@@ -59,6 +59,7 @@ export default class EntityThumbnailResource extends PureComponent {
         width={width}
         height={height}
         className={className}
+        loading="lazy"
       />
     );
   }

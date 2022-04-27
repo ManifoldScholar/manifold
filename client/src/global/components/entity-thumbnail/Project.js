@@ -30,11 +30,25 @@ export default class EntityThumbnailProject extends PureComponent {
     return this.props.variant;
   }
 
-  get src() {
+  get avatarStyle() {
     if (!this.attr.avatarStyles) return null;
     const meta = this.attr.avatarMeta ? this.attr.avatarMeta.original : null;
-    const style = meta && meta.width >= meta.height ? "smallSquare" : "small";
-    return this.attr.avatarStyles[style];
+    return meta && meta.width >= meta.height ? "smallSquare" : "small";
+  }
+
+  get src() {
+    if (!this.avatarStyle) return null;
+    return this.attr.avatarStyles[this.avatarStyle];
+  }
+
+  get width() {
+    if (this.props.width) return this.props.width;
+    return this.attr.avatarMeta[this.avatarStyle]?.width;
+  }
+
+  get height() {
+    if (this.props.height) return this.props.height;
+    return this.attr.avatarMeta[this.avatarStyle]?.height;
   }
 
   get icon() {
@@ -53,14 +67,14 @@ export default class EntityThumbnailProject extends PureComponent {
   }
 
   get image() {
-    const { width, height, className } = this.props;
     return (
       <img
         alt=""
         src={this.src}
-        width={width}
-        height={height}
-        className={className}
+        width={this.width}
+        height={this.height}
+        className={this.props.className}
+        loading="lazy"
       />
     );
   }
