@@ -12,6 +12,7 @@ import * as shapes from "./shapes";
 function EntityCollection({
   icon,
   IconComponent,
+  iconProps,
   title,
   description,
   DescriptionComponent,
@@ -29,7 +30,8 @@ function EntityCollection({
   nested,
   boxed,
   className,
-  filterProps
+  filterProps,
+  children
 }) {
   return (
     <Styled.Wrapper
@@ -46,6 +48,7 @@ function EntityCollection({
           title={title}
           icon={icon}
           IconComponent={IconComponent}
+          iconProps={iconProps}
           description={description}
           DescriptionComponent={DescriptionComponent}
           image={image}
@@ -54,7 +57,9 @@ function EntityCollection({
           headerWidth={headerWidth}
           headerLink={headerLink}
           collectingProps={collectingProps}
-        />
+        >
+          {children}
+        </Header>
         {filterProps && <ListFilters {...filterProps} />}
         {!isEmpty(countProps) && (
           <Styled.CountWrapper $hasHeader={!!title}>

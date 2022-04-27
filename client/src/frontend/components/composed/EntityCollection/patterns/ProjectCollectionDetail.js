@@ -35,9 +35,8 @@ function ProjectCollectionDetailEntityCollection({
     <EntityCollection
       title={title}
       description={description}
-      IconComponent={props => (
-        <ProjectCollectionIcon {...props} collection={projectCollection} />
-      )}
+      IconComponent={ProjectCollectionIcon}
+      iconProps={{ collection: projectCollection }}
       image={image}
       headerLayout={headerLayout}
       headerWidth="100%"
