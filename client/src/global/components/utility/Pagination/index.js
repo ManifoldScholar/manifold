@@ -46,7 +46,9 @@ function Pagination({
             {pages.map((page, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <React.Fragment key={index}>
-                {page === ELLIPSIS_CHAR && <span>{ELLIPSIS_CHAR}</span>}
+                {page === ELLIPSIS_CHAR && (
+                  <Styled.Ellipsis>{ELLIPSIS_CHAR}</Styled.Ellipsis>
+                )}
                 {page !== ELLIPSIS_CHAR && (
                   <Link
                     page={page}
