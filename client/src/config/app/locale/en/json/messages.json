@@ -10,7 +10,7 @@
     "confirm": "Are you sure?",
     "content_block_warning_heading": "This content block needs your attention before it can be displayed.",
     "content_block_warning_note": "Note: This message is only visible to project editors.",
-    "showing_resource": "Showing {{ type }} resource: {{ title }}",
+    "showing_resource": "Showing {{type}} resource: {{title}}",
     "unsaved_changes": "You may have unsaved changes. Do you want to leave without saving your changes?",
     "annotation_summary": {
       "highlight": "{{creator}} highlighted \"{{section}}\" in <text></text> on <date></date>.",

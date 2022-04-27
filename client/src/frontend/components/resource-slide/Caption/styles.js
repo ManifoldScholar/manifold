@@ -3,7 +3,6 @@ import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
 import { respond, utilityPrimary, buttonUnstyled } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
-import Collapse from "global/components/Collapse";
 
 const slideCopyFocus = "570px";
 
@@ -34,59 +33,28 @@ export const Title = styled.h3`
   }
 `;
 
-export const DescriptionWrapper = styled.div`
+export const DescriptionWrapper = styled("div", transientOptions)`
   position: relative;
-  padding-block-end: 5em;
+  padding-block-end: 2em;
 
-  ${respond(`padding-block-end: 3.5em;`, 40)}
-`;
+  ${respond(`padding-block-end: 2em;`, 65)}
 
-export const Description = styled("div", transientOptions)`
-  font-family: var(--font-family-copy);
-  max-width: ${slideCopyFocus};
-  overflow: hidden;
-  font-size: 15px;
-
-  p + p {
-    margin-block-start: 1em;
-  }
-
-  a {
-    text-decoration: underline;
-  }
-`;
-
-export const DescriptionStatic = styled(Description, transientOptions)`
-  position: absolute;
-  height: 48px;
-  top: 0;
-  opacity: 100%;
-  transition: opacity 250ms linear;
-
-  ${({ $expanded }) => $expanded && `opacity: 0`}
-`;
-
-export const Utility = styled("div", transientOptions)`
-  position: relative;
-
-  ${({ $expandable }) =>
+  ${({ $expandable, $expanded }) =>
     $expandable &&
+    !$expanded &&
     `
     &::before {
       /* Resource utility fade that hides part of the above description. Only displayed if description is present */
       position: absolute;
-      bottom: 100%;
+      bottom: 2em;
       left: 0;
       display: block;
       width: 100%;
-      height: 33px;
+      height: 2.5em;
       content: "";
       box-shadow: inset -10px -10px 18px 0 var(--color-base-neutral-white);
 
-      ${respond(
-        `box-shadow: inset -10px -10px 18px 0 var(--color-base-neutral90);`,
-        60
-      )}
+      ${respond(`box-shadow: inset -10px -10px 18px 0 #363636;`, 60)}
 
       .overlay-full & {
         box-shadow: inset -10px -10px 18px 0 var(--color-base-neutral90);
@@ -95,7 +63,26 @@ export const Utility = styled("div", transientOptions)`
   `}
 `;
 
-export const UtilityInner = styled("div", transientOptions)`
+export const Description = styled("div", transientOptions)`
+  font-family: var(--font-family-copy);
+  max-width: ${slideCopyFocus};
+  max-height: 50px;
+  overflow: hidden;
+  font-size: 15px;
+  transition: max-height 0.5s ease-in;
+
+  p + p {
+    margin-block-start: 1em;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  ${({ $expanded, $maxHeight }) => $expanded && `max-height: ${$maxHeight}px;`}
+`;
+
+export const Utility = styled("div", transientOptions)`
   padding: 9px 0 13px;
   background-color: var(--color-base-neutral-white);
 
@@ -125,7 +112,7 @@ const linkStyles = `
   )}
 `;
 
-export const MoreLink = styled(Collapse.Toggle, transientOptions)`
+export const MoreLink = styled("button", transientOptions)`
   ${linkStyles}
   display: block;
 
