@@ -54,6 +54,7 @@ export default class EntityThumbnailUser extends PureComponent {
         width={width}
         height={height}
         className={className}
+        loading="lazy"
       />
     );
   }
