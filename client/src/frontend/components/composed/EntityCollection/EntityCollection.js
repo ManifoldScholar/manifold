@@ -30,8 +30,7 @@ function EntityCollection({
   nested,
   boxed,
   className,
-  filterProps,
-  children
+  filterProps
 }) {
   return (
     <Styled.Wrapper
@@ -57,27 +56,21 @@ function EntityCollection({
           headerWidth={headerWidth}
           headerLink={headerLink}
           collectingProps={collectingProps}
-        >
-          {children}
-        </Header>
+        />
         {filterProps && <ListFilters {...filterProps} />}
         {!isEmpty(countProps) && (
           <Styled.CountWrapper $hasHeader={!!title}>
             <Utility.EntityCount {...countProps} />
           </Styled.CountWrapper>
         )}
-        <Styled.BodyWrapper>
-          <BodyComponent />
-        </Styled.BodyWrapper>
+        <Styled.BodyWrapper>{BodyComponent()}</Styled.BodyWrapper>
         {!isEmpty(paginationProps) && (
           <Styled.PaginationWrapper>
             <Utility.Pagination {...paginationProps} />
           </Styled.PaginationWrapper>
         )}
         {FooterComponent && (
-          <Styled.FooterWrapper>
-            <FooterComponent />
-          </Styled.FooterWrapper>
+          <Styled.FooterWrapper>{FooterComponent()}</Styled.FooterWrapper>
         )}
       </Styled.Inner>
     </Styled.Wrapper>
