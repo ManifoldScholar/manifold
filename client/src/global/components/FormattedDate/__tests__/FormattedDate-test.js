@@ -13,7 +13,7 @@ describe("global/components/FormattedDate", () => {
   def("wrapper", () => mount($withApp($root)));
 
   it("matches the snapshot", () => {
-    expect($wrapper).toMatchSnapshot();
+    expect(shallow($root)).toMatchSnapshot();
   });
 
   it("formats and renders a string as date with correct prefix", () => {

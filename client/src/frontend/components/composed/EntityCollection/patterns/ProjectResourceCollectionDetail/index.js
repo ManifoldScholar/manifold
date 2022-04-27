@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import get from "lodash/get";
 import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
-import FormattedDate from "global/components/FormattedDate";
 import ResourceList from "frontend/components/resource-list";
 import ResourceCollection from "frontend/components/resource-collection";
 import { useListFilters } from "hooks";

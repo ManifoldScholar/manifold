@@ -14,6 +14,6 @@ describe("frontend/components/text-list/List", () => {
   ));
 
   it("matches the snapshot when rendered", () => {
-    expect(mount($withApp($root)).html()).toMatchSnapshot();
+    expect(shallow($root)).toMatchSnapshot();
   });
 });
