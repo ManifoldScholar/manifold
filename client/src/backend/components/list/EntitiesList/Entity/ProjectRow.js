@@ -88,7 +88,7 @@ class ProjectRow extends PureComponent {
     if (!this.compact) return this.creatorNames;
     return (
       <FormattedDate
-        prefix={this.props.t("utility.dates.updated_title_case")}
+        prefix={this.props.t("dates.updated_title_case")}
         date={this.attr.updatedAt}
       />
     );

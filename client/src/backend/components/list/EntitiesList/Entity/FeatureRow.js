@@ -98,7 +98,7 @@ class FeatureRow extends PureComponent {
         title={this.name}
         meta={
           <FormattedDate
-            prefix={this.props.t("utility.dates.added_title_case")}
+            prefix={this.props.t("dates.added_title_case")}
             format="MMMM, yyyy"
             date={this.createdAt}
           />
