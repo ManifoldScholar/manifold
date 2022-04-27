@@ -9,7 +9,8 @@ export default class ListEntitiesListPagination extends PureComponent {
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func.isRequired,
     paginationTarget: PropTypes.string,
-    style: PropTypes.oneOf(["normal", "compact"])
+    style: PropTypes.oneOf(["normal", "compact"]),
+    padding: PropTypes.number
   };
 
   static defaultProps = {
@@ -28,7 +29,7 @@ export default class ListEntitiesListPagination extends PureComponent {
     if (this.style === "compact") {
       return { compact: true };
     }
-    return { compact: false };
+    return { compact: false, padding: this.props.padding };
   }
 
   get onPageClick() {
@@ -37,6 +38,10 @@ export default class ListEntitiesListPagination extends PureComponent {
 
   get paginationTarget() {
     return this.props.paginationTarget;
+  }
+
+  get padding() {
+    return this.props.padding;
   }
 
   render() {

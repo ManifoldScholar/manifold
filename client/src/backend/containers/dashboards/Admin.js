@@ -129,6 +129,7 @@ export function DashboardsAdminContainer({
               count: projectsMeta?.pagination?.totalCount
             })}
             pagination={projectsMeta.pagination}
+            paginationPadding={1}
             callbacks={{
               onPageClick: page => () => setProjectsPageNumber(page)
             }}
@@ -176,6 +177,7 @@ export function DashboardsAdminContainer({
               count: journalsMeta?.pagination?.totalCount
             })}
             pagination={journalsMeta.pagination}
+            paginationPadding={1}
             callbacks={{
               onPageClick: page => () => setJournalsPageNumber(page)
             }}

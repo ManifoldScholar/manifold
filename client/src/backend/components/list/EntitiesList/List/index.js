@@ -84,6 +84,7 @@ export default class ListEntities extends PureComponent {
     buttons: PropTypes.arrayOf(ListEntities.validateEnsureButton),
     search: ListEntities.validateSearch,
     pagination: PropTypes.object,
+    paginationPadding: PropTypes.number,
     useDragHandle: PropTypes.bool,
     paginationStyle: PropTypes.oneOf(["compact", "normal"]),
     emptyMessage: PropTypes.node,
@@ -141,6 +142,10 @@ export default class ListEntities extends PureComponent {
 
   get paginationStyle() {
     return this.props.paginationStyle;
+  }
+
+  get paginationPadding() {
+    return this.props.paginationPadding;
   }
 
   get unit() {
@@ -287,6 +292,7 @@ export default class ListEntities extends PureComponent {
               {this.pagination && (
                 <Pagination
                   pagination={this.pagination}
+                  padding={this.paginationPadding}
                   paginationTarget={`#${this.idPrefix}-${id}`}
                   onPageClick={this.callback("onPageClick")}
                   style={this.paginationStyle}

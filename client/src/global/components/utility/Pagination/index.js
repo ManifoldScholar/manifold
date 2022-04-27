@@ -1,176 +1,99 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import range from "lodash/range";
-import isString from "lodash/isString";
+import { useTranslation } from "react-i18next";
 import IconComposer from "../IconComposer";
+import Link from "./Link";
+import usePagination, { ELLIPSIS_CHAR } from "./hooks/usePagination";
 import * as Styled from "./styles";
 
-class UtilityPagination extends PureComponent {
-  static displayName = "Utility.Pagination";
+function Pagination({
+  pagination = {},
+  padding,
+  compact = false,
+  ...linkProps
+}) {
+  const { t } = useTranslation();
+  const pages = usePagination({ ...pagination, padding });
 
-  static propTypes = {
-    pagination: PropTypes.object,
-    paginationTarget: PropTypes.string,
-    padding: PropTypes.number,
-    paginationClickHandler: PropTypes.func,
-    compact: PropTypes.bool,
-    t: PropTypes.func
-  };
+  if (!pages || pages.length < 2) return null;
 
-  static defaultProps = {
-    padding: 3,
-    paginationTarget: "#pagination-target"
-  };
-
-  visiblePageArray(pagination) {
-    const current = pagination.currentPage;
-    let start = current - this.props.padding;
-    if (start < 1) start = 1;
-    let last = current + this.props.padding;
-    if (last > pagination.totalPages) last = pagination.totalPages;
-    const pages = range(start, last + 1);
-    const out = pages.map(page => {
-      return {
-        number: page,
-        key: page,
-        current: page === current,
-        first: page === 1,
-        last: page === pagination.totalPages
-      };
-    });
-    return out;
-  }
-
-  propsAndComponentForPage(handler) {
-    let PageComponent;
-    let pageProps;
-    if (isString(handler)) {
-      PageComponent = Link;
-      pageProps = { to: handler };
-    } else {
-      PageComponent = "a";
-      pageProps = { onClick: handler, href: this.props.paginationTarget };
-    }
-    return { PageComponent, pageProps };
-  }
-
-  previous(pagination) {
-    const handler = this.props.paginationClickHandler(pagination.prevPage);
-    const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
-    const t = this.props.t;
-
-    return (
-      <Styled.Link
-        as={PageComponent}
-        aria-disabled={!pagination.prevPage}
-        aria-label={t("pagination.previous_page")}
-        {...pageProps}
-      >
-        <IconComposer icon="arrowLongLeft16" />
-        <span>{t("pagination.previous_short")}</span>
-      </Styled.Link>
-    );
-  }
-
-  next(pagination) {
-    const handler = this.props.paginationClickHandler(pagination.nextPage);
-    const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
-    const t = this.props.t;
-
-    return (
-      <Styled.Link
-        as={PageComponent}
-        aria-disabled={!pagination.nextPage}
-        aria-label={t("pagination.next_page")}
-        {...pageProps}
-      >
-        <span>{t("pagination.next")}</span>
-        <IconComposer icon="arrowLongRight16" />
-      </Styled.Link>
-    );
-  }
-
-  number(page, handler) {
-    const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
-    const t = this.props.t;
-
-    return (
-      <Styled.Link
-        key={page.number}
-        as={PageComponent}
-        aria-label={t("pagination.page_number", { number: page.number })}
-        {...pageProps}
-      >
-        <span aria-hidden="true">{page.number}</span>
-      </Styled.Link>
-    );
-  }
-
-  current(page, handler) {
-    const { PageComponent, pageProps } = this.propsAndComponentForPage(handler);
-    const t = this.props.t;
-
-    return (
-      <Styled.Link
-        key={page.number}
-        as={PageComponent}
-        aria-current="page"
-        aria-label={t("pagination.page_number", { number: page.number })}
-        {...pageProps}
-      >
-        <span aria-hidden="true">{page.number}</span>
-      </Styled.Link>
-    );
-  }
-
-  renderRange(pages) {
-    return pages.map(page => {
-      const url = this.props.paginationClickHandler(page.number);
-      if (page.current) {
-        return this.current(page, url);
-      }
-      return this.number(page, url);
-    });
-  }
-
-  renderCompact(pagination) {
+  if (compact)
     return (
       <span>
-        {this.props.t("pagination.compact", {
+        {t("pagination.compact", {
           current: pagination.currentPage,
           total: pagination.totalPages
         })}
       </span>
     );
-  }
 
-  render() {
-    if (!this.props.pagination) return null;
-
-    const pages = this.visiblePageArray(this.props.pagination);
-    const pagination = this.props.pagination;
-    if (pagination.totalPages === 1 || pagination.totalPages === 0) return null;
-
-    const t = this.props.t;
-
-    return (
-      <Styled.Nav aria-label={t("pagination.aria_label")}>
-        <Styled.Columns>
-          <Styled.Column>{this.previous(pagination)}</Styled.Column>
-          <Styled.Column>
-            <Styled.Pages>
-              {this.props.compact
-                ? this.renderCompact(pagination)
-                : this.renderRange(pages)}
-            </Styled.Pages>
-          </Styled.Column>
-          <Styled.Column>{this.next(pagination)}</Styled.Column>
-        </Styled.Columns>
-      </Styled.Nav>
-    );
-  }
+  return (
+    <Styled.Nav aria-label={t("pagination.aria_label")}>
+      <Styled.Columns>
+        <Styled.Column>
+          <Link
+            page={pagination.prevPage}
+            disabled={!pagination.prevPage}
+            aria-label={t("pagination.previous_page")}
+            {...linkProps}
+          >
+            <IconComposer icon="arrowLongLeft16" />
+            <span>{t("pagination.previous_short")}</span>
+          </Link>
+        </Styled.Column>
+        <Styled.Column>
+          <Styled.Pages>
+            {pages.map((page, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <React.Fragment key={index}>
+                {page === ELLIPSIS_CHAR && <span>{ELLIPSIS_CHAR}</span>}
+                {page !== ELLIPSIS_CHAR && (
+                  <Link
+                    page={page}
+                    aria-current={
+                      page === pagination.currentPage ? "page" : null
+                    }
+                    aria-label={t("pagination.page_number", { number: page })}
+                    {...linkProps}
+                  >
+                    {page}
+                  </Link>
+                )}
+              </React.Fragment>
+            ))}
+          </Styled.Pages>
+        </Styled.Column>
+        <Styled.Column>
+          <Link
+            page={pagination.nextPage}
+            disabled={!pagination.nextPage}
+            aria-label={t("pagination.next_page")}
+            {...linkProps}
+          >
+            <span>{t("pagination.next")}</span>
+            <IconComposer icon="arrowLongRight16" />
+          </Link>
+        </Styled.Column>
+      </Styled.Columns>
+    </Styled.Nav>
+  );
 }
 
-export default withTranslation()(UtilityPagination);
+Pagination.displayName = "Utility.Pagination";
+
+Pagination.propTypes = {
+  pagination: PropTypes.shape({
+    currentPage: PropTypes.number,
+    nextPage: PropTypes.number,
+    perPage: PropTypes.number,
+    prevPage: PropTypes.number,
+    totalCount: PropTypes.number,
+    totalPages: PropTypes.number
+  }),
+  paginationTarget: PropTypes.string,
+  padding: PropTypes.number,
+  paginationClickHandler: PropTypes.func,
+  compact: PropTypes.bool
+};
+
+export default Pagination;
