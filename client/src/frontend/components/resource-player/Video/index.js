@@ -85,9 +85,7 @@ class ResourcePlayerVideo extends Component {
 
     return (
       <Styled.VideoWrapper>
-        <Styled.Video>
-          <iframe title={this.iframeTitle} {...this.iframeProps} />
-        </Styled.Video>
+        <Styled.Video title={this.iframeTitle} {...this.iframeProps} />
       </Styled.VideoWrapper>
     );
   }
