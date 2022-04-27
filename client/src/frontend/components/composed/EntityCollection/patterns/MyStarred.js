@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import isEmpty from "lodash/isEmpty";
 import { useTranslation, Trans } from "react-i18next";
 import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
-import IconComposer from "global/components/utility/IconComposer";
 import {
   CollectedProjects,
   CollectedTexts,
@@ -50,13 +49,8 @@ function MyStarredEntityCollection({
   return (
     <EntityCollection
       title={t("pages.frontend.my_starred")}
-      IconComponent={() => (
-        <IconComposer
-          size={48}
-          icon="StarFillUnique"
-          className="icon-star-fill--header"
-        />
-      )}
+      icon={"StarFillUnique"}
+      iconProps={{ size: 48, className: "icon-star-fill--header" }}
       countProps={{
         count: totalCount,
         unit: t("glossary.item", { count: totalCount }),

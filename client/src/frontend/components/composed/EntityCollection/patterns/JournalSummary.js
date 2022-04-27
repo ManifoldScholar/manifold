@@ -30,9 +30,8 @@ function JournalSummaryEntityCollection({
     <EntityCollection
       title={title}
       description={description}
-      IconComponent={props => (
-        <ProjectCollectionIcon {...props} collection={journal} />
-      )}
+      IconComponent={ProjectCollectionIcon}
+      iconProps={{ collection: journal }}
       image={image}
       headerLayout={headerLayout}
       headerLink={lh.link("frontendJournal", slug)}

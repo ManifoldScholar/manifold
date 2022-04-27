@@ -20,6 +20,7 @@ function Header({
   title,
   icon,
   IconComponent,
+  iconProps,
   description,
   DescriptionComponent,
   image,
@@ -45,8 +46,16 @@ function Header({
   return (
     <Styled.Header $layout={layout} $width={headerWidth}>
       <Styled.TitleAndIcon>
-        {IconComponent && <Styled.IconComponent as={IconComponent} />}
-        {!IconComponent && icon && <Styled.Icon size={60} icon={icon} />}
+        {IconComponent && (
+          <Styled.IconComponent as={IconComponent} {...iconProps} />
+        )}
+        {!IconComponent && icon && (
+          <Styled.Icon
+            size={iconProps?.size ?? 60}
+            icon={icon}
+            {...iconProps}
+          />
+        )}
         <Styled.TitleLink to={headerLink}>
           <Styled.Title>{title}</Styled.Title>
         </Styled.TitleLink>
@@ -59,7 +68,9 @@ function Header({
       {description && (
         <Styled.Description dangerouslySetInnerHTML={{ __html: description }} />
       )}
-      {DescriptionComponent && <Styled.Description as={DescriptionComponent} />}
+      {DescriptionComponent && (
+        <Styled.Description>{DescriptionComponent()}</Styled.Description>
+      )}
       {image && (
         <Styled.Image
           src={image}
@@ -70,7 +81,9 @@ function Header({
           $layout={layout}
         />
       )}
-      {ImageComponent && <Styled.ImageComponent as={ImageComponent} />}
+      {ImageComponent && (
+        <Styled.ImageComponent>{ImageComponent()}</Styled.ImageComponent>
+      )}
     </Styled.Header>
   );
 }

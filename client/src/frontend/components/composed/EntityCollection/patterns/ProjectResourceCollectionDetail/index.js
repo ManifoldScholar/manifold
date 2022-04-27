@@ -4,12 +4,11 @@ import get from "lodash/get";
 import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import FormattedDate from "global/components/FormattedDate";
-import EntityListTotal from "global/components/composed/EntityListTotal";
 import ResourceList from "frontend/components/resource-list";
-import lh from "helpers/linkHandler";
 import { useListFilters } from "hooks";
-import EntityCollection from "../EntityCollection";
-import * as shapes from "../shapes";
+import EntityCollection from "../../EntityCollection";
+import SlideshowSection from "./SlideshowSection";
+import * as shapes from "../../shapes";
 
 function ProjectResourceCollectionDetail({
   resourceCollection,
@@ -52,32 +51,18 @@ function ProjectResourceCollectionDetail({
       )}
       headerLayout="title_description_image"
       headerWidth="100%"
-      ImageComponent={props =>
-        isEmpty(slideshowResourcesMeta) ? null : (
-          <div {...props}>
-            <h2 className="screen-reader-text">
-              {t("pages.subheaders.resource_slideshow")}
-            </h2>
-            <ResourceList.Slideshow
-              resourceCollection={resourceCollection}
-              collectionResources={slideshowResources}
-              pagination={slideshowResourcesMeta.pagination}
-              dispatch={dispatch}
-            />
-            <h2 id={listHeaderId} className="screen-reader-text">
-              {t("pages.subheaders.resource_list")}
-            </h2>
-            <EntityListTotal
-              linkTo={lh.link(
-                "frontendProjectResources",
-                project.attributes.slug
-              )}
-              entityName={t("glossary.resource_one", { count: totalCount })}
-              count={totalCount}
-            />
-          </div>
-        )
-      }
+      ImageComponent={props => (
+        <SlideshowSection
+          slideshowResourcesMeta={slideshowResourcesMeta}
+          resourceCollection={resourceCollection}
+          slideshowResources={slideshowResources}
+          dispatch={dispatch}
+          slug={project.attributes.slug}
+          totalCount={totalCount}
+          listHeaderId={listHeaderId}
+          {...props}
+        />
+      )}
       BodyComponent={props => (
         <ResourceList.Cards
           resourceCollection={resourceCollection}
