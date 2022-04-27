@@ -1,22 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
-import { Trans, withTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import debounce from "lodash/debounce";
 import lh from "helpers/linkHandler";
-import Collapse from "global/components/Collapse";
-import Description from "./Description";
-import ToggleText from "./Toggle";
 import * as Styled from "./styles";
 
-function ResourceListSlideCaption({
+export default function ResourceListSlideCaption({
   resource,
   resourceCollection,
   hideDetailUrl = false,
-  hideDownload = false,
-  t
+  hideDownload = false
 }) {
   const [isExpandable, setExpandable] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const descriptRef = useRef();
+  const { t } = useTranslation();
 
   const canExpand = () => {
     if (!descriptRef.current) return setExpandable(false);
@@ -57,11 +55,17 @@ function ResourceListSlideCaption({
     };
 
     return (
-      <Description
-        content={content}
-        ref={descriptRef}
-        isExpandable={isExpandable}
-      />
+      <Styled.DescriptionWrapper
+        $expandable={isExpandable}
+        $expanded={expanded}
+      >
+        <Styled.Description
+          dangerouslySetInnerHTML={content}
+          $expanded={expanded}
+          $maxHeight={descriptRef.current?.scrollHeight ?? 300}
+          ref={descriptRef}
+        />
+      </Styled.DescriptionWrapper>
     );
   };
 
@@ -76,38 +80,41 @@ function ResourceListSlideCaption({
           }}
         />
         <span className="screen-reader-text" role="alert">
-          <Trans i18nKey="messages.showing_resource">
-            Showing {{ type: attr.type }} resource: {{ title: attr.title }}
-          </Trans>
+          <Trans
+            i18nKey="messages.showing_resource"
+            values={{ type: attr.kind, title: attr.title }}
+          />
         </span>
       </header>
-      <Collapse>
+      <div>
         {renderDescription()}
-        <Styled.Utility $expandable={isExpandable}>
-          <Styled.UtilityInner>
-            {isExpandable && (
-              <Styled.MoreLink>
-                <ToggleText />
-              </Styled.MoreLink>
-            )}
-            {canDownload ? (
-              <Styled.DownloadLink
-                href={attr.attachmentStyles.original}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>{t("actions.download")}</span>
-                <Styled.DownloadIcon icon="arrowDown16" size="default" />
-              </Styled.DownloadLink>
-            ) : null}
-            {detailUrl && !hideDetailUrl ? (
-              <Styled.DetailLink to={detailUrl}>
-                {t("actions.view_resource")}
-              </Styled.DetailLink>
-            ) : null}
-          </Styled.UtilityInner>
+        <Styled.Utility $expanded={expanded}>
+          {isExpandable && (
+            <Styled.MoreLink aria-hidden onClick={() => setExpanded(!expanded)}>
+              <span>
+                {expanded
+                  ? t("actions.hide_description")
+                  : t("actions.read_more")}
+              </span>
+            </Styled.MoreLink>
+          )}
+          {canDownload ? (
+            <Styled.DownloadLink
+              href={attr.attachmentStyles.original}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>{t("actions.download")}</span>
+              <Styled.DownloadIcon icon="arrowDown16" size="default" />
+            </Styled.DownloadLink>
+          ) : null}
+          {detailUrl && !hideDetailUrl ? (
+            <Styled.DetailLink to={detailUrl}>
+              {t("actions.view_resource")}
+            </Styled.DetailLink>
+          ) : null}
         </Styled.Utility>
-      </Collapse>
+      </div>
     </Styled.Caption>
   );
 }
@@ -119,8 +126,5 @@ ResourceListSlideCaption.propTypes = {
   resource: PropTypes.object,
   resourceCollection: PropTypes.object,
   hideDetailUrl: PropTypes.bool,
-  hideDownload: PropTypes.bool,
-  t: PropTypes.func
+  hideDownload: PropTypes.bool
 };
-
-export default withTranslation()(ResourceListSlideCaption);
