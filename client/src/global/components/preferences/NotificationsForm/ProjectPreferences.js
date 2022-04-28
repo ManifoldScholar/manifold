@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import config from "config";
 import Collapse from "global/components/Collapse";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
 import RadioGroup from "./RadioGroup";
@@ -10,7 +9,6 @@ function ProjectPreferences({ preferences, onChange, onDigestChange }) {
   const { toggleProps } = useCollapseContext();
   const { t } = useTranslation();
 
-  const items = config.app.locale.notificationPreferences.digest;
   const options = {
     ...(preferences.projects && {
       projects: t("forms.notifications.project_preferences.all_projects")
@@ -47,7 +45,9 @@ function ProjectPreferences({ preferences, onChange, onDigestChange }) {
           <RadioGroup
             preference={{
               key: "digest-projects",
-              label: t("forms.notifications.project_preferences.types_label")
+              label: t(
+                "forms.notifications.project_preferences.digest_projects_label"
+              )
             }}
             value={Object.keys(preferences).find(
               prefKey => prefKey in options && preferences[prefKey] === "always"
@@ -55,16 +55,17 @@ function ProjectPreferences({ preferences, onChange, onDigestChange }) {
             options={options}
             onChange={onDigestChange}
           />
-          {items.map(item => {
-            return (
-              <RadioGroup
-                key={item.key}
-                preference={item}
-                value={preferences[item.key]}
-                onChange={onChange}
-              />
-            );
-          })}
+          <RadioGroup
+            key={"digestCommentsAndAnnotations"}
+            preference={{
+              key: "digestCommentsAndAnnotations",
+              label: t(
+                "forms.notifications.project_preferences.digest_comments_label"
+              )
+            }}
+            value={preferences.digestCommentsAndAnnotations}
+            onChange={onChange}
+          />
         </div>
       </Collapse.Content>
     </>
