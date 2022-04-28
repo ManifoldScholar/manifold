@@ -178,7 +178,7 @@ class ListEntitiesListSearch extends PureComponent {
       <div className={`entity-list__search ${baseClass}`}>
         <Collapse>
           {this.hasKeywordParam && (
-            <form onSubmit={this.submitKeywordForm}>
+            <form role="search" onSubmit={this.submitKeywordForm}>
               <div className={`${baseClass}__keyword-row`}>
                 <button className={`${baseClass}__search-button`}>
                   <Utility.IconComposer icon="search16" size={20} />
