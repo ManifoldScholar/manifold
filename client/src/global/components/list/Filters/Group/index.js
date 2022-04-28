@@ -19,7 +19,6 @@ function FiltersGroup(props) {
   } = props;
 
   const searchInput = useRef(null);
-  const searchSubmit = useRef(null);
 
   const { t } = useTranslation();
 
@@ -27,7 +26,6 @@ function FiltersGroup(props) {
     onReset();
     setScreenReaderStatus(t("filters.reset_announcement"));
     if (searchInput.current) {
-      searchSubmit.current.focus();
       searchInput.current.value = "";
     }
   };
@@ -52,9 +50,7 @@ function FiltersGroup(props) {
       $searchCount={hideSearch ? 0 : 1}
       className={className}
     >
-      {!hideSearch && (
-        <Search inputRef={searchInput} submitRef={searchSubmit} />
-      )}
+      {!hideSearch && <Search inputRef={searchInput} />}
       {!!filters?.length && (
         <Styled.SelectGroup $count={filters?.length}>
           {filters.map(filter => (
