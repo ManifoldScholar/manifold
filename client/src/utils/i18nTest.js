@@ -2,9 +2,9 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 i18n.use(initReactI18next).init({
-  fallbackLng: "en",
+  fallbackLng: "en-US",
   resources: {
-    en: {
+    "en-US": {
       translation: {
         date_fns: null,
         forms: { upload: { image_preview: "<0></0><br/><1></1>" } },

@@ -13,16 +13,17 @@ import pages from "./json/pages.json";
 import reader from "./json/reader.json";
 import utility from "./json/utility.json";
 import resources from "./json/resources.json";
-import other from "./json/en.json";
+import base from "./json/base.json";
 import enUS from "date-fns/locale/en-US";
 import backend from "./json/backend.json";
 import backendEntities from "./json/backend-entities";
 import settings from "./json/settings";
 import userRoles from "./json/userRoles.json";
+import tables from "./json/tables.json";
 
 export default {
   translation: {
-    ...other,
+    ...base,
     ...glossary,
     ...actions,
     ...placeholders,
@@ -41,6 +42,7 @@ export default {
     backend_entities: backendEntities,
     ...settings,
     ...userRoles,
+    ...tables,
     date_fns: enUS
   }
 };

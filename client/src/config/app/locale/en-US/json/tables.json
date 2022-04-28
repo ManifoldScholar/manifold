@@ -1,0 +1,27 @@
+{
+  "tables": {
+    "generic": {
+      "title": "{{label}} Table",
+      "list": "{{label}} List",
+      "view_details": "$t(actions.view) Details"
+    },
+    "reading_groups": {
+      "headers": {
+        "name": "Name",
+        "role": "Role",
+        "members": "Members",
+        "activity": "Activity",
+        "actions": "Actions"
+      }
+    },
+    "reading_group_members": {
+      "headers": {
+        "name": "Member Name",
+        "role": "Role",
+        "activity": "Activity",
+        "note_style": "Note Style",
+        "actions": "Actions"
+      }
+    }
+  }
+}
