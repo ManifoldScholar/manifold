@@ -98,6 +98,7 @@ export class SearchMenuBody extends PureComponent {
             description={this.props.description}
             searchOnScopeChange={false}
             setQueryState={this.setQueryState}
+            autoFocus
           />
         </CSSTransition>
       </nav>
