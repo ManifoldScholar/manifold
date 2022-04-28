@@ -5,8 +5,9 @@ exports[`global/components/search/button when it is active matches the snapshot 
   active={true}
   i18n={
     Object {
-      "language": "en",
+      "language": "en-US",
       "languages": Array [
+        "en-US",
         "en",
       ],
       "options": Object {
@@ -18,7 +19,7 @@ exports[`global/components/search/button when it is active matches the snapshot 
           "translation",
         ],
         "fallbackLng": Array [
-          "en",
+          "en-US",
         ],
         "fallbackNS": false,
         "ignoreJSONStructure": true,
@@ -38,7 +39,7 @@ exports[`global/components/search/button when it is active matches the snapshot 
         },
         "joinArrays": false,
         "keySeparator": ".",
-        "lng": "en",
+        "lng": "en-US",
         "load": "all",
         "missingInterpolationHandler": false,
         "missingKeyHandler": false,
@@ -55,7 +56,7 @@ exports[`global/components/search/button when it is active matches the snapshot 
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {
+          "en-US": Object {
             "translation": Object {
               "backend": Object {
                 "dashboard": Object {
@@ -83,9 +84,9 @@ exports[`global/components/search/button when it is active matches the snapshot 
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": "en",
+      "resolvedLanguage": "en-US",
       "store": Object {
-        "en": Object {
+        "en-US": Object {
           "translation": Object {
             "backend": Object {
               "dashboard": Object {
@@ -115,8 +116,9 @@ exports[`global/components/search/button when it isn't active matches the snapsh
   active={false}
   i18n={
     Object {
-      "language": "en",
+      "language": "en-US",
       "languages": Array [
+        "en-US",
         "en",
       ],
       "options": Object {
@@ -128,7 +130,7 @@ exports[`global/components/search/button when it isn't active matches the snapsh
           "translation",
         ],
         "fallbackLng": Array [
-          "en",
+          "en-US",
         ],
         "fallbackNS": false,
         "ignoreJSONStructure": true,
@@ -148,7 +150,7 @@ exports[`global/components/search/button when it isn't active matches the snapsh
         },
         "joinArrays": false,
         "keySeparator": ".",
-        "lng": "en",
+        "lng": "en-US",
         "load": "all",
         "missingInterpolationHandler": false,
         "missingKeyHandler": false,
@@ -165,7 +167,7 @@ exports[`global/components/search/button when it isn't active matches the snapsh
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {
+          "en-US": Object {
             "translation": Object {
               "backend": Object {
                 "dashboard": Object {
@@ -193,9 +195,9 @@ exports[`global/components/search/button when it isn't active matches the snapsh
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": "en",
+      "resolvedLanguage": "en-US",
       "store": Object {
-        "en": Object {
+        "en-US": Object {
           "translation": Object {
             "backend": Object {
               "dashboard": Object {
