@@ -5,13 +5,13 @@ import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
-function Search({ inputRef, submitRef }) {
+function Search({ inputRef }) {
   const uid = useUID();
   const { t } = useTranslation();
 
   return (
     <Styled.Wrapper>
-      <Styled.Button type="submit" ref={submitRef}>
+      <Styled.Button type="submit">
         <span className="screen-reader-text">{t("search.title")}</span>
         <Utility.IconComposer icon="search16" size={20} />
       </Styled.Button>
