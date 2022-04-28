@@ -23,7 +23,8 @@ export default function SearchResultsList(props) {
     pagination,
     paginationClickHandler,
     context = "frontend",
-    hideParent = false
+    hideParent = false,
+    padding = 3
   } = props;
 
   const { t } = useTranslation();
@@ -55,7 +56,7 @@ export default function SearchResultsList(props) {
       </Styled.List>
       <Utility.Pagination
         pagination={pagination}
-        padding={3}
+        padding={padding}
         paginationClickHandler={paginationClickHandler}
         paginationTarget="#search"
       />
