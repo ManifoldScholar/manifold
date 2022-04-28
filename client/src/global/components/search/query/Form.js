@@ -39,7 +39,8 @@ class SearchQueryForm extends PureComponent {
       console.warn("Current SearchQuery State");
       console.warn(state);
     },
-    autoFocus: false
+    autoFocus: false,
+    blurOnSubmit: false
   };
   /* eslint-enable no-console */
 
@@ -54,6 +55,11 @@ class SearchQueryForm extends PureComponent {
     this.state = this.internalStateFromIncomingState(props.initialState);
 
     this.inputRef = createRef();
+    this.submitRef = createRef();
+  }
+
+  componentDidMount() {
+    if (!this.props.autoFocus) this.submitRef.current.focus();
   }
 
   componentDidUpdate(prevProps) {
@@ -181,7 +187,10 @@ class SearchQueryForm extends PureComponent {
     if (event) event.preventDefault();
     if (!this.state.keyword) return null; // If there's no keyword, don't do anything yet.
     this.props.setQueryState(this.state);
-    if (this.props.blurOnSubmit) this.inputRef.current.blur();
+    if (!this.props.autoFocus || this.props.blurOnSubmit) {
+      this.inputRef.current.blur();
+      this.submitRef.current.focus();
+    }
   };
 
   renderScopeOptions() {
@@ -270,7 +279,11 @@ class SearchQueryForm extends PureComponent {
               </>
             )}
           </UIDConsumer>
-          <button type="submit" className="search-query__submit">
+          <button
+            type="submit"
+            className="search-query__submit"
+            ref={this.submitRef}
+          >
             <Utility.IconComposer
               className="search-query__search-icon"
               icon="search16"
