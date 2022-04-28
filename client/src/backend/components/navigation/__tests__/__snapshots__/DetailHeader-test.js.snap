@@ -12,8 +12,9 @@ exports[`backend/components/navigation/DetailHeader matches the snapshot 1`] = `
   }
   i18n={
     Object {
-      "language": "en",
+      "language": "en-US",
       "languages": Array [
+        "en-US",
         "en",
       ],
       "options": Object {
@@ -25,7 +26,7 @@ exports[`backend/components/navigation/DetailHeader matches the snapshot 1`] = `
           "translation",
         ],
         "fallbackLng": Array [
-          "en",
+          "en-US",
         ],
         "fallbackNS": false,
         "ignoreJSONStructure": true,
@@ -45,7 +46,7 @@ exports[`backend/components/navigation/DetailHeader matches the snapshot 1`] = `
         },
         "joinArrays": false,
         "keySeparator": ".",
-        "lng": "en",
+        "lng": "en-US",
         "load": "all",
         "missingInterpolationHandler": false,
         "missingKeyHandler": false,
@@ -62,7 +63,7 @@ exports[`backend/components/navigation/DetailHeader matches the snapshot 1`] = `
         "postProcessPassResolved": false,
         "preload": false,
         "resources": Object {
-          "en": Object {
+          "en-US": Object {
             "translation": Object {
               "backend": Object {
                 "dashboard": Object {
@@ -90,9 +91,9 @@ exports[`backend/components/navigation/DetailHeader matches the snapshot 1`] = `
         "supportedLngs": false,
         "updateMissing": false,
       },
-      "resolvedLanguage": "en",
+      "resolvedLanguage": "en-US",
       "store": Object {
-        "en": Object {
+        "en-US": Object {
           "translation": Object {
             "backend": Object {
               "dashboard": Object {
