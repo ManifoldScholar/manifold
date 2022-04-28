@@ -3,22 +3,22 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
 function Time({ time }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const localeParams = {
     minimumIntegerDigits: 2,
     useGrouping: false
   };
   const hours = Math.floor(time / 60 / 60).toLocaleString(
-    "en-US",
+    i18n.language,
     localeParams
   );
   const minutes = Math.floor((time - hours * 60 * 60) / 60).toLocaleString(
-    "en-US",
+    i18n.language,
     localeParams
   );
   const seconds = Math.floor(
     time - hours * 60 * 60 - minutes * 60
-  ).toLocaleString("en-US", localeParams);
+  ).toLocaleString(i18n.language, localeParams);
 
   const values =
     hours > 0
