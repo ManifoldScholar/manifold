@@ -131,9 +131,18 @@
         "never": "Never",
         "daily": "Daily",
         "weekly": "Weekly",
-        "types_label": "Which projects should be included?",
+        "digest_projects_label": "Which projects should be included?",
         "all_projects": "All $t(glossary.project_title_case_other)",
-        "only_following": "Only Projects I'm Following"
+        "only_following": "Only Projects I'm Following",
+        "digest_comments_label": "Include New Comments and Annotations?"
+      },
+      "activity_preferences": {
+        "replies_to_me_label": "Notify you when someone replies to you?",
+        "replies_to_me_instructions": "Manifold will send you an email when a reply is posted to your annotations or comments.",
+        "project_comments_and_annotations_label": "Notify you of all Comments and Annotations?",
+        "project_comments_and_annotations_instructions": "Manifold will send you an email anytime a comment or annotation is created",
+        "flagged_resources_label": "Notify me when comments are flagged.",
+        "flagged_resources_instructions": "Anytime a user flags a comment, you will receive email notification."
       }
     },
     "signin_overlay": {

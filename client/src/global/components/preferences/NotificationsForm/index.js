@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import config from "config";
 import { UIDConsumer } from "react-uid";
 import Collapse from "global/components/Collapse";
 import RadioGroup from "./RadioGroup";
 import ProjectPreferences from "./ProjectPreferences";
+import humps from "humps";
 
 class NotificationsForm extends Component {
   static propTypes = {
@@ -25,14 +25,26 @@ class NotificationsForm extends Component {
   }
 
   renderNotificationContent() {
-    const items = config.app.locale.notificationPreferences.notifications;
+    const items = [
+      "repliesToMe",
+      "projectCommentsAndAnnotations",
+      "flaggedResources"
+    ];
 
     return items.map(item => {
+      const i18nKey = humps.decamelize(item, { separator: "_" }).toLowerCase();
+      const label = this.props.t(
+        `forms.notifications.activity_preferences.${i18nKey}_label`
+      );
+      const instructions = this.props.t(
+        `forms.notifications.activity_preferences.${i18nKey}_instructions`
+      );
+
       const checked = this.preferences[item.key] || false;
       return (
         <RadioGroup
-          key={item.key}
-          preference={item}
+          key={item}
+          preference={{ key: item, label, instructions }}
           value={checked}
           onChange={this.props.changeHandler}
         />
