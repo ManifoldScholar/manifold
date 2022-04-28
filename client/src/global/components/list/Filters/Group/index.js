@@ -45,6 +45,7 @@ function FiltersGroup(props) {
   return (
     <Styled.Wrapper
       as={onSubmit ? "form" : "div"}
+      role={onSubmit ? "search" : null}
       onSubmit={onSubmit}
       $count={filters?.length || 0}
       $searchCount={hideSearch ? 0 : 1}
