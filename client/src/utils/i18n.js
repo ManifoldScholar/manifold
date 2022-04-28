@@ -17,7 +17,7 @@ i18n
       escapeValue: false
     },
     fallbackLng: {
-      default: ["en"]
+      default: ["en-US"]
     },
     react: {
       transSupportBasicHtmlNodes: true
