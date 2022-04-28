@@ -31,7 +31,6 @@ class ListEntitiesListSearch extends PureComponent {
     this.state = {
       keyword: ""
     };
-    this.searchInput = React.createRef();
   }
 
   componentDidMount() {
@@ -155,9 +154,6 @@ class ListEntitiesListSearch extends PureComponent {
     event.preventDefault();
     this.setState({ keyword: "" });
     this.props.onReset();
-
-    // focus on search field
-    this.searchInput.current.focus();
   };
 
   classNameWithStyle(className) {
@@ -194,7 +190,6 @@ class ListEntitiesListSearch extends PureComponent {
                           {t("search.instructions")}
                         </label>
                         <input
-                          ref={this.searchInput}
                           className={`${baseClass}__keyword-input`}
                           id={id}
                           value={this.state.keyword}
@@ -207,6 +202,7 @@ class ListEntitiesListSearch extends PureComponent {
                   </UIDConsumer>
                 </div>
                 <button
+                  type="reset"
                   onClick={this.resetSearch}
                   className={`${baseClass}__text-button`}
                 >
