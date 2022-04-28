@@ -52,6 +52,8 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
           searchQueryState={query}
           setQueryState={setQuery}
           facets={facets}
+          autoFocus
+          blurOnSubmit
         />
       </div>
       {results && (

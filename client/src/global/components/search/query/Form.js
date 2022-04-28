@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, createRef } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
@@ -22,7 +22,9 @@ class SearchQueryForm extends PureComponent {
     projectId: PropTypes.string,
     textId: PropTypes.string,
     sectionId: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
+    autoFocus: PropTypes.bool,
+    blurOnSubmit: PropTypes.bool
   };
 
   /* eslint-disable no-console */
@@ -36,7 +38,8 @@ class SearchQueryForm extends PureComponent {
       );
       console.warn("Current SearchQuery State");
       console.warn(state);
-    }
+    },
+    autoFocus: false
   };
   /* eslint-enable no-console */
 
@@ -49,6 +52,8 @@ class SearchQueryForm extends PureComponent {
     };
 
     this.state = this.internalStateFromIncomingState(props.initialState);
+
+    this.inputRef = createRef();
   }
 
   componentDidUpdate(prevProps) {
@@ -176,6 +181,7 @@ class SearchQueryForm extends PureComponent {
     if (event) event.preventDefault();
     if (!this.state.keyword) return null; // If there's no keyword, don't do anything yet.
     this.props.setQueryState(this.state);
+    if (this.props.blurOnSubmit) this.inputRef.current.blur();
   };
 
   renderScopeOptions() {
@@ -243,7 +249,7 @@ class SearchQueryForm extends PureComponent {
   render() {
     const t = this.props.t;
     return (
-      <form className="search-query" onSubmit={this.doSearch}>
+      <form role="search" className="search-query" onSubmit={this.doSearch}>
         <div className="search-query__input-magnify">
           <UIDConsumer name={id => `${this.searchIdPrefix}-${id}`}>
             {id => (
@@ -254,7 +260,8 @@ class SearchQueryForm extends PureComponent {
                 <input
                   type="text"
                   id={id}
-                  autoFocus
+                  autoFocus={this.props.autoFocus}
+                  ref={this.inputRef}
                   onChange={this.setKeyword}
                   value={this.state.keyword}
                   placeholder={t("search.placeholder")}
