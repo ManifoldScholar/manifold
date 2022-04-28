@@ -64,6 +64,7 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
             paginationClickHandler={page => () => setPageNumber(page)}
             results={results}
             context="frontend"
+            padding={1}
           />
         </div>
       )}
