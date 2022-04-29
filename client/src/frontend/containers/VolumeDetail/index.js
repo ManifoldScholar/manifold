@@ -6,8 +6,8 @@ import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import lh from "helpers/linkHandler";
 import { journalVolumesAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
-import EntityMasthead from "frontend/components/composed/EntityMasthead";
+import EntityHeadContent from "frontend/components/entity/HeadContent";
+import EntityMasthead from "frontend/components/entity/Masthead";
 import Journal from "frontend/components/journal";
 import { useFetch, useFromStore } from "hooks";
 

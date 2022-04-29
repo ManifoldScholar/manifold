@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import EntityGroup from "global/components/composed/EntityGroup";
+import EntityGroup from "global/components/entity/Group";
 import * as Styled from "./styles";
 
 function JournalIssueList({ issues = [] }) {

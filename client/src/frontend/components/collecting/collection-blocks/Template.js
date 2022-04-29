@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import EntityCollection from "frontend/components/composed/EntityCollection/EntityCollection";
+import EntityCollection from "frontend/components/entity/Collection/EntityCollection";
 import DeferredCollectable from "frontend/components/collecting/collection-blocks/DeferredCollectable";
 
 function getTitleForType(type) {

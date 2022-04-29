@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { collectionProjectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
-import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
+import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import ProjectCollection from "backend/components/project-collection";
 import New from "./New";
 import Drawer from "global/components/drawer";

@@ -353,7 +353,7 @@ exports[`frontend/containers/ResourceCollectionDetail matches the snapshot 1`] =
     debugLabel="ResourceCollectionDetail"
     isProjectSubpage={true}
   />
-  <EntityHeadContent
+  <Frontend.Entity.HeadContent
     entity={
       Object {
         "attributes": Object {
@@ -1239,7 +1239,7 @@ exports[`frontend/containers/ResourceCollectionDetail matches the snapshot 1`] =
       ]
     }
   />
-  <Frontend.Composed.EntityCollection.ProjectResourceCollectionDetail
+  <Frontend.Entity.Collection.ProjectResourceCollectionDetail
     dispatch={[Function]}
     filterProps={
       Object {

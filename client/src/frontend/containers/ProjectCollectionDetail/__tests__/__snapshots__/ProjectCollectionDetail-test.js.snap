@@ -75,7 +75,7 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
   >
     A Project Collection
   </h1>
-  <Frontend.Composed.EntityCollection.ProjectCollectionDetail
+  <Frontend.Entity.Collection.ProjectCollectionDetail
     bgColor="neutral05"
     className="flex-grow"
     filterProps={
@@ -1717,6 +1717,6 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
       }
     }
   />
-  <Frontend.Composed.CollectionNavigation />
+  <Frontend.CollectionNavigation />
 </Fragment>
 `;

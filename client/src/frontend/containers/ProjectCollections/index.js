@@ -11,9 +11,9 @@ import { select, meta } from "utils/entityUtils";
 import { projectCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import queryString from "query-string";
-import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
-import EntityCollection from "frontend/components/composed/EntityCollection";
-import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
+import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
+import EntityCollection from "frontend/components/entity/Collection";
+import CollectionNavigation from "frontend/components/CollectionNavigation";
 
 const { request } = entityStoreActions;
 const perPage = 8;

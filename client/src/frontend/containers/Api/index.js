@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import connectAndFetch from "utils/connectAndFetch";
 import ApiDocs from "frontend/components/ApiDocs";
 import config from "config";
-import EntityCollection from "frontend/components/composed/EntityCollection/EntityCollection";
+import EntityCollection from "frontend/components/entity/Collection/EntityCollection";
 
 class Api extends Component {
   static mapStateToProps = (state, ownPropsIgnored) => {

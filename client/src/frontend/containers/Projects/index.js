@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
+import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { projectsAPI } from "api";
-import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
-import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
+import EntityCollection from "frontend/components/entity/Collection";
 import {
   useFetch,
   usePaginationState,

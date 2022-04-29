@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetch, usePaginationState, useFromStore } from "hooks";
 import { journalVolumesAPI } from "api";
-import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
-import EntityMasthead from "frontend/components/composed/EntityMasthead";
-import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityHeadContent from "frontend/components/entity/HeadContent";
+import EntityMasthead from "frontend/components/entity/Masthead";
+import EntityCollection from "frontend/components/entity/Collection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 

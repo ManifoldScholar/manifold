@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { readingGroupsAPI } from "api";
 import { useParams } from "react-router-dom";
-import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityCollection from "frontend/components/entity/Collection";
 import {
   useFetch,
   usePaginationState,

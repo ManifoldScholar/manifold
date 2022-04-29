@@ -7,7 +7,7 @@ import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
-import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
+import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
 import {

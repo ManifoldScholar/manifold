@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { projectsAPI } from "api";
-import EntityCollection from "frontend/components/composed/EntityCollection";
-import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
+import EntityCollection from "frontend/components/entity/Collection";
+import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import { useFetch, usePaginationState } from "hooks";
 
 export default function HomeProjectContainer() {

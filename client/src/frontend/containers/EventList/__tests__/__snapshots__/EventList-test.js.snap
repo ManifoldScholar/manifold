@@ -590,7 +590,7 @@ exports[`frontend/containers/EventList/EventList matches the snapshot 1`] = `
       ]
     }
   />
-  <Frontend.Composed.EntityCollection.Events
+  <Frontend.Entity.Collection.Events
     events={
       Array [
         Object {

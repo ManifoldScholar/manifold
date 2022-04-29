@@ -9,7 +9,7 @@ import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
 
 const { request } = entityStoreActions;

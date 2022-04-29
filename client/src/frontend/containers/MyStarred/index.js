@@ -3,8 +3,8 @@ import { meAPI } from "api";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
-import EntityCollection from "frontend/components/composed/EntityCollection";
-import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
+import EntityCollection from "frontend/components/entity/Collection";
+import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import { useFetch, useCurrentUser } from "hooks";
 

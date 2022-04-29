@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import EntityGroup from "global/components/composed/EntityGroup";
-import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
+import EntityGroup from "global/components/entity/Group";
+import ThumbnailGrid from "global/components/entity/ThumbnailGrid";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ContentBlockList from "frontend/components/content-block-list/List";
 import * as Styled from "./styles";

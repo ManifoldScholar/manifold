@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
+import EntityHeadContent from "frontend/components/entity/HeadContent";
 import Issue from "frontend/components/issue";
 import Schema from "global/components/schema";
 

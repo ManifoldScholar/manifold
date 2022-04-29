@@ -2,7 +2,7 @@
 
 exports[`frontend/containers/ProjectResources/ProjectResources matches the snapshot 1`] = `
 <Fragment>
-  <EntityHeadContent
+  <Frontend.Entity.HeadContent
     entity={
       Object {
         "attributes": Object {
@@ -541,7 +541,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
       ]
     }
   />
-  <Frontend.Composed.EntityCollection.ProjectsResources
+  <Frontend.Entity.Collection.ProjectsResources
     filterProps={
       Object {
         "initialState": Object {},

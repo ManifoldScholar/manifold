@@ -9,9 +9,9 @@ import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
-import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
-import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
+import EntityHeadContent from "frontend/components/entity/HeadContent";
+import EntityCollection from "frontend/components/entity/Collection";
 
 const { request, flush } = entityStoreActions;
 const defaultPage = 1;
