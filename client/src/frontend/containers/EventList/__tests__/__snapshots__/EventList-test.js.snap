@@ -104,7 +104,6 @@ exports[`frontend/containers/EventList/EventList matches the snapshot 1`] = `
       >
         <I18nextProvider>
           <Frontend.Containers.EventList
-            dispatch={[Function]}
             events={
               Array [
                 Object {
