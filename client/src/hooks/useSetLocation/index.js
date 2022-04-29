@@ -9,10 +9,13 @@ export default function useSetLocation({ filters, page }) {
   const { pathname } = useLocation();
 
   const updateUrlFromState = useCallback(() => {
-    const params = {
-      ...filters,
-      page
-    };
+    const params =
+      page === 1
+        ? filters
+        : {
+            ...filters,
+            page
+          };
     const search = queryString.stringify(params);
     history.push({
       pathname,
