@@ -7,7 +7,6 @@ describe("frontend/containers/EventList/EventList", () => {
   );
   def("root", () => (
     <EventList
-      dispatch={$dispatch}
       project={$project}
       events={$events}
       eventsMeta={{ pagination: fixtures.pagination() }}

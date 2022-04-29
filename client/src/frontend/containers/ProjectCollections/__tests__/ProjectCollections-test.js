@@ -1,4 +1,7 @@
 import ProjectsCollectionsContainer from "../";
+import useSetLocation from "hooks/useSetLocation";
+
+jest.mock("hooks/useSetLocation", () => () => null);
 
 describe("frontend/containers/ProjectCollections/ProjectCollections", () => {
   def("root", () => (
