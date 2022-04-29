@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { readingGroupsAPI } from "api";
 import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
-import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
+import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";

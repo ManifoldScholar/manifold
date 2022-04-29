@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useFetch } from "hooks";
 import { projectCollectionsAPI, journalsAPI } from "api";
-import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityCollection from "frontend/components/entity/Collection";
 
 export default function HomeCollectionsContainer() {
   const filters = useMemo(

@@ -5,7 +5,7 @@ import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta, loaded } from "utils/entityUtils";
 import Overlay from "global/components/Overlay";
-import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityCollection from "frontend/components/entity/Collection";
 import lh from "helpers/linkHandler";
 
 const { request, flush } = entityStoreActions;

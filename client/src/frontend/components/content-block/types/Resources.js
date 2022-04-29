@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import EntityListTotal from "global/components/composed/EntityListTotal";
+import EntityListTotal from "global/components/entity/ListTotal";
 import ResourceCollectionList from "frontend/components/resource-collection-list";
 import ResourceList from "frontend/components/resource-list";
 import lh from "helpers/linkHandler";

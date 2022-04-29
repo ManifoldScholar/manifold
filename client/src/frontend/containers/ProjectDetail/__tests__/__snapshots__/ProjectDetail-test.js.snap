@@ -6,7 +6,7 @@ exports[`frontend/containers/ProjectDetail/ProjectDetail matches the snapshot 1`
     debugLabel="ProjectDetail"
     isProjectHomePage={true}
   />
-  <EntityHeadContent
+  <Frontend.Entity.HeadContent
     entity={
       Object {
         "attributes": Object {

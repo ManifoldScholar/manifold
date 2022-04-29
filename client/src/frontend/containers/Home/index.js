@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Collections from "./Collections";
 import Projects from "./Projects";
 import Feature from "./Feature";
-import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
+import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import { useFromStore } from "hooks";
 import { useLocation } from "react-router-dom";

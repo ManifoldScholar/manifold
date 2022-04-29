@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Schema from "global/components/schema";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
+import EntityHeadContent from "frontend/components/entity/HeadContent";
 import IssueDetail from "frontend/containers/IssueDetail";
 
 function ProjectDetailContainer({ project, response, journalBreadcrumbs }) {

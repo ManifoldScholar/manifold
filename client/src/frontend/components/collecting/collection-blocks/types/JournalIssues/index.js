@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
-import ThumbnailGrid from "global/components/composed/ThumbnailGrid";
+import ThumbnailGrid from "global/components/entity/ThumbnailGrid";
 import Template from "../../Template";
 
 function CollectedJournalIssues({ onUncollect, ...props }) {

@@ -3,10 +3,10 @@ import { journalsAPI } from "api";
 import GlobalUtility from "global/components/utility";
 import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
-import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
+import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useFilterState, usePaginationState } from "hooks";
-import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
+import CollectionNavigation from "frontend/components/CollectionNavigation";
 
 export default function JournalsListContainer() {
   const [filters] = useFilterState();

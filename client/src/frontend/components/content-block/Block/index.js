@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import EntityCollection from "frontend/components/composed/EntityCollection/EntityCollection";
+import EntityCollection from "frontend/components/entity/Collection/EntityCollection";
 import AllLink from "frontend/components/event/AllLink";
 import Authorization from "helpers/authorization";
 import contentBlockHelpers from "helpers/contentBlockHelpers";

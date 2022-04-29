@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import EntityHero from "frontend/components/composed/EntityHero";
-import EntityCollection from "frontend/components/composed/EntityCollection/EntityCollection";
-import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
+import EntityHero from "frontend/components/entity/Hero";
+import EntityCollection from "frontend/components/entity/Collection/EntityCollection";
+import CollectionNavigation from "frontend/components/CollectionNavigation";
 import ContentBlockList from "frontend/components/content-block-list/List";
 import { Warning } from "frontend/components/content-block/parts";
 import Authorize from "hoc/Authorize";

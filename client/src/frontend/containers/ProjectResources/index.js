@@ -11,9 +11,9 @@ import debounce from "lodash/debounce";
 import omitBy from "lodash/omitBy";
 import isNull from "lodash/isNull";
 import lh from "helpers/linkHandler";
-import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
+import EntityHeadContent from "frontend/components/entity/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import EntityCollection from "frontend/components/composed/EntityCollection";
+import EntityCollection from "frontend/components/entity/Collection";
 
 const { request, flush } = entityStoreActions;
 const defaultPage = 1;

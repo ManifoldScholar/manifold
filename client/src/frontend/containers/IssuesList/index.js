@@ -8,9 +8,9 @@ import {
   useListFilters
   // useFromStore
 } from "hooks";
-import EntityCollectionPlaceholder from "global/components/composed/EntityCollectionPlaceholder";
-import EntityCollection from "frontend/components/composed/EntityCollection";
-import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
+import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
+import EntityCollection from "frontend/components/entity/Collection";
+import CollectionNavigation from "frontend/components/CollectionNavigation";
 
 import { journalIssuesAPI } from "api";
 

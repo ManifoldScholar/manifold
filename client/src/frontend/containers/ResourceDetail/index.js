@@ -9,7 +9,7 @@ import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import LoadingBlock from "global/components/loading-block";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import EntityHeadContent from "frontend/components/atomic/EntityHeadContent";
+import EntityHeadContent from "frontend/components/entity/HeadContent";
 import some from "lodash/some";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";

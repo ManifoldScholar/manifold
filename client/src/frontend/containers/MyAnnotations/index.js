@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
 import HeadContent from "global/components/HeadContent";
-import EntityCollection from "frontend/components/composed/EntityCollection";
-import CollectionNavigation from "frontend/components/composed/CollectionNavigation";
+import EntityCollection from "frontend/components/entity/Collection";
+import CollectionNavigation from "frontend/components/CollectionNavigation";
 import {
   useFetch,
   usePaginationState,

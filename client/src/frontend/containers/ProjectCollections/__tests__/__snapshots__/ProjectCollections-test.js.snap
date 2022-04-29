@@ -11,7 +11,7 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
   >
     glossary.project_collection_other
   </h1>
-  <Frontend.Composed.EntityCollection.ProjectCollectionSummary
+  <Frontend.Entity.Collection.ProjectCollectionSummary
     bgColor="white"
     key="projectCollection-0"
     limit={4}
@@ -62,7 +62,7 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
       }
     }
   />
-  <Frontend.Composed.EntityCollection.ProjectCollectionSummary
+  <Frontend.Entity.Collection.ProjectCollectionSummary
     bgColor="neutral05"
     key="projectCollection-1"
     limit={4}
@@ -113,7 +113,7 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
       }
     }
   />
-  <Frontend.Composed.EntityCollection.ProjectCollectionSummary
+  <Frontend.Entity.Collection.ProjectCollectionSummary
     bgColor="white"
     key="projectCollection-2"
     limit={4}
@@ -164,6 +164,6 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
       }
     }
   />
-  <Frontend.Composed.CollectionNavigation />
+  <Frontend.CollectionNavigation />
 </Fragment>
 `;

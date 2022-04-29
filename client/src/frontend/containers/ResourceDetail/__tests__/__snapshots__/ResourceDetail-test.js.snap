@@ -134,7 +134,7 @@ exports[`frontend/containers/ResourceDetail/ResourceDetail matches the snapshot 
     debugLabel="ResourceDetail"
     isProjectSubpage={true}
   />
-  <EntityHeadContent
+  <Frontend.Entity.HeadContent
     entity={
       Object {
         "attributes": Object {

@@ -9,7 +9,7 @@ import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import { commonActions } from "actions/helpers";
 import pickBy from "lodash/pickBy";
 import Header from "../index";
-import EntityHero from "frontend/components/composed/EntityHero";
+import EntityHero from "frontend/components/entity/Hero";
 import bookCover from "test/assets/book-cover.jpg";
 import heroBackground from "test/assets/hero-bg.jpg";
 import avatar from "test/assets/milton.jpg";
