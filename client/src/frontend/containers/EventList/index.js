@@ -19,7 +19,7 @@ export default function EventList({ project, journalBreadcrumbs }) {
   const { t } = useTranslation();
 
   const { titlePlaintext, slug, hideActivity, description, avatarStyles } =
-    project?.attributes || {};
+    project?.attributes ?? {};
 
   const breadcrumbs = useMemo(() => {
     const projectCrumb = {
@@ -68,5 +68,5 @@ EventList.displayName = "Frontend.Containers.EventList";
 
 EventList.propTypes = {
   project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.object
+  journalBreadcrumbs: PropTypes.array
 };
