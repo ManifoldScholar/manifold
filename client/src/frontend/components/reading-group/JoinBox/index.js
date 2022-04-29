@@ -4,7 +4,6 @@ import withDispatch from "hoc/withDispatch";
 import withConfirmation from "hoc/withConfirmation";
 import withCurrentUser from "hoc/withCurrentUser";
 import { withTranslation } from "react-i18next";
-import config from "config";
 import { readingGroupsAPI, readingGroupMembershipsAPI, requests } from "api";
 import { withRouter } from "react-router-dom";
 import template from "lodash/template";
@@ -29,6 +28,13 @@ class JoinBox extends PureComponent {
         this.handleSubmit();
       });
     }
+  }
+
+  get messages() {
+    return this.props.t("messages.reading_group.join", {
+      name: this.props.readingGroup,
+      returnObjects: true
+    });
   }
 
   updateCode = event => {
@@ -60,15 +66,14 @@ class JoinBox extends PureComponent {
   };
 
   handleFailure = () => {
-    const {
-      heading,
-      message
-    } = config.app.locale.dialogs.readingGroup.joinFailure;
+    const heading = this.messages.join_failure_heading;
+    const message = this.messages.join_failure_message;
     this.props.confirm(heading, message);
   };
 
   openConfirmation(readingGroup) {
-    const { heading, message } = config.app.locale.dialogs.readingGroup.join;
+    const heading = this.messages.heading;
+    const message = this.messages.message;
     const compiledMessage = template(message)({ readingGroup });
     const callback = () => {
       this.doJoin(readingGroup);
@@ -93,12 +98,10 @@ class JoinBox extends PureComponent {
   };
 
   openNotFound() {
-    const {
-      heading,
-      message
-    } = config.app.locale.dialogs.readingGroup.joinNotFound;
+    const heading = this.messages.join_not_found_heading;
+    const message = this.messages.join_not_found_message;
     this.props.confirm(heading, message, null, {
-      rejectLabel: this.props.t("forms.join_group.confirm_button_label")
+      rejectLabel: this.props.t("common.okay")
     });
   }
 

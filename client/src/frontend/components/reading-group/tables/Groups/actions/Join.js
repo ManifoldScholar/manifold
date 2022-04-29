@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import template from "lodash/template";
 import classNames from "classnames";
-import config from "config";
 import { requests } from "api";
 import { entityStoreActions } from "actions";
 import withConfirmation from "hoc/withConfirmation";
@@ -36,7 +35,8 @@ function JoinGroup({ confirm, readingGroup, onSuccess, buttonText, outlined }) {
   }
 
   function handleClick() {
-    const { heading, message } = config.app.locale.dialogs.readingGroup.join;
+    const heading = t("messages.reading_group.join_heading");
+    const message = t("messages.reading_group.join_message");
     const compiledMessage = template(message)({ readingGroup });
     confirm(heading, compiledMessage, () => doJoin());
   }

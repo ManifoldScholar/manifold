@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import queryString from "query-string";
 import { readingGroupsAPI, readingGroupMembershipsAPI, requests } from "api";
 import { meta, select } from "utils/entityUtils";
 import connectAndFetch from "utils/connectAndFetch";
-import config from "config";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
@@ -19,7 +19,8 @@ const perPage = 10;
 
 class ReadingGroupsMembersListContainer extends Component {
   static propTypes = {
-    confirm: PropTypes.func.isRequired
+    confirm: PropTypes.func.isRequired,
+    t: PropTypes.func
   };
 
   static fetchMembers(dispatch, page, match) {
@@ -121,10 +122,9 @@ class ReadingGroupsMembersListContainer extends Component {
   };
 
   removeMember = readingGroupMembership => {
-    const {
-      heading,
-      message
-    } = config.app.locale.dialogs.readingGroupMembership.destroy;
+    const t = this.props.t;
+    const heading = t("messages.membership.destroy_heading");
+    const message = t("messages.membership.destroy_message");
     this.props.confirm(heading, message, () => {
       this.destroyMembership(readingGroupMembership);
     });
@@ -190,6 +190,6 @@ class ReadingGroupsMembersListContainer extends Component {
   }
 }
 
-export default connectAndFetch(
-  withConfirmation(ReadingGroupsMembersListContainer)
+export default withTranslation()(
+  connectAndFetch(withConfirmation(ReadingGroupsMembersListContainer))
 );

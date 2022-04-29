@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { readingGroupMembershipsAPI, requests } from "api";
 import Form from "global/components/form";
-import config from "config";
 import StylePreview from "./StylePreview";
 import * as Styled from "./styles";
 
@@ -20,17 +19,11 @@ function ReadingGroupMemberForm({
   );
 
   function warnOnRoleChange(initialValue, newValue) {
-    let msg = null;
-    const {
-      heading,
-      memberToModerator,
-      moderatorToMember
-    } = config.app.locale.dialogs.readingGroupMembership.warn.roleChange;
-    if (initialValue === "moderator" && newValue === "member")
-      msg = moderatorToMember;
-    if (initialValue === "member" && newValue === "moderator")
-      msg = memberToModerator;
-    if (msg !== null) return confirm(heading, msg, () => {});
+    const messages = t("messages.membership.role_change", {
+      returnObjects: true
+    });
+    const msg = messages[`${initialValue}_to_${newValue}`];
+    return msg ? confirm(messages.heading, msg, () => {}) : null;
   }
 
   function handleStyleSelectChange(initialValueIgnored, newValue) {

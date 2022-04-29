@@ -10,7 +10,6 @@ import { useArchiveOrActivateGroup } from "frontend/components/reading-group/hoo
 import withConfirmation from "hoc/withConfirmation";
 import { readingGroupsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import config from "config";
 import lh from "helpers/linkHandler";
 import { DuplicatePanel } from "./panels";
 
@@ -81,7 +80,8 @@ function ReadingGroupSettings({
   }
 
   function handleDelete() {
-    const { heading, message } = config.app.locale.dialogs.readingGroup.destroy;
+    const heading = t("messages.reading_group.destroy_heading");
+    const message = t("messages.reading_group.destroy_message");
     confirm(heading, message, () => {
       const call = readingGroupsAPI.destroy(readingGroup.id);
       const options = { removes: readingGroup };

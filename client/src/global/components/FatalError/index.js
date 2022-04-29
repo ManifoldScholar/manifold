@@ -76,8 +76,9 @@ class FatalError extends PureComponent {
         notificationActions.addNotification({
           id: "projectAuthorizationError",
           level: 1,
-          heading:
-            config.app.locale.notifications.projectAuthorizationWarning.heading
+          heading: this.props.t(
+            "messages.project_authorization_warning.heading"
+          )
         })
       );
     }

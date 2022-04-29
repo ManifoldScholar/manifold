@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { requests } from "api";
-import config from "config";
 import { entityStoreActions } from "actions";
 
 const { request } = entityStoreActions;
@@ -52,8 +51,8 @@ export default function useArchiveGroup({ membership, confirm, callback }) {
   function onClick() {
     if (activate) return doActivate();
 
-    const { heading, message } = config.app.locale.dialogs.readingGroup.archive;
-
+    const heading = t("messages.reading_group.archive_heading");
+    const message = t("messages.reading_group.archive_message");
     confirm(heading, message, () => doArchive());
   }
 

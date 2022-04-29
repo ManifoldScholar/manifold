@@ -97,20 +97,11 @@ class ReadingGroupForm extends React.PureComponent {
   warnOnPrivacyChange = (initialValue, newValue) => {
     if (this.isNew) return;
 
-    let msg = null;
-    const {
-      heading,
-      privateToPublic,
-      anonymousToPublic,
-      anonymousToPrivate
-    } = config.app.locale.dialogs.readingGroup.warn.privacyChange;
-    if (initialValue === "private" && newValue === "public")
-      msg = privateToPublic;
-    if (initialValue === "anonymous" && newValue === "public")
-      msg = anonymousToPublic;
-    if (initialValue === "anonymous" && newValue === "private")
-      msg = anonymousToPrivate;
-    if (msg !== null) return this.props.confirm(heading, msg, () => {});
+    const messages = this.props.t("messages.reading_group.privacy_change", {
+      returnObjects: true
+    });
+    const msg = messages[`${initialValue}_to_${newValue}`];
+    return msg ? this.props.confirm(messages.heading, msg, () => {}) : null;
   };
 
   handleCourseChange = (initialValueIgnored, oldValueIgnored, newEvent) => {
