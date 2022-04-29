@@ -1,8 +1,16 @@
-import config from "config";
+// To be localized in v8. Moving enum here, so we can remove localeOld from translation files. -LD
+
+const ROLES = {
+  admin: "Admin",
+  editor: "Editor",
+  project_creator: "Project Creator",
+  marketeer: "Marketeer",
+  reader: "Reader"
+};
 
 export default function userFilters({ snapshotState = false } = {}) {
-  const roles = Object.keys(config.app.locale.roles);
-  const labels = config.app.locale.roles;
+  const roles = Object.keys(ROLES);
+  const labels = ROLES;
   const roleOptions = roles.map(role => {
     return {
       label: `Role: ${labels[role]}`,
