@@ -38,35 +38,33 @@ export default function ProjectResourcesContainer({
 
   useSetLocation({ filters, page: pagination.number });
 
+  const { slug, resourceKinds, resourceTags, titlePlaintext } =
+    project?.attributes ?? {};
+
   const filterProps = useListFilters({
     onFilterChange: param => setFilters({ newState: param }),
     initialState: filters,
     resetState: {},
     options: {
       sort: true,
-      kinds: project.attributes.resourceKinds,
-      tags: project.attributes.resourceTags
+      kinds: resourceKinds,
+      tags: resourceTags
     }
   });
 
   const breadcrumbs = useMemo(() => {
     const projectCrumb = {
-      to: lh.link("frontendProject", project.attributes.slug),
-      label: project.attributes.titlePlaintext
+      to: lh.link("frontendProject", slug),
+      label: titlePlaintext
     };
     const resourcesCrumb = {
-      to: lh.link("frontendProjectResources", project.attributes.slug),
+      to: lh.link("frontendProjectResources", slug),
       label: t("glossary.resource_other")
     };
     return journalBreadcrumbs
       ? [...journalBreadcrumbs, resourcesCrumb].filter(Boolean)
       : [projectCrumb, resourcesCrumb].filter(Boolean);
-  }, [
-    journalBreadcrumbs,
-    project.attributes.slug,
-    project.attributes.titlePlaintext,
-    t
-  ]);
+  }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
   if (!project) return <LoadingBlock />;
 
@@ -74,9 +72,9 @@ export default function ProjectResourcesContainer({
     <>
       <EntityHeadContent
         entity={project}
-        titleOverride={`${t("glossary.resource_title_case_other")} | ${
-          project.attributes.titlePlaintext
-        }`}
+        titleOverride={`${t(
+          "glossary.resource_title_case_other"
+        )} | ${titlePlaintext}`}
       />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <EntityCollection.ProjectResources

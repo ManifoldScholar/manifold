@@ -58,12 +58,10 @@ export default function ProjectResourceCollectionsContainer({
         entity={project}
         titleOverride={`${t(
           "glossary.resource_collection_title_case_other"
-        )} | ${project.attributes.titlePlaintext}`}
+        )} | ${titlePlaintext}`}
       />
       <h1 className="screen-reader-text">
-        {`${project.attributes.titlePlaintext} ${t(
-          "glossary.resource_collection_other"
-        )}`}
+        {`${titlePlaintext} ${t("glossary.resource_collection_other")}`}
       </h1>
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       {!resourceCollections?.length ? (
