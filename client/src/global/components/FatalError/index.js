@@ -23,11 +23,11 @@ class FatalError extends PureComponent {
     headerLineTwo: PropTypes.string,
     dismiss: PropTypes.func,
     dispatch: PropTypes.func,
-    t: PropTypes.func
+    i18n: PropTypes.object
   };
 
   get defaultHeaders() {
-    const t = this.props.t;
+    const t = this.props.i18n.t;
     return {
       headerLineOne: t("errors.fatal.heading_line_one"),
       headerLineTwo: t("errors.fatal.heading_line_two")
@@ -99,6 +99,7 @@ class FatalError extends PureComponent {
       return this.renderProjectAuthorizationRedirect();
     const { error } = this.props.fatalError;
     const showDetail = config.environment.isDevelopment;
+    const t = this.props.i18n.t;
 
     return (
       <HelmetProvider>
@@ -138,7 +139,7 @@ class FatalError extends PureComponent {
                             onClick={this.props.dismiss}
                             className="dismiss"
                           >
-                            {this.props.t("errors.fatal.dismiss_link")}
+                            {t("errors.fatal.dismiss_link")}
                           </Styled.Link>
                         </span>
                       ) : null}
