@@ -39,10 +39,13 @@ class ResourceTagList extends Component {
   };
 
   createTagLink(tag, projectSlug, index) {
-    if (!tag || !projectSlug) return null;
-    const url = lh.link("frontendProjectResources", projectSlug, {
-      tag: tag.toLowerCase()
-    });
+    const { disabledLinks } = this.props;
+    if (!projectSlug && !disabledLinks) return null;
+    const url = disabledLinks
+      ? "#"
+      : lh.link("frontendProjectResources", projectSlug, {
+          tag: tag.toLowerCase()
+        });
     return (
       <Styled.Tag key={`${tag}-${index}`}>
         <Styled.Link
