@@ -59,7 +59,12 @@ export default class ListEntities extends PureComponent {
   static validateSearch = (propValue, key) => {
     const value = propValue[key];
     if (!value) return;
-    if (!value.type || value.type.displayName !== "List.Entities.List.Search") {
+    if (
+      !value.type ||
+      (value.type.displayName !== "List.Entities.List.Search" &&
+        value.type.displayName !==
+          "withI18nextTranslation(List.Entities.List.Search)")
+    ) {
       return new Error(this.errors.invalidSearch);
     }
   };
