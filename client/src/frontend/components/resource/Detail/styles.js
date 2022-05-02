@@ -55,10 +55,14 @@ export const MetadataWrapper = styled.div`
   )}
 
   .share-nav-primary {
-    margin: ${fluidScale("32px", "25px")} 0;
+    margin-block-end: ${fluidScale("32px", "25px")};
     color: var(--color-neutral-text-dark);
 
-    .share-nav-primary__label::after {
+    &:not(:first-child) {
+      margin-block-start: ${fluidScale("32px", "25px")};
+    }
+
+    &__label::after {
       content: ":";
     }
   }
