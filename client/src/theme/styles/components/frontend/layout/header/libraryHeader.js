@@ -28,7 +28,7 @@ export default `
     .header-logo,
     .breadcrumb-list,
     .mobile-nav-toggle {
-      /* Set margin on individual items (also applied to .site-nav__item, .user-nav__item), rather than on the container itself. Done primarily for .user-nav__items (which has pos:rel), which allows .search-menu  and .user-menu to easily appear at the bottom of the header, rather than setting magic numbers for top and transformY values. */
+      /* Set margin on individual items (also applied to .site-nav__item, .user-nav__item), rather than on the container itself. Done primarily for .user-nav__items (which has pos:rel), which allows .search-menu to easily appear at the bottom of the header, rather than setting magic numbers for top and transformY values. */
       margin-bottom: ${headerLayout.paddingVerticalMobile};
 
       ${respond(`margin-bottom: ${headerLayout.paddingVerticalDesktop};`, 40)}

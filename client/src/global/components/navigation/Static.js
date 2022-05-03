@@ -6,6 +6,7 @@ import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
 import UserMenuBody from "global/components/UserMenuBody";
 import UIPanel from "global/components/UIPanel";
+import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
 import { NavLink, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
@@ -157,22 +158,15 @@ export class NavigationStatic extends PureComponent {
           )}
           {this.renderSearch(props)}
           <li className="user-nav__item">
-            <UserMenuButton
-              authentication={props.authentication}
-              active={props.visibility.uiPanels.user}
-              showLoginOverlay={props.commonActions.toggleSignInUpOverlay}
-              toggleUserMenu={props.commonActions.toggleUserPanel}
+            <DisclosureNavigationMenu
+              visible={props.visibility.uiPanels.user}
+              disclosure={<UserMenuButton />}
+              callbacks={props.commonActions}
+              onBlur={props.commonActions.hideUserPanel}
               context={props.mode}
-            />
-            <UIPanel
-              id="user"
-              visibility={props.visibility.uiPanels}
-              bodyComponent={UserMenuBody}
-              showLoginOverlay={props.commonActions.toggleSignInUpOverlay}
-              startLogout={props.commonActions.logout}
-              hideUserMenu={props.commonActions.toggleUserPanel}
-              hidePanel={props.commonActions.hideUserPanel}
-            />
+            >
+              <UserMenuBody />
+            </DisclosureNavigationMenu>
           </li>
         </ul>
       </nav>

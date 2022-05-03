@@ -6,9 +6,11 @@ describe("global/components/UserMenuBody/UserMenuBody", () => {
   def("showLoginOverlay", () => jest.fn());
   def("root", () => (
     <UserMenuBody
-      hideUserMenu={$hideUserMenu}
-      startLogout={$startLogout}
-      showLoginOverlay={$showLoginOverlay}
+      callbacks={{
+        hideUserPanel: $hideUserMenu,
+        toggleSignInUpOverlay: $showLoginOverlay,
+        logout: $startLogout
+      }}
       visible={false}
     />
   ));

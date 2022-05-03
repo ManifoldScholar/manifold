@@ -14,7 +14,6 @@ export default `
   --padding-lateral-narrow: 11px;
 
   ${reactSlideTransition("left", ".reader-return-menu")}
-  ${reactSlideTransition("right", ".user-menu")}
   ${reactSlideTransition("right", ".search-menu")}
 
   position: fixed;
@@ -221,14 +220,12 @@ export default `
   }
 
   .reader-return-menu,
-  .search-menu,
-  .user-menu {
+  .search-menu {
     position: absolute;
     top: 0;
   }
 
-  .search-menu,
-  .user-menu {
+  .search-menu {
     right: 0;
   }
 }

@@ -36,7 +36,7 @@ class SearchMenuButton extends PureComponent {
         className={buttonClass}
         onClick={this.clickHandler}
         data-id="toggle-menu"
-        aria-haspopup
+        aria-haspopup="dialog"
         aria-expanded={this.props.active}
       >
         <Utility.IconComposer
