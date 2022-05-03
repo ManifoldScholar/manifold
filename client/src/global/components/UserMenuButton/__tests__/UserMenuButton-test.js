@@ -1,17 +1,17 @@
 import UserMenuButton from "../";
 
 describe("global/components/UserMenuButton/UserMenuButton", () => {
-  def("startLogout", () => jest.fn());
-  def("showLoginOverlay", () => jest.fn());
-  def("toggleUserMenu", () => jest.fn());
+  def("toggleSignInUpOverlay", () => jest.fn());
+  def("toggleUserPanel", () => jest.fn());
   def("root", () => (
     <UserMenuButton
-      startLogout={$startLogout}
-      showLoginOverlay={$showLoginOverlay}
-      toggleUserMenu={$toggleUserMenu}
+      callbacks={{
+        toggleUserPanel: $toggleUserPanel,
+        toggleSignInUpOverlay: $toggleSignInUpOverlay
+      }}
     />
   ));
-  it("matches the snapshot", () => {
-    expect(shallow($root)).toMatchSnapshot();
+  it("matches the snapshot when rendered", () => {
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

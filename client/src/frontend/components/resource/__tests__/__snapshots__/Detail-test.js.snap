@@ -3418,7 +3418,7 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                     <MetadataWrapper>
                       <Noop />
                       <div
-                        className="css-1digu2o-MetadataWrapper e7ay30h5"
+                        className="css-ylv7sg-MetadataWrapper e7ay30h5"
                       >
                         <withI18nextTranslation(Resource.Link)
                           attributes={

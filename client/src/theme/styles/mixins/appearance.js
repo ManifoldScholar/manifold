@@ -91,13 +91,13 @@ export const defaultTransitionProps = `var(--transition-duration-default) var(--
 // Layout
 // --------------------------------------------------------
 // Apply to a pseudo element to get a tail/triangle pointing up
-export function tailUp(color = "var(--color-base-neutral10)", height = "17px") {
+export function tailUp(color = "var(--color-base-neutral10)", height = "10px") {
   return `
     width: 0;
     height: 0;
     border-color: transparent transparent ${color};
     border-style: solid;
-    border-width: 0 15.5px ${height};
+    border-width: 0 10px ${height};
   `;
 }
 

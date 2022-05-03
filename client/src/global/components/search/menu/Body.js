@@ -80,7 +80,7 @@ export class SearchMenuBody extends PureComponent {
 
   render() {
     return (
-      <nav className={this.containerClass}>
+      <div className={this.containerClass}>
         <CSSTransition
           in={this.props.visibility.search}
           classNames="visibility"
@@ -101,7 +101,7 @@ export class SearchMenuBody extends PureComponent {
             autoFocus
           />
         </CSSTransition>
-      </nav>
+      </div>
     );
   }
 }

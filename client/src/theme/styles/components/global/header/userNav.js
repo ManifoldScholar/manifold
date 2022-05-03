@@ -65,8 +65,7 @@ export default `
       }
     }
 
-    .search-menu,
-    .user-menu {
+    .search-menu {
       top: 100%;
     }
 
@@ -76,28 +75,24 @@ export default `
       ${respond(`padding: 20px 24px 22px;`, 40)}
     }
 
-    .panel-enter .search-menu,
-    .panel-enter .user-menu {
+    .panel-enter .search-menu {
       opacity: 0;
       transform: translateY(${-1 * parseInt(menuSlideDistance, 10)}px);
     }
 
-    .panel-enter-active .search-menu,
-    .panel-enter-active .user-menu {
+    .panel-enter-active .search-menu {
       opacity: 1;
       transition: opacity ${defaultTransitionProps},
         transform ${defaultTransitionProps};
       transform: translateY(0);
     }
 
-    .panel-exit .search-menu,
-    .panel-exit .user-menu {
+    .panel-exit .search-menu {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .panel-exit-active .search-menu,
-    .panel-exit-active .user-menu {
+    .panel-exit-active .search-menu {
       opacity: 0;
       transition: opacity ${defaultTransitionProps},
         transform ${defaultTransitionProps};

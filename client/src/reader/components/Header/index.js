@@ -15,6 +15,7 @@ import memoize from "lodash/memoize";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import Utility from "global/components/utility";
+import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
 import { withTranslation } from "react-i18next";
 
 import Authorize from "hoc/Authorize";
@@ -244,14 +245,15 @@ class Header extends Component {
                   />
                 </li>
                 <li className="reader-header__nav-item">
-                  <UserMenuButton
-                    authentication={this.props.authentication}
-                    active={this.props.visibility.uiPanels.user}
-                    showLoginOverlay={this.triggerShowSignInUpOverlay}
-                    toggleUserMenu={this.panelToggleHandler("user")}
+                  <DisclosureNavigationMenu
+                    visible={this.props.visibility.uiPanels.user}
+                    disclosure={<UserMenuButton />}
+                    callbacks={this.props.commonActions}
+                    onBlur={this.props.commonActions.hideUserPanel}
                     context="reader"
-                    className="reader-header__button reader-header__button--pad-narrow"
-                  />
+                  >
+                    <UserMenuBody />
+                  </DisclosureNavigationMenu>
                 </li>
               </ul>
             </div>
@@ -329,17 +331,17 @@ class Header extends Component {
               resetTypography={this.props.resetTypography}
               hidePanel={this.props.commonActions.hideAppearancePanel}
             />
-            <UIPanel
+            {/* <UserMenuBody
+              visible={this.props.visibility.uiPanels.user}
+              callbacks={this.props.commonActions}
+              context="reader"
+            /> */}
+            {/* <UIPanel
               id="user"
               visibility={this.props.visibility.uiPanels}
               bodyComponent={UserMenuBody}
               // Props required by body component
-              showLoginOverlay={this.props.commonActions.toggleSignInUpOverlay}
-              startLogout={this.props.commonActions.logout}
-              hideUserMenu={this.props.commonActions.toggleUserPanel}
-              hidePanel={this.props.commonActions.hideUserPanel}
-              context="reader"
-            />
+            /> */}
           </div>
           {this.renderOptionsToggle()}
           <HeaderNotifications />

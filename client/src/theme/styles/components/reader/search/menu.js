@@ -26,7 +26,7 @@ export default `
     }
 
     .header-app & {
-      --tail-height: 17px;
+      --tail-height: 10px;
       transition: color ${defaultTransitionProps};
 
       &.button-active {
@@ -41,7 +41,7 @@ export default `
         bottom: 14px;
         left: 50%;
         display: block;
-        margin-left: -15px;
+        margin-left: -10px;
         content: "";
         opacity: 0;
         transition: transform ${defaultTransitionProps},
