@@ -6566,14 +6566,14 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                                       >
                                         pages.subheaders.tags_list
                                       </span>
-                                      <Label>
+                                      <GroupLabel>
                                         <Noop />
                                         <span
-                                          className="css-n7qi8v-Label e1vmqhll3"
+                                          className="css-2d0gvt-GroupLabel e1vmqhll3"
                                         >
                                           metadata.tags
                                         </span>
-                                      </Label>
+                                      </GroupLabel>
                                       <List>
                                         <Noop />
                                         <ul
