@@ -6,11 +6,13 @@ module Collections
     include Dry::Equalizer.new(:collector)
     include MultiKeyable
 
+    Type = Types.Instance(self)
+
     multi_keyable :collector, :collectable_entries
 
     param :collector, Types::ModelProxy
 
-    option :collects, Types.Array(Types::ModelProxy), as: :collectable_models, default: proc { [] }
+    option :collects, Types::ModelProxies, as: :collectable_models, default: proc { [] }
 
     option :grouping, Types::ModelProxy.optional, optional: true, default: proc { nil }
 
@@ -25,6 +27,9 @@ module Collections
     option :reorderable, Types::Bool, default: proc { false }
 
     delegate :[], to: :collectables
+    delegate :name, to: :grouping, prefix: true, allow_nil: true
+
+    alias reorderable? reorderable
 
     # @!attribute [r] collectables
     # @return [<Collections::CollectableDefinition>]

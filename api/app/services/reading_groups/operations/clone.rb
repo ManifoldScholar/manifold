@@ -21,6 +21,8 @@ module ReadingGroups
       def call
         new_reading_group = yield clone_reading_group!
 
+        yield clone_collection! new_reading_group
+
         yield maybe_clone_annotations! new_reading_group
 
         yield maybe_archive_membership!
@@ -41,6 +43,14 @@ module ReadingGroups
         group.creator = user
 
         monadic_save group
+      end
+
+      # @see Collections::Operations::Clone
+      # @return [Dry::Monads::Result]
+      def clone_collection!(new_reading_group)
+        cloner = Collections::Operations::Clone.new reading_group, new_reading_group
+
+        cloner.call
       end
 
       def maybe_clone_annotations!(new_reading_group)

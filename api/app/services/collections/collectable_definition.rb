@@ -10,7 +10,7 @@ module Collections
 
     param :collectable, Types::ModelProxy
 
-    option :parent, Types.Instance(Collections::Definition), as: :type
+    option :parent, Collections::Definition::Type, as: :type
 
     option :entry_name, Types::String, default: proc { "#{type.entry_prefix}#{collectable.name}" }
 
