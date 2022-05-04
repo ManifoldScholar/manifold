@@ -7,7 +7,10 @@ require "our_types/indifferent_hash"
 require "scanf"
 require "zip"
 
+require "dry/core/memoizable"
+require "dry/effects"
 require "dry/monads"
+require "dry/monads/do"
 require "dry/system/container"
 require "dry/transaction/operation"
 
