@@ -171,6 +171,9 @@ Style/HashAsLastArrayItem:
 Style/HashLikeCase:
   Enabled: true
 
+Style/MultilineBlockChain:
+  Enabled: false
+
 Style/OptionalBooleanParameter:
   Enabled: true
 
@@ -191,6 +194,9 @@ Style/StringConcatenation:
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
 
 Style/CollectionMethods:
   Enabled: false

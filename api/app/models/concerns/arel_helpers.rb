@@ -2,7 +2,7 @@
 # SQL selections.
 #
 # rubocop:disable Metrics/BlockLength, Style/CharacterLiteral
-# rubocop:disable Style/MultilineBlockChain, Style/StringLiterals
+# rubocop:disable Style/StringLiterals
 # @see https://www.postgresql.org/docs/9.5/static/functions-json.html JSON functions and operators in PostgreSQL
 module ArelHelpers
   extend ActiveSupport::Concern
@@ -408,4 +408,4 @@ module ArelHelpers
   end
 end
 # rubocop:enable Metrics/BlockLength, Style/CharacterLiteral
-# rubocop:enable Style/MultilineBlockChain, Style/StringLiterals
+# rubocop:enable Style/StringLiterals

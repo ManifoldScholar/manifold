@@ -1,6 +1,6 @@
 module Testing
   # rubocop:disable Metrics/ParameterLists, Lint/UnusedMethodArgument, Naming/MethodParameterName, Layout/LineLength
-  # rubocop:disable Layout/FirstHashElementIndentation, Style/TrailingCommaInHashLiteral
+  # rubocop:disable Layout/FirstHashElementIndentation
   class ManifoldClient
     extend Dry::Initializer
 
@@ -229,6 +229,6 @@ module Testing
 
     prepend ResponseWrapping
   end
-  # rubocop:enable Layout/FirstHashElementIndentation, Style/TrailingCommaInHashLiteral
+  # rubocop:enable Layout/FirstHashElementIndentation
   # rubocop:enable Metrics/ParameterLists, Lint/UnusedMethodArgument, Naming/MethodParameterName, Layout/LineLength
 end

@@ -1,6 +1,5 @@
 module JSONAPI
   module Operations
-    # rubocop:disable Style/MultilineBlockChain
     class Handler
       extend Dry::Initializer
 
@@ -161,6 +160,5 @@ module JSONAPI
         }
       end
     end
-    # rubocop:enable Style/MultilineBlockChain
   end
 end
