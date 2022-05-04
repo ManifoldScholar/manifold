@@ -628,7 +628,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
                 }
               }
             >
-              <EntityHeadContent
+              <Frontend.Entity.HeadContent
                 entity={
                   Object {
                     "attributes": Object {
@@ -1458,7 +1458,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
                     </HeadContentComponent>
                   </WithSettings('HeadContentComponent)>
                 </Connect(WithSettings('HeadContentComponent))>
-              </EntityHeadContent>
+              </Frontend.Entity.HeadContent>
               <RegisterBreadcrumbs
                 breadcrumbs={
                   Array [
@@ -1473,7 +1473,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
                   ]
                 }
               />
-              <Frontend.Composed.EntityCollection.ProjectsResources
+              <Frontend.Entity.Collection.ProjectsResources
                 filterProps={
                   Object {
                     "filters": Array [
