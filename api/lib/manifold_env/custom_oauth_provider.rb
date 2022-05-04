@@ -1,6 +1,6 @@
 module ManifoldEnv
   # rubocop:disable Metrics/ParameterLists
-  # rubocop:disable Style/MultilineBlockChain, Metrics/AbcSize,
+  # rubocop:disable Metrics/AbcSize,
   # rubocop:disable Metrics/MethodLength
   class CustomOauthProvider
     def initialize(
@@ -164,6 +164,6 @@ module ManifoldEnv
     end
   end
   # rubocop:enable Metrics/ParameterLists
-  # rubocop:enable Style/MultilineBlockChain, Metrics/AbcSize,
+  # rubocop:enable Metrics/AbcSize,
   # rubocop:enable Metrics/MethodLength
 end

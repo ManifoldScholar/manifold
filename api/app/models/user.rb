@@ -234,7 +234,7 @@ class User < ApplicationRecord
     errors.add(:password, "can't be blank") if password.blank?
   end
 
-  # rubocop:disable Metrics/BlockLength, Style/MultilineBlockChain
+  # rubocop:disable Metrics/BlockLength
   concerning :Classification do
     included do
       include ClassyEnum::ActiveRecord
@@ -287,5 +287,5 @@ class User < ApplicationRecord
       end
     end
   end
-  # rubocop:enable Metrics/BlockLength, Style/MultilineBlockChain
+  # rubocop:enable Metrics/BlockLength
 end
