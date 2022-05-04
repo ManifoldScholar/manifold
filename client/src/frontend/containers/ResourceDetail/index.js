@@ -117,12 +117,18 @@ export class ResourceDetailContainer extends PureComponent {
       to: lh.link("frontendProject", project.attributes.slug),
       label: project.attributes.titlePlaintext
     };
-    const resourcesCrumb = {
-      to: isCollectionMember
-        ? lh.link("frontendProjectResourceCollections", project.attributes.slug)
-        : lh.link("frontendProjectResources", project.attributes.slug),
-      label: t("glossary.resource_other")
-    };
+    const resourcesCrumb = isCollectionMember
+      ? {
+          to: lh.link(
+            "frontendProjectResourceCollections",
+            project.attributes.slug
+          ),
+          label: t("glossary.resource_collection_other")
+        }
+      : {
+          to: lh.link("frontendProjectResources", project.attributes.slug),
+          label: t("glossary.resource_other")
+        };
     const collectionCrumb = isCollectionMember
       ? {
           to: this.collectionUrl(),
