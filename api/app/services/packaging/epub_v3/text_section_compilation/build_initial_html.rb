@@ -10,7 +10,7 @@ module Packaging
 
         PAGE_TEMPLATE = <<~HTML.freeze
         <!doctype html>
-        <html xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#, se: https://standardebooks.org/vocab/1.0">
+        <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: http://www.daisy.org/z3998/2012/vocab/structure/#, se: https://standardebooks.org/vocab/1.0">
           <head>
             <title></title>
           </head>
