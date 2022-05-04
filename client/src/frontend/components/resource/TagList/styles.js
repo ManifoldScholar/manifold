@@ -6,7 +6,6 @@ import {
   respond
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
-import { Link as LinkComponent } from "react-router-dom";
 
 export const Container = styled("nav", transientOptions)`
   ${({ $isCard }) =>
@@ -18,7 +17,7 @@ export const Container = styled("nav", transientOptions)`
   `}
 `;
 
-export const Label = styled.span`
+export const GroupLabel = styled.span`
   ${utilityPrimary}
   font-size: 13px;
   color: var(--color);
@@ -44,7 +43,7 @@ export const Tag = styled.li`
   }
 `;
 
-export const Link = styled(LinkComponent)`
+export const Label = styled.span`
   text-decoration: none;
   transition: color ${defaultTransitionProps};
   color: var(--color-neutral-text-extra-dark);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
+import { Link } from "react-router-dom";
 import * as Styled from "./styles";
 
 class ResourceTagList extends Component {
@@ -41,20 +42,15 @@ class ResourceTagList extends Component {
   createTagLink(tag, projectSlug, index) {
     const { disabledLinks } = this.props;
     if (!projectSlug && !disabledLinks) return null;
-    const url = disabledLinks
-      ? "#"
-      : lh.link("frontendProjectResources", projectSlug, {
-          tag: tag.toLowerCase()
-        });
+    const url = lh.link("frontendProjectResources", projectSlug, {
+      tag: tag.toLowerCase()
+    });
+    const tagProps = disabledLinks
+      ? { className: "disabled" }
+      : { onClick: this.stopPropagation, to: url, as: Link };
     return (
       <Styled.Tag key={`${tag}-${index}`}>
-        <Styled.Link
-          onClick={this.stopPropagation}
-          className={this.props.disabledLinks ? "disabled" : null}
-          to={url}
-        >
-          {tag}
-        </Styled.Link>
+        <Styled.Label {...tagProps}>{tag}</Styled.Label>
       </Styled.Tag>
     );
   }
@@ -72,7 +68,7 @@ class ResourceTagList extends Component {
         <span className="screen-reader-text">
           {this.props.t("pages.subheaders.tags_list")}
         </span>
-        <Styled.Label>{this.props.t("metadata.tags")}</Styled.Label>
+        <Styled.GroupLabel>{this.props.t("metadata.tags")}</Styled.GroupLabel>
         <Styled.List>{this.mapTagsToLinks(this.props.resource)}</Styled.List>
       </Styled.Container>
     );
