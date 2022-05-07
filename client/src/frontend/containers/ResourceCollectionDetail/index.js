@@ -212,8 +212,11 @@ export class ResourceCollectionDetailContainer extends PureComponent {
       label: project.attributes.titlePlaintext
     };
     const resourcesCrumb = {
-      to: lh.link("frontendProjectResources", project.attributes.slug),
-      label: this.props.t("glossary.resource_other")
+      to: lh.link(
+        "frontendProjectResourceCollections",
+        project.attributes.slug
+      ),
+      label: this.props.t("glossary.resource_collection_other")
     };
     const collectionCrumb = resourceCollection
       ? {

@@ -108,16 +108,19 @@ export class ResourceDetailContainer extends PureComponent {
       resourceCollection,
       project,
       resource,
-      t
+      t,
+      location
     } = this.props;
     const isCollectionMember = !!resourceCollection?.relationships?.resources?.find(
       r => r.id === resource.id
     );
+    const collectionRoute =
+      location.pathname.split("/").indexOf("resource-collection") >= 0;
     const projectCrumb = {
       to: lh.link("frontendProject", project.attributes.slug),
       label: project.attributes.titlePlaintext
     };
-    const resourcesCrumb = isCollectionMember
+    const resourcesCrumb = collectionRoute
       ? {
           to: lh.link(
             "frontendProjectResourceCollections",
@@ -129,12 +132,13 @@ export class ResourceDetailContainer extends PureComponent {
           to: lh.link("frontendProjectResources", project.attributes.slug),
           label: t("glossary.resource_other")
         };
-    const collectionCrumb = isCollectionMember
-      ? {
-          to: this.collectionUrl(),
-          label: resourceCollection.attributes.title
-        }
-      : null;
+    const collectionCrumb =
+      collectionRoute && isCollectionMember
+        ? {
+            to: this.collectionUrl(),
+            label: resourceCollection.attributes.title
+          }
+        : null;
     const currentCrumb = {
       to: this.resourceUrl(),
       label: resource.attributes.titlePlaintext
