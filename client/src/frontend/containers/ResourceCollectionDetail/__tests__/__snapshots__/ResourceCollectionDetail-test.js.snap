@@ -1229,8 +1229,8 @@ exports[`frontend/containers/ResourceCollectionDetail matches the snapshot 1`] =
           "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
         },
         Object {
-          "label": "glossary.resource_other",
-          "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resources",
+          "label": "glossary.resource_collection_other",
+          "to": "/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE/resource-collections",
         },
         Object {
           "label": "Rowan",
