@@ -12,6 +12,7 @@ describe("frontend/containers/ResourceDetail/ResourceDetail", () => {
       project={$project}
       resource={$resource}
       t={key => key}
+      location={{pathname: '/projects/test/resource'}}
     />
   ));
 
