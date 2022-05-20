@@ -23,12 +23,7 @@ module API
             inputs[:creator] = current_user
             inputs[:journal] = @journal
             outcome = JournalIssues::Create.run inputs
-
-            if outcome.valid?
-              render_single_resource outcome.result
-            else
-              respond_with_errors outcome
-            end
+            render_single_resource outcome.result
           end
 
           private
