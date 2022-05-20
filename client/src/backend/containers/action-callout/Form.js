@@ -82,6 +82,12 @@ export class ActionCalloutForm extends Component {
 
   get kindOptions() {
     const t = this.props.t;
+    if (this.calloutable.type === "journals") {
+      return [
+        { label: t("glossary.link_title_case_one"), value: "link" },
+        { label: t("actions.download"), value: "download" }
+      ];
+    }
     return [
       { label: t("glossary.link_title_case_one"), value: "link" },
       { label: t("actions.read"), value: "read" },
