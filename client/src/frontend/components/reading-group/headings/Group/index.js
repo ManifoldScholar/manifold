@@ -11,8 +11,13 @@ import * as Styled from "./styles";
 function GroupHeading({ readingGroup, history, location }) {
   const { t } = useTranslation();
 
-  const groupName = readingGroup.attributes.name;
-  const canUpdateGroup = readingGroup.attributes.abilities.update;
+  const {
+    name: groupName,
+    abilities,
+    currentUserRole
+  } = readingGroup.attributes;
+  const canUpdateGroup = abilities.update;
+  const isMember = currentUserRole !== "none";
 
   function getTag() {
     const membership =
@@ -27,7 +32,11 @@ function GroupHeading({ readingGroup, history, location }) {
       <Collapse>
         <Styled.Container>
           <Styled.Flex>
-            <Title title={groupName} tag={getTag()} />
+            <Title
+              title={groupName}
+              tag={getTag()}
+              adminWarning={canUpdateGroup && !isMember}
+            />
             <Collapse.Toggle
               className={`button-tertiary`}
               activeClassName="button-tertiary--active"

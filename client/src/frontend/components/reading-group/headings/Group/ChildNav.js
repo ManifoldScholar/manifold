@@ -15,7 +15,8 @@ function ChildNav({ readingGroup }) {
   const { abilities, currentUserRole } = readingGroup.attributes;
   const canUpdateGroup = abilities.update;
   const showHomeLink = canUpdateGroup || hasItemsInCollection(readingGroup);
-  const showMembersLink = currentUserRole !== "none";
+  const isMember = currentUserRole !== "none";
+  const showMembersLink = canUpdateGroup || isMember;
 
   const links = [
     {

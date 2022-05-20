@@ -5,7 +5,9 @@ import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 
 function ReadingGroupsMembersContainer({ route, readingGroup, ...restProps }) {
-  const userIsGroupMember = readingGroup.attributes.currentUserRole !== "none";
+  const { abilities, currentUserRole } = readingGroup.attributes;
+  const canUpdateGroup = abilities.update;
+  const userIsGroupMember = canUpdateGroup || currentUserRole !== "none";
 
   if (!userIsGroupMember) {
     return (

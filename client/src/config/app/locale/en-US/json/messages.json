@@ -37,7 +37,8 @@
       "destroy_heading": "Are you sure you want to delete this reading group?",
       "destroy_message": "If the reading group is anonymous or private, all annotations within the group will be made private and only visible to the annotation creator. If the group is public, annotations will be public. This action can not be undone.",
       "archive_heading": "Are you sure you want to archive this group?",
-      "archive_message": "This group’s annotations will be hidden for you in the reader. Groups can be reactivated at any time."
+      "archive_message": "This group’s annotations will be hidden for you in the reader. Groups can be reactivated at any time.",
+      "admin_warning": "Your admin privileges allow you to edit this group, but you are not a member."
     },
     "membership": {
       "destroy_heading": "Are you sure you want to remove this user from the group?",

@@ -12,6 +12,7 @@ import { GroupHeading } from "frontend/components/reading-group/headings";
 import Settings from "frontend/components/reading-group/Settings";
 import SearchDialog from "frontend/components/collecting/SearchDialog";
 import { useFetch, useFromStore } from "hooks";
+import Authorize from "hoc/Authorize";
 
 export default function ReadingGroup({ route }) {
   const { id } = useParams();
@@ -97,24 +98,26 @@ export default function ReadingGroup({ route }) {
 
   return (
     <>
-      <Drawer.Wrapper {...drawerProps}>
-        <Settings {...settingsProps} />
-      </Drawer.Wrapper>
-      <HeadContent title={groupName} appendDefaultTitle />
-      <section>
-        <div className="container">
-          <RegisterBreadcrumbs {...breadcrumbProps} />
-          <GroupHeading
-            readingGroup={readingGroup}
-            history={history}
-            location={location}
-          />
-          {childRoutes(route, { childProps })}
-          {showSearchDialog && (
-            <SearchDialog heading={groupName} onClose={onCloseSearch} />
-          )}
-        </div>
-      </section>
+      <Authorize entity={readingGroup} ability="read">
+        <Drawer.Wrapper {...drawerProps}>
+          <Settings {...settingsProps} />
+        </Drawer.Wrapper>
+        <HeadContent title={groupName} appendDefaultTitle />
+        <section>
+          <div className="container">
+            <RegisterBreadcrumbs {...breadcrumbProps} />
+            <GroupHeading
+              readingGroup={readingGroup}
+              history={history}
+              location={location}
+            />
+            {childRoutes(route, { childProps })}
+            {showSearchDialog && (
+              <SearchDialog heading={groupName} onClose={onCloseSearch} />
+            )}
+          </div>
+        </section>
+      </Authorize>
     </>
   );
 }
