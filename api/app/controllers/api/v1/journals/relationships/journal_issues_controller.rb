@@ -6,7 +6,7 @@ module API
 
           resourceful! JournalIssue, authorize_options: { except: [:index] } do
             JournalIssue.filtered(
-              with_pagination!({}), scope: @journal.journal_issues.in_reverse_order
+              with_pagination!(journal_issue_filter_params), scope: @journal.journal_issues.in_reverse_order, user: current_user
             )
           end
 
@@ -22,6 +22,9 @@ module API
             inputs[:params] = journal_issue_params.to_h
             inputs[:creator] = current_user
             inputs[:journal] = @journal
+
+            authorize_action_for JournalIssue.new(journal: @journal)
+
             outcome = JournalIssues::Create.run inputs
 
             if outcome.valid?

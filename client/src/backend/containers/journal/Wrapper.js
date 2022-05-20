@@ -89,7 +89,7 @@ function JournalWrapper({ match, route, history, confirm }) {
         failureFatalError={{
           detail: t("backend_entities.journals.unauthorized_edit")
         }}
-        ability={["update"]}
+        ability={["read"]}
       >
         <RedirectToFirstMatch
           from={lh.link("backendJournal", journal.id)}

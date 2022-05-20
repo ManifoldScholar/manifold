@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Authorize from "hoc/Authorize";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -17,8 +17,10 @@ function JournalIssuesContainer({ refresh, journal, route }) {
 
   const [pagination, setPageNumber] = usePaginationState();
 
+  const filters = useMemo(() => ({ withUpdateAbility: true }), []);
+
   const { data, refresh: refreshIssues, meta } = useFetch({
-    request: [journalsAPI.journalIssues, journal.id, pagination]
+    request: [journalsAPI.journalIssues, journal.id, pagination, filters]
   });
 
   const { t } = useTranslation();
@@ -28,7 +30,7 @@ function JournalIssuesContainer({ refresh, journal, route }) {
   return (
     <Authorize
       entity={journal}
-      ability="update"
+      ability="read"
       failureNotification
       failureRedirect={lh.link("backendJournal", journal.id)}
     >
@@ -53,7 +55,8 @@ function JournalIssuesContainer({ refresh, journal, route }) {
             path={lh.link("backendJournalIssueNew", journal.id)}
             type="add"
             text={t("backend_entities.issues.add_button_label")}
-            authorizedFor="journalIssue"
+            authorizedFor={journal}
+            authorizedTo="update"
           />
         ]}
       />

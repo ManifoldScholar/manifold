@@ -44,6 +44,11 @@ class JournalIssue < ApplicationRecord
 
     where(journal_volume_id: journal_volume_id)
   }
+  scope :with_update_ability, ->(user = nil) do
+    return none if user.blank?
+
+    where(project: Project.with_update_ability(user)).or(where(journal: Journal.with_update_ability(user)))
+  end
 
   delegate :avatar, to: :project
   delegate :avatar_color, to: :project
