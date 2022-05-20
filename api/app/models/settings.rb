@@ -94,6 +94,8 @@ class Settings < ApplicationRecord
     {
       has_visible_home_project_collections: ProjectCollection.by_visible_on_homepage.exists?,
       has_visible_projects: Project.with_read_ability(current_user).exists?,
+      has_visible_journals: Journal.with_read_ability(current_user).exists?,
+      has_project_collections: ProjectCollection.count.positive?,
       manifold_version: self.class.manifold_version
     }
   end

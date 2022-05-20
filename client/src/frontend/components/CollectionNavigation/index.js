@@ -1,60 +1,65 @@
-import React from "react";
+import React, { useMemo } from "react";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import { useRouteMatch } from "react-router-dom";
 import { useCurrentUser } from "hooks";
 import Link from "./Link";
 import * as Styled from "./styles";
+import withSettings from "hoc/withSettings";
 
-function CollectionNavigation() {
+function CollectionNavigation({ settings }) {
   const { t } = useTranslation();
   const currentUser = useCurrentUser();
   const { path } = useRouteMatch();
 
-  const links = [
-    {
-      to: lh.link("frontendProjectsAll"),
-      label: t("pages.frontend.projects"),
-      icon: "projects64",
-      requiresAuthorization: false,
-      show: true
-    },
-    {
-      to: lh.link("frontendJournalsList"),
-      label: t("pages.frontend.journals"),
-      icon: "journals64",
-      requiresAuthorization: false,
-      show: path !== lh.link("frontendJournalsList")
-    },
-    {
-      to: lh.link("frontendIssuesList"),
-      label: t("pages.frontend.issues"),
-      icon: "journals64",
-      requiresAuthorization: false,
-      show: path === lh.link("frontendJournalsList")
-    },
-    {
-      to: lh.link("frontendProjectCollections"),
-      label: t("pages.frontend.project_collections"),
-      icon: "projectCollections64",
-      requiresAuthorization: false,
-      show: true
-    },
-    {
-      to: lh.link("frontendStarred"),
-      label: t("pages.frontend.my_starred"),
-      icon: "star24",
-      requiresAuthorization: true,
-      show: true
-    },
-    {
-      to: lh.link("frontendAnnotations"),
-      label: t("pages.frontend.my_notes_truncated"),
-      icon: "notes24",
-      requiresAuthorization: true,
-      show: true
-    }
-  ];
+  const links = useMemo(
+    () =>
+      [
+        {
+          to: lh.link("frontendProjectsAll"),
+          label: t("pages.frontend.projects"),
+          icon: "projects64",
+          requiresAuthorization: false,
+          show: true
+        },
+        settings?.attributes?.calculated?.hasVisibleJournals && {
+          to: lh.link("frontendJournalsList"),
+          label: t("pages.frontend.journals"),
+          icon: "journals64",
+          requiresAuthorization: false,
+          show: path !== lh.link("frontendJournalsList")
+        },
+        {
+          to: lh.link("frontendIssuesList"),
+          label: t("pages.frontend.issues"),
+          icon: "journals64",
+          requiresAuthorization: false,
+          show: path === lh.link("frontendJournalsList")
+        },
+        settings?.attributes?.calculated?.hasProjectCollections && {
+          to: lh.link("frontendProjectCollections"),
+          label: t("pages.frontend.project_collections"),
+          icon: "projectCollections64",
+          requiresAuthorization: false,
+          show: true
+        },
+        {
+          to: lh.link("frontendStarred"),
+          label: t("pages.frontend.my_starred"),
+          icon: "star24",
+          requiresAuthorization: true,
+          show: true
+        },
+        {
+          to: lh.link("frontendAnnotations"),
+          label: t("pages.frontend.my_notes_truncated"),
+          icon: "notes24",
+          requiresAuthorization: true,
+          show: true
+        }
+      ].filter(x => x),
+    [settings, path, t]
+  );
 
   const filteredLinks = links
     .filter(link => (currentUser ? true : !link.requiresAuthorization))
@@ -75,4 +80,4 @@ function CollectionNavigation() {
 
 CollectionNavigation.displayName = "Frontend.CollectionNavigation";
 
-export default CollectionNavigation;
+export default withSettings(CollectionNavigation);

@@ -164,6 +164,6 @@ exports[`frontend/containers/ProjectCollections/ProjectCollections matches the s
       }
     }
   />
-  <Frontend.CollectionNavigation />
+  <Connect(WithSettings('Frontend.CollectionNavigation)) />
 </Fragment>
 `;

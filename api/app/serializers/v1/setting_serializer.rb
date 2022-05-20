@@ -88,6 +88,8 @@ module V1
     typed_attribute :calculated, Types::Hash.schema(
       hasVisibleHomeProjectCollections: Types::Bool,
       hasVisibleProjects: Types::Bool,
+      hasVisibleJournals: Types::Bool,
+      hasProjectCollections: Types::Bool,
       manifoldVersion: Types::Hash.schema(
         version: Types::String,
         segments: Types::Array.of(Types::Integer).optional.meta(
