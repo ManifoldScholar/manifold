@@ -28,7 +28,11 @@ class DefaultFooter extends Component {
         <FooterParts.Columns>
           <FooterParts.Copyright settings={this.props.settings} />
         </FooterParts.Columns>
-        <FooterParts.PoweredBy type="library" dull={false} />
+        <FooterParts.PoweredBy
+          withVersion={this.props.withVersion}
+          type="library"
+          dull={false}
+        />
       </Styled.DefaultFooter>
     );
   }
