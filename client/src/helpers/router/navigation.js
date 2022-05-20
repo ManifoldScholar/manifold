@@ -24,7 +24,7 @@ class Navigation {
           }
         ]
       },
-      {
+      settings.attributes.calculated.hasVisibleJournals && {
         label: "Journals",
         route: "frontendJournals",
         children: [

@@ -1717,6 +1717,6 @@ exports[`frontend/containers/ProjectCollectionDetail/ProjectCollectionDetail mat
       }
     }
   />
-  <Frontend.CollectionNavigation />
+  <Connect(WithSettings('Frontend.CollectionNavigation)) />
 </Fragment>
 `;
