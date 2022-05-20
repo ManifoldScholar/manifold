@@ -19,6 +19,15 @@ export const Title = styled.h1`
   ${respond(`font-size: 26px;`, 80)}
 `;
 
+export const Warning = styled.div`
+  margin-block-end: 0;
+  font-size: 16px;
+  color: var(--error-color);
+  word-wrap: break-word;
+
+  ${respond(`font-size: 18px;`, 80)}
+`;
+
 export const Icon = styled(IconComposer)`
   width: 32px;
   height: 32px;
