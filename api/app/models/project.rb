@@ -83,7 +83,6 @@ class Project < ApplicationRecord
   has_many :ingestions, dependent: :destroy, inverse_of: :project
   has_many :twitter_queries, dependent: :destroy, inverse_of: :project
   has_many :permissions, as: :resource, inverse_of: :resource
-
   has_many :resource_imports, inverse_of: :project, dependent: :destroy
   has_many :tracked_dependent_versions,
            -> { order(created_at: :desc) },
@@ -96,25 +95,23 @@ class Project < ApplicationRecord
            dependent: :destroy,
            inverse_of: :project
   has_many :content_block_references, through: :content_blocks
-
   has_many :action_callouts,
            -> { order(:position) },
            dependent: :destroy,
            as: :calloutable
-
-  belongs_to :journal_issue, optional: true, dependent: :destroy, touch: true
-  has_one :journal, through: :journal_issue
-  has_one :journal_volume, through: :journal_issue, touch: true
-
   has_many :project_exports, inverse_of: :project, dependent: :destroy
   has_many :project_export_statuses, inverse_of: :project
   has_many :project_exportations, dependent: :destroy
-  has_one :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
-  has_one :current_project_export, through: :current_project_export_status, source: :project_export
   has_many :uncollected_resources, ->(object) {
     where.not(id: object.collection_resources.select(:resource_id))
   }, class_name: "Resource"
-  # rubocop:enable
+
+  belongs_to :journal_issue, optional: true, dependent: :destroy, touch: true
+
+  has_one :journal, through: :journal_issue
+  has_one :journal_volume, through: :journal_issue, touch: true
+  has_one :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
+  has_one :current_project_export, through: :current_project_export_status, source: :project_export
 
   delegate :number, to: :journal_issue, allow_nil: true, prefix: true
   delegate :pending_sort_title, to: :journal_issue, allow_nil: true, prefix: true
