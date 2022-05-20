@@ -324,7 +324,7 @@ class Navigation {
         label: "Issues",
         route: "backendJournalIssues",
         entity: journal,
-        ability: "update",
+        ability: "read",
         args
       },
       {

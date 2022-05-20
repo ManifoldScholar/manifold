@@ -21,9 +21,9 @@ module API
             @journal_volume =
               ::Updaters::Default.new(journal_volume_params)
                 .update(@journal.journal_volumes.new(creator: current_user))
-            @journal_volume.save
             authorize_action_for @journal_volume
 
+            @journal_volume.save
             render_single_resource @journal_volume,
                                    location: location
           end

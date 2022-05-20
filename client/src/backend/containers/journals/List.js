@@ -15,7 +15,7 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
 
   const journalFiltersWithDefaults = useMemo(
     () => ({
-      withUpdateAbility: true,
+      withUpdateOrIssueUpdateAbility: true,
       ...entitiesListSearchParams.journals
     }),
     [entitiesListSearchParams?.journals]

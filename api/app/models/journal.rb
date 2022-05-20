@@ -55,10 +55,28 @@ class Journal < ApplicationRecord
   scope :drafts, -> { where(draft: true) }
   scope :published, -> { where(draft: false) }
   scope :by_draft, ->(draft = nil) { where(draft: to_boolean(draft)) unless draft.nil? }
-  scope :with_order, ->(by = nil) { by.present? ? order(by) : order(:sort_title, :title) }
+  scope :with_order, ->(by = nil) do
+    case by
+    when "updated_at ASC"
+      order("journals.updated_at ASC")
+    when "updated_at DESC"
+      order("journals.updated_at DESC")
+    when "created_at ASC"
+      order("journals.created_at ASC")
+    when "created_at DESC"
+      order("journals.created_at DESC")
+    when "sort_title ASC"
+      order("journals.sort_title ASC, journals.title ASC")
+    when "sort_title DESC"
+      order("journals.sort_title DESC, journals.title DESC")
+    else
+      order(:sort_title, :title)
+    end
+  end
   scope :with_read_ability, ->(user = nil) { build_read_ability_scope_for user }
   scope :by_show_on_homepage, ->(show = true) { where(show_on_homepage: show).order(home_page_priority: :desc) if show.present? }
   scope :with_update_ability, ->(user = nil) { build_update_ability_scope_for user }
+  scope :with_update_or_issue_update_ability, ->(user = nil) { build_update_or_issue_update_ability_for user }
 
   # Search
   scope :search_import, -> {
@@ -127,6 +145,20 @@ class Journal < ApplicationRecord
       return none if user.blank?
 
       where arel_with_roles_for(user, RoleName.for_journal_update)
+    end
+
+    def build_update_or_issue_update_ability_for(user = nil)
+      return none if user.blank?
+
+      include_journals = Journal
+        .joins(journal_issues: :project)
+        .where(journals: {
+                 journal_issues: {
+                   project: Project.with_update_ability(user)
+                 }
+               })
+
+      where(arel_with_roles_for(user, RoleName.for_journal_update)).or(where(id: include_journals))
     end
 
     private
