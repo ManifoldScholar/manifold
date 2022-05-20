@@ -18,7 +18,10 @@ module JournalIssues
         ::Updaters::Default.new(params).update(journal.journal_issues.new(creator: creator))
 
       create_and_assign_project unless @journal_issue.project.present?
-      persist_model! journal_issue, assimilate: true
+
+      journal_issue.save if journal_issue.valid?
+
+      return journal_issue
     end
 
     private
