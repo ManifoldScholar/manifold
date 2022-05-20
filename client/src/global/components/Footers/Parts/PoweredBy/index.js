@@ -4,6 +4,7 @@ import withPluginReplacement from "hoc/withPluginReplacement";
 import Utility from "global/components/utility";
 import { FrontendModeContext } from "helpers/contexts";
 import * as Styled from "./styles";
+import withSettings from "hoc/withSettings";
 
 class PoweredBy extends PureComponent {
   static displayName = "Global.Footers.Parts.PoweredBy";
@@ -11,7 +12,8 @@ class PoweredBy extends PureComponent {
   static contextType = FrontendModeContext;
 
   static propTypes = {
-    dull: PropTypes.bool
+    dull: PropTypes.bool,
+    withVersion: PropTypes.bool
   };
 
   static defaultProps = {
@@ -57,6 +59,9 @@ class PoweredBy extends PureComponent {
       ? this.manifoldLinkProps
       : {};
 
+    const version = this.props.settings?.attributes?.calculated?.manifoldVersion
+      ?.version;
+
     return (
       <Styled.Wrapper
         as={this.wrapWithLink ? "a" : "div"}
@@ -86,7 +91,10 @@ class PoweredBy extends PureComponent {
               {(this.isStandaloneFooter || this.isLibraryFooter) && (
                 <Styled.LogoText>
                   <Styled.LogoText $neutral>Powered by </Styled.LogoText>{" "}
-                  <Styled.LogoText $white>Manifold</Styled.LogoText>
+                  <Styled.LogoText $white>Manifold</Styled.LogoText>{" "}
+                  {version && (
+                    <Styled.LogoText $white> v{version}</Styled.LogoText>
+                  )}
                 </Styled.LogoText>
               )}
             </Styled.LogoWrapper>
@@ -100,7 +108,6 @@ class PoweredBy extends PureComponent {
   }
 }
 
-export default withPluginReplacement(
-  PoweredBy,
-  "Global.Components.Footers.PoweredBy"
+export default withSettings(
+  withPluginReplacement(PoweredBy, "Global.Components.Footers.PoweredBy")
 );

@@ -106,6 +106,7 @@ export class BackendContainer extends PureComponent {
               authentication={this.props.authentication}
               commonActions={this.commonActions}
               settings={this.props.settings}
+              withVersion
             />
           </>
         </BodyClass>
