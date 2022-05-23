@@ -9,9 +9,9 @@
     "resource_collection": "This collection has no resources.",
     "table_of_contents": "This text does not have a table of contents.",
     "comments": {
-      "edit": "Edit this comment...",
-      "reply": "Reply to this commment...",
-      "discuss_entity": "Discuss this {{entity}}...",
+      "edit": "Edit this comment…",
+      "reply": "Reply to this commment…",
+      "discuss_entity": "Discuss this {{entity}}…",
       "unauthenticated": "Login to post a comment",
       "deleted": "This comment was deleted."
     },
