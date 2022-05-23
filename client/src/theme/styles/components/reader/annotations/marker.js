@@ -59,6 +59,10 @@ export default `
   }
 
   .annotation-highlight {
+    &:hover {
+      color: inherit;
+    }
+
     &.primary {
       background-color: var(--color-annotation-primary-pale);
 
