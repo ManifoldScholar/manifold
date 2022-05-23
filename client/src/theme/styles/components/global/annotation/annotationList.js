@@ -5,20 +5,25 @@ export default `
     ${listUnstyled}
 
     &--dark {
+      --marker-bg-color: var(--box-medium-bg-color);
+
       background-color: var(--box-bg-color);
       border-bottom-right-radius: var(--box-border-radius);
       border-bottom-left-radius: var(--box-border-radius);
     }
 
     .annotation-comments {
+      --Annotation-Detail-Inner-padding-block-start: ${fluidScale(
+        "40px",
+        "32px"
+      )};
+
       ${drawerPadding("padding-right")}
       ${drawerPadding("padding-left")}
-      padding-top: ${fluidScale("40px", "32px")};
-      padding-bottom: 37px;
+      padding-block-end: 37px;
 
       + .annotation-comments {
-        margin-top: 23px;
-        border-top: 1px solid var(--color-base-neutral40);
+        --Annotation-Detail-Inner-border: 1px solid var(--color-base-neutral40);
       }
     }
 

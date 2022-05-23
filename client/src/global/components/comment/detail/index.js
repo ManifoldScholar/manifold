@@ -5,7 +5,7 @@ import CommentContainer from "global/containers/comment";
 import Meta from "global/components/comment/meta";
 import Deleted from "global/components/comment/deleted";
 import Helper from "global/components/helper";
-import classNames from "classnames";
+import * as Styled from "global/components/Annotation/Annotation/UserContent/styles";
 
 import Authorize from "hoc/Authorize";
 
@@ -112,24 +112,6 @@ class CommentDetail extends PureComponent {
     );
   }
 
-  get listButtonBaseClassNames() {
-    return "annotation-reply__inline-list-button";
-  }
-
-  get replyButtonClassNames() {
-    return classNames({
-      "annotation-reply__inline-list-button": true,
-      "annotation-reply__inline-list-button--active": this.state.replying
-    });
-  }
-
-  get secondaryButtonClassNames() {
-    return classNames({
-      "annotation-reply__inline-list-button": true,
-      "annotation-reply__inline-list-button--secondary": true
-    });
-  }
-
   renderComment() {
     const { comment, parent, t } = this.props;
     const { creator } = comment.relationships;
@@ -137,100 +119,78 @@ class CommentDetail extends PureComponent {
     return (
       <li className="annotation-reply">
         <Meta comment={comment} creator={creator} parent={parent} />
-        <section className="annotation-reply__body">
+        <Styled.Body>
           <Helper.SimpleFormat text={comment.attributes.body} />
-        </section>
+        </Styled.Body>
         <Authorize kind={"any"}>
-          <nav className="annotation-reply__utility">
-            <ul className="annotation-reply__utility-list">
+          <Styled.Utility>
+            <Styled.UtilityList>
               <li>
-                <button
-                  className={this.replyButtonClassNames}
+                <Styled.Button
                   onClick={this.startReply}
                   aria-expanded={this.state.editor === "reply"}
                 >
                   {t("actions.reply")}
-                </button>
+                </Styled.Button>
               </li>
               <Authorize entity={comment} ability={"update"}>
                 <li>
-                  <button
+                  <Styled.Button
                     onClick={this.startEdit}
-                    className={this.listButtonBaseClassNames}
                     aria-expanded={this.state.editor === "edit"}
                   >
                     {t("actions.edit")}
-                  </button>
+                  </Styled.Button>
                 </li>
               </Authorize>
               <Authorize entity={comment} ability={"delete"}>
                 {!comment.attributes.deleted ? (
                   <li>
-                    <button
-                      onClick={this.handleDelete}
-                      className={this.listButtonBaseClassNames}
-                    >
+                    <Styled.Button onClick={this.handleDelete}>
                       {t("actions.delete")}
-                    </button>
+                    </Styled.Button>
                   </li>
                 ) : null}
               </Authorize>
               {comment.attributes.deleted ? (
                 <li>
-                  <button
-                    onClick={this.handleRestore}
-                    className={this.listButtonBaseClassNames}
-                  >
-                    {t("actions.restore")}
-                  </button>
+                  <Styled.Button>{t("actions.restore")}</Styled.Button>
                 </li>
               ) : null}
               {comment.attributes.deleted ? (
                 <li>
-                  <button
-                    onClick={this.handleDestroy}
-                    className={this.listButtonBaseClassNames}
-                  >
+                  <Styled.Button onClick={this.handleDestroy}>
                     {t("actions.destroy")}
-                  </button>
+                  </Styled.Button>
                 </li>
               ) : null}
               {comment.attributes.flagged ? (
                 <li>
-                  <button
-                    className={this.secondaryButtonClassNames}
-                    onClick={this.handleUnflag}
-                  >
+                  <Styled.SecondaryButton onClick={this.handleUnflag}>
                     {t("actions.unflag")}
-                  </button>
+                  </Styled.SecondaryButton>
                 </li>
               ) : (
                 <li>
-                  <button
-                    onClick={this.handleFlag}
-                    className={this.listButtonBaseClassNames}
-                  >
+                  <Styled.Button onClick={this.handleFlag}>
                     {t("actions.flag")}
-                  </button>
+                  </Styled.Button>
                 </li>
               )}
-            </ul>
+            </Styled.UtilityList>
             {this.renderEditor()}
-          </nav>
+          </Styled.Utility>
         </Authorize>
         <Authorize kind="unauthenticated">
-          <nav className="annotation-reply__utility">
-            <ul className="annotation-reply__utility-list">
+          <Styled.Utility>
+            <Styled.UtilityList>
               <li>
-                <button
-                  onClick={this.props.showLogin}
-                  className={this.listButtonBaseClassNames}
-                >
+                <Styled.Button onClick={this.props.showLogin}>
                   {t("actions.login_to_reply")}
-                </button>
+                </Styled.Button>
               </li>
-            </ul>
-          </nav>
+            </Styled.UtilityList>
+          </Styled.Utility>
         </Authorize>
         <CommentContainer.Thread
           subject={this.props.subject}

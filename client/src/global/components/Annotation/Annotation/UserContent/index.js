@@ -8,11 +8,11 @@ import IconComposer from "global/components/utility/IconComposer";
 import Editor from "../../Editor";
 import Meta from "./Meta";
 import CommentContainer from "global/containers/comment";
-import classNames from "classnames";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import pluralize from "pluralize";
 import Authorize from "hoc/Authorize";
+import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
 
@@ -137,44 +137,17 @@ class AnnotationDetail extends PureComponent {
     );
   }
 
-  get listButtonBaseClassNames() {
-    return "annotation-comments__inline-list-button";
-  }
-
-  get replyButtonClassNames() {
-    return classNames({
-      "annotation-comments__inline-list-button": true,
-      "annotation-comments__inline-list-button--active":
-        this.state.action === "replying"
-    });
-  }
-
-  get editButtonClassNames() {
-    return classNames({
-      "annotation-comments__inline-list-button": true,
-      "annotation-comments__inline-list-button--active":
-        this.state.action === "editing"
-    });
-  }
-
-  get secondaryButtonClassNames() {
-    return classNames({
-      "annotation-comments__inline-list-button": true,
-      "annotation-comments__inline-list-button--secondary": true
-    });
-  }
-
   renderInlineCommentsToggle() {
     if (!this.showInlineCommentsToggle) return null;
 
     return (
       <li>
-        <button
-          className={this.editButtonClassNames}
+        <Styled.Button
           onClick={this.loadComments}
+          $active={this.state.action === "editing"}
         >
           {this.props.t("counts.comment", { count: this.commentsCount })}
-        </button>
+        </Styled.Button>
       </li>
     );
   }
@@ -210,111 +183,108 @@ class AnnotationDetail extends PureComponent {
     return (
       <>
         <li className="annotation-comments">
-          <Meta
-            annotation={annotation}
-            creator={creator}
-            includeMarkers={this.props.includeMarkers}
-          />
-          {this.state.action === "editing" ? (
-            <Editor
+          <Styled.Inner>
+            <Meta
               annotation={annotation}
-              saveAnnotation={this.saveAnnotation}
-              cancel={this.stopAction}
+              creator={creator}
+              includeMarkers={this.props.includeMarkers}
             />
-          ) : (
-            <div>
-              <section className="annotation-comments__body">
-                <Helper.SimpleFormat text={annotation.attributes.body} />
-              </section>
-              <Authorize kind={"any"}>
-                <div className="annotation-comments__utility">
-                  <ul className="annotation-comments__utility-list">
-                    {this.includeComments ? (
-                      <li>
-                        <button
-                          className={this.replyButtonClassNames}
-                          onClick={this.startReply}
-                        >
-                          {t("actions.reply")}
-                        </button>
-                      </li>
-                    ) : null}
-                    <Authorize entity={annotation} ability={"update"}>
-                      <li>
-                        <button
-                          className={this.editButtonClassNames}
-                          onClick={this.startEdit}
-                        >
-                          {t("actions.edit")}
-                        </button>
-                      </li>
-                    </Authorize>
-                    <Authorize entity={annotation} ability={"delete"}>
-                      <li>
-                        <Utility.ConfirmableButton
-                          label={t("actions.delete")}
-                          confirmHandler={this.deleteAnnotation}
-                        />
-                      </li>
-                    </Authorize>
-                    {annotation.attributes.flagged ? (
-                      <li>
-                        <button
-                          className={this.secondaryButtonClassNames}
-                          onClick={this.handleUnflag}
-                        >
-                          {t("actions.unflag")}
-                        </button>
-                      </li>
-                    ) : (
-                      <li>
-                        <button
-                          onClick={this.handleFlag}
-                          className={this.listButtonBaseClassNames}
-                        >
-                          {t("actions.flag")}
-                        </button>
-                      </li>
+            {this.state.action === "editing" ? (
+              <Editor
+                annotation={annotation}
+                saveAnnotation={this.saveAnnotation}
+                cancel={this.stopAction}
+              />
+            ) : (
+              <div>
+                <Styled.Body>
+                  <Helper.SimpleFormat text={annotation.attributes.body} />
+                </Styled.Body>
+                <Authorize kind={"any"}>
+                  <Styled.Utility>
+                    <Styled.UtilityList>
+                      {this.includeComments ? (
+                        <li>
+                          <Styled.Button
+                            onClick={
+                              this.state.action === "replying"
+                                ? this.stopAction
+                                : this.startReply
+                            }
+                            aria-expanded={this.state.action === "replying"}
+                          >
+                            {t("actions.reply")}
+                          </Styled.Button>
+                        </li>
+                      ) : null}
+                      <Authorize entity={annotation} ability={"update"}>
+                        <li>
+                          <Styled.Button
+                            onClick={this.startEdit}
+                            aria-expanded={this.state.action === "editing"}
+                          >
+                            {t("actions.edit")}
+                          </Styled.Button>
+                        </li>
+                      </Authorize>
+                      <Authorize entity={annotation} ability={"delete"}>
+                        <li>
+                          <Utility.ConfirmableButton
+                            label={t("actions.delete")}
+                            confirmHandler={this.deleteAnnotation}
+                          />
+                        </li>
+                      </Authorize>
+                      {annotation.attributes.flagged ? (
+                        <li>
+                          <Styled.SecondaryButton onClick={this.handleUnflag}>
+                            {t("actions.unflag")}
+                          </Styled.SecondaryButton>
+                        </li>
+                      ) : (
+                        <li>
+                          <Styled.Button onClick={this.handleFlag}>
+                            {t("actions.flag")}
+                          </Styled.Button>
+                        </li>
+                      )}
+                      {this.renderInlineCommentsToggle()}
+                    </Styled.UtilityList>
+                    {this.state.action === "replying" && (
+                      <CommentContainer.Editor
+                        subject={annotation}
+                        cancel={this.stopAction}
+                        initialOpen
+                      />
                     )}
-                    {this.renderInlineCommentsToggle()}
-                  </ul>
-                  {this.state.action === "replying" && (
-                    <CommentContainer.Editor
-                      subject={annotation}
-                      cancel={this.stopAction}
-                      initialOpen
-                    />
-                  )}
-                </div>
-              </Authorize>
-              {this.props.showLogin && (
-                <Authorize kind="unauthenticated">
-                  <nav className="annotation-comments__utility">
-                    <ul className="annotation-comments__utility-list">
-                      <li>
-                        <button
-                          onClick={this.props.showLogin}
-                          className={this.listButtonBaseClassNames}
-                        >
-                          {t("actions.login_to_reply")}
-                        </button>
-                      </li>
-                    </ul>
-                  </nav>
+                  </Styled.Utility>
                 </Authorize>
+                {this.props.showLogin && (
+                  <Authorize kind="unauthenticated">
+                    <Styled.Utility>
+                      <Styled.UtilityList>
+                        <li>
+                          <Styled.Button onClick={this.props.showLogin}>
+                            {t("actions.login_to_reply")}
+                          </Styled.Button>
+                        </li>
+                      </Styled.UtilityList>
+                    </Styled.Utility>
+                  </Authorize>
+                )}
+              </div>
+            )}
+            <div
+              ref={this.threadRef}
+              tabIndex={-1}
+              aria-label={t("glossary.comments__thread")}
+              className="annotation-comments__thread-container"
+            >
+              {this.includeComments && (
+                <CommentContainer.Thread subject={annotation} />
               )}
             </div>
-          )}
-          <div
-            ref={this.threadRef}
-            tabIndex={-1}
-            aria-label={t("glossary.comments__thread")}
-            className="annotation-comments__thread-container"
-          >
-            {this.includeComments && (
-              <CommentContainer.Thread subject={annotation} />
-            )}
-          </div>
+          </Styled.Inner>
         </li>
         {this.renderBlockCommentsToggle()}
       </>
