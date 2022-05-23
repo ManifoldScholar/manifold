@@ -34,11 +34,13 @@ export class CommentEditor extends PureComponent {
     subject: PropTypes.object.isRequired,
     parentId: PropTypes.string,
     focus: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
+    initialOpen: PropTypes.bool
   };
 
   static defaultProps = {
-    focus: true
+    focus: true,
+    initialOpen: false
   };
 
   constructor(props) {
@@ -73,7 +75,7 @@ export class CommentEditor extends PureComponent {
     return {
       body,
       errors: [],
-      open: false
+      open: props.initialOpen
     };
   }
 
