@@ -1,6 +1,5 @@
 import annotationList from "./annotationList";
 import citation from "./citation";
-import comments from "./comments";
 import editor from "./editor";
 import footerButton from "./footerButton";
 import groupOptions from "./groupOptions";
@@ -14,7 +13,6 @@ import truncated from "./truncated";
 export default `
   ${annotationList}
   ${citation}
-  ${comments}
   ${editor}
   ${footerButton}
   ${groupOptions}

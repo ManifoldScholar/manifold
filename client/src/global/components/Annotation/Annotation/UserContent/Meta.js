@@ -34,7 +34,7 @@ class AnnotationMeta extends PureComponent {
         attributes: { currentUserIsCreator, creatorName }
       }
     } = this.props;
-    if (currentUserIsCreator) return t("common.me");
+    if (currentUserIsCreator) return t("common.me_title_case");
     return creatorName;
   }
 
@@ -88,8 +88,8 @@ class AnnotationMeta extends PureComponent {
           </div>
         )}
         {annotation.attributes.private && (
-          <div className="annotation-tag__inner annotation-tag--secondary">
-            {t("common.private")}
+          <div className="annotation-tag__inner">
+            {t("common.private_title_case")}
           </div>
         )}
         {annotation.attributes.flagsCount > 0 && (

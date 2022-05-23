@@ -177,7 +177,7 @@ export const marker = `
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-  background-color: var(--box-bg-color);
+  background-color: var(--marker-bg-color, var(--box-bg-color));
   border-radius: 12px;
 `;
 
