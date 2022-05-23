@@ -10,7 +10,7 @@ export default `
   .annotation-comments,
   .annotation-reply {
     &__body {
-      ${drawerIndent("padding-left")}
+      ${drawerIndent("padding-inline-start")}
       font-family: var(--font-family-sans);
       font-weight: var(--font-weight-regular);
       line-height: 1.375;
@@ -18,6 +18,7 @@ export default `
     }
 
     &__utility {
+      ${drawerIndent("--Editor-padding-inline-start")}
       margin-top: 10px;
     }
 
