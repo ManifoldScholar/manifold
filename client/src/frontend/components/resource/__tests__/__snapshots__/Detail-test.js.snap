@@ -3214,6 +3214,7 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                                   },
                                 }
                               }
+                              initialOpen={false}
                               label="actions.add_comment_title_case"
                               subject={
                                 Object {
@@ -3346,7 +3347,7 @@ exports[`frontend/components/resource/Detail matches the snapshot 1`] = `
                               <Editor>
                                 <Noop />
                                 <div
-                                  className="css-493fqx-Editor e1vhjmiz6"
+                                  className="css-qlhjqd-Editor e1vhjmiz6"
                                 >
                                   <Label
                                     aria-expanded={false}

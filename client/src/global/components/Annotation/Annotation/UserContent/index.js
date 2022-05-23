@@ -282,6 +282,7 @@ class AnnotationDetail extends PureComponent {
                     <CommentContainer.Editor
                       subject={annotation}
                       cancel={this.stopAction}
+                      initialOpen
                     />
                   )}
                 </div>
