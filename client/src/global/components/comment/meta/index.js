@@ -44,7 +44,7 @@ class CommentMeta extends PureComponent {
     return (
       <section className="annotation-meta">
         <div>
-          <div className={this.avatarClassNames}>
+          <div aria-hidden className={this.avatarClassNames}>
             <Avatar url={this.avatarUrl} />
           </div>
           <h4 className="annotation-meta__author-name">{this.name}</h4>

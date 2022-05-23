@@ -17,7 +17,10 @@ class CommentDeleted extends PureComponent {
       <li className="annotation-reply">
         <section className="annotation-meta">
           <div>
-            <div className="annotation-meta__avatar annotation-meta__avatar annotation-meta__avatar-placeholder-container">
+            <div
+              aria-hidden
+              className="annotation-meta__avatar annotation-meta__avatar annotation-meta__avatar-placeholder-container"
+            >
               <Avatar />
             </div>
             <h4 className="annotation-meta__deleted-message">
