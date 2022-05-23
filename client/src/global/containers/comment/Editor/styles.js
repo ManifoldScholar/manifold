@@ -13,6 +13,7 @@ const BUTTON_MARGIN_LEFT = 15;
 
 export const Editor = styled.div`
   margin-block-end: 5px;
+  padding-inline-start: var(--Editor-padding-inline-start);
 `;
 
 export const Label = styled.button`
