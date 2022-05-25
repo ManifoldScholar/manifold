@@ -223,8 +223,6 @@
         "number": "Number",
         "subtitle": "Subtitle",
         "volume_instructions": "Optionally, select a volume.",
-        "slug": "Slug",
-        "slug_placeholder": "Enter Journal Issue Slug",
         "associated_project": "Associated $t(glossary.project_title_case_one)",
         "project_instructions": "Issue content is stored in projects. Select an existing content or leave blank to create a new project.",
         "update_issue": "$t(actions.update) $t(glossary.issue_title_case_one)",
