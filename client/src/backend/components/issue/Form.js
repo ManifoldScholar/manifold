@@ -26,7 +26,7 @@ function IssueForm({ journalId, model, ...props }) {
       className="form-secondary"
       model={model}
     >
-      <Form.NumberInput
+      <Form.TextInput
         label={t("backend.number")}
         focusOnMount
         name="attributes[number]"
