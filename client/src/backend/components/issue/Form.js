@@ -40,12 +40,6 @@ function IssueForm({ journalId, model, ...props }) {
         listStyle={"rows"}
         options={fetchJournalVolumes}
       />
-      <Form.TextInput
-        wide
-        label={t("backend.slug")}
-        name="attributes[pendingSlug]"
-        placeholder={t("backend.forms.issue.slug_placeholder")}
-      />
       {model?.id ? (
         <div className="form-input">
           <span className="form-input-heading">

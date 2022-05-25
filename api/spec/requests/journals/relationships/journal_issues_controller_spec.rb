@@ -39,7 +39,7 @@ RSpec.describe "Journal JournalIssues API", type: :request do
       context "when no project is provided" do
         let(:params) {
           {
-            attributes: { number: 1 }
+            attributes: { number: "1", pendingSlug: "test" }
           }
         }
 
