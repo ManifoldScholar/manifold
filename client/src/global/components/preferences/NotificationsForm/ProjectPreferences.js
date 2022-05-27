@@ -13,9 +13,7 @@ function ProjectPreferences({ preferences, onChange, onDigestChange }) {
     ...(preferences.projects && {
       projects: t("forms.notifications.project_preferences.all_projects")
     }),
-    followedProjects: t(
-      "forms.notifications.project_preferences.only_following"
-    )
+    followedProjects: t("forms.notifications.project_preferences.only_starred")
   };
 
   return (

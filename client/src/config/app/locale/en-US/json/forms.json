@@ -133,7 +133,7 @@
         "weekly": "Weekly",
         "digest_projects_label": "Which projects should be included?",
         "all_projects": "All $t(glossary.project_title_case_other)",
-        "only_following": "Only Projects I'm Following",
+        "only_starred": "Only Projects I've Starred",
         "digest_comments_label": "Include New Comments and Annotations?"
       },
       "activity_preferences": {
