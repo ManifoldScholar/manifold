@@ -104,6 +104,7 @@ export class SubscriptionsContainer extends Component {
               </h1>
               <Preferences.NotificationsForm
                 preferences={this.state.notificationPreferencesByKind}
+                authentication={this.props.authentication}
                 changeHandler={this.handlePreferenceChange}
                 digestProjectsChangeHandler={
                   this.handleProjectsPreferenceChange
