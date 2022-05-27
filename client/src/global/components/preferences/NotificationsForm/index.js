@@ -6,15 +6,22 @@ import Collapse from "global/components/Collapse";
 import RadioGroup from "./RadioGroup";
 import ProjectPreferences from "./ProjectPreferences";
 import humps from "humps";
+import Authorization from "helpers/authorization";
 
 class NotificationsForm extends Component {
   static propTypes = {
+    authentication: PropTypes.object,
     preferences: PropTypes.object,
     changeHandler: PropTypes.func.isRequired,
     digestProjectsChangeHandler: PropTypes.func.isRequired,
     unsubscribeAllHandler: PropTypes.func.isRequired,
     t: PropTypes.func
   };
+
+  constructor(props) {
+    super(props);
+    this.authorization = new Authorization();
+  }
 
   get preferences() {
     return this.props.preferences;
@@ -25,11 +32,20 @@ class NotificationsForm extends Component {
   }
 
   renderNotificationContent() {
-    const items = [
-      "repliesToMe",
-      "projectCommentsAndAnnotations",
-      "flaggedResources"
-    ];
+    const { authentication } = this.props;
+    const items = ["repliesToMe"];
+    const isAdmin = this.authorization.authorizeKind({
+      authentication,
+      kind: "admin"
+    });
+    const isProjectCreator = this.authorization.authorizeKind({
+      authentication,
+      kind: "project_creator"
+    });
+
+    if (isAdmin || isProjectCreator)
+      items.push("projectCommentsAndAnnotations");
+    if (isAdmin) items.push("flaggedResources");
 
     return items.map(item => {
       const i18nKey = humps.decamelize(item, { separator: "_" }).toLowerCase();
@@ -40,7 +56,8 @@ class NotificationsForm extends Component {
         `forms.notifications.activity_preferences.${i18nKey}_instructions`
       );
 
-      const checked = this.preferences[item.key] || false;
+      const checked = this.preferences[item] || false;
+
       return (
         <RadioGroup
           key={item}
