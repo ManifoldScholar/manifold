@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { readingGroupsAPI } from "api";
 import { useHistory } from "react-router-dom";
 import { childRoutes } from "helpers/router";
-import { useFetch, useFromStore } from "hooks";
+import { useFetch } from "hooks";
 import * as Styled from "../styles";
 
 function ReadingGroupHomepageFetchContainer({
@@ -52,7 +52,10 @@ function ReadingGroupHomepageFetchContainer({
     journalIssues
   };
 
-  const categories = useFromStore("feReadingGroupCategories", "select") || [];
+  const { data: categories } = useFetch({
+    request: [readingGroupsAPI.categories, readingGroup.id],
+    dependencies: [fetchVersion]
+  });
 
   return (
     <Styled.Body>
