@@ -15,7 +15,7 @@ export default function LinkedName({ name, tag, to }) {
         </Link>
       )}
       <span className="table__name-container">{name}</span>
-      <Styled.Tag>{tag}</Styled.Tag>
+      {tag && <Styled.Tag>{tag}</Styled.Tag>}
     </span>
   );
 }
