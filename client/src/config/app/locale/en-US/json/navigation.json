@@ -69,10 +69,7 @@
     "secondary": "Secondary Navigation",
     "page_links": "Page Links",
     "user_links": "User Links",
-    "skip_to_main": {
-      "link": "Skip to main content",
-      "message": "Skipped to main content"
-    },
+    "skip_to_main": "Skip to main content",
     "return_to_reader": "Return to Reader",
     "visit_collection": "Visit Collection Page"
   },
