@@ -13,7 +13,7 @@ export default `
     margin: 0;
     clip: unset;
     font-size: 15px;
-    color: var(--highlight-color);
+    color: var(--color-accent-primary);
     text-decoration: none;
     background: var(--color-base-neutral85);
     opacity: 0.95;
