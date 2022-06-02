@@ -262,6 +262,7 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
     <main
       className="main-content flex-viewport"
       id="skip-to-main"
+      tabIndex={-1}
     >
       <Switch />
     </main>
