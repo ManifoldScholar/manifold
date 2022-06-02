@@ -33,7 +33,7 @@ class RecordsContainer extends PureComponent {
         />
         <div>
           <Navigation.Secondary links={secondaryLinks} />
-          <main id="skip-to-main" className="backend-detail">
+          <main id="skip-to-main" tabIndex={-1} className="backend-detail">
             {childRoutes(this.props.route)}
           </main>
         </div>

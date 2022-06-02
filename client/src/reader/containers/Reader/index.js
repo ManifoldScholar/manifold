@@ -273,7 +273,11 @@ export class ReaderContainer extends Component {
             hideTocDrawer={this.hideTocDrawer}
             showMeta={this.toggleMeta}
           />
-          <main id="skip-to-main" className="main-content flex-viewport">
+          <main
+            id="skip-to-main"
+            tabIndex={-1}
+            className="main-content flex-viewport"
+          >
             {this.maybeRenderOverlay(this.props)}
             {this.renderRoutes()}
           </main>

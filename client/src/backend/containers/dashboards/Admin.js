@@ -241,7 +241,7 @@ export function DashboardsAdminContainer({
   );
 
   return (
-    <main id="skip-to-main">
+    <main id="skip-to-main" tabIndex={-1}>
       <h1 className="screen-reader-text">
         {t("backend.dashboard.global_header")}
       </h1>

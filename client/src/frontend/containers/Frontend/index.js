@@ -125,6 +125,7 @@ export class FrontendContainer extends Component {
               this.mainContainer = mainContainer;
             }}
             id="skip-to-main"
+            tabIndex={-1}
             className={this.mainClassName}
           >
             {renderRoutes(this.props.route.routes)}
