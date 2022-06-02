@@ -15,7 +15,7 @@ export default function JournalsWrapper({ route }) {
       }}
     >
       <div>
-        <main id="skip-to-main" className="backend-detail">
+        <main id="skip-to-main" tabIndex={-1} className="backend-detail">
           {childRoutes(route)}
         </main>
       </div>

@@ -25,7 +25,7 @@ export default function ProjectsWrapper({ route }) {
           candidates={secondaryLinks}
         />
         <Navigation.Secondary links={secondaryLinks} />
-        <main id="skip-to-main" className="backend-detail">
+        <main id="skip-to-main" tabIndex={-1} className="backend-detail">
           {childRoutes(route)}
         </main>
       </div>
