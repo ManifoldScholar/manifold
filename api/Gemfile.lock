@@ -891,7 +891,7 @@ DEPENDENCIES
   shrine (~> 3.3.0)
   shrine-google_cloud_storage (~> 3.0)
   shrine-tus (~> 2.0)
-  sidekiq (~> 5.0)
+  sidekiq (< 6)
   signet (~> 0.10)
   simplecov
   sinatra (~> 2.2)
