@@ -47,7 +47,6 @@ describe("global/components/FormattedDate", () => {
   context("when no date is supplied", () => {
     def("root", () => mount($withApp(<FormattedDate />)));
     it("renders nothing", () => {
-      console.log($root.html)
       expect($root.html()).toBe("");
     });
   });
