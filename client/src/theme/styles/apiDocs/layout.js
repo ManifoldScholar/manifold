@@ -65,11 +65,20 @@ export default `
     }
 
     small {
-      flex: 1;
+      flex: 2;
       padding: 0 10px;
       font-size: 14px;
       font-weight: normal;
       ${textBody}
+    }
+
+    >div
+    {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        flex: 1 1 150px;
+        font-weight: 400;
     }
   }
 
@@ -219,7 +228,7 @@ export default `
 
     .opblock-summary-method {
       min-width: 80px;
-      padding: 6px 15px;
+      padding: 6px 0;
       font-size: 14px;
       font-weight: bold;
       text-align: center;
@@ -523,6 +532,9 @@ export default `
     background: var(--color-base-neutral80);
     border-radius: 4px;
     ${utilityPrimary}
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 
   .scheme-container {

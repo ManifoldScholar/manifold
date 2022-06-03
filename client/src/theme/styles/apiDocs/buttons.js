@@ -104,6 +104,22 @@ export default `
     }
   }
 
+  .opblock-summary-control,
+  .models-control,
+  .model-box-control
+  {
+    all: inherit;
+    flex: 1;
+    border-bottom: 0;
+    padding: 0;
+    cursor: pointer;
+
+    &:focus {
+      outline: auto;
+    }
+  }
+
+
   .expand-methods,
   .expand-operation {
     background: none;
@@ -128,6 +144,11 @@ export default `
       fill: var(--expand-methods-svg-fill-color);
       transition: all 0.3s;
     }
+  }
+
+  .copy-to-clipboard
+  {
+    display: none;
   }
 
   button {

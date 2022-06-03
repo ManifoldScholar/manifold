@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import swaggerUIConstructor from "swagger-ui-react/swagger-ui";
+import swaggerUIConstructor from "swagger-ui-react/swagger-ui-es-bundle-core";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/apiDocsStyles";
 
