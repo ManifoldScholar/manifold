@@ -1,3 +1,5 @@
 Dry::Rails.container do
-  auto_register! "app/operations"
+  configure do |config|
+    config.component_dirs.add "app/operations"
+  end
 end
