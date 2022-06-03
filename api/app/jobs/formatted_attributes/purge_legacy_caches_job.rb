@@ -15,7 +15,7 @@ module FormattedAttributes
         cursor = 0
 
         loop do
-          cursor, keys = redis.scan cursor, pattern: pattern
+          cursor, keys = redis.scan cursor, match: pattern
 
           redis.del *keys if keys.any?
 
