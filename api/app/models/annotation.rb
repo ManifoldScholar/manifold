@@ -98,6 +98,7 @@ class Annotation < ApplicationRecord
   scope :only_annotations, -> { where(format: "annotation") }
   scope :only_highlights, -> { where(format: "highlight") }
   scope :created_by, ->(user) { where(creator: user) }
+  scope :sans_orphaned_from_text, -> { where.not(text_section: nil) }
   scope :by_text, lambda { |text|
     joins(:text_section).where(text_sections: { text: text }) if text.present?
   }
