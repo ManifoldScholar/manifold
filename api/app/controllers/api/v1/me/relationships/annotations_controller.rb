@@ -7,7 +7,7 @@ module API
           config.pagination_enforced = true
 
           resourceful! Annotation do
-            scope = Annotation.created_by(current_user).sans_archived_reading_group_memberships
+            scope = Annotation.created_by(current_user).sans_archived_reading_group_memberships.sans_orphaned_from_text
 
             Annotation.filtered(
               with_pagination!(annotation_filter_params),

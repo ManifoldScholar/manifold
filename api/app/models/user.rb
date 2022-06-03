@@ -22,7 +22,7 @@ class User < ApplicationRecord
   rolify after_add: :synchronize_kind!, after_remove: :synchronize_kind!
 
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
-  has_many :annotations, foreign_key: "creator_id", dependent: :destroy,
+  has_many :annotations, -> { sans_orphaned_from_text }, foreign_key: "creator_id", dependent: :destroy,
            inverse_of: :creator
   has_many :annotated_texts, -> { distinct }, through: :annotations, source: :text
   has_many :favorites
