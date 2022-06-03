@@ -10,6 +10,6 @@ describe("frontend/components/resource/Detail", () => {
   ));
 
   it("matches the snapshot", () => {
-    expect(mount($withApp($root))).toMatchSnapshot();
+    expect(mount($withApp($root)).html()).toMatchSnapshot();
   });
 });
