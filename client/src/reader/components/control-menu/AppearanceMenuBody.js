@@ -215,7 +215,7 @@ class AppearanceMenuBody extends Component {
           {this.props.t("reader.menus.appearance.select_font")}
         </legend>
         <div className="appearance-menu__radio-stack">
-          {this.fontStyleOptions.map((option, index) => (
+          {this.fontStyleOptions.map(option => (
             <label key={option.value} className={labelClassName(option)}>
               <input
                 value={option.value}
@@ -224,7 +224,6 @@ class AppearanceMenuBody extends Component {
                 checked={option.value === this.typography.font}
                 onChange={this.handleFontStyleControl}
                 className="appearance-menu__radio-input"
-                tabIndex={index === 0 ? 0 : -1}
               />
               <span className="appearance-menu__radio-label">
                 {option.label}
@@ -251,7 +250,7 @@ class AppearanceMenuBody extends Component {
         <legend className="screen-reader-text">
           {this.props.t("reader.menus.appearance.select_color")}
         </legend>
-        {this.colorSchemeOptions.map((option, index) => (
+        {this.colorSchemeOptions.map(option => (
           <label key={option.value} className={labelClassName(option)}>
             <input
               value={option.value}
@@ -260,7 +259,6 @@ class AppearanceMenuBody extends Component {
               checked={option.value === this.colorScheme}
               onChange={this.handleColorSchemeControl}
               className="appearance-menu__radio-input"
-              tabIndex={index === 0 ? 0 : -1}
             />
             <Utility.IconComposer
               icon="CheckUnique"
