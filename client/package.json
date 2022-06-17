@@ -103,7 +103,7 @@
     "common-tags": "^1.8.0",
     "compression": "^1.6.0",
     "connect": "^3.6.6",
-    "cookie": "^0.x",
+    "cookie": "0.4.1",
     "core-js": "2.6.9",
     "date-fns": "^2.8",
     "date-fns-tz": "^1.0.8",
