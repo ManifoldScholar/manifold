@@ -10,8 +10,10 @@ import { useLocation } from "react-router-dom";
 
 export default function HomeContainer() {
   const settings = useFromStore("settings", "select");
-  const { showProjects, hasVisibleProjects } =
+
+  const { hasVisibleHomeProjectCollections, hasVisibleProjects } =
     settings?.attributes?.calculated ?? {};
+  const showProjects = !hasVisibleHomeProjectCollections;
   const authentication = useFromStore("authentication");
   const location = useLocation();
 
