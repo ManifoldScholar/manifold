@@ -1,14 +1,42 @@
 {
   "assetsByChunkName": {
-    "ace-editor": "build/chunk-ace-editor.js",
-    "build/manifold-client-browser": [
-      "build/manifold-client-browser.js",
-      "build/manifold-client-browser.13918580a98b786ba2a4.hot-update.js"
+    "ace-editor": [
+      "build/chunk-ace-editor-47f460fbc684e4e69e90.js",
+      "build/chunk-ace-editor-47f460fbc684e4e69e90.js.map"
     ],
-    "build/manifold-client-print": "build/manifold-client-print.js",
-    "recharts": "build/chunk-recharts.js",
-    "vendors~ace-editor": "build/chunk-vendors~ace-editor.js",
-    "vendors~autolinker": "build/chunk-vendors~autolinker.js",
-    "vendors~recharts": "build/chunk-vendors~recharts.js"
+    "build/manifold-client-browser": [
+      "build/manifold-client-browser-47f460fbc684e4e69e90.js",
+      "build/manifold-client-browser-47f460fbc684e4e69e90.js.map"
+    ],
+    "build/manifold-client-print": [
+      "build/manifold-client-print-47f460fbc684e4e69e90.css",
+      "build/manifold-client-print-47f460fbc684e4e69e90.js",
+      "build/manifold-client-print-47f460fbc684e4e69e90.css.map",
+      "build/manifold-client-print-47f460fbc684e4e69e90.js.map"
+    ],
+    "recharts": [
+      "build/chunk-recharts-47f460fbc684e4e69e90.js",
+      "build/chunk-recharts-47f460fbc684e4e69e90.js.map"
+    ],
+    "swagger-ui": [
+      "build/chunk-swagger-ui-47f460fbc684e4e69e90.js",
+      "build/chunk-swagger-ui-47f460fbc684e4e69e90.js.map"
+    ],
+    "vendors~ace-editor": [
+      "build/chunk-vendors~ace-editor-47f460fbc684e4e69e90.js",
+      "build/chunk-vendors~ace-editor-47f460fbc684e4e69e90.js.map"
+    ],
+    "vendors~autolinker": [
+      "build/chunk-vendors~autolinker-47f460fbc684e4e69e90.js",
+      "build/chunk-vendors~autolinker-47f460fbc684e4e69e90.js.map"
+    ],
+    "vendors~recharts": [
+      "build/chunk-vendors~recharts-47f460fbc684e4e69e90.js",
+      "build/chunk-vendors~recharts-47f460fbc684e4e69e90.js.map"
+    ],
+    "vendors~swagger-ui": [
+      "build/chunk-vendors~swagger-ui-47f460fbc684e4e69e90.js",
+      "build/chunk-vendors~swagger-ui-47f460fbc684e4e69e90.js.map"
+    ]
   }
 }
