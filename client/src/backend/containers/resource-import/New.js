@@ -73,7 +73,7 @@ export class ResourceImportNew extends PureComponent {
     return (
       <FormContainer.Form
         model={resourceImport || null}
-        name="backend-resource-create"
+        name="backend-resource-import-create"
         create={this.create}
         update={this.update}
         onSuccess={this.onSuccess}
