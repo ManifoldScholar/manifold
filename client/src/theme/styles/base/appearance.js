@@ -19,6 +19,10 @@ export default `
     ${outlineOnFocus()}
   }
 
+  main[tabindex='-1'].focus-visible {
+    outline: none;
+  }
+
   .manicon-svg {
     display: inline-block;
     vertical-align: middle;
