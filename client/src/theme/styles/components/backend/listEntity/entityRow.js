@@ -16,11 +16,6 @@ export default `
     user-select: none;
 
     &__inner {
-      .focus-visible & {
-        outline: 2px solid var(--focus-color);
-        outline-offset: -2px;
-      }
-
       position: relative;
       display: flex;
       align-items: flex-start;
