@@ -469,12 +469,15 @@ export default `
   .form-switch {
     position: relative;
     display: block;
-    cursor: pointer;
 
     input {
       position: absolute;
-      z-index: -1;
+      inset-inline-start: 0;
+      inset-block-start: 0;
+      inline-size: 100%;
+      block-size: 100%;
       opacity: 0;
+      cursor: pointer;
 
       &.focus-visible ~ .toggle-indicator .boolean-primary {
         ${defaultFocusStyle}
