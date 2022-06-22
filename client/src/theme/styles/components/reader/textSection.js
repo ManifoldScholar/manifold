@@ -94,6 +94,12 @@ export default `
       }
     }
 
+    /* revert default list style to specification in UA stylesheet */
+    ul[class],
+    ol[class] {
+      list-style: revert;
+    }
+
     /* Link with notation marker cube */
     .notation-marker {
       cursor: pointer;
