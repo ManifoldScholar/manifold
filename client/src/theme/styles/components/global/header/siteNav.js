@@ -47,7 +47,7 @@ export default `
           width: 100%;
           height: 1.5px;
           content: "";
-          background-color: var(--color-base-neutral90);
+          background-color: currentColor;
 
           .site-nav--backend & {
             display: none;

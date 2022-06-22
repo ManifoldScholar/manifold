@@ -12,10 +12,12 @@ class ColorScheme extends Component {
 
   componentDidMount() {
     this.setColorScheme();
+    this.setOtherColorVars();
   }
 
   componentDidUpdate() {
     this.setColorScheme();
+    this.setOtherColorVars();
   }
 
   accentColor(props = this.props) {
@@ -42,12 +44,52 @@ class ColorScheme extends Component {
     );
   }
 
+  get otherColorVars() {
+    return {
+      "--color-header-background": "headerBackgroundColor",
+      "--color-header-foreground": "headerForegroundColor",
+      "--color-header-foreground-active": "headerForegroundActiveColor",
+      "--color-header-foreground-hover": "headerForegroundActiveColor"
+    };
+  }
+
+  lighten(hexValue) {
+    return `${colorHelper(hexValue)
+      .lighten(5)
+      .toHexString()}`;
+  }
+
   setColorScheme() {
     try {
       this.colorSchemeGenerator.updateBaseColor(
         this.hasCustomAccentColor ? this.accentColor() : this.defaultBaseColor
       );
       this.colorSchemeGenerator.setColorScheme();
+    } catch (error) {
+      /* eslint-disable no-console */
+      console.log(error, this.props.t("errors.color_scheme"));
+      /* eslint-enable no-console */
+    }
+  }
+
+  setOtherColorVars() {
+    try {
+      Object.keys(this.otherColorVars).forEach(varName => {
+        const stringValue = this.themeValue(this.otherColorVars[varName]);
+
+        if (!stringValue) return;
+
+        const value = colorHelper(stringValue).toHexString();
+
+        this.colorSchemeGenerator.setCustomProperty(varName, value);
+
+        if (varName === "--color-header-background") {
+          this.colorSchemeGenerator.setCustomProperty(
+            `${varName}-light`,
+            this.lighten(stringValue)
+          );
+        }
+      });
     } catch (error) {
       /* eslint-disable no-console */
       console.log(error, this.props.t("errors.color_scheme"));
@@ -72,27 +114,23 @@ class ColorScheme extends Component {
 
   otherColorVarsAsCSS() {
     const rules = [];
-    const vars = {
-      "--color-header-background": "headerBackgroundColor",
-      "--color-header-foreground": "headerForegroundColor",
-      "--color-header-foreground-active": "headerForegroundActiveColor",
-      "--color-header-foreground-hover": "headerForegroundActiveColor"
-    };
     try {
-      Object.keys(vars).forEach(varName => {
-        const stringValue = this.themeValue(vars[varName]);
+      Object.keys(this.otherColorVars).forEach(varName => {
+        const stringValue = this.themeValue(this.otherColorVars[varName]);
+
         if (!stringValue) return;
+
         const value = colorHelper(stringValue).toHexString();
+
         rules.push(`${varName}: ${value};`);
-        rules.push(
-          `${varName}-light: ${colorHelper(stringValue)
-            .lighten(5)
-            .toHexString()};`
-        );
+
+        if (varName === "--color-header-background") {
+          rules.push(`${varName}-light: ${this.lighten(stringValue)};`);
+        }
       });
     } catch (error) {
       /* eslint-disable no-console */
-      console.log(error, "Manifold color scheme error!");
+      console.log(error, this.props.t("errors.color_scheme"));
       /* eslint-enable no-console */
       return null;
     }
