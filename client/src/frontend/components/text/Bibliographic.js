@@ -86,7 +86,7 @@ class TextBibliographic extends Component {
       <Styled.Bibliographic>
         <Styled.Name>
           <Styled.TitleLink to={this.readUrl}>
-            <Styled.Title>{this.title}</Styled.Title>
+            <Styled.Title dangerouslySetInnerHTML={{ __html: this.title }} />
             {this.subtitle && (
               <Styled.Subtitle>{this.subtitle}</Styled.Subtitle>
             )}
