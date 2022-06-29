@@ -78,7 +78,7 @@ module Validation
                   :standalone_mode, :standalone_mode_press_bar_text, :restricted_access,
                   :standalone_mode_press_bar_url, :finished, :restricted_access_heading,
                   :restricted_access_body, :open_access, :disable_engagement,
-                  :journal_issue_pending_sort_title, :journal_issue_number]
+                  :journal_issue_pending_sort_title, :journal_issue_number, :pending_slug]
     relationships = [:collaborators, :creators, :contributors, :subjects, :journal_volume]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
