@@ -56,8 +56,7 @@ export default function EventList({ project, journalBreadcrumbs }) {
         events={events}
         eventsMeta={meta}
         paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
-          paginationTarget: "#"
+          paginationClickHandler: page => () => setPageNumber(page)
         }}
       />
     </>

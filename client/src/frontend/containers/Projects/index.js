@@ -55,8 +55,7 @@ export default function ProjectsContainer() {
           meta={meta}
           filterProps={filterProps}
           paginationProps={{
-            paginationClickHandler: page => () => setPageNumber(page),
-            paginationTarget: "#"
+            paginationClickHandler: page => () => setPageNumber(page)
           }}
           bgColor="neutral05"
           className="flex-grow"

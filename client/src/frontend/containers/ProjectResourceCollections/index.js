@@ -71,8 +71,7 @@ export default function ProjectResourceCollectionsContainer({
           resourceCollections={resourceCollections}
           resourceCollectionsMeta={meta}
           paginationProps={{
-            paginationClickHandler: page => () => setPageNumber(page),
-            paginationTarget: "#"
+            paginationClickHandler: page => () => setPageNumber(page)
           }}
           itemHeadingLevel={2}
         />
