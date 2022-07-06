@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 function Link({
   page,
   paginationClickHandler,
-  paginationTarget = "#pagination-target",
+  paginationTarget,
   disabled,
   children,
   ...props
