@@ -57,6 +57,13 @@ export default function ProjectCollectionDetailContainer() {
     }
   });
 
+  const paginationClickHandlerCreator = page => {
+    return event => {
+      event.preventDefault();
+      setPageNumber(page);
+    };
+  };
+
   const breadcrumbs = useMemo(
     () => [
       {
@@ -125,7 +132,7 @@ export default function ProjectCollectionDetailContainer() {
         projectsMeta={meta}
         filterProps={filterProps}
         paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
+          paginationClickHandler: paginationClickHandlerCreator,
           paginationTarget: "#"
         }}
         bgColor="neutral05"

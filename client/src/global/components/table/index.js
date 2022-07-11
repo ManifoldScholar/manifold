@@ -29,7 +29,7 @@ export default class Table extends PureComponent {
   }
 
   get paginationTarget() {
-    return "#sample-target";
+    return "#pagination-target";
   }
 
   get entityCountProps() {

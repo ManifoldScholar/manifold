@@ -52,6 +52,13 @@ export default function ProjectResourcesContainer({
     }
   });
 
+  const paginationClickHandlerCreator = page => {
+    return event => {
+      event.preventDefault();
+      setPageNumber(page);
+    };
+  };
+
   const breadcrumbs = useMemo(() => {
     const projectCrumb = {
       to: lh.link("frontendProject", slug),
@@ -83,7 +90,7 @@ export default function ProjectResourcesContainer({
         resourcesMeta={meta}
         filterProps={filterProps}
         paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
+          paginationClickHandler: paginationClickHandlerCreator,
           paginationTarget: "#"
         }}
         itemHeadingLevel={3}

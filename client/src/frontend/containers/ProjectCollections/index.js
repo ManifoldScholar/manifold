@@ -42,6 +42,13 @@ export default function ProjectCollectionsContainer() {
 
   useSetLocation({ page: pagination.number });
 
+  const paginationClickHandlerCreator = page => {
+    return event => {
+      event.preventDefault();
+      setPageNumber(page);
+    };
+  };
+
   const renderProjectCollections = () => {
     if (!projectCollections.length)
       return <EntityCollectionPlaceholder.ProjectCollectionsFrontend />;
@@ -67,7 +74,7 @@ export default function ProjectCollectionsContainer() {
         <section>
           <div className="container">
             <GlobalUtility.Pagination
-              paginationClickHandler={page => () => setPageNumber(page)}
+              paginationClickHandler={paginationClickHandlerCreator}
               pagination={meta.pagination}
             />
           </div>

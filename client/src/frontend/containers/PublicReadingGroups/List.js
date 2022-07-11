@@ -34,6 +34,13 @@ function PublicReadingGroupsListContainer({ route }) {
 
   useSetLocation({ filters, page: pagination.number });
 
+  const paginationClickHandlerCreator = page => {
+    return event => {
+      event.preventDefault();
+      setPageNumber(page);
+    };
+  };
+
   const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
 
   const currentUser = useCurrentUser();
@@ -66,7 +73,7 @@ function PublicReadingGroupsListContainer({ route }) {
               readingGroups={readingGroups}
               currentUser={currentUser}
               pagination={meta?.pagination}
-              onPageClick={page => () => setPageNumber(page)}
+              onPageClick={paginationClickHandlerCreator}
               filterProps={{
                 onFilterChange: param => setFilters({ newState: param }),
                 initialState: filters,
