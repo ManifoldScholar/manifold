@@ -195,6 +195,13 @@ class DrawerWrapper extends PureComponent {
     return this.props.lockScroll === "always" && this.scrollableNode.current;
   }
 
+  get closesOnClickOutside() {
+    if (this.props.closeUrl) return true;
+    return (
+      this.props.closeCallback && typeof this.props.closeCallback === "function"
+    );
+  }
+
   get drawerClasses() {
     return classNames(
       "drawer",
@@ -305,7 +312,7 @@ class DrawerWrapper extends PureComponent {
           ref={this.focusTrapNode}
           active={this.state.focusable && this.props.focusTrap}
           focusTrapOptions={{
-            clickOutsideDeactivates: true,
+            clickOutsideDeactivates: this.closesOnClickOutside,
             escapeDeactivates: false,
             returnFocusOnDeactivate: this.props.returnFocusOnDeactivate
           }}
