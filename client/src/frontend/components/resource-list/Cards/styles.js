@@ -16,5 +16,11 @@ export const List = styled.ul`
 export const Item = styled.li`
   flex-basis: 100%;
 
-  ${respond(`flex-basis: calc(50% - var(--column-gap) / 2);`, 75)}
+  ${respond(
+    `
+      flex-grow: 1;
+      flex-basis: calc(50% - var(--column-gap));
+    `,
+    75
+  )}
 `;
