@@ -36,6 +36,13 @@ export default function MyAnnotationsContainer() {
     options: { texts: annotatedTexts }
   });
 
+  const paginationClickHandlerCreator = page => {
+    return event => {
+      event.preventDefault();
+      setPageNumber(page);
+    };
+  };
+
   const { t } = useTranslation();
 
   return annotations ? (
@@ -48,7 +55,7 @@ export default function MyAnnotationsContainer() {
         filterProps={{ ...filterProps, hideSearch: true }}
         isFiltered={"text" in filters}
         paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
+          paginationClickHandler: paginationClickHandlerCreator,
           paginationTarget: "#"
         }}
       />

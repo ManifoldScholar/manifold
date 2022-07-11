@@ -39,6 +39,13 @@ function ReadingGroupAnnotationsContainer({
     options: { memberships, texts }
   });
 
+  const paginationClickHandlerCreator = page => {
+    return event => {
+      event.preventDefault();
+      setPageNumber(page);
+    };
+  };
+
   return readingGroup ? (
     <Styled.Body>
       <EntityCollection.GroupAnnotations
@@ -48,7 +55,7 @@ function ReadingGroupAnnotationsContainer({
         filterProps={{ ...filterProps, hideSearch: true }}
         isFiltered={!!Object.keys(filters).length}
         paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
+          paginationClickHandler: paginationClickHandlerCreator,
           paginationTarget: "#"
         }}
         refresh={refresh}

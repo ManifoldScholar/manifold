@@ -25,6 +25,13 @@ export default function JournalIssuesList({ journal }) {
 
   useSetLocation({ page: pagination.number });
 
+  const paginationClickHandlerCreator = page => {
+    return event => {
+      event.preventDefault();
+      setPageNumber(page);
+    };
+  };
+
   const { t } = useTranslation();
   const settings = useFromStore("settings", "select");
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
@@ -70,7 +77,7 @@ export default function JournalIssuesList({ journal }) {
         issues={issues}
         issuesMeta={meta}
         paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
+          paginationClickHandler: paginationClickHandlerCreator,
           paginationTarget: "#"
         }}
         parentView

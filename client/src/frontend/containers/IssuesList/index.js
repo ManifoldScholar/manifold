@@ -34,6 +34,13 @@ export default function IssuesListContainer() {
     resetState: baseFilters
   });
 
+  const paginationClickHandlerCreator = page => {
+    return event => {
+      event.preventDefault();
+      setPageNumber(page);
+    };
+  };
+
   const { t } = useTranslation();
 
   const showPlaceholder = "keyword" in filters ? false : !issues?.length;
@@ -50,7 +57,7 @@ export default function IssuesListContainer() {
           issuesMeta={meta}
           filterProps={filterProps}
           paginationProps={{
-            paginationClickHandler: page => () => setPageNumber(page),
+            paginationClickHandler: paginationClickHandlerCreator,
             paginationTarget: "#"
           }}
           bgColor="neutral05"

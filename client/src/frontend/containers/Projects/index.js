@@ -44,6 +44,13 @@ export default function ProjectsContainer() {
     }
   });
 
+  const paginationClickHandlerCreator = page => {
+    return event => {
+      event.preventDefault();
+      setPageNumber(page);
+    };
+  };
+
   return meta ? (
     <>
       <h1 className="screen-reader-text">{t("pages.frontend.projects_all")}</h1>
@@ -55,7 +62,7 @@ export default function ProjectsContainer() {
           meta={meta}
           filterProps={filterProps}
           paginationProps={{
-            paginationClickHandler: page => () => setPageNumber(page),
+            paginationClickHandler: paginationClickHandlerCreator,
             paginationTarget: "#"
           }}
           bgColor="neutral05"
