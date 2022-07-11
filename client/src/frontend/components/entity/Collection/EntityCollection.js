@@ -24,6 +24,7 @@ function EntityCollection({
   collectingProps,
   BodyComponent,
   FooterComponent,
+  UtilityComponent,
   countProps,
   paginationProps,
   bgColor = "white",
@@ -58,6 +59,7 @@ function EntityCollection({
           collectingProps={collectingProps}
         />
         {filterProps && <ListFilters {...filterProps} />}
+        {UtilityComponent && <UtilityComponent />}
         {!isEmpty(countProps) && (
           <Styled.CountWrapper $hasHeader={!!title}>
             <Utility.EntityCount {...countProps} />
@@ -82,6 +84,7 @@ EntityCollection.displayName = "Frontend.Entity.Collection";
 EntityCollection.propTypes = {
   BodyComponent: PropTypes.func.isRequired,
   FooterComponent: PropTypes.func,
+  UtilityComponent: PropTypes.func,
   countProps: shapes.count,
   paginationProps: shapes.pagination,
   filterProps: PropTypes.object,
