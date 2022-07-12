@@ -8,6 +8,7 @@ export default class ContentBlockList extends PureComponent {
   static propTypes = {
     entity: PropTypes.object,
     hideHeader: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+    hideDefaultHeader: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
     hideLastBottomBorder: PropTypes.bool
   };
 
@@ -36,11 +37,10 @@ export default class ContentBlockList extends PureComponent {
     );
   }
 
-  getHeader(block) {
-    if (typeof this.props.hideHeader === "boolean")
-      return this.props.hideHeader;
-    if (Array.isArray(this.props.hideHeader))
-      return this.props.hideHeader.includes(block.type);
+  hideHeader(block, hideProp = "hideHeader") {
+    if (typeof this.props[hideProp] === "boolean") return this.props[hideProp];
+    if (Array.isArray(this.props[hideProp]))
+      return this.props[hideProp].includes(block.type);
     return false;
   }
 
@@ -53,7 +53,8 @@ export default class ContentBlockList extends PureComponent {
           key={block.id}
           block={block}
           {...restProps}
-          hideHeader={this.getHeader(block)}
+          hideHeader={this.hideHeader(block)}
+          hideDefaultHeader={this.hideHeader(block, "hideDefaultHeader")}
           hideBottomBorder={
             this.props.hideLastBottomBorder &&
             index === this.visibleContentBlocks.length - 1
