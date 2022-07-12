@@ -28,14 +28,13 @@ function showBlock(block, authorization) {
   return visible;
 }
 
-function getTitle(block, typeComponent) {
+function getTitle(block, typeComponent, hideDefaultHeader) {
   const {
     attributes: { title, renderable }
   } = block;
-
   if (!renderable) return typeComponent.placeholderTitle || typeComponent.title;
-
-  return title || typeComponent.title;
+  if (title) return title;
+  return hideDefaultHeader ? undefined : typeComponent.title;
 }
 
 function getIcon(block, typeComponent, isJournalIssue) {
@@ -52,11 +51,14 @@ function ContentBlock({
   block,
   entity,
   hideHeader,
+  hideDefaultHeader,
   hideBottomBorder,
   ...passThroughProps
 }) {
   const authorization = new Authorization();
   const typeComponent = typeToBlockComponent(block.attributes.type);
+  const entityIsJournalIssue =
+    entity.attributes.isJournalIssue || entity.type === "journalIssues";
 
   if (!showBlock(block, authorization)) return null;
 
@@ -67,8 +69,8 @@ function ContentBlock({
   const headerProps = hideHeader
     ? {}
     : {
-        title: getTitle(block, typeComponent),
-        icon: getIcon(block, typeComponent, entity.attributes.isJournalIssue),
+        title: getTitle(block, typeComponent, hideDefaultHeader),
+        icon: getIcon(block, typeComponent, entityIsJournalIssue),
         description: descriptionFormatted
       };
 
@@ -99,7 +101,10 @@ ContentBlock.displayName = "ContentBlock";
 
 ContentBlock.propTypes = {
   block: PropTypes.object.isRequired,
-  entity: PropTypes.object.isRequired
+  entity: PropTypes.object.isRequired,
+  hideHeader: PropTypes.bool,
+  hideDefaultHeader: PropTypes.bool,
+  hideBottomBorder: PropTypes.bool
 };
 
 export default ContentBlock;
