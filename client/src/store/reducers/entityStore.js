@@ -98,9 +98,10 @@ function normalizeResponseAction(action) {
     request = {},
     links = {},
     force = false,
-    noTouch = false
+    noTouch = false,
+    appends = null
   } = payload;
-  const options = { force, noTouch };
+  const options = { appends, force, noTouch };
   const typedIncluded = entitiesToTypedHash(included);
 
   const adjustedAtomicResults = atomicResults.map(r => r.data);
@@ -144,7 +145,16 @@ function deriveType(entityOrCollection) {
 }
 
 function responseFromPayload(payload, previousResponse) {
-  const { results, links, meta, request } = payload;
+  const { results: payloadResults, links, meta, request } = payload;
+
+  const appends =
+    payload?.options?.appends &&
+    isCollection(payloadResults) &&
+    Array.isArray(previousResponse?.collection);
+  const results = appends
+    ? previousResponse.collection.concat(payloadResults)
+    : payloadResults;
+
   const includedEntityIds = typedEntitiesToIdArray(payload.entities);
   return {
     entity: isEntity(results) ? results : null,
