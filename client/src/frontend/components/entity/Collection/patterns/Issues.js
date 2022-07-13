@@ -42,7 +42,7 @@ function IssuesEntityCollection({
           : {
               pagination: get(issuesMeta, "pagination"),
               unit: t("glossary.issue_truncated", {
-                count: issuesMeta?.pagination?.totalCount
+                count: issuesMeta?.pagination?.totalCount || 0
               })
             }
       }

@@ -40,7 +40,7 @@ function ProjectResourcesEntityCollection({
           : {
               pagination: get(resourcesMeta, "pagination"),
               unit: t("glossary.resource", {
-                count: resourcesMeta?.pagination?.totalCount
+                count: resourcesMeta?.pagination?.totalCount || 0
               })
             }
       }

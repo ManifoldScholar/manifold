@@ -39,7 +39,9 @@ function JournalVolumesContainer({ refresh, journal, route }) {
         titleIcon="Journals64"
         titleStyle="bar"
         entities={data}
-        unit={t("glossary.volume", { count: meta?.pagination?.totalCount })}
+        unit={t("glossary.volume", {
+          count: meta?.pagination?.totalCount || 0
+        })}
         pagination={meta.pagination}
         showCount
         callbacks={{

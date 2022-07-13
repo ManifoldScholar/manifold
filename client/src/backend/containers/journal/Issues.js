@@ -43,7 +43,7 @@ function JournalIssuesContainer({ refresh, journal, route }) {
         titleStyle="bar"
         entities={data}
         unit={t("glossary.issue_truncated", {
-          count: meta?.pagination?.totalCount
+          count: meta?.pagination?.totalCount || 0
         })}
         pagination={meta.pagination}
         showCount
