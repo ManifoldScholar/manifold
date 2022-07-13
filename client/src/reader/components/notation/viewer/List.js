@@ -227,8 +227,8 @@ class NotationViewerList extends PureComponent {
 
   startDestroy = entry => {
     const t = this.props.t;
-    const heading = t("reader.notes.destroy_modal.heading");
-    const message = t("reader.notes.destroy_modal_message");
+    const heading = t("reader.menus.notes.destroy_modal.heading");
+    const message = t("reader.menus.notes.destroy_modal_message");
     this.props.confirm(heading, message, () => this.doDestroy(entry));
   };
 
