@@ -36,7 +36,7 @@ function ReaderFullNotesEntityCollection({
           : {
               pagination: get(annotationsMeta, "pagination"),
               unit: t("glossary.note", {
-                count: annotationsMeta?.pagination?.totalCount
+                count: annotationsMeta?.pagination?.totalCount || 0
               })
             }
       }

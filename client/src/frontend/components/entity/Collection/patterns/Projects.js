@@ -39,7 +39,7 @@ function ProjectsEntityCollection({
           : {
               pagination: get(meta, "pagination"),
               unit: t("glossary.project", {
-                count: meta?.pagination?.totalCount
+                count: meta?.pagination?.totalCount || 0
               })
             }
       }

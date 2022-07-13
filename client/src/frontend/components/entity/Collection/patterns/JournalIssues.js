@@ -27,7 +27,7 @@ function JournalIssuesEntityCollection({
           : {
               pagination: meta.pagination,
               unit: t("glossary.issue_truncated", {
-                count: meta?.pagination?.totalCount
+                count: meta?.pagination?.totalCount || 0
               })
             }
       }

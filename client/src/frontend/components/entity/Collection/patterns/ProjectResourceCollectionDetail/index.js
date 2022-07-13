@@ -78,7 +78,7 @@ function ProjectResourceCollectionDetail({
           : {
               pagination: get(meta, "pagination"),
               unit: t("glossary.resource", {
-                count: meta?.pagination?.totalCount
+                count: meta?.pagination?.totalCount || 0
               })
             }
       }

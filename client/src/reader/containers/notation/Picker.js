@@ -119,7 +119,7 @@ export class NotationPickerContainerImplementation extends PureComponent {
     let out = {
       entities: props.resources,
       unit: t("glossary.resource", {
-        count: props.resourcesMeta?.pagination?.totalCount
+        count: props.resourcesMeta?.pagination?.totalCount || 0
       }),
       entityComponent: ResourceRow,
       pagination: props.resourcesMeta.pagination
@@ -129,7 +129,7 @@ export class NotationPickerContainerImplementation extends PureComponent {
       out = {
         entities: props.resourceCollections,
         unit: t("glossary.resource_collection", {
-          count: props.resourceCollectionsMeta?.pagination?.totalCount
+          count: props.resourceCollectionsMeta?.pagination?.totalCount || 0
         }),
         entityComponent: ResourceCollectionRow,
         pagination: props.resourceCollectionsMeta.pagination
