@@ -2,6 +2,10 @@ import { useMemo } from "react";
 
 export const ELLIPSIS_CHAR = "…";
 
+function isOdd(num) {
+  return num % 2 === 1;
+}
+
 function range(start, end) {
   const length = end - start + 1;
   /*
@@ -22,17 +26,21 @@ export default function usePagination({
     if (!currentPage || !totalCount || !perPage) return null;
 
     const totalPageCount = Math.ceil(totalCount / perPage);
-    const firstPageIndex = 1;
-    const lastPageIndex = totalPageCount;
 
     // Defined as padding + firstPage + lastPage + currentPage
     const visiblePageNumbers = padding + 3;
 
     /*
      * If the number of pages is less than the visible page numbers we want to show,
-     * we return the range [1..totalPageCount]
+     * or if the visible page number count is odd and one less than the total page count,
+     * we return the range [1..totalPageCount].
+     * The latter condition resolves an edge case where an ellipsis
+     * was added unnecessarily (e.g. [1, 2, 3, 4, 5, …, 6])
      */
-    if (visiblePageNumbers >= totalPageCount) {
+    if (
+      visiblePageNumbers >= totalPageCount ||
+      (isOdd(visiblePageNumbers) && visiblePageNumbers + 1 === totalPageCount)
+    ) {
       return range(1, totalPageCount);
     }
 
@@ -43,7 +51,6 @@ export default function usePagination({
 
     if (!showLeftDots && showRightDots) {
       const leftRange = range(1, visiblePageNumbers);
-
       return [...leftRange, ELLIPSIS_CHAR, totalPageCount];
     }
 
@@ -52,19 +59,15 @@ export default function usePagination({
         totalPageCount - visiblePageNumbers + 1,
         totalPageCount
       );
-      return [firstPageIndex, ELLIPSIS_CHAR, ...rightRange];
+      return [1, ELLIPSIS_CHAR, ...rightRange];
     }
 
     if (showLeftDots && showRightDots) {
       const middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [
-        firstPageIndex,
-        ELLIPSIS_CHAR,
-        ...middleRange,
-        ELLIPSIS_CHAR,
-        lastPageIndex
-      ];
+      return [1, ELLIPSIS_CHAR, ...middleRange, ELLIPSIS_CHAR, totalPageCount];
     }
+
+    return range(1, totalPageCount);
   }, [totalCount, perPage, padding, currentPage]);
 
   return paginationRange;
