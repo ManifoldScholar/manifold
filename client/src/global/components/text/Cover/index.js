@@ -15,7 +15,7 @@ class TextCover extends PureComponent {
   };
 
   static defaultProps = {
-    iconOnly: true
+    iconOnly: false
   };
 
   get text() {
