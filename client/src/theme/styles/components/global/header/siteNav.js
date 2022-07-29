@@ -17,8 +17,8 @@ export default `
 
       ${respond(
         `
-          margin-right: 25px;
-          margin-bottom: ${paddingVerticalDesktop}
+          margin-right: min(2.5vw, 25px);
+          margin-bottom: ${paddingVerticalDesktop};
         `,
         40
       )}
