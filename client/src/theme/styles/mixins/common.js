@@ -14,8 +14,8 @@ export function respond(content, size, operator = "min", aspect = "width") {
 }
 
 export function fluidScale(max, min, maxVw, minVw) {
-  const scaleMax = get(breakpoints, 95, maxVw);
-  const scaleMin = get(breakpoints, 60, minVw);
+  const scaleMax = get(breakpoints, maxVw, breakpoints[95]);
+  const scaleMin = get(breakpoints, minVw, breakpoints[60]);
   if (max === min) return max;
   return fluidScaleBase(max, min, scaleMax, scaleMin);
 }
