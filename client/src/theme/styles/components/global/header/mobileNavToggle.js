@@ -9,7 +9,7 @@ export default `
     ${buttonUnstyled}
     position: relative;
 
-    ${respond(`display: none;`, 75)}
+    ${respond(`display: none;`, 82)}
 
     &.focus-visible {
       ${defaultHoverStyle}

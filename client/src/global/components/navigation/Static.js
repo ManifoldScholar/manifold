@@ -40,7 +40,7 @@ export class NavigationStatic extends PureComponent {
   get userMenuClasses() {
     return classNames({
       "user-nav": true,
-      "show-75": true,
+      "show-82": true,
       "user-nav--dark": this.props.darkTheme
     });
   }
@@ -48,7 +48,7 @@ export class NavigationStatic extends PureComponent {
   get siteNavClasses() {
     return classNames({
       "site-nav": true,
-      "show-75": true,
+      "show-82": true,
       "site-nav--backend": this.props.mode === "backend"
     });
   }

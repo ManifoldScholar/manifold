@@ -3,7 +3,6 @@ import {
   listUnstyled,
   defaultTransitionProps
 } from "theme/styles/mixins";
-import { containerWidth } from "theme/styles/variables/layout";
 import { headerLayout } from "theme/styles/variables/crossComponent";
 
 const {
@@ -37,9 +36,7 @@ export default `
       }
 
       & + & {
-        margin-left: 1.875vw;
-
-        ${respond(`margin-left: 24px;`, containerWidth.full)}
+        margin-left: min(1.625vw, 24px);
       }
     }
 

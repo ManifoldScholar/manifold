@@ -45,12 +45,20 @@ export default `
     ${show(75, "block")}
   }
 
+  .show-82 {
+    ${show(82, "block")}
+  }
+
   .hide-60 {
     ${hide(60)}
   }
 
   .hide-75 {
     ${hide(75)}
+  }
+
+  .hide-82 {
+    ${hide(82)}
   }
 
   .rel {

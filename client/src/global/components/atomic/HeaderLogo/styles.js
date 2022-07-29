@@ -36,8 +36,8 @@ export const Link = styled.a`
 
     ${respond(
       `
-        width: 38px;
-        height: 38px;
+        width: min(4.32vw, 38px);
+        height: min(4.32vw, 38px);
       `,
       75
     )}

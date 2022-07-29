@@ -49,7 +49,7 @@ export default class MobileBreadcrumb extends PureComponent {
     const size = segments.length;
 
     return (
-      <nav className="breadcrumb-list hide-75">
+      <nav className="breadcrumb-list hide-82">
         {this.segments.map(link => {
           count += 1;
           return (

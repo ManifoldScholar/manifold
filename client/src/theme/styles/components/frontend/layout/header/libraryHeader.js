@@ -21,7 +21,7 @@ export default `
 
       ${respond(
         `grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;`,
-        75
+        82
       )}
     }
 
@@ -38,7 +38,7 @@ export default `
       grid-area: site-nav;
       align-self: center;
 
-      ${respond(`margin-left: 25px;`, 75)}
+      ${respond(`margin-left: min(2.5vw, 25px);`, 82)}
     }
 
     .user-nav {
@@ -49,8 +49,6 @@ export default `
     .breadcrumb-list {
       grid-area: breadcrumbs;
       align-self: center;
-
-      ${respond(`display: none;`, 75)}
     }
 
     .mobile-nav-toggle {
