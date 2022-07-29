@@ -321,7 +321,7 @@ export default `
 
       &.focus-visible:not([disabled]) {
         color: var(--strong-color);
-        background-color: rgba("neutral70", 0.3);
+        background-color: ${rgba("neutral70", 0.3)};
         outline: 0;
       }
     }
