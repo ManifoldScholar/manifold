@@ -24,12 +24,6 @@ export const Block = styled("div", transientOptions)`
         color: var(--color-base-neutral40);
       }
   `}
-
-  a {
-    &.focus-visible {
-      outline: 0;
-    }
-  }
 `;
 
 export const Content = styled.div`
