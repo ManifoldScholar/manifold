@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { transientOptions } from "helpers/emotionHelpers";
 import {
   drawerIndent,
   listHorizontal,
@@ -25,12 +26,15 @@ export const Utility = styled.div`
   margin-top: 10px;
 `;
 
-export const UtilityList = styled.ul`
+export const UtilityList = styled("ul", transientOptions)`
   ${listHorizontal}
   ${drawerIndent("padding-left")}
   display: flex;
   flex-wrap: wrap;
   color: var(--medium-color);
+
+  ${({ $isFlagged }) =>
+    $isFlagged && `--secondary-button-color: var(--error-color);`}
 
   > li:not(:last-child) {
     margin-right: 26px;
@@ -49,7 +53,7 @@ export const Button = styled.button`
 `;
 
 export const SecondaryButton = styled(Button)`
-  color: var(--error-color);
+  color: var(--secondary-button-color);
 `;
 
 export const Thread = styled.div`

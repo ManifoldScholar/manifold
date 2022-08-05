@@ -19,7 +19,8 @@ class AnnotationSelectionWrapper extends PureComponent {
     visitHandler: PropTypes.func,
     onAnnotate: PropTypes.func,
     onLogin: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
+    annotateToggleRef: PropTypes.object
   };
 
   constructor(props) {
@@ -90,6 +91,7 @@ class AnnotationSelectionWrapper extends PureComponent {
               <button
                 className="annotation-selection__button"
                 onClick={this.props.onAnnotate}
+                ref={this.props.annotateToggleRef}
               >
                 {t("actions.annotate")}
               </button>

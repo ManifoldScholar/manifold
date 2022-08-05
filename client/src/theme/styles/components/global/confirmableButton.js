@@ -19,7 +19,7 @@ export default `
       ${utilityPrimary}
       font-size: 12px;
 
-      &--delete:not(:disabled):hover {
+      &--delete:not([aria-disabled="true"]):hover {
         ${defaultHoverStyle}
       }
 
@@ -34,6 +34,11 @@ export default `
         &.focus-visible {
           color: var(--error-color);
         }
+      }
+
+      &[aria-disabled="true"]:hover {
+        cursor: default;
+        color: inherit;
       }
     }
   }
