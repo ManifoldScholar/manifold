@@ -51,8 +51,8 @@ class ConfirmableButton extends Component {
       <div className="confirmable-button">
         <button
           className="confirmable-button__button confirmable-button__button--delete"
-          onClick={this.toggleConfirmation}
-          disabled={this.state.confirmation}
+          onClick={this.state.confirmation ? () => {} : this.toggleConfirmation}
+          aria-disabled={this.state.confirmation}
           ref={this.deleteButton}
         >
           {this.props.label}

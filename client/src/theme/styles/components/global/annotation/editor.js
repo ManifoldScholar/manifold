@@ -68,7 +68,10 @@ export default `
       background-color: var(--box-medium-bg-color);
       border: 0;
       border-radius: var(--box-border-radius);
-      outline: 0;
+
+      &.focus-visible {
+        ${defaultFocusStyle}
+      }
 
       &::placeholder {
         color: var(--color);

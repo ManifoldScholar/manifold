@@ -20,6 +20,7 @@ export default class GroupedList extends PureComponent {
     this.state = {
       editorVisible: false
     };
+    this.annotateToggleRef = React.createRef();
   }
 
   showEditor = () => {
@@ -27,7 +28,10 @@ export default class GroupedList extends PureComponent {
   };
 
   hideEditor = () => {
-    this.setState({ editorVisible: false });
+    this.setState({ editorVisible: false }, () => {
+      if (this.annotateToggleRef.current)
+        this.annotateToggleRef.current.focus();
+    });
   };
 
   render() {
@@ -45,6 +49,7 @@ export default class GroupedList extends PureComponent {
                   onAnnotate={this.showEditor}
                   onLogin={loginHandler}
                   truncate={250}
+                  annotateToggleRef={this.annotateToggleRef}
                 />
                 {this.state.editorVisible && (
                   <Editor

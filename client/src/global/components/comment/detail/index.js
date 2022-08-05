@@ -31,6 +31,8 @@ class CommentDetail extends PureComponent {
     this.state = {
       editor: null
     };
+    this.replyToggleRef = React.createRef();
+    this.editToggleRef = React.createRef();
   }
 
   handleFlag = event => {
@@ -79,6 +81,28 @@ class CommentDetail extends PureComponent {
     );
   };
 
+  stopEdit = () => {
+    this.setState(
+      {
+        editor: null
+      },
+      () => {
+        if (this.editToggleRef.current) this.editToggleRef.current.focus();
+      }
+    );
+  };
+
+  stopReply = () => {
+    this.setState(
+      {
+        editor: null
+      },
+      () => {
+        if (this.replyToggleRef.current) this.replyToggleRef.current.focus();
+      }
+    );
+  };
+
   closeEditor = () => {
     this.setState({
       editor: null
@@ -97,7 +121,7 @@ class CommentDetail extends PureComponent {
       <CommentContainer.Editor
         subject={this.props.subject}
         parentId={this.props.comment.id}
-        cancel={this.closeEditor}
+        cancel={this.stopReply}
       />
     );
   }
@@ -107,7 +131,7 @@ class CommentDetail extends PureComponent {
       <CommentContainer.Editor
         comment={this.props.comment}
         subject={this.props.subject}
-        cancel={this.closeEditor}
+        cancel={this.stopEdit}
       />
     );
   }
@@ -124,60 +148,69 @@ class CommentDetail extends PureComponent {
         </Styled.Body>
         <Authorize kind={"any"}>
           <Styled.Utility>
-            <Styled.UtilityList>
-              <li>
-                <Styled.Button
-                  onClick={this.startReply}
-                  aria-expanded={this.state.editor === "reply"}
-                >
-                  {t("actions.reply")}
-                </Styled.Button>
-              </li>
-              <Authorize entity={comment} ability={"update"}>
+            {this.state.editor !== "edit" && (
+              <Styled.UtilityList $isFlagged={comment.attributes.flagged}>
                 <li>
                   <Styled.Button
-                    onClick={this.startEdit}
-                    aria-expanded={this.state.editor === "edit"}
+                    ref={this.replyToggleRef}
+                    onClick={
+                      this.state.editor === "reply"
+                        ? this.stopReply
+                        : this.startReply
+                    }
+                    aria-expanded={this.state.editor === "reply"}
                   >
-                    {t("actions.edit")}
+                    {t("actions.reply")}
                   </Styled.Button>
                 </li>
-              </Authorize>
-              <Authorize entity={comment} ability={"delete"}>
-                {!comment.attributes.deleted ? (
+                <Authorize entity={comment} ability={"update"}>
                   <li>
-                    <Styled.Button onClick={this.handleDelete}>
-                      {t("actions.delete")}
+                    <Styled.Button
+                      ref={this.editToggleRef}
+                      onClick={this.startEdit}
+                      aria-expanded={this.state.editor === "edit"}
+                    >
+                      {t("actions.edit")}
                     </Styled.Button>
                   </li>
-                ) : null}
-              </Authorize>
-              {comment.attributes.deleted ? (
+                </Authorize>
+                <Authorize entity={comment} ability={"delete"}>
+                  <li>
+                    <Styled.Button
+                      onClick={
+                        comment.attributes.deleted
+                          ? this.handleRestore
+                          : this.handleDelete
+                      }
+                    >
+                      {comment.attributes.deleted
+                        ? t("actions.restore")
+                        : t("actions.delete")}
+                    </Styled.Button>
+                  </li>
+                </Authorize>
+                {comment.attributes.deleted && (
+                  <li>
+                    <Styled.Button onClick={this.handleDestroy}>
+                      {t("actions.destroy")}
+                    </Styled.Button>
+                  </li>
+                )}
                 <li>
-                  <Styled.Button>{t("actions.restore")}</Styled.Button>
-                </li>
-              ) : null}
-              {comment.attributes.deleted ? (
-                <li>
-                  <Styled.Button onClick={this.handleDestroy}>
-                    {t("actions.destroy")}
-                  </Styled.Button>
-                </li>
-              ) : null}
-              {comment.attributes.flagged ? (
-                <li>
-                  <Styled.SecondaryButton onClick={this.handleUnflag}>
-                    {t("actions.unflag")}
+                  <Styled.SecondaryButton
+                    onClick={
+                      comment.attributes.flagged
+                        ? this.handleUnflag
+                        : this.handleFlag
+                    }
+                  >
+                    {comment.attributes.flagged
+                      ? t("actions.unflag")
+                      : t("actions.flag")}
                   </Styled.SecondaryButton>
                 </li>
-              ) : (
-                <li>
-                  <Styled.Button onClick={this.handleFlag}>
-                    {t("actions.flag")}
-                  </Styled.Button>
-                </li>
-              )}
-            </Styled.UtilityList>
+              </Styled.UtilityList>
+            )}
             {this.renderEditor()}
           </Styled.Utility>
         </Authorize>

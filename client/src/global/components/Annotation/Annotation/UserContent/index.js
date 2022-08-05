@@ -39,6 +39,8 @@ class AnnotationDetail extends PureComponent {
       includeComments: this.props.includeComments && this.canIncludeComments
     };
     this.threadRef = React.createRef();
+    this.replyToggleRef = React.createRef();
+    this.editToggleRef = React.createRef();
   }
 
   startReply = () => {
@@ -53,10 +55,26 @@ class AnnotationDetail extends PureComponent {
     });
   };
 
-  stopAction = () => {
-    this.setState({
-      action: null
-    });
+  stopReply = () => {
+    this.setState(
+      {
+        action: null
+      },
+      () => {
+        if (this.replyToggleRef.current) this.replyToggleRef.current.focus();
+      }
+    );
+  };
+
+  stopEdit = () => {
+    this.setState(
+      {
+        action: null
+      },
+      () => {
+        if (this.editToggleRef.current) this.editToggleRef.current.focus();
+      }
+    );
   };
 
   handleFlag = () => {
@@ -193,7 +211,7 @@ class AnnotationDetail extends PureComponent {
               <Editor
                 annotation={annotation}
                 saveAnnotation={this.saveAnnotation}
-                cancel={this.stopAction}
+                cancel={this.stopEdit}
               />
             ) : (
               <div>
@@ -202,13 +220,16 @@ class AnnotationDetail extends PureComponent {
                 </Styled.Body>
                 <Authorize kind={"any"}>
                   <Styled.Utility>
-                    <Styled.UtilityList>
+                    <Styled.UtilityList
+                      $isFlagged={annotation.attributes.flagged}
+                    >
                       {this.includeComments ? (
                         <li>
                           <Styled.Button
+                            ref={this.replyToggleRef}
                             onClick={
                               this.state.action === "replying"
-                                ? this.stopAction
+                                ? this.stopReply
                                 : this.startReply
                             }
                             aria-expanded={this.state.action === "replying"}
@@ -220,6 +241,7 @@ class AnnotationDetail extends PureComponent {
                       <Authorize entity={annotation} ability={"update"}>
                         <li>
                           <Styled.Button
+                            ref={this.editToggleRef}
                             onClick={this.startEdit}
                             aria-expanded={this.state.action === "editing"}
                           >
@@ -235,25 +257,25 @@ class AnnotationDetail extends PureComponent {
                           />
                         </li>
                       </Authorize>
-                      {annotation.attributes.flagged ? (
-                        <li>
-                          <Styled.SecondaryButton onClick={this.handleUnflag}>
-                            {t("actions.unflag")}
-                          </Styled.SecondaryButton>
-                        </li>
-                      ) : (
-                        <li>
-                          <Styled.Button onClick={this.handleFlag}>
-                            {t("actions.flag")}
-                          </Styled.Button>
-                        </li>
-                      )}
+                      <li>
+                        <Styled.SecondaryButton
+                          onClick={
+                            annotation.attributes.flagged
+                              ? this.handleUnflag
+                              : this.handleFlag
+                          }
+                        >
+                          {annotation.attributes.flagged
+                            ? t("actions.unflag")
+                            : t("actions.flag")}
+                        </Styled.SecondaryButton>
+                      </li>
                       {this.renderInlineCommentsToggle()}
                     </Styled.UtilityList>
                     {this.state.action === "replying" && (
                       <CommentContainer.Editor
                         subject={annotation}
-                        cancel={this.stopAction}
+                        cancel={this.stopReply}
                         initialOpen
                       />
                     )}
