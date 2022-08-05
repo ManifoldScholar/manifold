@@ -5,7 +5,9 @@ import {
   fluidScale,
   utilityPrimary,
   buttonUnstyled,
-  defaultTransitionProps
+  defaultTransitionProps,
+  screenReaderText,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 const ACTION_MARGIN_TOP = 18;
@@ -126,6 +128,14 @@ export default `
     &__group-picker {
       position: relative;
       color: var(--strong-color);
+    }
+
+    &__group-select {
+      ${screenReaderText}
+
+      &.focus-visible ~ .annotation-editor__group-picker .annotation-editor__group-picker-toggle {
+        ${defaultFocusStyle}
+      }
     }
 
     &__group-picker-toggle {

@@ -201,7 +201,7 @@ class AnnotationEditor extends PureComponent {
     return (
       <select
         aria-labelledby={`${id}-label`}
-        className="screen-reader-text"
+        className="annotation-editor__group-select"
         onChange={event => this.setReadingGroup(event.target.value)}
         value={this.props.currentAnnotatingReadingGroup}
       >
@@ -333,9 +333,8 @@ class AnnotationEditor extends PureComponent {
                           : `${t("common.visibility")}`}
                       </span>
                     </div>
-
-                    {this.renderGroupPicker()}
                     {this.renderSRSelect(id)}
+                    {this.renderGroupPicker()}
                   </div>
                 )}
               </UIDConsumer>
