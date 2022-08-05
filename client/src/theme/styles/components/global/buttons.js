@@ -133,15 +133,6 @@ export default `
       border-color: var(--color-interaction-light);
     }
 
-    &.focus-visible {
-      background-color: var(--color-accent-primary-dull);
-      outline: 0;
-
-      .browse & {
-        outline: 0;
-      }
-    }
-
     &--gray {
       color: var(--color-base-neutral75);
       background-color: var(--color-base-neutral10);
@@ -152,12 +143,6 @@ export default `
         background-color: var(--color-base-neutral20);
         border-color: var(--color-base-neutral20);
       }
-
-      &.focus-visible {
-        color: var(--color-base-neutral95);
-        background-color: var(--color-base-neutral30);
-        border-color: var(--color-base-neutral30);
-      }
     }
 
     &--dull {
@@ -167,10 +152,6 @@ export default `
       &:active {
         background-color: var(--color-base-neutral10);
         border-color: var(--color-base-neutral70);
-      }
-
-      &.focus-visible {
-        background-color: var(--color-base-neutral20);
       }
 
       .bg-neutral05 & {
@@ -427,11 +408,9 @@ export default `
 
     ${respond(`font-size: 14px;`, 60)}
 
-    &:hover,
-    &.focus-visible {
+    &:hover {
       color: var(--strong-color);
       background-color: var(--color-accent-primary-dull);
-      outline: 0;
     }
 
     &:active {
@@ -445,8 +424,7 @@ export default `
     &--dull {
       background-color: var(--button-dull-bg-color);
 
-      &:hover,
-      &.focus-visible {
+      &:hover {
         background-color: var(--color-base-neutral20);
       }
 
@@ -461,11 +439,9 @@ export default `
       background: none;
       border: 1px solid var(--hover-color);
 
-      &:hover,
-      &.focus-visible {
+      &:hover {
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--hover-color);
-        outline: 0;
       }
 
       .bg-neutral90 &,
@@ -489,7 +465,6 @@ export default `
         &:hover {
           color: var(--color-neutral-text-extra-dark);
           background-color: var(--highlight-color);
-          outline: 0;
         }
       }
     }
@@ -497,16 +472,14 @@ export default `
     &--accent-pale {
       background-color: var(--color-accent-primary-pale);
 
-      &:hover,
-      &.focus-visible {
+      &:hover {
         background-color: var(--color-accent-primary);
       }
 
       &.button-secondary--dull {
         background-color: var(--color-base-neutral10);
 
-        &:hover,
-        &.focus-visible {
+        &:hover {
           background-color: var(--color-base-neutral20);
         }
       }
@@ -522,10 +495,6 @@ export default `
         &:hover,
         &:active {
           color: var(--color-neutral-text-extra-dark);
-        }
-
-        &.focus-visible {
-          background-color: var(--color-neutral-text-extra-dark);
         }
       }
     }
