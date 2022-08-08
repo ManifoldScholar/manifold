@@ -8,7 +8,7 @@ const CategoriesList = React.memo(function CategoriesList({
   ...restProps
 }) {
   return categoryOrder.map(({ id }, index) => {
-    const category = categories.find(cat => cat.id === id);
+    const category = categories?.find(cat => cat.id === id);
 
     if (!category) return null;
 
@@ -30,10 +30,10 @@ CategoriesList.displayName =
 CategoriesList.propTypes = {
   groupId: PropTypes.string.isRequired,
   categoryOrder: PropTypes.array.isRequired,
-  categories: PropTypes.array.isRequired,
   mappings: PropTypes.object.isRequired,
   responses: PropTypes.object.isRequired,
   callbacks: PropTypes.object.isRequired,
+  categories: PropTypes.array,
   activeType: PropTypes.string
 };
 

@@ -61,9 +61,9 @@ ReadingGroupHomepageEditContainer.displayName =
 
 ReadingGroupHomepageEditContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired,
   responses: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired
+  refresh: PropTypes.func.isRequired,
+  categories: PropTypes.array
 };
 
 export default ReadingGroupHomepageEditContainer;
