@@ -3,6 +3,7 @@ module Attachments
     attribute :field, Types::ATTRIBUTE_NAME
     attribute :type, Types::ATTACHMENT_TYPE
     attribute :no_styles, Types::Bool.default(false)
+    attribute :backgrounding, Types::Bool.default(true)
     attribute :validate_content_type, Types::Bool.default(true)
 
     attribute :validations, Types::FlexibleStruct do

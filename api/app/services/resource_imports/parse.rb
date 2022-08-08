@@ -3,6 +3,7 @@ module ResourceImports
     record :resource_import
 
     def execute
+      resource_import.reload
       begin
         if resource_import.attached_data?
           compose ResourceImports::ParseCSV, inputs

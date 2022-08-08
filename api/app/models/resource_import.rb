@@ -20,7 +20,8 @@ class ResourceImport < ApplicationRecord
   validates :header_row, presence: true
   validates :url, presence: true, if: :google_sheet?
   validates :data, presence: true, if: :attached_data?
-  manifold_has_attached_file :data, :csv
+
+  manifold_has_attached_file :data, :csv, backgrounding: false
 
   def state_machine
     @state_machine ||= ResourceImports::StateMachine.new(

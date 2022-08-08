@@ -305,13 +305,14 @@ module Attachments
     # can_process_avatar?
     # It also adds a before processing callback for Paperclip to process the variants if,
     # and only if the attachment is processable.
-    def manifold_has_attached_file(field, type, no_styles: false, validate_content_type: true)
+    def manifold_has_attached_file(field, type, no_styles: false, validate_content_type: true, backgrounding: true)
       validations = CONFIG.fetch(type).with_indifferent_access
 
       config = Attachments::Configuration.new(
         field: field, type: type,
         no_styles: no_styles, validate_content_type: validate_content_type,
-        validations: validations
+        validations: validations,
+        backgrounding: backgrounding
       )
 
       add_shrine_attachment_configuration! config
