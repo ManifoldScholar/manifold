@@ -17,11 +17,15 @@ class AttachmentUploader < Shrine
   }
 
   Attacher.promote_block do
-    Attachments::ProcessAttachmentJob.perform_later(self.class.name, record.class.name, record.id, name, file_data)
+    conf = record.shrine_configuration_for name
+    message = conf.backgrounding || Rails.env.test? ? :perform_later : :perform_now
+    Attachments::ProcessAttachmentJob.send(message, self.class.name, record.class.name, record.id, name, file_data)
   end
 
   Attacher.destroy_block do
-    Attachments::DestroyAttachmentJob.perform_later(self.class.name, data)
+    conf = record.shrine_configuration_for name
+    message = conf.backgrounding || Rails.env.test? ? :perform_later : :perform_now
+    Attachments::DestroyAttachmentJob.send(message, self.class.name, data)
   end
 
   Attacher.validate do
