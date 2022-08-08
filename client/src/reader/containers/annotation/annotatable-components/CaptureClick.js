@@ -43,9 +43,26 @@ export default class AnnotatableCaptureClick extends Component {
   };
 
   handleKeyUp = event => {
+    if (!event || !event.target || event.key !== " ") return;
+    // handle spacebar keyup like a click (see https://adrianroselli.com/2022/04/brief-note-on-buttons-enter-and-space.html)
+    this.handleClick(event, true);
+  };
+
+  handleKeyDown = event => {
     if (!event || !event.target || (event.key !== "Enter" && event.key !== " "))
       return;
-    this.handleClick(event, true);
+    // handle enter keydown like a click
+    if (event.key === "Enter") this.handleClick(event, true);
+    // prevent scroll on spacebar keydown if focused on an annotation or highlight
+    if (event.key === " ") {
+      const el = event.target;
+      if (
+        this.doesElementContainAnnotationAndHighlight(el) ||
+        this.doesElementContainRemovableHighlight(el) ||
+        this.doesElementContainAnnotation(el)
+      )
+        event.preventDefault();
+    }
   };
 
   handleClick = (event, isKeyEvent = false) => {
@@ -108,6 +125,7 @@ export default class AnnotatableCaptureClick extends Component {
         className="no-focus-outline"
         onClick={this.handleClick}
         onKeyUp={this.handleKeyUp}
+        onKeyDown={this.handleKeyDown}
         onMouseUp={this.handleMouseUp}
         tabIndex={-1}
       >

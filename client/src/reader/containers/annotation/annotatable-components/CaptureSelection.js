@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import selectionHelpers from "./selectionHelpers";
 
-export default class AnnotatableCaptureSelection extends Component {
+class AnnotatableCaptureSelection extends Component {
   static propTypes = {
     activeAnnotation: PropTypes.string,
     activeEvent: PropTypes.object,
@@ -16,7 +17,8 @@ export default class AnnotatableCaptureSelection extends Component {
     }),
     updateSelection: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
-    popupRef: PropTypes.object
+    popupRef: PropTypes.object,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -279,17 +281,21 @@ export default class AnnotatableCaptureSelection extends Component {
 
   render() {
     /* Element captures events that bubble from nested interactive elements */
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
+    /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */
     return (
       <div
         className="no-focus-outline"
         onTouchEnd={this.handleTouchEnd}
         onMouseUp={this.handleMouseUp}
         onKeyUp={this.handleKeyUp}
-        tabIndex={-1}
+        tabIndex={0}
+        role="region"
+        aria-label={this.props.t("reader.section_label")}
       >
         {this.props.children}
       </div>
     );
   }
 }
+
+export default withTranslation()(AnnotatableCaptureSelection);
