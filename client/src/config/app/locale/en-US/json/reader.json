@@ -90,6 +90,7 @@
     "my_private_annotations": "My Private $t(glossary.annotation_title_case_other)",
     "my_public_annotations": "My Public $t(glossary.annotation_title_case_other)",
     "full_text": "Full Text",
-    "section_description": "Start reading this text on {{appName}}"
+    "section_description": "Start reading this text on {{appName}}",
+    "section_label": "Text Section"
   }
 }
