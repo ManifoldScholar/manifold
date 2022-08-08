@@ -59,6 +59,8 @@ export default `
   }
 
   .annotation-highlight {
+    cursor: pointer;
+
     &:hover {
       color: inherit;
     }
