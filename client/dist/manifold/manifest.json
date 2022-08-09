@@ -1,42 +1,42 @@
 {
   "assetsByChunkName": {
     "ace-editor": [
-      "build/chunk-ace-editor-2fe9b3b6f46b8e2c3211.js",
-      "build/chunk-ace-editor-2fe9b3b6f46b8e2c3211.js.map"
+      "build/chunk-ace-editor-55305c479cc7badb34b8.js",
+      "build/chunk-ace-editor-55305c479cc7badb34b8.js.map"
     ],
     "build/manifold-client-browser": [
-      "build/manifold-client-browser-2fe9b3b6f46b8e2c3211.js",
-      "build/manifold-client-browser-2fe9b3b6f46b8e2c3211.js.map"
+      "build/manifold-client-browser-55305c479cc7badb34b8.js",
+      "build/manifold-client-browser-55305c479cc7badb34b8.js.map"
     ],
     "build/manifold-client-print": [
-      "build/manifold-client-print-2fe9b3b6f46b8e2c3211.css",
-      "build/manifold-client-print-2fe9b3b6f46b8e2c3211.js",
-      "build/manifold-client-print-2fe9b3b6f46b8e2c3211.css.map",
-      "build/manifold-client-print-2fe9b3b6f46b8e2c3211.js.map"
+      "build/manifold-client-print-55305c479cc7badb34b8.css",
+      "build/manifold-client-print-55305c479cc7badb34b8.js",
+      "build/manifold-client-print-55305c479cc7badb34b8.css.map",
+      "build/manifold-client-print-55305c479cc7badb34b8.js.map"
     ],
     "recharts": [
-      "build/chunk-recharts-2fe9b3b6f46b8e2c3211.js",
-      "build/chunk-recharts-2fe9b3b6f46b8e2c3211.js.map"
+      "build/chunk-recharts-55305c479cc7badb34b8.js",
+      "build/chunk-recharts-55305c479cc7badb34b8.js.map"
     ],
     "swagger-ui": [
-      "build/chunk-swagger-ui-2fe9b3b6f46b8e2c3211.js",
-      "build/chunk-swagger-ui-2fe9b3b6f46b8e2c3211.js.map"
+      "build/chunk-swagger-ui-55305c479cc7badb34b8.js",
+      "build/chunk-swagger-ui-55305c479cc7badb34b8.js.map"
     ],
     "vendors~ace-editor": [
-      "build/chunk-vendors~ace-editor-2fe9b3b6f46b8e2c3211.js",
-      "build/chunk-vendors~ace-editor-2fe9b3b6f46b8e2c3211.js.map"
+      "build/chunk-vendors~ace-editor-55305c479cc7badb34b8.js",
+      "build/chunk-vendors~ace-editor-55305c479cc7badb34b8.js.map"
     ],
     "vendors~autolinker": [
-      "build/chunk-vendors~autolinker-2fe9b3b6f46b8e2c3211.js",
-      "build/chunk-vendors~autolinker-2fe9b3b6f46b8e2c3211.js.map"
+      "build/chunk-vendors~autolinker-55305c479cc7badb34b8.js",
+      "build/chunk-vendors~autolinker-55305c479cc7badb34b8.js.map"
     ],
     "vendors~recharts": [
-      "build/chunk-vendors~recharts-2fe9b3b6f46b8e2c3211.js",
-      "build/chunk-vendors~recharts-2fe9b3b6f46b8e2c3211.js.map"
+      "build/chunk-vendors~recharts-55305c479cc7badb34b8.js",
+      "build/chunk-vendors~recharts-55305c479cc7badb34b8.js.map"
     ],
     "vendors~swagger-ui": [
-      "build/chunk-vendors~swagger-ui-2fe9b3b6f46b8e2c3211.js",
-      "build/chunk-vendors~swagger-ui-2fe9b3b6f46b8e2c3211.js.map"
+      "build/chunk-vendors~swagger-ui-55305c479cc7badb34b8.js",
+      "build/chunk-vendors~swagger-ui-55305c479cc7badb34b8.js.map"
     ]
   }
 }
