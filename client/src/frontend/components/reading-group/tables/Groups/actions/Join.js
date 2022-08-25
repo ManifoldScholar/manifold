@@ -35,8 +35,8 @@ function JoinGroup({ confirm, readingGroup, onSuccess, buttonText, outlined }) {
   }
 
   function handleClick() {
-    const heading = t("messages.reading_group.join_heading");
-    const message = t("messages.reading_group.join_message");
+    const heading = t("messages.reading_group.join.heading");
+    const message = t("messages.reading_group.join.message");
     const compiledMessage = template(message)({ readingGroup });
     confirm(heading, compiledMessage, () => doJoin());
   }
