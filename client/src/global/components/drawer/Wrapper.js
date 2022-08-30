@@ -106,6 +106,7 @@ class DrawerWrapper extends PureComponent {
 
   componentDidMount() {
     window.addEventListener("keyup", this.handleLeaveKey);
+    window.addEventListener("mousedown", this.preventDefaultOnChildClicks);
     this.enableScrollLock();
   }
 
@@ -128,6 +129,7 @@ class DrawerWrapper extends PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener("keyup", this.handleLeaveKey);
+    window.removeEventListener("mousedown", this.preventDefaultOnChildClicks);
     this.disableScrollLock();
   }
 
@@ -201,6 +203,15 @@ class DrawerWrapper extends PureComponent {
       this.props.closeCallback && typeof this.props.closeCallback === "function"
     );
   }
+
+  preventDefaultOnChildClicks = e => {
+    if (
+      this.focusTrapNode.current &&
+      this.focusTrapNode.current.node.contains(e.target)
+    ) {
+      e.preventDefault();
+    }
+  };
 
   get drawerClasses() {
     return classNames(
@@ -316,6 +327,7 @@ class DrawerWrapper extends PureComponent {
             escapeDeactivates: false,
             returnFocusOnDeactivate: this.props.returnFocusOnDeactivate
           }}
+          onDeactivate={this.checkTargetOnDeactivate}
         >
           {this.renderDrawerFrontMatter(this.props, headerId)}
           {this.props.connected && (
