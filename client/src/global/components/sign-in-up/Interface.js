@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import PasswordForgot from "./PasswordForgot";
 import Login from "./Login";
 import Logout from "./Logout";
-import CreateUpdate from "./CreateUpdate";
-import Update from "./Update";
+import Update from "./EditProfileForm";
 import Create from "./Create";
 import { withRouter } from "react-router-dom";
 
@@ -95,10 +94,10 @@ class SignInUpInterface extends Component {
         child = <Create {...childProps} />;
         break;
       case "account-update":
-        child = <Update {...childProps} />;
+        child = <Update mode="existing" {...childProps} />;
         break;
       case "account-create-update":
-        child = <CreateUpdate {...childProps} />;
+        child = <Update mode="new" {...childProps} />;
         break;
       case "account-password-forgot":
         child = <PasswordForgot {...childProps} />;
