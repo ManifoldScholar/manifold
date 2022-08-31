@@ -1,18 +1,17 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import { useUID } from "react-uid";
 
-export default function Input(props) {
+function Input(props, ref) {
   const {
-    name,
-    value,
     type = "text",
     errors,
     ariaLabel,
-    onChange,
     placeholder,
-    label
+    label,
+    name,
+    ...inputProps
   } = props;
 
   const { t } = useTranslation();
@@ -29,15 +28,17 @@ export default function Input(props) {
     >
       {label && <label htmlFor={id}>{t(label)}</label>}
       <input
-        value={value}
+        id={id}
+        ref={ref}
         type={type}
         name={name}
-        id={id}
         aria-label={t(ariaLabel)}
         aria-describedby={errorId}
-        onChange={onChange}
-        placeholder={t(placeholder)}
+        placeholder={placeholder && t(placeholder)}
+        {...inputProps}
       />
     </Form.Errorable>
   );
 }
+
+export default forwardRef(Input);

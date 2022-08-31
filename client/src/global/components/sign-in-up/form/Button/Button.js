@@ -7,7 +7,7 @@ export default function Button({
   icon,
   label,
   onClick,
-  type,
+  type = "button",
   styleType = "fill"
 }) {
   const { t } = useTranslation();

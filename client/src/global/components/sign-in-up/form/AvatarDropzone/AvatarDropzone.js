@@ -4,34 +4,41 @@ import Dropzone from "react-dropzone";
 import IconComposer from "global/components/utility/IconComposer";
 import Avatar from "global/components/avatar";
 import { useTranslation, Trans } from "react-i18next";
+import { useFormContext } from "react-hook-form";
+import { useUID } from "react-uid";
 
-export default function AvatarDropzone({
-  handleFileDrop,
-  handleRemoveAvatar,
-  avatarUrl,
-  errors
-}) {
+export default function AvatarDropzone({ errors }) {
   const { t } = useTranslation();
+  const uid = useUID();
 
-  const hasAvatar = !!avatarUrl;
+  const { watch, setValue } = useFormContext();
+
+  const showAvatar = !!watch("avatar");
+  const removeAvatar = () => {
+    setValue("avatar", null, { shouldDirty: true, shouldValidate: false });
+  };
+  const handleDrop = file => {
+    setValue("avatar", file[0], { shouldDirty: true, shouldValidate: false });
+  };
+  const avatarUrl = watch("avatar")?.preview;
 
   return __BROWSER__ ? (
     <div className="row-1-p">
-      {hasAvatar ? null : (
+      {showAvatar ? null : (
         <p className="overlay-copy">
           {t("forms.signin_overlay.profile_img_instructions")}
         </p>
       )}
       <Form.Errorable
         className="form-input"
-        idForError="avatar-update-error"
-        name="attributes[avatar]"
+        idForError="avatar-error"
+        name="attributes.avatar"
         errors={errors}
       >
         <label htmlFor="avatar-update" className="screen-reader-text">
           {t("forms.signin_overlay.profile_img")}
         </label>
-        <Dropzone onDrop={handleFileDrop}>
+        <Dropzone onDrop={handleDrop}>
           {({ getRootProps, getInputProps }) => (
             <div
               {...getRootProps({
@@ -43,8 +50,8 @@ export default function AvatarDropzone({
                 {...getInputProps({
                   accept: "image/*",
                   multiple: false,
-                  id: "avatar-update",
-                  "aria-describedby": "avatar-update-error",
+                  id: `${uid}_avatar`,
+                  "aria-describedby": "avatar-error",
                   tabIndex: 0
                 })}
               />
@@ -61,9 +68,9 @@ export default function AvatarDropzone({
                     position: "absolute"
                   }}
                 >
-                  {hasAvatar && (
+                  {showAvatar && (
                     <button
-                      onClick={handleRemoveAvatar}
+                      onClick={removeAvatar}
                       tabIndex="0"
                       className="dropzone-button__cancel-button"
                     >
