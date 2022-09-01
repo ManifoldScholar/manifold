@@ -17,12 +17,12 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
   const { t } = useTranslation();
   const uid = useUID();
 
+  const { currentUser } = authentication ?? {};
+
   const {
-    currentUser: {
-      id: userId,
-      attributes: { nickname, firstName, lastName, email, avatarStyles }
-    }
-  } = authentication ?? {};
+    id: userId,
+    attributes: { nickname, firstName, lastName, email, avatarStyles } = {}
+  } = currentUser ?? {};
 
   const defaultValues = {
     nickname,

@@ -17,6 +17,14 @@ export default {
     };
   },
 
+  destroy() {
+    return {
+      endpoint: "/api/v1/me",
+      method: "DELETE",
+      options: {}
+    };
+  },
+
   annotations(filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/me/relationships/annotations`,

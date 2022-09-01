@@ -28,6 +28,12 @@ module API
         end
       end
 
+      def destroy
+        if current_user
+          current_user.destroy
+        end
+      end
+
       private
 
       def includes

@@ -232,7 +232,9 @@
         "confirm_header": "Are you sure you want to delete your account?",
         "confirm_instructions": "Please enter your email to continue.",
         "email_placeholder": "Email address",
-        "confirm_button_label": "Yes, delete my account"
+        "confirm_button_label": "Yes, delete my account",
+        "confirmation_body": "{{name}} and all its data has been removed from Manifold.",
+        "confirmation_header": "We're sorry to see you go!"
       }
     }
   }
