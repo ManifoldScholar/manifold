@@ -63,6 +63,12 @@ const UserMenuBody = forwardRef(
           onClick={() => callbacks.hideUserPanel()}
         />
         <Item
+          to={lh.link("privacy")}
+          title={t("navigation.user.privacy")}
+          icon="eyeball24"
+          onClick={() => callbacks.hideUserPanel()}
+        />
+        <Item
           as="button"
           title={t("navigation.user.logout")}
           icon="logout24"

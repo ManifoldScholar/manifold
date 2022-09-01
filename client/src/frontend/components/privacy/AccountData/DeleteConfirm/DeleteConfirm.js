@@ -15,7 +15,7 @@ export default function DeleteConfirm() {
   const [emailValue, setEmail] = useState("");
   const [mismatch, setMismatch] = useState(false);
   const errorFormatted = [
-    { detail: "This email doesn't match your account email" }
+    { detail: t("forms.privacy.delete.email_mismatch_error") }
   ];
 
   const deleteAccount = useApiCallback(meAPI.destroy, { removes: currentUser });
