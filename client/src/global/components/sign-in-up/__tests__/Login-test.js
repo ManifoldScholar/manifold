@@ -1,5 +1,5 @@
 import Login from "../Login";
-import CreateUpdate from "../CreateUpdate";
+import CreateUpdate from "../EditProfileForm";
 
 describe("global/components/sign-in-up/Login", () => {
   def("user", () => factory("user"));
