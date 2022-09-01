@@ -13,10 +13,27 @@ export default function AccountData() {
         {t("forms.privacy.account_data")}
       </h2>
       <div className="form-group">
-        <fieldset className="subscriptions__radio-group form-input">
-          <legend className="subscriptions__legend">
+        <div className="form-input">
+          <h3 className="subscriptions__legend">
+            {t("forms.privacy.download.header")}
+          </h3>
+          <span className="instructions">
+            {t("forms.privacy.download.description")}
+          </span>
+          <button
+            className="button-secondary button-secondary--outlined"
+            style={{ width: "max-content" }}
+            type="button"
+          >
+            <span className="button-secondary__text">
+              {t("forms.privacy.download.button_label")}
+            </span>
+          </button>
+        </div>
+        <div className="form-input">
+          <h3 className="subscriptions__legend">
             {t("forms.privacy.delete.header")}
-          </legend>
+          </h3>
           <span className="instructions">
             {t("forms.privacy.delete.description")}
           </span>
@@ -30,7 +47,7 @@ export default function AccountData() {
               {t("forms.privacy.delete.button_label")}
             </span>
           </button>
-        </fieldset>
+        </div>
       </div>
       {showDeleteConfirm && <DeleteConfirm />}
     </div>

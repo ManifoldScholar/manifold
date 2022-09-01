@@ -216,8 +216,18 @@
       "title": "Privacy Settings",
       "instructions": "Edit your privacy settings.",
       "cookies": "Cookies",
-      "internal_analytics": "Internal Analytics",
-      "google_analytics": "Google Analytics",
+      "necessary_cookies": {
+        "label": "Neccessary Cookies",
+        "description": "authToken: stay logged in on returned visits"
+      },
+      "internal_analytics": {
+        "label": "Internal Analytics",
+        "description": "VISIT_TOKEN & VISITOR_TOKEN for Manifold's anonymous internal analytics"
+      },
+      "google_analytics": {
+        "label": "Google Analytics",
+        "description": "Mmm, cookies"
+      },
       "submit_button": "Save Changes",
       "account_data": "Account Data",
       "download": {
@@ -232,6 +242,7 @@
         "confirm_header": "Are you sure you want to delete your account?",
         "confirm_instructions": "Please enter your email to continue.",
         "email_placeholder": "Email address",
+        "email_mismatch_error": "The email you entered doesn't match your account email",
         "confirm_button_label": "Yes, delete my account",
         "confirmation_body": "{{name}} and all its data has been removed from Manifold.",
         "confirmation_header": "We're sorry to see you go!"
