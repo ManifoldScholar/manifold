@@ -1,7 +1,11 @@
 import React from "react";
 import { Trans } from "react-i18next";
+import { useFormContext } from "react-hook-form";
 
-export default function ProfileGreeting({ mode, nickname }) {
+export default function ProfileGreeting({ mode, defaultNickname }) {
+  const { watch } = useFormContext();
+  const nickname = watch("nickname") ?? defaultNickname;
+
   return mode === "new" ? (
     <Trans
       i18nKey="forms.signin_overlay.create_success_message"
