@@ -33,7 +33,7 @@ function RadioGroup({ preference, value, options, onChange, inputProps = {} }) {
               type="radio"
               name={preference.key}
               value={option}
-              checked={checked}
+              checked={onChange ? checked : undefined}
               onChange={onChange}
               aria-labelledby={uidSeed(option)}
               {...inputProps}

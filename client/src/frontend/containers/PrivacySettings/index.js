@@ -3,6 +3,7 @@ import Authorize from "hoc/Authorize";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import AccountData from "frontend/components/privacy/AccountData";
+import CookiesForm from "frontend/components/privacy/CookiesForm";
 
 export default function PrivacySettingsContainer() {
   const { t } = useTranslation();
@@ -24,8 +25,8 @@ export default function PrivacySettingsContainer() {
             <span className="instructions">
               {t("forms.privacy.instructions")}
             </span>
-          </h1>{" "}
-          {/* <CookiesForm /> */}
+          </h1>
+          <CookiesForm />
           <AccountData />
         </div>
       </div>
