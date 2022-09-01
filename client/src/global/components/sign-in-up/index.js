@@ -1,4 +1,4 @@
-import Create from "./Create";
+import Create from "./CreateUserForm";
 import Login from "./Login";
 import Logout from "./Logout";
 import Oauth from "./oauth";

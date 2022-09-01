@@ -31,10 +31,10 @@ export default function BaseHookForm(props) {
     data => {
       const args = formatData ? formatData(data) : data;
       triggerCall(args)
-        .then(() => {
-          if (onSuccess) onSuccess();
+        .then(res => {
+          if (onSuccess) onSuccess(res, data);
         })
-        .catch(err => setErrors(err.body.errors));
+        .catch(err => setErrors(err.body?.errors));
     },
     [formatData, onSuccess, triggerCall]
   );

@@ -67,7 +67,7 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
   };
 
   return userId ? (
-    <section
+    <div
       ref={el => (focusRef.current = el)}
       tabIndex={-1}
       className="sign-in-up-update"
@@ -88,7 +88,7 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
             </h2>
             <ProfileFormFields errors={errors} />
             <div className="row-1-p">
-              <div className="form-input form-error">
+              <div className="form-input">
                 <Button
                   type="submit"
                   label="forms.signin_overlay.submit_update_label"
@@ -110,6 +110,6 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
           label="Privacy Settings"
         />
       </div>
-    </section>
+    </div>
   ) : null;
 }
