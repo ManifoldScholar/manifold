@@ -4,7 +4,7 @@ import PasswordForgot from "./PasswordForgot";
 import Login from "./Login";
 import Logout from "./Logout";
 import Update from "./EditProfileForm";
-import Create from "./Create";
+import Create from "./CreateUserForm";
 import { withRouter } from "react-router-dom";
 
 class SignInUpInterface extends Component {

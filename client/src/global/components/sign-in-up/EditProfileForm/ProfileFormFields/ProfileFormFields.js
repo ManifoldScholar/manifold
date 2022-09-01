@@ -3,15 +3,16 @@ import { useTranslation } from "react-i18next";
 import { Input, AvatarDropzone } from "../../form-inputs";
 import { useFormContext } from "react-hook-form";
 
-export default function ProfileFormFields(props) {
-  const { errors, ...avatarProps } = props;
-
+export default function ProfileFormFields({ errors }) {
   const { t } = useTranslation();
 
   const { register } = useFormContext();
 
   return (
     <div className="row-1-p">
+      <p className="overlay-copy">
+        {t("forms.signin_overlay.update_nickname")}
+      </p>
       <div className="row-1-p">
         <Input
           errors={errors}
@@ -20,7 +21,7 @@ export default function ProfileFormFields(props) {
           {...register("nickname")}
         />
       </div>
-      <AvatarDropzone errors={errors} {...avatarProps} />
+      <AvatarDropzone errors={errors} />
       <div className="row-1-p">
         <p className="overlay-copy">{t("forms.signin_overlay.edit_account")}</p>
         <Input
