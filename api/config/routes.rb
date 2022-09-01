@@ -198,7 +198,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resource :me, only: [:show, :update], controller: "me"
+      resource :me, only: [:show, :update, :destroy], controller: "me"
       namespace :me do
         namespace :relationships do
           resources :annotated_texts, only: %i[index]
