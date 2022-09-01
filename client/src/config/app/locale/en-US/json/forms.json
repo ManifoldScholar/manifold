@@ -182,7 +182,8 @@
       "notification_settings": "Notification Settings",
       "subscriptions__label": "Adjust your settings for email notifications:",
       "create_success_message": "<0>Congratulations! </0><1>Your account has been successfully created and you are now logged in to Manifold. From now on, I'm going to call you </1><2>{{name}}</h4>",
-      "greeting": "Hello, <0>{{name}}</0>."
+      "greeting": "Hello, <0>{{name}}</0>.",
+      "update_notification_header": "Profile updated successfully!"
     },
     "attribute_map": {
       "cancel": "Cancel mapping of {{name}} to {{mapping}}",

@@ -1,25 +1,19 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import { meAPI, requests } from "api";
-import { entityStoreActions } from "actions";
+import { meAPI } from "api";
 import lh from "helpers/linkHandler";
 import ProfileFormFields from "./ProfileFormFields";
 import Greeting from "./Greeting";
-import { Button } from "../form";
-import { useDispatch } from "react-redux";
+import { Button } from "../form-inputs";
 import { useHistory } from "react-router-dom";
-import { useFromStore } from "hooks";
+import { useFromStore, useApiCallback, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import { useUID } from "react-uid";
 import { useForm, FormProvider } from "react-hook-form";
 
-const { request } = entityStoreActions;
-
 export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
-  const response = useFromStore("gAuthenticatedUserUpdate", "select");
   const authentication = useFromStore("authentication");
   const history = useHistory();
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const uid = useUID();
 
@@ -50,6 +44,8 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
     mode: "onSubmit"
   });
 
+  const [formErrors, setFormErrors] = useState([]);
+
   useEffect(() => {
     if (focusRef.current) focusRef.current.focus();
   }, []);
@@ -58,9 +54,18 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
     form.reset();
   }, [authentication.authenticating, userId, form]);
 
-  const updateUser = useCallback(
+  const updateUser = useApiCallback(meAPI.update);
+
+  const notifyUpdate = useNotification(() => ({
+    level: 0,
+    id: `CURRENT_USER_UPDATED`,
+    heading: t("forms.signin_overlay.update_notification_header"),
+    expiration: 3000
+  }));
+
+  const formatAttributesAndUpdate = useCallback(
     (data, avatarFileData) => {
-      const baseParams = Object.keys(data)
+      const baseAttributes = Object.keys(data)
         .filter(name => name !== "avatar")
         .filter(name => !(name === "password" && data.password === ""))
         .reduce((obj, name) => ({ ...obj, [name]: data[name] }), {});
@@ -74,16 +79,16 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
         : null;
       const removeAvatar = data.avatar === null;
 
-      const params = { ...baseParams, avatar, removeAvatar };
+      const attributes = { ...baseAttributes, avatar, removeAvatar };
 
-      const { promise } = dispatch(
-        request(meAPI.update(params), requests.gAuthenticatedUserUpdate)
-      );
-      promise.then(() => {
-        if (hideSignInUpOverlay) hideSignInUpOverlay();
-      });
+      updateUser(attributes)
+        .then(() => {
+          notifyUpdate();
+          if (hideSignInUpOverlay) hideSignInUpOverlay();
+        })
+        .catch(err => setFormErrors(err.body.errors));
     },
-    [dispatch, hideSignInUpOverlay]
+    [hideSignInUpOverlay, updateUser, notifyUpdate]
   );
 
   const processAvatar = useCallback(
@@ -91,13 +96,13 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
       if (data.avatar.path) {
         const reader = new FileReader();
         reader.onload = () => {
-          updateUser(data, reader.result);
+          formatAttributesAndUpdate(data, reader.result);
         };
         return reader.readAsDataURL(data.avatar);
       }
-      return updateUser(data);
+      return formatAttributesAndUpdate(data);
     },
-    [updateUser]
+    [formatAttributesAndUpdate]
   );
 
   const redirect = route => () => {
@@ -105,24 +110,22 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
     history.push(lh.link(route));
   };
 
-  const errors = response?.errors ?? [];
-
   return userId ? (
-    <section ref={el => (focusRef.current = el)} className="sign-in-up-update">
+    <section
+      ref={el => (focusRef.current = el)}
+      tabIndex={-1}
+      className="sign-in-up-update"
+    >
       <Greeting
         mode={mode}
         nickname={form.watch("nickname") ?? nickname ?? firstName}
       />
       <FormProvider {...form}>
-        <form
-          onSubmit={form.handleSubmit(processAvatar)}
-          tabIndex={-1}
-          aria-labelledby={uid}
-        >
+        <form onSubmit={form.handleSubmit(processAvatar)} aria-labelledby={uid}>
           <h2 id={uid} className="screen-reader-text">
             {t("forms.signin_overlay.update_sr_title")}
           </h2>
-          <ProfileFormFields errors={errors} />
+          <ProfileFormFields errors={formErrors} />
           <div className="row-1-p">
             <div className="form-input form-error">
               <Button
