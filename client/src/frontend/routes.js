@@ -415,6 +415,13 @@ const routes = {
       helper: () => "/subscriptions"
     },
     {
+      name: "privacy",
+      exact: true,
+      component: "PrivacySettings",
+      path: "/privacy",
+      helper: () => "/privacy"
+    },
+    {
       name: "unsubscribe",
       exact: true,
       component: "Unsubscribe",

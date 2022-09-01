@@ -205,6 +205,29 @@
     "date_picker": {
       "date_change_sr_status": "You entered {{date}}.",
       "date_clear_sr_status": "You cleared the date."
+    },
+    "privacy": {
+      "title": "Privacy Settings",
+      "instructions": "Edit your privacy settings.",
+      "cookies": "Cookies",
+      "internal_analytics": "Internal Analytics",
+      "google_analytics": "Google Analytics",
+      "submit_button": "Save Changes",
+      "account_data": "Account Data",
+      "download": {
+        "header": "Download your data",
+        "description": "Download all of your activity on Manifold.",
+        "button_label": "Download"
+      },
+      "delete": {
+        "header": "Delete your account",
+        "description": "This will delete your entire account and record from our databases.",
+        "button_label": "Delete my account",
+        "confirm_header": "Are you sure you want to delete your account?",
+        "confirm_instructions": "Please enter your email to continue.",
+        "email_placeholder": "Email address",
+        "confirm_button_label": "Yes, delete my account"
+      }
     }
   }
 }
