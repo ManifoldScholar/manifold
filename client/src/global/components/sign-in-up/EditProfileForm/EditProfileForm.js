@@ -33,7 +33,8 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
     passwordConfirmation: "",
     avatar: avatarStyles?.smallSquare
       ? { preview: avatarStyles?.smallSquare }
-      : null
+      : null,
+    removeAvatar: false
   };
 
   const focusRef = useRef();
@@ -49,37 +50,11 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
     expiration: 3000
   }));
 
-  const formatAttributes = useCallback((data, avatarFileData) => {
-    const baseAttributes = Object.keys(data)
-      .filter(name => name !== "avatar")
+  const formatAttributes = useCallback(data => {
+    return Object.keys(data)
       .filter(name => !(name === "password" && data.password === ""))
       .reduce((obj, name) => ({ ...obj, [name]: data[name] }), {});
-
-    const avatar = avatarFileData
-      ? {
-          data: avatarFileData,
-          content_type: data.avatar.type,
-          filename: data.avatar.name
-        }
-      : null;
-    const removeAvatar = data.avatar === null;
-
-    return { ...baseAttributes, avatar, removeAvatar };
   }, []);
-
-  const processAvatar = useCallback(
-    data => {
-      if (data.avatar.path) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          formatAttributes(data, reader.result);
-        };
-        return reader.readAsDataURL(data.avatar);
-      }
-      return formatAttributes(data);
-    },
-    [formatAttributes]
-  );
 
   const onSuccess = useCallback(() => {
     notifyUpdate();
@@ -99,7 +74,7 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
     >
       <BaseHookForm
         defaultValues={defaultValues}
-        formatData={processAvatar}
+        formatData={formatAttributes}
         ariaLabelledBy={uid}
         onSuccess={onSuccess}
         apiMethod={meAPI.update}
