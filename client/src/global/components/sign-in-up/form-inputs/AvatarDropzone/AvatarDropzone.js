@@ -14,13 +14,34 @@ export default function AvatarDropzone({ errors }) {
   const { watch, setValue } = useFormContext();
 
   const showAvatar = !!watch("avatar");
-  const removeAvatar = () => {
-    setValue("avatar", null, { shouldDirty: true, shouldValidate: false });
-  };
-  const handleDrop = file => {
-    setValue("avatar", file[0], { shouldDirty: true, shouldValidate: false });
-  };
   const avatarUrl = watch("avatar")?.preview;
+
+  const removeAvatar = e => {
+    e.stopPropagation();
+
+    setValue("removeAvatar", true, {
+      shouldDirty: true,
+      shouldValidate: false
+    });
+    setValue("avatar", null);
+  };
+
+  const handleDrop = file => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      setValue(
+        "avatar",
+        {
+          data: reader.result,
+          content_type: file[0].type,
+          filename: file[0].name
+        },
+        { shouldDirty: true, shouldValidate: false }
+      );
+    };
+    reader.readAsDataURL(file[0]);
+    setValue("removeAvatar", false);
+  };
 
   return __BROWSER__ ? (
     <div className="row-1-p">
@@ -70,6 +91,7 @@ export default function AvatarDropzone({ errors }) {
                 >
                   {showAvatar && (
                     <button
+                      type="button"
                       onClick={removeAvatar}
                       tabIndex="0"
                       className="dropzone-button__cancel-button"
