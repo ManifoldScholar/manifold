@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Input, AvatarDropzone } from "../../form";
+import { Input, AvatarDropzone } from "../../form-inputs";
 import { useFormContext } from "react-hook-form";
 
 export default function ProfileFormFields(props) {
