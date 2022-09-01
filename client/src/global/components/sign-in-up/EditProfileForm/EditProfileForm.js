@@ -141,7 +141,7 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
         />
         <Button
           styleType="outline"
-          onClick={redirect("subscriptions")}
+          onClick={redirect("privacy")}
           label="Privacy Settings"
         />
       </div>
