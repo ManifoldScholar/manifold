@@ -183,7 +183,9 @@
       "subscriptions__label": "Adjust your settings for email notifications:",
       "create_success_message": "<0>Congratulations! </0><1>Your account has been successfully created and you are now logged in to Manifold. From now on, I'm going to call you </1><2>{{name}}</h4>",
       "greeting": "Hello, <0>{{name}}</0>.",
-      "update_notification_header": "Profile updated successfully!"
+      "update_notification_header": "Profile updated successfully!",
+      "terms_header": "First things first...",
+      "accept_checkbox_label": "I agree to {{installationName}}'s <privacyLink>privacy policy</privacyLink> and <termsLink>terms and conditions.</termsLink>"
     },
     "attribute_map": {
       "cancel": "Cancel mapping of {{name}} to {{mapping}}",
