@@ -5,6 +5,7 @@ import Login from "./Login";
 import Logout from "./Logout";
 import Update from "./EditProfileForm";
 import Create from "./CreateUserForm";
+import Terms from "./AcceptTerms";
 import { withRouter } from "react-router-dom";
 
 class SignInUpInterface extends Component {
@@ -40,7 +41,7 @@ class SignInUpInterface extends Component {
         return "account-update";
       }
     } else {
-      if (defaultToSignUp) return "account-create";
+      if (defaultToSignUp) return "accept-terms";
       return "account-login";
     }
   }
@@ -90,6 +91,9 @@ class SignInUpInterface extends Component {
     let child = null;
     const childProps = this.childProps();
     switch (this.state.view) {
+      case "accept-terms":
+        child = <Terms {...childProps} />;
+        break;
       case "account-create":
         child = <Create {...childProps} />;
         break;

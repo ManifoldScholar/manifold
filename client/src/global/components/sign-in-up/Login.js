@@ -158,7 +158,7 @@ class Login extends Component {
           </button>
           <button
             onClick={event =>
-              this.props.handleViewChange("account-create", event)
+              this.props.handleViewChange("accept-terms", event)
             }
             data-id="show-create"
           >
