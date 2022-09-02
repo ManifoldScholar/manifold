@@ -8,7 +8,8 @@ export default function Button({
   label,
   onClick,
   type = "button",
-  styleType = "fill"
+  styleType = "fill",
+  disabled
 }) {
   const { t } = useTranslation();
 
@@ -24,6 +25,8 @@ export default function Button({
       style={{ width: "100%" }}
       onClick={typeof onClick === "function" ? onClick : undefined}
       type={type}
+      aria-disabled={disabled}
+      disabled={disabled}
     >
       <span className="button-secondary__text">{t(label)}</span>
       {icon && (
