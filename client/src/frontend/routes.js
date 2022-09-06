@@ -420,6 +420,13 @@ const routes = {
       helper: () => "/privacy"
     },
     {
+      name: "dataUse",
+      exact: true,
+      component: "DataUse",
+      path: "/data-use",
+      helper: () => "/data-use"
+    },
+    {
       name: "unsubscribe",
       exact: true,
       component: "Unsubscribe",
