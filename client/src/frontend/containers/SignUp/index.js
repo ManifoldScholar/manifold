@@ -22,8 +22,8 @@ export class SignUpContainer extends Component {
           <div className="login-form">
             <SignInUp.Interface
               authentication={this.props.authentication}
-              withoutAccountUpdate
-              defaultToSignUp
+              showLogout
+              defaultView="accept-terms"
               settings={this.props.settings}
               dispatch={this.props.dispatch}
               hash={get(this, "props.routing.locationBeforeTransitions.hash")}

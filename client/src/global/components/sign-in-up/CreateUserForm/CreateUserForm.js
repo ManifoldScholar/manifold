@@ -59,7 +59,7 @@ export default function CreateUserForm({
       authenticateUser(data);
 
       if (!willRedirect && !redirectToHomeOnSignup)
-        handleViewChange("account-create-update");
+        handleViewChange("create-update");
       if (redirectToHomeOnSignup && !location?.state?.postLoginRedirect) {
         history.replace(location, {
           postLoginRedirect: "/"
@@ -116,7 +116,7 @@ export default function CreateUserForm({
       )}
       <p className="login-links">
         <button
-          onClick={event => handleViewChange("account-login", event)}
+          onClick={event => handleViewChange("login", event)}
           data-id="show-login"
         >
           {t("forms.signin_overlay.have_account")}
