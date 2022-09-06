@@ -1,0 +1,34 @@
+import styled from "@emotion/styled";
+import { fluidScale, respond, formLabelPrimary } from "theme/styles/mixins";
+import { breakpoints } from "theme/styles/variables/media";
+
+export const Columns = styled.div`
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: max-content max-content;
+  gap: ${fluidScale("165px", "40px")};
+  color: #222222;
+  padding-block-end: 80px;
+
+  ${respond(
+    `grid-template-columns: 1.15fr .85fr; grid-template-rows: max-content;`,
+    breakpoints[70]
+  )}
+`;
+
+export const ImagePlaceholder = styled.div`
+  width: 100%;
+  height: 300px;
+  background-color: var(--color-accent-primary-light);
+`;
+
+export const CategoryHeader = styled.h2`
+  ${formLabelPrimary}
+  display: block;
+  font-size: 14px;
+  margin-block: 25px;
+`;
+
+export const Text = styled.p`
+  font-family: var(--font-family-copy);
+`;
