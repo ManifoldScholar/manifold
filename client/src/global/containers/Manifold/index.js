@@ -188,7 +188,7 @@ class ManifoldContainer extends PureComponent {
   render() {
     const fatalError = this.props.fatalError;
 
-    const hideSignInUpOverlay = bindActionCreators(
+    const hideOverlay = bindActionCreators(
       () => visibilityHide("signInUpOverlay"),
       this.props.dispatch
     );
@@ -215,10 +215,7 @@ class ManifoldContainer extends PureComponent {
           >
             <SignInUp.Overlay
               key="signInUpOverlay"
-              hideSignInUpOverlay={hideSignInUpOverlay}
-              authentication={this.props.authentication}
-              settings={this.props.settings}
-              dispatch={this.props.dispatch}
+              hideOverlay={hideOverlay}
               hash={get(this, "props.routing.locationBeforeTransitions.hash")}
             />
           </CSSTransition>

@@ -62,7 +62,7 @@ export default function AcceptTerms({ handleViewChange }) {
             type="button"
             label={t("actions.continue")}
             disabled={!accepted}
-            onClick={() => handleViewChange("account-create")}
+            onClick={() => handleViewChange("create")}
           />
         </div>
       </div>

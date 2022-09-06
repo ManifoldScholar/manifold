@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useUID } from "react-uid";
 import BaseHookForm from "../BaseHookForm";
 
-export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
+export default function EditProfileForm({ hideOverlay, mode }) {
   const authentication = useFromStore("authentication");
   const history = useHistory();
   const { t } = useTranslation();
@@ -58,11 +58,11 @@ export default function EditProfileForm({ hideSignInUpOverlay, mode }) {
 
   const onSuccess = useCallback(() => {
     notifyUpdate();
-    if (hideSignInUpOverlay) hideSignInUpOverlay();
-  }, [notifyUpdate, hideSignInUpOverlay]);
+    if (hideOverlay) hideOverlay();
+  }, [notifyUpdate, hideOverlay]);
 
   const redirect = route => () => {
-    if (hideSignInUpOverlay) hideSignInUpOverlay();
+    if (hideOverlay) hideOverlay();
     history.push(lh.link(route));
   };
 

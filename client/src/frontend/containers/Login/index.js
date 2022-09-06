@@ -22,7 +22,7 @@ export class LoginContainer extends Component {
           <div className="login-form">
             <SignInUp.Interface
               authentication={this.props.authentication}
-              withoutAccountUpdate
+              showLogout
               settings={this.props.settings}
               dispatch={this.props.dispatch}
               hash={get(this, "props.routing.locationBeforeTransitions.hash")}
