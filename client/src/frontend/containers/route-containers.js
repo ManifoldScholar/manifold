@@ -39,6 +39,7 @@ import VolumeDetail from "frontend/containers/VolumeDetail";
 import JournalVolumesList from "frontend/containers/JournalVolumesList";
 import JournalIssuesList from "frontend/containers/JournalIssuesList";
 import PrivacySettings from "frontend/containers/PrivacySettings";
+import DataUse from "frontend/containers/DataUse";
 
 export default {
   NotFound,
@@ -89,5 +90,6 @@ export default {
   SignUp,
   MyStarred,
   MyAnnotations,
-  PrivacySettings
+  PrivacySettings,
+  DataUse
 };
