@@ -13,6 +13,7 @@ export default function BaseHookForm(props) {
     apiMethod,
     apiOptions,
     onSuccess,
+    onError,
     resetDep
   } = props;
 
@@ -34,9 +35,12 @@ export default function BaseHookForm(props) {
         .then(res => {
           if (onSuccess) onSuccess(res, data);
         })
-        .catch(err => setErrors(err.body?.errors));
+        .catch(err => {
+          setErrors(err.body?.errors);
+          if (onError) onError(err);
+        });
     },
-    [formatData, onSuccess, triggerCall]
+    [formatData, onSuccess, onError, triggerCall]
   );
 
   useEffect(() => {
