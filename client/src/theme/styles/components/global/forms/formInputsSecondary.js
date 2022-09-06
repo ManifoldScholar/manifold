@@ -317,7 +317,6 @@ export default `
     }
 
     .form-dropzone {
-      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -363,8 +362,10 @@ export default `
         align-items: center;
         justify-content: center;
         width: 100%;
+        pointer-events: none;
 
         .message {
+          position: relative;
           width: 100%;
           padding: 20px;
           word-wrap: break-word;
@@ -378,31 +379,33 @@ export default `
       }
 
       .contents-image-preview {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
         align-items: center;
-        justify-content: center;
         width: 100%;
         padding: 10px;
+        pointer-events: none;
 
         .preview {
+          grid-column: 1 / -1;
+          grid-row: 1 / -1;
+          justify-self: center;
           max-width: 100%;
           max-height: 200px;
           background: var(--color-base-neutral20);
         }
 
         .message {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          z-index: 1;
+          grid-column: 1 / -1;
+          grid-row: 1 / -1;
+          justify-self: center;
           width: 75%;
           padding: 5px 20px 15px;
           margin-bottom: 20px;
           text-align: center;
           background: var(--color-base-neutral95);
           opacity: 0.9;
-          transform: translate(-50%, -50%);
         }
       }
 

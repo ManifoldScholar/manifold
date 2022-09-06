@@ -5,7 +5,6 @@ export default `
     ${setHoverStyle()}
     position: relative;
     display: block;
-    cursor: pointer;
 
     &--white {
       &:hover {
@@ -62,8 +61,12 @@ export default `
 
     input {
       position: absolute;
-      z-index: -1;
+      inset-inline-start: 0;
+      inset-block-start: 0;
+      inline-size: 100%;
+      block-size: 100%;
       opacity: 0;
+      cursor: pointer;
     }
 
     input:checked ~ .checkbox__indicator {

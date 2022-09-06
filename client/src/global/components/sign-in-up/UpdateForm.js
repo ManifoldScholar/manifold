@@ -238,7 +238,7 @@ export class UpdateFormContainer extends Component {
                       })}
                     />
                     <div
-                      style={{ position: "relative" }}
+                      style={{ position: "relative", pointerEvents: "none" }}
                       className="dropzone-button dropzone-button-dotted"
                     >
                       <div
