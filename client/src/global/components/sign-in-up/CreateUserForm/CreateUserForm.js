@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { usersAPI } from "api";
 import { currentUserActions } from "actions";
 import capitalize from "lodash/capitalize";
@@ -18,7 +18,6 @@ export default function CreateUserForm({
   willRedirect,
   redirectToHomeOnSignup
 }) {
-  const pages = useFromStore("gPages", "select");
   const settings = useFromStore("settings", "select");
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -77,28 +76,6 @@ export default function CreateUserForm({
     ]
   );
 
-  const renderTermsAndConditions = () => {
-    const termsPage = pages.find(
-      p => p.attributes.purpose === "terms_and_conditions"
-    );
-    if (!termsPage) return null;
-
-    const { attr } = termsPage ?? {};
-    const linkProps = attr.isExternalLink
-      ? { href: attr.externalLink, target: "_blank" }
-      : { href: `/page/${attr.slug}` };
-
-    return (
-      <p className="login-links">
-        <Trans
-          i18nKey="forms.signin_overlay.terms_and_conditions"
-          components={[<a {...linkProps}>#</a>]}
-          values={{ appName: installationName }}
-        />
-      </p>
-    );
-  };
-
   const uid = useUID();
 
   return (
@@ -137,7 +114,6 @@ export default function CreateUserForm({
           <LoginExternal settings={settings} dispatch={dispatch} />
         </>
       )}
-      {renderTermsAndConditions()}
       <p className="login-links">
         <button
           onClick={event => handleViewChange("account-login", event)}
