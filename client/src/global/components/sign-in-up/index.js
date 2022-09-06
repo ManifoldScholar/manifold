@@ -3,7 +3,7 @@ import Login from "./LoginForm";
 import Logout from "./Logout";
 import Oauth from "./oauth";
 import Overlay from "./Overlay";
-import PasswordForgot from "./PasswordForgot";
+import PasswordForgot from "./ForgotPasswordForm";
 import UpdateForm from "./EditProfileForm";
 import Interface from "./Interface";
 
