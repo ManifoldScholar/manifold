@@ -43,7 +43,7 @@ function getUserFromToken(token) {
   return Promise.reject();
 }
 
-function handleAuthenticationSuccess(
+export function handleAuthenticationSuccess(
   dispatch,
   options = { authToken: null, user: null, cookieHelper: null, setCookie: true }
 ) {
@@ -54,7 +54,7 @@ function handleAuthenticationSuccess(
   return Promise.resolve();
 }
 
-function handleAuthenticationFailure(
+export function handleAuthenticationFailure(
   dispatch,
   options = { status: 500, cookieHelper: null, destroyCookie: true }
 ) {
