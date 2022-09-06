@@ -14,7 +14,7 @@ class Logout extends Component {
   };
 
   static defaultProps = {
-    hideSignInUpOverlay: () => {}
+    hideOverlay: () => {}
   };
 
   handleLogout = event => {

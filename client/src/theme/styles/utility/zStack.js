@@ -5,8 +5,7 @@ export default `
     z-index: 700;
   }
 
-  .overlay-full,
-  .overlay-login {
+  .overlay-full {
     z-index: 600;
   }
 

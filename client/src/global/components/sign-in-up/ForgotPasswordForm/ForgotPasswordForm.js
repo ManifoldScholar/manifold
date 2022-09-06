@@ -7,10 +7,7 @@ import BaseHookForm from "../BaseHookForm";
 import { Input } from "../form-inputs";
 import { useNotification } from "hooks";
 
-export default function ForgotPasswordForm({
-  handleViewChange,
-  hideSignInUpOverlay
-}) {
+export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const { t } = useTranslation();
 
   const focusRef = useRef();
@@ -35,9 +32,9 @@ export default function ForgotPasswordForm({
   const onSuccess = useCallback(
     (res, data) => {
       notifySuccess(data.email);
-      if (hideSignInUpOverlay) hideSignInUpOverlay();
+      if (hideOverlay) hideOverlay();
     },
-    [hideSignInUpOverlay, notifySuccess]
+    [hideOverlay, notifySuccess]
   );
 
   const uid = useUID();
@@ -77,13 +74,13 @@ export default function ForgotPasswordForm({
       </BaseHookForm>
       <p className="login-links">
         <button
-          onClick={e => handleViewChange("account-login", e)}
+          onClick={e => handleViewChange("login", e)}
           data-id="show-login"
         >
           {t("forms.signin_overlay.remember_password")}
         </button>
         <button
-          onClick={e => handleViewChange("account-create", e)}
+          onClick={e => handleViewChange("terms", e)}
           data-id="show-create"
         >
           {t("forms.signin_overlay.need_account")}

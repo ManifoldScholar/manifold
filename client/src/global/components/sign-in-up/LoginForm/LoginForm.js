@@ -17,7 +17,7 @@ import { tokensAPI } from "api";
 
 export default function LoginForm({
   handleViewChange,
-  hideSignInUpOverlay,
+  hideOverlay,
   willRedirect
 }) {
   const { t } = useTranslation();
@@ -44,10 +44,10 @@ export default function LoginForm({
         user: res,
         setCookie: true
       }).then(() => {
-        if (hideSignInUpOverlay) hideSignInUpOverlay();
+        if (hideOverlay) hideOverlay();
       });
     },
-    [dispatch, hideSignInUpOverlay]
+    [dispatch, hideOverlay]
   );
 
   const onError = useCallback(
@@ -105,13 +105,13 @@ export default function LoginForm({
         </BaseHookForm>
         <p className="login-links">
           <button
-            onClick={e => handleViewChange("account-password-forgot", e)}
+            onClick={e => handleViewChange("password", e)}
             data-id="show-forgot"
           >
             {t("forms.signin_overlay.forgot_password")}
           </button>
           <button
-            onClick={e => handleViewChange("accept-terms", e)}
+            onClick={e => handleViewChange("terms", e)}
             data-id="show-create"
           >
             {t("forms.signin_overlay.need_account")}
