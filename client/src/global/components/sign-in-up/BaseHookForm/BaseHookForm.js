@@ -55,7 +55,7 @@ export default function BaseHookForm(props) {
         aria-labelledby={ariaLabelledBy}
         className={className}
       >
-        {children(errors)}
+        {children(errors, form)}
       </form>
     </FormProvider>
   );
