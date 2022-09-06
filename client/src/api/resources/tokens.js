@@ -22,5 +22,13 @@ export default {
         return json;
       });
     return results;
+  },
+
+  loginForm({ email, password }) {
+    return {
+      endpoint: "/api/v1/tokens",
+      method: "POST",
+      options: { params: { email, password } }
+    };
   }
 };

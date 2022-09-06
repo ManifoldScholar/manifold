@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import PasswordForgot from "./PasswordForgot";
-import Login from "./Login";
+import Login from "./LoginForm";
 import Logout from "./Logout";
 import Update from "./EditProfileForm";
 import Create from "./CreateUserForm";
