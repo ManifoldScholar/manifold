@@ -1,39 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import withSettings from "hoc/withSettings";
-import connectAndFetch from "utils/connectAndFetch";
 import withProjectContext from "hoc/withProjectContext";
 import SignInUp from "global/components/sign-in-up";
-import get from "lodash/get";
+import { useRouteMatch } from "react-router-dom";
+import * as Styled from "./styles";
 
-export class LoginContainer extends Component {
-  static mapStateToProps = state => {
-    return {
-      authentication: state.authentication,
-      routing: state.routing
-    };
-  };
+function LoginContainer({ projectBackLink }) {
+  const isSignUp = useRouteMatch("/signup");
 
-  render() {
-    return (
-      <section className="bg-neutral05">
-        {this.props.projectBackLink}
-        <div className="container login-page">
-          <div className="login-form">
-            <SignInUp.Interface
-              authentication={this.props.authentication}
-              showLogout
-              settings={this.props.settings}
-              dispatch={this.props.dispatch}
-              hash={get(this, "props.routing.locationBeforeTransitions.hash")}
-            />
-          </div>
-        </div>
-      </section>
-    );
-  }
+  return (
+    <Styled.Section className="bg-neutral05">
+      {projectBackLink}
+      <Styled.FormContainer className="container">
+        <SignInUp.Interface
+          showLogout
+          defaultView={isSignUp ? "terms" : "login"}
+        />
+      </Styled.FormContainer>
+    </Styled.Section>
+  );
 }
 
-export default connectAndFetch(
-  withSettings(withProjectContext(LoginContainer))
-);
+export default withProjectContext(LoginContainer);

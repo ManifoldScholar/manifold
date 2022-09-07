@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
+import { screenReaderText } from "theme/styles/mixins";
 
 export const Wrapper = styled.label`
   display: flex !important;
   gap: 11px;
   align-items: flex-start;
   margin-block-start: 40px;
-  margin-block-end: 36px;
+  margin-block-end: 10px;
 `;
 
 export const Checkbox = styled.div`
@@ -36,4 +37,12 @@ export const Label = styled.span`
   font-size: 18px;
   text-transform: none;
   color: var(--color-neutral-text-light);
+
+  .bg-neutral05 & {
+    color: var(--color-neutral-text-extra-dark);
+  }
+`;
+
+export const Input = styled.input`
+  ${screenReaderText}
 `;

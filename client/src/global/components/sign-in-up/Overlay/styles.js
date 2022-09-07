@@ -3,7 +3,6 @@ import {
   transparentize,
   defaultTransitionProps,
   respond,
-  loginFormPrimary,
   defaultFocusStyle,
   headerContainerPrimary,
   screenReaderText,
@@ -88,8 +87,6 @@ export const FormContainer = styled.div`
 
   ${respond(`padding-top: 35px;`, 40)}
   ${respond(`padding-top: 126px;`, 90)}
-
-  ${loginFormPrimary}
 
   .focusable-form {
     &:focus:not(.focus-visible) {

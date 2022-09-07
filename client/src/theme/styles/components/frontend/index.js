@@ -1,6 +1,5 @@
 import collecting from "./collecting";
 import layout from "./layout";
-import loginPage from "./loginPage";
 import page from "./page";
 import project from "./project";
 import resource from "./resource";
@@ -13,5 +12,4 @@ export default `
   ${project}
   ${text}
   ${resource}
-  ${loginPage}
 `;

@@ -83,12 +83,8 @@ export default function LoginForm({
             <>
               <Styled.Header>{t("forms.signin_overlay.log_in")}</Styled.Header>
               <LoginFormFields errors={errors} />
-              <Styled.SubmitWrapper>
-                {errors?.length ? (
-                  <Styled.Error>{errors[0]}</Styled.Error>
-                ) : null}
-                <Button type="submit" label="forms.signin_overlay.log_in" />
-              </Styled.SubmitWrapper>
+              {errors?.length ? <Styled.Error>{errors[0]}</Styled.Error> : null}
+              <Button type="submit" label="forms.signin_overlay.log_in" />
             </>
           )}
         </BaseHookForm>

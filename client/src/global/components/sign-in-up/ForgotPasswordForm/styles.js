@@ -24,6 +24,7 @@ export const ViewLink = styled.button`
   display: block;
   font-style: italic;
   text-decoration: underline;
+  font-family: var(--font-family-copy);
 
   & + & {
     margin-block-start: 14px;

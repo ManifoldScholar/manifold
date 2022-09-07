@@ -382,7 +382,7 @@ const routes = {
     {
       name: "frontendSignUp",
       exact: true,
-      component: "SignUp",
+      component: "Login",
       path: "/signup",
       helper: () => `/signup`
     },
