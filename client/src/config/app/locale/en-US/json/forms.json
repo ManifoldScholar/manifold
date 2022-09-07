@@ -218,10 +218,6 @@
       "title": "Privacy Settings",
       "instructions": "Edit your privacy settings.",
       "cookies": "Cookies",
-      "necessary_cookies": {
-        "label": "Neccessary Cookies",
-        "description": "authToken: stay logged in on returned visits"
-      },
       "internal_analytics": {
         "label": "Internal Analytics",
         "description": "VISIT_TOKEN & VISITOR_TOKEN for Manifold's anonymous internal analytics"
