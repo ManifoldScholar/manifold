@@ -12,10 +12,10 @@ export default function AcceptTerms({ handleViewChange }) {
   const settings = useFromStore("settings", "select");
 
   const installationName = settings?.attributes?.general?.installationName;
-  const termsPage = pages.find(
+  const termsPage = pages?.find(
     p => p.attributes.purpose === "terms_and_conditions"
   );
-  const privacyPolicy = pages.find(
+  const privacyPolicy = pages?.find(
     p => p.attributes.purpose === "privacy_policy"
   );
 

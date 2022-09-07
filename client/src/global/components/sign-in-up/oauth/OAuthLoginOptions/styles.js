@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  margin-top: 45px;
+  margin-block-start: 15px;
+
+  > * + * {
+    margin-block-start: 30px;
+  }
 `;

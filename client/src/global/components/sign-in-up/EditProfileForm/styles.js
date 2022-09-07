@@ -6,5 +6,5 @@ export const SRText = styled.h2`
 `;
 
 export const ButtonGroup = styled.div`
-  margin-block-start: 65px;
+  margin-block-start: 35px;
 `;

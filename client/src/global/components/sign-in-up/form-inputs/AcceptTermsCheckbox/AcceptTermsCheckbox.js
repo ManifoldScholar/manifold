@@ -8,12 +8,7 @@ export default function AcceptCheckbox({ label, onChange }) {
 
   return (
     <Styled.Wrapper htmlFor={uid}>
-      <input
-        id={uid}
-        type="checkbox"
-        onChange={onChange}
-        className="screen-reader-text"
-      />
+      <Styled.Input id={uid} type="checkbox" onChange={onChange} />
       <Styled.Checkbox>
         <IconComposer icon="checkmark16" size={16} />
       </Styled.Checkbox>
