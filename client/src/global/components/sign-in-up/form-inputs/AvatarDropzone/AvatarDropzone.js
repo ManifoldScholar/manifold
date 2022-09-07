@@ -2,10 +2,10 @@ import React from "react";
 import Form from "global/components/form";
 import Dropzone from "react-dropzone";
 import IconComposer from "global/components/utility/IconComposer";
-import Avatar from "global/components/avatar";
 import { useTranslation, Trans } from "react-i18next";
 import { useFormContext } from "react-hook-form";
 import { useUID } from "react-uid";
+import * as Styled from "./styles";
 
 export default function AvatarDropzone({ errors }) {
   const { t } = useTranslation();
@@ -44,30 +44,28 @@ export default function AvatarDropzone({ errors }) {
   };
 
   return __BROWSER__ ? (
-    <div className="row-1-p">
+    <Styled.Wrapper>
       {showAvatar ? null : (
-        <p className="overlay-copy">
+        <Styled.Instructions>
           {t("forms.signin_overlay.profile_img_instructions")}
-        </p>
+        </Styled.Instructions>
       )}
       <Form.Errorable
-        className="form-input"
         idForError="avatar-error"
         name="attributes.avatar"
         errors={errors}
       >
-        <label htmlFor="avatar-update" className="screen-reader-text">
+        <Styled.SRText htmlFor="avatar-update">
           {t("forms.signin_overlay.profile_img")}
-        </label>
+        </Styled.SRText>
         <Dropzone onDrop={handleDrop}>
           {({ getRootProps, getInputProps }) => (
-            <div
+            <Styled.Dropzone
               {...getRootProps({
-                className: "form-dropzone",
                 tabIndex: null
               })}
             >
-              <input
+              <Styled.DropzoneInput
                 {...getInputProps({
                   accept: "image/*",
                   multiple: false,
@@ -76,47 +74,29 @@ export default function AvatarDropzone({ errors }) {
                   tabIndex: 0
                 })}
               />
-              <div
-                style={{ position: "relative" }}
-                className="dropzone-button dropzone-button-dotted"
-              >
-                <div
-                  style={{
-                    top: "50%",
-                    marginTop: -33,
-                    height: 66,
-                    width: 66,
-                    position: "absolute"
-                  }}
-                >
+              <Styled.DropzoneOutline>
+                <Styled.RemoveWrapper>
                   {showAvatar && (
-                    <button
-                      type="button"
-                      onClick={removeAvatar}
-                      tabIndex="0"
-                      className="dropzone-button__cancel-button"
-                    >
+                    <Styled.RemoveButton type="button" onClick={removeAvatar}>
                       <IconComposer icon="close16" size="default" />
-                      <span className="screen-reader-text">
+                      <Styled.SRText as="span">
                         {t("forms.signin_overlay.remove_avatar")}
-                      </span>
-                    </button>
+                      </Styled.SRText>
+                    </Styled.RemoveButton>
                   )}
-                  <Avatar style={{ margin: 0 }} url={avatarUrl} />
-                </div>
-                <span className="dropzone-button__text">
+                  <Styled.Avatar url={avatarUrl} />
+                </Styled.RemoveWrapper>
+                <Styled.DropzonePrompt>
                   <Trans
                     i18nKey="forms.signin_overlay.upload_avatar_instructions"
-                    components={[
-                      <span className="form-dropzone__upload-prompt" />
-                    ]}
+                    components={[<Styled.UploadLink />]}
                   />
-                </span>
-              </div>
-            </div>
+                </Styled.DropzonePrompt>
+              </Styled.DropzoneOutline>
+            </Styled.Dropzone>
           )}
         </Dropzone>
       </Form.Errorable>
-    </div>
+    </Styled.Wrapper>
   ) : null;
 }
