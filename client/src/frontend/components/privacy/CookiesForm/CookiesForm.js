@@ -19,11 +19,7 @@ export default function CookiesForm() {
     }
   };
 
-  const cookieTypes = [
-    "necessaryCookies",
-    "internalAnalytics",
-    "googleAnalytics"
-  ];
+  const cookieTypes = ["internalAnalytics", "googleAnalytics"];
 
   return (
     <div style={{ marginBlockEnd: "75px" }}>
