@@ -33,16 +33,16 @@ export const Dialog = styled.div`
     text-decoration: underline;
   }
 
-  &.overlay-full-enter {
+  .overlay-full-enter > & {
     opacity: 0;
   }
 
-  &.overlay-full-enter-active {
+  .overlay-full-enter-active > & {
     opacity: 1;
     transition: opacity ${defaultTransitionProps};
   }
 
-  &.overlay-full-exit {
+  .overlay-full-exit > & {
     opacity: 0;
     transition: opacity ${defaultTransitionProps};
   }
@@ -50,8 +50,8 @@ export const Dialog = styled.div`
 
 export const Header = styled.div`
   position: fixed;
-  z-index: 5;
   width: 100%;
+  z-index: 601;
 `;
 
 export const HeaderInner = styled.div`
@@ -69,7 +69,6 @@ export const Content = styled.div`
   position: absolute;
   top: 80px;
   bottom: 0;
-  z-index: 0;
   width: 100%;
   overflow: auto;
 
