@@ -36,7 +36,7 @@ export default function Monitor() {
   }, [dispatch, oauth]);
 
   return oauth?.errors?.length ? (
-    <ul role="alert">
+    <ul>
       {oauth.errors.map(error => (
         <li key={error}>{error}</li>
       ))}
