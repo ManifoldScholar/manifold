@@ -91,12 +91,6 @@ export const FormContainer = styled.div`
 
   ${loginFormPrimary}
 
-  input[type='text'],
-  input[type='password'],
-  input[type='submit'] {
-    width: 100%;
-  }
-
   .focusable-form {
     &:focus:not(.focus-visible) {
       outline: 0;
