@@ -11,20 +11,25 @@ export default function Button({
   onClick,
   type = "button",
   styleType = "fill",
-  disabled
+  disabled,
+  className
 }) {
   const { t } = useTranslation();
 
-  const className = classNames("button-secondary", {
-    "button-secondary--outlined button-secondary--color-white":
-      styleType === "outline",
-    "button-secondary--with-room": styleType === "fill",
-    "button-secondary--dark": styleType === "dark"
-  });
+  const classes = classNames(
+    "button-secondary",
+    {
+      "button-secondary--outlined button-secondary--color-white":
+        styleType === "outline",
+      "button-secondary--with-room": styleType === "fill",
+      "button-secondary--dark": styleType === "dark"
+    },
+    className
+  );
 
   return (
     <button
-      className={className}
+      className={classes}
       style={{ width: "100%" }}
       onClick={typeof onClick === "function" ? onClick : undefined}
       type={type}
