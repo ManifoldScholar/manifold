@@ -40,7 +40,8 @@ export default function SignInUpInterface({
       if (showLogout && view !== "logout") {
         return setView("logout");
       }
-      if (willRedirect || view !== "create-update") {
+      /* This condition isn't quite right. Figure out what it's trying to do. */
+      if (willRedirect && view !== "create-update") {
         if (hideOverlay) hideOverlay();
       }
     }
