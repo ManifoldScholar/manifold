@@ -11,10 +11,10 @@ import * as Styled from "./styles";
 export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const { t } = useTranslation();
 
-  const focusRef = useRef();
+  const formRef = useRef();
 
   useEffect(() => {
-    if (focusRef.current) focusRef.current.focus();
+    if (formRef.current) formRef.current.focus();
   }, []);
 
   const notifySuccess = useNotification(email => ({
@@ -41,8 +41,9 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const uid = useUID();
 
   return (
-    <div ref={el => (focusRef.current = el)} tabIndex={-1}>
+    <div>
       <BaseHookForm
+        ref={formRef}
         apiMethod={passwordsAPI.create}
         ariaLabelledBy={uid}
         onSuccess={onSuccess}

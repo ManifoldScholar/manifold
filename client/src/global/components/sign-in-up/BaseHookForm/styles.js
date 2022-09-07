@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import { defaultFocusStyle } from "theme/styles/mixins";
 
 export const Form = styled.form`
-  &.focus-visible {
+  &:focus-visible,
+  &:focus {
     ${defaultFocusStyle}
     outline-offset: 5px;
   }
