@@ -49,12 +49,6 @@ export const loginFormPrimary = `
     ${inputLabelPrimary}
   }
 
-  input[type="text"],
-  input[type="password"],
-  input[type="email"] {
-    ${inputPrimary}
-  }
-
   .button-secondary {
     display: flex;
     margin-top: 30px;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useApiCallback } from "hooks";
+import * as Styled from "./styles";
 
 export default function BaseHookForm(props) {
   const {
@@ -49,14 +50,14 @@ export default function BaseHookForm(props) {
 
   return (
     <FormProvider {...form}>
-      <form
+      <Styled.Form
         onSubmit={handleSubmit(onSubmitWithRequest)}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
         className={className}
       >
         {children(errors, form)}
-      </form>
+      </Styled.Form>
     </FormProvider>
   );
 }

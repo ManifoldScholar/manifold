@@ -10,6 +10,7 @@ import { useFromStore, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import { useUID } from "react-uid";
 import BaseHookForm from "../BaseHookForm";
+import * as Styled from "./styles";
 
 export default function EditProfileForm({ hideOverlay, mode }) {
   const authentication = useFromStore("authentication");
@@ -67,11 +68,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   };
 
   return userId ? (
-    <div
-      ref={el => (focusRef.current = el)}
-      tabIndex={-1}
-      className="sign-in-up-update"
-    >
+    <div ref={el => (focusRef.current = el)} tabIndex={-1}>
       <BaseHookForm
         defaultValues={defaultValues}
         formatData={formatAttributes}
@@ -83,22 +80,18 @@ export default function EditProfileForm({ hideOverlay, mode }) {
         {errors => (
           <>
             <Greeting mode={mode} defaultNickname={nickname ?? firstName} />
-            <h2 id={uid} className="screen-reader-text">
+            <Styled.SRText id={uid}>
               {t("forms.signin_overlay.update_sr_title")}
-            </h2>
+            </Styled.SRText>
             <ProfileFormFields errors={errors} />
-            <div className="row-1-p">
-              <div className="form-input">
-                <Button
-                  type="submit"
-                  label="forms.signin_overlay.submit_update_label"
-                />
-              </div>
-            </div>
+            <Button
+              type="submit"
+              label="forms.signin_overlay.submit_update_label"
+            />
           </>
         )}
       </BaseHookForm>
-      <div style={{ marginTop: "65px" }}>
+      <Styled.ButtonGroup>
         <Button
           styleType="outline"
           onClick={redirect("subscriptions")}
@@ -109,7 +102,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
           onClick={redirect("privacy")}
           label="Privacy Settings"
         />
-      </div>
+      </Styled.ButtonGroup>
     </div>
   ) : null;
 }

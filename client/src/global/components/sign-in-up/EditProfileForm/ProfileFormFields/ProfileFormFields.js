@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Input, AvatarDropzone } from "../../form-inputs";
 import { useFormContext } from "react-hook-form";
+import * as Styled from "./styles";
 
 export default function ProfileFormFields({ errors }) {
   const { t } = useTranslation();
@@ -9,21 +10,17 @@ export default function ProfileFormFields({ errors }) {
   const { register } = useFormContext();
 
   return (
-    <div className="row-1-p">
-      <p className="overlay-copy">
-        {t("forms.signin_overlay.update_nickname")}
-      </p>
-      <div className="row-1-p">
-        <Input
-          errors={errors}
-          ariaLabel="update nickname"
-          placeholder="forms.signin_overlay.nickname"
-          {...register("nickname")}
-        />
-      </div>
+    <Styled.Group>
+      <Styled.Text>{t("forms.signin_overlay.update_nickname")}</Styled.Text>
+      <Input
+        errors={errors}
+        ariaLabel="update nickname"
+        placeholder="forms.signin_overlay.nickname"
+        {...register("nickname")}
+      />
       <AvatarDropzone errors={errors} />
-      <div className="row-1-p">
-        <p className="overlay-copy">{t("forms.signin_overlay.edit_account")}</p>
+      <Styled.Group>
+        <Styled.Text>{t("forms.signin_overlay.edit_account")}</Styled.Text>
         <Input
           label="forms.signin_overlay.first_name"
           errors={errors}
@@ -56,7 +53,7 @@ export default function ProfileFormFields({ errors }) {
           placeholder="forms.signin_overlay.confirm_new_password"
           {...register("passwordConfirmation")}
         />
-      </div>
-    </div>
+      </Styled.Group>
+    </Styled.Group>
   );
 }
