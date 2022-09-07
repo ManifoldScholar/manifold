@@ -13,6 +13,7 @@ import {
 import LoginFormFields from "./LoginFormFields";
 import { Button } from "../form-inputs";
 import { tokensAPI } from "api";
+import * as Styled from "./styles";
 
 export default function LoginForm({
   handleViewChange,
@@ -63,13 +64,13 @@ export default function LoginForm({
   return (
     <div>
       {willRedirect && (
-        <div style={{ marginBottom: 25 }}>
+        <Styled.NotificationsWrapper>
           <Notifications
             scope="authentication"
             style="drawer"
             animate={false}
           />
-        </div>
+        </Styled.NotificationsWrapper>
       )}
       <div ref={el => (focusRef.current = el)} tabIndex={-1}>
         <BaseHookForm
@@ -80,41 +81,25 @@ export default function LoginForm({
         >
           {errors => (
             <>
-              <h2 id={uid} className="form-heading">
-                {t("forms.signin_overlay.log_in")}
-              </h2>
+              <Styled.Header>{t("forms.signin_overlay.log_in")}</Styled.Header>
               <LoginFormFields errors={errors} />
-              <div className="row-1-p">
-                <div className={errors?.length ? "form-error" : "form-input"}>
-                  {errors?.length ? (
-                    <span
-                      style={{ marginTop: 0 }}
-                      role="alert"
-                      className="error"
-                    >
-                      {errors[0]}
-                    </span>
-                  ) : null}
-                  <Button type="submit" label="forms.signin_overlay.log_in" />
-                </div>
-              </div>
+              <Styled.SubmitWrapper>
+                {errors?.length ? (
+                  <Styled.Error>{errors[0]}</Styled.Error>
+                ) : null}
+                <Button type="submit" label="forms.signin_overlay.log_in" />
+              </Styled.SubmitWrapper>
             </>
           )}
         </BaseHookForm>
-        <p className="login-links">
-          <button
-            onClick={e => handleViewChange("password", e)}
-            data-id="show-forgot"
-          >
+        <Styled.LinksWrapper>
+          <Styled.ViewLink onClick={e => handleViewChange("password", e)}>
             {t("forms.signin_overlay.forgot_password")}
-          </button>
-          <button
-            onClick={e => handleViewChange("terms", e)}
-            data-id="show-create"
-          >
+          </Styled.ViewLink>
+          <Styled.ViewLink onClick={e => handleViewChange("terms", e)}>
             {t("forms.signin_overlay.need_account")}
-          </button>
-        </p>
+          </Styled.ViewLink>
+        </Styled.LinksWrapper>
         <OAuthOptions />
       </div>
     </div>
