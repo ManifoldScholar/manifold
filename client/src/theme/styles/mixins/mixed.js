@@ -40,10 +40,6 @@ export const loginFormPrimary = `
     }
   }
 
-  .login-external {
-    margin-top: 45px;
-  }
-
   .button-secondary--dark {
     display: flex;
     width: 100%;

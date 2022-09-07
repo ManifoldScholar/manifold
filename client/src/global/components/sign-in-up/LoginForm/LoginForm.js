@@ -1,11 +1,10 @@
 import React, { useRef, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import LoginExternal from "../LoginExternal";
+import OAuthOptions from "../oauth/OAuthLoginOptions";
 import Notifications from "global/containers/Notifications";
 import { useUID } from "react-uid";
 import { useDispatch } from "react-redux";
-import { useFromStore } from "hooks";
 import BaseHookForm from "../BaseHookForm";
 import {
   handleAuthenticationSuccess,
@@ -22,7 +21,6 @@ export default function LoginForm({
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const settings = useFromStore("settings", "select");
 
   const focusRef = useRef();
 
@@ -117,7 +115,7 @@ export default function LoginForm({
             {t("forms.signin_overlay.need_account")}
           </button>
         </p>
-        <LoginExternal settings={settings} dispatch={dispatch} />
+        <OAuthOptions />
       </div>
     </div>
   );
