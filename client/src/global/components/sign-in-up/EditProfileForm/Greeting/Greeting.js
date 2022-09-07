@@ -1,6 +1,7 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import { useFormContext } from "react-hook-form";
+import * as Styled from "./styles";
 
 export default function ProfileGreeting({ mode, defaultNickname }) {
   const { watch } = useFormContext();
@@ -10,19 +11,19 @@ export default function ProfileGreeting({ mode, defaultNickname }) {
     <Trans
       i18nKey="forms.signin_overlay.create_success_message"
       components={[
-        <h4 className="form-heading" />,
-        <p className="overlay-copy" />,
-        <h4 className="nickname" />
+        <Styled.Heading />,
+        <Styled.Text />,
+        <Styled.Nickname as="h4" />
       ]}
       values={{ name: nickname }}
     />
   ) : (
-    <h4 className="form-heading">
+    <Styled.Heading>
       <Trans
         i18nKey="forms.signin_overlay.greeting"
-        components={[<span className="nickname" />]}
+        components={[<Styled.Nickname />]}
         values={{ name: nickname }}
       />
-    </h4>
+    </Styled.Heading>
   );
 }

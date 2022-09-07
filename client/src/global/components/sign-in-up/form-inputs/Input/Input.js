@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import { useUID } from "react-uid";
+import * as Styled from "./styles";
 
 function Input(props, ref) {
   const {
@@ -20,14 +20,13 @@ function Input(props, ref) {
   const errorId = `${name}_error`;
 
   return (
-    <Form.Errorable
-      className="form-input"
+    <Styled.Field
       name={`attributes.${name}`}
       errors={errors}
       idForError={errorId}
     >
-      {label && <label htmlFor={id}>{t(label)}</label>}
-      <input
+      {label && <Styled.Label htmlFor={id}>{t(label)}</Styled.Label>}
+      <Styled.Input
         id={id}
         ref={ref}
         type={type}
@@ -37,7 +36,7 @@ function Input(props, ref) {
         placeholder={placeholder && t(placeholder)}
         {...inputProps}
       />
-    </Form.Errorable>
+    </Styled.Field>
   );
 }
 
