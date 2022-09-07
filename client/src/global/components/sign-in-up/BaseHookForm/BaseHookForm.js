@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, forwardRef } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useApiCallback } from "hooks";
 import * as Styled from "./styles";
 
-export default function BaseHookForm(props) {
+const BaseHookForm = forwardRef((props, ref) => {
   const {
     defaultValues,
     formatData,
@@ -51,6 +51,8 @@ export default function BaseHookForm(props) {
   return (
     <FormProvider {...form}>
       <Styled.Form
+        ref={ref}
+        tabIndex={-1}
         onSubmit={handleSubmit(onSubmitWithRequest)}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
@@ -60,4 +62,6 @@ export default function BaseHookForm(props) {
       </Styled.Form>
     </FormProvider>
   );
-}
+});
+
+export default BaseHookForm;
