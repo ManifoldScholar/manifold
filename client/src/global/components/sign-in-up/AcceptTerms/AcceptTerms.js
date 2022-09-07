@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { Button, AcceptTermsCheckbox } from "../form-inputs";
+import { AcceptTermsCheckbox } from "../form-inputs";
 import { useFromStore } from "hooks";
 import { Link } from "react-router-dom";
+import * as Styled from "./styles";
 
 export default function AcceptTerms({ handleViewChange }) {
   const [accepted, setAccepted] = useState(false);
@@ -38,34 +39,27 @@ export default function AcceptTerms({ handleViewChange }) {
   );
 
   return (
-    <div>
-      <h2 className="form-heading">{t("forms.signin_overlay.terms_header")}</h2>
-      <p className="row-1-p">
+    <>
+      <Styled.Header>{t("forms.signin_overlay.terms_header")}</Styled.Header>
+      <Styled.TextBlock>
         Use this area to describe how Manifold uses your data. Nulla porttitor
         accumsan tincidunt. Vivamus magna justo, lacinia eget consectetur sed,
         convallis at tellus.
-      </p>
-      <p className="row-1-p">
+      </Styled.TextBlock>
+      <Styled.TextBlock>
         Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
         Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo
         eget malesuada.
-      </p>
-      <div className="row-1-p">
-        <AcceptTermsCheckbox
-          onChange={() => setAccepted(!accepted)}
-          label={checkboxLabel}
-        />
-      </div>
-      <div className="row-1-p">
-        <div className="form-input">
-          <Button
-            type="button"
-            label={t("actions.continue")}
-            disabled={!accepted}
-            onClick={() => handleViewChange("create")}
-          />
-        </div>
-      </div>
-    </div>
+      </Styled.TextBlock>
+      <AcceptTermsCheckbox
+        onChange={() => setAccepted(!accepted)}
+        label={checkboxLabel}
+      />
+      <Styled.Button
+        label={t("actions.continue")}
+        disabled={!accepted}
+        onClick={() => handleViewChange("create")}
+      />
+    </>
   );
 }
