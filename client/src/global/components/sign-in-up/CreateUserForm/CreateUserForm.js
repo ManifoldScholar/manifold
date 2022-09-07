@@ -26,10 +26,10 @@ export default function CreateUserForm({
 
   const installationName = settings?.attributes?.general?.installationName;
 
-  const focusRef = useRef();
+  const formRef = useRef();
 
   useEffect(() => {
-    if (focusRef.current) focusRef.current.focus();
+    if (formRef.current) formRef.current.focus();
   }, []);
 
   const OAuthProviderNames = () => {
@@ -79,8 +79,9 @@ export default function CreateUserForm({
   const uid = useUID();
 
   return (
-    <div ref={el => (focusRef.current = el)} tabIndex={-1}>
+    <>
       <BaseHookForm
+        ref={formRef}
         apiMethod={usersAPI.create}
         formatData={formatAttributes}
         onSuccess={onSuccess}
@@ -115,6 +116,6 @@ export default function CreateUserForm({
           {t("forms.signin_overlay.have_account")}
         </Styled.ViewLink>
       </Styled.LinksWrapper>
-    </div>
+    </>
   );
 }

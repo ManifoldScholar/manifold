@@ -23,10 +23,10 @@ export default function LoginForm({
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const focusRef = useRef();
+  const formRef = useRef();
 
   useEffect(() => {
-    if (focusRef.current) focusRef.current.focus();
+    if (formRef.current) formRef.current.focus();
   }, []);
 
   const onSuccess = useCallback(
@@ -72,8 +72,9 @@ export default function LoginForm({
           />
         </Styled.NotificationsWrapper>
       )}
-      <div ref={el => (focusRef.current = el)} tabIndex={-1}>
+      <div>
         <BaseHookForm
+          ref={formRef}
           apiMethod={tokensAPI.loginForm}
           onSuccess={onSuccess}
           onError={onError}

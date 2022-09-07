@@ -38,10 +38,10 @@ export default function EditProfileForm({ hideOverlay, mode }) {
     removeAvatar: false
   };
 
-  const focusRef = useRef();
+  const formRef = useRef();
 
   useEffect(() => {
-    if (focusRef.current) focusRef.current.focus();
+    if (formRef.current) formRef.current.focus();
   }, []);
 
   const notifyUpdate = useNotification(() => ({
@@ -68,8 +68,9 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   };
 
   return userId ? (
-    <div ref={el => (focusRef.current = el)} tabIndex={-1}>
+    <div>
       <BaseHookForm
+        ref={formRef}
         defaultValues={defaultValues}
         formatData={formatAttributes}
         ariaLabelledBy={uid}
