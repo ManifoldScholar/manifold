@@ -6,6 +6,7 @@ import { useUID } from "react-uid";
 import BaseHookForm from "../BaseHookForm";
 import { Input } from "../form-inputs";
 import { useNotification } from "hooks";
+import * as Styled from "./styles";
 
 export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const { t } = useTranslation();
@@ -49,43 +50,30 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
       >
         {(errors, { register }) => (
           <>
-            <h2 id={uid} className="form-heading">
+            <Styled.Header id={uid}>
               {t("forms.signin_overlay.reset_password")}
-            </h2>
-            <div className="row-1-p">
-              <Input
-                label="forms.signin_overlay.email"
-                errors={errors}
-                placeholder="forms.signin_overlay.email"
-                {...register("email")}
-              />
-            </div>
-            <div className="row-1-p">
-              <div className="form-input">
-                <input
-                  className="button-secondary button-secondary--with-room"
-                  type="submit"
-                  value={t("forms.signin_overlay.send_password_reset")}
-                />
-              </div>
-            </div>
+            </Styled.Header>
+            <Input
+              label="forms.signin_overlay.email"
+              errors={errors}
+              placeholder="forms.signin_overlay.email"
+              {...register("email")}
+            />
+            <Styled.Button
+              type="submit"
+              label="forms.signin_overlay.send_password_reset"
+            />
           </>
         )}
       </BaseHookForm>
-      <p className="login-links">
-        <button
-          onClick={e => handleViewChange("login", e)}
-          data-id="show-login"
-        >
+      <Styled.LinksWrapper>
+        <Styled.ViewLink onClick={e => handleViewChange("login", e)}>
           {t("forms.signin_overlay.remember_password")}
-        </button>
-        <button
-          onClick={e => handleViewChange("terms", e)}
-          data-id="show-create"
-        >
+        </Styled.ViewLink>
+        <Styled.ViewLink onClick={e => handleViewChange("terms", e)}>
           {t("forms.signin_overlay.need_account")}
-        </button>
-      </p>
+        </Styled.ViewLink>
+      </Styled.LinksWrapper>
     </div>
   );
 }
