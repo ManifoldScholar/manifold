@@ -27,7 +27,6 @@ import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
 import ReadingGroupAnnotations from "frontend/containers/ReadingGroup/Annotations";
 import ReadingGroupHomepage from "frontend/containers/ReadingGroup/Homepage";
 import Login from "frontend/containers/Login";
-import SignUp from "frontend/containers/SignUp";
 import MyStarred from "frontend/containers/MyStarred";
 import MyAnnotations from "frontend/containers/MyAnnotations";
 import IssuesList from "frontend/containers/IssuesList";
@@ -87,7 +86,6 @@ export default {
   ReadingGroupHomepageEdit: ReadingGroupHomepage.Edit,
   ReadingGroupHomepageFetch: ReadingGroupHomepage.Fetch,
   Login,
-  SignUp,
   MyStarred,
   MyAnnotations,
   PrivacySettings,

@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 export default function Button({
   icon,
@@ -21,16 +22,14 @@ export default function Button({
     {
       "button-secondary--outlined button-secondary--color-white":
         styleType === "outline",
-      "button-secondary--with-room": styleType === "fill",
       "button-secondary--dark": styleType === "dark"
     },
     className
   );
 
   return (
-    <button
+    <Styled.Button
       className={classes}
-      style={{ width: "100%" }}
       onClick={typeof onClick === "function" ? onClick : undefined}
       type={type}
       aria-disabled={disabled}
@@ -51,6 +50,6 @@ export default function Button({
           className="button-secondary__icon"
         />
       )}
-    </button>
+    </Styled.Button>
   );
 }

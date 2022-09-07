@@ -6,10 +6,6 @@ export const Header = styled.h2`
   margin-block-end: 25px;
 `;
 
-export const SubmitWrapper = styled.div`
-  margin-block-start: 30px;
-`;
-
 export const LinksWrapper = styled.div`
   margin-block-start: 25px;
 `;
@@ -19,6 +15,7 @@ export const ViewLink = styled.button`
   display: block;
   font-style: italic;
   text-decoration: underline;
+  font-family: var(--font-family-copy);
 
   & + & {
     margin-block-start: 14px;
@@ -36,7 +33,7 @@ export const Error = styled.span`
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.05em;
   display: inline-block;
-  margin-top: 0;
+  margin-block-start: 30px;
   color: var(--error-color);
 `;
 
