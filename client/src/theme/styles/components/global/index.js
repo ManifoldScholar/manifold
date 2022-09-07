@@ -18,7 +18,6 @@ import paginationCount from "./paginationCount";
 import search from "./search";
 import sectionHeading from "./sectionHeading";
 import sectionHeadingSecondary from "./sectionHeadingSecondary";
-import signInUpUpdate from "./signInUpUpdate";
 import shareNavPrimary from "./shareNavPrimary";
 import skipToMain from "./skipToMain";
 import table from "./table";
@@ -46,7 +45,6 @@ export default `
   ${search}
   ${nestedNav}
   ${skipToMain}
-  ${signInUpUpdate}
   ${table}
   ${paginationCount}
   ${annotation}
