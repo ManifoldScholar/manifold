@@ -6,12 +6,12 @@ import { currentUserActions } from "actions";
 import capitalize from "lodash/capitalize";
 import OAuthOptions from "../oauth/OAuthLoginOptions";
 import { useFromStore } from "hooks";
-import { Button } from "../form-inputs";
 import { useUID } from "react-uid";
 import CreateFormFields from "./CreateFormFields";
 import BaseHookForm from "../BaseHookForm";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
+import * as Styled from "./styles";
 
 export default function CreateUserForm({
   handleViewChange,
@@ -88,40 +88,33 @@ export default function CreateUserForm({
       >
         {errors => (
           <>
-            <h2 id={uid} className="form-heading">
+            <Styled.Header>
               {t("forms.signin_overlay.create_account")}
-            </h2>
+            </Styled.Header>
             <CreateFormFields errors={errors} />
-            <div className="row-1-p">
-              <div className="form-input">
-                <Button
-                  type="submit"
-                  label={t("forms.signin_overlay.create_account")}
-                />
-              </div>
-            </div>
+            <Styled.Button
+              type="submit"
+              label={t("forms.signin_overlay.create_account")}
+            />
           </>
         )}
       </BaseHookForm>
       {settings?.attributes?.oauth && (
         <>
-          <p className="login-links">
+          <Styled.LinksWrapper>
             {t("forms.signin_overlay.oauth_instructions", {
               appName: installationName,
               providers: OAuthProviderNames()
             })}
-          </p>
+          </Styled.LinksWrapper>
           <OAuthOptions />
         </>
       )}
-      <p className="login-links">
-        <button
-          onClick={event => handleViewChange("login", event)}
-          data-id="show-login"
-        >
+      <Styled.LinksWrapper>
+        <Styled.ViewLink onClick={event => handleViewChange("login", event)}>
           {t("forms.signin_overlay.have_account")}
-        </button>
-      </p>
+        </Styled.ViewLink>
+      </Styled.LinksWrapper>
     </div>
   );
 }

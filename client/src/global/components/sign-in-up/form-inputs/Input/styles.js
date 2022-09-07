@@ -25,6 +25,6 @@ export const Label = styled.label`
 
 export const Field = styled(Form.Errorable)`
   & + & {
-    margin-block-start: 40px;
+    margin-block-start: 30px;
   }
 `;
