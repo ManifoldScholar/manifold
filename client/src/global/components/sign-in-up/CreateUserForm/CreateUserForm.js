@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { usersAPI } from "api";
 import { currentUserActions } from "actions";
 import capitalize from "lodash/capitalize";
-import LoginExternal from "../LoginExternal";
+import OAuthOptions from "../oauth/OAuthLoginOptions";
 import { useFromStore } from "hooks";
 import { Button } from "../form-inputs";
 import { useUID } from "react-uid";
@@ -111,7 +111,7 @@ export default function CreateUserForm({
               providers: OAuthProviderNames()
             })}
           </p>
-          <LoginExternal settings={settings} dispatch={dispatch} />
+          <OAuthOptions />
         </>
       )}
       <p className="login-links">

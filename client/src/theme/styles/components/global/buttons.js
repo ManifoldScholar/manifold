@@ -573,12 +573,6 @@ export default `
     ${buttonTrimPrimary}
   }
 
-  .login-external {
-    .button-secondary--dark + .button-secondary--dark {
-      margin-top: 21px;
-    }
-  }
-
   .close-button-primary {
     font-size: 15px;
     color: var(--color-base-neutral50);

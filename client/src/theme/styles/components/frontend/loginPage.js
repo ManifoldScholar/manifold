@@ -36,15 +36,6 @@ export default `
       margin-top: 25px;
     }
 
-    .login-external {
-      margin-top: 45px;
-
-      .button-secondary--dark {
-        display: block;
-        width: 100%;
-      }
-    }
-
     .login-notice {
       margin-bottom: 35px;
       font-size: var(--font-size-60);

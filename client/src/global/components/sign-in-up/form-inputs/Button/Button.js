@@ -5,6 +5,8 @@ import IconComposer from "global/components/utility/IconComposer";
 
 export default function Button({
   icon,
+  iconSize = "default",
+  iconLeft = false,
   label,
   onClick,
   type = "button",
@@ -16,7 +18,8 @@ export default function Button({
   const className = classNames("button-secondary", {
     "button-secondary--outlined button-secondary--color-white":
       styleType === "outline",
-    "button-secondary--with-room": styleType === "fill"
+    "button-secondary--with-room": styleType === "fill",
+    "button-secondary--dark": styleType === "dark"
   });
 
   return (
@@ -28,11 +31,18 @@ export default function Button({
       aria-disabled={disabled}
       disabled={disabled}
     >
-      <span className="button-secondary__text">{t(label)}</span>
-      {icon && (
+      {iconLeft && (
         <IconComposer
           icon={icon}
-          size="default"
+          size={iconSize}
+          className="button-secondary__icon"
+        />
+      )}
+      <span className="button-secondary__text">{t(label)}</span>
+      {!iconLeft && icon && (
+        <IconComposer
+          icon={icon}
+          size={iconSize}
           className="button-secondary__icon"
         />
       )}
