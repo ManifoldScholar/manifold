@@ -9,12 +9,7 @@ import {
 
 export const Fieldset = styled.fieldset`
   padding: 0;
-  margin: 0;
   border: none;
-
-  & + & {
-    margin-block-start: 50px;
-  }
 `;
 
 export const Instructions = styled.span`
