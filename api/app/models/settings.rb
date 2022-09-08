@@ -96,7 +96,8 @@ class Settings < ApplicationRecord
       has_visible_projects: Project.with_read_ability(current_user).exists?,
       has_visible_journals: Journal.with_read_ability(current_user).exists?,
       has_project_collections: ProjectCollection.count.positive?,
-      manifold_version: self.class.manifold_version
+      manifold_version: self.class.manifold_version,
+      require_terms_and_conditions: Page.by_purpose(:terms_and_conditions).exists?
     }
   end
 
@@ -130,6 +131,18 @@ class Settings < ApplicationRecord
     # @return [Gem::Version]
     def manifold_version
       @manifold_version ||= SettingsService::ReadManifoldVersion.run!
+    end
+
+    def require_terms_and_conditions?
+      instance.calculated[:require_terms_and_conditions]
+    end
+
+    def google_analytics_enabled?
+      instance[:integrations]["ga_tracking_id"].present?
+    end
+
+    def manifold_analytics_enabled?
+      instance[:integrations]["ga_tracking_id"]["disable_internal_analytics"] != true
     end
 
     def update_from_environment?
