@@ -86,11 +86,14 @@ module V1
     ).meta(read_only: true)
     typed_attribute :copyright_formatted, Types::String.meta(read_only: true)
     typed_attribute :calculated, Types::Hash.schema(
-      hasVisibleHomeProjectCollections: Types::Bool,
-      hasVisibleProjects: Types::Bool,
-      hasVisibleJournals: Types::Bool,
-      hasProjectCollections: Types::Bool,
-      manifoldVersion: Types::Hash.schema(
+      has_visible_home_project_collections: Types::Bool,
+      has_visible_projects: Types::Bool,
+      has_visible_journals: Types::Bool,
+      has_project_collections: Types::Bool,
+      require_terms_and_conditions: Types::Bool,
+      google_analytics_enabled: Types::Bool,
+      manifold_analytics_enabled: Types::Bool,
+      manifold_version: Types::Hash.schema(
         version: Types::String,
         segments: Types::Array.of(Types::Integer).optional.meta(
           description: "An array of integers representing the major, minor and patch version. "\

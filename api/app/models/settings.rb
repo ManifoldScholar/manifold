@@ -97,7 +97,9 @@ class Settings < ApplicationRecord
       has_visible_journals: Journal.with_read_ability(current_user).exists?,
       has_project_collections: ProjectCollection.count.positive?,
       manifold_version: self.class.manifold_version,
-      require_terms_and_conditions: Page.by_purpose(:terms_and_conditions).exists?
+      require_terms_and_conditions: Page.by_purpose(:terms_and_conditions).exists?,
+      google_analytics_enabled: integrations["ga_tracking_id"].present?,
+      manifold_analytics_enabled: integrations["disable_internal_analytics"] != true
     }
   end
 
@@ -138,11 +140,11 @@ class Settings < ApplicationRecord
     end
 
     def google_analytics_enabled?
-      instance[:integrations]["ga_tracking_id"].present?
+      instance.calculated[:google_analytics_enabled]
     end
 
     def manifold_analytics_enabled?
-      instance[:integrations]["ga_tracking_id"]["disable_internal_analytics"] != true
+      instance.calculated[:manifold_analytics_enabled]
     end
 
     def update_from_environment?
