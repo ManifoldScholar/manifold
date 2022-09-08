@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import { Button as BaseButton } from "global/components/sign-in-up/form-inputs";
 import { utilityPrimary, formInstructions } from "theme/styles/mixins";
 
 export const FormSection = styled.div`
-  margin-block-end: 75px;
+  & + & {
+    margin-block-start: 60px;
+  }
 `;
 
 export const Header = styled.h2`
@@ -25,11 +26,11 @@ export const FormFields = styled.div`
   }
 `;
 
-export const Button = styled(BaseButton)`
-  margin-block-start: 40px;
-`;
-
-export const NoAnalyticsMessage = styled.span`
+export const Instructions = styled.span`
   ${formInstructions}
   display: block;
+`;
+
+export const Button = styled.button`
+  margin-block-start: 60px;
 `;
