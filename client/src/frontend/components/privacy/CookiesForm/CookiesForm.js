@@ -5,6 +5,7 @@ import humps from "humps";
 import RadioGroup from "./RadioGroup";
 import BaseHookForm from "global/components/sign-in-up/BaseHookForm";
 import { useFromStore, useNotification } from "hooks";
+import { useUID } from "react-uid";
 import * as Styled from "./styles";
 
 export default function CookiesForm() {
@@ -60,17 +61,21 @@ export default function CookiesForm() {
     manifoldAnalyticsEnabled || googleAnalyticsEnabled
   );
 
+  const uid = useUID();
+
   return (
-    <Styled.Wrapper>
-      <Styled.Header>{t("forms.privacy.cookies")}</Styled.Header>
+    <Styled.FormSection role="group" aria-labelledby={`${uid}-header`}>
+      <Styled.Header id={`${uid}-header`}>
+        {t("forms.privacy.cookies")}
+      </Styled.Header>
       {showNoCookiesMessage ? (
-        <Styled.Group>
+        <Styled.FormFields>
           <Styled.NoAnalyticsMessage>
             {t("forms.privacy.no_analytics_message", {
               name: installationName
             })}
           </Styled.NoAnalyticsMessage>
-        </Styled.Group>
+        </Styled.FormFields>
       ) : (
         <BaseHookForm
           apiMethod={meAPI.update}
@@ -80,7 +85,7 @@ export default function CookiesForm() {
         >
           {() => (
             <>
-              <Styled.Group>
+              <Styled.FormFields>
                 {manifoldAnalyticsEnabled && (
                   <RadioGroup
                     setting={{
@@ -107,7 +112,7 @@ export default function CookiesForm() {
                     options={{ false: t("common.no"), true: t("common.yes") }}
                   />
                 )}
-              </Styled.Group>
+              </Styled.FormFields>
               <Styled.Button
                 type="submit"
                 label="forms.notifications.submit_label"
@@ -116,6 +121,6 @@ export default function CookiesForm() {
           )}
         </BaseHookForm>
       )}
-    </Styled.Wrapper>
+    </Styled.FormSection>
   );
 }

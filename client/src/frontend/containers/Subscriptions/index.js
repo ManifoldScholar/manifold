@@ -1,135 +1,70 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { requests, meAPI } from "api";
-import Preferences from "global/components/preferences";
-import { entityStoreActions } from "actions";
+import React from "react";
+import { meAPI } from "api";
+import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import lh from "helpers/linkHandler";
 import PropTypes from "prop-types";
-import mapValues from "lodash/mapValues";
-import withProjectContext from "hoc/withProjectContext";
 import Authorize from "hoc/Authorize";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useFromStore, useNotification } from "hooks";
+import BaseHookForm from "global/components/sign-in-up/BaseHookForm";
+import { Button } from "global/components/sign-in-up/form-inputs";
+import { useUID } from "react-uid";
+import * as Styled from "./styles";
 
-const { request } = entityStoreActions;
+export default function SubscriptionsContainer() {
+  const { t } = useTranslation();
+  const { currentUser } = useFromStore("authentication") ?? {};
 
-export class SubscriptionsContainer extends Component {
-  static mapStateToProps = state => ({
-    authentication: state.authentication
-  });
+  const defaultValues = currentUser?.attributes?.notificationPreferences ?? {};
 
-  static propTypes = {
-    dispatch: PropTypes.func,
-    authentication: PropTypes.object,
-    t: PropTypes.func
-  };
+  const notifyUpdate = useNotification(() => ({
+    level: 0,
+    id: `CURRENT_USER_UPDATED`,
+    heading: t("forms.signin_overlay.update_notification_header"),
+    expiration: 3000
+  }));
 
-  constructor(props) {
-    super(props);
-    this.state = this.initialState(props);
-  }
+  const formatData = data => ({ notificationPreferencesByKind: data });
 
-  initialState(props) {
-    const currentUser = props.authentication.currentUser;
-    if (!currentUser) return { notificationPreferencesByKind: {} };
-    return {
-      notificationPreferencesByKind:
-        currentUser.attributes.notificationPreferences
-    };
-  }
+  const uid = useUID();
 
-  handlePreferenceChange = event => {
-    const notifications = {
-      ...this.state.notificationPreferencesByKind
-    };
-    notifications[event.target.name] = event.target.value;
-    this.setState({ notificationPreferencesByKind: notifications });
-  };
-
-  handleProjectsPreferenceChange = toInclude => {
-    const notifications = {
-      ...this.state.notificationPreferencesByKind
-    };
-    const toExclude =
-      toInclude === "projects" ? "followedProjects" : "projects";
-
-    notifications[toInclude] = "always";
-    notifications[toExclude] = "never";
-
-    this.setState({ notificationPreferencesByKind: notifications });
-  };
-
-  unsubscribeAll = event => {
-    event.preventDefault();
-    const notifications = mapValues(
-      this.state.notificationPreferencesByKind,
-      () => "never"
-    );
-    this.setState({ notificationPreferencesByKind: notifications });
-  };
-
-  updateUser = event => {
-    event.preventDefault();
-    window.scrollTo(0, 0);
-    this.props.dispatch(
-      request(meAPI.update(this.state), requests.gAuthenticatedUserUpdate)
-    );
-  };
-
-  render() {
-    const t = this.props.t;
-    return (
-      <Authorize
-        kind="any"
-        failureRedirect={lh.link("frontendLogin")}
-        failureNotification={{
-          heading: t("errors.unauthorized.heading"),
-          body: t("errors.unauthorized.body"),
-          level: 2
-        }}
-      >
-        <section className="bg-neutral05">
-          {this.props.projectBackLink}
-          <div className="container">
-            <form
-              autoComplete="off"
-              className="subscriptions"
-              method="post"
-              onSubmit={this.updateUser}
-            >
-              <h1 className="form-heading">
-                {t("forms.notifications.title")}
-                <span className="instructions">
-                  {t("forms.notifications.instructions")}
-                </span>
-              </h1>
-              <Preferences.NotificationsForm
-                preferences={this.state.notificationPreferencesByKind}
-                authentication={this.props.authentication}
-                changeHandler={this.handlePreferenceChange}
-                digestProjectsChangeHandler={
-                  this.handleProjectsPreferenceChange
-                }
-                unsubscribeAllHandler={this.unsubscribeAll}
-              />
-              <div className="row-1-p">
-                <div className="form-input form-error">
-                  <input
-                    className="button-secondary button-secondary--with-room"
-                    type="submit"
-                    value={t("forms.notifications.submit_label")}
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-        </section>
-      </Authorize>
-    );
-  }
+  return (
+    <Authorize
+      kind="any"
+      failureRedirect={lh.link("frontendLogin")}
+      failureNotification={{
+        heading: t("errors.unauthorized.heading"),
+        body: t("errors.unauthorized.body"),
+        level: 2
+      }}
+    >
+      <Styled.Container>
+        <Styled.FormWrapper>
+          <Styled.Heading id={uid}>
+            {t("forms.notifications.title")}
+            <Styled.Instructions>
+              {t("forms.notifications.instructions")}
+            </Styled.Instructions>
+          </Styled.Heading>
+          <BaseHookForm
+            defaultValues={defaultValues}
+            ariaLabelledBy={uid}
+            formatData={formatData}
+            onSuccess={notifyUpdate}
+            apiMethod={meAPI.update}
+          >
+            {errors => (
+              <>
+                <NotificationsForm errors={errors} />
+                <Button
+                  type="submit"
+                  label="forms.notifications.submit_label"
+                />
+              </>
+            )}
+          </BaseHookForm>
+        </Styled.FormWrapper>
+      </Styled.Container>
+    </Authorize>
+  );
 }
-
-export default withTranslation()(
-  connect(SubscriptionsContainer.mapStateToProps)(
-    withProjectContext(SubscriptionsContainer)
-  )
-);
