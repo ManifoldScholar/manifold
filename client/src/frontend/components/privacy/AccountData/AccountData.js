@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import DeleteConfirm from "./DeleteConfirm";
+import * as Styled from "./styles";
 
 export default function AccountData() {
   const { t } = useTranslation();
@@ -9,46 +10,32 @@ export default function AccountData() {
 
   return (
     <div>
-      <h2 className="section-heading-secondary">
+      <Styled.SectionHeader>
         {t("forms.privacy.account_data")}
-      </h2>
-      <div className="form-group">
-        <div className="form-input">
-          <h3 className="subscriptions__legend">
-            {t("forms.privacy.download.header")}
-          </h3>
-          <span className="instructions">
+      </Styled.SectionHeader>
+      <Styled.Section>
+        <Styled.ButtonGroup>
+          <Styled.Legend>{t("forms.privacy.download.header")}</Styled.Legend>
+          <Styled.Instructions>
             {t("forms.privacy.download.description")}
-          </span>
-          <button
-            className="button-secondary button-secondary--outlined"
-            style={{ width: "max-content" }}
-            type="button"
-          >
-            <span className="button-secondary__text">
-              {t("forms.privacy.download.button_label")}
-            </span>
-          </button>
-        </div>
-        <div className="form-input">
-          <h3 className="subscriptions__legend">
-            {t("forms.privacy.delete.header")}
-          </h3>
-          <span className="instructions">
+          </Styled.Instructions>
+          <Styled.Button
+            styleType="outline"
+            label="forms.privacy.download.button_label"
+          />
+        </Styled.ButtonGroup>
+        <Styled.ButtonGroup>
+          <Styled.Legend>{t("forms.privacy.delete.header")}</Styled.Legend>
+          <Styled.Instructions>
             {t("forms.privacy.delete.description")}
-          </span>
-          <button
-            className="button-secondary button-secondary--outlined"
-            style={{ width: "max-content" }}
-            type="button"
+          </Styled.Instructions>
+          <Styled.Button
+            styleType="outline"
             onClick={() => setShowConfirm(true)}
-          >
-            <span className="button-secondary__text">
-              {t("forms.privacy.delete.button_label")}
-            </span>
-          </button>
-        </div>
-      </div>
+            label="forms.privacy.delete.button_label"
+          />
+        </Styled.ButtonGroup>
+      </Styled.Section>
       {showDeleteConfirm && <DeleteConfirm />}
     </div>
   );
