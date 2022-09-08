@@ -1,10 +1,35 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { meAPI } from "api";
 import humps from "humps";
-import RadioGroup from "global/components/preferences/NotificationsForm/RadioGroup";
+import RadioGroup from "./RadioGroup";
+import BaseHookForm from "global/components/sign-in-up/BaseHookForm";
+import { useFromStore, useNotification } from "hooks";
+import * as Styled from "./styles";
 
 export default function CookiesForm() {
   const { t } = useTranslation();
+
+  const { currentUser } = useFromStore("authentication") ?? {};
+
+  const { internalAnalytics, googleAnalytics } = currentUser.attributes ?? {};
+
+  const defaultValues = {
+    internalAnalytics: internalAnalytics.toString(),
+    googleAnalytics: googleAnalytics.toString()
+  };
+
+  const formatAttributes = data =>
+    Object.keys(data)
+      .map(d => [d, data[d] === "true"])
+      .reduce((obj, d) => ({ ...obj, [d[0]]: d[1] }), {});
+
+  const notifyUpdate = useNotification(() => ({
+    level: 0,
+    id: `CURRENT_USER_UPDATED`,
+    heading: t("forms.signin_overlay.update_notification_header"),
+    expiration: 3000
+  }));
 
   const getLocalized = (prop, strType) => {
     const i18nKey = humps.decamelize(prop, { separator: "_" }).toLowerCase();
@@ -19,41 +44,42 @@ export default function CookiesForm() {
     }
   };
 
-  const cookieTypes = ["internalAnalytics", "googleAnalytics"];
-
   return (
-    <div style={{ marginBlockEnd: "75px" }}>
-      <h2 className="section-heading-secondary">
-        {t("forms.privacy.cookies")}
-      </h2>
-      <div className="form-group">
-        {cookieTypes.map(type => (
-          <RadioGroup
-            key={type}
-            preference={{
-              key: type,
-              label: getLocalized(type, "label"),
-              instructions: getLocalized(type, "description")
-            }}
-            options={
-              type === "necessaryCookies"
-                ? { always: "Always Active" }
-                : undefined
-            }
-            value="always"
-          />
-        ))}
-      </div>
-      <div className="row-1-p">
-        <div className="form-input form-error">
-          <input
-            className="button-secondary"
-            style={{ width: "45%" }}
-            type="submit"
-            value={t("forms.notifications.submit_label")}
-          />
-        </div>
-      </div>
-    </div>
+    <Styled.Wrapper>
+      <Styled.Header>{t("forms.privacy.cookies")}</Styled.Header>
+      <BaseHookForm
+        apiMethod={meAPI.update}
+        defaultValues={defaultValues}
+        formatData={formatAttributes}
+        onSuccess={notifyUpdate}
+      >
+        {() => (
+          <>
+            <Styled.Group>
+              <RadioGroup
+                setting={{
+                  key: "internalAnalytics",
+                  label: getLocalized("internalAnalytics", "label"),
+                  instructions: getLocalized("internalAnalytics", "description")
+                }}
+                options={{ false: t("common.no"), true: t("common.yes") }}
+              />
+              <RadioGroup
+                setting={{
+                  key: "googleAnalytics",
+                  label: getLocalized("googleAnalytics", "label"),
+                  instructions: getLocalized("googleAnalytics", "description")
+                }}
+                options={{ false: t("common.no"), true: t("common.yes") }}
+              />
+            </Styled.Group>
+            <Styled.Button
+              type="submit"
+              label="forms.notifications.submit_label"
+            />
+          </>
+        )}
+      </BaseHookForm>
+    </Styled.Wrapper>
   );
 }
