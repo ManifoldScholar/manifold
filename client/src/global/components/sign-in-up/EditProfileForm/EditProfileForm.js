@@ -54,6 +54,14 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const formatAttributes = useCallback(data => {
     return Object.keys(data)
       .filter(name => !(name === "password" && data.password === ""))
+      .filter(
+        name =>
+          !(
+            name === "avatar" &&
+            !data.avatar.data &&
+            data.removeAvatar === false
+          )
+      )
       .reduce((obj, name) => ({ ...obj, [name]: data[name] }), {});
   }, []);
 
