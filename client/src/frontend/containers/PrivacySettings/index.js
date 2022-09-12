@@ -19,18 +19,20 @@ export default function PrivacySettingsContainer() {
         level: 2
       }}
     >
-      <Styled.Container className="bg-neutral05">
-        <Styled.FormWrapper>
-          <Styled.Heading>
-            {t("forms.privacy.title")}
-            <Styled.Instructions>
-              {t("forms.privacy.instructions")}
-            </Styled.Instructions>
-          </Styled.Heading>
-          <CookiesForm />
-          <AccountData />
-        </Styled.FormWrapper>
-      </Styled.Container>
+      <section className="bg-neutral05">
+        <Styled.Container>
+          <Styled.FormWrapper>
+            <Styled.Heading>
+              {t("forms.privacy.title")}
+              <Styled.Instructions>
+                {t("forms.privacy.instructions")}
+              </Styled.Instructions>
+            </Styled.Heading>
+            <CookiesForm />
+            <AccountData />
+          </Styled.FormWrapper>
+        </Styled.Container>
+      </section>
     </Authorize>
   );
 }
