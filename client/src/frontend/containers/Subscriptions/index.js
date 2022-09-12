@@ -9,13 +9,25 @@ import { useFromStore, useNotification } from "hooks";
 import BaseHookForm from "global/components/sign-in-up/BaseHookForm";
 import { Button } from "global/components/sign-in-up/form-inputs";
 import { useUID } from "react-uid";
+import omit from "lodash/omit";
 import * as Styled from "./styles";
 
 export default function SubscriptionsContainer() {
   const { t } = useTranslation();
   const { currentUser } = useFromStore("authentication") ?? {};
 
-  const defaultValues = currentUser?.attributes?.notificationPreferences ?? {};
+  const notificationPreferences =
+    currentUser?.attributes?.notificationPreferences ?? {};
+
+  const defaultValues = {
+    ...omit(notificationPreferences, ["projects", "followedProjects"]),
+    "digest-projects":
+      notificationPreferences.projects === "always"
+        ? "projects"
+        : "followedProjects"
+  };
+
+  const showAllProjects = !!notificationPreferences.projects;
 
   const notifyUpdate = useNotification(() => ({
     level: 0,
@@ -24,7 +36,15 @@ export default function SubscriptionsContainer() {
     expiration: 3000
   }));
 
-  const formatData = data => ({ notificationPreferencesByKind: data });
+  const formatData = data => {
+    const prefs = {
+      ...omit(data, ["digest-projects"]),
+      projects: data["digest-projects"] === "projects" ? "always" : "never",
+      followedProjects:
+        data["digest-projects"] === "followedProjects" ? "always" : "never"
+    };
+    return { notificationPreferencesByKind: prefs };
+  };
 
   const uid = useUID();
 
@@ -55,7 +75,10 @@ export default function SubscriptionsContainer() {
           >
             {errors => (
               <>
-                <NotificationsForm errors={errors} />
+                <NotificationsForm
+                  errors={errors}
+                  showAllProjects={showAllProjects}
+                />
                 <Button
                   type="submit"
                   label="forms.notifications.submit_label"

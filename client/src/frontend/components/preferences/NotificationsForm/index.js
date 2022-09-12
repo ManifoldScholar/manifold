@@ -10,7 +10,7 @@ import { useFormContext } from "react-hook-form";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
-export default function NotificationsForm() {
+export default function NotificationsForm({ showAllProjects }) {
   const authentication = useFromStore("authentication");
   const { t } = useTranslation();
 
@@ -47,7 +47,6 @@ export default function NotificationsForm() {
     reset({
       ...otherActivity,
       digest: "never",
-      "digest-projects": "never",
       digestCommentsAndAnnotations: "never"
     });
   };
@@ -85,7 +84,7 @@ export default function NotificationsForm() {
                 {t("forms.notifications.project_activity_instructions")}
               </Styled.Instructions>
               <Collapse initialVisible={digestOpen}>
-                <ProjectPreferences />
+                <ProjectPreferences showAllProjects={showAllProjects} />
               </Collapse>
             </Styled.FormFields>
           </Styled.FormSection>
