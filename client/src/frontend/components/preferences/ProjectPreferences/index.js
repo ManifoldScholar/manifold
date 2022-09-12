@@ -5,7 +5,7 @@ import RadioGroup from "frontend/components/privacy/CookiesForm/RadioGroup";
 import { useFormContext } from "react-hook-form";
 import * as Styled from "./Styles";
 
-function ProjectPreferences() {
+function ProjectPreferences({ showAllProjects }) {
   const { toggleProps } = useCollapseContext();
   const { t } = useTranslation();
 
@@ -14,7 +14,7 @@ function ProjectPreferences() {
   const digestOpen = watch("digest") !== "never";
 
   const options = {
-    ...(true && {
+    ...(showAllProjects && {
       projects: t("forms.notifications.project_preferences.all_projects")
     }),
     followedProjects: t("forms.notifications.project_preferences.only_starred")
