@@ -10,19 +10,31 @@ import * as Styled from "./styles";
 export default function CookiesForm() {
   const { t } = useTranslation();
 
+  const settings = useFromStore("settings", "select");
+  const manifoldAnalyticsEnabled = !settings?.attributes?.general
+    ?.disableInternalAnalytics;
+  const googleAnalyticsEnabled = !!settings?.attributes?.integrations
+    ?.gaTrackingId;
+  const installationName = settings?.attributes?.general?.installationName;
+
   const { currentUser } = useFromStore("authentication") ?? {};
 
-  const { internalAnalytics, googleAnalytics } = currentUser.attributes ?? {};
+  const { consentManifoldAnalytics, consentGoogleAnalytics } =
+    currentUser.attributes ?? {};
 
   const defaultValues = {
-    internalAnalytics: internalAnalytics.toString(),
-    googleAnalytics: googleAnalytics.toString()
+    manifold: consentManifoldAnalytics?.toString() ?? "true",
+    google: consentGoogleAnalytics?.toString() ?? "true"
   };
 
-  const formatAttributes = data =>
-    Object.keys(data)
-      .map(d => [d, data[d] === "true"])
-      .reduce((obj, d) => ({ ...obj, [d[0]]: d[1] }), {});
+  const formatAttributes = data => ({
+    consentManifoldAnalytics: !manifoldAnalyticsEnabled
+      ? null
+      : data.manifold === "true",
+    consentGoogleAnalytics: !googleAnalyticsEnabled
+      ? null
+      : data.google === "true"
+  });
 
   const notifyUpdate = useNotification(() => ({
     level: 0,
@@ -44,42 +56,66 @@ export default function CookiesForm() {
     }
   };
 
+  const showNoCookiesMessage = !(
+    manifoldAnalyticsEnabled || googleAnalyticsEnabled
+  );
+
   return (
     <Styled.Wrapper>
       <Styled.Header>{t("forms.privacy.cookies")}</Styled.Header>
-      <BaseHookForm
-        apiMethod={meAPI.update}
-        defaultValues={defaultValues}
-        formatData={formatAttributes}
-        onSuccess={notifyUpdate}
-      >
-        {() => (
-          <>
-            <Styled.Group>
-              <RadioGroup
-                setting={{
-                  key: "internalAnalytics",
-                  label: getLocalized("internalAnalytics", "label"),
-                  instructions: getLocalized("internalAnalytics", "description")
-                }}
-                options={{ false: t("common.no"), true: t("common.yes") }}
+      {showNoCookiesMessage ? (
+        <Styled.Group>
+          <Styled.NoAnalyticsMessage>
+            {t("forms.privacy.no_analytics_message", {
+              name: installationName
+            })}
+          </Styled.NoAnalyticsMessage>
+        </Styled.Group>
+      ) : (
+        <BaseHookForm
+          apiMethod={meAPI.update}
+          defaultValues={defaultValues}
+          formatData={formatAttributes}
+          onSuccess={notifyUpdate}
+        >
+          {() => (
+            <>
+              <Styled.Group>
+                {manifoldAnalyticsEnabled && (
+                  <RadioGroup
+                    setting={{
+                      key: "manifold",
+                      label: getLocalized("internalAnalytics", "label"),
+                      instructions: getLocalized(
+                        "internalAnalytics",
+                        "description"
+                      )
+                    }}
+                    options={{ false: t("common.no"), true: t("common.yes") }}
+                  />
+                )}
+                {googleAnalyticsEnabled && (
+                  <RadioGroup
+                    setting={{
+                      key: "google",
+                      label: getLocalized("googleAnalytics", "label"),
+                      instructions: getLocalized(
+                        "googleAnalytics",
+                        "description"
+                      )
+                    }}
+                    options={{ false: t("common.no"), true: t("common.yes") }}
+                  />
+                )}
+              </Styled.Group>
+              <Styled.Button
+                type="submit"
+                label="forms.notifications.submit_label"
               />
-              <RadioGroup
-                setting={{
-                  key: "googleAnalytics",
-                  label: getLocalized("googleAnalytics", "label"),
-                  instructions: getLocalized("googleAnalytics", "description")
-                }}
-                options={{ false: t("common.no"), true: t("common.yes") }}
-              />
-            </Styled.Group>
-            <Styled.Button
-              type="submit"
-              label="forms.notifications.submit_label"
-            />
-          </>
-        )}
-      </BaseHookForm>
+            </>
+          )}
+        </BaseHookForm>
+      )}
     </Styled.Wrapper>
   );
 }
