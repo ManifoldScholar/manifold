@@ -20,9 +20,7 @@ function RadioGroup({ setting, options, defaultValue, inputProps = {} }) {
     <Styled.Fieldset>
       <Styled.Legend>{setting.label}</Styled.Legend>
       {setting.instructions && (
-        <Styled.Instructions className="instructions">
-          {setting.instructions}
-        </Styled.Instructions>
+        <Styled.Instructions>{setting.instructions}</Styled.Instructions>
       )}
       {Object.keys(localizedOptions).map(option => (
         <Styled.RadioOption
