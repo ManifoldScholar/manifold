@@ -7,7 +7,6 @@ import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import { useFromStore, useNotification } from "hooks";
 import BaseHookForm from "global/components/sign-in-up/BaseHookForm";
-import { Button } from "global/components/sign-in-up/form-inputs";
 import { useUID } from "react-uid";
 import omit from "lodash/omit";
 import * as Styled from "./styles";
@@ -58,36 +57,38 @@ export default function SubscriptionsContainer() {
         level: 2
       }}
     >
-      <Styled.Container>
-        <Styled.FormWrapper>
-          <Styled.Heading id={uid}>
-            {t("forms.notifications.title")}
-            <Styled.Instructions>
-              {t("forms.notifications.instructions")}
-            </Styled.Instructions>
-          </Styled.Heading>
-          <BaseHookForm
-            defaultValues={defaultValues}
-            ariaLabelledBy={uid}
-            formatData={formatData}
-            onSuccess={notifyUpdate}
-            apiMethod={meAPI.update}
-          >
-            {errors => (
-              <>
-                <NotificationsForm
-                  errors={errors}
-                  showAllProjects={showAllProjects}
-                />
-                <Button
-                  type="submit"
-                  label="forms.notifications.submit_label"
-                />
-              </>
-            )}
-          </BaseHookForm>
-        </Styled.FormWrapper>
-      </Styled.Container>
+      <section className="bg-neutral05">
+        <Styled.Container>
+          <Styled.FormWrapper>
+            <Styled.Heading id={uid}>
+              {t("forms.notifications.title")}
+              <Styled.Instructions>
+                {t("forms.notifications.instructions")}
+              </Styled.Instructions>
+            </Styled.Heading>
+            <BaseHookForm
+              defaultValues={defaultValues}
+              ariaLabelledBy={uid}
+              formatData={formatData}
+              onSuccess={notifyUpdate}
+              apiMethod={meAPI.update}
+            >
+              {errors => (
+                <>
+                  <NotificationsForm
+                    errors={errors}
+                    showAllProjects={showAllProjects}
+                  />
+                  <Styled.Button
+                    type="submit"
+                    label="forms.notifications.submit_label"
+                  />
+                </>
+              )}
+            </BaseHookForm>
+          </Styled.FormWrapper>
+        </Styled.Container>
+      </section>
     </Authorize>
   );
 }

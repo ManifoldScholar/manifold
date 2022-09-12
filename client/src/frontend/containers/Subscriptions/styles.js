@@ -5,8 +5,9 @@ import {
   headingPrimary,
   formInstructions
 } from "theme/styles/mixins";
+import { Button as BaseButton } from "global/components/sign-in-up/form-inputs";
 
-export const Container = styled.section`
+export const Container = styled.div`
   ${containerPrototype}
   padding-block-start: var(--container-padding-block-start);
   padding-block-end: var(--container-padding-block-end);
@@ -26,4 +27,8 @@ export const Heading = styled.h1`
 export const Instructions = styled.span`
   ${formInstructions}
   display: block;
+`;
+
+export const Button = styled(BaseButton)`
+  margin-block-start: 40px;
 `;
