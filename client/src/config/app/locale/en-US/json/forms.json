@@ -213,6 +213,7 @@
       "title": "Privacy Settings",
       "instructions": "Edit your privacy settings.",
       "cookies": "Cookies",
+      "no_analytics_message": "{{name}} does not use cookies to track your activity.",
       "internal_analytics": {
         "label": "Internal Analytics",
         "description": "VISIT_TOKEN & VISITOR_TOKEN for Manifold's anonymous internal analytics"

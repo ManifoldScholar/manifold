@@ -4,6 +4,7 @@ import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import AccountData from "frontend/components/privacy/AccountData";
 import CookiesForm from "frontend/components/privacy/CookiesForm";
+import * as Styled from "./styles";
 
 export default function PrivacySettingsContainer() {
   const { t } = useTranslation();
@@ -18,18 +19,18 @@ export default function PrivacySettingsContainer() {
         level: 2
       }}
     >
-      <div className="container">
-        <div className="subscriptions">
-          <h1 className="form-heading">
+      <Styled.Container className="bg-neutral05">
+        <Styled.FormWrapper>
+          <Styled.Heading>
             {t("forms.privacy.title")}
-            <span className="instructions">
+            <Styled.Instructions>
               {t("forms.privacy.instructions")}
-            </span>
-          </h1>
+            </Styled.Instructions>
+          </Styled.Heading>
           <CookiesForm />
           <AccountData />
-        </div>
-      </div>
+        </Styled.FormWrapper>
+      </Styled.Container>
     </Authorize>
   );
 }
