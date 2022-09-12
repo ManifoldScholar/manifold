@@ -6,7 +6,7 @@ import {
   formInstructions
 } from "theme/styles/mixins";
 
-export const Container = styled.section`
+export const Container = styled.div`
   ${containerPrototype}
   padding-block-start: var(--container-padding-block-start);
   padding-block-end: var(--container-padding-block-end);
