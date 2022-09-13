@@ -5,6 +5,8 @@ import {
   unstyledSelect
 } from "theme/styles/mixins";
 
+// I think these styles are only used by src/backend/components/analytics/parts/RowSort.js
+
 export default `
   .select {
     &__label {
