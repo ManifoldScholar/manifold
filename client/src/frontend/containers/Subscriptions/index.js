@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import { useFromStore, useNotification } from "hooks";
-import BaseHookForm from "global/components/sign-in-up/BaseHookForm";
+import BaseHookForm from "global/components/form/hook-form/BaseHookForm";
 import { useUID } from "react-uid";
 import omit from "lodash/omit";
 import * as Styled from "./styles";
@@ -92,3 +92,5 @@ export default function SubscriptionsContainer() {
     </Authorize>
   );
 }
+
+SubscriptionsContainer.displayName = "Frontend.Containers.Subscriptions";

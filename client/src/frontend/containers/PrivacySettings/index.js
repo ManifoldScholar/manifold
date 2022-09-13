@@ -36,3 +36,5 @@ export default function PrivacySettingsContainer() {
     </Authorize>
   );
 }
+
+PrivacySettingsContainer.displayName = "Frontend.Containers.PrivacySettings";

@@ -2,12 +2,13 @@ import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import Collapse from "global/components/Collapse";
-import RadioGroup from "frontend/components/privacy/CookiesForm/RadioGroup";
+import RadioGroup from "global/components/form/hook-form/RadioGroup";
 import ProjectPreferences from "../ProjectPreferences";
 import humps from "humps";
 import Authorization from "helpers/authorization";
 import { useFormContext } from "react-hook-form";
 import { useFromStore } from "hooks";
+import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 export default function NotificationsForm({ showAllProjects }) {
@@ -112,3 +113,9 @@ export default function NotificationsForm({ showAllProjects }) {
     </>
   );
 }
+
+NotificationsForm.displayName = "Frontend.Preferenes.NotificationsForm";
+
+NotificationsForm.propTypes = {
+  showAllProjects: PropTypes.bool
+};

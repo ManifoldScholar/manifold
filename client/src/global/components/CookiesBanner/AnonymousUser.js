@@ -5,7 +5,7 @@ import { AcceptTermsCheckbox } from "global/components/sign-in-up/form-inputs";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
-export default function CookiesBanner() {
+export default function AnonymousUserBanner() {
   const { t } = useTranslation();
 
   const settings = useFromStore("settings", "select");
@@ -75,3 +75,5 @@ export default function CookiesBanner() {
     </Styled.Banner>
   );
 }
+
+AnonymousUserBanner.displayName = "Global.CookiesBanner.AnonymousUserBanner";
