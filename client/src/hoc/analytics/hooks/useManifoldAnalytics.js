@@ -6,6 +6,7 @@ import ch from "helpers/consoleHelpers";
 import uuid from "uuid";
 import { entityStoreActions, currentUserActions } from "actions";
 import { analyticEventsAPI, requests } from "api";
+import { useFromStore } from "hooks";
 
 const { request } = entityStoreActions;
 const cookie = new CookieHelper();
@@ -36,8 +37,13 @@ function getTokens() {
 }
 
 export default function useManifoldAnalytics(location, settings, dispatch) {
+  const { currentUser } = useFromStore("authentication") ?? {};
+
   useEffect(() => {
-    if (manifoldAnalyticsEnabled(settings)) {
+    if (
+      manifoldAnalyticsEnabled(settings) &&
+      (!currentUser || currentUser.attributes.consentManifoldAnalytics)
+    ) {
       const { visitToken, visitorToken } = getTokens();
       dispatch(currentUserActions.setVisitorToken(visitorToken));
       dispatch(currentUserActions.setVisitToken(visitToken));
@@ -48,7 +54,7 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
         );
       }
     }
-  }, [dispatch, settings]);
+  }, [dispatch, settings, currentUser]);
 
   const track = trackedEvent => {
     const { visitToken, visitorToken } = getTokens();
@@ -76,7 +82,10 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
     dispatch(trackRequest);
   };
 
-  if (!manifoldAnalyticsEnabled(settings))
+  if (
+    !manifoldAnalyticsEnabled(settings) ||
+    (currentUser && !currentUser.attributes.consentManifoldAnalytics)
+  )
     return { track: nullTracker, leave: nullTracker };
 
   return { track };
