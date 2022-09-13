@@ -48,8 +48,7 @@ RadioGroup.displayName = "HookForm.RadioGroup";
 RadioGroup.propTypes = {
   settings: PropTypes.object,
   options: PropTypes.object,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  disabled: PropTypes.bool,
+  defaultValue: PropTypes.string,
   inputProps: PropTypes.object
 };
 

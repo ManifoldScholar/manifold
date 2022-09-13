@@ -5,7 +5,7 @@ import { useFromStore, useApiCallback } from "hooks";
 import { meAPI } from "api";
 import * as Styled from "./styles";
 
-export default function CookiesBanner() {
+export default function CurrentUserBanner() {
   const { t } = useTranslation();
   const { currentUser } = useFromStore("authentication");
   const { consentNeededManifoldAnalytics, consentNeededGoogleAnalytics } =
@@ -62,3 +62,5 @@ export default function CookiesBanner() {
     </Styled.Banner>
   );
 }
+
+CurrentUserBanner.displayName = "Global.CookiesBanner.CurrentUser";
