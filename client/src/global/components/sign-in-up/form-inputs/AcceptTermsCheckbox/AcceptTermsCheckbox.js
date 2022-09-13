@@ -3,7 +3,11 @@ import { useUID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
-export default function AcceptCheckbox({ label, onChange }) {
+export default function AcceptCheckbox({
+  label,
+  onChange,
+  labelStyle = "copy"
+}) {
   const uid = useUID();
 
   return (
@@ -12,7 +16,7 @@ export default function AcceptCheckbox({ label, onChange }) {
       <Styled.Checkbox>
         <IconComposer icon="checkmark16" size={16} />
       </Styled.Checkbox>
-      <Styled.Label>{label}</Styled.Label>
+      <Styled.Label $labelStyle={labelStyle}>{label}</Styled.Label>
     </Styled.Wrapper>
   );
 }
