@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { screenReaderText } from "theme/styles/mixins";
+import { screenReaderText, utilityPrimary } from "theme/styles/mixins";
 
 export const Wrapper = styled.label`
   display: flex !important;
@@ -41,6 +41,15 @@ export const Label = styled.span`
   .bg-neutral05 & {
     color: var(--color-neutral-text-extra-dark);
   }
+
+  ${({ $labelStyle }) =>
+    $labelStyle === "heading" &&
+    `
+  ${utilityPrimary}
+  color: var(--color-base-neutral-black);
+  font-size: 14px;
+  line-height: 22px;
+  `}
 `;
 
 export const Input = styled.input`

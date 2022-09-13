@@ -14,6 +14,7 @@ import { renderRoutes } from "react-router-config";
 import get from "lodash/get";
 import BodyClass from "hoc/BodyClass";
 import redirectIfLibraryDisabled from "hoc/redirectIfLibraryDisabled";
+import CookiesBanner from "global/components/CookiesBanner";
 
 const { request } = entityStoreActions;
 
@@ -130,6 +131,7 @@ export class FrontendContainer extends Component {
           >
             {renderRoutes(this.props.route.routes)}
           </main>
+          <CookiesBanner />
           <Footers.FrontendFooter
             pages={this.props.pages}
             authentication={this.props.authentication}
