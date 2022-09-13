@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, forwardRef } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useApiCallback } from "hooks";
+import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 const BaseHookForm = forwardRef((props, ref) => {
@@ -63,5 +64,7 @@ const BaseHookForm = forwardRef((props, ref) => {
     </FormProvider>
   );
 });
+
+BaseHookForm.displayName = "Global.form.HookForm.BaseForm";
 
 export default BaseHookForm;

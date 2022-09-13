@@ -266,6 +266,7 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
     >
       <Switch />
     </main>
+    <Global.CookiesBanner />
     <Connect(WithSettings('Connect(withPluginReplacement('FrontendFooter))))
       authentication={
         Object {

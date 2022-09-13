@@ -14,3 +14,5 @@ export default function CookiesBanner() {
 
   return currentUser ? <CurrentUserBanner /> : <AnonymousUserBanner />;
 }
+
+CookiesBanner.displayName = "Global.CookiesBanner";

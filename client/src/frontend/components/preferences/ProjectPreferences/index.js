@@ -1,8 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
-import RadioGroup from "frontend/components/privacy/CookiesForm/RadioGroup";
+import RadioGroup from "global/components/form/hook-form/RadioGroup";
 import { useFormContext } from "react-hook-form";
+import PropTypes from "prop-types";
 import * as Styled from "./Styles";
 
 function ProjectPreferences({ showAllProjects }) {
@@ -61,5 +62,11 @@ function ProjectPreferences({ showAllProjects }) {
     </>
   );
 }
+
+ProjectPreferences.displayName = "Frontend.Preferences.ProjectDigest";
+
+ProjectPreferences.propTypes = {
+  showAllProjects: PropTypes.bool
+};
 
 export default ProjectPreferences;
