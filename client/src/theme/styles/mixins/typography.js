@@ -79,7 +79,7 @@ export const formLabelPrimary = `
 
 // // Forms
 // // --------------------------------------------------------
-const formInputBase = `
+export const formInputBase = `
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-regular);
   letter-spacing: 0.015em;
