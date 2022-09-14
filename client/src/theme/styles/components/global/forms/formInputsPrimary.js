@@ -119,7 +119,7 @@ export default `
       }
     }
 
-    label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker):not(.form-switch) {
+    label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker):not(.form-switch):not(.formerly-radio) {
       ${formLabelPrimary}
       display: block;
       margin-bottom: 1em;
