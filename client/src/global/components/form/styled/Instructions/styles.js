@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
-import { formInstructions } from "theme/styles/mixins";
+import { formInstructions, respond } from "theme/styles/mixins";
 
-export const Instructions = styled.span`
+// There are still a number of classnames to disentangle in here.
+
+export const PrimaryInstructions = styled.span`
   ${formInstructions}
   display: block;
   margin-bottom: 1em;
@@ -18,37 +20,38 @@ export const Instructions = styled.span`
     margin-bottom: 0;
   }
 
-  ${({ $secondary }) =>
-    $secondary &&
-    `
-    margin-top: 0.75em;
+  .form-input--with-actions & {
+    grid-column: 1 / -1;
+    margin-bottom: 1em !important;
 
-    &--inline {
-      display: inline;
-    }
+    ${respond(`margin-bottom: 0 !important;`, 60)}
+  }
 
-    + .form-input-group--primary {
-      margin-top: 32px;
-    }
+  .form-input .form-input-radios__legend + & {
+    margin-block-start: 7px;
+  }
 
-    + .form-input-group--secondary {
-      margin-top: 24px;
-    }
-
-    a {
-      color: inherit;
-    }
-  `}
+  .form-toggle .form-toggle-secondary & {
+    margin-bottom: 0;
+  }
 `;
 
-// form-input--with-actions
-// grid-column: 1 / -1;
-// margin-bottom: 1em !important;
-//
-// ${respond(`margin-bottom: 0 !important;`, 60)}
+export const SecondaryInstructions = styled(PrimaryInstructions)`
+  margin-top: 0.75em;
 
-// .form-input .form-input-radios__legend +
-// margin-block-start: 7px;
+  &--inline {
+    display: inline;
+  }
 
-// .form-toggle .form-toggle-secondary
-// margin-bottom: 0;
+  + .form-input-group--primary {
+    margin-top: 32px;
+  }
+
+  + .form-input-group--secondary {
+    margin-top: 24px;
+  }
+
+  a {
+    color: inherit;
+  }
+`;
