@@ -76,7 +76,7 @@ export default `
     }
 
     .form-input {
-      .form-input-heading, .column-heading, label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker):not(.form-switch) {
+      .form-input-heading, .column-heading, label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker):not(.form-switch):not(.formerly-radio) {
         ${formLabelPrimary}
         display: block;
         margin-top: 0;

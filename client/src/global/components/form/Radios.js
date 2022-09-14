@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
 import Errorable from "global/components/form/Errorable";
-import Option from "./Radio/Option";
+import Option from "./styled/Radio/Option";
 import RadioLabel from "./Radio/Label";
 import classnames from "classnames";
 import isString from "lodash/isString";
