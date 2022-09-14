@@ -10,7 +10,7 @@ import Hidden from "./Hidden";
 import Instructions from "./Instructions";
 import MaskedTextInput from "./MaskedTextInput";
 import NumberInput from "./NumberInput";
-import Radios from "./Radios";
+import Radios from "./styled/Radios";
 import Save from "./Save";
 import SectionLabel from "./SectionLabel";
 import Select from "./Select";
