@@ -1,24 +1,35 @@
 import styled from "@emotion/styled";
+import IconComposer from "global/components/utility/IconComposer";
 import {
-  formInputBase,
-  formLabelPrimary,
-  defaultTransitionProps,
+  respond,
   fluidScale,
-  respond
+  formInputBase,
+  defaultTransitionProps,
+  formLabelPrimary
 } from "theme/styles/mixins";
 
-export const PrimaryLabel = styled.label`
-  ${formLabelPrimary}
-  display: block;
-  margin-block-end: 1em;
+const VISIBILITY_TOGGLE_SIZE = 32;
 
-  ${({ $hasInstructions }) => $hasInstructions && `margin-block-end: 0.5em;`}
+export const Toggle = styled.span`
+  position: absolute;
+  top: ${(-1 / 4) * VISIBILITY_TOGGLE_SIZE - 1}px;
+  left: 80px;
+  width: ${VISIBILITY_TOGGLE_SIZE}px;
+  height: ${VISIBILITY_TOGGLE_SIZE}px;
+  color: var(--color-base-neutral70);
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 0;
+  }
 `;
 
-export const SecondaryLabel = styled(PrimaryLabel)`
-  margin-block-start: 0;
+export const Icon = styled(IconComposer)`
+  position: absolute;
+  cursor: pointer;
 `;
 
+/* Input styles here are the same as in BaseInput, so we should find a way to share them. */
 export const BaseInput = styled.input`
   ${formInputBase}
   width: 100%;
@@ -76,11 +87,17 @@ export const SecondaryInput = styled(BaseInput)`
     box-shadow: 0 0 0 1000px var(--background-color) inset;
     -webkit-text-fill-color: var(--input-autofill-color) !important;
   }
-
-  /* This is only applied in secondary, not sure if it would be okay in base. */
-  &[type="number"] {
-    text-align: left;
-  }
 `;
 
-// Needs styles for notification
+/* Same for label, though these are shared more broadly. */
+export const PrimaryLabel = styled.label`
+  ${formLabelPrimary}
+  display: block;
+  margin-block-end: 1em;
+
+  ${({ $hasInstructions }) => $hasInstructions && `margin-block-end: 0.5em;`}
+`;
+
+export const SecondaryLabel = styled(PrimaryLabel)`
+  margin-block-start: 0;
+`;
