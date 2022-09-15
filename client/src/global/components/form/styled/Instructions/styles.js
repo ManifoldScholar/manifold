@@ -30,10 +30,6 @@ export const PrimaryInstructions = styled.span`
   .form-input .form-input-radios__legend + & {
     margin-block-start: 7px;
   }
-
-  .form-toggle .form-toggle-secondary & {
-    margin-bottom: 0;
-  }
 `;
 
 export const SecondaryInstructions = styled(PrimaryInstructions)`
