@@ -51,12 +51,12 @@ export const Cancel = styled.button`
     }
   }
 
-  .well & {
-    visibility: visible;
+  ${({ $well }) =>
+    $well &&
+    `visibility: visible;
     opacity: 1;
     animation: cancelAppear var(--transition-duration-fast)
-      var(--transition-timing-function) 0s 1;
-  }
+      var(--transition-timing-function) 0s 1;`}
 `;
 
 /* = old classname text */
