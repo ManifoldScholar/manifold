@@ -46,9 +46,9 @@ class FormBaseInput extends PureComponent {
 
   renderButtons(buttons) {
     return (
-      <div className="form-input__action-group">
+      <Styled.ActionGroup className="form-input__action-group">
         {buttons.map(button => (
-          <button
+          <Styled.Action
             type="button"
             key={button.label}
             onClick={event =>
@@ -62,9 +62,9 @@ class FormBaseInput extends PureComponent {
             className="form-input__action"
           >
             {button.label}
-          </button>
+          </Styled.Action>
         ))}
-      </div>
+      </Styled.ActionGroup>
     );
   }
 
@@ -93,9 +93,9 @@ class FormBaseInput extends PureComponent {
       "has-instructions": isString(instructions)
     });
     const inputClasses = classnames(this.props.inputClasses, {
-      "form-input": true,
+      "form-input": true, // <FieldWrapper>
       wide,
-      "form-input--with-actions": buttons
+      "form-input--with-actions": buttons // Styled.WrapperWithActions
     });
 
     return (

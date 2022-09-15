@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import isString from "lodash/isString";
 import classNames from "classnames";
 import { UIDConsumer } from "react-uid";
-import Instructions from "./Instructions";
+import SectionLabel from "../SectionLabel";
+import Instructions from "../Instructions";
 import * as Styled from "./styles";
 
 export default class FieldGroup extends PureComponent {
@@ -50,42 +51,27 @@ export default class FieldGroup extends PureComponent {
   }
 
   render() {
-    const sectionClasses = classNames({
-      "form-section": true,
-      disabled: this.props.disabled,
-      horizontal: this.props.horizontal,
-      [`form-section--${this.props.theme}`]: true
-    });
-    const groupClasses = classNames({
-      "form-input-group": true,
-      [`form-input-group--${this.props.theme}`]: true
-    });
-
     return (
       <UIDConsumer name={id => `field-group-${id}`}>
         {id => (
-          <div
-            className={sectionClasses}
+          <Styled.Section
             key="group"
             role="group"
             aria-labelledby={`${id}-header`}
             aria-describedby={`${id}-instructions`}
+            $horizontal={this.props.horizontal}
           >
             {isString(this.props.label) ? (
-              <Styled.Label>
-                <this.labelTag id={`${id}-header`}>
-                  {this.props.label}
-                </this.labelTag>
-              </Styled.Label>
+              <SectionLabel label={this.props.label} id={`${id}-header`} />
             ) : null}
             <Instructions
               id={`${id}-instructions`}
               instructions={this.props.instructions}
             />
-            <div className={groupClasses}>
+            <Styled.Group $theme={this.props.theme}>
               {this.renderChildren(this.props)}
-            </div>
-          </div>
+            </Styled.Group>
+          </Styled.Section>
         )}
       </UIDConsumer>
     );

@@ -1,12 +1,30 @@
 import styled from "@emotion/styled";
-import { roundedFormHeader, panelRounded } from "theme/styles/mixins";
+import { respond } from "theme/styles/mixins";
+import { transientOptions } from "helpers/emotionHelpers";
 
-export const Label = styled.header`
-  ${roundedFormHeader}
-  ${panelRounded}
-  background-color: var(--box-medium-bg-color);
+export const Section = styled("div", transientOptions)`
+  & + & {
+    margin-top: 45px;
 
-  .backend & {
-    background-color: var(--box-bg-color);
+    ${respond(`margin-top: 52px;`, 60)}
   }
+`;
+
+export const BaseGroup = styled.div`
+  --FieldGroup-column-gap: 40px;
+  --FieldGroup-row-gap: 35px;
+
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--FieldGroup-column-gap);
+  row-gap: var(--FieldGroup-row-gap);
+
+  > * {
+    flex-grow: 1;
+    flex-basis: var(--FieldGroup-child-flex-basis, 100%);
+  }
+`;
+
+export const SecondaryGroup = styled(BaseGroup)`
+  --FieldGroup-row-gap: 25px;
 `;

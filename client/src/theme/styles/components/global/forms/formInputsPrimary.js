@@ -3,7 +3,6 @@ import {
   utilityPrimary,
   fillOnFocus,
   defaultFocusStyle,
-  defaultHoverStyle,
   outlineOnFocus,
   defaultTransitionProps,
   formLabelPrimary,
@@ -14,7 +13,6 @@ import {
   listUnstyled,
   clearfix,
   respond,
-  rgba
 } from "theme/styles/mixins";
 
 export default `
