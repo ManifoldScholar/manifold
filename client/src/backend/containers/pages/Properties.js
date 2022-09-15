@@ -146,21 +146,21 @@ class PagesPropertiesContainer extends PureComponent {
             instructions={t("backend.forms.page.states_instructions")}
           >
             <Form.Switch
-              className="form-input-fourth"
+              className="fourth"
               label={t("backend.forms.page.states_options.hide")}
               labelClass="secondary"
               labelPos="below"
               name="attributes[hidden]"
             />
             <Form.Switch
-              className="form-input-fourth"
+              className="fourth"
               label={t("backend.forms.page.states_options.footer")}
               labelClass="secondary"
               labelPos="below"
               name="attributes[showInFooter]"
             />
             <Form.Switch
-              className="form-input-fourth"
+              className="fourth"
               label={t("backend.forms.page.states_options.header")}
               labelClass="secondary"
               labelPos="below"

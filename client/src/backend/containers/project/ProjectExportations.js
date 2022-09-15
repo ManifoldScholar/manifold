@@ -160,7 +160,7 @@ export class ProjecExportations extends PureComponent {
           onSuccess={() => this.fetchExportations(1)}
           doNotWarn
         >
-          <Form.FieldGroup label="Project Exports" wide horizontal>
+          <Form.FieldGroup label="Project Exports">
             {this.hasExportTargets && (
               <div className="instructional-copy">
                 {t("backend_entities.projects.forms.exports.instructions")}

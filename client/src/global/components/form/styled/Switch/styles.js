@@ -136,11 +136,4 @@ export const LabelText = styled.span`
   ${formLabelPrimary}
   display: block;
   margin-top: 0;
-  margin-bottom: 0.5em;
-
-  ${({ $below }) =>
-    $below &&
-    `margin-top: 0.6em;
-    margin-bottom: 0;
-    `}
 `;

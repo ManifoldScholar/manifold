@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import SectionLabel from "global/components/form/SectionLabel";
+import * as Styled from "./styles";
 
 export default class ProjectContentSectionsPartsHeader extends PureComponent {
   static displayName = "Project.Content.Sections.Parts.Header";
@@ -25,9 +26,9 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
           </span>
         )}
         {this.props.subtitle && (
-          <header className="form-subsection-label">
-            <h3>{this.props.subtitle}</h3>
-          </header>
+          <Styled.SubtitleHeader className="form-subsection-label">
+            <Styled.Subtitle>{this.props.subtitle}</Styled.Subtitle>
+          </Styled.SubtitleHeader>
         )}
       </>
     );

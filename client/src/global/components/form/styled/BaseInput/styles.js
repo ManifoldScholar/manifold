@@ -2,10 +2,62 @@ import styled from "@emotion/styled";
 import {
   formInputBase,
   formLabelPrimary,
+  buttonUnstyled,
+  utilityPrimary,
   defaultTransitionProps,
   fluidScale,
   respond
 } from "theme/styles/mixins";
+
+export const WrapperWithActions = styled.div`
+  // will become styled(FieldWrapper);
+  // this is a one-off for RG edit drawer,
+  // so doesn't belong with FieldWrapper's style file
+  grid-template:
+    "label label" auto
+    "input input" auto
+    "actions notification" auto / auto 1fr;
+
+  ${respond(
+    `
+      --Action-transform: translateY(5px);
+
+      grid-template:
+        "label label label" auto
+        "input notification actions" auto / 1fr auto auto;
+    `,
+    60
+  )}
+
+  label {
+    grid-area: label;
+  }
+
+  input {
+    grid-area: input;
+  }
+
+  .notification {
+    grid-area: notification;
+
+    ${respond(
+      `
+        padding-right: 10px;
+        padding-left: 10px;
+        margin-top: 7px !important;
+        border-bottom: 1px solid var(--color-base-neutral80);
+      `,
+      60
+    )}
+  }
+
+  .instructions {
+    grid-column: 1 / -1;
+    margin-bottom: 1em !important;
+
+    ${respond(`margin-bottom: 0 !important;`, 60)}
+  }
+`;
 
 export const PrimaryLabel = styled.label`
   ${formLabelPrimary}
@@ -80,6 +132,44 @@ export const SecondaryInput = styled(BaseInput)`
   /* This is only applied in secondary, not sure if it would be okay in base. */
   &[type="number"] {
     text-align: left;
+  }
+`;
+
+export const ActionGroup = styled.div`
+  grid-area: actions;
+  margin-top: 12px;
+
+  ${respond(
+    `
+      margin-top: 0;
+      border-bottom: 1px solid var(--color-base-neutral80);
+    `,
+    60
+  )}
+`;
+
+export const Action = styled.button`
+  ${buttonUnstyled}
+  ${utilityPrimary}
+  ${fillOnFocus("var(--color-interaction-light)")}
+  padding: 0.333em 1em;
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  letter-spacing: 0.125em;
+  background-color: var(--color-base-neutral10);
+  border: 1px solid var(--color-base-neutral10);
+  border-radius: 16px;
+  transform: var(--Action-transform);
+  transition: color ${defaultTransitionProps},
+    background-color ${defaultTransitionProps};
+
+  &:hover {
+    background-color: var(--color-base-neutral20);
+  }
+
+  & + & {
+    margin-left: 8px;
   }
 `;
 
