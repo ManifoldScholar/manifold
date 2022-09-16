@@ -9,56 +9,6 @@ import {
   respond
 } from "theme/styles/mixins";
 
-export const WrapperWithActions = styled.div`
-  // will become styled(FieldWrapper);
-  // this is a one-off for RG edit drawer,
-  // so doesn't belong with FieldWrapper's style file
-  grid-template:
-    "label label" auto
-    "input input" auto
-    "actions notification" auto / auto 1fr;
-
-  ${respond(
-    `
-      --Action-transform: translateY(5px);
-
-      grid-template:
-        "label label label" auto
-        "input notification actions" auto / 1fr auto auto;
-    `,
-    60
-  )}
-
-  label {
-    grid-area: label;
-  }
-
-  input {
-    grid-area: input;
-  }
-
-  .notification {
-    grid-area: notification;
-
-    ${respond(
-      `
-        padding-right: 10px;
-        padding-left: 10px;
-        margin-top: 7px !important;
-        border-bottom: 1px solid var(--color-base-neutral80);
-      `,
-      60
-    )}
-  }
-
-  .instructions {
-    grid-column: 1 / -1;
-    margin-bottom: 1em !important;
-
-    ${respond(`margin-bottom: 0 !important;`, 60)}
-  }
-`;
-
 export const PrimaryLabel = styled.label`
   ${formLabelPrimary}
   display: block;
@@ -135,6 +85,59 @@ export const SecondaryInput = styled(BaseInput)`
   }
 `;
 
+export const Notification = styled.span`
+  grid-area: notification;
+  display: block;
+  padding-inline: var(--Notification-padding-inline);
+  margin-top: var(--Notification-margin-top, 0.75em);
+  color: var(--highlight-color);
+  border-bottom: var(--Notification-border-bottom);
+  text-align: right;
+  text-transform: none;
+  font-size: 17px;
+  font-style: italic;
+  font-family: var(--font-family-copy);
+`;
+
+export const WrapperWithActions = styled.div`
+  // will become styled(FieldWrapper);
+  // this is a one-off for RG edit drawer,
+  // so doesn't belong with FieldWrapper's style file
+  grid-template:
+    "label label" auto
+    "input input" auto
+    "actions notification" auto / auto 1fr;
+
+  ${respond(
+    `
+      --Action-transform: translateY(5px);
+      --Notification-padding-inline: 10px;
+      --Notification-margin-top: 7px;
+      --Notification-border-bottom: 1px solid var(--color-base-neutral80);
+
+      grid-template:
+        "label label label" auto
+        "input notification actions" auto / 1fr auto auto;
+    `,
+    60
+  )}
+
+  label {
+    grid-area: label;
+  }
+
+  input {
+    grid-area: input;
+  }
+
+  .instructions {
+    grid-column: 1 / -1;
+    margin-bottom: 1em !important;
+
+    ${respond(`margin-bottom: 0 !important;`, 60)}
+  }
+`;
+
 export const ActionGroup = styled.div`
   grid-area: actions;
   margin-top: 12px;
@@ -172,5 +175,3 @@ export const Action = styled.button`
     margin-left: 8px;
   }
 `;
-
-// Needs styles for notification
