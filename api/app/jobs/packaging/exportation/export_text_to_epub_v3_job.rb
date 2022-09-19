@@ -1,7 +1,11 @@
 module Packaging
   module Exportation
     class ExportTextToEpubV3Job < ApplicationJob
-      concurrency 3, drop: false
+      discard_on ActiveJob::DeserializationError, ActiveRecord::RecordNotFound
+
+      around_perform :advisory_locked!
+
+      unique :until_executed, lock_ttl: 15.minutes, on_conflict: :log
 
       queue_as :default
 
