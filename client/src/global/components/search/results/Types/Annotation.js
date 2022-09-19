@@ -33,8 +33,12 @@ function SearchResultsTypeAnnotation({ result, highlightedAttribute }) {
     />
   );
 
-  const parentUrl = lh.link("readerSection", text.slug, textSection.id);
-  const url = `${parentUrl}#annotation-${searchableId}`;
+  const hasValidLink = text?.slug && textSection?.id && searchableId;
+
+  const parentUrl = hasValidLink
+    ? lh.link("readerSection", text.slug, textSection.id)
+    : null;
+  const url = parentUrl ? `${parentUrl}#annotation-${searchableId}` : undefined;
 
   const resultProps = {
     url,
