@@ -147,8 +147,9 @@ Lint/UselessMethodDefinition:
 Lint/UselessTimes:
   Enabled: true
 
+# We know where accessors should go.
 Style/AccessorGrouping:
-  Enabled: true
+  Enabled: false
 
 Style/ArrayCoercion:
   Enabled: true
