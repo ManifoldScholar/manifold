@@ -37,6 +37,10 @@ RSpec.describe Packaging::Shared::ReferenceSelector, packaging: true do
     it { is_expected.not_to maybe_refer_to_an_external_resource }
   end
 
+  with_tuple "iframe", "src" do
+    it { is_expected.not_to maybe_refer_to_an_external_resource }
+  end
+
   with_tuple "img", "src" do
     it { is_expected.to maybe_refer_to_an_external_resource }
   end
