@@ -6,8 +6,6 @@ import {
   outlineOnFocus,
   defaultFocusStyle,
   defaultTransitionProps,
-  setHoverStyle,
-  screenReaderText,
   formLabelPrimary,
   selectPrimary,
   utilityPrimary
@@ -50,6 +48,7 @@ export default `
   }
 
   .form-dropzone {
+    position: relative;
     cursor: pointer;
 
     &__inline-button {
@@ -58,11 +57,12 @@ export default `
       text-decoration: underline;
       text-transform: inherit;
       letter-spacing: inherit;
+      pointer-events: auto;
     }
 
     &__upload-prompt {
-      ${setHoverStyle()}
       text-decoration: underline;
+      transition: color var(--transition-duration-default) var(--transition-timing-function);
     }
 
     .dropzone-button {
@@ -98,8 +98,21 @@ export default `
     }
 
     input {
-      ${screenReaderText}
       display: block !important;
+      position: absolute;
+      inset-inline-start: 0;
+      inset-block-start: 0;
+      inline-size: 100%;
+      block-size: 100%;
+      opacity: 0;
+      cursor: pointer;
+
+      &:hover {
+        + [class^='contents-'] .form-dropzone__upload-prompt,
+        + .dropzone-button .form-dropzone__upload-prompt {
+          color: var(--hover-color);
+        }
+      }
 
       &.focus-visible {
         outline: 0;

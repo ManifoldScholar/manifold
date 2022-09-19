@@ -8,7 +8,7 @@ import NestedLink from "global/components/table/NestedLink";
 import LinkedName from "global/components/table/LinkedName";
 import InlineValue from "global/components/table/InlineValue";
 import IconComposer from "global/components/utility/IconComposer";
-import { ArchiveGroup, EditGroup, JoinGroup } from "./actions";
+import { ArchiveGroup, EditGroup, JoinGroup, LeaveGroup } from "./actions";
 import { ListFilters } from "global/components/list";
 import lh from "helpers/linkHandler";
 import { useListFilters } from "hooks";
@@ -24,7 +24,7 @@ export default function GroupsTable(props) {
     currentUser,
     hideActions,
     hideTags,
-    onArchive
+    onArchive: refetch
   } = props;
 
   const { t } = useTranslation();
@@ -167,7 +167,14 @@ export default function GroupsTable(props) {
                 membership={
                   model.relationships.currentUserReadingGroupMembership
                 }
-                onArchive={onArchive}
+                onArchive={refetch}
+              />
+              <LeaveGroup
+                readingGroup={model}
+                membership={
+                  model.relationships.currentUserReadingGroupMembership
+                }
+                onLeave={refetch}
               />
             </div>
           )}

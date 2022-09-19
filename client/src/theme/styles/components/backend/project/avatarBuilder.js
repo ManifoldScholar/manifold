@@ -158,6 +158,9 @@ export default `
 
           .contents-image-preview {
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: space-between;
             padding: 0 0 15px;
 

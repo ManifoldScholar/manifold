@@ -324,7 +324,6 @@ export default `
     padding-left: 33px;
     margin-bottom: 0;
     font-size: 13px;
-    cursor: pointer;
 
     ${respond(`font-size: 16px;`, 60)}
 
@@ -349,8 +348,14 @@ export default `
 
     input {
       position: absolute;
-      z-index: -1;
+      inset-inline-start: 0;
+      inset-block-start: 0;
+      inline-size: 100%;
+      block-size: 100%;
+      margin: 0;
       opacity: 0;
+      z-index: 1;
+      cursor: pointer;
 
       &.focus-visible ~ .toggle-indicator {
         background-color: var(--color-accent-primary-light);

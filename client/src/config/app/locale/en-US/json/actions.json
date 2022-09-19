@@ -73,6 +73,7 @@
     "publish": "Publish",
     "publish_project": "$t(actions.publish) a project",
     "dismiss": "Dismiss",
-    "continue": "Continue"
+    "continue": "Continue",
+    "leave": "Leave"
   }
 }
