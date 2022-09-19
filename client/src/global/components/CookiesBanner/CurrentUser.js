@@ -1,12 +1,11 @@
 import React, { useCallback } from "react";
-import { useTranslation, Trans } from "react-i18next";
 import { Link } from "react-router-dom";
+import { Trans } from "react-i18next";
 import { useFromStore, useApiCallback } from "hooks";
 import { meAPI } from "api";
-import * as Styled from "./styles";
+import NarrowBanner from "./NarrowBanner";
 
 export default function CurrentUserBanner() {
-  const { t } = useTranslation();
   const { currentUser } = useFromStore("authentication");
   const { consentNeededManifoldAnalytics, consentNeededGoogleAnalytics } =
     currentUser?.attributes ?? {};
@@ -25,41 +24,22 @@ export default function CurrentUserBanner() {
     acceptCookies(args);
   }, [acceptCookies, googleAnalyticsEnabled, manifoldAnalyticsEnabled]);
 
-  if (
-    currentUser &&
-    !(consentNeededGoogleAnalytics || consentNeededManifoldAnalytics)
-  )
+  if (!(consentNeededGoogleAnalytics || consentNeededManifoldAnalytics))
     return null;
 
+  const message = (
+    <Trans
+      i18nKey="messages.cookies_banner.body"
+      components={[<Link to={`/privacy`} />]}
+    />
+  );
+
   return (
-    <Styled.Banner>
-      <Styled.Inner>
-        <Styled.TextWrapper>
-          <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
-          <p>
-            <Trans
-              i18nKey="messages.cookies_banner.body"
-              components={[<Link to={`/privacy`} />]}
-            />
-          </p>
-        </Styled.TextWrapper>
-        <Styled.ButtonWrapper>
-          <button
-            className="button-secondary button-secondary--text-white"
-            onClick={acceptAll}
-          >
-            {t("messages.cookies_banner.accept_button_label")}
-          </button>
-          <Styled.WhiteButton
-            as={Link}
-            to="/privacy"
-            className="button-secondary button-secondary--outlined"
-          >
-            {t("messages.cookies_banner.settings_button_label")}
-          </Styled.WhiteButton>
-        </Styled.ButtonWrapper>
-      </Styled.Inner>
-    </Styled.Banner>
+    <NarrowBanner
+      message={message}
+      acceptAll={acceptAll}
+      settingsLinkProps={{ as: Link, to: "/privacy" }}
+    />
   );
 }
 
