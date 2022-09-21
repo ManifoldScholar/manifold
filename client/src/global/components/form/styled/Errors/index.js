@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
-import Errorable from "./Errorable";
+import setter from "../../setter";
+import Errorable from "../Errorable";
 
 class Errors extends PureComponent {
   static propTypes = {

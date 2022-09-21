@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
-import Errorable from "global/components/form/Errorable";
+import Errorable from "../../Errorable";
 import isString from "lodash/isString";
 import Instructions from "../Instructions";
-import Empty from "./Empty";
-import Preview from "./Preview";
-import BaseLabel from "../BaseLabel";
+import Empty from "../Empty";
+import Preview from "../Preview";
+import BaseLabel from "../../BaseLabel";
 import * as Styled from "./styles";
 
 export default class FormUpload extends Component {

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
-import setter from "./setter";
-import Errorable from "global/components/form/Errorable";
+import setter from "../../setter";
+import Errorable from "../Errorable";
 import isString from "lodash/isString";
-import Instructions from "./Instructions";
-import BaseLabel from "./BaseLabel";
-import FieldWrapper from "./FieldWrapper";
+import Instructions from "../Instructions";
+import BaseLabel from "../BaseLabel";
+import FieldWrapper from "../FieldWrapper";
 import * as Styled from "./styles";
 
 class FormTextArea extends Component {

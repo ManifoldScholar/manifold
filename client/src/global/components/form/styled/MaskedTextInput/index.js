@@ -4,11 +4,10 @@ import { UIDConsumer } from "react-uid";
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
 import fill from "lodash/fill";
-import setter from "./setter";
-import classnames from "classnames";
+import setter from "../../setter";
 import isString from "lodash/isString";
-import Instructions from "./Instructions";
-import FieldWrapper from "./FieldWrapper";
+import Instructions from "../Instructions";
+import FieldWrapper from "../FieldWrapper";
 import BaseLabel from "BaseLabel";
 
 class FormMaskedTextInput extends Component {

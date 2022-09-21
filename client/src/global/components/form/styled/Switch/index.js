@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
-import setter from "./setter";
-import Instructions from "./Instructions";
-import FieldWrapper from "./FieldWrapper";
+import setter from "../../setter";
+import Instructions from "../Instructions";
+import FieldWrapper from "../FieldWrapper";
 import * as Styled from "./styles";
 
 class FormSwitch extends Component {
