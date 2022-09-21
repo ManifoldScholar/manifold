@@ -6,7 +6,7 @@ import Option from "../Radio/Option";
 import RadioLabel from "../Radio/Label";
 import classnames from "classnames";
 import isString from "lodash/isString";
-import Instructions from "../../Instructions";
+import Instructions from "../Instructions";
 import withFormOptions from "hoc/withFormOptions";
 import * as Styled from "./styles";
 

@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "../setter";
 import withDispatch from "hoc/withDispatch";
-import Errorable from "./Errorable";
+import Errorable from "../Errorable";
 import Loadable from "@docusaurus/react-loadable";
-import BaseLabel from "./BaseLabel";
-import Instructions from "./Instructions";
+import BaseLabel from "../BaseLabel";
+import Instructions from "../Instructions";
 
 /* eslint-disable react/prop-types */
 const CodeAreaInput = Loadable({

@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
-import setter from "./setter";
+import setter from "../../setter";
 import Errorable from "global/components/form/Errorable";
 import generatePassword from "helpers/passwordGenerator";
-import BaseLabel from "./BaseLabel";
+import BaseLabel from "../BaseLabel";
 import * as Styled from "./styles";
 
 class FormGeneratedPasswordInput extends Component {

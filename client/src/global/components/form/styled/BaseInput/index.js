@@ -4,8 +4,8 @@ import setter from "./setter";
 import Errorable from "global/components/form/Errorable";
 import classnames from "classnames";
 import isString from "lodash/isString";
-import Instructions from "./Instructions";
-import BaseLabel from "./BaseLabel";
+import Instructions from "../Instructions";
+import BaseLabel from "../BaseLabel";
 import * as Styled from "./styles";
 
 class FormBaseInput extends PureComponent {

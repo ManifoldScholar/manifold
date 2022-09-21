@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import InputError from "./InputError";
+import InputError from "../InputError";
 import brackets2dots from "brackets2dots";
 import has from "lodash/has";
-import FieldWrapper from "./FieldWrapper";
+import FieldWrapper from "../FieldWrapper";
 
 export default class Errorable extends PureComponent {
   // If name = "*" this component will show all errors, rather than a specific
