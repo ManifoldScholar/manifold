@@ -16,6 +16,7 @@ import { Prompt } from "react-router-dom";
 import { FormContext } from "helpers/contexts";
 import isArray from "lodash/isArray";
 import isNil from "lodash/isNil";
+import * as Styled from "./styles";
 
 const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
@@ -254,9 +255,8 @@ export class FormContainer extends PureComponent {
   renderGroupedErrors(props) {
     if (!props.groupErrors || !props.errors) return null;
     return (
-      <GlobalForm.Errorable
+      <Styled.ErrorGroup
         containerStyle={props.groupErrorsStyle}
-        className="form-input form-error-grouped"
         name="*"
         errors={props.errors}
       />
