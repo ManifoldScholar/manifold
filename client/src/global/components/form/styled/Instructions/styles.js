@@ -20,22 +20,19 @@ export const PrimaryInstructions = styled.span`
     margin-bottom: 0;
   }
 
-  .form-input--with-actions & {
-    grid-column: 1 / -1;
+  ${({ $withActions }) =>
+    $withActions &&
+    `grid-column: 1 / -1;
     margin-bottom: 1em !important;
 
     ${respond(`margin-bottom: 0 !important;`, 60)}
-  }
-
-  .form-input .form-input-radios__legend + & {
-    margin-block-start: 7px;
-  }
+  `}
 `;
 
 export const SecondaryInstructions = styled(PrimaryInstructions)`
   margin-top: 0.75em;
 
-  &--inline {
+  &.inline {
     display: inline;
   }
 

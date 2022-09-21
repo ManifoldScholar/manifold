@@ -4,9 +4,10 @@ import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Errorable from "global/components/form/Errorable";
 import isString from "lodash/isString";
-import classnames from "classnames";
 import Instructions from "./Instructions";
 import BaseLabel from "./BaseLabel";
+import FieldWrapper from "./FieldWrapper";
+import * as Styled from "./styles";
 
 class FormTextArea extends Component {
   static displayName = "Form.TextArea";
@@ -40,19 +41,14 @@ class FormTextArea extends Component {
   }
 
   render() {
-    const inputClasses = classnames({
-      "form-input": true,
-      wide: this.props.wide
-    });
+    const TextArea =
+      context === "primary" ? Styled.TextAreaPrimary : Styled.TextAreaSecondary;
 
     return (
       <UIDConsumer>
         {id => (
-          /* Should also be the generic FieldWrapper component */
-          <div className={inputClasses}>
-            /* Does not appear to have any styles applied via .form-input */
+          <FieldWrapper className={this.props.wide ? "wide" : undefined}>
             <Errorable
-              className="form-input"
               name={this.props.name}
               errors={this.props.errors}
               label={this.props.label}
@@ -67,7 +63,7 @@ class FormTextArea extends Component {
                 instructions={this.props.instructions}
                 id={`${this.idForInstructionsPrefix}-${id}`}
               />
-              <textarea
+              <TextArea
                 id={`${this.idPrefix}-${id}`}
                 aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
                 style={{ height: this.props.height }}
@@ -76,7 +72,7 @@ class FormTextArea extends Component {
                 value={this.props.value || ""}
               />
             </Errorable>
-          </div>
+          </FieldWrapper>
         )}
       </UIDConsumer>
     );

@@ -55,7 +55,6 @@ class FormRadios extends Component {
 
   get inputClasses() {
     return classnames(this.props.inputClasses, {
-      "form-input": true,
       "extra-space-bottom": true,
       wide: this.props.wide
     });

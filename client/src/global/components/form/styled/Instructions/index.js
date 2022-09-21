@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isString from "lodash/isString";
-import classnames from "classnames";
+import * as Styled from "./styles";
 
 export default class Instructions extends PureComponent {
   static propTypes = {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     className: PropTypes.string,
-    id: PropTypes.string
+    id: PropTypes.string,
+    withActions: PropTypes.bool,
+    styleType: PropTypes.string
   };
 
   static defaultProps = {
@@ -15,14 +17,22 @@ export default class Instructions extends PureComponent {
   };
 
   renderInstructions() {
-    const { instructions } = this.props;
-    const classes = classnames("instructions", this.props.className);
+    const { instructions, className, withActions, styleType } = this.props;
+
+    const InstructionsComponent =
+      styleType === "secondary"
+        ? Styled.SecondaryInstructions
+        : Styled.PrimaryInstructions;
 
     if (isString(instructions)) {
       return (
-        <span className={classes} id={this.props.id}>
+        <InstructionsComponent
+          className={className}
+          $withActions={withActions}
+          id={this.props.id}
+        >
           {instructions}
-        </span>
+        </InstructionsComponent>
       );
     }
     return instructions;

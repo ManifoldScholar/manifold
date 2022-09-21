@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import BaseErrorable from "global/components/form/Errorable";
 import IconComposer from "global/components/utility/IconComposer";
 import { formInputSecondary, textTruncate } from "theme/styles/mixins";
 
@@ -8,17 +7,12 @@ const FORM_SELECT_ICON_PADDING = 12;
 const FORM_SELECT_INLINE_END_PADDING =
   FORM_SELECT_ICON_SIZE + 2 * FORM_SELECT_ICON_PADDING;
 
-/* No styles applied except a width: auto override that's no longer necessary for secondary/tertiary. */
 export const PrimarySelectWrapper = styled.div`
   position: relative;
   display: inline-block;
   width: 100%;
 `;
 
-// Uses the same styles as SelectWrapper; use as prop. Also, necessary?
-export const Errorable = styled(BaseErrorable)``;
-
-/* eslint-disable no-nested-ternary */
 const BaseSelect = styled.select`
   ${formInputSecondary}
   padding: var(--Select-padding);

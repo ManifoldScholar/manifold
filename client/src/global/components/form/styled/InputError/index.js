@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
+import * as Styled from "./styles";
 
 export default class InputError extends Component {
   static propTypes = {
@@ -23,27 +24,22 @@ export default class InputError extends Component {
   render() {
     if (this.hasErrors()) {
       return (
-        <span
+        <Styled.ErrorList
           id={this.props.idForError ? this.props.idForError : null}
-          className="errors"
           role="alert"
           aria-live="polite"
           aria-atomic="true"
         >
           {this.props.errors.map((e, i) => {
             return (
-              <span key={i}>
-                <span className="error">
-                  {this.errorString(e)}
-                  <br />
-                </span>{" "}
-              </span>
+              <Styled.Error key={i} className="error">
+                {this.errorString(e)}
+              </Styled.Error>
             );
           })}
-        </span>
+        </Styled.ErrorList>
       );
     }
     return null;
   }
-  /* eslint-enable react/no-array-index-key */
 }

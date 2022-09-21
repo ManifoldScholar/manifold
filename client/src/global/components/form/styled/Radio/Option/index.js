@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 import * as Styled from "./styles";
 
 export default class FormRadioOption extends PureComponent {
@@ -44,13 +43,6 @@ export default class FormRadioOption extends PureComponent {
 
   get tabIndex() {
     return this.props.tabIndex || 0;
-  }
-
-  get inputClassNames() {
-    return classnames("form-toggle", "radio", {
-      checked: this.checked,
-      inline: this.inline
-    });
   }
 
   render() {

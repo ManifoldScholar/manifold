@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { listUnstyled, respond, formLabelPrimary } from "theme/styles/mixins";
 
-export const Mappable = styled.ul`
+export const MappableList = styled.ul`
   ${listUnstyled}
   max-height: 700px;
   padding: 0.8em;

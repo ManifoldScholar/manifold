@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Instructions from "./Instructions";
-import IconComposer from "global/components/utility/IconComposer";
+import FieldWrapper from "./FieldWrapper";
+import * as Styled from "./styles";
 
 class FormSwitch extends Component {
   static displayName = "Form.Switch";
@@ -37,47 +37,6 @@ class FormSwitch extends Component {
     if (this.props.focusOnMount && this.checkbox) {
       this.checkbox.focus();
     }
-  }
-
-  get labelClasses() {
-    return classnames(
-      "form-input-heading",
-      "toggle",
-      this.props.labelPos,
-      this.props.labelClass
-    );
-  }
-
-  get themeClasses() {
-    return classnames({
-      "form-switch": this.showSwitch,
-      "checkbox checkbox--gray": this.showCheckbox,
-      checked: this.checked
-    });
-  }
-
-  get wrapperClasses() {
-    return classnames(
-      {
-        "form-input": true,
-        wide: this.props.wide
-      },
-      this.props.className
-    );
-  }
-
-  get switchClasses() {
-    return classnames({
-      "boolean-primary": this.showSwitch,
-      checked: this.checked
-    });
-  }
-
-  /* Have not dealt with this */
-  get instructionClasses() {
-    return classnames({
-      "instructions--inline": this.showCheckbox
-    });
   }
 
   get checked() {
@@ -134,39 +93,38 @@ class FormSwitch extends Component {
   renderSwitchIndicator() {
     return (
       /* toggle-indicator does not seem to apply any styles here; used for customization by other parent components */
-      <span className="toggle-indicator">
-        <span className={this.switchClasses} aria-hidden="true" />
-      </span>
+      <Styled.IndicatorSwitchOuter className="toggle-indicator">
+        <Styled.IndicatorSwitchInner aria-hidden="true" />
+      </Styled.IndicatorSwitchOuter>
     );
   }
 
   renderCheckboxIndicator() {
     return (
-      <span className="checkbox__indicator" aria-hidden="true">
-        <IconComposer
-          icon="checkmark16"
-          size="default"
-          className="checkbox__icon"
-        />
-      </span>
+      <Styled.IndicatorCheckbox aria-hidden="true">
+        <Styled.IconCheckbox icon="checkmark16" size="default" />
+      </Styled.IndicatorCheckbox>
     );
   }
 
-  renderLabelText() {
-    return <span className={this.labelClasses}>{this.props.label}</span>;
-  }
-
   render() {
+    const Label = this.showSwitch ? Styled.LabelSwitch : Styled.LabelCheckbox;
+
     return (
       <UIDConsumer>
         {id => (
-          <div className={this.wrapperClasses}>
-            <label
-              htmlFor={`${this.idPrefix}-${id}`}
-              className={this.themeClasses}
-            >
-              {this.props.labelPos === "above" && this.renderLabelText()}
-              <input
+          <FieldWrapper
+            className={
+              this.props.wide
+                ? `wide ${this.props.className}`
+                : this.props.className
+            }
+          >
+            <Label htmlFor={`${this.idPrefix}-${id}`}>
+              {this.props.labelPos === "above" && (
+                <Styled.LabelText>{this.props.label}</Styled.LabelText>
+              )}
+              <Styled.InputCheckbox
                 ref={c => {
                   this.checkbox = c;
                 }}
@@ -177,13 +135,15 @@ class FormSwitch extends Component {
               />
               {this.showCheckbox && this.renderCheckboxIndicator()}
               {this.showSwitch && this.renderSwitchIndicator()}
-              {this.props.labelPos === "below" && this.renderLabelText()}
+              {this.props.labelPos === "below" && (
+                <Styled.LabelText>{this.props.label}</Styled.LabelText>
+              )}
               <Instructions
                 instructions={this.props.instructions}
-                className={this.instructionClasses}
+                className={this.showCheckbox ? "inline" : undefined}
               />
-            </label>
-          </div>
+            </Label>
+          </FieldWrapper>
         )}
       </UIDConsumer>
     );

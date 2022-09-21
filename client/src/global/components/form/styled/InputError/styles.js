@@ -9,6 +9,7 @@ export const Error = styled.span`
   ${formInputMessage}
   display: inline-block;
   margin-block-start: 15px;
+  margin-block-end: calc(1em * --var(line-height));
   color: var(--error-color);
 
   /* These need to come out later. */

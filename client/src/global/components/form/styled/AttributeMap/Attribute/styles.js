@@ -59,7 +59,6 @@ export const Cancel = styled.button`
       var(--transition-timing-function) 0s 1;`}
 `;
 
-/* = old classname text */
 export const ColumnName = styled.span`
   display: block;
   padding: 0.6em 0.8em;

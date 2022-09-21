@@ -186,7 +186,11 @@
     },
     "attribute_map": {
       "cancel": "Cancel mapping of {{name}} to {{mapping}}",
-      "placeholder": "Drag column..."
+      "placeholder": "Drag column...",
+      "auto_map": "Automatically Map Attributes",
+      "spreadsheet_cols": "Spreadsheet Columns",
+      "col_header_placeholder": "Column #{{num}}",
+      "available": "Available Attributes"
     },
     "picker": {
       "remove_all": "Remove All",

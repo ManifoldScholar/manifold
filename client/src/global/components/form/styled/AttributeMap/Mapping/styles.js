@@ -16,6 +16,7 @@ export const ColumnLabel = styled.div`
   font-weight: var(--font-weight-medium);
   color: var(--color-neutral-text-extra-dark);
   background-color: var(--color-base-neutral40);
+  min-height: calc(1em * var(--line-height));
 
   ${respond(`width: calc(100% - 21vw);`, 80)}
   ${respond(`width: calc(100% - 23vw);`, 85)}
