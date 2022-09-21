@@ -1,11 +1,7 @@
 import styled from "@emotion/styled";
 import BaseErrorable from "global/components/form/Errorable";
 import IconComposer from "global/components/utility/IconComposer";
-import {
-  formInputSecondary,
-  textTruncate,
-  formLabelPrimary
-} from "theme/styles/mixins";
+import { formInputSecondary, textTruncate } from "theme/styles/mixins";
 
 const FORM_SELECT_ICON_SIZE = 24;
 const FORM_SELECT_ICON_PADDING = 12;
@@ -81,21 +77,6 @@ export const TertiarySelect = styled(BaseSelect)`
   ); /* required for option to inherit in FF */
   border: 1px solid var(--color-neutral-ui-dull-light);
   border-radius: var(--box-border-radius);
-`;
-
-export const PrimaryLabel = styled.label`
-  ${formLabelPrimary}
-  display: block;
-  margin-block-end: 1em;
-`;
-
-export const SecondaryLabel = styled(PrimaryLabel)`
-  margin-block-start: 0;
-  margin-block-end: 0.5em;
-`;
-
-export const TertiaryLabel = styled(PrimaryLabel)`
-  margin-block-end: 1em;
 `;
 
 /* These icon styles seem to be used for both primary and secondary. */

@@ -5,6 +5,8 @@ import Errorable from "global/components/form/Errorable";
 import classnames from "classnames";
 import isString from "lodash/isString";
 import Instructions from "./Instructions";
+import BaseLabel from "./BaseLabel";
+import * as Styled from "./styles";
 
 class FormBaseInput extends PureComponent {
   static displayName = "Form.BaseInput";
@@ -89,9 +91,6 @@ class FormBaseInput extends PureComponent {
       instructions,
       wide
     } = this.props;
-    const labelClass = classnames({
-      "has-instructions": isString(instructions)
-    });
     const inputClasses = classnames(this.props.inputClasses, {
       "form-input": true, // <FieldWrapper>
       wide,
@@ -106,9 +105,11 @@ class FormBaseInput extends PureComponent {
         label={this.props.label}
         idForError={idForError}
       >
-        <label htmlFor={id} className={labelClass}>
-          {this.props.label}
-        </label>
+        <BaseLabel
+          id={id}
+          label={this.props.label}
+          hasInstructions={isString(instructions)}
+        />
         <input
           ref={input => {
             this.inputElement = input;

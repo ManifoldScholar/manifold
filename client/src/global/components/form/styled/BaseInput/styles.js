@@ -1,25 +1,13 @@
 import styled from "@emotion/styled";
 import {
   formInputBase,
-  formLabelPrimary,
   buttonUnstyled,
   utilityPrimary,
   defaultTransitionProps,
   fluidScale,
-  respond
+  respond,
+  fillOnFocus
 } from "theme/styles/mixins";
-
-export const PrimaryLabel = styled.label`
-  ${formLabelPrimary}
-  display: block;
-  margin-block-end: 1em;
-
-  ${({ $hasInstructions }) => $hasInstructions && `margin-block-end: 0.5em;`}
-`;
-
-export const SecondaryLabel = styled(PrimaryLabel)`
-  margin-block-start: 0;
-`;
 
 export const BaseInput = styled.input`
   ${formInputBase}

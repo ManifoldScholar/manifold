@@ -6,6 +6,7 @@ import setter from "./setter";
 import Errorable from "global/components/form/Errorable";
 import generatePassword from "helpers/passwordGenerator";
 import IconComposer from "global/components/utility/IconComposer";
+import BaseLabel from "./BaseLabel";
 
 class FormGeneratedPasswordInput extends Component {
   static displayName = "Form.GeneratedPasswordInput";
@@ -103,9 +104,10 @@ class FormGeneratedPasswordInput extends Component {
             label={t("forms.password_reset.password")}
             idForError={`${this.idForErrorPrefix}-${id}`}
           >
-            <label htmlFor={`${this.idPrefix}-${id}`}>
-              {t("forms.password_reset.password")}
-            </label>
+            <BaseLabel
+              id={`${this.idPrefix}-${id}`}
+              label={t("forms.password_reset.password")}
+            />
             <span
               className="password-input__visibility-toggle"
               onClick={event => this.togglePassword(event)}

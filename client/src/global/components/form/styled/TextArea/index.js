@@ -6,6 +6,7 @@ import Errorable from "global/components/form/Errorable";
 import isString from "lodash/isString";
 import classnames from "classnames";
 import Instructions from "./Instructions";
+import BaseLabel from "./BaseLabel";
 
 class FormTextArea extends Component {
   static displayName = "Form.TextArea";
@@ -39,9 +40,6 @@ class FormTextArea extends Component {
   }
 
   render() {
-    const labelClass = classnames({
-      "has-instructions": isString(this.props.instructions)
-    });
     const inputClasses = classnames({
       "form-input": true,
       wide: this.props.wide
@@ -60,9 +58,11 @@ class FormTextArea extends Component {
               label={this.props.label}
               idForError={`${this.idForErrorPrefix}-${id}`}
             >
-              <label htmlFor={`${this.idPrefix}-${id}`} className={labelClass}>
-                {this.props.label}
-              </label>
+              <BaseLabel
+                id={`${this.idPrefix}-${id}`}
+                hasInstructions={isString(this.props.instructions)}
+                label={this.props.label}
+              />
               <Instructions
                 instructions={this.props.instructions}
                 id={`${this.idForInstructionsPrefix}-${id}`}
