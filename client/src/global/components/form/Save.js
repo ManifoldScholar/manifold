@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import { withTranslation } from "react-i18next";
+import FieldWrapper from "./styled/FieldWrapper";
 
-export default class FormSave extends Component {
+class FormSave extends Component {
   static displayName = "Form.Save";
 
   static propTypes = {
     text: PropTypes.string,
     cancelRoute: PropTypes.string,
     cancelCallback: PropTypes.func,
-    theme: PropTypes.oneOf(["frontend", "backend", "reader"])
+    theme: PropTypes.oneOf(["frontend", "backend", "reader"]),
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -19,8 +22,10 @@ export default class FormSave extends Component {
   };
 
   render() {
+    const t = this.props.t;
+
     return (
-      <div className="form-input submit wide">
+      <FieldWrapper className="wide">
         {this.props.cancelRoute && (
           <Link
             to={this.props.cancelRoute}
@@ -31,7 +36,7 @@ export default class FormSave extends Component {
               "button-secondary--accent-pale": this.props.theme === "frontend"
             })}
           >
-            {"Cancel"}
+            {t("actions.cancel")}
           </Link>
         )}
         {this.props.cancelCallback && (
@@ -44,7 +49,7 @@ export default class FormSave extends Component {
               "button-secondary--outlined": this.props.theme === "backend"
             })}
           >
-            {"Cancel"}
+            {t("actions.cancel")}
           </button>
         )}
         <input
@@ -55,7 +60,9 @@ export default class FormSave extends Component {
           type="submit"
           value={this.props.text}
         />
-      </div>
+      </FieldWrapper>
     );
   }
 }
+
+export default withTranslation()(FormSave);
