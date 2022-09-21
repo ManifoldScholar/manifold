@@ -6,6 +6,7 @@ import setter from "../../setter";
 import Errorable from "global/components/form/Errorable";
 import generatePassword from "helpers/passwordGenerator";
 import BaseLabel from "../BaseLabel";
+import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
 class FormGeneratedPasswordInput extends Component {
@@ -23,6 +24,10 @@ class FormGeneratedPasswordInput extends Component {
 
   static defaultProps = {
     focusOnMount: false
+  };
+
+  static contextType = {
+    FormContext
   };
 
   constructor(props) {
@@ -76,7 +81,9 @@ class FormGeneratedPasswordInput extends Component {
     const type = this.state.showPassword ? "text" : "password";
 
     const Input =
-      context === "primary" ? Styled.PrimaryInput : Styled.SecondaryInput;
+      this.context.styleType === "primary"
+        ? Styled.PrimaryInput
+        : Styled.SecondaryInput;
 
     return (
       <Input
@@ -110,6 +117,7 @@ class FormGeneratedPasswordInput extends Component {
             <BaseLabel
               id={`${this.idPrefix}-${id}`}
               label={t("forms.password_reset.password")}
+              styleType={this.context.styleType}
             />
             <Styled.Toggle
               onClick={event => this.togglePassword(event)}

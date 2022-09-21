@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isString from "lodash/isString";
+import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
 export default class Instructions extends PureComponent {
@@ -8,19 +9,22 @@ export default class Instructions extends PureComponent {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     className: PropTypes.string,
     id: PropTypes.string,
-    withActions: PropTypes.bool,
-    styleType: PropTypes.string
+    withActions: PropTypes.bool
   };
 
   static defaultProps = {
     instructions: null
   };
 
+  static contextType = {
+    FormContext
+  };
+
   renderInstructions() {
-    const { instructions, className, withActions, styleType } = this.props;
+    const { instructions, className, withActions } = this.props;
 
     const InstructionsComponent =
-      styleType === "secondary"
+      this.context.styleType === "secondary"
         ? Styled.SecondaryInstructions
         : Styled.PrimaryInstructions;
 
