@@ -6,6 +6,7 @@ import Instructions from "./Instructions";
 import withFormOptions from "hoc/withFormOptions";
 import IconComposer from "global/components/utility/IconComposer";
 import classNames from "classnames";
+import BaseLabel from "./BaseLabel";
 
 class FormSelect extends Component {
   static displayName = "Form.Select";
@@ -87,13 +88,12 @@ class FormSelect extends Component {
               label={this.props.label}
               idForError={`${this.idForErrorPrefix}-${id}`}
             >
-              /* Label in styles */
-              <label
-                htmlFor={`${this.idPrefix}-${id}`}
-                className={labelClassName}
-              >
-                {this.props.label}
-              </label>
+              <BaseLabel
+                id={`${this.idPrefix}-${id}`}
+                styleType={this.props.rounded ? "tertiary" : "secondary"}
+                label={this.props.label}
+                isSelect
+              />{" "}
               /* SelectWrapper in styles */
               <div className="form-select">
                 /* Icon in styles */

@@ -4,8 +4,7 @@ import {
   respond,
   fluidScale,
   formInputBase,
-  defaultTransitionProps,
-  formLabelPrimary
+  defaultTransitionProps
 } from "theme/styles/mixins";
 
 const VISIBILITY_TOGGLE_SIZE = 32;
@@ -87,17 +86,4 @@ export const SecondaryInput = styled(BaseInput)`
     box-shadow: 0 0 0 1000px var(--background-color) inset;
     -webkit-text-fill-color: var(--input-autofill-color) !important;
   }
-`;
-
-/* Same for label, though these are shared more broadly. */
-export const PrimaryLabel = styled.label`
-  ${formLabelPrimary}
-  display: block;
-  margin-block-end: 1em;
-
-  ${({ $hasInstructions }) => $hasInstructions && `margin-block-end: 0.5em;`}
-`;
-
-export const SecondaryLabel = styled(PrimaryLabel)`
-  margin-block-start: 0;
 `;
