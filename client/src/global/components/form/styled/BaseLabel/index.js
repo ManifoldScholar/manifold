@@ -3,6 +3,7 @@ import * as Styled from "./styles";
 
 export default function BaseLabel({
   id,
+  as = "label",
   label,
   styleType = "primary",
   hasInstructions = false,
@@ -17,7 +18,12 @@ export default function BaseLabel({
       : Styled.TertiaryLabel;
 
   return (
-    <Label htmlFor={id} $hasInstructions={hasInstructions} $isSelect={isSelect}>
+    <Label
+      as={as}
+      htmlFor={id}
+      $hasInstructions={hasInstructions}
+      $isSelect={isSelect}
+    >
       {label}
     </Label>
   );
