@@ -50,7 +50,6 @@ class FormSwitchArray extends Component {
   render() {
     return (
       <Errorable
-        className="form-input"
         name={this.props.name}
         nameForError={this.props.label}
         errors={this.props.errors}
