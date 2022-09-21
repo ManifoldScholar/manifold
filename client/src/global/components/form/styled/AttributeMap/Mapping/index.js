@@ -1,10 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import classNames from "classnames";
 import { Droppable } from "react-beautiful-dnd";
 import Attribute from "./Attribute";
 import isNil from "lodash/isNil";
+import * as Styled from "./styles";
 
 class FormColumnMapMapping extends PureComponent {
   static displayName = "Form.ColumnMap.Mapping";
@@ -22,42 +22,35 @@ class FormColumnMapMapping extends PureComponent {
     const { match } = this.props;
 
     return (
-      <div className={`mapping ${match ? "matched" : ""}`}>
-        {/* Add min-height and get rid of conditional? */}
-        <div className="column-label">
-          {this.props.name ? (
-            <span className="truncate">{this.props.name}</span>
-          ) : (
-            <span className="truncate">&nbsp;</span>
-          )}
-        </div>
+      <Styled.Mapping>
+        <Styled.ColumnLabel>
+          <Styled.LabelTruncated>{this.props.name}</Styled.LabelTruncated>
+        </Styled.ColumnLabel>
         <Droppable droppableId={this.props.id} isDropDisabled={!isNil(match)}>
           {(provided, snapshot) => {
-            // Set a class if element is being dragged over
-            const wellClass = classNames("well", {
-              "drag-over": snapshot.isDraggingOver,
-              matched: match
-            });
-
             return (
-              <div className={wellClass} ref={provided.innerRef}>
+              <Styled.Well
+                ref={provided.innerRef}
+                $dragOver={snapshot.isDraggingOver}
+              >
                 {this.props.match ? (
                   <Attribute
                     name={this.props.match}
                     index={this.props.index}
                     unLink={this.props.unLink}
                     mapping={this.props.name}
+                    inWell
                   />
                 ) : null}
-                <span className="placeholder">
+                <Styled.Placeholder $matched={this.props.match}>
                   {this.props.t("forms.attribute_map.placeholder")}
-                </span>
+                </Styled.Placeholder>
                 {provided.placeholder}
-              </div>
+              </Styled.Well>
             );
           }}
         </Droppable>
-      </div>
+      </Styled.Mapping>
     );
   }
 }

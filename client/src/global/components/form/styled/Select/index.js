@@ -4,9 +4,9 @@ import { UIDConsumer } from "react-uid";
 import Errorable from "global/components/form/Errorable";
 import Instructions from "./Instructions";
 import withFormOptions from "hoc/withFormOptions";
-import IconComposer from "global/components/utility/IconComposer";
-import classNames from "classnames";
 import BaseLabel from "./BaseLabel";
+import FieldWrapper from "./FieldWrapper";
+import * as Styled from "./styles";
 
 class FormSelect extends Component {
   static displayName = "Form.Select";
@@ -61,28 +61,24 @@ class FormSelect extends Component {
       );
     });
 
-    const selectClassName = classNames({
-      "form-select": true,
-      "form-select--rounded": this.props.rounded
-    });
+    const WrapperTag =
+      context === "primary" ? Styled.PrimarySelectWrapper : "div";
 
-    const wrapperClassName = classNames({
-      "form-input": true,
-      wide: this.props.wide
-    });
+    const SelectComponent = this.props.rounded
+      ? Styled.TertiarySelect
+      : context === "primary"
+      ? Styled.PrimarySelect
+      : Styled.SecondarySelect;
 
-    const labelClassName = classNames({
-      "pad-bottom": this.props.rounded
-    });
+    const IconComponent = this.props.rounded
+      ? Styled.IconTertiary
+      : Styled.Icon;
 
     return (
       <UIDConsumer>
         {id => (
-          /* .form-input is the most complicated class. Should probably be extracted to its own component, e.g. Field or FieldWrapper, to handle spacing for as many atomics as possible. */
-          <div className={wrapperClassName}>
-            /* Errorable in styles */
+          <FieldWrapper className="wide">
             <Errorable
-              className={selectClassName}
               name={this.props.name}
               errors={this.props.errors}
               label={this.props.label}
@@ -90,20 +86,13 @@ class FormSelect extends Component {
             >
               <BaseLabel
                 id={`${this.idPrefix}-${id}`}
-                styleType={this.props.rounded ? "tertiary" : "secondary"}
+                styleType={this.props.rounded ? "tertiary" : context}
                 label={this.props.label}
                 isSelect
-              />{" "}
-              /* SelectWrapper in styles */
-              <div className="form-select">
-                /* Icon in styles */
-                <IconComposer
-                  icon="disclosureDown24"
-                  size={24}
-                  className="form-select__icon"
-                />
-                /* Select in styles */
-                <select
+              />
+              <WrapperTag>
+                <IconComponent icon="disclosureDown24" size={24} />
+                <SelectComponent
                   id={`${this.idPrefix}-${id}`}
                   aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
                   onChange={this.props.onChange}
@@ -113,14 +102,14 @@ class FormSelect extends Component {
                   }}
                 >
                   {options}
-                </select>
-              </div>
+                </SelectComponent>
+              </WrapperTag>
               <Instructions
                 instructions={this.props.instructions}
                 id={`${this.idForInstructionsPrefix}-${id}`}
               />
             </Errorable>
-          </div>
+          </FieldWrapper>
         )}
       </UIDConsumer>
     );

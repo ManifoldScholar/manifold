@@ -1,0 +1,126 @@
+
+  .form-input {
+    &--with-actions {
+      display: grid;
+      grid-template:
+        "label label" auto
+        "input input" auto
+        "actions notification" auto / auto 1fr;
+
+      ${respond(
+        `
+          grid-template:
+            "label label label" auto
+            "input notification actions" auto / 1fr auto auto;
+
+          .form-input__action {
+            transform: translateY(5px);
+          }
+        `,
+        60
+      )}
+
+      label {
+        grid-area: label;
+      }
+
+      input {
+        grid-area: input;
+      }
+
+      .notification {
+        grid-area: notification;
+
+        ${respond(
+          `
+            padding-right: 10px;
+            padding-left: 10px;
+            margin-top: 7px !important;
+            border-bottom: 1px solid var(--color-base-neutral80);
+          `,
+          60
+        )}
+      }
+
+      .form-input__action-group {
+        grid-area: actions;
+      }
+    }
+
+    & + & {
+      margin-top: 40px;
+    }
+
+    &__wrapper {
+      padding: 0;
+      margin: 0;
+      border: none;
+    }
+
+    &__action-group {
+      margin-top: 12px;
+
+      ${respond(
+        `
+          margin-top: 0;
+          border-bottom: 1px solid var(--color-base-neutral80);
+        `,
+        60
+      )}
+    }
+
+    &__action {
+      ${buttonUnstyled}
+      ${utilityPrimary}
+      ${fillOnFocus("var(--color-interaction-light)")}
+      padding: 0.333em 1em;
+      font-size: 12px;
+      font-weight: var(--font-weight-semibold);
+      text-decoration: none;
+      letter-spacing: 0.125em;
+      background-color: var(--color-base-neutral10);
+      border: 1px solid var(--color-base-neutral10);
+      border-radius: 16px;
+      transition: color ${defaultTransitionProps},
+        background-color ${defaultTransitionProps};
+
+      &:hover {
+        background-color: var(--color-base-neutral20);
+      }
+
+      & + & {
+        margin-left: 8px;
+      }
+    }
+
+    label:not(.checkbox):not(.radio):not(.toggle):not(.icon-picker):not(.form-switch) {
+      ${formLabelPrimary}
+      display: block;
+      margin-bottom: 1em;
+
+      &.has-instructions {
+        margin-bottom: 0.5em;
+      }
+    }
+
+    .button-secondary {
+      display: block;
+      width: 100%;
+
+      + .button-secondary {
+        margin-top: 21px;
+      }
+    }
+  }
+
+  .form-error-grouped {
+    margin-bottom: 15px;
+
+    .dialog & {
+      max-width: 80%;
+    }
+
+    .error {
+      margin-top: 0;
+    }
+  }

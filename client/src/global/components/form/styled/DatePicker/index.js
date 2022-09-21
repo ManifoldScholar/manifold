@@ -55,17 +55,13 @@ class DatePicker extends PureComponent {
   };
 
   render() {
-    const inputClasses = classnames({
-      "form-input": true,
-      wide: this.props.wide
-    });
     const { name, errors, label } = this.props;
 
     return (
       <UIDConsumer>
         {id => (
           <Errorable
-            className={inputClasses}
+            className={this.props.wide ? "wide" : undefined}
             name={name}
             errors={errors}
             label={label}

@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isString from "lodash/isString";
-import classNames from "classnames";
 import { UIDConsumer } from "react-uid";
 import SectionLabel from "../SectionLabel";
 import Instructions from "../Instructions";

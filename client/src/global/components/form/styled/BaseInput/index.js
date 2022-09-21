@@ -48,7 +48,7 @@ class FormBaseInput extends PureComponent {
 
   renderButtons(buttons) {
     return (
-      <Styled.ActionGroup className="form-input__action-group">
+      <Styled.ActionGroup>
         {buttons.map(button => (
           <Styled.Action
             type="button"
@@ -61,7 +61,6 @@ class FormBaseInput extends PureComponent {
                 this.props.set
               )
             }
-            className="form-input__action"
           >
             {button.label}
           </Styled.Action>
@@ -91,15 +90,17 @@ class FormBaseInput extends PureComponent {
       instructions,
       wide
     } = this.props;
-    const inputClasses = classnames(this.props.inputClasses, {
-      "form-input": true, // <FieldWrapper>
-      wide,
-      "form-input--with-actions": buttons // Styled.WrapperWithActions
+
+    const fieldClasses = classnames(this.props.inputClasses, {
+      wide
     });
+
+    const InputComponent =
+      context === "primary" ? Styled.PrimaryInput : Styled.SecondaryInput;
 
     return (
       <Errorable
-        className={inputClasses}
+        className={fieldClasses}
         name={this.props.name}
         errors={this.props.errors}
         label={this.props.label}
@@ -110,7 +111,7 @@ class FormBaseInput extends PureComponent {
           label={this.props.label}
           hasInstructions={isString(instructions)}
         />
-        <input
+        <InputComponent
           ref={input => {
             this.inputElement = input;
           }}
@@ -126,11 +127,12 @@ class FormBaseInput extends PureComponent {
         <Instructions
           instructions={this.props.instructions}
           id={idForInstructions}
+          withActions={!!buttons}
         />
         {this.state.notification && (
           <>
             {!this.props.instructions && <span />}
-            <span className="notification">{this.state.notification}</span>
+            <Styled.Notification>{this.state.notification}</Styled.Notification>
           </>
         )}
       </Errorable>

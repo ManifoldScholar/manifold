@@ -5,8 +5,8 @@ import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Errorable from "global/components/form/Errorable";
 import generatePassword from "helpers/passwordGenerator";
-import IconComposer from "global/components/utility/IconComposer";
 import BaseLabel from "./BaseLabel";
+import * as Styled from "./styles";
 
 class FormGeneratedPasswordInput extends Component {
   static displayName = "Form.GeneratedPasswordInput";
@@ -75,8 +75,11 @@ class FormGeneratedPasswordInput extends Component {
   renderInput(id) {
     const type = this.state.showPassword ? "text" : "password";
 
+    const Input =
+      context === "primary" ? Styled.PrimaryInput : Styled.SecondaryInput;
+
     return (
-      <input
+      <Input
         ref={input => {
           this.inputElement = input;
         }}
@@ -108,23 +111,18 @@ class FormGeneratedPasswordInput extends Component {
               id={`${this.idPrefix}-${id}`}
               label={t("forms.password_reset.password")}
             />
-            <span
-              className="password-input__visibility-toggle"
+            <Styled.Toggle
               onClick={event => this.togglePassword(event)}
               role="button"
               tabIndex="0"
             >
-              <IconComposer
-                icon={icon}
-                size="default"
-                className="password-input__visibility-icon"
-              />
+              <Styled.Icon icon={icon} size="default" />
               <span className="screen-reader-text">
                 {this.state.showPassword
                   ? t("forms.password_reset.hide_password")
                   : t("forms.password_reset.show_password")}
               </span>
-            </span>
+            </Styled.Toggle>
             {this.renderInput(id)}
           </Errorable>
         )}

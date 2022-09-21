@@ -19,14 +19,8 @@ export const BaseInput = styled.input`
   appearance: none;
   outline: 0;
 
-  &:focus,
   &:focus-visible {
     border-color: var(--Input-focus-color);
-  }
-
-  /* What to do with this depends on what happens with .form-input */
-  & + div > button {
-    grid-area: input;
   }
 `;
 
