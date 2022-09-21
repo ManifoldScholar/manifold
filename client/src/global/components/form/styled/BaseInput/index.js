@@ -22,7 +22,7 @@ class FormBaseInput extends PureComponent {
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,
     inputType: PropTypes.string,
-    inputClasses: PropTypes.string,
+    className: PropTypes.string,
     join: PropTypes.func,
     id: PropTypes.string,
     idForError: PropTypes.string,
@@ -88,10 +88,11 @@ class FormBaseInput extends PureComponent {
       idForInstructions,
       buttons,
       instructions,
-      wide
+      wide,
+      className
     } = this.props;
 
-    const fieldClasses = classnames(this.props.inputClasses, {
+    const fieldClasses = classnames(className, {
       wide
     });
 
