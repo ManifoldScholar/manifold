@@ -239,7 +239,10 @@ export class FormContainer extends PureComponent {
       getModelValue: name => this.lookupValue(name, this.props),
       sessionKey: props.name,
       submitKey: this.state.submitKey,
-      triggerSubmit: this.triggerSubmit
+      triggerSubmit: this.triggerSubmit,
+      styleType: props.className.includes("form-secondary")
+        ? "secondary"
+        : "primary"
     };
     if (!this.props.groupErrors) out.errors = props.errors || [];
     return out;

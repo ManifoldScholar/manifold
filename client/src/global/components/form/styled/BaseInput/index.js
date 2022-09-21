@@ -6,6 +6,7 @@ import classnames from "classnames";
 import isString from "lodash/isString";
 import Instructions from "../Instructions";
 import BaseLabel from "../BaseLabel";
+import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
 class FormBaseInput extends PureComponent {
@@ -29,6 +30,10 @@ class FormBaseInput extends PureComponent {
     idForInstructions: PropTypes.string,
     renderValue: PropTypes.func,
     wide: PropTypes.bool
+  };
+
+  static contextType = {
+    FormContext
   };
 
   constructor(props) {
@@ -97,7 +102,9 @@ class FormBaseInput extends PureComponent {
     });
 
     const InputComponent =
-      context === "primary" ? Styled.PrimaryInput : Styled.SecondaryInput;
+      this.context.styleType === "primary"
+        ? Styled.PrimaryInput
+        : Styled.SecondaryInput;
 
     return (
       <Errorable
@@ -111,6 +118,7 @@ class FormBaseInput extends PureComponent {
           id={id}
           label={this.props.label}
           hasInstructions={isString(instructions)}
+          styleType={this.context.styleType}
         />
         <InputComponent
           ref={input => {

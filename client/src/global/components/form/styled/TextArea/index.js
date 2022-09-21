@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
+import { FormContext } from "helpers/contexts";
 import setter from "../../setter";
 import Errorable from "../Errorable";
 import isString from "lodash/isString";
@@ -28,6 +29,10 @@ class FormTextArea extends Component {
     height: 100
   };
 
+  static contextType = {
+    FormContext
+  };
+
   get idPrefix() {
     return "textarea";
   }
@@ -42,7 +47,9 @@ class FormTextArea extends Component {
 
   render() {
     const TextArea =
-      context === "primary" ? Styled.TextAreaPrimary : Styled.TextAreaSecondary;
+      this.context.styleType === "primary"
+        ? Styled.TextAreaPrimary
+        : Styled.TextAreaSecondary;
 
     return (
       <UIDConsumer>
@@ -58,6 +65,7 @@ class FormTextArea extends Component {
                 id={`${this.idPrefix}-${id}`}
                 hasInstructions={isString(this.props.instructions)}
                 label={this.props.label}
+                styleType={this.context.styleType}
               />
               <Instructions
                 instructions={this.props.instructions}

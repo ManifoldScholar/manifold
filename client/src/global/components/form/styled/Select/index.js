@@ -6,6 +6,7 @@ import Instructions from "../Instructions";
 import withFormOptions from "hoc/withFormOptions";
 import BaseLabel from "../BaseLabel";
 import FieldWrapper from "../FieldWrapper";
+import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
 class FormSelect extends Component {
@@ -32,6 +33,10 @@ class FormSelect extends Component {
 
   static defaultProps = {
     rounded: false
+  };
+
+  static contextType = {
+    FormContext
   };
 
   componentDidMount() {
@@ -61,12 +66,14 @@ class FormSelect extends Component {
       );
     });
 
+    const styleType = this.context.styleType;
+
     const WrapperTag =
-      context === "primary" ? Styled.PrimarySelectWrapper : "div";
+      styleType === "primary" ? Styled.PrimarySelectWrapper : "div";
 
     const SelectComponent = this.props.rounded
       ? Styled.TertiarySelect
-      : context === "primary"
+      : styleType === "primary"
       ? Styled.PrimarySelect
       : Styled.SecondarySelect;
 
@@ -86,7 +93,7 @@ class FormSelect extends Component {
             >
               <BaseLabel
                 id={`${this.idPrefix}-${id}`}
-                styleType={this.props.rounded ? "tertiary" : context}
+                styleType={this.props.rounded ? "tertiary" : styleType}
                 label={this.props.label}
                 isSelect
               />
