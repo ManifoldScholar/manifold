@@ -1,4 +1,3 @@
-import coverUploadPlaceholder from "./coverUploadPlaceholder";
 import formInputsCustom from "./formInputsCustom";
 import formInputsPrimary from "./formInputsPrimary";
 import formInputsSecondary from "./formInputsSecondary";
@@ -9,7 +8,6 @@ import select from "./select";
 import reactDatepicker from "./reactDatepicker";
 
 export default `
-  ${coverUploadPlaceholder}
   ${formInputsCustom}
   ${formInputsPrimary}
   ${formInputsSecondary}

@@ -21,7 +21,7 @@ import TextArea from "./TextArea";
 import TextInput from "./TextInput";
 import TusUpload from "./TusUpload";
 import Upload from "./Upload";
-import CoverUploadPlaceholder from "./CoverUploadPlaceholder";
+import CoverUploadPlaceholder from "./styled/CoverUploadPlaceholder";
 import InputError from "./InputError";
 import Errorable from "./Errorable";
 import Errors from "./Errors";

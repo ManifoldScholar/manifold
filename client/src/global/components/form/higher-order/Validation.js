@@ -123,12 +123,10 @@ export default class FormHigherOrderValidation extends Component {
     return (
       <div>
         {React.cloneElement(this.props.children, transfer)}
-        <div className="form-error">
-          <GlobalForm.InputError
-            idForError={idForError}
-            errors={Object.values(this.state.errors)}
-          />
-        </div>
+        <GlobalForm.InputError
+          idForError={idForError}
+          errors={Object.values(this.state.errors)}
+        />
       </div>
     );
   }
