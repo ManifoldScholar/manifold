@@ -3,6 +3,11 @@ import styled from "@emotion/styled";
 export const Header = styled.div`
   background-color: var(--color-base-neutral110);
   border: none;
+  text-align: center;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+  padding-top: 8px;
+  position: relative;
 
   .browse &,
   .reader.scheme-light &,
@@ -12,6 +17,7 @@ export const Header = styled.div`
 `;
 
 const NavButton = styled.button`
+  position: absolute;
   top: 9px;
   width: auto;
   height: auto;
@@ -32,4 +38,7 @@ export const Prev = styled(NavButton)`
 
 export const Month = styled.div`
   color: var(--strong-color);
+  margin-top: 0;
+  font-weight: bold;
+  font-size: 0.944rem;
 `;
