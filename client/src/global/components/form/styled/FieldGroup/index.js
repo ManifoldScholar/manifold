@@ -4,6 +4,7 @@ import isString from "lodash/isString";
 import { UIDConsumer } from "react-uid";
 import SectionLabel from "../SectionLabel";
 import Instructions from "../Instructions";
+import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
 export default class FieldGroup extends PureComponent {
@@ -25,6 +26,8 @@ export default class FieldGroup extends PureComponent {
     labelTag: "h2",
     theme: "primary"
   };
+
+  static contextType = FormContext;
 
   get labelTag() {
     return this.props.labelTag;
@@ -50,6 +53,9 @@ export default class FieldGroup extends PureComponent {
   }
 
   render() {
+    const GroupComponent =
+      this.props.theme === "primary" ? Styled.BaseGroup : Styled.SecondaryGroup;
+
     return (
       <UIDConsumer name={id => `field-group-${id}`}>
         {id => (
@@ -67,9 +73,7 @@ export default class FieldGroup extends PureComponent {
               id={`${id}-instructions`}
               instructions={this.props.instructions}
             />
-            <Styled.Group $theme={this.props.theme}>
-              {this.renderChildren(this.props)}
-            </Styled.Group>
+            <GroupComponent>{this.renderChildren(this.props)}</GroupComponent>
           </Styled.Section>
         )}
       </UIDConsumer>

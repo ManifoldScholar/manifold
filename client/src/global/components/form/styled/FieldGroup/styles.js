@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { respond } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
-export const Section = styled("div", transientOptions)`
+export const Section = styled.div`
   & + & {
     margin-top: 45px;
 

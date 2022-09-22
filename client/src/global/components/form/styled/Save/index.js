@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
-import FieldWrapper from "./styled/FieldWrapper";
+import * as Styled from "./styles";
 
 class FormSave extends Component {
   static displayName = "Form.Save";
@@ -25,7 +25,7 @@ class FormSave extends Component {
     const t = this.props.t;
 
     return (
-      <FieldWrapper className="wide">
+      <Styled.FormButtonsWrapper className="wide">
         {this.props.cancelRoute && (
           <Link
             to={this.props.cancelRoute}
@@ -60,7 +60,7 @@ class FormSave extends Component {
           type="submit"
           value={this.props.text}
         />
-      </FieldWrapper>
+      </Styled.FormButtonsWrapper>
     );
   }
 }
