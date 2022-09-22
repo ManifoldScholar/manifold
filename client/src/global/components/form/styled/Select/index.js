@@ -35,9 +35,7 @@ class FormSelect extends Component {
     rounded: false
   };
 
-  static contextType = {
-    FormContext
-  };
+  static contextType = FormContext;
 
   componentDidMount() {
     if (this.props.focusOnMount === true && this.inputElement) {

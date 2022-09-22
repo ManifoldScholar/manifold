@@ -4,10 +4,10 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import Mapping from "./Mapping";
 import Instructions from "../Instructions";
 import Attribute from "./Attribute";
-import setter from "../setter";
+import setter from "../../setter";
 import omitBy from "lodash/omitBy";
 import difference from "lodash/difference";
-import FieldWrapper from "./FieldWrapper";
+import FieldWrapper from "../FieldWrapper";
 import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";
 

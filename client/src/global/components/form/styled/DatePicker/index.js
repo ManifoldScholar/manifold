@@ -2,10 +2,9 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
-import setter from "../setter";
+import setter from "../../setter";
 import Errorable from "global/components/form/Errorable";
 import PickerComponent from "./PickerComponent";
-import classnames from "classnames";
 import isDate from "lodash/isDate";
 import format from "date-fns/format";
 

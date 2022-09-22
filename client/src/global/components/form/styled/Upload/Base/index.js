@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
 import Errorable from "../../Errorable";
 import isString from "lodash/isString";
-import Instructions from "../Instructions";
+import Instructions from "../../Instructions";
 import Empty from "../Empty";
 import Preview from "../Preview";
 import BaseLabel from "../../BaseLabel";

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { buttonUnstyled, listUnstyled } from "theme/styles/mixins";
-import IconComposer from "global/utility/IconComposer";
+import IconComposer from "global/components/utility/IconComposer";
 import BaseList from "./List";
 
 const BUTTON_PADDING_LATERAL = 8;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
+import setter from "../../setter";
 import Errorable from "global/components/form/Errorable";
 import classnames from "classnames";
 import isString from "lodash/isString";
@@ -32,9 +32,7 @@ class FormBaseInput extends PureComponent {
     wide: PropTypes.bool
   };
 
-  static contextType = {
-    FormContext
-  };
+  static contextType = FormContext;
 
   constructor(props) {
     super(props);

@@ -29,9 +29,7 @@ class FormTextArea extends Component {
     height: 100
   };
 
-  static contextType = {
-    FormContext
-  };
+  static contextType = FormContext;
 
   get idPrefix() {
     return "textarea";

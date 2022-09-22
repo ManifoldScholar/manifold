@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
-import setter from "../setter";
+import setter from "../../setter";
 import Base from "./Base";
 import get from "lodash/get";
 
