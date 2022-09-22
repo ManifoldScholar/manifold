@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import BaseInput from "./BaseInput";
+import BaseInput from "../BaseInput";
 
 export const NumberInput = styled(BaseInput)`
   input[type="number"]::-webkit-inner-spin-button,

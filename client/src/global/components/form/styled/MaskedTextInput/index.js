@@ -8,7 +8,7 @@ import setter from "../../setter";
 import isString from "lodash/isString";
 import Instructions from "../Instructions";
 import FieldWrapper from "../FieldWrapper";
-import BaseLabel from "BaseLabel";
+import BaseLabel from "../BaseLabel";
 
 class FormMaskedTextInput extends Component {
   static displayName = "Form.MaskedTextInput";

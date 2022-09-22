@@ -16,9 +16,7 @@ export default class Instructions extends PureComponent {
     instructions: null
   };
 
-  static contextType = {
-    FormContext
-  };
+  static contextType = FormContext;
 
   renderInstructions() {
     const { instructions, className, withActions } = this.props;

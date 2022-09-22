@@ -26,9 +26,7 @@ class FormGeneratedPasswordInput extends Component {
     focusOnMount: false
   };
 
-  static contextType = {
-    FormContext
-  };
+  static contextType = FormContext;
 
   constructor(props) {
     super(props);

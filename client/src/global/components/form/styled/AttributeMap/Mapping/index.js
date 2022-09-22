@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { Droppable } from "react-beautiful-dnd";
-import Attribute from "./Attribute";
+import Attribute from "../Attribute";
 import isNil from "lodash/isNil";
 import * as Styled from "./styles";
 
