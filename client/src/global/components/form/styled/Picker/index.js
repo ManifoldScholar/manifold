@@ -10,6 +10,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import withFormOptions from "hoc/withFormOptions";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import isString from "lodash/isString";
+import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
 const KEYS = {
@@ -160,6 +161,8 @@ export class PickerComponent extends PureComponent {
       /* noop */
     }
   };
+
+  static contextType = FormContext;
 
   constructor(props) {
     super(props);
@@ -545,7 +548,9 @@ export class PickerComponent extends PureComponent {
     } = this.props;
 
     const TextInput =
-      context === "secondary" ? Styled.TextInputSecondary : Styled.TextInput;
+      this.context.styleType === "secondary"
+        ? Styled.TextInputSecondary
+        : Styled.TextInput;
 
     return (
       <UIDConsumer>
