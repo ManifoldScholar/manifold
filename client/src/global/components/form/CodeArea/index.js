@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import setter from "../setter";
 import withDispatch from "hoc/withDispatch";
-import Errorable from "global/components/form/Errorable";
+import Errorable from "../Errorable";
 import Loadable from "@docusaurus/react-loadable";
+import BaseLabel from "../BaseLabel";
+import Instructions from "../Instructions";
 
 /* eslint-disable react/prop-types */
 const CodeAreaInput = Loadable({
@@ -13,20 +15,13 @@ const CodeAreaInput = Loadable({
     ),
   render(Editor, props) {
     return (
-      <div className="form-input">
-        <Errorable
-          className="form-input"
-          name={props.name}
-          errors={props.errors}
-          label={props.label}
-        >
-          <h4 className="form-input-heading">{props.label}</h4>
-          {props.instructions ? (
-            <span className="instructions">{props.instructions}</span>
-          ) : null}
-          <Editor {...props} />
-        </Errorable>
-      </div>
+      <Errorable name={props.name} errors={props.errors} label={props.label}>
+        <BaseLabel as="h4">{props.label}</BaseLabel>
+        {props.instructions ? (
+          <Instructions instructions={props.instructions} />
+        ) : null}
+        <Editor {...props} />
+      </Errorable>
     );
   },
   loading: () => null
