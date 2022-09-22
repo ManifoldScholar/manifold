@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import Errorable from "../Errorable";
-import classNames from "classnames";
 import setter from "../setter";
 import Instructions from "../Instructions";
 import Developer from "global/components/developer";
-import IconComposer from "../../utility/IconComposer";
+import IconComposer from "global/components/utility/IconComposer";
 import withFormOptions from "hoc/withFormOptions";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
-import List from "./List";
 import isString from "lodash/isString";
+import { FormContext } from "helpers/contexts";
+import * as Styled from "./styles";
 
 const KEYS = {
   TAB: 9,
@@ -161,6 +161,8 @@ export class PickerComponent extends PureComponent {
       /* noop */
     }
   };
+
+  static contextType = FormContext;
 
   constructor(props) {
     super(props);
@@ -545,22 +547,10 @@ export class PickerComponent extends PureComponent {
       t
     } = this.props;
 
-    const inputClasses = classNames({
-      "form-input": true,
-      wide
-    });
-
-    const wrapperClasses = classNames({
-      "picker-input": true,
-      "picker-input--open": this.isListBoxVisible
-    });
-
-    const textBoxClasses = classNames({
-      "text-input": true,
-      "picker-input__text-input": true,
-      "picker-input__text-input--padded-1x": !this.isResetButtonVisible,
-      "picker-input__text-input--padded-2x": this.isResetButtonVisible
-    });
+    const TextInput =
+      this.context?.styleType === "secondary"
+        ? Styled.TextInputSecondary
+        : Styled.TextInput;
 
     return (
       <UIDConsumer>
@@ -568,7 +558,7 @@ export class PickerComponent extends PureComponent {
           const ids = this.ids(id);
           return (
             <Errorable
-              className={inputClasses}
+              className={wide ? "wide" : undefined}
               name={name}
               errors={errors}
               label={label}
@@ -584,25 +574,23 @@ export class PickerComponent extends PureComponent {
                 />
               )}
               {renderLiveRegion()}
-              <div className={wrapperClasses}>
+              <Styled.Wrapper>
                 <label htmlFor={ids.textBox} id={ids.label}>
                   {label}
                 </label>
                 <Instructions instructions={this.props.instructions} />
-                <div className="picker-input__input-wrapper">
-                  <div
+                <Styled.InputWrapper>
+                  <Styled.ComboBox
                     ref={this.inputWrapperRef}
                     // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
                     role="combobox"
                     aria-expanded={this.isListBoxVisible}
                     aria-owns={ids.listBox}
                     aria-haspopup="listbox"
-                    className="picker-input__input"
                   >
-                    <input
+                    <TextInput
                       ref={this.searchInputRef}
                       id={ids.textBox}
-                      className={textBoxClasses}
                       type="text"
                       onClick={this.onSearchInputClick}
                       onFocus={this.onSearchInputFocus}
@@ -617,50 +605,41 @@ export class PickerComponent extends PureComponent {
                       aria-controls={ids.listBox}
                       aria-activedescendant={this.activeOptionId(id)}
                     />
-                  </div>
-                  <div className="picker-input__button-group">
+                  </Styled.ComboBox>
+                  <Styled.ButtonGroup>
                     {this.isResetButtonVisible && (
-                      <button
+                      <Styled.Button
                         aria-label={t("forms.picker.reset")}
                         tabIndex="-1"
                         type="button"
                         onClick={this.callbacks.unselectAll}
-                        className="picker-input__button"
                       >
-                        <IconComposer
-                          icon="close16"
-                          size={20}
-                          className="picker-input__icon picker-input__icon--reset"
-                        />
+                        <Styled.IconReset icon="close16" size={20} />
                         <span className="screen-reader-text">
                           {t("forms.picker.clear_selection")}
                         </span>
-                      </button>
+                      </Styled.Button>
                     )}
-                    <div aria-hidden className="picker-input__button">
-                      <IconComposer
+                    <Styled.Button as="div" aria-hidden>
+                      <Styled.IconDisclosure
                         icon="disclosureDown16"
                         size={20}
-                        className="picker-input__icon picker-input__icon--disclosure"
                       />
-                    </div>
-                  </div>
-                </div>
-                <ul
+                    </Styled.Button>
+                  </Styled.ButtonGroup>
+                </Styled.InputWrapper>
+                <Styled.ResultsList
                   aria-labelledby={ids.label}
                   ref={this.optionsRef}
                   role="listbox"
                   id={ids.listBox}
                   onKeyDown={this.listenForListBoxNavigation}
-                  className="picker-input__results"
+                  $open={this.isListBoxVisible}
                 >
                   {options.length === 0 && (
-                    <li
-                      id="no-options"
-                      className="picker-input__result picker-input__result--empty"
-                    >
+                    <Styled.EmptyResult id="no-options">
                       {t("forms.picker.no_options")}
-                    </li>
+                    </Styled.EmptyResult>
                   )}
 
                   {options.map(option => {
@@ -669,29 +648,27 @@ export class PickerComponent extends PureComponent {
                       option
                     );
                     return (
-                      <li
+                      <Styled.Result
                         key={option.key}
                         role="option"
                         id={`${ids.option}-${option.key}`}
                         aria-selected={active}
-                        className={classNames("picker-input__result", {
-                          "picker-input__result--selected": selected,
-                          "picker-input__result--active": active
-                        })}
                         onClick={() => {
                           this.callbacks.selectOrToggleOption(option.value);
                         }}
+                        $active={active}
+                        $selected={selected}
                       >
                         {option.label}
-                      </li>
+                      </Styled.Result>
                     );
                   })}
-                </ul>
-              </div>
+                </Styled.ResultsList>
+              </Styled.Wrapper>
               {this.isMultiple && (
                 <>
                   {showAddRemoveAll && (
-                    <div className="picker-input__utility utility-button-group utility-button-group--inline">
+                    <Styled.Utility className="utility-button-group utility-button-group--inline">
                       <button
                         className="utility-button"
                         type="button"
@@ -720,14 +697,11 @@ export class PickerComponent extends PureComponent {
                           {t("forms.picker.remove_all")}
                         </span>
                       </button>
-                    </div>
+                    </Styled.Utility>
                   )}
 
-                  <List
-                    className={classNames("picker-input__list", {
-                      "picker-input__list--tight":
-                        showAddRemoveAll || listStyle === "rows"
-                    })}
+                  <Styled.List
+                    $tight={showAddRemoveAll || listStyle === "rows"}
                     listStyle={listStyle}
                     reorderable={reorderable}
                     rowComponent={listRowComponent}

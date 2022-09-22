@@ -7,6 +7,9 @@ import Attribute from "./Attribute";
 import setter from "../setter";
 import omitBy from "lodash/omitBy";
 import difference from "lodash/difference";
+import FieldWrapper from "../FieldWrapper";
+import { withTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 const sortAttributes = props => {
   const attributes = Object.values(props.getModelValue(props.attributes));
@@ -18,7 +21,7 @@ const sortHeaders = props => {
   const headers = props.getModelValue(props.headers);
   return Object.values(headers).map((header, index) => {
     if (header) return header;
-    return `Column #${index + 1}`;
+    return props.t("col_header_placeholder", { num: index + 1 });
   });
 };
 
@@ -29,7 +32,8 @@ class FormColumnMap extends PureComponent {
     set: PropTypes.func.isRequired,
     instructions: PropTypes.string.isRequired,
     getModelValue: PropTypes.func.isRequired,
-    value: PropTypes.object.isRequired
+    value: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -85,29 +89,33 @@ class FormColumnMap extends PureComponent {
   /* eslint-disable react/no-array-index-key */
   render() {
     const { sortedAttributes, sortedHeaders } = this.state;
+    const t = this.props.t;
+
     return (
       <div>
         <Instructions
           className="space-bottom"
           instructions={this.props.instructions}
         />
-        <div className="form-input">
+        <FieldWrapper>
           <button
             onClick={this.autoMap}
             className="button-secondary button-secondary--outlined"
           >
-            {"Automatically Map Attributes"}
+            {t("forms.attribute_map.auto_map")}
           </button>
-        </div>
+        </FieldWrapper>
         <DragDropContext
           onDragStart={this.onDragStart}
           onDragEnd={this.onDragEnd}
         >
-          <div className="form-input">
-            <div className="form-column-map">
-              <div className="column column-mappable">
-                <h4 className="column-heading">{"Spreadsheet Columns"}</h4>
-                <ul className="mappable">
+          <FieldWrapper>
+            <Styled.ColumnMap>
+              <Styled.ColumnMappable>
+                <Styled.ColumnHeading>
+                  {t("forms.attribute_map.spreadsheet_cols")}
+                </Styled.ColumnHeading>
+                <Styled.MappableList>
                   {sortedHeaders.map((header, index) => {
                     const position = this.getHeaderPosition(header, this.props);
                     const id = position || (index + 1).toString();
@@ -123,13 +131,15 @@ class FormColumnMap extends PureComponent {
                       </li>
                     );
                   })}
-                </ul>
-              </div>
-              <div className="column column-available">
-                <h4 className="column-heading">{"Available Attributes"}</h4>
+                </Styled.MappableList>
+              </Styled.ColumnMappable>
+              <Styled.Column>
+                <Styled.ColumnHeading>
+                  {t("forms.attribute_map.available")}
+                </Styled.ColumnHeading>
                 <Droppable droppableId="attributesAvailable" isDropDisabled>
                   {(provided, snapshotIgnored) => (
-                    <div className="available" ref={provided.innerRef}>
+                    <Styled.Available ref={provided.innerRef}>
                       {sortedAttributes.map((attribute, index) => {
                         return (
                           <Attribute
@@ -140,12 +150,12 @@ class FormColumnMap extends PureComponent {
                         );
                       })}
                       {provided.placeholder}
-                    </div>
+                    </Styled.Available>
                   )}
                 </Droppable>
-              </div>
-            </div>
-          </div>
+              </Styled.Column>
+            </Styled.ColumnMap>
+          </FieldWrapper>
         </DragDropContext>
       </div>
     );
@@ -153,4 +163,4 @@ class FormColumnMap extends PureComponent {
   /* eslint-enable react/no-array-index-key */
 }
 
-export default setter(FormColumnMap);
+export default withTranslation()(setter(FormColumnMap));
