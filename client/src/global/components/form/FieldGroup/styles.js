@@ -16,6 +16,7 @@ export const BaseGroup = styled.div`
 
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   column-gap: var(--FieldGroup-column-gap);
   row-gap: var(--FieldGroup-row-gap);
 

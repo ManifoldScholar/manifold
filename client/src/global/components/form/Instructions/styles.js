@@ -30,7 +30,7 @@ export const PrimaryInstructions = styled.span`
 `;
 
 export const SecondaryInstructions = styled(PrimaryInstructions)`
-  margin-top: 0.75em;
+  margin-block-start: 0.25em;
 
   &.inline {
     display: inline;
