@@ -67,7 +67,9 @@ class FormSelect extends Component {
     const styleType = this.context?.styleType;
 
     const WrapperTag =
-      styleType === "primary" ? Styled.PrimarySelectWrapper : "div";
+      styleType === "primary"
+        ? Styled.PrimarySelectWrapper
+        : Styled.SecondarySelectWrapper;
 
     const SelectComponent = this.props.rounded
       ? Styled.TertiarySelect
