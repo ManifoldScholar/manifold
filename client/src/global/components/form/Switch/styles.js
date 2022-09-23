@@ -3,7 +3,8 @@ import {
   defaultFocusStyle,
   formLabelPrimary,
   setHoverStyle,
-  respond
+  respond,
+  formInputSecondary
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -39,7 +40,13 @@ export const IndicatorSwitchInner = styled.span`
   }
 `;
 
-export const InputSwitch = styled.input`
+export const IndicatorSwitchInnerSecondary = styled(IndicatorSwitchInner)`
+  position: absolute;
+  top: -3px;
+  right: 0;
+`;
+
+const BaseInput = styled.input`
   position: absolute;
   inset-inline-start: 0;
   inset-block-start: 0;
@@ -47,18 +54,21 @@ export const InputSwitch = styled.input`
   block-size: 100%;
   opacity: 0;
   cursor: pointer;
+`;
 
-  &:focus ~ ${IndicatorSwitchOuter}, &:focus-visible ~ ${IndicatorSwitchOuter} {
+export const InputSwitch = styled(BaseInput)`
+  &:focus-visible ~ ${IndicatorSwitchOuter} {
     ${defaultFocusStyle}
     outline-offset: 2px;
   }
 
   &:checked ~ ${IndicatorSwitchOuter} {
-    ${IndicatorSwitchInner} {
+    ${IndicatorSwitchInner},
+    ${IndicatorSwitchInnerSecondary} {
       background-color: var(--active-switch-bg-color);
     }
 
-    &::before {
+    ${IndicatorSwitchInner}::before, ${IndicatorSwitchInnerSecondary}::before {
       transform: translateX(${BOOLEAN_WIDTH - BOOLEAN_HEIGHT}px);
     }
   }
@@ -83,15 +93,7 @@ export const IconCheckbox = styled(IconComposer)`
   visibility: hidden;
 `;
 
-export const InputCheckbox = styled.input`
-  position: absolute;
-  inset-inline-start: 0;
-  inset-block-start: 0;
-  inline-size: 100%;
-  block-size: 100%;
-  opacity: 0;
-  cursor: pointer;
-
+export const InputCheckbox = styled(BaseInput)`
   &:checked ~ ${IndicatorCheckbox} {
     background-color: var(--color-base-neutral20);
 
@@ -100,7 +102,6 @@ export const InputCheckbox = styled.input`
     }
   }
 
-  &:focus,
   &:focus-visible {
     outline: 0;
 
@@ -132,8 +133,19 @@ export const LabelCheckbox = styled.label`
   )}
 `;
 
-export const LabelText = styled.span`
+export const LabelTextPrimary = styled.span`
   ${formLabelPrimary}
   display: block;
   margin-top: 0;
+`;
+
+export const LabelTextSecondary = styled.span`
+  ${formInputSecondary}
+  display: block;
+  margin-bottom: 0.5em;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  color: var(--color-neutral-text-extra-light);
+
+  ${respond(`height: 38px;`, 60)}
 `;
