@@ -4,6 +4,7 @@ import { UIDConsumer } from "react-uid";
 import setter from "../setter";
 import Instructions from "../Instructions";
 import FieldWrapper from "../FieldWrapper";
+import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
 class FormSwitch extends Component {
@@ -32,6 +33,8 @@ class FormSwitch extends Component {
     theme: "default",
     submitOnChange: false
   };
+
+  static contextType = FormContext;
 
   componentDidMount() {
     if (this.props.focusOnMount && this.checkbox) {
@@ -91,10 +94,14 @@ class FormSwitch extends Component {
   }
 
   renderSwitchIndicator() {
+    const Indicator =
+      this.context?.styleType === "secondary"
+        ? Styled.IndicatorSwitchInnerSecondary
+        : Styled.IndicatorSwitchInner;
     return (
       /* toggle-indicator does not seem to apply any styles here; used for customization by other parent components */
       <Styled.IndicatorSwitchOuter className="toggle-indicator">
-        <Styled.IndicatorSwitchInner aria-hidden="true" />
+        <Indicator aria-hidden="true" />
       </Styled.IndicatorSwitchOuter>
     );
   }
@@ -109,6 +116,11 @@ class FormSwitch extends Component {
 
   render() {
     const Label = this.showSwitch ? Styled.LabelSwitch : Styled.LabelCheckbox;
+    const LabelText =
+      this.context?.styleType === "secondary"
+        ? Styled.LabelTextSecondary
+        : Styled.LabelTextPrimary;
+    const Input = this.showSwitch ? Styled.InputSwitch : Styled.InputCheckbox;
 
     return (
       <UIDConsumer>
@@ -122,9 +134,9 @@ class FormSwitch extends Component {
           >
             <Label htmlFor={`${this.idPrefix}-${id}`}>
               {this.props.labelPos === "above" && (
-                <Styled.LabelText>{this.props.label}</Styled.LabelText>
+                <LabelText>{this.props.label}</LabelText>
               )}
-              <Styled.InputCheckbox
+              <Input
                 ref={c => {
                   this.checkbox = c;
                 }}
@@ -136,7 +148,7 @@ class FormSwitch extends Component {
               {this.showCheckbox && this.renderCheckboxIndicator()}
               {this.showSwitch && this.renderSwitchIndicator()}
               {this.props.labelPos === "below" && (
-                <Styled.LabelText>{this.props.label}</Styled.LabelText>
+                <LabelText>{this.props.label}</LabelText>
               )}
               <Instructions
                 instructions={this.props.instructions}
