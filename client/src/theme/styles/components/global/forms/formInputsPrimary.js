@@ -12,7 +12,7 @@ import {
   formInputSecondary,
   listUnstyled,
   clearfix,
-  respond,
+  respond
 } from "theme/styles/mixins";
 
 export default `

@@ -289,6 +289,7 @@ export class FormContainer extends PureComponent {
 
   render() {
     if (!this.props.session) return null;
+    const className = this.props.className.replace("form-secondary", "");
 
     const contextProps = this.contextProps(this.props);
 
@@ -305,7 +306,7 @@ export class FormContainer extends PureComponent {
         <form
           style={this.props.style}
           onSubmit={this.handleSubmit}
-          className={this.props.className}
+          className={className}
           data-id="submit"
         >
           <FormContext.Provider value={contextProps}>

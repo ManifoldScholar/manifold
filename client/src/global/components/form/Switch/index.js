@@ -25,7 +25,8 @@ class FormSwitch extends Component {
     focusOnMount: PropTypes.bool,
     submitOnChange: PropTypes.bool,
     wide: PropTypes.bool,
-    theme: PropTypes.oneOf(["default", "checkbox"])
+    theme: PropTypes.oneOf(["default", "checkbox"]),
+    isRG: PropTypes.bool
   };
 
   static defaultProps = {
@@ -117,7 +118,7 @@ class FormSwitch extends Component {
   render() {
     const Label = this.showSwitch ? Styled.LabelSwitch : Styled.LabelCheckbox;
     const LabelText =
-      this.context?.styleType === "secondary"
+      this.context?.styleType === "secondary" && !this.props.isRG
         ? Styled.LabelTextSecondary
         : Styled.LabelTextPrimary;
     const Input = this.showSwitch ? Styled.InputSwitch : Styled.InputCheckbox;
