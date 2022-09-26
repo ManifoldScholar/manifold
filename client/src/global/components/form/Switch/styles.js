@@ -6,6 +6,7 @@ import {
   formInputSecondary
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
+import { transientOptions } from "helpers/emotionHelpers";
 
 const BOOLEAN_HEIGHT = 26;
 const BOOLEAN_WIDTH = BOOLEAN_HEIGHT * 2;
@@ -111,17 +112,17 @@ export const InputCheckbox = styled(BaseInput)`
   }
 `;
 
-export const LabelTextPrimary = styled.span`
+export const LabelTextPrimary = styled("span", transientOptions)`
   ${formLabelPrimary}
   display: block;
   margin-block-start: 0;
-  margin-block-end: 1em;
+  ${({ $marginEnd }) => $marginEnd && `margin-block-end: 1em;`}
 `;
 
 export const LabelTextSecondary = styled.span`
   ${formInputSecondary}
   display: block;
-  margin-bottom: 0.5em;
+  margin-block-end: 0.5em;
   text-transform: inherit;
   letter-spacing: inherit;
   color: var(--color-neutral-text-extra-light);

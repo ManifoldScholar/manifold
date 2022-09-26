@@ -20,20 +20,22 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
       onSuccess={onSuccess}
       className="form-secondary"
     >
-      <Form.TextInput
-        wide
-        label={t("forms.category.name")}
-        name="attributes[title]"
-        placeholder={t("forms.category.name_placeholder")}
-      />
-      <Form.TextArea
-        wide
-        height={122}
-        label={t("forms.category.description")}
-        name="attributes[description]"
-        placeholder={t("forms.category.description_placeholder")}
-        instructions={t("forms.category.description_instructions")}
-      />
+      <Form.FieldGroup>
+        <Form.TextInput
+          wide
+          label={t("forms.category.name")}
+          name="attributes[title]"
+          placeholder={t("forms.category.name_placeholder")}
+        />
+        <Form.TextArea
+          wide
+          height={122}
+          label={t("forms.category.description")}
+          name="attributes[description]"
+          placeholder={t("forms.category.description_placeholder")}
+          instructions={t("forms.category.description_instructions")}
+        />
+      </Form.FieldGroup>
       <Form.Save text="Save" theme="frontend" cancelCallback={onCancel} />
     </FormContainer.Form>
   );
