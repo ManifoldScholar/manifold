@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import {
   defaultFocusStyle,
   formLabelPrimary,
-  setHoverStyle,
   respond,
   formInputSecondary
 } from "theme/styles/mixins";
@@ -84,6 +83,7 @@ export const IndicatorCheckbox = styled.span`
   vertical-align: middle;
   background-color: var(--color-base-neutral20);
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const IconCheckbox = styled(IconComposer)`
@@ -111,32 +111,11 @@ export const InputCheckbox = styled(BaseInput)`
   }
 `;
 
-export const LabelSwitch = styled.label`
-  position: relative;
-  display: block;
-`;
-
-export const LabelCheckbox = styled.label`
-  ${setHoverStyle()}
-  position: relative;
-  display: block;
-
-  ${respond(`display: inline-block;`, 20)}
-
-  ${respond(
-    `
-      & + & {
-        margin-left: 32px;
-      }
-    `,
-    50
-  )}
-`;
-
 export const LabelTextPrimary = styled.span`
   ${formLabelPrimary}
   display: block;
-  margin-top: 0;
+  margin-block-start: 0;
+  margin-block-end: 1em;
 `;
 
 export const LabelTextSecondary = styled.span`
@@ -148,4 +127,31 @@ export const LabelTextSecondary = styled.span`
   color: var(--color-neutral-text-extra-light);
 
   ${respond(`height: 38px;`, 60)}
+`;
+
+export const LabelSwitch = styled.label`
+  position: relative;
+  display: block;
+`;
+
+export const LabelCheckbox = styled.label`
+  position: relative;
+  display: block;
+
+  &:hover {
+    ${LabelTextSecondary} {
+      color: var(--hover-color);
+    }
+  }
+
+  ${respond(`display: inline-block;`, 20)}
+
+  ${respond(
+    `
+      & + & {
+        margin-left: 32px;
+      }
+    `,
+    50
+  )}
 `;

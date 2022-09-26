@@ -66,10 +66,12 @@ class FormSelect extends Component {
 
     const styleType = this.context?.styleType;
 
-    const WrapperTag =
-      styleType === "primary"
-        ? Styled.PrimarySelectWrapper
-        : Styled.SecondarySelectWrapper;
+    /* eslint-disable no-nested-ternary */
+    const WrapperTag = this.props.rounded
+      ? Styled.TertiarySelectWrapper
+      : styleType === "primary"
+      ? Styled.PrimarySelectWrapper
+      : Styled.SecondarySelectWrapper;
 
     const SelectComponent = this.props.rounded
       ? Styled.TertiarySelect

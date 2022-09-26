@@ -98,6 +98,7 @@ class FormBaseInput extends PureComponent {
     const fieldClasses = classnames(className, {
       wide
     });
+    const Wrapper = buttons ? Styled.WrapperWithActions : Errorable;
 
     const InputComponent =
       this.context?.styleType === "primary"
@@ -105,8 +106,8 @@ class FormBaseInput extends PureComponent {
         : Styled.SecondaryInput;
 
     return (
-      <Errorable
-        className={fieldClasses}
+      <Wrapper
+        className={buttons ? undefined : fieldClasses}
         name={this.props.name}
         errors={this.props.errors}
         label={this.props.label}
@@ -142,7 +143,7 @@ class FormBaseInput extends PureComponent {
             <Styled.Notification>{this.state.notification}</Styled.Notification>
           </>
         )}
-      </Errorable>
+      </Wrapper>
     );
   }
 }

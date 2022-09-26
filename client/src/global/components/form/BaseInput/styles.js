@@ -20,7 +20,7 @@ export const BaseInput = styled.input`
   outline: 0;
 
   &:focus-visible {
-    border-color: var(--Input-focus-color);
+    outline: 0;
   }
 `;
 
@@ -41,7 +41,6 @@ export const PrimaryInput = styled(BaseInput)`
 export const SecondaryInput = styled(BaseInput)`
   --Input-focus-color: var(--focus-color);
 
-  /* Explicit height so that elements can line up */
   height: 32px;
   padding: 0;
   font-size: ${fluidScale("18px", "16px")};
@@ -82,9 +81,10 @@ export const Notification = styled.span`
 `;
 
 export const WrapperWithActions = styled.div`
-  // will become styled(FieldWrapper);
   // this is a one-off for RG edit drawer,
   // so doesn't belong with FieldWrapper's style file
+
+  display: grid;
   grid-template:
     "label label" auto
     "input input" auto
@@ -99,7 +99,7 @@ export const WrapperWithActions = styled.div`
 
       grid-template:
         "label label label" auto
-        "input notification actions" auto / 1fr auto auto;
+        "input notification actions" auto/1fr auto auto;
     `,
     60
   )}
@@ -110,6 +110,7 @@ export const WrapperWithActions = styled.div`
 
   input {
     grid-area: input;
+    width: auto;
   }
 
   .instructions {

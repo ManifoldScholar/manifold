@@ -17,6 +17,11 @@ export const SecondarySelectWrapper = styled.div`
   position: relative;
 `;
 
+export const TertiarySelectWrapper = styled.div`
+  position: relative;
+  width: max-content;
+`;
+
 const BaseSelect = styled.select`
   ${formInputSecondary}
   padding: var(--Select-padding);
