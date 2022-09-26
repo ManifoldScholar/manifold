@@ -1,27 +1,35 @@
 import styled from "@emotion/styled";
 import { defaultFocusStyle, setHoverStyle } from "theme/styles/mixins";
 
-export const Dropzone = styled.div`
-  position: relative;
-  cursor: pointer;
+const BaseDropzone = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 350px;
+  width: 100%;
   min-height: 200px;
-  border: 1px solid var(--input-border-color);
-  border-radius: var(--box-border-radius);
-  transition: border-color 0.2s;
 
   a,
   .fake-link {
     ${setHoverStyle()}
 
-    &.focus-visible,
     &:focus-visible {
       outline: 0;
     }
   }
+`;
+
+export const Dropzone = styled(BaseDropzone)`
+  position: relative;
+  cursor: pointer;
+  max-width: 350px;
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--box-border-radius);
+  transition: border-color 0.2s;
+`;
+
+export const AvatarBuilderDropzone = styled(BaseDropzone)`
+  position: relative;
+  width: 100%;
 `;
 
 export const Prompt = styled.span`

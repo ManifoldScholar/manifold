@@ -105,10 +105,7 @@ class AvatarBuilder extends Component {
     const image =
       this.props.getModelValue("attributes[avatar][data]") ||
       this.props.getModelValue("attributes[avatarStyles][smallSquare]");
-    const inputClasses = classNames({
-      "form-input avatar-builder": true,
-      wide: this.props.wide
-    });
+
     const uploadClasses = classNames({
       section: true,
       upload: true,
@@ -123,15 +120,13 @@ class AvatarBuilder extends Component {
 
     return (
       <GlobalForm.Errorable
-        className={inputClasses}
+        className={this.props.wide ? "wide" : undefined}
         name="attributes[avatar]"
         errors={this.props.errors}
         label="Avatar"
       >
-        <div className={inputClasses}>
-          <div className="form-input-heading">
-            {t("backend.forms.project.thumbnail")}
-          </div>
+        <div className="avatar-builder">
+          <Form.Label label={t("backend.forms.project.thumbnail")} />
           <div className="grid">
             <div className="section current">
               <span className="label" aria-hidden="true">
@@ -169,6 +164,7 @@ class AvatarBuilder extends Component {
                 accepts="images"
                 label={t("backend.forms.project.custom_thumbnail")}
                 labelClass="screen-reader-text"
+                isBuilder
               />
             </div>
           </div>
