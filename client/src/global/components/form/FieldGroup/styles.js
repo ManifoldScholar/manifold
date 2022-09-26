@@ -7,6 +7,10 @@ export const Section = styled.div`
 
     ${respond(`margin-top: 52px;`, 60)}
   }
+
+  > * + * {
+    margin-block-start: 32px;
+  }
 `;
 
 export const BaseGroup = styled.div`

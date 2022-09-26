@@ -36,20 +36,18 @@ export class ProjectNewContainer extends PureComponent {
 
   get layoutInstructions() {
     return (
-      <span className="instructions">
-        <Trans
-          i18nKey="backend_entities.projects.forms.new.layout_instructions"
-          components={[
-            <a
-              href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/projects#creating-projects"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              #
-            </a>
-          ]}
-        />
-      </span>
+      <Trans
+        i18nKey="backend_entities.projects.forms.new.layout_instructions"
+        components={[
+          <a
+            href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/projects#creating-projects"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            #
+          </a>
+        ]}
+      />
     );
   }
 

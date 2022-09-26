@@ -1,5 +1,11 @@
 import styled from "@emotion/styled";
-import { buttonUnstyled, listUnstyled } from "theme/styles/mixins";
+import {
+  buttonUnstyled,
+  listUnstyled,
+  formInputBase,
+  defaultTransitionProps,
+  fluidScale
+} from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import BaseList from "./List";
 
@@ -24,14 +30,27 @@ export const ComboBox = styled.div`
 `;
 
 export const TextInput = styled.input`
+  ${formInputBase}
+  width: 100%;
+  outline: 0;
+  border: 1px solid;
+  transition: border-color ${defaultTransitionProps};
+  border-radius: 0;
+  appearance: none;
+  outline: 0;
+  font-size: ${fluidScale("18px", "16px")};
+
   padding-right: ${({ $paddingFactor }) =>
     `${BUTTON_WIDTH * $paddingFactor + BUTTON_PADDING_LATERAL}px`};
 `;
 
 export const TextInputSecondary = styled(TextInput)`
   height: auto;
-  padding: 8px 0 13px 17px;
+  padding-block-start: 8px;
+  padding-block-end: 13px;
+  padding-inline-start: 17px;
   border: 0;
+  background: transparent;
 
   &:focus-visible {
     border: 0;
@@ -84,6 +103,7 @@ export const ResultsList = styled.ul`
   transition: opacity var(--transition-duration-fast)
       var(--transition-timing-function),
     visibility var(--transition-duration-fast) var(--transition-timing-function);
+  z-index: 100;
 
   ${({ $open }) =>
     $open &&
@@ -94,9 +114,10 @@ export const ResultsList = styled.ul`
 
 export const Result = styled.li`
   --Result-bg-color: ${({ $active, $selected }) => {
-    if ($active && $selected) return "var(--color-base-neutral75)";
-    if ($active) return "var(--color-base-neutral80)";
-    if ($selected) return "var(--color-base-neutral85)";
+    if ($active && $selected) return "var(--color-base-neutral75);";
+    if ($active) return "var(--color-base-neutral80);";
+    if ($selected) return "var(--color-base-neutral85);";
+    return "inherit;";
   }}
 
   padding: 8px 17px;
