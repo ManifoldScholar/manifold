@@ -11,6 +11,15 @@ export const Preview = styled.div`
   pointer-events: none;
 `;
 
+export const PreviewBuilder = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 15px;
+`;
+
 export const Message = styled.div`
   grid-column: 1 / -1;
   grid-row: 1 / -1;
@@ -21,6 +30,13 @@ export const Message = styled.div`
   text-align: center;
   background: var(--color-base-neutral95);
   opacity: 0.9;
+`;
+
+export const MessageBuilder = styled(Message)`
+  padding: 0;
+  margin-block-start: 16px;
+  margin-block-end: 0;
+  background-color: transparent;
 `;
 
 export const SecondaryText = styled.p`
@@ -46,5 +62,11 @@ export const Image = styled.img`
   justify-self: center;
   max-width: 100%;
   max-height: 200px;
+  background: var(--color-base-neutral20);
+`;
+
+export const ImageBuilder = styled.img`
+  width: 120px;
+  height: 120px;
   background: var(--color-base-neutral20);
 `;

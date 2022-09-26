@@ -92,6 +92,9 @@ export default class FormUpload extends Component {
   };
 
   render() {
+    const InputWrapper = this.props.isBuilder
+      ? Styled.AvatarBuilderDropzone
+      : Styled.Dropzone;
     return (
       <Errorable
         className={this.props.wide ? "wide" : undefined}
@@ -105,11 +108,12 @@ export default class FormUpload extends Component {
             id={this.props.inputId}
             label={this.props.label}
             $hasInstructions={isString(this.props.instructions)}
+            className={this.props.labelClass}
           />
         ) : null}
         <Dropzone onDrop={this.handleFileDrop}>
           {({ getRootProps, getInputProps }) => (
-            <Styled.Dropzone
+            <InputWrapper
               {...getRootProps({
                 style: this.props.inlineStyle,
                 tabIndex: null
@@ -129,6 +133,7 @@ export default class FormUpload extends Component {
                   preview={this.currentPreview}
                   handleRemove={this.handleRemove}
                   fileName={this.fileName}
+                  isBuilder={this.props.isBuilder}
                 />
               ) : (
                 <Empty
@@ -138,7 +143,7 @@ export default class FormUpload extends Component {
                   placeholder={this.props.placeholder}
                 />
               )}
-            </Styled.Dropzone>
+            </InputWrapper>
           )}
         </Dropzone>
         <Instructions

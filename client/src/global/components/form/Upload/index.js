@@ -141,6 +141,7 @@ export class FormUpload extends Component {
             inputId={`${this.idPrefix}-${id}`}
             idForError={`${this.idForErrorPrefix}-${id}`}
             idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
+            isBuilder={this.props.isBuilder}
           />
         )}
       </UIDConsumer>

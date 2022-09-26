@@ -7,7 +7,8 @@ export default function BaseLabel({
   label,
   styleType = "primary",
   hasInstructions = false,
-  isSelect = false
+  isSelect = false,
+  className
 }) {
   /* eslint-disable no-nested-ternary */
   const Label =
@@ -23,6 +24,7 @@ export default function BaseLabel({
       htmlFor={id}
       $hasInstructions={hasInstructions}
       $isSelect={isSelect}
+      className={className}
     >
       {label}
     </Label>

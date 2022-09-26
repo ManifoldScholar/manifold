@@ -27,6 +27,7 @@ import Errorable from "./Errorable";
 import Errors from "./Errors";
 import Divider from "./Divider";
 import Picker from "./Picker";
+import Label from "./BaseLabel";
 
 export default {
   CoverUploadPlaceholder,
@@ -57,5 +58,6 @@ export default {
   TusUpload,
   Upload,
   Divider,
-  Picker
+  Picker,
+  Label
 };

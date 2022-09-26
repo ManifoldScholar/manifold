@@ -21,9 +21,16 @@ class FormUploadImagePreview extends PureComponent {
   }
 
   render() {
+    const Message = this.props.isBuilder
+      ? Styled.MessageBuilder
+      : Styled.Message;
+    const Preview = this.props.isBuilder
+      ? Styled.PreviewBuilder
+      : Styled.Preview;
+    const Image = this.props.isBuilder ? Styled.ImageBuilder : Styled.Image;
     return (
-      <Styled.Preview data-id="preview">
-        <Styled.Message>
+      <Preview data-id="preview">
+        <Message>
           <Styled.SecondaryText>
             <Trans
               i18nKey="forms.upload.image_preview"
@@ -37,12 +44,9 @@ class FormUploadImagePreview extends PureComponent {
               ]}
             />
           </Styled.SecondaryText>
-        </Styled.Message>
-        <Styled.Image
-          alt={this.props.t("image_preview_alt")}
-          src={this.imageUrl}
-        />
-      </Styled.Preview>
+        </Message>
+        <Image alt={this.props.t("image_preview_alt")} src={this.imageUrl} />
+      </Preview>
     );
   }
 }
