@@ -135,7 +135,9 @@ class FormSwitch extends Component {
           >
             <Label htmlFor={`${this.idPrefix}-${id}`}>
               {this.props.labelPos === "above" && (
-                <LabelText>{this.props.label}</LabelText>
+                <LabelText $marginEnd={this.props.isRG}>
+                  {this.props.label}
+                </LabelText>
               )}
               <Input
                 ref={c => {
