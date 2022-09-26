@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import isString from "lodash/isString";
 import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
@@ -26,18 +25,15 @@ export default class Instructions extends PureComponent {
         ? Styled.SecondaryInstructions
         : Styled.PrimaryInstructions;
 
-    if (isString(instructions)) {
-      return (
-        <InstructionsComponent
-          className={className}
-          $withActions={withActions}
-          id={this.props.id}
-        >
-          {instructions}
-        </InstructionsComponent>
-      );
-    }
-    return instructions;
+    return (
+      <InstructionsComponent
+        className={className}
+        $withActions={withActions}
+        id={this.props.id}
+      >
+        {instructions}
+      </InstructionsComponent>
+    );
   }
 
   render() {

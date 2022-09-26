@@ -36,14 +36,6 @@ export const SecondaryInstructions = styled(PrimaryInstructions)`
     display: inline;
   }
 
-  + .form-input-group--primary {
-    margin-top: 32px;
-  }
-
-  + .form-input-group--secondary {
-    margin-top: 24px;
-  }
-
   a {
     color: inherit;
   }

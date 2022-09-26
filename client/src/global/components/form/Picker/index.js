@@ -11,6 +11,7 @@ import withFormOptions from "hoc/withFormOptions";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import isString from "lodash/isString";
 import { FormContext } from "helpers/contexts";
+import BaseLabel from "../BaseLabel";
 import * as Styled from "./styles";
 
 const KEYS = {
@@ -575,9 +576,11 @@ export class PickerComponent extends PureComponent {
               )}
               {renderLiveRegion()}
               <Styled.Wrapper>
-                <label htmlFor={ids.textBox} id={ids.label}>
-                  {label}
-                </label>
+                <BaseLabel
+                  id={ids.textBox}
+                  label={label}
+                  styleType={this.context.styleType}
+                />
                 <Instructions instructions={this.props.instructions} />
                 <Styled.InputWrapper>
                   <Styled.ComboBox
@@ -604,6 +607,7 @@ export class PickerComponent extends PureComponent {
                       aria-autocomplete="list"
                       aria-controls={ids.listBox}
                       aria-activedescendant={this.activeOptionId(id)}
+                      $paddingFactor={1}
                     />
                   </Styled.ComboBox>
                   <Styled.ButtonGroup>
