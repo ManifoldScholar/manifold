@@ -57,33 +57,37 @@ export class TextCollaboratorsContainer extends Component {
           update={textsAPI.update}
           className="form-secondary"
         >
-          <Form.Picker
-            label={t("glossary.author_title_case_other")}
-            name="relationships[creators]"
-            optionToLabel={maker => maker.attributes.fullName}
-            reorderable
-            predictive
-            listStyle={"rows"}
-            listRowComponent="MakerRow"
-            listRowEditRoute={"backendRecordsMaker"}
-            options={makersAPI.index}
-            newToValue={this.newMaker}
-            allowNew
-          />
-          <Form.Picker
-            label={t("glossary.contributor_title_case_other")}
-            name="relationships[contributors]"
-            optionToLabel={maker => maker.attributes.fullName}
-            callbacks={{}}
-            reorderable
-            predictive
-            newToValue={this.newMaker}
-            allowNew
-            options={makersAPI.index}
-            listStyle={"rows"}
-            listRowComponent="MakerRow"
-            listRowEditRoute={"backendRecordsMaker"}
-          />
+          <Form.FieldGroup>
+            <Form.Picker
+              label={t("glossary.author_title_case_other")}
+              name="relationships[creators]"
+              optionToLabel={maker => maker.attributes.fullName}
+              reorderable
+              predictive
+              listStyle={"rows"}
+              listRowComponent="MakerRow"
+              listRowEditRoute={"backendRecordsMaker"}
+              options={makersAPI.index}
+              newToValue={this.newMaker}
+              allowNew
+              wide
+            />
+            <Form.Picker
+              label={t("glossary.contributor_title_case_other")}
+              name="relationships[contributors]"
+              optionToLabel={maker => maker.attributes.fullName}
+              callbacks={{}}
+              reorderable
+              predictive
+              newToValue={this.newMaker}
+              allowNew
+              options={makersAPI.index}
+              listStyle={"rows"}
+              listRowComponent="MakerRow"
+              listRowEditRoute={"backendRecordsMaker"}
+              wide
+            />
+          </Form.FieldGroup>
           <Form.Save />
         </FormContainer.Form>
         {childRoutes(this.props.route, {

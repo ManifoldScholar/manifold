@@ -118,7 +118,7 @@ export default function MetadataForm({ model, ...restProps }) {
       case "resourcesDoi":
         return { component: Form.MaskedTextInput, props: { mask: "doi" } };
       case "originalPublicationDate":
-        return { component: Form.Date, props: null };
+        return { component: Form.DatePicker, props: null };
       default:
         return { component: Form.TextInput, props: null };
     }

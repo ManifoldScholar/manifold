@@ -15,8 +15,13 @@ const CodeAreaInput = Loadable({
     ),
   render(Editor, props) {
     return (
-      <Errorable name={props.name} errors={props.errors} label={props.label}>
-        <BaseLabel as="h4">{props.label}</BaseLabel>
+      <Errorable
+        className="wide"
+        name={props.name}
+        errors={props.errors}
+        label={props.label}
+      >
+        {props.label && <BaseLabel as="h4" label={props.label} />}
         {props.instructions ? (
           <Instructions instructions={props.instructions} />
         ) : null}

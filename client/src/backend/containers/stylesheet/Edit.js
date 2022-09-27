@@ -80,71 +80,67 @@ export class StylesheetEditContainer extends PureComponent {
     const t = this.props.t;
 
     return (
-      <div>
-        <section>
-          <section className="form-section form-section--primary">
-            <FormContainer.Form
-              model={this.stylesheet}
-              name={name}
-              update={stylesheetsAPI.update}
-              create={this.create}
-              onSuccess={this.redirectToStylesheet}
-              className="form-secondary"
-            >
-              <div className="form-input">
-                <p className="instructions">
-                  {this.stylesheet.attributes.ingested
-                    ? t("backend_entities.stylesheets.edit.instructions")
-                    : null}
-                </p>
-              </div>
-              <Form.TextInput
-                label={t("backend_entities.stylesheets.edit.name_label")}
-                name="attributes[name]"
-                placeholder={t("backend_entities.stylesheets.edit.name_label")}
-              />
-              <Form.CodeArea
-                label={t(
-                  "backend_entities.stylesheets.edit.source_styles_label"
-                )}
-                height="300px"
-                mode="css"
-                name="attributes[rawStyles]"
+      <section>
+        <FormContainer.Form
+          model={this.stylesheet}
+          name={name}
+          update={stylesheetsAPI.update}
+          create={this.create}
+          onSuccess={this.redirectToStylesheet}
+          className="form-secondary"
+        >
+          <Form.FieldGroup>
+            {this.stylesheet.attributes.ingested ? (
+              <Form.Instructions
                 instructions={t(
-                  "backend_entities.stylesheets.edit.source_styles_instructions"
+                  "backend_entities.stylesheets.edit.instructions"
                 )}
               />
-              <Form.CodeArea
-                label={t(
-                  "backend_entities.stylesheets.edit.validated_styles_label"
-                )}
-                name="attributes[styles]"
-                mode="css"
-                instructions={t(
-                  "backend_entities.stylesheets.edit.validated_styles_instructions"
-                )}
-                readOnly
-              />
-              <Form.Picker
-                label={t("backend_entities.stylesheets.edit.sections_label")}
-                placeholder={t(
-                  "backend_entities.stylesheets.edit.sections_placeholder"
-                )}
-                name="relationships[textSections]"
-                optionToLabel={text => text.attributes.name}
-                options={this.fetchTextSections}
-                rowProps={{ namePath: "attributes.title" }}
-                showAddRemoveAll
-              />
-
-              <Form.Save
-                cancelRoute={lh.link("backendTextStyles", params.id)}
-                text={t("backend_entities.stylesheets.edit.save")}
-              />
-            </FormContainer.Form>
-          </section>
-        </section>
-      </div>
+            ) : null}
+            <Form.TextInput
+              label={t("backend_entities.stylesheets.edit.name_label")}
+              name="attributes[name]"
+              placeholder={t("backend_entities.stylesheets.edit.name_label")}
+              wide
+            />
+            <Form.CodeArea
+              label={t("backend_entities.stylesheets.edit.source_styles_label")}
+              height="300px"
+              mode="css"
+              name="attributes[rawStyles]"
+              instructions={t(
+                "backend_entities.stylesheets.edit.source_styles_instructions"
+              )}
+            />
+            <Form.CodeArea
+              label={t(
+                "backend_entities.stylesheets.edit.validated_styles_label"
+              )}
+              name="attributes[styles]"
+              mode="css"
+              instructions={t(
+                "backend_entities.stylesheets.edit.validated_styles_instructions"
+              )}
+              readOnly
+            />
+            <Form.Picker
+              label={t("backend_entities.stylesheets.edit.sections_label")}
+              placeholder={t(
+                "backend_entities.stylesheets.edit.sections_placeholder"
+              )}
+              name="relationships[textSections]"
+              optionToLabel={text => text.attributes.name}
+              options={this.fetchTextSections}
+              rowProps={{ namePath: "attributes.title" }}
+              showAddRemoveAll
+            />
+          </Form.FieldGroup>
+          <Form.Save
+            cancelRoute={lh.link("backendTextStyles", params.id)}
+            text={t("backend_entities.stylesheets.edit.save")}
+          />
+        </FormContainer.Form>
+      </section>
     );
   }
 }
