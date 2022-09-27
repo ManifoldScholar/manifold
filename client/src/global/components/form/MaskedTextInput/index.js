@@ -9,6 +9,7 @@ import isString from "lodash/isString";
 import Instructions from "../Instructions";
 import FieldWrapper from "../FieldWrapper";
 import BaseLabel from "../BaseLabel";
+import * as Styled from "../BaseInput/styles";
 
 class FormMaskedTextInput extends Component {
   static displayName = "Form.MaskedTextInput";
@@ -109,7 +110,8 @@ class FormMaskedTextInput extends Component {
               hasInstructions={isString(this.props.instructions)}
               label={this.props.label}
             />
-            <MaskedInput
+            <Styled.SecondaryInput
+              as={MaskedInput}
               onChange={this.props.onChange}
               value={this.props.value}
               id={`${this.idPrefix}-${id}`}
