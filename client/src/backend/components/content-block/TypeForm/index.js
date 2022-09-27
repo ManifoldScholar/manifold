@@ -46,7 +46,7 @@ export class ProjectContentTypeForm extends PureComponent {
     const TypeForm = this.typeComponent;
 
     return (
-      <>
+      <Form.FieldGroup>
         <Form.Select
           label="Access"
           options={[
@@ -66,7 +66,7 @@ export class ProjectContentTypeForm extends PureComponent {
           name="attributes[access]"
         />
         <TypeForm {...this.props} />
-      </>
+      </Form.FieldGroup>
     );
   }
 }

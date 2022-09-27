@@ -185,60 +185,64 @@ export class ActionCalloutForm extends Component {
         >
           {getModelValue => (
             <>
-              <Form.TextInput
-                label={t("backend.forms.call-to-action.input_labels.title")}
-                name="attributes[title]"
-                focusOnMount
-              />
-              <Form.Select
-                label={t("backend.forms.call-to-action.input_labels.type")}
-                options={this.kindOptions}
-                name="attributes[kind]"
-              />
-              {this.shouldShowVisibilityForKind(
-                getModelValue("attributes[kind]")
-              ) && (
-                <Form.Select
-                  label={t(
-                    "backend.forms.call-to-action.input_labels.visibility"
-                  )}
-                  options={this.visibilityOptions}
-                  name="attributes[visibility]"
-                />
-              )}
-              {this.shouldShowTextsForKind(
-                getModelValue("attributes[kind]")
-              ) && (
-                <Form.Select
-                  label={t("backend.forms.call-to-action.input_labels.text")}
-                  placeholder={t(
-                    "backend.forms.call-to-action.text_select_placeholder"
-                  )}
-                  name="relationships[text]"
-                  options={this.textOptions}
-                  entityLabelAttribute={"title"}
-                />
-              )}
-              {this.shouldShowUrlForKind(getModelValue("attributes[kind]")) && (
+              <Form.FieldGroup>
                 <Form.TextInput
-                  label={t("backend.forms.call-to-action.input_labels.url")}
-                  name="attributes[url]"
+                  label={t("backend.forms.call-to-action.input_labels.title")}
+                  name="attributes[title]"
+                  focusOnMount
                 />
-              )}
-              {this.shouldShowAttachmentForKind(
-                getModelValue("attributes[kind]")
-              ) && (
-                <Form.Upload
-                  layout="portrait"
-                  label={t(
-                    "backend.forms.call-to-action.input_labels.download"
-                  )}
-                  accepts="files"
-                  readFrom="attributes[attachmentStyles][original]"
-                  name="attributes[attachment]"
-                  remove="attributes[removeAttachment]"
+                <Form.Select
+                  label={t("backend.forms.call-to-action.input_labels.type")}
+                  options={this.kindOptions}
+                  name="attributes[kind]"
                 />
-              )}
+                {this.shouldShowVisibilityForKind(
+                  getModelValue("attributes[kind]")
+                ) && (
+                  <Form.Select
+                    label={t(
+                      "backend.forms.call-to-action.input_labels.visibility"
+                    )}
+                    options={this.visibilityOptions}
+                    name="attributes[visibility]"
+                  />
+                )}
+                {this.shouldShowTextsForKind(
+                  getModelValue("attributes[kind]")
+                ) && (
+                  <Form.Select
+                    label={t("backend.forms.call-to-action.input_labels.text")}
+                    placeholder={t(
+                      "backend.forms.call-to-action.text_select_placeholder"
+                    )}
+                    name="relationships[text]"
+                    options={this.textOptions}
+                    entityLabelAttribute={"title"}
+                  />
+                )}
+                {this.shouldShowUrlForKind(
+                  getModelValue("attributes[kind]")
+                ) && (
+                  <Form.TextInput
+                    label={t("backend.forms.call-to-action.input_labels.url")}
+                    name="attributes[url]"
+                  />
+                )}
+                {this.shouldShowAttachmentForKind(
+                  getModelValue("attributes[kind]")
+                ) && (
+                  <Form.Upload
+                    layout="portrait"
+                    label={t(
+                      "backend.forms.call-to-action.input_labels.download"
+                    )}
+                    accepts="files"
+                    readFrom="attributes[attachmentStyles][original]"
+                    name="attributes[attachment]"
+                    remove="attributes[removeAttachment]"
+                  />
+                )}
+              </Form.FieldGroup>
               <Form.Save
                 text={t("backend.forms.call-to-action.input_labels.save")}
               />

@@ -19,6 +19,8 @@ const BaseDropzone = styled.div`
 `;
 
 export const Dropzone = styled(BaseDropzone)`
+  --FieldGroup-child-flex-basis: 100%;
+
   position: relative;
   cursor: pointer;
   max-width: 350px;

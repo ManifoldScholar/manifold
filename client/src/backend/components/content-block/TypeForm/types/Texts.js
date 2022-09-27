@@ -29,50 +29,55 @@ class ProjectContentTypeFormTexts extends PureComponent {
 
   render() {
     return (
-      <>
+      <Form.FieldGroup>
         <Form.TextInput
           label={this.props.t("backend.forms.title")}
           name="attributes[title]"
           focusOnMount
+          wide
         />
         <Form.TextArea
           label={this.props.t("backend.forms.description")}
           name="attributes[description]"
+          wide
         />
-        <div className="form-section form-section--primary">
-          <div className="form-input-group form-input-group--primary">
-            <Form.Switch
-              label={this.props.t("backend.forms.text.show_author_names")}
-              name="attributes[showAuthors]"
-            />
-            <Form.Switch
-              label={this.props.t("backend.forms.text.show_descriptions")}
-              name="attributes[showDescriptions]"
-            />
-            <Form.Switch
-              label={this.props.t("backend.forms.text.show_subtitles")}
-              name="attributes[showSubtitles]"
-            />
-            <Form.Switch
-              label={this.props.t("backend.forms.text.show_cover_images")}
-              name="attributes[showCovers]"
-            />
-            <Form.Switch
-              label={this.props.t("backend.forms.text.show_dates")}
-              name="attributes[showDates]"
-            />
-            <Form.Switch
-              label={this.props.t("backend.forms.text.show_category_labels")}
-              name="attributes[showCategoryLabels]"
-            />
-            <Form.Switch
-              label={this.props.t(
-                "backend.forms.text.show_uncategorized_texts"
-              )}
-              name="attributes[showUncategorized]"
-            />
-          </div>
-        </div>
+        <Form.FieldGroup>
+          <Form.Switch
+            label={this.props.t("backend.forms.text.show_author_names")}
+            name="attributes[showAuthors]"
+            isPrimary
+          />
+          <Form.Switch
+            label={this.props.t("backend.forms.text.show_descriptions")}
+            name="attributes[showDescriptions]"
+            isPrimary
+          />
+          <Form.Switch
+            label={this.props.t("backend.forms.text.show_subtitles")}
+            name="attributes[showSubtitles]"
+            isPrimary
+          />
+          <Form.Switch
+            label={this.props.t("backend.forms.text.show_cover_images")}
+            name="attributes[showCovers]"
+            isPrimary
+          />
+          <Form.Switch
+            label={this.props.t("backend.forms.text.show_dates")}
+            name="attributes[showDates]"
+            isPrimary
+          />
+          <Form.Switch
+            label={this.props.t("backend.forms.text.show_category_labels")}
+            name="attributes[showCategoryLabels]"
+            isPrimary
+          />
+          <Form.Switch
+            label={this.props.t("backend.forms.text.show_uncategorized_texts")}
+            name="attributes[showUncategorized]"
+            isPrimary
+          />
+        </Form.FieldGroup>
         {this.hasCategories && (
           <Form.Picker
             placeholder={this.props.t("backend.forms.text.add_text_category")}
@@ -84,9 +89,10 @@ class ProjectContentTypeFormTexts extends PureComponent {
             reorderable
             showAddRemoveAll
             listRowComponent="TextCategoryRow"
+            wide
           />
         )}
-      </>
+      </Form.FieldGroup>
     );
   }
 }

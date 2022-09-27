@@ -88,29 +88,33 @@ export class ResourceNewContainer extends PureComponent {
                 name="attributes[kind]"
                 includeButtons
               />
-              <Form.TextInput
-                label={t("backend_entities.resources.forms.title_label")}
-                name="attributes[title]"
-                placeholder={t(
-                  "backend_entities.resources.forms.title_placeholder"
-                )}
-              />
-              <Form.TextArea
-                label={t("backend_entities.resources.forms.descript_label")}
-                name="attributes[description]"
-                placeholder={t(
-                  "backend_entities.resources.forms.descript_placeholder"
-                )}
-              />
-              <Resource.Form.KindAttributes />
-              <GlobalForm.Errorable
-                className="form-input"
-                name="attributes[fingerprint]"
-              />
-              <Form.Save
-                text={t("backend_entities.resources.forms.new.save")}
-                cancelRoute={lh.link("backendProjectResources", project.id)}
-              />
+              <Form.FieldGroup>
+                <Form.TextInput
+                  label={t("backend_entities.resources.forms.title_label")}
+                  name="attributes[title]"
+                  placeholder={t(
+                    "backend_entities.resources.forms.title_placeholder"
+                  )}
+                  wide
+                />
+                <Form.TextArea
+                  label={t("backend_entities.resources.forms.descript_label")}
+                  name="attributes[description]"
+                  placeholder={t(
+                    "backend_entities.resources.forms.descript_placeholder"
+                  )}
+                  wide
+                />
+                <Resource.Form.KindAttributes />
+                <GlobalForm.Errorable
+                  className="form-input"
+                  name="attributes[fingerprint]"
+                />
+                <Form.Save
+                  text={t("backend_entities.resources.forms.new.save")}
+                  cancelRoute={lh.link("backendProjectResources", project.id)}
+                />
+              </Form.FieldGroup>
             </FormContainer.Form>
           </Layout.BackendPanel>
         </div>

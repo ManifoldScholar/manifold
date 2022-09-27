@@ -26,7 +26,7 @@ class FormSwitch extends Component {
     submitOnChange: PropTypes.bool,
     wide: PropTypes.bool,
     theme: PropTypes.oneOf(["default", "checkbox"]),
-    isRG: PropTypes.bool
+    isPrimary: PropTypes.bool
   };
 
   static defaultProps = {
@@ -96,7 +96,7 @@ class FormSwitch extends Component {
 
   renderSwitchIndicator() {
     const Indicator =
-      this.context?.styleType === "secondary"
+      this.context?.styleType === "secondary" && !this.props.isPrimary
         ? Styled.IndicatorSwitchInnerSecondary
         : Styled.IndicatorSwitchInner;
     return (
@@ -118,7 +118,7 @@ class FormSwitch extends Component {
   render() {
     const Label = this.showSwitch ? Styled.LabelSwitch : Styled.LabelCheckbox;
     const LabelText =
-      this.context?.styleType === "secondary" && !this.props.isRG
+      this.context?.styleType === "secondary" && !this.props.isPrimary
         ? Styled.LabelTextSecondary
         : Styled.LabelTextPrimary;
     const Input = this.showSwitch ? Styled.InputSwitch : Styled.InputCheckbox;
@@ -135,7 +135,7 @@ class FormSwitch extends Component {
           >
             <Label htmlFor={`${this.idPrefix}-${id}`}>
               {this.props.labelPos === "above" && (
-                <LabelText $marginEnd={this.props.isRG}>
+                <LabelText $marginEnd={this.props.isPrimary}>
                   {this.props.label}
                 </LabelText>
               )}
