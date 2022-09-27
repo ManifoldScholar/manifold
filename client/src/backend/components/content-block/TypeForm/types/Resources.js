@@ -30,10 +30,12 @@ class ProjectContentTypeFormResources extends PureComponent {
             "backend.forms.resource.default_title_message"
           )}
           focusOnMount
+          wide
         />
         <Form.TextArea
           label={this.props.t("backend.forms.description")}
           name="attributes[description]"
+          wide
         />
         <Form.Switch
           label={this.props.t("backend.forms.resource.collections_switch")}
@@ -42,6 +44,7 @@ class ProjectContentTypeFormResources extends PureComponent {
           )}
           name="attributes[showAllCollections]"
           wide
+          isPrimary
         />
         {!this.showAllCollections ? (
           <>

@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
-import classNames from "classnames";
 import IconComputed from "global/components/icon-computed";
 import setter from "global/components/form/setter";
-import IconComposer from "global/components/utility/IconComposer";
 import { withTranslation } from "react-i18next";
+import Form from "global/components/form";
+import { FormSelect } from "global/components/form/Select/index";
+import * as Styled from "./styles";
 
 class KindPicker extends PureComponent {
   static displayName = "Resource.KindPicker";
@@ -17,52 +18,40 @@ class KindPicker extends PureComponent {
     t: PropTypes.func
   };
 
-  get selectClasses() {
-    return classNames({
-      "resource-kind-picker__select": true,
-      "resource-kind-picker__select--only": !this.props.includeButtons
-    });
-  }
-
   get idPrefix() {
     return "kind";
+  }
+
+  get set() {
+    return this.props.set;
   }
 
   renderSelect(kindList, id) {
     return (
       <>
-        <label htmlFor={id}>
-          {this.props.t("backend.forms.resource.kind")}
-        </label>
-        <div className={this.selectClasses}>
-          <div className="form-select">
-            <IconComposer
-              icon="disclosureDown16"
-              size={22}
-              className="form-select__icon"
-            />
-            <select
-              id={id}
-              onChange={event => {
-                this.props.set(event.target.value);
-              }}
-              value={this.props.getModelValue("attributes[kind]").toLowerCase()}
-            >
-              {kindList.map(kind => {
-                const safeKind = kind.toLowerCase();
-                const translatedKind = this.props.t(
-                  `backend.forms.resource.${safeKind}`
-                );
-
-                return (
-                  <option key={safeKind} value={safeKind} id={safeKind}>
-                    {translatedKind}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        </div>
+        <Form.Label
+          id={id}
+          label={this.props.t("backend.forms.resource.kind")}
+        />
+        <Styled.SelectWrapper $only={this.props.includeButtons}>
+          <FormSelect
+            onChange={event => {
+              this.set(event.target.value);
+            }}
+            value={this.props.getModelValue("attributes[kind]").toLowerCase()}
+            options={kindList.map(kind => {
+              const safeKind = kind.toLowerCase();
+              const translatedKind = this.props.t(
+                `backend.forms.resource.${safeKind}`
+              );
+              return {
+                value: safeKind,
+                label: translatedKind,
+                key: safeKind
+              };
+            })}
+          />
+        </Styled.SelectWrapper>
       </>
     );
   }
@@ -70,10 +59,9 @@ class KindPicker extends PureComponent {
   renderRadios(kindList, id) {
     if (!kindList) return null;
     return (
-      <div
+      <Styled.List
         role="group"
         aria-label={this.props.t("backend.forms.resource.resource_kind")}
-        className="resource-kind-picker__list"
       >
         {kindList.map(kind => {
           const safeKind = kind.toLowerCase();
@@ -82,38 +70,27 @@ class KindPicker extends PureComponent {
           );
           const kindValue = this.props.getModelValue("attributes[kind]");
           const isActive = safeKind === kindValue;
-          const itemClass = classNames({
-            "resource-kind-picker__item": true,
-            radio: true,
-            "resource-kind-picker__item--active": isActive
-          });
+
           return (
-            <label
+            <Styled.Item
               key={safeKind}
               htmlFor={`${id}-${safeKind}`}
-              className={itemClass}
+              $active={isActive}
             >
-              <input
+              <Styled.Input
                 type="radio"
                 value={safeKind}
                 id={`${id}-${safeKind}`}
                 name={id}
                 checked={isActive}
                 onChange={() => this.props.set(safeKind)}
-                className="resource-kind-picker__input"
               />
-              <span className="resource-kind-picker__label">
-                {translatedKind}
-              </span>
-              <IconComputed.Resource
-                size="default"
-                icon={safeKind}
-                className="resource-kind-picker__icon"
-              />
-            </label>
+              <Styled.Label>{translatedKind}</Styled.Label>
+              <IconComputed.Resource size="default" icon={safeKind} />
+            </Styled.Item>
           );
         })}
-      </div>
+      </Styled.List>
     );
   }
 
@@ -134,14 +111,14 @@ class KindPicker extends PureComponent {
     return (
       <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
         {id => (
-          <div className="resource-kind-picker form-secondary">
-            <div className="form-input">
+          <Styled.KindPicker className="form-secondary">
+            <Form.FieldWrapper>
               {this.renderSelect(kindList, id)}
               {this.props.includeButtons
                 ? this.renderRadios(kindList, id)
                 : null}
-            </div>
-          </div>
+            </Form.FieldWrapper>
+          </Styled.KindPicker>
         )}
       </UIDConsumer>
     );

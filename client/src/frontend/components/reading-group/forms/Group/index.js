@@ -235,7 +235,7 @@ class ReadingGroupForm extends React.PureComponent {
             </Styled.DatesOuter>
             <Form.Switch
               wide
-              isRG
+              isPrimary
               label={t("forms.reading_group.notifications")}
               name="attributes[notifyOnJoin]"
               instructions={t("forms.reading_group.notifications_instructions")}

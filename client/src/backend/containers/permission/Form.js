@@ -79,6 +79,7 @@ export class PermissionForm extends PureComponent {
         placeholder={t("backend.forms.permissions.user_placeholder")}
         predictive
         listRowComponent="UserRow"
+        wide
       />
     );
   }
@@ -102,25 +103,27 @@ export class PermissionForm extends PureComponent {
           className="form-secondary permissions-form"
           notificationScope="drawer"
         >
-          {this.renderUser(this.props)}
-          <Form.SwitchArray
-            name="attributes[roleNames]"
-            options={[
-              {
-                label: t("backend.forms.permissions.modify_project"),
-                value: "project_editor"
-              },
-              {
-                label: t("backend.forms.permissions.modify_resource"),
-                value: "project_resource_editor"
-              },
-              {
-                label: t("backend.forms.permissions.author"),
-                value: "project_author"
-              }
-            ]}
-            focusOnMount={this.props.showUserInput}
-          />
+          <Form.FieldGroup>
+            {this.renderUser(this.props)}
+            <Form.SwitchArray
+              name="attributes[roleNames]"
+              options={[
+                {
+                  label: t("backend.forms.permissions.modify_project"),
+                  value: "project_editor"
+                },
+                {
+                  label: t("backend.forms.permissions.modify_resource"),
+                  value: "project_resource_editor"
+                },
+                {
+                  label: t("backend.forms.permissions.author"),
+                  value: "project_author"
+                }
+              ]}
+              focusOnMount={this.props.showUserInput}
+            />
+          </Form.FieldGroup>
           <Form.Save text={t("backend.forms.permissions.submit_label")} />
         </FormContainer.Form>
       </section>

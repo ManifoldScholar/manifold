@@ -43,53 +43,57 @@ function ProjectDescription({
           className="form-secondary"
           onSuccess={maybeCloseDrawer}
         >
-          {withDarkMode && (
-            <Form.Switch
-              label={t("backend.forms.dark_mode")}
-              name="attributes[darkMode]"
+          <Form.FieldGroup>
+            {withDarkMode && (
+              <Form.Switch
+                label={t("backend.forms.dark_mode")}
+                name="attributes[darkMode]"
+              />
+            )}
+            <Form.TextArea
+              wide
+              focusOnMount
+              height={250}
+              label={t("backend.forms.description")}
+              name="attributes[description]"
+              placeholder={t("backend.forms.description_placeholder", {
+                entity: modelLabel
+              })}
+              instructions={t("backend.forms.description_instructions", {
+                entity: modelLabel
+              })}
             />
-          )}
-          <Form.TextArea
-            wide
-            focusOnMount
-            height={250}
-            label={t("backend.forms.description")}
-            name="attributes[description]"
-            placeholder={t("backend.forms.description_placeholder", {
-              entity: modelLabel
-            })}
-            instructions={t("backend.forms.description_instructions", {
-              entity: modelLabel
-            })}
-          />
-          <Form.Upload
-            layout="landscape"
-            accepts="images"
-            label={t("backend.forms.image_label")}
-            readFrom="attributes[heroStyles][small]"
-            name="attributes[hero]"
-            remove="attributes[removeHero]"
-            instructions={t("backend.forms.image_instructions")}
-          />
-          <Form.Upload
-            layout="portrait"
-            label={t("backend.forms.cover_image")}
-            accepts="images"
-            readFrom="attributes[coverStyles][small]"
-            name="attributes[cover]"
-            remove="attributes[removeCover]"
-            instructions={t("backend.forms.cover_image_instructions", {
-              entity: modelLabel
-            })}
-          />
-          <Form.TextArea
-            label={t("backend.forms.image_credits")}
-            name="attributes[imageCredits]"
-            placeholder={t("backend.forms.image_credits_placeholder")}
-            instructions={t("backend.forms.image_credits_instructions")}
-            height={250}
-            wide
-          />
+            <Form.Upload
+              layout="landscape"
+              accepts="images"
+              label={t("backend.forms.image_label")}
+              readFrom="attributes[heroStyles][small]"
+              name="attributes[hero]"
+              remove="attributes[removeHero]"
+              instructions={t("backend.forms.image_instructions")}
+              wide
+            />
+            <Form.Upload
+              layout="portrait"
+              label={t("backend.forms.cover_image")}
+              accepts="images"
+              readFrom="attributes[coverStyles][small]"
+              name="attributes[cover]"
+              remove="attributes[removeCover]"
+              instructions={t("backend.forms.cover_image_instructions", {
+                entity: modelLabel
+              })}
+              wide
+            />
+            <Form.TextArea
+              label={t("backend.forms.image_credits")}
+              name="attributes[imageCredits]"
+              placeholder={t("backend.forms.image_credits_placeholder")}
+              instructions={t("backend.forms.image_credits_instructions")}
+              height={250}
+              wide
+            />
+          </Form.FieldGroup>
           <Form.Save text={t("actions.save")} />
         </FormContainer.Form>
       </section>

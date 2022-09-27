@@ -28,6 +28,7 @@ import Errors from "./Errors";
 import Divider from "./Divider";
 import Picker from "./Picker";
 import Label from "./BaseLabel";
+import FieldWrapper from "./FieldWrapper";
 
 export default {
   CoverUploadPlaceholder,
@@ -59,5 +60,6 @@ export default {
   Upload,
   Divider,
   Picker,
-  Label
+  Label,
+  FieldWrapper
 };

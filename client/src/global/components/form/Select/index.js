@@ -9,7 +9,7 @@ import FieldWrapper from "../FieldWrapper";
 import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
-class FormSelect extends Component {
+export class FormSelect extends Component {
   static displayName = "Form.Select";
 
   static propTypes = {
@@ -105,7 +105,9 @@ class FormSelect extends Component {
                   id={`${this.idPrefix}-${id}`}
                   aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
                   onChange={this.props.onChange}
-                  value={this.props.optionsMeta.stringValue}
+                  value={
+                    this.props.optionsMeta?.stringValue || this.props.value
+                  }
                   ref={input => {
                     this.inputElement = input;
                   }}
