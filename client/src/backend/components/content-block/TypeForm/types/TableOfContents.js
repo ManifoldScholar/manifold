@@ -22,7 +22,7 @@ class ProjectContentTypeFormTableOfContents extends PureComponent {
 
   render() {
     return (
-      <Form.FieldGroup>
+      <>
         <Form.TextInput
           label={this.props.t("backend.forms.title")}
           name="attributes[title]"
@@ -47,7 +47,7 @@ class ProjectContentTypeFormTableOfContents extends PureComponent {
           wide
           isPrimary
         />
-      </Form.FieldGroup>
+      </>
     );
   }
 }

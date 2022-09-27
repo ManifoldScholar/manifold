@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import Form from "global/components/form";
+import GlobalForm from "global/components/form";
 
-export const ErrorGroup = styled(Form.Errorable)`
+export const ErrorGroup = styled(GlobalForm.Errorable)`
   margin-bottom: 15px;
 
   .dialog & {
@@ -11,4 +11,11 @@ export const ErrorGroup = styled(Form.Errorable)`
   span {
     margin-block-start: 0;
   }
+`;
+
+export const Form = styled.form`
+  --Form-row-gap: 40px;
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--Form-row-gap);
 `;

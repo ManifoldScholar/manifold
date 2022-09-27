@@ -43,7 +43,7 @@ function ProjectDescription({
           className="form-secondary"
           onSuccess={maybeCloseDrawer}
         >
-          <Form.FieldGroup>
+          <>
             {withDarkMode && (
               <Form.Switch
                 label={t("backend.forms.dark_mode")}
@@ -93,7 +93,7 @@ function ProjectDescription({
               height={250}
               wide
             />
-          </Form.FieldGroup>
+          </>
           <Form.Save text={t("actions.save")} />
         </FormContainer.Form>
       </section>

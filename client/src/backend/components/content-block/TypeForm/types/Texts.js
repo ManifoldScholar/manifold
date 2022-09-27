@@ -29,7 +29,7 @@ class ProjectContentTypeFormTexts extends PureComponent {
 
   render() {
     return (
-      <Form.FieldGroup>
+      <>
         <Form.TextInput
           label={this.props.t("backend.forms.title")}
           name="attributes[title]"
@@ -92,7 +92,7 @@ class ProjectContentTypeFormTexts extends PureComponent {
             wide
           />
         )}
-      </Form.FieldGroup>
+      </>
     );
   }
 }

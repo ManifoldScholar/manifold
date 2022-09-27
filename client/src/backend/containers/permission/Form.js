@@ -103,27 +103,25 @@ export class PermissionForm extends PureComponent {
           className="form-secondary permissions-form"
           notificationScope="drawer"
         >
-          <Form.FieldGroup>
-            {this.renderUser(this.props)}
-            <Form.SwitchArray
-              name="attributes[roleNames]"
-              options={[
-                {
-                  label: t("backend.forms.permissions.modify_project"),
-                  value: "project_editor"
-                },
-                {
-                  label: t("backend.forms.permissions.modify_resource"),
-                  value: "project_resource_editor"
-                },
-                {
-                  label: t("backend.forms.permissions.author"),
-                  value: "project_author"
-                }
-              ]}
-              focusOnMount={this.props.showUserInput}
-            />
-          </Form.FieldGroup>
+          {this.renderUser(this.props)}
+          <Form.SwitchArray
+            name="attributes[roleNames]"
+            options={[
+              {
+                label: t("backend.forms.permissions.modify_project"),
+                value: "project_editor"
+              },
+              {
+                label: t("backend.forms.permissions.modify_resource"),
+                value: "project_resource_editor"
+              },
+              {
+                label: t("backend.forms.permissions.author"),
+                value: "project_author"
+              }
+            ]}
+            focusOnMount={this.props.showUserInput}
+          />
           <Form.Save text={t("backend.forms.permissions.submit_label")} />
         </FormContainer.Form>
       </section>

@@ -17,7 +17,7 @@ class ProjectContentTypeFormMarkdown extends PureComponent {
 
   render() {
     return (
-      <Form.FieldGroup>
+      <>
         <Form.TextArea
           focusOnMount
           label={this.props.t("backend.forms.body")}
@@ -35,7 +35,7 @@ class ProjectContentTypeFormMarkdown extends PureComponent {
           inline
           wide
         />
-      </Form.FieldGroup>
+      </>
     );
   }
 }

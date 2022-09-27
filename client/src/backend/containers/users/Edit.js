@@ -172,51 +172,49 @@ export class UsersEditContainer extends PureComponent {
             className="form-secondary"
             notificationScope="drawer"
           >
-            <Form.FieldGroup>
-              <Form.TextInput
-                focusOnMount
-                label={t("backend.forms.user.email")}
-                name="attributes[email]"
-                placeholder={t("backend.forms.user.email")}
-              />
-              <Form.TextInput
-                label={t("backend.forms.user.first_name")}
-                name="attributes[firstName]"
-                placeholder={t("backend.forms.user.first_name")}
-              />
-              <Form.TextInput
-                label={t("backend.forms.user.last_name")}
-                name="attributes[lastName]"
-                placeholder={t("backend.forms.user.last_name")}
-              />
-              <Form.Select
-                label={t("backend.forms.user.role_label")}
-                name="attributes[role]"
-                selected={user.attributes.role}
-                options={[
-                  {
-                    label: t("backend.forms.user.role_options.admin"),
-                    value: "admin"
-                  },
-                  {
-                    label: t("backend.forms.user.role_options.editor"),
-                    value: "editor"
-                  },
-                  {
-                    label: t("backend.forms.user.role_options.creator"),
-                    value: "project_creator"
-                  },
-                  {
-                    label: t("backend.forms.user.role_options.marketeer"),
-                    value: "marketeer"
-                  },
-                  {
-                    label: t("backend.forms.user.role_options.reader"),
-                    value: "reader"
-                  }
-                ]}
-              />
-            </Form.FieldGroup>
+            <Form.TextInput
+              focusOnMount
+              label={t("backend.forms.user.email")}
+              name="attributes[email]"
+              placeholder={t("backend.forms.user.email")}
+            />
+            <Form.TextInput
+              label={t("backend.forms.user.first_name")}
+              name="attributes[firstName]"
+              placeholder={t("backend.forms.user.first_name")}
+            />
+            <Form.TextInput
+              label={t("backend.forms.user.last_name")}
+              name="attributes[lastName]"
+              placeholder={t("backend.forms.user.last_name")}
+            />
+            <Form.Select
+              label={t("backend.forms.user.role_label")}
+              name="attributes[role]"
+              selected={user.attributes.role}
+              options={[
+                {
+                  label: t("backend.forms.user.role_options.admin"),
+                  value: "admin"
+                },
+                {
+                  label: t("backend.forms.user.role_options.editor"),
+                  value: "editor"
+                },
+                {
+                  label: t("backend.forms.user.role_options.creator"),
+                  value: "project_creator"
+                },
+                {
+                  label: t("backend.forms.user.role_options.marketeer"),
+                  value: "marketeer"
+                },
+                {
+                  label: t("backend.forms.user.role_options.reader"),
+                  value: "reader"
+                }
+              ]}
+            />
             <Form.Save text="Save User" />
           </FormContainer.Form>
         </section>

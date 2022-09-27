@@ -88,26 +88,24 @@ export class ResourceNewContainer extends PureComponent {
                 name="attributes[kind]"
                 includeButtons
               />
-              <Form.FieldGroup>
-                <Form.TextInput
-                  label={t("backend_entities.resources.forms.title_label")}
-                  name="attributes[title]"
-                  placeholder={t(
-                    "backend_entities.resources.forms.title_placeholder"
-                  )}
-                  wide
-                />
-                <Form.TextArea
-                  label={t("backend_entities.resources.forms.descript_label")}
-                  name="attributes[description]"
-                  placeholder={t(
-                    "backend_entities.resources.forms.descript_placeholder"
-                  )}
-                  wide
-                />
-                <Resource.Form.KindAttributes />
-                <GlobalForm.Errorable name="attributes[fingerprint]" />
-              </Form.FieldGroup>
+              <Form.TextInput
+                label={t("backend_entities.resources.forms.title_label")}
+                name="attributes[title]"
+                placeholder={t(
+                  "backend_entities.resources.forms.title_placeholder"
+                )}
+                wide
+              />
+              <Form.TextArea
+                label={t("backend_entities.resources.forms.descript_label")}
+                name="attributes[description]"
+                placeholder={t(
+                  "backend_entities.resources.forms.descript_placeholder"
+                )}
+                wide
+              />
+              <Resource.Form.KindAttributes />
+              <GlobalForm.Errorable name="attributes[fingerprint]" />
               <Form.Save
                 text={t("backend_entities.resources.forms.new.save")}
                 cancelRoute={lh.link("backendProjectResources", project.id)}

@@ -14,7 +14,7 @@ class ResourceFormKindVideo extends PureComponent {
 
   renderExternalVideoForm() {
     return (
-      <Form.FieldGroup>
+      <>
         <Form.TextInput
           label={this.props.t("backend.forms.resource.video_id")}
           name="attributes[externalId]"
@@ -40,7 +40,7 @@ class ResourceFormKindVideo extends PureComponent {
           ]}
           {...this.props}
         />
-      </Form.FieldGroup>
+      </>
     );
   }
 
@@ -60,7 +60,7 @@ class ResourceFormKindVideo extends PureComponent {
 
   render() {
     return (
-      <Form.FieldGroup>
+      <>
         <Form.Switch
           label={this.props.t("backend.forms.resource.video_source")}
           name="attributes[subKind]"
@@ -75,7 +75,7 @@ class ResourceFormKindVideo extends PureComponent {
         {this.props.getModelValue("attributes[subKind]")
           ? this.renderExternalVideoForm()
           : this.renderVideoAttachmentForm()}
-      </Form.FieldGroup>
+      </>
     );
   }
 }

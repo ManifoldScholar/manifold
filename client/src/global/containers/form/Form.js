@@ -303,7 +303,7 @@ export class FormContainer extends PureComponent {
         />
 
         {this.renderGroupedErrors(this.props)}
-        <form
+        <Styled.Form
           style={this.props.style}
           onSubmit={this.handleSubmit}
           className={className}
@@ -315,7 +315,7 @@ export class FormContainer extends PureComponent {
               : this.props.children}
           </FormContext.Provider>
           {this.renderModelErrors(this.props)}
-        </form>
+        </Styled.Form>
       </div>
     );
   }

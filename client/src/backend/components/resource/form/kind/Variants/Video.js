@@ -16,7 +16,7 @@ export default class ResourceFormKindVariantsVideo extends PureComponent {
 
   render() {
     return (
-      <Form.FieldGroup>
+      <>
         <Form.Upload
           layout="square"
           label="Variant #1"
@@ -55,7 +55,7 @@ export default class ResourceFormKindVariantsVideo extends PureComponent {
           remove="attributes[removeVariantThumbnail]"
           {...this.props}
         />
-      </Form.FieldGroup>
+      </>
     );
   }
 }

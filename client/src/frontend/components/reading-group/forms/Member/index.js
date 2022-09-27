@@ -42,78 +42,76 @@ function ReadingGroupMemberForm({
       className="form-secondary"
       notificationScope="drawer"
     >
-      <Form.FieldGroup>
-        <Form.TextInput
-          wide
-          isDisabled
-          label={t("forms.reading_group_member.name")}
-          name="attributes[name]"
-        />
-        {!userIsGroupCreator && (
-          <Form.Radios
-            label={t("forms.reading_group_member.role")}
-            name="attributes[role]"
-            beforeOnChange={warnOnRoleChange}
-            instructions={t("forms.reading_group_member.role_instructions")}
-            options={[
-              {
-                label: t("forms.reading_group_member.role_options.member"),
-                value: "member"
-              },
-              {
-                label: t("forms.reading_group_member.role_options.moderator"),
-                value: "moderator"
-              }
-            ]}
-            inline
-            wide
-            focusOnMount
-          />
-        )}
-        <Form.TextInput
-          wide
-          label={t("forms.reading_group_member.label")}
-          name="attributes[label]"
-          placeholder={t("forms.reading_group_member.label_placeholder")}
-          instructions={t("forms.reading_group_member.label_instructions")}
-          focusOnMount={userIsGroupCreator}
-        />
-        <Form.Select
-          label={t("forms.reading_group_member.annotation_style")}
-          name="attributes[annotationStyle]"
-          beforeOnChange={handleStyleSelectChange}
-          instructions={t(
-            "forms.reading_group_member.annotation_style_instructions"
-          )}
+      <Form.TextInput
+        wide
+        isDisabled
+        label={t("forms.reading_group_member.name")}
+        name="attributes[name]"
+      />
+      {!userIsGroupCreator && (
+        <Form.Radios
+          label={t("forms.reading_group_member.role")}
+          name="attributes[role]"
+          beforeOnChange={warnOnRoleChange}
+          instructions={t("forms.reading_group_member.role_instructions")}
           options={[
             {
-              label: t(
-                "forms.reading_group_member.annotation_style_options.dashed"
-              ),
-              value: "dashes"
+              label: t("forms.reading_group_member.role_options.member"),
+              value: "member"
             },
             {
-              label: t(
-                "forms.reading_group_member.annotation_style_options.dotted"
-              ),
-              value: "dots"
-            },
-            {
-              label: t(
-                "forms.reading_group_member.annotation_style_options.solid"
-              ),
-              value: "solid"
-            },
-            {
-              label: t(
-                "forms.reading_group_member.annotation_style_options.wavy"
-              ),
-              value: "wavy"
+              label: t("forms.reading_group_member.role_options.moderator"),
+              value: "moderator"
             }
           ]}
-          rounded
+          inline
+          wide
+          focusOnMount
         />
-      </Form.FieldGroup>
+      )}
+      <Form.TextInput
+        wide
+        label={t("forms.reading_group_member.label")}
+        name="attributes[label]"
+        placeholder={t("forms.reading_group_member.label_placeholder")}
+        instructions={t("forms.reading_group_member.label_instructions")}
+        focusOnMount={userIsGroupCreator}
+      />
+      <Form.Select
+        label={t("forms.reading_group_member.annotation_style")}
+        name="attributes[annotationStyle]"
+        beforeOnChange={handleStyleSelectChange}
+        instructions={t(
+          "forms.reading_group_member.annotation_style_instructions"
+        )}
+        options={[
+          {
+            label: t(
+              "forms.reading_group_member.annotation_style_options.dashed"
+            ),
+            value: "dashes"
+          },
+          {
+            label: t(
+              "forms.reading_group_member.annotation_style_options.dotted"
+            ),
+            value: "dots"
+          },
+          {
+            label: t(
+              "forms.reading_group_member.annotation_style_options.solid"
+            ),
+            value: "solid"
+          },
+          {
+            label: t(
+              "forms.reading_group_member.annotation_style_options.wavy"
+            ),
+            value: "wavy"
+          }
+        ]}
+        rounded
+      />
       <StylePreview style={selectedStyle} />
       <Form.Save text={t("actions.save")} theme="frontend" />
     </Styled.Form>
