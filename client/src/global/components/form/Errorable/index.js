@@ -61,7 +61,7 @@ export default class Errorable extends PureComponent {
     const fieldErrors = this.fieldErrors();
     const hasErrors = fieldErrors.length > 0;
 
-    return (
+    return hasErrors || children ? (
       <FieldWrapper className={className}>
         {children}
         {hasErrors ? (
@@ -72,6 +72,6 @@ export default class Errorable extends PureComponent {
           />
         ) : null}
       </FieldWrapper>
-    );
+    ) : null;
   }
 }
