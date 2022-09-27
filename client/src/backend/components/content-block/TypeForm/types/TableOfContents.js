@@ -45,6 +45,7 @@ class ProjectContentTypeFormTableOfContents extends PureComponent {
           label={this.props.t("backend.forms.show_text_title")}
           name="attributes[showTextTitle]"
           wide
+          isPrimary
         />
       </Form.FieldGroup>
     );

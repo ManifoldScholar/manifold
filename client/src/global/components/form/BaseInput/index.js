@@ -132,11 +132,13 @@ class FormBaseInput extends PureComponent {
           aria-describedby={`${idForError} ${idForInstructions}`}
         />
         {buttons && this.renderButtons(buttons)}
-        <Instructions
-          instructions={this.props.instructions}
-          id={idForInstructions}
-          withActions={!!buttons}
-        />
+        {this.props.instructions && (
+          <Instructions
+            instructions={this.props.instructions}
+            id={idForInstructions}
+            withActions={!!buttons}
+          />
+        )}
         {this.state.notification && (
           <>
             {!this.props.instructions && <span />}
