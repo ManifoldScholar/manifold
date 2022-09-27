@@ -13,7 +13,7 @@ class ResourceFormKindInteractive extends PureComponent {
 
   render() {
     return (
-      <div className="form-section form-section--primary">
+      <Form.FieldGroup>
         <Form.TextInput
           label={this.props.t("backend.forms.resource.min_width")}
           placeholder={this.props.t(
@@ -38,7 +38,7 @@ class ResourceFormKindInteractive extends PureComponent {
           )}
           {...this.props}
         />
-      </div>
+      </Form.FieldGroup>
     );
   }
 }

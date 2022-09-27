@@ -19,6 +19,7 @@ import Form from "/global/components/form";
 import FormContainer from "global/containers/form";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
+import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
 
@@ -160,7 +161,7 @@ export class ProjecExportations extends PureComponent {
           onSuccess={() => this.fetchExportations(1)}
           doNotWarn
         >
-          <Form.FieldGroup label="Project Exports">
+          <Styled.FieldGroup label="Project Exports">
             {this.hasExportTargets && (
               <div className="instructional-copy">
                 {t("backend_entities.projects.forms.exports.instructions")}
@@ -211,7 +212,7 @@ export class ProjecExportations extends PureComponent {
                 />
               </>
             )}
-          </Form.FieldGroup>
+          </Styled.FieldGroup>
         </FormContainer.Form>
         {this.hasExportTargets && (
           <div style={{ marginTop: 25 }}>

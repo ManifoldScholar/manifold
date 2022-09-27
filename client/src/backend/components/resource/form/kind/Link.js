@@ -12,16 +12,15 @@ class ResourceFormKindLink extends PureComponent {
 
   render() {
     return (
-      <div className="form-section form-section--primary">
-        <Form.TextInput
-          label={this.props.t("backend.forms.resource.link_url")}
-          name="attributes[externalUrl]"
-          placeholder={this.props.t(
-            "backend.forms.resource.link_url_placeholder"
-          )}
-          {...this.props}
-        />
-      </div>
+      <Form.TextInput
+        label={this.props.t("backend.forms.resource.link_url")}
+        name="attributes[externalUrl]"
+        placeholder={this.props.t(
+          "backend.forms.resource.link_url_placeholder"
+        )}
+        {...this.props}
+        wide
+      />
     );
   }
 }

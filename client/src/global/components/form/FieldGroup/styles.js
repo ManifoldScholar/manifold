@@ -2,6 +2,9 @@ import styled from "@emotion/styled";
 import { respond } from "theme/styles/mixins";
 
 export const Section = styled.div`
+  --FieldGroup-column-gap: 40px;
+  --FieldGroup-row-gap: 35px;
+
   & + & {
     margin-top: 45px;
 
@@ -14,9 +17,6 @@ export const Section = styled.div`
 `;
 
 export const BaseGroup = styled.div`
-  --FieldGroup-column-gap: 40px;
-  --FieldGroup-row-gap: 35px;
-
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
