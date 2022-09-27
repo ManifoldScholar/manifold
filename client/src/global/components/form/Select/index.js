@@ -115,10 +115,12 @@ export class FormSelect extends Component {
                   {options}
                 </SelectComponent>
               </WrapperTag>
-              <Instructions
-                instructions={this.props.instructions}
-                id={`${this.idForInstructionsPrefix}-${id}`}
-              />
+              {this.props.instructions && (
+                <Instructions
+                  instructions={this.props.instructions}
+                  id={`${this.idForInstructionsPrefix}-${id}`}
+                />
+              )}
             </Errorable>
           </FieldWrapper>
         )}

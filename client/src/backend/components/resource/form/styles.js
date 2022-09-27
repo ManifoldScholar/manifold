@@ -9,8 +9,6 @@ import {
 const GRID_GAP = "15px";
 
 export const KindPicker = styled.div`
-  padding-bottom: 40px;
-
   ${respond(`padding-bottom: 12px;`, 65)}
 `;
 

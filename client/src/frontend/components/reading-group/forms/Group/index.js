@@ -123,102 +123,98 @@ class ReadingGroupForm extends React.PureComponent {
       >
         {getModelValue => (
           <>
-            <Form.FieldGroup>
-              <Form.TextInput
-                wide
-                label={t("forms.reading_group.name")}
-                name="attributes[name]"
-                placeholder={t("forms.reading_group.name_placeholder")}
-                focusOnMount
-              />
+            <Form.TextInput
+              wide
+              label={t("forms.reading_group.name")}
+              name="attributes[name]"
+              placeholder={t("forms.reading_group.name_placeholder")}
+              focusOnMount
+            />
 
-              <Form.Radios
-                label={t("forms.reading_group.privacy")}
-                name="attributes[privacy]"
-                defaultValue={"private"}
-                beforeOnChange={this.warnOnPrivacyChange}
-                instructions={t("forms.reading_group.privacy_instructions")}
-                options={[
-                  {
-                    label: t("forms.reading_group.privacy_options.public"),
-                    value: "public"
-                  },
-                  {
-                    label: t("forms.reading_group.privacy_options.private"),
-                    value: "private"
-                  },
-                  {
-                    label: t("forms.reading_group.privacy_options.anonymous"),
-                    value: "anonymous"
-                  }
-                ]}
-                inline
-                wide
-              />
-              <Form.TextInput
-                wide
-                label={t("forms.reading_group.invitation_code")}
-                name="attributes[invitationCode]"
-                buttons={[
-                  {
-                    label: t(
-                      "forms.reading_group.invitation_code_buttons.regenerate"
-                    ),
-                    onClick: this.handleRegenerate
-                  },
-                  {
-                    label: t(
-                      "forms.reading_group.invitation_code_buttons.copy"
-                    ),
-                    onClick: this.handleCopy
-                  }
-                ]}
-                instructions={t(
-                  "forms.reading_group.invitation_code_instructions"
-                )}
-              />
-              <Form.TextInput
-                wide
-                isDisabled
-                label={t("forms.reading_group.invitation_url")}
-                value={this.urlForToken(
-                  getModelValue("attributes[invitationCode]")
-                )}
-                instructions={t(
-                  "forms.reading_group.invitation_url_instructions"
-                )}
-                buttons={[
-                  {
-                    label: t("forms.reading_group.invitation_url_button_label"),
-                    onClick: this.handleCopy
-                  }
-                ]}
-              />
-              <ClassNames>
-                {({ css }) => (
-                  <Form.Radios
-                    label={t("forms.reading_group.course")}
-                    name="attributes[course][enabled]"
-                    defaultValue={false}
-                    instructions={t("forms.reading_group.course_instructions")}
-                    options={[
-                      {
-                        label: t("forms.reading_group.course_options.yes"),
-                        value: true
-                      },
-                      {
-                        label: t("forms.reading_group.course_options.no"),
-                        value: false
-                      }
-                    ]}
-                    beforeOnChange={this.handleCourseChange}
-                    inputClasses={css(`padding-block-end: 20px;`)}
-                    inline
-                    wide
-                  />
-                )}
-              </ClassNames>
-            </Form.FieldGroup>
+            <Form.Radios
+              label={t("forms.reading_group.privacy")}
+              name="attributes[privacy]"
+              defaultValue={"private"}
+              beforeOnChange={this.warnOnPrivacyChange}
+              instructions={t("forms.reading_group.privacy_instructions")}
+              options={[
+                {
+                  label: t("forms.reading_group.privacy_options.public"),
+                  value: "public"
+                },
+                {
+                  label: t("forms.reading_group.privacy_options.private"),
+                  value: "private"
+                },
+                {
+                  label: t("forms.reading_group.privacy_options.anonymous"),
+                  value: "anonymous"
+                }
+              ]}
+              inline
+              wide
+            />
+            <Form.TextInput
+              wide
+              label={t("forms.reading_group.invitation_code")}
+              name="attributes[invitationCode]"
+              buttons={[
+                {
+                  label: t(
+                    "forms.reading_group.invitation_code_buttons.regenerate"
+                  ),
+                  onClick: this.handleRegenerate
+                },
+                {
+                  label: t("forms.reading_group.invitation_code_buttons.copy"),
+                  onClick: this.handleCopy
+                }
+              ]}
+              instructions={t(
+                "forms.reading_group.invitation_code_instructions"
+              )}
+            />
+            <Form.TextInput
+              wide
+              isDisabled
+              label={t("forms.reading_group.invitation_url")}
+              value={this.urlForToken(
+                getModelValue("attributes[invitationCode]")
+              )}
+              instructions={t(
+                "forms.reading_group.invitation_url_instructions"
+              )}
+              buttons={[
+                {
+                  label: t("forms.reading_group.invitation_url_button_label"),
+                  onClick: this.handleCopy
+                }
+              ]}
+            />
+            <ClassNames>
+              {({ css }) => (
+                <Form.Radios
+                  label={t("forms.reading_group.course")}
+                  name="attributes[course][enabled]"
+                  defaultValue={false}
+                  instructions={t("forms.reading_group.course_instructions")}
+                  options={[
+                    {
+                      label: t("forms.reading_group.course_options.yes"),
+                      value: true
+                    },
+                    {
+                      label: t("forms.reading_group.course_options.no"),
+                      value: false
+                    }
+                  ]}
+                  beforeOnChange={this.handleCourseChange}
+                  inputClasses={css(`padding-block-end: 20px;`)}
+                  inline
+                  wide
+                />
+              )}
+            </ClassNames>
             <Styled.DatesOuter>
               <Collapse isOpened={this.state.courseEnabled}>
                 <Styled.DatesInner>

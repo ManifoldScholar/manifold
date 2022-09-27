@@ -53,43 +53,41 @@ class Social extends PureComponent {
             onSuccess={this.closeDrawer}
             className="form-secondary"
           >
-            <Form.FieldGroup>
-              <Form.TextInput
-                label={t("backend.forms.hashtag")}
-                name="attributes[hashtag]"
-                placeholder={t("backend.forms.hashtag_placeholder", {
-                  entity: modelLabel
-                })}
-                wide
-              />
-              <Form.TextInput
-                label={t("backend.forms.social_id", { social: "Facebook" })}
-                name="attributes[facebookId]"
-                placeholder={t("backend.forms.social_placeholder", {
-                  entity: modelLabel,
-                  social: "Facebook"
-                })}
-                wide
-              />
-              <Form.TextInput
-                label={t("backend.forms.social_id", { social: "Twitter" })}
-                name="attributes[twitterId]"
-                placeholder={t("backend.forms.social_placeholder", {
-                  entity: modelLabel,
-                  social: "Twitter"
-                })}
-                wide
-              />
-              <Form.TextInput
-                label={t("backend.forms.social_id", { social: "Instagram" })}
-                name="attributes[instagramId]"
-                placeholder={t("backend.forms.social_placeholder", {
-                  entity: modelLabel,
-                  social: "Instagram"
-                })}
-                wide
-              />
-            </Form.FieldGroup>
+            <Form.TextInput
+              label={t("backend.forms.hashtag")}
+              name="attributes[hashtag]"
+              placeholder={t("backend.forms.hashtag_placeholder", {
+                entity: modelLabel
+              })}
+              wide
+            />
+            <Form.TextInput
+              label={t("backend.forms.social_id", { social: "Facebook" })}
+              name="attributes[facebookId]"
+              placeholder={t("backend.forms.social_placeholder", {
+                entity: modelLabel,
+                social: "Facebook"
+              })}
+              wide
+            />
+            <Form.TextInput
+              label={t("backend.forms.social_id", { social: "Twitter" })}
+              name="attributes[twitterId]"
+              placeholder={t("backend.forms.social_placeholder", {
+                entity: modelLabel,
+                social: "Twitter"
+              })}
+              wide
+            />
+            <Form.TextInput
+              label={t("backend.forms.social_id", { social: "Instagram" })}
+              name="attributes[instagramId]"
+              placeholder={t("backend.forms.social_placeholder", {
+                entity: modelLabel,
+                social: "Instagram"
+              })}
+              wide
+            />
             <Form.Save text={t("actions.save")} />
           </FormContainer.Form>
         </section>

@@ -11,7 +11,7 @@ export default class ResourceFormKindVariantsImage extends PureComponent {
 
   render() {
     return (
-      <Form.FieldGroup>
+      <>
         <Form.Upload
           layout="square"
           label="High Resolution Image"
@@ -30,7 +30,7 @@ export default class ResourceFormKindVariantsImage extends PureComponent {
           remove="attributes[removeVariantThumbnail]"
           {...this.props}
         />
-      </Form.FieldGroup>
+      </>
     );
   }
 }

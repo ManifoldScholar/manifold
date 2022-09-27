@@ -11,7 +11,7 @@ export default class ResourceFormKindVariantsDefault extends PureComponent {
 
   render() {
     return (
-      <Form.FieldGroup>
+      <>
         <Form.Upload
           layout="square"
           label="Variant #1"
@@ -30,7 +30,7 @@ export default class ResourceFormKindVariantsDefault extends PureComponent {
           remove="attributes[removeVariantFormatTwo]"
           {...this.props}
         />
-      </Form.FieldGroup>
+      </>
     );
   }
 }

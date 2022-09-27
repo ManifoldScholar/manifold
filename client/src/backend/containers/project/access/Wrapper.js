@@ -66,49 +66,47 @@ class ProjectAccessWrapper extends Component {
                       update={updateProject}
                       className="form-secondary"
                     >
-                      <Form.FieldGroup>
-                        {this.defaultIsOpen && (
-                          <Form.Switch
-                            className="form-toggle-secondary"
-                            label={t(
-                              "backend_entities.projects.forms.access.restricted_label"
-                            )}
-                            name="attributes[restrictedAccess]"
-                            wide
-                          />
-                        )}
-                        {this.defaultIsRestricted && (
-                          <Form.Switch
-                            className="form-toggle-secondary"
-                            label={t(
-                              "backend_entities.projects.forms.access.open_access_label"
-                            )}
-                            name="attributes[openAccess]"
-                            wide
-                          />
-                        )}
-                        <Form.TextInput
+                      {this.defaultIsOpen && (
+                        <Form.Switch
                           className="form-toggle-secondary"
                           label={t(
-                            "backend_entities.projects.forms.access.notice_header_label"
+                            "backend_entities.projects.forms.access.restricted_label"
                           )}
-                          name="attributes[restrictedAccessHeading]"
-                          placeholder={t(
-                            "backend_entities.projects.forms.access.notice_header_placeholder"
-                          )}
+                          name="attributes[restrictedAccess]"
                           wide
                         />
-                        <Form.TextArea
+                      )}
+                      {this.defaultIsRestricted && (
+                        <Form.Switch
                           className="form-toggle-secondary"
                           label={t(
-                            "backend_entities.projects.forms.access.notice_body_label"
+                            "backend_entities.projects.forms.access.open_access_label"
                           )}
-                          name="attributes[restrictedAccessBody]"
-                          placeholder={t(
-                            "backend_entities.projects.forms.access.notice_body_placeholder"
-                          )}
+                          name="attributes[openAccess]"
+                          wide
                         />
-                      </Form.FieldGroup>
+                      )}
+                      <Form.TextInput
+                        className="form-toggle-secondary"
+                        label={t(
+                          "backend_entities.projects.forms.access.notice_header_label"
+                        )}
+                        name="attributes[restrictedAccessHeading]"
+                        placeholder={t(
+                          "backend_entities.projects.forms.access.notice_header_placeholder"
+                        )}
+                        wide
+                      />
+                      <Form.TextArea
+                        className="form-toggle-secondary"
+                        label={t(
+                          "backend_entities.projects.forms.access.notice_body_label"
+                        )}
+                        name="attributes[restrictedAccessBody]"
+                        placeholder={t(
+                          "backend_entities.projects.forms.access.notice_body_placeholder"
+                        )}
+                      />
                       <Form.Save
                         text={t("backend_entities.projects.forms.access.save")}
                       />

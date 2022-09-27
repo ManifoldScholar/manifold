@@ -46,7 +46,6 @@ export default class FieldGroup extends PureComponent {
         instructions,
         theme,
         children,
-        className,
         ...childProps
       } = this.props;
       return React.cloneElement(child, childProps);
@@ -66,17 +65,14 @@ export default class FieldGroup extends PureComponent {
             aria-labelledby={`${id}-header`}
             aria-describedby={`${id}-instructions`}
             $horizontal={this.props.horizontal}
-            className={this.props.className}
           >
             {isString(this.props.label) ? (
               <SectionLabel label={this.props.label} id={`${id}-header`} />
             ) : null}
-            {this.props.instructions && (
-              <Instructions
-                id={`${id}-instructions`}
-                instructions={this.props.instructions}
-              />
-            )}
+            <Instructions
+              id={`${id}-instructions`}
+              instructions={this.props.instructions}
+            />
             <GroupComponent>{this.renderChildren(this.props)}</GroupComponent>
           </Styled.Section>
         )}

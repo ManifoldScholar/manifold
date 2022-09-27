@@ -11,7 +11,7 @@ export default class ResourceFormKindVariantsInteractive extends PureComponent {
 
   render() {
     return (
-      <Form.FieldGroup>
+      <>
         <Form.Upload
           layout="landscape"
           label="Poster Image"
@@ -30,7 +30,7 @@ export default class ResourceFormKindVariantsInteractive extends PureComponent {
           remove="attributes[removeVariantThumbnail]"
           {...this.props}
         />
-      </Form.FieldGroup>
+      </>
     );
   }
 }

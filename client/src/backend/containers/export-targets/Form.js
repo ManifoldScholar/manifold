@@ -36,71 +36,69 @@ class ExportTargetsContainerForm extends PureComponent {
     return (
       <>
         <Form.Errors names={["attributes[configuration]"]} />
-        <Form.FieldGroup>
-          <Form.TextInput
-            focusOnMount
-            label={t("backend.forms.export_target.name_label")}
-            name="attributes[name]"
-            placeholder={t("backend.forms.export_target.name_placeholder")}
+        <Form.TextInput
+          focusOnMount
+          label={t("backend.forms.export_target.name_label")}
+          name="attributes[name]"
+          placeholder={t("backend.forms.export_target.name_placeholder")}
+          wide
+        />
+        <Form.TextInput
+          label={t("backend.forms.export_target.format_label")}
+          name="attributes[configuration][targetNameFormat]"
+          placeholder="%s.%e"
+          wide
+        />
+        <Form.Select
+          label={t("backend.forms.export_target.type_label")}
+          name="attributes[strategy]"
+          options={[
+            {
+              label: t("backend.forms.export_target.type_options.sftp_key"),
+              value: "sftp_key"
+            },
+            {
+              label: t(
+                "backend.forms.export_target.type_options.sftp_password"
+              ),
+              value: "sftp_password"
+            }
+          ]}
+        />
+        <Form.TextInput
+          label={t("backend.forms.export_target.host_label")}
+          name={`attributes[configuration][${strategy}][host]`}
+          placeholder={t("backend.forms.export_target.host_placeholder")}
+          wide
+        />
+        <Form.TextInput
+          label={t("backend.forms.export_target.port_label")}
+          name={`attributes[configuration][${strategy}][port]`}
+          placeholder="22"
+          wide
+        />
+        <Form.TextInput
+          label={t("backend.forms.export_target.username_label")}
+          name={`attributes[configuration][${strategy}][username]`}
+          placeholder={t("backend.forms.export_target.username_placeholder")}
+          show_uncategorized_texts
+          wide
+        />
+        {strategy === "sftpKey" && (
+          <Form.TextArea
+            label={t("backend.forms.export_target.private_key_label")}
+            name={`attributes[configuration][${strategy}][privateKey]`}
             wide
           />
+        )}
+        {strategy === "sftpPassword" && (
           <Form.TextInput
-            label={t("backend.forms.export_target.format_label")}
-            name="attributes[configuration][targetNameFormat]"
-            placeholder="%s.%e"
+            password
+            label={t("backend.forms.export_target.password_label")}
+            name={`attributes[configuration][${strategy}][password]`}
             wide
           />
-          <Form.Select
-            label={t("backend.forms.export_target.type_label")}
-            name="attributes[strategy]"
-            options={[
-              {
-                label: t("backend.forms.export_target.type_options.sftp_key"),
-                value: "sftp_key"
-              },
-              {
-                label: t(
-                  "backend.forms.export_target.type_options.sftp_password"
-                ),
-                value: "sftp_password"
-              }
-            ]}
-          />
-          <Form.TextInput
-            label={t("backend.forms.export_target.host_label")}
-            name={`attributes[configuration][${strategy}][host]`}
-            placeholder={t("backend.forms.export_target.host_placeholder")}
-            wide
-          />
-          <Form.TextInput
-            label={t("backend.forms.export_target.port_label")}
-            name={`attributes[configuration][${strategy}][port]`}
-            placeholder="22"
-            wide
-          />
-          <Form.TextInput
-            label={t("backend.forms.export_target.username_label")}
-            name={`attributes[configuration][${strategy}][username]`}
-            placeholder={t("backend.forms.export_target.username_placeholder")}
-            show_uncategorized_texts
-            wide
-          />
-          {strategy === "sftpKey" && (
-            <Form.TextArea
-              label={t("backend.forms.export_target.private_key_label")}
-              name={`attributes[configuration][${strategy}][privateKey]`}
-              wide
-            />
-          )}
-          {strategy === "sftpPassword" && (
-            <Form.TextInput
-              password
-              label={t("backend.forms.export_target.password_label")}
-              name={`attributes[configuration][${strategy}][password]`}
-              wide
-            />
-          )}
-        </Form.FieldGroup>
+        )}
         <Form.Save text={t("backend.forms.export_target.submit_label")} />
       </>
     );
