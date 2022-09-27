@@ -106,15 +106,12 @@ export class ResourceNewContainer extends PureComponent {
                   wide
                 />
                 <Resource.Form.KindAttributes />
-                <GlobalForm.Errorable
-                  className="form-input"
-                  name="attributes[fingerprint]"
-                />
-                <Form.Save
-                  text={t("backend_entities.resources.forms.new.save")}
-                  cancelRoute={lh.link("backendProjectResources", project.id)}
-                />
+                <GlobalForm.Errorable name="attributes[fingerprint]" />
               </Form.FieldGroup>
+              <Form.Save
+                text={t("backend_entities.resources.forms.new.save")}
+                cancelRoute={lh.link("backendProjectResources", project.id)}
+              />
             </FormContainer.Form>
           </Layout.BackendPanel>
         </div>

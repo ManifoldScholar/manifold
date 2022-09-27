@@ -55,23 +55,29 @@ class TwitterQueryForm extends PureComponent {
         className="form-secondary"
         notificationScope={this.props.notificationScope}
       >
-        <Form.TextInput
-          validation={["required"]}
-          focusOnMount
-          label={t("backend.query")}
-          name="attributes[query]"
-          placeholder={t("backend.query_placeholder")}
-          instructions={instructions}
-        />
-        <Form.Select
-          name="attributes[resultType]"
-          label={t("backend.fetch_tweets_by")}
-          options={[
-            { label: t("backend.most_recent"), value: "most_recent" },
-            { label: t("backend.most_popular"), value: "popular" }
-          ]}
-        />
-        <Form.Switch label={t("backend.active")} name="attributes[active]" />
+        <Form.FieldGroup>
+          <Form.TextInput
+            validation={["required"]}
+            focusOnMount
+            label={t("backend.query")}
+            name="attributes[query]"
+            placeholder={t("backend.query_placeholder")}
+            instructions={instructions}
+          />
+          <Form.Select
+            name="attributes[resultType]"
+            label={t("backend.fetch_tweets_by")}
+            options={[
+              { label: t("backend.most_recent"), value: "most_recent" },
+              { label: t("backend.most_popular"), value: "popular" }
+            ]}
+          />
+          <Form.Switch
+            label={t("backend.active")}
+            name="attributes[active]"
+            isPrimary
+          />
+        </Form.FieldGroup>
         <Form.Save text={t("backend.save_query")} />
       </FormContainer.Form>
     );
