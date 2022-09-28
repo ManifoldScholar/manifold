@@ -7,7 +7,6 @@ import layout from "./layout";
 import project from "./project";
 import projectCollection from "./project-collection";
 import activityStats from "./activityStats";
-import permissionForm from "./permissionForm";
 import orderedRecords from "./orderedRecords";
 import notificationList from "./notificationList";
 import navigation from "./navigation";
@@ -28,7 +27,6 @@ export default `
   ${project}
   ${projectCollection}
   ${activityStats}
-  ${permissionForm}
   ${orderedRecords}
   ${notificationList}
   ${navigation}

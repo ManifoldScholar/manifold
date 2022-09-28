@@ -41,7 +41,7 @@ class ProjectContentTypeFormTexts extends PureComponent {
           name="attributes[description]"
           wide
         />
-        <Form.InputGroupPrimary>
+        <Form.FieldGroup>
           <Form.Switch
             label={this.props.t("backend.forms.text.show_author_names")}
             name="attributes[showAuthors]"
@@ -77,7 +77,7 @@ class ProjectContentTypeFormTexts extends PureComponent {
             name="attributes[showUncategorized]"
             isPrimary
           />
-        </Form.InputGroupPrimary>
+        </Form.FieldGroup>
         {this.hasCategories && (
           <Form.Picker
             placeholder={this.props.t("backend.forms.text.add_text_category")}
