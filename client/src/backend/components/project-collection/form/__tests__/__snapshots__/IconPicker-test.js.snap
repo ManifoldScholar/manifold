@@ -5,11 +5,10 @@ exports[`backend/components/project-collection/form/IconPicker matches the snaps
   class="form-input icon-picker"
 >
   <div
-    class="form-input"
+    class="form-input css-154vff9-Wrapper eon8abq0"
   >
     <label
-      class="form-input-heading"
-      for="icon-picker-1"
+      class="css-bmmdfg-PrimaryLabel e11et4nf2"
     >
       backend.forms.project_collection.collection_icon
     </label>

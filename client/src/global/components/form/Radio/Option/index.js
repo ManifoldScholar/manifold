@@ -48,8 +48,7 @@ export default class FormRadioOption extends PureComponent {
   render() {
     return (
       <>
-        {/* This classname is here so styles from form-input > label don't get applied. */}
-        <Styled.WrapperLabel $inline={this.inline} className="formerly-radio">
+        <Styled.WrapperLabel $inline={this.inline}>
           <Styled.RadioInput
             type="radio"
             name={this.props.groupName}

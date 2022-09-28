@@ -41,10 +41,8 @@ function IssueForm({ journalId, model, ...props }) {
         options={fetchJournalVolumes}
       />
       {model?.id ? (
-        <div className="form-input">
-          <span className="form-input-heading">
-            {t("backend.forms.issue.associated_project")}
-          </span>
+        <div>
+          <Form.Label label={t("backend.forms.issue.associated_project")} />
           <EntitiesList
             entities={[model.relationships.project]}
             entityComponent={ProjectRow}

@@ -3,60 +3,62 @@
 exports[`backend/components/project-collection/form/SmartAttributes when the project collection is smart matches the snapshot when rendered 1`] = `
 Array [
   <div
-    class="form-number-input form-input"
+    class="e1dgmes50 css-b3o1sw-Wrapper-NumberInput eon8abq0"
   >
     <label
-      class="has-instructions"
+      class="css-cqb262-PrimaryLabel e11et4nf2"
       for="number-input-1"
     >
       backend.forms.project_collection.number_projects
     </label>
     <input
       aria-describedby="number-input-error-1 number-input-instructions-1"
+      class="css-kb5mz1-BaseInput-SecondaryInput e1e2hl9r4"
       id="number-input-1"
       type="number"
       value=""
     />
     <span
-      class="instructions"
+      class="css-65ims6-PrimaryInstructions e10u3e2o1"
       id="number-input-instructions-1"
     >
       backend.forms.project_collection.number_projects_instructions
     </span>
   </div>,
   <div
-    class="form-input form-toggle-secondary"
+    class="form-toggle-secondary css-154vff9-Wrapper eon8abq0"
   >
     <label
-      class="form-switch"
+      class="css-1f8v3pv-LabelSwitch e2dgthi1"
       for="switch-input-1"
     >
       <span
-        class="form-input-heading toggle above"
+        class="css-1tpktqh-LabelTextPrimary e2dgthi3"
       >
         backend.forms.project_collection.featured_projects
       </span>
       <input
+        class="css-ql9lvi-BaseInput-InputSwitch e2dgthi7"
         id="switch-input-1"
         type="checkbox"
       />
       <span
-        class="toggle-indicator"
+        class="toggle-indicator css-6rh76p-IndicatorSwitchOuter e2dgthi11"
       >
         <span
           aria-hidden="true"
-          class="boolean-primary"
+          class="css-iz3q7p-IndicatorSwitchInner e2dgthi10"
         />
       </span>
       <span
-        class="instructions"
+        class="css-65ims6-PrimaryInstructions e10u3e2o1"
       >
         backend.forms.project_collection.featured_projects_instructions
       </span>
     </label>
   </div>,
   <div
-    class="form-input"
+    class="css-154vff9-Wrapper eon8abq0"
   >
     <div
       aria-atomic="true"
@@ -65,29 +67,32 @@ Array [
       role="status"
     />
     <div
-      class="picker-input"
+      class="css-a2xa0g-Wrapper ef2ewu713"
     >
       <label
+        class="css-bmmdfg-PrimaryLabel e11et4nf2"
         for="1-picker-textbox"
-        id="1-picker-label"
       >
         backend.forms.project_collection.subjects
       </label>
+      <span
+        class="css-65ims6-PrimaryInstructions e10u3e2o1"
+      />
       <div
-        class="picker-input__input-wrapper"
+        class="css-1x69m8a-InputWrapper ef2ewu712"
       >
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
           aria-owns="1-picker-listbox"
-          class="picker-input__input"
+          class="css-z857ow-ComboBox ef2ewu711"
           role="combobox"
         >
           <input
             aria-autocomplete="list"
             aria-controls="1-picker-listbox"
             aria-labelledby="1-picker-label"
-            class="text-input picker-input__text-input picker-input__text-input--padded-1x"
+            class="css-12duwyt-TextInput ef2ewu710"
             id="1-picker-textbox"
             placeholder="backend.forms.project_collection.subjects_placeholder"
             type="text"
@@ -95,15 +100,15 @@ Array [
           />
         </div>
         <div
-          class="picker-input__button-group"
+          class="css-18rlpod-ButtonGroup ef2ewu78"
         >
           <div
             aria-hidden="true"
-            class="picker-input__button"
+            class="css-g1yzh3-Button ef2ewu77"
           >
             <svg
               aria-hidden="true"
-              class="manicon-svg picker-input__icon picker-input__icon--disclosure svg-icon--disclosureDown16"
+              class="manicon-svg css-1onbdaj-IconDisclosure ef2ewu75 svg-icon--disclosureDown16"
               fill="currentColor"
               height="20"
               viewBox="0 0 16 16"
@@ -119,12 +124,12 @@ Array [
       </div>
       <ul
         aria-labelledby="1-picker-label"
-        class="picker-input__results"
+        class="css-685xow-ResultsList ef2ewu74"
         id="1-picker-listbox"
         role="listbox"
       >
         <li
-          class="picker-input__result picker-input__result--empty"
+          class="css-1du3u78-Result-EmptyResult ef2ewu72"
           id="no-options"
         >
           forms.picker.no_options
@@ -133,7 +138,7 @@ Array [
     </div>
   </div>,
   <div
-    class="form-input"
+    class="css-154vff9-Wrapper eon8abq0"
   >
     <div
       aria-atomic="true"
@@ -142,29 +147,32 @@ Array [
       role="status"
     />
     <div
-      class="picker-input"
+      class="css-a2xa0g-Wrapper ef2ewu713"
     >
       <label
+        class="css-bmmdfg-PrimaryLabel e11et4nf2"
         for="1-picker-textbox"
-        id="1-picker-label"
       >
         backend.forms.project_collection.tags
       </label>
+      <span
+        class="css-65ims6-PrimaryInstructions e10u3e2o1"
+      />
       <div
-        class="picker-input__input-wrapper"
+        class="css-1x69m8a-InputWrapper ef2ewu712"
       >
         <div
           aria-expanded="false"
           aria-haspopup="listbox"
           aria-owns="1-picker-listbox"
-          class="picker-input__input"
+          class="css-z857ow-ComboBox ef2ewu711"
           role="combobox"
         >
           <input
             aria-autocomplete="list"
             aria-controls="1-picker-listbox"
             aria-labelledby="1-picker-label"
-            class="text-input picker-input__text-input picker-input__text-input--padded-1x"
+            class="css-12duwyt-TextInput ef2ewu710"
             id="1-picker-textbox"
             placeholder="backend.forms.project_collection.tags_placeholder"
             type="text"
@@ -172,15 +180,15 @@ Array [
           />
         </div>
         <div
-          class="picker-input__button-group"
+          class="css-18rlpod-ButtonGroup ef2ewu78"
         >
           <div
             aria-hidden="true"
-            class="picker-input__button"
+            class="css-g1yzh3-Button ef2ewu77"
           >
             <svg
               aria-hidden="true"
-              class="manicon-svg picker-input__icon picker-input__icon--disclosure svg-icon--disclosureDown16"
+              class="manicon-svg css-1onbdaj-IconDisclosure ef2ewu75 svg-icon--disclosureDown16"
               fill="currentColor"
               height="20"
               viewBox="0 0 16 16"
@@ -196,12 +204,12 @@ Array [
       </div>
       <ul
         aria-labelledby="1-picker-label"
-        class="picker-input__results"
+        class="css-685xow-ResultsList ef2ewu74"
         id="1-picker-listbox"
         role="listbox"
       >
         <li
-          class="picker-input__result picker-input__result--empty"
+          class="css-1du3u78-Result-EmptyResult ef2ewu72"
           id="no-options"
         >
           forms.picker.no_options
@@ -209,7 +217,7 @@ Array [
       </ul>
     </div>
     <div
-      class="picker-input__list"
+      class="css-1vhkkx-List ef2ewu71"
     >
       <div
         class="entity-list entity-list--well"

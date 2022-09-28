@@ -135,14 +135,12 @@ class IconPicker extends Component {
               label={this.props.label}
               idForError={`${this.idForErrorPrefix}-${id}`}
             >
-              <label
-                className="form-input-heading"
+              <GlobalForm.Label
                 htmlFor={`${this.idPrefix}-${id}`}
-              >
-                {this.props.t(
+                label={this.props.t(
                   "backend.forms.project_collection.collection_icon"
                 )}
-              </label>
+              />
               <div>
                 <span className="screen-reader-text">
                   {this.props.t(

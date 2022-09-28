@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import { useListFilters } from "hooks";
 import * as Styled from "./styles";
+import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 
 export default function ProjectCollectionSortBy({
@@ -38,28 +39,25 @@ export default function ProjectCollectionSortBy({
     });
 
     return (
-      <div className="form-secondary">
-        <div className="form-input">
-          <div className="form-input-heading">
-            {t("backend.forms.project_collection.order_manually")}
-          </div>
-          <div className="toggle-indicator">
-            <div
-              onClick={handleClick}
-              className={classes}
-              role="button"
-              tabIndex="0"
-              aria-pressed={isManualSort}
-            >
-              <span className="screen-reader-text">
-                {t(
-                  "backend.forms.project_collection.order_collection_manually"
-                )}
-              </span>
-            </div>
+      <Styled.Toggle>
+        <Form.Label
+          as="div"
+          label={t("backend.forms.project_collection.order_manually")}
+        />
+        <div className="toggle-indicator">
+          <div
+            onClick={handleClick}
+            className={classes}
+            role="button"
+            tabIndex="0"
+            aria-pressed={isManualSort}
+          >
+            <span className="screen-reader-text">
+              {t("backend.forms.project_collection.order_collection_manually")}
+            </span>
           </div>
         </div>
-      </div>
+      </Styled.Toggle>
     );
   };
 

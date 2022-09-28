@@ -6,8 +6,8 @@ exports[`global/containers/form/Form matches the snapshot 1`] = `
     message="messages.unsaved_changes"
     when={false}
   />
-  <form
-    className="form-secondary"
+  <Form
+    className=""
     data-id="submit"
     onSubmit={[Function]}
     style={Object {}}
@@ -545,11 +545,12 @@ exports[`global/containers/form/Form matches the snapshot 1`] = `
             },
             "type": "projects",
           },
+          "styleType": "secondary",
           "submitKey": null,
           "triggerSubmit": [Function],
         }
       }
     />
-  </form>
+  </Form>
 </div>
 `;

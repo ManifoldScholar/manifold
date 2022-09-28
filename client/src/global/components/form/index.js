@@ -1,7 +1,6 @@
 import BaseInput from "./BaseInput";
 import CodeArea from "./CodeArea";
 import AttributeMap from "./AttributeMap";
-import Date from "./Date";
 import DatePicker from "./DatePicker";
 import FieldGroup from "./FieldGroup";
 import GeneratedPasswordInput from "./GeneratedPasswordInput";
@@ -39,7 +38,6 @@ export default {
   BaseInput,
   CodeArea,
   AttributeMap,
-  Date,
   DatePicker,
   FieldGroup,
   GeneratedPasswordInput,

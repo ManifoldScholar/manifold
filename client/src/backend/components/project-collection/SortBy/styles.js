@@ -16,28 +16,19 @@ export const Wrapper = styled.div`
     `,
     60
   )}
+`;
 
-  .form-secondary {
-    margin-top: 0;
+export const Toggle = styled.div`
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
 
-    .form-input {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+  ${respond(`justify-content: flex-end;`, 60)}
 
-      ${respond(`justify-content: flex-end;`, 60)}
-
-      .form-input-heading {
-        margin-right: 12px;
-        margin-bottom: 0;
-        font-size: 13px;
-        transform: translateY(-1px);
-      }
-
-      .toggle-indicator {
-        display: inline-block;
-      }
-    }
+  .toggle-indicator {
+    display: inline-block;
   }
 `;
 
