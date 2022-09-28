@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 100%;
   gap: var(--gap);
+  min-inline-size: 200px;
 
   &.wide {
     --FieldGroup-child-flex-basis: 100%;

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Switch from "./Switch";
 import Errorable from "global/components/form/Errorable";
-import FieldGroup from "./FieldGroup";
 import setter from "./setter";
 
 class FormSwitchArray extends Component {
@@ -56,11 +55,9 @@ class FormSwitchArray extends Component {
         nameForError={this.props.label}
         errors={this.props.errors}
       >
-        <FieldGroup label={this.props.label} horizontal>
-          {this.props.options.map((option, index) => {
-            return this.renderSwitch(option, index);
-          })}
-        </FieldGroup>
+        {this.props.options.map((option, index) => {
+          return this.renderSwitch(option, index);
+        })}
       </Errorable>
     );
   }

@@ -7,6 +7,7 @@ import { usersAPI, permissionsAPI, requests } from "api";
 import connectAndFetch from "utils/connectAndFetch";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
+import * as Styled from "./styles";
 
 export class PermissionForm extends PureComponent {
   static displayName = "Permission.Form";
@@ -45,16 +46,12 @@ export class PermissionForm extends PureComponent {
     if (!user) return null;
     const attr = user.attributes;
     return (
-      <div className="form-input">
-        <div className="user">
-          <figure className="avatar">
-            <EntityThumbnail.User entity={user} />
-          </figure>
-          <div className="meta">
-            <h3 className="name large">{attr.fullName}</h3>
-          </div>
-        </div>
-      </div>
+      <Styled.User>
+        <Styled.Avatar>
+          <EntityThumbnail.User entity={user} />
+        </Styled.Avatar>
+        <Styled.Name>{attr.fullName}</Styled.Name>
+      </Styled.User>
     );
   }
 
@@ -100,7 +97,7 @@ export class PermissionForm extends PureComponent {
           create={this.composeCreateCall}
           options={{ adds: requests.bePermissions }}
           onSuccess={this.handleSuccess}
-          className="form-secondary permissions-form"
+          className="form-secondary"
           notificationScope="drawer"
         >
           {this.renderUser(this.props)}
