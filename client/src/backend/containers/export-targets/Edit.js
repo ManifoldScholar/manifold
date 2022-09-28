@@ -90,7 +90,7 @@ export class ExportTargetsEditContainer extends PureComponent {
     const attr = this.exportTarget.attributes;
 
     return (
-      <div>
+      <section>
         <Navigation.DrawerHeader
           title={attr.name}
           buttons={[
@@ -102,10 +102,8 @@ export class ExportTargetsEditContainer extends PureComponent {
             }
           ]}
         />
-        <section className="form-section form-section--primary">
-          <Form model={this.exportTarget} />
-        </section>
-      </div>
+        <Form model={this.exportTarget} />
+      </section>
     );
   }
 }

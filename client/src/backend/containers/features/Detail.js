@@ -216,11 +216,11 @@ class FeatureDetailContainer extends PureComponent {
             {feature || isNew ? (
               <section>
                 {previewFeature ? (
-                  <div className="form-secondary form-section form-section--primary">
+                  <div className="form-secondary">
                     <SectionLabel
                       label={t("backend.features.preview.section_title")}
                     />
-                    <div className="form-input-group form-input-group--primary">
+                    <div>
                       <div className="form-input wide">
                         <FrontendLayout.Splash
                           feature={previewFeature}

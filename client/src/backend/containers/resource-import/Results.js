@@ -59,27 +59,25 @@ export class ResourceImportResults extends PureComponent {
     return (
       <div>
         <div className="form-secondary">
-          <div className="form-section form-section--primary">
-            <ResourceImport.Control
-              resourceImport={resourceImport}
-              updateImportState={this.updateImportState}
-              fetch={this.props.fetch}
-              match={this.props.match}
-            />
-            <div className="form-input">
-              <nav className="results-list">
-                <ul>
-                  {importResults.map(r => {
-                    return (
-                      <ResourceImport.Result
-                        resourceImportRow={r}
-                        key={r.lineNumber}
-                      />
-                    );
-                  })}
-                </ul>
-              </nav>
-            </div>
+          <ResourceImport.Control
+            resourceImport={resourceImport}
+            updateImportState={this.updateImportState}
+            fetch={this.props.fetch}
+            match={this.props.match}
+          />
+          <div className="form-input">
+            <nav className="results-list">
+              <ul>
+                {importResults.map(r => {
+                  return (
+                    <ResourceImport.Result
+                      resourceImportRow={r}
+                      key={r.lineNumber}
+                    />
+                  );
+                })}
+              </ul>
+            </nav>
           </div>
         </div>
       </div>

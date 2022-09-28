@@ -34,6 +34,7 @@ class FeaturesPropertiesContainer extends PureComponent {
               label={t("backend.forms.feature.published_label")}
               name="attributes[live]"
               instructions={t("backend.forms.feature.published_instructions")}
+              isPrimary
             />
             <Form.TextInput
               wide
@@ -70,6 +71,7 @@ class FeaturesPropertiesContainer extends PureComponent {
               label={t("backend.forms.feature.sign_up_label")}
               name="attributes[includeSignUp]"
               instructions={t("backend.forms.feature.sign_up_instructions")}
+              isPrimary
             />
             <Form.Select
               label={t("backend.forms.feature.style_label")}
