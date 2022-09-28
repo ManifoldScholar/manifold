@@ -43,6 +43,8 @@ class FormSwitchArray extends Component {
         set={() => this.handleChange(option.value)}
         value={this.props.value.includes(option.value)}
         focusOnMount={focusOnMount}
+        isPrimary
+        wide
       />
     );
   }

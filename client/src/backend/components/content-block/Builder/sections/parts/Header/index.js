@@ -21,12 +21,12 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
           <SectionLabel label={this.props.title} id={this.props.headerId} />
         )}
         {this.props.children && (
-          <span id={this.props.instructionsId} className="instructions">
+          <Styled.Instructions id={this.props.instructionsId}>
             {this.props.children}
-          </span>
+          </Styled.Instructions>
         )}
         {this.props.subtitle && (
-          <Styled.SubtitleHeader className="form-subsection-label">
+          <Styled.SubtitleHeader>
             <Styled.Subtitle>{this.props.subtitle}</Styled.Subtitle>
           </Styled.SubtitleHeader>
         )}

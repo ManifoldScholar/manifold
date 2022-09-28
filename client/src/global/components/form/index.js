@@ -29,6 +29,7 @@ import Divider from "./Divider";
 import Picker from "./Picker";
 import Label from "./BaseLabel";
 import FieldWrapper from "./FieldWrapper";
+import { InputGroupPrimary, InputGroupSecondary } from "./InputGroup/styles";
 
 export default {
   CoverUploadPlaceholder,
@@ -61,5 +62,7 @@ export default {
   Divider,
   Picker,
   Label,
-  FieldWrapper
+  FieldWrapper,
+  InputGroupPrimary,
+  InputGroupSecondary
 };
