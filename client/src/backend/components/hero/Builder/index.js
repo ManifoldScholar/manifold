@@ -8,6 +8,7 @@ import Drawer from "global/containers/drawer";
 import ActionCallouts from "./ActionCallouts";
 import SectionLabel from "global/components/form/SectionLabel";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 class Builder extends PureComponent {
   static displayName = "Hero.Builder";
@@ -107,9 +108,8 @@ class Builder extends PureComponent {
       <UIDConsumer name={id => `hero-builder-${id}`}>
         {id => (
           <>
-            <section className="hero-builder form-secondary">
+            <section className="hero-builder">
               <div
-                className="form-section form-section--primary"
                 role="group"
                 aria-labelledby={`${id}-header`}
                 aria-describedby={`${id}-instructions`}
@@ -118,11 +118,11 @@ class Builder extends PureComponent {
                   label={t("backend.layout.hero_block")}
                   id={`${id}-header`}
                 />
-                <span id={`${id}-instructions`} className="instructions">
+                <Styled.Instructions id={`${id}-instructions`}>
                   {t("backend.layout.hero_block_instructions", {
                     entity: modelLabel ?? this.defaultModelLabel
                   })}
-                </span>
+                </Styled.Instructions>
 
                 {include.includes("projectDescription") && (
                   <Block

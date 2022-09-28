@@ -123,21 +123,19 @@ export class TwitterQueryEditContainer extends PureComponent {
       });
 
     return (
-      <div>
+      <section>
         <Navigation.DrawerHeader
           title={twitterQuery.attributes.displayName}
           icon="activityTweet64"
           buttons={buttons}
         />
-        <section className="form-section form-section--primary">
-          <TwitterQuery.Form
-            name={requests.beTwitterQueryUpdate}
-            twitterQuery={twitterQuery}
-            projectId={projectId}
-            notificationScope="drawer"
-          />
-        </section>
-      </div>
+        <TwitterQuery.Form
+          name={requests.beTwitterQueryUpdate}
+          twitterQuery={twitterQuery}
+          projectId={projectId}
+          notificationScope="drawer"
+        />
+      </section>
     );
   }
 }

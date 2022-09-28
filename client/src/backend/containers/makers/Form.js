@@ -25,7 +25,7 @@ class MakersFormContainer extends PureComponent {
     const requestName = maker ? requests.beMakerUpdate : requests.beMakerCreate;
 
     return (
-      <section className="form-section form-section--primary">
+      <section>
         <FormContainer.Form
           model={maker}
           modelName="Maker"

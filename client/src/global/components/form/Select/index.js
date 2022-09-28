@@ -86,7 +86,7 @@ export class FormSelect extends Component {
     return (
       <UIDConsumer>
         {id => (
-          <FieldWrapper className="wide">
+          <FieldWrapper>
             <Errorable
               name={this.props.name}
               errors={this.props.errors}
