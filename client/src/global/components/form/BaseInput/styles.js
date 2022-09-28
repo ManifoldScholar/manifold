@@ -64,6 +64,11 @@ export const SecondaryInput = styled(BaseInput)`
   &[type="number"] {
     text-align: left;
   }
+
+  header & {
+    font-size: 24px;
+    padding: 0 0 0.4em;
+  }
 `;
 
 export const Notification = styled.span`

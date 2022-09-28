@@ -106,7 +106,6 @@ class FormGeneratedPasswordInput extends Component {
       <UIDConsumer>
         {id => (
           <Errorable
-            className="form-input password-input"
             name={this.props.name}
             errors={this.props.errors}
             label={t("forms.password_reset.password")}

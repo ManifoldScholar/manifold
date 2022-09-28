@@ -27,25 +27,23 @@ class KindPicker extends Component {
       : t("backend.forms.project_collection.manual");
 
     return (
-      <div className="form-input">
-        <div>
-          <span className="screen-reader-text">
-            {t("backend.forms.project_collection.collection_kind_instructions")}
-          </span>
-          <Utility.Toggle
-            handleToggle={this.handleSmartClick}
-            selected={selected}
-            label="kind"
-            optionOne={{
-              label: t("backend.forms.project_collection.manual"),
-              icon: "BECollectionManual64"
-            }}
-            optionTwo={{
-              label: t("backend.forms.project_collection.smart"),
-              icon: "BECollectionSmart64"
-            }}
-          />
-        </div>
+      <div>
+        <span className="screen-reader-text">
+          {t("backend.forms.project_collection.collection_kind_instructions")}
+        </span>
+        <Utility.Toggle
+          handleToggle={this.handleSmartClick}
+          selected={selected}
+          label="kind"
+          optionOne={{
+            label: t("backend.forms.project_collection.manual"),
+            icon: "BECollectionManual64"
+          }}
+          optionTwo={{
+            label: t("backend.forms.project_collection.smart"),
+            icon: "BECollectionSmart64"
+          }}
+        />
       </div>
     );
   }

@@ -77,25 +77,23 @@ class ResourceRow extends PureComponent {
     });
 
     return (
-      <div className="form-input">
-        <div className="toggle-indicator">
-          {/* Add .checked to .boolean-primary to change visual state */}
-          <div
-            onClick={event => this.onSwitchChange(event, this.resource)}
-            className={classes}
-            role="button"
-            tabIndex="0"
-          >
-            {this.switchValue(this.resource) ? (
-              <span className="screen-reader-text">
-                {this.props.t("backend.actions.remove_resource")}
-              </span>
-            ) : (
-              <span className="screen-reader-text">
-                {this.props.t("backend.actions.add_resource")}
-              </span>
-            )}
-          </div>
+      <div className="toggle-indicator">
+        {/* Add .checked to .boolean-primary to change visual state */}
+        <div
+          onClick={event => this.onSwitchChange(event, this.resource)}
+          className={classes}
+          role="button"
+          tabIndex="0"
+        >
+          {this.switchValue(this.resource) ? (
+            <span className="screen-reader-text">
+              {this.props.t("backend.actions.remove_resource")}
+            </span>
+          ) : (
+            <span className="screen-reader-text">
+              {this.props.t("backend.actions.add_resource")}
+            </span>
+          )}
         </div>
       </div>
     );

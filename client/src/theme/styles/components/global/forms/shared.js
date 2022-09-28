@@ -1,12 +1,9 @@
 import {
   respond,
   buttonUnstyled,
-  buttonRounded,
   inputQuaternary,
   outlineOnFocus,
-  defaultFocusStyle,
   defaultTransitionProps,
-  formLabelPrimary,
   selectPrimary,
   utilityPrimary
 } from "theme/styles/mixins";
@@ -43,85 +40,6 @@ export default `
       &.focus-visible {
         color: var(--color-base-neutral-white);
         border-color: var(--focus-color);
-      }
-    }
-  }
-
-  .form-dropzone {
-    position: relative;
-    cursor: pointer;
-
-    &__inline-button {
-      ${buttonUnstyled}
-      display: inline;
-      text-decoration: underline;
-      text-transform: inherit;
-      letter-spacing: inherit;
-      pointer-events: auto;
-    }
-
-    &__upload-prompt {
-      text-decoration: underline;
-      transition: color var(--transition-duration-default) var(--transition-timing-function);
-    }
-
-    .dropzone-button {
-      ${buttonUnstyled}
-      ${buttonRounded}
-      ${formLabelPrimary}
-      padding: 25px 15px;
-      font-weight: var(--font-weight-regular);
-      line-height: 1.761;
-      text-align: center;
-      border: 2px solid;
-
-      &__text {
-        display: block;
-        padding-left: 95px;
-        text-align: left;
-      }
-
-      &__cancel-button {
-        ${buttonUnstyled}
-        position: absolute;
-        top: -6px;
-        right: -12px;
-      }
-
-      + .dropzone-button {
-        margin-top: 25px;
-      }
-    }
-
-    .dropzone-button-dotted {
-      border: 2px dotted var(--color-base-neutral50);
-    }
-
-    input {
-      display: block !important;
-      position: absolute;
-      inset-inline-start: 0;
-      inset-block-start: 0;
-      inline-size: 100%;
-      block-size: 100%;
-      opacity: 0;
-      cursor: pointer;
-
-      &:hover {
-        + [class^='contents-'] .form-dropzone__upload-prompt,
-        + .dropzone-button .form-dropzone__upload-prompt {
-          color: var(--hover-color);
-        }
-      }
-
-      &.focus-visible {
-        outline: 0;
-
-        + [class^='contents-'] .form-dropzone__upload-prompt,
-        + .dropzone-button .form-dropzone__upload-prompt {
-          ${defaultFocusStyle}
-          outline-color: var(--focus-color);
-        }
       }
     }
   }

@@ -1,23 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`global/components/form/InputError matches the snapshot 1`] = `
-<span
+<ErrorList
   aria-atomic="true"
   aria-live="polite"
-  className="errors"
   id={null}
   role="alert"
 >
-  <span
+  <Error
+    className="error"
     key="0"
   >
-    <span
-      className="error"
-    >
-      Can't be blank.
-      <br />
-    </span>
-     
-  </span>
-</span>
+    Can't be blank.
+  </Error>
+</ErrorList>
 `;

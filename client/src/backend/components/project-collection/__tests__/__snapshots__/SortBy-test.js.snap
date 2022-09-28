@@ -5,35 +5,28 @@ exports[`backend/components/project-collection/SortBy matches the snapshot 1`] =
   <Instructions>
     backend.forms.project_collection.order_manually_instructions
   </Instructions>
-  <div
-    className="form-secondary"
-  >
+  <Toggle>
+    <Form.BaseLabel
+      as="div"
+      label="backend.forms.project_collection.order_manually"
+    />
     <div
-      className="form-input"
+      className="toggle-indicator"
     >
       <div
-        className="form-input-heading"
+        aria-pressed={true}
+        className="boolean-primary checked"
+        onClick={[Function]}
+        role="button"
+        tabIndex="0"
       >
-        backend.forms.project_collection.order_manually
-      </div>
-      <div
-        className="toggle-indicator"
-      >
-        <div
-          aria-pressed={true}
-          className="boolean-primary checked"
-          onClick={[Function]}
-          role="button"
-          tabIndex="0"
+        <span
+          className="screen-reader-text"
         >
-          <span
-            className="screen-reader-text"
-          >
-            backend.forms.project_collection.order_collection_manually
-          </span>
-        </div>
+          backend.forms.project_collection.order_collection_manually
+        </span>
       </div>
     </div>
-  </div>
+  </Toggle>
 </Wrapper>
 `;

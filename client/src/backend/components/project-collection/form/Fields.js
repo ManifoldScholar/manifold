@@ -49,6 +49,7 @@ class Fields extends Component {
         >
           <Form.TextInput
             wide
+            header
             focusOnMount
             label={t("backend.forms.project_collection.collection_title")}
             name="attributes[title]"
@@ -57,7 +58,6 @@ class Fields extends Component {
             )}
           />
         </Navigation.DrawerHeader>
-
         <KindPicker {...this.props} />
         <Form.TextInput
           wide

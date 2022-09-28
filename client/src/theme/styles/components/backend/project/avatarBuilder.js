@@ -193,28 +193,6 @@ export default `
         }
       }
 
-      .form-dropzone {
-        width: 100%;
-        border: 0;
-
-        .contents-empty {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          width: 100%;
-          margin: 0;
-        }
-
-        .primary {
-          font-size: ${fluidScale("12px", "10px")};
-        }
-
-        .secondary {
-          ${utilityMessage}
-          margin: 0;
-        }
-      }
-
       .contents-empty {
         margin-top: 0;
       }
