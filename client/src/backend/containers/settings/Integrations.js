@@ -117,7 +117,7 @@ export class SettingsIntegrationsContainer extends PureComponent {
               <Form.TextInput
                 label={t("settings.integrations.google_tracking_id_label")}
                 name="attributes[integrations][gaTrackingId]"
-                placeholder="UA-000000-00"
+                placeholder="G-0000000000"
               />
             </Form.FieldGroup>
             <Form.Save text={t("settings.save")} />
