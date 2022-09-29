@@ -19,7 +19,7 @@ import {
 import { meAPI, requests } from "api";
 import { select, loaded } from "utils/entityUtils";
 import { closest } from "utils/domUtils";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "routes";
@@ -72,6 +72,14 @@ class ManifoldContainer extends PureComponent {
       ReactGA.initialize(
         this.props.settings.attributes.integrations.gaTrackingId
       );
+      if (
+        this.props.authentication.authenticated &&
+        !this.props.authentication.currentUser.consentGoogleAnalytics
+      ) {
+        ReactGA.gtag("consent", "default", {
+          analytics_storage: "denied"
+        });
+      }
       this.gaInitialized = true;
       if (this.props.gaInitCallback) this.props.gaInitCallback();
     }
