@@ -4,9 +4,15 @@ import { Link } from "react-router-dom";
 import NarrowBanner from "./NarrowBanner";
 import FormEmbedBanner from "./FormEmbedBanner";
 import { useFromStore } from "hooks";
+import CookieHelper from "helpers/cookie/Browser";
+
+const cookie = new CookieHelper();
 
 export default function AnonymousUserBanner() {
   const [showForm, setShowForm] = useState(false);
+  const [consentNeeded, setConsentNeeded] = useState(
+    !cookie.read("anonAnalyticsConsent")
+  );
 
   const settings = useFromStore("settings", "select");
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
@@ -27,13 +33,12 @@ export default function AnonymousUserBanner() {
           ? google
           : all
       };
-      console.info(prefs);
-      // save cookies prefs in redux store or local storage
+
+      cookie.write("anonAnalyticsConsent", prefs, { expires: 365 });
+      setConsentNeeded(false);
     },
     [googleAnalyticsEnabled, manifoldAnalyticsEnabled]
   );
-
-  // check saved prefs to see if we need to render the banner
 
   const message = (
     <Trans
@@ -41,6 +46,8 @@ export default function AnonymousUserBanner() {
       components={[<Link to={`/login`} />]}
     />
   );
+
+  if (!consentNeeded) return null;
 
   return showForm ? (
     <FormEmbedBanner

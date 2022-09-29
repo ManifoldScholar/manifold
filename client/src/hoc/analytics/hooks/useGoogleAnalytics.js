@@ -4,6 +4,9 @@ import ReactGA from "react-ga4";
 import ch from "helpers/consoleHelpers";
 import config from "config";
 import { useFromStore } from "hooks";
+import CookieHelper from "helpers/cookie/Browser";
+
+const cookie = new CookieHelper();
 
 function nullTracker(trackedEventIgnored) {}
 
@@ -19,6 +22,12 @@ export default function useGoogleAnalytics(location, settings) {
   const googleAnalyticsId = getGoogleAnalyticsId(settings);
   const { currentUser } = useFromStore("authentication") ?? {};
 
+  const anonConsent = cookie.read("anonAnalyticsConsent");
+
+  const consentGoogleAnalytics =
+    currentUser?.attributes.consentGoogleAnalytics ||
+    anonConsent?.consentGoogleAnalytics;
+
   useEffect(() => {
     if (googleAnalyticsEnabled(settings)) {
       ReactGA.initialize(googleAnalyticsId, { debug: false });
@@ -29,13 +38,13 @@ export default function useGoogleAnalytics(location, settings) {
         );
       }
 
-      if (!currentUser?.attributes.consentGoogleAnalytics) {
+      if (!consentGoogleAnalytics) {
         ReactGA.gtag("consent", "default", {
           analytics_storage: "denied"
         });
       }
     }
-  }, [googleAnalyticsId, settings, currentUser]);
+  }, [googleAnalyticsId, settings, consentGoogleAnalytics]);
 
   useEffect(() => {
     if (googleAnalyticsEnabled(settings)) {
