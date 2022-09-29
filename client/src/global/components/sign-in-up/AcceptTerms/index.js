@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { AcceptTermsCheckbox } from "../form-inputs";
 import { useFromStore } from "hooks";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
@@ -26,12 +25,12 @@ export default function AcceptTerms({ handleViewChange }) {
       values={{ installationName }}
       components={{
         termsLink: termsPage ? (
-          <Link to={`/page/${termsPage.attributes.slug}`} />
+          <a href={`/page/${termsPage.attributes.slug}`}>#</a>
         ) : (
           <></>
         ),
         privacyLink: privacyPolicy ? (
-          <Link to={`/page/${privacyPolicy.attributes.slug}`} />
+          <a href={`/page/${privacyPolicy.attributes.slug}`}>#</a>
         ) : (
           <></>
         )
