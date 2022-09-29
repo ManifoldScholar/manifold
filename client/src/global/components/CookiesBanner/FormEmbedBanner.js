@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AcceptTermsCheckbox } from "global/components/sign-in-up/form-inputs";
 import PropTypes from "prop-types";
+import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 export default function FormEmbedBanner({ declineAll, save, message }) {
@@ -10,6 +11,10 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
   const [prefs, setPrefs] = useState({ manifold: false, google: false });
   const onChange = pref => setPrefs({ ...prefs, [pref]: !prefs[pref] });
 
+  const settings = useFromStore("settings", "select");
+  const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
+    settings?.attributes?.calculated ?? {};
+
   return (
     <Styled.Banner>
       <Styled.Inner $wide>
@@ -17,26 +22,30 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
           <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
           <p>{message}</p>
           <Styled.Checkboxes>
-            <Styled.CheckboxWrapper>
-              <AcceptTermsCheckbox
-                label={t("forms.privacy.internal_analytics.label")}
-                labelStyle="heading"
-                onChange={() => onChange("manifold")}
-              />
-              <Styled.Description>
-                {t("forms.privacy.internal_analytics.description")}
-              </Styled.Description>
-            </Styled.CheckboxWrapper>
-            <Styled.CheckboxWrapper>
-              <AcceptTermsCheckbox
-                label={t("forms.privacy.google_analytics.label")}
-                labelStyle="heading"
-                onChange={() => onChange("google")}
-              />
-              <Styled.Description>
-                {t("forms.privacy.google_analytics.description")}
-              </Styled.Description>
-            </Styled.CheckboxWrapper>
+            {manifoldAnalyticsEnabled && (
+              <Styled.CheckboxWrapper>
+                <AcceptTermsCheckbox
+                  label={t("forms.privacy.internal_analytics.label")}
+                  labelStyle="heading"
+                  onChange={() => onChange("manifold")}
+                />
+                <Styled.Description>
+                  {t("forms.privacy.internal_analytics.description")}
+                </Styled.Description>
+              </Styled.CheckboxWrapper>
+            )}
+            {googleAnalyticsEnabled && (
+              <Styled.CheckboxWrapper>
+                <AcceptTermsCheckbox
+                  label={t("forms.privacy.google_analytics.label")}
+                  labelStyle="heading"
+                  onChange={() => onChange("google")}
+                />
+                <Styled.Description>
+                  {t("forms.privacy.google_analytics.description")}
+                </Styled.Description>
+              </Styled.CheckboxWrapper>
+            )}
           </Styled.Checkboxes>
         </Styled.TextWrapper>
         <Styled.ButtonWrapper>
