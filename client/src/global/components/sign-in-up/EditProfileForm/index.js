@@ -10,6 +10,7 @@ import { useFromStore, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import { useUID } from "react-uid";
 import BaseHookForm from "global/components/form/hook-form/BaseHookForm";
+import CookiesFields from "./CookiesFields";
 import * as Styled from "./styles";
 
 export default function EditProfileForm({ hideOverlay, mode }) {
@@ -93,6 +94,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
               {t("forms.signin_overlay.update_sr_title")}
             </Styled.SRText>
             <ProfileFormFields errors={errors} />
+            {mode === "new" && <CookiesFields />}
             <Button
               type="submit"
               label="forms.signin_overlay.submit_update_label"
