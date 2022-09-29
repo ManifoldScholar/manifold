@@ -226,8 +226,8 @@
       "account_data": "Account Data",
       "download": {
         "header": "Download your data",
-        "description": "Download all of your activity on Manifold.",
-        "button_label": "Download"
+        "description": "Export a copy of your Manifold account data. Manifold will email you a link when the export is ready to download.",
+        "button_label": "Start Export"
       },
       "delete": {
         "header": "Delete your account",
