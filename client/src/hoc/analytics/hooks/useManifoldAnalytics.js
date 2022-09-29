@@ -39,11 +39,14 @@ function getTokens() {
 export default function useManifoldAnalytics(location, settings, dispatch) {
   const { currentUser } = useFromStore("authentication") ?? {};
 
+  const anonConsent = cookie.read("anonAnalyticsConsent");
+
+  const consentManifoldAnalytics =
+    currentUser?.attributes.consentManifoldAnalytics ||
+    anonConsent?.consentManifoldAnalytics;
+
   useEffect(() => {
-    if (
-      manifoldAnalyticsEnabled(settings) &&
-      (!currentUser || currentUser.attributes.consentManifoldAnalytics)
-    ) {
+    if (manifoldAnalyticsEnabled(settings) && consentManifoldAnalytics) {
       const { visitToken, visitorToken } = getTokens();
       dispatch(currentUserActions.setVisitorToken(visitorToken));
       dispatch(currentUserActions.setVisitToken(visitToken));
@@ -54,7 +57,7 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
         );
       }
     }
-  }, [dispatch, settings, currentUser]);
+  }, [dispatch, settings, consentManifoldAnalytics]);
 
   const track = trackedEvent => {
     const { visitToken, visitorToken } = getTokens();
@@ -82,10 +85,7 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
     dispatch(trackRequest);
   };
 
-  if (
-    !manifoldAnalyticsEnabled(settings) ||
-    (currentUser && !currentUser.attributes.consentManifoldAnalytics)
-  )
+  if (!manifoldAnalyticsEnabled(settings) || !consentManifoldAnalytics)
     return { track: nullTracker, leave: nullTracker };
 
   return { track };
