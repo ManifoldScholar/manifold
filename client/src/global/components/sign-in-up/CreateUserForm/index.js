@@ -52,7 +52,19 @@ export default function CreateUserForm({
     [dispatch]
   );
 
-  const formatAttributes = data => ({ attributes: data });
+  const pages = useFromStore("gPages", "select");
+  const termsPage = pages?.find(
+    p => p.attributes.purpose === "terms_and_conditions"
+  );
+
+  const formatAttributes = data => ({
+    attributes: termsPage
+      ? {
+          ...data,
+          termsAndConditionsAcceptedAt: new Date().toISOString()
+        }
+      : data
+  });
 
   const onSuccess = useCallback(
     (response, data) => {

@@ -39,7 +39,11 @@ export default function AcceptTerms({ handleViewChange }) {
     />
   );
 
-  return (
+  if (!termsPage) {
+    handleViewChange("create");
+  }
+
+  return termsPage ? (
     <>
       <Styled.Header>{t("forms.signin_overlay.terms_header")}</Styled.Header>
       <Styled.TextBlock>
@@ -62,7 +66,7 @@ export default function AcceptTerms({ handleViewChange }) {
         onClick={() => handleViewChange("create")}
       />
     </>
-  );
+  ) : null;
 }
 
 AcceptTerms.displayName = "Global.SignInUp.AcceptTerms";
