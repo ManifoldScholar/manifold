@@ -152,7 +152,6 @@ function ProjectPropertiesContainer({ project }) {
             )}
           >
             <Form.Switch
-              className="form-toggle-secondary"
               wide
               label={t(
                 "backend_entities.projects.forms.properties.draft_mode_label"
@@ -163,7 +162,6 @@ function ProjectPropertiesContainer({ project }) {
               )}
             />
             <Form.Switch
-              className="form-toggle-secondary"
               wide
               label={t(
                 "backend_entities.projects.forms.properties.featured_label"
@@ -174,7 +172,6 @@ function ProjectPropertiesContainer({ project }) {
               )}
             />
             <Form.Switch
-              className="form-toggle-secondary"
               wide
               label={t(
                 "backend_entities.projects.forms.properties.finished_label"
@@ -239,7 +236,6 @@ function ProjectPropertiesContainer({ project }) {
             )}
           >
             <Form.Switch
-              className="form-toggle-secondary"
               wide
               label={t(
                 "backend_entities.projects.forms.properties.disable_public_label"

@@ -30,7 +30,6 @@ class SmartAttributes extends Component {
                 )}
               />
               <Form.Switch
-                className="form-toggle-secondary"
                 label={t("backend.forms.project_collection.featured_projects")}
                 name="attributes[featuredOnly]"
                 instructions={t(

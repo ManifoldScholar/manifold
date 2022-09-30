@@ -121,7 +121,6 @@ export class SettingsPropertiesContainer extends PureComponent {
                   label={t("settings.properties.behaviors_header")}
                 >
                   <Form.Switch
-                    className="form-toggle-secondary"
                     wide
                     label={t("settings.properties.analytics_label")}
                     instructions={t(
@@ -131,7 +130,6 @@ export class SettingsPropertiesContainer extends PureComponent {
                   />
                   <Form.Switch
                     wide
-                    className="form-toggle-secondary"
                     label={t("settings.properties.access_label")}
                     instructions={t("settings.properties.access_instructions")}
                     name="attributes[general][restrictedAccess]"
@@ -141,7 +139,6 @@ export class SettingsPropertiesContainer extends PureComponent {
                     <>
                       <Form.TextInput
                         wide
-                        className="form-toggle-secondary"
                         label={t(
                           "settings.properties.access_notice_header_label"
                         )}
@@ -152,7 +149,6 @@ export class SettingsPropertiesContainer extends PureComponent {
                       />
                       <Form.TextArea
                         wide
-                        className="form-toggle-secondary"
                         label={t(
                           "settings.properties.access_notice_body_label"
                         )}
@@ -164,7 +160,6 @@ export class SettingsPropertiesContainer extends PureComponent {
                     </>
                   )}
                   <Form.Switch
-                    className="form-toggle-secondary"
                     wide
                     label={t("settings.properties.library_views_label")}
                     instructions={t(
@@ -177,7 +172,6 @@ export class SettingsPropertiesContainer extends PureComponent {
                     <>
                       <Form.Switch
                         wide
-                        className="form-toggle-secondary"
                         label={t("settings.properties.standalone_label")}
                         name="attributes[general][allStandalone]"
                         instructions={t(
@@ -207,7 +201,6 @@ export class SettingsPropertiesContainer extends PureComponent {
                     </>
                   )}
                   <Form.Switch
-                    className="form-toggle-secondary"
                     wide
                     label={t("settings.properties.public_comments_label")}
                     instructions={t(
@@ -216,7 +209,6 @@ export class SettingsPropertiesContainer extends PureComponent {
                     name="attributes[general][disableEngagement]"
                   />
                   <Form.Switch
-                    className="form-toggle-secondary"
                     wide
                     label={t("settings.properties.reading_groups_label")}
                     instructions={t(
