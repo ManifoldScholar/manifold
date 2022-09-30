@@ -52,33 +52,34 @@ class FormTextArea extends Component {
     return (
       <UIDConsumer>
         {id => (
-          <FieldWrapper className={this.props.wide ? "wide" : undefined}>
-            <Errorable
-              name={this.props.name}
-              errors={this.props.errors}
+          <Errorable
+            name={this.props.name}
+            errors={this.props.errors}
+            label={this.props.label}
+            idForError={`${this.idForErrorPrefix}-${id}`}
+            className={this.props.wide ? "wide" : undefined}
+          >
+            <BaseLabel
+              id={`${this.idPrefix}-${id}`}
+              hasInstructions={isString(this.props.instructions)}
               label={this.props.label}
-              idForError={`${this.idForErrorPrefix}-${id}`}
-            >
-              <BaseLabel
-                id={`${this.idPrefix}-${id}`}
-                hasInstructions={isString(this.props.instructions)}
-                label={this.props.label}
-                styleType={this.context?.styleType}
-              />
+              styleType={this.context?.styleType}
+            />
+            {this.props.instructions && (
               <Instructions
                 instructions={this.props.instructions}
                 id={`${this.idForInstructionsPrefix}-${id}`}
               />
-              <TextArea
-                id={`${this.idPrefix}-${id}`}
-                aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
-                style={{ height: this.props.height }}
-                placeholder={this.props.placeholder}
-                onChange={this.props.onChange}
-                value={this.props.value || ""}
-              />
-            </Errorable>
-          </FieldWrapper>
+            )}
+            <TextArea
+              id={`${this.idPrefix}-${id}`}
+              aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
+              style={{ height: this.props.height }}
+              placeholder={this.props.placeholder}
+              onChange={this.props.onChange}
+              value={this.props.value || ""}
+            />
+          </Errorable>
         )}
       </UIDConsumer>
     );
