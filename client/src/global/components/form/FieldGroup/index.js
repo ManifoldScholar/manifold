@@ -33,6 +33,15 @@ export default class FieldGroup extends PureComponent {
     return this.props.labelTag;
   }
 
+  getAriaGroupAttributes(id) {
+    if (!this.props.label && !this.props.instructions) return {};
+    return {
+      role: "group",
+      "aria-labelledby": `${id}-header`,
+      "aria-describedby": `${id}-instructions`
+    };
+  }
+
   renderChildren(props) {
     return React.Children.map(props.children, child => {
       if (!child) return null;
@@ -61,18 +70,18 @@ export default class FieldGroup extends PureComponent {
         {id => (
           <Styled.Section
             key="group"
-            role="group"
-            aria-labelledby={`${id}-header`}
-            aria-describedby={`${id}-instructions`}
+            {...this.getAriaGroupAttributes(id)}
             $horizontal={this.props.horizontal}
           >
             {isString(this.props.label) ? (
               <SectionLabel label={this.props.label} id={`${id}-header`} />
             ) : null}
-            <Instructions
-              id={`${id}-instructions`}
-              instructions={this.props.instructions}
-            />
+            {this.props.instructions && (
+              <Instructions
+                id={`${id}-instructions`}
+                instructions={this.props.instructions}
+              />
+            )}
             <GroupComponent>{this.renderChildren(this.props)}</GroupComponent>
           </Styled.Section>
         )}
