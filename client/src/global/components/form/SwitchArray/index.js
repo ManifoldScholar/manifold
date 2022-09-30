@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Switch from "./Switch";
+import Switch from "../Switch";
 import Errorable from "global/components/form/Errorable";
-import setter from "./setter";
+import setter from "../setter";
+import * as Styled from "./styles";
 
 class FormSwitchArray extends Component {
   static displayName = "Form.SwitchArray";
@@ -50,15 +51,17 @@ class FormSwitchArray extends Component {
 
   render() {
     return (
-      <Errorable
-        name={this.props.name}
-        nameForError={this.props.label}
-        errors={this.props.errors}
-      >
-        {this.props.options.map((option, index) => {
-          return this.renderSwitch(option, index);
-        })}
-      </Errorable>
+      <Styled.Wrapper>
+        <Errorable
+          name={this.props.name}
+          nameForError={this.props.label}
+          errors={this.props.errors}
+        >
+          {this.props.options.map((option, index) => {
+            return this.renderSwitch(option, index);
+          })}
+        </Errorable>
+      </Styled.Wrapper>
     );
   }
 }
