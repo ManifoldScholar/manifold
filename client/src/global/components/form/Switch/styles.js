@@ -54,7 +54,7 @@ const BaseInput = styled.input`
 `;
 
 export const InputSwitch = styled(BaseInput)`
-  &:focus-visible ~ ${IndicatorSwitchOuter} {
+  &:focus-visible ~ ${IndicatorSwitchOuter} ${IndicatorSwitchInner} {
     ${defaultFocusStyle}
     outline-offset: 2px;
   }

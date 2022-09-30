@@ -21,12 +21,6 @@ export default `
       }
     }
 
-    &--backend {
-      .button-switch-primary {
-        margin-bottom: 28px;
-      }
-    }
-
     &--reader {
       &.drawer--pos-default {
         top: var(--reader-header-height);
