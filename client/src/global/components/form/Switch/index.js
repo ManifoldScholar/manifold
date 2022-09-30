@@ -95,14 +95,10 @@ class FormSwitch extends Component {
   }
 
   renderSwitchIndicator() {
-    const Indicator =
-      this.context?.styleType === "secondary" && !this.props.isPrimary
-        ? Styled.IndicatorSwitchInnerSecondary
-        : Styled.IndicatorSwitchInner;
     return (
       /* toggle-indicator does not seem to apply any styles here; used for customization by other parent components */
       <Styled.IndicatorSwitchOuter className="toggle-indicator">
-        <Indicator aria-hidden="true" />
+        <Styled.IndicatorSwitchInner aria-hidden="true" />
       </Styled.IndicatorSwitchOuter>
     );
   }
@@ -116,7 +112,6 @@ class FormSwitch extends Component {
   }
 
   render() {
-    const Label = this.showSwitch ? Styled.LabelSwitch : Styled.LabelCheckbox;
     const LabelText =
       this.context?.styleType === "secondary" && !this.props.isPrimary
         ? Styled.LabelTextSecondary
@@ -133,7 +128,7 @@ class FormSwitch extends Component {
                 : this.props.className
             }
           >
-            <Label htmlFor={`${this.idPrefix}-${id}`}>
+            <Styled.Label htmlFor={`${this.idPrefix}-${id}`}>
               {this.props.labelPos === "above" && (
                 <LabelText $marginEnd={this.props.isPrimary}>
                   {this.props.label}
@@ -157,7 +152,7 @@ class FormSwitch extends Component {
                 instructions={this.props.instructions}
                 className={this.showCheckbox ? "inline" : undefined}
               />
-            </Label>
+            </Styled.Label>
           </FieldWrapper>
         )}
       </UIDConsumer>
