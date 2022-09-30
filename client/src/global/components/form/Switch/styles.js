@@ -13,7 +13,9 @@ const BOOLEAN_WIDTH = BOOLEAN_HEIGHT * 2;
 const BOOLEAN_PADDING = 4;
 
 /* See note in renderSwitchIndicator, also checked and focus styles for InputCheckbox. */
-export const IndicatorSwitchOuter = styled.span``;
+export const IndicatorSwitchOuter = styled.span`
+  border-bottom: 1px solid var(--input-border-color);
+`;
 
 export const IndicatorSwitchInner = styled.span`
   position: relative;
@@ -23,6 +25,7 @@ export const IndicatorSwitchInner = styled.span`
   cursor: pointer;
   background-color: var(--inactive-switch-bg-color);
   border-radius: ${BOOLEAN_HEIGHT}px;
+  transform: translateY(-10%);
   transition: background-color var(--transition-duration-slow)
     var(--transition-timing-function);
 
@@ -38,12 +41,6 @@ export const IndicatorSwitchInner = styled.span`
     transition: transform var(--transition-duration-default)
       cubic-bezier(0.46, 0.03, 0.52, 0.96);
   }
-`;
-
-export const IndicatorSwitchInnerSecondary = styled(IndicatorSwitchInner)`
-  position: absolute;
-  top: -3px;
-  right: 0;
 `;
 
 const BaseInput = styled.input`
@@ -63,12 +60,11 @@ export const InputSwitch = styled(BaseInput)`
   }
 
   &:checked ~ ${IndicatorSwitchOuter} {
-    ${IndicatorSwitchInner},
-    ${IndicatorSwitchInnerSecondary} {
+    ${IndicatorSwitchInner} {
       background-color: var(--active-switch-bg-color);
     }
 
-    ${IndicatorSwitchInner}::before, ${IndicatorSwitchInnerSecondary}::before {
+    ${IndicatorSwitchInner}::before {
       transform: translateX(${BOOLEAN_WIDTH - BOOLEAN_HEIGHT}px);
     }
   }
@@ -110,49 +106,43 @@ export const InputCheckbox = styled(BaseInput)`
       ${defaultFocusStyle}
     }
   }
+
+  ~ :last-child {
+    flex-basis: 75%;
+    margin-top: 0;
+  }
 `;
 
 export const LabelTextPrimary = styled("span", transientOptions)`
   ${formLabelPrimary}
-  display: block;
+  flex-basis: 100%;
   margin-block-start: 0;
   ${({ $marginEnd }) => $marginEnd && `margin-block-end: 1em;`}
+
+  ~ ${IndicatorSwitchOuter} {
+    flex-basis: 100%;
+    border-bottom: none;
+  }
 `;
 
 export const LabelTextSecondary = styled.span`
   ${formInputSecondary}
+  flex-grow: 1;
+  flex-basis: 66.666%;
+  height: auto;
+  min-height: 32px;
   display: block;
-  margin-block-end: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: 0.5em;
   text-transform: inherit;
   letter-spacing: inherit;
-  color: var(--color-neutral-text-extra-light);
+  color: var(--strong-color);
 
-  ${respond(`height: 38px;`, 60)}
+  ${respond(`min-height: 38px;`, 60)}
 `;
 
-export const LabelSwitch = styled.label`
+export const Label = styled.label`
   position: relative;
-  display: block;
-`;
-
-export const LabelCheckbox = styled.label`
-  position: relative;
-  display: block;
-
-  &:hover {
-    ${LabelTextSecondary} {
-      color: var(--hover-color);
-    }
-  }
-
-  ${respond(`display: inline-block;`, 20)}
-
-  ${respond(
-    `
-      & + & {
-        margin-left: 32px;
-      }
-    `,
-    50
-  )}
+  display: flex;
+  flex-wrap: wrap;
 `;
