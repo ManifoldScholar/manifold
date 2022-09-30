@@ -68,7 +68,6 @@ class ProjectAccessWrapper extends Component {
                     >
                       {this.defaultIsOpen && (
                         <Form.Switch
-                          className="form-toggle-secondary"
                           label={t(
                             "backend_entities.projects.forms.access.restricted_label"
                           )}
@@ -78,7 +77,6 @@ class ProjectAccessWrapper extends Component {
                       )}
                       {this.defaultIsRestricted && (
                         <Form.Switch
-                          className="form-toggle-secondary"
                           label={t(
                             "backend_entities.projects.forms.access.open_access_label"
                           )}
@@ -87,7 +85,6 @@ class ProjectAccessWrapper extends Component {
                         />
                       )}
                       <Form.TextInput
-                        className="form-toggle-secondary"
                         label={t(
                           "backend_entities.projects.forms.access.notice_header_label"
                         )}
@@ -98,7 +95,6 @@ class ProjectAccessWrapper extends Component {
                         wide
                       />
                       <Form.TextArea
-                        className="form-toggle-secondary"
                         label={t(
                           "backend_entities.projects.forms.access.notice_body_label"
                         )}

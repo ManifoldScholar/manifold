@@ -76,7 +76,6 @@ function JournalPropertiesContainer({ journal }) {
                 )}
               >
                 <Form.Switch
-                  className="form-toggle-secondary"
                   wide
                   label={t(
                     "backend_entities.journals.forms.properties.draft_mode_label"
@@ -87,7 +86,6 @@ function JournalPropertiesContainer({ journal }) {
                   )}
                 />
                 <Form.Switch
-                  className="form-toggle-secondary"
                   wide
                   label={t(
                     "backend_entities.journals.forms.properties.show_home_label"

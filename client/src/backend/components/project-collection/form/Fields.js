@@ -90,12 +90,10 @@ class Fields extends Component {
           ]}
         />
         <Form.Switch
-          className="form-toggle-secondary"
           label={t("backend.forms.visible")}
           name="attributes[visible]"
         />
         <Form.Switch
-          className="form-toggle-secondary"
           label={t("backend.forms.project_collection.homepage_visible")}
           name="attributes[homepage]"
         />

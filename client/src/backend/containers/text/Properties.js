@@ -68,7 +68,6 @@ export default function TextPropertiesContainer({ text }) {
         >
           <Form.Switch
             wide
-            className="form-toggle-secondary"
             instructions={t(
               "backend_entities.texts.properties.published_instructions"
             )}
@@ -92,7 +91,6 @@ export default function TextPropertiesContainer({ text }) {
         >
           <Form.Switch
             wide
-            className="form-toggle-secondary"
             label={t("backend_entities.texts.properties.ignore_label")}
             instructions={t(
               "backend_entities.texts.properties.ignore_instructions"
