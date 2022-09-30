@@ -58,7 +58,7 @@ export const PrimarySelect = styled(BaseSelect)`
 
 export const SecondarySelect = styled(BaseSelect)`
   --Select-focus-color: var(--highlight-color);
-  --Select-padding: 0 ${FORM_SELECT_INLINE_END_PADDING}px 0.75em 0;
+  --Select-padding: 0 ${FORM_SELECT_INLINE_END_PADDING}px 0.125em 0;
   --Select-text-shadow-color: var(--color-neutral-text-extra-light);
 `;
 

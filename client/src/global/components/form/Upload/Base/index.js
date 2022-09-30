@@ -146,10 +146,12 @@ export default class FormUpload extends Component {
             </InputWrapper>
           )}
         </Dropzone>
-        <Instructions
-          instructions={this.props.instructions}
-          id={this.props.idForInstructions}
-        />
+        {this.props.instructions && (
+          <Instructions
+            instructions={this.props.instructions}
+            id={this.props.idForInstructions}
+          />
+        )}
       </Errorable>
     );
   }

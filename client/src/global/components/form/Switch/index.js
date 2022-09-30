@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
+import classNames from "classnames";
 import setter from "../setter";
 import Instructions from "../Instructions";
 import FieldWrapper from "../FieldWrapper";
@@ -122,11 +123,10 @@ class FormSwitch extends Component {
       <UIDConsumer>
         {id => (
           <FieldWrapper
-            className={
-              this.props.wide
-                ? `wide ${this.props.className}`
-                : this.props.className
-            }
+            className={classNames({
+              wide: this.props.wide,
+              [this.props.className]: !!this.props.className
+            })}
           >
             <Styled.Label htmlFor={`${this.idPrefix}-${id}`}>
               {this.props.labelPos === "above" && (

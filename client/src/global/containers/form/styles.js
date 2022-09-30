@@ -18,4 +18,8 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   row-gap: var(--Form-row-gap);
+
+  .drawer-header {
+    padding-bottom: 0;
+  }
 `;
