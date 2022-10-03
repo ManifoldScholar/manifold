@@ -50,6 +50,10 @@ class JournalIssue < ApplicationRecord
     where(project: Project.with_update_ability(user)).or(where(journal: Journal.with_update_ability(user)))
   end
 
+  scope :with_read_ability, ->(user = nil) do
+    where(project: Project.with_read_ability(user)).or(where(journal: Journal.with_update_ability(user)))
+  end
+
   delegate :avatar, to: :project
   delegate :avatar_color, to: :project
   delegate :avatar_meta, to: :project

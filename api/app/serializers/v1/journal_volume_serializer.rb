@@ -9,8 +9,11 @@ module V1
     typed_attribute :journal_issues_count, Types::Integer
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
     typed_attribute :updated_at, Types::DateTime.meta(read_only: true)
-    typed_has_many :journal_issues, record_type: "journalIssue"
     typed_attribute :slug, Types::String.meta(read_only: true)
+
+    typed_has_many :journal_issues, record_type: "journalIssue" do |object, params|
+      object.journal_issues.with_read_ability(params[:current_user])
+    end
 
     when_full do
       typed_belongs_to :journal
