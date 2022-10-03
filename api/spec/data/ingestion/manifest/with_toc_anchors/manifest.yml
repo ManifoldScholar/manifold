@@ -1,0 +1,15 @@
+meta:
+  title: 'Test Nested TOC Anchors and Section Titles'
+toc:
+  - label: 'Section 1'
+    source_path: section_1.html
+  - label: 'Section 2'
+    source_path: section_2.html
+    children:
+      - label: 'Section 2.1'
+        source_path: section_2.html#anchor-1
+      - label: 'Section 2.2'
+        source_path: section_2.html#anchor-2
+        children:
+          - label: 'Section 2.2.1'
+            source_path: section_2.html#anchor-2-1

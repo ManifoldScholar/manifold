@@ -1,0 +1,13 @@
+meta:
+  title: Hashed Start Section
+  creators:
+    - name: Rowan Ono
+toc:
+  - label: The Start Section
+    source_path: start_section.html
+    children:
+      - label: An Anchor in the Start Section
+        source_path: start_section.html#anchor
+        start_section: true
+  - label: The Second Section
+    source_path: second_section.html

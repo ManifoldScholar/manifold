@@ -103,4 +103,23 @@ RSpec.describe Ingestions::Strategies::Manifest do
       expect(manifest[:attributes][:toc]).to eq expected
     end
   end
+
+  context "when the manifest is composed of nested, remote sources", slow: true do
+    before(:all) do
+      Settings.instance.update_from_environment!
+    end
+
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "with_toc_anchors.zip") }
+
+    it "Has the correct number of text sections" do
+      expect(manifest[:relationships][:text_sections].count).to eq 2
+    end
+
+    it "Assigns the correct title to the parent section" do
+      expect(manifest[:relationships][:text_sections][1][:name]).to eq "Section 2"
+    end
+
+  end
+
+
 end
