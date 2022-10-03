@@ -47,7 +47,7 @@ module Ingestions
         def start_section_identifier
           return nil unless toc_start_section_item.present?
 
-          Digest::MD5.hexdigest context.basename(toc_start_section_item["source_path"])
+          Digest::MD5.hexdigest context.basename(base_source_path(toc_start_section_item["source_path"]))
         end
 
         def toc_start_section_item(items = toc)
@@ -148,14 +148,12 @@ module Ingestions
         # This is where we filter out duplicate sources.  A source is considered a duplicate
         # if its source path references the same file.  We only accept the first reference (in TOC order)
         # of a source file.
-        def build_source_map(array = toc)
-          out = []
+        def build_source_map(array = toc, out = [])
           array.each do |entry|
             out << build_source_map_item(entry) unless source_in_sources?(entry, out)
-            out << build_source_map(entry["children"]) if entry["children"].present?
+            out = build_source_map(entry["children"], out) if entry["children"].present?
           end
-
-          out.flatten
+          out
         end
 
         def build_source_map_item(entry)
