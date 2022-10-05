@@ -96,7 +96,7 @@ export const Body = styled.div`
 export const PlaceholderText = styled.p`
   font-family: var(--font-family-heading);
   font-size: ${fluidScale("20px", "16px")};
-  margin-inline-start: calc(-1 * ${fluidScale("15px", "0px")});
+  margin-inline-start: var(--list-item-padding);
   padding-block-start: ${fluidScale("20px", "10px")};
   padding-block-end: ${fluidScale("30px", "20px")};
   width: 100%;
