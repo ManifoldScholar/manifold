@@ -27,6 +27,7 @@ export default `
       border: 1px solid var(--color-neutral-ui-dull-light);
       transition: color ${defaultTransitionProps},
         background-color ${defaultTransitionProps};
+      position: relative;
 
       &--active,
       &:hover,
@@ -41,6 +42,8 @@ export default `
       position: absolute;
       z-index: -1;
       opacity: 0;
+      width: 100%;
+      height: 100%;
     }
   }
 `;
