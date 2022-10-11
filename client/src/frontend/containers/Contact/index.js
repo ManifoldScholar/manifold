@@ -57,9 +57,10 @@ export class ContactContainer extends Component {
   };
 
   handleInputChange = event => {
+    const name = event.target.name.replace("attributes[", "").replace("]", "");
     const contact = {
       ...this.state.contact,
-      [event.target.name]: event.target.value
+      [name]: event.target.value
     };
     this.setState({ contact });
   };
@@ -72,77 +73,51 @@ export class ContactContainer extends Component {
       <section>
         <div className="container">
           <form method="post" onSubmit={this.sendMessage}>
-            <h1 className="form-heading">{t("forms.contact.title")}</h1>
-            <div className="row-1-p">
-              <Form.Errorable
+            <Form.Header styleType="primary" label={t("forms.contact.title")} />
+            <Form.FieldGroup>
+              <Unwrapped.Input
+                value={this.state.contact.email}
+                type="text"
                 name="attributes[email]"
-                errors={errors}
+                id="create-email"
                 idForError="create-email-error"
-              >
-                <Form.Label
-                  htmlFor="create-email"
-                  label={t("forms.contact.email")}
-                />
-                <Unwrapped.Input
-                  value={this.state.contact.email}
-                  type="text"
-                  name="email"
-                  id="create-email"
-                  idForError="create-email-error"
-                  onChange={this.handleInputChange}
-                  placeholder={t("forms.contact.email_placeholder")}
-                />
-              </Form.Errorable>
-            </div>
-            <div className="row-1-p">
-              <Form.Errorable
+                errors={errors}
+                onChange={this.handleInputChange}
+                placeholder={t("forms.contact.email_placeholder")}
+                label={t("forms.contact.email")}
+                wide
+              />
+              <Unwrapped.Input
+                value={this.state.contact.fullName}
+                type="text"
+                id="create-name"
+                aria-describedby="create-name-error"
+                onChange={this.handleInputChange}
+                placeholder={t("forms.contact.name_placeholder")}
                 name={"attributes[fullName]"}
                 errors={errors}
                 idForError="create-name-error"
-              >
-                <Form.Label
-                  htmlFor="create-name"
-                  label={t("forms.contact.name")}
-                />
-                <Unwrapped.Input
-                  value={this.state.contact.fullName}
-                  type="text"
-                  id="create-name"
-                  aria-describedby="create-name-error"
-                  name="fullName"
-                  onChange={this.handleInputChange}
-                  placeholder={t("forms.contact.name_placeholder")}
-                />
-              </Form.Errorable>
-            </div>
-            <div className="row-1-p">
-              <Form.Errorable
+                wide
+                label={t("forms.contact.name")}
+              />
+              <Unwrapped.TextArea
+                label={t("forms.contact.message")}
                 name="attributes[message]"
                 errors={errors}
                 idForError="create-message-error"
-              >
-                <Form.Label
-                  htmlFor="create-message"
-                  label={t("forms.contact.message")}
-                />
-                <Unwrapped.TextArea
-                  value={this.state.contact.message}
-                  type="message"
-                  name="message"
-                  id="create-message"
-                  onChange={this.handleInputChange}
-                  placeholder={t("forms.contact.message_placeholder")}
-                  aria-describedby="create-message-error"
-                />
-              </Form.Errorable>
-            </div>
-            <div className="row-1-p">
+                value={this.state.contact.message}
+                type="message"
+                id="create-message"
+                onChange={this.handleInputChange}
+                placeholder={t("forms.contact.message_placeholder")}
+                aria-describedby="create-message-error"
+              />
               <input
                 className="button-secondary button-secondary--with-room"
                 type="submit"
                 value={t("forms.contact.button_label")}
               />
-            </div>
+            </Form.FieldGroup>
           </form>
         </div>
       </section>

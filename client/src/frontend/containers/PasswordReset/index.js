@@ -72,7 +72,8 @@ export class PasswordResetContainer extends Component {
   }
 
   handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    const name = event.target.name.replace("attributes[", "").replace("]", "");
+    this.setState({ [name]: event.target.value });
   };
 
   render() {
@@ -82,59 +83,45 @@ export class PasswordResetContainer extends Component {
       <section>
         <div className="container">
           <form method="post" onSubmit={event => this.handleSubmit(event)}>
-            <h4 className="form-heading">{t("forms.password_reset.title")}</h4>
-            <div className="row-1-p" />
-            <div className="row-1-p">
-              <Form.Errorable
+            <Form.Header
+              styleType="primary"
+              label={t("forms.password_reset.title")}
+            />
+            <Form.FieldGroup>
+              <Unwrapped.Input
+                value={this.state.password}
+                type="password"
                 name="attributes[password]"
+                id="reset-password"
+                onChange={this.handleInputChange}
+                placeholder={t("forms.password_reset.new_placeholder")}
+                aria-describedby="reset-password-error"
                 errors={errors}
                 idForError="reset-password-error"
-              >
-                <Form.Label
-                  id="reset-password"
-                  label={t("forms.password_reset.new")}
-                />
-                <Unwrapped.Input
-                  value={this.state.password}
-                  type="password"
-                  name="password"
-                  id="reset-password"
-                  onChange={this.handleInputChange}
-                  placeholder={t("forms.password_reset.new_placeholder")}
-                  aria-describedby="reset-password-error"
-                />
-              </Form.Errorable>
-            </div>
-            <div className="row-1-p">
-              <Form.Errorable
+                label={t("forms.password_reset.new")}
+                wide
+              />
+              <Unwrapped.Input
+                value={this.state.passwordConfirmation}
+                type="password"
+                id="reset-password-confirmation"
+                onChange={this.handleInputChange}
+                placeholder={t("forms.password_reset.confirm_placeholder")}
+                aria-describedby="reset-password-confirmation-error"
                 name="attributes[passwordConfirmation]"
                 errors={errors}
                 idForError="reset-password-confirmation-error"
-              >
-                <Form.Label
-                  id="reset-password-confirmation"
-                  label={t("forms.password_reset.confirm")}
-                />
-                <Unwrapped.Input
-                  value={this.state.passwordConfirmation}
-                  type="password"
-                  name="passwordConfirmation"
-                  id="reset-password-confirmation"
-                  onChange={this.handleInputChange}
-                  placeholder={t("forms.password_reset.confirm_placeholder")}
-                  aria-describedby="reset-password-confirmation-error"
-                />
-              </Form.Errorable>
-            </div>
-            <div className="row-1-p">
+                label={t("forms.password_reset.confirm")}
+                wide
+              />
               <Form.Errorable name="attributes[resetToken]" errors={errors}>
                 <input
-                  className="button-secondary button-secondary--with-room"
+                  className="button-secondary"
                   type="submit"
                   value={t("forms.password_reset.submit_reset")}
                 />
               </Form.Errorable>
-            </div>
+            </Form.FieldGroup>
           </form>
         </div>
       </section>

@@ -2,8 +2,7 @@ import { logicalWithFallback } from "@castiron/style-mixins";
 import {
   containerPrototype,
   containerFocus,
-  flexViewport,
-  clearfix
+  flexViewport
 } from "../mixins/layout";
 
 export const readerContainerWidths = [
@@ -83,13 +82,5 @@ export default `
 
   .flex-grow {
     flex-grow: 1;
-  }
-
-  .row-1-p {
-    ${clearfix()}
-
-    & + & {
-      margin-top: 30px;
-    }
   }
 `;
