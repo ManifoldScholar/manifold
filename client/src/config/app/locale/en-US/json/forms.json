@@ -190,7 +190,8 @@
       "auto_map": "Automatically Map Attributes",
       "spreadsheet_cols": "Spreadsheet Columns",
       "col_header_placeholder": "Column #{{num}}",
-      "available": "Available Attributes"
+      "available": "Available Attributes",
+      "instructions": "The column on the left side lists the column headers found in your spreadsheet. The column on the right lists the attributes that can be set on Manifold resources. Drag the attributes on the right to the corresponding columns on the left. Pressing the \"automatically map attributes\" button will attempt to automatically match the attributes with the spreadsheet columns."
     },
     "picker": {
       "remove_all": "Remove All",

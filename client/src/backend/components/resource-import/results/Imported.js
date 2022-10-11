@@ -26,7 +26,7 @@ export default class ResourceImportResultsImported extends PureComponent {
         <span>
           {resourceImportRow.isUpdate ? (
             <Trans
-              i18nKey="backend.forms.resource_import.row_updated"
+              i18nKey="resources.import.row_updated"
               components={{
                 resourceLink: (
                   <Link
@@ -44,7 +44,7 @@ export default class ResourceImportResultsImported extends PureComponent {
             />
           ) : (
             <Trans
-              i18nKey="backend.forms.resource_import.row_created"
+              i18nKey="resources.import.row_created"
               components={{
                 resourceLink: (
                   <Link

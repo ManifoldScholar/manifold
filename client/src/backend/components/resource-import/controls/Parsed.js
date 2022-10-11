@@ -30,9 +30,9 @@ class ResourceImportControlsParsed extends PureComponent {
 
     return (
       <>
-        <SectionLabel label={t("backend.forms.resource_import.step_four")} />
+        <SectionLabel label={t("resources.import.step_four")} />
         <p className="instructional-copy">
-          {t("backend.forms.resource_import.import_ready")}
+          {t("resources.import.import_ready")}
         </p>
 
         <div
@@ -51,7 +51,7 @@ class ResourceImportControlsParsed extends PureComponent {
               size="default"
               className="button-icon-secondary__icon"
             />
-            <span>{t("backend.forms.resource_import.start_import")}</span>
+            <span>{t("resources.import.start_import")}</span>
           </button>
           <Link
             to={this.props.backLinkUrl}

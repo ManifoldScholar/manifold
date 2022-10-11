@@ -4,7 +4,7 @@ const getKindOptions = (kinds, t) =>
   kinds.map(kind => {
     const i18nKey = humps.decamelize(kind, { separator: "_" }).toLowerCase();
     return {
-      label: t(`resource_kinds.${i18nKey}`),
+      label: t(`resources.kinds.${i18nKey}`),
       value: kind
     };
   });

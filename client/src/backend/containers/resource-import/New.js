@@ -6,6 +6,7 @@ import Form from "global/components/form";
 import connectAndFetch from "utils/connectAndFetch";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
 export class ResourceImportNew extends PureComponent {
   static displayName = "ResourceImport.New";
@@ -69,7 +70,7 @@ export class ResourceImportNew extends PureComponent {
   };
 
   render() {
-    const { resourceImport } = this.props;
+    const { resourceImport, t } = this.props;
     return (
       <FormContainer.Form
         model={resourceImport || null}
@@ -84,59 +85,51 @@ export class ResourceImportNew extends PureComponent {
           <Form.InputError
             errors={[
               {
-                detail:
-                  "Manifold was unable to parse the import data. If the source is a google sheet, check to be sure that the sheet is publicly accessible (or that it's accessible to your Google integration service account) and that the URL is correct."
+                detail: t("resources.import.parse_error")
               }
             ]}
           />
         ) : null}
-        <Form.FieldGroup label="Step 1: Upload">
+        <Form.FieldGroup label={t("resources.import.step_one_header")}>
           <Form.Upload
             wide
-            label="Upload a CSV (File with Comma Separated Values)"
+            label={t("resources.import.upload_instructions")}
             accepts="csv"
             layout="horizontal"
             afterChange={this.afterSourceChange}
             name="attributes[data]"
             readFrom="attributes[dataFilename]"
           />
-          <div className="form-divider wide">or</div>
+          <div className="form-divider wide">{t("common.or")}</div>
           <Form.TextInput
             wide
-            label="Google Sheets URL"
+            label={t("resources.import.sheets_url")}
             afterChange={this.afterUrlChange}
-            instructions="You can also import resources listed in a Google Sheet"
+            instructions={t("resources.import.sheets_instructions")}
             name="attributes[url]"
           />
         </Form.FieldGroup>
-        <Form.FieldGroup label="Step 2: Describe Data">
+        <Form.FieldGroup label={t("resources.import.step_two_header")}>
           <Form.Select
-            label="Which row contains the column headers?"
+            label={t("resources.import.headers_label")}
             options={this.headerRowOptions()}
             name="attributes[headerRow]"
-            instructions="The import assumes that the row immediately following the header
-             row is the first row of data. All rows above the header row are ignored."
+            instructions={t("resources.import.headers_instructions")}
           />
           <Form.TextInput
-            label="Enter the Storage Identifier"
+            label={t("resources.import.storage_identifier_label")}
             name="attributes[storageIdentifier]"
-            instructions="In the case of Google Drive, this will be the ID, which is the
-            last part of the folder's URL"
+            instructions={t("resources.import.storage_identifier_instructions")}
           />
         </Form.FieldGroup>
-        <div
-          className="buttons-icon-horizontal right"
-          style={{
-            marginTop: "30px"
-          }}
-        >
+        <div className="buttons-icon-horizontal right">
           <button type="submit" className={this.buttonClasses}>
             <IconComposer
               icon="checkmark16"
               size="default"
               className="button-icon-secondary__icon"
             />
-            <span>Continue</span>
+            <span>{t("actions.continue")}</span>
           </button>
         </div>
       </FormContainer.Form>
@@ -144,4 +137,4 @@ export class ResourceImportNew extends PureComponent {
   }
 }
 
-export default connectAndFetch(ResourceImportNew);
+export default withTranslation()(connectAndFetch(ResourceImportNew));

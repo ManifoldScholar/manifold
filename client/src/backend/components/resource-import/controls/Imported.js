@@ -30,9 +30,9 @@ class ResourceImportControlsImported extends PureComponent {
 
     return (
       <>
-        <SectionLabel label={t("backend.forms.resource_import.step_four")} />
+        <SectionLabel label={t("resources.import.step_four")} />
         <p className="instructional-copy">
-          {t("backend.forms.resource_import.import_complete")}
+          {t("resources.import.import_complete")}
         </p>
 
         <div
@@ -48,7 +48,7 @@ class ResourceImportControlsImported extends PureComponent {
               size="default"
               className="button-icon-secondary__icon"
             />
-            <span>{t("backend.forms.resource_import.back_to_resources")}</span>
+            <span>{t("resources.import.back_to_resources")}</span>
           </Link>
           <button
             onClick={this.props.resetImport}
@@ -62,7 +62,7 @@ class ResourceImportControlsImported extends PureComponent {
               size="default"
               className="button-icon-secondary__icon"
             />
-            <span>{t("backend.forms.resource_import.reset_import")}</span>
+            <span>{t("resources.import.reset_import")}</span>
           </button>
         </div>
       </>

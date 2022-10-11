@@ -24,7 +24,7 @@ class ResourceImportResultsImporting extends PureComponent {
           className="results-header__icon"
         />
         <span>
-          {t("backend.forms.resource_import.row_importing", {
+          {t("resources.import.row_importing", {
             number: resourceImportRow.lineNumber
           })}
         </span>

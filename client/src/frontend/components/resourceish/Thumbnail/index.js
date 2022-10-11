@@ -52,7 +52,7 @@ class ResourceishThumbnail extends Component {
 
   get resourceishKind() {
     const kind = this.resourceish.attributes.kind;
-    return this.props.t(`resource_kinds.${kind}`);
+    return this.props.t(`resources.kinds.${kind}`);
   }
 
   get variant() {
