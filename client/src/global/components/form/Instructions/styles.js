@@ -6,18 +6,18 @@ import { formInstructions, respond } from "theme/styles/mixins";
 export const PrimaryInstructions = styled.span`
   ${formInstructions}
   display: block;
-  margin-bottom: 1em;
+  margin-block-end: 1em;
 
   a:visited {
     color: inherit;
   }
 
-  &.space-bottom {
-    margin-bottom: 2em;
+  &:last-child {
+    margin-block-end: 0;
   }
 
-  &:last-child {
-    margin-bottom: 0;
+  &.space-bottom {
+    margin-block-end: 2em;
   }
 
   ${({ $withActions }) =>

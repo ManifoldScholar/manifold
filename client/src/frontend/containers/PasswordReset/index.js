@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { passwordsAPI, requests } from "api";
-import Form from "global/components/form";
+import Form, { Unwrapped } from "global/components/form";
 import { entityStoreActions, currentUserActions } from "actions";
 import { get } from "lodash";
 
@@ -86,15 +86,15 @@ export class PasswordResetContainer extends Component {
             <div className="row-1-p" />
             <div className="row-1-p">
               <Form.Errorable
-                className="form-input"
                 name="attributes[password]"
                 errors={errors}
                 idForError="reset-password-error"
               >
-                <label htmlFor="reset-password">
-                  {t("forms.password_reset.new")}
-                </label>
-                <input
+                <Form.Label
+                  id="reset-password"
+                  label={t("forms.password_reset.new")}
+                />
+                <Unwrapped.Input
                   value={this.state.password}
                   type="password"
                   name="password"
@@ -107,15 +107,15 @@ export class PasswordResetContainer extends Component {
             </div>
             <div className="row-1-p">
               <Form.Errorable
-                className="form-input"
                 name="attributes[passwordConfirmation]"
                 errors={errors}
                 idForError="reset-password-confirmation-error"
               >
-                <label htmlFor="reset-password-confirmation">
-                  {t("forms.password_reset.confirm")}
-                </label>
-                <input
+                <Form.Label
+                  id="reset-password-confirmation"
+                  label={t("forms.password_reset.confirm")}
+                />
+                <Unwrapped.Input
                   value={this.state.passwordConfirmation}
                   type="password"
                   name="passwordConfirmation"
@@ -127,11 +127,7 @@ export class PasswordResetContainer extends Component {
               </Form.Errorable>
             </div>
             <div className="row-1-p">
-              <Form.Errorable
-                className="form-input"
-                name="attributes[resetToken]"
-                errors={errors}
-              >
+              <Form.Errorable name="attributes[resetToken]" errors={errors}>
                 <input
                   className="button-secondary button-secondary--with-room"
                   type="submit"

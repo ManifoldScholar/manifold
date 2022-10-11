@@ -120,7 +120,7 @@ class IconPicker extends Component {
 
   render() {
     const inputClasses = classNames({
-      "form-input icon-picker": true,
+      "icon-picker": true,
       wide: this.props.wide
     });
 
@@ -129,7 +129,6 @@ class IconPicker extends Component {
         {id => (
           <div className={inputClasses}>
             <GlobalForm.Errorable
-              className="form-input"
               name={this.props.name}
               errors={this.props.errors}
               label={this.props.label}

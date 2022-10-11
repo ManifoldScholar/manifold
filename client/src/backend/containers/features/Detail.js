@@ -14,6 +14,7 @@ import withConfirmation from "hoc/withConfirmation";
 import get from "lodash/get";
 import IconComposer from "global/components/utility/IconComposer";
 import SectionLabel from "global/components/form/SectionLabel";
+import Instructions from "global/components/form/Instructions";
 
 import Authorize from "hoc/Authorize";
 
@@ -221,15 +222,13 @@ class FeatureDetailContainer extends PureComponent {
                       label={t("backend.features.preview.section_title")}
                     />
                     <div>
-                      <div className="form-input wide">
-                        <FrontendLayout.Splash
-                          feature={previewFeature}
-                          preview
-                        />
-                        <span className="instructions">
-                          {t("backend.features.preview.instructions")}
-                        </span>
-                      </div>
+                      <FrontendLayout.Splash feature={previewFeature} preview />
+                      <Instructions
+                        className="space-bottom"
+                        instructions={t(
+                          "backend.features.preview.instructions"
+                        )}
+                      />
                     </div>
                   </div>
                 ) : null}
