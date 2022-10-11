@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
-import Utility from "global/components/utility";
 import { useTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 function RowSort({ options, active, onChange }) {
   const { t } = useTranslation();
@@ -15,12 +15,12 @@ function RowSort({ options, active, onChange }) {
       >
         <UIDConsumer name={id => `rowSort-${id}`}>
           {id => (
-            <div className="select">
-              <label htmlFor={id} className="select__label">
+            <div>
+              <Styled.Label htmlFor={id}>
                 {t("backend.analytics.sort_by")}
-              </label>
-              <div className="select__wrapper">
-                <select
+              </Styled.Label>
+              <Styled.SelectWrapper>
+                <Styled.Select
                   id={id}
                   onChange={event => onChange(event.target.value)}
                   value={active.value}
@@ -30,9 +30,9 @@ function RowSort({ options, active, onChange }) {
                       {label}
                     </option>
                   ))}
-                </select>
-                <Utility.IconComposer icon="disclosureDown16" size={22} />
-              </div>
+                </Styled.Select>
+                <Styled.Icon icon="disclosureDown16" size={22} />
+              </Styled.SelectWrapper>
             </div>
           )}
         </UIDConsumer>
