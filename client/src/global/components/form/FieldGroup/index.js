@@ -67,6 +67,8 @@ export default class FieldGroup extends PureComponent {
         ? Styled.SecondaryGroup
         : Styled.BaseGroup;
 
+    const { gapLg } = this.props;
+
     return (
       <UIDConsumer name={id => `field-group-${id}`}>
         {id => (
@@ -84,7 +86,9 @@ export default class FieldGroup extends PureComponent {
                 instructions={this.props.instructions}
               />
             )}
-            <GroupComponent>{this.renderChildren(this.props)}</GroupComponent>
+            <GroupComponent $gapLg={gapLg}>
+              {this.renderChildren(this.props)}
+            </GroupComponent>
           </Styled.Section>
         )}
       </UIDConsumer>
