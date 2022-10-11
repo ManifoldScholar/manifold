@@ -57,11 +57,7 @@ export default `
     right: 32px;
     cursor: pointer;
   }
-
-  .form-input.submit {
-    text-align: center;
-  }
-
+  
   p:not([class]) {
     font-size: 18px;
     font-weight: var(--font-weight-regular);
