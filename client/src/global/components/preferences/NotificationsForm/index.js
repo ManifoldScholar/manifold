@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import { UIDConsumer } from "react-uid";
 import Collapse from "global/components/Collapse";
 import RadioGroup from "./RadioGroup";
 import ProjectPreferences from "./ProjectPreferences";
 import humps from "humps";
 import Authorization from "helpers/authorization";
+import Form from "global/components/form";
+import * as Styled from "./styles";
 
 class NotificationsForm extends Component {
   static propTypes = {
@@ -75,57 +76,33 @@ class NotificationsForm extends Component {
     const t = this.props.t;
 
     return (
-      <div className="subscriptions">
-        <UIDConsumer name={id => `project-activity-${id}`}>
-          {id => (
-            <div
-              role="group"
-              aria-labelledby={`${id}-header`}
-              aria-describedby={`${id}-instructions`}
-            >
-              <h2 id={`${id}-header`} className="section-heading-secondary">
-                {t("forms.notifications.project_activity")}
-              </h2>
-              <div className="form-group">
-                <div className="form-input">
-                  <span id={`${id}-instructions`} className="instructions">
-                    {t("forms.notifications.project_activity_instructions")}
-                  </span>
-                </div>
-                <Collapse initialVisible={this.digestOpen}>
-                  <ProjectPreferences
-                    preferences={this.preferences}
-                    onChange={this.props.changeHandler}
-                    onDigestChange={event =>
-                      this.props.digestProjectsChangeHandler(event.target.value)
-                    }
-                  />
-                </Collapse>
-              </div>
-            </div>
-          )}
-        </UIDConsumer>
-        <UIDConsumer name={id => `other-activity-${id}`}>
-          {id => (
-            <div role="group" aria-labelledby={`${id}-header`}>
-              <h2 id={`${id}-header`} className="section-heading-secondary">
-                {t("forms.notifications.other_activity")}
-              </h2>
-              <div className="form-group">
-                {this.renderNotificationContent()}
-              </div>
-            </div>
-          )}
-        </UIDConsumer>
-        <button
+      <>
+        <Form.FieldGroup
+          label={t("forms.notifications.project_activity")}
+          instructions={t("forms.notifications.project_activity_instructions")}
+        >
+          <Collapse initialVisible={this.digestOpen}>
+            <ProjectPreferences
+              preferences={this.preferences}
+              onChange={this.props.changeHandler}
+              onDigestChange={event =>
+                this.props.digestProjectsChangeHandler(event.target.value)
+              }
+            />
+          </Collapse>
+        </Form.FieldGroup>
+        <Form.FieldGroup label={t("forms.notifications.other_activity")}>
+          {this.renderNotificationContent()}
+        </Form.FieldGroup>
+        <Styled.Button
           className="utility-button"
           onClick={this.props.unsubscribeAllHandler}
         >
           <span className="utility-button__text utility-button__text--underlined">
             {t("forms.notifications.unsubscribe")}
           </span>
-        </button>
-      </div>
+        </Styled.Button>
+      </>
     );
   }
 }

@@ -63,7 +63,9 @@ export default class FieldGroup extends PureComponent {
 
   render() {
     const GroupComponent =
-      this.props.theme === "primary" ? Styled.BaseGroup : Styled.SecondaryGroup;
+      this.props.theme === "secondary"
+        ? Styled.SecondaryGroup
+        : Styled.BaseGroup;
 
     return (
       <UIDConsumer name={id => `field-group-${id}`}>

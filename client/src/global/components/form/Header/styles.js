@@ -12,9 +12,17 @@ export const Header = styled.header`
 `;
 
 export const HeaderPrimary = styled.header`
-  margin-bottom: 25px;
+  margin-block-end: 25px;
+
+  .subscriptions & {
+    margin-block-end: 55px;
+  }
 
   > h2 {
     ${headingPrimary}
+
+    &:not(:last-child) {
+      margin-block-end: 0;
+    }
   }
 `;
