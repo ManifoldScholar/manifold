@@ -126,7 +126,7 @@ export class FormBaseInput extends PureComponent {
           id={id}
           name={this.props.name}
           disabled={this.props.isDisabled}
-          type={this.props.inputType}
+          type={this.props.inputType ?? this.props.type}
           placeholder={this.props.placeholder}
           onChange={this.props.onChange}
           value={this.renderValue(this.props)}

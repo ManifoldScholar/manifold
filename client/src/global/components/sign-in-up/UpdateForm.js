@@ -4,14 +4,14 @@ import { withTranslation, Trans } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { meAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import Form from "global/components/form";
-import Avatar from "global/components/avatar";
+import Form, { Unwrapped } from "global/components/form";
 import get from "lodash/get";
 import hasIn from "lodash/hasIn";
 import Dropzone from "react-dropzone";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { UIDConsumer } from "react-uid";
+import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
 
@@ -80,7 +80,8 @@ export class UpdateFormContainer extends Component {
   }
 
   handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    const name = event.target.name.replace("attributes[", "").replace("]", "");
+    this.setState({ [name]: event.target.value });
   };
 
   doUpdateRequest = (avatarData = null) => {
@@ -171,48 +172,42 @@ export class UpdateFormContainer extends Component {
   renderProfileForm(errors) {
     const t = this.props.t;
     return (
-      <div className="row-1-p">
-        {this.props.mode === "new" ? (
-          <div>
-            <p className="overlay-copy">
-              {t("forms.signin_overlay.familiar_name")}
-            </p>
-          </div>
-        ) : (
-          <div>
-            <p className="overlay-copy" id="update-nickname-label">
-              {t("forms.signin_overlay.update_nickname")}
-            </p>
-          </div>
-        )}
-        <div className="row-1-p">
-          <Form.Errorable
-            className="form-input"
+      <>
+        <div>
+          {this.props.mode === "new" ? (
+            <div>
+              <p className="overlay-copy">
+                {t("forms.signin_overlay.familiar_name")}
+              </p>
+            </div>
+          ) : (
+            <div>
+              <p className="overlay-copy" id="update-nickname-label">
+                {t("forms.signin_overlay.update_nickname")}
+              </p>
+            </div>
+          )}
+          <Unwrapped.Input
+            value={this.state.nickname}
+            type="text"
+            id="update-nickname"
+            aria-labelledby="update-nickname-label"
+            aria-describedby="update-nickname-error"
+            onChange={this.handleInputChange}
+            placeholder={t("forms.signin_overlay.nickname")}
             name="attributes[nickname]"
             errors={errors}
             idForError="update-nickname-error"
-          >
-            <input
-              value={this.state.nickname}
-              type="text"
-              name="nickname"
-              id="update-nickname"
-              aria-labelledby="update-nickname-label"
-              aria-describedby="update-nickname-error"
-              onChange={this.handleInputChange}
-              placeholder={t("forms.signin_overlay.nickname")}
-            />
-          </Form.Errorable>
+          />
         </div>
         {__BROWSER__ ? (
-          <div className="row-1-p">
+          <div>
             {this.displayAvatar() ? null : (
               <p className="overlay-copy">
                 {t("forms.signin_overlay.profile_img_instructions")}
               </p>
             )}
             <Form.Errorable
-              className="form-input"
               idForError="avatar-update-error"
               name="attributes[avatar]"
               errors={errors}
@@ -222,13 +217,12 @@ export class UpdateFormContainer extends Component {
               </label>
               <Dropzone onDrop={this.handleFileDrop}>
                 {({ getRootProps, getInputProps }) => (
-                  <div
+                  <Styled.Dropzone
                     {...getRootProps({
-                      className: "form-dropzone",
                       tabIndex: null
                     })}
                   >
-                    <input
+                    <Styled.DropzoneInput
                       {...getInputProps({
                         accept: "image/*",
                         multiple: false,
@@ -237,152 +231,100 @@ export class UpdateFormContainer extends Component {
                         tabIndex: 0
                       })}
                     />
-                    <div
-                      style={{ position: "relative", pointerEvents: "none" }}
-                      className="dropzone-button dropzone-button-dotted"
-                    >
-                      <div
-                        style={{
-                          top: "50%",
-                          marginTop: -33,
-                          height: 66,
-                          width: 66,
-                          position: "absolute"
-                        }}
-                      >
+                    <Styled.DropzoneOutline>
+                      <Styled.RemoveWrapper>
                         {this.hasAvatar() && (
-                          <button
+                          <Styled.RemoveButton
                             onClick={this.handleRemoveAvatar}
                             tabIndex="0"
-                            className="dropzone-button__cancel-button"
                           >
                             <IconComposer icon="close16" size="default" />
                             <span className="screen-reader-text">
                               {t("forms.signin_overlay.remove_avatar")}
                             </span>
-                          </button>
+                          </Styled.RemoveButton>
                         )}
-                        <Avatar
-                          style={{ margin: 0 }}
-                          url={this.displayAvatar()}
-                        />
-                      </div>
-                      <span className="dropzone-button__text">
+                        <Styled.Avatar url={this.displayAvatar()} />
+                      </Styled.RemoveWrapper>
+                      <Styled.DropzonePrompt>
                         <Trans
                           i18nKey="forms.signin_overlay.upload_avatar_instructions"
-                          components={[
-                            <span className="form-dropzone__upload-prompt" />
-                          ]}
+                          components={[<span />]}
                         />
-                      </span>
-                    </div>
-                  </div>
+                      </Styled.DropzonePrompt>
+                    </Styled.DropzoneOutline>
+                  </Styled.Dropzone>
                 )}
               </Dropzone>
             </Form.Errorable>
           </div>
         ) : null}
-        <div className="row-1-p">
+        <div>
           <p className="overlay-copy">
             {t("forms.signin_overlay.edit_account")}
           </p>
-          <Form.Errorable
-            className="form-input"
+          <Unwrapped.Input
+            value={this.state.firstName}
+            type="text"
+            id="update-firstName"
+            aria-describedby="update-firstName-error"
+            onChange={this.handleInputChange}
+            placeholder={t("forms.signin_overlay.first_name")}
             name="attributes[firstName]"
             errors={errors}
             idForError="update-firstName-error"
-          >
-            <label htmlFor="update-firstName">
-              {t("forms.signin_overlay.first_name")}
-            </label>
-            <input
-              value={this.state.firstName}
-              type="text"
-              name="firstName"
-              id="update-firstName"
-              aria-describedby="update-firstName-error"
-              onChange={this.handleInputChange}
-              placeholder={t("forms.signin_overlay.first_name")}
-            />
-          </Form.Errorable>
-          <Form.Errorable
-            className="form-input"
-            name="attributes[lastName]"
-            errors={errors}
-            idForError="update-lastName-error"
-          >
-            <label htmlFor="update-lastName">
-              {t("forms.signin_overlay.last_name")}
-            </label>
-            <input
-              value={this.state.lastName}
-              type="text"
-              name="lastName"
-              id="update-lastName"
-              aria-describedby="update-lastName-error"
-              onChange={this.handleInputChange}
-              placeholder={t("forms.signin_overlay.last_name")}
-            />
-          </Form.Errorable>
-          <Form.Errorable
-            className="form-input"
-            name="attributes[email]"
-            errors={errors}
-            idForError="update-email-error"
-          >
-            <label htmlFor="update-email">
-              {t("forms.signin_overlay.email")}
-            </label>
-            <input
-              value={this.state.email}
-              type="text"
-              name="email"
-              id="update-email"
-              aria-describedby="update-email-error"
-              onChange={this.handleInputChange}
-              placeholder={t("forms.signin_overlay.email")}
-            />
-          </Form.Errorable>
-          <Form.Errorable
-            className="form-input"
-            name="attributes[password]"
-            errors={errors}
-            idForError="update-password-error"
-          >
-            <label htmlFor="update-password">
-              {t("forms.signin_overlay.password")}
-            </label>
-            <input
-              value={this.state.password}
-              type="password"
-              name="password"
-              id="update-password"
-              aria-describedby="update-password-error"
-              onChange={this.handleInputChange}
-              placeholder={t("forms.signin_overlay.new_password")}
-            />
-          </Form.Errorable>
-          <Form.Errorable
-            className="form-input"
-            name="attributes[passwordConfirmation]"
-            errors={errors}
-            idForError="update-passwordConfirmation-error"
-          >
-            <label htmlFor="update-passwordConfirmation">
-              {t("forms.signin_overlay.confirm_password")}
-            </label>
-            <input
-              value={this.state.passwordConfirmation}
-              type="password"
-              name="passwordConfirmation"
-              id="update-passwordConfirmation"
-              aria-describedby="update-passwordConfirmation-error"
-              onChange={this.handleInputChange}
-              placeholder={t("forms.signin_overlay.confirm_new_password")}
-            />
-          </Form.Errorable>
+            label={t("forms.signin_overlay.first_name")}
+          />
         </div>
-      </div>
+        <Unwrapped.Input
+          value={this.state.lastName}
+          type="text"
+          id="update-lastName"
+          aria-describedby="update-lastName-error"
+          onChange={this.handleInputChange}
+          placeholder={t("forms.signin_overlay.last_name")}
+          name="attributes[lastName]"
+          errors={errors}
+          idForError="update-lastName-error"
+          label={t("forms.signin_overlay.last_name")}
+        />
+        <Unwrapped.Input
+          value={this.state.email}
+          type="text"
+          id="update-email"
+          aria-describedby="update-email-error"
+          onChange={this.handleInputChange}
+          placeholder={t("forms.signin_overlay.email")}
+          name="attributes[email]"
+          errors={errors}
+          idForError="update-email-error"
+          label={t("forms.signin_overlay.email")}
+        />
+        <Unwrapped.Input
+          value={this.state.password}
+          type="password"
+          id="update-password"
+          aria-describedby="update-password-error"
+          onChange={this.handleInputChange}
+          placeholder={t("forms.signin_overlay.new_password")}
+          name="attributes[password]"
+          errors={errors}
+          idForError="update-password-error"
+          label={t("forms.signin_overlay.password")}
+        />
+        <Unwrapped.Input
+          value={this.state.passwordConfirmation}
+          type="password"
+          id="update-passwordConfirmation"
+          aria-describedby="update-passwordConfirmation-error"
+          onChange={this.handleInputChange}
+          placeholder={t("forms.signin_overlay.confirm_new_password")}
+          name="attributes[passwordConfirmation]"
+          errors={errors}
+          idForError="update-passwordConfirmation-error"
+          label={t("forms.signin_overlay.confirm_password")}
+        />
+      </>
     );
   }
 
@@ -411,7 +353,7 @@ export class UpdateFormContainer extends Component {
                   <Trans
                     i18nKey="forms.signin_overlay.create_success_message"
                     components={[
-                      <h4 className="form-heading" />,
+                      <Form.Header styleType="primary" />,
                       <p className="overlay-copy" />,
                       <h4 className="nickname" />
                     ]}
@@ -420,33 +362,34 @@ export class UpdateFormContainer extends Component {
                 </div>
               ) : (
                 <div>
-                  <h4 className="form-heading">
-                    <Trans
-                      i18nKey="forms.signin_overlay.greeting"
-                      components={[<span className="nickname" />]}
-                      values={{ name: this.displayNickname() }}
-                    />
-                  </h4>
-                </div>
-              )}
-              {this.renderProfileForm(errors)}
-              <div className="row-1-p">
-                <div className="form-input form-error">
-                  <input
-                    className="button-secondary button-secondary--with-room"
-                    type="submit"
-                    value={t("forms.signin_overlay.submit_update_label")}
+                  <Form.Header
+                    styleType="primary"
+                    label={
+                      <Trans
+                        i18nKey="forms.signin_overlay.greeting"
+                        components={[<span className="nickname" />]}
+                        values={{ name: this.displayNickname() }}
+                      />
+                    }
                   />
                 </div>
-              </div>
+              )}
+              <Form.FieldGroup>
+                {this.renderProfileForm(errors)}
+              </Form.FieldGroup>
+              <input
+                className="button-secondary button-secondary--with-room"
+                type="submit"
+                value={t("forms.signin_overlay.submit_update_label")}
+              />
             </form>
           )}
         </UIDConsumer>
 
-        <div className="subscriptions">
-          <span className="subscriptions__label">
+        <Styled.Subscriptions>
+          <Styled.SubscriptionsLabel>
             {t("forms.signin_overlay.subscriptions__label")}
-          </span>
+          </Styled.SubscriptionsLabel>
           <button
             className="button-secondary button-secondary--outlined button-secondary--color-white"
             onClick={this.redirectToSubscriptions}
@@ -460,7 +403,7 @@ export class UpdateFormContainer extends Component {
               className="button-secondary__icon"
             />
           </button>
-        </div>
+        </Styled.Subscriptions>
       </section>
     );
   }

@@ -4,7 +4,7 @@ import { withTranslation, Trans } from "react-i18next";
 import { usersAPI, requests } from "api";
 import { entityStoreActions, currentUserActions } from "actions";
 import { select } from "utils/entityUtils";
-import Form from "global/components/form";
+import Form, { Unwrapped } from "global/components/form";
 import connectAndFetch from "utils/connectAndFetch";
 import get from "lodash/get";
 import find from "lodash/find";
@@ -109,11 +109,14 @@ export class CreateContainer extends Component {
 
   handleInputChange = event => {
     const { name, value } = event.target;
-    const adjustedValue = name === "email" ? value.trim() : value;
+    const fieldName = name.includes("firstName")
+      ? "name"
+      : name.replace("attributes[", "").replace("]", "");
+    const adjustedValue = fieldName === "email" ? value.trim() : value;
 
     const user = {
       ...this.state.user,
-      [name]: adjustedValue
+      [fieldName]: adjustedValue
     };
     this.setState({ user });
   };
@@ -160,102 +163,66 @@ export class CreateContainer extends Component {
               ref={el => (this.formRef = el)}
               className="focusable-form"
             >
-              <h2 id={id} className="form-heading">
-                {t("forms.signin_overlay.create_account")}
-              </h2>
-              <div className="row-1-p">
-                <Form.Errorable
-                  className="form-input"
+              <Form.Header
+                id={id}
+                label={t("forms.signin_overlay.create_account")}
+                styleType="primary"
+              />
+              <Form.FieldGroup>
+                <Unwrapped.Input
+                  value={this.state.user.email}
+                  type="text"
                   name="attributes[email]"
+                  id="create-email"
+                  aria-describedby="create-email-error"
+                  onChange={this.handleInputChange}
+                  placeholder={t("forms.signin_overlay.email")}
                   errors={errors}
                   idForError="create-email-error"
-                >
-                  <label htmlFor="create-email">
-                    {t("forms.signin_overlay.email")}
-                  </label>
-                  <input
-                    value={this.state.user.email}
-                    type="text"
-                    name="email"
-                    id="create-email"
-                    aria-describedby="create-email-error"
-                    onChange={this.handleInputChange}
-                    placeholder={t("forms.signin_overlay.email")}
-                  />
-                </Form.Errorable>
-              </div>
-              <div className="row-1-p">
-                <Form.Errorable
-                  className="form-input"
+                  label={t("forms.signin_overlay.email")}
+                />
+                <Unwrapped.Input
+                  value={this.state.user.name}
+                  type="text"
+                  id="create-name"
+                  aria-describedby="create-name-error"
+                  onChange={this.handleInputChange}
+                  placeholder={t("forms.signin_overlay.name")}
                   idForError="create-name-error"
                   name={["attributes[firstName]", "attributes[lastName]"]}
                   errors={errors}
-                >
-                  <label htmlFor="create-name">
-                    {t("forms.signin_overlay.name")}
-                  </label>
-                  <input
-                    value={this.state.user.name}
-                    type="text"
-                    id="create-name"
-                    aria-describedby="create-name-error"
-                    name="name"
-                    onChange={this.handleInputChange}
-                    placeholder={t("forms.signin_overlay.name")}
-                  />
-                </Form.Errorable>
-              </div>
-              <div className="row-1-p">
-                <Form.Errorable
-                  className="form-input"
+                  label={t("forms.signin_overlay.name")}
+                />
+                <Unwrapped.Input
+                  value={this.state.user.password}
+                  type="password"
+                  id="create-password"
+                  aria-describedby="create-password-error"
+                  onChange={this.handleInputChange}
+                  placeholder={t("forms.signin_overlay.password")}
                   idForError="create-password-error"
                   name="attributes[password]"
                   errors={errors}
-                >
-                  <label htmlFor="create-password">
-                    {t("forms.signin_overlay.password")}
-                  </label>
-                  <input
-                    value={this.state.user.password}
-                    type="password"
-                    name="password"
-                    id="create-password"
-                    aria-describedby="create-password-error"
-                    onChange={this.handleInputChange}
-                    placeholder={t("forms.signin_overlay.password")}
-                  />
-                </Form.Errorable>
-              </div>
-              <div className="row-1-p">
-                <Form.Errorable
-                  className="form-input"
+                  label={t("forms.signin_overlay.password")}
+                />
+                <Unwrapped.Input
+                  value={this.state.user.passwordConfirmation}
+                  type="password"
+                  id="create-password-confirmation"
+                  aria-describedby="create-password-confirmation-error"
+                  onChange={this.handleInputChange}
+                  placeholder={t("forms.signin_overlay.confirm_password")}
                   idForError="create-password-confirmation-error"
                   name="attributes[passwordConfirmation]"
                   errors={errors}
-                >
-                  <label htmlFor="create-password-confirmation">
-                    {t("forms.signin_overlay.confirm_password")}
-                  </label>
-                  <input
-                    value={this.state.user.passwordConfirmation}
-                    type="password"
-                    name="passwordConfirmation"
-                    id="create-password-confirmation"
-                    aria-describedby="create-password-confirmation-error"
-                    onChange={this.handleInputChange}
-                    placeholder={t("forms.signin_overlay.confirm_password")}
-                  />
-                </Form.Errorable>
-              </div>
-              <div className="row-1-p">
-                <div className="form-input">
-                  <input
-                    className="button-secondary button-secondary--with-room"
-                    type="submit"
-                    value={t("forms.signin_overlay.create_account")}
-                  />
-                </div>
-              </div>
+                  label={t("forms.signin_overlay.confirm_password")}
+                />
+                <input
+                  className="button-secondary button-secondary--with-room"
+                  type="submit"
+                  value={t("forms.signin_overlay.create_account")}
+                />
+              </Form.FieldGroup>
             </form>
           )}
         </UIDConsumer>

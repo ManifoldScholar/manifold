@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { passwordsAPI, requests } from "api";
 import { entityStoreActions, notificationActions } from "actions";
 import get from "lodash/get";
-import GlobalForm from "global/components/form";
+import GlobalForm, { Unwrapped } from "global/components/form";
 import { UIDConsumer } from "react-uid";
 
 const { request, flush } = entityStoreActions;
@@ -109,36 +109,27 @@ export class PasswordForgotContainer extends Component {
               ref={el => (this.formRef = el)}
               className="focusable-form"
             >
-              <h2 id={id} className="form-heading">
-                {t("forms.signin_overlay.reset_password")}
-              </h2>
-              <div className="row-1-p">
-                <div className="form-input form-error">
-                  <label htmlFor="password-forgot-email">
-                    {t("forms.signin_overlay.email")}
-                  </label>
-                  <GlobalForm.Errorable name="email" errors={this.state.errors}>
-                    <input
-                      value={this.state.email}
-                      onChange={this.handleInputChange}
-                      name="email"
-                      type="text"
-                      id="password-forgot-email"
-                      placeholder={t("forms.signin_overlay.email")}
-                      aria-describedby="password-forgot-email-error"
-                    />
-                  </GlobalForm.Errorable>
-                </div>
-              </div>
-              <div className="row-1-p">
-                <div className="form-input">
-                  <input
-                    className="button-secondary button-secondary--with-room"
-                    type="submit"
-                    value={t("forms.signin_overlay.send_password_reset")}
-                  />
-                </div>
-              </div>
+              <GlobalForm.Header
+                styleType="primary"
+                label={t("forms.signin_overlay.reset_password")}
+                id={id}
+              />
+              <Unwrapped.Input
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                name="email"
+                type="text"
+                id="password-forgot-email"
+                placeholder={t("forms.signin_overlay.email")}
+                aria-describedby="password-forgot-email-error"
+                label={t("forms.signin_overlay.email")}
+                errors={this.state.errors}
+              />
+              <input
+                className="button-secondary button-secondary--with-room"
+                type="submit"
+                value={t("forms.signin_overlay.send_password_reset")}
+              />
             </form>
           )}
         </UIDConsumer>
