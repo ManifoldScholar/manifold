@@ -5,7 +5,8 @@ import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import { withTranslation } from "react-i18next";
-import { Unwrapped } from "global/components/form";
+/* Importing directly rather than from form/index to prevent circular import in Picker. */
+import { Toggle } from "global/components/form/Switch/ToggleOnly";
 
 class ResourceRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ResourceRow";
@@ -73,7 +74,7 @@ class ResourceRow extends PureComponent {
 
     return (
       <div className="toggle-indicator">
-        <Unwrapped.Toggle
+        <Toggle
           onClick={event => this.onSwitchChange(event, this.resource)}
           $checked={this.switchValue(this.resource)}
           role="button"
@@ -88,7 +89,7 @@ class ResourceRow extends PureComponent {
               {this.props.t("backend.actions.add_resource")}
             </span>
           )}
-        </Unwrapped.Toggle>
+        </Toggle>
       </div>
     );
   }
