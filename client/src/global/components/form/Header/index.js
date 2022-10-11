@@ -11,10 +11,13 @@ export default class FormHeader extends Component {
   };
 
   render() {
+    const Header =
+      this.props.styleType === "primary" ? Styled.HeaderPrimary : Styled.Header;
+
     return (
-      <Styled.Header>
+      <Header>
         <h2 id={this.props.id}>{this.props.label}</h2>
-      </Styled.Header>
+      </Header>
     );
   }
 }

@@ -4,7 +4,6 @@ import {
   headingPrimaryFontSizing,
   subtitlePrimary,
   overlayCopy,
-  formInstructions,
   utilityPrimary
 } from "theme/styles/mixins";
 
@@ -97,20 +96,5 @@ export default `
     font-size: 14px;
     color: var(--color-accent-primary-dark);
     background-color: var(--color-base-neutral05);
-  }
-
-  .form-heading {
-    ${headingPrimary}
-    margin-bottom: 25px;
-
-    .instructions {
-      ${formInstructions}
-      display: block;
-      margin-bottom: 1em;
-
-      a:visited {
-        color: inherit;
-      }
-    }
   }
 `;

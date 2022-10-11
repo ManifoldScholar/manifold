@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Wrapper from "./Wrapper";
 import Confirm from "./Confirm";
-import Form, { Unwrapped } from "global/components/form";
+import { Unwrapped } from "global/components/form";
 import { entityStoreActions } from "actions";
 import { usersAPI, requests, passwordsAPI } from "api";
 import { get } from "lodash";
@@ -127,24 +127,18 @@ export class ResetPasswordBase extends PureComponent {
         onSubmit={event => this.resetUserPassword(event, this.props.user)}
       >
         <FormContext.Provider value={{ styleType: "secondary" }}>
-          <div className="row-1-p">
-            <Form.Errorable
-              name="attributes[password]"
-              errors={errors}
-              idForError={errorId}
-            >
-              <label htmlFor={id}>{t("forms.password_reset.new")}</label>
-              <Unwrapped.Input
-                value={this.state.password}
-                onChange={event => this.handleInputChange(event)}
-                name="password"
-                type="password"
-                id={id}
-                placeholder={t("forms.password_reset.new")}
-                aria-describedby={errorId}
-              />
-            </Form.Errorable>
-          </div>
+          <Unwrapped.Input
+            value={this.state.password}
+            onChange={event => this.handleInputChange(event)}
+            type="password"
+            id={id}
+            placeholder={t("forms.password_reset.new")}
+            aria-describedby={errorId}
+            name="attributes[password]"
+            errors={errors}
+            idForError={errorId}
+            label={t("forms.password_reset.new")}
+          />
           <Styled.ButtonGroup>
             <input
               className={classNames(
