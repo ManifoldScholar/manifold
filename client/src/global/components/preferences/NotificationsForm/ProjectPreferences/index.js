@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Collapse from "global/components/Collapse";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
-import RadioGroup from "./RadioGroup";
+import RadioGroup from "../RadioGroup";
+import * as Styled from "./styles";
 
 function ProjectPreferences({ preferences, onChange, onDigestChange }) {
   const { toggleProps } = useCollapseContext();
@@ -38,8 +38,8 @@ function ProjectPreferences({ preferences, onChange, onDigestChange }) {
             preferences.digest === "daily" || preferences.digest === "weekly"
         }}
       />
-      <Collapse.Content>
-        <div className="subscriptions__collapsed-group">
+      <Styled.CollapseGroup $expanded={preferences.digest !== "never"}>
+        <>
           <RadioGroup
             preference={{
               key: "digest-projects",
@@ -64,8 +64,8 @@ function ProjectPreferences({ preferences, onChange, onDigestChange }) {
             value={preferences.digestCommentsAndAnnotations}
             onChange={onChange}
           />
-        </div>
-      </Collapse.Content>
+        </>
+      </Styled.CollapseGroup>
     </>
   );
 }

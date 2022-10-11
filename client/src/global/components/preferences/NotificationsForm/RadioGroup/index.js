@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useUIDSeed } from "react-uid";
-import classNames from "classnames";
+import * as Styled from "./styles";
 
 function RadioGroup({ preference, value, options, onChange, inputProps = {} }) {
   const uidSeed = useUIDSeed();
@@ -14,24 +14,22 @@ function RadioGroup({ preference, value, options, onChange, inputProps = {} }) {
   const localizedOptions = options ?? defaultOptions;
 
   return (
-    <fieldset className="subscriptions__radio-group form-input">
-      <legend className="subscriptions__legend">{preference.label}</legend>
+    <Styled.Fieldset>
+      <Styled.Legend>{preference.label}</Styled.Legend>
       {preference.instructions && (
-        <span className="instructions">{preference.instructions}</span>
+        <Styled.Instructions className="instructions">
+          {preference.instructions}
+        </Styled.Instructions>
       )}
       {Object.keys(localizedOptions).map(option => {
         const checked = value === option;
-        const inputClassNames = classNames("form-toggle", "radio", "inline", {
-          checked
-        });
 
         return (
-          <label
+          <Styled.RadioOption
             id={uidSeed(option)}
-            className={inputClassNames}
             key={`${preference.key}-${option}`}
           >
-            <input
+            <Styled.RadioInput
               type="radio"
               name={preference.key}
               value={option}
@@ -40,12 +38,12 @@ function RadioGroup({ preference, value, options, onChange, inputProps = {} }) {
               aria-labelledby={uidSeed(option)}
               {...inputProps}
             />
-            <span className="toggle-indicator" />
-            <span className="toggle-label">{localizedOptions[option]}</span>
-          </label>
+            <Styled.Toggle />
+            <Styled.ToggleLabel>{localizedOptions[option]}</Styled.ToggleLabel>
+          </Styled.RadioOption>
         );
       })}
-    </fieldset>
+    </Styled.Fieldset>
   );
 }
 

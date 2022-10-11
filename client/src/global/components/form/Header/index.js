@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Instructions from "../Instructions";
 import * as Styled from "./styles";
 
 export default class FormHeader extends Component {
@@ -7,7 +8,8 @@ export default class FormHeader extends Component {
 
   static propTypes = {
     label: PropTypes.string.isRequired,
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    instructions: PropTypes.string
   };
 
   render() {
@@ -17,6 +19,9 @@ export default class FormHeader extends Component {
     return (
       <Header>
         <h2 id={this.props.id}>{this.props.label}</h2>
+        {this.props.instructions && (
+          <Instructions instructions={this.props.instructions} />
+        )}
       </Header>
     );
   }

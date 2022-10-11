@@ -9,6 +9,8 @@ import mapValues from "lodash/mapValues";
 import withProjectContext from "hoc/withProjectContext";
 import Authorize from "hoc/Authorize";
 import { withTranslation } from "react-i18next";
+import Form from "global/components/form";
+import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
 
@@ -90,18 +92,17 @@ export class SubscriptionsContainer extends Component {
         <section className="bg-neutral05">
           {this.props.projectBackLink}
           <div className="container">
-            <form
+            <Styled.Form
               autoComplete="off"
               className="subscriptions"
               method="post"
               onSubmit={this.updateUser}
             >
-              <h1 className="form-heading">
-                {t("forms.notifications.title")}
-                <span className="instructions">
-                  {t("forms.notifications.instructions")}
-                </span>
-              </h1>
+              <Form.Header
+                label={t("forms.notifications.title")}
+                instructions={t("forms.notifications.instructions")}
+                styleType="primary"
+              />
               <Preferences.NotificationsForm
                 preferences={this.state.notificationPreferencesByKind}
                 authentication={this.props.authentication}
@@ -111,16 +112,12 @@ export class SubscriptionsContainer extends Component {
                 }
                 unsubscribeAllHandler={this.unsubscribeAll}
               />
-              <div className="row-1-p">
-                <div className="form-input form-error">
-                  <input
-                    className="button-secondary button-secondary--with-room"
-                    type="submit"
-                    value={t("forms.notifications.submit_label")}
-                  />
-                </div>
-              </div>
-            </form>
+              <input
+                className="button-secondary button-secondary--with-room"
+                type="submit"
+                value={t("forms.notifications.submit_label")}
+              />
+            </Styled.Form>
           </div>
         </section>
       </Authorize>
