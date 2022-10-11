@@ -13,8 +13,7 @@ export const InputGroup = styled.div`
     90
   )}
 
-  > .buttons-icon-horizontal,
-  .form-divider.wide {
+  > .buttons-icon-horizontal, {
     ${respond(`flex-basis: 100%;`, 90)}
   }
 

@@ -100,7 +100,7 @@ export class ResourceImportNew extends PureComponent {
             name="attributes[data]"
             readFrom="attributes[dataFilename]"
           />
-          <div className="form-divider wide">{t("common.or")}</div>
+          <Form.Divider>{t("common.or")}</Form.Divider>
           <Form.TextInput
             wide
             label={t("resources.import.sheets_url")}
