@@ -31,11 +31,7 @@ export default class InputError extends Component {
           aria-atomic="true"
         >
           {this.props.errors.map((e, i) => {
-            return (
-              <Styled.Error key={i} className="error">
-                {this.errorString(e)}
-              </Styled.Error>
-            );
+            return <Styled.Error key={i}>{this.errorString(e)}</Styled.Error>;
           })}
         </Styled.ErrorList>
       );

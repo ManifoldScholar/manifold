@@ -1,4 +1,4 @@
-import BaseInput from "./BaseInput";
+import BaseInput, { FormBaseInput } from "./BaseInput";
 import CodeArea from "./CodeArea";
 import AttributeMap from "./AttributeMap";
 import DatePicker from "./DatePicker";
@@ -16,7 +16,7 @@ import Select from "./Select";
 import setter from "./setter";
 import Switch from "./Switch";
 import SwitchArray from "./SwitchArray";
-import TextArea from "./TextArea";
+import TextArea, { FormTextArea } from "./TextArea";
 import TextInput from "./TextInput";
 import TusUpload from "./TusUpload";
 import Upload from "./Upload";
@@ -63,4 +63,9 @@ export default {
   FieldWrapper,
   InputGroupPrimary,
   InputGroupSecondary
+};
+
+export const Unwrapped = {
+  TextArea: FormTextArea,
+  Input: FormBaseInput
 };

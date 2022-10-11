@@ -142,57 +142,6 @@ export default `
         }
       }
 
-      .upload {
-        > .form-input {
-          display: flex;
-          flex-grow: 2;
-          width: 100%;
-
-          .form-input,
-          .form-dropzone {
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-            max-width: none;
-          }
-
-          .contents-image-preview {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 0 15px;
-
-            .message {
-              position: static;
-              order: 1;
-              padding: 0;
-              margin-top: 16px;
-              margin-bottom: 0;
-              background-color: transparent;
-              transform: none;
-            }
-          }
-
-          .preview {
-            width: 120px;
-            height: 120px;
-
-            svg {
-              width: 100%;
-              height: auto;
-            }
-          }
-
-          .cover-upload-placeholder {
-            width: ${fluidScale("118px", "90px")};
-            height: auto;
-            margin: 0 auto 17px;
-          }
-        }
-      }
-
       .contents-empty {
         margin-top: 0;
       }

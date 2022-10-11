@@ -90,12 +90,6 @@ export default `
       margin-top: ${10 - ACTION_MARGIN_TOP}px;
 
       ${respond(`margin-top: ${20 - ACTION_MARGIN_TOP}px;`, 90)}
-
-      .form-input {
-        width: 100%;
-
-        ${respond(`width: auto;`, 95)}
-      }
     }
 
     &__action {

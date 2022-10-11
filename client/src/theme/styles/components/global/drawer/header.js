@@ -47,21 +47,5 @@ export default `
       ${subtitlePrimary}
       padding: 5px 0;
     }
-
-    .form-input {
-      input[type="text"] {
-        height: auto;
-        padding: 0 0 0.4em;
-        font-size: 24px;
-
-        ${respond(
-          `
-            padding: 0 0 0.25em;
-            font-size: 30px;
-          `,
-          90
-        )}
-      }
-    }
   }
 `;

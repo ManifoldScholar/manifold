@@ -2,10 +2,6 @@ import { defaultTransitionProps } from "theme/styles/mixins";
 
 export default `
   .icon-picker {
-    &.form-input .form-input-heading {
-      padding-bottom: 1em;
-    }
-
     &__list {
       display: flex;
       flex-flow: row wrap;
@@ -15,6 +11,7 @@ export default `
 
     &__item {
       /* need to use !important until form inputs are refactored due to specificity of selectors :( */
+      position: relative;
       display: flex !important;
       align-items: center;
       justify-content: center;
@@ -39,9 +36,12 @@ export default `
     }
 
     &__input {
+      width: 100%;
+      height: 100%;
       position: absolute;
-      z-index: -1;
+      z-index: 10;
       opacity: 0;
+      cursor: pointer;
       width: 100%;
       height: 100%;
     }

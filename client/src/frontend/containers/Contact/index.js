@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { contactsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import Form from "global/components/form";
+import Form, { Unwrapped } from "global/components/form";
 
 const { request, flush } = entityStoreActions;
 
@@ -75,18 +75,20 @@ export class ContactContainer extends Component {
             <h1 className="form-heading">{t("forms.contact.title")}</h1>
             <div className="row-1-p">
               <Form.Errorable
-                className="form-input"
                 name="attributes[email]"
                 errors={errors}
                 idForError="create-email-error"
               >
-                <label htmlFor="create-email">{t("forms.contact.email")}</label>
-                <input
+                <Form.Label
+                  htmlFor="create-email"
+                  label={t("forms.contact.email")}
+                />
+                <Unwrapped.Input
                   value={this.state.contact.email}
                   type="text"
                   name="email"
                   id="create-email"
-                  aria-describedby="create-email-error"
+                  idForError="create-email-error"
                   onChange={this.handleInputChange}
                   placeholder={t("forms.contact.email_placeholder")}
                 />
@@ -94,13 +96,15 @@ export class ContactContainer extends Component {
             </div>
             <div className="row-1-p">
               <Form.Errorable
-                className="form-input"
                 name={"attributes[fullName]"}
                 errors={errors}
                 idForError="create-name-error"
               >
-                <label htmlFor="create-name">{t("forms.contact.name")}</label>
-                <input
+                <Form.Label
+                  htmlFor="create-name"
+                  label={t("forms.contact.name")}
+                />
+                <Unwrapped.Input
                   value={this.state.contact.fullName}
                   type="text"
                   id="create-name"
@@ -113,34 +117,31 @@ export class ContactContainer extends Component {
             </div>
             <div className="row-1-p">
               <Form.Errorable
-                className="form-input"
                 name="attributes[message]"
                 errors={errors}
                 idForError="create-message-error"
               >
-                <label htmlFor="create-message">
-                  {t("forms.contact.message")}
-                </label>
-                <textarea
+                <Form.Label
+                  htmlFor="create-message"
+                  label={t("forms.contact.message")}
+                />
+                <Unwrapped.TextArea
                   value={this.state.contact.message}
                   type="message"
                   name="message"
                   id="create-message"
                   onChange={this.handleInputChange}
                   placeholder={t("forms.contact.message_placeholder")}
-                  className="dark-placeholder wide large"
                   aria-describedby="create-message-error"
                 />
               </Form.Errorable>
             </div>
             <div className="row-1-p">
-              <div className="form-input-submit">
-                <input
-                  className="button-secondary button-secondary--with-room"
-                  type="submit"
-                  value={t("forms.contact.button_label")}
-                />
-              </div>
+              <input
+                className="button-secondary button-secondary--with-room"
+                type="submit"
+                value={t("forms.contact.button_label")}
+              />
             </div>
           </form>
         </div>

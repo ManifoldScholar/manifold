@@ -7,10 +7,9 @@ import Errorable from "../Errorable";
 import isString from "lodash/isString";
 import Instructions from "../Instructions";
 import BaseLabel from "../BaseLabel";
-import FieldWrapper from "../FieldWrapper";
 import * as Styled from "./styles";
 
-class FormTextArea extends Component {
+export class FormTextArea extends Component {
   static displayName = "Form.TextArea";
 
   static propTypes = {
@@ -44,10 +43,10 @@ class FormTextArea extends Component {
   }
 
   render() {
-    const TextArea =
-      this.context?.styleType === "primary"
-        ? Styled.TextAreaPrimary
-        : Styled.TextAreaSecondary;
+    const TextAreaInput =
+      this.context?.styleType === "secondary"
+        ? Styled.TextAreaSecondary
+        : Styled.TextAreaPrimary;
 
     return (
       <UIDConsumer>
@@ -71,8 +70,9 @@ class FormTextArea extends Component {
                 id={`${this.idForInstructionsPrefix}-${id}`}
               />
             )}
-            <TextArea
+            <TextAreaInput
               id={`${this.idPrefix}-${id}`}
+              name={this.props.name}
               aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
               style={{ height: this.props.height }}
               placeholder={this.props.placeholder}

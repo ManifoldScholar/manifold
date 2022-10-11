@@ -9,7 +9,7 @@ import BaseLabel from "../BaseLabel";
 import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
-class FormBaseInput extends PureComponent {
+export class FormBaseInput extends PureComponent {
   static displayName = "Form.BaseInput";
 
   static propTypes = {
@@ -101,9 +101,9 @@ class FormBaseInput extends PureComponent {
     const Wrapper = buttons ? Styled.WrapperWithActions : Errorable;
 
     const InputComponent =
-      this.context?.styleType === "primary"
-        ? Styled.PrimaryInput
-        : Styled.SecondaryInput;
+      this.context?.styleType === "secondary"
+        ? Styled.SecondaryInput
+        : Styled.PrimaryInput;
 
     return (
       <Wrapper
@@ -124,6 +124,7 @@ class FormBaseInput extends PureComponent {
             this.inputElement = input;
           }}
           id={id}
+          name={this.props.name}
           disabled={this.props.isDisabled}
           type={this.props.inputType}
           placeholder={this.props.placeholder}

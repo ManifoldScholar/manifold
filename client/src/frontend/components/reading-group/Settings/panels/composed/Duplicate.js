@@ -4,6 +4,7 @@ import { useUIDSeed } from "react-uid";
 import { useTranslation } from "react-i18next";
 import Panel from "../parts/Panel";
 import Checkbox from "../parts/Checkbox";
+import Form from "global/components/form";
 import * as Styled from "./styles";
 
 function DuplicatePanel({ readingGroup, onProceed, onCancel }) {
@@ -30,18 +31,20 @@ function DuplicatePanel({ readingGroup, onProceed, onCancel }) {
       onCancel={onCancel}
     >
       <Styled.Inputs className="form-secondary">
-        <div className="form-input">
-          <label htmlFor={uidSeed("name")}>
-            {t("forms.edit_group.duplicate.group_name")}
-          </label>
-          <input
+        <div>
+          <Form.Label
+            id={uidSeed("name")}
+            label={t("forms.edit_group.duplicate.group_name")}
+            styleType="tertiary"
+          />
+          <Styled.Input
             id={uidSeed("name")}
             type="text"
             value={name}
             onChange={event => setName(event.target.value)}
           />
         </div>
-        <div className="form-input">
+        <div>
           <Checkbox
             id={uidSeed("copyAnnotations")}
             label={t("forms.edit_group.duplicate.copy_annotations")}

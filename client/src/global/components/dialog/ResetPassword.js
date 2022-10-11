@@ -4,11 +4,13 @@ import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Wrapper from "./Wrapper";
 import Confirm from "./Confirm";
-import Form from "global/components/form";
+import Form, { Unwrapped } from "global/components/form";
 import { entityStoreActions } from "actions";
 import { usersAPI, requests, passwordsAPI } from "api";
 import { get } from "lodash";
 import classNames from "classnames";
+import { FormContext } from "helpers/contexts";
+import * as Styled from "./styles";
 
 const { request, flush } = entityStoreActions;
 
@@ -121,51 +123,52 @@ export class ResetPasswordBase extends PureComponent {
     return (
       <form
         method="put"
-        className="dialog__body form-secondary"
+        className="dialog__body"
         onSubmit={event => this.resetUserPassword(event, this.props.user)}
       >
-        <div className="row-1-p">
-          <Form.Errorable
-            className="form-input"
-            name="attributes[password]"
-            errors={errors}
-            idForError={errorId}
-          >
-            <label htmlFor={id}>{t("forms.password_reset.new")}</label>
+        <FormContext.Provider value={{ styleType: "secondary" }}>
+          <div className="row-1-p">
+            <Form.Errorable
+              name="attributes[password]"
+              errors={errors}
+              idForError={errorId}
+            >
+              <label htmlFor={id}>{t("forms.password_reset.new")}</label>
+              <Unwrapped.Input
+                value={this.state.password}
+                onChange={event => this.handleInputChange(event)}
+                name="password"
+                type="password"
+                id={id}
+                placeholder={t("forms.password_reset.new")}
+                aria-describedby={errorId}
+              />
+            </Form.Errorable>
+          </div>
+          <Styled.ButtonGroup>
             <input
-              value={this.state.password}
-              onChange={event => this.handleInputChange(event)}
-              name="password"
-              type="password"
-              id={id}
-              placeholder={t("forms.password_reset.new")}
-              aria-describedby={errorId}
+              className={classNames(
+                "button-secondary",
+                "button-secondary--wide",
+                "button-secondary--outlined",
+                "button-secondary--with-room"
+              )}
+              type="submit"
+              value={t("forms.password_reset.submit_reset")}
             />
-          </Form.Errorable>
-        </div>
-        <div className="form-input">
-          <input
-            className={classNames(
-              "button-secondary",
-              "button-secondary--wide",
-              "button-secondary--outlined",
-              "button-secondary--with-room"
-            )}
-            type="submit"
-            value={t("forms.password_reset.submit_reset")}
-          />
-          <button
-            className={classNames(
-              "button-secondary",
-              "button-secondary--wide",
-              "button-secondary--outlined",
-              "button-secondary--dull"
-            )}
-            onClick={event => this.handleStateChange(event, "editing", false)}
-          >
-            {t("actions.cancel")}
-          </button>
-        </div>
+            <button
+              className={classNames(
+                "button-secondary",
+                "button-secondary--wide",
+                "button-secondary--outlined",
+                "button-secondary--dull"
+              )}
+              onClick={event => this.handleStateChange(event, "editing", false)}
+            >
+              {t("actions.cancel")}
+            </button>
+          </Styled.ButtonGroup>
+        </FormContext.Provider>
       </form>
     );
   }
@@ -184,37 +187,43 @@ export class ResetPasswordBase extends PureComponent {
         {this.state.editing ? (
           this.renderResetForm()
         ) : (
-          <div className="dialog__body form-input">
-            <button
-              onClick={event => this.handleStateChange(event, "confirm", true)}
-              className="button-secondary button-secondary--outlined"
-            >
-              {t("forms.password_reset.generate_password")}
-            </button>
-            <button
-              onClick={event => this.handleStateChange(event, "editing", true)}
-              className="button-secondary button-secondary--outlined"
-            >
-              {t("forms.password_reset.set_password")}
-            </button>
-            <button
-              className={classNames(
-                "button-secondary",
-                "button-secondary--outlined",
-                "button-secondary--dull"
-              )}
-              onClick={event => this.handleRejectClick(event)}
-            >
-              <span
-                className={classNames(
-                  "button-secondary__text",
-                  "button-secondary__text--white",
-                  "button-secondary__text--hover-dark"
-                )}
+          <div className="dialog__body">
+            <Styled.ButtonGroup>
+              <button
+                onClick={event =>
+                  this.handleStateChange(event, "confirm", true)
+                }
+                className="button-secondary button-secondary--outlined"
               >
-                {t("actions.cancel")}
-              </span>
-            </button>
+                {t("forms.password_reset.generate_password")}
+              </button>
+              <button
+                onClick={event =>
+                  this.handleStateChange(event, "editing", true)
+                }
+                className="button-secondary button-secondary--outlined"
+              >
+                {t("forms.password_reset.set_password")}
+              </button>
+              <button
+                className={classNames(
+                  "button-secondary",
+                  "button-secondary--outlined",
+                  "button-secondary--dull"
+                )}
+                onClick={event => this.handleRejectClick(event)}
+              >
+                <span
+                  className={classNames(
+                    "button-secondary__text",
+                    "button-secondary__text--white",
+                    "button-secondary__text--hover-dark"
+                  )}
+                >
+                  {t("actions.cancel")}
+                </span>
+              </button>
+            </Styled.ButtonGroup>
           </div>
         )}
       </div>
