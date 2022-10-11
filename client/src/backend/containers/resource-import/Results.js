@@ -65,7 +65,7 @@ export class ResourceImportResults extends PureComponent {
             fetch={this.props.fetch}
             match={this.props.match}
           />
-          <div className="form-input">
+          <div>
             <nav className="results-list">
               <ul>
                 {importResults.map(r => {

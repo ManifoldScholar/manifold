@@ -92,19 +92,18 @@ class FormColumnMap extends PureComponent {
     const t = this.props.t;
 
     return (
-      <div>
-        <Instructions
-          className="space-bottom"
-          instructions={this.props.instructions}
-        />
-        <FieldWrapper>
+      <>
+        <div>
+          <Instructions instructions={this.props.instructions} />
+        </div>
+        <div>
           <button
             onClick={this.autoMap}
             className="button-secondary button-secondary--outlined"
           >
             {t("forms.attribute_map.auto_map")}
           </button>
-        </FieldWrapper>
+        </div>
         <DragDropContext
           onDragStart={this.onDragStart}
           onDragEnd={this.onDragEnd}
@@ -157,7 +156,7 @@ class FormColumnMap extends PureComponent {
             </Styled.ColumnMap>
           </FieldWrapper>
         </DragDropContext>
-      </div>
+      </>
     );
   }
   /* eslint-enable react/no-array-index-key */
