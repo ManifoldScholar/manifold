@@ -14,7 +14,8 @@
     "everything": "Everything",
     "scopes_label": "Search within:",
     "result_types_label": "Show results for:",
-    "execute": "Execute search"
+    "execute": "Execute search",
+    "global_label": "Site Search"
   },
   "filters": {
     "featured_projects": "Featured $t(glossary.project_other)",
