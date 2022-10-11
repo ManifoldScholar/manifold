@@ -15,6 +15,7 @@ import SectionLabel from "./SectionLabel";
 import Select from "./Select";
 import setter from "./setter";
 import Switch from "./Switch";
+import { Toggle } from "./Switch/ToggleOnly";
 import SwitchArray from "./SwitchArray";
 import TextArea, { FormTextArea } from "./TextArea";
 import TextInput from "./TextInput";
@@ -67,5 +68,6 @@ export default {
 
 export const Unwrapped = {
   TextArea: FormTextArea,
-  Input: FormBaseInput
+  Input: FormBaseInput,
+  Toggle
 };

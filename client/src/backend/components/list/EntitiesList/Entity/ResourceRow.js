@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
-import classNames from "classnames";
 import EntityRow from "./Row";
 import { withTranslation } from "react-i18next";
+import { Unwrapped } from "global/components/form";
 
 class ResourceRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ResourceRow";
@@ -71,17 +71,11 @@ class ResourceRow extends PureComponent {
   get utility() {
     if (!this.showSwitch) return null;
 
-    const classes = classNames({
-      "boolean-primary": true,
-      checked: this.switchValue(this.resource)
-    });
-
     return (
       <div className="toggle-indicator">
-        {/* Add .checked to .boolean-primary to change visual state */}
-        <div
+        <Unwrapped.Toggle
           onClick={event => this.onSwitchChange(event, this.resource)}
-          className={classes}
+          $checked={this.switchValue(this.resource)}
           role="button"
           tabIndex="0"
         >
@@ -94,7 +88,7 @@ class ResourceRow extends PureComponent {
               {this.props.t("backend.actions.add_resource")}
             </span>
           )}
-        </div>
+        </Unwrapped.Toggle>
       </div>
     );
   }
