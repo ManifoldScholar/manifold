@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 import { useListFilters } from "hooks";
 import * as Styled from "./styles";
-import Form from "global/components/form";
+import Form, { Unwrapped } from "global/components/form";
 import { useTranslation } from "react-i18next";
 
 export default function ProjectCollectionSortBy({
@@ -33,11 +32,6 @@ export default function ProjectCollectionSortBy({
   const renderToggle = () => {
     if (projectCollection.attributes.smart) return null;
 
-    const classes = classnames({
-      "boolean-primary": true,
-      checked: isManualSort
-    });
-
     return (
       <Styled.Toggle>
         <Form.Label
@@ -45,9 +39,10 @@ export default function ProjectCollectionSortBy({
           label={t("backend.forms.project_collection.order_manually")}
         />
         <div className="toggle-indicator">
-          <div
+          <Unwrapped.Toggle
+            as="div"
             onClick={handleClick}
-            className={classes}
+            $checked={isManualSort}
             role="button"
             tabIndex="0"
             aria-pressed={isManualSort}
@@ -55,7 +50,7 @@ export default function ProjectCollectionSortBy({
             <span className="screen-reader-text">
               {t("backend.forms.project_collection.order_collection_manually")}
             </span>
-          </div>
+          </Unwrapped.Toggle>
         </div>
       </Styled.Toggle>
     );

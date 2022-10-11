@@ -7,7 +7,6 @@ import confirmableButton from "./confirmableButton";
 import demoAnimation from "./demoAnimation";
 import dialog from "./dialog";
 import drawer from "./drawer";
-import forms from "./forms";
 import header from "./header";
 import instructionalCopy from "./instructionalCopy";
 import listTotal from "./listTotal";
@@ -25,9 +24,9 @@ import skipToMain from "./skipToMain";
 import table from "./table";
 import userMenu from "./userMenu";
 import utility from "./utility";
+import reactDatePicker from "./reactDatePicker";
 
 export default `
-  ${forms}
   ${buttons}
   ${confirmableButton}
   ${demoAnimation}
@@ -54,4 +53,5 @@ export default `
   ${commentMore}
   ${dialog}
   ${collapse}
+  ${reactDatePicker}
 `;

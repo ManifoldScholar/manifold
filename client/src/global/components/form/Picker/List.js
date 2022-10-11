@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import * as EntitiesList from "backend/components/list/EntitiesList";
+import List, * as EntitiesList from "backend/components/list/EntitiesList";
 import Utility from "global/components/utility";
 import has from "lodash/has";
 import isFunction from "lodash/isFunction";
@@ -85,7 +85,7 @@ export default class PickerListComponent extends PureComponent {
   render() {
     return (
       <div className={this.props.className}>
-        <EntitiesList.default
+        <List
           emptyMessage="None Added"
           listStyle={this.props.listStyle}
           sortableStyle="tight"
