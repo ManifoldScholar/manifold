@@ -10,6 +10,7 @@ export const Section = styled.div`
 `;
 
 export const BaseGroup = styled.div`
+  ${({ $gapLg }) => $gapLg && `--FieldGroup-row-gap: 55px;`}
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
