@@ -100,7 +100,7 @@ class IngestionFormUpload extends PureComponent {
               set={this.onSourceChange}
               accepts="any"
             />
-            <div className="form-divider">{t("common.or")}</div>
+            <Form.Divider>{t("common.or")}</Form.Divider>
             <Form.TextInput
               label={t("backend.forms.ingestion.url")}
               focusOnMount
