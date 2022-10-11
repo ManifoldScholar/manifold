@@ -24,7 +24,7 @@ class ResourceImportResultsSkipped extends PureComponent {
           className="results-header__icon"
         />
         <span>
-          {t("backend.forms.resource_import.row_skipped", {
+          {t("resources.import.row_skipped", {
             number: resourceImportRow.lineNumber
           })}
         </span>

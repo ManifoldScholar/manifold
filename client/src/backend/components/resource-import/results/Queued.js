@@ -23,7 +23,7 @@ class ResourceImportResultsQueued extends PureComponent {
       return (
         <span>
           <Trans
-            i18nKey="backend.forms.resource_import.row_queued_update"
+            i18nKey="resources.import.row_queued_update"
             components={{
               resourceLink: (
                 <Link
@@ -41,7 +41,7 @@ class ResourceImportResultsQueued extends PureComponent {
     } else if (resourceImportRow.isSkip) {
       return (
         <span>
-          {t("backend.forms.resource_import.row_will_skip", {
+          {t("resources.import.row_will_skip", {
             number: resourceImportRow.lineNumber
           })}
         </span>
@@ -49,7 +49,7 @@ class ResourceImportResultsQueued extends PureComponent {
     }
     return (
       <span>
-        {t("backend.forms.resource_import.row_queued_create", {
+        {t("resources.import.row_queued_create", {
           number: resourceImportRow.lineNumber
         })}
       </span>

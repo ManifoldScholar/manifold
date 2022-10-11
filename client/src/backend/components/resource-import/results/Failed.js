@@ -23,7 +23,7 @@ class ResourceImportResultsFailed extends PureComponent {
           className="results-header__icon"
         />
         <span>
-          {t("backend.forms.resource_import.row_failed", {
+          {t("resources.import.row_failed", {
             number: resourceImportRow.lineNumber
           })}
         </span>

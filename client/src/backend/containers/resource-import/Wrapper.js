@@ -8,6 +8,7 @@ import { childRoutes } from "helpers/router";
 import { resourceImportsAPI, projectsAPI, requests } from "api";
 import { grab, isEntityLoaded, select } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
+import { withTranslation } from "react-i18next";
 
 import Authorize from "hoc/Authorize";
 
@@ -110,14 +111,14 @@ export class ResourceImportWrapper extends PureComponent {
   }
 
   render() {
-    const { project, match } = this.props;
+    const { project, match, t } = this.props;
     if (!project) return null;
 
     return (
       <Authorize
         entity={project}
         failureFatalError={{
-          body: "You are not allowed to import resources for this project."
+          body: t("resources.import.unauthorized")
         }}
         ability={["update"]}
       >
@@ -125,10 +126,9 @@ export class ResourceImportWrapper extends PureComponent {
           type="resources"
           backUrl={lh.link("backendProjectResources", match.params.projectId)}
           backLabel={project.attributes.titlePlaintext}
-          title={"Bulk Add Resources"}
+          title={t("resources.import.header")}
           showUtility={false}
-          note={`Import resources from CSV or Google Sheet, with file assets stored in a
-          Google Drive folder.`}
+          note={t("resources.import.header_note")}
         />
         <Layout.BackendPanel>
           <div>{this.renderRoutes()}</div>
@@ -138,4 +138,4 @@ export class ResourceImportWrapper extends PureComponent {
   }
 }
 
-export default connectAndFetch(ResourceImportWrapper);
+export default withTranslation()(connectAndFetch(ResourceImportWrapper));

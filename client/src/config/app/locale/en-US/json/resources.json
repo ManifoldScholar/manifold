@@ -1,14 +1,51 @@
 {
-  "resource_kinds": {
-    "image": "Image",
-    "video": "Video",
-    "audio": "Audio",
-    "file": "File",
-    "link": "Link",
-    "pdf": "PDF",
-    "document": "Document",
-    "spreadsheet": "Spreadsheet",
-    "presentation": "Presentation",
-    "interactive": "Interactive"
+  "resources": {
+    "kinds": {
+      "image": "Image",
+      "video": "Video",
+      "audio": "Audio",
+      "file": "File",
+      "link": "Link",
+      "pdf": "PDF",
+      "document": "Document",
+      "spreadsheet": "Spreadsheet",
+      "presentation": "Presentation",
+      "interactive": "Interactive"
+    },
+    "import": {
+      "header": "Bulk Add Resources",
+      "header_note": "Import resources from CSV or Google Sheet, with file assets stored in a Google Drive folder.",
+      "step_one_header": "Step 1: Upload",
+      "step_two_header": "Step 2: Describe Data",
+      "step_three_header": "Step 3: Map Columns to Resource Attributes",
+      "parse_error": "Manifold was unable to parse the import data. If the source is a google sheet, check to be sure that the sheet is publicly accessible (or that it's accessible to your Google integration service account) and that the URL is correct.",
+      "upload_instructions": "Upload a CSV (File with Comma Separated Values)",
+      "sheets_url": "Google Sheets URL",
+      "sheets_instructions": "You can also import resources listed in a Google Sheet",
+      "headers_label": "Which row contains the column headers?",
+      "headers_instructions": "The import assumes that the row immediately following the header row is the first row of data. All rows above the header row are ignored.",
+      "storage_identifier_label": "Enter the Storage Identifier",
+      "storage_identifier_instructions": "In the case of Google Drive, this will be the ID, which is the last part of the folder's URL",
+      "unauthorized": "You are not allowed to import resources for this project.",
+      "result_row": "Row #{num} {state}",
+      "back_to_resources": "Back to Resources",
+      "reset_import": "Reset Import",
+      "start_import": "Start Import",
+      "refresh_results": "Refresh Results",
+      "row_failed": "Row #{{number}} failed with errors.",
+      "row_updated": "Row #{{number}} updated <resourceLink>{{resourceTitle}}</resourceLink>.",
+      "row_created": "Row #{{number}} created <resourceLink>{{resourceTitle}}</resourceLink>.",
+      "row_importing": "Row #{{number}} is being imported.",
+      "row_pending": "Row #{{number}} will update <resourceLink>{{resourceTitle}}</resourceLink>.",
+      "row_queued_update": "Row #{{number}} is queued to update <resourceLink>{{resourceTitle}}</resourceLink>.",
+      "row_queued_create": "Row #{{number}} is queued to create a new resource.",
+      "row_will_skip": "Row #{{number}} will be skipped as marked.",
+      "row_will_create": "Row #{{number}} will create a new resource.",
+      "row_skipped": "Row #{{number}} was skipped as marked.",
+      "step_four": "Step 4. Import Resources",
+      "import_complete": "This import is complete. You may go back, edit the mapping, and rerun the import. Or, if the source is a google sheet, you can reset the import, which will allow you to make changes to mapping or source data, and then rerun the import.",
+      "import_in_progress": "The import is in progress. Each resource is updated in the background. This list below will refresh every 5 seconds, or you can press the refresh button to manually update the results.",
+      "import_ready": "The import is ready to begin. The list below is a preview of what will happen. Press the \"start import\" button below to begin."
+    }
   }
 }

@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Results from "./results";
+import { withTranslation } from "react-i18next";
 
-export default class ResourceImportResult extends PureComponent {
+class ResourceImportResult extends PureComponent {
   static displayName = "ResourceImport.Result";
 
   static propTypes = {
@@ -29,6 +30,8 @@ export default class ResourceImportResult extends PureComponent {
   }
 
   renderHeader(resourceImportRow) {
+    const { t } = this.props;
+
     switch (resourceImportRow.state) {
       case "importing":
         return <Results.Importing resourceImportRow={resourceImportRow} />;
@@ -43,7 +46,10 @@ export default class ResourceImportResult extends PureComponent {
       case "skipped":
         return <Results.Skipped resourceImportRow={resourceImportRow} />;
       default:
-        return `Row #${resourceImportRow.lineNumber}: ${resourceImportRow.state}`;
+        return t("resources.import.result_row", {
+          num: resourceImportRow.lineNumber,
+          state: resourceImportRow.state
+        });
     }
   }
 
@@ -64,3 +70,5 @@ export default class ResourceImportResult extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ResourceImportResult);

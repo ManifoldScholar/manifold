@@ -7,6 +7,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
 export class ResourceImportMap extends PureComponent {
   static displayName = "ResourceImport.Map";
@@ -71,7 +72,7 @@ export class ResourceImportMap extends PureComponent {
   /* eslint-enable no-param-reassign */
 
   render() {
-    const { resourceImport } = this.props;
+    const { resourceImport, t } = this.props;
 
     return (
       <div>
@@ -83,26 +84,14 @@ export class ResourceImportMap extends PureComponent {
           onSuccess={this.onSuccess}
           className="form-secondary"
         >
-          <Form.FieldGroup label="Step 3: Map Columns to Resource Attributes">
+          <Form.FieldGroup label={t("resources.import.step_three_header")}>
             <Form.AttributeMap
-              instructions={
-                "The column on the left side lists the column headers " +
-                "found in your spreadsheet. The column on the right lists the attributes " +
-                "that can be set on Manifold resources. Drag the attributes on the right " +
-                'to the corresponding columns on the left. Pressing the "automatically ' +
-                'map attributes" button will attempt to automatically match the ' +
-                "attributes with the spreadsheet columns."
-              }
+              instructions={t("forms.attribute_map.instructions")}
               name="attributes[columnMap]"
               attributes="attributes[availableColumns]"
               headers="attributes[headers]"
             />
-            <div
-              className="buttons-icon-horizontal"
-              style={{
-                marginTop: "30px"
-              }}
-            >
+            <div className="buttons-icon-horizontal">
               <Link
                 to={this.backLinkUrl()}
                 className={classNames(
@@ -115,7 +104,7 @@ export class ResourceImportMap extends PureComponent {
                   size="default"
                   className="button-icon-secondary__icon"
                 />
-                <span>Back</span>
+                <span>{t("actions.back")}</span>
               </Link>
               <button type="submit" className={this.buttonClasses}>
                 <IconComposer
@@ -123,7 +112,7 @@ export class ResourceImportMap extends PureComponent {
                   size="default"
                   className="button-icon-secondary__icon"
                 />
-                <span>Continue</span>
+                <span>{t("actions.continue")}</span>
               </button>
             </div>
           </Form.FieldGroup>
@@ -133,4 +122,4 @@ export class ResourceImportMap extends PureComponent {
   }
 }
 
-export default connectAndFetch(ResourceImportMap);
+export default withTranslation()(connectAndFetch(ResourceImportMap));
