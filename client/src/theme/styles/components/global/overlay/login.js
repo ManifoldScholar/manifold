@@ -71,10 +71,15 @@ export default `
     .login-form {
       ${loginFormPrimary}
 
+      input {
+        color: var(--color-neutral-text-dark);
+      }
+
       input[type='text'],
       input[type='password'],
       input[type='submit'] {
         width: 100%;
+        color: var(--input-color);
       }
 
       .focusable-form {

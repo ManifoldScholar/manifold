@@ -1,5 +1,4 @@
 import {
-  respond,
   fluidScale,
   headingQuaternary,
   subtitlePrimary
