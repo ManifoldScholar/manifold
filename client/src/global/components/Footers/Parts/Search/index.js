@@ -2,9 +2,10 @@ import React, { PureComponent } from "react";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
-export default class Search extends PureComponent {
+class Search extends PureComponent {
   static displayName = "Global.Footers.Parts.Search";
 
   static propTypes = {
@@ -32,6 +33,8 @@ export default class Search extends PureComponent {
   };
 
   render() {
+    const { t } = this.props;
+
     return (
       <Styled.Form
         role="search"
@@ -39,14 +42,14 @@ export default class Search extends PureComponent {
         $withTopMargin={this.props.withTopMargin}
         onSubmit={this.doSearch}
       >
-        <div className="search-button-inline">
+        <Styled.SearchButton>
           <label htmlFor="app-footer-search" className="screen-reader-text">
-            Site Search
+            {t("search.global_label")}
           </label>
           <input
             type="text"
             id="app-footer-search"
-            placeholder="Search"
+            placeholder={t("search.title")}
             value={this.state.keyword}
             onChange={this.updateSearchWord}
           />
@@ -56,10 +59,12 @@ export default class Search extends PureComponent {
               icon="search16"
               size={20}
             />
-            <span className="screen-reader-text">Search</span>
+            <span className="screen-reader-text">{t("search.title")}</span>
           </button>
-        </div>
+        </Styled.SearchButton>
       </Styled.Form>
     );
   }
 }
+
+export default withTranslation()(Search);
