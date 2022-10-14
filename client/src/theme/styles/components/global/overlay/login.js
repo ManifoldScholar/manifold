@@ -69,6 +69,8 @@ export default `
     }
 
     .login-form {
+      --error-color: var(--color-notification-error-light);
+
       ${loginFormPrimary}
 
       input {
