@@ -25,7 +25,7 @@ export const IndicatorSwitchInner = styled.span`
   cursor: pointer;
   background-color: var(--inactive-switch-bg-color);
   border-radius: ${BOOLEAN_HEIGHT}px;
-  transform: translateY(-10%);
+  transform: translateY(var(--IndicatorSwitchInner-translateY, -10%));
   transition: background-color var(--transition-duration-slow)
     var(--transition-timing-function);
 
@@ -115,12 +115,12 @@ export const InputCheckbox = styled(BaseInput)`
 
 export const LabelTextPrimary = styled("span", transientOptions)`
   ${formLabelPrimary}
-  flex-basis: 100%;
+  flex-basis: var(--Switch-child-flex-basis, 100%);
   margin-block-start: 0;
   ${({ $marginEnd }) => $marginEnd && `margin-block-end: 1em;`}
 
   ~ ${IndicatorSwitchOuter} {
-    flex-basis: 100%;
+    flex-basis: var(--Switch-child-flex-basis, 100%);
     border-bottom: none;
   }
 `;
@@ -128,7 +128,7 @@ export const LabelTextPrimary = styled("span", transientOptions)`
 export const LabelTextSecondary = styled.span`
   ${formInputSecondary}
   flex-grow: 1;
-  flex-basis: 66.666%;
+  flex-basis: var(--Switch-child-flex-basis, 66.666%);
   height: auto;
   min-height: 32px;
   display: block;
@@ -145,4 +145,14 @@ export const Label = styled.label`
   position: relative;
   display: flex;
   flex-wrap: wrap;
+
+  ${({ $inline }) =>
+    $inline &&
+    `
+    --Switch-child-flex-basis: auto;
+    --IndicatorSwitchInner-translateY: 0;
+
+    align-items: center;
+    gap: 1em;
+  `}
 `;
