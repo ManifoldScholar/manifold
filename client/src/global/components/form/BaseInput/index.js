@@ -24,7 +24,7 @@ export class FormBaseInput extends PureComponent {
     errors: PropTypes.array,
     inputType: PropTypes.string,
     type: PropTypes.string,
-    autocomplete: PropTypes.string,
+    autoComplete: PropTypes.string,
     className: PropTypes.string,
     join: PropTypes.func,
     id: PropTypes.string,
@@ -133,6 +133,7 @@ export class FormBaseInput extends PureComponent {
           onChange={this.props.onChange}
           value={this.renderValue(this.props)}
           aria-describedby={`${idForError || ""} ${idForInstructions || ""}`}
+          autoComplete={this.props.autoComplete}
         />
         {buttons && this.renderButtons(buttons)}
         {this.props.instructions && (

@@ -171,7 +171,7 @@ export class CreateContainer extends Component {
               <Form.FieldGroup>
                 <Unwrapped.Input
                   value={this.state.user.email}
-                  type="text"
+                  type="email"
                   name="attributes[email]"
                   id="create-email"
                   aria-describedby="create-email-error"
@@ -180,6 +180,7 @@ export class CreateContainer extends Component {
                   errors={errors}
                   idForError="create-email-error"
                   label={t("forms.signin_overlay.email")}
+                  autoComplete="email"
                 />
                 <Unwrapped.Input
                   value={this.state.user.name}
@@ -192,6 +193,7 @@ export class CreateContainer extends Component {
                   name={["attributes[firstName]", "attributes[lastName]"]}
                   errors={errors}
                   label={t("forms.signin_overlay.name")}
+                  autoComplete="name"
                 />
                 <Unwrapped.Input
                   value={this.state.user.password}
@@ -204,6 +206,7 @@ export class CreateContainer extends Component {
                   name="attributes[password]"
                   errors={errors}
                   label={t("forms.signin_overlay.password")}
+                  autoComplete="new-password"
                 />
                 <Unwrapped.Input
                   value={this.state.user.passwordConfirmation}
@@ -216,6 +219,7 @@ export class CreateContainer extends Component {
                   name="attributes[passwordConfirmation]"
                   errors={errors}
                   label={t("forms.signin_overlay.confirm_password")}
+                  autoComplete="new-password"
                 />
                 <input
                   className="button-secondary button-secondary--with-room"
