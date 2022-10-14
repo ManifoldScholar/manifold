@@ -23,6 +23,8 @@ export class FormBaseInput extends PureComponent {
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,
     inputType: PropTypes.string,
+    type: PropTypes.string,
+    autocomplete: PropTypes.string,
     className: PropTypes.string,
     join: PropTypes.func,
     id: PropTypes.string,
@@ -130,7 +132,7 @@ export class FormBaseInput extends PureComponent {
           placeholder={this.props.placeholder}
           onChange={this.props.onChange}
           value={this.renderValue(this.props)}
-          aria-describedby={`${idForError} ${idForInstructions}`}
+          aria-describedby={`${idForError || ""} ${idForInstructions || ""}`}
         />
         {buttons && this.renderButtons(buttons)}
         {this.props.instructions && (
