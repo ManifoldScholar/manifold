@@ -97,9 +97,11 @@ export class UpdateFormContainer extends Component {
     const { promise } = this.props.dispatch(
       request(meAPI.update(params), requests.gAuthenticatedUserUpdate)
     );
-    promise.then(() => {
-      this.props.hideSignInUpOverlay();
-    });
+    promise
+      .then(() => {
+        this.props.hideSignInUpOverlay();
+      })
+      .catch(() => {});
   };
 
   updateUser = event => {

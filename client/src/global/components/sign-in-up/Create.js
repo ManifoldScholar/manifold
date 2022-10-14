@@ -104,7 +104,8 @@ export class CreateContainer extends Component {
             postLoginRedirect: "/"
           });
         }
-      });
+      })
+      .catch(() => {});
   };
 
   handleInputChange = event => {
