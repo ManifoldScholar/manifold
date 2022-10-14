@@ -16,7 +16,7 @@ export class FormBaseInput extends PureComponent {
     placeholder: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     label: PropTypes.string,
-    name: PropTypes.string,
+    name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     onChange: PropTypes.func,
     afterChange: PropTypes.func,
     value: PropTypes.any,
