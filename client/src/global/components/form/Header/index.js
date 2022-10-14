@@ -7,7 +7,7 @@ export default class FormHeader extends Component {
   static displayName = "Form.Header";
 
   static propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     instructions: PropTypes.string
   };
