@@ -33,6 +33,7 @@ function HeadingManageGroup({ readingGroup, history, location }) {
           <div aria-hidden>
             <Styled.EditToggle
               label={t("forms.manage_group.edit_homepage")}
+              labelPos="inline"
               set={handleSwitchChange}
               value={inEditMode}
             />

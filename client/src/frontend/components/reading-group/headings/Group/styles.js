@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { utilityPrimary } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 import Switch from "global/components/form/Switch";
 
@@ -34,16 +33,7 @@ export const ManageGroupContainer = styled(Flex)`
 `;
 
 export const EditToggle = styled(Switch)`
-  label {
-    ${utilityPrimary};
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-
-    .toggle-indicator {
-      margin-inline-start: 1em;
-    }
-  }
+  min-inline-size: auto;
 `;
 
 export const NavContainer = styled(Container)`

@@ -13,7 +13,7 @@ class FormSwitch extends Component {
 
   static propTypes = {
     label: PropTypes.string,
-    labelPos: PropTypes.string,
+    labelPos: PropTypes.oneOf(["above", "below", "inline"]),
     className: PropTypes.string,
     labelClass: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -128,12 +128,16 @@ class FormSwitch extends Component {
               [this.props.className]: !!this.props.className
             })}
           >
-            <Styled.Label htmlFor={`${this.idPrefix}-${id}`}>
-              {this.props.labelPos === "above" && (
-                <LabelText $marginEnd={this.props.isPrimary}>
-                  {this.props.label}
-                </LabelText>
-              )}
+            <Styled.Label
+              htmlFor={`${this.idPrefix}-${id}`}
+              $inline={this.props.labelPos === "inline"}
+            >
+              {this.props.labelPos === "above" ||
+                (this.props.labelPos === "inline" && (
+                  <LabelText $marginEnd={this.props.isPrimary}>
+                    {this.props.label}
+                  </LabelText>
+                ))}
               <Input
                 ref={c => {
                   this.checkbox = c;
@@ -148,10 +152,12 @@ class FormSwitch extends Component {
               {this.props.labelPos === "below" && (
                 <LabelText>{this.props.label}</LabelText>
               )}
-              <Instructions
-                instructions={this.props.instructions}
-                className={this.showCheckbox ? "inline" : undefined}
-              />
+              {!!this.props.instructions && (
+                <Instructions
+                  instructions={this.props.instructions}
+                  className={this.showCheckbox ? "inline" : undefined}
+                />
+              )}
             </Styled.Label>
           </FieldWrapper>
         )}
