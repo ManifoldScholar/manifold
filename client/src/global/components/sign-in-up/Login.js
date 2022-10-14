@@ -101,6 +101,7 @@ class Login extends Component {
                   placeholder={t("forms.signin_overlay.email")}
                   inputMode="email"
                   label={t("forms.signin_overlay.email")}
+                  autoComplete="email"
                 />
                 <Unwrapped.Input
                   type="password"
@@ -110,6 +111,7 @@ class Login extends Component {
                   id="login-password"
                   placeholder={t("forms.signin_overlay.password")}
                   label={t("forms.signin_overlay.password")}
+                  autoComplete="current-password"
                 />
               </Form.FieldGroup>
               <div>

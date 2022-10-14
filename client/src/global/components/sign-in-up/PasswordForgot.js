@@ -118,12 +118,13 @@ export class PasswordForgotContainer extends Component {
                 value={this.state.email}
                 onChange={this.handleInputChange}
                 name="email"
-                type="text"
+                type="email"
                 id="password-forgot-email"
                 placeholder={t("forms.signin_overlay.email")}
                 aria-describedby="password-forgot-email-error"
                 label={t("forms.signin_overlay.email")}
                 errors={this.state.errors}
+                autoComplete="email"
               />
               <input
                 className="button-secondary button-secondary--with-room"

@@ -198,6 +198,7 @@ export class UpdateFormContainer extends Component {
             name="attributes[nickname]"
             errors={errors}
             idForError="update-nickname-error"
+            autoComplete="nickname"
           />
         </div>
         {__BROWSER__ ? (
@@ -274,6 +275,7 @@ export class UpdateFormContainer extends Component {
             errors={errors}
             idForError="update-firstName-error"
             label={t("forms.signin_overlay.first_name")}
+            autoComplete="given-name"
           />
         </div>
         <Unwrapped.Input
@@ -287,10 +289,11 @@ export class UpdateFormContainer extends Component {
           errors={errors}
           idForError="update-lastName-error"
           label={t("forms.signin_overlay.last_name")}
+          autoComplete="family-name"
         />
         <Unwrapped.Input
           value={this.state.email}
-          type="text"
+          type="email"
           id="update-email"
           aria-describedby="update-email-error"
           onChange={this.handleInputChange}
@@ -311,6 +314,7 @@ export class UpdateFormContainer extends Component {
           errors={errors}
           idForError="update-password-error"
           label={t("forms.signin_overlay.password")}
+          autoComplete="new-password"
         />
         <Unwrapped.Input
           value={this.state.passwordConfirmation}
@@ -323,6 +327,7 @@ export class UpdateFormContainer extends Component {
           errors={errors}
           idForError="update-passwordConfirmation-error"
           label={t("forms.signin_overlay.confirm_password")}
+          autoComplete="new-password"
         />
       </>
     );
