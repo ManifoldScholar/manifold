@@ -50,7 +50,12 @@ module V1
       accent_color: Types::String,
       header_foreground_color: Types::String,
       header_foreground_active_color: Types::String,
-      header_background_color: Types::String
+      header_background_color: Types::String,
+      string_signup_terms_header: Types::String,
+      string_signup_terms_one: Types::String,
+      string_signup_terms_two: Types::String,
+      string_data_use_header: Types::String,
+      string_data_use_copy: Types::String
     )
     typed_attribute :integrations, Types::Hash.schema(
       facebook_app_id: Types::String,

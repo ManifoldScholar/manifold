@@ -29,6 +29,24 @@ class Settings < ApplicationRecord
       closing: "Sincerely,\nThe Manifold Team",
       delivery_method: "sendmail"
     },
+    theme: {
+      string_signup_terms_header: "First things first...",
+      string_signup_terms_one: "When you create an account, we will collect and store your name and email address for account management purposes.",
+      string_signup_terms_two: "This site will also store the annotations and highlights you create on texts, and it will keep track of content that you've starred. Depending on its configuration, this site may store anonymous data on how the site is being used.",
+      string_data_use_header: "What data does Manifold store about me?",
+      string_data_use_copy: <<~HEREDOC
+Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo eget malesuada.
+
+### INTERNAL ANALYTICS
+Manifold stores anonymous data about what pages users access and how much time they spend on those pages. There is no personally identifiable information stored in relation to usage data.
+
+### ANNOTATIONS AND COMMENTS
+When you create a highlight, annotate a text, or write a comment, Manifold stores it in the database.
+
+### READING GROUPS
+Manifold stores basic information about each reading group, the content that has been collected in the group, and the group's members.
+      HEREDOC
+    },
     ingestion: {
       global_styles: "",
       mammoth_style_map: ""

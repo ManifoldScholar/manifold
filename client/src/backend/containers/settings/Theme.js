@@ -161,6 +161,33 @@ export class SettingsThemeContainer extends PureComponent {
                 ]}
               />
             </Form.FieldGroup>
+            <Form.FieldGroup label={t("settings.theme.content_header")}>
+              <Form.TextInput
+                wide
+                label={t("settings.theme.string_signup_terms_header")}
+                name="attributes[theme][stringSignupTermsHeader]"
+              />
+              <Form.TextArea
+                wide
+                label={t("settings.theme.string_signup_terms_two")}
+                name="attributes[theme][stringSignupTermsOne]"
+              />
+              <Form.TextArea
+                wide
+                label={t("settings.theme.string_signup_terms_one")}
+                name="attributes[theme][stringSignupTermsTwo]"
+              />
+              <Form.TextInput
+                wide
+                label={t("settings.theme.string_data_use_header")}
+                name="attributes[theme][stringDataUseHeader]"
+              />
+              <Form.TextArea
+                wide
+                label={t("settings.theme.string_data_use_copy")}
+                name="attributes[theme][stringDataUseCopy]"
+              />
+            </Form.FieldGroup>
             <Form.Save text={t("settings.save")} />
           </FormContainer.Form>
         </Layout.BackendPanel>
