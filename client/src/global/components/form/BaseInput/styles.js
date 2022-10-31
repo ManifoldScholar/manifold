@@ -6,8 +6,10 @@ import {
   defaultTransitionProps,
   fluidScale,
   respond,
-  fillOnFocus
+  fillOnFocus,
+  rgba
 } from "theme/styles/mixins";
+import { transientOptions } from "helpers/emotionHelpers";
 
 export const BaseInput = styled.input`
   ${formInputBase}
@@ -126,14 +128,18 @@ export const WrapperWithActions = styled.div`
   }
 `;
 
-export const ActionGroup = styled.div`
+export const ActionGroup = styled("div", transientOptions)`
+  --border-color: ${({ $secondary }) =>
+    $secondary ? `var(--input-border-color)` : `var(--color-base-neutral80)`};
+
   grid-area: actions;
   margin-top: 12px;
 
   ${respond(
     `
       margin-top: 0;
-      border-bottom: 1px solid var(--color-base-neutral80);
+      border-bottom: 1px solid;
+      border-color: var(--border-color);
     `,
     60
   )}
@@ -162,4 +168,19 @@ export const Action = styled.button`
   & + & {
     margin-left: 8px;
   }
+
+  ${({ $secondary }) =>
+    $secondary &&
+    `
+      border: 1px solid;
+      background-color: transparent;
+      color: var(--input-border-color);
+
+      ${fillOnFocus(rgba("neutral70", 0.2))}
+
+      &:hover {
+        color: var(--color-neutral-text-extra-dark);
+        background-color: var(--color-base-neutral45);
+      }
+    `}
 `;

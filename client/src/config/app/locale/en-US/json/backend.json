@@ -213,6 +213,16 @@
         "add_text_category": "Add a Text Category",
         "include_texts_in_category": "Include Texts in these Categories"
       },
+      "text_create": {
+        "text_title": "Text Title",
+        "title_placeholder": "New Text Title",
+        "cover_section_label": "Cover",
+        "cover_instructions": "Add some instruction text here.",
+        "sections_section_label": "Sections",
+        "sections_instructions": "Add more instruction text here.",
+        "section_name_placeholder": "Enter section name",
+        "save_button_label": "Save New Text"
+      },
       "ingestion": {
         "instructions": "Manifold can ingest texts from single files or a .zip collection. See the <1>documentation</1> for supported file types and directory structure.",
         "upload_file": "Upload a file",
