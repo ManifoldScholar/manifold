@@ -185,7 +185,8 @@
       "greeting": "Hello, <0>{{name}}</0>.",
       "update_notification_header": "Profile updated successfully!",
       "terms_header": "First things first...",
-      "accept_checkbox_label": "I agree to {{installationName}}'s <privacyLink>privacy policy</privacyLink> and <termsLink>terms and conditions.</termsLink>"
+      "accept_checkbox_label": "I agree to {{installationName}}'s <privacyLink>privacy policy</privacyLink> and <termsLink>terms and conditions.</termsLink>",
+      "accept_checkbox_label_truncated": "I agree to {{installationName}}'s <termsLink>terms and conditions.</termsLink>"
     },
     "attribute_map": {
       "cancel": "Cancel mapping of {{name}} to {{mapping}}",
