@@ -172,7 +172,13 @@
         "disabled": "Disabled",
         "always": "Always Visible",
         "standalone": "Only Visible in Standalone Mode"
-      }
+      },
+      "content_header": "Content",
+      "string_signup_terms_header": "Signup T&C View Header",
+      "string_signup_terms_one": "Signup T&C View First Paragraph",
+      "string_signup_terms_two":  "Signup T&C View Second Paragraph",
+      "string_data_use_header": "Account Data Use Header",
+      "string_data_use_copy":  "Account Data Use Copy (Markdown)"
     }
   }
 }
