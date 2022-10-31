@@ -62,6 +62,7 @@ export default {
   ProjectTextIngestionNew: Project.Text.Ingestion.New,
   ProjectTextIngestionEdit: Project.Text.Ingestion.Edit,
   IngestionIngest: Ingestion.Ingest,
+  ProjectTextCreate: Project.Text.Create,
   ProjectCategoryWrapper: Project.Category.Wrapper,
   ProjectCategoryNew: Project.Category.New,
   ProjectCategoryEdit: Project.Category.Edit,
