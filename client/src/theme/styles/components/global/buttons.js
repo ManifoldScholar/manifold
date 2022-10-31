@@ -345,6 +345,12 @@ export default `
     gap: 20px;
     margin-bottom: 35px;
 
+    &.authoring-drawer {
+      margin-top: 20px;
+      gap: 24px;
+      justify-content: flex-start;
+    }
+
     &.right {
       justify-content: flex-end;
     }
