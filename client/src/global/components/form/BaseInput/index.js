@@ -52,10 +52,12 @@ export class FormBaseInput extends PureComponent {
   }
 
   renderButtons(buttons) {
+    const secondary = this.context?.styleType === "secondary";
     return (
-      <Styled.ActionGroup>
+      <Styled.ActionGroup $secondary={secondary}>
         {buttons.map(button => (
           <Styled.Action
+            $secondary={secondary}
             type="button"
             key={button.label}
             onClick={event =>
