@@ -355,7 +355,6 @@ const routes = {
       exact: true,
       component: "MyStarred",
       path: "/my/starred",
-      isLibrary: true,
       helper: () => "/my/starred"
     },
     {
@@ -363,7 +362,6 @@ const routes = {
       exact: true,
       component: "MyAnnotations",
       path: "/my/notes",
-      isLibrary: true,
       helper: () => "/my/notes"
     },
     {
