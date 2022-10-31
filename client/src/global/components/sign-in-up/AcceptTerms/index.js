@@ -58,10 +58,14 @@ export default function AcceptTerms({ handleViewChange }) {
     <>
       <Styled.Header>{t("forms.signin_overlay.terms_header")}</Styled.Header>
       <Styled.TextBlock>
-        When you create an account, we will collect and store your name and email address for account management purposes.
+        When you create an account, we will collect and store your name and
+        email address for account management purposes.
       </Styled.TextBlock>
       <Styled.TextBlock>
-        This site will also store the annotations and highlights you create on texts, and it will keep track of content that you've starred. Depending on its configuration, this site may store anonymous data on how the site is being used.
+        This site will also store the annotations and highlights you create on
+        texts, and it will keep track of content that you've starred. Depending
+        on its configuration, this site may store anonymous data on how the site
+        is being used.
       </Styled.TextBlock>
 
       <AcceptTermsCheckbox
