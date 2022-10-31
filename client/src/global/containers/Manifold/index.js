@@ -79,7 +79,9 @@ class ManifoldContainer extends PureComponent {
       const anonConsent = cookie.read("anonAnalyticsConsent");
       const consentGoogleAnalytics =
         (auth.authenticated && !!auth.currentUser.consentGoogleAnalytics) ||
-        (!auth.authenticated && !!anonConsent.consentGoogleAnalytics);
+        (!auth.authenticated &&
+          anonConsent &&
+          !!anonConsent.consentGoogleAnalytics);
 
       if (!consentGoogleAnalytics) {
         ReactGA.gtag("consent", "default", {
