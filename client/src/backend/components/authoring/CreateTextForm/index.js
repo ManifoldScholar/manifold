@@ -14,8 +14,7 @@ export default function CreateTextForm({
   const history = useHistory();
   const { t } = useTranslation();
 
-  const buttonClasses =
-    "button-secondary button-secondary--outlined buttons-icon-horizontal__button";
+  const buttonClasses = "button-secondary button-secondary--outlined";
 
   const handleCancelClick = e => {
     e.preventDefault();
@@ -50,20 +49,20 @@ export default function CreateTextForm({
           placeholder={t("backend.forms.text_create.section_name_placeholder")}
           buttons={[{ label: t("actions.create") }]}
         />
-      </Form.FieldGroup>
-      <div className="buttons-icon-horizontal">
-        <button type="submit" className={buttonClasses} disabled={false}>
-          <span>{t("backend.forms.text_create.save_button_label")}</span>
-        </button>
-        {cancelUrl ? (
-          <button
-            onClick={handleCancelClick}
-            className={classNames(buttonClasses, "button-secondary--dull")}
-          >
-            <span>{t("actions.cancel")}</span>
+        <div className="buttons-icon-horizontal authoring-drawer">
+          <button type="submit" className={buttonClasses} disabled={false}>
+            <span>{t("backend.forms.text_create.save_button_label")}</span>
           </button>
-        ) : null}
-      </div>
+          {cancelUrl ? (
+            <button
+              onClick={handleCancelClick}
+              className={classNames(buttonClasses, "button-secondary--dull")}
+            >
+              <span>{t("actions.cancel")}</span>
+            </button>
+          ) : null}
+        </div>
+      </Form.FieldGroup>
     </FormContainer.Form>
   );
 }
