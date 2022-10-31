@@ -214,10 +214,12 @@
         "include_texts_in_category": "Include Texts in these Categories"
       },
       "ingestion": {
-        "instructions": "Manifold can ingest texts from single files or a .zip collection.<0/>See the <1>documentation</1> for supported file types and directory structure.",
+        "instructions": "Manifold can ingest texts from single files or a .zip collection. See the <1>documentation</1> for supported file types and directory structure.",
         "upload_file": "Upload a file",
+        "upload_from_url": "Upload from URL",
         "url": "URL",
-        "url_instructions": "Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file."
+        "url_instructions": "Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.",
+        "url_placeholder": "enter url here..."
       },
       "issue": {
         "number": "Number",

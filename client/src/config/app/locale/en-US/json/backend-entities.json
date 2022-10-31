@@ -187,8 +187,10 @@
     }
   },
   "texts": {
-    "add_text_label": "Add a new text",
-    "add_category_label": "Create a new category",
+    "ingest_button_label": "Ingest New Text",
+    "ingest_truncated": "Ingest",
+    "create_button_label": "Create New Text",
+    "create_category_button_label": "Create New Category",
     "category_new_header": "Create Category",
     "category_edit_header": "Edit Category",
     "enable_epub": "Enable EPUB",
