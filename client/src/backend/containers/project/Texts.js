@@ -208,7 +208,7 @@ export class ProjectTextsContainer extends Component {
               </span>
             </Link>
             <Link
-              to={lh.link("backendProjectTextsIngestionsNew", this.project.id)}
+              to={lh.link("backendProjectTextsCreate", this.project.id)}
               className={this.buttonClasses}
             >
               <span className="screen-reader-text">
