@@ -19,7 +19,7 @@ export default function AcceptTerms({ handleViewChange }) {
     p => p.attributes.purpose === "privacy_policy"
   );
 
-  const checkboxLabel = (
+  const checkboxLabel = privacyPolicy ? (
     <Trans
       i18nKey="forms.signin_overlay.accept_checkbox_label"
       values={{ installationName }}
@@ -31,6 +31,18 @@ export default function AcceptTerms({ handleViewChange }) {
         ),
         privacyLink: privacyPolicy ? (
           <a href={`/page/${privacyPolicy.attributes.slug}`}>#</a>
+        ) : (
+          <></>
+        )
+      }}
+    />
+  ) : (
+    <Trans
+      i18nKey="forms.signin_overlay.accept_checkbox_label_truncated"
+      values={{ installationName }}
+      components={{
+        termsLink: termsPage ? (
+          <a href={`/page/${termsPage.attributes.slug}`}>#</a>
         ) : (
           <></>
         )
