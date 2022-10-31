@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Form from "global/components/form";
 import setter from "global/components/form/setter";
-import IconComposer from "global/components/utility/IconComposer";
-import { DrawerContext } from "helpers/contexts";
 import { Trans, withTranslation } from "react-i18next";
 import { t } from "i18next";
 
@@ -49,8 +47,8 @@ class IngestionFormUpload extends PureComponent {
   get buttonClasses() {
     return classNames(
       "buttons-icon-horizontal__button",
-      "button-icon-secondary",
-      "button-icon-secondary--in-drawer"
+      "button-secondary",
+      "button-secondary--outlined"
     );
   }
 
@@ -62,14 +60,14 @@ class IngestionFormUpload extends PureComponent {
   };
 
   render() {
-    const formHeader = this.props.header || "Upload";
+    const formHeader =
+      this.props.header || t("backend.forms.ingestion.upload_file");
 
     const fileInstructions = (
       <span className="instructions">
         <Trans
           i18nKey="backend.forms.ingestion.instructions"
           components={[
-            <br />,
             <a
               href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
               target="_blank"
@@ -84,63 +82,52 @@ class IngestionFormUpload extends PureComponent {
 
     /* eslint-disable max-len */
     return (
-      <DrawerContext.Consumer>
-        {contextProps => (
-          <div>
-            <Form.Header label={formHeader} id={contextProps?.headerId} />
-            <Form.TusUpload
-              inlineStyle={{ width: "100%" }}
-              layout="landscape"
-              instructions={fileInstructions}
-              label={t("backend.forms.ingestion.upload_file")}
-              value={this.props.getModelValue("attributes[source]")}
-              initialValue={this.props.getModelValue(
-                "attributes[sourceFileName]"
-              )}
-              set={this.onSourceChange}
-              accepts="any"
-            />
-            <Form.Divider>{t("common.or")}</Form.Divider>
-            <Form.TextInput
-              label={t("backend.forms.ingestion.url")}
-              focusOnMount
-              instructions={t("backend.forms.ingestion.url_instructions")}
-              value={this.props.getModelValue("attributes[externalSourceUrl]")}
-              onChange={event => this.onUrlChange(event)}
-            />
-            <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
-              {this.props.cancelUrl ? (
-                <button
-                  onClick={this.handleCancelClick}
-                  className={classNames(
-                    this.buttonClasses,
-                    "button-icon-secondary--dull"
-                  )}
-                >
-                  <IconComposer
-                    icon="close16"
-                    size="default"
-                    className="button-icon-secondary__icon"
-                  />
-                  <span>{t("actions.cancel")}</span>
-                </button>
-              ) : null}
+      <>
+        <Form.FieldGroup label={formHeader} instructions={fileInstructions}>
+          <Form.TusUpload
+            inlineStyle={{ width: "100%" }}
+            layout="landscape"
+            value={this.props.getModelValue("attributes[source]")}
+            initialValue={this.props.getModelValue(
+              "attributes[sourceFileName]"
+            )}
+            set={this.onSourceChange}
+            accepts="any"
+          />
+        </Form.FieldGroup>
+        <Form.FieldGroup
+          label={t("backend.forms.ingestion.upload_from_url")}
+          instructions={t("backend.forms.ingestion.url_instructions")}
+        >
+          <Form.TextInput
+            label={t("backend.forms.ingestion.url")}
+            focusOnMount
+            value={this.props.getModelValue("attributes[externalSourceUrl]")}
+            onChange={event => this.onUrlChange(event)}
+            placeholder={t("backend.forms.ingestion.url_placeholder")}
+          />
+          <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
+            <button
+              type="submit"
+              className={this.buttonClasses}
+              disabled={!this.valid}
+            >
+              <span>{t("actions.continue")}</span>
+            </button>
+            {this.props.cancelUrl ? (
               <button
-                type="submit"
-                className={this.buttonClasses}
-                disabled={!this.valid}
+                onClick={this.handleCancelClick}
+                className={classNames(
+                  this.buttonClasses,
+                  "button-secondary--dull"
+                )}
               >
-                <IconComposer
-                  icon="checkmark16"
-                  size="default"
-                  className="button-icon-secondary__icon"
-                />
-                <span>{t("actions.continue")}</span>
+                <span>{t("actions.cancel")}</span>
               </button>
-            </div>
+            ) : null}
           </div>
-        )}
-      </DrawerContext.Consumer>
+        </Form.FieldGroup>
+      </>
     );
   }
 }
