@@ -58,15 +58,12 @@ export default function AcceptTerms({ handleViewChange }) {
     <>
       <Styled.Header>{t("forms.signin_overlay.terms_header")}</Styled.Header>
       <Styled.TextBlock>
-        Use this area to describe how Manifold uses your data. Nulla porttitor
-        accumsan tincidunt. Vivamus magna justo, lacinia eget consectetur sed,
-        convallis at tellus.
+        When you create an account, we will collect and store your name and email address for account management purposes.
       </Styled.TextBlock>
       <Styled.TextBlock>
-        Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
-        Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo
-        eget malesuada.
+        This site will also store the annotations and highlights you create on texts, and it will keep track of content that you've starred. Depending on its configuration, this site may store anonymous data on how the site is being used.
       </Styled.TextBlock>
+
       <AcceptTermsCheckbox
         onChange={() => setAccepted(!accepted)}
         label={checkboxLabel}

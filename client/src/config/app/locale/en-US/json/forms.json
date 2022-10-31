@@ -217,11 +217,11 @@
       "no_analytics_message": "{{name}} does not use cookies to track your activity.",
       "internal_analytics": {
         "label": "Internal Analytics",
-        "description": "VISIT_TOKEN & VISITOR_TOKEN for Manifold's anonymous internal analytics"
+        "description": "Selecting yes will allow this site to set a VISIT_TOKEN & VISITOR_TOKEN for its anonymous internal analytics."
       },
       "google_analytics": {
         "label": "Google Analytics",
-        "description": "Mmm, cookies"
+        "description": "Selecting yes will allow Google Analytics to record your anonymized interactions with the site. This helps us understand how this site is being used."
       },
       "submit_button": "Save Changes",
       "account_data": "Account Data",
