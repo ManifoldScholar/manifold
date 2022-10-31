@@ -647,6 +647,7 @@ export default `
       height: 24px;
       margin-right: 6px;
       margin-left: -5px;
+      padding-bottom: 2px;
     }
   }
 `;
