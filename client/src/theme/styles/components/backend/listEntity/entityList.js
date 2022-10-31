@@ -200,8 +200,13 @@ export default `.entity-list {
 
   &__button-set-flex {
     display: flex;
-    gap: 12px;
+    column-gap: 12px;
+    row-gap: 24px;
     flex-wrap: wrap;
+
+    .entity-list__button + .entity-list__button {
+      margin-top: 0;
+    }
 
     .full {
       display: none;
