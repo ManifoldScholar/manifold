@@ -45,11 +45,7 @@ class IngestionFormUpload extends PureComponent {
   }
 
   get buttonClasses() {
-    return classNames(
-      "buttons-icon-horizontal__button",
-      "button-secondary",
-      "button-secondary--outlined"
-    );
+    return classNames("button-secondary", "button-secondary--outlined");
   }
 
   handleCancelClick = event => {
@@ -106,7 +102,7 @@ class IngestionFormUpload extends PureComponent {
             onChange={event => this.onUrlChange(event)}
             placeholder={t("backend.forms.ingestion.url_placeholder")}
           />
-          <div style={{ marginTop: 30 }} className="buttons-icon-horizontal">
+          <div className="buttons-icon-horizontal authoring-drawer">
             <button
               type="submit"
               className={this.buttonClasses}
