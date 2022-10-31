@@ -193,27 +193,48 @@ export class ProjectTextsContainer extends Component {
                 {t("backend_entities.texts.add_text_label")}
               </span>
               <IconComposer
-                icon="circlePlus32"
-                size={18}
+                icon="export24"
+                size={16}
                 className={classNames(
                   "button-icon-secondary__icon",
                   "button-icon-secondary__icon--large"
                 )}
               />
               <span className="full" aria-hidden="true">
-                {t("backend_entities.texts.add_text_label")}
+                {t("backend_entities.texts.ingest_button_label")}
+              </span>
+              <span className="abbreviated" aria-hidden="true">
+                {t("backend_entities.texts.ingest_truncated")}
+              </span>
+            </Link>
+            <Link
+              to={lh.link("backendProjectTextsIngestionsNew", this.project.id)}
+              className={this.buttonClasses}
+            >
+              <span className="screen-reader-text">
+                {t("backend_entities.texts.create_button_label")}
+              </span>
+              <IconComposer
+                icon="copy24"
+                size={16}
+                className={classNames(
+                  "button-icon-secondary__icon",
+                  "button-icon-secondary__icon--large"
+                )}
+              />
+              <span className="full" aria-hidden="true">
+                {t("backend_entities.texts.create_button_label")}
               </span>
               <span className="abbreviated" aria-hidden="true">
                 {t("glossary.text_title_case_one")}
               </span>
             </Link>
-
             <Link
               to={lh.link("backendProjectCategoriesNew", this.project.id)}
               className={this.buttonClasses}
             >
               <span className="screen-reader-text">
-                {t("backend_entities.texts.add_category_label")}
+                {t("backend_entities.texts.create_category_button_label")}
               </span>
               <IconComposer
                 icon="circlePlus32"
@@ -224,7 +245,7 @@ export class ProjectTextsContainer extends Component {
                 )}
               />
               <span className="full" aria-hidden="true">
-                {t("backend_entities.texts.add_category_label")}
+                {t("backend_entities.texts.create_category_button_label")}
               </span>
               <span className="abbreviated" aria-hidden="true">
                 {t("glossary.category_title_case_one")}

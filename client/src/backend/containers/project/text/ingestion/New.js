@@ -6,6 +6,7 @@ import Ingestion from "backend/components/ingestion";
 import { requests } from "api";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
+import Navigation from "backend/components/navigation";
 
 export class IngestionNewContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -46,7 +47,10 @@ export class IngestionNewContainer extends PureComponent {
 
   render() {
     return (
-      <div>
+      <section>
+        <Navigation.DrawerHeader
+          title={this.props.t("backend_entities.texts.ingest_button_label")}
+        />
         <Ingestion.Form.Wrapper
           cancelUrl={lh.link("backendProjectTexts", this.projectId)}
           location={this.props.location}
@@ -54,9 +58,8 @@ export class IngestionNewContainer extends PureComponent {
           name={requests.beIngestionCreate}
           project={this.props.project}
           triggerClose={this.props.triggerClose}
-          header={this.props.t("backend_entities.texts.add_text_label")}
         />
-      </div>
+      </section>
     );
   }
 }
