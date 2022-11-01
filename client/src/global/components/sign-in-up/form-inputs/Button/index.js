@@ -59,7 +59,7 @@ Button.displayName = "Global.SignInUp.Inputs.Button";
 
 Button.propTypes = {
   icon: PropTypes.string,
-  iconSize: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  iconSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   iconLeft: PropTypes.bool,
   label: PropTypes.string,
   onClick: PropTypes.func,
