@@ -86,43 +86,39 @@ export class FormSelect extends Component {
     return (
       <UIDConsumer>
         {id => (
-          <FieldWrapper>
-            <Errorable
-              name={this.props.name}
-              errors={this.props.errors}
+          <Errorable
+            name={this.props.name}
+            errors={this.props.errors}
+            label={this.props.label}
+            idForError={`${this.idForErrorPrefix}-${id}`}
+          >
+            <BaseLabel
+              id={`${this.idPrefix}-${id}`}
+              styleType={this.props.rounded ? "tertiary" : styleType}
               label={this.props.label}
-              idForError={`${this.idForErrorPrefix}-${id}`}
-            >
-              <BaseLabel
+              isSelect
+            />
+            <WrapperTag>
+              <IconComponent icon="disclosureDown24" size={24} />
+              <SelectComponent
                 id={`${this.idPrefix}-${id}`}
-                styleType={this.props.rounded ? "tertiary" : styleType}
-                label={this.props.label}
-                isSelect
+                aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
+                onChange={this.props.onChange}
+                value={this.props.optionsMeta?.stringValue || this.props.value}
+                ref={input => {
+                  this.inputElement = input;
+                }}
+              >
+                {options}
+              </SelectComponent>
+            </WrapperTag>
+            {this.props.instructions && (
+              <Instructions
+                instructions={this.props.instructions}
+                id={`${this.idForInstructionsPrefix}-${id}`}
               />
-              <WrapperTag>
-                <IconComponent icon="disclosureDown24" size={24} />
-                <SelectComponent
-                  id={`${this.idPrefix}-${id}`}
-                  aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
-                  onChange={this.props.onChange}
-                  value={
-                    this.props.optionsMeta?.stringValue || this.props.value
-                  }
-                  ref={input => {
-                    this.inputElement = input;
-                  }}
-                >
-                  {options}
-                </SelectComponent>
-              </WrapperTag>
-              {this.props.instructions && (
-                <Instructions
-                  instructions={this.props.instructions}
-                  id={`${this.idForInstructionsPrefix}-${id}`}
-                />
-              )}
-            </Errorable>
-          </FieldWrapper>
+            )}
+          </Errorable>
         )}
       </UIDConsumer>
     );
