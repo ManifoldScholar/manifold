@@ -80,6 +80,7 @@ Manifold stores basic information about each reading group, the content that has
 
   has_formatted_attributes :copyright, include_wrap: false, container: :general
   has_formatted_attributes :restricted_access_body, include_wrap: false, container: :general
+  has_formatted_attributes :string_data_use_copy, include_wrap: false, container: :theme
 
   # Callbacks
   after_update :update_oauth_providers!
