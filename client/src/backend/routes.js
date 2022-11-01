@@ -237,10 +237,20 @@ const routes = {
             },
             {
               name: "backendTextSections",
-              exact: true,
+              exact: false,
               component: "TextSections",
               path: "/backend/projects/text/:id/sections",
-              helper: t => `/backend/projects/text/${t}/sections`
+              helper: t => `/backend/projects/text/${t}/sections`,
+              routes: [
+                {
+                  name: "backendTextSectionsNew",
+                  exact: true,
+                  component: "TextSectionsNew",
+                  path: "/backend/projects/text/:id/sections/new",
+                  helper: t => `/backend/projects/text/${t}/sections/new`,
+                  modal: true
+                }
+              ]
             }
           ]
         },
