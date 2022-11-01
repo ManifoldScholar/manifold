@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
-import { fluidScale, respond, formLabelPrimary } from "theme/styles/mixins";
+import {
+  fluidScale,
+  respond,
+  formLabelPrimary,
+  headingPrimary
+} from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 
 export const Columns = styled.div`
@@ -22,13 +27,28 @@ export const ImagePlaceholder = styled.div`
   background-color: var(--color-accent-primary-light);
 `;
 
-export const CategoryHeader = styled.h2`
-  ${formLabelPrimary}
-  display: block;
-  font-size: 14px;
-  margin-block: 25px;
+export const Header = styled.h1`
+  ${headingPrimary}
+  margin-bottom: 25px;
 `;
 
-export const Text = styled.p`
+export const Body = styled.div`
   font-family: var(--font-family-copy);
+
+  h1 {
+    ${headingPrimary}
+    margin-bottom: 25px;
+  }
+
+  h2,
+  h3 {
+    ${formLabelPrimary}
+    display: block;
+    font-size: 14px;
+    margin-block: 25px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
 `;

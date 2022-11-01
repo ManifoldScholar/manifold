@@ -169,12 +169,12 @@ export class SettingsThemeContainer extends PureComponent {
               />
               <Form.TextArea
                 wide
-                label={t("settings.theme.string_signup_terms_two")}
+                label={t("settings.theme.string_signup_terms_one")}
                 name="attributes[theme][stringSignupTermsOne]"
               />
               <Form.TextArea
                 wide
-                label={t("settings.theme.string_signup_terms_one")}
+                label={t("settings.theme.string_signup_terms_two")}
                 name="attributes[theme][stringSignupTermsTwo]"
               />
               <Form.TextInput
