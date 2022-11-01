@@ -5,6 +5,7 @@ import Collaborators from "./Collaborators";
 import Ingestion from "./ingestion";
 import Styles from "./Styles";
 import Analytics from "./Analytics";
+import Sections from "./Sections";
 
 export default {
   Properties,
@@ -13,5 +14,6 @@ export default {
   Collaborators,
   Ingestion,
   Styles,
-  Analytics
+  Analytics,
+  Sections
 };
