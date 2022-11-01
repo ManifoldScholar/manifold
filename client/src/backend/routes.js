@@ -234,6 +234,13 @@ const routes = {
               component: "TextProperties",
               path: "/backend/projects/text/:id/properties",
               helper: t => `/backend/projects/text/${t}/properties`
+            },
+            {
+              name: "backendTextSections",
+              exact: true,
+              component: "TextSections",
+              path: "/backend/projects/text/:id/sections",
+              helper: t => `/backend/projects/text/${t}/sections`
             }
           ]
         },
