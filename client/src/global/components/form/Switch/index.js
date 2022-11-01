@@ -132,12 +132,12 @@ class FormSwitch extends Component {
               htmlFor={`${this.idPrefix}-${id}`}
               $inline={this.props.labelPos === "inline"}
             >
-              {this.props.labelPos === "above" ||
-                (this.props.labelPos === "inline" && (
-                  <LabelText $marginEnd={this.props.isPrimary}>
-                    {this.props.label}
-                  </LabelText>
-                ))}
+              {(this.props.labelPos === "above" ||
+                this.props.labelPos === "inline") && (
+                <LabelText $marginEnd={this.props.isPrimary}>
+                  {this.props.label}
+                </LabelText>
+              )}
               <Input
                 ref={c => {
                   this.checkbox = c;
