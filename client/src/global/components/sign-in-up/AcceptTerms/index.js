@@ -11,7 +11,12 @@ export default function AcceptTerms({ handleViewChange }) {
   const pages = useFromStore("gPages", "select");
   const settings = useFromStore("settings", "select");
 
-  const installationName = settings?.attributes?.general?.installationName;
+  const { attributes } = settings ?? {};
+  const installationName = attributes?.general?.installationName;
+  const header = attributes?.theme?.stringSignupTermsHeader;
+  const textOne = attributes?.theme?.stringSignupTermsOne;
+  const textTwo = attributes?.theme?.stringSignupTermsTwo;
+
   const termsPage = pages?.find(
     p => p.attributes.purpose === "terms_and_conditions"
   );
@@ -56,18 +61,9 @@ export default function AcceptTerms({ handleViewChange }) {
 
   return termsPage ? (
     <>
-      <Styled.Header>{t("forms.signin_overlay.terms_header")}</Styled.Header>
-      <Styled.TextBlock>
-        When you create an account, we will collect and store your name and
-        email address for account management purposes.
-      </Styled.TextBlock>
-      <Styled.TextBlock>
-        This site will also store the annotations and highlights you create on
-        texts, and it will keep track of content that you've starred. Depending
-        on its configuration, this site may store anonymous data on how the site
-        is being used.
-      </Styled.TextBlock>
-
+      <Styled.Header>{header}</Styled.Header>
+      {textOne && <Styled.TextBlock>{textOne}</Styled.TextBlock>}
+      {textTwo && <Styled.TextBlock>{textTwo}</Styled.TextBlock>}
       <AcceptTermsCheckbox
         onChange={() => setAccepted(!accepted)}
         label={checkboxLabel}
