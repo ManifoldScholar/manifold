@@ -54,6 +54,7 @@ export default {
   TextIngestionEdit: Text.Ingestion.Edit,
   TextProperties: Text.Properties,
   TextSections: Text.Sections,
+  TextSectionsNew: Text.Section.New,
   ProjectCollectionWrapper: ProjectCollection.Wrapper,
   ProjectCollectionDetail: ProjectCollection.Detail,
   ProjectCollectionManageProjects: ProjectCollection.ManageProjects,
