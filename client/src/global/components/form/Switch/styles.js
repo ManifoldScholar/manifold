@@ -146,13 +146,18 @@ export const Label = styled.label`
   display: flex;
   flex-wrap: wrap;
 
-  ${({ $inline }) =>
-    $inline &&
+  ${({ $inline, $below }) =>
     `
-    --Switch-child-flex-basis: auto;
-    --IndicatorSwitchInner-translateY: 0;
+      ${
+        $inline
+          ? `--Switch-child-flex-basis: auto;
+        --IndicatorSwitchInner-translateY: 0;
 
-    align-items: center;
-    gap: 1em;
-  `}
+        align-items: center;
+        gap: 1em;
+      `
+          : ``
+      }
+      ${$below ? `--input-border-color: transparent;` : ``}
+    `}
 `;

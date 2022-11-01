@@ -15,7 +15,6 @@ class FormSwitch extends Component {
     label: PropTypes.string,
     labelPos: PropTypes.oneOf(["above", "below", "inline"]),
     className: PropTypes.string,
-    labelClass: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     set: PropTypes.func,
     value: PropTypes.any,
@@ -131,6 +130,7 @@ class FormSwitch extends Component {
             <Styled.Label
               htmlFor={`${this.idPrefix}-${id}`}
               $inline={this.props.labelPos === "inline"}
+              $below={this.props.labelPos === "below"}
             >
               {(this.props.labelPos === "above" ||
                 this.props.labelPos === "inline") && (
