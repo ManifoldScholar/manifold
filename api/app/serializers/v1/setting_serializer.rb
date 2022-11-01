@@ -55,9 +55,12 @@ module V1
       string_signup_terms_one: Types::String,
       string_signup_terms_two: Types::String,
       string_data_use_header: Types::String,
-      string_data_use_copy: Types::String
+      string_data_use_copy: Types::String,
+      string_cookies_banner_header: Types::String,
+      string_cookies_banner_copy: Types::String
     )
     typed_attribute :string_data_use_copy_formatted, Types::String.meta(read_only: true)
+    typed_attribute :string_cookies_banner_copy_formatted, Types::String.meta(read_only: true)
     typed_attribute :integrations, Types::Hash.schema(
       facebook_app_id: Types::String,
       twitter_app_id: Types::String,

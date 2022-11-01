@@ -17,7 +17,7 @@ export default function NarrowBanner({
       <Styled.Inner>
         <Styled.TextWrapper>
           <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
-          <p>{message}</p>
+          <p dangerouslySetInnerHTML={{ __html: message }} />
         </Styled.TextWrapper>
         <Styled.ButtonWrapper>
           <button

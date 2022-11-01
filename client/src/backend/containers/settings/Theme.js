@@ -187,6 +187,16 @@ export class SettingsThemeContainer extends PureComponent {
                 label={t("settings.theme.string_data_use_copy")}
                 name="attributes[theme][stringDataUseCopy]"
               />
+              <Form.TextInput
+                wide
+                label={t("settings.theme.string_cookies_banner_header")}
+                name="attributes[theme][stringCookiesBannerHeader]"
+              />
+              <Form.TextArea
+                wide
+                label={t("settings.theme.string_cookies_banner_copy")}
+                name="attributes[theme][stringCookiesBannerCopy]"
+              />
             </Form.FieldGroup>
             <Form.Save text={t("settings.save")} />
           </FormContainer.Form>

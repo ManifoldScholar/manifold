@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Trans } from "react-i18next";
 import { useFromStore, useApiCallback } from "hooks";
 import { meAPI } from "api";
 import NarrowBanner from "./NarrowBanner";
@@ -27,12 +26,7 @@ export default function CurrentUserBanner() {
   if (!(consentNeededGoogleAnalytics || consentNeededManifoldAnalytics))
     return null;
 
-  const message = (
-    <Trans
-      i18nKey="messages.cookies_banner.body"
-      components={[<Link to={`/privacy`} />]}
-    />
-  );
+  const message = settings?.attributes?.stringCookiesBannerCopyFormatted;
 
   return (
     <NarrowBanner

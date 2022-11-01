@@ -176,9 +176,11 @@
       "content_header": "Content",
       "string_signup_terms_header": "Signup T&C View Header",
       "string_signup_terms_one": "Signup T&C View First Paragraph",
-      "string_signup_terms_two":  "Signup T&C View Second Paragraph",
+      "string_signup_terms_two": "Signup T&C View Second Paragraph",
       "string_data_use_header": "Account Data Use Header",
-      "string_data_use_copy":  "Account Data Use Copy (Markdown)"
+      "string_data_use_copy": "Account Data Use Copy (Markdown)",
+      "string_cookies_banner_header": "Cookies Banner Header",
+      "string_cookies_banner_copy": "Cookies Banner Body (Markdown)"
     }
   }
 }
