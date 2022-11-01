@@ -86,14 +86,12 @@ export default function CreateTextForm({
           <button type="submit" className={buttonClasses} disabled={false}>
             <span>{t("backend.forms.text_create.save_button_label")}</span>
           </button>
-          {cancelUrl ? (
-            <button
-              onClick={handleCancelClick}
-              className={classNames(buttonClasses, "button-secondary--dull")}
-            >
-              <span>{t("actions.cancel")}</span>
-            </button>
-          ) : null}
+          <button
+            onClick={handleCancelClick}
+            className={classNames(buttonClasses, "button-secondary--dull")}
+          >
+            <span>{t("actions.cancel")}</span>
+          </button>
         </div>
       </Form.FieldGroup>
     </FormContainer.Form>
