@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useListFilters } from "hooks";
 import * as Styled from "./styles";
-import Form, { Unwrapped } from "global/components/form";
+import { Unwrapped } from "global/components/form";
 import { useTranslation } from "react-i18next";
 
 export default function ProjectCollectionSortBy({
@@ -34,7 +34,7 @@ export default function ProjectCollectionSortBy({
 
     return (
       <Styled.Toggle>
-        <Form.Label
+        <Styled.Label
           as="div"
           label={t("backend.forms.project_collection.order_manually")}
         />
