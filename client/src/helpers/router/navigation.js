@@ -477,6 +477,13 @@ class Navigation {
         args
       },
       {
+        label: "Sections",
+        route: "backendTextSections",
+        entity: text,
+        ability: "update",
+        args
+      },
+      {
         label: "Metadata",
         route: "backendTextMetadata",
         entity: text,
