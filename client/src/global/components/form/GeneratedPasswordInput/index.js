@@ -110,6 +110,7 @@ class FormGeneratedPasswordInput extends Component {
             errors={this.props.errors}
             label={t("forms.password_reset.password")}
             idForError={`${this.idForErrorPrefix}-${id}`}
+            className="rel"
           >
             <BaseLabel
               id={`${this.idPrefix}-${id}`}
