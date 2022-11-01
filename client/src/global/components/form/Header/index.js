@@ -17,10 +17,13 @@ export default class FormHeader extends Component {
       this.props.styleType === "primary" ? Styled.HeaderPrimary : Styled.Header;
 
     return (
-      <Header>
+      <Header $hasInstructions={this.props.instructions}>
         <h2 id={this.props.id}>{this.props.label}</h2>
         {this.props.instructions && (
-          <Instructions instructions={this.props.instructions} />
+          <Instructions
+            instructions={this.props.instructions}
+            styleType={this.props.styleType ?? "primary"}
+          />
         )}
       </Header>
     );
