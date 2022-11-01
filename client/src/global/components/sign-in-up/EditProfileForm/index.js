@@ -59,7 +59,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
         name =>
           !(
             name === "avatar" &&
-            !data.avatar.data &&
+            !data.avatar?.data &&
             data.removeAvatar === false
           )
       )
