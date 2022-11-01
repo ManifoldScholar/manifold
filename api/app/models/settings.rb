@@ -30,6 +30,8 @@ class Settings < ApplicationRecord
       delivery_method: "sendmail"
     },
     theme: {
+      string_cookies_banner_header: "Manifold uses cookies",
+      string_cookies_banner_copy: "We use cookies to analyze our traffic. Please decide if you are willing to accept cookies from our website. You can change this setting anytime in [Privacy Settings](/privacy).",
       string_signup_terms_header: "First things first...",
       string_signup_terms_one: "When you create an account, we will collect and store your name and email address for account management purposes.",
       string_signup_terms_two: "This site will also store the annotations and highlights you create on texts, and it will keep track of content that you've starred. Depending on its configuration, this site may store anonymous data on how the site is being used.",
@@ -81,6 +83,7 @@ Manifold stores basic information about each reading group, the content that has
   has_formatted_attributes :copyright, include_wrap: false, container: :general
   has_formatted_attributes :restricted_access_body, include_wrap: false, container: :general
   has_formatted_attributes :string_data_use_copy, include_wrap: false, container: :theme
+  has_formatted_attributes :string_cookies_banner_copy, include_wrap: false, container: :theme
 
   # Callbacks
   after_update :update_oauth_providers!
