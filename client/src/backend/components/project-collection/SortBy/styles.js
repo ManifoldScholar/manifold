@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { ListFilters as ListFiltersComponent } from "global/components/list";
+import Form from "global/components/form";
 import { respond, formInstructions } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
@@ -12,7 +13,7 @@ export const Wrapper = styled.div`
   ${respond(
     `
       flex-flow: row wrap;
-      align-items: center;
+      align-items: baseline;
     `,
     60
   )}
@@ -39,5 +40,8 @@ export const ListFilters = styled(ListFiltersComponent)`
 
 export const Instructions = styled.div`
   ${formInstructions}
-  font-size: 13px;
+`;
+
+export const Label = styled(Form.Label)`
+  transform: translateY(-2px);
 `;
