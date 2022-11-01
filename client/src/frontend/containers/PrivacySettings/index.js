@@ -15,7 +15,7 @@ export default function PrivacySettingsContainer() {
       failureRedirect={lh.link("frontendLogin")}
       failureNotification={{
         heading: t("errors.unauthorized.heading"),
-        body: t("errors.unauthorized.body"),
+        body: t("errors.unauthorized.privacy_body"),
         level: 2
       }}
     >

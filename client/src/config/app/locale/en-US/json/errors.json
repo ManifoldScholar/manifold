@@ -19,7 +19,8 @@
     "audio_playback": "{{ error }}<br/>This audio file is not playable in your browser.<br/><br/>Click the download button to listen to the file on your device.",
     "unauthorized": {
       "heading": "Access Denied",
-      "body": "You must be logged in to manage notification preferences."
+      "body": "You must be logged in to manage notification preferences.",
+      "privacy_body": "You must be logged in to manage privacy settings."
     },
     "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
     "color_scheme": "Manifold color scheme error!",

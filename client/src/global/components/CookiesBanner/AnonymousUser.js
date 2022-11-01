@@ -1,6 +1,4 @@
 import React, { useCallback, useState } from "react";
-import { Trans } from "react-i18next";
-import { Link } from "react-router-dom";
 import NarrowBanner from "./NarrowBanner";
 import FormEmbedBanner from "./FormEmbedBanner";
 import { useFromStore } from "hooks";
@@ -40,12 +38,7 @@ export default function AnonymousUserBanner() {
     [googleAnalyticsEnabled, manifoldAnalyticsEnabled]
   );
 
-  const message = (
-    <Trans
-      i18nKey="messages.cookies_banner.body_annonymous_user"
-      components={[<Link to={`/login`} />]}
-    />
-  );
+  const message = settings?.attributes?.stringCookiesBannerCopyFormatted;
 
   if (!consentNeeded) return null;
 

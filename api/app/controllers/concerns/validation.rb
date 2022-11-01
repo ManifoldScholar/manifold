@@ -434,7 +434,9 @@ module Validation
           :string_signup_terms_one,
           :string_signup_terms_two,
           :string_data_use_header,
-          :string_data_use_copy
+          :string_data_use_copy,
+          :string_cookies_banner_header,
+          :string_cookies_banner_copy
         ]
       },
       :remove_press_logo, attachment(:press_logo),

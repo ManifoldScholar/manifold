@@ -20,7 +20,7 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
       <Styled.Inner $wide>
         <Styled.TextWrapper>
           <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
-          <p>{message}</p>
+          <p dangerouslySetInnerHTML={{ __html: message }} />
           <Styled.Checkboxes>
             {manifoldAnalyticsEnabled && (
               <Styled.CheckboxWrapper>
