@@ -7,6 +7,7 @@ import classNames from "classnames";
 import has from "lodash/has";
 import isPlainObject from "lodash/isPlainObject";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 class ListEntitiesListSearch extends PureComponent {
   static displayName = "List.Entities.List.Search";
@@ -228,72 +229,72 @@ class ListEntitiesListSearch extends PureComponent {
                         `${baseClass}__options`
                       )}
                     >
-                      {this.filterParams.map((param, i) => (
-                        <div
-                          key={i}
-                          className={this.classNameWithStyle(
-                            `${baseClass}__option`
-                          )}
-                        >
-                          <div className={`select`}>
-                            <span
-                              className={`select__label ${
-                                i > 0 ? `select__label--empty` : ""
-                              }`}
-                            >
-                              {i === 0
-                                ? t("filters.labels.filter_results")
-                                : "\u00A0"}
-                            </span>
-                            <div className={`select__wrapper`}>
-                              <label
-                                htmlFor={`${id}-filter-${i}`}
-                                className="screen-reader-text"
-                              >
-                                {param.label === "Draft" &&
-                                  t("filters.labels.by_draft")}
-                                {param.label === "Role" &&
-                                  t("filters.labels.by_role")}
-                              </label>
-                              <select
-                                id={`${id}-filter-${i}`}
-                                onChange={e => this.setParam(e, param)}
-                                value={this.paramValue(param)}
-                              >
-                                {this.paramOptions(param).map(
-                                  (option, optionIndex) => (
-                                    <option
-                                      key={optionIndex}
-                                      value={option.value || ""}
-                                    >
-                                      {option.label}
-                                    </option>
-                                  )
-                                )}
-                              </select>
-                              <Utility.IconComposer icon="disclosureDown24" />
+                      {this.filterParams.map((param, i) => {
+                        const SelectLabel =
+                          i > 0 ? Styled.EmptySelectLabel : Styled.SelectLabel;
+                        return (
+                          <div
+                            key={i}
+                            className={this.classNameWithStyle(
+                              `${baseClass}__option`
+                            )}
+                          >
+                            <div>
+                              <SelectLabel>
+                                {i === 0
+                                  ? t("filters.labels.filter_results")
+                                  : "\u00A0"}
+                              </SelectLabel>
+                              <div className="rel">
+                                <label
+                                  htmlFor={`${id}-filter-${i}`}
+                                  className="screen-reader-text"
+                                >
+                                  {param.label === "Draft" &&
+                                    t("filters.labels.by_draft")}
+                                  {param.label === "Role" &&
+                                    t("filters.labels.by_role")}
+                                </label>
+                                <Styled.Select
+                                  id={`${id}-filter-${i}`}
+                                  onChange={e => this.setParam(e, param)}
+                                  value={this.paramValue(param)}
+                                >
+                                  {this.paramOptions(param).map(
+                                    (option, optionIndex) => (
+                                      <option
+                                        key={optionIndex}
+                                        value={option.value || ""}
+                                      >
+                                        {option.label}
+                                      </option>
+                                    )
+                                  )}
+                                </Styled.Select>
+                                <Styled.Icon icon="disclosureDown24" />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                       {this.hasOrderParam && (
                         <div
                           className={this.classNameWithStyle(
                             `${baseClass}__option`
                           )}
                         >
-                          <div className={`select`}>
-                            <span className={`select__label`}>
+                          <div>
+                            <Styled.SelectLabel>
                               {t("filters.labels.order_results")}
-                            </span>
-                            <div className={`select__wrapper`}>
+                            </Styled.SelectLabel>
+                            <div className="rel">
                               <label
                                 htmlFor={`${id}-order`}
                                 className="screen-reader-text"
                               >
                                 {t("filters.labels.order_results")}
                               </label>
-                              <select
+                              <Styled.Select
                                 id={`${id}-order`}
                                 onChange={e =>
                                   this.setParam(e, this.orderParam)
@@ -310,8 +311,8 @@ class ListEntitiesListSearch extends PureComponent {
                                     </option>
                                   )
                                 )}
-                              </select>
-                              <Utility.IconComposer icon="disclosureDown24" />
+                              </Styled.Select>
+                              <Styled.Icon icon="disclosureDown24" />
                             </div>
                           </div>
                         </div>
