@@ -6,6 +6,7 @@ import Ingestion from "./ingestion";
 import Styles from "./Styles";
 import Analytics from "./Analytics";
 import Sections from "./Sections";
+import Section from "./Section";
 
 export default {
   Properties,
@@ -15,5 +16,6 @@ export default {
   Ingestion,
   Styles,
   Analytics,
-  Sections
+  Sections,
+  Section
 };

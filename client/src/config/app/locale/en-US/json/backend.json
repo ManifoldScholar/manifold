@@ -223,6 +223,9 @@
         "section_name_placeholder": "Enter section name",
         "save_button_label": "Save New Text"
       },
+      "text_section": {
+        "section_name": "Section Name"
+      },
       "ingestion": {
         "instructions": "Manifold can ingest texts from single files or a .zip collection. See the <1>documentation</1> for supported file types and directory structure.",
         "upload_file": "Upload a file",
