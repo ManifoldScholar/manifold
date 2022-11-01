@@ -8,6 +8,24 @@ import {
 export const Header = styled.header`
   ${roundedFormHeader}
 
+  ${({ $hasInstructions }) =>
+    $hasInstructions &&
+    `
+    > * {
+      display: block;
+    }
+
+    > span {
+      color: var(--color-neutral-ui-light);
+      font-family: var(--font-family-copy);
+      text-transform: none;
+      font-size: 16px;
+      padding-block-end: 14px;
+    }
+  `}
+
+
+
   ${respond(`margin-bottom: 38px;`, 90)}
 `;
 
