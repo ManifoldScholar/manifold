@@ -144,7 +144,7 @@ class FeaturesPropertiesContainer extends PureComponent {
                 { label: "", value: "" },
                 {
                   label: t(
-                    "backend.forms.feature.foreground_image_position.mode.rrelative"
+                    "backend.forms.feature.foreground_image_position.mode.relative"
                   ),
                   value: "relative"
                 },
