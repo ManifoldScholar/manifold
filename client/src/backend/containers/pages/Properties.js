@@ -148,23 +148,23 @@ class PagesPropertiesContainer extends PureComponent {
             <Form.Switch
               className="fourth"
               label={t("backend.forms.page.states_options.hide")}
-              labelClass="secondary"
               labelPos="below"
               name="attributes[hidden]"
+              isPrimary
             />
             <Form.Switch
               className="fourth"
               label={t("backend.forms.page.states_options.footer")}
-              labelClass="secondary"
               labelPos="below"
               name="attributes[showInFooter]"
+              isPrimary
             />
             <Form.Switch
               className="fourth"
               label={t("backend.forms.page.states_options.header")}
-              labelClass="secondary"
               labelPos="below"
               name="attributes[showInHeader]"
+              isPrimary
             />
           </Form.FieldGroup>
           <Form.Save text={t("backend.forms.page.submit_label")} />
