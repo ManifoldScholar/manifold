@@ -7,10 +7,13 @@ import {
 
 export const Header = styled.header`
   ${roundedFormHeader}
+  ${respond(`margin-bottom: 38px;`, 90)}
 
   ${({ $hasInstructions }) =>
     $hasInstructions &&
     `
+    margin-bottom: 0 !important;
+
     > * {
       display: block;
     }
@@ -24,9 +27,6 @@ export const Header = styled.header`
     }
   `}
 
-
-
-  ${respond(`margin-bottom: 38px;`, 90)}
 `;
 
 export const HeaderPrimary = styled.header`
