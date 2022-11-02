@@ -21,7 +21,13 @@ const CodeAreaInput = Loadable({
         errors={props.errors}
         label={props.label}
       >
-        {props.label && <BaseLabel as="h4" label={props.label} />}
+        {props.label && (
+          <BaseLabel
+            as="h4"
+            label={props.label}
+            hasInstructions={!!props.instructions}
+          />
+        )}
         {props.instructions ? (
           <Instructions instructions={props.instructions} />
         ) : null}

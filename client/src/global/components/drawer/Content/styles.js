@@ -98,6 +98,12 @@ export const Drawer = styled.div`
     )}
   }
 
+  &.authoring {
+    width: 100%;
+
+    ${respond(`min-width: 800px; width: 40%;`, 80)}
+  }
+
   &.pad-large {
     ${respond(`padding: 33px 48px;`, 65)}
     ${respond(`padding: 33px 156px 66px 98px;`, 90)}
@@ -105,6 +111,10 @@ export const Drawer = styled.div`
       `padding: 33px 70px;`,
       `${parseInt(breakpoints[120], 10) + 1000}px`
     )}
+  }
+
+  &.pad-authoring {
+    ${respond(`padding: 33px 70px;`, 65)}
   }
 `;
 
