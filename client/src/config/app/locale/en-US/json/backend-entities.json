@@ -203,6 +203,7 @@
     "reingest": "Reingest",
     "sections_instructions": "Add, edit, and reorder text sections here.",
     "add_section_button_label": "Add New Section",
+    "edit_section": "Edit Section",
     "modals": {
       "delete_category_heading": "Are you sure you want to delete this category?",
       "delete_category_body": "Any texts belonging to this category will become uncategorized.",
