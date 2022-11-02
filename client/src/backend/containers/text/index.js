@@ -7,6 +7,7 @@ import Styles from "./Styles";
 import Analytics from "./Analytics";
 import Sections from "./Sections";
 import Section from "./Section";
+import TableOfContents from "./TableOfContents";
 
 export default {
   Properties,
@@ -17,5 +18,6 @@ export default {
   Styles,
   Analytics,
   Sections,
-  Section
+  Section,
+  TableOfContents
 };
