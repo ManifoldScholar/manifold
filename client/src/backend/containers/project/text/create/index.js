@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Navigation from "backend/components/navigation";
 import lh from "helpers/linkHandler";
@@ -20,3 +21,9 @@ export default function TextCreateContainer({ project }) {
     </section>
   );
 }
+
+TextCreateContainer.displayName = "Project.Text.Create";
+
+TextCreateContainer.propTypes = {
+  project: PropTypes.object.isRequired
+};

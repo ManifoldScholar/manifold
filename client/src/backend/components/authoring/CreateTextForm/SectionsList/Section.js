@@ -4,7 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
-export default function SectionsList({ name, onDelete, index }) {
+export default function Section({ name, onDelete, index }) {
   return (
     <Draggable draggableId={name} index={index}>
       {(provided, snapshot) => (
@@ -27,3 +27,11 @@ export default function SectionsList({ name, onDelete, index }) {
     </Draggable>
   );
 }
+
+Section.displayName = "CreateTextForm.Sections.ListItem";
+
+Section.propTypes = {
+  name: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired
+};

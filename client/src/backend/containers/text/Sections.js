@@ -1,5 +1,6 @@
 import React from "react";
 import Form from "global/components/form";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
 import { Link } from "react-router-dom";
@@ -7,7 +8,7 @@ import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { childRoutes } from "helpers/router";
 
-export default function TextSectionsContainer({ text, name, refresh, route }) {
+export default function TextSectionsContainer({ text, refresh, route }) {
   const { t } = useTranslation();
 
   const renderChildRoutes = () => {
@@ -35,8 +36,8 @@ export default function TextSectionsContainer({ text, name, refresh, route }) {
         className="form-secondary"
         doNotWarn
         groupErrors
-        model={"TBD"}
-        name={name}
+        model={text}
+        name="backend-text-sections"
       >
         <Form.Header
           label={t("glossary.section_title_case_other")}
@@ -67,3 +68,10 @@ export default function TextSectionsContainer({ text, name, refresh, route }) {
     </section>
   );
 }
+
+TextSectionsContainer.displayName = "Text.Sections";
+
+TextSectionsContainer.propTypes = {
+  text: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired
+};
