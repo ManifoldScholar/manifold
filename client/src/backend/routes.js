@@ -260,6 +260,13 @@ const routes = {
                   modal: true
                 }
               ]
+            },
+            {
+              name: "backendTextTOC",
+              exact: true,
+              component: "TextTOC",
+              path: "/backend/projects/text/:id/contents",
+              helper: t => `/backend/projects/text/${t}/contents`
             }
           ]
         },
