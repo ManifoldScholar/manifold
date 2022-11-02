@@ -63,6 +63,7 @@ function DrawerContent(props, ref) {
   // A variety of other classes depend on .drawer--backend
   const classes = classNames(entrySide, size, {
     "pad-large": padding === "large",
+    "pad-authoring": padding === "authoring",
     "drawer--backend": context === "backend"
   });
 
