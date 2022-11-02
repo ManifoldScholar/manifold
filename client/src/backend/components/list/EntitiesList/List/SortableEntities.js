@@ -120,7 +120,7 @@ export default class SortableEntities extends PureComponent {
 
   entityKey(index) {
     const entity = this.entities[index];
-    if (!entity || !entity.id) return index;
+    if (!entity || !entity.id) return index.toString();
     return entity.id;
   }
 
