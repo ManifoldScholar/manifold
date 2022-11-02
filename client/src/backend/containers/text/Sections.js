@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { childRoutes } from "helpers/router";
+import SectionsList from "backend/components/authoring/SectionsList";
 
 export default function TextSectionsContainer({ text, refresh, route }) {
   const { t } = useTranslation();
@@ -44,28 +45,29 @@ export default function TextSectionsContainer({ text, refresh, route }) {
           label={t("glossary.section_title_case_other")}
           instructions={t("backend_entities.texts.sections_instructions")}
         />
+        <div className="entity-list__button-set-flex full-width">
+          <Link
+            to={lh.link("backendTextSectionsNew", text.id)}
+            className="entity-list__button button-lozenge-secondary"
+          >
+            <span className="screen-reader-text">
+              {t("backend_entities.texts.create_category_button_label")}
+            </span>
+            <IconComposer
+              icon="circlePlus32"
+              size={18}
+              className="button-icon-secondary__icon button-icon-secondary__icon--large"
+            />
+            <span className="full" aria-hidden="true">
+              {t("backend_entities.texts.add_section_button_label")}
+            </span>
+            <span className="abbreviated" aria-hidden="true">
+              {t("glossary.section_title_case_one")}
+            </span>
+          </Link>
+        </div>
+        <SectionsList />
       </FormContainer.Form>
-      <div className="entity-list__button-set-flex">
-        <Link
-          to={lh.link("backendTextSectionsNew", text.id)}
-          className="entity-list__button button-lozenge-secondary"
-        >
-          <span className="screen-reader-text">
-            {t("backend_entities.texts.create_category_button_label")}
-          </span>
-          <IconComposer
-            icon="circlePlus32"
-            size={18}
-            className="button-icon-secondary__icon button-icon-secondary__icon--large"
-          />
-          <span className="full" aria-hidden="true">
-            {t("backend_entities.texts.add_section_button_label")}
-          </span>
-          <span className="abbreviated" aria-hidden="true">
-            {t("glossary.section_title_case_one")}
-          </span>
-        </Link>
-      </div>
     </section>
   );
 }
