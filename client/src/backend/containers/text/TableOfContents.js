@@ -20,9 +20,7 @@ export default function TextTOCContainer({ text, refresh, route }) {
         lockScroll: "always",
         wide: true,
         lockScrollClickCloses: false,
-        closeUrl,
-        size: "authoring",
-        padding: "authoring"
+        closeUrl
       },
       childProps: { refresh, text }
     });

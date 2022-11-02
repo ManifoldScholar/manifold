@@ -8,6 +8,7 @@ import Analytics from "./Analytics";
 import Sections from "./Sections";
 import Section from "./Section";
 import TableOfContents from "./TableOfContents";
+import TOCEntry from "./toc-entry";
 
 export default {
   Properties,
@@ -19,5 +20,6 @@ export default {
   Analytics,
   Sections,
   Section,
-  TableOfContents
+  TableOfContents,
+  TOCEntry
 };
