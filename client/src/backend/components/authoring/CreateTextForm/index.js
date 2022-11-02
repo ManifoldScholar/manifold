@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import FormContainer from "global/containers/form";
@@ -6,12 +7,7 @@ import Form from "global/components/form";
 import { useHistory } from "react-router";
 import SectionsList from "./SectionsList";
 
-export default function CreateTextForm({
-  name,
-  cancelUrl,
-  project,
-  onSuccess
-}) {
+export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -39,8 +35,8 @@ export default function CreateTextForm({
     <FormContainer.Form
       doNotWarn
       groupErrors
-      model={"TBD"}
-      name={name}
+      model={project}
+      name="tbd"
       className="form-secondary"
       onSuccess={onSuccess}
     >
@@ -97,3 +93,11 @@ export default function CreateTextForm({
     </FormContainer.Form>
   );
 }
+
+CreateTextForm.displayName = "Project.Texts.CreateForm";
+
+CreateTextForm.propTypes = {
+  cancelUrl: PropTypes.string,
+  project: PropTypes.object.isRequired,
+  onSuccess: PropTypes.func
+};
