@@ -88,6 +88,7 @@ import Key32 from "./32/Key";
 import Journals64 from "./64/Journals";
 import Lamp64 from "./64/Lamp";
 import LanguageGlobe24 from "./24/LanguageGlobe";
+import Lightning24 from "./24/Lightning";
 import Link24 from "./24/Link";
 import Lock16 from "./16/Lock";
 import Lock32 from "./32/Lock";
@@ -255,6 +256,7 @@ export default {
   Key32,
   Lamp64,
   LanguageGlobe24,
+  Lightning24,
   Link24,
   Lock16,
   Lock32,

@@ -484,6 +484,13 @@ class Navigation {
         args
       },
       {
+        label: "Table of Contents",
+        route: "backendTextTOC",
+        entity: text,
+        ability: "update",
+        args
+      },
+      {
         label: "Metadata",
         route: "backendTextMetadata",
         entity: text,

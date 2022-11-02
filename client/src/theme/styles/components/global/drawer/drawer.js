@@ -54,9 +54,8 @@ export default `
     }
 
     &--authoring {
+      max-width: 800px;
       width: 100%;
-
-      ${respond(`min-width: 800px; width: 40%;`, 80)}
     }
 
     &--flexible {
