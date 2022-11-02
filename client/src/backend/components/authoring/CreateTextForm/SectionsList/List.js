@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import Section from "./Section";
 import { useUID } from "react-uid";
@@ -31,3 +32,11 @@ export default function SectionList({ sections, setSectionOrder, onDelete }) {
     </DragDropContext>
   );
 }
+
+SectionList.displayName = "CreateTextForm.Sections.List";
+
+SectionList.propTypes = {
+  sections: PropTypes.arrayOf(PropTypes.string),
+  setSectionOrder: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
+};
