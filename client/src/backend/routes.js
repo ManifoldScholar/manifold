@@ -263,10 +263,21 @@ const routes = {
             },
             {
               name: "backendTextTOC",
-              exact: true,
+              exact: false,
               component: "TextTOC",
               path: "/backend/projects/text/:id/contents",
-              helper: t => `/backend/projects/text/${t}/contents`
+              helper: t => `/backend/projects/text/${t}/contents`,
+              routes: [
+                {
+                  name: "backendTextTOCEntryEdit",
+                  exact: true,
+                  component: "TextTOCEntryEdit",
+                  path: "/backend/projects/text/:id/contents/:entryId/edit",
+                  helper: (t, e) =>
+                    `/backend/projects/text/${t}/content/${e}/edit`,
+                  modal: true
+                }
+              ]
             }
           ]
         },

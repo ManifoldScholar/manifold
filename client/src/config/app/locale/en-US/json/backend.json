@@ -229,6 +229,16 @@
         "content_label": "Content",
         "content_instructions": "Instructions needed here..."
       },
+      "text_toc": {
+        "header": "Edit TOC Entry",
+        "entry_name": "TOC Entry Name",
+        "section_link": "Section Link",
+        "section_link_instructions": "Instructions here",
+        "section_link_placeholder": "Select a Text Section",
+        "anchor_link": "Anchor Link",
+        "anchor_link_instructions": "More instructions here",
+        "save_button_label": "Save Changes"
+      },
       "ingestion": {
         "instructions": "Manifold can ingest texts from single files or a .zip collection. See the <1>documentation</1> for supported file types and directory structure.",
         "upload_file": "Upload a file",

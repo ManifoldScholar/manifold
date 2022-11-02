@@ -20,6 +20,8 @@ export const SecondarySelectWrapper = styled.div`
 export const TertiarySelectWrapper = styled.div`
   position: relative;
   width: max-content;
+
+  ${({ $wide }) => $wide && `width: 100%;`}
 `;
 
 const BaseSelect = styled.select`
@@ -80,6 +82,8 @@ export const TertiarySelect = styled(BaseSelect)`
   ); /* required for option to inherit in FF */
   border: 1px solid var(--color-neutral-ui-dull-light);
   border-radius: var(--box-border-radius);
+
+  ${({ $wide }) => $wide && `width: 100%;`}
 `;
 
 /* These icon styles seem to be used for both primary and secondary. */
