@@ -7,7 +7,7 @@ import classNames from "classnames";
 import { useHistory } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
-export default function AddSectionForm({ text, onSuccess }) {
+export default function AddEditSectionForm({ section = {}, text, onSuccess }) {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -18,12 +18,17 @@ export default function AddSectionForm({ text, onSuccess }) {
     history.push(lh.link("backendTextSections", text.id));
   };
 
+  const createSection = () => {};
+  const editSection = () => {};
+
   return (
     <FormContainer.Form
-      model={text}
+      model={section}
       name="tbd"
       className="form-secondary"
       onSuccess={onSuccess}
+      create={createSection}
+      update={editSection}
     >
       <Form.TextInput
         focusOnMount
@@ -31,14 +36,14 @@ export default function AddSectionForm({ text, onSuccess }) {
         placeholder={t("backend.forms.text_section.section_name")}
       />
       <Form.CodeArea
-        label="Content"
-        instructions="instructions here"
+        label={t("backend.forms.text_section.content_label")}
+        instructions={t("backend.forms.text_section.content_instructions")}
         height="600px"
         mode="css"
       />
       <div className="buttons-icon-horizontal authoring-drawer">
         <button type="submit" className={buttonClasses} disabled={false}>
-          <span>{t("backend.forms.text_create.save_button_label")}</span>
+          <span>{t("backend.forms.text_section.save_button_label")}</span>
         </button>
         <button
           onClick={handleCancelClick}
@@ -51,9 +56,9 @@ export default function AddSectionForm({ text, onSuccess }) {
   );
 }
 
-AddSectionForm.displayName = "Text.Sections.AddForm";
+AddEditSectionForm.displayName = "Text.Sections.AddEditForm";
 
-AddSectionForm.propTypes = {
+AddEditSectionForm.propTypes = {
   text: PropTypes.object.isRequired,
   onSuccess: PropTypes.func
 };
