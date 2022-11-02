@@ -57,6 +57,7 @@ export default {
   TextSectionsNew: Text.Section.New,
   TextSectionsEdit: Text.Section.Edit,
   TextTOC: Text.TableOfContents,
+  TextTOCEntryEdit: Text.TOCEntry.Edit,
   ProjectCollectionWrapper: ProjectCollection.Wrapper,
   ProjectCollectionDetail: ProjectCollection.Detail,
   ProjectCollectionManageProjects: ProjectCollection.ManageProjects,

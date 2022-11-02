@@ -97,7 +97,7 @@ export class FormSelect extends Component {
               label={this.props.label}
               isSelect
             />
-            <WrapperTag>
+            <WrapperTag $wide={this.props.wide}>
               <IconComponent icon="disclosureDown24" size={24} />
               <SelectComponent
                 id={`${this.idPrefix}-${id}`}
