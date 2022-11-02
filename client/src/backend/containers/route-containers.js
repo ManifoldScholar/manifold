@@ -55,6 +55,7 @@ export default {
   TextProperties: Text.Properties,
   TextSections: Text.Sections,
   TextSectionsNew: Text.Section.New,
+  TextSectionsEdit: Text.Section.Edit,
   ProjectCollectionWrapper: ProjectCollection.Wrapper,
   ProjectCollectionDetail: ProjectCollection.Detail,
   ProjectCollectionManageProjects: ProjectCollection.ManageProjects,

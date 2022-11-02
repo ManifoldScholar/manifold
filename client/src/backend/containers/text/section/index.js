@@ -1,3 +1,4 @@
 import New from "./New";
+import Edit from "./Edit";
 
-export default { New };
+export default { New, Edit };

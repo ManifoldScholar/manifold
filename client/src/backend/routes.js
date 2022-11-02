@@ -249,6 +249,15 @@ const routes = {
                   path: "/backend/projects/text/:id/sections/new",
                   helper: t => `/backend/projects/text/${t}/sections/new`,
                   modal: true
+                },
+                {
+                  name: "backendTextSectionsEdit",
+                  exact: true,
+                  component: "TextSectionsEdit",
+                  path: "/backend/projects/text/:id/sections/:sectionId/edit",
+                  helper: (t, s) =>
+                    `/backend/projects/text/${t}/sections/${s}/edit`,
+                  modal: true
                 }
               ]
             }
