@@ -53,6 +53,12 @@ export default `
       ${respond(`width: 860px;`, 120)}
     }
 
+    &--authoring {
+      width: 100%;
+
+      ${respond(`min-width: 800px; width: 40%;`, 80)}
+    }
+
     &--flexible {
       ${respond(
         `width: auto;
@@ -71,7 +77,8 @@ export default `
     }
 
     &--pad-default,
-    &--pad-large {
+    &--pad-large,
+    &--pad-authoring {
       padding: 20px var(--container-padding-inline-responsive) 33px;
     }
 
@@ -86,6 +93,10 @@ export default `
         `padding: 33px 70px;`,
         `${parseInt(breakpoints[120], 10) + 1000}px`
       )}
+    }
+
+    &--pad-authoring {
+      ${respond(`padding: 33px 70px;`, 65)}
     }
 
     .utility-primary {
