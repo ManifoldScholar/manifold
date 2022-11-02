@@ -77,7 +77,7 @@ export const EntityTitle = styled.span`
   padding-inline-start: ${fluidScale("61px", "51px")};
   font-size: 17px;
   hyphens: none;
-  text-decoration: underline;
+  text-decoration-line: underline;
 `;
 
 export const SignInButton = styled.button`
@@ -105,7 +105,7 @@ export const MoreLink = styled.a`
   padding: 0.5em 1.688em 1.75em ${fluidScale("32px", "24px")};
   font-size: 16px;
   line-height: 1.5;
-  text-decoration: underline;
+  text-decoration-line: underline;
   transition: color ${defaultTransitionProps};
 
   &:hover,

@@ -124,7 +124,7 @@ export const Body = styled("div", transientOptions)`
   color: ${({ $color }) => $color || "inherit"};
 
   a {
-    text-decoration: underline;
+    text-decoration-line: underline;
   }
 `;
 

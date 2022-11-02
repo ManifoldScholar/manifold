@@ -208,7 +208,7 @@ export default `
   }
 
   .rh5v-Captions_activeTrackItem {
-    text-decoration: underline;
+    text-decoration-line: underline;
   }
 
   .rh5v-PlayPause_component {

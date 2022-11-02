@@ -26,7 +26,7 @@ export default `
     transition: opacity 0s linear;
 
     a {
-      text-decoration: underline;
+      text-decoration-line: underline;
     }
 
     &.overlay-full-enter {
