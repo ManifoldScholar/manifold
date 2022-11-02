@@ -47,7 +47,7 @@ export const SecondaryText = styled.p`
 export const Button = styled.button`
   ${buttonUnstyled}
   display: inline;
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-transform: inherit;
   letter-spacing: inherit;
   pointer-events: auto;

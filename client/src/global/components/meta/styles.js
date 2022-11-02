@@ -86,7 +86,7 @@ export const Value = styled.div`
     color: var(--strong-color);
 
     a {
-      text-decoration: underline;
+      text-decoration-line: underline;
     }
   }
 `;

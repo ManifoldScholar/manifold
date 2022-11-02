@@ -10,7 +10,7 @@ export default `
     text-transform: none;
 
     a {
-      text-decoration: underline;
+      text-decoration-line: underline;
     }
 
     &.margin-top {

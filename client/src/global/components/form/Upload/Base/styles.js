@@ -35,7 +35,7 @@ export const AvatarBuilderDropzone = styled(BaseDropzone)`
 `;
 
 export const Prompt = styled.span`
-  text-decoration: underline;
+  text-decoration-line: underline;
   transition: color var(--transition-duration-default)
     var(--transition-timing-function);
 `;

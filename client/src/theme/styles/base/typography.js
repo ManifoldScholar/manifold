@@ -3,6 +3,8 @@ export default `
     font-size: 22px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-decoration-thickness: from-font;
+    text-underline-position: from-font;
   }
 
   body {
@@ -12,5 +14,9 @@ export default `
     line-height: var(--line-height);
     word-wrap: break-word;
     overflow-wrap: break-word;
+  }
+
+  a {
+    text-decoration-thickness: inherit;
   }
 `;

@@ -62,7 +62,7 @@ export const DropzonePrompt = styled.span`
 `;
 
 export const UploadLink = styled.span`
-  text-decoration: underline;
+  text-decoration-line: underline;
   transition: color var(--transition-duration-default)
     var(--transition-timing-function);
 `;

@@ -18,7 +18,7 @@ export const Result = styled.li`
   }
 
   a:hover {
-    text-decoration: underline;
+    text-decoration-line: underline;
   }
 
   & + & {
@@ -180,6 +180,6 @@ export const ExcerptToggle = styled(Collapse.Toggle)`
   margin-block-start: 30px;
   font-size: 13px;
   font-weight: var(--font-weight-semibold);
-  text-decoration: underline;
+  text-decoration-line: underline;
   color: var(--color-neutral-text-dark);
 `;

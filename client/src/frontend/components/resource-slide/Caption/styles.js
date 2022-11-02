@@ -76,7 +76,7 @@ export const Description = styled("div", transientOptions)`
   }
 
   a {
-    text-decoration: underline;
+    text-decoration-line: underline;
   }
 
   ${({ $expanded, $maxHeight }) => $expanded && `max-height: ${$maxHeight}px;`}

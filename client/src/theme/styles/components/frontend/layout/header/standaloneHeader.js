@@ -111,7 +111,7 @@ export default `
 
       a:hover &,
       a.focus-visible & {
-        text-decoration: underline;
+        text-decoration-line: underline;
       }
 
       ${respond(`font-size: 21px;`, 40)}

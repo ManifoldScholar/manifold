@@ -74,7 +74,7 @@ export default `
       }
 
       &--underlined {
-        text-decoration: underline;
+        text-decoration-line: underline;
       }
 
       .utility-button:hover & {

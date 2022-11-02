@@ -18,7 +18,7 @@ export const loginFormPrimary = `
       ${buttonUnstyled}
       display: block;
       font-style: italic;
-      text-decoration: underline;
+      text-decoration-line: underline;
 
       + button {
         margin-top: 14px;

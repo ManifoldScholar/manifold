@@ -69,7 +69,7 @@ export default `
     }
 
     a {
-      text-decoration: underline;
+      text-decoration-line: underline;
 
       &:visited {
         color: var(--color-accent-primary-dark);

@@ -50,7 +50,7 @@ export const Body = styled.div`
   }
 
   a {
-    text-decoration: underline;
+    text-decoration-line: underline;
 
     &:visited {
       color: var(--hover-color);

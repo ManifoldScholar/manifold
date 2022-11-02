@@ -70,7 +70,7 @@ export const ErrorBody = styled.p`
 export const Link = styled.button`
   ${buttonUnstyled}
   margin-top: 10px;
-  text-decoration: underline;
+  text-decoration-line: underline;
   cursor: pointer;
 `;
 
