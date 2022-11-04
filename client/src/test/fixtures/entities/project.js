@@ -26,7 +26,9 @@ const project = () => ({
     metadataProperties: Object.keys(metadata()),
     metadata: metadata(),
     metadataFormatted: metadata(),
-    imageCreditsFormatted: "<p>Rowan, <em>The Dog</em></p>"
+    imageCreditsFormatted: "<p>Rowan, <em>The Dog</em></p>",
+    restrictedAccessHeading: "Test heading",
+    restrictedAccessBody: "Test body"
   },
   relationships: {
     resources: ["resource"],

@@ -579,7 +579,7 @@ export class PickerComponent extends PureComponent {
                 <BaseLabel
                   id={ids.textBox}
                   label={label}
-                  styleType={this.context.styleType}
+                  styleType={this.context?.styleType}
                 />
                 <Instructions instructions={this.props.instructions} />
                 <Styled.InputWrapper>

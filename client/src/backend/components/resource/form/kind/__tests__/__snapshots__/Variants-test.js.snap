@@ -3,7 +3,7 @@
 exports[`backend/components/resource/form/kind/Variants matches the snapshot when rendered 1`] = `
 Array [
   <div
-    class="css-154vff9-Wrapper eon8abq0"
+    class="css-1idpiku-Wrapper eon8abq0"
   >
     <label
       class="css-bmmdfg-PrimaryLabel e11et4nf2"
@@ -48,13 +48,9 @@ Array [
         </div>
       </div>
     </div>
-    <span
-      class="css-65ims6-PrimaryInstructions e10u3e2o1"
-      id="upload-instructions-1"
-    />
   </div>,
   <div
-    class="css-154vff9-Wrapper eon8abq0"
+    class="css-1idpiku-Wrapper eon8abq0"
   >
     <label
       class="css-bmmdfg-PrimaryLabel e11et4nf2"
@@ -99,10 +95,6 @@ Array [
         </div>
       </div>
     </div>
-    <span
-      class="css-65ims6-PrimaryInstructions e10u3e2o1"
-      id="upload-instructions-1"
-    />
   </div>,
 ]
 `;
@@ -110,7 +102,7 @@ Array [
 exports[`backend/components/resource/form/kind/Variants when kind is image matches the snapshot when rendered 1`] = `
 Array [
   <div
-    class="css-154vff9-Wrapper eon8abq0"
+    class="css-1idpiku-Wrapper eon8abq0"
   >
     <label
       class="css-bmmdfg-PrimaryLabel e11et4nf2"
@@ -160,13 +152,9 @@ Array [
         </div>
       </div>
     </div>
-    <span
-      class="css-65ims6-PrimaryInstructions e10u3e2o1"
-      id="upload-instructions-1"
-    />
   </div>,
   <div
-    class="css-154vff9-Wrapper eon8abq0"
+    class="css-1idpiku-Wrapper eon8abq0"
   >
     <label
       class="css-bmmdfg-PrimaryLabel e11et4nf2"
@@ -216,17 +204,13 @@ Array [
         </div>
       </div>
     </div>
-    <span
-      class="css-65ims6-PrimaryInstructions e10u3e2o1"
-      id="upload-instructions-1"
-    />
   </div>,
 ]
 `;
 
 exports[`backend/components/resource/form/kind/Variants when kind is pdf matches the snapshot when rendered 1`] = `
 <div
-  class="css-154vff9-Wrapper eon8abq0"
+  class="css-1idpiku-Wrapper eon8abq0"
 >
   <label
     class="css-bmmdfg-PrimaryLabel e11et4nf2"
@@ -276,9 +260,5 @@ exports[`backend/components/resource/form/kind/Variants when kind is pdf matches
       </div>
     </div>
   </div>
-  <span
-    class="css-65ims6-PrimaryInstructions e10u3e2o1"
-    id="upload-instructions-1"
-  />
 </div>
 `;

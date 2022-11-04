@@ -2,10 +2,10 @@
 
 exports[`backend/components/project-collection/form/IconPicker matches the snapshot when rendered 1`] = `
 <div
-  class="form-input icon-picker"
+  class="icon-picker"
 >
   <div
-    class="form-input css-154vff9-Wrapper eon8abq0"
+    class="css-1idpiku-Wrapper eon8abq0"
   >
     <label
       class="css-bmmdfg-PrimaryLabel e11et4nf2"

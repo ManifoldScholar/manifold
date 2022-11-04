@@ -3,14 +3,14 @@
 exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
 <div>
   <header
-    class="css-94quec-Header ec180290"
+    class="css-94quec-Header ec180291"
   >
     <h2>
       Upload
     </h2>
   </header>
   <div
-    class="css-154vff9-Wrapper eon8abq0"
+    class="css-1idpiku-Wrapper eon8abq0"
   >
     <label
       class="css-bmmdfg-PrimaryLabel e11et4nf2"
@@ -56,7 +56,7 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
       </div>
     </div>
     <span
-      class="css-65ims6-PrimaryInstructions e10u3e2o1"
+      class="css-5mpmt2-PrimaryInstructions e10u3e2o1"
       id="upload-instructions-1"
     >
       <span
@@ -67,12 +67,12 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
     </span>
   </div>
   <div
-    class="form-divider"
+    class="css-1j9d9s4-Divider eh1jy5f0"
   >
     common.or
   </div>
   <div
-    class=" css-154vff9-Wrapper eon8abq0"
+    class=" css-1idpiku-Wrapper eon8abq0"
   >
     <label
       class="css-cqb262-PrimaryLabel e11et4nf2"
@@ -82,13 +82,13 @@ exports[`backend/components/ingestion/form/Upload matches the snapshot 1`] = `
     </label>
     <input
       aria-describedby="text-input-error-1 text-input-instructions-1"
-      class="css-kb5mz1-BaseInput-SecondaryInput e1e2hl9r4"
+      class="css-4skzkl-BaseInput-PrimaryInput e1e2hl9r5"
       id="text-input-1"
       type="text"
       value=""
     />
     <span
-      class="css-65ims6-PrimaryInstructions e10u3e2o1"
+      class="css-5mpmt2-PrimaryInstructions e10u3e2o1"
       id="text-input-instructions-1"
     >
       backend.forms.ingestion.url_instructions

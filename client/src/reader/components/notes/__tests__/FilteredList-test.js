@@ -8,7 +8,7 @@ describe("reader/components/notes/FilteredList", () => {
   def("sortedAnnotations", () => [
     {
       name: "Test",
-      sectionId: 1,
+      id: 1,
       annotations: $annotations
     }
   ]);

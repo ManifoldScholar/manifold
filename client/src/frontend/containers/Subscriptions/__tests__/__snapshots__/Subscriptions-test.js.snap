@@ -18,22 +18,17 @@ exports[`frontend/containers/Subscriptions matches the snapshot 1`] = `
     <div
       className="container"
     >
-      <form
+      <Form
         autoComplete="off"
         className="subscriptions"
         method="post"
         onSubmit={[Function]}
       >
-        <h1
-          className="form-heading"
-        >
-          forms.notifications.title
-          <span
-            className="instructions"
-          >
-            forms.notifications.instructions
-          </span>
-        </h1>
+        <Form.Header
+          instructions="forms.notifications.instructions"
+          label="forms.notifications.title"
+          styleType="primary"
+        />
         <withI18nextTranslation(NotificationsForm)
           authentication={
             Object {
@@ -138,20 +133,12 @@ exports[`frontend/containers/Subscriptions matches the snapshot 1`] = `
           digestProjectsChangeHandler={[Function]}
           unsubscribeAllHandler={[Function]}
         />
-        <div
-          className="row-1-p"
-        >
-          <div
-            className="form-input form-error"
-          >
-            <input
-              className="button-secondary button-secondary--with-room"
-              type="submit"
-              value="forms.notifications.submit_label"
-            />
-          </div>
-        </div>
-      </form>
+        <input
+          className="button-secondary button-secondary--with-room"
+          type="submit"
+          value="forms.notifications.submit_label"
+        />
+      </Form>
     </div>
   </section>
 </Connect(withRouter(AuthorizeComponent))>
