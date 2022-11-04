@@ -15,7 +15,8 @@ export default class FieldGroup extends PureComponent {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     label: PropTypes.string,
     labelTag: PropTypes.oneOf(["h2", "span"]),
-    theme: PropTypes.oneOf(["primary", "secondary"])
+    theme: PropTypes.oneOf(["primary", "secondary"]),
+    className: PropTypes.string
   };
 
   static defaultProps = {
@@ -67,8 +68,6 @@ export default class FieldGroup extends PureComponent {
         ? Styled.SecondaryGroup
         : Styled.BaseGroup;
 
-    const { gapLg } = this.props;
-
     return (
       <UIDConsumer name={id => `field-group-${id}`}>
         {id => (
@@ -76,6 +75,7 @@ export default class FieldGroup extends PureComponent {
             key="group"
             {...this.getAriaGroupAttributes(id)}
             $horizontal={this.props.horizontal}
+            className={this.props.className}
           >
             {isString(this.props.label) ? (
               <SectionLabel label={this.props.label} id={`${id}-header`} />
@@ -86,9 +86,7 @@ export default class FieldGroup extends PureComponent {
                 instructions={this.props.instructions}
               />
             )}
-            <GroupComponent $gapLg={gapLg}>
-              {this.renderChildren(this.props)}
-            </GroupComponent>
+            <GroupComponent>{this.renderChildren(this.props)}</GroupComponent>
           </Styled.Section>
         )}
       </UIDConsumer>
