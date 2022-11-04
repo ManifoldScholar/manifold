@@ -274,7 +274,7 @@ const routes = {
                   component: "TextTOCEntryEdit",
                   path: "/backend/projects/text/:id/contents/:entryId/edit",
                   helper: (t, e) =>
-                    `/backend/projects/text/${t}/content/${e}/edit`,
+                    `/backend/projects/text/${t}/contents/${e}/edit`,
                   modal: true
                 }
               ]

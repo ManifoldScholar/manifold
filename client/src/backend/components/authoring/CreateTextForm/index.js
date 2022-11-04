@@ -1,22 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import classNames from "classnames";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
-import { useHistory } from "react-router";
 import SectionsList from "./SectionsList";
 
 export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
-  const history = useHistory();
   const { t } = useTranslation();
-
-  const buttonClasses = "button-secondary button-secondary--outlined";
-
-  const handleCancelClick = e => {
-    e.preventDefault();
-    cancelUrl ? history.push(cancelUrl) : history.goBack();
-  };
 
   const [sectionName, setSectionName] = useState();
   const [sections, setSections] = useState([]);
@@ -78,17 +68,11 @@ export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
             onDelete={handleDeleteSection}
           />
         </div>
-        <div className="buttons-icon-horizontal authoring-drawer">
-          <button type="submit" className={buttonClasses} disabled={false}>
-            <span>{t("backend.forms.text_create.save_button_label")}</span>
-          </button>
-          <button
-            onClick={handleCancelClick}
-            className={classNames(buttonClasses, "button-secondary--dull")}
-          >
-            <span>{t("actions.cancel")}</span>
-          </button>
-        </div>
+        <Form.DrawerButtons
+          showCancel
+          cancelUrl={cancelUrl}
+          submitLabel="backend.forms.text_create.save_button_label"
+        />
       </Form.FieldGroup>
     </FormContainer.Form>
   );
