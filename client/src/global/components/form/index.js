@@ -30,6 +30,7 @@ import Picker from "./Picker";
 import Label from "./BaseLabel";
 import FieldWrapper from "./FieldWrapper";
 import { InputGroupPrimary, InputGroupSecondary } from "./InputGroup/styles";
+import DrawerButtons from "./DrawerButtons";
 
 export default {
   CoverUploadPlaceholder,
@@ -63,7 +64,8 @@ export default {
   Label,
   FieldWrapper,
   InputGroupPrimary,
-  InputGroupSecondary
+  InputGroupSecondary,
+  DrawerButtons
 };
 
 export const Unwrapped = {
