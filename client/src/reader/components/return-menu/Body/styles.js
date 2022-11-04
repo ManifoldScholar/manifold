@@ -7,10 +7,12 @@ import {
   listUnstyled,
   buttonUnstyled,
   defaultHoverStyle,
-  defaultTransitionProps
+  defaultTransitionProps,
+  reactSlideTransition
 } from "theme/styles/mixins";
 
 export const Menu = styled.nav`
+  ${reactSlideTransition("left")}
   max-width: ${fluidScale("390px", "330px")};
   background-color: var(--box-bg-color);
   box-shadow: 0 12px 22px -3px ${rgba("neutralBlack", 0.13)};

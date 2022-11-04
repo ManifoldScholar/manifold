@@ -13,7 +13,6 @@ export default `
   --padding-lateral: var(--container-padding-inline-narrow);
   --padding-lateral-narrow: 11px;
 
-  ${reactSlideTransition("left", ".reader-return-menu")}
   ${reactSlideTransition("right", ".search-menu")}
 
   position: fixed;
