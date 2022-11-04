@@ -411,7 +411,11 @@ export default `
 
       .entity-row__row-link--in-grid:hover &,
       .entity-row__row-link--in-grid.focus-visible & {
-        ${respond(`text-decoration-line: underline;`, breakpointLessOne(65), "max")}
+        ${respond(
+          `text-decoration-line: underline;`,
+          breakpointLessOne(65),
+          "max"
+        )}
       }
 
       .entity-row__row-link--is-active & {

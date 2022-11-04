@@ -16,7 +16,6 @@ import EntitiesList, {
   ProjectExportationRow
 } from "backend/components/list/EntitiesList";
 import Form from "/global/components/form";
-import FormContainer from "global/containers/form";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import * as Styled from "./styles";

@@ -5,7 +5,6 @@ import Errorable from "../Errorable";
 import Instructions from "../Instructions";
 import withFormOptions from "hoc/withFormOptions";
 import BaseLabel from "../BaseLabel";
-import FieldWrapper from "../FieldWrapper";
 import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
