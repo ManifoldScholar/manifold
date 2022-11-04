@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isNil from "lodash/isNil";
-import { Link } from "react-router-dom";
+import FormSectionLabel from "global/components/form/SectionLabel";
 
 export default class ListEntitiesListSectionTitle extends PureComponent {
   static displayName = "List.Entities.List.SectionTitle";
@@ -27,20 +27,7 @@ export default class ListEntitiesListSectionTitle extends PureComponent {
     return title;
   }
 
-  get titleLink() {
-    return this.props.titleLink;
-  }
-
-  link(child) {
-    if (!this.titleLink) return child;
-    return <Link to={this.titleLink}>{child}</Link>;
-  }
-
   render() {
-    return (
-      <header className="entity-list__title-block entity-list__title backend-header">
-        {this.link(<h2 className="backend-header__h2-title">{this.title}</h2>)}
-      </header>
-    );
+    return <FormSectionLabel label={this.title} />;
   }
 }
