@@ -146,7 +146,7 @@ export class ProjecExportations extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
-        <FormContainer.Form
+        <Styled.Form
           className="form-secondary"
           suppressModelErrors
           name={requests.beProjectExportationCreate}
@@ -161,36 +161,42 @@ export class ProjecExportations extends PureComponent {
           onSuccess={() => this.fetchExportations(1)}
           doNotWarn
         >
-          <Styled.FieldGroup label="Project Exports">
+          <Form.FieldGroup label="Project Exports">
             {this.hasExportTargets && (
-              <div className="instructional-copy">
-                {t("backend_entities.projects.forms.exports.instructions")}
-              </div>
+              <Form.Instructions
+                instructions={t(
+                  "backend_entities.projects.forms.exports.instructions"
+                )}
+              />
             )}
             {!this.hasExportTargets && (
               <>
                 <Authorize entity="exportTarget" ability="create">
-                  <div className="instructional-copy">
-                    {t("backend_entities.projects.forms.exports.no_targets")}
-                  </div>
-                  <Button
-                    path={lh.link("backendSettingsExportTargetsNew")}
-                    text={t(
-                      "backend_entities.projects.forms.exports.add_target_label"
+                  <Form.Instructions
+                    instructions={t(
+                      "backend_entities.projects.forms.exports.no_targets"
                     )}
-                    type="add"
                   />
+                  <div>
+                    <Button
+                      path={lh.link("backendSettingsExportTargetsNew")}
+                      text={t(
+                        "backend_entities.projects.forms.exports.add_target_label"
+                      )}
+                      type="add"
+                    />
+                  </div>
                 </Authorize>
                 <Authorize
                   entity="exportTarget"
                   ability="create"
                   successBehavior="hide"
                 >
-                  <span>
-                    {t(
+                  <Form.Instructions
+                    instructions={t(
                       "backend_entities.projects.forms.exports.no_targets_unauthorized"
                     )}
-                  </span>
+                  />
                 </Authorize>
               </>
             )}
@@ -212,8 +218,8 @@ export class ProjecExportations extends PureComponent {
                 />
               </>
             )}
-          </Styled.FieldGroup>
-        </FormContainer.Form>
+          </Form.FieldGroup>
+        </Styled.Form>
         {this.hasExportTargets && (
           <div style={{ marginTop: 25 }}>
             <EntitiesList

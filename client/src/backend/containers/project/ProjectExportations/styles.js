@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import Form from "/global/components/form";
+import FormContainer from "global/containers/form";
 
-export const FieldGroup = styled(Form.FieldGroup)`
-  --FieldGroup-row-gap: 0;
+export const Form = styled(FormContainer.Form)`
+  --Instructions-margin-block-end: 0;
 `;

@@ -6,31 +6,37 @@ import { formInstructions, respond } from "theme/styles/mixins";
 export const PrimaryInstructions = styled.span`
   ${formInstructions}
   display: block;
-  margin-block-end: 1em;
 
   a:visited {
     color: inherit;
   }
 
-  &:last-child {
-    margin-block-end: 0;
+  &:not(:first-child) {
+    margin-block-start: var(--Instructions-margin-block-start);
   }
 
-  &.space-bottom {
-    margin-block-end: 2em;
+  &:not(:last-child) {
+    margin-block-end: var(--Instructions-margin-block-end, 1em);
+
+    &.space-bottom {
+      --Instructions-margin-block-end: 2em;
+    }
   }
 
   ${({ $withActions }) =>
     $withActions &&
-    `grid-column: 1 / -1;
-    margin-bottom: 1em !important;
+    `
+      --Instructions-margin-block-end: 1em;
+      grid-column: 1 / -1;
 
-    ${respond(`margin-bottom: 0 !important;`, 60)}
+      ${respond(`--Instructions-margin-block-end: 0;`, 60)}
   `}
 `;
 
 export const SecondaryInstructions = styled(PrimaryInstructions)`
-  margin-block-start: 0.5em;
+  &:not(:first-child) {
+    margin-block-start: var(--Instructions-margin-block-start, 0.5em);
+  }
 
   &.inline {
     display: inline;
