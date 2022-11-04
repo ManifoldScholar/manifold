@@ -44,7 +44,7 @@ export default function TextTOCContainer({ text, refresh, route }) {
         />
         <div className="entity-list__button-set-flex full-width">
           <Link
-            to={lh.link("backendTextSectionsNew", text.id)}
+            to={lh.link("backendTextTOCEntryEdit", text.id)}
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
