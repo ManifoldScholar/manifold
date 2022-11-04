@@ -118,6 +118,6 @@ export const Legend = styled.legend`
     margin-top: 4px;
   }
   + ${RadioOption} {
-    margin-block-start: 1em;
+    margin-block-start: 0.25em;
   }
 `;

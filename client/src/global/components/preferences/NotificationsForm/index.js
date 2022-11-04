@@ -77,10 +77,9 @@ class NotificationsForm extends Component {
 
     return (
       <>
-        <Form.FieldGroup
+        <Styled.FieldGroup
           label={t("forms.notifications.project_activity")}
           instructions={t("forms.notifications.project_activity_instructions")}
-          gapLg
         >
           <Collapse initialVisible={this.digestOpen}>
             <ProjectPreferences
@@ -91,8 +90,8 @@ class NotificationsForm extends Component {
               }
             />
           </Collapse>
-        </Form.FieldGroup>
-        <Form.FieldGroup label={t("forms.notifications.other_activity")} gapLg>
+        </Styled.FieldGroup>
+        <Form.FieldGroup label={t("forms.notifications.other_activity")}>
           {this.renderNotificationContent()}
         </Form.FieldGroup>
         <Styled.Button
