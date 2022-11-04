@@ -470,6 +470,8 @@ exports[`reader/components/section/NextSection matches the snapshot 1`] = `
               "numberOfVolumes",
               "volume",
             ],
+            "restrictedAccessBody": "Test body",
+            "restrictedAccessHeading": "Test heading",
             "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
             "subtitle": "World's Greatest Dog",
             "title": "Rowan Test",

@@ -6,16 +6,17 @@ exports[`backend/components/project-collection/SortBy matches the snapshot 1`] =
     backend.forms.project_collection.order_manually_instructions
   </Instructions>
   <Toggle>
-    <Form.BaseLabel
+    <Label
       as="div"
       label="backend.forms.project_collection.order_manually"
     />
     <div
       className="toggle-indicator"
     >
-      <div
+      <Toggle
+        $checked={true}
         aria-pressed={true}
-        className="boolean-primary checked"
+        as="div"
         onClick={[Function]}
         role="button"
         tabIndex="0"
@@ -25,7 +26,7 @@ exports[`backend/components/project-collection/SortBy matches the snapshot 1`] =
         >
           backend.forms.project_collection.order_collection_manually
         </span>
-      </div>
+      </Toggle>
     </div>
   </Toggle>
 </Wrapper>

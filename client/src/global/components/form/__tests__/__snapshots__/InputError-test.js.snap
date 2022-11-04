@@ -8,7 +8,6 @@ exports[`global/components/form/InputError matches the snapshot 1`] = `
   role="alert"
 >
   <Error
-    className="error"
     key="0"
   >
     Can't be blank.

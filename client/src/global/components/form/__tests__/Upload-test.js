@@ -24,20 +24,6 @@ describe("global/components/form/Upload", () => {
     expect($wrapper).toMatchSnapshot();
   });
 
-  it("should contain a preview", () => {
-    expect($wrapper.find('[data-id="preview"]')).toHaveLength(1);
-  });
-
-  it("should contain a remove link", () => {
-    expect($wrapper.find('[data-id="remove"]')).toHaveLength(1);
-  });
-
-  it("should trigger set callback when remove is clicked", () => {
-    $set.mockClear();
-    $wrapper.find('[data-id="remove"]').simulate("click", $fakeDomEvent);
-    expect($set).toHaveBeenCalled();
-  });
-
   context("When there is no remove prop", () => {
     def("root", () => (
       <Upload
@@ -52,20 +38,6 @@ describe("global/components/form/Upload", () => {
 
     it("matches the snapshot", () => {
       expect($wrapper).toMatchSnapshot();
-    });
-
-    it("should contain a preview", () => {
-      expect($wrapper.find('[data-id="preview"]')).toHaveLength(1);
-    });
-
-    it("should contain a remove link", () => {
-      expect($wrapper.find('[data-id="remove"]')).toHaveLength(1);
-    });
-
-    it("should trigger set callback when remove is clicked with null value", () => {
-      $set.mockClear();
-      $wrapper.find('[data-id="remove"]').simulate("click", $fakeDomEvent);
-      expect($set).toHaveBeenCalled();
     });
   });
 });

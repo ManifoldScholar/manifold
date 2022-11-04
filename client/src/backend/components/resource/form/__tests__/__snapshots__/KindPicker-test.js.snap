@@ -5,7 +5,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
   class="form-secondary css-mfq02g-KindPicker e1rz3qld5"
 >
   <div
-    class="css-154vff9-Wrapper eon8abq0"
+    class="css-1idpiku-Wrapper eon8abq0"
   >
     <label
       class="css-bmmdfg-PrimaryLabel e11et4nf2"
@@ -17,89 +17,85 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
       class="css-ze28ur-SelectWrapper e1rz3qld4"
     >
       <div
-        class="css-154vff9-Wrapper eon8abq0"
+        class="css-1idpiku-Wrapper eon8abq0"
       >
+        <label
+          class="css-bmmdfg-PrimaryLabel e11et4nf2"
+          for="select-1"
+        />
         <div
-          class="css-154vff9-Wrapper eon8abq0"
+          class="css-e6curp-SecondarySelectWrapper exv2xkc7"
         >
-          <label
-            class="css-bmmdfg-PrimaryLabel e11et4nf2"
-            for="select-1"
-          />
-          <div
-            class="css-e6curp-SecondarySelectWrapper exv2xkc7"
+          <svg
+            aria-hidden="true"
+            class="manicon-svg css-nnaksz-Icon exv2xkc1 svg-icon--disclosureDown24"
+            fill="currentColor"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              aria-hidden="true"
-              class="manicon-svg css-nnaksz-Icon exv2xkc1 svg-icon--disclosureDown24"
-              fill="currentColor"
-              height="24"
-              viewBox="0 0 24 24"
-              width="24"
-              xmlns="http://www.w3.org/2000/svg"
+            <polygon
+              points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
+            />
+          </svg>
+          <select
+            aria-describedby="select-error-1 select-instructions-1"
+            class="css-zhm7ug-BaseSelect-SecondarySelect exv2xkc3"
+            id="select-1"
+          >
+            <option
+              selected=""
+              value="image"
             >
-              <polygon
-                points="20.374 9 21 9.78 12 17 3 9.78 3.626 9 12 15.718"
-              />
-            </svg>
-            <select
-              aria-describedby="select-error-1 select-instructions-1"
-              class="css-1vxmpme-BaseSelect-SecondarySelect exv2xkc3"
-              id="select-1"
+              backend.forms.resource.image
+            </option>
+            <option
+              value="video"
             >
-              <option
-                selected=""
-                value="image"
-              >
-                backend.forms.resource.image
-              </option>
-              <option
-                value="video"
-              >
-                backend.forms.resource.video
-              </option>
-              <option
-                value="audio"
-              >
-                backend.forms.resource.audio
-              </option>
-              <option
-                value="file"
-              >
-                backend.forms.resource.file
-              </option>
-              <option
-                value="link"
-              >
-                backend.forms.resource.link
-              </option>
-              <option
-                value="pdf"
-              >
-                backend.forms.resource.pdf
-              </option>
-              <option
-                value="document"
-              >
-                backend.forms.resource.document
-              </option>
-              <option
-                value="spreadsheet"
-              >
-                backend.forms.resource.spreadsheet
-              </option>
-              <option
-                value="presentation"
-              >
-                backend.forms.resource.presentation
-              </option>
-              <option
-                value="interactive"
-              >
-                backend.forms.resource.interactive
-              </option>
-            </select>
-          </div>
+              backend.forms.resource.video
+            </option>
+            <option
+              value="audio"
+            >
+              backend.forms.resource.audio
+            </option>
+            <option
+              value="file"
+            >
+              backend.forms.resource.file
+            </option>
+            <option
+              value="link"
+            >
+              backend.forms.resource.link
+            </option>
+            <option
+              value="pdf"
+            >
+              backend.forms.resource.pdf
+            </option>
+            <option
+              value="document"
+            >
+              backend.forms.resource.document
+            </option>
+            <option
+              value="spreadsheet"
+            >
+              backend.forms.resource.spreadsheet
+            </option>
+            <option
+              value="presentation"
+            >
+              backend.forms.resource.presentation
+            </option>
+            <option
+              value="interactive"
+            >
+              backend.forms.resource.interactive
+            </option>
+          </select>
         </div>
       </div>
     </div>
