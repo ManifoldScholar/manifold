@@ -154,7 +154,7 @@
       "exports": {
         "location_placeholder": "Choose an Export Location",
         "instructions": "Manifold makes it possible to export a preservation copy of your project to an external export target. To start an export, select one of the configured targets below and press the button. The export will happen in the background and can take a few minutes to complete.",
-        "no_targets": "No export targets have been created on this instance. Export targets can be managed in the backend under records > export targets.",
+        "no_targets": "No export targets have been created on this instance. Export targets can be managed in the backend under Settings > Export Targets.",
         "no_targets_unauthorized": "No export targets have been created on this instance. Only administrators may create export targets. To setup export targets, please contact the administrator of this Manifold instance.",
         "add_target_label": "Create a new export target",
         "new_export_label": "New Project Export:",

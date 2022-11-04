@@ -1,24 +1,29 @@
+import { formInstructions } from "theme/styles/mixins";
+
 export default `
   .instructional-copy {
     display: block;
-    padding-bottom: 12px;
-    margin-top: 0.75em;
-    margin-bottom: 15px;
-    font-size: 17px;
-    font-family: var(--font-family-copy);
-    font-style: italic;
-    text-transform: none;
+    ${formInstructions}
+
+    &:not(:first-child) {
+      margin-top: 0.75em;
+
+      &.margin-top {
+        margin-top: 30px;
+      }
+    }
+
+    &:not(:last-child) {
+      padding-bottom: 12px;
+      margin-bottom: 15px;
+
+      &.margin-bottom {
+        margin-bottom: 30px;
+      }
+    }
 
     a {
       text-decoration-line: underline;
-    }
-
-    &.margin-top {
-      margin-top: 30px;
-    }
-
-    &.margin-bottom {
-      margin-bottom: 30px;
     }
   }
 `;
