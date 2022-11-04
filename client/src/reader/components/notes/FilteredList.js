@@ -126,7 +126,7 @@ class FilteredList extends PureComponent {
         {this.props.sortedAnnotations.map(group => {
           return (
             <Partial.Group
-              key={group.sectionId}
+              key={group.id}
               annotations={group.annotations}
               sectionName={group.name}
               readerSection={this.props.section}
