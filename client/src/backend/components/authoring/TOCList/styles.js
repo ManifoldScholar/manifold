@@ -12,13 +12,13 @@ export const Item = styled.div`
   & + & {
     padding-block-start: 16px;
   }
-  color: var(--color-neutral-text-extra-light);
 `;
 
 export const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+  color: var(--color-neutral-text-extra-light);
 `;
 
 export const ChildLink = styled.div`
@@ -58,7 +58,7 @@ export const ButtonGroup = styled.div`
   padding: 0;
   color: var(--color-neutral-ui-light);
 
-  &:hover ~ ${Title} {
+  &:hover ~ ${TitleWrapper} {
     color: var(--highlight-color);
   }
 
@@ -68,8 +68,6 @@ export const ButtonGroup = styled.div`
 `;
 
 export const Inner = styled.div`
-  --item-background: var(--box-bg-color);
-
   ${draggable}
   padding: 10px 24px;
   display: flex;

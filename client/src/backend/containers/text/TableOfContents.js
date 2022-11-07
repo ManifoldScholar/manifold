@@ -8,6 +8,7 @@ import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { childRoutes } from "helpers/router";
 import TOCList from "backend/components/authoring/TOCList";
+import { formatTreeData } from "backend/components/authoring/TOCList/formatTreeData";
 
 export default function TextTOCContainer({ text, refresh, route }) {
   const { t } = useTranslation();
@@ -83,7 +84,7 @@ export default function TextTOCContainer({ text, refresh, route }) {
             </span>
           </Link>
         </div>
-        <TOCList />
+        <TOCList toc={formatTreeData(text.attributes.toc)} />
       </FormContainer.Form>
     </section>
   );
