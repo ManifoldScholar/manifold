@@ -13,6 +13,6 @@ describe("global/components/sign-in-up/UpdateForm", () => {
   ));
 
   it("matches the snapshot", () => {
-    expect(mount($withApp($root))).toMatchSnapshot();
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

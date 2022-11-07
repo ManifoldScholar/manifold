@@ -14,6 +14,6 @@ describe("backend/components/ingestion/form/Wrapper", () => {
   ));
 
   it("matches the snapshot after mounting", () => {
-    expect(mount($withApp($root))).toMatchSnapshot();
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 });

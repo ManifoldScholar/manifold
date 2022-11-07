@@ -19,7 +19,7 @@ describe("global/components/sign-in-up/Login", () => {
   def("wrapper", () => mount($withApp($root)));
 
   it("matches the snapshot", () => {
-    expect(mount($withApp($root))).toMatchSnapshot();
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 
   it("should trigger handleViewChange callback when show forgot is clicked", () => {

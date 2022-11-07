@@ -18,7 +18,7 @@ describe("global/components/form/Upload", () => {
       accepts="images"
     />
   ));
-  def("wrapper", () => mount($root));
+  def("wrapper", () => render($root).html());
 
   it("matches the snapshot", () => {
     expect($wrapper).toMatchSnapshot();
