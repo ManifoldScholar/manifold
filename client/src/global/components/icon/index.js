@@ -165,6 +165,7 @@ import Users32 from "./32/Users";
 import WarningSign64 from "./64/WarningSign";
 import ZoomIn16 from "./16/ZoomIn";
 import ZoomOut16 from "./16/ZoomOut";
+import TocLink16 from "./16/TOCLink";
 
 export default {
   ActivityComments64,
@@ -327,6 +328,7 @@ export default {
   TextsStacked64,
   TimerClock32,
   Toc64,
+  TocLink16,
   Touch64,
   Upload32,
   Upload64,

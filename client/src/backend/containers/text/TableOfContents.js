@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { childRoutes } from "helpers/router";
+import TOCList from "backend/components/authoring/TOCList";
 
 export default function TextTOCContainer({ text, refresh, route }) {
   const { t } = useTranslation();
@@ -82,6 +83,7 @@ export default function TextTOCContainer({ text, refresh, route }) {
             </span>
           </Link>
         </div>
+        <TOCList />
       </FormContainer.Form>
     </section>
   );
