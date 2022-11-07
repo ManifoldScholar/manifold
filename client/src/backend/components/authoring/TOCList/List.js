@@ -1,0 +1,57 @@
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Tree, { mutateTree, moveItemOnTree } from "@atlaskit/tree";
+import Item from "./TOCEntry";
+import test from "./testData";
+import { DragOverContext } from "./dragContext";
+
+export default function TOCList({ toc }) {
+  const [tree, setTree] = useState(test);
+  const [combine, setCombine] = useState(null);
+
+  const renderItem = ({ item, provided, snapshot, depth }) => {
+    return (
+      <Item
+        item={item}
+        depth={depth}
+        innerRef={provided.innerRef}
+        draggableProps={provided.draggableProps}
+        dragHandleProps={provided.dragHandleProps}
+        isDragging={snapshot.isDragging}
+        placeholder={provided.placeholder}
+        setCombine={setCombine}
+        combine={snapshot.combineWith}
+      />
+    );
+  };
+
+  const onDragEnd = (source, destination) => {
+    setCombine(null);
+    const update = moveItemOnTree(tree, source, destination);
+    const expand = mutateTree(update, destination.parentId, {
+      isExpanded: true
+    });
+    setTree(expand);
+  };
+
+  return tree ? (
+    <div className="full-width" style={{ overflow: "auto", height: "100vh" }}>
+      <DragOverContext.Provider value={combine}>
+        <Tree
+          tree={tree}
+          renderItem={renderItem}
+          onDragEnd={onDragEnd}
+          isDragEnabled
+          isNestingEnabled
+          offsetPerLevel={0}
+        />
+      </DragOverContext.Provider>
+    </div>
+  ) : null;
+}
+
+TOCList.displayName = "Text.TOC.List";
+
+TOCList.propTypes = {
+  toc: PropTypes.object.isRequired
+};
