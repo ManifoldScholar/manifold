@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Tree, { mutateTree, moveItemOnTree } from "@atlaskit/tree";
 import Item from "./TOCEntry";
-import test from "./testData";
 import { DragOverContext } from "./dragContext";
 
 export default function TOCList({ toc }) {
-  const [tree, setTree] = useState(test);
+  const [tree, setTree] = useState(toc);
   const [combine, setCombine] = useState(null);
 
   const renderItem = ({ item, provided, snapshot, depth }) => {
@@ -35,7 +34,13 @@ export default function TOCList({ toc }) {
   };
 
   return tree ? (
-    <div className="full-width" style={{ overflow: "auto", height: "100vh" }}>
+    <div
+      className="full-width"
+      style={{
+        overflow: "auto",
+        height: `${(Object.keys(toc.items).length - 1) * 68}px`
+      }}
+    >
       <DragOverContext.Provider value={combine}>
         <Tree
           tree={tree}
