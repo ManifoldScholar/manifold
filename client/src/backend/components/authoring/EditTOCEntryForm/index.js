@@ -38,6 +38,7 @@ export default function EditTOCEntryForm({ entry = {}, text, onSuccess }) {
           ]}
           rounded
           wide
+          hideLabel
         />
       </Form.FieldGroup>
       <Form.FieldGroup
