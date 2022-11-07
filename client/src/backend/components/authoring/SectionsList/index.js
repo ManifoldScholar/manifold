@@ -4,15 +4,12 @@ import EntitiesList from "backend/components/list/EntitiesList";
 import Section from "./SectionListItem";
 
 export default function SectionsList({
-  sections = [
-    { attributes: { title: "A Section" } },
-    { attributes: { title: "Another Section" } }
-  ],
+  sections = [],
   onDelete,
   onEdit,
   onReorder = () => {}
 }) {
-  return (
+  return sections.length ? (
     <div className="full-width">
       <EntitiesList
         entities={sections}
@@ -22,7 +19,7 @@ export default function SectionsList({
         callbacks={{ onReorder }}
       />
     </div>
-  );
+  ) : null;
 }
 
 SectionsList.displayName = "Text.Sections.List";

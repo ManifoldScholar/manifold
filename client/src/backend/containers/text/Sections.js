@@ -66,7 +66,7 @@ export default function TextSectionsContainer({ text, refresh, route }) {
             </span>
           </Link>
         </div>
-        <SectionsList />
+        <SectionsList sections={text?.attributes?.sectionsMap} />
       </FormContainer.Form>
     </section>
   );
