@@ -4,20 +4,23 @@ import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import SectionsList from "./SectionsList";
+import { useUIDSeed } from "react-uid";
 
 export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
   const { t } = useTranslation();
+  const uidSeed = useUIDSeed();
 
   const [sectionName, setSectionName] = useState();
   const [sections, setSections] = useState([]);
   const setSectionOrder = result => {
     const { draggableId, destination } = result ?? {};
-    const newOrder = sections.filter(s => s !== draggableId);
-    newOrder.splice(destination.index, 0, draggableId);
+    const entity = sections.find(s => s.id === draggableId);
+    const newOrder = sections.filter(s => s.id !== draggableId);
+    newOrder.splice(destination.index, 0, entity);
     setSections(newOrder);
   };
   const handleDeleteSection = section => {
-    const update = sections.filter(s => s !== section);
+    const update = sections.filter(s => s.id !== section.id);
     setSections(update);
   };
 
@@ -56,7 +59,14 @@ export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
               {
                 label: t("actions.create"),
                 onClick: (e, el) => {
-                  setSections([...sections, el.value]);
+                  const duplicate = sections.filter(s => s.name === el.value);
+                  const id = duplicate.length
+                    ? `${el.value}_${duplicate.length}`
+                    : el.value;
+                  setSections([
+                    ...sections,
+                    { id: uidSeed(id), name: el.value }
+                  ]);
                   setSectionName(null);
                 }
               }
