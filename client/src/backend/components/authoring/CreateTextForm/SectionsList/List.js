@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import Section from "./Section";
 import { useUID } from "react-uid";
-import * as Styled from "./styles";
 
 export default function SectionList({ sections, setSectionOrder, onDelete }) {
   const id = useUID();
@@ -11,22 +10,18 @@ export default function SectionList({ sections, setSectionOrder, onDelete }) {
   return (
     <DragDropContext onDragEnd={setSectionOrder}>
       <Droppable droppableId={id}>
-        {(provided, snapshot) => (
-          <Styled.List
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            $dragging={snapshot.isDraggingOver}
-          >
+        {provided => (
+          <ul {...provided.droppableProps} ref={provided.innerRef}>
             {sections.map((section, i) => (
               <Section
-                key={section}
-                name={section}
+                key={section.id}
+                section={section}
                 index={i}
                 onDelete={onDelete}
               />
             ))}
             {provided.placeholder}
-          </Styled.List>
+          </ul>
         )}
       </Droppable>
     </DragDropContext>
