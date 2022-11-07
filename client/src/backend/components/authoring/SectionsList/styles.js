@@ -15,18 +15,6 @@ export const Item = styled.li`
   color: var(--color-neutral-text-extra-light);
 `;
 
-export const Inner = styled.div`
-  ${draggable}
-  padding: 12px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  cursor: default;
-
-  ${({ $isDragging }) => $isDragging && dragging}
-`;
-
 export const Title = styled.div`
   overflow: hidden;
   ${textTruncate}
@@ -35,17 +23,57 @@ export const Title = styled.div`
   font-weight: var(--font-weight-semibold);
 `;
 
+export const BG = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background-color: var(--box-bg-color);
+  border-radius: var(--box-border-radius);
+
+  ${({ $isDragging }) =>
+    $isDragging && `background-color: var(--drawer-bg-color)`}
+`;
+
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
   padding: 0;
 
-  ${respond(`gap: 12px;`, 30)}
+  &:hover ~ ${Title} {
+    color: var(--highlight-color);
+  }
+
+  &:hover ~ ${BG} {
+    background-color: var(--drawer-bg-color);
+  }
+`;
+
+export const Inner = styled.div`
+  --item-background: var(--box-bg-color);
+
+  ${draggable}
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: default;
+  background-color: transparent;
+  position: relative;
+
+  ${({ $isDragging }) => $isDragging && dragging}
 `;
 
 export const Button = styled.button`
   ${buttonUnstyled}
+
+  padding-inline: 3px;
+
+  ${respond(`padding-inline: 6px;`, 30)};
 `;
 
 export const DragHandle = styled(Button)`
