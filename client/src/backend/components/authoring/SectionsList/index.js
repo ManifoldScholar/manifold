@@ -5,8 +5,8 @@ import Section from "./SectionListItem";
 
 export default function SectionsList({
   sections = [],
+  textId,
   onDelete,
-  onEdit,
   onReorder = () => {}
 }) {
   return sections.length ? (
@@ -14,7 +14,7 @@ export default function SectionsList({
       <EntitiesList
         entities={sections}
         entityComponent={Section}
-        entityComponentProps={{ onDelete, onEdit }}
+        entityComponentProps={{ onDelete, textId }}
         listStyle="bare"
         callbacks={{ onReorder }}
       />
