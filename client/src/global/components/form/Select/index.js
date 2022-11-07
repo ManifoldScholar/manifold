@@ -15,6 +15,7 @@ export class FormSelect extends Component {
     value: PropTypes.any,
     errors: PropTypes.array,
     label: PropTypes.string,
+    hideLabel: PropTypes.bool,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     rounded: PropTypes.bool,
     name: PropTypes.string,
@@ -31,7 +32,8 @@ export class FormSelect extends Component {
   };
 
   static defaultProps = {
-    rounded: false
+    rounded: false,
+    hideLabel: false
   };
 
   static contextType = FormContext;
@@ -115,6 +117,12 @@ export class FormSelect extends Component {
               <Instructions
                 instructions={this.props.instructions}
                 id={`${this.idForInstructionsPrefix}-${id}`}
+                styleType={this.props.rounded ? "tertiary" : styleType}
+                label={this.props.label}
+                isSelect
+                className={
+                  this.props.hideLabel ? "screen-reader-text" : undefined
+                }
               />
             )}
           </Errorable>
