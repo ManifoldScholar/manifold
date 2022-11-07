@@ -35,7 +35,7 @@ module Packaging
       private
 
       def build_base_path
-        stylesheet.source_identifier.presence || "css/#{stylesheet_name}.css"
+        "css/#{stylesheet_name}.css"
       end
     end
   end
