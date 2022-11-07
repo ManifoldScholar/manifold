@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import Form from "global/components/form";
 import setter from "global/components/form/setter";
 import { Trans, withTranslation } from "react-i18next";
@@ -43,17 +42,6 @@ class IngestionFormUpload extends PureComponent {
   get ingestionSourceUrl() {
     return this.props.getModelValue("attributes[externalSourceUrl]");
   }
-
-  get buttonClasses() {
-    return classNames("button-secondary", "button-secondary--outlined");
-  }
-
-  handleCancelClick = event => {
-    event.preventDefault();
-    this.props.cancelUrl
-      ? this.props.history.push(this.props.cancelUrl)
-      : this.props.history.goBack();
-  };
 
   render() {
     const formHeader =
@@ -102,26 +90,11 @@ class IngestionFormUpload extends PureComponent {
             onChange={event => this.onUrlChange(event)}
             placeholder={t("backend.forms.ingestion.url_placeholder")}
           />
-          <div className="buttons-icon-horizontal authoring-drawer">
-            <button
-              type="submit"
-              className={this.buttonClasses}
-              disabled={!this.valid}
-            >
-              <span>{t("actions.continue")}</span>
-            </button>
-            {this.props.cancelUrl ? (
-              <button
-                onClick={this.handleCancelClick}
-                className={classNames(
-                  this.buttonClasses,
-                  "button-secondary--dull"
-                )}
-              >
-                <span>{t("actions.cancel")}</span>
-              </button>
-            ) : null}
-          </div>
+          <Form.DrawerButtons
+            showCancel
+            cancelUrl={this.props.cancelUrl}
+            submitLabel="actions.continue"
+          />
         </Form.FieldGroup>
       </>
     );
