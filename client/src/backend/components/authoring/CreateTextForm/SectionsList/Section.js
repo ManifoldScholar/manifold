@@ -4,18 +4,18 @@ import { Draggable } from "react-beautiful-dnd";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
-export default function Section({ name, onDelete, index }) {
+export default function Section({ section, onDelete, index }) {
   return (
-    <Draggable draggableId={name} index={index}>
+    <Draggable draggableId={section.id} index={index}>
       {(provided, snapshot) => (
         <Styled.Section
           ref={provided.innerRef}
           {...provided.draggableProps}
           $dragging={snapshot.isDragging}
         >
-          <span>{name}</span>
+          <span>{section.name}</span>
           <Styled.ButtonGroup>
-            <button onClick={() => onDelete(name)}>
+            <button onClick={() => onDelete(section.id)}>
               <IconComposer icon="delete32" size={24} />
             </button>
             <Styled.DragHandle {...provided.dragHandleProps}>

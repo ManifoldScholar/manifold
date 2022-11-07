@@ -6,10 +6,6 @@ import {
   dragging
 } from "theme/styles/mixins";
 
-export const List = styled.ul`
-  ${({ $dragging }) => $dragging && dragging}
-`;
-
 export const Section = styled.li`
   display: flex;
   justify-content: space-between;
