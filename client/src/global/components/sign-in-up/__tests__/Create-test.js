@@ -17,7 +17,7 @@ describe("global/components/sign-in-up/Create", () => {
   ));
 
   it("matches the snapshot", () => {
-    expect(mount($withApp($root))).toMatchSnapshot();
+    expect(render($withApp($root)).html()).toMatchSnapshot();
   });
 
   it("should trigger handleViewChange callback when show login is clicked", () => {
