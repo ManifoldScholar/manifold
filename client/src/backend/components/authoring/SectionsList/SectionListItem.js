@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 
 export default function SectionListItem(props) {
   const {
-    entity,
+    entity: section,
     draggableProps,
     dragHandleProps,
     isDragging,
@@ -16,10 +16,9 @@ export default function SectionListItem(props) {
   } = props;
   const { t } = useTranslation();
 
-  return entity ? (
+  return section ? (
     <Styled.Item ref={innerRef} {...draggableProps}>
       <Styled.Inner $isDragging={isDragging}>
-        <Styled.Title>{entity.attributes.title}</Styled.Title>
         <Styled.ButtonGroup>
           <Styled.Button onClick={onDelete} aria-label={t("actions.delete")}>
             <Utility.IconComposer size={24} icon="delete24" />
@@ -31,6 +30,8 @@ export default function SectionListItem(props) {
             <Utility.IconComposer size={30} icon="grabber32" />
           </Styled.DragHandle>
         </Styled.ButtonGroup>
+        <Styled.Title>{section.name}</Styled.Title>
+        <Styled.BG $isDragging={isDragging} />
       </Styled.Inner>
     </Styled.Item>
   ) : null;
@@ -39,7 +40,7 @@ export default function SectionListItem(props) {
 SectionListItem.displayName = "Text.Sections.List.Item";
 
 SectionListItem.propTypes = {
-  entity: PropTypes.object,
+  section: PropTypes.object,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   dragHandleProps: PropTypes.object,
