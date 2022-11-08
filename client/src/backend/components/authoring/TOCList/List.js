@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Tree, { mutateTree, moveItemOnTree } from "@atlaskit/tree";
-import Item from "./TOCEntry";
+import Entry from "./TOCEntry";
 import { DragOverContext } from "./dragContext";
 
-export default function TOCList({ toc }) {
+export default function TOCList({ toc, textId }) {
   const [tree, setTree] = useState(toc);
   const [combine, setCombine] = useState(null);
 
   const renderItem = ({ item, provided, snapshot, depth }) => {
     return (
-      <Item
-        item={item}
+      <Entry
+        entry={item}
         depth={depth}
         innerRef={provided.innerRef}
         draggableProps={provided.draggableProps}
@@ -20,6 +20,7 @@ export default function TOCList({ toc }) {
         placeholder={provided.placeholder}
         setCombine={setCombine}
         combine={snapshot.combineWith}
+        textId={textId}
       />
     );
   };
@@ -58,5 +59,6 @@ export default function TOCList({ toc }) {
 TOCList.displayName = "Text.TOC.List";
 
 TOCList.propTypes = {
-  toc: PropTypes.object.isRequired
+  toc: PropTypes.object.isRequired,
+  textId: PropTypes.string
 };

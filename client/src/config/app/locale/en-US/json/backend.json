@@ -230,7 +230,8 @@
         "content_instructions": "Instructions needed here..."
       },
       "text_toc": {
-        "header": "Edit TOC Entry",
+        "edit_header": "Edit TOC Entry",
+        "add_header": "Add TOC Entry",
         "entry_name": "TOC Entry Name",
         "section_link": "Section Link",
         "section_link_instructions": "Instructions here",

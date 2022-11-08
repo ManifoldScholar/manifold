@@ -24,13 +24,17 @@ export default function TextTOCContainer({ text, refresh, route }) {
         lockScrollClickCloses: false,
         closeUrl
       },
-      childProps: { refresh, text }
+      childProps: {
+        refresh,
+        textId: text.id,
+        sections: text.attributes?.sectionsMap
+      }
     });
   };
 
   // TODO: Add an Authorize with correct permission.
 
-  return (
+  return text ? (
     <section>
       {renderChildRoutes()}
       <FormContainer.Form
@@ -46,7 +50,7 @@ export default function TextTOCContainer({ text, refresh, route }) {
         />
         <div className="entity-list__button-set-flex full-width">
           <Link
-            to={lh.link("backendTextTOCEntryEdit", text.id)}
+            to={lh.link("backendTextTOCEntryNew", text.id)}
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
@@ -65,7 +69,7 @@ export default function TextTOCContainer({ text, refresh, route }) {
             </span>
           </Link>
           <Link
-            to={lh.link("backendTextSectionsNew", text.id)}
+            to={lh.link("backendTextTOC", text.id)}
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
@@ -84,10 +88,10 @@ export default function TextTOCContainer({ text, refresh, route }) {
             </span>
           </Link>
         </div>
-        <TOCList toc={formatTreeData(text.attributes.toc)} />
+        <TOCList toc={formatTreeData(text.attributes.toc)} textId={text.id} />
       </FormContainer.Form>
     </section>
-  );
+  ) : null;
 }
 
 TextTOCContainer.displayName = "Text.Sections";
