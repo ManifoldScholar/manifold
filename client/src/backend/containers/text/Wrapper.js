@@ -143,7 +143,7 @@ export class TextWrapperContainer extends PureComponent {
         {epubV3ExportUrl && (
           <a href={epubV3ExportUrl} download className="utility-button">
             <IconComposer
-              icon="arrowDown32"
+              icon="download24"
               size={26}
               className="utility-button__icon utility-button__icon--download"
             />
@@ -159,7 +159,7 @@ export class TextWrapperContainer extends PureComponent {
             className="utility-button"
           >
             <IconComposer
-              icon="arrowDown32"
+              icon="download24"
               size={26}
               className="utility-button__icon utility-button__icon--download"
             />
