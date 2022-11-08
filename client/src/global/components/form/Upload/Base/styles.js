@@ -23,7 +23,7 @@ export const Dropzone = styled(BaseDropzone)`
 
   position: relative;
   cursor: pointer;
-  max-width: 350px;
+  max-width: var(--Dropzone-max-width, 350px);
   border: 1px solid var(--input-border-color);
   border-radius: var(--box-border-radius);
   transition: border-color 0.2s;

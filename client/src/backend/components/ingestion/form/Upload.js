@@ -69,7 +69,6 @@ class IngestionFormUpload extends PureComponent {
       <>
         <Form.FieldGroup label={formHeader} instructions={fileInstructions}>
           <Form.TusUpload
-            inlineStyle={{ width: "100%" }}
             layout="landscape"
             value={this.props.getModelValue("attributes[source]")}
             initialValue={this.props.getModelValue(

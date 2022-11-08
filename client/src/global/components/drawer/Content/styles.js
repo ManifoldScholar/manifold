@@ -37,6 +37,8 @@ function drawerSlideTransition(
 }
 
 export const Drawer = styled.div`
+  --Dropzone-max-width: 100%;
+
   position: fixed;
   bottom: 0;
   top: var(--library-header-height, 82px);
@@ -118,6 +120,8 @@ export const Drawer = styled.div`
 `;
 
 export const DrawerReader = styled(Drawer)`
+  --Dropzone-max-width: 350px;
+
   top: var(--reader-header-height);
   z-index: 150;
   padding: 0 !important;
@@ -138,5 +142,7 @@ export const DrawerReader = styled(Drawer)`
 `;
 
 export const DrawerOverlay = styled(Drawer)`
+  --Dropzone-max-width: 350px;
+
   top: 0;
 `;
