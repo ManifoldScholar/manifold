@@ -12,7 +12,12 @@ export default function TextCreateContainer({ project }) {
     <section>
       <Navigation.DrawerHeader
         title={t("backend_entities.texts.create_button_label")}
-      />
+      >
+        <span className="subtitle">
+          This is a sample description of the drawer. Some more description
+          here.
+        </span>
+      </Navigation.DrawerHeader>
       <CreateTextForm
         cancelUrl={lh.link("backendProjectTexts", project.id)}
         name={"TBD"}
