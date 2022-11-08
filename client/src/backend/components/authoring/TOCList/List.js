@@ -4,7 +4,7 @@ import Tree, { mutateTree, moveItemOnTree } from "@atlaskit/tree";
 import Entry from "./TOCEntry";
 import { DragOverContext } from "./dragContext";
 
-export default function TOCList({ toc, textId }) {
+export default function TOCList({ toc, textId, startSectionId }) {
   const [tree, setTree] = useState(toc);
   const [combine, setCombine] = useState(null);
 
@@ -21,6 +21,7 @@ export default function TOCList({ toc, textId }) {
         setCombine={setCombine}
         combine={snapshot.combineWith}
         textId={textId}
+        isStart={startSectionId === item.id}
       />
     );
   };

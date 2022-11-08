@@ -107,6 +107,7 @@ import Notifications24 from "./24/Notifications";
 import PauseSolid24 from "./24/PauseSolid";
 import Play16 from "./16/Play";
 import PlaySolid24 from "./24/PlaySolid";
+import PlayOutline24 from "./24/PlayOutline";
 import Plus16 from "./16/Plus";
 import Plus24 from "./24/Plus";
 import Privacy24 from "./24/Privacy";
@@ -277,6 +278,7 @@ export default {
   PauseSolid24,
   Play16,
   PlaySolid24,
+  PlayOutline24,
   Plus16,
   Plus24,
   Privacy24,
