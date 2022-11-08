@@ -12,7 +12,7 @@ Array [
       Variant #1
     </label>
     <div
-      class="css-1904g9m-BaseDropzone-Dropzone e1lcnawm3"
+      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
     >
       <input
         class="css-septlj-Input e1lcnawm0"
@@ -59,7 +59,7 @@ Array [
       Variant #2
     </label>
     <div
-      class="css-1904g9m-BaseDropzone-Dropzone e1lcnawm3"
+      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
     >
       <input
         class="css-septlj-Input e1lcnawm0"
@@ -111,7 +111,7 @@ Array [
       High Resolution Image
     </label>
     <div
-      class="css-1904g9m-BaseDropzone-Dropzone e1lcnawm3"
+      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
     >
       <input
         class="css-septlj-Input e1lcnawm0"
@@ -163,7 +163,7 @@ Array [
       Thumbnail Image
     </label>
     <div
-      class="css-1904g9m-BaseDropzone-Dropzone e1lcnawm3"
+      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
     >
       <input
         class="css-septlj-Input e1lcnawm0"
@@ -219,7 +219,7 @@ exports[`backend/components/resource/form/kind/Variants when kind is pdf matches
     Thumbnail Image
   </label>
   <div
-    class="css-1904g9m-BaseDropzone-Dropzone e1lcnawm3"
+    class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
   >
     <input
       class="css-septlj-Input e1lcnawm0"
