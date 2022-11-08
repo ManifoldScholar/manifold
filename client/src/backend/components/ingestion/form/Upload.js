@@ -89,12 +89,12 @@ class IngestionFormUpload extends PureComponent {
             onChange={event => this.onUrlChange(event)}
             placeholder={t("backend.forms.ingestion.url_placeholder")}
           />
-          <Form.DrawerButtons
-            showCancel
-            cancelUrl={this.props.cancelUrl}
-            submitLabel="actions.continue"
-          />
         </Form.FieldGroup>
+        <Form.DrawerButtons
+          showCancel
+          cancelUrl={this.props.cancelUrl}
+          submitLabel="actions.continue"
+        />
       </>
     );
   }
