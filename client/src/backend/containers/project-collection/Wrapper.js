@@ -75,7 +75,10 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   }
 
   fetchProjectCollections = () => {
-    const call = projectCollectionsAPI.index({ order: "position ASC" });
+    const call = projectCollectionsAPI.index(
+      { order: "position ASC" },
+      { number: 1, size: 100 }
+    );
     const { promise } = this.props.dispatch(
       request(call, requests.beProjectCollections)
     );
@@ -244,7 +247,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     if (!projectCollections) return null;
 
     const wrapperClasses = classnames("project-collections", {
-      "active-collection": projectCollection || this.state.showNew,
+      "active-collection": this.props.match.params.id || this.state.showNew,
       empty: this.noProjectCollections
     });
 
