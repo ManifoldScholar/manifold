@@ -87,15 +87,19 @@ export const Inner = styled.div`
 
 `;
 
-export const Button = styled.button`
+const actionIconStyles = `
   ${buttonUnstyled}
 
   padding-inline: 3px;
-
   ${respond(`padding-inline: 6px;`, 30)};
 `;
 
-export const DragHandle = styled(Button)`
+export const Button = styled.button`
+  ${actionIconStyles}
+`;
+
+export const DragHandle = styled.div`
+  ${actionIconStyles}
   cursor: grab;
   ${setHoverStyle()}
 `;
