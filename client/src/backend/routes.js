@@ -269,6 +269,14 @@ const routes = {
               helper: t => `/backend/projects/text/${t}/contents`,
               routes: [
                 {
+                  name: "backendTextTOCEntryNew",
+                  exact: true,
+                  component: "TextTOCEntryNew",
+                  path: "/backend/projects/text/:id/contents/new",
+                  helper: t => `/backend/projects/text/${t}/contents/new`,
+                  modal: true
+                },
+                {
                   name: "backendTextTOCEntryEdit",
                   exact: true,
                   component: "TextTOCEntryEdit",
