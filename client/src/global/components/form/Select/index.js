@@ -97,6 +97,9 @@ export class FormSelect extends Component {
               id={`${this.idPrefix}-${id}`}
               styleType={this.props.rounded ? "tertiary" : styleType}
               label={this.props.label}
+              className={
+                this.props.hideLabel ? "screen-reader-text" : undefined
+              }
               isSelect
             />
             <WrapperTag $wide={this.props.wide}>
@@ -109,6 +112,7 @@ export class FormSelect extends Component {
                 ref={input => {
                   this.inputElement = input;
                 }}
+                $wide={this.props.wide}
               >
                 {options}
               </SelectComponent>
