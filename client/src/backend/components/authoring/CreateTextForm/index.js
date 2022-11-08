@@ -78,12 +78,12 @@ export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
             onDelete={handleDeleteSection}
           />
         </div>
-        <Form.DrawerButtons
-          showCancel
-          cancelUrl={cancelUrl}
-          submitLabel="backend.forms.text_create.save_button_label"
-        />
       </Form.FieldGroup>
+      <Form.DrawerButtons
+        showCancel
+        cancelUrl={cancelUrl}
+        submitLabel="backend.forms.text_create.save_button_label"
+      />
     </FormContainer.Form>
   );
 }
