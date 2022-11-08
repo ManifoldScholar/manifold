@@ -12,7 +12,8 @@ export const Header = styled.header`
 
   .subtitle {
     ${subtitlePrimary}
-    padding: 5px 0;
+    display: inline-block;
+    margin-block-start: 12px;
   }
 
   .instructions {
