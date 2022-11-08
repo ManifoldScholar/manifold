@@ -21,6 +21,10 @@ export default `
       }
     }
 
+    &--backend {
+      --Dropzone-max-width: 100%;
+    }
+
     &--reader {
       &.drawer--pos-default {
         top: var(--reader-header-height);
