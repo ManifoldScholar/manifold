@@ -88,7 +88,11 @@ export default function TextTOCContainer({ text, refresh, route }) {
             </span>
           </Link>
         </div>
-        <TOCList toc={formatTreeData(text.attributes.toc)} textId={text.id} />
+        <TOCList
+          toc={formatTreeData(text.attributes?.toc)}
+          textId={text.id}
+          startSectionId={text.attributes?.startTextSectionId}
+        />
       </FormContainer.Form>
     </section>
   ) : null;

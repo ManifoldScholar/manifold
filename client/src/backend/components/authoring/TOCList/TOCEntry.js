@@ -5,11 +5,13 @@ import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
+import Tooltip from "global/components/atomic/Tooltip";
 import * as Styled from "./styles";
 
 export default function TOCEntry({
   entry,
   depth,
+  isStart,
   innerRef,
   draggableProps,
   dragHandleProps,
@@ -17,7 +19,8 @@ export default function TOCEntry({
   setCombine,
   combine,
   textId,
-  onDelete
+  onDelete,
+  onSetStart
 }) {
   const { t } = useTranslation();
   const active = useContext(DragOverContext);
@@ -36,6 +39,15 @@ export default function TOCEntry({
         $isTarget={active === entry.id}
       >
         <Styled.ButtonGroup>
+          <Tooltip
+            content={t("backend.forms.text_toc.start_tooltip_content")}
+            xOffset="-110px"
+            yOffset="43px"
+          >
+            <Styled.Button onClick={onSetStart}>
+              <Utility.IconComposer size={24} icon="playOutline24" />
+            </Styled.Button>
+          </Tooltip>
           <Styled.Button onClick={onDelete} aria-label={t("actions.delete")}>
             <Utility.IconComposer size={24} icon="delete24" />
           </Styled.Button>
@@ -49,6 +61,7 @@ export default function TOCEntry({
         <Styled.TitleWrapper>
           {!!depth && <Styled.ChildLink icon="tocLink16" />}
           <Styled.Title>{entry.data ? entry.data.title : ""}</Styled.Title>
+          {isStart && <Styled.Tag>Start</Styled.Tag>}
         </Styled.TitleWrapper>
         <Styled.BG $isDragging={isDragging} />
       </Styled.Inner>
@@ -68,5 +81,7 @@ TOCEntry.propTypes = {
   setCombine: PropTypes.func,
   combine: PropTypes.string,
   textId: PropTypes.string,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
+  isStart: PropTypes.bool,
+  onSetStart: PropTypes.func
 };

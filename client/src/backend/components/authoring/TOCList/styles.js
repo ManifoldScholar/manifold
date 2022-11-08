@@ -5,7 +5,8 @@ import {
   buttonUnstyled,
   setHoverStyle,
   textTruncate,
-  respond
+  respond,
+  blockLabelRound
 } from "theme/styles/mixins";
 
 export const Item = styled.div`
@@ -87,19 +88,30 @@ export const Inner = styled.div`
 
 `;
 
-const actionIconStyles = `
+export const Button = styled.button`
   ${buttonUnstyled}
 
   padding-inline: 3px;
   ${respond(`padding-inline: 6px;`, 30)};
 `;
 
-export const Button = styled.button`
-  ${actionIconStyles}
-`;
-
 export const DragHandle = styled.div`
-  ${actionIconStyles}
+  ${buttonUnstyled}
   cursor: grab;
   ${setHoverStyle()}
+`;
+
+export const Tag = styled.div`
+  ${blockLabelRound}
+  width: max-content;
+
+  padding-right: 8px;
+  padding-left: 8px;
+  margin: 0;
+  font-size: 12px;
+  vertical-align: middle;
+  line-height: 1.188;
+  font-family: var(--font-family-heading);
+  background-color: var(--color-accent-primary-light);
+  color: var(--color-neutral-text-extra-dark);
 `;
