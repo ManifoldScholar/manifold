@@ -5,18 +5,31 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 
-export default function EditTOCEntryForm({ entry = {}, text, onSuccess }) {
+export default function AddEditTOCEntryForm({
+  entry = {},
+  textId,
+  sections,
+  onSuccess
+}) {
   const { t } = useTranslation();
 
   const editEntry = () => {};
+  const addEntry = () => {};
+
+  const sectionOptions = sections.map(s => ({
+    value: s.id,
+    label: s.name,
+    key: s.id
+  }));
 
   return (
     <FormContainer.Form
-      model={text}
+      model={entry}
       name="tbd"
       className="form-secondary"
       onSuccess={onSuccess}
       update={editEntry}
+      create={addEntry}
     >
       <Form.TextInput
         focusOnMount
@@ -34,7 +47,8 @@ export default function EditTOCEntryForm({ entry = {}, text, onSuccess }) {
               value: "",
               label: t("backend.forms.text_toc.section_link_placeholder"),
               key: 0
-            }
+            },
+            ...sectionOptions
           ]}
           rounded
           wide
@@ -49,16 +63,16 @@ export default function EditTOCEntryForm({ entry = {}, text, onSuccess }) {
       </Form.FieldGroup>
       <Form.DrawerButtons
         showCancel
-        cancelUrl={lh.link("backendTextTOC", text.id)}
+        cancelUrl={lh.link("backendTextTOC", textId)}
         submitLabel="backend.forms.text_toc.save_button_label"
       />
     </FormContainer.Form>
   );
 }
 
-EditTOCEntryForm.displayName = "Text.TOC.EditEntryForm";
+AddEditTOCEntryForm.displayName = "Text.TOC.AddEditEntryForm";
 
-EditTOCEntryForm.propTypes = {
+AddEditTOCEntryForm.propTypes = {
   text: PropTypes.object.isRequired,
   onSuccess: PropTypes.func
 };

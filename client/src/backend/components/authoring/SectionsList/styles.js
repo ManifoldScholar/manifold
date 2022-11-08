@@ -21,6 +21,7 @@ export const Title = styled.div`
   font-family: var(--font-family-sans);
   font-size: 17px;
   font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-text-extra-light);
 `;
 
 export const BG = styled.div`
