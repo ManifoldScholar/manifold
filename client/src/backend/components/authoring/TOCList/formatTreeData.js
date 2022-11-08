@@ -27,6 +27,8 @@ const formatEntry = entry => {
 };
 
 export const formatTreeData = toc => {
+  if (!toc) return null;
+
   const rootChildren = toc.map(e => e.id);
   const entries = toc.map(formatEntry);
   const flatEntries = entries.flat(Infinity);
