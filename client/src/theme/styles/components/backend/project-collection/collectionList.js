@@ -26,6 +26,11 @@ export default `
         breakpointLessOne(75),
         "max"
       )}
+
+      ul {
+        max-height: 1270px;
+        overflow-y: scroll;
+      }
     }
 
     .actions {
