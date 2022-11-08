@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
-export default class TOCLink extends Component {
+export default class Download extends Component {
   static propTypes = {
     className: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -20,11 +20,11 @@ export default class TOCLink extends Component {
   };
 
   get defaultHeight() {
-    return 12;
+    return 24;
   }
 
   get defaultWidth() {
-    return 17;
+    return 24;
   }
 
   get size() {
@@ -44,7 +44,7 @@ export default class TOCLink extends Component {
   }
 
   get viewBox() {
-    return "0 0 12 17";
+    return "0 0 24 24";
   }
 
   get classes() {
@@ -74,7 +74,8 @@ export default class TOCLink extends Component {
 
     return (
       <svg {...svgProps}>
-        <path d="M17 8H3C1.89543 8 1 7.10457 1 6V0" />
+        <path d="M11.4999 4L11.5 15.0852L7.854 11.4392L7.146 12.1462L12 16.9992L16.854 12.1462L16.146 11.4392L12.5 15.0852L12.4999 4H11.4999Z" />
+        <path d="M5.0001 18.9992H19.0001V14.9992H20.0001V19.9992H4.0001V14.9992H5.0001V18.9992Z" />
       </svg>
     );
   }

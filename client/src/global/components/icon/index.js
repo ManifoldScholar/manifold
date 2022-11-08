@@ -61,6 +61,7 @@ import DisclosureDown32 from "./32/DisclosureDown";
 import DisclosureUp16 from "./16/DisclosureUp";
 import DisclosureUp24 from "./24/DisclosureUp";
 import DisclosureUp32 from "./32/DisclosureUp";
+import Download24 from "./24/Download";
 import Duplicate24 from "./24/Duplicate";
 import Duplicate32 from "./32/Duplicate";
 import EditProfile24 from "./24/EditProfile";
@@ -164,7 +165,6 @@ import Users32 from "./32/Users";
 import WarningSign64 from "./64/WarningSign";
 import ZoomIn16 from "./16/ZoomIn";
 import ZoomOut16 from "./16/ZoomOut";
-import TocLink16 from "./16/TOCLink";
 
 export default {
   ActivityComments64,
@@ -230,6 +230,7 @@ export default {
   DisclosureUp16,
   DisclosureUp24,
   DisclosureUp32,
+  Download24,
   Duplicate24,
   Duplicate32,
   EditProfile24,
@@ -326,7 +327,6 @@ export default {
   TextsStacked64,
   TimerClock32,
   Toc64,
-  TocLink16,
   Touch64,
   Upload32,
   Upload64,
