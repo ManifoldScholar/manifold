@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
 export default function TOCEntry({
-  item,
+  entry,
   depth,
   innerRef,
   draggableProps,
@@ -26,14 +26,14 @@ export default function TOCEntry({
     setCombine(combine);
   }
 
-  const editUrl = lh.link("backendTextSectionsEdit", textId, "id");
+  const editUrl = lh.link("backendTextTOCEntryEdit", textId, entry.id);
 
   return (
     <Styled.Item ref={innerRef} {...draggableProps}>
       <Styled.Inner
         $isDragging={isDragging}
         $depth={depth}
-        $isTarget={active === item.id}
+        $isTarget={active === entry.id}
       >
         <Styled.ButtonGroup>
           <Styled.Button onClick={onDelete} aria-label={t("actions.delete")}>
@@ -48,7 +48,7 @@ export default function TOCEntry({
         </Styled.ButtonGroup>
         <Styled.TitleWrapper>
           {!!depth && <Styled.ChildLink icon="tocLink16" />}
-          <Styled.Title>{item.data ? item.data.title : ""}</Styled.Title>
+          <Styled.Title>{entry.data ? entry.data.title : ""}</Styled.Title>
         </Styled.TitleWrapper>
         <Styled.BG $isDragging={isDragging} />
       </Styled.Inner>
