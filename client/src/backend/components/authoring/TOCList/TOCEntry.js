@@ -29,7 +29,7 @@ export default function TOCEntry({
   const editUrl = lh.link("backendTextSectionsEdit", textId, "id");
 
   return (
-    <Styled.Item ref={innerRef} {...draggableProps} {...dragHandleProps}>
+    <Styled.Item ref={innerRef} {...draggableProps}>
       <Styled.Inner
         $isDragging={isDragging}
         $depth={depth}
@@ -42,7 +42,7 @@ export default function TOCEntry({
           <Styled.Button as={Link} to={editUrl} aria-label={t("actions.edit")}>
             <Utility.IconComposer size={24} icon="annotate24" />
           </Styled.Button>
-          <Styled.DragHandle>
+          <Styled.DragHandle {...dragHandleProps}>
             <Utility.IconComposer size={30} icon="grabber32" />
           </Styled.DragHandle>
         </Styled.ButtonGroup>
