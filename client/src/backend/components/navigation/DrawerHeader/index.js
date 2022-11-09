@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Utility from "global/components/utility";
 import { DrawerContext } from "helpers/contexts";
-import Button from "./DrawerHeader/Button";
+import Button from "./Button";
+import * as Styled from "./styles";
 
 export default class DrawerEntityHeader extends PureComponent {
   static displayName = "Drawer.EntityHeader";
@@ -15,7 +15,7 @@ export default class DrawerEntityHeader extends PureComponent {
     buttons: PropTypes.array,
     icon: PropTypes.string,
     buttonLayout: PropTypes.oneOf(["stack", "inline"]),
-    className: PropTypes.string
+    small: PropTypes.bool
   };
 
   static defaultProps = {
@@ -35,32 +35,29 @@ export default class DrawerEntityHeader extends PureComponent {
     return (
       <DrawerContext.Consumer>
         {contextProps => (
-          <header className={classNames("drawer-header", this.props.className)}>
+          <Styled.Header $small={this.props.small}>
             {this.props.title && (
-              <h2
+              <Styled.TitleWrapper
                 id={contextProps?.headerId}
                 className={classNames({
-                  "drawer-header__title": true,
                   "screen-reader-text": this.props.hideTitle
                 })}
               >
                 {this.props.icon && (
-                  <Utility.IconComposer
-                    icon={this.props.icon}
-                    size={44}
-                    className="drawer-header__title-icon"
-                  />
+                  <Styled.Icon icon={this.props.icon} size={44} />
                 )}
-                <span className="drawer-header__title-text">
-                  {this.props.title}
-                </span>
-              </h2>
+                <Styled.Title>{this.props.title}</Styled.Title>
+              </Styled.TitleWrapper>
+            )}
+            {this.props.instructions && (
+              <Styled.Instructions>
+                {this.props.instructions}
+              </Styled.Instructions>
             )}
             {this.props.children}
             {this.props.buttons.length > 0 && (
-              <div
+              <Styled.ButtonGroup
                 className={classNames({
-                  "drawer-header__utility": true,
                   "utility-button-group": true,
                   "utility-button-group--stack": this.stackButtons,
                   "utility-button-group--inline": this.inlineButtons
@@ -70,9 +67,9 @@ export default class DrawerEntityHeader extends PureComponent {
                   this.props.buttons.map(button => (
                     <Button key={button.label} {...button} />
                   ))}
-              </div>
+              </Styled.ButtonGroup>
             )}
-          </header>
+          </Styled.Header>
         )}
       </DrawerContext.Consumer>
     );
