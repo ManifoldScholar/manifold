@@ -14,7 +14,7 @@ export default function AddEditSectionForm({ section = {}, text, onSuccess }) {
   return (
     <FormContainer.Form
       model={section}
-      name="tbd"
+      name="be-text-update"
       className="form-secondary"
       onSuccess={onSuccess}
       create={createSection}
@@ -24,12 +24,13 @@ export default function AddEditSectionForm({ section = {}, text, onSuccess }) {
         focusOnMount
         label={t("backend.forms.text_section.section_name")}
         placeholder={t("backend.forms.text_section.section_name")}
+        name="name"
       />
       <Form.CodeArea
         label={t("backend.forms.text_section.content_label")}
         instructions={t("backend.forms.text_section.content_instructions")}
         height="600px"
-        mode="css"
+        mode="html"
       />
       <Form.DrawerButtons
         showCancel
