@@ -5,6 +5,7 @@ import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import SectionsList from "./SectionsList";
 import { useUIDSeed } from "react-uid";
+import { textsAPI } from "api";
 
 export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
   const { t } = useTranslation();
@@ -24,12 +25,18 @@ export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
     setSections(update);
   };
 
+  const defaultText = {
+    relationships: {
+      project: { id: project.id }
+    }
+  };
+
   return (
     <FormContainer.Form
-      doNotWarn
-      groupErrors
-      model={project}
-      name="tbd"
+      model={defaultText}
+      create={textsAPI.create}
+      update={textsAPI.update}
+      name="backend-text-create"
       className="form-secondary"
       onSuccess={onSuccess}
     >
@@ -37,12 +44,18 @@ export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
         focusOnMount
         label={t("backend.forms.text_create.text_title")}
         placeholder={t("backend.forms.text_create.title_placeholder")}
+        name="attributes[title]"
       />
       <Form.FieldGroup
         label={t("backend.forms.text_create.cover_section_label")}
         instructions={t("backend.forms.text_create.cover_instructions")}
       >
-        <Form.Upload accepts="images" />
+        <Form.Upload
+          accepts="images"
+          name="attributes[cover]"
+          readFrom="attributes[coverStyles][small]"
+          remove="attributes[removeCover]"
+        />
       </Form.FieldGroup>
       <Form.FieldGroup
         label={t("backend.forms.text_create.sections_section_label")}
