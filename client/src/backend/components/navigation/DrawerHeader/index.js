@@ -15,8 +15,7 @@ export default class DrawerEntityHeader extends PureComponent {
     buttons: PropTypes.array,
     icon: PropTypes.string,
     buttonLayout: PropTypes.oneOf(["stack", "inline"]),
-    className: PropTypes.string,
-    narrow: PropTypes.bool
+    small: PropTypes.bool
   };
 
   static defaultProps = {
@@ -36,23 +35,28 @@ export default class DrawerEntityHeader extends PureComponent {
     return (
       <DrawerContext.Consumer>
         {contextProps => (
-          <Styled.Header $padSmall={this.props.narrow}>
+          <Styled.Header $small={this.props.small}>
             {this.props.title && (
-              <Styled.Title
+              <Styled.TitleWrapper
                 id={contextProps?.headerId}
-                className={
-                  this.props.hideTitle ? "screen-reader-text" : undefined
-                }
+                className={classNames({
+                  "screen-reader-text": this.props.hideTitle
+                })}
               >
                 {this.props.icon && (
-                  <Styled.TitleIcon icon={this.props.icon} size={44} />
+                  <Styled.Icon icon={this.props.icon} size={44} />
                 )}
-                <Styled.TitleText>{this.props.title}</Styled.TitleText>
-              </Styled.Title>
+                <Styled.Title>{this.props.title}</Styled.Title>
+              </Styled.TitleWrapper>
+            )}
+            {this.props.instructions && (
+              <Styled.Instructions>
+                {this.props.instructions}
+              </Styled.Instructions>
             )}
             {this.props.children}
             {this.props.buttons.length > 0 && (
-              <Styled.UtilityButtons
+              <Styled.ButtonGroup
                 className={classNames({
                   "utility-button-group": true,
                   "utility-button-group--stack": this.stackButtons,
@@ -63,7 +67,7 @@ export default class DrawerEntityHeader extends PureComponent {
                   this.props.buttons.map(button => (
                     <Button key={button.label} {...button} />
                   ))}
-              </Styled.UtilityButtons>
+              </Styled.ButtonGroup>
             )}
           </Styled.Header>
         )}
