@@ -1,52 +1,39 @@
 import styled from "@emotion/styled";
-import Utility from "global/components/utility";
 import {
   fluidScale,
   headingQuaternary,
   subtitlePrimary
 } from "theme/styles/mixins";
+import Utility from "global/components/utility";
 
 export const Header = styled.header`
-  padding-bottom: ${({ $padSmall }) =>
-    $padSmall ? "20px" : fluidScale("53px", "21px")};
-
-  .subtitle {
-    ${subtitlePrimary}
-    display: inline-block;
-    margin-block-start: 12px;
-  }
-
-  .instructions {
-    font-family: var(--font-family-copy);
-    display: block;
-    margin-top: 8px;
-    margin-bottom: 0;
-    font-size: 17px;
-    font-style: italic;
-    text-transform: none;
-  }
-
-  form > & {
-    padding-bottom: 0;
-  }
+  padding-bottom: ${({ $small }) =>
+    $small ? "20px" : fluidScale("53px", "21px")};
 `;
 
-export const Title = styled.h2`
+export const TitleWrapper = styled.h2`
   ${headingQuaternary}
   display: flex;
   min-width: 0;
 `;
 
-export const TitleIcon = styled(Utility.IconComposer)`
+export const Icon = styled(Utility.IconComposer)`
   margin-right: 10px;
   margin-left: -8px;
 `;
 
-export const TitleText = styled.span`
+export const Title = styled.span`
   padding-top: 2px;
   color: var(--strong-color);
 `;
 
-export const UtilityButtons = styled.div`
+export const Instructions = styled.span`
+  ${subtitlePrimary}
+  font-size: 17px;
+  display: inline-block;
+  margin-block-start: 12px;
+`;
+
+export const ButtonGroup = styled.div`
   margin-top: 24px;
 `;

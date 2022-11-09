@@ -135,7 +135,7 @@ function ReadingGroupSettings({
         title={t("forms.edit_group.title")}
         buttons={buttons}
         buttonLayout="inline"
-        narrow
+        small
       />
       <div role="region" id="group-settings-duplicate-region">
         <Collapse isOpened={showActionPanel === "duplicate"}>
