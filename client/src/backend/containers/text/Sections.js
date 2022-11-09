@@ -29,8 +29,6 @@ export default function TextSectionsContainer({ text, refresh, route }) {
     });
   };
 
-  // TODO: Add an Authorize with correct permission.
-
   return (
     <section>
       {renderChildRoutes()}

@@ -25,7 +25,7 @@ export default function AddEditTOCEntryForm({
   return (
     <FormContainer.Form
       model={entry}
-      name="tbd"
+      name="be-text-update"
       className="form-secondary"
       onSuccess={onSuccess}
       update={editEntry}
@@ -35,7 +35,7 @@ export default function AddEditTOCEntryForm({
         focusOnMount
         label={t("backend.forms.text_toc.entry_name")}
         placeholder={t("backend.forms.text_toc.entry_name")}
-        value={entry?.name}
+        name="label"
       />
       <Form.FieldGroup
         label={t("backend.forms.text_toc.section_link")}
@@ -59,7 +59,7 @@ export default function AddEditTOCEntryForm({
         label={t("backend.forms.text_toc.anchor_link")}
         instructions={t("backend.forms.text_toc.anchor_link_instructions")}
       >
-        <Form.TextInput placeholder="#" />
+        <Form.TextInput placeholder="#" name="anchor" />
       </Form.FieldGroup>
       <Form.DrawerButtons
         showCancel
