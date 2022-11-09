@@ -32,8 +32,6 @@ export default function TextTOCContainer({ text, refresh, route }) {
     });
   };
 
-  // TODO: Add an Authorize with correct permission.
-
   return text ? (
     <section>
       {renderChildRoutes()}
