@@ -28,8 +28,8 @@ export default `
       )}
 
       ul {
-        max-height: 1270px;
-        overflow-y: scroll;
+        max-height: 1150px;
+        overflow-y: auto;
       }
     }
 
