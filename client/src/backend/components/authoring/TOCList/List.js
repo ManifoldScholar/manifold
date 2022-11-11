@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import Tree, { mutateTree, moveItemOnTree } from "@atlaskit/tree";
 import Entry from "./TOCEntry";
 import { DragOverContext } from "./dragContext";
+import { formatTOCData } from "./formatTreeData";
+import { textsAPI } from "api";
+import { useApiCallback } from "hooks";
 
 export default function TOCList({ toc, textId, startSectionId }) {
   const [tree, setTree] = useState(toc);
@@ -26,9 +29,21 @@ export default function TOCList({ toc, textId, startSectionId }) {
     );
   };
 
-  const onDragEnd = (source, destination) => {
+  const updateText = useApiCallback(textsAPI.update);
+
+  const onReorderTOC = async newTree => {
+    const newToc = formatTOCData(newTree);
+    await updateText(textId, { attributes: { toc: newToc } });
+
+    // TODO: add error handling
+  };
+
+  const onDragEnd = async (source, destination) => {
     setCombine(null);
+
     const update = moveItemOnTree(tree, source, destination);
+    onReorderTOC(update);
+
     const expand = mutateTree(update, destination.parentId, {
       isExpanded: true
     });
