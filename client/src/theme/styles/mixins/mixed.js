@@ -1,4 +1,4 @@
-import { buttonUnstyled, inputLabelPrimary, inputPrimary } from "./appearance";
+import { buttonUnstyled, inputLabelPrimary } from "./appearance";
 
 // The really messy mixins that jumble a bunch of other ones together
 // Should become components!

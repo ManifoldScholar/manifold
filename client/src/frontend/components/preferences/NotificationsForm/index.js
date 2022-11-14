@@ -1,23 +1,24 @@
 import React, { useMemo } from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { UIDConsumer } from "react-uid";
+import Form from "global/components/form";
 import Collapse from "global/components/Collapse";
-import RadioGroup from "global/components/form/hook-form/RadioGroup";
+import RadioGroup from "../RadioGroup";
 import ProjectPreferences from "../ProjectPreferences";
 import humps from "humps";
 import Authorization from "helpers/authorization";
-import { useFormContext } from "react-hook-form";
 import { useFromStore } from "hooks";
-import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
-export default function NotificationsForm({ showAllProjects }) {
+export default function NotificationsForm({
+  showAllProjects,
+  preferences,
+  setPreferences
+}) {
   const authentication = useFromStore("authentication");
   const { t } = useTranslation();
 
-  const { getValues, reset } = useFormContext();
-
-  const digestOpen = getValues("digest") !== "never";
+  const digestOpen = preferences?.digest !== "never";
 
   const otherActivityOptions = useMemo(() => {
     const authorization = new Authorization();
@@ -45,11 +46,30 @@ export default function NotificationsForm({ showAllProjects }) {
       (obj, option) => ({ ...obj, [option]: "never" }),
       {}
     );
-    reset({
+    setPreferences({
       ...otherActivity,
       digest: "never",
       digestCommentsAndAnnotations: "never"
     });
+  };
+
+  const onPreferenceChange = e => {
+    const update = { ...preferences, [e.target.name]: e.target.value };
+    setPreferences(update);
+  };
+
+  const onDigestChange = e => {
+    const toInclude = e.target.value;
+    const toExclude =
+      e.target.value === "projects" ? "followedProjects" : "projects";
+
+    const update = {
+      ...preferences,
+      [toInclude]: "always",
+      [toExclude]: "never"
+    };
+
+    setPreferences(update);
   };
 
   const renderNotificationContent = () => {
@@ -63,49 +83,35 @@ export default function NotificationsForm({ showAllProjects }) {
       );
 
       return (
-        <RadioGroup key={item} setting={{ key: item, label, instructions }} />
+        <RadioGroup
+          key={item}
+          value={preferences[item]}
+          onChange={onPreferenceChange}
+          preference={{ key: item, label, instructions }}
+        />
       );
     });
   };
 
   return (
     <>
-      <UIDConsumer name={id => `project-activity-${id}`}>
-        {id => (
-          <Styled.FormSection
-            role="group"
-            aria-labelledby={`${id}-header`}
-            aria-describedby={`${id}-instructions`}
-          >
-            <Styled.Header id={`${id}-header`}>
-              {t("forms.notifications.project_activity")}
-            </Styled.Header>
-            <Styled.FormFields>
-              <Styled.Instructions id={`${id}-instructions`}>
-                {t("forms.notifications.project_activity_instructions")}
-              </Styled.Instructions>
-              <Collapse initialVisible={digestOpen}>
-                <ProjectPreferences showAllProjects={showAllProjects} />
-              </Collapse>
-            </Styled.FormFields>
-          </Styled.FormSection>
-        )}
-      </UIDConsumer>
-      <UIDConsumer name={id => `other-activity-${id}`}>
-        {id => (
-          <Styled.FormSection role="group" aria-labelledby={`${id}-header`}>
-            <Styled.Header id={`${id}-header`}>
-              {t("forms.notifications.other_activity")}
-            </Styled.Header>
-            <Styled.FormFields>{renderNotificationContent()}</Styled.FormFields>
-          </Styled.FormSection>
-        )}
-      </UIDConsumer>
-      <Styled.Button
-        type="button"
-        className="utility-button"
-        onClick={unsubscribeAll}
+      <Styled.FieldGroup
+        label={t("forms.notifications.project_activity")}
+        instructions={t("forms.notifications.project_activity_instructions")}
       >
+        <Collapse initialVisible={digestOpen}>
+          <ProjectPreferences
+            showAllProjects={showAllProjects}
+            preferences={preferences}
+            onChange={onPreferenceChange}
+            onDigestChange={onDigestChange}
+          />
+        </Collapse>
+      </Styled.FieldGroup>
+      <Form.FieldGroup label={t("forms.notifications.other_activity")}>
+        {renderNotificationContent()}
+      </Form.FieldGroup>
+      <Styled.Button className="utility-button" onClick={unsubscribeAll}>
         <span className="utility-button__text utility-button__text--underlined">
           {t("forms.notifications.unsubscribe")}
         </span>
@@ -114,7 +120,7 @@ export default function NotificationsForm({ showAllProjects }) {
   );
 }
 
-NotificationsForm.displayName = "Frontend.Preferenes.NotificationsForm";
+NotificationsForm.displayName = "Frontend.Preferences.NotificationsForm";
 
 NotificationsForm.propTypes = {
   showAllProjects: PropTypes.bool

@@ -1,32 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { meAPI } from "api";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import lh from "helpers/linkHandler";
 import PropTypes from "prop-types";
 import Authorize from "hoc/Authorize";
+import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import { useFromStore, useNotification } from "hooks";
-import BaseHookForm from "global/components/form/hook-form/BaseHookForm";
-import { useUID } from "react-uid";
-import omit from "lodash/omit";
 import * as Styled from "./styles";
 
 export default function SubscriptionsContainer() {
   const { t } = useTranslation();
   const { currentUser } = useFromStore("authentication") ?? {};
-
-  const notificationPreferences =
-    currentUser?.attributes?.notificationPreferences ?? {};
-
-  const defaultValues = {
-    ...omit(notificationPreferences, ["projects", "followedProjects"]),
-    "digest-projects":
-      notificationPreferences.projects === "always"
-        ? "projects"
-        : "followedProjects"
-  };
-
-  const showAllProjects = !!notificationPreferences.projects;
+  const [preferences, setPreferences] = useState(
+    currentUser?.attributes?.notificationPreferences
+  );
 
   const notifyUpdate = useNotification(() => ({
     level: 0,
@@ -35,17 +23,9 @@ export default function SubscriptionsContainer() {
     expiration: 3000
   }));
 
-  const formatData = data => {
-    const prefs = {
-      ...omit(data, ["digest-projects"]),
-      projects: data["digest-projects"] === "projects" ? "always" : "never",
-      followedProjects:
-        data["digest-projects"] === "followedProjects" ? "always" : "never"
-    };
-    return { notificationPreferencesByKind: prefs };
+  const formatData = () => {
+    return { notificationPreferencesByKind: preferences };
   };
-
-  const uid = useUID();
 
   return (
     <Authorize
@@ -58,36 +38,31 @@ export default function SubscriptionsContainer() {
       }}
     >
       <section className="bg-neutral05">
-        <Styled.Container>
-          <Styled.FormWrapper>
-            <Styled.Heading id={uid}>
-              {t("forms.notifications.title")}
-              <Styled.Instructions>
-                {t("forms.notifications.instructions")}
-              </Styled.Instructions>
-            </Styled.Heading>
-            <BaseHookForm
-              defaultValues={defaultValues}
-              ariaLabelledBy={uid}
-              formatData={formatData}
-              onSuccess={notifyUpdate}
-              apiMethod={meAPI.update}
-            >
-              {errors => (
-                <>
-                  <NotificationsForm
-                    errors={errors}
-                    showAllProjects={showAllProjects}
-                  />
-                  <Styled.Button
-                    type="submit"
-                    label="forms.notifications.submit_label"
-                  />
-                </>
-              )}
-            </BaseHookForm>
-          </Styled.FormWrapper>
-        </Styled.Container>
+        <div className="container">
+          <Styled.Form
+            model={currentUser?.attributes?.notificationPreferences}
+            name="global-authenticated-user-update"
+            update={meAPI.update}
+            formatData={formatData}
+            onSuccess={notifyUpdate}
+          >
+            <Form.Header
+              label={t("forms.notifications.title")}
+              instructions={t("forms.notifications.instructions")}
+              styleType="primary"
+            />
+            <NotificationsForm
+              preferences={preferences}
+              setPreferences={setPreferences}
+              showAllProjects={!!preferences.projects}
+            />
+            <input
+              className="button-secondary"
+              type="submit"
+              value={t("forms.notifications.submit_label")}
+            />
+          </Styled.Form>
+        </div>
       </section>
     </Authorize>
   );

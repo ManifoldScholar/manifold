@@ -10,7 +10,7 @@ export default `
 
       &--visible {
         height: var(--collapse-height);
-        visibility: 1;
+        visibility: visible;
         opacity: 1;
         transition: height var(--collapse-duration) linear 0ms,
           opacity var(--collapse-durationAfterDelay) ease var(--collapse-delay);
@@ -18,7 +18,7 @@ export default `
 
       &--hidden {
         height: 0;
-        visibility: 0;
+        visibility: hidden;
         opacity: 0;
         transition: height var(--collapse-durationAfterDelay) linear 0ms,
           opacity var(--collapse-duration) ease var(--collapse-delay),
