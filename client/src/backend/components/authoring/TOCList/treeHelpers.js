@@ -1,4 +1,5 @@
 const formatTreeItem = entry => {
+  if (!entry) return undefined;
   if (!entry.children) {
     return {
       id: `${entry.id}_${entry.label}`,
@@ -18,7 +19,9 @@ const formatTreeItem = entry => {
     {
       id: `${entry.id}_${entry.label}`,
       hasChildren: true,
-      children: entry.children.map(c => `${c.id}_${c.label}`),
+      children: entry.children
+        .map(c => (c ? `${c.id}_${c.label}` : undefined))
+        .filter(Boolean),
       isExpanded: true,
       isChildrenLoading: false,
       data: {
@@ -28,7 +31,7 @@ const formatTreeItem = entry => {
         type: entry.type
       }
     },
-    entry.children.map(c => formatTreeItem(c))
+    entry.children.map(c => formatTreeItem(c)).filter(Boolean)
   ];
 };
 
@@ -36,7 +39,7 @@ export const formatTreeData = toc => {
   if (!toc) return null;
 
   const rootChildren = toc.map(e => `${e.id}_${e.label}`);
-  const entries = toc.map(formatTreeItem);
+  const entries = toc.map(formatTreeItem).filter(Boolean);
   const flatEntries = entries.flat(10);
   const asObj = flatEntries.reduce((obj, e) => {
     return { ...obj, [e.id]: e };
@@ -60,6 +63,8 @@ export const formatTreeData = toc => {
 };
 
 const formatTOCEntry = all => item => {
+  if (!item) return undefined;
+
   const formatter = formatTOCEntry(all);
   return {
     id: item.data.sectionId,
@@ -76,5 +81,20 @@ export const formatTOCData = tree => {
   if (!tree) return null;
 
   const topLevel = tree.items.root.children.map(c => tree.items[c]);
-  return topLevel.map(formatTOCEntry(tree.items));
+  return topLevel.map(formatTOCEntry(tree.items)).filter(Boolean);
 };
+
+export const getNestedTreeChildren = (itemId, treeItems) => {
+  const item = treeItems[itemId];
+
+  if (!item.hasChildren) return [];
+
+  return [
+    ...item.children,
+    item.children.map(c => getNestedTreeChildren(c, treeItems))
+  ].flat(10);
+};
+
+const removeKey = (k, { [k]: _, ...o }) => o;
+export const removeKeys = (keys, o) =>
+  keys.reduce((r, k) => removeKey(k, r), o);

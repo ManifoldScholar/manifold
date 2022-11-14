@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { textsAPI } from "api";
 import { useHistory } from "react-router-dom";
-import { formatTreeData } from "backend/components/authoring/TOCList/formatTreeData";
+import { formatTreeData } from "backend/components/authoring/TOCList/treeHelpers";
 
 export default function AddEditTOCEntryForm({
   entry = {},
@@ -34,6 +34,7 @@ export default function AddEditTOCEntryForm({
   );
 
   const onSuccess = useCallback(() => {
+    // attributes aren't current included in the response in the store that can be passed directly to this callback, so using the toc prop here.
     setTree(formatTreeData(toc));
     history.push(lh.link("backendTextTOC", textId));
   }, [textId, history, toc, setTree]);
