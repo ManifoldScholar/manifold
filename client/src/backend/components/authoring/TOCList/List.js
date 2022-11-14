@@ -63,14 +63,17 @@ export default function TOCList({ tree, setTree, textId, startSectionId }) {
         setCombine={setCombine}
         combine={snapshot.combineWith}
         textId={textId}
-        isStart={startSectionId === item.id}
+        isStart={startSectionId === item.data.sectionId}
         onDelete={onDelete}
       />
     );
   };
 
   return tree ? (
-    <Styled.ScrollContainer $count={Object.keys(tree.items).length - 1}>
+    <Styled.ScrollContainer
+      className="full-width"
+      $count={Object.keys(tree.items).length - 1}
+    >
       <DragOverContext.Provider value={combine}>
         <Tree
           tree={tree}
