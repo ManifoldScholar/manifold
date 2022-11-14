@@ -36,8 +36,7 @@ RSpec.describe Text, type: :model do
     let!(:section_one) { FactoryBot.create(:text_section, text: text)}
     let!(:section_two) { FactoryBot.create(:text_section, text: text)}
     let(:new_toc) { [{label: "one", id: section_one.id, type: "test"}, {label: "two", id: section_two.id}] }
-    let(:add_valid_entry) { [*new_toc, {label: "three", id: section_one.id}] }
-    let(:add_invalid_entry) { [*new_toc, {label: "three"}]}
+    let(:new_toc_invalid_entry) { [*new_toc, {label: "three"}]}
 
     it "can be changed" do
       expect do
@@ -45,13 +44,13 @@ RSpec.describe Text, type: :model do
       end.to execute_safely.and change { text.reload.toc }.to(new_toc)
     end
 
-    it "is valid when a new entry has a valid section id" do
-        text.toc = add_valid_entry
+    it "is valid when all entries have a valid section id" do
+        text.toc = new_toc
         expect(text.valid?).to be true
     end
 
-    it "is invalid when a new entry has an invalid section id" do
-      text.toc = add_invalid_entry
+    it "is invalid when an entry has an invalid section id" do
+      text.toc = new_toc_invalid_entry
       expect(text.valid?).to be false
     end
   end
