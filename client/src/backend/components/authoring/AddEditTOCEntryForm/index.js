@@ -6,10 +6,14 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { textsAPI } from "api";
 import { useHistory } from "react-router-dom";
-import { formatTreeData } from "backend/components/authoring/TOCList/treeHelpers";
+import {
+  formatTreeData,
+  formatTOCData
+} from "backend/components/authoring/TOCList/treeHelpers";
 
 export default function AddEditTOCEntryForm({
-  entry = {},
+  entry,
+  tree,
   toc,
   textId,
   sections,
@@ -19,7 +23,28 @@ export default function AddEditTOCEntryForm({
   const history = useHistory();
 
   const formatDataOnSubmit = useCallback(
-    data => {
+    (data, model) => {
+      if (entry) {
+        const update = {
+          ...entry,
+          data: {
+            sectionId: data.sectionId ?? model.sectionId,
+            title: data.label ?? model.label,
+            anchor: data.anchor ?? model.anchor,
+            type: entry.data.type
+          }
+        };
+
+        const newTree = {
+          ...tree,
+          items: { ...tree.items, [entry.id]: update }
+        };
+        const newToc = formatTOCData(newTree);
+        return {
+          attributes: { toc: newToc }
+        };
+      }
+
       const newEntry = {
         id: data.sectionId,
         label: data.label,
@@ -30,7 +55,7 @@ export default function AddEditTOCEntryForm({
         attributes: { toc: newToc }
       };
     },
-    [toc]
+    [toc, entry, tree]
   );
 
   const onSuccess = useCallback(() => {
@@ -45,11 +70,11 @@ export default function AddEditTOCEntryForm({
     key: s.id
   }));
 
-  const { id: sectionId, ...rest } = entry;
+  const { id: sectionId, title: label, ...rest } = entry?.data ?? {};
 
   return (
     <FormContainer.Form
-      model={{ id: textId, sectionId, ...rest }}
+      model={{ id: textId, sectionId, label, ...rest }}
       name="be-text-update"
       className="form-secondary"
       update={textsAPI.update}
@@ -103,6 +128,7 @@ AddEditTOCEntryForm.propTypes = {
   textId: PropTypes.string.isRequired,
   entry: PropTypes.object,
   sections: PropTypes.array,
-  toc: PropTypes.array,
-  refresh: PropTypes.func
+  toc: PropTypes.array.isRequired,
+  setTree: PropTypes.func.isRequired,
+  tree: PropTypes.object
 };
