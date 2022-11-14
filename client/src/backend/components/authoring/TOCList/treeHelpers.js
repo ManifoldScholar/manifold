@@ -1,8 +1,10 @@
+import { uid } from "react-uid";
+
 const formatTreeItem = entry => {
   if (!entry) return undefined;
   if (!entry.children) {
     return {
-      id: `${entry.id}_${entry.label}`,
+      id: uid(entry),
       children: [],
       hasChildren: false,
       isExpanded: true,
@@ -17,10 +19,10 @@ const formatTreeItem = entry => {
   }
   return [
     {
-      id: `${entry.id}_${entry.label}`,
+      id: uid(entry),
       hasChildren: true,
       children: entry.children
-        .map(c => (c ? `${c.id}_${c.label}` : undefined))
+        .map(c => (c ? uid(c) : undefined))
         .filter(Boolean),
       isExpanded: true,
       isChildrenLoading: false,
@@ -38,7 +40,7 @@ const formatTreeItem = entry => {
 export const formatTreeData = toc => {
   if (!toc) return null;
 
-  const rootChildren = toc.map(e => `${e.id}_${e.label}`);
+  const rootChildren = toc.map(e => uid(e));
   const entries = toc.map(formatTreeItem).filter(Boolean);
   const flatEntries = entries.flat(10);
   const asObj = flatEntries.reduce((obj, e) => {
