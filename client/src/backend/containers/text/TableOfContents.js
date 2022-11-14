@@ -30,6 +30,7 @@ export default function TextTOCContainer({ text, route }) {
         closeUrl
       },
       childProps: {
+        tree: tocAsDndTree,
         setTree,
         textId: text.id,
         sections: text.attributes?.sectionsMap,
