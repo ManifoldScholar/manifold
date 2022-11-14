@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -10,8 +10,11 @@ import { childRoutes } from "helpers/router";
 import TOCList from "backend/components/authoring/TOCList";
 import { formatTreeData } from "backend/components/authoring/TOCList/formatTreeData";
 
-export default function TextTOCContainer({ text, refresh, route }) {
+export default function TextTOCContainer({ text, route }) {
   const { t } = useTranslation();
+  const [tocAsDndTree, setTree] = useState(
+    formatTreeData(text.attributes?.toc)
+  );
 
   const renderChildRoutes = () => {
     const closeUrl = lh.link("backendTextTOC", text.id);
@@ -25,9 +28,10 @@ export default function TextTOCContainer({ text, refresh, route }) {
         closeUrl
       },
       childProps: {
-        refresh,
+        setTree,
         textId: text.id,
-        sections: text.attributes?.sectionsMap
+        sections: text.attributes?.sectionsMap,
+        toc: text.attributes?.toc
       }
     });
   };
@@ -87,7 +91,8 @@ export default function TextTOCContainer({ text, refresh, route }) {
           </Link>
         </div>
         <TOCList
-          toc={formatTreeData(text.attributes?.toc)}
+          tree={tocAsDndTree}
+          setTree={setTree}
           textId={text.id}
           startSectionId={text.attributes?.startTextSectionId}
         />

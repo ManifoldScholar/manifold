@@ -111,6 +111,7 @@ class Text < ApplicationRecord
   validates :spine,
             presence: true, unless: proc { |x| x.spine.is_a?(Array) && x.spine.empty? }
   validate :validate_start_text_section
+  validate :validate_new_toc_entry
 
   # Scopes
   scope :published, ->(published) { where(published: published) if published.present? }
@@ -388,6 +389,15 @@ class Text < ApplicationRecord
     return if text_sections.include? start_text_section
 
     errors.add(:start_text_section, "does not belong to this text")
+  end
+
+  def validate_new_toc_entry
+    return if toc.empty? || toc.nil?
+
+    @id = toc.last[:id]
+    return if !@id.nil? && text_sections.find(@id)
+
+    errors.add(:toc, "entry must be linked to a text section")
   end
 
 end

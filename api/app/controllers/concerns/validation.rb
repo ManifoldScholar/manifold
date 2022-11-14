@@ -315,7 +315,7 @@ module Validation
 
   def text_params
     toc_attrs = %i[id type label anchor]
-    nested_toc = 10.times.reduce(toc_attrs) { |nested, _| [*toc_attrs, children: nested] }
+    nested_toc = 10.times.reduce(toc_attrs) { |nested, _| [*toc_attrs, { children: nested }] }
 
     params.require(:data)
     attributes = [:title, :position, :description, :publication_date,
