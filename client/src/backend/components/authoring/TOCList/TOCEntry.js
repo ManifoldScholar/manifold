@@ -58,7 +58,10 @@ export default function TOCEntry({
               <Utility.IconComposer size={24} icon="playOutline24" />
             </Styled.Button>
           </Tooltip>
-          <Styled.Button onClick={onDelete} aria-label={t("actions.delete")}>
+          <Styled.Button
+            onClick={() => onDelete(entry.id)}
+            aria-label={t("actions.delete")}
+          >
             <Utility.IconComposer size={24} icon="delete24" />
           </Styled.Button>
           <Styled.Button as={Link} to={editUrl} aria-label={t("actions.edit")}>
