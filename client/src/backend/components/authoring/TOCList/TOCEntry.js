@@ -54,7 +54,7 @@ export default function TOCEntry({
             xOffset="-100px"
             yOffset="43px"
           >
-            <Styled.Button onClick={() => onSetStart(entry.id)}>
+            <Styled.Button onClick={() => onSetStart(entry.data?.sectionId)}>
               <Utility.IconComposer size={24} icon="playOutline24" />
             </Styled.Button>
           </Tooltip>
