@@ -8,10 +8,12 @@ import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { childRoutes } from "helpers/router";
 import TOCList from "backend/components/authoring/TOCList";
-import { formatTreeData } from "backend/components/authoring/TOCList/formatTreeData";
+import { formatTreeData } from "backend/components/authoring/TOCList/treeHelpers";
 
 export default function TextTOCContainer({ text, route }) {
   const { t } = useTranslation();
+
+  // tree + setTree are here in the container because child route drawers need to call to setTree after save to update the dnd list. This could instead be implemented as a useEffect in List, but it made more sense to me to call it in the onSuccess callback in the forms.
   const [tocAsDndTree, setTree] = useState(
     formatTreeData(text.attributes?.toc)
   );
@@ -91,6 +93,7 @@ export default function TextTOCContainer({ text, route }) {
           </Link>
         </div>
         <TOCList
+          toc={text.attributes?.toc}
           tree={tocAsDndTree}
           setTree={setTree}
           textId={text.id}
