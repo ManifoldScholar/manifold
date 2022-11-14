@@ -36,8 +36,8 @@ RSpec.describe Text, type: :model do
     let!(:section_one) { FactoryBot.create(:text_section, text: text)}
     let!(:section_two) { FactoryBot.create(:text_section, text: text)}
     let(:new_toc) { [{label: "one", id: section_one.id, type: "test"}, {label: "two", id: section_two.id}] }
-    let!(:add_valid_entry) { [*new_toc, {label: "three", id: section_one.id}] }
-    let!(:add_invalid_entry) { [*new_toc, {label: "three"}]}
+    let(:add_valid_entry) { [*new_toc, {label: "three", id: section_one.id}] }
+    let(:add_invalid_entry) { [*new_toc, {label: "three"}]}
 
     it "can be changed" do
       expect do
