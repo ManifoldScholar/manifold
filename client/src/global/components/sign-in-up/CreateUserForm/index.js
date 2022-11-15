@@ -6,12 +6,12 @@ import { currentUserActions } from "actions";
 import capitalize from "lodash/capitalize";
 import OAuthOptions from "../oauth/OAuthLoginOptions";
 import { useFromStore } from "hooks";
-import { useUID } from "react-uid";
 import CreateFormFields from "./CreateFormFields";
-import BaseHookForm from "global/components/form/hook-form/BaseHookForm";
+import Form from "global/components/form";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import * as Styled from "./styles";
+import * as SharedStyles from "../styles";
 
 export default function CreateUserForm({
   handleViewChange,
@@ -27,6 +27,8 @@ export default function CreateUserForm({
   const installationName = settings?.attributes?.general?.installationName;
 
   const formRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   useEffect(() => {
     if (formRef.current) formRef.current.focus();
@@ -44,10 +46,8 @@ export default function CreateUserForm({
   };
 
   const authenticateUser = useCallback(
-    user => {
-      dispatch(
-        currentUserActions.login({ email: user.email, password: user.password })
-      );
+    (email, password) => {
+      dispatch(currentUserActions.login({ email, password }));
     },
     [dispatch]
   );
@@ -57,61 +57,60 @@ export default function CreateUserForm({
     p => p.attributes.purpose === "terms_and_conditions"
   );
 
-  const formatAttributes = data => ({
-    attributes: termsPage
-      ? {
-          ...data,
-          termsAndConditionsAcceptedAt: new Date().toISOString()
-        }
-      : data
-  });
+  const formatAttributes = data => {
+    const { attributes } = data;
+    emailRef.current = attributes?.email;
+    passwordRef.current = attributes?.password;
 
-  const onSuccess = useCallback(
-    (response, data) => {
-      authenticateUser(data);
+    return {
+      attributes: termsPage
+        ? {
+            ...attributes,
+            termsAndConditionsAcceptedAt: new Date().toISOString()
+          }
+        : attributes
+    };
+  };
 
-      if (!willRedirect && !redirectToHomeOnSignup)
-        handleViewChange("create-update");
-      if (redirectToHomeOnSignup && !location?.state?.postLoginRedirect) {
-        history.replace(location, {
-          postLoginRedirect: "/"
-        });
-      }
-    },
-    [
-      authenticateUser,
-      handleViewChange,
-      willRedirect,
-      redirectToHomeOnSignup,
-      history,
-      location
-    ]
-  );
+  const onSuccess = useCallback(() => {
+    authenticateUser(emailRef.current, passwordRef.current);
 
-  const uid = useUID();
+    if (!willRedirect && !redirectToHomeOnSignup)
+      handleViewChange("create-update");
+    if (redirectToHomeOnSignup && !location?.state?.postLoginRedirect) {
+      history.replace(location, {
+        postLoginRedirect: "/"
+      });
+    }
+  }, [
+    authenticateUser,
+    handleViewChange,
+    willRedirect,
+    redirectToHomeOnSignup,
+    history,
+    location
+  ]);
 
   return (
     <>
-      <BaseHookForm
+      <SharedStyles.Form
         ref={formRef}
-        apiMethod={usersAPI.create}
+        name="global-create-user"
+        create={usersAPI.create}
         formatData={formatAttributes}
         onSuccess={onSuccess}
-        ariaLabelledBy={uid}
       >
-        {errors => (
-          <>
-            <Styled.Header>
-              {t("forms.signin_overlay.create_account")}
-            </Styled.Header>
-            <CreateFormFields errors={errors} />
-            <Styled.Button
-              type="submit"
-              label={t("forms.signin_overlay.create_account")}
-            />
-          </>
-        )}
-      </BaseHookForm>
+        <Form.Header
+          label={t("forms.signin_overlay.create_account")}
+          styleType="primary"
+        />
+        <CreateFormFields />
+        <input
+          className="button-secondary"
+          type="submit"
+          value={t("forms.signin_overlay.create_account")}
+        />
+      </SharedStyles.Form>
       {settings?.attributes?.oauth && (
         <>
           <Styled.LinksWrapper>
