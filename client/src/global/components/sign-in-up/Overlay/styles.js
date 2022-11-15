@@ -5,7 +5,6 @@ import {
   respond,
   defaultFocusStyle,
   headerContainerPrimary,
-  screenReaderText,
   containerPrototype
 } from "theme/styles/mixins";
 
@@ -50,7 +49,7 @@ export const Dialog = styled.div`
 export const Header = styled.div`
   position: fixed;
   width: 100%;
-  z-index: 601;
+  z-index: 1;
 `;
 
 export const HeaderInner = styled.div`
@@ -58,10 +57,6 @@ export const HeaderInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
-
-export const SRTitle = styled.h1`
-  ${screenReaderText}
 `;
 
 export const Content = styled.div`
@@ -77,23 +72,22 @@ export const Content = styled.div`
 export const LayoutContainer = styled.div`
   ${containerPrototype}
   padding-block-start: var(--container-padding-block-start);
-  padding-block-end: var(--container-padding-block-end);
+  padding-block-end: 100px;
 `;
 
 export const FormContainer = styled.div`
-  padding-block-end: 100px;
   max-width: 340px;
   margin: 0 auto;
 
   ${respond(`padding-top: 35px;`, 40)}
   ${respond(`padding-top: 126px;`, 90)}
 
-  .focusable-form {
+  form {
     &:focus:not(.focus-visible) {
       outline: 0;
     }
 
-    &.focus-visible {
+    &:focus-visible {
       ${defaultFocusStyle}
       outline-offset: 5px;
     }

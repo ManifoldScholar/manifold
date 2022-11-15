@@ -27,9 +27,9 @@ export default function Overlay({ hideOverlay }) {
         <Styled.Header>
           <Styled.HeaderInner>
             <Utility.IconComposer size={26} icon="manifoldLogo32" />
-            <Styled.SRTitle id={uid}>
+            <h1 className="screen-reader-text" id={uid}>
               {t("forms.signin_overlay.sr_title")}
-            </Styled.SRTitle>
+            </h1>
             <CloseButton onClick={hideOverlay} />
           </Styled.HeaderInner>
         </Styled.Header>
