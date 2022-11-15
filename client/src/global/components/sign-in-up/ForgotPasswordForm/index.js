@@ -11,6 +11,7 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const { t } = useTranslation();
 
   const formRef = useRef();
+  const emailRef = useRef("");
 
   useEffect(() => {
     if (formRef.current) formRef.current.focus();
@@ -26,16 +27,14 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   }));
 
   const formatData = useCallback(data => {
+    emailRef.current = data.email;
     return data.email;
   }, []);
 
-  const onSuccess = useCallback(
-    res => {
-      notifySuccess(res ?? "your email");
-      if (hideOverlay) hideOverlay();
-    },
-    [hideOverlay, notifySuccess]
-  );
+  const onSuccess = useCallback(() => {
+    notifySuccess(emailRef.current ?? "your email");
+    if (hideOverlay) hideOverlay();
+  }, [hideOverlay, notifySuccess]);
 
   return (
     <div>
