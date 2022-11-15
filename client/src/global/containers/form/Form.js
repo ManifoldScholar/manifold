@@ -167,19 +167,20 @@ export class FormContainer extends PureComponent {
     const source = this.props.session.source;
     if (!this.props.update) return;
 
-    const call = this.props.formatData
-      ? this.props.update(source.id, this.props.formatData(dirty, source))
-      : this.props.update(source.id, {
+    const args = this.props.formatData
+      ? this.props.formatData(dirty, source)
+      : {
           attributes: dirty.attributes,
           relationships: this.adjustedRelationships(dirty.relationships)
-        });
+        };
+    const call = this.props.update(source.id, args);
 
     const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {
       res.promise.then(() => {
         this.setState({ preventDirtyWarning: true }, () => {
-          this.props.onSuccess(this.props.response.entity);
+          this.props.onSuccess(this.props.response.entity ?? args);
         });
       });
     }
@@ -197,12 +198,13 @@ export class FormContainer extends PureComponent {
     const callMethod = this.props.create || this.props.update || null;
     if (!callMethod) return;
 
-    const call = this.props.formatData
-      ? callMethod(this.props.formatData(dirty, source))
-      : callMethod({
+    const args = this.props.formatData
+      ? this.props.formatData(dirty, source)
+      : {
           attributes: { ...source.attributes, ...dirty.attributes },
           relationships: this.adjustedRelationships(dirty.relationships)
-        });
+        };
+    const call = callMethod(args);
 
     const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
@@ -210,7 +212,7 @@ export class FormContainer extends PureComponent {
       res.promise.then(
         () => {
           this.setState({ preventDirtyWarning: true }, () => {
-            this.props.onSuccess(this.props.response.entity);
+            this.props.onSuccess(this.props.response.entity ?? args);
           });
         },
         () => {}
