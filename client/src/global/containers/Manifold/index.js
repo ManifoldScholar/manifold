@@ -226,7 +226,6 @@ class ManifoldContainer extends PureComponent {
           <ColorScheme settings={this.props.settings} />
           <CSSTransition
             in={this.props.visibility.signInUpOverlay}
-            classNames="overlay-login"
             timeout={{ enter: 300, exit: 300 }}
             unmountOnExit
           >
