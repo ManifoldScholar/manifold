@@ -6,5 +6,6 @@ export const Wrapper = styled.div`
 
   > * + * {
     margin-block-start: 30px;
+    width: 100%;
   }
 `;
