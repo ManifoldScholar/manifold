@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { currentUserActions } from "actions";
 import { useDispatch } from "react-redux";
 import { useFromStore } from "hooks";
-import { Button } from "../form-inputs";
 import * as Styled from "./styles";
 
 export default function Logout() {
@@ -23,7 +22,13 @@ export default function Logout() {
           name: currentUser?.attributes?.fullName
         })}
       </div>
-      <Button label="forms.signin_overlay.log_out" onClick={handleLogout} />
+      <button
+        aria-label={t("forms.signin_overlay.log_out")}
+        className="button-secondary"
+        onClick={handleLogout}
+      >
+        {t("forms.signin_overlay.log_out")}
+      </button>
     </Styled.Wrapper>
   ) : null;
 }
