@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import humps from "humps";
-import RadioGroup from "global/components/form/hook-form/RadioGroup";
+import RadioGroup from "frontend/components/preferences/RadioGroup";
 import { useFromStore } from "hooks";
 import { useUID } from "react-uid";
 import * as Styled from "./styles";
@@ -52,7 +52,7 @@ export default function CookiesFields() {
         <Styled.FormFields>
           {manifoldAnalyticsEnabled && (
             <RadioGroup
-              setting={{
+              preference={{
                 key: "manifold",
                 label: getLocalized("internalAnalytics", "label"),
                 instructions: getLocalized("internalAnalytics", "description")
@@ -62,7 +62,7 @@ export default function CookiesFields() {
           )}
           {googleAnalyticsEnabled && (
             <RadioGroup
-              setting={{
+              preference={{
                 key: "google",
                 label: getLocalized("googleAnalytics", "label"),
                 instructions: getLocalized("googleAnalytics", "description")

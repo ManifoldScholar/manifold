@@ -40,7 +40,6 @@ export default function SubscriptionsContainer() {
       <section className="bg-neutral05">
         <div className="container">
           <Styled.Form
-            model={currentUser?.attributes?.notificationPreferences}
             name="global-authenticated-user-update"
             update={meAPI.update}
             formatData={formatData}

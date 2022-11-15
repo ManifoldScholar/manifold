@@ -1,29 +1,12 @@
 import styled from "@emotion/styled";
-import {
-  containerPrototype,
-  respond,
-  headingPrimary,
-  formInstructions
-} from "theme/styles/mixins";
-
-export const Container = styled.div`
-  ${containerPrototype}
-  padding-block-start: var(--container-padding-block-start);
-  padding-block-end: var(--container-padding-block-end);
-  display: flex;
-  justify-content: center;
-`;
+import { respond } from "theme/styles/mixins";
 
 export const FormWrapper = styled.div`
+  --Form-row-gap: 40px;
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--Form-row-gap);
+
+  margin: auto;
   ${respond(`width: 600px;`, 75)}
-`;
-
-export const Heading = styled.h1`
-  ${headingPrimary}
-  margin-block-end: 55px;
-`;
-
-export const Instructions = styled.span`
-  ${formInstructions}
-  display: block;
 `;

@@ -4,6 +4,7 @@ import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import AccountData from "frontend/components/privacy/AccountData";
 import CookiesForm from "frontend/components/privacy/CookiesForm";
+import Form from "global/components/form";
 import * as Styled from "./styles";
 
 export default function PrivacySettingsContainer() {
@@ -20,18 +21,17 @@ export default function PrivacySettingsContainer() {
       }}
     >
       <section className="bg-neutral05">
-        <Styled.Container>
+        <div className="container">
           <Styled.FormWrapper>
-            <Styled.Heading>
-              {t("forms.privacy.title")}
-              <Styled.Instructions>
-                {t("forms.privacy.instructions")}
-              </Styled.Instructions>
-            </Styled.Heading>
+            <Form.Header
+              label={t("forms.privacy.title")}
+              instructions={t("forms.privacy.instructions")}
+              styleType="primary"
+            />
             <CookiesForm />
             <AccountData />
           </Styled.FormWrapper>
-        </Styled.Container>
+        </div>
       </section>
     </Authorize>
   );
