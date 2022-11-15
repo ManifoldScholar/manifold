@@ -49,7 +49,8 @@ export default class FormTextInput extends Component {
   };
 
   render() {
-    const inputType = this.props.password ? "password" : "text";
+    const inputType =
+      this.props.inputType ?? (this.props.password ? "password" : "text");
 
     return (
       <UIDConsumer>

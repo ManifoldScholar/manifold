@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { passwordsAPI } from "api";
-import { useUID } from "react-uid";
-import BaseHookForm from "global/components/form/hook-form/BaseHookForm";
-import { Input } from "../form-inputs";
+import Form from "global/components/form";
 import { useNotification } from "hooks";
 import * as Styled from "./styles";
+import * as SharedStyles from "../styles";
 
 export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const { t } = useTranslation();
@@ -31,42 +30,41 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   }, []);
 
   const onSuccess = useCallback(
-    (res, data) => {
-      notifySuccess(data.email);
+    res => {
+      notifySuccess(res ?? "your email");
       if (hideOverlay) hideOverlay();
     },
     [hideOverlay, notifySuccess]
   );
 
-  const uid = useUID();
-
   return (
     <div>
-      <BaseHookForm
+      <SharedStyles.Form
         ref={formRef}
-        apiMethod={passwordsAPI.create}
-        ariaLabelledBy={uid}
+        name="global-password-request"
+        create={passwordsAPI.create}
         onSuccess={onSuccess}
         formatData={formatData}
       >
-        {(errors, { register }) => (
-          <>
-            <Styled.Header id={uid}>
-              {t("forms.signin_overlay.reset_password")}
-            </Styled.Header>
-            <Input
-              label="forms.signin_overlay.email"
-              errors={errors}
-              placeholder="forms.signin_overlay.email"
-              {...register("email")}
-            />
-            <Styled.Button
-              type="submit"
-              label="forms.signin_overlay.send_password_reset"
-            />
-          </>
-        )}
-      </BaseHookForm>
+        <Form.Header
+          styleType="primary"
+          label={t("forms.signin_overlay.reset_password")}
+        />
+        <Form.TextInput
+          name="email"
+          inputType="email"
+          id="password-forgot-email"
+          placeholder={t("forms.signin_overlay.email")}
+          aria-describedby="password-forgot-email-error"
+          label={t("forms.signin_overlay.email")}
+          autoComplete="email"
+        />
+        <input
+          className="button-secondary button-secondary--with-room"
+          type="submit"
+          value={t("forms.signin_overlay.send_password_reset")}
+        />
+      </SharedStyles.Form>
       <Styled.LinksWrapper>
         <Styled.ViewLink onClick={e => handleViewChange("login", e)}>
           {t("forms.signin_overlay.remember_password")}
