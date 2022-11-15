@@ -1,45 +1,54 @@
 import React from "react";
-import { Input } from "../../form-inputs";
-import { useFormContext } from "react-hook-form";
 import PropTypes from "prop-types";
+import Form from "global/components/form";
+import { useTranslation } from "react-i18next";
 
-export default function CreateFormFields({ errors }) {
-  const { register } = useFormContext();
+export default function CreateFormFields() {
+  const { t } = useTranslation();
 
   return (
-    <>
-      <Input
-        label="forms.signin_overlay.email"
-        errors={errors}
-        placeholder="forms.signin_overlay.email"
-        {...register("email")}
+    <Form.FieldGroup>
+      <Form.TextInput
+        inputType="email"
+        name="attributes[email]"
+        id="create-email"
+        aria-describedby="create-email-error"
+        placeholder={t("forms.signin_overlay.email")}
+        idForError="create-email-error"
+        label={t("forms.signin_overlay.email")}
+        autoComplete="email"
       />
-      <Input
-        label="forms.signin_overlay.name"
-        errors={errors}
-        placeholder="forms.signin_overlay.name"
-        {...register("name")}
+      <Form.TextInput
+        id="create-name"
+        aria-describedby="create-name-error"
+        placeholder={t("forms.signin_overlay.name")}
+        idForError="create-name-error"
+        name="attributes[name]"
+        label={t("forms.signin_overlay.name")}
+        autoComplete="name"
       />
-      <Input
-        type="password"
-        label="forms.signin_overlay.password"
-        errors={errors}
-        placeholder="forms.signin_overlay.password"
-        {...register("password")}
+      <Form.TextInput
+        password
+        id="create-password"
+        aria-describedby="create-password-error"
+        placeholder={t("forms.signin_overlay.password")}
+        idForError="create-password-error"
+        name="attributes[password]"
+        label={t("forms.signin_overlay.password")}
+        autoComplete="new-password"
       />
-      <Input
-        type="password"
-        label="forms.signin_overlay.confirm_password"
-        errors={errors}
-        placeholder="forms.signin_overlay.confirm_password"
-        {...register("passwordConfirmation")}
+      <Form.TextInput
+        password
+        id="create-password-confirmation"
+        aria-describedby="create-password-confirmation-error"
+        placeholder={t("forms.signin_overlay.confirm_password")}
+        idForError="create-password-confirmation-error"
+        name="attributes[passwordConfirmation]"
+        label={t("forms.signin_overlay.confirm_password")}
+        autoComplete="new-password"
       />
-    </>
+    </Form.FieldGroup>
   );
 }
 
 CreateFormFields.displayName = "Global.SignInUp.CreateUserForm.Fields";
-
-CreateFormFields.propTypes = {
-  errors: PropTypes.array
-};

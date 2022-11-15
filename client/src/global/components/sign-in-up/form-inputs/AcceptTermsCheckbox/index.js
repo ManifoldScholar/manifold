@@ -25,7 +25,7 @@ export default function AcceptCheckbox({
 AcceptCheckbox.displayName = "Global.SignInUp.Inputs.AcceptTermsCheckbox";
 
 AcceptCheckbox.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onChange: PropTypes.func,
   labelStyle: PropTypes.oneOf(["copy", "heading"])
 };
