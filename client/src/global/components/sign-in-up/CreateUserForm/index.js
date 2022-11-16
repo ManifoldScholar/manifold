@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { usersAPI } from "api";
@@ -22,6 +22,8 @@ export default function CreateUserForm({
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const authentication = useFromStore("authentication");
+  const { currentUser } = authentication ?? {};
 
   const installationName = settings?.attributes?.general?.installationName;
 
@@ -68,16 +70,20 @@ export default function CreateUserForm({
 
   const onSuccess = useCallback(() => {
     authenticateUser(emailRef.current, passwordRef.current);
+  }, [authenticateUser]);
 
-    if (!willRedirect && !redirectToHomeOnSignup)
-      handleViewChange("create-update");
-    if (redirectToHomeOnSignup && !location?.state?.postLoginRedirect) {
-      history.replace(location, {
-        postLoginRedirect: "/"
-      });
+  useEffect(() => {
+    if (currentUser) {
+      if (!willRedirect && !redirectToHomeOnSignup)
+        handleViewChange("create-update");
+      if (redirectToHomeOnSignup && !location?.state?.postLoginRedirect) {
+        history.replace(location, {
+          postLoginRedirect: "/"
+        });
+      }
     }
   }, [
-    authenticateUser,
+    currentUser,
     handleViewChange,
     willRedirect,
     redirectToHomeOnSignup,
