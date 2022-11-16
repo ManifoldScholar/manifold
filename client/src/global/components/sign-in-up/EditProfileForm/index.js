@@ -20,9 +20,11 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const uid = useUID();
 
   const { currentUser } = authentication ?? {};
-  const { id, ...userModel } = currentUser;
   const { consentManifoldAnalytics, consentGoogleAnalytics } =
     currentUser.attributes ?? {};
+
+  // Strip id from the user data, so the global form treats this as a create call and passes the args meAPI.update needs.
+  const { id, ...userModel } = currentUser;
 
   const [cookiePrefs, setCookiePrefs] = useState({
     manifold: consentManifoldAnalytics ? "yes" : "no",

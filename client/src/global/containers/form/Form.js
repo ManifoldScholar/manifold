@@ -173,6 +173,7 @@ export class FormContainer extends PureComponent {
           attributes: dirty.attributes,
           relationships: this.adjustedRelationships(dirty.relationships)
         };
+
     const call = this.props.update(source.id, args);
 
     const action = request(call, this.props.name, this.requestOptions());
@@ -180,7 +181,7 @@ export class FormContainer extends PureComponent {
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {
       res.promise.then(() => {
         this.setState({ preventDirtyWarning: true }, () => {
-          this.props.onSuccess(this.props.response.entity ?? args);
+          this.props.onSuccess(this.props.response.entity);
         });
       });
     }
@@ -208,14 +209,20 @@ export class FormContainer extends PureComponent {
 
     const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
+
+    // Pass data and err here so we can use the global form for Login.
     if (res.hasOwnProperty("promise") && this.props.onSuccess) {
       res.promise.then(
-        () => {
+        data => {
           this.setState({ preventDirtyWarning: true }, () => {
-            this.props.onSuccess(this.props.response.entity ?? args);
+            this.props.onSuccess(this.props.response.entity, data);
           });
         },
-        () => {}
+        err => {
+          if (this.props.onError) {
+            this.props.onError(err);
+          }
+        }
       );
     }
   }
