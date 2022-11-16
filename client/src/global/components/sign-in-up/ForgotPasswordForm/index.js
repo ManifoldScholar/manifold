@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { passwordsAPI } from "api";
 import Form from "global/components/form";
 import { useNotification } from "hooks";
-import * as Styled from "./styles";
 import * as SharedStyles from "../styles";
 
 export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
@@ -64,14 +63,14 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
           value={t("forms.signin_overlay.send_password_reset")}
         />
       </SharedStyles.Form>
-      <Styled.LinksWrapper>
-        <Styled.ViewLink onClick={e => handleViewChange("login", e)}>
+      <SharedStyles.LinksWrapper>
+        <SharedStyles.ViewLink onClick={e => handleViewChange("login", e)}>
           {t("forms.signin_overlay.remember_password")}
-        </Styled.ViewLink>
-        <Styled.ViewLink onClick={e => handleViewChange("terms", e)}>
+        </SharedStyles.ViewLink>
+        <SharedStyles.ViewLink onClick={e => handleViewChange("terms", e)}>
           {t("forms.signin_overlay.need_account")}
-        </Styled.ViewLink>
-      </Styled.LinksWrapper>
+        </SharedStyles.ViewLink>
+      </SharedStyles.LinksWrapper>
     </div>
   );
 }

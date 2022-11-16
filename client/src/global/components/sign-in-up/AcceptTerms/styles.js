@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { headingPrimary } from "theme/styles/mixins";
-import { Button as BaseButton } from "../form-inputs";
 
 export const Header = styled.h2`
   ${headingPrimary}
@@ -11,7 +10,9 @@ export const TextBlock = styled.p`
   margin-block-end: 20px;
 `;
 
-export const Button = styled(BaseButton)`
+export const Button = styled.button`
+  width: 100%;
+
   &:disabled {
     color: var(--color-neutral-ui-dull-light);
     background: none;

@@ -54,3 +54,7 @@ export const EmailInput = styled.input`
   padding-block: 7px;
   padding-inline: 16px;
 `;
+
+export const Button = styled.button`
+  padding-inline: 20px;
+`;

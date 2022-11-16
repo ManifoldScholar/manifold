@@ -19,10 +19,9 @@ export default function AccountData() {
           <Styled.Instructions>
             {t("forms.privacy.download.description")}
           </Styled.Instructions>
-          <Styled.Button
-            styleType="outline"
-            label="forms.privacy.download.button_label"
-          />
+          <Styled.Button className="button-secondary button-secondary--outlined">
+            {t("forms.privacy.download.button_label")}
+          </Styled.Button>
         </Styled.ButtonGroup>
         <Styled.ButtonGroup>
           <Styled.Legend>{t("forms.privacy.delete.header")}</Styled.Legend>
@@ -30,10 +29,11 @@ export default function AccountData() {
             {t("forms.privacy.delete.description")}
           </Styled.Instructions>
           <Styled.Button
-            styleType="outline"
+            className="button-secondary button-secondary--outlined"
             onClick={() => setShowConfirm(true)}
-            label="forms.privacy.delete.button_label"
-          />
+          >
+            {t("forms.privacy.delete.button_label")}
+          </Styled.Button>
         </Styled.ButtonGroup>
       </Styled.Section>
       {showDeleteConfirm && <DeleteConfirm />}

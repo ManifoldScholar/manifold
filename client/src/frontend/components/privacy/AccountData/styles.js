@@ -4,7 +4,6 @@ import {
   formLabelPrimary,
   formInstructions
 } from "theme/styles/mixins";
-import { Button as BaseButton } from "global/components/sign-in-up/form-inputs";
 
 export const SectionHeader = styled.h2`
   ${utilityPrimary}
@@ -47,7 +46,7 @@ export const Instructions = styled.span`
   }
 `;
 
-export const Button = styled(BaseButton)`
+export const Button = styled.button`
   width: max-content;
   color: var(--highlight-color);
 `;
