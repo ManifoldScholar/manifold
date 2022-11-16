@@ -23,11 +23,16 @@ export default function PrivacySettingsContainer() {
       <section className="bg-neutral05">
         <div className="container">
           <Styled.FormWrapper>
-            <Form.Header
-              label={t("forms.privacy.title")}
-              instructions={t("forms.privacy.instructions")}
-              styleType="primary"
-            />
+            <div>
+              <Form.Header
+                label={t("forms.privacy.title")}
+                instructions={t("forms.privacy.instructions")}
+                styleType="primary"
+              />
+              <Styled.Link to={lh.link("dataUse")}>
+                What data does Manifold store about me?
+              </Styled.Link>
+            </div>
             <CookiesForm />
             <AccountData />
           </Styled.FormWrapper>

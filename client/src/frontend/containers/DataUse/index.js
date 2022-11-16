@@ -9,13 +9,10 @@ export default function DataUseContainer() {
 
   return (
     <div className="container">
-      <Styled.Columns>
-        <div>
-          <Styled.Header>{header}</Styled.Header>
-          <Styled.Body dangerouslySetInnerHTML={{ __html: body }} />
-        </div>
-        <Styled.ImagePlaceholder />
-      </Styled.Columns>
+      <Styled.Wrapper>
+        <Styled.Header>{header}</Styled.Header>
+        <Styled.Body dangerouslySetInnerHTML={{ __html: body }} />
+      </Styled.Wrapper>
     </div>
   );
 }
