@@ -1,17 +1,17 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { meAPI } from "api";
 import lh from "helpers/linkHandler";
 import ProfileFormFields from "./ProfileFormFields";
 import Greeting from "./Greeting";
-import { Button } from "../form-inputs";
 import { useHistory } from "react-router-dom";
 import { useFromStore, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import { useUID } from "react-uid";
-import BaseHookForm from "global/components/form/hook-form/BaseHookForm";
 import CookiesFields from "./CookiesFields";
+import Form from "global/components/form";
 import * as Styled from "./styles";
+import * as SharedStyles from "../styles";
 
 export default function EditProfileForm({ hideOverlay, mode }) {
   const authentication = useFromStore("authentication");
@@ -20,24 +20,20 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const uid = useUID();
 
   const { currentUser } = authentication ?? {};
+  const { id, ...userModel } = currentUser;
+  const { consentManifoldAnalytics, consentGoogleAnalytics } =
+    currentUser.attributes ?? {};
 
-  const {
-    id: userId,
-    attributes: { nickname, firstName, lastName, email, avatarStyles } = {}
-  } = currentUser ?? {};
+  const [cookiePrefs, setCookiePrefs] = useState({
+    manifold: consentManifoldAnalytics ? "yes" : "no",
+    google: consentGoogleAnalytics ? "yes" : "no"
+  });
 
-  const defaultValues = {
-    nickname,
-    firstName,
-    lastName,
-    email,
-    password: "",
-    passwordConfirmation: "",
-    avatar: avatarStyles?.smallSquare
-      ? { preview: avatarStyles?.smallSquare }
-      : null,
-    removeAvatar: false
-  };
+  const settings = useFromStore("settings", "select");
+  const manifoldAnalyticsEnabled = !settings?.attributes?.general
+    ?.disableInternalAnalytics;
+  const googleAnalyticsEnabled = !!settings?.attributes?.integrations
+    ?.gaTrackingId;
 
   const formRef = useRef();
 
@@ -52,19 +48,20 @@ export default function EditProfileForm({ hideOverlay, mode }) {
     expiration: 3000
   }));
 
-  const formatAttributes = useCallback(data => {
-    return Object.keys(data)
-      .filter(name => !(name === "password" && data.password === ""))
-      .filter(
-        name =>
-          !(
-            name === "avatar" &&
-            !data.avatar?.data &&
-            data.removeAvatar === false
-          )
-      )
-      .reduce((obj, name) => ({ ...obj, [name]: data[name] }), {});
-  }, []);
+  const formatAttributes = useCallback(
+    data => {
+      return {
+        consentManifoldAnalytics: !manifoldAnalyticsEnabled
+          ? null
+          : cookiePrefs.manifold === "yes",
+        consentGoogleAnalytics: !googleAnalyticsEnabled
+          ? null
+          : cookiePrefs.google === "yes",
+        ...data.attributes
+      };
+    },
+    [cookiePrefs, manifoldAnalyticsEnabled, googleAnalyticsEnabled]
+  );
 
   const onSuccess = useCallback(() => {
     notifyUpdate();
@@ -76,43 +73,48 @@ export default function EditProfileForm({ hideOverlay, mode }) {
     history.push(lh.link(route));
   };
 
-  return userId ? (
+  return currentUser ? (
     <div>
-      <BaseHookForm
+      <SharedStyles.Form
         ref={formRef}
-        defaultValues={defaultValues}
-        formatData={formatAttributes}
-        ariaLabelledBy={uid}
+        model={userModel}
+        name="global-authenticated-user-update"
         onSuccess={onSuccess}
-        apiMethod={meAPI.update}
-        reset={authentication.authenticating}
+        formatData={formatAttributes}
+        update={meAPI.update}
       >
-        {errors => (
-          <>
-            <Greeting mode={mode} defaultNickname={nickname ?? firstName} />
-            <Styled.SRText id={uid}>
-              {t("forms.signin_overlay.update_sr_title")}
-            </Styled.SRText>
-            <ProfileFormFields errors={errors} />
-            {mode === "new" && <CookiesFields />}
-            <Button
-              type="submit"
-              label="forms.signin_overlay.submit_update_label"
-            />
-          </>
+        <Greeting mode={mode} />
+        <Styled.SRText id={uid}>
+          {t("forms.signin_overlay.update_sr_title")}
+        </Styled.SRText>
+        <Form.FieldGroup>
+          <ProfileFormFields mode={mode} />
+        </Form.FieldGroup>
+        {mode && (
+          <CookiesFields
+            cookiePrefs={cookiePrefs}
+            setCookiePrefs={setCookiePrefs}
+          />
         )}
-      </BaseHookForm>
+        <input
+          className="button-secondary"
+          type="submit"
+          value={t("forms.signin_overlay.submit_update_label")}
+        />
+      </SharedStyles.Form>
       <Styled.ButtonGroup>
-        <Button
-          styleType="outline"
+        <button
+          className="button-secondary button-secondary--outlined button-secondary--color-white"
           onClick={redirect("subscriptions")}
-          label="forms.signin_overlay.notification_settings"
-        />
-        <Button
-          styleType="outline"
+        >
+          {t("forms.signin_overlay.notification_settings")}
+        </button>
+        <button
+          className="button-secondary button-secondary--outlined button-secondary--color-white"
           onClick={redirect("privacy")}
-          label="Privacy Settings"
-        />
+        >
+          {t("forms.privacy.title")}
+        </button>
       </Styled.ButtonGroup>
     </div>
   ) : null;
