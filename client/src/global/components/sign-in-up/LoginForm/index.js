@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import actions from "actions/currentUser";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -24,12 +24,6 @@ export default function LoginForm({
   const dispatch = useDispatch();
   const authentication = useFromStore("authentication");
   const error = authentication?.error?.body;
-
-  const formRef = useRef();
-
-  useEffect(() => {
-    if (formRef.current) formRef.current.focus();
-  }, []);
 
   const formatData = data => {
     dispatch(actions.loginStart());
@@ -79,7 +73,6 @@ export default function LoginForm({
       )}
       <div>
         <SharedStyles.Form
-          ref={formRef}
           name="global-login"
           create={tokensAPI.loginForm}
           onSuccess={onSuccess}
@@ -93,6 +86,7 @@ export default function LoginForm({
             />
             <Form.FieldGroup>
               <Form.TextInput
+                focusOnMount
                 inputType="email"
                 name="email"
                 id="login-email"

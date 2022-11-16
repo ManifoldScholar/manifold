@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { passwordsAPI } from "api";
@@ -9,12 +9,7 @@ import * as SharedStyles from "../styles";
 export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const { t } = useTranslation();
 
-  const formRef = useRef();
   const emailRef = useRef("");
-
-  useEffect(() => {
-    if (formRef.current) formRef.current.focus();
-  }, []);
 
   const notifySuccess = useNotification(email => ({
     level: 0,
@@ -38,7 +33,6 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   return (
     <div>
       <SharedStyles.Form
-        ref={formRef}
         name="global-password-request"
         create={passwordsAPI.create}
         onSuccess={onSuccess}
@@ -49,6 +43,7 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
           label={t("forms.signin_overlay.reset_password")}
         />
         <Form.TextInput
+          focusOnMount
           name="email"
           inputType="email"
           id="password-forgot-email"

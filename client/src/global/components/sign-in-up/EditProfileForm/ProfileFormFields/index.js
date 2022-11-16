@@ -16,6 +16,7 @@ export default function ProfileFormFields({ mode }) {
             : t("forms.signin_overlay.update_nickname")}
         </Styled.Text>
         <Form.TextInput
+          focusOnMount
           id="update-nickname"
           aria-labelledby="update-nickname-label"
           aria-describedby="update-nickname-error"
