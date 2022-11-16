@@ -1,7 +1,7 @@
-import Login from "../Login";
+import Login from "../LoginForm";
 import CreateUpdate from "../EditProfileForm";
 
-describe("global/components/sign-in-up/Login", () => {
+describe("global/components/sign-in-up/LoginForm", () => {
   def("user", () => factory("user"));
   def("authentication", () => fixtures.authentication({ user: $user }));
   def("handleViewChange", () => jest.fn());
@@ -25,7 +25,7 @@ describe("global/components/sign-in-up/Login", () => {
   it("should trigger handleViewChange callback when show forgot is clicked", () => {
     $handleViewChange.mockClear();
     $wrapper
-      .find('[data-id="show-forgot"]')
+      .find('button')
       .first()
       .simulate("click");
     expect($handleViewChange).toHaveBeenCalled();
@@ -34,8 +34,8 @@ describe("global/components/sign-in-up/Login", () => {
   it("should trigger handleViewChange callback when show create is clicked", () => {
     $handleViewChange.mockClear();
     $wrapper
-      .find('[data-id="show-create"]')
-      .first()
+      .find('button')
+      .at(1)
       .simulate("click");
     expect($handleViewChange).toHaveBeenCalled();
   });
