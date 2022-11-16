@@ -10,7 +10,6 @@ import {
   handleAuthenticationFailure
 } from "store/middleware/currentUserMiddleware";
 import Form from "global/components/form";
-import { Button } from "../form-inputs";
 import { tokensAPI } from "api";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
@@ -112,17 +111,21 @@ export default function LoginForm({
               />
             </Form.FieldGroup>
             {error && <Form.InputError errors={[{ detail: error }]} />}
-            <Button type="submit" label="forms.signin_overlay.log_in" />
+            <input
+              type="submit"
+              className="button-secondary"
+              value={t("forms.signin_overlay.log_in")}
+            />
           </>
         </SharedStyles.Form>
-        <Styled.LinksWrapper>
-          <Styled.ViewLink onClick={e => handleViewChange("password", e)}>
+        <SharedStyles.LinksWrapper>
+          <SharedStyles.ViewLink onClick={e => handleViewChange("password", e)}>
             {t("forms.signin_overlay.forgot_password")}
-          </Styled.ViewLink>
-          <Styled.ViewLink onClick={e => handleViewChange("terms", e)}>
+          </SharedStyles.ViewLink>
+          <SharedStyles.ViewLink onClick={e => handleViewChange("terms", e)}>
             {t("forms.signin_overlay.need_account")}
-          </Styled.ViewLink>
-        </Styled.LinksWrapper>
+          </SharedStyles.ViewLink>
+        </SharedStyles.LinksWrapper>
         <OAuthOptions />
       </div>
     </div>

@@ -7,7 +7,6 @@ import Greeting from "./Greeting";
 import { useHistory } from "react-router-dom";
 import { useFromStore, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
-import { useUID } from "react-uid";
 import CookiesFields from "./CookiesFields";
 import Form from "global/components/form";
 import * as Styled from "./styles";
@@ -17,7 +16,6 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const authentication = useFromStore("authentication");
   const history = useHistory();
   const { t } = useTranslation();
-  const uid = useUID();
 
   const { currentUser } = authentication ?? {};
   const { consentManifoldAnalytics, consentGoogleAnalytics } =
@@ -86,13 +84,13 @@ export default function EditProfileForm({ hideOverlay, mode }) {
         update={meAPI.update}
       >
         <Greeting mode={mode} />
-        <Styled.SRText id={uid}>
+        <h2 className="screen-reader-text">
           {t("forms.signin_overlay.update_sr_title")}
-        </Styled.SRText>
+        </h2>
         <Form.FieldGroup>
           <ProfileFormFields mode={mode} />
         </Form.FieldGroup>
-        {mode && (
+        {mode === "new" && (
           <CookiesFields
             cookiePrefs={cookiePrefs}
             setCookiePrefs={setCookiePrefs}

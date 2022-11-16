@@ -10,7 +10,6 @@ import CreateFormFields from "./CreateFormFields";
 import Form from "global/components/form";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import * as Styled from "./styles";
 import * as SharedStyles from "../styles";
 
 export default function CreateUserForm({
@@ -113,20 +112,22 @@ export default function CreateUserForm({
       </SharedStyles.Form>
       {settings?.attributes?.oauth && (
         <>
-          <Styled.LinksWrapper>
+          <SharedStyles.LinksWrapper>
             {t("forms.signin_overlay.oauth_instructions", {
               appName: installationName,
               providers: OAuthProviderNames()
             })}
-          </Styled.LinksWrapper>
+          </SharedStyles.LinksWrapper>
           <OAuthOptions />
         </>
       )}
-      <Styled.LinksWrapper>
-        <Styled.ViewLink onClick={event => handleViewChange("login", event)}>
+      <SharedStyles.LinksWrapper>
+        <SharedStyles.ViewLink
+          onClick={event => handleViewChange("login", event)}
+        >
           {t("forms.signin_overlay.have_account")}
-        </Styled.ViewLink>
-      </Styled.LinksWrapper>
+        </SharedStyles.ViewLink>
+      </SharedStyles.LinksWrapper>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AcceptTermsCheckbox } from "global/components/sign-in-up/form-inputs";
+import AcceptTermsCheckbox from "global/components/sign-in-up/AcceptTerms/AcceptTermsCheckbox";
 import PropTypes from "prop-types";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";

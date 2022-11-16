@@ -69,13 +69,13 @@ export default function DeleteConfirm() {
             idForError="email-mismatch"
           />
         </Styled.InputWrapper>
-        <button
+        <Styled.Button
           className="button-secondary button-secondary--outlined"
           type="button"
           onClick={handleDelete}
         >
           {t("forms.privacy.delete.confirm_button_label")}
-        </button>
+        </Styled.Button>
       </Styled.EmailWrapper>
     </Styled.Box>
   );

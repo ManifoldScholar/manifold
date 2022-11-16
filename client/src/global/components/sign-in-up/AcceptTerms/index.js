@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { AcceptTermsCheckbox } from "../form-inputs";
+import AcceptTermsCheckbox from "./AcceptTermsCheckbox";
 import { useFromStore } from "hooks";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
@@ -69,10 +69,12 @@ export default function AcceptTerms({ handleViewChange }) {
         label={checkboxLabel}
       />
       <Styled.Button
-        label={t("actions.continue")}
+        className="button-secondary button-secondary--with-room"
         disabled={!accepted}
         onClick={() => handleViewChange("create")}
-      />
+      >
+        {t("actions.continue")}
+      </Styled.Button>
     </>
   ) : null;
 }
