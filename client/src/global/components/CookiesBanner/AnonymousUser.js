@@ -3,6 +3,7 @@ import NarrowBanner from "./NarrowBanner";
 import FormEmbedBanner from "./FormEmbedBanner";
 import { useFromStore } from "hooks";
 import CookieHelper from "helpers/cookie/Browser";
+import ReactGA from "react-ga4";
 
 const cookie = new CookieHelper();
 
@@ -33,6 +34,11 @@ export default function AnonymousUserBanner() {
       };
 
       cookie.write("anonAnalyticsConsent", prefs, { expires: 365 });
+
+      ReactGA.gtag("consent", "default", {
+        analytics_storage: prefs.consentGoogleAnalytics ? "granted" : "denied"
+      });
+
       setConsentNeeded(false);
     },
     [googleAnalyticsEnabled, manifoldAnalyticsEnabled]

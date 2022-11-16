@@ -26,9 +26,7 @@ import getRoutes from "routes";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
 import { FrontendModeContext } from "helpers/contexts";
 import { entityStoreActions } from "actions";
-import CookieHelper from "helpers/cookie/Browser";
 
-const cookie = new CookieHelper();
 const { request } = entityStoreActions;
 const routes = getRoutes();
 const { visibilityHide } = uiVisibilityActions;
@@ -70,29 +68,6 @@ class ManifoldContainer extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevStateIgnored) {
-    if (this.receivedGaTrackingId(this.props.settings) && !this.gaInitialized) {
-      ReactGA.initialize(
-        this.props.settings.attributes.integrations.gaTrackingId
-      );
-
-      const auth = this.props.authentication;
-      const anonConsent = cookie.read("anonAnalyticsConsent");
-      const consentGoogleAnalytics =
-        (auth.authenticated && !!auth.currentUser.consentGoogleAnalytics) ||
-        (!auth.authenticated &&
-          anonConsent &&
-          !!anonConsent.consentGoogleAnalytics);
-
-      if (!consentGoogleAnalytics) {
-        ReactGA.gtag("consent", "default", {
-          analytics_storage: "denied"
-        });
-      }
-
-      this.gaInitialized = true;
-      if (this.props.gaInitCallback) this.props.gaInitCallback();
-    }
-
     if (this.routeChanged(prevProps.location, this.props.location)) {
       this.dispatchRouteUpdate();
       if (this.routeStateRequestsLogin) this.maybeShowLogin();

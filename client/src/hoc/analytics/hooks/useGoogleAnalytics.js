@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import get from "lodash/get";
 import ReactGA from "react-ga4";
 import ch from "helpers/consoleHelpers";
@@ -20,6 +20,7 @@ function googleAnalyticsEnabled(settings) {
 
 export default function useGoogleAnalytics(location, settings) {
   const googleAnalyticsId = getGoogleAnalyticsId(settings);
+  const [gaInitialized, setGaInitialized] = useState(false);
   const { currentUser } = useFromStore("authentication") ?? {};
 
   const anonConsent = cookie.read("anonAnalyticsConsent");
@@ -29,7 +30,15 @@ export default function useGoogleAnalytics(location, settings) {
     anonConsent?.consentGoogleAnalytics;
 
   useEffect(() => {
-    if (googleAnalyticsEnabled(settings)) {
+    const setConsentState = () => {
+      const consentState = consentGoogleAnalytics ? "granted" : "denied";
+
+      ReactGA.gtag("consent", "default", {
+        analytics_storage: consentState
+      });
+    };
+
+    if (!gaInitialized && googleAnalyticsEnabled(settings)) {
       ReactGA.initialize(googleAnalyticsId, { debug: false });
       if (config.environment.isDevelopment) {
         ch.notice(
@@ -37,14 +46,13 @@ export default function useGoogleAnalytics(location, settings) {
           "chart_with_upwards_trend"
         );
       }
-
-      if (!consentGoogleAnalytics) {
-        ReactGA.gtag("consent", "default", {
-          analytics_storage: "denied"
-        });
-      }
+      setGaInitialized(true);
     }
-  }, [googleAnalyticsId, settings, consentGoogleAnalytics]);
+
+    if (gaInitialized) {
+      setConsentState();
+    }
+  }, [gaInitialized, googleAnalyticsId, settings, consentGoogleAnalytics]);
 
   useEffect(() => {
     if (googleAnalyticsEnabled(settings)) {
