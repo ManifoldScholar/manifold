@@ -1,6 +1,6 @@
-import { UpdateFormContainer } from "../UpdateForm";
+import UpdateFormContainer from "../EditProfileForm";
 
-describe("global/components/sign-in-up/UpdateForm", () => {
+describe("global/components/sign-in-up/EditProfileForm", () => {
   def("user", () => factory("user"));
   def("authentication", () => fixtures.authentication({ user: $user }));
   def("root", () => (

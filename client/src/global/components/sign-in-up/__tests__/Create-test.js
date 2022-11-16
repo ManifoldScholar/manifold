@@ -1,6 +1,6 @@
-import { CreateContainer } from "../Create";
+import CreateContainer from "../CreateUserForm";
 
-describe("global/components/sign-in-up/Create", () => {
+describe("global/components/sign-in-up/CreateUserForm", () => {
   def("handleViewChange", () => jest.fn());
   def("user", () => factory("user"));
   def("pages", () => collectionFactory("page"));
@@ -24,8 +24,8 @@ describe("global/components/sign-in-up/Create", () => {
     const wrapper = mount($withApp($root));
     $handleViewChange.mockClear();
     wrapper
-      .find('[data-id="show-login"]')
-      .first()
+      .find('button')
+      .last()
       .simulate("click");
     expect($handleViewChange).toHaveBeenCalled();
   });

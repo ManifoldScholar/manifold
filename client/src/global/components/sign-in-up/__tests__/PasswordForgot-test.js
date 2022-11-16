@@ -1,6 +1,6 @@
-import { PasswordForgotContainer } from "../PasswordForgot";
+import PasswordForgotContainer from "../ForgotPasswordForm";
 
-describe("global/components/sign-in-up/PasswordForgot", () => {
+describe("global/components/sign-in-up/ForgotPasswordForm", () => {
   def("handleViewChange", () => jest.fn());
 
   def("root", () => (
@@ -19,7 +19,7 @@ describe("global/components/sign-in-up/PasswordForgot", () => {
   it("should trigger handleViewChange callback when show login is clicked", () => {
     $handleViewChange.mockClear();
     $wrapper
-      .find('[data-id="show-login"]')
+      .find('button')
       .first()
       .simulate("click");
     expect($handleViewChange).toHaveBeenCalled();
@@ -28,8 +28,8 @@ describe("global/components/sign-in-up/PasswordForgot", () => {
   it("should trigger handleViewChange callback when show create is clicked", () => {
     $handleViewChange.mockClear();
     $wrapper
-      .find('[data-id="show-create"]')
-      .first()
+      .find('button')
+      .at(1)
       .simulate("click");
     expect($handleViewChange).toHaveBeenCalled();
   });
