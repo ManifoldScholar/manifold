@@ -321,6 +321,7 @@ export class FormContainer extends PureComponent {
 
         {this.renderGroupedErrors(this.props)}
         <Styled.Form
+          ref={this.props.formRef}
           style={this.props.style}
           onSubmit={this.handleSubmit}
           className={className}

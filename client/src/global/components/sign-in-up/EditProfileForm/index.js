@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { meAPI } from "api";
 import lh from "helpers/linkHandler";
@@ -35,12 +35,6 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const googleAnalyticsEnabled = !!settings?.attributes?.integrations
     ?.gaTrackingId;
 
-  const formRef = useRef();
-
-  useEffect(() => {
-    if (formRef.current) formRef.current.focus();
-  }, []);
-
   const notifyUpdate = useNotification(() => ({
     level: 0,
     id: `CURRENT_USER_UPDATED`,
@@ -76,7 +70,6 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   return currentUser ? (
     <div>
       <SharedStyles.Form
-        ref={formRef}
         model={userModel}
         name="global-authenticated-user-update"
         onSuccess={onSuccess}
@@ -90,7 +83,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
         <Form.FieldGroup>
           <ProfileFormFields mode={mode} />
         </Form.FieldGroup>
-        {mode && (
+        {mode === "new" && (
           <Styled.CookiesFieldGroup label={t("forms.privacy.cookies")}>
             <CookiesFields
               cookiePrefs={cookiePrefs}

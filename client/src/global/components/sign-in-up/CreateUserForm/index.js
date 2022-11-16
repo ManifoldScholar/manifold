@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { usersAPI } from "api";
@@ -25,13 +25,8 @@ export default function CreateUserForm({
 
   const installationName = settings?.attributes?.general?.installationName;
 
-  const formRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-
-  useEffect(() => {
-    if (formRef.current) formRef.current.focus();
-  }, []);
 
   const OAuthProviderNames = () => {
     if (!settings?.attributes?.oauth) return null;
@@ -93,7 +88,6 @@ export default function CreateUserForm({
   return (
     <>
       <SharedStyles.Form
-        ref={formRef}
         name="global-create-user"
         create={usersAPI.create}
         formatData={formatAttributes}

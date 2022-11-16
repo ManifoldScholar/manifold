@@ -9,6 +9,7 @@ export default function CreateFormFields() {
   return (
     <Form.FieldGroup>
       <Form.TextInput
+        focusOnMount
         inputType="email"
         name="attributes[email]"
         id="create-email"
