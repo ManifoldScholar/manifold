@@ -42,7 +42,7 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
   const anonConsent = cookie.read("anonAnalyticsConsent");
 
   const consentManifoldAnalytics =
-    currentUser?.attributes.consentManifoldAnalytics ||
+    currentUser?.attributes?.consentManifoldAnalytics ||
     anonConsent?.consentManifoldAnalytics;
 
   useEffect(() => {

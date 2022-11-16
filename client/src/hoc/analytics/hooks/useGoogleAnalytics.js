@@ -25,7 +25,7 @@ export default function useGoogleAnalytics(location, settings) {
   const anonConsent = cookie.read("anonAnalyticsConsent");
 
   const consentGoogleAnalytics =
-    currentUser?.attributes.consentGoogleAnalytics ||
+    currentUser?.attributes?.consentGoogleAnalytics ||
     anonConsent?.consentGoogleAnalytics;
 
   useEffect(() => {

@@ -27,22 +27,3 @@ export const Form = styled(GlobalForm.Form)`
     margin-top: 30px;
   }
 `;
-
-export const Subscriptions = styled.div`
-  margin-block-start: 50px;
-
-  .button-secondary {
-    width: 100%;
-    &__icon {
-      width: 30px;
-      height: 20px;
-    }
-  }
-`;
-
-export const SubscriptionsLabel = styled.span`
-  font-family: var(--font-family-copy);
-  display: block;
-  margin-bottom: 20px;
-  font-style: italic;
-`;
