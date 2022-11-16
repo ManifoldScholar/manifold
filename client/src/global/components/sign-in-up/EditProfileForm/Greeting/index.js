@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Trans } from "react-i18next";
-import { useFormContext } from "react-hook-form";
 import PropTypes from "prop-types";
+import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
-export default function ProfileGreeting({ mode, defaultNickname }) {
-  const { watch } = useFormContext();
-  const nickname = watch("nickname") ?? defaultNickname;
+export default function ProfileGreeting({ mode }) {
+  const formData = useContext(FormContext);
+  const nickname = formData.getModelValue("attributes[nickname]");
 
   return mode === "new" ? (
     <Trans
@@ -33,5 +33,5 @@ ProfileGreeting.displayName = "Global.SignInUp.EditProfileForm.Greeting";
 
 ProfileGreeting.propTypes = {
   mode: PropTypes.oneOf(["new", "existing"]),
-  defaultNickname: PropTypes.string
+  nickname: PropTypes.string
 };
