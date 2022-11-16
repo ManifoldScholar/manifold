@@ -7,7 +7,7 @@ import Greeting from "./Greeting";
 import { useHistory } from "react-router-dom";
 import { useFromStore, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
-import CookiesFields from "./CookiesFields";
+import CookiesFields from "frontend/components/privacy/CookiesForm/CookiesFormFields";
 import Form from "global/components/form";
 import * as Styled from "./styles";
 import * as SharedStyles from "../styles";
@@ -90,11 +90,15 @@ export default function EditProfileForm({ hideOverlay, mode }) {
         <Form.FieldGroup>
           <ProfileFormFields mode={mode} />
         </Form.FieldGroup>
-        {mode === "new" && (
-          <CookiesFields
-            cookiePrefs={cookiePrefs}
-            setCookiePrefs={setCookiePrefs}
-          />
+        {mode && (
+          <Styled.CookiesFieldGroup label={t("forms.privacy.cookies")}>
+            <CookiesFields
+              cookiePrefs={cookiePrefs}
+              setCookiePrefs={setCookiePrefs}
+              manifoldAnalyticsEnabled={manifoldAnalyticsEnabled}
+              googleAnalyticsEnabled={googleAnalyticsEnabled}
+            />
+          </Styled.CookiesFieldGroup>
         )}
         <input
           className="button-secondary"

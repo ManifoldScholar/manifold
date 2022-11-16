@@ -1,24 +1,25 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 import humps from "humps";
+import { useTranslation } from "react-i18next";
 import RadioGroup from "frontend/components/preferences/RadioGroup";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
-export default function CookiesFields({ cookiePrefs, setCookiePrefs }) {
+export default function CookiesFormFields({
+  cookiePrefs,
+  setCookiePrefs,
+  manifoldAnalyticsEnabled,
+  googleAnalyticsEnabled
+}) {
   const { t } = useTranslation();
-
-  const onChange = pref => {
-    const newVal = cookiePrefs[pref] === "yes" ? "no" : "yes";
-    setCookiePrefs({ ...cookiePrefs, [pref]: newVal });
-  };
-
   const settings = useFromStore("settings", "select");
-  const manifoldAnalyticsEnabled = !settings?.attributes?.general
-    ?.disableInternalAnalytics;
-  const googleAnalyticsEnabled = !!settings?.attributes?.integrations
-    ?.gaTrackingId;
+
   const installationName = settings?.attributes?.general?.installationName;
+
+  const showNoCookiesMessage = !(
+    manifoldAnalyticsEnabled || googleAnalyticsEnabled
+  );
 
   const getLocalized = (prop, strType) => {
     const i18nKey = humps.decamelize(prop, { separator: "_" }).toLowerCase();
@@ -33,12 +34,13 @@ export default function CookiesFields({ cookiePrefs, setCookiePrefs }) {
     }
   };
 
-  const showNoCookiesMessage = !(
-    manifoldAnalyticsEnabled || googleAnalyticsEnabled
-  );
+  const onChange = pref => {
+    const newVal = cookiePrefs[pref] === "yes" ? "no" : "yes";
+    setCookiePrefs({ ...cookiePrefs, [pref]: newVal });
+  };
 
   return (
-    <Styled.FieldGroup label={t("forms.privacy.cookies")}>
+    <>
       {showNoCookiesMessage ? (
         <Styled.NoAnalyticsMessage>
           {t("forms.privacy.no_analytics_message", {
@@ -73,8 +75,15 @@ export default function CookiesFields({ cookiePrefs, setCookiePrefs }) {
           )}
         </>
       )}
-    </Styled.FieldGroup>
+    </>
   );
 }
 
-CookiesFields.displayName = "Global.SignInUp.CookiesFields";
+CookiesFormFields.displayName = "Frontend.Privacy.CookiesForm.Fields";
+
+CookiesFormFields.propTypes = {
+  cookiePrefs: PropTypes.object.isRequired,
+  setCookiePrefs: PropTypes.func.isRequired,
+  manifoldAnalyticsEnabled: PropTypes.bool,
+  googleAnalyticsEnabled: PropTypes.bool
+};

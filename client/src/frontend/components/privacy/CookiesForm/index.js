@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
-import humps from "humps";
-import RadioGroup from "frontend/components/preferences/RadioGroup";
+import CookiesFields from "./CookiesFormFields";
 import GlobalForm from "global/containers/form";
 import { useFromStore, useNotification } from "hooks";
 import * as Styled from "./styles";
@@ -25,13 +24,6 @@ export default function CookiesForm() {
     google: consentGoogleAnalytics ? "yes" : "no"
   });
 
-  const onChange = pref => {
-    const newVal = cookiePrefs[pref] === "yes" ? "no" : "yes";
-    setCookiePrefs({ ...cookiePrefs, [pref]: newVal });
-  };
-
-  const installationName = settings?.attributes?.general?.installationName;
-
   const formatAttributes = () => ({
     consentManifoldAnalytics: !manifoldAnalyticsEnabled
       ? null
@@ -48,23 +40,6 @@ export default function CookiesForm() {
     expiration: 3000
   }));
 
-  const getLocalized = (prop, strType) => {
-    const i18nKey = humps.decamelize(prop, { separator: "_" }).toLowerCase();
-
-    switch (strType) {
-      case "label":
-        return t(`forms.privacy.${i18nKey}.label`);
-      case "description":
-        return t(`forms.privacy.${i18nKey}.description`, { defaultValue: "" });
-      default:
-        return "";
-    }
-  };
-
-  const showNoCookiesMessage = !(
-    manifoldAnalyticsEnabled || googleAnalyticsEnabled
-  );
-
   return (
     <GlobalForm.Form
       name="global-authenticated-user-update"
@@ -73,40 +48,12 @@ export default function CookiesForm() {
       onSuccess={notifyUpdate}
     >
       <Styled.FieldGroup label={t("forms.privacy.cookies")}>
-        {showNoCookiesMessage ? (
-          <Styled.NoAnalyticsMessage>
-            {t("forms.privacy.no_analytics_message", {
-              name: installationName
-            })}
-          </Styled.NoAnalyticsMessage>
-        ) : (
-          <>
-            {manifoldAnalyticsEnabled && (
-              <RadioGroup
-                preference={{
-                  key: "manifold",
-                  label: getLocalized("internalAnalytics", "label"),
-                  instructions: getLocalized("internalAnalytics", "description")
-                }}
-                options={{ no: t("common.no"), yes: t("common.yes") }}
-                value={cookiePrefs.manifold}
-                onChange={() => onChange("manifold")}
-              />
-            )}
-            {googleAnalyticsEnabled && (
-              <RadioGroup
-                preference={{
-                  key: "google",
-                  label: getLocalized("googleAnalytics", "label"),
-                  instructions: getLocalized("googleAnalytics", "description")
-                }}
-                options={{ no: t("common.no"), yes: t("common.yes") }}
-                value={cookiePrefs.google}
-                onChange={() => onChange("google")}
-              />
-            )}
-          </>
-        )}
+        <CookiesFields
+          cookiePrefs={cookiePrefs}
+          setCookiePrefs={setCookiePrefs}
+          manifoldAnalyticsEnabled={manifoldAnalyticsEnabled}
+          googleAnalyticsEnabled={googleAnalyticsEnabled}
+        />
       </Styled.FieldGroup>
       <Styled.Save
         className="button-secondary"
