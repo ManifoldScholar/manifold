@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
 import setter from "../setter";
 import Base from "./Base";
+import UserAvatar from "./UserAvatar";
 import get from "lodash/get";
 
 export class FormUpload extends Component {
@@ -130,20 +131,34 @@ export class FormUpload extends Component {
   }
 
   render() {
-    const { set: _set, setOther: _setOther, ...baseProps } = this.props;
+    const {
+      set: _set,
+      setOther: _setOther,
+      isUserAvatar,
+      ...baseProps
+    } = this.props;
     return (
       <UIDConsumer>
-        {id => (
-          <Base
-            {...baseProps}
-            accepts={this.accepts(this.props)}
-            updateValue={this.updateValue}
-            inputId={`${this.idPrefix}-${id}`}
-            idForError={`${this.idForErrorPrefix}-${id}`}
-            idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
-            isBuilder={this.props.isBuilder}
-          />
-        )}
+        {id =>
+          isUserAvatar ? (
+            <UserAvatar
+              {...baseProps}
+              updateValue={this.updateValue}
+              inputId={`${this.idPrefix}-${id}`}
+              idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
+            />
+          ) : (
+            <Base
+              {...baseProps}
+              accepts={this.accepts(this.props)}
+              updateValue={this.updateValue}
+              inputId={`${this.idPrefix}-${id}`}
+              idForError={`${this.idForErrorPrefix}-${id}`}
+              idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
+              isBuilder={this.props.isBuilder}
+            />
+          )
+        }
       </UIDConsumer>
     );
   }
