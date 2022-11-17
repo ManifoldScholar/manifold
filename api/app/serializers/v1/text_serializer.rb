@@ -36,6 +36,7 @@ module V1
         anchor: Types::String,
         type: Types::String.optional,
         id: Types::Serializer::ID,
+        uid: Types::Serializer::ID.optional,
         collected: Types::Bool.optional,
         children: Types::Array.of(
           Types::Hash.schema(
@@ -43,6 +44,7 @@ module V1
             anchor: Types::String,
             type: Types::String.optional,
             id: Types::Serializer::ID,
+            uid: Types::Serializer::ID.optional,
             collected: Types::Bool.optional
           )
         )
