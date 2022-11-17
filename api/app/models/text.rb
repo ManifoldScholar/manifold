@@ -395,7 +395,7 @@ class Text < ApplicationRecord
     return if toc.empty?
 
     return if toc.all? do |toc_entry|
-      toc_entry[:source_path] || (!toc_entry[:id].nil? && text_sections.find(toc_entry[:id]))
+      toc_entry[:source_path] || text_sections.find_by(id: toc_entry[:id])
     end
 
     errors.add(:toc, "entry must be linked to a text section")
