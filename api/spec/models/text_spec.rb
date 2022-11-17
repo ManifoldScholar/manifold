@@ -38,20 +38,16 @@ RSpec.describe Text, type: :model do
     let(:new_toc) { [{label: "one", id: section_one.id, type: "test"}, {label: "two", id: section_two.id}] }
     let(:new_toc_invalid_entry) { [*new_toc, {label: "three"}]}
 
-    it "can be changed" do
-      expect do
-        text.update! :toc => new_toc
-      end.to execute_safely.and change { text.reload.toc }.to(new_toc)
-    end
-
     it "is valid when all entries have a valid section id" do
-        text.toc = new_toc
-        expect(text.valid?).to be true
+      text.toc = new_toc
+
+      expect(text).to be_valid
     end
 
     it "is invalid when an entry has an invalid section id" do
       text.toc = new_toc_invalid_entry
-      expect(text.valid?).to be false
+
+      expect(text).to be_invalid
     end
   end
 

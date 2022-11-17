@@ -13,7 +13,7 @@ module Ingestions
       def report
         count = text.toc.length
         if count.positive?
-          log_structure text.toc, "TOC:"
+          log_structure text.toc.as_json, "TOC:"
         else
           info "services.ingestions.post_processor.log.toc_empty"
         end
@@ -24,24 +24,38 @@ module Ingestions
       end
 
       def transform_toc
-        branch_convert text.toc.clone
+        branch_convert text.toc.as_json.map(&:deep_symbolize_keys)
       end
 
       def branch_convert(branch)
         branch.each do |leaf|
-          if leaf[:source_path]
-            source_path, _hash, anchor = leaf[:source_path].partition("#")
-            ts = text.find_text_section_by_source_path(source_path)
-            next unless ts.present?
-
-            leaf[:id] = ts.id
-            leaf[:anchor] = anchor if anchor.present?
-            leaf.delete(:source_path)
-          end
-          branch_convert(leaf[:children]) if leaf[:children]
+          handle_leaf! leaf
         end
       end
 
+      # @return [void]
+      def handle_leaf!(leaf)
+        leaf[:uid] ||= SecureRandom.uuid
+
+        handle_source_path! leaf
+
+        branch_convert leaf[:children] if leaf[:children]
+      end
+
+      def handle_source_path!(leaf)
+        return unless leaf[:source_path]
+
+        source_path, _hash, anchor = leaf[:source_path].partition("#")
+
+        ts = text.find_text_section_by_source_path(source_path)
+
+        return unless ts.present?
+
+        leaf[:id] = ts.id
+        leaf[:anchor] = anchor if anchor.present?
+
+        leaf.delete(:source_path)
+      end
     end
   end
 end
