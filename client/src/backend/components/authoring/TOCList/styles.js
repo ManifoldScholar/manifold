@@ -5,8 +5,7 @@ import {
   buttonUnstyled,
   setHoverStyle,
   textTruncate,
-  respond,
-  blockLabelRound
+  respond
 } from "theme/styles/mixins";
 
 export const ScrollContainer = styled.div`
@@ -104,19 +103,4 @@ export const DragHandle = styled.div`
   ${buttonUnstyled}
   cursor: grab;
   ${setHoverStyle()}
-`;
-
-export const Tag = styled.div`
-  ${blockLabelRound}
-  width: max-content;
-
-  padding-right: 8px;
-  padding-left: 8px;
-  margin: 0;
-  font-size: 12px;
-  vertical-align: middle;
-  line-height: 1.188;
-  font-family: var(--font-family-heading);
-  background-color: var(--color-accent-primary-light);
-  color: var(--color-neutral-text-extra-dark);
 `;
