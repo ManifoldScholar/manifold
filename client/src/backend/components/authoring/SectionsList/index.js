@@ -6,17 +6,16 @@ import Section from "./SectionListItem";
 export default function SectionsList({
   sections = [],
   textId,
-  onDelete,
-  onReorder = () => {}
+  startSectionId
 }) {
   return sections.length ? (
     <div className="full-width">
       <EntitiesList
         entities={sections}
         entityComponent={Section}
-        entityComponentProps={{ onDelete, textId }}
+        entityComponentProps={{ startSectionId, textId }}
         listStyle="bare"
-        callbacks={{ onReorder }}
+        callbacks={{}}
       />
     </div>
   ) : null;
@@ -25,8 +24,7 @@ export default function SectionsList({
 SectionsList.displayName = "Text.Sections.List";
 
 SectionsList.propTypes = {
+  textId: PropTypes.string.isRequired,
   sections: PropTypes.array,
-  onDelete: PropTypes.func,
-  onEdit: PropTypes.func,
-  onReorder: PropTypes.func
+  startTextSectionId: PropTypes.string
 };
