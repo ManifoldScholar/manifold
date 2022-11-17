@@ -5,7 +5,8 @@ import {
   buttonUnstyled,
   setHoverStyle,
   textTruncate,
-  respond
+  respond,
+  blockLabelRound
 } from "theme/styles/mixins";
 
 export const Item = styled.li`
@@ -21,6 +22,12 @@ export const Title = styled.div`
   font-family: var(--font-family-sans);
   font-size: 17px;
   font-weight: var(--font-weight-semibold);
+`;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
   color: var(--color-neutral-text-extra-light);
 `;
 
@@ -43,7 +50,7 @@ export const ButtonGroup = styled.div`
   align-items: center;
   padding: 0;
 
-  &:hover ~ ${Title} {
+  &:hover ~ ${TitleWrapper} {
     color: var(--highlight-color);
   }
 
@@ -80,4 +87,19 @@ export const Button = styled.button`
 export const DragHandle = styled(Button)`
   cursor: grab;
   ${setHoverStyle()}
+`;
+
+export const Tag = styled.div`
+  ${blockLabelRound}
+  width: max-content;
+
+  padding-right: 8px;
+  padding-left: 8px;
+  margin: 0;
+  font-size: 12px;
+  vertical-align: middle;
+  line-height: 1.188;
+  font-family: var(--font-family-heading);
+  background-color: var(--color-accent-primary-light);
+  color: var(--color-neutral-text-extra-dark);
 `;
