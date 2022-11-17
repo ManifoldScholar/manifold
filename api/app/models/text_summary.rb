@@ -14,7 +14,7 @@ class TextSummary < ApplicationRecord
 
   manifold_has_attached_file :cover, :image
 
-  serialize :toc, Array
+  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: []
 
   delegate :collected_by?, to: :text
 
