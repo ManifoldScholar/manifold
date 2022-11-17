@@ -1,36 +1,34 @@
-import { uid } from "react-uid";
-
 const formatTreeItem = entry => {
   if (!entry) return undefined;
   if (!entry.children) {
     return {
-      id: uid(entry),
+      id: entry.uid,
       children: [],
       hasChildren: false,
       isExpanded: true,
       isChildrenLoading: false,
       data: {
+        uid: entry.uid,
         sectionId: entry.id,
         title: entry.label,
-        anchor: entry.anchor,
-        type: entry.type
+        anchor: entry.anchor
       }
     };
   }
   return [
     {
-      id: uid(entry),
+      id: entry.uid,
       hasChildren: true,
       children: entry.children
-        .map(c => (c ? uid(c) : undefined))
+        .map(c => (c ? c.uid : undefined))
         .filter(Boolean),
       isExpanded: true,
       isChildrenLoading: false,
       data: {
+        uid: entry.uid,
         sectionId: entry.id,
         title: entry.label,
-        anchor: entry.anchor,
-        type: entry.type
+        anchor: entry.anchor
       }
     },
     entry.children.map(c => formatTreeItem(c)).filter(Boolean)
@@ -40,7 +38,7 @@ const formatTreeItem = entry => {
 export const formatTreeData = toc => {
   if (!toc) return null;
 
-  const rootChildren = toc.map(e => uid(e));
+  const rootChildren = toc.map(e => e.uid);
   const entries = toc.map(formatTreeItem).filter(Boolean);
   const flatEntries = entries.flat(10);
   const asObj = flatEntries.reduce((obj, e) => {
@@ -69,10 +67,10 @@ const formatTOCEntry = all => item => {
 
   const formatter = formatTOCEntry(all);
   return {
+    uid: item.data.uid,
     id: item.data.sectionId,
     label: item.data.title,
     anchor: item.data.anchor,
-    type: item.data.type,
     children: item.hasChildren
       ? item.children.map(c => formatter(all[c]))
       : undefined
