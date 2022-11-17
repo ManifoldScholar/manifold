@@ -43,17 +43,15 @@ RSpec.describe Ingestions::PostProcessor do
     end
 
     it "assigns a text_section ID to each item" do
-      def walk(array)
-        ids = []
-        array.each do |hash|
-          ids.push hash[:id]
-          if hash.key? :children
-            ids.concat walk(hash[:children])
-          end
-        end
-        ids
-      end
       expect(walk(text.toc).any? { |i| i.nil? }).to be false
+    end
+
+    def walk(entries)
+      entries.each_with_object([]) do |entry, ids|
+        ids.push entry.id
+
+        ids.concat walk(entry.children) if entry.children.present?
+      end
     end
   end
 

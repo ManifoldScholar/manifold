@@ -10,8 +10,6 @@ class ProjectSummary < ApplicationRecord
 
   manifold_has_attached_file :avatar, :image
 
-  serialize :toc, Array
-
   def updated?
     updated_at.strftime("%F") != created_at.strftime("%F")
   end

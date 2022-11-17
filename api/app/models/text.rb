@@ -50,11 +50,9 @@ class Text < ApplicationRecord
   end
   with_citable_children :text_sections
 
-  # Fields
-  serialize :structure_titles, Hash
-  serialize :toc, Array
-  serialize :page_list, Array
-  serialize :landmarks, Array
+  attribute :structure_titles, :indifferent_hash, default: {}
+  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: []
+  attribute :landmarks, Texts::LandmarkEntry.to_array_type, default: []
 
   jsonb_accessor(
     :export_configuration,
@@ -106,6 +104,10 @@ class Text < ApplicationRecord
   delegate :subtitle_formatted, to: :title_subtitle, allow_nil: true
   delegate :subtitle_plaintext, to: :title_subtitle, allow_nil: true
   delegate :social_image, to: :project
+
+  before_validation :ensure_toc_uids!
+
+  after_initialize :migrate_toc!
 
   # Validation
   validates :spine,
@@ -252,41 +254,34 @@ class Text < ApplicationRecord
     text_sections.find_by(source_identifier: source_id)
   end
 
-  def section_source_map
-    map = {}
-    text_sections.each do |ts|
+  memoize def section_source_map
+    text_sections.each_with_object({}) do |ts, map|
       next if ts.ingestion_source.nil?
 
       path = ts.ingestion_source.source_path
+
       map[path] = ts
     end
-    map
   end
-  memoize :section_source_map
 
-  def source_path_map
-    map = {}
-    ingestion_sources.each do |s|
+  memoize def source_path_map
+    ingestion_sources.each_with_object({}) do |s, map|
       map[s.source_path] = s.proxy_path
     end
-    map
   end
-  memoize :source_path_map
 
   # @param [String, TextSection] source_path
   # @return [Hash, nil]
   def landmark_for(source_path)
     return toc_entry_for(source_path.source_path) if source_path.is_a?(TextSection)
 
-    Array(landmarks).detect do |landmark|
-      landmark["source_path"] == source_path
+    landmarks.detect do |landmark|
+      landmark.source_path == source_path
     end
   end
 
   memoize def toc_landmark
-    Array(landmarks).detect do |landmark|
-      landmark["type"]&.match? "toc"
-    end
+    landmarks.detect(&:toc?)
   end
 
   memoize def toc_section
@@ -295,12 +290,12 @@ class Text < ApplicationRecord
     return nil if landmark.blank?
 
     toc_entry = toc_entry_detect do |entry|
-      entry["anchor"] == landmark["anchor"]
+      entry.anchor == landmark.anchor
     end
 
     return nil if toc_entry.blank?
 
-    section_by_id toc_entry["id"]
+    section_by_id toc_entry.id
   end
 
   delegate :id, to: :toc_section, prefix: true, allow_nil: true
@@ -312,7 +307,7 @@ class Text < ApplicationRecord
   # @yieldparam [Hash] toc_entry
   # @yieldreturn [Boolean]
   # @return [Hash, nil]
-  def toc_entry_detect(list: toc, depth: 0)
+  def toc_entry_detect(list: toc, depth: 0, &block)
     return enum_for(__method__) unless block_given?
 
     catch(:found) do
@@ -321,7 +316,7 @@ class Text < ApplicationRecord
 
         children = toc_entry["children"]
 
-        found = toc_entry_detect(list: children, depth: depth + 1, &Proc.new) if children.present?
+        found = toc_entry_detect(list: children, depth: depth + 1, &block) if children.present?
 
         throw :found, found unless found.nil?
       end
@@ -336,8 +331,30 @@ class Text < ApplicationRecord
     return toc_entry_for(text_section_id.id) if text_section_id.is_a?(TextSection)
 
     toc_entry_detect do |entry|
-      entry["id"] == text_section_id
+      entry.id == text_section_id
     end
+  end
+
+  def toc_entry_by_uid(uid)
+    toc_entry_detect do |entry|
+      entry.uid == uid
+    end
+  end
+
+  # @api private
+  # @return [void]
+  def ensure_toc_uids!
+    toc.each(&:ensure_uid!)
+  end
+
+  # @api private
+  # @return [void]
+  def migrate_toc!
+    return unless persisted?
+
+    ensure_toc_uids!
+
+    update_column :toc, toc if toc_changed?
   end
 
   def to_s
