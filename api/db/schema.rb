@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_16_211558) do
+ActiveRecord::Schema.define(version: 2022_11_17_235556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -2083,5 +2083,11 @@ UNION ALL
            FROM (collaborators c
              JOIN makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+  SQL
+  create_view "text_section_aggregations", sql_definition: <<-SQL
+    SELECT text_sections.text_id,
+    jsonb_agg(jsonb_build_object('label', text_sections.name, 'id', text_sections.id, 'source_path', text_sections.source_identifier) ORDER BY text_sections."position") AS auto_generated_toc
+   FROM text_sections
+  GROUP BY text_sections.text_id;
   SQL
 end
