@@ -74,6 +74,7 @@ class Text < ApplicationRecord
   has_many :ingestion_sources, dependent: :destroy
   has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text
+  has_one :text_section_aggregation, inverse_of: :text
   has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text
   has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
@@ -104,6 +105,7 @@ class Text < ApplicationRecord
   delegate :subtitle_formatted, to: :title_subtitle, allow_nil: true
   delegate :subtitle_plaintext, to: :title_subtitle, allow_nil: true
   delegate :social_image, to: :project
+  delegate :auto_generated_toc, to: :text_section_aggregation, allow_nil: true
 
   before_validation :ensure_toc_uids!
 
