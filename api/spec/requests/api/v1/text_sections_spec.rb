@@ -12,6 +12,14 @@ RSpec.describe "Text Sections", type: :request do
                        parent: "text",
                        url_parameters: [:text_id]
     end
+
+    path "/texts/{text_id}/relationships/text_sections/{id}" do
+      include_examples "an API update request",
+                       model: TextSection,
+                       parent: "text",
+                       authorized_user: :admin,
+                       url_parameters: [:text_id]
+    end
   end
 
   path "/text_sections/{id}" do
