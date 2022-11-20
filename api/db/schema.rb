@@ -1408,13 +1408,6 @@ ActiveRecord::Schema.define(version: 2022_11_16_211558) do
     t.jsonb "avatar_data"
     t.text "role", null: false
     t.text "kind", null: false
-    t.boolean "internal_analytics", default: true, null: false
-    t.boolean "google_analytics", default: true, null: false
-    t.boolean "cookie_banner", default: true, null: false
-    t.datetime "terms_accepted"
-    t.boolean "consent_manifold_analytics"
-    t.boolean "consent_google_analytics"
-    t.datetime "terms_and_conditions_accepted_at"
     t.index ["classification"], name: "udx_users_anonymous", unique: true, where: "((classification)::text = 'anonymous'::text)"
     t.index ["classification"], name: "udx_users_cli", unique: true, where: "((classification)::text = 'command_line'::text)"
     t.index ["import_source_id"], name: "index_users_on_import_source_id", unique: true, where: "(import_source_id IS NOT NULL)"
