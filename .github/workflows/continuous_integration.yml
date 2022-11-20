@@ -10,7 +10,6 @@ env:
   PATH: /usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:/usr/local/sbin
 
 jobs:
-
   client-lint:
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
@@ -22,7 +21,7 @@ jobs:
       - name: "Install Node 12.x"
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: "12.x"
 
       - name: "Install Yarn"
         run: |
@@ -63,7 +62,7 @@ jobs:
       - name: "Install Node 12.x"
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: "12.x"
 
       - name: "Install Yarn"
         run: |
@@ -101,10 +100,11 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v1
 
-      - name: "Install Ruby 2.7.x"
-        uses: actions/setup-ruby@v1
+      - name: "Install Ruby 2.7.3"
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.x
+          bundler-cache: true
+          ruby-version: 2.7.3
 
       - name: "Install PostgreSQL 11 client"
         run: |
@@ -148,84 +148,85 @@ jobs:
         options: --entrypoint redis-server
 
     steps:
-    - name: "Checkout code"
-      uses: actions/checkout@v1
+      - name: "Checkout code"
+        uses: actions/checkout@v1
 
-    - name: "Install Ruby 2.7.x"
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.7.x
+      - name: "Install Ruby 2.7.3"
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 2.7.3
 
-    - name: "Install PostgreSQL 11 client"
-      run: |
-        sudo apt-get -yqq install libpq-dev
+      - name: "Install PostgreSQL 11 client"
+        run: |
+          sudo apt-get -yqq install libpq-dev
 
-    - name: "Install Pandoc"
-      run: |
-        wget https://github.com/jgm/pandoc/releases/download/2.2/pandoc-2.2-1-amd64.deb
-        sudo dpkg -i pandoc-2.2-1-amd64.deb
+      - name: "Install Pandoc"
+        run: |
+          wget https://github.com/jgm/pandoc/releases/download/2.2/pandoc-2.2-1-amd64.deb
+          sudo dpkg -i pandoc-2.2-1-amd64.deb
 
-    - name: "Install Node 12.x"
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
+      - name: "Install Node 12.x"
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
 
-    - name: "Install Yarn"
-      run: |
-        sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
-        echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-        sudo apt-get update
-        sudo apt-get install -y yarn
+      - name: "Install Yarn"
+        run: |
+          sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
+          echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          sudo apt-get update
+          sudo apt-get install -y yarn
 
-    - name: "Restore Node dependencies from cache"
-      uses: actions/cache@v1
-      with:
-        path: client/node_modules
-        key: ${{ runner.OS }}-node-module-cache-${{ hashFiles('**/client/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.OS }}-node-module-cache-
+      - name: "Restore Node dependencies from cache"
+        uses: actions/cache@v1
+        with:
+          path: client/node_modules
+          key: ${{ runner.OS }}-node-module-cache-${{ hashFiles('**/client/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-module-cache-
 
-    - name: "Install Node dependencies"
-      env:
-        NODE_ENV: development
-      run: |
-        cd client
-        yarn install
+      - name: "Install Node dependencies"
+        env:
+          NODE_ENV: development
+        run: |
+          cd client
+          yarn install
 
-    - name: "Restore gem dependencies from cache"
-      uses: actions/cache@v1
-      with:
-        path: api/vendor
-        key: ${{ runner.OS }}-gem-2-cache-${{ hashFiles('**/api/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.OS }}-gem-2-cache-
+      - name: "Restore gem dependencies from cache"
+        uses: actions/cache@v1
+        with:
+          path: api/vendor
+          key: ${{ runner.OS }}-gem-2-cache-${{ hashFiles('**/api/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-gem-2-cache-
 
-    - name: "Install Gem dependencies"
-      env:
-        RAILS_ENV: test
-      run: |
-        cd api
-        gem install bundler -v 2.2.17
-        bundle install --deployment --jobs 4 --retry 3
+      - name: "Install Gem dependencies"
+        env:
+          RAILS_ENV: test
+        run: |
+          cd api
+          gem install bundler -v 2.2.17
+          bundle install --deployment --jobs 4 --retry 3
 
-    - name: "Setup test database"
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        RAILS_ENV: test
-      run: |
-        cd api
-        bin/rails db:setup
+      - name: "Setup test database"
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          RAILS_ENV: test
+        run: |
+          cd api
+          bin/rails db:setup
 
-    - name: "Increase file nodes"
-      run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      - name: "Increase file nodes"
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-    - name: "Run API specs"
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        RAILS_ENV: test
+      - name: "Run API specs"
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+          RAILS_ENV: test
 
-      run: |
-        cd api
-        bin/rspec spec --tag="~integration" --tag="~slow" --tag="~elasticsearch"
+        run: |
+          cd api
+          bin/rspec spec --tag="~integration" --tag="~slow" --tag="~elasticsearch"
