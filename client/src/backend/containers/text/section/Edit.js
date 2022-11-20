@@ -3,9 +3,17 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Navigation from "backend/components/navigation";
 import AddEditSectionForm from "backend/components/authoring/AddEditSectionForm";
+import { useParams } from "react-router-dom";
+import { useFetch } from "hooks";
+import { sectionsAPI } from "api";
 
-export default function EditSectionContainer({ text, section }) {
+export default function EditSectionContainer({ text }) {
   const { t } = useTranslation();
+  const { sectionId } = useParams();
+
+  const { data: section } = useFetch({
+    request: [sectionsAPI.show, sectionId]
+  });
 
   return (
     <section>
@@ -17,7 +25,7 @@ export default function EditSectionContainer({ text, section }) {
   );
 }
 
-EditSectionContainer.displayName = "Text.Sections.New";
+EditSectionContainer.displayName = "Text.Sections.Edit";
 
 EditSectionContainer.propTypes = {
   text: PropTypes.object.isRequired
