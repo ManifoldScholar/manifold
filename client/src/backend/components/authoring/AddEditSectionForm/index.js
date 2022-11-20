@@ -24,13 +24,14 @@ export default function AddEditSectionForm({ section = {}, text, onSuccess }) {
         focusOnMount
         label={t("backend.forms.text_section.section_name")}
         placeholder={t("backend.forms.text_section.section_name")}
-        name="name"
+        name="attributes[name]"
       />
       <Form.CodeArea
         label={t("backend.forms.text_section.content_label")}
         instructions={t("backend.forms.text_section.content_instructions")}
         height="600px"
         mode="html"
+        name="attributes[body]"
       />
       <Form.DrawerButtons
         showCancel

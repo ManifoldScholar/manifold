@@ -72,8 +72,7 @@ SectionListItem.displayName = "Text.Sections.List.Item";
 
 SectionListItem.propTypes = {
   section: PropTypes.object,
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
   dragHandleProps: PropTypes.object,
   draggableProps: PropTypes.object,
   isDragging: PropTypes.bool,
