@@ -5,7 +5,8 @@ import {
   buttonUnstyled,
   setHoverStyle,
   textTruncate,
-  respond
+  respond,
+  fluidScale
 } from "theme/styles/mixins";
 
 export const ScrollContainer = styled.div`
@@ -79,17 +80,19 @@ export const Inner = styled.div`
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
-  width: ${({ $depth }) => `calc(100% - ${$depth * 24}px)`};
+  width: ${({ $depth }) =>
+    `calc(100% - ${fluidScale(`${$depth * 24}px`, `${$depth * 12}px`)})`};
   cursor: default;
   background-color: transparent;
   position: relative;
   border: 1px solid var(--box-bg-color);
   color: var(--text-neutral-extra-light);
+  margin-inline-start: ${({ $depth }) =>
+    fluidScale(`${$depth * 24}px`, `${$depth * 12}px`)};
 
   ${({ $isDragging }) => $isDragging && dragging}
-  margin-inline-start: ${({ $depth }) => `${$depth * 24}px`};
-  ${({ $isTarget }) => $isTarget && `border-color: var(--highlight-color);`}
 
+  ${({ $isTarget }) => $isTarget && `border-color: var(--highlight-color);`}
 `;
 
 export const Button = styled.button`
