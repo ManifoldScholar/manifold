@@ -101,6 +101,9 @@ export const getRootParentPosition = (id, treeItems) => {
   const rootChildren = treeItems.root.children;
   const parent = treeItems[id].data.parentId;
 
+  if (!parent) {
+    return rootChildren.length;
+  }
   if (parent === "root") {
     return rootChildren.indexOf(id);
   }
