@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Tree, { mutateTree, moveItemOnTree } from "@atlaskit/tree";
 import Entry from "./TOCEntry";
-import { DragOverContext } from "./dragContext";
 import {
   formatTOCData,
   formatTreeData,
@@ -14,9 +13,7 @@ import { textsAPI } from "api";
 import { useApiCallback } from "hooks";
 import * as Styled from "./styles";
 
-export default function TOCList({ tree, setTree, textId, startSectionId }) {
-  const [combine, setCombine] = useState(null);
-
+export default function TOCList({ tree, setTree, textId }) {
   const updateText = useApiCallback(textsAPI.update);
 
   const onReorderTOC = async newTree => {
@@ -40,8 +37,6 @@ export default function TOCList({ tree, setTree, textId, startSectionId }) {
   };
 
   const onDragEnd = async (source, destination) => {
-    setCombine(null);
-
     let finalDestination;
     if (destination.parentId === "root" && isNaN(destination.index)) {
       const rootParentIndex = getRootParentPosition(
@@ -74,11 +69,9 @@ export default function TOCList({ tree, setTree, textId, startSectionId }) {
         draggableProps={provided.draggableProps}
         dragHandleProps={provided.dragHandleProps}
         isDragging={snapshot.isDragging}
+        isdropTarget={snapshot.combineTargetFor}
         placeholder={provided.placeholder}
-        setCombine={setCombine}
-        combine={snapshot.combineWith}
         textId={textId}
-        isStart={startSectionId === item.data.sectionId}
         onDelete={onDelete}
       />
     );
@@ -89,16 +82,14 @@ export default function TOCList({ tree, setTree, textId, startSectionId }) {
       className="full-width"
       $count={Object.keys(tree.items).length - 1}
     >
-      <DragOverContext.Provider value={combine}>
-        <Tree
-          tree={tree}
-          renderItem={renderItem}
-          onDragEnd={onDragEnd}
-          isDragEnabled
-          isNestingEnabled
-          offsetPerLevel={0}
-        />
-      </DragOverContext.Provider>
+      <Tree
+        tree={tree}
+        renderItem={renderItem}
+        onDragEnd={onDragEnd}
+        isDragEnabled
+        isNestingEnabled
+        offsetPerLevel={0}
+      />
     </Styled.ScrollContainer>
   ) : null;
 }
