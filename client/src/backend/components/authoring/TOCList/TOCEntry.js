@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { DragOverContext } from "./dragContext";
 import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
@@ -14,17 +13,11 @@ export default function TOCEntry({
   draggableProps,
   dragHandleProps,
   isDragging,
-  setCombine,
-  combine,
+  isdropTarget,
   textId,
   onDelete
 }) {
   const { t } = useTranslation();
-  const active = useContext(DragOverContext);
-
-  if (isDragging) {
-    setCombine(combine);
-  }
 
   const editUrl = lh.link("backendTextTOCEntryEdit", textId, entry.id);
 
@@ -33,7 +26,7 @@ export default function TOCEntry({
       <Styled.Inner
         $isDragging={isDragging}
         $depth={depth}
-        $isTarget={active === entry.id}
+        $isTarget={isdropTarget}
       >
         <Styled.ButtonGroup>
           <Styled.Button
