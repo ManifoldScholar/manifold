@@ -7,6 +7,7 @@ import {
   formatTOCData,
   formatTreeData,
   getNestedTreeChildren,
+  getRootParentPosition,
   removeKeys
 } from "./treeHelpers";
 import { textsAPI } from "api";
@@ -41,8 +42,22 @@ export default function TOCList({ tree, setTree, textId, startSectionId }) {
   const onDragEnd = async (source, destination) => {
     setCombine(null);
 
-    const update = moveItemOnTree(tree, source, destination);
+    let finalDestination;
+    if (destination.parentId === "root" && isNaN(destination.index)) {
+      const rootParentIndex = getRootParentPosition(
+        source.parentId,
+        tree.items
+      );
+      finalDestination = { parentId: "root", index: rootParentIndex + 1 };
+    } else {
+      finalDestination = destination;
+    }
+
+    const update = moveItemOnTree(tree, source, finalDestination);
     onReorderTOC(update);
+
+    const movedId = tree.items[source.parentId].children.at(source.index);
+    update.items[movedId].data.parentId = destination.parentId;
 
     const expand = mutateTree(update, destination.parentId, {
       isExpanded: true

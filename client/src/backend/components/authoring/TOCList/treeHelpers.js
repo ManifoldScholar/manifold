@@ -1,4 +1,4 @@
-const formatTreeItem = entry => {
+const formatTreeItem = (entry, parentId) => {
   if (!entry) return undefined;
   if (!entry.children) {
     return {
@@ -11,7 +11,8 @@ const formatTreeItem = entry => {
         uid: entry.uid,
         sectionId: entry.id,
         title: entry.label,
-        anchor: entry.anchor
+        anchor: entry.anchor,
+        parentId
       }
     };
   }
@@ -28,10 +29,11 @@ const formatTreeItem = entry => {
         uid: entry.uid,
         sectionId: entry.id,
         title: entry.label,
-        anchor: entry.anchor
+        anchor: entry.anchor,
+        parentId
       }
     },
-    entry.children.map(c => formatTreeItem(c)).filter(Boolean)
+    entry.children.map(c => formatTreeItem(c, entry.uid)).filter(Boolean)
   ];
 };
 
@@ -39,7 +41,7 @@ export const formatTreeData = toc => {
   if (!toc) return null;
 
   const rootChildren = toc.map(e => e.uid);
-  const entries = toc.map(formatTreeItem).filter(Boolean);
+  const entries = toc.map(e => formatTreeItem(e, "root")).filter(Boolean);
   const flatEntries = entries.flat(10);
   const asObj = flatEntries.reduce((obj, e) => {
     return { ...obj, [e.id]: e };
@@ -93,6 +95,16 @@ export const getNestedTreeChildren = (itemId, treeItems) => {
     ...item.children,
     item.children.map(c => getNestedTreeChildren(c, treeItems))
   ].flat(10);
+};
+
+export const getRootParentPosition = (id, treeItems) => {
+  const rootChildren = treeItems.root.children;
+  const parent = treeItems[id].data.parentId;
+
+  if (parent === "root") {
+    return rootChildren.indexOf(id);
+  }
+  return getRootParentPosition(parent, treeItems);
 };
 
 const removeKey = (k, { [k]: _, ...o }) => o;
