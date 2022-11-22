@@ -9,7 +9,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import { childRoutes } from "helpers/router";
 import SectionsList from "backend/components/authoring/SectionsList";
 
-export default function TextSectionsContainer({ text, route }) {
+export default function TextSectionsContainer({ text, route, refresh }) {
   const { t } = useTranslation();
 
   const renderChildRoutes = () => {
@@ -27,7 +27,8 @@ export default function TextSectionsContainer({ text, route }) {
       },
       childProps: {
         textId: text.id,
-        nextPosition: text.attributes?.spine?.length + 1
+        nextPosition: text.attributes?.sectionsMap?.length + 1,
+        refresh
       }
     });
   };
@@ -71,6 +72,7 @@ export default function TextSectionsContainer({ text, route }) {
           textId={text?.id}
           sections={text?.attributes?.sectionsMap}
           startSectionId={text?.attributes?.startTextSectionId}
+          refresh={refresh}
         />
       </FormContainer.Form>
     </section>
