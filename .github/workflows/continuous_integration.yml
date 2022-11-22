@@ -103,28 +103,16 @@ jobs:
       - name: "Install Ruby 2.7.3"
         uses: ruby/setup-ruby@v1
         with:
+          bundler: 2.2.17
           bundler-cache: true
           ruby-version: 2.7.3
+          working-directory: api
 
       - name: "Install PostgreSQL 11 client"
-        run: |
-          sudo apt-get -yqq install libpq-dev
-
-      - name: "Restore gem dependencies from cache"
-        uses: actions/cache@v1
+        uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          path: api/vendor
-          key: ${{ runner.OS }}-gem-1-cache-${{ hashFiles('**/api/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-gem-1-cache-
-
-      - name: "Install Gem dependencies"
-        env:
-          RAILS_ENV: test
-        run: |
-          cd api
-          gem install bundler -v 2.2.17
-          bundle install --deployment --jobs 4 --retry 3
+          packages: libpq-dev
+          version: 1.0
 
       - name: "Run Rubopcop"
         run: |
@@ -154,12 +142,16 @@ jobs:
       - name: "Install Ruby 2.7.3"
         uses: ruby/setup-ruby@v1
         with:
+          bundler: 2.2.17
           bundler-cache: true
           ruby-version: 2.7.3
+          working-directory: api
 
       - name: "Install PostgreSQL 11 client"
-        run: |
-          sudo apt-get -yqq install libpq-dev
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: libpq-dev
+          version: 1.0
 
       - name: "Install Pandoc"
         run: |
@@ -192,22 +184,6 @@ jobs:
         run: |
           cd client
           yarn install
-
-      - name: "Restore gem dependencies from cache"
-        uses: actions/cache@v1
-        with:
-          path: api/vendor
-          key: ${{ runner.OS }}-gem-2-cache-${{ hashFiles('**/api/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-gem-2-cache-
-
-      - name: "Install Gem dependencies"
-        env:
-          RAILS_ENV: test
-        run: |
-          cd api
-          gem install bundler -v 2.2.17
-          bundle install --deployment --jobs 4 --retry 3
 
       - name: "Setup test database"
         env:
