@@ -7,12 +7,13 @@ import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
 import { sectionsAPI } from "api";
 
-export default function AddEditSectionContainer({ textId }) {
+export default function AddEditSectionContainer(props) {
   const { t } = useTranslation();
   const { sectionId } = useParams();
 
   const { data: section } = useFetch({
-    request: [sectionsAPI.show, sectionId]
+    request: [sectionsAPI.show, sectionId],
+    condition: !!sectionId
   });
 
   return (
@@ -24,7 +25,7 @@ export default function AddEditSectionContainer({ textId }) {
             : t("backend_entities.texts.add_section_button_label")
         }
       />
-      <AddEditSectionForm textId={textId} section={section} />
+      <AddEditSectionForm section={section} {...props} />
     </section>
   );
 }
@@ -32,5 +33,6 @@ export default function AddEditSectionContainer({ textId }) {
 AddEditSectionContainer.displayName = "Text.Sections.Edit";
 
 AddEditSectionContainer.propTypes = {
-  textId: PropTypes.string.isRequired
+  textId: PropTypes.string.isRequired,
+  nextPosition: PropTypes.number
 };
