@@ -1,5 +1,4 @@
 module ManifoldEnv
-  # rubocop:disable Style/RedundantReturn
   module HasConfigurationDSL
     extend ActiveSupport::Concern
 
@@ -118,5 +117,4 @@ module ManifoldEnv
       # rubocop:enable Metrics/BlockLength
     end
   end
-  # rubocop:enable Style/RedundantReturn
 end
