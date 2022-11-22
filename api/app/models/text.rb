@@ -110,8 +110,6 @@ class Text < ApplicationRecord
   after_initialize :migrate_toc!
 
   # Validation
-  validates :spine,
-            presence: true, unless: proc { |x| x.spine.is_a?(Array) && x.spine.empty? }
   validate :validate_start_text_section
   validate :validate_toc
 
@@ -243,7 +241,11 @@ class Text < ApplicationRecord
   end
 
   def calculated_start_text_section_id
-    start_text_section_id || spine[0] || text_sections.first.try(:id)
+    start_text_section_id || text_sections.ordered.first.try(:id)
+  end
+
+  def spine
+    text_sections.ordered.pluck(:id)
   end
 
   def find_text_section_by_source_path(path)
