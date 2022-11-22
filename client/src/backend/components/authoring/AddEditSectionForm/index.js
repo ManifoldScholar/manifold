@@ -7,11 +7,17 @@ import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
 import { useHistory } from "react-router-dom";
 
-export default function AddEditSectionForm({ section = {}, textId }) {
+export default function AddEditSectionForm({ section, textId, nextPosition }) {
   const { t } = useTranslation();
   const history = useHistory();
 
-  const createSection = () => {};
+  const defaultModel = {
+    attributes: { position: nextPosition, kind: "section" }
+  };
+
+  const createSection = model => {
+    return sectionsAPI.create(textId, model);
+  };
 
   const onSuccess = useCallback(() => {
     history.push(lh.link("backendTextSections", textId));
@@ -19,8 +25,8 @@ export default function AddEditSectionForm({ section = {}, textId }) {
 
   return (
     <FormContainer.Form
-      model={section}
-      name="be-text-section-update"
+      model={section ?? defaultModel}
+      name={section ? "be-text-section-update" : "be-text-section-create"}
       className="form-secondary"
       onSuccess={onSuccess}
       create={createSection}

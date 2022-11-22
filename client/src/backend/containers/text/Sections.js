@@ -25,7 +25,10 @@ export default function TextSectionsContainer({ text, route }) {
         size: "authoring",
         padding: "authoring"
       },
-      childProps: { textId: text.id }
+      childProps: {
+        textId: text.id,
+        nextPosition: text.attributes?.spine?.length + 1
+      }
     });
   };
 
