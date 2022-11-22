@@ -13,6 +13,12 @@ module API
                                include: includes
       end
 
+      def update
+        @text_section = load_text_section
+        ::Updaters::TextSection.new(text_section_params).update(@text_section)
+        render_single_resource @text_section
+      end
+
     end
   end
 end

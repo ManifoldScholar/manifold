@@ -12,9 +12,6 @@ export default function AddEditSectionForm({ section = {}, textId }) {
   const history = useHistory();
 
   const createSection = () => {};
-  const editSection = (id, model) => {
-    return sectionsAPI.update(textId, id, model);
-  };
 
   const onSuccess = useCallback(() => {
     history.push(lh.link("backendTextSections", textId));
@@ -27,7 +24,7 @@ export default function AddEditSectionForm({ section = {}, textId }) {
       className="form-secondary"
       onSuccess={onSuccess}
       create={createSection}
-      update={editSection}
+      update={sectionsAPI.update}
     >
       <Form.TextInput
         focusOnMount

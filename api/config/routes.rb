@@ -97,7 +97,7 @@ Rails.application.routes.draw do
 
         scope module: :texts do
           namespace :relationships do
-            resources :text_sections, only: [:index, :update]
+            resources :text_sections, only: [:index]
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
           end
         end
@@ -140,7 +140,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :text_sections, only: [:show] do
+      resources :text_sections, only: [:show, :update] do
         scope module: :text_sections do
           namespace :relationships do
             resources :annotations, only: [:index, :create, :update]

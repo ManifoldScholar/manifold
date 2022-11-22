@@ -7,9 +7,9 @@ export default {
     };
   },
 
-  update(textId, id, section) {
+  update(id, section) {
     return {
-      endpoint: `/api/v1/texts/${textId}/relationships/text_sections/${id}`,
+      endpoint: `/api/v1/text_sections/${id}`,
       method: "PUT",
       options: {
         body: JSON.stringify({ type: "text_sections", data: section })
