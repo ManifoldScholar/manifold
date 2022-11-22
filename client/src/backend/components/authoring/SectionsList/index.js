@@ -2,13 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import EntitiesList from "backend/components/list/EntitiesList";
 import Section from "./SectionListItem";
+import { sectionsAPI } from "api";
+import { useApiCallback } from "hooks";
 
 export default function SectionsList({
   sections = [],
   textId,
-  startSectionId
+  startSectionId,
+  refresh
 }) {
-  const onReorder = () => {};
+  const updateSection = useApiCallback(sectionsAPI.update);
+
+  const onReorder = ({ id, position }) => {
+    updateSection(id, { attributes: { position } });
+    if (refresh) refresh();
+  };
 
   return sections.length ? (
     <div className="full-width">
@@ -28,5 +36,6 @@ SectionsList.displayName = "Text.Sections.List";
 SectionsList.propTypes = {
   textId: PropTypes.string.isRequired,
   sections: PropTypes.array,
-  startTextSectionId: PropTypes.string
+  startTextSectionId: PropTypes.string,
+  refresh: PropTypes.func
 };
