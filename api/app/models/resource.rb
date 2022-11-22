@@ -185,7 +185,7 @@ class Resource < ApplicationRecord
     candidate.delete "\"", "'"
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
   # rubocop:disable Metrics/CyclomaticComplexity
   def determine_kind
     ext = attachment_extension
@@ -204,7 +204,7 @@ class Resource < ApplicationRecord
     # attachments.
     :file
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
   # rubocop:enable Metrics/CyclomaticComplexity
 
   # I believe this is here to allow us to pass `Resource` as a scope in our resourceful

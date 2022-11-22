@@ -61,7 +61,6 @@ class ContentBlock < ApplicationRecord
     end
   end
 
-  # rubocop:disable Metrics/AbcSize
   def references_belong_to_project!
     reference_configurations.each do |config|
       association = __send__(config.name)
@@ -78,7 +77,6 @@ class ContentBlock < ApplicationRecord
       errors.add(config.name, "must belong to #{project.title}")
     end
   end
-  # rubocop:enable Metrics/AbcSize
 
   def references_are_valid!
     reference_configurations.each do |config|

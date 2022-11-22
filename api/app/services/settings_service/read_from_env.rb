@@ -9,7 +9,6 @@ module SettingsService
     interface :env, methods: %i(each_with_object), default: proc { ENV }
 
     # @return [{Symbol => {Symbol => String}}]
-    # rubocop:disable Metrics/AbcSize
     def execute
       env.each_with_object({}) do |(key, value), hsh|
         next unless key =~ KEY_PARSER
@@ -27,7 +26,6 @@ module SettingsService
         hsh[section][setting] = value
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     private
 

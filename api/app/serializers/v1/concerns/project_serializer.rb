@@ -3,7 +3,6 @@ module V1
     module ProjectSerializer
       extend ActiveSupport::Concern
 
-      # rubocop:disable Metrics/BlockLength
       included do
         abilities
 
@@ -102,7 +101,6 @@ module V1
                          serializer: ::V1::MakerSerializer,
                          record_type: :maker
         end
-        # rubocop:enable Metrics/BlockLength
       end
 
       class_methods do

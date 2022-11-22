@@ -1,7 +1,6 @@
 module Filterable
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/BlockLength
   # rubocop:disable Metrics/AbcSize
   class_methods do
     def filtered(params, scope: all, user: nil)
@@ -70,7 +69,6 @@ module Filterable
       query.filter_with_elasticsearch params
     end
   end
-  # rubocop:enable Metrics/BlockLength
   # rubocop:enable Metrics/AbcSize
 
   included do

@@ -6,7 +6,7 @@ module MoneyAttributes
   end
 
   class_methods do
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:disable Metrics/MethodLength
     def money_attributes(*args)
       args.each do |attribute|
         cents_attribute = "#{attribute}_in_cents"
@@ -25,6 +25,6 @@ module MoneyAttributes
         end
       end
     end
-    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength
   end
 end

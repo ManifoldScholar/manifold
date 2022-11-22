@@ -10,7 +10,6 @@ module Packaging
         # @param [Packaging::BagItSpec::Context] context
         # @param [Hash] state
         # @return [{ String => String }]
-        # rubocop:disable Metrics/AbcSize
         def call(build_path:, context:, **_state)
           project = context.project
 
@@ -33,7 +32,6 @@ module Packaging
         ensure
           reset!
         end
-        # rubocop:enable Metrics/AbcSize
 
         private
 

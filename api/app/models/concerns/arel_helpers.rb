@@ -1,7 +1,7 @@
 # Shared collection of (mostly Arel) class-level helpers for working with advanced
 # SQL selections.
 #
-# rubocop:disable Metrics/BlockLength, Style/CharacterLiteral
+# rubocop:disable Style/CharacterLiteral
 # rubocop:disable Style/StringLiterals
 # @see https://www.postgresql.org/docs/9.5/static/functions-json.html JSON functions and operators in PostgreSQL
 module ArelHelpers
@@ -407,5 +407,5 @@ module ArelHelpers
     # @!endgroup
   end
 end
-# rubocop:enable Metrics/BlockLength, Style/CharacterLiteral
+# rubocop:enable Style/CharacterLiteral
 # rubocop:enable Style/StringLiterals

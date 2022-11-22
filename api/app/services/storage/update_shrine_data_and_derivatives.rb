@@ -17,7 +17,6 @@ module Storage
       end
 
       # rubocop:disable Lint/SuppressedException
-      # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/MethodLength
       def for_instance_and_attribute(instance, attribute)
         attacher = attacher_for(instance, attribute)
@@ -46,7 +45,6 @@ module Storage
         end
       end
       # rubocop:enable Lint/SuppressedException
-      # rubocop:enable Metrics/AbcSize
       # rubocop:enable Metrics/MethodLength
 
       private

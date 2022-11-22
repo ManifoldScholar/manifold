@@ -124,7 +124,6 @@ module V1
         }
       end
 
-      # rubocop:disable Metrics/AbcSize
       def text_nodes(object)
         results = object.dig("inner_hits", "text_nodes")
         return nil unless results
@@ -141,7 +140,6 @@ module V1
           end
         )
       end
-      # rubocop:enable Metrics/AbcSize
 
       def highlights(object)
         a = [:parent_keywords, :keywords, :makers, :full_text, :title].map do |k|

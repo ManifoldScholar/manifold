@@ -2,7 +2,6 @@ module API
   module V1
     module ReadingGroups
       module Relationships
-        # rubocop:disable Metrics/AbcSize
         module Collectable
           extend ActiveSupport::Concern
 
@@ -69,7 +68,6 @@ module API
             end
           end
         end
-        # rubocop:enable Metrics/AbcSize
       end
     end
   end

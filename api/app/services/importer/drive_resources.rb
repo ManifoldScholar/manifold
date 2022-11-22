@@ -111,7 +111,6 @@ module Importer
       @logger.log_model_errors(collection)
     end
 
-    # rubocop:disable Metrics/AbcSize
     def import_resource(row, count)
       return if TRUTHY_VALUES.include?(row["Skip"])
 
@@ -130,7 +129,6 @@ module Importer
       end
       @logger.log_model_errors(resource)
     end
-    # rubocop:enable Metrics/AbcSize
 
     def create_tag_list(resource, row)
       return unless row["Keywords"]

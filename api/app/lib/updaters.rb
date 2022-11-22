@@ -114,7 +114,6 @@ module Updaters
   end
   # rubocop:enable Metrics/CyclomaticComplexity
 
-  # rubocop:disable Metrics/AbcSize
   def update_belongs_to(model, name, to_add)
     polymorphic = model.class.reflect_on_association(name).options.dig(:polymorphic)
     klass = if polymorphic
@@ -129,7 +128,6 @@ module Updaters
       model.send("#{name}=", value)
     end
   end
-  # rubocop:enable Metrics/AbcSize
 
   def update_has_many(model, name, to_add)
     value = relationship_map(model, name, to_add)

@@ -42,7 +42,6 @@ module Entitlements
 
     class_methods do
       # @return [void]
-      # rubocop:disable Metrics/AbcSize
       def define_roles!
         raise "Must specify a conditional block!" unless block_given?
 
@@ -61,7 +60,6 @@ module Entitlements
 
         config.managed_roles = [*config.managed_roles, *found_roles]
       end
-      # rubocop:enable Metrics/AbcSize
     end
   end
 end

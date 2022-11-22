@@ -23,7 +23,6 @@ module JSONAPI
 
       private
 
-      # rubocop:disable Metrics/AbcSize
       def handle(operation, index)
         provide(operation: operation, current_user: current_user) do
           with_operation_index(index) do
@@ -45,7 +44,6 @@ module JSONAPI
           end
         end
       end
-      # rubocop:enable Metrics/AbcSize
 
       def operator_klass_for(operation)
         if operation.for_collection?

@@ -3,7 +3,6 @@ module Ingestions
     class InjectGlobalStyles < AbstractInteraction
       hash :manifest, strip: false
 
-      # rubocop:disable Metrics/AbcSize
       def execute
         return manifest unless global_styles?
 
@@ -17,7 +16,6 @@ module Ingestions
 
         manifest
       end
-      # rubocop:enable Metrics/AbcSize
 
       private
 

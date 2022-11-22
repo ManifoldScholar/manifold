@@ -34,7 +34,6 @@ module Factory
       true
     end
 
-    # rubocop:disable Metrics/AbcSize
     def auth_options
       settings = Settings.instance
       {
@@ -47,7 +46,5 @@ module Factory
         )
       }
     end
-    # rubocop:enable Metrics/AbcSize
-
   end
 end

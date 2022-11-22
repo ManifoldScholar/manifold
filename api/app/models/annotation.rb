@@ -187,14 +187,12 @@ class Annotation < ApplicationRecord
 
     # @param [User, nil] user
     # @return [Arel::Nodes::Not]
-    # rubocop:disable Metrics/AbcSize
     def arel_exclude_public_annotations_not_owned_by(user)
       Arel::Nodes::Not.new(arel_table[:creator_id].not_eq(user&.id)
                                .and(Arel::Nodes::Not.new(arel_table[:format].eq(TYPE_RESOURCE)))
                                .and(arel_table[:reading_group_id].eq(nil))
                                .and(arel_table[:private].eq(false)))
     end
-    # rubocop:enable Metrics/AbcSize
 
     def arel_reading_groups_for_user(user, with_membership_only: false)
       id_scope = ReadingGroupVisibility.visible_or_joined_reading_group_ids_for(user, joined: with_membership_only)
@@ -315,7 +313,6 @@ class Annotation < ApplicationRecord
   class << self
     # @param [ReadingGroupMembership, String] rgm
     # @return [ActiveRecord::Relation<ReadingGroup>]
-    # rubocop:disable Metrics/AbcSize
     def build_by_reading_group_membership_scope(rgm)
       return all if rgm.blank?
 
@@ -329,6 +326,5 @@ class Annotation < ApplicationRecord
 
       includes(:membership_comments).where(condition)
     end
-    # rubocop:enable Metrics/AbcSize
-  end
+      end
 end
