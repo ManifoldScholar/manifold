@@ -30,8 +30,7 @@ export default function AddEditTOCEntryForm({
           data: {
             sectionId: data.sectionId ?? model.sectionId,
             title: data.label ?? model.label,
-            anchor: data.anchor ?? model.anchor,
-            type: entry.data.type
+            anchor: data.anchor ?? model.anchor
           }
         };
 
@@ -58,11 +57,13 @@ export default function AddEditTOCEntryForm({
     [toc, entry, tree]
   );
 
-  const onSuccess = useCallback(() => {
-    // attributes aren't current included in the response in the store that can be passed directly to this callback, so using the toc prop here.
-    setTree(formatTreeData(toc));
-    history.push(lh.link("backendTextTOC", textId));
-  }, [textId, history, toc, setTree]);
+  const onSuccess = useCallback(
+    (_, res) => {
+      setTree(formatTreeData(res.data?.attributes?.toc));
+      history.push(lh.link("backendTextTOC", textId));
+    },
+    [textId, history, setTree]
+  );
 
   const sectionOptions = sections.map(s => ({
     value: s.id,
