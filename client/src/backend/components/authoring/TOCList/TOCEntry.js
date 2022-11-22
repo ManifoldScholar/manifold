@@ -35,7 +35,7 @@ export default function TOCEntry({
   const updateText = useApiCallback(textsAPI.update);
 
   const onSetStart = async id => {
-    const res = await updateText(textId, {
+    await updateText(textId, {
       attributes: { startTextSectionId: id }
     });
     // TODO: add error handling
