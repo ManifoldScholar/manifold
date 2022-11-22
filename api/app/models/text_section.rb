@@ -32,7 +32,7 @@ class TextSection < ApplicationRecord
   has_one :project, through: :text
   has_one :text_started_by, class_name: "Text", foreign_key: "start_text_section_id",
           dependent: :nullify, inverse_of: :start_text_section
-  belongs_to :ingestion_source
+  belongs_to :ingestion_source, optional: true
   # We intentionally do not destroy annotations because we want to handle the orphans.
   has_many :annotations, dependent: :nullify
   has_many :resources, through: :annotations
