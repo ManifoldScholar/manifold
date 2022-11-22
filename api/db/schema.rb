@@ -470,8 +470,8 @@ ActiveRecord::Schema.define(version: 2022_11_16_211558) do
     t.uuid "journal_id", null: false
     t.uuid "journal_volume_id"
     t.uuid "creator_id"
-    t.jsonb "fa_cache", default: {}, null: false
     t.string "number", default: "", null: false
+    t.jsonb "fa_cache", default: {}, null: false
     t.integer "sort_title", default: 0, null: false
     t.integer "pending_sort_title"
     t.index ["creator_id"], name: "index_journal_issues_on_creator_id"

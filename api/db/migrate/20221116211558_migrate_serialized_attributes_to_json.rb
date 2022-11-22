@@ -40,6 +40,7 @@ class MigrateSerializedAttributesToJSON < ActiveRecord::Migration[6.0]
           projection = Text.arel_table.project(*columns).to_sql
 
           selection = connection.select_all(projection)
+          break 0 if selection.blank?
 
           columns = [:id, *COLUMNS]
 
