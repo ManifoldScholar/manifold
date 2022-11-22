@@ -121,7 +121,8 @@ gem "validates_email_format_of", "~> 1.0"
 gem "validate_url", "~> 1.0"
 gem "with_advisory_lock", "~> 4.0"
 gem "zaru", "~> 0.3.0"
-gem "zhong", "~> 0.2"
+gem "zhong", "~> 0.3"
+gem "dalli", "~> 2.7.11"
 
 group :development, :test do
   gem "byebug"
