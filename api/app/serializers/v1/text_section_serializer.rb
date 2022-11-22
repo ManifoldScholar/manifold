@@ -20,6 +20,7 @@ module V1
           description: "A JSON representation of the text section's HTML contents"
         )
       )
+      typed_attribute :body, Types::String
       typed_attribute :citations, Types::Serializer::Citations
     end
 
