@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
+import { sectionsAPI } from "api";
+import { useHistory } from "react-router-dom";
 
-export default function AddEditSectionForm({ section = {}, text, onSuccess }) {
+export default function AddEditSectionForm({ section = {}, textId }) {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const createSection = () => {};
-  const editSection = () => {};
+  const editSection = (id, model) => {
+    return sectionsAPI.update(textId, id, model);
+  };
+
+  const onSuccess = useCallback(() => {
+    history.push(lh.link("backendTextSections", textId));
+  }, [history, textId]);
 
   return (
     <FormContainer.Form
       model={section}
-      name="be-text-update"
+      name="be-text-section-update"
       className="form-secondary"
       onSuccess={onSuccess}
       create={createSection}
@@ -35,7 +44,7 @@ export default function AddEditSectionForm({ section = {}, text, onSuccess }) {
       />
       <Form.DrawerButtons
         showCancel
-        cancelUrl={lh.link("backendTextSections", text.id)}
+        cancelUrl={lh.link("backendTextSections", textId)}
         submitLabel="backend.forms.text_section.save_button_label"
       />
     </FormContainer.Form>
@@ -45,6 +54,6 @@ export default function AddEditSectionForm({ section = {}, text, onSuccess }) {
 AddEditSectionForm.displayName = "Text.Sections.AddEditForm";
 
 AddEditSectionForm.propTypes = {
-  text: PropTypes.object.isRequired,
-  onSuccess: PropTypes.func
+  textId: PropTypes.string.isRequired,
+  section: PropTypes.object
 };
