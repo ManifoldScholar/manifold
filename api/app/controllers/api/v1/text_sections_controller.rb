@@ -19,6 +19,11 @@ module API
         render_single_resource @text_section
       end
 
+      def destroy
+        @text_section = load_text_section
+        @text_section.destroy
+      end
+
     end
   end
 end

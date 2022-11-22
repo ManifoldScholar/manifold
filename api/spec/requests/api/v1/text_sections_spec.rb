@@ -20,16 +20,17 @@ RSpec.describe "Text Sections", type: :request do
     end
 
     path "/text_sections/{id}" do
+      include_examples "an API show request",
+                       model: TextSection,
+                       included_relationships: [:stylesheets]
+
       include_examples "an API update request",
                        model: TextSection,
-                       parent: "text",
+                       authorized_user: :admin
+
+      include_examples "an API destroy request",
+                       model: TextSection,
                        authorized_user: :admin
     end
-  end
-
-  path "/text_sections/{id}" do
-    include_examples "an API show request",
-                     model: TextSection,
-                     included_relationships: [:stylesheets]
   end
 end
