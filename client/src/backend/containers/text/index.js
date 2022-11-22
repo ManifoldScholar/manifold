@@ -6,7 +6,7 @@ import Ingestion from "./ingestion";
 import Styles from "./Styles";
 import Analytics from "./Analytics";
 import Sections from "./Sections";
-import Section from "./Section";
+import Section from "./section";
 import TableOfContents from "./TableOfContents";
 import TOCEntry from "./toc-entry";
 
