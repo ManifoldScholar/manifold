@@ -9,6 +9,11 @@ import {
   blockLabelRound
 } from "theme/styles/mixins";
 
+export const ScrollContainer = styled.div`
+  overflow: auto;
+  height: ${({ $count }) => `${$count * 68}px`};
+`;
+
 export const Item = styled.div`
   & + & {
     padding-block-start: 16px;

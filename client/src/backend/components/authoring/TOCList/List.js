@@ -6,9 +6,9 @@ import { DragOverContext } from "./dragContext";
 import { formatTOCData } from "./formatTreeData";
 import { textsAPI } from "api";
 import { useApiCallback } from "hooks";
+import * as Styled from "./styles";
 
-export default function TOCList({ toc, textId, startSectionId }) {
-  const [tree, setTree] = useState(toc);
+export default function TOCList({ tree, setTree, textId, startSectionId }) {
   const [combine, setCombine] = useState(null);
 
   const renderItem = ({ item, provided, snapshot, depth }) => {
@@ -51,13 +51,7 @@ export default function TOCList({ toc, textId, startSectionId }) {
   };
 
   return tree ? (
-    <div
-      className="full-width"
-      style={{
-        overflow: "auto",
-        height: `${(Object.keys(toc.items).length - 1) * 68}px`
-      }}
-    >
+    <Styled.ScrollContainer $count={Object.keys(tree.items).length - 1}>
       <DragOverContext.Provider value={combine}>
         <Tree
           tree={tree}
@@ -68,13 +62,13 @@ export default function TOCList({ toc, textId, startSectionId }) {
           offsetPerLevel={0}
         />
       </DragOverContext.Provider>
-    </div>
+    </Styled.ScrollContainer>
   ) : null;
 }
 
 TOCList.displayName = "Text.TOC.List";
 
 TOCList.propTypes = {
-  toc: PropTypes.object.isRequired,
+  tree: PropTypes.object.isRequired,
   textId: PropTypes.string
 };

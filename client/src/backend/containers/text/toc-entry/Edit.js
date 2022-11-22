@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Navigation from "backend/components/navigation";
 import EditTOCEntryForm from "backend/components/authoring/AddEditTOCEntryForm";
 
-export default function EditTOCEntryContainer({ entry, textId, sections }) {
+export default function EditTOCEntryContainer(props) {
   const { t } = useTranslation();
 
   return (
@@ -12,7 +12,7 @@ export default function EditTOCEntryContainer({ entry, textId, sections }) {
       <Navigation.DrawerHeader
         title={t("backend.forms.text_toc.edit_header")}
       />
-      <EditTOCEntryForm text={textId} sections={sections} entry={entry} />
+      <EditTOCEntryForm {...props} />
     </section>
   );
 }
@@ -20,7 +20,9 @@ export default function EditTOCEntryContainer({ entry, textId, sections }) {
 EditTOCEntryContainer.displayName = "Text.TOC.Edit";
 
 EditTOCEntryContainer.propTypes = {
-  entry: PropTypes.object.isRequired,
+  entryId: PropTypes.string.isRequired,
   textId: PropTypes.string.isRequired,
-  sections: PropTypes.array
+  sections: PropTypes.array.isRequired,
+  toc: PropTypes.array,
+  setTree: PropTypes.func.isRequired
 };
