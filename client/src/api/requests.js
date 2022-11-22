@@ -56,6 +56,7 @@ export default {
   beTextCategoryCreate: "backend-text-category-create",
   beTextCategoryDestroy: "backend-text-category-destroy",
   beTextCategory: "backend-text-category",
+  beTextSectionCreate: "backend-text-section-create",
   beTextSectionUpdate: "backend-text-section-update",
   beProjectUpdate: "backend-project-update",
   beProjectDestroy: "backend-project-destroy",
