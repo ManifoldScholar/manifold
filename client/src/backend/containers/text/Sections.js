@@ -9,7 +9,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import { childRoutes } from "helpers/router";
 import SectionsList from "backend/components/authoring/SectionsList";
 
-export default function TextSectionsContainer({ text, refresh, route }) {
+export default function TextSectionsContainer({ text, route }) {
   const { t } = useTranslation();
 
   const renderChildRoutes = () => {
@@ -25,7 +25,7 @@ export default function TextSectionsContainer({ text, refresh, route }) {
         size: "authoring",
         padding: "authoring"
       },
-      childProps: { refresh, text }
+      childProps: { textId: text.id }
     });
   };
 
