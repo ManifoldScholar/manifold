@@ -234,11 +234,7 @@ Style/PercentLiteralDelimiters:
   Enabled: false
 
 Style/RedundantReturn:
-  Exclude:
-    # Interactions often benefit from being able to explicitly return
-    # to distinguish typos
-    - app/services/**/*.rb
-    - api/app/services/**/*.rb
+  Enabled: false
 
 Style/SymbolArray:
   Enabled: false
