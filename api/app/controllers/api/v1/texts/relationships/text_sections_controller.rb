@@ -3,7 +3,7 @@ module API
     module Texts
       module Relationships
         class TextSectionsController < ApplicationController
-          before_action :set_text, only: [:index]
+          before_action :set_text, only: [:index, :create]
 
           resourceful! TextSection, authorize_options: { except: [:index] } do
             @text.text_sections
@@ -17,6 +17,11 @@ module API
               @text_sections,
               location: location
             )
+          end
+
+          def create
+            @text_section = authorize_and_create_text_section(text_section_params)
+            render_single_resource @text_section
           end
 
           private
