@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import Tooltip from "global/components/atomic/Tooltip";
+import { textsAPI } from "api";
+import { useApiCallback } from "hooks";
 import * as Styled from "./styles";
 
 export default function TOCEntry({
@@ -19,8 +21,7 @@ export default function TOCEntry({
   setCombine,
   combine,
   textId,
-  onDelete,
-  onSetStart
+  onDelete
 }) {
   const { t } = useTranslation();
   const active = useContext(DragOverContext);
@@ -30,6 +31,15 @@ export default function TOCEntry({
   }
 
   const editUrl = lh.link("backendTextTOCEntryEdit", textId, entry.id);
+
+  const updateText = useApiCallback(textsAPI.update);
+
+  const onSetStart = async id => {
+    const res = await updateText(textId, {
+      attributes: { startTextSectionId: id }
+    });
+    // TODO: add error handling
+  };
 
   return (
     <Styled.Item ref={innerRef} {...draggableProps}>
@@ -41,10 +51,10 @@ export default function TOCEntry({
         <Styled.ButtonGroup>
           <Tooltip
             content={t("backend.forms.text_toc.start_tooltip_content")}
-            xOffset="-110px"
+            xOffset="-100px"
             yOffset="43px"
           >
-            <Styled.Button onClick={onSetStart}>
+            <Styled.Button onClick={() => onSetStart(entry.id)}>
               <Utility.IconComposer size={24} icon="playOutline24" />
             </Styled.Button>
           </Tooltip>
@@ -72,7 +82,7 @@ export default function TOCEntry({
 TOCEntry.displayName = "Text.TOC.List.Entry";
 
 TOCEntry.propTypes = {
-  item: PropTypes.object.isRequired,
+  entry: PropTypes.object.isRequired,
   depth: PropTypes.number.isRequired,
   innerRef: PropTypes.func,
   draggableProps: PropTypes.object,
