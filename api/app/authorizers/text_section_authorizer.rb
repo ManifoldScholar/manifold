@@ -5,7 +5,7 @@ class TextSectionAuthorizer < ProjectChildAuthorizer
   def readable_by?(user, options = {})
     return false unless resource&.text.present?
 
-    return resource.text.readable_by?(user, options)
+    resource.text.readable_by?(user, options)
   end
 
 end
