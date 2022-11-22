@@ -206,7 +206,6 @@ module Ingestions
         end
       end
 
-      # rubocop:disable Metrics/AbcSize
       def extract(path = source_path, extract_path = root_path)
         extract_path = Pathname.new(extract_path)
 
@@ -226,7 +225,6 @@ module Ingestions
         end
         logger.debug("Unzipped archive to temporary directory: #{extract_path}")
       end
-      # rubocop:enable Metrics/AbcSize
 
       def source_root_dir?(path = source_root_path)
         entities = top_level_entities(path)

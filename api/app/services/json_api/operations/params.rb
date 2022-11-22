@@ -1,6 +1,5 @@
 module JSONAPI
   module Operations
-    # rubocop:disable Metrics/BlockLength
     class Params < Types::FlexibleStruct
       transform_keys do |key|
         case key
@@ -95,6 +94,5 @@ module JSONAPI
         end
       end
     end
-    # rubocop:enable Metrics/BlockLength
   end
 end

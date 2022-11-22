@@ -71,7 +71,6 @@ module ManifoldEnv
         __getobj__.instance_variable_set(:"@#{name}", value)
       end
 
-      # rubocop:disable Metrics/BlockLength
       class_methods do
         def declarative_setter(name)
           class_eval <<-RUBY, __FILE__, __LINE__ + 1
@@ -114,7 +113,6 @@ module ManifoldEnv
           RUBY
         end
       end
-      # rubocop:enable Metrics/BlockLength
     end
   end
 end

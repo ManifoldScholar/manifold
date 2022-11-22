@@ -77,7 +77,6 @@ module Storage
     # Returns a Tus::Response object through which data of the specified
     # upload can be retrieved in a streaming fashion. Accepts an optional
     # range parameter for selecting a subset of bytes to retrieve.
-    # rubocop:disable Metrics/AbcSize
     def get_file(uid, _info = {}, range: nil)
       range_opts = range ? range.begin..range.end : nil
       data = get_object(uid).download(range: range_opts)
@@ -93,7 +92,6 @@ module Storage
 
       Tus::Response.new(chunks: chunks, close: data.method(:close))
     end
-    # rubocop:enable Metrics/AbcSize
 
     # optional
     def file_url(uid, info = {}, **options); end

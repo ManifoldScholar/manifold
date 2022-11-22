@@ -28,7 +28,6 @@ module Factory
     end
     # rubocop:enable Metrics/MethodLength
 
-    # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     def create_from_tweet(tweet, query)
       subject = query
@@ -56,7 +55,6 @@ module Factory
       event
     end
     # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Metrics/AbcSize
 
     private
 

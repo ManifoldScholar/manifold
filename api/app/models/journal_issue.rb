@@ -98,7 +98,6 @@ class JournalIssue < ApplicationRecord
     pending_sort_title.blank? ? number.to_i : pending_sort_title.to_i
   end
 
-  # rubocop:disable Metrics/AbcSize
   def search_data
     {
       search_result_type: search_result_type,
@@ -110,7 +109,6 @@ class JournalIssue < ApplicationRecord
       metadata: metadata.values.reject(&:blank?)
     }.merge(search_hidden)
   end
-  # rubocop:enable Metrics/AbcSize
 
   def search_hidden
     {

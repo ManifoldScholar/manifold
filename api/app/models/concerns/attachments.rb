@@ -241,7 +241,6 @@ module Attachments
     shrine_configuration_for(attachment_name).validate_content_type
   end
 
-  # rubocop:disable Metrics/BlockLength
   class_methods do
     # @!attribute [r] shrine_attachment_configurations
     # @!scope class
@@ -328,6 +327,5 @@ module Attachments
       config.shrine_attachment_configurations = shrine_attachment_configurations.merge(configuration.field => configuration)
     end
   end
-  # rubocop:enable Metrics/BlockLength
 end
 # rubocop:enable

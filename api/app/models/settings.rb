@@ -8,7 +8,7 @@ class Settings < ApplicationRecord
 
   SECTIONS = [:general, :integrations, :ingestion, :secrets, :email, :theme].freeze
 
-  # rubocop/disable Layout/LineLength
+  # rubocop:disable Layout/LineLength
   DEFAULTS = {
     general: {
       installation_name: "Manifold",
@@ -54,7 +54,7 @@ Manifold stores basic information about each reading group, the content that has
       mammoth_style_map: ""
     }
   }.freeze
-  # rubocop/enable Layout/LineLength
+  # rubocop:enable Layout/LineLength
 
   # Create merge setters for the various settings sections. Initialize the hashes.
   SECTIONS.each do |section|

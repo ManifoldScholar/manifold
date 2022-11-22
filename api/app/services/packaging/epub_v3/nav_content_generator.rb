@@ -2,7 +2,6 @@ module Packaging
   module EpubV3
     # A rewrite of `GEPUB::Book#nav_doc` to better support our use cases. Namely, including
     # the correct epub:prefix values and other XML namespaces.
-    # rubocop:disable Metrics/AbcSize
     class NavContentGenerator
       extend Dry::Initializer
       extend Memoist
@@ -124,6 +123,5 @@ module Packaging
         end
       end
     end
-    # rubocop:enable Metrics/AbcSize
   end
 end

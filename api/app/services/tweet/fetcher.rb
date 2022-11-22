@@ -10,7 +10,6 @@ module Tweet
       end
     end
 
-    # rubocop:disable Metrics/AbcSize
     def fetch_one(twitter_query)
       return unless twitter_configured?
 
@@ -28,7 +27,6 @@ module Tweet
       max = results.max_by(&:id)&.id
       update_query_most_recent(twitter_query, max)
     end
-    # rubocop:enable Metrics/AbcSize
 
     private
 
@@ -49,7 +47,6 @@ module Tweet
       query.save
     end
 
-    # rubocop: disable Metrics/AbcSize
     def client
       @client ||= Twitter::REST::Client.new do |config|
         config.consumer_key        = settings.integrations.dig(:twitter_app_id)
@@ -58,7 +55,6 @@ module Tweet
         config.access_token_secret = settings.secrets.dig(:twitter_access_token_secret)
       end
     end
-    # rubocop: enable Metrics/AbcSize
 
     def settings
       @settings ||= Settings.instance

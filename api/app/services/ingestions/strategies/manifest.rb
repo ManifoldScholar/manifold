@@ -19,7 +19,6 @@ module Ingestions
 
       private
 
-      # rubocop:disable Metrics/AbcSize
       def fetch_external
         inspector.external_sources.each do |source|
           fetched = compose Ingestions::Fetcher, url: source["source_path"]
@@ -31,7 +30,6 @@ module Ingestions
         end
         inspector.update_toc
       end
-      # rubocop:enable Metrics/AbcSize
 
       # NB: The output path is important here.  We need to preserve the
       # entire relative path to the file for cases where nested items have

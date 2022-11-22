@@ -38,7 +38,6 @@ module Ingestions
         end
       end
 
-      # rubocop:disable Metrics/AbcSize
       def attributes
         {}.with_indifferent_access.tap do |hash|
           hash[:publication_date] = inspector.date
@@ -49,7 +48,6 @@ module Ingestions
           hash[:page_list] = []
         end
       end
-      # rubocop:enable Metrics/AbcSize
 
       def relationships
         {}.with_indifferent_access.tap do |hash|
@@ -128,7 +126,6 @@ module Ingestions
       # 2. The text being updated exists and has one text section that is KIND_SECTION
       # 3. None of the text's text sections have the correct source identifier
       #
-      # rubocop:disable Metrics/AbcSize
       def maybe_fix_legacy_source_identifiers!
         return unless reingest?
 
@@ -140,8 +137,6 @@ module Ingestions
           resource.update_column(:source_identifier, text_section_source_identifier)
         end
       end
-      # rubocop:enable Metrics/AbcSize
-
     end
   end
 end

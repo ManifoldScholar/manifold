@@ -12,7 +12,6 @@ module ProjectCollections
 
     validate :must_be_smart!
 
-    # rubocop:disable Metrics/AbcSize
     def execute
       valid_projects = query.limit(number_of_projects).order(project_sorting)
 
@@ -24,7 +23,6 @@ module ProjectCollections
 
       project_collection.reload
     end
-    # rubocop:enable Metrics/AbcSize
 
     private
 

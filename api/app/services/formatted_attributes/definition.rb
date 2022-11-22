@@ -1,5 +1,4 @@
 module FormattedAttributes
-  # rubocop:disable Metrics/AbcSize
   class Definition
     extend Dry::Initializer
     extend Memoist
@@ -138,5 +137,4 @@ module FormattedAttributes
       initialize orig.attribute, **orig.options
     end
   end
-  # rubocop:enable Metrics/AbcSize
 end

@@ -38,7 +38,6 @@ module V1
         end
       end
 
-      # rubocop:disable Metrics/BlockLength
       class_methods do
         delegate :typed_has_one, to: :current_register
         delegate :typed_belongs_to, to: :current_register
@@ -225,7 +224,6 @@ module V1
           end
         end
       end
-      # rubocop:enable Metrics/BlockLength
     end
   end
 end

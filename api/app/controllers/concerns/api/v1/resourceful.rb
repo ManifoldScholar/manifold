@@ -52,7 +52,6 @@ module API
       # @param [Symbol] error_status
       # @param [Hash] options
       # @return [void]
-      # rubocop:disable Metrics/AbcSize
       def render_single_resource(model, ok_status: default_ok_status, error_status: :unprocessable_entity, **options)
         options[:serializer] ||= model_serializer
         options[:serializer] = error_serializer if (action_name == "update" || action_name == "create") && !model.valid?
@@ -61,7 +60,6 @@ module API
         options[:full] = true
         render_jsonapi model, options
       end
-      # rubocop:enable Metrics/AbcSize
 
       # We want to make sure all our endpoints are authorized while we are in development.
       #
@@ -105,10 +103,8 @@ module API
         end
       end
 
-      # rubocop:disable Metrics/BlockLength
       # rubocop:disable Metrics/MethodLength
       class_methods do
-        # rubocop:disable Metrics/AbcSize
         def setup_resources!(model:, authorize: true, authorize_options: {}, &model_scope)
           self.resource_configuration = API::V1::ResourcefulMethods.new(
             model: model,
@@ -134,7 +130,6 @@ module API
           self.model_serializer = detect_model_serializer
           self.error_serializer = ::V1::ErrorSerializer
         end
-        # rubocop:enable Metrics/AbcSize
 
         # @return [String]
         def detect_model_name
@@ -153,7 +148,6 @@ module API
           "::V1::#{detect_model_name}Serializer".safe_constantize
         end
       end
-      # rubocop:enable Metrics/BlockLength
       # rubocop:enable Metrics/MethodLength
     end
   end

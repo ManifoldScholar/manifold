@@ -1,6 +1,5 @@
 module Collections
   module Operations
-    # rubocop:disable Metrics/AbcSize
     module CollectableOption
       extend ActiveSupport::Concern
 
@@ -56,6 +55,5 @@ module Collections
         end
       end
     end
-    # rubocop:enable Metrics/AbcSize
   end
 end

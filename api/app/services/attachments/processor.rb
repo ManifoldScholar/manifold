@@ -50,7 +50,6 @@ module Attachments
     end
 
     # rubocop:disable Lint/Void
-    # rubocop:disable Metrics/AbcSize
     def image?
       return false unless mime_and_extension?
 
@@ -65,7 +64,5 @@ module Attachments
       !shrine_uploaded_file.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
     end
     # rubocop:enable Lint/Void
-    # rubocop:enable Metrics/AbcSize
-
   end
 end

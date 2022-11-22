@@ -2,27 +2,23 @@ AllCops:
   TargetRubyVersion: 2.7
   DisplayCopNames: true
   Exclude:
-      - 'vendor/**/*'
-      - 'db/**/*'
-      - 'bin/**/*'
-      - 'spec/**/*'
-      - 'tmp/**/*'
-      - 'lib/patches/**/*'
-      - 'lib/templates/**/*'
-      - 'api/vendor/**/*'
-      - 'api/tmp/**/*'
-      - 'api/db/**/*'
-      - 'api/bin/**/*'
-      - 'api/spec/**/*'
-      - 'api/lib/patches/**/*'
-      - 'api/lib/templates/**/*'
+    - "vendor/**/*"
+    - "db/**/*"
+    - "bin/**/*"
+    - "spec/**/*"
+    - "tmp/**/*"
+    - "lib/patches/**/*"
+    - "lib/templates/**/*"
+    - "api/vendor/**/*"
+    - "api/tmp/**/*"
+    - "api/db/**/*"
+    - "api/bin/**/*"
+    - "api/spec/**/*"
+    - "api/lib/patches/**/*"
+    - "api/lib/templates/**/*"
 
 Metrics/BlockLength:
-  Exclude:
-    - 'Rakefile'
-    - '**/*.rake'
-    - 'spec/**/*.rb'
-    - 'zhong.rb'
+  Enabled: false
 
 Metrics/MethodLength:
   Max: 15
@@ -36,7 +32,8 @@ Metrics/ClassLength:
 Metrics/AbcSize:
   Enabled: true
   Exclude:
-    - 'app/services/collections'
+    - "app/services/collections"
+  Max: 20
 
 Layout/HashAlignment:
   EnforcedLastArgumentHashStyle: ignore_implicit
@@ -304,11 +301,11 @@ Naming/AccessorMethodName:
 
 Naming/MethodParameterName:
   AllowedNames:
-    - 'as'
-    - 'at'
-    - 'ok'
-    - 'id'
-    - 'io'
-    - 'e'
-    - 'on'
-    - 'to'
+    - "as"
+    - "at"
+    - "ok"
+    - "id"
+    - "io"
+    - "e"
+    - "on"
+    - "to"

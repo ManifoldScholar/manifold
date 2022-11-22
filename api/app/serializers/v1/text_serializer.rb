@@ -61,7 +61,6 @@ module V1
 
     serialize_collectable_attributes!
 
-    # rubocop: disable Metrics/BlockLength
     when_full do
       abilities
       metadata(metadata: true, properties: true, formatted: true)
@@ -105,8 +104,6 @@ module V1
       typed_has_many :text_sections
       typed_has_one :toc_section, serializer: TextSectionSerializer, record_type: "textSection"
     end
-    # rubocop: enable Metrics/BlockLength
-
     class << self
       def ingestion_external_source_url(object, params)
         return nil unless current_user_can_update?(object, params)
@@ -125,7 +122,7 @@ module V1
         object.last_finished_ingestion&.source_url
       end
 
-    end
+end
 
   end
 end
