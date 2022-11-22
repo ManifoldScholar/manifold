@@ -2,8 +2,8 @@ require "swagger_helper"
 
 RSpec.describe "Text Sections", type: :request do
   describe "when relating to a text" do
-    let(:text) { FactoryBot.create(:text) }
-    let(:resource) { FactoryBot.create(:text_section, text: text) }
+    let!(:text) { FactoryBot.create(:text) }
+    let!(:resource) { FactoryBot.create(:text_section, text: text) }
     let(:text_id) { text.id }
 
     path "/texts/{text_id}/relationships/text_sections" do
@@ -13,12 +13,11 @@ RSpec.describe "Text Sections", type: :request do
                        url_parameters: [:text_id]
     end
 
-    path "/texts/{text_id}/relationships/text_sections/{id}" do
+    path "/text_sections/{id}" do
       include_examples "an API update request",
                        model: TextSection,
                        parent: "text",
-                       authorized_user: :admin,
-                       url_parameters: [:text_id]
+                       authorized_user: :admin
     end
   end
 
