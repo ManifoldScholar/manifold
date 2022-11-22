@@ -29,9 +29,7 @@ module API
       end
 
       def destroy
-        if current_user
-          current_user.destroy
-        end
+        current_user&.destroy
       end
 
       private

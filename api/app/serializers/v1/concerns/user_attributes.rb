@@ -6,6 +6,26 @@ module V1
       included do
         abilities
 
+        typed_attribute :consent_manifold_analytics, Types::Bool.optional
+        typed_attribute :consent_google_analytics, Types::Bool.optional
+        typed_attribute :terms_and_conditions_accepted_at, Types::DateTime.optional
+
+        typed_attribute :consent_complete, Types::Bool.meta(read_only: true) do |object|
+          object.consent_complete?
+        end
+
+        typed_attribute :consent_needed_terms_and_conditions, Types::Bool.meta(read_only: true) do |object|
+          object.consent_needed_terms_and_conditions?
+        end
+
+        typed_attribute :consent_needed_manifold_analytics, Types::Bool.meta(read_only: true) do |object|
+          object.consent_needed_manifold_analytics?
+        end
+
+        typed_attribute :consent_needed_google_analytics, Types::Bool.meta(read_only: true) do |object|
+          object.consent_needed_google_analytics?
+        end
+
         typed_attribute :nickname, Types::String
         typed_attribute :first_name, Types::String
         typed_attribute :last_name, Types::String

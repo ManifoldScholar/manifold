@@ -152,6 +152,25 @@ class User < ApplicationRecord
     resource.creator == self
   end
 
+  def consent_complete?
+    return false if consent_needed_terms_and_conditions?
+    return false if consent_needed_google_analytics?
+
+    consent_needed_manifold_analytics?
+  end
+
+  def consent_needed_terms_and_conditions?
+    Settings.require_terms_and_conditions? && terms_and_conditions_accepted_at.blank?
+  end
+
+  def consent_needed_google_analytics?
+    Settings.google_analytics_enabled? && consent_google_analytics.nil?
+  end
+
+  def consent_needed_manifold_analytics?
+    Settings.google_analytics_enabled? && consent_manifold_analytics.nil?
+  end
+
   # @param [ReadingGroup]
   # @return [ReadingGroupUserCount, nil]
   def reading_group_count_for(reading_group)

@@ -32,7 +32,9 @@ module Validation
     }
     attributes = [:first_name, :last_name, :nickname, :name, :email, :password,
                   :password_confirmation, :remove_avatar, attachment(:avatar),
-                  persistent_ui, notification_preferences_by_kind, :unsubscribe]
+                  persistent_ui, notification_preferences_by_kind, :unsubscribe,
+                  :consent_manifold_analytics, :consent_google_analytics,
+                  :terms_and_conditions_accepted_at]
     attributes << :role if current_user&.admin?
     relationships = [:makers]
     param_config = structure_params(attributes: attributes, relationships: relationships)
