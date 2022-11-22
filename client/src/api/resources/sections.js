@@ -27,6 +27,14 @@ export default {
     };
   },
 
+  destroy(id) {
+    return {
+      endpoint: `/api/v1/text_sections/${id}`,
+      method: "DELETE",
+      options: {}
+    };
+  },
+
   forText(textId) {
     return {
       endpoint: `/api/v1/texts/${textId}/relationships/text_sections`,

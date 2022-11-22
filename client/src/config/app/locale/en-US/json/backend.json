@@ -227,7 +227,11 @@
         "section_name": "Section Name",
         "save_button_label": "Save Changes",
         "content_label": "Content",
-        "content_instructions": "Instructions needed here..."
+        "content_instructions": "Instructions needed here...",
+        "start_tag_label": "Start",
+        "start_tooltip_content": "Set the initial starting point for this text when viewed in the Manifold reader.",
+        "delete_confirm_heading": "Are you sure you want to delete this section?",
+        "delete_confirm_body": "This action cannot be undone."
       },
       "text_toc": {
         "edit_header": "Edit TOC Entry",
@@ -238,8 +242,7 @@
         "section_link_placeholder": "Select a Text Section",
         "anchor_link": "Anchor Link",
         "anchor_link_instructions": "More instructions here",
-        "save_button_label": "Save Changes",
-        "start_tooltip_content": "Set the initial starting point for this text when viewed in the Manifold reader."
+        "save_button_label": "Save Changes"
       },
       "ingestion": {
         "instructions": "Manifold can ingest texts from single files or a .zip collection. See the <1>documentation</1> for supported file types and directory structure.",
