@@ -4,7 +4,6 @@ module Ingestions
     object :text
 
     def execute
-      generate_spine
       remove_stale_records
       transform_text_sections
       validate_stylesheets
@@ -16,10 +15,6 @@ module Ingestions
     end
 
     private
-
-    def generate_spine
-      compose PostProcessors::Spine
-    end
 
     def transform_toc
       info "services.ingestions.post_processor.log.transform_toc_structure"
