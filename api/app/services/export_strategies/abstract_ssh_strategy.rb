@@ -3,7 +3,7 @@ module ExportStrategies
   class AbstractSSHStrategy < AbstractStrategy
     has_port! default: 22
 
-    setting(:auth_methods, [], reader: true) { |value| Array(value) }
+    setting :auth_methods, default: [], reader: true, constructor: ->(value) { Array(value) }
 
     attribute :host, :string
     attribute :username, :string
