@@ -110,6 +110,7 @@ class Text < ApplicationRecord
   # Validation
   validates :spine,
             presence: true, unless: proc { |x| x.spine.is_a?(Array) && x.spine.empty? }
+  validate :validate_start_text_section
 
   # Scopes
   scope :published, ->(published) { where(published: published) if published.present? }
@@ -380,6 +381,13 @@ class Text < ApplicationRecord
 
   def trigger_text_added_event
     Event.trigger(EventType[:text_added], self) if project
+  end
+
+  def validate_start_text_section
+    return unless start_text_section
+    return if text_sections.include? start_text_section
+
+    errors.add(:start_text_section, "does not belong to this text")
   end
 
 end

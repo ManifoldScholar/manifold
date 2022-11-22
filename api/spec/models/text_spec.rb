@@ -15,6 +15,23 @@ RSpec.describe Text, type: :model do
     end
   end
 
+  describe "its starting section" do
+
+    let(:text) { FactoryBot.create(:text, title: "test text")}
+    let(:valid_section) { FactoryBot.create(:text_section, text: text)}
+    let(:invalid_section) { FactoryBot.create(:text_section)}
+
+    it "is valid when it is a section of the text" do
+      text.start_text_section_id = valid_section.id
+      expect(text.valid?).to be true
+    end
+
+    it "is invalid when it is not a section of the text" do
+      text.start_text_section_id = invalid_section.id
+      expect(text.valid?).to be false
+    end
+  end
+
   context "when citations are updated" do
     before(:each) do
       @calling_class = FactoryBot.create(:text, title: "A Title")
