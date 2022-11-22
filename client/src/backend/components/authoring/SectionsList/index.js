@@ -8,6 +8,8 @@ export default function SectionsList({
   textId,
   startSectionId
 }) {
+  const onReorder = () => {};
+
   return sections.length ? (
     <div className="full-width">
       <EntitiesList
@@ -15,7 +17,7 @@ export default function SectionsList({
         entityComponent={Section}
         entityComponentProps={{ startSectionId, textId }}
         listStyle="bare"
-        callbacks={{}}
+        callbacks={{ onReorder }}
       />
     </div>
   ) : null;

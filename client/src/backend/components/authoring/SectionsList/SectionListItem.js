@@ -5,11 +5,12 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import Tooltip from "global/components/atomic/Tooltip";
-import { textsAPI } from "api";
+import { textsAPI, sectionsAPI } from "api";
 import { useApiCallback } from "hooks";
+import withConfirmation from "hoc/withConfirmation";
 import * as Styled from "./styles";
 
-export default function SectionListItem(props) {
+function SectionListItem(props) {
   const {
     entity: section,
     textId,
@@ -18,8 +19,9 @@ export default function SectionListItem(props) {
     dragHandleProps,
     isDragging,
     innerRef,
-    onDelete
+    confirm
   } = props;
+
   const { t } = useTranslation();
 
   const editUrl = lh.link("backendTextSectionsEdit", textId, section.id);
@@ -35,12 +37,20 @@ export default function SectionListItem(props) {
 
   const isStart = startSectionId === section.id;
 
+  const deleteSection = useApiCallback(sectionsAPI.destroy);
+
+  const onDelete = () => {
+    const heading = t("backend.forms.text_section.delete_confirm_heading");
+    const message = t("backend.forms.text_section.delete_confirm_body");
+    if (confirm) confirm(heading, message, deleteSection(section.id));
+  };
+
   return section ? (
     <Styled.Item ref={innerRef} {...draggableProps}>
       <Styled.Inner $isDragging={isDragging}>
         <Styled.ButtonGroup>
           <Tooltip
-            content={t("backend.forms.text_toc.start_tooltip_content")}
+            content={t("backend.forms.text_section.start_tooltip_content")}
             xOffset="-100px"
             yOffset="43px"
           >
@@ -60,7 +70,11 @@ export default function SectionListItem(props) {
         </Styled.ButtonGroup>
         <Styled.TitleWrapper>
           <Styled.Title>{section.name}</Styled.Title>
-          {isStart && <Styled.Tag>Start</Styled.Tag>}
+          {isStart && (
+            <Styled.Tag>
+              {t("backend.forms.text_section.start_tag_label")}
+            </Styled.Tag>
+          )}
         </Styled.TitleWrapper>
         <Styled.BG $isDragging={isDragging} />
       </Styled.Inner>
@@ -71,10 +85,14 @@ export default function SectionListItem(props) {
 SectionListItem.displayName = "Text.Sections.List.Item";
 
 SectionListItem.propTypes = {
-  section: PropTypes.object,
-  onDelete: PropTypes.func,
+  entity: PropTypes.object,
   dragHandleProps: PropTypes.object,
   draggableProps: PropTypes.object,
   isDragging: PropTypes.bool,
-  innerRef: PropTypes.func
+  innerRef: PropTypes.func,
+  textId: PropTypes.string.isRequired,
+  startSectionId: PropTypes.string.isRequired,
+  confirm: PropTypes.func
 };
+
+export default withConfirmation(SectionListItem);
