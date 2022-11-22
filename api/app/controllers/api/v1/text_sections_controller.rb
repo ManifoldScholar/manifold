@@ -14,7 +14,7 @@ module API
       end
 
       def update
-        @text_section = load_text_section
+        @text_section = load_and_authorize_text_section
         ::Updaters::TextSection.new(text_section_params).update(@text_section)
         render_single_resource @text_section
       end
