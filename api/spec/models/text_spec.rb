@@ -16,10 +16,9 @@ RSpec.describe Text, type: :model do
   end
 
   describe "its starting section" do
-
-    let(:text) { FactoryBot.create(:text, title: "test text")}
-    let(:valid_section) { FactoryBot.create(:text_section, text: text)}
-    let(:invalid_section) { FactoryBot.create(:text_section)}
+    let!(:text) { FactoryBot.create(:text, title: "test text")}
+    let!(:valid_section) { FactoryBot.create(:text_section, text: text)}
+    let!(:invalid_section) { FactoryBot.create(:text_section)}
 
     it "is valid when it is a section of the text" do
       text.start_text_section_id = valid_section.id
@@ -28,6 +27,30 @@ RSpec.describe Text, type: :model do
 
     it "is invalid when it is not a section of the text" do
       text.start_text_section_id = invalid_section.id
+      expect(text.valid?).to be false
+    end
+  end
+
+  describe "its toc" do
+    let!(:text) { FactoryBot.create(:text, title: "test text")}
+    let!(:section_one) { FactoryBot.create(:text_section, text: text)}
+    let!(:section_two) { FactoryBot.create(:text_section, text: text)}
+    let(:new_toc) { [{label: "one", id: section_one.id, type: "test"}, {label: "two", id: section_two.id}] }
+    let(:new_toc_invalid_entry) { [*new_toc, {label: "three"}]}
+
+    it "can be changed" do
+      expect do
+        text.update! :toc => new_toc
+      end.to execute_safely.and change { text.reload.toc }.to(new_toc)
+    end
+
+    it "is valid when all entries have a valid section id" do
+        text.toc = new_toc
+        expect(text.valid?).to be true
+    end
+
+    it "is invalid when an entry has an invalid section id" do
+      text.toc = new_toc_invalid_entry
       expect(text.valid?).to be false
     end
   end
