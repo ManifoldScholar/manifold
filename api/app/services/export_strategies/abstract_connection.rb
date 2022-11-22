@@ -14,8 +14,8 @@ module ExportStrategies
     include Dry::Matcher.for(:upload!, with: Dry::Matcher::ResultMatcher)
     include ExportStrategies::Haltable
 
-    setting :strategy_klass, ExportStrategies::AbstractStrategy, reader: true
-    setting :uploader_klass, ExportStrategies::AbstractUploader, reader: true
+    setting :strategy_klass, default: ExportStrategies::AbstractStrategy, reader: true
+    setting :uploader_klass, default: ExportStrategies::AbstractUploader, reader: true
 
     param :strategy, Types.Instance(ExportStrategies::AbstractStrategy)
 
