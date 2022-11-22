@@ -51,7 +51,7 @@ export default function Tooltip({
 Tooltip.displayName = "Global.Atomic.Tooltip";
 
 Tooltip.propTypes = {
-  content: PropTypes.element,
-  xOffset: PropTypes.number,
-  yOffset: PropTypes.number
+  content: PropTypes.node,
+  xOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  yOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
