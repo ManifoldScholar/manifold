@@ -111,6 +111,7 @@ class Text < ApplicationRecord
   validates :spine,
             presence: true, unless: proc { |x| x.spine.is_a?(Array) && x.spine.empty? }
   validate :validate_start_text_section
+  validate :validate_toc
 
   # Scopes
   scope :published, ->(published) { where(published: published) if published.present? }
@@ -388,6 +389,16 @@ class Text < ApplicationRecord
     return if text_sections.include? start_text_section
 
     errors.add(:start_text_section, "does not belong to this text")
+  end
+
+  def validate_toc
+    return if toc.empty?
+
+    return if toc.all? do |toc_entry|
+      toc_entry[:source_path] || text_sections.find_by(id: toc_entry[:id])
+    end
+
+    errors.add(:toc, "entry must be linked to a text section")
   end
 
 end
