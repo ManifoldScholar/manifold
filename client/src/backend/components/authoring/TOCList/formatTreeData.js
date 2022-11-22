@@ -1,12 +1,13 @@
 const formatTreeItem = entry => {
   if (!entry.children) {
     return {
-      id: entry.id,
+      id: `${entry.id}_${entry.label}`,
       children: [],
       hasChildren: false,
       isExpanded: true,
       isChildrenLoading: false,
       data: {
+        sectionId: entry.id,
         title: entry.label,
         anchor: entry.anchor,
         type: entry.type
@@ -15,12 +16,13 @@ const formatTreeItem = entry => {
   }
   return [
     {
-      id: entry.id,
+      id: `${entry.id}_${entry.label}`,
       hasChildren: true,
-      children: entry.children.map(c => c.id),
+      children: entry.children.map(c => `${c.id}_${c.label}`),
       isExpanded: true,
       isChildrenLoading: false,
       data: {
+        sectionId: entry.id,
         title: entry.label,
         anchor: entry.anchor,
         type: entry.type
@@ -33,9 +35,9 @@ const formatTreeItem = entry => {
 export const formatTreeData = toc => {
   if (!toc) return null;
 
-  const rootChildren = toc.map(e => e.id);
+  const rootChildren = toc.map(e => `${e.id}_${e.label}`);
   const entries = toc.map(formatTreeItem);
-  const flatEntries = entries.flat(Infinity);
+  const flatEntries = entries.flat(10);
   const asObj = flatEntries.reduce((obj, e) => {
     return { ...obj, [e.id]: e };
   }, {});
@@ -60,7 +62,7 @@ export const formatTreeData = toc => {
 const formatTOCEntry = all => item => {
   const formatter = formatTOCEntry(all);
   return {
-    id: item.id,
+    id: item.data.sectionId,
     label: item.data.title,
     anchor: item.data.anchor,
     type: item.data.type,
