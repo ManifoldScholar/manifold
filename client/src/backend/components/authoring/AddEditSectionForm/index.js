@@ -7,7 +7,12 @@ import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
 import { useHistory } from "react-router-dom";
 
-export default function AddEditSectionForm({ section, textId, nextPosition }) {
+export default function AddEditSectionForm({
+  section,
+  textId,
+  nextPosition,
+  refresh
+}) {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -20,8 +25,9 @@ export default function AddEditSectionForm({ section, textId, nextPosition }) {
   };
 
   const onSuccess = useCallback(() => {
+    if (refresh) refresh();
     history.push(lh.link("backendTextSections", textId));
-  }, [history, textId]);
+  }, [history, textId, refresh]);
 
   return (
     <FormContainer.Form
@@ -58,5 +64,7 @@ AddEditSectionForm.displayName = "Text.Sections.AddEditForm";
 
 AddEditSectionForm.propTypes = {
   textId: PropTypes.string.isRequired,
-  section: PropTypes.object
+  section: PropTypes.object,
+  refresh: PropTypes.func,
+  nextPosition: PropTypes.number
 };
