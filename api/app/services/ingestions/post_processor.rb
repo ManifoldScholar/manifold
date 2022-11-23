@@ -4,7 +4,6 @@ module Ingestions
     object :text
 
     def execute
-      generate_spine
       remove_stale_records
       transform_text_sections
       validate_stylesheets
@@ -16,10 +15,6 @@ module Ingestions
     end
 
     private
-
-    def generate_spine
-      compose PostProcessors::Spine
-    end
 
     def transform_toc
       info "services.ingestions.post_processor.log.transform_toc_structure"
@@ -60,7 +55,7 @@ module Ingestions
 
     def remove_stale_sections
       text.text_sections.each do |section|
-        next if text.spine.include? section.id
+        next if manifest_spine.include? section.id
         next if section.toc?
         next if section.cover?
 
@@ -68,6 +63,17 @@ module Ingestions
         info "services.ingestions.post_processor.log.remove_text_section",
              id: section.id
       end
+    end
+
+    def manifest_spine
+      identifiers = manifest[:relationships][:text_sections].map do |ts|
+        ts[:source_identifier]
+      end
+
+      text.text_sections
+        .where(source_identifier: identifiers)
+        .order(position: :asc)
+        .pluck(:id)
     end
 
     def remove_stale_stylesheets
