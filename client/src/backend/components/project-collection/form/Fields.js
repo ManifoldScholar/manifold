@@ -67,9 +67,22 @@ class Fields extends Component {
         />
         <Form.TextArea
           wide
-          label={t("backend.forms.description")}
+          label={t("backend.forms.project_collection.full_description")}
           name="attributes[description]"
-          placeholder="Enter description"
+          placeholder={t(
+            "backend.forms.project_collection.full_description_placeholder"
+          )}
+        />
+        <Form.TextArea
+          wide
+          label={t("backend.forms.project_collection.short_description")}
+          name="attributes[shortDescription]"
+          placeholder={t(
+            "backend.forms.project_collection.short_description_placeholder"
+          )}
+          instructions={t(
+            "backend.forms.project_collection.short_description_instructions"
+          )}
         />
         <Form.Upload
           wide
