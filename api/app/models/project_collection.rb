@@ -26,6 +26,7 @@ class ProjectCollection < ApplicationRecord
 
   # Formatted Attributes
   has_formatted_attribute :description, include_wrap: false
+  has_formatted_attribute :short_description, include_wrap: false
 
   resourcify
 

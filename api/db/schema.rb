@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_12_160459) do
+ActiveRecord::Schema.define(version: 2022_11_23_205731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -633,6 +633,7 @@ ActiveRecord::Schema.define(version: 2022_04_12_160459) do
     t.text "social_description"
     t.text "social_title"
     t.jsonb "fa_cache", default: {}, null: false
+    t.text "short_description"
     t.index ["creator_id"], name: "index_project_collections_on_creator_id"
     t.index ["homepage_end_date"], name: "index_project_collections_on_homepage_end_date"
     t.index ["homepage_start_date"], name: "index_project_collections_on_homepage_start_date"
