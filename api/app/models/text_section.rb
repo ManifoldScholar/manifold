@@ -27,6 +27,9 @@ class TextSection < ApplicationRecord
     )
   end
 
+  # Ordering
+  acts_as_list scope: :text
+
   # Associations
   belongs_to :text, inverse_of: :text_sections
   has_one :project, through: :text
@@ -65,6 +68,7 @@ class TextSection < ApplicationRecord
   scope :in_texts, lambda { |texts|
     where(text: texts)
   }
+  scope :ordered, -> { order(position: :asc) }
 
   # Search
   searchkick(
