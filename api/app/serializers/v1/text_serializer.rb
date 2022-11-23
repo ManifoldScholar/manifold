@@ -76,6 +76,14 @@ module V1
         sections_map(object)
       end
 
+      typed_attribute :auto_generated_toc, Types::Array.of(
+        Types::Hash.schema(
+          id: Types::Serializer::ID,
+          label: Types::String,
+          source_path: Types::String
+        )
+      ).optional.meta(read_only: true)
+
       typed_attribute :ingestion_source_download_url, Types::Serializer::URL.optional.meta(read_only: true) do |object, params|
         ingestion_source_download_url(object, params)
       end
