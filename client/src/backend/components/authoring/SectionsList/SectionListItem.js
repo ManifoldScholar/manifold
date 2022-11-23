@@ -19,7 +19,8 @@ function SectionListItem(props) {
     dragHandleProps,
     isDragging,
     innerRef,
-    confirm
+    confirm,
+    refresh
   } = props;
 
   const { t } = useTranslation();
@@ -39,10 +40,14 @@ function SectionListItem(props) {
 
   const deleteSection = useApiCallback(sectionsAPI.destroy);
 
+  const doDelete = () => {
+    deleteSection(section.id).then(refresh());
+  };
+
   const onDelete = () => {
     const heading = t("backend.forms.text_section.delete_confirm_heading");
     const message = t("backend.forms.text_section.delete_confirm_body");
-    if (confirm) confirm(heading, message, deleteSection(section.id));
+    if (confirm) confirm(heading, message, doDelete);
   };
 
   return section ? (
@@ -92,7 +97,8 @@ SectionListItem.propTypes = {
   innerRef: PropTypes.func,
   textId: PropTypes.string.isRequired,
   startSectionId: PropTypes.string.isRequired,
-  confirm: PropTypes.func
+  confirm: PropTypes.func,
+  refresh: PropTypes.func
 };
 
 export default withConfirmation(SectionListItem);
