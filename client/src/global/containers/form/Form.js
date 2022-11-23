@@ -178,12 +178,20 @@ export class FormContainer extends PureComponent {
 
     const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
-    if (res.hasOwnProperty("promise") && this.props.onSuccess) {
-      res.promise.then(data => {
-        this.setState({ preventDirtyWarning: true }, () => {
-          this.props.onSuccess(this.props.response.entity, data);
-        });
-      });
+    if (res.hasOwnProperty("promise")) {
+      res.promise.then(
+        data => {
+          this.setState({ preventDirtyWarning: true }, () => {
+            if (this.props.onSuccess)
+              this.props.onSuccess(this.props.response.entity, data);
+          });
+        },
+        err => {
+          if (this.props.onError) {
+            this.props.onError(err);
+          }
+        }
+      );
     }
   }
 
@@ -210,12 +218,12 @@ export class FormContainer extends PureComponent {
     const action = request(call, this.props.name, this.requestOptions());
     const res = this.props.dispatch(action);
 
-    // Pass data and err here so we can use the global form for Login.
-    if (res.hasOwnProperty("promise") && this.props.onSuccess) {
+    if (res.hasOwnProperty("promise")) {
       res.promise.then(
         data => {
           this.setState({ preventDirtyWarning: true }, () => {
-            this.props.onSuccess(this.props.response.entity, data);
+            if (this.props.onSuccess)
+              this.props.onSuccess(this.props.response.entity, data);
           });
         },
         err => {
