@@ -20,7 +20,8 @@ function ProjectCollectionSummaryEntityCollection({
   const {
     title,
     slug,
-    descriptionFormatted: description
+    descriptionFormatted: description,
+    shortDescriptionFormatted: shortDescription
   } = projectCollection.attributes;
 
   const mapProjects = useCallback(collection => {
@@ -45,7 +46,7 @@ function ProjectCollectionSummaryEntityCollection({
   return (
     <EntityCollection
       title={title}
-      description={description}
+      description={shortDescription || description}
       IconComponent={ProjectCollectionIcon}
       iconProps={{ collection: projectCollection }}
       image={image}
