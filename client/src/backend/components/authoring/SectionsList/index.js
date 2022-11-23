@@ -23,7 +23,7 @@ export default function SectionsList({
       <EntitiesList
         entities={sections}
         entityComponent={Section}
-        entityComponentProps={{ startSectionId, textId }}
+        entityComponentProps={{ startSectionId, textId, refresh }}
         listStyle="bare"
         callbacks={{ onReorder }}
       />
