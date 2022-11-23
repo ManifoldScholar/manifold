@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_22_200717) do
+ActiveRecord::Schema.define(version: 2022_11_23_202620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -470,8 +470,8 @@ ActiveRecord::Schema.define(version: 2022_11_22_200717) do
     t.uuid "journal_id", null: false
     t.uuid "journal_volume_id"
     t.uuid "creator_id"
-    t.string "number", default: "", null: false
     t.jsonb "fa_cache", default: {}, null: false
+    t.string "number", default: "", null: false
     t.integer "sort_title", default: 0, null: false
     t.integer "pending_sort_title"
     t.index ["creator_id"], name: "index_journal_issues_on_creator_id"
@@ -1202,15 +1202,17 @@ ActiveRecord::Schema.define(version: 2022_11_22_200717) do
     t.text "body"
     t.string "source_identifier"
     t.uuid "text_id"
-    t.integer "position"
+    t.integer "legacy_position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "kind"
     t.uuid "ingestion_source_id"
     t.jsonb "body_json", default: "{}", null: false
     t.jsonb "citations", default: {}
+    t.bigint "position"
     t.index ["ingestion_source_id"], name: "index_text_sections_on_ingestion_source_id"
     t.index ["source_identifier"], name: "index_text_sections_on_source_identifier"
+    t.index ["text_id", "position"], name: "index_text_sections_on_text_id_and_position"
     t.index ["text_id"], name: "index_text_sections_on_text_id"
   end
 
@@ -2086,7 +2088,7 @@ UNION ALL
   SQL
   create_view "text_section_aggregations", sql_definition: <<-SQL
     SELECT text_sections.text_id,
-    jsonb_agg(jsonb_build_object('label', text_sections.name, 'id', text_sections.id, 'source_path', text_sections.source_identifier) ORDER BY text_sections."position") AS auto_generated_toc
+    jsonb_agg(jsonb_build_object('label', text_sections.name, 'id', text_sections.id, 'source_path', text_sections.source_identifier) ORDER BY text_sections.legacy_position) AS auto_generated_toc
    FROM text_sections
   GROUP BY text_sections.text_id;
   SQL
