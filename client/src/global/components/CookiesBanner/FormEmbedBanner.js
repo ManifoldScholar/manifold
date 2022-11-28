@@ -17,16 +17,17 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
 
   return (
     <Styled.Banner>
-      <Styled.Inner $wide>
-        <Styled.TextWrapper>
-          <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
-          <p dangerouslySetInnerHTML={{ __html: message }} />
+      <Styled.SelectionInner>
+        <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
+        <p dangerouslySetInnerHTML={{ __html: message }} />
+        <Styled.SelectionInputs>
           <Styled.Checkboxes>
             {manifoldAnalyticsEnabled && (
               <Styled.CheckboxWrapper>
                 <AcceptTermsCheckbox
                   label={t("forms.privacy.internal_analytics.label")}
                   labelStyle="heading"
+                  checkboxWhite
                   onChange={() => onChange("manifold")}
                 />
                 <Styled.Description>
@@ -39,6 +40,7 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
                 <AcceptTermsCheckbox
                   label={t("forms.privacy.google_analytics.label")}
                   labelStyle="heading"
+                  checkboxWhite
                   onChange={() => onChange("google")}
                 />
                 <Styled.Description>
@@ -47,22 +49,23 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
               </Styled.CheckboxWrapper>
             )}
           </Styled.Checkboxes>
-        </Styled.TextWrapper>
-        <Styled.ButtonWrapper>
-          <button
-            onClick={() => save(prefs)}
-            className="button-secondary button-secondary--text-white"
-          >
-            {t("messages.cookies_banner.accept_label_truncated")}
-          </button>
-          <Styled.WhiteButton
-            onClick={declineAll}
-            className="button-secondary button-secondary--outlined"
-          >
-            {t("messages.cookies_banner.decline_button_label")}
-          </Styled.WhiteButton>
-        </Styled.ButtonWrapper>
-      </Styled.Inner>
+          <Styled.ButtonWrapper>
+            <Styled.Button
+              onClick={() => save(prefs)}
+              className="button-secondary button-secondary--outlined"
+            >
+              {t("messages.cookies_banner.accept_label_truncated")}
+            </Styled.Button>
+            <Styled.Button
+              $dull
+              onClick={declineAll}
+              className="button-secondary button-secondary--outlined"
+            >
+              {t("messages.cookies_banner.decline_button_label")}
+            </Styled.Button>
+          </Styled.ButtonWrapper>
+        </Styled.SelectionInputs>
+      </Styled.SelectionInner>
     </Styled.Banner>
   );
 }

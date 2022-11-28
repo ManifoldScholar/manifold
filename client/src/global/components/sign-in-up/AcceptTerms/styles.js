@@ -20,3 +20,8 @@ export const Button = styled.button`
     border: 1px solid;
   }
 `;
+
+export const CheckboxWrapper = styled.div`
+  margin-block-start: 40px;
+  margin-block-end: 10px;
+`;

@@ -7,16 +7,19 @@ import * as Styled from "./styles";
 export default function AcceptCheckbox({
   label,
   onChange,
-  labelStyle = "copy"
+  labelStyle = "copy",
+  checkboxWhite = false
 }) {
   const uid = useUID();
+
+  const Checkbox = checkboxWhite ? Styled.CheckboxWhite : Styled.Checkbox;
 
   return (
     <Styled.Wrapper htmlFor={uid}>
       <Styled.Input id={uid} type="checkbox" onChange={onChange} />
-      <Styled.Checkbox>
+      <Checkbox>
         <IconComposer icon="checkmark16" size={16} />
-      </Styled.Checkbox>
+      </Checkbox>
       <Styled.Label $labelStyle={labelStyle}>{label}</Styled.Label>
     </Styled.Wrapper>
   );

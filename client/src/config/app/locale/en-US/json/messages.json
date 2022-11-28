@@ -64,9 +64,9 @@
       "body": "We use cookies to analyze our traffic. Please decide if you are willing to accept cookies from our website. You can change this setting anytime in <0>Privacy Settings</0>.",
       "body_annonymous_user": "We use cookies to analyze our traffic. Please decide if you are willing to accept cookies from our website. If you'd like to update your settings on future visits, <0>create an account.</0>",
       "settings_button_label": "Settings",
-      "accept_button_label": "Accept all cookies",
+      "accept_button_label": "Accept all",
       "accept_label_truncated": "Accept",
-      "decline_button_label": "Decline all cookies"
+      "decline_button_label": "Decline all"
     }
   }
 }
