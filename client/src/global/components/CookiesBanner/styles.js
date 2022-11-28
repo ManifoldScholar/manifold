@@ -1,12 +1,17 @@
 import styled from "@emotion/styled";
-import { utilityPrimary, respond, formInstructions } from "theme/styles/mixins";
+import {
+  headingPrimary,
+  respond,
+  formInstructions,
+  fluidScale
+} from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 
 export const Banner = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: var(--color-accent-primary-extra-pale);
+  background-color: var(--color-base-neutral110);
   z-index: 100;
 `;
 
@@ -15,8 +20,7 @@ export const Inner = styled.div`
   max-width: var(--container-width-full);
   padding-inline: var(--container-padding-inline-fluid);
   margin-inline: auto;
-  padding-block-start: 20px;
-  padding-block-end: 26px;
+  padding-block: 60px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -24,29 +28,66 @@ export const Inner = styled.div`
   ${respond(
     `flex-direction: row;
     align-items: center;
-    gap: 30px;
+    justify-content: space-between;
+    gap: 10px;
     `,
     breakpoints[90]
   )}
+`;
 
-  ${({ $wide }) =>
-    $wide && `justify-content: space-between; padding-block: 30px;`}
+const copyStyles = `
+  font-family: var(--font-family-copy);
+  font-size: ${fluidScale("17px", "15px")};
+  line-height: 24px;
+  color: var(--color-base-neutral20);
+`;
+
+const copyLinkStyles = `
+  a:hover,
+  a:focus-visible {
+    color: var(--color-accent-primary);
+  }
+`;
+
+export const SelectionInner = styled.div`
+  ${copyStyles}
+  width: 100%;
+  max-width: var(--container-width-full);
+  padding-inline: var(--container-padding-inline-fluid);
+  margin-inline: auto;
+  padding-block: 80px;
+
+  p {
+    max-width: 100%;
+    ${copyLinkStyles}
+
+    ${respond(`max-width: 70%`, breakpoints[95])}
+  }
 `;
 
 export const TextWrapper = styled.div`
-  font-family: var(--font-family-copy);
-  font-size: 17px;
-  color: var(--color-neutral-text-extra-dark);
-
+  ${copyStyles}
+  ${copyLinkStyles}
   ${respond(`max-width: 60%;`, breakpoints[90])}
 `;
 
+export const SelectionInputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  ${respond(
+    `flex-direction: row; justify-content: space-between; align-items: flex-end;d`,
+    breakpoints[90]
+  )}
+`;
+
 export const Heading = styled.span`
-  ${utilityPrimary}
-  color: var(--color-base-neutral-black);
-  font-size: 14px;
+  ${headingPrimary}
+  font-size: ${fluidScale("30px", "24px")};
+  color: var(--color-accent-primary);
   display: block;
-  margin-block-end: 12px;
+  margin-block-end: 8px;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -56,17 +97,30 @@ export const ButtonWrapper = styled.div`
   ${respond(`padding-block-start: 3%;`, breakpoints[90])}
 `;
 
-export const WhiteButton = styled.button`
-  background-color: var(--color-base-neutral-white);
+export const Button = styled.button`
+  color: var(--color-base-neutral-white);
+  border-color: ${({ $dull }) =>
+    $dull ? `var(--color-base-neutral70)` : `var(--color-accent-primary)`};
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-base-neutral110);
+    background-color: ${({ $dull }) =>
+      $dull ? `var(--color-base-neutral70)` : `var(--color-accent-primary)`};
+    outline: 0;
+  }
 `;
 
 export const Checkboxes = styled.div`
-  display: flex;
-  gap: 40px;
+  margin-block-start: 32px;
+
+  ${respond(`max-width: 50%;`, breakpoints[90])}
 `;
 
 export const CheckboxWrapper = styled.div`
-  max-width: 60%;
+  & + & {
+    margin-block-start: 20px;
+  }
 `;
 
 export const Description = styled.span`

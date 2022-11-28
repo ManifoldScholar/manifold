@@ -25,6 +25,7 @@ import getRoutes from "routes";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
 import { FrontendModeContext } from "helpers/contexts";
 import { entityStoreActions } from "actions";
+import CookiesBanner from "global/components/CookiesBanner";
 
 const { request } = entityStoreActions;
 const routes = getRoutes();
@@ -207,6 +208,7 @@ class ManifoldContainer extends PureComponent {
           ) : (
             <FatalErrorBoundary>{renderRoutes(routes)}</FatalErrorBoundary>
           )}
+          <CookiesBanner />
         </FrontendModeContext.Provider>
       </div>
     );

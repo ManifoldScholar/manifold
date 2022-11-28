@@ -64,10 +64,12 @@ export default function AcceptTerms({ handleViewChange }) {
       <Styled.Header>{header}</Styled.Header>
       {textOne && <Styled.TextBlock>{textOne}</Styled.TextBlock>}
       {textTwo && <Styled.TextBlock>{textTwo}</Styled.TextBlock>}
-      <AcceptTermsCheckbox
-        onChange={() => setAccepted(!accepted)}
-        label={checkboxLabel}
-      />
+      <Styled.CheckboxWrapper>
+        <AcceptTermsCheckbox
+          onChange={() => setAccepted(!accepted)}
+          label={checkboxLabel}
+        />
+      </Styled.CheckboxWrapper>
       <Styled.Button
         className="button-secondary button-secondary--with-room"
         disabled={!accepted}

@@ -1,15 +1,19 @@
 import styled from "@emotion/styled";
-import { screenReaderText, utilityPrimary } from "theme/styles/mixins";
+import {
+  screenReaderText,
+  utilityPrimary,
+  defaultFocusStyle
+} from "theme/styles/mixins";
 
 export const Wrapper = styled.label`
   display: flex !important;
   gap: 11px;
   align-items: flex-start;
-  margin-block-start: 40px;
-  margin-block-end: 10px;
 `;
 
 export const Checkbox = styled.div`
+  --focus-color: var(--color-accent-primary);
+
   flex-shrink: 0;
   width: 24px;
   height: 24px;
@@ -19,6 +23,7 @@ export const Checkbox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   > svg {
     display: none;
@@ -30,6 +35,16 @@ export const Checkbox = styled.div`
       display: block;
     }
   }
+
+  input:focus-visible ~ & {
+    ${defaultFocusStyle}
+  }
+`;
+
+export const CheckboxWhite = styled(Checkbox)`
+  --highlight-color: var(--color-base-neutral110);
+
+  background-color: var(--color-base-neutral-white);
 `;
 
 export const Label = styled.span`
@@ -46,7 +61,7 @@ export const Label = styled.span`
     $labelStyle === "heading" &&
     `
   ${utilityPrimary}
-  color: var(--color-base-neutral-black);
+  color: var(--color-accent-primary);
   font-size: 14px;
   line-height: 22px;
   `}

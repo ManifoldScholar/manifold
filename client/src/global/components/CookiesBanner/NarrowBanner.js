@@ -20,19 +20,20 @@ export default function NarrowBanner({
           <p dangerouslySetInnerHTML={{ __html: message }} />
         </Styled.TextWrapper>
         <Styled.ButtonWrapper>
-          <button
-            className="button-secondary button-secondary--text-white"
+          <Styled.Button
+            className="button-secondary button-secondary--outlined"
             onClick={acceptAll}
           >
             {t("messages.cookies_banner.accept_button_label")}
-          </button>
-          <Styled.WhiteButton
+          </Styled.Button>
+          <Styled.Button
+            $dull
             className="button-secondary button-secondary--outlined"
             onClick={onClickSettings}
             {...settingsLinkProps}
           >
             {t("messages.cookies_banner.settings_button_label")}
-          </Styled.WhiteButton>
+          </Styled.Button>
         </Styled.ButtonWrapper>
       </Styled.Inner>
     </Styled.Banner>
