@@ -107,6 +107,7 @@ import Play16 from "./16/Play";
 import PlaySolid24 from "./24/PlaySolid";
 import Plus16 from "./16/Plus";
 import Plus24 from "./24/Plus";
+import Privacy24 from "./24/Privacy";
 import ProjectCollections64 from "./64/ProjectCollections";
 import Projects64 from "./64/Projects";
 import ReadingGroup24 from "./24/ReadingGroup";
@@ -274,6 +275,7 @@ export default {
   PlaySolid24,
   Plus16,
   Plus24,
+  Privacy24,
   ProjectCollections64,
   Projects64,
   ReadingGroup24,

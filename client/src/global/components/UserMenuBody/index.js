@@ -65,7 +65,7 @@ const UserMenuBody = forwardRef(
         <Item
           to={lh.link("privacy")}
           title={t("navigation.user.privacy")}
-          icon="eyeball24"
+          icon="privacy24"
           onClick={() => callbacks.hideUserPanel()}
         />
         <Item
