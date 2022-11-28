@@ -21,9 +21,6 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const { consentManifoldAnalytics, consentGoogleAnalytics } =
     currentUser?.attributes ?? {};
 
-  // Strip id from the user data, so the global form treats this as a create call and passes the args meAPI.update needs.
-  const { id, ...userModel } = currentUser ?? {};
-
   const [cookiePrefs, setCookiePrefs] = useState({
     manifold: consentManifoldAnalytics ? "yes" : "no",
     google: consentGoogleAnalytics ? "yes" : "no"
@@ -44,18 +41,28 @@ export default function EditProfileForm({ hideOverlay, mode }) {
 
   const formatAttributes = useCallback(
     data => {
+      const consentAttrs =
+        mode === "new"
+          ? {
+              consentManifoldAnalytics: !manifoldAnalyticsEnabled
+                ? null
+                : cookiePrefs.manifold === "yes",
+              consentGoogleAnalytics: !googleAnalyticsEnabled
+                ? null
+                : cookiePrefs.google === "yes"
+            }
+          : {};
       return {
-        consentManifoldAnalytics: !manifoldAnalyticsEnabled
-          ? null
-          : cookiePrefs.manifold === "yes",
-        consentGoogleAnalytics: !googleAnalyticsEnabled
-          ? null
-          : cookiePrefs.google === "yes",
+        ...consentAttrs,
         ...data.attributes
       };
     },
-    [cookiePrefs, manifoldAnalyticsEnabled, googleAnalyticsEnabled]
+    [mode, cookiePrefs, manifoldAnalyticsEnabled, googleAnalyticsEnabled]
   );
+
+  const updateUser = useCallback((_, data) => {
+    return meAPI.update(data);
+  }, []);
 
   const onSuccess = useCallback(() => {
     notifyUpdate();
@@ -70,11 +77,11 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   return currentUser ? (
     <div>
       <SharedStyles.Form
-        model={userModel}
+        model={currentUser}
         name="global-authenticated-user-update"
         onSuccess={onSuccess}
         formatData={formatAttributes}
-        update={meAPI.update}
+        update={updateUser}
       >
         <Greeting mode={mode} />
         <h2 className="screen-reader-text">
