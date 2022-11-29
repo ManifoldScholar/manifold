@@ -17,7 +17,7 @@ export default `
     &--backend,
     &--frontend {
       &.drawer--pos-default {
-        top: var(--header-height, 82px);
+        top: var(--library-header-height, 82px);
       }
     }
 
