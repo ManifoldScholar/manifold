@@ -658,6 +658,7 @@ export class PickerComponent extends PureComponent {
                     <li
                       id="no-options"
                       className="picker-input__result picker-input__result--empty"
+                      tabIndex={-1}
                     >
                       {t("forms.picker.no_options")}
                     </li>
@@ -680,7 +681,9 @@ export class PickerComponent extends PureComponent {
                         })}
                         onClick={() => {
                           this.callbacks.selectOrToggleOption(option.value);
+                          this.focusOnSearchInput();
                         }}
+                        tabIndex={-1}
                       >
                         {option.label}
                       </li>

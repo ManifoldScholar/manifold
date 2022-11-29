@@ -312,9 +312,9 @@ class DrawerWrapper extends PureComponent {
           ref={this.focusTrapNode}
           active={this.state.focusable && this.props.focusTrap}
           focusTrapOptions={{
-            clickOutsideDeactivates: this.closesOnClickOutside,
             escapeDeactivates: false,
-            returnFocusOnDeactivate: this.props.returnFocusOnDeactivate
+            returnFocusOnDeactivate: this.props.returnFocusOnDeactivate,
+            clickOutsideDeactivates: this.closesOnClickOutside
           }}
         >
           {this.renderDrawerFrontMatter(this.props, headerId)}

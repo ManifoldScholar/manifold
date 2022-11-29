@@ -35,6 +35,13 @@ export class ProjectCollectionSettings extends PureComponent {
     this.props.confirm(heading, message, this.props.destroyProjectCollection);
   };
 
+  onSuccess = () => {
+    this.props.refreshCollectionProjects();
+    this.props.history.push(
+      lh.link("backendProjectCollection", this.props.projectCollection.id)
+    );
+  };
+
   render() {
     const { projectCollection, t } = this.props;
     if (!projectCollection) return null;
@@ -55,7 +62,7 @@ export class ProjectCollectionSettings extends PureComponent {
             name={requests.beProjectCollectionUpdate}
             update={this.props.buildUpdateProjectCollection}
             create={projectCollectionsAPI.create}
-            onSuccess={this.props.refreshCollectionProjects}
+            onSuccess={this.onSuccess}
             className="form-secondary project-collection-form"
             flushOnUnmount={false}
           >
