@@ -14,7 +14,7 @@ export default function NarrowBanner({
 
   return (
     <Styled.Banner>
-      <Styled.Inner>
+      <Styled.NarrowInner>
         <Styled.TextWrapper>
           <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
           <p dangerouslySetInnerHTML={{ __html: message }} />
@@ -35,7 +35,7 @@ export default function NarrowBanner({
             {t("messages.cookies_banner.settings_button_label")}
           </Styled.Button>
         </Styled.ButtonWrapper>
-      </Styled.Inner>
+      </Styled.NarrowInner>
     </Styled.Banner>
   );
 }

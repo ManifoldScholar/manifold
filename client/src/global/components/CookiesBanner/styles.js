@@ -12,74 +12,46 @@ export const Banner = styled.div`
   bottom: 0;
   width: 100%;
   background-color: var(--color-base-neutral110);
-  z-index: 100;
+  z-index: 500;
 `;
 
-export const Inner = styled.div`
+const Inner = styled.div`
   width: 100%;
   max-width: var(--container-width-full);
   padding-inline: var(--container-padding-inline-fluid);
   margin-inline: auto;
-  padding-block: 60px;
   display: flex;
   flex-direction: column;
   gap: 30px;
 
   ${respond(
     `flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: 10px;
+    gap: ${fluidScale("120px", "60px", 120, 90)};
     `,
     breakpoints[90]
   )}
 `;
 
-const copyStyles = `
+export const NarrowInner = styled(Inner)`
+  padding-block: ${fluidScale("60px", "40px")};
+`;
+
+export const SelectionInner = styled(Inner)`
+  padding-block: ${fluidScale("80px", "50px")};
+`;
+
+export const TextWrapper = styled.div`
   font-family: var(--font-family-copy);
   font-size: ${fluidScale("17px", "15px")};
   line-height: 24px;
   color: var(--color-base-neutral20);
-`;
 
-const copyLinkStyles = `
   a:hover,
   a:focus-visible {
     color: var(--color-accent-primary);
   }
-`;
-
-export const SelectionInner = styled.div`
-  ${copyStyles}
-  width: 100%;
-  max-width: var(--container-width-full);
-  padding-inline: var(--container-padding-inline-fluid);
-  margin-inline: auto;
-  padding-block: 80px;
-
-  p {
-    max-width: 100%;
-    ${copyLinkStyles}
-
-    ${respond(`max-width: 70%`, breakpoints[95])}
-  }
-`;
-
-export const TextWrapper = styled.div`
-  ${copyStyles}
-  ${copyLinkStyles}
-  ${respond(`max-width: 60%;`, breakpoints[90])}
-`;
-
-export const SelectionInputs = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-
-  ${respond(
-    `flex-direction: row; justify-content: space-between; align-items: flex-end;d`,
-    breakpoints[90]
-  )}
 `;
 
 export const Heading = styled.span`
@@ -92,12 +64,12 @@ export const Heading = styled.span`
 
 export const ButtonWrapper = styled.div`
   display: flex;
+  min-width: max-content;
   gap: 20px;
-
-  ${respond(`padding-block-start: 3%;`, breakpoints[90])}
 `;
 
 export const Button = styled.button`
+  flex-shrink: 0;
   color: var(--color-base-neutral-white);
   border-color: ${({ $dull }) =>
     $dull ? `var(--color-base-neutral70)` : `var(--color-accent-primary)`};
@@ -113,8 +85,6 @@ export const Button = styled.button`
 
 export const Checkboxes = styled.div`
   margin-block-start: 32px;
-
-  ${respond(`max-width: 50%;`, breakpoints[90])}
 `;
 
 export const CheckboxWrapper = styled.div`
