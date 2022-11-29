@@ -180,6 +180,7 @@ export default `
           position: absolute;
           top: -3px;
           right: 0;
+          z-index: -1;
         }
 
         .instructions {

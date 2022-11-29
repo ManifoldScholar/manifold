@@ -23,7 +23,6 @@ export default `
       margin-top: -1px !important;
       margin-bottom: 0 !important;
       margin-left: -1px;
-      cursor: pointer;
       border: 1px solid var(--color-neutral-ui-dull-light);
       transition: color ${defaultTransitionProps},
         background-color ${defaultTransitionProps};
@@ -40,10 +39,11 @@ export default `
 
     &__input {
       position: absolute;
-      z-index: -1;
+      z-index: 10;
       opacity: 0;
       width: 100%;
       height: 100%;
+      cursor: pointer;
     }
   }
 `;

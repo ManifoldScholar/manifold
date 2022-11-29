@@ -126,6 +126,7 @@ Array [
         <li
           class="picker-input__result picker-input__result--empty"
           id="no-options"
+          tabindex="-1"
         >
           forms.picker.no_options
         </li>
@@ -203,6 +204,7 @@ Array [
         <li
           class="picker-input__result picker-input__result--empty"
           id="no-options"
+          tabindex="-1"
         >
           forms.picker.no_options
         </li>

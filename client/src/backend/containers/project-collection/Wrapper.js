@@ -251,6 +251,10 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       empty: this.noProjectCollections
     });
 
+    const collectionForHeader = this.props.match.params.id
+      ? projectCollection
+      : null;
+
     return (
       <Authorize
         ability="update"
@@ -277,7 +281,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
               <div className="panel">
                 {this.hasProjectCollections && (
                   <ProjectCollection.Header
-                    projectCollection={projectCollection}
+                    projectCollection={collectionForHeader}
                   />
                 )}
                 <Drawer.Wrapper
