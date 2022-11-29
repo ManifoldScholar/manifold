@@ -18,9 +18,9 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
   return (
     <Styled.Banner>
       <Styled.SelectionInner>
-        <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
-        <p dangerouslySetInnerHTML={{ __html: message }} />
-        <Styled.SelectionInputs>
+        <Styled.TextWrapper>
+          <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
+          <p dangerouslySetInnerHTML={{ __html: message }} />
           <Styled.Checkboxes>
             {manifoldAnalyticsEnabled && (
               <Styled.CheckboxWrapper>
@@ -49,22 +49,22 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
               </Styled.CheckboxWrapper>
             )}
           </Styled.Checkboxes>
-          <Styled.ButtonWrapper>
-            <Styled.Button
-              onClick={() => save(prefs)}
-              className="button-secondary button-secondary--outlined"
-            >
-              {t("messages.cookies_banner.accept_label_truncated")}
-            </Styled.Button>
-            <Styled.Button
-              $dull
-              onClick={declineAll}
-              className="button-secondary button-secondary--outlined"
-            >
-              {t("messages.cookies_banner.decline_button_label")}
-            </Styled.Button>
-          </Styled.ButtonWrapper>
-        </Styled.SelectionInputs>
+        </Styled.TextWrapper>
+        <Styled.ButtonWrapper>
+          <Styled.Button
+            onClick={() => save(prefs)}
+            className="button-secondary button-secondary--outlined"
+          >
+            {t("messages.cookies_banner.accept_label_truncated")}
+          </Styled.Button>
+          <Styled.Button
+            $dull
+            onClick={declineAll}
+            className="button-secondary button-secondary--outlined"
+          >
+            {t("messages.cookies_banner.decline_button_label")}
+          </Styled.Button>
+        </Styled.ButtonWrapper>
       </Styled.SelectionInner>
     </Styled.Banner>
   );
