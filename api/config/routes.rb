@@ -174,6 +174,7 @@ Rails.application.routes.draw do
             resources :resource_imports, only: [:create, :update, :show]
             resources :collaborators, only: [:index, :show]
             resources :text_categories, only: [:index, :create, :show]
+            resources :texts, only: [:create]
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
             resources :versions, only: [:index]
             concerns [:permissible]

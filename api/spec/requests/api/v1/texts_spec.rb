@@ -30,4 +30,16 @@ RSpec.describe "Text", type: :request do
                       model: Text,
                       authorized_user: :admin
   end
+
+  let!(:project) { FactoryBot.create(:project) }
+  let(:project_id) { project.id }
+
+  path "/projects/{project_id}/relationships/texts" do
+    include_examples "an API create request",
+                    model: Text,
+                    parent: "project",
+                    url_parameters: [:project_id],
+                    authorized_user: :admin
+  end
+
 end
