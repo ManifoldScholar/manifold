@@ -73,7 +73,7 @@ class Text < ApplicationRecord
   has_many :subjects, through: :text_subjects
   has_many :ingestion_sources, dependent: :destroy
   has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy,
-           inverse_of: :text
+           inverse_of: :text, autosave: true
   has_one :text_section_aggregation, inverse_of: :text
   has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text
@@ -239,6 +239,16 @@ class Text < ApplicationRecord
       end
     else
       text_sections.where(id: section_id).first
+    end
+  end
+
+  def section_names=(section_names)
+    return unless new_record?
+
+    Array(section_names).each_with_index do |name, i|
+      position = i + 1
+
+      text_sections.build(name: name, kind: "section", position: position)
     end
   end
 

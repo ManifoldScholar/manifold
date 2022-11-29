@@ -323,7 +323,7 @@ module Validation
     attributes = [:title, :position, :description, :publication_date,
                   metadata(Text), :section_kind, :subtitle, :published,
                   :pending_slug, attachment(:cover), :remove_cover,
-                  :ignore_access_restrictions, :start_text_section_id, { toc: nested_toc }]
+                  :ignore_access_restrictions, :start_text_section_id, { toc: nested_toc }, { section_names: [] }]
     relationships = [:category, :contributors, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

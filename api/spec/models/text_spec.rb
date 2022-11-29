@@ -146,6 +146,13 @@ RSpec.describe Text, type: :model do
     end
   end
 
+  specify "a new text can create sections from a list of names" do
+    new_text = Text.new
+    new_text.section_names= %w[foo bar]
+
+    expect(new_text.text_sections.size).to eq 2
+  end
+
   it_should_behave_like "a model that stores its fingerprint" do
     subject { FactoryBot.create :text }
   end
