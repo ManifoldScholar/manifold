@@ -10,6 +10,7 @@ export default class EdgeLockScroll extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.childRef = React.createRef();
 
     this.state = {
       touchStart: null
@@ -17,7 +18,7 @@ export default class EdgeLockScroll extends PureComponent {
   }
 
   componentDidMount() {
-    this.scroller = this.child;
+    this.scroller = this.childRef.current;
 
     if (!this.scroller) return null;
 
@@ -79,10 +80,8 @@ export default class EdgeLockScroll extends PureComponent {
   render() {
     return (
       <div className="edge-lock-scroll">
-        {React.cloneElement(this.props.children, {
-          ref: child => {
-            this.child = child;
-          }
+        {React.cloneElement(React.Children.only(this.props.children), {
+          ref: this.childRef
         })}
       </div>
     );

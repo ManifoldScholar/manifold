@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import FocusTrap from "focus-trap-react";
 import classNames from "classnames";
 import Notifications from "global/containers/Notifications";
@@ -7,7 +7,7 @@ import { DrawerContext } from "helpers/contexts";
 import { useSelector } from "react-redux";
 import { usePreventBodyScroll } from "hooks";
 
-export default function DrawerContent(props) {
+function DrawerContent(props, ref) {
   const {
     headerId,
     id,
@@ -21,7 +21,7 @@ export default function DrawerContent(props) {
     position = "default",
     children,
     handleLeaveEvent,
-    lockScroll
+    lockScroll = false
   } = props;
 
   const connected = useSelector(state => state.websocket.connected);
@@ -60,6 +60,7 @@ export default function DrawerContent(props) {
       aria-modal={focusTrap}
       aria-label={ariaLabel}
       aria-labelledby={headerId}
+      ref={ref}
     >
       <FocusTrap
         focusTrapOptions={{
@@ -87,3 +88,5 @@ export default function DrawerContent(props) {
     </div>
   );
 }
+
+export default forwardRef(DrawerContent);
