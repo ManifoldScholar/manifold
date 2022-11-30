@@ -12,20 +12,6 @@ export default class UIPanel extends Component {
     hidePanel: PropTypes.func
   };
 
-  componentDidMount() {
-    window.addEventListener("keyup", this.handleLeaveKey);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("keyup", this.handleLeaveKey);
-  }
-
-  handleLeaveKey = event => {
-    if (event.keyCode === 27) {
-      this.props.hidePanel(event);
-    }
-  };
-
   render() {
     const visibility = this.props.visibility[this.props.id];
     const visibilityClass = classNames({
@@ -45,20 +31,21 @@ export default class UIPanel extends Component {
           <FocusTrap
             focusTrapOptions={{
               clickOutsideDeactivates: true,
-              escapeDeactivate: false
+              escapeDeactivates: e => this.props.hidePanel(e)
             }}
           >
-            <button
-              className="screen-reader-text"
-              onClick={this.props.hidePanel}
-            >
-              Close Panel
-            </button>
-            {/* Second argument as props */}
-            {React.createElement(this.props.bodyComponent, {
-              ...this.props,
-              closeCallback: this.props.hidePanel
-            })}
+            <div>
+              <button
+                className="screen-reader-text"
+                onClick={this.props.hidePanel}
+              >
+                Close Panel
+              </button>
+              {React.createElement(this.props.bodyComponent, {
+                ...this.props,
+                closeCallback: this.props.hidePanel
+              })}
+            </div>
           </FocusTrap>
         </div>
       </CSSTransition>
