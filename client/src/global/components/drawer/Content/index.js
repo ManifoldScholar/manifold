@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
 import classNames from "classnames";
 import Notifications from "global/containers/Notifications";
-import FrontMatter from "./FrontMatter";
+import FrontMatter from "../FrontMatter";
 import { DrawerContext } from "helpers/contexts";
 import { usePreventBodyScroll, useFromStore } from "hooks";
+import * as Styled from "./styles";
 
 function DrawerContent(props, ref) {
   const {
@@ -51,19 +52,24 @@ function DrawerContent(props, ref) {
     return true;
   };
 
-  const drawerClasses = classNames(
-    "drawer",
-    [`drawer--${context}`],
-    [`drawer--${entrySide}`],
-    [`drawer--${size}`],
-    [`drawer--pad-${padding}`],
-    [`drawer--pos-${position}`]
-  );
+  /* eslint-disable no-nested-ternary */
+  const Drawer =
+    context === "reader"
+      ? Styled.DrawerReader
+      : position === "overlay"
+      ? Styled.DrawerOverlay
+      : Styled.Drawer;
+
+  // A variety of other classes depend on .drawer--backend
+  const classes = classNames(entrySide, size, {
+    "pad-large": padding === "large",
+    "drawer--backend": context === "backend"
+  });
 
   return (
-    <div
+    <Drawer
       key="drawer"
-      className={drawerClasses}
+      className={classes}
       id={id}
       role="dialog"
       aria-modal={focusTrap}
@@ -94,7 +100,7 @@ function DrawerContent(props, ref) {
           </DrawerContext.Provider>
         </div>
       </FocusTrap>
-    </div>
+    </Drawer>
   );
 }
 
