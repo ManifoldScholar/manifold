@@ -243,7 +243,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
           icon="BECollectionManual64"
           title={this.props.projectCollection.attributes.title}
         >
-          <p className="instructions drawer-header__instructions">
+          <p className="instructions">
             {t(
               "backend_entities.project_collections.manage_projects_instructions"
             )}

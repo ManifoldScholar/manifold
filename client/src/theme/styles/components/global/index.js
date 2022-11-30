@@ -6,7 +6,6 @@ import commentMore from "./commentMore";
 import confirmableButton from "./confirmableButton";
 import demoAnimation from "./demoAnimation";
 import dialog from "./dialog";
-import drawer from "./drawer";
 import header from "./header";
 import instructionalCopy from "./instructionalCopy";
 import listTotal from "./listTotal";
@@ -29,7 +28,6 @@ export default `
   ${buttons}
   ${confirmableButton}
   ${demoAnimation}
-  ${drawer}
   ${utility}
   ${listTotal}
   ${overlay}
