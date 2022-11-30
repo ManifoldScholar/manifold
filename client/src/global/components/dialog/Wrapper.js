@@ -41,26 +41,12 @@ class DialogWrapper extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    window.addEventListener("keyup", this.handleEscape);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("keyup", this.handleEscape);
-  }
-
   get overlayRole() {
     return this.props.closeOnOverlayClick ? "button" : null;
   }
 
   setDialogClassName = additionalClassNames => {
     this.setState({ additionalClassNames });
-  };
-
-  handleEscape = event => {
-    if (event.keyCode === 27 && this.props.showCloseButton === true) {
-      this.doClose();
-    }
   };
 
   leave(callback) {
@@ -125,43 +111,49 @@ class DialogWrapper extends PureComponent {
         unmountOnExit
       >
         <BodyClass className={"no-scroll"}>
-          <FocusTrap className="dialog-wrapper dialog-appear">
-            {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
-            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-            <div
-              className="dialog-overlay"
-              onClick={this.handleOverlayClick}
-              role={this.overlayRole}
-            />
-            {/* Prevent clicking in the modal from triggering handleGlobalClick */}
-            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-            <div
-              role="dialog"
-              aria-modal
-              aria-labelledby={this.props.labelledBy}
-              aria-describedby={this.props.describedBy}
-              className={classnames(
-                "dialog",
-                this.props.className,
-                this.state.additionalClassNames
-              )}
-              style={this.style()}
-              onClick={e => e.stopPropagation()}
-            >
-              {this.props.showCloseButton ? (
-                <div
-                  onClick={this.handleCloseClick}
-                  className="dialog__close"
-                  role="button"
-                  tabIndex="0"
-                >
-                  <IconComposer icon="close16" size={24} />
-                  <span className="screen-reader-text">
-                    {this.props.t("modals.close")}
-                  </span>
-                </div>
-              ) : null}
-              {this.renderChildren()}
+          <FocusTrap
+            focusTrapOptions={{
+              escapeDeactivates: this.doClose.bind(this)
+            }}
+          >
+            <div className="dialog-wrapper">
+              {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
+              {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+              <div
+                className="dialog-overlay"
+                onClick={this.handleOverlayClick}
+                role={this.overlayRole}
+              />
+              {/* Prevent clicking in the modal from triggering handleGlobalClick */}
+              {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+              <div
+                role="dialog"
+                aria-modal
+                aria-labelledby={this.props.labelledBy}
+                aria-describedby={this.props.describedBy}
+                className={classnames(
+                  "dialog",
+                  this.props.className,
+                  this.state.additionalClassNames
+                )}
+                style={this.style()}
+                onClick={e => e.stopPropagation()}
+              >
+                {this.props.showCloseButton ? (
+                  <div
+                    onClick={this.handleCloseClick}
+                    className="dialog__close"
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <IconComposer icon="close16" size={24} />
+                    <span className="screen-reader-text">
+                      {this.props.t("modals.close")}
+                    </span>
+                  </div>
+                ) : null}
+                {this.renderChildren()}
+              </div>
             </div>
           </FocusTrap>
         </BodyClass>
