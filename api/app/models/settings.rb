@@ -37,15 +37,13 @@ class Settings < ApplicationRecord
       string_signup_terms_two: "This site will also store the annotations and highlights you create on texts, and it will keep track of content that you've starred. Depending on its configuration, this site may store anonymous data on how the site is being used.",
       string_data_use_header: "What data does Manifold store about me?",
       string_data_use_copy: <<~HEREDOC
-Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo eget malesuada.
-
-### INTERNAL ANALYTICS
+## Internal Analytics
 Manifold stores anonymous data about what pages users access and how much time they spend on those pages. There is no personally identifiable information stored in relation to usage data.
 
-### ANNOTATIONS AND COMMENTS
+## Annotations and Comments
 When you create a highlight, annotate a text, or write a comment, Manifold stores it in the database.
 
-### READING GROUPS
+## Reading Groups
 Manifold stores basic information about each reading group, the content that has been collected in the group, and the group's members.
       HEREDOC
     },
