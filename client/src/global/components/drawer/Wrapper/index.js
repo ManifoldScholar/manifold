@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
-import classNames from "classnames";
 import { useUID } from "react-uid";
 import Utility from "global/components/utility";
 import { notificationActions } from "actions";
-import Content from "./Content";
+import Content from "../Content";
+import * as Styled from "./styles";
 
 export default function DrawerWrapper({
   lockScroll = "hover",
@@ -40,12 +40,6 @@ export default function DrawerWrapper({
     }
   };
 
-  const overlayClasses = classNames(
-    "drawer-overlay",
-    [`drawer-overlay--${props.context}`],
-    [`drawer-overlay--pos-${props.position}`]
-  );
-
   const renderDrawerWrapper = headerId => {
     if (lockScroll === "hover") {
       return (
@@ -65,7 +59,7 @@ export default function DrawerWrapper({
     if (lockScroll === "always") {
       return (
         <div className={identifier}>
-          <div className={overlayClasses} />
+          <Styled.Overlay />
           <Content
             headerId={headerId}
             handleLeaveEvent={handleLeaveEvent}
