@@ -113,7 +113,7 @@
     "express-session": "^1.12.1",
     "fast-copy": "^2.1.0",
     "filesize": "^4.x",
-    "focus-trap-react": "4.0.1",
+    "focus-trap-react": "10.0.1",
     "focus-visible": "^5.0.1",
     "glob": "^7.0.0",
     "he": "^1.2.0",

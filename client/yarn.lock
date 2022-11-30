@@ -7132,20 +7132,20 @@ focus-lock@^0.10.1:
   dependencies:
     tslib "^2.0.3"
 
-focus-trap-react@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/focus-trap-react/-/focus-trap-react-4.0.1.tgz#3cffd39341df3b2f546a4a2fe94cfdea66154683"
-  integrity sha512-UUZKVEn5cFbF6yUnW7lbXNW0iqN617ShSqYKgxctUvWw1wuylLtyVmC0RmPQNnJ/U+zoKc/djb0tZMs0uN/0QQ==
+focus-trap-react@10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/focus-trap-react/-/focus-trap-react-10.0.1.tgz#5a50333f9753355765fcd7b83c6d2a59c5716c65"
+  integrity sha512-Av+O4JCT4/WnY25jnaOu1rysqhaD9aAhqAxxcrJbgKciZToIFmPng/WOrLJ1yHe6ntNmx1g0WhdeDfNCL1dmfA==
   dependencies:
-    focus-trap "^3.0.0"
+    focus-trap "^7.1.0"
+    tabbable "^6.0.1"
 
-focus-trap@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-3.0.0.tgz#4d2ee044ae66bf7eb6ebc6c93bd7a1039481d7dc"
-  integrity sha512-jTFblf0tLWbleGjj2JZsAKbgtZTdL1uC48L8FcmSDl4c2vDoU4NycN1kgV5vJhuq1mxNFkw7uWZ1JAGlINWvyw==
+focus-trap@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-7.1.0.tgz#3226e977d76b1fd555c2e4f7ff91f10371f0f2cc"
+  integrity sha512-CuJvwUBfJCWcU6fc4xr3UwMF5vWnox4isXAixCwrPzCsPKOQjP9T+nTlYT2t+vOmQL8MOQ16eim99XhjQHAuiQ==
   dependencies:
-    tabbable "^3.1.0"
-    xtend "^4.0.1"
+    tabbable "^6.0.1"
 
 focus-visible@^5.0.1:
   version "5.2.0"
@@ -14419,10 +14419,10 @@ symbol.prototype.description@^1.0.0:
     has-symbols "^1.0.2"
     object.getownpropertydescriptors "^2.1.2"
 
-tabbable@^3.1.0:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-3.1.2.tgz#f2d16cccd01f400e38635c7181adfe0ad965a4a2"
-  integrity sha512-wjB6puVXTYO0BSFtCmWQubA/KIn7Xvajw0x0l6eJUudMG/EAiJvIUnyNX6xO4NpGrJ16lbD0eUseB9WxW0vlpQ==
+tabbable@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.0.1.tgz#427a09b13c83ae41eed3e88abb76a4af28bde1a6"
+  integrity sha512-SYJSIgeyXW7EuX1ytdneO5e8jip42oHWg9xl/o3oTYhmXusZVgiA+VlPvjIN+kHii9v90AmzTZEBcsEvuAY+TA==
 
 table@^5.2.3:
   version "5.4.6"
@@ -15686,7 +15686,7 @@ xmlbuilder@^10.0.0:
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-10.1.1.tgz#8cae6688cc9b38d850b7c8d3c0a4161dcaf475b0"
   integrity sha512-OyzrcFLL/nb6fMGHbiRDuPup9ljBycsdCypwuyg5AAHvyWzGfChJpCXMG88AGTIMFhGZ9RccFN1e6lhg3hkwKg==
 
-xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
+xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.2.tgz#bb72779f5fa465186b1f438f674fa347fdb5db54"
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
