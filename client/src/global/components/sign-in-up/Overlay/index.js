@@ -1,20 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
-import Utility from "global/components/utility";
-import CloseButton from "global/components/Overlay/Close";
-import Interface from "../Interface";
-import { useTranslation } from "react-i18next";
 import { useUID } from "react-uid";
-import { useFromStore } from "hooks";
-import * as Styled from "./styles";
-
+import TrapContent from "./Content";
 import { usePreventBodyScroll } from "hooks";
+import * as Styled from "./styles";
 
 export default function Overlay({ hideOverlay }) {
   usePreventBodyScroll();
-  const { t } = useTranslation();
-  const authentication = useFromStore("authentication");
   const uid = useUID();
 
   return (
@@ -24,25 +17,7 @@ export default function Overlay({ hideOverlay }) {
           onDeactivate: hideOverlay
         }}
       >
-        <Styled.Header>
-          <Styled.HeaderInner>
-            <Utility.IconComposer size={26} icon="manifoldLogo32" />
-            <h1 className="screen-reader-text" id={uid}>
-              {t("forms.signin_overlay.sr_title")}
-            </h1>
-            <CloseButton onClick={hideOverlay} />
-          </Styled.HeaderInner>
-        </Styled.Header>
-        <Styled.Content>
-          <Styled.LayoutContainer>
-            <Styled.FormContainer>
-              <Interface
-                hideOverlay={hideOverlay}
-                defaultView={authentication?.authenticated ? "update" : "login"}
-              />
-            </Styled.FormContainer>
-          </Styled.LayoutContainer>
-        </Styled.Content>
+        <TrapContent uid={uid} hideOverlay={hideOverlay} />
       </FocusTrap>
     </Styled.Dialog>
   );
