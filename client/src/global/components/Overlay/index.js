@@ -33,20 +33,6 @@ function Overlay({
     }
   }
 
-  function handleEscape(event) {
-    if (event.keyCode === 27) {
-      handleCloseEvent(event);
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener("keyup", handleEscape);
-
-    return () => {
-      window.removeEventListener("keyup", handleEscape);
-    };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   useEffect(() => {
     if (!overlayRef.current) return;
     overlayRef.current.scrollTop = 0;
@@ -65,18 +51,20 @@ function Overlay({
       >
         <FocusTrap
           focusTrapOptions={{
-            escapeDeactivates: false
+            escapeDeactivates: e => handleCloseEvent(e)
           }}
         >
-          <Header
-            title={title}
-            subtitle={subtitle}
-            icon={icon}
-            onCloseClick={handleCloseEvent}
-            headerId={headerId}
-          />
-          <div style={{ maxWidth: contentWidth }} className="container">
-            {children}
+          <div>
+            <Header
+              title={title}
+              subtitle={subtitle}
+              icon={icon}
+              onCloseClick={handleCloseEvent}
+              headerId={headerId}
+            />
+            <div style={{ maxWidth: contentWidth }} className="container">
+              {children}
+            </div>
           </div>
         </FocusTrap>
       </div>
