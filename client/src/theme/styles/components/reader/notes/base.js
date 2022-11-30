@@ -1,8 +1,4 @@
-import {
-  buttonUnstyled,
-  defaultTransitionProps,
-  drawerPadding
-} from "theme/styles/mixins";
+import { buttonUnstyled, defaultTransitionProps } from "theme/styles/mixins";
 
 export default `
   .button-notes {
@@ -69,11 +65,6 @@ export default `
       .panel-exit.panel-exit-active & {
         transform: translateX(100%);
       }
-    }
-
-    .drawer-bar {
-      ${drawerPadding("padding-right", "narrow")}
-      ${drawerPadding("padding-left", "narrow")}
     }
   }
 `;
