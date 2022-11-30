@@ -41,7 +41,7 @@ function ReadingGroupMemberEditContainer({
           }
         ]}
         buttonLayout="inline"
-        className="drawer-header--pad-bottom-small"
+        narrow
       />
       <MemberSettingsForm
         membership={membership}
