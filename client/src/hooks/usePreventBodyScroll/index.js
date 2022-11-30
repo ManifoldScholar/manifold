@@ -2,12 +2,14 @@
 
 import { useLayoutEffect, useEffect } from "react";
 
-export default function usePreventBodyScroll() {
+export default function usePreventBodyScroll(active = true) {
   const isBrowser =
     typeof window !== "undefined" && !!window.document?.createElement;
   const safeEffect = isBrowser ? useLayoutEffect : useEffect;
 
   safeEffect(() => {
+    if (!active) return () => {};
+
     const { body } = document;
 
     if (!body) return () => {};
