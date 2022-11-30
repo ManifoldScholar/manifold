@@ -14,24 +14,26 @@ exports[`global/components/Overlay matches the snapshot 1`] = `
     <focus-trap-react
       focusTrapOptions={
         Object {
-          "escapeDeactivates": false,
+          "escapeDeactivates": [Function],
         }
       }
     >
-      <Global.Overlay.Header
-        headerId="abcdef"
-        onCloseClick={[Function]}
-      />
-      <div
-        className="container"
-        style={
-          Object {
-            "maxWidth": undefined,
+      <div>
+        <Global.Overlay.Header
+          headerId="abcdef"
+          onCloseClick={[Function]}
+        />
+        <div
+          className="container"
+          style={
+            Object {
+              "maxWidth": undefined,
+            }
           }
-        }
-      >
-        <div>
-          Test me
+        >
+          <div>
+            Test me
+          </div>
         </div>
       </div>
     </focus-trap-react>

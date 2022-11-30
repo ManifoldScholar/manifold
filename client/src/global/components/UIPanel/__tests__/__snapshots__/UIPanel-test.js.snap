@@ -15,24 +15,26 @@ exports[`global/components/UIPanel matches the snapshot 1`] = `
       focusTrapOptions={
         Object {
           "clickOutsideDeactivates": true,
-          "escapeDeactivate": false,
+          "escapeDeactivates": [Function],
         }
       }
     >
-      <button
-        className="screen-reader-text"
-      >
-        Close Panel
-      </button>
-      <Component
-        bodyComponent={[Function]}
-        id="show"
-        visibility={
-          Object {
-            "show": true,
+      <div>
+        <button
+          className="screen-reader-text"
+        >
+          Close Panel
+        </button>
+        <Component
+          bodyComponent={[Function]}
+          id="show"
+          visibility={
+            Object {
+              "show": true,
+            }
           }
-        }
-      />
+        />
+      </div>
     </focus-trap-react>
   </div>
 </Component>
