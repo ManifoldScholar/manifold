@@ -55,10 +55,6 @@ export class NavigationMobile extends Component {
     this.setState(this.initialState);
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("keyup", this.handleEscape);
-  }
-
   get initialState() {
     return {
       expanded: [],
@@ -106,11 +102,6 @@ export class NavigationMobile extends Component {
     }
   };
 
-  handleEscape = event => {
-    if (event.keyCode !== 27) return;
-    this.closeNavigation();
-  };
-
   expand(key) {
     if (this.state.expanded.includes(key)) return;
     const expanded = this.state.expanded.slice(0);
@@ -127,12 +118,10 @@ export class NavigationMobile extends Component {
 
   closeNavigation = () => {
     this.setState({ open: false, expanded: [] });
-    window.removeEventListener("keyup", this.handleEscape);
   };
 
   openNavigation = () => {
     this.setState({ open: true, expanded: this.activeRoutes() });
-    window.addEventListener("keyup", this.handleEscape);
   };
 
   activeRoutes() {
@@ -253,7 +242,8 @@ export class NavigationMobile extends Component {
       <BodyClass className={"no-scroll"}>
         <FocusTrap
           focusTrapOptions={{
-            clickOutsideDeactivates: true
+            allowOutsideClick: true,
+            escapeDeactivates: this.closeNavigation.bind(this)
           }}
         >
           <div className="nested-nav__content">
