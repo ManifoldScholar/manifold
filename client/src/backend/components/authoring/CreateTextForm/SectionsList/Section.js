@@ -31,7 +31,7 @@ export default function Section({ section, onDelete, index }) {
 Section.displayName = "CreateTextForm.Sections.ListItem";
 
 Section.propTypes = {
-  name: PropTypes.string.isRequired,
+  section: PropTypes.exact({ id: PropTypes.string, name: PropTypes.string }),
   onDelete: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired
 };

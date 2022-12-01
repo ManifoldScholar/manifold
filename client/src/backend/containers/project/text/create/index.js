@@ -5,7 +5,7 @@ import Navigation from "backend/components/navigation";
 import lh from "helpers/linkHandler";
 import CreateTextForm from "backend/components/authoring/CreateTextForm";
 
-export default function TextCreateContainer({ project }) {
+export default function TextCreateContainer({ project, refresh }) {
   const { t } = useTranslation();
 
   return (
@@ -18,7 +18,8 @@ export default function TextCreateContainer({ project }) {
       <CreateTextForm
         cancelUrl={lh.link("backendProjectTexts", project.id)}
         name={"TBD"}
-        project={project}
+        projectId={project.id}
+        refresh={refresh}
       />
     </section>
   );
@@ -27,5 +28,6 @@ export default function TextCreateContainer({ project }) {
 TextCreateContainer.displayName = "Project.Text.Create";
 
 TextCreateContainer.propTypes = {
-  project: PropTypes.object.isRequired
+  project: PropTypes.object.isRequired,
+  refresh: PropTypes.func
 };
