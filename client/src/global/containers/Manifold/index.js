@@ -18,7 +18,6 @@ import {
 } from "actions";
 import { meAPI, requests } from "api";
 import { select, loaded } from "utils/entityUtils";
-import { closest } from "utils/domUtils";
 import ReactGA from "react-ga4";
 import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
@@ -162,14 +161,6 @@ class ManifoldContainer extends PureComponent {
     this.props.history.push("/");
   }
 
-  handleGlobalClick = event => {
-    if (!closest(event.target, ".panel-visible"))
-      return this.props.dispatch(uiVisibilityActions.panelHideAll());
-    if (event.target.classList.contains("drawer-overlay"))
-      return this.props.dispatch(uiVisibilityActions.panelHideAll());
-    return null;
-  };
-
   renderTypekit() {
     const tkId = get(this.props.settings, "attributes.theme.typekitId");
     const tkEnabled = !!tkId;
@@ -186,11 +177,7 @@ class ManifoldContainer extends PureComponent {
     );
 
     return (
-      <div
-        onClick={this.handleGlobalClick}
-        role="presentation"
-        className="global-container"
-      >
+      <div role="presentation" className="global-container">
         <div id="global-notification-container" />
         <div id="global-overlay-container" />
         <FrontendModeContext.Provider value={this.props.frontendMode}>
