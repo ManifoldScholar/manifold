@@ -16,6 +16,7 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
 
   const [sectionName, setSectionName] = useState();
   const [sections, setSections] = useState([]);
+
   const setSectionOrder = result => {
     const { draggableId, destination } = result ?? {};
     const entity = sections.find(s => s.id === draggableId);
@@ -23,9 +24,17 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
     newOrder.splice(destination.index, 0, entity);
     setSections(newOrder);
   };
+
   const handleDeleteSection = section => {
     const update = sections.filter(s => s.id !== section.id);
     setSections(update);
+  };
+
+  const handleAddSection = (e, el) => {
+    const duplicate = sections.filter(s => s.name === el.value);
+    const id = duplicate.length ? `${el.value}_${duplicate.length}` : el.value;
+    setSections([...sections, { id: uidSeed(id), name: el.value }]);
+    setSectionName(null);
   };
 
   const addSectionsToRequest = data => {
@@ -80,22 +89,21 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
             placeholder={t(
               "backend.forms.text_create.section_name_placeholder"
             )}
-            onChange={e => setSectionName(e.target.value)}
+            onChange={e => {
+              e.preventDefault();
+              setSectionName(e.target.value);
+            }}
+            onKeyDown={(e, el) => {
+              if (e.keyCode === 13) {
+                e.preventDefault();
+                handleAddSection(e, el);
+              }
+            }}
             value={sectionName}
             buttons={[
               {
                 label: t("actions.create"),
-                onClick: (e, el) => {
-                  const duplicate = sections.filter(s => s.name === el.value);
-                  const id = duplicate.length
-                    ? `${el.value}_${duplicate.length}`
-                    : el.value;
-                  setSections([
-                    ...sections,
-                    { id: uidSeed(id), name: el.value }
-                  ]);
-                  setSectionName(null);
-                }
+                onClick: handleAddSection
               }
             ]}
           />
