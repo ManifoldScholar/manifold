@@ -2,10 +2,35 @@ import styled from "@emotion/styled";
 import {
   defaultTransitionProps,
   respond,
-  reactSlideTransition,
   drawerPadding
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
+
+function drawerSlideTransition(
+  from = "right",
+  selector = "&",
+  prefix = "panel"
+) {
+  return `
+    .${prefix}-enter ~ ${selector} {
+      transform: translateX(${from === "right" ? "100%" : "-100%"});
+    }
+
+    .${prefix}-enter-active ~ ${selector} {
+      transition: transform ${defaultTransitionProps};
+      transform: translateX(0);
+    }
+
+    .${prefix}-exit ~ ${selector} {
+      transform: translateX(0);
+    }
+
+    .${prefix}-exit.${prefix}-exit-active ~ ${selector} {
+      transition: transform ${defaultTransitionProps};
+      transform: translateX(${from === "right" ? "100%" : "-100%"});
+    }
+  `;
+}
 
 export const Drawer = styled.div`
   position: fixed;
@@ -33,13 +58,13 @@ export const Drawer = styled.div`
   }
 
   &.left {
-    ${reactSlideTransition("left", "&", "drawer")}
+    ${drawerSlideTransition("left", "&", "drawer")}
     right: auto;
     left: 0;
   }
 
   &.right {
-    ${reactSlideTransition("right", "&", "drawer")}
+    ${drawerSlideTransition("right", "&", "drawer")}
     right: 0;
     left: auto;
   }
@@ -95,17 +120,17 @@ export const DrawerReader = styled(Drawer)`
     }
   }
 
-  .panel-visible & {
-    animation: notesSlide ${defaultTransitionProps} forwards;
-  }
+  animation: notesSlide ${defaultTransitionProps} forwards;
 
-  .panel-exit & {
+  .panel-exit &,
+  .drawer-exit ~ & {
     transform: translateX(0);
 
     animation: notesSlide ${defaultTransitionProps} backwards;
   }
 
-  .panel-exit.panel-exit-active & {
+  .panel-exit.panel-exit-active &,
+  .drawer-exit.drawer-exit-active ~ & {
     transform: translateX(100%);
   }
 

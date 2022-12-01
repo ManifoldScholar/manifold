@@ -43,23 +43,25 @@ export default function DrawerWrapper({
   const renderDrawerWrapper = headerId => {
     if (lockScroll === "hover") {
       return (
-        <div className={identifier}>
-          <Utility.EdgeLockScroll>
-            <Content
-              headerId={headerId}
-              handleLeaveEvent={handleLeaveEvent}
-              hasConfirm={!!closeUrl}
-              {...props}
-            />
-          </Utility.EdgeLockScroll>
-        </div>
+        <Utility.EdgeLockScroll>
+          <Content
+            headerId={headerId}
+            handleLeaveEvent={handleLeaveEvent}
+            hasConfirm={!!closeUrl}
+            {...props}
+          />
+        </Utility.EdgeLockScroll>
       );
     }
 
     if (lockScroll === "always") {
+      const Overlay =
+        identifier === "notes-drawer" || identifier === "annotations-drawer"
+          ? Styled.NotesOverlay
+          : Styled.Overlay;
       return (
-        <div className={identifier}>
-          <Styled.Overlay />
+        <>
+          <Overlay />
           <Content
             headerId={headerId}
             handleLeaveEvent={handleLeaveEvent}
@@ -67,7 +69,7 @@ export default function DrawerWrapper({
             lockScroll
             {...props}
           />
-        </div>
+        </>
       );
     }
 
