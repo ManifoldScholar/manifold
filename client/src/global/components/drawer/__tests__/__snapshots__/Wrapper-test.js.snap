@@ -14,9 +14,10 @@ exports[`global/components/drawer/Wrapper matches the snapshot 1`] = `
 >
   <div>
     <Utility.EdgeLockScroll>
-      <ForwardRef(DrawerContent)
+      <ForwardRef(Drawer.Content)
         closeCallback={[MockFunction]}
         handleLeaveEvent={[Function]}
+        hasConfirm={false}
         headerId="abcdef"
         style="backend"
         title="wrapper"

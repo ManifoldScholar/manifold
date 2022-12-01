@@ -46,11 +46,4 @@ describe("backend/components/dialog/Confirm", () => {
       .simulate("click", { preventDefault() {} });
     expect($resolveMock).toHaveBeenCalled();
   });
-
-  it("should trigger reject callback when escape is pressed", () => {
-    mount($withApp($root));
-    map.keyup({ keyCode: 27, preventDefault() {} });
-    expect($rejectMock).toHaveBeenCalled();
-  });
-
 });
