@@ -133,6 +133,10 @@ export class FormBaseInput extends PureComponent {
           type={this.props.inputType ?? this.props.type}
           placeholder={this.props.placeholder}
           onChange={this.props.onChange}
+          onKeyDown={e => {
+            if (this.props.onKeyDown)
+              this.props.onKeyDown(e, this.inputElement);
+          }}
           value={this.renderValue(this.props)}
           aria-describedby={`${idForError || ""} ${idForInstructions || ""}`}
           autoComplete={this.props.autoComplete}
