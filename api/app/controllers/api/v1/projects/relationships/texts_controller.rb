@@ -9,7 +9,7 @@ module API
           end
 
           def create
-            @text = authorize_and_create_text(text_params)
+            @text = ::Updaters::Text.new(text_params).update(@project.texts.new, creator: @current_user)
             render_single_resource @text
           end
 
