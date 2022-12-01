@@ -54,6 +54,7 @@ export default function DrawerWrapper({
             <Content
               headerId={headerId}
               handleLeaveEvent={handleLeaveEvent}
+              hasConfirm={!!closeUrl}
               {...props}
             />
           </Utility.EdgeLockScroll>
@@ -68,6 +69,7 @@ export default function DrawerWrapper({
           <Content
             headerId={headerId}
             handleLeaveEvent={handleLeaveEvent}
+            hasConfirm={!!closeUrl}
             lockScroll
             {...props}
           />
@@ -79,6 +81,7 @@ export default function DrawerWrapper({
       <Content
         headerId={headerId}
         handleLeaveEvent={handleLeaveEvent}
+        hasConfirm={!!closeUrl}
         {...props}
       />
     );

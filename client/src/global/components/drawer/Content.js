@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import PropTypes from "prop-types";
 import FocusTrap from "focus-trap-react";
 import classNames from "classnames";
 import Notifications from "global/containers/Notifications";
@@ -21,7 +22,8 @@ function DrawerContent(props, ref) {
     position = "default",
     children,
     handleLeaveEvent,
-    lockScroll = false
+    lockScroll = false,
+    hasConfirm
   } = props;
 
   const connected = useSelector(state => state.websocket.connected);
@@ -40,6 +42,14 @@ function DrawerContent(props, ref) {
       });
     });
     return Promise.all(results);
+  };
+
+  const handleEscape = e => {
+    e.preventDefault();
+    handleLeaveEvent(e);
+
+    if (hasConfirm) return false;
+    return true;
   };
 
   const drawerClasses = classNames(
@@ -66,7 +76,7 @@ function DrawerContent(props, ref) {
         focusTrapOptions={{
           checkCanFocusTrap,
           allowOutsideClick: true,
-          escapeDeactivates: handleLeaveEvent,
+          escapeDeactivates: handleEscape,
           returnFocusOnDeactivate
         }}
       >
@@ -90,3 +100,22 @@ function DrawerContent(props, ref) {
 }
 
 export default forwardRef(DrawerContent);
+
+DrawerContent.displayName = "Drawer.Content";
+
+DrawerContent.propTypes = {
+  headerId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  focusTrap: PropTypes.bool,
+  ariaLabel: PropTypes.string,
+  returnFocusOnDeactivate: PropTypes.bool,
+  context: PropTypes.string,
+  entrySide: PropTypes.oneOf(["right", "left"]),
+  size: PropTypes.oneOf(["default", "wide", "flexible"]),
+  padding: PropTypes.oneOf(["none", "default", "large"]),
+  position: PropTypes.oneOf(["default", "overlay"]),
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+  handleLeaveEvent: PropTypes.func.isRequired,
+  lockScroll: PropTypes.bool,
+  hasConfirm: PropTypes.bool
+};
