@@ -14,7 +14,7 @@ exports[`global/components/UIPanel matches the snapshot 1`] = `
     <focus-trap-react
       focusTrapOptions={
         Object {
-          "clickOutsideDeactivates": true,
+          "clickOutsideDeactivates": [Function],
           "escapeDeactivates": [Function],
         }
       }
