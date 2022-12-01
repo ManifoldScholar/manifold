@@ -5,8 +5,7 @@ import classNames from "classnames";
 import Notifications from "global/containers/Notifications";
 import FrontMatter from "./FrontMatter";
 import { DrawerContext } from "helpers/contexts";
-import { useSelector } from "react-redux";
-import { usePreventBodyScroll } from "hooks";
+import { usePreventBodyScroll, useFromStore } from "hooks";
 
 function DrawerContent(props, ref) {
   const {
@@ -26,7 +25,7 @@ function DrawerContent(props, ref) {
     hasConfirm
   } = props;
 
-  const connected = useSelector(state => state.websocket.connected);
+  const connected = useFromStore("websocket.connected");
   usePreventBodyScroll(lockScroll);
 
   // Waits for animation to finish before focusing in trap.
