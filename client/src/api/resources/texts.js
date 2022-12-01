@@ -17,9 +17,9 @@ export default {
     };
   },
 
-  create(text) {
+  create(projectId, text) {
     return {
-      endpoint: "/api/v1/texts",
+      endpoint: `/api/v1/projects/${projectId}/relationships/texts`,
       method: "POST",
       options: {
         body: JSON.stringify({ type: "texts", data: text })

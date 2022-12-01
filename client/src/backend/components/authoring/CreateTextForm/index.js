@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
@@ -6,10 +6,13 @@ import Form from "global/components/form";
 import SectionsList from "./SectionsList";
 import { useUIDSeed } from "react-uid";
 import { textsAPI } from "api";
+import lh from "helpers/linkHandler";
+import { useHistory } from "react-router-dom";
 
-export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
+export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
   const { t } = useTranslation();
   const uidSeed = useUIDSeed();
+  const history = useHistory();
 
   const [sectionName, setSectionName] = useState();
   const [sections, setSections] = useState([]);
@@ -25,17 +28,28 @@ export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
     setSections(update);
   };
 
-  const defaultText = {
-    relationships: {
-      project: { id: project.id }
-    }
+  const addSectionsToRequest = data => {
+    return {
+      attributes: {
+        sectionNames: sections.map(s => s.name),
+        ...data.attributes
+      }
+    };
   };
+
+  const createText = model => {
+    return textsAPI.create(projectId, model);
+  };
+
+  const onSuccess = useCallback(() => {
+    if (refresh) refresh();
+    history.push(lh.link("backendProjectTexts", projectId));
+  }, [history, projectId, refresh]);
 
   return (
     <FormContainer.Form
-      model={defaultText}
-      create={textsAPI.create}
-      update={textsAPI.update}
+      create={createText}
+      formatData={addSectionsToRequest}
       name="backend-text-create"
       className="form-secondary"
       onSuccess={onSuccess}
@@ -51,10 +65,10 @@ export default function CreateTextForm({ cancelUrl, project, onSuccess }) {
         instructions={t("backend.forms.text_create.cover_instructions")}
       >
         <Form.Upload
+          layout="portrait"
           accepts="images"
           name="attributes[cover]"
           readFrom="attributes[coverStyles][small]"
-          remove="attributes[removeCover]"
         />
       </Form.FieldGroup>
       <Form.FieldGroup
@@ -105,6 +119,6 @@ CreateTextForm.displayName = "Project.Texts.CreateForm";
 
 CreateTextForm.propTypes = {
   cancelUrl: PropTypes.string,
-  project: PropTypes.object.isRequired,
+  projectId: PropTypes.string.isRequired,
   onSuccess: PropTypes.func
 };
