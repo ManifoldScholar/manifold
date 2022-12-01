@@ -43,10 +43,8 @@ export const BarReader = styled.div`
   color: var(--strong-color);
   background-color: var(--box-medium-bg-color);
 
-  .notes-drawer & {
-    ${drawerPadding("padding-right", "narrow")}
-    ${drawerPadding("padding-left", "narrow")}
-  }
+  ${drawerPadding("padding-right", "narrow")}
+  ${drawerPadding("padding-left", "narrow")}
 `;
 
 export const Title = styled.div`

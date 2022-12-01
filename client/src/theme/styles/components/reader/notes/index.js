@@ -1,4 +1,3 @@
-import base from "./base";
 import filteredList from "./filteredList";
 import filters from "./filters";
 import list from "./list";
@@ -10,6 +9,5 @@ ${message}
 ${list}
 ${groupFilter}
 ${filters}
-${base}
 ${filteredList}
 `;

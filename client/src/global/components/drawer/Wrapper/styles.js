@@ -10,54 +10,57 @@ export const Overlay = styled.div`
   background-color: ${transparentize("neutralBlack", 0.35)};
   z-index: 400;
 
-  .drawer-enter & {
+  .drawer-enter ~ & {
     opacity: 0.01;
   }
 
-  .drawer-enter-active & {
+  .drawer-enter-active ~ & {
     opacity: 1;
     transition: opacity ${defaultTransitionProps};
   }
 
-  .drawer-exit & {
+  .drawer-exit ~ & {
     opacity: 1;
   }
 
-  .drawer-exit-active & {
+  .drawer-exit-active ~ & {
     opacity: 0.01;
     transition: opacity ${defaultTransitionProps};
   }
+`;
 
-  .annotations-drawer & {
-    z-index: 150;
-  }
-
-  .notes-drawer & {
-    @keyframes drawerOverlayFade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    opacity: 0;
-    z-index: 150;
-    animation: drawerOverlayFade ${defaultTransitionProps} forwards;
-
-    .panel-visible & {
-      opacity: 1;
-    }
-
-    .panel-exit & {
-      opacity: 1;
-      animation: drawerOverlayFade ${defaultTransitionProps} backwards;
-    }
-
-    .panel-exit.panel-exit-active & {
+export const NotesOverlay = styled(Overlay)`
+  @keyframes drawerOverlayFade {
+    from {
       opacity: 0;
     }
+
+    to {
+      opacity: 1;
+    }
   }
+
+  opacity: 0;
+  z-index: 150;
+  animation: drawerOverlayFade ${defaultTransitionProps} forwards;
+
+  .panel-visible &,
+  .drawer-enter-done ~ & {
+    opacity: 1;
+  }
+
+  .panel-exit &,
+  .drawer-exit ~ & {
+    opacity: 1;
+    animation: drawerOverlayFade ${defaultTransitionProps} backwards;
+  }
+
+  .panel-exit.panel-exit-active &,
+  .drawer-exit.drawer-exit-active ~ & {
+    opacity: 0;
+  }
+`;
+
+export const AnnotationsOverlay = styled(Overlay)`
+  z-index: 150;
 `;
