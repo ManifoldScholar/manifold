@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`backend/containers/makers/Edit matches the snapshot when rendered 1`] = `"<header class=\\"drawer-header\\"><h2 class=\\"drawer-header__title\\"><span class=\\"drawer-header__title-text\\">John Milton</span></h2><div class=\\"drawer-header__utility utility-button-group utility-button-group--inline\\"></div></header><section></section>"`;
+exports[`backend/containers/makers/Edit matches the snapshot when rendered 1`] = `"<header class=\\"css-1rjb770-Header eem09g54\\"><h2 class=\\"css-u5h9zp-Title eem09g53\\"><span class=\\"css-1n1rp41-TitleText eem09g51\\">John Milton</span></h2><div class=\\"utility-button-group utility-button-group--inline css-91qewl-UtilityButtons eem09g50\\"></div></header><section></section>"`;
