@@ -32,13 +32,11 @@ class DialogConfirm extends PureComponent {
 
   componentDidMount() {
     if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
-    window.addEventListener("keyup", this.handleKeyPress);
   }
 
   componentWillUnmount() {
     if (this.context.unpauseKeyboardEvents)
       this.context.unpauseKeyboardEvents();
-    window.removeEventListener("keyup", this.handleKeyPress);
   }
 
   get buttonClasses() {
@@ -66,11 +64,6 @@ class DialogConfirm extends PureComponent {
       ? this.props.t("common.no_title_case")
       : this.props.t("common.okay");
   }
-
-  handleKeyPress = event => {
-    event.preventDefault();
-    if (event.keyCode === 27) return this.handleRejectClick(event);
-  };
 
   handleResolveClick = event => {
     event.preventDefault();
