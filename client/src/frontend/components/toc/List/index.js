@@ -54,13 +54,11 @@ class ContentBlockTocBlockList extends PureComponent {
       );
     }
 
-    const anchor = node.anchor ? `#${node.anchor}` : "";
-
     return (
       <li key={this.keyCount++}>
         <Node
           id={node.id}
-          anchor={anchor}
+          anchor={node.anchor}
           title={node.label}
           className={this.props.blockClass}
           textSlug={this.text.attributes.slug}
