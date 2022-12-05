@@ -25,6 +25,7 @@ class DialogWrapper extends PureComponent {
     children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     labelledBy: PropTypes.string,
     describedBy: PropTypes.string,
+    onEsc: PropTypes.func,
     t: PropTypes.func
   };
 
@@ -70,7 +71,7 @@ class DialogWrapper extends PureComponent {
 
   doClose() {
     if (this.props.closeUrl) return this.closeWithUrlChange();
-    if (!this.props.closeHandler) return this.closeWithCallback();
+    if (this.props.closeCallback) return this.closeWithCallback();
     return this.closeWithNoAction();
   }
 
@@ -82,6 +83,12 @@ class DialogWrapper extends PureComponent {
   handleCloseClick = event => {
     event.stopPropagation();
     this.doClose();
+  };
+
+  handleEscape = e => {
+    e.stopPropagation();
+    if (this.props.onEsc) return this.props.onEsc(e);
+    return this.doClose();
   };
 
   style() {
@@ -113,7 +120,7 @@ class DialogWrapper extends PureComponent {
         <BodyClass className={"no-scroll"}>
           <FocusTrap
             focusTrapOptions={{
-              escapeDeactivates: this.doClose.bind(this)
+              escapeDeactivates: this.handleEscape
             }}
           >
             <div className="dialog-wrapper">

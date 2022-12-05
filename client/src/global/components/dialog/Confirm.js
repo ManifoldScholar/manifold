@@ -86,6 +86,7 @@ class DialogConfirm extends PureComponent {
             closeOnOverlayClick={false}
             labelledBy={`${id}-label`}
             describedBy={`${id}-description`}
+            onEsc={this.props.reject}
           >
             <header className="dialog__header">
               <h2 id={`${id}-label`}>
