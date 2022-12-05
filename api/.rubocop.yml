@@ -193,6 +193,9 @@ Style/StringConcatenation:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
 Style/TrailingCommaInHashLiteral:
   Enabled: false
 
@@ -206,7 +209,7 @@ Style/FormatStringToken:
   Enabled: false
 
 Style/ClassCheck:
-  Enabled: true
+  Enabled: false
 
 Style/Documentation:
   Enabled: false

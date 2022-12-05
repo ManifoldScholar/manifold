@@ -1,0 +1,33 @@
+# Custom predicates implemented for dry-logic
+
+en:
+  custom_predicates: &custom
+    rails_blank?: "must be blank"
+
+    rails_present?: "cannot be blank"
+
+    email?: "must be an email"
+
+    global_id_uri?: "must be a GlobalID URI"
+
+    global_id?: "must be a GlobalID"
+
+    entitlement_subject_gid?: "must be a GlobalID for an entitlement subject"
+
+    entitlement_target_gid?: "must be a GlobalID for an entitlement subject"
+
+    model?: "must be a model"
+
+    model_list?: "must be an array of models"
+
+    model_class?: "must be a model class"
+
+    model_class_list?: "must be an array of model classes"
+
+    specific_model?: "must be a model of type %{model_name}"
+  dry_schema:
+    errors:
+      <<: *custom
+  dry_validation:
+    errors:
+      <<: *custom

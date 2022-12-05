@@ -35,4 +35,6 @@ end
 
 Dry::Transaction::Callable.prepend TransactionCallablePatch
 
+Dry::Validation.load_extensions :predicates_as_macros
+
 ActiveRecord::Type.register :indifferent_hash, OurTypes::IndifferentHash

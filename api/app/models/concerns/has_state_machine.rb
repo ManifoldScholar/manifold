@@ -8,7 +8,7 @@ module HasStateMachine
   include HasReloadHooks
 
   included do
-    delegate :can_transition_to?, :transition_to, :transition_to!, :trigger, :trigger!, :available_events, to: :state_machine
+    delegate :can_transition_to?, :in_state?, :transition_to, :transition_to!, :trigger, :trigger!, :available_events, to: :state_machine
   end
 
   def can_trigger?(event_name)
