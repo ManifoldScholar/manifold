@@ -9,23 +9,27 @@ import { breakpoints } from "theme/styles/variables/media";
 function drawerSlideTransition(
   from = "right",
   selector = "&",
-  prefix = "panel"
+  prefix = "drawer"
 ) {
   return `
-    .${prefix}-enter ~ ${selector} {
+    .${prefix}-enter ~ ${selector},
+    .${prefix}-enter ${selector} {
       transform: translateX(${from === "right" ? "100%" : "-100%"});
     }
 
-    .${prefix}-enter-active ~ ${selector} {
+    .${prefix}-enter-active ~ ${selector},
+    .${prefix}-enter-active ${selector} {
       transition: transform ${defaultTransitionProps};
       transform: translateX(0);
     }
 
-    .${prefix}-exit ~ ${selector} {
+    .${prefix}-exit ~ ${selector},
+    .${prefix}-exit ${selector} {
       transform: translateX(0);
     }
 
-    .${prefix}-exit.${prefix}-exit-active ~ ${selector} {
+    .${prefix}-exit.${prefix}-exit-active ~ ${selector},
+    .${prefix}-exit.${prefix}-exit-active ${selector} {
       transition: transform ${defaultTransitionProps};
       transform: translateX(${from === "right" ? "100%" : "-100%"});
     }
@@ -58,13 +62,12 @@ export const Drawer = styled.div`
   }
 
   &.left {
-    ${drawerSlideTransition("left", "&", "drawer")}
-    right: auto;
+    ${drawerSlideTransition("left")}
     left: 0;
   }
 
   &.right {
-    ${drawerSlideTransition("right", "&", "drawer")}
+    ${drawerSlideTransition()}
     right: 0;
     left: auto;
   }
@@ -110,27 +113,11 @@ export const DrawerReader = styled(Drawer)`
   z-index: 150;
   padding: 0 !important;
 
-  @keyframes notesSlide {
-    from {
-      transform: translateX(100%);
-    }
-
-    to {
-      transform: translateX(0);
-    }
-  }
-
-  animation: notesSlide ${defaultTransitionProps} forwards;
-
-  .panel-exit &,
-  .drawer-exit ~ & {
+  .panel-exit & {
     transform: translateX(0);
-
-    animation: notesSlide ${defaultTransitionProps} backwards;
   }
 
-  .panel-exit.panel-exit-active &,
-  .drawer-exit.drawer-exit-active ~ & {
+  .panel-exit.panel-exit-active & {
     transform: translateX(100%);
   }
 
