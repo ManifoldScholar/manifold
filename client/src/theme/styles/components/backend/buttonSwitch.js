@@ -14,6 +14,7 @@ export default `
     &__side {
       ${buttonUnstyled}
       ${utilityPrimary}
+      position: relative;
       display: flex;
       flex-grow: 1;
       align-items: center;
@@ -65,8 +66,10 @@ export default `
 
     &__input {
       position: absolute;
-      z-index: -1;
       opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
     }
 
     .drawer-backend & {
