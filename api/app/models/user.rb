@@ -67,6 +67,7 @@ class User < ApplicationRecord
   before_validation :infer_role!
 
   after_save :sync_global_role!, if: :saved_change_to_role?
+  after_save :create_entitlements_for_email!, if: :saved_change_to_email?
 
   # Attachments
   manifold_has_attached_file :avatar, :image
@@ -251,6 +252,11 @@ class User < ApplicationRecord
     return if password.nil?
 
     errors.add(:password, "can't be blank") if password.blank?
+  end
+
+  # @return [void]
+  def create_entitlements_for_email!
+    Entitlements::CreateFromUserJob.perform_later self
   end
 
   concerning :Classification do

@@ -219,6 +219,62 @@ ActiveRecord::Schema.define(version: 2023_01_25_004558) do
     t.index ["project_id"], name: "index_content_blocks_on_project_id"
   end
 
+  create_table "entitlement_import_row_transitions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "to_state", null: false
+    t.jsonb "metadata", default: {}
+    t.integer "sort_key", null: false
+    t.uuid "entitlement_import_row_id", null: false
+    t.boolean "most_recent", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["entitlement_import_row_id", "most_recent"], name: "index_entitlement_import_row_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["entitlement_import_row_id", "sort_key"], name: "index_entitlement_import_row_transitions_parent_sort", unique: true
+  end
+
+  create_table "entitlement_import_rows", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "entitlement_import_id", null: false
+    t.uuid "entitlement_id"
+    t.string "subject_type"
+    t.uuid "subject_id"
+    t.string "target_type"
+    t.uuid "target_id"
+    t.bigint "line_number", null: false
+    t.citext "email"
+    t.date "expires_on"
+    t.text "messages", default: [], null: false, array: true
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["email"], name: "index_entitlement_import_rows_on_email"
+    t.index ["entitlement_id"], name: "index_entitlement_import_rows_on_entitlement_id"
+    t.index ["entitlement_import_id", "line_number"], name: "index_entitlement_import_rows_ordering"
+    t.index ["entitlement_import_id"], name: "index_entitlement_import_rows_on_entitlement_import_id"
+    t.index ["subject_type", "subject_id"], name: "index_entitlement_import_rows_on_subject_type_and_subject_id"
+    t.index ["target_type", "target_id"], name: "index_entitlement_import_rows_on_target_type_and_target_id"
+  end
+
+  create_table "entitlement_import_transitions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "to_state", null: false
+    t.jsonb "metadata", default: {}
+    t.integer "sort_key", null: false
+    t.uuid "entitlement_import_id", null: false
+    t.boolean "most_recent", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["entitlement_import_id", "most_recent"], name: "index_entitlement_import_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["entitlement_import_id", "sort_key"], name: "index_entitlement_import_transitions_parent_sort", unique: true
+  end
+
+  create_table "entitlement_imports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "creator_id"
+    t.citext "name", null: false
+    t.jsonb "file_data"
+    t.bigint "entitlement_import_rows_count", default: 0, null: false
+    t.text "messages", default: [], null: false, array: true
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["creator_id"], name: "index_entitlement_imports_on_creator_id"
+  end
+
   create_table "entitlement_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "name", null: false
     t.text "kind", default: "unknown", null: false
@@ -1460,6 +1516,11 @@ ActiveRecord::Schema.define(version: 2023_01_25_004558) do
   add_foreign_key "annotations", "reading_groups", on_delete: :nullify
   add_foreign_key "cached_external_source_links", "cached_external_sources", on_delete: :cascade
   add_foreign_key "cached_external_source_links", "texts", on_delete: :cascade
+  add_foreign_key "entitlement_import_row_transitions", "entitlement_import_rows", on_delete: :cascade
+  add_foreign_key "entitlement_import_rows", "entitlement_imports", on_delete: :cascade
+  add_foreign_key "entitlement_import_rows", "entitlements", on_delete: :nullify
+  add_foreign_key "entitlement_import_transitions", "entitlement_imports", on_delete: :cascade
+  add_foreign_key "entitlement_imports", "users", column: "creator_id", on_delete: :nullify
   add_foreign_key "entitlement_user_links", "entitlements", on_delete: :cascade
   add_foreign_key "entitlement_user_links", "users", on_delete: :cascade
   add_foreign_key "entitlements", "entitlers", on_delete: :restrict

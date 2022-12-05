@@ -4,7 +4,7 @@ module Entitlements
 
     include ActiveSupport::Configurable
 
-    TYPE = Types::Coercible::Hash.map(Types::ENUM_OF_TYPE[RoleName], Types::Bool.default { false })
+    TYPE = ::Types::Coercible::Hash.map(::Types::ENUM_OF_TYPE[RoleName], ::Types::Bool.default { false })
 
     included do
       include StoreModel::Model
