@@ -11,6 +11,14 @@ export default function UIPanel(props) {
     "panel-visible": visibility
   });
 
+  const handleOutsideClick = e => {
+    const header = document.querySelector(".reader-header");
+    if (header.contains(e.target)) {
+      return true;
+    }
+    return props.hidePanel(e);
+  };
+
   return (
     <CSSTransition
       key={props.id}
@@ -22,7 +30,7 @@ export default function UIPanel(props) {
       <div className={visibilityClass}>
         <FocusTrap
           focusTrapOptions={{
-            clickOutsideDeactivates: e => props.hidePanel(e),
+            allowOutsideClick: handleOutsideClick,
             escapeDeactivates: e => props.hidePanel(e)
           }}
         >
