@@ -1,0 +1,12 @@
+target,subject,expires_on
+dustin_ankunding@example.org,gid://entitlements/Project/7a1338ca-5af3-4122-b164-1846e520d253,2023-12-31
+perla_cormier@example.com,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,2023-12-31
+bennie_kling@example.net,subscriber,2023-12-31
+remedios_toy@example.com,gid://entitlements/Project/7a1338ca-5af3-4122-b164-1846e520d253,2023-12-31
+tyree_jakubowski@example.org,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,2023-12-31
+mervin_pacocha@example.net,subscriber,2023-12-31
+mechelle_jacobs@example.net,gid://entitlements/Project/7a1338ca-5af3-4122-b164-1846e520d253,2023-12-31
+hiram_dach@example.net,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,2023-12-31
+catrice_fahey@example.org,subscriber,2023-12-31
+admin@castironcoding.com,gid://entitlements/Project/7a1338ca-5af3-4122-b164-1846e520d253,2023-12-31
+does.not.exist+15@example.org,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,2023-12-31

@@ -210,6 +210,18 @@ module Validation
     params.permit(param_config)
   end
 
+  def entitlement_import_params
+    params.require(:data)
+
+    attributes = [
+      :name, attachment(:file),
+    ]
+
+    param_config = structure_params(attributes: attributes)
+
+    params.permit(param_config)
+  end
+
   # rubocop:disable Metrics/MethodLength
   def resource_params
     params.require(:data)

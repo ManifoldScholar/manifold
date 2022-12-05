@@ -1,5 +1,6 @@
-class Entitlement < ApplicationRecord
+# frozen_string_literal: true
 
+class Entitlement < ApplicationRecord
   include Authority::Abilities
   include HasStateMachine
   include SerializedAbilitiesFor

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 # A semantic wrapper around an `entity` who can entitle a {User}
 # with any number of given roles.
 class Entitler < ApplicationRecord
-  ACCEPTED_ENTITY_TYPES = %w[User].freeze
+  ACCEPTED_ENTITY_TYPES = %w[EntitlementImport User].freeze
 
   upsert_keys %i[entity_id entity_type]
 
