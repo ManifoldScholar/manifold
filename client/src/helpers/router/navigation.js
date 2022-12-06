@@ -362,6 +362,12 @@ class Navigation {
         route: "backendRecordsFeatures",
         entity: "feature",
         ability: "update"
+      },
+      {
+        label: "Entitlements",
+        route: "backendRecordsEntitlements",
+        entity: "entitlementImport",
+        ability: "update"
       }
     ];
   });
