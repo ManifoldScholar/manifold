@@ -1,6 +1,4 @@
-require "active_support/core_ext/string"
-require "active_support/concern"
-require "active_support/callbacks"
+# frozen_string_literal: true
 
 # Updaters are responsible for mapping JSON-API structured params to model updates.
 # This module acts as a base mix-in for model-specific updaters.
@@ -8,11 +6,12 @@ module Updaters
   extend ActiveSupport::Concern
 
   included do
-    include ActiveSupport::Callbacks
-    attr_accessor :id, :type, :data, :attributes, :relationships
+    extend ActiveModel::Callbacks
 
-    define_callbacks :update_attributes, :update_relationships, :update, :save
+    define_model_callbacks :update_attributes, :update_relationships, :update, :save
   end
+
+  attr_accessor :id, :type, :data, :attributes, :relationships
 
   def initialize(params)
     @attributes = params.dig(:data, :attributes)&.to_h || {}
@@ -44,11 +43,16 @@ module Updaters
   protected
 
   def save_model(model)
+    @model = model
+
     saved = false
+
     run_callbacks "save" do
       saved = model.save
     end
+
     model.reload if model.id && saved
+
     saved
   end
 
