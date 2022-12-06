@@ -69,7 +69,7 @@ function SectionListItem(props) {
           <Styled.Button as={Link} to={editUrl} aria-label={t("actions.edit")}>
             <Utility.IconComposer size={24} icon="annotate24" />
           </Styled.Button>
-          <Styled.DragHandle {...dragHandleProps}>
+          <Styled.DragHandle as="div" {...dragHandleProps}>
             <Utility.IconComposer size={30} icon="grabber32" />
           </Styled.DragHandle>
         </Styled.ButtonGroup>
