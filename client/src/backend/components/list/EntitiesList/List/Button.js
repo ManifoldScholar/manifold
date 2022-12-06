@@ -10,7 +10,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
 
   static propTypes = {
     path: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(["add"]),
+    type: PropTypes.oneOf(["add", "import"]),
     icon: PropTypes.string,
     text: PropTypes.string.isRequired,
     authorizedFor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -28,6 +28,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
   get icon() {
     if (this.props.icon) return this.props.icon;
     if (this.type === "add") return "circlePlus32";
+    if (this.type === "import") return "export24";
   }
 
   get text() {
