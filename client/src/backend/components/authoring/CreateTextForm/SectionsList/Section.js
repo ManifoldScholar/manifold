@@ -15,9 +15,9 @@ export default function Section({ section, onDelete, index }) {
         >
           <span>{section.name}</span>
           <Styled.ButtonGroup>
-            <button onClick={() => onDelete(section.id)}>
+            <Styled.Button onClick={() => onDelete(section.id)}>
               <IconComposer icon="delete32" size={24} />
-            </button>
+            </Styled.Button>
             <Styled.DragHandle {...provided.dragHandleProps}>
               <IconComposer icon="grabber32" size={24} />
             </Styled.DragHandle>
