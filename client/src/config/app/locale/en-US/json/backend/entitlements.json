@@ -11,6 +11,12 @@
       "expiration_label": "Expiration",
       "expiration_instructions": "Enter YYYY/MM/DD or a human-readable string, e.g. 'in one year'",
       "submit_label": "Save Entitlement"
-    }
+    },
+    "header": "Grant Entitlements",
+    "user_select_label": "Who is the entitlement for?",
+    "user_select_placeholder": "Select a User or Reading Group",
+    "expiration_label": "Expiration",
+    "expiration_instructions": "Enter YYYY/MM/DD or a human-readable string, e.g. 'in one year'",
+    "submit_label": "Save Entitlement"
   }
 }

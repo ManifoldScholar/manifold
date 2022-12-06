@@ -828,10 +828,19 @@ const routes = {
         },
         {
           name: "backendRecordsEntitlements",
-          exact: true,
+          exact: false,
           component: "EntitlementImports",
           path: "/backend/records/entitlements",
-          helper: () => `/backend/records/entitlements`
+          helper: () => `/backend/records/entitlements`,
+          routes: [
+            {
+              name: "backendRecordsEntitlementsNew",
+              exact: false,
+              component: "EntitlementImportsNew",
+              path: "/backend/records/entitlements/new",
+              helper: () => `/backend/records/entitlements/new`
+            }
+          ]
         }
       ]
     },
