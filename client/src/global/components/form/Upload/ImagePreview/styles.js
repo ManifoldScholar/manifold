@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
-import { formLabelPrimary, buttonUnstyled } from "theme/styles/mixins";
+import {
+  formLabelPrimary,
+  buttonUnstyled,
+  defaultFocusStyle
+} from "theme/styles/mixins";
 
 export const Preview = styled.div`
   display: grid;
@@ -54,6 +58,11 @@ export const Button = styled.button`
   text-transform: inherit;
   letter-spacing: inherit;
   pointer-events: auto;
+
+  /* Needed to override -moz-focusing default on FF */
+  &:focus-visible {
+    ${defaultFocusStyle}
+  }
 `;
 
 export const Image = styled.img`

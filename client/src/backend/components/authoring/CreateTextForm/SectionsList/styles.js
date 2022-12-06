@@ -29,19 +29,17 @@ export const Section = styled.li`
   `}
 `;
 
-export const DragHandle = styled.button``;
-
 export const ButtonGroup = styled.div`
   display: flex;
   flex-wrap: nowrap;
   gap: 12px;
+`;
 
-  > button {
-    ${buttonUnstyled}
-    ${utilityPrimary}
-  }
+export const Button = styled.button`
+  ${buttonUnstyled}
+  ${utilityPrimary}
+`;
 
-  > ${DragHandle} {
-    cursor: grab;
-  }
+export const DragHandle = styled(Button)`
+  cursor: grab;
 `;
