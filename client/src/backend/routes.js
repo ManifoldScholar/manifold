@@ -825,6 +825,13 @@ const routes = {
           component: "FeaturesList",
           path: "/backend/records/features",
           helper: () => `/backend/records/features`
+        },
+        {
+          name: "backendRecordsEntitlements",
+          exact: true,
+          component: "EntitlementImports",
+          path: "/backend/records/entitlements",
+          helper: () => `/backend/records/entitlements`
         }
       ]
     },
