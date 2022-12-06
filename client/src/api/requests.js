@@ -35,6 +35,7 @@ export default {
   beUserCreate: "backend-user-create",
   beUserUpdate: "backend-user-update",
   beUserDestroy: "backend-user-destroy",
+  beEntitlementImport: "backend-entitlement-import-create",
   beEntitlementTargets: "backend-entitlement-targets",
   beProjectEntitlement: "backend-project-entitlement",
   beProjectEntitlements: "backend-project-entitlements",
