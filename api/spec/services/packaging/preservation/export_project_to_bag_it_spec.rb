@@ -39,7 +39,7 @@ RSpec.describe Packaging::Preservation::ExportProjectToBagIt, interaction: true,
         e.to execute_safely.and keep_the_same(ProjectExport, :count)
       end
 
-      expect(@outcome).to be_invalid.and have(1).error_on(:base)
+      expect(@outcome).to be_invalid
     end
   end
 end
