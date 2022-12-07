@@ -15,7 +15,7 @@ RSpec.describe Ingestions::Converters::MsWord do
       end
     end
 
-    it "extracts media files to dirs matching source file name" do
+    it "extracts media files to dirs matching source file name", odd_fs: true do
       @sources.each do |source|
         image_path = Pathname.new(File.join(context.source_root, File.basename(source, ".*"), "media", "1.jpeg"))
         expect(File.file?(image_path)).to eq true
@@ -30,7 +30,7 @@ RSpec.describe Ingestions::Converters::MsWord do
       let!(:parsed) { Nokogiri::HTML output.result }
       let(:media_tags) { parsed.xpath("//img | //image | //video | //audio") }
 
-      it "relativizes the media tag src paths" do
+      it "relativizes the media tag src paths", odd_fs: true do
         srcs = media_tags.map { |tag| tag["src"] }
         expect(srcs.all? { |src| src.start_with? "/" }).to eq false
       end

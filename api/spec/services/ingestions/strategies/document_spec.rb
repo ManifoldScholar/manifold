@@ -248,16 +248,16 @@ RSpec.describe Ingestions::Strategies::Document do
 
     let(:path) { Rails.root.join("spec", "data", "ingestion", "ms_word", "example.docx") }
 
-    it "correctly sets the text title based on styled title text" do
+    it "correctly sets the text title based on styled title text", odd_fs: true do
       expect(manifest["relationships"]["text_titles"][0]["value"]).to eq "Text Styled as Title"
     end
 
-    it "correctly sets the text section based on styled title text" do
+    it "correctly sets the text section based on styled title text", odd_fs: true do
       expect(manifest["relationships"]["text_sections"][0]["name"]).to eq "Text Styled as Title"
     end
 
 
-    it "has an ingestion source for document and each media item" do
+    it "has an ingestion source for document and each media item", odd_fs: true do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 2
     end
 
