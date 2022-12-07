@@ -38,7 +38,10 @@ export default function TOCEntry({
           <Styled.Button as={Link} to={editUrl} aria-label={t("actions.edit")}>
             <Utility.IconComposer size={24} icon="annotate24" />
           </Styled.Button>
-          <Styled.DragHandle {...dragHandleProps}>
+          <Styled.DragHandle
+            aria-describedby="toc-drag-handle-instructions"
+            {...dragHandleProps}
+          >
             <Utility.IconComposer size={30} icon="grabber32" />
           </Styled.DragHandle>
         </Styled.ButtonGroup>

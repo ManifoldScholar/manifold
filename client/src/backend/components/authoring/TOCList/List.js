@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Tree, { mutateTree, moveItemOnTree } from "@atlaskit/tree";
 import Entry from "./TOCEntry";
 import {
@@ -14,6 +15,8 @@ import { useApiCallback } from "hooks";
 import * as Styled from "./styles";
 
 export default function TOCList({ tree, setTree, textId }) {
+  const { t } = useTranslation();
+
   const updateText = useApiCallback(textsAPI.update);
 
   const onReorderTOC = async newTree => {
@@ -61,13 +64,16 @@ export default function TOCList({ tree, setTree, textId }) {
   };
 
   const renderItem = ({ item, provided, snapshot, depth }) => {
+    const dragHandleProps = provided.dragHandleProps;
+    delete dragHandleProps["aria-roledescription"];
+
     return (
       <Entry
         entry={item}
         depth={depth}
         innerRef={provided.innerRef}
         draggableProps={provided.draggableProps}
-        dragHandleProps={provided.dragHandleProps}
+        dragHandleProps={dragHandleProps}
         isDragging={snapshot.isDragging}
         isdropTarget={snapshot.combineTargetFor}
         placeholder={provided.placeholder}
@@ -90,6 +96,9 @@ export default function TOCList({ tree, setTree, textId }) {
         isNestingEnabled
         offsetPerLevel={0}
       />
+      <span className="screen-reader-text" id="toc-drag-handle-instructions">
+        {t("backend.drag_handle_instructions")}
+      </span>
     </Styled.ScrollContainer>
   ) : null;
 }

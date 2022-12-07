@@ -653,6 +653,7 @@
     "slug_placeholder": "Enter Journal Volume Slug",
     "update_volume": "Update Journal Volume",
     "create_volume": "Create Journal Volume",
-    "number": "Number"
+    "number": "Number",
+    "drag_handle_instructions": "Press space bar to start a drag. When dragging you can use the arrow keys to move the item around and escape to cancel. Some screen readers may require you to be in focus mode or to use your pass through key."
   }
 }
