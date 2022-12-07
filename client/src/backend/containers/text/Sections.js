@@ -22,8 +22,8 @@ export default function TextSectionsContainer({ text, route, refresh }) {
         wide: true,
         lockScrollClickCloses: false,
         closeUrl,
-        size: "authoring",
-        padding: "authoring"
+        size: "fixed",
+        padding: "xl"
       },
       childProps: {
         textId: text.id,
