@@ -74,6 +74,7 @@ export default `
 
       a {
         font-size: 17px;
+        hyphens: none;
 
         &.active {
           border-bottom: none;
