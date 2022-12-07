@@ -57,6 +57,14 @@ class EntitlementKind::Subscription < EntitlementKind
   end
 end
 
+class EntitlementKind::Journal < EntitlementKind
+  scoped!
+
+  def applies_to?(entitlement)
+    entitlement.for_journal?
+  end
+end
+
 class EntitlementKind::Project < EntitlementKind
   scoped!
 

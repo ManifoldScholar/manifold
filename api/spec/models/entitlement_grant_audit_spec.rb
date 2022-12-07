@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe EntitlementGrantAudit, type: :model do
   let!(:entitlement_target) { FactoryBot.create :user }
@@ -25,13 +27,13 @@ RSpec.describe EntitlementGrantAudit, type: :model do
   end
 
   before do
-    Entitlements::SyncStaticModels.run!
+    ManifoldApi::Container["entitlements.sync_static_models"].()
 
     refresh!
   end
 
   def refresh!
-    EntitlementGrant.refresh!
+    ManifoldApi::Container["entitlements.populate_grants"].()
 
     described_class.refresh!
   end
