@@ -4,7 +4,13 @@ module EntitlementImports
   class GenerateFake
     include Dry::Monads[:result, :do]
 
-    HEADERS = %w[email subject expires_on].freeze
+    HEADERS = %w[email subject expiration first_name last_name].freeze
+
+    EXPIRATIONS = [
+      "in 1 year",
+      "in 2 months",
+      "6 weeks from now"
+    ].freeze
 
     def call
       content = yield generate_csv
@@ -19,15 +25,17 @@ module EntitlementImports
     private
 
     def generate_csv
-      emails = yield find_emails
+      details = yield find_details
 
       subject = yield cycle_subjects
+
+      expirations = EXPIRATIONS.cycle
 
       content = CSV.generate do |csv|
         csv << HEADERS
 
-        emails.each do |email|
-          csv << [email, subject.next, "2023-12-31"]
+        details.each do |(email, first_name, last_name)|
+          csv << [email, subject.next, expirations.next, first_name, last_name]
         end
       end
 
@@ -40,12 +48,16 @@ module EntitlementImports
       Success Rails.root.join("tmp", filename)
     end
 
-    def find_emails
-      emails = User.where(classification: "default").order(Arel.sql("RANDOM()")).limit(10).pluck(:email)
+    def find_details
+      details = User.where(classification: "default").order(Arel.sql("RANDOM()")).limit(10).pluck(:email, :first_name, :last_name)
 
-      emails << "does.not.exist+#{rand(10..100)}@example.org"
+      remainder = 20 - details.size
 
-      Success emails
+      remainder.times do |i|
+        details << ["does.not.exist+#{i}@example.org", "Unknown+#{i}", "User"]
+      end
+
+      Success details
     end
 
     def cycle_subjects
@@ -53,7 +65,9 @@ module EntitlementImports
 
       coll = ProjectCollection.order(Arel.sql("RANDOM()")).sample&.to_entitlement_gid&.to_s
 
-      Success [proj, coll, "subscriber"].compact.cycle
+      jrn = Journal.order(Arel.sql("RANDOM()")).sample&.to_entitlement_gid&.to_s
+
+      Success [proj, coll, jrn, "subscriber"].compact.cycle
     end
 
     def write_csv!(path, content)

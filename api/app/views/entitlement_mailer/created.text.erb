@@ -1,0 +1,5 @@
+You have been granted access <%= @subject_description %>.
+
+<%- if @entitlement.expirable? -%>
+This will expire on <%= @entitlement.expires_on.to_s(:long) %> (<%= @entitlement.expires_on.iso8601 %>).
+<%- end -%>

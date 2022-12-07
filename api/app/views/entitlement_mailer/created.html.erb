@@ -1,0 +1,10 @@
+<p>
+  You have been granted access <%= @subject_description %>.
+</p>
+<%- if @entitlement.expirable? -%>
+  <p>
+    This will expire on <time datetime=<%= @entitlement.expires_on.iso8601.inspect %>><%= @entitlement.expires_on.to_s(:long) %></time>.
+  </p>
+<%- end -%>
+<%= render partial: "partials/email/spacer", locals: { height: 10 } %>
+<%= render partial: "partials/email/button", locals: { text: "Login", url: @client_url } %>

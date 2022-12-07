@@ -244,10 +244,15 @@ ActiveRecord::Schema.define(version: 2023_01_25_004558) do
     t.text "messages", default: [], null: false, array: true
     t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.uuid "pending_entitlement_id"
+    t.text "expiration"
+    t.text "first_name"
+    t.text "last_name"
     t.index ["email"], name: "index_entitlement_import_rows_on_email"
     t.index ["entitlement_id"], name: "index_entitlement_import_rows_on_entitlement_id"
     t.index ["entitlement_import_id", "line_number"], name: "index_entitlement_import_rows_ordering"
     t.index ["entitlement_import_id"], name: "index_entitlement_import_rows_on_entitlement_import_id"
+    t.index ["pending_entitlement_id"], name: "index_entitlement_import_rows_on_pending_entitlement_id"
     t.index ["subject_type", "subject_id"], name: "index_entitlement_import_rows_on_subject_type_and_subject_id"
     t.index ["target_type", "target_id"], name: "index_entitlement_import_rows_on_target_type_and_target_id"
   end
@@ -651,6 +656,39 @@ ActiveRecord::Schema.define(version: 2023_01_25_004558) do
     t.string "purpose", default: "supplemental_content"
     t.jsonb "fa_cache", default: {}, null: false
     t.index ["slug"], name: "index_pages_on_slug", unique: true
+  end
+
+  create_table "pending_entitlement_transitions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "pending_entitlement_id", null: false
+    t.boolean "most_recent", null: false
+    t.integer "sort_key", null: false
+    t.string "to_state", null: false
+    t.jsonb "metadata"
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["pending_entitlement_id", "most_recent"], name: "index_pending_entitlement_transitions_parent_most_recent", unique: true, where: "most_recent"
+    t.index ["pending_entitlement_id", "sort_key"], name: "index_pending_entitlement_transitions_parent_sort", unique: true
+  end
+
+  create_table "pending_entitlements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "creator_id"
+    t.uuid "entitlement_id"
+    t.uuid "user_id"
+    t.string "subject_type", null: false
+    t.uuid "subject_id", null: false
+    t.text "expiration"
+    t.date "expires_on"
+    t.text "name", null: false
+    t.citext "email", null: false
+    t.text "first_name"
+    t.text "last_name"
+    t.text "messages", default: [], null: false, array: true
+    t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["creator_id"], name: "index_pending_entitlements_on_creator_id"
+    t.index ["entitlement_id"], name: "index_pending_entitlements_on_entitlement_id"
+    t.index ["subject_type", "subject_id"], name: "index_pending_entitlements_on_subject_type_and_subject_id"
+    t.index ["user_id"], name: "index_pending_entitlements_on_user_id"
   end
 
   create_table "project_collection_subjects", id: :serial, force: :cascade do |t|
@@ -1523,6 +1561,7 @@ ActiveRecord::Schema.define(version: 2023_01_25_004558) do
   add_foreign_key "entitlement_import_row_transitions", "entitlement_import_rows", on_delete: :cascade
   add_foreign_key "entitlement_import_rows", "entitlement_imports", on_delete: :cascade
   add_foreign_key "entitlement_import_rows", "entitlements", on_delete: :nullify
+  add_foreign_key "entitlement_import_rows", "pending_entitlements", on_delete: :nullify
   add_foreign_key "entitlement_import_transitions", "entitlement_imports", on_delete: :cascade
   add_foreign_key "entitlement_imports", "users", column: "creator_id", on_delete: :nullify
   add_foreign_key "entitlement_user_links", "entitlements", on_delete: :cascade
@@ -1537,6 +1576,10 @@ ActiveRecord::Schema.define(version: 2023_01_25_004558) do
   add_foreign_key "ingestions", "texts", on_delete: :nullify
   add_foreign_key "ingestions", "users", column: "creator_id", on_delete: :restrict
   add_foreign_key "notification_preferences", "users", on_delete: :cascade
+  add_foreign_key "pending_entitlement_transitions", "pending_entitlements", on_delete: :cascade
+  add_foreign_key "pending_entitlements", "entitlements", on_delete: :cascade
+  add_foreign_key "pending_entitlements", "users", column: "creator_id", on_delete: :nullify
+  add_foreign_key "pending_entitlements", "users", on_delete: :cascade
   add_foreign_key "project_exportation_transitions", "project_exportations", on_delete: :cascade
   add_foreign_key "project_exportations", "export_targets", on_delete: :cascade
   add_foreign_key "project_exportations", "project_exports", on_delete: :nullify

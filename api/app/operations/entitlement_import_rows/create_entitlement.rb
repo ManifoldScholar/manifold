@@ -34,7 +34,7 @@ module EntitlementImportRows
     def attributes_to_entitle(row)
       attrs = row.slice(:subject, :target, :expires_on)
 
-      attrs[:entitler] = entitler { row.entitlement_import.to_upsertable_entitler }
+      attrs[:entitler] = entitler { row.to_upsertable_entitler }
 
       Success attrs
     end
@@ -72,6 +72,26 @@ module EntitlementImportRows
       end
     end
 
+    def build_pending_entitlement_for!(row)
+      pending_entitlement = PendingEntitlement.new(row.to_pending_entitlement_attributes)
+
+      if pending_entitlement.save
+        row.pending_entitlement = pending_entitlement
+
+        row.save!
+
+        log! "Created pending entitlement #{pending_entitlement.id}"
+
+        Success pending_entitlement
+      else
+        pending_entitlement.errors.full_messages.each do |err|
+          log! "Problem saving pending entitlement: #{err}"
+        end
+
+        Failure[:invalid]
+      end
+    end
+
     # @param [EntitlementImportRow] row
     # @return [Dry::Monads:Result]
     def maybe_set_target!(row)
@@ -81,11 +101,13 @@ module EntitlementImportRows
 
       row.save! if row.target_id_changed?
 
-      if row.target.blank?
-        Failure[:no_target_yet, row.email]
-      else
-        Success()
-      end
+      return Success() unless row.target.blank?
+
+      yield build_pending_entitlement_for!(row)
+
+      row.transition_to! :success
+
+      Failure[:no_target_yet, row.email]
     end
   end
 end

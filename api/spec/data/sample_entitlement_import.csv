@@ -1,12 +1,21 @@
-target,subject,expires_on
-dustin_ankunding@example.org,gid://entitlements/Project/7a1338ca-5af3-4122-b164-1846e520d253,2023-12-31
-perla_cormier@example.com,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,2023-12-31
-bennie_kling@example.net,subscriber,2023-12-31
-remedios_toy@example.com,gid://entitlements/Project/7a1338ca-5af3-4122-b164-1846e520d253,2023-12-31
-tyree_jakubowski@example.org,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,2023-12-31
-mervin_pacocha@example.net,subscriber,2023-12-31
-mechelle_jacobs@example.net,gid://entitlements/Project/7a1338ca-5af3-4122-b164-1846e520d253,2023-12-31
-hiram_dach@example.net,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,2023-12-31
-catrice_fahey@example.org,subscriber,2023-12-31
-admin@castironcoding.com,gid://entitlements/Project/7a1338ca-5af3-4122-b164-1846e520d253,2023-12-31
-does.not.exist+15@example.org,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,2023-12-31
+email,subject,expiration,first_name,last_name
+mervin_pacocha@example.net,gid://entitlements/Project/39d234e7-3413-4001-9c7c-4a834547d691,in 1 year,Mervin,Pacocha
+remedios_toy@example.com,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,in 2 months,Remedios,Toy
+monica_treutel@example.com,gid://entitlements/Journal/34e7f1b6-922c-478e-8716-711ef06ffa5d,6 weeks from now,Monica,Treutel
+richard_haley@example.com,subscriber,in 1 year,Richard,Haley
+hiram_dach@example.net,gid://entitlements/Project/39d234e7-3413-4001-9c7c-4a834547d691,in 2 months,Hiram,Dach
+dawne_parker@example.net,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,6 weeks from now,Dawne,Parker
+harrison_lind@example.net,gid://entitlements/Journal/34e7f1b6-922c-478e-8716-711ef06ffa5d,in 1 year,Harrison,Lind
+jackie_greenfelder@example.org,subscriber,in 2 months,Jackie,Greenfelder
+bart_windler@example.net,gid://entitlements/Project/39d234e7-3413-4001-9c7c-4a834547d691,6 weeks from now,Bart,Windler
+tyree_jakubowski@example.org,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,in 1 year,Tyree,Jakubowski
+does.not.exist+0@example.org,gid://entitlements/Journal/34e7f1b6-922c-478e-8716-711ef06ffa5d,in 2 months,Unknown+0,User
+does.not.exist+1@example.org,subscriber,6 weeks from now,Unknown+1,User
+does.not.exist+2@example.org,gid://entitlements/Project/39d234e7-3413-4001-9c7c-4a834547d691,in 1 year,Unknown+2,User
+does.not.exist+3@example.org,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,in 2 months,Unknown+3,User
+does.not.exist+4@example.org,gid://entitlements/Journal/34e7f1b6-922c-478e-8716-711ef06ffa5d,6 weeks from now,Unknown+4,User
+does.not.exist+5@example.org,subscriber,in 1 year,Unknown+5,User
+does.not.exist+6@example.org,gid://entitlements/Project/39d234e7-3413-4001-9c7c-4a834547d691,in 2 months,Unknown+6,User
+does.not.exist+7@example.org,gid://entitlements/ProjectCollection/958b2b8e-ce2a-4e9c-87bf-c2c44436e158,6 weeks from now,Unknown+7,User
+does.not.exist+8@example.org,gid://entitlements/Journal/34e7f1b6-922c-478e-8716-711ef06ffa5d,in 1 year,Unknown+8,User
+does.not.exist+9@example.org,subscriber,in 2 months,Unknown+9,User

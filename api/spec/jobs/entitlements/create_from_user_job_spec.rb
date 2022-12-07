@@ -1,18 +1,16 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe Entitlements::CreateFromUserJob, type: :job do
   let!(:email) { Faker::Internet.unique.safe_email }
 
-  let!(:user) { FactoryBot.create :user, email: email }
+  let!(:pending_entitlement) { FactoryBot.create :pending_entitlement, email: email }
 
-  let!(:entitlement_import_row) { FactoryBot.create :entitlement_import_row, email: email }
+  let!(:user) { pending_entitlement && FactoryBot.create(:user, email: email) }
 
   it "enqueues a job for each matching row" do
     expect do
       described_class.perform_now user
-    end.to have_enqueued_job(Entitlements::CreateForRowJob).with(entitlement_import_row).once
+    end.to have_enqueued_job(Entitlements::CreatePendingJob).with(pending_entitlement).once
   end
 
   it "gets enqueued when a user reconfirms their email" do

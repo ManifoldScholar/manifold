@@ -5,5 +5,13 @@ FactoryBot.define do
     association :entitlement_import
 
     sequence(:line_number)
+
+    expiration { "in 1 year" }
+
+    email { Faker::Internet.unique.safe_email }
+
+    first_name { Faker::Name.first_name }
+
+    last_name { Faker::Name.last_name }
   end
 end

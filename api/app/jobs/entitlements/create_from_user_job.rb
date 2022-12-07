@@ -10,8 +10,8 @@ module Entitlements
     # @param [User] user
     # @return [void]
     def perform(user)
-      EntitlementImportRow.pending_for_email(user.email).find_each do |row|
-        Entitlements::CreateForRowJob.perform_later row
+      PendingEntitlement.pending_for_email(user.email).find_each do |pe|
+        Entitlements::CreatePendingJob.perform_later pe
       end
     end
   end

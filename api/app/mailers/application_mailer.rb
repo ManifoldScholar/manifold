@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class ApplicationMailer < ActionMailer::Base
   layout "email"
+
   before_action :assign_global_email_vars
 
   private
