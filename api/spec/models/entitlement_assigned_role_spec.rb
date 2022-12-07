@@ -1,8 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe EntitlementAssignedRole, type: :model do
   before do
-    Entitlements::SyncStaticModels.run!
+    ManifoldApi::Container["entitlements.sync_static_models"].()
   end
 
   let!(:project_entitlement) { FactoryBot.create :entitlement, :project_read_access, :for_user }

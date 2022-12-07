@@ -1,8 +1,7 @@
-require "securerandom"
+# frozen_string_literal: true
 
-# Volumes belong to Journals
+# Volumes belong to {Journal}s and are used to group {JournalIssue issues}.
 class JournalVolume < ApplicationRecord
-
   include Authority::Abilities
   include TrackedCreator
   include SerializedAbilitiesFor
@@ -26,5 +25,4 @@ class JournalVolume < ApplicationRecord
   def published_issues
     journal_issues.published
   end
-
 end

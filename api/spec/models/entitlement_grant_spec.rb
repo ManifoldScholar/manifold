@@ -1,8 +1,10 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe EntitlementGrant, type: :model do
   before do
-    Entitlements::SyncStaticModels.run!
+    ManifoldApi::Container["entitlements.sync_static_models"].()
   end
 
   context "with a mix of entitlement sources" do
@@ -22,7 +24,7 @@ RSpec.describe EntitlementGrant, type: :model do
     let!(:grant) do
       everything
 
-      described_class.refresh!
+      ManifoldApi::Container["entitlements.populate_grants"].()
 
       EntitlementGrant.where(user: user, resource: project).first!
     end

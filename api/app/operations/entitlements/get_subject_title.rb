@@ -10,6 +10,10 @@ module Entitlements
       return call(subject.subject) if Entitlements::Subjects::Subjectable.(subject)
 
       Entitlements::Subjects::Matcher.(subject) do |m|
+        m.journal do |journal|
+          Success "Journal (#{journal.title.inspect})"
+        end
+
         m.project do |project|
           Success "Project (#{project.title.inspect})"
         end

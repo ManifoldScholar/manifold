@@ -7,6 +7,15 @@ module Entitlements
     end
 
     # @api private
+    MatchJournal = Dry::Matcher::Case.new do |subject, _|
+      if subject.kind_of?(::Journal)
+        subject
+      else
+        Dry::Matcher::Undefined
+      end
+    end
+
+    # @api private
     MatchProject = Dry::Matcher::Case.new do |subject, _|
       if subject.kind_of?(::Project)
         subject
@@ -38,6 +47,7 @@ module Entitlements
 
     # @see Entitlement#on_subject
     Matcher = Dry::Matcher.new(
+      journal: MatchJournal,
       project: MatchProject,
       project_collection: MatchProjectCollection,
       subscription: MatchSubscription,

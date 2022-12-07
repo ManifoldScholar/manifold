@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 # Tracks the relationship between journals and subjects
 class JournalSubject < ApplicationRecord
-
-  # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "JournalChildAuthorizer"
 
   # Association
@@ -16,5 +17,4 @@ class JournalSubject < ApplicationRecord
   def to_s
     subject.title
   end
-
 end

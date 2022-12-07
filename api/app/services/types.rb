@@ -128,6 +128,10 @@ module Types
     end
   end
 
+  UUID = String.constrained(uuid_v4: true)
+
+  UUIDList = Array.of(UUID)
+
   class FlexibleStruct < Dry::Struct
     extend Memoist
 

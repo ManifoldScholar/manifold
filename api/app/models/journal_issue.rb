@@ -1,8 +1,9 @@
-require "securerandom"
+# frozen_string_literal: true
 
-# Issues belong to Journals
+# Issues belong to {Journal}s, and optionally to a {JournalVolume}.
+#
+# They connect a {Journal} with a {Project}.
 class JournalIssue < ApplicationRecord
-
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
   include Authority::Abilities
@@ -141,5 +142,4 @@ class JournalIssue < ApplicationRecord
   def content_block_ids
     content_blocks.pluck[:id]
   end
-
 end

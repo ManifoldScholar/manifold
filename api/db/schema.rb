@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_06_214829) do
+ActiveRecord::Schema.define(version: 2022_12_07_034410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -217,6 +217,33 @@ ActiveRecord::Schema.define(version: 2022_12_06_214829) do
     t.integer "access", default: 0, null: false
     t.jsonb "fa_cache", default: {}, null: false
     t.index ["project_id"], name: "index_content_blocks_on_project_id"
+  end
+
+  create_table "entitlement_grants", id: false, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "entitlement_role_id", null: false
+    t.string "resource_type", null: false
+    t.uuid "resource_id", null: false
+    t.text "role_name", null: false
+    t.text "role_kind", null: false
+    t.text "current_state", null: false
+    t.boolean "expired", default: false, null: false
+    t.boolean "inferred", default: false, null: false
+    t.boolean "has_ever_been_expired", default: false, null: false
+    t.boolean "has_ever_been_inferred", default: false, null: false
+    t.bigint "active_entitlements_count", default: 0, null: false
+    t.bigint "expiring_soon_entitlements_count", default: 0, null: false
+    t.bigint "expired_entitlements_count", default: 0, null: false
+    t.datetime "first_granted_at", precision: 6
+    t.datetime "last_expired_at", precision: 6
+    t.uuid "refresh_key", null: false
+    t.datetime "refreshed_at", precision: 6, null: false
+    t.jsonb "summaries", default: [], null: false
+    t.index ["entitlement_role_id"], name: "index_entitlement_grants_on_entitlement_role_id"
+    t.index ["refreshed_at", "refresh_key"], name: "index_entitlement_grants_refreshing", order: { refreshed_at: :desc }
+    t.index ["resource_type", "resource_id"], name: "index_entitlement_grants_on_resource_type_and_resource_id"
+    t.index ["user_id", "entitlement_role_id", "resource_id", "resource_type", "role_name", "role_kind"], name: "entitlement_grants_pkey", unique: true
+    t.index ["user_id"], name: "index_entitlement_grants_on_user_id"
   end
 
   create_table "entitlement_import_row_transitions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1556,6 +1583,8 @@ ActiveRecord::Schema.define(version: 2022_12_06_214829) do
   add_foreign_key "annotations", "reading_groups", on_delete: :nullify
   add_foreign_key "cached_external_source_links", "cached_external_sources", on_delete: :cascade
   add_foreign_key "cached_external_source_links", "texts", on_delete: :cascade
+  add_foreign_key "entitlement_grants", "entitlement_roles", on_delete: :restrict
+  add_foreign_key "entitlement_grants", "users", on_delete: :cascade
   add_foreign_key "entitlement_import_row_transitions", "entitlement_import_rows", on_delete: :cascade
   add_foreign_key "entitlement_import_rows", "entitlement_imports", on_delete: :cascade
   add_foreign_key "entitlement_import_rows", "entitlements", on_delete: :nullify
@@ -1810,106 +1839,6 @@ ActiveRecord::Schema.define(version: 2022_12_06_214829) do
    FROM (entitlement_user_links eul
      JOIN entitlements ent ON ((ent.id = eul.entitlement_id)));
   SQL
-  create_view "entitlement_derived_roles", sql_definition: <<-SQL
-    SELECT ent.user_id,
-    ent.id AS entitlement_id,
-    ent.created_at AS granted_at,
-    COALESCE(most_recent_entitlement_transition.to_state, 'pending'::text) AS current_state,
-    r.entitlement_role_id,
-    r.role_name,
-    r.role_kind,
-    r.resource_id,
-    r.resource_type,
-    r.inferred,
-    ent.expires_on,
-    ent.expired_at,
-    (ent.expired_at IS NOT NULL) AS expired
-   FROM ((user_entitlements ent
-     LEFT JOIN entitlement_transitions most_recent_entitlement_transition ON (((ent.id = most_recent_entitlement_transition.entitlement_id) AND (most_recent_entitlement_transition.most_recent = true))))
-     LEFT JOIN LATERAL ( SELECT er.id AS entitlement_role_id,
-            er.name AS role_name,
-            er.kind AS role_kind,
-            ent.subject_id AS resource_id,
-            ent.subject_type AS resource_type,
-            false AS inferred
-           FROM (jsonb_each(ent.global_roles) t(name, value)
-             JOIN entitlement_roles er USING (name))
-          WHERE (t.value = to_jsonb(true))
-        UNION ALL
-         SELECT er.id AS entitlement_role_id,
-            er.name AS role_name,
-            er.kind AS role_kind,
-            ent.subject_id AS resource_id,
-            ent.subject_type AS resource_type,
-            false AS inferred
-           FROM (jsonb_each(ent.scoped_roles) t(name, value)
-             JOIN entitlement_roles er USING (name))
-          WHERE (t.value = to_jsonb(true))
-        UNION ALL
-         SELECT er.id AS entitlement_role_id,
-            er.name AS role_name,
-            er.kind AS role_kind,
-            cp.project_id AS resource_id,
-            'Project'::character varying AS resource_type,
-            true AS inferred
-           FROM ((jsonb_each(ent.scoped_roles) t(name, value)
-             JOIN entitlement_roles er USING (name))
-             JOIN collection_projects cp ON ((cp.project_collection_id = ent.subject_id)))
-          WHERE (((ent.subject_type)::text = 'ProjectCollection'::text) AND (t.value = to_jsonb(true)))) r ON (true));
-  SQL
-  create_view "entitlement_grants", materialized: true, sql_definition: <<-SQL
-    SELECT entitlement_derived_roles.user_id,
-    entitlement_derived_roles.entitlement_role_id,
-    entitlement_derived_roles.resource_id,
-    entitlement_derived_roles.resource_type,
-    entitlement_derived_roles.role_name,
-    entitlement_derived_roles.role_kind,
-    COALESCE((array_agg(entitlement_derived_roles.current_state ORDER BY cs."position"))[1], 'pending'::text) AS current_state,
-    bool_and(entitlement_derived_roles.expired) AS expired,
-    bool_and(entitlement_derived_roles.inferred) AS inferred,
-    bool_or(entitlement_derived_roles.expired) AS has_ever_been_expired,
-    bool_or(entitlement_derived_roles.inferred) AS has_ever_been_inferred,
-    count(DISTINCT entitlement_derived_roles.entitlement_id) FILTER (WHERE (entitlement_derived_roles.current_state = 'active'::text)) AS active_entitlements_count,
-    count(DISTINCT entitlement_derived_roles.entitlement_id) FILTER (WHERE (entitlement_derived_roles.current_state = 'expiring_soon'::text)) AS expiring_soon_entitlements_count,
-    count(DISTINCT entitlement_derived_roles.entitlement_id) FILTER (WHERE (entitlement_derived_roles.current_state = 'expired'::text)) AS expired_entitlements_count,
-    min(entitlement_derived_roles.granted_at) AS first_granted_at,
-    max(entitlement_derived_roles.expired_at) AS last_expired_at,
-    jsonb_agg(DISTINCT s.summary) AS summaries
-   FROM ((entitlement_derived_roles
-     LEFT JOIN LATERAL ( SELECT
-                CASE entitlement_derived_roles.current_state
-                    WHEN 'active'::text THEN 1
-                    WHEN 'expiring_soon'::text THEN 2
-                    WHEN 'expired'::text THEN 3
-                    ELSE 5
-                END AS "position") cs ON (true))
-     LEFT JOIN LATERAL ( SELECT jsonb_build_object('current_state', entitlement_derived_roles.current_state, 'entitlement_id', entitlement_derived_roles.entitlement_id, 'expired', entitlement_derived_roles.expired, 'expires_on', entitlement_derived_roles.expires_on, 'expired_at', entitlement_derived_roles.expired_at, 'granted_at', entitlement_derived_roles.granted_at) AS summary
-          ORDER BY entitlement_derived_roles.expired_at DESC, cs."position", entitlement_derived_roles.expires_on DESC) s ON (true))
-  GROUP BY entitlement_derived_roles.user_id, entitlement_derived_roles.entitlement_role_id, entitlement_derived_roles.resource_id, entitlement_derived_roles.resource_type, entitlement_derived_roles.role_name, entitlement_derived_roles.role_kind;
-  SQL
-  add_index "entitlement_grants", ["user_id", "entitlement_role_id", "resource_id", "resource_type", "role_name", "role_kind"], name: "entitlement_grants_pkey", unique: true
-
-  create_view "entitlement_grant_audits", materialized: true, sql_definition: <<-SQL
-    SELECT user_id,
-    entitlement_role_id,
-    resource_id,
-    resource_type,
-    role_name,
-    x.has_entitlement,
-    x.has_assigned_role,
-        CASE
-            WHEN (x.has_entitlement AND (NOT x.has_assigned_role)) THEN 'add_role'::text
-            WHEN ((NOT x.has_entitlement) AND x.has_assigned_role) THEN 'remove_role'::text
-            ELSE 'skip'::text
-        END AS action
-   FROM ((entitlement_grants eg
-     FULL JOIN entitlement_assigned_roles ear USING (user_id, entitlement_role_id, resource_id, resource_type, role_name))
-     LEFT JOIN LATERAL ( SELECT ((eg.summaries IS NOT NULL) AND (NOT eg.expired)) AS has_entitlement,
-            (ear.role_id IS NOT NULL) AS has_assigned_role) x ON (true));
-  SQL
-  add_index "entitlement_grant_audits", ["action"], name: "index_entitlement_grant_audits_on_action"
-  add_index "entitlement_grant_audits", ["user_id", "entitlement_role_id", "resource_id", "resource_type", "role_name"], name: "entitlement_grant_audits_pkey", unique: true
-
   create_view "entitlement_targets", sql_definition: <<-SQL
     SELECT 'User'::text AS target_type,
     users.id AS target_id,
@@ -2199,5 +2128,94 @@ UNION ALL
     jsonb_agg(jsonb_build_object('label', text_sections.name, 'id', text_sections.id, 'source_path', text_sections.source_identifier) ORDER BY text_sections.legacy_position) AS auto_generated_toc
    FROM text_sections
   GROUP BY text_sections.text_id;
+  SQL
+  create_view "journal_project_links", sql_definition: <<-SQL
+    SELECT DISTINCT ON (ji.journal_id, p.id) ji.journal_id,
+    p.id AS project_id,
+    dense_rank() OVER w AS "position"
+   FROM ((journal_issues ji
+     LEFT JOIN journal_volumes jv ON ((jv.id = ji.journal_volume_id)))
+     JOIN projects p ON ((p.journal_issue_id = ji.id)))
+  WINDOW w AS (PARTITION BY ji.journal_id ORDER BY jv.number NULLS FIRST, ji.sort_title NULLS FIRST, p.sort_title)
+  ORDER BY ji.journal_id, p.id, jv.number NULLS FIRST, ji.sort_title NULLS FIRST, p.sort_title;
+  SQL
+  create_view "entitlement_grant_audits", materialized: true, sql_definition: <<-SQL
+    SELECT user_id,
+    entitlement_role_id,
+    resource_id,
+    resource_type,
+    role_name,
+    x.has_entitlement,
+    x.has_assigned_role,
+        CASE
+            WHEN (x.has_entitlement AND (NOT x.has_assigned_role)) THEN 'add_role'::text
+            WHEN ((NOT x.has_entitlement) AND x.has_assigned_role) THEN 'remove_role'::text
+            ELSE 'skip'::text
+        END AS action
+   FROM ((entitlement_grants eg
+     FULL JOIN entitlement_assigned_roles ear USING (user_id, entitlement_role_id, resource_id, resource_type, role_name))
+     LEFT JOIN LATERAL ( SELECT ((eg.summaries IS NOT NULL) AND (NOT eg.expired)) AS has_entitlement,
+            (ear.role_id IS NOT NULL) AS has_assigned_role) x ON (true));
+  SQL
+  add_index "entitlement_grant_audits", ["action"], name: "index_entitlement_grant_audits_on_action"
+  add_index "entitlement_grant_audits", ["user_id", "entitlement_role_id", "resource_id", "resource_type", "role_name"], name: "entitlement_grant_audits_pkey", unique: true
+
+  create_view "entitlement_derived_roles", sql_definition: <<-SQL
+    SELECT ent.user_id,
+    ent.id AS entitlement_id,
+    ent.created_at AS granted_at,
+    COALESCE(most_recent_entitlement_transition.to_state, 'pending'::text) AS current_state,
+    r.entitlement_role_id,
+    r.role_name,
+    r.role_kind,
+    r.resource_id,
+    r.resource_type,
+    r.inferred,
+    ent.expires_on,
+    ent.expired_at,
+    (ent.expired_at IS NOT NULL) AS expired
+   FROM ((user_entitlements ent
+     LEFT JOIN entitlement_transitions most_recent_entitlement_transition ON (((ent.id = most_recent_entitlement_transition.entitlement_id) AND (most_recent_entitlement_transition.most_recent = true))))
+     LEFT JOIN LATERAL ( SELECT er.id AS entitlement_role_id,
+            er.name AS role_name,
+            er.kind AS role_kind,
+            ent.subject_id AS resource_id,
+            ent.subject_type AS resource_type,
+            false AS inferred
+           FROM (jsonb_each(ent.global_roles) t(name, value)
+             JOIN entitlement_roles er USING (name))
+          WHERE (t.value = to_jsonb(true))
+        UNION ALL
+         SELECT er.id AS entitlement_role_id,
+            er.name AS role_name,
+            er.kind AS role_kind,
+            ent.subject_id AS resource_id,
+            ent.subject_type AS resource_type,
+            false AS inferred
+           FROM (jsonb_each(ent.scoped_roles) t(name, value)
+             JOIN entitlement_roles er USING (name))
+          WHERE (t.value = to_jsonb(true))
+        UNION ALL
+         SELECT er.id AS entitlement_role_id,
+            er.name AS role_name,
+            er.kind AS role_kind,
+            cp.project_id AS resource_id,
+            'Project'::character varying AS resource_type,
+            true AS inferred
+           FROM ((jsonb_each(ent.scoped_roles) t(name, value)
+             JOIN entitlement_roles er USING (name))
+             JOIN collection_projects cp ON ((cp.project_collection_id = ent.subject_id)))
+          WHERE (((ent.subject_type)::text = 'ProjectCollection'::text) AND (t.value = to_jsonb(true)))
+        UNION ALL
+         SELECT er.id AS entitlement_role_id,
+            er.name AS role_name,
+            er.kind AS role_kind,
+            jpl.project_id AS resource_id,
+            'Project'::character varying AS resource_type,
+            true AS inferred
+           FROM ((jsonb_each(ent.scoped_roles) t(name, value)
+             JOIN entitlement_roles er USING (name))
+             JOIN journal_project_links jpl ON ((jpl.journal_id = ent.subject_id)))
+          WHERE (((ent.subject_type)::text = 'Journal'::text) AND (t.value = to_jsonb(true)))) r ON (true));
   SQL
 end
