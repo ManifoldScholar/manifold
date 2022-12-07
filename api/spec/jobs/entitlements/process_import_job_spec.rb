@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe Entitlements::ProcessImportJob, type: :job do
   let!(:users) { FactoryBot.create_list :user, 5 }
 

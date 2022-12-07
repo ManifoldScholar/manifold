@@ -19,6 +19,10 @@ class EntitlementImport < ApplicationRecord
 
   validates :file, :name, presence: true
 
+  def to_upsertable_entitler
+    creator&.to_upsertable_entitler || super
+  end
+
   private
 
   # @return [void]

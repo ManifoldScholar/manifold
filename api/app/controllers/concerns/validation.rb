@@ -210,6 +210,26 @@ module Validation
     params.permit(param_config)
   end
 
+  def pending_entitlement_filter_params
+    params.permit(filter: [:email])[:filter] || {}
+  end
+
+  def pending_entitlement_params
+    params.require(:data)
+
+    attributes = [
+      :email,
+      :first_name,
+      :last_name,
+      :subject_url,
+      :expiration,
+    ]
+
+    param_config = structure_params(attributes: attributes)
+
+    params.permit(param_config)
+  end
+
   def entitlement_import_params
     params.require(:data)
 

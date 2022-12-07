@@ -708,6 +708,8 @@ GEM
       statesman (>= 1.3)
     store_model (0.7.0)
       activerecord (>= 5.2)
+    strip_attributes (1.13.0)
+      activemodel (>= 3.0, < 8.0)
     suo (0.4.0)
       dalli
       msgpack
@@ -909,6 +911,7 @@ DEPENDENCIES
   statesman (~> 3.4)
   statesman-events (~> 0.0.1)
   store_model (~> 0.7.0)
+  strip_attributes (~> 1.13.0)
   terrapin (~> 0.6.0)
   timecop (~> 0.9)
   tus-server (~> 2.0)

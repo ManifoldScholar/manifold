@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+class Create<%= migration_class_name %> < ActiveRecord::Migration<%= "[#{ActiveRecord::Migration.current_version}]" if Statesman::Utils.rails_5_or_higher? %>
+  def change
+    create_table :<%= table_name %>, id: :uuid do |t|
+      t.references :<%= parent_name %>, null: false, type: :uuid, foreign_key: { on_delete: :cascade }, index: false
+      t.boolean :most_recent, null: false
+      t.integer :sort_key, null: false
+      t.string :to_state, null: false
+      t.jsonb :metadata
+
+      t.timestamps null: false, default: -> { "CURRENT_TIMESTAMP" }
+
+      t.index %i(<%= parent_id %> sort_key), unique: true, name: <%= index_name(:parent_sort).inspect %>
+      t.index %i(<%= parent_id %> most_recent), unique: true, where: "most_recent", name: <%= index_name(:parent_most_recent).inspect %>
+    end
+  end
+end

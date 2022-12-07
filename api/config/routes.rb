@@ -76,6 +76,7 @@ Rails.application.routes.draw do
 
       resources :entitlements, only: %i[index show create destroy]
       resources :entitlement_imports, only: %i[index show create destroy]
+      resources :pending_entitlements, only: %i[index show create destroy]
       resources :entitlement_targets, only: %i[index]
       resources :export_targets
       resources :project_exportations, except: [:update]

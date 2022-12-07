@@ -131,10 +131,10 @@ class Entitlement < ApplicationRecord
   # @yield [m]
   # @yieldparam [Dry::Matcher] m
   # @yieldreturn [object]
-  def on_subject
+  def on_subject(&block)
     raise "Must provide a block" unless block_given?
 
-    Entitlements::SubjectMatcher.call(self, &Proc.new)
+    Entitlements::Subjects::Matcher.call(self, &block)
   end
 
   # @!attribute [r] subject_url
