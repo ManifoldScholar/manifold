@@ -21,6 +21,8 @@ Metrics/BlockLength:
   Enabled: false
 
 Metrics/MethodLength:
+  Exclude:
+    - "app/operations/**/*.rb"
   Max: 15
 
 Metrics/ModuleLength:
@@ -32,6 +34,7 @@ Metrics/ClassLength:
 Metrics/AbcSize:
   Enabled: true
   Exclude:
+    - "app/operations/**/*.rb"
     - "app/services/collections"
   Max: 20
 

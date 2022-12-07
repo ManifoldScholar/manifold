@@ -7,9 +7,12 @@ require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
 require "webmock/rspec"
 require "database_cleaner"
+require "dry/container/stub"
 require "closure_tree/test/matcher"
 require "scanf"
 require "with_model"
+
+Dry::Effects.load_extensions :rspec
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -67,6 +70,10 @@ RSpec.configure do |config|
   # Clean up any jobs before each run.
   config.before(:each) do
     clear_enqueued_jobs
+  end
+
+  config.before(:suite) do
+    ManifoldApi::Container.enable_stubs!
   end
 
   # Set up jsonapi request encoder

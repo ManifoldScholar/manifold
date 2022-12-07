@@ -32,10 +32,12 @@ RSpec.describe Entitlements::CreateForRowJob, type: :job do
   end
 
   context "when the email is pending" do
-    it "does not create an entitlement but keeps it open" do
+    it "creates a pending entitlement" do
       expect do
         described_class.perform_now entitlement_import_row
-      end.to keep_the_same { entitlement_import_row.current_state(force_reload: true) }
+      end.to change { entitlement_import_row.current_state(force_reload: true) }.from("pending").to("success")
+        .and(change(PendingEntitlement, :count).by(1))
+        .and(keep_the_same(Entitlement, :count))
     end
 
     context "when a user exists with that email" do
@@ -44,11 +46,10 @@ RSpec.describe Entitlements::CreateForRowJob, type: :job do
       it "creates an entitlement for that user" do
         expect do
           described_class.perform_now entitlement_import_row
-        end.to(
-          change { entitlement_import_row.current_state(force_reload: true) }.from("pending").to("success")
+        end.to change { entitlement_import_row.current_state(force_reload: true) }.from("pending").to("success")
           .and(change { entitlement_import_row.reload.target_id }.to(user.id))
           .and(change(Entitlement, :count).by(1))
-        )
+          .and(keep_the_same(PendingEntitlement, :count))
       end
     end
   end

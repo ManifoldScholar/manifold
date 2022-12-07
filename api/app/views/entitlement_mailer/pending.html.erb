@@ -1,0 +1,9 @@
+<p>
+  Hi <%= @identifier %>,
+</p>
+<p>
+  You have been granted pending access <%= @subject_description %> on <%= @installation_name.inspect %>, a Manifold installation.
+  Create and verify an account with this same email address in order to view your content.
+</p>
+<%= render partial: "partials/email/spacer", locals: { height: 10 } %>
+<%= render partial: "partials/email/button", locals: { text: "Login", url: @client_url } %>

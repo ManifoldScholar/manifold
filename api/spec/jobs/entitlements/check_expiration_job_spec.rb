@@ -1,4 +1,4 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
 RSpec.describe Entitlements::CheckExpirationJob, type: :job do
   before do
