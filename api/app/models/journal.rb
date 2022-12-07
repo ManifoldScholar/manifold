@@ -1,11 +1,14 @@
-# Journals are a grouping of projects
-class Journal < ApplicationRecord
+# frozen_string_literal: true
 
-  # Constants
+# {Journal}s are a grouping of {JournalIssue}s, optionally grouped by {JournalVolume},
+# that contain {Project}s.
+#
+# @see JournalProjectLink
+class Journal < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:title, :maker_names].freeze
 
-  # Concerns
   include Authority::Abilities
+  include Entitleable
   include TrackedCreator
   include Collaborative
   include SerializedAbilitiesFor
@@ -43,12 +46,13 @@ class Journal < ApplicationRecord
            as: :calloutable
   has_many :journal_volumes, -> { in_reverse_order }, dependent: :destroy
   has_many :journal_issues, -> { in_reverse_order },  dependent: :destroy
+  has_many :journal_project_links, -> { in_default_order }
 
-  # Validation
+  has_many :projects, through: :journal_project_links
+
   validates :title, presence: true
   validates :draft, inclusion: { in: [true, false] }
 
-  # Attachments
   manifold_has_attached_file :logo, :image
   manifold_has_attached_file :social_image, :image
 
@@ -78,13 +82,7 @@ class Journal < ApplicationRecord
   scope :with_update_ability, ->(user = nil) { build_update_ability_scope_for user }
   scope :with_update_or_issue_update_ability, ->(user = nil) { build_update_or_issue_update_ability_for user }
 
-  # Search
-  scope :search_import, -> {
-    includes(
-      :collaborators,
-      :makers
-    )
-  }
+  scope :search_import, -> { includes(:collaborators, :makers) }
 
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,

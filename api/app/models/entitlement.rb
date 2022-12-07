@@ -68,6 +68,13 @@ class Entitlement < ApplicationRecord
     expires_on.to_s
   end
 
+  # Predicate that tests if the entitlement's `subject` is a {Journal}
+  #
+  # @see #has_subject?
+  def for_journal?
+    has_subject? Journal
+  end
+
   # Predicate that tests if the entitlement's `subject` is a {Project}
   #
   # @see #has_subject?

@@ -1,11 +1,22 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
 RSpec.describe Entitlements::AuditJob, type: :job do
-  let(:perform_audit) { Container["entitlements.audit.perform"] }
+  let(:stubbed_operation) do
+    double(ManifoldApi::Container["entitlements.audit.perform"])
+  end
+
   let(:result) { Dry::Monads.Success(true) }
 
-  before do
-    allow(perform_audit).to receive(:call).and_return result
+  around do |example|
+    RSpec::Mocks.with_temporary_scope do
+      allow(stubbed_operation).to receive(:call).and_return result
+
+      ManifoldApi::Container.stub "entitlements.audit.perform", stubbed_operation do
+        example.run
+      end
+    ensure
+      ManifoldApi::Container.unstub "entitlements.audit.perform"
+    end
   end
 
   context "on a success" do
