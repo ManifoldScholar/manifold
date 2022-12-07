@@ -176,9 +176,8 @@ export const Action = styled.button`
       background-color: transparent;
       color: var(--input-border-color);
 
-      ${fillOnFocus(rgba("neutral70", 0.2))}
-
-      &:hover {
+      &:hover,
+      &:focus-visible {
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--color-base-neutral45);
       }
