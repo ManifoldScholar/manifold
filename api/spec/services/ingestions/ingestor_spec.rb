@@ -89,7 +89,7 @@ RSpec.describe Ingestions::Ingestor do
       let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
       let!(:text) { Ingestions::Ingestor.run ingestion: ingestion }
 
-      it "returns a valid text" do
+      it "returns a valid text", odd_fs: true do
         expect(text.result.valid?).to eq true
       end
     end
