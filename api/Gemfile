@@ -158,5 +158,6 @@ end
 
 group :test do
   gem "database_cleaner", "~> 1.0"
+  gem "test-prof", "~> 1.0"
   gem "with_model", "~> 2.1"
 end

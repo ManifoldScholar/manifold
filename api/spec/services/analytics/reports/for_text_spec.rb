@@ -1,36 +1,29 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe Analytics::Reports::ForText do
-  let(:text) { texts.first }
-  let(:text_section) { text_sections.first }
-  let(:scope) { text }
+  include_context "with a single text"
 
   include_examples "analytics reporter visits"
 
+  let(:scope) { text }
+
   include_examples "analytics reporter events" do
-    include_context "with a single text"
+    let_it_be(:share_actions) { %w[facebook twitter] }
 
-    let(:share_actions) { %w[facebook twitter] }
-
-    let(:share_clicks) do
+    let_it_be(:share_clicks) do
       visits.each do |visit|
         text.text_sections.each do |text_section|
           share_actions.map do |action|
-            FactoryBot.create :analytics_event,
-                              record: text_section,
-                              name: "share_text_section",
-                              properties: { action: action, text_section: text_section.id },
-                              time: visit.started_at + 10.minutes
+            FactoryBot.create(
+              :analytics_event,
+              record: text_section,
+              name: "share_text_section",
+              properties: { action: action, text_section: text_section.id },
+              time: visit.started_at + 10.minutes
+            )
           end
         end
       end
-    end
-
-    let(:events) do
-      annotations
-      text_view_events
-      text_section_view_events
-      share_clicks
     end
 
     let(:expectations) do
@@ -43,7 +36,7 @@ RSpec.describe Analytics::Reports::ForText do
         "reading_group_annotations" => per_group_annotations_count * 2
       }]
 
-      l_text_section_views = text_sections.map do |ts|
+      l_text_section_views = actual_text_sections.map do |ts|
         { "id" => ts.id, "name" => ts.name, "count" => visits.count }
       end
 
@@ -62,7 +55,6 @@ RSpec.describe Analytics::Reports::ForText do
         shares: l_text_section_shares,
         citations: l_text_section_citations
       }
-
     end
   end
 end

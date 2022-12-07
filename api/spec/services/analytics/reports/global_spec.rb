@@ -1,28 +1,23 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
 RSpec.describe Analytics::Reports::Global do
+  include_context "with projects"
 
   include_examples "analytics reporter visits"
 
   include_examples "analytics reporter events" do
-    include_context "with projects"
+    let_it_be(:werd) { Faker::Lorem.word }
 
-    let(:werd) { Faker::Lorem.word }
-    let(:search_events) do
+    let_it_be(:search_events) do
       visits.map do |v|
         FactoryBot.create(:analytics_event, visit: v, name: "search", properties: { keyword: werd })
       end
     end
 
-    let(:annotation_creation_events) do
+    let_it_be(:annotation_creation_events) do
       annotations.map do |a|
         Analytics::Event.create(name: "create_annotation", visit: Analytics::Visit.find_by(visitor_token: tokens[a.creator]), time: created_at[:created_at])
       end
-    end
-
-    let(:events) do
-      search_events
-      annotation_creation_events
     end
 
     let(:expectations) do
@@ -67,9 +62,9 @@ RSpec.describe Analytics::Reports::Global do
     end
 
     context "with different values for search counts" do
-      let(:search_events) do
+      let_it_be(:search_events) do
         [3, 1, 2].each do |count|
-          word = Faker::Lorem.word
+          word = Faker::Lorem.unique.word
 
           count.times do
             FactoryBot.create(:analytics_event, visit: visits.first, name: "search", properties: { keyword: word })
@@ -85,7 +80,5 @@ RSpec.describe Analytics::Reports::Global do
         expect(sorted.map.with_index { |d, i| d["count"] == search_results.dig(i, "count") }).to all(be true)
       end
     end
-
   end
-
 end

@@ -1,10 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Project, type: :model do
-  it "has a valid factory" do
-    expect(FactoryBot.build(:project)).to be_valid
-  end
-
   it "updates the sort_title when saved" do
     project = FactoryBot.build(:project, title: "A Hobbit's Journey")
     project.save
@@ -250,8 +246,8 @@ RSpec.describe Project, type: :model do
   end
 
   describe ".filtered(collection_order:)" do
-    let(:tag_list) { "smart" }
-    let!(:collected_projects) { FactoryBot.create_list :project, 7, draft: false, tag_list: tag_list }
+    let_it_be(:tag_list) { "smart" }
+    let_it_be(:collected_projects) { FactoryBot.create_list :project, 7, draft: false, tag_list: tag_list }
     let(:expected_total_count) { collected_projects.length }
     let(:pages) { 1.upto(3).to_a }
     let(:total_page_count) { pages.length }
@@ -260,8 +256,8 @@ RSpec.describe Project, type: :model do
       pages.map { |i| [i, (i%3).nonzero? ? 3 : 1] }.to_h
     end
 
-    let!(:other_projects) { FactoryBot.create_list :project, 7, draft: false, tag_list: "other" }
-    let!(:another_collection) { FactoryBot.create :project_collection, :smart, tag_list: "other" }
+    let_it_be(:other_projects) { FactoryBot.create_list :project, 7, draft: false, tag_list: "other" }
+    let_it_be(:another_collection) { FactoryBot.create :project_collection, :smart, tag_list: "other" }
 
     def filter!(page, per_page: 3)
       Project.filtered collection_order: project_collection.slug, page: page, per_page: per_page
@@ -312,17 +308,17 @@ RSpec.describe Project, type: :model do
     end
 
     context "for a manual collection" do
-      let!(:project_collection) { FactoryBot.create :project_collection, smart: false }
-      let!(:other_manual_collection) { FactoryBot.create :project_collection, smart: false }
+      let_it_be(:project_collection) { FactoryBot.create :project_collection, smart: false }
+      let_it_be(:other_manual_collection) { FactoryBot.create :project_collection, smart: false }
 
-      let!(:collection_projects) do
+      let_it_be(:collection_projects) do
         collected_projects.map do |project|
           FactoryBot.create :collection_project, project_collection: project_collection, project: project
         end
       end
 
       # Ensure collection project rankings are not duplicated
-      let!(:other_manual_collection_projects) do
+      let_it_be(:other_manual_collection_projects) do
         collected_projects.map do |project|
           FactoryBot.create :collection_project, project_collection: other_manual_collection, project: project
         end
@@ -332,7 +328,7 @@ RSpec.describe Project, type: :model do
     end
 
     context "for a smart collection" do
-      let!(:project_collection) do
+      let_it_be(:project_collection) do
         FactoryBot.create(:project_collection, :smart, tag_list: tag_list)
       end
 
@@ -344,6 +340,7 @@ RSpec.describe Project, type: :model do
     before(:each) do
       FactoryBot.create(:project, draft: false)
       FactoryBot.create(:project, draft: true)
+
       @project_b = FactoryBot.create(:project, draft: true)
     end
 
