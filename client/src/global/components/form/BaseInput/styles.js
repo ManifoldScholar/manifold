@@ -6,8 +6,7 @@ import {
   defaultTransitionProps,
   fluidScale,
   respond,
-  fillOnFocus,
-  rgba
+  fillOnFocus
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
