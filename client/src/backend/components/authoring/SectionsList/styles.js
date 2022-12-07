@@ -6,7 +6,8 @@ import {
   setHoverStyle,
   textTruncate,
   respond,
-  blockLabelRound
+  blockLabelRound,
+  fluidScale
 } from "theme/styles/mixins";
 
 export const Item = styled.li`
@@ -29,6 +30,7 @@ export const TitleWrapper = styled.div`
   align-items: center;
   gap: 12px;
   color: var(--color-neutral-text-extra-light);
+  max-width: ${fluidScale("85%", "50%", 90, 35)};
 `;
 
 export const BG = styled.div`
