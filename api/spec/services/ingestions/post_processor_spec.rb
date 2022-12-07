@@ -1,18 +1,18 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe Ingestions::PostProcessor do
   include TestHelpers::IngestionHelper
 
-  let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
-  let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
-  let(:context) { create_context(ingestion) }
-  let(:manifest) do
-    manifest = Ingestions::Strategies::Epub.run(context: context).result
-    manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
-    manifest
+  let_it_be(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
+  let_it_be(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
+  let_it_be(:context) { create_context(ingestion) }
+  let_it_be(:manifest) do
+    Ingestions::Strategies::Epub.run(context: context).result.then do |manifest|
+      Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+    end
   end
-  let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
-  let!(:outcome) { Ingestions::PostProcessor.run(manifest: manifest, text: text, context: context) }
+  let_it_be(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+  let_it_be(:outcome) { Ingestions::PostProcessor.run(manifest: manifest, text: text, context: context) }
 
   describe "the text section bodies" do
     it "generates the body" do
@@ -56,18 +56,18 @@ RSpec.describe Ingestions::PostProcessor do
   end
 
   describe "compiled files that are unreferenced" do
-    let!(:user_stylesheet) { FactoryBot.create(:stylesheet, text: text) }
+    let_it_be(:user_stylesheet) { FactoryBot.create(:stylesheet, text: text) }
 
-    let(:after_path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3-less.zip") }
-    let(:after_source) { File.open(after_path) }
-    let!(:after_ingestion) { FactoryBot.create :ingestion, :file_source, text: text, source_path: after_path }
-    let(:reingestion_context) { create_context(after_ingestion) }
-    let(:reingestion_manifest) do
-      reingestion_manifest = Ingestions::Strategies::Epub.run(context: reingestion_context).result
-      reingestion_manifest = Ingestions::PreProcessor.run(context: reingestion_context, manifest: reingestion_manifest).result
-      reingestion_manifest
+    let_it_be(:after_path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3-less.zip") }
+    let_it_be(:after_source) { File.open(after_path) }
+    let_it_be(:after_ingestion) { FactoryBot.create :ingestion, :file_source, text: text, source_path: after_path }
+    let_it_be(:reingestion_context) { create_context(after_ingestion) }
+    let_it_be(:reingestion_manifest) do
+      Ingestions::Strategies::Epub.run(context: reingestion_context).result.then do |reingestion_manifest|
+        Ingestions::PreProcessor.run(context: reingestion_context, manifest: reingestion_manifest).result
+      end
     end
-    let!(:after_text) { Ingestions::Compiler.run(manifest: reingestion_manifest, context: reingestion_context).result }
+    let_it_be(:after_text) { Ingestions::Compiler.run(manifest: reingestion_manifest, context: reingestion_context).result }
 
     context "when text sections" do
       it "destroys the compiled records" do
@@ -81,7 +81,9 @@ RSpec.describe Ingestions::PostProcessor do
       end
 
       it "does not destroy user created stylesheets" do
-        expect(Stylesheet.find(user_stylesheet.id)).to be_present
+        expect do
+          user_stylesheet.reload
+        end.to execute_safely
       end
     end
   end

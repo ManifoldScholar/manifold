@@ -1,20 +1,13 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe Analytics::Reports::ForProject do
-  let(:scope) { project }
+  include_context "with a single project"
 
   include_examples "analytics reporter visits"
 
+  let(:scope) { project }
+
   include_examples "analytics reporter events" do
-    include_context "with a single project"
-
-    let(:events) do
-      annotations
-      project_view_events
-      favorites
-      previous_favorites
-    end
-
     let(:expectations) do
       l_daily_visitors = build_expected_daily_visitors from_date: Date.yesterday
 

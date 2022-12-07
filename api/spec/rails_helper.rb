@@ -5,6 +5,7 @@ require "spec_helper"
 require File.expand_path("../config/environment", __dir__)
 
 require "rspec/rails"
+require "test_prof/recipes/rspec/let_it_be"
 require "webmock/rspec"
 require "database_cleaner"
 require "dry/container/stub"
