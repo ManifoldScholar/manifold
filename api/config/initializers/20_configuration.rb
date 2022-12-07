@@ -10,6 +10,7 @@ ssl_enabled = %w(1 true).include?(ENV["SSL_ENABLED"].to_s.downcase)
 m.ssl_enabled = ssl_enabled
 m.protocol = ssl_enabled ? "https" : "http"
 m.domain = ENV["DOMAIN"]
+m.domain ||= "manifold.lvh" if Rails.env.development? || Rails.env.test?
 m.url ||= ENV["CLIENT_URL"] || "#{ssl_enabled ? 'https' : 'http'}://#{m.domain}"
 m.api_url ||= ENV["CLIENT_BROWSER_API_URL"] || m.url
 m.elastic_search_url ||= ENV["ELASTICSEARCH_URL"]

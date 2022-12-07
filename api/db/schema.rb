@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_23_202620) do
+ActiveRecord::Schema.define(version: 2022_12_06_170542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1469,8 +1469,12 @@ ActiveRecord::Schema.define(version: 2022_11_23_202620) do
     t.boolean "consent_manifold_analytics"
     t.boolean "consent_google_analytics"
     t.datetime "terms_and_conditions_accepted_at"
+    t.text "email_confirmation_token"
+    t.datetime "email_confirmation_sent_at", precision: 6
+    t.datetime "email_confirmed_at", precision: 6
     t.index ["classification"], name: "udx_users_anonymous", unique: true, where: "((classification)::text = 'anonymous'::text)"
     t.index ["classification"], name: "udx_users_cli", unique: true, where: "((classification)::text = 'command_line'::text)"
+    t.index ["email_confirmed_at"], name: "index_users_on_email_confirmed_at"
     t.index ["import_source_id"], name: "index_users_on_import_source_id", unique: true, where: "(import_source_id IS NOT NULL)"
     t.index ["kind"], name: "index_users_on_kind"
     t.index ["role"], name: "index_users_on_role"

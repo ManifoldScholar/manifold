@@ -1,0 +1,5 @@
+<p>
+  Please <%= link_to "confirm your email address", @email_confirmation_url %>.
+</p>
+<%= render :partial => "partials/email/spacer", locals: { height: 10 } %>
+<%= render :partial => "partials/email/button", locals: { text: "Login", url: @client_url } %>
