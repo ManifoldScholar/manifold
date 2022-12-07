@@ -61,9 +61,7 @@ function DrawerContent(props, ref) {
       : Styled.Drawer;
 
   // A variety of other classes depend on .drawer--backend
-  const classes = classNames(entrySide, size, {
-    "pad-large": padding === "large",
-    "pad-authoring": padding === "authoring",
+  const classes = classNames(entrySide, size, `pad-${padding}`, {
     "drawer--backend": context === "backend"
   });
 

@@ -100,7 +100,7 @@ export const Drawer = styled.div`
     )}
   }
 
-  &.authoring {
+  &.fixed {
     max-width: 800px;
     width: 100%;
   }
@@ -114,7 +114,7 @@ export const Drawer = styled.div`
     )}
   }
 
-  &.pad-authoring {
+  &.pad-xl {
     ${respond(`padding: 33px 70px;`, 65)}
   }
 `;
