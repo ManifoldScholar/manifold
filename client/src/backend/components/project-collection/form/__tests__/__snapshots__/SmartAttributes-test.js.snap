@@ -132,7 +132,6 @@ Array [
         <li
           class="css-1du3u78-Result-EmptyResult ef2ewu72"
           id="no-options"
-          tabindex="-1"
         >
           forms.picker.no_options
         </li>
@@ -213,7 +212,6 @@ Array [
         <li
           class="css-1du3u78-Result-EmptyResult ef2ewu72"
           id="no-options"
-          tabindex="-1"
         >
           forms.picker.no_options
         </li>
