@@ -67,7 +67,7 @@ class User < ApplicationRecord
   before_validation :infer_role!
 
   after_save :sync_global_role!, if: :saved_change_to_role?
-  after_save :create_entitlements_for_email!, if: :saved_change_to_email?
+  after_save :prepare_email_confirmation!, if: :saved_change_to_email?
 
   # Attachments
   manifold_has_attached_file :avatar, :image
@@ -89,12 +89,21 @@ class User < ApplicationRecord
   }
   scope :by_role, ->(role) { RoleName[role].then { |r| with_role(r.to_sym) if r.present? } }
   scope :by_cached_role, ->(*role) { where(role: role) }
+  scope :email_confirmed, -> { where.not(email_confirmed_at: nil) }
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   delegate *RoleName.global_predicates, to: :role
   delegate *RoleName.scoped_predicates, to: :kind
+
+  # @!attribute [r] email_confirmed
+  # @return [Boolean]
+  def email_confirmed
+    email_confirmed_at?
+  end
+
+  alias email_confirmed? email_confirmed
 
   def search_data
     {
@@ -191,6 +200,24 @@ class User < ApplicationRecord
 
   # @api private
   # @return [void]
+  def mark_email_confirmed!
+    ManifoldApi::Container["users.mark_email_confirmed"].(self).value!
+  end
+
+  # @api private
+  # @return [void]
+  def prepare_email_confirmation!
+    ManifoldApi::Container["users.prepare_email_confirmation"].(self).value!
+  end
+
+  # @api private
+  # @return [void]
+  def request_email_confirmation!
+    ManifoldApi::Container["users.request_email_confirmation"].(self).value!
+  end
+
+  # @api private
+  # @return [void]
   def sync_global_role!
     @synchronizing_global_role = true
 
@@ -254,11 +281,6 @@ class User < ApplicationRecord
     errors.add(:password, "can't be blank") if password.blank?
   end
 
-  # @return [void]
-  def create_entitlements_for_email!
-    Entitlements::CreateFromUserJob.perform_later self
-  end
-
   concerning :Classification do
     included do
       include ClassyEnum::ActiveRecord
@@ -287,6 +309,10 @@ class User < ApplicationRecord
 
       def cli_user(&block)
         fetch_by_classification :command_line, &block
+      end
+
+      def testing_user(&block)
+        fetch_by_classification :testing, &block
       end
 
       # @api private

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       resources :action_callouts, only: [:show, :update, :destroy]
       resources :contacts, only: [:create]
       resources :content_blocks, only: [:show, :update, :destroy]
+      resources :email_confirmations, only: %i[show update]
       resources :test_mails, only: [:create]
       resources :pages
 
