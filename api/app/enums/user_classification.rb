@@ -45,3 +45,7 @@ end
 class UserClassification::CommandLine < UserClassification
   config.unique = true
 end
+
+class UserClassification::Testing < UserClassification
+  config.unique = true
+end
