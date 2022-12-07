@@ -231,6 +231,11 @@
       "project_collection": {
         "collection_title": "Collection Title",
         "collection_title_placeholder": "Enter collection name",
+        "full_description": "Description",
+        "full_description_placeholder": "Enter description",
+        "short_description": "Short Description",
+        "short_description_placeholder": "Enter short description",
+        "short_description_instructions": "If set, will display in collection summaries in place of description.",
         "slug_placeholder": "Enter URL slug",
         "hero_image": "Hero Image",
         "homepage_visible": "Show on homepage:",

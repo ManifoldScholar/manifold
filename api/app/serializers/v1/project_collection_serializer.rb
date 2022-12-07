@@ -28,6 +28,9 @@ module V1
     typed_attribute :description, Types::String.optional
     typed_attribute :description_formatted, Types::String.meta(read_only: true)
     typed_attribute :description_plaintext, Types::String.meta(read_only: true)
+    typed_attribute :short_description, Types::String.optional
+    typed_attribute :short_description_formatted, Types::String.meta(read_only: true)
+    typed_attribute :short_description_plaintext, Types::String.meta(read_only: true)
     typed_attribute :tag_list, Types::Array.of(Types::String) # check value
     typed_attribute :homepage_start_date, Types::String.optional
     typed_attribute :homepage_end_date, Types::String.optional

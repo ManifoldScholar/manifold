@@ -5,6 +5,8 @@ export default `
   .visibility-menu {
     font-family: var(--font-family-heading);
     ${uiPanelMenu}
+    overflow-y: auto;
+    max-height: calc(100vh - var(--reader-header-height));
 
     ${respond(`width: 286px;`, 50)}
 
