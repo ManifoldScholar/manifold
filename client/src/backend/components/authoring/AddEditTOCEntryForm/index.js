@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
@@ -71,11 +71,18 @@ export default function AddEditTOCEntryForm({
     key: s.id
   }));
 
-  const { id: sectionId, title: label, ...rest } = entry?.data ?? {};
+  const { id: sectionId, title: label, anchor } = entry?.data ?? {};
+
+  const model = useMemo(() => ({ id: textId, sectionId, label, anchor }), [
+    textId,
+    sectionId,
+    label,
+    anchor
+  ]);
 
   return (
     <FormContainer.Form
-      model={{ id: textId, sectionId, label, ...rest }}
+      model={model}
       name="be-text-update"
       className="form-secondary"
       update={textsAPI.update}
