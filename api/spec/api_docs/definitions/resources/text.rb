@@ -32,6 +32,8 @@ module APIDocs
           remove_cover: Types::Bool
         }.freeze
 
+        REQUIRED_CREATE_ATTRIBUTES = [:title].freeze
+
         class << self
 
           include APIDocs::Definitions::Resource

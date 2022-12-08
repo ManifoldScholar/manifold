@@ -153,6 +153,18 @@ RSpec.describe Text, type: :model do
     expect(new_text.text_sections.size).to eq 2
   end
 
+  context "when created from an api request" do
+    let!(:new_text) { FactoryBot.create(:text, title: nil) }
+
+    it "validates its main title" do
+      expect(new_text).to be_invalid(:from_api)
+
+      new_text.title = "something"
+
+      expect(new_text).to be_valid(:from_api)
+    end
+  end
+
   it_should_behave_like "a model that stores its fingerprint" do
     subject { FactoryBot.create :text }
   end

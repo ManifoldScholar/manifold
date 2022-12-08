@@ -114,6 +114,7 @@ class Text < ApplicationRecord
   # Validation
   validate :validate_start_text_section
   validate :validate_toc
+  validate :ensure_main_title_present!, on: :from_api
 
   # Scopes
   scope :published, ->(published) { where(published: published) if published.present? }
@@ -220,6 +221,10 @@ class Text < ApplicationRecord
 
   def subtitle
     get_title_value title_subtitle
+  end
+
+  def ensure_main_title_present!
+    errors.add :title, :blank if title_main.blank?
   end
 
   def section_before(position)
