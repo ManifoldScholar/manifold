@@ -14,7 +14,7 @@ RSpec.describe "Text Sections", type: :request do
 
      include_examples "an API create request",
                       model: TextSection,
-                      parent: "text",
+                      parent: :text,
                       url_parameters: [:text_id],
                       authorized_user: :admin
     end

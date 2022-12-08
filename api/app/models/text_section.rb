@@ -60,6 +60,7 @@ class TextSection < ApplicationRecord
   # Validation
   validates :position, numericality: { only_integer: true }
   validates :kind, inclusion: { in: ALLOWED_KINDS }
+  validates :name, presence: { on: :from_api }
 
   # Callbacks
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
