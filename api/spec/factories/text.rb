@@ -3,7 +3,7 @@ FactoryBot.define do
     association :creator, factory: :user
     project
 
-    title { nil }
+    title { "title" }
     subtitle { nil }
 
     trait :exports_as_epub_v3 do
