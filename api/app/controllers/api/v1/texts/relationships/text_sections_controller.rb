@@ -20,7 +20,7 @@ module API
           end
 
           def create
-            @text_section = authorize_and_create_text_section(text_section_params)
+            @text_section = ::Updaters::Text.new(text_section_params, :from_api).update(@text.text_sections.new, creator: @current_user)
             render_single_resource @text_section
           end
 

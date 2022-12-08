@@ -5,6 +5,8 @@ FactoryBot.define do
     text
     ingestion_source
 
+    name { "name" }
+
     trait :with_simple_body do
       body_json do
         {
