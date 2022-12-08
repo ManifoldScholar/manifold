@@ -9,14 +9,15 @@ module Updaters
 
   included do
     include ActiveSupport::Callbacks
-    attr_accessor :id, :type, :data, :attributes, :relationships
+    attr_accessor :id, :type, :data, :attributes, :relationships, :context
 
     define_callbacks :update_attributes, :update_relationships, :update, :save
   end
 
-  def initialize(params)
+  def initialize(params, context = nil)
     @attributes = params.dig(:data, :attributes)&.to_h || {}
     @relationships = params.dig(:data, :relationships)&.to_h || {}
+    @context = context
   end
 
   def update_without_save(model, creator: nil)
@@ -46,7 +47,7 @@ module Updaters
   def save_model(model)
     saved = false
     run_callbacks "save" do
-      saved = model.save
+      saved = model.save(context: context)
     end
     model.reload if model.id && saved
     saved
