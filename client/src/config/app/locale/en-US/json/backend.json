@@ -214,12 +214,12 @@
         "include_texts_in_category": "Include Texts in these Categories"
       },
       "text_create": {
+        "drawer_instructions": "Create a new Manifold text in the current project. Once the text is created you can add content by managing the text's sections and assets.",
         "text_title": "Text Title",
         "title_placeholder": "New Text Title",
         "cover_section_label": "Cover",
-        "cover_instructions": "Add some instruction text here.",
         "sections_section_label": "Sections",
-        "sections_instructions": "Add more instruction text here.",
+        "sections_instructions": "Add and order section titles to create sections with the new text. Sections can also be added, edited, and removed later.",
         "section_name_placeholder": "Enter section name",
         "save_button_label": "Save New Text"
       },
@@ -227,7 +227,7 @@
         "section_name": "Section Name",
         "save_button_label": "Save Changes",
         "content_label": "Content",
-        "content_instructions": "Instructions needed here...",
+        "content_instructions": "HTML section content",
         "start_tag_label": "Start",
         "start_tooltip_content": "Set the initial starting point for this text when viewed in the Manifold reader.",
         "delete_confirm_heading": "Are you sure you want to delete this section?",
@@ -238,10 +238,10 @@
         "add_header": "Add TOC Entry",
         "entry_name": "TOC Entry Name",
         "section_link": "Section Link",
-        "section_link_instructions": "Instructions here",
+        "section_link_instructions": "A TOC entry must link to one of the text's sections.",
         "section_link_placeholder": "Select a Text Section",
         "anchor_link": "Anchor Link",
-        "anchor_link_instructions": "More instructions here",
+        "anchor_link_instructions": "If set, the TOC entry will link to the anchor rather than the start of the section.",
         "save_button_label": "Save Changes"
       },
       "ingestion": {

@@ -71,7 +71,9 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
       />
       <Form.FieldGroup
         label={t("backend.forms.text_create.cover_section_label")}
-        instructions={t("backend.forms.text_create.cover_instructions")}
+        instructions={t("backend.forms.cover_image_instructions", {
+          entity: t("glossary.text_one")
+        })}
       >
         <Form.Upload
           layout="portrait"
