@@ -5,6 +5,7 @@ export resourceCollectionsAPI from "./resources/resourceCollections";
 export entitlementsAPI from "./resources/entitlements";
 export entitlementTargetsAPI from "./resources/entitlementTargets";
 export entitlementImportsAPI from "./resources/entitlementImports";
+export pendingEntitlementsAPI from "./resources/entitlementsPending";
 export eventsAPI from "./resources/events";
 export makersAPI from "./resources/makers";
 export meAPI from "./resources/me";
