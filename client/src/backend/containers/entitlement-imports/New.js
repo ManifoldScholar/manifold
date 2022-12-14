@@ -7,8 +7,6 @@ import Test from "backend/components/entitlement-import";
 export default function EntitlementImportContainer({ refresh }) {
   const { t } = useTranslation();
 
-  console.log(Test.Form);
-
   return (
     <section>
       <Navigation.DrawerHeader

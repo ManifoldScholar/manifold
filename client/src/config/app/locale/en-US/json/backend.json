@@ -586,6 +586,7 @@
     "entitlement_imports": {
       "header": "Manage Pending Entitlements",
       "button_label": "Import from CSV",
+      "add_button_label": "Add entitlement",
       "drawer_header": "Entitlement CSV Import",
       "form": {
         "upload_label": "Upload a CSV",
