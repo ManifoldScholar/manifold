@@ -26,6 +26,7 @@ import TextCategoryRow from "./Entity/TextCategoryRow";
 import FormOptionRow from "./Entity/FormOptionRow";
 import JournalVolumeRow from "./Entity/JournalVolumeRow";
 import JournalIssueRow from "./Entity/JournalIssueRow";
+import PendingEntitlementRow from "./Entity/PendingEntitlementRow";
 
 export default List;
 export {
@@ -55,5 +56,6 @@ export {
   TextCategoryRow,
   FormOptionRow,
   JournalVolumeRow,
-  JournalIssueRow
+  JournalIssueRow,
+  PendingEntitlementRow
 };
