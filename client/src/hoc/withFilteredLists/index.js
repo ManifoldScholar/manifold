@@ -7,6 +7,7 @@ import resourceFilters from "./resourceFilters";
 import userFilters from "./userFilters";
 import keywordFilter from "./keywordFilter";
 import journalFilters from "./journalFilters";
+import entitlementFilters from "./entitlementFilters";
 
 export default withFilters;
 
@@ -18,5 +19,6 @@ export {
   resourceFilters,
   userFilters,
   keywordFilter,
-  journalFilters
+  journalFilters,
+  entitlementFilters
 };
