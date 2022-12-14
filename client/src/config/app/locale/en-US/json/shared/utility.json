@@ -108,7 +108,9 @@
     "minutes": "minutes",
     "minutes_truncated": "min",
     "seconds": "seconds",
-    "seconds_truncated": "sec"
+    "seconds_truncated": "sec",
+    "expires": "expires",
+    "expires_title_case": "Expires"
   },
   "img_alts": {
     "user_avatar": "User Avatar",
