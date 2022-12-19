@@ -72,6 +72,7 @@ module V1
           typed_attribute :journal_issue_number, Types::String.optional
           typed_attribute :journal_issue_pending_sort_title, Types::String.optional
           typed_attribute :journal_volume_number, Types::String.optional
+          typed_attribute :entitlement_subject_url, Types::String.meta(read_only: true)
 
           typed_has_one :journal
           typed_has_one :journal_volume, record_type: "journalVolume"
