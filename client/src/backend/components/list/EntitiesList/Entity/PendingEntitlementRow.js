@@ -15,7 +15,7 @@ export default function PendingEntitlementRow({
 }) {
   const { t } = useTranslation();
 
-  const { email, currentState, expiration, subjectId } =
+  const { email, currentState, subjectId, expiresOn } =
     entitlement?.attributes ?? {};
 
   const project = useFromStore(`entityStore.entities.projects["${subjectId}"]`);
@@ -30,12 +30,10 @@ export default function PendingEntitlementRow({
     undefined
   );
 
-  const dateOnly = expiration ? expiration.split(" ")[0] : null;
-
-  const meta = expiration && (
+  const meta = expiresOn && (
     <FormattedDate
       prefix={t("dates.expires_title_case")}
-      date={new Date(dateOnly)}
+      date={new Date(expiresOn)}
     />
   );
 
@@ -43,7 +41,7 @@ export default function PendingEntitlementRow({
     <div style={{ display: "flex", gap: "12px" }}>
       <button
         className="entity-row__utility-button"
-        onClick={() => onDelete(entitlement)}
+        onClick={() => onDelete(entitlement.id)}
         title={t("backend.actions.publish_feature")}
       >
         <Utility.IconComposer icon="delete32" size={26} />
