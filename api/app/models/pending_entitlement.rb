@@ -27,6 +27,7 @@ class PendingEntitlement < ApplicationRecord
   before_validation :maybe_map_subject_url!
 
   scope :by_email, ->(email) { where(arel_table[:email].matches("#{email}%")) if email.present? }
+  scope :by_state, ->(state) { in_state(state) }
   scope :in_default_order, -> { order(created_at: :desc) }
   scope :pending_for_email, ->(email) do
     where(email: email, user: nil).in_state(:pending)
@@ -99,8 +100,15 @@ class PendingEntitlement < ApplicationRecord
 
   class << self
     # @param [ActiveRecord::Relation<PendingEntitlement>]
-    def with_order(*)
-      in_default_order
+    def with_order(value = nil)
+      case value
+      when "expires_on_asc"
+        order arel_nulls_last arel_table[:expires_on].asc
+      when "expires_on_desc"
+        order arel_nulls_last arel_table[:expires_on].desc
+      else
+        in_default_order
+      end
     end
   end
 end
