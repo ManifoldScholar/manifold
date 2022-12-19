@@ -34,16 +34,12 @@ export default function CSVImportForm({ refresh }) {
     >
       <Form.Upload
         layout="landscape"
-        instructions={t("backend.entitlement_imports.form.upload_instructions")}
-        label={t("backend.entitlement_imports.form.upload_label")}
+        instructions={t(
+          "backend.pending_entitlements.import.form.upload_instructions"
+        )}
+        label={t("backend.pending_entitlements.import.form.upload_label")}
         accepts="csv"
         name="attributes[file]"
-      />
-      <Form.TextInput
-        focusOnMount
-        label={t("backend.entitlement_imports.form.name_label")}
-        instructions={t("backend.entitlement_imports.form.name_instructions")}
-        name="attributes[name]"
       />
       <div className="buttons-icon-horizontal">
         <Link
