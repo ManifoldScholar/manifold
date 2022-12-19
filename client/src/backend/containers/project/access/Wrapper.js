@@ -27,7 +27,6 @@ class ProjectAccessWrapper extends Component {
     return this.props.settings.attributes.general.restrictedAccess === true;
   }
 
-  // This didn't seem to be in use, but can add                 initialVisible={this.defaultIsOpen} as a prop on `Hero.Block` if this is the expected behavior. -LD
   get defaultIsOpen() {
     return !this.defaultIsRestricted;
   }
@@ -56,6 +55,7 @@ class ProjectAccessWrapper extends Component {
                   <Hero.Block
                     title={t("projects.forms.access.title")}
                     description={t("projects.forms.access.description")}
+                    initialVisible={this.defaultIsRestricted}
                   >
                     <FormContainer.Form
                       style={{ paddingTop: 24, paddingBottom: 24 }}
