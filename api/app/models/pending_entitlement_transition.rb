@@ -12,7 +12,7 @@ class PendingEntitlementTransition < ApplicationRecord
   # @return [void]
   def update_most_recent!
     # :nocov:
-    last_transition = pending_entitlement.pending_entitlement_transitions.order(:sort_key).last
+    last_transition = pending_entitlement.transitions.order(:sort_key).last
 
     return if last_transition.blank?
 

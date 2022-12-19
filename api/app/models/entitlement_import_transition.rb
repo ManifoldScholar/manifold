@@ -12,7 +12,7 @@ class EntitlementImportTransition < ApplicationRecord
   # @return [void]
   def update_most_recent!
     # :nocov:
-    last_transition = entitlement_import.entitlement_import_transitions.order(:sort_key).last
+    last_transition = entitlement_import.transitions.order(:sort_key).last
 
     return unless last_transition.present?
 
