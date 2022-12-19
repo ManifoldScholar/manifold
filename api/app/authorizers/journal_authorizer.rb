@@ -1,5 +1,5 @@
 class JournalAuthorizer < ApplicationAuthorizer
-  expose_abilities [:read_drafts, :update_makers, :fully_read]
+  expose_abilities [:read_drafts, :update_makers, :fully_read, :create_entitlements, :manage_entitlements]
 
   # First, we check to see if the journal is a draft. If so, {#drafts_readable_by? it must be readable}.
   # Otherwise, we allow a journal to be read.
@@ -48,6 +48,28 @@ class JournalAuthorizer < ApplicationAuthorizer
 
   def fully_readable_by?(_user, _options = {})
     true
+  end
+
+  # @see EntitlementAuthorizer.creatable_by?
+  # @param [User] user
+  # @param [Hash] options
+  def entitlements_creatable_by?(user, options = {})
+    options ||= {}
+
+    options[:subject] = resource
+
+    user.can_create? Entitlement, options
+  end
+
+  # @see EntitlementAuthorizer.manageable_by?
+  # @param [User] user
+  # @param [Hash] options
+  def entitlements_manageable_by?(user, options = {})
+    options ||= {}
+
+    options[:subject] = resource
+
+    user.can_manage? Entitlement, options
   end
 
   class << self
