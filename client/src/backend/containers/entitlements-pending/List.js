@@ -14,6 +14,7 @@ import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 
 function PendingEntitlementsList({
   route,
+  history,
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
@@ -48,6 +49,10 @@ function PendingEntitlementsList({
     setFilters({ newState: { ...filters, [param.name]: value } });
   };
 
+  const onEdit = id => {
+    history.push(lh.link("backendRecordsEntitlementsEdit", id));
+  };
+
   return (
     <>
       {renderChildRoutes()}
@@ -56,6 +61,7 @@ function PendingEntitlementsList({
           title={t("backend.entitlement_imports.header")}
           titleStyle="bar"
           entityComponent={PendingEntitlementRow}
+          entityComponentProps={{ onEdit }}
           entities={entitlements}
           buttons={[
             <Button
@@ -65,7 +71,7 @@ function PendingEntitlementsList({
               authorizedFor="entitlement"
             />,
             <Button
-              path={lh.link("backendRecordsEntitlementsNew")}
+              path={lh.link("backendRecordsEntitlementsImport")}
               type="import"
               text={t("backend.entitlement_imports.button_label")}
               authorizedFor="entitlement"

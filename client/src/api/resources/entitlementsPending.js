@@ -29,6 +29,19 @@ export default {
     };
   },
 
+  update(id, entitlement) {
+    return {
+      endpoint: `/api/v1/pending_entitlements/${id}`,
+      method: "PUT",
+      options: {
+        body: JSON.stringify({
+          type: "pending_entitlements",
+          data: entitlement
+        })
+      }
+    };
+  },
+
   destroy(id) {
     return {
       endpoint: `/api/v1/pending_entitlements/${id}`,
