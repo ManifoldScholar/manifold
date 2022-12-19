@@ -144,6 +144,7 @@ export default {
   JournalVolumeEdit: Journal.VolumeEdit,
   JournalVolumeNew: Journal.VolumeNew,
   JournalVolumeWrapper: Journal.VolumeWrapper,
+  JournalAccessWrapper: Journal.AccessWrapper,
   EntitlementsPending: EntitlementsPending.List,
   EntitlementsPendingNew: EntitlementsPending.AddEdit,
   EntitlementsPendingEdit: EntitlementsPending.AddEdit,

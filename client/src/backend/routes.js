@@ -636,6 +636,22 @@ const routes = {
               ]
             },
             {
+              name: "backendJournalAccess",
+              exact: false,
+              component: "JournalAccessWrapper",
+              path: "/backend/journals/:id/access",
+              helper: j => `/backend/journals/${j}/access`,
+              routes: [
+                {
+                  name: "backendJournalEntitlementsNew",
+                  exact: true,
+                  component: "EntitlementsNew",
+                  path: "/backend/journals/:id/access/entitlements/new",
+                  helper: j => `/backend/journals/${j}/access/entitlements/new`
+                }
+              ]
+            },
+            {
               name: "backendJournalVolumes",
               exact: false,
               component: "JournalVolumes",

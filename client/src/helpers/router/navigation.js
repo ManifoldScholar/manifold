@@ -314,6 +314,13 @@ class Navigation {
         args
       },
       {
+        label: "Access",
+        route: "backendJournalAccess",
+        entity: journal,
+        ability: "update",
+        args
+      },
+      {
         label: "Metadata",
         route: "backendJournalMetadata",
         entity: journal,

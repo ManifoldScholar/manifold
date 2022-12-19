@@ -92,8 +92,12 @@ export class EntitlementsList extends PureComponent {
       <section>
         {entitlements && (
           <EntitiesList
-            title={t("entitlements.header")}
-            instructions={t("entitlements.instructions")}
+            title={t("entitlements.header", {
+              entity: entity.type.slice(0, -1)
+            })}
+            instructions={t(
+              `entitlements.instructions_${entity.type.slice(0, -1)}`
+            )}
             preList={preList}
             titleStyle="section"
             entities={entitlements}
@@ -115,7 +119,7 @@ export class EntitlementsList extends PureComponent {
                 path={lh.link(newUrl, entity.id)}
                 text={t("entitlements.button_label")}
                 type="add"
-                authorizedTo="createEntitlements"
+                authorizedTo="update"
                 authorizedFor={entity}
               />
             ]}

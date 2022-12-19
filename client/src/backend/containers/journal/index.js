@@ -10,6 +10,7 @@ import Volumes from "./Volumes";
 import VolumeEdit from "./VolumeEdit";
 import VolumeNew from "./VolumeNew";
 import VolumeWrapper from "./VolumeWrapper";
+import AccessWrapper from "./AccessWrapper";
 
 export default {
   Wrapper,
@@ -23,5 +24,6 @@ export default {
   Volumes,
   VolumeEdit,
   VolumeNew,
-  VolumeWrapper
+  VolumeWrapper,
+  AccessWrapper
 };
