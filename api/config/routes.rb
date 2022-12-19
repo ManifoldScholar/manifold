@@ -156,6 +156,7 @@ Rails.application.routes.draw do
         scope module: :journals do
           namespace :relationships do
             resources :action_callouts, only: [:index, :create]
+            resources :entitlements, only: [:index, :create]
             resources :journal_issues, only: [:index, :create]
             resources :journal_volumes, only: [:index, :create]
           end
