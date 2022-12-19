@@ -7,6 +7,16 @@ RSpec.describe "Pending Entitlements API", type: :request do
   include_context("param helpers")
 
   context "when fetching entitlements" do
+    let(:filter) do
+      {}
+    end
+
+    let(:params) do
+      {
+        filter: filter,
+      }
+    end
+
     let(:path) { api_v1_pending_entitlements_path }
 
     let!(:pending_entitlements) do
@@ -19,6 +29,32 @@ RSpec.describe "Pending Entitlements API", type: :request do
       end.to execute_safely
 
       expect(response).to have_http_status(200)
+    end
+
+    context "when filtering by currentState: success" do
+      let(:filter) do
+        {
+          state: "success"
+        }
+      end
+
+      let!(:successful_entitlement) do
+        FactoryBot.create(:pending_entitlement, :successful)
+      end
+
+      it "renders the expected result" do
+        expect do
+          get path, headers: admin_headers, params: params
+        end.to execute_safely
+
+        resp = response.parsed_body.try(:with_indifferent_access)
+
+        aggregate_failures do
+          expect(resp[:data]).to have(1).item
+          expect(resp.dig(:data, 0, :id)).to eq successful_entitlement.id
+          expect(resp.dig(:data, 0, :attributes, :currentState)).to eq "success"
+        end
+      end
     end
   end
 

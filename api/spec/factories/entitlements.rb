@@ -14,16 +14,18 @@ FactoryBot.define do
       global_roles { { subscriber: true } }
     end
 
+    trait :read_access do
+      scoped_roles { { read_access: true } }
+    end
+
     trait :collection_read_access do
       association :subject, factory: :project_collection
 
-      scoped_roles { { read_access: true } }
+      read_access
     end
 
     trait :project_read_access do
       association :subject, factory: :project
-
-      scoped_roles { { read_access: true } }
     end
 
     trait :for_user do

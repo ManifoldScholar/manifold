@@ -169,6 +169,10 @@ module ArelHelpers
       expr.in(wrapped_query)
     end
 
+    def arel_nulls_last(expr)
+      arel_infix " ", expr, arel_literal("NULLS LAST")
+    end
+
     # @param [#to_sql] query
     # @return [Arel::Nodes::SqlLiteral]
     def arel_quote_query(query)
