@@ -119,7 +119,7 @@ export class EntitlementsList extends PureComponent {
                 path={lh.link(newUrl, entity.id)}
                 text={t("entitlements.button_label")}
                 type="add"
-                authorizedTo="update"
+                authorizedTo="createEntitlements"
                 authorizedFor={entity}
               />
             ]}
