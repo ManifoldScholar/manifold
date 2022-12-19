@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
 
-export default function EntitlementImportForm({ refresh }) {
+export default function CSVImportForm({ refresh }) {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -70,6 +70,6 @@ export default function EntitlementImportForm({ refresh }) {
   );
 }
 
-EntitlementImportForm.displayName = "Records.EntitlementImport.Create.Form";
+CSVImportForm.displayName = "Records.Entitlements.CSVImport.Form";
 
-EntitlementImportForm.propTypes = {};
+CSVImportForm.propTypes = {};

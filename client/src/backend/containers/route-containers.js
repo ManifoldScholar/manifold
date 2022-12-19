@@ -21,7 +21,7 @@ import Content from "backend/containers/content-block";
 import ActionCallout from "backend/containers/action-callout";
 import ExportTargets from "backend/containers/export-targets";
 import Entitlements from "backend/containers/entitlements";
-import EntitlementImports from "backend/containers/entitlement-imports";
+import EntitlementsPending from "backend/containers/entitlements-pending";
 import Analytics from "backend/containers/analytics";
 import Journals from "backend/containers/journals";
 import Journal from "backend/containers/journal";
@@ -144,6 +144,8 @@ export default {
   JournalVolumeEdit: Journal.VolumeEdit,
   JournalVolumeNew: Journal.VolumeNew,
   JournalVolumeWrapper: Journal.VolumeWrapper,
-  EntitlementImports: EntitlementImports.List,
-  EntitlementImportsNew: EntitlementImports.New
+  EntitlementsPending: EntitlementsPending.List,
+  EntitlementsPendingNew: EntitlementsPending.AddEdit,
+  EntitlementsPendingEdit: EntitlementsPending.AddEdit,
+  EntitlementsPendingImport: EntitlementsPending.Import
 };

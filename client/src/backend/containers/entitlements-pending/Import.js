@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Navigation from "backend/components/navigation";
-import Test from "backend/components/entitlement-import";
+import { CSVImport } from "backend/components/pending-entitlements";
 
 export default function EntitlementImportContainer({ refresh }) {
   const { t } = useTranslation();
@@ -14,11 +14,11 @@ export default function EntitlementImportContainer({ refresh }) {
         instructions="This is a sample description of the drawer. Some more description
         here."
       />
-      <Test.Form refresh={refresh} />
+      <CSVImport refresh={refresh} />
     </section>
   );
 }
 
-EntitlementImportContainer.displayName = "EntitlementImport.Create";
+EntitlementImportContainer.displayName = "PendingEntitlements.Import";
 
 EntitlementImportContainer.propTypes = {};
