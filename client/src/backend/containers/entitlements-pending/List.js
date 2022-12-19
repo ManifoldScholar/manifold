@@ -8,23 +8,30 @@ import EntitiesList, {
   Search,
   PendingEntitlementRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, usePaginationState, useFilterState } from "hooks";
+import {
+  useFetch,
+  usePaginationState,
+  useFilterState,
+  useApiCallback
+} from "hooks";
 import { childRoutes } from "helpers/router";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
+import withConfirmation from "hoc/withConfirmation";
 
 function PendingEntitlementsList({
   route,
   history,
+  confirm,
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState();
+  const [pagination, setPageNumber] = usePaginationState(1, 10);
   const baseFilters = entitiesListSearchParams.initialentitlements;
   const [filters, setFilters] = useFilterState(baseFilters);
 
-  const { data: entitlements, meta } = useFetch({
+  const { data: entitlements, meta, refresh } = useFetch({
     request: [pendingEntitlementsAPI.index, filters, pagination],
     dependencies: [filters]
   });
@@ -39,7 +46,7 @@ function PendingEntitlementsList({
         wide: true,
         closeUrl
       },
-      childProps: {}
+      childProps: { refresh }
     });
   };
 
@@ -53,27 +60,36 @@ function PendingEntitlementsList({
     history.push(lh.link("backendRecordsEntitlementsEdit", id));
   };
 
+  const deleteEntitlement = useApiCallback(pendingEntitlementsAPI.destroy);
+
+  const onDelete = id => {
+    const heading = t("backend.pending_entitlements.delete_confirm_heading");
+    const message = t("backend.pending_entitlements.delete_confirm_body");
+    if (confirm)
+      confirm(heading, message, () => deleteEntitlement(id).then(refresh()));
+  };
+
   return (
     <>
       {renderChildRoutes()}
       {entitlements && (
         <EntitiesList
-          title={t("backend.entitlement_imports.header")}
+          title={t("backend.pending_entitlements.header")}
           titleStyle="bar"
           entityComponent={PendingEntitlementRow}
-          entityComponentProps={{ onEdit }}
+          entityComponentProps={{ onEdit, onDelete }}
           entities={entitlements}
           buttons={[
             <Button
               path={lh.link("backendRecordsEntitlementsNew")}
               type="add"
-              text={t("backend.entitlement_imports.add_button_label")}
+              text={t("backend.pending_entitlements.add_button_label")}
               authorizedFor="entitlement"
             />,
             <Button
               path={lh.link("backendRecordsEntitlementsImport")}
               type="import"
-              text={t("backend.entitlement_imports.button_label")}
+              text={t("backend.pending_entitlements.import.button_label")}
               authorizedFor="entitlement"
             />
           ]}
@@ -92,7 +108,7 @@ function PendingEntitlementsList({
   );
 }
 
-export default withFilteredLists(PendingEntitlementsList, {
+export default withFilteredLists(withConfirmation(PendingEntitlementsList), {
   entitlements: entitlementFilters()
 });
 

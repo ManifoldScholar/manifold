@@ -583,16 +583,33 @@
       "instructions": "Entitlements give users and/or reading groups access to this project. In Manifold, all projects are open by default. Configure access restrictions, below, and enable restrictions to limit access to your project.",
       "button_label": "Create entitlement"
     },
-    "entitlement_imports": {
+    "pending_entitlements": {
       "header": "Manage Pending Entitlements",
-      "button_label": "Import from CSV",
       "add_button_label": "Add entitlement",
-      "drawer_header": "Entitlement CSV Import",
+      "delete_confirm_heading": "Are you sure you want to delete this entitlement?",
+      "delete_confirm_body": "This action cannot be undone.",
       "form": {
-        "upload_label": "Upload a CSV",
-        "upload_instructions": "Manifold can import entitlements from a CSV file, including pending entitlements for not yet registered users. See the documentation for CSV format.",
-        "name_label": "Import Name",
-        "name_instructions": "An optional name for this import for your records."
+        "add_header": "Add Pending Entitlement",
+        "add_instructions": "Create an entitlement for a user who has not yet created an account on this Manifold instance. When the user registers, this entitlement will be automatically added to their account.",
+        "edit_header": "Edit Pending Entitlement",
+        "email": "User Email",
+        "email_instructions": "Email address is used to match newly created accounts to pending entitlements.",
+        "first_name": "User First Name",
+        "last_name": "User Last Name",
+        "entity_id": "Project or Journal ID",
+        "id_instructions": "The ID of the project or journal that this is an entitlement to. This ID can be found in the project's url.",
+        "id_placeholder": "00000000-0000-0000-0000-00000000",
+        "expiration": "Expiration",
+        "expiration_instructions": "Optionally, set the expiration date for this entitlement.",
+        "save_label": "Save Entitlement"
+      },
+      "import": {
+        "button_label": "Import from CSV",
+        "drawer_header": "Entitlement CSV Import",
+        "form": {
+          "upload_label": "Upload a CSV",
+          "upload_instructions": "Manifold can import entitlements from a CSV file, including pending entitlements for not yet registered users. See the documentation for CSV format."
+        }
       }
     },
     "log": {

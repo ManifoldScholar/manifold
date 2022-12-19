@@ -7,6 +7,7 @@ import Errorable from "global/components/form/Errorable";
 import PickerComponent from "./PickerComponent";
 import isDate from "lodash/isDate";
 import format from "date-fns/format";
+import Instructions from "../Instructions";
 
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
@@ -73,6 +74,9 @@ class DatePicker extends PureComponent {
               onChange={this.handleChange}
               label={label}
             />
+            {this.props.instructions && (
+              <Instructions instructions={this.props.instructions} />
+            )}
           </Errorable>
         )}
       </UIDConsumer>
