@@ -211,7 +211,7 @@ module Validation
   end
 
   def pending_entitlement_filter_params
-    params.permit(filter: [:email])[:filter] || {}
+    params.permit(filter: [:email, :order, :state])[:filter] || { current_state: :pending, order: :default }
   end
 
   def pending_entitlement_params
