@@ -37,7 +37,7 @@ export default function PendingEntitlementRow({
   );
 
   const utility = (
-    <div style={{ display: "flex", gap: "12px" }}>
+    <div>
       <button
         className="entity-row__utility-button"
         onClick={() => onDelete(entitlement.id)}
@@ -45,13 +45,13 @@ export default function PendingEntitlementRow({
       >
         <Utility.IconComposer icon="delete32" size={26} />
       </button>
-      <button
+      {/* <button
         className="entity-row__utility-button"
         onClick={() => onEdit(entitlement.id)}
         title={t("backend.actions.publish_feature")}
       >
         <Utility.IconComposer icon="annotate32" size={26} />
-      </button>
+      </button> */}
     </div>
   );
 
