@@ -15,8 +15,7 @@ export default function PendingEntitlementRow({
 }) {
   const { t } = useTranslation();
 
-  const { email, currentState, subjectId, expiresOn } =
-    entitlement?.attributes ?? {};
+  const { email, subjectId, expiresOn } = entitlement?.attributes ?? {};
 
   const project = useFromStore(`entityStore.entities.projects["${subjectId}"]`);
   const journal = useFromStore(`entityStore.entities.journals["${subjectId}"]`);
@@ -56,13 +55,10 @@ export default function PendingEntitlementRow({
     </div>
   );
 
-  const label = [currentState];
-
   const rowProps = {
     title: email,
     subtitle,
     meta,
-    label,
     figure,
     figureSize: "small",
     ...rest
