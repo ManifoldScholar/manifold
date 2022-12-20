@@ -65,6 +65,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
           const param = {
             label: paramDefinition.label,
             name: paramDefinition.name,
+            as: paramDefinition.as,
             hidden: paramDefinition.hidden || false
           };
           if (paramDefinition.options) {
@@ -85,7 +86,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
 
     setParam = (key, paramLike, value) => {
       const param = this.ensureParamObject(key, paramLike);
-      this.setValues(key, { [param.name]: value });
+      this.setValues(key, { [param.as || param.name]: value });
     };
 
     setValues(key, updatedValues, isReset) {

@@ -28,7 +28,10 @@ function PendingEntitlementsList({
   const { t } = useTranslation();
 
   const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const baseFilters = entitiesListSearchParams.initialentitlements;
+  const baseFilters = {
+    ...entitiesListSearchParams.initialentitlements,
+    state: "pending"
+  };
   const [filters, setFilters] = useFilterState(baseFilters);
 
   const { data: entitlements, meta, refresh } = useFetch({
@@ -50,10 +53,16 @@ function PendingEntitlementsList({
     });
   };
 
-  const { setParam, ...searchProps } = entitiesListSearchProps("entitlements");
+  const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
+    "entitlements"
+  );
   const updatedSetParam = (param, value) => {
     setParam(param, value);
-    setFilters({ newState: { ...filters, [param.name]: value } });
+    setFilters({ newState: { ...filters, [param.as || param.name]: value } });
+  };
+  const updatedOnReset = () => {
+    onReset();
+    setFilters({ newState: baseFilters });
   };
 
   const onEdit = id => {
@@ -93,7 +102,13 @@ function PendingEntitlementsList({
               authorizedFor="entitlement"
             />
           ]}
-          search={<Search {...searchProps} setParam={updatedSetParam} />}
+          search={
+            <Search
+              {...searchProps}
+              setParam={updatedSetParam}
+              onReset={updatedOnReset}
+            />
+          }
           pagination={meta.pagination}
           showCount
           unit={t("glossary.entitlement", {
