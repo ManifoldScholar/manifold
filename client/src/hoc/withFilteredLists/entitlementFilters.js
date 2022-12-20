@@ -5,17 +5,19 @@ export default function entitlementFilters({ snapshotState = false } = {}) {
     },
     params: [
       {
-        label: "Search...",
+        label: "Search by email...",
         name: "keyword",
+        as: "email",
         value: ""
       },
       {
         label: "Order",
         name: "order",
-        value: "email",
+        value: "default",
         options: [
-          { label: "Alphabetical by email", value: "email" },
-          { label: "By soonest expiration", value: "expiration" }
+          { label: "By creation date", value: "default" },
+          { label: "By latest expiration", value: "expires_on_asc" },
+          { label: "By soonest expiration", value: "expires_on_desc" }
         ]
       }
     ]
