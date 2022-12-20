@@ -16,8 +16,8 @@ export default function entitlementFilters({ snapshotState = false } = {}) {
         value: "default",
         options: [
           { label: "By creation date", value: "default" },
-          { label: "By latest expiration", value: "expires_on_asc" },
-          { label: "By soonest expiration", value: "expires_on_desc" }
+          { label: "By latest expiration", value: "expires_on_desc" },
+          { label: "By soonest expiration", value: "expires_on_asc" }
         ]
       }
     ]
