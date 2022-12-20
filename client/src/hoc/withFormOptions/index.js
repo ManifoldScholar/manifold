@@ -186,6 +186,9 @@ function withFormOptions(WrappedComponent) {
     }
 
     componentDidUpdate(prevProps, prevState) {
+      if (prevProps.options !== this.props.options) {
+        if (this.canFetchOptions) this.fetchOptions();
+      }
       if (prevState.searchWord !== this.state.searchWord) {
         this.handleSearchWordChange();
       }
