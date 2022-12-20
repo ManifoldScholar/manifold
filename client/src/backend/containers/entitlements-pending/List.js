@@ -28,10 +28,7 @@ function PendingEntitlementsList({
   const { t } = useTranslation();
 
   const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const baseFilters = {
-    ...entitiesListSearchParams.initialentitlements,
-    state: "pending"
-  };
+  const baseFilters = entitiesListSearchParams.initialentitlements;
   const [filters, setFilters] = useFilterState(baseFilters);
 
   const { data: entitlements, meta, refresh } = useFetch({
