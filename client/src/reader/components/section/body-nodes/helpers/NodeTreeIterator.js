@@ -2,6 +2,7 @@ import React from "react";
 import Nodes from "../nodes";
 import has from "lodash/has";
 import upperFirst from "lodash/upperFirst";
+import { MathJaxContext } from "../nodes/Math";
 
 export default class NodeTreeIterator {
   constructor(bodyProps) {
@@ -84,6 +85,9 @@ export default class NodeTreeIterator {
     const lookup = upperFirst(node.tag);
     if (Nodes.hasOwnProperty(lookup)) ComponentClass = Nodes[lookup];
     if (lookup === "A") ComponentClass = Nodes.Link;
+    if (lookup === "Math") {
+      return React.createElement(ComponentClass, node, node.children);
+    }
     return React.createElement(ComponentClass, node, this.visitChildren(node));
   }
 
@@ -107,7 +111,8 @@ export default class NodeTreeIterator {
       "tbody",
       "tfoot",
       "thead",
-      "tr"
+      "tr",
+      "math"
     ];
     if (
       !parent ||
@@ -182,6 +187,6 @@ export default class NodeTreeIterator {
       this.endAnnotations(node.nodeUuid);
     }
 
-    return out;
+    return <MathJaxContext version={3}>{out}</MathJaxContext>;
   }
 }
