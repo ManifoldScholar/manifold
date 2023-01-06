@@ -2,6 +2,7 @@ import React from "react";
 import Nodes from "../nodes";
 import has from "lodash/has";
 import upperFirst from "lodash/upperFirst";
+import { mathNodeHelpers } from "../nodes/Math";
 
 export default class NodeTreeIterator {
   constructor(bodyProps) {
@@ -79,13 +80,17 @@ export default class NodeTreeIterator {
     }
   }
 
-  visitElementNode(node) {
+  visitElementNode(node, mathUuids) {
     let ComponentClass = Nodes.Default;
     const lookup = upperFirst(node.tag);
     if (Nodes.hasOwnProperty(lookup)) ComponentClass = Nodes[lookup];
     if (lookup === "A") ComponentClass = Nodes.Link;
     if (lookup === "Math") {
-      return React.createElement(ComponentClass, node, node.children);
+      return React.createElement(
+        ComponentClass,
+        { ...node, uuids: mathUuids },
+        node.children
+      );
     }
     return React.createElement(ComponentClass, node, this.visitChildren(node));
   }
@@ -124,22 +129,30 @@ export default class NodeTreeIterator {
 
   startAnnotations(nodeUuid) {
     const annotationIds = this.annotationStartMap[nodeUuid];
-    annotationIds.forEach(annotationId => {
-      const annotation = this.annotationsMap[annotationId];
-      this.openAnnotations[annotation.id] = annotation;
-    });
+    if (annotationIds) {
+      annotationIds.forEach(annotationId => {
+        const annotation = this.annotationsMap[annotationId];
+        this.openAnnotations[annotation.id] = annotation;
+      });
+    }
   }
 
   endAnnotations(nodeUuid) {
     const annotationIds = this.annotationEndMap[nodeUuid];
-    annotationIds.forEach(annotationId => {
-      const annotation = this.annotationsMap[annotationId];
-      delete this.openAnnotations[annotation.id];
-    });
+    if (annotationIds) {
+      annotationIds.forEach(annotationId => {
+        const annotation = this.annotationsMap[annotationId];
+        delete this.openAnnotations[annotation.id];
+      });
+    }
   }
 
   visit(node, parent = null) {
-    if (this.annotationStartMap.hasOwnProperty(node.nodeUuid)) {
+    let mathUuids;
+    if (node.tag === "math") {
+      mathUuids = mathNodeHelpers.getUuids(node.children);
+      mathUuids.map(uuid => this.startAnnotations(uuid));
+    } else if (this.annotationStartMap.hasOwnProperty(node.nodeUuid)) {
       this.startAnnotations(node.nodeUuid);
     }
 
@@ -172,7 +185,7 @@ export default class NodeTreeIterator {
 
     switch (node.nodeType) {
       case "element":
-        out = this.visitElementNode(adjustedNode);
+        out = this.visitElementNode(adjustedNode, mathUuids);
         break;
       case "text":
         out = this.visitTextNode(adjustedNode, parent);
@@ -182,7 +195,9 @@ export default class NodeTreeIterator {
         break;
     }
 
-    if (this.annotationEndMap.hasOwnProperty(node.nodeUuid)) {
+    if (mathUuids) {
+      mathUuids.map(uuid => this.endAnnotations(uuid));
+    } else if (this.annotationEndMap.hasOwnProperty(node.nodeUuid)) {
       this.endAnnotations(node.nodeUuid);
     }
 
