@@ -1,6 +1,8 @@
+import React from "react";
 import { Component } from "react";
 import PropTypes from "prop-types";
 import BodyNodes from "./body-nodes";
+import { MathJaxContext } from "./body-nodes/nodes/Math";
 
 export default class Body extends Component {
   static propTypes = {
@@ -24,6 +26,6 @@ export default class Body extends Component {
     const iterator = new BodyNodes.Helpers.NodeTreeIterator(this.props);
     const node = this.props.section.attributes.bodyJSON;
     const elements = iterator.visit(node);
-    return elements;
+    return <MathJaxContext>{elements}</MathJaxContext>;
   }
 }

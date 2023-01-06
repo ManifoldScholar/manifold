@@ -2,7 +2,6 @@ import React from "react";
 import Nodes from "../nodes";
 import has from "lodash/has";
 import upperFirst from "lodash/upperFirst";
-import { MathJaxContext } from "../nodes/Math";
 
 export default class NodeTreeIterator {
   constructor(bodyProps) {
@@ -187,6 +186,6 @@ export default class NodeTreeIterator {
       this.endAnnotations(node.nodeUuid);
     }
 
-    return <MathJaxContext version={3}>{out}</MathJaxContext>;
+    return out;
   }
 }
