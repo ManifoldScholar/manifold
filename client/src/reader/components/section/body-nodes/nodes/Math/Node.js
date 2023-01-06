@@ -2,6 +2,12 @@ import React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import PropTypes from "prop-types";
 import { MathJax } from "better-react-mathjax";
+import {
+  getAnnotationStyles,
+  getlocalAnnotationsArray
+} from "./annotationHelpers";
+import { useTranslation } from "react-i18next";
+import { uid } from "react-uid";
 
 const mergeTextChild = node => {
   const textChild = node.children[0];
@@ -34,14 +40,21 @@ const createNode = n =>
     n.tag,
     {
       ...n.attributes,
+      key: n.nodeUuid ?? uid(n),
       "data-node-uuid": n.nodeUuid,
       "data-text-digest": n.textDigest
     },
     n.content ? n.content : n.children.map(child => createNode(child))
   );
 
-function MathNode({ attributes, children }) {
-  const { xmlns, ...rest } = attributes;
+function MathNode({
+  attributes,
+  children,
+  openAnnotations,
+  uuids,
+  hasInteractiveAncestor
+}) {
+  const { t } = useTranslation();
 
   const transformedChildren = Array.isArray(children)
     ? transformJSON(children)
@@ -49,9 +62,27 @@ function MathNode({ attributes, children }) {
 
   const childNodes = transformedChildren.map(child => createNode(child));
 
+  const localAnnotations = getlocalAnnotationsArray(openAnnotations);
+  const {
+    classes,
+    removableHighlightId,
+    textAnnotationIds,
+    annotationIds,
+    interactiveAttributes
+  } = getAnnotationStyles(localAnnotations, uuids, t, hasInteractiveAncestor);
+
   return (
-    <MathJax {...rest}>
-      <math xmlns={xmlns}>{childNodes}</math>
+    <MathJax
+      data-mathml="true"
+      inline={attributes.display === "inline"}
+      className={classes}
+      style={{ width: "max-content" }}
+      data-removable-highlight-id={removableHighlightId}
+      data-text-annotation-ids={textAnnotationIds}
+      data-annotation-ids={annotationIds}
+      {...interactiveAttributes}
+    >
+      <math>{childNodes}</math>
     </MathJax>
   );
 }

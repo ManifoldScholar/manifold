@@ -67,7 +67,9 @@ export default class AnnotatableCaptureClick extends Component {
 
   handleClick = (event, isKeyEvent = false) => {
     if (!event || !event.target) return;
-    const el = event.target;
+    const el = event.target.nodeName.includes("MJX")
+      ? selectionHelpers.closest(event.target, "[data-mathml]")
+      : event.target;
     if (this.doesElementContainAnnotationAndHighlight(el))
       this.handleDisambiguationClick(event, el);
     if (this.doesElementContainRemovableHighlight(el))
