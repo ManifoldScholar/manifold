@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import selectionHelpers from "./selectionHelpers";
+import has from "lodash/has";
 
 class AnnotatableCaptureSelection extends Component {
   static propTypes = {
@@ -200,6 +201,24 @@ class AnnotatableCaptureSelection extends Component {
     return annotation;
   }
 
+  /* eslint-disable no-param-reassign */
+  replaceMath(node) {
+    if (has(node.dataset, "mathml")) {
+      node.textContent = " [mathematical content] ";
+    }
+
+    const children = node.childNodes;
+    children.forEach(child => {
+      if (has(child.dataset, "mathml")) {
+        child.textContent = " [mathematical content] ";
+      }
+      if (child.childNodes.length) {
+        this.replaceMath(child);
+      }
+    });
+  }
+  /* eslint-enable no-param-reassign */
+
   extractText(nativeSelection) {
     try {
       const range = nativeSelection.getRangeAt(0);
@@ -210,6 +229,7 @@ class AnnotatableCaptureSelection extends Component {
       let text = "";
       fragment.childNodes.forEach(node => {
         if (node.nodeType === Node.ELEMENT_NODE) {
+          this.replaceMath(node);
           text += node.innerText;
           if (blockRegex.test(node.nodeName)) {
             text += "\n";
