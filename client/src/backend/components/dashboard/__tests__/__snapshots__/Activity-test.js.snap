@@ -13,7 +13,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        backend.dashboard.text_stats
+        dashboard.text_stats
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"
@@ -55,7 +55,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        backend.dashboard.highlight_stats
+        dashboard.highlight_stats
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"
@@ -69,7 +69,7 @@ exports[`backend/components/dashboard/Activity when all stats are present matche
       <span
         class="backend-activity-stats__list-text"
       >
-        backend.dashboard.annotation_stats
+        dashboard.annotation_stats
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"

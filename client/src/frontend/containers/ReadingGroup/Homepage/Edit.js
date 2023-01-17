@@ -27,18 +27,18 @@ function ReadingGroupHomepageEditContainer({
     >
       <Styled.EditContainer>
         <Styled.Heading>
-          {t("pages.frontend.reading_group.homepage_edit_header")}
+          {t("pages.reading_group.homepage_edit_header")}
         </Styled.Heading>
         <Styled.Instructions>
-          {t("pages.frontend.reading_group.homepage_edit_instructions")}
+          {t("pages.reading_group.homepage_edit_instructions")}
         </Styled.Instructions>
         <Styled.Actions>
           <ActionBox
-            title={t("pages.frontend.reading_group.search_title")}
-            instructions={t("pages.frontend.reading_group.search_instructions")}
+            title={t("pages.reading_group.search_title")}
+            instructions={t("pages.reading_group.search_instructions")}
             actions={
               <Styled.SearchButton href="#search" className="button-tertiary">
-                {t("pages.frontend.reading_group.search_button_label")}
+                {t("pages.reading_group.search_button_label")}
               </Styled.SearchButton>
             }
           />

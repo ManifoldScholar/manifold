@@ -335,7 +335,7 @@ class EntitiesListRow extends PureComponent {
                         id={`${id}-describedby`}
                         className="screen-reader-text"
                       >
-                        {this.props.t("backend.view_item", {
+                        {this.props.t("actions.view_item", {
                           item: this.titlePlainText
                         })}
                       </span>

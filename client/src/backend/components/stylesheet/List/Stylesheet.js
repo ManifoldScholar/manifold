@@ -33,8 +33,8 @@ class CategoryList extends PureComponent {
   get type() {
     const t = this.props.t;
     return this.stylesheet.attributes.ingested
-      ? t("backend.ingested")
-      : t("backend.user_created");
+      ? t("texts.stylesheets.ingested")
+      : t("texts.stylesheets.user_created");
   }
 
   get editUrl() {
@@ -101,13 +101,13 @@ class CategoryList extends PureComponent {
                 >
                   <Utility.IconComposer icon="delete32" size={26} />
                   <span className="screen-reader-text">
-                    {t("backend.delete_stylesheet")}
+                    {t("texts.stylesheets.delete_button_label")}
                   </span>
                 </button>
                 <Link className={`${baseClass}__button`} to={this.editUrl}>
                   <Utility.IconComposer icon="annotate32" size={26} />
                   <span className="screen-reader-text">
-                    {t("backend.edit_stylesheet")}
+                    {t("texts.stylesheets.edit_button_label")}
                   </span>
                 </Link>
                 <div

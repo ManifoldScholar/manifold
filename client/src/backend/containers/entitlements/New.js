@@ -9,7 +9,7 @@ export default function EntitlementNew({ entity, closeUrl }) {
 
   return (
     <section>
-      <Navigation.DrawerHeader title={t("backend.forms.entitlement.header")} />
+      <Navigation.DrawerHeader title={t("entitlements.new.header")} />
       <Form entity={entity} redirectAfterSuccess={closeUrl} />
     </section>
   );

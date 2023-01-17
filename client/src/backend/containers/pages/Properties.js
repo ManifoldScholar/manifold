@@ -34,20 +34,20 @@ class PagesPropertiesContainer extends PureComponent {
       return (
         <Form.TextInput
           validation={["required"]}
-          label={t("backend.forms.page.external_label")}
+          label={t("records.pages.external_label")}
           name="attributes[externalLink]"
-          placeholder={t("backend.forms.page.external_placeholder")}
-          instructions={t("backend.forms.page.external_instructions")}
+          placeholder={t("records.pages.external_placeholder")}
+          instructions={t("records.pages.external_instructions")}
         />
       );
     return (
       <Form.TextInput
         wide
         validation={["required"]}
-        label={t("backend.forms.page.slug_label")}
+        label={t("records.pages.slug_label")}
         name="attributes[pendingSlug]"
-        placeholder={t("backend.forms.page.slug_placeholder")}
-        instructions={t("backend.forms.page.slug_instructions")}
+        placeholder={t("records.pages.slug_placeholder")}
+        instructions={t("records.pages.slug_instructions")}
       />
     );
   }
@@ -61,11 +61,11 @@ class PagesPropertiesContainer extends PureComponent {
     return (
       <Form.TextArea
         wide
-        label={t("backend.forms.page.body_label")}
+        label={t("records.pages.body_label")}
         height={300}
         name="attributes[body]"
-        placeholder={t("backend.forms.page.body_placeholder")}
-        instructions={t("backend.forms.page.body_instructions")}
+        placeholder={t("records.pages.body_placeholder")}
+        instructions={t("records.pages.body_instructions")}
       />
     );
   }
@@ -78,7 +78,7 @@ class PagesPropertiesContainer extends PureComponent {
     return (
       <Form.Switch
         wide
-        label={t("backend.forms.page.new_tab_label")}
+        label={t("records.pages.new_tab_label")}
         name="attributes[openInNewTab]"
       />
     );
@@ -98,43 +98,43 @@ class PagesPropertiesContainer extends PureComponent {
           create={pagesAPI.create}
           className="form-secondary"
         >
-          <Form.FieldGroup label={t("backend.forms.page.properties_label")}>
+          <Form.FieldGroup label={t("records.pages.properties_label")}>
             <Form.TextInput
               wide
               validation={["required"]}
               focusOnMount
-              label={t("backend.forms.page.title_label")}
+              label={t("records.pages.title_label")}
               name="attributes[title]"
-              placeholder={t("backend.forms.page.title_placeholder")}
+              placeholder={t("records.pages.title_placeholder")}
             />
             <Form.TextInput
               wide
-              label={t("backend.forms.page.navigation_label")}
+              label={t("records.pages.navigation_label")}
               name="attributes[navTitle]"
-              placeholder={t("backend.forms.page.navigation_placeholder")}
-              instructions={t("backend.forms.page.navigation_instructions")}
+              placeholder={t("records.pages.navigation_placeholder")}
+              instructions={t("records.pages.navigation_instructions")}
             />
             <Form.Select
-              label={t("backend.forms.page.purpose_label")}
+              label={t("records.pages.purpose_label")}
               name="attributes[purpose]"
               options={[
                 {
-                  label: t("backend.forms.page.purpose_options.supplemental"),
+                  label: t("records.pages.purpose_options.supplemental"),
                   value: "supplemental_content"
                 },
                 {
-                  label: t("backend.forms.page.purpose_options.privacy_policy"),
+                  label: t("records.pages.purpose_options.privacy_policy"),
                   value: "privacy_policy"
                 },
                 {
-                  label: t("backend.forms.page.purpose_options.terms"),
+                  label: t("records.pages.purpose_options.terms"),
                   value: "terms_and_conditions"
                 }
               ]}
             />
             <Form.Switch
               wide
-              label={t("backend.forms.page.switch_label")}
+              label={t("records.pages.switch_label")}
               name="attributes[isExternalLink]"
             />
             {this.renderNewTab()}
@@ -142,32 +142,32 @@ class PagesPropertiesContainer extends PureComponent {
             {this.renderBody()}
           </Form.FieldGroup>
           <Form.FieldGroup
-            label={t("backend.forms.page.states_label")}
-            instructions={t("backend.forms.page.states_instructions")}
+            label={t("records.pages.states_label")}
+            instructions={t("records.pages.states_instructions")}
           >
             <Form.Switch
               className="fourth"
-              label={t("backend.forms.page.states_options.hide")}
+              label={t("records.pages.states_options.hide")}
               labelPos="below"
               name="attributes[hidden]"
               isPrimary
             />
             <Form.Switch
               className="fourth"
-              label={t("backend.forms.page.states_options.footer")}
+              label={t("records.pages.states_options.footer")}
               labelPos="below"
               name="attributes[showInFooter]"
               isPrimary
             />
             <Form.Switch
               className="fourth"
-              label={t("backend.forms.page.states_options.header")}
+              label={t("records.pages.states_options.header")}
               labelPos="below"
               name="attributes[showInHeader]"
               isPrimary
             />
           </Form.FieldGroup>
-          <Form.Save text={t("backend.forms.page.submit_label")} />
+          <Form.Save text={t("records.pages.submit_label")} />
         </FormContainer.Form>
       </section>
     );

@@ -23,7 +23,7 @@ class ProjectContentBlockInListPartsEdit extends PureComponent {
       <button
         className={`${this.props.baseClass}__button`}
         onClick={this.props.clickHandler}
-        aria-label={this.props.t("backend.layout.edit_block", {
+        aria-label={this.props.t("layout.edit_block", {
           blockTitle: translatedTitle
         })}
       >

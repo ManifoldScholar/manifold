@@ -28,7 +28,7 @@ class AnalyticsSearchesContainer extends PureComponent {
         <Layout.ViewHeader spaceBottom icon="BEAnalytics64" iconAltAccented>
           <h1 className="backend-header__title">
             <Trans
-              i18nKey="backend.analytics.top_searches_header"
+              i18nKey="analytics.top_searches_header"
               components={[<Link to={lh.link("backendAnalyticsGlobal")} />]}
             />
           </h1>

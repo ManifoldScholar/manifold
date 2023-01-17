@@ -14,7 +14,7 @@ class ResourceFormKindSpreadsheet extends PureComponent {
     return (
       <Form.Upload
         layout="square"
-        label={this.props.t("backend.forms.resource.spreadsheet_file")}
+        label={this.props.t("resources.new.spreadsheet_file")}
         accepts="spreadsheet"
         readFrom="attributes[attachmentFileName]"
         name="attributes[attachment]"

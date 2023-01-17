@@ -28,8 +28,8 @@ export class ActionCalloutForm extends Component {
 
   onDelete = () => {
     const t = this.props.t;
-    const heading = t("backend.forms.call-to-action.delete_modal_heading");
-    const message = t("backend.forms.call-to-action.delete_modal_message");
+    const heading = t("call_to_action.delete_modal_heading");
+    const message = t("call_to_action.delete_modal_message");
     this.props.confirm(heading, message, () => this.onConfirmedDelete());
   };
 
@@ -65,8 +65,8 @@ export class ActionCalloutForm extends Component {
   get drawerTitle() {
     const t = this.props.t;
     if (this.actionCallout.id)
-      return t("backend.forms.call-to-action.edit_drawer_title");
-    return t("backend.forms.call-to-action.create_drawer_title");
+      return t("call_to_action.edit_drawer_title");
+    return t("call_to_action.create_drawer_title");
   }
 
   get buttons() {
@@ -100,16 +100,16 @@ export class ActionCalloutForm extends Component {
     const t = this.props.t;
     return [
       {
-        label: t("backend.forms.call-to-action.visibility_options.always"),
+        label: t("layout.visibility_options.always"),
         value: "always"
       },
       {
-        label: t("backend.forms.call-to-action.visibility_options.authorized"),
+        label: t("layout.visibility_options.authorized"),
         value: "authorized"
       },
       {
         label: t(
-          "backend.forms.call-to-action.visibility_options.unauthorized"
+          "layout.visibility_options.unauthorized"
         ),
         value: "unauthorized"
       }
@@ -120,7 +120,7 @@ export class ActionCalloutForm extends Component {
     const options = [
       {
         label: this.props.t(
-          "backend.forms.call-to-action.text_select_placeholder"
+          "call_to_action.text_select_placeholder"
         ),
         value: ""
       }
@@ -186,12 +186,12 @@ export class ActionCalloutForm extends Component {
           {getModelValue => (
             <>
               <Form.TextInput
-                label={t("backend.forms.call-to-action.input_labels.title")}
+                label={t("call_to_action.input_labels.title")}
                 name="attributes[title]"
                 focusOnMount
               />
               <Form.Select
-                label={t("backend.forms.call-to-action.input_labels.type")}
+                label={t("call_to_action.input_labels.type")}
                 options={this.kindOptions}
                 name="attributes[kind]"
               />
@@ -200,7 +200,7 @@ export class ActionCalloutForm extends Component {
               ) && (
                 <Form.Select
                   label={t(
-                    "backend.forms.call-to-action.input_labels.visibility"
+                    "call_to_action.input_labels.visibility"
                   )}
                   options={this.visibilityOptions}
                   name="attributes[visibility]"
@@ -210,9 +210,9 @@ export class ActionCalloutForm extends Component {
                 getModelValue("attributes[kind]")
               ) && (
                 <Form.Select
-                  label={t("backend.forms.call-to-action.input_labels.text")}
+                  label={t("call_to_action.input_labels.text")}
                   placeholder={t(
-                    "backend.forms.call-to-action.text_select_placeholder"
+                    "call_to_action.text_select_placeholder"
                   )}
                   name="relationships[text]"
                   options={this.textOptions}
@@ -221,7 +221,7 @@ export class ActionCalloutForm extends Component {
               )}
               {this.shouldShowUrlForKind(getModelValue("attributes[kind]")) && (
                 <Form.TextInput
-                  label={t("backend.forms.call-to-action.input_labels.url")}
+                  label={t("call_to_action.input_labels.url")}
                   name="attributes[url]"
                 />
               )}
@@ -231,7 +231,7 @@ export class ActionCalloutForm extends Component {
                 <Form.Upload
                   layout="portrait"
                   label={t(
-                    "backend.forms.call-to-action.input_labels.download"
+                    "call_to_action.input_labels.download"
                   )}
                   accepts="files"
                   readFrom="attributes[attachmentStyles][original]"
@@ -240,7 +240,7 @@ export class ActionCalloutForm extends Component {
                 />
               )}
               <Form.Save
-                text={t("backend.forms.call-to-action.input_labels.save")}
+                text={t("call_to_action.input_labels.save")}
               />
             </>
           )}

@@ -14,7 +14,7 @@ class ResourceFormKindDocument extends PureComponent {
     return (
       <Form.Upload
         layout="square"
-        label={this.props.t("backend.forms.resource.document_file")}
+        label={this.props.t("resources.new.document_file")}
         accepts="document"
         readFrom="attributes[attachmentFileName]"
         name="attributes[attachment]"

@@ -68,11 +68,11 @@ class CategoryList extends PureComponent {
     const sourceIndex = this.categories.findIndex(c => c.id === sourceId);
 
     if (sourceId === "uncategorized" && direction === "down") {
-      this.announce(this.props.t("backend.messages.cannot_move_down"));
+      this.announce(this.props.t("projects.category.cannot_move_down"));
       return;
     }
     if (sourceIndex === 0 && direction === "up") {
-      this.announce(this.props.t("backend.messages.cannot_move_up"));
+      this.announce(this.props.t("projects.category.cannot_move_up"));
       return;
     }
 
@@ -85,7 +85,7 @@ class CategoryList extends PureComponent {
       position
     );
     this.announce(
-      this.props.t("backend.messages.text_moved", {
+      this.props.t("projects.category.text_moved", {
         destination: `${destination?.attributes.title || "Uncategorized"}`
       })
     );

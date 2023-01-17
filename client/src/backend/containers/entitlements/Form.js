@@ -45,26 +45,26 @@ export class EntitlementForm extends PureComponent {
           notificationScope="drawer"
         >
           <Form.Picker
-            label={t("backend.forms.entitlement.user_select_label")}
+            label={t("entitlements.new.user_select_label")}
             listStyle={"well"}
             name="attributes[targetUrl]"
             options={entitlementTargetsAPI.index}
             optionToValue={et => et.id}
             optionToLabel={et => et.attributes.name}
-            placeholder={t("backend.forms.entitlement.user_select_placeholder")}
+            placeholder={t("entitlements.new.user_select_placeholder")}
             predictive
           />
           {/* Date placholder is not localized in first pass, since the api needs this format to parse the date. -LD */}
           <Form.TextInput
             wide
-            label={t("backend.forms.entitlement.expiration_label")}
+            label={t("entitlements.new.expiration_label")}
             name="attributes[expiration]"
             placeholder="YYYY/MM/DD"
             instructions={t(
-              "backend.forms.entitlement.expiration_instructions"
+              "entitlements.new.expiration_instructions"
             )}
           />
-          <Form.Save text={t("backend.forms.entitlement.submit_label")} />
+          <Form.Save text={t("entitlements.new.submit_label")} />
         </FormContainer.Form>
       </section>
     );

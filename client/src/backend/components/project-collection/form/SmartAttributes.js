@@ -23,38 +23,38 @@ class SmartAttributes extends Component {
           return (
             <>
               <Form.NumberInput
-                label={t("backend.forms.project_collection.number_projects")}
+                label={t("project_collections.number_projects")}
                 name="attributes[numberOfProjects]"
                 instructions={t(
-                  "backend.forms.project_collection.number_projects_instructions"
+                  "project_collections.number_projects_instructions"
                 )}
               />
               <Form.Switch
-                label={t("backend.forms.project_collection.featured_projects")}
+                label={t("project_collections.featured_projects")}
                 name="attributes[featuredOnly]"
                 instructions={t(
-                  "backend.forms.project_collection.featured_projects_instructions"
+                  "project_collections.featured_projects_instructions"
                 )}
               />
               <Form.Picker
-                label={t("backend.forms.project_collection.subjects")}
+                label={t("project_collections.subjects")}
                 listStyle={"well"}
                 name="relationships[subjects]"
                 options={subjectsAPI.index}
                 optionToLabel={subject => subject.attributes.name}
                 placeholder={t(
-                  "backend.forms.project_collection.subjects_placeholder"
+                  "project_collections.subjects_placeholder"
                 )}
                 predictive
                 listRowComponent="SubjectRow"
               />
               <Form.Picker
-                label={t("backend.forms.project_collection.tags")}
+                label={t("project_collections.tags")}
                 listStyle="well"
                 listRowComponent="StringRow"
                 name="attributes[tagList]"
                 placeholder={t(
-                  "backend.forms.project_collection.tags_placeholder"
+                  "project_collections.tags_placeholder"
                 )}
                 options={tagsAPI.index}
                 optionToLabel={tag => tag.attributes.name}

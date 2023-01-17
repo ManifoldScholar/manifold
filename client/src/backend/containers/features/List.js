@@ -54,7 +54,7 @@ class ContentFeaturesList extends PureComponent {
     if (!features) return null;
     return (
       <EntitiesList
-        title={t("backend.features.header")}
+        title={t("records.features.header")}
         titleStyle="bar"
         entityComponent={FeatureRow}
         entityComponentProps={{
@@ -65,7 +65,7 @@ class ContentFeaturesList extends PureComponent {
           <Button
             path={lh.link("backendRecordsFeatureNew")}
             type="add"
-            text={t("backend.features.button_label")}
+            text={t("records.features.button_label")}
             authorizedFor="feature"
           />
         ]}

@@ -36,7 +36,7 @@ class SiteStatistics extends Component {
       },
       {
         icon: "users32",
-        label: this.props.t("common.user_title_case_other"),
+        label: this.props.t("glossary.user_title_case_other"),
         value: this.stats.totalUserCount
       },
       {
@@ -61,8 +61,8 @@ class SiteStatistics extends Component {
       <Block
         width={this.blockWidth}
         icon="featureMeasure32"
-        title={this.props.t("backend.analytics.site_statistics")}
-        description={this.props.t("backend.analytics.installation_activity")}
+        title={this.props.t("analytics.site_statistics")}
+        description={this.props.t("analytics.installation_activity")}
       >
         <List items={this.items} />
       </Block>

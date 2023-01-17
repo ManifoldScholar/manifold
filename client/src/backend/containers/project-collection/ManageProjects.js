@@ -77,14 +77,14 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
 
   projectAddMessage(project) {
     const title = project.attributes.title;
-    return this.props.t("backend_entities.project_collections.add_message", {
+    return this.props.t("project_collections.add_message", {
       title
     });
   }
 
   projectRemoveMessage(project) {
     const title = project.attributes.title;
-    return this.props.t("backend_entities.project_collections.remove_message", {
+    return this.props.t("project_collections.remove_message", {
       title
     });
   }
@@ -208,7 +208,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     return (
       <>
         <p className="list-total" aria-hidden>
-          {t("backend_entities.project_collections.added_count", {
+          {t("project_collections.added_count", {
             total,
             count
           })}
@@ -220,7 +220,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
           aria-atomic
           className="screen-reader-text"
         >
-          {t("backend_entities.project_collections.added_count", {
+          {t("project_collections.added_count", {
             total,
             count
           })}
@@ -243,7 +243,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
           icon="BECollectionManual64"
           title={this.props.projectCollection.attributes.title}
           instructions={t(
-            "backend_entities.project_collections.manage_projects_instructions"
+            "project_collections.manage_projects_instructions"
           )}
         />
         <EntitiesList

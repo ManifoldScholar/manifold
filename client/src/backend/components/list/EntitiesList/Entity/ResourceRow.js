@@ -82,11 +82,11 @@ class ResourceRow extends PureComponent {
         >
           {this.switchValue(this.resource) ? (
             <span className="screen-reader-text">
-              {this.props.t("backend.actions.remove_resource")}
+              {this.props.t("resource_collections.remove_resource")}
             </span>
           ) : (
             <span className="screen-reader-text">
-              {this.props.t("backend.actions.add_resource")}
+              {this.props.t("resource_collections.add_resource")}
             </span>
           )}
         </Toggle>

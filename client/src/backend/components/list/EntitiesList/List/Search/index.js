@@ -213,7 +213,7 @@ class ListEntitiesListSearch extends PureComponent {
                   <Collapse.Toggle
                     className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
                   >
-                    {t("common.option_title_case_other")}
+                    {t("glossary.option_title_case_other")}
                   </Collapse.Toggle>
                 )}
               </div>

@@ -107,7 +107,7 @@ export class ProjectResourceCollectionsListContainerImplementation extends PureC
         buttons={[
           <Button
             path={lh.link("backendProjectResourceCollectionsNew", project.id)}
-            text={t("backend_entities.resource_collections.add_button_label")}
+            text={t("resource_collections.add_button_label")}
             authorizedFor={project}
             authorizedTo="createResourceCollections"
             type="add"

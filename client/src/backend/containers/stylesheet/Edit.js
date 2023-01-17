@@ -91,39 +91,39 @@ export class StylesheetEditContainer extends PureComponent {
         >
           {this.stylesheet.attributes.ingested ? (
             <Form.Instructions
-              instructions={t("backend_entities.stylesheets.edit.instructions")}
+              instructions={t("texts.stylesheets.edit.instructions")}
             />
           ) : null}
           <Form.TextInput
-            label={t("backend_entities.stylesheets.edit.name_label")}
+            label={t("texts.stylesheets.edit.name_label")}
             name="attributes[name]"
-            placeholder={t("backend_entities.stylesheets.edit.name_label")}
+            placeholder={t("texts.stylesheets.edit.name_label")}
             wide
           />
           <Form.CodeArea
-            label={t("backend_entities.stylesheets.edit.source_styles_label")}
+            label={t("texts.stylesheets.edit.source_styles_label")}
             height="300px"
             mode="css"
             name="attributes[rawStyles]"
             instructions={t(
-              "backend_entities.stylesheets.edit.source_styles_instructions"
+              "texts.stylesheets.edit.source_styles_instructions"
             )}
           />
           <Form.CodeArea
             label={t(
-              "backend_entities.stylesheets.edit.validated_styles_label"
+              "texts.stylesheets.edit.validated_styles_label"
             )}
             name="attributes[styles]"
             mode="css"
             instructions={t(
-              "backend_entities.stylesheets.edit.validated_styles_instructions"
+              "texts.stylesheets.edit.validated_styles_instructions"
             )}
             readOnly
           />
           <Form.Picker
-            label={t("backend_entities.stylesheets.edit.sections_label")}
+            label={t("texts.stylesheets.edit.sections_label")}
             placeholder={t(
-              "backend_entities.stylesheets.edit.sections_placeholder"
+              "texts.stylesheets.edit.sections_placeholder"
             )}
             name="relationships[textSections]"
             optionToLabel={text => text.attributes.name}
@@ -133,7 +133,7 @@ export class StylesheetEditContainer extends PureComponent {
           />
           <Form.Save
             cancelRoute={lh.link("backendTextStyles", params.id)}
-            text={t("backend_entities.stylesheets.edit.save")}
+            text={t("texts.stylesheets.edit.save")}
           />
         </FormContainer.Form>
       </section>

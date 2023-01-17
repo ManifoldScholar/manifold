@@ -68,8 +68,8 @@ export default function TextTOCContainer({ text, route }) {
         name="backend-text-sections"
       >
         <Form.Header
-          label={t("backend_entities.texts.toc_header")}
-          instructions={t("backend_entities.texts.toc_instructions")}
+          label={t("texts.toc_header")}
+          instructions={t("texts.toc_instructions")}
         />
         <div className="entity-list__button-set-flex full-width">
           <Link
@@ -77,7 +77,7 @@ export default function TextTOCContainer({ text, route }) {
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
-              {t("backend_entities.texts.add_toc_button_label")}
+              {t("texts.add_toc_button_label")}
             </span>
             <IconComposer
               icon="circlePlus32"
@@ -85,10 +85,10 @@ export default function TextTOCContainer({ text, route }) {
               className="button-icon-secondary__icon button-icon-secondary__icon--large"
             />
             <span className="full" aria-hidden="true">
-              {t("backend_entities.texts.add_toc_button_label")}
+              {t("texts.add_toc_button_label")}
             </span>
             <span className="abbreviated" aria-hidden="true">
-              {t("backend_entities.texts.add_toc_truncated")}
+              {t("texts.add_toc_truncated")}
             </span>
           </Link>
           <button
@@ -96,7 +96,7 @@ export default function TextTOCContainer({ text, route }) {
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
-              {t("backend_entities.texts.auto_toc_button_label")}
+              {t("texts.auto_toc_button_label")}
             </span>
             <IconComposer
               icon="lightning24"
@@ -104,10 +104,10 @@ export default function TextTOCContainer({ text, route }) {
               className="button-icon-secondary__icon button-icon-secondary__icon--large"
             />
             <span className="full" aria-hidden="true">
-              {t("backend_entities.texts.auto_toc_button_label")}
+              {t("texts.auto_toc_button_label")}
             </span>
             <span className="abbreviated" aria-hidden="true">
-              {t("backend_entities.texts.auto_toc_truncated")}
+              {t("texts.auto_toc_truncated")}
             </span>
           </button>
         </div>

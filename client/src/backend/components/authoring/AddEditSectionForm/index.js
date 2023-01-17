@@ -40,13 +40,13 @@ export default function AddEditSectionForm({
     >
       <Form.TextInput
         focusOnMount
-        label={t("backend.forms.text_section.section_name")}
-        placeholder={t("backend.forms.text_section.section_name")}
+        label={t("texts.section.section_name")}
+        placeholder={t("texts.section.section_name")}
         name="attributes[name]"
       />
       <Form.CodeArea
-        label={t("backend.forms.text_section.content_label")}
-        instructions={t("backend.forms.text_section.content_instructions")}
+        label={t("texts.section.content_label")}
+        instructions={t("texts.section.content_instructions")}
         height="600px"
         mode="html"
         name="attributes[body]"
@@ -54,7 +54,7 @@ export default function AddEditSectionForm({
       <Form.DrawerButtons
         showCancel
         cancelUrl={lh.link("backendTextSections", textId)}
-        submitLabel="backend.forms.text_section.save_button_label"
+        submitLabel="texts.section.save_button_label"
       />
     </FormContainer.Form>
   );

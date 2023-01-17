@@ -119,7 +119,7 @@ class TextInner extends Component {
           >
             <Utility.IconComposer icon="delete32" size={26} />
             <span className="screen-reader-text">
-              {this.props.t("backend.actions.delete_text")}
+              {this.props.t("projects.category.delete_text")}
             </span>
           </button>
           <Link
@@ -128,7 +128,7 @@ class TextInner extends Component {
           >
             <Utility.IconComposer icon="annotate32" size={26} />
             <span className="screen-reader-text">
-              {this.props.t("backend.actions.edit_text")}
+              {this.props.t("projects.category.edit_text")}
             </span>
           </Link>
 
@@ -140,7 +140,7 @@ class TextInner extends Component {
           >
             <Utility.IconComposer icon="grabber32" size={26} />
             <span className="screen-reader-text">
-              {this.props.t("backend.actions.drag_category")}
+              {this.props.t("projects.category.drag")}
             </span>
           </div>
           <div className="texts-list__keyboard-buttons">
@@ -152,7 +152,7 @@ class TextInner extends Component {
             >
               <Utility.IconComposer icon="arrowUp32" size={26} />
               <span className="screen-reader-text">
-                {this.props.t("backend.messages.move_up")}
+                {this.props.t("projects.category.move_up")}
               </span>
             </button>
             <button
@@ -163,7 +163,7 @@ class TextInner extends Component {
             >
               <Utility.IconComposer icon="arrowDown32" size={26} />
               <span className="screen-reader-text">
-                {this.props.t("backend.messages.move_down")}
+                {this.props.t("projects.category.move_down")}
               </span>
             </button>
           </div>

@@ -33,12 +33,12 @@ class TopProjects extends Component {
       {
         key: "most_visited_desc",
         value: "most_visited_desc",
-        label: this.props.t("backend.analytics.most_visited_top")
+        label: this.props.t("analytics.most_visited_top")
       },
       {
         key: "most_visited_asc",
         value: "most_visited_asc",
-        label: this.props.t("backend.analytics.most_visited_bottom")
+        label: this.props.t("analytics.most_visited_bottom")
       }
     ];
   }
@@ -54,13 +54,13 @@ class TopProjects extends Component {
       <Block
         width={this.blockWidth}
         icon="eyeOpen32"
-        title={this.props.t("backend.analytics.most_viewed_projects")}
+        title={this.props.t("analytics.most_viewed_projects")}
       >
         <Table
           rowComponent={ProjectRow}
           headers={[
             this.props.t("glossary.project_title_case_one"),
-            this.props.t("backend.analytics.visits")
+            this.props.t("analytics.visits")
           ]}
           rows={this.data}
           paginationClickHandler={paginationClickHandler}

@@ -28,21 +28,21 @@ class IngestionHeader extends Component {
 
   get currentState() {
     return this.props.t(
-      `backend.ingestion.states.${this.ingestion.attributes.state}`
+      `texts.ingestion.states.${this.ingestion.attributes.state}`
     );
   }
 
   get strategy() {
     return (
       this.ingestion.attributes.strategyLabel ||
-      this.props.t("backend.ingestion.no_strategy")
+      this.props.t("texts.ingestion.no_strategy")
     );
   }
 
   get textId() {
     if (this.props.reingestion) return this.ingestion.attributes.textId;
 
-    return this.props.t("backend.ingestion.id_placeholder");
+    return this.props.t("texts.ingestion.id_placeholder");
   }
 
   titleBlock() {
@@ -101,15 +101,15 @@ class IngestionHeader extends Component {
             className="backend-header__body ingestion-output__properties"
           >
             <Property
-              label={this.props.t("backend.ingestion.current_state_label")}
+              label={this.props.t("texts.ingestion.current_state_label")}
               value={this.currentState}
             />
             <Property
-              label={this.props.t("backend.ingestion.strategy_label")}
+              label={this.props.t("texts.ingestion.strategy_label")}
               value={this.strategy}
             />
             <Property
-              label={this.props.t("backend.ingestion.id_label")}
+              label={this.props.t("texts.ingestion.id_label")}
               value={this.textId}
             />
           </div>

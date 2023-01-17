@@ -78,8 +78,8 @@ export class TextWrapperContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `TEXT_DESTROYED_${this.props.text.id}`,
-      heading: t("backend_entities.texts.modals.destroyed_heading"),
-      body: t("backend_entities.texts.modals.destroyed_body", {
+      heading: t("texts.modals.destroyed_heading"),
+      body: t("texts.modals.destroyed_body", {
         title: this.props.text.attributes.titlePlaintext
       }),
       expiration: 5000
@@ -95,8 +95,8 @@ export class TextWrapperContainer extends PureComponent {
 
   handleTextDestroy = () => {
     const t = this.props.t;
-    const heading = t("backend_entities.texts.modals.delete_text_heading");
-    const message = t("backend_entities.texts.modals.delete_text_body");
+    const heading = t("texts.modals.delete_text_heading");
+    const message = t("texts.modals.delete_text_body");
     this.props.confirm(heading, message, this.doDestroy);
   };
 
@@ -136,8 +136,8 @@ export class TextWrapperContainer extends PureComponent {
           />
           <span className="utility-button__text">
             {exportsAsEpubV3
-              ? t("backend_entities.texts.disable_epub")
-              : t("backend_entities.texts.enable_epub")}
+              ? t("texts.disable_epub")
+              : t("texts.enable_epub")}
           </span>
         </button>
         {epubV3ExportUrl && (
@@ -148,7 +148,7 @@ export class TextWrapperContainer extends PureComponent {
               className="utility-button__icon utility-button__icon--download"
             />
             <span className="utility-button__text">
-              {t("backend_entities.texts.download_epub")}
+              {t("texts.download_epub")}
             </span>
           </a>
         )}
@@ -164,7 +164,7 @@ export class TextWrapperContainer extends PureComponent {
               className="utility-button__icon utility-button__icon--download"
             />
             <span className="utility-button__text">
-              {t("backend_entities.texts.download_source")}
+              {t("texts.download_source")}
             </span>
           </a>
         )}
@@ -181,7 +181,7 @@ export class TextWrapperContainer extends PureComponent {
               className="utility-button__icon utility-button__icon--download"
             />
             <span className="utility-button__text">
-              {t("backend_entities.texts.visit_source")}
+              {t("texts.visit_source")}
             </span>
           </a>
         )}
@@ -207,7 +207,7 @@ export class TextWrapperContainer extends PureComponent {
         <Authorize
           entity={text}
           failureFatalError={{
-            body: t("backend_entities.texts.unauthorized")
+            body: t("texts.unauthorized")
           }}
           ability={["update"]}
         >
@@ -232,7 +232,7 @@ export class TextWrapperContainer extends PureComponent {
               <Navigation.Secondary
                 links={secondaryLinks}
                 panel
-                ariaLabel={t("backend_entities.texts.settings")}
+                ariaLabel={t("texts.settings")}
               />
             }
           >

@@ -14,8 +14,8 @@ export default function AddEditTOCEntryContainer({ tree, ...props }) {
       <Navigation.DrawerHeader
         title={
           entryId
-            ? t("backend.forms.text_toc.edit_header")
-            : t("backend.forms.text_toc.add_header")
+            ? t("texts.toc.edit_header")
+            : t("texts.toc.add_header")
         }
       />
       <AddEditTOCEntryForm entry={tree.items[entryId]} tree={tree} {...props} />

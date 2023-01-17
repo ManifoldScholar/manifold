@@ -35,7 +35,7 @@ function JournalVolumesContainer({ refresh, journal, route }) {
       <EntitiesList
         entityComponent={JournalVolumeRow}
         entityComponentProps={{ journal }}
-        title={t("backend_entities.volumes.header")}
+        title={t("volumes.header")}
         titleIcon="Journals64"
         titleStyle="bar"
         entities={data}
@@ -51,7 +51,7 @@ function JournalVolumesContainer({ refresh, journal, route }) {
           <Button
             path={lh.link("backendJournalVolumeNew", journal.id)}
             type="add"
-            text={t("backend_entities.volumes.add_button_label")}
+            text={t("volumes.add_button_label")}
             authorizedFor="journalVolume"
           />
         ]}

@@ -107,12 +107,12 @@ class MakersListContainerImplementation extends PureComponent {
         {childRoutes(this.props.route, { drawer: true, drawerProps })}
         {makers && (
           <EntitiesList
-            title={t("backend.makers.header")}
+            title={t("records.makers.header")}
             titleStyle="bar"
             buttons={[
               <Button
                 path={lh.link("backendRecordsMakersNew")}
-                text={t("backend.makers.button_label")}
+                text={t("records.makers.button_label")}
                 type="add"
                 authorizedFor="maker"
               />

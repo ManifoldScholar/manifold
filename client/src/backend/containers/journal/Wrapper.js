@@ -22,8 +22,8 @@ function JournalWrapper({ match, route, history, confirm }) {
   const notifyDestroy = useNotification(j => ({
     level: 0,
     id: `JOURNAL_DESTROYED_${j.id}`,
-    heading: t("backend_entities.journals.modals.delete_heading"),
-    body: t("backend_entities.journals.modals.delete_body", {
+    heading: t("journals.modals.delete_heading"),
+    body: t("journals.modals.delete_body", {
       title: j?.attributes?.title
     }),
     expiration: 5000
@@ -41,8 +41,8 @@ function JournalWrapper({ match, route, history, confirm }) {
   }, [destroy, history, journal, notifyDestroy]);
 
   const handleJournalDestroy = useCallback(() => {
-    const heading = t("backend_entities.journals.modals.confirm_heading");
-    const message = t("backend_entities.journals.modals.confirm_body");
+    const heading = t("journals.modals.confirm_heading");
+    const message = t("journals.modals.confirm_body");
     confirm(heading, message, destroyAndRedirect);
   }, [destroyAndRedirect, confirm, t]);
 
@@ -87,7 +87,7 @@ function JournalWrapper({ match, route, history, confirm }) {
       <Authorize
         entity={journal}
         failureFatalError={{
-          detail: t("backend_entities.journals.unauthorized_edit")
+          detail: t("journals.unauthorized_edit")
         }}
         ability={["read"]}
       >
@@ -107,7 +107,7 @@ function JournalWrapper({ match, route, history, confirm }) {
             <Navigation.Secondary
               links={navigation.journal(journal)}
               panel
-              ariaLabel={t("backend_entities.journals.settings")}
+              ariaLabel={t("journals.settings")}
             />
           }
         >

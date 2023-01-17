@@ -68,12 +68,12 @@ export class PermissionForm extends PureComponent {
 
     return (
       <Form.Picker
-        label={t("backend.forms.permissions.user_label")}
+        label={t("projects.permissions.user_label")}
         listStyle={"well"}
         name="relationships[user]"
         options={this.fetchUsers}
         optionToLabel={u => u.attributes.fullName}
-        placeholder={t("backend.forms.permissions.user_placeholder")}
+        placeholder={t("projects.permissions.user_placeholder")}
         predictive
         listRowComponent="UserRow"
         wide
@@ -105,21 +105,21 @@ export class PermissionForm extends PureComponent {
             name="attributes[roleNames]"
             options={[
               {
-                label: t("backend.forms.permissions.modify_project"),
+                label: t("projects.permissions.modify_project"),
                 value: "project_editor"
               },
               {
-                label: t("backend.forms.permissions.modify_resource"),
+                label: t("projects.permissions.modify_resource"),
                 value: "project_resource_editor"
               },
               {
-                label: t("backend.forms.permissions.author"),
+                label: t("projects.permissions.author"),
                 value: "project_author"
               }
             ]}
             focusOnMount={this.props.showUserInput}
           />
-          <Form.Save text={t("backend.forms.permissions.submit_label")} />
+          <Form.Save text={t("projects.permissions.submit_label")} />
         </FormContainer.Form>
       </section>
     );

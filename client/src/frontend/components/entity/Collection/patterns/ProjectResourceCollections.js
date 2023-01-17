@@ -21,7 +21,7 @@ function ProjectResourceCollectionsEntityCollection({
     !isEmpty(resourceCollectionsMeta) && !isEmpty(paginationProps);
   return (
     <EntityCollection
-      title={t("pages.frontend.resource_collections_all")}
+      title={t("pages.resource_collections_all")}
       icon="resourceCollection64"
       BodyComponent={props => (
         <ResourceCollectionList.Grid

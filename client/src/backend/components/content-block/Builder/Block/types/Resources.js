@@ -9,7 +9,7 @@ export default class ProjectContentBlocksResources extends PureComponent {
   };
 
   static defaultProps = {
-    title: "backend.layout.resources_block_title", // Static props can't be translated in their own class, pass the key to be translated where it's implemented
+    title: "layout.resources_block_title", // Static props can't be translated in their own class, pass the key to be translated where it's implemented
     icon: "BEResourcesBox64"
   };
 

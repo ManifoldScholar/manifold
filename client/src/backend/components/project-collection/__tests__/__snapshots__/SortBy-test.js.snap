@@ -3,12 +3,12 @@
 exports[`backend/components/project-collection/SortBy matches the snapshot 1`] = `
 <Wrapper>
   <Instructions>
-    backend.forms.project_collection.order_manually_instructions
+    project_collections.order_manually_instructions
   </Instructions>
   <Toggle>
     <Label
       as="div"
-      label="backend.forms.project_collection.order_manually"
+      label="project_collections.order_manually"
     />
     <div
       className="toggle-indicator"
@@ -24,7 +24,7 @@ exports[`backend/components/project-collection/SortBy matches the snapshot 1`] =
         <span
           className="screen-reader-text"
         >
-          backend.forms.project_collection.order_collection_manually
+          project_collections.order_collection_manually
         </span>
       </Toggle>
     </div>

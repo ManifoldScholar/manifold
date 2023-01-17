@@ -39,7 +39,7 @@ export class UsersNewContainer extends PureComponent {
     const t = this.props.t;
     return (
       <section>
-        <Navigation.DrawerHeader title={t("backend.forms.user.new_header")} />
+        <Navigation.DrawerHeader title={t("records.users.new_header")} />
         <FormContainer.Form
           model={this.defaultUser}
           name={requests.beUserCreate}
@@ -52,48 +52,48 @@ export class UsersNewContainer extends PureComponent {
         >
           <Form.TextInput
             focusOnMount
-            label={t("backend.forms.user.email")}
+            label={t("records.users.email")}
             name="attributes[email]"
-            placeholder={t("backend.forms.user.email")}
+            placeholder={t("records.users.email")}
           />
           <Form.Select
-            label={t("backend.forms.user.role_label")}
+            label={t("records.users.role_label")}
             name="attributes[role]"
             options={[
               {
-                label: t("backend.forms.user.role_options.admin"),
+                label: t("records.users.role_options.admin"),
                 value: "admin"
               },
               {
-                label: t("backend.forms.user.role_options.editor"),
+                label: t("records.users.role_options.editor"),
                 value: "editor"
               },
               {
-                label: t("backend.forms.user.role_options.creator"),
+                label: t("records.users.role_options.creator"),
                 value: "project_creator"
               },
               {
-                label: t("backend.forms.user.role_options.marketeer"),
+                label: t("records.users.role_options.marketeer"),
                 value: "marketeer"
               },
               {
-                label: t("backend.forms.user.role_options.reader"),
+                label: t("records.users.role_options.reader"),
                 value: "reader"
               }
             ]}
           />
           <Form.TextInput
-            label={t("backend.forms.user.first_name")}
+            label={t("records.users.first_name")}
             name="attributes[firstName]"
-            placeholder={t("backend.forms.user.first_name")}
+            placeholder={t("records.users.first_name")}
           />
           <Form.TextInput
-            label={t("backend.forms.user.last_name")}
+            label={t("records.users.last_name")}
             name="attributes[lastName]"
-            placeholder={t("backend.forms.user.last_name")}
+            placeholder={t("records.users.last_name")}
           />
           <Form.GeneratedPasswordInput name="attributes[password]" />
-          <Form.Save text={t("backend.forms.user.submit_label")} />
+          <Form.Save text={t("records.users.submit_label")} />
         </FormContainer.Form>
       </section>
     );

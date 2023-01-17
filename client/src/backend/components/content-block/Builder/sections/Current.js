@@ -58,7 +58,7 @@ class ProjectContentSectionsCurrent extends PureComponent {
   render() {
     return (
       <div>
-        <Header subtitle={this.props.t("backend.layout.layout")} />
+        <Header subtitle={this.props.t("layout.layout")} />
         {Object.keys(this.zones).map(zone => (
           <Droppable
             key={zone}

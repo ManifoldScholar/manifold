@@ -16,7 +16,7 @@ export default function ProjectsWrapper({ route }) {
       ability="update"
       entity={["project"]}
       failureFatalError={{
-        body: t("backend_entities.projects.unauthorized")
+        body: t("projects.unauthorized")
       }}
     >
       <div>

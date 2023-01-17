@@ -49,7 +49,7 @@ export class IngestionNewContainer extends PureComponent {
     return (
       <section>
         <Navigation.DrawerHeader
-          title={this.props.t("backend_entities.texts.ingest_button_label")}
+          title={this.props.t("texts.ingest_button_label")}
         />
         <Ingestion.Form.Wrapper
           cancelUrl={lh.link("backendProjectTexts", this.projectId)}

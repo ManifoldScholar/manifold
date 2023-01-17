@@ -77,7 +77,7 @@ export class LogContainer extends PureComponent {
       >
         {this.props.versions && (
           <EntitiesList
-            title={t("backend_entities.projects.changes")}
+            title={t("projects.changes")}
             titleIcon="BEActivity64"
             entities={this.props.versions}
             entityComponent={LogRow}

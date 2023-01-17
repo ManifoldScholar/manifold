@@ -43,51 +43,51 @@ function ProjectPropertiesContainer({ project }) {
           className="form-secondary"
         >
           <Form.FieldGroup
-            label={t("backend_entities.projects.forms.properties.header")}
+            label={t("projects.forms.properties.header")}
           >
             <Form.TextInput
               wide
               validation={["required"]}
               focusOnMount
-              label={t("backend_entities.projects.forms.title_label")}
+              label={t("projects.forms.title_label")}
               name="attributes[title]"
               placeholder={t(
-                "backend_entities.projects.forms.title_placeholder"
+                "projects.forms.title_placeholder"
               )}
             />
             <Form.TextInput
               wide
-              label={t("backend_entities.projects.forms.subtitle_label")}
+              label={t("projects.forms.subtitle_label")}
               name="attributes[subtitle]"
               placeholder={t(
-                "backend_entities.projects.forms.subtitle_placeholder"
+                "projects.forms.subtitle_placeholder"
               )}
             />
             {journalIssue && (
               <>
                 <Form.TextInput
-                  label={t("backend_entities.issues.forms.number_label")}
+                  label={t("issues.forms.number_label")}
                   wide
                   name="attributes[journalIssueNumber]"
                 />
                 <Form.NumberInput
-                  label={t("backend_entities.issues.forms.sort_number_label")}
+                  label={t("issues.forms.sort_number_label")}
                   wide
                   name="attributes[journalIssuePendingSortTitle]"
                   placeholder={t(
-                    "backend_entities.issues.forms.sort_number_placeholder"
+                    "issues.forms.sort_number_placeholder"
                   )}
                   instructions={t(
-                    "backend_entities.issues.forms.sort_number_instructions"
+                    "issues.forms.sort_number_instructions"
                   )}
                 />
                 <Form.Picker
                   instructions={t(
-                    "backend_entities.issues.forms.volume_instructions"
+                    "issues.forms.volume_instructions"
                   )}
                   wide
                   belongsTo
-                  label={t("backend_entities.issues.forms.volume_label")}
+                  label={t("issues.forms.volume_label")}
                   name="relationships[journalVolume]"
                   optionToLabel={volume => volume.attributes.number}
                   predictive
@@ -98,28 +98,28 @@ function ProjectPropertiesContainer({ project }) {
             )}
             <Form.DatePicker
               label={t(
-                "backend_entities.projects.forms.properties.pub_date_label"
+                "projects.forms.properties.pub_date_label"
               )}
               name="attributes[publicationDate]"
             />
             <Form.TextInput
               wide
-              label={t("backend_entities.projects.forms.properties.slug_label")}
+              label={t("projects.forms.properties.slug_label")}
               name="attributes[pendingSlug]"
               placeholder={t(
-                "backend_entities.projects.forms.properties.slug_placeholder"
+                "projects.forms.properties.slug_placeholder"
               )}
             />
             <Project.Form.AvatarBuilder wide project={project} />
           </Form.FieldGroup>
           <Form.FieldGroup
             label={t(
-              "backend_entities.projects.forms.properties.taxonomy_header"
+              "projects.forms.properties.taxonomy_header"
             )}
           >
             <Form.Picker
               label={t(
-                "backend_entities.projects.forms.properties.subjects_label"
+                "projects.forms.properties.subjects_label"
               )}
               listStyle={"well"}
               name="relationships[subjects]"
@@ -127,18 +127,18 @@ function ProjectPropertiesContainer({ project }) {
               optionToLabel={subject => subject.attributes.name}
               newToValue={createSubjectFromValue}
               placeholder={t(
-                "backend_entities.projects.forms.properties.subjects_placeholder"
+                "projects.forms.properties.subjects_placeholder"
               )}
               listRowComponent="SubjectRow"
             />
 
             <Form.Picker
-              label={t("backend_entities.projects.forms.properties.tags_label")}
+              label={t("projects.forms.properties.tags_label")}
               listStyle="well"
               listRowComponent="StringRow"
               name="attributes[tagList]"
               placeholder={t(
-                "backend_entities.projects.forms.properties.tags_placeholder"
+                "projects.forms.properties.tags_placeholder"
               )}
               options={tagsAPI.index}
               optionToLabel={tag => tag.attributes.name}
@@ -148,42 +148,42 @@ function ProjectPropertiesContainer({ project }) {
           </Form.FieldGroup>
           <Form.FieldGroup
             label={t(
-              "backend_entities.projects.forms.properties.presentation_header"
+              "projects.forms.properties.presentation_header"
             )}
           >
             <Form.Switch
               wide
               label={t(
-                "backend_entities.projects.forms.properties.draft_mode_label"
+                "projects.forms.properties.draft_mode_label"
               )}
               name="attributes[draft]"
               instructions={t(
-                "backend_entities.projects.forms.properties.draft_mode_instructions"
+                "projects.forms.properties.draft_mode_instructions"
               )}
             />
             <Form.Switch
               wide
               label={t(
-                "backend_entities.projects.forms.properties.featured_label"
+                "projects.forms.properties.featured_label"
               )}
               name="attributes[featured]"
               instructions={t(
-                "backend_entities.projects.forms.properties.featured_instructions"
+                "projects.forms.properties.featured_instructions"
               )}
             />
             <Form.Switch
               wide
               label={t(
-                "backend_entities.projects.forms.properties.finished_label"
+                "projects.forms.properties.finished_label"
               )}
               name="attributes[finished]"
               instructions={t(
-                "backend_entities.projects.forms.properties.finished_instructions"
+                "projects.forms.properties.finished_instructions"
               )}
             />
             <Form.Select
               label={t(
-                "backend_entities.projects.forms.properties.standalone_label"
+                "projects.forms.properties.standalone_label"
               )}
               wide
               name="attributes[standaloneMode]"
@@ -191,63 +191,63 @@ function ProjectPropertiesContainer({ project }) {
                 {
                   value: "disabled",
                   label: t(
-                    "backend_entities.projects.forms.properties.standalone_options.disabled"
+                    "projects.forms.properties.standalone_options.disabled"
                   )
                 },
                 {
                   value: "enabled",
                   label: t(
-                    "backend_entities.projects.forms.properties.standalone_options.enabled"
+                    "projects.forms.properties.standalone_options.enabled"
                   )
                 },
                 {
                   value: "enforced",
                   label: t(
-                    "backend_entities.projects.forms.properties.standalone_options.enforced"
+                    "projects.forms.properties.standalone_options.enforced"
                   )
                 }
               ]}
               instructions={t(
-                "backend_entities.projects.forms.properties.standalone_instructions"
+                "projects.forms.properties.standalone_instructions"
               )}
             />
             <Form.TextInput
               label={t(
-                "backend_entities.projects.forms.properties.top_bar_text_label"
+                "projects.forms.properties.top_bar_text_label"
               )}
               name="attributes[standaloneModePressBarText]"
               instructions={t(
-                "backend_entities.projects.forms.properties.top_bar_text_instructions"
+                "projects.forms.properties.top_bar_text_instructions"
               )}
             />
             <Form.TextInput
               label={t(
-                "backend_entities.projects.forms.properties.top_bar_url_label"
+                "projects.forms.properties.top_bar_url_label"
               )}
               name="attributes[standaloneModePressBarUrl]"
               instructions={t(
-                "backend_entities.projects.forms.properties.top_bar_url_instructions"
+                "projects.forms.properties.top_bar_url_instructions"
               )}
             />
           </Form.FieldGroup>
           <Form.FieldGroup
             label={t(
-              "backend_entities.projects.forms.properties.restrictions_header"
+              "projects.forms.properties.restrictions_header"
             )}
           >
             <Form.Switch
               wide
               label={t(
-                "backend_entities.projects.forms.properties.disable_public_label"
+                "projects.forms.properties.disable_public_label"
               )}
               name="attributes[disableEngagement]"
               instructions={t(
-                "backend_entities.projects.forms.properties.disable_public_instructions"
+                "projects.forms.properties.disable_public_instructions"
               )}
             />
           </Form.FieldGroup>
           <Form.Save
-            text={t("backend_entities.projects.forms.properties.save")}
+            text={t("projects.forms.properties.save")}
           />
         </FormContainer.Form>
       </section>

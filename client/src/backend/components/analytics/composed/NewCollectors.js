@@ -22,10 +22,10 @@ class NewCollectors extends Component {
   get caption() {
     const { rangeInWords } = this.props;
     return rangeInWords
-      ? this.props.t("backend.analytics.stars_in_date_range", {
+      ? this.props.t("analytics.stars_in_date_range", {
           dateRange: rangeInWords
         })
-      : this.props.t("backend.analytics.stars_received");
+      : this.props.t("analytics.stars_received");
   }
 
   render() {
@@ -33,7 +33,7 @@ class NewCollectors extends Component {
       <Block
         width={this.blockWidth}
         icon="starSquircle32"
-        title={this.props.t("backend.analytics.new_stars")}
+        title={this.props.t("analytics.new_stars")}
       >
         <Figure stat={`${this.data.value}`} caption={this.caption} />
       </Block>

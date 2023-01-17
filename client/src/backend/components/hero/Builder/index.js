@@ -115,21 +115,19 @@ class Builder extends PureComponent {
                 aria-describedby={`${id}-instructions`}
               >
                 <SectionLabel
-                  label={t("backend.layout.hero_block")}
+                  label={t("layout.hero_block")}
                   id={`${id}-header`}
                 />
                 <Styled.Instructions id={`${id}-instructions`}>
-                  {t("backend.layout.hero_block_instructions", {
+                  {t("layout.hero_block_instructions", {
                     entity: modelLabel ?? this.defaultModelLabel
                   })}
                 </Styled.Instructions>
 
                 {include.includes("projectDescription") && (
                   <Block
-                    title={t("backend.layout.description_and_images")}
-                    description={t(
-                      "backend.layout.description_and_images_description"
-                    )}
+                    title={t("layout.description_and_images")}
+                    description={t("layout.description_and_images_description")}
                     onEdit={this.openProjectDescriptionDrawer}
                     ariaControls={`${id}-drawer`}
                     ariaExpanded={
@@ -139,10 +137,8 @@ class Builder extends PureComponent {
                 )}
                 {include.includes("journalDescription") && (
                   <Block
-                    title={t("backend.layout.description_and_images")}
-                    description={t(
-                      "backend.layout.description_and_images_description"
-                    )}
+                    title={t("layout.description_and_images")}
+                    description={t("layout.description_and_images_description")}
                     onEdit={this.openJournalDescriptionDrawer}
                     ariaControls={`${id}-drawer`}
                     ariaExpanded={
@@ -152,10 +148,8 @@ class Builder extends PureComponent {
                 )}
                 {include.includes("actionCallouts") && (
                   <Block
-                    title={t("backend.layout.calls_to_action")}
-                    description={t(
-                      "backend.layout.calls_to_action_description"
-                    )}
+                    title={t("layout.calls_to_action")}
+                    description={t("layout.calls_to_action_description")}
                   >
                     {this.props.actionCallouts && (
                       <ActionCallouts
@@ -177,8 +171,8 @@ class Builder extends PureComponent {
                 )}
                 {include.includes("social") && (
                   <Block
-                    title={t("backend.layout.social_links")}
-                    description={t("backend.layout.social_links_description")}
+                    title={t("layout.social_links")}
+                    description={t("layout.social_links_description")}
                     onEdit={this.openSocialDrawer}
                     ariaControls={`${id}-drawer`}
                     ariaExpanded={this.state.drawer === Forms.Social}

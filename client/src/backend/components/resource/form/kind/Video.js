@@ -16,23 +16,23 @@ class ResourceFormKindVideo extends PureComponent {
     return (
       <>
         <Form.TextInput
-          label={this.props.t("backend.forms.resource.video_id")}
+          label={this.props.t("resources.new.video_id")}
           name="attributes[externalId]"
           placeholder={this.props.t(
-            "backend.forms.resource.video_id_placeholder"
+            "resources.new.video_id_placeholder"
           )}
           instructions={this.props.t(
-            "backend.forms.resource.video_id_instructions"
+            "resources.new.video_id_instructions"
           )}
           {...this.props}
         />
         <Form.Select
-          label={this.props.t("backend.forms.resource.external_video_type")}
+          label={this.props.t("resources.new.external_video_type")}
           name="attributes[externalType]"
           selected={this.props.sourceModel.attributes.externalType}
           options={[
             {
-              label: this.props.t("backend.forms.resource.select_source"),
+              label: this.props.t("resources.new.select_source"),
               value: ""
             },
             { label: "Youtube", value: "youtube" },
@@ -48,7 +48,7 @@ class ResourceFormKindVideo extends PureComponent {
     return (
       <Form.Upload
         layout="square"
-        label={this.props.t("backend.forms.resource.video_file")}
+        label={this.props.t("resources.new.video_file")}
         accepts="video"
         readFrom="attributes[attachmentFileName]"
         name="attributes[attachment]"
@@ -62,7 +62,7 @@ class ResourceFormKindVideo extends PureComponent {
     return (
       <>
         <Form.Switch
-          label={this.props.t("backend.forms.resource.video_source")}
+          label={this.props.t("resources.new.video_source")}
           name="attributes[subKind]"
           customValues={{
             true: "external_video",

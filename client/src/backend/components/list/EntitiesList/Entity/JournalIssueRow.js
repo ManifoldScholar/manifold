@@ -20,7 +20,7 @@ function JournalIssueRow({
     ? t("journals.volume_number", {
         volNum: relationships.journalVolume.attributes.number
       })
-    : t("backend.no_volume");
+    : t("volumes.no_volume");
 
   const additionalProps = {
     title: t("journals.issue_number", { issNum: number }),

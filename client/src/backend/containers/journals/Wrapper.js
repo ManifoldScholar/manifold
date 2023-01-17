@@ -11,7 +11,7 @@ export default function JournalsWrapper({ route }) {
       ability="update"
       entity={["journal"]}
       failureFatalError={{
-        body: t("backend_entities.journals.unauthorized")
+        body: t("journals.unauthorized")
       }}
     >
       <div>

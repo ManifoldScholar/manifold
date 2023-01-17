@@ -47,8 +47,8 @@ export class ContentBlockEditContainer extends Component {
 
   onDelete = () => {
     const t = this.props.t;
-    const heading = t("backend.forms.content-block.delete_modal_heading");
-    const message = t("backend.forms.content-block.delete_modal_message");
+    const heading = t("modals.delete_content_block");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, this.doDelete);
   };
 

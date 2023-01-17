@@ -110,8 +110,8 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `RESOURCE_COLLECTION_DESTROYED_${this.props.resourceCollection.id}`,
-      heading: t("backend_entities.resource_collections.modals.delete_heading"),
-      body: t("backend_entities.resource_collections.modals.delete_body", {
+      heading: t("resource_collections.modals.delete_heading"),
+      body: t("resource_collections.modals.delete_body", {
         title: this.props.resourceCollection.attributes.title
       }),
       expiration: 5000
@@ -122,10 +122,10 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
   handleCollectionDestroy = () => {
     const t = this.props.t;
     const heading = t(
-      "backend_entities.resource_collections.modals.confirm_heading"
+      "resource_collections.modals.confirm_heading"
     );
     const message = t(
-      "backend_entities.resource_collections.modals.confirm_body"
+      "resource_collections.modals.confirm_body"
     );
     this.props.confirm(heading, message, this.doDestroy);
   };
@@ -176,7 +176,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
         <Authorize
           entity={resourceCollection}
           failureFatalError={{
-            body: t("backend_entities.resource_collections.unauthorized")
+            body: t("resource_collections.unauthorized")
           }}
           ability="update"
         >
@@ -202,7 +202,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
               <Navigation.Secondary
                 links={secondaryLinks}
                 panel
-                ariaLabel={t("backend_entities.resource_collections.settings")}
+                ariaLabel={t("resource_collections.settings")}
               />
             }
           >

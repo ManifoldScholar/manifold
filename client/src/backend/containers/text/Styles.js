@@ -52,8 +52,8 @@ export class TextStylesContainer extends PureComponent {
 
   confirmDestroy = stylesheet => {
     const t = this.props.t;
-    const heading = t("backend_entities.stylesheets.modals.confirm_heading");
-    const message = t("backend_entities.stylesheets.modals.confirm_body");
+    const heading = t("texts.stylesheets.modals.confirm_heading");
+    const message = t("texts.stylesheets.modals.confirm_body");
     this.props.confirm(heading, message, () => this.destroy(stylesheet));
   };
 
@@ -92,7 +92,7 @@ export class TextStylesContainer extends PureComponent {
       <div>
         <section className="text-category-list-secondary">
           <div className="instructional-copy">
-            <p>{t("backend_entities.stylesheets.instructions")}</p>
+            <p>{t("texts.stylesheets.instructions")}</p>
           </div>
 
           <div className="buttons-icon-horizontal maintain">
@@ -108,7 +108,7 @@ export class TextStylesContainer extends PureComponent {
                   "button-icon-secondary__icon--large"
                 )}
               />
-              <span>{t("backend_entities.stylesheets.add_button_label")}</span>
+              <span>{t("texts.stylesheets.add_button_label")}</span>
             </Link>
           </div>
 

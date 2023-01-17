@@ -17,7 +17,7 @@ function RowSort({ options, active, onChange }) {
           {id => (
             <div>
               <Styled.Label htmlFor={id}>
-                {t("backend.analytics.sort_by")}
+                {t("analytics.sort_by")}
               </Styled.Label>
               <Styled.SelectWrapper>
                 <Styled.Select

@@ -14,7 +14,7 @@ class ResourceFormKindImage extends PureComponent {
     return (
       <Form.Upload
         layout="square"
-        label={this.props.t("backend.forms.resource.image_file")}
+        label={this.props.t("resources.new.image_file")}
         accepts="images"
         readFrom="attributes[attachmentStyles][small]"
         name="attributes[attachment]"

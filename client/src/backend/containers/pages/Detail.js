@@ -79,8 +79,8 @@ class PageDetailContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `PAGE_DESTROYED_${feature.id}`,
-      heading: t("backend.forms.page.delete_confirm_heading"),
-      body: t("backend.forms.page.delete_confim_body"),
+      heading: t("records.pages.delete_confirm_heading"),
+      body: t("records.pages.delete_confim_body"),
       expiration: 3000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -92,8 +92,8 @@ class PageDetailContainer extends PureComponent {
 
   handleDestroy = () => {
     const t = this.props.t;
-    const heading = t("backend.forms.page.delete_modal_heading");
-    const message = t("backend.forms.page.delete_modal_message");
+    const heading = t("records.pages.delete_modal_heading");
+    const message = t("records.pages.delete_modal_message");
     this.props.confirm(heading, message, this.doDestroy);
   };
 
@@ -126,10 +126,10 @@ class PageDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="page"
         backUrl={lh.link("backendRecordsPages")}
-        backLabel={t("backend.pages.back_label")}
-        title={t("backend.forms.page.new_header")}
+        backLabel={t("records.pages.back_label")}
+        title={t("records.pages.new_header")}
         showUtility={false}
-        note={t("backend.forms.page.new_instructions")}
+        note={t("records.pages.new_instructions")}
       />
     );
   }
@@ -145,7 +145,7 @@ class PageDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="page"
         backUrl={lh.link("backendRecordsPages")}
-        backLabel={t("backend.pages.back_label")}
+        backLabel={t("records.pages.back_label")}
         title={page.attributes.title}
         subtitle={subtitle}
         utility={this.renderUtility()}
@@ -210,7 +210,7 @@ class PageDetailContainer extends PureComponent {
             <Navigation.Secondary
               links={secondaryLinks}
               panel
-              ariaLabel={t("backend.forms.page.settings")}
+              ariaLabel={t("records.pages.settings")}
             />
           }
         >
@@ -239,7 +239,7 @@ class PageDetailContainer extends PureComponent {
     return (
       <Authorize
         failureFatalError={{
-          body: t(`backend.forms.page.unauthorized_${authProps.abiltiy}`)
+          body: t(`records.pages.unauthorized_${authProps.abiltiy}`)
         }}
         {...authProps}
       >

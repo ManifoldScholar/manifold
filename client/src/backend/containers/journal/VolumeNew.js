@@ -15,7 +15,7 @@ function JournalVolumeNew({ refreshVolumes, closeUrl, journal, history }) {
   return (
     <div>
       <Navigation.DrawerHeader
-        title={t("backend_entities.volumes.create_header")}
+        title={t("volumes.create_header")}
       />
       <Volume.Form journalId={journal.id} onSuccess={refreshAndRedirect} />
     </div>

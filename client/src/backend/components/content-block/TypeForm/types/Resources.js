@@ -24,23 +24,23 @@ class ProjectContentTypeFormResources extends PureComponent {
     return (
       <>
         <Form.TextInput
-          label={this.props.t("backend.forms.title")}
+          label={this.props.t("common.title")}
           name="attributes[title]"
           instructions={this.props.t(
-            "backend.forms.resource.default_title_message"
+            "content_blocks.resources.default_title_message"
           )}
           focusOnMount
           wide
         />
         <Form.TextArea
-          label={this.props.t("backend.forms.description")}
+          label={this.props.t("common.description")}
           name="attributes[description]"
           wide
         />
         <Form.Switch
-          label={this.props.t("backend.forms.resource.collections_switch")}
+          label={this.props.t("content_blocks.resources.collections_switch")}
           instructions={this.props.t(
-            "backend.forms.resource.collections_switch_info"
+            "content_blocks.resources.collections_switch_info"
           )}
           name="attributes[showAllCollections]"
           wide
@@ -50,9 +50,9 @@ class ProjectContentTypeFormResources extends PureComponent {
           <>
             <Form.Picker
               placeholder={this.props.t(
-                "backend.forms.resource.select_collection_placeholder"
+                "content_blocks.resources.select_collection_placeholder"
               )}
-              label={this.props.t("backend.forms.resource.select_collection")}
+              label={this.props.t("content_blocks.resources.select_collection")}
               optionToLabel={rc => rc.attributes.title}
               name="relationships[featuredCollections]"
               options={this.collections}

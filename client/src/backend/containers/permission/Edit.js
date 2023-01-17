@@ -60,8 +60,8 @@ export class PermissionEdit extends PureComponent {
 
   handleRemoveAll = () => {
     const t = this.props.t;
-    const heading = t("backend.forms.permissions.delete_modal_heading");
-    const message = t("backend.forms.permissions.delete_modal_message");
+    const heading = t("projects.permissions.delete_modal_heading");
+    const message = t("projects.permissions.delete_modal_message");
     this.props.confirm(heading, message, this.removeAllPermissions);
   };
 
@@ -86,7 +86,7 @@ export class PermissionEdit extends PureComponent {
     return (
       <section>
         <Navigation.DrawerHeader
-          title={t("backend.forms.permissions.edit_header")}
+          title={t("projects.permissions.edit_header")}
           buttons={[
             {
               onClick: this.handleRemoveAll,

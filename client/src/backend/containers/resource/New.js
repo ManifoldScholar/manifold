@@ -71,9 +71,9 @@ export class ResourceNewContainer extends PureComponent {
             type="resource"
             backUrl={lh.link("backendProjectResources", project.id)}
             backLabel={project.attributes.titlePlaintext}
-            title={t("backend_entities.resources.forms.new.title")}
+            title={t("resources.new.title")}
             showUtility={false}
-            note={t("backend_entities.resources.forms.new.instructions")}
+            note={t("resources.new.instructions")}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
@@ -89,25 +89,25 @@ export class ResourceNewContainer extends PureComponent {
                 includeButtons
               />
               <Form.TextInput
-                label={t("backend_entities.resources.forms.title_label")}
+                label={t("resources.title_label")}
                 name="attributes[title]"
                 placeholder={t(
-                  "backend_entities.resources.forms.title_placeholder"
+                  "resources.title_placeholder"
                 )}
                 wide
               />
               <Form.TextArea
-                label={t("backend_entities.resources.forms.descript_label")}
+                label={t("resources.descript_label")}
                 name="attributes[description]"
                 placeholder={t(
-                  "backend_entities.resources.forms.descript_placeholder"
+                  "resources.descript_placeholder"
                 )}
                 wide
               />
               <Resource.Form.KindAttributes />
               <GlobalForm.Errorable name="attributes[fingerprint]" />
               <Form.Save
-                text={t("backend_entities.resources.forms.new.save")}
+                text={t("resources.new.save")}
                 cancelRoute={lh.link("backendProjectResources", project.id)}
               />
             </FormContainer.Form>

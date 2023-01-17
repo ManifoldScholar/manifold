@@ -74,8 +74,8 @@ class Slot extends PureComponent {
                   {t(this.title)}
                   <br />
                   {this.attributes.button
-                    ? t("backend.layout.buttons")
-                    : t("backend.layout.links")}
+                    ? t("layout.buttons")
+                    : t("layout.links")}
                 </span>
               </button>
               <div

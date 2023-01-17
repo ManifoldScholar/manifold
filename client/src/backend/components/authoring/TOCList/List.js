@@ -97,7 +97,7 @@ export default function TOCList({ tree, setTree, textId }) {
         offsetPerLevel={0}
       />
       <span className="screen-reader-text" id="toc-drag-handle-instructions">
-        {t("backend.drag_handle_instructions")}
+        {t("texts.toc.drag_handle_instructions")}
       </span>
     </Styled.ScrollContainer>
   ) : null;

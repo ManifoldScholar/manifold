@@ -1,0 +1,108 @@
+{
+  "layout": {
+    "add_block": "Add content block \"{{blockTitle}}\"",
+    "delete_block": "Delete content block \"{{blockTitle}}\"",
+    "edit_block": "Edit content block \"{{blockTitle}}\"",
+    "hide_block": "Hide  content block \"{{blockTitle}}\"",
+    "show_block": "Show content block \"{{blockTitle}}\"",
+    "authorized": "Authorized",
+    "unauthorized": "Unauthorized",
+    "markdown_block_title": "Markdown",
+    "recent_activity_block_title": "Recent Activity",
+    "metadata_block_title": "Metadata",
+    "table_of_contents_block_title": "$t(glossary.table_of_contents_title_case)",
+    "resources_block_title": "$t(glossary.resource_title_case_other)",
+    "texts_block_title": "$t(glossary.text_title_case_other)",
+    "blocks": "Blocks:",
+    "layout": "Layout:",
+    "normal": "Normal",
+    "shaded": "Shaded",
+    "confirm_delete_block": "Are you sure you want to delete this content block?",
+    "cannot_be_undone": "This action cannot be undone.",
+    "customize_blocks_message": "Customize the rest of the content on your project page. Add, delete, and reorder content blocks, edit settings, and toggle visibility.",
+    "left_side": "Left side",
+    "right_side": "Right side",
+    "buttons": "buttons",
+    "links": "links",
+    "description_and_images": "Description + Images",
+    "description_and_images_description": "Description Text, Cover Art, and Background Image",
+    "hero_block": "Hero Block",
+    "hero_block_instructions": "The Hero Block is the top of your {{entity}} page. Customize its content, layout, and settings here.",
+    "calls_to_action": "Calls-to-Action",
+    "calls_to_action_description": "Buttons and links to related resources",
+    "social_links": "Social Links",
+    "social_links_description": "Links to social platforms and hashtag",
+    "visibility_options": {
+      "always": "Always Visible",
+      "authorized": "Visible Only When Authorized",
+      "unauthorized": "Visible Only When Unauthorized"
+    }
+  },
+  "hero": {
+    "dark_mode": "Dark Mode",
+    "description_placeholder": "Describe the {{entity}}",
+    "description_instructions": "Enter a brief description of your {{entity}}. This field accepts basic Markdown.",
+    "image_label": "Background Image",
+    "image_instructions": "Images will be resized to 1280x800 and cropped along the bottom edge.",
+    "layout": "Hero Layout:",
+    "square_inset": "Square Inset",
+    "wide_inset": "Wide Inset",
+    "full_bleed": "Full Bleed",
+    "background_color": "Background Color",
+    "background_color_instructions": "Enter a color in one of the following formats: CSS color keyword, hexadecimal, rgb, rgba, hsl, hsla, or hwb. Leave blank to restore default background color.",
+    "image_credits": "Image Credits",
+    "image_credits_placeholder": "Add image credits",
+    "image_credits_instructions": "Enter image credits for hero and cover. This field accepts basic Markdown.",
+    "cover_image": "Cover Image",
+    "cover_image_instructions": "If a cover is set for the {{entity}}, it will appear over the hero, to the right of the description.",
+    "social_id": "{{social}} ID",
+    "social_placeholder": "Enter the {{entity}} {{social}} ID",
+    "hashtag": "Hashtag",
+    "hashtag_placeholder": "Enter {{entity}} Hashtag"
+  },
+  "call_to_action": {
+    "delete_modal_heading": "Are you sure you want to delete this call-to-action?",
+    "delete_modal_message": "This action cannot be undone.",
+    "edit_drawer_title": "Edit Call-to-Action",
+    "create_drawer_title": "New Call-to-Action",
+    "text_select_placeholder": "Select Text",
+    "input_labels": {
+      "title": "Title",
+      "type": "Type",
+      "visibility": "Visibility",
+      "text": "Link to Text",
+      "url": "URL",
+      "download": "Download File",
+      "save": "Save"
+    }
+  },
+  "content_blocks": {
+    "texts": {
+      "show_author_names": "Show Author Names?",
+      "show_descriptions": "Show Descriptions?",
+      "show_subtitles": "Show Subtitles?",
+      "show_cover_images": "Show Cover Images?",
+      "show_dates": "Show Dates?",
+      "show_category_labels": "Show Category Labels?",
+      "show_uncategorized_texts": "Show Uncategorized Texts?",
+      "add_text_category": "Add a Text Category",
+      "include_texts_in_category": "Include Texts in these Categories"
+    },
+    "resources": {
+      "default_title_message": "If blank, the block title will default to \"$t(layout.resources_block_title)\"",
+      "collections_switch": "Show all collections?",
+      "collections_switch_info": "If set, all resource collections will be included in the block. Otherwise, only featured selections will be shown.",
+      "select_collection_placeholder": "Add a Resource Collection",
+      "select_collection": "Show Specific Collections"
+    },
+    "markdown": {
+      "body": "Body",
+      "style": "Style"
+    },
+    "toc": {
+      "depth": "Depth",
+      "select_text": "Select a $t(glossary.text_one)",
+      "show_text_title": "Show $t(glossary.text_one) title?"
+    }
+  }
+}

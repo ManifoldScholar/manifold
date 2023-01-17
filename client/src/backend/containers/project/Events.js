@@ -86,8 +86,8 @@ class ProjectEventsContainerImplementation extends PureComponent {
 
   handleEventDestroy = event => {
     const t = this.props.t;
-    const heading = t("backend_entities.projects.modals.confirm_event");
-    const message = t("backend_entities.projects.modals.confirm_body");
+    const heading = t("projects.modals.confirm_event");
+    const message = t("projects.modals.confirm_body");
     this.props.confirm(heading, message, () => this.destroyEvent(event));
   };
 
@@ -131,7 +131,7 @@ class ProjectEventsContainerImplementation extends PureComponent {
             entities={this.props.events}
             listStyle="tiles"
             showCount
-            title={t("backend_entities.projects.activity")}
+            title={t("projects.activity")}
             titleIcon="BENews64"
             unit={t("glossary.event", {
               count: eventsMeta?.pagination?.totalCount

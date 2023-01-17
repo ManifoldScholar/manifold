@@ -8,7 +8,7 @@ export default function PermissionNew({ entity, history }) {
   const { t } = useTranslation();
   return (
     <section>
-      <Navigation.DrawerHeader title={t("backend.forms.permissions.header")} />
+      <Navigation.DrawerHeader title={t("projects.permissions.header")} />
       <Form entity={entity} history={history} />
     </section>
   );

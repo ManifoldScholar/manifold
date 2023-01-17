@@ -40,9 +40,9 @@ class ProjectCollectionListItem extends PureComponent {
     const t = this.props.t;
     const { entity } = this.props;
     const visibility = entity.attributes.visible
-      ? t("backend.hidden")
-      : t("backend.visible");
-    return t("backend.project_collection.change_visibility", {
+      ? t("common.hidden")
+      : t("common.visible");
+    return t("project_collections.change_visibility", {
       entity: entity.attributes.title,
       visibility
     });
@@ -111,8 +111,8 @@ class ProjectCollectionListItem extends PureComponent {
               {this.icon}
               <span className="screen-reader-text">
                 {entity.attributes.visible
-                  ? t("backend.project_collection.collection_is_visible")
-                  : t("backend.project_collection.collection_is_not_visible")}
+                  ? t("project_collections.collection_is_visible")
+                  : t("project_collections.collection_is_not_visible")}
               </span>
             </button>
             <div

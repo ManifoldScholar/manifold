@@ -65,10 +65,10 @@ export class ResourceCollectionNewContainer extends PureComponent {
             type="resourceCollection"
             backUrl={lh.link("backendProjectResourceCollections", project.id)}
             backLabel={project.attributes.titlePlaintext}
-            title={t("backend_entities.resource_collections.forms.new_title")}
+            title={t("resource_collections.forms.new_title")}
             showUtility={false}
             note={t(
-              "backend_entities.resource_collections.forms.new_instructions"
+              "resource_collections.forms.new_instructions"
             )}
           />
           <Layout.BackendPanel>
@@ -82,23 +82,23 @@ export class ResourceCollectionNewContainer extends PureComponent {
             >
               <Form.TextInput
                 label={t(
-                  "backend_entities.resource_collections.forms.title_label"
+                  "resource_collections.forms.title_label"
                 )}
                 name="attributes[title]"
                 focusOnMount
                 wide
                 placeholder={t(
-                  "backend_entities.resource_collections.forms.title_placeholder"
+                  "resource_collections.forms.title_placeholder"
                 )}
                 {...this.props}
               />
               <Form.TextArea
                 label={t(
-                  "backend_entities.resource_collections.forms.descript_label"
+                  "resource_collections.forms.descript_label"
                 )}
                 name="attributes[description]"
                 placeholder={t(
-                  "backend_entities.resource_collections.forms.descript_placeholder"
+                  "resource_collections.forms.descript_placeholder"
                 )}
                 wide
                 {...this.props}
@@ -107,14 +107,14 @@ export class ResourceCollectionNewContainer extends PureComponent {
                 layout="landscape"
                 accepts="images"
                 label={t(
-                  "backend_entities.resource_collections.forms.image_label"
+                  "resource_collections.forms.image_label"
                 )}
                 readFrom="attributes[thumbnailStyles][small]"
                 name="attributes[thumbnail]"
                 remove="attributes[removeThumbnail]"
               />
               <Form.Save
-                text={t("backend_entities.resource_collections.forms.new_save")}
+                text={t("resource_collections.forms.new_save")}
                 cancelRoute={lh.link("backendProjectResources", project.id)}
               />
             </FormContainer.Form>

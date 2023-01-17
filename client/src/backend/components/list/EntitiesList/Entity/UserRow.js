@@ -28,7 +28,7 @@ class UserRow extends PureComponent {
       <>
         {this.isCurrentUser(this.id)}
         {this.attributes.role
-          ? this.props.t(`user_roles.${this.attributes.role}`)
+          ? this.props.t(`records.users.role_options.${this.attributes.role}`)
           : null}
       </>
     );

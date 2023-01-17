@@ -92,20 +92,20 @@ export default function AddEditTOCEntryForm({
     >
       <Form.TextInput
         focusOnMount
-        label={t("backend.forms.text_toc.entry_name")}
-        placeholder={t("backend.forms.text_toc.entry_name")}
+        label={t("texts.toc.entry_name")}
+        placeholder={t("texts.toc.entry_name")}
         name="label"
       />
       <Form.FieldGroup
         name="sectionId"
-        label={t("backend.forms.text_toc.section_link")}
-        instructions={t("backend.forms.text_toc.section_link_instructions")}
+        label={t("texts.toc.section_link")}
+        instructions={t("texts.toc.section_link_instructions")}
       >
         <Form.Select
           options={[
             {
               value: "",
-              label: t("backend.forms.text_toc.section_link_placeholder"),
+              label: t("texts.toc.section_link_placeholder"),
               key: 0
             },
             ...sectionOptions
@@ -116,15 +116,15 @@ export default function AddEditTOCEntryForm({
         />
       </Form.FieldGroup>
       <Form.FieldGroup
-        label={t("backend.forms.text_toc.anchor_link")}
-        instructions={t("backend.forms.text_toc.anchor_link_instructions")}
+        label={t("texts.toc.anchor_link")}
+        instructions={t("texts.toc.anchor_link_instructions")}
       >
         <Form.TextInput placeholder="#" name="anchor" />
       </Form.FieldGroup>
       <Form.DrawerButtons
         showCancel
         cancelUrl={lh.link("backendTextTOC", textId)}
-        submitLabel="backend.forms.text_toc.save_button_label"
+        submitLabel="texts.toc.save_button_label"
       />
     </FormContainer.Form>
   );

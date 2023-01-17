@@ -74,8 +74,8 @@ export class UsersEditContainer extends PureComponent {
 
   handleUserDestroy = () => {
     const t = this.props.t;
-    const heading = t("backend.forms.user.delete_modal_heading");
-    const message = t("backend.forms.user.delete_modal_message");
+    const heading = t("records.users.delete_modal_heading");
+    const message = t("records.users.delete_modal_message");
     this.props.confirm(heading, message, this.destroyUser);
   };
 
@@ -91,8 +91,8 @@ export class UsersEditContainer extends PureComponent {
 
   unsubscribeUser = () => {
     const t = this.props.t;
-    const heading = t("backend.forms.user.unsubscribe_modal_heading");
-    const message = t("backend.forms.user.unsubscribe_modal_message");
+    const heading = t("records.users.unsubscribe_modal_heading");
+    const message = t("records.users.unsubscribe_modal_message");
     this.props.confirm(heading, message, () => {
       const adjustedUser = { ...this.user };
       adjustedUser.attributes.unsubscribe = true;
@@ -110,8 +110,8 @@ export class UsersEditContainer extends PureComponent {
 
   handleResetPasswordClick = () => {
     const t = this.props.t;
-    const heading = t("backend.forms.user.password_modal_heading");
-    const message = t("backend.forms.user.password_modal_message");
+    const heading = t("records.users.password_modal_heading");
+    const message = t("records.users.password_modal_message");
     new Promise((resolve, reject) => {
       this.setState({
         resetPassword: { resolve, reject, heading, message }
@@ -147,12 +147,12 @@ export class UsersEditContainer extends PureComponent {
             {
               onClick: this.handleResetPasswordClick,
               icon: "key32",
-              label: t("backend.forms.user.reset_password")
+              label: t("records.users.reset_password")
             },
             {
               onClick: this.unsubscribeUser,
               icon: "mail32",
-              label: t("backend.forms.user.unsubscribe")
+              label: t("records.users.unsubscribe")
             },
             {
               onClick: this.handleUserDestroy,
@@ -174,43 +174,43 @@ export class UsersEditContainer extends PureComponent {
           >
             <Form.TextInput
               focusOnMount
-              label={t("backend.forms.user.email")}
+              label={t("records.users.email")}
               name="attributes[email]"
-              placeholder={t("backend.forms.user.email")}
+              placeholder={t("records.users.email")}
             />
             <Form.TextInput
-              label={t("backend.forms.user.first_name")}
+              label={t("records.users.first_name")}
               name="attributes[firstName]"
-              placeholder={t("backend.forms.user.first_name")}
+              placeholder={t("records.users.first_name")}
             />
             <Form.TextInput
-              label={t("backend.forms.user.last_name")}
+              label={t("records.users.last_name")}
               name="attributes[lastName]"
-              placeholder={t("backend.forms.user.last_name")}
+              placeholder={t("records.users.last_name")}
             />
             <Form.Select
-              label={t("backend.forms.user.role_label")}
+              label={t("records.users.role_label")}
               name="attributes[role]"
               selected={user.attributes.role}
               options={[
                 {
-                  label: t("backend.forms.user.role_options.admin"),
+                  label: t("records.users.role_options.admin"),
                   value: "admin"
                 },
                 {
-                  label: t("backend.forms.user.role_options.editor"),
+                  label: t("records.users.role_options.editor"),
                   value: "editor"
                 },
                 {
-                  label: t("backend.forms.user.role_options.creator"),
+                  label: t("records.users.role_options.creator"),
                   value: "project_creator"
                 },
                 {
-                  label: t("backend.forms.user.role_options.marketeer"),
+                  label: t("records.users.role_options.marketeer"),
                   value: "marketeer"
                 },
                 {
-                  label: t("backend.forms.user.role_options.reader"),
+                  label: t("records.users.role_options.reader"),
                   value: "reader"
                 }
               ]}

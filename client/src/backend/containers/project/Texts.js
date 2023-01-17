@@ -74,15 +74,15 @@ export class ProjectTextsContainer extends Component {
 
   handleCategoryDestroy = category => {
     const t = this.props.t;
-    const heading = t("backend_entities.texts.modals.delete_category_heading");
-    const message = t("backend_entities.texts.modals.delete_category_body");
+    const heading = t("texts.modals.delete_category_heading");
+    const message = t("texts.modals.delete_category_body");
     this.props.confirm(heading, message, () => this.destroyCategory(category));
   };
 
   handleTextDestroy = text => {
     const t = this.props.t;
-    const heading = t("backend_entities.texts.modals.delete_text_heading");
-    const message = t("backend_entities.texts.modals.delete_text_body");
+    const heading = t("texts.modals.delete_text_heading");
+    const message = t("texts.modals.delete_text_body");
     this.props.confirm(heading, message, () => this.destroyText(text));
   };
 
@@ -190,7 +190,7 @@ export class ProjectTextsContainer extends Component {
               className={this.buttonClasses}
             >
               <span className="screen-reader-text">
-                {t("backend_entities.texts.add_text_label")}
+                {t("texts.add_text_label")}
               </span>
               <IconComposer
                 icon="export24"
@@ -201,10 +201,10 @@ export class ProjectTextsContainer extends Component {
                 )}
               />
               <span className="full" aria-hidden="true">
-                {t("backend_entities.texts.ingest_button_label")}
+                {t("texts.ingest_button_label")}
               </span>
               <span className="abbreviated" aria-hidden="true">
-                {t("backend_entities.texts.ingest_truncated")}
+                {t("texts.ingest_truncated")}
               </span>
             </Link>
             <Link
@@ -212,7 +212,7 @@ export class ProjectTextsContainer extends Component {
               className={this.buttonClasses}
             >
               <span className="screen-reader-text">
-                {t("backend_entities.texts.create_button_label")}
+                {t("texts.create_button_label")}
               </span>
               <IconComposer
                 icon="copy24"
@@ -223,7 +223,7 @@ export class ProjectTextsContainer extends Component {
                 )}
               />
               <span className="full" aria-hidden="true">
-                {t("backend_entities.texts.create_button_label")}
+                {t("texts.create_button_label")}
               </span>
               <span className="abbreviated" aria-hidden="true">
                 {t("glossary.text_title_case_one")}
@@ -234,7 +234,7 @@ export class ProjectTextsContainer extends Component {
               className={this.buttonClasses}
             >
               <span className="screen-reader-text">
-                {t("backend_entities.texts.create_category_button_label")}
+                {t("texts.create_category_button_label")}
               </span>
               <IconComposer
                 icon="circlePlus32"
@@ -245,7 +245,7 @@ export class ProjectTextsContainer extends Component {
                 )}
               />
               <span className="full" aria-hidden="true">
-                {t("backend_entities.texts.create_category_button_label")}
+                {t("texts.create_category_button_label")}
               </span>
               <span className="abbreviated" aria-hidden="true">
                 {t("glossary.category_title_case_one")}

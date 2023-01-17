@@ -38,46 +38,46 @@ class MakersFormContainer extends PureComponent {
           notificationScope="drawer"
         >
           <Form.TextInput
-            label={t("backend.forms.maker.title")}
+            label={t("records.makers.title")}
             name="attributes[prefix]"
-            placeholder={t("backend.forms.maker.title")}
+            placeholder={t("records.makers.title")}
             focusOnMount
             wide
           />
           <Form.TextInput
-            label={t("backend.forms.maker.first_name")}
+            label={t("records.makers.first_name")}
             name="attributes[firstName]"
-            placeholder={t("backend.forms.maker.first_name")}
+            placeholder={t("records.makers.first_name")}
             wide
           />
           <Form.TextInput
-            label={t("backend.forms.maker.middle_name")}
+            label={t("records.makers.middle_name")}
             name="attributes[middleName]"
-            placeholder={t("backend.forms.maker.middle_name")}
+            placeholder={t("records.makers.middle_name")}
             wide
           />
           <Form.TextInput
-            label={t("backend.forms.maker.last_name")}
+            label={t("records.makers.last_name")}
             name="attributes[lastName]"
-            placeholder={t("backend.forms.maker.last_name")}
+            placeholder={t("records.makers.last_name")}
             wide
           />
           <Form.TextInput
-            label={t("backend.forms.maker.suffix")}
+            label={t("records.makers.suffix")}
             name="attributes[suffix]"
-            placeholder={t("backend.forms.maker.suffix")}
+            placeholder={t("records.makers.suffix")}
             wide
           />
           <Form.Upload
             layout="square"
             accepts="images"
-            label={t("backend.forms.maker.avatar")}
+            label={t("records.makers.avatar")}
             readFrom="attributes[avatarStyles][small]"
             name="attributes[avatar]"
             remove="attributes[removeAvatar]"
             wide
           />
-          <Form.Save text={t("backend.forms.maker.submit_label")} />
+          <Form.Save text={t("records.makers.submit_label")} />
         </FormContainer.Form>
       </section>
     );

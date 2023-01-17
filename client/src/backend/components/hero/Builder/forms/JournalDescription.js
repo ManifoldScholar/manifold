@@ -32,7 +32,7 @@ function JournalDescription({
       <section>
         <Navigation.DrawerHeader
           icon="journals64"
-          title={t("backend.layout.description_and_images")}
+          title={t("layout.description_and_images")}
           headerId={headerId}
         />
         <FormContainer.Form
@@ -45,7 +45,7 @@ function JournalDescription({
         >
           {withDarkMode && (
             <Form.Switch
-              label={t("backend.forms.dark_mode")}
+              label={t("hero.dark_mode")}
               name="attributes[darkMode]"
             />
           )}
@@ -53,56 +53,56 @@ function JournalDescription({
             wide
             focusOnMount
             height={250}
-            label={t("backend.forms.description")}
+            label={t("common.description")}
             name="attributes[description]"
-            placeholder={t("backend.forms.description_placeholder", {
+            placeholder={t("hero.description_placeholder", {
               entity: modelLabel
             })}
-            instructions={t("backend.forms.description_instructions", {
+            instructions={t("hero.description_instructions", {
               entity: modelLabel
             })}
           />
           <Form.Upload
             layout="landscape"
             accepts="images"
-            label={t("backend.forms.image_label")}
+            label={t("hero.image_label")}
             readFrom="attributes[heroStyles][small]"
             name="attributes[hero]"
             remove="attributes[removeHero]"
-            instructions={t("backend.forms.image_instructions")}
+            instructions={t("hero.image_instructions")}
           />
           <Form.Select
             name="attributes[heroLayout]"
-            label={t("backend.forms.hero_layout")}
+            label={t("hero.layout")}
             options={[
-              { label: t("backend.forms.square_inset"), value: "square_inset" },
-              { label: t("backend.forms.wide_inset"), value: "wide_inset" },
-              { label: t("backend.forms.full_bleed"), value: "full_bleed" }
+              { label: t("hero.square_inset"), value: "square_inset" },
+              { label: t("hero.wide_inset"), value: "wide_inset" },
+              { label: t("hero.full_bleed"), value: "full_bleed" }
             ]}
           />
           <Form.Upload
             layout="portrait"
-            label={t("backend.forms.logo")}
+            label={t("journals.forms.logo")}
             accepts="images"
             readFrom="attributes[logoStyles][small]"
             name="attributes[logo]"
             remove="attributes[removeLog]"
-            instructions={t("backend.forms.logo_instructions", {
+            instructions={t("journals.forms.logo_instructions", {
               entity: modelLabel
             })}
           />
           <Form.TextInput
-            label={t("backend.forms.background_color")}
+            label={t("hero.background_color")}
             name="attributes[heroBackgroundColor]"
             placeholder="#52e3ac"
-            instructions={t("backend.forms.background_color_instructions")}
+            instructions={t("hero.background_color_instructions")}
             wide
           />
           <Form.TextArea
-            label={t("backend.forms.image_credits")}
+            label={t("hero.image_credits")}
             name="attributes[imageCredits]"
-            placeholder={t("backend.forms.image_credits_placeholder")}
-            instructions={t("backend.forms.image_credits_instructions")}
+            placeholder={t("hero.image_credits_placeholder")}
+            instructions={t("hero.image_credits_instructions")}
             height={250}
             wide
           />

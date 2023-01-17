@@ -1,9 +1,0 @@
-{
-  "user_roles": {
-    "admin": "admin",
-    "editor": "editor",
-    "project_creator": "project creator",
-    "marketeer": "marketeer",
-    "reader": "reader"
-  }
-}

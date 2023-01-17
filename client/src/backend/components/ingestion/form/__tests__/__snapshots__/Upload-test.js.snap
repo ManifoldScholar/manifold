@@ -14,7 +14,7 @@ Array [
       <h2
         id="1-header"
       >
-        backend.forms.ingestion.upload_file
+        texts.ingestion.upload_file
       </h2>
     </header>
     <span
@@ -24,7 +24,7 @@ Array [
       <span
         class="instructions"
       >
-        backend.forms.ingestion.instructions
+        texts.ingestion.instructions
       </span>
     </span>
     <div
@@ -85,14 +85,14 @@ Array [
       <h2
         id="1-header"
       >
-        backend.forms.ingestion.upload_from_url
+        texts.ingestion.upload_from_url
       </h2>
     </header>
     <span
       class="css-5mpmt2-PrimaryInstructions e10u3e2o1"
       id="1-instructions"
     >
-      backend.forms.ingestion.url_instructions
+      texts.ingestion.url_instructions
     </span>
     <div
       class="css-1a8zzxm-BaseGroup eu7s2fw1"
@@ -104,13 +104,13 @@ Array [
           class="css-bmmdfg-PrimaryLabel e11et4nf2"
           for="text-input-1"
         >
-          backend.forms.ingestion.url
+          texts.ingestion.url
         </label>
         <input
           aria-describedby="text-input-error-1 text-input-instructions-1"
           class="css-4skzkl-BaseInput-PrimaryInput e1e2hl9r5"
           id="text-input-1"
-          placeholder="backend.forms.ingestion.url_placeholder"
+          placeholder="texts.ingestion.url_placeholder"
           type="text"
           value=""
         />

@@ -65,13 +65,13 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
     >
       <Form.TextInput
         focusOnMount
-        label={t("backend.forms.text_create.text_title")}
-        placeholder={t("backend.forms.text_create.title_placeholder")}
+        label={t("texts.create.text_title")}
+        placeholder={t("texts.create.title_placeholder")}
         name="attributes[title]"
       />
       <Form.FieldGroup
-        label={t("backend.forms.text_create.cover_section_label")}
-        instructions={t("backend.forms.cover_image_instructions", {
+        label={t("texts.create.cover_section_label")}
+        instructions={t("hero.cover_image_instructions", {
           entity: t("glossary.text_one")
         })}
       >
@@ -83,13 +83,13 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
         />
       </Form.FieldGroup>
       <Form.FieldGroup
-        label={t("backend.forms.text_create.sections_section_label")}
-        instructions={t("backend.forms.text_create.sections_instructions")}
+        label={t("texts.create.sections_section_label")}
+        instructions={t("texts.create.sections_instructions")}
       >
         <div>
           <Form.TextInput
             placeholder={t(
-              "backend.forms.text_create.section_name_placeholder"
+              "texts.create.section_name_placeholder"
             )}
             onChange={e => {
               e.preventDefault();
@@ -119,7 +119,7 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
       <Form.DrawerButtons
         showCancel
         cancelUrl={cancelUrl}
-        submitLabel="backend.forms.text_create.save_button_label"
+        submitLabel="texts.create.save_button_label"
       />
     </FormContainer.Form>
   );

@@ -28,7 +28,7 @@ class AverageVisit extends Component {
       <Block
         width={this.blockWidth}
         icon="timerClock32"
-        title={this.props.t("backend.analytics.average_visit")}
+        title={this.props.t("analytics.average_visit")}
       >
         <Time time={this.averageTime} />
       </Block>

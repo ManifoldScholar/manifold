@@ -52,13 +52,13 @@ export class ProjectCollectionDetail extends PureComponent {
       <Authorize
         entity={projectCollection}
         failureFatalError={{
-          detail: t("backend_entities.project_collections.unauthorized_edit")
+          detail: t("project_collections.unauthorized_edit")
         }}
         ability="update"
       >
         <div>
           <h2 className="screen-reader-text">
-            {t("backend_entities.project_collections.sr_list_title")}
+            {t("project_collections.sr_list_title")}
           </h2>
           <ProjectCollection.SortBy
             sortChangeHandler={this.handleSortOrderChange}

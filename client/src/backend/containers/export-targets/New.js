@@ -36,7 +36,7 @@ export class ExportTargetsNewContainer extends PureComponent {
     return (
       <section>
         <Navigation.DrawerHeader
-          title={this.props.t("backend.forms.export_target.header")}
+          title={this.props.t("settings.export_targets.form_header")}
         />
         <Form
           model={this.defaultExportTarget}

@@ -1,0 +1,42 @@
+{
+  "pages": {
+    "events": "Events",
+    "events_all": "All Activity",
+    "journals": "Journals",
+    "issues": "Journal Issues",
+    "issues_all": "All Journal Issues",
+    "projects": "Projects",
+    "projects_all": "All Projects",
+    "project_collections": "Project Collections",
+    "resource_collections_all": "All Project Resource Collections",
+    "resources_all": "All Project Resources",
+    "my_notes": "My Notes + Comments",
+    "my_notes_truncated": "My Notes",
+    "my_starred": "My Starred",
+    "my_groups": "My Reading Groups",
+    "public_groups": "Public Reading Groups",
+    "reading_group": {
+      "homepage_edit_header": "Edit Home Page",
+      "homepage_edit_instructions": "Organize and edit the contents of your Reading Group’s home page. Search for new content to add. Create your own Categories and add or edit category descriptions. Move content between categories and within content types by dragging with the handle.",
+      "search_title": "Search + add content:",
+      "search_instructions": "Search for and star the content you want to add to the home page.",
+      "search_button_label": "$t(actions.add) $t(common.content)"
+    },
+    "data_use": {
+      "header": "What data does Manifold store about me?",
+      "internal_analytics": "Internal Analytics",
+      "annotations": "Annotations and Comments",
+      "reading_groups": "Reading Groups"
+    },
+    "subheaders": {
+      "journal_info": "Journal info",
+      "full_description": "Full description",
+      "tags_list": "Tags list",
+      "variants": "Downloadable variants",
+      "resource_slideshow": "Resource slideshow",
+      "resource_list": "Resource list",
+      "group_details": "Group details",
+      "group_summary": "Group summary"
+    }
+  }
+}

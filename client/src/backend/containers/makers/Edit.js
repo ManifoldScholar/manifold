@@ -58,8 +58,8 @@ export class MakersEditContainer extends PureComponent {
   }
 
   handleMakerDestroy = () => {
-    const heading = this.props.t("backend.forms.maker.delete_modal_heading");
-    const message = this.props.t("backend.forms.maker.delete_modal_message");
+    const heading = this.props.t("records.makers.delete_modal_heading");
+    const message = this.props.t("records.makers.delete_modal_message");
     this.props.confirm(heading, message, this.destroyMaker);
   };
 

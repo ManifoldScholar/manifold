@@ -34,7 +34,7 @@ export class TwitterQueryNewContainer extends Component {
     return (
       <section>
         <Navigation.DrawerHeader
-          title={this.props.t("backend_entities.projects.forms.twitter.title")}
+          title={this.props.t("projects.social.title")}
           icon="activityTweet64"
         />
         <TwitterQuery.Form

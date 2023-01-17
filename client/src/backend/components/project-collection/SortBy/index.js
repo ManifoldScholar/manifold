@@ -36,7 +36,7 @@ export default function ProjectCollectionSortBy({
       <Styled.Toggle>
         <Styled.Label
           as="div"
-          label={t("backend.forms.project_collection.order_manually")}
+          label={t("project_collections.order_manually")}
         />
         <div className="toggle-indicator">
           <Unwrapped.Toggle
@@ -48,7 +48,7 @@ export default function ProjectCollectionSortBy({
             aria-pressed={isManualSort}
           >
             <span className="screen-reader-text">
-              {t("backend.forms.project_collection.order_collection_manually")}
+              {t("project_collections.order_collection_manually")}
             </span>
           </Unwrapped.Toggle>
         </div>
@@ -58,7 +58,7 @@ export default function ProjectCollectionSortBy({
 
   const renderManualInstructions = (
     <Styled.Instructions>
-      {t("backend.forms.project_collection.order_manually_instructions")}
+      {t("project_collections.order_manually_instructions")}
     </Styled.Instructions>
   );
 

@@ -54,7 +54,9 @@ class FeatureRow extends PureComponent {
   get name() {
     return truncate(
       this.header ||
-        this.props.t("backend.untitled_record", { number: this.position }),
+        this.props.t("records.features.untitled_record", {
+          number: this.position
+        }),
       {
         length: 60
       }
@@ -72,7 +74,7 @@ class FeatureRow extends PureComponent {
         <button
           className="entity-row__utility-button"
           onClick={this.onTogglePublish}
-          title={this.props.t("backend.actions.unpublish_feature")}
+          title={this.props.t("records.features.unpublish")}
         >
           <Utility.IconComposer icon="eyeClosed32" size={26} />
         </button>
@@ -82,7 +84,7 @@ class FeatureRow extends PureComponent {
       <button
         className="entity-row__utility-button"
         onClick={this.onTogglePublish}
-        title={this.props.t("backend.actions.publish_feature")}
+        title={this.props.t("records.features.publish")}
       >
         <Utility.IconComposer icon="eyeOpen32" size={26} />
       </button>

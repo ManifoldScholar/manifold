@@ -21,8 +21,8 @@ export default function AddEditSectionContainer(props) {
       <Navigation.DrawerHeader
         title={
           sectionId
-            ? t("backend_entities.texts.edit_section")
-            : t("backend_entities.texts.add_section_button_label")
+            ? t("texts.edit_section")
+            : t("texts.add_section_button_label")
         }
       />
       <AddEditSectionForm section={section} {...props} />

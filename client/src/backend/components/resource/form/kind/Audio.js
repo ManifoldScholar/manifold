@@ -14,7 +14,7 @@ class ResourceFormKindAudio extends PureComponent {
     return (
       <Form.Upload
         layout="square"
-        label={this.props.t("backend.forms.resource.audio_file")}
+        label={this.props.t("resources.new.audio_file")}
         accepts="audio"
         readFrom="attributes[attachmentFileName]"
         name="attributes[attachment]"

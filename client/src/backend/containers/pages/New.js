@@ -44,19 +44,19 @@ class PagesNewContainer extends PureComponent {
       return (
         <Form.TextInput
           validation={["required"]}
-          label={t("backend.forms.page.external_label")}
+          label={t("records.pages.external_label")}
           name="attributes[externalLink]"
-          placeholder={t("backend.forms.page.external_placeholder")}
-          instructions={t("backend.forms.page.external_instructions")}
+          placeholder={t("records.pages.external_placeholder")}
+          instructions={t("records.pages.external_instructions")}
         />
       );
     return (
       <Form.TextInput
         validation={["required"]}
-        label={t("backend.forms.page.slug_label")}
+        label={t("records.pages.slug_label")}
         name="attributes[slug]"
-        placeholder={t("backend.forms.page.slug_placeholder")}
-        instructions={t("backend.forms.page.slug_instructions")}
+        placeholder={t("records.pages.slug_placeholder")}
+        instructions={t("records.pages.slug_instructions")}
       />
     );
   }
@@ -76,16 +76,16 @@ class PagesNewContainer extends PureComponent {
           >
             <Form.TextInput
               focusOnMount
-              label={t("backend.forms.page.title_label")}
+              label={t("records.pages.title_label")}
               name="attributes[title]"
-              placeholder={t("backend.forms.page.title_placeholder")}
+              placeholder={t("records.pages.title_placeholder")}
             />
             <Form.Switch
-              label={t("backend.forms.page.switch_label")}
+              label={t("records.pages.switch_label")}
               name="attributes[isExternalLink]"
             />
             {this.renderPath()}
-            <Form.Save text={t("backend.forms.page.submit_label")} />
+            <Form.Save text={t("records.pages.submit_label")} />
           </FormContainer.Form>
         </section>
       </section>

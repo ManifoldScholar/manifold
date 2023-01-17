@@ -48,7 +48,7 @@ function MyStarredEntityCollection({
 
   return (
     <EntityCollection
-      title={t("pages.frontend.my_starred")}
+      title={t("pages.my_starred")}
       icon={"StarFillUnique"}
       iconProps={{ size: 48, className: "icon-star-fill--header" }}
       countProps={{

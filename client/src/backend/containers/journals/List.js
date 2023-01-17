@@ -33,7 +33,7 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
     <>
       <EntitiesList
         entityComponent={JournalRow}
-        title={t("backend_entities.journals.header")}
+        title={t("journals.header")}
         titleIcon="Journals64"
         titleStyle="bar"
         entities={data}
@@ -47,7 +47,7 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
         buttons={[
           <Button
             path={lh.link("backendJournalsNew")}
-            text={t("backend_entities.journals.add_button_label")}
+            text={t("journals.add_button_label")}
             authorizedFor="journal"
             type="add"
           />

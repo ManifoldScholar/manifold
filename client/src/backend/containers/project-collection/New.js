@@ -54,7 +54,7 @@ class ProjectCollectionNew extends PureComponent {
             <ProjectCollection.Form.Fields {...this.props} />
             <Form.Save
               text={this.props.t(
-                "backend_entities.project_collections.forms.save"
+                "project_collections.forms.save"
               )}
             />
           </FormContainer.Form>

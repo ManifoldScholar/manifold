@@ -31,41 +31,41 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
           className="form-secondary"
         >
           <Form.TextInput
-            label={t("backend_entities.resource_collections.forms.title_label")}
+            label={t("resource_collections.forms.title_label")}
             name="attributes[title]"
             placeholder={t(
-              "backend_entities.resource_collections.forms.title_placeholder"
+              "resource_collections.forms.title_placeholder"
             )}
             {...this.props}
           />
           <Form.TextArea
             label={t(
-              "backend_entities.resource_collections.forms.descript_label"
+              "resource_collections.forms.descript_label"
             )}
             name="attributes[description]"
             placeholder={t(
-              "backend_entities.resource_collections.forms.descript_placeholder"
+              "resource_collections.forms.descript_placeholder"
             )}
             {...this.props}
           />
           <Form.TextInput
             wide
-            label={t("backend_entities.resource_collections.forms.slug_label")}
+            label={t("resource_collections.forms.slug_label")}
             name="attributes[pendingSlug]"
             placeholder={t(
-              "backend_entities.resource_collections.forms.sluslug_placeholder"
+              "resource_collections.forms.sluslug_placeholder"
             )}
           />
           <Form.Upload
             layout="landscape"
             accepts="images"
-            label={t("backend_entities.resource_collections.forms.image_label")}
+            label={t("resource_collections.forms.image_label")}
             readFrom="attributes[thumbnailStyles][small]"
             name="attributes[thumbnail]"
             remove="attributes[removeThumbnail]"
           />
           <Form.Save
-            text={t("backend_entities.resource_collections.forms.save")}
+            text={t("resource_collections.forms.save")}
           />
         </FormContainer.Form>
       </section>

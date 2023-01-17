@@ -28,14 +28,14 @@ class Visitors extends Component {
   get description() {
     const { rangeInWords } = this.props;
     const uniqueVisitorCount = this.total
-      ? this.props.t("backend.analytics.unique_visitor_with_count", {
+      ? this.props.t("analytics.unique_visitor_with_count", {
           count: this.total
         })
       : null;
     return this.total !== null ? (
       <p className="analytics-block__description">
         {rangeInWords
-          ? this.props.t("backend.analytics.visitors_in_date_range", {
+          ? this.props.t("analytics.visitors_in_date_range", {
               uniqueVisitorCount,
               dateRange: rangeInWords
             })
@@ -49,12 +49,12 @@ class Visitors extends Component {
       <Block
         width={this.blockWidth}
         icon="featureExplore32"
-        title={this.props.t("backend.analytics.visitor_title_case_other")}
+        title={this.props.t("analytics.visitor_title_case_other")}
         description={this.description}
       >
         <Chart
           data={this.data}
-          tooltipLabel="backend.analytics.visitor_with_count"
+          tooltipLabel="analytics.visitor_with_count"
         />
       </Block>
     );

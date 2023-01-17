@@ -17,42 +17,42 @@ function CollectionNavigation({ settings }) {
       [
         {
           to: lh.link("frontendProjectsAll"),
-          label: t("pages.frontend.projects"),
+          label: t("pages.projects"),
           icon: "projects64",
           requiresAuthorization: false,
           show: true
         },
         settings?.attributes?.calculated?.hasVisibleJournals && {
           to: lh.link("frontendJournalsList"),
-          label: t("pages.frontend.journals"),
+          label: t("pages.journals"),
           icon: "journals64",
           requiresAuthorization: false,
           show: path !== lh.link("frontendJournalsList")
         },
         {
           to: lh.link("frontendIssuesList"),
-          label: t("pages.frontend.issues"),
+          label: t("pages.issues"),
           icon: "journals64",
           requiresAuthorization: false,
           show: path === lh.link("frontendJournalsList")
         },
         settings?.attributes?.calculated?.hasProjectCollections && {
           to: lh.link("frontendProjectCollections"),
-          label: t("pages.frontend.project_collections"),
+          label: t("pages.project_collections"),
           icon: "projectCollections64",
           requiresAuthorization: false,
           show: true
         },
         {
           to: lh.link("frontendStarred"),
-          label: t("pages.frontend.my_starred"),
+          label: t("pages.my_starred"),
           icon: "star24",
           requiresAuthorization: true,
           show: true
         },
         {
           to: lh.link("frontendAnnotations"),
-          label: t("pages.frontend.my_notes_truncated"),
+          label: t("pages.my_notes_truncated"),
           icon: "notes24",
           requiresAuthorization: true,
           show: true

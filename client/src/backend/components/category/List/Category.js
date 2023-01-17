@@ -86,7 +86,7 @@ class CategoryListCategory extends PureComponent {
                   >
                     <Utility.IconComposer icon="delete32" size={26} />
                     <span className="screen-reader-text">
-                      {this.props.t("backend.actions.delete_category")}
+                      {this.props.t("projects.category.delete")}
                     </span>
                   </button>
 
@@ -100,7 +100,7 @@ class CategoryListCategory extends PureComponent {
                   >
                     <Utility.IconComposer icon="annotate32" size={26} />
                     <span className="screen-reader-text">
-                      {this.props.t("backend.actions.edit_category")}
+                      {this.props.t("projects.category.edit")}
                     </span>
                   </Link>
 
@@ -110,7 +110,7 @@ class CategoryListCategory extends PureComponent {
                   >
                     <Utility.IconComposer icon="grabber32" size={26} />
                     <span className="screen-reader-text">
-                      {this.props.t("backend.actions.drag_category")}
+                      {this.props.t("projects.category.drag")}
                     </span>
                   </div>
                 </div>
