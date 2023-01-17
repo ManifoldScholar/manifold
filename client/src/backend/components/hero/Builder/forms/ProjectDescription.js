@@ -32,7 +32,7 @@ function ProjectDescription({
       <section>
         <Navigation.DrawerHeader
           icon="projects64"
-          title={t("backend.layout.description_and_images")}
+          title={t("layout.description_and_images")}
           headerId={headerId}
         />
         <FormContainer.Form
@@ -46,7 +46,7 @@ function ProjectDescription({
           <>
             {withDarkMode && (
               <Form.Switch
-                label={t("backend.forms.dark_mode")}
+                label={t("hero.dark_mode")}
                 name="attributes[darkMode]"
               />
             )}
@@ -54,42 +54,42 @@ function ProjectDescription({
               wide
               focusOnMount
               height={250}
-              label={t("backend.forms.description")}
+              label={t("common.description")}
               name="attributes[description]"
-              placeholder={t("backend.forms.description_placeholder", {
+              placeholder={t("hero.description_placeholder", {
                 entity: modelLabel
               })}
-              instructions={t("backend.forms.description_instructions", {
+              instructions={t("hero.description_instructions", {
                 entity: modelLabel
               })}
             />
             <Form.Upload
               layout="landscape"
               accepts="images"
-              label={t("backend.forms.image_label")}
+              label={t("hero.image_label")}
               readFrom="attributes[heroStyles][small]"
               name="attributes[hero]"
               remove="attributes[removeHero]"
-              instructions={t("backend.forms.image_instructions")}
+              instructions={t("hero.image_instructions")}
               wide
             />
             <Form.Upload
               layout="portrait"
-              label={t("backend.forms.cover_image")}
+              label={t("hero.cover_image")}
               accepts="images"
               readFrom="attributes[coverStyles][small]"
               name="attributes[cover]"
               remove="attributes[removeCover]"
-              instructions={t("backend.forms.cover_image_instructions", {
+              instructions={t("hero.cover_image_instructions", {
                 entity: modelLabel
               })}
               wide
             />
             <Form.TextArea
-              label={t("backend.forms.image_credits")}
+              label={t("hero.image_credits")}
               name="attributes[imageCredits]"
-              placeholder={t("backend.forms.image_credits_placeholder")}
-              instructions={t("backend.forms.image_credits_instructions")}
+              placeholder={t("hero.image_credits_placeholder")}
+              instructions={t("hero.image_credits_instructions")}
               height={250}
               wide
             />

@@ -23,7 +23,7 @@ function ProjectResourcesEntityCollection({
 
   return resources && project ? (
     <EntityCollection
-      title={t("pages.frontend.resources_all")}
+      title={t("pages.resources_all")}
       icon="resources64"
       filterProps={showFilters ? filterProps : null}
       BodyComponent={props => (

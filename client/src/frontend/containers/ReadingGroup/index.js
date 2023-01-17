@@ -36,7 +36,7 @@ export default function ReadingGroup({ route }) {
         breadcrumbs: [
           {
             to: lh.link("frontendPublicReadingGroups"),
-            label: t("pages.frontend.public_groups")
+            label: t("pages.public_groups")
           }
         ]
       };
@@ -44,7 +44,7 @@ export default function ReadingGroup({ route }) {
       breadcrumbs: [
         {
           to: lh.link("frontendMyReadingGroups"),
-          label: t("pages.frontend.my_groups")
+          label: t("pages.my_groups")
         }
       ]
     };

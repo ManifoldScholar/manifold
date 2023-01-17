@@ -59,10 +59,10 @@ class AvatarBuilder extends Component {
 
   handleColorChange = color => {
     const t = this.props.t;
-    const heading = t("backend.forms.project.color_change_message", {
+    const heading = t("projects.thumbnail.color_change_message", {
       label: this.label()
     });
-    const message = t("backend.forms.project.confirm");
+    const message = t("projects.thumbnail.confirm");
     this.props.confirm(heading, message, () => {
       this.removeAvatar();
       this.setAvatarColor(color);
@@ -81,7 +81,7 @@ class AvatarBuilder extends Component {
     return (
       <div
         role="img"
-        aria-label={this.props.t("backend.forms.project.thumbnail_label", {
+        aria-label={this.props.t("projects.thumbnail.thumbnail_label", {
           title
         })}
         className="preview"
@@ -126,14 +126,14 @@ class AvatarBuilder extends Component {
         label="Avatar"
       >
         <div className="avatar-builder">
-          <Form.Label label={t("backend.forms.project.thumbnail")} />
+          <Form.Label label={t("projects.thumbnail.thumbnail")} />
           <div className="grid">
             <div className="section current">
               <span className="label" aria-hidden="true">
                 {t("common.current")}
               </span>
               <span className="label screen-reader-text">
-                {t("backend.forms.project.current_thumbnail")}
+                {t("projects.thumbnail.current_thumbnail")}
               </span>
               {image
                 ? this.renderCoverImage(image)
@@ -146,7 +146,7 @@ class AvatarBuilder extends Component {
               <ColorPicker
                 onChange={this.onColorChange}
                 value={this.props.getModelValue("attributes[avatarColor]")}
-                label={t("backend.forms.project.default_thumbnail")}
+                label={t("projects.thumbnail.default_thumbnail")}
                 {...this.props}
               />
             </div>
@@ -162,7 +162,7 @@ class AvatarBuilder extends Component {
                 value={this.props.getModelValue("attributes[avatar]")}
                 placeholder="cover"
                 accepts="images"
-                label={t("backend.forms.project.custom_thumbnail")}
+                label={t("projects.thumbnail.custom_thumbnail")}
                 labelClass="screen-reader-text"
                 isBuilder
               />

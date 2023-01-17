@@ -27,7 +27,7 @@ class ProjectContentBlockInListAvailable extends PureComponent {
             <Identity icon={block.icon} title={block.title} />
             <button
               className="backend-content-block__button"
-              aria-label={this.props.t("backend.layout.add_block", {
+              aria-label={this.props.t("layout.add_block", {
                 blockTitle: this.props.t(block.title)
               })}
               onClick={this.props.onClickAdd}

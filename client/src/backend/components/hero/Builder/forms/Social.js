@@ -42,7 +42,7 @@ class Social extends PureComponent {
         <section>
           <Navigation.DrawerHeader
             icon="projects64"
-            title={t("backend.layout.social_links")}
+            title={t("layout.social_links")}
             headerId={headerId}
           />
           <FormContainer.Form
@@ -54,35 +54,35 @@ class Social extends PureComponent {
             className="form-secondary"
           >
             <Form.TextInput
-              label={t("backend.forms.hashtag")}
+              label={t("hero.hashtag")}
               name="attributes[hashtag]"
-              placeholder={t("backend.forms.hashtag_placeholder", {
+              placeholder={t("hero.hashtag_placeholder", {
                 entity: modelLabel
               })}
               wide
             />
             <Form.TextInput
-              label={t("backend.forms.social_id", { social: "Facebook" })}
+              label={t("hero.social_id", { social: "Facebook" })}
               name="attributes[facebookId]"
-              placeholder={t("backend.forms.social_placeholder", {
+              placeholder={t("hero.social_placeholder", {
                 entity: modelLabel,
                 social: "Facebook"
               })}
               wide
             />
             <Form.TextInput
-              label={t("backend.forms.social_id", { social: "Twitter" })}
+              label={t("hero.social_id", { social: "Twitter" })}
               name="attributes[twitterId]"
-              placeholder={t("backend.forms.social_placeholder", {
+              placeholder={t("hero.social_placeholder", {
                 entity: modelLabel,
                 social: "Twitter"
               })}
               wide
             />
             <Form.TextInput
-              label={t("backend.forms.social_id", { social: "Instagram" })}
+              label={t("hero.social_id", { social: "Instagram" })}
               name="attributes[instagramId]"
-              placeholder={t("backend.forms.social_placeholder", {
+              placeholder={t("hero.social_placeholder", {
                 entity: modelLabel,
                 social: "Instagram"
               })}

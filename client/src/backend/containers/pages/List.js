@@ -39,14 +39,14 @@ class PagesDashboardContainer extends PureComponent {
     return (
       <EntitiesList
         entityComponent={PageRow}
-        title={t("backend.pages.header")}
+        title={t("records.pages.header")}
         titleStyle="bar"
         entities={pages}
         buttons={[
           <Button
             path={lh.link("backendRecordsPageNew")}
             type="add"
-            text={t("backend.pages.button_label")}
+            text={t("records.pages.button_label")}
             authorizedFor="page"
           />
         ]}

@@ -228,8 +228,8 @@ export class ResetPasswordBase extends PureComponent {
     const t = this.props.t;
     return (
       <Confirm
-        heading={t("modals.reset_password.heading")}
-        message={t("modals.reset_password.body")}
+        heading={t("modals.reset_password")}
+        message={t("modals.confirm_body")}
         resolve={event => this.handleResetEmailClick(event, this.props.user)}
         reject={event => this.handleStateChange(event, "confirm", false)}
       />

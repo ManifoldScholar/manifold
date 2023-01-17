@@ -45,12 +45,12 @@ class IngestionFormUpload extends PureComponent {
 
   render() {
     const formHeader =
-      this.props.header || t("backend.forms.ingestion.upload_file");
+      this.props.header || t("texts.ingestion.upload_file");
 
     const fileInstructions = (
       <span className="instructions">
         <Trans
-          i18nKey="backend.forms.ingestion.instructions"
+          i18nKey="texts.ingestion.instructions"
           components={[
             <a
               href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
@@ -79,15 +79,15 @@ class IngestionFormUpload extends PureComponent {
           />
         </Form.FieldGroup>
         <Form.FieldGroup
-          label={t("backend.forms.ingestion.upload_from_url")}
-          instructions={t("backend.forms.ingestion.url_instructions")}
+          label={t("texts.ingestion.upload_from_url")}
+          instructions={t("texts.ingestion.url_instructions")}
         >
           <Form.TextInput
-            label={t("backend.forms.ingestion.url")}
+            label={t("texts.ingestion.url")}
             focusOnMount
             value={this.props.getModelValue("attributes[externalSourceUrl]")}
             onChange={event => this.onUrlChange(event)}
-            placeholder={t("backend.forms.ingestion.url_placeholder")}
+            placeholder={t("texts.ingestion.url_placeholder")}
           />
         </Form.FieldGroup>
         <Form.DrawerButtons

@@ -31,57 +31,57 @@ class ProjectContentTypeFormTexts extends PureComponent {
     return (
       <>
         <Form.TextInput
-          label={this.props.t("backend.forms.title")}
+          label={this.props.t("common.title")}
           name="attributes[title]"
           focusOnMount
           wide
         />
         <Form.TextArea
-          label={this.props.t("backend.forms.description")}
+          label={this.props.t("common.description")}
           name="attributes[description]"
           wide
         />
         <Form.FieldGroup>
           <Form.Switch
-            label={this.props.t("backend.forms.text.show_author_names")}
+            label={this.props.t("content_blocks.texts.show_author_names")}
             name="attributes[showAuthors]"
             isPrimary
           />
           <Form.Switch
-            label={this.props.t("backend.forms.text.show_descriptions")}
+            label={this.props.t("content_blocks.texts.show_descriptions")}
             name="attributes[showDescriptions]"
             isPrimary
           />
           <Form.Switch
-            label={this.props.t("backend.forms.text.show_subtitles")}
+            label={this.props.t("content_blocks.texts.show_subtitles")}
             name="attributes[showSubtitles]"
             isPrimary
           />
           <Form.Switch
-            label={this.props.t("backend.forms.text.show_cover_images")}
+            label={this.props.t("content_blocks.texts.show_cover_images")}
             name="attributes[showCovers]"
             isPrimary
           />
           <Form.Switch
-            label={this.props.t("backend.forms.text.show_dates")}
+            label={this.props.t("content_blocks.texts.show_dates")}
             name="attributes[showDates]"
             isPrimary
           />
           <Form.Switch
-            label={this.props.t("backend.forms.text.show_category_labels")}
+            label={this.props.t("content_blocks.texts.show_category_labels")}
             name="attributes[showCategoryLabels]"
             isPrimary
           />
           <Form.Switch
-            label={this.props.t("backend.forms.text.show_uncategorized_texts")}
+            label={this.props.t("content_blocks.texts.show_uncategorized_texts")}
             name="attributes[showUncategorized]"
             isPrimary
           />
         </Form.FieldGroup>
         {this.hasCategories && (
           <Form.Picker
-            placeholder={this.props.t("backend.forms.text.add_text_category")}
-            label={this.props.t("backend.forms.text.include_texts_in_category")}
+            placeholder={this.props.t("content_blocks.texts.add_text_category")}
+            label={this.props.t("content_blocks.texts.include_texts_in_category")}
             optionToLabel={rc => rc.attributes.title}
             name="relationships[includedCategories]"
             options={this.categories}

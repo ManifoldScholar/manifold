@@ -224,23 +224,23 @@ export class IngestionIngest extends Component {
         {config.services.cable ? (
           <span>
             <Trans
-              i18nKey="backend.ingestion.error.body_cable"
+              i18nKey="texts.ingestion.error.body_cable"
               values={{ cable: config.services.cable }}
             />
           </span>
         ) : (
-          <span>{t("backend.ingestion.error.body_no_cable")}</span>
+          <span>{t("texts.ingestion.error.body_no_cable")}</span>
         )}
         <br />
         <br />
-        <span>{t("backend.ingestion.error.body_closing")}</span>
+        <span>{t("texts.ingestion.error.body_closing")}</span>
       </>
     );
 
     const notification = {
       level: 2,
       id: `WEBSOCKET_ERROR`,
-      heading: t("backend.ingestion.error.heading"),
+      heading: t("texts.ingestion.error.heading"),
       body,
       scope: this.isReingestion ? "global" : "drawer",
       expiration: 0,
@@ -272,7 +272,7 @@ export class IngestionIngest extends Component {
           />
           <div className="ingestion-output__log">
             <p className="ingestion-output__label">
-              {this.props.t("backend.ingestion.log_label")}
+              {this.props.t("texts.ingestion.log_label")}
             </p>
             <div
               className="ingestion-output__log-value"
@@ -295,7 +295,7 @@ export class IngestionIngest extends Component {
                 className="utility-button__icon utility-button__icon--highlight"
               />
               <span className="utility-button__text">
-                {this.props.t("backend.ingestion.restart_button_label")}
+                {this.props.t("texts.ingestion.restart_button_label")}
               </span>
             </button>
           </div>

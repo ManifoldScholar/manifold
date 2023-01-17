@@ -35,10 +35,10 @@ function JournalIssuesContainer({ refresh, journal, route }) {
       failureRedirect={lh.link("backendJournal", journal.id)}
     >
       <EntitiesList
-        instructions={t("backend_entities.issues.instructions")}
+        instructions={t("issues.instructions")}
         entityComponent={JournalIssueRow}
         entityComponentProps={{ journal }}
-        title={t("backend_entities.issues.header")}
+        title={t("issues.header")}
         titleIcon="Journals64"
         titleStyle="bar"
         entities={data}
@@ -54,7 +54,7 @@ function JournalIssuesContainer({ refresh, journal, route }) {
           <Button
             path={lh.link("backendJournalIssueNew", journal.id)}
             type="add"
-            text={t("backend_entities.issues.add_button_label")}
+            text={t("issues.add_button_label")}
             authorizedFor={journal}
             authorizedTo="update"
           />

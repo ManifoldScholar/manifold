@@ -18,18 +18,18 @@ function VolumeForm({ journalId, model, ...props }) {
       model={model}
     >
       <Form.NumberInput
-        label={t("backend.number")}
+        label={t("volumes.number_truncated")}
         focusOnMount
         name="attributes[number]"
       />
       <Form.TextInput
         wide
-        label={t("backend.slug")}
+        label={t("common.slug")}
         name="attributes[pendingSlug]"
-        placeholder={t("backend.slug_placeholder")}
+        placeholder={t("volumes.slug_placeholder")}
       />
       <Form.Save
-        text={model ? t("backend.update_volume") : t("backend.create_volume")}
+        text={model ? t("volumes.update_volume") : t("volumes.create_volume")}
       />
     </FormContainer.Form>
   );

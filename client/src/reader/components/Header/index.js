@@ -130,7 +130,7 @@ class Header extends Component {
       >
         {mobileOptionsExpanded
           ? this.props.t("actions.close")
-          : this.props.t("common.option_title_case_other")}
+          : this.props.t("glossary.option_title_case_other")}
         {mobileOptionsExpanded && (
           <Utility.IconComposer
             icon="close32"

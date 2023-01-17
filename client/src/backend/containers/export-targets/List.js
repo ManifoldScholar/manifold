@@ -73,14 +73,14 @@ export class ExportTargetsContainerImplementation extends PureComponent {
         <EntitiesList
           entityComponent={ExportTargetRow}
           entityComponentProps={{ active }}
-          title={t("backend.export_targets.header")}
+          title={t("settings.export_targets.header")}
           titleStyle="bar"
           entities={exportTargets}
           unit={t("glossary.export_target", { count: exportTargets?.length })}
           buttons={[
             <Button
               path={lh.link("backendSettingsExportTargetsNew")}
-              text={t("backend.export_targets.button_label")}
+              text={t("settings.export_targets.button_label")}
               authorizedFor="exportTarget"
               type="add"
             />

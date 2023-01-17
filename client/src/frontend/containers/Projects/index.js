@@ -53,7 +53,7 @@ export default function ProjectsContainer() {
 
   return meta ? (
     <>
-      <h1 className="screen-reader-text">{t("pages.frontend.projects_all")}</h1>
+      <h1 className="screen-reader-text">{t("pages.projects_all")}</h1>
       {showPlaceholder ? (
         <EntityCollectionPlaceholder.Projects />
       ) : (

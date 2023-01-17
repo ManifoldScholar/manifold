@@ -28,11 +28,11 @@ class ShareClicks extends Component {
       <Block
         width={this.blockWidth}
         icon="share32"
-        title={this.props.t("backend.analytics.shares")}
+        title={this.props.t("analytics.shares")}
       >
         <Figure
           stat={`${this.total}`}
-          caption={this.props.t("backend.analytics.share_clicks")}
+          caption={this.props.t("analytics.share_clicks")}
         />
       </Block>
     );

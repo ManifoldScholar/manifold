@@ -49,8 +49,8 @@ class CategoryListTexts extends PureComponent {
       <div className="texts-list__text texts-list__text--placeholder">
         <p>
           {this.hasCategory
-            ? this.props.t("backend.messages.empty_category")
-            : this.props.t("backend.messages.all_texts_categorized")}
+            ? this.props.t("projects.category.empty_category")
+            : this.props.t("projects.category.all_texts_categorized")}
         </p>
       </div>
     );

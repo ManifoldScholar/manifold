@@ -12,7 +12,7 @@ function ProjectsSummaryEntityCollection({ projects, ...passThroughProps }) {
 
   return (
     <EntityCollection
-      title={t("pages.frontend.projects_all")}
+      title={t("pages.projects_all")}
       icon="projects64"
       BodyComponent={props => (
         <ThumbnailGrid {...props}>

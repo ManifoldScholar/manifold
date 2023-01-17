@@ -168,8 +168,8 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     const t = this.props.t;
 
     const toggleLabel = collectionFilterEnabled
-      ? t("backend_entities.resource_collections.show_all_projects")
-      : t("backend_entities.resource_collections.show_collection_projects");
+      ? t("resource_collections.show_all_projects")
+      : t("resource_collections.show_collection_projects");
 
     return (
       <EntitiesList

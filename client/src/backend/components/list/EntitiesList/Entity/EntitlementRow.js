@@ -56,7 +56,7 @@ class EntitlementRow extends PureComponent {
   get subtitle() {
     if (this.entitlement.attributes.expiration) {
       const date = new Date(this.entitlement.attributes.expiration);
-      return this.props.t("backend.entitlements.expires", {
+      return this.props.t("entitlements.expires", {
         val: date,
         formatParams: {
           val: { month: "long", day: "numeric", year: "numeric" }
@@ -71,7 +71,7 @@ class EntitlementRow extends PureComponent {
       <button
         className="entity-row__utility-button"
         onClick={this.onDelete}
-        title={this.props.t("backend.actions.publish_feature")}
+        title={this.props.t("actions.delete")}
       >
         <Utility.IconComposer icon="delete32" size={26} />
       </button>

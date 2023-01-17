@@ -73,7 +73,7 @@ exports[`backend/components/dashboard/Counts matches the snapshot 1`] = `
       <span
         class="backend-activity-stats__list-text"
       >
-        common.user_title_case_other
+        glossary.user_title_case_other
       </span>
       <span
         class="backend-activity-stats__list-text--highlighted"

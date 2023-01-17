@@ -79,8 +79,8 @@ class FeatureDetailContainer extends PureComponent {
   handleDestroy = () => {
     const { feature, t } = this.props;
     if (!feature) return;
-    const heading = t("backend.forms.feature.delete_modal_heading");
-    const message = t("backend.forms.feature.delete_modal_message");
+    const heading = t("records.features.delete_modal_heading");
+    const message = t("records.features.delete_modal_message");
     this.props.confirm(heading, message, () => this.doDestroy(feature));
   };
 
@@ -104,8 +104,8 @@ class FeatureDetailContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `FEATURE_DESTROYED_${feature.id}`,
-      heading: t("backend.forms.feature.delete_confirm_heading"),
-      body: t("backend.forms.feature.delete_confim_body"),
+      heading: t("records.features.delete_confirm_heading"),
+      body: t("records.features.delete_confim_body"),
       expiration: 3000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -141,10 +141,10 @@ class FeatureDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="feature"
         backUrl={lh.link("backendRecordsFeatures")}
-        backLabel={t("backend.features.back_label")}
-        title={t("backend.forms.feature.new_header")}
+        backLabel={t("records.features.back_label")}
+        title={t("records.features.new_header")}
         showUtility={false}
-        note={t("backend.forms.feature.new_instructions")}
+        note={t("records.features.new_instructions")}
       />
     );
   }
@@ -156,10 +156,10 @@ class FeatureDetailContainer extends PureComponent {
       <Navigation.DetailHeader
         type="feature"
         backUrl={lh.link("backendRecordsFeatures")}
-        backLabel={t("backend.features.back_label")}
+        backLabel={t("records.features.back_label")}
         title={
           feature.attributes.header ||
-          t("backend.feaures.preview.no_title", {
+          t("records.features.preview.no_title", {
             position: feature.attributes.position
           })
         }
@@ -206,7 +206,7 @@ class FeatureDetailContainer extends PureComponent {
     return (
       <Authorize
         failureFatalError={{
-          body: t(`backend.features.preview.unauthorized_${authProps.ability}`)
+          body: t(`records.features.preview.unauthorized_${authProps.ability}`)
         }}
         {...authProps}
       >
@@ -217,8 +217,8 @@ class FeatureDetailContainer extends PureComponent {
               <section>
                 {previewFeature ? (
                   <Form.FieldGroup
-                    label={t("backend.features.preview.section_title")}
-                    instructions={t("backend.features.preview.instructions")}
+                    label={t("records.features.preview.section_title")}
+                    instructions={t("records.features.preview.instructions")}
                   >
                     <FrontendLayout.Splash feature={previewFeature} preview />
                   </Form.FieldGroup>

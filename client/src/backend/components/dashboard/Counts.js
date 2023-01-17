@@ -71,7 +71,7 @@ class Activity extends Component {
           </li>
           <li className="backend-activity-stats__list-item">
             <span className="backend-activity-stats__list-text">
-              {t("common.user_title_case_other")}
+              {t("glossary.user_title_case_other")}
             </span>
             <span className="backend-activity-stats__list-text--highlighted">
               {stats.totalUserCount}

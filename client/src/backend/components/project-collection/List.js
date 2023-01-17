@@ -54,11 +54,11 @@ class ProjectCollectionList extends PureComponent {
                 "button-icon-secondary__icon--large"
               )}
             />
-            <span>{t("backend.project_collection.create_collection")}</span>
+            <span>{t("project_collections.create_collection")}</span>
           </button>
         </div>
         <p className="instructional-copy">
-          {t("backend.project_collection.create_collection_instructions")}
+          {t("project_collections.create_collection_instructions")}
         </p>
       </aside>
     );

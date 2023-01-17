@@ -34,7 +34,7 @@ class TwitterQueryForm extends PureComponent {
     const instructions = (
       <p className="instructions">
         <Trans
-          i18nKey="backend.twitter_learn_more"
+          i18nKey="projects.social.twitter_learn_more"
           components={[
             <a target="_blank" rel="noopener noreferrer" href={twitterHelpUrl}>
               #
@@ -58,25 +58,25 @@ class TwitterQueryForm extends PureComponent {
         <Form.TextInput
           validation={["required"]}
           focusOnMount
-          label={t("backend.query")}
+          label={t("projects.social.query")}
           name="attributes[query]"
-          placeholder={t("backend.query_placeholder")}
+          placeholder={t("projects.social.query_placeholder")}
           instructions={instructions}
         />
         <Form.Select
           name="attributes[resultType]"
-          label={t("backend.fetch_tweets_by")}
+          label={t("projects.social.fetch_tweets_by")}
           options={[
-            { label: t("backend.most_recent"), value: "most_recent" },
-            { label: t("backend.most_popular"), value: "popular" }
+            { label: t("projects.social.most_recent"), value: "most_recent" },
+            { label: t("projects.social.most_popular"), value: "popular" }
           ]}
         />
         <Form.Switch
-          label={t("backend.active")}
+          label={t("common.active")}
           name="attributes[active]"
           isPrimary
         />
-        <Form.Save text={t("backend.save_query")} />
+        <Form.Save text={t("projects.social.save_query")} />
       </FormContainer.Form>
     );
   }

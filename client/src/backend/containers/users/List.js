@@ -104,7 +104,7 @@ class UsersListContainerImplementation extends PureComponent {
         <EntitiesList
           entityComponent={UserRow}
           entityComponentProps={{ active }}
-          title={t("backend.users.header")}
+          title={t("records.users.header")}
           titleStyle="bar"
           entities={users}
           unit={t("glossary.user", { count: usersMeta.pagination.totalCount })}
@@ -117,7 +117,7 @@ class UsersListContainerImplementation extends PureComponent {
           buttons={[
             <Button
               path={lh.link("backendRecordsUsersNew")}
-              text={t("backend.users.button_label")}
+              text={t("records.users.button_label")}
               authorizedFor="user"
               type="add"
             />

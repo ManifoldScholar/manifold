@@ -38,55 +38,55 @@ class ExportTargetsContainerForm extends PureComponent {
         <Form.Errors names={["attributes[configuration]"]} />
         <Form.TextInput
           focusOnMount
-          label={t("backend.forms.export_target.name_label")}
+          label={t("settings.export_targets.name_label")}
           name="attributes[name]"
-          placeholder={t("backend.forms.export_target.name_placeholder")}
+          placeholder={t("settings.export_targets.name_placeholder")}
           wide
         />
         <Form.TextInput
-          label={t("backend.forms.export_target.format_label")}
+          label={t("settings.export_targets.format_label")}
           name="attributes[configuration][targetNameFormat]"
           placeholder="%s.%e"
           wide
         />
         <Form.Select
-          label={t("backend.forms.export_target.type_label")}
+          label={t("settings.export_targets.type_label")}
           name="attributes[strategy]"
           options={[
             {
-              label: t("backend.forms.export_target.type_options.sftp_key"),
+              label: t("settings.export_targets.type_options.sftp_key"),
               value: "sftp_key"
             },
             {
               label: t(
-                "backend.forms.export_target.type_options.sftp_password"
+                "settings.export_targets.type_options.sftp_password"
               ),
               value: "sftp_password"
             }
           ]}
         />
         <Form.TextInput
-          label={t("backend.forms.export_target.host_label")}
+          label={t("settings.export_targets.host_label")}
           name={`attributes[configuration][${strategy}][host]`}
-          placeholder={t("backend.forms.export_target.host_placeholder")}
+          placeholder={t("settings.export_targets.host_placeholder")}
           wide
         />
         <Form.TextInput
-          label={t("backend.forms.export_target.port_label")}
+          label={t("settings.export_targets.port_label")}
           name={`attributes[configuration][${strategy}][port]`}
           placeholder="22"
           wide
         />
         <Form.TextInput
-          label={t("backend.forms.export_target.username_label")}
+          label={t("settings.export_targets.username_label")}
           name={`attributes[configuration][${strategy}][username]`}
-          placeholder={t("backend.forms.export_target.username_placeholder")}
+          placeholder={t("settings.export_targets.username_placeholder")}
           show_uncategorized_texts
           wide
         />
         {strategy === "sftpKey" && (
           <Form.TextArea
-            label={t("backend.forms.export_target.private_key_label")}
+            label={t("settings.export_targets.private_key_label")}
             name={`attributes[configuration][${strategy}][privateKey]`}
             wide
           />
@@ -94,12 +94,12 @@ class ExportTargetsContainerForm extends PureComponent {
         {strategy === "sftpPassword" && (
           <Form.TextInput
             password
-            label={t("backend.forms.export_target.password_label")}
+            label={t("settings.export_targets.password_label")}
             name={`attributes[configuration][${strategy}][password]`}
             wide
           />
         )}
-        <Form.Save text={t("backend.forms.export_target.submit_label")} />
+        <Form.Save text={t("settings.export_targets.submit_label")} />
       </>
     );
   }

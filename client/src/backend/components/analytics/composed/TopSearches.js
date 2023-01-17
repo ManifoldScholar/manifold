@@ -37,13 +37,13 @@ class TopSearches extends Component {
       <Block
         width={this.blockWidth}
         icon="search32"
-        title={this.props.t("backend.analytics.top_searches")}
+        title={this.props.t("analytics.top_searches")}
       >
         <Table
           rowComponent={SearchRow}
           headers={[
-            this.props.t("backend.analytics.search_term"),
-            this.props.t("backend.analytics.search_count")
+            this.props.t("analytics.search_term"),
+            this.props.t("analytics.search_count")
           ]}
           rows={this.data}
           paginationClickHandler={paginationClickHandler}

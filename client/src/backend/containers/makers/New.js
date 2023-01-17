@@ -28,7 +28,7 @@ export class MakersNewContainer extends PureComponent {
     return (
       <section>
         <Navigation.DrawerHeader
-          title={this.props.t("backend.forms.maker.new_header")}
+          title={this.props.t("records.makers.new_header")}
         />
         <Form
           successHandler={this.handleSuccess}

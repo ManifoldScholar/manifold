@@ -23,24 +23,24 @@ class KindPicker extends Component {
   render() {
     const t = this.props.t;
     const selected = this.isSmart
-      ? t("backend.forms.project_collection.smart")
-      : t("backend.forms.project_collection.manual");
+      ? t("project_collections.smart")
+      : t("project_collections.manual");
 
     return (
       <div>
         <span className="screen-reader-text">
-          {t("backend.forms.project_collection.collection_kind_instructions")}
+          {t("project_collections.collection_kind_instructions")}
         </span>
         <Utility.Toggle
           handleToggle={this.handleSmartClick}
           selected={selected}
           label="kind"
           optionOne={{
-            label: t("backend.forms.project_collection.manual"),
+            label: t("project_collections.manual"),
             icon: "BECollectionManual64"
           }}
           optionTwo={{
-            label: t("backend.forms.project_collection.smart"),
+            label: t("project_collections.smart"),
             icon: "BECollectionSmart64"
           }}
         />

@@ -37,9 +37,9 @@ class ProjectContentBlockIdentity extends PureComponent {
     if (!this.props.entity) return;
     switch (this.props.entity.attributes.access) {
       case "unauthorized":
-        return this.props.t("backend.layout.unauthorized");
+        return this.props.t("layout.unauthorized");
       case "authorized":
-        return this.props.t("backend.layout.authorized");
+        return this.props.t("layout.authorized");
       default:
         return null;
     }
@@ -72,7 +72,7 @@ class ProjectContentBlockIdentity extends PureComponent {
           {translatedTitle}
           {this.showVisibility && !this.visible && (
             <span className="backend-content-block__label">
-              {this.props.t("backend.hidden")}
+              {this.props.t("common.hidden")}
             </span>
           )}
           {this.access && (

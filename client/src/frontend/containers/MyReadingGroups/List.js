@@ -71,7 +71,7 @@ function MyReadingGroupsListContainer({ route }) {
 
   return readingGroups ? (
     <>
-      <HeadContent title={t("pages.frontend.my_groups")} appendDefaultTitle />
+      <HeadContent title={t("pages.my_groups")} appendDefaultTitle />
       <section>
         <Styled.Container>
           <GroupsHeading currentUser={currentUser} />

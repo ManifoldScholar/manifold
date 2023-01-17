@@ -51,8 +51,8 @@ export class PermissionContainer extends PureComponent {
       <section>
         {permissions && (
           <EntitiesList
-            title={t("backend.permissions.header")}
-            instructions={t("backend.permissions.instructions")}
+            title={t("projects.permissions.header")}
+            instructions={t("projects.permissions.instructions")}
             titleStyle="section"
             entities={permissions}
             entityComponent={PermissionRow}
@@ -63,7 +63,7 @@ export class PermissionContainer extends PureComponent {
             buttons={[
               <Button
                 path={lh.link(newUrl, entity.id)}
-                text={t("backend.permissions.button_label")}
+                text={t("projects.permissions.button_label")}
                 type="add"
                 authorizedTo="createPermissions"
                 authorizedFor={entity}

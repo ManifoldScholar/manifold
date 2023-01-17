@@ -32,7 +32,7 @@ class Citations extends Component {
       >
         <Figure
           stat={`${this.total}`}
-          caption={this.props.t("backend.analytics.citations_generated")}
+          caption={this.props.t("analytics.citations_generated")}
         />
       </Block>
     );

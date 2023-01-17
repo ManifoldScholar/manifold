@@ -24,7 +24,7 @@ class ProjectContentTypeFormTableOfContents extends PureComponent {
     return (
       <>
         <Form.TextInput
-          label={this.props.t("backend.forms.title")}
+          label={this.props.t("common.title")}
           name="attributes[title]"
           focusOnMount
         />
@@ -32,17 +32,17 @@ class ProjectContentTypeFormTableOfContents extends PureComponent {
           label={this.props.t("glossary.text_title_case_one")}
           options={this.project.relationships.texts}
           optionToLabel={t => t.attributes.title}
-          placeholder={this.props.t("backend.forms.select_text")}
+          placeholder={this.props.t("content_blocks.toc.select_text")}
           name="relationships[text]"
           wide
         />
         <Form.NumberInput
-          label={this.props.t("backend.forms.depth")}
+          label={this.props.t("content_blocks.toc.depth")}
           name="attributes[depth]"
           wide
         />
         <Form.Switch
-          label={this.props.t("backend.forms.show_text_title")}
+          label={this.props.t("content_blocks.toc.show_text_title")}
           name="attributes[showTextTitle]"
           wide
           isPrimary

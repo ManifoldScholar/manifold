@@ -37,7 +37,7 @@ export class ProjectNewContainer extends PureComponent {
   get layoutInstructions() {
     return (
       <Trans
-        i18nKey="backend_entities.projects.forms.new.layout_instructions"
+        i18nKey="projects.forms.new.layout_instructions"
         components={[
           <a
             href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/projects#creating-projects"
@@ -72,9 +72,9 @@ export class ProjectNewContainer extends PureComponent {
         <div>
           <Navigation.DetailHeader
             type="project"
-            title={t("backend_entities.projects.forms.new.title")}
+            title={t("projects.forms.new.title")}
             showUtility={false}
-            note={t("backend_entities.projects.forms.new.instructions")}
+            note={t("projects.forms.new.instructions")}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
@@ -87,28 +87,28 @@ export class ProjectNewContainer extends PureComponent {
             >
               <Form.FieldGroup
                 label={t(
-                  "backend_entities.projects.forms.new.title_descript_header"
+                  "projects.forms.new.title_descript_header"
                 )}
               >
                 <Form.TextInput
                   validation={["required"]}
                   focusOnMount
-                  label={t("backend_entities.projects.forms.title_label")}
+                  label={t("projects.forms.title_label")}
                   name="attributes[title]"
                   placeholder={t(
-                    "backend_entities.projects.forms.title_placeholder"
+                    "projects.forms.title_placeholder"
                   )}
                 />
                 <Form.TextInput
-                  label={t("backend_entities.projects.forms.subtitle_label")}
+                  label={t("projects.forms.subtitle_label")}
                   name="attributes[subtitle]"
                   placeholder={t(
-                    "backend_entities.projects.forms.subtitle_placeholder"
+                    "projects.forms.subtitle_placeholder"
                   )}
                 />
                 <Form.TextArea
                   label={t(
-                    "backend_entities.projects.forms.new.descript_label"
+                    "projects.forms.new.descript_label"
                   )}
                   name="attributes[description]"
                   height={100}
@@ -116,15 +116,15 @@ export class ProjectNewContainer extends PureComponent {
                 />
               </Form.FieldGroup>
               <Form.FieldGroup
-                label={t("backend_entities.projects.forms.new.layout_header")}
+                label={t("projects.forms.new.layout_header")}
                 instructions={this.layoutInstructions}
               >
                 <Form.Radios
                   label={t("glossary.text_title_case_other")}
-                  prompt={t("backend_entities.projects.forms.new.texts_prompt")}
+                  prompt={t("projects.forms.new.texts_prompt")}
                   name="attributes[configuration][multipleTexts]"
                   instructions={t(
-                    "backend_entities.projects.forms.new.texts_instructions"
+                    "projects.forms.new.texts_instructions"
                   )}
                   options={[
                     { label: t("common.yes"), value: true },
@@ -136,11 +136,11 @@ export class ProjectNewContainer extends PureComponent {
                 <Form.Radios
                   label={t("glossary.resource_title_case_other")}
                   prompt={t(
-                    "backend_entities.projects.forms.new.resources_prompt"
+                    "projects.forms.new.resources_prompt"
                   )}
                   name="attributes[configuration][resources]"
                   instructions={t(
-                    "backend_entities.projects.forms.new.resources_instructions"
+                    "projects.forms.new.resources_instructions"
                   )}
                   options={[
                     { label: t("common.yes"), value: true },
@@ -151,14 +151,14 @@ export class ProjectNewContainer extends PureComponent {
                 />
                 <Form.Radios
                   label={t(
-                    "backend_entities.projects.forms.new.extended_descript_label"
+                    "projects.forms.new.extended_descript_label"
                   )}
                   prompt={t(
-                    "backend_entities.projects.forms.new.extended_descript_prompt"
+                    "projects.forms.new.extended_descript_prompt"
                   )}
                   name="attributes[configuration][markdown]"
                   instructions={t(
-                    "backend_entities.projects.forms.new.extended_descript_instructions"
+                    "projects.forms.new.extended_descript_instructions"
                   )}
                   options={[
                     { label: t("common.yes"), value: true },
@@ -168,13 +168,13 @@ export class ProjectNewContainer extends PureComponent {
                   wide
                 />
                 <Form.Radios
-                  label={t("backend_entities.projects.activity")}
+                  label={t("projects.activity")}
                   prompt={t(
-                    "backend_entities.projects.forms.new.activity_prompt"
+                    "projects.forms.new.activity_prompt"
                   )}
                   name="attributes[configuration][recentActivity]"
                   instructions={t(
-                    "backend_entities.projects.forms.new.activity_instructions"
+                    "projects.forms.new.activity_instructions"
                   )}
                   options={[
                     { label: t("common.yes"), value: true },
@@ -185,7 +185,7 @@ export class ProjectNewContainer extends PureComponent {
                 />
               </Form.FieldGroup>
               <Form.Save
-                text={t("backend_entities.projects.forms.new.save")}
+                text={t("projects.forms.new.save")}
                 cancelRoute={lh.link("backendProjects")}
               />
             </FormContainer.Form>

@@ -16,47 +16,47 @@ export default function TextPropertiesContainer({ text }) {
         create={textsAPI.create}
         className="form-secondary"
       >
-        <Form.FieldGroup label={t("backend_entities.texts.properties.header")}>
+        <Form.FieldGroup label={t("texts.properties.header")}>
           <Form.TextInput
             wide
-            label={t("backend_entities.texts.properties.title_label")}
+            label={t("texts.properties.title_label")}
             name="attributes[title]"
             placeholder={t(
-              "backend_entities.texts.properties.title_placeholder"
+              "texts.properties.title_placeholder"
             )}
           />
           <Form.TextInput
             wide
-            label={t("backend_entities.texts.properties.subtitle_label")}
+            label={t("texts.properties.subtitle_label")}
             name="attributes[subtitle]"
             placeholder={t(
-              "backend_entities.texts.properties.subtitle_placeholder"
+              "texts.properties.subtitle_placeholder"
             )}
           />
           <Form.DatePicker
-            label={t("backend_entities.texts.properties.pub_date_label")}
+            label={t("texts.properties.pub_date_label")}
             name="attributes[publicationDate]"
           />
           <Form.TextInput
             wide
-            label={t("backend_entities.texts.properties.slug_label")}
+            label={t("texts.properties.slug_label")}
             name="attributes[pendingSlug]"
             placeholder={t(
-              "backend_entities.texts.properties.slug_placeholder"
+              "texts.properties.slug_placeholder"
             )}
           />
           <Form.TextArea
             wide
-            label={t("backend_entities.texts.properties.descript_label")}
+            label={t("texts.properties.descript_label")}
             name="attributes[description]"
             placeholder={t(
-              "backend_entities.texts.properties.descript_placeholder"
+              "texts.properties.descript_placeholder"
             )}
           />
           <Form.Upload
             wide
             layout="portrait"
-            label={t("backend_entities.texts.properties.cover_label")}
+            label={t("texts.properties.cover_label")}
             accepts="images"
             readFrom="attributes[coverStyles][small]"
             name="attributes[cover]"
@@ -64,41 +64,41 @@ export default function TextPropertiesContainer({ text }) {
           />
         </Form.FieldGroup>
         <Form.FieldGroup
-          label={t("backend_entities.texts.properties.presentation_header")}
+          label={t("texts.properties.presentation_header")}
         >
           <Form.Switch
             wide
             instructions={t(
-              "backend_entities.texts.properties.published_instructions"
+              "texts.properties.published_instructions"
             )}
-            label={t("backend_entities.texts.properties.published_label")}
+            label={t("texts.properties.published_label")}
             name="attributes[published]"
           />
           <Form.TextInput
             wide
-            label={t("backend_entities.texts.properties.section_label")}
+            label={t("texts.properties.section_label")}
             name="attributes[sectionKind]"
             placeholder={t(
-              "backend_entities.texts.properties.section_placeholder"
+              "texts.properties.section_placeholder"
             )}
             instructions={t(
-              "backend_entities.texts.properties.section_instructions"
+              "texts.properties.section_instructions"
             )}
           />
         </Form.FieldGroup>
         <Form.FieldGroup
-          label={t("backend_entities.texts.properties.access_header")}
+          label={t("texts.properties.access_header")}
         >
           <Form.Switch
             wide
-            label={t("backend_entities.texts.properties.ignore_label")}
+            label={t("texts.properties.ignore_label")}
             instructions={t(
-              "backend_entities.texts.properties.ignore_instructions"
+              "texts.properties.ignore_instructions"
             )}
             name="attributes[ignoreAccessRestrictions]"
           />
         </Form.FieldGroup>
-        <Form.Save text={t("backend_entities.texts.properties.save")} />
+        <Form.Save text={t("texts.properties.save")} />
       </FormContainer.Form>
     </section>
   );

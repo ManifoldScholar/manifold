@@ -18,7 +18,7 @@ class ColorPicker extends Component {
 
   label() {
     if (this.props.label) return this.props.label;
-    return this.props.t("backend.forms.project.color_picker");
+    return this.props.t("projects.thumbnail.color_picker");
   }
 
   get idForPrefix() {
@@ -30,32 +30,32 @@ class ColorPicker extends Component {
     const avatarColors = [
       {
         value: "primary",
-        label: t("backend.forms.project.green"),
+        label: t("projects.thumbnail.green"),
         className: "color-picker__item--primary"
       },
       {
         value: "secondary",
-        label: t("backend.forms.project.gray"),
+        label: t("projects.thumbnail.gray"),
         className: "color-picker__item--secondary"
       },
       {
         value: "tertiary",
-        label: t("backend.forms.project.blue"),
+        label: t("projects.thumbnail.blue"),
         className: "color-picker__item--tertiary"
       },
       {
         value: "quaternary",
-        label: t("backend.forms.poject.orange"),
+        label: t("projects.thumbnail.orange"),
         className: "color-picker__item--quaternary"
       },
       {
         value: "quinary",
-        label: t("backend.forms.project.violet"),
+        label: t("projects.thumbnail.violet"),
         className: "color-picker__item--quinary"
       },
       {
         value: "sentary",
-        label: t("backend.forms.project.white"),
+        label: t("projects.thumbnail.white"),
         className: "color-picker__item--sentary"
       }
     ];
@@ -118,7 +118,7 @@ class ColorPicker extends Component {
       <div className="color-picker">
         <div className="color-picker__inner">{this.renderColorPalette()}</div>
         <div className="color-picker__description" aria-hidden="true">
-          {this.props.t("backend.forms.project.color_instructions")}
+          {this.props.t("projects.thumbnail.color_instructions")}
         </div>
       </div>
     );

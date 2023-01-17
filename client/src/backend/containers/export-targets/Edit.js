@@ -69,10 +69,10 @@ export class ExportTargetsEditContainer extends PureComponent {
 
   handleExportTargetDestroy = () => {
     const heading = this.props.t(
-      "backend.forms.export_target.delete_modal_heading"
+      "settings.export_targets.delete_modal_heading"
     );
     const message = this.props.t(
-      "backend.forms.export_target.delete_modal_message"
+      "settings.export_targets.delete_modal_message"
     );
 
     this.props.confirm(heading, message, this.destroyExportTarget);

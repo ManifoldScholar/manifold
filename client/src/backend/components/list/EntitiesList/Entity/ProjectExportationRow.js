@@ -55,11 +55,11 @@ class ProjectExportationRow extends PureComponent {
     const t = this.props.t;
     switch (this.currentState) {
       case "success":
-        return t("backend.success");
+        return t("projects.exports.tags.success");
       case "pending":
-        return t("backend.pending");
+        return t("projects.exports.tags.pending");
       case "failure":
-        return t("backend.failure");
+        return t("projects.exports.tags.failure");
       default:
         return null;
     }
@@ -68,12 +68,12 @@ class ProjectExportationRow extends PureComponent {
   get successMessage() {
     let size = "";
     if (this.attributes.packageSize) {
-      size = this.props.t("backend.exporter.project_size", {
+      size = this.props.t("projects.exports.project_size", {
         size: filesize(this.attributes.packageSize)
       });
     }
 
-    return this.props.t("backend.exporter.success_message", {
+    return this.props.t("projects.exports.success_message", {
       target: this.exportTargetName,
       size
     });
@@ -94,7 +94,7 @@ class ProjectExportationRow extends PureComponent {
         <button
           className="entity-row__utility-button"
           onClick={this.onDelete}
-          title={this.props.t("backend.exporter.delete_export")}
+          title={this.props.t("projects.exports.delete_export")}
         >
           <Utility.IconComposer icon="delete32" size={26} />
         </button>
@@ -108,14 +108,14 @@ class ProjectExportationRow extends PureComponent {
   }
 
   get failureMessage() {
-    return this.props.t("backend.exporter.failure_message", {
+    return this.props.t("projects.exports.failure_message", {
       target: this.exportTargetName,
       reason: this.metadataReason
     });
   }
 
   get pendingMessage() {
-    return this.props.t("backend.exporter.pending_message", {
+    return this.props.t("projects.exports.pending_message", {
       target: this.exportTargetName,
       reason: this.metadataReason
     });

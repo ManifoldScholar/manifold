@@ -11,8 +11,8 @@ export default function TextCreateContainer({ project, refresh }) {
   return (
     <section>
       <Navigation.DrawerHeader
-        title={t("backend_entities.texts.create_button_label")}
-        instructions={t("backend.forms.text_create.drawer_instructions")}
+        title={t("texts.create_button_label")}
+        instructions={t("texts.create.drawer_instructions")}
       />
       <CreateTextForm
         cancelUrl={lh.link("backendProjectTexts", project.id)}

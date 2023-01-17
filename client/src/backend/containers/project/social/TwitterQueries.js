@@ -71,15 +71,15 @@ export class ProjectSocialTwitterQueriesContainer extends Component {
           entityComponent={TwitterQueryRow}
           entities={twitterQueries}
           entityComponentProps={{ active }}
-          title={t("backend_entities.projects.twitter_queries")}
+          title={t("projects.twitter_queries")}
           titleStyle="section"
           instructions={t(
-            "backend_entities.projects.twitter_queries_instructions"
+            "projects.twitter_queries_instructions"
           )}
           buttons={[
             <Button
               path={lh.link("backendProjectSocialTwitterQueryNew", project.id)}
-              text={t("backend_entities.projects.add_twitter_label")}
+              text={t("projects.add_twitter_label")}
               type="add"
               authorizedFor={project}
               authorizedTo="createTwitterQueries"

@@ -32,13 +32,13 @@ class CategoryForm extends PureComponent {
           label={this.props.t("glossary.title_title_case_one")}
           focusOnMount
           name="attributes[title]"
-          placeholder={this.props.t("backend.forms.category.title_placeholder")}
+          placeholder={this.props.t("projects.category.title_placeholder")}
         />
         <Form.Save
           text={
             this.props.model
-              ? this.props.t("backend.forms.category.update")
-              : this.props.t("backend.forms.category.create")
+              ? this.props.t("projects.category.update")
+              : this.props.t("projects.category.create")
           }
         />
       </FormContainer.Form>

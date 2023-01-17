@@ -45,7 +45,7 @@ export default function TextSectionsContainer({ text, route, refresh }) {
       >
         <Form.Header
           label={t("glossary.section_title_case_other")}
-          instructions={t("backend_entities.texts.sections_instructions")}
+          instructions={t("texts.sections_instructions")}
         />
         <div className="entity-list__button-set-flex full-width">
           <Link
@@ -53,7 +53,7 @@ export default function TextSectionsContainer({ text, route, refresh }) {
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
-              {t("backend_entities.texts.create_category_button_label")}
+              {t("texts.create_category_button_label")}
             </span>
             <IconComposer
               icon="circlePlus32"
@@ -61,7 +61,7 @@ export default function TextSectionsContainer({ text, route, refresh }) {
               className="button-icon-secondary__icon button-icon-secondary__icon--large"
             />
             <span className="full" aria-hidden="true">
-              {t("backend_entities.texts.add_section_button_label")}
+              {t("texts.add_section_button_label")}
             </span>
             <span className="abbreviated" aria-hidden="true">
               {t("glossary.section_title_case_one")}

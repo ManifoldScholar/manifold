@@ -112,7 +112,7 @@ class ProjectsListContainerImplementation extends PureComponent {
         buttons={[
           <Button
             path={lh.link("backendProjectsNew")}
-            text={t("backend_entities.projects.add_button_label")}
+            text={t("projects.add_button_label")}
             authorizedFor="project"
             type="add"
           />

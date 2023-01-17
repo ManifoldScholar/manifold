@@ -49,10 +49,10 @@ export default function IssuesListContainer() {
 
   return (
     <>
-      <h1 className="screen-reader-text">{t("pages.frontend.issues_all")}</h1>
+      <h1 className="screen-reader-text">{t("pages.issues_all")}</h1>
       {!showPlaceholder && (
         <EntityCollection.Issues
-          title={t("pages.frontend.issues_all")}
+          title={t("pages.issues_all")}
           issues={issues}
           issuesMeta={meta}
           filterProps={filterProps}

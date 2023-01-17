@@ -39,7 +39,7 @@ class AnalyticsGlobalContainer extends PureComponent {
     return (
       <>
         <Layout.ViewHeader spaceBottom icon="BEAnalytics64" iconAltAccented>
-          {this.props.t("backend.analytics.global_header")}
+          {this.props.t("analytics.global_header")}
         </Layout.ViewHeader>
         <Grid columns={4}>
           {analytics && (

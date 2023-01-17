@@ -41,7 +41,7 @@ class Fields extends Component {
     return (
       <>
         <Navigation.DrawerHeader
-          title={t("backend.forms.manage_entity", {
+          title={t("project_collections.manage", {
             entity: t("glossary.project_collection_other")
           })}
           hideTitle
@@ -52,43 +52,35 @@ class Fields extends Component {
             wide
             header
             focusOnMount
-            label={t("backend.forms.project_collection.collection_title")}
+            label={t("project_collections.collection_title")}
             name="attributes[title]"
-            placeholder={t(
-              "backend.forms.project_collection.collection_title_placeholder"
-            )}
+            placeholder={t("project_collections.collection_title_placeholder")}
           />
         </Navigation.DrawerHeader>
         <KindPicker {...this.props} />
         <Form.TextInput
           wide
-          label={t("backend.slug")}
+          label={t("common.slug")}
           name="attributes[pendingSlug]"
-          placeholder={t("backend.forms.project_collection.slug_placeholder")}
+          placeholder={t("project_collections.slug_placeholder")}
         />
         <Form.TextArea
           wide
-          label={t("backend.forms.project_collection.full_description")}
+          label={t("project_collections.full_description")}
           name="attributes[description]"
-          placeholder={t(
-            "backend.forms.project_collection.full_description_placeholder"
-          )}
+          placeholder={t("project_collections.full_description_placeholder")}
         />
         <Form.TextArea
           wide
-          label={t("backend.forms.project_collection.short_description")}
+          label={t("project_collections.short_description")}
           name="attributes[shortDescription]"
-          placeholder={t(
-            "backend.forms.project_collection.short_description_placeholder"
-          )}
-          instructions={t(
-            "backend.forms.project_collection.short_description_instructions"
-          )}
+          placeholder={t("project_collections.short_description_placeholder")}
+          instructions={t("project_collections.short_description_instructions")}
         />
         <Form.Upload
           wide
           layout="portrait"
-          label={t("backend.forms.project_collection.hero_image")}
+          label={t("project_collections.hero_image")}
           accepts="images"
           readFrom="attributes[heroStyles][small]"
           name="attributes[hero]"
@@ -96,7 +88,7 @@ class Fields extends Component {
         />
         <Form.Select
           name="attributes[heroLayout]"
-          label={t("backend.forms.hero_layout")}
+          label={t("hero.layout")}
           options={[
             { label: "Square Inset", value: "square_inset" },
             { label: "Wide Inset", value: "wide_inset" },
@@ -104,36 +96,34 @@ class Fields extends Component {
           ]}
         />
         <Form.Switch
-          label={t("backend.forms.visible")}
+          label={t("project_collections.visible")}
           name="attributes[visible]"
         />
         <Form.Switch
-          label={t("backend.forms.project_collection.homepage_visible")}
+          label={t("project_collections.homepage_visible")}
           name="attributes[homepage]"
         />
         {this.homepageVisible && (
           <Form.FieldGroup
             instructions={t(
-              "backend.forms.project_collection.homepage_visible_instructions"
+              "project_collections.homepage_visible_instructions"
             )}
           >
             <Form.DatePicker
-              label={t(
-                "backend.forms.project_collection.homepage_visible_start"
-              )}
+              label={t("project_collections.homepage_visible_start")}
               name="attributes[homepageStartDate]"
               wide
             />
             <Form.DatePicker
-              label={t("backend.forms.project_collection.homepage_visible_end")}
+              label={t("project_collections.homepage_visible_end")}
               name="attributes[homepageEndDate]"
               wide
             />
             <Form.NumberInput
-              label={t("backend.forms.project_collection.projects_shown")}
+              label={t("project_collections.projects_shown")}
               name="attributes[homepageCount]"
               instructions={t(
-                "backend.forms.project_collection.projects_shown_instructions"
+                "project_collections.projects_shown_instructions"
               )}
               wide
             />
@@ -143,7 +133,7 @@ class Fields extends Component {
         <Form.Upload
           wide
           layout="portrait"
-          label={t("backend.forms.project_collection.custom_icon")}
+          label={t("project_collections.custom_icon")}
           accepts="images"
           readFrom="attributes[customIconStyles][small]"
           name="attributes[customIcon]"
@@ -152,7 +142,7 @@ class Fields extends Component {
         <Form.Upload
           wide
           layout="portrait"
-          label={t("backend.forms.project_collection.social_image")}
+          label={t("project_collections.social_image")}
           accepts="images"
           readFrom="attributes[socialImageStyles][small]"
           name="attributes[socialImage]"
@@ -160,19 +150,15 @@ class Fields extends Component {
         />
         <Form.TextInput
           wide
-          label={t("backend.forms.project_collection.social_title")}
+          label={t("project_collections.social_title")}
           name="attributes[socialTitle]"
-          placeholder={t(
-            "backend.forms.project_collection.social_title_placeholder"
-          )}
+          placeholder={t("project_collections.social_title_placeholder")}
         />
         <Form.TextArea
           wide
-          label={t("backend.forms.project_collection.social_description")}
+          label={t("project_collections.social_description")}
           name="attributes[socialDescription]"
-          placeholder={t(
-            "backend.forms.project_collection.social_description_placeholder"
-          )}
+          placeholder={t("project_collections.social_description_placeholder")}
         />
         <SmartAttributes {...this.props} />
       </>

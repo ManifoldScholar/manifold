@@ -24,7 +24,7 @@ class RecordsContainer extends PureComponent {
         ability="update"
         entity={["user", "maker", "page", "feature", "exportTarget"]}
         failureFatalError={{
-          body: this.props.t("backend.records.unauthorized")
+          body: this.props.t("records.unauthorized")
         }}
       >
         <RedirectToFirstMatch

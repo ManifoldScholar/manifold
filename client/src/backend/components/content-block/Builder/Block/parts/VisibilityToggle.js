@@ -30,7 +30,7 @@ class ProjectContentBlockVisibilityToggle extends PureComponent {
       return (
         <button
           className={`${baseClass}__button`}
-          aria-label={this.props.t("backend.layout.hide_block")}
+          aria-label={this.props.t("layout.hide_block")}
           onClick={this.props.entityCallbacks.hideBlock}
         >
           <Utility.IconComposer
@@ -44,7 +44,7 @@ class ProjectContentBlockVisibilityToggle extends PureComponent {
     return (
       <button
         className={`${baseClass}__button`}
-        aria-label={this.props.t("backend.layout.show_block")}
+        aria-label={this.props.t("layout.show_block")}
         onClick={this.props.entityCallbacks.showBlock}
       >
         <Utility.IconComposer

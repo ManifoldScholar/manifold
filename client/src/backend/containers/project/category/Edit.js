@@ -48,7 +48,7 @@ export class ProjectCategoryEditContainer extends Component {
     return (
       <div>
         <Navigation.DrawerHeader
-          title={this.props.t("backend_entities.texts.category_edit_header")}
+          title={this.props.t("texts.category_edit_header")}
         />
         <Category.Form model={this.props.category} onSuccess={this.onSuccess} />
       </div>

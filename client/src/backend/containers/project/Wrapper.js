@@ -74,8 +74,8 @@ export class ProjectWrapperContainer extends PureComponent {
 
   handleProjectDestroy = () => {
     const t = this.props.t;
-    const heading = t("backend_entities.projects.modals.confirm_heading");
-    const message = t("backend_entities.projects.modals.confirm_body");
+    const heading = t("projects.modals.confirm_heading");
+    const message = t("projects.modals.confirm_body");
     this.props.confirm(heading, message, this.doDestroy);
   };
 
@@ -140,7 +140,7 @@ export class ProjectWrapperContainer extends PureComponent {
         <Authorize
           entity={project}
           failureFatalError={{
-            detail: t("backend_entities.projects.unauthorized_edit")
+            detail: t("projects.unauthorized_edit")
           }}
           ability={["update", "manageResources"]}
         >
@@ -162,7 +162,7 @@ export class ProjectWrapperContainer extends PureComponent {
               <Navigation.Secondary
                 links={secondaryLinks}
                 panel
-                ariaLabel={t("backend_entities.projects.settings")}
+                ariaLabel={t("projects.settings")}
               />
             }
           >

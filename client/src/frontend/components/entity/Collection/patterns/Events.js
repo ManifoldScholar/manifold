@@ -17,7 +17,7 @@ function EventsEntityCollection({
   const showPagination = !isEmpty(eventsMeta) && !isEmpty(paginationProps);
   return (
     <EntityCollection
-      title={t("pages.frontend.events_all")}
+      title={t("pages.events_all")}
       icon="recentActivity64"
       BodyComponent={props => <Event.List events={events} {...props} />}
       paginationProps={

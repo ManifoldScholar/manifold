@@ -29,8 +29,8 @@ function JournalVolumeEdit({
   const notifyDestroy = useNotification(v => ({
     level: 0,
     id: `JOURNAL_VOLUME_DESTROYED_${v.id}`,
-    heading: t("backend_entities.volumes.delete_heading"),
-    body: t("backend_entities.volumes.delete_body", {
+    heading: t("volumes.delete_heading"),
+    body: t("volumes.delete_body", {
       number: v?.attributes?.number
     }),
     expiration: 5000
@@ -49,8 +49,8 @@ function JournalVolumeEdit({
   }, [destroy, history, journal?.id, journalVolume, notifyDestroy]);
 
   const onDelete = useCallback(() => {
-    const heading = t("backend_entities.volumes.confirm_heading");
-    const message = t("backend_entities.volumes.confirm_body");
+    const heading = t("volumes.confirm_heading");
+    const message = t("volumes.confirm_body");
     confirm(heading, message, destroyAndRedirect);
   }, [destroyAndRedirect, confirm, t]);
 
@@ -71,7 +71,7 @@ function JournalVolumeEdit({
   return (
     <div>
       <Navigation.DrawerHeader
-        title={t("backend_entities.volumes.edit_header")}
+        title={t("volumes.edit_header")}
         buttons={buttons}
       />
       <Volume.Form

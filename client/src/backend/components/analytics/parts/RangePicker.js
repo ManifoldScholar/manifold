@@ -35,24 +35,24 @@ const getLastMonthDates = () => {
 const presets = [
   {
     key: 0,
-    label: "backend.analytics.last_week",
+    label: "analytics.last_week",
     ...getLastWeekDates()
   },
   {
     key: 1,
-    label: "backend.analytics.last_month",
+    label: "analytics.last_month",
     ...getLastMonthDates()
   },
   {
     key: 2,
-    label: "backend.analytics.last_count_days",
+    label: "analytics.last_count_days",
     count: "7",
     start: subDays(today, 7),
     end: today
   },
   {
     key: 3,
-    label: "backend.analytics.last_count_days",
+    label: "analytics.last_count_days",
     count: "30",
     start: subDays(today, 30),
     end: today
@@ -88,28 +88,28 @@ function RangePicker({
     const newDate = subDays(endDate, 1);
     setStartDate(newDate);
     const date = humanReadableDate(newDate);
-    setScreenReaderStatus(t("backend.analytics.invalid_start_date", { date }));
+    setScreenReaderStatus(t("analytics.invalid_start_date", { date }));
   };
 
   const handleInvalidEnd = () => {
     const newDate = addDays(startDate, 1);
     setEndDate(newDate);
     const date = humanReadableDate(newDate);
-    setScreenReaderStatus(t("backend.analytics.invalid_end_date", { date }));
+    setScreenReaderStatus(t("analytics.invalid_end_date", { date }));
   };
 
   const validateAndSetStart = start => {
     if (!isBefore(start, endDate)) return handleInvalidStart();
     setStartDate(start);
     const date = humanReadableDate(start);
-    setScreenReaderStatus(t("backend.analytics.you_entered_date", { date }));
+    setScreenReaderStatus(t("analytics.you_entered_date", { date }));
   };
 
   const validateAndSetEnd = end => {
     if (isBefore(end, startDate)) return handleInvalidEnd();
     setEndDate(end);
     const date = humanReadableDate(end);
-    setScreenReaderStatus(t("backend.analytics.you_entered_date", { date }));
+    setScreenReaderStatus(t("analytics.you_entered_date", { date }));
   };
 
   const handlePresetClick = ({ start, end }) => {
@@ -142,7 +142,7 @@ function RangePicker({
           <div className="range-picker__section">
             <fieldset className="range-picker__preset-group">
               <legend className="range-picker__label">
-                {t("backend.analytics.choose_date_preset")}
+                {t("analytics.choose_date_preset")}
               </legend>
               <div className="range-picker__preset-group-inner">
                 {presets.map(({ key, label, count, ...dateProps }) => (

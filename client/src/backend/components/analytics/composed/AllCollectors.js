@@ -24,11 +24,11 @@ class AllCollectors extends Component {
       <Block
         width={this.blockWidth}
         icon="starSquircleFilled32"
-        title={this.props.t("backend.analytics.all_stars")}
+        title={this.props.t("analytics.all_stars")}
       >
         <Figure
           stat={`${this.data.value}`}
-          caption={this.props.t("backend.analytics.total_stars")}
+          caption={this.props.t("analytics.total_stars")}
         />
       </Block>
     );

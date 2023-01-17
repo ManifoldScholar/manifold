@@ -14,7 +14,7 @@ class ExportTargetRow extends PureComponent {
   render() {
     const { entity: exportTarget, active } = this.props;
     const { name, strategy } = exportTarget.attributes;
-    const label = this.props.t(`backend.${strategy}`);
+    const label = this.props.t(`settings.export_targets.${strategy}_tag`);
 
     return (
       <EntityRow

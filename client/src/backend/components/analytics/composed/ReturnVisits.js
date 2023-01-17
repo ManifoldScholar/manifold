@@ -33,10 +33,10 @@ class ReturnVisits extends Component {
 
   get caption() {
     const totalVisitorCount = this.props.t(
-      "backend.analytics.visitor_with_count",
+      "analytics.visitor_with_count",
       { count: this.allVisits }
     );
-    return this.props.t("backend.analytics.return_visit_count", {
+    return this.props.t("analytics.return_visit_count", {
       totalVisitorCount,
       returnVisitorCount: this.returnVisits
     });
@@ -47,7 +47,7 @@ class ReturnVisits extends Component {
       <Block
         width={this.blockWidth}
         icon="reload32"
-        title={this.props.t("backend.analytics.return_visits")}
+        title={this.props.t("analytics.return_visits")}
       >
         <Figure stat={this.percentage} caption={this.caption} />
       </Block>

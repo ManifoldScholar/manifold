@@ -9,7 +9,7 @@ Array [
       class="css-cqb262-PrimaryLabel e11et4nf2"
       for="number-input-1"
     >
-      backend.forms.project_collection.number_projects
+      project_collections.number_projects
     </label>
     <input
       aria-describedby="number-input-error-1 number-input-instructions-1"
@@ -23,7 +23,7 @@ Array [
       class="css-5mpmt2-PrimaryInstructions e10u3e2o1"
       id="number-input-instructions-1"
     >
-      backend.forms.project_collection.number_projects_instructions
+      project_collections.number_projects_instructions
     </span>
   </div>,
   <div
@@ -36,7 +36,7 @@ Array [
       <span
         class="css-11bnl5i-LabelTextPrimary e2dgthi2"
       >
-        backend.forms.project_collection.featured_projects
+        project_collections.featured_projects
       </span>
       <input
         class="css-1xi7143-BaseInput-InputSwitch e2dgthi6"
@@ -54,7 +54,7 @@ Array [
       <span
         class="css-5mpmt2-PrimaryInstructions e10u3e2o1"
       >
-        backend.forms.project_collection.featured_projects_instructions
+        project_collections.featured_projects_instructions
       </span>
     </label>
   </div>,
@@ -74,7 +74,7 @@ Array [
         class="css-bmmdfg-PrimaryLabel e11et4nf2"
         for="1-picker-textbox"
       >
-        backend.forms.project_collection.subjects
+        project_collections.subjects
       </label>
       <span
         class="css-5mpmt2-PrimaryInstructions e10u3e2o1"
@@ -95,7 +95,7 @@ Array [
             aria-labelledby="1-picker-label"
             class="css-12duwyt-TextInput ef2ewu710"
             id="1-picker-textbox"
-            placeholder="backend.forms.project_collection.subjects_placeholder"
+            placeholder="project_collections.subjects_placeholder"
             type="text"
             value=""
           />
@@ -154,7 +154,7 @@ Array [
         class="css-bmmdfg-PrimaryLabel e11et4nf2"
         for="1-picker-textbox"
       >
-        backend.forms.project_collection.tags
+        project_collections.tags
       </label>
       <span
         class="css-5mpmt2-PrimaryInstructions e10u3e2o1"
@@ -175,7 +175,7 @@ Array [
             aria-labelledby="1-picker-label"
             class="css-12duwyt-TextInput ef2ewu710"
             id="1-picker-textbox"
-            placeholder="backend.forms.project_collection.tags_placeholder"
+            placeholder="project_collections.tags_placeholder"
             type="text"
             value=""
           />

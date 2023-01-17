@@ -32,10 +32,10 @@ class Engagement extends Component {
   }
 
   get caption() {
-    const visitorCount = this.props.t("backend.analytics.visitor_with_count", {
+    const visitorCount = this.props.t("analytics.visitor_with_count", {
       count: this.activeVisitorCount
     });
-    return this.props.t("backend.analytics.visitor_engagement", {
+    return this.props.t("analytics.visitor_engagement", {
       visitorCount
     });
   }
@@ -45,7 +45,7 @@ class Engagement extends Component {
       <Block
         width={this.blockWidth}
         icon="resourceInteractive64"
-        title={this.props.t("backend.analytics.engagement")}
+        title={this.props.t("analytics.engagement")}
       >
         <Figure stat={this.percentage} caption={this.caption} />
       </Block>

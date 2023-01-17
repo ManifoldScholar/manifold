@@ -103,7 +103,7 @@ class LogRow extends PureComponent {
     return (
       <span>
         <Trans
-          i18nKey="backend.log.entry_project"
+          i18nKey="projects.log.entry_project"
           components={{
             userLink: this.userLink,
             date: <FormattedDate date={this.createdAt} />
@@ -130,7 +130,7 @@ class LogRow extends PureComponent {
     return (
       <span>
         <Trans
-          i18nKey="backend.log.entry"
+          i18nKey="projects.log.entry"
           components={{
             userLink: this.userLink,
             titleWithLink: this.itemLink,
@@ -145,7 +145,7 @@ class LogRow extends PureComponent {
           values={{
             user: this.actorName,
             entityType: t(`glossary.${this.itemType.toLowerCase()}_one`),
-            action: t(`backend.log.actions.${this.action}`)
+            action: t(`projects.log.actions.${this.action}`)
           }}
         />
       </span>
@@ -160,7 +160,7 @@ class LogRow extends PureComponent {
       .map(change => humps.decamelize(change, { separator: " " }))
       .join(", ");
 
-    return <span>{this.props.t("backend.log.change_list", { changes })}</span>;
+    return <span>{this.props.t("projects.log.change_list", { changes })}</span>;
   }
 
   render() {

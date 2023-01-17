@@ -15,26 +15,26 @@ class ResourceFormKindInteractive extends PureComponent {
     return (
       <>
         <Form.TextInput
-          label={this.props.t("backend.forms.resource.min_width")}
+          label={this.props.t("resources.new.min_width")}
           placeholder={this.props.t(
-            "backend.forms.resource.min_width_placeholder"
+            "resources.new.min_width_placeholder"
           )}
           name="attributes[minimumWidth]"
           {...this.props}
         />
         <Form.TextInput
-          label={this.props.t("backend.forms.resource.min_height")}
+          label={this.props.t("resources.new.min_height")}
           placeholder={this.props.t(
-            "backend.forms.resource.min_height_placeholder"
+            "resources.new.min_height_placeholder"
           )}
           name="attributes[minimumHeight]"
           {...this.props}
         />
         <Form.TextInput
-          label={this.props.t("backend.forms.resource.iframe_url")}
+          label={this.props.t("resources.new.iframe_url")}
           name="attributes[externalUrl]"
           placeholder={this.props.t(
-            "backend.forms.resource.iframe_url_placeholder"
+            "resources.new.iframe_url_placeholder"
           )}
           {...this.props}
         />

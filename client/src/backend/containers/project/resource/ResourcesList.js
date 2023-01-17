@@ -102,14 +102,14 @@ class ProjectResourcesListContainerImplementation extends PureComponent {
         buttons={[
           <Button
             path={lh.link("backendProjectResourcesNew", project.id)}
-            text={t("backend_entities.resources.add_button_label")}
+            text={t("resources.add_button_label")}
             authorizedFor={project}
             authorizedTo="createResources"
             type="add"
           />,
           <Button
             path={lh.link("backendResourceImport", project.id)}
-            text={t("backend_entities.resources.bulk_add_label")}
+            text={t("resources.bulk_add_label")}
             authorizedFor={project}
             authorizedTo="createResources"
             icon="BEResourcesBoxes64"

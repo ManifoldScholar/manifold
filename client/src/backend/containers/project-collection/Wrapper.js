@@ -261,7 +261,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
         entity={["projectCollection"]}
         failureFatalError={{
           detail: this.props.t(
-            "backend_entities.project_collections.unauthorized"
+            "project_collections.unauthorized"
           )
         }}
       >

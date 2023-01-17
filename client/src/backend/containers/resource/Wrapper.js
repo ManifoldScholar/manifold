@@ -76,8 +76,8 @@ export class ResourceWrapperContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `RESOURCE_DESTROYED_${this.props.resource.id}`,
-      heading: t("backend_entities.resources.modals.delete_heading"),
-      body: t("backend_entities.resources.modals.delete_body", {
+      heading: t("resources.modals.delete_heading"),
+      body: t("resources.modals.delete_body", {
         title: this.props.resource.attributes.title
       }),
       expiration: 5000
@@ -87,8 +87,8 @@ export class ResourceWrapperContainer extends PureComponent {
 
   handleResourceDestroy = () => {
     const t = this.props.t;
-    const heading = t("backend_entities.resources.modals.confirm_heading");
-    const message = t("backend_entities.resources.modals.confirm_body");
+    const heading = t("resources.modals.confirm_heading");
+    const message = t("resources.modals.confirm_body");
     this.props.confirm(heading, message, this.doDestroy);
   };
 
@@ -145,7 +145,7 @@ export class ResourceWrapperContainer extends PureComponent {
         <Authorize
           entity={resource}
           failureFatalError={{
-            body: t("backend_entities.resources.unauthorized")
+            body: t("resources.unauthorized")
           }}
           ability="update"
         >
@@ -170,7 +170,7 @@ export class ResourceWrapperContainer extends PureComponent {
               <Navigation.Secondary
                 links={secondaryLinks}
                 panel
-                ariaLabel={t("backend_entities.resources.settings")}
+                ariaLabel={t("resources.settings")}
               />
             }
           >

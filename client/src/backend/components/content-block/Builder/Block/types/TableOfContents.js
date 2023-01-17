@@ -9,7 +9,7 @@ export default class ProjectContentBlocksTableOfContents extends PureComponent {
   };
 
   static defaultProps = {
-    title: "backend.layout.table_of_contents_block_title", // Static props can't be translated in their own class, pass the key to be translated where it's implemented
+    title: "layout.table_of_contents_block_title", // Static props can't be translated in their own class, pass the key to be translated where it's implemented
     icon: "toc64"
   };
 

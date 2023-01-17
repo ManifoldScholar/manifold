@@ -64,7 +64,7 @@ export class ProjecExportations extends PureComponent {
     const targets = [
       {
         label: this.props.t(
-          "backend_entities.projects.forms.exports.location_placeholder"
+          "projects.forms.exports.location_placeholder"
         ),
         value: "",
         internalValue: ""
@@ -164,7 +164,7 @@ export class ProjecExportations extends PureComponent {
             {this.hasExportTargets && (
               <Form.Instructions
                 instructions={t(
-                  "backend_entities.projects.forms.exports.instructions"
+                  "projects.forms.exports.instructions"
                 )}
               />
             )}
@@ -173,14 +173,14 @@ export class ProjecExportations extends PureComponent {
                 <Authorize entity="exportTarget" ability="create">
                   <Form.Instructions
                     instructions={t(
-                      "backend_entities.projects.forms.exports.no_targets"
+                      "projects.forms.exports.no_targets"
                     )}
                   />
                   <div>
                     <Button
                       path={lh.link("backendSettingsExportTargetsNew")}
                       text={t(
-                        "backend_entities.projects.forms.exports.add_target_label"
+                        "projects.forms.exports.add_target_label"
                       )}
                       type="add"
                     />
@@ -193,7 +193,7 @@ export class ProjecExportations extends PureComponent {
                 >
                   <Form.Instructions
                     instructions={t(
-                      "backend_entities.projects.forms.exports.no_targets_unauthorized"
+                      "projects.forms.exports.no_targets_unauthorized"
                     )}
                   />
                 </Authorize>
@@ -206,13 +206,13 @@ export class ProjecExportations extends PureComponent {
                   wide
                   name="attributes[export_target_id]"
                   label={t(
-                    "backend_entities.projects.forms.exports.new_export_label"
+                    "projects.forms.exports.new_export_label"
                   )}
                   options={this.exportTargetSelectOptions}
                 />
                 <Form.Errors wide names={["attributes[base]"]} />
                 <Form.Save
-                  text={t("backend_entities.projects.forms.exports.save")}
+                  text={t("projects.forms.exports.save")}
                   wide={false}
                 />
               </>

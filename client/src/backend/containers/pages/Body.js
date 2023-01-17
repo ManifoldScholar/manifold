@@ -30,13 +30,13 @@ class PagesEditContainer extends PureComponent {
           className="form-secondary"
         >
           <Form.TextArea
-            label={t("backend.forms.page.body_label")}
+            label={t("records.pages.body_label")}
             height={300}
             name="attributes[body]"
-            placeholder={t("backend.forms.page.body_placeholder")}
-            instructions={t("backend.forms.page.body_instructions")}
+            placeholder={t("records.pages.body_placeholder")}
+            instructions={t("records.pages.body_instructions")}
           />
-          <Form.Save text={t("backend.forms.page.submit_label")} />
+          <Form.Save text={t("records.pages.submit_label")} />
         </FormContainer.Form>
       </section>
     );

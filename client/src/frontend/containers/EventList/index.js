@@ -41,7 +41,7 @@ export default function EventList({ project, journalBreadcrumbs }) {
   return (
     <>
       <HeadContent
-        title={`${titlePlaintext} | ${t("pages.frontend.events")}`}
+        title={`${titlePlaintext} | ${t("pages.events")}`}
         description={description}
         image={avatarStyles.mediumSquare}
         appendDefaultTitle

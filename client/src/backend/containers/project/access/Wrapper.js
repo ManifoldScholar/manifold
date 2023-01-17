@@ -54,9 +54,9 @@ class ProjectAccessWrapper extends Component {
               preList={
                 <div style={{ marginBottom: 44, marginTop: 22 }}>
                   <Hero.Block
-                    title={t("backend_entities.projects.forms.access.title")}
+                    title={t("projects.forms.access.title")}
                     description={t(
-                      "backend_entities.projects.forms.access.description"
+                      "projects.forms.access.description"
                     )}
                   >
                     <FormContainer.Form
@@ -69,7 +69,7 @@ class ProjectAccessWrapper extends Component {
                       {this.defaultIsOpen && (
                         <Form.Switch
                           label={t(
-                            "backend_entities.projects.forms.access.restricted_label"
+                            "projects.forms.access.restricted_label"
                           )}
                           name="attributes[restrictedAccess]"
                           wide
@@ -78,7 +78,7 @@ class ProjectAccessWrapper extends Component {
                       {this.defaultIsRestricted && (
                         <Form.Switch
                           label={t(
-                            "backend_entities.projects.forms.access.open_access_label"
+                            "projects.forms.access.open_access_label"
                           )}
                           name="attributes[openAccess]"
                           wide
@@ -86,25 +86,25 @@ class ProjectAccessWrapper extends Component {
                       )}
                       <Form.TextInput
                         label={t(
-                          "backend_entities.projects.forms.access.notice_header_label"
+                          "projects.forms.access.notice_header_label"
                         )}
                         name="attributes[restrictedAccessHeading]"
                         placeholder={t(
-                          "backend_entities.projects.forms.access.notice_header_placeholder"
+                          "projects.forms.access.notice_header_placeholder"
                         )}
                         wide
                       />
                       <Form.TextArea
                         label={t(
-                          "backend_entities.projects.forms.access.notice_body_label"
+                          "projects.forms.access.notice_body_label"
                         )}
                         name="attributes[restrictedAccessBody]"
                         placeholder={t(
-                          "backend_entities.projects.forms.access.notice_body_placeholder"
+                          "projects.forms.access.notice_body_placeholder"
                         )}
                       />
                       <Form.Save
-                        text={t("backend_entities.projects.forms.access.save")}
+                        text={t("projects.forms.access.save")}
                       />
                     </FormContainer.Form>
                   </Hero.Block>

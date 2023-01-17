@@ -14,7 +14,7 @@ function JournalIssueNew({ refreshIssues, closeUrl, journal, history }) {
   return (
     <div>
       <Navigation.DrawerHeader
-        title={t("backend_entities.issues.create_header")}
+        title={t("issues.create_header")}
       />
       <Issue.Form journalId={journal.id} onSuccess={refreshAndRedirect} />
     </div>

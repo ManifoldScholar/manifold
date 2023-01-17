@@ -51,15 +51,15 @@ export class ProjectContentTypeForm extends PureComponent {
           label="Access"
           options={[
             {
-              label: this.props.t("backend.forms.always_visible"),
+              label: this.props.t("layout.visibility_options.always"),
               value: "always"
             },
             {
-              label: this.props.t("backend.forms.authorized_visible"),
+              label: this.props.t("layout.visibility_options.authorized"),
               value: "authorized"
             },
             {
-              label: this.props.t("backend.forms.unauthorized_visible"),
+              label: this.props.t("layout.visibility_options.unauthorized"),
               value: "unauthorized"
             }
           ]}

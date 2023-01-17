@@ -20,17 +20,17 @@ class ProjectContentTypeFormMarkdown extends PureComponent {
       <>
         <Form.TextArea
           focusOnMount
-          label={this.props.t("backend.forms.body")}
+          label={this.props.t("content_blocks.markdown.body")}
           name="attributes[body]"
           wide
           height={300}
         />
         <Form.Radios
-          label={this.props.t("backend.forms.style")}
+          label={this.props.t("content_blocks.markdown.style")}
           name="attributes[style]"
           options={[
-            { label: this.props.t("backend.layout.normal"), value: "normal" },
-            { label: this.props.t("backend.layout.shaded"), value: "shaded" }
+            { label: this.props.t("layout.normal"), value: "normal" },
+            { label: this.props.t("layout.shaded"), value: "shaded" }
           ]}
           inline
           wide

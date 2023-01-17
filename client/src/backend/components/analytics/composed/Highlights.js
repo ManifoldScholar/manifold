@@ -26,10 +26,10 @@ class Highlights extends Component {
   get caption() {
     const { rangeInWords } = this.props;
     return rangeInWords
-      ? this.props.t("backend.analytics.highlights_in_date_range", {
+      ? this.props.t("analytics.highlights_in_date_range", {
           dateRange: rangeInWords
         })
-      : this.props.t("backend.analytics.highlights_made");
+      : this.props.t("analytics.highlights_made");
   }
 
   render() {

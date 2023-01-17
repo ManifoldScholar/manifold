@@ -101,8 +101,8 @@ export function DashboardsAdminContainer({
       entitiesListSearchParams?.projects,
       entitiesListSearchParams?.initialProjects
     ) && canCreateProjects
-      ? t("backend.dashboard.empty_message_creator")
-      : t("backend.dashboard.empty_message");
+      ? t("dashboard.empty_message_creator")
+      : t("dashboard.empty_message_generic");
 
   if (!projects) return null;
 
@@ -143,7 +143,7 @@ export function DashboardsAdminContainer({
             buttons={[
               <Button
                 path={lh.link("backendProjectsNew")}
-                text={t("backend.dashboard.add_project_button")}
+                text={t("projects.add_button_label")}
                 authorizedFor="project"
                 authorizedTo="create"
                 type="add"
@@ -190,7 +190,7 @@ export function DashboardsAdminContainer({
             buttons={[
               <Button
                 path={lh.link("backendJournalsNew")}
-                text={t("backend.dashboard.add_journal_button")}
+                text={t("journals.add_button_label")}
                 authorizedFor="journal"
                 authorizedTo="create"
                 type="add"
@@ -213,7 +213,7 @@ export function DashboardsAdminContainer({
         }}
         titleTag="h2"
       >
-        {t("backend.analytics.global_header")}
+        {t("analytics.global_header")}
       </Layout.ViewHeader>
       <DashboardComponents.Analytics />
     </Authorize>
@@ -243,7 +243,7 @@ export function DashboardsAdminContainer({
   return (
     <main id="skip-to-main" tabIndex={-1}>
       <h1 className="screen-reader-text">
-        {t("backend.dashboard.global_header")}
+        {t("dashboard.title")}
       </h1>
       <section>
         <div className="container">

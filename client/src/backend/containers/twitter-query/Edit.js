@@ -69,11 +69,11 @@ export class TwitterQueryEditContainer extends PureComponent {
 
   handleQueryDestroy = () => {
     const heading = this.props.t(
-      "backend_entities.projects.forms.twitter.confirm_heading"
+      "projects.social.confirm_heading"
     );
     const message = (
       <div>
-        <Trans i18nKey="backend_entities.projects.forms.twitter.confirm_message" />
+        <Trans i18nKey="projects.social.confirm_message" />
       </div>
     );
     this.props.confirm(heading, message, this.destroyQuery);
@@ -118,7 +118,7 @@ export class TwitterQueryEditContainer extends PureComponent {
       buttons.push({
         onClick: this.handleQueryFetch,
         icon: "reload32",
-        label: t("backend_entities.projects.forms.twitter.fetch_label"),
+        label: t("projects.social.fetch_label"),
         className: "utility-button__icon--highlight"
       });
 

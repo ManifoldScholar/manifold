@@ -38,7 +38,7 @@ class Activity extends Component {
         <ul className="backend-activity-stats__list">
           <li className="backend-activity-stats__list-item">
             <span className="backend-activity-stats__list-text">
-              {this.props.t("backend.dashboard.text_stats")}
+              {this.props.t("dashboard.text_stats")}
             </span>
             <span className="backend-activity-stats__list-text--highlighted">
               {stats.newTextsCount}
@@ -47,7 +47,7 @@ class Activity extends Component {
           {stats.readersThisWeek !== null ? (
             <li className="backend-activity-stats__list-item">
               <span className="backend-activity-stats__list-text">
-                {this.props.t("backend.dashboard.reader_stats")}
+                {this.props.t("dashboard.reader_stats")}
               </span>
               <span className="backend-activity-stats__list-text--highlighted">
                 {stats.readersThisWeek}
@@ -57,7 +57,7 @@ class Activity extends Component {
           {stats.readerIncrease != null ? (
             <li className="backend-activity-stats__list-item">
               <span className="backend-activity-stats__list-text">
-                {this.props.t("backend.dashboard.stats_change")}
+                {this.props.t("dashboard.stats_change")}
               </span>
               <span className="backend-activity-stats__list-text--highlighted">
                 {this.formatReaderIncrease(stats)}
@@ -66,7 +66,7 @@ class Activity extends Component {
           ) : null}
           <li className="backend-activity-stats__list-item">
             <span className="backend-activity-stats__list-text">
-              {this.props.t("backend.dashboard.highlight_stats")}
+              {this.props.t("dashboard.highlight_stats")}
             </span>
             <span className="backend-activity-stats__list-text--highlighted">
               {stats.newHighlightsCount}
@@ -74,7 +74,7 @@ class Activity extends Component {
           </li>
           <li className="backend-activity-stats__list-item">
             <span className="backend-activity-stats__list-text">
-              {this.props.t("backend.dashboard.annotation_stats")}
+              {this.props.t("dashboard.annotation_stats")}
             </span>
             <span className="backend-activity-stats__list-text--highlighted">
               {stats.newAnnotationsCount}

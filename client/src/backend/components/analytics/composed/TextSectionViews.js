@@ -58,12 +58,12 @@ class TextSectionViews extends Component {
       <Block
         width={this.blockWidth}
         icon="eyeOpen32"
-        title={this.props.t("backend.analytics.text_section_views")}
+        title={this.props.t("analytics.text_section_views")}
       >
         <TextNodeTable
           headers={[
-            this.props.t("backend.analytics.section_title"),
-            this.props.t("backend.analytics.view_count")
+            this.props.t("analytics.section_title"),
+            this.props.t("analytics.view_count")
           ]}
           rows={this.rows}
           slug={this.slug}

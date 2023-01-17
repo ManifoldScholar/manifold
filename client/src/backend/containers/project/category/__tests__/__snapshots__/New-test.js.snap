@@ -5,7 +5,7 @@ exports[`backend/containers/project/category/New matches the snapshot 1`] = `
   <Drawer.EntityHeader
     buttonlayout="stack"
     buttons={Array []}
-    title="backend_entities.texts.category_new_header"
+    title="texts.category_new_header"
   />
   <withI18nextTranslation(Category.Form)
     onSuccess={[Function]}

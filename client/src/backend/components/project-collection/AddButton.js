@@ -91,12 +91,12 @@ class ProjectCollectionAddButton extends Component {
     switch (this.state.view) {
       case "add":
       case "add-active":
-        return t("backend.project_collection.include_title", {
+        return t("project_collections.include_title", {
           title: project.attributes.titlePlaintext
         });
       case "remove":
       case "remove-active":
-        return t("backend.project_collection.exclude_title", {
+        return t("project_collections.exclude_title", {
           title: project.attributes.titlePlaintext
         });
       default:
@@ -126,12 +126,12 @@ class ProjectCollectionAddButton extends Component {
       case "remove-active":
         return {
           key: "add",
-          text: t("backend.project_collection.exclude")
+          text: t("project_collections.exclude")
         };
       case "add-active":
         return {
           key: "remove",
-          text: t("backend.project_collection.include")
+          text: t("project_collections.include")
         };
       default:
         return {

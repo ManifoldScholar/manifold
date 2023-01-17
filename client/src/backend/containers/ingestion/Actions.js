@@ -51,8 +51,8 @@ class IngestionActions extends Component {
     if (this.finished) return null;
     const t = this.props.t;
     const label = this.inProgress
-      ? t("backend.ingestion.ingesting_button_label")
-      : t("backend.ingestion.start_button_label");
+      ? t("texts.ingestion.ingesting_button_label")
+      : t("texts.ingestion.start_button_label");
 
     return (
       <button
@@ -90,7 +90,7 @@ class IngestionActions extends Component {
           size="default"
           className="button-icon-secondary__icon"
         />
-        <span>{this.props.t("backend.ingestion.change_button_label")}</span>
+        <span>{this.props.t("texts.ingestion.change_button_label")}</span>
       </button>
     );
   }
@@ -105,7 +105,7 @@ class IngestionActions extends Component {
           size="default"
           className="button-icon-secondary__icon"
         />
-        <span>{this.props.t("backend.ingestion.complete_button_label")}</span>
+        <span>{this.props.t("texts.ingestion.complete_button_label")}</span>
       </button>
     );
   }

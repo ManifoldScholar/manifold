@@ -62,7 +62,7 @@ function PublicReadingGroupsListContainer({ route }) {
   return readingGroups ? (
     <>
       <HeadContent
-        title={t("pages.frontend.public_groups")}
+        title={t("pages.public_groups")}
         appendDefaultTitle
       />
       <section>

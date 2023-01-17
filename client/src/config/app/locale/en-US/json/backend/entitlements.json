@@ -1,0 +1,16 @@
+{
+  "entitlements": {
+    "expires": "Expires {{val, datetime}}",
+    "header": "Project Entitlements",
+    "instructions": "Entitlements give users and/or reading groups access to this project. In Manifold, all projects are open by default. Configure access restrictions, below, and enable restrictions to limit access to your project.",
+    "button_label": "Create entitlement",
+    "new": {
+      "header": "Grant Entitlement",
+      "user_select_label": "Who is the entitlement for?",
+      "user_select_placeholder": "Select a User or Reading Group",
+      "expiration_label": "Expiration",
+      "expiration_instructions": "Enter YYYY/MM/DD or a human-readable string, e.g. 'in one year'",
+      "submit_label": "Save Entitlement"
+    }
+  }
+}

@@ -30,11 +30,11 @@ class Collected extends Component {
       <Block
         width={this.blockWidth}
         icon="starSquircle32"
-        title={this.props.t("backend.analytics.starred")}
+        title={this.props.t("analytics.starred")}
       >
         <Figure
           stat={`${this.value || 0}`}
-          caption={this.props.t("backend.analytics.average_projects_starred")}
+          caption={this.props.t("analytics.average_projects_starred")}
         />
       </Block>
     );

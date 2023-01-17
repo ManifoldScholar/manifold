@@ -45,8 +45,8 @@ function SectionListItem(props) {
   };
 
   const onDelete = () => {
-    const heading = t("backend.forms.text_section.delete_confirm_heading");
-    const message = t("backend.forms.text_section.delete_confirm_body");
+    const heading = t("texts.section.delete_confirm_heading");
+    const message = t("texts.section.delete_confirm_body");
     if (confirm) confirm(heading, message, doDelete);
   };
 
@@ -55,7 +55,7 @@ function SectionListItem(props) {
       <Styled.Inner $isDragging={isDragging}>
         <Styled.ButtonGroup>
           <Tooltip
-            content={t("backend.forms.text_section.start_tooltip_content")}
+            content={t("texts.section.start_tooltip_content")}
             xOffset="-100px"
             yOffset="43px"
           >
@@ -77,7 +77,7 @@ function SectionListItem(props) {
           <Styled.Title>{section.name}</Styled.Title>
           {isStart && (
             <Styled.Tag>
-              {t("backend.forms.text_section.start_tag_label")}
+              {t("texts.section.start_tag_label")}
             </Styled.Tag>
           )}
         </Styled.TitleWrapper>

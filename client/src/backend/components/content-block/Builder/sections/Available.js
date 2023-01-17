@@ -30,11 +30,11 @@ class ProjectContentSectionsAvailable extends PureComponent {
       <div>
         <Header
           title={this.props.t("glossary.content_block_title_case_other")}
-          subtitle={this.props.t("backend.layout.blocks")}
+          subtitle={this.props.t("layout.blocks")}
           headerId={this.props.headerId}
           instructionsId={this.props.instructionsId}
         >
-          {this.props.t("backend.layout.customize_blocks_message")}
+          {this.props.t("layout.customize_blocks_message")}
         </Header>
         <div className="block-grid full-width">
           {this.types.map((type, index) => (

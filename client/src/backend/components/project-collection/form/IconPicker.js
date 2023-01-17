@@ -44,19 +44,19 @@ class IconPicker extends Component {
     const t = this.props.t;
     switch (icon) {
       case "book-stack-vertical":
-        return t("backend.forms.project_collection.book_stack_icon");
+        return t("project_collections.book_stack_icon");
       case "lamp":
-        return t("backend.forms.project_collection.lamp_icon");
+        return t("project_collections.lamp_icon");
       case "new-round":
-        return t("backend.forms.project_collection.new_icon");
+        return t("project_collections.new_icon");
       case "books-on-shelf":
-        return t("backend.forms.project_collection.book_shelf_icon");
+        return t("project_collections.book_shelf_icon");
       case "globe":
-        return t("backend.forms.project_collection.globe_icon");
+        return t("project_collections.globe_icon");
       case "touch":
-        return t("backend.forms.project_collection.touch_icon");
+        return t("project_collections.touch_icon");
       case "mug":
-        return t("backend.forms.project_collection.mug_icon");
+        return t("project_collections.mug_icon");
       default:
         return null;
     }
@@ -137,13 +137,13 @@ class IconPicker extends Component {
               <GlobalForm.Label
                 htmlFor={`${this.idPrefix}-${id}`}
                 label={this.props.t(
-                  "backend.forms.project_collection.collection_icon"
+                  "project_collections.collection_icon"
                 )}
               />
               <div>
                 <span className="screen-reader-text">
                   {this.props.t(
-                    "backend.forms.project_collection.collection_icon_instructions"
+                    "project_collections.collection_icon_instructions"
                   )}
                 </span>
                 {this.renderIconList(id)}

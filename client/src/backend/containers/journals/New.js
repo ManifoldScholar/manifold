@@ -37,9 +37,9 @@ class JournalsNew extends PureComponent {
         <div>
           <Navigation.DetailHeader
             type="journal"
-            title={t("backend_entities.journals.forms.new_header")}
+            title={t("journals.forms.new_header")}
             showUtility={false}
-            note={t("backend_entities.journals.forms.new_instructions")}
+            note={t("journals.forms.new_instructions")}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
@@ -51,34 +51,34 @@ class JournalsNew extends PureComponent {
             >
               <Form.FieldGroup
                 label={t(
-                  "backend_entities.journals.forms.title_descript_label"
+                  "journals.forms.title_descript_label"
                 )}
               >
                 <Form.TextInput
                   validation={["required"]}
                   focusOnMount
-                  label={t("backend_entities.journals.forms.title_label")}
+                  label={t("journals.forms.title_label")}
                   name="attributes[title]"
                   placeholder={t(
-                    "backend_entities.journals.forms.title_placeholder"
+                    "journals.forms.title_placeholder"
                   )}
                 />
                 <Form.TextInput
-                  label={t("backend_entities.journals.forms.subtitle_label")}
+                  label={t("journals.forms.subtitle_label")}
                   name="attributes[subtitle]"
                   placeholder={t(
-                    "backend_entities.journals.forms.subtitle_placeholder"
+                    "journals.forms.subtitle_placeholder"
                   )}
                 />
                 <Form.TextArea
-                  label={t("backend_entities.journals.forms.descript_label")}
+                  label={t("journals.forms.descript_label")}
                   name="attributes[description]"
                   height={100}
                   wide
                 />
               </Form.FieldGroup>
               <Form.Save
-                text={t("backend_entities.journals.forms.submit_label")}
+                text={t("journals.forms.submit_label")}
                 cancelRoute={lh.link("backendJournals")}
               />
             </FormContainer.Form>

@@ -27,12 +27,12 @@ function IssueForm({ journalId, model, ...props }) {
       model={model}
     >
       <Form.TextInput
-        label={t("backend.number")}
+        label={t("volumes.number_truncated")}
         focusOnMount
         name="attributes[number]"
       />
       <Form.Picker
-        instructions={t("backend.forms.issue.volume_instructions")}
+        instructions={t("issues.volume_instructions")}
         label={t("glossary.volume_title_case_one")}
         name="relationships[journalVolume]"
         optionToLabel={volume => volume.attributes.number}
@@ -42,7 +42,7 @@ function IssueForm({ journalId, model, ...props }) {
       />
       {model?.id ? (
         <div>
-          <Form.Label label={t("backend.forms.issue.associated_project")} />
+          <Form.Label label={t("issues.associated_project")} />
           <EntitiesList
             entities={[model.relationships.project]}
             entityComponent={ProjectRow}
@@ -52,7 +52,7 @@ function IssueForm({ journalId, model, ...props }) {
       ) : (
         <Form.Picker
           disabled
-          instructions={t("backend.forms.issue.project_instructions")}
+          instructions={t("issues.project_instructions")}
           label={t("glossary.project_title_case_one")}
           name="relationships[project]"
           optionToLabel={project => project.attributes.title}
@@ -64,8 +64,8 @@ function IssueForm({ journalId, model, ...props }) {
       <Form.Save
         text={
           model
-            ? t("backend.forms.issue.update_issue")
-            : t("backend.forms.issue.create_issue")
+            ? t("issues.update_issue")
+            : t("issues.create_issue")
         }
       />
     </FormContainer.Form>

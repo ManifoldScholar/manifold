@@ -65,7 +65,7 @@ class ProjectCollectionHeader extends PureComponent {
               className="utility-button__icon utility-button__icon--highlight"
             />
             <span className="utility-button__text">
-              {t("backend.forms.manage_entity", {
+              {t("project_collections.manage", {
                 entity: t("glossary.project_other")
               })}
             </span>
@@ -86,7 +86,7 @@ class ProjectCollectionHeader extends PureComponent {
               {t("glossary.project_collection_title_case_other")}
             </h1>
             <span>
-              {t("backend.project_collection.manage_collection_instructions")}
+              {t("project_collections.manage_collection_instructions")}
             </span>
           </header>
         </div>

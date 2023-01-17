@@ -48,11 +48,11 @@ class PermissionRow extends PureComponent {
     const t = this.props.t;
     switch (name) {
       case "project_editor":
-        return t("backend.roles.project_editor");
+        return t("projects.permissions.project_editor");
       case "project_resource_editor":
-        return t("backend.roles.metadata_editor");
+        return t("projects.permissions.metadata_editor");
       case "project_author":
-        return t("backend.roles.author");
+        return t("projects.permissions.author");
       default:
         return null;
     }

@@ -28,10 +28,10 @@ class Annotations extends Component {
     return {
       stat,
       caption: rangeInWords
-        ? this.props.t("backend.analytics.annotations_in_date_range", {
+        ? this.props.t("analytics.annotations_in_date_range", {
             dateRange: rangeInWords
           })
-        : this.props.t("backend.analytics.annotations_created")
+        : this.props.t("analytics.annotations_created")
     };
   }
 
@@ -55,7 +55,7 @@ class Annotations extends Component {
     const stat = this.data.readingGroupAnnotations;
     return {
       stat,
-      caption: this.props.t("backend.analytics.in_reading_groups")
+      caption: this.props.t("analytics.in_reading_groups")
     };
   }
 

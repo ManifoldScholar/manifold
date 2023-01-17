@@ -34,7 +34,7 @@ export class ResourceVariantsContainer extends PureComponent {
           />
           <Form.Save
             text={this.props.t(
-              "backend_entities.resources.forms.properties.save"
+              "resources.properties.save"
             )}
           />
         </FormContainer.Form>

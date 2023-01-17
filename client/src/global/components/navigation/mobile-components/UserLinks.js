@@ -94,7 +94,7 @@ class UserLinks extends PureComponent {
         {!!currentUser && (
           <Link
             to={lh.link("frontendStarred")}
-            title={t("pages.frontend.my_starred")}
+            title={t("pages.my_starred")}
             icon="star24"
             onClick={() => this.props.closeNavigation()}
           />
@@ -103,13 +103,13 @@ class UserLinks extends PureComponent {
           <>
             <Link
               to={lh.link("frontendAnnotations")}
-              title={t("pages.frontend.my_notes")}
+              title={t("pages.my_notes")}
               icon="notes24"
               onClick={() => this.props.closeNavigation()}
             />
             <Link
               to={lh.link("frontendMyReadingGroups")}
-              title={t("pages.frontend.my_groups")}
+              title={t("pages.my_groups")}
               icon="annotationGroup24"
               onClick={() => this.props.closeNavigation()}
             />

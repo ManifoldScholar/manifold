@@ -50,55 +50,55 @@ export class ResourcePropertiesContainer extends PureComponent {
         >
           <Resource.Form.KindPicker name="attributes[kind]" />
           <Form.TextInput
-            label={t("backend_entities.resources.forms.title_label")}
+            label={t("resources.title_label")}
             name="attributes[title]"
             placeholder={t(
-              "backend_entities.resources.forms.title_placeholder"
+              "resources.title_placeholder"
             )}
             instructions={t(
-              "backend_entities.resources.forms.properties.title_instructions"
+              "resources.properties.title_instructions"
             )}
           />
           <Form.TextInput
             label={t(
-              "backend_entities.resources.forms.properties.sort_title_label"
+              "resources.properties.sort_title_label"
             )}
             name="attributes[pendingSortTitle]"
             placeholder={t(
-              "backend_entities.resources.forms.properties.sort_title_placeholder"
+              "resources.properties.sort_title_placeholder"
             )}
             instructions={t(
-              "backend_entities.resources.forms.properties.sort_title_instructions"
+              "resources.properties.sort_title_instructions"
             )}
             disabled
           />
           <Form.TextInput
             label={t(
-              "backend_entities.resources.forms.properties.fingerprint_label"
+              "resources.properties.fingerprint_label"
             )}
             name="attributes[fingerprint]"
             placeholder={t(
-              "backend_entities.resources.forms.properties.fingerprint_placeholder"
+              "resources.properties.fingerprint_placeholder"
             )}
             instructions={t(
-              "backend_entities.resources.forms.properties.fingerprint_instructions"
+              "resources.properties.fingerprint_instructions"
             )}
             disabled
           />
           <Form.TextInput
-            label={t("backend_entities.resources.forms.properties.slug_label")}
+            label={t("resources.properties.slug_label")}
             name="attributes[pendingSlug]"
             placeholder={t(
-              "backend_entities.resources.forms.properties.slug_placeholder"
+              "resources.properties.slug_placeholder"
             )}
           />
           <Form.Picker
-            label={t("backend_entities.resources.forms.properties.tags_label")}
+            label={t("resources.properties.tags_label")}
             listStyle="well"
             listRowComponent="StringRow"
             name="attributes[tagList]"
             placeholder={t(
-              "backend_entities.resources.forms.properties.tags_placeholder"
+              "resources.properties.tags_placeholder"
             )}
             options={tagsAPI.index}
             optionToLabel={tag => tag.attributes.name}
@@ -106,32 +106,32 @@ export class ResourcePropertiesContainer extends PureComponent {
             allowNew
           />
           <Form.TextArea
-            label={t("backend_entities.resources.forms.descript_label")}
+            label={t("resources.descript_label")}
             name="attributes[description]"
             placeholder={t(
-              "backend_entities.resources.forms.descript_placeholder"
+              "resources.descript_placeholder"
             )}
           />
           <Form.TextArea
             label={t(
-              "backend_entities.resources.forms.properties.caption_label"
+              "resources.properties.caption_label"
             )}
             name="attributes[caption]"
             placeholder={t(
-              "backend_entities.resources.forms.properties.caption_placeholder"
+              "resources.properties.caption_placeholder"
             )}
           />
           {resource.downloadableKind ? (
             <Form.Switch
               label={t(
-                "backend_entities.resources.forms.properties.download_label"
+                "resources.properties.download_label"
               )}
               name="attributes[allowDownload]"
             />
           ) : null}
           <Resource.Form.KindAttributes />
           <Form.Save
-            text={t("backend_entities.resources.forms.properties.save")}
+            text={t("resources.properties.save")}
           />
         </FormContainer.Form>
       </section>
