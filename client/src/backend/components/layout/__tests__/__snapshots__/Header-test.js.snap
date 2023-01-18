@@ -163,11 +163,9 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
         "resources": Object {
           "en-US": Object {
             "translation": Object {
-              "backend": Object {
-                "dashboard": Object {
-                  "reader_stats": "Readers this week",
-                  "stats_change": "Change from last week",
-                },
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
               },
               "date_fns": null,
               "forms": Object {
@@ -193,11 +191,9 @@ exports[`Backend.Layout.Header component matches the snapshot 1`] = `
       "store": Object {
         "en-US": Object {
           "translation": Object {
-            "backend": Object {
-              "dashboard": Object {
-                "reader_stats": "Readers this week",
-                "stats_change": "Change from last week",
-              },
+            "dashboard": Object {
+              "reader_stats": "Readers this week",
+              "stats_change": "Change from last week",
             },
             "date_fns": null,
             "forms": Object {
