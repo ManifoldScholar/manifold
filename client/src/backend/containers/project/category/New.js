@@ -20,9 +20,7 @@ export default function ProjectCategoryNewContainer({
 
   return (
     <div>
-      <Navigation.DrawerHeader
-        title={t("texts.category_new_header")}
-      />
+      <Navigation.DrawerHeader title={t("texts.category_new_header")} />
       <Category.Form projectId={project.id} onSuccess={onSuccess} />
     </div>
   );

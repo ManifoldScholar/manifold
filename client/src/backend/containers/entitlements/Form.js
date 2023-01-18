@@ -60,9 +60,7 @@ export class EntitlementForm extends PureComponent {
             label={t("entitlements.new.expiration_label")}
             name="attributes[expiration]"
             placeholder="YYYY/MM/DD"
-            instructions={t(
-              "entitlements.new.expiration_instructions"
-            )}
+            instructions={t("entitlements.new.expiration_instructions")}
           />
           <Form.Save text={t("entitlements.new.submit_label")} />
         </FormContainer.Form>

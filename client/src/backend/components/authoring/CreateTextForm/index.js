@@ -88,9 +88,7 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
       >
         <div>
           <Form.TextInput
-            placeholder={t(
-              "texts.create.section_name_placeholder"
-            )}
+            placeholder={t("texts.create.section_name_placeholder")}
             onChange={e => {
               e.preventDefault();
               setSectionName(e.target.value);

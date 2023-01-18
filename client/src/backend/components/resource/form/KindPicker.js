@@ -29,10 +29,7 @@ class KindPicker extends PureComponent {
   renderSelect(kindList, id) {
     return (
       <>
-        <Form.Label
-          id={id}
-          label={this.props.t("resources.new.kind")}
-        />
+        <Form.Label id={id} label={this.props.t("resources.new.kind")} />
         <Styled.SelectWrapper $only={this.props.includeButtons}>
           <FormSelect
             onChange={event => {
@@ -41,9 +38,7 @@ class KindPicker extends PureComponent {
             value={this.props.getModelValue("attributes[kind]").toLowerCase()}
             options={kindList.map(kind => {
               const safeKind = kind.toLowerCase();
-              const translatedKind = this.props.t(
-                `resources.new.${safeKind}`
-              );
+              const translatedKind = this.props.t(`resources.new.${safeKind}`);
               return {
                 value: safeKind,
                 label: translatedKind,
@@ -65,9 +60,7 @@ class KindPicker extends PureComponent {
       >
         {kindList.map(kind => {
           const safeKind = kind.toLowerCase();
-          const translatedKind = this.props.t(
-            `resources.new.${safeKind}`
-          );
+          const translatedKind = this.props.t(`resources.new.${safeKind}`);
           const kindValue = this.props.getModelValue("attributes[kind]");
           const isActive = safeKind === kindValue;
 

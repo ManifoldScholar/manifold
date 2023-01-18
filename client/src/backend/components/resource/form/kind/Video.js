@@ -18,12 +18,8 @@ class ResourceFormKindVideo extends PureComponent {
         <Form.TextInput
           label={this.props.t("resources.new.video_id")}
           name="attributes[externalId]"
-          placeholder={this.props.t(
-            "resources.new.video_id_placeholder"
-          )}
-          instructions={this.props.t(
-            "resources.new.video_id_instructions"
-          )}
+          placeholder={this.props.t("resources.new.video_id_placeholder")}
+          instructions={this.props.t("resources.new.video_id_instructions")}
           {...this.props}
         />
         <Form.Select

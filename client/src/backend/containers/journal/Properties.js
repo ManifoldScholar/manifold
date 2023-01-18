@@ -37,49 +37,35 @@ function JournalPropertiesContainer({ journal }) {
         >
           {getModelValue => (
             <>
-              <Form.FieldGroup
-                label={t("journals.forms.properties.header")}
-              >
+              <Form.FieldGroup label={t("journals.forms.properties.header")}>
                 <Form.TextInput
                   wide
                   validation={["required"]}
                   focusOnMount
                   label={t("journals.forms.title_label")}
                   name="attributes[title]"
-                  placeholder={t(
-                    "journals.forms.title_placeholder"
-                  )}
+                  placeholder={t("journals.forms.title_placeholder")}
                 />
                 <Form.TextInput
                   wide
                   label={t("journals.forms.subtitle_label")}
                   name="attributes[subtitle]"
-                  placeholder={t(
-                    "journals.forms.subtitle_placeholder"
-                  )}
+                  placeholder={t("journals.forms.subtitle_placeholder")}
                 />
                 <Form.TextInput
                   wide
-                  label={t(
-                    "journals.forms.properties.slug_label"
-                  )}
+                  label={t("journals.forms.properties.slug_label")}
                   name="attributes[pendingSlug]"
-                  placeholder={t(
-                    "journals.forms.properties.slug_placeholder"
-                  )}
+                  placeholder={t("journals.forms.properties.slug_placeholder")}
                 />
                 <Project.Form.AvatarBuilder wide />
               </Form.FieldGroup>
               <Form.FieldGroup
-                label={t(
-                  "journals.forms.properties.presentation_header"
-                )}
+                label={t("journals.forms.properties.presentation_header")}
               >
                 <Form.Switch
                   wide
-                  label={t(
-                    "journals.forms.properties.draft_mode_label"
-                  )}
+                  label={t("journals.forms.properties.draft_mode_label")}
                   name="attributes[draft]"
                   instructions={t(
                     "journals.forms.properties.draft_mode_instructions"
@@ -87,9 +73,7 @@ function JournalPropertiesContainer({ journal }) {
                 />
                 <Form.Switch
                   wide
-                  label={t(
-                    "journals.forms.properties.show_home_label"
-                  )}
+                  label={t("journals.forms.properties.show_home_label")}
                   name="attributes[showOnHomepage]"
                   instructions={t(
                     "journals.forms.properties.show_home_instructions"
@@ -110,14 +94,10 @@ function JournalPropertiesContainer({ journal }) {
                 )}
               </Form.FieldGroup>
               <Form.FieldGroup
-                label={t(
-                  "journals.forms.properties.social_header"
-                )}
+                label={t("journals.forms.properties.social_header")}
               >
                 <Form.TextInput
-                  label={t(
-                    "journals.forms.properties.social_card_label"
-                  )}
+                  label={t("journals.forms.properties.social_card_label")}
                   name="attributes[socialTitle]"
                   placeholder={t(
                     "journals.forms.properties.social_card_placeholder"
@@ -125,9 +105,7 @@ function JournalPropertiesContainer({ journal }) {
                 />
                 <Form.TextArea
                   wide
-                  label={t(
-                    "journals.forms.properties.social_descript_label"
-                  )}
+                  label={t("journals.forms.properties.social_descript_label")}
                   name="attributes[socialDescription]"
                   placeholder={t(
                     "journals.forms.properties.social_descript_placeholder"
@@ -135,9 +113,7 @@ function JournalPropertiesContainer({ journal }) {
                 />
                 <Form.Upload
                   layout="portrait"
-                  label={t(
-                    "journals.forms.properties.social_image_label"
-                  )}
+                  label={t("journals.forms.properties.social_image_label")}
                   accepts="images"
                   readFrom="attributes[socialImageStyles][small]"
                   name="attributes[socialImage]"
@@ -145,14 +121,10 @@ function JournalPropertiesContainer({ journal }) {
                 />
               </Form.FieldGroup>
               <Form.FieldGroup
-                label={t(
-                  "journals.forms.properties.taxonomy_header"
-                )}
+                label={t("journals.forms.properties.taxonomy_header")}
               >
                 <Form.Picker
-                  label={t(
-                    "journals.forms.properties.subjects_label"
-                  )}
+                  label={t("journals.forms.properties.subjects_label")}
                   listStyle={"well"}
                   name="relationships[subjects]"
                   options={subjectsAPI.index}
@@ -164,24 +136,18 @@ function JournalPropertiesContainer({ journal }) {
                   listRowComponent="SubjectRow"
                 />
                 <Form.Picker
-                  label={t(
-                    "journals.forms.properties.tags_label"
-                  )}
+                  label={t("journals.forms.properties.tags_label")}
                   listStyle="well"
                   listRowComponent="StringRow"
                   name="attributes[tagList]"
-                  placeholder={t(
-                    "journals.forms.properties.tags_placeholder"
-                  )}
+                  placeholder={t("journals.forms.properties.tags_placeholder")}
                   options={tagsAPI.index}
                   optionToLabel={tag => tag.attributes.name}
                   optionToValue={tag => tag.attributes.name}
                   allowNew
                 />
               </Form.FieldGroup>
-              <Form.Save
-                text={t("journals.forms.properties.save")}
-              />
+              <Form.Save text={t("journals.forms.properties.save")} />
             </>
           )}
         </FormContainer.Form>

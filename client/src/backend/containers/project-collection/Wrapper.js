@@ -260,9 +260,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
         ability="update"
         entity={["projectCollection"]}
         failureFatalError={{
-          detail: this.props.t(
-            "project_collections.unauthorized"
-          )
+          detail: this.props.t("project_collections.unauthorized")
         }}
       >
         <section className={wrapperClasses}>

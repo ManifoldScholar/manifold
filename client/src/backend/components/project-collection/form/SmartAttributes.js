@@ -42,9 +42,7 @@ class SmartAttributes extends Component {
                 name="relationships[subjects]"
                 options={subjectsAPI.index}
                 optionToLabel={subject => subject.attributes.name}
-                placeholder={t(
-                  "project_collections.subjects_placeholder"
-                )}
+                placeholder={t("project_collections.subjects_placeholder")}
                 predictive
                 listRowComponent="SubjectRow"
               />
@@ -53,9 +51,7 @@ class SmartAttributes extends Component {
                 listStyle="well"
                 listRowComponent="StringRow"
                 name="attributes[tagList]"
-                placeholder={t(
-                  "project_collections.tags_placeholder"
-                )}
+                placeholder={t("project_collections.tags_placeholder")}
                 options={tagsAPI.index}
                 optionToLabel={tag => tag.attributes.name}
                 optionToValue={tag => tag.attributes.name}

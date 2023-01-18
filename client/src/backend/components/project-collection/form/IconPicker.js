@@ -136,9 +136,7 @@ class IconPicker extends Component {
             >
               <GlobalForm.Label
                 htmlFor={`${this.idPrefix}-${id}`}
-                label={this.props.t(
-                  "project_collections.collection_icon"
-                )}
+                label={this.props.t("project_collections.collection_icon")}
               />
               <div>
                 <span className="screen-reader-text">

@@ -42,26 +42,20 @@ function ProjectPropertiesContainer({ project }) {
           create={projectsAPI.create}
           className="form-secondary"
         >
-          <Form.FieldGroup
-            label={t("projects.forms.properties.header")}
-          >
+          <Form.FieldGroup label={t("projects.forms.properties.header")}>
             <Form.TextInput
               wide
               validation={["required"]}
               focusOnMount
               label={t("projects.forms.title_label")}
               name="attributes[title]"
-              placeholder={t(
-                "projects.forms.title_placeholder"
-              )}
+              placeholder={t("projects.forms.title_placeholder")}
             />
             <Form.TextInput
               wide
               label={t("projects.forms.subtitle_label")}
               name="attributes[subtitle]"
-              placeholder={t(
-                "projects.forms.subtitle_placeholder"
-              )}
+              placeholder={t("projects.forms.subtitle_placeholder")}
             />
             {journalIssue && (
               <>
@@ -74,17 +68,11 @@ function ProjectPropertiesContainer({ project }) {
                   label={t("issues.forms.sort_number_label")}
                   wide
                   name="attributes[journalIssuePendingSortTitle]"
-                  placeholder={t(
-                    "issues.forms.sort_number_placeholder"
-                  )}
-                  instructions={t(
-                    "issues.forms.sort_number_instructions"
-                  )}
+                  placeholder={t("issues.forms.sort_number_placeholder")}
+                  instructions={t("issues.forms.sort_number_instructions")}
                 />
                 <Form.Picker
-                  instructions={t(
-                    "issues.forms.volume_instructions"
-                  )}
+                  instructions={t("issues.forms.volume_instructions")}
                   wide
                   belongsTo
                   label={t("issues.forms.volume_label")}
@@ -97,38 +85,28 @@ function ProjectPropertiesContainer({ project }) {
               </>
             )}
             <Form.DatePicker
-              label={t(
-                "projects.forms.properties.pub_date_label"
-              )}
+              label={t("projects.forms.properties.pub_date_label")}
               name="attributes[publicationDate]"
             />
             <Form.TextInput
               wide
               label={t("projects.forms.properties.slug_label")}
               name="attributes[pendingSlug]"
-              placeholder={t(
-                "projects.forms.properties.slug_placeholder"
-              )}
+              placeholder={t("projects.forms.properties.slug_placeholder")}
             />
             <Project.Form.AvatarBuilder wide project={project} />
           </Form.FieldGroup>
           <Form.FieldGroup
-            label={t(
-              "projects.forms.properties.taxonomy_header"
-            )}
+            label={t("projects.forms.properties.taxonomy_header")}
           >
             <Form.Picker
-              label={t(
-                "projects.forms.properties.subjects_label"
-              )}
+              label={t("projects.forms.properties.subjects_label")}
               listStyle={"well"}
               name="relationships[subjects]"
               options={subjectsAPI.index}
               optionToLabel={subject => subject.attributes.name}
               newToValue={createSubjectFromValue}
-              placeholder={t(
-                "projects.forms.properties.subjects_placeholder"
-              )}
+              placeholder={t("projects.forms.properties.subjects_placeholder")}
               listRowComponent="SubjectRow"
             />
 
@@ -137,9 +115,7 @@ function ProjectPropertiesContainer({ project }) {
               listStyle="well"
               listRowComponent="StringRow"
               name="attributes[tagList]"
-              placeholder={t(
-                "projects.forms.properties.tags_placeholder"
-              )}
+              placeholder={t("projects.forms.properties.tags_placeholder")}
               options={tagsAPI.index}
               optionToLabel={tag => tag.attributes.name}
               optionToValue={tag => tag.attributes.name}
@@ -147,15 +123,11 @@ function ProjectPropertiesContainer({ project }) {
             />
           </Form.FieldGroup>
           <Form.FieldGroup
-            label={t(
-              "projects.forms.properties.presentation_header"
-            )}
+            label={t("projects.forms.properties.presentation_header")}
           >
             <Form.Switch
               wide
-              label={t(
-                "projects.forms.properties.draft_mode_label"
-              )}
+              label={t("projects.forms.properties.draft_mode_label")}
               name="attributes[draft]"
               instructions={t(
                 "projects.forms.properties.draft_mode_instructions"
@@ -163,9 +135,7 @@ function ProjectPropertiesContainer({ project }) {
             />
             <Form.Switch
               wide
-              label={t(
-                "projects.forms.properties.featured_label"
-              )}
+              label={t("projects.forms.properties.featured_label")}
               name="attributes[featured]"
               instructions={t(
                 "projects.forms.properties.featured_instructions"
@@ -173,18 +143,14 @@ function ProjectPropertiesContainer({ project }) {
             />
             <Form.Switch
               wide
-              label={t(
-                "projects.forms.properties.finished_label"
-              )}
+              label={t("projects.forms.properties.finished_label")}
               name="attributes[finished]"
               instructions={t(
                 "projects.forms.properties.finished_instructions"
               )}
             />
             <Form.Select
-              label={t(
-                "projects.forms.properties.standalone_label"
-              )}
+              label={t("projects.forms.properties.standalone_label")}
               wide
               name="attributes[standaloneMode]"
               options={[
@@ -212,18 +178,14 @@ function ProjectPropertiesContainer({ project }) {
               )}
             />
             <Form.TextInput
-              label={t(
-                "projects.forms.properties.top_bar_text_label"
-              )}
+              label={t("projects.forms.properties.top_bar_text_label")}
               name="attributes[standaloneModePressBarText]"
               instructions={t(
                 "projects.forms.properties.top_bar_text_instructions"
               )}
             />
             <Form.TextInput
-              label={t(
-                "projects.forms.properties.top_bar_url_label"
-              )}
+              label={t("projects.forms.properties.top_bar_url_label")}
               name="attributes[standaloneModePressBarUrl]"
               instructions={t(
                 "projects.forms.properties.top_bar_url_instructions"
@@ -231,24 +193,18 @@ function ProjectPropertiesContainer({ project }) {
             />
           </Form.FieldGroup>
           <Form.FieldGroup
-            label={t(
-              "projects.forms.properties.restrictions_header"
-            )}
+            label={t("projects.forms.properties.restrictions_header")}
           >
             <Form.Switch
               wide
-              label={t(
-                "projects.forms.properties.disable_public_label"
-              )}
+              label={t("projects.forms.properties.disable_public_label")}
               name="attributes[disableEngagement]"
               instructions={t(
                 "projects.forms.properties.disable_public_instructions"
               )}
             />
           </Form.FieldGroup>
-          <Form.Save
-            text={t("projects.forms.properties.save")}
-          />
+          <Form.Save text={t("projects.forms.properties.save")} />
         </FormContainer.Form>
       </section>
     </Authorize>

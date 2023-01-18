@@ -86,30 +86,22 @@ export class ProjectNewContainer extends PureComponent {
               className="form-secondary"
             >
               <Form.FieldGroup
-                label={t(
-                  "projects.forms.new.title_descript_header"
-                )}
+                label={t("projects.forms.new.title_descript_header")}
               >
                 <Form.TextInput
                   validation={["required"]}
                   focusOnMount
                   label={t("projects.forms.title_label")}
                   name="attributes[title]"
-                  placeholder={t(
-                    "projects.forms.title_placeholder"
-                  )}
+                  placeholder={t("projects.forms.title_placeholder")}
                 />
                 <Form.TextInput
                   label={t("projects.forms.subtitle_label")}
                   name="attributes[subtitle]"
-                  placeholder={t(
-                    "projects.forms.subtitle_placeholder"
-                  )}
+                  placeholder={t("projects.forms.subtitle_placeholder")}
                 />
                 <Form.TextArea
-                  label={t(
-                    "projects.forms.new.descript_label"
-                  )}
+                  label={t("projects.forms.new.descript_label")}
                   name="attributes[description]"
                   height={100}
                   wide
@@ -123,9 +115,7 @@ export class ProjectNewContainer extends PureComponent {
                   label={t("glossary.text_title_case_other")}
                   prompt={t("projects.forms.new.texts_prompt")}
                   name="attributes[configuration][multipleTexts]"
-                  instructions={t(
-                    "projects.forms.new.texts_instructions"
-                  )}
+                  instructions={t("projects.forms.new.texts_instructions")}
                   options={[
                     { label: t("common.yes"), value: true },
                     { label: t("common.no"), value: false }
@@ -135,13 +125,9 @@ export class ProjectNewContainer extends PureComponent {
                 />
                 <Form.Radios
                   label={t("glossary.resource_title_case_other")}
-                  prompt={t(
-                    "projects.forms.new.resources_prompt"
-                  )}
+                  prompt={t("projects.forms.new.resources_prompt")}
                   name="attributes[configuration][resources]"
-                  instructions={t(
-                    "projects.forms.new.resources_instructions"
-                  )}
+                  instructions={t("projects.forms.new.resources_instructions")}
                   options={[
                     { label: t("common.yes"), value: true },
                     { label: t("common.no"), value: false }
@@ -150,12 +136,8 @@ export class ProjectNewContainer extends PureComponent {
                   wide
                 />
                 <Form.Radios
-                  label={t(
-                    "projects.forms.new.extended_descript_label"
-                  )}
-                  prompt={t(
-                    "projects.forms.new.extended_descript_prompt"
-                  )}
+                  label={t("projects.forms.new.extended_descript_label")}
+                  prompt={t("projects.forms.new.extended_descript_prompt")}
                   name="attributes[configuration][markdown]"
                   instructions={t(
                     "projects.forms.new.extended_descript_instructions"
@@ -169,13 +151,9 @@ export class ProjectNewContainer extends PureComponent {
                 />
                 <Form.Radios
                   label={t("projects.activity")}
-                  prompt={t(
-                    "projects.forms.new.activity_prompt"
-                  )}
+                  prompt={t("projects.forms.new.activity_prompt")}
                   name="attributes[configuration][recentActivity]"
-                  instructions={t(
-                    "projects.forms.new.activity_instructions"
-                  )}
+                  instructions={t("projects.forms.new.activity_instructions")}
                   options={[
                     { label: t("common.yes"), value: true },
                     { label: t("common.no"), value: false }

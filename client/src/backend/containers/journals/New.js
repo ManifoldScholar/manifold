@@ -49,26 +49,18 @@ class JournalsNew extends PureComponent {
               onSuccess={this.handleSuccess}
               className="form-secondary"
             >
-              <Form.FieldGroup
-                label={t(
-                  "journals.forms.title_descript_label"
-                )}
-              >
+              <Form.FieldGroup label={t("journals.forms.title_descript_label")}>
                 <Form.TextInput
                   validation={["required"]}
                   focusOnMount
                   label={t("journals.forms.title_label")}
                   name="attributes[title]"
-                  placeholder={t(
-                    "journals.forms.title_placeholder"
-                  )}
+                  placeholder={t("journals.forms.title_placeholder")}
                 />
                 <Form.TextInput
                   label={t("journals.forms.subtitle_label")}
                   name="attributes[subtitle]"
-                  placeholder={t(
-                    "journals.forms.subtitle_placeholder"
-                  )}
+                  placeholder={t("journals.forms.subtitle_placeholder")}
                 />
                 <Form.TextArea
                   label={t("journals.forms.descript_label")}

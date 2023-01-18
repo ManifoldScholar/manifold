@@ -14,9 +14,7 @@ function JournalVolumeNew({ refreshVolumes, closeUrl, journal, history }) {
 
   return (
     <div>
-      <Navigation.DrawerHeader
-        title={t("volumes.create_header")}
-      />
+      <Navigation.DrawerHeader title={t("volumes.create_header")} />
       <Volume.Form journalId={journal.id} onSuccess={refreshAndRedirect} />
     </div>
   );

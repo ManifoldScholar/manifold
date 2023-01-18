@@ -110,9 +110,7 @@ export class StylesheetEditContainer extends PureComponent {
             )}
           />
           <Form.CodeArea
-            label={t(
-              "texts.stylesheets.edit.validated_styles_label"
-            )}
+            label={t("texts.stylesheets.edit.validated_styles_label")}
             name="attributes[styles]"
             mode="css"
             instructions={t(
@@ -122,9 +120,7 @@ export class StylesheetEditContainer extends PureComponent {
           />
           <Form.Picker
             label={t("texts.stylesheets.edit.sections_label")}
-            placeholder={t(
-              "texts.stylesheets.edit.sections_placeholder"
-            )}
+            placeholder={t("texts.stylesheets.edit.sections_placeholder")}
             name="relationships[textSections]"
             optionToLabel={text => text.attributes.name}
             options={this.fetchTextSections}

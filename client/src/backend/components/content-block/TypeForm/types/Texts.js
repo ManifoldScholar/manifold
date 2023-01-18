@@ -73,7 +73,9 @@ class ProjectContentTypeFormTexts extends PureComponent {
             isPrimary
           />
           <Form.Switch
-            label={this.props.t("content_blocks.texts.show_uncategorized_texts")}
+            label={this.props.t(
+              "content_blocks.texts.show_uncategorized_texts"
+            )}
             name="attributes[showUncategorized]"
             isPrimary
           />
@@ -81,7 +83,9 @@ class ProjectContentTypeFormTexts extends PureComponent {
         {this.hasCategories && (
           <Form.Picker
             placeholder={this.props.t("content_blocks.texts.add_text_category")}
-            label={this.props.t("content_blocks.texts.include_texts_in_category")}
+            label={this.props.t(
+              "content_blocks.texts.include_texts_in_category"
+            )}
             optionToLabel={rc => rc.attributes.title}
             name="relationships[includedCategories]"
             options={this.categories}
