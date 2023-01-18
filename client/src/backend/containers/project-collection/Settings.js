@@ -66,7 +66,7 @@ export class ProjectCollectionSettings extends PureComponent {
               handleDestroy={this.handleDestroy}
               {...this.props}
             />
-            <Form.Save text={t("project_collections.forms.save")} />
+            <Form.Save text={t("project_collections.save_button_label")} />
           </FormContainer.Form>
         </section>
       </Authorize>

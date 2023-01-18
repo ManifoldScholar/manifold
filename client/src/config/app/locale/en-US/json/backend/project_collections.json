@@ -63,8 +63,6 @@
     "change_visibility": "Change visibility of {{entity}} to {{visibility}}",
     "collection_is_visible": "Collection is visible",
     "collection_is_not_visible": "Collection is not visible",
-    "forms": {
-      "save": "Save Project Collection"
-    }
+    "save_button_label": "$t(actions.save) Project Collection"
   }
 }
