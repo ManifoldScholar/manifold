@@ -16,9 +16,7 @@ function RowSort({ options, active, onChange }) {
         <UIDConsumer name={id => `rowSort-${id}`}>
           {id => (
             <div>
-              <Styled.Label htmlFor={id}>
-                {t("analytics.sort_by")}
-              </Styled.Label>
+              <Styled.Label htmlFor={id}>{t("analytics.sort_by")}</Styled.Label>
               <Styled.SelectWrapper>
                 <Styled.Select
                   id={id}

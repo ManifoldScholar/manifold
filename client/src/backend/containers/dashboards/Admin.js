@@ -242,9 +242,7 @@ export function DashboardsAdminContainer({
 
   return (
     <main id="skip-to-main" tabIndex={-1}>
-      <h1 className="screen-reader-text">
-        {t("dashboard.title")}
-      </h1>
+      <h1 className="screen-reader-text">{t("dashboard.title")}</h1>
       <section>
         <div className="container">
           <section className="backend-dashboard">{guts}</section>

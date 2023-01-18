@@ -21,17 +21,13 @@ export default function TextPropertiesContainer({ text }) {
             wide
             label={t("texts.properties.title_label")}
             name="attributes[title]"
-            placeholder={t(
-              "texts.properties.title_placeholder"
-            )}
+            placeholder={t("texts.properties.title_placeholder")}
           />
           <Form.TextInput
             wide
             label={t("texts.properties.subtitle_label")}
             name="attributes[subtitle]"
-            placeholder={t(
-              "texts.properties.subtitle_placeholder"
-            )}
+            placeholder={t("texts.properties.subtitle_placeholder")}
           />
           <Form.DatePicker
             label={t("texts.properties.pub_date_label")}
@@ -41,17 +37,13 @@ export default function TextPropertiesContainer({ text }) {
             wide
             label={t("texts.properties.slug_label")}
             name="attributes[pendingSlug]"
-            placeholder={t(
-              "texts.properties.slug_placeholder"
-            )}
+            placeholder={t("texts.properties.slug_placeholder")}
           />
           <Form.TextArea
             wide
             label={t("texts.properties.descript_label")}
             name="attributes[description]"
-            placeholder={t(
-              "texts.properties.descript_placeholder"
-            )}
+            placeholder={t("texts.properties.descript_placeholder")}
           />
           <Form.Upload
             wide
@@ -63,14 +55,10 @@ export default function TextPropertiesContainer({ text }) {
             remove="attributes[removeCover]"
           />
         </Form.FieldGroup>
-        <Form.FieldGroup
-          label={t("texts.properties.presentation_header")}
-        >
+        <Form.FieldGroup label={t("texts.properties.presentation_header")}>
           <Form.Switch
             wide
-            instructions={t(
-              "texts.properties.published_instructions"
-            )}
+            instructions={t("texts.properties.published_instructions")}
             label={t("texts.properties.published_label")}
             name="attributes[published]"
           />
@@ -78,23 +66,15 @@ export default function TextPropertiesContainer({ text }) {
             wide
             label={t("texts.properties.section_label")}
             name="attributes[sectionKind]"
-            placeholder={t(
-              "texts.properties.section_placeholder"
-            )}
-            instructions={t(
-              "texts.properties.section_instructions"
-            )}
+            placeholder={t("texts.properties.section_placeholder")}
+            instructions={t("texts.properties.section_instructions")}
           />
         </Form.FieldGroup>
-        <Form.FieldGroup
-          label={t("texts.properties.access_header")}
-        >
+        <Form.FieldGroup label={t("texts.properties.access_header")}>
           <Form.Switch
             wide
             label={t("texts.properties.ignore_label")}
-            instructions={t(
-              "texts.properties.ignore_instructions"
-            )}
+            instructions={t("texts.properties.ignore_instructions")}
             name="attributes[ignoreAccessRestrictions]"
           />
         </Form.FieldGroup>

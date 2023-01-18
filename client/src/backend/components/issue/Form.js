@@ -62,11 +62,7 @@ function IssueForm({ journalId, model, ...props }) {
         />
       )}
       <Form.Save
-        text={
-          model
-            ? t("issues.update_issue")
-            : t("issues.create_issue")
-        }
+        text={model ? t("issues.update_issue") : t("issues.create_issue")}
       />
     </FormContainer.Form>
   );

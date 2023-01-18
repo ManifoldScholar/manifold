@@ -63,9 +63,7 @@ export class ProjecExportations extends PureComponent {
   get exportTargetSelectOptions() {
     const targets = [
       {
-        label: this.props.t(
-          "projects.forms.exports.location_placeholder"
-        ),
+        label: this.props.t("projects.forms.exports.location_placeholder"),
         value: "",
         internalValue: ""
       }
@@ -163,25 +161,19 @@ export class ProjecExportations extends PureComponent {
           <Form.FieldGroup label="Project Exports">
             {this.hasExportTargets && (
               <Form.Instructions
-                instructions={t(
-                  "projects.forms.exports.instructions"
-                )}
+                instructions={t("projects.forms.exports.instructions")}
               />
             )}
             {!this.hasExportTargets && (
               <>
                 <Authorize entity="exportTarget" ability="create">
                   <Form.Instructions
-                    instructions={t(
-                      "projects.forms.exports.no_targets"
-                    )}
+                    instructions={t("projects.forms.exports.no_targets")}
                   />
                   <div>
                     <Button
                       path={lh.link("backendSettingsExportTargetsNew")}
-                      text={t(
-                        "projects.forms.exports.add_target_label"
-                      )}
+                      text={t("projects.forms.exports.add_target_label")}
                       type="add"
                     />
                   </div>
@@ -205,9 +197,7 @@ export class ProjecExportations extends PureComponent {
                   rounded
                   wide
                   name="attributes[export_target_id]"
-                  label={t(
-                    "projects.forms.exports.new_export_label"
-                  )}
+                  label={t("projects.forms.exports.new_export_label")}
                   options={this.exportTargetSelectOptions}
                 />
                 <Form.Errors wide names={["attributes[base]"]} />

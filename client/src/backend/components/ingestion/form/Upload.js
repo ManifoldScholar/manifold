@@ -44,8 +44,7 @@ class IngestionFormUpload extends PureComponent {
   }
 
   render() {
-    const formHeader =
-      this.props.header || t("texts.ingestion.upload_file");
+    const formHeader = this.props.header || t("texts.ingestion.upload_file");
 
     const fileInstructions = (
       <span className="instructions">

@@ -32,11 +32,7 @@ export class ResourceVariantsContainer extends PureComponent {
             kind={this.props.resource.attributes.kind}
             {...this.props}
           />
-          <Form.Save
-            text={this.props.t(
-              "resources.properties.save"
-            )}
-          />
+          <Form.Save text={this.props.t("resources.properties.save")} />
         </FormContainer.Form>
       </section>
     );

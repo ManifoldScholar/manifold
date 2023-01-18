@@ -58,9 +58,7 @@ class ExportTargetsContainerForm extends PureComponent {
               value: "sftp_key"
             },
             {
-              label: t(
-                "settings.export_targets.type_options.sftp_password"
-              ),
+              label: t("settings.export_targets.type_options.sftp_password"),
               value: "sftp_password"
             }
           ]}

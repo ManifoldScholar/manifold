@@ -33,28 +33,20 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
           <Form.TextInput
             label={t("resource_collections.forms.title_label")}
             name="attributes[title]"
-            placeholder={t(
-              "resource_collections.forms.title_placeholder"
-            )}
+            placeholder={t("resource_collections.forms.title_placeholder")}
             {...this.props}
           />
           <Form.TextArea
-            label={t(
-              "resource_collections.forms.descript_label"
-            )}
+            label={t("resource_collections.forms.descript_label")}
             name="attributes[description]"
-            placeholder={t(
-              "resource_collections.forms.descript_placeholder"
-            )}
+            placeholder={t("resource_collections.forms.descript_placeholder")}
             {...this.props}
           />
           <Form.TextInput
             wide
             label={t("resource_collections.forms.slug_label")}
             name="attributes[pendingSlug]"
-            placeholder={t(
-              "resource_collections.forms.sluslug_placeholder"
-            )}
+            placeholder={t("resource_collections.forms.sluslug_placeholder")}
           />
           <Form.Upload
             layout="landscape"
@@ -64,9 +56,7 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
             name="attributes[thumbnail]"
             remove="attributes[removeThumbnail]"
           />
-          <Form.Save
-            text={t("resource_collections.forms.save")}
-          />
+          <Form.Save text={t("resource_collections.forms.save")} />
         </FormContainer.Form>
       </section>
     );

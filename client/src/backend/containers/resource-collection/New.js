@@ -67,9 +67,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
             backLabel={project.attributes.titlePlaintext}
             title={t("resource_collections.forms.new_title")}
             showUtility={false}
-            note={t(
-              "resource_collections.forms.new_instructions"
-            )}
+            note={t("resource_collections.forms.new_instructions")}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
@@ -81,21 +79,15 @@ export class ResourceCollectionNewContainer extends PureComponent {
               className="form-secondary"
             >
               <Form.TextInput
-                label={t(
-                  "resource_collections.forms.title_label"
-                )}
+                label={t("resource_collections.forms.title_label")}
                 name="attributes[title]"
                 focusOnMount
                 wide
-                placeholder={t(
-                  "resource_collections.forms.title_placeholder"
-                )}
+                placeholder={t("resource_collections.forms.title_placeholder")}
                 {...this.props}
               />
               <Form.TextArea
-                label={t(
-                  "resource_collections.forms.descript_label"
-                )}
+                label={t("resource_collections.forms.descript_label")}
                 name="attributes[description]"
                 placeholder={t(
                   "resource_collections.forms.descript_placeholder"
@@ -106,9 +98,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
               <Form.Upload
                 layout="landscape"
                 accepts="images"
-                label={t(
-                  "resource_collections.forms.image_label"
-                )}
+                label={t("resource_collections.forms.image_label")}
                 readFrom="attributes[thumbnailStyles][small]"
                 name="attributes[thumbnail]"
                 remove="attributes[removeThumbnail]"

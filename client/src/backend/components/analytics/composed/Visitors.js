@@ -52,10 +52,7 @@ class Visitors extends Component {
         title={this.props.t("analytics.visitor_title_case_other")}
         description={this.description}
       >
-        <Chart
-          data={this.data}
-          tooltipLabel="analytics.visitor_with_count"
-        />
+        <Chart data={this.data} tooltipLabel="analytics.visitor_with_count" />
       </Block>
     );
   }

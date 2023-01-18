@@ -53,9 +53,7 @@ class ProjectCollectionNew extends PureComponent {
           >
             <ProjectCollection.Form.Fields {...this.props} />
             <Form.Save
-              text={this.props.t(
-                "project_collections.save_button_label"
-              )}
+              text={this.props.t("project_collections.save_button_label")}
             />
           </FormContainer.Form>
         </section>

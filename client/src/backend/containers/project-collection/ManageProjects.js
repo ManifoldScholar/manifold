@@ -242,9 +242,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
         <Navigation.DrawerHeader
           icon="BECollectionManual64"
           title={this.props.projectCollection.attributes.title}
-          instructions={t(
-            "project_collections.manage_projects_instructions"
-          )}
+          instructions={t("project_collections.manage_projects_instructions")}
         />
         <EntitiesList
           entities={this.props.projects}

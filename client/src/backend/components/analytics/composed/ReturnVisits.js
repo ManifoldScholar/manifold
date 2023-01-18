@@ -32,10 +32,9 @@ class ReturnVisits extends Component {
   }
 
   get caption() {
-    const totalVisitorCount = this.props.t(
-      "analytics.visitor_with_count",
-      { count: this.allVisits }
-    );
+    const totalVisitorCount = this.props.t("analytics.visitor_with_count", {
+      count: this.allVisits
+    });
     return this.props.t("analytics.return_visit_count", {
       totalVisitorCount,
       returnVisitorCount: this.returnVisits

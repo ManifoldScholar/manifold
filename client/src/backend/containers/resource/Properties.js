@@ -52,54 +52,34 @@ export class ResourcePropertiesContainer extends PureComponent {
           <Form.TextInput
             label={t("resources.title_label")}
             name="attributes[title]"
-            placeholder={t(
-              "resources.title_placeholder"
-            )}
-            instructions={t(
-              "resources.properties.title_instructions"
-            )}
+            placeholder={t("resources.title_placeholder")}
+            instructions={t("resources.properties.title_instructions")}
           />
           <Form.TextInput
-            label={t(
-              "resources.properties.sort_title_label"
-            )}
+            label={t("resources.properties.sort_title_label")}
             name="attributes[pendingSortTitle]"
-            placeholder={t(
-              "resources.properties.sort_title_placeholder"
-            )}
-            instructions={t(
-              "resources.properties.sort_title_instructions"
-            )}
+            placeholder={t("resources.properties.sort_title_placeholder")}
+            instructions={t("resources.properties.sort_title_instructions")}
             disabled
           />
           <Form.TextInput
-            label={t(
-              "resources.properties.fingerprint_label"
-            )}
+            label={t("resources.properties.fingerprint_label")}
             name="attributes[fingerprint]"
-            placeholder={t(
-              "resources.properties.fingerprint_placeholder"
-            )}
-            instructions={t(
-              "resources.properties.fingerprint_instructions"
-            )}
+            placeholder={t("resources.properties.fingerprint_placeholder")}
+            instructions={t("resources.properties.fingerprint_instructions")}
             disabled
           />
           <Form.TextInput
             label={t("resources.properties.slug_label")}
             name="attributes[pendingSlug]"
-            placeholder={t(
-              "resources.properties.slug_placeholder"
-            )}
+            placeholder={t("resources.properties.slug_placeholder")}
           />
           <Form.Picker
             label={t("resources.properties.tags_label")}
             listStyle="well"
             listRowComponent="StringRow"
             name="attributes[tagList]"
-            placeholder={t(
-              "resources.properties.tags_placeholder"
-            )}
+            placeholder={t("resources.properties.tags_placeholder")}
             options={tagsAPI.index}
             optionToLabel={tag => tag.attributes.name}
             optionToValue={tag => tag.attributes.name}
@@ -108,31 +88,21 @@ export class ResourcePropertiesContainer extends PureComponent {
           <Form.TextArea
             label={t("resources.descript_label")}
             name="attributes[description]"
-            placeholder={t(
-              "resources.descript_placeholder"
-            )}
+            placeholder={t("resources.descript_placeholder")}
           />
           <Form.TextArea
-            label={t(
-              "resources.properties.caption_label"
-            )}
+            label={t("resources.properties.caption_label")}
             name="attributes[caption]"
-            placeholder={t(
-              "resources.properties.caption_placeholder"
-            )}
+            placeholder={t("resources.properties.caption_placeholder")}
           />
           {resource.downloadableKind ? (
             <Form.Switch
-              label={t(
-                "resources.properties.download_label"
-              )}
+              label={t("resources.properties.download_label")}
               name="attributes[allowDownload]"
             />
           ) : null}
           <Resource.Form.KindAttributes />
-          <Form.Save
-            text={t("resources.properties.save")}
-          />
+          <Form.Save text={t("resources.properties.save")} />
         </FormContainer.Form>
       </section>
     );

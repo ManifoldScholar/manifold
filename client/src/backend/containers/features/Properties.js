@@ -110,9 +110,7 @@ class FeaturesPropertiesContainer extends PureComponent {
               readFrom="attributes[backgroundStyles][small]"
               name="attributes[background]"
               remove="attributes[removeBackground]"
-              instructions={t(
-                "records.features.background_image_instructions"
-              )}
+              instructions={t("records.features.background_image_instructions")}
             />
             <Form.Upload
               layout="portrait"
@@ -121,9 +119,7 @@ class FeaturesPropertiesContainer extends PureComponent {
               readFrom="attributes[foregroundStyles][small]"
               name="attributes[foreground]"
               remove="attributes[removeForeground]"
-              instructions={t(
-                "records.features.foreground_image_instructions"
-              )}
+              instructions={t("records.features.foreground_image_instructions")}
             />
             <Form.TextInput
               label={t("records.features.foreground_image_position.top")}
@@ -136,9 +132,7 @@ class FeaturesPropertiesContainer extends PureComponent {
               placeholder="0em"
             />
             <Form.Select
-              label={t(
-                "records.features.foreground_image_position.mode.label"
-              )}
+              label={t("records.features.foreground_image_position.mode.label")}
               name="attributes[foregroundPosition]"
               options={[
                 { label: "", value: "" },

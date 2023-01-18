@@ -15,9 +15,7 @@ class ResourceFormKindLink extends PureComponent {
       <Form.TextInput
         label={this.props.t("resources.new.link_url")}
         name="attributes[externalUrl]"
-        placeholder={this.props.t(
-          "resources.new.link_url_placeholder"
-        )}
+        placeholder={this.props.t("resources.new.link_url_placeholder")}
         {...this.props}
         wide
       />

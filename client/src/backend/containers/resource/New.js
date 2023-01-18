@@ -91,17 +91,13 @@ export class ResourceNewContainer extends PureComponent {
               <Form.TextInput
                 label={t("resources.title_label")}
                 name="attributes[title]"
-                placeholder={t(
-                  "resources.title_placeholder"
-                )}
+                placeholder={t("resources.title_placeholder")}
                 wide
               />
               <Form.TextArea
                 label={t("resources.descript_label")}
                 name="attributes[description]"
-                placeholder={t(
-                  "resources.descript_placeholder"
-                )}
+                placeholder={t("resources.descript_placeholder")}
                 wide
               />
               <Resource.Form.KindAttributes />

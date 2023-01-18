@@ -8,9 +8,7 @@ export default function AnalyticsWrapperContainer({ route }) {
 
   return (
     <main id="skip-to-main" tabIndex={-1}>
-      <h1 className="screen-reader-text">
-        {t("dashboard.title")}
-      </h1>
+      <h1 className="screen-reader-text">{t("dashboard.title")}</h1>
       <section>
         <div className="container">{childRoutes(route)}</div>
       </section>
