@@ -1,6 +1,5 @@
 {
   "actions": {
-    "__note": "Alpha sorted using https://novicelab.org/jsonabc/",
     "activate": "Activate",
     "add": "Add",
     "add_comment": "$t(actions.add) comment",
