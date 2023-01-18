@@ -58,11 +58,9 @@ exports[`backend/components/resource/form/kind/Interactive when sub kind is embe
         "resources": Object {
           "en-US": Object {
             "translation": Object {
-              "backend": Object {
-                "dashboard": Object {
-                  "reader_stats": "Readers this week",
-                  "stats_change": "Change from last week",
-                },
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
               },
               "date_fns": null,
               "forms": Object {
@@ -88,11 +86,9 @@ exports[`backend/components/resource/form/kind/Interactive when sub kind is embe
       "store": Object {
         "en-US": Object {
           "translation": Object {
-            "backend": Object {
-              "dashboard": Object {
-                "reader_stats": "Readers this week",
-                "stats_change": "Change from last week",
-              },
+            "dashboard": Object {
+              "reader_stats": "Readers this week",
+              "stats_change": "Change from last week",
             },
             "date_fns": null,
             "forms": Object {
@@ -168,11 +164,9 @@ exports[`backend/components/resource/form/kind/Interactive when sub kind is ifra
         "resources": Object {
           "en-US": Object {
             "translation": Object {
-              "backend": Object {
-                "dashboard": Object {
-                  "reader_stats": "Readers this week",
-                  "stats_change": "Change from last week",
-                },
+              "dashboard": Object {
+                "reader_stats": "Readers this week",
+                "stats_change": "Change from last week",
               },
               "date_fns": null,
               "forms": Object {
@@ -198,11 +192,9 @@ exports[`backend/components/resource/form/kind/Interactive when sub kind is ifra
       "store": Object {
         "en-US": Object {
           "translation": Object {
-            "backend": Object {
-              "dashboard": Object {
-                "reader_stats": "Readers this week",
-                "stats_change": "Change from last week",
-              },
+            "dashboard": Object {
+              "reader_stats": "Readers this week",
+              "stats_change": "Change from last week",
             },
             "date_fns": null,
             "forms": Object {
