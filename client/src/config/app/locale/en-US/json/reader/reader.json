@@ -70,11 +70,7 @@
         "no_annotations_by_me": "You haven't annotated this text yet",
         "no_annotations_by_me_message": "Once you’ve highlighted or annotated a passage in this text, it will appear here. To annotate or highlight, select a passage from the text and click the appropriate button on the pop-up menu.",
         "my_notes": "My $t(glossary.note_title_case_other)",
-        "all_notes": "All $t(glossary.note_other) for group:",
-        "destroy_modal": {
-          "heading": "Are you sure you want to remove this notation?",
-          "message": "Pressing yes will remove the notation from this spot in the text. It will not remove it from the project."
-        }
+        "all_notes": "All $t(glossary.note_other) for group:"
       },
       "return": {
         "project_home": "$t(glossary.project_title_case_one) Home",

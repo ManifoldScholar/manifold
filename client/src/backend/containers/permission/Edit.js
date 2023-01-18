@@ -60,8 +60,8 @@ export class PermissionEdit extends PureComponent {
 
   handleRemoveAll = () => {
     const t = this.props.t;
-    const heading = t("projects.permissions.delete_modal_heading");
-    const message = t("projects.permissions.delete_modal_message");
+    const heading = t("modals.delete_permissions");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, this.removeAllPermissions);
   };
 

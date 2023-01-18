@@ -74,15 +74,15 @@ export class ProjectTextsContainer extends Component {
 
   handleCategoryDestroy = category => {
     const t = this.props.t;
-    const heading = t("texts.modals.delete_category_heading");
-    const message = t("texts.modals.delete_category_body");
+    const heading = t("modals.delete_category");
+    const message = t("modals.delete_category_body");
     this.props.confirm(heading, message, () => this.destroyCategory(category));
   };
 
   handleTextDestroy = text => {
     const t = this.props.t;
-    const heading = t("texts.modals.delete_text_heading");
-    const message = t("texts.modals.delete_text_body");
+    const heading = t("modals.delete_text");
+    const message = t("modals.delete_text_body");
     this.props.confirm(heading, message, () => this.destroyText(text));
   };
 

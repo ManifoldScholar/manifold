@@ -8,6 +8,7 @@ import metadata from "./metadata.json";
 import modals from "./modals.json";
 import navigation from "./navigation.json";
 import utility from "./utility.json";
+import notifications from "./notifications.json";
 
 export default {
   ...actions,
@@ -18,5 +19,6 @@ export default {
   ...metadata,
   ...modals,
   ...navigation,
-  ...utility
+  ...utility,
+  ...notifications
 };

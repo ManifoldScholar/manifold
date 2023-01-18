@@ -79,8 +79,8 @@ class FeatureDetailContainer extends PureComponent {
   handleDestroy = () => {
     const { feature, t } = this.props;
     if (!feature) return;
-    const heading = t("records.features.delete_modal_heading");
-    const message = t("records.features.delete_modal_message");
+    const heading = t("modals.delete_feature");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, () => this.doDestroy(feature));
   };
 
@@ -104,8 +104,8 @@ class FeatureDetailContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `FEATURE_DESTROYED_${feature.id}`,
-      heading: t("records.features.delete_confirm_heading"),
-      body: t("records.features.delete_confim_body"),
+      heading: t("notifications.feature_delete"),
+      body: t("notifications.delete_record_body"),
       expiration: 3000
     };
     this.props.dispatch(notificationActions.addNotification(notification));

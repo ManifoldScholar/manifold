@@ -26,12 +26,8 @@ export class ProjectCollectionSettings extends PureComponent {
 
   handleDestroy = () => {
     const t = this.props.t;
-    const heading = t(
-      "project_collections.modals.confirm_heading"
-    );
-    const message = t(
-      "project_collections.modals.confirm_body"
-    );
+    const heading = t("modals.delete_project_collection");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, this.props.destroyProjectCollection);
   };
 
@@ -70,9 +66,7 @@ export class ProjectCollectionSettings extends PureComponent {
               handleDestroy={this.handleDestroy}
               {...this.props}
             />
-            <Form.Save
-              text={t("project_collections.forms.save")}
-            />
+            <Form.Save text={t("project_collections.forms.save")} />
           </FormContainer.Form>
         </section>
       </Authorize>

@@ -52,8 +52,8 @@ export class TextStylesContainer extends PureComponent {
 
   confirmDestroy = stylesheet => {
     const t = this.props.t;
-    const heading = t("texts.stylesheets.modals.confirm_heading");
-    const message = t("texts.stylesheets.modals.confirm_body");
+    const heading = t("modals.delete_text");
+    const message = t("modals.delete_text_body");
     this.props.confirm(heading, message, () => this.destroy(stylesheet));
   };
 

@@ -142,15 +142,9 @@
       "name_label": "Name",
       "name_placeholder": "Enter Subject Name",
       "new_save": "Save and Continue",
-      "save": "Save Subject",
-      "confirm_heading": "Are you sure you want to delete this subject?",
-      "confirm_body": "This action cannot be undone."
+      "save": "Save Subject"
     },
     "email": {
-      "success_heading": "The test email appears to have been sent.",
-      "success_body": "Expect to receive it shortly.",
-      "failure_heading": "Manifold was unable to send a test email.",
-      "failure_body": "Please check that your email configuration is correct.",
       "header": "Email Settings",
       "message_header": "Message Settings",
       "from_label": "Email from address",
@@ -202,8 +196,6 @@
       "private_key_label": "SFTP Private Key",
       "password_label": "SFTP Password",
       "submit_label": "Save Export Target",
-      "delete_modal_heading": "Are you sure you want to delete this export target?",
-      "delete_modal_message": "This action cannot be undone.",
       "sftp_key_tag": "SFTP Key",
       "sftp_password_tag": "$t(settings.export_targets.password_label)"
     }

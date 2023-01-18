@@ -86,8 +86,8 @@ class ProjectEventsContainerImplementation extends PureComponent {
 
   handleEventDestroy = event => {
     const t = this.props.t;
-    const heading = t("projects.modals.confirm_event");
-    const message = t("projects.modals.confirm_body");
+    const heading = t("modals.delete_event");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, () => this.destroyEvent(event));
   };
 
