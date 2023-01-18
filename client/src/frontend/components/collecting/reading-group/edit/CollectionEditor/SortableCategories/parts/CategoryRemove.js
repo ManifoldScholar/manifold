@@ -9,7 +9,7 @@ function CategoryRemove({ onRemove, confirm }) {
   const { t } = useTranslation();
 
   function handleClick() {
-    const heading = t("modals.remove_category_heading");
+    const heading = t("modals.remove_category");
     const message = t("modals.remove_category_body");
     confirm(heading, message, () => onRemove());
   }

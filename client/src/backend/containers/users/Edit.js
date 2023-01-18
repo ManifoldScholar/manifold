@@ -74,8 +74,8 @@ export class UsersEditContainer extends PureComponent {
 
   handleUserDestroy = () => {
     const t = this.props.t;
-    const heading = t("records.users.delete_modal_heading");
-    const message = t("records.users.delete_modal_message");
+    const heading = t("modals.delete_user");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, this.destroyUser);
   };
 
@@ -91,8 +91,8 @@ export class UsersEditContainer extends PureComponent {
 
   unsubscribeUser = () => {
     const t = this.props.t;
-    const heading = t("records.users.unsubscribe_modal_heading");
-    const message = t("records.users.unsubscribe_modal_message");
+    const heading = t("modals.unsubscribe");
+    const message = t("modals.unsubscribe_body");
     this.props.confirm(heading, message, () => {
       const adjustedUser = { ...this.user };
       adjustedUser.attributes.unsubscribe = true;
@@ -110,8 +110,8 @@ export class UsersEditContainer extends PureComponent {
 
   handleResetPasswordClick = () => {
     const t = this.props.t;
-    const heading = t("records.users.password_modal_heading");
-    const message = t("records.users.password_modal_message");
+    const heading = t("modals.password_reset");
+    const message = t("modals.password_reset_body");
     new Promise((resolve, reject) => {
       this.setState({
         resetPassword: { resolve, reject, heading, message }

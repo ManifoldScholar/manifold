@@ -78,8 +78,8 @@ export class TextWrapperContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `TEXT_DESTROYED_${this.props.text.id}`,
-      heading: t("texts.modals.destroyed_heading"),
-      body: t("texts.modals.destroyed_body", {
+      heading: t("notifications.text_delete"),
+      body: t("notifications.delete_entity_body", {
         title: this.props.text.attributes.titlePlaintext
       }),
       expiration: 5000
@@ -95,8 +95,8 @@ export class TextWrapperContainer extends PureComponent {
 
   handleTextDestroy = () => {
     const t = this.props.t;
-    const heading = t("texts.modals.delete_text_heading");
-    const message = t("texts.modals.delete_text_body");
+    const heading = t("modals.delete_text");
+    const message = t("modals.delete_text_body");
     this.props.confirm(heading, message, this.doDestroy);
   };
 
@@ -135,9 +135,7 @@ export class TextWrapperContainer extends PureComponent {
             className="utility-button__icon utility-button__icon--download"
           />
           <span className="utility-button__text">
-            {exportsAsEpubV3
-              ? t("texts.disable_epub")
-              : t("texts.enable_epub")}
+            {exportsAsEpubV3 ? t("texts.disable_epub") : t("texts.enable_epub")}
           </span>
         </button>
         {epubV3ExportUrl && (

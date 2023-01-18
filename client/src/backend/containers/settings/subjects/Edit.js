@@ -57,8 +57,8 @@ export class SettingsSubjectsEditContainer extends PureComponent {
 
   handleSubjectDestroy = () => {
     const t = this.props.t;
-    const heading = t("settings.subjects.confirm_heading");
-    const message = t("settings.subjects.confirm_body");
+    const heading = t("modals.delete_subject");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, this.destroySubject);
   };
 

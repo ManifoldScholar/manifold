@@ -22,8 +22,8 @@ function JournalWrapper({ match, route, history, confirm }) {
   const notifyDestroy = useNotification(j => ({
     level: 0,
     id: `JOURNAL_DESTROYED_${j.id}`,
-    heading: t("journals.modals.delete_heading"),
-    body: t("journals.modals.delete_body", {
+    heading: t("notifications.journal_delete"),
+    body: t("notifications.delete_entity_body", {
       title: j?.attributes?.title
     }),
     expiration: 5000
@@ -41,8 +41,8 @@ function JournalWrapper({ match, route, history, confirm }) {
   }, [destroy, history, journal, notifyDestroy]);
 
   const handleJournalDestroy = useCallback(() => {
-    const heading = t("journals.modals.confirm_heading");
-    const message = t("journals.modals.confirm_body");
+    const heading = t("modals.delete_journal");
+    const message = t("modals.confirm_body");
     confirm(heading, message, destroyAndRedirect);
   }, [destroyAndRedirect, confirm, t]);
 

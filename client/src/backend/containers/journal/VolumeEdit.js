@@ -29,8 +29,8 @@ function JournalVolumeEdit({
   const notifyDestroy = useNotification(v => ({
     level: 0,
     id: `JOURNAL_VOLUME_DESTROYED_${v.id}`,
-    heading: t("volumes.delete_heading"),
-    body: t("volumes.delete_body", {
+    heading: t("notifications.volume_delete"),
+    body: t("notifications.volume_body", {
       number: v?.attributes?.number
     }),
     expiration: 5000
@@ -49,8 +49,8 @@ function JournalVolumeEdit({
   }, [destroy, history, journal?.id, journalVolume, notifyDestroy]);
 
   const onDelete = useCallback(() => {
-    const heading = t("volumes.confirm_heading");
-    const message = t("volumes.confirm_body");
+    const heading = t("modals.delete_volume");
+    const message = t("modals.confirm_body");
     confirm(heading, message, destroyAndRedirect);
   }, [destroyAndRedirect, confirm, t]);
 

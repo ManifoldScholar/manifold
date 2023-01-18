@@ -45,8 +45,8 @@ function SectionListItem(props) {
   };
 
   const onDelete = () => {
-    const heading = t("texts.section.delete_confirm_heading");
-    const message = t("texts.section.delete_confirm_body");
+    const heading = t("modals.delete_text");
+    const message = t("modals.confirm_body");
     if (confirm) confirm(heading, message, doDelete);
   };
 
@@ -76,9 +76,7 @@ function SectionListItem(props) {
         <Styled.TitleWrapper>
           <Styled.Title>{section.name}</Styled.Title>
           {isStart && (
-            <Styled.Tag>
-              {t("texts.section.start_tag_label")}
-            </Styled.Tag>
+            <Styled.Tag>{t("texts.section.start_tag_label")}</Styled.Tag>
           )}
         </Styled.TitleWrapper>
         <Styled.BG $isDragging={isDragging} />

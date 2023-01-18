@@ -28,8 +28,8 @@ export class ActionCalloutForm extends Component {
 
   onDelete = () => {
     const t = this.props.t;
-    const heading = t("call_to_action.delete_modal_heading");
-    const message = t("call_to_action.delete_modal_message");
+    const heading = t("modals.delete_cta");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, () => this.onConfirmedDelete());
   };
 
@@ -64,8 +64,7 @@ export class ActionCalloutForm extends Component {
 
   get drawerTitle() {
     const t = this.props.t;
-    if (this.actionCallout.id)
-      return t("call_to_action.edit_drawer_title");
+    if (this.actionCallout.id) return t("call_to_action.edit_drawer_title");
     return t("call_to_action.create_drawer_title");
   }
 
@@ -108,9 +107,7 @@ export class ActionCalloutForm extends Component {
         value: "authorized"
       },
       {
-        label: t(
-          "layout.visibility_options.unauthorized"
-        ),
+        label: t("layout.visibility_options.unauthorized"),
         value: "unauthorized"
       }
     ];
@@ -119,9 +116,7 @@ export class ActionCalloutForm extends Component {
   get textOptions() {
     const options = [
       {
-        label: this.props.t(
-          "call_to_action.text_select_placeholder"
-        ),
+        label: this.props.t("call_to_action.text_select_placeholder"),
         value: ""
       }
     ];
@@ -199,9 +194,7 @@ export class ActionCalloutForm extends Component {
                 getModelValue("attributes[kind]")
               ) && (
                 <Form.Select
-                  label={t(
-                    "call_to_action.input_labels.visibility"
-                  )}
+                  label={t("call_to_action.input_labels.visibility")}
                   options={this.visibilityOptions}
                   name="attributes[visibility]"
                 />
@@ -211,9 +204,7 @@ export class ActionCalloutForm extends Component {
               ) && (
                 <Form.Select
                   label={t("call_to_action.input_labels.text")}
-                  placeholder={t(
-                    "call_to_action.text_select_placeholder"
-                  )}
+                  placeholder={t("call_to_action.text_select_placeholder")}
                   name="relationships[text]"
                   options={this.textOptions}
                   entityLabelAttribute={"title"}
@@ -230,18 +221,14 @@ export class ActionCalloutForm extends Component {
               ) && (
                 <Form.Upload
                   layout="portrait"
-                  label={t(
-                    "call_to_action.input_labels.download"
-                  )}
+                  label={t("call_to_action.input_labels.download")}
                   accepts="files"
                   readFrom="attributes[attachmentStyles][original]"
                   name="attributes[attachment]"
                   remove="attributes[removeAttachment]"
                 />
               )}
-              <Form.Save
-                text={t("call_to_action.input_labels.save")}
-              />
+              <Form.Save text={t("call_to_action.input_labels.save")} />
             </>
           )}
         </FormContainer.Form>

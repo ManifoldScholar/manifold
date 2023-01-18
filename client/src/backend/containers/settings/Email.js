@@ -41,8 +41,8 @@ export class SettingsEmailContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `TEST_EMAIL_SENT`,
-      heading: t("settings.email.success_heading"),
-      body: t("settings.email.success_body"),
+      heading: t("notifications.email.success"),
+      body: t("notifications.email_success_body"),
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -53,8 +53,8 @@ export class SettingsEmailContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `TEST_EMAIL_NOT_SENT`,
-      heading: t("settings.email.failure_heading"),
-      body: t("settings.email.failure_body"),
+      heading: t("notifications.email_failure"),
+      body: t("notifications.email_failure_body"),
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));

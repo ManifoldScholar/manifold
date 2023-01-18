@@ -173,8 +173,8 @@ export class ProjectContent extends PureComponent {
   };
 
   handleDeleteBlock = block => {
-    const heading = this.props.t("layout.confirm_delete_block");
-    const message = this.props.t("layout.cannot_be_undone");
+    const heading = this.props.t("modals.delete_block");
+    const message = this.props.t("modals.confirm_body");
     this.props.confirm(heading, message, () => this.deleteBlock(block));
   };
 

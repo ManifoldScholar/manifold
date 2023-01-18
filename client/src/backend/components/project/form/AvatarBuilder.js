@@ -59,10 +59,10 @@ class AvatarBuilder extends Component {
 
   handleColorChange = color => {
     const t = this.props.t;
-    const heading = t("projects.thumbnail.color_change_message", {
+    const heading = t("modals.thumbnail_change", {
       label: this.label()
     });
-    const message = t("projects.thumbnail.confirm");
+    const message = t("modals.thumbnail_change_body");
     this.props.confirm(heading, message, () => {
       this.removeAvatar();
       this.setAvatarColor(color);

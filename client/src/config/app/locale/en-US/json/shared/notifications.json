@@ -1,0 +1,18 @@
+{
+  "notifications": {
+    "delete_entity_body": "{{title}} has passed into the endless night.",
+    "delete_record_body": "And we're sorry to see it go.",
+    "email_failure": "Manifold was unable to send a test email.",
+    "email_failure_body": "Please check that your email configuration is correct.",
+    "email_success": "The test email appears to have been sent.",
+    "email_success_body": "Expect to receive it shortly.",
+    "feature_delete": "The feature has been deleted.",
+    "journal_delete": "The journal has been destroyed.",
+    "page_delete": "The page has been deleted.",
+    "resource_collection_delete": "The resource collection has been destroyed.",
+    "resource_delete": "The resource has been destroyed.",
+    "text_delete": "The text has been destroyed.",
+    "volume_body": "Volume #{{number}} has passed into the endless night.",
+    "volume_delete": "The volume has been destroyed."
+  }
+}

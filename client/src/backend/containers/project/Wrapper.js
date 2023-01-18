@@ -74,8 +74,8 @@ export class ProjectWrapperContainer extends PureComponent {
 
   handleProjectDestroy = () => {
     const t = this.props.t;
-    const heading = t("projects.modals.confirm_heading");
-    const message = t("projects.modals.confirm_body");
+    const heading = t("modals.delete_project");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, this.doDestroy);
   };
 

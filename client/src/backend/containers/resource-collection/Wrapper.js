@@ -110,8 +110,8 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `RESOURCE_COLLECTION_DESTROYED_${this.props.resourceCollection.id}`,
-      heading: t("resource_collections.modals.delete_heading"),
-      body: t("resource_collections.modals.delete_body", {
+      heading: t("notifications.resource_collection_delete"),
+      body: t("notifications.delete_entity_body", {
         title: this.props.resourceCollection.attributes.title
       }),
       expiration: 5000
@@ -121,12 +121,8 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
 
   handleCollectionDestroy = () => {
     const t = this.props.t;
-    const heading = t(
-      "resource_collections.modals.confirm_heading"
-    );
-    const message = t(
-      "resource_collections.modals.confirm_body"
-    );
+    const heading = t("modals.delete_resource_collection");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, this.doDestroy);
   };
 

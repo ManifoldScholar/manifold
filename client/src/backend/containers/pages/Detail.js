@@ -79,8 +79,8 @@ class PageDetailContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `PAGE_DESTROYED_${feature.id}`,
-      heading: t("records.pages.delete_confirm_heading"),
-      body: t("records.pages.delete_confim_body"),
+      heading: t("notifications.page_delete"),
+      body: t("notifications.delete_record_body"),
       expiration: 3000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
@@ -92,8 +92,8 @@ class PageDetailContainer extends PureComponent {
 
   handleDestroy = () => {
     const t = this.props.t;
-    const heading = t("records.pages.delete_modal_heading");
-    const message = t("records.pages.delete_modal_message");
+    const heading = t("modals.delete_page");
+    const message = t("modals.confirm_body");
     this.props.confirm(heading, message, this.doDestroy);
   };
 

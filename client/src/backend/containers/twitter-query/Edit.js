@@ -68,12 +68,10 @@ export class TwitterQueryEditContainer extends PureComponent {
   }
 
   handleQueryDestroy = () => {
-    const heading = this.props.t(
-      "projects.social.confirm_heading"
-    );
+    const heading = this.props.t("modals.delete_twitter");
     const message = (
       <div>
-        <Trans i18nKey="projects.social.confirm_message" />
+        <Trans i18nKey="modals.delete_twitter_body" />
       </div>
     );
     this.props.confirm(heading, message, this.destroyQuery);
