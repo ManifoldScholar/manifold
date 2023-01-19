@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import HeaderNotifications from "global/components/HeaderNotifications";
 import BlurOnLocationChange from "hoc/BlurOnLocationChange";
-import Utility from "global/components/utility";
 import { FrontendModeContext } from "helpers/contexts";
 import CustomHeader from "./CustomHeader";
 import LibraryHeader from "./LibraryHeader";
@@ -50,7 +49,6 @@ export default class LayoutHeader extends PureComponent {
           className="header-app header-app--sticky"
           location={this.props.location}
         >
-          <Utility.SkipLink />
           <CustomHeader />
           <PressHeader />
           {this.context.isLibrary && <LibraryHeader {...this.props} />}
