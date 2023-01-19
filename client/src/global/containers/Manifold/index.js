@@ -26,6 +26,7 @@ import FatalErrorBoundary from "global/components/FatalError/Boundary";
 import { FrontendModeContext } from "helpers/contexts";
 import { entityStoreActions } from "actions";
 import CookiesBanner from "global/components/CookiesBanner";
+import Utility from "global/components/utility";
 
 const { request } = entityStoreActions;
 const routes = getRoutes();
@@ -179,6 +180,7 @@ class ManifoldContainer extends PureComponent {
 
     return (
       <div role="presentation" className="global-container">
+        <Utility.SkipLink />
         <div id="global-notification-container" />
         <div id="global-overlay-container" />
         <FrontendModeContext.Provider value={this.props.frontendMode}>

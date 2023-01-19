@@ -186,7 +186,6 @@ class Header extends Component {
     return (
       <BlurOnLocationChange location={this.props.location}>
         <header className="reader-header">
-          <Utility.SkipLink />
           <Layout.PreHeader />
           <nav className={innerClassName}>
             <div className="reader-header__menu-group reader-header__menu-group--left">

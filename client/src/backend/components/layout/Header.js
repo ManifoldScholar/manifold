@@ -36,7 +36,6 @@ class LayoutHeader extends Component {
           measurement="height"
           propertyName="--library-header-height"
         >
-          <Utility.SkipLink />
           <div className="library-header library-header--dark">
             <div className="library-header__inner">
               <HeaderLogo as="Link" to={lh.link("backend")}>
