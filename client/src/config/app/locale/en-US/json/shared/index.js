@@ -9,6 +9,7 @@ import modals from "./modals.json";
 import navigation from "./navigation.json";
 import utility from "./utility.json";
 import notifications from "./notifications.json";
+import pageTitles from "./page-titles.json";
 
 export default {
   ...actions,
@@ -20,5 +21,6 @@ export default {
   ...modals,
   ...navigation,
   ...utility,
-  ...notifications
+  ...notifications,
+  ...pageTitles
 };

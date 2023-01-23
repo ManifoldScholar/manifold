@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import isString from "lodash/isString";
 import isEmpty from "lodash/isEmpty";
 import isNil from "lodash/isNil";
+import { withTranslation } from "react-i18next";
 
-export default class ViewHeader extends PureComponent {
+class ViewHeader extends PureComponent {
   static displayName = "Layout.ViewHeader";
 
   static propTypes = {
@@ -45,7 +46,8 @@ export default class ViewHeader extends PureComponent {
     ]),
     iconType: PropTypes.string,
     link: PropTypes.shape({ path: PropTypes.string, label: PropTypes.string }),
-    titleTag: PropTypes.string
+    titleTag: PropTypes.string,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -158,7 +160,7 @@ export default class ViewHeader extends PureComponent {
             {link && (
               <div className="backend-header__utility-block backend-header__utility-block--flex">
                 <Link to={link.path} className="utility-button">
-                  {link.label}
+                  {this.props.t(link.label)}
                 </Link>
               </div>
             )}
@@ -169,3 +171,5 @@ export default class ViewHeader extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(ViewHeader);

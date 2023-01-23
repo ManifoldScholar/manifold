@@ -28,7 +28,7 @@ export class NavigationDropdown extends Component {
   get currentLabel() {
     const selected = this.visitLinks(this.props.links);
     if (!selected) return "";
-    return selected.headerLabel || selected.label;
+    return selected.headerLabel || this.props.t(selected.label);
   }
 
   visitLinks(links) {
@@ -64,7 +64,7 @@ export class NavigationDropdown extends Component {
           className="dropdown-nav__link"
           activeClassName="dropdown-nav__link--active"
         >
-          {link.label}
+          {this.props.t(link.label)}
         </NavLink>
       </li>
     );
