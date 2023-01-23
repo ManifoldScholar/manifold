@@ -7,6 +7,7 @@ import EntityCollectionPlaceholder from "global/components/entity/CollectionPlac
 import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useFilterState, usePaginationState } from "hooks";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
+import HeadContent from "global/components/HeadContent";
 
 export default function JournalsListContainer() {
   const [filters] = useFilterState();
@@ -23,6 +24,7 @@ export default function JournalsListContainer() {
 
   return (
     <>
+      <HeadContent title={t("titles.journals_all")} appendDefaultTitle />
       <CheckFrontendMode debugLabel="JournalsList" />
       <h1 className="screen-reader-text">{t("glossary.journal_other")}</h1>
       {!!journals.length &&

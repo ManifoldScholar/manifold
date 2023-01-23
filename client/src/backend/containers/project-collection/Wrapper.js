@@ -13,6 +13,7 @@ import { childRoutes } from "helpers/router";
 import size from "lodash/size";
 import lh from "helpers/linkHandler";
 import classnames from "classnames";
+import HeadContent from "global/components/HeadContent";
 
 import Authorize from "hoc/Authorize";
 
@@ -242,6 +243,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   }
 
   render() {
+    const t = this.props.t;
     const projectCollection = this.props.projectCollection;
     const projectCollections = this.props.projectCollections;
     if (!projectCollections) return null;
@@ -254,6 +256,9 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     const collectionForHeader = this.props.match.params.id
       ? projectCollection
       : null;
+    const pageTitle = collectionForHeader
+      ? collectionForHeader.attributes.title
+      : t("titles.project_collections");
 
     return (
       <Authorize
@@ -263,6 +268,10 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
           detail: this.props.t("project_collections.unauthorized")
         }}
       >
+        <HeadContent
+          title={`${pageTitle} | ${t("common.admin")}`}
+          appendDefaultTitle
+        />
         <section className={wrapperClasses}>
           <div className="backend-panel">
             <div className="container">

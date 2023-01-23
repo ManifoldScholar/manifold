@@ -40,6 +40,8 @@
     "yes_title_case": "Yes",
     "you": "you",
     "you_title_case": "You",
-    "yours": "yours"
+    "yours": "yours",
+    "settings": "Settings",
+    "admin": "Admin"
   }
 }

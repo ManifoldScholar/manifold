@@ -6,6 +6,7 @@ import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
+import HeadContent from "global/components/HeadContent";
 import EntitiesList, {
   Button,
   Search,
@@ -92,32 +93,38 @@ class ProjectsListContainerImplementation extends PureComponent {
     const t = this.props.t;
 
     return (
-      <EntitiesList
-        entityComponent={ProjectRow}
-        listStyle="grid"
-        title={t("glossary.project_title_case", { count: totalCount })}
-        titleStyle="bar"
-        titleIcon="BEProject64"
-        entities={this.props.projects}
-        unit={t("glossary.project", { count: totalCount })}
-        pagination={this.props.projectsMeta.pagination}
-        showCountInTitle
-        showCount
-        callbacks={{
-          onPageClick: this.updateHandlerCreator
-        }}
-        search={
-          <Search {...this.props.entitiesListSearchProps("projectsList")} />
-        }
-        buttons={[
-          <Button
-            path={lh.link("backendProjectsNew")}
-            text={t("projects.add_button_label")}
-            authorizedFor="project"
-            type="add"
-          />
-        ]}
-      />
+      <>
+        <HeadContent
+          title={`${t("titles.projects")} | ${t("common.admin")}`}
+          appendDefaultTitle
+        />
+        <EntitiesList
+          entityComponent={ProjectRow}
+          listStyle="grid"
+          title={t("glossary.project_title_case", { count: totalCount })}
+          titleStyle="bar"
+          titleIcon="BEProject64"
+          entities={this.props.projects}
+          unit={t("glossary.project", { count: totalCount })}
+          pagination={this.props.projectsMeta.pagination}
+          showCountInTitle
+          showCount
+          callbacks={{
+            onPageClick: this.updateHandlerCreator
+          }}
+          search={
+            <Search {...this.props.entitiesListSearchProps("projectsList")} />
+          }
+          buttons={[
+            <Button
+              path={lh.link("backendProjectsNew")}
+              text={t("projects.add_button_label")}
+              authorizedFor="project"
+              type="add"
+            />
+          ]}
+        />
+      </>
     );
   }
 }

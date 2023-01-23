@@ -88,12 +88,7 @@ export default function ProjectCollectionDetailContainer() {
   const ogTitle = () => {
     if (!projectCollection || !settings) return null;
     const { socialTitle, title } = projectCollection.attributes;
-    return (
-      socialTitle ||
-      `\u201c${title}\u201d ${t("common.on")} ${
-        settings.attributes.general.installationName
-      }`
-    );
+    return socialTitle || `\u201c${title}\u201d`;
   };
 
   const ogImage = () => {
@@ -122,6 +117,7 @@ export default function ProjectCollectionDetailContainer() {
         title={ogTitle()}
         description={ogDescription()}
         image={ogImage()}
+        appendDefaultTitle
       />
       <h1 className="screen-reader-text">
         {projectCollection.attributes.title}

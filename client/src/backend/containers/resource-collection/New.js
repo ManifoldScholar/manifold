@@ -10,6 +10,7 @@ import { requests, resourceCollectionsAPI, projectsAPI } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import { select } from "utils/entityUtils";
+import HeadContent from "global/components/HeadContent";
 
 import Authorize from "hoc/Authorize";
 
@@ -60,6 +61,12 @@ export class ResourceCollectionNewContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
+        <HeadContent
+          title={`${t(`titles.resource_collection_new`)} | ${t(
+            "common.admin"
+          )}`}
+          appendDefaultTitle
+        />
         <div>
           <Navigation.DetailHeader
             type="resourceCollection"

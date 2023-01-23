@@ -76,10 +76,11 @@ function EntityHeadContent({
 
   return (
     <HeadContent
-      title={appendHeadTitle(getTitle())}
+      title={getTitle()}
       socialTitle={getSocialTitle()}
       description={getDescription()}
       image={getImage()}
+      appendDefaultTitle
     />
   );
 }

@@ -11,6 +11,7 @@ import {
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
+import HeadContent from "global/components/HeadContent";
 
 import { journalIssuesAPI } from "api";
 
@@ -49,6 +50,7 @@ export default function IssuesListContainer() {
 
   return (
     <>
+      <HeadContent title={t("titles.issues_all")} appendDefaultTitle />
       <h1 className="screen-reader-text">{t("pages.issues_all")}</h1>
       {!showPlaceholder && (
         <EntityCollection.Issues

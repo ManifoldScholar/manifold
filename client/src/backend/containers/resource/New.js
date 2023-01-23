@@ -12,6 +12,7 @@ import { requests, projectsAPI, resourcesAPI } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
+import HeadContent from "global/components/HeadContent";
 
 import Authorize from "hoc/Authorize";
 
@@ -66,6 +67,10 @@ export class ResourceNewContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
+        <HeadContent
+          title={`${t(`titles.resource_new`)} | ${t("common.admin")}`}
+          appendDefaultTitle
+        />
         <div>
           <Navigation.DetailHeader
             type="resource"

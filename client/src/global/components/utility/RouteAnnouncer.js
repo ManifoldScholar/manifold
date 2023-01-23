@@ -9,8 +9,6 @@ export default function RouteAnnouncer({ title }) {
     setContent(title);
   }, [pathname, title]);
 
-  console.log(content);
-
   return (
     <p
       aria-live="assertive" // Make the announcement immediately.
