@@ -37,7 +37,10 @@ export class PageContainer extends Component {
     if (!this.props.page) return null;
     return (
       <section>
-        <HeadContent title={this.props.page.attributes.title} />
+        <HeadContent
+          title={this.props.page.attributes.title}
+          appendDefaultTitle
+        />
         <div
           className="container page-content"
           dangerouslySetInnerHTML={{

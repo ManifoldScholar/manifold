@@ -5,6 +5,7 @@ import Navigation from "backend/components/navigation";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
+import HeadContent from "global/components/HeadContent";
 
 import Authorize from "hoc/Authorize";
 
@@ -13,11 +14,14 @@ class RecordsContainer extends PureComponent {
 
   static propTypes = {
     route: PropTypes.object,
+    location: PropTypes.object,
     t: PropTypes.func
   };
 
   render() {
     const secondaryLinks = navigation.records();
+    const { t } = this.props;
+    const subpage = this.props.location.pathname.split("/")[3];
 
     return (
       <Authorize
@@ -27,6 +31,12 @@ class RecordsContainer extends PureComponent {
           body: this.props.t("records.unauthorized")
         }}
       >
+        {subpage && (
+          <HeadContent
+            title={`${t(`titles.${subpage}`)} | ${t("common.admin")}`}
+            appendDefaultTitle
+          />
+        )}
         <RedirectToFirstMatch
           from={lh.link("backendRecords")}
           candidates={secondaryLinks}

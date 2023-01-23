@@ -6,17 +6,24 @@ import Navigation from "backend/components/navigation";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
+import HeadContent from "global/components/HeadContent";
 
 import Authorize from "hoc/Authorize";
 
 export class SettingsWrapperContainer extends PureComponent {
   static propTypes = {
     route: PropTypes.object,
+    location: PropTypes.object,
     t: PropTypes.func
   };
 
   render() {
     const secondaryLinks = navigation.settings();
+    const { t } = this.props;
+    const subpage = this.props.location.pathname
+      .split("/")[3]
+      ?.replace("-", "_");
+    const subpageOverride = subpage === "properties" ? "settings" : null;
 
     return (
       <Authorize
@@ -26,6 +33,12 @@ export class SettingsWrapperContainer extends PureComponent {
         }}
         ability="update"
       >
+        <HeadContent
+          title={`${t(`titles.${subpageOverride ?? subpage}`)} | ${t(
+            "common.admin"
+          )}`}
+          appendDefaultTitle
+        />
         <RedirectToFirstMatch
           from={lh.link("backendSettings")}
           candidates={secondaryLinks}

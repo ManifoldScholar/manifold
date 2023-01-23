@@ -8,6 +8,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
+import HeadContent from "global/components/HeadContent";
 
 import Authorize from "hoc/Authorize";
 
@@ -69,6 +70,10 @@ export class ProjectNewContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backend")}
       >
+        <HeadContent
+          title={`${t(`titles.project_new`)} | ${t("common.admin")}`}
+          appendDefaultTitle
+        />
         <div>
           <Navigation.DetailHeader
             type="project"

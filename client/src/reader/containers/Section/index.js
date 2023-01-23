@@ -207,9 +207,9 @@ export class SectionContainer extends Component {
     );
     const append = settings.attributes.general.installationName;
     let metaTitle = "";
-    if (parts.length === 1) metaTitle = `\u201c${parts[0]}\u201d on ${append}`;
+    if (parts.length === 1) metaTitle = `\u201c${parts[0]}\u201d`;
     if (parts.length === 2 || parts.length === 3)
-      metaTitle = `\u201c${parts[0]}\u201d in \u201c${parts[1]}\u201d on ${append}`;
+      metaTitle = `\u201c${parts[0]}\u201d in \u201c${parts[1]}\u201d`;
     let sectionDescription = text.attributes.description;
     if (!sectionDescription)
       sectionDescription = this.props.t("reader.section_description", {
@@ -227,6 +227,7 @@ export class SectionContainer extends Component {
           title={metaTitle}
           image={section.attributes.socialImage}
           description={sectionDescription}
+          appendDefaultTitle
         />
         {this.renderRoutes()}
         <Section.Text {...this.props} />

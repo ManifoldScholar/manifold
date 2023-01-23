@@ -4,6 +4,7 @@ import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { projectsAPI } from "api";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
+import HeadContent from "global/components/HeadContent";
 import {
   useFetch,
   usePaginationState,
@@ -53,6 +54,7 @@ export default function ProjectsContainer() {
 
   return meta ? (
     <>
+      <HeadContent title={t("titles.projects_all")} appendDefaultTitle />
       <h1 className="screen-reader-text">{t("pages.projects_all")}</h1>
       {showPlaceholder ? (
         <EntityCollectionPlaceholder.Projects />

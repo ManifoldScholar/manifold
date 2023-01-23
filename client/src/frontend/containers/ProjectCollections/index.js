@@ -7,6 +7,7 @@ import { projectCollectionsAPI } from "api";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
+import HeadContent from "global/components/HeadContent";
 import {
   useFetch,
   usePaginationState,
@@ -65,6 +66,7 @@ export default function ProjectCollectionsContainer() {
 
   return projectCollections ? (
     <>
+      <HeadContent title={t("titles.project_collections")} appendDefaultTitle />
       <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
       <h1 className="screen-reader-text">
         {t("glossary.project_collection_other")}

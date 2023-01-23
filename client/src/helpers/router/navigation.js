@@ -216,7 +216,7 @@ class Navigation {
         args
       },
       {
-        label: "titles.people",
+        label: "titles.collaborators",
         route: "backendProjectCollaborators",
         entity: project,
         ability: "updateMakers",
@@ -244,7 +244,7 @@ class Navigation {
         args
       },
       {
-        label: "titles.activity",
+        label: "titles.events",
         route: "backendProjectEvents",
         entity: project,
         ability: "manageEvents",
@@ -485,7 +485,7 @@ class Navigation {
         args
       },
       {
-        label: "titles.people",
+        label: "titles.collaborators",
         route: "backendTextCollaborators",
         entity: text.relationships.project,
         ability: "updateMakers",

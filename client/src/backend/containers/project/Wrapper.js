@@ -15,6 +15,7 @@ import Authorize from "hoc/Authorize";
 import get from "lodash/get";
 import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
+import HeadContent from "global/components/HeadContent";
 
 const { request, flush } = entityStoreActions;
 
@@ -73,7 +74,7 @@ export class ProjectWrapperContainer extends PureComponent {
   }
 
   handleProjectDestroy = () => {
-    const t = this.props.t;
+    const { t } = this.props;
     const heading = t("modals.delete_project");
     const message = t("modals.confirm_body");
     this.props.confirm(heading, message, this.doDestroy);
@@ -81,36 +82,41 @@ export class ProjectWrapperContainer extends PureComponent {
 
   renderUtility(project) {
     const t = this.props.t;
+
     return (
-      <div className="utility-button-group utility-button-group--inline">
-        <Link
-          to={lh.link(
-            "frontendProjectDetail",
-            this.props.project.attributes.slug
-          )}
-          className="utility-button"
-        >
-          <IconComposer
-            icon="eyeOpen32"
-            size={26}
-            className="utility-button__icon utility-button__icon--highlight"
-          />
-          <span className="utility-button__text">{t("actions.view")}</span>
-        </Link>
-        <Authorize entity={project} ability={"delete"}>
-          <button
-            onClick={this.handleProjectDestroy}
+      <>
+        <div className="utility-button-group utility-button-group--inline">
+          <Link
+            to={lh.link(
+              "frontendProjectDetail",
+              this.props.project.attributes.slug
+            )}
             className="utility-button"
           >
             <IconComposer
-              icon="delete32"
+              icon="eyeOpen32"
               size={26}
-              className="utility-button__icon utility-button__icon--notice"
+              className="utility-button__icon utility-button__icon--highlight"
             />
-            <span className="utility-button__text">{t("actions.delete")}</span>
-          </button>
-        </Authorize>
-      </div>
+            <span className="utility-button__text">{t("actions.view")}</span>
+          </Link>
+          <Authorize entity={project} ability={"delete"}>
+            <button
+              onClick={this.handleProjectDestroy}
+              className="utility-button"
+            >
+              <IconComposer
+                icon="delete32"
+                size={26}
+                className="utility-button__icon utility-button__icon--notice"
+              />
+              <span className="utility-button__text">
+                {t("actions.delete")}
+              </span>
+            </button>
+          </Authorize>
+        </div>
+      </>
     );
   }
 
@@ -135,6 +141,8 @@ export class ProjectWrapperContainer extends PureComponent {
       ? project.relationships.journal.attributes.title
       : null;
 
+    const subpage = location.pathname.split("/")[4]?.replace("-", "_");
+
     return (
       <div>
         <Authorize
@@ -144,6 +152,14 @@ export class ProjectWrapperContainer extends PureComponent {
           }}
           ability={["update", "manageResources"]}
         >
+          {subpage && (
+            <HeadContent
+              title={`${t(`titles.${subpage}`)} | ${
+                project.attributes.titlePlaintext
+              } | ${t("common.admin")}`}
+              appendDefaultTitle
+            />
+          )}
           <RedirectToFirstMatch
             from={lh.link("backendProject", project.id)}
             candidates={secondaryLinks}

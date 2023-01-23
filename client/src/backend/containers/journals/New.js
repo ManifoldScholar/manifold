@@ -8,6 +8,7 @@ import Layout from "backend/components/layout";
 import Navigation from "backend/components/navigation";
 import { journalsAPI } from "api";
 import lh from "helpers/linkHandler";
+import HeadContent from "global/components/HeadContent";
 
 class JournalsNew extends PureComponent {
   static displayName = "Journals.New";
@@ -34,6 +35,10 @@ class JournalsNew extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backend")}
       >
+        <HeadContent
+          title={`${t(`titles.journal_new`)} | ${t("common.admin")}`}
+          appendDefaultTitle
+        />
         <div>
           <Navigation.DetailHeader
             type="journal"

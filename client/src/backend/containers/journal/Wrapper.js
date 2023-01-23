@@ -11,8 +11,9 @@ import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
 import { useFetch, useApiCallback, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
+import HeadContent from "global/components/HeadContent";
 
-function JournalWrapper({ match, route, history, confirm }) {
+function JournalWrapper({ match, route, history, confirm, location }) {
   const { t } = useTranslation();
   const { data: journal, refresh } = useFetch({
     request: [journalsAPI.show, match.params.id]
@@ -82,6 +83,8 @@ function JournalWrapper({ match, route, history, confirm }) {
 
   if (!journal) return null;
 
+  const subpage = location.pathname.split("/")[4]?.replace("-", "_");
+
   return (
     <div>
       <Authorize
@@ -91,6 +94,14 @@ function JournalWrapper({ match, route, history, confirm }) {
         }}
         ability={["read"]}
       >
+        {subpage && (
+          <HeadContent
+            title={`${t(`titles.${subpage}`)} | ${
+              journal.attributes.titlePlaintext
+            } | ${t("common.admin")}`}
+            appendDefaultTitle
+          />
+        )}
         <RedirectToFirstMatch
           from={lh.link("backendJournal", journal.id)}
           candidates={navigation.journal(journal)}

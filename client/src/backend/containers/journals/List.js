@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useFetch, usePaginationState } from "hooks";
 import { journalsAPI } from "api";
 import withFilteredLists, { journalFilters } from "hoc/withFilteredLists";
+import HeadContent from "global/components/HeadContent";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
@@ -31,6 +32,10 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
 
   return (
     <>
+      <HeadContent
+        title={`${t("titles.journals")} | ${t("common.admin")}`}
+        appendDefaultTitle
+      />
       <EntitiesList
         entityComponent={JournalRow}
         title={t("journals.header")}

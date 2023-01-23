@@ -12,6 +12,7 @@ import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
 import withConfirmation from "hoc/withConfirmation";
 import IconComposer from "global/components/utility/IconComposer";
+import HeadContent from "global/components/HeadContent";
 
 import Authorize from "hoc/Authorize";
 import { Link } from "react-router-dom";
@@ -140,6 +141,8 @@ export class ResourceWrapperContainer extends PureComponent {
     if (!resource) return null;
     const secondaryLinks = navigation.resource(resource);
 
+    const subpage = location.pathname.split("/")[5];
+
     return (
       <div>
         <Authorize
@@ -149,6 +152,14 @@ export class ResourceWrapperContainer extends PureComponent {
           }}
           ability="update"
         >
+          {subpage && (
+            <HeadContent
+              title={`${t(`titles.${subpage}`)} | ${
+                resource.attributes.titlePlaintext
+              } | ${t("common.admin")}`}
+              appendDefaultTitle
+            />
+          )}
           <RedirectToFirstMatch
             from={lh.link("backendResource", resource.id)}
             candidates={secondaryLinks}
