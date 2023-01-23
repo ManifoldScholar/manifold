@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import HeadContent from "global/components/HeadContent";
 import ColorScheme from "global/components/ColorScheme";
 import LoadingBar from "global/components/LoadingBar";
 import FatalError from "global/components/FatalError";
@@ -66,10 +65,12 @@ class ManifoldContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.gaInitialized = false;
+    this.skipLinkRef = React.createRef();
   }
 
   componentDidUpdate(prevProps, prevStateIgnored) {
     if (this.routeChanged(prevProps.location, this.props.location)) {
+      if (this.skipLinkRef.current) this.skipLinkRef.current.focus();
       this.dispatchRouteUpdate();
       if (this.routeStateRequestsLogin) this.maybeShowLogin();
     }
@@ -180,13 +181,12 @@ class ManifoldContainer extends PureComponent {
 
     return (
       <div role="presentation" className="global-container">
-        <Utility.SkipLink />
+        <Utility.SkipLink ref={this.skipLinkRef} />
         <div id="global-notification-container" />
         <div id="global-overlay-container" />
         <FrontendModeContext.Provider value={this.props.frontendMode}>
           {this.renderTypekit()}
           {this.props.confirm}
-          <HeadContent />
           <LoadingBar loading={this.props.loading} />
           <ColorScheme settings={this.props.settings} />
           <CSSTransition
