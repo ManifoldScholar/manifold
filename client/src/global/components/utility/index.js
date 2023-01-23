@@ -7,6 +7,7 @@ import ScrollToTop from "./ScrollToTop";
 import SetCSSProperty from "./SetCSSProperty";
 import SkipLink from "./SkipLink";
 import LabelWithIcon from "./LabelWithIcon";
+import RouteAnnouncer from "./RouteAnnouncer";
 
 export default {
   Pagination,
@@ -17,5 +18,6 @@ export default {
   ScrollToTop,
   SkipLink,
   LabelWithIcon,
-  SetCSSProperty
+  SetCSSProperty,
+  RouteAnnouncer
 };

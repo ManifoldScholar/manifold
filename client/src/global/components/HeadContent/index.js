@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet-async";
+import Utility from "../utility";
 
 import config from "config";
 import get from "lodash/get";
@@ -112,7 +113,12 @@ export class HeadContentComponent extends Component {
     props.titleTemplate = this.titleTemplate(this.props);
     props.defaultTitle = this.defaultTitle;
 
-    return <Helmet {...props} />;
+    return (
+      <>
+        <Helmet {...props} />
+        <Utility.RouteAnnouncer title={props.title ?? props.defaultTitle} />
+      </>
+    );
   }
 }
 
