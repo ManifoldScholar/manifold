@@ -29,7 +29,7 @@ export class NavigationSecondary extends Component {
     return (
       <li key={link.route}>
         <NavLink to={this.pathForLink(link)} activeClassName="active">
-          {link.label}
+          {this.props.t(link.label)}
         </NavLink>
       </li>
     );

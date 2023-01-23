@@ -4,11 +4,13 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
+import { withTranslation } from "react-i18next";
 
-export default class MobileBreadcrumb extends PureComponent {
+class MobileBreadcrumb extends PureComponent {
   static propTypes = {
     links: PropTypes.array.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    t: PropTypes.func
   };
 
   get segments() {
@@ -58,7 +60,7 @@ export default class MobileBreadcrumb extends PureComponent {
                 className="breadcrumb-list__link"
                 to={this.pathForLink(link)}
               >
-                {link.label}
+                {this.props.t(link.label)}
               </NavLink>
               {count < size && (
                 <IconComposer
@@ -74,3 +76,5 @@ export default class MobileBreadcrumb extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(MobileBreadcrumb);

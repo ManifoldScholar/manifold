@@ -186,7 +186,7 @@ export class NavigationMobile extends Component {
         className="nested-nav__link"
         activeClassName="active"
       >
-        {link.label}
+        {this.props.t(link.label)}
       </NavLink>
     );
   }

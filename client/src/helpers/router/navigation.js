@@ -1,45 +1,47 @@
 import memoize from "lodash/memoize";
 
+// Labels reference i18n keys in /shared/page-titles.json.
+
 class Navigation {
   static frontend = memoize((authentication, settings) => {
     if (settings.attributes.general.libraryDisabled) return [];
 
     return [
       {
-        label: "Home",
+        label: "titles.home",
         route: "frontend",
         matchType: "link"
       },
       {
-        label: "Projects",
+        label: "titles.projects",
         route: "frontendProjects",
         children: [
           {
-            label: "All Projects",
+            label: "titles.projects_all",
             route: "frontendProjectsAll"
           },
           {
-            label: "Project Collections",
+            label: "titles.project_collections",
             route: "frontendProjectCollections"
           }
         ]
       },
       settings.attributes.calculated.hasVisibleJournals && {
-        label: "Journals",
+        label: "titles.journals",
         route: "frontendJournals",
         children: [
           {
-            label: "All Journals",
+            label: "titles.journals_all",
             route: "frontendJournalsList"
           },
           {
-            label: "All Issues",
+            label: "titles.issues_all",
             route: "frontendIssuesList"
           }
         ]
       },
       !settings.attributes.general.disableReadingGroups && {
-        label: "Reading Groups",
+        label: "titles.groups",
         route: "frontendPublicReadingGroups"
       }
     ].filter(x => x);
@@ -48,53 +50,53 @@ class Navigation {
   static backend = memoize(() => {
     return [
       {
-        label: "Dashboard",
+        label: "titles.dashboard",
         route: "backendDashboard"
       },
       {
-        label: "Projects",
+        label: "titles.projects",
         route: "backendProjects",
         children: [
           {
-            label: "All Projects",
+            label: "titles.projects_all",
             route: "backendProjectsAll"
           },
           {
-            label: "Project Collections",
+            label: "titles.project_collections",
             route: "backendProjectCollections"
           }
         ]
       },
       {
-        label: "Journals",
+        label: "titles.journals",
         route: "backendJournals"
       },
       {
-        label: "Records",
+        label: "titles.records",
         route: "backendRecords",
         entity: ["user", "maker", "page", "feature"],
         ability: "update",
         children: [
           {
-            label: "Makers",
+            label: "titles.makers",
             route: "backendRecordsMakers",
             entity: "maker",
             ability: "update"
           },
           {
-            label: "Users",
+            label: "titles.users",
             route: "backendRecordsUsers",
             entity: "user",
             ability: "update"
           },
           {
-            label: "Pages",
+            label: "titles.pages",
             route: "backendRecordsPages",
             entity: "page",
             ability: "update"
           },
           {
-            label: "Features",
+            label: "titles.features",
             route: "backendRecordsFeatures",
             entity: "feature",
             ability: "update"
@@ -102,37 +104,37 @@ class Navigation {
         ]
       },
       {
-        label: "Settings",
+        label: "titles.settings",
         route: "backendSettings",
         entity: "settings",
         ability: "update",
         children: [
           {
-            label: "Properties",
+            label: "titles.properties",
             route: "backendSettingsProperties"
           },
           {
-            label: "Theme",
+            label: "titles.theme",
             route: "backendSettingsTheme"
           },
           {
-            label: "Ingestion",
+            label: "titles.ingestion",
             route: "backendSettingsIngestion"
           },
           {
-            label: "Integrations",
+            label: "titles.integrations",
             route: "backendSettingsIntegrations"
           },
           {
-            label: "Subjects",
+            label: "titles.subjects",
             route: "backendSettingsSubjects"
           },
           {
-            label: "Email",
+            label: "titles.email",
             route: "backendSettingsEmail"
           },
           {
-            label: "Export Targets",
+            label: "titles.export_targets",
             route: "backendSettingsExportTargets",
             entity: "exportTarget",
             ability: "update"
@@ -140,7 +142,7 @@ class Navigation {
         ]
       },
       {
-        label: "Analytics",
+        label: "titles.analytics",
         route: "backendAnalytics",
         entity: "statistics",
         ability: "read",
@@ -153,14 +155,14 @@ class Navigation {
     const args = [collection.id];
     return [
       {
-        label: "Properties",
+        label: "titles.properties",
         route: "backendResourceCollectionProperties",
         entity: collection,
         ability: "update",
         args
       },
       {
-        label: "Resources",
+        label: "titles.resources",
         route: "backendResourceCollectionResources",
         entity: collection,
         ability: "update",
@@ -173,7 +175,7 @@ class Navigation {
     const args = [page.id];
     return [
       {
-        label: "Properties",
+        label: "titles.properties",
         route: "backendRecordsPageProperties",
         entity: page,
         ability: "update",
@@ -186,91 +188,91 @@ class Navigation {
     const args = [project.id];
     return [
       {
-        label: "Analytics",
+        label: "titles.analytics",
         route: "backendProjectAnalytics",
         entity: project,
         ability: "update",
         args
       },
       {
-        label: "Properties",
+        label: "titles.properties",
         route: "backendProjectProperties",
         entity: project,
         ability: "update",
         args
       },
       {
-        label: "Layout",
+        label: "titles.layout",
         route: "backendProjectLayout",
         entity: project,
         ability: "update",
         args
       },
       {
-        label: "Access",
+        label: "titles.access",
         route: "backendProjectAccess",
         entity: project,
         ability: "update",
         args
       },
       {
-        label: "People",
+        label: "titles.people",
         route: "backendProjectCollaborators",
         entity: project,
         ability: "updateMakers",
         args
       },
       {
-        label: "Texts",
+        label: "titles.texts",
         route: "backendProjectTexts",
         entity: project,
         ability: "manageTexts",
         args
       },
       {
-        label: "Resources",
+        label: "titles.resources",
         route: "backendProjectResources",
         entity: project,
         ability: "manageResources",
         args
       },
       {
-        label: "Resource Collections",
+        label: "titles.resource_collections",
         route: "backendProjectResourceCollections",
         entity: project,
         ability: "manageResourceCollections",
         args
       },
       {
-        label: "Activity",
+        label: "titles.activity",
         route: "backendProjectEvents",
         entity: project,
         ability: "manageEvents",
         args
       },
       {
-        label: "Metadata",
+        label: "titles.metadata",
         route: "backendProjectMetadata",
         entity: project,
         ability: "update",
         args
       },
       {
-        label: "Social Integrations",
+        label: "titles.social",
         route: "backendProjectSocial",
         entity: project,
         ability: "manageSocials",
         args
       },
       {
-        label: "Exports",
+        label: "titles.exports",
         route: "backendProjectExportations",
         entity: project,
         ability: "manageProjectExportations",
         args
       },
       {
-        label: "Log",
+        label: "titles.log",
         route: "backendProjectLog",
         entity: project,
         ability: "readLog",
@@ -282,13 +284,13 @@ class Navigation {
   static projects = memoize(() => {
     return [
       {
-        label: "All Projects",
+        label: "titles.projects_all",
         route: "backendProjectsAll",
         entity: "project",
         ability: "update"
       },
       {
-        label: "Project Collections",
+        label: "titles.project_collections",
         route: "backendProjectCollections",
         entity: "projectCollection",
         ability: "update"
@@ -300,42 +302,42 @@ class Navigation {
     const args = [journal.id];
     return [
       {
-        label: "Properties",
+        label: "titles.properties",
         route: "backendJournalProperties",
         entity: journal,
         ability: "update",
         args
       },
       {
-        label: "Layout",
+        label: "titles.layout",
         route: "backendJournalLayout",
         entity: journal,
         ability: "update",
         args
       },
       {
-        label: "Access",
+        label: "titles.access",
         route: "backendJournalAccess",
         entity: journal,
         ability: "update",
         args
       },
       {
-        label: "Metadata",
+        label: "titles.metadata",
         route: "backendJournalMetadata",
         entity: journal,
         ability: "update",
         args
       },
       {
-        label: "Issues",
+        label: "titles.issues",
         route: "backendJournalIssues",
         entity: journal,
         ability: "read",
         args
       },
       {
-        label: "Volumes",
+        label: "titles.volumes",
         route: "backendJournalVolumes",
         entity: journal,
         ability: "update",
@@ -347,25 +349,25 @@ class Navigation {
   static records = memoize(() => {
     return [
       {
-        label: "Makers",
+        label: "titles.makers",
         route: "backendRecordsMakers",
         entity: "maker",
         ability: "update"
       },
       {
-        label: "Users",
+        label: "titles.users",
         route: "backendRecordsUsers",
         entity: "user",
         ability: "update"
       },
       {
-        label: "Pages",
+        label: "titles.pages",
         route: "backendRecordsPages",
         entity: "page",
         ability: "update"
       },
       {
-        label: "Features",
+        label: "titles.features",
         route: "backendRecordsFeatures",
         entity: "feature",
         ability: "update"
@@ -386,14 +388,14 @@ class Navigation {
     const args = [resource.id];
     const out = [
       {
-        label: "Properties",
+        label: "titles.properties",
         route: "backendResourceProperties",
         entity: project,
         ability: "update",
         args
       },
       {
-        label: "Metadata",
+        label: "titles.metadata",
         route: "backendResourceMetadata",
         entity: project,
         ability: "manageResources",
@@ -408,7 +410,7 @@ class Navigation {
       (kind === "video" && !externalVideo)
     ) {
       out.splice(1, 0, {
-        label: "Variants",
+        label: "titles.variants",
         route: "backendResourceVariants",
         entity: project,
         ability: "update",
@@ -421,43 +423,43 @@ class Navigation {
   static settings = memoize(() => {
     return [
       {
-        label: "Properties",
+        label: "titles.properties",
         route: "backendSettingsProperties",
         entity: "settings",
         ability: "update"
       },
       {
-        label: "Theme",
+        label: "titles.theme",
         route: "backendSettingsTheme",
         entity: "settings",
         ability: "update"
       },
       {
-        label: "Integrations",
+        label: "titles.integrations",
         route: "backendSettingsIntegrations",
         entity: "settings",
         ability: "update"
       },
       {
-        label: "Ingestion",
+        label: "titles.ingestion",
         route: "backendSettingsIngestion",
         entity: "settings",
         ability: "update"
       },
       {
-        label: "Subjects",
+        label: "titles.subjects",
         route: "backendSettingsSubjects",
         entity: "settings",
         ability: "update"
       },
       {
-        label: "Email",
+        label: "titles.email",
         route: "backendSettingsEmail",
         entity: "settings",
         ability: "update"
       },
       {
-        label: "Export Targets",
+        label: "titles.export_targets",
         route: "backendSettingsExportTargets",
         entity: "exportTarget",
         ability: "update"
@@ -469,56 +471,56 @@ class Navigation {
     const args = [text.id];
     return [
       {
-        label: "Analytics",
+        label: "titles.analytics",
         route: "backendTextAnalytics",
         entity: text,
         ability: "update",
         args
       },
       {
-        label: "Properties",
+        label: "titles.properties",
         route: "backendTextProperties",
         entity: text,
         ability: "update",
         args
       },
       {
-        label: "People",
+        label: "titles.people",
         route: "backendTextCollaborators",
         entity: text.relationships.project,
         ability: "updateMakers",
         args
       },
       {
-        label: "Sections",
+        label: "titles.sections",
         route: "backendTextSections",
         entity: text,
         ability: "update",
         args
       },
       {
-        label: "Table of Contents",
+        label: "titles.toc",
         route: "backendTextTOC",
         entity: text,
         ability: "update",
         args
       },
       {
-        label: "Metadata",
+        label: "titles.metadata",
         route: "backendTextMetadata",
         entity: text,
         ability: "update",
         args
       },
       {
-        label: "Styles",
+        label: "titles.styles",
         route: "backendTextStyles",
         entity: text,
         ability: "update",
         args
       },
       {
-        label: "Reingest",
+        label: "titles.reingest",
         route: "backendTextIngestionsNew",
         entity: text,
         ability: "update",

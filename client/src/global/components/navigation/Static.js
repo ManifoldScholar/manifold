@@ -89,7 +89,7 @@ export class NavigationStatic extends PureComponent {
         className="site-nav__link"
         activeClassName="site-nav__link--active"
       >
-        {link.label}
+        {this.props.t(link.label)}
       </NavLink>
     );
   }
