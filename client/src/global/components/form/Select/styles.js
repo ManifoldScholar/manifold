@@ -69,14 +69,14 @@ export const TertiarySelect = styled(BaseSelect)`
   --Select-focus-color: var(--highlight-color);
   --Select-padding: 0 ${FORM_SELECT_INLINE_END_PADDING}px 0 13px;
   --Select-text-shadow-color: var(--color-neutral-text-dark);
+  --Select-text-transform: ${({ $primary }) => $primary && "uppercase"};
 
   ${textTruncate}
-  font-weight: var(--font-weight-semibold);
-  text-transform: uppercase;
+  text-transform: var(--Select-text-transform, none);
   letter-spacing: 0.115em;
+  font-size: 16px;
   width: auto;
   height: 40px;
-  font-size: 13px;
   background-color: var(
     --select-bg-color
   ); /* required for option to inherit in FF */
@@ -84,6 +84,12 @@ export const TertiarySelect = styled(BaseSelect)`
   border-radius: var(--box-border-radius);
 
   ${({ $wide }) => $wide && `width: 100%;`}
+
+  .browse & {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: var(--font-weight-semibold);
+  }
 `;
 
 /* These icon styles seem to be used for both primary and secondary. */
