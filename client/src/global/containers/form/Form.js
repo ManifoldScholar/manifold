@@ -43,6 +43,7 @@ export class FormContainer extends PureComponent {
     style: PropTypes.object,
     model: PropTypes.object,
     formatData: PropTypes.func,
+    onDirty: PropTypes.func,
     update: PropTypes.func,
     create: PropTypes.func,
     name: PropTypes.string.isRequired,
@@ -95,6 +96,7 @@ export class FormContainer extends PureComponent {
     this.maybeOpenSession(this.props, prevProps);
     if (this.state.submitRequested && !prevState.submitRequested)
       this.handleSubmit();
+    if (this.props.onDirty) this.props.onDirty(this.props.session.dirty);
   }
 
   componentWillUnmount() {
