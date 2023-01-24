@@ -17,7 +17,8 @@ class Social extends PureComponent {
     closeDrawer: PropTypes.func,
     failureRedirectRoute: PropTypes.string.isRequired,
     headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    t: PropTypes.func
+    t: PropTypes.func,
+    setDirty: PropTypes.func
   };
 
   get model() {
@@ -27,6 +28,12 @@ class Social extends PureComponent {
   closeDrawer = () => {
     if (!this.props.closeDrawer) return;
     this.props.closeDrawer();
+  };
+
+  onDirty = session => {
+    const dirtyAttrs = Object.keys(session.attributes).length;
+    const dirtyRels = Object.keys(session.relationships).length;
+    this.props.setDirty(dirtyAttrs || dirtyRels);
   };
 
   render() {
@@ -51,6 +58,7 @@ class Social extends PureComponent {
             update={api.update}
             create={api.create}
             onSuccess={this.closeDrawer}
+            onDirty={this.onDirty}
             className="form-secondary"
           >
             <Form.TextInput

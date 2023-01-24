@@ -14,13 +14,20 @@ function ProjectDescription({
   headerId,
   withDarkMode = true,
   model,
-  closeDrawer
+  closeDrawer,
+  setDirty
 }) {
   const maybeCloseDrawer = useCallback(() => {
     if (!closeDrawer) return;
     closeDrawer();
   }, [closeDrawer]);
   const { t } = useTranslation();
+
+  const onDirty = session => {
+    const dirtyAttrs = Object.keys(session.attributes).length;
+    const dirtyRels = Object.keys(session.relationships).length;
+    setDirty(dirtyAttrs || dirtyRels);
+  };
 
   return (
     <Authorize
@@ -42,6 +49,7 @@ function ProjectDescription({
           create={api.create}
           className="form-secondary"
           onSuccess={maybeCloseDrawer}
+          onDirty={onDirty}
         >
           <>
             {withDarkMode && (
@@ -108,7 +116,8 @@ ProjectDescription.propTypes = {
   failureRedirectRoute: PropTypes.string.isRequired,
   closeDrawer: PropTypes.func,
   withDarkMode: PropTypes.bool,
-  headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  setDirty: PropTypes.func
 };
 
 export default ProjectDescription;

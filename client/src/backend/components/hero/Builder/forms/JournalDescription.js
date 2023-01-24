@@ -14,13 +14,20 @@ function JournalDescription({
   headerId,
   withDarkMode = true,
   model,
-  closeDrawer
+  closeDrawer,
+  setDirty
 }) {
   const maybeCloseDrawer = useCallback(() => {
     if (!closeDrawer) return;
     closeDrawer();
   }, [closeDrawer]);
   const { t } = useTranslation();
+
+  const onDirty = session => {
+    const dirtyAttrs = Object.keys(session.attributes).length;
+    const dirtyRels = Object.keys(session.relationships).length;
+    setDirty(dirtyAttrs || dirtyRels);
+  };
 
   return (
     <Authorize
@@ -42,6 +49,7 @@ function JournalDescription({
           create={api.create}
           className="form-secondary"
           onSuccess={maybeCloseDrawer}
+          onDirty={onDirty}
         >
           {withDarkMode && (
             <Form.Switch
@@ -120,7 +128,8 @@ JournalDescription.propTypes = {
   failureRedirectRoute: PropTypes.string.isRequired,
   closeDrawer: PropTypes.func,
   withDarkMode: PropTypes.bool,
-  headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  setDirty: PropTypes.func
 };
 
 export default JournalDescription;

@@ -10,6 +10,8 @@ import SectionLabel from "global/components/form/SectionLabel";
 import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
+import withConfirmation from "hoc/withConfirmation";
+
 class Builder extends PureComponent {
   static displayName = "Hero.Builder";
 
@@ -34,7 +36,8 @@ class Builder extends PureComponent {
     refreshActionCallouts: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     withDarkMode: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
+    confirm: PropTypes.func
   };
 
   static defaultProps = {
@@ -59,11 +62,19 @@ class Builder extends PureComponent {
     super(props);
     this.state = {
       drawer: null,
+      formDirty: false,
       actionCalloutsOpen: false
     };
   }
 
   onDrawerClose = () => {
+    if (this.state.formDirty) {
+      const heading = this.props.t("messages.confirm");
+      const message = this.props.t("messages.unsaved_changes");
+      return this.props.confirm(heading, message, () =>
+        this.setState({ drawer: null })
+      );
+    }
     this.setState({ drawer: null });
   };
 
@@ -196,6 +207,7 @@ class Builder extends PureComponent {
                   model={this.model}
                   withDarkMode={this.props.withDarkMode}
                   modelLabel={modelLabel ?? this.defaultModelLabel}
+                  setDirty={val => this.setState({ formDirty: val })}
                 />
               ) : null}
             </Drawer.Wrapper>
@@ -206,4 +218,4 @@ class Builder extends PureComponent {
   }
 }
 
-export default withTranslation()(Builder);
+export default withTranslation()(withConfirmation(Builder));
