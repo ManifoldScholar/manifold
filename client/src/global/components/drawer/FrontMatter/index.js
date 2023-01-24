@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
@@ -61,3 +62,18 @@ export default function FrontMatter(props) {
     </>
   );
 }
+
+FrontMatter.displayName = "Drawer.FrontMatter";
+
+FrontMatter.propTypes = {
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  icon: PropTypes.string,
+  closeCallback: PropTypes.func,
+  closeUrl: PropTypes.string,
+  context: PropTypes.oneOf(["backend", "frontend", "reader"]),
+  padding: PropTypes.oneOf(["none", "default", "large"]),
+  includeDrawerFrontMatter: PropTypes.bool,
+  includeSRCloseButton: PropTypes.bool,
+  headerId: PropTypes.string.isRequired,
+  handleLeaveEvent: PropTypes.func.isRequired
+};
