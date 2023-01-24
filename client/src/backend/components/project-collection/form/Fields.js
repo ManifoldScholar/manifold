@@ -46,6 +46,7 @@ class Fields extends Component {
           })}
           hideTitle
           buttons={buttons}
+          small
         >
           <Form.TextInput
             wide

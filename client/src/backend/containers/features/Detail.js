@@ -13,8 +13,7 @@ import FrontendLayout from "frontend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import get from "lodash/get";
 import IconComposer from "global/components/utility/IconComposer";
-import SectionLabel from "global/components/form/SectionLabel";
-import Instructions from "global/components/form/Instructions";
+import Form from "global/components/form";
 
 import Authorize from "hoc/Authorize";
 
@@ -217,20 +216,12 @@ class FeatureDetailContainer extends PureComponent {
             {feature || isNew ? (
               <section>
                 {previewFeature ? (
-                  <div className="form-secondary">
-                    <SectionLabel
-                      label={t("backend.features.preview.section_title")}
-                    />
-                    <div>
-                      <FrontendLayout.Splash feature={previewFeature} preview />
-                      <Instructions
-                        className="space-bottom"
-                        instructions={t(
-                          "backend.features.preview.instructions"
-                        )}
-                      />
-                    </div>
-                  </div>
+                  <Form.FieldGroup
+                    label={t("backend.features.preview.section_title")}
+                    instructions={t("backend.features.preview.instructions")}
+                  >
+                    <FrontendLayout.Splash feature={previewFeature} preview />
+                  </Form.FieldGroup>
                 ) : null}
                 {this.renderRoutes()}
               </section>
