@@ -1,11 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import queryString from "query-string";
-import { readingGroupsAPI, readingGroupMembershipsAPI, requests } from "api";
-import { meta, select } from "utils/entityUtils";
-import connectAndFetch from "utils/connectAndFetch";
-import { entityStoreActions } from "actions";
+import { useParams, useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import {
+  useFetch,
+  useApiCallback,
+  usePaginationState,
+  useSetLocation
+} from "hooks";
+import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import MembersTable from "frontend/components/reading-group/tables/Members";
@@ -13,142 +16,44 @@ import * as Styled from "../styles";
 
 import withConfirmation from "hoc/withConfirmation";
 
-const { request } = entityStoreActions;
-const defaultPage = 1;
-const perPage = 10;
+function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
+  const { id } = useParams();
+  const history = useHistory();
+  const { t } = useTranslation();
 
-class ReadingGroupsMembersListContainer extends Component {
-  static propTypes = {
-    confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
-  };
+  const [pagination, setPageNumber] = usePaginationState(1, 10);
 
-  static fetchMembers(dispatch, page, match) {
-    const pagination = {
-      number: page || defaultPage,
-      size: perPage
-    };
+  const { data: members, meta, refresh } = useFetch({
+    request: [readingGroupsAPI.members, id, pagination]
+  });
 
-    const membersRequest = request(
-      readingGroupsAPI.members(match.params.id, {}, pagination),
-      requests.feReadingGroupMembers
-    );
+  useSetLocation({ page: pagination.number });
 
-    const { promise: one } = dispatch(membersRequest);
-    return one;
-  }
-
-  static fetchData = (getState, dispatch, location, match) => {
-    const params = queryString.parse(location.search);
-    const promise = ReadingGroupsMembersListContainer.fetchMembers(
-      dispatch,
-      params.page,
-      match
-    );
-    return Promise.all([promise]);
-  };
-
-  static mapStateToProps = state => {
-    return {
-      readingGroupMembers: select(
-        requests.feReadingGroupMembers,
-        state.entityStore
-      ),
-      readingGroupMembersMeta: meta(
-        requests.feReadingGroupMembers,
-        state.entityStore
-      )
-    };
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = this.initialState(queryString.parse(props.location.search));
-  }
-
-  initialState(init) {
-    return {
-      pagination: {
-        number: init.page || defaultPage,
-        size: perPage
-      }
-    };
-  }
-
-  get groupsRoute() {
-    return lh.link("frontendMyReadingGroups");
-  }
-
-  get membersRoute() {
-    return lh.link("frontendReadingGroupMembers", this.props.readingGroup.id);
-  }
-
-  handlePageChange = pageParam => {
-    const pagination = { ...this.state.pagination, number: pageParam };
-    this.setState({ pagination }, this.doUpdate);
-  };
-
-  pageChangeHandlerCreator = pageParam => {
+  const paginationClickHandlerCreator = page => {
     return event => {
       event.preventDefault();
-      this.handlePageChange(pageParam);
+      setPageNumber(page);
     };
   };
 
-  handlePageChange = pageParam => {
-    const pagination = { ...this.state.pagination, number: pageParam };
-    this.setState({ pagination }, this.doUpdate);
-  };
+  const membersRoute = lh.link("frontendReadingGroupMembers", readingGroup.id);
 
-  doUpdate = () => {
-    const pathname = this.props.location.pathname;
-    const pageParam = this.state.pagination.number;
-    const params = {};
-    if (pageParam !== 1) params.page = pageParam;
-    const search = queryString.stringify(params);
-    this.props.history.push({ pathname, search });
-    this.constructor.fetchMembers(
-      this.props.dispatch,
-      this.state.pagination.number,
-      this.props.match
-    );
-  };
+  const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
 
-  pageChangeHandlerCreator = pageParam => {
-    return event => {
-      event.preventDefault();
-      this.handlePageChange(pageParam);
-    };
-  };
-
-  removeMember = readingGroupMembership => {
-    const t = this.props.t;
+  const removeMember = membership => {
     const heading = t("messages.membership.destroy_heading");
     const message = t("messages.membership.destroy_message");
-    this.props.confirm(heading, message, () => {
-      this.destroyMembership(readingGroupMembership);
-    });
+    if (confirm)
+      confirm(heading, message, () => {
+        deleteMembership(membership.id).then(refresh());
+      });
   };
 
-  destroyMembership(readingGroupMembership) {
-    const call = readingGroupMembershipsAPI.destroy(readingGroupMembership.id);
-    const options = { removes: readingGroupMembership };
-    const readingGroupMembershipRequest = request(
-      call,
-      requests.feReadingGroupMembershipDestroy,
-      options
-    );
-    this.props.dispatch(readingGroupMembershipRequest).promise.then(() => {
-      this.props.history.push(this.membersRoute);
-    });
-  }
-
-  renderRoutes() {
-    const { route, confirm, dispatch, readingGroup } = this.props;
+  const renderRoutes = () => {
     return childRoutes(route, {
       drawer: true,
       drawerProps: {
-        closeUrl: this.membersRoute,
+        closeUrl: membersRoute,
         context: "frontend",
         size: "wide",
         position: "overlay",
@@ -158,38 +63,37 @@ class ReadingGroupsMembersListContainer extends Component {
         confirm,
         dispatch,
         readingGroup,
-        onRemoveClick: this.removeMember,
-        onEditSuccess: () => this.props.history.push(this.membersRoute)
+        onRemoveClick: removeMember,
+        onEditSuccess: () => history.push(membersRoute)
       }
     });
-  }
+  };
 
-  render() {
-    const {
-      readingGroup,
-      readingGroupMembers,
-      readingGroupMembersMeta
-    } = this.props;
+  if (!members) return null;
 
-    if (!readingGroupMembers) return null;
-
-    return (
-      <>
-        <Styled.Body>
-          <MembersTable
-            readingGroup={readingGroup}
-            members={readingGroupMembers}
-            pagination={readingGroupMembersMeta.pagination}
-            onPageClick={this.pageChangeHandlerCreator}
-            onRemoveMember={this.removeMember}
-          />
-        </Styled.Body>
-        {this.renderRoutes()}
-      </>
-    );
-  }
+  return (
+    <>
+      <Styled.Body>
+        <MembersTable
+          readingGroup={readingGroup}
+          members={members}
+          pagination={meta.pagination}
+          onPageClick={paginationClickHandlerCreator}
+          onRemoveMember={removeMember}
+        />
+      </Styled.Body>
+      {renderRoutes()}
+    </>
+  );
 }
 
-export default withTranslation()(
-  connectAndFetch(withConfirmation(ReadingGroupsMembersListContainer))
-);
+MembersListContainer.displayName = "ReadingGroup.MembersList.Container";
+
+MembersListContainer.propTypes = {
+  route: PropTypes.object,
+  dispatch: PropTypes.func,
+  confirm: PropTypes.func,
+  readingGroup: PropTypes.object
+};
+
+export default withConfirmation(MembersListContainer);
