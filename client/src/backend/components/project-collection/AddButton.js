@@ -38,6 +38,7 @@ class ProjectCollectionAddButton extends Component {
   get transitionProps() {
     return {
       mountOnEnter: true,
+      timeout: 600,
       classNames: "collecting-toggle__text"
     };
   }
