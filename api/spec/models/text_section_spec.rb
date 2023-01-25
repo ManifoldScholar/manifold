@@ -103,4 +103,17 @@ RSpec.describe TextSection, type: :model do
     end
   end
 
+  describe "has_mathml" do
+    let!(:section_no_math) { FactoryBot.create(:text_section, body: "")}
+    let!(:section_with_math) { FactoryBot.create(:text_section, body: "<div><math>1+1</math></div>")}
+
+    it "is true when body contains a math tag" do
+      expect(section_with_math.has_mathml).to be true
+    end
+
+    it "is false when body does not contain a math tag" do
+      expect(section_no_math.has_mathml).to be false
+    end
+  end
+
 end
