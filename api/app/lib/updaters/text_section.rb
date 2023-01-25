@@ -10,8 +10,7 @@ module Updaters
     def adjusted_attributes
       return {} unless attributes
 
-      clone = attributes.clone
-      clone
+      attributes.clone
     end
   end
 end
