@@ -64,6 +64,7 @@ class TextSection < ApplicationRecord
 
   # Callbacks
   before_validation :update_body_json
+  before_validation :maybe_set_has_mathml
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
 
   # Scopes
@@ -200,6 +201,16 @@ class TextSection < ApplicationRecord
     TextSectionJobs::EnqueueAdoptAnnotationsJob.perform_later annotations.pluck(:id)
   end
 
+  def has_mathml?(node)
+    return true if node["tag"] == "math"
+
+    if node["children"].present?
+      node["children"].find { |node| has_mathml?(node) }
+    else
+      false
+    end
+  end
+
   private
 
   def maybe_adopt_or_orphan_annotations!
@@ -211,5 +222,11 @@ class TextSection < ApplicationRecord
   def update_body_json
     return unless body_changed?
     self.body_json = Serializer::HTML.serialize_as_json(body)
+  end
+
+  def maybe_set_has_mathml
+    return unless body_json_changed?
+
+    self.has_mathml = has_mathml?(self.body_json)
   end
 end

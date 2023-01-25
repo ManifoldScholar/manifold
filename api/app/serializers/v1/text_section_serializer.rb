@@ -22,6 +22,7 @@ module V1
       )
       typed_attribute :body, Types::String.optional
       typed_attribute :citations, Types::Serializer::Citations
+      typed_attribute :has_mathml, Types::Bool
     end
 
   end
