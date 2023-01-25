@@ -32,7 +32,7 @@ module Ingestions
         info "services.ingestions.post_processor.log.transform_ts",
              name: text_section.name
         text_section.update(
-          body: convert_body,
+          body: convert_body
         )
       end
 

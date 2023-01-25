@@ -205,7 +205,7 @@ class TextSection < ApplicationRecord
     return true if node["tag"] == "math"
 
     if node["children"].present?
-      node["children"].find { |node| has_mathml?(node) }
+      node["children"].find { |child| has_mathml?(child) }
     else
       false
     end
@@ -221,12 +221,13 @@ class TextSection < ApplicationRecord
 
   def update_body_json
     return unless body_changed?
+
     self.body_json = Serializer::HTML.serialize_as_json(body)
   end
 
   def maybe_set_has_mathml
     return unless body_json_changed?
 
-    self.has_mathml = has_mathml?(self.body_json)
+    self.has_mathml = has_mathml?(body_json)
   end
 end
