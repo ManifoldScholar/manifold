@@ -33,7 +33,6 @@ module Ingestions
              name: text_section.name
         text_section.update(
           body: convert_body,
-          body_json: convert_body_to_json
         )
       end
 
@@ -64,18 +63,6 @@ module Ingestions
         transform_doc_uris(doc, source_path_map,
                            source_map, source_path)
         body
-      end
-
-      def convert_body_to_json
-        return unless body.present?
-
-        Serializer::HTML.serialize_as_json(body) do |json|
-          if json.blank?
-            error_string(body)
-
-            raise IngestionError, "Body contains no nodes"
-          end
-        end
       end
 
       def transform_doc_uris(doc, source_path_map, source_map, source_path)

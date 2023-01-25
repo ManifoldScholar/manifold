@@ -63,6 +63,7 @@ class TextSection < ApplicationRecord
   validates :name, presence: { on: :from_api }
 
   # Callbacks
+  before_validation :update_body_json
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
 
   # Scopes
@@ -205,5 +206,10 @@ class TextSection < ApplicationRecord
     return unless body_json_previously_changed? || source_body_previously_changed?
 
     adopt_or_orphan_annotations!
+  end
+
+  def update_body_json
+    return unless body_changed?
+    self.body_json = Serializer::HTML.serialize_as_json(body)
   end
 end
