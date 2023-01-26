@@ -40,8 +40,9 @@ function SectionListItem(props) {
 
   const deleteSection = useApiCallback(sectionsAPI.destroy);
 
-  const doDelete = () => {
-    deleteSection(section.id).then(refresh());
+  const doDelete = async () => {
+    await deleteSection(section.id);
+    refresh();
   };
 
   const onDelete = () => {
