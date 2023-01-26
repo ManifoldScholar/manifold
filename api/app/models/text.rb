@@ -376,14 +376,22 @@ class Text < ApplicationRecord
     update_column :toc, toc if toc_changed?
   end
 
-  def audit_toc(deleted_section_id)
+  def remove_nested_toc_entries(deleted_section_id, entries = toc)
+    entries.each_with_object([]) do |entry, new_entries|
+      next if entry[:id] == deleted_section_id
+
+      entry[:children] = remove_nested_toc_entries(deleted_section_id, entry[:children]) if entry[:children].present?
+
+      new_entries << entry
+    end
+  end
+
+  def remove_toc_entry!(deleted_section_id)
     return if toc.empty?
 
-    toc.each do |entry|
-      toc.delete(entry) if entry[:id] == deleted_section_id
-    end
+    new_toc = remove_nested_toc_entries(deleted_section_id)
 
-    update_attribute :toc, toc if toc_changed?
+    update_attribute :toc, new_toc
   end
 
   def to_s
