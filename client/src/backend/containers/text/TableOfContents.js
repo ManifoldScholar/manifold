@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -19,6 +19,10 @@ export default function TextTOCContainer({ text, route }) {
   const [tocAsDndTree, setTree] = useState(
     formatTreeData(text.attributes?.toc)
   );
+
+  useEffect(() => {
+    setTree(formatTreeData(text.attributes?.toc));
+  }, [text?.attributes.toc]);
 
   const updateText = useApiCallback(textsAPI.update);
 
@@ -116,7 +120,6 @@ export default function TextTOCContainer({ text, route }) {
           tree={tocAsDndTree}
           setTree={setTree}
           textId={text.id}
-          startSectionId={text.attributes?.startTextSectionId}
         />
       </FormContainer.Form>
     </section>

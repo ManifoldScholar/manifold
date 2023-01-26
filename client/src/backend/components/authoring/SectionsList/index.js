@@ -13,9 +13,9 @@ export default function SectionsList({
 }) {
   const updateSection = useApiCallback(sectionsAPI.update);
 
-  const onReorder = ({ id, position }) => {
-    updateSection(id, { attributes: { position } });
-    if (refresh) refresh();
+  const onReorder = async ({ id, position }) => {
+    await updateSection(id, { attributes: { position } });
+    refresh();
   };
 
   return sections.length ? (

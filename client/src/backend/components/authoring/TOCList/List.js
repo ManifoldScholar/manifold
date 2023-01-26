@@ -108,6 +108,5 @@ TOCList.displayName = "Text.TOC.List";
 TOCList.propTypes = {
   tree: PropTypes.object.isRequired,
   setTree: PropTypes.func.isRequired,
-  textId: PropTypes.string.isRequired,
-  startSectionId: PropTypes.string.isRequired
+  textId: PropTypes.string.isRequired
 };
