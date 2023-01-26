@@ -66,6 +66,7 @@ class TextSection < ApplicationRecord
   before_validation :update_body_json
   before_validation :maybe_set_has_mathml
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
+  after_destroy :remove_linked_toc_entries
 
   # Scopes
   scope :in_texts, lambda { |texts|
@@ -229,5 +230,9 @@ class TextSection < ApplicationRecord
     return unless body_json_changed?
 
     self.has_mathml = has_mathml?(body_json)
+  end
+
+  def remove_linked_toc_entries
+    text.audit_toc(id)
   end
 end

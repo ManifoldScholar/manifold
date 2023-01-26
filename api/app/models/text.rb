@@ -376,6 +376,16 @@ class Text < ApplicationRecord
     update_column :toc, toc if toc_changed?
   end
 
+  def audit_toc(deleted_section_id)
+    return if toc.empty?
+
+    toc.each do |entry|
+      toc.delete(entry) if entry[:id] == deleted_section_id
+    end
+
+    update_attribute :toc, toc if toc_changed?
+  end
+
   def to_s
     title
   end
