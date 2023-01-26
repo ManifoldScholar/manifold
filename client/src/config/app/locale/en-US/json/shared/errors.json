@@ -30,6 +30,7 @@
       "dismiss_link": "Try again."
     },
     "logo_styles": "Error: Invalid press logo styles",
-    "upload_failed": "Upload failed. Please try again."
+    "upload_failed": "Upload failed. Please try again.",
+    "cookies_banner": "Sorry! There was an error saving your preferences. Please visit your settings to try again."
   }
 }

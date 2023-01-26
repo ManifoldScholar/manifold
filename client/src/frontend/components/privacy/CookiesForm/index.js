@@ -46,6 +46,7 @@ export default function CookiesForm() {
       update={meAPI.update}
       formatData={formatAttributes}
       onSuccess={notifyUpdate}
+      groupErrors
     >
       <Styled.FieldGroup label={t("forms.privacy.cookies")}>
         <CookiesFields
