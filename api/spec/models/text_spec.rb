@@ -165,6 +165,24 @@ RSpec.describe Text, type: :model do
     end
   end
 
+  context "when a section is deleted" do
+    let!(:text) { FactoryBot.create(:text)}
+    let!(:section_one) { FactoryBot.create(:text_section, text: text)}
+    let!(:section_two) { FactoryBot.create(:text_section, text: text)}
+    let(:toc) { [{label: "one", id: section_one.id}, {label: "two", id: section_two.id}, {label: "three", id: section_one.id},] }
+
+    before do
+      text.update! :toc => toc
+    end
+
+    specify "all linked toc entries are also deleted" do
+      section_one.destroy
+      text.reload
+
+      expect(text.toc.size).to eq 1
+    end
+  end
+
   it_should_behave_like "a model that stores its fingerprint" do
     subject { FactoryBot.create :text }
   end
