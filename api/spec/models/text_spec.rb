@@ -169,7 +169,7 @@ RSpec.describe Text, type: :model do
     let!(:text) { FactoryBot.create(:text)}
     let!(:section_one) { FactoryBot.create(:text_section, text: text)}
     let!(:section_two) { FactoryBot.create(:text_section, text: text)}
-    let(:toc) { [{label: "one", id: section_one.id}, {label: "two", id: section_two.id}, {label: "three", id: section_one.id},] }
+    let(:toc) { [{label: "one", id: section_one.id}, {label: "two", id: section_two.id, children: [{label: "one_child", id: section_one.id}]}, {label: "three", id: section_one.id}] }
 
     before do
       text.update! :toc => toc
@@ -180,6 +180,7 @@ RSpec.describe Text, type: :model do
       text.reload
 
       expect(text.toc.size).to eq 1
+      expect(text.toc.first[:children].empty?).to be true
     end
   end
 

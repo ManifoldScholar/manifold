@@ -233,6 +233,6 @@ class TextSection < ApplicationRecord
   end
 
   def remove_linked_toc_entries
-    text.audit_toc(id)
+    text.remove_toc_entry!(id)
   end
 end
