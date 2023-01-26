@@ -13,6 +13,8 @@ export default function AnonymousUserBanner() {
     !cookie.read("anonAnalyticsConsent")
   );
 
+  // cookie.remove("anonAnalyticsConsent");
+
   const settings = useFromStore("settings", "select");
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
     settings?.attributes?.calculated ?? {};

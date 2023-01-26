@@ -3,7 +3,8 @@ import {
   headingPrimary,
   respond,
   formInstructions,
-  fluidScale
+  fluidScale,
+  formInputMessage
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 
@@ -64,7 +65,7 @@ export const Heading = styled.span`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  min-width: max-content;
+  width: 310px;
   gap: 20px;
 `;
 
@@ -97,4 +98,13 @@ export const Description = styled.span`
   ${formInstructions}
   display: block;
   margin-block-start: 14px;
+`;
+
+export const Error = styled.span`
+  ${formInputMessage}
+  display: inline-block;
+  margin-block-end: 20px;
+  color: var(--error-color);
+
+  ${respond(`width: 310px;`, breakpoints[90])}
 `;

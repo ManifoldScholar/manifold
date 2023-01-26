@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { useFromStore, useApiCallback } from "hooks";
 import { meAPI } from "api";
@@ -15,12 +15,18 @@ export default function CurrentUserBanner() {
 
   const acceptCookies = useApiCallback(meAPI.update);
 
-  const acceptAll = useCallback(() => {
+  const [errors, setErrors] = useState(null);
+
+  const acceptAll = useCallback(async () => {
     const args = {
       consentManifoldAnalytics: !manifoldAnalyticsEnabled ? null : true,
       consentGoogleAnalytics: !googleAnalyticsEnabled ? null : true
     };
-    acceptCookies(args);
+
+    const res = await acceptCookies(args);
+    if (res.errors) {
+      setErrors(res.errors);
+    }
   }, [acceptCookies, googleAnalyticsEnabled, manifoldAnalyticsEnabled]);
 
   if (!(consentNeededGoogleAnalytics || consentNeededManifoldAnalytics))
@@ -33,6 +39,7 @@ export default function CurrentUserBanner() {
       message={message}
       acceptAll={acceptAll}
       settingsLinkProps={{ as: Link, to: "/privacy" }}
+      error={!!errors}
     />
   );
 }

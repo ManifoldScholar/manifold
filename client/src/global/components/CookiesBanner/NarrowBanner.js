@@ -8,7 +8,8 @@ export default function NarrowBanner({
   message,
   acceptAll,
   settingsLinkProps,
-  onClickSettings
+  onClickSettings,
+  error
 }) {
   const { t } = useTranslation();
 
@@ -19,22 +20,25 @@ export default function NarrowBanner({
           <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
           <p dangerouslySetInnerHTML={{ __html: message }} />
         </Styled.TextWrapper>
-        <Styled.ButtonWrapper>
-          <Styled.Button
-            className="button-secondary button-secondary--outlined"
-            onClick={acceptAll}
-          >
-            {t("messages.cookies_banner.accept_button_label")}
-          </Styled.Button>
-          <Styled.Button
-            $dull
-            className="button-secondary button-secondary--outlined"
-            onClick={onClickSettings}
-            {...settingsLinkProps}
-          >
-            {t("messages.cookies_banner.settings_button_label")}
-          </Styled.Button>
-        </Styled.ButtonWrapper>
+        <div>
+          {error && <Styled.Error>{t("errors.cookies_banner")}</Styled.Error>}
+          <Styled.ButtonWrapper>
+            <Styled.Button
+              className="button-secondary button-secondary--outlined"
+              onClick={acceptAll}
+            >
+              {t("messages.cookies_banner.accept_button_label")}
+            </Styled.Button>
+            <Styled.Button
+              $dull
+              className="button-secondary button-secondary--outlined"
+              onClick={onClickSettings}
+              {...settingsLinkProps}
+            >
+              {t("messages.cookies_banner.settings_button_label")}
+            </Styled.Button>
+          </Styled.ButtonWrapper>
+        </div>
       </Styled.NarrowInner>
     </Styled.Banner>
   );
