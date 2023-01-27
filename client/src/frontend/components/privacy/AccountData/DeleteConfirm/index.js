@@ -14,9 +14,7 @@ export default function DeleteConfirm() {
 
   const [emailValue, setEmail] = useState("");
   const [mismatch, setMismatch] = useState(false);
-  const errorFormatted = [
-    { detail: t("forms.privacy.delete.email_mismatch_error") }
-  ];
+  const [errors, setErrors] = useState(null);
 
   const deleteAccount = useApiCallback(meAPI.destroy, { removes: currentUser });
 
@@ -30,25 +28,26 @@ export default function DeleteConfirm() {
     expiration: 5000
   }));
 
-  const deleteAndRedirect = useCallback(() => {
-    deleteAccount()
-      .then(() => {
-        notifyDestroy(currentUser);
-        dispatch(currentUserActions.logout());
-      })
-      .catch(err => {
-        // This is placeholder. Add some kind of failure notification.
-        /* eslint-disable-next-line no-console */
-        console.info(err);
-      });
+  const deleteAndRedirect = useCallback(async () => {
+    const res = await deleteAccount();
+    if (res.errors) return setErrors(res.errors);
+    notifyDestroy(currentUser);
+    dispatch(currentUserActions.logout());
   }, [currentUser, deleteAccount, notifyDestroy, dispatch]);
 
   const handleDelete = e => {
     e.preventDefault();
     if (!(emailValue === currentUser?.attributes?.email))
       return setMismatch(true);
+    setMismatch(false);
     deleteAndRedirect();
   };
+
+  const mismatchErrorFormatted = [
+    { detail: t("forms.privacy.delete.email_mismatch_error") }
+  ];
+
+  const visibleErrors = mismatch ? mismatchErrorFormatted : errors || [];
 
   return (
     <Styled.Box>
@@ -64,10 +63,6 @@ export default function DeleteConfirm() {
             placeholder={t("forms.privacy.delete.email_placeholder")}
             onChange={e => setEmail(e.target.value)}
           />
-          <Form.InputError
-            errors={mismatch ? errorFormatted : []}
-            idForError="email-mismatch"
-          />
         </Styled.InputWrapper>
         <Styled.Button
           className="button-secondary button-secondary--outlined"
@@ -77,6 +72,7 @@ export default function DeleteConfirm() {
           {t("forms.privacy.delete.confirm_button_label")}
         </Styled.Button>
       </Styled.EmailWrapper>
+      <Form.InputError errors={visibleErrors} idForError="delete-account" />
     </Styled.Box>
   );
 }
