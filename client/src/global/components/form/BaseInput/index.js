@@ -29,6 +29,7 @@ export class FormBaseInput extends PureComponent {
     join: PropTypes.func,
     id: PropTypes.string,
     idForError: PropTypes.string,
+    errorName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     idForInstructions: PropTypes.string,
     renderValue: PropTypes.func,
     wide: PropTypes.bool
@@ -112,7 +113,7 @@ export class FormBaseInput extends PureComponent {
     return (
       <Wrapper
         className={buttons ? undefined : fieldClasses}
-        name={this.props.name}
+        name={this.props.errorName ?? this.props.name}
         errors={this.props.errors}
         label={this.props.label}
         idForError={idForError}
