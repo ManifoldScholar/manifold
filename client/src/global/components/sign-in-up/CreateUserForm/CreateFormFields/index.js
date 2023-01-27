@@ -25,6 +25,11 @@ export default function CreateFormFields() {
         placeholder={t("forms.signin_overlay.name")}
         idForError="create-name-error"
         name="attributes[name]"
+        errorName={[
+          "attributes[name]",
+          "attributes[lastName]",
+          "attributes[firstName]"
+        ]}
         label={t("forms.signin_overlay.name")}
         autoComplete="name"
       />
