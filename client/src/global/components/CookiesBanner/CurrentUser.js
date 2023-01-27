@@ -24,7 +24,7 @@ export default function CurrentUserBanner() {
     };
 
     const res = await acceptCookies(args);
-    if (res.errors) {
+    if (res?.errors) {
       setErrors(res.errors);
     }
   }, [acceptCookies, googleAnalyticsEnabled, manifoldAnalyticsEnabled]);

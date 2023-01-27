@@ -30,7 +30,7 @@ export default function DeleteConfirm() {
 
   const deleteAndRedirect = useCallback(async () => {
     const res = await deleteAccount();
-    if (res.errors) return setErrors(res.errors);
+    if (res?.errors) return setErrors(res.errors);
     notifyDestroy(currentUser);
     dispatch(currentUserActions.logout());
   }, [currentUser, deleteAccount, notifyDestroy, dispatch]);
