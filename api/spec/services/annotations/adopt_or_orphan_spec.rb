@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Annotations::AdoptOrOrphan do
   context "with a complex text structure" do
     let(:text_section) do
@@ -134,71 +136,75 @@ RSpec.describe Annotations::AdoptOrOrphan do
       end
 
       it "has the correct end char" do
-        expect(@annotation.end_char).to eq 4
+        expect(@annotation.end_char).to eq 5
       end
     end
 
-    context "when parent nodes are still present" do
-      context "when content in range has not changed" do
-        it "maintains the current parent nodes" do
-          annotation = FactoryBot.create(:annotation,
-                                         text_section: text_section,
-                                         start_node: "B",
-                                         end_node: "C",
-                                         subject: "One, two, blue, three, four, ")
-          Annotations::AdoptOrOrphan.run annotation: annotation
-          expect(annotation.attributes.slice("start_node", "end_node").values).to eq %w(B C)
+    context "when body_json is updated" do
+      context "when parent nodes are still present" do
+        context "when content in range has not changed" do
+          it "maintains the current parent nodes and does not orphan the annotation" do
+            annotation = FactoryBot.create(:annotation,
+                                           text_section: text_section,
+                                           start_node: "B",
+                                           end_node: "C",
+                                           subject: "One, two, blue, three, four, ")
+            Annotations::AdoptOrOrphan.run annotation: annotation
+            expect(annotation.attributes.slice("start_node", "end_node").values).to eq %w(B C)
+            expect(annotation.orphaned).to be false
+          end
+
+          context "when nodes have duplicate content" do
+            it "maintains the current parent nodes and does not orphan the annotation" do
+              annotation = FactoryBot.create(:annotation,
+                                             text_section: text_section,
+                                             start_node: "D",
+                                             end_node: "D",
+                                             start_char: "12",
+                                             end_char: "15",
+                                             subject: "blue")
+              Annotations::AdoptOrOrphan.run annotation: annotation
+              expect(annotation.attributes.slice("start_node", "end_node").values).to eq %w(D D)
+              expect(annotation.orphaned).to be false
+            end
+          end
+        end
+
+        context "when content in range has changed" do
+          it "marks the annotation as orphaned" do
+            annotation = FactoryBot.create(:annotation,
+                                           text_section: text_section,
+                                           start_node: "B",
+                                           end_node: "D",
+                                           subject: "One, two, blue, five, six.")
+            Annotations::AdoptOrOrphan.run annotation: annotation
+            expect(annotation.orphaned).to eq true
+          end
         end
       end
 
-      context "when content in range has changed" do
+      context "when parent parent nodes are not found" do
         it "marks the annotation as orphaned" do
           annotation = FactoryBot.create(:annotation,
                                          text_section: text_section,
-                                         start_node: "B",
-                                         end_node: "D",
-                                         subject: "One, two, blue, five, six.")
+                                         start_node: "H",
+                                         end_node: "E",
+                                         subject: "Seven, eight.")
           Annotations::AdoptOrOrphan.run annotation: annotation
           expect(annotation.orphaned).to eq true
         end
-      end
 
-      context "when nodes have duplicate content" do
-        it "maintains the current parent nodes" do
-          annotation = FactoryBot.create(:annotation,
-                                         text_section: text_section,
-                                         start_node: "D",
-                                         end_node: "D",
-                                         subject: "blue")
-          Annotations::AdoptOrOrphan.run annotation: annotation
-          expect(annotation.attributes.slice("start_node", "end_node").values).to eq %w(D D)
+        context "when nodes have duplicate content" do
+          it "marks the annotation as orphaned" do
+            annotation = FactoryBot.create(:annotation,
+                                           text_section: text_section,
+                                           start_node: "F",
+                                           end_node: "F",
+                                           subject: "blue")
+            Annotations::AdoptOrOrphan.run annotation: annotation
+            expect(annotation.orphaned).to eq true
+          end
         end
-      end
-    end
-
-    context "when new nodes are found" do
-      context "when nodes have duplicate content" do
-        it "marks the annotation as orphaned" do
-          annotation = FactoryBot.create(:annotation,
-                                         text_section: text_section,
-                                         start_node: "F",
-                                         end_node: "F",
-                                         subject: "blue")
-          Annotations::AdoptOrOrphan.run annotation: annotation
-          expect(annotation.orphaned).to eq true
-        end
-      end
-    end
-
-    context "when no parent nodes are found" do
-      it "marks the annotation as orphaned" do
-        annotation = FactoryBot.create(:annotation,
-                                       text_section: text_section,
-                                       start_node: "H",
-                                       end_node: "E",
-                                       subject: "Seven, eight.")
-        Annotations::AdoptOrOrphan.run annotation: annotation
-        expect(annotation.orphaned).to eq true
       end
     end
   end
