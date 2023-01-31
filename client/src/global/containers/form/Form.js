@@ -319,7 +319,7 @@ export class FormContainer extends PureComponent {
     const contextProps = this.contextProps(this.props);
 
     return (
-      <div>
+      <>
         {this.renderDebugger()}
 
         <Prompt
@@ -342,7 +342,7 @@ export class FormContainer extends PureComponent {
           </FormContext.Provider>
           {this.renderModelErrors(this.props)}
         </Styled.Form>
-      </div>
+      </>
     );
   }
 }

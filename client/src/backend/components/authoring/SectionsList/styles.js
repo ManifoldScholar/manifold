@@ -30,7 +30,9 @@ export const TitleWrapper = styled.div`
   align-items: center;
   gap: 12px;
   color: var(--color-neutral-text-extra-light);
-  max-width: ${fluidScale("85%", "50%", 90, 35)};
+  max-width: 50%;
+
+  ${respond(`max-width: ${fluidScale("650px", "250px", 120, 65)};`, 65)}
 `;
 
 export const BG = styled.div`
@@ -70,7 +72,6 @@ export const Inner = styled.div`
   flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   cursor: default;
   background-color: transparent;
   position: relative;
