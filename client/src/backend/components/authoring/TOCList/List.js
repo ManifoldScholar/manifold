@@ -8,7 +8,9 @@ import {
   formatTreeData,
   getNestedTreeChildren,
   getRootParentPosition,
-  removeKeys
+  removeKeys,
+  isValidParent,
+  getParentId
 } from "./treeHelpers";
 import { textsAPI } from "api";
 import { useApiCallback } from "hooks";
@@ -45,6 +47,10 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
         tree.items
       );
       finalDestination = { parentId: "root", index: rootParentIndex + 1 };
+    } else if (!isValidParent(destination.parentId, tree.items)) {
+      finalDestination = {
+        parentId: getParentId(destination.parentId, tree.items)
+      };
     } else {
       finalDestination = destination;
     }
