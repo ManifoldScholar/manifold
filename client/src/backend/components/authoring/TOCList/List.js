@@ -14,29 +14,27 @@ import { textsAPI } from "api";
 import { useApiCallback } from "hooks";
 import * as Styled from "./styles";
 
-export default function TOCList({ tree, setTree, textId }) {
+export default function TOCList({ tree, setTree, textId, error, setError }) {
   const { t } = useTranslation();
 
   const updateText = useApiCallback(textsAPI.update);
 
   const onReorderTOC = async newTree => {
+    setError(null);
     const newToc = formatTOCData(newTree);
-    await updateText(textId, { attributes: { toc: newToc } });
-
-    // TODO: add error handling
+    const res = await updateText(textId, { attributes: { toc: newToc } });
+    if (res?.errors) setError("reorder");
   };
 
   const onDelete = async entryId => {
+    setError(null);
     const toDelete = [entryId, ...getNestedTreeChildren(entryId, tree.items)];
     const update = removeKeys(toDelete, tree.items);
     const newToc = formatTOCData({ ...tree, items: update });
 
-    try {
-      await updateText(textId, { attributes: { toc: newToc } });
-      setTree(formatTreeData(newToc));
-    } catch (err) {
-      // TODO: add error handling
-    }
+    const res = await updateText(textId, { attributes: { toc: newToc } });
+    if (res?.errors) return setError(res.errors);
+    setTree(formatTreeData(newToc));
   };
 
   const onDragEnd = async (source, destination) => {
@@ -83,11 +81,21 @@ export default function TOCList({ tree, setTree, textId }) {
     );
   };
 
+  /* eslint-disable no-nested-ternary */
+  const errorMessage =
+    error === "reorder"
+      ? t("errors.toc_reorder")
+      : Array.isArray(error)
+      ? error.map(e => e.detail).join(". ")
+      : error;
+  /* eslint-disable no-nested-ternary */
+
   return tree ? (
     <Styled.ScrollContainer
       className="full-width"
       $count={Object.keys(tree.items).length - 1}
     >
+      {error && <Styled.Error>{errorMessage}</Styled.Error>}
       <Tree
         tree={tree}
         renderItem={renderItem}

@@ -31,6 +31,8 @@
     },
     "logo_styles": "Error: Invalid press logo styles",
     "upload_failed": "Upload failed. Please try again.",
-    "cookies_banner": "Sorry! There was an error saving your preferences. Please visit your settings to try again."
+    "cookies_banner": "Sorry! There was an error saving your preferences. Please visit your settings to try again.",
+    "section_reorder": "There was an error updating the section order. This list has been reset.",
+    "toc_reorder": "There was an error updating the TOC order. This list has been reset"
   }
 }
