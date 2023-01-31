@@ -6,7 +6,8 @@ import {
   setHoverStyle,
   textTruncate,
   respond,
-  fluidScale
+  fluidScale,
+  formInputMessage
 } from "theme/styles/mixins";
 
 export const ScrollContainer = styled.div`
@@ -109,4 +110,12 @@ export const DragHandle = styled.div`
   ${buttonUnstyled}
   cursor: grab;
   ${setHoverStyle()}
+`;
+
+export const Error = styled.span`
+  ${formInputMessage}
+  display: inline-block;
+  margin-block-end: 20px;
+  color: var(--error-color);
+  padding-inline: 0;
 `;

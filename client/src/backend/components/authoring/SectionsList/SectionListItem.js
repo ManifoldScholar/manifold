@@ -20,7 +20,8 @@ function SectionListItem(props) {
     isDragging,
     innerRef,
     confirm,
-    refresh
+    refresh,
+    setError
   } = props;
 
   const { t } = useTranslation();
@@ -30,10 +31,11 @@ function SectionListItem(props) {
   const updateText = useApiCallback(textsAPI.update);
 
   const onSetStart = async id => {
-    await updateText(textId, {
+    setError(null);
+    const res = await updateText(textId, {
       attributes: { startTextSectionId: id }
     });
-    // TODO: add error handling
+    if (res?.errors) setError(res.errors);
   };
 
   const isStart = startSectionId === section.id;
@@ -41,7 +43,9 @@ function SectionListItem(props) {
   const deleteSection = useApiCallback(sectionsAPI.destroy);
 
   const doDelete = async () => {
-    await deleteSection(section.id);
+    setError(null);
+    const res = await deleteSection(section.id);
+    if (res?.errors) setError(res.errors);
     refresh();
   };
 

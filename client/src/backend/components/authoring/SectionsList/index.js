@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import EntitiesList from "backend/components/list/EntitiesList";
 import Section from "./SectionListItem";
 import { sectionsAPI } from "api";
 import { useApiCallback } from "hooks";
+import { useTranslation } from "react-i18next";
 
 export default function SectionsList({
   sections = [],
@@ -11,10 +12,23 @@ export default function SectionsList({
   startSectionId,
   refresh
 }) {
+  const { t } = useTranslation();
   const updateSection = useApiCallback(sectionsAPI.update);
+  const [error, setError] = useState(null);
+
+  /* eslint-disable no-nested-ternary */
+  const errorMessage =
+    error === "reorder"
+      ? t("errors.section_reorder")
+      : Array.isArray(error)
+      ? error.map(e => e.detail).join(". ")
+      : error;
+  /* eslint-disable no-nested-ternary */
 
   const onReorder = async ({ id, position }) => {
-    await updateSection(id, { attributes: { position } });
+    setError(null);
+    const res = await updateSection(id, { attributes: { position } });
+    if (res?.errors) setError("reorder");
     refresh();
   };
 
@@ -23,9 +37,10 @@ export default function SectionsList({
       <EntitiesList
         entities={sections}
         entityComponent={Section}
-        entityComponentProps={{ startSectionId, textId, refresh }}
+        entityComponentProps={{ startSectionId, textId, refresh, setError }}
         listStyle="bare"
         callbacks={{ onReorder }}
+        error={errorMessage}
       />
     </div>
   ) : null;

@@ -13,6 +13,7 @@ import isFunction from "lodash/isFunction";
 import isBoolean from "lodash/isBoolean";
 import isNil from "lodash/isNil";
 import { UIDConsumer } from "react-uid";
+import * as Styled from "./styles";
 
 export default class ListEntities extends PureComponent {
   static displayName = "List.Entities.List";
@@ -99,7 +100,8 @@ export default class ListEntities extends PureComponent {
         singular: PropTypes.string,
         plural: PropTypes.string
       })
-    ])
+    ]),
+    error: PropTypes.string
   };
 
   static defaultProps = {
@@ -279,6 +281,9 @@ export default class ListEntities extends PureComponent {
                     />
                   )}
                 </div>
+              )}
+              {this.props.error && (
+                <Styled.Error>{this.props.error}</Styled.Error>
               )}
               {!this.isSortable && (
                 <Entities
