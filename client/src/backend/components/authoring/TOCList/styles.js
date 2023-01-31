@@ -25,7 +25,9 @@ export const TitleWrapper = styled.div`
   align-items: center;
   gap: 12px;
   color: var(--color-neutral-text-extra-light);
-  max-width: ${fluidScale("90%", "55%", 90, 35)};
+  max-width: 55%;
+
+  ${respond(`max-width: ${fluidScale("650px", "250px", 120, 65)};`, 65)}
 `;
 
 export const ChildLink = styled.div`

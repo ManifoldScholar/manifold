@@ -201,7 +201,7 @@ export class TextWrapperContainer extends PureComponent {
     const secondaryLinks = navigation.text(text);
 
     return (
-      <div>
+      <>
         <Authorize
           entity={text}
           failureFatalError={{
@@ -237,7 +237,7 @@ export class TextWrapperContainer extends PureComponent {
             <div>{this.renderRoutes()}</div>
           </Layout.BackendPanel>
         </Authorize>
-      </div>
+      </>
     );
   }
 }
