@@ -1,5 +1,20 @@
-const formatTreeItem = (entry, parentId) => {
+const nodeToUids = n => {
+  if (!n) return undefined;
+  return [n.uid, n.children?.map(nodeToUids)];
+};
+
+const getFinalParentChildren = children => {
+  return children
+    .map(nodeToUids)
+    .flat(100)
+    .filter(Boolean);
+};
+
+const formatTreeItem = (entry, parentId, depth = 1, finalParent) => {
   if (!entry) return undefined;
+
+  const setFinalParent = depth === 9 ? entry.uid : null;
+
   if (!entry.children) {
     return {
       id: entry.uid,
@@ -12,17 +27,25 @@ const formatTreeItem = (entry, parentId) => {
         sectionId: entry.id,
         title: entry.label,
         anchor: entry.anchor,
-        parentId
+        parentId: finalParent ?? parentId,
+        isValidParent: !finalParent
       }
     };
   }
+
+  /* eslint-disable no-nested-ternary */
+  const children = setFinalParent
+    ? getFinalParentChildren(entry.children)
+    : !finalParent
+    ? entry.children.map(c => (c ? c.uid : undefined)).filter(Boolean)
+    : [];
+  /* eslint-disable no-nested-ternary */
+
   return [
     {
       id: entry.uid,
-      hasChildren: true,
-      children: entry.children
-        .map(c => (c ? c.uid : undefined))
-        .filter(Boolean),
+      hasChildren: !finalParent,
+      children,
       isExpanded: true,
       isChildrenLoading: false,
       data: {
@@ -30,10 +53,15 @@ const formatTreeItem = (entry, parentId) => {
         sectionId: entry.id,
         title: entry.label,
         anchor: entry.anchor,
-        parentId
+        parentId: finalParent ?? parentId,
+        isValidParent: !finalParent
       }
     },
-    entry.children.map(c => formatTreeItem(c, entry.uid)).filter(Boolean)
+    entry.children
+      .map(c =>
+        formatTreeItem(c, entry.uid, depth + 1, finalParent ?? setFinalParent)
+      )
+      .filter(Boolean)
   ];
 };
 
@@ -42,10 +70,11 @@ export const formatTreeData = toc => {
 
   const rootChildren = toc.map(e => e.uid);
   const entries = toc.map(e => formatTreeItem(e, "root")).filter(Boolean);
-  const flatEntries = entries.flat(10);
+  const flatEntries = entries.flat(100);
   const asObj = flatEntries.reduce((obj, e) => {
     return { ...obj, [e.id]: e };
   }, {});
+
   return {
     rootId: "root",
     items: {
@@ -56,7 +85,8 @@ export const formatTreeData = toc => {
         isExpanded: true,
         isChildrenLoading: false,
         data: {
-          title: "root"
+          title: "root",
+          isValidParent: true
         }
       },
       ...asObj
@@ -108,6 +138,14 @@ export const getRootParentPosition = (id, treeItems) => {
     return rootChildren.indexOf(id);
   }
   return getRootParentPosition(parent, treeItems);
+};
+
+export const isValidParent = (id, treeItems) => {
+  return treeItems[id].data.isValidParent;
+};
+
+export const getParentId = (id, treeItems) => {
+  return treeItems[id].data.parentId;
 };
 
 const removeKey = (k, { [k]: _, ...o }) => o;
