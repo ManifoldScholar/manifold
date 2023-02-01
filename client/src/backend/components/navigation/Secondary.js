@@ -1,58 +1,48 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
-
-import BlurOnLocationChange from "hoc/BlurOnLocationChange";
 import Authorize from "hoc/Authorize";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-export class NavigationSecondary extends Component {
-  static displayName = "Navigation.Secondary";
+export default function NavigationSecondary(props) {
+  const { ariaLabel, links, panel } = props;
+  const { t } = useTranslation();
 
-  static propTypes = {
-    links: PropTypes.array,
-    location: PropTypes.object,
-    panel: PropTypes.bool,
-    ariaLabel: PropTypes.string,
-    t: PropTypes.func
-  };
-
-  pathForLink(link) {
+  const pathForLink = link => {
     const args = link.args || [];
     return lh.link(link.route, ...args);
-  }
+  };
 
-  renderItem(link) {
+  const renderItem = link => {
     return (
       <li key={link.route}>
-        <NavLink to={this.pathForLink(link)} activeClassName="active">
-          {this.props.t(link.label)}
+        <NavLink to={pathForLink(link)} activeClassName="active">
+          {t(link.label)}
         </NavLink>
       </li>
     );
-  }
+  };
 
-  ariaLabel() {
-    if (this.props.ariaLabel) {
-      return this.props.ariaLabel;
+  const getAriaLabel = () => {
+    if (ariaLabel) {
+      return ariaLabel;
     } else {
-      return this.props.t("navigation.secondary");
+      return t("navigation.secondary");
     }
-  }
+  };
 
-  renderContents(props) {
+  const renderContents = () => {
     const navClasses = classnames({
       "secondary-nav": true,
-      "panel-nav": props.panel
+      "panel-nav": panel
     });
 
     return (
-      <nav className={navClasses} aria-label={this.ariaLabel()}>
+      <nav className={navClasses} aria-label={getAriaLabel()}>
         <ul>
-          {this.props.links.map(link => {
+          {links.map(link => {
             if (link.ability)
               return (
                 <Authorize
@@ -60,32 +50,32 @@ export class NavigationSecondary extends Component {
                   entity={link.entity}
                   ability={link.ability}
                 >
-                  {this.renderItem(link)}
+                  {renderItem(link)}
                 </Authorize>
               );
-            return this.renderItem(link);
+            return renderItem(link);
           })}
         </ul>
       </nav>
     );
-  }
+  };
 
-  renderPanel(props) {
-    return <aside className="aside">{this.renderContents(props)}</aside>;
-  }
+  const renderPanel = () => {
+    return <aside className="aside">{renderContents(props)}</aside>;
+  };
 
-  renderNav(props) {
-    if (props.panel) return this.renderPanel(props);
-    return this.renderContents(props);
-  }
+  const renderNav = () => {
+    if (panel) return renderPanel(props);
+    return renderContents(props);
+  };
 
-  render() {
-    return (
-      <BlurOnLocationChange location={this.props.location}>
-        {this.renderNav(this.props)}
-      </BlurOnLocationChange>
-    );
-  }
+  return renderNav();
 }
 
-export default withTranslation()(withRouter(NavigationSecondary));
+NavigationSecondary.displayName = "Navigation.Secondary";
+
+NavigationSecondary.propTypes = {
+  links: PropTypes.array,
+  panel: PropTypes.bool,
+  ariaLabel: PropTypes.string
+};

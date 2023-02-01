@@ -65,12 +65,12 @@ class ManifoldContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.gaInitialized = false;
-    this.skipLinkRef = React.createRef();
   }
 
   componentDidUpdate(prevProps, prevStateIgnored) {
     if (this.routeChanged(prevProps.location, this.props.location)) {
-      if (this.skipLinkRef.current) this.skipLinkRef.current.focus();
+      const activeEl = document.activeElement;
+      if (activeEl) activeEl.blur();
       this.dispatchRouteUpdate();
       if (this.routeStateRequestsLogin) this.maybeShowLogin();
     }
@@ -181,7 +181,7 @@ class ManifoldContainer extends PureComponent {
 
     return (
       <div role="presentation" className="global-container">
-        <Utility.SkipLink ref={this.skipLinkRef} />
+        <Utility.SkipLink />
         <div id="global-notification-container" />
         <div id="global-overlay-container" />
         <FrontendModeContext.Provider value={this.props.frontendMode}>
