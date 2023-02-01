@@ -56,8 +56,14 @@ RSpec.describe Annotations::AdoptOrOrphan do
         TEXT
       )
       Annotations::AdoptOrOrphan.run annotation: annotation
+
+      first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
+      last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
+
       expect(annotation.start_node).to eq "d1603a807fc4e475f1d55ff989743a9239f26ed9"
       expect(annotation.end_node).to eq "d1603a807fc4e475f1d55ff989743a9239f26ed9"
+      expect(first_char).to eq "W"
+      expect(last_char).to eq "."
     end
 
     it "places an orphaned annotation when the text spans two nodes" do
@@ -67,8 +73,14 @@ RSpec.describe Annotations::AdoptOrOrphan do
         subject: "bell pepper artichoke.    \n Nori grape silver beet broccoli kombu"
       )
       Annotations::AdoptOrOrphan.run annotation: annotation
+
+      first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
+      last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
+
       expect(annotation.start_node).to eq "d1603a807fc4e475f1d55ff989743a9239f26ed9"
       expect(annotation.end_node).to eq "731817dbf0b8c6d334ae40d53a4c2805c8b27c12"
+      expect(first_char).to eq "b"
+      expect(last_char).to eq "u"
     end
 
     it "does not place an annotation when placement is ambiguous" do
@@ -132,11 +144,17 @@ RSpec.describe Annotations::AdoptOrOrphan do
       end
 
       it "has the correct start char" do
+        first_char = first_char_as_string(annotation: @annotation, json: text_section.body_json)
+
         expect(@annotation.start_char).to eq 1
+        expect(first_char).to eq "t"
       end
 
       it "has the correct end char" do
+        last_char = last_char_as_string(annotation: @annotation, json: text_section.body_json)
+
         expect(@annotation.end_char).to eq 5
+        expect(last_char).to eq ","
       end
     end
 
@@ -148,9 +166,15 @@ RSpec.describe Annotations::AdoptOrOrphan do
                                            text_section: text_section,
                                            start_node: "B",
                                            end_node: "C",
-                                           subject: "One, two, blue, three, four, ")
+                                           subject: "One, two, blue, three, four,") #client trims subjects, so removing ending space here
             Annotations::AdoptOrOrphan.run annotation: annotation
+
+            first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
+            last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
+
             expect(annotation.attributes.slice("start_node", "end_node").values).to eq %w(B C)
+            expect(first_char).to eq "O"
+            expect(last_char).to eq ","
             expect(annotation.orphaned).to be false
           end
 
@@ -164,7 +188,13 @@ RSpec.describe Annotations::AdoptOrOrphan do
                                              end_char: "15",
                                              subject: "blue")
               Annotations::AdoptOrOrphan.run annotation: annotation
+
+              first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
+              last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
+
               expect(annotation.attributes.slice("start_node", "end_node").values).to eq %w(D D)
+              expect(first_char).to eq "b"
+              expect(last_char).to eq "e"
               expect(annotation.orphaned).to be false
             end
           end
@@ -245,7 +275,93 @@ RSpec.describe Annotations::AdoptOrOrphan do
 
     it "adopts it correctly" do
       Annotations::AdoptOrOrphan.run annotation: annotation
+
+      first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
+      last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
+
       expect(annotation.attributes.slice("start_node", "end_node").values).to eq %w(a a)
+      expect(first_char).to eq "b"
+      expect(last_char).to eq "f"
     end
+  end
+
+  context "when a subject contains whitespace added by the client" do
+    # markup: <p>a paragraph</p><p>another paragraph</p>
+    let!(:body_json) do
+      one = {
+        "content" => "a paragraph",
+        "node_type" => "text",
+        "node_uuid" => "one",
+      }
+      two = {
+        "content" => "another paragraph",
+        "node_type" => "text",
+        "node_uuid" => "two",
+      }
+      {
+        "tag" => "div",
+        "children" => [{
+            "tag" => "div",
+            "children" => [one],
+            "node_type": "element"
+          },
+          {
+            "tag" => "div",
+            "children" => [two],
+            "node_type": "element"
+          }],
+        "node_type": "element"
+      }
+    end
+
+    let!(:text_section) do
+      FactoryBot.create(:text_section, body_json: body_json)
+    end
+
+    let!(:annotation) do
+      FactoryBot.create(
+        :annotation,
+        start_node: "one",
+        end_node: "two",
+        text_section: text_section,
+        subject: "paragraph\nanother"
+      )
+    end
+
+    it "does not orphan the annotaton" do
+      Annotations::AdoptOrOrphan.run annotation: annotation
+
+      expect(annotation.orphaned).to eq false
+    end
+  end
+
+  private
+
+  def find_node_by_uuid(node:, uuid:)
+    return node if node[:node_uuid] == uuid
+
+    if node[:children].present?
+      node[:children].find { |child| find_node_by_uuid(node: child, uuid: uuid) }
+    else
+      nil
+    end
+  end
+
+  def first_char_as_string(annotation:, json:)
+    start_node = json[:children].map { |n| find_node_by_uuid(node: n, uuid: annotation.start_node) }.find { |n| !n.nil? }
+    start_node_text = start_node[:content]
+    start_index = annotation.start_char - 1
+    first_char = start_node_text[start_index]
+
+    first_char
+  end
+
+  def last_char_as_string(annotation:, json:)
+    end_node = json[:children].map { |n| find_node_by_uuid(node: n, uuid: annotation.end_node) }.find { |n| !n.nil? }
+    end_node_text = end_node[:content]
+    end_index = annotation.end_char - 1
+    last_char = end_node_text[end_index]
+
+    last_char
   end
 end
