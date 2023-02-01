@@ -1,102 +1,90 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
-import { withRouter, matchPath } from "react-router-dom";
+import { matchPath, useLocation } from "react-router-dom";
 import classnames from "classnames";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
-
-import BlurOnLocationChange from "hoc/BlurOnLocationChange";
 import Authorize from "hoc/Authorize";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-export class NavigationDropdown extends Component {
-  static displayName = "Navigation.Dropdown";
+export default function NavigationDropdown({ links, classNames }) {
+  const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
 
-  static propTypes = {
-    links: PropTypes.array,
-    classNames: PropTypes.string,
-    location: PropTypes.object,
-    t: PropTypes.func
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = { open: false };
-  }
-
-  get currentLabel() {
-    const selected = this.visitLinks(this.props.links);
-    if (!selected) return "";
-    return selected.headerLabel || this.props.t(selected.label);
-  }
-
-  visitLinks(links) {
+  const visitLinks = () => {
     const activeLink = links.find(link => {
       const route = lh.routeFromName(link.route);
-      return matchPath(this.props.location.pathname, route) !== null;
+      return matchPath(pathname, route) !== null;
     });
     if (activeLink && activeLink.children) {
-      return this.visitLinks(activeLink.children);
+      return visitLinks(activeLink.children);
     }
     return activeLink;
-  }
-
-  toggleOpen = () => {
-    this.setState({ open: !this.state.open });
   };
 
-  close = () => {
-    this.setState({ open: false });
+  const getCurrentLabel = () => {
+    const selected = visitLinks(links);
+    if (!selected) return "";
+    return selected.headerLabel || t(selected.label);
   };
 
-  pathForLink(link) {
+  const toggleOpen = () => {
+    setOpen(!open);
+  };
+
+  const close = () => {
+    setOpen(false);
+  };
+
+  const pathForLink = link => {
     const args = link.args || [];
     return lh.link(link.route, ...args);
-  }
+  };
 
-  renderItem(link) {
+  const renderItem = link => {
     return (
       <li key={link.route} className="dropdown-nav__nav-item">
         <NavLink
-          onClick={this.close}
-          to={this.pathForLink(link)}
+          onClick={close}
+          to={pathForLink(link)}
           className="dropdown-nav__link"
           activeClassName="dropdown-nav__link--active"
         >
-          {this.props.t(link.label)}
+          {t(link.label)}
         </NavLink>
       </li>
     );
-  }
+  };
 
-  getSelected() {
+  const getSelected = () => {
     // this was refactored out at some point. TODO: Circle back.
     return null;
-  }
+  };
 
-  renderStatic(props) {
-    const selected = this.getSelected(props);
-    const label = selected ? selected.label : this.props.t("navigation.menu");
+  const renderStatic = () => {
+    const selected = getSelected();
+    const label = selected ? selected.label : t("navigation.menu");
 
     return (
-      <nav className={`dropdown-nav dropdown-nav--static ${props.classNames}`}>
+      <nav className={`dropdown-nav dropdown-nav--static ${classNames}`}>
         <div className="dropdown-nav__selected">{label}</div>
       </nav>
     );
-  }
+  };
 
-  renderMenu(props) {
+  const renderMenu = () => {
     const navClasses = classnames({
       "dropdown-nav": true,
-      "dropdown-nav--open": this.state.open
+      "dropdown-nav--open": open
     });
 
     return (
-      <nav className={`${navClasses} ${this.props.classNames}`}>
-        <button className="dropdown-nav__trigger" onClick={this.toggleOpen}>
+      <nav className={`${navClasses} ${classNames}`}>
+        <button className="dropdown-nav__trigger" onClick={toggleOpen}>
           <div className="dropdown-nav__selected">
-            {this.currentLabel}
+            {getCurrentLabel()}
             <IconComposer
               icon="disclosureDown16"
               size="default"
@@ -105,7 +93,7 @@ export class NavigationDropdown extends Component {
           </div>
         </button>
         <ul className="dropdown-nav__nav-list">
-          {props.links.map(link => {
+          {links.map(link => {
             if (link.ability)
               return (
                 <Authorize
@@ -113,25 +101,22 @@ export class NavigationDropdown extends Component {
                   entity={link.entity}
                   ability={link.ability}
                 >
-                  {this.renderItem(link)}
+                  {renderItem(link)}
                 </Authorize>
               );
-            return this.renderItem(link);
+            return renderItem(link);
           })}
         </ul>
       </nav>
     );
-  }
+  };
 
-  render() {
-    return (
-      <BlurOnLocationChange location={this.props.location}>
-        {this.props.links.length > 1
-          ? this.renderMenu(this.props)
-          : this.renderStatic(this.props)}
-      </BlurOnLocationChange>
-    );
-  }
+  return links.length > 1 ? renderMenu() : renderStatic();
 }
 
-export default withTranslation()(withRouter(NavigationDropdown));
+NavigationDropdown.displayName = "Navigation.Dropdown";
+
+NavigationDropdown.propTypes = {
+  links: PropTypes.array,
+  classNames: PropTypes.string
+};

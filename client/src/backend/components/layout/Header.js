@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
@@ -7,59 +7,52 @@ import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Utility from "global/components/utility";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
+import { useTranslation } from "react-i18next";
 
-import BlurOnLocationChange from "hoc/BlurOnLocationChange";
-import { withTranslation } from "react-i18next";
+export default function LayoutHeader({
+  commonActions,
+  authentication,
+  visibility
+}) {
+  const { t } = useTranslation();
 
-class LayoutHeader extends Component {
-  static displayName = "Layout.Header";
+  const links = navigation.backend();
 
-  static propTypes = {
-    visibility: PropTypes.object,
-    location: PropTypes.object,
-    match: PropTypes.object,
-    authentication: PropTypes.object,
-    commonActions: PropTypes.object,
-    t: PropTypes.func
-  };
-
-  render() {
-    const links = navigation.backend();
-
-    return (
-      <BlurOnLocationChange
-        tag="header"
-        className="header-app header-app--sticky"
-        location={this.props.location}
+  return (
+    <header className="header-app header-app--sticky">
+      <Utility.SetCSSProperty
+        measurement="height"
+        propertyName="--library-header-height"
       >
-        <Utility.SetCSSProperty
-          measurement="height"
-          propertyName="--library-header-height"
-        >
-          <div className="library-header library-header--dark">
-            <div className="library-header__inner">
-              <HeaderLogo as="Link" to={lh.link("backend")}>
-                <span className="screen-reader-text">
-                  {this.props.t("navigation.return_home")}
-                </span>
-                <PressLogo aria-hidden="true" />
-              </HeaderLogo>
-              <Navigation.Primary
-                links={links}
-                commonActions={this.props.commonActions}
-                authentication={this.props.authentication}
-                visibility={this.props.visibility}
-                mode="backend"
-                darkTheme
-              />
-            </div>
+        <div className="library-header library-header--dark">
+          <div className="library-header__inner">
+            <HeaderLogo as="Link" to={lh.link("backend")}>
+              <span className="screen-reader-text">
+                {t("navigation.return_home")}
+              </span>
+              <PressLogo aria-hidden="true" />
+            </HeaderLogo>
+            <Navigation.Primary
+              links={links}
+              commonActions={commonActions}
+              authentication={authentication}
+              visibility={visibility}
+              mode="backend"
+              darkTheme
+            />
           </div>
-          <div className="header-border" />
-        </Utility.SetCSSProperty>
-        <HeaderNotifications scope="global" />
-      </BlurOnLocationChange>
-    );
-  }
+        </div>
+        <div className="header-border" />
+      </Utility.SetCSSProperty>
+      <HeaderNotifications scope="global" />
+    </header>
+  );
 }
 
-export default withTranslation()(LayoutHeader);
+LayoutHeader.displayName = "Layout.Header";
+
+LayoutHeader.propTypes = {
+  visibility: PropTypes.object,
+  authentication: PropTypes.object,
+  commonActions: PropTypes.object
+};
