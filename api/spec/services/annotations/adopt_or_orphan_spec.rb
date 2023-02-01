@@ -286,15 +286,15 @@ RSpec.describe Annotations::AdoptOrOrphan do
   end
 
   context "when a subject contains whitespace added by the client" do
-    # markup: <p>a paragraph</p><p>another paragraph</p>
+    # markup: <p>a paragraph paragraph</p><p>another another paragraph</p>
     let!(:body_json) do
       one = {
-        "content" => "a paragraph",
+        "content" => "a a paragraph",
         "node_type" => "text",
         "node_uuid" => "one",
       }
       two = {
-        "content" => "another paragraph",
+        "content" => "another another paragraph",
         "node_type" => "text",
         "node_uuid" => "two",
       }
@@ -324,14 +324,20 @@ RSpec.describe Annotations::AdoptOrOrphan do
         start_node: "one",
         end_node: "two",
         text_section: text_section,
-        subject: "paragraph\nanother"
-      )
-    end
+        subject: "paragraph\n\nanother"
+      )    end
 
     it "does not orphan the annotaton" do
       Annotations::AdoptOrOrphan.run annotation: annotation
 
+      first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
+      last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
+
       expect(annotation.orphaned).to eq false
+      expect(annotation.start_char).to eq 5
+      expect(annotation.end_char).to eq 7
+      expect(first_char).to eq "p"
+      expect(last_char).to eq "r"
     end
   end
 
