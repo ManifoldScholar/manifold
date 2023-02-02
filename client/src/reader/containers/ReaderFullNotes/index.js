@@ -41,17 +41,17 @@ function ReaderFullNotesContainer({
 }) {
   const initialFilters = useMemo(() => {
     return {
-      orphaned: false,
+      orphaned: !!(currentGroupId === "orphaned"),
       text: text?.id,
       formats: [...INITIAL_FORMATS],
       ...INITIAL_VISIBLE_FILTER_STATE
     };
-  }, [text]);
+  }, [text, currentGroupId]);
 
   const [pagination, setPageNumber] = usePaginationState();
   const [filters, setFilters] = useFilterState(initialFilters);
 
-  const me = currentGroupId === "me";
+  const me = currentGroupId === "me" || currentGroupId === "orphaned";
   const endpoint = me ? meAPI.annotations : readingGroupsAPI.annotations;
   const args = me
     ? [filters, pagination]
@@ -62,7 +62,7 @@ function ReaderFullNotesContainer({
 
   const commonActions = commonActionsHelper(dispatch);
   const readingGroup =
-    readingGroups.find(group => group.id === currentGroupId) || "me";
+    readingGroups.find(group => group.id === currentGroupId) || currentGroupId;
 
   function mapAnnotationsToSections() {
     const annotationGroups = groupBy(annotations, "attributes.textSectionId");
@@ -95,24 +95,33 @@ function ReaderFullNotesContainer({
   }
 
   function getMemberships() {
-    if (readingGroup === "me") return [];
+    if (readingGroup === "me" || readingGroup === "orphaned") return [];
     const rgms = readingGroup.relationships.readingGroupMemberships;
     return rgms?.length ? rgms : [];
   }
 
   const { t } = useTranslation();
 
+  /* eslint-disable no-nested-ternary */
   function getOverlayPropsForGroup() {
     return {
       title:
         readingGroup === "me"
           ? t("reader.menus.notes.my_notes")
+          : readingGroup === "orphaned"
+          ? t("reader.menus.notes.orphaned_notes")
           : readingGroup.attributes.name,
       subtitle:
-        readingGroup === "me" ? null : t("reader.menus.notes.all_notes"),
-      icon: readingGroup === "me" ? "notes24" : "readingGroup24"
+        readingGroup === "me" || readingGroup === "orphaned"
+          ? null
+          : t("reader.menus.notes.all_notes"),
+      icon:
+        readingGroup === "me" || readingGroup === "orphaned"
+          ? "notes24"
+          : "readingGroup24"
     };
   }
+  /* eslint-enable no-nested-ternary */
 
   const memberships = getMemberships();
   const sections = text.attributes.sectionsMap?.length

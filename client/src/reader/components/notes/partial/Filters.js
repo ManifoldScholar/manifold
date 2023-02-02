@@ -25,7 +25,7 @@ class Filters extends Component {
     } else {
       formatsFilter.push(format);
     }
-    this.props.filterChangeHandler("formats", formatsFilter);
+    this.props.filterChangeHandler({ formats: formatsFilter });
   };
 
   renderCheckBox(label, format) {

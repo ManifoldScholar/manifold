@@ -34,7 +34,12 @@ class GroupFilter extends Component {
   }
 
   handleFilterChange = ({ target: { value } }) => {
-    this.props.filterChangeHandler("readingGroup", value);
+    if (value === "orphaned") {
+      this.props.filterChangeHandler({ orphaned: true, readingGroup: "me" });
+      this.props.setAnnotationOverlayReadingGroup("orphaned");
+      return;
+    }
+    this.props.filterChangeHandler({ orphaned: false, readingGroup: value });
     this.props.setAnnotationOverlayReadingGroup(value);
   };
 
@@ -46,6 +51,10 @@ class GroupFilter extends Component {
         {
           label: this.props.t("reader.menus.notes.my_notes"),
           value: "me"
+        },
+        {
+          label: this.props.t("reader.menus.notes.orphaned_notes"),
+          value: "orphaned"
         },
         ...this.groupOptions
       ],
