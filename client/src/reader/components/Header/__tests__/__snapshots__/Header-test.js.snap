@@ -1,588 +1,308 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Reader.Header Component matches the snapshot 1`] = `
-<Header
-  appearance={
-    Object {
-      "colors": Object {
-        "colorScheme": "light",
-      },
-      "readingGroups": Object {
-        "currentAnnotatingReadingGroup": "public",
-        "currentAnnotationOverlayReadingGroup": "me",
-      },
-      "typography": Object {
-        "font": "serif",
-        "fontSize": Object {
-          "current": 3,
-          "max": 6,
-          "min": 0,
-        },
-        "margins": Object {
-          "current": 1,
-          "max": 4,
-          "min": 0,
-        },
-      },
-    }
-  }
-  commonActions={
-    Object {
-      "addNotification": [Function],
-      "clearNotifications": [Function],
-      "closeSignInUpOverlay": [Function],
-      "hideAppearancePanel": [Function],
-      "hideNotesPanel": [Function],
-      "hideReaderReturnPanel": [Function],
-      "hideSearchPanel": [Function],
-      "hideUserPanel": [Function],
-      "hideVisibilityPanel": [Function],
-      "logout": [Function],
-      "panelHide": [Function],
-      "panelShow": [Function],
-      "panelToggle": [Function],
-      "removeNotification": [Function],
-      "showMyNotes": [Function],
-      "toggleSearchPanel": [Function],
-      "toggleSignInUpOverlay": [Function],
-      "toggleUserPanel": [Function],
-      "visibilityChange": [Function],
-      "visibilityHide": [Function],
-      "visibilityShow": [Function],
-      "visibilityToggle": [Function],
-    }
-  }
-  i18n={
-    Object {
-      "language": "en-US",
-      "languages": Array [
-        "en-US",
-        "en",
-      ],
-      "options": Object {
-        "appendNamespaceToCIMode": false,
-        "appendNamespaceToMissingKey": false,
-        "contextSeparator": "_",
-        "debug": false,
-        "defaultNS": Array [
-          "translation",
-        ],
-        "fallbackLng": Array [
-          "en-US",
-        ],
-        "fallbackNS": false,
-        "ignoreJSONStructure": true,
-        "initImmediate": true,
-        "interpolation": Object {
-          "escapeValue": true,
-          "format": [Function],
-          "formatSeparator": ",",
-          "maxReplaces": 1000,
-          "nestingOptionsSeparator": ",",
-          "nestingPrefix": "$t(",
-          "nestingSuffix": ")",
-          "prefix": "{{",
-          "skipOnVariables": true,
-          "suffix": "}}",
-          "unescapePrefix": "-",
-        },
-        "joinArrays": false,
-        "keySeparator": ".",
-        "lng": "en-US",
-        "load": "all",
-        "missingInterpolationHandler": false,
-        "missingKeyHandler": false,
-        "nonExplicitSupportedLngs": false,
-        "ns": Array [
-          "translation",
-        ],
-        "nsSeparator": ":",
-        "overloadTranslationOptionHandler": [Function],
-        "parseMissingKeyHandler": false,
-        "partialBundledLanguages": false,
-        "pluralSeparator": "_",
-        "postProcess": false,
-        "postProcessPassResolved": false,
-        "preload": false,
-        "resources": Object {
-          "en-US": Object {
-            "translation": Object {
-              "dashboard": Object {
-                "reader_stats": "Readers this week",
-                "stats_change": "Change from last week",
-              },
-              "date_fns": null,
-              "forms": Object {
-                "upload": Object {
-                  "image_preview": "<0></0><br/><1></1>",
-                },
-              },
-            },
-          },
-        },
-        "returnEmptyString": true,
-        "returnNull": true,
-        "returnObjects": false,
-        "returnedObjectHandler": false,
-        "saveMissing": false,
-        "saveMissingPlurals": true,
-        "saveMissingTo": "fallback",
-        "simplifyPluralSuffix": true,
-        "supportedLngs": false,
-        "updateMissing": false,
-      },
-      "resolvedLanguage": "en-US",
-      "store": Object {
-        "en-US": Object {
-          "translation": Object {
-            "dashboard": Object {
-              "reader_stats": "Readers this week",
-              "stats_change": "Change from last week",
-            },
-            "date_fns": null,
-            "forms": Object {
-              "upload": Object {
-                "image_preview": "<0></0><br/><1></1>",
-              },
-            },
-          },
-        },
-      },
-    }
-  }
-  notifications={
-    Object {
-      "notifications": Array [],
-    }
-  }
-  t={[Function]}
-  tReady={true}
-  text={
-    Object {
-      "attributes": Object {
-        "abilities": Object {
-          "create": true,
-          "createEntitlements": true,
-          "createPermissions": true,
-          "createResourceCollections": true,
-          "createResources": true,
-          "createTexts": true,
-          "createTwitterQueries": true,
-          "delete": true,
-          "manageEntitlements": true,
-          "manageEvents": true,
-          "managePermissions": true,
-          "manageResourceCollections": true,
-          "manageResources": true,
-          "manageSocials": true,
-          "manageTexts": true,
-          "manageTwitterQueries": true,
-          "read": true,
-          "readDeleted": true,
-          "readDrafts": true,
-          "readLog": true,
-          "readSecrets": true,
-          "update": true,
-          "updateMakers": true,
-        },
-        "coverStyles": Object {},
-        "createdAt": "2017-04-24T23:25:50.161Z",
-        "creatorNames": "Andre3000, Big Boi",
-        "metadata": Object {
-          "abstract": "some-value",
-          "archive": "some-value",
-          "archiveLocation": "some-value",
-          "archivePlace": "some-value",
-          "authority": "some-value",
-          "callNumber": "some-value",
-          "chapterNumber": "some-value",
-          "collectionNumber": "some-value",
-          "collectionTitle": "some-value",
-          "containerTitle": "some-value",
-          "dimensions": "some-value",
-          "edition": "some-value",
-          "event": "some-value",
-          "eventPlace": "some-value",
-          "isbn": "some-value",
-          "issn": "some-value",
-          "issue": "some-value",
-          "jurisdiction": "some-value",
-          "medium": "some-value",
-          "number": "some-value",
-          "numberOfPages": "some-value",
-          "numberOfVolumes": "some-value",
-          "originalPublisher": "some-value",
-          "originalPublisherPlace": "some-value",
-          "originalTitle": "some-value",
-          "pmcid": "some-value",
-          "pmid": "some-value",
-          "publisher": "some-value",
-          "publisherPlace": "some-value",
-          "reviewedTitle": "some-value",
-          "section": "some-value",
-          "version": "some-value",
-          "volume": "some-value",
-          "yearSuffix": "some-value",
-        },
-        "metadataFormatted": Object {
-          "abstract": "some-value",
-          "archive": "some-value",
-          "archiveLocation": "some-value",
-          "archivePlace": "some-value",
-          "authority": "some-value",
-          "callNumber": "some-value",
-          "chapterNumber": "some-value",
-          "collectionNumber": "some-value",
-          "collectionTitle": "some-value",
-          "containerTitle": "some-value",
-          "dimensions": "some-value",
-          "edition": "some-value",
-          "event": "some-value",
-          "eventPlace": "some-value",
-          "isbn": "some-value",
-          "issn": "some-value",
-          "issue": "some-value",
-          "jurisdiction": "some-value",
-          "medium": "some-value",
-          "number": "some-value",
-          "numberOfPages": "some-value",
-          "numberOfVolumes": "some-value",
-          "originalPublisher": "some-value",
-          "originalPublisherPlace": "some-value",
-          "originalTitle": "some-value",
-          "pmcid": "some-value",
-          "pmid": "some-value",
-          "publisher": "some-value",
-          "publisherPlace": "some-value",
-          "reviewedTitle": "some-value",
-          "section": "some-value",
-          "version": "some-value",
-          "volume": "some-value",
-          "yearSuffix": "some-value",
-        },
-        "metadataProperties": Array [
-          "abstract",
-          "archive",
-          "archiveLocation",
-          "archivePlace",
-          "authority",
-          "callNumber",
-          "collectionTitle",
-          "containerTitle",
-          "dimensions",
-          "event",
-          "eventPlace",
-          "isbn",
-          "issn",
-          "jurisdiction",
-          "medium",
-          "originalPublisher",
-          "originalPublisherPlace",
-          "originalTitle",
-          "pmcid",
-          "pmid",
-          "publisher",
-          "publisherPlace",
-          "reviewedTitle",
-          "section",
-          "version",
-          "yearSuffix",
-          "chapterNumber",
-          "collectionNumber",
-          "edition",
-          "issue",
-          "number",
-          "numberOfPages",
-          "numberOfVolumes",
-          "volume",
-        ],
-        "publicationDate": "2001-12-04",
-        "published": true,
-        "rights": "All Rights Reserved",
-        "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-        "title": "Ain't No Thang",
-        "titleFormatted": "Ain't No Thang",
-        "titlePlaintext": "Ain't No Thang",
-        "toc": Array [
-          Object {
-            "anchor": "cvi",
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "label": "Cover",
-          },
-          Object {
-            "anchor": "bk",
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "label": "Title Page",
-          },
-          Object {
-            "anchor": "cip",
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "label": "Copyright Page",
-          },
-          Object {
-            "anchor": "toc",
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "label": "Contents",
-          },
-          Object {
-            "anchor": "ch01",
-            "children": Array [
+<header
+  className="reader-header"
+>
+  <Connect(withPluginReplacement('Reader.Layout.PreHeader)) />
+  <nav
+    className="reader-header__inner"
+  >
+    <div
+      className="reader-header__menu-group reader-header__menu-group--left"
+    >
+      <ReturnMenuButton
+        expanded={false}
+        toggleReaderMenu={[Function]}
+      />
+      <button
+        aria-expanded={false}
+        aria-haspopup={true}
+        className="reader-header__button reader-header__button--gray reader-header__button--pad-default"
+        onClick={[Function]}
+      >
+        <span
+          className="reader-header__button-text"
+        >
+          reader.header.contents
+        </span>
+        <IconComposer
+          className="reader-header__button-icon reader-header__button-icon--large"
+          fill="currentColor"
+          icon="disclosureDown24"
+          size="default"
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+        <IconComposer
+          className="reader-header__button-icon reader-header__button-icon--small"
+          fill="currentColor"
+          icon="disclosureDown16"
+          size={20}
+          svgProps={
+            Object {
+              "aria-hidden": true,
+            }
+          }
+        />
+      </button>
+    </div>
+    <div
+      className="reader-header__menu-group reader-header__menu-group--right"
+    >
+      <ul
+        aria-label="reader.header.reader_settings_search"
+        className="reader-header__nav-list"
+      >
+        <Connect(withRouter(AuthorizeComponent))
+          kind="any"
+        >
+          <li
+            className="reader-header__nav-item"
+          >
+            <ControlMenu.Button
+              active={false}
+              icon="notes24"
+              label="glossary.note_title_case_other"
+              onClick={[Function]}
+            />
+          </li>
+        </Connect(withRouter(AuthorizeComponent))>
+        <li
+          className="reader-header__nav-item"
+        >
+          <ControlMenu.Button
+            active={false}
+            icon="eyeball24"
+            label="common.visibility_title_case"
+            onClick={[Function]}
+          />
+        </li>
+        <li
+          className="reader-header__nav-item"
+        >
+          <ControlMenu.Button
+            active={false}
+            icon="text24"
+            label="reader.header.reader_appearance"
+            onClick={[Function]}
+          />
+        </li>
+        <li
+          className="reader-header__nav-item"
+        >
+          <withI18nextTranslation(SearchMenuButton)
+            active={false}
+            className="reader-header__button reader-header__button--pad-narrow"
+            iconSize={32}
+            toggleSearchMenu={[Function]}
+          />
+        </li>
+        <li
+          className="reader-header__nav-item"
+        >
+          <Global.Atomic.DisclosureNavigationMenu
+            callbacks={
               Object {
-                "anchor": "ch01sec01",
-                "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                "label": "Chapter 1 Section 1",
-              },
-              Object {
-                "anchor": "ch01sec02",
-                "children": Array [
-                  Object {
-                    "anchor": "ch01sec01subsec01",
-                    "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                    "label": "Chapter 1 Section 2 Subsection 1",
-                  },
-                ],
-                "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-                "label": "Chapter 1 Section 2",
-              },
-            ],
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "label": "Chapter 1",
+                "addNotification": [Function],
+                "clearNotifications": [Function],
+                "closeSignInUpOverlay": [Function],
+                "hideAppearancePanel": [Function],
+                "hideNotesPanel": [Function],
+                "hideReaderReturnPanel": [Function],
+                "hideSearchPanel": [Function],
+                "hideUserPanel": [Function],
+                "hideVisibilityPanel": [Function],
+                "logout": [Function],
+                "panelHide": [Function],
+                "panelShow": [Function],
+                "panelToggle": [Function],
+                "removeNotification": [Function],
+                "showMyNotes": [Function],
+                "toggleSearchPanel": [Function],
+                "toggleSignInUpOverlay": [Function],
+                "toggleUserPanel": [Function],
+                "visibilityChange": [Function],
+                "visibilityHide": [Function],
+                "visibilityShow": [Function],
+                "visibilityToggle": [Function],
+              }
+            }
+            context="reader"
+            disclosure={<ForwardRef />}
+            onBlur={[Function]}
+            visible={false}
+          >
+            <UserMenuBody />
+          </Global.Atomic.DisclosureNavigationMenu>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div
+    className="reader-header__panels reader-header__panels--left"
+  >
+    <Global.UIPanel
+      bodyComponent={[Function]}
+      hidePanel={[Function]}
+      id="readerReturn"
+      moreLink="https://manifoldapp.org/"
+      projectId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+      projectTitle="Rowan Test"
+      returnUrl="/projects/slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+      toggleSignInUpOverlay={[Function]}
+      visibility={
+        Object {
+          "appearance": false,
+          "layers": false,
+          "notes": false,
+          "readerReturn": false,
+          "search": false,
+          "tocDrawer": false,
+          "user": false,
+          "visibility": false,
+        }
+      }
+    />
+  </div>
+  <div
+    className="reader-header__panels reader-header__panels--right"
+  >
+    <Global.UIPanel
+      bodyComponent={[Function]}
+      hidePanel={[Function]}
+      history={History {}}
+      id="notes"
+      visibility={
+        Object {
+          "appearance": false,
+          "layers": false,
+          "notes": false,
+          "readerReturn": false,
+          "search": false,
+          "tocDrawer": false,
+          "user": false,
+          "visibility": false,
+        }
+      }
+      visible={false}
+    />
+    <Global.UIPanel
+      bodyComponent={[Function]}
+      filter={
+        Object {
+          "annotation": Object {
+            "others": true,
+            "yours": true,
           },
-        ],
-      },
-      "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-      "relationships": Object {
-        "category": Object {
-          "attributes": Object {
-            "position": 1,
-            "title": "Hip Hop Classics",
+          "highlight": Object {
+            "others": true,
+            "yours": true,
           },
-          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-          "relationships": Object {},
-          "type": "categories",
-        },
-        "project": Object {
-          "attributes": Object {
-            "abilities": Object {
-              "create": true,
-              "createEntitlements": true,
-              "createPermissions": true,
-              "createResourceCollections": true,
-              "createResources": true,
-              "createTexts": true,
-              "createTwitterQueries": true,
-              "delete": true,
-              "manageEntitlements": true,
-              "manageEvents": true,
-              "managePermissions": true,
-              "manageResourceCollections": true,
-              "manageResources": true,
-              "manageSocials": true,
-              "manageTexts": true,
-              "manageTwitterQueries": true,
-              "read": true,
-              "readDeleted": true,
-              "readDrafts": true,
-              "readLog": true,
-              "readSecrets": true,
-              "update": true,
-              "updateMakers": true,
-            },
-            "avatarColor": "primary",
-            "avatarMeta": Object {},
-            "avatarStyles": Object {},
-            "coverStyles": Object {},
-            "darkMode": false,
-            "description": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
-            "descriptionFormatted": "The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew.",
-            "downloadCallToAction": "Download the greatest dog",
-            "hashtag": "cute_dog",
-            "heroStyles": Object {},
-            "hideActivity": false,
-            "imageCreditsFormatted": "<p>Rowan, <em>The Dog</em></p>",
-            "metadata": Object {
-              "abstract": "some-value",
-              "archive": "some-value",
-              "archiveLocation": "some-value",
-              "archivePlace": "some-value",
-              "authority": "some-value",
-              "callNumber": "some-value",
-              "chapterNumber": "some-value",
-              "collectionNumber": "some-value",
-              "collectionTitle": "some-value",
-              "containerTitle": "some-value",
-              "dimensions": "some-value",
-              "edition": "some-value",
-              "event": "some-value",
-              "eventPlace": "some-value",
-              "isbn": "some-value",
-              "issn": "some-value",
-              "issue": "some-value",
-              "jurisdiction": "some-value",
-              "medium": "some-value",
-              "number": "some-value",
-              "numberOfPages": "some-value",
-              "numberOfVolumes": "some-value",
-              "originalPublisher": "some-value",
-              "originalPublisherPlace": "some-value",
-              "originalTitle": "some-value",
-              "pmcid": "some-value",
-              "pmid": "some-value",
-              "publisher": "some-value",
-              "publisherPlace": "some-value",
-              "reviewedTitle": "some-value",
-              "section": "some-value",
-              "version": "some-value",
-              "volume": "some-value",
-              "yearSuffix": "some-value",
-            },
-            "metadataFormatted": Object {
-              "abstract": "some-value",
-              "archive": "some-value",
-              "archiveLocation": "some-value",
-              "archivePlace": "some-value",
-              "authority": "some-value",
-              "callNumber": "some-value",
-              "chapterNumber": "some-value",
-              "collectionNumber": "some-value",
-              "collectionTitle": "some-value",
-              "containerTitle": "some-value",
-              "dimensions": "some-value",
-              "edition": "some-value",
-              "event": "some-value",
-              "eventPlace": "some-value",
-              "isbn": "some-value",
-              "issn": "some-value",
-              "issue": "some-value",
-              "jurisdiction": "some-value",
-              "medium": "some-value",
-              "number": "some-value",
-              "numberOfPages": "some-value",
-              "numberOfVolumes": "some-value",
-              "originalPublisher": "some-value",
-              "originalPublisherPlace": "some-value",
-              "originalTitle": "some-value",
-              "pmcid": "some-value",
-              "pmid": "some-value",
-              "publisher": "some-value",
-              "publisherPlace": "some-value",
-              "reviewedTitle": "some-value",
-              "section": "some-value",
-              "version": "some-value",
-              "volume": "some-value",
-              "yearSuffix": "some-value",
-            },
-            "metadataProperties": Array [
-              "abstract",
-              "archive",
-              "archiveLocation",
-              "archivePlace",
-              "authority",
-              "callNumber",
-              "collectionTitle",
-              "containerTitle",
-              "dimensions",
-              "event",
-              "eventPlace",
-              "isbn",
-              "issn",
-              "jurisdiction",
-              "medium",
-              "originalPublisher",
-              "originalPublisherPlace",
-              "originalTitle",
-              "pmcid",
-              "pmid",
-              "publisher",
-              "publisherPlace",
-              "reviewedTitle",
-              "section",
-              "version",
-              "yearSuffix",
-              "chapterNumber",
-              "collectionNumber",
-              "edition",
-              "issue",
-              "number",
-              "numberOfPages",
-              "numberOfVolumes",
-              "volume",
-            ],
-            "restrictedAccessBody": "Test body",
-            "restrictedAccessHeading": "Test heading",
-            "slug": "slug-AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "subtitle": "World's Greatest Dog",
-            "title": "Rowan Test",
-            "titleFormatted": "Rowan Test",
-            "titlePlaintext": "Rowan Test",
+          "readingGroups": Object {
+            "all": true,
           },
-          "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-          "relationships": Object {
-            "actionCallouts": Array [
-              "actionCallout",
-            ],
-            "makers": Array [
-              "maker",
-            ],
-            "resources": Array [
-              "resource",
-            ],
-            "texts": Array [
-              "text",
-            ],
+          "resource": Object {
+            "all": true,
           },
-          "type": "projects",
-        },
-        "stylesheets": Array [
-          Object {
-            "attributes": Object {
-              "name": "Slarmbo",
-              "position": 1,
-              "rawStyles": ".some-class { font-weight: bold }",
-              "styles": ".manifold-text-section .some-class { font-weight: bold }",
-            },
-            "id": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE",
-            "relationships": Object {
-              "text": null,
-            },
-            "type": "stylesheets",
+        }
+      }
+      filterChangeHandler={[Function]}
+      hidePanel={[Function]}
+      id="visibility"
+      visibility={
+        Object {
+          "appearance": false,
+          "layers": false,
+          "notes": false,
+          "readerReturn": false,
+          "search": false,
+          "tocDrawer": false,
+          "user": false,
+          "visibility": false,
+        }
+      }
+    />
+    <Global.UIPanel
+      bodyComponent={[Function]}
+      hidePanel={[Function]}
+      id="search"
+      initialState={
+        Object {
+          "keyword": "",
+          "scope": "text",
+        }
+      }
+      projectId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+      searchType="reader"
+      textId="AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE"
+      toggleVisibility={[Function]}
+      visibility={
+        Object {
+          "appearance": false,
+          "layers": false,
+          "notes": false,
+          "readerReturn": false,
+          "search": false,
+          "tocDrawer": false,
+          "user": false,
+          "visibility": false,
+        }
+      }
+    />
+    <Global.UIPanel
+      appearance={
+        Object {
+          "colors": Object {
+            "colorScheme": "light",
           },
-        ],
-      },
-      "type": "texts",
-    }
-  }
-  visibility={
-    Object {
-      "loginOverlay": false,
-      "uiPanels": Object {
-        "appearance": false,
-        "layers": false,
-        "notes": false,
-        "readerReturn": false,
-        "search": false,
-        "tocDrawer": false,
-        "user": false,
-        "visibility": false,
-      },
-      "userMenu": false,
-      "visibilityFilters": Object {
-        "annotation": Object {
-          "others": true,
-          "yours": true,
-        },
-        "highlight": Object {
-          "others": true,
-          "yours": true,
-        },
-        "readingGroups": Object {
-          "all": true,
-        },
-        "resource": Object {
-          "all": true,
-        },
-      },
-    }
-  }
-/>
+          "readingGroups": Object {
+            "currentAnnotatingReadingGroup": "public",
+            "currentAnnotationOverlayReadingGroup": "me",
+          },
+          "typography": Object {
+            "font": "serif",
+            "fontSize": Object {
+              "current": 3,
+              "max": 6,
+              "min": 0,
+            },
+            "margins": Object {
+              "current": 1,
+              "max": 4,
+              "min": 0,
+            },
+          },
+        }
+      }
+      bodyComponent={[Function]}
+      hidePanel={[Function]}
+      id="appearance"
+      visibility={
+        Object {
+          "appearance": false,
+          "layers": false,
+          "notes": false,
+          "readerReturn": false,
+          "search": false,
+          "tocDrawer": false,
+          "user": false,
+          "visibility": false,
+        }
+      }
+    />
+  </div>
+  <button
+    aria-hidden={true}
+    className="reader-header__button reader-header__button--pad-default reader-header__options-button"
+    onClick={[Function]}
+    tabIndex={-1}
+  >
+    glossary.option_title_case_other
+  </button>
+  <HeaderNotification />
+</header>
 `;

@@ -138,7 +138,6 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
           "notifications": Array [],
         }
       }
-      pages={Array []}
       settings={
         Object {
           "attributes": Object {

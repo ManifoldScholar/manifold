@@ -1158,12 +1158,14 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
                 titleOverride="glossary.resource_title_case_other | Rowan Test"
               >
                 <Connect(WithSettings('HeadContentComponent))
+                  appendDefaultTitle={true}
                   description="The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew."
                   image={null}
                   socialTitle="glossary.resource_title_case_other | Rowan Test"
                   title="glossary.resource_title_case_other | Rowan Test"
                 >
                   <WithSettings('HeadContentComponent)
+                    appendDefaultTitle={true}
                     description="The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew."
                     dispatch={[Function]}
                     image={null}
@@ -1258,6 +1260,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
                     title="glossary.resource_title_case_other | Rowan Test"
                   >
                     <HeadContentComponent
+                      appendDefaultTitle={true}
                       charset="utf-8"
                       description="The look in your eyes, I recognize it. You used to have it for me. I guess it's better to be lucky than good. Mr. Crusher, ready a collision course with the Borg ship. My oath is between Captain Kargan and myself. Your only concern is with how you obey my orders. Or do you prefer the rank of prisoner to that of lieutenant? That might've been one of the shortest assignments in the history of Starfleet. I'll alert the crew."
                       dispatch={[Function]}
@@ -1400,7 +1403,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
                         }
                         prioritizeSeoTags={false}
                         title="glossary.resource_title_case_other | Rowan Test"
-                        titleTemplate={null}
+                        titleTemplate="%s | undefined"
                       >
                         <HelmetDispatcher
                           context={
@@ -1456,9 +1459,21 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
                           }
                           prioritizeSeoTags={false}
                           title="glossary.resource_title_case_other | Rowan Test"
-                          titleTemplate={null}
+                          titleTemplate="%s | undefined"
                         />
                       </Helmet>
+                      <RouteAnnouncer
+                        title="glossary.resource_title_case_other | Rowan Test"
+                      >
+                        <p
+                          aria-live="assertive"
+                          className="screen-reader-text"
+                          id="route-announcer"
+                          role="alert"
+                        >
+                          glossary.resource_title_case_other | Rowan Test
+                        </p>
+                      </RouteAnnouncer>
                     </HeadContentComponent>
                   </WithSettings('HeadContentComponent)>
                 </Connect(WithSettings('HeadContentComponent))>
