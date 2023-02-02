@@ -168,7 +168,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     if (!resourceCollection) return null;
     const secondaryLinks = navigation.resourceCollection(resourceCollection);
 
-    const subpage = this.props.location.pathname.split("/")[5];
+    const subpage = this.props.location?.pathname.split("/")[5];
 
     return (
       <div>

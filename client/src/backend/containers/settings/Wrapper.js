@@ -20,7 +20,7 @@ export class SettingsWrapperContainer extends PureComponent {
   render() {
     const secondaryLinks = navigation.settings();
     const { t } = this.props;
-    const subpage = this.props.location.pathname
+    const subpage = this.props.location?.pathname
       .split("/")[3]
       ?.replace("-", "_");
     const subpageOverride = subpage === "properties" ? "settings" : null;

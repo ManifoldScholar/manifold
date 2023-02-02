@@ -3,6 +3,7 @@
 exports[`frontend/containers/Page/Page matches the snapshot 1`] = `
 <section>
   <Connect(WithSettings('HeadContentComponent))
+    appendDefaultTitle={true}
     title="Daily Rowan"
   />
   <div
