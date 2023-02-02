@@ -13,12 +13,12 @@ module Annotations
     def execute
       return orphan_annotation unless adoptable?
 
-      # iterate through the haystack will all whitespace collapsed to assign start and end nodes
+      # iterate through the haystack with all whitespace collapsed to assign start and end nodes
       # if the needle has more than one match, attempt to locate it by node uuids
       node_updates = if multiple_occurrences?
                        maybe_locate_occurence
                      else
-                       find_needle_in_haystack(text_nodes)
+                       find_needle_in_haystack(text_nodes, start_index, final_index)
                      end
 
       # iterate through the text content of the new nodes accounting for whitespace to find the correct start and end chars
@@ -34,17 +34,14 @@ module Annotations
     private
 
     # rubocop:disable Metrics/MethodLength
-    def find_needle_in_haystack(haystack, first_index = nil, last_index = nil)
+    def find_needle_in_haystack(a_haystack, first_index, last_index)
       updates = {
         start_node: nil,
         end_node: nil,
       }
 
-      first_index ||= start_index
-      last_index ||= final_index
-
       haystack_iterator = 0
-      haystack.each do |node|
+      a_haystack.each do |node|
         node_text_iterator = 0
         node_content = collapse(node[:content])
         node_content.split("") do
@@ -123,12 +120,12 @@ module Annotations
       splits.reverse! if end_node
 
       text_content = node[:content]
-      occurrences = text_content.scan(splits[0])
+      node_occurrences = text_content.scan(splits[0])
 
       # if we can't find the first char, something went wrong; shouldn't happen
-      return nil if occurrences.size.zero?
+      return nil if node_occurrences.size.zero?
       # if the first char is unique in the node, return its index
-      return text_content.index(splits[0]) if occurrences.size == 1
+      return text_content.index(splits[0]) if node_occurrences.size == 1
 
       # if it occurs more than once, iteratively expand the search
       find_substr_index(splits: splits, text_content: text_content, count: 1, from_end: end_node)
@@ -141,19 +138,19 @@ module Annotations
       # escape regex metachars so they match
       splits = splits.map { |c| metachars.include?(c) ? "\\#{c}" : c }
       substr = substr_regex(splits: splits, count: count, from_end: from_end)
-      occurrences = text_content.scan(substr)
+      node_occurrences = text_content.scan(substr)
 
       prev_substr = substr_regex(splits: splits, count: count - 1, from_end: from_end)
 
       if from_end
         # if we don't find a match, we want the first occurrence of the previous search term
         # use the match data to find the length of the substr in the text node in case the client added or removed whitespace
-        return text_content.index(prev_substr) + prev_substr.match(text_content)[0].length - 1 if occurrences.size.zero?
-        return text_content.index(substr) + substr.match(text_content)[0].length - 1 if occurrences.size == 1
+        return text_content.index(prev_substr) + prev_substr.match(text_content)[0].length - 1 if node_occurrences.size.zero?
+        return text_content.index(substr) + substr.match(text_content)[0].length - 1 if node_occurrences.size == 1
       else
         # if we don't find a match, we want the last occurrence of the previous search term
-        return text_content.rindex(prev_substr) if occurrences.size.zero?
-        return text_content.index(substr) if occurrences.size == 1
+        return text_content.rindex(prev_substr) if node_occurrences.size.zero?
+        return text_content.index(substr) if node_occurrences.size == 1
       end
 
       find_substr_index(splits: splits, text_content: text_content, count: count + 1, from_end: from_end)
