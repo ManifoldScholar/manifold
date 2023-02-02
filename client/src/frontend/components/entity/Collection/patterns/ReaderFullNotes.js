@@ -24,6 +24,8 @@ function ReaderFullNotesEntityCollection({
   function renderEmptyMessage() {
     if (filtersChanged) return <EmptyMessage.NoResults />;
     if (readingGroup === "me") return <EmptyMessage.TextNotAnnotatedByMe />;
+    if (readingGroup === "orphaned")
+      return <EmptyMessage.NoOrphanedAnnotations />;
     return <EmptyMessage.TextNotAnnotatedByGroup readingGroup={readingGroup} />;
   }
 

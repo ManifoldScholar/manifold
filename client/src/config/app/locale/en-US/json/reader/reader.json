@@ -70,7 +70,9 @@
         "no_annotations_by_me": "You haven't annotated this text yet",
         "no_annotations_by_me_message": "Once you’ve highlighted or annotated a passage in this text, it will appear here. To annotate or highlight, select a passage from the text and click the appropriate button on the pop-up menu.",
         "my_notes": "My $t(glossary.note_title_case_other)",
-        "all_notes": "All $t(glossary.note_other) for group:"
+        "all_notes": "All $t(glossary.note_other) for group:",
+        "orphaned_notes": "My Notes on Prior Versions",
+        "no_orphans_message": "When a text is edited, Manifold attempts to place annotations in the updated text. If the passage you annotated no longer exists in the text, your annotations will appear here."
       },
       "return": {
         "project_home": "$t(glossary.project_title_case_one) Home",

@@ -46,7 +46,7 @@ class FilteredList extends PureComponent {
   }
 
   get selectedGroup() {
-    return this.filters.readingGroup;
+    return this.filters.orphaned ? "orphaned" : this.filters.readingGroup;
   }
 
   get formatFilters() {
@@ -115,6 +115,8 @@ class FilteredList extends PureComponent {
     if (this.formatFiltersChanged) return <EmptyMessage.NoResults />;
     if (this.selectedGroup === "me")
       return <EmptyMessage.TextNotAnnotatedByMe />;
+    if (this.selectedGroup === "orphaned")
+      return <EmptyMessage.NoOrphanedAnnotations />;
     return <EmptyMessage.TextNotAnnotatedByGroup />;
   }
 
@@ -131,7 +133,12 @@ class FilteredList extends PureComponent {
               sectionName={group.name}
               readerSection={this.props.section}
               visitHandler={this.props.handleVisitAnnotation}
-              showAnnotationCreator={this.selectedGroup !== "me"}
+              showAnnotationCreator={
+                !(
+                  this.selectedGroup === "me" ||
+                  this.selectedGroup === "orphaned"
+                )
+              }
             />
           );
         })}

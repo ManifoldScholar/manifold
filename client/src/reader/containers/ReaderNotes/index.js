@@ -32,10 +32,10 @@ function ReaderNotesContainer({
 
   const baseFilters = useMemo(
     () => ({
-      orphaned: false,
+      orphaned: !!(currentGroup === "orphaned"),
       text: text?.id,
       formats: [...DEFAULT_FORMATS],
-      readingGroup: currentGroup
+      readingGroup: currentGroup === "orphaned" ? "me" : currentGroup
     }),
     [text, currentGroup]
   );
@@ -111,8 +111,8 @@ function ReaderNotesContainer({
     sortedAnnotations,
     section,
     handleVisitAnnotation,
-    handleFilterChange: (label, value) => {
-      setFilters({ newState: { ...filters, [label]: value } });
+    handleFilterChange: updates => {
+      setFilters({ newState: { ...filters, ...updates } });
     },
     handleSeeAllClick,
     setAnnotationOverlayReadingGroup,
