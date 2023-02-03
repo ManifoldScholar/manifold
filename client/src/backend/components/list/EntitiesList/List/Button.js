@@ -9,12 +9,18 @@ export default class ListEntitiesListButtonSet extends PureComponent {
   static displayName = "List.Entities.List.Button";
 
   static propTypes = {
-    path: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(["add", "import"]),
+    tag: PropTypes.oneOf(["button", "link"]),
+    path: PropTypes.string,
+    type: PropTypes.oneOf(["add", "import", "reload"]),
     icon: PropTypes.string,
     text: PropTypes.string.isRequired,
     authorizedFor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    authorizedTo: PropTypes.string
+    authorizedTo: PropTypes.string,
+    onClick: PropTypes.func
+  };
+
+  static defaultProps = {
+    tag: "link"
   };
 
   get path() {
@@ -29,6 +35,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
     if (this.props.icon) return this.props.icon;
     if (this.type === "add") return "circlePlus32";
     if (this.type === "import") return "export24";
+    if (this.type === "reload") return "reload24";
   }
 
   get text() {
@@ -61,11 +68,21 @@ export default class ListEntitiesListButtonSet extends PureComponent {
       "button-lozenge-secondary": true
     });
 
+    const { tag, onClick } = this.props;
+    const isButton = tag === "button";
+
+    const Tag = isButton ? "button" : Link;
+    const buttonProps = isButton ? { onClick } : { to: this.path };
+
     return this.maybeAuthorize(
-      <Link to={this.path} className={buttonClassNames}>
+      <Tag
+        className={buttonClassNames}
+        style={this.props.style}
+        {...buttonProps}
+      >
         {this.icon && <Utility.IconComposer icon={this.icon} />}
         <span>{this.text}</span>
-      </Link>
+      </Tag>
     );
   }
 }

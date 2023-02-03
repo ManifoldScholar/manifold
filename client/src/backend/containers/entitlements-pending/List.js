@@ -99,6 +99,14 @@ function PendingEntitlementsList({
               type="import"
               text={t("entitlements.pending.import_button_label")}
               authorizedFor="entitlement"
+            />,
+            <Button
+              tag="button"
+              style={{ marginInlineStart: "auto" }}
+              onClick={refresh}
+              type="reload"
+              text={"Refresh"}
+              authorizedFor="entitlement"
             />
           ]}
           search={
