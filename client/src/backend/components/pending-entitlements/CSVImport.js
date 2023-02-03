@@ -1,26 +1,33 @@
-import React, { useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { entitlementImportsAPI } from "api";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { notificationActions } from "actions";
 
-export default function CSVImportForm({ refresh }) {
+export default function CSVImportForm() {
   const { t } = useTranslation();
-  const history = useHistory();
+  const dispatch = useDispatch();
 
-  const onSuccess = useCallback(() => {
-    if (refresh) refresh();
-    history.push(lh.link("backendRecordsEntitlements"));
-  }, [history, refresh]);
+  const notifySuccess = () => {
+    const notification = {
+      level: 0,
+      id: "Entitlement_Import_Success",
+      heading: t("notifications.entitlement_import_success"),
+      body: t("notifications.entitlement_import_success_body"),
+      scope: "drawer"
+    };
+    dispatch(notificationActions.addNotification(notification));
+  };
 
   return (
     <FormContainer.Form
       name={"backend-entitlement-import-create"}
       className="form-secondary"
-      onSuccess={onSuccess}
+      onSuccess={notifySuccess}
       create={entitlementImportsAPI.create}
     >
       <Form.Upload

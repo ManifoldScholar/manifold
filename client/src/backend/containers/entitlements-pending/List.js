@@ -22,6 +22,7 @@ function PendingEntitlementsList({
   route,
   history,
   confirm,
+  location,
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
@@ -44,7 +45,8 @@ function PendingEntitlementsList({
       drawerProps: {
         lockScroll: "always",
         wide: true,
-        closeUrl
+        closeUrl,
+        showNotifications: location.pathname.includes("import")
       },
       childProps: { refresh }
     });
@@ -136,4 +138,11 @@ export default withFilteredLists(withConfirmation(PendingEntitlementsList), {
 
 PendingEntitlementsList.displayName = "PendingEntitlements.List";
 
-PendingEntitlementsList.propTypes = {};
+PendingEntitlementsList.propTypes = {
+  route: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  confirm: PropTypes.func,
+  location: PropTypes.object.isRequired,
+  entitiesListSearchProps: PropTypes.func,
+  entitiesListSearchParams: PropTypes.object
+};
