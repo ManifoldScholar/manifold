@@ -76,5 +76,16 @@
     "number": "Volume Number",
     "number_truncated": "Number",
     "no_volume": "No Volume"
+  },
+  "access": {
+    "title": "Configure Access Restrictions",
+    "description": "Enable access restrictions and adjust messaging",
+    "restricted_label": "Journal Access is Restricted",
+    "open_access_label": "Journal is Open Access",
+    "notice_header_label": "Restricted Access Notice Header",
+    "notice_body_label": "Restricted Access Notice Body",
+    "notice_header_placeholder": "Access to this journal is restricted.",
+    "notice_body_placeholder": "Only users granted permission may view this journal's volumes and issues.",
+    "save": "Update Access Settings"
   }
 }

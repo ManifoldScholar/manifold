@@ -69,8 +69,8 @@ function PendingEntitlementsList({
   const deleteEntitlement = useApiCallback(pendingEntitlementsAPI.destroy);
 
   const onDelete = id => {
-    const heading = t("backend.pending_entitlements.delete_confirm_heading");
-    const message = t("backend.pending_entitlements.delete_confirm_body");
+    const heading = t("entitlements.pending.delete_confirm_heading");
+    const message = t("entitlements.pending.delete_confirm_body");
     if (confirm)
       confirm(heading, message, () => deleteEntitlement(id).then(refresh()));
   };
@@ -80,7 +80,7 @@ function PendingEntitlementsList({
       {renderChildRoutes()}
       {entitlements && (
         <EntitiesList
-          title={t("backend.pending_entitlements.header")}
+          title={t("entitlements.pending.header")}
           titleStyle="bar"
           entityComponent={PendingEntitlementRow}
           entityComponentProps={{ onEdit, onDelete }}
@@ -89,13 +89,13 @@ function PendingEntitlementsList({
             <Button
               path={lh.link("backendRecordsEntitlementsNew")}
               type="add"
-              text={t("backend.pending_entitlements.add_button_label")}
+              text={t("entitlements.pending.add_button_label")}
               authorizedFor="entitlement"
             />,
             <Button
               path={lh.link("backendRecordsEntitlementsImport")}
               type="import"
-              text={t("backend.pending_entitlements.import.button_label")}
+              text={t("entitlements.pending.import.button_label")}
               authorizedFor="entitlement"
             />
           ]}

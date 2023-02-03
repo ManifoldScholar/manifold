@@ -34,10 +34,8 @@ export default function CSVImportForm({ refresh }) {
     >
       <Form.Upload
         layout="landscape"
-        instructions={t(
-          "backend.pending_entitlements.import.form.upload_instructions"
-        )}
-        label={t("backend.pending_entitlements.import.form.upload_label")}
+        instructions={t("entitlements.pending.import.form.upload_instructions")}
+        label={t("entitlements.pending.import.form.upload_label")}
         accepts="csv"
         name="attributes[file]"
       />
