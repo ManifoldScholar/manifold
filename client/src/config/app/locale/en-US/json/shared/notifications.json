@@ -6,6 +6,8 @@
     "email_failure_body": "Please check that your email configuration is correct.",
     "email_success": "The test email appears to have been sent.",
     "email_success_body": "Expect to receive it shortly.",
+    "entitlement_import_success": "Import successful!",
+    "entitlement_import_success_body": "Manifold is processing your upload. Refresh the list or come back to this page in a few minutes to view the new entitlements.",
     "feature_delete": "The feature has been deleted.",
     "journal_delete": "The journal has been destroyed.",
     "page_delete": "The page has been deleted.",

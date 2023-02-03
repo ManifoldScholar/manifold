@@ -40,10 +40,9 @@
       "import": {
         "button_label": "Import from CSV",
         "drawer_header": "Entitlement CSV Import",
-        "form": {
-          "upload_label": "Upload a CSV",
-          "upload_instructions": "Manifold can import entitlements from a CSV file, including pending entitlements for not yet registered users. See the documentation for CSV format."
-        }
+        "upload_label": "Upload a CSV",
+        "upload_instructions": "Manifold can import entitlements from a CSV file, including pending entitlements for not yet registered users. See the documentation for CSV format.",
+        "submit_label": "Import"
       }
     }
   }

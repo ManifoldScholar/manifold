@@ -1,65 +1,47 @@
-import React, { useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { entitlementImportsAPI } from "api";
-import { useHistory } from "react-router-dom";
-import IconComposer from "global/components/utility/IconComposer";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { notificationActions } from "actions";
 
-export default function CSVImportForm({ refresh }) {
+export default function CSVImportForm() {
   const { t } = useTranslation();
-  const history = useHistory();
+  const dispatch = useDispatch();
 
-  const onSuccess = useCallback(() => {
-    if (refresh) refresh();
-    history.push(lh.link("backendRecordsEntitlements"));
-  }, [history, refresh]);
-
-  const buttonClasses = classNames(
-    "buttons-icon-horizontal__button",
-    "button-icon-secondary",
-    "button-icon-secondary--in-drawer"
-  );
+  const notifySuccess = () => {
+    const notification = {
+      level: 0,
+      id: "Entitlement_Import_Success",
+      heading: t("notifications.entitlement_import_success"),
+      body: t("notifications.entitlement_import_success_body"),
+      scope: "drawer"
+    };
+    dispatch(notificationActions.addNotification(notification));
+  };
 
   return (
     <FormContainer.Form
       name={"backend-entitlement-import-create"}
       className="form-secondary"
-      onSuccess={onSuccess}
+      onSuccess={notifySuccess}
       create={entitlementImportsAPI.create}
     >
       <Form.Upload
         layout="landscape"
-        instructions={t("entitlements.pending.import.form.upload_instructions")}
-        label={t("entitlements.pending.import.form.upload_label")}
+        instructions={t("entitlements.pending.import.upload_instructions")}
+        label={t("entitlements.pending.import.upload_label")}
         accepts="csv"
         name="attributes[file]"
       />
-      <div className="buttons-icon-horizontal">
-        <Link
-          to={lh.link("backendRecordsEntitlements")}
-          className={`${buttonClasses} button-icon-secondary--dull`}
-        >
-          <IconComposer
-            icon="close16"
-            size="default"
-            className="button-icon-secondary__icon"
-          />
-          <span>{t("actions.cancel")}</span>
-        </Link>
-        <button type="submit" className={buttonClasses}>
-          <IconComposer
-            icon="checkmark16"
-            size="default"
-            className="button-icon-secondary__icon"
-          />
-          <span>{t("actions.continue")}</span>
-        </button>
-      </div>
+      <Form.DrawerButtons
+        showCancel
+        cancelUrl={lh.link("backendRecordsEntitlements")}
+        submitLabel="entitlements.pending.import.submit_label"
+      />
     </FormContainer.Form>
   );
 }
