@@ -23,7 +23,8 @@ function DrawerContent(props, ref) {
     children,
     handleLeaveEvent,
     lockScroll = false,
-    hasConfirm
+    hasConfirm,
+    showNotifications
   } = props;
 
   const connected = useFromStore("websocket.connected");
@@ -86,7 +87,7 @@ function DrawerContent(props, ref) {
       >
         <div>
           <FrontMatter {...props} />
-          {connected && (
+          {(connected || showNotifications) && (
             <Notifications scope="drawer" style="drawer" animate={false} />
           )}
           <DrawerContext.Provider value={{ headerId }}>
