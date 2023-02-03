@@ -47,36 +47,28 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
 
         return (
           <>
-            <Form.FieldGroup
-              label={t("backend.pending_entitlements.form.user_group_label")}
-            >
+            <Form.FieldGroup label={t("entitlements.pending.user_group_label")}>
               <Form.TextInput
                 focusOnMount
-                label={t("backend.pending_entitlements.form.email")}
-                instructions={t(
-                  "backend.pending_entitlements.form.email_instructions"
-                )}
+                label={t("entitlements.pending.email")}
+                instructions={t("entitlements.pending.email_instructions")}
                 name="attributes[email]"
               />
               <Form.TextInput
-                label={t("backend.pending_entitlements.form.first_name")}
+                label={t("entitlements.pending.first_name")}
                 name="attributes[firstName]"
               />
               <Form.TextInput
-                label={t("backend.pending_entitlements.form.last_name")}
+                label={t("entitlements.pending.last_name")}
                 name="attributes[lastName]"
               />
             </Form.FieldGroup>
             <Form.FieldGroup
-              label={t(
-                "backend.pending_entitlements.form.entitlement_group_label"
-              )}
+              label={t("entitlements.pending.entitlement_group_label")}
             >
               <Form.Select
-                label={t("backend.pending_entitlements.form.type_label")}
-                instructions={t(
-                  "backend.pending_entitlements.form.type_instructions"
-                )}
+                label={t("entitlements.pending.type_label")}
+                instructions={t("entitlements.pending.type_instructions")}
                 name="entityType"
                 options={[
                   {
@@ -103,17 +95,15 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
                 listStyle="rows"
               />
               <Form.DatePicker
-                label={t("backend.pending_entitlements.form.expiration")}
-                instructions={t(
-                  "backend.pending_entitlements.form.expiration_instructions"
-                )}
+                label={t("entitlements.pending.expiration")}
+                instructions={t("entitlements.pending.expiration_instructions")}
                 name="attributes[expiresOn]"
               />
             </Form.FieldGroup>
             <Form.DrawerButtons
               showCancel
               cancelUrl={lh.link("backendRecordsEntitlements")}
-              submitLabel="backend.pending_entitlements.form.save_label"
+              submitLabel="entitlements.pending.save_label"
             />
           </>
         );

@@ -21,12 +21,10 @@ export default function EntitlementNewContainer({ refresh }) {
       <Navigation.DrawerHeader
         title={
           id
-            ? t("backend.pending_entitlements.form.edit_header")
-            : t("backend.pending_entitlements.form.add_header")
+            ? t("entitlements.pending.edit_header")
+            : t("entitlements.pending.add_header")
         }
-        instructions={
-          !id && t("backend.pending_entitlements.form.add_instructions")
-        }
+        instructions={!id && t("entitlements.pending.add_instructions")}
       />
       <AddEditForm refresh={refresh} entitlement={entitlement} />
     </section>

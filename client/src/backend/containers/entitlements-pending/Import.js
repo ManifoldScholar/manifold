@@ -10,7 +10,7 @@ export default function EntitlementImportContainer({ refresh }) {
   return (
     <section>
       <Navigation.DrawerHeader
-        title={t("backend.pending_entitlements.import.drawer_header")}
+        title={t("entitlements.pending.import_header")}
       />
       <CSVImport refresh={refresh} />
     </section>
