@@ -102,9 +102,16 @@ class MakersListContainerImplementation extends PureComponent {
       closeUrl: lh.link("backendRecordsMakers")
     };
 
+    const refetch = () =>
+      this.fetchMakers(makersMeta?.pagination?.currentPage ?? 1);
+
     return (
       <>
-        {childRoutes(this.props.route, { drawer: true, drawerProps })}
+        {childRoutes(this.props.route, {
+          drawer: true,
+          drawerProps,
+          childProps: { refetch }
+        })}
         {makers && (
           <EntitiesList
             title={t("backend.makers.header")}
