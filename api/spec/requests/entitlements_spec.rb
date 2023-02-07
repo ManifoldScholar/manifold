@@ -24,8 +24,9 @@ RSpec.describe "Entitlements API", type: :request do
 
     describe "GET" do
       let(:request_method) { :get }
+      let!(:project) { FactoryBot.create :project, { draft: false } }
       let!(:subscriber_entitlement) { FactoryBot.create :entitlement, :global_subscriber }
-      let!(:subscriber_project_read) { FactoryBot.create :entitlement, :project_read_access }
+      let!(:subscriber_project_read) { FactoryBot.create :entitlement, :read_access, subject: project }
 
       it "responds with the list of entitlements" do
         expect_making_the_request.not_to raise_error

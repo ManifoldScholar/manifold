@@ -7,7 +7,8 @@ RSpec.describe EntitlementAssignedRole, type: :model do
     ManifoldApi::Container["entitlements.sync_static_models"].()
   end
 
-  let!(:project_entitlement) { FactoryBot.create :entitlement, :project_read_access, :for_user }
+  let!(:project) { FactoryBot.create(:project, draft: false) }
+  let!(:project_entitlement) { FactoryBot.create :entitlement, :read_access, :for_user, subject: project }
   let!(:subscription_entitlement) { FactoryBot.create :entitlement, :global_subscriber, :for_user }
 
   def assigned_roles_for(entitlement)

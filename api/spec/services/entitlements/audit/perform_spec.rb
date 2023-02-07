@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Entitlements::Audit::Perform do
-  let!(:project_entitlement) { FactoryBot.create :entitlement, :for_user, :project_read_access }
+  let!(:project) { FactoryBot.create :project, { draft: false } }
+  let!(:project_entitlement) { FactoryBot.create :entitlement, :for_user, :read_access, subject: project }
   let!(:project_user) { project_entitlement.target }
   let!(:entitled_project) { project_entitlement.subject }
 
