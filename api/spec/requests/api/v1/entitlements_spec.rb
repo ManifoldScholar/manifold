@@ -3,7 +3,7 @@ require "swagger_helper"
 RSpec.describe "Entitlements", type: :request do
   let(:project) { FactoryBot.create(:project) }
   let(:project_id) { project.id }
-  let(:resource) { FactoryBot.create(:entitlement, :project_read_access, subject: project) }
+  let(:resource) { FactoryBot.create(:entitlement, :read_access, subject: project) }
   let(:id) { resource.id }
 
   let!(:target_user) { FactoryBot.create(:user) }

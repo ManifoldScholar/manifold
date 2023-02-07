@@ -317,7 +317,7 @@ RSpec.describe "Project Abilities", :authorizer do
     end
 
     context "when the user has been granted a specific entitlement" do
-      let!(:entitlement) { FactoryBot.create :entitlement, :project_read_access, user: user, subject: project }
+      let!(:entitlement) { FactoryBot.create :entitlement, :read_access, user: user, subject: project }
 
       it { is_expected.to be_authorized_to :read, project }
       it { is_expected.to be_authorized_to :fully_read, project }

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe V1::EntitlementSerializer do
   let(:main_trait) { raise "must set" }
   let(:target_trait) { :for_user }
-  let(:other_traits) { [] }
+  let(:other_traits) { :read_access }
   let!(:entitlement) { FactoryBot.create :entitlement, main_trait, target_trait, *Array(other_traits)}
   let(:serialized_object) { entitlement }
 
@@ -11,7 +11,7 @@ RSpec.describe V1::EntitlementSerializer do
     include_examples "a serializer"
 
     context "with an expiration" do
-      let(:other_traits) { [:with_expiration] }
+      let(:other_traits) { [:with_expiration, :read_access] }
 
       include_examples "a serializer"
     end
