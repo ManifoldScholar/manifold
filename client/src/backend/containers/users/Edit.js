@@ -34,7 +34,8 @@ export class UsersEditContainer extends PureComponent {
     dispatch: PropTypes.func,
     user: PropTypes.object,
     history: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
+    refetch: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -82,9 +83,9 @@ export class UsersEditContainer extends PureComponent {
   destroyUser = () => {
     const user = this.user;
     const call = usersAPI.destroy(user.id);
-    const options = { removes: user };
-    const userRequest = request(call, requests.beUserDestroy, options);
+    const userRequest = request(call, requests.beUserDestroy);
     this.props.dispatch(userRequest).promise.then(() => {
+      this.props.refetch();
       this.props.history.push(lh.link("backendRecordsUsers"));
     });
   };
