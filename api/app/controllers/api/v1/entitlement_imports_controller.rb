@@ -39,7 +39,7 @@ module API
 
         @entitlement_import = ::Updaters::EntitlementImport.new(entitlement_import_params).update(@entitlement_import)
 
-        Entitlements::ProcessImportJob.perform_later @entitlement_import
+        Entitlements::ProcessImportJob.perform_later @entitlement_import if @entitlement_import.id
 
         render_single_resource @entitlement_import
       end
