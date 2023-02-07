@@ -26,6 +26,7 @@ module V1
         typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
         typed_attribute :is_journal_issue, Types::Bool.meta(read_only: true), &:journal_issue?
         typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
+        typed_attribute :entitlement_subject_url, Types::String.meta(read_only: true)
 
         serialize_collectable_attributes!
 
@@ -72,7 +73,6 @@ module V1
           typed_attribute :journal_issue_number, Types::String.optional
           typed_attribute :journal_issue_pending_sort_title, Types::String.optional
           typed_attribute :journal_volume_number, Types::String.optional
-          typed_attribute :entitlement_subject_url, Types::String.meta(read_only: true)
 
           typed_has_one :journal
           typed_has_one :journal_volume, record_type: "journalVolume"
