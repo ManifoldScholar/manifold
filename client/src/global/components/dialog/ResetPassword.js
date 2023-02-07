@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Wrapper from "./Wrapper";
-import Confirm from "./Confirm";
+import Body from "./Confirm/ConfirmModalBody";
 import { Unwrapped } from "global/components/form";
 import { entityStoreActions } from "actions";
 import { usersAPI, requests, passwordsAPI } from "api";
@@ -227,11 +227,12 @@ export class ResetPasswordBase extends PureComponent {
   renderConfirmation() {
     const t = this.props.t;
     return (
-      <Confirm
+      <Body
         heading={t("modals.reset_password")}
         message={t("modals.confirm_body")}
         resolve={event => this.handleResetEmailClick(event, this.props.user)}
         reject={event => this.handleStateChange(event, "confirm", false)}
+        id="reset-confirm"
       />
     );
   }
