@@ -98,9 +98,16 @@ class UsersListContainerImplementation extends PureComponent {
       closeUrl: lh.link("backendRecordsUsers")
     };
 
+    const refetch = () =>
+      this.fetchUsers(usersMeta?.pagination?.currentPage ?? 1);
+
     return (
       <>
-        {childRoutes(this.props.route, { drawer: true, drawerProps })}
+        {childRoutes(this.props.route, {
+          drawer: true,
+          drawerProps,
+          childProps: { refetch }
+        })}
         <EntitiesList
           entityComponent={UserRow}
           entityComponentProps={{ active }}

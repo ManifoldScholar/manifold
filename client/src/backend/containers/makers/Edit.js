@@ -30,7 +30,8 @@ export class MakersEditContainer extends PureComponent {
     history: PropTypes.object,
     afterDestroy: PropTypes.func,
     dispatch: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
+    refetch: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -66,14 +67,14 @@ export class MakersEditContainer extends PureComponent {
   destroyMaker = () => {
     const maker = this.props.maker;
     const call = makersAPI.destroy(maker.id);
-    const options = { removes: maker };
-    const makerRequest = request(call, requests.beMakerDestroy, options);
+    const makerRequest = request(call, requests.beMakerDestroy);
     this.props.dispatch(makerRequest).promise.then(() => {
       this.doAfterDestroy(this.props);
     });
   };
 
   doAfterDestroy(props) {
+    this.props.refetch();
     if (props.afterDestroy) return props.afterDestroy();
     return props.history.push(lh.link("backendRecordsMakers"));
   }
