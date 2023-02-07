@@ -13,7 +13,7 @@ module API
       INCLUDES = %i[entitlement user subject].freeze
 
       resourceful! PendingEntitlement, authorize_options: { except: [:index] } do
-        PendingEntitlement.preload(*INCLUSIONS).in_default_order.filtered(
+        PendingEntitlement.preload(*INCLUSIONS).filtered(
           with_pagination!(
             pending_entitlement_filter_params
           )
