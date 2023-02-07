@@ -7,6 +7,7 @@ class ProjectSummary < ApplicationRecord
   belongs_to :project
 
   delegate :collected_by?, to: :project
+  delegate :entitlement_subject_url, to: :project
 
   manifold_has_attached_file :avatar, :image
 
