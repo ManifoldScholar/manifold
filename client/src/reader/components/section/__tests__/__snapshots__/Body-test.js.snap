@@ -1,22 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`reader/components/section/Body matches the snapshot 1`] = `
-<MathLoader>
-  <ValidatedNode
-    attributes={
-      Object {
-        "class": "chapter",
-        "id": "RO",
-        "type": "titlepage",
-      }
+<ValidatedNode
+  attributes={
+    Object {
+      "class": "chapter",
+      "id": "RO",
+      "type": "titlepage",
     }
-    nodeType="element"
-    openAnnotations={Object {}}
-    scrollAnnotation={null}
-    scrollKey={null}
-    scrollNode={false}
-    scrollToView={false}
-    tag="section"
-  />
-</MathLoader>
+  }
+  nodeType="element"
+  openAnnotations={Object {}}
+  scrollAnnotation={null}
+  scrollKey={null}
+  scrollNode={false}
+  scrollToView={false}
+  tag="section"
+/>
 `;
