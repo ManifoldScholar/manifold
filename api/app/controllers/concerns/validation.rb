@@ -14,7 +14,7 @@ module Validation
             { font_size: [:current, :max, :min] },
             { margins: [:current, :max, :min] }
           ],
-          reading_groups: [:current_reading_group]
+          reading_groups: [:current_annotating_reading_group, :current_annotation_overlay_reading_group]
         },
         locale: [:language]
       }
