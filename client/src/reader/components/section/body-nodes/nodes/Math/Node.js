@@ -9,31 +9,31 @@ import {
 import { useTranslation } from "react-i18next";
 import { uid } from "react-uid";
 
-const mergeTextChild = node => {
-  const textChild = node.children[0];
-  return {
-    ...node,
-    nodeUuid: textChild.nodeUuid,
-    textDigest: textChild.textDigest,
-    content: textChild.content,
-    children: null
-  };
-};
-
-const transformJSON = nodes => {
-  return nodes.map(node => {
-    if (!node.children) return node;
-
-    if (node.children.length === 1) {
-      const onlyChild = node.children[0];
-      if (onlyChild.nodeType === "text") {
-        return mergeTextChild(node);
-      }
-    }
-
-    return { ...node, children: transformJSON(node.children) };
-  });
-};
+// const mergeTextChild = node => {
+//   const textChild = node.children[0];
+//   return {
+//     ...node,
+//     nodeUuid: textChild.nodeUuid,
+//     textDigest: textChild.textDigest,
+//     content: textChild.content,
+//     children: null
+//   };
+// };
+//
+// const transformJSON = nodes => {
+//   return nodes.map(node => {
+//     if (!node.children) return node;
+//
+//     if (node.children.length === 1) {
+//       const onlyChild = node.children[0];
+//       if (onlyChild.nodeType === "text") {
+//         return mergeTextChild(node);
+//       }
+//     }
+//
+//     return { ...node, children: transformJSON(node.children) };
+//   });
+// };
 
 const createNode = n =>
   React.createElement(
@@ -56,11 +56,7 @@ function MathNode({
 }) {
   const { t } = useTranslation();
 
-  const transformedChildren = Array.isArray(children)
-    ? transformJSON(children)
-    : null;
-
-  const childNodes = transformedChildren.map(child => createNode(child));
+  const childNodes = children.map(child => createNode(child));
 
   const localAnnotations = getlocalAnnotationsArray(openAnnotations);
   const {
