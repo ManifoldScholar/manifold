@@ -99,7 +99,21 @@ RSpec.describe Serializer::HTML do
     expect(text_node).to include(:node_uuid)
   end
 
+  it "should merge mathml only child text nodes into the parent element" do
+    html = "<math><mn>20</mn></math>"
+    serialized = serializer.serialize(html)
+    mn_node = serialized[:children].first
+    expect(mn_node).to include(:node_uuid)
+    expect(mn_node).to include(:content)
+    expect(mn_node).to include(:tag)
+  end
 
+  it "should remove all blank nodes from mathml" do
+    html = "<math>\n<mn>20</mn>\n</math>"
+    serialized = serializer.serialize(html)
+    children = serialized[:children]
+    expect(children.size).to eq 1
+  end
 
 
 end
