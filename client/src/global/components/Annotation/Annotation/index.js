@@ -17,7 +17,8 @@ class Annotation extends PureComponent {
     annotation: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     visitHandler: PropTypes.func,
-    showCommentsToggleAsBlock: PropTypes.bool
+    showCommentsToggleAsBlock: PropTypes.bool,
+    refresh: PropTypes.func
   };
 
   deleteHandler = () => {
@@ -27,7 +28,9 @@ class Annotation extends PureComponent {
     const res = this.props.dispatch(
       request(call, requests.rAnnotationDestroy, options)
     );
-    return res.promise;
+    res.promise.then(() => {
+      if (this.props.refresh) this.props.refresh();
+    });
   };
 
   visitHandler = event => {

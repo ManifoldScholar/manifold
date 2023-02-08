@@ -15,6 +15,7 @@ function ReaderFullNotesEntityCollection({
   filterProps,
   filtersChanged,
   paginationProps,
+  refresh,
   ...passThroughProps
 }) {
   const { t } = useTranslation();
@@ -46,6 +47,7 @@ function ReaderFullNotesEntityCollection({
             <Annotation.List.GroupedBySection
               handleVisitAnnotation={handleVisitAnnotation}
               groupedAnnotations={groupedAnnotations}
+              refresh={refresh}
             />
           )}
           {!hasSortedAnnotations && renderEmptyMessage()}
