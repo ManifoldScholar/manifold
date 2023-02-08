@@ -71,7 +71,8 @@ module Types
           )
         ),
         reading_groups: Types::Hash.schema(
-          current_reading_group: Types::Serializer::ID
+          current_annotating_reading_group: Types::Serializer::ID || Types::String,
+          current_annotation_overlay_reading_group: Types::Serializer::ID || Types::String
         )
       ),
       locale: Types::Hash.schema(
