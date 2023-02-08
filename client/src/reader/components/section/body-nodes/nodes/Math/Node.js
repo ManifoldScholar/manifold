@@ -47,6 +47,7 @@ const createNode = n =>
   );
 
 function MathNode({
+  attributes,
   children,
   openAnnotations,
   uuids,
@@ -65,17 +66,22 @@ function MathNode({
     interactiveAttributes
   } = getAnnotationStyles(localAnnotations, uuids, t, hasInteractiveAncestor);
 
+  const Wrapper = attributes.display === "inline" ? "span" : "div";
+  const wrapperStyles = Wrapper === "div" ? { width: "max-content" } : {};
+
   return (
-    <math
-      data-mathml="true"
-      className={classes}
-      data-removable-highlight-id={removableHighlightId}
-      data-text-annotation-ids={textAnnotationIds}
-      data-annotation-ids={annotationIds}
-      {...interactiveAttributes}
-    >
-      {childNodes}
-    </math>
+    <Wrapper className={classes} style={wrapperStyles}>
+      <math
+        data-mathml="true"
+        data-removable-highlight-id={removableHighlightId}
+        data-text-annotation-ids={textAnnotationIds}
+        data-annotation-ids={annotationIds}
+        {...interactiveAttributes}
+        {...attributes}
+      >
+        {childNodes}
+      </math>
+    </Wrapper>
   );
 }
 
