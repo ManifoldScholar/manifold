@@ -56,7 +56,7 @@ function ReaderFullNotesContainer({
   const args = me
     ? [filters, pagination]
     : [currentGroupId, filters, pagination];
-  const { data: annotations, meta } = useFetch({
+  const { data: annotations, meta, refresh } = useFetch({
     request: [endpoint, ...args]
   });
 
@@ -156,6 +156,7 @@ function ReaderFullNotesContainer({
           paginationClickHandler: page => () => setPageNumber(page),
           paginationTarget: "#group-annotations"
         }}
+        refresh={refresh}
         nested
       />
     </Overlay>
