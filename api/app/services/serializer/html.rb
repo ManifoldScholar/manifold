@@ -10,6 +10,10 @@ module Serializer
     INLINE_ELEMENTS = %w(b big i small tt abbr acronym cite code dfn em kbd strong samp
                          time var a bdo br img map object q script span sub sup button
                          input label select textarea).freeze
+    MATHML_ELEMENTS = %w(math maction annotation annotation-xml menclose merror mfenced
+                         mfrac mi mmultiscripts mn mo mover mpadded mphantom mprescripts
+                         mroot mrow ms semantics mspace msqrt mstyle msub msup msubsup
+                         mtable mtd mtext mtr munder munderover).freeze
 
     def serialize(html, logger = Rails.logger)
       reset
@@ -50,7 +54,7 @@ module Serializer
       visited = begin_visit(node, representation)
       return nil unless visited
 
-      children = traverse(node)
+      children = traverse(node) unless mathml_element?(representation) && representation[:content]
       representation[:children] = children unless children.nil?
       clean_empty_text_nodes!(representation)
       representation
@@ -59,6 +63,10 @@ module Serializer
     def block_level_element?(representation)
       representation[:node_type] == "element" &&
         !INLINE_ELEMENTS.include?(representation[:tag])
+    end
+
+    def mathml_element?(representation)
+      MATHML_ELEMENTS.include?(representation[:tag])
     end
 
     # rubocop:disable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/AbcSize
@@ -75,6 +83,7 @@ module Serializer
 
         child[:delete] = true if index.zero?
         child[:delete] = true if (index + 1) == representation[:children].length
+        child[:delete] = true if mathml_element?(representation)
         # Between two block level elements
         next unless representation[:children][index - 1] &&
                     block_level_element?(representation[:children][index - 1]) &&
@@ -116,6 +125,7 @@ module Serializer
       representation[:attributes] = node.attributes
         .transform_keys(&:to_sym)
         .transform_values(&:content)
+      merge_mathml_element_text_child(node, representation) if mathml_element?(representation)
       true
     end
 
@@ -135,6 +145,19 @@ module Serializer
       representation[:text_digest] = text_digest
       representation[:node_uuid] = node_digest
       true
+    end
+
+    def text_only_child?(children)
+      return false unless children.size == 1
+      return false unless children[0].text?
+
+      true
+    end
+
+    def merge_mathml_element_text_child(node, representation)
+      return unless text_only_child?(node.children)
+
+      begin_visit_text(node.children[0], representation)
     end
 
     def reset
