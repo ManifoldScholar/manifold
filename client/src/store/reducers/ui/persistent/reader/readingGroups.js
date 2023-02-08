@@ -1,7 +1,7 @@
 import { handleActions } from "redux-actions";
 
 const getInitialState = () => ({
-  currentAnnotatingReadingGroup: "public",
+  currentAnnotatingReadingGroup: "private",
   currentAnnotationOverlayReadingGroup: "me"
 });
 
