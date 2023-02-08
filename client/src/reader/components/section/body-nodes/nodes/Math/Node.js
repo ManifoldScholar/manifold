@@ -1,7 +1,6 @@
 import React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import PropTypes from "prop-types";
-import { MathJax } from "better-react-mathjax";
 import {
   getAnnotationStyles,
   getlocalAnnotationsArray
@@ -48,7 +47,6 @@ const createNode = n =>
   );
 
 function MathNode({
-  attributes,
   children,
   openAnnotations,
   uuids,
@@ -68,18 +66,16 @@ function MathNode({
   } = getAnnotationStyles(localAnnotations, uuids, t, hasInteractiveAncestor);
 
   return (
-    <MathJax
+    <math
       data-mathml="true"
-      inline={attributes.display === "inline"}
       className={classes}
-      style={{ width: "max-content" }}
       data-removable-highlight-id={removableHighlightId}
       data-text-annotation-ids={textAnnotationIds}
       data-annotation-ids={annotationIds}
       {...interactiveAttributes}
     >
-      <math>{childNodes}</math>
-    </MathJax>
+      {childNodes}
+    </math>
   );
 }
 
