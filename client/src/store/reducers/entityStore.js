@@ -309,7 +309,7 @@ function handleRemove(state, action) {
     if (index === -1) return true;
     const newCollection = response.collection.slice();
     newCollection.splice(index, 1);
-    const newMeta = buildMeta(response, true);
+    const newMeta = buildMeta(response.meta, true);
     const newResponse = {
       ...response,
       collection: newCollection,
