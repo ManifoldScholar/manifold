@@ -8,7 +8,7 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
         "colorScheme": "light",
       },
       "readingGroups": Object {
-        "currentAnnotatingReadingGroup": "public",
+        "currentAnnotatingReadingGroup": "private",
         "currentAnnotationOverlayReadingGroup": "me",
       },
       "typography": Object {
