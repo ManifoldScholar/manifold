@@ -229,8 +229,7 @@ class AnnotatableCaptureSelection extends Component {
       let text = "";
       fragment.childNodes.forEach(node => {
         if (node.nodeType === Node.ELEMENT_NODE) {
-          this.replaceMath(node);
-          text += node.innerText;
+          text += node.innerText ?? node.textContent;
           if (blockRegex.test(node.nodeName)) {
             text += "\n";
           }
