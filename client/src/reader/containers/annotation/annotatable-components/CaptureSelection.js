@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import selectionHelpers from "./selectionHelpers";
-import has from "lodash/has";
+import {
+  isMathMLNode,
+  isMathMLWrapper,
+  findFirstMathUuidNode,
+  findLastMathUuidNode
+} from "./mathHelpers";
 
 class AnnotatableCaptureSelection extends Component {
   static propTypes = {
@@ -71,8 +76,18 @@ class AnnotatableCaptureSelection extends Component {
   firstAndLastAnnotationNode(id) {
     const nodes = document.querySelectorAll(`[data-annotation-ids*="${id}"]`);
     const finder = n => n.nodeType === Node.TEXT_NODE;
-    const first = [...nodes[0].childNodes].find(finder);
-    const last = [...nodes[nodes.length - 1].childNodes].find(finder);
+
+    // If the node is our MathML styling wrapper, descend into it to retrieve text nodes.
+    const firstNode = isMathMLWrapper(nodes[0])
+      ? findFirstMathUuidNode(nodes[0])
+      : nodes[0];
+    const first = [...firstNode.childNodes].find(finder);
+
+    const lastNode = isMathMLWrapper([...nodes].pop())
+      ? findLastMathUuidNode([...nodes].pop())
+      : [...nodes].pop();
+    const last = [...lastNode.childNodes].find(finder);
+
     return [first, last];
   }
 
@@ -129,10 +144,7 @@ class AnnotatableCaptureSelection extends Component {
       const { x, y } = this.getEventXY(event);
       const newState = this.emptySelection({
         selection,
-        selectionAnnotation: this.mapSelectionToAnnotation(
-          selection,
-          this.nativeSelection
-        ),
+        selectionAnnotation: this.mapSelectionToAnnotation(selection),
         selectionComplete: complete,
         popupTriggerX: selection && x ? x : selectionState.popupTriggerX,
         popupTriggerY: selection && y ? y : selectionState.popupTriggerY,
@@ -145,17 +157,18 @@ class AnnotatableCaptureSelection extends Component {
     }
   }
 
-  // Maps selection to an annotation data structure
-  mapSelectionToAnnotation(selection, nativeSelection) {
-    if (!selection) return null;
-
-    const range = selection.range;
+  findStartValues(range) {
+    // If the annotation begins in a math tag, capture the expression from the beginning.
+    if (isMathMLNode(range.startContainer?.parentNode)) {
+      const startNode = findFirstMathUuidNode(range.startContainer);
+      const startChar = 1;
+      return { startNode, startChar, adjustStart: true };
+    }
 
     // 1. Find the closest element with a data-node-uuid attribute
     const startNode = selectionHelpers.findClosestTextNode(
       range.startContainer
     );
-
     // 2. Create a new range that ends with the start point of our existing range
     const startRange = document.createRange();
     startRange.setStart(startNode, 0);
@@ -164,12 +177,22 @@ class AnnotatableCaptureSelection extends Component {
     } catch (error) {
       startRange.setEnd(range.startContainer, range.startOffset);
     }
-
     // 3. Find the offset from the data-node-uuid start element
     const startChar = startRange.toString().length;
+    return { startNode, startChar };
+  }
+
+  findEndValues(range, startNode) {
+    // If the annotation ends in a math tag, capture the entire mathematical expression.
+    if (isMathMLNode(range.endContainer?.parentNode)) {
+      const endNode = findLastMathUuidNode(range.endContainer);
+      const endChar = endNode.textContent.length;
+      return { endNode, endChar, adjustEnd: true };
+    }
 
     // 4. Do the same for the end node
     let endNode = selectionHelpers.findClosestTextNode(range.endContainer);
+
     const endRange = document.createRange();
 
     // This bit of logic is to deal with shift-right selection that captures the beginning
@@ -190,34 +213,33 @@ class AnnotatableCaptureSelection extends Component {
       endRange.setEnd(range.endContainer, range.endOffset);
     }
     const endChar = endRange.toString().length;
+    return { endNode, endChar };
+  }
+
+  // Maps selection to an annotation data structure
+  mapSelectionToAnnotation(selection) {
+    if (!selection) return null;
+
+    const range = selection.range;
+    const { startNode, startChar, adjustStart } = this.findStartValues(range);
+    const { endNode, endChar, adjustEnd } = this.findEndValues(
+      range,
+      startNode
+    );
+
+    // Adjust the selection range if we added characters to capture an entire mathematical expression.
+    if (adjustStart) range.setStart(startNode, 0);
+    if (adjustEnd) range.setEnd(endNode, endNode.childNodes.length);
 
     const annotation = {
       startNode: startNode.dataset.nodeUuid,
       startChar,
       endNode: endNode.dataset.nodeUuid,
       endChar,
-      subject: this.extractText(nativeSelection)
+      subject: this.extractText(range)
     };
     return annotation;
   }
-
-  /* eslint-disable no-param-reassign */
-  replaceMath(node) {
-    if (has(node.dataset, "mathml")) {
-      node.textContent = " [mathematical content] ";
-    }
-
-    const children = node.childNodes;
-    children.forEach(child => {
-      if (has(child.dataset, "mathml")) {
-        child.textContent = " [mathematical content] ";
-      }
-      if (child.childNodes.length) {
-        this.replaceMath(child);
-      }
-    });
-  }
-  /* eslint-enable no-param-reassign */
 
   extractText(nativeSelection) {
     try {

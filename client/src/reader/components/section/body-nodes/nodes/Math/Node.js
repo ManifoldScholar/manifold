@@ -8,32 +8,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { uid } from "react-uid";
 
-// const mergeTextChild = node => {
-//   const textChild = node.children[0];
-//   return {
-//     ...node,
-//     nodeUuid: textChild.nodeUuid,
-//     textDigest: textChild.textDigest,
-//     content: textChild.content,
-//     children: null
-//   };
-// };
-//
-// const transformJSON = nodes => {
-//   return nodes.map(node => {
-//     if (!node.children) return node;
-//
-//     if (node.children.length === 1) {
-//       const onlyChild = node.children[0];
-//       if (onlyChild.nodeType === "text") {
-//         return mergeTextChild(node);
-//       }
-//     }
-//
-//     return { ...node, children: transformJSON(node.children) };
-//   });
-// };
-
 const createNode = n =>
   React.createElement(
     n.tag,
@@ -43,7 +17,7 @@ const createNode = n =>
       "data-node-uuid": n.nodeUuid,
       "data-text-digest": n.textDigest
     },
-    n.content ? n.content : n.children.map(child => createNode(child))
+    n.content ? n.content : n.children?.map(child => createNode(child))
   );
 
 function MathNode({
@@ -70,17 +44,16 @@ function MathNode({
   const wrapperStyles = Wrapper === "div" ? { width: "max-content" } : {};
 
   return (
-    <Wrapper className={classes} style={wrapperStyles}>
-      <math
-        data-mathml="true"
-        data-removable-highlight-id={removableHighlightId}
-        data-text-annotation-ids={textAnnotationIds}
-        data-annotation-ids={annotationIds}
-        {...interactiveAttributes}
-        {...attributes}
-      >
-        {childNodes}
-      </math>
+    <Wrapper
+      data-mathml="true"
+      className={classes}
+      style={wrapperStyles}
+      data-removable-highlight-id={removableHighlightId}
+      data-text-annotation-ids={textAnnotationIds}
+      data-annotation-ids={annotationIds}
+      {...interactiveAttributes}
+    >
+      <math {...attributes}>{childNodes}</math>
     </Wrapper>
   );
 }

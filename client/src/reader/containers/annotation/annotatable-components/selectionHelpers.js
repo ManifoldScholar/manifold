@@ -1,4 +1,9 @@
 import has from "lodash/has";
+import {
+  isMathMLNode,
+  findMathTagNode,
+  findFirstMathUuidNode
+} from "./mathHelpers";
 
 const closest = (el, selector) => {
   let element = el;
@@ -17,6 +22,10 @@ const closest = (el, selector) => {
 };
 
 const findClosestTextNode = node => {
+  if (isMathMLNode(node)) {
+    const mathTagNode = findMathTagNode(node);
+    return findFirstMathUuidNode(mathTagNode);
+  }
   if (node.nodeType === Node.TEXT_NODE) {
     const parent = node.parentElement;
     if (has(parent.dataset, "nodeUuid")) {
