@@ -163,7 +163,7 @@ GEM
     css_parser (1.11.0)
       addressable
     cssbeautify (0.2.0)
-    dalli (2.7.11)
+    dalli (3.2.3)
     data_uri (0.1.0)
     database_cleaner (1.99.0)
     debase (0.2.4.1)
@@ -804,7 +804,7 @@ DEPENDENCIES
   csl-styles (~> 1.0)
   css_parser (~> 1.0)
   cssbeautify
-  dalli (~> 2.7.11)
+  dalli (~> 3.2.3)
   data_uri (~> 0.1.0)
   database_cleaner (~> 1.0)
   debase
