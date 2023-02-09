@@ -44,12 +44,16 @@ export default function AddEditSectionForm({
         placeholder={t("texts.section.section_name")}
         name="attributes[name]"
       />
-      <Form.CodeArea
+      {/* <Form.CodeArea
         label={t("texts.section.content_label")}
         instructions={t("texts.section.content_instructions")}
         height="600px"
         mode="html"
         name="attributes[body]"
+      /> */}
+      <Form.RichText
+        label={t("texts.section.content_label")}
+        instructions={"Rich text section content"}
       />
       <Form.DrawerButtons
         showCancel
