@@ -167,6 +167,10 @@ import Users32 from "./32/Users";
 import WarningSign64 from "./64/WarningSign";
 import ZoomIn16 from "./16/ZoomIn";
 import ZoomOut16 from "./16/ZoomOut";
+import Bold16 from "./16/Bold";
+import Italic16 from "./16/Italic";
+import Underline16 from "./16/Underline";
+import UnorderedList16 from "./16/UnorderedList";
 
 export default {
   ActivityComments64,
@@ -204,6 +208,7 @@ export default {
   BEProject64,
   BEResourcesBox64,
   BEResourcesBoxes64,
+  Bold16,
   Bookmark24,
   Bookmark32,
   Calendar24,
@@ -256,6 +261,7 @@ export default {
   InteractAnnotate32,
   InteractHighlight32,
   InteractComment32,
+  Italic16,
   Journals64,
   Key32,
   Lamp64,
@@ -332,6 +338,8 @@ export default {
   TimerClock32,
   Toc64,
   Touch64,
+  Underline16,
+  UnorderedList16,
   Upload32,
   Upload64,
   Users32,

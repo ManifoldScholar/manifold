@@ -31,6 +31,7 @@ import Label from "./BaseLabel";
 import FieldWrapper from "./FieldWrapper";
 import { InputGroupPrimary, InputGroupSecondary } from "./InputGroup/styles";
 import DrawerButtons from "./DrawerButtons";
+import RichText from "./RichText";
 
 export default {
   CoverUploadPlaceholder,
@@ -65,7 +66,8 @@ export default {
   FieldWrapper,
   InputGroupPrimary,
   InputGroupSecondary,
-  DrawerButtons
+  DrawerButtons,
+  RichText
 };
 
 export const Unwrapped = {
