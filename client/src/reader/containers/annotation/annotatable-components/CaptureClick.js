@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import selectionHelpers from "./selectionHelpers";
+import { isMathMLNode } from "./mathHelpers";
 import isString from "lodash/isString";
 
 export default class AnnotatableCaptureClick extends Component {
@@ -67,7 +68,7 @@ export default class AnnotatableCaptureClick extends Component {
 
   handleClick = (event, isKeyEvent = false) => {
     if (!event || !event.target) return;
-    const el = event.target.nodeName.includes("MJX")
+    const el = isMathMLNode(event.target)
       ? selectionHelpers.closest(event.target, "[data-mathml]")
       : event.target;
     if (this.doesElementContainAnnotationAndHighlight(el))
