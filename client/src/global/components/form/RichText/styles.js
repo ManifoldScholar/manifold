@@ -37,32 +37,14 @@ export const Toolbar = styled.div`
 export const EditableWrapper = styled.div`
   height: 800px;
   overflow-y: scroll;
+
+  .ace_editor {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
 `;
 
 export const Editable = styled(BaseEditable)`
   padding-inline: 1.25em;
   margin-block-start: 1.25em;
-
-  ul,
-  ol {
-    list-style-position: inside;
-  }
-
-  blockquote {
-    border-left: 3px solid currentColor;
-    padding: 0 10px;
-  }
-
-  p,
-  blockquote,
-  ul,
-  ol,
-  h1,
-  h2 {
-    margin-block: 20px;
-  }
-
-  div + div {
-    margin-block: 5px;
-  }
 `;
