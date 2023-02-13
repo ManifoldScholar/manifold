@@ -174,9 +174,11 @@ import UnorderedList16 from "./16/UnorderedList";
 import OrderedList16 from "./16/OrderedList";
 import HeadingOne16 from "./16/HeadingOne";
 import HeadingTwo16 from "./16/HeadingTwo";
+import HeadingThree16 from "./16/HeadingThree";
 import BlockQuote16 from "./16/BlockQuote";
 import Code16 from "./16/Code";
 import CodeOff16 from "./16/CodeOff";
+import Strikethrough16 from "./16/Strikethrough";
 
 export default {
   ActivityComments64,
@@ -264,6 +266,7 @@ export default {
   GrabberInactive32,
   HeadingOne16,
   HeadingTwo16,
+  HeadingThree16,
   Info16,
   InteractComment16,
   InteractAnnotate24,
@@ -343,6 +346,7 @@ export default {
   StarSquircleFilled32,
   Star24,
   StopSign64,
+  Strikethrough16,
   Text24,
   TextsBook64,
   TextsLoosePages64,

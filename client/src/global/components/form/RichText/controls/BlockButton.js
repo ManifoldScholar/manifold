@@ -59,7 +59,7 @@ const toggleBlock = (editor, format) => {
   }
 };
 
-const BlockButton = ({ format, icon }) => {
+const BlockButton = ({ format, icon, size }) => {
   const editor = useSlate();
 
   return (
@@ -74,7 +74,7 @@ const BlockButton = ({ format, icon }) => {
         toggleBlock(editor, format);
       }}
     >
-      {icon && <Utility.IconComposer icon={icon} />}
+      {icon && <Utility.IconComposer icon={icon} size={size} />}
     </Styled.Button>
   );
 };

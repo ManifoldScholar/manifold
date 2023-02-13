@@ -5,7 +5,7 @@ export const isOnlyWhitespace = str => {
 };
 
 export const blankLineHandler = ({ node, children }) => {
-  if (node.children[0].text === "") {
+  if (node.children.length === 1 && node.children[0].text === "") {
     return new Element("br");
   }
   return new Element("p", {}, children);

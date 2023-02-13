@@ -54,5 +54,6 @@ export const slateToDom = slate => {
 
 export const slateToHtml = slate => {
   const document = slateToDom(slate);
+  console.log(document);
   return serializer(document);
 };
