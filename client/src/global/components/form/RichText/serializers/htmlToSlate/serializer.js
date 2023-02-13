@@ -37,16 +37,26 @@ const deserializeText = (el, attrs, context, isFirstChild, isLastChild) => {
   });
   return !isOnlyWhitespace(text) ? jsx("text", { ...attrs, text }, []) : null;
 };
+
+const flatten = nodes => {
+  let result = [];
+  nodes.forEach(n => {
+    if (n.length === 2) result.push(n);
+    if (n.length > 2) result = [...result, ...flatten(n)];
+  });
+  return result;
+};
+
 const deserializeMarkTag = (el, context, isFirstChild, isLastChild) => {
   const nodes = assignTextMarkAttributes(el);
   if (!Array.isArray(nodes[0])) {
     const [node, attrs] = nodes;
     return deserializeText(node, attrs, context, isFirstChild, isLastChild);
   }
-  return nodes
+  return flatten(nodes)
     .map(([node, attrs], i) => {
       const adjustedFirstChild = isFirstChild && i === 0;
-      const adjustedLastChild = isLastChild && i === nodes.length - 1;
+      const adjustedLastChild = isLastChild && i === test.length - 1;
       return deserializeText(
         node,
         attrs,
@@ -55,7 +65,7 @@ const deserializeMarkTag = (el, context, isFirstChild, isLastChild) => {
         adjustedLastChild
       );
     })
-    .flat();
+    .filter(Boolean);
 };
 
 const deserializeElement = ({
@@ -73,6 +83,17 @@ const deserializeElement = ({
     return deserializeVoid(nodeName);
   }
 
+  const isFirstChild = index === 0;
+  const isLastChild = index === childrenLength - 1;
+
+  if (el.type === ElementType.Text) {
+    return deserializeText(el, {}, context, isFirstChild, isLastChild);
+  }
+
+  if (Object.keys(markTags).includes(nodeName)) {
+    return deserializeMarkTag(el, context, isFirstChild, isLastChild);
+  }
+
   /* eslint-disable no-use-before-define */
   const children = deserializeChildren(
     el.childNodes,
@@ -86,17 +107,6 @@ const deserializeElement = ({
 
   if (nodeName === "body") {
     return deserializeBody(normalizedChildren);
-  }
-
-  const isFirstChild = index === 0;
-  const isLastChild = index === childrenLength - 1;
-
-  if (Object.keys(markTags).includes(nodeName)) {
-    return deserializeMarkTag(el, context, isFirstChild, isLastChild);
-  }
-
-  if (el.type === ElementType.Text) {
-    return deserializeText(el, {}, context, isFirstChild, isLastChild);
   }
 
   if (el.type === ElementType.Tag) {
@@ -120,7 +130,7 @@ const deserializeChildren = (children, context) => {
     dom: children,
     childrenLength: children.length,
     context
-  });
+  }).filter(Boolean);
   return nodes;
 };
 

@@ -1,6 +1,7 @@
 import { Document, Element, Text } from "domhandler";
 import serializer from "dom-serializer";
 import { Text as SlateText } from "slate";
+import isEmpty from "lodash/isEmpty";
 
 import { isOnlyWhitespace, nestMarkElements } from "./utils";
 
@@ -48,6 +49,8 @@ const serializeNode = node => {
 
   const children = serializeChildren(node.children);
   const attrs = { ...node.htmlAttrs };
+
+  if (children.length === 0 && isEmpty(attrs)) return null;
 
   if (!node.type) return new Element("div", attrs, children);
 
