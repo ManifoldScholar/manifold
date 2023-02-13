@@ -25,11 +25,13 @@ export default function AddEditSectionForm({
     return sectionsAPI.create(textId, model);
   };
 
-  const formatData = data => {
+  const formatData = (data, model) => {
     const { body, name } = data.attributes ?? {};
-    if (!body) return data;
-    if (typeof body === "string") return data;
-    return { attributes: { name, body: serializeToHtml(body) } };
+    if (!body || typeof body === "string")
+      return { attributes: { ...model.attributes, ...data.attributes } };
+    return {
+      attributes: { ...model.attributes, name, body: serializeToHtml(body) }
+    };
   };
 
   const onSuccess = useCallback(() => {
