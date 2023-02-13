@@ -1,4 +1,10 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  useRef
+} from "react";
 import { createEditor, Transforms, Path, Editor as SlateEditor } from "slate";
 import { Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
@@ -23,6 +29,17 @@ export default function Editor({
   const [htmlMode, toggleHtmlMode] = useState(false);
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
+  const [hasErrors, setHasErrors] = useState(false);
+  const [warnErrors, setWarnErrors] = useState(false);
+  const prevSlate = useRef(initialSlateValue);
+
+  useEffect(() => {
+    if (prevSlate.current !== initialSlateValue) {
+      clearSlate(editor);
+      Transforms.insertNodes(editor, initialSlateValue);
+    }
+  }, [initialSlateValue, editor]);
+
   const theme = stylesheets?.map(s => s.attributes.styles).join("\n");
 
   const renderElement = useCallback(props => <Element {...props} />, []);
@@ -53,15 +70,26 @@ export default function Editor({
     return toggleHtmlMode(true);
   };
 
-  const onClickHtml = e => {
+  const onClickToggle = e => {
     e.stopPropagation();
     e.preventDefault();
+    if (hasErrors) {
+      setWarnErrors(true);
+      return;
+    }
     toggleEditorView();
+  };
+
+  const onValidateHtml = messages => {
+    const errorFound = messages.find(msg => msg.type === "error");
+    if (!errorFound) setWarnErrors(false);
+    setHasErrors(errorFound);
   };
 
   const codeAreaProps = {
     onChange: onChangeHtml,
-    value: localHtml
+    value: localHtml,
+    onValidate: onValidateHtml
   };
 
   const onKeyDown = e => {
@@ -91,7 +119,9 @@ export default function Editor({
   };
 
   return (
-    <Styled.EditorSecondary>
+    <Styled.EditorSecondary
+      className={hasErrors && warnErrors ? "error" : undefined}
+    >
       <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
         <Styled.Toolbar>
           <MarkButton icon="bold16" format="bold" />
@@ -102,7 +132,7 @@ export default function Editor({
           <BlockButton icon="orderedList16" format="ol" />
           <BlockButton icon="unorderedList16" format="ul" />
           <BlockButton icon="blockQuote16" format="blockquote" />
-          <ToggleHTML icon="code16" active={htmlMode} onClick={onClickHtml} />
+          <ToggleHTML icon="code16" active={htmlMode} onClick={onClickToggle} />
         </Styled.Toolbar>
         <Styled.EditableWrapper className="manifold-text-section">
           {!htmlMode && (
