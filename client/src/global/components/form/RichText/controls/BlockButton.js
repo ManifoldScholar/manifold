@@ -4,7 +4,7 @@ import { Editor, Element as SlateElement, Transforms } from "slate";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
-const LIST_TYPES = ["ol-list", "ul-list"];
+const LIST_TYPES = ["ol", "ul"];
 const TEXT_ALIGN_TYPES = ["left", "center", "right", "justify"];
 
 const isBlockActive = (editor, format, blockType = "type") => {
@@ -48,7 +48,7 @@ const toggleBlock = (editor, format) => {
     };
   } else {
     newProperties = {
-      type: isActive ? "paragraph" : isList ? "list-item" : format
+      type: isActive ? "paragraph" : isList ? "li" : format
     };
   }
   Transforms.setNodes(editor, newProperties);
