@@ -178,6 +178,7 @@
     "slate": "^0.90.0",
     "slate-history": "^0.86.0",
     "slate-react": "^0.90.0",
+    "slate-serializers": "^0.0.25",
     "swagger-ui-react": "4.9.0",
     "text-mask-addons": "^3.7.1",
     "tinycolor2": "^1.4.1",
@@ -266,6 +267,10 @@
     "webpack-dev-server": "^3.1",
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^3.0.0"
+  },
+  "resolutions": {
+    "htmlparser2": "~7.0.0",
+    "slate": "^0.90.0"
   },
   "engines": {
     "node": ">=8.0.0 <13.0.0"

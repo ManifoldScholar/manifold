@@ -31,6 +31,7 @@ export default function AddEditSectionForm({
 
   return (
     <FormContainer.Form
+      debug
       model={section ?? defaultModel}
       name={section ? "be-text-section-update" : "be-text-section-create"}
       className="form-secondary"
@@ -54,6 +55,7 @@ export default function AddEditSectionForm({
       <Form.RichText
         label={t("texts.section.content_label")}
         instructions={"Rich text section content"}
+        name="attributes[body]"
       />
       <Form.DrawerButtons
         showCancel

@@ -4,23 +4,29 @@ import { Slate, withReact } from "slate-react";
 // import { withHistory } from "slate-history";
 import { Leaf, Element } from "./renderers";
 import { MarkButton, BlockButton } from "./controls";
+import { serializeToHtml, serializeToSlate } from "./serializers";
 import * as Styled from "./styles";
 
-const initialValue = [
+const defaultValue = [
   {
     type: "paragraph",
     children: [{ text: "" }]
   }
 ];
 
-export default function Editor() {
+export default function Editor({ set, value }) {
   const [editor] = useState(() => withReact(createEditor()));
 
   const renderElement = useCallback(props => <Element {...props} />, []);
 
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
 
-  const onChange = val => console.log(val);
+  const onChange = val => {
+    const html = serializeToHtml(val);
+    if (set) set(html);
+  };
+
+  const initialValue = value ? serializeToSlate(value) : defaultValue;
 
   return (
     <Styled.EditorSecondary>
@@ -29,7 +35,7 @@ export default function Editor() {
           <MarkButton icon="bold16" format="bold" />
           <MarkButton icon="italic16" format="italic" />
           <MarkButton icon="underline16" format="underline" />
-          <BlockButton icon="unorderedList16" format="ul-list" />
+          <BlockButton icon="unorderedList16" format="ul" />
         </Styled.Toolbar>
         <Styled.Editable
           renderElement={renderElement}
