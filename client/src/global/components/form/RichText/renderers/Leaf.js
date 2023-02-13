@@ -16,6 +16,10 @@ export default function SlateLeaf({ attributes, children, leaf }) {
     leafChildren = <u>{leafChildren}</u>;
   }
 
+  if (leaf.strikethrough) {
+    leafChildren = <s>{leafChildren}</s>;
+  }
+
   return (
     <span {...attributes} className={Object.keys(rest).join(" ")}>
       {leafChildren}

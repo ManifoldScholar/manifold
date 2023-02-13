@@ -1,3 +1,5 @@
+/* Element groups for rendering/editing in RTE */
+
 // These elements can be inserted via the RTE UI. Fully editable.
 export const rteElements = [
   "p",
@@ -8,8 +10,12 @@ export const rteElements = [
   "ol",
   "ul",
   "blockquote",
-  "li"
+  "li",
+  "a"
 ];
+
+// These elements are removable/insertable via the RTE but their contents cannot be edited.
+export const rteVoids = ["img", "iframe"];
 
 // These elements are rendered in the RTE, but can't be created there. Their rteElement children are editable, and these elements can be removed in the RTE by removing all of their children.
 export const renderedElements = [
@@ -19,14 +25,58 @@ export const renderedElements = [
   "figure",
   "div",
   "br",
-  "span",
   "section",
   "figcaption",
-  "hr",
-  "a"
+  "hr"
 ];
 
-// add h3, h4, h5?, a, img, iframe?, text alignment?,
-// render header, footer, figure, figcaption, br, hr
+// These elements are applied as marks to text leaves in Slate. They can be added and removed in the RTE. This probably needs some adjustment. For example, currently both del and s become "strikethrough" when serialized to Slate and there's no way to tell what the original tag was.
+export const markElements = [
+  "i",
+  "del",
+  "em",
+  "s",
+  "strong",
+  "u",
+  "pre",
+  "code"
+];
 
-export const markElements = ["i", "del", "em", "s", "strong", "u"];
+// All other elements are Slate void elements and are rendered as a placeholder in the RTE.
+
+/* Element groups for Slate normalizing */
+
+// See https://docs.slatejs.org/concepts/02-nodes#blocks-vs.-inlines and https://docs.slatejs.org/concepts/11-normalizing#built-in-constraints
+// This list mirrors the list of inline elements in the api serializer minus the elements that are marks rather than nodes in Slate.
+export const inlineNodes = [
+  "b",
+  "big",
+  "small",
+  "tt",
+  "abbr",
+  "acronym",
+  "cite",
+  "dfn",
+  "kbd",
+  "samp",
+  "time",
+  "var",
+  "a",
+  "bdo",
+  "br",
+  "img",
+  "map",
+  "object",
+  "q",
+  "span",
+  "sub",
+  "sup",
+  "button",
+  "input",
+  "label",
+  "select",
+  "textarea"
+];
+
+// Also duplicated from the api. These elements are removed during serialization and are never saved.
+export const blackList = ["script", "link"];

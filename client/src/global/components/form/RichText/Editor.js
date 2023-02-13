@@ -9,10 +9,16 @@ import { createEditor, Transforms, Path, Editor as SlateEditor } from "slate";
 import { Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { Leaf, Element } from "./renderers";
-import { MarkButton, BlockButton, ToggleHTML } from "./controls";
+import {
+  MarkButton,
+  BlockButton,
+  ToggleHTML,
+  LinkButton,
+  ImageButton
+} from "./controls";
 import { serializeToHtml, serializeToSlate } from "./serializers";
 import { HTMLEditor } from "./loaders";
-import { withVoids } from "./plugins";
+import { withVoids, withInlines, withImages } from "./slate-plugins";
 import { clearSlate, formatHtml } from "./slateHelpers";
 import * as Styled from "./styles";
 
@@ -23,7 +29,10 @@ export default function Editor({
   stylesheets
 }) {
   const editor = useMemo(
-    () => withHistory(withReact(withVoids(createEditor()))),
+    () =>
+      withHistory(
+        withReact(withInlines(withVoids(withImages(createEditor()))))
+      ),
     []
   );
   const [htmlMode, toggleHtmlMode] = useState(false);
@@ -127,11 +136,16 @@ export default function Editor({
           <MarkButton icon="bold16" format="bold" />
           <MarkButton icon="italic16" format="italic" />
           <MarkButton icon="underline16" format="underline" />
+          <MarkButton icon="strikethrough16" format="strikethrough" />
+          <LinkButton icon="resourceLink64" size={20} />
           <BlockButton icon="headingOne16" format="h1" />
           <BlockButton icon="headingTwo16" format="h2" />
+          <BlockButton icon="headingThree16" format="h3" />
           <BlockButton icon="orderedList16" format="ol" />
           <BlockButton icon="unorderedList16" format="ul" />
           <BlockButton icon="blockQuote16" format="blockquote" />
+          <ImageButton icon="resourceImage64" size={20} />
+          <BlockButton icon="resourceVideo64" size={20} />
           <ToggleHTML icon="code16" active={htmlMode} onClick={onClickToggle} />
         </Styled.Toolbar>
         <Styled.EditableWrapper className="manifold-text-section">

@@ -1,5 +1,6 @@
 import React from "react";
 import Utility from "global/components/utility";
+import Image from "./Image";
 import { rteElements, renderedElements, markElements } from "../rteElements";
 
 export default function SlateElement({ attributes, children, element }) {
@@ -16,13 +17,9 @@ export default function SlateElement({ attributes, children, element }) {
   }
   if (element.type === "img") {
     return (
-      <div contentEditable={false} {...attributes}>
-        <img
-          height="200px"
-          src={element.htmlAttrs.src}
-          alt={element.htmlAttrs.alt}
-        />
-      </div>
+      <Image attributes={attributes} element={element}>
+        {children}
+      </Image>
     );
   }
   if (element.type === "a") {

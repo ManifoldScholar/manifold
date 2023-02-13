@@ -27,3 +27,18 @@ export const formatHtml = html => {
 
   return html_beautify(html, options);
 };
+
+export const isValidUrl = str => {
+  try {
+    return Boolean(new URL(str));
+  } catch (e) {
+    return false;
+  }
+};
+
+export const isImageUrl = url => {
+  if (!url) return false;
+  if (!isValidUrl(url)) return false;
+  const ext = new URL(url).pathname.split(".").pop();
+  return ["gif", "jpg", "jpeg", "png"].includes(ext);
+};

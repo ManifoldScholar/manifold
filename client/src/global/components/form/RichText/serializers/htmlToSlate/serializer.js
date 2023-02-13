@@ -63,9 +63,15 @@ const deserializeElement = ({
   childrenLength = 0,
   context = ""
 }) => {
-  if (el.type !== ElementType.Tag && el.type !== ElementType.Text) {
+  if (
+    el.type !== ElementType.Tag &&
+    el.type !== ElementType.Text &&
+    el.type !== ElementType.Root
+  ) {
     return null;
   }
+
+  if (el.type === ElementType.Root) return deserializeElement(el.childNodes[0]);
 
   const nodeName = getName(el);
   const childrenContext = getContext(nodeName) || context;
