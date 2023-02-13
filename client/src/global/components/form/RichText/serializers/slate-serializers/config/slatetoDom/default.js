@@ -30,10 +30,6 @@ export const config = {
   markMap: MARK_ELEMENT_TAG_MAP,
   elementMap: ELEMENT_NAME_TAG_MAP,
   elementTransforms: {
-    quote: ({ children = [] }) => {
-      const p = [new Element("p", {}, children)];
-      return new Element("blockquote", {}, p);
-    },
     link: ({ node, children = [] }) => {
       const attrs = {};
       if (node.newTab) {
