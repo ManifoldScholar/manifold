@@ -7,6 +7,7 @@ import {
 } from "./annotationHelpers";
 import { useTranslation } from "react-i18next";
 import { uid } from "react-uid";
+import { useErrorHandler } from "react-error-boundary";
 
 const createNode = n =>
   React.createElement(
@@ -28,8 +29,15 @@ function MathNode({
   hasInteractiveAncestor
 }) {
   const { t } = useTranslation();
+  const handleError = useErrorHandler();
 
-  const childNodes = children.map(child => createNode(child));
+  const childNodes = () => {
+    try {
+      return children.map(child => createNode(child));
+    } catch (e) {
+      handleError();
+    }
+  };
 
   const localAnnotations = getlocalAnnotationsArray(openAnnotations);
   const {
@@ -53,7 +61,7 @@ function MathNode({
       data-annotation-ids={annotationIds}
       {...interactiveAttributes}
     >
-      <math {...attributes}>{childNodes}</math>
+      <math {...attributes}>{childNodes()}</math>
     </Wrapper>
   );
 }

@@ -3,6 +3,14 @@ import Nodes from "../nodes";
 import has from "lodash/has";
 import upperFirst from "lodash/upperFirst";
 import { mathNodeHelpers } from "../nodes/Math";
+import { ErrorBoundary } from "react-error-boundary";
+import * as Styled from "./styles";
+
+const MathError = () => (
+  <Styled.Error>
+    There was an error rendering this MathML expression.
+  </Styled.Error>
+);
 
 export default class NodeTreeIterator {
   constructor(bodyProps) {
@@ -86,10 +94,14 @@ export default class NodeTreeIterator {
     if (Nodes.hasOwnProperty(lookup)) ComponentClass = Nodes[lookup];
     if (lookup === "A") ComponentClass = Nodes.Link;
     if (lookup === "Math") {
-      return React.createElement(
-        ComponentClass,
-        { ...node, uuids: mathUuids },
-        node.children
+      return (
+        <ErrorBoundary FallbackComponent={MathError}>
+          {React.createElement(
+            ComponentClass,
+            { ...node, uuids: mathUuids },
+            node.children
+          )}
+        </ErrorBoundary>
       );
     }
     return React.createElement(ComponentClass, node, this.visitChildren(node));
