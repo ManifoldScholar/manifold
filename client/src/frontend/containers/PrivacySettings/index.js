@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import AccountData from "frontend/components/privacy/AccountData";
 import CookiesForm from "frontend/components/privacy/CookiesForm";
 import Form from "global/components/form";
+import HeadContent from "global/components/HeadContent";
 import * as Styled from "./styles";
 
 export default function PrivacySettingsContainer() {
@@ -20,6 +21,7 @@ export default function PrivacySettingsContainer() {
         level: 2
       }}
     >
+      <HeadContent title={t("titles.privacy")} appendDefaultTitle />
       <section className="bg-neutral05">
         <div className="container">
           <Styled.FormWrapper>

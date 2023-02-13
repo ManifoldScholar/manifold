@@ -7,6 +7,7 @@ import Authorize from "hoc/Authorize";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import { useFromStore, useNotification } from "hooks";
+import HeadContent from "global/components/HeadContent";
 import * as Styled from "./styles";
 
 export default function SubscriptionsContainer() {
@@ -37,6 +38,7 @@ export default function SubscriptionsContainer() {
         level: 2
       }}
     >
+      <HeadContent title={t("titles.notifications")} appendDefaultTitle />
       <section className="bg-neutral05">
         <div className="container">
           <Styled.Form
