@@ -20,6 +20,7 @@ import { serializeToHtml, serializeToSlate } from "./serializers";
 import { HTMLEditor } from "./loaders";
 import { withVoids, withInlines, withImages } from "./slate-plugins";
 import { clearSlate, formatHtml } from "./slateHelpers";
+import { inlineNodes } from "./rteElements";
 import * as Styled from "./styles";
 
 export default function Editor({
@@ -111,7 +112,7 @@ export default function Editor({
       const focusOffset = editor.selection.focus.offset;
       const endOffset = SlateEditor.end(editor, prev[1]).offset;
 
-      if (focusOffset !== endOffset) {
+      if (focusOffset !== endOffset || inlineNodes.includes(prev[0].type)) {
         Transforms.splitNodes(editor, { at: editor.selection });
       } else {
         const { children, htmlAttrs, ...next } = prev[0];

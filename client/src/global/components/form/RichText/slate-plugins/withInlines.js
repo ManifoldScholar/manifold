@@ -7,11 +7,10 @@ const withInlines = editor => {
   const { insertData, insertText, isInline } = editor;
 
   editor.isInline = element => {
-    const isInlineMath =
-      element.type === "math" && element.htmlAttrs?.display === "inline";
-    return (
-      isInlineMath || inlineNodes.includes(element.type) || isInline(element)
-    );
+    // Add later
+    // const isInlineMath =
+    //   element.type === "math" && element.htmlAttrs?.display === "inline";
+    return inlineNodes.includes(element.type) || isInline(element);
   };
 
   editor.insertText = text => {

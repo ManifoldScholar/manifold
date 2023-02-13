@@ -12,18 +12,17 @@ export const addSlateOnlySpan = node => {
   return jsx("element", { type: "span", slateOnly: true }, [node]);
 };
 
-const isInlineMath = node => {
-  return node.type === "math" && node.htmlAttrs?.display === "inline";
-};
+// Implement this later...
+// const isInlineMath = node => {
+//   return node.type === "math" && node.htmlAttrs?.display === "inline";
+// };
 
 const hasInvalidChildren = (children, context) => {
   const hasTextChild = children.find(c => c.text);
   const hasBlockChild = children.find(
-    c => c.type && !inlineNodes.includes(c.type) && !isInlineMath(c)
+    c => c.type && !inlineNodes.includes(c.type)
   );
-  const hasInlineChild = children.find(
-    c => inlineNodes.includes(c.type) || isInlineMath(c)
-  );
+  const hasInlineChild = children.find(c => inlineNodes.includes(c.type));
 
   if (context === CONTEXT_VALUES.block) {
     if (!hasBlockChild) return false;
@@ -47,9 +46,8 @@ const spaceInlineChildren = children => {
       return c;
     })
     .flat();
-
   const hasInlineLastChild = inlineNodes.includes(
-    adjustedChildren[adjustedChildren.length - 1].type
+    adjustedChildren[adjustedChildren.length - 1]?.type
   );
   return hasInlineLastChild
     ? [...adjustedChildren, jsx("text", { text: "" }, [])]
@@ -65,6 +63,7 @@ const wrapBlockChildren = children => {
 };
 
 export const normalizeChildren = (children, context) => {
+  if (!children || children.length === 0) return children;
   if (!hasInvalidChildren(children, context)) {
     if (context === CONTEXT_VALUES.block) {
       return [spaceInlineChildren(children), null];
