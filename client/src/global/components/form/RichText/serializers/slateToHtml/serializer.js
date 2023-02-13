@@ -50,7 +50,6 @@ const serializeNode = node => {
   const attrs = { ...node.htmlAttrs };
 
   if (!node.type) return new Element("div", attrs, children);
-  if (node.type === "p") return blankLineHandler({ node, children });
 
   const el = new Element(node.type, attrs, children);
   return el ?? new Document(children);
