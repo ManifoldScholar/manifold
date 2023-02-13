@@ -95,7 +95,7 @@ export default class NodeTreeIterator {
     if (lookup === "A") ComponentClass = Nodes.Link;
     if (lookup === "Math") {
       return (
-        <ErrorBoundary FallbackComponent={MathError}>
+        <ErrorBoundary key={node.key} FallbackComponent={MathError}>
           {React.createElement(
             ComponentClass,
             { ...node, uuids: mathUuids },
