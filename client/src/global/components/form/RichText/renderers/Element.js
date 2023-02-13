@@ -4,12 +4,12 @@ import { rteElements, renderedElements, markElements } from "../rteElements";
 
 export default function SlateElement({ attributes, children, element }) {
   if (element.type === "br") {
-    return <p {...attributes}>{[]}</p>;
+    return <p {...attributes}>{children}</p>;
   }
   if (element.type === "hr") {
     return (
       <span contentEditable={false} {...attributes}>
-        {[]}
+        {children}
         <hr />
       </span>
     );
