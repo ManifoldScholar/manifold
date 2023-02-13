@@ -1,38 +1,66 @@
 import React from "react";
-import HTMLBlock from "./HTMLBlock";
+import Utility from "global/components/utility";
+import { rteElements, renderedElements, markElements } from "../rteElements";
 
 export default function SlateElement({ attributes, children, element }) {
-  switch (element.type) {
-    case "html":
-      return (
-        <HTMLBlock attributes={attributes} element={element}>
-          {children}
-        </HTMLBlock>
-      );
-    case "code-line":
-      return (
-        <div {...attributes} style={{ position: "relative" }}>
-          {children}
-        </div>
-      );
-    case "blockquote":
-      return <blockquote {...attributes}>{children}</blockquote>;
-    case "ul":
-      return <ul {...attributes}>{children}</ul>;
-    case "ol":
-      return <ol {...attributes}>{children}</ol>;
-    case "h1":
-      return <h1 {...attributes}>{children}</h1>;
-    case "h2":
-      return <h2 {...attributes}>{children}</h2>;
-    case "li":
-      return <li {...attributes}>{children}</li>;
-    case "p":
-      // if (children.length === 1 && !children[0].props.text.text) return <br />;
-      return <p {...attributes}>{children}</p>;
-    case "section":
-      return <section {...attributes}>{children}</section>;
-    default:
-      return <span {...attributes}>{children}</span>;
+  if (element.type === "br") {
+    return <p {...attributes}>{[]}</p>;
   }
+  if (element.type === "hr") {
+    return (
+      <span contentEditable={false} {...attributes}>
+        {[]}
+        <hr />
+      </span>
+    );
+  }
+  if (element.type === "img") {
+    return (
+      <div contentEditable={false} {...attributes}>
+        <img
+          height="200px"
+          src={element.htmlAttrs.src}
+          alt={element.htmlAttrs.alt}
+        />
+      </div>
+    );
+  }
+  if (element.type === "a") {
+    return (
+      <a href={element.htmlAttrs.href} {...attributes}>
+        {children}
+      </a>
+    );
+  }
+  if (
+    rteElements.includes(element.type) ||
+    renderedElements.includes(element.type) ||
+    markElements.includes(element.type)
+  ) {
+    const Tag = element.type;
+    const className = element.htmlAttrs?.class || undefined;
+    const epubType = element.htmlAttrs?.["data-epub-type"] || undefined;
+    return (
+      <Tag className={className} data-epub-type={epubType} {...attributes}>
+        {children}
+      </Tag>
+    );
+  }
+
+  return (
+    <span
+      style={{
+        background: "gray",
+        color: "black",
+        paddingInline: "2px",
+        marginInline: "2px",
+        pointerEvents: "none"
+      }}
+      contentEditable={false}
+      {...attributes}
+    >
+      {[]}
+      <Utility.IconComposer icon="code16" />
+    </span>
+  );
 }
