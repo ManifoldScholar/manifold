@@ -25,8 +25,7 @@ const MarkButton = ({ format, label, icon }) => {
   return (
     <Styled.Button
       data-active={isMarkActive(editor, format)}
-      type="button"
-      onClick={event => {
+      onMouseDown={event => {
         event.preventDefault();
         toggleMark(editor, format);
       }}

@@ -69,8 +69,7 @@ const BlockButton = ({ format, icon }) => {
         format,
         TEXT_ALIGN_TYPES.includes(format) ? "align" : "type"
       )}
-      type="button"
-      onClick={event => {
+      onMouseDown={event => {
         event.preventDefault();
         toggleBlock(editor, format);
       }}

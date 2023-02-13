@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { createEditor, Transforms } from "slate";
 import { Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
@@ -6,7 +6,8 @@ import { Leaf, Element } from "./renderers";
 import { MarkButton, BlockButton, ToggleHTML } from "./controls";
 import { serializeToHtml, serializeToSlate } from "./serializers";
 import { HTMLEditor } from "./loaders";
-import { clearSlate } from "./slateHelpers";
+import { clearSlate, formatHtml } from "./slateHelpers";
+import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 const defaultValue = [
@@ -16,17 +17,23 @@ const defaultValue = [
   }
 ];
 
-const getInitialValue = value => {
-  if (!value) return defaultValue;
-  if (typeof value === "string") return serializeToSlate(value);
-  return value;
+const getInitialSlateValue = value => {
+  if (value && typeof value === "string") return serializeToSlate(value);
+  return defaultValue;
+};
+
+const getInitialHtmlValue = value => {
+  if (value && typeof value === "string") return formatHtml(value);
+  return "";
 };
 
 export default function Editor({ set: setFormValue, value }) {
-  const [editor] = useState(() => withHistory(withReact(createEditor())));
-  const [htmlMode, toggleHtmlMode] = useState(true);
-  const [localHtml, setLocalHtml] = useState(value);
-  const [localSlate, setLocalSlate] = useState(getInitialValue());
+  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  const [htmlMode, toggleHtmlMode] = useState(false);
+  const [localHtml, setLocalHtml] = useState(getInitialHtmlValue(value));
+  const [localSlate, setLocalSlate] = useState(getInitialSlateValue(value));
+  const settings = useFromStore("settings", "select");
+  const theme = `.rte-container {${settings.attributes.ingestion.globalStyles}}`;
 
   const renderElement = useCallback(props => <Element {...props} />, []);
 
@@ -51,7 +58,7 @@ export default function Editor({ set: setFormValue, value }) {
       return toggleHtmlMode(false);
     }
 
-    const html = serializeToHtml(localSlate);
+    const html = formatHtml(serializeToHtml(localSlate));
     setLocalHtml(html);
     return toggleHtmlMode(true);
   };
@@ -68,7 +75,7 @@ export default function Editor({ set: setFormValue, value }) {
   };
 
   return (
-    <Styled.EditorSecondary>
+    <Styled.EditorSecondary className="rte-container">
       <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
         <Styled.Toolbar>
           <MarkButton icon="bold16" format="bold" />
@@ -88,11 +95,12 @@ export default function Editor({ set: setFormValue, value }) {
               renderElement={renderElement}
               renderLeaf={renderLeaf}
               placeholder="Enter text here..."
-              spellCheck
+              spellCheck={false}
             />
           )}
           {htmlMode && <HTMLEditor {...codeAreaProps} />}
         </Styled.EditableWrapper>
+        <style>{theme}</style>
       </Slate>
     </Styled.EditorSecondary>
   );
