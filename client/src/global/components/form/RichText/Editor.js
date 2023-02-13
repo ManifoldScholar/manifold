@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
-import { createEditor, Transforms } from "slate";
+import { createEditor, Transforms, Path, Editor as SlateEditor } from "slate";
 import { Slate, withReact } from "slate-react";
 import { withHistory } from "slate-history";
 import { Leaf, Element } from "./renderers";
@@ -64,6 +64,32 @@ export default function Editor({
     value: localHtml
   };
 
+  const onKeyDown = e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      // handle case where prev is a span or other inline
+      const prev = SlateEditor.above(editor, editor.selection);
+      const focusOffset = editor.selection.focus.offset;
+      const endOffset = SlateEditor.end(editor, prev[1]).offset;
+
+      if (focusOffset !== endOffset) {
+        Transforms.splitNodes(editor, { at: editor.selection });
+      } else {
+        const { children, htmlAttrs, ...next } = prev[0];
+        const path = Path.next(prev[1]);
+        Transforms.insertNodes(
+          editor,
+          { ...next, children: [] },
+          { at: editor.selection }
+        );
+        Transforms.select(editor, {
+          anchor: { path: [...path, 0], offset: 0 },
+          focus: { path: [...path, 0], offset: 0 }
+        });
+      }
+    }
+  };
+
   return (
     <Styled.EditorSecondary>
       <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
@@ -86,6 +112,7 @@ export default function Editor({
               renderLeaf={renderLeaf}
               placeholder="Enter text here..."
               spellCheck={false}
+              onKeyDown={onKeyDown}
             />
           )}
           {htmlMode && <HTMLEditor {...codeAreaProps} />}
