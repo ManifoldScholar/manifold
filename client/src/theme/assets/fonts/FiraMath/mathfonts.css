@@ -1,0 +1,21 @@
+/*
+The FiraMath font is released under the SIL Open Font License. See the files in
+this directory for details.
+*/
+
+@namespace url('http://www.w3.org/1999/xhtml');
+@namespace m url('http://www.w3.org/1998/Math/MathML');
+
+@font-face {
+    font-family: Fira Math;
+    src: local('Fira Math'), local('FiraMath-Regular'),
+         url('FiraMath-Regular.woff2'), url('FiraMath-Regular.woff');
+}
+
+.htmlmathparagraph, m|mtext {
+    /* TODO: use FiraGO instead? */
+    font-family: Fira Math;
+}
+m|math {
+    font-family: Fira Math;
+}

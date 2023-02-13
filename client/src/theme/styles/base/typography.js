@@ -19,4 +19,21 @@ export default `
   a {
     text-decoration-thickness: inherit;
   }
+
+  mtext {
+    font-family: Latin Modern Roman, LMRoman12, STIX Two Text;
+  }
+  math {
+    font-family: Latin Modern Math, STIX Two Math;
+  }
+
+  .font-sans-serif {
+    mtext {
+      font-family: Fira Math, STIX Two Text;
+    }
+    math {
+      font-family: Fira Math, STIX Two Math;
+    }
+  }
+
 `;
