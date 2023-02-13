@@ -13,7 +13,8 @@ module Serializer
     MATHML_ELEMENTS = %w(math maction annotation annotation-xml menclose merror mfenced
                          mfrac mi mmultiscripts mn mo mover mpadded mphantom mprescripts
                          mroot mrow ms semantics mspace msqrt mstyle msub msup msubsup
-                         mtable mtd mtext mtr munder munderover).freeze
+                         mtable mtd mtext mtr munder munderover ci cn cs csymbol apply bind
+                         bvar share cerror cbytes).freeze
 
     def serialize(html, logger = Rails.logger)
       reset

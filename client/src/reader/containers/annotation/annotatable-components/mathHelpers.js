@@ -32,7 +32,17 @@ const mathMLElements = [
   "mtext",
   "mtr",
   "munder",
-  "munderover"
+  "munderover",
+  "ci",
+  "cn",
+  "cs",
+  "csymbol",
+  "apply",
+  "bind",
+  "bvar",
+  "share",
+  "cerror",
+  "cbytes"
 ];
 
 export const isMathMLNode = node => {
