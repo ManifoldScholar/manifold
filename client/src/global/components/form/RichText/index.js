@@ -4,7 +4,7 @@ import Editor from "./Editor";
 import BaseLabel from "../BaseLabel";
 import Instructions from "../Instructions";
 import setter from "../setter";
-import serializeToSlate from "./serializers/htmlToSlate";
+import { serializeToSlate } from "./serializers";
 import { formatHtml } from "./slateHelpers";
 
 const defaultValue = [
