@@ -2,7 +2,7 @@ import { Document, Element, Text } from "domhandler";
 import serializer from "dom-serializer";
 import { Text as SlateText } from "slate";
 
-import { isOnlyWhitespace, nestMarkElements, blankLineHandler } from "./utils";
+import { isOnlyWhitespace, nestMarkElements } from "./utils";
 
 const MARK_TAG_MAP = {
   strikethrough: "s",
@@ -27,14 +27,23 @@ const serializeText = node => {
   return new Document(textElement);
 };
 
+const mergeSlateOnlyChildren = node => {
+  if (!node.slateOnly) return node;
+  return node.children;
+};
+
 /* eslint-disable no-use-before-define */
-const serializeChildren = (children, config) => {
+const serializeChildren = children => {
   if (!children) return [];
-  return children.map(n => serializeNode(n, config)).filter(Boolean);
+
+  return children
+    .map(mergeSlateOnlyChildren)
+    .flat()
+    .map(serializeNode)
+    .filter(Boolean);
 };
 
 const serializeNode = node => {
-  if (node.slateOnly) return serializeNode(node.children[0]);
   if (SlateText.isText(node)) return serializeText(node);
 
   const children = serializeChildren(node.children);
@@ -54,6 +63,5 @@ export const slateToDom = slate => {
 
 export const slateToHtml = slate => {
   const document = slateToDom(slate);
-  console.log(document);
   return serializer(document);
 };

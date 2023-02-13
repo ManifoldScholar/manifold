@@ -1,21 +1,81 @@
 import { jsx } from "slate-hyperscript";
 import { getChildren } from "domutils";
-import { isBlock } from "./blocks";
+import { inlineNodes } from "../../rteElements";
+
+const CONTEXT_VALUES = {
+  block: "block",
+  inline: "inline",
+  preserve: "preserve"
+};
 
 export const addSlateOnlySpan = node => {
   return jsx("element", { type: "span", slateOnly: true }, [node]);
 };
 
-export const hasChildTypeMismatch = children => {
-  const hasElementChild = children.find(c => c.type);
-  const hasTextChild = children.find(c => c.text);
-  return hasElementChild && hasTextChild;
+const isInlineMath = node => {
+  return node.type === "math" && node.htmlAttrs?.display === "inline";
 };
 
-export const handleChildMismatch = children => {
-  if (!hasChildTypeMismatch(children)) return children;
+const hasInvalidChildren = (children, context) => {
+  const hasTextChild = children.find(c => c.text);
+  const hasBlockChild = children.find(
+    c => c.type && !inlineNodes.includes(c.type) && !isInlineMath(c)
+  );
+  const hasInlineChild = children.find(
+    c => inlineNodes.includes(c.type) || isInlineMath(c)
+  );
 
-  return children.map(c => (c.text ? addSlateOnlySpan(c) : c));
+  if (context === CONTEXT_VALUES.block) {
+    if (!hasBlockChild) return false;
+    if (hasTextChild || hasInlineChild) return true;
+    return false;
+  }
+
+  if (context === CONTEXT_VALUES.inline) {
+    if (hasBlockChild) return true;
+  }
+
+  return false;
+};
+
+const spaceInlineChildren = children => {
+  const adjustedChildren = children
+    .map((c, i) => {
+      if (!inlineNodes.includes(c.type)) return c;
+      if (i === 0 || inlineNodes.includes(children[i - 1]?.type))
+        return [jsx("text", { text: "" }, []), c];
+      return c;
+    })
+    .flat();
+
+  const hasInlineLastChild = inlineNodes.includes(
+    adjustedChildren[adjustedChildren.length - 1].type
+  );
+  return hasInlineLastChild
+    ? [...adjustedChildren, jsx("text", { text: "" }, [])]
+    : adjustedChildren;
+};
+
+const wrapBlockChildren = children => {
+  return children.map(c => {
+    if (inlineNodes.includes(c.type) || c.text)
+      return jsx("element", { type: "div", slateOnly: true }, [c]);
+    return c;
+  });
+};
+
+export const normalizeChildren = (children, context) => {
+  if (!hasInvalidChildren(children, context)) {
+    if (context === CONTEXT_VALUES.block) {
+      return [spaceInlineChildren(children), null];
+    }
+    return [children, null];
+  }
+
+  const normalizedChildren = spaceInlineChildren(wrapBlockChildren(children));
+
+  if (context === CONTEXT_VALUES.block) return [normalizedChildren, null];
+  return [normalizedChildren, "div"];
 };
 
 export const replacePreTags = html =>
@@ -27,7 +87,7 @@ export const addTextNodeToEmptyChildren = element => {
     : element;
 };
 
-export const textTags = {
+export const markTags = {
   code: "code",
   pre: "code",
   del: "strikethrough",
@@ -39,7 +99,7 @@ export const textTags = {
 };
 
 export const getMarkAttributesForTag = tag => {
-  if (Object.keys(textTags).includes(tag)) return { [textTags[tag]]: true };
+  if (Object.keys(markTags).includes(tag)) return { [markTags[tag]]: true };
 };
 
 export const assignTextMarkAttributes = (el, attrs) => {
@@ -83,21 +143,21 @@ export const isOnlyWhitespace = str => {
   return !/[^\t\n\r ]/.test(str);
 };
 
-const preserveWhitespace = tagName => {
-  return ["code", "pre", "xmp"].includes(tagName);
+const preserveWhitespace = tag => {
+  return ["code", "pre", "xmp"].includes(tag);
 };
 
-export const getContext = tagName => {
-  if (!tagName || tagName.trim() === "") {
+export const getSlateNodeContext = tag => {
+  if (!tag || tag.trim() === "") {
     return "";
   }
-  if (preserveWhitespace(tagName)) {
-    return "preserve";
+  if (preserveWhitespace(tag)) {
+    return CONTEXT_VALUES.preserve;
   }
-  if (isBlock(tagName)) {
-    return "block";
+  if (inlineNodes.includes(tag)) {
+    return CONTEXT_VALUES.inline;
   }
-  return "inline";
+  return CONTEXT_VALUES.block;
 };
 
 export const processTextValue = ({
@@ -107,15 +167,13 @@ export const processTextValue = ({
   isInlineEnd = false,
   isNextSiblingBlock = false
 }) => {
-  if (context === "preserve") {
+  if (context === CONTEXT_VALUES.preserve) {
     return text;
   }
-  if (context === "block") {
-    // is this the start of inline content after a block element?
+  if (context === CONTEXT_VALUES.block) {
     if (isInlineStart) {
       return minifyText(text).trimStart();
     }
-    // is this the end of inline content in a block element?
     if (isInlineEnd || isNextSiblingBlock) {
       return minifyText(text).trimEnd();
     }
