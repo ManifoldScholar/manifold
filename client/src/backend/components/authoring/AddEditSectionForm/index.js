@@ -70,6 +70,9 @@ export default function AddEditSectionForm({
         label={t("texts.section.content_label")}
         instructions={"Rich text section content"}
         name="attributes[body]"
+        sectionId={section?.id}
+        sectionBody={section?.attributes.body}
+        stylesheets={section?.relationships.stylesheets}
       />
       <Form.DrawerButtons
         showCancel

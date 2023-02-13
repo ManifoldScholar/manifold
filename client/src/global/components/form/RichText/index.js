@@ -24,10 +24,24 @@ const getInitialHtmlValue = value => {
   return "";
 };
 
-function RichText({ name, errors, label, instructions, set, value }) {
+function RichText({
+  name,
+  errors,
+  label,
+  instructions,
+  set,
+  stylesheets,
+  sectionId,
+  sectionBody
+}) {
   /* eslint-disable react-hooks/exhaustive-deps */
-  const initialSlateValue = useMemo(() => getInitialSlateValue(value), []);
-  const initialHtmlValue = useMemo(() => getInitialHtmlValue(value), []);
+  const initialSlateValue = useMemo(() => {
+    return getInitialSlateValue(sectionBody);
+  }, [sectionId, sectionBody]);
+  const initialHtmlValue = useMemo(() => getInitialHtmlValue(sectionBody), [
+    sectionId,
+    sectionBody
+  ]);
 
   return (
     <Errorable className="wide" name={name} errors={errors} label={label}>
@@ -39,6 +53,7 @@ function RichText({ name, errors, label, instructions, set, value }) {
         set={set}
         initialSlateValue={initialSlateValue}
         initialHtmlValue={initialHtmlValue}
+        stylesheets={stylesheets}
       />
     </Errorable>
   );

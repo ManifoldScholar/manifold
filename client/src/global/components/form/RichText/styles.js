@@ -25,6 +25,10 @@ export const EditorSecondary = styled(Editor)`
   &::placeholder {
     color: var(--color-neutral-ui-light);
   }
+
+  &.error {
+    --TextArea-border-color: var(--error-color);
+  }
 `;
 
 export const Toolbar = styled.div`
