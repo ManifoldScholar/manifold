@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
@@ -50,6 +50,15 @@ export default function AddEditSectionForm({
     history.push(lh.link("backendTextSections", textId));
   }, [history, textId, refresh]);
 
+  const [hasErrors, setHasErrors] = useState(false);
+  const [warnErrors, setWarnErrors] = useState(false);
+  const errorProps = {
+    hasErrors,
+    setHasErrors,
+    warnErrors,
+    setWarnErrors
+  };
+
   return (
     <FormContainer.Form
       model={section ?? defaultModel}
@@ -73,11 +82,13 @@ export default function AddEditSectionForm({
         sectionId={section?.id}
         sectionBody={section?.attributes.body}
         stylesheets={section?.relationships.stylesheets}
+        {...errorProps}
       />
       <Form.DrawerButtons
         showCancel
         cancelUrl={lh.link("backendTextSections", textId)}
         submitLabel="texts.section.save_button_label"
+        disableSubmit={!!hasErrors}
       />
     </FormContainer.Form>
   );

@@ -414,7 +414,7 @@ export default `
 
     ${respond(`font-size: 14px;`, 60)}
 
-    &:hover {
+    &:hover:not(:disabled) {
       color: var(--strong-color);
       background-color: var(--color-accent-primary-dull);
     }
@@ -430,7 +430,7 @@ export default `
     &--dull {
       background-color: var(--button-dull-bg-color);
 
-      &:hover {
+      &:hover:not(:disabled) {
         background-color: var(--color-base-neutral20);
       }
 
@@ -445,7 +445,7 @@ export default `
       background: none;
       border: 1px solid var(--hover-color);
 
-      &:hover {
+      &:hover:not(:disabled) {
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--hover-color);
       }
@@ -468,7 +468,7 @@ export default `
 
         ${fillOnFocus(rgba("neutral70", 0.2))}
 
-        &:hover {
+        &:hover:not(:disabled) {
           color: var(--color-neutral-text-extra-dark);
           background-color: var(--highlight-color);
         }

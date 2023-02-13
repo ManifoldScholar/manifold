@@ -23,9 +23,16 @@ export default function DrawerButtons({
 
   return (
     <Styled.ButtonGroup>
-      <button type="submit" className={buttonClasses} disabled={disableSubmit}>
+      <Styled.ButtonWithDisable
+        type="submit"
+        className={classNames(buttonClasses, {
+          "button-secondary--dull": disableSubmit,
+          disabled: disableSubmit
+        })}
+        disabled={disableSubmit}
+      >
         <span>{t(submitLabel)}</span>
-      </button>
+      </Styled.ButtonWithDisable>
       {showCancel && (
         <button
           onClick={handleCancelClick}
