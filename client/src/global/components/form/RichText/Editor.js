@@ -10,28 +10,15 @@ import { clearSlate, formatHtml } from "./slateHelpers";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
-const defaultValue = [
-  {
-    type: "p",
-    children: [{ text: "" }]
-  }
-];
-
-const getInitialSlateValue = value => {
-  if (value && typeof value === "string") return serializeToSlate(value);
-  return defaultValue;
-};
-
-const getInitialHtmlValue = value => {
-  if (value && typeof value === "string") return formatHtml(value);
-  return "";
-};
-
-export default function Editor({ set: setFormValue, value }) {
+export default function Editor({
+  set: setFormValue,
+  initialSlateValue,
+  initialHtmlValue
+}) {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const [htmlMode, toggleHtmlMode] = useState(false);
-  const [localHtml, setLocalHtml] = useState(getInitialHtmlValue(value));
-  const [localSlate, setLocalSlate] = useState(getInitialSlateValue(value));
+  const [localHtml, setLocalHtml] = useState(initialHtmlValue);
+  const [localSlate, setLocalSlate] = useState(initialSlateValue);
   const settings = useFromStore("settings", "select");
   const theme = `.rte-container {${settings.attributes.ingestion.globalStyles}}`;
 
@@ -55,6 +42,7 @@ export default function Editor({ set: setFormValue, value }) {
       setLocalSlate(json);
       clearSlate(editor);
       Transforms.insertNodes(editor, json);
+      console.log(editor.children);
       return toggleHtmlMode(false);
     }
 

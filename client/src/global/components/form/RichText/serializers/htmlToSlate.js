@@ -1,4 +1,4 @@
-import { htmlToSlate } from "slate-serializers";
+import { htmlToSlate } from "./slate-serializers";
 
 const serializeToSlate = html => {
   const slateData = htmlToSlate(html);
