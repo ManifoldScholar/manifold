@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { entitlementsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -88,6 +88,13 @@ export class EntitlementsList extends PureComponent {
     const active = match.params.id;
     const listUrl = lh.nameFromType("backend", "Entitlement", entity);
     const newUrl = lh.nameFromType("backend", "EntitlementsNew", entity);
+    const instructions = (
+      <Trans
+        i18nKey="entitlements.instructions_project"
+        values={{ gid: entity.attributes.entitlementSubjectUrl }}
+        components={[<p />, <p className="entitlement-gid" />, <br />]}
+      />
+    );
     return (
       <section>
         {entitlements && (
@@ -95,9 +102,7 @@ export class EntitlementsList extends PureComponent {
             title={t("entitlements.header", {
               entity: entity.type.slice(0, -1)
             })}
-            instructions={t(
-              `entitlements.instructions_${entity.type.slice(0, -1)}`
-            )}
+            instructions={instructions}
             preList={preList}
             titleStyle="section"
             entities={entitlements}

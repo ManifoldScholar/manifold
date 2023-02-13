@@ -245,5 +245,12 @@ export default `.entity-list {
       border-radius: 10px;
     }
   }
+  
+  .entitlement-gid {
+    font-family: var(--font-family-mono);
+    font-style: normal;
+    font-size: 14px;
+    line-height: 1.5;
+  }
 }
 `;

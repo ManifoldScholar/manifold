@@ -2,8 +2,8 @@
   "entitlements": {
     "expires": "Expires {{val, datetime}}",
     "header": "{{ entity }} Entitlements",
-    "instructions_project": "Entitlements give users and/or reading groups access to this project. In Manifold, all projects are open by default. Enable access restrictions below to limit access to your project.",
-    "instructions_journal": "Journal entitlements give users and/or reading groups access to all of this journal's issues. You can also configure access to individual issues by granting entitlements on an issue's project.",
+    "instructions_project": "<0>Entitlements give users and/or reading groups access to this project. In Manifold, all projects are open by default. Enable access restrictions below to limit access to your project.</0><2/><0>ID for CSV entitlement imports:</0></2><1>{{gid}}</1>",
+    "instructions_journal": "<0>Journal entitlements give users and/or reading groups access to all of this journal's issues. You can also configure access to individual issues by granting entitlements on an issue's project.</0><2/><0>ID for CSV entitlement imports:</0></2><1>{{gid}}</1>",
     "button_label": "Create entitlement",
     "new": {
       "header": "Grant Entitlement",
