@@ -2,7 +2,7 @@ import { jsx } from "slate-hyperscript";
 import { Parser, ElementType } from "htmlparser2";
 import { DomHandler, isTag } from "domhandler";
 import { getName, textContent } from "domutils";
-import { inlineNodes } from "../../rteElements";
+import { inlineNodes, blackList } from "../../rteElements";
 
 import {
   normalizeChildren,
@@ -64,9 +64,9 @@ const deserializeElement = ({
   childrenLength = 0,
   context = ""
 }) => {
-  if (el.type !== ElementType.Tag && el.type !== ElementType.Text) {
-    return null;
-  }
+  if (el.type !== ElementType.Tag && el.type !== ElementType.Text) return null;
+  if (blackList.includes(el.type)) return null;
+
   const nodeName = getName(el);
 
   if (nodeName === "br" || nodeName === "hr") {
