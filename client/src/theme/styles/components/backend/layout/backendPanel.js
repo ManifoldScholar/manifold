@@ -21,6 +21,7 @@ export default `
       ${panelRounded}
       display: none;
       width: 192px;
+      height: max-content;
       padding: 25px 31px 45px;
       margin-right: 20px;
 
