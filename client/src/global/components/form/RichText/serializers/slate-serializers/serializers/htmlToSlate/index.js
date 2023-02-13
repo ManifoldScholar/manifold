@@ -11,6 +11,7 @@ import { getNested } from "../../utilities";
 import { isBlock } from "../blocks";
 
 import { getContext, isAllWhitespace, processTextValue } from "./whitespace";
+import { handleChildMismatch } from "./utils";
 
 const isSlateDeadEnd = element => {
   const keys = Object.keys(element);
@@ -33,7 +34,9 @@ const gatherTextMarkAttributes = ({ el, config = defaultConfig }) => {
   if (children.length > 0) {
     [el, ...children.flat()].forEach(child => {
       const name = getName(child);
-      const attrs = config.textTags[name] ? config.textTags[name](child) : {};
+      const attrs = config.textTags[el.parent.name]
+        ? config.textTags[el.parent.name](child)
+        : {};
       allAttrs = {
         ...allAttrs,
         ...attrs
@@ -47,7 +50,9 @@ const gatherTextMarkAttributes = ({ el, config = defaultConfig }) => {
     }
   } else {
     const name = getName(el);
-    const attrs = config.textTags[name] ? config.textTags[name](el) : {};
+    const attrs = config.textTags[el.parent.name]
+      ? config.textTags[el.parent.name](el)
+      : {};
     allAttrs = {
       ...attrs
     };
@@ -66,8 +71,6 @@ const deserialize = ({
     return null;
   }
 
-  console.log(el);
-
   const parent = el;
   const isLastChild = index === childrenLength - 1;
   const nodeName = getName(parent);
@@ -81,20 +84,22 @@ const deserialize = ({
   }
 
   const children = parent.childNodes
-    ? parent.childNodes
-        .map((node, i) =>
-          deserialize({
-            el: node,
-            config,
-            index: i,
-            childrenLength: parent.childNodes.length,
-            context: childrenContext
-          })
-        )
-        .filter(element => element)
-        .filter(element => !isSlateDeadEnd(element))
-        .map(element => addTextNodeToEmptyChildren(element))
-        .flat()
+    ? handleChildMismatch(
+        parent.childNodes
+          .map((node, i) =>
+            deserialize({
+              el: node,
+              config,
+              index: i,
+              childrenLength: parent.childNodes.length,
+              context: childrenContext
+            })
+          )
+          .filter(element => element)
+          .filter(element => !isSlateDeadEnd(element))
+          .map(element => addTextNodeToEmptyChildren(element))
+          .flat()
+      )
     : [];
 
   if (getName(parent) === "body") {

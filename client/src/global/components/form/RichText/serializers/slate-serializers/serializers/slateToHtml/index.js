@@ -13,6 +13,9 @@ const slateNodeToHtml = (
   config = defaultConfig,
   isLastNodeInDocument = false
 ) => {
+  if (node.slateOnly) {
+    return slateNodeToHtml(node.children[0]);
+  }
   if (SlateText.isText(node)) {
     const str = node.text;
     if (!/[^\t\n\r ]/.test(str)) return null;
