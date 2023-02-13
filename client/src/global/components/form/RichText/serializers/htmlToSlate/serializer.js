@@ -2,15 +2,15 @@ import { jsx } from "slate-hyperscript";
 import { Parser, ElementType } from "htmlparser2";
 import { DomHandler, isTag } from "domhandler";
 import { getName, textContent } from "domutils";
+import { inlineNodes } from "../../rteElements";
 
-import { isBlock } from "./blocks";
 import {
-  handleChildMismatch,
+  normalizeChildren,
   replacePreTags,
   addTextNodeToEmptyChildren,
-  textTags,
+  markTags,
   assignTextMarkAttributes,
-  getContext,
+  getSlateNodeContext,
   isOnlyWhitespace,
   processTextValue
 } from "./utils";
@@ -32,7 +32,8 @@ const deserializeText = (el, attrs, context, isFirstChild, isLastChild) => {
     isInlineStart: isFirstChild,
     isInlineEnd: isLastChild,
     isNextSiblingBlock:
-      (el.next && isTag(el.next) && isBlock(el.next.tagName)) || false
+      (el.next && isTag(el.next) && !inlineNodes.includes(el.next.tagName)) ||
+      false
   });
   return !isOnlyWhitespace(text) ? jsx("text", { ...attrs, text }, []) : null;
 };
@@ -63,49 +64,51 @@ const deserializeElement = ({
   childrenLength = 0,
   context = ""
 }) => {
-  if (
-    el.type !== ElementType.Tag &&
-    el.type !== ElementType.Text &&
-    el.type !== ElementType.Root
-  ) {
+  if (el.type !== ElementType.Tag && el.type !== ElementType.Text) {
     return null;
   }
-
-  if (el.type === ElementType.Root) return deserializeElement(el.childNodes[0]);
-
   const nodeName = getName(el);
-  const childrenContext = getContext(nodeName) || context;
 
   if (nodeName === "br" || nodeName === "hr") {
     return deserializeVoid(nodeName);
   }
 
   /* eslint-disable no-use-before-define */
-  const children = deserializeChildren(el.childNodes, childrenContext);
+  const children = deserializeChildren(
+    el.childNodes,
+    nodeName ? getSlateNodeContext(nodeName) : ""
+  );
+
+  const [normalizedChildren, normalizedTag] = normalizeChildren(
+    children,
+    nodeName ? getSlateNodeContext(nodeName) : ""
+  );
 
   if (nodeName === "body") {
-    return deserializeBody(children);
+    return deserializeBody(normalizedChildren);
   }
 
   const isFirstChild = index === 0;
   const isLastChild = index === childrenLength - 1;
 
-  if (Object.keys(textTags).includes(nodeName)) {
-    return deserializeMarkTag(el, childrenContext, isFirstChild, isLastChild);
+  if (Object.keys(markTags).includes(nodeName)) {
+    return deserializeMarkTag(el, context, isFirstChild, isLastChild);
   }
 
   if (el.type === ElementType.Text) {
-    return deserializeText(el, {}, childrenContext, isFirstChild, isLastChild);
+    return deserializeText(el, {}, context, isFirstChild, isLastChild);
   }
 
   if (el.type === ElementType.Tag) {
-    return deserializeTag(el, nodeName, children);
+    return deserializeTag(el, normalizedTag ?? nodeName, normalizedChildren);
   }
 };
 
-const deserializeDom = ({ dom, ...opts }) => {
+const deserializeDom = ({ dom, childrenLength, context }) => {
   const nodes = dom
-    .map((el, i) => deserializeElement({ el, index: i, ...opts }))
+    .map((el, i) =>
+      deserializeElement({ el, index: i, childrenLength, context })
+    )
     .filter(Boolean)
     .map(element => addTextNodeToEmptyChildren(element));
   return nodes;
@@ -118,7 +121,7 @@ const deserializeChildren = (children, context) => {
     childrenLength: children.length,
     context
   });
-  return handleChildMismatch(nodes);
+  return nodes;
 };
 
 export const htmlToSlate = html => {
@@ -135,5 +138,23 @@ export const htmlToSlate = html => {
   const htmlToParse = replacePreTags(html);
   parser.write(htmlToParse);
   parser.end();
+
+  if (slateContent.length > 1) {
+    return [
+      {
+        type: "section",
+        children: slateContent
+      }
+    ];
+  }
+  if (slateContent.length === 1 && !slateContent[0].type) {
+    return [
+      {
+        type: "section",
+        children: slateContent[0].children
+      }
+    ];
+  }
+
   return slateContent;
 };
