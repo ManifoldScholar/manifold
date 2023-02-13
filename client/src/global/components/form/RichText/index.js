@@ -32,7 +32,8 @@ function RichText({
   set,
   stylesheets,
   sectionId,
-  sectionBody
+  sectionBody,
+  ...props
 }) {
   /* eslint-disable react-hooks/exhaustive-deps */
   const initialSlateValue = useMemo(() => {
@@ -54,6 +55,7 @@ function RichText({
         initialSlateValue={initialSlateValue}
         initialHtmlValue={initialHtmlValue}
         stylesheets={stylesheets}
+        {...props}
       />
     </Errorable>
   );

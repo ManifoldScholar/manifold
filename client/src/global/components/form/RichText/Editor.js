@@ -26,7 +26,11 @@ export default function Editor({
   set: setFormValue,
   initialSlateValue,
   initialHtmlValue,
-  stylesheets
+  stylesheets,
+  hasErrors,
+  setHasErrors,
+  warnErrors,
+  setWarnErrors
 }) {
   const editor = useMemo(
     () =>
@@ -38,8 +42,6 @@ export default function Editor({
   const [htmlMode, toggleHtmlMode] = useState(false);
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
-  const [hasErrors, setHasErrors] = useState(false);
-  const [warnErrors, setWarnErrors] = useState(false);
   const prevSlate = useRef(initialSlateValue);
 
   useEffect(() => {

@@ -7,3 +7,9 @@ export const ButtonGroup = styled.div`
   margin-block-end: 35px;
   margin-block-start: 20px;
 `;
+
+export const ButtonWithDisable = styled.button`
+  &:disabled {
+    cursor: default;
+  }
+`;
