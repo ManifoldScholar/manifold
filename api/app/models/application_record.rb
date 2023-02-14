@@ -10,6 +10,13 @@ class ApplicationRecord < ActiveRecord::Base
   include ValuesAt
   include WithAdvisoryLock::Concern
 
+  # Quote the model's primary key if it is persisted and a single string.
+  #
+  # @return [String, nil]
+  def quoted_id
+    self.class.connection.quote id if persisted? && id.kind_of?(String)
+  end
+
   # https://api.rubyonrails.org/classes/ActiveModel/Errors.html#method-i-merge-21
   # This exists in Rails 5.2, so we can remove this whenever we upgrade to 5.2
   def merge_errors!(other)

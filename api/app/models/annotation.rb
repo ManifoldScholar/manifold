@@ -45,6 +45,8 @@ class Annotation < ApplicationRecord
           dependent: :destroy,
           inverse_of: :subject
 
+  has_one :annotation_node, -> { preload(ancestor_node: :children) }, inverse_of: :annotation
+
   has_one :annotation_reading_group_membership
   has_one :reading_group_membership, through: :annotation_reading_group_membership
   has_many :annotation_membership_comments
@@ -177,6 +179,8 @@ class Annotation < ApplicationRecord
   after_commit :enqueue_annotation_notifications, on: [:create]
   after_commit :maybe_enqueue_annotation_notifications, on: [:update]
   after_commit :trigger_event_creation, on: [:create]
+
+  delegate :node, to: :annotation_node, prefix: :derived, allow_nil: true
 
   class << self
     # @param [User, nil] user

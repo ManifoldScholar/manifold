@@ -108,6 +108,9 @@ module ManifoldApi
     end
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.active_record.schema_format = :sql
+
     config.cache_store = :redis_cache_store, ManifoldEnv.redis.cache_options
   end
 end

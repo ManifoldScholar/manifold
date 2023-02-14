@@ -40,6 +40,7 @@ class TextSection < ApplicationRecord
   has_many :annotations, dependent: :nullify
   has_many :resources, through: :annotations
   has_many :resource_collections, through: :annotations
+  has_many :text_section_nodes, inverse_of: :text_section, dependent: :destroy
   has_many :text_section_stylesheets, dependent: :destroy
   has_many :stylesheets,
            -> { order(position: :asc) },
@@ -65,6 +66,7 @@ class TextSection < ApplicationRecord
   # Callbacks
   before_validation :update_body_json
   before_validation :maybe_set_has_mathml
+  after_save :extrapolate_nodes!
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
   after_destroy :remove_linked_toc_entries
 
@@ -213,6 +215,11 @@ class TextSection < ApplicationRecord
   end
 
   private
+
+  # @return [void]
+  def extrapolate_nodes!
+    ManifoldApi::Container["text_sections.extrapolate_nodes"].(text_section: self).value!
+  end
 
   def maybe_adopt_or_orphan_annotations!
     return unless body_json_previously_changed? || source_body_previously_changed?
