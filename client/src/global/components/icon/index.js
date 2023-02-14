@@ -171,6 +171,10 @@ import Bold16 from "./16/Bold";
 import Italic16 from "./16/Italic";
 import Underline16 from "./16/Underline";
 import UnorderedList16 from "./16/UnorderedList";
+import OrderedList16 from "./16/OrderedList";
+import HeadingOne16 from "./16/HeadingOne";
+import HeadingTwo16 from "./16/HeadingTwo";
+import BlockQuote16 from "./16/BlockQuote";
 
 export default {
   ActivityComments64,
@@ -208,6 +212,7 @@ export default {
   BEProject64,
   BEResourcesBox64,
   BEResourcesBoxes64,
+  BlockQuote16,
   Bold16,
   Bookmark24,
   Bookmark32,
@@ -253,6 +258,8 @@ export default {
   Globe64,
   Grabber32,
   GrabberInactive32,
+  HeadingOne16,
+  HeadingTwo16,
   Info16,
   InteractComment16,
   InteractAnnotate24,
@@ -281,6 +288,7 @@ export default {
   New64,
   Notes24,
   Notifications24,
+  OrderedList16,
   PauseSolid24,
   Play16,
   PlaySolid24,
