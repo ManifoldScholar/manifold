@@ -21,7 +21,7 @@ module ProxiedAssociations
     reference_configurations.detect { |config| config.name == kind }
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def build_reference_associations
     reference_configurations.each_with_object({}) do |config, h|
       h[config.name] ||= [] if config.multiple
@@ -35,7 +35,7 @@ module ProxiedAssociations
                        end
     end
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   # rubocop:disable Naming/PredicateName
   class_methods do

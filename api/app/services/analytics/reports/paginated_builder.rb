@@ -7,7 +7,6 @@ module Analytics
       integer :page, default: 1
       integer :per_page, default: 20
 
-      # rubocop:disable Metrics/AbcSize
       def pagination_dict
         total_count = count_cte(cte_for_count)
         total_pages = (total_count / per_page.to_f).ceil
@@ -21,7 +20,6 @@ module Analytics
           total_count: total_count
         }
       end
-      # rubocop:enable Metrics/AbcSize
 
       protected
 
