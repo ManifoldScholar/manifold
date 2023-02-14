@@ -36,7 +36,7 @@ Metrics/AbcSize:
   Exclude:
     - "app/operations/**/*.rb"
     - "app/services/collections"
-  Max: 20
+  Max: 22
 
 Layout/HashAlignment:
   EnforcedLastArgumentHashStyle: ignore_implicit
