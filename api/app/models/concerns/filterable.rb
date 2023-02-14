@@ -1,7 +1,6 @@
 module Filterable
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/AbcSize
   class_methods do
     def filtered(params, scope: all, user: nil)
       results = filter_with_query_and_elasticsearch(params, scope, user)
@@ -69,8 +68,6 @@ module Filterable
       query.filter_with_elasticsearch params
     end
   end
-  # rubocop:enable Metrics/AbcSize
-
   included do
     scope :by_pagination, lambda { |page_number, per_page|
       page(page_number).per(per_page) if page_number.present?

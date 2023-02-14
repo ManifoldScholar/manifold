@@ -11,7 +11,6 @@ module SystemUpgrades
 
     set_callback :execute, :around, :tag_version!
 
-    # rubocop:disable Metrics/AbcSize
     def execute
       unless upgrade_result.new_record?
         if force
@@ -22,8 +21,6 @@ module SystemUpgrades
           return [nil, output.string]
         end
       end
-      # rubocop:enable Metrics/AbcSize
-
       perform! unless noop
 
       upgrade_result.output += output.string

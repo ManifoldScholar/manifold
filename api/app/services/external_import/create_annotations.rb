@@ -2,7 +2,6 @@ module ExternalImport
   class CreateAnnotations < ActiveInteraction::Base
     object :import_selection
 
-    # rubocop:disable Metrics/AbcSize
     def execute
       return unless import_selection.matches_count == 1
 
@@ -22,6 +21,5 @@ module ExternalImport
 
       import_selection.touch :imported_at
     end
-    # rubocop:enable Metrics/AbcSize
   end
 end
