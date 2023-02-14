@@ -59,4 +59,17 @@ export const Editable = styled(BaseEditable)`
     border-left: 3px solid currentColor;
     padding: 0 10px;
   }
+
+  p,
+  blockquote,
+  ul,
+  ol,
+  h1,
+  h2 {
+    margin-block: 20px;
+  }
+
+  div + div {
+    margin-block: 5px;
+  }
 `;

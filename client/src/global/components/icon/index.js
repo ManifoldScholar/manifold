@@ -175,6 +175,8 @@ import OrderedList16 from "./16/OrderedList";
 import HeadingOne16 from "./16/HeadingOne";
 import HeadingTwo16 from "./16/HeadingTwo";
 import BlockQuote16 from "./16/BlockQuote";
+import Code16 from "./16/Code";
+import CodeOff16 from "./16/CodeOff";
 
 export default {
   ActivityComments64,
@@ -229,6 +231,8 @@ export default {
   Close16,
   Close24,
   Close32,
+  Code16,
+  CodeOff16,
   Comment24,
   Comment32,
   CommentPencil32,

@@ -28,3 +28,15 @@ export const Button = styled.span`
     margin-inline-start: -10px;
   }
 `;
+
+export const HTMLToggle = styled.button`
+  color: var(--color-accent-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  margin-inline-start: auto;
+  align-self: center;
+  border-radius: 4px;
+`;

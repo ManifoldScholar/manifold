@@ -48,7 +48,7 @@ const toggleBlock = (editor, format) => {
     };
   } else {
     newProperties = {
-      type: isActive ? "paragraph" : isList ? "li" : format
+      type: isActive ? "p" : isList ? "li" : format
     };
   }
   Transforms.setNodes(editor, newProperties);
