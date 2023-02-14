@@ -90,6 +90,10 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:deletion)
+
+    Scenic.database.views.select(&:materialized).each do |view|
+      Scenic.database.refresh_materialized_view view.name, concurrently: false, cascade: false
+    end
   end
 
   config.after(:suite) do
