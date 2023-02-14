@@ -31,7 +31,6 @@ export default function AddEditSectionForm({
 
   return (
     <FormContainer.Form
-      debug
       model={section ?? defaultModel}
       name={section ? "be-text-section-update" : "be-text-section-create"}
       className="form-secondary"

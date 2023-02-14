@@ -9,6 +9,7 @@ export const Editor = styled.div`
   border: 1px solid var(--TextArea-border-color);
   outline: none;
   transition: border-color ${defaultTransitionProps};
+  overflow-y: scroll;
 
   &:focus-visible {
     border-color: var(--TextArea-focus-color);
@@ -48,4 +49,14 @@ export const Toolbar = styled.div`
 
 export const Editable = styled(BaseEditable)`
   padding-inline: 1.25em;
+
+  ul,
+  ol {
+    list-style-position: inside;
+  }
+
+  blockquote {
+    border-left: 3px solid currentColor;
+    padding: 0 10px;
+  }
 `;
