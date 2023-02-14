@@ -8,7 +8,6 @@ module ExternalImport
 
     validate :texts_must_exist!
 
-    # rubocop:disable Metrics/AbcSize
     def execute
       @source_data = JSON.parse(File.read(source_path)).with_indifferent_access
 
@@ -27,7 +26,6 @@ module ExternalImport
         end
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     private
 
