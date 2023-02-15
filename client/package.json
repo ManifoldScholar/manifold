@@ -137,6 +137,7 @@
     "npm-run-all": "^4.0.2",
     "piping": "^1.0.0-rc.1",
     "pretty-error": "^2.0.0",
+    "prismjs": "^1.29.0",
     "prop-types": "^15.5.10",
     "qs": "^6.0.0",
     "query-string": "^6.x",
