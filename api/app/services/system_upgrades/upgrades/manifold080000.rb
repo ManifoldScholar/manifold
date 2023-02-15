@@ -16,7 +16,7 @@ module SystemUpgrades
         logger.info("required libraries for sections that include math.                 ")
         logger.info("===================================================================")
 
-        TextSection.find_each { |s| TextSection.has_mathml?(s.body_json) }
+        TextSection.find_each(&:save!)
       end
     end
   end
