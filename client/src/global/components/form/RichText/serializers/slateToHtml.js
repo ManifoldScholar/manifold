@@ -13,6 +13,8 @@ const testConfig = {
   elementTransforms: { ...config.elementTransforms, p: blankLineHandler }
 };
 
-const serializeToHtml = node => slateToHtml(node, testConfig);
+const serializeToHtml = node => {
+  return slateToHtml(node, testConfig);
+};
 
 export default serializeToHtml;
