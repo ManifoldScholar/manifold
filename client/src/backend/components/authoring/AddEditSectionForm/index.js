@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
 import { useHistory } from "react-router-dom";
+import { serializeToHtml } from "global/components/form/RichText/serializers";
 
 export default function AddEditSectionForm({
   section,
@@ -24,6 +25,13 @@ export default function AddEditSectionForm({
     return sectionsAPI.create(textId, model);
   };
 
+  const formatData = data => {
+    const { body, name } = data.attributes ?? {};
+    if (!body) return data;
+    if (typeof body === "string") return data;
+    return { attributes: { name, body: serializeToHtml(body) } };
+  };
+
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
     history.push(lh.link("backendTextSections", textId));
@@ -35,6 +43,7 @@ export default function AddEditSectionForm({
       name={section ? "be-text-section-update" : "be-text-section-create"}
       className="form-secondary"
       onSuccess={onSuccess}
+      formatData={formatData}
       create={createSection}
       update={sectionsAPI.update}
     >
@@ -44,13 +53,6 @@ export default function AddEditSectionForm({
         placeholder={t("texts.section.section_name")}
         name="attributes[name]"
       />
-      {/* <Form.CodeArea
-        label={t("texts.section.content_label")}
-        instructions={t("texts.section.content_instructions")}
-        height="600px"
-        mode="html"
-        name="attributes[body]"
-      /> */}
       <Form.RichText
         label={t("texts.section.content_label")}
         instructions={"Rich text section content"}

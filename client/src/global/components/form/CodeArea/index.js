@@ -8,7 +8,7 @@ import BaseLabel from "../BaseLabel";
 import Instructions from "../Instructions";
 
 /* eslint-disable react/prop-types */
-const CodeAreaInput = Loadable({
+export const CodeAreaInput = Loadable({
   loader: () =>
     import(/* webpackChunkName: "ace-editor" */ "./Ace").then(
       ace => ace.default
