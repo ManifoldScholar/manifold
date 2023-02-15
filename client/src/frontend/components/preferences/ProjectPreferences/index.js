@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
 import RadioGroup from "../RadioGroup";
-import * as Styled from "./Styles";
+import * as Styled from "./styles";
 
 function ProjectPreferences({
   showAllProjects,
