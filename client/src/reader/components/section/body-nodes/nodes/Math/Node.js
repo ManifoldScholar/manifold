@@ -49,7 +49,8 @@ function MathNode({
   } = getAnnotationStyles(localAnnotations, uuids, t, hasInteractiveAncestor);
 
   const Wrapper = attributes.display === "inline" ? "span" : "div";
-  const wrapperStyles = Wrapper === "div" ? { width: "max-content" } : {};
+  const wrapperStyles =
+    Wrapper === "div" ? { width: "max-content", maxWidth: "100%" } : {};
 
   return (
     <Wrapper
