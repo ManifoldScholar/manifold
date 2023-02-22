@@ -6,11 +6,7 @@ import { mathNodeHelpers } from "../nodes/Math";
 import { ErrorBoundary } from "react-error-boundary";
 import * as Styled from "./styles";
 
-const MathError = () => (
-  <Styled.Error>
-    There was an error rendering this MathML expression.
-  </Styled.Error>
-);
+const MathError = () => <Styled.Error>MathML error</Styled.Error>;
 
 export default class NodeTreeIterator {
   constructor(bodyProps) {
