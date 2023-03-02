@@ -28,6 +28,9 @@ Rails.application.configure do
 
   Rails.application.configure do
     config.hosts << "manifold.lvh"
+    config.hosts << "manifold-api.ngrok.io"
+    config.hosts << "manifold-dev.ngrok.io"
+    config.hosts << "manifold-cable.ngrok.io"
     config.hosts << ENV["DOMAIN"]
   end
 
