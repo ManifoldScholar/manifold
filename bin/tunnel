@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# To use this tunnel, add the following to your .env file and uncomment lines.
+# Access the site at https://manifold-dev.ngrok.io/
+
+##########################################################################################
+# Running site behind ngrok tunnel
+##########################################################################################
+#DOMAIN=https://manifold-dev.ngrok.io/
+#API_PORT=3020
+#API_CABLE_PORT=3021
+#CLIENT_SERVER_PORT=3010
+#CLIENT_URL=https://manifold-dev.ngrok.io/
+#CLIENT_BROWSER_API_URL=https://manifold-api.ngrok.io/
+#CLIENT_BROWSER_API_CABLE_URL=ws://manifold-cable.ngrok.io/cable
+#CLIENT_SERVER_API_URL=http://127.0.0.1:3020
+#CLIENT_SERVER_PROXIES=true
+#SSL_ENABLED=true
+
+path_prefix=$(dirname "$(realpath $0)")
+ngrok start --config="$HOME/Library/Application Support/ngrok/ngrok.yml",$path_prefix/tunnels.yml manifold_client manifold_cable manifold_api

@@ -24,7 +24,7 @@ compiler.hooks.compile.tap("ManifoldWebpackDevServer", params => {
 });
 
 const hot = !process.env.DISABLE_HMR;
-const allowedHosts = ["manifold.lvh", "localhost", "127.0.0.1", "manifold-dev.lvh", "manifold-stable.lvh"];
+const allowedHosts = ["manifold.lvh", "localhost", "127.0.0.1", "manifold-dev.lvh", "manifold-stable.lvh", "manifold-dev.ngrok.io"];
 if (process.env.DOMAIN) allowedHosts.push(process.env.DOMAIN);
 
 const serverOptions = {

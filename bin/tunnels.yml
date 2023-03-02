@@ -1,0 +1,16 @@
+version: "2"
+region: us
+
+tunnels:
+  manifold_client:
+    proto: http
+    addr: 3010
+    hostname: manifold-dev.ngrok.io
+  manifold_api:
+    proto: http
+    addr: 3020
+    hostname: manifold-api.ngrok.io
+  manifold_cable:
+    proto: http
+    addr: 3021
+    hostname: manifold-cable.ngrok.io
