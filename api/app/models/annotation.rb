@@ -315,6 +315,12 @@ class Annotation < ApplicationRecord
   end
 
   class << self
+    def filtered(params, scope: all, user: nil)
+      scope = scope.includes(:annotation_node)
+
+      super(params, scope: scope, user: user)
+    end
+
     # @param [ReadingGroupMembership, String] rgm
     # @return [ActiveRecord::Relation<ReadingGroup>]
     def build_by_reading_group_membership_scope(rgm)
@@ -330,5 +336,5 @@ class Annotation < ApplicationRecord
 
       includes(:membership_comments).where(condition)
     end
-      end
+  end
 end
