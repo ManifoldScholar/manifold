@@ -67,6 +67,10 @@ module V1
       object.filtered_membership_comments_for rgm
     end
 
+    typed_attribute :annotation_node, Types::Hash do |object|
+      object.annotation_node.node
+    end
+
     class << self
 
       def include_abilities?(_object, _params)
