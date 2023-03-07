@@ -45,6 +45,7 @@ export default class GroupedList extends PureComponent {
             render={group => (
               <li key={group.selection.hash} className="annotation-detail">
                 <TextContent
+                  annotation={group.annotation}
                   selection={group.selection.subject}
                   onAnnotate={this.showEditor}
                   onLogin={loginHandler}

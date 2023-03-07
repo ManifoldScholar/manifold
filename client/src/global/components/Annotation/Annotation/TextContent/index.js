@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import Truncated from "./Truncated";
+import FromNodes from "./FromNodes";
 import nl2br from "nl2br";
 import classNames from "classnames";
 import Authorize from "hoc/Authorize";
@@ -48,17 +49,19 @@ class AnnotationSelectionWrapper extends PureComponent {
   };
 
   maybeTruncateSelection() {
-    const { truncate, displayFormat, selection } = this.props;
-    if (truncate && selection && selection.length > truncate) {
-      return (
-        <Truncated
-          selection={selection}
-          truncate={truncate}
-          displayFormat={displayFormat}
-        />
-      );
-    }
-    return <div dangerouslySetInnerHTML={{ __html: nl2br(selection) }} />;
+    const { truncate, displayFormat, selection, annotation } = this.props;
+
+    if (annotation) return <FromNodes annotation={this.props.annotation} />;
+
+    return truncate && selection && selection.length > truncate ? (
+      <Truncated
+        selection={selection}
+        truncate={truncate}
+        displayFormat={displayFormat}
+      />
+    ) : (
+      <div dangerouslySetInnerHTML={{ __html: nl2br(selection) }} />
+    );
   }
 
   render() {
@@ -82,7 +85,7 @@ class AnnotationSelectionWrapper extends PureComponent {
           <SourceSummary
             annotation={annotation}
             onClick={this.props.visitHandler}
-            onHover={this.hoverHandler}
+            onHover={() => {}}
           />
         </div>
         {this.annotatable && (
