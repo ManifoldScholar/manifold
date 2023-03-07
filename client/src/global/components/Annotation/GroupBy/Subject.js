@@ -21,6 +21,7 @@ export default class AnnotationGroupedBySubject extends PureComponent {
       if (!memo.hasOwnProperty(key)) {
         memo[key] = {
           annotations: [],
+          annotation,
           selection: {
             hash: key,
             subject: annotation.attributes.subject,

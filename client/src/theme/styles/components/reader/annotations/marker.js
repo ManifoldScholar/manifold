@@ -21,7 +21,9 @@ const defaultUnderline = (color = annotationHighlightColors.primaryBase) => `
 
 export default `
   .annotation-underline {
-    cursor: pointer;
+    &:not(.inert) {
+      cursor: pointer;
+    }
 
     &:hover {
       color: inherit;
@@ -59,7 +61,9 @@ export default `
   }
 
   .annotation-highlight {
-    cursor: pointer;
+    &:not(.inert) {
+      cursor: pointer;
+    }
 
     &:hover {
       color: inherit;

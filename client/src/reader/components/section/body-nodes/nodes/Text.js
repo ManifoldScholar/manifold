@@ -41,7 +41,8 @@ class TextNode extends Component {
   }
 
   get openAnnotations() {
-    return this.props.openAnnotations;
+    const { inert, ...annotations } = this.props.openAnnotations;
+    return annotations;
   }
 
   get containsAnnotations() {
@@ -53,7 +54,7 @@ class TextNode extends Component {
   }
 
   get content() {
-    return this.props.content;
+    return this.props.content ?? "";
   }
 
   get localAnnotationsArray() {
@@ -169,10 +170,27 @@ class TextNode extends Component {
           a => starts[a.id] === index && a.startNode === this.props.nodeUuid
         );
       }
+
+      const textAnnotationIds = map[index]
+        .filter(a => a.type === "annotation")
+        .map(a => a.id);
+
+      const removableHighlight = map[index].filter(
+        a => a.type === "highlight" && (a.isCreator || a.abilities.delete)
+      )[0];
+      const removableHighlightId = removableHighlight
+        ? removableHighlight.id
+        : "";
+
+      const inert = this.props.openAnnotations.inert;
+      const isInteractive =
+        !inert && (!!textAnnotationIds.length || removableHighlight);
+
       const classes = classNames({
         primary: isCreator,
         secondary: !isCreator,
         tertiary: !isCreator && authorCreated,
+        inert: !isInteractive,
         "annotation-locked-selected primary": lockedSelection,
         "annotation-underline": underlined,
         "annotation-highlight": highlighted,
@@ -187,17 +205,6 @@ class TextNode extends Component {
 
       const announcedStyle = this.announcedStyle({ wavy, dots, dashes });
 
-      const textAnnotationIds = map[index]
-        .filter(a => a.type === "annotation")
-        .map(a => a.id);
-
-      const removableHighlight = map[index].filter(
-        a => a.type === "highlight" && (a.isCreator || a.abilities.delete)
-      )[0];
-      const removableHighlightId = removableHighlight
-        ? removableHighlight.id
-        : "";
-      const isInteractive = !!textAnnotationIds.length || removableHighlight;
       const interactiveAttributes =
         isInteractive && !this.props.hasInteractiveAncestor
           ? {
