@@ -26,7 +26,8 @@ function Content(props) {
     className,
     activeClassName,
     focusOnVisible,
-    maxDuration
+    maxDuration,
+    stubHeight
   } = props;
   const { visible, contentProps, toggleVisible } = useCollapseContext();
   const { ref: resizeRef, height } = useResizeObserver();
@@ -36,6 +37,7 @@ function Content(props) {
     collapse__content: true,
     "collapse__content--visible": visible,
     "collapse__content--hidden": !visible,
+    "collapse__content--stub": stubHeight,
     [className]: className,
     [activeClassName]: activeClassName
   });
@@ -61,8 +63,14 @@ function Content(props) {
         "--collapse-durationAfterDelay",
         `${diff}ms`
       );
+
+      if (stubHeight)
+        contentRef.current.style.setProperty(
+          "--hidden-height",
+          `${stubHeight}px`
+        );
     }
-  }, [height, maxDuration]);
+  }, [height, stubHeight, maxDuration]);
 
   useEffect(() => {
     setIsMounted(true);
