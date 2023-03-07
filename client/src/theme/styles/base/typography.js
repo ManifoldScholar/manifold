@@ -27,7 +27,8 @@ export default `
     font-family: Latin Modern Math, STIX Two Math;
   }
 
-  .font-sans-serif {
+  .font-sans-serif,
+  .annotation-selection__text-container {
     mtext {
       font-family: Fira Math, STIX Two Text;
     }

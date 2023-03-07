@@ -29,6 +29,7 @@ class Annotation extends PureComponent {
 
   render() {
     const { annotation, visitHandler, displayFormat } = this.props;
+
     return (
       <>
         <div className="annotation-selection">

@@ -41,7 +41,8 @@ function MathNode({
     }
   };
 
-  const localAnnotations = getlocalAnnotationsArray(openAnnotations);
+  const { inert, ...annotations } = openAnnotations;
+  const localAnnotations = getlocalAnnotationsArray(annotations);
   const {
     classes,
     removableHighlightId,

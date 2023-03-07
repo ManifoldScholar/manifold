@@ -19,6 +19,21 @@ export default `
       word-wrap: break-word;
       transition: background-color ${defaultTransitionProps};
 
+      & * + p,
+      & * + div[data-mathml="true"] {
+        margin-block-start: 1em;
+      }
+
+      & li {
+        list-style-position: inside;
+      }
+
+      & img {
+        height: 150px;
+        margin-inline: auto;
+        margin-block: 1em;
+      }
+
       &--dark {
         padding-top: ${fluidScale("31px", "23px")};
         padding-bottom: ${fluidScale("25px", "23px")};
