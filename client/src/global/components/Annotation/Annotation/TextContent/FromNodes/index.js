@@ -1,7 +1,9 @@
 import React, { memo } from "react";
 import BodyNodes from "reader/components/section/body-nodes";
+import Collapse from "global/components/Collapse";
 import { findTargetNode, maybeTruncate } from "./helpers";
 import { useFromStore } from "hooks";
+import * as Styled from "./styles";
 
 function AnnotationWithNodes({ annotation }) {
   const {
@@ -79,7 +81,16 @@ function AnnotationWithNodes({ annotation }) {
     inert: true
   });
 
-  return iterator.visit(fragment);
+  return (
+    <Collapse>
+      <Styled.Toggle>
+        <Styled.Content stubHeight={200}>
+          {iterator.visit(fragment)}
+          <Styled.Overlay />
+        </Styled.Content>
+      </Styled.Toggle>
+    </Collapse>
+  );
 }
 
 const checkId = (prev, next) => {
