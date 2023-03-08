@@ -24,7 +24,7 @@ export default class NodeTreeIterator {
   }
 
   setupAnnotations(bodyProps) {
-    const { annotations, pendingAnnotation, inert } = bodyProps;
+    const { annotations, pendingAnnotation, isDetail } = bodyProps;
     this.annotations = annotations ? annotations.slice(0) : [];
     if (pendingAnnotation)
       this.annotations.push(this.makePendingAnnotation(pendingAnnotation));
@@ -44,7 +44,7 @@ export default class NodeTreeIterator {
         this.annotationEndMap[a.attributes.endNode] = [a.id];
       }
     });
-    this.openAnnotations = { inert };
+    this.openAnnotations = { isDetail };
   }
 
   setScrollTargetNode(bodyProps) {

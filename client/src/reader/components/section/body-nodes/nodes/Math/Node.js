@@ -41,7 +41,7 @@ function MathNode({
     }
   };
 
-  const { inert, ...annotations } = openAnnotations;
+  const { isDetail, ...annotations } = openAnnotations;
   const localAnnotations = getlocalAnnotationsArray(annotations);
   const {
     classes,
@@ -49,7 +49,13 @@ function MathNode({
     textAnnotationIds,
     annotationIds,
     interactiveAttributes
-  } = getAnnotationStyles(localAnnotations, uuids, t, hasInteractiveAncestor);
+  } = getAnnotationStyles(
+    localAnnotations,
+    uuids,
+    t,
+    hasInteractiveAncestor,
+    isDetail
+  );
 
   const Wrapper = attributes.display === "inline" ? "span" : "div";
   const wrapperStyles =
