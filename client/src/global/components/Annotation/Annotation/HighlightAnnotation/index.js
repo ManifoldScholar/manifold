@@ -6,6 +6,7 @@ import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import SourceSummary from "../SourceSummary/index";
 import Authorize from "hoc/Authorize";
+import FromNodes from "../TextContent/FromNodes";
 
 class HighlightDetail extends PureComponent {
   static displayName = "Annotation.HighlightAnnotation";
@@ -50,9 +51,10 @@ class HighlightDetail extends PureComponent {
             size="default"
             className="annotation-selection__icon"
           />
-          <span className="annotation-selection__highlight-text">
-            {annotation.attributes.subject}
-          </span>
+          <FromNodes
+            annotation={annotation}
+            selection={annotation.attributes.subject}
+          />
           <SourceSummary
             includeDate
             includeCreator
