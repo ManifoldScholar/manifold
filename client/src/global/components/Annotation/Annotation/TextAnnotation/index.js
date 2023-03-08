@@ -36,7 +36,6 @@ class Annotation extends PureComponent {
           <TextContent
             annotation={annotation}
             selection={annotation.attributes.subject}
-            truncate={250}
             visitHandler={visitHandler}
             displayFormat={displayFormat}
           />

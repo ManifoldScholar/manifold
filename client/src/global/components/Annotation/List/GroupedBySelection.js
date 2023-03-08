@@ -49,7 +49,6 @@ export default class GroupedList extends PureComponent {
                   selection={group.selection.subject}
                   onAnnotate={this.showEditor}
                   onLogin={loginHandler}
-                  truncate={250}
                   annotateToggleRef={this.annotateToggleRef}
                 />
                 {this.state.editorVisible && (

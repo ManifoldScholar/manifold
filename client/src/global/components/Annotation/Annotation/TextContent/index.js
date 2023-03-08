@@ -1,9 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import Truncated from "./Truncated";
 import FromNodes from "./FromNodes";
-import nl2br from "nl2br";
 import classNames from "classnames";
 import Authorize from "hoc/Authorize";
 import IconComposer from "global/components/utility/IconComposer";
@@ -16,7 +14,6 @@ class AnnotationSelectionWrapper extends PureComponent {
     annotation: PropTypes.object,
     selection: PropTypes.string.isRequired,
     displayFormat: PropTypes.string,
-    truncate: PropTypes.number,
     visitHandler: PropTypes.func,
     onAnnotate: PropTypes.func,
     onLogin: PropTypes.func,
@@ -48,24 +45,8 @@ class AnnotationSelectionWrapper extends PureComponent {
     this.setState({ hovering });
   };
 
-  maybeTruncateSelection() {
-    const { truncate, displayFormat, selection, annotation } = this.props;
-
-    if (annotation) return <FromNodes annotation={this.props.annotation} />;
-
-    return truncate && selection && selection.length > truncate ? (
-      <Truncated
-        selection={selection}
-        truncate={truncate}
-        displayFormat={displayFormat}
-      />
-    ) : (
-      <div dangerouslySetInnerHTML={{ __html: nl2br(selection) }} />
-    );
-  }
-
   render() {
-    const { annotation, t } = this.props;
+    const { annotation, selection, t } = this.props;
     const wrapperClasses = classNames({
       "annotation-selection__text-container": true,
       "annotation-selection__text-container--dark": this.fullPageFormat,
@@ -81,7 +62,7 @@ class AnnotationSelectionWrapper extends PureComponent {
             size="default"
             className="annotation-selection__icon annotation-selection__icon--flipped"
           />
-          {this.maybeTruncateSelection()}
+          <FromNodes annotation={annotation} selection={selection} />
           <SourceSummary
             annotation={annotation}
             onClick={this.props.visitHandler}

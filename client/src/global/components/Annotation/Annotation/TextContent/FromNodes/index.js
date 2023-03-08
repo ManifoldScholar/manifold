@@ -1,7 +1,8 @@
 import React, { memo } from "react";
 import { useParams } from "react-router-dom";
+import nl2br from "nl2br";
 import BodyNodes from "reader/components/section/body-nodes";
-import Collapse from "global/components/Collapse";
+import Wrapper from "./Wrapper";
 import {
   findStartOrEndNode,
   findTextNode,
@@ -10,9 +11,8 @@ import {
   deepCopyChildren
 } from "./helpers";
 import { useFromStore } from "hooks";
-import * as Styled from "./styles";
 
-function AnnotationWithNodes({ annotation }) {
+function AnnotationWithNodes({ annotation, selection }) {
   const {
     annotationNode,
     startNode: startNodeId,
@@ -20,6 +20,12 @@ function AnnotationWithNodes({ annotation }) {
     startChar,
     endChar
   } = annotation.attributes;
+
+  const fallback = (
+    <Wrapper>
+      <div dangerouslySetInnerHTML={{ __html: nl2br(selection) }} />
+    </Wrapper>
+  );
 
   const { sectionId } = useParams();
   const bodyJSON = useFromStore(
@@ -32,11 +38,11 @@ function AnnotationWithNodes({ annotation }) {
     [];
   const haystack = toDeepCopy.map(deepCopyChildren);
 
-  if (!annotation || !haystack.length) return null;
+  if (!annotation || !haystack.length) return fallback;
 
   if (startNodeId === endNodeId) {
     const node = findTextNode(haystack, startNodeId);
-    if (!node) return null;
+    if (!node) return fallback;
     const { adjustedNode, split } = maybeTruncate(node, startChar, endChar);
 
     const iterator = new BodyNodes.Helpers.NodeTreeIterator({
@@ -56,17 +62,17 @@ function AnnotationWithNodes({ annotation }) {
       inert: true
     });
 
-    return iterator.visit(adjustedNode);
+    return <Wrapper>{iterator.visit(adjustedNode)}</Wrapper>;
   }
 
   const [startNodeIndex, startNode] = findStartOrEndNode(haystack, startNodeId);
-  if (!startNode) return null;
+  if (!startNode) return fallback;
   const [endNodeIndex, endNode] = findStartOrEndNode(
     haystack,
     endNodeId,
     false
   );
-  if (!endNode) return null;
+  if (!endNode) return fallback;
   const middleNodes = haystack.slice(startNodeIndex + 1, endNodeIndex);
 
   const { adjustedNode: adjustedStartNode, split } = maybeTruncate(
@@ -102,16 +108,7 @@ function AnnotationWithNodes({ annotation }) {
     inert: true
   });
 
-  return (
-    <Collapse>
-      <Styled.Toggle>
-        <Styled.Content stubHeight={200}>
-          {iterator.visit(fragment)}
-          <Styled.Overlay />
-        </Styled.Content>
-      </Styled.Toggle>
-    </Collapse>
-  );
+  return <Wrapper>{iterator.visit(fragment)}</Wrapper>;
 }
 
 const checkId = (prev, next) => {
