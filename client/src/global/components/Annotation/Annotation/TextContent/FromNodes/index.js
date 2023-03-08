@@ -1,36 +1,51 @@
 import React, { memo } from "react";
+import { useParams } from "react-router-dom";
 import BodyNodes from "reader/components/section/body-nodes";
 import Collapse from "global/components/Collapse";
-import { findTargetNode, maybeTruncate } from "./helpers";
+import {
+  findStartOrEndNode,
+  findTextNode,
+  findAncestorNode,
+  maybeTruncate,
+  deepCopyChildren
+} from "./helpers";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 function AnnotationWithNodes({ annotation }) {
   const {
+    annotationNode,
     startNode: startNodeId,
     endNode: endNodeId,
     startChar,
     endChar
   } = annotation.attributes;
 
-  const annotationNode = useFromStore(
-    `entityStore.entities.annotations["${annotation.id}"].attributes.annotationNode`
+  const { sectionId } = useParams();
+  const bodyJSON = useFromStore(
+    `entityStore.entities.textSections["${sectionId}"].attributes.bodyJSON`
   );
 
-  const haystack = annotationNode.children;
+  const toDeepCopy =
+    annotationNode?.children ??
+    findAncestorNode(bodyJSON, startNodeId, endNodeId)?.children ??
+    [];
+  const haystack = toDeepCopy.map(deepCopyChildren);
 
-  if (!annotation) return null;
+  if (!annotation || !haystack.length) return null;
 
   if (startNodeId === endNodeId) {
-    const [, node] = findTargetNode(haystack, startNodeId);
+    const node = findTextNode(haystack, startNodeId);
     if (!node) return null;
     const { adjustedNode, split } = maybeTruncate(node, startChar, endChar);
 
     const iterator = new BodyNodes.Helpers.NodeTreeIterator({
       annotations: [
         {
+          id: "selection",
           ...annotation,
           attributes: {
+            userIsCreator: true,
             ...annotation.attributes,
             startChar: split ? startChar - split - 1 : startChar,
             endChar: split ? endChar - split - 1 : endChar
@@ -44,9 +59,13 @@ function AnnotationWithNodes({ annotation }) {
     return iterator.visit(adjustedNode);
   }
 
-  const [startNodeIndex, startNode] = findTargetNode(haystack, startNodeId);
+  const [startNodeIndex, startNode] = findStartOrEndNode(haystack, startNodeId);
   if (!startNode) return null;
-  const [endNodeIndex, endNode] = findTargetNode(haystack, endNodeId, false);
+  const [endNodeIndex, endNode] = findStartOrEndNode(
+    haystack,
+    endNodeId,
+    false
+  );
   if (!endNode) return null;
   const middleNodes = haystack.slice(startNodeIndex + 1, endNodeIndex);
 
@@ -69,8 +88,10 @@ function AnnotationWithNodes({ annotation }) {
   const iterator = new BodyNodes.Helpers.NodeTreeIterator({
     annotations: [
       {
+        id: "selection",
         ...annotation,
         attributes: {
+          userIsCreator: true,
           ...annotation.attributes,
           startChar: split ? startChar - split - 1 : startChar,
           endChar

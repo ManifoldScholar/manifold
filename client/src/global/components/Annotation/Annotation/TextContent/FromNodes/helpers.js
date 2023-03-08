@@ -1,3 +1,25 @@
+import isEqual from "lodash/isEqual";
+
+export const deepCopyChildren = n => ({
+  ...n,
+  children: n.children ? n.children.map(deepCopyChildren) : undefined
+});
+
+export const findNestedNode = (nodes, target) => {
+  const result = nodes
+    .map(n => {
+      if (n.nodeUuid === target) return n;
+      if (n.children) return findNestedNode(n.children, target).flat();
+      return [];
+    })
+    .flat();
+  return result;
+};
+
+export const findTextNode = (nodes, target) => {
+  return findNestedNode(nodes, target)[0];
+};
+
 export const findNestedMatchIndex = (nodes, target) => {
   return nodes.findIndex(n => {
     return (
@@ -14,7 +36,44 @@ const maybeTruncateChildren = (node, target, start = true) => {
   return { ...node, children: node.children.slice(0, index + 1) };
 };
 
-export const findTargetNode = (nodes, target, start = true) => {
+const findParentNode = (node, childId) => {
+  if (!node.children?.length) return [];
+  const result = node.children
+    .map(n => {
+      if (n.nodeUuid === childId) return node;
+      if (n.children) return findParentNode(n, childId).flat();
+      return [];
+    })
+    .flat();
+  return result;
+};
+
+const findParentOfElement = (node, element) => {
+  if (!node.children?.length) return [];
+  const result = node.children
+    .map(n => {
+      if (isEqual(n, element)) return node;
+      if (n.children) return findParentOfElement(n, element).flat();
+      return [];
+    })
+    .flat();
+  return result;
+};
+
+export const findAncestorNode = (bodyNode, startNode, endNode) => {
+  if (typeof startNode === "string") {
+    const startNodeParent = findParentNode(bodyNode, startNode)[0];
+    const endNodeParent = findParentNode(bodyNode, endNode)[0];
+    if (isEqual(startNodeParent, endNodeParent)) return startNodeParent;
+    return findAncestorNode(bodyNode, startNodeParent, endNodeParent);
+  }
+  const startNodeParent = findParentOfElement(bodyNode, startNode)[0];
+  const endNodeParent = findParentOfElement(bodyNode, endNode)[0];
+  if (isEqual(startNodeParent, endNodeParent)) return startNodeParent;
+  return findAncestorNode(bodyNode, startNodeParent, endNodeParent);
+};
+
+export const findStartOrEndNode = (nodes, target, start = true) => {
   const index = findNestedMatchIndex(nodes, target);
   if (index === -1) return [-1, null];
   return [index, maybeTruncateChildren(nodes[index], target, start)];
