@@ -81,13 +81,21 @@ export const findStartOrEndNode = (nodes, target, start = true) => {
 };
 
 const truncateStart = (content, startChar, limit) => {
-  const split = content.lastIndexOf(".", startChar - limit);
+  const split = Math.max(
+    content.lastIndexOf(".", startChar - limit),
+    content.lastIndexOf("?", startChar - limit),
+    content.lastIndexOf("!", startChar - limit)
+  );
   if (split === -1) return { content };
   return { content: content.substring(split + 1), split };
 };
 
 const truncateEnd = (content, endChar, limit) => {
-  const split = content.indexOf(".", endChar + limit);
+  const split = Math.min(
+    content.indexOf(".", endChar + limit),
+    content.indexOf("?", endChar + limit),
+    content.indexOf("!", endChar + limit)
+  );
   if (split === -1) return content;
   return content.substring(0, split + 1);
 };
