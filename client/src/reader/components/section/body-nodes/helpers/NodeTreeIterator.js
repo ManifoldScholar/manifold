@@ -67,7 +67,7 @@ export default class NodeTreeIterator {
     }
   }
 
-  visitChildren(node) {
+  visitChildren(node, blacklist) {
     const children = node.children;
     if (Array.isArray(children)) {
       const childElements = [];
@@ -75,7 +75,7 @@ export default class NodeTreeIterator {
         const adjustedChild = { ...child };
         adjustedChild.attributes = { ...adjustedChild.attributes };
         adjustedChild.key = index;
-        const childNode = this.visit(adjustedChild, node);
+        const childNode = this.visit(adjustedChild, node, blacklist);
         if (childNode) {
           childElements.push(childNode);
         }
@@ -84,7 +84,8 @@ export default class NodeTreeIterator {
     }
   }
 
-  visitElementNode(node, mathUuids) {
+  visitElementNode(node, mathUuids, blacklist) {
+    if (blacklist && blacklist[node.tag]) return <p>{blacklist[node.tag]}</p>;
     let ComponentClass = Nodes.Default;
     const lookup = upperFirst(node.tag);
     if (Nodes.hasOwnProperty(lookup)) ComponentClass = Nodes[lookup];
@@ -100,7 +101,11 @@ export default class NodeTreeIterator {
         </ErrorBoundary>
       );
     }
-    return React.createElement(ComponentClass, node, this.visitChildren(node));
+    return React.createElement(
+      ComponentClass,
+      node,
+      this.visitChildren(node, blacklist)
+    );
   }
 
   visitTextNode(node, parent) {
@@ -155,7 +160,7 @@ export default class NodeTreeIterator {
     }
   }
 
-  visit(node, parent = null) {
+  visit(node, parent = null, blacklist) {
     let mathUuids;
     if (node.tag === "math") {
       mathUuids = mathNodeHelpers.getUuids(node.children);
@@ -194,7 +199,7 @@ export default class NodeTreeIterator {
 
     switch (node.nodeType) {
       case "element":
-        out = this.visitElementNode(adjustedNode, mathUuids);
+        out = this.visitElementNode(adjustedNode, mathUuids, blacklist);
         break;
       case "text":
         out = this.visitTextNode(adjustedNode, parent);
