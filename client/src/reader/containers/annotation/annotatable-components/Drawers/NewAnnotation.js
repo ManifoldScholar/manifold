@@ -26,6 +26,7 @@ export default class NewAnnotation extends PureComponent {
       <div className="annotation-selection">
         <AnnotationSelectionWrapper
           selection={pendingAnnotation.subject}
+          annotation={{ attributes: pendingAnnotation }}
           truncate={300}
         />
         <AnnotationEditor

@@ -74,9 +74,9 @@ class SourceSummary extends React.PureComponent {
 
   render() {
     const { onClick, onHover, annotation } = this.props;
-    if (!annotation) return null;
 
-    const { textTitle, textSectionTitle } = annotation.attributes;
+    const { textTitle, textSectionTitle } = annotation?.attributes;
+    if (!textTitle) return null;
 
     /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
