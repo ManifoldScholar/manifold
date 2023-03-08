@@ -38,6 +38,17 @@ function AnnotationWithNodes({ annotation, selection }) {
     [];
   const haystack = toDeepCopy.map(deepCopyChildren);
 
+  const activeGroup = useFromStore(
+    `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`
+  );
+  const memberships = useFromStore(
+    `entityStore.entities.readingGroupMemberships`
+  );
+  const membership = Object.keys(memberships)?.find(
+    m => memberships[m].relationships.readingGroup.data.id === activeGroup
+  );
+  const annotationStyle = memberships[membership]?.attributes?.annotationStyle;
+
   if (!annotation || !haystack.length) return fallback;
 
   if (startNodeId === endNodeId) {
@@ -52,6 +63,7 @@ function AnnotationWithNodes({ annotation, selection }) {
           ...annotation,
           attributes: {
             userIsCreator: true,
+            annotationStyle,
             ...annotation.attributes,
             startChar: split ? startChar - split - 1 : startChar,
             endChar: split ? endChar - split - 1 : endChar
@@ -98,6 +110,7 @@ function AnnotationWithNodes({ annotation, selection }) {
         ...annotation,
         attributes: {
           userIsCreator: true,
+          annotationStyle,
           ...annotation.attributes,
           startChar: split ? startChar - split - 1 : startChar,
           endChar
