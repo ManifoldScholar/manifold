@@ -10,6 +10,7 @@ import {
   maybeTruncate,
   deepCopyChildren
 } from "./helpers";
+import blacklist from "./elementBlacklist";
 import { useFromStore } from "hooks";
 
 function AnnotationWithNodes({ annotation, selection }) {
@@ -83,7 +84,7 @@ function AnnotationWithNodes({ annotation, selection }) {
       isDetail: true
     });
 
-    return <Wrapper>{iterator.visit(adjustedNode)}</Wrapper>;
+    return <Wrapper>{iterator.visit(adjustedNode, null, blacklist)}</Wrapper>;
   }
 
   const [startNodeIndex, startNode] = findStartOrEndNode(haystack, startNodeId);
@@ -134,7 +135,7 @@ function AnnotationWithNodes({ annotation, selection }) {
     isDetail: true
   });
 
-  return <Wrapper>{iterator.visit(fragment)}</Wrapper>;
+  return <Wrapper>{iterator.visit(fragment, null, blacklist)}</Wrapper>;
 }
 
 const checkId = (prev, next) => {
