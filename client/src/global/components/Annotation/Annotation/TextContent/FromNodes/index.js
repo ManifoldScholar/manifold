@@ -52,10 +52,17 @@ function AnnotationWithNodes({ annotation, selection }) {
 
   if (!annotation || !haystack.length) return fallback;
 
+  const contextCharLimit = selection.replace("\n", " ").length > 500 ? 50 : 100;
+
   if (startNodeId === endNodeId) {
     const node = findTextNode(haystack, startNodeId);
     if (!node) return fallback;
-    const { adjustedNode, split } = maybeTruncate(node, startChar, endChar);
+    const { adjustedNode, split } = maybeTruncate(
+      node,
+      startChar,
+      endChar,
+      contextCharLimit
+    );
 
     const iterator = new BodyNodes.Helpers.NodeTreeIterator({
       annotations: [
@@ -91,12 +98,15 @@ function AnnotationWithNodes({ annotation, selection }) {
 
   const { adjustedNode: adjustedStartNode, split } = maybeTruncate(
     startNode,
-    startChar
+    startChar,
+    null,
+    contextCharLimit
   );
   const { adjustedNode: adjustedEndNode } = maybeTruncate(
     endNode,
     null,
-    endChar
+    endChar,
+    contextCharLimit
   );
 
   const fragment = {
