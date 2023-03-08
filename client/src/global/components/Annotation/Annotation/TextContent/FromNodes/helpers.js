@@ -49,6 +49,7 @@ const findParentNode = (node, childId) => {
 };
 
 const findParentOfElement = (node, element) => {
+  if (isEqual(node, element)) return [element];
   if (!node.children?.length) return [];
   const result = node.children
     .map(n => {

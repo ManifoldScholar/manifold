@@ -20,9 +20,19 @@ export const Overlay = styled.div`
   --Overlay-bg: rgba(247, 247, 247, 1);
   --Overlay-bg-transparent: rgba(247, 247, 247, 0);
 
+  .overlay-full & {
+    --Overlay-bg: rgba(236, 236, 236, 1);
+    --Overlay-bg-transparent: rgba(236, 236, 236, 0);
+  }
+
   .scheme-dark & {
     --Overlay-bg: rgba(46, 46, 46, 1);
     --Overlay-bg-transparent: rgba(46, 46, 46, 0);
+  }
+
+  .scheme-dark .overlay-full & {
+    --Overlay-bg: rgba(54, 54, 54, 1);
+    --Overlay-bg-transparent: rgba(54, 54, 54, 0);
   }
 
   position: absolute;
