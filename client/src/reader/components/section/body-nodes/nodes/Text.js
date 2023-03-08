@@ -192,7 +192,8 @@ class TextNode extends Component {
         tertiary: !isCreator && authorCreated,
         inert: !isInteractive,
         "annotation-locked-selected primary": lockedSelection,
-        "annotation-underline": underlined,
+        "annotation-underline":
+          underlined || (!isInteractive && lockedSelection),
         "annotation-highlight": highlighted,
         "annotation-wavy": wavy,
         "annotation-dashes": dashes,
