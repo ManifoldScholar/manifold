@@ -66,7 +66,7 @@ class AnnotationSelectionWrapper extends PureComponent {
           <SourceSummary
             annotation={annotation}
             onClick={this.props.visitHandler}
-            onHover={() => {}}
+            onHover={this.hoverHandler}
           />
         </div>
         {this.annotatable && (
