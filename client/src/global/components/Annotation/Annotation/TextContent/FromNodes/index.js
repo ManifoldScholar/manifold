@@ -47,7 +47,8 @@ function AnnotationWithNodes({ annotation, selection }) {
   const membership = Object.keys(memberships)?.find(
     m => memberships[m].relationships.readingGroup.data.id === activeGroup
   );
-  const annotationStyle = memberships[membership]?.attributes?.annotationStyle;
+  const annotationStyle =
+    memberships[membership]?.attributes?.annotationStyle ?? "solid";
 
   if (!annotation || !haystack.length) return fallback;
 
@@ -64,6 +65,7 @@ function AnnotationWithNodes({ annotation, selection }) {
           attributes: {
             userIsCreator: true,
             annotationStyle,
+            format: "annotation",
             ...annotation.attributes,
             startChar: split ? startChar - split - 1 : startChar,
             endChar: split ? endChar - split - 1 : endChar
@@ -71,7 +73,7 @@ function AnnotationWithNodes({ annotation, selection }) {
         }
       ],
       location: { hash: `` },
-      inert: true
+      isDetail: true
     });
 
     return <Wrapper>{iterator.visit(adjustedNode)}</Wrapper>;
@@ -111,6 +113,7 @@ function AnnotationWithNodes({ annotation, selection }) {
         attributes: {
           userIsCreator: true,
           annotationStyle,
+          format: "annotation",
           ...annotation.attributes,
           startChar: split ? startChar - split - 1 : startChar,
           endChar
@@ -118,7 +121,7 @@ function AnnotationWithNodes({ annotation, selection }) {
       }
     ],
     location: { hash: `` },
-    inert: true
+    isDetail: true
   });
 
   return <Wrapper>{iterator.visit(fragment)}</Wrapper>;

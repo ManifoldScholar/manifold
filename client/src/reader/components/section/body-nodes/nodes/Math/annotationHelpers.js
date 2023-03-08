@@ -35,7 +35,8 @@ export const getAnnotationStyles = (
   annotations,
   uuids,
   t,
-  hasInteractiveAncestor
+  hasInteractiveAncestor,
+  isDetail
 ) => {
   const highlighted = annotations.find(a => a.type === "highlight");
   const underlined = annotations.find(a => a.type === "annotation");
@@ -60,10 +61,26 @@ export const getAnnotationStyles = (
       (a.type === "resource" || a.type === "resource_collection")
   );
 
+  const annotationIds = annotations.map(a => a.id);
+
+  const textAnnotationIds = annotations
+    .filter(a => a.type === "annotation")
+    .map(a => a.id);
+
+  const removableHighlight = annotations.filter(
+    a => a.type === "highlight" && (a.isCreator || a.abilities.delete)
+  )[0];
+  const removableHighlightId = removableHighlight
+    ? removableHighlight.id
+    : null;
+  const isInteractive =
+    (!isDetail && !!textAnnotationIds.length) || removableHighlight;
+
   const classes = classNames({
     primary: isCreator,
     secondary: !isCreator,
     tertiary: !isCreator && authorCreated,
+    inert: !isInteractive,
     "annotation-locked-selected primary": lockedSelection,
     "annotation-underline": underlined,
     "annotation-highlight": highlighted,
@@ -83,19 +100,6 @@ export const getAnnotationStyles = (
     return "solid";
   };
 
-  const annotationIds = annotations.map(a => a.id);
-
-  const textAnnotationIds = annotations
-    .filter(a => a.type === "annotation")
-    .map(a => a.id);
-
-  const removableHighlight = annotations.filter(
-    a => a.type === "highlight" && (a.isCreator || a.abilities.delete)
-  )[0];
-  const removableHighlightId = removableHighlight
-    ? removableHighlight.id
-    : null;
-  const isInteractive = !!textAnnotationIds.length || removableHighlight;
   const interactiveAttributes =
     isInteractive && !hasInteractiveAncestor
       ? {

@@ -35,9 +35,10 @@ function Content(props) {
 
   const finalClassName = classNames({
     collapse__content: true,
-    "collapse__content--visible": visible,
+    "collapse__content--visible": visible || height < stubHeight,
     "collapse__content--hidden": !visible,
     "collapse__content--stub": stubHeight,
+    "collapse__content--stub-only": height < stubHeight,
     [className]: className,
     [activeClassName]: activeClassName
   });

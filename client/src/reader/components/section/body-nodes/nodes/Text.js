@@ -41,7 +41,7 @@ class TextNode extends Component {
   }
 
   get openAnnotations() {
-    const { inert, ...annotations } = this.props.openAnnotations;
+    const { isDetail, ...annotations } = this.props.openAnnotations;
     return annotations;
   }
 
@@ -182,9 +182,9 @@ class TextNode extends Component {
         ? removableHighlight.id
         : "";
 
-      const inert = this.props.openAnnotations.inert;
+      const isDetail = this.props.openAnnotations.isDetail;
       const isInteractive =
-        !inert && (!!textAnnotationIds.length || removableHighlight);
+        !isDetail && (!!textAnnotationIds.length || removableHighlight);
 
       const classes = classNames({
         primary: isCreator,
@@ -192,8 +192,7 @@ class TextNode extends Component {
         tertiary: !isCreator && authorCreated,
         inert: !isInteractive,
         "annotation-locked-selected primary": lockedSelection,
-        "annotation-underline":
-          underlined || (!isInteractive && lockedSelection),
+        "annotation-underline": underlined,
         "annotation-highlight": highlighted,
         "annotation-wavy": wavy,
         "annotation-dashes": dashes,
