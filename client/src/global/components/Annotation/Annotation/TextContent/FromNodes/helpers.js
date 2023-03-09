@@ -91,7 +91,7 @@ const truncateStart = (content, startChar, limit) => {
 };
 
 const truncateEnd = (content, endChar, limit) => {
-  const split = Math.min(
+  const split = Math.max(
     content.indexOf(".", endChar + limit),
     content.indexOf("?", endChar + limit),
     content.indexOf("!", endChar + limit)
@@ -100,9 +100,14 @@ const truncateEnd = (content, endChar, limit) => {
   return content.substring(0, split + 1);
 };
 
-const maybeTruncateStart = (node, startChar, limit) => {
+// TODO: make finding the text child fully recursive
+const maybeTruncateStart = (node, startChar, limit, target) => {
   if (node.children?.length) {
-    const startNode = node.children.shift();
+    let startNode = node.children.shift();
+    if (startNode.children?.length > 1) {
+      const index = findNestedMatchIndex(startNode.children, target);
+      startNode = { ...startNode, children: startNode.children.slice(index) };
+    }
     const { adjustedNode: adjustedStartNode, split } = maybeTruncateStart(
       startNode,
       startChar,
@@ -122,10 +127,14 @@ const maybeTruncateStart = (node, startChar, limit) => {
   }
 };
 
-const maybeTruncateEnd = (node, endChar, limit) => {
+const maybeTruncateEnd = (node, endChar, limit, target) => {
   if (!endChar) return { adjustedNode: node };
   if (node.children?.length) {
-    const endNode = node.children.pop();
+    let endNode = node.children.pop();
+    if (endNode.children?.length > 1) {
+      const index = findNestedMatchIndex(endNode.children, target);
+      endNode = { ...endNode, children: endNode.children.slice(0, index + 1) };
+    }
     const adjustedEndNode = maybeTruncateEnd(endNode, endChar, limit)
       .adjustedNode;
     return {
@@ -143,13 +152,20 @@ const maybeTruncateEnd = (node, endChar, limit) => {
   }
 };
 
-export const maybeTruncate = (node, startChar, endChar, limit = 100) => {
+export const maybeTruncate = (
+  node,
+  startChar,
+  endChar,
+  limit = 100,
+  target
+) => {
   if (!startChar || startChar < limit) {
-    return maybeTruncateEnd(node, endChar, limit);
+    return maybeTruncateEnd(node, endChar, limit, target);
   }
   return maybeTruncateStart(
-    maybeTruncateEnd(node, endChar, limit).adjustedNode,
+    maybeTruncateEnd(node, endChar, limit, target).adjustedNode,
     startChar,
-    limit
+    limit,
+    target
   );
 };
