@@ -101,13 +101,15 @@ function AnnotationWithNodes({ annotation, selection }) {
     startNode,
     startChar,
     null,
-    contextCharLimit
+    contextCharLimit,
+    startNodeId
   );
   const { adjustedNode: adjustedEndNode } = maybeTruncate(
     endNode,
     null,
     endChar,
-    contextCharLimit
+    contextCharLimit,
+    endNodeId
   );
 
   const fragment = {
