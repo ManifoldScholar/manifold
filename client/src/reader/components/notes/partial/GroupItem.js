@@ -149,7 +149,9 @@ class GroupItem extends Component {
               />
             )}
             <span className="notes-filtered-list__item-inner">
-              <span className="notes-filtered-list__item-text">{subject}</span>
+              <span className="notes-filtered-list__item-text">
+                {subject.replace("\n", " ")}
+              </span>
               <span className="notes-filtered-list__item-tag">
                 {showAnnotationCreator
                   ? this.renderCreatorTag()
