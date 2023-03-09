@@ -18,12 +18,10 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const { t } = useTranslation();
 
   const { currentUser } = authentication ?? {};
-  const { consentManifoldAnalytics, consentGoogleAnalytics } =
-    currentUser?.attributes ?? {};
 
   const [cookiePrefs, setCookiePrefs] = useState({
-    manifold: consentManifoldAnalytics ? "yes" : "no",
-    google: consentGoogleAnalytics ? "yes" : "no"
+    manifold: "yes",
+    google: "yes"
   });
 
   const settings = useFromStore("settings", "select");

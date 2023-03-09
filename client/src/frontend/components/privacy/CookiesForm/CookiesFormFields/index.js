@@ -56,7 +56,7 @@ export default function CookiesFormFields({
                 label: getLocalized("internalAnalytics", "label"),
                 instructions: getLocalized("internalAnalytics", "description")
               }}
-              options={{ no: t("common.no"), yes: t("common.yes") }}
+              options={{ yes: t("common.yes"), no: t("common.no") }}
               value={cookiePrefs.manifold}
               onChange={() => onChange("manifold")}
             />
@@ -68,7 +68,7 @@ export default function CookiesFormFields({
                 label: getLocalized("googleAnalytics", "label"),
                 instructions: getLocalized("googleAnalytics", "description")
               }}
-              options={{ no: t("common.no"), yes: t("common.yes") }}
+              options={{ yes: t("common.yes"), no: t("common.no") }}
               value={cookiePrefs.google}
               onChange={() => onChange("google")}
             />
