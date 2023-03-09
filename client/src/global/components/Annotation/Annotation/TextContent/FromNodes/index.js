@@ -1,15 +1,9 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import nl2br from "nl2br";
 import BodyNodes from "reader/components/section/body-nodes";
 import Wrapper from "./Wrapper";
-import {
-  findStartOrEndNode,
-  findTextNode,
-  findAncestorNode,
-  maybeTruncate,
-  deepCopyChildren
-} from "./helpers";
+import { shrinkHaystack, maybeTruncate, deepCopy } from "./helpers";
 import blacklist from "./elementBlacklist";
 import { useFromStore } from "hooks";
 
@@ -33,11 +27,14 @@ function AnnotationWithNodes({ annotation, selection }) {
     `entityStore.entities.textSections["${sectionId}"].attributes.bodyJSON`
   );
 
-  const toDeepCopy =
-    annotationNode?.children ??
-    findAncestorNode(bodyJSON, startNodeId, endNodeId)?.children ??
-    [];
-  const haystack = toDeepCopy.map(deepCopyChildren);
+  const haystack = useMemo(() => deepCopy(annotationNode ?? bodyJSON), [
+    annotationNode,
+    bodyJSON
+  ]);
+  const nodesToRender = useMemo(
+    () => shrinkHaystack(haystack, startNodeId, endNodeId)?.children,
+    [haystack, endNodeId, startNodeId]
+  );
 
   const activeGroup = useFromStore(
     `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`
@@ -51,19 +48,18 @@ function AnnotationWithNodes({ annotation, selection }) {
   const annotationStyle =
     memberships[membership]?.attributes?.annotationStyle ?? "solid";
 
-  if (!annotation || !haystack.length) return fallback;
+  if (!nodesToRender?.length) return fallback;
 
   const contextCharLimit = selection.replace("\n", " ").length > 500 ? 50 : 100;
 
   if (startNodeId === endNodeId) {
-    const node = findTextNode(haystack, startNodeId);
-    if (!node) return fallback;
-    const { adjustedNode, split } = maybeTruncate(
-      node,
+    const [textNode] = nodesToRender;
+    const { adjustedNode, split } = maybeTruncate({
+      node: textNode,
       startChar,
       endChar,
-      contextCharLimit
-    );
+      limit: contextCharLimit
+    });
 
     const iterator = new BodyNodes.Helpers.NodeTreeIterator({
       annotations: [
@@ -87,35 +83,24 @@ function AnnotationWithNodes({ annotation, selection }) {
     return <Wrapper>{iterator.visit(adjustedNode, null, blacklist)}</Wrapper>;
   }
 
-  const [startNodeIndex, startNode] = findStartOrEndNode(haystack, startNodeId);
-  if (!startNode) return fallback;
-  const [endNodeIndex, endNode] = findStartOrEndNode(
-    haystack,
-    endNodeId,
-    false
-  );
-  if (!endNode) return fallback;
-  const middleNodes = haystack.slice(startNodeIndex + 1, endNodeIndex);
+  const startNode = nodesToRender.shift();
+  const endNode = nodesToRender.pop();
 
-  const { adjustedNode: adjustedStartNode, split } = maybeTruncate(
-    startNode,
+  const { adjustedNode: adjustedStartNode, split } = maybeTruncate({
+    node: startNode,
     startChar,
-    null,
-    contextCharLimit,
-    startNodeId
-  );
-  const { adjustedNode: adjustedEndNode } = maybeTruncate(
-    endNode,
-    null,
+    limit: contextCharLimit
+  });
+  const { adjustedNode: adjustedEndNode } = maybeTruncate({
+    node: endNode,
     endChar,
-    contextCharLimit,
-    endNodeId
-  );
+    limit: contextCharLimit
+  });
 
   const fragment = {
     nodeType: "element",
     tag: "div",
-    children: [adjustedStartNode, ...middleNodes, adjustedEndNode]
+    children: [adjustedStartNode, ...nodesToRender, adjustedEndNode]
   };
 
   const iterator = new BodyNodes.Helpers.NodeTreeIterator({
