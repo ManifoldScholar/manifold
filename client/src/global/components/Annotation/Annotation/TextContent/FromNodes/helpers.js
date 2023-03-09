@@ -1,8 +1,3 @@
-export const deepCopy = n => ({
-  ...n,
-  children: n.children ? n.children.map(deepCopy) : undefined
-});
-
 const findNestedMatchIndex = (nodes, target) => {
   return nodes.findIndex(n => {
     return (
@@ -52,9 +47,9 @@ const truncateStart = (content, startChar, limit) => {
 };
 
 const maybeTruncateStart = (node, startChar, limit) => {
-  if (!startChar) return { adjustedNode: node };
+  if (!startChar || startChar < limit) return { adjustedNode: node };
   if (node.children?.length) {
-    const firstChild = node.children.shift();
+    const firstChild = node.children[0];
     const { adjustedNode: adjustedStartNode, split } = maybeTruncateStart(
       firstChild,
       startChar,
@@ -63,7 +58,7 @@ const maybeTruncateStart = (node, startChar, limit) => {
     return {
       adjustedNode: {
         ...node,
-        children: [adjustedStartNode, ...node.children]
+        children: [adjustedStartNode, ...node.children.slice(1)]
       },
       split
     };
@@ -87,11 +82,14 @@ const truncateEnd = (content, endChar, limit) => {
 const maybeTruncateEnd = (node, endChar, limit) => {
   if (!endChar) return { adjustedNode: node };
   if (node.children?.length) {
-    const lastChild = node.children.pop();
+    const lastChild = node.children[node.children.length - 1];
     const adjustedEndNode = maybeTruncateEnd(lastChild, endChar, limit)
       .adjustedNode;
     return {
-      adjustedNode: { ...node, children: [...node.children, adjustedEndNode] }
+      adjustedNode: {
+        ...node,
+        children: [...node.children.slice(0, -1), adjustedEndNode]
+      }
     };
   }
   if (node.content) {
@@ -106,17 +104,16 @@ const maybeTruncateEnd = (node, endChar, limit) => {
 };
 
 export const maybeTruncate = ({ limit, node, endChar, startChar }) => {
-  if (!startChar || startChar < limit) {
-    return maybeTruncateEnd(node, endChar, limit);
-  }
-  return maybeTruncateStart(
-    maybeTruncateEnd(node, endChar, limit).adjustedNode,
-    startChar,
-    limit
-  );
+  const { adjustedNode } = maybeTruncateEnd(node, endChar, limit);
+  return maybeTruncateStart(adjustedNode, startChar, limit);
 };
 
 /* Unused prior iterations. Can remove before merging.
+
+export const deepCopy = n => ({
+  ...n,
+  children: n.children ? n.children.map(deepCopy) : undefined
+});
 
 const findNestedNode = (nodes, target) => {
   const result = nodes
