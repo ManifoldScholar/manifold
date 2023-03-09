@@ -11,8 +11,9 @@ import TOCList from "backend/components/authoring/TOCList";
 import { formatTreeData } from "backend/components/authoring/TOCList/treeHelpers";
 import { textsAPI } from "api";
 import { useApiCallback } from "hooks";
+import withConfirmation from "hoc/withConfirmation";
 
-export default function TextTOCContainer({ text, route }) {
+function TextTOCContainer({ text, route, confirm }) {
   const { t } = useTranslation();
 
   // tree + setTree are here in the container because child route drawers need to call setTree after save to update the dnd tree. This could instead be implemented as a useEffect in List, but it made more sense to me to call it in the onSuccess callback in the forms. -LD
@@ -38,6 +39,12 @@ export default function TextTOCContainer({ text, route }) {
     const { toc } = data.attributes;
     setTree(formatTreeData(toc));
   }, [text, updateText]);
+
+  const confirmAutoGenerate = () => {
+    const heading = t("modals.auto_generate_toc");
+    const message = t("modals.auto_generate_toc_body");
+    if (confirm) confirm(heading, message, onAutoGenerate);
+  };
 
   const renderChildRoutes = () => {
     const closeUrl = lh.link("backendTextTOC", text.id);
@@ -95,7 +102,7 @@ export default function TextTOCContainer({ text, route }) {
             </span>
           </Link>
           <button
-            onClick={onAutoGenerate}
+            onClick={confirmAutoGenerate}
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
@@ -133,3 +140,5 @@ TextTOCContainer.propTypes = {
   text: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired
 };
+
+export default withConfirmation(TextTOCContainer);
