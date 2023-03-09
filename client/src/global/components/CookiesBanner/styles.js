@@ -7,6 +7,7 @@ import {
   formInputMessage
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
+import { transientOptions } from "helpers/emotionHelpers";
 
 export const Banner = styled.div`
   position: fixed;
@@ -69,7 +70,7 @@ export const ButtonWrapper = styled.div`
   gap: 20px;
 `;
 
-export const Button = styled.button`
+export const Button = styled("button", transientOptions)`
   flex-shrink: 0;
   color: var(--color-base-neutral-white);
   border-color: ${({ $dull }) =>
