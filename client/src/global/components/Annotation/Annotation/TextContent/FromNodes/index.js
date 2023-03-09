@@ -1,9 +1,9 @@
-import React, { memo, useMemo } from "react";
+import React, { memo } from "react";
 import { useParams } from "react-router-dom";
 import nl2br from "nl2br";
 import BodyNodes from "reader/components/section/body-nodes";
 import Wrapper from "./Wrapper";
-import { shrinkHaystack, maybeTruncate, deepCopy } from "./helpers";
+import { shrinkHaystack, maybeTruncate } from "./helpers";
 import blacklist from "./elementBlacklist";
 import { useFromStore } from "hooks";
 
@@ -27,14 +27,9 @@ function AnnotationWithNodes({ annotation, selection }) {
     `entityStore.entities.textSections["${sectionId}"].attributes.bodyJSON`
   );
 
-  const haystack = useMemo(() => deepCopy(annotationNode ?? bodyJSON), [
-    annotationNode,
-    bodyJSON
-  ]);
-  const nodesToRender = useMemo(
-    () => shrinkHaystack(haystack, startNodeId, endNodeId)?.children,
-    [haystack, endNodeId, startNodeId]
-  );
+  const haystack = annotationNode ?? bodyJSON;
+  const nodesToRender = shrinkHaystack(haystack, startNodeId, endNodeId)
+    ?.children;
 
   const activeGroup = useFromStore(
     `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`
@@ -50,7 +45,9 @@ function AnnotationWithNodes({ annotation, selection }) {
 
   if (!nodesToRender?.length) return fallback;
 
-  const contextCharLimit = selection.replace("\n", " ").length > 500 ? 50 : 100;
+  const length = selection.replace("\n", " ").length;
+  /* eslint-disable no-nested-ternary */
+  const contextCharLimit = length > 500 ? 25 : length > 200 ? 50 : 100;
 
   if (startNodeId === endNodeId) {
     const [textNode] = nodesToRender;
@@ -83,8 +80,9 @@ function AnnotationWithNodes({ annotation, selection }) {
     return <Wrapper>{iterator.visit(adjustedNode, null, blacklist)}</Wrapper>;
   }
 
-  const startNode = nodesToRender.shift();
-  const endNode = nodesToRender.pop();
+  const startNode = nodesToRender[0];
+  const endNode = nodesToRender[nodesToRender.length - 1];
+  const middle = nodesToRender.slice(1, nodesToRender.length - 1);
 
   const { adjustedNode: adjustedStartNode, split } = maybeTruncate({
     node: startNode,
@@ -100,7 +98,7 @@ function AnnotationWithNodes({ annotation, selection }) {
   const fragment = {
     nodeType: "element",
     tag: "div",
-    children: [adjustedStartNode, ...nodesToRender, adjustedEndNode]
+    children: [adjustedStartNode, ...middle, adjustedEndNode]
   };
 
   const iterator = new BodyNodes.Helpers.NodeTreeIterator({
