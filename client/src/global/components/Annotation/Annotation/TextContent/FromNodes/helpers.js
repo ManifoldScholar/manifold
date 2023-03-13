@@ -7,35 +7,6 @@ const findNestedMatchIndex = (nodes, target) => {
   });
 };
 
-const maybeTruncateChildren = (node, target, fromStart = true) => {
-  if (!node.children || node.children?.length <= 1) return node;
-  const index = findNestedMatchIndex(node.children, target);
-  if (fromStart)
-    return {
-      ...node,
-      children: [
-        maybeTruncateChildren(node.children[index], target),
-        ...node.children.slice(index + 1)
-      ]
-    };
-  return {
-    ...node,
-    children: [
-      ...node.children.slice(0, index),
-      maybeTruncateChildren(node.children[index], target, fromStart)
-    ]
-  };
-};
-
-export const shrinkHaystack = (haystack, startId, endId) => {
-  if (!haystack) return null;
-  const shrunkFromStart = maybeTruncateChildren(haystack, startId);
-  if (!shrunkFromStart) return null;
-  const finalStack = maybeTruncateChildren(shrunkFromStart, endId, false);
-  if (!finalStack) return null;
-  return finalStack;
-};
-
 const truncateStart = (content, startChar, limit) => {
   const split = Math.max(
     content.lastIndexOf(".", startChar - limit),
@@ -46,27 +17,10 @@ const truncateStart = (content, startChar, limit) => {
   return { content: content.substring(split + 1), split };
 };
 
-const maybeTruncateStart = (node, startChar, limit) => {
+const maybeTruncateStart = ({ node, startChar, limit }) => {
   if (!startChar || startChar < limit) return { adjustedNode: node };
-  if (node.children?.length) {
-    const firstChild = node.children[0];
-    const { adjustedNode: adjustedStartNode, split } = maybeTruncateStart(
-      firstChild,
-      startChar,
-      limit
-    );
-    return {
-      adjustedNode: {
-        ...node,
-        children: [adjustedStartNode, ...node.children.slice(1)]
-      },
-      split
-    };
-  }
-  if (node.content) {
-    const { content, split } = truncateStart(node.content, startChar, limit);
-    return { adjustedNode: { ...node, content }, split };
-  }
+  const { content, split } = truncateStart(node.content, startChar, limit);
+  return { adjustedNode: { ...node, content }, split };
 };
 
 const truncateEnd = (content, endChar, limit) => {
@@ -79,93 +33,73 @@ const truncateEnd = (content, endChar, limit) => {
   return content.substring(0, split + 1);
 };
 
-const maybeTruncateEnd = (node, endChar, limit) => {
+const maybeTruncateEnd = ({ node, endChar, limit }) => {
   if (!endChar) return { adjustedNode: node };
-  if (node.children?.length) {
-    const lastChild = node.children[node.children.length - 1];
-    const adjustedEndNode = maybeTruncateEnd(lastChild, endChar, limit)
-      .adjustedNode;
+  if (node.content.length - endChar < limit) return { adjustedNode: node };
+  return {
+    adjustedNode: {
+      ...node,
+      content: truncateEnd(node.content, endChar, limit)
+    }
+  };
+};
+
+const maybeTruncateText = ({ fromStart, setSplit, target, node, ...args }) => {
+  const isTargetNode = node.nodeUuid === target;
+  const hasTargetNodeChild = node.children?.[0].nodeUuid === target;
+
+  if (!isTargetNode && !hasTargetNodeChild) return node;
+
+  const nodeToTruncate = isTargetNode ? node : node.children[0];
+
+  let truncatedNode;
+  if (fromStart) {
+    const { split, adjustedNode } = maybeTruncateStart({
+      node: nodeToTruncate,
+      ...args
+    });
+    if (split) setSplit(split);
+    truncatedNode = adjustedNode;
+  } else {
+    const { adjustedNode } = maybeTruncateEnd({
+      node: nodeToTruncate,
+      ...args
+    });
+    truncatedNode = adjustedNode;
+  }
+
+  return isTargetNode ? truncatedNode : { ...node, children: [truncatedNode] };
+};
+
+export const maybeTruncateChildren = ({
+  node,
+  target,
+  fromStart = true,
+  ...args
+}) => {
+  if (!node.children || node.children.length <= 1) {
+    return maybeTruncateText({
+      node,
+      target,
+      fromStart,
+      ...args
+    });
+  }
+
+  const index = findNestedMatchIndex(node.children, target);
+  const adjustedChild = maybeTruncateChildren({
+    node: node.children[index],
+    target,
+    fromStart,
+    ...args
+  });
+  if (fromStart)
     return {
-      adjustedNode: {
-        ...node,
-        children: [...node.children.slice(0, -1), adjustedEndNode]
-      }
+      ...node,
+      children: [adjustedChild, ...node.children.slice(index + 1)]
     };
-  }
-  if (node.content) {
-    if (node.content.length - endChar < limit) return { adjustedNode: node };
-    return {
-      adjustedNode: {
-        ...node,
-        content: truncateEnd(node.content, endChar, limit)
-      }
-    };
-  }
+  return {
+    ...node,
+    children: [...node.children.slice(0, index), adjustedChild]
+  };
 };
-
-export const maybeTruncate = ({ limit, node, endChar, startChar }) => {
-  const { adjustedNode } = maybeTruncateEnd(node, endChar, limit);
-  return maybeTruncateStart(adjustedNode, startChar, limit);
-};
-
-/* Unused prior iterations. Can remove before merging.
-
-export const deepCopy = n => ({
-  ...n,
-  children: n.children ? n.children.map(deepCopy) : undefined
-});
-
-const findNestedNode = (nodes, target) => {
-  const result = nodes
-    .map(n => {
-      if (n.nodeUuid === target) return n;
-      if (n.children) return findNestedNode(n.children, target).flat();
-      return [];
-    })
-    .flat();
-  return result;
-};
-
-const findTextNode = (nodes, target) => {
-  return findNestedNode(nodes, target)[0];
-};
-
-const findParentNode = (node, childId) => {
-  if (!node.children?.length) return [];
-  const result = node.children
-    .map(n => {
-      if (n.nodeUuid === childId) return node;
-      if (n.children) return findParentNode(n, childId).flat();
-      return [];
-    })
-    .flat();
-  return result;
-};
-
-const findParentOfElement = (node, element) => {
-  if (isEqual(node, element)) return [element];
-  if (!node.children?.length) return [];
-  const result = node.children
-    .map(n => {
-      if (isEqual(n, element)) return node;
-      if (n.children) return findParentOfElement(n, element).flat();
-      return [];
-    })
-    .flat();
-  return result;
-};
-
-const findAncestorNode = (bodyNode, startNode, endNode) => {
-  if (typeof startNode === "string") {
-    const startNodeParent = findParentNode(bodyNode, startNode)[0];
-    const endNodeParent = findParentNode(bodyNode, endNode)[0];
-    if (isEqual(startNodeParent, endNodeParent)) return startNodeParent;
-    return findAncestorNode(bodyNode, startNodeParent, endNodeParent);
-  }
-  const startNodeParent = findParentOfElement(bodyNode, startNode)[0];
-  const endNodeParent = findParentOfElement(bodyNode, endNode)[0];
-  if (isEqual(startNodeParent, endNodeParent)) return startNodeParent;
-  return findAncestorNode(bodyNode, startNodeParent, endNodeParent);
-};
-
-*/
