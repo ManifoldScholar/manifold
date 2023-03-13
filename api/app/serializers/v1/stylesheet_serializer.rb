@@ -13,6 +13,7 @@ module V1
     typed_attribute :ingested, Types::Bool.meta(read_only: true)
     typed_attribute :position, Types::Integer
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
+    typed_attribute :applies_to_all_text_sections, Types::Bool
 
     when_full do
       typed_attribute :raw_styles, Types::String.optional.meta(

@@ -312,7 +312,7 @@ module Validation
 
   def stylesheet_params
     params.require(:data)
-    attributes = [:raw_styles, :name, :position]
+    attributes = [:raw_styles, :name, :position, :applies_to_all_text_sections]
     relationships = [:text_sections]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

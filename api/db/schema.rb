@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_25_004558) do
+ActiveRecord::Schema.define(version: 2023_03_13_215126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1252,6 +1252,7 @@ ActiveRecord::Schema.define(version: 2023_01_25_004558) do
     t.integer "position"
     t.uuid "creator_id"
     t.string "hashed_content"
+    t.boolean "applies_to_all_text_sections", default: false
     t.index ["ingestion_source_id"], name: "index_stylesheets_on_ingestion_source_id"
     t.index ["text_id"], name: "index_stylesheets_on_text_id"
   end
