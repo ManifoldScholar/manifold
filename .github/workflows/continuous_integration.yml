@@ -126,8 +126,12 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11.5
+        image: postgres:13.2-alpine
         ports: ["5432:5432"]
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: manifold_test
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
       redis:
@@ -187,9 +191,8 @@ jobs:
 
       - name: "Setup test database"
         env:
-          PGHOST: localhost
-          PGUSER: postgres
-          RAILS_ENV: test
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/manifold_test"
+          RAILS_ENV: "test"
         run: |
           cd api
           bin/rails db:setup
@@ -199,9 +202,8 @@ jobs:
 
       - name: "Run API specs"
         env:
-          PGHOST: localhost
-          PGUSER: postgres
-          RAILS_ENV: test
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/manifold_test"
+          RAILS_ENV: "test"
 
         run: |
           cd api
