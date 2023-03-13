@@ -64,6 +64,7 @@ export const SecondaryInput = styled(BaseInput)`
   /* This is only applied in secondary, not sure if it would be okay in base. */
   &[type="number"] {
     text-align: left;
+    -moz-appearance: textfield;
   }
 
   header & {
