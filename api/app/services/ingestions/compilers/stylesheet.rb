@@ -6,6 +6,7 @@ module Ingestions
       hash :attributes do
         string :name
         boolean :ingested, default: true
+        boolean :applies_to_all_text_sections, default: false
         integer :position, default: nil
         string :source_identifier, default: nil
         string :hashed_content
@@ -41,6 +42,7 @@ module Ingestions
           hash[:ingestion_source] = ingestion_source
           hash[:creator] = context.creator
           hash[:skip_formatting] = true
+          hash[:applies_to_all_text_sections] = attributes[:applies_to_all_text_sections]
         end.except(:build)
       end
 

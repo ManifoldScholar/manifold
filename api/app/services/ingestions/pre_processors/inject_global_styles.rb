@@ -9,11 +9,6 @@ module Ingestions
         manifest[:relationships][:stylesheets] ||= []
         manifest[:relationships][:stylesheets] << global_stylesheet
 
-        manifest[:relationships][:text_sections].each do |ts|
-          ts[:stylesheet_contents] ||= []
-          ts[:stylesheet_contents].push hashed_content
-        end
-
         manifest
       end
 
@@ -35,6 +30,7 @@ module Ingestions
           hash[:hashed_content] = hashed_content
           hash[:build] = write_file
           hash[:source_identifier] = "global-styles"
+          hash[:applies_to_all_text_sections] = true
         end
       end
 
