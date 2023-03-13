@@ -1,9 +1,9 @@
-import React, { memo } from "react";
+import React, { memo, useRef } from "react";
 import { useParams } from "react-router-dom";
 import nl2br from "nl2br";
 import BodyNodes from "reader/components/section/body-nodes";
 import Wrapper from "./Wrapper";
-import { shrinkHaystack, maybeTruncate } from "./helpers";
+import { maybeTruncateChildren } from "./helpers";
 import blacklist from "./elementBlacklist";
 import { useFromStore } from "hooks";
 
@@ -27,9 +27,39 @@ function AnnotationWithNodes({ annotation, selection }) {
     `entityStore.entities.textSections["${sectionId}"].attributes.bodyJSON`
   );
 
+  const length = selection?.replace("\n", " ")?.length;
+  /* eslint-disable no-nested-ternary */
+  const contextCharLimit = length > 500 ? 25 : length > 200 ? 50 : 100;
+
+  const textSplit = useRef(0);
+  const setSplit = val => (textSplit.current = val);
+
   const haystack = annotationNode ?? bodyJSON;
-  const nodesToRender = shrinkHaystack(haystack, startNodeId, endNodeId)
-    ?.children;
+
+  const subjectInSingleNode = startNodeId === endNodeId;
+
+  const siftHaystack = () => {
+    if (!haystack) return null;
+    const adjustedStack = maybeTruncateChildren({
+      node: haystack,
+      target: startNodeId,
+      startChar,
+      limit: contextCharLimit,
+      setSplit
+    });
+    if (!adjustedStack) return null;
+    const finalStack = maybeTruncateChildren({
+      node: adjustedStack,
+      target: endNodeId,
+      endChar: subjectInSingleNode ? endChar - textSplit.current : endChar,
+      limit: contextCharLimit,
+      fromStart: false
+    });
+    if (!finalStack) return null;
+    return finalStack;
+  };
+
+  const nodesToRender = siftHaystack()?.children;
 
   const activeGroup = useFromStore(
     `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`
@@ -45,61 +75,16 @@ function AnnotationWithNodes({ annotation, selection }) {
 
   if (!nodesToRender?.length) return fallback;
 
-  const length = selection.replace("\n", " ").length;
-  /* eslint-disable no-nested-ternary */
-  const contextCharLimit = length > 500 ? 25 : length > 200 ? 50 : 100;
-
-  if (startNodeId === endNodeId) {
-    const [textNode] = nodesToRender;
-    const { adjustedNode, split } = maybeTruncate({
-      node: textNode,
-      startChar,
-      endChar,
-      limit: contextCharLimit
-    });
-
-    const iterator = new BodyNodes.Helpers.NodeTreeIterator({
-      annotations: [
-        {
-          id: "selection",
-          ...annotation,
-          attributes: {
-            userIsCreator: true,
-            annotationStyle,
-            format: "annotation",
-            ...annotation.attributes,
-            startChar: split ? startChar - split - 1 : startChar,
-            endChar: split ? endChar - split - 1 : endChar
-          }
-        }
-      ],
-      location: { hash: `` },
-      isDetail: true
-    });
-
-    return <Wrapper>{iterator.visit(adjustedNode, null, blacklist)}</Wrapper>;
-  }
-
-  const startNode = nodesToRender[0];
-  const endNode = nodesToRender[nodesToRender.length - 1];
-  const middle = nodesToRender.slice(1, nodesToRender.length - 1);
-
-  const { adjustedNode: adjustedStartNode, split } = maybeTruncate({
-    node: startNode,
-    startChar,
-    limit: contextCharLimit
-  });
-  const { adjustedNode: adjustedEndNode } = maybeTruncate({
-    node: endNode,
-    endChar,
-    limit: contextCharLimit
-  });
-
   const fragment = {
     nodeType: "element",
     tag: "div",
-    children: [adjustedStartNode, ...middle, adjustedEndNode]
+    children: nodesToRender
   };
+
+  const adjustedEndChar =
+    subjectInSingleNode && textSplit
+      ? endChar - textSplit.current - 1
+      : endChar;
 
   const iterator = new BodyNodes.Helpers.NodeTreeIterator({
     annotations: [
@@ -111,8 +96,8 @@ function AnnotationWithNodes({ annotation, selection }) {
           annotationStyle,
           format: "annotation",
           ...annotation.attributes,
-          startChar: split ? startChar - split - 1 : startChar,
-          endChar
+          startChar: textSplit ? startChar - textSplit.current - 1 : startChar,
+          endChar: adjustedEndChar
         }
       }
     ],
