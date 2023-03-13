@@ -15,6 +15,7 @@ class ProjectCollectionNew extends PureComponent {
     buildUpdateProjectCollection: PropTypes.func.isRequired,
     buildCreateProjectCollection: PropTypes.func.isRequired,
     successHandler: PropTypes.func.isRequired,
+    setDirty: PropTypes.func.isRequired,
     t: PropTypes.func
   };
 
@@ -34,6 +35,12 @@ class ProjectCollectionNew extends PureComponent {
     };
   }
 
+  onDirty = session => {
+    const dirtyAttrs = Object.keys(session.attributes).length;
+    const dirtyRels = Object.keys(session.relationships).length;
+    this.props.setDirty(dirtyAttrs || dirtyRels);
+  };
+
   render() {
     return (
       <Authorize
@@ -49,6 +56,7 @@ class ProjectCollectionNew extends PureComponent {
             update={this.props.buildUpdateProjectCollection}
             create={this.props.buildCreateProjectCollection}
             onSuccess={this.props.successHandler}
+            onDirty={this.onDirty}
             className="form-secondary project-collection-form"
           >
             <ProjectCollection.Form.Fields {...this.props} />

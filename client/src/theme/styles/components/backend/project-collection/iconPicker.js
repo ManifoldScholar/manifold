@@ -26,11 +26,16 @@ export default `
       position: relative;
 
       &--active,
-      &:hover,
-      &:focus-within {
+      &:hover {
         color: var(--color-base-neutral110);
         background-color: var(--focus-color);
         outline: 0;
+      }
+
+      &:focus-within {
+        color: var(--color-base-neutral110);
+        background-color: var(--color-accent-primary-pale);
+        border-color: var(--color-accent-primary-pale);
       }
     }
 

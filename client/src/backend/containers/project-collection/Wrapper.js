@@ -14,6 +14,7 @@ import size from "lodash/size";
 import lh from "helpers/linkHandler";
 import classnames from "classnames";
 import HeadContent from "global/components/HeadContent";
+import withConfirmation from "hoc/withConfirmation";
 
 import Authorize from "hoc/Authorize";
 
@@ -47,12 +48,13 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     history: PropTypes.object,
     match: PropTypes.object,
     route: PropTypes.object,
+    confirm: PropTypes.func,
     t: PropTypes.func
   };
 
   constructor(props) {
     super(props);
-    this.state = { showNew: false };
+    this.state = { showNew: false, newFormDirty: false };
   }
 
   componentDidMount() {
@@ -194,6 +196,13 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 
   handleHideNew = event => {
     if (event) event.preventDefault();
+    if (this.state.newFormDirty) {
+      const heading = this.props.t("messages.confirm");
+      const message = this.props.t("messages.unsaved_changes");
+      return this.props.confirm(heading, message, () =>
+        this.setState({ showNew: false })
+      );
+    }
     this.setState({ showNew: false });
   };
 
@@ -301,6 +310,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
                 >
                   <New
                     successHandler={this.handleNewSuccess}
+                    setDirty={val => this.setState({ newFormDirty: val })}
                     {...this.childProps}
                   />
                 </Drawer.Wrapper>
@@ -321,5 +331,5 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  connectAndFetch(ProjectCollectionWrapperContainer)
+  withConfirmation(connectAndFetch(ProjectCollectionWrapperContainer))
 );
