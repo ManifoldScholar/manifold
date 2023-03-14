@@ -22,6 +22,7 @@ import Authorize from "hoc/Authorize";
 export default function Header(props) {
   const {
     match,
+    history,
     text,
     section,
     commonActions,

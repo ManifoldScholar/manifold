@@ -177,7 +177,13 @@ export class SectionContainer extends Component {
   }
 
   renderStyles = props => {
-    return values(props.section.relationships.stylesheets).map(stylesheet => {
+    const globalStylesheet = props.text.relationships.stylesheets?.find(
+      s => s.attributes.appliesToAllTextSections
+    );
+    const stylesheets = globalStylesheet
+      ? [globalStylesheet, ...values(props.section.relationships.stylesheets)]
+      : values(props.section.relationships.stylesheets);
+    return stylesheets.map(stylesheet => {
       return (
         <style
           key={stylesheet.id}
