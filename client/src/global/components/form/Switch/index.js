@@ -26,7 +26,8 @@ class FormSwitch extends Component {
     submitOnChange: PropTypes.bool,
     wide: PropTypes.bool,
     theme: PropTypes.oneOf(["default", "checkbox"]),
-    isPrimary: PropTypes.bool
+    isPrimary: PropTypes.bool,
+    collapseProps: PropTypes.object
   };
 
   static defaultProps = {
@@ -146,6 +147,7 @@ class FormSwitch extends Component {
                 id={`${this.idPrefix}-${id}`}
                 checked={this.checked}
                 onChange={eventIgnored => this.handleChange()}
+                {...this.props.collapseProps}
               />
               {this.showCheckbox && this.renderCheckboxIndicator()}
               {this.showSwitch && this.renderSwitchIndicator()}

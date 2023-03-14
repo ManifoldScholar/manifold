@@ -9,6 +9,8 @@ import lh from "helpers/linkHandler";
 import FormContainer from "global/containers/form";
 import { entityStoreActions } from "actions";
 import has from "lodash/has";
+import Collapse from "global/components/Collapse";
+import SectionFields from "./SectionFields";
 
 const { request } = entityStoreActions;
 
@@ -89,48 +91,55 @@ export class StylesheetEditContainer extends PureComponent {
           onSuccess={this.redirectToStylesheet}
           className="form-secondary"
         >
-          {this.stylesheet.attributes.ingested ? (
-            <Form.Instructions
-              instructions={t("texts.stylesheets.edit.instructions")}
-            />
-          ) : null}
-          <Form.TextInput
-            label={t("texts.stylesheets.edit.name_label")}
-            name="attributes[name]"
-            placeholder={t("texts.stylesheets.edit.name_label")}
-            wide
-          />
-          <Form.CodeArea
-            label={t("texts.stylesheets.edit.source_styles_label")}
-            height="300px"
-            mode="css"
-            name="attributes[rawStyles]"
-            instructions={t(
-              "texts.stylesheets.edit.source_styles_instructions"
-            )}
-          />
-          <Form.CodeArea
-            label={t("texts.stylesheets.edit.validated_styles_label")}
-            name="attributes[styles]"
-            mode="css"
-            instructions={t(
-              "texts.stylesheets.edit.validated_styles_instructions"
-            )}
-            readOnly
-          />
-          <Form.Picker
-            label={t("texts.stylesheets.edit.sections_label")}
-            placeholder={t("texts.stylesheets.edit.sections_placeholder")}
-            name="relationships[textSections]"
-            optionToLabel={text => text.attributes.name}
-            options={this.fetchTextSections}
-            rowProps={{ namePath: "attributes.title" }}
-            showAddRemoveAll
-          />
-          <Form.Save
-            cancelRoute={lh.link("backendTextStyles", params.id)}
-            text={t("texts.stylesheets.edit.save")}
-          />
+          {getModelValue => (
+            <>
+              {this.stylesheet.attributes.ingested ? (
+                <Form.Instructions
+                  instructions={t("texts.stylesheets.edit.instructions")}
+                />
+              ) : null}
+              <Form.TextInput
+                label={t("texts.stylesheets.edit.name_label")}
+                name="attributes[name]"
+                placeholder={t("texts.stylesheets.edit.name_label")}
+                wide
+              />
+              <Form.CodeArea
+                label={t("texts.stylesheets.edit.source_styles_label")}
+                height="300px"
+                mode="css"
+                name="attributes[rawStyles]"
+                instructions={t(
+                  "texts.stylesheets.edit.source_styles_instructions"
+                )}
+              />
+              <Form.CodeArea
+                label={t("texts.stylesheets.edit.validated_styles_label")}
+                name="attributes[styles]"
+                mode="css"
+                instructions={t(
+                  "texts.stylesheets.edit.validated_styles_instructions"
+                )}
+                readOnly
+              />
+              <Collapse
+                initialVisible={
+                  !getModelValue("attributes[appliesToAllTextSections]")
+                }
+              >
+                <SectionFields
+                  options={this.fetchTextSections}
+                  visible={
+                    !getModelValue("attributes[appliesToAllTextSections]")
+                  }
+                />
+              </Collapse>
+              <Form.Save
+                cancelRoute={lh.link("backendTextStyles", params.id)}
+                text={t("texts.stylesheets.edit.save")}
+              />
+            </>
+          )}
         </FormContainer.Form>
       </section>
     );
