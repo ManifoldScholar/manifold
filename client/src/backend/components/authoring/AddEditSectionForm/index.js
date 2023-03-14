@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
@@ -20,9 +20,12 @@ export default function AddEditSectionForm({
   const { t } = useTranslation();
   const history = useHistory();
 
-  const defaultModel = {
-    attributes: { position: nextPosition, kind: "section" }
-  };
+  const defaultModel = useMemo(
+    () => ({
+      attributes: { position: nextPosition, kind: "section" }
+    }),
+    [nextPosition]
+  );
 
   const createSection = model => {
     return sectionsAPI.create(textId, model);
@@ -31,7 +34,8 @@ export default function AddEditSectionForm({
   const formatData = (data, model) => {
     const { body, name } = data.attributes ?? {};
     const { position, kind } = model.attributes ?? {};
-    if (!body || typeof body === "string")
+    if (!body) return { attributes: { position, kind, name } };
+    if (typeof body === "string")
       return {
         attributes: {
           position,
