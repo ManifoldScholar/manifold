@@ -131,6 +131,7 @@ class Text < ApplicationRecord
 
   # Callbacks
   after_commit :trigger_text_added_event, on: [:create, :update]
+  after_commit :inject_global_stylesheet, on: :create
 
   # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
@@ -453,6 +454,39 @@ class Text < ApplicationRecord
     end
 
     errors.add(:toc, "entry must be linked to a text section")
+  end
+
+  def global_styles
+    Settings.instance.ingestion[:global_styles]
+  end
+
+  def global_stylesheet
+    stylesheets.find_by(
+      source_identifier: "global-styles",
+      name: "Global Styles"
+    )
+  end
+
+  def global_stylesheet_attributes
+    {}.tap do |attrs|
+      attrs[:name] = "Global Styles"
+      attrs[:source_identifier] = "global-styles"
+      attrs[:position] = stylesheets.count + 1
+      attrs[:ingested] = false
+      attrs[:creator] = User.find(creator_id)
+      attrs[:raw_styles] = global_styles
+      attrs[:hashed_content] = Digest::MD5.hexdigest(global_styles)
+      attrs[:source_identifier] = "global-styles"
+      attrs[:applies_to_all_text_sections] = true
+      attrs[:skip_formatting] = true
+    end
+  end
+
+  def inject_global_stylesheet
+    return if global_stylesheet.present?
+    return unless global_styles.present?
+
+    stylesheets.create global_stylesheet_attributes
   end
 
 end
