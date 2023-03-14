@@ -1,28 +1,27 @@
 import { jsx } from "slate-hyperscript";
 import { getChildren } from "domutils";
-import { inlineNodes } from "../../rteElements";
+import { inlineNodes, markElements } from "../../rteElements";
 
 const CONTEXT_VALUES = {
   block: "block",
   inline: "inline",
-  preserve: "preserve"
+  default: null
 };
 
 export const addSlateOnlySpan = node => {
   return jsx("element", { type: "span", slateOnly: true }, [node]);
 };
 
-// Implement this later...
-// const isInlineMath = node => {
-//   return node.type === "math" && node.htmlAttrs?.display === "inline";
-// };
+const isInlineMath = node => {
+  return node.type === "math" && node.htmlAttrs?.display === "inline";
+};
+
+const isInline = node => isInlineMath(node) || inlineNodes.includes(node.type);
 
 const hasInvalidChildren = (children, context) => {
   const hasTextChild = children.find(c => c.text);
-  const hasBlockChild = children.find(
-    c => c.type && !inlineNodes.includes(c.type)
-  );
-  const hasInlineChild = children.find(c => inlineNodes.includes(c.type));
+  const hasBlockChild = children.find(c => c.type && !isInline(c));
+  const hasInlineChild = children.find(c => isInline(c));
 
   if (context === CONTEXT_VALUES.block) {
     if (!hasBlockChild) return false;
@@ -40,14 +39,14 @@ const hasInvalidChildren = (children, context) => {
 const spaceInlineChildren = children => {
   const adjustedChildren = children
     .map((c, i) => {
-      if (!inlineNodes.includes(c.type)) return c;
-      if (i === 0 || inlineNodes.includes(children[i - 1]?.type))
+      if (!isInline(c)) return c;
+      if (i === 0 || isInline(children[i - 1]))
         return [jsx("text", { text: "" }, []), c];
       return c;
     })
     .flat();
-  const hasInlineLastChild = inlineNodes.includes(
-    adjustedChildren[adjustedChildren.length - 1]?.type
+  const hasInlineLastChild = isInline(
+    adjustedChildren[adjustedChildren.length - 1]
   );
   return hasInlineLastChild
     ? [...adjustedChildren, jsx("text", { text: "" }, [])]
@@ -56,7 +55,7 @@ const spaceInlineChildren = children => {
 
 const wrapBlockChildren = children => {
   return children.map(c => {
-    if (inlineNodes.includes(c.type) || c.text)
+    if (isInline(c) || c.text)
       return jsx("element", { type: "div", slateOnly: true }, [c]);
     return c;
   });
@@ -126,56 +125,16 @@ export const assignTextMarkAttributes = (el, attrs) => {
   );
 };
 
-const replaceNewlines = str => {
-  return str.replace(/(?:\r\n|\r|\n)/g, " ");
-};
-
-const reduceToSingleSpaces = str => {
-  return str.replace(/ +(?= )/g, "");
-};
-
-export const minifyText = str => {
-  return reduceToSingleSpaces(replaceNewlines(str));
-};
-
 export const isOnlyWhitespace = str => {
   return !/[^\t\n\r ]/.test(str);
 };
 
-const preserveWhitespace = tag => {
-  return ["code", "pre", "xmp"].includes(tag);
-};
-
 export const getSlateNodeContext = tag => {
-  if (!tag || tag.trim() === "") {
-    return "";
+  if (!tag) {
+    return CONTEXT_VALUES.default;
   }
-  if (preserveWhitespace(tag)) {
-    return CONTEXT_VALUES.preserve;
-  }
-  if (inlineNodes.includes(tag)) {
+  if (inlineNodes.includes(tag) || markElements.includes(tag)) {
     return CONTEXT_VALUES.inline;
   }
   return CONTEXT_VALUES.block;
-};
-
-export const processTextValue = ({
-  text,
-  context = "",
-  isInlineStart = false,
-  isInlineEnd = false,
-  isNextSiblingBlock = false
-}) => {
-  if (context === CONTEXT_VALUES.preserve) {
-    return text;
-  }
-  if (context === CONTEXT_VALUES.block) {
-    if (isInlineStart) {
-      return minifyText(text).trimStart();
-    }
-    if (isInlineEnd || isNextSiblingBlock) {
-      return minifyText(text).trimEnd();
-    }
-  }
-  return minifyText(text);
 };

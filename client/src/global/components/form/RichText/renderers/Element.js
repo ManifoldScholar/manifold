@@ -1,5 +1,4 @@
 import React from "react";
-import Utility from "global/components/utility";
 import Image from "./Image";
 import { rteElements, renderedElements, markElements } from "../rteElements";
 
@@ -54,15 +53,19 @@ export default function SlateElement({ attributes, children, element }) {
       style={{
         background: "gray",
         color: "black",
-        paddingInline: "2px",
-        marginInline: "2px",
-        pointerEvents: "none"
+        paddingInline: "5px",
+        paddingBlock: "3px",
+        margin: "5px",
+        pointerEvents: "none",
+        fontFamily: "monospace",
+        fontSize: "12px",
+        display: "inline-block"
       }}
       contentEditable={false}
       {...attributes}
     >
       {[]}
-      <Utility.IconComposer icon="code16" />
+      {`<${element.type}/>`}
     </span>
   );
 }
