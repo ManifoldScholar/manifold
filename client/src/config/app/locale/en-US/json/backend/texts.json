@@ -120,6 +120,8 @@
         "source_styles_instructions": "These are the raw source styles, which can be edited.",
         "validated_styles_label": "Validated Styles",
         "validated_styles_instructions": "The following input is read-only. It contains the validated styles that are included in the reader for this text.",
+        "all_sections_label": "Applies to All Sections",
+        "all_sections_instructions": "When set, styles in this stylesheet will be applied to all sections in the text, both existing and those that are added later. Toggle this off to select individual sections to which to apply styles.",
         "sections_label": "Apply to these text sections",
         "sections_placeholder": "Add a text section",
         "save": "Save Stylesheet"
