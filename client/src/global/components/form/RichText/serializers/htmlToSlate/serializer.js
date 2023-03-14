@@ -1,8 +1,8 @@
 import { jsx } from "slate-hyperscript";
 import { Parser, ElementType } from "htmlparser2";
-import { DomHandler, isTag } from "domhandler";
+import { DomHandler } from "domhandler";
 import { getName, textContent } from "domutils";
-import { inlineNodes, blackList } from "../../rteElements";
+import { blackList } from "../../rteElements";
 
 import {
   normalizeChildren,
@@ -11,8 +11,7 @@ import {
   markTags,
   assignTextMarkAttributes,
   getSlateNodeContext,
-  isOnlyWhitespace,
-  processTextValue
+  isOnlyWhitespace
 } from "./utils";
 
 const deserializeVoid = nodeName => {
@@ -25,16 +24,8 @@ const deserializeTag = (el, nodeName, children) => {
   const attrs = { type: nodeName, htmlAttrs: { ...el.attribs } };
   return jsx("element", attrs, children);
 };
-const deserializeText = (el, attrs, context, isFirstChild, isLastChild) => {
-  const text = processTextValue({
-    text: textContent(el),
-    context,
-    isInlineStart: isFirstChild,
-    isInlineEnd: isLastChild,
-    isNextSiblingBlock:
-      (el.next && isTag(el.next) && !inlineNodes.includes(el.next.tagName)) ||
-      false
-  });
+const deserializeText = (el, attrs) => {
+  const text = textContent(el);
   return !isOnlyWhitespace(text) ? jsx("text", { ...attrs, text }, []) : null;
 };
 
@@ -87,7 +78,7 @@ const deserializeElement = ({
   const isLastChild = index === childrenLength - 1;
 
   if (el.type === ElementType.Text) {
-    return deserializeText(el, {}, context, isFirstChild, isLastChild);
+    return deserializeText(el);
   }
 
   if (Object.keys(markTags).includes(nodeName)) {
@@ -138,7 +129,7 @@ export const htmlToSlate = html => {
   let slateContent;
   const handler = new DomHandler((error, dom) => {
     if (error) {
-      // Handle error
+      // TODO:  Handle error
     } else {
       slateContent = deserializeDom({ dom });
     }

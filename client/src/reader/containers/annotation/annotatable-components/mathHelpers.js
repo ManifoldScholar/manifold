@@ -1,6 +1,6 @@
 import has from "lodash/has";
 
-const mathMLElements = [
+export const mathMLElements = [
   "math",
   "maction",
   "annotation",

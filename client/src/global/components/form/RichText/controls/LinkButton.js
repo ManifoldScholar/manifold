@@ -19,7 +19,7 @@ const unwrapLink = editor => {
   });
 };
 
-const wrapLink = (editor, url) => {
+export const wrapLink = (editor, url) => {
   if (isLinkActive(editor)) {
     unwrapLink(editor);
   }
