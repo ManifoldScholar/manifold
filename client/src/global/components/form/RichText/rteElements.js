@@ -63,7 +63,6 @@ export const inlineNodes = [
   "var",
   "a",
   "bdo",
-  "br",
   "img",
   "map",
   "object",

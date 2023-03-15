@@ -117,6 +117,7 @@ export default function Editor({
         Transforms.splitNodes(editor, { at: editor.selection });
       } else {
         const { children, htmlAttrs, ...next } = prev[0];
+        if (next.type === "iframe") next.type = "p";
         const path = Path.next(prev[1]);
         Transforms.insertNodes(
           editor,
