@@ -27,7 +27,7 @@ const isBlockActive = (editor, format, blockType = "type") => {
 };
 
 /* eslint-disable no-nested-ternary */
-const toggleBlock = (editor, format) => {
+export const toggleBlock = (editor, format) => {
   const isActive = isBlockActive(
     editor,
     format,
@@ -65,7 +65,7 @@ const toggleBlock = (editor, format) => {
   }
 };
 
-const BlockButton = ({ format, icon, size }) => {
+const BlockButton = ({ format, icon, size, selection }) => {
   const editor = useSlate();
 
   return (
@@ -75,9 +75,11 @@ const BlockButton = ({ format, icon, size }) => {
         format,
         TEXT_ALIGN_TYPES.includes(format) ? "align" : "type"
       )}
-      onMouseDown={event => {
+      onClick={event => {
         event.preventDefault();
+        Transforms.select(editor, selection);
         toggleBlock(editor, format);
+        ReactEditor.focus(editor);
       }}
     >
       {icon && <Utility.IconComposer icon={icon} size={size} />}

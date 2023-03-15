@@ -1,6 +1,6 @@
 import React from "react";
-import { useSlate } from "slate-react";
-import { Editor } from "slate";
+import { useSlate, ReactEditor } from "slate-react";
+import { Editor, Transforms } from "slate";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
@@ -19,15 +19,18 @@ export const toggleMark = (editor, format) => {
   }
 };
 
-const MarkButton = ({ format, label, icon }) => {
+const MarkButton = ({ format, label, icon, selection }) => {
   const editor = useSlate();
 
   return (
     <Styled.Button
+      aria-label={format}
       data-active={isMarkActive(editor, format)}
-      onMouseDown={event => {
+      onClick={event => {
         event.preventDefault();
+        Transforms.select(editor, selection);
         toggleMark(editor, format);
+        ReactEditor.focus(editor);
       }}
     >
       {icon && <Utility.IconComposer icon={icon} />}

@@ -5,23 +5,18 @@ import React, {
   useEffect,
   useRef
 } from "react";
-import { createEditor, Transforms, Path, Editor as SlateEditor } from "slate";
-import { Slate, withReact } from "slate-react";
-import { withHistory } from "slate-history";
+import { createEditor, Transforms } from "slate";
+import { Slate, withReact, ReactEditor } from "slate-react";
+import { withHistory, HistoryEditor } from "slate-history";
 import { Leaf, Element } from "./renderers";
-import {
-  MarkButton,
-  BlockButton,
-  ToggleHTML,
-  LinkButton,
-  ImageButton,
-  IframeButton,
-  captureHotKeys
-} from "./controls";
+import Toolbar from "./Toolbar";
+import { captureHotKeys } from "./controls";
 import { serializeToHtml, serializeToSlate } from "./serializers";
 import { HTMLEditor } from "./loaders";
 import { withVoids, withInlines, withImages } from "./slate-plugins";
 import { clearSlate, formatHtml } from "./slateHelpers";
+import { ErrorBoundary } from "react-error-boundary";
+import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 export default function Editor({
@@ -46,12 +41,24 @@ export default function Editor({
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
   const prevSlate = useRef(initialSlateValue);
 
+  // The value prop on the Slate component is unhelpfully named. It is really initialSlateValue and is only read once, so it's possible for Slate to get out of sync when switching between text sections. This resets the editor each time the form model changes.
   useEffect(() => {
     if (prevSlate.current !== initialSlateValue) {
       clearSlate(editor);
       Transforms.insertNodes(editor, initialSlateValue);
     }
   }, [initialSlateValue, editor]);
+
+  const [lastActiveSelection, setLastActiveSelection] = useState({});
+
+  const onEditorBlur = () => {
+    if (editor.selection != null) setLastActiveSelection(editor.selection);
+  };
+
+  const onEditorFocus = () => {
+    if (!editor.selection && !isEmpty(lastActiveSelection))
+      Transforms.select(editor, lastActiveSelection);
+  };
 
   const theme = stylesheets?.map(s => s.attributes.styles).join("\n");
 
@@ -105,48 +112,47 @@ export default function Editor({
     onValidate: onValidateHtml
   };
 
+  const handleError = ({ resetErrorBoundary }) => {
+    HistoryEditor.undo(editor);
+    resetErrorBoundary();
+    return null;
+  };
+
   return (
     <Styled.EditorSecondary
       className={hasErrors && warnErrors ? "error" : undefined}
     >
-      <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
-        <Styled.Toolbar>
-          <MarkButton icon="bold16" format="bold" />
-          <MarkButton icon="italic16" format="italic" />
-          <MarkButton icon="underline16" format="underline" />
-          <MarkButton icon="strikethrough16" format="strikethrough" />
-          <LinkButton icon="resourceLink64" size={20} />
-          <BlockButton icon="headingOne16" format="h1" />
-          <BlockButton icon="headingTwo16" format="h2" />
-          <BlockButton icon="headingThree16" format="h3" />
-          <BlockButton icon="orderedList16" format="ol" />
-          <BlockButton icon="unorderedList16" format="ul" />
-          <BlockButton icon="blockQuote16" format="blockquote" />
-          <ImageButton icon="resourceImage64" size={20} />
-          <IframeButton icon="resourceVideo64" size={20} />
-          <ToggleHTML icon="code16" active={htmlMode} onClick={onClickToggle} />
-        </Styled.Toolbar>
-        <Styled.EditableWrapper className="manifold-text-section">
-          {!htmlMode && (
-            <Styled.Editable
-              as="div"
-              renderElement={renderElement}
-              renderLeaf={renderLeaf}
-              placeholder="Enter text here..."
-              spellCheck={false}
-              onKeyDown={e => captureHotKeys(e, editor)}
+      <ErrorBoundary fallbackRender={handleError}>
+        <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
+          <Toolbar
+            selection={lastActiveSelection}
+            htmlMode={htmlMode}
+            onClickToggle={onClickToggle}
+          />
+          <Styled.EditableWrapper className="manifold-text-section">
+            {!htmlMode && (
+              <Styled.Editable
+                as="div"
+                renderElement={renderElement}
+                renderLeaf={renderLeaf}
+                placeholder="Enter text here..."
+                spellCheck={false}
+                onKeyDown={e => captureHotKeys(e, editor)}
+                onBlur={onEditorBlur}
+                onFocus={onEditorFocus}
+              />
+            )}
+            {htmlMode && <HTMLEditor {...codeAreaProps} />}
+          </Styled.EditableWrapper>
+          {theme && (
+            <style
+              dangerouslySetInnerHTML={{
+                __html: theme
+              }}
             />
           )}
-          {htmlMode && <HTMLEditor {...codeAreaProps} />}
-        </Styled.EditableWrapper>
-        {theme && (
-          <style
-            dangerouslySetInnerHTML={{
-              __html: theme
-            }}
-          />
-        )}
-      </Slate>
+        </Slate>
+      </ErrorBoundary>
     </Styled.EditorSecondary>
   );
 }

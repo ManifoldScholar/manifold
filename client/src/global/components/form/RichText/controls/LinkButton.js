@@ -1,7 +1,8 @@
 import React from "react";
 import { Editor, Element as SlateElement, Transforms, Range } from "slate";
-import { useSlate } from "slate-react";
+import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
+import { isValidUrl } from "../slateHelpers";
 import * as Styled from "./styles";
 
 export const isLinkActive = editor => {
@@ -17,13 +18,10 @@ const unwrapLink = editor => {
     match: n =>
       !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "a"
   });
+  ReactEditor.focus(editor);
 };
 
 export const wrapLink = (editor, url) => {
-  if (isLinkActive(editor)) {
-    unwrapLink(editor);
-  }
-
   const { selection } = editor;
   const isCollapsed = selection && Range.isCollapsed(selection);
   const link = {
@@ -38,26 +36,30 @@ export const wrapLink = (editor, url) => {
     Transforms.wrapNodes(editor, link, { split: true });
     Transforms.collapse(editor, { edge: "end" });
   }
+
+  ReactEditor.focus(editor);
 };
 
 const insertLink = (editor, url) => {
   if (editor.selection) {
     wrapLink(editor, url);
   }
+  ReactEditor.focus(editor);
 };
 
-const LinkButton = ({ icon, size }) => {
+const LinkButton = ({ icon, size, selection }) => {
   const editor = useSlate();
   const active = isLinkActive(editor);
-  const onMouseDown = () => {
+  const onClick = () => {
     event.preventDefault();
+    Transforms.select(editor, selection);
     if (active) return unwrapLink(editor);
     const url = window.prompt("Enter the URL of the link:");
-    if (!url) return;
+    if (!isValidUrl(url)) return ReactEditor.focus(editor);
     return insertLink(editor, url);
   };
   return (
-    <Styled.Button active={active} onMouseDown={onMouseDown}>
+    <Styled.Button aria-label="link" active={active} onClick={onClick}>
       {icon && <Utility.IconComposer icon={icon} size={size} />}
     </Styled.Button>
   );
