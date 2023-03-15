@@ -26,6 +26,13 @@ export default function SlateElement({ attributes, children, element }) {
       </Image>
     );
   }
+  if (element.type === "iframe") {
+    return (
+      <Image as="iframe" attributes={attributes} element={element}>
+        {children}
+      </Image>
+    );
+  }
   if (element.type === "a") {
     return (
       <a href={element.htmlAttrs.href} {...attributes}>

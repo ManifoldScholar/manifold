@@ -23,7 +23,8 @@ export const RemoveButton = styled.button`
 `;
 
 export const Image = styled.img`
-  height: 300px;
+  width: 300px;
+  border: 1px solid;
 `;
 
 export const ImageWrapper = styled.span`

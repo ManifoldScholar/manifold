@@ -14,7 +14,8 @@ import {
   BlockButton,
   ToggleHTML,
   LinkButton,
-  ImageButton
+  ImageButton,
+  IframeButton
 } from "./controls";
 import { serializeToHtml, serializeToSlate } from "./serializers";
 import { HTMLEditor } from "./loaders";
@@ -148,7 +149,7 @@ export default function Editor({
           <BlockButton icon="unorderedList16" format="ul" />
           <BlockButton icon="blockQuote16" format="blockquote" />
           <ImageButton icon="resourceImage64" size={20} />
-          <BlockButton icon="resourceVideo64" size={20} />
+          <IframeButton icon="resourceVideo64" size={20} />
           <ToggleHTML icon="code16" active={htmlMode} onClick={onClickToggle} />
         </Styled.Toolbar>
         <Styled.EditableWrapper className="manifold-text-section">
