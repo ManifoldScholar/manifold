@@ -9,7 +9,7 @@ const isMarkActive = (editor, format) => {
   return marks ? marks[format] === true : false;
 };
 
-const toggleMark = (editor, format) => {
+export const toggleMark = (editor, format) => {
   const isActive = isMarkActive(editor, format);
 
   if (isActive) {

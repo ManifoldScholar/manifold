@@ -15,13 +15,13 @@ import {
   ToggleHTML,
   LinkButton,
   ImageButton,
-  IframeButton
+  IframeButton,
+  captureHotKeys
 } from "./controls";
 import { serializeToHtml, serializeToSlate } from "./serializers";
 import { HTMLEditor } from "./loaders";
 import { withVoids, withInlines, withImages } from "./slate-plugins";
 import { clearSlate, formatHtml } from "./slateHelpers";
-import { inlineNodes } from "./rteElements";
 import * as Styled from "./styles";
 
 export default function Editor({
@@ -105,33 +105,6 @@ export default function Editor({
     onValidate: onValidateHtml
   };
 
-  const onKeyDown = e => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      // handle case where prev is a span or other inline
-      const prev = SlateEditor.above(editor, editor.selection);
-      const focusOffset = editor.selection.focus.offset;
-      const endOffset = SlateEditor.end(editor, prev[1]).offset;
-
-      if (focusOffset !== endOffset || inlineNodes.includes(prev[0].type)) {
-        Transforms.splitNodes(editor, { at: editor.selection });
-      } else {
-        const { children, htmlAttrs, ...next } = prev[0];
-        if (next.type === "iframe") next.type = "p";
-        const path = Path.next(prev[1]);
-        Transforms.insertNodes(
-          editor,
-          { ...next, children: [] },
-          { at: editor.selection }
-        );
-        Transforms.select(editor, {
-          anchor: { path: [...path, 0], offset: 0 },
-          focus: { path: [...path, 0], offset: 0 }
-        });
-      }
-    }
-  };
-
   return (
     <Styled.EditorSecondary
       className={hasErrors && warnErrors ? "error" : undefined}
@@ -161,7 +134,7 @@ export default function Editor({
               renderLeaf={renderLeaf}
               placeholder="Enter text here..."
               spellCheck={false}
-              onKeyDown={onKeyDown}
+              onKeyDown={e => captureHotKeys(e, editor)}
             />
           )}
           {htmlMode && <HTMLEditor {...codeAreaProps} />}

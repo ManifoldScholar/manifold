@@ -1,6 +1,8 @@
+// This file still has a lot of copied code. Needs to be revised.
+
 import React from "react";
-import { useSlate } from "slate-react";
-import { Editor, Element as SlateElement, Transforms } from "slate";
+import { useSlate, ReactEditor } from "slate-react";
+import { Editor, Element as SlateElement, Transforms, Range } from "slate";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
@@ -51,7 +53,11 @@ const toggleBlock = (editor, format) => {
       type: isActive ? "p" : isList ? "li" : format
     };
   }
-  Transforms.setNodes(editor, newProperties);
+  if (Range.isCollapsed(editor.selection)) {
+    Transforms.setNodes(editor, newProperties);
+  } else {
+    Transforms.setNodes(editor, newProperties, editor.selection.anchor);
+  }
 
   if (!isActive && isList) {
     const block = { type: format, children: [] };
