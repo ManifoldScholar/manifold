@@ -27,7 +27,9 @@ export const Image = styled.img`
   border: 1px solid;
 `;
 
-export const ImageWrapper = styled.span`
+export const ImageWrapper = styled.div`
   display: inline-block;
+  width: max-content;
+  max-width: 100%;
   position: relative;
 `;

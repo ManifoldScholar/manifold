@@ -14,18 +14,16 @@ export default function ImageRenderer({ element, children, attributes, as }) {
   };
 
   return (
-    <span {...attributes}>
+    <Styled.ImageWrapper contentEditable={false} {...attributes}>
       {children}
-      <Styled.ImageWrapper contentEditable={false}>
-        <Styled.Image
-          as={as}
-          src={element.htmlAttrs.src}
-          alt={!as ? element.htmlAttrs.alt : undefined}
-        />
-        <Styled.RemoveButton onClick={onRemove}>
-          <Utility.IconComposer icon="delete24" size={20} />
-        </Styled.RemoveButton>
-      </Styled.ImageWrapper>
-    </span>
+      <Styled.Image
+        as={as}
+        src={element.htmlAttrs.src}
+        alt={!as ? element.htmlAttrs.alt : undefined}
+      />
+      <Styled.RemoveButton onClick={onRemove}>
+        <Utility.IconComposer icon="delete24" size={20} />
+      </Styled.RemoveButton>
+    </Styled.ImageWrapper>
   );
 }
