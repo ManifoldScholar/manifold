@@ -5,6 +5,7 @@ import Utility from "global/components/utility";
 import { isImageUrl } from "../slateHelpers";
 import * as Styled from "./styles";
 
+// Maybe do something fancier here to prevent images from ending up alone in pargraphs?
 export const insertImage = (editor, url) => {
   const text = { text: "" };
   const image = { type: "img", htmlAttrs: { src: url }, children: [text] };
