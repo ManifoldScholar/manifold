@@ -9,8 +9,8 @@ import { formatHtml } from "./slateHelpers";
 
 const defaultValue = [
   {
-    type: "p",
-    children: [{ text: "" }]
+    type: "section",
+    children: [{ type: "p", children: [{ text: "" }] }]
   }
 ];
 
