@@ -7,7 +7,6 @@ import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
 const LIST_TYPES = ["ol", "ul"];
-const TEXT_ALIGN_TYPES = ["left", "center", "right", "justify"];
 
 const isBlockActive = (editor, format, blockType = "type") => {
   const { selection } = editor;
@@ -28,31 +27,21 @@ const isBlockActive = (editor, format, blockType = "type") => {
 
 /* eslint-disable no-nested-ternary */
 export const toggleBlock = (editor, format) => {
-  const isActive = isBlockActive(
-    editor,
-    format,
-    TEXT_ALIGN_TYPES.includes(format) ? "align" : "type"
-  );
+  const isActive = isBlockActive(editor, format);
   const isList = LIST_TYPES.includes(format);
 
   Transforms.unwrapNodes(editor, {
     match: n =>
       !Editor.isEditor(n) &&
       SlateElement.isElement(n) &&
-      LIST_TYPES.includes(n.type) &&
-      !TEXT_ALIGN_TYPES.includes(format),
+      LIST_TYPES.includes(n.type),
     split: true
   });
-  let newProperties;
-  if (TEXT_ALIGN_TYPES.includes(format)) {
-    newProperties = {
-      align: isActive ? undefined : format
-    };
-  } else {
-    newProperties = {
-      type: isActive ? "p" : isList ? "li" : format
-    };
-  }
+
+  const newProperties = {
+    type: isActive ? "p" : isList ? "li" : format
+  };
+
   if (Range.isCollapsed(editor.selection)) {
     Transforms.setNodes(editor, newProperties);
   } else {
@@ -70,11 +59,8 @@ const BlockButton = ({ format, icon, size, selection }) => {
 
   return (
     <Styled.Button
-      data-active={isBlockActive(
-        editor,
-        format,
-        TEXT_ALIGN_TYPES.includes(format) ? "align" : "type"
-      )}
+      aria-label={format}
+      data-active={isBlockActive(editor, format)}
       onClick={event => {
         event.preventDefault();
         Transforms.select(editor, selection);
