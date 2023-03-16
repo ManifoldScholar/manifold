@@ -13,7 +13,7 @@ import Toolbar from "./Toolbar";
 import { captureHotKeys } from "./controls";
 import { serializeToHtml, serializeToSlate } from "./serializers";
 import { HTMLEditor } from "./loaders";
-import { withVoids, withInlines, withImages } from "./slate-plugins";
+import withPlugins from "./slate-plugins";
 import { clearSlate, formatHtml } from "./slateHelpers";
 import { ErrorBoundary } from "react-error-boundary";
 import isEmpty from "lodash/isEmpty";
@@ -30,10 +30,7 @@ export default function Editor({
   setWarnErrors
 }) {
   const editor = useMemo(
-    () =>
-      withHistory(
-        withReact(withInlines(withVoids(withImages(createEditor()))))
-      ),
+    () => withHistory(withReact(withPlugins(createEditor()))),
     []
   );
   const [htmlMode, toggleHtmlMode] = useState(false);
