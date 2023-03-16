@@ -15,7 +15,6 @@ export default function ImageRenderer({ element, children, attributes, as }) {
 
   return (
     <Styled.ImageWrapper contentEditable={false} {...attributes}>
-      {children}
       <Styled.Image
         as={as}
         src={element.htmlAttrs.src}
@@ -24,6 +23,7 @@ export default function ImageRenderer({ element, children, attributes, as }) {
       <Styled.RemoveButton onClick={onRemove}>
         <Utility.IconComposer icon="delete24" size={20} />
       </Styled.RemoveButton>
+      {children}
     </Styled.ImageWrapper>
   );
 }
