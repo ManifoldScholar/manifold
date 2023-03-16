@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Editor, Element as SlateElement, Transforms, Range } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
@@ -47,7 +47,7 @@ const insertLink = (editor, url) => {
   ReactEditor.focus(editor);
 };
 
-const LinkButton = ({ icon, size, selection }) => {
+const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
   const editor = useSlate();
   const active = isLinkActive(editor);
   const onClick = () => {
@@ -59,10 +59,17 @@ const LinkButton = ({ icon, size, selection }) => {
     return insertLink(editor, url);
   };
   return (
-    <Styled.Button aria-label="link" active={active} onClick={onClick}>
+    <Styled.Button
+      ref={ref}
+      {...rest}
+      aria-label="link"
+      active={active}
+      onClick={onClick}
+      tabIndex={-1}
+    >
       {icon && <Utility.IconComposer icon={icon} size={size} />}
     </Styled.Button>
   );
 };
 
-export default LinkButton;
+export default forwardRef(LinkButton);

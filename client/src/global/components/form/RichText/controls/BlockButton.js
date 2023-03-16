@@ -1,6 +1,4 @@
-// This file still has a lot of copied code. Needs to be revised.
-
-import React from "react";
+import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
 import { Editor, Element as SlateElement, Transforms, Range } from "slate";
 import Utility from "global/components/utility";
@@ -54,11 +52,13 @@ export const toggleBlock = (editor, format) => {
   }
 };
 
-const BlockButton = ({ format, icon, size, selection }) => {
+const BlockButton = ({ format, icon, size, selection, ...rest }, ref) => {
   const editor = useSlate();
 
   return (
     <Styled.Button
+      ref={ref}
+      {...rest}
       aria-label={format}
       data-active={isBlockActive(editor, format)}
       onClick={event => {
@@ -67,10 +67,11 @@ const BlockButton = ({ format, icon, size, selection }) => {
         toggleBlock(editor, format);
         ReactEditor.focus(editor);
       }}
+      tabIndex={-1}
     >
       {icon && <Utility.IconComposer icon={icon} size={size} />}
     </Styled.Button>
   );
 };
 
-export default BlockButton;
+export default forwardRef(BlockButton);

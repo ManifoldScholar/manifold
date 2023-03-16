@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Transforms } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
@@ -13,7 +13,7 @@ export const insertImage = (editor, url) => {
   ReactEditor.focus(editor);
 };
 
-const ImageButton = ({ icon, size, selection }) => {
+const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
   const editor = useSlate();
   const onClick = () => {
     event.preventDefault();
@@ -23,10 +23,16 @@ const ImageButton = ({ icon, size, selection }) => {
     return insertImage(editor, url);
   };
   return (
-    <Styled.Button aria-label="image" onClick={onClick}>
+    <Styled.Button
+      ref={ref}
+      {...rest}
+      aria-label="image"
+      onClick={onClick}
+      tabIndex={-1}
+    >
       {icon && <Utility.IconComposer icon={icon} size={size} />}
     </Styled.Button>
   );
 };
 
-export default ImageButton;
+export default forwardRef(ImageButton);

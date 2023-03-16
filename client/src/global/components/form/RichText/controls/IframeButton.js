@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { Transforms } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
@@ -12,7 +12,7 @@ export const insertIframe = (editor, url) => {
   ReactEditor.focus(editor);
 };
 
-const IframeButton = ({ icon, size, selection }) => {
+const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
   const editor = useSlate();
   const onClick = () => {
     event.preventDefault();
@@ -22,10 +22,16 @@ const IframeButton = ({ icon, size, selection }) => {
     return insertIframe(editor, url);
   };
   return (
-    <Styled.Button aria-label="iframe" onClick={onClick}>
+    <Styled.Button
+      ref={ref}
+      {...rest}
+      aria-label="iframe"
+      onClick={onClick}
+      tabIndex={-1}
+    >
       {icon && <Utility.IconComposer icon={icon} size={size} />}
     </Styled.Button>
   );
 };
 
-export default IframeButton;
+export default forwardRef(IframeButton);
