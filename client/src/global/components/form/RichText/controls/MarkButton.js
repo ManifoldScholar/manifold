@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
 import { Editor, Transforms } from "slate";
 import Utility from "global/components/utility";
@@ -19,11 +19,16 @@ export const toggleMark = (editor, format) => {
   }
 };
 
-const MarkButton = ({ format, label, icon, selection }) => {
+const MarkButton = (
+  { format, label, icon, selection, isFirst, ...rest },
+  ref
+) => {
   const editor = useSlate();
 
   return (
     <Styled.Button
+      ref={ref}
+      {...rest}
       aria-label={format}
       data-active={isMarkActive(editor, format)}
       onClick={event => {
@@ -32,6 +37,7 @@ const MarkButton = ({ format, label, icon, selection }) => {
         toggleMark(editor, format);
         ReactEditor.focus(editor);
       }}
+      tabIndex={isFirst ? 0 : -1}
     >
       {icon && <Utility.IconComposer icon={icon} />}
       {label && label}
@@ -39,4 +45,4 @@ const MarkButton = ({ format, label, icon, selection }) => {
   );
 };
 
-export default MarkButton;
+export default forwardRef(MarkButton);

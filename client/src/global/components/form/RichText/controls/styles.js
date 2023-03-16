@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { buttonUnstyled, defaultTransitionProps } from "theme/styles/mixins";
+import { transientOptions } from "helpers/emotionHelpers";
 
-export const Button = styled.button`
+export const Button = styled("button", transientOptions)`
   ${buttonUnstyled}
   display: inline-flex;
   align-items: center;
