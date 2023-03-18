@@ -1,7 +1,8 @@
 import { wrapLink } from "../controls/LinkButton";
 import { inlineNodes } from "../rteElements";
 import { insertImage } from "../controls/ImageButton";
-import { isValidUrl, isImageUrl } from "../slateHelpers";
+import { insertIframe } from "../controls/IframeButton";
+import { isValidUrl, isImageUrl, isVideoUrl } from "../slateHelpers";
 import { mathMLElements } from "reader/containers/annotation/annotatable-components/mathHelpers";
 
 /* eslint-disable no-param-reassign */
@@ -19,14 +20,23 @@ const withInlines = editor => {
   };
 
   editor.insertText = text => {
-    if (isImageUrl(text)) {
+    const isImage = isImageUrl(text);
+    const isVideo = isVideoUrl(text);
+    const isLink = isValidUrl(text);
+
+    if (isImage) {
       return insertImage(editor, text);
     }
-    if (isValidUrl(text)) {
+    if (isVideo) {
+      return insertIframe(editor, text);
+    }
+    if (isLink) {
       return wrapLink(editor, text);
     }
     insertText(text);
   };
+
+  // TODO: update delete to remove blank inlines
 
   return editor;
 };

@@ -42,3 +42,12 @@ export const isImageUrl = url => {
   const ext = new URL(url).pathname.split(".").pop();
   return ["gif", "jpg", "jpeg", "png"].includes(ext);
 };
+
+/* eslint-disable no-useless-escape */
+const vimeoRegex = /^(http|https)?:\/\/(www\.|player\.)?vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|video\/|)(\d+)(?:|\/\?)$/gim;
+
+const ytRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/gm;
+
+export const isVideoUrl = url => {
+  return vimeoRegex.test(url) || ytRegex.test(url);
+};
