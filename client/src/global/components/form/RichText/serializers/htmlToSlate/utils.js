@@ -5,6 +5,7 @@ import { inlineNodes, markElements } from "../../rteElements";
 const CONTEXT_VALUES = {
   block: "block",
   inline: "inline",
+  listItem: "list",
   default: null
 };
 
@@ -23,7 +24,7 @@ const hasInvalidChildren = (children, context) => {
   const hasBlockChild = children.find(c => c.type && !isInline(c));
   const hasInlineChild = children.find(c => isInline(c));
 
-  if (context === CONTEXT_VALUES.block) {
+  if (context === CONTEXT_VALUES.block || context === CONTEXT_VALUES.listItem) {
     if (!hasBlockChild) return false;
     if (hasTextChild || hasInlineChild) return true;
     return false;
@@ -53,7 +54,17 @@ const spaceInlineChildren = children => {
     : adjustedChildren;
 };
 
-const wrapBlockChildren = children => {
+const wrapBlockChildren = (children, isList) => {
+  if (isList) {
+    const listChild = children.find(c => c.type === "ul" || c.type === "ol");
+    const restChildren = children.filter(
+      c => !(c.type === "ul" || c.type === "ol")
+    );
+    return [
+      jsx("element", { type: "list-sibling", slateOnly: true }, restChildren),
+      listChild
+    ];
+  }
   return children.map(c => {
     if (isInline(c) || c.text)
       return jsx("element", { type: "div", slateOnly: true }, [c]);
@@ -63,16 +74,22 @@ const wrapBlockChildren = children => {
 
 export const normalizeChildren = (children, context) => {
   if (!children || children.length === 0) return children;
+
+  const isBlock = context === CONTEXT_VALUES.block;
+  const isList = context === CONTEXT_VALUES.listItem;
+
   if (!hasInvalidChildren(children, context)) {
-    if (context === CONTEXT_VALUES.block) {
+    if (isBlock || isList) {
       return [spaceInlineChildren(children), null];
     }
     return [children, null];
   }
 
-  const normalizedChildren = spaceInlineChildren(wrapBlockChildren(children));
+  const normalizedChildren = spaceInlineChildren(
+    wrapBlockChildren(children, isList)
+  );
 
-  if (context === CONTEXT_VALUES.block) return [normalizedChildren, null];
+  if (isBlock || isList) return [normalizedChildren, null];
   return [normalizedChildren, "div"];
 };
 
@@ -130,11 +147,9 @@ export const isOnlyWhitespace = str => {
 };
 
 export const getSlateNodeContext = tag => {
-  if (!tag) {
-    return CONTEXT_VALUES.default;
-  }
-  if (inlineNodes.includes(tag) || markElements.includes(tag)) {
+  if (!tag) return CONTEXT_VALUES.default;
+  if (tag === "li") return CONTEXT_VALUES.listItem;
+  if (inlineNodes.includes(tag) || markElements.includes(tag))
     return CONTEXT_VALUES.inline;
-  }
   return CONTEXT_VALUES.block;
 };
