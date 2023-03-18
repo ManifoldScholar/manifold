@@ -40,7 +40,7 @@ export default function SlateElement({ attributes, children, element }) {
     renderedElements.includes(element.type) ||
     markElements.includes(element.type)
   ) {
-    const Tag = element.type;
+    const Tag = element.type === "list-sibling" ? "span" : element.type;
     const className = element.htmlAttrs?.class || undefined;
     const epubType = element.htmlAttrs?.["data-epub-type"] || undefined;
     return (

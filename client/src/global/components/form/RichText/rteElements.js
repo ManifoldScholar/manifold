@@ -11,7 +11,8 @@ export const rteElements = [
   "ul",
   "blockquote",
   "li",
-  "a"
+  "a",
+  "list-sibling"
 ];
 
 // These elements are removable/insertable via the RTE but their contents cannot be edited.
