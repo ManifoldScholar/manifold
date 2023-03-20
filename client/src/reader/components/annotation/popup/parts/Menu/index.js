@@ -9,14 +9,13 @@ function Menu({
   lastActiveMenu,
   onKeyDown,
   direction,
-  isKeyboardSelection = false,
   children,
   ...menuProps
 }) {
   // Focus on first interactive el when menu becomes visible.
   // Or on last interactive el if moving from RG menu to main menu.
   useEffect(() => {
-    if (!menuProps.visible || !isKeyboardSelection) return;
+    if (!menuProps.visible) return;
     const fromRGtoMain =
       activeMenu === "main" && lastActiveMenu?.current === "readingGroup";
     fromRGtoMain ? menu.last() : menu.first();

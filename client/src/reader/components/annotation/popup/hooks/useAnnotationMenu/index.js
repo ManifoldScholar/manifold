@@ -15,20 +15,7 @@ export default function useAnnotationMenu({ menuArray, defaultMenu, visible }) {
    */
   /* eslint-disable react-hooks/rules-of-hooks */
   const menus = Object.fromEntries(
-    menuArray.map(menu => [
-      menu,
-      {
-        ...useMenuState(MENU_OPTIONS),
-        // Prevent reakit from moving focus based on mouse events,
-        // which causes selection highlighting to disappear in FF and Safari
-        // see https://github.com/ManifoldScholar/manifold/pull/3086#issuecomment-1030141362
-        onMouseEnter: event => event.preventDefault(),
-        onMouseMove: event => event.preventDefault(),
-        onMouseLeave: event => event.preventDefault(),
-        onMouseDown: event => event.preventDefault(),
-        onTouchEnd: event => event.preventDefault()
-      }
-    ])
+    menuArray.map(menu => [menu, useMenuState(MENU_OPTIONS)])
   );
   /* eslint-enable react-hooks/rules-of-hooks */
 

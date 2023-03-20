@@ -20,8 +20,7 @@ function ReadingGroupMenu({
   readingGroups,
   currentReadingGroup,
   onSelect,
-  currentUser,
-  isKeyboardSelection
+  currentUser
 }) {
   const context = useReaderContext();
   const canEngagePublicly = context.attributes.abilities.engagePublicly;
@@ -40,7 +39,6 @@ function ReadingGroupMenu({
       aria-label={t("glossary.reading_group_one")}
       direction={direction}
       onKeyDown={onKeyDown}
-      isKeyboardSelection={isKeyboardSelection}
     >
       <div className="annotation-popup__header">
         <IconComposer icon="readingGroup24" size="default" />
@@ -117,8 +115,7 @@ ReadingGroupMenu.propTypes = {
   readingGroups: PropTypes.array,
   currentReadingGroup: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
-  currentUser: PropTypes.object,
-  isKeyboardSelection: PropTypes.bool
+  currentUser: PropTypes.object
 };
 
 export default withCurrentUser(ReadingGroupMenu);

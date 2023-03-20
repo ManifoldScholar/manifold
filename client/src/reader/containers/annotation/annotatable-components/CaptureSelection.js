@@ -130,11 +130,7 @@ class AnnotatableCaptureSelection extends Component {
     return event.type !== "selectionchange";
   }
 
-  updateSelectionState(
-    event = null,
-    selectionComplete = false,
-    isKeyboardSelection = false
-  ) {
+  updateSelectionState(event = null, selectionComplete = false) {
     try {
       const { selectionState } = this.props;
       const selection = this.mapNativeSelection(this.nativeSelection);
@@ -147,8 +143,7 @@ class AnnotatableCaptureSelection extends Component {
         selectionAnnotation: this.mapSelectionToAnnotation(selection),
         selectionComplete: complete,
         popupTriggerX: selection && x ? x : selectionState.popupTriggerX,
-        popupTriggerY: selection && y ? y : selectionState.popupTriggerY,
-        isKeyboardSelection
+        popupTriggerY: selection && y ? y : selectionState.popupTriggerY
       });
       this.props.updateSelection(newState);
     } catch (error) {

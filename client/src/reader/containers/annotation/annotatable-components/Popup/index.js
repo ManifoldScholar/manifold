@@ -29,13 +29,6 @@ export default class AnnotatablePopup extends PureComponent {
     return !!(selection && selectionComplete);
   }
 
-  get isKeyboardSelection() {
-    return (
-      this.props.selectionState?.isKeyboardSelection ||
-      this.props.activeEvent?.isKeyEvent
-    );
-  }
-
   render() {
     return (
       <Positioner
@@ -56,7 +49,6 @@ export default class AnnotatablePopup extends PureComponent {
                   {...this.props}
                   direction={direction}
                   visible={this.visible}
-                  isKeyboardSelection={this.isKeyboardSelection}
                 />
               </Authorize>
               <Authorize kind="any">
@@ -65,7 +57,6 @@ export default class AnnotatablePopup extends PureComponent {
                     {...this.props}
                     direction={direction}
                     visible={this.visible}
-                    isKeyboardSelection={this.isKeyboardSelection}
                   />
                 )}
                 {!this.showLinkMenu && (
@@ -73,7 +64,6 @@ export default class AnnotatablePopup extends PureComponent {
                     {...this.props}
                     direction={direction}
                     visible={this.visible}
-                    isKeyboardSelection={this.isKeyboardSelection}
                   />
                 )}
               </Authorize>
