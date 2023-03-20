@@ -66,7 +66,7 @@ export default class AnnotatableCaptureClick extends Component {
     }
   };
 
-  handleClick = (event, isKeyEvent = false) => {
+  handleClick = event => {
     if (!event || !event.target) return;
     const el = isMathMLNode(event.target)
       ? selectionHelpers.closest(event.target, "[data-mathml]")
@@ -74,9 +74,9 @@ export default class AnnotatableCaptureClick extends Component {
     if (this.doesElementContainAnnotationAndHighlight(el))
       this.handleDisambiguationClick(event, el);
     if (this.doesElementContainRemovableHighlight(el))
-      return this.handleRemovableHighlightClick(event, el, isKeyEvent);
+      return this.handleRemovableHighlightClick(event, el);
     if (this.doesElementContainAnnotation(el))
-      return this.handleAnnotationClick(event, el, isKeyEvent);
+      return this.handleAnnotationClick(event, el);
   };
 
   handleDisambiguationClick(eventIgnored, el) {
@@ -88,28 +88,26 @@ export default class AnnotatableCaptureClick extends Component {
     });
   }
 
-  handleRemovableHighlightClick(event, el, isKeyEvent) {
+  handleRemovableHighlightClick(event, el) {
     event.preventDefault();
     event.stopPropagation();
     const id = el.dataset.removableHighlightId;
-    this.props.updateActiveAnnotation(id, event, { isKeyEvent });
+    this.props.updateActiveAnnotation(id, event);
   }
 
-  handleAnnotationClick(event, el, isKeyEvent) {
+  handleAnnotationClick(event, el) {
     event.preventDefault();
     const link = selectionHelpers.closest(el, "a");
     const annotationIds = this.elementAnnotationIds(el);
-    if (link)
-      return this.showLinkMenu(event, el, annotationIds, link, isKeyEvent);
+    if (link) return this.showLinkMenu(event, el, annotationIds, link);
     this.props.actions.openViewAnnotationsDrawer(annotationIds);
   }
 
-  showLinkMenu(event, el, annotationIds, link, isKeyEvent) {
+  showLinkMenu(event, el, annotationIds, link) {
     event.stopPropagation();
     const eventInfo = {
       annotationIds,
-      link,
-      isKeyEvent
+      link
     };
     this.props.updateActiveAnnotation(annotationIds[0], event, eventInfo);
   }
