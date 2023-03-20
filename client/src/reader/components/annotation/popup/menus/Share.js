@@ -15,8 +15,7 @@ function ShareMenu({
   selectionState,
   actions,
   onBackClick,
-  onKeyDown,
-  isKeyboardSelection
+  onKeyDown
 }) {
   const {
     facebookAppId,
@@ -43,7 +42,6 @@ function ShareMenu({
       aria-label={t("actions.share")}
       direction={direction}
       onKeyDown={onKeyDown}
-      isKeyboardSelection={isKeyboardSelection}
     >
       {canCite && (
         <MenuItem
@@ -102,8 +100,7 @@ ShareMenu.propTypes = {
   direction: PropTypes.oneOf(["up", "down"]),
   visible: PropTypes.bool,
   text: PropTypes.object,
-  selectionState: PropTypes.object,
-  isKeyboardSelection: PropTypes.bool
+  selectionState: PropTypes.object
 };
 
 export default ShareMenu;

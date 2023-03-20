@@ -15,8 +15,7 @@ function PrimaryMenu({
   actions,
   activeAnnotation,
   direction,
-  visible,
-  isKeyboardSelection
+  visible
 }) {
   const {
     menus,
@@ -37,7 +36,6 @@ function PrimaryMenu({
 
   const submenuProps = {
     direction,
-    isKeyboardSelection,
     onBackClick: () => setActiveMenu("main"),
     onKeyDown: event => handleKeyDown(event)
   };
@@ -57,7 +55,6 @@ function PrimaryMenu({
         activeAnnotation={activeAnnotation}
         readingGroups={readingGroups}
         currentReadingGroup={currentAnnotatingReadingGroup}
-        isKeyboardSelection={isKeyboardSelection}
       />
       <Menus.Share
         menu={menus.share}
@@ -92,8 +89,7 @@ PrimaryMenu.propTypes = {
   readingGroups: PropTypes.array,
   setAnnotatingReadingGroup: PropTypes.func,
   direction: PropTypes.oneOf(["up", "down"]),
-  visible: PropTypes.bool,
-  isKeyboardSelection: PropTypes.bool
+  visible: PropTypes.bool
 };
 
 export default withReadingGroups(PrimaryMenu);
