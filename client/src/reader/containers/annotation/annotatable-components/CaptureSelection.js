@@ -241,12 +241,10 @@ class AnnotatableCaptureSelection extends Component {
     return annotation;
   }
 
-  extractText(nativeSelection) {
+  extractText(range) {
     try {
-      const range = nativeSelection.getRangeAt(0);
-      if (!range) return nativeSelection.toString();
       const fragment = range.cloneContents();
-      const blockRegex = /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr)$/i;
+      const blockRegex = /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr|math)$/i;
 
       let text = "";
       fragment.childNodes.forEach(node => {
@@ -263,7 +261,7 @@ class AnnotatableCaptureSelection extends Component {
       text = text.trim();
       return text;
     } catch (error) {
-      return nativeSelection.toString();
+      return range.toString();
     }
   }
 
