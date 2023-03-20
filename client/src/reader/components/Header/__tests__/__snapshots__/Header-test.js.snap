@@ -174,7 +174,6 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
     <Global.UIPanel
       bodyComponent={[Function]}
       hidePanel={[Function]}
-      history={History {}}
       id="notes"
       visibility={
         Object {
