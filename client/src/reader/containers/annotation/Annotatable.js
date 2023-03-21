@@ -12,6 +12,7 @@ import AnnotationNotationViewer from "./annotatable-components/NotationViewer";
 import selectionHelpers from "./annotatable-components/selectionHelpers";
 import locationHelper from "helpers/location";
 import withReadingGroups from "hoc/withReadingGroups";
+import isEqual from "lodash/isEqual";
 
 const { request } = entityStoreActions;
 
@@ -49,6 +50,31 @@ export class Annotatable extends Component {
     this.state = this.initialState;
   }
 
+  componentDidMount() {
+    this.setState({ renderedAnnotations: this.props.annotations });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.annotations.length !== prevProps.annotations.length)
+      this.setState({ renderedAnnotations: this.props.annotations });
+
+    if (
+      !isEqual(
+        this.state?.selectionState.selection,
+        prevState?.selectionState.selection
+      )
+    ) {
+      if (this.state?.selectionState.selectionComplete) {
+        const test = this.createAnnotationFromSelection(
+          this.state.selectionState.selectionAnnotation
+        );
+        return this.appendSelectionAnnotation(test);
+      }
+
+      return this.removeSelectionAnnotation();
+    }
+  }
+
   get initialState() {
     return {
       selectionState: {
@@ -62,7 +88,8 @@ export class Annotatable extends Component {
       annotation: null, // the ID of the active annotation
       annotationState: null, // null, pending, active
       drawerState: null, // a key indicating visible drawer content
-      drawerProps: {} // props to be passed to the drawer when it opens
+      drawerProps: {}, // props to be passed to the drawer when it opens
+      renderedAnnotations: this.state?.renderedAnnotations ?? []
     };
   }
 
@@ -283,8 +310,31 @@ export class Annotatable extends Component {
     }
   };
 
+  createAnnotationFromSelection = selection => {
+    return {
+      id: "selection",
+      attributes: {
+        userIsCreator: true,
+        annotationStyle: "pending",
+        format: "highlight",
+        ...selection
+      }
+    };
+  };
+
+  appendSelectionAnnotation = annotation => {
+    this.setState({
+      renderedAnnotations: [...this.state.renderedAnnotations, annotation]
+    });
+  };
+
+  removeSelectionAnnotation = () => {
+    this.setState({ renderedAnnotations: this.props.annotations });
+  };
+
   render() {
-    const { annotationState, selectionState } = this.state;
+    const { annotationState, selectionState, renderedAnnotations } = this.state;
+
     // const pendingAnnotation =
     //   annotationState === "locked" ||
     //   (annotationState === "pending" && selectionState.selectionComplete)
@@ -320,7 +370,7 @@ export class Annotatable extends Component {
               className="annotatable"
               ref={this.setAnnotatableRef}
             >
-              {this.props.render(pendingAnnotation)}
+              {this.props.render(pendingAnnotation, renderedAnnotations)}
             </div>
           </CaptureClick>
         </CaptureSelection>
