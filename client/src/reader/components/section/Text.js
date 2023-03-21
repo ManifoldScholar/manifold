@@ -139,7 +139,7 @@ export default class Text extends Component {
               location={this.props.location}
               history={this.props.history}
               section={this.props.section}
-              render={pendingAnnotation => (
+              render={(pendingAnnotation, adjustedAnnotations) => (
                 <div className={containerClass}>
                   <div
                     data-id="body"
@@ -149,7 +149,7 @@ export default class Text extends Component {
                     <Body
                       location={this.props.location}
                       pendingAnnotation={pendingAnnotation}
-                      annotations={this.state.filteredAnnotations}
+                      annotations={adjustedAnnotations}
                       section={this.props.section}
                     />
                   </div>
