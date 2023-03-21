@@ -93,4 +93,12 @@ export default `
       background-color: var(--color-annotation-mixed);
     }
   }
+
+  .annotation-pending {
+    background: var(--color-base-yellow20);
+
+    .scheme-dark & {
+      background: var(--color-base-yellow75);
+    }
+  }
 `;
