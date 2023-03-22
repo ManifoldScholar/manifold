@@ -8,7 +8,6 @@ import marker from "./marker";
 import meta from "./meta";
 import selection from "./selection";
 import tag from "./tag";
-import truncated from "./truncated";
 
 export default `
   ${annotationList}
@@ -21,5 +20,4 @@ export default `
   ${meta}
   ${selection}
   ${tag}
-  ${truncated}
 `;

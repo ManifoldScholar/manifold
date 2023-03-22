@@ -63,12 +63,6 @@ export default `
       &--hovering {
         position: relative;
 
-        .truncated__wrapper--blur {
-          &::after {
-            opacity: 1;
-          }
-        }
-
         .annotation-selection__arrow-icon {
           transform: translateX(20%);
         }
