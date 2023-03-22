@@ -58,19 +58,18 @@ export class Annotatable extends Component {
     if (this.props.annotations.length !== prevProps.annotations.length)
       this.setState({ renderedAnnotations: this.props.annotations });
 
-    if (
-      !isEqual(
-        this.state?.selectionState.selection,
-        prevState?.selectionState.selection
-      )
-    ) {
+    const { selection } = this.state.selectionState ?? {};
+    const { range, ...selectionData } = selection ?? {};
+    const { selection: prevSelection } = prevState.selectionState ?? {};
+    const { range: prevRange, ...prevSelectionData } = prevSelection ?? {};
+
+    if (!isEqual(selectionData, prevSelectionData)) {
       if (this.state?.selectionState.selectionComplete) {
         const test = this.createAnnotationFromSelection(
           this.state.selectionState.selectionAnnotation
         );
         return this.appendSelectionAnnotation(test);
       }
-
       return this.removeSelectionAnnotation();
     }
   }
@@ -298,7 +297,9 @@ export class Annotatable extends Component {
   closeDrawer = () => {
     this.maybeRemoveAnnotationHashFromUrl();
     this.unlockSelection();
+    const range = this.state.selectionState.selection.range;
     this.resetState();
+    window.getSelection().addRange(range);
   };
 
   resetState = () => {
@@ -334,12 +335,6 @@ export class Annotatable extends Component {
 
   render() {
     const { annotationState, selectionState, renderedAnnotations } = this.state;
-
-    // const pendingAnnotation =
-    //   annotationState === "locked" ||
-    //   (annotationState === "pending" && selectionState.selectionComplete)
-    //     ? selectionState.selectionAnnotation
-    //     : null;
     const pendingAnnotation =
       annotationState === "locked" ? selectionState.selectionAnnotation : null;
     return (
@@ -375,21 +370,25 @@ export class Annotatable extends Component {
           </CaptureClick>
         </CaptureSelection>
 
-        <AnnotatablePopup
-          dispatch={this.props.dispatch}
-          selectionState={selectionState}
-          annotatableRef={this.annotatableRef}
-          actions={this.actions}
-          text={this.props.text}
-          section={this.props.section}
-          activeEvent={this.state.activeEvent}
-          activeAnnotation={this.activeAnnotationObject}
-          annotationState={annotationState}
-          setPopupRef={this.setPopupRef}
-        />
+        {selectionState.selectionComplete && (
+          <AnnotatablePopup
+            selectionState={selectionState}
+            annotatableRef={this.annotatableRef}
+            actions={this.actions}
+            text={this.props.text}
+            section={this.props.section}
+            activeEvent={this.state.activeEvent}
+            activeAnnotation={this.activeAnnotationObject}
+            annotationState={annotationState}
+            setPopupRef={this.setPopupRef}
+            clearSelection={this.resetState}
+          />
+        )}
+
         <AnnotatableDrawer
           drawerState={this.state.drawerState}
           actions={this.actions}
+          close={this.closeDrawer}
           {...this.state.drawerProps}
         />
         <AnnotationNotationViewer

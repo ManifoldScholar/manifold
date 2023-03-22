@@ -1,76 +1,59 @@
-import React, { PureComponent } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import Positioner from "./Positioner";
 import PrimaryMenu from "./PrimaryMenu";
 import LinkMenu from "./LinkMenu";
 import LoginMenu from "./LoginMenu";
 import Authorize from "hoc/Authorize";
+import usePositioner from "./usePositioner";
 
-export default class AnnotatablePopup extends PureComponent {
-  static displayName = "Annotatable.Popup";
+export default function AnnotatablePopup(props) {
+  const { selectionState, annotatableRef, activeEvent } = props;
+  const popupRef = useRef();
 
-  static propTypes = {
-    annotationState: PropTypes.string,
-    selectionState: PropTypes.object,
-    annotatableRef: PropTypes.object,
-    activeEvent: PropTypes.object,
-    setPopupRef: PropTypes.func
+  const showLinkMenu = activeEvent?.annotationIds && activeEvent?.link;
+
+  const setPopupRef = el => {
+    popupRef.current = props.popupRef?.current || el;
+    props.setPopupRef(el);
   };
 
-  get showLinkMenu() {
-    const { activeEvent } = this.props;
-    if (!activeEvent) return false;
-    return activeEvent.annotationIds && activeEvent.link;
-  }
+  const { direction, style } = usePositioner({
+    popupRef: popupRef.current,
+    locked: false,
+    selectionState,
+    annotatableRef
+  });
 
-  get visible() {
-    const { selection, selectionComplete } = this.props.selectionState;
-    return !!(selection && selectionComplete);
-  }
-
-  render() {
-    return (
-      <Positioner
-        locked={this.props.annotationState === "locked"}
-        selectionState={this.props.selectionState}
-        annotatableRef={this.props.annotatableRef}
-        setPopupRef={this.props.setPopupRef}
-        className={classNames({
-          "annotation-popup": true,
-          "annotation-popup--visible": this.visible
-        })}
-      >
-        {({ direction }) =>
-          this.visible && (
-            <>
-              <Authorize kind="unauthenticated">
-                <LoginMenu
-                  {...this.props}
-                  direction={direction}
-                  visible={this.visible}
-                />
-              </Authorize>
-              <Authorize kind="any">
-                {this.showLinkMenu && (
-                  <LinkMenu
-                    {...this.props}
-                    direction={direction}
-                    visible={this.visible}
-                  />
-                )}
-                {!this.showLinkMenu && (
-                  <PrimaryMenu
-                    {...this.props}
-                    direction={direction}
-                    visible={this.visible}
-                  />
-                )}
-              </Authorize>
-            </>
-          )
-        }
-      </Positioner>
-    );
-  }
+  return (
+    <div
+      ref={setPopupRef}
+      style={style}
+      className="annotation-popup annotation-popup--visible"
+    >
+      <Authorize kind="unauthenticated">
+        <LoginMenu {...props} direction={direction} visible />
+      </Authorize>
+      <Authorize kind="any">
+        {showLinkMenu && <LinkMenu {...props} direction={direction} visible />}
+        {!showLinkMenu && (
+          <PrimaryMenu
+            {...props}
+            locked={props.annotationState === "locked"}
+            direction={direction}
+            visible
+          />
+        )}
+      </Authorize>
+    </div>
+  );
 }
+
+AnnotatablePopup.displayName = "Annotatable.Popup";
+
+AnnotatablePopup.propTypes = {
+  annotationState: PropTypes.string,
+  selectionState: PropTypes.object,
+  annotatableRef: PropTypes.object,
+  activeEvent: PropTypes.object,
+  setPopupRef: PropTypes.func
+};
