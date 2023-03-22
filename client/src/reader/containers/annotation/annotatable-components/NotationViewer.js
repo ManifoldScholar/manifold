@@ -6,6 +6,7 @@ export default class AnnotatableNotationViewer extends PureComponent {
   static propTypes = {
     sectionId: PropTypes.string.isRequired,
     textId: PropTypes.string.isRequired,
+    textSlug: PropTypes.string.isRequired,
     notations: PropTypes.array,
     annotations: PropTypes.array,
     containerSize: PropTypes.number,
@@ -17,6 +18,7 @@ export default class AnnotatableNotationViewer extends PureComponent {
       <NotationComponents.Viewer.List
         sectionId={this.props.sectionId}
         textId={this.props.textId}
+        textSlug={this.props.textSlug}
         notations={this.props.notations}
         annotations={this.props.annotations}
         containerSize={this.props.containerSize}
