@@ -41,6 +41,7 @@ class NotationViewerList extends PureComponent {
     containerSize: PropTypes.number,
     sectionId: PropTypes.string,
     textId: PropTypes.string,
+    textSlug: PropTypes.string,
     confirm: PropTypes.func.isRequired,
     t: PropTypes.func
   };
@@ -270,7 +271,7 @@ class NotationViewerList extends PureComponent {
   }
 
   renderGroup(group) {
-    const { activeAnnotation, textId, sectionId } = this.props;
+    const { activeAnnotation, textId, sectionId, textSlug } = this.props;
     const wrapperStyle = {
       top: group.location,
       height: group.height
@@ -281,7 +282,7 @@ class NotationViewerList extends PureComponent {
         <Fader scrollY={this.state.scrollY}>
           <Group
             group={group}
-            params={{ textId, sectionId }}
+            params={{ textId, sectionId, textSlug }}
             actions={this.actions}
             activeAnnotation={activeAnnotation}
             singleHeight={this.notationHeight}
@@ -292,7 +293,7 @@ class NotationViewerList extends PureComponent {
   }
 
   renderSingle(entry) {
-    const { activeAnnotation, textId, sectionId } = this.props;
+    const { activeAnnotation, textId, sectionId, textSlug } = this.props;
     const wrapperStyle = { top: entry.location + "px" };
 
     return (
@@ -300,7 +301,7 @@ class NotationViewerList extends PureComponent {
         <Fader scrollY={this.state.scrollY}>
           <Single
             entry={entry}
-            params={{ textId, sectionId }}
+            params={{ textId, sectionId, textSlug }}
             actions={this.actions}
             active={activeAnnotation === entry.annotation.id}
           />
@@ -312,7 +313,7 @@ class NotationViewerList extends PureComponent {
   render() {
     if (!this.state.entries || this.state.entries.length < 1) return null;
 
-    const { textId, sectionId } = this.props;
+    const { textId, sectionId, textSlug } = this.props;
     const viewerClass = `notation-viewer container-width-${this.props.containerSize}`;
     return (
       <nav
@@ -339,7 +340,7 @@ class NotationViewerList extends PureComponent {
           <Preview
             entry={this.state.previewEntry}
             actions={this.actions}
-            params={{ textId, sectionId }}
+            params={{ textId, sectionId, textSlug }}
           />
         </CSSTransition>
       </nav>
