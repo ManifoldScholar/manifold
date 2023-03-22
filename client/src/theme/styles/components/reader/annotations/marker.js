@@ -92,13 +92,14 @@ export default `
     &.mixed {
       background-color: var(--color-annotation-mixed);
     }
-  }
 
-  .annotation-pending {
-    background: var(--color-base-yellow20);
+    &.pending {
+      cursor: auto;
+      background-color: var(--color-base-yellow20);
 
-    .scheme-dark & {
-      background: var(--color-base-yellow75);
+      .scheme-dark & {
+        background-color: var(--color-base-yellow75);
+      }
     }
   }
 `;

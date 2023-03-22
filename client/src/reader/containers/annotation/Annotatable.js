@@ -48,6 +48,8 @@ export class Annotatable extends Component {
     super(props);
 
     this.state = this.initialState;
+
+    this.lastSelectionRange = React.createRef();
   }
 
   componentDidMount() {
@@ -64,13 +66,21 @@ export class Annotatable extends Component {
     const { range: prevRange, ...prevSelectionData } = prevSelection ?? {};
 
     if (!isEqual(selectionData, prevSelectionData)) {
+      /**
+       * In order to restore cursor position when selection is lost,
+       * we need to wrap a pending text selection in an HTML element.
+       * So we create a *fake* annotation and append it to the list of
+       * rendered annotations. On each new selection, this one is replaced by
+       * the latest selection. When selection is lost, that appended element
+       * is restyled (but kept in the DOM so we can set the cursor position there).
+       */
       if (this.state?.selectionState.selectionComplete) {
-        const test = this.createAnnotationFromSelection(
+        const selectionAnnotation = this.createAnnotationFromSelection(
           this.state.selectionState.selectionAnnotation
         );
-        return this.appendSelectionAnnotation(test);
+        return this.appendLastSelectionAnnotation(selectionAnnotation);
       }
-      return this.removeSelectionAnnotation();
+      return this.reviseLastSelectionAnnotation();
     }
   }
 
@@ -126,12 +136,22 @@ export class Annotatable extends Component {
     return this.props.annotations.find(a => a.id === compareId);
   }
 
+  get pendingAnnotationNode() {
+    return [
+      ...document.querySelectorAll("[data-annotation-ids].pending")
+    ].pop();
+  }
+
   setAnnotatableRef = el => {
     this.annotatableRef = el;
   };
 
   setPopupRef = el => {
     this.popupRef = el;
+  };
+
+  setSelectableRef = el => {
+    this.selectableRef = el;
   };
 
   setSelectionState = selectionState => {
@@ -142,7 +162,10 @@ export class Annotatable extends Component {
 
     // If the selection is empty, and it's not locked, we always reset.
     if (emptySelection && annotationState !== "locked")
-      return this.setState(this.initialState);
+      return this.resetState({
+        restoreFocusTo: null,
+        restoreSelectionTo: null
+      });
 
     // If we have an active annotation state, maintain the state.
     if (
@@ -152,7 +175,10 @@ export class Annotatable extends Component {
         this.activeAnnotationObject
       )
     )
-      return this.setState({ selectionState, annotationState: "active" });
+      return this.setState({
+        selectionState,
+        annotationState: "active"
+      });
 
     // If no guards catch it, we update the state.
     return this.setState({
@@ -226,8 +252,11 @@ export class Annotatable extends Component {
     const res = this.props.dispatch(
       request(call, requests.rAnnotationCreate, requestOptions)
     );
-    res.promise.then(() => {
-      this.resetState();
+    res.promise.then(response => {
+      this.resetState({
+        restoreFocusTo: response.data?.id,
+        restoreSelectionTo: response.data?.id
+      });
     });
     return res.promise;
   };
@@ -267,14 +296,6 @@ export class Annotatable extends Component {
     this.openDrawer("viewAnnotations", event, false);
   };
 
-  lockSelection() {
-    this.setState({ annotationState: "locked" });
-  }
-
-  unlockSelection() {
-    this.setState({ annotationState: "pending" });
-  }
-
   showLogin = () => {
     this.props.dispatch(
       uiVisibilityActions.visibilityToggle("signInUpOverlay")
@@ -290,25 +311,16 @@ export class Annotatable extends Component {
 
   openDrawer = (drawerState, event = null, lock = true) => {
     if (event) event.preventDefault();
-    if (lock) this.lockSelection();
+    if (lock) this.setState({ annotationState: "locked" });
     this.setState({ drawerState });
   };
 
   closeDrawer = () => {
     this.maybeRemoveAnnotationHashFromUrl();
-    this.unlockSelection();
-    const range = this.state.selectionState.selection.range;
-    this.resetState();
-    window.getSelection().addRange(range);
-  };
-
-  resetState = () => {
-    this.setState(this.initialState);
-    if (window.getSelection) {
-      window.getSelection().removeAllRanges();
-    } else if (document.selection) {
-      document.selection.empty();
-    }
+    this.resetState({
+      restoreFocusTo: this.selectableRef,
+      restoreSelectionTo: this.pendingAnnotationNode
+    });
   };
 
   createAnnotationFromSelection = selection => {
@@ -323,14 +335,80 @@ export class Annotatable extends Component {
     };
   };
 
-  appendSelectionAnnotation = annotation => {
+  appendLastSelectionAnnotation = annotation => {
+    const newArray = [...this.state.renderedAnnotations];
+    const lastAnnotation = newArray[newArray.length - 1];
+    const isSelection = lastAnnotation?.id === "selection";
+
+    // if last annotation was fake (aka a selection), replace it
+    if (isSelection) {
+      newArray.pop();
+    }
+
     this.setState({
-      renderedAnnotations: [...this.state.renderedAnnotations, annotation]
+      renderedAnnotations: [...newArray, annotation]
     });
   };
 
-  removeSelectionAnnotation = () => {
-    this.setState({ renderedAnnotations: this.props.annotations });
+  // when selected text is released, revise the style of last selection
+  reviseLastSelectionAnnotation = () => {
+    const { renderedAnnotations } = this.state;
+    const lastAnnotation = renderedAnnotations[renderedAnnotations.length - 1];
+    const isSelection = lastAnnotation?.id === "selection";
+
+    // if last annotation wasn't fake, don't revise it
+    if (!isSelection) return;
+
+    const revisedAnnotation = {
+      ...lastAnnotation,
+      id: "previous",
+      attributes: {
+        ...lastAnnotation.attributes,
+        format: "previous",
+        annotationStyle: null
+      }
+    };
+
+    this.appendLastSelectionAnnotation(revisedAnnotation);
+  };
+
+  resetState = ({
+    restoreFocusTo = this.selectableRef,
+    restoreSelectionTo
+  }) => {
+    this.setState(this.initialState);
+
+    if (!restoreFocusTo && !restoreSelectionTo) return;
+
+    try {
+      const getNodeForId = id =>
+        document.querySelector(`[data-annotation-ids*="${id}"]`);
+
+      // optionally restore selection and focus to node if ID is passed
+      if (typeof restoreFocusTo === "string") {
+        const node = getNodeForId(restoreFocusTo);
+        if (node) {
+          restoreFocusTo = node;
+        }
+      }
+      if (typeof restoreSelectionTo === "string") {
+        const node = getNodeForId(restoreSelectionTo);
+        if (node) {
+          restoreSelectionTo = node;
+        }
+      }
+
+      // move focus to node or text section wrapper
+      if (restoreFocusTo && restoreFocusTo instanceof Node) {
+        restoreFocusTo.focus();
+      }
+
+      // move cursor to end of last selection node
+      if (restoreSelectionTo && restoreSelectionTo instanceof Node) {
+        const selection = window.getSelection();
+        selection.setPosition(restoreSelectionTo, 1);
+      }
+    } catch (error) {}
   };
 
   render() {
@@ -353,11 +431,11 @@ export class Annotatable extends Component {
           selectionState={selectionState}
           updateSelection={this.setSelectionState}
           popupRef={this.popupRef}
+          setSelectableRef={this.setSelectableRef}
         >
           <CaptureClick
             activeAnnotation={this.state.annotation}
             updateActiveAnnotation={this.setActiveAnnotation}
-            onClick={this.handleClick}
             actions={this.actions}
           >
             <div
@@ -381,7 +459,12 @@ export class Annotatable extends Component {
             activeAnnotation={this.activeAnnotationObject}
             annotationState={annotationState}
             setPopupRef={this.setPopupRef}
-            clearSelection={this.resetState}
+            clearSelection={() =>
+              this.resetState({
+                restoreFocusTo: this.selectableRef,
+                restoreSelectionTo: this.pendingAnnotationNode
+              })
+            }
           />
         )}
 

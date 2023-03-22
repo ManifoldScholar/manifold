@@ -22,10 +22,10 @@ export default `
 
     *::selection,
     .annotation-locked-selected {
-      background: var(--color-base-yellow20);
+      background-color: var(--color-base-yellow20);
 
       .scheme-dark & {
-        background: var(--color-base-yellow75);
+        background-color: var(--color-base-yellow75);
       }
     }
 

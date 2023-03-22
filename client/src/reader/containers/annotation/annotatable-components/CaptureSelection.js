@@ -24,12 +24,17 @@ class AnnotatableCaptureSelection extends Component {
     updateSelection: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     popupRef: PropTypes.object,
+    setSelectableRef: PropTypes.func,
     t: PropTypes.func
   };
 
   constructor(props) {
     super(props);
     this.lastSelection = React.createRef();
+  }
+
+  componentDidMount() {
+    window.addEventListener("keyup", this.handleKeyUp);
   }
 
   componentDidUpdate(prevProps) {
@@ -42,6 +47,7 @@ class AnnotatableCaptureSelection extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.timeout);
+    window.removeEventListener("keyup", this.handleKeyUp);
   }
 
   getEventXY(event) {
@@ -130,6 +136,7 @@ class AnnotatableCaptureSelection extends Component {
       const { selectionState } = this.props;
       const selection = this.mapNativeSelection(this.nativeSelection);
       if (!selection) return this.props.updateSelection(this.emptySelection());
+      window.getSelection().empty();
       let complete = selectionComplete;
       if (selectionState.selectionComplete) complete = true;
       const { x, y } = this.getEventXY(event);
@@ -283,15 +290,17 @@ class AnnotatableCaptureSelection extends Component {
 
   handleKeyUp = event => {
     const { key, shiftKey } = event;
-    if (key === "Shift" && shiftKey === false)
-      this.updateSelectionState(event, true, true);
+    if (key === "Shift" && shiftKey === false) {
+      const selectionNode = window.getSelection().anchorNode;
+      if (selectionNode && selectionNode.type === Node.TextNode)
+        this.updateSelectionState(event, true, true);
+    }
   };
 
   handleMouseDown = event => {
     if (!this.props.selectionState.selectionComplete) return;
-    const range = this.props.selectionState.selection.range;
+
     this.updateSelectionState(event);
-    window.getSelection().addRange(range);
   };
 
   render() {
@@ -299,14 +308,15 @@ class AnnotatableCaptureSelection extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */
     return (
       <div
-        className="no-focus-outline"
+        ref={this.props.setSelectableRef}
+        role="region"
+        aria-label={this.props.t("reader.section_label")}
+        tabIndex={0}
         onTouchEnd={this.handleTouchEnd}
         onMouseUp={this.handleMouseUp}
         onMouseDown={this.handleMouseDown}
-        onKeyUp={this.handleKeyUp}
-        tabIndex={0}
-        role="region"
-        aria-label={this.props.t("reader.section_label")}
+        // onKeyUp={this.handleKeyUp}
+        className="no-focus-outline"
       >
         {this.props.children}
       </div>

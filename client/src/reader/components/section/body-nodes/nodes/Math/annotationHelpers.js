@@ -37,24 +37,29 @@ export const getAnnotationStyles = (
   t,
   hasInteractiveAncestor
 ) => {
-  const highlighted = annotations.find(a => a.type === "highlight");
-  const underlined = annotations.find(a => a.type === "annotation");
-  const wavy = annotations.find(a => a.annotationStyle === "wavy");
-  const dots = annotations.find(a => a.annotationStyle === "dots");
-  const dashes = annotations.find(a => a.annotationStyle === "dashes");
-  const solid = annotations.find(a => a.annotationStyle === "solid");
-  const isCreator = annotations.find(a => a.isCreator);
-  const authorCreated = annotations.find(a => a.authorCreated);
-  const lockedSelection = annotations.find(a => a.id === "selection");
+  const highlighted = annotations.some(a => a.type === "highlight");
+  const underlined = annotations.some(a => a.type === "annotation");
+  const wavy = annotations.some(a => a.annotationStyle === "wavy");
+  const dots = annotations.some(a => a.annotationStyle === "dots");
+  const dashes = annotations.some(a => a.annotationStyle === "dashes");
+  const solid = annotations.some(a => a.annotationStyle === "solid");
+  const pending = annotations.some(a => a.annotationStyle === "pending");
+  const previous =
+    annotations.length === 1 && annotations.some(a => a.type === "previous"); // don't style as previous if node has multiple annotations
+  const isCreator = annotations.some(a => a.isCreator);
+  const authorCreated = annotations.some(a => a.authorCreated);
+  const lockedSelection = annotations.some(
+    a => a.id === "selection" && a.type !== "previous"
+  );
   const notations = annotations.filter(
     a => a.type === "resource" || a.type === "resource_collection"
   );
-  const start = annotations.find(
+  const start = annotations.some(
     a =>
       uuids.includes(a.startNode) &&
       (a.type === "resource" || a.type === "resource_collection")
   );
-  const end = annotations.find(
+  const end = annotations.some(
     a =>
       uuids.includes(a.endNode) &&
       (a.type === "resource" || a.type === "resource_collection")
@@ -73,7 +78,9 @@ export const getAnnotationStyles = (
     "annotation-solid": solid,
     "annotation-resource": notations.length > 0,
     "annotation-resource-start": notations && start,
-    "annotation-resource-end": notations && end
+    "annotation-resource-end": notations && end,
+    pending: pending,
+    previous: previous
   });
 
   const announcedStyle = () => {
@@ -95,9 +102,10 @@ export const getAnnotationStyles = (
   const removableHighlightId = removableHighlight
     ? removableHighlight.id
     : null;
-  const isInteractive = !!textAnnotationIds.length || removableHighlight;
+  const isInteractive =
+    !pending && (!!textAnnotationIds.length || removableHighlight);
   const interactiveAttributes =
-    isInteractive && !hasInteractiveAncestor
+    isInteractive && !hasInteractiveAncestor && !previous
       ? {
           tabIndex: 0,
           role: "button",
