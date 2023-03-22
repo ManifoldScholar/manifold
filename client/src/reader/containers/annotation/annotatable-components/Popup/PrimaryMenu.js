@@ -15,8 +15,10 @@ function PrimaryMenu({
   actions,
   activeAnnotation,
   direction,
-  visible
+  visible,
+  clearSelection
 }) {
+  const { range } = selectionState?.selection ?? {};
   const {
     menus,
     activeMenu,
@@ -26,7 +28,9 @@ function PrimaryMenu({
   } = useAnnotationMenu({
     menuArray: ["main", "share", "readingGroup"],
     defaultMenu: "main",
-    visible
+    visible,
+    clearSelection,
+    range
   });
 
   function handleReadingGroupSelect(id) {

@@ -5,7 +5,13 @@ const MENU_OPTIONS = {
   loop: true
 };
 
-export default function useAnnotationMenu({ menuArray, defaultMenu, visible }) {
+export default function useAnnotationMenu({
+  menuArray,
+  defaultMenu,
+  visible,
+  clearSelection,
+  range
+}) {
   const lastFocus = useRef();
   const lastActiveMenu = useRef();
 
@@ -49,6 +55,12 @@ export default function useAnnotationMenu({ menuArray, defaultMenu, visible }) {
         target: { dataset }
       } = event;
 
+      if (key === "Escape") {
+        event.preventDefault();
+        clearSelection();
+        window.getSelection().addRange(range);
+      }
+
       if (key === "ArrowRight") {
         if (sourceMenu === defaultMenu && dataset.name) {
           setMenu(dataset.name);
@@ -65,7 +77,7 @@ export default function useAnnotationMenu({ menuArray, defaultMenu, visible }) {
         }
       }
     },
-    [defaultMenu]
+    [defaultMenu, clearSelection, range]
   );
 
   const setActiveMenu = useCallback(name => setMenu(name), []);

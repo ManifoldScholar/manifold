@@ -39,7 +39,7 @@ export default class AnnotatableDrawer extends PureComponent {
 
   closeDrawer = () => {
     this.setState(this.initialState);
-    this.props.actions.closeDrawer();
+    this.props.close();
   };
 
   render() {

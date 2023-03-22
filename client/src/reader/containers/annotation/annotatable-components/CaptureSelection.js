@@ -32,10 +32,6 @@ class AnnotatableCaptureSelection extends Component {
     this.lastSelection = React.createRef();
   }
 
-  componentDidMount() {
-    document.addEventListener("selectionchange", this.handleSelectionChange);
-  }
-
   componentDidUpdate(prevProps) {
     const { activeAnnotation: annotationId } = this.props;
     const { activeAnnotation: prevAnnotationId } = prevProps;
@@ -46,7 +42,6 @@ class AnnotatableCaptureSelection extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.timeout);
-    document.removeEventListener("selectionchange", this.handleSelectionChange);
   }
 
   getEventXY(event) {
@@ -292,25 +287,11 @@ class AnnotatableCaptureSelection extends Component {
       this.updateSelectionState(event, true, true);
   };
 
-  get focusInPopup() {
-    const selection = document.getSelection();
-    return (
-      this.props.popupRef?.contains(document.activeElement) ||
-      this.props.popupRef?.contains(selection.focusNode)
-    );
-  }
-
-  /**
-   * When the annotation popup appears and focus is set inside it,
-   * Safari and Firefox detect a `selectionchange` event, causing the selection
-   * to be cleared and the popup to be hidden. (Chromium browsers don't do this.)
-   * So we check if the popup contains focus before doing anything with the selection change.
-   */
-  handleSelectionChange = event => {
-    if (this.focusInPopup) return;
-
-    this.lastSelection.current = document.getSelection();
+  handleMouseDown = event => {
+    if (!this.props.selectionState.selectionComplete) return;
+    const range = this.props.selectionState.selection.range;
     this.updateSelectionState(event);
+    window.getSelection().addRange(range);
   };
 
   render() {
@@ -321,6 +302,7 @@ class AnnotatableCaptureSelection extends Component {
         className="no-focus-outline"
         onTouchEnd={this.handleTouchEnd}
         onMouseUp={this.handleMouseUp}
+        onMouseDown={this.handleMouseDown}
         onKeyUp={this.handleKeyUp}
         tabIndex={0}
         role="region"
