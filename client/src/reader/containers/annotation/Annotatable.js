@@ -345,6 +345,7 @@ export class Annotatable extends Component {
         <AnnotationNotationViewer
           sectionId={this.props.sectionId}
           textId={this.props.textId}
+          textSlug={this.props.text.attributes.slug}
           notations={this.props.notations}
           annotations={this.props.annotations}
           containerSize={this.props.containerSize}

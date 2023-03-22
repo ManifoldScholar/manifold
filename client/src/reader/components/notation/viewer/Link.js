@@ -16,14 +16,14 @@ class NotationViewerLink extends PureComponent {
 
   url(notation) {
     if (!notation) return null;
-    const { textId, sectionId } = this.props.params;
+    const { sectionId, textSlug } = this.props.params;
     if (notation.type === "resources") {
-      return lh.link("readerSectionResource", textId, sectionId, notation.id);
+      return lh.link("readerSectionResource", textSlug, sectionId, notation.id);
     }
     if (notation.type === "resourceCollections") {
       return lh.link(
         "readerSectionResourceCollection",
-        textId,
+        textSlug,
         sectionId,
         notation.id
       );
