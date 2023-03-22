@@ -48,6 +48,8 @@ export class Annotatable extends Component {
     super(props);
 
     this.state = this.initialState;
+
+    this.lastSelectionRange = React.createRef();
   }
 
   componentDidMount() {
@@ -134,6 +136,10 @@ export class Annotatable extends Component {
     this.popupRef = el;
   };
 
+  setSelectableRef = el => {
+    this.selectableRef = el;
+  };
+
   setSelectionState = selectionState => {
     const { annotationState } = this.state;
     const emptySelection = !selectionState.selection;
@@ -142,7 +148,7 @@ export class Annotatable extends Component {
 
     // If the selection is empty, and it's not locked, we always reset.
     if (emptySelection && annotationState !== "locked")
-      return this.setState(this.initialState);
+      return this.resetState(false);
 
     // If we have an active annotation state, maintain the state.
     if (
@@ -267,14 +273,6 @@ export class Annotatable extends Component {
     this.openDrawer("viewAnnotations", event, false);
   };
 
-  lockSelection() {
-    this.setState({ annotationState: "locked" });
-  }
-
-  unlockSelection() {
-    this.setState({ annotationState: "pending" });
-  }
-
   showLogin = () => {
     this.props.dispatch(
       uiVisibilityActions.visibilityToggle("signInUpOverlay")
@@ -290,24 +288,34 @@ export class Annotatable extends Component {
 
   openDrawer = (drawerState, event = null, lock = true) => {
     if (event) event.preventDefault();
-    if (lock) this.lockSelection();
+    if (lock) this.setState({ annotationState: "locked" });
     this.setState({ drawerState });
   };
 
   closeDrawer = () => {
     this.maybeRemoveAnnotationHashFromUrl();
-    this.unlockSelection();
-    const range = this.state.selectionState.selection.range;
     this.resetState();
-    window.getSelection().addRange(range);
   };
 
-  resetState = () => {
+  resetState = (restoreSelection = true) => {
     this.setState(this.initialState);
-    if (window.getSelection) {
-      window.getSelection().removeAllRanges();
-    } else if (document.selection) {
-      document.selection.empty();
+
+    if (!restoreSelection) return;
+
+    if (this.selectableRef) {
+      this.selectableRef.focus();
+    }
+
+    const selection = window.getSelection();
+
+    const lastSelection = document.querySelector(
+      "[data-annotation-ids='selection']"
+    );
+
+    if (lastSelection) {
+      selection.removeAllRanges();
+      selection.setBaseAndExtent(lastSelection, 0, lastSelection, 0);
+      selection.collapseToStart();
     }
   };
 
@@ -323,14 +331,31 @@ export class Annotatable extends Component {
     };
   };
 
+  // replace last selection with latest
   appendSelectionAnnotation = annotation => {
+    const newArray = [...this.state.renderedAnnotations];
+
+    newArray.pop();
+
     this.setState({
-      renderedAnnotations: [...this.state.renderedAnnotations, annotation]
+      renderedAnnotations: [...newArray, annotation]
     });
   };
 
   removeSelectionAnnotation = () => {
-    this.setState({ renderedAnnotations: this.props.annotations });
+    const { renderedAnnotations } = this.state;
+    const latestAnnotation =
+      renderedAnnotations[renderedAnnotations.length - 1];
+
+    const revisedAnnotation = {
+      ...latestAnnotation,
+      attributes: {
+        ...latestAnnotation.attributes,
+        annotationStyle: "previous"
+      }
+    };
+
+    this.appendSelectionAnnotation(revisedAnnotation);
   };
 
   render() {
@@ -353,11 +378,11 @@ export class Annotatable extends Component {
           selectionState={selectionState}
           updateSelection={this.setSelectionState}
           popupRef={this.popupRef}
+          setSelectableRef={this.setSelectableRef}
         >
           <CaptureClick
             activeAnnotation={this.state.annotation}
             updateActiveAnnotation={this.setActiveAnnotation}
-            onClick={this.handleClick}
             actions={this.actions}
           >
             <div
@@ -389,6 +414,7 @@ export class Annotatable extends Component {
           drawerState={this.state.drawerState}
           actions={this.actions}
           close={this.closeDrawer}
+          returnFocusRef={this.selectableRef}
           {...this.state.drawerProps}
         />
         <AnnotationNotationViewer

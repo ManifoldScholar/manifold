@@ -101,4 +101,9 @@ export default `
       background: var(--color-base-yellow75);
     }
   }
+
+  .annotation-previous {
+    cursor: auto;
+    background: transparent !important;
+  }
 `;

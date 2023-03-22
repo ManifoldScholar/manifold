@@ -43,6 +43,8 @@ export const getAnnotationStyles = (
   const dots = annotations.find(a => a.annotationStyle === "dots");
   const dashes = annotations.find(a => a.annotationStyle === "dashes");
   const solid = annotations.find(a => a.annotationStyle === "solid");
+  const pending = map[index].find(a => a.annotationStyle === "pending");
+  const previous = map[index].find(a => a.annotationStyle === "previous");
   const isCreator = annotations.find(a => a.isCreator);
   const authorCreated = annotations.find(a => a.authorCreated);
   const lockedSelection = annotations.find(a => a.id === "selection");
@@ -73,7 +75,9 @@ export const getAnnotationStyles = (
     "annotation-solid": solid,
     "annotation-resource": notations.length > 0,
     "annotation-resource-start": notations && start,
-    "annotation-resource-end": notations && end
+    "annotation-resource-end": notations && end,
+    "annotation-pending": pending,
+    "annotation-previous": previous
   });
 
   const announcedStyle = () => {

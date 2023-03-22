@@ -154,6 +154,7 @@ class TextNode extends Component {
       const dashes = map[index].find(a => a.annotationStyle === "dashes");
       const solid = map[index].find(a => a.annotationStyle === "solid");
       const pending = map[index].find(a => a.annotationStyle === "pending");
+      const previous = map[index].find(a => a.annotationStyle === "previous");
       const isCreator = map[index].find(a => a.isCreator);
       const authorCreated = map[index].find(a => a.authorCreated);
       const lockedSelection = map[index].find(a => a.id === "selection");
@@ -184,7 +185,8 @@ class TextNode extends Component {
         "annotation-resource": notations.length > 0,
         "annotation-resource-start": notations && startingResources.length > 0,
         "annotation-resource-end": notations && endingResources.length > 0,
-        "annotation-pending": pending
+        "annotation-pending": pending,
+        "annotation-previous": previous
       });
 
       const announcedStyle = this.announcedStyle({ wavy, dots, dashes });

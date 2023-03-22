@@ -24,6 +24,7 @@ class AnnotatableCaptureSelection extends Component {
     updateSelection: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     popupRef: PropTypes.object,
+    setSelectableRef: PropTypes.func,
     t: PropTypes.func
   };
 
@@ -289,9 +290,8 @@ class AnnotatableCaptureSelection extends Component {
 
   handleMouseDown = event => {
     if (!this.props.selectionState.selectionComplete) return;
-    const range = this.props.selectionState.selection.range;
+
     this.updateSelectionState(event);
-    window.getSelection().addRange(range);
   };
 
   render() {
@@ -299,14 +299,15 @@ class AnnotatableCaptureSelection extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */
     return (
       <div
-        className="no-focus-outline"
+        ref={this.props.setSelectableRef}
+        role="region"
+        aria-label={this.props.t("reader.section_label")}
+        tabIndex={0}
         onTouchEnd={this.handleTouchEnd}
         onMouseUp={this.handleMouseUp}
         onMouseDown={this.handleMouseDown}
         onKeyUp={this.handleKeyUp}
-        tabIndex={0}
-        role="region"
-        aria-label={this.props.t("reader.section_label")}
+        className="no-focus-outline"
       >
         {this.props.children}
       </div>

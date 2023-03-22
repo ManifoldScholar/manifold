@@ -15,6 +15,7 @@ function DrawerContent(props, ref) {
     focusTrap = true,
     ariaLabel,
     returnFocusOnDeactivate = true,
+    setReturnFocus,
     context = "backend",
     entrySide = "right",
     size = "default",
@@ -82,7 +83,8 @@ function DrawerContent(props, ref) {
           checkCanFocusTrap,
           allowOutsideClick: true,
           escapeDeactivates: handleEscape,
-          returnFocusOnDeactivate
+          returnFocusOnDeactivate,
+          ...(!!setReturnFocus && { setReturnFocus })
         }}
       >
         <div>
