@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Citation from "./Citation";
-import TruncatedTextContent from "global/components/Annotation/Annotation/TextContent/Truncated";
+import FromNodes from "global/components/Annotation/Annotation/TextContent/FromNodes";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class AnnotationShareWrapper extends PureComponent {
@@ -39,12 +39,7 @@ export default class AnnotationShareWrapper extends PureComponent {
       annotation: { subject }
     } = this.props;
     if (this.props.truncate && subject.length > this.props.truncate) {
-      return (
-        <TruncatedTextContent
-          selection={subject}
-          truncate={this.props.truncate}
-        />
-      );
+      return <FromNodes selection={subject} />;
     }
 
     return subject;

@@ -14,7 +14,7 @@ function AnnotationWithNodes({ annotation, selection }) {
     endNode: endNodeId,
     startChar,
     endChar
-  } = annotation.attributes;
+  } = annotation?.attributes ?? {};
 
   const fallback = (
     <Wrapper>
@@ -73,7 +73,7 @@ function AnnotationWithNodes({ annotation, selection }) {
   const annotationStyle =
     memberships[membership]?.attributes?.annotationStyle ?? "solid";
 
-  if (!nodesToRender?.length) return fallback;
+  if (!annotation || !nodesToRender?.length) return fallback;
 
   const fragment = {
     nodeType: "element",
@@ -109,7 +109,7 @@ function AnnotationWithNodes({ annotation, selection }) {
 }
 
 const checkId = (prev, next) => {
-  if (prev.annotation.id === next.annotation.id) return true;
+  if (prev.annotation?.id === next.annotation?.id) return true;
   return false;
 };
 
