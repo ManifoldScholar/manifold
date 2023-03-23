@@ -43,8 +43,8 @@ export const getAnnotationStyles = (
   const dots = annotations.find(a => a.annotationStyle === "dots");
   const dashes = annotations.find(a => a.annotationStyle === "dashes");
   const solid = annotations.find(a => a.annotationStyle === "solid");
-  const pending = map[index].find(a => a.annotationStyle === "pending");
-  const previous = map[index].find(a => a.annotationStyle === "previous");
+  const pending = annotations.find(a => a.annotationStyle === "pending");
+  const previous = annotations.find(a => a.annotationStyle === "previous");
   const isCreator = annotations.find(a => a.isCreator);
   const authorCreated = annotations.find(a => a.authorCreated);
   const lockedSelection = annotations.find(a => a.id === "selection");
@@ -101,7 +101,7 @@ export const getAnnotationStyles = (
     : null;
   const isInteractive = !!textAnnotationIds.length || removableHighlight;
   const interactiveAttributes =
-    isInteractive && !hasInteractiveAncestor
+    isInteractive && !hasInteractiveAncestor && !previous
       ? {
           tabIndex: 0,
           role: "button",

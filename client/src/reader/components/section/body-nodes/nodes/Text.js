@@ -203,7 +203,7 @@ class TextNode extends Component {
         : "";
       const isInteractive = !!textAnnotationIds.length || removableHighlight;
       const interactiveAttributes =
-        isInteractive && !this.props.hasInteractiveAncestor
+        isInteractive && !this.props.hasInteractiveAncestor && !previous
           ? {
               tabIndex: 0,
               role: "button",

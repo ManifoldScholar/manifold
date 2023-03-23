@@ -8,8 +8,7 @@ import isFunction from "lodash/isFunction";
 export default class AnnotatableDrawer extends PureComponent {
   static propTypes = {
     drawerState: PropTypes.string,
-    actions: PropTypes.object.isRequired,
-    returnFocusRef: PropTypes.object
+    actions: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -54,8 +53,7 @@ export default class AnnotatableDrawer extends PureComponent {
       open: this.isOpen,
       closeCallback: this.closeDrawer,
       lockScroll: "always",
-      identifier: "annotations-drawer",
-      setReturnFocus: this.props.returnFocusRef
+      identifier: "annotations-drawer"
     };
     if (DrawerContents && isFunction(DrawerContents.drawerProps)) {
       drawerProps = Object.assign(drawerProps, DrawerContents.drawerProps());

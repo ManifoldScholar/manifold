@@ -306,16 +306,13 @@ export class Annotatable extends Component {
       this.selectableRef.focus();
     }
 
-    const selection = window.getSelection();
-
-    const lastSelection = document.querySelector(
-      "[data-annotation-ids='selection']"
-    );
+    const lastSelection = [
+      ...document.querySelectorAll("[data-annotation-ids='selection']")
+    ].pop();
 
     if (lastSelection) {
-      selection.removeAllRanges();
-      selection.setBaseAndExtent(lastSelection, 0, lastSelection, 0);
-      selection.collapseToStart();
+      const selection = window.getSelection();
+      selection.setPosition(lastSelection, 1);
     }
   };
 
@@ -414,7 +411,6 @@ export class Annotatable extends Component {
           drawerState={this.state.drawerState}
           actions={this.actions}
           close={this.closeDrawer}
-          returnFocusRef={this.selectableRef}
           {...this.state.drawerProps}
         />
         <AnnotationNotationViewer

@@ -58,7 +58,6 @@ export default function useAnnotationMenu({
       if (key === "Escape") {
         event.preventDefault();
         clearSelection();
-        window.getSelection().addRange(range);
       }
 
       if (key === "ArrowRight") {
