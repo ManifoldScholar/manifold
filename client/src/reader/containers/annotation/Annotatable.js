@@ -66,13 +66,21 @@ export class Annotatable extends Component {
     const { range: prevRange, ...prevSelectionData } = prevSelection ?? {};
 
     if (!isEqual(selectionData, prevSelectionData)) {
+      /**
+       * In order to restore cursor position when selection is lost,
+       * we need to wrap a pending text selection in an HTML element.
+       * So we create a *fake* annotation and append it to the list of
+       * rendered annotations. On each new selection, this one is replaced by
+       * the latest selection. When selection is lost, that appended element
+       * is restyled (but kept in the DOM so we can set the cursor position there).
+       */
       if (this.state?.selectionState.selectionComplete) {
-        const test = this.createAnnotationFromSelection(
+        const selectionAnnotation = this.createAnnotationFromSelection(
           this.state.selectionState.selectionAnnotation
         );
-        return this.appendSelectionAnnotation(test);
+        return this.appendLastSelectionAnnotation(selectionAnnotation);
       }
-      return this.removeSelectionAnnotation();
+      return this.reviseLastSelectionAnnotation();
     }
   }
 
@@ -158,7 +166,10 @@ export class Annotatable extends Component {
         this.activeAnnotationObject
       )
     )
-      return this.setState({ selectionState, annotationState: "active" });
+      return this.setState({
+        selectionState,
+        annotationState: "active"
+      });
 
     // If no guards catch it, we update the state.
     return this.setState({
@@ -297,25 +308,6 @@ export class Annotatable extends Component {
     this.resetState();
   };
 
-  resetState = (restoreSelection = true) => {
-    this.setState(this.initialState);
-
-    if (!restoreSelection) return;
-
-    if (this.selectableRef) {
-      this.selectableRef.focus();
-    }
-
-    const lastSelection = [
-      ...document.querySelectorAll("[data-annotation-ids='selection']")
-    ].pop();
-
-    if (lastSelection) {
-      const selection = window.getSelection();
-      selection.setPosition(lastSelection, 1);
-    }
-  };
-
   createAnnotationFromSelection = selection => {
     return {
       id: "selection",
@@ -328,31 +320,67 @@ export class Annotatable extends Component {
     };
   };
 
-  // replace last selection with latest
-  appendSelectionAnnotation = annotation => {
+  appendLastSelectionAnnotation = annotation => {
     const newArray = [...this.state.renderedAnnotations];
+    const lastAnnotation = newArray[newArray.length - 1];
+    const isSelection = lastAnnotation?.id === "selection";
 
-    newArray.pop();
+    // if last annotation was fake (aka a selection), replace it
+    if (isSelection) {
+      newArray.pop();
+    }
 
     this.setState({
       renderedAnnotations: [...newArray, annotation]
     });
   };
 
-  removeSelectionAnnotation = () => {
+  // when selected text is released, revise the style of last selection
+  reviseLastSelectionAnnotation = () => {
     const { renderedAnnotations } = this.state;
-    const latestAnnotation =
-      renderedAnnotations[renderedAnnotations.length - 1];
+    const lastAnnotation = renderedAnnotations[renderedAnnotations.length - 1];
+    const isSelection = lastAnnotation?.id === "selection";
+
+    // if last annotation wasn't fake, don't revise it
+    if (!isSelection) return;
 
     const revisedAnnotation = {
-      ...latestAnnotation,
+      ...lastAnnotation,
       attributes: {
-        ...latestAnnotation.attributes,
+        ...lastAnnotation.attributes,
         annotationStyle: "previous"
       }
     };
 
-    this.appendSelectionAnnotation(revisedAnnotation);
+    this.appendLastSelectionAnnotation(revisedAnnotation);
+  };
+
+  resetState = (restoreSelection = true) => {
+    const { renderedAnnotations } = this.state;
+    const lastAnnotationOrSelection =
+      renderedAnnotations[renderedAnnotations.length - 1];
+
+    this.setState(this.initialState);
+
+    if (!restoreSelection) return;
+
+    // move focus to text section wrapper
+    if (this.selectableRef) {
+      this.selectableRef.focus();
+    }
+
+    // console.log(lastAnnotationOrSelection);
+
+    // find node created for last selection
+    const lastSelection = [
+      ...document.querySelectorAll("[data-annotation-ids='selection']")
+    ].pop();
+
+    // move cursor to end of last selection node
+    if (lastSelection) {
+      const selection = window.getSelection();
+      selection.setPosition(lastSelection, 1);
+    }
   };
 
   render() {
