@@ -136,6 +136,12 @@ export class Annotatable extends Component {
     return this.props.annotations.find(a => a.id === compareId);
   }
 
+  get pendingAnnotationNode() {
+    return [
+      ...document.querySelectorAll("[data-annotation-ids].pending")
+    ].pop();
+  }
+
   setAnnotatableRef = el => {
     this.annotatableRef = el;
   };
@@ -156,7 +162,10 @@ export class Annotatable extends Component {
 
     // If the selection is empty, and it's not locked, we always reset.
     if (emptySelection && annotationState !== "locked")
-      return this.resetState(false);
+      return this.resetState({
+        restoreFocusTo: null,
+        restoreSelectionTo: null
+      });
 
     // If we have an active annotation state, maintain the state.
     if (
@@ -243,8 +252,11 @@ export class Annotatable extends Component {
     const res = this.props.dispatch(
       request(call, requests.rAnnotationCreate, requestOptions)
     );
-    res.promise.then(() => {
-      this.resetState();
+    res.promise.then(response => {
+      this.resetState({
+        restoreFocusTo: response.data?.id,
+        restoreSelectionTo: response.data?.id
+      });
     });
     return res.promise;
   };
@@ -305,7 +317,10 @@ export class Annotatable extends Component {
 
   closeDrawer = () => {
     this.maybeRemoveAnnotationHashFromUrl();
-    this.resetState();
+    this.resetState({
+      restoreFocusTo: this.selectableRef,
+      restoreSelectionTo: this.pendingAnnotationNode
+    });
   };
 
   createAnnotationFromSelection = selection => {
@@ -348,38 +363,48 @@ export class Annotatable extends Component {
       ...lastAnnotation,
       attributes: {
         ...lastAnnotation.attributes,
-        annotationStyle: "previous"
+        format: "previous",
+        annotationStyle: null
       }
     };
 
     this.appendLastSelectionAnnotation(revisedAnnotation);
   };
 
-  resetState = (restoreSelection = true) => {
-    const { renderedAnnotations } = this.state;
-    const lastAnnotationOrSelection =
-      renderedAnnotations[renderedAnnotations.length - 1];
-
+  resetState = ({
+    restoreFocusTo = this.selectableRef,
+    restoreSelectionTo
+  }) => {
     this.setState(this.initialState);
 
-    if (!restoreSelection) return;
+    if (!restoreFocusTo && !restoreSelectionTo) return;
 
-    // move focus to text section wrapper
-    if (this.selectableRef) {
-      this.selectableRef.focus();
+    const getNodeForId = id =>
+      document.querySelector(`[data-annotation-ids*="${id}"]`);
+
+    // optionally restore selection and focus to node if ID is passed
+    if (typeof restoreFocusTo === "string") {
+      const node = getNodeForId(restoreFocusTo);
+      if (node) {
+        restoreFocusTo = node;
+      }
+    }
+    if (typeof restoreSelectionTo === "string") {
+      const node = getNodeForId(restoreSelectionTo);
+      if (node) {
+        restoreSelectionTo = node;
+      }
     }
 
-    // console.log(lastAnnotationOrSelection);
-
-    // find node created for last selection
-    const lastSelection = [
-      ...document.querySelectorAll("[data-annotation-ids='selection']")
-    ].pop();
+    // move focus to node or text section wrapper
+    if (restoreFocusTo) {
+      restoreFocusTo.focus();
+    }
 
     // move cursor to end of last selection node
-    if (lastSelection) {
+    if (restoreSelectionTo) {
       const selection = window.getSelection();
-      selection.setPosition(lastSelection, 1);
+      selection.setPosition(restoreSelectionTo, 1);
     }
   };
 
@@ -431,7 +456,12 @@ export class Annotatable extends Component {
             activeAnnotation={this.activeAnnotationObject}
             annotationState={annotationState}
             setPopupRef={this.setPopupRef}
-            clearSelection={this.resetState}
+            clearSelection={() =>
+              this.resetState({
+                restoreFocusTo: this.selectableRef,
+                restoreSelectionTo: this.pendingAnnotationNode
+              })
+            }
           />
         )}
 

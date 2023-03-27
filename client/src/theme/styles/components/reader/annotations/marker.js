@@ -92,20 +92,13 @@ export default `
     &.mixed {
       background-color: var(--color-annotation-mixed);
     }
-  }
 
-  [data-removable-highlight-id="selection"] {
-    &.annotation-pending {
+    &.pending {
       background: var(--color-base-yellow20);
 
       .scheme-dark & {
         background: var(--color-base-yellow75);
       }
-    }
-
-    &.annotation-previous {
-      cursor: auto;
-      background: transparent !important;
     }
   }
 `;

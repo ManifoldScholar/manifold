@@ -147,17 +147,20 @@ class TextNode extends Component {
 
     // map the chunks to outputs.
     return chunks.map((chunk, index) => {
-      const highlighted = map[index].find(a => a.type === "highlight");
-      const underlined = map[index].find(a => a.type === "annotation");
-      const wavy = map[index].find(a => a.annotationStyle === "wavy");
-      const dots = map[index].find(a => a.annotationStyle === "dots");
-      const dashes = map[index].find(a => a.annotationStyle === "dashes");
-      const solid = map[index].find(a => a.annotationStyle === "solid");
-      const pending = map[index].find(a => a.annotationStyle === "pending");
-      const previous = map[index].find(a => a.annotationStyle === "previous");
-      const isCreator = map[index].find(a => a.isCreator);
-      const authorCreated = map[index].find(a => a.authorCreated);
-      const lockedSelection = map[index].find(a => a.id === "selection");
+      const highlighted = map[index].some(a => a.type === "highlight");
+      const underlined = map[index].some(a => a.type === "annotation");
+      const wavy = map[index].some(a => a.annotationStyle === "wavy");
+      const dots = map[index].some(a => a.annotationStyle === "dots");
+      const dashes = map[index].some(a => a.annotationStyle === "dashes");
+      const solid = map[index].some(a => a.annotationStyle === "solid");
+      const pending = map[index].some(a => a.annotationStyle === "pending");
+      const previous =
+        map[index].length === 1 && map[index].some(a => a.type === "previous"); // don't style as previous if node has multiple annotations
+      const isCreator = map[index].some(a => a.isCreator);
+      const authorCreated = map[index].some(a => a.authorCreated);
+      const lockedSelection = map[index].some(
+        a => a.id === "selection" && a.type !== "previous"
+      );
       const notations = map[index].filter(
         a => a.type === "resource" || a.type === "resource_collection"
       );
@@ -175,7 +178,7 @@ class TextNode extends Component {
         primary: isCreator,
         secondary: !isCreator,
         tertiary: !isCreator && authorCreated,
-        "annotation-locked-selected primary": lockedSelection && !previous,
+        "annotation-locked-selected primary": lockedSelection,
         "annotation-underline": underlined,
         "annotation-highlight": highlighted,
         "annotation-wavy": wavy,
@@ -185,8 +188,8 @@ class TextNode extends Component {
         "annotation-resource": notations.length > 0,
         "annotation-resource-start": notations && startingResources.length > 0,
         "annotation-resource-end": notations && endingResources.length > 0,
-        "annotation-pending": pending,
-        "annotation-previous": previous
+        pending: pending,
+        previous: previous
       });
 
       const announcedStyle = this.announcedStyle({ wavy, dots, dashes });
@@ -203,7 +206,7 @@ class TextNode extends Component {
         : "";
       const isInteractive = !!textAnnotationIds.length || removableHighlight;
       const interactiveAttributes =
-        isInteractive && !this.props.hasInteractiveAncestor && !previous
+        isInteractive && !this.props.hasInteractiveAncestor
           ? {
               tabIndex: 0,
               role: "button",
