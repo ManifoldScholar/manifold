@@ -130,6 +130,7 @@ class AnnotatableCaptureSelection extends Component {
     try {
       const { selectionState } = this.props;
       const selection = this.mapNativeSelection(this.nativeSelection);
+      window.getSelection().empty();
       if (!selection) return this.props.updateSelection(this.emptySelection());
       let complete = selectionComplete;
       if (selectionState.selectionComplete) complete = true;
