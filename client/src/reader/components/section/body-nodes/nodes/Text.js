@@ -204,7 +204,8 @@ class TextNode extends Component {
       const removableHighlightId = removableHighlight
         ? removableHighlight.id
         : "";
-      const isInteractive = !!textAnnotationIds.length || removableHighlight;
+      const isInteractive =
+        !pending && (!!textAnnotationIds.length || removableHighlight);
       const interactiveAttributes =
         isInteractive && !this.props.hasInteractiveAncestor
           ? {

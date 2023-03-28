@@ -379,33 +379,36 @@ export class Annotatable extends Component {
 
     if (!restoreFocusTo && !restoreSelectionTo) return;
 
-    const getNodeForId = id =>
-      document.querySelector(`[data-annotation-ids*="${id}"]`);
+    try {
+      const getNodeForId = id =>
+        document.querySelector(`[data-annotation-ids*="${id}"]`);
 
-    // optionally restore selection and focus to node if ID is passed
-    if (typeof restoreFocusTo === "string") {
-      const node = getNodeForId(restoreFocusTo);
-      if (node) {
-        restoreFocusTo = node;
+      // optionally restore selection and focus to node if ID is passed
+      if (typeof restoreFocusTo === "string") {
+        const node = getNodeForId(restoreFocusTo);
+        if (node) {
+          restoreFocusTo = node;
+        }
       }
-    }
-    if (typeof restoreSelectionTo === "string") {
-      const node = getNodeForId(restoreSelectionTo);
-      if (node) {
-        restoreSelectionTo = node;
+      if (typeof restoreSelectionTo === "string") {
+        const node = getNodeForId(restoreSelectionTo);
+        if (node) {
+          restoreSelectionTo = node;
+        }
       }
-    }
 
-    // move focus to node or text section wrapper
-    if (restoreFocusTo) {
-      restoreFocusTo.focus();
-    }
+      // move focus to node or text section wrapper
+      if (restoreFocusTo) {
+        restoreFocusTo.focus();
+      }
 
-    // move cursor to end of last selection node
-    if (restoreSelectionTo) {
-      const selection = window.getSelection();
-      selection.setPosition(restoreSelectionTo, 1);
-    }
+      // move cursor to end of last selection node
+      if (restoreSelectionTo) {
+          console.log(restoreSelectionTo instanceof Node);
+        const selection = window.getSelection();
+        selection.setPosition(restoreSelectionTo, 1);
+      }
+    } catch (error) {}
   };
 
   render() {

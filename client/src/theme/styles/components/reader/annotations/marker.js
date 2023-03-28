@@ -94,6 +94,7 @@ export default `
     }
 
     &.pending {
+      cursor: auto;
       background: var(--color-base-yellow20);
 
       .scheme-dark & {
