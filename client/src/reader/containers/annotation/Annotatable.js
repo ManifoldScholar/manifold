@@ -399,13 +399,12 @@ export class Annotatable extends Component {
       }
 
       // move focus to node or text section wrapper
-      if (restoreFocusTo) {
+      if (restoreFocusTo && restoreFocusTo instanceof Node) {
         restoreFocusTo.focus();
       }
 
       // move cursor to end of last selection node
-      if (restoreSelectionTo) {
-        console.log(restoreSelectionTo instanceof Node);
+      if (restoreSelectionTo && restoreSelectionTo instanceof Node) {
         const selection = window.getSelection();
         selection.setPosition(restoreSelectionTo, 1);
       }
