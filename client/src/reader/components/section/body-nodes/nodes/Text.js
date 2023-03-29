@@ -188,8 +188,8 @@ class TextNode extends Component {
         "annotation-resource": notations.length > 0,
         "annotation-resource-start": notations && startingResources.length > 0,
         "annotation-resource-end": notations && endingResources.length > 0,
-        pending: pending,
-        previous: previous
+        pending,
+        previous
       });
 
       const announcedStyle = this.announcedStyle({ wavy, dots, dashes });

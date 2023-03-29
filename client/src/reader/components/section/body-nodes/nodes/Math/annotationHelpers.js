@@ -79,8 +79,8 @@ export const getAnnotationStyles = (
     "annotation-resource": notations.length > 0,
     "annotation-resource-start": notations && start,
     "annotation-resource-end": notations && end,
-    pending: pending,
-    previous: previous
+    pending,
+    previous
   });
 
   const announcedStyle = () => {
