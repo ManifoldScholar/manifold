@@ -48,8 +48,6 @@ export class Annotatable extends Component {
     super(props);
 
     this.state = this.initialState;
-
-    this.lastSelectionRange = React.createRef();
   }
 
   componentDidMount() {
@@ -57,7 +55,7 @@ export class Annotatable extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.annotations.length !== prevProps.annotations.length)
+    if (this.props.annotations?.length !== prevProps.annotations?.length)
       this.setState({ renderedAnnotations: this.props.annotations });
 
     const { selection } = this.state.selectionState ?? {};
@@ -138,7 +136,7 @@ export class Annotatable extends Component {
 
   get pendingAnnotationNode() {
     return [
-      ...document.querySelectorAll("[data-annotation-ids].pending")
+      ...document.querySelectorAll("[data-annotation-ids*='selection']")
     ].pop();
   }
 
@@ -253,9 +251,14 @@ export class Annotatable extends Component {
       request(call, requests.rAnnotationCreate, requestOptions)
     );
     res.promise.then(response => {
-      this.resetState({
-        restoreFocusTo: response.data?.id,
-        restoreSelectionTo: response.data?.id
+      this.setState(this.initialState, () => {
+        setTimeout(() => {
+          // delay till after closeDrawer() runs
+          this.restoreFocusAndSelection({
+            restoreFocusTo: response.data?.id,
+            restoreSelectionTo: response.data?.id
+          });
+        });
       });
     });
     return res.promise;
@@ -269,7 +272,15 @@ export class Annotatable extends Component {
       request(call, requests.rAnnotationDestroy, options)
     );
     res.promise.then(() => {
-      this.resetState();
+      // recreate destroyed node and move selection to it after state is reset
+      const selectionAnnotation = this.createAnnotationFromSelection(
+        this.state.selectionState.selectionAnnotation
+      );
+      this.appendLastSelectionAnnotation(selectionAnnotation);
+      this.resetState({
+        restoreFocusTo: this.selectableRef,
+        restoreSelectionTo: this.pendingAnnotationNode
+      });
     });
     return res.promise;
   };
@@ -361,7 +372,7 @@ export class Annotatable extends Component {
 
     const revisedAnnotation = {
       ...lastAnnotation,
-      id: "previous",
+      // id: "previous",
       attributes: {
         ...lastAnnotation.attributes,
         format: "previous",
@@ -372,43 +383,51 @@ export class Annotatable extends Component {
     this.appendLastSelectionAnnotation(revisedAnnotation);
   };
 
-  resetState = ({
+  restoreFocusAndSelection = ({
     restoreFocusTo = this.selectableRef,
     restoreSelectionTo
   }) => {
-    this.setState(this.initialState);
-
     if (!restoreFocusTo && !restoreSelectionTo) return;
+
+    let focusNode = restoreFocusTo;
+    let selectionNode = restoreSelectionTo;
 
     try {
       const getNodeForId = id =>
         document.querySelector(`[data-annotation-ids*="${id}"]`);
 
       // optionally restore selection and focus to node if ID is passed
-      if (typeof restoreFocusTo === "string") {
-        const node = getNodeForId(restoreFocusTo);
+      if (typeof focusNode === "string") {
+        const node = getNodeForId(focusNode);
         if (node) {
-          restoreFocusTo = node;
+          focusNode = node;
         }
       }
-      if (typeof restoreSelectionTo === "string") {
-        const node = getNodeForId(restoreSelectionTo);
+      if (typeof selectionNode === "string") {
+        const node = getNodeForId(selectionNode);
         if (node) {
-          restoreSelectionTo = node;
+          selectionNode = node;
         }
       }
 
       // move focus to node or text section wrapper
-      if (restoreFocusTo && restoreFocusTo instanceof Node) {
-        restoreFocusTo.focus();
+      if (focusNode && focusNode instanceof Node) {
+        focusNode.focus();
       }
 
-      // move cursor to end of last selection node
-      if (restoreSelectionTo && restoreSelectionTo instanceof Node) {
+      if (selectionNode && selectionNode instanceof Node) {
+        // move cursor to end of last selection node
         const selection = window.getSelection();
-        selection.setPosition(restoreSelectionTo, 1);
+        selection.setPosition(selectionNode, 1);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.info(error); // eslint-disable-line no-console
+    }
+  };
+
+  resetState = focusAndSelectionNodes => {
+    this.setState(this.initialState);
+    this.restoreFocusAndSelection(focusAndSelectionNodes);
   };
 
   render() {

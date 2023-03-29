@@ -96,6 +96,7 @@ export default `
     &.pending {
       cursor: auto;
       background-color: var(--color-base-yellow20);
+      pointer-events: none;
 
       .scheme-dark & {
         background-color: var(--color-base-yellow75);
