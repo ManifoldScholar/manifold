@@ -33,6 +33,10 @@ class AnnotatableCaptureSelection extends Component {
     this.lastSelection = React.createRef();
   }
 
+  componentDidMount() {
+    window.addEventListener("keyup", this.handleKeyUp);
+  }
+
   componentDidUpdate(prevProps) {
     const { activeAnnotation: annotationId } = this.props;
     const { activeAnnotation: prevAnnotationId } = prevProps;
@@ -43,6 +47,7 @@ class AnnotatableCaptureSelection extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.timeout);
+    window.removeEventListener("keyup", this.handleKeyUp);
   }
 
   getEventXY(event) {
@@ -285,8 +290,11 @@ class AnnotatableCaptureSelection extends Component {
 
   handleKeyUp = event => {
     const { key, shiftKey } = event;
-    if (key === "Shift" && shiftKey === false)
-      this.updateSelectionState(event, true, true);
+    if (key === "Shift" && shiftKey === false) {
+      const selectionNode = window.getSelection().anchorNode;
+      if (selectionNode && selectionNode.type === Node.TextNode)
+        this.updateSelectionState(event, true, true);
+    }
   };
 
   handleMouseDown = event => {
@@ -307,7 +315,7 @@ class AnnotatableCaptureSelection extends Component {
         onTouchEnd={this.handleTouchEnd}
         onMouseUp={this.handleMouseUp}
         onMouseDown={this.handleMouseDown}
-        onKeyUp={this.handleKeyUp}
+        // onKeyUp={this.handleKeyUp}
         className="no-focus-outline"
       >
         {this.props.children}
