@@ -361,6 +361,7 @@ export class Annotatable extends Component {
 
     const revisedAnnotation = {
       ...lastAnnotation,
+      id: "previous",
       attributes: {
         ...lastAnnotation.attributes,
         format: "previous",
@@ -404,7 +405,7 @@ export class Annotatable extends Component {
 
       // move cursor to end of last selection node
       if (restoreSelectionTo) {
-          console.log(restoreSelectionTo instanceof Node);
+        console.log(restoreSelectionTo instanceof Node);
         const selection = window.getSelection();
         selection.setPosition(restoreSelectionTo, 1);
       }
