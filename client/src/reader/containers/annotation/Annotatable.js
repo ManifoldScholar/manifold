@@ -48,8 +48,6 @@ export class Annotatable extends Component {
     super(props);
 
     this.state = this.initialState;
-
-    this.lastSelectionRange = React.createRef();
   }
 
   componentDidMount() {
@@ -269,7 +267,15 @@ export class Annotatable extends Component {
       request(call, requests.rAnnotationDestroy, options)
     );
     res.promise.then(() => {
-      this.resetState();
+      // recreate destroyed node and move selection to it after state is reset
+      const selectionAnnotation = this.createAnnotationFromSelection(
+        this.state.selectionState.selectionAnnotation
+      );
+      this.appendLastSelectionAnnotation(selectionAnnotation);
+      this.resetState({
+        restoreFocusTo: this.selectableRef,
+        restoreSelectionTo: this.pendingAnnotationNode
+      });
     });
     return res.promise;
   };
@@ -318,8 +324,8 @@ export class Annotatable extends Component {
   closeDrawer = () => {
     this.maybeRemoveAnnotationHashFromUrl();
     this.resetState({
-      restoreFocusTo: this.selectableRef,
-      restoreSelectionTo: this.pendingAnnotationNode
+      restoreFocusTo: null,
+      restoreSelectionTo: null
     });
   };
 
@@ -403,8 +409,8 @@ export class Annotatable extends Component {
         restoreFocusTo.focus();
       }
 
-      // move cursor to end of last selection node
       if (restoreSelectionTo && restoreSelectionTo instanceof Node) {
+        // move cursor to end of last selection node
         const selection = window.getSelection();
         selection.setPosition(restoreSelectionTo, 1);
       }
