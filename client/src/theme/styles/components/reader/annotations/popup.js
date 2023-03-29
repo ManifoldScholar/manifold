@@ -48,6 +48,7 @@ export default `
     }
 
     position: absolute;
+    contain: layout;
     margin-top: -30px;
     white-space: nowrap;
     visibility: hidden;
@@ -93,7 +94,7 @@ export default `
       &--active {
         opacity: 1;
         pointer-events: auto;
-        transform: translateX(-50%);
+        transform: translateX(0);
         transition:
           opacity ${transitionDuration} var(--transition-timing-function),
           transform ${transitionDuration} var(--transition-timing-function);

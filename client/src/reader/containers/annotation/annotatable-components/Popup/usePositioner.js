@@ -16,9 +16,11 @@ export default function usePositioner({
   const popupDimensions = useCallback(() => {
     if (!popupRef)
       throw new Error("Cannot get popupDimensions without a popupRef");
+
+    const measureableNode = popupRef.firstChild ?? popupRef;
     return {
-      height: popupRef.offsetHeight,
-      width: popupRef.offsetWidth
+      height: measureableNode.offsetHeight,
+      width: measureableNode.offsetWidth
     };
   }, [popupRef]);
 
