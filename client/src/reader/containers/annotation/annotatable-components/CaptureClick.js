@@ -66,18 +66,11 @@ export default class AnnotatableCaptureClick extends Component {
     }
   };
 
-  belongsToPendingSelection = el => {
-    if (!el) return false;
-    const { annotationIds } = el.dataset;
-    return annotationIds && annotationIds.includes("selection");
-  };
-
   handleClick = event => {
     if (!event || !event.target) return;
     const el = isMathMLNode(event.target)
       ? selectionHelpers.closest(event.target, "[data-mathml]")
       : event.target;
-    if (this.belongsToPendingSelection(el)) return;
     if (this.doesElementContainAnnotationAndHighlight(el))
       this.handleDisambiguationClick(event, el);
     if (this.doesElementContainRemovableHighlight(el))
