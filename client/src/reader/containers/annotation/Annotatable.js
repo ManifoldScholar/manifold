@@ -136,7 +136,7 @@ export class Annotatable extends Component {
 
   get pendingAnnotationNode() {
     return [
-      ...document.querySelectorAll("[data-annotation-ids].pending")
+      ...document.querySelectorAll("[data-annotation-ids*='selection']")
     ].pop();
   }
 
@@ -251,9 +251,14 @@ export class Annotatable extends Component {
       request(call, requests.rAnnotationCreate, requestOptions)
     );
     res.promise.then(response => {
-      this.resetState({
-        restoreFocusTo: response.data?.id,
-        restoreSelectionTo: response.data?.id
+      this.setState(this.initialState, () => {
+        setTimeout(() => {
+          // delay till after closeDrawer() runs
+          this.restoreFocusAndSelection({
+            restoreFocusTo: response.data?.id,
+            restoreSelectionTo: response.data?.id
+          });
+        });
       });
     });
     return res.promise;
@@ -324,8 +329,8 @@ export class Annotatable extends Component {
   closeDrawer = () => {
     this.maybeRemoveAnnotationHashFromUrl();
     this.resetState({
-      restoreFocusTo: null,
-      restoreSelectionTo: null
+      restoreFocusTo: this.selectableRef,
+      restoreSelectionTo: this.pendingAnnotationNode
     });
   };
 
@@ -367,7 +372,7 @@ export class Annotatable extends Component {
 
     const revisedAnnotation = {
       ...lastAnnotation,
-      id: "previous",
+      // id: "previous",
       attributes: {
         ...lastAnnotation.attributes,
         format: "previous",
@@ -378,12 +383,10 @@ export class Annotatable extends Component {
     this.appendLastSelectionAnnotation(revisedAnnotation);
   };
 
-  resetState = ({
+  restoreFocusAndSelection = ({
     restoreFocusTo = this.selectableRef,
     restoreSelectionTo
   }) => {
-    this.setState(this.initialState);
-
     if (!restoreFocusTo && !restoreSelectionTo) return;
 
     try {
@@ -415,6 +418,11 @@ export class Annotatable extends Component {
         selection.setPosition(restoreSelectionTo, 1);
       }
     } catch (error) {}
+  };
+
+  resetState = focusAndSelectionNodes => {
+    this.setState(this.initialState);
+    this.restoreFocusAndSelection(focusAndSelectionNodes);
   };
 
   render() {
