@@ -9,8 +9,7 @@ export default function useAnnotationMenu({
   menuArray,
   defaultMenu,
   visible,
-  clearSelection,
-  range
+  clearSelection
 }) {
   const lastFocus = useRef();
   const lastActiveMenu = useRef();
@@ -76,7 +75,7 @@ export default function useAnnotationMenu({
         }
       }
     },
-    [defaultMenu, clearSelection, range]
+    [defaultMenu, clearSelection]
   );
 
   const setActiveMenu = useCallback(name => setMenu(name), []);

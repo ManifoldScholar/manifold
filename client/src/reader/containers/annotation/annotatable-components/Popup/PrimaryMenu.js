@@ -18,7 +18,6 @@ function PrimaryMenu({
   visible,
   clearSelection
 }) {
-  const { range } = selectionState?.selection ?? {};
   const {
     menus,
     activeMenu,
@@ -29,8 +28,7 @@ function PrimaryMenu({
     menuArray: ["main", "share", "readingGroup"],
     defaultMenu: "main",
     visible,
-    clearSelection,
-    range
+    clearSelection
   });
 
   function handleReadingGroupSelect(id) {
