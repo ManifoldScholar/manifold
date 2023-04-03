@@ -3,21 +3,12 @@ import PropTypes from "prop-types";
 import { Menus } from "reader/components/annotation/popup";
 import { useAnnotationMenu } from "reader/components/annotation/popup/hooks";
 
-function LoginMenu({
-  direction,
-  actions,
-  visible,
-  clearSelection,
-  selectionState
-}) {
-  const { range } = selectionState?.selection ?? {};
-
-  const { menus, activeMenu } = useAnnotationMenu({
+function LoginMenu({ direction, actions, visible, clearSelection }) {
+  const { menus, activeMenu, handleKeyDown } = useAnnotationMenu({
     menuArray: ["main"],
     defaultMenu: "main",
     visible,
-    clearSelection,
-    range
+    clearSelection
   });
 
   return (
@@ -26,6 +17,7 @@ function LoginMenu({
       visible={activeMenu === "main"}
       direction={direction}
       actions={actions}
+      onKeyDown={handleKeyDown}
     />
   );
 }
