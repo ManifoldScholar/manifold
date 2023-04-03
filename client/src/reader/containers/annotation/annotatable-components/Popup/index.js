@@ -34,8 +34,9 @@ export default function AnnotatablePopup(props) {
         <LoginMenu {...props} direction={direction} visible />
       </Authorize>
       <Authorize kind="any">
-        {showLinkMenu && <LinkMenu {...props} direction={direction} visible />}
-        {!showLinkMenu && (
+        {showLinkMenu ? (
+          <LinkMenu {...props} direction={direction} visible />
+        ) : (
           <PrimaryMenu
             {...props}
             locked={props.annotationState === "locked"}

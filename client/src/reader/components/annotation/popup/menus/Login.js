@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
 
-function Login({ menu, visible, direction, actions }) {
+function Login({ menu, visible, direction, actions, onKeyDown }) {
   const { t } = useTranslation();
 
   return (
@@ -13,6 +13,7 @@ function Login({ menu, visible, direction, actions }) {
       visible={visible}
       aria-label={t("reader.menus.popup.log_in_annotate")}
       direction={direction}
+      onKeyDown={onKeyDown}
     >
       <MenuItem
         menu={menu}

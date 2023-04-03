@@ -8,17 +8,13 @@ function LinkMenu({
   visible,
   actions,
   activeEvent,
-  clearSelection,
-  selectionState
+  clearSelection
 }) {
-  const { range } = selectionState?.selection ?? {};
-
-  const { menus, activeMenu } = useAnnotationMenu({
+  const { menus, activeMenu, handleKeyDown } = useAnnotationMenu({
     menuArray: ["main"],
     defaultMenu: "main",
     visible,
-    clearSelection,
-    range
+    clearSelection
   });
 
   return (
@@ -28,6 +24,7 @@ function LinkMenu({
       direction={direction}
       activeEvent={activeEvent}
       actions={actions}
+      onKeyDown={handleKeyDown}
     />
   );
 }
