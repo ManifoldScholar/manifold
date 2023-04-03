@@ -83,13 +83,6 @@ export const getAnnotationStyles = (
     previous
   });
 
-  const announcedStyle = () => {
-    if (wavy) return "wavy";
-    if (dots) return "dots";
-    if (dashes) return "dashes";
-    return "solid";
-  };
-
   const annotationIds = annotations.map(a => a.id);
 
   const textAnnotationIds = annotations
@@ -115,8 +108,7 @@ export const getAnnotationStyles = (
                 chunk: "mathematical content"
               })
             : t("reader.actions.view_annotations", {
-                chunk: "mathematical content",
-                style: announcedStyle()
+                chunk: "mathematical content"
               })
         }
       : {};
