@@ -383,6 +383,7 @@ export class Annotatable extends Component {
     this.appendLastSelectionAnnotation(revisedAnnotation);
   };
 
+  /* eslint-disable no-param-reassign */
   restoreFocusAndSelection = ({
     restoreFocusTo = this.selectableRef,
     restoreSelectionTo
@@ -417,8 +418,11 @@ export class Annotatable extends Component {
         const selection = window.getSelection();
         selection.setPosition(restoreSelectionTo, 1);
       }
-    } catch (error) {}
+    } catch (error) {
+      this.selectableRef.focus();
+    }
   };
+  /* eslint-enable no-param-reassign */
 
   resetState = focusAndSelectionNodes => {
     this.setState(this.initialState);
