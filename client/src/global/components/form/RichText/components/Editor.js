@@ -132,7 +132,7 @@ export default function Editor({
                 as="div"
                 renderElement={renderElement}
                 renderLeaf={renderLeaf}
-                placeholder="Enter text here..."
+                placeholder="Section body..."
                 spellCheck={false}
                 onKeyDown={e => captureHotKeys(e, editor)}
                 onBlur={onEditorBlur}

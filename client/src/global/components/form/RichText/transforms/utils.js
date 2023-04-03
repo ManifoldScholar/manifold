@@ -27,7 +27,15 @@ export const findListChild = iterator => {
   return findListChild(iterator);
 };
 
-const getTextLocation = (editor, iterator, path, str = "") => {
+export const getTextContent = (editor, iterator, str = "") => {
+  const { value } = iterator.next();
+  if (!value) return str;
+  const [node] = value;
+  const nextStr = node.text ? str + node.text : str;
+  return getTextContent(editor, iterator, nextStr);
+};
+
+export const getTextLocation = (editor, iterator, path, str = "") => {
   const { value } = iterator.next();
   if (!value) return { textContent: str, lastPath: path };
   const [node, nodePath] = value;
