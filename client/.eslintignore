@@ -3,6 +3,7 @@ webpack/*
 dist
 src/config.js
 plugins
+!src/global/components/form/RichText/plugins
 plugins-off
 plugins.off
 tmp
