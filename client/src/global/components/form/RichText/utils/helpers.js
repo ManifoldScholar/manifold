@@ -49,5 +49,7 @@ const vimeoRegex = /^(http|https)?:\/\/(www\.|player\.)?vimeo\.com\/(?:channels\
 const ytRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/gm;
 
 export const isVideoUrl = url => {
-  return vimeoRegex.test(url) || ytRegex.test(url);
+  const isYT = ytRegex.test(url);
+  const isVimeo = vimeoRegex.test(url);
+  return isYT || isVimeo;
 };
