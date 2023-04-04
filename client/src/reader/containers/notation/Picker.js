@@ -165,21 +165,23 @@ export class NotationPickerContainerImplementation extends PureComponent {
               icon: "resourceCollection64"
             }}
           />
-          <EntitiesList
-            entityComponent={entityComponent}
-            entities={entities}
-            unit={unit}
-            pagination={pagination}
-            callbacks={{
-              onPageClick: this.pageChangeHandlerCreator
-            }}
-            entityComponentProps={{
-              onRowClick: this.props.selectionHandler
-            }}
-            search={
-              <Search {...this.props.entitiesListSearchProps("notations")} />
-            }
-          />
+          <div style={{ marginBlockStart: "24px" }}>
+            <EntitiesList
+              entityComponent={entityComponent}
+              entities={entities}
+              unit={unit}
+              pagination={pagination}
+              callbacks={{
+                onPageClick: this.pageChangeHandlerCreator
+              }}
+              entityComponentProps={{
+                onRowClick: this.props.selectionHandler
+              }}
+              search={
+                <Search {...this.props.entitiesListSearchProps("notations")} />
+              }
+            />
+          </div>
         </div>
       </section>
     );
