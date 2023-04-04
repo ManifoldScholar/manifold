@@ -415,13 +415,19 @@ export class Annotatable extends Component {
         focusNode.focus();
       }
 
-      if (selectionNode && selectionNode instanceof Node) {
+      // not ideal, but iOS seems to select the whole text sometimes
+      // when calling `setPosition()`, and managing selection when the primary
+      // input mode is touch isn't necessary
+      const touchIsPrimary = window.matchMedia(
+        "(hover: none) and (pointer: coarse)"
+      ).matches;
+      if (selectionNode && selectionNode instanceof Node && !touchIsPrimary) {
         // move cursor to end of last selection node
         const selection = window.getSelection();
         selection.setPosition(selectionNode, 1);
       }
     } catch (error) {
-      console.info(error); // eslint-disable-line no-console
+      console.warn(error); // eslint-disable-line no-console
     }
   };
 
