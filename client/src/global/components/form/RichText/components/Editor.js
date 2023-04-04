@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useCallback,
-  useMemo,
-  useEffect,
-  useRef
-} from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { createEditor, Transforms } from "slate";
 import { Slate, withReact, ReactEditor } from "slate-react";
 import { withHistory, HistoryEditor } from "slate-history";
@@ -29,10 +23,11 @@ export default function Editor({
   warnErrors,
   setWarnErrors
 }) {
-  const editor = useMemo(
-    () => withHistory(withReact(withPlugins(createEditor()))),
-    []
-  );
+  const editorRef = useRef();
+  if (!editorRef.current)
+    editorRef.current = withHistory(withReact(withPlugins(createEditor())));
+  const editor = editorRef.current;
+
   const [htmlMode, toggleHtmlMode] = useState(false);
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
