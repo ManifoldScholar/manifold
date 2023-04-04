@@ -10,11 +10,11 @@ import { Slate, withReact, ReactEditor } from "slate-react";
 import { withHistory, HistoryEditor } from "slate-history";
 import { Leaf, Element } from "./renderers";
 import Toolbar from "./Toolbar";
-import { captureHotKeys } from "./controls";
-import { serializeToHtml, serializeToSlate } from "./serializers";
-import { HTMLEditor } from "./loaders";
-import withPlugins from "./slate-plugins";
-import { clearSlate, formatHtml } from "./slateHelpers";
+import { captureHotKeys } from "../transforms";
+import { serializeToHtml, serializeToSlate } from "../serializers";
+import { HtmlEditor } from "./HtmlEditor";
+import withPlugins from "../plugins";
+import { clearSlate, formatHtml } from "../utils/helpers";
 import { ErrorBoundary } from "react-error-boundary";
 import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
@@ -139,7 +139,7 @@ export default function Editor({
                 onFocus={onEditorFocus}
               />
             )}
-            {htmlMode && <HTMLEditor {...codeAreaProps} />}
+            {htmlMode && <HtmlEditor {...codeAreaProps} />}
           </Styled.EditableWrapper>
           {theme && (
             <style

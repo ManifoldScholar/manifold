@@ -1,9 +1,9 @@
-import { toggleMark } from "./MarkButton";
-import { toggleBlock } from "./BlockButton";
+import { toggleMark } from "../components/controls/MarkButton";
+import { toggleBlock } from "../components/controls/BlockButton";
 import { Editor as SlateEditor, Transforms, Path } from "slate";
-import { rteElements, inlineNodes } from "../rteElements";
-import { increaseIndent, decreaseIndent } from "./transforms/indents";
-import { setSelectionAtPoint, getListItemNode } from "./transforms/utils";
+import { rteElements, inlineNodes } from "../utils/elements";
+import { increaseIndent, decreaseIndent } from "./indents";
+import { setSelectionAtPoint, getListItemNode } from "./utils";
 
 const handleInsertNode = editor => {
   // Grab the element node that contains the text where the user hit enter; Slate's default handling of enter would simply duplicate this node

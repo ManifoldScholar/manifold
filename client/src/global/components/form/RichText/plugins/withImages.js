@@ -1,5 +1,5 @@
-import { insertImage } from "../controls/ImageButton";
-import { isImageUrl } from "../slateHelpers";
+import { insertImage } from "../components/controls/ImageButton";
+import { isImageUrl } from "../utils/helpers";
 
 /* eslint-disable no-param-reassign */
 const withImages = editor => {

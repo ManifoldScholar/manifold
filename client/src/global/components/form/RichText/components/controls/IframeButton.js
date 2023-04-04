@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Transforms } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
-import { isValidUrl } from "../slateHelpers";
+import { isValidUrl } from "../../utils/helpers";
 import * as Styled from "./styles";
 
 export const insertIframe = (editor, url) => {

@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Transforms } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
-import { isImageUrl } from "../slateHelpers";
+import { isImageUrl } from "../../utils/helpers";
 import * as Styled from "./styles";
 
 // Maybe do something fancier here to prevent images from ending up alone in pargraphs?

@@ -1,8 +1,8 @@
 import React from "react";
 import Loadable from "@docusaurus/react-loadable";
 
-export const HTMLEditor = Loadable({
-  loader: () => import("../CodeArea/Ace").then(ace => ace.default),
+export const HtmlEditor = Loadable({
+  loader: () => import("../../CodeArea/Ace").then(ace => ace.default),
   render(Editor, props) {
     return (
       <Editor

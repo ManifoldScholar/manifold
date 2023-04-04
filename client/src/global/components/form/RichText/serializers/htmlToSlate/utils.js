@@ -1,6 +1,6 @@
 import { jsx } from "slate-hyperscript";
 import { getChildren } from "domutils";
-import { inlineNodes, markElements } from "../../rteElements";
+import { inlineNodes, markElements } from "../../utils/elements";
 
 const CONTEXT_VALUES = {
   block: "block",
