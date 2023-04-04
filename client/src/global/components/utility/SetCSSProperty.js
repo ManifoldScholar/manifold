@@ -40,6 +40,8 @@ export default class SetCSSProperty extends PureComponent {
   };
 
   setMeasuredProperty = () => {
+    if (!this.measuredRef?.current) return;
+
     const measurement = this.measuredRef.current.getBoundingClientRect()[
       this.props.measurement
     ];
