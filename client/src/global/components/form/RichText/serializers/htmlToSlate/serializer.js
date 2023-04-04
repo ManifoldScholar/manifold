@@ -2,7 +2,7 @@ import { jsx } from "slate-hyperscript";
 import { Parser, ElementType } from "htmlparser2";
 import { DomHandler } from "domhandler";
 import { getName, textContent } from "domutils";
-import { blackList } from "../../rteElements";
+import { blackList } from "../../utils/elements";
 
 import {
   normalizeChildren,

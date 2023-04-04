@@ -5,7 +5,7 @@ import {
   Range,
   Transforms
 } from "slate";
-import { toggleBlock } from "../controls/BlockButton";
+import { toggleBlock } from "../components/controls/BlockButton";
 
 const SHORTCUTS = {
   "*": "ul",

@@ -1,6 +1,10 @@
 import React from "react";
 import Image from "./Image";
-import { rteElements, renderedElements, markElements } from "../rteElements";
+import {
+  rteElements,
+  renderedElements,
+  markElements
+} from "../../utils/elements";
 
 export default function SlateElement({ attributes, children, element }) {
   if (element.type === "br") {

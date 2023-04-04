@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
 import Errorable from "../Errorable";
-import Editor from "./Editor";
+import { Editor } from "./components";
 import BaseLabel from "../BaseLabel";
 import Instructions from "../Instructions";
 import setter from "../setter";
 import { serializeToSlate } from "./serializers";
-import { formatHtml } from "./slateHelpers";
+import { formatHtml } from "./utils/helpers";
 
 const defaultValue = [
   {

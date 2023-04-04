@@ -1,8 +1,8 @@
-import { wrapLink } from "../controls/LinkButton";
-import { inlineNodes } from "../rteElements";
-import { insertImage } from "../controls/ImageButton";
-import { insertIframe } from "../controls/IframeButton";
-import { isValidUrl, isImageUrl, isVideoUrl } from "../slateHelpers";
+import { wrapLink } from "../components/controls/LinkButton";
+import { inlineNodes } from "../utils/elements";
+import { insertImage } from "../components/controls/ImageButton";
+import { insertIframe } from "../components/controls/IframeButton";
+import { isValidUrl, isImageUrl, isVideoUrl } from "../utils/helpers";
 import { mathMLElements } from "reader/containers/annotation/annotatable-components/mathHelpers";
 
 /* eslint-disable no-param-reassign */

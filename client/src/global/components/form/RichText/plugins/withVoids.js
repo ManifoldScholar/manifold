@@ -1,4 +1,4 @@
-import { rteElements, renderedElements, markElements } from "../rteElements";
+import { rteElements, renderedElements, markElements } from "../utils/elements";
 
 /* eslint-disable no-param-reassign */
 const withVoids = editor => {
