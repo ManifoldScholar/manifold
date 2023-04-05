@@ -1,4 +1,5 @@
 import { Transforms, Editor, Node } from "slate";
+import has from "lodash/has";
 
 export const setSelectionAtPoint = (editor, path, offset = 0) => {
   Transforms.select(editor, {
@@ -41,8 +42,9 @@ export const getTextLocation = (editor, iterator, path, str = "") => {
   const [node, nodePath] = value;
   if (node.type === "list-sibling")
     return getTextLocation(editor, Node.children(editor, nodePath), nodePath);
-  const nextStr = node.text ?? str;
-  const nextPath = node.text ? nodePath : path;
+  const isTextNode = has(node, "text");
+  const nextStr = isTextNode ? node.text : str;
+  const nextPath = isTextNode ? nodePath : path;
   return getTextLocation(editor, iterator, nextPath, nextStr);
 };
 

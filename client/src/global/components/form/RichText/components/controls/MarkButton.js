@@ -1,11 +1,13 @@
 import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
-import { Editor, Transforms } from "slate";
+import { Editor, Transforms, Node } from "slate";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
 const isMarkActive = (editor, format) => {
-  const marks = Editor.marks(editor);
+  if (!editor.selection) return false;
+  const node = Node.get(editor, editor.selection.focus.path);
+  const marks = node.text ? Editor.marks(editor) : false;
   return marks ? marks[format] === true : false;
 };
 
