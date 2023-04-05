@@ -136,7 +136,7 @@ export default function Editor({
             )}
             {htmlMode && <HtmlEditor {...codeAreaProps} />}
           </Styled.EditableWrapper>
-          {theme && (
+          {theme && !htmlMode && (
             <style
               dangerouslySetInnerHTML={{
                 __html: theme
