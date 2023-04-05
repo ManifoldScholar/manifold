@@ -142,7 +142,7 @@
     "qs": "^6.0.0",
     "query-string": "^6.x",
     "react": "^16.13",
-    "react-ace": "^5.9.0",
+    "react-ace": "7.0.5",
     "react-attr-converter": "^0.3.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-collapse": "^5.0.0",
