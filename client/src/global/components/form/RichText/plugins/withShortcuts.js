@@ -14,6 +14,7 @@ import { getTextContent } from "../transforms/utils";
 const SHORTCUTS = {
   "*": "ul",
   "-": "ul",
+  "+": "ul",
   "1.": "ol",
   ">": "blockquote",
   "#": "h1",
