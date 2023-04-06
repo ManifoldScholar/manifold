@@ -46,6 +46,7 @@ class TextSection < ApplicationRecord
            through: :text_section_stylesheets,
            dependent: :destroy,
            inverse_of: :text_sections
+  has_many :ingestions, dependent: :nullify, inverse_of: :text_section
 
   # Delegation
   delegate :citation_parts, to: :text, prefix: true, allow_nil: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_13_215126) do
+ActiveRecord::Schema.define(version: 2023_04_06_164035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -546,10 +546,12 @@ ActiveRecord::Schema.define(version: 2023_03_13_215126) do
     t.integer "source_file_size"
     t.datetime "source_updated_at"
     t.jsonb "source_data"
+    t.uuid "text_section_id"
     t.index ["creator_id"], name: "index_ingestions_on_creator_id"
     t.index ["project_id"], name: "index_ingestions_on_project_id"
     t.index ["state"], name: "index_ingestions_on_state"
     t.index ["text_id"], name: "index_ingestions_on_text_id"
+    t.index ["text_section_id"], name: "index_ingestions_on_text_section_id"
   end
 
   create_table "journal_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

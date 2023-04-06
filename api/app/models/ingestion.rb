@@ -16,6 +16,7 @@ class Ingestion < ApplicationRecord
 
   # Associations
   belongs_to :text, optional: true
+  belongs_to :text_section, optional: true
   belongs_to :project
 
   # Validations
