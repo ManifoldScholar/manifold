@@ -101,6 +101,7 @@ Rails.application.routes.draw do
           namespace :relationships do
             resources :text_sections, only: [:index, :create]
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
+            resources :ingestions, only: [:create], controller: "/api/v1/texts/relationships/text_section_ingestions"
           end
         end
       end
