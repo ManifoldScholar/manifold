@@ -15,6 +15,8 @@ module Ingestions
       def execute
         update_or_create
         report
+
+        text_section if manifest[:section_ingestion]
       end
 
       private
