@@ -4,6 +4,10 @@ class IngestionChannel < ApplicationCable::Channel
     @ingestion ||= Ingestion.find(params[:ingestion])
   end
 
+  def section_ingestion?
+    params[:section] || false
+  end
+
   def subscribed
     return unless current_user.can_read? ingestion
 
@@ -32,7 +36,7 @@ class IngestionChannel < ApplicationCable::Channel
 
   def process
     send_start
-    ingestion.process(current_user)
+    ingestion.process(processing_user: current_user, section_only: section_ingestion?)
     ingestion.save
     send_model(ingestion)
     send_end
@@ -44,7 +48,7 @@ class IngestionChannel < ApplicationCable::Channel
     send_start
     ingestion.reset
     ingestion.analyze
-    ingestion.process(current_user)
+    ingestion.process(processing_user: current_user)
     ingestion.save
     send_model(ingestion)
     send_end

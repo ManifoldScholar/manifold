@@ -104,8 +104,7 @@ class Ingestion < ApplicationRecord
     self.log_buffer = []
   end
 
-  # rubocop:disable Metrics/MethodLength
-  def begin_processing(processing_user = nil)
+  def begin_processing(processing_user: nil, section_only: false)
     # Announce the new state of the ingestion.
     serialization_options = { current_user: processing_user }
     serialization = V1::IngestionSerializer.new(
@@ -114,18 +113,9 @@ class Ingestion < ApplicationRecord
     ).serializable_hash
     IngestionChannel.broadcast_to self, type: "entity", payload: serialization
 
-    begin
-      outcome = nil
-      PaperTrail.request(whodunnit: processing_user) do
-        outcome = Ingestions::Ingestor.run ingestion: self
-      end
-      outcome
-    rescue StandardError => e
-      return handle_ingestion_exception(e)
-    end
+    outcome = section_only ? process_section(processing_user) : process_text(processing_user)
 
     if outcome.valid?
-      self.text = outcome.result
       info("\nIngestion Complete.")
       processing_success
     else
@@ -133,7 +123,32 @@ class Ingestion < ApplicationRecord
     end
   end
 
-  # rubocop:enable Metrics/MethodLength
+  def process_text(processing_user)
+    begin
+      outcome = nil
+      PaperTrail.request(whodunnit: processing_user) do
+        outcome = Ingestions::Ingestor.run ingestion: self
+      end
+      self.text = outcome if outcome.valid?
+      outcome
+    rescue StandardError => e
+      return handle_ingestion_exception(e)
+    end
+  end
+
+  def process_section(processing_user)
+    begin
+      outcome = nil
+      PaperTrail.request(whodunnit: processing_user) do
+        text = self.text
+        outcome = Ingestions::TextSection::Ingestor.run(ingestion: self, text: text)
+      end
+      self.text_section = outcome if outcome.valid?
+      outcome
+    rescue StandardError => e
+      return handle_ingestion_exception(e)
+    end
+  end
 
   private
 
@@ -162,6 +177,10 @@ class Ingestion < ApplicationRecord
     errors.full_messages.each do |e|
       error(e)
     end
+  end
+
+  def text_for_section_processing
+    Text.friendly.find(text_id)
   end
 
 end
