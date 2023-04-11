@@ -54,9 +54,9 @@ module API
       # @return [void]
       def render_single_resource(model, ok_status: default_ok_status, error_status: :unprocessable_entity, **options)
         options[:serializer] ||= model_serializer
-        options[:serializer] = error_serializer if (action_name == "update" || action_name == "create") && !model.valid?
+        options[:serializer] = error_serializer if (action_name == "update" || action_name == "create") && !model.valid?(options[:context])
         options[:location] ||= build_location_for model
-        options[:status] ||= build_status_for model, ok_status, error_status
+        options[:status] ||= build_status_for model, ok_status, error_status, options[:context]
         options[:full] = true
         render_jsonapi model, options
       end
@@ -73,10 +73,10 @@ module API
       # @param [Symbol] ok
       # @param [Symbol] error
       # @return [Symbol]
-      def build_status_for(model, ok, error)
+      def build_status_for(model, ok, error, context)
         return ok unless action_name == "update" || action_name == "create"
 
-        model.valid? ? ok : error
+        model.valid?(context) ? ok : error
       end
 
       # @api private

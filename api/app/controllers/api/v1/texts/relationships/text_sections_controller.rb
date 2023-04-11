@@ -21,7 +21,7 @@ module API
 
           def create
             @text_section = ::Updaters::Text.new(text_section_params, :from_api).update(@text.text_sections.new, creator: @current_user)
-            render_single_resource @text_section
+            render_single_resource @text_section, context: :from_api
           end
 
           private

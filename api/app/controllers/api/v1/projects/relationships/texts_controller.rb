@@ -10,7 +10,7 @@ module API
 
           def create
             @text = ::Updaters::Text.new(text_params, :from_api).update(@project.texts.new, creator: @current_user)
-            render_single_resource @text
+            render_single_resource @text, context: :from_api
           end
 
         end
