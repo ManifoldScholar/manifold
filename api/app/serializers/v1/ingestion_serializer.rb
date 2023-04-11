@@ -17,6 +17,7 @@ module V1
       actions = object.aasm.events.map(&:name)
       actions.select { |action| allowed.include?(action) }
     end
+    typed_attribute :target_kind, Types::String.enum("text", "text_section")
 
     typed_has_one :creator, serializer: ::V1::UserSerializer
 
