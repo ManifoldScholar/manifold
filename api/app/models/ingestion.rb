@@ -14,6 +14,8 @@ class Ingestion < ApplicationRecord
 
   attr_writer :log_buffer
 
+  classy_enum_attr :target_kind, enum: "IngestionTargetKind", allow_blank: false
+
   # Associations
   belongs_to :text, optional: true
   belongs_to :text_section, optional: true
@@ -55,6 +57,7 @@ class Ingestion < ApplicationRecord
 
   before_save :commit_log
   before_update :commit_log
+  before_validation :infer_kind!
 
   def reset_strategy
     self.strategy = nil
@@ -73,7 +76,7 @@ class Ingestion < ApplicationRecord
   end
 
   def reingest?
-    text.present?
+    target_kind.reingest?(self)
   end
 
   def strategy_label
@@ -104,50 +107,8 @@ class Ingestion < ApplicationRecord
     self.log_buffer = []
   end
 
-  def begin_processing(processing_user: nil, section_only: false)
-    # Announce the new state of the ingestion.
-    serialization_options = { current_user: processing_user }
-    serialization = V1::IngestionSerializer.new(
-      self,
-      serialization_options
-    ).serializable_hash
-    IngestionChannel.broadcast_to self, type: "entity", payload: serialization
-
-    outcome = section_only ? process_section(processing_user) : process_text(processing_user)
-
-    if outcome.valid?
-      info("\nIngestion Complete.")
-      processing_success
-    else
-      handle_ingestion_exception(outcome.errors)
-    end
-  end
-
-  def process_text(processing_user)
-    begin
-      outcome = nil
-      PaperTrail.request(whodunnit: processing_user) do
-        outcome = Ingestions::Ingestor.run ingestion: self
-      end
-      self.text = outcome if outcome.valid?
-      outcome
-    rescue StandardError => e
-      return handle_ingestion_exception(e)
-    end
-  end
-
-  def process_section(processing_user)
-    begin
-      outcome = nil
-      PaperTrail.request(whodunnit: processing_user) do
-        text = self.text
-        outcome = Ingestions::TextSection::Ingestor.run(ingestion: self, text: text)
-      end
-      self.text_section = outcome if outcome.valid?
-      outcome
-    rescue StandardError => e
-      return handle_ingestion_exception(e)
-    end
+  def begin_processing(user)
+    target_kind.begin_processing(user, self)
   end
 
   private
@@ -179,8 +140,19 @@ class Ingestion < ApplicationRecord
     end
   end
 
-  def text_for_section_processing
-    Text.friendly.find(text_id)
+  # @return [void]
+  def infer_kind!
+    return if target_kind
+
+    self.target_kind = derive_kind
+  end
+
+  def derive_kind
+    if text_section
+      "text_section"
+    else
+      "text"
+    end
   end
 
 end

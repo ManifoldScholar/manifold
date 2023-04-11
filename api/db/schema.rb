@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_06_164035) do
+ActiveRecord::Schema.define(version: 2023_04_10_195543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -547,6 +547,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_164035) do
     t.datetime "source_updated_at"
     t.jsonb "source_data"
     t.uuid "text_section_id"
+    t.text "target_kind", null: false
     t.index ["creator_id"], name: "index_ingestions_on_creator_id"
     t.index ["project_id"], name: "index_ingestions_on_project_id"
     t.index ["state"], name: "index_ingestions_on_state"

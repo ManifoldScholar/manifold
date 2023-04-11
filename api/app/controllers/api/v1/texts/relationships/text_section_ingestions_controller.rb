@@ -15,6 +15,7 @@ module API
               .update_without_save(@text.ingestions.new)
             @ingestion.creator = current_user
             @ingestion.project_id = @text.project_id
+            @ingestion.target_kind = "text_section"
             authorize_action_for @ingestion
             @ingestion.save
             render_single_resource(
