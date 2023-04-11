@@ -14,7 +14,8 @@ class IngestionFormUpload extends PureComponent {
     setOther: PropTypes.func,
     header: PropTypes.string,
     t: PropTypes.func,
-    sectionIngest: PropTypes.bool
+    sectionIngest: PropTypes.bool,
+    sectionId: PropTypes.string
   };
 
   onSourceChange = source => {
@@ -61,6 +62,9 @@ class IngestionFormUpload extends PureComponent {
 
   // TODO: update the link here after docs are updated
   get fileInstructionsSection() {
+    if (this.props.sectionId)
+      return this.props.t("texts.section.reingest_instructions");
+
     return (
       <Trans
         i18nKey="texts.section.ingest_instructions"
@@ -88,6 +92,14 @@ class IngestionFormUpload extends PureComponent {
       </span>
     );
 
+    /* eslint-disable no-nested-ternary */
+    const urlInstructions = isSection
+      ? this.props.sectionId
+        ? t("texts.section.reingest_url_instructions")
+        : t("texts.section.url_instructions")
+      : t("texts.ingestion.url_instructions");
+    /* eslint-enable no-nested-ternary */
+
     /* eslint-disable max-len */
     return (
       <>
@@ -104,11 +116,7 @@ class IngestionFormUpload extends PureComponent {
         </Form.FieldGroup>
         <Form.FieldGroup
           label={t("texts.ingestion.upload_from_url")}
-          instructions={
-            isSection
-              ? t("texts.section.url_instructions")
-              : t("texts.ingestion.url_instructions")
-          }
+          instructions={urlInstructions}
         >
           <Form.TextInput
             label={t("texts.ingestion.url")}

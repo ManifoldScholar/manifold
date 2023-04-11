@@ -28,6 +28,8 @@ function SectionListItem(props) {
 
   const editUrl = lh.link("backendTextSectionEdit", textId, section.id);
 
+  const ingestUrl = lh.link("backendTextSectionIngestEdit", textId, section.id);
+
   const updateText = useApiCallback(textsAPI.update);
 
   const onSetStart = async id => {
@@ -73,6 +75,13 @@ function SectionListItem(props) {
           </Styled.Button>
           <Styled.Button as={Link} to={editUrl} aria-label={t("actions.edit")}>
             <Utility.IconComposer size={24} icon="annotate24" />
+          </Styled.Button>
+          <Styled.Button
+            as={Link}
+            to={ingestUrl}
+            aria-label={t("actions.ingest")}
+          >
+            <Utility.IconComposer size={24} icon="export24" />
           </Styled.Button>
           <Styled.DragHandle as="div" {...dragHandleProps}>
             <Utility.IconComposer size={30} icon="grabber32" />

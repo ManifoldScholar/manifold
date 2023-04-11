@@ -94,11 +94,13 @@
       "start_tag_label": "Start",
       "start_tooltip_content": "Set the initial starting point for this text when viewed in the Manifold reader.",
       "ingest_button_label": "Ingest New Section",
-      "reingest": "Reingest {{title}}",
+      "reingest": "Reingest <0>{{title}}</0>",
       "ingest_instructions": "Manifold can ingest text sections from single files or a .zip collection. See the <1>documentation</1> for supported file types and directory structure.",
       "url_instructions": "Manifold can also ingest a section from the URL of its Google Doc or HTML file.",
       "ingest_id_label": "Text Section Id",
-      "ingest_id_placeholder": "This ingestion will create a new section."
+      "ingest_id_placeholder": "This ingestion will create a new section.",
+      "reingest_instructions": "Reingesting this section will overwrite the existing section content, including any changes made in the editor. If you want to keep both versions, you can ingest this file into a new section from the previous page.",
+      "reingest_url_instructions": "Manifold can also reingest from a Google Doc or HTML URL."
     },
     "toc": {
       "edit_header": "Edit TOC Entry",
