@@ -88,7 +88,7 @@
     },
     "section": {
       "section_name": "Section Name",
-      "save_button_label": "Save Changes",
+      "save_and_open_label": "Save and Open in Editor",
       "content_label": "Content",
       "content_instructions": "HTML section content",
       "start_tag_label": "Start",
