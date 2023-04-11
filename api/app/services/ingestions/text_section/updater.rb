@@ -1,20 +1,23 @@
 module Ingestions
-  module Compilers
-    class TextSection < AbstractInteraction
+  module TextSection
+    class Updater < Ingestions::AbstractInteraction
+
       hash :manifest, strip: false
       object :text
+      string :text_section_id
       hash :attributes do
         string :build
         string :source_identifier
         string :name, default: "untitled"
         string :kind
         array :stylesheet_contents
-        integer :position
       end
 
       def execute
         update_or_create
         report
+
+        text_section
       end
 
       private
@@ -28,8 +31,10 @@ module Ingestions
       end
 
       def initialize_text_section
+        return text.text_sections.find(text_section_id) if text_section_id.present?
+
         text.text_sections.find_or_initialize_by(
-          source_identifier: attributes[:source_identifier]
+          source_identifier: attributes[:source_identifier], position: position
         )
       end
 
@@ -40,6 +45,12 @@ module Ingestions
           hash[:source_body] = source_body
           hash[:stylesheets] = user_stylesheets + stylesheets
         end.except(:build, :stylesheet_contents)
+      end
+
+      def position
+        return text_section.position if text_section_id.present?
+
+        text.text_sections.count + 1
       end
 
       def source_body

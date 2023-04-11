@@ -11,6 +11,7 @@ module V1
     typed_attribute :strategy, Types::String.optional.meta(read_only: true)
     typed_attribute :strategy_label, Types::String.optional.meta(read_only: true)
     typed_attribute :text_id, Types::Serializer::ID.optional.meta(read_only: true)
+    typed_attribute :text_section_id, Types::Serializer::ID.optional.meta(read_only: true)
     typed_attribute :creator_id, Types::Serializer::ID.meta(read_only: true)
     typed_attribute :available_events, Types::Array.of(Types::String) do |object, _params|
       allowed = [:analyze, :reset, :process, :reingest]

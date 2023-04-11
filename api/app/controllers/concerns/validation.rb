@@ -299,7 +299,7 @@ module Validation
       }
     ]
 
-    relationships = [:text]
+    relationships = [:text, :text_section]
 
     param_config = structure_params(
       attributes: attributes,
