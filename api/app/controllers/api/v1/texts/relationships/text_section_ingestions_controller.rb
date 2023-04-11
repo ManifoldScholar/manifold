@@ -16,6 +16,7 @@ module API
             @ingestion.creator = current_user
             @ingestion.project_id = @text.project_id
             @ingestion.target_kind = "text_section"
+            @ingestion.text_section_id = params[:data][:relationships][:text_section]
             authorize_action_for @ingestion
             @ingestion.save
             render_single_resource(

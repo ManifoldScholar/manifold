@@ -7,6 +7,7 @@ module Ingestions
       record :text
       object :logger, default: nil
 
+      # rubocop:disable Metrics/AbcSize
       def execute
         @context = shared_inputs[:context] = build_context
 
@@ -21,7 +22,7 @@ module Ingestions
         shared_inputs[:manifest][:section_ingestion] = true
 
         ActiveRecord::Base.transaction do
-          compose_into :text_section, Ingestions::TextSection::Compiler
+          compose_into :text_section, Ingestions::TextSection::Compiler, text_section_id: ingestion.text_section&.id
 
           text.reload
 
@@ -32,6 +33,7 @@ module Ingestions
 
         text_section
       end
+      # rubocop:enable Metrics/AbcSize
 
       private
 

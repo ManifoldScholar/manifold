@@ -4,6 +4,7 @@ module Ingestions
 
       hash :manifest, strip: false
       record :text
+      string :text_section_id, default: ""
 
       def execute
         create_records :ingestion_sources
@@ -17,7 +18,7 @@ module Ingestions
         attributes = manifest[:relationships]["text_sections"].first
         return unless attributes.present?
 
-        compose_into :text_section, Ingestions::Compilers::TextSection, attributes: attributes, text: text
+        compose_into :text_section, Ingestions::TextSection::Updater, attributes: attributes, text: text, text_section_id: text_section_id
       end
 
       def create_records(klass)
