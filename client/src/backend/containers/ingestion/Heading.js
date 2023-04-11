@@ -39,9 +39,16 @@ class IngestionHeader extends Component {
     );
   }
 
-  get textId() {
-    if (this.props.reingestion) return this.ingestion.attributes.textId;
+  get entityId() {
+    const { textId, textSectionId } = this.ingestion.attributes ?? {};
 
+    if (this.props.reingestion) {
+      if (this.props.sectionIngest) return textSectionId;
+      return textId;
+    }
+
+    if (this.props.sectionIngest)
+      return this.props.t("texts.section.ingest_id_placeholder");
     return this.props.t("texts.ingestion.id_placeholder");
   }
 
@@ -74,6 +81,10 @@ class IngestionHeader extends Component {
 
   render() {
     if (!this.props.ingestion) return null;
+
+    const idLabelKey = this.props.sectionIngest
+      ? "texts.section.ingest_id_label"
+      : "texts.ingestion.id_label";
 
     const Property = props => (
       <div className="ingestion-output__item">
@@ -108,10 +119,7 @@ class IngestionHeader extends Component {
               label={this.props.t("texts.ingestion.strategy_label")}
               value={this.strategy}
             />
-            <Property
-              label={this.props.t("texts.ingestion.id_label")}
-              value={this.textId}
-            />
+            <Property label={this.props.t(idLabelKey)} value={this.entityId} />
           </div>
         </div>
       </div>

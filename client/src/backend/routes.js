@@ -243,21 +243,51 @@ const routes = {
               helper: t => `/backend/projects/text/${t}/sections`,
               routes: [
                 {
-                  name: "backendTextSectionsNew",
+                  name: "backendTextSectionNew",
                   exact: true,
-                  component: "TextSectionsNew",
+                  component: "TextSectionNew",
                   path: "/backend/projects/text/:id/sections/new",
                   helper: t => `/backend/projects/text/${t}/sections/new`,
                   modal: true
                 },
                 {
-                  name: "backendTextSectionsEdit",
+                  name: "backendTextSectionEdit",
                   exact: true,
-                  component: "TextSectionsEdit",
+                  component: "TextSectionEdit",
                   path: "/backend/projects/text/:id/sections/:sectionId/edit",
                   helper: (t, s) =>
                     `/backend/projects/text/${t}/sections/${s}/edit`,
-                  modal: true
+                  modal: true,
+                  editor: true
+                },
+                {
+                  name: "backendTextSectionIngest",
+                  exact: true,
+                  component: "TextSectionIngest",
+                  path: "/backend/projects/text/:id/sections/ingestions/new",
+                  helper: t =>
+                    `/backend/projects/text/${t}/sections/ingestions/new`,
+                  modal: false
+                },
+                {
+                  name: "backendTextSectionIngestEdit",
+                  exact: true,
+                  component: "TextSectionIngestEdit",
+                  path:
+                    "/backend/projects/text/:id/sections/ingestion/:ingestionId/edit",
+                  helper: (t, i) =>
+                    `/backend/projects/text/${t}/sections/ingestion/${i}/edit`,
+                  modal: false
+                },
+                {
+                  name: "backendTextSectionIngestIngest",
+                  exact: true,
+                  component: "TextSectionIngestIngest",
+                  path:
+                    "/backend/projects/text/:id/sections/ingestion/:ingestionId/ingest",
+                  helper: (t, i) =>
+                    `/backend/projects/text/${t}/sections/ingestion/${i}/ingest`,
+                  modal: false
                 }
               ]
             },

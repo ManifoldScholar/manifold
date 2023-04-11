@@ -26,7 +26,7 @@ function SectionListItem(props) {
 
   const { t } = useTranslation();
 
-  const editUrl = lh.link("backendTextSectionsEdit", textId, section.id);
+  const editUrl = lh.link("backendTextSectionEdit", textId, section.id);
 
   const updateText = useApiCallback(textsAPI.update);
 

@@ -49,7 +49,8 @@ export class IngestionIngest extends Component {
     setDialogClassName: PropTypes.func,
     webSocketConnected: PropTypes.bool,
     webSocketFailure: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
+    sectionIngestion: PropTypes.bool
   };
 
   static defaultProps = {
@@ -111,6 +112,8 @@ export class IngestionIngest extends Component {
   }
 
   get isReingestion() {
+    if (this.props.sectionIngest)
+      return this.props.ingestion.attributes.textSectionId;
     return this.props.ingestion.attributes.textId;
   }
 
@@ -125,6 +128,9 @@ export class IngestionIngest extends Component {
 
   get closeUrl() {
     const { id } = this.props.match.params;
+
+    if (this.props.sectionIngest) return lh.link("backendTextSections", id);
+
     const path = this.props.text
       ? "backendTextIngestionsNew"
       : "backendProjectTexts";
@@ -198,7 +204,9 @@ export class IngestionIngest extends Component {
   }
 
   openSocket(ingestionId) {
-    const options = { ingestion: ingestionId };
+    const options = {
+      ingestion: ingestionId
+    };
     this.props.dispatch(websocketActions.subscribe(this.channelName, options));
   }
 
@@ -262,6 +270,7 @@ export class IngestionIngest extends Component {
           <Heading
             ingestion={this.props.ingestion}
             reingestion={!!this.isReingestion}
+            sectionIngest={this.props.sectionIngest}
           />
           <Actions
             ingestion={this.props.ingestion}

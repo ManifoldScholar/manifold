@@ -10,12 +10,11 @@ class IngestionFormUpload extends PureComponent {
 
   static propTypes = {
     getModelValue: PropTypes.func,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
     cancelUrl: PropTypes.string,
     setOther: PropTypes.func,
     header: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
+    sectionIngest: PropTypes.bool
   };
 
   onSourceChange = source => {
@@ -43,23 +42,49 @@ class IngestionFormUpload extends PureComponent {
     return this.props.getModelValue("attributes[externalSourceUrl]");
   }
 
+  get fileInstructionsText() {
+    return (
+      <Trans
+        i18nKey="texts.ingestion.instructions"
+        components={[
+          <a
+            href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            #
+          </a>
+        ]}
+      />
+    );
+  }
+
+  // TODO: update the link here after docs are updated
+  get fileInstructionsSection() {
+    return (
+      <Trans
+        i18nKey="texts.section.ingest_instructions"
+        components={[
+          <a
+            href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            #
+          </a>
+        ]}
+      />
+    );
+  }
+
   render() {
     const formHeader = this.props.header || t("texts.ingestion.upload_file");
 
+    const isSection = this.props.sectionIngest;
+
     const fileInstructions = (
       <span className="instructions">
-        <Trans
-          i18nKey="texts.ingestion.instructions"
-          components={[
-            <a
-              href="https://manifoldscholar.github.io/manifold-docusaurus/docs/backend/texts#adding-texts"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              #
-            </a>
-          ]}
-        />
+        {isSection ? this.fileInstructionsSection : this.fileInstructionsText}
       </span>
     );
 
@@ -79,7 +104,11 @@ class IngestionFormUpload extends PureComponent {
         </Form.FieldGroup>
         <Form.FieldGroup
           label={t("texts.ingestion.upload_from_url")}
-          instructions={t("texts.ingestion.url_instructions")}
+          instructions={
+            isSection
+              ? t("texts.section.url_instructions")
+              : t("texts.ingestion.url_instructions")
+          }
         >
           <Form.TextInput
             label={t("texts.ingestion.url")}
