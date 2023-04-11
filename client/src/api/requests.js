@@ -60,6 +60,8 @@ export default {
   beTextSectionCreate: "backend-text-section-create",
   beTextSectionUpdate: "backend-text-section-update",
   beTextSectionDestroy: "backend-text-section-destroy",
+  beTextSectionIngest: "backend-text-section-ingest",
+  beTextSectionIngestUpdate: "backend-text-section-ingest-update",
   beProjectUpdate: "backend-project-update",
   beProjectDestroy: "backend-project-destroy",
   beIngestionCreate: "backend-ingestion-create",

@@ -25,5 +25,15 @@ export default {
       method: "GET",
       options: {}
     };
+  },
+
+  createSection(textId, ingestion) {
+    return {
+      endpoint: `/api/v1/texts/${textId}/relationships/ingestions`,
+      method: "POST",
+      options: {
+        body: JSON.stringify({ type: "ingestions", data: ingestion })
+      }
+    };
   }
 };
