@@ -42,14 +42,12 @@ class IngestionHeader extends Component {
   get entityId() {
     const { textId, textSectionId } = this.ingestion.attributes ?? {};
 
-    if (this.props.reingestion) {
-      if (this.props.sectionIngest) return textSectionId;
-      return textId;
-    }
-
     if (this.props.sectionIngest)
-      return this.props.t("texts.section.ingest_id_placeholder");
-    return this.props.t("texts.ingestion.id_placeholder");
+      return (
+        textSectionId ?? this.props.t("texts.section.ingest_id_placeholder")
+      );
+
+    return textId ?? this.props.t("texts.ingestion.id_placeholder");
   }
 
   titleBlock() {

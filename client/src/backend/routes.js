@@ -274,9 +274,9 @@ const routes = {
                   exact: true,
                   component: "TextSectionIngestEdit",
                   path:
-                    "/backend/projects/text/:id/sections/ingestion/:ingestionId/edit",
-                  helper: (t, i) =>
-                    `/backend/projects/text/${t}/sections/ingestion/${i}/edit`,
+                    "/backend/projects/text/:id/sections/:sectionId/ingestion",
+                  helper: (t, s) =>
+                    `/backend/projects/text/${t}/sections/${s}/ingestion`,
                   modal: false
                 },
                 {

@@ -5,30 +5,30 @@ import Navigation from "backend/components/navigation";
 import Ingestion from "backend/components/ingestion";
 import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
-import { ingestionsAPI } from "api";
+import { sectionsAPI } from "api";
 import lh from "helpers/linkHandler";
 
 export default function IngestSectionContainer({ textId }) {
   const { t } = useTranslation();
-  const { ingestionId } = useParams();
+  const { sectionId } = useParams();
 
-  const { data: ingestion } = useFetch({
-    request: [ingestionsAPI.show, ingestionId],
-    condition: !!ingestionId
+  const { data: section } = useFetch({
+    request: [sectionsAPI.show, sectionId],
+    condition: !!sectionId
   });
 
   return (
     <section>
       <Navigation.DrawerHeader
         title={
-          ingestionId
-            ? t("texts.section.reingest", { title: "title" })
+          sectionId
+            ? section?.attributes?.name
             : t("texts.section.ingest_button_label")
         }
       />
       <Ingestion.Form.SectionWrapper
         textId={textId}
-        ingestion={ingestion}
+        sectionId={sectionId}
         cancelUrl={lh.link("backendTextSections", textId)}
       />
     </section>

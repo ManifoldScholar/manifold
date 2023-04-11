@@ -8,8 +8,8 @@ import { ingestionsAPI } from "api";
 import lh from "helpers/linkHandler";
 
 export default function SectionIngestionFormWrapper({
-  ingestion,
   textId,
+  sectionId,
   cancelUrl
 }) {
   const { t } = useTranslation();
@@ -17,7 +17,11 @@ export default function SectionIngestionFormWrapper({
   const location = useLocation();
 
   const createIngestion = model => {
-    return ingestionsAPI.createSection(textId, model);
+    const data = {
+      ...model,
+      relationships: { ...model.relationships, textSection: sectionId }
+    };
+    return ingestionsAPI.createSection(textId, data);
   };
 
   const onSuccess = useCallback(
@@ -31,22 +35,17 @@ export default function SectionIngestionFormWrapper({
     <FormContainer.Form
       doNotWarn
       groupErrors
-      model={ingestion ?? {}}
-      name={
-        ingestion
-          ? "be-text-section-ingestion-update"
-          : "be-text-section-ingestion"
-      }
-      update={ingestionsAPI.update}
+      name={"be-text-section-ingestion"}
       create={createIngestion}
       className="form-secondary"
       onSuccess={onSuccess}
     >
       <Upload
-        header={ingestion ? t("texts.reingest") : undefined}
+        header={sectionId ? t("texts.reingest") : undefined}
         cancelUrl={cancelUrl}
         history={history}
         location={location}
+        sectionId={sectionId}
         sectionIngest
       />
     </FormContainer.Form>
@@ -57,6 +56,6 @@ SectionIngestionFormWrapper.displayName = "Text.SectionIngestion.Form.Wrapper";
 
 SectionIngestionFormWrapper.propTypes = {
   textId: PropTypes.string.isRequired,
-  ingestion: PropTypes.object.isRequired,
+  sectionId: PropTypes.string,
   cancelUrl: PropTypes.string
 };

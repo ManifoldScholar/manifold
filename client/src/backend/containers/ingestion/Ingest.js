@@ -112,9 +112,7 @@ export class IngestionIngest extends Component {
   }
 
   get isReingestion() {
-    if (this.props.sectionIngest)
-      return this.props.ingestion.attributes.textSectionId;
-    return this.props.ingestion.attributes.textId;
+    return this.props.ingestion.attributes.state !== "sleeping";
   }
 
   get editUrl() {
