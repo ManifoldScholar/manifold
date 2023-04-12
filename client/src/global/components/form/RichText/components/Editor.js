@@ -158,7 +158,7 @@ export default function Editor({
               cssVisible={showCss}
             />
             <Styled.EditableWrapper
-              className="manifold-text-section"
+              className="manifold-text-section font-size-2"
               $cssVisible={showCss}
             >
               {!htmlMode && (

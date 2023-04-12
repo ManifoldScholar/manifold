@@ -14,6 +14,7 @@ import * as Styled from "./styles";
 export default function EditSectionForm({
   section,
   textId,
+  globalStylesheet,
   nextPosition,
   refresh
 }) {
@@ -63,6 +64,10 @@ export default function EditSectionForm({
     setWarnErrors
   };
 
+  const stylesheets = Array.isArray(section?.relationships.stylesheets)
+    ? [...section?.relationships.stylesheets, globalStylesheet]
+    : globalStylesheet;
+
   return (
     <div style={{ paddingBottom: "125px" }}>
       <Styled.Form
@@ -84,7 +89,7 @@ export default function EditSectionForm({
           name="attributes[body]"
           sectionId={section?.id}
           sectionBody={section?.attributes.body}
-          stylesheets={section?.relationships.stylesheets}
+          stylesheets={stylesheets}
           {...errorProps}
         />
         <Styled.ButtonOverlay>
