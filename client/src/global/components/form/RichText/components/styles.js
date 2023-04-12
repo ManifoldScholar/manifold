@@ -33,7 +33,7 @@ export const EditorSecondary = styled(Editor)`
 `;
 
 export const EditableWrapper = styled.div`
-  min-height: 825px;
+  min-height: 700px;
   padding-block-end: 4em;
   border: 1px solid var(--TextArea-border-color);
   border-top: 0;
@@ -50,12 +50,22 @@ export const EditableWrapper = styled.div`
 
   .ace_gutter,
   .ace_scroller {
-    min-height: 825px !important;
+    min-height: 700px !important;
     overflow: visible;
     padding-block-start: 2em;
     height: calc(100% + 5.25em);
     border-bottom-left-radius: var(--box-border-radius);
   }
+
+  ${({ $cssVisible }) =>
+    $cssVisible &&
+    `
+    cursor: default;
+    
+    .ace_cursor {
+      display: none;
+    }
+  `}
 `;
 
 export const Editable = styled(BaseEditable)`

@@ -167,22 +167,22 @@ import Users32 from "./32/Users";
 import WarningSign64 from "./64/WarningSign";
 import ZoomIn16 from "./16/ZoomIn";
 import ZoomOut16 from "./16/ZoomOut";
-import Bold16 from "./16/Bold";
-import Italic16 from "./16/Italic";
-import Underline16 from "./16/Underline";
-import UnorderedList16 from "./16/UnorderedList";
-import OrderedList16 from "./16/OrderedList";
-import HeadingOne16 from "./16/HeadingOne";
-import HeadingTwo16 from "./16/HeadingTwo";
-import HeadingThree16 from "./16/HeadingThree";
-import BlockQuote16 from "./16/BlockQuote";
+import Bold24 from "./24/Bold";
+import Italic24 from "./24/Italic";
+import Underline24 from "./24/Underline";
+import UnorderedList24 from "./24/UnorderedList";
+import OrderedList24 from "./24/OrderedList";
+import BlockQuote24 from "./24/BlockQuote";
 import Code16 from "./16/Code";
 import CodeOff16 from "./16/CodeOff";
-import Strikethrough16 from "./16/Strikethrough";
+import Strikethrough24 from "./24/Strikethrough";
 import EditorRTE24 from "./24/EditorRTE";
 import EditorHTML24 from "./24/EditorHTML";
 import DarkMode16 from "./16/DarkMode";
 import LightMode16 from "./16/LightMode";
+import Undo24 from "./24/Undo";
+import Redo24 from "./24/Redo";
+import Iframe24 from "./24/Iframe";
 
 export default {
   ActivityComments64,
@@ -220,8 +220,8 @@ export default {
   BEProject64,
   BEResourcesBox64,
   BEResourcesBoxes64,
-  BlockQuote16,
-  Bold16,
+  BlockQuote24,
+  Bold24,
   Bookmark24,
   Bookmark32,
   Calendar24,
@@ -271,9 +271,7 @@ export default {
   Globe64,
   Grabber32,
   GrabberInactive32,
-  HeadingOne16,
-  HeadingTwo16,
-  HeadingThree16,
+  Iframe24,
   Info16,
   InteractComment16,
   InteractAnnotate24,
@@ -282,7 +280,7 @@ export default {
   InteractAnnotate32,
   InteractHighlight32,
   InteractComment32,
-  Italic16,
+  Italic24,
   Journals64,
   Key32,
   Lamp64,
@@ -303,7 +301,7 @@ export default {
   New64,
   Notes24,
   Notifications24,
-  OrderedList16,
+  OrderedList24,
   PauseSolid24,
   Play16,
   PlaySolid24,
@@ -315,6 +313,7 @@ export default {
   Projects64,
   ReadingGroup24,
   RecentActivity64,
+  Redo24,
   Reload24,
   Reload32,
   Reply16,
@@ -354,7 +353,7 @@ export default {
   StarSquircleFilled32,
   Star24,
   StopSign64,
-  Strikethrough16,
+  Strikethrough24,
   Text24,
   TextsBook64,
   TextsLoosePages64,
@@ -362,8 +361,9 @@ export default {
   TimerClock32,
   Toc64,
   Touch64,
-  Underline16,
-  UnorderedList16,
+  Underline24,
+  Undo24,
+  UnorderedList24,
   Upload32,
   Upload64,
   Users32,

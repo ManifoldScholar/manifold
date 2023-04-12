@@ -87,12 +87,14 @@ export default function EditSectionForm({
           stylesheets={section?.relationships.stylesheets}
           {...errorProps}
         />
-        <Form.DrawerButtons
-          showCancel
-          cancelUrl={lh.link("backendTextSections", textId)}
-          submitLabel="actions.save"
-          disableSubmit={!!hasErrors}
-        />
+        <Styled.ButtonOverlay>
+          <Form.DrawerButtons
+            showCancel
+            cancelUrl={lh.link("backendTextSections", textId)}
+            submitLabel="actions.save"
+            disableSubmit={!!hasErrors}
+          />
+        </Styled.ButtonOverlay>
       </Styled.Form>
     </div>
   );

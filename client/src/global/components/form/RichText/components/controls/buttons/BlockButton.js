@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 
 const LIST_TYPES = ["ol", "ul"];
 
-const isBlockActive = (editor, format, blockType = "type") => {
+export const isBlockActive = (editor, format, blockType = "type") => {
   const { selection } = editor;
   if (!selection) return false;
 
