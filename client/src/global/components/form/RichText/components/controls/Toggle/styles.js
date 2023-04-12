@@ -20,8 +20,8 @@ export const Button = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding-right: 15px;
-  padding-left: 15px;
+  gap: 8px;
+  padding-inline: ${({ $padding }) => $padding};
   font-size: 14px;
   font-weight: var(--font-weight-medium);
   text-decoration: none;
@@ -49,9 +49,8 @@ export const Button = styled.button`
   svg {
     width: 24px;
     height: 24px;
-    margin-right: 6px;
-    margin-left: -5px;
     padding-bottom: 2px;
+    margin: 0;
   }
 
   &:hover {
