@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-function Strikethrough(props) {
+function Redo(props) {
   const { className, size, fill, svgProps } = props;
 
   const getSize = () => {
     if (size === "inherit") return null;
-    if (!size || size === "default") return 18;
+    if (!size || size === "default") return 24;
     return size;
   };
   const baseSvgProps = {
@@ -15,17 +15,17 @@ function Strikethrough(props) {
     className: classNames("manicon-svg", className),
     width: getSize(),
     height: getSize(),
-    viewBox: "0 0 16 16",
+    viewBox: "0 0 24 24",
     fill
   };
   return (
     <svg {...baseSvgProps} {...svgProps}>
-      <path d="M6.333 5.686c0 .31.083.581.27.814H5.166a2.776 2.776 0 0 1-.099-.76c0-1.627 1.436-2.768 3.48-2.768 1.969 0 3.39 1.175 3.445 2.85h-1.23c-.11-1.08-.964-1.743-2.25-1.743-1.23 0-2.18.602-2.18 1.607zm2.194 7.478c-2.153 0-3.589-1.107-3.705-2.81h1.23c.144 1.06 1.129 1.703 2.544 1.703 1.34 0 2.31-.705 2.31-1.675 0-.827-.547-1.374-1.914-1.675L8.046 8.5H1v-1h14v1h-3.504c.468.437.675.994.675 1.697 0 1.826-1.436 2.967-3.644 2.967z" />
+      <path d="M11.5 10.25H19.1156L16.8737 8.00875L17.75 7.125L21.5 10.875L17.75 14.625L16.8737 13.7406L19.1137 11.5H11.5C10.5054 11.5 9.55161 11.8951 8.84835 12.5983C8.14509 13.3016 7.75 14.2554 7.75 15.25C7.75 16.2446 8.14509 17.1984 8.84835 17.9017C9.55161 18.6049 10.5054 19 11.5 19H16.5V20.25H11.5C10.1739 20.25 8.90215 19.7232 7.96447 18.7855C7.02678 17.8479 6.5 16.5761 6.5 15.25C6.5 13.9239 7.02678 12.6521 7.96447 11.7145C8.90215 10.7768 10.1739 10.25 11.5 10.25Z" />
     </svg>
   );
 }
 
-Strikethrough.propTypes = {
+Redo.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   stroke: PropTypes.string,
@@ -33,4 +33,4 @@ Strikethrough.propTypes = {
   svgProps: PropTypes.object
 };
 
-export default Strikethrough;
+export default Redo;

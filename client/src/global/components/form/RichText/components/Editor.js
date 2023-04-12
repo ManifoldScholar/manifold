@@ -27,8 +27,10 @@ export default function Editor({
   if (!editorRef.current)
     editorRef.current = withHistory(withReact(withPlugins(createEditor())));
   const editor = editorRef.current;
+  const aceRef = useRef();
 
   const [htmlMode, toggleHtmlMode] = useState(true);
+  const [showCss, toggleCss] = useState(false);
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
   const prevSlate = useRef(initialSlateValue);
@@ -79,6 +81,7 @@ export default function Editor({
 
     const html = formatHtml(serializeToHtml(localSlate));
     setLocalHtml(html);
+    toggleCss(false);
     return toggleHtmlMode(true);
   };
 
@@ -98,16 +101,44 @@ export default function Editor({
     setHasErrors(errorFound);
   };
 
-  const codeAreaProps = {
+  const htmlProps = {
     onChange: onChangeHtml,
     value: localHtml,
-    onValidate: onValidateHtml
+    onValidate: onValidateHtml,
+    mode: "html",
+    aceRef
+  };
+
+  const cssProps = {
+    value: theme,
+    mode: "css",
+    readOnly: true,
+    onValidate: () => {}
+  };
+
+  const codeAreaProps = showCss ? cssProps : htmlProps;
+
+  const toggleStyles = e => {
+    e.preventDefault();
+    toggleCss(!showCss);
   };
 
   const handleError = ({ resetErrorBoundary }) => {
     HistoryEditor.undo(editor);
     resetErrorBoundary();
     return null;
+  };
+
+  const onClickUndo = e => {
+    e.preventDefault();
+    if (!htmlMode) return HistoryEditor.undo(editor);
+    aceRef.current.editor.undo();
+  };
+
+  const onClickRedo = e => {
+    e.preventDefault();
+    if (!htmlMode) return HistoryEditor.redo(editor);
+    aceRef.current.editor.redo();
   };
 
   return (
@@ -121,8 +152,15 @@ export default function Editor({
               selection={lastActiveSelection}
               htmlMode={htmlMode}
               onClickEditorToggle={onClickToggle}
+              onClickUndo={onClickUndo}
+              onClickRedo={onClickRedo}
+              toggleStyles={toggleStyles}
+              cssVisible={showCss}
             />
-            <Styled.EditableWrapper className="manifold-text-section">
+            <Styled.EditableWrapper
+              className="manifold-text-section"
+              $cssVisible={showCss}
+            >
               {!htmlMode && (
                 <Styled.Editable
                   as="div"

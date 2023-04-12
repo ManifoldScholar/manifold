@@ -1,11 +1,15 @@
 import React from "react";
-import { Toolbar, ToggleBar } from "./controls";
+import { ToolbarRTE, ToolbarHTML, ToggleBar } from "./controls";
 import * as Styled from "./styles";
 
 export default function EditorControls({
   htmlMode,
+  cssVisible,
   onClickEditorToggle,
-  selection
+  selection,
+  onClickRedo,
+  onClickUndo,
+  toggleStyles
 }) {
   return (
     <Styled.Controls>
@@ -13,7 +17,20 @@ export default function EditorControls({
         htmlMode={htmlMode}
         onClickEditorToggle={onClickEditorToggle}
       />
-      <Toolbar selection={selection} />
+      {htmlMode ? (
+        <ToolbarHTML
+          onClickUndo={onClickUndo}
+          onClickRedo={onClickRedo}
+          toggleStyles={toggleStyles}
+          cssVisible={cssVisible}
+        />
+      ) : (
+        <ToolbarRTE
+          selection={selection}
+          onClickUndo={onClickUndo}
+          onClickRedo={onClickRedo}
+        />
+      )}
     </Styled.Controls>
   );
 }
