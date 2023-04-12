@@ -28,7 +28,10 @@ export const renderedElements = [
   "br",
   "section",
   "figcaption",
-  "hr"
+  "hr",
+  "abbr",
+  "sub",
+  "sup"
 ];
 
 // These elements are applied as marks to text leaves in Slate. They can be added and removed in the RTE. This probably needs some adjustment. For example, currently both del and s become "strikethrough" when serialized to Slate and there's no way to tell what the original tag was.

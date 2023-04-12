@@ -156,6 +156,13 @@ export const htmlToSlate = html => {
       }
     ];
   }
+  if (!slateContent.length)
+    return [
+      {
+        type: "section",
+        children: [{ type: "p", children: [{ text: "" }] }]
+      }
+    ];
 
   return slateContent;
 };
