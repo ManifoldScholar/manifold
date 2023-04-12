@@ -2,11 +2,10 @@ import React from "react";
 import {
   MarkButton,
   BlockButton,
-  ToggleHTML,
   LinkButton,
   ImageButton,
   IframeButton
-} from "./controls";
+} from "./buttons";
 import {
   MenuBar as ReakitMenuBar,
   MenuItem as ReakitMenuItem,
@@ -14,7 +13,7 @@ import {
 } from "reakit/Menu";
 import * as Styled from "./styles";
 
-export default function Toolbar({ selection, htmlMode, onClickToggle }) {
+export default function Toolbar({ selection }) {
   const menu = useMenuBarState({
     orientation: "horizontal",
     loop: true,
@@ -116,7 +115,6 @@ export default function Toolbar({ selection, htmlMode, onClickToggle }) {
           {...menu}
         />
       </ReakitMenuBar>
-      <ToggleHTML icon="code16" active={htmlMode} onClick={onClickToggle} />
     </Styled.Toolbar>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useCallback, useState, useMemo } from "react";
 import PropTypes from "prop-types";
-import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
@@ -10,8 +9,9 @@ import {
   serializeToHtml,
   serializeToSlate
 } from "global/components/form/RichText/serializers";
+import * as Styled from "./styles";
 
-export default function AddEditSectionForm({
+export default function EditSectionForm({
   section,
   textId,
   nextPosition,
@@ -64,43 +64,43 @@ export default function AddEditSectionForm({
   };
 
   return (
-    <FormContainer.Form
-      model={section ?? defaultModel}
-      name={section ? "be-text-section-update" : "be-text-section-create"}
-      className="form-secondary"
-      onSuccess={onSuccess}
-      formatData={formatData}
-      create={createSection}
-      update={sectionsAPI.update}
-    >
-      <Form.TextInput
-        focusOnMount
-        label={t("texts.section.section_name")}
-        placeholder={t("texts.section.section_name")}
-        name="attributes[name]"
-      />
-      <Form.RichText
-        label={t("texts.section.content_label")}
-        instructions={"Rich text section content"}
-        name="attributes[body]"
-        sectionId={section?.id}
-        sectionBody={section?.attributes.body}
-        stylesheets={section?.relationships.stylesheets}
-        {...errorProps}
-      />
-      <Form.DrawerButtons
-        showCancel
-        cancelUrl={lh.link("backendTextSections", textId)}
-        submitLabel="texts.section.save_button_label"
-        disableSubmit={!!hasErrors}
-      />
-    </FormContainer.Form>
+    <div style={{ paddingBottom: "125px" }}>
+      <Styled.Form
+        model={section ?? defaultModel}
+        name={section ? "be-text-section-update" : "be-text-section-create"}
+        className="form-secondary"
+        onSuccess={onSuccess}
+        formatData={formatData}
+        create={createSection}
+        update={sectionsAPI.update}
+      >
+        <Form.TextInput
+          focusOnMount
+          label={t("texts.section.section_name")}
+          placeholder={t("texts.section.section_name")}
+          name="attributes[name]"
+        />
+        <Form.RichText
+          name="attributes[body]"
+          sectionId={section?.id}
+          sectionBody={section?.attributes.body}
+          stylesheets={section?.relationships.stylesheets}
+          {...errorProps}
+        />
+        <Form.DrawerButtons
+          showCancel
+          cancelUrl={lh.link("backendTextSections", textId)}
+          submitLabel="actions.save"
+          disableSubmit={!!hasErrors}
+        />
+      </Styled.Form>
+    </div>
   );
 }
 
-AddEditSectionForm.displayName = "Text.Sections.AddEditForm";
+EditSectionForm.displayName = "Text.Sections.AddEditForm";
 
-AddEditSectionForm.propTypes = {
+EditSectionForm.propTypes = {
   textId: PropTypes.string.isRequired,
   section: PropTypes.object,
   refresh: PropTypes.func,

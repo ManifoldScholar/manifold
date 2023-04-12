@@ -32,8 +32,11 @@ export default function TextSectionsContainer({
             lockScrollClickCloses: false,
             wide: true,
             closeUrl,
-            size: "fixed",
-            padding: "xl"
+            padding: "xl",
+            context: "editor",
+            entrySide: "top",
+            fullScreenTitle: t("texts.edit_section"),
+            icon: "annotate32"
           },
           childProps: {
             textId: text.id,

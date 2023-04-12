@@ -4,7 +4,8 @@ import {
   utilityPrimary,
   defaultHoverStyle,
   respond,
-  drawerPadding
+  drawerPadding,
+  headingQuaternary
 } from "theme/styles/mixins";
 import Utility from "global/components/utility";
 
@@ -32,6 +33,11 @@ export const Bar = styled.div`
       65
     )}
   `}
+
+  ${({ $padBottom }) =>
+    $padBottom &&
+    `padding-block-end: 50px;
+    ${respond(`padding-bottom: 50px;`, 50)}`}
 `;
 
 export const BarReader = styled.div`
@@ -99,4 +105,22 @@ export const CloseText = styled.span`
 export const CloseIcon = styled(Utility.IconComposer)`
   width: ${CLOSE_ICON_SIZE};
   height: ${CLOSE_ICON_SIZE};
+`;
+
+export const FullScreenTitle = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-right: auto;
+`;
+
+export const FullScreenTitleText = styled.h1`
+  ${headingQuaternary}
+  font-weight: var(--font-weight-semibold);
+`;
+
+export const FullScreenTitleIcon = styled(Utility.IconComposer)`
+  position: relative;
+  top: 2px;
+  color: var(--color-accent-primary);
 `;

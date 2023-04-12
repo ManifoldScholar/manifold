@@ -146,3 +146,46 @@ export const DrawerOverlay = styled(Drawer)`
 
   top: 0;
 `;
+
+function editorDrawerTransition(selector = "&", prefix = "drawer") {
+  return `
+    .${prefix}-enter ~ ${selector},
+    .${prefix}-enter ${selector} {
+      transform: translateY(-100%);
+    }
+
+    .${prefix}-enter-active ~ ${selector},
+    .${prefix}-enter-active ${selector} {
+      transition: transform 0.75s ease-out;
+      transform: translateY(0);
+    }
+
+    .${prefix}-exit ~ ${selector},
+    .${prefix}-exit ${selector} {
+      transform: translateY(0);
+    }
+
+    .${prefix}-exit.${prefix}-exit-active ~ ${selector},
+    .${prefix}-exit.${prefix}-exit-active ${selector} {
+      transition: transform 0.5s ease-out;
+      transform: translateY(-100%);
+    }
+  `;
+}
+
+export const DrawerEditor = styled(Drawer)`
+  width: 100vw !important;
+  min-height: 100vh;
+  padding: 80px var(--container-padding-inline-responsive) 160px !important;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  z-index: 500;
+  ${editorDrawerTransition()}
+`;
+
+export const DrawerEditorInner = styled.div`
+  max-width: 1040px;
+  max-height: 500px;
+  margin: auto;
+`;

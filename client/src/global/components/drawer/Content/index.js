@@ -57,9 +57,13 @@ function DrawerContent(props, ref) {
   const Drawer =
     context === "reader"
       ? Styled.DrawerReader
+      : context === "editor"
+      ? Styled.DrawerEditor
       : position === "overlay"
       ? Styled.DrawerOverlay
       : Styled.Drawer;
+
+  const Inner = context === "editor" ? Styled.DrawerEditorInner : "div";
 
   // A variety of other classes depend on .drawer--backend
   const classes = classNames(entrySide, size, `pad-${padding}`, {
@@ -85,7 +89,7 @@ function DrawerContent(props, ref) {
           returnFocusOnDeactivate
         }}
       >
-        <div>
+        <Inner>
           <FrontMatter {...props} />
           {(connected || showNotifications) && (
             <Notifications scope="drawer" style="drawer" animate={false} />
@@ -98,7 +102,7 @@ function DrawerContent(props, ref) {
                     closeDrawer: handleLeaveEvent
                   }))}
           </DrawerContext.Provider>
-        </div>
+        </Inner>
       </FocusTrap>
     </Drawer>
   );

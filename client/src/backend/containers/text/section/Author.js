@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Navigation from "backend/components/navigation";
-import AddEditSectionForm from "backend/components/authoring/AddEditSectionForm";
+import EditSectionForm from "backend/components/authoring/EditSectionForm";
 import AddSectionForm from "backend/components/authoring/AddSectionForm";
 import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
@@ -19,17 +19,15 @@ export default function AuthorSectionContainer(props) {
 
   return (
     <section>
-      <Navigation.DrawerHeader
-        title={
-          sectionId
-            ? t("texts.edit_section")
-            : t("texts.add_section_button_label")
-        }
-      />
       {sectionId ? (
-        section && <AddEditSectionForm section={section} {...props} />
+        section && <EditSectionForm section={section} {...props} />
       ) : (
-        <AddSectionForm {...props} />
+        <>
+          <Navigation.DrawerHeader
+            title={t("texts.add_section_button_label")}
+          />
+          <AddSectionForm {...props} />
+        </>
       )}
     </section>
   );
