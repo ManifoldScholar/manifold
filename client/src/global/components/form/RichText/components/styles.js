@@ -60,8 +60,6 @@ export const EditableWrapper = styled.div`
   ${({ $cssVisible }) =>
     $cssVisible &&
     `
-    cursor: default;
-    
     .ace_cursor {
       display: none;
     }
@@ -72,6 +70,9 @@ export const Editable = styled(BaseEditable)`
   max-width: 750px;
   margin: auto;
   padding-block: 4em;
+  font-family: var(--font-family-copy);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.761;
 `;
 
 export const Controls = styled.div`

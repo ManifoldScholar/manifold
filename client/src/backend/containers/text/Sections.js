@@ -23,6 +23,10 @@ export default function TextSectionsContainer({
     const drawerRoutes = { ...route, routes: routes.filter(r => !r.editor) };
     const editorRoute = { ...route, routes: [routes.find(r => r.editor)] };
 
+    const globalStylesheet = text.relationships.stylesheets?.find(
+      s => s.attributes.appliesToAllTextSections
+    );
+
     return (
       <>
         {childRoutes(editorRoute, {
@@ -40,6 +44,7 @@ export default function TextSectionsContainer({
           },
           childProps: {
             textId: text.id,
+            globalStylesheet,
             nextPosition: text.attributes?.sectionsMap?.length + 1,
             refresh
           }
