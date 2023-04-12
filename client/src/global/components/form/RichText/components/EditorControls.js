@@ -5,7 +5,9 @@ import * as Styled from "./styles";
 export default function EditorControls({
   htmlMode,
   cssVisible,
+  darkMode,
   onClickEditorToggle,
+  onClickDarkModeToggle,
   selection,
   onClickRedo,
   onClickUndo,
@@ -15,7 +17,9 @@ export default function EditorControls({
     <Styled.Controls>
       <ToggleBar
         htmlMode={htmlMode}
+        darkMode={darkMode}
         onClickEditorToggle={onClickEditorToggle}
+        onClickDarkModeToggle={onClickDarkModeToggle}
       />
       {htmlMode ? (
         <ToolbarHTML

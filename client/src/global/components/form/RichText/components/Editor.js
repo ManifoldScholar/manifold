@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
+import classNames from "classnames";
 import { createEditor, Transforms } from "slate";
 import { Slate, withReact, ReactEditor } from "slate-react";
 import { withHistory, HistoryEditor } from "slate-history";
@@ -31,6 +32,8 @@ export default function Editor({
 
   const [htmlMode, toggleHtmlMode] = useState(true);
   const [showCss, toggleCss] = useState(false);
+  const [darkMode, toggleDarkMode] = useState(true);
+
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
   const prevSlate = useRef(initialSlateValue);
@@ -141,6 +144,16 @@ export default function Editor({
     aceRef.current.editor.redo();
   };
 
+  const wrapperClasses = classNames("manifold-text-section font-size-2", {
+    "scheme-dark": darkMode,
+    "scheme-light": !darkMode
+  });
+
+  const onClickDarkModeToggle = e => {
+    e.preventDefault();
+    toggleDarkMode(!darkMode);
+  };
+
   return (
     <>
       <Styled.EditorSecondary
@@ -151,14 +164,16 @@ export default function Editor({
             <Controls
               selection={lastActiveSelection}
               htmlMode={htmlMode}
+              darkMode={darkMode}
               onClickEditorToggle={onClickToggle}
+              onClickDarkModeToggle={onClickDarkModeToggle}
               onClickUndo={onClickUndo}
               onClickRedo={onClickRedo}
               toggleStyles={toggleStyles}
               cssVisible={showCss}
             />
             <Styled.EditableWrapper
-              className="manifold-text-section font-size-2"
+              className={wrapperClasses}
               $cssVisible={showCss}
             >
               {!htmlMode && (
