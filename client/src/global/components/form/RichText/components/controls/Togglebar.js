@@ -2,7 +2,12 @@ import React from "react";
 import Toggle from "./Toggle";
 import * as Styled from "./styles";
 
-export default function ToggleBar({ htmlMode, onClickEditorToggle }) {
+export default function ToggleBar({
+  htmlMode,
+  onClickEditorToggle,
+  darkMode,
+  onClickDarkModeToggle
+}) {
   return (
     <Styled.ToggleBar>
       <Toggle
@@ -27,15 +32,15 @@ export default function ToggleBar({ htmlMode, onClickEditorToggle }) {
             label: "Dark",
             icon: "darkMode16",
             iconSize: 12,
-            active: true,
-            onClick: e => e.preventDefault()
+            active: darkMode,
+            onClick: onClickDarkModeToggle
           },
           {
             label: "Light",
             icon: "lightMode16",
             iconSize: 12,
-            active: false,
-            onClick: e => e.preventDefault()
+            active: !darkMode,
+            onClick: onClickDarkModeToggle
           }
         ]}
         padding="16px"
