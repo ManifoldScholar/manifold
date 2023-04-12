@@ -9,11 +9,13 @@ export default function ToggleBar({ htmlMode, onClickEditorToggle }) {
         options={[
           {
             label: "HTML Editor",
+            icon: "editorHTML24",
             active: htmlMode,
             onClick: onClickEditorToggle
           },
           {
             label: "Rich Text Editor",
+            icon: "editorRTE24",
             active: !htmlMode,
             onClick: onClickEditorToggle
           }
@@ -21,9 +23,22 @@ export default function ToggleBar({ htmlMode, onClickEditorToggle }) {
       />
       <Toggle
         options={[
-          { label: "Dark", active: true },
-          { label: "Light", active: false }
+          {
+            label: "Dark",
+            icon: "darkMode16",
+            iconSize: 12,
+            active: true,
+            onClick: e => e.preventDefault()
+          },
+          {
+            label: "Light",
+            icon: "lightMode16",
+            iconSize: 12,
+            active: false,
+            onClick: e => e.preventDefault()
+          }
         ]}
+        padding="16px"
       />
     </Styled.ToggleBar>
   );

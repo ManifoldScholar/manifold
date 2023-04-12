@@ -179,6 +179,10 @@ import BlockQuote16 from "./16/BlockQuote";
 import Code16 from "./16/Code";
 import CodeOff16 from "./16/CodeOff";
 import Strikethrough16 from "./16/Strikethrough";
+import EditorRTE24 from "./24/EditorRTE";
+import EditorHTML24 from "./24/EditorHTML";
+import DarkMode16 from "./16/DarkMode";
+import LightMode16 from "./16/LightMode";
 
 export default {
   ActivityComments64,
@@ -240,6 +244,7 @@ export default {
   CommentPencil32,
   CommentPost32,
   Copy24,
+  DarkMode16,
   Delete24,
   Delete32,
   DisclosureDown16,
@@ -252,6 +257,8 @@ export default {
   Duplicate24,
   Duplicate32,
   EditProfile24,
+  EditorHTML24,
+  EditorRTE24,
   Export24,
   EyeClosed32,
   EyeOpen16,
@@ -280,6 +287,7 @@ export default {
   Key32,
   Lamp64,
   LanguageGlobe24,
+  LightMode16,
   Lightning24,
   Link24,
   Lock16,
