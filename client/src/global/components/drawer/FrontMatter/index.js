@@ -14,7 +14,8 @@ export default function FrontMatter(props) {
     includeDrawerFrontMatter = true,
     includeSRCloseButton = true,
     headerId,
-    handleLeaveEvent
+    handleLeaveEvent,
+    fullScreenTitle
   } = props;
 
   const hasTitle = title || icon;
@@ -27,8 +28,8 @@ export default function FrontMatter(props) {
   return (
     <>
       {includeDrawerFrontMatter && (
-        <Bar $padLateral={padding === "none"}>
-          {hasTitle ? (
+        <Bar $padLateral={padding === "none"} $padBottom={!!fullScreenTitle}>
+          {hasTitle && !fullScreenTitle ? (
             <Styled.Title>
               {icon && <Styled.TitleIcon icon={icon} size={24} />}
               {title && (
@@ -37,6 +38,16 @@ export default function FrontMatter(props) {
                 </span>
               )}
             </Styled.Title>
+          ) : null}
+          {fullScreenTitle ? (
+            <Styled.FullScreenTitle>
+              {icon && <Styled.FullScreenTitleIcon icon={icon} size={32} />}
+              <Styled.FullScreenTitleText id={headerId}>
+                {typeof fullScreenTitle === "object"
+                  ? t(fullScreenTitle.key)
+                  : fullScreenTitle}
+              </Styled.FullScreenTitleText>
+            </Styled.FullScreenTitle>
           ) : null}
           {hasClose ? (
             <Styled.CloseButton

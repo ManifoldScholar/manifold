@@ -7,7 +7,7 @@ import {
   Path,
   Node
 } from "slate";
-import { toggleBlock } from "../components/controls/BlockButton";
+import { toggleBlock } from "../components/controls/buttons/BlockButton";
 import { inlineNodes } from "../utils/elements";
 import { getTextContent } from "../transforms/utils";
 

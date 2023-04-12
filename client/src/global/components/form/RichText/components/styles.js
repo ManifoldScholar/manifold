@@ -5,9 +5,10 @@ import { Editable as BaseEditable } from "slate-react";
 export const Editor = styled.div`
   width: 100%;
   resize: vertical;
-  border: 1px solid var(--TextArea-border-color);
   outline: none;
   transition: border-color ${defaultTransitionProps};
+  position: relative;
+  border-radius: var(--box-border-radius);
 
   &:focus-visible {
     border-color: var(--TextArea-focus-color);
@@ -31,24 +32,42 @@ export const EditorSecondary = styled(Editor)`
   }
 `;
 
-export const Toolbar = styled.div`
-  width: 100%;
-  display: flex;
-  border-bottom: 1px solid var(--textarea-border-color);
-  padding-inline: 1.25em;
-`;
-
 export const EditableWrapper = styled.div`
-  height: 800px;
-  overflow-y: scroll;
+  min-height: 825px;
+  padding-block-end: 4em;
+  border: 1px solid var(--TextArea-border-color);
+  border-top: 0;
+  border-bottom-left-radius: var(--box-border-radius);
+  border-bottom-right-radius: var(--box-border-radius);
+  background-color: var(--background-color);
 
   .ace_editor {
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
+    border: 0;
+    overflow: visible;
+  }
+
+  .ace_gutter,
+  .ace_scroller {
+    min-height: 825px !important;
+    overflow: visible;
+    padding-block-start: 2em;
+    height: calc(100% + 5.25em);
+    border-bottom-left-radius: var(--box-border-radius);
   }
 `;
 
 export const Editable = styled(BaseEditable)`
-  padding-inline: 1.25em;
-  margin-block-start: 1.25em;
+  max-width: 750px;
+  margin: auto;
+  padding-block: 4em;
+`;
+
+export const Controls = styled.div`
+  position: sticky;
+  top: -80px;
+  z-index: 200;
+  background-color: var(--drawer-bg-color);
+  padding-top: 30px;
 `;

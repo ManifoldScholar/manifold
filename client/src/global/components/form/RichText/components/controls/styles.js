@@ -1,43 +1,18 @@
 import styled from "@emotion/styled";
-import { buttonUnstyled, defaultTransitionProps } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
-export const Button = styled("button", transientOptions)`
-  ${buttonUnstyled}
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding-block: 1em;
-  color: var(--strong-color);
-  background-color: none;
-  transition: color ${defaultTransitionProps},
-    background-color ${defaultTransitionProps};
-  font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-semibold);
-  padding-inline: 10px;
-
-  &:hover {
-    color: var(--strong-color);
-    color: var(--color-accent-primary);
-  }
-
-  &[data-active="true"] {
-    color: var(--color-accent-primary-medium);
-  }
-
-  &:first-child {
-    margin-inline-start: -10px;
-  }
+export const Toolbar = styled.div`
+  width: 100%;
+  display: flex;
+  border: 1px solid var(--textarea-border-color);
+  padding-inline: 1.25em;
+  background-color: var(--drawer-bg-color);
+  border-top-left-radius: var(--box-border-radius);
+  border-top-right-radius: var(--box-border-radius);
 `;
 
-export const HTMLToggle = styled.button`
-  color: var(--color-accent-primary);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  width: 30px;
-  margin-inline-start: auto;
-  align-self: center;
-  border-radius: 4px;
+export const ToggleBar = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-block-end: 32px;
 `;

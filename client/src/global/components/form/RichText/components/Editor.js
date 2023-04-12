@@ -3,10 +3,10 @@ import { createEditor, Transforms } from "slate";
 import { Slate, withReact, ReactEditor } from "slate-react";
 import { withHistory, HistoryEditor } from "slate-history";
 import { Leaf, Element } from "./renderers";
-import Toolbar from "./Toolbar";
 import { captureHotKeys } from "../transforms";
 import { serializeToHtml, serializeToSlate } from "../serializers";
 import { HtmlEditor } from "./HtmlEditor";
+import Controls from "./EditorControls";
 import withPlugins from "../plugins";
 import { clearSlate, formatHtml } from "../utils/helpers";
 import { ErrorBoundary } from "react-error-boundary";
@@ -28,7 +28,7 @@ export default function Editor({
     editorRef.current = withHistory(withReact(withPlugins(createEditor())));
   const editor = editorRef.current;
 
-  const [htmlMode, toggleHtmlMode] = useState(false);
+  const [htmlMode, toggleHtmlMode] = useState(true);
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
   const prevSlate = useRef(initialSlateValue);
@@ -111,40 +111,42 @@ export default function Editor({
   };
 
   return (
-    <Styled.EditorSecondary
-      className={hasErrors && warnErrors ? "error" : undefined}
-    >
-      <ErrorBoundary fallbackRender={handleError}>
-        <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
-          <Toolbar
-            selection={lastActiveSelection}
-            htmlMode={htmlMode}
-            onClickToggle={onClickToggle}
-          />
-          <Styled.EditableWrapper className="manifold-text-section">
-            {!htmlMode && (
-              <Styled.Editable
-                as="div"
-                renderElement={renderElement}
-                renderLeaf={renderLeaf}
-                placeholder="Section body..."
-                spellCheck={false}
-                onKeyDown={e => captureHotKeys(e, editor)}
-                onBlur={onEditorBlur}
-                onFocus={onEditorFocus}
+    <>
+      <Styled.EditorSecondary
+        className={hasErrors && warnErrors ? "error" : undefined}
+      >
+        <ErrorBoundary fallbackRender={handleError}>
+          <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
+            <Controls
+              selection={lastActiveSelection}
+              htmlMode={htmlMode}
+              onClickEditorToggle={onClickToggle}
+            />
+            <Styled.EditableWrapper className="manifold-text-section">
+              {!htmlMode && (
+                <Styled.Editable
+                  as="div"
+                  renderElement={renderElement}
+                  renderLeaf={renderLeaf}
+                  placeholder="Section body..."
+                  spellCheck={false}
+                  onKeyDown={e => captureHotKeys(e, editor)}
+                  onBlur={onEditorBlur}
+                  onFocus={onEditorFocus}
+                />
+              )}
+              {htmlMode && <HtmlEditor {...codeAreaProps} />}
+            </Styled.EditableWrapper>
+            {theme && !htmlMode && (
+              <style
+                dangerouslySetInnerHTML={{
+                  __html: theme
+                }}
               />
             )}
-            {htmlMode && <HtmlEditor {...codeAreaProps} />}
-          </Styled.EditableWrapper>
-          {theme && !htmlMode && (
-            <style
-              dangerouslySetInnerHTML={{
-                __html: theme
-              }}
-            />
-          )}
-        </Slate>
-      </ErrorBoundary>
-    </Styled.EditorSecondary>
+          </Slate>
+        </ErrorBoundary>
+      </Styled.EditorSecondary>
+    </>
   );
 }

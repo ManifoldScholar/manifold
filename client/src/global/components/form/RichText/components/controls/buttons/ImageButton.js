@@ -2,30 +2,31 @@ import React, { forwardRef } from "react";
 import { Transforms } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
-import { isValidUrl } from "../../utils/helpers";
+import { isImageUrl } from "../../../utils/helpers";
 import * as Styled from "./styles";
 
-export const insertIframe = (editor, url) => {
+// Maybe do something fancier here to prevent images from ending up alone in pargraphs?
+export const insertImage = (editor, url) => {
   const text = { text: "" };
-  const embed = { type: "iframe", htmlAttrs: { src: url }, children: [text] };
-  Transforms.insertNodes(editor, embed);
+  const image = { type: "img", htmlAttrs: { src: url }, children: [text] };
+  Transforms.insertNodes(editor, image);
   ReactEditor.focus(editor);
 };
 
-const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
+const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
   const editor = useSlate();
   const onClick = () => {
     event.preventDefault();
     Transforms.select(editor, selection);
-    const url = window.prompt("Enter the URL of the embed:");
-    if (!isValidUrl(url)) return ReactEditor.focus(editor);
-    return insertIframe(editor, url);
+    const url = window.prompt("Enter the URL of the image:");
+    if (!isImageUrl(url)) return ReactEditor.focus(editor);
+    return insertImage(editor, url);
   };
   return (
     <Styled.Button
       ref={ref}
       {...rest}
-      aria-label="iframe"
+      aria-label="image"
       onClick={onClick}
       tabIndex={-1}
     >
@@ -34,4 +35,4 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
   );
 };
 
-export default forwardRef(IframeButton);
+export default forwardRef(ImageButton);

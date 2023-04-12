@@ -1,5 +1,5 @@
-import { toggleMark } from "../components/controls/MarkButton";
-import { toggleBlock } from "../components/controls/BlockButton";
+import { toggleMark } from "../components/controls/buttons/MarkButton";
+import { toggleBlock } from "../components/controls/buttons/BlockButton";
 import { Editor as SlateEditor, Transforms, Path } from "slate";
 import { rteElements, inlineNodes } from "../utils/elements";
 import { increaseIndent, decreaseIndent } from "./indents";
