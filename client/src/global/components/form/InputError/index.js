@@ -7,7 +7,8 @@ export default class InputError extends Component {
   static propTypes = {
     errors: PropTypes.array,
     name: PropTypes.string,
-    idForError: PropTypes.string
+    idForError: PropTypes.string,
+    className: PropTypes.string
   };
 
   hasErrors = () => {
@@ -15,6 +16,9 @@ export default class InputError extends Component {
   };
 
   errorString(error) {
+    if (error.detail.split(".").length > 1) {
+      return error.detail;
+    }
     const out = `${capitalize(error.detail)}`;
     if (out.endsWith(".") || out.endsWith("?")) return out;
     return `${out}.`;
@@ -29,6 +33,7 @@ export default class InputError extends Component {
           role="alert"
           aria-live="polite"
           aria-atomic="true"
+          className={this.props.className}
         >
           {this.props.errors.map((e, i) => {
             return <Styled.Error key={i}>{this.errorString(e)}</Styled.Error>;

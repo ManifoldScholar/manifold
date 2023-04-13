@@ -1,11 +1,9 @@
 import React, { useMemo } from "react";
-import Errorable from "../Errorable";
 import { Editor } from "./components";
-import BaseLabel from "../BaseLabel";
-import Instructions from "../Instructions";
 import setter from "../setter";
 import { serializeToSlate } from "./serializers";
 import { formatHtml } from "./utils/helpers";
+import FieldWrapper from "../FieldWrapper";
 
 const defaultValue = [
   {
@@ -27,8 +25,6 @@ const getInitialHtmlValue = value => {
 function RichText({
   name,
   errors,
-  label,
-  instructions,
   set,
   stylesheets,
   sectionId,
@@ -45,11 +41,7 @@ function RichText({
   ]);
 
   return (
-    <Errorable className="wide" name={name} errors={errors} label={label}>
-      {label && (
-        <BaseLabel as="h4" label={label} hasInstructions={!!instructions} />
-      )}
-      {instructions ? <Instructions instructions={instructions} /> : null}
+    <FieldWrapper className="wide">
       <Editor
         set={set}
         initialSlateValue={initialSlateValue}
@@ -57,7 +49,7 @@ function RichText({
         stylesheets={stylesheets}
         {...props}
       />
-    </Errorable>
+    </FieldWrapper>
   );
 }
 

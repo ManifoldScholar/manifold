@@ -4,7 +4,8 @@ export const Toolbar = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  border: 1px solid var(--textarea-border-color);
+  border: 1px solid var(--TextArea-border-color);
+  border-bottom-color: var(--textarea-border-color);
   padding-inline: 1.25em;
   background-color: var(--drawer-bg-color);
   border-top-left-radius: var(--box-border-radius);
