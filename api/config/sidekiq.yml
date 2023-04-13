@@ -1,5 +1,6 @@
 :queues:
   - default
+  - mailers
   - low_priority
   - searchkick
   - ahoy
