@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo } from "react";
+import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
@@ -15,22 +15,10 @@ export default function EditSectionForm({
   section,
   textId,
   globalStylesheet,
-  nextPosition,
   refresh
 }) {
   const { t } = useTranslation();
   const history = useHistory();
-
-  const defaultModel = useMemo(
-    () => ({
-      attributes: { position: nextPosition, kind: "section" }
-    }),
-    [nextPosition]
-  );
-
-  const createSection = model => {
-    return sectionsAPI.create(textId, model);
-  };
 
   const formatData = (data, model) => {
     const { body, name } = data.attributes ?? {};
@@ -68,44 +56,48 @@ export default function EditSectionForm({
     ? [...section?.relationships.stylesheets, globalStylesheet]
     : globalStylesheet;
 
-  return (
-    <div style={{ paddingBottom: "125px" }}>
-      <Styled.Form
-        model={section ?? defaultModel}
-        name={section ? "be-text-section-update" : "be-text-section-create"}
-        className="form-secondary"
-        onSuccess={onSuccess}
-        formatData={formatData}
-        create={createSection}
-        update={sectionsAPI.update}
-      >
-        <Form.TextInput
-          focusOnMount
-          label={t("texts.section.section_name")}
-          placeholder={t("texts.section.section_name")}
-          name="attributes[name]"
+  const handleSaveClick = e => {
+    if (hasErrors) {
+      e.preventDefault();
+      return setWarnErrors("save");
+    }
+  };
+
+  return section ? (
+    <Styled.Form
+      model={section}
+      name={"be-text-section-update"}
+      className="form-secondary"
+      onSuccess={onSuccess}
+      formatData={formatData}
+      update={sectionsAPI.update}
+    >
+      <Form.TextInput
+        focusOnMount
+        label={t("texts.section.section_name")}
+        placeholder={t("texts.section.section_name")}
+        name="attributes[name]"
+      />
+      <Form.RichText
+        name="attributes[body]"
+        sectionId={section.id}
+        sectionBody={section.attributes.body}
+        stylesheets={stylesheets}
+        {...errorProps}
+      />
+      <Styled.ButtonOverlay>
+        <Form.DrawerButtons
+          showCancel
+          cancelUrl={lh.link("backendTextSections", textId)}
+          submitLabel="actions.save"
+          onSaveClick={handleSaveClick}
         />
-        <Form.RichText
-          name="attributes[body]"
-          sectionId={section?.id}
-          sectionBody={section?.attributes.body}
-          stylesheets={stylesheets}
-          {...errorProps}
-        />
-        <Styled.ButtonOverlay>
-          <Form.DrawerButtons
-            showCancel
-            cancelUrl={lh.link("backendTextSections", textId)}
-            submitLabel="actions.save"
-            disableSubmit={!!hasErrors}
-          />
-        </Styled.ButtonOverlay>
-      </Styled.Form>
-    </div>
-  );
+      </Styled.ButtonOverlay>
+    </Styled.Form>
+  ) : null;
 }
 
-EditSectionForm.displayName = "Text.Sections.AddEditForm";
+EditSectionForm.displayName = "Text.Sections.EditForm";
 
 EditSectionForm.propTypes = {
   textId: PropTypes.string.isRequired,

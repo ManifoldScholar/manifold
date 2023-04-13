@@ -11,7 +11,8 @@ export default function EditorControls({
   selection,
   onClickRedo,
   onClickUndo,
-  toggleStyles
+  toggleStyles,
+  errors
 }) {
   return (
     <Styled.Controls>
@@ -21,6 +22,7 @@ export default function EditorControls({
         onClickEditorToggle={onClickEditorToggle}
         onClickDarkModeToggle={onClickDarkModeToggle}
       />
+      {!!errors.length && <Styled.HTMLError errors={errors} />}
       {htmlMode ? (
         <ToolbarHTML
           onClickUndo={onClickUndo}

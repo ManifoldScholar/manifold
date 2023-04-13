@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { defaultTransitionProps } from "theme/styles/mixins";
 import { Editable as BaseEditable } from "slate-react";
+import InputError from "../../InputError";
 
 export const Editor = styled.div`
   width: 100%;
@@ -52,7 +53,6 @@ export const EditableWrapper = styled.div`
   .ace_scroller {
     min-height: 700px !important;
     overflow: visible;
-    padding-block-start: 2em;
     height: calc(100% + 5.25em);
     border-bottom-left-radius: var(--box-border-radius);
   }
@@ -81,4 +81,12 @@ export const Controls = styled.div`
   z-index: 200;
   background-color: var(--drawer-bg-color);
   padding-top: 30px;
+`;
+
+export const HTMLError = styled(InputError)`
+  margin-block-end: 20px;
+
+  > span {
+    margin: 0;
+  }
 `;

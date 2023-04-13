@@ -18,6 +18,8 @@ export const HtmlEditor = Loadable({
           editor.once("change", () => {
             editor.session.getUndoManager().reset();
           });
+          editor.renderer.setPadding(10, 24);
+          editor.renderer.setScrollMargin(24);
         }}
         {...rest}
       />

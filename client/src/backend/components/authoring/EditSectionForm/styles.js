@@ -3,6 +3,8 @@ import FormContainer from "global/containers/form";
 
 export const Form = styled(FormContainer.Form)`
   --Form-row-gap: 20px;
+
+  padding-bottom: 125px;
 `;
 
 export const ButtonOverlay = styled.div`

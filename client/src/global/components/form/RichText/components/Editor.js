@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import { createEditor, Transforms } from "slate";
 import { Slate, withReact, ReactEditor } from "slate-react";
 import { withHistory, HistoryEditor } from "slate-history";
@@ -22,7 +23,8 @@ export default function Editor({
   hasErrors,
   setHasErrors,
   warnErrors,
-  setWarnErrors
+  setWarnErrors,
+  errors: formErrors = []
 }) {
   const editorRef = useRef();
   if (!editorRef.current)
@@ -37,6 +39,8 @@ export default function Editor({
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
   const prevSlate = useRef(initialSlateValue);
+
+  const { t } = useTranslation();
 
   // The value prop on the Slate component is unhelpfully named. It is really initialSlateValue and is only read once, so it's possible for Slate to get out of sync when switching between text sections. This resets the editor each time the form model changes.
   useEffect(() => {
@@ -92,7 +96,7 @@ export default function Editor({
     e.stopPropagation();
     e.preventDefault();
     if (hasErrors) {
-      setWarnErrors(true);
+      setWarnErrors("switch");
       return;
     }
     toggleEditorView();
@@ -154,6 +158,16 @@ export default function Editor({
     toggleDarkMode(!darkMode);
   };
 
+  const errors = warnErrors
+    ? [
+        {
+          source: { pointer: "/data/attributes/body" },
+          detail: t(`errors.invalid_html_${warnErrors}`)
+        },
+        ...formErrors
+      ]
+    : [...formErrors];
+
   return (
     <>
       <Styled.EditorSecondary
@@ -171,6 +185,7 @@ export default function Editor({
               onClickRedo={onClickRedo}
               toggleStyles={toggleStyles}
               cssVisible={showCss}
+              errors={errors}
             />
             <Styled.EditableWrapper
               className={wrapperClasses}

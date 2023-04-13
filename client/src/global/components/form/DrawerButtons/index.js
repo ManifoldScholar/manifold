@@ -9,7 +9,8 @@ export default function DrawerButtons({
   showCancel = false,
   cancelUrl,
   submitLabel = "actions.save",
-  disableSubmit = false
+  disableSubmit = false,
+  onSaveClick
 }) {
   const history = useHistory();
   const { t } = useTranslation();
@@ -30,6 +31,7 @@ export default function DrawerButtons({
           disabled: disableSubmit
         })}
         disabled={disableSubmit}
+        onClick={onSaveClick}
       >
         <span>{t(submitLabel)}</span>
       </Styled.ButtonWithDisable>
