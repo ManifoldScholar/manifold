@@ -35,12 +35,12 @@ export const EditorSecondary = styled(Editor)`
 
 export const EditableWrapper = styled.div`
   min-height: 700px;
-  padding-block-end: 4em;
   border: 1px solid var(--TextArea-border-color);
   border-top: 0;
   border-bottom-left-radius: var(--box-border-radius);
   border-bottom-right-radius: var(--box-border-radius);
   background-color: var(--background-color);
+  padding-block-end: 24px;
 
   .ace_editor {
     border-bottom-left-radius: 6px;
@@ -53,7 +53,6 @@ export const EditableWrapper = styled.div`
   .ace_scroller {
     min-height: 700px !important;
     overflow: visible;
-    height: calc(100% + 5.25em);
     border-bottom-left-radius: var(--box-border-radius);
   }
 
