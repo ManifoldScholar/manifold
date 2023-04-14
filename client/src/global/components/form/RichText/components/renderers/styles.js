@@ -33,3 +33,18 @@ export const ImageWrapper = styled.div`
   max-width: 100%;
   position: relative;
 `;
+
+export const Void = styled.span`
+  background: var(--color);
+  color: var(--color-neutral-text-extra-dark);
+  border-radius: 4px;
+  padding-inline: 10px;
+  padding-block: 3px;
+  pointer-events: none;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: inherit;
+  display: inline-block;
+  text-indent: 0;
+  margin-bottom: 10px;
+`;
