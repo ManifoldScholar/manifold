@@ -55,9 +55,6 @@ const withShortcuts = editor => {
   };
 
   const removeEmptyInlines = (editor, selection) => {
-    const selectionPath = selection.anchor.path;
-    if (selectionPath[selectionPath.length - 1] === 0) return;
-
     const match = type =>
       type !== "iframe" && type !== "img" && inlineNodes.includes(type);
 
@@ -72,13 +69,12 @@ const withShortcuts = editor => {
 
       if (
         Point.isBefore(inlineStart, selection.anchor) &&
-        textContent.length <= 1
+        textContent.length === 1
       ) {
         Transforms.removeNodes(editor, {
           at: inlinePath,
           match: n => match(n.type)
         });
-        return removeEmptyInlines(editor, selection);
       }
     }
   };
@@ -104,32 +100,22 @@ const withShortcuts = editor => {
           block.type !== "p" &&
           Point.equals(selection.anchor, start)
         ) {
-          if (path.length <= 2 && path[path.length - 1] === 0) {
+          Transforms.setNodes(editor, { type: "p" });
+
+          if (block.type === "li") {
             Transforms.unwrapNodes(editor, {
               match: n =>
                 !Editor.isEditor(n) &&
                 SlateElement.isElement(n) &&
                 (n.type === "ul" || n.type === "ol"),
-              split: false
+              split: true
             });
-            Transforms.setNodes(editor, { type: "p" });
-            console.log(editor.children);
-            return;
           }
-
-          Transforms.removeNodes(editor, { at: path });
-
-          const selectionPath =
-            path[path.length - 1] === 0 ? path : Path.previous(path);
-
-          Transforms.select(editor, Editor.end(editor, selectionPath));
-
           return;
         }
       }
-
-      deleteBackward(...args);
     }
+    deleteBackward(...args);
   };
 
   return editor;
