@@ -63,7 +63,14 @@ export default function Editor({
 
   const theme = stylesheets?.map(s => s?.attributes.styles).join("\n");
 
-  const renderElement = useCallback(props => <Element {...props} />, []);
+  const styleTag = `<style>body {  font-family: 'freight-text-pro', 'aleo', serif; color: #b3b3b3;
+    font-weight: 400;
+    line-height: 1.761;}${theme}</style>`;
+
+  const renderElement = useCallback(
+    props => <Element {...props} styleTag={styleTag} />,
+    [styleTag]
+  );
 
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
 

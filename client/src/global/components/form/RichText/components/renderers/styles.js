@@ -23,7 +23,6 @@ export const RemoveButton = styled.button`
 `;
 
 export const Image = styled.img`
-  width: 300px;
   border: 1px solid;
 `;
 
@@ -34,7 +33,19 @@ export const ImageWrapper = styled.div`
   position: relative;
 `;
 
-export const Void = styled.span`
+export const VoidWrapper = styled.div`
+  display: inline-block;
+  width: 100%;
+  position: relative;
+`;
+
+export const Void = styled.iframe`
+  border: 1px solid var(--error-color);
+  border-radius: 4px;
+  width: 100%;
+`;
+
+export const VoidTag = styled.span`
   background: var(--color);
   color: var(--color-neutral-text-extra-dark);
   border-radius: 4px;
