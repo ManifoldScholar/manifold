@@ -73,16 +73,32 @@ function SectionListItem(props) {
           <Styled.Button onClick={onDelete} aria-label={t("actions.delete")}>
             <Utility.IconComposer size={24} icon="delete24" />
           </Styled.Button>
-          <Styled.Button as={Link} to={editUrl} aria-label={t("actions.edit")}>
-            <Utility.IconComposer size={24} icon="annotate24" />
-          </Styled.Button>
-          <Styled.Button
-            as={Link}
-            to={ingestUrl}
-            aria-label={t("actions.ingest")}
+          <Tooltip
+            content={"Edit section in Manifold editor."}
+            xOffset="-100px"
+            yOffset="43px"
           >
-            <Utility.IconComposer size={24} icon="export24" />
-          </Styled.Button>
+            <Styled.Button
+              as={Link}
+              to={editUrl}
+              aria-label={t("actions.edit")}
+            >
+              <Utility.IconComposer size={24} icon="annotate24" />
+            </Styled.Button>
+          </Tooltip>
+          <Tooltip
+            content={"Reginest section from source document."}
+            xOffset="-100px"
+            yOffset="43px"
+          >
+            <Styled.Button
+              as={Link}
+              to={ingestUrl}
+              aria-label={t("actions.ingest")}
+            >
+              <Utility.IconComposer size={24} icon="export24" />
+            </Styled.Button>
+          </Tooltip>
           <Styled.DragHandle as="div" {...dragHandleProps}>
             <Utility.IconComposer size={30} icon="grabber32" />
           </Styled.DragHandle>
