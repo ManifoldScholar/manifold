@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "./Image";
+import Void from "./Void";
 import {
   rteElements,
   renderedElements,
@@ -7,7 +8,12 @@ import {
 } from "../../utils/elements";
 import * as Styled from "./styles";
 
-export default function SlateElement({ attributes, children, element }) {
+export default function SlateElement({
+  attributes,
+  children,
+  element,
+  styleTag
+}) {
   if (element.type === "br") {
     return <p {...attributes}>{children}</p>;
   }
@@ -27,6 +33,12 @@ export default function SlateElement({ attributes, children, element }) {
     );
   }
   if (element.type === "iframe") {
+    if (element.nodeName)
+      return (
+        <Void attributes={attributes} element={element} styleTag={styleTag}>
+          {children}
+        </Void>
+      );
     return (
       <Image as="iframe" attributes={attributes} element={element}>
         {children}
@@ -34,8 +46,9 @@ export default function SlateElement({ attributes, children, element }) {
     );
   }
   if (element.type === "a") {
+    const className = element.htmlAttrs?.class || undefined;
     return (
-      <a href={element.htmlAttrs.href} {...attributes}>
+      <a className={className} href={element.htmlAttrs.href} {...attributes}>
         {children}
       </a>
     );
@@ -58,9 +71,9 @@ export default function SlateElement({ attributes, children, element }) {
   return (
     <div style={{ display: "inline-block" }} {...attributes}>
       {children}
-      <Styled.Void contentEditable={false}>
+      <Styled.VoidTag contentEditable={false}>
         <span>{`<${element.type}/>`}</span>
-      </Styled.Void>
+      </Styled.VoidTag>
     </div>
   );
 }

@@ -13,12 +13,19 @@ export default function ImageRenderer({ element, children, attributes, as }) {
     Transforms.removeNodes(editor, { at: path });
   };
 
+  const className = element.htmlAttrs?.class || undefined;
+
   return (
-    <Styled.ImageWrapper contentEditable={false} {...attributes}>
+    <Styled.ImageWrapper
+      contentEditable={false}
+      className={className}
+      {...attributes}
+    >
       <Styled.Image
         as={as}
         src={element.htmlAttrs.src}
         alt={!as ? element.htmlAttrs.alt : undefined}
+        title={as ? element.htmlAttrs.title : undefined}
       />
       <Styled.RemoveButton onClick={onRemove}>
         <Utility.IconComposer icon="delete24" size={20} />

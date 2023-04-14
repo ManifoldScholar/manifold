@@ -1,8 +1,10 @@
 import { jsx } from "slate-hyperscript";
 import { Parser, ElementType } from "htmlparser2";
-import { DomHandler } from "domhandler";
+import { DomHandler, Document } from "domhandler";
 import { getName, textContent } from "domutils";
 import { blackList } from "../../utils/elements";
+import { isSlateVoid } from "../../plugins/withVoids";
+import htmlSerializer from "dom-serializer";
 
 import {
   normalizeChildren,
@@ -14,8 +16,22 @@ import {
   isOnlyWhitespace
 } from "./utils";
 
-const deserializeVoid = nodeName => {
-  return jsx("element", { type: nodeName });
+const deserializeVoid = (el, nodeName, children) => {
+  if (nodeName === "br" || nodeName === "hr")
+    return jsx("element", { type: nodeName });
+
+  const attrs = {
+    type: "iframe",
+    nodeName,
+    htmlChildren: children,
+    htmlAttrs: {
+      ...el.attribs,
+      srcdoc: `<!DOCTYPE html><html><body class="manifold-text-section scheme-dark wf-freighttextpro-n4-active" style="height: 100%">${htmlSerializer(
+        new Document(el)
+      )}</body></html>`
+    }
+  };
+  return jsx("element", attrs, [{ text: "" }]);
 };
 const deserializeBody = children => {
   return jsx("fragment", {}, children);
@@ -70,10 +86,6 @@ const deserializeElement = ({
 
   const nodeName = getName(el);
 
-  if (nodeName === "br" || nodeName === "hr") {
-    return deserializeVoid(nodeName);
-  }
-
   const isFirstChild = index === 0;
   const isLastChild = index === childrenLength - 1;
 
@@ -83,6 +95,10 @@ const deserializeElement = ({
 
   if (Object.keys(markTags).includes(nodeName)) {
     return deserializeMarkTag(el, context, isFirstChild, isLastChild);
+  }
+
+  if (isSlateVoid(nodeName) && nodeName !== "img" && nodeName !== "iframe") {
+    return deserializeVoid(el, nodeName, el.childNodes);
   }
 
   /* eslint-disable no-use-before-define */
