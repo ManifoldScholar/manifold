@@ -5,6 +5,7 @@ import {
   renderedElements,
   markElements
 } from "../../utils/elements";
+import * as Styled from "./styles";
 
 export default function SlateElement({ attributes, children, element }) {
   if (element.type === "br") {
@@ -55,24 +56,11 @@ export default function SlateElement({ attributes, children, element }) {
   }
 
   return (
-    <span
-      style={{
-        background: "gray",
-        color: "black",
-        paddingInline: "5px",
-        paddingBlock: "3px",
-        margin: "5px",
-        pointerEvents: "none",
-        fontFamily: "monospace",
-        fontSize: "12px",
-        display: "inline-block",
-        textIndent: "0"
-      }}
-      contentEditable={false}
-      {...attributes}
-    >
-      {[]}
-      {`<${element.type}/>`}
-    </span>
+    <div style={{ display: "inline-block" }} {...attributes}>
+      {children}
+      <Styled.Void contentEditable={false}>
+        <span>{`<${element.type}/>`}</span>
+      </Styled.Void>
+    </div>
   );
 }

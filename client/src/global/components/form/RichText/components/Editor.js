@@ -61,7 +61,7 @@ export default function Editor({
       Transforms.select(editor, lastActiveSelection);
   };
 
-  const theme = stylesheets?.map(s => s.attributes.styles).join("\n");
+  const theme = stylesheets?.map(s => s?.attributes.styles).join("\n");
 
   const renderElement = useCallback(props => <Element {...props} />, []);
 
