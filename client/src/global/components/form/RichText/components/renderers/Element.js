@@ -53,6 +53,14 @@ export default function SlateElement({
       </a>
     );
   }
+  if (element.type === "pre") {
+    const className = element.htmlAttrs?.class || undefined;
+    return (
+      <pre className={className} {...attributes}>
+        <code>{children}</code>
+      </pre>
+    );
+  }
   if (
     rteElements.includes(element.type) ||
     renderedElements.includes(element.type) ||

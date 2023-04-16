@@ -4,6 +4,7 @@ export const Toolbar = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  gap: 3px;
   border: 1px solid var(--TextArea-border-color);
   border-bottom-color: var(--textarea-border-color);
   padding-inline: 1.25em;
@@ -11,6 +12,7 @@ export const Toolbar = styled.div`
   border-top-left-radius: var(--box-border-radius);
   border-top-right-radius: var(--box-border-radius);
   color: var(--color);
+  height: 60px;
 `;
 
 export const ToolbarSpacer = styled.div`

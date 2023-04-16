@@ -20,6 +20,10 @@ export default function SlateLeaf({ attributes, children, leaf }) {
     leafChildren = <s>{leafChildren}</s>;
   }
 
+  if (leaf.code) {
+    leafChildren = <code>{leafChildren}</code>;
+  }
+
   return (
     <span {...attributes} className={Object.keys(rest).join(" ")}>
       {leafChildren}

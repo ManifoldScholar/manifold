@@ -15,7 +15,7 @@ function Redo(props) {
     className: classNames("manicon-svg", className),
     width: getSize(),
     height: getSize(),
-    viewBox: "0 0 24 24",
+    viewBox: "2 2 24 24",
     fill
   };
   return (

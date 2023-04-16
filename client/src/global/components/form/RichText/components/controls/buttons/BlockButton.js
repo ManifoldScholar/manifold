@@ -50,6 +50,8 @@ export const toggleBlock = (editor, format) => {
     const block = { type: format, children: [] };
     Transforms.wrapNodes(editor, block);
   }
+
+  if (format === "pre") Editor.addMark(editor, "code", true);
 };
 
 const BlockButton = ({ format, icon, size, selection, ...rest }, ref) => {

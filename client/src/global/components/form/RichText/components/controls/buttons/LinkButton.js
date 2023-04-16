@@ -63,7 +63,7 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
       ref={ref}
       {...rest}
       aria-label="link"
-      active={active}
+      data-active={active}
       onClick={onClick}
       tabIndex={-1}
     >

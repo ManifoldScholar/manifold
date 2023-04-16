@@ -173,8 +173,7 @@ import Underline24 from "./24/Underline";
 import UnorderedList24 from "./24/UnorderedList";
 import OrderedList24 from "./24/OrderedList";
 import BlockQuote24 from "./24/BlockQuote";
-import Code16 from "./16/Code";
-import CodeOff16 from "./16/CodeOff";
+import Code24 from "./24/Code";
 import Strikethrough24 from "./24/Strikethrough";
 import EditorRTE24 from "./24/EditorRTE";
 import EditorHTML24 from "./24/EditorHTML";
@@ -237,8 +236,7 @@ export default {
   Close16,
   Close24,
   Close32,
-  Code16,
-  CodeOff16,
+  Code24,
   Comment24,
   Comment32,
   CommentPencil32,

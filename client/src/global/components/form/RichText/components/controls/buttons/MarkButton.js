@@ -8,6 +8,11 @@ const isMarkActive = (editor, format) => {
   if (!editor.selection) return false;
   const node = Node.get(editor, editor.selection.focus.path);
   const marks = node.text ? Editor.marks(editor) : false;
+
+  if (format === "code") {
+    const [pre] = Editor.above(editor, { match: n => n.type === "pre" }) ?? [];
+    if (pre) return false;
+  }
   return marks ? marks[format] === true : false;
 };
 
