@@ -19,7 +19,9 @@ const SHORTCUTS = {
   ">": "blockquote",
   "#": "h1",
   "##": "h2",
-  "###": "h3"
+  "###": "h3",
+  "####": "h4",
+  "```": "pre"
 };
 
 /* eslint-disable no-param-reassign */

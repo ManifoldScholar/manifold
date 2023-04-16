@@ -45,6 +45,7 @@ export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
           { format: "h1", label: "Heading 1" },
           { format: "h2", label: "Heading 2" },
           { format: "h3", label: "Heading 3" },
+          { format: "h4", label: "Heading 4" },
           { format: "", label: "" }
         ]}
         selection={selection}
@@ -79,6 +80,13 @@ export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
         selection={selection}
         {...menu}
       />
+      <ReakitMenuItem
+        as={MarkButton}
+        icon="code24"
+        format="code"
+        selection={selection}
+        {...menu}
+      />
       <Styled.ToolbarSpacer />
       <ReakitMenuItem
         as={BlockButton}
@@ -98,6 +106,13 @@ export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
         as={BlockButton}
         icon="blockQuote24"
         format="blockquote"
+        selection={selection}
+        {...menu}
+      />
+      <ReakitMenuItem
+        as={BlockButton}
+        icon="code24"
+        format="pre"
         selection={selection}
         {...menu}
       />

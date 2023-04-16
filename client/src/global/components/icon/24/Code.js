@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-function CodeOff(props) {
+function Code(props) {
   const { className, size, fill, svgProps } = props;
 
   const getSize = () => {
     if (size === "inherit") return null;
-    if (!size || size === "default") return 16;
+    if (!size || size === "default") return 24;
     return size;
   };
   const baseSvgProps = {
@@ -15,17 +15,17 @@ function CodeOff(props) {
     className: classNames("manicon-svg", className),
     width: getSize(),
     height: getSize(),
-    viewBox: "0 0 21 24",
+    viewBox: "2 2 24 24",
     fill
   };
   return (
     <svg {...baseSvgProps} {...svgProps}>
-      <path d="m19.17 12-4.58-4.59L16 6l6 6-3.59 3.59L17 14.17 19.17 12zM1.39 4.22l4.19 4.19L2 12l6 6 1.41-1.41L4.83 12 7 9.83l12.78 12.78 1.41-1.41L2.81 2.81 1.39 4.22z" />
+      <path d="M23.375 14L19 18.375L18.1188 17.4938L21.6063 14L18.1188 10.5062L19 9.625L23.375 14ZM4.625 14L9 9.625L9.88125 10.5062L6.39375 14L9.88125 17.4938L9 18.375L4.625 14Z" />
     </svg>
   );
 }
 
-CodeOff.propTypes = {
+Code.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   stroke: PropTypes.string,
@@ -33,4 +33,4 @@ CodeOff.propTypes = {
   svgProps: PropTypes.object
 };
 
-export default CodeOff;
+export default Code;

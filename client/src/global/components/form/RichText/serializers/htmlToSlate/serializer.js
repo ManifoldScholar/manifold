@@ -152,8 +152,7 @@ export const htmlToSlate = html => {
   });
 
   const parser = new Parser(handler);
-  const htmlToParse = replacePreTags(html);
-  parser.write(htmlToParse);
+  parser.write(html);
   parser.end();
 
   if (slateContent.length > 1) {

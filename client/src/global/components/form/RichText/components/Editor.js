@@ -34,7 +34,7 @@ export default function Editor({
 
   const [htmlMode, toggleHtmlMode] = useState(true);
   const [showCss, toggleCss] = useState(false);
-  const [darkMode, toggleDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(true);
 
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
@@ -99,13 +99,15 @@ export default function Editor({
     return toggleHtmlMode(true);
   };
 
-  const onClickToggle = e => {
+  const onClickToggle = val => e => {
     e.stopPropagation();
     e.preventDefault();
     if (hasErrors) {
       setWarnErrors("switch");
       return;
     }
+    if (val && htmlMode) return;
+    if (!val && !htmlMode) return;
     toggleEditorView();
   };
 
@@ -160,9 +162,9 @@ export default function Editor({
     "scheme-light": !darkMode
   });
 
-  const onClickDarkModeToggle = e => {
+  const onClickDarkModeToggle = val => e => {
     e.preventDefault();
-    toggleDarkMode(!darkMode);
+    setDarkMode(val);
   };
 
   const errors = warnErrors

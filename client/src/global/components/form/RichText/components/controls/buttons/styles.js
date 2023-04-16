@@ -4,29 +4,30 @@ import {
   defaultTransitionProps,
   formLabelPrimary
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 import IconComposer from "global/components/utility/IconComposer";
 
-export const Button = styled("button", transientOptions)`
+export const Button = styled.button`
   ${buttonUnstyled}
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding-block: 1em;
+  height: 28px;
+  width: 28px;
   background-color: none;
   transition: color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-semibold);
-  padding-inline: 5px;
+  border-radius: 4px;
 
   &:hover {
-    color: var(--strong-color);
-    color: var(--color-accent-primary);
+    background-color: var(--background-color);
+    color: inherit;
   }
 
   &[data-active="true"] {
-    color: var(--color-accent-primary-medium);
+    color: var(--drawer-bg-color);
+    background-color: var(--color-accent-primary);
   }
 
   &:first-child {
@@ -61,8 +62,13 @@ export const Select = styled.select`
   height: 28px;
   display: inline-block;
   border-radius: 4px;
-  padding-block: 2px;
+  padding-block-start: 2px;
+  padding-block-end: 4px;
   padding-inline-start: 8px;
+
+  &:hover {
+    background-color: var(--background-color);
+  }
 `;
 
 export const SelectIcon = styled(IconComposer)`

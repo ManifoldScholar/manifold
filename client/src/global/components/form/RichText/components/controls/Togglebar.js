@@ -16,13 +16,13 @@ export default function ToggleBar({
             label: "HTML Editor",
             icon: "editorHTML24",
             active: htmlMode,
-            onClick: onClickEditorToggle
+            onClick: onClickEditorToggle(true)
           },
           {
             label: "Rich Text Editor",
             icon: "editorRTE24",
             active: !htmlMode,
-            onClick: onClickEditorToggle
+            onClick: onClickEditorToggle(false)
           }
         ]}
       />
@@ -33,14 +33,14 @@ export default function ToggleBar({
             icon: "darkMode16",
             iconSize: 12,
             active: darkMode,
-            onClick: onClickDarkModeToggle
+            onClick: onClickDarkModeToggle(true)
           },
           {
             label: "Light",
             icon: "lightMode16",
             iconSize: 12,
             active: !darkMode,
-            onClick: onClickDarkModeToggle
+            onClick: onClickDarkModeToggle(false)
           }
         ]}
         padding="16px"

@@ -12,7 +12,8 @@ export const rteElements = [
   "blockquote",
   "li",
   "a",
-  "list-sibling"
+  "list-sibling",
+  "pre"
 ];
 
 // These elements are removable/insertable via the RTE but their contents cannot be edited.
@@ -35,16 +36,7 @@ export const renderedElements = [
 ];
 
 // These elements are applied as marks to text leaves in Slate. They can be added and removed in the RTE. This probably needs some adjustment. For example, currently both del and s become "strikethrough" when serialized to Slate and there's no way to tell what the original tag was.
-export const markElements = [
-  "i",
-  "del",
-  "em",
-  "s",
-  "strong",
-  "u",
-  "pre",
-  "code"
-];
+export const markElements = ["i", "del", "em", "s", "strong", "u", "code"];
 
 // All other elements are Slate void elements and are rendered as a placeholder in the RTE.
 

@@ -10,7 +10,7 @@ const MARK_TAG_MAP = {
   bold: "strong",
   underline: "u",
   italic: "em",
-  code: "pre"
+  code: "code"
 };
 
 const serializeText = node => {
