@@ -63,6 +63,9 @@ export const captureHotKeys = (e, editor) => {
   // Prevent default only if we match a case so we don't block undo, paste, etc.
   if ((e.metaKey && e.altKey) || (e.ctrlKey && e.shiftKey)) {
     switch (e.keyCode) {
+      case 48:
+        e.preventDefault();
+        return toggleBlock(editor, "p");
       case 49:
         e.preventDefault();
         return toggleBlock(editor, "h1");
@@ -74,13 +77,19 @@ export const captureHotKeys = (e, editor) => {
         return toggleBlock(editor, "h3");
       case 52:
         e.preventDefault();
-        return toggleBlock(editor, "ol");
+        return toggleBlock(editor, "h4");
       case 53:
         e.preventDefault();
-        return toggleBlock(editor, "ul");
+        return toggleBlock(editor, "ol");
       case 54:
         e.preventDefault();
+        return toggleBlock(editor, "ul");
+      case 55:
+        e.preventDefault();
         return toggleBlock(editor, "blockquote");
+      case 56:
+        e.preventDefault();
+        return toggleBlock(editor, "pre");
     }
   }
 
@@ -99,6 +108,9 @@ export const captureHotKeys = (e, editor) => {
     case "u":
       e.preventDefault();
       return toggleMark(editor, "underline");
+    case "e":
+      e.preventDefault();
+      return toggleMark(editor, "code");
     case "k":
       e.preventDefault();
       return toggleBlock(editor, "link");
