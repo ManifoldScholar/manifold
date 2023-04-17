@@ -81,7 +81,7 @@ FrontMatter.propTypes = {
   icon: PropTypes.string,
   closeCallback: PropTypes.func,
   closeUrl: PropTypes.string,
-  context: PropTypes.oneOf(["backend", "frontend", "reader"]),
+  context: PropTypes.oneOf(["backend", "frontend", "reader", "editor"]),
   padding: PropTypes.oneOf(["none", "default", "large", "xl"]),
   includeDrawerFrontMatter: PropTypes.bool,
   includeSRCloseButton: PropTypes.bool,
