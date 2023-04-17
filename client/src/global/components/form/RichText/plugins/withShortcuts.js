@@ -57,8 +57,7 @@ const withShortcuts = editor => {
   };
 
   const removeEmptyInlines = (editor, selection) => {
-    const match = type =>
-      type !== "iframe" && type !== "img" && inlineNodes.includes(type);
+    const match = type => inlineNodes.includes(type);
 
     const [inline, inlinePath] =
       Editor.previous(editor, {

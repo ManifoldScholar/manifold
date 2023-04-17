@@ -30,13 +30,16 @@ const BlockSelect = ({ options, selection, ...rest }, ref) => {
     </option>
   ));
 
+  const active = getActiveBlock(editor);
+
   return (
     <Styled.SelectWrapper>
       <Styled.Select
         ref={ref}
         {...rest}
         aria-label="Text styles"
-        value={getActiveBlock(editor)}
+        data-active={active !== "p" && active !== ""}
+        value={active}
         onChange={e => {
           e.preventDefault();
           Transforms.select(editor, selection);

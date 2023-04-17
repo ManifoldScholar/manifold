@@ -43,7 +43,6 @@ export const SelectWrapper = styled.div`
 export const Select = styled.select`
   ${buttonUnstyled}
   font-family: var(--font-family-sans);
-  color: var(--color) !important;
   line-height: 22px;
   font-size: 14px;
   width: 110px;
@@ -54,8 +53,18 @@ export const Select = styled.select`
   padding-block-end: 4px;
   padding-inline-start: 8px;
 
-  &:hover {
-    background-color: var(--background-color);
+  .backend & {
+    color: var(--color);
+
+    &[data-active="true"] {
+      color: var(--drawer-bg-color);
+      background-color: var(--color-accent-primary);
+    }
+
+    &:hover {
+      background-color: var(--background-color);
+      color: var(--color);
+    }
   }
 `;
 
@@ -64,6 +73,10 @@ export const SelectIcon = styled(IconComposer)`
   top: 25%;
   right: 4px;
   pointer-events: none;
+
+  select[data-active="true"]:not(:hover) + & {
+    color: var(--drawer-bg-color);
+  }
 `;
 
 export const StylesButton = styled.button`

@@ -1,7 +1,12 @@
-import { rteElements, renderedElements, markElements } from "../utils/elements";
+import {
+  rteElements,
+  renderedElements,
+  markElements,
+  rteVoids
+} from "../utils/elements";
 
 export const isSlateVoid = element => {
-  const isRteEl = rteElements.includes(element);
+  const isRteEl = rteElements.includes(element) && !rteVoids.includes(element);
   const isRendered = renderedElements.includes(element);
   const isMark = markElements.includes(element);
   return !(isRteEl || isRendered || isMark);

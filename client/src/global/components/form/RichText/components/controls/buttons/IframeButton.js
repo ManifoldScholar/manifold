@@ -6,6 +6,7 @@ import InsertIframeForm from "./insert/IframeForm";
 import { useConfirmation } from "hooks";
 import Utility from "global/components/utility";
 import { isValidUrl } from "../../../utils/helpers";
+import { isBlockActive } from "./BlockButton";
 import * as Styled from "./styles";
 
 export const insertIframe = (editor, url, title) => {
@@ -51,6 +52,7 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
         ref={ref}
         {...rest}
         aria-label="iframe"
+        data-active={isBlockActive(editor, "iframe")}
         onClick={getIframeData}
         tabIndex={-1}
       >

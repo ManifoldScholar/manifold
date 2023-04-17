@@ -18,7 +18,8 @@ const handleInsertNode = editor => {
 
   // Insert a paragraph if this node type isn't editable in the RTE; insert a list item if the node is the child of a list item
   if (!rteElements.includes(next.type)) next.type = "p";
-  if (next.type === "a") next.type = "p";
+  if (next.type === "a" || next.type === "img" || next.type === "iframe")
+    next.type = "p";
   if (SlateEditor.node(editor, Path.parent(path)) === "li") next.type = "li";
 
   // Insert the adjusted node

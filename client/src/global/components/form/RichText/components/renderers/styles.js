@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { buttonUnstyled } from "theme/styles/mixins";
+import { buttonUnstyled, defaultFocusStyle } from "theme/styles/mixins";
 
 export const RemoveButton = styled.button`
   ${buttonUnstyled}
@@ -22,11 +22,11 @@ export const RemoveButton = styled.button`
   }
 `;
 
-export const Image = styled.img`
-  border: 1px solid;
+export const Content = styled.img`
+  display: inline;
+  ${({ $selected }) => $selected && `${defaultFocusStyle} outline-offset: 1px;`}
 `;
-
-export const ImageWrapper = styled.div`
+export const ImageWrapper = styled.span`
   display: inline-block;
   width: max-content;
   max-width: 100%;
@@ -35,17 +35,22 @@ export const ImageWrapper = styled.div`
   &.responsive-iframe {
     display: block;
     width: 100%;
+    overflow: visible;
   }
 `;
 
 export const VoidWrapper = styled.div`
-  display: inline-block;
+  display: block;
   width: 100%;
   position: relative;
 `;
 
 export const Void = styled.iframe`
-  border: 1px solid var(--error-color);
+  background-color: var(--drawer-bg-color);
+  box-shadow: 2px 2px 10px var(--drawer-bg-color);
   border-radius: 4px;
+  border: 0;
   width: 100%;
+
+  ${({ $selected }) => $selected && `${defaultFocusStyle} outline-offset: 1px;`}
 `;
