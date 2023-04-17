@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
+import RichText from "global/components/form/RichText";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
@@ -74,7 +75,7 @@ export default function EditSectionForm({
         placeholder={t("texts.section.section_name")}
         name="attributes[name]"
       />
-      <Form.RichText
+      <RichText
         name="attributes[body]"
         sectionId={section.id}
         sectionBody={section.attributes.body}

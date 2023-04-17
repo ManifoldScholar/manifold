@@ -1,37 +1,57 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import { Transforms } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
-import { isImageUrl } from "../../../utils/helpers";
+import Dialog from "global/components/dialog";
+import { useConfirmation } from "hooks";
+import InsertImageForm from "./insert/ImageForm";
 import * as Styled from "./styles";
 
-// Maybe do something fancier here to prevent images from ending up alone in pargraphs?
-export const insertImage = (editor, url) => {
+export const insertImage = (editor, url, alt) => {
   const text = { text: "" };
-  const image = { type: "img", htmlAttrs: { src: url }, children: [text] };
+  const image = { type: "img", htmlAttrs: { src: url, alt }, children: [text] };
   Transforms.insertNodes(editor, image);
-  ReactEditor.focus(editor);
 };
 
 const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
   const editor = useSlate();
-  const onClick = () => {
-    event.preventDefault();
+  const { confirm, confirmation } = useConfirmation();
+  const urlRef = useRef(null);
+  const altRef = useRef(null);
+
+  const addImage = () => {
+    ReactEditor.focus(editor);
+    const url = urlRef?.current?.inputElement?.value;
+    if (!url) return;
+    const alt = altRef?.current?.inputElement?.value;
     Transforms.select(editor, selection);
-    const url = window.prompt("Enter the URL of the image:");
-    if (!isImageUrl(url)) return ReactEditor.focus(editor);
-    return insertImage(editor, url);
+    return insertImage(editor, url, alt);
   };
+
+  const getImageData = e => {
+    e.preventDefault();
+    const heading = "Insert Image";
+    const message = <InsertImageForm urlRef={urlRef} altRef={altRef} />;
+    if (confirm)
+      confirm(heading, message, addImage, {
+        rejectLabel: "Cancel",
+        resolveLabel: "Add"
+      });
+  };
+
   return (
-    <Styled.Button
-      ref={ref}
-      {...rest}
-      aria-label="image"
-      onClick={onClick}
-      tabIndex={-1}
-    >
-      {icon && <Utility.IconComposer icon={icon} size={size} />}
-    </Styled.Button>
+    <>
+      <Styled.Button
+        ref={ref}
+        {...rest}
+        aria-label="image"
+        onClick={getImageData}
+        tabIndex={-1}
+      >
+        {icon && <Utility.IconComposer icon={icon} size={size} />}
+      </Styled.Button>
+      {confirmation && <Dialog.Confirm {...confirmation} />}
+    </>
   );
 };
 
