@@ -27,19 +27,43 @@ export const Button = styled.button`
   text-decoration: none;
   text-transform: none;
   letter-spacing: 0;
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
   transition: color ${defaultTransitionProps},
     background-color ${defaultTransitionProps},
     border-color ${defaultTransitionProps};
 
   ${({ $active }) =>
-    $active &&
-    `
+    $active
+      ? `
       color: var(--color-neutral-text-extra-dark);
       background-color: var(--hover-color);
       border-color: var(--hover-color);
-    `}
+
+      &:hover {
+        color: var(--color-neutral-text-extra-dark);
+      }
+
+      &:focus-visible {
+        color: var(--color-base-neutral100);
+        background-color: var(--color-accent-primary-pale);
+        border-color: var(--color-accent-primary-pale);
+        outline: 0;
+      }`
+      : `
+      &:focus-visible {
+        color: var(--color-base-neutral100);
+        background-color: var(--color-accent-primary-pale);
+        border-color: var(--color-accent-primary-pale);
+        outline: 0;
+      }
+
+      &:hover {
+        color: inherit;
+        background-color: inherit;
+        border-color: inherit;
+      }
+      `}
 
   span {
     padding-top: 7px;
@@ -51,18 +75,6 @@ export const Button = styled.button`
     height: 24px;
     padding-bottom: 2px;
     margin: 0;
-  }
-
-  &:hover {
-    color: var(--color-neutral-text-extra-dark);
-    background-color: var(--hover-color);
-    border-color: var(--hover-color);
-  }
-
-  &.focus-visible {
-    color: var(--color-neutral-text-extra-dark);
-    border-color: var(--hover-color);
-    outline: none;
   }
 
   * + & {

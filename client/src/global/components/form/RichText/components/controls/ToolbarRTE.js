@@ -119,15 +119,13 @@ export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
       <Styled.ToolbarSpacer />
       <ReakitMenuItem
         as={LinkButton}
-        icon="resourceLink64"
-        size={22}
+        icon="RTELink24"
         selection={selection}
         {...menu}
       />
       <ReakitMenuItem
         as={ImageButton}
-        icon="resourceImage64"
-        size={22}
+        icon="RTEImage24"
         selection={selection}
         {...menu}
       />
