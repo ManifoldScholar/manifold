@@ -141,8 +141,26 @@ export const assignTextMarkAttributes = (el, attrs) => {
   );
 };
 
-export const isOnlyWhitespace = str => {
-  return !/[^\t\n\r ]/.test(str);
+export const isOnlyFormat = str => {
+  return /^[\t\n\r]*$/.test(str);
+};
+
+export const replaceFormatChars = str => {
+  return str.replace(/[\t\n\r]/g, "");
+};
+
+export const getNextNonFormat = el => {
+  if (!el?.next) return {};
+  if (el.next.tag) return el.next;
+  if (!isOnlyFormat(el.next.data)) return el.next;
+  return getNextNonFormat(el.next.next);
+};
+
+export const getPrevNonFormat = el => {
+  if (!el?.prev) return {};
+  if (el.prev.tag) return el.prev;
+  if (!isOnlyFormat(el.prev.data)) return el.prev;
+  return getNextNonFormat(el.prev.prev);
 };
 
 export const getSlateNodeContext = tag => {

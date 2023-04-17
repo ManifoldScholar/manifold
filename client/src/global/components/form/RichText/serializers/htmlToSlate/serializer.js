@@ -8,16 +8,18 @@ import htmlSerializer from "dom-serializer";
 
 import {
   normalizeChildren,
-  replacePreTags,
   addTextNodeToEmptyChildren,
   markTags,
   assignTextMarkAttributes,
   getSlateNodeContext,
-  isOnlyWhitespace
+  isOnlyFormat,
+  replaceFormatChars,
+  getNextNonFormat,
+  getPrevNonFormat
 } from "./utils";
 
 const deserializeVoid = (el, nodeName, children) => {
-  if (nodeName === "br" || nodeName === "hr")
+  if (nodeName === "hr" || nodeName === "br")
     return jsx("element", { type: nodeName });
 
   const attrs = {
@@ -26,7 +28,7 @@ const deserializeVoid = (el, nodeName, children) => {
     htmlChildren: children,
     htmlAttrs: {
       ...el.attribs,
-      srcdoc: `<!DOCTYPE html><html><body class="manifold-text-section scheme-dark wf-freighttextpro-n4-active" style="height: 100%">${htmlSerializer(
+      srcdoc: `<!DOCTYPE html><html><body class="manifold-text-section scheme-dark" style="height: 100%">${htmlSerializer(
         new Document(el)
       )}</body></html>`
     }
@@ -41,8 +43,10 @@ const deserializeTag = (el, nodeName, children) => {
   return jsx("element", attrs, children);
 };
 const deserializeText = (el, attrs) => {
-  const text = textContent(el);
-  return !isOnlyWhitespace(text) ? jsx("text", { ...attrs, text }, []) : null;
+  const rawText = textContent(el);
+  if (isOnlyFormat(rawText)) return null;
+  const text = replaceFormatChars(rawText);
+  return jsx("text", { ...attrs, text }, []);
 };
 
 const flatten = nodes => {
@@ -85,6 +89,13 @@ const deserializeElement = ({
   if (blackList.includes(el.type)) return null;
 
   const nodeName = getName(el);
+
+  if (
+    nodeName === "br" &&
+    (getNextNonFormat(el).type === "text" ||
+      getPrevNonFormat(el).type === "text")
+  )
+    return jsx("text", { text: "\n" }, []);
 
   const isFirstChild = index === 0;
   const isLastChild = index === childrenLength - 1;
