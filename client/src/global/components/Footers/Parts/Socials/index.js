@@ -9,7 +9,7 @@ export default function FooterPartsSocials({ links }) {
           <Styled.Group>
             {links.map(link => (
               <Styled.Item key={`${link.to}${link.title}`}>
-                <Styled.Link item={link} hideLabel />
+                <Styled.Link item={link} />
               </Styled.Item>
             ))}
           </Styled.Group>
