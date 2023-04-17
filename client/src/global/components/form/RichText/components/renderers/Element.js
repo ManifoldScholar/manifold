@@ -6,7 +6,6 @@ import {
   renderedElements,
   markElements
 } from "../../utils/elements";
-import * as Styled from "./styles";
 
 export default function SlateElement({
   attributes,
@@ -76,12 +75,5 @@ export default function SlateElement({
     );
   }
 
-  return (
-    <div style={{ display: "inline-block" }} {...attributes}>
-      {children}
-      <Styled.VoidTag contentEditable={false}>
-        <span>{`<${element.type}/>`}</span>
-      </Styled.VoidTag>
-    </div>
-  );
+  return null;
 }

@@ -31,6 +31,11 @@ export const ImageWrapper = styled.div`
   width: max-content;
   max-width: 100%;
   position: relative;
+
+  &.responsive-iframe {
+    display: block;
+    width: 100%;
+  }
 `;
 
 export const VoidWrapper = styled.div`
@@ -43,19 +48,4 @@ export const Void = styled.iframe`
   border: 1px solid var(--error-color);
   border-radius: 4px;
   width: 100%;
-`;
-
-export const VoidTag = styled.span`
-  background: var(--color);
-  color: var(--color-neutral-text-extra-dark);
-  border-radius: 4px;
-  padding-inline: 10px;
-  padding-block: 3px;
-  pointer-events: none;
-  font-family: monospace;
-  font-size: 14px;
-  line-height: inherit;
-  display: inline-block;
-  text-indent: 0;
-  margin-bottom: 10px;
 `;

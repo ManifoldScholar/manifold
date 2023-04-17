@@ -182,6 +182,8 @@ import LightMode16 from "./16/LightMode";
 import Undo24 from "./24/Undo";
 import Redo24 from "./24/Redo";
 import Iframe24 from "./24/Iframe";
+import RTELink24 from "./24/RTELink";
+import RTEImage24 from "./24/RTEImage";
 
 export default {
   ActivityComments64,
@@ -330,6 +332,8 @@ export default {
   ResourceSpreadsheet64,
   ResourceVideo64,
   Resources64,
+  RTELink24,
+  RTEImage24,
   Search16,
   Search24,
   Search32,

@@ -35,18 +35,6 @@ export const Button = styled.button`
   }
 `;
 
-export const HTMLToggle = styled.button`
-  color: var(--color-accent-primary);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  width: 30px;
-  margin-inline-start: auto;
-  align-self: center;
-  border-radius: 4px;
-`;
-
 export const SelectWrapper = styled.div`
   position: relative;
   display: inline-block;
@@ -94,5 +82,10 @@ export const StylesButton = styled.button`
 
   svg {
     margin-top: 3px;
+  }
+
+  &:hover {
+    background-color: var(--color-accent-primary);
+    color: var(--box-bg-color);
   }
 `;
