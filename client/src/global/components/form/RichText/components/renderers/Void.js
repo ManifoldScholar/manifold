@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ReactEditor } from "slate-react";
+import { ReactEditor, useFocused, useSelected } from "slate-react";
 import * as Styled from "./styles";
 
 export default function ImageRenderer({
@@ -8,6 +8,9 @@ export default function ImageRenderer({
   attributes,
   styleTag
 }) {
+  const focused = useFocused();
+  const selected = useSelected();
+
   const className = element.htmlAttrs?.class || undefined;
 
   const addStyleTag = html => {
@@ -29,19 +32,17 @@ export default function ImageRenderer({
   };
 
   return (
-    <Styled.VoidWrapper
-      contentEditable={false}
-      className={className}
-      {...attributes}
-    >
-      <Styled.Void
-        as={"iframe"}
-        ref={iframeRef}
-        srcDoc={srcDoc}
-        title={"element not editable"}
-        onLoad={onLoad}
-      />
+    <div {...attributes}>
       {children}
-    </Styled.VoidWrapper>
+      <Styled.VoidWrapper contentEditable={false} className={className}>
+        <Styled.Void
+          ref={iframeRef}
+          srcDoc={srcDoc}
+          title={"element not editable"}
+          onLoad={onLoad}
+          $selected={selected && focused}
+        />
+      </Styled.VoidWrapper>
+    </div>
   );
 }

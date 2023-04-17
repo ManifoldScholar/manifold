@@ -16,7 +16,8 @@ export const isBlockActive = (editor, format, blockType = "type") => {
       match: n =>
         !Editor.isEditor(n) &&
         SlateElement.isElement(n) &&
-        n[blockType] === format
+        n[blockType] === format &&
+        !n.nodeName
     })
   );
 

@@ -13,7 +13,9 @@ export const rteElements = [
   "li",
   "a",
   "list-sibling",
-  "pre"
+  "pre",
+  "img",
+  "iframe"
 ];
 
 // These elements are removable/insertable via the RTE but their contents cannot be edited.
@@ -69,8 +71,6 @@ export const inlineNodes = [
   "var",
   "a",
   "bdo",
-  "iframe",
-  "img",
   "map",
   "object",
   "q",

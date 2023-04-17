@@ -5,6 +5,7 @@ import Utility from "global/components/utility";
 import Dialog from "global/components/dialog";
 import { useConfirmation } from "hooks";
 import InsertImageForm from "./insert/ImageForm";
+import { isBlockActive } from "./BlockButton";
 import * as Styled from "./styles";
 
 export const insertImage = (editor, url, alt) => {
@@ -45,6 +46,7 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
         ref={ref}
         {...rest}
         aria-label="image"
+        data-active={isBlockActive(editor, "img")}
         onClick={getImageData}
         tabIndex={-1}
       >

@@ -19,7 +19,7 @@ const getInitialSlateValue = value => {
 
 const getInitialHtmlValue = value => {
   if (value && typeof value === "string") return formatHtml(value);
-  return formatHtml("<!DOCTYPE html><section></section>");
+  return formatHtml("<!DOCTYPE html>");
 };
 
 function RichText({
