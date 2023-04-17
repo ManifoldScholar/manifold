@@ -3,7 +3,7 @@ import serializer from "dom-serializer";
 import { Text as SlateText } from "slate";
 import isEmpty from "lodash/isEmpty";
 
-import { isOnlyWhitespace, nestMarkElements } from "./utils";
+import { isOnlyFormat, nestMarkElements, replaceLineBreaks } from "./utils";
 
 const MARK_TAG_MAP = {
   strikethrough: "s",
@@ -15,7 +15,9 @@ const MARK_TAG_MAP = {
 
 const serializeText = node => {
   const textContent = node.text;
-  if (isOnlyWhitespace(textContent)) return null;
+  if (isOnlyFormat(textContent)) return null;
+
+  const textSplits = replaceLineBreaks(textContent);
 
   const markElements = Object.keys(MARK_TAG_MAP)
     .map(key => {
@@ -23,9 +25,13 @@ const serializeText = node => {
     })
     .filter(Boolean);
 
-  const textElement = nestMarkElements(markElements, new Text(textContent));
+  const textElements = [];
+  textSplits.forEach((t, i) => {
+    textElements.push(nestMarkElements(markElements, new Text(t)));
+    if (i < textSplits.length - 1) textElements.push(new Element("br"));
+  });
 
-  return new Document(textElement);
+  return new Document(textElements);
 };
 
 const mergeSlateOnlyChildren = node => {

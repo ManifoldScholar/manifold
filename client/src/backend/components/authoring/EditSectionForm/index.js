@@ -5,10 +5,7 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
 import { useHistory } from "react-router-dom";
-import {
-  serializeToHtml,
-  serializeToSlate
-} from "global/components/form/RichText/serializers";
+import { serializeToHtml } from "global/components/form/RichText/serializers";
 import * as Styled from "./styles";
 
 export default function EditSectionForm({
@@ -23,14 +20,13 @@ export default function EditSectionForm({
   const formatData = (data, model) => {
     const { body, name } = data.attributes ?? {};
     const { position, kind } = model.attributes ?? {};
-    if (!body) return { attributes: { position, kind, name } };
-    if (typeof body === "string")
+    if (!body || typeof body === "string")
       return {
         attributes: {
           position,
           kind,
           name,
-          body: serializeToHtml(serializeToSlate(body))
+          body
         }
       };
     return {

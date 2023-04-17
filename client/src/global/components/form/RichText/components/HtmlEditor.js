@@ -21,6 +21,7 @@ export const HtmlEditor = Loadable({
           editor.renderer.setPadding(10, 24);
           editor.renderer.setScrollMargin(24);
         }}
+        editorOptions={{ enableAutoIndent: true }}
         {...rest}
       />
     );
