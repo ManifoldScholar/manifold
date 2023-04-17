@@ -86,7 +86,7 @@ function JournalDescription({
             accepts="images"
             readFrom="attributes[logoStyles][small]"
             name="attributes[logo]"
-            remove="attributes[removeLog]"
+            remove="attributes[removeLogo]"
             instructions={t("backend.forms.logo_instructions", {
               entity: modelLabel
             })}
