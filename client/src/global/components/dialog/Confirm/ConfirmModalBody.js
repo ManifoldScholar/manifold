@@ -36,9 +36,10 @@ export default function ConfirmModalBody({
   const resolveLabel = options?.resolveLabel || t("common.yes_title_case");
 
   const rejectLabel =
-    options?.rejectLabel || typeof resolve === "function"
+    options?.rejectLabel ||
+    (typeof resolve === "function"
       ? t("common.no_title_case")
-      : t("common.okay");
+      : t("common.okay"));
 
   return (
     <>

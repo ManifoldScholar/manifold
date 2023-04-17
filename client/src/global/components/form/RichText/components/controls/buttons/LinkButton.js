@@ -1,8 +1,11 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import { Editor, Element as SlateElement, Transforms, Range } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
 import { isValidUrl } from "../../../utils/helpers";
+import InsertLinkForm from "./insert/LinkForm";
+import { useConfirmation } from "hooks";
+import Dialog from "global/components/dialog";
 import * as Styled from "./styles";
 
 export const isLinkActive = editor => {
@@ -50,25 +53,44 @@ const insertLink = (editor, url) => {
 const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
   const editor = useSlate();
   const active = isLinkActive(editor);
-  const onClick = () => {
-    event.preventDefault();
+  const { confirm, confirmation } = useConfirmation();
+  const urlRef = useRef(null);
+
+  const addLink = () => {
+    ReactEditor.focus(editor);
+    const url = urlRef?.current?.inputElement?.value;
+    if (!url) return;
     Transforms.select(editor, selection);
-    if (active) return unwrapLink(editor);
-    const url = window.prompt("Enter the URL of the link:");
-    if (!isValidUrl(url)) return ReactEditor.focus(editor);
+    if (!isValidUrl(url));
     return insertLink(editor, url);
   };
+
+  const getLinkData = e => {
+    e.preventDefault();
+    if (active) return unwrapLink(editor);
+    const heading = "Insert Link";
+    const message = <InsertLinkForm urlRef={urlRef} />;
+    if (confirm)
+      confirm(heading, message, addLink, {
+        rejectLabel: "Cancel",
+        resolveLabel: "Add"
+      });
+  };
+
   return (
-    <Styled.Button
-      ref={ref}
-      {...rest}
-      aria-label="link"
-      data-active={active}
-      onClick={onClick}
-      tabIndex={-1}
-    >
-      {icon && <Utility.IconComposer icon={icon} size={size} />}
-    </Styled.Button>
+    <>
+      <Styled.Button
+        ref={ref}
+        {...rest}
+        aria-label="link"
+        data-active={active}
+        onClick={getLinkData}
+        tabIndex={-1}
+      >
+        {icon && <Utility.IconComposer icon={icon} size={size} />}
+        {confirmation && <Dialog.Confirm {...confirmation} />}
+      </Styled.Button>
+    </>
   );
 };
 

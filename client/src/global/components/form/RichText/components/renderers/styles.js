@@ -13,7 +13,7 @@ export const RemoveButton = styled.button`
   top: 5px;
   right: 5px;
   color: var(--color);
-  background: var(--color-base-neutral90);
+  background: var(--background-color);
   border-radius: 4px;
   border: 1px solid;
 
