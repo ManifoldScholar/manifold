@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import { createEditor, Transforms } from "slate";
+import { createEditor, Transforms, Editor as SlateEditor } from "slate";
 import { Slate, withReact, ReactEditor } from "slate-react";
 import { withHistory, HistoryEditor } from "slate-history";
 import { Leaf, Element } from "./renderers";
@@ -61,6 +61,16 @@ export default function Editor({
       Transforms.select(editor, lastActiveSelection);
   };
 
+  useEffect(() => {
+    if (editor.selection) {
+      const [node] = ReactEditor.toDOMPoint(editor, editor.selection.focus);
+      node.parentElement.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+  }, [editor, editor.selection]);
+
   const theme = stylesheets?.map(s => s?.attributes.styles).join("\n");
 
   const styleTag = `<style>body {  font-family: 'freight-text-pro', 'aleo', serif; color: #b3b3b3;
@@ -90,6 +100,10 @@ export default function Editor({
       setLocalSlate(json);
       clearSlate(editor);
       Transforms.insertNodes(editor, json);
+      Transforms.select(editor, {
+        anchor: SlateEditor.start(editor, [0]),
+        focus: SlateEditor.start(editor, [0])
+      });
       return toggleHtmlMode(false);
     }
 
