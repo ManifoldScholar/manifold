@@ -272,6 +272,9 @@ class TextNode extends Component {
   }
 
   render() {
+    const content = this.containsAnnotations
+      ? this.annotatedContent
+      : this.content;
     return (
       <span
         ref={el => {
@@ -281,7 +284,7 @@ class TextNode extends Component {
         data-node-uuid={this.props.nodeUuid}
         data-comments={this.containsAnnotations ? this.commentsCount : null}
       >
-        {this.containsAnnotations ? this.annotatedContent : this.content}
+        {content}
       </span>
     );
   }

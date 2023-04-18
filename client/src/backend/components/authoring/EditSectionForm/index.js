@@ -21,7 +21,8 @@ export default function EditSectionForm({
   const formatData = (data, model) => {
     const { body, name } = data.attributes ?? {};
     const { position, kind } = model.attributes ?? {};
-    if (!body || typeof body === "string")
+    if (!body) return { attributes: { position, kind, name, body: null } };
+    if (typeof body === "string")
       return {
         attributes: {
           position,
