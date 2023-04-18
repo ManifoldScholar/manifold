@@ -20,6 +20,17 @@ export const HtmlEditor = Loadable({
           });
           editor.renderer.setPadding(10, 24);
           editor.renderer.setScrollMargin(24);
+          const input = editor.textInput.getElement();
+          input.addEventListener("keydown", e => {
+            if (e.key === "ArrowDown") {
+              const scroller = document.querySelector(".top.pad-xl");
+              scroller.scrollBy(0, 16);
+            }
+            if (e.key === "ArrowUp") {
+              const scroller = document.querySelector(".top.pad-xl");
+              scroller.scrollBy(0, -16);
+            }
+          });
         }}
         editorOptions={{ enableAutoIndent: true }}
         {...rest}
