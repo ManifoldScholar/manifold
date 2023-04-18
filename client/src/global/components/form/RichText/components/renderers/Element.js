@@ -11,7 +11,8 @@ export default function SlateElement({
   attributes,
   children,
   element,
-  styleTag
+  theme,
+  darkMode
 }) {
   if (element.type === "br") {
     return <p {...attributes}>{children}</p>;
@@ -24,6 +25,18 @@ export default function SlateElement({
       </span>
     );
   }
+  if (element.type === "void") {
+    return (
+      <Void
+        attributes={attributes}
+        element={element}
+        theme={theme}
+        darkMode={darkMode}
+      >
+        {children}
+      </Void>
+    );
+  }
   if (element.type === "img") {
     return (
       <Image attributes={attributes} element={element}>
@@ -32,12 +45,6 @@ export default function SlateElement({
     );
   }
   if (element.type === "iframe") {
-    if (element.nodeName)
-      return (
-        <Void attributes={attributes} element={element} styleTag={styleTag}>
-          {children}
-        </Void>
-      );
     return (
       <Image as="iframe" attributes={attributes} element={element}>
         {children}

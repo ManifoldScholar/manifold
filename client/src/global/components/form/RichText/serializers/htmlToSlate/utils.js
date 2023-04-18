@@ -1,6 +1,7 @@
 import { jsx } from "slate-hyperscript";
 import { getChildren } from "domutils";
 import { inlineNodes, markElements } from "../../utils/elements";
+import { ElementType } from "htmlparser2";
 
 const CONTEXT_VALUES = {
   block: "block",
@@ -169,4 +170,18 @@ export const getSlateNodeContext = tag => {
   if (inlineNodes.includes(tag) || markElements.includes(tag))
     return CONTEXT_VALUES.inline;
   return CONTEXT_VALUES.block;
+};
+
+export const removeFormatOnlyChildren = el => {
+  const filteredChildren = el.children.map(c => {
+    if (c.type === ElementType.Text) {
+      const rawText = c.data;
+      if (isOnlyFormat(rawText)) return null;
+    }
+    if (c.children?.length) {
+      return { ...c, children: removeFormatOnlyChildren(c).filter(Boolean) };
+    }
+    return c;
+  });
+  return filteredChildren.filter(Boolean);
 };
