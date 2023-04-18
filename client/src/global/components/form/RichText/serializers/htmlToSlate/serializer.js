@@ -15,25 +15,27 @@ import {
   isOnlyFormat,
   replaceFormatChars,
   getNextNonFormat,
-  getPrevNonFormat
+  getPrevNonFormat,
+  removeFormatOnlyChildren
 } from "./utils";
 
 const deserializeVoid = (el, nodeName, children) => {
   if (nodeName === "hr" || nodeName === "br")
     return jsx("element", { type: nodeName });
 
-  const htmlAttrs = el.attribs ?? {};
+  const adjustedEl = {
+    ...el,
+    children: removeFormatOnlyChildren(el)
+  };
 
   const attrs = {
-    type: "iframe",
+    type: "void",
     nodeName,
     htmlChildren: children,
-    htmlAttrs: {
-      ...htmlAttrs,
-      srcdoc: `<!DOCTYPE html><html><body class="manifold-text-section scheme-dark" style="height: 100%">${htmlSerializer(
-        new Document(el)
-      )}</body></html>`
-    }
+    srcdoc: `<!DOCTYPE html><html><body class="manifold-text-section scheme-dark" style="height: 100%">${htmlSerializer(
+      new Document(adjustedEl)
+    )}</body></html>`,
+    htmlAttrs: el.attribs ?? {}
   };
   return jsx("element", attrs, [{ text: "" }]);
 };

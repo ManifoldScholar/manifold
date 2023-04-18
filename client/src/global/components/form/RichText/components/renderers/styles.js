@@ -41,16 +41,21 @@ export const ImageWrapper = styled.span`
 
 export const VoidWrapper = styled.div`
   display: block;
-  width: 100%;
+  margin-inline-start: -5%;
+  width: 110%;
+  padding-inline: 8%;
+  padding-block-end: 20px;
+  padding-block-start: 10px;
   position: relative;
-`;
-
-export const Void = styled.iframe`
   background-color: var(--drawer-bg-color);
-  box-shadow: 2px 2px 10px var(--drawer-bg-color);
+  box-shadow: 5px 5px 8px var(--color-base-neutral100);
   border-radius: 4px;
   border: 0;
-  width: 100%;
+
+  .scheme-light & {
+    background-color: var(--color-base-neutral20);
+    box-shadow: 5px 5px 8px var(--weak-color);
+  }
 
   ${({ $selected }) => $selected && `${defaultFocusStyle} outline-offset: 1px;`}
 `;

@@ -54,7 +54,7 @@ const serializeNode = node => {
   if (SlateText.isText(node)) return serializeText(node);
 
   if (node.nodeName) {
-    const { srcdoc, ...attrs } = node.htmlAttrs;
+    const { srcdoc, ...attrs } = node.htmlAttrs ?? {};
     return new Element(node.nodeName, attrs, node.htmlChildren);
   }
 

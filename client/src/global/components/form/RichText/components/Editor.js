@@ -73,13 +73,9 @@ export default function Editor({
 
   const theme = stylesheets?.map(s => s?.attributes.styles).join("\n");
 
-  const styleTag = `<style>body {  font-family: serif; color: #b3b3b3;
-    font-weight: 400;
-    line-height: 1.761;}${theme}</style>`;
-
   const renderElement = useCallback(
-    props => <Element {...props} styleTag={styleTag} />,
-    [styleTag]
+    props => <Element {...props} theme={theme} darkMode={darkMode} />,
+    [theme, darkMode]
   );
 
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);

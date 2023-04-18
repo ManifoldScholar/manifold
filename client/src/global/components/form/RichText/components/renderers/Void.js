@@ -1,48 +1,53 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { ReactEditor, useFocused, useSelected } from "slate-react";
 import * as Styled from "./styles";
 
-export default function ImageRenderer({
+export default function VoidRenderer({
   element,
   children,
   attributes,
-  styleTag
+  theme,
+  darkMode
 }) {
   const focused = useFocused();
   const selected = useSelected();
 
-  const className = element.htmlAttrs?.class || undefined;
+  const { srcdoc } = element ?? {};
 
-  const addStyleTag = html => {
-    const [, rest] = html.split("<html>");
-    return `<html>${styleTag}${rest}`;
-  };
+  const ref = useRef();
 
-  const { srcdoc } = element.htmlAttrs ?? {};
-
-  const srcDoc = srcdoc ? addStyleTag(srcdoc) : undefined;
-
-  const iframeRef = useRef(null);
-
-  const onLoad = () => {
-    const contentHeight =
-      iframeRef.current.contentWindow.document.body.scrollHeight;
-    const height = contentHeight > 48 ? contentHeight + 44 : 48;
-    iframeRef.current.height = `${height}px`;
-  };
+  useEffect(() => {
+    if (ref.current && !ref.current.shadowRoot) {
+      const shadow = ref.current.attachShadow({ mode: "open" });
+      const container = document.createElement("div");
+      const containerClass = `manifold-text-section ${
+        darkMode ? "scheme-dark" : "scheme-light"
+      }`;
+      container.setAttribute("class", containerClass);
+      const style = document.createElement("style");
+      style.textContent = theme;
+      shadow.appendChild(style);
+      container.innerHTML = srcdoc;
+      shadow.appendChild(container);
+    }
+    if (ref.current?.shadowRoot) {
+      const shadow = ref.current.shadowRoot;
+      const container = shadow.childNodes[1];
+      const containerClass = `manifold-text-section ${
+        darkMode ? "scheme-dark" : "scheme-light"
+      }`;
+      container.setAttribute("class", containerClass);
+    }
+  }, [srcdoc, theme, darkMode]);
 
   return (
     <div {...attributes}>
       {children}
-      <Styled.VoidWrapper contentEditable={false} className={className}>
-        <Styled.Void
-          ref={iframeRef}
-          srcDoc={srcDoc}
-          title={"element not editable"}
-          onLoad={onLoad}
-          $selected={selected && focused}
-        />
-      </Styled.VoidWrapper>
+      <Styled.VoidWrapper
+        ref={ref}
+        contentEditable={false}
+        $selected={selected && focused}
+      />
     </div>
   );
 }
