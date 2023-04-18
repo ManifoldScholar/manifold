@@ -22,12 +22,14 @@ const deserializeVoid = (el, nodeName, children) => {
   if (nodeName === "hr" || nodeName === "br")
     return jsx("element", { type: nodeName });
 
+  const htmlAttrs = el.attribs ?? {};
+
   const attrs = {
     type: "iframe",
     nodeName,
     htmlChildren: children,
     htmlAttrs: {
-      ...el.attribs,
+      ...htmlAttrs,
       srcdoc: `<!DOCTYPE html><html><body class="manifold-text-section scheme-dark" style="height: 100%">${htmlSerializer(
         new Document(el)
       )}</body></html>`
@@ -39,7 +41,8 @@ const deserializeBody = children => {
   return jsx("fragment", {}, children);
 };
 const deserializeTag = (el, nodeName, children) => {
-  const attrs = { type: nodeName, htmlAttrs: { ...el.attribs } };
+  const htmlAttrs = el.attribs ?? {};
+  const attrs = { type: nodeName, htmlAttrs };
   return jsx("element", attrs, children);
 };
 const deserializeText = (el, attrs) => {

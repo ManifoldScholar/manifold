@@ -62,18 +62,18 @@ export default function Editor({
   };
 
   useEffect(() => {
-    if (editor.selection) {
+    if (editor.selection && !htmlMode) {
       const [node] = ReactEditor.toDOMPoint(editor, editor.selection.focus);
       node.parentElement.scrollIntoView({
         behavior: "smooth",
         block: "center"
       });
     }
-  }, [editor, editor.selection]);
+  }, [editor, editor.selection, htmlMode]);
 
   const theme = stylesheets?.map(s => s?.attributes.styles).join("\n");
 
-  const styleTag = `<style>body {  font-family: 'freight-text-pro', 'aleo', serif; color: #b3b3b3;
+  const styleTag = `<style>body {  font-family: serif; color: #b3b3b3;
     font-weight: 400;
     line-height: 1.761;}${theme}</style>`;
 
