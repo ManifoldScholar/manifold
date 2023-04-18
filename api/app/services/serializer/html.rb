@@ -9,7 +9,7 @@ module Serializer
     ELEMENT_BLACK_LIST = %w(script link).freeze
     INLINE_ELEMENTS = %w(b big i small tt abbr acronym cite code dfn em kbd strong samp
                          time var a bdo br img map object q script span sub sup button
-                         input label select textarea).freeze
+                         input label select textarea s strong u).freeze
     MATHML_ELEMENTS = %w(math maction annotation annotation-xml menclose merror mfenced
                          mfrac mi mmultiscripts mn mo mover mpadded mphantom mprescripts
                          mroot mrow ms semantics mspace msqrt mstyle msub msup msubsup
@@ -126,6 +126,7 @@ module Serializer
       representation[:attributes] = node.attributes
         .transform_keys(&:to_sym)
         .transform_values(&:content)
+        .except(:style)
       merge_mathml_element_text_child(node, representation) if mathml_element?(representation)
       true
     end
