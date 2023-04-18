@@ -12,6 +12,7 @@ export const insertImage = (editor, url, alt) => {
   const text = { text: "" };
   const image = { type: "img", htmlAttrs: { src: url, alt }, children: [text] };
   Transforms.insertNodes(editor, image);
+  ReactEditor.focus(editor);
 };
 
 const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
@@ -20,12 +21,11 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
   const urlRef = useRef(null);
   const altRef = useRef(null);
 
-  const addImage = () => {
-    ReactEditor.focus(editor);
+  const addImage = close => {
     const url = urlRef?.current?.inputElement?.value;
     if (!url) return;
     const alt = altRef?.current?.inputElement?.value;
-    Transforms.select(editor, selection);
+    close();
     return insertImage(editor, url, alt);
   };
 

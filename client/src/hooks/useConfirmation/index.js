@@ -13,8 +13,7 @@ export default function useConfirmation() {
     });
     promise.then(
       () => {
-        callback();
-        closeDialog();
+        callback(closeDialog);
       },
       () => {
         closeDialog();

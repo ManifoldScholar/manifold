@@ -56,13 +56,12 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
   const { confirm, confirmation } = useConfirmation();
   const urlRef = useRef(null);
 
-  const addLink = () => {
-    ReactEditor.focus(editor);
+  const addLink = close => {
     const url = urlRef?.current?.inputElement?.value;
     if (!url) return;
-    Transforms.select(editor, selection);
     if (!isValidUrl(url));
-    return insertLink(editor, url);
+    close();
+    insertLink(editor, url);
   };
 
   const getLinkData = e => {

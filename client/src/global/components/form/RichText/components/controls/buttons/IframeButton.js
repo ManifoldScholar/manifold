@@ -17,6 +17,7 @@ export const insertIframe = (editor, url, title) => {
     children: [text]
   };
   Transforms.insertNodes(editor, embed);
+  ReactEditor.focus(editor);
 };
 
 const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
@@ -25,13 +26,12 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
   const urlRef = useRef(null);
   const titleRef = useRef(null);
 
-  const addIframe = () => {
-    ReactEditor.focus(editor);
+  const addIframe = close => {
     const url = urlRef?.current?.inputElement?.value;
     if (!url) return;
     const title = titleRef?.current?.inputElement?.value;
-    Transforms.select(editor, selection);
     if (!isValidUrl(url)) return;
+    close();
     return insertIframe(editor, url, title);
   };
 
