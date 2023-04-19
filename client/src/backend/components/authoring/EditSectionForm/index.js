@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import RichText from "global/components/form/RichText";
@@ -61,6 +61,8 @@ export default function EditSectionForm({
     }
   };
 
+  const saveRef = useRef();
+
   return section ? (
     <Styled.Form
       model={section}
@@ -81,6 +83,7 @@ export default function EditSectionForm({
         sectionId={section.id}
         sectionBody={section.attributes.body}
         stylesheets={stylesheets}
+        nextRef={saveRef}
         {...errorProps}
       />
       <Styled.ButtonOverlay>
@@ -89,6 +92,7 @@ export default function EditSectionForm({
           cancelUrl={lh.link("backendTextSections", textId)}
           submitLabel="actions.save"
           onSaveClick={handleSaveClick}
+          saveRef={saveRef}
         />
       </Styled.ButtonOverlay>
     </Styled.Form>

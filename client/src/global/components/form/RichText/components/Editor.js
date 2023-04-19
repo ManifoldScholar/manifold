@@ -24,13 +24,15 @@ export default function Editor({
   setHasErrors,
   warnErrors,
   setWarnErrors,
-  errors: formErrors = []
+  errors: formErrors = [],
+  nextRef
 }) {
   const editorRef = useRef();
   if (!editorRef.current)
     editorRef.current = withHistory(withReact(withPlugins(createEditor())));
   const editor = editorRef.current;
   const aceRef = useRef();
+  const controlsRef = useRef();
 
   const [htmlMode, toggleHtmlMode] = useState(true);
   const [showCss, toggleCss] = useState(false);
@@ -132,7 +134,9 @@ export default function Editor({
     value: localHtml,
     onValidate: onValidateHtml,
     mode: "html",
-    aceRef
+    aceRef,
+    nextRef,
+    prevRef: controlsRef
   };
 
   const cssProps = {
@@ -205,6 +209,7 @@ export default function Editor({
               toggleStyles={toggleStyles}
               cssVisible={showCss}
               errors={errors}
+              controlsRef={controlsRef}
             />
             <Styled.EditableWrapper
               className={wrapperClasses}

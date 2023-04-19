@@ -11,7 +11,8 @@ export default function ToolbarHTML({
   onClickUndo,
   onClickRedo,
   toggleStyles,
-  cssVisible
+  cssVisible,
+  controlsRef
 }) {
   const menu = useMenuBarState({
     orientation: "horizontal",
@@ -21,6 +22,7 @@ export default function ToolbarHTML({
   return (
     <ReakitMenuBar as={Styled.Toolbar} aria-label="Rich text toolbar" {...menu}>
       <ReakitMenuItem
+        ref={controlsRef}
         as={FunctionButton}
         icon="undo24"
         onClick={onClickUndo}
