@@ -9,7 +9,7 @@ export const clearSlate = editor => {
     try {
       Transforms.removeNodes(editor, { at: [0] });
     } catch (e) {
-      console.log(e);
+      return e;
     }
   });
 };
