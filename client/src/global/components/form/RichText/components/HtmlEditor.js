@@ -4,7 +4,7 @@ import Loadable from "@docusaurus/react-loadable";
 export const HtmlEditor = Loadable({
   loader: () => import("../../CodeArea/Ace").then(ace => ace.default),
   render(Editor, props) {
-    const { aceRef, ...rest } = props;
+    const { aceRef, nextRef, prevRef, ...rest } = props;
     return (
       <Editor
         ref={aceRef}
@@ -32,7 +32,26 @@ export const HtmlEditor = Loadable({
             }
           });
         }}
+        onFocus={() => {
+          if (aceRef.current) aceRef.current.editor.gotoLine(0, 0, true);
+        }}
         editorOptions={{ enableAutoIndent: true }}
+        commands={[
+          {
+            name: "tab",
+            bindKey: { win: "Tab", mac: "Tab" },
+            exec: () => {
+              nextRef.current.focus();
+            }
+          },
+          {
+            name: "shiftTab",
+            bindKey: { win: "Shift+Tab", mac: "Shift+Tab" },
+            exec: () => {
+              prevRef.current.focus();
+            }
+          }
+        ]}
         {...rest}
       />
     );

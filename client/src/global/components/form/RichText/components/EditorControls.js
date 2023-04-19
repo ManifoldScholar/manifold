@@ -12,7 +12,8 @@ export default function EditorControls({
   onClickRedo,
   onClickUndo,
   toggleStyles,
-  errors
+  errors,
+  controlsRef
 }) {
   return (
     <Styled.Controls>
@@ -29,6 +30,7 @@ export default function EditorControls({
           onClickRedo={onClickRedo}
           toggleStyles={toggleStyles}
           cssVisible={cssVisible}
+          controlsRef={controlsRef}
         />
       ) : (
         <ToolbarRTE
