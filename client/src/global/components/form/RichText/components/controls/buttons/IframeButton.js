@@ -1,5 +1,5 @@
 import React, { forwardRef, useRef } from "react";
-import { Transforms } from "slate";
+import { Transforms, Editor, Element as SlateElement } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Dialog from "global/components/dialog";
 import InsertIframeForm from "./insert/IframeForm";
@@ -35,16 +35,77 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
     return insertIframe(editor, url, title);
   };
 
+  const updateIframe = attrs => close => {
+    const url = urlRef?.current?.inputElement?.value ?? attrs.src;
+    if (!url) return;
+    const title = titleRef?.current?.inputElement?.value;
+    close();
+    Transforms.setNodes(editor, {
+      htmlAttrs: { ...attrs, src: url, title }
+    });
+    ReactEditor.focus(editor);
+  };
+
+  // Not totally sure why, but we have to perform an actual update to the node tree after closing the modal before returning focus to the editor. It might be a weird interaction between the focus trap's close callbacks and the editor.
+  const onModalClose = close => {
+    close();
+    const [node] = Editor.above(editor, { at: selection.focus.path });
+    const val = node?.selection_tracker_ignore ?? false;
+    Transforms.setNodes(
+      editor,
+      { selection_tracker_ignore: !val },
+      { at: selection.focus.path.slice(0, -1) }
+    );
+    ReactEditor.focus(editor);
+  };
+
   const getIframeData = e => {
     e.preventDefault();
     const heading = "Insert Iframe";
     const message = <InsertIframeForm urlRef={urlRef} titleRef={titleRef} />;
     if (confirm)
-      confirm(heading, message, addIframe, {
+      confirm(heading, message, addIframe, onModalClose, {
         rejectLabel: "Cancel",
         resolveLabel: "Add"
       });
   };
+
+  const updateIframeData = e => {
+    e.preventDefault();
+
+    const [[iframe]] = Array.from(
+      Editor.nodes(editor, {
+        at: Editor.unhangRange(editor, selection),
+        match: n =>
+          !Editor.isEditor(n) &&
+          SlateElement.isElement(n) &&
+          n.type === "iframe"
+      })
+    );
+
+    const attrs = iframe?.htmlAttrs ?? {};
+    const defaultValues = {
+      src: attrs.src,
+      title: attrs.title
+    };
+
+    const heading = "Update Iframe";
+    const message = (
+      <InsertIframeForm
+        defaultValues={defaultValues}
+        urlRef={urlRef}
+        titleRef={titleRef}
+      />
+    );
+
+    if (confirm)
+      confirm(heading, message, updateIframe(attrs), onModalClose, {
+        rejectLabel: "Cancel",
+        resolveLabel: "Update"
+      });
+  };
+
+  const active = isBlockActive(editor, "iframe");
 
   return (
     <>
@@ -52,8 +113,8 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
         ref={ref}
         {...rest}
         aria-label="iframe"
-        data-active={isBlockActive(editor, "iframe")}
-        onClick={getIframeData}
+        data-active={active}
+        onClick={active ? updateIframeData : getIframeData}
         tabIndex={-1}
       >
         {icon && <Utility.IconComposer icon={icon} size={size} />}
