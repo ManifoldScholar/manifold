@@ -32,7 +32,8 @@ export class FormBaseInput extends PureComponent {
     errorName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     idForInstructions: PropTypes.string,
     renderValue: PropTypes.func,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    defaultValue: PropTypes.string
   };
 
   static contextType = FormContext;
@@ -141,6 +142,7 @@ export class FormBaseInput extends PureComponent {
           value={this.renderValue(this.props)}
           aria-describedby={`${idForError || ""} ${idForInstructions || ""}`}
           autoComplete={this.props.autoComplete}
+          defaultValue={this.props.defaultValue}
         />
         {buttons && this.renderButtons(buttons)}
         {this.props.instructions && (

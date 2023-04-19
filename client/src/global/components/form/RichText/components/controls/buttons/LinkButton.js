@@ -64,13 +64,25 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
     insertLink(editor, url);
   };
 
+  const onModalClose = close => {
+    close();
+    const [node] = Editor.above(editor, { at: selection.focus.path });
+    const val = node?.selection_tracker_ignore ?? false;
+    Transforms.setNodes(
+      editor,
+      { selection_tracker_ignore: !val },
+      { at: selection.focus.path.slice(0, -1) }
+    );
+    ReactEditor.focus(editor);
+  };
+
   const getLinkData = e => {
     e.preventDefault();
     if (active) return unwrapLink(editor);
     const heading = "Insert Link";
     const message = <InsertLinkForm urlRef={urlRef} />;
     if (confirm)
-      confirm(heading, message, addLink, {
+      confirm(heading, message, addLink, onModalClose, {
         rejectLabel: "Cancel",
         resolveLabel: "Add"
       });
