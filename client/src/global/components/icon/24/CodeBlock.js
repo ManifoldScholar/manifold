@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-function EditorRTE(props) {
+function CodeBlock(props) {
   const { className, size, fill, svgProps } = props;
 
   const getSize = () => {
@@ -15,7 +15,7 @@ function EditorRTE(props) {
     className: classNames("manicon-svg", className),
     width: getSize(),
     height: getSize(),
-    viewBox: "0 0 24 24",
+    viewBox: "2 2 24 24",
     fill
   };
   return (
@@ -23,33 +23,28 @@ function EditorRTE(props) {
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M3.75 16.9989H10V17.9989H3.75V16.9989Z"
+        d="M19.6253 8.37496H18.0628V7.12496H19.6253C20.6608 7.12496 21.5003 7.96442 21.5003 8.99996V19.625C21.5003 20.6605 20.6608 21.5 19.6253 21.5H8.37528C7.33975 21.5 6.50028 20.6605 6.50028 19.625V15.5056H7.75028V19.625C7.75028 19.9701 8.03011 20.25 8.37528 20.25H19.6253C19.9705 20.25 20.2503 19.9701 20.2503 19.625V8.99996C20.2503 8.65478 19.9705 8.37496 19.6253 8.37496Z"
       />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M3.75 13.4989H10.75V14.4989H3.75V13.4989Z"
+        d="M15.9766 10.25L13.8457 7.85268L14.7799 7.02223L17.649 10.25L14.7799 13.4777L13.8457 12.6472L15.9766 10.25Z"
       />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M3.75 9.99891H12.625V10.9989H3.75V9.99891Z"
+        d="M7.33651 10.25L9.46742 7.85268L8.53315 7.02223L5.66406 10.25L8.53315 13.4777L9.46742 12.6472L7.33651 10.25Z"
       />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M3.75 6.49891H14.875V7.49891H3.75V6.49891Z"
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M18.9921 6.36525C18.6932 6.19267 18.311 6.29509 18.1384 6.59402L12.7766 15.881L12.9506 18.5795L15.3746 17.381L20.7364 8.09397C20.909 7.79503 20.8066 7.41279 20.5076 7.2402L18.9921 6.36525ZM17.2723 6.09402C17.7211 5.3168 18.7149 5.0505 19.4921 5.49922L21.0076 6.37417C21.7849 6.82289 22.0512 7.81673 21.6024 8.59396L16.0893 18.1432L12.0492 20.1408L11.7591 15.6432L17.2723 6.09402Z"
+        d="M13.0485 6.94522L11.486 14.1327L10.2645 13.8672L11.827 6.67969L13.0485 6.94522Z"
       />
     </svg>
   );
 }
 
-EditorRTE.propTypes = {
+CodeBlock.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   stroke: PropTypes.string,
@@ -57,4 +52,4 @@ EditorRTE.propTypes = {
   svgProps: PropTypes.object
 };
 
-export default EditorRTE;
+export default CodeBlock;
