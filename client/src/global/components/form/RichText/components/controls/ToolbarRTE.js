@@ -111,7 +111,7 @@ export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
       />
       <ReakitMenuItem
         as={BlockButton}
-        icon="code24"
+        icon="codeBlock24"
         format="pre"
         selection={selection}
         {...menu}

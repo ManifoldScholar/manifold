@@ -184,6 +184,7 @@ import Redo24 from "./24/Redo";
 import Iframe24 from "./24/Iframe";
 import RTELink24 from "./24/RTELink";
 import RTEImage24 from "./24/RTEImage";
+import CodeBlock24 from "./24/CodeBlock";
 
 export default {
   ActivityComments64,
@@ -239,6 +240,7 @@ export default {
   Close24,
   Close32,
   Code24,
+  CodeBlock24,
   Comment24,
   Comment32,
   CommentPencil32,
