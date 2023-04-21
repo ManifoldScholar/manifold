@@ -9,7 +9,7 @@ export default function InsertIframeForm({ urlRef, titleRef, defaultValues }) {
         defaultValue={defaultValues?.src}
         ref={urlRef}
         name="url"
-        label="url"
+        label="Iframe Url"
       />
       <Input
         defaultValue={defaultValues?.title}
