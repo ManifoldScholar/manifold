@@ -1,7 +1,8 @@
 import React, { forwardRef, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Transforms, Editor, Element as SlateElement } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
-import Dialog from "global/components/dialog";
+import Modal from "./insert/Modal";
 import InsertIframeForm from "./insert/IframeForm";
 import { useConfirmation } from "hooks";
 import Utility from "global/components/utility";
@@ -25,6 +26,7 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
   const { confirm, confirmation } = useConfirmation();
   const urlRef = useRef(null);
   const titleRef = useRef(null);
+  const { t } = useTranslation();
 
   const addIframe = close => {
     const url = urlRef?.current?.inputElement?.value;
@@ -62,11 +64,15 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
   const getIframeData = e => {
     e.preventDefault();
     const heading = "Insert Iframe";
-    const message = <InsertIframeForm urlRef={urlRef} titleRef={titleRef} />;
+    const form = <InsertIframeForm urlRef={urlRef} titleRef={titleRef} />;
     if (confirm)
-      confirm(heading, message, addIframe, onModalClose, {
-        rejectLabel: "Cancel",
-        resolveLabel: "Add"
+      confirm({
+        heading,
+        icon,
+        form,
+        callback: addIframe,
+        closeCallback: onModalClose,
+        resolveLabel: t("actions.add")
       });
   };
 
@@ -90,7 +96,7 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
     };
 
     const heading = "Update Iframe";
-    const message = (
+    const form = (
       <InsertIframeForm
         defaultValues={defaultValues}
         urlRef={urlRef}
@@ -99,9 +105,13 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
     );
 
     if (confirm)
-      confirm(heading, message, updateIframe(attrs), onModalClose, {
-        rejectLabel: "Cancel",
-        resolveLabel: "Update"
+      confirm({
+        heading,
+        icon,
+        form,
+        callback: updateIframe(attrs),
+        closeCallback: onModalClose,
+        resolveLabel: t("actions.add")
       });
   };
 
@@ -119,7 +129,7 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
       >
         {icon && <Utility.IconComposer icon={icon} size={size} />}
       </Styled.Button>
-      {confirmation && <Dialog.Confirm {...confirmation} />}
+      {confirmation && <Modal {...confirmation} />}
     </>
   );
 };

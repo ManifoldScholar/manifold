@@ -9,13 +9,13 @@ export default function InsertImageForm({ urlRef, altRef, defaultValues }) {
         defaultValue={defaultValues?.src}
         ref={urlRef}
         name="url"
-        label="url"
+        label="Image Url"
       />
       <Input
         defaultValue={defaultValues?.alt}
         ref={altRef}
         name="alt"
-        label="alt"
+        label="Alt Text"
       />
     </Styled.Form>
   );

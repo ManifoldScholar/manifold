@@ -1,11 +1,12 @@
 import React, { forwardRef, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Editor, Element as SlateElement, Transforms, Range } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
 import { isValidUrl } from "../../../utils/helpers";
 import InsertLinkForm from "./insert/LinkForm";
 import { useConfirmation } from "hooks";
-import Dialog from "global/components/dialog";
+import Modal from "./insert/Modal";
 import * as Styled from "./styles";
 
 export const isLinkActive = editor => {
@@ -55,6 +56,7 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
   const active = isLinkActive(editor);
   const { confirm, confirmation } = useConfirmation();
   const urlRef = useRef(null);
+  const { t } = useTranslation();
 
   const addLink = close => {
     const url = urlRef?.current?.inputElement?.value;
@@ -80,11 +82,15 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
     e.preventDefault();
     if (active) return unwrapLink(editor);
     const heading = "Insert Link";
-    const message = <InsertLinkForm urlRef={urlRef} />;
+    const form = <InsertLinkForm urlRef={urlRef} />;
     if (confirm)
-      confirm(heading, message, addLink, onModalClose, {
-        rejectLabel: "Cancel",
-        resolveLabel: "Add"
+      confirm({
+        heading,
+        icon,
+        form,
+        callback: addLink,
+        closeCallback: onModalClose,
+        resolveLabel: t("actions.add")
       });
   };
 
@@ -99,7 +105,7 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
         tabIndex={-1}
       >
         {icon && <Utility.IconComposer icon={icon} size={size} />}
-        {confirmation && <Dialog.Confirm {...confirmation} />}
+        {confirmation && <Modal {...confirmation} />}
       </Styled.Button>
     </>
   );

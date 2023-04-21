@@ -1,8 +1,9 @@
 import React, { forwardRef, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Transforms, Editor, Element as SlateElement } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
-import Dialog from "global/components/dialog";
+import Modal from "./insert/Modal";
 import { useConfirmation } from "hooks";
 import InsertImageForm from "./insert/ImageForm";
 import { isBlockActive } from "./BlockButton";
@@ -20,6 +21,7 @@ export const insertImage = (editor, url, alt) => {
 };
 
 const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
+  const { t } = useTranslation();
   const editor = useSlate();
   const { confirm, confirmation } = useConfirmation();
   const urlRef = useRef(null);
@@ -60,11 +62,15 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
   const getImageData = e => {
     e.preventDefault();
     const heading = "Insert Image";
-    const message = <InsertImageForm urlRef={urlRef} altRef={altRef} />;
+    const form = <InsertImageForm urlRef={urlRef} altRef={altRef} />;
     if (confirm)
-      confirm(heading, message, addImage, onModalClose, {
-        rejectLabel: "Cancel",
-        resolveLabel: "Add"
+      confirm({
+        heading,
+        icon,
+        form,
+        callback: addImage,
+        closeCallback: onModalClose,
+        resolveLabel: t("actions.add")
       });
   };
 
@@ -86,7 +92,7 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
     };
 
     const heading = "Update Image";
-    const message = (
+    const form = (
       <InsertImageForm
         defaultValues={defaultValues}
         urlRef={urlRef}
@@ -95,9 +101,13 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
     );
 
     if (confirm)
-      confirm(heading, message, updateImage(attrs), onModalClose, {
-        rejectLabel: "Cancel",
-        resolveLabel: "Update"
+      confirm({
+        heading,
+        icon,
+        form,
+        callback: updateImage(attrs),
+        closeCallback: onModalClose,
+        resolveLabel: t("actions.update")
       });
   };
 
@@ -115,7 +125,7 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
       >
         {icon && <Utility.IconComposer icon={icon} size={size} />}
       </Styled.Button>
-      {confirmation && <Dialog.Confirm {...confirmation} />}
+      {confirmation && <Modal {...confirmation} />}
     </>
   );
 };
