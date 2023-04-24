@@ -6,7 +6,10 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
 import { useHistory } from "react-router-dom";
-import { serializeToHtml } from "global/components/form/RichText/serializers";
+import {
+  serializeToHtml,
+  removeFormatting
+} from "global/components/form/RichText/serializers";
 import * as Styled from "./styles";
 
 export default function EditSectionForm({
@@ -28,7 +31,7 @@ export default function EditSectionForm({
           position,
           kind,
           name,
-          body
+          body: removeFormatting(body)
         }
       };
     return {
