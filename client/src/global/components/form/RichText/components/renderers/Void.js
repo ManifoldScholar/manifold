@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { ReactEditor, useFocused, useSelected } from "slate-react";
+import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
 export default function VoidRenderer({
@@ -44,10 +45,15 @@ export default function VoidRenderer({
     <div {...attributes}>
       {children}
       <Styled.VoidWrapper
-        ref={ref}
         contentEditable={false}
         $selected={selected && focused}
-      />
+      >
+        <Styled.VoidLabel>
+          <Utility.IconComposer icon="code24" />
+          Preview only. Switch to HTML mode to edit this block:
+        </Styled.VoidLabel>
+        <div ref={ref} />
+      </Styled.VoidWrapper>
     </div>
   );
 }
