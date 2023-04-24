@@ -148,5 +148,6 @@ export default {
   EntitlementsPending: EntitlementsPending.List,
   EntitlementsPendingNew: EntitlementsPending.AddEdit,
   EntitlementsPendingEdit: EntitlementsPending.AddEdit,
-  EntitlementsPendingImport: EntitlementsPending.Import
+  EntitlementsPendingImport: EntitlementsPending.Import,
+  CSVEntitlementImports: EntitlementsPending.CSVImports
 };

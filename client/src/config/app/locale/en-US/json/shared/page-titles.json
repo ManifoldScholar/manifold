@@ -8,6 +8,7 @@
     "dashboard": "Dashboard",
     "email": "Email",
     "entitlements": "Entitlements",
+    "entitlement-imports": "Entitlement Imports",
     "events": "Activity",
     "export_targets": "Export Targets",
     "exports": "Exports",

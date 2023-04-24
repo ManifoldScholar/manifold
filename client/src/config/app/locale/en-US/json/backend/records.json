@@ -23,6 +23,7 @@
         "admin": "Admin",
         "editor": "Editor",
         "creator": "Project Creator",
+        "project_creator": "$t(records.users.role_options.creator)",
         "marketeer": "Marketeer",
         "reader": "Reader"
       },

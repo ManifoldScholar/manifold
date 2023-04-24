@@ -67,6 +67,7 @@ export default class ListEntitiesListTitle extends PureComponent {
         title={this.title}
         titleIcon={this.titleIcon}
         titleTag={this.props.titleTag}
+        titleUtility={this.props.titleUtility}
       />
     );
   }

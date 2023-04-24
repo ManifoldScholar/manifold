@@ -259,6 +259,7 @@ export default class ListEntities extends PureComponent {
                 pagination={this.pagination}
                 showCount={this.showCountInTitle}
                 titleTag={this.props.titleTag}
+                titleUtility={this.props.titleUtility}
               />
             )}
             <div className={contentsWrapperClassName}>
@@ -303,7 +304,7 @@ export default class ListEntities extends PureComponent {
                 <Pagination
                   pagination={this.pagination}
                   padding={this.paginationPadding}
-                  paginationTarget={`#${this.idPrefix}-${id}`}
+                  paginationTarget={null}
                   onPageClick={this.callback("onPageClick")}
                   style={this.paginationStyle}
                 />

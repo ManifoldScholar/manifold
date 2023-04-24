@@ -17,6 +17,8 @@ import {
 import { childRoutes } from "helpers/router";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
+import { Link } from "react-router-dom";
+import IconComposer from "global/components/utility/IconComposer";
 
 function PendingEntitlementsList({
   route,
@@ -75,9 +77,25 @@ function PendingEntitlementsList({
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, () => deleteEntitlement(id).then(refresh()));
-
-    // TODO: catch errors and pass to entities list
   };
+
+  const utility = (
+    <div className="utility-button-group utility-button-group--inline">
+      <Link
+        to={lh.link("backendRecordsEntitlementImports")}
+        className="utility-button"
+      >
+        <IconComposer
+          icon="eyeOpen32"
+          size={26}
+          className="utility-button__icon utility-button__icon--highlight"
+        />
+        <span className="utility-button__text">
+          {t("entitlements.imports.view_imports_label")}
+        </span>
+      </Link>
+    </div>
+  );
 
   return (
     <>
@@ -86,6 +104,7 @@ function PendingEntitlementsList({
         <EntitiesList
           title={t("entitlements.pending.header")}
           titleStyle="bar"
+          titleUtility={utility}
           entityComponent={PendingEntitlementRow}
           entityComponentProps={{ onEdit, onDelete }}
           entities={entitlements}
