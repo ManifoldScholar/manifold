@@ -5,6 +5,7 @@ import { getName, textContent } from "domutils";
 import { blackList } from "../../utils/elements";
 import { isSlateVoid } from "../../plugins/withVoids";
 import htmlSerializer from "dom-serializer";
+import has from "lodash/has";
 
 import {
   normalizeChildren,
@@ -94,6 +95,9 @@ const deserializeElement = ({
   if (blackList.includes(el.type)) return null;
 
   const nodeName = getName(el);
+
+  if (has(el.attribs, "void"))
+    return deserializeVoid(el, nodeName, el.childNodes);
 
   if (
     nodeName === "br" &&
