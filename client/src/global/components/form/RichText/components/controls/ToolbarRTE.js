@@ -28,6 +28,7 @@ export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
         as={FunctionButton}
         icon="undo24"
         onClick={onClickUndo}
+        tooltip="undo"
         isFirst
         {...menu}
       />
@@ -35,6 +36,7 @@ export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
         as={FunctionButton}
         icon="redo24"
         onClick={onClickRedo}
+        tooltip="redo"
         {...menu}
       />
       <Styled.ToolbarSpacer />

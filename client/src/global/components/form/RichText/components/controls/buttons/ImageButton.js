@@ -7,6 +7,10 @@ import Modal from "./insert/Modal";
 import { useConfirmation } from "hooks";
 import InsertImageForm from "./insert/ImageForm";
 import { isBlockActive } from "./BlockButton";
+import Tooltip from "global/components/atomic/Tooltip";
+import TooltipContent from "./TooltipContent";
+import { descriptions, labels } from "./TooltipContent/hotkeys";
+import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 export const insertImage = (editor, url, alt) => {
@@ -61,6 +65,8 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
 
   const getImageData = e => {
     e.preventDefault();
+    if (isEmpty(selection)) return;
+
     const heading = "Insert Image";
     const form = <InsertImageForm urlRef={urlRef} altRef={altRef} />;
     if (confirm)
@@ -114,19 +120,28 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
   const active = isBlockActive(editor, "img");
 
   return (
-    <>
-      <Styled.Button
-        ref={ref}
-        {...rest}
-        aria-label="image"
-        data-active={active}
-        onClick={active ? updateImageData : getImageData}
-        tabIndex={-1}
-      >
-        {icon && <Utility.IconComposer icon={icon} size={size} />}
-      </Styled.Button>
-      {confirmation && <Modal {...confirmation} />}
-    </>
+    <Tooltip
+      content={
+        <TooltipContent label={labels.img} description={descriptions.img} />
+      }
+      xOffset="-75px"
+      yOffset="43px"
+      delay={1}
+    >
+      <div>
+        <Styled.Button
+          ref={ref}
+          {...rest}
+          aria-label="image"
+          data-active={active}
+          onClick={active ? updateImageData : getImageData}
+          tabIndex={-1}
+        >
+          {icon && <Utility.IconComposer icon={icon} size={size} />}
+        </Styled.Button>
+        {confirmation && <Modal {...confirmation} />}
+      </div>
+    </Tooltip>
   );
 };
 

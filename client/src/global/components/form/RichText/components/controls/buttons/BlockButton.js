@@ -2,6 +2,10 @@ import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
 import { Editor, Element as SlateElement, Transforms, Range } from "slate";
 import Utility from "global/components/utility";
+import Tooltip from "global/components/atomic/Tooltip";
+import TooltipContent from "./TooltipContent";
+import { hotkeys, labels } from "./TooltipContent/hotkeys";
+import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 const LIST_TYPES = ["ol", "ul"];
@@ -59,21 +63,31 @@ const BlockButton = ({ format, icon, size, selection, ...rest }, ref) => {
   const editor = useSlate();
 
   return (
-    <Styled.Button
-      ref={ref}
-      {...rest}
-      aria-label={format}
-      data-active={isBlockActive(editor, format)}
-      onClick={event => {
-        event.preventDefault();
-        Transforms.select(editor, selection);
-        toggleBlock(editor, format);
-        ReactEditor.focus(editor);
-      }}
-      tabIndex={-1}
+    <Tooltip
+      content={
+        <TooltipContent label={labels[format]} hotkeys={hotkeys[format]} />
+      }
+      xOffset="-75px"
+      yOffset="43px"
+      delay={1}
     >
-      {icon && <Utility.IconComposer icon={icon} size={size} />}
-    </Styled.Button>
+      <Styled.Button
+        ref={ref}
+        {...rest}
+        aria-label={format}
+        data-active={isBlockActive(editor, format)}
+        onClick={event => {
+          event.preventDefault();
+          if (isEmpty(selection)) return;
+          Transforms.select(editor, selection);
+          toggleBlock(editor, format);
+          ReactEditor.focus(editor);
+        }}
+        tabIndex={-1}
+      >
+        {icon && <Utility.IconComposer icon={icon} size={size} />}
+      </Styled.Button>
+    </Tooltip>
   );
 };
 

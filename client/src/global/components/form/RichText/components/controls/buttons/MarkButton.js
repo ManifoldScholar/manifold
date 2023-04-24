@@ -2,6 +2,10 @@ import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
 import { Editor, Transforms, Node } from "slate";
 import Utility from "global/components/utility";
+import Tooltip from "global/components/atomic/Tooltip";
+import TooltipContent from "./TooltipContent";
+import { hotkeys, labels } from "./TooltipContent/hotkeys";
+import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 const isMarkActive = (editor, format) => {
@@ -33,22 +37,32 @@ const MarkButton = (
   const editor = useSlate();
 
   return (
-    <Styled.Button
-      ref={ref}
-      {...rest}
-      aria-label={format}
-      data-active={isMarkActive(editor, format)}
-      onClick={event => {
-        event.preventDefault();
-        Transforms.select(editor, selection);
-        toggleMark(editor, format);
-        ReactEditor.focus(editor);
-      }}
-      tabIndex={isFirst ? 0 : -1}
+    <Tooltip
+      content={
+        <TooltipContent label={labels[format]} hotkeys={hotkeys[format]} />
+      }
+      xOffset="-75px"
+      yOffset="43px"
+      delay={1}
     >
-      {icon && <Utility.IconComposer icon={icon} />}
-      {label && label}
-    </Styled.Button>
+      <Styled.Button
+        ref={ref}
+        {...rest}
+        aria-label={format}
+        data-active={isMarkActive(editor, format)}
+        onClick={event => {
+          event.preventDefault();
+          if (isEmpty(selection)) return;
+          Transforms.select(editor, selection);
+          toggleMark(editor, format);
+          ReactEditor.focus(editor);
+        }}
+        tabIndex={isFirst ? 0 : -1}
+      >
+        {icon && <Utility.IconComposer icon={icon} />}
+        {label && label}
+      </Styled.Button>
+    </Tooltip>
   );
 };
 

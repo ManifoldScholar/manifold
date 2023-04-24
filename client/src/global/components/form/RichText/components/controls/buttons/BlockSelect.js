@@ -2,6 +2,10 @@ import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
 import { Transforms } from "slate";
 import { toggleBlock, isBlockActive } from "./BlockButton";
+import Tooltip from "global/components/atomic/Tooltip";
+import TooltipContent from "./TooltipContent";
+import { hotkeys, labels } from "./TooltipContent/hotkeys";
+import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 const getActiveBlock = editor => {
@@ -33,25 +37,35 @@ const BlockSelect = ({ options, selection, ...rest }, ref) => {
   const active = getActiveBlock(editor);
 
   return (
-    <Styled.SelectWrapper>
-      <Styled.Select
-        ref={ref}
-        {...rest}
-        aria-label="Text styles"
-        data-active={active !== "p" && active !== ""}
-        value={active}
-        onChange={e => {
-          e.preventDefault();
-          Transforms.select(editor, selection);
-          toggleBlock(editor, e.target.value);
-          ReactEditor.focus(editor);
-        }}
-        tabIndex={-1}
-      >
-        {renderOptions}
-      </Styled.Select>
-      <Styled.SelectIcon icon="disclosureDown24" size={16} />
-    </Styled.SelectWrapper>
+    <Tooltip
+      content={
+        <TooltipContent label={labels[active]} hotkeys={hotkeys[active]} />
+      }
+      xOffset="-75px"
+      yOffset="43px"
+      delay={1}
+    >
+      <Styled.SelectWrapper>
+        <Styled.Select
+          ref={ref}
+          {...rest}
+          aria-label="Text styles"
+          data-active={active !== "p" && active !== ""}
+          value={active}
+          onChange={e => {
+            e.preventDefault();
+            if (isEmpty(selection)) return;
+            Transforms.select(editor, selection);
+            toggleBlock(editor, e.target.value);
+            ReactEditor.focus(editor);
+          }}
+          tabIndex={-1}
+        >
+          {renderOptions}
+        </Styled.Select>
+        <Styled.SelectIcon icon="disclosureDown24" size={16} />
+      </Styled.SelectWrapper>
+    </Tooltip>
   );
 };
 

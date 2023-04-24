@@ -8,6 +8,9 @@ import { useConfirmation } from "hooks";
 import Utility from "global/components/utility";
 import { isValidUrl } from "../../../utils/helpers";
 import { isBlockActive } from "./BlockButton";
+import Tooltip from "global/components/atomic/Tooltip";
+import TooltipContent from "./TooltipContent";
+import { descriptions, labels } from "./TooltipContent/hotkeys";
 import * as Styled from "./styles";
 
 export const insertIframe = (editor, url, title) => {
@@ -118,19 +121,31 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
   const active = isBlockActive(editor, "iframe");
 
   return (
-    <>
-      <Styled.Button
-        ref={ref}
-        {...rest}
-        aria-label="iframe"
-        data-active={active}
-        onClick={active ? updateIframeData : getIframeData}
-        tabIndex={-1}
-      >
-        {icon && <Utility.IconComposer icon={icon} size={size} />}
-      </Styled.Button>
-      {confirmation && <Modal {...confirmation} />}
-    </>
+    <Tooltip
+      content={
+        <TooltipContent
+          label={labels.iframe}
+          description={descriptions.iframe}
+        />
+      }
+      xOffset="-75px"
+      yOffset="43px"
+      delay={1}
+    >
+      <div>
+        <Styled.Button
+          ref={ref}
+          {...rest}
+          aria-label="iframe"
+          data-active={active}
+          onClick={active ? updateIframeData : getIframeData}
+          tabIndex={-1}
+        >
+          {icon && <Utility.IconComposer icon={icon} size={size} />}
+        </Styled.Button>
+        {confirmation && <Modal {...confirmation} />}
+      </div>
+    </Tooltip>
   );
 };
 

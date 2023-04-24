@@ -7,6 +7,10 @@ import { isValidUrl } from "../../../utils/helpers";
 import InsertLinkForm from "./insert/LinkForm";
 import { useConfirmation } from "hooks";
 import Modal from "./insert/Modal";
+import Tooltip from "global/components/atomic/Tooltip";
+import TooltipContent from "./TooltipContent";
+import { hotkeys, labels } from "./TooltipContent/hotkeys";
+import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 export const isLinkActive = editor => {
@@ -80,6 +84,7 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
 
   const getLinkData = e => {
     e.preventDefault();
+    if (isEmpty(selection)) return;
     if (active) return unwrapLink(editor);
     const heading = "Insert Link";
     const form = <InsertLinkForm urlRef={urlRef} />;
@@ -95,7 +100,12 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
   };
 
   return (
-    <>
+    <Tooltip
+      content={<TooltipContent label={labels.link} hotkeys={hotkeys.link} />}
+      xOffset="-75px"
+      yOffset="43px"
+      delay={1}
+    >
       <Styled.Button
         ref={ref}
         {...rest}
@@ -107,7 +117,7 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
         {icon && <Utility.IconComposer icon={icon} size={size} />}
         {confirmation && <Modal {...confirmation} />}
       </Styled.Button>
-    </>
+    </Tooltip>
   );
 };
 
