@@ -37,6 +37,11 @@ export default function CSVImportForm() {
         accepts="csv"
         name="attributes[file]"
       />
+      <Form.TextInput
+        label={t("entitlements.pending.name_label")}
+        instructions={t("entitlements.pending.name_instructions")}
+        name="attributes[name]"
+      />
       <Form.DrawerButtons
         showCancel
         cancelUrl={lh.link("backendRecordsEntitlements")}

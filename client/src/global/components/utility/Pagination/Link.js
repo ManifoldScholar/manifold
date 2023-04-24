@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 function Link({
   page,
   paginationClickHandler,
-  paginationTarget = "#pagination-target",
+  paginationTarget,
   disabled,
   children,
   ...props
@@ -18,7 +18,7 @@ function Link({
       ? { to: handler }
       : {
           onClick: !disabled ? handler : event => event.preventDefault(),
-          href: paginationTarget
+          href: paginationTarget ?? "#"
         };
 
   return (

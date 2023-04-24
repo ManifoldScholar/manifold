@@ -38,6 +38,7 @@ export default class ListEntitiesListBarTitle extends PureComponent {
         iconAccented
         count={this.count}
         titleTag={this.props.titleTag}
+        utility={this.props.titleUtility}
       >
         {this.title}
       </Layout.ViewHeader>

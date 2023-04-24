@@ -37,7 +37,15 @@
       "import_header": "Entitlement CSV Import",
       "upload_label": "Upload a CSV",
       "upload_instructions": "Manifold can import entitlements from a CSV file, including pending entitlements for not yet registered users. See the documentation for CSV format.",
+      "name_label": "Name",
+      "name_instructions": "Optionally, give the import a name for later reference.",
       "submit_label": "Import"
+    },
+    "imports": {
+      "header": "Entitlement CSV Imports",
+      "view_pending_label": "View Pending Entitlements",
+      "view_imports_label": "View CSV Imports",
+      "results_header": "Results:"
     }
   }
 }
