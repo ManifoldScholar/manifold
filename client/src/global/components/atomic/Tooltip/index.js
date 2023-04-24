@@ -7,7 +7,8 @@ export default function Tooltip({
   children,
   content,
   xOffset = 0,
-  yOffset = 20
+  yOffset = 20,
+  delay = 0
 }) {
   const [userClosed, setUserClosed] = useState(false);
   const tooltipRef = useRef(null);
@@ -27,6 +28,13 @@ export default function Tooltip({
 
   const uid = useUID();
 
+  const renderContent =
+    typeof content === "string" ? (
+      <Styled.ContentWrapper>{content}</Styled.ContentWrapper>
+    ) : (
+      content
+    );
+
   return children && content ? (
     <Styled.Wrapper>
       {React.cloneElement(children, {
@@ -41,8 +49,9 @@ export default function Tooltip({
         $xOffset={xOffset}
         $yOffset={yOffset}
         $userClosed={userClosed}
+        $delay={delay}
       >
-        {content}
+        {renderContent}
       </Styled.Tooltip>
     </Styled.Wrapper>
   ) : null;

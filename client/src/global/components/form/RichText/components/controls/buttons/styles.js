@@ -19,6 +19,7 @@ export const Button = styled.button`
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-semibold);
   border-radius: 4px;
+  margin-inline-start: 3px;
 
   &:hover {
     background-color: var(--background-color);
@@ -28,10 +29,6 @@ export const Button = styled.button`
   &[data-active="true"] {
     color: var(--drawer-bg-color);
     background-color: var(--color-accent-primary);
-  }
-
-  &:first-child {
-    margin-inline-start: -5px;
   }
 `;
 
