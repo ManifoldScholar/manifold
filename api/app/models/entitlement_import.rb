@@ -7,6 +7,7 @@ class EntitlementImport < ApplicationRecord
   include ProvidesEntitlements
   include SerializedAbilitiesFor
   include TrackedCreator
+  include Filterable
 
   has_many :entitlement_import_rows, -> { in_order }, dependent: :destroy,
     inverse_of: :entitlement_import
@@ -22,6 +23,10 @@ class EntitlementImport < ApplicationRecord
   def to_upsertable_entitler
     creator&.to_upsertable_entitler || super
   end
+
+  scope :with_order, -> {
+    order(created_at: :desc)
+  }
 
   private
 
