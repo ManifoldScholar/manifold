@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
-import { buttonUnstyled, defaultFocusStyle } from "theme/styles/mixins";
+import {
+  buttonUnstyled,
+  defaultFocusStyle,
+  formLabelPrimary
+} from "theme/styles/mixins";
 
 export const RemoveButton = styled.button`
   ${buttonUnstyled}
@@ -45,17 +49,34 @@ export const VoidWrapper = styled.div`
   width: 110%;
   padding-inline: 8%;
   padding-block-end: 20px;
-  padding-block-start: 10px;
+  padding-block-start: 20px;
   position: relative;
   background-color: var(--drawer-bg-color);
-  box-shadow: 5px 5px 8px var(--color-base-neutral100);
+  box-shadow: 3px 3px 10px var(--color-base-neutral100);
   border-radius: 4px;
   border: 0;
 
   .scheme-light & {
     background-color: var(--color-base-neutral20);
-    box-shadow: 5px 5px 8px var(--weak-color);
+    box-shadow: 3px 3px 10px var(--color-base-neutral30);
   }
 
   ${({ $selected }) => $selected && `${defaultFocusStyle} outline-offset: 1px;`}
+`;
+
+export const VoidLabel = styled.span`
+  ${formLabelPrimary}
+  font-size: 14px;
+  color: var(--color-base-yellow20);
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+
+  .scheme-light & {
+    color: var(--color-base-violet75);
+  }
+
+  > svg {
+    margin-top: 1px;
+  }
 `;
