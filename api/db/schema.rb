@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_10_195543) do
+ActiveRecord::Schema.define(version: 2023_04_25_172153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -1336,7 +1336,6 @@ ActiveRecord::Schema.define(version: 2023_04_10_195543) do
     t.jsonb "body_json", default: "{}", null: false
     t.jsonb "citations", default: {}
     t.bigint "position"
-    t.boolean "has_mathml", default: false
     t.index ["ingestion_source_id"], name: "index_text_sections_on_ingestion_source_id"
     t.index ["source_identifier"], name: "index_text_sections_on_source_identifier"
     t.index ["text_id", "position"], name: "index_text_sections_on_text_id_and_position"
