@@ -26,17 +26,25 @@ function SearchResultsTypeGeneric(props) {
   const { t } = useTranslation();
 
   const maybeHtml = item => {
-    const isHtml = !!item.__html;
-    return isHtml ? { dangerouslySetInnerHTML: { ...item } } : {};
+    const hasHtml = !!item.__html;
+    const hasTags = typeof item === "string" && item.match(/(<([^>]+)>)/gi);
+    /* eslint-disable no-nested-ternary */
+    return hasHtml
+      ? { dangerouslySetInnerHTML: { ...item } }
+      : hasTags
+      ? { dangerouslySetInnerHTML: { __html: item } }
+      : {};
   };
 
   const maybeReactNode = item => {
-    const isReactNode = React.isValidElement(item) || typeof item === "string";
+    const isReactNode =
+      React.isValidElement(item) ||
+      (typeof item === "string" && !item.match(/(<([^>]+)>)/gi));
     return isReactNode ? item : null;
   };
 
   const maybeWithLink = ({ to, children, tabIndex = 0, ariaHidden = null }) => {
-    return url ? (
+    return to ? (
       <Styled.Link to={to} tabIndex={tabIndex} aria-hidden={ariaHidden}>
         {children}
       </Styled.Link>
@@ -64,14 +72,16 @@ function SearchResultsTypeGeneric(props) {
         <Styled.TextCol>
           <Styled.TextTop>
             <Styled.TextTopLeft>
-              {parent && !hideParent && (
-                <Styled.Parent {...maybeHtml(parent)}>
-                  {maybeWithLink({
-                    to: parentUrl,
-                    children: maybeReactNode(parent)
-                  })}
-                </Styled.Parent>
-              )}
+              {parent &&
+                !hideParent &&
+                maybeWithLink({
+                  to: parentUrl,
+                  children: (
+                    <Styled.Parent {...maybeHtml(parent)}>
+                      {maybeReactNode(parent)}
+                    </Styled.Parent>
+                  )
+                })}
               {title &&
                 maybeWithLink({
                   to: url,

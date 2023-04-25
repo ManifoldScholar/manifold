@@ -74,7 +74,7 @@ export const TextTopRight = styled.div`
   gap: 12px;
 `;
 
-export const Parent = styled.div`
+export const Parent = styled.span`
   margin: 0 0 12px;
   font-size: 18px;
   font-family: var(--font-family-sans);
