@@ -9,17 +9,19 @@ import { useTranslation } from "react-i18next";
 import { uid } from "react-uid";
 import { useErrorHandler } from "react-error-boundary";
 
-const createNode = n =>
-  React.createElement(
+const createNode = n => {
+  const { style, ...attrs } = n.attributes ?? {};
+  return React.createElement(
     n.tag,
     {
-      ...n.attributes,
+      ...attrs,
       key: n.nodeUuid ?? uid(n),
       "data-node-uuid": n.nodeUuid,
       "data-text-digest": n.textDigest
     },
     n.content ? n.content : n.children?.map(child => createNode(child))
   );
+};
 
 function MathNode({
   attributes,
@@ -52,6 +54,8 @@ function MathNode({
   const wrapperStyles =
     Wrapper === "div" ? { width: "max-content", maxWidth: "100%" } : {};
 
+  const { style, ...mathAttrs } = attributes ?? {};
+
   return (
     <Wrapper
       data-mathml="true"
@@ -62,7 +66,7 @@ function MathNode({
       data-annotation-ids={annotationIds}
       {...interactiveAttributes}
     >
-      <math {...attributes}>{childNodes()}</math>
+      <math {...mathAttrs}>{childNodes()}</math>
     </Wrapper>
   );
 }
