@@ -96,6 +96,16 @@ export class NavigationStatic extends PureComponent {
 
   renderStaticItem(link, index) {
     if (link.hideInNav) return null;
+    if (link.dropdown) {
+      const Disclosure = link.disclosure;
+      return (
+        <DisclosureNavigationMenu
+          disclosure={<Disclosure link={link} index={index} />}
+        >
+          {link.dropdownContent}
+        </DisclosureNavigationMenu>
+      );
+    }
     return (
       <li key={`${link.label}-${index}`} className="site-nav__item">
         {link.route

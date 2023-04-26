@@ -312,6 +312,7 @@ export default {
   Plus24,
   Privacy24,
   ProjectCollections64,
+  ProjectCollection32,
   Projects64,
   ReadingGroup24,
   RecentActivity64,

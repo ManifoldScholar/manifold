@@ -42,7 +42,8 @@ export default function useMenuState(initialVisible = false, onBlur) {
     id,
     visible,
     onBlur: handleBlur,
-    onKeyDown: handleKeyDown
+    onKeyDown: handleKeyDown,
+    toggleVisible
   };
 
   const state = useMemo(
