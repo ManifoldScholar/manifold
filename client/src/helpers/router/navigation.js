@@ -56,6 +56,7 @@ class Navigation {
       {
         label: "titles.projects",
         route: "backendProjects",
+        dropdown: true,
         children: [
           {
             label: "titles.projects_all",

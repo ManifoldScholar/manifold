@@ -8,6 +8,8 @@ import navigation from "helpers/router/navigation";
 import Utility from "global/components/utility";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
 import { useTranslation } from "react-i18next";
+import ProjectsNav from "./SecondaryNav/Projects";
+import ProjectsButton from "./SecondaryNav/Projects/Button";
 
 export default function LayoutHeader({
   commonActions,
@@ -16,7 +18,12 @@ export default function LayoutHeader({
 }) {
   const { t } = useTranslation();
 
-  const links = navigation.backend();
+  const baseLinks = navigation.backend();
+  const projectsLink = baseLinks.find(l => l.route === "backendProjects");
+  projectsLink.dropdownContent = <ProjectsNav links={projectsLink.children} />;
+  projectsLink.disclosure = ProjectsButton;
+  const links = baseLinks.filter(l => l.route !== "backendProjects");
+  links.splice(1, 0, projectsLink);
 
   return (
     <header className="header-app header-app--sticky">
