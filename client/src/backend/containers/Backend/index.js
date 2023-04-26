@@ -12,6 +12,7 @@ import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import BodyClass from "hoc/BodyClass";
 import Authorize from "hoc/Authorize";
+import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 
 const { request } = entityStoreActions;
 
@@ -98,9 +99,13 @@ export class BackendContainer extends PureComponent {
               authentication={this.props.authentication}
               commonActions={this.commonActions}
             />
-            <div className="main-content">
-              {childRoutes(this.props.route, { childProps: this.childProps() })}
-            </div>
+            <BreadcrumbsProvider>
+              <div className="main-content">
+                {childRoutes(this.props.route, {
+                  childProps: this.childProps()
+                })}
+              </div>
+            </BreadcrumbsProvider>
             <Footers.FrontendFooter
               pages={this.props.pages}
               authentication={this.props.authentication}
