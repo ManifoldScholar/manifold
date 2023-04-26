@@ -7,7 +7,7 @@ import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 
 const { request } = entityStoreActions;
@@ -164,7 +164,7 @@ export class ActionCalloutForm extends Component {
     const t = this.props.t;
     return (
       <>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           icon="touch64"
           title={this.drawerTitle}
           buttons={this.buttons}

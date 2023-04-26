@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import TwitterQuery from "backend/components/twitter-query";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 export class TwitterQueryNewContainer extends Component {
   static displayName = "TwitterQuery.New";
@@ -33,7 +33,7 @@ export class TwitterQueryNewContainer extends Component {
 
     return (
       <section>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={this.props.t("projects.social.title")}
           icon="activityTweet64"
         />

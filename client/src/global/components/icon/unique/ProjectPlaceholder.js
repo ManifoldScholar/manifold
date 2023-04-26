@@ -9,12 +9,14 @@ export default class SVGProjectPlaceholder extends Component {
     color: PropTypes.string,
     ariaLabel: PropTypes.bool,
     mode: PropTypes.oneOf(["responsive", "small", "large"]),
-    className: PropTypes.string
+    className: PropTypes.string,
+    borderless: PropTypes.bool
   };
 
   static defaultProps = {
     mode: "responsive",
-    ariaLabel: true
+    ariaLabel: true,
+    borderless: false
   };
 
   get blockClass() {
@@ -71,11 +73,13 @@ export default class SVGProjectPlaceholder extends Component {
               <path d="M5.22155347 5.12585966C5.22155347 6.3608015 4.2211182 7.36123677 2.98617636 7.36123677 1.7531257 7.36123677.752690432 6.3608015.752690432 5.12585966.752690432 3.89091782 1.7531257 2.89048255 2.98617636 2.89048255 4.2211182 2.89048255 5.22155347 3.89091782 5.22155347 5.12585966zM5.22155347 5.34334559L5.71136961 5.13720675C6.09906191 4.97267392 6.53781614 4.97267392 6.92739962 5.13720675L7.41532458 5.34334559" />
             </g>
           </g>
-          <g className={`${this.blockClass}__frame`} stroke="#828282">
-            <polyline points="48 6 48 48 6 48" />
-            <polyline points="45 3 45 45 3 45" />
-            <polygon points="0 42 42 42 42 0 0 0" />
-          </g>
+          {!this.props.borderless && (
+            <g className={`${this.blockClass}__frame`} stroke="#828282">
+              <polyline points="48 6 48 48 6 48" />
+              <polyline points="45 3 45 45 3 45" />
+              <polygon points="0 42 42 42 42 0 0 0" />
+            </g>
+          )}
         </g>
       </svg>
     );

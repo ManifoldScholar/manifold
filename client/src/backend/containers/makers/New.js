@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import Form from "./Form";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 export class MakersNewContainer extends PureComponent {
   static displayName = "Makers.New";
@@ -27,7 +27,7 @@ export class MakersNewContainer extends PureComponent {
   render() {
     return (
       <section>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={this.props.t("records.makers.new_header")}
         />
         <Form

@@ -72,7 +72,7 @@ export default function NavigationSecondary(props) {
   return renderNav();
 }
 
-NavigationSecondary.displayName = "Navigation.Secondary";
+NavigationSecondary.displayName = "Layout.SecondaryNav";
 
 NavigationSecondary.propTypes = {
   links: PropTypes.array,

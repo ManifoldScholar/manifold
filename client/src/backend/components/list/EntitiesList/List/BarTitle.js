@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Layout from "backend/components/layout";
+import PageHeader from "backend/components/layout/PageHeader";
 import isNil from "lodash/isNil";
 
 export default class ListEntitiesListBarTitle extends PureComponent {
@@ -32,16 +32,14 @@ export default class ListEntitiesListBarTitle extends PureComponent {
 
   render() {
     return (
-      <Layout.ViewHeader
-        className="entity-list__title-block"
+      <PageHeader
         icon={this.titleIcon}
-        iconAccented
         count={this.count}
         titleTag={this.props.titleTag}
         utility={this.props.titleUtility}
-      >
-        {this.title}
-      </Layout.ViewHeader>
+        title={this.title}
+        type={this.count ? "count" : "list"}
+      />
     );
   }
 }

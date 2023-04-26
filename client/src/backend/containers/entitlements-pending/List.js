@@ -19,6 +19,7 @@ import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
+import PageHeader from "backend/components/layout/PageHeader";
 
 function PendingEntitlementsList({
   route,
@@ -88,7 +89,7 @@ function PendingEntitlementsList({
         <IconComposer
           icon="eyeOpen32"
           size={26}
-          className="utility-button__icon utility-button__icon--highlight"
+          className="utility-button__icon"
         />
         <span className="utility-button__text">
           {t("entitlements.imports.view_imports_label")}
@@ -101,51 +102,55 @@ function PendingEntitlementsList({
     <>
       {renderChildRoutes()}
       {entitlements && (
-        <EntitiesList
-          title={t("entitlements.pending.header")}
-          titleStyle="bar"
-          titleUtility={utility}
-          entityComponent={PendingEntitlementRow}
-          entityComponentProps={{ onEdit, onDelete }}
-          entities={entitlements}
-          buttons={[
-            <Button
-              path={lh.link("backendRecordsEntitlementsNew")}
-              type="add"
-              text={t("entitlements.pending.add_button_label")}
-              authorizedFor="entitlement"
-            />,
-            <Button
-              path={lh.link("backendRecordsEntitlementsImport")}
-              type="import"
-              text={t("entitlements.pending.import_button_label")}
-              authorizedFor="entitlement"
-            />,
-            <Button
-              tag="button"
-              style={{ marginInlineStart: "auto" }}
-              onClick={refresh}
-              type="reload"
-              text={"Refresh"}
-              authorizedFor="entitlement"
-            />
-          ]}
-          search={
-            <Search
-              {...searchProps}
-              setParam={updatedSetParam}
-              onReset={updatedOnReset}
-            />
-          }
-          pagination={meta.pagination}
-          showCount
-          unit={t("glossary.entitlement", {
-            count: meta.pagination.totalCount
-          })}
-          callbacks={{
-            onPageClick: page => () => setPageNumber(page)
-          }}
-        />
+        <>
+          <PageHeader
+            type="entitlements"
+            title={t("entitlements.pending.header")}
+            utility={utility}
+          />
+          <EntitiesList
+            entityComponent={PendingEntitlementRow}
+            entityComponentProps={{ onEdit, onDelete }}
+            entities={entitlements}
+            buttons={[
+              <Button
+                path={lh.link("backendRecordsEntitlementsNew")}
+                type="add"
+                text={t("entitlements.pending.add_button_label")}
+                authorizedFor="entitlement"
+              />,
+              <Button
+                path={lh.link("backendRecordsEntitlementsImport")}
+                type="import"
+                text={t("entitlements.pending.import_button_label")}
+                authorizedFor="entitlement"
+              />,
+              <Button
+                tag="button"
+                style={{ marginInlineStart: "auto" }}
+                onClick={refresh}
+                type="reload"
+                text={"Refresh"}
+                authorizedFor="entitlement"
+              />
+            ]}
+            search={
+              <Search
+                {...searchProps}
+                setParam={updatedSetParam}
+                onReset={updatedOnReset}
+              />
+            }
+            pagination={meta.pagination}
+            showCount
+            unit={t("glossary.entitlement", {
+              count: meta.pagination.totalCount
+            })}
+            callbacks={{
+              onPageClick: page => () => setPageNumber(page)
+            }}
+          />
+        </>
       )}
     </>
   );

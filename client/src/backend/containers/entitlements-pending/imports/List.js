@@ -9,6 +9,7 @@ import { useFetch, usePaginationState } from "hooks";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
+import PageHeader from "backend/components/layout/PageHeader";
 
 export default function EntitlementImportsList() {
   const { t } = useTranslation();
@@ -28,7 +29,7 @@ export default function EntitlementImportsList() {
         <IconComposer
           icon="eyeOpen32"
           size={26}
-          className="utility-button__icon utility-button__icon--highlight"
+          className="utility-button__icon"
         />
         <span className="utility-button__text">
           {t("entitlements.imports.view_pending_label")}
@@ -38,21 +39,25 @@ export default function EntitlementImportsList() {
   );
 
   return csvImports ? (
-    <EntitiesList
-      title={t("entitlements.imports.header")}
-      titleStyle="bar"
-      titleUtility={utility}
-      entityComponent={EntitlementImportRow}
-      entities={csvImports}
-      pagination={meta.pagination}
-      showCount
-      unit={t("glossary.import", {
-        count: meta.pagination?.totalCount
-      })}
-      callbacks={{
-        onPageClick: page => () => setPageNumber(page)
-      }}
-    />
+    <>
+      <PageHeader
+        type="imports"
+        title={t("entitlements.imports.header")}
+        utility={utility}
+      />
+      <EntitiesList
+        entityComponent={EntitlementImportRow}
+        entities={csvImports}
+        pagination={meta.pagination}
+        showCount
+        unit={t("glossary.import", {
+          count: meta.pagination?.totalCount
+        })}
+        callbacks={{
+          onPageClick: page => () => setPageNumber(page)
+        }}
+      />
+    </>
   ) : null;
 }
 

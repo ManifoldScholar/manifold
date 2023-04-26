@@ -8,7 +8,7 @@ import { select, meta } from "utils/entityUtils";
 import { projectsAPI, collectionProjectsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import EntitiesList, {
   Search,
   ProjectRow
@@ -239,7 +239,7 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
 
     return (
       <>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           icon="BECollectionManual64"
           title={this.props.projectCollection.attributes.title}
           instructions={t("project_collections.manage_projects_instructions")}

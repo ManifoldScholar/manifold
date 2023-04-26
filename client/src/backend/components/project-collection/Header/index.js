@@ -1,10 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Navigation from "backend/components/navigation";
+import PageHeader from "backend/components/layout/PageHeader";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 class ProjectCollectionHeader extends PureComponent {
   static displayName = "ProjectCollection.Header";
@@ -79,18 +80,19 @@ class ProjectCollectionHeader extends PureComponent {
     const t = this.props.t;
 
     return (
-      <section className="backend-header">
-        <div className="backend-header__inner backend-header__inner--empty">
-          <header className="backend-header__empty-text">
+      <PageHeader
+        type="projectCollection"
+        title={
+          <Styled.EmptyHeader>
             <h1 className="screen-reader-text">
               {t("glossary.project_collection_title_case_other")}
             </h1>
             <span>
               {t("project_collections.manage_collection_instructions")}
             </span>
-          </header>
-        </div>
-      </section>
+          </Styled.EmptyHeader>
+        }
+      />
     );
   }
 
@@ -99,12 +101,11 @@ class ProjectCollectionHeader extends PureComponent {
     if (!projectCollection) return this.renderPlaceholder();
 
     return (
-      <Navigation.DetailHeader
-        iconName={this.iconName}
+      <PageHeader
+        icon={this.iconName}
         type="projectCollection"
         title={projectCollection.attributes.title}
         utility={this.renderUtility(projectCollection)}
-        backUrl={lh.link("backendProjectCollections")}
       />
     );
   }

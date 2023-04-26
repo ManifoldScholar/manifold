@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
-import Navigation from "backend/components/navigation";
 import withConfirmation from "hoc/withConfirmation";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
@@ -16,6 +15,8 @@ import get from "lodash/get";
 import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
 import HeadContent from "global/components/HeadContent";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import PageHeader from "backend/components/layout/PageHeader";
 
 const { request, flush } = entityStoreActions;
 
@@ -96,7 +97,7 @@ export class ProjectWrapperContainer extends PureComponent {
             <IconComposer
               icon="eyeOpen32"
               size={26}
-              className="utility-button__icon utility-button__icon--highlight"
+              className="utility-button__icon"
             />
             <span className="utility-button__text">{t("actions.view")}</span>
           </Link>
@@ -108,7 +109,7 @@ export class ProjectWrapperContainer extends PureComponent {
               <IconComposer
                 icon="delete32"
                 size={26}
-                className="utility-button__icon utility-button__icon--notice"
+                className="utility-button__icon"
               />
               <span className="utility-button__text">
                 {t("actions.delete")}
@@ -133,13 +134,23 @@ export class ProjectWrapperContainer extends PureComponent {
     if (!this.props.project) return null;
     const { project, t } = this.props;
     const secondaryLinks = navigation.project(project);
+    const isJournalIssue = project.attributes.isJournalIssue;
 
-    const backUrl = project.attributes.isJournalIssue
+    const backUrl = isJournalIssue
       ? lh.link("backendJournalIssues", project.relationships.journal.id)
       : null;
-    const backLabel = project.attributes.isJournalIssue
+    const backLabel = isJournalIssue
       ? project.relationships.journal.attributes.title
       : null;
+
+    const projectCrumb = [
+      { to: lh.link("backend"), label: "Admin" },
+      { to: lh.link("backendProjects"), label: "Projects" }
+    ];
+
+    const breadcrumbs = backUrl
+      ? [{ to: backUrl, label: backLabel }]
+      : projectCrumb;
 
     const subpage = location.pathname.split("/")[4]?.replace("-", "_");
 
@@ -164,18 +175,21 @@ export class ProjectWrapperContainer extends PureComponent {
             from={lh.link("backendProject", project.id)}
             candidates={secondaryLinks}
           />
-          <Navigation.DetailHeader
-            type="project"
+          <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
+          <PageHeader
+            type={isJournalIssue ? "issue" : "project"}
             title={project.attributes.titleFormatted}
             subtitle={project.attributes.subtitle}
             utility={this.renderUtility(project)}
             secondaryLinks={secondaryLinks}
-            backUrl={backUrl}
-            backLabel={backLabel}
+            parentTitle={
+              project.relationships.journal?.attributes.titleFormatted
+            }
+            parentSubtitle={project.relationships.journal?.attributes.subtitle}
           />
           <Layout.BackendPanel
             sidebar={
-              <Navigation.Secondary
+              <Layout.SecondaryNav
                 links={secondaryLinks}
                 panel
                 ariaLabel={t("projects.settings")}

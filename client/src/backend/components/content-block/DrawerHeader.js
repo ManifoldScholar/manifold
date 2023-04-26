@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import resolver from "./helpers/resolver";
 import { withTranslation } from "react-i18next";
 
@@ -80,7 +80,7 @@ class ContentBlockDrawerHeader extends PureComponent {
 
   render() {
     return (
-      <Navigation.DrawerHeader
+      <Layout.DrawerHeader
         icon={this.icon}
         title={this.props.t(this.title)}
         buttons={this.buttons}

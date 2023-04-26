@@ -7,6 +7,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { settingsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
+import PageHeader from "backend/components/layout/PageHeader";
 
 export class SettingsPropertiesContainer extends PureComponent {
   static mapStateToProps = state => {
@@ -25,7 +26,7 @@ export class SettingsPropertiesContainer extends PureComponent {
     const t = this.props.t;
     return (
       <div>
-        <Layout.ViewHeader>Settings</Layout.ViewHeader>
+        <PageHeader title="Settings" type="settings" />
         <Layout.BackendPanel>
           <FormContainer.Form
             model={this.props.settings}

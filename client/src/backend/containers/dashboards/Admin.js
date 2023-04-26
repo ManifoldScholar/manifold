@@ -14,7 +14,7 @@ import withFilteredLists, {
 } from "hoc/withFilteredLists";
 import Authorize from "hoc/Authorize";
 import DashboardComponents from "backend/components/dashboard";
-import Layout from "backend/components/layout";
+import PageHeader from "backend/components/layout/PageHeader";
 import Authorization from "helpers/authorization";
 import isEqual from "lodash/isEqual";
 import { useTranslation } from "react-i18next";
@@ -203,18 +203,16 @@ export function DashboardsAdminContainer({
 
   const analytics = (
     <Authorize entity="statistics" ability={"read"}>
-      <Layout.ViewHeader
-        spaceBottom
-        icon="BEAnalytics64"
-        iconAltAccented
+      <PageHeader
+        type="analytics"
         link={{
           path: lh.link("backendAnalytics"),
           label: t("actions.see_all")
         }}
         titleTag="h2"
-      >
-        {t("analytics.global_header")}
-      </Layout.ViewHeader>
+        title={t("analytics.global_header")}
+      />
+
       <DashboardComponents.Analytics />
     </Authorize>
   );

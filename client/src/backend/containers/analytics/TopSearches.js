@@ -6,7 +6,7 @@ import {
   Grid,
   RangePicker
 } from "backend/components/analytics";
-import Layout from "backend/components/layout";
+import PageHeader from "backend/components/layout/PageHeader";
 import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
@@ -25,14 +25,15 @@ class AnalyticsSearchesContainer extends PureComponent {
 
     return (
       <>
-        <Layout.ViewHeader spaceBottom icon="BEAnalytics64" iconAltAccented>
-          <h1 className="backend-header__title">
+        <PageHeader
+          type="analytics"
+          title={
             <Trans
               i18nKey="analytics.top_searches_header"
               components={[<Link to={lh.link("backendAnalyticsGlobal")} />]}
             />
-          </h1>
-        </Layout.ViewHeader>
+          }
+        />
         <Grid columns={4}>
           {analytics && (
             <>

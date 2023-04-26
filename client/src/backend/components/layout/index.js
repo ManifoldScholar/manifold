@@ -1,9 +1,13 @@
-import Header from "./Header";
-import ViewHeader from "./ViewHeader";
+import GlobalHeader from "./GlobalHeader";
 import BackendPanel from "./BackendPanel";
+import PageHeader from "./PageHeader";
+import DrawerHeader from "./DrawerHeader";
+import SecondaryNav from "./SecondaryNav";
 
 export default {
-  Header,
-  ViewHeader,
-  BackendPanel
+  GlobalHeader,
+  PageHeader,
+  BackendPanel,
+  DrawerHeader,
+  SecondaryNav
 };

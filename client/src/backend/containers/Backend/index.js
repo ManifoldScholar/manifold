@@ -92,7 +92,7 @@ export class BackendContainer extends PureComponent {
               ]}
             />
             <Utility.ScrollToTop />
-            <Layout.Header
+            <Layout.GlobalHeader
               visibility={this.props.visibility}
               match={this.props.match}
               location={this.props.location}

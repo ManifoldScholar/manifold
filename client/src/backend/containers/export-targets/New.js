@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import Form from "./Form";
 
 export class ExportTargetsNewContainer extends PureComponent {
@@ -35,7 +35,7 @@ export class ExportTargetsNewContainer extends PureComponent {
   render() {
     return (
       <section>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={this.props.t("settings.export_targets.form_header")}
         />
         <Form

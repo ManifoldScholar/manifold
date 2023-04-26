@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Issue from "backend/components/issue";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 function JournalIssueNew({ refreshIssues, closeUrl, journal, history }) {
   const { t } = useTranslation();
@@ -13,7 +13,7 @@ function JournalIssueNew({ refreshIssues, closeUrl, journal, history }) {
 
   return (
     <div>
-      <Navigation.DrawerHeader title={t("issues.create_header")} />
+      <Layout.DrawerHeader title={t("issues.create_header")} />
       <Issue.Form journalId={journal.id} onSuccess={refreshAndRedirect} />
     </div>
   );

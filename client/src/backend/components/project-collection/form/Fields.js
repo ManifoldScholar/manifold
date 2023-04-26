@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import KindPicker from "./KindPicker";
 import IconPicker from "./IconPicker";
 import SmartAttributes from "./SmartAttributes";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import { withTranslation } from "react-i18next";
 
 class Fields extends Component {
@@ -40,7 +40,7 @@ class Fields extends Component {
 
     return (
       <>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={t("project_collections.manage", {
             entity: t("glossary.project_collection_other")
           })}
@@ -56,7 +56,7 @@ class Fields extends Component {
             name="attributes[title]"
             placeholder={t("project_collections.collection_title_placeholder")}
           />
-        </Navigation.DrawerHeader>
+        </Layout.DrawerHeader>
         <KindPicker {...this.props} />
         <Form.TextInput
           wide

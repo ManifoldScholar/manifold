@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import FormContainer from "global/containers/form";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
-import Navigation from "backend/components/navigation";
+import PageHeader from "backend/components/layout/PageHeader";
 import { requests, resourceCollectionsAPI, projectsAPI } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
@@ -68,13 +68,13 @@ export class ResourceCollectionNewContainer extends PureComponent {
           appendDefaultTitle
         />
         <div>
-          <Navigation.DetailHeader
+          <PageHeader
             type="resourceCollection"
             backUrl={lh.link("backendProjectResourceCollections", project.id)}
             backLabel={project.attributes.titlePlaintext}
             title={t("resource_collections.forms.new_title")}
-            showUtility={false}
             note={t("resource_collections.forms.new_instructions")}
+            icon="ResourceCollection64"
           />
           <Layout.BackendPanel>
             <FormContainer.Form

@@ -11,10 +11,6 @@ export default `
       &:not(.flush) {
         --container-padding-block-start: 42px;
       }
-
-      .backend-header + & {
-        ${respond(`padding-top: 20px;`, 60, "max")}
-      }
     }
 
     .aside {

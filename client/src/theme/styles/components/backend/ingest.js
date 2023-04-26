@@ -2,7 +2,7 @@ import { utilityPrimary, formInstructions, respond } from "theme/styles/mixins";
 
 export default `
   .ingestion-output {
-    .backend-header {
+    .ingest-header {
       margin-bottom: 30px;
     }
 

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { UnmountClosed as Collapse } from "react-collapse";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import { GroupSettingsForm } from "frontend/components/reading-group/forms";
 import { useArchiveOrActivateGroup } from "frontend/components/reading-group/hooks";
 import withConfirmation from "hoc/withConfirmation";
@@ -131,7 +131,7 @@ function ReadingGroupSettings({
 
   return (
     <section>
-      <Navigation.DrawerHeader
+      <Layout.DrawerHeader
         title={t("forms.edit_group.title")}
         buttons={buttons}
         buttonLayout="inline"

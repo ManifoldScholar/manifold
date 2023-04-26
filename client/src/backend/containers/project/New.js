@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation, Trans } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
-import Navigation from "backend/components/navigation";
+import PageHeader from "backend/components/layout/PageHeader";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { projectsAPI } from "api";
@@ -75,10 +75,9 @@ export class ProjectNewContainer extends PureComponent {
           appendDefaultTitle
         />
         <div>
-          <Navigation.DetailHeader
+          <PageHeader
             type="project"
             title={t("projects.forms.new.title")}
-            showUtility={false}
             note={t("projects.forms.new.instructions")}
           />
           <Layout.BackendPanel>

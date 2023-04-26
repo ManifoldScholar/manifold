@@ -63,12 +63,6 @@ export default `
           "max"
         )}
       }
-
-      .backend-header {
-        margin-bottom: 20px;
-
-        ${respond(`margin-bottom: 42px;`, 75)}
-      }
     }
 
     .drawer-backend {

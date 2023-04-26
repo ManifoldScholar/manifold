@@ -8,6 +8,7 @@ import FormContainer from "global/containers/form";
 import { settingsAPI, testMailsAPI, requests } from "api";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
+import PageHeader from "backend/components/layout/PageHeader";
 
 import withFormSession from "hoc/withFormSession";
 
@@ -66,7 +67,7 @@ export class SettingsEmailContainer extends PureComponent {
 
     return (
       <section>
-        <Layout.ViewHeader>{t("settings.email.header")}</Layout.ViewHeader>
+        <PageHeader title={t("settings.email.header")} type="settings" />
         <Layout.BackendPanel>
           <FormContainer.Form
             model={this.props.settings}
