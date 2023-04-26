@@ -6,7 +6,7 @@ import {
   Grid,
   RangePicker
 } from "backend/components/analytics";
-import Layout from "backend/components/layout";
+import PageHeader from "backend/components/layout/PageHeader";
 import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
 
 class AnalyticsGlobalContainer extends PureComponent {
@@ -38,9 +38,10 @@ class AnalyticsGlobalContainer extends PureComponent {
 
     return (
       <>
-        <Layout.ViewHeader spaceBottom icon="BEAnalytics64" iconAltAccented>
-          {this.props.t("analytics.global_header")}
-        </Layout.ViewHeader>
+        <PageHeader
+          type="analytics"
+          title={this.props.t("analytics.global_header")}
+        />
         <Grid columns={4}>
           {analytics && (
             <>

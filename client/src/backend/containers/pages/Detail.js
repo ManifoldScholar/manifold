@@ -8,11 +8,11 @@ import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import Layout from "backend/components/layout";
-import Navigation from "backend/components/navigation";
 import navigation from "helpers/router/navigation";
 import withConfirmation from "hoc/withConfirmation";
 import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
+import PageHeader from "backend/components/layout/PageHeader";
 
 import Authorize from "hoc/Authorize";
 
@@ -123,13 +123,13 @@ class PageDetailContainer extends PureComponent {
   renderNewHeader() {
     const t = this.props.t;
     return (
-      <Navigation.DetailHeader
+      <PageHeader
         type="page"
         backUrl={lh.link("backendRecordsPages")}
         backLabel={t("records.pages.back_label")}
         title={t("records.pages.new_header")}
-        showUtility={false}
         note={t("records.pages.new_instructions")}
+        icon="ResourceDocument64"
       />
     );
   }
@@ -142,13 +142,14 @@ class PageDetailContainer extends PureComponent {
       : `/page/${page.attributes.slug}`;
 
     return (
-      <Navigation.DetailHeader
+      <PageHeader
         type="page"
         backUrl={lh.link("backendRecordsPages")}
         backLabel={t("records.pages.back_label")}
         title={page.attributes.title}
         subtitle={subtitle}
         utility={this.renderUtility()}
+        icon="ResourceDocument64"
       />
     );
   }
@@ -164,7 +165,7 @@ class PageDetailContainer extends PureComponent {
           <IconComposer
             icon="eyeOpen32"
             size={26}
-            className="utility-button__icon utility-button__icon--highlight"
+            className="utility-button__icon"
           />
           <span className="utility-button__text">{t("actions.view")}</span>
         </Link>
@@ -173,7 +174,7 @@ class PageDetailContainer extends PureComponent {
             <IconComposer
               icon="delete32"
               size={26}
-              className="utility-button__icon utility-button__icon--notice"
+              className="utility-button__icon"
             />
             <span className="utility-button__text">{t("actions.delete")}</span>
           </button>
@@ -207,7 +208,7 @@ class PageDetailContainer extends PureComponent {
         {this.renderExistingHeader(page)}
         <Layout.BackendPanel
           sidebar={
-            <Navigation.Secondary
+            <Layout.SecondaryNav
               links={secondaryLinks}
               panel
               ariaLabel={t("records.pages.settings")}

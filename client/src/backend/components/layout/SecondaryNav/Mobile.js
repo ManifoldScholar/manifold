@@ -8,7 +8,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 
-export default function NavigationDropdown({ links, classNames }) {
+export default function NavigationDropdown({ links, className }) {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
   const { pathname } = useLocation();
@@ -68,7 +68,7 @@ export default function NavigationDropdown({ links, classNames }) {
     const label = selected ? selected.label : t("navigation.menu");
 
     return (
-      <nav className={`dropdown-nav dropdown-nav--static ${classNames}`}>
+      <nav className={`dropdown-nav dropdown-nav--static ${className}`}>
         <div className="dropdown-nav__selected">{label}</div>
       </nav>
     );
@@ -81,7 +81,7 @@ export default function NavigationDropdown({ links, classNames }) {
     });
 
     return (
-      <nav className={`${navClasses} ${classNames}`}>
+      <nav className={`${navClasses} ${className}`}>
         <button className="dropdown-nav__trigger" onClick={toggleOpen}>
           <div className="dropdown-nav__selected">
             {getCurrentLabel()}

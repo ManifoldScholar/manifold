@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import AddEditTOCEntryForm from "backend/components/authoring/AddEditTOCEntryForm";
 import { useParams } from "react-router-dom";
 
@@ -11,7 +11,7 @@ export default function AddEditTOCEntryContainer({ tree, ...props }) {
 
   return (
     <section>
-      <Navigation.DrawerHeader
+      <Layout.DrawerHeader
         title={entryId ? t("texts.toc.edit_header") : t("texts.toc.add_header")}
       />
       <AddEditTOCEntryForm entry={tree.items[entryId]} tree={tree} {...props} />

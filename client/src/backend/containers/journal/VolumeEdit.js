@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Volume from "backend/components/volume";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import { journalVolumesAPI } from "api";
 import { useFetch, useApiCallback, useNotification } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
@@ -70,10 +70,7 @@ function JournalVolumeEdit({
 
   return (
     <div>
-      <Navigation.DrawerHeader
-        title={t("volumes.edit_header")}
-        buttons={buttons}
-      />
+      <Layout.DrawerHeader title={t("volumes.edit_header")} buttons={buttons} />
       <Volume.Form
         model={journalVolume}
         journalId={journal.id}

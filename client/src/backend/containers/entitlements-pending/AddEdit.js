@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import { AddEditForm } from "backend/components/pending-entitlements";
 import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
@@ -18,7 +18,7 @@ export default function EntitlementNewContainer({ refresh }) {
 
   return (
     <section>
-      <Navigation.DrawerHeader
+      <Layout.DrawerHeader
         title={
           id
             ? t("entitlements.pending.edit_header")

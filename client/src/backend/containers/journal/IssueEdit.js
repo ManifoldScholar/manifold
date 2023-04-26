@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import Issue from "backend/components/issue";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import { journalIssuesAPI } from "api";
 import { useFetch, useApiCallback, useNotification } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
@@ -67,7 +67,7 @@ function JournalIssueEdit({
 
   return (
     <div>
-      <Navigation.DrawerHeader title="Edit Issue" buttons={buttons} />
+      <Layout.DrawerHeader title="Edit Issue" buttons={buttons} />
       <Issue.Form
         model={journalIssue}
         journalId={journal.id}

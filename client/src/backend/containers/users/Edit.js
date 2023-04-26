@@ -11,7 +11,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 const { request, flush } = entityStoreActions;
 
@@ -142,7 +142,7 @@ export class UsersEditContainer extends PureComponent {
           />
         ) : null}
 
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={`${attr.firstName} ${attr.lastName}`}
           buttons={[
             {

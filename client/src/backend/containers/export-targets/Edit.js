@@ -7,7 +7,7 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { exportTargetsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import Form from "./Form";
 
 const { request, flush } = entityStoreActions;
@@ -87,7 +87,7 @@ export class ExportTargetsEditContainer extends PureComponent {
 
     return (
       <section>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={attr.name}
           buttons={[
             {

@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
-import Navigation from "backend/components/navigation";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { resourceCollectionsAPI, requests, projectsAPI } from "api";
@@ -13,6 +12,7 @@ import navigation from "helpers/router/navigation";
 import withConfirmation from "hoc/withConfirmation";
 import IconComposer from "global/components/utility/IconComposer";
 import HeadContent from "global/components/HeadContent";
+import PageHeader from "backend/components/layout/PageHeader";
 
 import Authorize from "hoc/Authorize";
 import { Link } from "react-router-dom";
@@ -135,7 +135,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
           <IconComposer
             icon="eyeOpen32"
             size={26}
-            className="utility-button__icon utility-button__icon--highlight"
+            className="utility-button__icon"
           />
           <span className="utility-button__text">{t("actions.view")}</span>
         </Link>
@@ -146,7 +146,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
           <IconComposer
             icon="delete32"
             size={26}
-            className="utility-button__icon utility-button__icon--notice"
+            className="utility-button__icon"
           />
           <span className="utility-button__text">{t("actions.delete")}</span>
         </button>
@@ -191,7 +191,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
             from={lh.link("backendResourceCollection", resourceCollection.id)}
             candidates={secondaryLinks}
           />
-          <Navigation.DetailHeader
+          <PageHeader
             type="resourceCollection"
             backUrl={lh.link(
               "backendProjectResourceCollections",
@@ -203,10 +203,11 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
             utility={this.renderUtility()}
             title={resourceCollection.attributes.title}
             secondaryLinks={secondaryLinks}
+            icon="ResourceCollection64"
           />
           <Layout.BackendPanel
             sidebar={
-              <Navigation.Secondary
+              <Layout.SecondaryNav
                 links={secondaryLinks}
                 panel
                 ariaLabel={t("resource_collections.settings")}

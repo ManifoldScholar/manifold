@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
-import Navigation from "backend/components/navigation";
 import { entityStoreActions, notificationActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textsAPI, requests } from "api";
@@ -13,6 +12,7 @@ import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import withConfirmation from "hoc/withConfirmation";
 import IconComposer from "global/components/utility/IconComposer";
 import HeadContent from "global/components/HeadContent";
+import PageHeader from "backend/components/layout/PageHeader";
 
 import Authorize from "hoc/Authorize";
 import { Link } from "react-router-dom";
@@ -117,7 +117,7 @@ export class TextWrapperContainer extends PureComponent {
           <IconComposer
             icon="eyeOpen32"
             size={26}
-            className="utility-button__icon utility-button__icon--highlight"
+            className="utility-button__icon"
           />
           <span className="utility-button__text">{t("actions.view")}</span>
         </Link>
@@ -125,7 +125,7 @@ export class TextWrapperContainer extends PureComponent {
           <IconComposer
             icon="delete32"
             size={26}
-            className="utility-button__icon utility-button__icon--notice"
+            className="utility-button__icon"
           />
           <span className="utility-button__text">{t("actions.delete")}</span>
         </button>
@@ -133,7 +133,7 @@ export class TextWrapperContainer extends PureComponent {
           <IconComposer
             icon={exportsAsEpubV3 ? "circleMinus24" : "circlePlus24"}
             size={26}
-            className="utility-button__icon utility-button__icon--download"
+            className="utility-button__icon"
           />
           <span className="utility-button__text">
             {exportsAsEpubV3 ? t("texts.disable_epub") : t("texts.enable_epub")}
@@ -144,7 +144,7 @@ export class TextWrapperContainer extends PureComponent {
             <IconComposer
               icon="download24"
               size={26}
-              className="utility-button__icon utility-button__icon--download"
+              className="utility-button__icon"
             />
             <span className="utility-button__text">
               {t("texts.download_epub")}
@@ -160,7 +160,7 @@ export class TextWrapperContainer extends PureComponent {
             <IconComposer
               icon="download24"
               size={26}
-              className="utility-button__icon utility-button__icon--download"
+              className="utility-button__icon"
             />
             <span className="utility-button__text">
               {t("texts.download_source")}
@@ -177,7 +177,7 @@ export class TextWrapperContainer extends PureComponent {
             <IconComposer
               icon="link24"
               size={26}
-              className="utility-button__icon utility-button__icon--download"
+              className="utility-button__icon"
             />
             <span className="utility-button__text">
               {t("texts.visit_source")}
@@ -223,21 +223,18 @@ export class TextWrapperContainer extends PureComponent {
             from={lh.link("backendText", text.id)}
             candidates={secondaryLinks}
           />
-          <Navigation.DetailHeader
+          <PageHeader
             type="text"
-            backUrl={lh.link(
-              "backendProjectTexts",
-              text.relationships.project.id
-            )}
-            backLabel={text.relationships.project.attributes.titlePlaintext}
-            title={text.attributes.titlePlaintext}
-            subtitle={text.attributes.subtitlePlaintext}
+            parentTitle={text.relationships.project.attributes.titleFormatted}
+            parentSubtitle={text.relationships.project.attributes.subtitle}
+            title={text.attributes.titleFormatted}
+            subtitle={text.attributes.subtitle}
             utility={this.renderUtility()}
             secondaryLinks={secondaryLinks}
           />
           <Layout.BackendPanel
             sidebar={
-              <Navigation.Secondary
+              <Layout.SecondaryNav
                 links={secondaryLinks}
                 panel
                 ariaLabel={t("texts.settings")}

@@ -52,8 +52,8 @@ class IngestionHeader extends Component {
 
   titleBlock() {
     return (
-      <div className="backend-header__title-block">
-        <h1 className="backend-header__title">{this.title}</h1>
+      <div className="ingest-header__title-block">
+        <h1 className="ingest-header__title">{this.title}</h1>
       </div>
     );
   }
@@ -62,15 +62,15 @@ class IngestionHeader extends Component {
     return (
       <figure
         className={classNames(
-          "backend-header__figure-block",
-          "backend-header__figure-block--shift-left"
+          "ingest-header__figure-block",
+          "ingest-header__figure-block--shift-left"
         )}
       >
-        <div className="backend-header__figure">
+        <div className="ingest-header__figure">
           <IconComposer
             icon="textsBook64"
             size={56}
-            className="backend-header__type-icon"
+            className="ingest-header__type-icon"
           />
         </div>
       </figure>
@@ -92,13 +92,13 @@ class IngestionHeader extends Component {
     );
 
     return (
-      <div className="backend-header">
-        <div className="backend-header__inner">
+      <div className="ingest-header">
+        <div className="ingest-header__inner">
           <header
             className={classNames(
-              "backend-header__content-flex-wrapper",
-              "backend-header__content-flex-wrapper--aib",
-              "backend-header__content-flex-wrapper--tight"
+              "ingest-header__content-flex-wrapper",
+              "ingest-header__content-flex-wrapper--aib",
+              "ingest-header__content-flex-wrapper--tight"
             )}
           >
             {this.figureBlock()}
@@ -107,7 +107,7 @@ class IngestionHeader extends Component {
           <div
             aria-live="polite"
             aria-atomic
-            className="backend-header__body ingestion-output__properties"
+            className="ingest-header__body ingestion-output__properties"
           >
             <Property
               label={this.props.t("texts.ingestion.current_state_label")}

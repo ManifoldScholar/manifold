@@ -5,7 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import FormContainer from "global/containers/form";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
-import Navigation from "backend/components/navigation";
+import PageHeader from "backend/components/layout/PageHeader";
 import Resource from "backend/components/resource";
 import GlobalForm from "global/components/form";
 import { requests, projectsAPI, resourcesAPI } from "api";
@@ -72,13 +72,13 @@ export class ResourceNewContainer extends PureComponent {
           appendDefaultTitle
         />
         <div>
-          <Navigation.DetailHeader
+          <PageHeader
             type="resource"
             backUrl={lh.link("backendProjectResources", project.id)}
             backLabel={project.attributes.titlePlaintext}
             title={t("resources.new.title")}
-            showUtility={false}
             note={t("resources.new.instructions")}
+            icon="BEResourcesBox64"
           />
           <Layout.BackendPanel>
             <FormContainer.Form

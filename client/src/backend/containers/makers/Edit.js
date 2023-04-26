@@ -9,7 +9,7 @@ import { makersAPI, requests } from "api";
 import get from "lodash/get";
 import Form from "./Form";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 const { request, flush } = entityStoreActions;
 
@@ -86,7 +86,7 @@ export class MakersEditContainer extends PureComponent {
 
     return (
       <div>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={attr.fullName}
           buttons={[
             {

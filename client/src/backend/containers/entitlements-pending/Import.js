@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import { CSVImport } from "backend/components/pending-entitlements";
 
 export default function EntitlementImportContainer({ refresh }) {
@@ -9,9 +9,7 @@ export default function EntitlementImportContainer({ refresh }) {
 
   return (
     <section>
-      <Navigation.DrawerHeader
-        title={t("entitlements.pending.import_header")}
-      />
+      <Layout.DrawerHeader title={t("entitlements.pending.import_header")} />
       <CSVImport refresh={refresh} />
     </section>
   );

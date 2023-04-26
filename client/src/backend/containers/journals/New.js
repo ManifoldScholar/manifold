@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import Authorize from "hoc/Authorize";
 import Layout from "backend/components/layout";
-import Navigation from "backend/components/navigation";
+import PageHeader from "backend/components/layout/PageHeader";
 import { journalsAPI } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
@@ -40,10 +40,9 @@ class JournalsNew extends PureComponent {
           appendDefaultTitle
         />
         <div>
-          <Navigation.DetailHeader
+          <PageHeader
             type="journal"
             title={t("journals.forms.new_header")}
-            showUtility={false}
             note={t("journals.forms.new_instructions")}
           />
           <Layout.BackendPanel>

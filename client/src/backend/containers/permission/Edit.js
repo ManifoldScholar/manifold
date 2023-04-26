@@ -6,7 +6,7 @@ import { permissionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import connectAndFetch from "utils/connectAndFetch";
 import { select } from "utils/entityUtils";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 
 const { request, flush } = entityStoreActions;
@@ -85,7 +85,7 @@ export class PermissionEdit extends PureComponent {
     if (!permission) return null;
     return (
       <section>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={t("projects.permissions.edit_header")}
           buttons={[
             {

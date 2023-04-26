@@ -8,7 +8,7 @@ import { entityStoreActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import Layout from "backend/components/layout";
-import Navigation from "backend/components/navigation";
+import PageHeader from "backend/components/layout/PageHeader";
 import FrontendLayout from "frontend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import get from "lodash/get";
@@ -138,13 +138,13 @@ class FeatureDetailContainer extends PureComponent {
   newHeader() {
     const t = this.props.t;
     return (
-      <Navigation.DetailHeader
+      <PageHeader
         type="feature"
         backUrl={lh.link("backendRecordsFeatures")}
         backLabel={t("records.features.back_label")}
         title={t("records.features.new_header")}
-        showUtility={false}
         note={t("records.features.new_instructions")}
+        icon="Lamp64"
       />
     );
   }
@@ -153,7 +153,7 @@ class FeatureDetailContainer extends PureComponent {
     if (!feature) return null;
     const t = this.props.t;
     return (
-      <Navigation.DetailHeader
+      <PageHeader
         type="feature"
         backUrl={lh.link("backendRecordsFeatures")}
         backLabel={t("records.features.back_label")}
@@ -164,6 +164,7 @@ class FeatureDetailContainer extends PureComponent {
           })
         }
         utility={this.renderUtility()}
+        icon="Lamp64"
       />
     );
   }
@@ -175,7 +176,7 @@ class FeatureDetailContainer extends PureComponent {
           <IconComposer
             icon="delete32"
             size={26}
-            className="utility-button__icon utility-button__icon--notice"
+            className="utility-button__icon"
           />
           <span className="utility-button__text">
             {this.props.t("actions.delete")}

@@ -15,6 +15,10 @@ import lh from "helpers/linkHandler";
 import classnames from "classnames";
 import HeadContent from "global/components/HeadContent";
 import withConfirmation from "hoc/withConfirmation";
+import Breadcrumbs, {
+  RegisterBreadcrumbs
+} from "global/components/atomic/Breadcrumbs";
+import { fluidScale } from "theme/styles/mixins";
 
 import Authorize from "hoc/Authorize";
 
@@ -269,6 +273,11 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       ? collectionForHeader.attributes.title
       : t("titles.project_collections");
 
+    const breadcrumbs = [
+      { to: lh.link("backend"), label: "Admin" },
+      { to: lh.link("backendProjectCollections"), label: "Project Collections" }
+    ];
+
     return (
       <Authorize
         ability="update"
@@ -281,9 +290,14 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
           title={`${pageTitle} | ${t("common.admin")}`}
           appendDefaultTitle
         />
+        <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
         <section className={wrapperClasses}>
           <div className="backend-panel">
-            <div className="container">
+            <Breadcrumbs backend breadcrumbs={breadcrumbs} />
+            <div
+              className="container"
+              style={{ marginBlockStart: fluidScale("30px", "20px") }}
+            >
               {this.hasProjectCollections && (
                 <ProjectCollection.List
                   projectCollection={projectCollection}

@@ -8,7 +8,7 @@ import FormContainer from "global/containers/form";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 
 const { request, flush } = entityStoreActions;
@@ -78,7 +78,7 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     const attr = subject.attributes;
     return (
       <div>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={attr.name}
           buttons={[
             {

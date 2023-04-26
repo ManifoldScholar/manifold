@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
@@ -42,7 +42,7 @@ class RecordsContainer extends PureComponent {
           candidates={secondaryLinks}
         />
         <div>
-          <Navigation.Secondary links={secondaryLinks} />
+          <Layout.SecondaryNav links={secondaryLinks} />
           <main id="skip-to-main" tabIndex={-1} className="backend-detail">
             {childRoutes(this.props.route)}
           </main>

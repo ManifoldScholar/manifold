@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import lh from "helpers/linkHandler";
 import CreateTextForm from "backend/components/authoring/CreateTextForm";
 
@@ -10,7 +10,7 @@ export default function TextCreateContainer({ project, refresh }) {
 
   return (
     <section>
-      <Navigation.DrawerHeader
+      <Layout.DrawerHeader
         title={t("texts.create_button_label")}
         instructions={t("texts.create.drawer_instructions")}
       />

@@ -4,7 +4,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import Authorize from "hoc/Authorize";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import { useTranslation } from "react-i18next";
 
 function ProjectDescription({
@@ -37,7 +37,7 @@ function ProjectDescription({
       failureRedirect={lh.link(failureRedirectRoute, model.id)}
     >
       <section>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           icon="projects64"
           title={t("layout.description_and_images")}
           headerId={headerId}

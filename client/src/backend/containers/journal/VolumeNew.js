@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Volume from "backend/components/volume";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 function JournalVolumeNew({ refreshVolumes, closeUrl, journal, history }) {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ function JournalVolumeNew({ refreshVolumes, closeUrl, journal, history }) {
 
   return (
     <div>
-      <Navigation.DrawerHeader title={t("volumes.create_header")} />
+      <Layout.DrawerHeader title={t("volumes.create_header")} />
       <Volume.Form journalId={journal.id} onSuccess={refreshAndRedirect} />
     </div>
   );

@@ -6,7 +6,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { subjectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 export class SettingsSubjectsNewContainer extends PureComponent {
   static displayName = "Settings.Subjects.New";
@@ -26,7 +26,7 @@ export class SettingsSubjectsNewContainer extends PureComponent {
     const t = this.props.t;
     return (
       <section>
-        <Navigation.DrawerHeader title={t("settings.subjects.new_header")} />
+        <Layout.DrawerHeader title={t("settings.subjects.new_header")} />
         <FormContainer.Form
           model={this.props.subject}
           name="backend-create-subject"

@@ -6,7 +6,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { usersAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 export class UsersNewContainer extends PureComponent {
   static displayName = "Users.New";
@@ -39,7 +39,7 @@ export class UsersNewContainer extends PureComponent {
     const t = this.props.t;
     return (
       <section>
-        <Navigation.DrawerHeader title={t("records.users.new_header")} />
+        <Layout.DrawerHeader title={t("records.users.new_header")} />
         <FormContainer.Form
           model={this.defaultUser}
           name={requests.beUserCreate}

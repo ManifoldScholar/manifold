@@ -7,6 +7,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { settingsAPI, requests } from "api";
 import { select } from "utils/entityUtils";
+import PageHeader from "backend/components/layout/PageHeader";
 
 import withFormSession from "hoc/withFormSession";
 
@@ -29,7 +30,7 @@ export class SettingsIngestionContainer extends PureComponent {
     const t = this.props.t;
     return (
       <section>
-        <Layout.ViewHeader>{t("settings.ingestion.header")}</Layout.ViewHeader>
+        <PageHeader title={t("settings.ingestion.header")} type="settings" />
         <Layout.BackendPanel>
           <FormContainer.Form
             model={this.props.settings}

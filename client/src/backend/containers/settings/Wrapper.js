@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
@@ -45,7 +45,7 @@ export class SettingsWrapperContainer extends PureComponent {
         />
 
         <section>
-          <Navigation.Secondary links={secondaryLinks} />
+          <Layout.SecondaryNav links={secondaryLinks} />
           <main id="skip-to-main" tabIndex={-1} className="backend-detail">
             <div className="panel">{childRoutes(this.props.route)}</div>
           </main>

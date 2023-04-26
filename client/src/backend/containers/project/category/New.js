@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Category from "backend/components/category";
 import lh from "helpers/linkHandler";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 export default function ProjectCategoryNewContainer({
   project,
@@ -20,7 +20,7 @@ export default function ProjectCategoryNewContainer({
 
   return (
     <div>
-      <Navigation.DrawerHeader title={t("texts.category_new_header")} />
+      <Layout.DrawerHeader title={t("texts.category_new_header")} />
       <Category.Form projectId={project.id} onSuccess={onSuccess} />
     </div>
   );

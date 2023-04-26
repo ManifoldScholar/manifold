@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
-import Navigation from "backend/components/navigation";
+import PageHeader from "backend/components/layout/PageHeader";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { resourceImportsAPI, projectsAPI, requests } from "api";
@@ -127,13 +127,13 @@ export class ResourceImportWrapper extends PureComponent {
           title={`${t(`titles.resource_import`)} | ${t("common.admin")}`}
           appendDefaultTitle
         />
-        <Navigation.DetailHeader
+        <PageHeader
           type="resources"
           backUrl={lh.link("backendProjectResources", match.params.projectId)}
           backLabel={project.attributes.titlePlaintext}
           title={t("resources.import.header")}
-          showUtility={false}
           note={t("resources.import.header_note")}
+          icon="BEResourcesBoxes64"
         />
         <Layout.BackendPanel>
           <div>{this.renderRoutes()}</div>

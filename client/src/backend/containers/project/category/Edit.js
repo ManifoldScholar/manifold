@@ -6,7 +6,7 @@ import Category from "backend/components/category";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import { textCategoriesAPI, requests } from "api";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 
 const { request } = entityStoreActions;
 
@@ -47,7 +47,7 @@ export class ProjectCategoryEditContainer extends Component {
 
     return (
       <div>
-        <Navigation.DrawerHeader
+        <Layout.DrawerHeader
           title={this.props.t("texts.category_edit_header")}
         />
         <Category.Form model={this.props.category} onSuccess={this.onSuccess} />

@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import Layout from "backend/components/layout";
-import Navigation from "backend/components/navigation";
 import withConfirmation from "hoc/withConfirmation";
 import { journalsAPI } from "api";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
@@ -12,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useFetch, useApiCallback, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
+import PageHeader from "backend/components/layout/PageHeader";
 
 function JournalWrapper({ match, route, history, confirm, location }) {
   const { t } = useTranslation();
@@ -57,7 +57,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
           <IconComposer
             icon="eyeOpen32"
             size={26}
-            className="utility-button__icon utility-button__icon--highlight"
+            className="utility-button__icon"
           />
           <span className="utility-button__text">{t("actions.view")}</span>
         </Link>
@@ -66,7 +66,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
             <IconComposer
               icon="delete32"
               size={26}
-              className="utility-button__icon utility-button__icon--notice"
+              className="utility-button__icon"
             />
             <span className="utility-button__text">{t("actions.delete")}</span>
           </button>
@@ -106,7 +106,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
           from={lh.link("backendJournal", journal.id)}
           candidates={navigation.journal(journal)}
         />
-        <Navigation.DetailHeader
+        <PageHeader
           type="journal"
           title={journal.attributes.titleFormatted}
           subtitle={journal.attributes.subtitle}
@@ -115,7 +115,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
         />
         <Layout.BackendPanel
           sidebar={
-            <Navigation.Secondary
+            <Layout.SecondaryNav
               links={navigation.journal(journal)}
               panel
               ariaLabel={t("journals.settings")}

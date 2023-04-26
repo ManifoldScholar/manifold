@@ -38,7 +38,9 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
       />
       <EntitiesList
         entityComponent={JournalRow}
-        title={t("journals.header")}
+        title={t("glossary.journal_title_case", {
+          count: meta.pagination.totalCount
+        })}
         titleIcon="Journals64"
         titleStyle="bar"
         entities={data}
@@ -46,6 +48,7 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
         search={<Search {...entitiesListSearchProps("journals")} />}
         pagination={meta.pagination}
         showCount
+        showCountInTitle
         callbacks={{
           onPageClick: page => () => setPageNumber(page)
         }}

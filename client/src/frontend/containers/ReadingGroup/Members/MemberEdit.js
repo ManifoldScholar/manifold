@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { readingGroupMembershipsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import { MemberSettingsForm } from "frontend/components/reading-group/forms";
 import { useFetch } from "hooks";
 
@@ -30,7 +30,7 @@ function ReadingGroupMemberEditContainer({
 
   return membership ? (
     <section>
-      <Navigation.DrawerHeader
+      <Layout.DrawerHeader
         title={t("forms.reading_group_member.title")}
         buttons={[
           {
