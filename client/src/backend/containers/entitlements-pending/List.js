@@ -81,21 +81,19 @@ function PendingEntitlementsList({
   };
 
   const utility = (
-    <div className="utility-button-group utility-button-group--inline">
-      <Link
-        to={lh.link("backendRecordsEntitlementImports")}
-        className="utility-button"
-      >
-        <IconComposer
-          icon="eyeOpen32"
-          size={26}
-          className="utility-button__icon"
-        />
-        <span className="utility-button__text">
-          {t("entitlements.imports.view_imports_label")}
-        </span>
-      </Link>
-    </div>
+    <Link
+      to={lh.link("backendRecordsEntitlementImports")}
+      className="utility-button"
+    >
+      <IconComposer
+        icon="eyeOpen32"
+        size={26}
+        className="utility-button__icon"
+      />
+      <span className="utility-button__text">
+        {t("entitlements.imports.view_imports_label")}
+      </span>
+    </Link>
   );
 
   return (

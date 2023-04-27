@@ -23,7 +23,7 @@ export const Row = styled.div`
     margin-block-start: -6px;
   }
 
-  ${({ $minHeight }) => $minHeight && `min-height: 100px;`}
+  ${({ $minHeight }) => $minHeight && `min-height: 85px;`}
   ${({ $compact }) =>
     $compact &&
     `padding: ${fluidScale("16px", "12px")} ${fluidScale("24px", "12px")}`}
