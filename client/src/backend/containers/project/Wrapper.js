@@ -50,6 +50,14 @@ export class ProjectWrapperContainer extends PureComponent {
     this.fetchProject();
   }
 
+  componentDidUpdate() {
+    const {
+      params: { id: nextId }
+    } = this.props.match ?? {};
+    const prevId = this.props.project?.id;
+    if (nextId && prevId && nextId !== prevId) this.fetchProject();
+  }
+
   componentWillUnmount() {
     this.props.dispatch(flush(requests.beProject));
   }
@@ -154,6 +162,24 @@ export class ProjectWrapperContainer extends PureComponent {
 
     const subpage = location.pathname.split("/")[4]?.replace("-", "_");
 
+    const issues = isJournalIssue
+      ? project.relationships.journal?.relationships.recentJournalIssues?.map(
+          i => ({
+            title: i.attributes?.title,
+            ...i.relationships?.project
+          })
+        )
+      : null;
+
+    const parentProps = isJournalIssue
+      ? {
+          parentTitle: project.relationships.journal.attributes.titleFormatted,
+          parentSubtitle: project.relationships.journal.attributes.subtitle,
+          issues,
+          parentId: project.relationships.journal.id
+        }
+      : {};
+
     return (
       <div>
         <Authorize
@@ -180,12 +206,10 @@ export class ProjectWrapperContainer extends PureComponent {
             type={isJournalIssue ? "issue" : "project"}
             title={project.attributes.titleFormatted}
             subtitle={project.attributes.subtitle}
+            texts={project.relationships.texts}
             utility={this.renderUtility(project)}
             secondaryLinks={secondaryLinks}
-            parentTitle={
-              project.relationships.journal?.attributes.titleFormatted
-            }
-            parentSubtitle={project.relationships.journal?.attributes.subtitle}
+            {...parentProps}
           />
           <Layout.BackendPanel
             sidebar={

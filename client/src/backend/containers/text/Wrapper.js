@@ -48,6 +48,14 @@ export class TextWrapperContainer extends PureComponent {
     this.fetchText();
   }
 
+  componentDidUpdate() {
+    const {
+      params: { id: nextId }
+    } = this.props.match ?? {};
+    const prevId = this.props.text?.id;
+    if (nextId && prevId && nextId !== prevId) this.fetchText();
+  }
+
   componentWillUnmount() {
     this.props.dispatch(entityStoreActions.flush(requests.beText));
   }
@@ -202,6 +210,16 @@ export class TextWrapperContainer extends PureComponent {
     const secondaryLinks = navigation.text(text);
     const subpage = location.pathname.split("/")[5]?.replace("-", "_");
 
+    const parentProps = {
+      parentTitle: text.relationships.project.attributes.titleFormatted,
+      parentSubtitle: text.relationships.project.attributes.subtitle,
+      texts: text.relationships.project.relationships.texts,
+      parentId: text.relationships.project.id
+    };
+
+    const belongsToJournalIssue =
+      text.relationships.project.relationships.journalIssue;
+
     return (
       <>
         <Authorize
@@ -224,13 +242,12 @@ export class TextWrapperContainer extends PureComponent {
             candidates={secondaryLinks}
           />
           <PageHeader
-            type="text"
-            parentTitle={text.relationships.project.attributes.titleFormatted}
-            parentSubtitle={text.relationships.project.attributes.subtitle}
+            type={belongsToJournalIssue ? "article" : "text"}
             title={text.attributes.titleFormatted}
             subtitle={text.attributes.subtitle}
             utility={this.renderUtility()}
             secondaryLinks={secondaryLinks}
+            {...parentProps}
           />
           <Layout.BackendPanel
             sidebar={

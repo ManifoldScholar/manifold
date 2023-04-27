@@ -1,10 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  respond,
-  fluidScale,
-  buttonUnstyled,
-  formLabelPrimary
-} from "theme/styles/mixins";
+import { respond, fluidScale } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import UniqueIcons from "global/components/icon/unique";
 import { Link } from "react-router-dom";
@@ -14,6 +9,7 @@ export const Row = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  position: relative;
 
   ${({ $padStart }) =>
     $padStart && `padding-inline-start: ${fluidScale("36px", "16px")};`}
@@ -147,21 +143,6 @@ export const Note = styled.note`
   font-size: ${fluidScale("17px", "14px")};
   line-height: initial;
 `;
-
-export const Dropdown = styled.button`
-  ${buttonUnstyled}
-  border-radius: var(--box-border-radius);
-  background-color: var(--color-base-neutral100);
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 7px 12px 7px 16px;
-  ${formLabelPrimary}
-  font-size: 13px;
-  margin-inline-start: auto;
-`;
-
-export const DropdownIcon = styled(IconComposer)``;
 
 export const ChildLink = styled.div`
   width: ${fluidScale("16px", "12px")};

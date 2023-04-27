@@ -85,6 +85,11 @@ function JournalWrapper({ match, route, history, confirm, location }) {
 
   const subpage = location.pathname.split("/")[4]?.replace("-", "_");
 
+  const issues = journal.relationships.journalIssues?.map(i => ({
+    title: i.attributes.title,
+    ...i.relationships.project
+  }));
+
   return (
     <div>
       <Authorize
@@ -112,6 +117,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
           subtitle={journal.attributes.subtitle}
           utility={renderUtility(journal)}
           secondaryLinks={navigation.journal(journal)}
+          issues={issues}
         />
         <Layout.BackendPanel
           sidebar={

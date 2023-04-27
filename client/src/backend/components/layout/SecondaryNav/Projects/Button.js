@@ -4,29 +4,25 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import * as Styled from "./styles";
 
-const ProjectsButton = forwardRef(
-  ({ className, link, index, toggleVisible, ...props }, ref) => {
-    const { t } = useTranslation();
+function ProjectsButton(
+  { className, link, index, toggleVisible, ...props },
+  ref
+) {
+  const { t } = useTranslation();
 
-    const { pathname } = useLocation();
-    const active = pathname.includes("/projects");
+  const { pathname } = useLocation();
+  const active = pathname?.includes("/projects");
 
-    return (
-      <li key={`${link.label}-${index}`} className="site-nav__item">
-        <Styled.Button
-          ref={ref}
-          tabIndex={0}
-          onClick={toggleVisible}
-          {...props}
-        >
-          <Styled.ButtonText className="site-nav__link" $active={active}>
-            {t(link.label)}
-          </Styled.ButtonText>
-        </Styled.Button>
-      </li>
-    );
-  }
-);
+  return (
+    <li className="site-nav__item">
+      <Styled.Button ref={ref} tabIndex={0} onClick={toggleVisible} {...props}>
+        <Styled.ButtonText className="site-nav__link" $active={active}>
+          {t(link.label)}
+        </Styled.ButtonText>
+      </Styled.Button>
+    </li>
+  );
+}
 
 ProjectsButton.displayName = "UserMenuButton";
 
@@ -39,4 +35,4 @@ ProjectsButton.propTypes = {
   context: PropTypes.oneOf(["frontend", "backend", "reader"])
 };
 
-export default ProjectsButton;
+export default forwardRef(ProjectsButton);

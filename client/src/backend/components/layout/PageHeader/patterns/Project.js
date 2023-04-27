@@ -1,4 +1,6 @@
 import React from "react";
+import ChildSelector from "../ChildSelector";
+import { useLocation } from "react-router-dom";
 import * as Styled from "./styles";
 
 export default function ProjectHeader({
@@ -6,10 +8,30 @@ export default function ProjectHeader({
   titleString,
   subtitle,
   parent,
-  childEntities,
+  texts,
   utility,
-  note
+  note,
+  id
 }) {
+  const { pathname } = useLocation();
+
+  const textLinks = texts
+    ? [
+        {
+          label: "None",
+          active: !parent,
+          id: id ?? "none",
+          route: parent ? "backendProject" : null
+        },
+        ...texts?.map(t => ({
+          label: t.attributes.titlePlaintext,
+          route: "backendTextAnalytics",
+          id: t.id,
+          active: pathname?.includes(t.id)
+        }))
+      ]
+    : [];
+
   return (
     <>
       <Styled.Row $padStart={parent}>
@@ -29,12 +51,7 @@ export default function ProjectHeader({
           </Styled.Title>
           {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
         </Styled.TitleWrapper>
-        {childEntities && (
-          <Styled.Dropdown>
-            <span>Show Text</span>
-            <Styled.DropdownIcon icon="disclosureDown24" size={22} />
-          </Styled.Dropdown>
-        )}
+        {texts && <ChildSelector links={textLinks} entity="text" />}
       </Styled.Row>
       {(utility || note) && (
         <Styled.Utility>
