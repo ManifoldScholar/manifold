@@ -10,9 +10,10 @@ import Instructions from "../Instructions";
 /* eslint-disable react/prop-types */
 const CodeAreaInput = Loadable({
   loader: () =>
-    import(/* webpackChunkName: "ace-editor" */ "./Ace").then(
-      ace => ace.default
-    ),
+    import(/* webpackChunkName: "ace-editor" */ "./Ace").then(ace => {
+      console.log(ace);
+      return ace.default;
+    }),
   render(Editor, props) {
     return (
       <Errorable
