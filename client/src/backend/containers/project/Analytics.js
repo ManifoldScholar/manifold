@@ -31,6 +31,18 @@ export class AnalyticsContainer extends PureComponent {
     });
   }
 
+  componentDidUpdate() {
+    const {
+      params: { id: nextId }
+    } = this.props.match ?? {};
+    const prevId = this.props.project?.id;
+    if (nextId && prevId && nextId !== prevId)
+      this.props.fetchAnalytics("project", {
+        record_type: "Project",
+        record_id: nextId
+      });
+  }
+
   render() {
     const {
       project,

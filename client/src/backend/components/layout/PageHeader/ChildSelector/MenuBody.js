@@ -1,0 +1,41 @@
+import React, { forwardRef } from "react";
+import PropTypes from "prop-types";
+import lh from "helpers/linkHandler";
+import { useTranslation } from "react-i18next";
+import * as Styled from "./styles";
+
+function ChildSelectorMenuBody(props, ref) {
+  const { links, visible, ...dropDownProps } = props;
+  const { t } = useTranslation();
+
+  const renderItem = link => {
+    const maybeLinkProps = link.route
+      ? { to: lh.link(link.route, link.id) }
+      : { as: "span", $noLink: true };
+
+    return (
+      <li key={link.id}>
+        <Styled.Link {...maybeLinkProps} onClick={dropDownProps.toggleVisible}>
+          {link.active && <Styled.LinkIcon icon="checkmark16" size={16} />}
+          <Styled.LinkText>{t(link.label)}</Styled.LinkText>
+        </Styled.Link>
+      </li>
+    );
+  };
+
+  return (
+    <Styled.Wrapper $visible={visible} ref={ref} {...dropDownProps}>
+      <Styled.List>{links.map(link => renderItem(link))}</Styled.List>
+    </Styled.Wrapper>
+  );
+}
+
+ChildSelectorMenuBody.displayName = "Layout.Projects.SecondaryNav";
+
+ChildSelectorMenuBody.propTypes = {
+  links: PropTypes.array,
+  panel: PropTypes.bool,
+  ariaLabel: PropTypes.string
+};
+
+export default forwardRef(ChildSelectorMenuBody);

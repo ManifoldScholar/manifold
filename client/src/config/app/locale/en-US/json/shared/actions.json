@@ -64,6 +64,7 @@
     "share": "Share",
     "show": "Show",
     "show_all": "Show all",
+    "show_entity": "Show {{entity}}",
     "start_playback": "Start Playback",
     "toggle_collecting": "Toggle collecting dialog",
     "toggle_to_state": "Toggle {{label}} to {{state}}",

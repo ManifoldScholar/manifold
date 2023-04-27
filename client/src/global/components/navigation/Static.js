@@ -100,6 +100,7 @@ export class NavigationStatic extends PureComponent {
       const Disclosure = link.disclosure;
       return (
         <DisclosureNavigationMenu
+          key={`${link.label}-${index}`}
           disclosure={<Disclosure link={link} index={index} />}
         >
           {link.dropdownContent}

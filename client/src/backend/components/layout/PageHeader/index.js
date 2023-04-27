@@ -12,7 +12,8 @@ import {
   Base,
   Compact,
   Count,
-  Analytics
+  Analytics,
+  Article
 } from "./patterns";
 import * as Styled from "./styles";
 
@@ -35,7 +36,8 @@ const COMPONENT_MAP = {
   settings: Compact,
   analytics: Analytics,
   list: Compact,
-  count: Count
+  count: Count,
+  article: Article
 };
 
 export default function PageHeader({

@@ -1,8 +1,8 @@
 import React from "react";
-import Project from "./Project";
+import Issue from "./Issue";
 import * as Styled from "./styles";
 
-export default function TextHeader({
+export default function ArticleHeader({
   titleHtml,
   titleString,
   subtitle,
@@ -16,7 +16,7 @@ export default function TextHeader({
 }) {
   return (
     <>
-      <Project
+      <Issue
         titleString={parentTitleString}
         titleHtml={parentTitleHtml}
         subtitle={parentSubtitle}
