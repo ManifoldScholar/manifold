@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import {
   buttonUnstyled,
   utilityPrimary,
-  defaultTransitionProps
+  defaultTransitionProps,
+  respond
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
@@ -12,6 +13,9 @@ export const Wrapper = styled.div`
   border: 1px solid;
   border-radius: 16px;
   color: var(--color-accent-primary);
+  width: 100%;
+
+  ${respond(`width: auto;`, 60)};
 `;
 
 export const Button = styled.button`
@@ -32,6 +36,9 @@ export const Button = styled.button`
   transition: color ${defaultTransitionProps},
     background-color ${defaultTransitionProps},
     border-color ${defaultTransitionProps};
+  width: 50%;
+
+  ${respond(`width: auto;`, 60)}
 
   ${({ $active }) =>
     $active

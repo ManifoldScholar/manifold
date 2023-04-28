@@ -21,9 +21,9 @@ export const labels = {
 };
 
 export const descriptions = {
-  img: "Paste image URL into editor to insert.",
+  img: "Click here or paste an image URL into the editor to insert.",
   iframe:
-    "Paste a YouTube or Vimeo embed URL to insert. Click to add other types of iframe content."
+    "Paste a YouTube or Vimeo embed URL into the editor to insert. Click to add all types of iframe content."
 };
 
 export const hotkeys = {

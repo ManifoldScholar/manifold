@@ -104,7 +104,7 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
       content={<TooltipContent label={labels.link} hotkeys={hotkeys.link} />}
       xOffset="-75px"
       yOffset="43px"
-      delay={1}
+      delay={0.5}
     >
       <Styled.Button
         ref={ref}

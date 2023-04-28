@@ -34,7 +34,7 @@ const FunctionButton = (
       }
       xOffset="-50px"
       yOffset="43px"
-      delay={1}
+      delay={0.5}
     >
       {renderButton}
     </Tooltip>

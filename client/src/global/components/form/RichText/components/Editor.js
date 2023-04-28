@@ -136,14 +136,19 @@ export default function Editor({
     mode: "html",
     aceRef,
     nextRef,
-    prevRef: controlsRef
+    prevRef: controlsRef,
+    darkMode
   };
 
   const cssProps = {
     value: theme,
     mode: "css",
     readOnly: true,
-    onValidate: () => {}
+    onValidate: () => {},
+    aceRef,
+    nextRef,
+    prevRef: controlsRef,
+    darkMode
   };
 
   const codeAreaProps = showCss ? cssProps : htmlProps;
@@ -171,10 +176,13 @@ export default function Editor({
     aceRef.current.editor.redo();
   };
 
-  const wrapperClasses = classNames("manifold-text-section font-size-2", {
-    "scheme-dark": darkMode,
-    "scheme-light": !darkMode
-  });
+  const wrapperClasses = classNames(
+    "manifold-text-section text-section font-size-2",
+    {
+      "scheme-dark": darkMode,
+      "scheme-light": !darkMode
+    }
+  );
 
   const onClickDarkModeToggle = val => e => {
     e.preventDefault();
