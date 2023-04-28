@@ -43,7 +43,7 @@ const BlockSelect = ({ options, selection, ...rest }, ref) => {
       }
       xOffset="-75px"
       yOffset="43px"
-      delay={1}
+      delay={0.5}
     >
       <Styled.SelectWrapper>
         <Styled.Select

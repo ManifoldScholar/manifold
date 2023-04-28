@@ -14,6 +14,23 @@ export const Editor = styled.div`
   &:focus-visible {
     border-color: var(--TextArea-focus-color);
   }
+
+  .scheme-light {
+    .ace_gutter {
+      background-color: var(--color-base-neutral30);
+    }
+    .ace_active-line,
+    .ace_gutter-active-line {
+      background-color: var(--color-base-yellow20) !important;
+    }
+  }
+
+  .scheme-dark {
+    .ace_active-line,
+    .ace_gutter-active-line {
+      background-color: var(--color-base-neutral110) !important;
+    }
+  }
 `;
 
 export const EditorSecondary = styled(Editor)`
@@ -40,7 +57,6 @@ export const EditableWrapper = styled.div`
   border-bottom-left-radius: var(--box-border-radius);
   border-bottom-right-radius: var(--box-border-radius);
   background-color: var(--background-color);
-  padding-block-end: 24px;
 
   .ace_editor {
     border-bottom-left-radius: 6px;
@@ -53,6 +69,10 @@ export const EditableWrapper = styled.div`
   .ace_scroller {
     min-height: 700px !important;
     overflow: visible;
+    border-bottom-left-radius: var(--box-border-radius);
+  }
+
+  .ace_gutter-cell:last-of-type {
     border-bottom-left-radius: var(--box-border-radius);
   }
 
@@ -69,9 +89,6 @@ export const Editable = styled(BaseEditable)`
   max-width: 750px;
   margin: auto;
   padding-block: 4em;
-  font-family: var(--font-family-copy);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.761;
 `;
 
 export const Controls = styled.div`

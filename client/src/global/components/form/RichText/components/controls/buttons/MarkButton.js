@@ -43,7 +43,7 @@ const MarkButton = (
       }
       xOffset="-75px"
       yOffset="43px"
-      delay={1}
+      delay={0.5}
     >
       <Styled.Button
         ref={ref}

@@ -18,7 +18,7 @@ export const formatHtml = html => {
   const options = {
     indent_with_tabs: true,
     preserve_newlines: false,
-    end_with_newline: false,
+    end_with_newline: true,
     wrap_line_length: "0",
     indent_inner_html: true,
     inline: [...markElements],

@@ -130,7 +130,7 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
       }
       xOffset="-75px"
       yOffset="43px"
-      delay={1}
+      delay={0.5}
     >
       <div>
         <Styled.Button

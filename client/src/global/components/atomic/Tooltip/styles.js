@@ -16,6 +16,8 @@ export const Tooltip = styled.div`
   left: ${({ $xOffset }) => $xOffset};
   z-index: 100;
   transition: 0.2s;
+  border: 1px solid var(--color-base-neutral90);
+  box-shadow: 0px 12px 32px 3px rgba(0, 0, 0, 0.3);
 
   [aria-describedby]:hover + & {
     visibility: visible;
