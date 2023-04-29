@@ -244,10 +244,11 @@ class EntitiesListRow extends PureComponent {
       "entity-row__row-link--in-well": this.listStyle === "well",
       "entity-row__row-link--is-active": this.active
     });
+
     return (
       <Link
         className={className}
-        to={url}
+        to={{ pathname: url, state: this.props.linkState, hash: "test" }}
         aria-describedby={`${id}-describedby`}
       >
         {child}

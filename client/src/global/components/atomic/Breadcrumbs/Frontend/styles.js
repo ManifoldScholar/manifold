@@ -6,6 +6,7 @@ import {
   containerPrototype,
   defaultTransitionProps
 } from "theme/styles/mixins";
+import { transientOptions } from "helpers/emotionHelpers";
 
 export const Outer = styled.nav`
   --Breadcrumb-margin-inline: 16px;
@@ -37,7 +38,7 @@ export const Inner = styled.div`
   align-items: center;
 `;
 
-export const Breadcrumb = styled(Link)`
+export const Breadcrumb = styled(Link, transientOptions)`
   display: flex;
   align-items: center;
   text-decoration: none !important;
@@ -60,9 +61,12 @@ export const Breadcrumb = styled(Link)`
     }
   }
 
-  &:hover {
-    color: var(--hover-color);
-  }
+  ${({ $noLink }) =>
+    !$noLink &&
+    `&:hover {
+        color: var(--hover-color);
+      }
+    `}
 `;
 
 export const Label = styled.span`

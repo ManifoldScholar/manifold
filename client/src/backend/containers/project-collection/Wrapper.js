@@ -274,8 +274,15 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       : t("titles.project_collections");
 
     const breadcrumbs = [
-      { to: lh.link("backend"), label: "Admin" },
-      { to: lh.link("backendProjectCollections"), label: "Project Collections" }
+      { to: null, label: t("common.admin") },
+      {
+        to: lh.link("backendProjects"),
+        label: t("glossary.project_title_case_other")
+      },
+      {
+        to: lh.link("backendProjectCollections"),
+        label: t("glossary.project_collection_title_case_other")
+      }
     ];
 
     return (

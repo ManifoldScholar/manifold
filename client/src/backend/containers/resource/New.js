@@ -13,6 +13,8 @@ import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import { getBreadcrumbs } from "./breadcrumbs";
 
 import Authorize from "hoc/Authorize";
 
@@ -60,6 +62,10 @@ export class ResourceNewContainer extends PureComponent {
     const { project, t } = this.props;
     if (!project) return null;
 
+    const belongsToJournalIssue = project.attributes.isJournalIssue;
+
+    const breadcrumbs = getBreadcrumbs(project, belongsToJournalIssue, t);
+
     return (
       <Authorize
         entity={project}
@@ -72,6 +78,7 @@ export class ResourceNewContainer extends PureComponent {
           appendDefaultTitle
         />
         <div>
+          <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
           <PageHeader
             type="resource"
             backUrl={lh.link("backendProjectResources", project.id)}

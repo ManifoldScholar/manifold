@@ -17,7 +17,8 @@ class RedirectToFirstMatch extends React.PureComponent {
     location: PropTypes.object,
     candidates: PropTypes.array.isRequired,
     authentication: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    state: PropTypes.object
   };
 
   constructor(props) {
@@ -52,7 +53,10 @@ class RedirectToFirstMatch extends React.PureComponent {
           path = lh.link(candidate.route, ...args);
         }
         if (path) {
-          this.props.history.replace(path);
+          this.props.history.replace({
+            pathname: path,
+            state: this.props.state
+          });
           return true;
         }
       }

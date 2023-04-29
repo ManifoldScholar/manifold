@@ -39,8 +39,8 @@ function JournalIssuesContainer({ refresh, journal, route }) {
         entityComponent={JournalIssueRow}
         entityComponentProps={{ journal }}
         title={t("issues.header")}
-        titleIcon="Journals64"
         titleStyle="bar"
+        titleTag="h2"
         entities={data}
         unit={t("glossary.issue_truncated", {
           count: meta?.pagination?.totalCount || 0

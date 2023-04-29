@@ -138,7 +138,7 @@ export const Utility = styled.div`
   justify-content: space-between;
 `;
 
-export const Note = styled.note`
+export const Note = styled.span`
   font-family: var(--font-family-serif);
   font-size: ${fluidScale("17px", "14px")};
   line-height: initial;

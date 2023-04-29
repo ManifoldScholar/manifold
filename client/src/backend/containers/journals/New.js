@@ -9,6 +9,7 @@ import PageHeader from "backend/components/layout/PageHeader";
 import { journalsAPI } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
 class JournalsNew extends PureComponent {
   static displayName = "Journals.New";
@@ -28,6 +29,15 @@ class JournalsNew extends PureComponent {
 
   render() {
     const t = this.props.t;
+
+    const breadcrumbs = [
+      { to: null, label: t("common.admin") },
+      {
+        to: lh.link("backendJournals"),
+        label: t("glossary.journal_title_case_other")
+      }
+    ];
+
     return (
       <Authorize
         entity={"journal"}
@@ -40,6 +50,7 @@ class JournalsNew extends PureComponent {
           appendDefaultTitle
         />
         <div>
+          <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
           <PageHeader
             type="journal"
             title={t("journals.forms.new_header")}

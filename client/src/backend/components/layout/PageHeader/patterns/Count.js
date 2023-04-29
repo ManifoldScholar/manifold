@@ -8,15 +8,16 @@ export default function CountHeader({
   count,
   titleTag
 }) {
+  /* eslint-disable no-nested-ternary */
   return (
     <Styled.Row $compact>
       {icon && titleTag ? (
         <Styled.CountIconSmall icon={icon} />
-      ) : (
+      ) : icon ? (
         <Styled.CountIcon icon={icon} />
-      )}
+      ) : null}
       <Styled.Title as={titleTag}>
-        <Styled.Count>{count}</Styled.Count>
+        {count && <Styled.Count>{count}</Styled.Count>}
         {titleString}
       </Styled.Title>
       {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
