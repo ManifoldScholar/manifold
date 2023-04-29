@@ -34,11 +34,17 @@ export default class ProjectCollectionDetailManual extends PureComponent {
     const { projectCollection } = this.props;
     if (!projectCollection) return null;
 
+    const linkState = {
+      id: this.props.projectCollection.id,
+      label: this.props.projectCollection.attributes.title
+    };
+
     return (
       <EntitiesList
         entityComponent={
           this.isManuallySorted ? CollectionProjectRow : ProjectRow
         }
+        entityComponentProps={{ linkState }}
         entities={this.entities}
         listStyle="rows"
         sortableStyle="tight"

@@ -9,6 +9,7 @@ import FormContainer from "global/containers/form";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
 import Authorize from "hoc/Authorize";
 
@@ -63,6 +64,15 @@ export class ProjectNewContainer extends PureComponent {
 
   render() {
     const t = this.props.t;
+
+    const breadcrumbs = [
+      { to: null, label: t("common.admin") },
+      {
+        to: lh.link("backendProjects"),
+        label: t("glossary.project_title_case_other")
+      }
+    ];
+
     return (
       <Authorize
         entity={"project"}
@@ -70,6 +80,7 @@ export class ProjectNewContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backend")}
       >
+        <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
         <HeadContent
           title={`${t(`titles.project_new`)} | ${t("common.admin")}`}
           appendDefaultTitle

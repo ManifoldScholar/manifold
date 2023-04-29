@@ -45,6 +45,7 @@ export default function PageHeader({
   parentTitle,
   type,
   secondaryLinks,
+  hideBreadcrumbs,
   ...props
 }) {
   const { breadcrumbs } = useContext(BreadcrumbsContext);
@@ -53,7 +54,7 @@ export default function PageHeader({
 
   return (
     <Styled.Header>
-      {breadcrumbs && type !== "projectCollection" && (
+      {breadcrumbs && !hideBreadcrumbs && (
         <Breadcrumbs backend breadcrumbs={breadcrumbs} />
       )}
       <Styled.Content>

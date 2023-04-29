@@ -13,6 +13,8 @@ import withConfirmation from "hoc/withConfirmation";
 import IconComposer from "global/components/utility/IconComposer";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import { getBreadcrumbs } from "./breadcrumbs";
 
 import Authorize from "hoc/Authorize";
 import { Link } from "react-router-dom";
@@ -143,6 +145,15 @@ export class ResourceWrapperContainer extends PureComponent {
 
     const subpage = location.pathname.split("/")[5];
 
+    const belongsToJournalIssue =
+      resource.relationships.project.attributes.isJournalIssue;
+
+    const breadcrumbs = getBreadcrumbs(
+      resource.relationships.project,
+      belongsToJournalIssue,
+      t
+    );
+
     return (
       <div>
         <Authorize
@@ -164,13 +175,9 @@ export class ResourceWrapperContainer extends PureComponent {
             from={lh.link("backendResource", resource.id)}
             candidates={secondaryLinks}
           />
+          <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
           <PageHeader
             type="resource"
-            backUrl={lh.link(
-              "backendProjectResources",
-              resource.relationships.project.id
-            )}
-            backLabel={resource.relationships.project.attributes.titlePlaintext}
             utility={this.renderUtility(resource)}
             title={resource.attributes.titleFormatted}
             subtitle={resource.attributes.subtitle}

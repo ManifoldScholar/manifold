@@ -15,24 +15,28 @@ export default function BackendBreadcrumbs({
       $hideOnDesktop={hideOnDesktop}
     >
       <Styled.BackendInner>
-        {breadcrumbs.map((crumb, i) => (
-          <>
-            <Styled.BackendBreadcrumb
-              to={crumb.to}
-              key={crumb.to}
-              aria-current={
-                breadcrumbs.length > 1 && i === breadcrumbs.length - 1
-                  ? "page"
-                  : null
-              }
-            >
-              <Styled.Label>{crumb.label}</Styled.Label>
-            </Styled.BackendBreadcrumb>
-            {i < breadcrumbs.length - 1 && (
-              <Styled.Spacer icon="disclosureDown16" size={16} />
-            )}
-          </>
-        ))}
+        {breadcrumbs.map((crumb, i) => {
+          const maybeLinkProps = crumb.to
+            ? { to: crumb.to }
+            : { as: "span", $noLink: true };
+          return (
+            <>
+              <Styled.BackendBreadcrumb
+                {...maybeLinkProps}
+                aria-current={
+                  breadcrumbs.length > 1 && i === breadcrumbs.length - 1
+                    ? "page"
+                    : null
+                }
+              >
+                <Styled.Label>{crumb.label}</Styled.Label>
+              </Styled.BackendBreadcrumb>
+              {i < breadcrumbs.length - 1 && (
+                <Styled.Spacer icon="disclosureDown16" size={16} />
+              )}
+            </>
+          );
+        })}
       </Styled.BackendInner>
     </Styled.BackendOuter>
   );

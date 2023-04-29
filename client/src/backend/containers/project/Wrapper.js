@@ -16,6 +16,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import { Link } from "react-router-dom";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import { getBreadcrumbs } from "./breadcrumbs";
 import PageHeader from "backend/components/layout/PageHeader";
 
 const { request, flush } = entityStoreActions;
@@ -144,21 +145,12 @@ export class ProjectWrapperContainer extends PureComponent {
     const secondaryLinks = navigation.project(project);
     const isJournalIssue = project.attributes.isJournalIssue;
 
-    const backUrl = isJournalIssue
-      ? lh.link("backendJournalIssues", project.relationships.journal.id)
-      : null;
-    const backLabel = isJournalIssue
-      ? project.relationships.journal.attributes.title
-      : null;
-
-    const projectCrumb = [
-      { to: lh.link("backend"), label: "Admin" },
-      { to: lh.link("backendProjects"), label: "Projects" }
-    ];
-
-    const breadcrumbs = backUrl
-      ? [{ to: backUrl, label: backLabel }]
-      : projectCrumb;
+    const breadcrumbs = getBreadcrumbs(
+      project,
+      this.props.location.state,
+      isJournalIssue,
+      t
+    );
 
     const subpage = location.pathname.split("/")[4]?.replace("-", "_");
 
@@ -200,6 +192,7 @@ export class ProjectWrapperContainer extends PureComponent {
           <RedirectToFirstMatch
             from={lh.link("backendProject", project.id)}
             candidates={secondaryLinks}
+            state={this.props.location.state}
           />
           <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
           <PageHeader

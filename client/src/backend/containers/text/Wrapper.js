@@ -13,6 +13,8 @@ import withConfirmation from "hoc/withConfirmation";
 import IconComposer from "global/components/utility/IconComposer";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import { getBreadcrumbs } from "./breadcrumbs";
 
 import Authorize from "hoc/Authorize";
 import { Link } from "react-router-dom";
@@ -218,7 +220,9 @@ export class TextWrapperContainer extends PureComponent {
     };
 
     const belongsToJournalIssue =
-      text.relationships.project.relationships.journalIssue;
+      text.relationships.project.attributes.isJournalIssue;
+
+    const breadcrumbs = getBreadcrumbs(text, belongsToJournalIssue, t);
 
     return (
       <>
@@ -241,6 +245,7 @@ export class TextWrapperContainer extends PureComponent {
             from={lh.link("backendText", text.id)}
             candidates={secondaryLinks}
           />
+          <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
           <PageHeader
             type={belongsToJournalIssue ? "article" : "text"}
             title={text.attributes.titleFormatted}

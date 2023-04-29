@@ -36,8 +36,8 @@ function JournalVolumesContainer({ refresh, journal, route }) {
         entityComponent={JournalVolumeRow}
         entityComponentProps={{ journal }}
         title={t("volumes.header")}
-        titleIcon="Journals64"
         titleStyle="bar"
+        titleTag="h2"
         entities={data}
         unit={t("glossary.volume", {
           count: meta?.pagination?.totalCount || 0

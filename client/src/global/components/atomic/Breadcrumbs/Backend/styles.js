@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { respond } from "theme/styles/mixins";
 import { Outer, Inner, Breadcrumb } from "../Frontend/styles";
 import IconComposer from "global/components/utility/IconComposer";
+import { transientOptions } from "helpers/emotionHelpers";
 
 export const BackendOuter = styled(Outer)`
   --Breadcrumb-margin-inline: 0.5em;
@@ -31,23 +32,31 @@ export const BackendInner = styled(Inner)`
   padding-inline-end: 0;
 `;
 
-export const BackendBreadcrumb = styled(Breadcrumb)`
-  &:last-of-type {
-    color: var(--input-color);
-  }
-
-  &:hover {
-    color: var(--hover-color);
-  }
-`;
-
 export const Label = styled.span`
   margin-inline-start: var(--Breadcrumb-margin-inline);
   white-space: nowrap;
+`;
+
+export const BackendBreadcrumb = styled(Breadcrumb, transientOptions)`
+  &:last-of-type:not(span) {
+    color: var(--input-color);
+  }
+
+  ${({ $noLink }) =>
+    !$noLink &&
+    `&:hover {
+        color: var(--hover-color);
+      }
+
+      &:hover:last-of-type:not(span) {
+          color: var(--hover-color);
+        }
+    `}
 `;
 
 export const Spacer = styled(IconComposer)`
   transform: rotate(-90deg);
   margin-inline-start: 8px;
   margin-block-start: 2px;
+  flex-shrink: 0;
 `;

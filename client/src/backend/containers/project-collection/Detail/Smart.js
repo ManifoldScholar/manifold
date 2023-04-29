@@ -12,9 +12,16 @@ export default class ProjectCollectionDetailSmart extends PureComponent {
 
   render() {
     const { projects } = this.props;
+
+    const linkState = {
+      id: this.props.projectCollection.id,
+      label: this.props.projectCollection.attributes.title
+    };
+
     return (
       <EntitiesList
         entityComponent={ProjectRow}
+        entityComponentProps={{ linkState }}
         entities={projects}
         listStyle="grid"
       />

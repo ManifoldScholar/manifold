@@ -10,6 +10,8 @@ import { grab, isEntityLoaded, select } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
 import { withTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import { getBreadcrumbs } from "backend/containers/resource/breadcrumbs";
 
 import Authorize from "hoc/Authorize";
 
@@ -115,6 +117,10 @@ export class ResourceImportWrapper extends PureComponent {
     const { project, match, t } = this.props;
     if (!project) return null;
 
+    const belongsToJournalIssue = project.attributes.isJournalIssue;
+
+    const breadcrumbs = getBreadcrumbs(project, belongsToJournalIssue, t);
+
     return (
       <Authorize
         entity={project}
@@ -127,6 +133,7 @@ export class ResourceImportWrapper extends PureComponent {
           title={`${t(`titles.resource_import`)} | ${t("common.admin")}`}
           appendDefaultTitle
         />
+        <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
         <PageHeader
           type="resources"
           backUrl={lh.link("backendProjectResources", match.params.projectId)}

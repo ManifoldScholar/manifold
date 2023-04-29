@@ -12,6 +12,7 @@ import { useFetch, useApiCallback, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
 function JournalWrapper({ match, route, history, confirm, location }) {
   const { t } = useTranslation();
@@ -90,6 +91,14 @@ function JournalWrapper({ match, route, history, confirm, location }) {
     ...i.relationships.project
   }));
 
+  const breadcrumbs = [
+    { to: null, label: t("common.admin") },
+    {
+      to: lh.link("backendJournals"),
+      label: t("glossary.journal_title_case_other")
+    }
+  ];
+
   return (
     <div>
       <Authorize
@@ -111,6 +120,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
           from={lh.link("backendJournal", journal.id)}
           candidates={navigation.journal(journal)}
         />
+        <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
         <PageHeader
           type="journal"
           title={journal.attributes.titleFormatted}

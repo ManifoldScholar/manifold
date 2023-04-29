@@ -92,6 +92,7 @@ class ProjectCollectionHeader extends PureComponent {
             </span>
           </Styled.EmptyHeader>
         }
+        hideBreadcrumbs
       />
     );
   }
@@ -106,6 +107,7 @@ class ProjectCollectionHeader extends PureComponent {
         type="projectCollection"
         title={projectCollection.attributes.title}
         utility={this.renderUtility(projectCollection)}
+        hideBreadcrumbs
       />
     );
   }
