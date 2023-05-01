@@ -14,12 +14,18 @@ import { descriptions, labels } from "./TooltipContent/hotkeys";
 import * as Styled from "./styles";
 
 export const insertIframe = (editor, url, title) => {
-  const text = { text: "" };
+  const text = { text: "", slateOnly: true };
   const embed = {
     type: "iframe",
     htmlAttrs: { src: url, title },
     children: [text]
   };
+  const [node] = Editor.above(editor, editor.selection);
+  if (node.type === "p") {
+    if (node.children.length === 1 && node.children[0].text === "") {
+      Transforms.removeNodes(editor);
+    }
+  }
   Transforms.insertNodes(editor, embed);
   ReactEditor.focus(editor);
 };
