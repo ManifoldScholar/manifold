@@ -82,3 +82,22 @@ export const handleInlineItemChildren = ({ editor, at, nodes }) => {
     match: n => n.type === "list-sibling"
   });
 };
+
+export const getCommonBlock = editor => {
+  const range = Editor.unhangRange(editor, editor.selection, { voids: true });
+
+  const [common, path] = Node.common(
+    editor,
+    range.anchor.path,
+    range.focus.path
+  );
+
+  if (Editor.isBlock(editor, common) || Editor.isEditor(common)) {
+    return [common, path];
+  } else {
+    return Editor.above(editor, {
+      at: path,
+      match: n => Editor.isBlock(editor, n) || Editor.isEditor(n)
+    });
+  }
+};

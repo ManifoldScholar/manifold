@@ -21,7 +21,7 @@ export const isLinkActive = editor => {
   return !!link;
 };
 
-const unwrapLink = editor => {
+export const unwrapLink = editor => {
   Transforms.unwrapNodes(editor, {
     match: n =>
       !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "a"
@@ -107,6 +107,7 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
       delay={0.5}
     >
       <Styled.Button
+        name="link-modal-trigger"
         ref={ref}
         {...rest}
         aria-label="link"
