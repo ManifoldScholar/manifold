@@ -86,11 +86,6 @@ function JournalWrapper({ match, route, history, confirm, location }) {
 
   const subpage = location.pathname.split("/")[4]?.replace("-", "_");
 
-  const issues = journal.relationships.journalIssues?.map(i => ({
-    title: i.attributes.title,
-    ...i.relationships.project
-  }));
-
   const breadcrumbs = [
     { to: null, label: t("common.admin") },
     {
@@ -127,7 +122,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
           subtitle={journal.attributes.subtitle}
           utility={renderUtility(journal)}
           secondaryLinks={navigation.journal(journal)}
-          issues={issues}
+          issues={journal.attributes.journalIssuesNav}
         />
         <Layout.BackendPanel
           sidebar={
