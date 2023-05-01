@@ -7,10 +7,12 @@ import * as Styled from "./styles";
 
 export default function DrawerButtons({
   showCancel = false,
+  showSaveAndClose = false,
   cancelUrl,
   submitLabel = "actions.save",
   disableSubmit = false,
   onSaveClick,
+  onSaveAndCloseClick,
   saveRef
 }) {
   const history = useHistory();
@@ -37,6 +39,19 @@ export default function DrawerButtons({
       >
         <span>{t(submitLabel)}</span>
       </Styled.ButtonWithDisable>
+      {showSaveAndClose && (
+        <Styled.ButtonWithDisable
+          type="submit"
+          className={classNames(buttonClasses, {
+            "button-secondary--dull": disableSubmit,
+            disabled: disableSubmit
+          })}
+          disabled={disableSubmit}
+          onClick={onSaveAndCloseClick}
+        >
+          <span>{t("actions.save_and_close")}</span>
+        </Styled.ButtonWithDisable>
+      )}
       {showCancel && (
         <button
           onClick={handleCancelClick}
