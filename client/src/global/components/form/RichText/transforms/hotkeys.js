@@ -4,6 +4,7 @@ import { Editor as SlateEditor, Transforms, Path } from "slate";
 import { rteElements, inlineNodes } from "../utils/elements";
 import { increaseIndent, decreaseIndent } from "./indents";
 import { setSelectionAtPoint, getListItemNode } from "./utils";
+import { handleLinkHotkey } from "./links";
 
 const handleInsertNode = editor => {
   // Grab the element node that contains the text where the user hit enter; Slate's default handling of enter would simply duplicate this node
@@ -114,6 +115,6 @@ export const captureHotKeys = (e, editor) => {
       return toggleMark(editor, "code");
     case "k":
       e.preventDefault();
-      return toggleBlock(editor, "link");
+      return handleLinkHotkey(editor);
   }
 };
