@@ -1,16 +1,19 @@
 import { SettingsEmailContainer } from "../Email";
+import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 
 describe("backend/containers/settings/Email", () => {
   def("settings", () => factory("settings"));
   def("isSendmail", () => name => "sendmail");
   def("isSmtp", () => name => "smtp");
   def("root", () => (
-    <SettingsEmailContainer
-      dispatch={() => {}}
-      settings={$settings}
-      form={$formMock}
-      t={key => key}
-    />
+    <BreadcrumbsProvider>
+      <SettingsEmailContainer
+        dispatch={() => {}}
+        settings={$settings}
+        form={$formMock}
+        t={key => key}
+      />
+    </BreadcrumbsProvider>
   ));
 
   describe("when delivery method is smtp", () => {

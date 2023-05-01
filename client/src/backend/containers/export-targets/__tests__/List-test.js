@@ -1,16 +1,19 @@
 import { ExportTargetsContainerImplementation } from "../List";
+import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 
 describe("backend/containers/Records/export-targets/List", () => {
   def("exportTargets", () => collectionFactory("exportTarget"));
   def("root", () => (
-    <ExportTargetsContainerImplementation
-      exportTargets={$exportTargets}
-      exportTargetsMeta={{ pagination: fixtures.pagination() }}
-      match={{ params: {} }}
-      route={fixtures.route()}
-      dispatch={$dispatch}
-      t={key => key}
-    />
+    <BreadcrumbsProvider>
+      <ExportTargetsContainerImplementation
+        exportTargets={$exportTargets}
+        exportTargetsMeta={{ pagination: fixtures.pagination() }}
+        match={{ params: {} }}
+        route={fixtures.route()}
+        dispatch={$dispatch}
+        t={key => key}
+      />
+    </BreadcrumbsProvider>
   ));
 
   it("matches the snapshot when rendered", () => {

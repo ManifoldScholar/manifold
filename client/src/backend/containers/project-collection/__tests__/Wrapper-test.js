@@ -1,4 +1,5 @@
 import { ProjectCollectionWrapperContainer } from "../Wrapper";
+import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 
 describe("backend/containers/project-collection/Wrapper", () => {
   beforeEach(() => {
@@ -13,16 +14,18 @@ describe("backend/containers/project-collection/Wrapper", () => {
   def("history", () => fixtures.history());
   def("route", () => fixtures.route());
   def("root", () => (
-    <ProjectCollectionWrapperContainer
-      projectCollections={$projectCollections}
-      collectionProjects={[]}
-      refresh={jest.fn}
-      dispatch={$dispatch}
-      history={$history}
-      match={{ params: {} }}
-      route={$route}
-      t={key => key}
-    />
+    <BreadcrumbsProvider>
+      <ProjectCollectionWrapperContainer
+        projectCollections={$projectCollections}
+        collectionProjects={[]}
+        refresh={jest.fn}
+        dispatch={$dispatch}
+        history={$history}
+        match={{ params: {} }}
+        route={$route}
+        t={key => key}
+      />
+    </BreadcrumbsProvider>
   ));
 
   context("when there are project collections", () => {
