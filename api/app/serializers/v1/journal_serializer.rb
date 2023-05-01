@@ -39,15 +39,6 @@ module V1
     typed_has_many :recent_journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: "journalVolume"
     typed_has_many :recent_journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: "journalIssue"
 
-    typed_attribute :journal_issues_nav, Types::Array.of(
-      Types::Hash.schema(
-        id: Types::Serializer::ID,
-        label: Types::String
-      )
-    ).meta(read_only: true) do |object|
-      journal_issues_nav(object)
-    end
-
     when_full do
       metadata(metadata: true, properties: true, formatted: true)
       typed_attribute :hashtag, Types::String.optional
@@ -63,13 +54,13 @@ module V1
       typed_has_many :permitted_users, serializer: ::V1::UserSerializer
       typed_has_many :subjects
       typed_has_many :action_callouts
-    end
 
-    class << self
-      def journal_issues_nav(object)
-        issue_projects = object.journal_issues&.map { |i| i.project }
-        issue_projects.map { |p| { id: p.id, label: p.sort_title } }
-      end
+      typed_attribute :issues_nav, Types::Array.of(
+        Types::Hash.schema(
+          id: Types::Serializer::ID,
+          label: Types::String
+        )
+      ).meta(read_only: true).optional
     end
   end
 end

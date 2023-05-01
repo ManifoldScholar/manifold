@@ -117,6 +117,7 @@ class Project < ApplicationRecord
   delegate :number, to: :journal_issue, allow_nil: true, prefix: true
   delegate :pending_sort_title, to: :journal_issue, allow_nil: true, prefix: true
   delegate :number, to: :journal_volume, allow_nil: true, prefix: true
+  delegate :issues_nav, to: :journal, prefix: true, allow_nil: true
 
   # Callbacks
   before_update :prepare_to_reindex_children, if: :draft_changed?
@@ -366,6 +367,20 @@ class Project < ApplicationRecord
   # @return [void]
   def packaging_metadata
     Packaging::Preservation::ExportProjectMetadata.run! project: self
+  end
+
+  def texts_nav
+    texts.map { |t| { id: t.id, label: t.title_plaintext } }
+  end
+
+  def journal_nav
+    return unless journal_issue?
+
+    journal_issue = JournalIssue.find(journal_issue_id)
+    journal_id = journal_issue.journal_id
+    journal_title = Journal.find(journal_id).title_plaintext
+
+    { id: journal_id, label: journal_title }
   end
 
   private

@@ -215,7 +215,7 @@ export class TextWrapperContainer extends PureComponent {
     const parentProps = {
       parentTitle: text.relationships.project.attributes.titleFormatted,
       parentSubtitle: text.relationships.project.attributes.subtitle,
-      texts: text.relationships.project.attributes.textsNav,
+      texts: text.attributes.projectTextsNav,
       parentId: text.relationships.project.id
     };
 

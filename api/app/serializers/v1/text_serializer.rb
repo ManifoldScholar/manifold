@@ -111,7 +111,19 @@ module V1
       typed_has_many :contributors, serializer: MakerSerializer, record_type: "maker"
       typed_has_many :text_sections
       typed_has_one :toc_section, serializer: TextSectionSerializer, record_type: "textSection"
+
+      typed_attribute :project_texts_nav, Types::Array.of(
+        Types::Hash.schema(
+          id: Types::Serializer::ID,
+          label: Types::String
+        )
+      ).meta(read_only: true).optional
+      typed_attribute :project_journal_nav, Types::Hash.schema(
+        id: Types::Serializer::ID,
+        label: Types::String
+      ).meta(read_only: true).optional
     end
+
     class << self
       def ingestion_external_source_url(object, params)
         return nil unless current_user_can_update?(object, params)

@@ -159,7 +159,7 @@ export class ProjectWrapperContainer extends PureComponent {
           parentTitle: project.relationships.journal.attributes.titleFormatted,
           parentSubtitle: project.relationships.journal.attributes.subtitle,
           parentId: project.relationships.journal.id,
-          issues: project.relationships.journal.attributes.journalIssuesNav
+          issues: project.attributes.journalIssuesNav
         }
       : {};
 

@@ -122,7 +122,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
           subtitle={journal.attributes.subtitle}
           utility={renderUtility(journal)}
           secondaryLinks={navigation.journal(journal)}
-          issues={journal.attributes.journalIssuesNav}
+          issues={journal.attributes.issuesNav}
         />
         <Layout.BackendPanel
           sidebar={
