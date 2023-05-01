@@ -24,7 +24,7 @@ export default function ProjectHeader({
           route: parent ? "backendProject" : null
         },
         ...texts?.map(t => ({
-          label: t.attributes.titlePlaintext,
+          label: t.label,
           route: "backendTextAnalytics",
           id: t.id,
           active: pathname?.includes(t.id)

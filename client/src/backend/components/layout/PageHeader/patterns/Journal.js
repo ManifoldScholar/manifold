@@ -24,7 +24,7 @@ export default function JournalHeader({
           route: parent ? "backendJournal" : null
         },
         ...issues?.map(i => ({
-          label: i.title,
+          label: i.label,
           route: "backendProjectAnalytics",
           id: i.id,
           active: pathname?.includes(i.id)
