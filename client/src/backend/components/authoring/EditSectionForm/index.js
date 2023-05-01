@@ -39,10 +39,13 @@ export default function EditSectionForm({
     };
   };
 
+  const [closeOnSave, setCloseOnSave] = useState(false);
+
   const onSuccess = useCallback(() => {
+    if (!closeOnSave) return;
     if (refresh) refresh();
     history.push(lh.link("backendTextSections", textId));
-  }, [history, textId, refresh]);
+  }, [history, textId, refresh, closeOnSave]);
 
   const [hasErrors, setHasErrors] = useState(false);
   const [warnErrors, setWarnErrors] = useState(false);
@@ -57,11 +60,12 @@ export default function EditSectionForm({
     ? [...section?.relationships.stylesheets, globalStylesheet]
     : globalStylesheet;
 
-  const handleSaveClick = e => {
+  const handleSaveAndCloseClick = e => {
     if (hasErrors) {
       e.preventDefault();
       return setWarnErrors("save");
     }
+    setCloseOnSave(true);
   };
 
   const saveRef = useRef();
@@ -92,9 +96,10 @@ export default function EditSectionForm({
       <Styled.ButtonOverlay>
         <Form.DrawerButtons
           showCancel
+          showSaveAndClose
           cancelUrl={lh.link("backendTextSections", textId)}
           submitLabel="actions.save"
-          onSaveClick={handleSaveClick}
+          onSaveAndCloseClick={handleSaveAndCloseClick}
           saveRef={saveRef}
         />
       </Styled.ButtonOverlay>
