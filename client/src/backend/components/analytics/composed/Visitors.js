@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Block from "../Block";
 import Chart from "../parts/Chart";
 import { withTranslation } from "react-i18next";
+import isEqual from "lodash/isEqual";
 
 class Visitors extends Component {
   static displayName = "Analytics.Composed.Visitors";
@@ -10,6 +11,11 @@ class Visitors extends Component {
   static propTypes = {
     t: PropTypes.func
   };
+
+  shouldComponentUpdate(nextProps) {
+    if (isEqual(nextProps.data, this.props.data)) return false;
+    return true;
+  }
 
   get total() {
     const { additionalData } = this.props;
