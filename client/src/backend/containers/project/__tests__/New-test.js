@@ -1,6 +1,7 @@
 import { ProjectNewContainer } from "../New";
 import { project } from "./__fixtures__";
 import ProjectMetadataContainer from "../Metadata";
+import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 
 describe("backend/containers/project/New", () => {
   beforeEach(() => {
@@ -17,7 +18,7 @@ describe("backend/containers/project/New", () => {
       }
     })
   );
-  def("root", () => <ProjectNewContainer t={key => key}/>);
+  def("root", () => <BreadcrumbsProvider><ProjectNewContainer t={key => key}/></BreadcrumbsProvider>);
 
   it("matches the snapshot when rendered", () => {
     expect(render($withApp($root)).html()).toMatchSnapshot();

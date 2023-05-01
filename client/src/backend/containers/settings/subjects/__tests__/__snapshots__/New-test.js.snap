@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`backend/containers/settings/subjects/New matches the snapshot when rendered 1`] = `"<header class=\\"css-ibt74g-Header eem09g55\\"><h2 class=\\" css-4532mb-TitleWrapper eem09g54\\"><span class=\\"css-183oh9-Title eem09g52\\">settings.subjects.new_header</span></h2></header>"`;
+exports[`backend/containers/settings/subjects/New matches the snapshot when rendered 1`] = `"<header class=\\"css-ibt74g-Header ewz6knw5\\"><h2 class=\\" css-4532mb-TitleWrapper ewz6knw4\\"><span class=\\"css-183oh9-Title ewz6knw2\\">settings.subjects.new_header</span></h2></header>"`;

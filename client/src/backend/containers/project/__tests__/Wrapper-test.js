@@ -1,5 +1,6 @@
 import { ProjectWrapperContainer } from "../Wrapper";
 import { project, route } from "./__fixtures__";
+import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 
 describe("backend/containers/project/Wrapper", () => {
   beforeEach(() => {
@@ -14,14 +15,16 @@ describe("backend/containers/project/Wrapper", () => {
     params: {}
   }));
   def("root", () => (
-    <ProjectWrapperContainer
-      project={$project}
-      dispatch={$dispatch}
-      location={{ pathname: "/projects/1" }}
-      route={$route}
-      match={$match}
-      t={key => key}
-    />
+    <BreadcrumbsProvider>
+      <ProjectWrapperContainer
+        project={$project}
+        dispatch={$dispatch}
+        location={{ pathname: "/projects/1" }}
+        route={$route}
+        match={$match}
+        t={key => key}
+      />
+    </BreadcrumbsProvider>
   ));
 
   it("matches the snapshot when rendered", () => {
