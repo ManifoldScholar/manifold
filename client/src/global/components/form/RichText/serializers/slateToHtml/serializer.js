@@ -14,6 +14,8 @@ const MARK_TAG_MAP = {
 };
 
 const serializeText = node => {
+  if (node.slateOnly) return null;
+
   const textContent = node.text;
   if (isOnlyFormat(textContent)) return null;
 
@@ -51,6 +53,8 @@ const serializeChildren = children => {
 };
 
 const serializeNode = node => {
+  if (!node) return null;
+
   if (SlateText.isText(node)) return serializeText(node);
 
   if (node.nodeName) {

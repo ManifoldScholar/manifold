@@ -14,12 +14,18 @@ import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 export const insertImage = (editor, url, alt) => {
-  const text = { text: "" };
+  const text = { text: "", slateOnly: true };
   const image = {
     type: "img",
     htmlAttrs: { src: url, alt: alt ?? "" },
     children: [text]
   };
+  const [node] = Editor.above(editor, editor.selection);
+  if (node.type === "p") {
+    if (node.children.length === 1 && node.children[0].text === "") {
+      Transforms.removeNodes(editor);
+    }
+  }
   Transforms.insertNodes(editor, image);
   ReactEditor.focus(editor);
 };
