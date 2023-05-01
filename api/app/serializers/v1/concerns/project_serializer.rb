@@ -28,6 +28,21 @@ module V1
         typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
         typed_attribute :entitlement_subject_url, Types::String.meta(read_only: true)
 
+        typed_attribute :texts_nav, Types::Array.of(
+          Types::Hash.schema(
+            id: Types::Serializer::ID,
+            label: Types::String
+          )
+        ).meta(read_only: true).optional do |object|
+          texts_nav(object)
+        end
+        typed_attribute :journal_nav, Types::Hash.schema(
+          id: Types::Serializer::ID,
+          title: Types::String
+        ).meta(read_only: true).optional do |object|
+          journal_nav(object)
+        end
+
         serialize_collectable_attributes!
 
         when_full do
@@ -107,6 +122,20 @@ module V1
       class_methods do
         def filtered_events(project)
           project.events.excluding_type(%w(comment_created text_annotated))
+        end
+
+        def texts_nav(object)
+          return unless object.instance_of?(Project)
+
+          object.texts.map { |t| { id: t.id, label: t.title_plaintext } }
+        end
+
+        def journal_nav(object)
+          return unless object.journal_issue?
+
+          journal = { id: object.journal.id, title: object.journal.title_plaintext }
+          issue = { id: object.journal_issue.id, title: object.journal_issue.title }
+          { journal: journal, issue: issue }
         end
       end
     end
