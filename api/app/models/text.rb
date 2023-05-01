@@ -106,6 +106,8 @@ class Text < ApplicationRecord
   delegate :subtitle_plaintext, to: :title_subtitle, allow_nil: true
   delegate :social_image, to: :project
   delegate :auto_generated_toc, to: :text_section_aggregation, allow_nil: true
+  delegate :texts_nav, to: :project, prefix: true, allow_nil: true
+  delegate :journal_nav, to: :project, prefix: true, allow_nil: true
 
   before_validation :ensure_toc_uids!
 

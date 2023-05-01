@@ -130,6 +130,11 @@ class Journal < ApplicationRecord
     journal_issues.where(journal_volume: nil).count
   end
 
+  def issues_nav
+    issue_projects = journal_issues.map { |i| i.project }
+    issue_projects&.map { |p| { id: p.id, label: p.sort_title } }
+  end
+
   class << self
     def build_read_ability_scope_for(user = nil)
       return published unless user.present?

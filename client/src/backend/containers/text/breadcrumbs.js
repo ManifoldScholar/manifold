@@ -2,8 +2,8 @@
 import lh from "helpers/linkHandler";
 
 export const getBreadcrumbs = (text, belongsToJournalIssue, t) => {
-  const { journal, issue } = belongsToJournalIssue
-    ? text.relationships.project.attributes.journalNav
+  const journal = belongsToJournalIssue
+    ? text.attributes.projectJournalNav
     : {};
 
   return belongsToJournalIssue
@@ -15,7 +15,7 @@ export const getBreadcrumbs = (text, belongsToJournalIssue, t) => {
         },
         {
           to: lh.link("backendJournal", journal.id),
-          label: journal.title
+          label: journal.label
         },
         {
           to: lh.link("backendJournalIssues", journal.id),
@@ -23,7 +23,7 @@ export const getBreadcrumbs = (text, belongsToJournalIssue, t) => {
         },
         {
           to: lh.link("backendProject", text.relationships.project.id),
-          label: issue.title
+          label: text.relationships.project.attributes.titlePlaintext
         },
         {
           to: lh.link("backendProjectTexts", text.relationships.project.id),
