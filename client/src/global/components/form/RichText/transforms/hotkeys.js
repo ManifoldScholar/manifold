@@ -1,14 +1,15 @@
 import { toggleMark } from "../components/controls/buttons/MarkButton";
 import { toggleBlock } from "../components/controls/buttons/BlockButton";
-import { Editor as SlateEditor, Transforms, Path } from "slate";
+import { Editor as SlateEditor, Transforms, Path, Range } from "slate";
 import { rteElements, inlineNodes } from "../utils/elements";
 import { increaseIndent, decreaseIndent } from "./indents";
 import { setSelectionAtPoint, getListItemNode } from "./utils";
 import { handleLinkHotkey } from "./links";
 
 const handleInsertNode = editor => {
+  const { selection } = editor;
   // Grab the element node that contains the text where the user hit enter; Slate's default handling of enter would simply duplicate this node
-  const [node, path] = SlateEditor.above(editor, editor.selection);
+  const [node, path] = SlateEditor.above(editor, selection);
   // Remove all attributes other than the type/tag, so we don't copy id, classes, etc.
   const { children, htmlAttrs, slateOnly, ...next } = node;
 
@@ -21,13 +22,17 @@ const handleInsertNode = editor => {
   if (!rteElements.includes(next.type)) next.type = "p";
   if (next.type === "a" || next.type === "img" || next.type === "iframe")
     next.type = "p";
-  if (SlateEditor.node(editor, Path.parent(path)) === "li") next.type = "li";
+  if (next.type === "li") {
+    const isCollapsed = selection && Range.isCollapsed(selection);
+    const liIsEmpty = SlateEditor.isEmpty(editor, node);
+    if (isCollapsed && liIsEmpty) return decreaseIndent(editor, true);
+  }
 
   // Insert the adjusted node
   Transforms.insertNodes(
     editor,
     { ...next, children: [{ text: "" }] },
-    { at: editor.selection }
+    { at: selection }
   );
   // Set the cursor position at the first child of the new node
   setSelectionAtPoint(editor, [...nextPath, 0]);

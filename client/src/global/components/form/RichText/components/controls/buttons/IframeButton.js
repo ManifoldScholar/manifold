@@ -21,10 +21,8 @@ export const insertIframe = (editor, url, title) => {
     children: [text]
   };
   const [node] = Editor.above(editor, editor.selection);
-  if (node.type === "p") {
-    if (node.children.length === 1 && node.children[0].text === "") {
-      Transforms.removeNodes(editor);
-    }
+  if (Editor.isEmpty(editor, node)) {
+    Transforms.removeNodes(editor);
   }
   Transforms.insertNodes(editor, embed);
   ReactEditor.focus(editor);
