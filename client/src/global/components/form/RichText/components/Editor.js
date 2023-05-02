@@ -13,6 +13,7 @@ import withPlugins from "../plugins";
 import { clearSlate, formatHtml } from "../utils/helpers";
 import { ErrorBoundary } from "react-error-boundary";
 import isEmpty from "lodash/isEmpty";
+import isEqual from "lodash/isEqual";
 import * as Styled from "./styles";
 
 export default function Editor({
@@ -41,16 +42,23 @@ export default function Editor({
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
   const prevSlate = useRef(initialSlateValue);
+  const prevHtml = useRef(initialHtmlValue);
 
   const { t } = useTranslation();
 
-  // The value prop on the Slate component is unhelpfully named. It is really initialSlateValue and is only read once, so it's possible for Slate to get out of sync when switching between text sections. This resets the editor each time the form model changes.
+  // The value prop on the Slate provider component is unhelpfully named. It is really initialSlateValue and is only read once, so it's easy for Slate to get out of sync when waiting for data from the api. This resets the editor each time the form model changes.
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    if (prevSlate.current !== initialSlateValue) {
+    if (!htmlMode && !isEqual(prevSlate.current, initialSlateValue)) {
       clearSlate(editor);
       Transforms.insertNodes(editor, initialSlateValue);
+      return;
     }
-  }, [initialSlateValue, editor]);
+    if (!isEqual(prevHtml.current, initialHtmlValue)) {
+      setLocalHtml(initialHtmlValue);
+    }
+  }, [initialSlateValue, initialHtmlValue]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const [lastActiveSelection, setLastActiveSelection] = useState({});
 

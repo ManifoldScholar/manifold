@@ -19,15 +19,13 @@ export const Editor = styled.div`
     .ace_gutter {
       background-color: var(--color-base-neutral30);
     }
-    .ace_active-line,
-    .ace_gutter-active-line {
+    .ace_active-line {
       background-color: var(--color-base-yellow20) !important;
     }
   }
 
   .scheme-dark {
-    .ace_active-line,
-    .ace_gutter-active-line {
+    .ace_active-line {
       background-color: var(--color-base-neutral110) !important;
     }
   }
@@ -65,11 +63,15 @@ export const EditableWrapper = styled.div`
     overflow: visible;
   }
 
-  .ace_gutter,
-  .ace_scroller {
-    min-height: 700px !important;
+  .ace_gutter {
+    min-height: 699px !important;
     overflow: visible;
     border-bottom-left-radius: var(--box-border-radius);
+  }
+
+  .ace_scroller {
+    min-height: 699px !important;
+    overflow: visible;
   }
 
   .ace_gutter-cell:last-of-type {

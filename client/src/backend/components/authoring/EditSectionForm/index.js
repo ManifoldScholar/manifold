@@ -58,7 +58,7 @@ export default function EditSectionForm({
 
   const stylesheets = Array.isArray(section?.relationships.stylesheets)
     ? [...section?.relationships.stylesheets, globalStylesheet]
-    : globalStylesheet;
+    : [globalStylesheet];
 
   const handleSaveAndCloseClick = e => {
     if (hasErrors) {
@@ -70,7 +70,7 @@ export default function EditSectionForm({
 
   const saveRef = useRef();
 
-  return section ? (
+  return (
     <Styled.Form
       model={section}
       name={"be-text-section-update"}
@@ -87,8 +87,8 @@ export default function EditSectionForm({
       />
       <RichText
         name="attributes[body]"
-        sectionId={section.id}
-        sectionBody={section.attributes.body}
+        sectionId={section?.id}
+        sectionBody={section?.attributes.body}
         stylesheets={stylesheets}
         nextRef={saveRef}
         {...errorProps}
@@ -104,7 +104,7 @@ export default function EditSectionForm({
         />
       </Styled.ButtonOverlay>
     </Styled.Form>
-  ) : null;
+  );
 }
 
 EditSectionForm.displayName = "Text.Sections.EditForm";

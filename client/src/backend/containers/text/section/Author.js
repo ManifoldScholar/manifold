@@ -20,7 +20,7 @@ export default function AuthorSectionContainer(props) {
   return (
     <section>
       {sectionId ? (
-        section && <EditSectionForm section={section} {...props} />
+        <EditSectionForm section={section} {...props} />
       ) : (
         <>
           <Navigation.DrawerHeader
