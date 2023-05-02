@@ -12,8 +12,13 @@ export default function TooltipContent({ label, description, hotkeys = [] }) {
         <Styled.HotKey key={hk.label}>
           <Styled.HotKeyLabel>{hk.label}</Styled.HotKeyLabel>
           <Styled.Keys>
-            {hk.keys.map(k => (
-              <Styled.Key key={k}>{k}</Styled.Key>
+            {hk.keys.map((k, i) => (
+              <>
+                <Styled.Key key={k}>{k}</Styled.Key>
+                {hk.inline && i === 0 && (
+                  <Styled.TextPlaceholder>[text]</Styled.TextPlaceholder>
+                )}
+              </>
             ))}
           </Styled.Keys>
         </Styled.HotKey>

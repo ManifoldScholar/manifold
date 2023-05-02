@@ -25,36 +25,93 @@ const SHORTCUTS = {
   "```": "pre"
 };
 
+const INLINE_SHORTCUTS = {
+  "*": "italic",
+  "**": "bold",
+  "`": "code",
+  "~": "strikethrough"
+};
+
 /* eslint-disable no-param-reassign */
 const withShortcuts = editor => {
   const { deleteBackward, insertText } = editor;
 
+  // Insert block elements from .md shortcuts
   editor.insertText = text => {
     const { selection } = editor;
+    const { anchor } = selection;
 
     if (text.endsWith(" ") && selection && Range.isCollapsed(selection)) {
-      const { anchor } = selection;
-      const block = Editor.above(editor, {
-        match: n => SlateElement.isElement(n) && Editor.isBlock(editor, n)
-      });
-      const path = block ? block[1] : [];
+      const [block, path] =
+        Editor.above(editor, {
+          match: n => SlateElement.isElement(n) && Editor.isBlock(editor, n)
+        }) ?? [];
       const start = Editor.start(editor, path);
       const range = { anchor, focus: start };
-      const beforeText = Editor.string(editor, range) + text.slice(0, -1);
-      const type = SHORTCUTS[beforeText];
 
-      if (type) {
+      const blockType =
+        SHORTCUTS[Editor.string(editor, range) + text.slice(0, -1)];
+
+      if (blockType) {
         Transforms.select(editor, range);
-
         if (!Range.isCollapsed(range)) {
           Transforms.delete(editor);
         }
-
-        return toggleBlock(editor, type);
+        return toggleBlock(editor, blockType);
       }
     }
 
-    insertText(text);
+    // Insert inline elements (Slate "marks") from .md
+    let shortcut;
+    const shortCutChars = ["*", "`", "~"];
+
+    if (shortCutChars.includes(text)) {
+      const [textNode, textNodePath] = Editor.first(editor, anchor.path);
+      const beforeText = Node.string(textNode);
+
+      if (text === "~") {
+        shortcut = "~";
+      }
+      if (text === "`") {
+        shortcut = "`";
+      }
+      if (text === "*") {
+        if (beforeText.endsWith("*")) shortcut = "**";
+        if (beforeText.indexOf("**") === -1) shortcut = "*";
+      }
+
+      if (shortcut) {
+        const startIndex = beforeText.indexOf(shortcut);
+        const endIndex =
+          shortcut.length - 1 > 0 ? -(shortcut.length - 1) : undefined;
+        const target = beforeText.slice(startIndex + shortcut.length, endIndex);
+
+        if (startIndex >= 0 && target) {
+          const anchor = { path: textNodePath, offset: startIndex };
+          const focus = { path: textNodePath, offset: beforeText.length };
+
+          return Editor.withoutNormalizing(editor, () => {
+            Transforms.select(editor, { anchor, focus });
+            Editor.addMark(editor, INLINE_SHORTCUTS[shortcut], true);
+            Transforms.delete(editor, {
+              at: anchor,
+              distance: shortcut.length,
+              unit: "character"
+            });
+            Transforms.collapse(editor, { edge: "end" });
+            if (shortcut.length > 1) {
+              Transforms.delete(editor, {
+                distance: shortcut.length - 1,
+                unit: "character",
+                reverse: true
+              });
+            }
+          });
+        }
+      }
+    }
+
+    return insertText(text);
   };
 
   const removeEmptyInlines = (editor, selection) => {
@@ -86,8 +143,10 @@ const withShortcuts = editor => {
 
     if (selection && Range.isCollapsed(selection)) {
       const [li, liPath] = getListItemNode(editor, editor.selection);
-      const liIsEmpty = Editor.isEmpty(editor, li);
-      if (li && liIsEmpty) return decreaseIndent(editor, true);
+      if (li) {
+        const liIsEmpty = Editor.isEmpty(editor, li);
+        if (liIsEmpty) return decreaseIndent(editor, true);
+      }
 
       removeEmptyInlines(editor, selection);
 
