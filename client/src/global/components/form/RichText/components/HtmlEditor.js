@@ -20,7 +20,7 @@ export const HtmlEditor = Loadable({
             editor.session.getUndoManager().reset();
           });
           editor.renderer.setPadding(24, 24);
-          editor.renderer.setScrollMargin(24);
+          editor.renderer.setScrollMargin(24, 24);
           const input = editor.textInput.getElement();
           input.addEventListener("keydown", e => {
             if (e.key === "ArrowDown") {
