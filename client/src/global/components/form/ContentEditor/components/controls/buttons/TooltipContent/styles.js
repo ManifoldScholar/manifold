@@ -35,10 +35,20 @@ export const Description = styled.span`
 
 export const HotKey = styled.div``;
 
-export const HotKeyLabel = styled.span``;
+export const HotKeyLabel = styled.span`
+  whitespace: nowrap;
+`;
+
+export const TextPlaceholder = styled.span`
+  whitespace: nowrap;
+  font-style: normal;
+  display: inline-block;
+`;
 
 export const Key = styled.span`
   display: inline-flex;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
   padding-block-start: 6px;
@@ -57,4 +67,5 @@ export const Keys = styled.div`
   gap: 8px;
   flex-wrap: no-wrap;
   margin-block-start: 8px;
+  align-items: center;
 `;
