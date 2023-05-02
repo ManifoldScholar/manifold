@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
-import RichText from "global/components/form/RichText";
+import ContentEditor from "global/components/form/ContentEditor";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import {
   serializeToHtml,
   removeFormatting
-} from "global/components/form/RichText/serializers";
+} from "global/components/form/ContentEditor/serializers";
 import * as Styled from "./styles";
 
 export default function EditSectionForm({
@@ -85,7 +85,7 @@ export default function EditSectionForm({
         placeholder={t("texts.section.section_name")}
         name="attributes[name]"
       />
-      <RichText
+      <ContentEditor
         name="attributes[body]"
         sectionId={section?.id}
         sectionBody={section?.attributes.body}

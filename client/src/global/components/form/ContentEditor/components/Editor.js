@@ -258,3 +258,5 @@ export default function Editor({
     </>
   );
 }
+
+Editor.displayName = "Global.Forms.ContentEditor.Editor";

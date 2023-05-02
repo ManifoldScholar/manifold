@@ -18,7 +18,7 @@ const handleInsertNode = editor => {
     ? Path.next(Path.parent(path))
     : Path.next(path);
 
-  // Insert a paragraph if this node type isn't editable in the RTE; insert a list item if the node is the child of a list item
+  // Insert a paragraph if this node type isn't editable in the RTE; handle unwrapping the list item if we're on an empty li
   if (!rteElements.includes(next.type)) next.type = "p";
   if (next.type === "a" || next.type === "img" || next.type === "iframe")
     next.type = "p";
