@@ -68,7 +68,7 @@ export default function InsertModal(props) {
   );
 }
 
-InsertModal.displayName = "RichText.Insert.Modal";
+InsertModal.displayName = "ContentEditor.Insert.Modal";
 
 InsertModal.propTypes = {
   resolve: PropTypes.func,

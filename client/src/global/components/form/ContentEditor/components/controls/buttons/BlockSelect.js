@@ -49,7 +49,7 @@ const BlockSelect = ({ options, selection, ...rest }, ref) => {
         <Styled.Select
           ref={ref}
           {...rest}
-          aria-label="Text styles"
+          aria-label="Text styles selector"
           data-active={active !== "p" && active !== ""}
           value={active}
           onChange={e => {

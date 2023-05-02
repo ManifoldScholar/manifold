@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import PropTypes from "prop-types";
 import { Editor } from "./components";
 import setter from "../setter";
 import { serializeToSlate } from "./serializers";
@@ -22,15 +23,7 @@ const getInitialHtmlValue = value => {
   return formatHtml("<!DOCTYPE html><section><p></p></section>");
 };
 
-function RichText({
-  name,
-  errors,
-  set,
-  stylesheets,
-  sectionId,
-  sectionBody,
-  ...props
-}) {
+function ContentEditor({ set, stylesheets, sectionId, sectionBody, ...props }) {
   /* eslint-disable react-hooks/exhaustive-deps */
   const initialSlateValue = useMemo(() => {
     return getInitialSlateValue(sectionBody);
@@ -53,4 +46,13 @@ function RichText({
   );
 }
 
-export default setter(RichText);
+export default setter(ContentEditor);
+
+ContentEditor.displayName = "Global.Form.ContentEditor";
+
+ContentEditor.propTypes = {
+  set: PropTypes.func,
+  stylesheets: PropTypes.arrayOf(PropTypes.object),
+  sectionId: PropTypes.string,
+  sectionBody: PropTypes.string
+};

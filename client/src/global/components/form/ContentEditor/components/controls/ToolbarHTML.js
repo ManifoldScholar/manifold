@@ -20,7 +20,7 @@ export default function ToolbarHTML({
     wrap: "horizontal"
   });
   return (
-    <ReakitMenuBar as={Styled.Toolbar} aria-label="Rich text toolbar" {...menu}>
+    <ReakitMenuBar as={Styled.Toolbar} aria-label="HTML toolbar" {...menu}>
       <ReakitMenuItem
         ref={controlsRef}
         as={FunctionButton}

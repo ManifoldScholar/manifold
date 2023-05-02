@@ -18,10 +18,10 @@ export const rteElements = [
   "iframe"
 ];
 
-// These elements are removable/insertable via the RTE but their contents cannot be edited.
+// These elements are removable/insertable via the RTE but their contents cannot be edited as text.
 export const rteVoids = ["img", "iframe"];
 
-// These elements are rendered in the RTE, but can't be created there. Their rteElement children are editable, and these elements can be removed in the RTE by removing all of their children.
+// These elements are rendered in the RTE, but can't be created there. Their text children are editable, and these elements can be deleted in the RTE like any other block.
 export const renderedElements = [
   "header",
   "footer",
@@ -50,7 +50,7 @@ export const renderedElements = [
 // These elements are applied as marks to text leaves in Slate. They can be added and removed in the RTE. This probably needs some adjustment. For example, currently both del and s become "strikethrough" when serialized to Slate and there's no way to tell what the original tag was.
 export const markElements = ["i", "del", "em", "s", "strong", "u", "code"];
 
-// All other elements are Slate void elements and are rendered as a placeholder in the RTE.
+// All other elements are Slate void elements and are rendered as preview only in the RTE.
 
 /* Element groups for Slate normalizing */
 

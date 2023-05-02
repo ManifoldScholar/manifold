@@ -1,4 +1,4 @@
-import { Editor as SlateEditor, Transforms, Node } from "slate";
+import { Editor as SlateEditor, Transforms, Node, Point } from "slate";
 import {
   findListChild,
   nestListItem,
@@ -20,7 +20,11 @@ export const increaseIndent = editor => {
   const listType = listNode.type;
   const index = [...path].pop();
 
-  if (index === 0)
+  const nodeStart = SlateEditor.start(editor, path);
+  const listStart = SlateEditor.start(editor, listNodePath);
+
+  // If this is the first element in a list, indent the entire (sub)list
+  if (Point.equals(nodeStart, listStart))
     return SlateEditor.withoutNormalizing(editor, () => {
       nestListItem({
         editor,
@@ -102,9 +106,11 @@ export const decreaseIndent = (editor, isReturn) => {
   if (!((listNode && isWrappedList) || parentLi))
     return isReturn ? toggleBlock(editor, listParent?.type) : null;
 
-  const index = [...path].pop();
+  const nodeStart = SlateEditor.start(editor, path);
+  const listStart = SlateEditor.start(editor, listNodePath);
 
-  if (index === 0)
+  // If this is the first element in a list, unindent the entire (sub)list
+  if (Point.equals(nodeStart, listStart))
     return SlateEditor.withoutNormalizing(editor, () => {
       if (isWrappedList) {
         return liftListItem({ editor, srcPath: listNodePath });
