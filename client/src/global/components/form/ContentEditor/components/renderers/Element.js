@@ -14,6 +14,9 @@ export default function SlateElement({
   theme,
   darkMode
 }) {
+  const className = element.htmlAttrs?.class || undefined;
+  const epubType = element.htmlAttrs?.["data-epub-type"] || undefined;
+
   if (element.type === "br") {
     return <p {...attributes}>{children}</p>;
   }
@@ -52,17 +55,20 @@ export default function SlateElement({
     );
   }
   if (element.type === "a") {
-    const className = element.htmlAttrs?.class || undefined;
     return (
-      <a className={className} href={element.htmlAttrs.href} {...attributes}>
+      <a
+        className={className}
+        data-epub-type={epubType}
+        href={element.htmlAttrs.href}
+        {...attributes}
+      >
         {children}
       </a>
     );
   }
   if (element.type === "pre") {
-    const className = element.htmlAttrs?.class || undefined;
     return (
-      <pre className={className} {...attributes}>
+      <pre className={className} data-epub-type={epubType} {...attributes}>
         <code>{children}</code>
       </pre>
     );
@@ -73,8 +79,6 @@ export default function SlateElement({
     markElements.includes(element.type)
   ) {
     const Tag = element.type === "list-sibling" ? "span" : element.type;
-    const className = element.htmlAttrs?.class || undefined;
-    const epubType = element.htmlAttrs?.["data-epub-type"] || undefined;
     return (
       <Tag className={className} data-epub-type={epubType} {...attributes}>
         {children}

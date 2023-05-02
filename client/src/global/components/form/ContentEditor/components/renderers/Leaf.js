@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function SlateLeaf({ attributes, children, leaf }) {
-  const { text, ...rest } = leaf;
   let leafChildren = children;
 
   if (leaf.bold) {
@@ -24,9 +23,5 @@ export default function SlateLeaf({ attributes, children, leaf }) {
     leafChildren = <code>{leafChildren}</code>;
   }
 
-  return (
-    <span {...attributes} className={Object.keys(rest).join(" ")}>
-      {leafChildren}
-    </span>
-  );
+  return <span {...attributes}>{leafChildren}</span>;
 }
