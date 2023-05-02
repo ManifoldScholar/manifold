@@ -9,6 +9,7 @@ import {
   getIndentSelectionLocation,
   handleInlineItemChildren
 } from "./utils";
+import { toggleBlock } from "../components/controls/buttons/BlockButton";
 
 export const increaseIndent = editor => {
   const [node, path] = getListItemNode(editor, editor.selection);
@@ -89,14 +90,17 @@ export const increaseIndent = editor => {
   });
 };
 
-export const decreaseIndent = editor => {
+export const decreaseIndent = (editor, isReturn) => {
   const [node, path] = getListItemNode(editor, editor.selection);
   const [parentLi, parentPath] = getListItemNode(editor, path);
   const [listNode, listNodePath] = getListNode(editor, path);
   const listParent = Node.parent(editor, listNodePath);
   const isWrappedList = listParent?.type === "ul" || listParent?.type === "ol";
 
-  if (!node || !((listNode && isWrappedList) || parentLi)) return;
+  if (!node) return;
+
+  if (!((listNode && isWrappedList) || parentLi))
+    return isReturn ? toggleBlock(editor, listParent?.type) : null;
 
   const index = [...path].pop();
 

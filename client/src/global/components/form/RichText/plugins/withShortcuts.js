@@ -9,7 +9,8 @@ import {
 } from "slate";
 import { toggleBlock } from "../components/controls/buttons/BlockButton";
 import { inlineNodes } from "../utils/elements";
-import { getTextContent } from "../transforms/utils";
+import { getTextContent, getListItemNode } from "../transforms/utils";
+import { decreaseIndent } from "../transforms/indents";
 
 const SHORTCUTS = {
   "*": "ul",
@@ -84,6 +85,10 @@ const withShortcuts = editor => {
     const { selection } = editor;
 
     if (selection && Range.isCollapsed(selection)) {
+      const [li, liPath] = getListItemNode(editor, editor.selection);
+      const liIsEmpty = Editor.isEmpty(editor, li);
+      if (li && liIsEmpty) return decreaseIndent(editor, true);
+
       removeEmptyInlines(editor, selection);
 
       const match =
