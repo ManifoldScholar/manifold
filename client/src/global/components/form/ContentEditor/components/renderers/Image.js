@@ -25,12 +25,16 @@ export default function ImageRenderer({ element, children, attributes, as }) {
     "responsive-iframe": as === "iframe"
   });
   const className = element.htmlAttrs?.class ?? undefined;
+  const epubType = element.htmlAttrs?.["data-epub-type"] || undefined;
 
   return (
     <div {...attributes}>
       {children}
       <div contentEditable={false}>
-        <Styled.ImageWrapper className={wrapperClassName}>
+        <Styled.ImageWrapper
+          className={wrapperClassName}
+          data-epub-type={epubType}
+        >
           <Styled.Content
             as={as ?? "img"}
             src={element.htmlAttrs.src}
