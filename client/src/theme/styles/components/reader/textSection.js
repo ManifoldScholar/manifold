@@ -20,13 +20,16 @@ export default `
     font-weight: var(--font-weight-regular);
     line-height: 1.761;
 
+    --selection-bg-color: var(--color-base-yellow20);
+
+    &.scheme-dark,
+    .scheme-dark & {
+      --selection-bg-color: var(--color-base-yellow75);
+    }
+
     *::selection,
     .annotation-locked-selected {
-      background-color: var(--color-base-yellow20);
-
-      .scheme-dark & {
-        background-color: var(--color-base-yellow75);
-      }
+      background-color: var(--selection-bg-color);
     }
 
     &.font-sans-serif {
