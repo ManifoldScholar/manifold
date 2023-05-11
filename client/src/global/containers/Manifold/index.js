@@ -8,7 +8,6 @@ import ColorScheme from "global/components/ColorScheme";
 import LoadingBar from "global/components/LoadingBar";
 import FatalError from "global/components/FatalError";
 import SignInUp from "global/components/sign-in-up";
-import has from "lodash/has";
 import get from "lodash/get";
 import { CSSTransition } from "react-transition-group";
 import {
@@ -19,7 +18,6 @@ import {
 import { meAPI, requests } from "api";
 import { select, loaded } from "utils/entityUtils";
 import { closest } from "utils/domUtils";
-import ReactGA from "react-ga";
 import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "routes";
@@ -58,24 +56,10 @@ class ManifoldContainer extends PureComponent {
     settings: PropTypes.object,
     location: PropTypes.object,
     history: PropTypes.object,
-    confirm: PropTypes.element,
-    gaInitCallback: PropTypes.func
+    confirm: PropTypes.element
   };
 
-  constructor(props) {
-    super(props);
-    this.gaInitialized = false;
-  }
-
   componentDidUpdate(prevProps, prevStateIgnored) {
-    if (this.receivedGaTrackingId(this.props.settings) && !this.gaInitialized) {
-      ReactGA.initialize(
-        this.props.settings.attributes.integrations.gaTrackingId
-      );
-      this.gaInitialized = true;
-      if (this.props.gaInitCallback) this.props.gaInitCallback();
-    }
-
     if (this.routeChanged(prevProps.location, this.props.location)) {
       this.dispatchRouteUpdate();
       if (this.routeStateRequestsLogin) this.maybeShowLogin();
@@ -135,11 +119,6 @@ class ManifoldContainer extends PureComponent {
 
   routeChanged(prevLocation, location) {
     return prevLocation.pathname !== location.pathname;
-  }
-
-  receivedGaTrackingId(settings) {
-    const path = "attributes.integrations.gaTrackingId";
-    return has(settings, path) && get(settings, path) !== "";
   }
 
   userJustLoggedOut(prevAuth, auth) {

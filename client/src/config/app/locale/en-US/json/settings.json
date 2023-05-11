@@ -127,7 +127,7 @@
       "google_oauth_id_label": "Google OAuth Client ID",
       "google_client_secret_label": "Google Client Secret",
       "google_analytics_header": "Google Analytics",
-      "google_tracking_id_label": "Google Analytics Tracking ID"
+      "google_tracking_id_label": "Google Measurement ID"
     },
     "theme": {
       "header": "Theme Settings",
