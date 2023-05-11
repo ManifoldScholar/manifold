@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import get from "lodash/get";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import ch from "helpers/consoleHelpers";
 import config from "config";
 
@@ -32,7 +32,7 @@ export default function useGoogleAnalytics(location, settings) {
   useEffect(() => {
     if (googleAnalyticsEnabled(settings)) {
       const path = location.pathname + location.search;
-      ReactGA.pageview(path);
+      ReactGA.send({ hitType: "pageview", path });
       if (config.environment.isDevelopment) {
         ch.notice(`Tracking GA pageview: ${path}.`, "chart_with_upwards_trend");
       }
