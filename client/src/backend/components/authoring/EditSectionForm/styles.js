@@ -10,7 +10,8 @@ export const Form = styled(FormContainer.Form)`
 export const ButtonOverlay = styled.div`
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: calc(100% - (2 * var(--container-padding-inline-responsive)));
+  box-sizing: border-box;
   background-color: var(--drawer-bg-color);
   padding-block-start: 20px;
   z-index: 200;

@@ -14,12 +14,14 @@ export default function ToggleBar({
         options={[
           {
             label: "HTML Editor",
+            mobileLabel: "HTML",
             icon: "editorHTML24",
             active: htmlMode,
             onClick: onClickEditorToggle(true)
           },
           {
             label: "Rich Text Editor",
+            mobileLabel: "Rich Text",
             icon: "editorRTE24",
             active: !htmlMode,
             onClick: onClickEditorToggle(false)

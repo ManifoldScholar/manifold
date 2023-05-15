@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
+import { respond } from "theme/styles/mixins";
 
 export const Toolbar = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  row-gap: 8px;
+  row-gap: 5px;
   align-items: center;
-  gap: 3px;
+  column-gap: 3px;
   border: 1px solid var(--TextArea-border-color);
   border-bottom-color: var(--textarea-border-color);
   padding-inline: 1.25em;
@@ -16,6 +17,15 @@ export const Toolbar = styled.div`
   border-top-right-radius: var(--box-border-radius);
   color: var(--color);
   min-height: 60px;
+`;
+
+export const ToolGroup = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+
+  ${respond(`gap: 3px;`, 30)}
 `;
 
 export const ToolbarSpacer = styled.div`

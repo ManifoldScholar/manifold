@@ -17,7 +17,10 @@ export default function Toggle({ options, padding = "20px" }) {
           size={left.iconSize || 16}
           className="button-icon-secondary__icon button-icon-secondary__icon--large"
         />
-        <span>{left.label}</span>
+        {left.mobileLabel && (
+          <Styled.MobileLabel>{left.mobileLabel}</Styled.MobileLabel>
+        )}
+        <Styled.Label>{left.label}</Styled.Label>
       </Styled.Button>
       <Styled.Button
         $active={right.active}
@@ -29,7 +32,10 @@ export default function Toggle({ options, padding = "20px" }) {
           size={right.iconSize || 16}
           className="button-icon-secondary__icon button-icon-secondary__icon--large"
         />
-        <span>{right.label}</span>
+        {right.mobileLabel && (
+          <Styled.MobileLabel>{right.mobileLabel}</Styled.MobileLabel>
+        )}
+        <Styled.Label>{right.label}</Styled.Label>
       </Styled.Button>
     </Styled.Wrapper>
   );
