@@ -14,21 +14,6 @@ export const Editor = styled.div`
   &:focus-visible {
     border-color: var(--TextArea-focus-color);
   }
-
-  .scheme-light {
-    .ace_gutter {
-      background-color: var(--color-base-neutral30);
-    }
-    .ace_active-line {
-      background-color: var(--color-base-yellow20) !important;
-    }
-  }
-
-  .scheme-dark {
-    .ace_active-line {
-      background-color: var(--color-base-neutral110) !important;
-    }
-  }
 `;
 
 export const EditorSecondary = styled(Editor)`
@@ -72,6 +57,7 @@ export const EditableWrapper = styled.div`
   .ace_scroller {
     min-height: 699px !important;
     overflow: visible;
+    border-bottom-right-radius: var(--box-border-radius);
   }
 
   .ace_gutter-cell:last-of-type {
