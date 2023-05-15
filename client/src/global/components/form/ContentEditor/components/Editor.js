@@ -37,7 +37,7 @@ export default function Editor({
 
   const [htmlMode, toggleHtmlMode] = useState(true);
   const [showCss, toggleCss] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
