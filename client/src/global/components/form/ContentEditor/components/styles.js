@@ -88,9 +88,10 @@ export const EditableWrapper = styled.div`
 `;
 
 export const Editable = styled(BaseEditable)`
-  max-width: 750px;
+  max-width: 850px;
   margin: auto;
   padding-block: 4em;
+  padding-inline: var(--container-padding-inline-fluid);
 `;
 
 export const Controls = styled.div`

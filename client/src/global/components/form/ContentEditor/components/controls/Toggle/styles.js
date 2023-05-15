@@ -92,3 +92,15 @@ export const Button = styled.button`
     border-bottom-right-radius: 14px;
   }
 `;
+
+export const MobileLabel = styled.span`
+  ${respond(`display: none;`, 40)};
+`;
+
+export const Label = styled.span`
+  ${MobileLabel} + & {
+    display: none;
+
+    ${respond(`display: inline;`, 40)};
+  }
+`;
