@@ -10,7 +10,8 @@ import { isValidUrl } from "../../../utils/helpers";
 import { isBlockActive } from "./BlockButton";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { descriptions, labels } from "./TooltipContent/hotkeys";
+import { descriptions, labels, hotkeys } from "./TooltipContent/hotkeys";
+import { onModalClose } from "./utils";
 import * as Styled from "./styles";
 
 export const insertIframe = (editor, url, title) => {
@@ -130,6 +131,7 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
         <TooltipContent
           label={labels.iframe}
           description={descriptions.iframe}
+          hotkeys={hotkeys.iframe}
         />
       }
       xOffset="-75px"
@@ -138,6 +140,7 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
     >
       <div>
         <Styled.Button
+          name="iframe-modal-trigger"
           ref={ref}
           {...rest}
           aria-label="iframe"

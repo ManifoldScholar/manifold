@@ -9,7 +9,7 @@ import InsertImageForm from "./insert/ImageForm";
 import { isBlockActive } from "./BlockButton";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { descriptions, labels } from "./TooltipContent/hotkeys";
+import { descriptions, labels, hotkeys } from "./TooltipContent/hotkeys";
 import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
@@ -126,7 +126,11 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
   return (
     <Tooltip
       content={
-        <TooltipContent label={labels.img} description={descriptions.img} />
+        <TooltipContent
+          label={labels.img}
+          description={descriptions.img}
+          hotkeys={hotkeys.img}
+        />
       }
       xOffset="-75px"
       yOffset="43px"
@@ -134,6 +138,7 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
     >
       <div>
         <Styled.Button
+          name="img-modal-trigger"
           ref={ref}
           {...rest}
           aria-label="image"
