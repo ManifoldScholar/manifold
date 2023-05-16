@@ -15,7 +15,7 @@ export default function EditorControls({
   controlsRef
 }) {
   return (
-    <Styled.Controls>
+    <Styled.Controls id="editor-controls">
       <ToggleBar
         htmlMode={htmlMode}
         darkMode={darkMode}
