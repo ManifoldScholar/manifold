@@ -113,7 +113,7 @@ export class CommentEditor extends PureComponent {
   updateComment(props, state) {
     const comment = this.commentFromPropsAndState(props, state);
     const call = commentsAPI.update(props.comment.id, comment);
-    const options = { adds: `comments-for-${props.subject.id}` };
+    const options = { refreshes: `comments-for-${props.subject.id}` };
     const updateRequest = request(call, requests.rCommentCreate, options);
     this.processRequest(updateRequest);
   }
