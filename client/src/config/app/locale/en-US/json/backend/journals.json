@@ -7,7 +7,7 @@
     "settings": "Journal Settings",
     "volume_number": "Volume {{volNum}}",
     "issue_number": "Issue {{issNum}}",
-    "volume_issue_number": "Vol., {{volNum}}), No., {{issNum}})",
+    "volume_issue_number": "Vol., {{volNum}}, No., {{issNum}}",
     "forms": {
       "new_header": "New Journal",
       "new_instructions": "Enter the name of your journal, and a brief description. Press save to continue.",
