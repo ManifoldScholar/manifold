@@ -99,12 +99,14 @@ const deserializeElement = ({
   if (has(el.attribs, "void"))
     return deserializeVoid(el, nodeName, el.childNodes);
 
-  if (
-    nodeName === "br" &&
-    (getNextNonFormat(el).type === "text" ||
-      getPrevNonFormat(el).type === "text")
-  )
-    return jsx("text", { text: "\n" }, []);
+  if (nodeName === "br") {
+    if (
+      getNextNonFormat(el).type === "text" ||
+      getPrevNonFormat(el).type === "text"
+    )
+      return jsx("text", { text: "\n" }, []);
+    return jsx("element", { type: "p" }, [{ text: "" }]);
+  }
 
   const isFirstChild = index === 0;
   const isLastChild = index === childrenLength - 1;
