@@ -5,7 +5,6 @@ import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
-import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 const LIST_TYPES = ["ol", "ul"];
@@ -57,10 +56,13 @@ export const toggleBlock = (editor, format) => {
   }
 
   if (format === "pre") Editor.addMark(editor, "code", true);
+
+  ReactEditor.focus(editor);
 };
 
-const BlockButton = ({ format, icon, size, selection, ...rest }, ref) => {
+const BlockButton = ({ format, icon, size, ...rest }, ref) => {
   const editor = useSlate();
+  const { selection } = editor ?? {};
 
   return (
     <Tooltip
@@ -78,10 +80,8 @@ const BlockButton = ({ format, icon, size, selection, ...rest }, ref) => {
         data-active={isBlockActive(editor, format)}
         onClick={event => {
           event.preventDefault();
-          if (isEmpty(selection)) return;
-          Transforms.select(editor, selection);
+          if (!selection) return;
           toggleBlock(editor, format);
-          ReactEditor.focus(editor);
         }}
         tabIndex={-1}
       >

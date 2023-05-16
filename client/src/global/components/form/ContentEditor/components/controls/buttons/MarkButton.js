@@ -1,11 +1,10 @@
 import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
-import { Editor, Transforms, Node } from "slate";
+import { Editor, Node } from "slate";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
-import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 const isMarkActive = (editor, format) => {
@@ -28,13 +27,13 @@ export const toggleMark = (editor, format) => {
   } else {
     Editor.addMark(editor, format, true);
   }
+
+  ReactEditor.focus(editor);
 };
 
-const MarkButton = (
-  { format, label, icon, selection, isFirst, ...rest },
-  ref
-) => {
+const MarkButton = ({ format, label, icon, isFirst, ...rest }, ref) => {
   const editor = useSlate();
+  const { selection } = editor ?? {};
 
   return (
     <Tooltip
@@ -52,10 +51,8 @@ const MarkButton = (
         data-active={isMarkActive(editor, format)}
         onClick={event => {
           event.preventDefault();
-          if (isEmpty(selection)) return;
-          Transforms.select(editor, selection);
+          if (!selection) return;
           toggleMark(editor, format);
-          ReactEditor.focus(editor);
         }}
         tabIndex={isFirst ? 0 : -1}
       >

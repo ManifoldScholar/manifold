@@ -10,7 +10,8 @@ import { isBlockActive } from "./BlockButton";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { descriptions, labels, hotkeys } from "./TooltipContent/hotkeys";
-import isEmpty from "lodash/isEmpty";
+import { onModalClose } from "./utils";
+import { setSelectionAtPoint } from "../../../transforms/utils";
 import * as Styled from "./styles";
 
 export const insertImage = (editor, url, alt) => {
@@ -28,9 +29,10 @@ export const insertImage = (editor, url, alt) => {
   ReactEditor.focus(editor);
 };
 
-const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
+const ImageButton = ({ icon, size, ...rest }, ref) => {
   const { t } = useTranslation();
   const editor = useSlate();
+  const { selection } = editor ?? {};
   const { confirm, confirmation } = useConfirmation();
   const urlRef = useRef(null);
   const altRef = useRef(null);
@@ -54,22 +56,9 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
     ReactEditor.focus(editor);
   };
 
-  // Not totally sure why, but we have to perform an actual update to the node tree after closing the modal before returning focus to the editor. It might be a weird interaction between the focus trap's close callbacks and the editor.
-  const onModalClose = close => {
-    close();
-    const [node] = Editor.above(editor, { at: selection.focus.path });
-    const val = node?.selection_tracker_ignore ?? false;
-    Transforms.setNodes(
-      editor,
-      { selection_tracker_ignore: !val },
-      { at: selection.focus.path.slice(0, -1) }
-    );
-    ReactEditor.focus(editor);
-  };
-
   const getImageData = e => {
     e.preventDefault();
-    if (isEmpty(selection)) return;
+    if (!selection) return;
 
     const heading = "Insert Image";
     const form = <InsertImageForm urlRef={urlRef} altRef={altRef} />;
@@ -79,7 +68,7 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
         icon,
         form,
         callback: addImage,
-        closeCallback: onModalClose,
+        closeCallback: onModalClose(editor, selection),
         resolveLabel: t("actions.add")
       });
   };
@@ -116,7 +105,7 @@ const ImageButton = ({ icon, size, selection, ...rest }, ref) => {
         icon,
         form,
         callback: updateImage(attrs),
-        closeCallback: onModalClose,
+        closeCallback: onModalClose(editor, selection),
         resolveLabel: t("actions.update")
       });
   };
