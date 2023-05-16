@@ -21,9 +21,9 @@ export const labels = {
 };
 
 export const descriptions = {
-  img: "Click here or paste an image URL into the editor to insert.",
+  img: "Paste an image URL into the editor to insert.",
   iframe:
-    "Paste a YouTube or Vimeo embed URL into the editor to insert. Click to add all types of iframe content."
+    "Paste a YouTube or Vimeo embed URL into the editor to insert. Insert other iframe content via the modal."
 };
 
 export const hotkeys = {
@@ -106,5 +106,13 @@ export const hotkeys = {
   redo: [
     { label: "Mac", keys: ["Cmd", "Shift", "Z"] },
     { label: "Windows", keys: ["Ctrl", "Y"] }
+  ],
+  img: [
+    { label: "Mac", keys: ["Cmd", "G"] },
+    { label: "Windows", keys: ["Ctrl", "G"] }
+  ],
+  iframe: [
+    { label: "Mac", keys: ["Cmd", "F"] },
+    { label: "Windows", keys: ["Ctrl", "F"] }
   ]
 };

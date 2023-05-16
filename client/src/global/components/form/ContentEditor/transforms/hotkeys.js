@@ -1,46 +1,14 @@
 import { toggleMark } from "../components/controls/buttons/MarkButton";
 import { toggleBlock } from "../components/controls/buttons/BlockButton";
-import { Editor as SlateEditor, Transforms, Path, Range } from "slate";
-import { rteElements, inlineNodes } from "../utils/elements";
 import { increaseIndent, decreaseIndent } from "./indents";
-import { setSelectionAtPoint, getListItemNode } from "./utils";
-import { handleLinkHotkey } from "./links";
-
-const handleInsertNode = editor => {
-  const { selection } = editor;
-  // Grab the element node that contains the text where the user hit enter; Slate's default handling of enter would simply duplicate this node
-  const [node, path] = SlateEditor.above(editor, selection);
-  // Remove all attributes other than the type/tag, so we don't copy id, classes, etc.
-  const { children, htmlAttrs, slateOnly, ...next } = node;
-
-  // Set the path for the new node based on whether the element node is block or inline; the new node will be block so it must not be a sibling of an inline
-  const nextPath = inlineNodes.includes(next.type)
-    ? Path.next(Path.parent(path))
-    : Path.next(path);
-
-  // Insert a paragraph if this node type isn't editable in the RTE; handle unwrapping the list item if we're on an empty li
-  if (!rteElements.includes(next.type)) next.type = "p";
-  if (next.type === "a" || next.type === "img" || next.type === "iframe")
-    next.type = "p";
-  if (next.type === "li") {
-    const isCollapsed = selection && Range.isCollapsed(selection);
-    const liIsEmpty = SlateEditor.isEmpty(editor, node);
-    if (isCollapsed && liIsEmpty) return decreaseIndent(editor, true);
-  }
-
-  // Insert the adjusted node
-  Transforms.insertNodes(
-    editor,
-    { ...next, children: [{ text: "" }] },
-    { at: selection }
-  );
-  // Set the cursor position at the first child of the new node
-  setSelectionAtPoint(editor, [...nextPath, 0]);
-};
-
-const insertSoftBreak = editor => {
-  Transforms.insertText(editor, "\n");
-};
+import { getListItemNode } from "./utils";
+import {
+  handleLinkHotkey,
+  handleImageHotkey,
+  handleIframeHotkey,
+  handleInsertNode,
+  insertSoftBreak
+} from "./handlers";
 
 export const captureHotKeys = (e, editor) => {
   if (e.key === "Enter") {
@@ -121,5 +89,11 @@ export const captureHotKeys = (e, editor) => {
     case "k":
       e.preventDefault();
       return handleLinkHotkey(editor);
+    case "g":
+      e.preventDefault();
+      return handleImageHotkey(editor);
+    case "f":
+      e.preventDefault();
+      return handleIframeHotkey(editor);
   }
 };
