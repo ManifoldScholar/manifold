@@ -7,7 +7,7 @@ import {
   useFocused,
   useSelected
 } from "slate-react";
-import { Transforms } from "slate";
+import { Transforms, Editor } from "slate";
 import * as Styled from "./styles";
 
 export default function ImageRenderer({ element, children, attributes, as }) {
@@ -18,7 +18,11 @@ export default function ImageRenderer({ element, children, attributes, as }) {
 
   const onRemove = e => {
     e.preventDefault();
-    Transforms.removeNodes(editor, { at: path });
+
+    return Editor.withoutNormalizing(editor, () => {
+      Transforms.removeNodes(editor, { at: path });
+      Transforms.insertNodes(editor, { type: "p", children: [{ text: "" }] });
+    });
   };
 
   const wrapperClassName = classNames({
