@@ -63,22 +63,38 @@ export class CommentThread extends PureComponent {
 
   handleCommentDelete = (event, comment) => {
     const call = commentsAPI.update(comment.id, { deleted: true });
-    this.props.dispatch(request(call, requests.rCommentUpdate));
+    this.props.dispatch(
+      request(call, requests.rCommentUpdate, {
+        refreshes: `comments-for-${this.props.subject.id}`
+      })
+    );
   };
 
   handleCommentRestore = (event, comment) => {
     const call = commentsAPI.update(comment.id, { deleted: false });
-    this.props.dispatch(request(call, requests.rCommentUpdate));
+    this.props.dispatch(
+      request(call, requests.rCommentUpdate, {
+        refreshes: `comments-for-${this.props.subject.id}`
+      })
+    );
   };
 
   handleCommentFlag = (event, comment) => {
     const call = commentsAPI.flag(comment);
-    this.props.dispatch(request(call, requests.rCommentFlag));
+    this.props.dispatch(
+      request(call, requests.rCommentFlag, {
+        refreshes: `comments-for-${this.props.subject.id}`
+      })
+    );
   };
 
   handleCommentUnflag = (event, comment) => {
     const call = commentsAPI.unflag(comment);
-    this.props.dispatch(request(call, requests.rCommentUnflag));
+    this.props.dispatch(
+      request(call, requests.rCommentUnflag, {
+        refreshes: `comments-for-${this.props.subject.id}`
+      })
+    );
   };
 
   handleNextClick = pagination => {
