@@ -59,14 +59,22 @@ export default function Editor({
   }, [initialSlateValue, initialHtmlValue]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-
+  // Since the editor overflows the visible area and we scroll the whole drawer, we have to manually handle scroll when arrow keys are used to move the cursor out of view.
   useEffect(() => {
     if (editor.selection && !htmlMode) {
       const [node] = ReactEditor.toDOMPoint(editor, editor.selection.focus);
-      node.parentElement.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
+      const rect = node.parentElement.getBoundingClientRect();
+      const buttons = document.getElementById("editor-button-overlay");
+      const controls = document.getElementById("editor-controls");
+      const buttonsRect = buttons.getBoundingClientRect();
+      const controlsRect = controls.getBoundingClientRect();
+      const isInView = rect.y < buttonsRect.top && rect.y > controlsRect.bottom;
+      if (!isInView) {
+        node.parentElement.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }
     }
   }, [editor, editor.selection, htmlMode]);
 

@@ -93,7 +93,7 @@ export default function EditSectionForm({
         nextRef={saveRef}
         {...errorProps}
       />
-      <Styled.ButtonOverlay>
+      <Styled.ButtonOverlay id="editor-button-overlay">
         <Form.DrawerButtons
           showCancel
           showSaveAndClose
