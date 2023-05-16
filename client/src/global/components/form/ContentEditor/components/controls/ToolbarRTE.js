@@ -15,7 +15,7 @@ import {
 } from "reakit/Menu";
 import * as Styled from "./styles";
 
-export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
+export default function ToolbarRTE({ onClickUndo, onClickRedo }) {
   const menu = useMenuBarState({
     orientation: "horizontal",
     loop: true,
@@ -53,47 +53,31 @@ export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
             { format: "h4", label: "Heading 4" },
             { format: "", label: "" }
           ]}
-          selection={selection}
           {...menu}
         />
         <Styled.ToolbarSpacer />
       </Styled.ToolGroup>
       <Styled.ToolGroup>
-        <ReakitMenuItem
-          as={MarkButton}
-          icon="bold24"
-          format="bold"
-          selection={selection}
-          {...menu}
-        />
+        <ReakitMenuItem as={MarkButton} icon="bold24" format="bold" {...menu} />
         <ReakitMenuItem
           as={MarkButton}
           icon="italic24"
           format="italic"
-          selection={selection}
           {...menu}
         />
         <ReakitMenuItem
           as={MarkButton}
           icon="underline24"
           format="underline"
-          selection={selection}
           {...menu}
         />
         <ReakitMenuItem
           as={MarkButton}
           icon="strikethrough24"
           format="strikethrough"
-          selection={selection}
           {...menu}
         />
-        <ReakitMenuItem
-          as={MarkButton}
-          icon="code24"
-          format="code"
-          selection={selection}
-          {...menu}
-        />
+        <ReakitMenuItem as={MarkButton} icon="code24" format="code" {...menu} />
         <Styled.ToolbarSpacer />
       </Styled.ToolGroup>
       <Styled.ToolGroup>
@@ -101,51 +85,32 @@ export default function ToolbarRTE({ selection, onClickUndo, onClickRedo }) {
           as={BlockButton}
           icon="orderedList24"
           format="ol"
-          selection={selection}
           {...menu}
         />
         <ReakitMenuItem
           as={BlockButton}
           icon="unorderedList24"
           format="ul"
-          selection={selection}
           {...menu}
         />
         <ReakitMenuItem
           as={BlockButton}
           icon="blockQuote24"
           format="blockquote"
-          selection={selection}
           {...menu}
         />
         <ReakitMenuItem
           as={BlockButton}
           icon="codeBlock24"
           format="pre"
-          selection={selection}
           {...menu}
         />
         <Styled.ToolbarSpacer />
       </Styled.ToolGroup>
       <Styled.ToolGroup>
-        <ReakitMenuItem
-          as={LinkButton}
-          icon="RTELink24"
-          selection={selection}
-          {...menu}
-        />
-        <ReakitMenuItem
-          as={ImageButton}
-          icon="RTEImage24"
-          selection={selection}
-          {...menu}
-        />
-        <ReakitMenuItem
-          as={IframeButton}
-          icon="iframe24"
-          selection={selection}
-          {...menu}
-        />
+        <ReakitMenuItem as={LinkButton} icon="RTELink24" {...menu} />
+        <ReakitMenuItem as={ImageButton} icon="RTEImage24" {...menu} />
+        <ReakitMenuItem as={IframeButton} icon="iframe24" {...menu} />
       </Styled.ToolGroup>
     </ReakitMenuBar>
   );

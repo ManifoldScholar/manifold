@@ -12,7 +12,6 @@ import Controls from "./EditorControls";
 import withPlugins from "../plugins";
 import { clearSlate, formatHtml } from "../utils/helpers";
 import { ErrorBoundary } from "react-error-boundary";
-import isEmpty from "lodash/isEmpty";
 import isEqual from "lodash/isEqual";
 import * as Styled from "./styles";
 
@@ -60,16 +59,6 @@ export default function Editor({
   }, [initialSlateValue, initialHtmlValue]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-  const [lastActiveSelection, setLastActiveSelection] = useState({});
-
-  const onEditorBlur = () => {
-    if (editor.selection != null) setLastActiveSelection(editor.selection);
-  };
-
-  const onEditorFocus = () => {
-    if (!editor.selection && !isEmpty(lastActiveSelection))
-      Transforms.select(editor, lastActiveSelection);
-  };
 
   useEffect(() => {
     if (editor.selection && !htmlMode) {
@@ -215,7 +204,6 @@ export default function Editor({
         <ErrorBoundary fallbackRender={handleError}>
           <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
             <Controls
-              selection={lastActiveSelection}
               htmlMode={htmlMode}
               darkMode={darkMode}
               onClickEditorToggle={onClickToggle}
@@ -239,8 +227,6 @@ export default function Editor({
                   placeholder="Section body..."
                   spellCheck={false}
                   onKeyDown={e => captureHotKeys(e, editor)}
-                  onBlur={onEditorBlur}
-                  onFocus={onEditorFocus}
                 />
               )}
               {htmlMode && <HtmlEditor {...codeAreaProps} />}

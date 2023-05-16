@@ -9,7 +9,7 @@ import Modal from "./insert/Modal";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
-import isEmpty from "lodash/isEmpty";
+import { onModalClose } from "./utils";
 import * as Styled from "./styles";
 
 export const isLinkActive = editor => {
@@ -48,7 +48,7 @@ export const wrapLink = (editor, url, text) => {
   ReactEditor.focus(editor);
 };
 
-const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
+const LinkButton = ({ icon, size, ...rest }, ref) => {
   const editor = useSlate();
   const active = isLinkActive(editor);
   const { confirm, confirmation } = useConfirmation();
@@ -64,34 +64,18 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
     wrapLink(editor, url, text);
   };
 
-  const onModalClose = close => {
-    close();
-    const selectionToUse = editor.selection ?? selection;
-
-    const [node] = Editor.above(editor, { at: selectionToUse.focus.path });
-    const val = node?.selection_tracker_ignore ?? false;
-    Transforms.setNodes(
-      editor,
-      { selection_tracker_ignore: !val },
-      { at: selectionToUse.focus.path.slice(0, -1) }
-    );
-
-    ReactEditor.focus(editor);
-    Transforms.select(editor, selectionToUse);
-  };
-
   const getLinkData = e => {
     e.preventDefault();
-    if (isEmpty(selection) && !editor.selection) return;
-    if (active) return unwrapLink(editor);
+    const { selection } = editor ?? {};
+    if (!selection) return;
 
-    const selectionToUse = editor.selection ?? selection;
+    if (active) return unwrapLink(editor);
 
     const heading = "Insert Link";
 
-    const isCollapsed = Range.isCollapsed(selectionToUse);
+    const isCollapsed = Range.isCollapsed(selection);
     const defaultValues = !isCollapsed
-      ? { text: Editor.string(editor, selectionToUse) }
+      ? { text: Editor.string(editor, selection) }
       : {};
 
     const form = (
@@ -107,7 +91,7 @@ const LinkButton = ({ icon, size, selection, ...rest }, ref) => {
         icon,
         form,
         callback: addLink,
-        closeCallback: onModalClose,
+        closeCallback: onModalClose(editor, selection),
         resolveLabel: t("actions.add")
       });
   };

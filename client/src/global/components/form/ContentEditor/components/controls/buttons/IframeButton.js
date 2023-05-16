@@ -29,8 +29,9 @@ export const insertIframe = (editor, url, title) => {
   ReactEditor.focus(editor);
 };
 
-const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
+const IframeButton = ({ icon, size, ...rest }, ref) => {
   const editor = useSlate();
+  const { selection } = editor ?? {};
   const { confirm, confirmation } = useConfirmation();
   const urlRef = useRef(null);
   const titleRef = useRef(null);
@@ -56,21 +57,10 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
     ReactEditor.focus(editor);
   };
 
-  // Not totally sure why, but we have to perform an actual update to the node tree after closing the modal before returning focus to the editor. It might be a weird interaction between the focus trap's close callbacks and the editor.
-  const onModalClose = close => {
-    close();
-    const [node] = Editor.above(editor, { at: selection.focus.path });
-    const val = node?.selection_tracker_ignore ?? false;
-    Transforms.setNodes(
-      editor,
-      { selection_tracker_ignore: !val },
-      { at: selection.focus.path.slice(0, -1) }
-    );
-    ReactEditor.focus(editor);
-  };
-
   const getIframeData = e => {
     e.preventDefault();
+    if (!selection) return;
+
     const heading = "Insert Iframe";
     const form = <InsertIframeForm urlRef={urlRef} titleRef={titleRef} />;
     if (confirm)
@@ -79,7 +69,7 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
         icon,
         form,
         callback: addIframe,
-        closeCallback: onModalClose,
+        closeCallback: onModalClose(editor, selection),
         resolveLabel: t("actions.add")
       });
   };
@@ -118,7 +108,7 @@ const IframeButton = ({ icon, size, selection, ...rest }, ref) => {
         icon,
         form,
         callback: updateIframe(attrs),
-        closeCallback: onModalClose,
+        closeCallback: onModalClose(editor, selection),
         resolveLabel: t("actions.add")
       });
   };

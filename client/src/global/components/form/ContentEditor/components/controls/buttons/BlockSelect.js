@@ -1,11 +1,9 @@
 import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
-import { Transforms } from "slate";
 import { toggleBlock, isBlockActive } from "./BlockButton";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
-import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 const getActiveBlock = editor => {
@@ -25,8 +23,9 @@ const getActiveBlock = editor => {
   return "p";
 };
 
-const BlockSelect = ({ options, selection, ...rest }, ref) => {
+const BlockSelect = ({ options, ...rest }, ref) => {
   const editor = useSlate();
+  const { selection } = editor ?? {};
 
   const renderOptions = options.map(o => (
     <option key={o.format} value={o.format} hidden={!o.format}>
@@ -54,10 +53,8 @@ const BlockSelect = ({ options, selection, ...rest }, ref) => {
           value={active}
           onChange={e => {
             e.preventDefault();
-            if (isEmpty(selection)) return;
-            Transforms.select(editor, selection);
+            if (!selection) return;
             toggleBlock(editor, e.target.value);
-            ReactEditor.focus(editor);
           }}
           tabIndex={-1}
         >
