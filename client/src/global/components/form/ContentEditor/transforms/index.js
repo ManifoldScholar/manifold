@@ -1,1 +1,1 @@
-export { captureHotKeys } from "./hotKeys";
+export { captureHotKeys } from "./hotkeys";
