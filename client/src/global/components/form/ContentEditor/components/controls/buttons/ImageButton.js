@@ -11,7 +11,6 @@ import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { descriptions, labels, hotkeys } from "./TooltipContent/hotkeys";
 import { onModalClose } from "./utils";
-import { setSelectionAtPoint } from "../../../transforms/utils";
 import * as Styled from "./styles";
 
 export const insertImage = (editor, url, alt) => {
