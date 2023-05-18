@@ -1,77 +1,66 @@
 class IngestionTargetKind < ClassyEnum::Base
+  def ingest(user, ingestion)
+    outcome = nil
+
+    begin
+      PaperTrail.request(whodunnit: user) do
+        outcome = run_ingestion(ingestion)
+      end
+      outcome
+    rescue StandardError => e
+      return ingestion.handle_ingestion_exception(e)
+    end
+  end
 
   def reingest?(ingestion)
     ingestion.text.present?
   end
 
-  # rubocop:disable Metrics/MethodLength
-  def begin_processing(user, ingestion)
+  def serialize(user, ingestion)
     serialization_options = { current_user: user }
     serialization = V1::IngestionSerializer.new(
       ingestion,
       serialization_options
     ).serializable_hash
     IngestionChannel.broadcast_to ingestion, type: "entity", payload: serialization
+  end
 
-    outcome = nil
+  def begin_processing(user, ingestion)
+    serialize(user, ingestion)
 
-    begin
-      PaperTrail.request(whodunnit: user) do
-        outcome = Ingestions::Ingestor.run ingestion: ingestion
-      end
-      outcome
-    rescue StandardError => e
-      return ingestion.handle_ingestion_exception(e)
-    end
+    outcome = ingest(user, ingestion)
 
     if outcome.valid?
       ingestion.info("\nIngestion Complete.")
-      ingestion.text = outcome.result
+      attach_record(ingestion, outcome.result)
       ingestion.processing_success
     else
       ingestion.handle_ingestion_exception(outcome.errors)
     end
   end
-  # rubocop:enable Metrics/MethodLength
 end
 
 class IngestionTargetKind::Text < IngestionTargetKind
+  def run_ingestion(ingestion)
+    Ingestions::Ingestor.run ingestion: ingestion
+  end
+
+  def attach_record(ingestion, result)
+    ingestion.text = result
+  end
 end
 
 class IngestionTargetKind::TextSection < IngestionTargetKind
+  def run_ingestion(ingestion)
+    text = ingestion.text
+    Ingestions::TextSection::Ingestor.run(ingestion: ingestion, text: text)
+  end
+
   def reingest?(ingestion)
     ingestion.text_section.present?
   end
 
-  # rubocop:disable Metrics/MethodLength
-  def begin_processing(user, ingestion)
-    serialization_options = { current_user: user }
-    serialization = V1::IngestionSerializer.new(
-      ingestion,
-      serialization_options
-    ).serializable_hash
-    IngestionChannel.broadcast_to ingestion, type: "entity", payload: serialization
-
-    outcome = nil
-
-    begin
-      PaperTrail.request(whodunnit: user) do
-        text = ingestion.text
-        outcome = Ingestions::TextSection::Ingestor.run(ingestion: ingestion, text: text)
-      end
-      outcome
-    rescue StandardError => e
-      return ingestion.handle_ingestion_exception(e)
-    end
-
-    if outcome.valid?
-      ingestion.info("\nIngestion Complete.")
-      ingestion.text_section = outcome.result
-      ingestion.processing_success
-    else
-      ingestion.handle_ingestion_exception(outcome.errors)
-    end
+  def attach_record(ingestion, result)
+    ingestion.text_section = result
   end
-  # rubocop:enable Metrics/MethodLength
-
 end

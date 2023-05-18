@@ -111,8 +111,6 @@ class Ingestion < ApplicationRecord
     target_kind.begin_processing(user, self)
   end
 
-  private
-
   def handle_ingestion_exception(errors)
     error("Processing failed.\n")
 
@@ -124,6 +122,8 @@ class Ingestion < ApplicationRecord
 
     processing_failure
   end
+
+  private
 
   def compose_and_output_backtrace(errors)
     output = errors.message
