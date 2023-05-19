@@ -310,6 +310,10 @@ module Validation
   end
   # rubocop:enable Metrics/MethodLength
 
+  def ingestion_source_filter_params
+    params.permit(filter: [:order, :keyword, :kind])[:filter]
+  end
+
   def stylesheet_params
     params.require(:data)
     attributes = [:raw_styles, :name, :position, :applies_to_all_text_sections]

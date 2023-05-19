@@ -2,14 +2,18 @@
 #
 # @see IngestionSourceUploader
 class IngestionSource < ApplicationRecord
+  # Constants
+  TYPEAHEAD_ATTRIBUTES = [:display_name, :source_identifier].freeze
 
   # Attachments
   include IngestionSourceUploader::Attachment.new(:attachment)
 
   # Authorization
   include Authority::Abilities
+  include Filterable
   include SerializedAbilitiesFor
   include HasFormattedAttributes
+  include SearchIndexable
   self.authorizer_name = "ProjectChildAuthorizer"
 
   classy_enum_attr :kind, enum: "IngestionSourceKind", allow_blank: false
@@ -31,6 +35,27 @@ class IngestionSource < ApplicationRecord
   scope :cover_images, -> { by_kind(:cover_image) }
   scope :navigation, -> { by_kind(:navigation) }
   scope :publication_resources, -> { by_kind(:publication_resource) }
+  scope :with_order, ->(by = nil) do
+    case by
+    when "updated_at ASC"
+      order(updated_at: :asc)
+    when "updated_at DESC"
+      order(updated_at: :desc)
+    when "created_at ASC"
+      order(created_at: :asc)
+    when "created_at DESC"
+      order(created_at: :desc)
+    when "name"
+      order(display_name: :asc, source_identifier: :asc)
+    else
+      order(created_at: :asc)
+    end
+  end
+
+  # Search
+  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
+             callbacks: :async,
+             batch_size: 500)
 
   # Associations
   belongs_to :text

@@ -6,7 +6,11 @@ module API
           before_action :set_text
 
           resourceful! IngestionSource, authorize_options: { except: [:index] } do
-            @text.ingestion_sources
+            @text.ingestion_sources.filtered(
+              with_pagination!(
+                ingestion_source_filter_params
+              )
+            )
           end
 
           def index
