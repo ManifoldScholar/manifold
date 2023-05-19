@@ -9,6 +9,7 @@ class IngestionSource < ApplicationRecord
   # Authorization
   include Authority::Abilities
   include SerializedAbilitiesFor
+  include HasFormattedAttributes
   self.authorizer_name = "ProjectChildAuthorizer"
 
   classy_enum_attr :kind, enum: "IngestionSourceKind", allow_blank: false
@@ -38,6 +39,8 @@ class IngestionSource < ApplicationRecord
   delegate :project, to: :text
   delegate *IngestionSourceKind.predicates, to: :kind
   delegate :content_type, to: :attachment, allow_nil: true
+
+  has_formatted_attribute :display_name
 
   # Validations
   validates :source_identifier, presence: true
