@@ -134,6 +134,19 @@
         "sections_placeholder": "Add a text section",
         "save": "Save Stylesheet"
       }
+    },
+    "assets": {
+      "header": "Assets",
+      "instructions": "Assets are files that are associated with a text. Assets have stable URLs and can be rendered in the Manifold reader.",
+      "add_button_label": "Add New Asset",
+      "edit_header": "Edit Asset",
+      "name_label": "Asset Name",
+      "name_instructions": "This field accepts markdown.",
+      "id_label": "Asset ID",
+      "url_label": "Asset URL",
+      "upload_label": "Upload Asset File",
+      "upload_instructions": "See documentation for supported file types.",
+      "copy_button_label": "Copy URL"
     }
   }
 }

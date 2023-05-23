@@ -56,13 +56,12 @@ export default class FormTextInput extends Component {
       <UIDConsumer>
         {id => (
           <BaseInput
-            {...this.props}
             id={`${this.idPrefix}-${id}`}
             idForError={`${this.idForErrorPrefix}-${id}`}
             idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
             inputType={inputType}
             renderValue={this.renderValue}
-            buttons={this.props.buttons}
+            {...this.props}
           />
         )}
       </UIDConsumer>

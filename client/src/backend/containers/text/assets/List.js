@@ -18,6 +18,7 @@ import {
 import withConfirmation from "hoc/withConfirmation";
 import withFilteredLists, { assetFilters } from "hoc/withFilteredLists";
 import { ingestionSourcesAPI } from "api";
+import { useHistory } from "react-router-dom";
 import * as Styled from "./styles";
 
 function TextAssetsContainer({
@@ -28,6 +29,7 @@ function TextAssetsContainer({
   entitiesListSearchParams
 }) {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const [pagination, setPageNumber] = usePaginationState(1, 10);
   const baseFilters = entitiesListSearchParams.initialassets;
@@ -54,8 +56,6 @@ function TextAssetsContainer({
           },
           childProps: {
             textId: text.id,
-            sectionIngest: true,
-            nextPosition: text.attributes?.sectionsMap?.length + 1,
             refresh
           }
         })}
@@ -76,36 +76,35 @@ function TextAssetsContainer({
   };
 
   const onEdit = id => {
-    history.push(lh.link("backendTextAssetsEdit", id));
+    history.push(lh.link("backendTextAssetEdit", text.id, id));
   };
 
-  // const deleteAsset = useApiCallback(pendingEntitlementsAPI.destroy);
-  //
-  // const onDelete = id => {
-  //   const heading = t("modals.delete_entitlement");
-  //   const message = t("modals.confirm_body");
-  //   if (confirm)
-  //     confirm(heading, message, () => deleteEntitlement(id).then(refresh()));
-  // };
+  const deleteAsset = useApiCallback(ingestionSourcesAPI.destroy);
+
+  const onDelete = id => {
+    const heading = t("modals.delete_asset");
+    const message = t("modals.confirm_body");
+    if (confirm)
+      confirm(heading, message, () => deleteAsset(id).then(refresh()));
+  };
 
   return (
     <Styled.Wrapper>
       {renderChildRoutes()}
       <Form.Header
-        label="Assets"
-        instructions="Assets are files that are associated with a text. Assets have stable URLs and can be rendered in the Manifold reader."
+        label={t("texts.assets.header")}
+        instructions={t("texts.assets.instructions")}
       />
       <EntitiesList
         className="full-width"
         entityComponent={AssetRow}
-        entityComponentProps={{ onEdit }}
+        entityComponentProps={{ onEdit, onDelete }}
         entities={assets ?? []}
         buttons={[
           <Button
-            path={lh.link("backendRecordsEntitlementsNew")}
+            path={lh.link("backendTextAssetNew", text.id)}
             type="add"
-            text={"Add New Asset"}
-            authorizedFor="entitlement"
+            text={t("texts.assets.add_button_label")}
           />
         ]}
         search={
@@ -117,7 +116,7 @@ function TextAssetsContainer({
         }
         pagination={meta?.pagination}
         showCount
-        unit={t("glossary.entitlement", {
+        unit={t("glossary.asset", {
           count: meta?.pagination.totalCount
         })}
         callbacks={{

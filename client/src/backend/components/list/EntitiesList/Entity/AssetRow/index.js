@@ -80,8 +80,10 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
         onClick={onCopy}
         className="entity-row__utility button-lozenge-secondary"
       >
-        <Styled.CopyLabel>Copy URL</Styled.CopyLabel>
-        <Styled.CopyLabelMobile>Copy</Styled.CopyLabelMobile>
+        <Styled.CopyLabel>
+          {t("texts.assets.copy_button_label")}
+        </Styled.CopyLabel>
+        <Styled.CopyLabelMobile>{t("actions.copy")}</Styled.CopyLabelMobile>
       </Styled.CopyButton>
       <button
         className="entity-row__utility-button"
