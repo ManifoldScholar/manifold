@@ -513,6 +513,13 @@ class Navigation {
         args
       },
       {
+        label: "titles.assets",
+        route: "backendTextAssets",
+        entity: text,
+        ability: "update",
+        args
+      },
+      {
         label: "titles.metadata",
         route: "backendTextMetadata",
         entity: text,

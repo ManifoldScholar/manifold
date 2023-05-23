@@ -222,6 +222,7 @@ export default `
     &__utility {
       align-self: center;
       flex-shrink: 0;
+      margin-inline-start: auto;
     }
 
     &__utility-button {

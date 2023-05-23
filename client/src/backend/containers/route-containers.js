@@ -63,6 +63,7 @@ export default {
   TextTOC: Text.TableOfContents,
   TextTOCEntryNew: Text.TOCEntry,
   TextTOCEntryEdit: Text.TOCEntry,
+  TextAssets: Text.Assets,
   ProjectCollectionWrapper: ProjectCollection.Wrapper,
   ProjectCollectionDetail: ProjectCollection.Detail,
   ProjectCollectionManageProjects: ProjectCollection.ManageProjects,

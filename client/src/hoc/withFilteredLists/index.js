@@ -8,6 +8,7 @@ import userFilters from "./userFilters";
 import keywordFilter from "./keywordFilter";
 import journalFilters from "./journalFilters";
 import entitlementFilters from "./entitlementFilters";
+import assetFilters from "./assetFilters";
 
 export default withFilters;
 
@@ -20,5 +21,6 @@ export {
   userFilters,
   keywordFilter,
   journalFilters,
-  entitlementFilters
+  entitlementFilters,
+  assetFilters
 };

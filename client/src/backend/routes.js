@@ -316,6 +316,14 @@ const routes = {
                   modal: true
                 }
               ]
+            },
+            {
+              name: "backendTextAssets",
+              exact: false,
+              component: "TextAssets",
+              path: "/backend/projects/text/:id/assets",
+              helper: t => `/backend/projects/text/${t}/assets`,
+              routes: []
             }
           ]
         },

@@ -225,7 +225,8 @@ export default class ListEntities extends PureComponent {
       "entity-list": true,
       "entity-list--bare": this.listStyle === "bare",
       "entity-list--well": this.listStyle === "well",
-      "entity-list--indented": this.props.indented
+      "entity-list--indented": this.props.indented,
+      [this.props.className]: this.props.className
     });
 
     const listClassNames = classNames({
