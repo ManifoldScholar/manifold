@@ -104,7 +104,7 @@ Rails.application.routes.draw do
             resources :text_sections, only: [:index, :create]
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
             resources :ingestions, only: [:create], controller: "/api/v1/texts/relationships/text_section_ingestions"
-            resources :ingestion_sources, only: [:index]
+            resources :ingestion_sources, only: [:index, :show]
           end
         end
       end
