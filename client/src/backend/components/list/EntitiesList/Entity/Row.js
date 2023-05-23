@@ -108,6 +108,7 @@ class EntitiesListRow extends PureComponent {
   }
 
   get verticalAlignment() {
+    if (this.props.figureAlign) return this.props.figureAlign;
     if (this.hasSubtitle || this.hasMeta) return "top";
     return "center";
   }
@@ -156,6 +157,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__figure": true,
       "entity-row__figure--valign-center": this.verticalAlignment === "center",
       "entity-row__figure--size-small": this.figureSize === "small",
+      "entity-row__figure--size-medium": this.figureSize === "medium",
       "entity-row__figure--size-normal": this.figureSize === "normal",
       "entity-row__figure--shape-round": this.figureShape === "circle",
       "entity-row__figure--shape-square": this.figureShape === "square",
@@ -320,11 +322,14 @@ class EntitiesListRow extends PureComponent {
           <li className="entity-row entity-list__entity">
             {this.blockLink(
               <div className={this.rowClassNames}>
-                {this.figure && (
-                  <div className={this.figureClassNames}>
-                    {this.inlineLink(this.figure)}
-                  </div>
-                )}
+                {this.figure &&
+                  (this.props.figureHasWrapper ? (
+                    this.inlineLink(this.figure)
+                  ) : (
+                    <div className={this.figureClassNames}>
+                      {this.inlineLink(this.figure)}
+                    </div>
+                  ))}
                 <div className={this.textClassNames}>
                   {this.title && (
                     <h3 className={this.titleClassNames}>

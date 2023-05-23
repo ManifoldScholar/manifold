@@ -9,6 +9,7 @@ import Sections from "./Sections";
 import Section from "./section";
 import TableOfContents from "./TableOfContents";
 import TOCEntry from "./toc-entry";
+import Assets from "./assets/List";
 
 export default {
   Properties,
@@ -21,5 +22,6 @@ export default {
   Sections,
   Section,
   TableOfContents,
-  TOCEntry
+  TOCEntry,
+  Assets
 };

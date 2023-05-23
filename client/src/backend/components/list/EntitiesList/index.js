@@ -28,6 +28,7 @@ import JournalVolumeRow from "./Entity/JournalVolumeRow";
 import JournalIssueRow from "./Entity/JournalIssueRow";
 import PendingEntitlementRow from "./Entity/PendingEntitlementRow";
 import EntitlementImportRow from "./Entity/EntitlementImportRow";
+import AssetRow from "./Entity/AssetRow";
 
 export default List;
 export {
@@ -59,5 +60,6 @@ export {
   JournalVolumeRow,
   JournalIssueRow,
   PendingEntitlementRow,
-  EntitlementImportRow
+  EntitlementImportRow,
+  AssetRow
 };

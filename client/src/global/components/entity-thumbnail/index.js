@@ -10,6 +10,7 @@ import Feature from "./Feature";
 import TwitterQuery from "./TwitterQuery";
 import ReadingGroup from "./ReadingGroup";
 import JournalVolume from "./JournalVolume";
+import Asset from "./Asset";
 
 export default {
   Resource,
@@ -23,5 +24,6 @@ export default {
   Feature,
   TwitterQuery,
   ReadingGroup,
-  JournalVolume
+  JournalVolume,
+  Asset
 };
