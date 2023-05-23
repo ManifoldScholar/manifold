@@ -323,7 +323,25 @@ const routes = {
               component: "TextAssets",
               path: "/backend/projects/text/:id/assets",
               helper: t => `/backend/projects/text/${t}/assets`,
-              routes: []
+              routes: [
+                {
+                  name: "backendTextAssetNew",
+                  exact: true,
+                  component: "TextAssetAddEdit",
+                  path: "/backend/projects/text/:id/assets/new",
+                  helper: t => `/backend/projects/text/${t}/assets/new`,
+                  modal: true
+                },
+                {
+                  name: "backendTextAssetEdit",
+                  exact: true,
+                  component: "TextAssetAddEdit",
+                  path: "/backend/projects/text/:id/assets/:assetId/edit",
+                  helper: (t, a) =>
+                    `/backend/projects/text/${t}/assets/${a}/edit`,
+                  modal: true
+                }
+              ]
             }
           ]
         },

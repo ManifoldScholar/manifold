@@ -30,7 +30,8 @@ export default class FormUploadPreview extends PureComponent {
         startsWith(ext, ".png") ||
         startsWith(ext, ".gif") ||
         startsWith(ext, ".jpg") ||
-        startsWith(ext, ".jpeg")
+        startsWith(ext, ".jpeg") ||
+        startsWith(ext, ".svg")
       );
     }
     return false;

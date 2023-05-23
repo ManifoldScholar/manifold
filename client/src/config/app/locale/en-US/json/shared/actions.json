@@ -18,6 +18,7 @@
     "confirm": "Confirm",
     "confirm_delete": "$t(actions.confirm) $t(actions.delete)",
     "continue": "Continue",
+    "copy": "Copy",
     "create": "Create",
     "create_collection": "$t(actions.create) a $t(glossary.collection_one)",
     "create_journal": "$t(actions.create) a $t(glossary.journal_one)",
