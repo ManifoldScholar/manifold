@@ -23,6 +23,12 @@ module API
             )
           end
 
+          def show
+            @ingestion_source = load_and_authorize_ingestion_source
+
+            render_single_resource @ingestion_source
+          end
+
           private
 
           def set_text
