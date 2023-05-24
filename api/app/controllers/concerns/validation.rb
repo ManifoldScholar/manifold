@@ -310,6 +310,15 @@ module Validation
   end
   # rubocop:enable Metrics/MethodLength
 
+  def ingestion_source_params
+    params.require(:data)
+
+    attributes = [:display_name, attachment(:attachment), :kind, :source_identifier]
+    param_config = structure_params(attributes: attributes)
+
+    params.permit(param_config)
+  end
+
   def ingestion_source_filter_params
     params.permit(filter: [:order, :keyword, :kind])[:filter]
   end
