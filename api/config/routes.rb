@@ -93,6 +93,7 @@ Rails.application.routes.draw do
       resource :settings, except: [:destroy, :create]
       resources :journal_issues, except: [:create]
       resources :journal_volumes, except: [:create, :index]
+      resources :ingestion_sources, except: [:create, :index]
 
       resources :texts do
         put :toggle_export_epub_v3, on: :member, path: "export_epub_v3"
@@ -104,7 +105,7 @@ Rails.application.routes.draw do
             resources :text_sections, only: [:index, :create]
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
             resources :ingestions, only: [:create], controller: "/api/v1/texts/relationships/text_section_ingestions"
-            resources :ingestion_sources, only: [:index, :show, :create, :update]
+            resources :ingestion_sources, only: [:index, :create]
           end
         end
       end

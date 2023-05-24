@@ -12,7 +12,7 @@ export default function AddEditAssetContainer({ textId, refresh }) {
   const { assetId } = useParams();
 
   const { data: asset } = useFetch({
-    request: [ingestionSourcesAPI.show, textId, assetId],
+    request: [ingestionSourcesAPI.show, assetId],
     condition: !!assetId
   });
 

@@ -57,10 +57,6 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
     return ingestionSourcesAPI.create(textId, data);
   };
 
-  const updateAsset = (_, data) => {
-    return ingestionSourcesAPI.update(textId, assetId, data);
-  };
-
   const { displayName, sourceIdentifier } = asset?.attributes ?? {};
 
   const nameDefault = displayName ?? sourceIdentifier;
@@ -70,7 +66,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
       model={asset}
       name={assetId ? "be-asset-update" : "be-asset-create"}
       create={createAsset}
-      update={updateAsset}
+      update={ingestionSourcesAPI.update}
       formatData={formatData}
       onSuccess={onSuccess}
       className="form-secondary"

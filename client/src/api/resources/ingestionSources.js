@@ -7,9 +7,9 @@ export default {
     };
   },
 
-  show(textId, id) {
+  show(id) {
     return {
-      endpoint: `/api/v1/texts/${textId}/relationships/ingestion_sources/${id}`,
+      endpoint: `/api/v1/ingestion_sources/${id}`,
       method: "GET",
       options: {}
     };
@@ -25,9 +25,9 @@ export default {
     };
   },
 
-  update(textId, id, asset) {
+  update(id, asset) {
     return {
-      endpoint: `/api/v1/texts/${textId}/relationships/ingestion_sources/${id}`,
+      endpoint: `/api/v1/ingestion_sources/${id}`,
       method: "PUT",
       options: {
         body: JSON.stringify({ type: "ingestion_sources", data: asset })
@@ -35,9 +35,9 @@ export default {
     };
   },
 
-  destroy(textId, id) {
+  destroy(id) {
     return {
-      endpoint: `/api/v1/texts/${textId}/relationships/ingestion_sources/${id}`,
+      endpoint: `/api/v1/ingestion_sources/${id}`,
       method: "DELETE",
       options: {}
     };
