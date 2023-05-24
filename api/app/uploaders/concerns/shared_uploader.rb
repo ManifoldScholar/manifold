@@ -10,8 +10,10 @@ module SharedUploader
     host: MANIFOLD_CONFIG.api_url&.sub(%r{/\z}, "") || ""
   }.freeze
 
-  BETTER_MARCEL = ->(io, *_) do
-    Marcel::MimeType.for(io, name: io.path, extension: File.extname(io))
+  BETTER_MARCEL = ->(io, analyzers) do
+    return Marcel::MimeType.for(io, name: io.path, extension: File.extname(io)) if io.respond_to? :path
+
+    analyzers[:marcel].call(io)
   end
 
   included do

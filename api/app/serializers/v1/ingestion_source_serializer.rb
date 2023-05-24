@@ -8,11 +8,5 @@ module V1
     typed_attribute :display_name, Types::String.optional
     typed_attribute :display_name_formatted, Types::String.optional.meta(read_only: true)
     typed_attribute :attachment_data, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :file_name, Types::String do | object |
-      object.attachment_data["metadata"]["filename"]
-    end
-    typed_attribute :mime_type, Types::String do | object |
-      object.attachment_data["metadata"]["mime_type"]
-    end
   end
 end

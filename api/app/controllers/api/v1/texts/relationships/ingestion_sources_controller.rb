@@ -29,6 +29,16 @@ module API
             render_single_resource @ingestion_source
           end
 
+          def create
+            @ingestion_source = ::Updaters::IngestionSource.new(ingestion_source_params).update(
+              @text.ingestion_sources.new,
+              creator: @current_user
+            )
+            @ingestion_source.save
+
+            render_single_resource @ingestion_source
+          end
+
           private
 
           def set_text
