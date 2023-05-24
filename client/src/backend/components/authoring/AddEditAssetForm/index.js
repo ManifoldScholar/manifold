@@ -8,7 +8,7 @@ import { ingestionSourcesAPI } from "api";
 import { useHistory } from "react-router-dom";
 import * as Styled from "./styles";
 
-export default function AddEditAssetForm({ assetId, textId, model, refresh }) {
+export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -21,18 +21,19 @@ export default function AddEditAssetForm({ assetId, textId, model, refresh }) {
         ...(displayName && { displayName }),
         ...(attachment && { attachment })
       };
-      return displayName || attachment
-        ? {
+
+      return asset
+        ? { attributes }
+        : {
             attributes: {
               ...attributes,
               sourceIdentifier:
-                model?.sourceIdentifier ?? data.attachment.filename,
-              kind: model?.kind ?? "publication_resource"
+                asset?.sourceIdentifier ?? data.attachment?.filename,
+              kind: asset?.kind ?? "publication_resource"
             }
-          }
-        : {};
+          };
     },
-    [model]
+    [asset]
   );
 
   const onSuccess = useCallback(() => {
@@ -56,16 +57,20 @@ export default function AddEditAssetForm({ assetId, textId, model, refresh }) {
     return ingestionSourcesAPI.create(textId, data);
   };
 
-  const { displayName, sourceIdentifier } = model?.attributes ?? {};
+  const updateAsset = (_, data) => {
+    return ingestionSourcesAPI.update(textId, assetId, data);
+  };
+
+  const { displayName, sourceIdentifier } = asset?.attributes ?? {};
 
   const nameDefault = displayName ?? sourceIdentifier;
 
-  return (assetId && model) || (!assetId && !model) ? (
+  return (assetId && asset) || (!assetId && !asset) ? (
     <FormContainer.Form
-      model={model}
+      model={asset}
       name={assetId ? "be-asset-update" : "be-asset-create"}
       create={createAsset}
-      update={ingestionSourcesAPI.update}
+      update={updateAsset}
       formatData={formatData}
       onSuccess={onSuccess}
       className="form-secondary"
@@ -109,16 +114,17 @@ export default function AddEditAssetForm({ assetId, textId, model, refresh }) {
         <Form.Upload
           fileNameFrom="attributes[attachmentData][metadata][filename]"
           value={
-            model
-              ? `http://manifold.lvh/system/${model?.attributes?.attachmentData.id}`
+            asset
+              ? `http://manifold.lvh/system/${asset?.attributes?.attachmentData.id}`
               : undefined
           }
+          required={!asset}
         />
       </Form.FieldGroup>
       <Form.DrawerButtons
         showCancel
         cancelUrl={lh.link("backendTextAssets", textId)}
-        submitLabel={model ? "texts.toc.save_button_label" : "actions.save"}
+        submitLabel={asset ? "texts.toc.save_button_label" : "actions.save"}
       />
     </FormContainer.Form>
   ) : null;

@@ -24,7 +24,7 @@ export default function AddEditAssetContainer({ textId, refresh }) {
     <section>
       <Navigation.DrawerHeader title={title} />
       <AddEditAssetForm
-        model={asset}
+        asset={asset}
         assetId={assetId}
         textId={textId}
         refresh={refresh}
