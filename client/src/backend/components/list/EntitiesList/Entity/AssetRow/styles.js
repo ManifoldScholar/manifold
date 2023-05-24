@@ -4,6 +4,7 @@ import { fluidScale, utilityPrimary, respond } from "theme/styles/mixins";
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
   padding-inline-start: ${fluidScale("25px", "12px")};
   flex-wrap: wrap;
@@ -11,6 +12,8 @@ export const ButtonGroup = styled.div`
   margin-inline-start: auto;
 
   ${respond(`flex-wrap: nowrap; max-width: none;`, 50)}
+  ${respond(`flex-wrap: wrap; max-width: 100px;`, 65)}
+  ${respond(`flex-wrap: nowrap; max-width: none;`, 80)}
 `;
 
 export const CopyButton = styled.button`
@@ -64,9 +67,13 @@ export const IconWrapper = styled.div`
 
 export const TruncateURL = styled.span`
   display: inline-block;
-  width: ${fluidScale("620px", "150px")};
+  max-width: 175px;
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
   overflow: hidden;
+
+  ${respond(`max-width: 250px;`, 40)}
+  ${respond(`max-width: ${fluidScale("400px", "250px")};`, 65)}
+  ${respond(`max-width: 620px;`, 120)}
 `;
