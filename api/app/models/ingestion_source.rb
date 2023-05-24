@@ -69,6 +69,7 @@ class IngestionSource < ApplicationRecord
 
   # Validations
   validates :source_identifier, presence: true
+  validates :attachment, presence: true
 
   class << self
     # @param [String] attachment_id
