@@ -17,7 +17,7 @@ module API
           @ingestion_source
         )
 
-        render_single_resource @ingestion_source
+        render_single_resource @ingestion_source, context: :from_api
       end
 
       def destroy
