@@ -34,7 +34,7 @@ export default function Editor({
   const aceRef = useRef();
   const controlsRef = useRef();
 
-  const [htmlMode, toggleHtmlMode] = useState(true);
+  const [htmlMode, toggleHtmlMode] = useState(false);
   const [showCss, toggleCss] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
 
