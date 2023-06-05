@@ -40,6 +40,7 @@ export const EditableWrapper = styled.div`
   border-bottom-left-radius: var(--box-border-radius);
   border-bottom-right-radius: var(--box-border-radius);
   background-color: var(--background-color);
+  overflow-x: hidden;
 
   .ace_editor {
     border-bottom-left-radius: 6px;
