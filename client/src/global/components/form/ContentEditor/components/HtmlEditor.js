@@ -19,6 +19,7 @@ export const HtmlEditor = Loadable({
           editor.once("change", () => {
             editor.session.getUndoManager().reset();
           });
+          editor.commands.removeCommand("find");
           editor.renderer.setPadding(24, 24);
           editor.renderer.setScrollMargin(24, 24);
           const input = editor.textInput.getElement();
