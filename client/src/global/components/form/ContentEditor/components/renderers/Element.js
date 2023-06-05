@@ -22,9 +22,15 @@ export default function SlateElement({
   }
   if (element.type === "hr") {
     return (
-      <span contentEditable={false} {...attributes}>
+      <span
+        style={{ display: "inline-flex", width: "100%" }}
+        contentEditable={false}
+        {...attributes}
+      >
         {children}
-        <hr />
+        <span style={{ flexGrow: 1, margin: 0, width: "100%" }}>
+          <hr className={className} data-epub-type={epubType} />
+        </span>
       </span>
     );
   }
