@@ -55,14 +55,20 @@ export const captureHotKeys = (e, editor) => {
         return toggleBlock(editor, "h4");
       case 53:
         e.preventDefault();
-        return toggleBlock(editor, "ol");
+        return toggleBlock(editor, "h5");
       case 54:
         e.preventDefault();
-        return toggleBlock(editor, "ul");
+        return toggleBlock(editor, "h6");
       case 55:
         e.preventDefault();
-        return toggleBlock(editor, "blockquote");
+        return toggleBlock(editor, "ol");
       case 56:
+        e.preventDefault();
+        return toggleBlock(editor, "ul");
+      case 57:
+        e.preventDefault();
+        return toggleBlock(editor, "blockquote");
+      case 69:
         e.preventDefault();
         return toggleBlock(editor, "pre");
     }
@@ -92,7 +98,7 @@ export const captureHotKeys = (e, editor) => {
     case "g":
       e.preventDefault();
       return handleImageHotkey(editor);
-    case "f":
+    case "m":
       e.preventDefault();
       return handleIframeHotkey(editor);
   }
