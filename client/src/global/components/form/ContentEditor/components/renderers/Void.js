@@ -49,8 +49,11 @@ export default function VoidRenderer({
         $selected={selected && focused}
       >
         <Styled.VoidLabel>
-          <Utility.IconComposer icon="code24" />
-          Preview only. Switch to HTML mode to edit this block:
+          <Utility.IconComposer
+            svgProps={{ style: { flexShrink: 0 } }}
+            icon="code24"
+          />
+          <span>Preview only. Switch to HTML mode to edit this block:</span>
         </Styled.VoidLabel>
         <div ref={ref} />
       </Styled.VoidWrapper>
