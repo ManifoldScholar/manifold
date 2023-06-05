@@ -51,6 +51,8 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo }) {
             { format: "h2", label: "Heading 2" },
             { format: "h3", label: "Heading 3" },
             { format: "h4", label: "Heading 4" },
+            { format: "h5", label: "Heading 5" },
+            { format: "h6", label: "Heading 6" },
             { format: "", label: "" }
           ]}
           {...menu}

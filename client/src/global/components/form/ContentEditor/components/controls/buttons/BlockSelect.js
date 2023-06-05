@@ -11,15 +11,19 @@ const getActiveBlock = editor => {
   const h2 = isBlockActive(editor, "h2");
   const h3 = isBlockActive(editor, "h3");
   const h4 = isBlockActive(editor, "h4");
+  const h5 = isBlockActive(editor, "h5");
+  const h6 = isBlockActive(editor, "h6");
   const p = isBlockActive(editor, "p");
 
-  const activeCount = [p, h1, h2, h3, h4].filter(Boolean).length;
+  const activeCount = [p, h1, h2, h3, h4, h5, h6].filter(Boolean).length;
 
   if (activeCount > 1) return "";
   if (h1) return "h1";
   if (h2) return "h2";
   if (h3) return "h3";
   if (h4) return "h4";
+  if (h5) return "h5";
+  if (h6) return "h6";
   return "p";
 };
 
