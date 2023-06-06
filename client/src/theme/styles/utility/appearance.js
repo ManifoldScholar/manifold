@@ -108,4 +108,8 @@ export default `
       outline: 0;
     }
   }
+
+  .inline-block {
+    display: inline-block;
+  }
 `;

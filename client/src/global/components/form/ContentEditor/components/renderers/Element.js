@@ -79,6 +79,17 @@ export default function SlateElement({
       </pre>
     );
   }
+  if (element.type === "div" && element.inline) {
+    return (
+      <div
+        className={`inline-block ${className}`}
+        data-epub-type={epubType}
+        {...attributes}
+      >
+        {children}
+      </div>
+    );
+  }
   if (
     rteElements.includes(element.type) ||
     renderedElements.includes(element.type) ||
