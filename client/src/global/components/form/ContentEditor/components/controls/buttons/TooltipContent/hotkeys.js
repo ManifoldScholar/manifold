@@ -4,6 +4,8 @@ export const labels = {
   h2: "Heading 2",
   h3: "Heading 3",
   h4: "Heading 4",
+  h5: "Heading 5",
+  h6: "Heading 6",
   ol: "Numbered List",
   ul: "Bulleted List",
   blockquote: "Block Quote",
@@ -51,19 +53,29 @@ export const hotkeys = {
     { label: "Windows", keys: ["Ctrl", "Shift", "4"] },
     { label: "Markdown", keys: ["####", "Space"] }
   ],
-  ol: [
+  h5: [
     { label: "Mac", keys: ["Cmd", "Option", "5"] },
     { label: "Windows", keys: ["Ctrl", "Shift", "5"] },
+    { label: "Markdown", keys: ["#####", "Space"] }
+  ],
+  h6: [
+    { label: "Mac", keys: ["Cmd", "Option", "6"] },
+    { label: "Windows", keys: ["Ctrl", "Shift", "6"] },
+    { label: "Markdown", keys: ["######", "Space"] }
+  ],
+  ol: [
+    { label: "Mac", keys: ["Cmd", "Option", "7"] },
+    { label: "Windows", keys: ["Ctrl", "Shift", "7"] },
     { label: "Markdown", keys: ["1.", "Space"] }
   ],
   ul: [
-    { label: "Mac", keys: ["Cmd", "Option", "6"] },
-    { label: "Windows", keys: ["Ctrl", "Shift", "6"] },
+    { label: "Mac", keys: ["Cmd", "Option", "8"] },
+    { label: "Windows", keys: ["Ctrl", "Shift", "8"] },
     { label: "Markdown", keys: ["-", "Space"] }
   ],
   blockquote: [
-    { label: "Mac", keys: ["Cmd", "Option", "7"] },
-    { label: "Windows", keys: ["Ctrl", "Shift", "7"] },
+    { label: "Mac", keys: ["Cmd", "Option", "9"] },
+    { label: "Windows", keys: ["Ctrl", "Shift", "9"] },
     { label: "Markdown", keys: [">", "Space"] }
   ],
   link: [
@@ -71,8 +83,8 @@ export const hotkeys = {
     { label: "Windows", keys: ["Ctrl", "K"] }
   ],
   pre: [
-    { label: "Mac", keys: ["Cmd", "Option", "8"] },
-    { label: "Windows", keys: ["Ctrl", "Shift", "8"] },
+    { label: "Mac", keys: ["Cmd", "Option", "E"] },
+    { label: "Windows", keys: ["Ctrl", "Shift", "E"] },
     { label: "Markdown", keys: ["```", "Space"] }
   ],
   italic: [
@@ -112,7 +124,7 @@ export const hotkeys = {
     { label: "Windows", keys: ["Ctrl", "G"] }
   ],
   iframe: [
-    { label: "Mac", keys: ["Cmd", "F"] },
-    { label: "Windows", keys: ["Ctrl", "F"] }
+    { label: "Mac", keys: ["Cmd", "M"] },
+    { label: "Windows", keys: ["Ctrl", "M"] }
   ]
 };

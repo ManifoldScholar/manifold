@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import * as Styled from "./styles";
 
 export default function TooltipContent({ label, description, hotkeys = [] }) {
@@ -13,12 +13,13 @@ export default function TooltipContent({ label, description, hotkeys = [] }) {
           <Styled.HotKeyLabel>{hk.label}</Styled.HotKeyLabel>
           <Styled.Keys>
             {hk.keys.map((k, i) => (
-              <>
-                <Styled.Key key={k}>{k}</Styled.Key>
+              /* eslint-disable react/no-array-index-key */
+              <Fragment key={`${k}_${i}`}>
+                <Styled.Key>{k}</Styled.Key>
                 {hk.inline && i === 0 && (
                   <Styled.TextPlaceholder>[text]</Styled.TextPlaceholder>
                 )}
-              </>
+              </Fragment>
             ))}
           </Styled.Keys>
         </Styled.HotKey>

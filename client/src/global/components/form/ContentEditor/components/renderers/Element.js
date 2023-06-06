@@ -6,6 +6,7 @@ import {
   renderedElements,
   markElements
 } from "../../utils/elements";
+import classNames from "classnames";
 
 export default function SlateElement({
   attributes,
@@ -82,7 +83,7 @@ export default function SlateElement({
   if (element.type === "div" && element.inline) {
     return (
       <div
-        className={`inline-block ${className}`}
+        className={classNames("inline-block", className)}
         data-epub-type={epubType}
         {...attributes}
       >
