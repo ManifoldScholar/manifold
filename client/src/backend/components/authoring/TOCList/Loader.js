@@ -1,6 +1,7 @@
 import React from "react";
 import Loadable from "@docusaurus/react-loadable";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
+import * as Styled from "./styles";
 
 const Loading = ({ timedOut, retry }) => {
   const handleTimeOut = useErrorHandler();
@@ -17,12 +18,13 @@ const TOCList = Loadable({
   loading: Loading
 });
 
-// TODO: Update this to allow the user to retry/refresh on load + api errors.
 const Fallback = ({ error }) => {
-  if (error.timeout) {
-    return <div>Loading timed out...</div>;
-  }
-  return <div>error</div>;
+  return (
+    <Styled.Error>
+      There was a problem loading your TOC: {error.message}. Refresh the page to
+      try again.
+    </Styled.Error>
+  );
 };
 
 export default function Loader(props) {
