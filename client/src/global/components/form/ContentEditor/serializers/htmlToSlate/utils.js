@@ -1,5 +1,5 @@
 import { jsx } from "slate-hyperscript";
-import { getChildren } from "domutils";
+import { getChildren, textContent } from "domutils";
 import { inlineNodes, markElements } from "../../utils/elements";
 import { ElementType } from "htmlparser2";
 
@@ -55,6 +55,24 @@ const spaceInlineChildren = children => {
     : adjustedChildren;
 };
 
+// Make an educated guess about whether text that preceeds or follows an image should wrap around it. Display inline-block is applied via a utility class, so this should be overridden by any styles in the stylesheet if this guess is wrong.
+const isInlineImageAdjacent = (prev, next) => {
+  if (prev?.type === "img" || next?.type === "img") return true;
+  if (prev?.children?.length === 1 && prev?.children[0].type === "img")
+    return true;
+  if (next?.children?.length === 1 && next?.children[0].type === "img")
+    return true;
+
+  return false;
+};
+
+const isInlineImage = (prev, next) => {
+  if (prev && (isInline(prev) || prev.text)) return true;
+  if (next && (isInline(next) || next.text)) return true;
+
+  return false;
+};
+
 const wrapBlockChildren = (children, isList) => {
   if (isList) {
     const listChild = children.find(c => c.type === "ul" || c.type === "ol");
@@ -66,9 +84,15 @@ const wrapBlockChildren = (children, isList) => {
       listChild
     ];
   }
-  return children.map(c => {
-    if (isInline(c) || c.text)
-      return jsx("element", { type: "div", slateOnly: true }, [c]);
+  return children.map((c, i) => {
+    if (isInline(c) || c.text) {
+      const inline = isInlineImageAdjacent(children[i - 1], children[i + 1]);
+      return jsx("element", { type: "div", slateOnly: true, inline }, [c]);
+    }
+    if (c.type === "img") {
+      if (isInlineImage(children[i - 1], children[i + 1]))
+        return { ...c, htmlAttrs: { ...c.htmlAttrs, inline: true } };
+    }
     return c;
   });
 };

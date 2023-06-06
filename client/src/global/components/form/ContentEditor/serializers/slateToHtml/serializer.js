@@ -63,7 +63,7 @@ const serializeNode = node => {
   }
 
   const children = serializeChildren(node.children);
-  const attrs = { ...node.htmlAttrs };
+  const { inline, ...attrs } = node.htmlAttrs ?? {};
 
   if (node.type === "p" && children.length === 0 && isEmpty(attrs))
     return new Element("br");

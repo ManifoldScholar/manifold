@@ -32,9 +32,12 @@ export default function ImageRenderer({ element, children, attributes, as }) {
   const epubType = element.htmlAttrs?.["data-epub-type"] || undefined;
 
   return (
-    <div {...attributes}>
+    <div
+      className={element.htmlAttrs?.inline ? "inline-block" : undefined}
+      {...attributes}
+    >
       {children}
-      <div contentEditable={false}>
+      <span contentEditable={false}>
         <Styled.ImageWrapper
           className={wrapperClassName}
           data-epub-type={epubType}
@@ -46,12 +49,14 @@ export default function ImageRenderer({ element, children, attributes, as }) {
             title={as ? element.htmlAttrs.title : undefined}
             $selected={selected && focused}
             className={className}
+            width={element.htmlAttrs.width}
+            height={element.htmlAttrs.height}
           />
           <Styled.RemoveButton onClick={onRemove}>
             <Utility.IconComposer icon="delete24" size={20} />
           </Styled.RemoveButton>
         </Styled.ImageWrapper>
-      </div>
+      </span>
     </div>
   );
 }
