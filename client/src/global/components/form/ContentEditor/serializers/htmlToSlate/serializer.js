@@ -17,7 +17,8 @@ import {
   replaceFormatChars,
   getNextNonFormat,
   getPrevNonFormat,
-  removeFormatOnlyChildren
+  removeFormatOnlyChildren,
+  isEmptyParagraph
 } from "./utils";
 
 const deserializeVoid = (el, nodeName, children) => {
@@ -46,7 +47,11 @@ const deserializeBody = children => {
 const deserializeTag = (el, nodeName, children) => {
   const htmlAttrs = el.attribs ?? {};
   const attrs = { type: nodeName, htmlAttrs };
-  return jsx("element", attrs, children);
+  const adjustedChildren =
+    (nodeName === "p" || nodeName === "span") && isEmptyParagraph(el)
+      ? [{ text: "" }]
+      : children;
+  return jsx("element", attrs, adjustedChildren);
 };
 const deserializeText = (el, attrs) => {
   const rawText = textContent(el);
