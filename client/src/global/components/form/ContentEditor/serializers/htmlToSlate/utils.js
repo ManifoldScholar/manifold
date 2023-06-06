@@ -143,7 +143,7 @@ export const assignTextMarkAttributes = (el, attrs) => {
 };
 
 export const isOnlyFormat = str => {
-  return /^[\t\n\r]*$/.test(str);
+  return /^[\n\t\r]+\s*$/.test(str);
 };
 
 export const replaceFormatChars = str => {
@@ -184,4 +184,11 @@ export const removeFormatOnlyChildren = el => {
     return c;
   });
   return filteredChildren.filter(Boolean);
+};
+
+export const isEmptyParagraph = el => {
+  const hasAllTextChildren = el.children.every(
+    c => c.type === "p" || c.type === "span" || c.text
+  );
+  return hasAllTextChildren && !textContent(el);
 };
