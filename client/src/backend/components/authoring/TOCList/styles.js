@@ -17,7 +17,7 @@ export const ScrollContainer = styled.div`
 
 export const Item = styled.div`
   & + & {
-    padding-block-start: 16px;
+    margin-block-start: 16px;
   }
 `;
 
