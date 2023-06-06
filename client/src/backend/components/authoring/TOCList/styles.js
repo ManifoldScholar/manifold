@@ -10,9 +10,28 @@ import {
   formInputMessage
 } from "theme/styles/mixins";
 
+export const Wrapper = styled.div`
+  overflow: visible;
+  position: relative;
+  height: ${({ $count }) => `${$count * 68}px`};
+`;
+
 export const ScrollContainer = styled.div`
   overflow: auto;
   height: ${({ $count }) => `${$count * 68}px`};
+`;
+
+export const Dropzone = styled.div`
+  --Padding-inline: 10px;
+  ${respond(`--Padding-inline: 20px;`, 110)};
+
+  position: absolute;
+  top: -20px;
+  left: calc(-1 * var(--Padding-inline));
+  background-color: var(--box-weak-bg-color);
+  border-radius: var(--box-border-radius);
+  width: calc(100% + (2 * var(--Padding-inline)));
+  height: ${({ $count }) => `${$count * 68 + 20}px`};
 `;
 
 export const Item = styled.div`
@@ -54,7 +73,6 @@ export const BG = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -10;
   background-color: var(--box-bg-color);
   border-radius: var(--box-border-radius);
 
@@ -71,10 +89,6 @@ export const ButtonGroup = styled.div`
   &:hover ~ ${TitleWrapper} {
     color: var(--highlight-color);
   }
-
-  &:hover ~ ${BG} {
-    background-color: var(--drawer-bg-color);
-  }
 `;
 
 export const Inner = styled.div`
@@ -87,7 +101,7 @@ export const Inner = styled.div`
   width: ${({ $depth }) =>
     `calc(100% - ${fluidScale(`${$depth * 24}px`, `${$depth * 12}px`)})`};
   cursor: default;
-  background-color: transparent;
+  background-color: var(--box-bg-color);
   position: relative;
   border: 1px solid var(--box-bg-color);
   color: var(--text-neutral-extra-light);
@@ -95,6 +109,13 @@ export const Inner = styled.div`
     fluidScale(`${$depth * 24}px`, `${$depth * 12}px`)};
 
   ${({ $isDragging }) => $isDragging && dragging}
+
+  ${({ $isDragging }) =>
+    $isDragging && `background-color: var(--drawer-bg-color)`}
+
+    &:has(${ButtonGroup}:hover) {
+      background-color: var(--drawer-bg-color);
+    }
 
   ${({ $isTarget }) => $isTarget && `border-color: var(--highlight-color);`}
 `;

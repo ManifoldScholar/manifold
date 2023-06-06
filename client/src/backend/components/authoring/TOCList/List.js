@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Tree, { mutateTree, moveItemOnTree } from "@atlaskit/tree";
@@ -18,6 +18,8 @@ import * as Styled from "./styles";
 
 export default function TOCList({ tree, setTree, textId, error, setError }) {
   const { t } = useTranslation();
+
+  const [dragging, setDragging] = useState(false);
 
   const updateText = useApiCallback(textsAPI.update);
 
@@ -40,6 +42,7 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
   };
 
   const onDragEnd = async (source, destination) => {
+    setDragging(false);
     let finalDestination;
     if (destination.parentId === "root" && isNaN(destination.index)) {
       const rootParentIndex = getRootParentPosition(
@@ -96,24 +99,38 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
       : error;
   /* eslint-disable no-nested-ternary */
 
+  const [dropzoneCount, setDropzoneCount] = useState(
+    Object.keys(tree.items).length - 1
+  );
+
+  const onDragStart = id => {
+    setDragging(true);
+    const collapsedCount = tree.items[id].children.length;
+    setDropzoneCount(Object.keys(tree.items).length - 1 - collapsedCount);
+  };
+
   return tree ? (
-    <Styled.ScrollContainer
+    <Styled.Wrapper
       className="full-width"
       $count={Object.keys(tree.items).length - 1}
     >
       {error && <Styled.Error>{errorMessage}</Styled.Error>}
-      <Tree
-        tree={tree}
-        renderItem={renderItem}
-        onDragEnd={onDragEnd}
-        isDragEnabled
-        isNestingEnabled
-        offsetPerLevel={0}
-      />
-      <span className="screen-reader-text" id="toc-drag-handle-instructions">
-        {t("texts.toc.drag_handle_instructions")}
-      </span>
-    </Styled.ScrollContainer>
+      {dragging && <Styled.Dropzone $count={dropzoneCount} />}
+      <Styled.ScrollContainer $count={Object.keys(tree.items).length - 1}>
+        <Tree
+          tree={tree}
+          renderItem={renderItem}
+          onDragStart={onDragStart}
+          onDragEnd={onDragEnd}
+          isDragEnabled
+          isNestingEnabled
+          offsetPerLevel={0}
+        />
+        <span className="screen-reader-text" id="toc-drag-handle-instructions">
+          {t("texts.toc.drag_handle_instructions")}
+        </span>
+      </Styled.ScrollContainer>
+    </Styled.Wrapper>
   ) : null;
 }
 

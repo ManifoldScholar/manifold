@@ -49,7 +49,6 @@ export default function TOCEntry({
           {!!depth && <Styled.ChildLink icon="tocLink16" />}
           <Styled.Title>{entry.data ? entry.data.title : ""}</Styled.Title>
         </Styled.TitleWrapper>
-        <Styled.BG $isDragging={isDragging} />
       </Styled.Inner>
     </Styled.Item>
   );
