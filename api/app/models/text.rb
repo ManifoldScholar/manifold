@@ -467,7 +467,6 @@ class Text < ApplicationRecord
     )
   end
 
-  # rubocop:disable Metrics/AbcSize
   def global_stylesheet_attributes
     {}.tap do |attrs|
       attrs[:name] = "Global Styles"
@@ -482,7 +481,6 @@ class Text < ApplicationRecord
       attrs[:skip_formatting] = true
     end
   end
-  # rubocop:enable Metrics/AbcSize
 
   def inject_global_stylesheet
     return if global_stylesheet.present?
