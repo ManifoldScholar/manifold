@@ -8,6 +8,10 @@ import {
   useSelected
 } from "slate-react";
 import { Transforms, Editor } from "slate";
+import {
+  handleImageHotkey,
+  handleIframeHotkey
+} from "../../transforms/handlers";
 import * as Styled from "./styles";
 
 export default function ImageRenderer({ element, children, attributes, as }) {
@@ -52,9 +56,16 @@ export default function ImageRenderer({ element, children, attributes, as }) {
             width={element.htmlAttrs.width}
             height={element.htmlAttrs.height}
           />
-          <Styled.RemoveButton onClick={onRemove}>
-            <Utility.IconComposer icon="delete24" size={20} />
-          </Styled.RemoveButton>
+          <Styled.ButtonGroup $visible={selected}>
+            <Styled.InteriorButton
+              onClick={as === "iframe" ? handleIframeHotkey : handleImageHotkey}
+            >
+              <Utility.IconComposer icon="annotate24" size={24} />
+            </Styled.InteriorButton>
+            <Styled.InteriorButton $color="red" onClick={onRemove}>
+              <Utility.IconComposer icon="delete24" size={24} />
+            </Styled.InteriorButton>
+          </Styled.ButtonGroup>
         </Styled.ImageWrapper>
       </span>
     </div>
