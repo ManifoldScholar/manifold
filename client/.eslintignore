@@ -2,8 +2,8 @@ webpack/*
 **/__tests__
 dist
 src/config.js
-plugins
-!src/global/components/form/RichText/plugins
+
+src/utils/plugins
 plugins-off
 plugins.off
 tmp
