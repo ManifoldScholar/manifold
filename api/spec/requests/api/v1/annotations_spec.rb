@@ -1,15 +1,19 @@
 require "swagger_helper"
 
 RSpec.describe "Annotations", type: :request do
+  before do
+    TextSections::ExtrapolateNodes.new.call
+  end
+
   path "/annotations/{id}" do
     include_examples "an API update request", model: Annotation, authorized_user: :admin
     include_examples "an API destroy request", model: Annotation, authorized_user: :admin
   end
 
   describe "for a text section" do
-    let(:parent) { FactoryBot.create(:text_section) }
-    let(:annotation) { FactoryBot.create(:annotation, text_section: parent) }
-    let(:text_section_id) { parent.id }
+    let!(:parent) { FactoryBot.create(:text_section) }
+    let!(:annotation) { FactoryBot.create(:annotation, text_section: parent) }
+    let!(:text_section_id) { parent.id }
 
     path "/text_sections/{text_section_id}/relationships/annotations" do
       include_examples "an API index request",
@@ -34,14 +38,14 @@ RSpec.describe "Annotations", type: :request do
   end
 
   describe "for me" do
-    let(:text) { FactoryBot.create :text }
-    let(:text_section) { FactoryBot.create(:text_section, text: text) }
-    let(:annotation) do
+    let!(:text) { FactoryBot.create :text }
+    let!(:text_section) { FactoryBot.create(:text_section, text: text) }
+    let!(:annotation) do
       FactoryBot.create(:annotation, creator: admin, text_section: text_section)
     end
 
     path "/me/relationships/annotations" do
-      let(:'filter[text]') { nil }
+      let!(:'filter[text]') { nil }
 
       include_examples "an API index request",
                        parent: "current user",
@@ -61,9 +65,9 @@ RSpec.describe "Annotations", type: :request do
   end
 
   describe "for a reading group" do
-    let(:parent) { FactoryBot.create(:reading_group) }
-    let(:annotation) { FactoryBot.create(:annotation, reading_group: parent) }
-    let(:reading_group_id) { parent.id }
+    let!(:parent) { FactoryBot.create(:reading_group) }
+    let!(:annotation) { FactoryBot.create(:annotation, reading_group: parent) }
+    let!(:reading_group_id) { parent.id }
 
     path "/reading_groups/{reading_group_id}/relationships/annotations" do
       include_examples "an API index request",
