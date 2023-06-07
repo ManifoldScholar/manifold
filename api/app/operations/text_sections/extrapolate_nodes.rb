@@ -68,6 +68,7 @@ module TextSections
         node_uuid, text_digest, content,
         COALESCE(node_extra, '{}'::jsonb) AS node_extra,
         COALESCE(children_count, 0) AS children_count,
+        (tag IS NOT NULL AND tag IN ('mrow', 'mi', 'msup', 'mn', 'mo')) AS intermediate,
         CURRENT_TIMESTAMP AS extrapolated_at
       FROM nodes
     ) INSERT INTO text_section_nodes (
@@ -79,6 +80,7 @@ module TextSections
       node_uuid, text_digest, content,
       node_extra,
       children_count,
+      intermediate,
       extrapolated_at
     ) SELECT
       text_section_id, body_hash,
@@ -89,6 +91,7 @@ module TextSections
       node_uuid, text_digest, content,
       node_extra,
       children_count,
+      intermediate,
       extrapolated_at
       FROM finalized
     ON CONFLICT (node_path) DO UPDATE SET
@@ -107,6 +110,7 @@ module TextSections
       "content" = EXCLUDED."content",
       "node_extra" = EXCLUDED."node_extra",
       "children_count" = EXCLUDED."children_count",
+      "intermediate" = EXCLUDED."intermediate",
       "extrapolated_at" = EXCLUDED."extrapolated_at",
       "updated_at" =
       CASE
@@ -139,6 +143,8 @@ module TextSections
         EXCLUDED."node_extra" IS DISTINCT FROM text_section_nodes."node_extra"
         OR
         EXCLUDED."children_count" IS DISTINCT FROM text_section_nodes."children_count"
+        OR
+        EXCLUDED."intermediate" IS DISTINCT FROM text_section_nodes."intermediate"
         OR
         EXCLUDED."extrapolated_at" IS DISTINCT FROM text_section_nodes."extrapolated_at"
         THEN CURRENT_TIMESTAMP

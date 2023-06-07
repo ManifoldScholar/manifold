@@ -6,11 +6,12 @@ class TextSectionNode < ApplicationRecord
 
   scope :by_type, ->(type) { where(node_type: type) }
   scope :by_uuid, ->(uuid) { where(node_uuid: uuid) }
+  scope :terminal, -> { where(intermediate: false) }
 
   has_many :text_section_node_links, -> { in_order }, inverse_of: :parent, foreign_key: :parent_id
   has_many :ancestor_links, -> { in_reverse_order }, class_name: "TextSectionNodeLink", inverse_of: :child, foreign_key: :child_id
 
-  has_many :parents, through: :ancestor_links, source: :parent
+  has_many :parents, -> { terminal }, through: :ancestor_links, source: :parent
   has_many :children, through: :text_section_node_links, source: :child
 
   def node
