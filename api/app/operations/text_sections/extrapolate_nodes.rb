@@ -163,7 +163,7 @@ module TextSections
 
     private
 
-    def interpolate(text_section:, **)
+    def interpolate(text_section: nil, **)
       with_quoted_id_for text_section, <<~SQL
       AND text_sections.id = %s
       SQL

@@ -68,7 +68,7 @@ module V1
     end
 
     typed_attribute :annotation_node, Types::Hash do |object|
-      object.annotation_node.node
+      object.annotation_node.node || {}
     end
 
     class << self
