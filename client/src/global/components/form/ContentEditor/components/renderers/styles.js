@@ -2,27 +2,46 @@ import styled from "@emotion/styled";
 import {
   buttonUnstyled,
   defaultFocusStyle,
-  formLabelPrimary
+  formLabelPrimary,
+  respond
 } from "theme/styles/mixins";
 
-export const RemoveButton = styled.button`
+export const ButtonGroup = styled.div`
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  top: 5px;
+  right: auto;
+  left: 5px;
+  color: var(--color-accent-primary);
+
+  ${({ $visible }) => $visible && `display: flex;`}
+  ${respond(`right: -60px; left: auto; top: -5px;`, 65)}
+`;
+
+export const InteriorButton = styled.button`
   ${buttonUnstyled}
+  width: 34px;
+  height: 34px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  color: var(--color);
-  background: var(--background-color);
+  color: var(--color-neutral-text-light);
+  background: var(--color-base-neutral90);
   border-radius: 4px;
-  border: 1px solid;
+  border: 1px solid var(--color);
 
   &:hover {
-    color: var(--error-color);
+    color: ${({ $color }) =>
+      $color === "red"
+        ? `var(--color-notification-error-light)`
+        : `var(--color-accent-primary)`};
+    border-color: ${({ $color }) =>
+      $color === "red"
+        ? `var(--color-notification-error-light)`
+        : `var(--color-accent-primary)`};
   }
 `;
 
