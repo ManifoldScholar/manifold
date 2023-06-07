@@ -16,7 +16,7 @@ export const Toolbar = styled.div`
   border-top-left-radius: var(--box-border-radius);
   border-top-right-radius: var(--box-border-radius);
   color: var(--color);
-  min-height: 60px;
+  min-height: 73px;
 `;
 
 export const ToolGroup = styled.div`
