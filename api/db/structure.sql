@@ -305,7 +305,8 @@ CREATE TABLE public.text_section_nodes (
     children_count bigint DEFAULT 0 NOT NULL,
     extrapolated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    intermediate boolean DEFAULT false NOT NULL
 );
 
 
@@ -350,9 +351,9 @@ CREATE VIEW public.annotation_nodes AS
    FROM ((((public.annotations a
      LEFT JOIN public.text_section_nodes start_node ON (((start_node.text_section_id = a.text_section_id) AND (start_node.node_uuid = (a.start_node)::text))))
      LEFT JOIN public.text_section_nodes end_node ON (((end_node.text_section_id = a.text_section_id) AND (end_node.node_uuid = (a.end_node)::text))))
-     LEFT JOIN public.text_section_nodes ancestor_node ON ((ancestor_node.node_path OPERATOR(public.=) public.lca(start_node.node_path, end_node.node_path))))
+     LEFT JOIN public.text_section_nodes ancestor_node ON (((ancestor_node.node_path OPERATOR(public.@>) start_node.node_path) AND (ancestor_node.node_path OPERATOR(public.@>) end_node.node_path) AND (NOT ancestor_node.intermediate))))
      LEFT JOIN public.text_sections ts ON (((ts.id = a.text_section_id) AND (ts.body_hash = ancestor_node.body_hash))))
-  ORDER BY a.id, ancestor_node.extrapolated_at DESC NULLS LAST;
+  ORDER BY a.id, ancestor_node.depth DESC NULLS LAST, ancestor_node.extrapolated_at DESC NULLS LAST;
 
 
 --
@@ -1421,7 +1422,9 @@ CREATE TABLE public.ingestion_sources (
     attachment_content_type_deprecated character varying,
     attachment_file_size_deprecated integer,
     attachment_updated_at_deprecated timestamp without time zone,
-    attachment_data jsonb
+    attachment_data jsonb,
+    display_name text,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 
@@ -1445,7 +1448,9 @@ CREATE TABLE public.ingestions (
     source_content_type character varying,
     source_file_size integer,
     source_updated_at timestamp without time zone,
-    source_data jsonb
+    source_data jsonb,
+    text_section_id uuid,
+    target_kind text NOT NULL
 );
 
 
@@ -2412,7 +2417,8 @@ CREATE TABLE public.stylesheets (
     updated_at timestamp without time zone NOT NULL,
     "position" integer,
     creator_id uuid,
-    hashed_content character varying
+    hashed_content character varying,
+    applies_to_all_text_sections boolean DEFAULT false
 );
 
 
@@ -4542,6 +4548,13 @@ CREATE INDEX index_ingestions_on_text_id ON public.ingestions USING btree (text_
 
 
 --
+-- Name: index_ingestions_on_text_section_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ingestions_on_text_section_id ON public.ingestions USING btree (text_section_id);
+
+
+--
 -- Name: index_journal_issues_on_creator_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5477,6 +5490,13 @@ CREATE INDEX index_text_exports_on_text_id ON public.text_exports USING btree (t
 --
 
 CREATE UNIQUE INDEX index_text_exports_uniqueness ON public.text_exports USING btree (text_id, export_kind, fingerprint);
+
+
+--
+-- Name: index_text_section_nodes_actual_ancestors; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_section_nodes_actual_ancestors ON public.text_section_nodes USING gist (node_path) WHERE (NOT intermediate);
 
 
 --
@@ -7038,6 +7058,12 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230213165037'),
 ('20230213165542'),
 ('20230213201744'),
-('20230214172717');
+('20230214172717'),
+('20230313215126'),
+('20230406164035'),
+('20230410195543'),
+('20230519033907'),
+('20230607190750'),
+('20230607191531');
 
 
