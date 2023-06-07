@@ -59,7 +59,9 @@ function AnnotationWithNodes({ annotation, selection }) {
     return finalStack;
   };
 
-  const nodesToRender = siftHaystack()?.children;
+  const finalStack = siftHaystack();
+  const nodesToRender =
+    finalStack?.children ?? finalStack?.content ? [finalStack] : undefined;
 
   const activeGroup = useFromStore(
     `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`
