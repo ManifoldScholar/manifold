@@ -36,8 +36,6 @@ const withInlines = editor => {
     insertText(text);
   };
 
-  // TODO: update delete to remove blank inlines
-
   return editor;
 };
 

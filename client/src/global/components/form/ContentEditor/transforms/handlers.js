@@ -5,10 +5,7 @@ import {
   unwrapLink,
   isLinkActive
 } from "../components/controls/buttons/LinkButton";
-import { Editor as SlateEditor, Transforms, Path, Range, Node } from "slate";
-import { rteElements, inlineNodes } from "../utils/elements";
-import { setSelectionAtPoint } from "./utils";
-import { decreaseIndent } from "./indents";
+import { Transforms, Range, Node } from "slate";
 
 export const handleLinkHotkey = editor => {
   if (isLinkActive(editor)) return unwrapLink(editor);
@@ -36,45 +33,6 @@ export const handleImageHotkey = () => {
 export const handleIframeHotkey = () => {
   const button = document.getElementsByName("iframe-modal-trigger");
   if (button[0]) button[0].click();
-};
-
-export const handleInsertNode = editor => {
-  const { selection } = editor;
-  // Grab the element node that contains the text where the user hit enter; Slate's default handling of enter would simply duplicate this node
-  const [node, path] = SlateEditor.above(editor, selection);
-  // Remove all attributes other than the type/tag, so we don't copy id, classes, etc.
-  const { children, htmlAttrs, slateOnly, inline, ...next } = node;
-
-  // Set the path for the new node based on whether the element node is block or inline; the new node will be block so it must not be a sibling of an inline
-  // Also, move an extra layer up the tree if the inline node is wrapped in a slate only div
-  const parent = Node.parent(editor, path);
-  /* eslint-disable no-nested-ternary */
-  const nextPath =
-    inlineNodes.includes(next.type) || slateOnly
-      ? parent.slateOnly
-        ? Path.next(Path.parent(Path.parent(path)))
-        : Path.next(Path.parent(path))
-      : Path.next(path);
-
-  // Insert a paragraph if this node type isn't editable in the RTE; handle unwrapping the list item if we're on an empty li
-  if (!rteElements.includes(next.type)) next.type = "p";
-  if (next.type === "a" || next.type === "img" || next.type === "iframe")
-    next.type = "p";
-  if (next.type === "li") {
-    const isCollapsed = selection && Range.isCollapsed(selection);
-    const liIsEmpty = SlateEditor.isEmpty(editor, node);
-    if (isCollapsed && liIsEmpty) return decreaseIndent(editor, true);
-  }
-
-  // Insert the adjusted node
-  Transforms.insertNodes(
-    editor,
-    { ...next, children: [{ text: "" }] },
-    { at: nextPath }
-  );
-
-  // Set the cursor position at the first child of the new node
-  setSelectionAtPoint(editor, [...nextPath, 0]);
 };
 
 export const insertSoftBreak = editor => {

@@ -6,17 +6,16 @@ import {
   handleLinkHotkey,
   handleImageHotkey,
   handleIframeHotkey,
-  handleInsertNode,
   insertSoftBreak
 } from "./handlers";
 
 export const captureHotKeys = (e, editor) => {
   if (e.key === "Enter") {
-    e.preventDefault();
     if (e.shiftKey) {
+      e.preventDefault();
       return insertSoftBreak(editor);
     }
-    return handleInsertNode(editor);
+    return;
   }
 
   if (e.key === "Tab") {
