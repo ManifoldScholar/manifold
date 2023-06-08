@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import EditSectionForm from "backend/components/authoring/EditSectionForm";
 import AddSectionForm from "backend/components/authoring/AddSectionForm";
 import { useParams } from "react-router-dom";
@@ -23,9 +23,7 @@ export default function AuthorSectionContainer(props) {
         <EditSectionForm section={section} {...props} />
       ) : (
         <>
-          <Navigation.DrawerHeader
-            title={t("texts.add_section_button_label")}
-          />
+          <Layout.DrawerHeader title={t("texts.add_section_button_label")} />
           <AddSectionForm {...props} />
         </>
       )}
