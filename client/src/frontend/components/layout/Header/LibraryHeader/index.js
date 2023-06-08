@@ -10,6 +10,7 @@ import HeaderLogo from "global/components/atomic/HeaderLogo";
 import Breadcrumbs, {
   BreadcrumbsContext
 } from "global/components/atomic/Breadcrumbs";
+import { useShowJournalsActive } from "hooks";
 
 export default function LibraryHeader({
   settings,
@@ -56,6 +57,8 @@ export default function LibraryHeader({
     ? { position: "relative", top: parseInt(offset, 10) }
     : {};
 
+  const journalIsActive = useShowJournalsActive();
+
   return (
     <header>
       <div className="library-header library-header--light">
@@ -84,6 +87,7 @@ export default function LibraryHeader({
               authentication={authentication}
               visibility={visibility}
               mode="frontend"
+              journalIsActive={journalIsActive}
             />
           </div>
         </SetCSSProperty>

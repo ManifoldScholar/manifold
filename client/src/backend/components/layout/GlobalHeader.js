@@ -10,6 +10,7 @@ import HeaderLogo from "global/components/atomic/HeaderLogo";
 import { useTranslation } from "react-i18next";
 import ProjectsNav from "./SecondaryNav/Projects";
 import ProjectsButton from "./SecondaryNav/Projects/Button";
+import { useShowJournalsActive } from "hooks";
 
 export default function LayoutHeader({
   commonActions,
@@ -17,6 +18,7 @@ export default function LayoutHeader({
   visibility
 }) {
   const { t } = useTranslation();
+  const journalIsActive = useShowJournalsActive();
 
   const baseLinks = navigation.backend();
   const projectsLink = baseLinks.find(l => l.route === "backendProjects");
@@ -41,6 +43,7 @@ export default function LayoutHeader({
             </HeaderLogo>
             <Navigation.Primary
               links={links}
+              journalIsActive={journalIsActive}
               commonActions={commonActions}
               authentication={authentication}
               visibility={visibility}
