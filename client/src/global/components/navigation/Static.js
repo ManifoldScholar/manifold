@@ -79,15 +79,32 @@ export class NavigationStatic extends PureComponent {
     );
   }
 
+  adjustClassesForJournalIssue(link) {
+    if (typeof this.props.journalIsActive !== "boolean") {
+      if (link.label.includes("projects"))
+        return { className: "site-nav__link", activeClassName: "" };
+    }
+    if (this.props.journalIsActive) {
+      if (link.label.includes("projects"))
+        return { className: "site-nav__link", activeClassName: "" };
+      if (link.label.includes("journals"))
+        return { className: "site-nav__link site-nav__link--active" };
+    }
+    return {
+      className: "site-nav__link",
+      activeClassName: "site-nav__link--active"
+    };
+  }
+
   renderManifoldLink(link) {
     const exact = this.pathForLink(link) === "/" ? true : this.props.exact;
+    const classes = this.adjustClassesForJournalIssue(link);
     return (
       <NavLink
         to={this.pathForLink(link)}
         exact={exact}
         target={link.newTab ? "_blank" : null}
-        className="site-nav__link"
-        activeClassName="site-nav__link--active"
+        {...classes}
       >
         {this.props.t(link.label)}
       </NavLink>
@@ -101,7 +118,13 @@ export class NavigationStatic extends PureComponent {
       return (
         <DisclosureNavigationMenu
           key={`${link.label}-${index}`}
-          disclosure={<Disclosure link={link} index={index} />}
+          disclosure={
+            <Disclosure
+              link={link}
+              index={index}
+              journalIsActive={this.props.journalIsActive}
+            />
+          }
         >
           {link.dropdownContent}
         </DisclosureNavigationMenu>

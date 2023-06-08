@@ -6,7 +6,7 @@ import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
 function ProjectsButton(
-  { className, link, index, toggleVisible, ...props },
+  { className, link, index, toggleVisible, journalIsActive, ...props },
   ref
 ) {
   const { t } = useTranslation();
@@ -17,7 +17,12 @@ function ProjectsButton(
   return (
     <li className="site-nav__item">
       <Styled.Button ref={ref} tabIndex={0} onClick={toggleVisible} {...props}>
-        <Styled.ButtonText className="site-nav__link" $active={active}>
+        <Styled.ButtonText
+          className="site-nav__link"
+          $active={
+            active && typeof journalIsActive === "boolean" && !journalIsActive
+          }
+        >
           <span>{t(link.label)}</span>
           <Utility.IconComposer icon="disclosureDown24" size={16} />
         </Styled.ButtonText>
