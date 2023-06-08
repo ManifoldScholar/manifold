@@ -76,6 +76,14 @@ export const Button = styled.button`
   }
 `;
 
-export const ButtonText = styled.span`
+export const ButtonText = styled.div`
+  display: flex;
+  gap: 6px;
+  align-items: center;
+
   ${({ $active }) => $active && `color: var(--color-base-neutral-white);`}
+
+  & svg {
+    margin-top: 4px;
+  }
 `;
