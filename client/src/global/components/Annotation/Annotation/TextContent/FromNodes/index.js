@@ -69,11 +69,16 @@ function AnnotationWithNodes({ annotation, selection }) {
   const memberships = useFromStore(
     `entityStore.entities.readingGroupMemberships`
   );
-  const membership = Object.keys(memberships)?.find(
-    m => memberships[m].relationships.readingGroup.data.id === activeGroup
-  );
+  const membership =
+    typeof memberships === "object"
+      ? Object.keys(memberships)?.find(
+          m => memberships[m].relationships.readingGroup.data.id === activeGroup
+        )
+      : null;
   const annotationStyle =
-    memberships[membership]?.attributes?.annotationStyle ?? "solid";
+    memberships && membership
+      ? memberships[membership]?.attributes?.annotationStyle
+      : "solid";
 
   if (!annotation || !nodesToRender?.length) return fallback;
 
@@ -91,10 +96,10 @@ function AnnotationWithNodes({ annotation, selection }) {
   const iterator = new BodyNodes.Helpers.NodeTreeIterator({
     annotations: [
       {
-        id: "selection",
+        id: "detail",
         ...annotation,
         attributes: {
-          userIsCreator: true,
+          currentUserIsCreator: true,
           annotationStyle,
           format: "annotation",
           ...annotation.attributes,
