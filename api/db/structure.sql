@@ -329,7 +329,6 @@ CREATE TABLE public.text_sections (
     body_json jsonb DEFAULT '{}'::jsonb NOT NULL,
     citations jsonb DEFAULT '{}'::jsonb,
     "position" bigint,
-    has_mathml boolean DEFAULT false,
     body_hash bigint GENERATED ALWAYS AS (COALESCE(hashtextextended((body_json)::text, (0)::bigint), (0)::bigint)) STORED NOT NULL,
     node_root public.ltree GENERATED ALWAYS AS (public.text2ltree(((md5((id)::text) || '.'::text) || md5((COALESCE(hashtextextended((body_json)::text, (0)::bigint), (0)::bigint))::text)))) STORED NOT NULL,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
@@ -7062,6 +7061,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230313215126'),
 ('20230406164035'),
 ('20230410195543'),
+('20230425172153'),
 ('20230519033907'),
 ('20230607190750'),
 ('20230607191531');
