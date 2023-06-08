@@ -37,6 +37,7 @@ export default function Splash(props) {
     >
       <Styled.Container>
         <Styled.Left>
+testzzsdss
           <Styled.Heading
             $color={headerColor}
             dangerouslySetInnerHTML={{

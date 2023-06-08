@@ -104,7 +104,10 @@ export default function buildWebpackConfiguration(target = "web") {
 
     resolve: {
       modules: [paths.src, "node_modules"],
-      alias: plugins.webpackAliases
+      alias: plugins.webpackAliases,
+      fallback: {
+        "path": require.resolve("path-browserify")
+      }
     },
 
     plugins: [
