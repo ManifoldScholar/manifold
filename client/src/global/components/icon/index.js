@@ -185,6 +185,7 @@ import Iframe24 from "./24/Iframe";
 import RTELink24 from "./24/RTELink";
 import RTEImage24 from "./24/RTEImage";
 import CodeBlock24 from "./24/CodeBlock";
+import ProjectCollection32 from "./32/ProjectCollection";
 
 export default {
   ActivityComments64,

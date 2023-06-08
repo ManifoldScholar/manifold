@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import Ingestion from "backend/components/ingestion";
 import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
@@ -19,7 +19,7 @@ export default function IngestSectionContainer({ textId }) {
 
   return (
     <section>
-      <Navigation.DrawerHeader
+      <Layout.DrawerHeader
         title={
           sectionId
             ? section?.attributes?.name
