@@ -61,7 +61,8 @@ export default function Editor({
 
   // Since the editor overflows the visible area and we scroll the whole drawer, we have to manually handle scroll when arrow keys are used to move the cursor out of view.
   useEffect(() => {
-    if (editor.selection && !htmlMode) {
+    const active = document.activeElement;
+    if (active?.id === "content-editable" && editor.selection && !htmlMode) {
       const [node] = ReactEditor.toDOMPoint(editor, editor.selection.focus);
       const rect = node.parentElement.getBoundingClientRect();
       const buttons = document.getElementById("editor-button-overlay");
@@ -229,6 +230,7 @@ export default function Editor({
             >
               {!htmlMode && (
                 <Styled.Editable
+                  id={"content-editable"}
                   as="div"
                   renderElement={renderElement}
                   renderLeaf={renderLeaf}
