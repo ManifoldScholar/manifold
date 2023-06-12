@@ -116,8 +116,14 @@ export class SettingsIntegrationsContainer extends PureComponent {
             >
               <Form.TextInput
                 label={t("settings.integrations.google_tracking_id_label")}
-                name="attributes[integrations][gaTrackingId]"
+                name="attributes[integrations][gaFourTrackingId]"
                 placeholder="G-0000000000"
+              />
+              <Form.TextInput
+                label={t("settings.integrations.google_ua_id_label")}
+                name="attributes[integrations][gaTrackingId]"
+                placeholder="UA-000000-00"
+                instructions="Manifold will only send tracking events to this account if a GA4 Measurement ID is not set."
               />
             </Form.FieldGroup>
             <Form.Save text={t("settings.save")} />
