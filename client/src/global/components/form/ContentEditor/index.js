@@ -1,10 +1,18 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { Editor } from "./components";
 import setter from "../setter";
 import { serializeToSlate } from "./serializers";
 import { formatHtml } from "./utils/helpers";
 import FieldWrapper from "../FieldWrapper";
+import Loadable from "@docusaurus/react-loadable";
+
+const Editor = Loadable({
+  loader: () => import("./components/Editor").then(editor => editor.default),
+  render(EditorComponent, props) {
+    return <EditorComponent {...props} />;
+  },
+  loading: () => null
+});
 
 const defaultValue = [
   {
