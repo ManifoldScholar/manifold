@@ -62,7 +62,13 @@ export const ImageWrapper = styled.span`
   }
 `;
 
-export const VoidWrapper = styled.div`
+export const VoidOuter = styled.div`
+  & + & {
+    margin-block-start: 20px;
+  }
+`;
+
+export const VoidInner = styled.div`
   display: block;
   margin-inline-start: -5%;
   width: 110%;
@@ -80,7 +86,9 @@ export const VoidWrapper = styled.div`
     box-shadow: 3px 3px 10px var(--color-base-neutral30);
   }
 
-  ${({ $selected }) => $selected && `${defaultFocusStyle} outline-offset: 1px;`}
+  ${({ $selected }) =>
+    $selected &&
+    `outline: solid 2px var(--disabled-control-color); outline-offset: 1px;`}
 `;
 
 export const VoidLabel = styled.span`
