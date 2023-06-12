@@ -23,8 +23,18 @@ export default function EditSectionForm({
 
   const formatData = (data, model) => {
     const { body, name } = data.attributes ?? {};
-    const { position, kind } = model.attributes ?? {};
-    if (!body) return { attributes: { position, kind, name, body: null } };
+    const { position, kind, body: lastSavedBody, name: lastSavedName } =
+      model.attributes ?? {};
+    // Ensure we never clear out body if the user clicks Save multiple times without dirtying the form
+    if (body === undefined)
+      return {
+        attributes: {
+          position,
+          kind,
+          name: lastSavedName,
+          body: lastSavedBody ?? null
+        }
+      };
     if (typeof body === "string")
       return {
         attributes: {
