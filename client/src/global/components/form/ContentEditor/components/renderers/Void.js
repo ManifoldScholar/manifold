@@ -42,12 +42,9 @@ export default function VoidRenderer({
   }, [srcdoc, theme, darkMode]);
 
   return (
-    <div {...attributes}>
+    <Styled.VoidOuter {...attributes}>
       {children}
-      <Styled.VoidWrapper
-        contentEditable={false}
-        $selected={selected && focused}
-      >
+      <Styled.VoidInner contentEditable={false} $selected={selected && focused}>
         <Styled.VoidLabel>
           <Utility.IconComposer
             svgProps={{ style: { flexShrink: 0 } }}
@@ -56,7 +53,7 @@ export default function VoidRenderer({
           <span>Preview only. Switch to HTML mode to edit this block:</span>
         </Styled.VoidLabel>
         <div ref={ref} />
-      </Styled.VoidWrapper>
-    </div>
+      </Styled.VoidInner>
+    </Styled.VoidOuter>
   );
 }
