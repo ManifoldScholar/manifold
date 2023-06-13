@@ -25,19 +25,25 @@ export default function ImageRenderer({ element, children, attributes, as }) {
 
     return Editor.withoutNormalizing(editor, () => {
       Transforms.removeNodes(editor, { at: path });
-      Transforms.insertNodes(editor, { type: "p", children: [{ text: "" }] });
+      Transforms.insertNodes(
+        editor,
+        { type: "p", children: [{ text: "" }] },
+        { select: true }
+      );
     });
   };
 
   const wrapperClassName = classNames({
     "responsive-iframe": as === "iframe"
   });
-  const className = element.htmlAttrs?.class ?? undefined;
-  const epubType = element.htmlAttrs?.["data-epub-type"] || undefined;
+
+  const { htmlAttrs } = element ?? {};
+  const className = htmlAttrs?.class ?? undefined;
+  const epubType = htmlAttrs?.["data-epub-type"] || undefined;
 
   return (
     <div
-      className={element.htmlAttrs?.inline ? "inline-block" : undefined}
+      className={htmlAttrs?.inline ? "inline-block" : undefined}
       {...attributes}
     >
       {children}
@@ -48,13 +54,13 @@ export default function ImageRenderer({ element, children, attributes, as }) {
         >
           <Styled.Content
             as={as ?? "img"}
-            src={element.htmlAttrs.src}
-            alt={!as ? element.htmlAttrs.alt : undefined}
-            title={as ? element.htmlAttrs.title : undefined}
+            src={htmlAttrs.src}
+            alt={!as ? htmlAttrs.alt : undefined}
+            title={as ? htmlAttrs.title : undefined}
             $selected={selected && focused}
             className={className}
-            width={element.htmlAttrs.width}
-            height={element.htmlAttrs.height}
+            width={htmlAttrs?.width}
+            height={htmlAttrs?.height}
           />
           <Styled.ButtonGroup $visible={selected}>
             <Styled.InteriorButton

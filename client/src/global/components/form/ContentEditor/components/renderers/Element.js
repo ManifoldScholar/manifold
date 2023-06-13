@@ -7,6 +7,7 @@ import {
   markElements
 } from "../../utils/elements";
 import classNames from "classnames";
+import * as Styled from "./styles";
 
 export default function SlateElement({
   attributes,
@@ -23,16 +24,12 @@ export default function SlateElement({
   }
   if (element.type === "hr") {
     return (
-      <span
-        style={{ display: "inline-flex", width: "100%" }}
-        contentEditable={false}
-        {...attributes}
-      >
+      <Styled.HrOuter contentEditable={false} {...attributes}>
         {children}
-        <span style={{ flexGrow: 1, margin: 0, width: "100%" }}>
+        <Styled.HrInner>
           <hr className={className} data-epub-type={epubType} />
-        </span>
-      </span>
+        </Styled.HrInner>
+      </Styled.HrOuter>
     );
   }
   if (element.type === "void") {
@@ -66,7 +63,7 @@ export default function SlateElement({
       <a
         className={className}
         data-epub-type={epubType}
-        href={element.htmlAttrs.href}
+        href={element.htmlAttrs?.href}
         {...attributes}
       >
         {children}

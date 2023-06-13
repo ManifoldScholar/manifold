@@ -107,3 +107,14 @@ export const VoidLabel = styled.span`
     margin-top: 1px;
   }
 `;
+
+export const HrOuter = styled.span`
+  display: inline-flex;
+  width: 100%;
+`;
+
+export const HrInner = styled.span`
+  flex-grow: 1;
+  margin: 0;
+  width: 100%;
+`;
