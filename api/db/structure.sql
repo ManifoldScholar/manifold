@@ -815,8 +815,8 @@ CREATE TABLE public.journal_issues (
     journal_id uuid NOT NULL,
     journal_volume_id uuid,
     creator_id uuid,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     number character varying DEFAULT ''::character varying NOT NULL,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     sort_title integer DEFAULT 0 NOT NULL,
     pending_sort_title integer
 );
@@ -1421,9 +1421,7 @@ CREATE TABLE public.ingestion_sources (
     attachment_content_type_deprecated character varying,
     attachment_file_size_deprecated integer,
     attachment_updated_at_deprecated timestamp without time zone,
-    attachment_data jsonb,
-    display_name text,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL
+    attachment_data jsonb
 );
 
 
@@ -7062,7 +7060,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230406164035'),
 ('20230410195543'),
 ('20230425172153'),
-('20230519033907'),
 ('20230607190750'),
 ('20230607191531');
 
