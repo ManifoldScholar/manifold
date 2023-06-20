@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useState, useRef, useMemo } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import ContentEditor from "global/components/form/ContentEditor";
@@ -8,9 +8,28 @@ import { sectionsAPI } from "api";
 import { useHistory } from "react-router-dom";
 import {
   serializeToHtml,
+  serializeToSlate,
   removeFormatting
 } from "global/components/form/ContentEditor/serializers";
+import { formatHtml } from "global/components/form/ContentEditor/utils/helpers";
 import * as Styled from "./styles";
+
+const defaultValue = [
+  {
+    type: "section",
+    children: [{ type: "p", children: [{ text: "" }] }]
+  }
+];
+
+const getInitialSlateValue = value => {
+  if (value && typeof value === "string") return serializeToSlate(value);
+  return defaultValue;
+};
+
+const getInitialHtmlValue = value => {
+  if (value && typeof value === "string") return formatHtml(value);
+  return formatHtml("<!DOCTYPE html><section><p></p></section>");
+};
 
 export default function EditSectionForm({
   section,
@@ -20,6 +39,14 @@ export default function EditSectionForm({
 }) {
   const { t } = useTranslation();
   const history = useHistory();
+
+  const initialSlateValue = useMemo(() => {
+    return getInitialSlateValue(section?.attributes.body);
+  }, [section?.attributes.body]);
+  const initialHtmlValue = useMemo(
+    () => getInitialHtmlValue(section?.attributes.body),
+    [section?.attributes.body]
+  );
 
   const formatData = (data, model) => {
     const { body, name } = data.attributes ?? {};
@@ -97,8 +124,8 @@ export default function EditSectionForm({
       />
       <ContentEditor
         name="attributes[body]"
-        sectionId={section?.id}
-        sectionBody={section?.attributes.body}
+        initialHtmlValue={initialHtmlValue}
+        initialSlateValue={initialSlateValue}
         stylesheets={stylesheets}
         nextRef={saveRef}
         {...errorProps}

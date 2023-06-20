@@ -29,7 +29,7 @@ export default function Editor({
 }) {
   const editorRef = useRef();
   if (!editorRef.current)
-    editorRef.current = withHistory(withReact(withPlugins(createEditor())));
+    editorRef.current = withReact(withHistory(withPlugins(createEditor())));
   const editor = editorRef.current;
   const aceRef = useRef();
   const controlsRef = useRef();
@@ -90,7 +90,10 @@ export default function Editor({
 
   const onChangeSlate = val => {
     setLocalSlate(val);
-    setFormValue(val);
+    const changes = editor?.history?.undos ?? [];
+    const shouldUpdateFormValue =
+      changes.length > 1 || changes[0]?.selectionBefore;
+    if (shouldUpdateFormValue) setFormValue(val);
   };
 
   const onChangeHtml = val => {

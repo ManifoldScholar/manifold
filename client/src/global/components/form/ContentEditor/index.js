@@ -1,8 +1,6 @@
-import React, { useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import setter from "../setter";
-import { serializeToSlate } from "./serializers";
-import { formatHtml } from "./utils/helpers";
 import FieldWrapper from "../FieldWrapper";
 import Loadable from "@docusaurus/react-loadable";
 
@@ -14,33 +12,13 @@ const Editor = Loadable({
   loading: () => null
 });
 
-const defaultValue = [
-  {
-    type: "section",
-    children: [{ type: "p", children: [{ text: "" }] }]
-  }
-];
-
-const getInitialSlateValue = value => {
-  if (value && typeof value === "string") return serializeToSlate(value);
-  return defaultValue;
-};
-
-const getInitialHtmlValue = value => {
-  if (value && typeof value === "string") return formatHtml(value);
-  return formatHtml("<!DOCTYPE html><section><p></p></section>");
-};
-
-function ContentEditor({ set, stylesheets, sectionId, sectionBody, ...props }) {
-  /* eslint-disable react-hooks/exhaustive-deps */
-  const initialSlateValue = useMemo(() => {
-    return getInitialSlateValue(sectionBody);
-  }, [sectionId, sectionBody]);
-  const initialHtmlValue = useMemo(() => getInitialHtmlValue(sectionBody), [
-    sectionId,
-    sectionBody
-  ]);
-
+function ContentEditor({
+  set,
+  stylesheets,
+  initialHtmlValue,
+  initialSlateValue,
+  ...props
+}) {
   return (
     <FieldWrapper className="wide">
       <Editor
