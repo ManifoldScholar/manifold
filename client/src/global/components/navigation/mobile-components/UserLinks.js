@@ -116,6 +116,13 @@ class UserLinks extends PureComponent {
           </>
         )}
         <Link
+          as="button"
+          title={t("navigation.user.edit_profile")}
+          srTitle={t("navigation.user.edit_profile_sr_title")}
+          icon="editProfile24"
+          onClick={this.handleProfileClick}
+        />
+        <Link
           to={lh.link("subscriptions")}
           title={t("navigation.user.notifications")}
           srTitle={t("navigation.user.notifications_sr_title")}
@@ -123,11 +130,11 @@ class UserLinks extends PureComponent {
           onClick={() => this.props.closeNavigation()}
         />
         <Link
-          as="button"
-          title={t("navigation.user.edit_profile")}
-          srTitle={t("navigation.user.edit_profile_sr_title")}
-          icon="editProfile24"
-          onClick={this.handleProfileClick}
+          to={lh.link("privacy")}
+          title={t("navigation.user.privacy")}
+          srTitle={t("navigation.user.privacy_sr_title")}
+          icon="privacy24"
+          onClick={() => this.props.closeNavigation()}
         />
         <Link
           as="button"
