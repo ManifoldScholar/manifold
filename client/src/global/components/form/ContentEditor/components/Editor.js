@@ -6,13 +6,18 @@ import { Slate, withReact, ReactEditor } from "slate-react";
 import { withHistory, HistoryEditor } from "slate-history";
 import { Leaf, Element } from "./renderers";
 import { captureHotKeys } from "../transforms";
-import { serializeToHtml, serializeToSlate } from "../serializers";
+import {
+  serializeToHtml,
+  serializeToSlate,
+  removeFormatting
+} from "../serializers";
 import HtmlEditor from "./HtmlEditor";
 import Controls from "./EditorControls";
 import withPlugins from "../plugins";
 import { clearSlate, formatHtml } from "../utils/helpers";
 import { ErrorBoundary } from "react-error-boundary";
 import isEqual from "lodash/isEqual";
+import throttle from "lodash/throttle";
 import * as Styled from "./styles";
 
 export default function Editor({
@@ -88,17 +93,27 @@ export default function Editor({
 
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
 
+  const setFormValueFromSlate = throttle(
+    val => setFormValue(serializeToHtml(val)),
+    500
+  );
+
   const onChangeSlate = val => {
     setLocalSlate(val);
     const changes = editor?.history?.undos ?? [];
     const shouldUpdateFormValue =
       changes.length > 1 || changes[0]?.selectionBefore;
-    if (shouldUpdateFormValue) setFormValue(val);
+    if (shouldUpdateFormValue) setFormValueFromSlate(val);
   };
+
+  const setFormValueFromHtml = throttle(
+    val => setFormValue(removeFormatting(val)),
+    500
+  );
 
   const onChangeHtml = val => {
     setLocalHtml(val);
-    setFormValue(val);
+    setFormValueFromHtml(val);
   };
 
   const toggleEditorView = () => {
