@@ -6,11 +6,7 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
 import { useHistory } from "react-router-dom";
-import {
-  serializeToHtml,
-  serializeToSlate,
-  removeFormatting
-} from "global/components/form/ContentEditor/serializers";
+import { serializeToSlate } from "global/components/form/ContentEditor/serializers";
 import { formatHtml } from "global/components/form/ContentEditor/utils/helpers";
 import * as Styled from "./styles";
 
@@ -58,21 +54,12 @@ export default function EditSectionForm({
         attributes: {
           position,
           kind,
-          name: lastSavedName,
+          name: name ?? lastSavedName,
           body: lastSavedBody ?? null
         }
       };
-    if (typeof body === "string")
-      return {
-        attributes: {
-          position,
-          kind,
-          name,
-          body: removeFormatting(body)
-        }
-      };
     return {
-      attributes: { position, kind, name, body: serializeToHtml(body) }
+      attributes: { position, kind, name, body }
     };
   };
 
