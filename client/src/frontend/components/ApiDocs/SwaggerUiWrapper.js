@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import swaggerUIConstructor from "swagger-ui-react/swagger-ui-es-bundle-core";
+// import swaggerUIConstructor from "swagger-ui-react/swagger-ui-es-bundle-core";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/apiDocsStyles";
 
@@ -24,23 +24,23 @@ export default class SwaggerUI extends React.Component {
   }
 
   componentDidMount() {
-    const ui = swaggerUIConstructor({
-      plugins: this.props.plugins,
-      tagsSorter: "alpha",
-      spec: this.props.spec,
-      layout: this.props.layout,
-      url: this.props.url,
-      requestInterceptor: this.requestInterceptor,
-      responseInterceptor: this.responseInterceptor,
-      onComplete: this.onComplete,
-      docExpansion: this.props.docExpansion,
-      defaultModelExpandDepth: this.props.defaultModelExpandDepth
-    });
-
-    this.system = ui;
-    this.SwaggerUIComponent = ui.getComponent("App", "root");
-
-    this.forceUpdate();
+    // const ui = swaggerUIConstructor({
+    //   plugins: this.props.plugins,
+    //   tagsSorter: "alpha",
+    //   spec: this.props.spec,
+    //   layout: this.props.layout,
+    //   url: this.props.url,
+    //   requestInterceptor: this.requestInterceptor,
+    //   responseInterceptor: this.responseInterceptor,
+    //   onComplete: this.onComplete,
+    //   docExpansion: this.props.docExpansion,
+    //   defaultModelExpandDepth: this.props.defaultModelExpandDepth
+    // });
+    //
+    // this.system = ui;
+    // this.SwaggerUIComponent = ui.getComponent("App", "root");
+    //
+    // this.forceUpdate();
   }
 
   render() {

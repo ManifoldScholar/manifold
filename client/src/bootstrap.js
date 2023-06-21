@@ -25,12 +25,15 @@ export default function bootstrap(getState, dispatch, cookieHelper) {
         oneTime: true
       }
     );
+
     const settingsPromise = dispatch(settingsRequest).promise;
+
     settingsPromise.then(
       () => {
         ch.notice("Initialization: settings loaded", "ok_hand");
       },
-      () => {
+      (err) => {
+        console.log(err, 'errzd');
         ch.error("Initialization: settings failed to load");
       }
     );

@@ -11,12 +11,7 @@ import merge from "webpack-merge";
 const config = merge(baseConfig("web"), {
   entry: {
     "build/manifold-client-browser": ["./src/entry-browser.js"],
-    "build/manifold-client-print": ["./src/theme/print.js"]
   },
-
-  // Webpack mocks node's global "process". We don't want it to in this case, because
-  // we're mocking it ourselves via the .env file that we generate for the client.
-  node: { process: false },
 
   // Browser javascript is written into the www folder in the dist directory.
   output: {
@@ -30,9 +25,9 @@ const config = merge(baseConfig("web"), {
     }),
 
     // In production, make sure react knows to remove dead code, and uglify output.
-    new DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(environment.name)
-    }),
+    // new DefinePlugin({
+    //   "process.env.NODE_ENV": JSON.stringify(environment.name)
+    // }),
 
     // Manifest is used by the server-side application to figure out what hashed css and
     // js files should be included in the HTML markup.
@@ -40,16 +35,18 @@ const config = merge(baseConfig("web"), {
       fileName: "manifest.json"
     }),
 
-    new CopyWebpackPlugin([
-      // We always want to include the env.js file in the client build. This file is
-      // loaded by the client, and it provides an environment of sorts for the browser
-      // code.
-      {
-        from: "webpack/templates/www_env.ejs",
-        to: `${paths.build}/www/browser.config.js`,
-        transform: compileEnv
-      }
-    ])
+    // We always want to include the env.js file in the client build. This file is
+    // loaded by the client, and it provides an environment of sorts for the browser
+    // code.
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "webpack/templates/www_env.ejs",
+          to: `${paths.build}/www/browser.config.js`,
+          transform: compileEnv
+        }
+      ]
+    })
   ]
 });
 

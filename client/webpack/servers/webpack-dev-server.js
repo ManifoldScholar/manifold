@@ -23,23 +23,28 @@ compiler.hooks.compile.tap("ManifoldWebpackDevServer", params => {
   ch.background("Serving browser assets from webpack-dev-server.");
 });
 
-const hot = !process.env.DISABLE_HMR;
-const allowedHosts = ["manifold.lvh", "localhost", "127.0.0.1", "manifold-dev.lvh", "manifold-stable.lvh", "manifold-dev.ngrok.io"];
+const hot = process.env.DISABLE_HMR ? false : "only";
+
+console.log(hot,"ZDHOT");
+
+const allowedHosts = ["manifold.lvh", "localhost", "127.0.0.1", "manifold-dev.lvh", "dev-manifold.lvh", "manifold-stable.lvh", "manifold-dev.ngrok.io"];
 if (process.env.DOMAIN) allowedHosts.push(process.env.DOMAIN);
 
 const serverOptions = {
   hot,
   allowedHosts,
-  quiet: false,
-  noInfo: false,
-  inline: false,
-  lazy: false,
   headers: { "Access-Control-Allow-Origin": "*" },
-  sockHost: process.env.DOMAIN || "localhost",
-  sockPort: environment.devPort,
-  stats: {
-    modules: false,
-    colors: true
+  client: {
+    webSocketURL: {
+      hostname: process.env.DOMAIN || "localhost",
+      port: environment.devPort,
+    },
+  },
+  devMiddleware: {
+    stats: {
+      modules: false,
+      colors: true
+    }
   }
 };
 

@@ -1,8 +1,6 @@
 import baseConfig from "./browser-base.config";
 import {
-  DefinePlugin,
   HotModuleReplacementPlugin,
-  NamedModulesPlugin
 } from "webpack";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import { mergeWithRules} from "webpack-merge";
@@ -10,14 +8,18 @@ import environment from "../helpers/environment";
 import paths from "../helpers/paths";
 
 const browserConfig = {
+  // entry: {
+  //   "build/manifold-client-browser": [
+  //     "webpack/hot/only-dev-server",
+  //     `webpack-dev-server/client/index.js?hot=true&live-reload=false&port=3012`
+  //   ]
+  // },
+
   entry: {
-    "build/manifold-client-browser": [
-      "webpack/hot/only-dev-server",
-      `webpack-dev-server/client?http://0.0.0.0:${environment.devPort}`
-    ]
+    "build/manifold-client-browser": []
   },
 
-  devtool: "cheap-module-eval-source-map",
+  devtool: "eval-cheap-module-source-map",
 
   mode: "development",
   module: {
@@ -40,19 +42,28 @@ const browserConfig = {
     ]
   },
 
-  devServer: {
-    hot: true,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers":
-        "X-Requested-With, content-type, Authorization"
-    }
+  // devServer: {
+  //   hot: false,
+  //   client: false,
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+  //     "Access-Control-Allow-Headers":
+  //       "X-Requested-With, content-type, Authorization"
+  //   }
+  // },
+  optimization: {
+    moduleIds: 'named',
+    runtimeChunk: 'single'
   },
   plugins: [
-    new NamedModulesPlugin(),
     new HotModuleReplacementPlugin(),
-    new ReactRefreshWebpackPlugin()
+    new ReactRefreshWebpackPlugin({
+      overlay: {
+        sockPort: environment.devPort,
+        sockHost: process.env.DOMAIN || "localhost"
+      }
+    })
   ]
 }
 
