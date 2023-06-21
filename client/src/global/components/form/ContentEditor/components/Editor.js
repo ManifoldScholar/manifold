@@ -7,7 +7,7 @@ import { withHistory, HistoryEditor } from "slate-history";
 import { Leaf, Element } from "./renderers";
 import { captureHotKeys } from "../transforms";
 import { serializeToHtml, serializeToSlate } from "../serializers";
-import { HtmlEditor } from "./HtmlEditor";
+import HtmlEditor from "./HtmlEditor";
 import Controls from "./EditorControls";
 import withPlugins from "../plugins";
 import { clearSlate, formatHtml } from "../utils/helpers";
