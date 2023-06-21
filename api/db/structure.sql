@@ -1421,7 +1421,9 @@ CREATE TABLE public.ingestion_sources (
     attachment_content_type_deprecated character varying,
     attachment_file_size_deprecated integer,
     attachment_updated_at_deprecated timestamp without time zone,
-    attachment_data jsonb
+    attachment_data jsonb,
+    display_name text,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 
@@ -7060,6 +7062,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230406164035'),
 ('20230410195543'),
 ('20230425172153'),
+('20230519033907'),
 ('20230607190750'),
 ('20230607191531'),
 ('20230816233543'),
