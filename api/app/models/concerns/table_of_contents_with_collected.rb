@@ -30,9 +30,8 @@ module TableOfContentsWithCollected
   # @param [<String>] ids
   # @return [Hash]
   def augment_toc_entry_with_collected(entry, ids:)
-    entry.merge(
-      collected: entry[:id].in?(ids),
-      children: augment_toc_children_with_collected(entry[:children], ids: ids)
-    )
+    entry.collected = entry[:id].in?(ids)
+    entry.children = augment_toc_children_with_collected(entry[:children], ids: ids)
+    entry
   end
 end
