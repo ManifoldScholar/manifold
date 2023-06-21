@@ -15,10 +15,8 @@ module Analytics
         symbol
       end
 
-      with_options default: nil do
-        date :start_date
-        date :end_date
-      end
+      date :start_date, default: nil
+      date :end_date, default: nil
 
       boolean :force_cache_refresh, default: false
       boolean :allow_cached_result, default: true
@@ -26,10 +24,9 @@ module Analytics
       def execute
         return cached_analytics if use_cached_analytics?
 
-        set_default_dates
         require_base_ctes
 
-        Analytics::Reports::AnalyticsResult.run data: analytics_data, **inputs
+        Analytics::Reports::AnalyticsResult.run data: analytics_data, **inputs, start_date: valid_start_date, end_date: valid_end_date
       end
 
       def pagination_dict
@@ -73,7 +70,8 @@ module Analytics
         end
 
         def define_analytic(name, &block)
-          @analytics ||= []
+          @analytics = [] unless @analytics.present?
+
           @analytics.push(name)
 
           define_method name, &block
@@ -115,18 +113,20 @@ module Analytics
         allow_cached_result && start_date.nil? && end_date.nil?
       end
 
-      def set_default_dates
-        # rubocop:disable Naming/MemoizedInstanceVariableName
-        @start_date ||= (Date.current - 31.days)
-        @end_date ||= (Date.current - 1.day)
-        # rubocop:enable Naming/MemoizedInstanceVariableName
+      def valid_start_date
+        @valid_start_date ||= start_date || (Date.current - 31.days)
+      end
+
+      def valid_end_date
+        @valid_end_date ||= end_date || (Date.current - 1.day)
       end
 
       def cached_analytics
-        set_default_dates
         @cached_result = true
 
-        compose Analytics::Reports::AnalyticsResult, data: cached_analytics_result, **inputs
+        # rubocop:disable Layout/LineLength
+        compose Analytics::Reports::AnalyticsResult, data: cached_analytics_result, **inputs, start_date: valid_start_date, end_date: valid_end_date
+        # rubocop:enable Layout/LineLength
       end
 
       def cached_analytics_result
@@ -135,7 +135,7 @@ module Analytics
                           skip_nil: true,
                           expires_in: (Time.current.end_of_day - Time.current).seconds,
                           race_condition_ttl: 10.seconds) do
-          compose(self.class, **inputs).data
+          compose(self.class, **inputs, start_date: valid_start_date, end_date: valid_end_date).data
         end
       end
 
@@ -145,7 +145,7 @@ module Analytics
 
       # Placeholders
 
-      def sub_placeholders(sql, zone = start_date.to_time.zone)
+      def sub_placeholders(sql, zone = valid_start_date.to_time.zone)
         sql.gsub(VISIT_DATE_PLACEHOLDER, visit_date_sql(zone))
           .gsub(START_DATE_PLACEHOLDER, start_date_sql)
           .gsub(END_DATE_PLACEHOLDER, end_date_sql)
@@ -153,27 +153,27 @@ module Analytics
           .gsub(GENERATE_SERIES_PLACEHOLDER, generate_series_sql)
       end
 
-      def timezone_sql(zone = start_date.in_time_zone.zone)
+      def timezone_sql(zone = valid_start_date.in_time_zone.zone)
         "AT TIME ZONE 'UTC' AT TIME ZONE #{quote(zone)}"
       end
 
-      def start_date_sql(_zone = start_date.to_time.zone)
-        "#{quote(start_date)}::date"
+      def start_date_sql(_zone = valid_start_date.to_time.zone)
+        "#{quote(valid_start_date)}::date"
       end
 
-      def end_date_sql(_zone = end_date.to_time.zone)
-        "#{quote(end_date)}::date"
+      def end_date_sql(_zone = valid_end_date.to_time.zone)
+        "#{quote(valid_end_date)}::date"
       end
 
-      def visit_date_sql(_zone = start_date.to_time.zone)
+      def visit_date_sql(_zone = valid_start_date.to_time.zone)
         self.class.timestamp_field_in_range("started_at")
       end
 
-      def generate_series_sql(zone = start_date.to_time.zone)
+      def generate_series_sql(zone = valid_start_date.to_time.zone)
         <<~SQL.strip_heredoc.squish
         generate_series(
-          (TIMESTAMP #{quote(start_date)} AT TIME ZONE #{quote(zone)}),
-          (TIMESTAMP #{quote(end_date)} AT TIME ZONE #{quote(zone)}),
+          (TIMESTAMP #{quote(valid_start_date)} AT TIME ZONE #{quote(zone)}),
+          (TIMESTAMP #{quote(valid_end_date)} AT TIME ZONE #{quote(zone)}),
           INTERVAL '1 day'
         ) AS t(d)
         SQL

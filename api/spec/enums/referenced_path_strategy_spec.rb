@@ -1,27 +1,27 @@
 require "rails_helper"
 
-RSpec.describe ReferencedPathStrategy, packaging: true, type: :enum do
-  describe ".find_for" do
-    matcher :use_referenced_path_strategy do |name|
-      match do |path|
-        @metadata ||= {}.with_indifferent_access
+RSpec::Matchers.define :use_referenced_path_strategy do |name|
+  match do |path|
+    @metadata ||= {}.with_indifferent_access
 
-        ReferencedPathStrategy.find_for path do |m|
-          m.success do |enum, metadata|
-            enum == name && metadata == @metadata
-          end
-
-          m.failure do |enum, metadata|
-            enum == name && metadata == @metadata
-          end
-        end
+    ReferencedPathStrategy.find_for path do |m|
+      m.success do |enum, metadata|
+        enum == name && metadata == @metadata
       end
 
-      chain :with_metadata do |metadata|
-        @metadata = Hash(metadata).with_indifferent_access
+      m.failure do |enum, metadata|
+        enum == name && metadata == @metadata
       end
     end
+  end
 
+  chain :with_metadata do |metadata|
+    @metadata = Hash(metadata).with_indifferent_access
+  end
+end
+
+RSpec.describe ReferencedPathStrategy, packaging: true, type: :enum do
+  describe ".find_for" do
     class << self
       def finds_strategy_given(path, strategy, **provided_metadata)
         context "with #{path.inspect} as input" do

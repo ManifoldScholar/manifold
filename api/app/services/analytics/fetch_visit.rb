@@ -1,12 +1,12 @@
 module Analytics
   class FetchVisit < ActiveInteraction::Base
 
-    string :visit_token
-    string :visitor_token
+    with_options default: nil do
+      string :visit_token
+      string :visitor_token
+    end
 
     object :request, class: ActionDispatch::Request
-
-    set_callback :type_check, :before, :extract_tokens
 
     def execute
       visit || track_new_visit
@@ -14,15 +14,16 @@ module Analytics
 
     private
 
-    def extract_tokens
-      # rubocop:disable Naming/MemoizedInstanceVariableName
-      @visit_token ||= request.headers["HTTP_VISIT_TOKEN"]
-      @visitor_token ||= request.headers["HTTP_VISITOR_TOKEN"]
-      # rubocop:enable Naming/MemoizedInstanceVariableName
+    def valid_visit_token
+      @valid_visit_token ||= visit_token || request.headers["HTTP_VISIT_TOKEN"]
+    end
+
+    def valid_visitor_token
+      @valid_visitor_token ||= visitor_token || request.headers["HTTP_VISITOR_TOKEN"]
     end
 
     def visit
-      @visit ||= Analytics::Visit.find_by(visit_token: visit_token)
+      @visit ||= Analytics::Visit.find_by(visit_token: valid_visit_token)
     end
 
     def track_new_visit
@@ -36,8 +37,8 @@ module Analytics
 
     def tracker_args
       {
-        visit_token: visit_token,
-        visitor_token: visitor_token,
+        visit_token: valid_visit_token,
+        visitor_token: valid_visitor_token,
         request: request
       }.compact
     end

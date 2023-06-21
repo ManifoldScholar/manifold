@@ -9,7 +9,7 @@ module Analytics
 
     def job_params
       {
-        analytics_visit: analytics_visit.id,
+        analytics_visit: valid_analytics_visit.id,
         record_id: record_id,
         record_type: record_type,
         time: Time.current

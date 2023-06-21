@@ -39,8 +39,8 @@ RSpec.describe Search::QueryBuilder, elasticsearch: true, interaction: true do
 
   context "with nothing provided" do
     its(:body) { is_expected.to be_present }
-
-    it { is_expected.to be_invalid.and have(1).error_on(:base) }
+    it { is_expected.to be_invalid }
+    it { is_expected.to have(1).error_on(:base) }
   end
 
   context "with a needle" do

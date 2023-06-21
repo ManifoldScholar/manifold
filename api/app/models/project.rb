@@ -26,6 +26,7 @@ class Project < ApplicationRecord
   include WithConfigurableAvatar
 
   # Magic
+
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :restricted_access_body, include_wrap: false
   has_formatted_attributes :title, include_wrap: false
@@ -57,7 +58,7 @@ class Project < ApplicationRecord
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
-  has_many :collection_project_rankings, source: :ranking
+  has_many :collection_project_rankings
   has_many :project_collections, through: :collection_projects, dependent: :destroy
   has_many :texts, dependent: :destroy, inverse_of: :project
   has_many :text_summaries, inverse_of: :project

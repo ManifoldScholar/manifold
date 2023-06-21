@@ -5,7 +5,7 @@ module Analytics
       validate :resource_is_project!
 
       def resource_is_project!
-        errors.add :resource, "must be a project" unless resource.is_a?(Project)
+        errors.add :resource, "must be a project" unless valid_resource.is_a?(Project)
       end
 
       register_base_cte! :visits, <<~SQL

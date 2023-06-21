@@ -6,15 +6,17 @@ module Analytics
     string :record_type, default: nil
     string :record_id, default: nil
 
-    set_callback :type_check, :before, :set_scope
+    def valid_record
+      @valid_record ||= set_valid_record
+    end
 
     private
 
-    def set_scope
-      return if record.present?
-      return if record_type.blank? || record_id.blank?
+    def set_valid_record
+      return record if record.present?
+      return record if record_type.blank? || record_id.blank?
 
-      @record = record_type.classify.safe_constantize&.find_by(id: record_id)
+      record_type.classify.safe_constantize&.find_by(id: record_id)
     end
 
   end

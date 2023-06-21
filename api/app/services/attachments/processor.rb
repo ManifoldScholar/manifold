@@ -2,7 +2,7 @@ module Attachments
   class Processor < ActiveInteraction::Base
     object :shrine_uploaded_file, class: Object
     file :file_resource
-    interface :model
+    object :model, class: Object
     hash :attachment_options do
       symbol :type
       boolean :no_styles, :validate_content_type
