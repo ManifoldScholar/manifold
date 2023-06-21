@@ -54,7 +54,7 @@ module ResourceImportRows
         row.save
         next outcome
       end
-      row.import_errors = outcome.errors[:base]
+      row.import_errors = outcome.errors[:base].to_a
       row.state_machine.transition_to!(:failed)
       row.save
       outcome

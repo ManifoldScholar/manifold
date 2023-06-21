@@ -24,8 +24,7 @@ RSpec.describe Packaging::Shared::ReferenceSelector, packaging: true do
       end
     end
   end
-
-  matcher :maybe_refer_to_an_external_resource do
+  RSpec::Matchers.define :maybe_refer_to_an_external_resource do
     match { |actual| actual.can_refer_to_external_resource? }
   end
 

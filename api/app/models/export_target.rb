@@ -6,7 +6,7 @@ class ExportTarget < ApplicationRecord
 
   classy_enum_attr :strategy, enum: "ExportTargetStrategy", default: :unknown
 
-  encrypts :configuration, type: ExportStrategies::Configuration.to_type
+  has_encrypted :configuration, type: ExportStrategies::Configuration.to_type
 
   friendly_id :name, use: :slugged
 

@@ -287,7 +287,6 @@ RSpec.shared_examples_for "analytics reporter events" do
         expect(actual).to eq expected
       end
     rescue Exception => e
-      binding.pry
 
       raise e
     end

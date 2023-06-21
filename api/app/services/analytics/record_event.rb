@@ -8,13 +8,9 @@ module Analytics
     LEAVE_EVENT_MATCHER = "leave".freeze
 
     record :analytics_visit, class: Analytics::Visit
-
     string :visit_token, default: nil
     string :visitor_token, default: nil
-
     object :request, class: ActionDispatch::Request, default: nil
-
-    set_callback :type_check, :before, :set_visit
 
     class << self
       def record_event(inputs)
@@ -38,21 +34,23 @@ module Analytics
 
     private
 
-    def set_visit
-      return if analytics_visit.present? || request.blank?
+    def set_valid_analytics_visit
+      return analytics_visit if analytics_visit.present? || request.blank?
+      return analytics_visit if valid_visit_token.blank?
 
-      get_tokens
-
-      return if visit_token.blank?
-
-      @analytics_visit = Analytics::FetchVisit.run!(visit_token: visit_token, visitor_token: visitor_token, request: request)
+      Analytics::FetchVisit.run!(visit_token: valid_visit_token, visitor_token: valid_visitor_token, request: request)
     end
 
-    def get_tokens
-      # rubocop:disable Naming/MemoizedInstanceVariableName
-      @visit_token ||= request.headers["HTTP_VISIT_TOKEN"]
-      @visitor_token ||= request.headers["HTTP_VISITOR_TOKEN"]
-      # rubocop:enable Naming/MemoizedInstanceVariableName
+    def valid_analytics_visit
+      @valid_analytics_visit ||= set_valid_analytics_visit
+    end
+
+    def valid_visit_token
+      @valid_visit_token ||= visit_token || request.headers["HTTP_VISIT_TOKEN"]
+    end
+
+    def valid_visitor_token
+      @valid_visitor_token ||= valid_visitor_token || request.headers["HTTP_VISITOR_TOKEN"]
     end
 
   end

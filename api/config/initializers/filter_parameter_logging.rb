@@ -22,5 +22,14 @@ Rails.application.config.filter_parameters += [
   "variant_format_two.data",
   "variant_thumbnail.data",
   "variant_poster.data",
-  "press_logo.data"
+  "press_logo.data",
+  :passw,
+  :secret,
+  :token,
+  :_key,
+  :crypt,
+  :salt,
+  :certificate,
+  :otp,
+  :ssn
 ]

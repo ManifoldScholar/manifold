@@ -5,7 +5,7 @@ module Analytics
       validate :resource_is_text!
 
       def resource_is_text!
-        errors.add :resource, "must be a text" unless resource.is_a?(Text)
+        errors.add :resource, "must be a text" unless valid_resource.is_a?(Text)
       end
 
       register_base_cte! :visits, <<~SQL

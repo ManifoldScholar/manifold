@@ -17,11 +17,8 @@ class ApplicationRecord < ActiveRecord::Base
     self.class.connection.quote id if persisted? && id.kind_of?(String)
   end
 
-  # https://api.rubyonrails.org/classes/ActiveModel/Errors.html#method-i-merge-21
-  # This exists in Rails 5.2, so we can remove this whenever we upgrade to 5.2
   def merge_errors!(other)
-    errors.messages.merge!(other.messages) { |_, ary1, ary2| ary1 + ary2 }
-    errors.details.merge!(other.details) { |_, ary1, ary2| ary1 + ary2 }
+    errors.merge!(other)
   end
 
   class << self

@@ -59,7 +59,7 @@ class User < ApplicationRecord
 
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
   validate :password_not_blank!
-  validates :email, presence: true, case_sensitive: false
+  validates :email, presence: true
   validates :email, uniqueness: true, email_format: { message: "is not valid" }
   validates :first_name, :last_name, presence: true
 

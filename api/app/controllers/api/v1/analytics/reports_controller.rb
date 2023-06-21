@@ -12,6 +12,7 @@ module API
           return respond_with_bad_request unless valid_report_type?
 
           outcome = run_report
+
           render_jsonapi(outcome.result, serializer: ::V1::AnalyticsResultSerializer, **serialization_options(outcome))
         end
 

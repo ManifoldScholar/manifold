@@ -1,5 +1,3 @@
-include ActionDispatch::TestProcess
-
 FactoryBot.define do
   factory :resource_import do
     source { :attached_data }
@@ -7,14 +5,14 @@ FactoryBot.define do
     storage_identifier { "0B6UzSqdJo8o8WU40WHFTeWFPUW8" }
     header_row { 2 }
     column_map { {} }
-    data { fixture_file_upload(Rails.root.join('spec', 'data','resource_import','resources.csv'), 'text/csv') }
+    data { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'data','resource_import','resources.csv'), 'text/csv') }
     association :creator, factory: :user
     project
 
     factory :resource_import_csv do
       source { :attached_data }
       header_row { 2 }
-      data { fixture_file_upload(Rails.root.join('spec', 'data','resource_import','resources.csv'), 'text/csv') }
+      data { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'data','resource_import','resources.csv'), 'text/csv') }
       url { nil }
     end
 

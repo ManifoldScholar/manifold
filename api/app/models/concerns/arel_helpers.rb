@@ -279,7 +279,7 @@ module ArelHelpers
     # @return [Arel::Node]
     def arel_attrify(attribute)
       case attribute
-      when Arel::Attributes::Attribute, Arel::Nodes::SqlLiteral, Arel::Expressions, Arel::Node
+      when Arel::Attributes::Attribute, Arel::Nodes::SqlLiteral, Arel::Expressions, Arel::Nodes::Node
         attribute
       when arel_column_matcher
         arel_table[attribute]
@@ -403,7 +403,7 @@ module ArelHelpers
     # @param [Arel::Node, Object] arg
     # @return [Arel::Node, Arel::Nodes::Quoted]
     def arel_quote(arg)
-      return arg if arg.is_a?(Arel::Node)
+      return arg if arg.is_a?(Arel::Nodes::Node)
 
       Arel::Nodes.build_quoted arg
     end

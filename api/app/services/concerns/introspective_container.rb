@@ -3,7 +3,7 @@ module IntrospectiveContainer
   extend ActiveSupport::Concern
 
   included do
-    extend Dry::Container::Mixin
+    extend Dry::Core::Container::Mixin
   end
 
   module ClassMethods

@@ -1,7 +1,7 @@
 module Utility
   # Monadic interface to `HTTParty`
   module DryHTTP
-    extend Dry::Container::Mixin
+    extend Dry::Core::Container::Mixin
 
     register "get" do
       Utility::DryHTTP::Requestor.new(:get)
