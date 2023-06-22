@@ -55,7 +55,7 @@ export const Select = styled.select`
 
     &[data-active="true"] {
       color: var(--drawer-bg-color);
-      background-color: var(--color-accent-primary);
+      background-color: ${({ $color }) => $color};
     }
 
     &:hover {

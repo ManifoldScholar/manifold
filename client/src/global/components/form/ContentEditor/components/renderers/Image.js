@@ -12,9 +12,18 @@ import {
   handleImageHotkey,
   handleIframeHotkey
 } from "../../transforms/handlers";
+import HtmlLabel from "./HtmlLabel";
+import { getHtmlOutlineStyles } from "./styles";
 import * as Styled from "./styles";
 
-export default function ImageRenderer({ element, children, attributes, as }) {
+export default function ImageRenderer({
+  element,
+  children,
+  attributes,
+  as,
+  showHtml,
+  darkMode
+}) {
   const editor = useSlateStatic();
   const focused = useFocused();
   const selected = useSelected();
@@ -45,6 +54,7 @@ export default function ImageRenderer({ element, children, attributes, as }) {
     <div
       className={htmlAttrs?.inline ? "inline-block" : undefined}
       {...attributes}
+      style={showHtml ? getHtmlOutlineStyles("a", darkMode) : undefined}
     >
       {children}
       <span contentEditable={false}>
@@ -74,6 +84,7 @@ export default function ImageRenderer({ element, children, attributes, as }) {
           </Styled.ButtonGroup>
         </Styled.ImageWrapper>
       </span>
+      <HtmlLabel element={element} visible={showHtml} />
     </div>
   );
 }

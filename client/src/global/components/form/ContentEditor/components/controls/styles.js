@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
-import { respond } from "theme/styles/mixins";
+import { respond, buttonUnstyled } from "theme/styles/mixins";
+import { COLOR_MAP } from "../renderers/styles";
+import IconComposer from "global/components/utility/IconComposer";
 
 export const Toolbar = styled.div`
   width: 100%;
@@ -41,4 +43,44 @@ export const ToggleBar = styled.div`
   row-gap: 12px;
   justify-content: space-between;
   margin-block-end: 32px;
+`;
+
+export const BreadcrumbsBar = styled.div`
+  border-left: 1px solid;
+  border-right: 1px solid;
+  background: ${({ $darkMode }) =>
+    $darkMode ? `var(--TextArea-border-color)` : `var(--color-base-neutral30)`};
+  border-color: var(--TextArea-border-color);
+  color: var(--drawer-bg-color);
+  padding-inline: 1.5em;
+  padding-block-start: 3px;
+  padding-block-end: 6px;
+  min-height: 30px;
+  font-family: var(--font-family-heading);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: scroll;
+`;
+
+export const Breadcrumb = styled.button`
+  ${buttonUnstyled}
+
+  &:hover {
+    color: ${({ $color, $darkMode }) =>
+      $darkMode ? COLOR_MAP[$color].dark : COLOR_MAP[$color].light};
+  }
+`;
+
+export const Spacer = styled(IconComposer)`
+  transform: rotate(-90deg);
+  margin-block-start: 4px;
+  flex-shrink: 0;
+`;
+
+export const ShowHideButton = styled.button`
+  ${buttonUnstyled}
+  display: flex;
+  align-items: center;
+  margin-inline-start: auto;
 `;

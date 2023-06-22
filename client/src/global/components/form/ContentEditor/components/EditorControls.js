@@ -32,7 +32,11 @@ export default function EditorControls({
           controlsRef={controlsRef}
         />
       ) : (
-        <ToolbarRTE onClickUndo={onClickUndo} onClickRedo={onClickRedo} />
+        <ToolbarRTE
+          onClickUndo={onClickUndo}
+          onClickRedo={onClickRedo}
+          darkMode={darkMode}
+        />
       )}
     </Styled.Controls>
   );
