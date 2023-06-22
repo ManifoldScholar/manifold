@@ -1,7 +1,5 @@
-import { toggleMark } from "../components/controls/buttons/MarkButton";
-import { toggleBlock } from "../components/controls/buttons/BlockButton";
-import { increaseIndent, decreaseIndent } from "./indents";
-import { getListItemNode } from "./utils";
+import { increaseIndent, decreaseIndent } from "./listIndents";
+import { getListItemNode, toggleMark, toggleBlock } from "../utils/slate";
 import {
   handleLinkHotkey,
   handleImageHotkey,

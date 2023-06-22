@@ -1,11 +1,21 @@
 import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
-import { toggleBlock } from "./BlockButton";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
-import { getActiveBlock } from "./utils";
+import { toggleBlock, isBlockActive } from "../../../utils/slate";
 import * as Styled from "./styles";
+
+const getActiveBlock = (editor, opts) => {
+  const active = opts
+    .map(o => [o, isBlockActive(editor, o)])
+    .reduce((obj, o) => ({ ...obj, [o[0]]: o[1] }), {});
+  const activeCount = opts.map(o => isBlockActive(editor, o)).filter(Boolean)
+    .length;
+
+  if (activeCount !== 1) return "";
+  return Object.keys(active).find(o => active[o]);
+};
 
 const BlockSelect = ({ options, ...rest }, ref) => {
   const editor = useSlate();
