@@ -1,8 +1,10 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import PropTypes from "prop-types";
 import setter from "../setter";
 import FieldWrapper from "../FieldWrapper";
 import Loadable from "@docusaurus/react-loadable";
+
+export const HtmlBreadcrumbsContext = createContext([]);
 
 const Editor = Loadable({
   loader: () => import("./components/Editor").then(editor => editor.default),
@@ -19,15 +21,21 @@ function ContentEditor({
   initialSlateValue,
   ...props
 }) {
+  const [selectedCrumb, setSelectedCrumb] = useState();
+
   return (
     <FieldWrapper className="wide">
-      <Editor
-        set={set}
-        initialSlateValue={initialSlateValue}
-        initialHtmlValue={initialHtmlValue}
-        stylesheets={stylesheets}
-        {...props}
-      />
+      <HtmlBreadcrumbsContext.Provider
+        value={{ selectedCrumb, setSelectedCrumb }}
+      >
+        <Editor
+          set={set}
+          initialSlateValue={initialSlateValue}
+          initialHtmlValue={initialHtmlValue}
+          stylesheets={stylesheets}
+          {...props}
+        />
+      </HtmlBreadcrumbsContext.Provider>
     </FieldWrapper>
   );
 }

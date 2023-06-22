@@ -9,28 +9,27 @@ import * as Styled from "./styles";
 
 const LIST_TYPES = ["ol", "ul"];
 
-export const isBlockActive = (editor, format, blockType = "type") => {
+export const isBlockActive = (editor, format) => {
   const { selection } = editor;
   if (!selection) return false;
 
-  const [match] = Array.from(
+  const matches = Array.from(
     Editor.nodes(editor, {
       at: Editor.unhangRange(editor, selection),
       match: n =>
-        !Editor.isEditor(n) &&
-        SlateElement.isElement(n) &&
-        n[blockType] === format &&
-        !n.nodeName
+        !Editor.isEditor(n) && n.type === format && !n.nodeName && !n.slateOnly
     })
   );
 
-  return !!match;
+  return !!matches.length;
 };
 
 /* eslint-disable no-nested-ternary */
 export const toggleBlock = (editor, format) => {
   const isActive = isBlockActive(editor, format);
   const isList = LIST_TYPES.includes(format);
+
+  if (isActive && format === "pre") Editor.removeMark(editor, "code", true);
 
   Transforms.unwrapNodes(editor, {
     match: n =>
@@ -55,7 +54,7 @@ export const toggleBlock = (editor, format) => {
     Transforms.wrapNodes(editor, block);
   }
 
-  if (format === "pre") Editor.addMark(editor, "code", true);
+  if (!isActive && format === "pre") Editor.addMark(editor, "code", true);
 
   ReactEditor.focus(editor);
 };

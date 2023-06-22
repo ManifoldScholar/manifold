@@ -1,4 +1,5 @@
 import { Transforms, Editor, Node } from "slate";
+import { ReactEditor } from "slate-react";
 import has from "lodash/has";
 
 export const setSelectionAtPoint = (editor, path, offset = 0) => {
@@ -100,4 +101,24 @@ export const getCommonBlock = editor => {
       match: n => Editor.isBlock(editor, n) || Editor.isEditor(n)
     });
   }
+};
+
+export const formatNodeLabel = node => {
+  let label = node.type === "void" ? node.nodeName : node.type;
+  const { htmlAttrs } = node ?? {};
+  if (htmlAttrs?.id) label = `${label}#${htmlAttrs.id}`;
+  if (htmlAttrs?.class) label = `${label}.${htmlAttrs.class.replace(" ", ".")}`;
+  return label;
+};
+
+export const getAncestors = (editor, iterator, list = {}) => {
+  const { value } = iterator.next();
+  if (!value) return list;
+  const [node] = value;
+  const key = ReactEditor.findKey(editor, node);
+  const next =
+    node.type && !node.slateOnly
+      ? { ...list, [key.id]: formatNodeLabel(node) }
+      : list;
+  return getAncestors(editor, iterator, next);
 };

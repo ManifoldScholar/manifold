@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "./Image";
 import Void from "./Void";
+import HtmlLabel from "./HtmlLabel";
 import {
   rteElements,
   renderedElements,
@@ -8,6 +9,9 @@ import {
 } from "../../utils/elements";
 import classNames from "classnames";
 import * as Styled from "./styles";
+import { getHtmlOutlineStyles } from "./styles";
+import { useSlateStatic, ReactEditor } from "slate-react";
+import { HtmlBreadcrumbsContext } from "../../index";
 
 export default function SlateElement({
   attributes,
@@ -19,16 +23,34 @@ export default function SlateElement({
   const className = element.htmlAttrs?.class || undefined;
   const epubType = element.htmlAttrs?.["data-epub-type"] || undefined;
 
+  const editor = useSlateStatic();
+  const { id } = ReactEditor.findKey(editor, element);
+  const { selectedCrumb } = useContext(HtmlBreadcrumbsContext);
+  const showHtml = selectedCrumb === id || selectedCrumb === "all";
+
   if (element.type === "br") {
-    return <p {...attributes}>{children}</p>;
+    return (
+      <p
+        {...attributes}
+        style={showHtml ? getHtmlOutlineStyles("p", darkMode) : undefined}
+      >
+        {children}
+        <HtmlLabel element={element} visible={showHtml} />
+      </p>
+    );
   }
   if (element.type === "hr") {
     return (
       <Styled.HrOuter contentEditable={false} {...attributes}>
         {children}
         <Styled.HrInner>
-          <hr className={className} data-epub-type={epubType} />
+          <hr
+            className={className}
+            data-epub-type={epubType}
+            style={showHtml ? getHtmlOutlineStyles("hr", darkMode) : undefined}
+          />
         </Styled.HrInner>
+        <HtmlLabel element={element} visible={showHtml} />
       </Styled.HrOuter>
     );
   }
@@ -39,6 +61,7 @@ export default function SlateElement({
         element={element}
         theme={theme}
         darkMode={darkMode}
+        showHtml={showHtml}
       >
         {children}
       </Void>
@@ -46,14 +69,25 @@ export default function SlateElement({
   }
   if (element.type === "img") {
     return (
-      <Image attributes={attributes} element={element}>
+      <Image
+        attributes={attributes}
+        element={element}
+        showHtml={showHtml}
+        darkMode={darkMode}
+      >
         {children}
       </Image>
     );
   }
   if (element.type === "iframe") {
     return (
-      <Image as="iframe" attributes={attributes} element={element}>
+      <Image
+        as="iframe"
+        attributes={attributes}
+        element={element}
+        showHtml={showHtml}
+        darkMode={darkMode}
+      >
         {children}
       </Image>
     );
@@ -65,15 +99,23 @@ export default function SlateElement({
         data-epub-type={epubType}
         href={element.htmlAttrs?.href}
         {...attributes}
+        style={showHtml ? getHtmlOutlineStyles("a", darkMode) : undefined}
       >
         {children}
+        <HtmlLabel element={element} visible={showHtml} />
       </a>
     );
   }
   if (element.type === "pre") {
     return (
-      <pre className={className} data-epub-type={epubType} {...attributes}>
+      <pre
+        className={className}
+        data-epub-type={epubType}
+        {...attributes}
+        style={showHtml ? getHtmlOutlineStyles("pre", darkMode) : undefined}
+      >
         <code>{children}</code>
+        <HtmlLabel element={element} visible={showHtml} />
       </pre>
     );
   }
@@ -95,8 +137,14 @@ export default function SlateElement({
   ) {
     const Tag = element.type === "list-sibling" ? "span" : element.type;
     return (
-      <Tag className={className} data-epub-type={epubType} {...attributes}>
+      <Tag
+        className={className}
+        data-epub-type={epubType}
+        {...attributes}
+        style={showHtml ? getHtmlOutlineStyles(Tag, darkMode) : undefined}
+      >
         {children}
+        <HtmlLabel element={element} visible={showHtml} />
       </Tag>
     );
   }
