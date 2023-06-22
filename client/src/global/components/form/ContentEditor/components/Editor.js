@@ -74,7 +74,8 @@ export default function Editor({
       const controls = document.getElementById("editor-controls");
       const buttonsRect = buttons.getBoundingClientRect();
       const controlsRect = controls.getBoundingClientRect();
-      const isInView = rect.y < buttonsRect.top && rect.y > controlsRect.bottom;
+      const isInView =
+        rect.bottom < buttonsRect.top && rect.y > controlsRect.bottom;
       if (!isInView) {
         node.parentElement.scrollIntoView({
           behavior: "smooth",
