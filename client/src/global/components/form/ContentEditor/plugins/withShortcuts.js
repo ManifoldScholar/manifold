@@ -1,5 +1,5 @@
 import { Editor, Element, Range, Transforms, Node } from "slate";
-import { toggleBlock } from "../components/controls/buttons/BlockButton";
+import { toggleBlock } from "../utils/slate";
 
 const SHORTCUTS = {
   "*": "ul",

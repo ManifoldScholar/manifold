@@ -1,7 +1,5 @@
-import { wrapLink } from "../components/controls/buttons/LinkButton";
 import { inlineNodes } from "../utils/elements";
-import { insertImage } from "../components/controls/buttons/ImageButton";
-import { insertIframe } from "../components/controls/buttons/IframeButton";
+import { wrapLink, insertImage, insertIframe } from "../utils/slate";
 import { isValidUrl, isImageUrl, isVideoUrl } from "../utils/helpers";
 import { mathMLElements } from "reader/containers/annotation/annotatable-components/mathHelpers";
 

@@ -14,7 +14,8 @@ import {
 import HtmlEditor from "./HtmlEditor";
 import Controls from "./EditorControls";
 import withPlugins from "../plugins";
-import { clearSlate, formatHtml } from "../utils/helpers";
+import { formatHtml } from "../utils/helpers";
+import { clearSlate } from "../utils/slate";
 import { ErrorBoundary } from "react-error-boundary";
 import isEqual from "lodash/isEqual";
 import throttle from "lodash/throttle";

@@ -1,15 +1,67 @@
 import { Editor as SlateEditor, Transforms, Node, Point } from "slate";
 import {
-  findListChild,
-  nestListItem,
-  liftListItem,
   getListNode,
   getListItemNode,
   setSelectionAtPoint,
-  getIndentSelectionLocation,
-  handleInlineItemChildren
-} from "./utils";
-import { toggleBlock } from "../components/controls/buttons/BlockButton";
+  toggleBlock
+} from "../utils/slate";
+import has from "lodash/has";
+
+const getTextLocation = (editor, iterator, path, str = "") => {
+  const { value } = iterator.next();
+  if (!value) return { textContent: str, lastPath: path };
+  const [node, nodePath] = value;
+  if (node.type === "list-sibling")
+    return getTextLocation(editor, Node.children(editor, nodePath), nodePath);
+  const isTextNode = has(node, "text");
+  const nextStr = isTextNode ? node.text : str;
+  const nextPath = isTextNode ? nodePath : path;
+  return getTextLocation(editor, iterator, nextPath, nextStr);
+};
+
+// There must be a better way to achieve this with Range, but I haven't taken the time to figure it out. -LD
+const getIndentSelectionLocation = (editor, path) => {
+  const textIterator = Node.children(editor, path);
+  const { textContent, lastPath } = getTextLocation(editor, textIterator, path);
+  return { path: lastPath, offset: textContent.length };
+};
+
+const nestListItem = ({ editor, srcPath, destPath, node, type }) => {
+  const children = Array.isArray(node) ? node : [node];
+  Transforms.removeNodes(editor, { at: srcPath });
+  Transforms.insertNodes(editor, [{ type, children }], {
+    at: destPath
+  });
+};
+
+const liftListItem = ({ editor, srcPath, destPath, unwrap = true }) => {
+  if (destPath) Transforms.moveNodes(editor, { at: srcPath, to: destPath });
+  if (unwrap) {
+    const targetPath = destPath ?? srcPath;
+    Transforms.unwrapNodes(editor, { at: targetPath });
+  }
+};
+
+const handleInlineItemChildren = ({ editor, at, nodes }) => {
+  if (nodes)
+    return Transforms.insertNodes(
+      editor,
+      [{ type: "list-sibling", slateOnly: true, children: nodes }],
+      { at }
+    );
+  return Transforms.unwrapNodes(editor, {
+    at,
+    match: n => n.type === "list-sibling"
+  });
+};
+
+const findListChild = iterator => {
+  const { value } = iterator.next();
+  if (!value) return [];
+  const [node, path] = value;
+  if (node.type === "ul" || node.type === "ol") return [node, path];
+  return findListChild(iterator);
+};
 
 export const increaseIndent = editor => {
   const [node, path] = getListItemNode(editor, editor.selection);

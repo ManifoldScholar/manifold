@@ -1,6 +1,6 @@
 import React from "react";
 import { rteElements, inlineNodes } from "../../utils/elements";
-import { formatNodeLabel } from "../../transforms/utils";
+import { formatNodeLabel } from "../../utils/slate";
 import * as Styled from "./styles";
 
 export default function HtmlLabel({ visible, element }) {

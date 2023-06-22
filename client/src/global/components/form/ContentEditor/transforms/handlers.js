@@ -1,10 +1,10 @@
-import { getCommonBlock } from "./utils";
-import { isValidUrl } from "../utils/helpers";
 import {
+  getCommonBlock,
   wrapLink,
   unwrapLink,
   isLinkActive
-} from "../components/controls/buttons/LinkButton";
+} from "../utils/slate";
+import { isValidUrl } from "../utils/helpers";
 import { Transforms, Range, Node } from "slate";
 
 export const handleLinkHotkey = editor => {

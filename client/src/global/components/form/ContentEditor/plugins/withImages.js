@@ -1,4 +1,4 @@
-import { insertImage } from "../components/controls/buttons/ImageButton";
+import { insertImage } from "../utils/slate";
 import { isImageUrl } from "../utils/helpers";
 
 /* eslint-disable no-param-reassign */

@@ -1,7 +1,7 @@
 import { Editor, Range, Transforms, Path, Element, Point, Node } from "slate";
 import { rteElements } from "../utils/elements";
-import { decreaseIndent } from "../transforms/indents";
-import { getListItemNode } from "../transforms/utils";
+import { decreaseIndent } from "../transforms/listIndents";
+import { getListItemNode } from "../utils/slate";
 
 // The plugins here are for dealing with nodes that are "invisible" in the RTE, that is renderedElements in "../utils/elements". For example, with html such as <p><span>my text</span></p>, if a user hit enter at the end of "text" having moved selection there in an inline way (that is, by arrowing left or right or by typing in the line but not by arrowing up and down which selects blocks only), Slate would by default simply split the p block. This would result in a new block with the html <p><span></span></p>. Since this span is invisible to the user in RTE mode, I'm assuming that user really wants html of just <p></p> and inserting that instead. It might make sense in a later iteration to assign all the elements in renderedElements to either void or full RTE elements, so there are not invisisbles and all nodes are either preview only or managed with the toolbars. Doing so would remove much of the complexity here. -LD
 
