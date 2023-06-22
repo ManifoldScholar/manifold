@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import { ReactEditor, useFocused, useSelected } from "slate-react";
 import Utility from "global/components/utility";
+import HtmlLabel from "./HtmlLabel";
+import { getHtmlOutlineStyles } from "./styles";
 import * as Styled from "./styles";
 
 export default function VoidRenderer({
@@ -8,7 +10,8 @@ export default function VoidRenderer({
   children,
   attributes,
   theme,
-  darkMode
+  darkMode,
+  showHtml
 }) {
   const focused = useFocused();
   const selected = useSelected();
@@ -44,7 +47,11 @@ export default function VoidRenderer({
   return (
     <Styled.VoidOuter {...attributes}>
       {children}
-      <Styled.VoidInner contentEditable={false} $selected={selected && focused}>
+      <Styled.VoidInner
+        contentEditable={false}
+        $selected={selected && focused}
+        style={showHtml ? getHtmlOutlineStyles("div", darkMode) : undefined}
+      >
         <Styled.VoidLabel>
           <Utility.IconComposer
             svgProps={{ style: { flexShrink: 0 } }}
@@ -53,6 +60,7 @@ export default function VoidRenderer({
           <span>Preview only. Switch to HTML mode to edit this block:</span>
         </Styled.VoidLabel>
         <div ref={ref} />
+        <HtmlLabel element={element} visible={showHtml} />
       </Styled.VoidInner>
     </Styled.VoidOuter>
   );

@@ -5,6 +5,7 @@ import {
   formLabelPrimary,
   respond
 } from "theme/styles/mixins";
+import { rteElements, inlineNodes } from "../../utils/elements";
 
 export const ButtonGroup = styled.div`
   display: none;
@@ -118,3 +119,65 @@ export const HrInner = styled.span`
   margin: 0;
   width: 100%;
 `;
+
+export const COLOR_MAP = {
+  green: {
+    light: "var(--color-interaction-dark)",
+    dark: "var(--color-accent-primary)"
+  },
+  blue: { light: "var(--color-base-blue75)", dark: "var(--color-base-blue45)" },
+  yellow: {
+    dark: "var(--color-base-yellow20)",
+    light: "var(--color-base-orange75)"
+  }
+};
+
+export const ElementLabel = styled.span`
+  position: absolute;
+  display: inline-block;
+  left: -8px;
+  top: -26px;
+  font-size: 14px;
+  line-height: 1;
+  padding: 2px;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-regular);
+  border: 0px solid;
+  border-bottom: 0;
+  white-space: nowrap;
+  text-indent: 0;
+  z-index: 10;
+  padding-inline: 4px;
+  padding-block-start: 2px;
+  padding-block-end: 4px;
+
+  .scheme-dark & {
+    background: ${({ $color }) => COLOR_MAP[$color].dark};
+    color: var(--drawer-bg-color);
+  }
+
+  .scheme-light & {
+    background: ${({ $color }) => COLOR_MAP[$color].light};
+    color: var(--background-color);
+  }
+`;
+
+export const getHtmlOutlineStyles = (nodeName, darkMode) => {
+  /* eslint-disable no-nested-ternary */
+  const color = rteElements.includes(nodeName)
+    ? "green"
+    : inlineNodes.includes(nodeName)
+    ? "blue"
+    : "yellow";
+
+  return {
+    outline: "2px dotted",
+    outlineColor: darkMode ? COLOR_MAP[color].dark : COLOR_MAP[color].light,
+    borderRadius: "2px",
+    borderTopLeftRadius: 0,
+    outlineOffset: "6px",
+    position: "relative"
+  };
+};
