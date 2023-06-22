@@ -6,7 +6,10 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
 import { useHistory } from "react-router-dom";
-import { serializeToSlate } from "global/components/form/ContentEditor/serializers";
+import {
+  serializeToSlate,
+  removeFormatting
+} from "global/components/form/ContentEditor/serializers";
 import { formatHtml } from "global/components/form/ContentEditor/utils/helpers";
 import * as Styled from "./styles";
 
@@ -18,7 +21,8 @@ const defaultValue = [
 ];
 
 const getInitialSlateValue = value => {
-  if (value && typeof value === "string") return serializeToSlate(value);
+  if (value && typeof value === "string")
+    return serializeToSlate(formatHtml(value));
   return defaultValue;
 };
 
