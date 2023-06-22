@@ -7,27 +7,12 @@ import InsertIframeForm from "./insert/IframeForm";
 import { useConfirmation } from "hooks";
 import Utility from "global/components/utility";
 import { isValidUrl } from "../../../utils/helpers";
-import { isBlockActive } from "./BlockButton";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { descriptions, labels, hotkeys } from "./TooltipContent/hotkeys";
 import { onModalClose } from "./utils";
+import { insertIframe, isBlockActive } from "../../../utils/slate";
 import * as Styled from "./styles";
-
-export const insertIframe = (editor, url, title) => {
-  const text = { text: "", slateOnly: true };
-  const embed = {
-    type: "iframe",
-    htmlAttrs: { src: url, title },
-    children: [text]
-  };
-  const [node] = Editor.above(editor, editor.selection);
-  if (Editor.isEmpty(editor, node)) {
-    Transforms.removeNodes(editor);
-  }
-  Transforms.insertNodes(editor, embed);
-  ReactEditor.focus(editor);
-};
 
 const IframeButton = ({ icon, size, ...rest }, ref) => {
   const editor = useSlate();

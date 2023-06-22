@@ -1,35 +1,11 @@
 import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
-import { Editor, Node } from "slate";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
+import { isMarkActive, toggleMark } from "../../../utils/slate";
 import * as Styled from "./styles";
-
-const isMarkActive = (editor, format) => {
-  if (!editor.selection) return false;
-  const node = Node.get(editor, editor.selection.focus.path);
-  const marks = node.text ? Editor.marks(editor) : false;
-
-  if (format === "code") {
-    const [pre] = Editor.above(editor, { match: n => n.type === "pre" }) ?? [];
-    if (pre) return false;
-  }
-  return marks ? marks[format] === true : false;
-};
-
-export const toggleMark = (editor, format) => {
-  const isActive = isMarkActive(editor, format);
-
-  if (isActive) {
-    Editor.removeMark(editor, format);
-  } else {
-    Editor.addMark(editor, format, true);
-  }
-
-  ReactEditor.focus(editor);
-};
 
 const MarkButton = ({ format, label, icon, isFirst, ...rest }, ref) => {
   const editor = useSlate();

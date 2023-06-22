@@ -1,18 +1,6 @@
 /* eslint-disable camelcase */
-import { Transforms } from "slate";
 import { html_beautify } from "js-beautify";
 import { markElements } from "./elements";
-
-export const clearSlate = editor => {
-  const count = Array(editor.children.length).keys();
-  [...count].forEach(() => {
-    try {
-      Transforms.removeNodes(editor, { at: [0] });
-    } catch (e) {
-      return e;
-    }
-  });
-};
 
 export const formatHtml = html => {
   const options = {

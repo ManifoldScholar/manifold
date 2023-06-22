@@ -6,27 +6,12 @@ import Utility from "global/components/utility";
 import Modal from "./insert/Modal";
 import { useConfirmation } from "hooks";
 import InsertImageForm from "./insert/ImageForm";
-import { isBlockActive } from "./BlockButton";
+import { isBlockActive, insertImage } from "../../../utils/slate";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { descriptions, labels, hotkeys } from "./TooltipContent/hotkeys";
 import { onModalClose } from "./utils";
 import * as Styled from "./styles";
-
-export const insertImage = (editor, url, alt) => {
-  const text = { text: "", slateOnly: true };
-  const image = {
-    type: "img",
-    htmlAttrs: { src: url, alt: alt ?? "" },
-    children: [text]
-  };
-  const [node] = Editor.above(editor, editor.selection);
-  if (Editor.isEmpty(editor, node)) {
-    Transforms.removeNodes(editor);
-  }
-  Transforms.insertNodes(editor, image);
-  ReactEditor.focus(editor);
-};
 
 const ImageButton = ({ icon, size, ...rest }, ref) => {
   const { t } = useTranslation();
