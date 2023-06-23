@@ -1,69 +1,43 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import { createEditor, Transforms, Editor as SlateEditor } from "slate";
-import { Slate, withReact, ReactEditor } from "slate-react";
-import { withHistory, HistoryEditor } from "slate-history";
-import { Leaf, Element } from "./renderers";
+import { Transforms, Editor as SlateEditor } from "slate";
+import { withReact, ReactEditor, useSlate } from "slate-react";
+import { HistoryEditor } from "slate-history";
+import Leaf from "./renderers/Leaf";
+import Element from "./renderers/Element";
 import { captureHotKeys } from "../transforms";
-import {
-  serializeToHtml,
-  serializeToSlate,
-  removeFormatting
-} from "../serializers";
+import { serializeToHtml, serializeToSlate } from "../serializers";
+import { clearSlate } from "../utils/slate";
 import HtmlEditor from "./HtmlEditor";
 import Controls from "./EditorControls";
-import withPlugins from "../plugins";
 import { formatHtml } from "../utils/helpers";
-import { clearSlate } from "../utils/slate";
-import { ErrorBoundary } from "react-error-boundary";
-import isEqual from "lodash/isEqual";
-import throttle from "lodash/throttle";
 import * as Styled from "./styles";
 
 export default function Editor({
-  set: setFormValue,
-  initialSlateValue,
-  initialHtmlValue,
+  localHtml,
+  localSlate,
+  setLocalHtml,
+  onChangeHtml,
+  setLocalSlate,
   stylesheets,
   hasErrors,
   setHasErrors,
   warnErrors,
   setWarnErrors,
   errors: formErrors = [],
-  nextRef
+  nextRef,
+  htmlMode,
+  toggleHtmlMode
 }) {
-  const editorRef = useRef();
-  if (!editorRef.current)
-    editorRef.current = withReact(withHistory(withPlugins(createEditor())));
-  const editor = editorRef.current;
+  const editor = useSlate();
   const aceRef = useRef();
   const controlsRef = useRef();
 
-  const [htmlMode, toggleHtmlMode] = useState(false);
   const [showCss, toggleCss] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
 
-  const [localHtml, setLocalHtml] = useState(initialHtmlValue);
-  const [localSlate, setLocalSlate] = useState(initialSlateValue);
-  const prevSlate = useRef(initialSlateValue);
-  const prevHtml = useRef(initialHtmlValue);
-
   const { t } = useTranslation();
-
-  // The value prop on the Slate provider component is unhelpfully named. It is really initialSlateValue and is only read once, so it's easy for Slate to get out of sync when waiting for data from the api. This resets the editor each time the form model changes.
-  /* eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    if (!htmlMode && !isEqual(prevSlate.current, initialSlateValue)) {
-      clearSlate(editor);
-      Transforms.insertNodes(editor, initialSlateValue);
-      return;
-    }
-    if (!isEqual(prevHtml.current, initialHtmlValue)) {
-      setLocalHtml(initialHtmlValue);
-    }
-  }, [initialSlateValue, initialHtmlValue]);
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   // Since the editor overflows the visible area and we scroll the whole drawer, we have to manually handle scroll when arrow keys are used to move the cursor out of view.
   useEffect(() => {
@@ -94,29 +68,6 @@ export default function Editor({
   );
 
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
-
-  const setFormValueFromSlate = throttle(
-    val => setFormValue(serializeToHtml(val)),
-    500
-  );
-
-  const onChangeSlate = val => {
-    setLocalSlate(val);
-    const changes = editor?.history?.undos ?? [];
-    const shouldUpdateFormValue =
-      changes.length > 1 || changes[0]?.selectionBefore;
-    if (shouldUpdateFormValue) setFormValueFromSlate(val);
-  };
-
-  const setFormValueFromHtml = throttle(
-    val => setFormValue(removeFormatting(val)),
-    500
-  );
-
-  const onChangeHtml = val => {
-    setLocalHtml(val);
-    setFormValueFromHtml(val);
-  };
 
   const toggleEditorView = () => {
     if (htmlMode) {
@@ -184,12 +135,6 @@ export default function Editor({
     toggleCss(!showCss);
   };
 
-  const handleError = ({ resetErrorBoundary }) => {
-    HistoryEditor.undo(editor);
-    resetErrorBoundary();
-    return null;
-  };
-
   const onClickUndo = e => {
     e.preventDefault();
     if (!htmlMode) return HistoryEditor.undo(editor);
@@ -227,50 +172,39 @@ export default function Editor({
 
   return (
     <>
-      <Styled.EditorSecondary
-        className={hasErrors && warnErrors ? "error" : undefined}
-      >
-        <ErrorBoundary fallbackRender={handleError}>
-          <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
-            <Controls
-              htmlMode={htmlMode}
-              darkMode={darkMode}
-              onClickEditorToggle={onClickToggle}
-              onClickDarkModeToggle={onClickDarkModeToggle}
-              onClickUndo={onClickUndo}
-              onClickRedo={onClickRedo}
-              toggleStyles={toggleStyles}
-              cssVisible={showCss}
-              errors={errors}
-              controlsRef={controlsRef}
-            />
-            <Styled.EditableWrapper
-              className={wrapperClasses}
-              $cssVisible={showCss}
-            >
-              {!htmlMode && (
-                <Styled.Editable
-                  id={"content-editable"}
-                  as="div"
-                  renderElement={renderElement}
-                  renderLeaf={renderLeaf}
-                  placeholder="Section body..."
-                  spellCheck={false}
-                  onKeyDown={e => captureHotKeys(e, editor)}
-                />
-              )}
-              {htmlMode && <HtmlEditor {...codeAreaProps} />}
-            </Styled.EditableWrapper>
-            {theme && !htmlMode && (
-              <style
-                dangerouslySetInnerHTML={{
-                  __html: `@layer stylesheets {${theme}}`
-                }}
-              />
-            )}
-          </Slate>
-        </ErrorBoundary>
-      </Styled.EditorSecondary>
+      <Controls
+        htmlMode={htmlMode}
+        darkMode={darkMode}
+        onClickEditorToggle={onClickToggle}
+        onClickDarkModeToggle={onClickDarkModeToggle}
+        onClickUndo={onClickUndo}
+        onClickRedo={onClickRedo}
+        toggleStyles={toggleStyles}
+        cssVisible={showCss}
+        errors={errors}
+        controlsRef={controlsRef}
+      />
+      <Styled.EditableWrapper className={wrapperClasses} $cssVisible={showCss}>
+        {!htmlMode && (
+          <Styled.Editable
+            id={"content-editable"}
+            as="div"
+            renderElement={renderElement}
+            renderLeaf={renderLeaf}
+            placeholder="Section body..."
+            spellCheck={false}
+            onKeyDown={e => captureHotKeys(e, editor)}
+          />
+        )}
+        {htmlMode && <HtmlEditor {...codeAreaProps} />}
+      </Styled.EditableWrapper>
+      {theme && !htmlMode && (
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `@layer stylesheets {${theme}}`
+          }}
+        />
+      )}
     </>
   );
 }

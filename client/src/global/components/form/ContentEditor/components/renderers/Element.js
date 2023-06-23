@@ -11,7 +11,7 @@ import classNames from "classnames";
 import * as Styled from "./styles";
 import { getHtmlOutlineStyles } from "./styles";
 import { useSlateStatic, ReactEditor } from "slate-react";
-import { HtmlBreadcrumbsContext } from "../../index";
+import { HtmlBreadcrumbsContext } from "../../contexts/htmlBreadcrumbsContext";
 
 export default function SlateElement({
   attributes,
