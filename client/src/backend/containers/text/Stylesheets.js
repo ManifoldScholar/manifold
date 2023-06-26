@@ -50,6 +50,10 @@ export class TextStylesContainer extends PureComponent {
     );
   }
 
+  componentDidMount() {
+    this.props.refresh();
+  }
+
   confirmDestroy = stylesheet => {
     const t = this.props.t;
     const heading = t("modals.delete_text");
