@@ -35,7 +35,8 @@ export default function HtmlLabel({ visible, element }) {
     path.length === 1 ||
     (element.type === "li" && !Editor.isEmpty(editor, element));
 
-  const disableLift = path.length === 2 || element.type === "li";
+  const disableLift =
+    path.length === 2 || element.type === "li" || element.type === "span";
 
   const updateClassName = e => {
     e.persist();
