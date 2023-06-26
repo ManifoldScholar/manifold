@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Image from "./Image";
 import Void from "./Void";
 import HtmlLabel from "./HtmlLabel";
@@ -12,7 +12,7 @@ import classNames from "classnames";
 import * as Styled from "./styles";
 import { getHtmlOutlineStyles } from "./styles";
 import { useSlateStatic, ReactEditor } from "slate-react";
-import { HtmlBreadcrumbsContext } from "../../contexts/htmlBreadcrumbsContext";
+import { useHtmlBreadcrumbs } from "../../contexts/htmlBreadcrumbsContext";
 
 export default function SlateElement({
   attributes,
@@ -26,7 +26,7 @@ export default function SlateElement({
 
   const editor = useSlateStatic();
   const { id } = ReactEditor.findKey(editor, element);
-  const { selectedCrumb } = useContext(HtmlBreadcrumbsContext);
+  const { selectedCrumb } = useHtmlBreadcrumbs();
   const showHtml = selectedCrumb === id || selectedCrumb === "all";
 
   if (element.type === "br") {
