@@ -1,4 +1,9 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
-// This is here to prevent a circular dependency between Wrapper/Editor/Element
 export const HtmlBreadcrumbsContext = createContext([]);
+
+export const useHtmlBreadcrumbs = () => {
+  const context = useContext(HtmlBreadcrumbsContext);
+
+  return context;
+};
