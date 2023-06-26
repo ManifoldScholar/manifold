@@ -8,10 +8,7 @@ import {
   useSelected
 } from "slate-react";
 import { Transforms, Editor } from "slate";
-import {
-  handleImageHotkey,
-  handleIframeHotkey
-} from "../../transforms/handlers";
+import { handleImageHotkey, handleIframeHotkey } from "../../hotkeys/handlers";
 import HtmlLabel from "./HtmlLabel";
 import { getHtmlOutlineStyles } from "./styles";
 import * as Styled from "./styles";

@@ -1,9 +1,9 @@
-import { Editor, Range, Transforms, Path, Element, Point, Node } from "slate";
+import { Editor, Range, Transforms, Element, Point, Node } from "slate";
 import { rteElements } from "../utils/elements";
-import { decreaseIndent } from "../transforms/listIndents";
-import { getListItemNode } from "../utils/slate";
+import { decreaseIndent } from "../utils/slate/listIndents";
+import { getListItemNode } from "../utils/slate/getters";
 
-// The plugins here are for dealing with nodes that are "invisible" in the RTE, that is renderedElements in "../utils/elements". For example, with html such as <p><span>my text</span></p>, if a user hit enter at the end of "text" having moved selection there in an inline way (that is, by arrowing left or right or by typing in the line but not by arrowing up and down which selects blocks only), Slate would by default simply split the p block. This would result in a new block with the html <p><span></span></p>. Since this span is invisible to the user in RTE mode, I'm assuming that user really wants html of just <p></p> and inserting that instead. It might make sense in a later iteration to assign all the elements in renderedElements to either void or full RTE elements, so there are not invisisbles and all nodes are either preview only or managed with the toolbars. Doing so would remove much of the complexity here. -LD
+// The plugins here provide sane defaults for dealing with enter/delete given that we have nested html structure, in particular nested blocks, which isn't accounted for in the default slate implementation.
 
 /* eslint-disable no-param-reassign */
 const withHtmlAwareBreaks = editor => {
@@ -24,7 +24,7 @@ const withHtmlAwareBreaks = editor => {
     // Grab the nearest block node to determine what to insert
     const [block, blockPath] = Editor.above(editor, {
       at: selection,
-      match: n => Editor.isBlock(editor, n)
+      match: n => Editor.isBlock(editor, n) && !n.slateOnly
     });
     // Remove all attributes other than the type/tag and marks, so we don't copy id, classes, anything that can't be updated in the RTE
     const { children, htmlAttrs, slateOnly, inline, ...next } = block;
@@ -34,7 +34,8 @@ const withHtmlAwareBreaks = editor => {
       next.type = "p";
     if (next.type === "li") {
       const liIsEmpty = Editor.isEmpty(editor, block);
-      if (isCollapsed && liIsEmpty) return decreaseIndent(editor, true);
+      if (isCollapsed && liIsEmpty)
+        return decreaseIndent({ editor, canUnwrapRoot: true });
       // Since the new element we're inserting is an element in an existing list, we'll keep the classname around in case indents are handled with classes
       next.htmlAttrs = { class: htmlAttrs?.class };
     }
@@ -46,14 +47,6 @@ const withHtmlAwareBreaks = editor => {
           { ...next, children: [{ text: "" }] },
           { at: selection, select: true }
         );
-        // If the parent block exists only for Slate normalization, ensure that our new node has a "real" html parent
-        if (block.slateOnly) {
-          Transforms.liftNodes(editor, { mode: "lowest" });
-        }
-        // For some reason I don't quite understand, inserting at a nested inline path causes a double node insertion; this cleans up that extra node
-        if (!Path.equals(blockPath, nodePath)) {
-          Transforms.removeNodes(editor, selection);
-        }
       });
     } catch (e) {
       insertBreak();
@@ -104,7 +97,7 @@ const withHtmlAwareBreaks = editor => {
       const [li] = getListItemNode(editor, editor.selection);
       if (li) {
         const liIsEmpty = Editor.isEmpty(editor, li);
-        if (liIsEmpty) return decreaseIndent(editor, true);
+        if (liIsEmpty) return decreaseIndent({ editor, canUnwrapRoot: true });
       }
 
       const [inline, inlinePath] =

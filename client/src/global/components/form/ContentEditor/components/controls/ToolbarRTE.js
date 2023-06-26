@@ -15,8 +15,8 @@ import {
 } from "reakit/Menu";
 import { Node } from "slate";
 import { useSlateStatic, useSlateSelection } from "slate-react";
-import { getAncestors } from "../../utils/slate";
 import { HtmlBreadcrumbsContext } from "../../contexts/htmlBreadcrumbsContext";
+import { getAncestors } from "../../utils/slate/getters";
 import { rteElements, inlineNodes } from "../../utils/elements";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";

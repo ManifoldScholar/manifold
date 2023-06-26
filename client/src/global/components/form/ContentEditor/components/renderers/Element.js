@@ -5,7 +5,8 @@ import HtmlLabel from "./HtmlLabel";
 import {
   rteElements,
   renderedElements,
-  markElements
+  markElements,
+  nestableElements
 } from "../../utils/elements";
 import classNames from "classnames";
 import * as Styled from "./styles";
@@ -133,7 +134,8 @@ export default function SlateElement({
   if (
     rteElements.includes(element.type) ||
     renderedElements.includes(element.type) ||
-    markElements.includes(element.type)
+    markElements.includes(element.type) ||
+    nestableElements.includes(element.type)
   ) {
     const Tag = element.type === "list-sibling" ? "span" : element.type;
     return (

@@ -1,9 +1,5 @@
-import {
-  getCommonBlock,
-  wrapLink,
-  unwrapLink,
-  isLinkActive
-} from "../utils/slate";
+import { wrapLink, unwrapLink } from "../utils/slate/transforms";
+import { getCommonBlock, isLinkActive } from "../utils/slate/getters";
 import { isValidUrl } from "../utils/helpers";
 import { Transforms, Range, Node } from "slate";
 
