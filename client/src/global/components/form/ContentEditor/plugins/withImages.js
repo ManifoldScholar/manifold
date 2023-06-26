@@ -1,4 +1,4 @@
-import { insertImage } from "../utils/slate";
+import { insertImage } from "../utils/slate/transforms";
 import { isImageUrl } from "../utils/helpers";
 
 /* eslint-disable no-param-reassign */

@@ -1,5 +1,5 @@
 import { Editor, Element, Range, Transforms, Node } from "slate";
-import { toggleBlock } from "../utils/slate";
+import { toggleOrWrapBlock } from "../utils/slate/transforms";
 
 const SHORTCUTS = {
   "*": "ul",
@@ -49,7 +49,7 @@ const withShortcuts = editor => {
         if (!Range.isCollapsed(range)) {
           Transforms.delete(editor);
         }
-        return toggleBlock(editor, blockType);
+        return toggleOrWrapBlock(editor, blockType);
       }
     }
 

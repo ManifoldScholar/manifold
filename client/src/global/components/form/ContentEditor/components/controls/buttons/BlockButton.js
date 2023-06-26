@@ -4,7 +4,8 @@ import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
-import { isBlockActive, toggleBlock } from "../../../utils/slate";
+import { toggleOrWrapBlock } from "../../../utils/slate/transforms";
+import { isBlockActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
 
 const BlockButton = ({ format, icon, size, ...rest }, ref) => {
@@ -28,7 +29,7 @@ const BlockButton = ({ format, icon, size, ...rest }, ref) => {
         onClick={event => {
           event.preventDefault();
           if (!selection) return;
-          toggleBlock(editor, format);
+          toggleOrWrapBlock(editor, format);
         }}
         tabIndex={-1}
       >

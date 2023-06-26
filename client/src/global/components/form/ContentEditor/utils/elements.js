@@ -23,31 +23,18 @@ export const rteElements = [
 // These elements are removable/insertable via the RTE but their contents cannot be edited as text.
 export const rteVoids = ["img", "iframe"];
 
-// These elements are rendered in the RTE, but can't be created there. Their text children are editable, and these elements can be deleted in the RTE like any other block.
-export const renderedElements = [
+// HTML container elements that nest in the RTE
+export const nestableElements = [
   "header",
   "footer",
-  "span",
   "figure",
   "div",
-  "br",
   "section",
-  "figcaption",
-  "hr",
-  "abbr",
-  "sub",
-  "sup",
-  "b",
-  "big",
-  "small",
-  "acronym",
-  "cite",
-  "dfn",
-  "samp",
-  "time",
-  "kbd",
-  "q"
+  "figcaption"
 ];
+
+// These elements are rendered in the RTE, but can't be created there. Their text children are editable, and these elements can be deleted in the RTE like any other block.
+export const renderedElements = ["span", "br", "hr", "abbr", "sub", "sup"];
 
 // These elements are applied as marks to text leaves in Slate. They can be added and removed in the RTE. This probably needs some adjustment. For example, currently both del and s become "strikethrough" when serialized to Slate and there's no way to tell what the original tag was.
 export const markElements = ["i", "del", "em", "s", "strong", "u", "code"];
