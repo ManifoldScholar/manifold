@@ -95,34 +95,36 @@ function TextAssetsContainer({
         label={t("texts.assets.header")}
         instructions={t("texts.assets.instructions")}
       />
-      <EntitiesList
-        className="full-width"
-        entityComponent={AssetRow}
-        entityComponentProps={{ onEdit, onDelete }}
-        entities={assets ?? []}
-        buttons={[
-          <Button
-            path={lh.link("backendTextAssetNew", text.id)}
-            type="add"
-            text={t("texts.assets.add_button_label")}
-          />
-        ]}
-        search={
-          <Search
-            {...searchProps}
-            setParam={updatedSetParam}
-            onReset={updatedOnReset}
-          />
-        }
-        pagination={meta?.pagination}
-        showCount
-        unit={t("glossary.asset", {
-          count: meta?.pagination.totalCount
-        })}
-        callbacks={{
-          onPageClick: page => () => setPageNumber(page)
-        }}
-      />
+      {meta && (
+        <EntitiesList
+          className="full-width"
+          entityComponent={AssetRow}
+          entityComponentProps={{ onEdit, onDelete }}
+          entities={assets ?? []}
+          buttons={[
+            <Button
+              path={lh.link("backendTextAssetNew", text.id)}
+              type="add"
+              text={t("texts.assets.add_button_label")}
+            />
+          ]}
+          search={
+            <Search
+              {...searchProps}
+              setParam={updatedSetParam}
+              onReset={updatedOnReset}
+            />
+          }
+          pagination={meta?.pagination}
+          showCount
+          unit={t("glossary.asset", {
+            count: meta?.pagination.totalCount
+          })}
+          callbacks={{
+            onPageClick: page => () => setPageNumber(page)
+          }}
+        />
+      )}
     </Styled.Wrapper>
   );
 }
