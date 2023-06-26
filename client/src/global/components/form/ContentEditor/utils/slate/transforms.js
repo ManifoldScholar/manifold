@@ -1,4 +1,4 @@
-import { Transforms, Editor, Range, Element } from "slate";
+import { Transforms, Editor, Range, Element, Path } from "slate";
 import { ReactEditor } from "slate-react";
 import { rteElements, nestableElements } from "../elements";
 import { isMarkActive } from "./getters";
@@ -71,6 +71,10 @@ export const unwrapContainerBlock = ({ editor, format }) => {
 
 export const toggleOrWrapBlock = (editor, format) => {
   const isCollapsed = Range.isCollapsed(editor.selection);
+  const selectionSpansMultipleNodes = !Path.equals(
+    editor.selection.anchor.path,
+    editor.selection.focus.path
+  );
 
   const [nearest, path] = Editor.above(editor, {
     at: Editor.unhangRange(editor, editor.selection),
@@ -82,8 +86,9 @@ export const toggleOrWrapBlock = (editor, format) => {
   });
 
   if (
-    (nearest.slateOnly || rteElements.includes(nearest.type)) &&
-    !nestableElements.includes(format)
+    (!nestableElements.includes(format) &&
+      (nearest.slateOnly || rteElements.includes(nearest.type))) ||
+    selectionSpansMultipleNodes
   )
     return toggleTextBlock({
       editor,
@@ -92,7 +97,9 @@ export const toggleOrWrapBlock = (editor, format) => {
       split: !isCollapsed
     });
 
-  return wrapContainerBlock({ editor, format, node: nearest, path });
+  return !selectionSpansMultipleNodes
+    ? wrapContainerBlock({ editor, format, node: nearest, path })
+    : null;
 };
 
 export const toggleMark = (editor, format) => {
