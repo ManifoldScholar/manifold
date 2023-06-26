@@ -52,10 +52,7 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
     }
   } = asset?.attributes ?? {};
 
-  const origin = typeof window !== "undefined" ? window.location.origin : null;
-  const src = origin
-    ? `${origin}/api/proxy/ingestion_sources/${asset.id}`
-    : `/api/proxy/ingestion_sources/${asset.id}`;
+  const src = `/api/proxy/ingestion_sources/${asset.id}`;
 
   const figure = (
     <Styled.IconWrapper>

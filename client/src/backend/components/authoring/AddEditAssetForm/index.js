@@ -42,9 +42,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
   }, [history, textId, refresh]);
 
   const origin = typeof window !== "undefined" ? window.location.origin : null;
-  const src = origin
-    ? `${origin}/api/proxy/ingestion_sources/${assetId}`
-    : `/api/proxy/ingestion_sources/${assetId}`;
+  const src = `/api/proxy/ingestion_sources/${assetId}`;
 
   const onCopy = e => {
     e.preventDefault();
@@ -111,7 +109,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
           fileNameFrom="attributes[attachmentData][metadata][filename]"
           value={
             asset
-              ? `http://manifold.lvh/system/${asset?.attributes?.attachmentData.id}`
+              ? `${origin}/system/${asset?.attributes?.attachmentData.id}`
               : undefined
           }
           required={!asset}
