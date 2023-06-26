@@ -4,6 +4,8 @@ import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
 import { toggleBlock, isBlockActive } from "../../../utils/slate";
+import { toggleOrWrapBlock } from "../../../utils/slate/transforms";
+import { isBlockActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
 
 const getActiveBlock = (editor, opts) => {
@@ -52,7 +54,7 @@ const BlockSelect = ({ options, ...rest }, ref) => {
           onChange={e => {
             e.preventDefault();
             if (!selection) return;
-            toggleBlock(editor, e.target.value);
+            toggleOrWrapBlock(editor, e.target.value);
           }}
           tabIndex={-1}
         >

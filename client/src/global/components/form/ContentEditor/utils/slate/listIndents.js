@@ -1,10 +1,9 @@
 import { Editor as SlateEditor, Transforms, Node, Point } from "slate";
-import {
-  getListNode,
-  getListItemNode,
-  setSelectionAtPoint,
-  toggleBlock
-} from "../utils/slate";
+import { ReactEditor } from "slate-react";
+import { getListNode, getListItemNode } from "./getters";
+import { setSelectionAtPoint } from "./general";
+import { toggleOrWrapBlock } from "./transforms";
+import { rteElements } from "../elements";
 import has from "lodash/has";
 
 const getTextLocation = (editor, iterator, path, str = "") => {
@@ -146,7 +145,7 @@ export const increaseIndent = editor => {
   });
 };
 
-export const decreaseIndent = (editor, isReturn) => {
+export const decreaseIndent = ({ editor, canUnwrapRoot }) => {
   const [node, path] = getListItemNode(editor, editor.selection);
   const [parentLi, parentPath] = getListItemNode(editor, path);
   const [listNode, listNodePath] = getListNode(editor, path);
@@ -155,8 +154,12 @@ export const decreaseIndent = (editor, isReturn) => {
 
   if (!node) return;
 
-  if (!((listNode && isWrappedList) || parentLi))
-    return isReturn ? toggleBlock(editor, listParent?.type) : null;
+  if ((!listNode || !isWrappedList) && !parentLi) {
+    const format = rteElements.includes(listParent?.type)
+      ? listParent.type
+      : "p";
+    return canUnwrapRoot ? toggleOrWrapBlock(editor, format) : null;
+  }
 
   const nodeStart = SlateEditor.start(editor, path);
   const listStart = SlateEditor.start(editor, listNodePath);

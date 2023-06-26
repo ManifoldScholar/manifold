@@ -1,1 +1,0 @@
-export { captureHotKeys } from "./hotkeys";

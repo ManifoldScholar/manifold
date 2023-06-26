@@ -11,7 +11,8 @@ import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { descriptions, labels, hotkeys } from "./TooltipContent/hotkeys";
 import { onModalClose } from "./utils";
-import { insertIframe, isBlockActive } from "../../../utils/slate";
+import { insertIframe } from "../../../utils/slate/transforms";
+import { isBlockActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
 
 const IframeButton = ({ icon, size, ...rest }, ref) => {

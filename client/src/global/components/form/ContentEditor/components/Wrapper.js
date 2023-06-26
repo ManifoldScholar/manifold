@@ -8,7 +8,7 @@ import { withHistory, HistoryEditor } from "slate-history";
 import withPlugins from "../plugins";
 import throttle from "lodash/throttle";
 import { serializeToHtml, removeFormatting } from "../serializers";
-import { clearSlate } from "../utils/slate";
+import { clearSlate } from "../utils/slate/general";
 import isEqual from "lodash/isEqual";
 import Editor from "./Editor";
 import { HtmlBreadcrumbsContext } from "../contexts/htmlBreadcrumbsContext";
@@ -22,7 +22,8 @@ export default function EditorWrapper({
   hasErrors,
   setHasErrors,
   warnErrors,
-  setWarnErrors
+  setWarnErrors,
+  nextRef
 }) {
   const editorRef = useRef();
   if (!editorRef.current)
@@ -34,6 +35,7 @@ export default function EditorWrapper({
 
   const [htmlMode, toggleHtmlMode] = useState(false);
   const [selectedCrumb, setSelectedCrumb] = useState();
+  const [editingCrumb, setEditingCrumb] = useState(false);
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
   const [localSlate, setLocalSlate] = useState(initialSlateValue);
 
@@ -87,7 +89,12 @@ export default function EditorWrapper({
       >
         <ErrorBoundary fallbackRender={handleError}>
           <HtmlBreadcrumbsContext.Provider
-            value={{ selectedCrumb, setSelectedCrumb }}
+            value={{
+              selectedCrumb,
+              setSelectedCrumb,
+              editingCrumb,
+              setEditingCrumb
+            }}
           >
             <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
               <Editor
@@ -103,6 +110,7 @@ export default function EditorWrapper({
                 setHasErrors={setHasErrors}
                 warnErrors={warnErrors}
                 setWarnErrors={setWarnErrors}
+                nextRef={nextRef}
               />
             </Slate>
           </HtmlBreadcrumbsContext.Provider>

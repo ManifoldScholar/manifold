@@ -1,5 +1,6 @@
-import { increaseIndent, decreaseIndent } from "./listIndents";
-import { getListItemNode, toggleMark, toggleBlock } from "../utils/slate";
+import { increaseIndent, decreaseIndent } from "../utils/slate/listIndents";
+import { toggleMark, toggleOrWrapBlock } from "../utils/slate/transforms";
+import { getListItemNode } from "../utils/slate/getters";
 import {
   handleLinkHotkey,
   handleImageHotkey,
@@ -24,7 +25,7 @@ export const captureHotKeys = (e, editor) => {
     e.preventDefault();
 
     if (e.shiftKey) {
-      return decreaseIndent(editor);
+      return decreaseIndent({ editor });
     }
     return increaseIndent(editor);
   }
@@ -37,37 +38,37 @@ export const captureHotKeys = (e, editor) => {
     switch (e.keyCode) {
       case 48:
         e.preventDefault();
-        return toggleBlock(editor, "p");
+        return toggleOrWrapBlock(editor, "p");
       case 49:
         e.preventDefault();
-        return toggleBlock(editor, "h1");
+        return toggleOrWrapBlock(editor, "h1");
       case 50:
         e.preventDefault();
-        return toggleBlock(editor, "h2");
+        return toggleOrWrapBlock(editor, "h2");
       case 51:
         e.preventDefault();
-        return toggleBlock(editor, "h3");
+        return toggleOrWrapBlock(editor, "h3");
       case 52:
         e.preventDefault();
-        return toggleBlock(editor, "h4");
+        return toggleOrWrapBlock(editor, "h4");
       case 53:
         e.preventDefault();
-        return toggleBlock(editor, "h5");
+        return toggleOrWrapBlock(editor, "h5");
       case 54:
         e.preventDefault();
-        return toggleBlock(editor, "h6");
+        return toggleOrWrapBlock(editor, "h6");
       case 55:
         e.preventDefault();
-        return toggleBlock(editor, "ol");
+        return toggleOrWrapBlock(editor, "ol");
       case 56:
         e.preventDefault();
-        return toggleBlock(editor, "ul");
+        return toggleOrWrapBlock(editor, "ul");
       case 57:
         e.preventDefault();
-        return toggleBlock(editor, "blockquote");
+        return toggleOrWrapBlock(editor, "blockquote");
       case 69:
         e.preventDefault();
-        return toggleBlock(editor, "pre");
+        return toggleOrWrapBlock(editor, "pre");
     }
   }
 

@@ -10,7 +10,9 @@ import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
 import { onModalClose } from "./utils";
-import { isLinkActive, wrapLink, unwrapLink } from "../../../utils/slate";
+import { wrapLink, unwrapLink } from "../../../utils/slate/transforms";
+import { isLinkActive } from "../../../utils/slate/getters";
+
 import * as Styled from "./styles";
 
 const LinkButton = ({ icon, size, ...rest }, ref) => {
