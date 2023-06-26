@@ -44,7 +44,7 @@ export default function TextSectionsContainer({
           },
           childProps: {
             textId: text.id,
-            globalStylesheet,
+            globalStylesheetId: globalStylesheet.id,
             nextPosition: text.attributes?.sectionsMap?.length + 1,
             refresh
           }
