@@ -162,6 +162,77 @@ export const ElementLabel = styled.span`
     background: ${({ $color }) => COLOR_MAP[$color].light};
     color: var(--background-color);
   }
+
+  &:hover {
+    z-index: 20;
+  }
+`;
+
+export const EditableElementLabel = styled(ElementLabel)`
+  top: -35px;
+  padding-block-start: 4px;
+  display: flex;
+  align-items: center;
+
+  > span {
+    line-height: 1;
+  }
+`;
+
+export const ClassInput = styled.input`
+  appearance: none;
+  background: rgba(255, 255, 255, 0.75);
+  border: none;
+  padding: 0;
+  height: 18px;
+  margin-inline-start: 3px;
+  width: 150px;
+
+  .scheme-light & {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &:focus-visible {
+    outline: 1px solid;
+  }
+`;
+
+export const TagButtons = styled.div`
+  display: flex;
+  gap: 4px;
+  margin-inline-start: 8px;
+  margin-inline-end: 4px;
+`;
+
+export const DeleteButton = styled.button`
+  ${buttonUnstyled}
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+  padding: 2px;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--error-color);
+    background: var(--background-color);
+  }
+
+  &:disabled {
+    cursor: default;
+
+    &:hover {
+      background: none;
+      color: inherit;
+    }
+  }
+`;
+
+export const LiftButton = styled(DeleteButton)`
+  &:hover,
+  &:focus-visible {
+    color: var(--hover-color);
+    background: var(--background-color);
+  }
 `;
 
 export const getHtmlOutlineStyles = (nodeName, darkMode) => {

@@ -3,9 +3,9 @@ import { useSlate, ReactEditor } from "slate-react";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
-import { toggleBlock, isBlockActive } from "../../../utils/slate";
 import { toggleOrWrapBlock } from "../../../utils/slate/transforms";
 import { isBlockActive } from "../../../utils/slate/getters";
+import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
 const getActiveBlock = (editor, opts) => {
@@ -35,14 +35,23 @@ const BlockSelect = ({ options, ...rest }, ref) => {
   );
 
   return (
-    <Tooltip
-      content={
-        <TooltipContent label={labels[active]} hotkeys={hotkeys[active]} />
-      }
-      xOffset="-75px"
-      yOffset="43px"
-      delay={0.5}
-    >
+    <Styled.SelectTooltipWrapper>
+      <Tooltip
+        content={
+          active ? (
+            <TooltipContent label={labels[active]} hotkeys={hotkeys[active]} />
+          ) : (
+            <div>Placeholder</div>
+          )
+        }
+        xOffset="0"
+        yOffset="43px"
+        delay={0}
+      >
+        <Styled.TooltipIcon>
+          <IconComposer icon="circlePlus24" size={16} />
+        </Styled.TooltipIcon>
+      </Tooltip>
       <Styled.SelectWrapper>
         <Styled.Select
           ref={ref}
@@ -62,7 +71,7 @@ const BlockSelect = ({ options, ...rest }, ref) => {
         </Styled.Select>
         <Styled.SelectIcon icon="disclosureDown24" size={16} />
       </Styled.SelectWrapper>
-    </Tooltip>
+    </Styled.SelectTooltipWrapper>
   );
 };
 

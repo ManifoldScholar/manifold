@@ -32,6 +32,18 @@ export const Button = styled.button`
   }
 `;
 
+export const SelectTooltipWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+export const TooltipIcon = styled.div`
+  position: relative;
+  width: max-content;
+  margin-block-start: -3px;
+`;
+
 export const SelectWrapper = styled.div`
   position: relative;
   display: inline-block;
