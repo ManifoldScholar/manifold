@@ -77,7 +77,7 @@ export const maybeTruncateChildren = ({
   fromStart = true,
   ...args
 }) => {
-  if (!node.children || node.children.length <= 1) {
+  if (!node.children) {
     return maybeTruncateText({
       node,
       target,
