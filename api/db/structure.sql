@@ -1422,8 +1422,7 @@ CREATE TABLE public.ingestion_sources (
     attachment_file_size_deprecated integer,
     attachment_updated_at_deprecated timestamp without time zone,
     attachment_data jsonb,
-    display_name text,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL
+    display_name text
 );
 
 

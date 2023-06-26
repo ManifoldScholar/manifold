@@ -46,7 +46,7 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
 
   const {
     sourceIdentifier,
-    displayNameFormatted,
+    displayName,
     attachmentData: {
       metadata: { filename, mimeType }
     }
@@ -103,11 +103,7 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
   );
 
   const rowProps = {
-    title: displayNameFormatted ? (
-      <span dangerouslySetInnerHTML={{ __html: displayNameFormatted }} />
-    ) : (
-      sourceIdentifier
-    ),
+    title: displayName ?? sourceIdentifier,
     subtitle: <Styled.TruncateURL>{src}</Styled.TruncateURL>,
     figure,
     figureHasWrapper: true,

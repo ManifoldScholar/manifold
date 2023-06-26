@@ -12,7 +12,6 @@ class IngestionSource < ApplicationRecord
   include Authority::Abilities
   include Filterable
   include SerializedAbilitiesFor
-  include HasFormattedAttributes
   include SearchIndexable
   self.authorizer_name = "ProjectChildAuthorizer"
 
@@ -46,7 +45,7 @@ class IngestionSource < ApplicationRecord
     when "created_at DESC"
       order(created_at: :desc)
     when "name"
-      order(display_name: :asc, source_identifier: :asc)
+      order(display_name: :asc)
     else
       order(created_at: :asc)
     end
@@ -64,8 +63,6 @@ class IngestionSource < ApplicationRecord
   delegate :project, to: :text
   delegate *IngestionSourceKind.predicates, to: :kind
   delegate :content_type, to: :attachment, allow_nil: true
-
-  has_formatted_attribute :display_name
 
   # Validations
   validates :source_identifier, presence: true
