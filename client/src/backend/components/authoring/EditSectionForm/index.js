@@ -11,6 +11,7 @@ import {
   removeFormatting
 } from "global/components/form/ContentEditor/serializers";
 import { formatHtml } from "global/components/form/ContentEditor/utils/helpers";
+import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 const defaultValue = [
@@ -34,7 +35,7 @@ const getInitialHtmlValue = value => {
 export default function EditSectionForm({
   section,
   textId,
-  globalStylesheet,
+  globalStylesheetId,
   refresh
 }) {
   const { t } = useTranslation();
@@ -83,6 +84,10 @@ export default function EditSectionForm({
     warnErrors,
     setWarnErrors
   };
+
+  const globalStylesheet = useFromStore(
+    `entityStore.entities.stylesheets["${globalStylesheetId}"]`
+  );
 
   const stylesheets = Array.isArray(section?.relationships.stylesheets)
     ? [...section?.relationships.stylesheets, globalStylesheet]
