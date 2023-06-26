@@ -61,14 +61,17 @@ export default function HtmlLabel({ visible, element }) {
     removeNode(editor, path);
   };
 
-  const labelParts = formatNodeLabel(element).split(".");
+  const tagAndId = element.htmlAttrs?.id
+    ? `${element.type}#${element.htmlAttrs.id}`
+    : element.type;
+  const formattedClass = element.htmlAttrs?.class?.replaceAll(" ", ".");
 
   return editing ? (
     <Styled.EditableElementLabel contentEditable={false} $color={color}>
-      <span>{labelParts[0]}.</span>
+      <span>{tagAndId}.</span>
       <Styled.ClassInput
         ref={inputRef}
-        defaultValue={labelParts.slice(1).join(".")}
+        defaultValue={formattedClass}
         onChange={e => updateClassName(e)}
       />
       <Styled.TagButtons>
