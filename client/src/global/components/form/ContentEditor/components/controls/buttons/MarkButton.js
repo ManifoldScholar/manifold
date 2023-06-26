@@ -4,7 +4,8 @@ import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/hotkeys";
-import { isMarkActive, toggleMark } from "../../../utils/slate";
+import { toggleMark } from "../../../utils/slate/transforms";
+import { isMarkActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
 
 const MarkButton = ({ format, label, icon, isFirst, ...rest }, ref) => {

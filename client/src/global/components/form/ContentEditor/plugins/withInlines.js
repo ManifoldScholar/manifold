@@ -1,5 +1,5 @@
 import { inlineNodes } from "../utils/elements";
-import { wrapLink, insertImage, insertIframe } from "../utils/slate";
+import { wrapLink, insertImage, insertIframe } from "../utils/slate/transforms";
 import { isValidUrl, isImageUrl, isVideoUrl } from "../utils/helpers";
 import { mathMLElements } from "reader/containers/annotation/annotatable-components/mathHelpers";
 
