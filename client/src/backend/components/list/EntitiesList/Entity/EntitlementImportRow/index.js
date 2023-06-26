@@ -53,7 +53,7 @@ export default function EntitlementImportRow({ entity: csv }) {
               {t("entitlements.imports.results_header")}
             </Styled.MessagesTitle>
             {messages.map(m => (
-              <Styled.Message>{m}</Styled.Message>
+              <Styled.Message key={m}>{m}</Styled.Message>
             ))}
           </Styled.Messages>
         </Collapse.Content>

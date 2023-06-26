@@ -42,13 +42,15 @@ function TextNodeTable({
       </thead>
       <tbody>
         {!hasRows && <EmptyRow message={t(emptyMessageKey)} />}
-        {flattenedRows.map(row => (
+        {/* eslint-disable react/no-array-index-key */}
+        {flattenedRows.map((row, i) => (
           <TextNodeRow
-            key={`${row.id}#${row.anchor}`}
+            key={`${i}_${row.id}#${row.anchor}`}
             textSlug={slug}
             {...row}
           />
         ))}
+        {/* eslint-enable react/no-array-index-key */}
       </tbody>
     </table>
   );
