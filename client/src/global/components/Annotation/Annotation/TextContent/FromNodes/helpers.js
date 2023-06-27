@@ -77,6 +77,9 @@ export const maybeTruncateChildren = ({
   fromStart = true,
   ...args
 }) => {
+  if (node.tag === "table") {
+    return node;
+  }
   if (!node.children) {
     return maybeTruncateText({
       node,
