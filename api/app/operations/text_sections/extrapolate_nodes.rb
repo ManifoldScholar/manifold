@@ -68,7 +68,7 @@ module TextSections
         node_uuid, text_digest, content,
         COALESCE(node_extra, '{}'::jsonb) AS node_extra,
         COALESCE(children_count, 0) AS children_count,
-        (tag IS NOT NULL AND tag IN ('mrow', 'mi', 'msup', 'mn', 'mo')) AS intermediate,
+        (tag IS NOT NULL AND tag IN ('mrow', 'mi', 'msup', 'mn', 'mo', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th')) AS intermediate,
         CURRENT_TIMESTAMP AS extrapolated_at
       FROM nodes
     ) INSERT INTO text_section_nodes (
