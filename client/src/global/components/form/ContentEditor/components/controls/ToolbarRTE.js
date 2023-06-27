@@ -188,43 +188,47 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
         </Styled.ToolGroup>
       </ReakitMenuBar>
       <Styled.BreadcrumbsBar $darkMode={darkMode}>
-        {true &&
-          Object.keys(ancestors)
-            .sort((a, b) => ancestors[a].path.length - ancestors[b].path.length)
-            .map((a, i) => {
-              /* eslint-disable no-nested-ternary */
-              const tag = ancestors[a].label.split(".")[0].split("#")[0];
-              const color = rteElements.includes(tag)
-                ? "green"
-                : inlineNodes.includes(tag)
-                ? "blue"
-                : "yellow";
+        <Styled.BreadcrumbsScroller>
+          {true &&
+            Object.keys(ancestors)
+              .sort(
+                (a, b) => ancestors[a].path.length - ancestors[b].path.length
+              )
+              .map((a, i) => {
+                /* eslint-disable no-nested-ternary */
+                const tag = ancestors[a].label.split(".")[0].split("#")[0];
+                const color = rteElements.includes(tag)
+                  ? "green"
+                  : inlineNodes.includes(tag)
+                  ? "blue"
+                  : "yellow";
 
-              return (
-                <Fragment key={a}>
-                  <Styled.Breadcrumb
-                    $color={color}
-                    $darkMode={darkMode}
-                    onMouseEnter={() => {
-                      if (!editingCrumb) setSelectedCrumb(a);
-                    }}
-                    onMouseLeave={() => {
-                      if (!editingCrumb) setSelectedCrumb(null);
-                    }}
-                    onClick={e => {
-                      e.preventDefault();
-                      setSelectedCrumb(a);
-                      setEditingCrumb(true);
-                    }}
-                  >
-                    {ancestors[a].label}
-                  </Styled.Breadcrumb>
-                  {i < Object.keys(ancestors).length - 1 && (
-                    <Styled.Spacer icon="disclosureDown16" size={16} />
-                  )}
-                </Fragment>
-              );
-            })}
+                return (
+                  <Fragment key={a}>
+                    <Styled.Breadcrumb
+                      $color={color}
+                      $darkMode={darkMode}
+                      onMouseEnter={() => {
+                        if (!editingCrumb) setSelectedCrumb(a);
+                      }}
+                      onMouseLeave={() => {
+                        if (!editingCrumb) setSelectedCrumb(null);
+                      }}
+                      onClick={e => {
+                        e.preventDefault();
+                        setSelectedCrumb(a);
+                        setEditingCrumb(true);
+                      }}
+                    >
+                      {ancestors[a].label}
+                    </Styled.Breadcrumb>
+                    {i < Object.keys(ancestors).length - 1 && (
+                      <Styled.Spacer icon="disclosureDown16" size={16} />
+                    )}
+                  </Fragment>
+                );
+              })}
+        </Styled.BreadcrumbsScroller>
         <Styled.ShowHideButton
           onClick={onToggleHtmlOutlines}
           aria-label={
