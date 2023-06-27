@@ -59,12 +59,24 @@ export const BreadcrumbsBar = styled.div`
   font-family: var(--font-family-heading);
   display: flex;
   align-items: center;
+  gap: 20px;
+`;
+
+export const BreadcrumbsScroller = styled.div`
+  display: flex;
+  align-items: center;
   gap: 8px;
   overflow-x: scroll;
+  scrollbar-width: none;
 `;
 
 export const Breadcrumb = styled.button`
   ${buttonUnstyled}
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  flex-shrink: 0;
 
   &:hover {
     color: ${({ $color, $darkMode }) =>
