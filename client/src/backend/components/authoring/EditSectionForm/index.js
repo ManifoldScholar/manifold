@@ -23,7 +23,7 @@ const defaultValue = [
 
 const getInitialSlateValue = value => {
   if (value && typeof value === "string")
-    return serializeToSlate(removeFormatting(value));
+    return serializeToSlate(formatHtml(value));
   return defaultValue;
 };
 
