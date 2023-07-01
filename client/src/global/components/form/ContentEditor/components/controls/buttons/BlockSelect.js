@@ -19,7 +19,7 @@ const getActiveBlock = (editor, opts) => {
   return Object.keys(active).find(o => active[o]);
 };
 
-const BlockSelect = ({ options, ...rest }, ref) => {
+const BlockSelect = ({ options, color, ...rest }, ref) => {
   const editor = useSlate();
   const { selection } = editor ?? {};
 
@@ -33,6 +33,12 @@ const BlockSelect = ({ options, ...rest }, ref) => {
     editor,
     options.map(o => o.format)
   );
+
+  const activeColor =
+    color ??
+    (active === "span"
+      ? "var(--color-base-blue45)"
+      : "var(--color-accent-primary)");
 
   return (
     <Styled.SelectTooltipWrapper>
@@ -58,7 +64,7 @@ const BlockSelect = ({ options, ...rest }, ref) => {
           {...rest}
           aria-label="Text styles selector"
           data-active={active !== ""}
-          $color={"var(--color-accent-primary)"}
+          $color={activeColor}
           value={active}
           onChange={e => {
             e.preventDefault();

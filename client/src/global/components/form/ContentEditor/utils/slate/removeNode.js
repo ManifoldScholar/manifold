@@ -1,6 +1,7 @@
 import { Transforms, Editor, Node, Element } from "slate";
 import { ReactEditor } from "slate-react";
 import has from "lodash/has";
+import isEqual from "lodash/isEqual";
 import { isEmptyAndChildless } from "./getters";
 
 // This function removes a specific node at any point in the selection hierarchy, not just the lowest one like the other transforms. It is used to handle delete via the html element labels.
@@ -15,18 +16,22 @@ export const removeNode = (editor, path) => {
   if (isEmptyAndChildless(editor, node))
     return Transforms.removeNodes(editor, {
       at: path,
-      mode: "highest",
-      match: n =>
-        !Editor.isEditor(n) && Element.isElement(n) && n.type === node.type
+      match: (n, p) =>
+        !Editor.isEditor(n) &&
+        Element.isElement(n) &&
+        n.type === node.type &&
+        isEqual(p, path)
     });
 
   // if the node is inline, it's safe to unwrap; the parent node is already setup for inline children
   if (Editor.isInline(editor, node)) {
     return Transforms.unwrapNodes(editor, {
       at: path,
-      mode: "highest",
-      match: n =>
-        !Editor.isEditor(n) && Element.isElement(n) && n.type === node.type
+      match: (n, p) =>
+        !Editor.isEditor(n) &&
+        Element.isElement(n) &&
+        n.type === node.type &&
+        isEqual(p, path)
     });
   }
 
@@ -55,10 +60,12 @@ export const removeNode = (editor, path) => {
       }
     });
     return Transforms.unwrapNodes(editor, {
-      match: n =>
-        !Editor.isEditor(n) && Element.isElement(n) && n.type === node.type,
-      at: path,
-      mode: "highest"
+      match: (n, p) =>
+        !Editor.isEditor(n) &&
+        Element.isElement(n) &&
+        n.type === node.type &&
+        isEqual(p, path),
+      at: path
     });
   }
 
@@ -77,12 +84,12 @@ export const removeNode = (editor, path) => {
   if (hasBlockChildren)
     return Transforms.unwrapNodes(editor, {
       at: path,
-      mode: "lowest",
-      match: n =>
+      match: (n, p) =>
         !Editor.isEditor(n) &&
         Element.isElement(n) &&
         n.type === node.type &&
-        !n.slateOnly
+        !n.slateOnly &&
+        isEqual(p, path)
     });
 
   // if the children are inline, there's a normalization issue because we'd be moving inline nodes up to parent with block children
@@ -106,11 +113,12 @@ export const removeNode = (editor, path) => {
       // now unwrap the node
       Transforms.unwrapNodes(editor, {
         at: path,
-        match: n =>
+        match: (n, p) =>
           !Editor.isEditor(n) &&
           Element.isElement(n) &&
           n.type === node.type &&
-          !n.slateOnly
+          !n.slateOnly &&
+          isEqual(p, path)
       });
     });
 };

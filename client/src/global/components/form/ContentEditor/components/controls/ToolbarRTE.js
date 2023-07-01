@@ -93,6 +93,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
             as={BlockSelect}
             options={[
               { format: "p", label: "Paragraph" },
+              { format: "span", label: "Span" },
               { format: "h1", label: "Heading 1" },
               { format: "h2", label: "Heading 2" },
               { format: "h3", label: "Heading 3" },
@@ -117,6 +118,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               { format: "figcaption", label: "Figcaption" },
               { format: "", label: "Container" }
             ]}
+            color="var(--color-base-yellow20)"
             {...menu}
           />
           <Styled.ToolbarSpacer />

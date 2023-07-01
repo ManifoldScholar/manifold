@@ -1,7 +1,9 @@
-import { Transforms, Editor, Range, Element, Path } from "slate";
+import { Transforms, Editor, Range, Element, Path, Node } from "slate";
 import { ReactEditor } from "slate-react";
 import { rteElements, nestableElements } from "../elements";
-import { isMarkActive } from "./getters";
+import { isMarkActive, isEmptyAndChildless } from "./getters";
+import isEqual from "lodash/isEqual";
+import has from "lodash/has";
 
 const LIST_TYPES = ["ol", "ul"];
 
@@ -62,10 +64,52 @@ const wrapContainerBlock = ({ editor, format, node, path }) => {
   Transforms.removeNodes(editor);
 };
 
-export const unwrapContainerBlock = ({ editor, format }) => {
+export const unwrapContainerBlock = ({ editor, format, path }) => {
+  if (format === "span") {
+    const parentPath = Path.parent(path);
+    const [newParent] = Editor.node(editor, { at: parentPath });
+    if (Editor.hasBlocks(editor, newParent)) {
+      return Editor.withoutNormalizing(editor, () => {
+        Transforms.wrapNodes(
+          editor,
+          { type: "div", slateOnly: true },
+          {
+            at: path,
+            match: (n, p) => {
+              return n.type === format && isEqual(p, path);
+            }
+          }
+        );
+        Transforms.removeNodes(editor, {
+          match: (n, p) => {
+            return has(n, "text") && !n.text && isEqual(p, Path.next(path));
+          },
+          at: parentPath
+        });
+        Transforms.liftNodes(editor, {
+          match: (n, p) => {
+            return n.type === "div" && isEqual(p, path);
+          },
+          at: path
+        });
+        const parent = Node.get(editor, parentPath);
+        if (isEmptyAndChildless(editor, parent)) {
+          Transforms.removeNodes(editor, {
+            at: Path.parent(parentPath),
+            match: n => {
+              return isEqual(n, parent);
+            }
+          });
+        }
+      });
+    }
+  }
+
   Transforms.liftNodes(editor, {
-    mode: "lowest",
-    match: n => n.type === format
+    match: (n, p) => {
+      return n.type === format && isEqual(p, path);
+    },
+    at: path
   });
 };
 
@@ -84,6 +128,14 @@ export const toggleOrWrapBlock = (editor, format) => {
       !n.nodeName &&
       n.type !== "li"
   });
+
+  if (format === "span") {
+    return Transforms.wrapNodes(
+      editor,
+      { type: "span", children: [] },
+      { split: true }
+    );
+  }
 
   if (
     (!nestableElements.includes(format) &&

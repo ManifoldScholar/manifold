@@ -75,7 +75,7 @@ export const isBlockActive = (editor, format) => {
     at: Editor.unhangRange(editor, selection),
     match: n =>
       !Editor.isEditor(n) &&
-      Editor.isBlock(editor, n) &&
+      Element.isElement(n) &&
       !n.nodeName &&
       !n.slateOnly &&
       n.type !== "li"
@@ -106,5 +106,8 @@ export const isLinkActive = editor => {
 export const isEmptyAndChildless = (editor, node) => {
   const onlyChildIsEmptyText =
     node.children.length === 1 && has(node.children[0], "text");
-  return Editor.isEmpty(editor, node) && onlyChildIsEmptyText;
+  return (
+    Editor.isEmpty(editor, node) &&
+    (onlyChildIsEmptyText || !node.children.length)
+  );
 };
