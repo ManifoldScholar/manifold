@@ -7,10 +7,14 @@ import componentStyles from "./components";
 import utilityStyles from "./utility";
 
 export default css`
+@layer manifold, stylesheets;
+
+@layer manifold {
   ${fonts}
   ${rootVariables}
   ${vendorStyles}
   ${baseStyles}
   ${utilityStyles}
   ${componentStyles}
+}
 `;

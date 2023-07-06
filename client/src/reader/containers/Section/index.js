@@ -187,7 +187,9 @@ export class SectionContainer extends Component {
       return (
         <style
           key={stylesheet.id}
-          dangerouslySetInnerHTML={{ __html: stylesheet.attributes.styles }}
+          dangerouslySetInnerHTML={{
+            __html: `@layer stylesheets {${stylesheet.attributes.styles}}`
+          }}
         />
       );
     });
