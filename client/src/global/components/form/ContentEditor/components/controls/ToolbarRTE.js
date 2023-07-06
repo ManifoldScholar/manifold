@@ -6,7 +6,8 @@ import {
   ImageButton,
   IframeButton,
   BlockSelect,
-  FunctionButton
+  FunctionButton,
+  SpanButton
 } from "./buttons";
 import {
   MenuBar as ReakitMenuBar,
@@ -19,6 +20,7 @@ import { getAncestors } from "../../utils/slate/getters";
 import { useHtmlBreadcrumbs } from "../../contexts/htmlBreadcrumbsContext";
 import { rteElements, inlineNodes } from "../../utils/elements";
 import IconComposer from "global/components/utility/IconComposer";
+import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
@@ -63,6 +65,17 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
     [selectedCrumb, setSelectedCrumb]
   );
 
+  const handleHoverFocus = useCallback(
+    a => {
+      if (!editingCrumb) setSelectedCrumb(a);
+    },
+    [editingCrumb]
+  );
+
+  const clearHoverFocus = useCallback(() => {
+    if (!editingCrumb) setSelectedCrumb(null);
+  }, [editingCrumb]);
+
   return (
     <>
       <ReakitMenuBar
@@ -91,6 +104,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
         <Styled.ToolGroup>
           <ReakitMenuItem
             as={BlockSelect}
+            name="textBlock"
             options={[
               { format: "p", label: "Paragraph" },
               { format: "h1", label: "Heading 1" },
@@ -99,15 +113,17 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               { format: "h4", label: "Heading 4" },
               { format: "h5", label: "Heading 5" },
               { format: "h6", label: "Heading 6" },
-              { format: "", label: "Text" }
+              { format: "", label: "Text Block" }
             ]}
             {...menu}
           />
+          <ReakitMenuItem as={SpanButton} format="span" {...menu} />
           <Styled.ToolbarSpacer />
         </Styled.ToolGroup>
         <Styled.ToolGroup>
           <ReakitMenuItem
             as={BlockSelect}
+            name="container"
             options={[
               { format: "div", label: "Div" },
               { format: "header", label: "Header" },
@@ -117,6 +133,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               { format: "figcaption", label: "Figcaption" },
               { format: "", label: "Container" }
             ]}
+            color="var(--color-base-yellow20)"
             {...menu}
           />
           <Styled.ToolbarSpacer />
@@ -189,7 +206,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
       </ReakitMenuBar>
       <Styled.BreadcrumbsBar $darkMode={darkMode}>
         <Styled.BreadcrumbsScroller>
-          {true &&
+          {!isEmpty(ancestors) &&
             Object.keys(ancestors)
               .sort(
                 (a, b) => ancestors[a].path.length - ancestors[b].path.length
@@ -208,12 +225,10 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
                     <Styled.Breadcrumb
                       $color={color}
                       $darkMode={darkMode}
-                      onMouseEnter={() => {
-                        if (!editingCrumb) setSelectedCrumb(a);
-                      }}
-                      onMouseLeave={() => {
-                        if (!editingCrumb) setSelectedCrumb(null);
-                      }}
+                      onMouseEnter={() => handleHoverFocus(a)}
+                      onMouseLeave={clearHoverFocus}
+                      onFocus={() => handleHoverFocus(a)}
+                      onBlur={clearHoverFocus}
                       onClick={e => {
                         e.preventDefault();
                         setSelectedCrumb(a);

@@ -135,7 +135,8 @@ export default function SlateElement({
     rteElements.includes(element.type) ||
     renderedElements.includes(element.type) ||
     markElements.includes(element.type) ||
-    nestableElements.includes(element.type)
+    nestableElements.includes(element.type) ||
+    element.type === "span"
   ) {
     const Tag = element.type === "list-sibling" ? "span" : element.type;
     return (

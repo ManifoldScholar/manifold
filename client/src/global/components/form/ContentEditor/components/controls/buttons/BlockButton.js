@@ -3,9 +3,9 @@ import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { hotkeys, labels } from "./TooltipContent/hotkeys";
+import { hotkeys, labels } from "./TooltipContent/content";
 import { toggleOrWrapBlock } from "../../../utils/slate/transforms";
-import { isBlockActive } from "../../../utils/slate/getters";
+import { isElementActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
 
 const BlockButton = ({ format, icon, size, ...rest }, ref) => {
@@ -25,7 +25,7 @@ const BlockButton = ({ format, icon, size, ...rest }, ref) => {
         ref={ref}
         {...rest}
         aria-label={format}
-        data-active={isBlockActive(editor, format)}
+        data-active={isElementActive(editor, format)}
         onClick={event => {
           event.preventDefault();
           if (!selection) return;

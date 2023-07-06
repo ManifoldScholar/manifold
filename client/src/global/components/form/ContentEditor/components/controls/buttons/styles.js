@@ -77,6 +77,19 @@ export const Select = styled.select`
   }
 `;
 
+export const SpanButton = styled(Select)`
+  width: auto;
+  padding-inline: 8px;
+  margin-inline-start: 8px;
+
+  .backend & {
+    &[data-active="true"] {
+      color: var(--drawer-bg-color);
+      background-color: var(--color-base-blue45);
+    }
+  }
+`;
+
 export const SelectIcon = styled(IconComposer)`
   position: absolute;
   top: 25%;

@@ -8,7 +8,7 @@ import { useConfirmation } from "hooks";
 import Modal from "./insert/Modal";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { hotkeys, labels } from "./TooltipContent/hotkeys";
+import { hotkeys, labels } from "./TooltipContent/content";
 import { onModalClose } from "./utils";
 import { wrapLink, unwrapLink } from "../../../utils/slate/transforms";
 import { isLinkActive } from "../../../utils/slate/getters";

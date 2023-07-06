@@ -67,7 +67,7 @@ export const getNearestOfType = (editor, types) => {
   return { nearest, path };
 };
 
-export const isBlockActive = (editor, format) => {
+export const isElementActive = (editor, format) => {
   const { selection } = editor;
   if (!selection) return false;
 
@@ -75,13 +75,30 @@ export const isBlockActive = (editor, format) => {
     at: Editor.unhangRange(editor, selection),
     match: n =>
       !Editor.isEditor(n) &&
-      Editor.isBlock(editor, n) &&
+      Element.isElement(n) &&
       !n.nodeName &&
       !n.slateOnly &&
       n.type !== "li"
   });
 
   return nearest?.type === format;
+};
+
+export const isTextBlockActive = (editor, format) => {
+  const { selection } = editor;
+  if (!selection) return false;
+
+  const block = Editor.above(editor, {
+    at: Editor.unhangRange(editor, selection),
+    match: n =>
+      !Editor.isEditor(n) &&
+      Editor.isBlock(editor, n) &&
+      !n.nodeName &&
+      !n.slateOnly &&
+      n.type === format
+  });
+
+  return block ? block[0]?.type === format : false;
 };
 
 export const isMarkActive = (editor, format) => {
@@ -106,5 +123,8 @@ export const isLinkActive = editor => {
 export const isEmptyAndChildless = (editor, node) => {
   const onlyChildIsEmptyText =
     node.children.length === 1 && has(node.children[0], "text");
-  return Editor.isEmpty(editor, node) && onlyChildIsEmptyText;
+  return (
+    Editor.isEmpty(editor, node) &&
+    (onlyChildIsEmptyText || !node.children.length)
+  );
 };

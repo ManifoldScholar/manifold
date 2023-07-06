@@ -3,7 +3,7 @@ import { useSlate, ReactEditor } from "slate-react";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { hotkeys, labels } from "./TooltipContent/hotkeys";
+import { hotkeys, labels } from "./TooltipContent/content";
 import { toggleMark } from "../../../utils/slate/transforms";
 import { isMarkActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";

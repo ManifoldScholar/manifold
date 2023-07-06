@@ -2,24 +2,27 @@ import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { hotkeys, labels } from "./TooltipContent/hotkeys";
+import { hotkeys, labels, descriptions } from "./TooltipContent/content";
 import { toggleOrWrapBlock } from "../../../utils/slate/transforms";
-import { isBlockActive } from "../../../utils/slate/getters";
+import {
+  isTextBlockActive,
+  isElementActive
+} from "../../../utils/slate/getters";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
-const getActiveBlock = (editor, opts) => {
+const getActiveBlock = (editor, opts, name) => {
+  const isActive = name === "textBlock" ? isTextBlockActive : isElementActive;
   const active = opts
-    .map(o => [o, isBlockActive(editor, o)])
+    .map(o => [o, isActive(editor, o)])
     .reduce((obj, o) => ({ ...obj, [o[0]]: o[1] }), {});
-  const activeCount = opts.map(o => isBlockActive(editor, o)).filter(Boolean)
-    .length;
+  const activeCount = opts.map(o => isActive(editor, o)).filter(Boolean).length;
 
   if (activeCount !== 1) return "";
   return Object.keys(active).find(o => active[o]);
 };
 
-const BlockSelect = ({ options, ...rest }, ref) => {
+const BlockSelect = ({ options, name, color, ...rest }, ref) => {
   const editor = useSlate();
   const { selection } = editor ?? {};
 
@@ -31,7 +34,8 @@ const BlockSelect = ({ options, ...rest }, ref) => {
 
   const active = getActiveBlock(
     editor,
-    options.map(o => o.format)
+    options.map(o => o.format),
+    name
   );
 
   return (
@@ -41,7 +45,10 @@ const BlockSelect = ({ options, ...rest }, ref) => {
           active ? (
             <TooltipContent label={labels[active]} hotkeys={hotkeys[active]} />
           ) : (
-            <div>Placeholder</div>
+            <TooltipContent
+              label={labels[name]}
+              description={descriptions[name]}
+            />
           )
         }
         xOffset="0"
@@ -58,7 +65,7 @@ const BlockSelect = ({ options, ...rest }, ref) => {
           {...rest}
           aria-label="Text styles selector"
           data-active={active !== ""}
-          $color={"var(--color-accent-primary)"}
+          $color={color ?? "var(--color-accent-primary)"}
           value={active}
           onChange={e => {
             e.preventDefault();
