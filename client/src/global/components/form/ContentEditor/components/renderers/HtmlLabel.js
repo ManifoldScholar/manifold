@@ -35,8 +35,7 @@ export default function HtmlLabel({ visible, element }) {
     path.length === 1 ||
     (element.type === "li" && !Editor.isEmpty(editor, element));
 
-  const disableLift =
-    path.length === 2 || element.type === "li" || element.type === "span";
+  const disableLift = path.length === 2 || element.type === "li";
 
   const updateClassName = e => {
     e.persist();
@@ -64,7 +63,7 @@ export default function HtmlLabel({ visible, element }) {
   const tagAndId = element.htmlAttrs?.id
     ? `${element.type}#${element.htmlAttrs.id}`
     : element.type;
-  const formattedClass = element.htmlAttrs?.class?.replaceAll(" ", ".");
+  const formattedClass = element.htmlAttrs?.class?.trim().replaceAll(" ", ".");
 
   return editing ? (
     <Styled.EditableElementLabel contentEditable={false} $color={color}>
@@ -76,7 +75,10 @@ export default function HtmlLabel({ visible, element }) {
       />
       <Styled.TagButtons>
         <Styled.LiftButton
-          onClick={() => unwrapContainerBlock({ editor, format: element.type })}
+          onClick={e => {
+            e.preventDefault();
+            unwrapContainerBlock({ editor, format: element.type, path });
+          }}
           aria-label="Move node up one level in the html hierarchy"
           disabled={disableLift}
         >

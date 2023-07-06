@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { hotkeys, labels, descriptions } from "./TooltipContent/hotkeys";
+import { hotkeys, labels, descriptions } from "./TooltipContent/content";
 import * as Styled from "./styles";
 
 const FunctionButton = (

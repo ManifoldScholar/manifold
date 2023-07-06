@@ -9,10 +9,10 @@ import Utility from "global/components/utility";
 import { isValidUrl } from "../../../utils/helpers";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { descriptions, labels, hotkeys } from "./TooltipContent/hotkeys";
+import { descriptions, labels, hotkeys } from "./TooltipContent/content";
 import { onModalClose } from "./utils";
 import { insertIframe } from "../../../utils/slate/transforms";
-import { isBlockActive } from "../../../utils/slate/getters";
+import { isElementActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
 
 const IframeButton = ({ icon, size, ...rest }, ref) => {
@@ -99,7 +99,7 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
       });
   };
 
-  const active = isBlockActive(editor, "iframe");
+  const active = isElementActive(editor, "iframe");
 
   return (
     <Tooltip

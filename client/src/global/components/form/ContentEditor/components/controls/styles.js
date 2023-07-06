@@ -67,20 +67,28 @@ export const BreadcrumbsScroller = styled.div`
   align-items: center;
   gap: 8px;
   overflow-x: scroll;
+  overflow-y: visible;
   scrollbar-width: none;
 `;
 
 export const Breadcrumb = styled.button`
   ${buttonUnstyled}
   white-space: nowrap;
-  overflow: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   max-width: 300px;
   flex-shrink: 0;
+  min-height: 24px;
 
   &:hover {
     color: ${({ $color, $darkMode }) =>
       $darkMode ? COLOR_MAP[$color].dark : COLOR_MAP[$color].light};
+  }
+
+  &:focus-visible {
+    color: ${({ $color, $darkMode }) =>
+      $darkMode ? COLOR_MAP[$color].dark : COLOR_MAP[$color].light};
+    outline: 0;
   }
 `;
 

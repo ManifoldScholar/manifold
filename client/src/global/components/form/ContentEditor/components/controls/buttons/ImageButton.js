@@ -6,11 +6,11 @@ import Utility from "global/components/utility";
 import Modal from "./insert/Modal";
 import { useConfirmation } from "hooks";
 import InsertImageForm from "./insert/ImageForm";
-import { isBlockActive } from "../../../utils/slate/getters";
+import { isElementActive } from "../../../utils/slate/getters";
 import { insertImage } from "../../../utils/slate/transforms";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { descriptions, labels, hotkeys } from "./TooltipContent/hotkeys";
+import { descriptions, labels, hotkeys } from "./TooltipContent/content";
 import { onModalClose } from "./utils";
 import * as Styled from "./styles";
 
@@ -95,7 +95,7 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
       });
   };
 
-  const active = isBlockActive(editor, "img");
+  const active = isElementActive(editor, "img");
 
   return (
     <Tooltip

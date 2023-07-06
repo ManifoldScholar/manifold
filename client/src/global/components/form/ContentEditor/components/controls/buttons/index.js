@@ -5,3 +5,4 @@ export { default as ImageButton } from "./ImageButton";
 export { default as IframeButton } from "./IframeButton";
 export { default as BlockSelect } from "./BlockSelect";
 export { default as FunctionButton } from "./FunctionButton";
+export { default as SpanButton } from "./SpanButton";

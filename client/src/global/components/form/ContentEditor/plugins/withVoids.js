@@ -8,7 +8,9 @@ import {
 
 export const isSlateVoid = element => {
   const isRteEl =
-    (rteElements.includes(element) || nestableElements.includes(element)) &&
+    (rteElements.includes(element) ||
+      nestableElements.includes(element) ||
+      element === "span") &&
     !rteVoids.includes(element);
   const isRendered = renderedElements.includes(element);
   const isMark = markElements.includes(element);
