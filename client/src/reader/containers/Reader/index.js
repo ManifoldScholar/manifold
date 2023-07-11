@@ -12,7 +12,7 @@ import Header from "reader/components/Header";
 import ReaderFullNotes from "reader/containers/ReaderFullNotes";
 import { select, grab, isEntityLoaded } from "utils/entityUtils";
 import { commonActions } from "actions/helpers";
-import { textsAPI, requests } from "api";
+import { textsAPI, requests, meAPI } from "api";
 import lh from "helpers/linkHandler";
 import locationHelper from "helpers/location";
 import { childRoutes } from "helpers/router";
@@ -77,6 +77,7 @@ export class ReaderContainer extends Component {
       loading: state.ui.transitory.loading.active,
       notifications: state.notifications,
       renderDevTools: state.developer.renderDevTools,
+      settings: select(requests.settings, state.entityStore),
       appearance
     };
   };
@@ -109,6 +110,7 @@ export class ReaderContainer extends Component {
 
   componentDidMount() {
     this.setPersistentUI(this.props);
+    this.maybeFetchReadingGroups();
   }
 
   componentDidUpdate(prevProps) {
@@ -126,6 +128,16 @@ export class ReaderContainer extends Component {
     this.props.dispatch(flush(requests.rText));
     this.props.dispatch(flush(requests.rMyAnnotationsForText));
     this.props.dispatch(flush(requests.rMyFilteredAnnotationsForText));
+  }
+
+  maybeFetchReadingGroups() {
+    const { authentication, settings, dispatch } = this.props;
+    const { authenticated } = authentication;
+    if (!authenticated) return;
+    if (!settings) return;
+    if (settings?.attributes?.general?.disableReadingGroups !== false) return;
+
+    dispatch(request(meAPI.readingGroups(), requests.feMyReadingGroups));
   }
 
   get bodyClass() {
