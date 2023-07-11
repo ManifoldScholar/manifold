@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { readingGroupsAPI } from "api";
+import { readingGroupsAPI, requests } from "api";
 import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
@@ -26,10 +26,9 @@ function PublicReadingGroupsListContainer({ route }) {
   };
   const [filters, setFilters] = useFilterState(baseFilters);
 
-  const [rgJoins, setRGJoins] = useState(0);
-  const { data: readingGroups, meta } = useFetch({
+  const { data: readingGroups, meta, refresh } = useFetch({
     request: [readingGroupsAPI.publicIndex, filters, pagination],
-    dependencies: [rgJoins]
+    options: { requestKey: requests.fePublicReadingGroups }
   });
 
   useSetLocation({ filters, page: pagination.number });
@@ -55,7 +54,7 @@ function PublicReadingGroupsListContainer({ route }) {
       lockScroll: "always"
     },
     childProps: {
-      onSuccess: () => setRGJoins(prev => prev + 1)
+      onSuccess: refresh
     }
   };
 
@@ -83,9 +82,7 @@ function PublicReadingGroupsListContainer({ route }) {
           {showPlaceholder && (
             <EntityCollectionPlaceholder.ReadingGroups isPublic />
           )}
-          {currentUser && (
-            <JoinBox onJoin={() => setRGJoins(prev => prev + 1)} />
-          )}
+          {currentUser && <JoinBox onJoin={refresh} />}
         </Styled.Container>
       </section>
       {childRoutes(route, childRouteProps)}

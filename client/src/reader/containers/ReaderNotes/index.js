@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { readingGroupsAPI, meAPI } from "api";
+import { readingGroupsAPI, meAPI, requests } from "api";
 import groupBy from "lodash/groupBy";
 import isString from "lodash/isString";
 import { commonActions as commonActionsHelper } from "actions/helpers";
@@ -51,11 +51,13 @@ function ReaderNotesContainer({
 
   const { data: myAnnotations, meta: myMeta } = useFetch({
     request: [meAPI.annotations, fetchFilters],
-    condition: showMyAnnotations
+    condition: showMyAnnotations,
+    options: { fetchKey: requests.rMyFilteredAnnotationsForText }
   });
   const { data: rgAnnotations, meta: rgMeta } = useFetch({
     request: [readingGroupsAPI.annotations, groupId, fetchFilters],
-    condition: !showMyAnnotations
+    condition: !showMyAnnotations,
+    options: { fetchKey: requests.rReadingGroupFilteredAnnotationsForText }
   });
 
   const annotations = showMyAnnotations ? myAnnotations : rgAnnotations;
