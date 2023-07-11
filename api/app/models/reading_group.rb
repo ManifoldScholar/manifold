@@ -104,9 +104,9 @@ class ReadingGroup < ApplicationRecord
   end
 
   def ensure_creator_membership
-    return if creator.in?(users)
-
-    reading_group_memberships.create!(user: creator, role: :moderator)
+    reading_group_memberships.where(user: creator).first_or_create! do |rgm|
+      rgm[:role] = :moderator
+    end
   end
 
   class << self
