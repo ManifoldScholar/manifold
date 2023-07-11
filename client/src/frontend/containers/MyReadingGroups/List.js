@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { meAPI, requests } from "api";
+import { meAPI } from "api";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { childRoutes } from "helpers/router";
@@ -30,8 +30,7 @@ function MyReadingGroupsListContainer({ route }) {
   const [filters, setFilters] = useFilterState(baseFilters);
 
   const { data: readingGroups, meta, refresh } = useFetch({
-    request: [meAPI.readingGroups, filters, pagination],
-    options: { requestKey: requests.feMyReadingGroups }
+    request: [meAPI.readingGroups, filters, pagination]
   });
 
   useSetLocation({ filters, page: pagination.number });
