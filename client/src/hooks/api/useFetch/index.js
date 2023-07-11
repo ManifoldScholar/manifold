@@ -30,7 +30,7 @@ export default function useFetch({
 }) {
   const firstRun = useRef(true);
   const uid = `fetch_${useUID()}`;
-  const [requestKey] = useState(`fetch_${useUID()}`);
+  const [requestKey] = useState(options.requestKey ?? `fetch_${useUID()}`);
   const [count, setCount] = useState(1);
   const store = useStore();
   const getState = store.getState;

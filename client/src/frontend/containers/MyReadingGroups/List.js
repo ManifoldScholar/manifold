@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { meAPI } from "api";
+import { meAPI, requests } from "api";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { childRoutes } from "helpers/router";
@@ -29,10 +29,9 @@ function MyReadingGroupsListContainer({ route }) {
   };
   const [filters, setFilters] = useFilterState(baseFilters);
 
-  const [rgCountChanges, setRgCountChanges] = useState(0);
-  const { data: readingGroups, meta } = useFetch({
+  const { data: readingGroups, meta, refresh } = useFetch({
     request: [meAPI.readingGroups, filters, pagination],
-    dependencies: [rgCountChanges]
+    options: { requestKey: requests.feMyReadingGroups }
   });
 
   useSetLocation({ filters, page: pagination.number });
@@ -52,7 +51,7 @@ function MyReadingGroupsListContainer({ route }) {
 
   function handleNewGroupSuccess() {
     history.push(lh.link("frontendMyReadingGroups"));
-    setRgCountChanges(prev => prev + 1);
+    refresh();
   }
 
   const childRouteProps = {
@@ -86,11 +85,11 @@ function MyReadingGroupsListContainer({ route }) {
                 resetState: baseFilters
               }}
               showStatusFilter
-              onArchive={() => setRgCountChanges(prev => prev + 1)}
+              onArchive={refresh}
             />
           )}
           {showPlaceholder && <EntityCollectionPlaceholder.ReadingGroups />}
-          <JoinBox onJoin={() => setRgCountChanges(prev => prev + 1)} />
+          <JoinBox onJoin={refresh} />
         </Styled.Container>
       </section>
       {childRoutes(route, childRouteProps)}
