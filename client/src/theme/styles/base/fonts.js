@@ -26,7 +26,7 @@ export default `
     font-family: "aleo";
     font-style: normal;
     font-weight: ${fontWeight.regular};
-    font-display: optional;
+    font-display: swap;
     src: url(${AleoRegular}) format("woff");
   }
 
@@ -34,7 +34,7 @@ export default `
     font-family: "aleo";
     font-style: italic;
     font-weight: ${fontWeight.regular};
-    font-display: optional;
+    font-display: swap;
     src: url(${AleoItalic}) format("woff");
   }
 
@@ -42,7 +42,7 @@ export default `
     font-family: "aleo";
     font-style: normal;
     font-weight: ${fontWeight.bold};
-    font-display: optional;
+    font-display: swap;
     src: url(${AleoBold}) format("woff");
   }
 
@@ -50,7 +50,7 @@ export default `
     font-family: "aleo";
     font-style: normal;
     font-weight: ${fontWeight.light};
-    font-display: optional;
+    font-display: swap;
     src: url(${AleoLight}) format("woff");
   }
 
@@ -59,7 +59,7 @@ export default `
     font-family: "trueno";
     font-style: normal;
     font-weight: ${fontWeight.regular};
-    font-display: optional;
+    font-display: swap;
     src: url(${TruenoRg}) format("woff");
   }
 
@@ -67,7 +67,7 @@ export default `
     font-family: "trueno";
     font-style: italic;
     font-weight: ${fontWeight.regular};
-    font-display: optional;
+    font-display: swap;
     src: url(${TruenoRgIt}) format("woff");
   }
 
@@ -75,7 +75,7 @@ export default `
     font-family: "trueno";
     font-style: normal;
     font-weight: ${fontWeight.bold};
-    font-display: optional;
+    font-display: swap;
     src: url(${TruenoBd}) format("woff");
   }
 
@@ -83,7 +83,7 @@ export default `
     font-family: "trueno";
     font-style: normal;
     font-weight: ${fontWeight.semibold};
-    font-display: optional;
+    font-display: swap;
     src: url(${TruenoSBd}) format("woff");
   }
 
@@ -91,7 +91,7 @@ export default `
     font-family: "trueno";
     font-style: normal;
     font-weight: ${fontWeight.light};
-    font-display: optional;
+    font-display: swap;
     src: url(${TruenoLt}) format("woff");
   }
 
