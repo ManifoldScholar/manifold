@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import groupBy from "lodash/groupBy";
 import isEqual from "lodash/isEqual";
-import { meAPI, readingGroupsAPI } from "api";
+import { meAPI, readingGroupsAPI, requests } from "api";
 import { commonActions as commonActionsHelper } from "actions/helpers";
 import lh from "helpers/linkHandler";
 import Overlay from "global/components/Overlay";
@@ -53,11 +53,15 @@ function ReaderFullNotesContainer({
 
   const me = currentGroupId === "me" || currentGroupId === "orphaned";
   const endpoint = me ? meAPI.annotations : readingGroupsAPI.annotations;
+  const fetchKey = me
+    ? requests.rMyFilteredAnnotationsForText
+    : requests.rReadingGroupFilteredAnnotationsForText;
   const args = me
     ? [filters, pagination]
     : [currentGroupId, filters, pagination];
   const { data: annotations, meta, refresh } = useFetch({
-    request: [endpoint, ...args]
+    request: [endpoint, ...args],
+    options: { fetchKey }
   });
 
   const commonActions = commonActionsHelper(dispatch);
