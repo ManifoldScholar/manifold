@@ -1,9 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import PageHeader from "backend/components/layout/PageHeader";
-import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
-import IconComposer from "global/components/utility/IconComposer";
 import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
@@ -21,60 +18,40 @@ class ProjectCollectionHeader extends PureComponent {
       : "BECollectionManual64";
   }
 
-  renderUtility = projectCollection => {
+  get utility() {
+    const { projectCollection, t } = this.props;
     const smart = projectCollection.attributes.smart;
-    const t = this.props.t;
 
-    return (
-      <div className="utility-button-group utility-button-group--inline">
-        <Link
-          to={lh.link(
-            "frontendProjectCollection",
-            projectCollection.attributes.slug
-          )}
-          className="utility-button"
-        >
-          <IconComposer
-            icon="eyeOpen32"
-            size={26}
-            className="utility-button__icon utility-button__icon--highlight"
-          />
-          <span className="utility-button__text">{t("actions.view")}</span>
-        </Link>
-        <Link
-          to={lh.link("backendProjectCollectionSettings", projectCollection.id)}
-          className="utility-button"
-        >
-          <IconComposer
-            icon="settings32"
-            size={26}
-            className="utility-button__icon utility-button__icon--highlight"
-          />
-          <span className="utility-button__text">{t("common.settings")}</span>
-        </Link>
-        {!smart ? (
-          <Link
-            to={lh.link(
-              "backendProjectCollectionManageProjects",
-              projectCollection.id
-            )}
-            className="utility-button"
-          >
-            <IconComposer
-              icon="BEProject64"
-              size={26}
-              className="utility-button__icon utility-button__icon--highlight"
-            />
-            <span className="utility-button__text">
-              {t("project_collections.manage", {
-                entity: t("glossary.project_other")
-              })}
-            </span>
-          </Link>
-        ) : null}
-      </div>
-    );
-  };
+    const base = [
+      {
+        label: "actions.view",
+        route: "frontendProjectCollection",
+        slug: projectCollection.attributes.slug,
+        icon: "eyeOpen32"
+      },
+      {
+        label: "common.settings",
+        route: "backendProjectCollectionSettings",
+        slug: projectCollection.id,
+        icon: "settings32"
+      }
+    ];
+
+    const manage = smart
+      ? [
+          {
+            label: t("project_collections.manage", {
+              entity: t("glossary.project_other")
+            }),
+            route: "backendProjectCollectionManageProjects",
+            slug: projectCollection.id,
+            icon: "BEProject64"
+          }
+        ]
+      : [];
+
+    return [...base, ...manage];
+  }
 
   renderPlaceholder() {
     const t = this.props.t;
@@ -106,7 +83,7 @@ class ProjectCollectionHeader extends PureComponent {
         icon={this.iconName}
         type="projectCollection"
         title={projectCollection.attributes.title}
-        utility={this.renderUtility(projectCollection)}
+        actions={this.utility}
         hideBreadcrumbs
       />
     );

@@ -10,14 +10,12 @@ import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import withConfirmation from "hoc/withConfirmation";
-import IconComposer from "global/components/utility/IconComposer";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getBreadcrumbs } from "./breadcrumbs";
 
 import Authorize from "hoc/Authorize";
-import { Link } from "react-router-dom";
 
 const { request } = entityStoreActions;
 
@@ -115,87 +113,78 @@ export class TextWrapperContainer extends PureComponent {
     return lh.link("reader", this.props.text.attributes.slug);
   }
 
-  renderUtility() {
+  get utility() {
     const { text, t } = this.props;
     const {
-      attributes: { exportsAsEpubV3, epubV3ExportUrl }
+      attributes: {
+        exportsAsEpubV3,
+        epubV3ExportUrl,
+        ingestionSourceDownloadUrl,
+        ingestionExternalSourceUrl
+      }
     } = text;
 
-    return (
-      <div className="utility-button-group utility-button-group--inline">
-        <Link to={this.previewUrl()} className="utility-button">
-          <IconComposer
-            icon="eyeOpen32"
-            size={26}
-            className="utility-button__icon"
-          />
-          <span className="utility-button__text">{t("actions.view")}</span>
-        </Link>
-        <button onClick={this.handleTextDestroy} className="utility-button">
-          <IconComposer
-            icon="delete32"
-            size={26}
-            className="utility-button__icon"
-          />
-          <span className="utility-button__text">{t("actions.delete")}</span>
-        </button>
-        <button onClick={this.toggleExportsAsEpubV3} className="utility-button">
-          <IconComposer
-            icon={exportsAsEpubV3 ? "circleMinus24" : "circlePlus24"}
-            size={26}
-            className="utility-button__icon"
-          />
-          <span className="utility-button__text">
-            {exportsAsEpubV3 ? t("texts.disable_epub") : t("texts.enable_epub")}
-          </span>
-        </button>
-        {epubV3ExportUrl && (
-          <a href={epubV3ExportUrl} download className="utility-button">
-            <IconComposer
-              icon="download24"
-              size={26}
-              className="utility-button__icon"
-            />
-            <span className="utility-button__text">
-              {t("texts.download_epub")}
-            </span>
-          </a>
-        )}
-        {text.attributes.ingestionSourceDownloadUrl && (
-          <a
-            href={text.attributes.ingestionSourceDownloadUrl}
-            download
-            className="utility-button"
-          >
-            <IconComposer
-              icon="download24"
-              size={26}
-              className="utility-button__icon"
-            />
-            <span className="utility-button__text">
-              {t("texts.download_source")}
-            </span>
-          </a>
-        )}
-        {text.attributes.ingestionExternalSourceUrl && (
-          <a
-            href={text.attributes.ingestionExternalSourceUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-            className="utility-button"
-          >
-            <IconComposer
-              icon="link24"
-              size={26}
-              className="utility-button__icon"
-            />
-            <span className="utility-button__text">
-              {t("texts.visit_source")}
-            </span>
-          </a>
-        )}
-      </div>
-    );
+    const base = [
+      {
+        label: "actions.view",
+        route: "frontendProjectDetail",
+        slug: text.relationships.project.attributes.slug,
+        icon: "eyeOpen32"
+      },
+      {
+        label: "actions.delete",
+        authorize: "delete",
+        icon: "delete32",
+        onClick: this.handleTextDestroy
+      },
+      {
+        label: exportsAsEpubV3
+          ? t("texts.disable_epub")
+          : t("texts.enable_epub"),
+        icon: exportsAsEpubV3 ? "circleMinus24" : "circlePlus24",
+        onClick: this.toggleExportsAsEpubV3
+      }
+    ];
+
+    const epubDownload = epubV3ExportUrl
+      ? [
+          {
+            label: "texts.download_epub",
+            href: epubV3ExportUrl,
+            download: true,
+            icon: "download24"
+          }
+        ]
+      : [];
+
+    const ingestionSourceDownload = ingestionSourceDownloadUrl
+      ? [
+          {
+            label: "texts.download_source",
+            href: ingestionSourceDownloadUrl,
+            download: true,
+            icon: "download24"
+          }
+        ]
+      : [];
+
+    const externalLink = ingestionExternalSourceUrl
+      ? [
+          {
+            label: "texts.visit_source",
+            href: ingestionExternalSourceUrl,
+            download: false,
+            icon: "link24"
+          }
+        ]
+      : [];
+
+    return [
+      ...base,
+      ...epubDownload,
+      ...ingestionSourceDownload,
+      ...externalLink
+    ];
   }
 
   renderRoutes() {
@@ -250,7 +239,7 @@ export class TextWrapperContainer extends PureComponent {
             type={belongsToJournalIssue ? "article" : "text"}
             title={text.attributes.titleFormatted}
             subtitle={text.attributes.subtitle}
-            utility={this.renderUtility()}
+            actions={this.utility}
             secondaryLinks={secondaryLinks}
             {...parentProps}
           />

@@ -10,14 +10,12 @@ import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
 import withConfirmation from "hoc/withConfirmation";
-import IconComposer from "global/components/utility/IconComposer";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getBreadcrumbs } from "./breadcrumbs";
 
 import Authorize from "hoc/Authorize";
-import { Link } from "react-router-dom";
 
 const { request, flush } = entityStoreActions;
 
@@ -95,40 +93,25 @@ export class ResourceWrapperContainer extends PureComponent {
     this.props.confirm(heading, message, this.doDestroy);
   };
 
-  renderUtility(resource) {
-    const project = resource.relationships.project;
-    const previewUrl = lh.link(
-      "frontendProjectResource",
-      project.attributes.slug,
-      resource.attributes.slug
-    );
-    const t = this.props.t;
+  get utility() {
+    const { resource } = this.props;
+    const { project } = resource.relationships ?? {};
 
-    return (
-      <div className="utility-button-group utility-button-group--inline">
-        <Link to={previewUrl} className="utility-button">
-          <IconComposer
-            icon="eyeOpen32"
-            size={26}
-            className="utility-button__icon"
-          />
-          <span className="utility-button__text">{t("actions.view")}</span>
-        </Link>
-        <Authorize entity={resource} ability={"delete"}>
-          <button
-            onClick={this.handleResourceDestroy}
-            className="utility-button"
-          >
-            <IconComposer
-              icon="delete32"
-              size={26}
-              className="utility-button__icon"
-            />
-            <span className="utility-button__text">{t("actions.delete")}</span>
-          </button>
-        </Authorize>
-      </div>
-    );
+    return [
+      {
+        label: "actions.view",
+        route: "frontendProjectResource",
+        slug: project.attributes.slug,
+        resourceSlug: resource.attributes.slug,
+        icon: "eyeOpen32"
+      },
+      {
+        label: "actions.delete",
+        icon: "delete32",
+        authorize: "delete",
+        onClick: this.handleResourceDestroy
+      }
+    ];
   }
 
   renderRoutes() {
@@ -178,7 +161,7 @@ export class ResourceWrapperContainer extends PureComponent {
           <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
           <PageHeader
             type="resource"
-            utility={this.renderUtility(resource)}
+            actions={this.utility}
             title={resource.attributes.titleFormatted}
             subtitle={resource.attributes.subtitle}
             secondaryLinks={secondaryLinks}

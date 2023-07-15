@@ -4,13 +4,11 @@ import MenuBody from "./MenuBody";
 import Button from "./Button";
 import * as Styled from "./styles";
 
-export default function ChildSelector({ links, active, entity }) {
-  return links ? (
+export default function ActionSelector({ actions, entity }) {
+  return actions ? (
     <Styled.Positioner>
-      <DisclosureNavigationMenu
-        disclosure={<Button active={active} entity={entity} />}
-      >
-        <MenuBody links={links} />
+      <DisclosureNavigationMenu disclosure={<Button />}>
+        <MenuBody actions={actions} entity={entity} />
       </DisclosureNavigationMenu>
     </Styled.Positioner>
   ) : null;

@@ -23,13 +23,5 @@ export const SecondaryNav = styled(SecondaryNavDropdown)`
   border-radius: 0 0 var(--box-border-radius) var(--box-border-radius);
   margin-block-start: -3px;
 
-  &.open {
-    border-radius: 0;
-  }
-
-  ul {
-    border-radius: var(--box-border-radius);
-  }
-
   ${respond(`display: none;`, 65)}
 `;

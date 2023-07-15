@@ -1,5 +1,8 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Project from "./Project";
+import Utility from "../utility";
+import { getTextLinks } from "../utility/helpers";
 import * as Styled from "./styles";
 
 export default function TextHeader({
@@ -10,10 +13,19 @@ export default function TextHeader({
   parentTitleString,
   parentSubtitle,
   parentId,
-  utility,
+  actions,
   note,
-  texts
+  texts,
+  hasSecondaryNav
 }) {
+  const { pathname } = useLocation();
+  const textLinks = getTextLinks({
+    texts,
+    id: parentId,
+    pathname,
+    parent: true
+  });
+
   return (
     <>
       <Project
@@ -32,12 +44,14 @@ export default function TextHeader({
           {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
         </Styled.TitleWrapper>
       </Styled.Row>
-      {(utility || note) && (
-        <Styled.Utility>
-          {utility}
-          {note && <Styled.Note>{note}</Styled.Note>}
-        </Styled.Utility>
-      )}
+      <Utility
+        actions={actions}
+        links={textLinks}
+        entityType="text"
+        childType="text"
+        hasSecondaryNav={hasSecondaryNav}
+        note={note}
+      />
     </>
   );
 }

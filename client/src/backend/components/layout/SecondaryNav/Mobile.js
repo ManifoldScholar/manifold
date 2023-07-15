@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
 import { matchPath, useLocation } from "react-router-dom";
-import classnames from "classnames";
 import lh from "helpers/linkHandler";
-import IconComposer from "global/components/utility/IconComposer";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 export default function NavigationDropdown({ links, className }) {
   const [open, setOpen] = useState(false);
@@ -45,15 +43,14 @@ export default function NavigationDropdown({ links, className }) {
 
   const renderItem = link => {
     return (
-      <li key={link.route} className="dropdown-nav__nav-item">
-        <NavLink
+      <li key={link.route}>
+        <Styled.Link
           onClick={close}
           to={pathForLink(link)}
-          className="dropdown-nav__link"
-          activeClassName="dropdown-nav__link--active"
+          activeClassName="active"
         >
           {t(link.label)}
-        </NavLink>
+        </Styled.Link>
       </li>
     );
   };
@@ -68,31 +65,22 @@ export default function NavigationDropdown({ links, className }) {
     const label = selected ? selected.label : t("navigation.menu");
 
     return (
-      <nav className={`dropdown-nav dropdown-nav--static ${className}`}>
-        <div className="dropdown-nav__selected">{label}</div>
-      </nav>
+      <Styled.Nav className={className}>
+        <Styled.Active>{label}</Styled.Active>
+      </Styled.Nav>
     );
   };
 
   const renderMenu = () => {
-    const navClasses = classnames({
-      "dropdown-nav": true,
-      "dropdown-nav--open": open
-    });
-
     return (
-      <nav className={`${navClasses} ${className}`}>
-        <button className="dropdown-nav__trigger" onClick={toggleOpen}>
-          <div className="dropdown-nav__selected">
+      <Styled.Nav className={className}>
+        <Styled.Disclosure $open={open} onClick={toggleOpen}>
+          <Styled.Active $open={open}>
             {getCurrentLabel()}
-            <IconComposer
-              icon="disclosureDown16"
-              size="default"
-              className="dropdown-nav__trigger-icon"
-            />
-          </div>
-        </button>
-        <ul className="dropdown-nav__nav-list">
+            <Styled.Icon icon="disclosureDown16" size="default" $open={open} />
+          </Styled.Active>
+        </Styled.Disclosure>
+        <Styled.List $open={open}>
           {links.map(link => {
             if (link.ability)
               return (
@@ -106,15 +94,15 @@ export default function NavigationDropdown({ links, className }) {
               );
             return renderItem(link);
           })}
-        </ul>
-      </nav>
+        </Styled.List>
+      </Styled.Nav>
     );
   };
 
   return links.length > 1 ? renderMenu() : renderStatic();
 }
 
-NavigationDropdown.displayName = "Navigation.Dropdown";
+NavigationDropdown.displayName = "SecondaryNav.Mobile.Dropdown";
 
 NavigationDropdown.propTypes = {
   links: PropTypes.array,

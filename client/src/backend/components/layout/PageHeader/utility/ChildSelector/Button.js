@@ -14,15 +14,6 @@ function ChildSelectorButton({ active, entity, toggleVisible, ...props }, ref) {
   );
 }
 
-ChildSelectorButton.displayName = "UserMenuButton";
-
-ChildSelectorButton.propTypes = {
-  callbacks: PropTypes.shape({
-    toggleUserPanel: PropTypes.func.isRequired,
-    toggleSignInUpOverlay: PropTypes.func.isRequired
-  }),
-  visible: PropTypes.bool,
-  context: PropTypes.oneOf(["frontend", "backend", "reader"])
-};
+ChildSelectorButton.displayName = "PageHeader.ChildSelector";
 
 export default forwardRef(ChildSelectorButton);

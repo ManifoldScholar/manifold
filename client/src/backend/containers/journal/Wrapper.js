@@ -6,8 +6,6 @@ import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
-import IconComposer from "global/components/utility/IconComposer";
-import { Link } from "react-router-dom";
 import { useFetch, useApiCallback, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
@@ -48,33 +46,20 @@ function JournalWrapper({ match, route, history, confirm, location }) {
     confirm(heading, message, destroyAndRedirect);
   }, [destroyAndRedirect, confirm, t]);
 
-  const renderUtility = () => {
-    return (
-      <div className="utility-button-group utility-button-group--inline">
-        <Link
-          to={lh.link("frontendJournalDetail", journal.attributes.slug)}
-          className="utility-button"
-        >
-          <IconComposer
-            icon="eyeOpen32"
-            size={26}
-            className="utility-button__icon"
-          />
-          <span className="utility-button__text">{t("actions.view")}</span>
-        </Link>
-        <Authorize entity={journal} ability={"delete"}>
-          <button onClick={handleJournalDestroy} className="utility-button">
-            <IconComposer
-              icon="delete32"
-              size={26}
-              className="utility-button__icon"
-            />
-            <span className="utility-button__text">{t("actions.delete")}</span>
-          </button>
-        </Authorize>
-      </div>
-    );
-  };
+  const utility = [
+    {
+      label: "actions.view",
+      route: "frontendJournalDetail",
+      slug: journal?.attributes.slug,
+      icon: "eyeOpen32"
+    },
+    {
+      label: "actions.delete",
+      authorize: "delete",
+      icon: "delete32",
+      onClick: handleJournalDestroy
+    }
+  ];
 
   const renderRoutes = () => {
     return childRoutes(route, {
@@ -120,7 +105,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
           type="journal"
           title={journal.attributes.titleFormatted}
           subtitle={journal.attributes.subtitle}
-          utility={renderUtility(journal)}
+          actions={utility}
           secondaryLinks={navigation.journal(journal)}
           issues={journal.attributes.issuesNav}
         />

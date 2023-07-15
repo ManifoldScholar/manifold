@@ -10,8 +10,6 @@ import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import Layout from "backend/components/layout";
 import navigation from "helpers/router/navigation";
 import withConfirmation from "hoc/withConfirmation";
-import IconComposer from "global/components/utility/IconComposer";
-import { Link } from "react-router-dom";
 import PageHeader from "backend/components/layout/PageHeader";
 
 import Authorize from "hoc/Authorize";
@@ -148,39 +146,27 @@ class PageDetailContainer extends PureComponent {
         backLabel={t("records.pages.back_label")}
         title={page.attributes.title}
         subtitle={subtitle}
-        utility={this.renderUtility()}
+        actions={this.utility}
         icon="ResourceDocument64"
       />
     );
   }
 
-  renderUtility() {
-    const t = this.props.t;
-    return (
-      <div className="utility-button-group utility-button-group--inline">
-        <Link
-          to={lh.link("frontendPage", this.props.page.attributes.slug)}
-          className="utility-button"
-        >
-          <IconComposer
-            icon="eyeOpen32"
-            size={26}
-            className="utility-button__icon"
-          />
-          <span className="utility-button__text">{t("actions.view")}</span>
-        </Link>
-        <Authorize entity={this.props.page} ability="update">
-          <button onClick={this.handleDestroy} className="utility-button">
-            <IconComposer
-              icon="delete32"
-              size={26}
-              className="utility-button__icon"
-            />
-            <span className="utility-button__text">{t("actions.delete")}</span>
-          </button>
-        </Authorize>
-      </div>
-    );
+  get utility() {
+    return [
+      {
+        label: "actions.view",
+        route: "frontendPage",
+        slug: this.props.page.attributes.slug,
+        icon: "eyeOpen32"
+      },
+      {
+        label: "actions.delete",
+        authorize: "update",
+        icon: "delete32",
+        onClick: this.handleDestroy
+      }
+    ];
   }
 
   renderNew() {

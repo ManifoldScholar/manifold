@@ -12,7 +12,6 @@ import PageHeader from "backend/components/layout/PageHeader";
 import FrontendLayout from "frontend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import get from "lodash/get";
-import IconComposer from "global/components/utility/IconComposer";
 import Form from "global/components/form";
 
 import Authorize from "hoc/Authorize";
@@ -163,27 +162,20 @@ class FeatureDetailContainer extends PureComponent {
             position: feature.attributes.position
           })
         }
-        utility={this.renderUtility()}
+        actions={this.utility}
         icon="Lamp64"
       />
     );
   }
 
-  renderUtility() {
-    return (
-      <div className="utility-button-group utility-button-group--inline">
-        <button onClick={this.handleDestroy} className="utility-button">
-          <IconComposer
-            icon="delete32"
-            size={26}
-            className="utility-button__icon"
-          />
-          <span className="utility-button__text">
-            {this.props.t("actions.delete")}
-          </span>
-        </button>
-      </div>
-    );
+  get utility() {
+    return [
+      {
+        label: "actions.delete",
+        icon: "delete32",
+        onClick: this.handleDestroy
+      }
+    ];
   }
 
   renderRoutes() {
