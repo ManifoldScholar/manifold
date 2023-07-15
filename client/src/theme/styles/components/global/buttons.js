@@ -89,6 +89,8 @@ export default `
 
   .utility-button-group {
     &--inline {
+      max-height: 26px;
+
       > *:not(:last-child) {
         margin-right: 1em;
 

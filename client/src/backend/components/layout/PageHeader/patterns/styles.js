@@ -5,16 +5,18 @@ import UniqueIcons from "global/components/icon/unique";
 import { Link } from "react-router-dom";
 
 export const Row = styled.div`
-  padding: ${fluidScale("22px", "12px")} ${fluidScale("28px", "12px")};
+  padding: ${fluidScale("22px", "24px")} ${fluidScale("28px", "16px")}
+    ${fluidScale("22px", "20px")} ${fluidScale("28px", "16px")};
   display: flex;
   align-items: center;
   width: 100%;
   position: relative;
 
   ${({ $padStart }) =>
-    $padStart && `padding-inline-start: ${fluidScale("36px", "16px")};`}
+    $padStart && `padding-inline-start: ${fluidScale("36px", "28px")};`}
 
-  & + & {
+  & + &,
+  &:not(:first-of-type) {
     padding-block-start: 0;
     margin-block-start: -6px;
   }
@@ -30,7 +32,7 @@ export const Figure = styled.figure`
   height: ${fluidScale("64px", "59px")};
   background-color: var(--color-base-neutral100);
   border-radius: 12px;
-  margin-inline-end: 24px;
+  margin-inline-end: 20px;
 `;
 
 export const JournalFigure = styled(Figure)`
@@ -55,6 +57,18 @@ export const ProjectCollectionFigure = styled.figure`
   border-radius: var(--box-border-radius);
   color: var(--color-accent-primary);
   margin-inline-end: 24px;
+`;
+
+export const ChildLink = styled.div`
+  width: ${fluidScale("16px", "12px")};
+  height: ${fluidScale("16px", "12px")};
+  border-bottom-left-radius: 4px;
+  border-left: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  color: var(--color-neutral-ui-light);
+  margin-block-start: -12px;
+
+  ${respond(`margin-inline-start: 12px;`, 65)}
 `;
 
 export const Icon = styled(IconComposer)`
@@ -87,14 +101,22 @@ export const ProjectCollectionIcon = styled(IconComposer)`
 export const ProjectIcon = styled(UniqueIcons.ProjectPlaceholderUnique)`
   width: ${fluidScale("64px", "59px")};
   height: ${fluidScale("64px", "59px")};
-  margin-inline-start: 4px;
   margin-block-start: 3px;
+  margin-inline-start: 2px;
+
+  ${Figure} > & {
+    margin-inline-start: 4px;
+  }
 `;
 
 export const TextIcon = styled(IconComposer)`
   width: ${fluidScale("36px", "32px")};
   height: ${fluidScale("36px", "32px")};
-  margin-inline-end: 24px;
+  margin-inline-end: ${fluidScale("20px", "16px")};
+
+  ${ChildLink} + & {
+    margin-inline-start: 12px;
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -116,42 +138,16 @@ export const Title = styled.h1`
 `;
 
 export const Subtitle = styled.span`
-  font-size: ${fluidScale("20px", "14px")};
+  font-size: ${fluidScale("20px", "17px")};
   font-family: var(--font-family-serif);
   color: var(--color-neutral-text-light);
+  margin-block-start: 8px;
 
   ${respond(`margin-block-start: 4px;`, 65)}
 `;
 
 export const Count = styled.span`
   color: var(--color-accent-primary);
-  margin-inline-end: 12px;
-`;
-
-export const Utility = styled.div`
-  background-color: var(--color-base-neutral100);
-  padding: 15px 28px;
-  border-bottom-left-radius: var(--box-border-radius);
-  border-bottom-right-radius: var(--box-border-radius);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const Note = styled.span`
-  font-family: var(--font-family-serif);
-  font-size: ${fluidScale("17px", "14px")};
-  line-height: initial;
-`;
-
-export const ChildLink = styled.div`
-  width: ${fluidScale("16px", "12px")};
-  height: ${fluidScale("16px", "12px")};
-  border-bottom-left-radius: 4px;
-  border-left: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
-  color: var(--color-neutral-ui-light);
-  margin-block-start: -12px;
   margin-inline-end: 12px;
 `;
 

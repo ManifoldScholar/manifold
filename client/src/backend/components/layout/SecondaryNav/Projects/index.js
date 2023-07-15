@@ -21,7 +21,7 @@ function ProjectsSecondaryNav(props, ref) {
         : "ProjectCollection32";
 
     return (
-      <li key={link.route}>
+      <li key={link.label}>
         <Styled.Link
           to={pathForLink(link)}
           activeClassName="active"
@@ -41,7 +41,7 @@ function ProjectsSecondaryNav(props, ref) {
           if (link.ability)
             return (
               <Authorize
-                key={`${link.route}-wrapped`}
+                key={`${link.label}-wrapped`}
                 entity={link.entity}
                 ability={link.ability}
               >

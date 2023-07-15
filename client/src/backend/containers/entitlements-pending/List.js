@@ -17,8 +17,6 @@ import {
 import { childRoutes } from "helpers/router";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
-import { Link } from "react-router-dom";
-import IconComposer from "global/components/utility/IconComposer";
 import PageHeader from "backend/components/layout/PageHeader";
 
 function PendingEntitlementsList({
@@ -80,21 +78,13 @@ function PendingEntitlementsList({
       confirm(heading, message, () => deleteEntitlement(id).then(refresh()));
   };
 
-  const utility = (
-    <Link
-      to={lh.link("backendRecordsEntitlementImports")}
-      className="utility-button"
-    >
-      <IconComposer
-        icon="eyeOpen32"
-        size={26}
-        className="utility-button__icon"
-      />
-      <span className="utility-button__text">
-        {t("entitlements.imports.view_imports_label")}
-      </span>
-    </Link>
-  );
+  const actions = [
+    {
+      label: "entitlements.imports.view_imports_label",
+      route: "backendRecordsEntitlementImports",
+      icon: "eyeOpen32"
+    }
+  ];
 
   return (
     <>
@@ -104,7 +94,7 @@ function PendingEntitlementsList({
           <PageHeader
             type="entitlements"
             title={t("entitlements.pending.header")}
-            utility={utility}
+            actions={actions}
           />
           <EntitiesList
             entityComponent={PendingEntitlementRow}

@@ -10,14 +10,12 @@ import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
 import withConfirmation from "hoc/withConfirmation";
-import IconComposer from "global/components/utility/IconComposer";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getBreadcrumbs } from "./breadcrumbs";
 
 import Authorize from "hoc/Authorize";
-import { Link } from "react-router-dom";
 
 const { request, flush } = entityStoreActions;
 
@@ -78,14 +76,6 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     this.props.dispatch(resourceCollectionRequest);
   };
 
-  previewUrl() {
-    return lh.link(
-      "frontendProjectResourceCollection",
-      this.props.resourceCollection.relationships.project.attributes.slug,
-      this.props.resourceCollection.attributes.slug
-    );
-  }
-
   doDestroy = () => {
     const call = resourceCollectionsAPI.destroy(
       this.props.resourceCollection.id
@@ -129,31 +119,23 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     this.props.confirm(heading, message, this.doDestroy);
   };
 
-  renderUtility() {
-    const t = this.props.t;
-    return (
-      <div className="utility-button-group utility-button-group--inline">
-        <Link to={this.previewUrl()} className="utility-button">
-          <IconComposer
-            icon="eyeOpen32"
-            size={26}
-            className="utility-button__icon"
-          />
-          <span className="utility-button__text">{t("actions.view")}</span>
-        </Link>
-        <button
-          onClick={this.handleCollectionDestroy}
-          className="utility-button"
-        >
-          <IconComposer
-            icon="delete32"
-            size={26}
-            className="utility-button__icon"
-          />
-          <span className="utility-button__text">{t("actions.delete")}</span>
-        </button>
-      </div>
-    );
+  get utility() {
+    const { resourceCollection } = this.props;
+    return [
+      {
+        label: "actions.view",
+        route: "frontendProjectResourceCollection",
+        slug: resourceCollection.relationships.project.attributes.slug,
+        resourceSlug: resourceCollection.attributes.slug,
+        icon: "eyeOpen32"
+      },
+      {
+        label: "actions.delete",
+        icon: "delete32",
+        authorize: "delete",
+        onClick: this.handleCollectionDestroy
+      }
+    ];
   }
 
   renderRoutes() {
@@ -212,7 +194,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
             backLabel={
               resourceCollection.relationships.project.attributes.titlePlaintext
             }
-            utility={this.renderUtility()}
+            actions={this.utility}
             title={resourceCollection.attributes.title}
             secondaryLinks={secondaryLinks}
             icon="ResourceCollection64"

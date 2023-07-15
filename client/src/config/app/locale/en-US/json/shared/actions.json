@@ -1,5 +1,6 @@
 {
   "actions": {
+    "actions": "Actions",
     "activate": "Activate",
     "add": "Add",
     "add_comment": "$t(actions.add) comment",

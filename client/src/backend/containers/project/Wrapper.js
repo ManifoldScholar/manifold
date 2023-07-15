@@ -12,8 +12,6 @@ import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
 import get from "lodash/get";
-import IconComposer from "global/components/utility/IconComposer";
-import { Link } from "react-router-dom";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getBreadcrumbs } from "./breadcrumbs";
@@ -90,44 +88,21 @@ export class ProjectWrapperContainer extends PureComponent {
     this.props.confirm(heading, message, this.doDestroy);
   };
 
-  renderUtility(project) {
-    const t = this.props.t;
-
-    return (
-      <>
-        <div className="utility-button-group utility-button-group--inline">
-          <Link
-            to={lh.link(
-              "frontendProjectDetail",
-              this.props.project.attributes.slug
-            )}
-            className="utility-button"
-          >
-            <IconComposer
-              icon="eyeOpen32"
-              size={26}
-              className="utility-button__icon"
-            />
-            <span className="utility-button__text">{t("actions.view")}</span>
-          </Link>
-          <Authorize entity={project} ability={"delete"}>
-            <button
-              onClick={this.handleProjectDestroy}
-              className="utility-button"
-            >
-              <IconComposer
-                icon="delete32"
-                size={26}
-                className="utility-button__icon"
-              />
-              <span className="utility-button__text">
-                {t("actions.delete")}
-              </span>
-            </button>
-          </Authorize>
-        </div>
-      </>
-    );
+  get utility() {
+    return [
+      {
+        label: "actions.view",
+        route: "frontendProjectDetail",
+        slug: this.props.project.attributes.slug,
+        icon: "eyeOpen32"
+      },
+      {
+        label: "actions.delete",
+        authorize: "delete",
+        icon: "delete32",
+        onClick: this.handleProjectDestroy
+      }
+    ];
   }
 
   renderRoutes() {
@@ -191,7 +166,7 @@ export class ProjectWrapperContainer extends PureComponent {
             title={project.attributes.titleFormatted}
             subtitle={project.attributes.subtitle}
             texts={project.attributes.textsNav}
-            utility={this.renderUtility(project)}
+            actions={this.utility}
             secondaryLinks={secondaryLinks}
             {...parentProps}
           />

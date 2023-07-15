@@ -3,7 +3,9 @@ import {
   buttonUnstyled,
   formLabelPrimary,
   listUnstyled,
-  defaultTransitionProps
+  defaultTransitionProps,
+  respond,
+  fluidScale
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import { NavLink } from "react-router-dom";
@@ -18,7 +20,13 @@ export const Button = styled.button`
   align-items: center;
   padding: 7px 12px 7px 16px;
   ${formLabelPrimary}
-  font-size: 13px;
+  font-size: ${fluidScale("13px", "12px")};
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-accent-primary);
+    color: var(--color-base-neutral100);
+  }
 `;
 
 export const DropdownIcon = styled(IconComposer)``;
@@ -26,6 +34,20 @@ export const DropdownIcon = styled(IconComposer)``;
 export const Positioner = styled.div`
   position: relative;
   margin-inline-start: auto;
+  display: none;
+
+  ${respond(`display: block;`, 65)}
+`;
+
+export const PositionerMobile = styled(Positioner)`
+  display: block;
+  margin-inline-start: 0;
+
+  &:not(:first-child) {
+    margin-inline-start: 12px;
+  }
+
+  ${respond(`display: none;`, 65)}
 `;
 
 export const Wrapper = styled.div`
@@ -37,7 +59,7 @@ export const Wrapper = styled.div`
   position: absolute;
   top: 130%;
   right: 0;
-  z-index: 1;
+  z-index: 51;
 
   ${({ $visible }) =>
     $visible
@@ -104,4 +126,5 @@ export const Link = styled(NavLink, transientOptions)`
 
 export const LinkIcon = styled(IconComposer)`
   color: var(--color-accent-primary);
+  margin-top: 2px;
 `;

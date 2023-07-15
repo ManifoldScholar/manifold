@@ -1,4 +1,5 @@
 import React from "react";
+import Utility from "../utility";
 import * as Styled from "./styles";
 
 export default function ProjectCollectionHeader({
@@ -7,7 +8,7 @@ export default function ProjectCollectionHeader({
   titleComponent,
   subtitle,
   icon,
-  utility,
+  actions,
   note
 }) {
   return (
@@ -25,12 +26,7 @@ export default function ProjectCollectionHeader({
           </>
         )}
       </Styled.Row>
-      {(utility || note) && (
-        <Styled.Utility>
-          {utility}
-          {note && <Styled.Note>{note}</Styled.Note>}
-        </Styled.Utility>
-      )}
+      <Utility actions={actions} note={note} entityType="projectCollection" />
     </>
   );
 }

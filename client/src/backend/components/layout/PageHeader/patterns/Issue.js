@@ -1,7 +1,9 @@
 import React from "react";
 import Journal from "./Journal";
-import ChildSelector from "../ChildSelector";
+import ChildSelector from "../utility/ChildSelector";
 import { useLocation } from "react-router-dom";
+import Utility from "../utility";
+import { getTextLinks } from "../utility/helpers";
 import * as Styled from "./styles";
 
 export default function IssueHeader({
@@ -12,31 +14,15 @@ export default function IssueHeader({
   parentTitleString,
   parentSubtitle,
   parentId,
-  utility,
+  actions,
   note,
   texts,
-  id,
   parent,
-  issues
+  issues,
+  hasSecondaryNav
 }) {
   const { pathname } = useLocation();
-
-  const textLinks = texts?.length
-    ? [
-        {
-          label: "None",
-          active: !parent,
-          id: id ?? "none",
-          route: parent ? "backendProject" : null
-        },
-        ...texts?.map(t => ({
-          label: t.label,
-          route: "backendTextAnalytics",
-          id: t.id,
-          active: pathname?.includes(t.id)
-        }))
-      ]
-    : [];
+  const textLinks = getTextLinks({ texts, parentId, pathname, parent });
 
   return (
     <>
@@ -66,13 +52,17 @@ export default function IssueHeader({
           <Styled.Title {...titleHtml}>{titleString}</Styled.Title>
           {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
         </Styled.TitleWrapper>
-        {!!texts?.length && <ChildSelector links={textLinks} entity="text" />}
+        {textLinks && <ChildSelector links={textLinks} entity="article" />}
       </Styled.Row>
-      {(utility || note) && (
-        <Styled.Utility>
-          {utility}
-          {note && <Styled.Note>{note}</Styled.Note>}
-        </Styled.Utility>
+      {!parent && (
+        <Utility
+          actions={actions}
+          links={textLinks}
+          entityType="journalIssue"
+          childType="article"
+          hasSecondaryNav={hasSecondaryNav}
+          note={note}
+        />
       )}
     </>
   );

@@ -64,6 +64,8 @@ export default function PageHeader({
           titleHtml={maybeHtml(title)}
           parentTitleString={maybeString(parentTitle)}
           parentTitleHtml={maybeHtml(parentTitle)}
+          hasSecondaryNav={!!secondaryLinks}
+          type={type}
           {...props}
         />
         {secondaryLinks && <Styled.SecondaryNav links={secondaryLinks} />}
@@ -75,10 +77,7 @@ export default function PageHeader({
 PageHeader.displayName = "Layout.PageHeader";
 
 PageHeader.propTypes = {
-  utility: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
+  actions: PropTypes.arrayOf(PropTypes.object),
   note: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

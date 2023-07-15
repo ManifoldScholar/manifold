@@ -1,4 +1,5 @@
 import React from "react";
+import Utility from "../utility";
 import * as Styled from "./styles";
 
 export default function BaseHeader({
@@ -6,8 +7,10 @@ export default function BaseHeader({
   titleString,
   subtitle,
   icon,
-  utility,
-  note
+  actions,
+  note,
+  hasSecondaryNav,
+  type
 }) {
   return (
     <>
@@ -22,12 +25,12 @@ export default function BaseHeader({
           {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
         </Styled.TitleWrapper>
       </Styled.Row>
-      {(utility || note) && (
-        <Styled.Utility>
-          {utility}
-          {note && <Styled.Note>{note}</Styled.Note>}
-        </Styled.Utility>
-      )}
+      <Utility
+        actions={actions}
+        hasSecondaryNav={hasSecondaryNav}
+        note={note}
+        entityType={type}
+      />
     </>
   );
 }
