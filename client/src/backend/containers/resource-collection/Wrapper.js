@@ -158,6 +158,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
       resourceCollection.relationships.project.attributes.isJournalIssue;
 
     const breadcrumbs = getBreadcrumbs(
+      resourceCollection,
       resourceCollection.relationships.project,
       belongsToJournalIssue,
       t

@@ -64,7 +64,7 @@ export class ResourceNewContainer extends PureComponent {
 
     const belongsToJournalIssue = project.attributes.isJournalIssue;
 
-    const breadcrumbs = getBreadcrumbs(project, belongsToJournalIssue, t);
+    const breadcrumbs = getBreadcrumbs(null, project, belongsToJournalIssue, t);
 
     return (
       <Authorize

@@ -273,17 +273,25 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       ? collectionForHeader.attributes.title
       : t("titles.project_collections");
 
-    const breadcrumbs = [
-      { to: null, label: t("common.admin") },
-      {
-        to: lh.link("backendProjects"),
-        label: t("glossary.project_title_case_other")
-      },
-      {
-        to: lh.link("backendProjectCollections"),
-        label: t("glossary.project_collection_title_case_other")
-      }
-    ];
+    const breadcrumbs = collectionForHeader
+      ? [
+          { to: null, label: t("glossary.project_title_case_other") },
+          {
+            to: lh.link("backendProjectCollections"),
+            label: t("glossary.project_collection_title_case_other")
+          },
+          {
+            to: lh.link("backendProjectCollections", projectCollection.id),
+            label: projectCollection.attributes.title
+          }
+        ]
+      : [
+          { to: null, label: t("glossary.project_title_case_other") },
+          {
+            to: lh.link("backendProjectCollections"),
+            label: t("glossary.project_collection_title_case_other")
+          }
+        ];
 
     return (
       <Authorize

@@ -53,12 +53,17 @@ export class ResourceCollectionNewContainer extends PureComponent {
   };
 
   render() {
-    const { project, t } = this.props;
+    const { resourceCollection, project, t } = this.props;
     if (!project) return null;
 
     const belongsToJournalIssue = project.attributes.isJournalIssue;
 
-    const breadcrumbs = getBreadcrumbs(project, belongsToJournalIssue, t);
+    const breadcrumbs = getBreadcrumbs(
+      resourceCollection,
+      project,
+      belongsToJournalIssue,
+      t
+    );
 
     return (
       <Authorize
@@ -85,7 +90,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
           />
           <Layout.BackendPanel>
             <FormContainer.Form
-              model={this.props.resourceCollection}
+              model={resourceCollection}
               name={requests.beResourceCollectionCreate}
               update={resourceCollectionsAPI.update}
               create={model => resourceCollectionsAPI.create(project.id, model)}

@@ -31,10 +31,13 @@ class JournalsNew extends PureComponent {
     const t = this.props.t;
 
     const breadcrumbs = [
-      { to: null, label: t("common.admin") },
       {
         to: lh.link("backendJournals"),
         label: t("glossary.journal_title_case_other")
+      },
+      {
+        to: lh.link("backendJournalsNew"),
+        label: t("common.new")
       }
     ];
 

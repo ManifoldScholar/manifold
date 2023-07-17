@@ -33,6 +33,7 @@
     "hide": "Hide",
     "hide_all": "Hide all",
     "hide_description": "$t(actions.hide) Description",
+    "import": "Import",
     "join": "Join",
     "join_group": "$t(actions.join) this group",
     "leave": "Leave",

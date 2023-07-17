@@ -1,9 +1,31 @@
 import lh from "helpers/linkHandler";
 
-export const getBreadcrumbs = (project, belongsToJournalIssue, t) =>
-  belongsToJournalIssue
+export const getBreadcrumbs = (resource, project, belongsToJournalIssue, t) => {
+  /* eslint-disable no-nested-ternary */
+  const currentCrumb =
+    resource === "import"
+      ? [
+          {
+            to: lh.link("backendResourceImport"),
+            label: t("actions.import")
+          }
+        ]
+      : resource
+      ? [
+          {
+            to: lh.link("backendResource", resource.id),
+            label: resource.attributes.title
+          }
+        ]
+      : [
+          {
+            to: lh.link("backendProjectResourcesNew"),
+            label: t("common.new")
+          }
+        ];
+
+  return belongsToJournalIssue
     ? [
-        { to: null, label: t("common.admin") },
         {
           to: lh.link("backendJournals"),
           label: t("glossary.journal_title_case_other")
@@ -23,13 +45,14 @@ export const getBreadcrumbs = (project, belongsToJournalIssue, t) =>
         {
           to: lh.link("backendProjectResources", project.id),
           label: t("glossary.resource_title_case_other")
-        }
+        },
+        ...currentCrumb
       ]
     : [
-        { to: null, label: "Admin" },
+        { to: null, label: t("glossary.project_title_case_other") },
         {
           to: lh.link("backendProjects"),
-          label: t("glossary.project_title_case_other")
+          label: t("pages.projects_all")
         },
         {
           to: lh.link("backendProject", project.id),
@@ -38,5 +61,7 @@ export const getBreadcrumbs = (project, belongsToJournalIssue, t) =>
         {
           to: lh.link("backendProjectResources", project.id),
           label: t("glossary.resource_title_case_other")
-        }
+        },
+        ...currentCrumb
       ];
+};

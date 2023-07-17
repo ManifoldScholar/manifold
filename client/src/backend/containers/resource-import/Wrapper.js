@@ -119,7 +119,12 @@ export class ResourceImportWrapper extends PureComponent {
 
     const belongsToJournalIssue = project.attributes.isJournalIssue;
 
-    const breadcrumbs = getBreadcrumbs(project, belongsToJournalIssue, t);
+    const breadcrumbs = getBreadcrumbs(
+      "import",
+      project,
+      belongsToJournalIssue,
+      t
+    );
 
     return (
       <Authorize
