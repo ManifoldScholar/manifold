@@ -40,7 +40,9 @@ class TextSectionViews extends Component {
   }
 
   viewCountForSection(section) {
-    const rowData = this.data.find(entry => entry.id === section.id);
+    const rowData = Array.isArray(this.data)
+      ? this.data.find(entry => entry.id === section.id)
+      : null;
     return rowData ? rowData.count : 0;
   }
 

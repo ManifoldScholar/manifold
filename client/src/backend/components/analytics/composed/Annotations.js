@@ -12,7 +12,7 @@ class Annotations extends Component {
   };
 
   get data() {
-    return this.props.data?.length ? this.props.data[0] : {};
+    return Array.isArray(this.props.data) ? this.props.data[0] : {};
   }
 
   get blockWidth() {

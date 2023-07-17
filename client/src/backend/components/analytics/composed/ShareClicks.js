@@ -16,7 +16,9 @@ class ShareClicks extends Component {
   }
 
   get total() {
-    return this.data.reduce((accum, entry) => accum + entry.count, 0);
+    return Array.isArray(this.data)
+      ? this.data.reduce((accum, entry) => accum + entry.count, 0)
+      : 0;
   }
 
   get blockWidth() {
