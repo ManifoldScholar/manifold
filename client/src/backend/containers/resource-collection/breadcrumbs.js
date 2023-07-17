@@ -1,9 +1,26 @@
 import lh from "helpers/linkHandler";
 
-export const getBreadcrumbs = (project, belongsToJournalIssue, t) =>
-  belongsToJournalIssue
+export const getBreadcrumbs = (
+  resourceCollection,
+  project,
+  belongsToJournalIssue,
+  t
+) => {
+  const currentCrumb = resourceCollection
     ? [
-        { to: null, label: t("common.admin") },
+        {
+          to: lh.link("backendResourceCollection", resourceCollection.id),
+          label: resourceCollection.attributes.title
+        }
+      ]
+    : [
+        {
+          to: lh.link("backendProjectResourceCollectionsNew"),
+          label: t("common.new")
+        }
+      ];
+  return belongsToJournalIssue
+    ? [
         {
           to: lh.link("backendJournals"),
           label: t("glossary.journal_title_case_other")
@@ -23,13 +40,14 @@ export const getBreadcrumbs = (project, belongsToJournalIssue, t) =>
         {
           to: lh.link("backendProjectResourceCollections", project.id),
           label: t("glossary.resource_collection_title_case_other")
-        }
+        },
+        ...currentCrumb
       ]
     : [
-        { to: null, label: t("common.admin") },
+        { to: null, label: t("glossary.project_title_case_other") },
         {
           to: lh.link("backendProjects"),
-          label: t("glossary.project_title_case_other")
+          label: t("pages.projects_all")
         },
         {
           to: lh.link("backendProject", project.id),
@@ -38,5 +56,7 @@ export const getBreadcrumbs = (project, belongsToJournalIssue, t) =>
         {
           to: lh.link("backendProjectResourceCollections", project.id),
           label: t("glossary.resource_collection_title_case_other")
-        }
+        },
+        ...currentCrumb
       ];
+};

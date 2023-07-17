@@ -8,7 +8,6 @@ export const getBreadcrumbs = (text, belongsToJournalIssue, t) => {
 
   return belongsToJournalIssue
     ? [
-        { to: null, label: t("common.admin") },
         {
           to: lh.link("backendJournals"),
           label: t("glossary.journal_title_case_other")
@@ -27,14 +26,21 @@ export const getBreadcrumbs = (text, belongsToJournalIssue, t) => {
         },
         {
           to: lh.link("backendProjectTexts", text.relationships.project.id),
-          label: t("glossary.text_title_case_other")
+          label: t("glossary.article_title_case_other")
+        },
+        {
+          to: lh.link("backendProjectTexts", text.id),
+          label: text.attributes.titlePlaintext
         }
       ]
     : [
-        { to: null, label: t("common.admin") },
+        {
+          to: null,
+          label: t("glossary.project_title_case_other")
+        },
         {
           to: lh.link("backendProjects"),
-          label: t("glossary.project_title_case_other")
+          label: t("pages.projects_all")
         },
         {
           to: lh.link("backendProject", text.relationships.project.id),
@@ -43,6 +49,10 @@ export const getBreadcrumbs = (text, belongsToJournalIssue, t) => {
         {
           to: lh.link("backendProjectTexts", text.relationships.project.id),
           label: t("glossary.text_title_case_other")
+        },
+        {
+          to: lh.link("backendProjectTexts", text.id),
+          label: text.attributes.titlePlaintext
         }
       ];
 };

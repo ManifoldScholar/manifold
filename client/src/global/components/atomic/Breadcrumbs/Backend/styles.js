@@ -14,6 +14,7 @@ export const BackendOuter = styled(Outer)`
   border-radius: var(--box-border-radius);
   text-transform: none;
   font-weight: var(--font-weight-regular);
+  overflow-x: scroll;
 
   ${respond(
     `
@@ -27,9 +28,7 @@ export const BackendOuter = styled(Outer)`
 `;
 
 export const BackendInner = styled(Inner)`
-  max-width: 100%;
-  padding-inline-start: 0;
-  padding-inline-end: 0;
+  padding-inline: 0;
 `;
 
 export const Label = styled.span`
@@ -40,6 +39,7 @@ export const Label = styled.span`
 export const BackendBreadcrumb = styled(Breadcrumb, transientOptions)`
   &:last-of-type:not(span) {
     color: var(--input-color);
+    padding-inline-end: 24px;
   }
 
   ${({ $noLink }) =>

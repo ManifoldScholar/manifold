@@ -72,10 +72,13 @@ function JournalWrapper({ match, route, history, confirm, location }) {
   const subpage = location.pathname.split("/")[4]?.replace("-", "_");
 
   const breadcrumbs = [
-    { to: null, label: t("common.admin") },
     {
       to: lh.link("backendJournals"),
       label: t("glossary.journal_title_case_other")
+    },
+    {
+      to: lh.link("backendJournals", journal.id),
+      label: journal.attributes.titlePlaintext
     }
   ];
 

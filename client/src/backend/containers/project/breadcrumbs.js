@@ -4,11 +4,7 @@ import lh from "helpers/linkHandler";
 export const getBreadcrumbs = (project, locationState, isJournalIssue, t) =>
   locationState
     ? [
-        { to: null, label: t("common.admin") },
-        {
-          to: lh.link("backendProjects"),
-          label: t("glossary.project_title_case_other")
-        },
+        { to: null, label: t("glossary.project_title_case_other") },
         {
           to: lh.link("backendProjectCollections"),
           label: t("glossary.project_collection_title_case_other")
@@ -16,11 +12,14 @@ export const getBreadcrumbs = (project, locationState, isJournalIssue, t) =>
         {
           to: lh.link("backendProjectCollection", locationState.id),
           label: locationState.label
+        },
+        {
+          to: lh.link("backendProjects", project.id),
+          label: project.attributes.titlePlaintext
         }
       ]
     : isJournalIssue
     ? [
-        { to: null, label: t("common.admin") },
         {
           to: lh.link("backendJournals"),
           label: t("glossary.journal_title_case_other")
@@ -32,12 +31,20 @@ export const getBreadcrumbs = (project, locationState, isJournalIssue, t) =>
         {
           to: lh.link("backendJournalIssues", project.relationships.journal.id),
           label: t("glossary.issue_truncated_title_case_other")
+        },
+        {
+          to: lh.link("backendProjects", project.id),
+          label: project.attributes.titlePlaintext
         }
       ]
     : [
-        { to: null, label: t("common.admin") },
+        { to: null, label: t("glossary.project_title_case_other") },
         {
           to: lh.link("backendProjects"),
-          label: t("glossary.project_title_case_other")
+          label: t("pages.projects_all")
+        },
+        {
+          to: lh.link("backendProjects", project.id),
+          label: project.attributes.titlePlaintext
         }
       ];

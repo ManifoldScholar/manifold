@@ -66,10 +66,14 @@ export class ProjectNewContainer extends PureComponent {
     const t = this.props.t;
 
     const breadcrumbs = [
-      { to: null, label: t("common.admin") },
+      { to: null, label: t("glossary.project_title_case_other") },
       {
         to: lh.link("backendProjects"),
-        label: t("glossary.project_title_case_other")
+        label: t("pages.projects_all")
+      },
+      {
+        to: lh.link("backendProjectsNew"),
+        label: t("common.new")
       }
     ];
 
