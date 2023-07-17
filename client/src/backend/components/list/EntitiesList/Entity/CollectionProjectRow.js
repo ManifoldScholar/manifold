@@ -19,7 +19,7 @@ export default class CollectionProjectRow extends PureComponent {
 
   render() {
     return (
-      <ProjectRow {...this.props} entity={this.project} renderWithoutLink />
+      <ProjectRow {...this.props} entity={this.project} rowClickMode="inline" />
     );
   }
 }

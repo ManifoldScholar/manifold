@@ -102,9 +102,9 @@ class ProjectRow extends PureComponent {
   render() {
     return (
       <EntityRow
+        rowClickMode="block"
         {...this.props}
         onRowClick={this.url}
-        rowClickMode="block"
         listStyle={this.props.listStyle}
         title={
           <span
