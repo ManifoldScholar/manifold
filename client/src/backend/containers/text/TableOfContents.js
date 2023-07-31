@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import FormContainer from "global/containers/form";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
@@ -12,6 +11,7 @@ import { formatTreeData } from "backend/components/authoring/TOCList/treeHelpers
 import { textsAPI } from "api";
 import { useApiCallback } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
+import * as Styled from "./styles";
 
 function TextTOCContainer({ text, route, confirm }) {
   const { t } = useTranslation();
@@ -70,7 +70,7 @@ function TextTOCContainer({ text, route, confirm }) {
   return text ? (
     <section>
       {renderChildRoutes()}
-      <FormContainer.Form
+      <Styled.Form
         className="form-secondary"
         doNotWarn
         groupErrors
@@ -97,9 +97,6 @@ function TextTOCContainer({ text, route, confirm }) {
             <span className="full" aria-hidden="true">
               {t("texts.add_toc_button_label")}
             </span>
-            <span className="abbreviated" aria-hidden="true">
-              {t("texts.add_toc_truncated")}
-            </span>
           </Link>
           <button
             onClick={confirmAutoGenerate}
@@ -116,9 +113,6 @@ function TextTOCContainer({ text, route, confirm }) {
             <span className="full" aria-hidden="true">
               {t("texts.auto_toc_button_label")}
             </span>
-            <span className="abbreviated" aria-hidden="true">
-              {t("texts.auto_toc_truncated")}
-            </span>
           </button>
         </div>
         <TOCList
@@ -129,7 +123,7 @@ function TextTOCContainer({ text, route, confirm }) {
           error={error}
           setError={setError}
         />
-      </FormContainer.Form>
+      </Styled.Form>
     </section>
   ) : null;
 }

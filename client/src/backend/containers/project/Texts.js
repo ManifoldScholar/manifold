@@ -203,9 +203,6 @@ export class ProjectTextsContainer extends Component {
               <span className="full" aria-hidden="true">
                 {t("texts.ingest_button_label")}
               </span>
-              <span className="abbreviated" aria-hidden="true">
-                {t("texts.ingest_truncated")}
-              </span>
             </Link>
             <Link
               to={lh.link("backendProjectTextsCreate", this.project.id)}
@@ -225,9 +222,6 @@ export class ProjectTextsContainer extends Component {
               <span className="full" aria-hidden="true">
                 {t("texts.create_button_label")}
               </span>
-              <span className="abbreviated" aria-hidden="true">
-                {t("glossary.text_title_case_one")}
-              </span>
             </Link>
             <Link
               to={lh.link("backendProjectCategoriesNew", this.project.id)}
@@ -246,9 +240,6 @@ export class ProjectTextsContainer extends Component {
               />
               <span className="full" aria-hidden="true">
                 {t("texts.create_category_button_label")}
-              </span>
-              <span className="abbreviated" aria-hidden="true">
-                {t("glossary.category_title_case_one")}
               </span>
             </Link>
           </div>

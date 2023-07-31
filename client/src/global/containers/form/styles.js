@@ -14,7 +14,7 @@ export const ErrorGroup = styled(GlobalForm.Errorable)`
 `;
 
 export const Form = styled.form`
-  --Form-row-gap: 40px;
+  --Form-row-gap: var(--form-row-gap, 40px);
   display: flex;
   flex-direction: column;
   row-gap: var(--Form-row-gap);

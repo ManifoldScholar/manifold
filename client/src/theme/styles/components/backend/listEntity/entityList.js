@@ -201,22 +201,14 @@ export default `.entity-list {
   &__button-set-flex {
     display: flex;
     column-gap: 12px;
-    row-gap: 24px;
-    flex-wrap: wrap;
+    row-gap: 16px;
+    flex-direction: column;
 
     .entity-list__button + .entity-list__button {
       margin-top: 0;
     }
 
-    .full {
-      display: none;
-
-      ${respond(`display: inline;`, 85)}
-    }
-
-    .abbreviated {
-      ${respond(`display: none;`, 85)}
-    }
+    ${respond(`flex-direction: row;`, 85)}
 
   }
 
@@ -245,7 +237,7 @@ export default `.entity-list {
       border-radius: 10px;
     }
   }
-  
+
   .entitlement-gid {
     font-family: var(--font-family-mono);
     font-style: normal;
