@@ -7,7 +7,8 @@ import {
   buttonUnstyled,
   respond,
   outlineOnFocus,
-  lighten
+  lighten,
+  fluidScale
 } from "theme/styles/mixins";
 
 export default `
@@ -27,9 +28,6 @@ export default `
     }
 
     &--empty {
-      position: relative;
-      min-height: 87px;
-
       p {
         ${utilityPrimary}
         width: 100%;
@@ -37,6 +35,7 @@ export default `
         font-size: 14px;
         text-align: center;
         border: 1px solid var(--color-base-neutral80);
+        margin: auto;
       }
     }
 
@@ -44,8 +43,7 @@ export default `
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      padding: 8px 16px;
-      margin: 8px;
+      padding: 16px ${fluidScale("24px", "20px")};
       background: var(--color-base-neutral95);
       border-radius: 8px;
 
@@ -54,10 +52,9 @@ export default `
       }
 
       &--placeholder {
-        position: absolute;
         width: 100%;
-        padding-right: 38px;
         background: none;
+        padding-block: 22px;
       }
     }
 
@@ -72,19 +69,23 @@ export default `
     }
 
     &__title-wrapper {
-      padding-left: 16px;
+      > * + * {
+        margin-block-start: 1em;
+      }
     }
 
     &__title {
-      margin: 0 0 0.4em;
       font-size: 17px;
       hyphens: none;
       color: var(--color-neutral-text-extra-light);
       transition: color ${defaultTransitionProps};
+      display: flex;
+      column-gap: 15px;
+      flex-wrap: wrap;
+      margin: 0;
     }
 
     &__subtitle {
-      margin: 7px 0 0 15px;
       transition: color ${defaultTransitionProps};
     }
 

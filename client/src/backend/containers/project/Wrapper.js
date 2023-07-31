@@ -139,50 +139,48 @@ export class ProjectWrapperContainer extends PureComponent {
       : {};
 
     return (
-      <div>
-        <Authorize
-          entity={project}
-          failureFatalError={{
-            detail: t("projects.unauthorized_edit")
-          }}
-          ability={["update", "manageResources"]}
-        >
-          {subpage && (
-            <HeadContent
-              title={`${t(`titles.${subpage}`)} | ${
-                project.attributes.titlePlaintext
-              } | ${t("common.admin")}`}
-              appendDefaultTitle
+      <Authorize
+        entity={project}
+        failureFatalError={{
+          detail: t("projects.unauthorized_edit")
+        }}
+        ability={["update", "manageResources"]}
+      >
+        {subpage && (
+          <HeadContent
+            title={`${t(`titles.${subpage}`)} | ${
+              project.attributes.titlePlaintext
+            } | ${t("common.admin")}`}
+            appendDefaultTitle
+          />
+        )}
+        <RedirectToFirstMatch
+          from={lh.link("backendProject", project.id)}
+          candidates={secondaryLinks}
+          state={this.props.location.state}
+        />
+        <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
+        <PageHeader
+          type={isJournalIssue ? "issue" : "project"}
+          title={project.attributes.titleFormatted}
+          subtitle={project.attributes.subtitle}
+          texts={project.attributes.textsNav}
+          actions={this.utility}
+          secondaryLinks={secondaryLinks}
+          {...parentProps}
+        />
+        <Layout.BackendPanel
+          sidebar={
+            <Layout.SecondaryNav
+              links={secondaryLinks}
+              panel
+              ariaLabel={t("projects.settings")}
             />
-          )}
-          <RedirectToFirstMatch
-            from={lh.link("backendProject", project.id)}
-            candidates={secondaryLinks}
-            state={this.props.location.state}
-          />
-          <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
-          <PageHeader
-            type={isJournalIssue ? "issue" : "project"}
-            title={project.attributes.titleFormatted}
-            subtitle={project.attributes.subtitle}
-            texts={project.attributes.textsNav}
-            actions={this.utility}
-            secondaryLinks={secondaryLinks}
-            {...parentProps}
-          />
-          <Layout.BackendPanel
-            sidebar={
-              <Layout.SecondaryNav
-                links={secondaryLinks}
-                panel
-                ariaLabel={t("projects.settings")}
-              />
-            }
-          >
-            <div>{this.renderRoutes()}</div>
-          </Layout.BackendPanel>
-        </Authorize>
-      </div>
+          }
+        >
+          <div>{this.renderRoutes()}</div>
+        </Layout.BackendPanel>
+      </Authorize>
     );
   }
 }

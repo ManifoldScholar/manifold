@@ -3,11 +3,15 @@ import {
   panelRounded,
   utilityPrimary,
   buttonUnstyled,
-  lighten
+  lighten,
+  respond,
+  fluidScale
 } from "theme/styles/mixins";
 
 export default `
   .text-categories {
+    padding-block-start: 16px;
+
     &__category {
       ${panelRounded}
       margin-bottom: 16px;
@@ -18,27 +22,46 @@ export default `
       }
     }
 
+    &__uncategorized {
+      &:first-child {
+        margin-block-start: 16px;
+      }
+    }
+
     &__header {
       ${utilityPrimary}
       display: flex;
       justify-content: space-between;
-      padding: 8px 24px;
+      padding: 8px ${fluidScale("24px", "20px")};
       font-size: 14px;
       font-weight: var(--font-weight-medium);
       line-height: 1;
       color: var(--color-neutral-text-extra-light);
       background: var(--color-base-neutral100);
       border-radius: 8px 8px 0 0;
+
+      *[role="tooltip"] {
+        text-transform: none;
+      }
     }
 
     &__label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
       margin: 4px 0;
       font-size: 14px;
       hyphens: none;
       line-height: 1.3em;
 
+      ${respond(`flex-direction: row;`, 85)}
+
       &--notice {
         color: var(--error-color);
+      }
+
+      &--tooltip {
+        cursor: pointer;
       }
     }
 

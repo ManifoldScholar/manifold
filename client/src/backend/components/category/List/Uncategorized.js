@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Texts from "./Texts";
+import Tooltip from "global/components/atomic/Tooltip";
 import { withTranslation } from "react-i18next";
 
 class CategoryListUncategorized extends PureComponent {
@@ -38,13 +39,19 @@ class CategoryListUncategorized extends PureComponent {
 
   render() {
     return (
-      <div className="text-categories__category">
+      <div className="text-categories__category text-categories__uncategorized">
         <header className="text-categories__header">
-          <h2 className="text-categories__label">
-            <span className="text-categories__label--notice">
-              {this.props.t("common.uncategorized_title_case")}
-            </span>
-          </h2>
+          <Tooltip
+            content={this.props.t("projects.category.uncategorized_tooltip")}
+            xOffset="-20px"
+            yOffset="30px"
+          >
+            <h2 className="text-categories__label">
+              <span className="text-categories__label--tooltip">
+                {this.props.t("common.uncategorized_title_case")}
+              </span>
+            </h2>
+          </Tooltip>
         </header>
         <Texts
           activeType={this.props.activeType}

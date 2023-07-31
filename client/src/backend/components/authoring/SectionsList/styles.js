@@ -67,7 +67,7 @@ export const Inner = styled.div`
   --item-background: var(--box-bg-color);
 
   ${draggable}
-  padding: 12px 24px;
+  padding: 12px ${fluidScale("24px", "16px")};
   display: flex;
   flex-direction: row-reverse;
   align-items: center;

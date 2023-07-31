@@ -62,7 +62,7 @@ class CategoryListCategory extends PureComponent {
     return (
       <Draggable type="category" index={this.props.index} draggableId={this.id}>
         {(provided, snapshot) => (
-          <div>
+          <>
             <div
               ref={provided.innerRef}
               {...provided.draggableProps}
@@ -124,7 +124,7 @@ class CategoryListCategory extends PureComponent {
               />
             </div>
             {provided.placeholder}
-          </div>
+          </>
         )}
       </Draggable>
     );
