@@ -151,29 +151,31 @@ class CategoryList extends PureComponent {
         onDragEnd={this.onDragEnd}
       >
         <section className="text-categories">
-          <Droppable type="category" droppableId="categories">
-            {provided => (
-              <div
-                className={classNames({
-                  "text-categories__dropzone": true,
-                  "text-categories__dropzone--active":
-                    this.state.activeType === "category"
-                })}
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                <Categories
-                  activeType={this.state.activeType}
-                  categories={this.categories}
-                  texts={this.texts}
-                  project={this.project}
-                  callbacks={this.callbacks}
-                  onTextKeyboardMove={this.onTextKeyboardMove}
-                />
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+          {!!this.categories?.length && (
+            <Droppable type="category" droppableId="categories">
+              {provided => (
+                <div
+                  className={classNames({
+                    "text-categories__dropzone": true,
+                    "text-categories__dropzone--active":
+                      this.state.activeType === "category"
+                  })}
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  <Categories
+                    activeType={this.state.activeType}
+                    categories={this.categories}
+                    texts={this.texts}
+                    project={this.project}
+                    callbacks={this.callbacks}
+                    onTextKeyboardMove={this.onTextKeyboardMove}
+                  />
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          )}
           <Uncategorized
             callbacks={this.callbacks}
             project={this.project}

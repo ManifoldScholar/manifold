@@ -100,7 +100,8 @@
       "cannot_move_down": "Cannot move down. Text is already in the last category.",
       "text_moved": "Text moved to {{destination}}",
       "empty_category": "No texts have been added to this category",
-      "all_texts_categorized": "All texts belong to categories"
+      "all_texts_categorized": "All texts belong to categories",
+      "uncategorized_tooltip": "Uncategorized texts can be hidden in the frontend using this project's Texts content block. If uncategorized texts are visible, they will appear under the heading 'Uncategorized'."
     },
     "thumbnail": {
       "thumbnail_label": "Thumbnail for {{title}}",

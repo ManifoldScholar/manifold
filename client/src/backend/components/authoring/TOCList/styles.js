@@ -93,7 +93,7 @@ export const ButtonGroup = styled.div`
 
 export const Inner = styled.div`
   ${draggable}
-  padding: 10px 24px;
+  padding: 10px ${fluidScale("24px", "16px")};
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
