@@ -308,7 +308,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
         <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
         <section className={wrapperClasses}>
           <div className="backend-panel">
-            <Breadcrumbs backend breadcrumbs={breadcrumbs} />
+            <Breadcrumbs backend hideOnDesktop breadcrumbs={breadcrumbs} />
             <div
               className="container"
               style={{ marginBlockStart: fluidScale("30px", "20px") }}

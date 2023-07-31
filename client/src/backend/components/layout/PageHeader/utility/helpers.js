@@ -1,39 +1,23 @@
 import lh from "helpers/linkHandler";
 
-export const getTextLinks = ({ texts, id, parent, pathname }) =>
-  texts
-    ? [
-        {
-          label: "None",
-          active: !parent,
-          id: id ?? "none",
-          route: parent ? "backendProject" : null
-        },
-        ...texts?.map(t => ({
-          label: t.label,
-          route: "backendTextAnalytics",
-          id: t.id,
-          active: pathname?.includes(t.id)
-        }))
-      ]
+export const getTextLinks = ({ texts, pathname }) =>
+  texts?.length
+    ? texts?.map(t => ({
+        label: t.label,
+        route: "backendTextAnalytics",
+        id: t.id,
+        active: pathname?.includes(t.id)
+      }))
     : null;
 
-export const getIssueLinks = ({ issues, id, parent, pathname }) =>
-  issues
-    ? [
-        {
-          label: "None",
-          active: !parent,
-          id: id ?? "none",
-          route: parent ? "backendJournal" : null
-        },
-        ...issues?.map(i => ({
-          label: i.label,
-          route: "backendProjectAnalytics",
-          id: i.id,
-          active: pathname?.includes(i.id)
-        }))
-      ]
+export const getIssueLinks = ({ issues, pathname }) =>
+  issues?.length
+    ? issues?.map(i => ({
+        label: i.label,
+        route: "backendProjectAnalytics",
+        id: i.id,
+        active: pathname?.includes(i.id)
+      }))
     : null;
 
 export const getLinkOrButtonProps = action => {
