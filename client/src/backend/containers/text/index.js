@@ -3,7 +3,7 @@ import Metadata from "./Metadata";
 import Wrapper from "./Wrapper";
 import Collaborators from "./Collaborators";
 import Ingestion from "./ingestion";
-import Styles from "./Styles";
+import Styles from "./Stylesheets";
 import Analytics from "./Analytics";
 import Sections from "./Sections";
 import Section from "./section";

@@ -2,12 +2,12 @@ import React from "react";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import FormContainer from "global/containers/form";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 import { childRoutes } from "helpers/router";
 import SectionsList from "backend/components/authoring/SectionsList";
+import * as Styled from "./styles";
 
 export default function TextSectionsContainer({
   text,
@@ -72,7 +72,7 @@ export default function TextSectionsContainer({
   return (
     <section>
       {renderChildRoutes()}
-      <FormContainer.Form
+      <Styled.Form
         className="form-secondary"
         doNotWarn
         groupErrors
@@ -99,9 +99,6 @@ export default function TextSectionsContainer({
             <span className="full" aria-hidden="true">
               {t("texts.section.ingest_button_label")}
             </span>
-            <span className="abbreviated" aria-hidden="true">
-              {t("texts.ingest_truncated")}
-            </span>
           </Link>
           <Link
             to={lh.link("backendTextSectionNew", text.id)}
@@ -118,9 +115,6 @@ export default function TextSectionsContainer({
             <span className="full" aria-hidden="true">
               {t("texts.add_section_button_label")}
             </span>
-            <span className="abbreviated" aria-hidden="true">
-              {t("glossary.section_title_case_one")}
-            </span>
           </Link>
         </div>
         <SectionsList
@@ -129,7 +123,7 @@ export default function TextSectionsContainer({
           startSectionId={text?.attributes?.startTextSectionId}
           refresh={refresh}
         />
-      </FormContainer.Form>
+      </Styled.Form>
     </section>
   );
 }
