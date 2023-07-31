@@ -57,10 +57,4 @@ function ProjectsSecondaryNav(props, ref) {
 
 ProjectsSecondaryNav.displayName = "Layout.Projects.SecondaryNav";
 
-ProjectsSecondaryNav.propTypes = {
-  links: PropTypes.array,
-  panel: PropTypes.bool,
-  ariaLabel: PropTypes.string
-};
-
 export default forwardRef(ProjectsSecondaryNav);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -20,7 +20,7 @@ export default function BackendBreadcrumbs({
             ? { to: crumb.to }
             : { as: "span", $noLink: true };
           return (
-            <>
+            <Fragment key={crumb.label}>
               <Styled.BackendBreadcrumb
                 {...maybeLinkProps}
                 aria-current={
@@ -34,7 +34,7 @@ export default function BackendBreadcrumbs({
               {i < breadcrumbs.length - 1 && (
                 <Styled.Spacer icon="disclosureDown16" size={16} />
               )}
-            </>
+            </Fragment>
           );
         })}
       </Styled.BackendInner>

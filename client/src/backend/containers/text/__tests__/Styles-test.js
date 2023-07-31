@@ -1,4 +1,4 @@
-import TextStylesContainer from "../Styles";
+import TextStylesContainer from "../Stylesheets";
 
 describe("backend/containers/text/Styles", () => {
   def("stylesheets", () => collectionFactory("stylesheet"));

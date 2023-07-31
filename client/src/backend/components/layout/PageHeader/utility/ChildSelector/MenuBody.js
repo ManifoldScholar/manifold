@@ -32,10 +32,4 @@ function ChildSelectorMenuBody(props, ref) {
 
 ChildSelectorMenuBody.displayName = "Layout.Projects.SecondaryNav";
 
-ChildSelectorMenuBody.propTypes = {
-  links: PropTypes.array,
-  panel: PropTypes.bool,
-  ariaLabel: PropTypes.string
-};
-
 export default forwardRef(ChildSelectorMenuBody);

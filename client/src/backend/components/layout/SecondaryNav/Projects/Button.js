@@ -33,13 +33,4 @@ function ProjectsButton(
 
 ProjectsButton.displayName = "UserMenuButton";
 
-ProjectsButton.propTypes = {
-  callbacks: PropTypes.shape({
-    toggleUserPanel: PropTypes.func.isRequired,
-    toggleSignInUpOverlay: PropTypes.func.isRequired
-  }),
-  visible: PropTypes.bool,
-  context: PropTypes.oneOf(["frontend", "backend", "reader"])
-};
-
 export default forwardRef(ProjectsButton);

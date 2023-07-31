@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Authorize from "hoc/Authorize";
 import { getLinkOrButtonProps } from "../helpers";
@@ -14,8 +13,12 @@ function ActionSelectorMenuBody(props, ref) {
 
     if (action.authorize) {
       return (
-        <Authorize entity={entity} ability={action.authorize}>
-          <li key={action.label}>
+        <Authorize
+          key={action.label}
+          entity={entity}
+          ability={action.authorize}
+        >
+          <li>
             <Styled.Link {...linkOrButtonProps}>
               <Styled.LinkIcon icon={action.icon} size={20} />
               <Styled.LinkText>{t(action.label)}</Styled.LinkText>
@@ -43,11 +46,5 @@ function ActionSelectorMenuBody(props, ref) {
 }
 
 ActionSelectorMenuBody.displayName = "Layout.Projects.SecondaryNav";
-
-ActionSelectorMenuBody.propTypes = {
-  actions: PropTypes.array,
-  panel: PropTypes.bool,
-  ariaLabel: PropTypes.string
-};
 
 export default forwardRef(ActionSelectorMenuBody);
