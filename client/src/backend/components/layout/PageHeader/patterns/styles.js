@@ -135,6 +135,7 @@ export const Title = styled.h1`
   hyphens: none;
   color: ${({ $parent }) =>
     $parent ? `inherit` : `var(--color-base-neutral20)`};
+  text-decoration: none;
 `;
 
 export const Subtitle = styled.span`

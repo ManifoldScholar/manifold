@@ -4,6 +4,8 @@ import ChildSelector from "../utility/ChildSelector";
 import { useLocation } from "react-router-dom";
 import Utility from "../utility";
 import { getTextLinks } from "../utility/helpers";
+import { NavLink } from "react-router-dom";
+import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 export default function IssueHeader({
@@ -19,10 +21,18 @@ export default function IssueHeader({
   texts,
   parent,
   issues,
-  hasSecondaryNav
+  hasSecondaryNav,
+  id
 }) {
   const { pathname } = useLocation();
   const textLinks = getTextLinks({ texts, pathname });
+
+  const titleLinkProps = parent
+    ? {
+        as: NavLink,
+        to: lh.link("backendProject", id)
+      }
+    : {};
 
   return (
     <>
@@ -49,7 +59,9 @@ export default function IssueHeader({
           </>
         )}
         <Styled.TitleWrapper>
-          <Styled.Title {...titleHtml}>{titleString}</Styled.Title>
+          <Styled.Title {...titleHtml} {...titleLinkProps}>
+            {titleString}
+          </Styled.Title>
           {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
         </Styled.TitleWrapper>
         {textLinks && <ChildSelector links={textLinks} entity="text" />}
