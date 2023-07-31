@@ -21,9 +21,7 @@ export default function ArticleHeader({
   const { pathname } = useLocation();
   const textLinks = getTextLinks({
     texts,
-    id: parentId,
-    pathname,
-    parent: true
+    pathname
   });
 
   return (
@@ -48,7 +46,7 @@ export default function ArticleHeader({
         actions={actions}
         links={textLinks}
         entityType="text"
-        childType="article"
+        childType="text"
         hasSecondaryNav={hasSecondaryNav}
         note={note}
       />

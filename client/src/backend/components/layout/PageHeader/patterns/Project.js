@@ -12,12 +12,11 @@ export default function ProjectHeader({
   parent,
   texts,
   note,
-  id,
   actions,
   hasSecondaryNav
 }) {
   const { pathname } = useLocation();
-  const textLinks = getTextLinks({ texts, id, pathname });
+  const textLinks = getTextLinks({ texts, pathname });
 
   return (
     <>

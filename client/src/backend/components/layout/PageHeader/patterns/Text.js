@@ -21,9 +21,7 @@ export default function TextHeader({
   const { pathname } = useLocation();
   const textLinks = getTextLinks({
     texts,
-    id: parentId,
-    pathname,
-    parent: true
+    pathname
   });
 
   return (

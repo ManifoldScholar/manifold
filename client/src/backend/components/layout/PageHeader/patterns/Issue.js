@@ -22,7 +22,7 @@ export default function IssueHeader({
   hasSecondaryNav
 }) {
   const { pathname } = useLocation();
-  const textLinks = getTextLinks({ texts, parentId, pathname, parent });
+  const textLinks = getTextLinks({ texts, pathname });
 
   return (
     <>
@@ -52,14 +52,14 @@ export default function IssueHeader({
           <Styled.Title {...titleHtml}>{titleString}</Styled.Title>
           {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
         </Styled.TitleWrapper>
-        {textLinks && <ChildSelector links={textLinks} entity="article" />}
+        {textLinks && <ChildSelector links={textLinks} entity="text" />}
       </Styled.Row>
       {!parent && (
         <Utility
           actions={actions}
           links={textLinks}
           entityType="journalIssue"
-          childType="article"
+          childType="text"
           hasSecondaryNav={hasSecondaryNav}
           note={note}
         />
