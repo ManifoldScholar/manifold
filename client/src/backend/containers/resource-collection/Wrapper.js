@@ -164,6 +164,15 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
       t
     );
 
+    const parentProps = {
+      parentTitle:
+        resourceCollection.relationships.project.attributes.titleFormatted,
+      parentSubtitle:
+        resourceCollection.relationships.project.attributes.subtitle,
+      texts: resourceCollection.attributes.projectTextsNav,
+      parentId: resourceCollection.relationships.project.id
+    };
+
     return (
       <div>
         <Authorize
@@ -199,6 +208,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
             title={resourceCollection.attributes.title}
             secondaryLinks={secondaryLinks}
             icon="ResourceCollection64"
+            {...parentProps}
           />
           <Layout.BackendPanel
             sidebar={

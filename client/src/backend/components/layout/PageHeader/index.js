@@ -13,7 +13,8 @@ import {
   Compact,
   Count,
   Analytics,
-  Article
+  Article,
+  Resource
 } from "./patterns";
 import * as Styled from "./styles";
 
@@ -37,7 +38,9 @@ const COMPONENT_MAP = {
   analytics: Analytics,
   list: Compact,
   count: Count,
-  article: Article
+  article: Article,
+  resource: Resource,
+  resourceCollection: Resource
 };
 
 export default function PageHeader({

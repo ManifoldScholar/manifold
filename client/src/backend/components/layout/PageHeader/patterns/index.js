@@ -8,3 +8,4 @@ export { default as Compact } from "./Compact";
 export { default as Count } from "./Count";
 export { default as Analytics } from "./Analytics";
 export { default as Article } from "./Article";
+export { default as Resource } from "./Resource";

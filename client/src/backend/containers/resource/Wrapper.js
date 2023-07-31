@@ -138,6 +138,13 @@ export class ResourceWrapperContainer extends PureComponent {
       t
     );
 
+    const parentProps = {
+      parentTitle: resource.relationships.project.attributes.titleFormatted,
+      parentSubtitle: resource.relationships.project.attributes.subtitle,
+      texts: resource.attributes.projectTextsNav,
+      parentId: resource.relationships.project.id
+    };
+
     return (
       <div>
         <Authorize
@@ -167,6 +174,7 @@ export class ResourceWrapperContainer extends PureComponent {
             subtitle={resource.attributes.subtitle}
             secondaryLinks={secondaryLinks}
             icon="BEResourcesBox64"
+            {...parentProps}
           />
           <Layout.BackendPanel
             sidebar={
