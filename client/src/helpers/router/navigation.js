@@ -101,6 +101,12 @@ class Navigation {
             route: "backendRecordsFeatures",
             entity: "feature",
             ability: "update"
+          },
+          {
+            label: "titles.entitlements",
+            route: "backendRecordsEntitlements",
+            entity: "entitlement",
+            ability: "update"
           }
         ]
       },
