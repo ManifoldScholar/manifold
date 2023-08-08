@@ -21,6 +21,8 @@ export const Button = styled.button`
   padding: 7px 12px 7px 16px;
   ${formLabelPrimary}
   font-size: ${fluidScale("13px", "12px")};
+  flex-shrink: 0;
+  white-space: nowrap;
 
   &:hover,
   &:focus-visible {
@@ -58,8 +60,13 @@ export const Wrapper = styled.div`
   box-shadow: 0px 12px 32px 3px rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 130%;
+  left: auto;
   right: 0;
   z-index: 51;
+  max-width: 200%;
+
+  ${respond(`left: -45%; right: auto; max-width: 200%`, 40)}
+  ${respond(`right: 0; left: auto; max-width: 300%`, 65)}
 
   ${({ $visible }) =>
     $visible
@@ -88,7 +95,7 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   width: max-content;
-  max-width: 500px;
+  max-width: 100%;
   min-width: 150px;
 
   > * + * {
@@ -127,4 +134,5 @@ export const Link = styled(NavLink, transientOptions)`
 export const LinkIcon = styled(IconComposer)`
   color: var(--color-accent-primary);
   margin-top: 2px;
+  flex-shrink: 0;
 `;

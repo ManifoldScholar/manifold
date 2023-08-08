@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { respond, fluidScale } from "theme/styles/mixins";
+import { respond, fluidScale, defaultHoverStyle } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import UniqueIcons from "global/components/icon/unique";
 import { Link } from "react-router-dom";
@@ -33,6 +33,7 @@ export const Figure = styled.figure`
   background-color: var(--color-base-neutral100);
   border-radius: 12px;
   margin-inline-end: 20px;
+  flex-shrink: 0;
 `;
 
 export const JournalFigure = styled(Figure)`
@@ -67,6 +68,7 @@ export const ChildLink = styled.div`
   border-bottom: 1px solid currentColor;
   color: var(--color-neutral-ui-light);
   margin-block-start: -12px;
+  flex-shrink: 0;
 
   ${respond(`margin-inline-start: 12px;`, 65)}
 `;
@@ -124,7 +126,10 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: start;
 
-  ${respond(`flex-direction: row; align-items: center; gap: 12px;`, 65)}
+  ${respond(
+    `flex-direction: row; align-items: center; gap: 12px; flex-wrap: wrap;`,
+    65
+  )}
 `;
 
 export const Title = styled.h1`
@@ -136,6 +141,11 @@ export const Title = styled.h1`
   color: ${({ $parent }) =>
     $parent ? `inherit` : `var(--color-base-neutral20)`};
   text-decoration: none;
+  ${respond(`white-space: nowrap;`, 65)}
+
+  &:hover {
+    ${({ $parent }) => $parent && defaultHoverStyle}
+  }
 `;
 
 export const Subtitle = styled.span`
