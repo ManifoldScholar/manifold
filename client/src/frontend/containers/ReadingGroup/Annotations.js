@@ -55,8 +55,7 @@ function ReadingGroupAnnotationsContainer({
         filterProps={{ ...filterProps, hideSearch: true }}
         isFiltered={!!Object.keys(filters).length}
         paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator,
-          paginationTarget: "#"
+          paginationClickHandler: paginationClickHandlerCreator
         }}
         refresh={refresh}
         nested

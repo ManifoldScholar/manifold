@@ -59,8 +59,7 @@ export default function IssuesListContainer() {
           issuesMeta={meta}
           filterProps={filterProps}
           paginationProps={{
-            paginationClickHandler: paginationClickHandlerCreator,
-            paginationTarget: "#"
+            paginationClickHandler: paginationClickHandlerCreator
           }}
           bgColor="neutral05"
           className="flex-grow"

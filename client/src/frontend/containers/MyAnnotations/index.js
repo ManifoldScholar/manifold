@@ -55,8 +55,7 @@ export default function MyAnnotationsContainer() {
         filterProps={{ ...filterProps, hideSearch: true }}
         isFiltered={"text" in filters}
         paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator,
-          paginationTarget: "#"
+          paginationClickHandler: paginationClickHandlerCreator
         }}
       />
       <CollectionNavigation />

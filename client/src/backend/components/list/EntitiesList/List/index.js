@@ -303,7 +303,6 @@ export default class ListEntities extends PureComponent {
                 <Pagination
                   pagination={this.pagination}
                   padding={this.paginationPadding}
-                  paginationTarget={null}
                   onPageClick={this.callback("onPageClick")}
                   style={this.paginationStyle}
                 />
