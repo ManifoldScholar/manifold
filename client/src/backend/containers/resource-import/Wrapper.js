@@ -126,6 +126,12 @@ export class ResourceImportWrapper extends PureComponent {
       t
     );
 
+    const parentProps = {
+      parentTitle: project.attributes.titleFormatted,
+      parentSubtitle: project.attributes.subtitle,
+      parentId: project.id
+    };
+
     return (
       <Authorize
         entity={project}
@@ -146,6 +152,7 @@ export class ResourceImportWrapper extends PureComponent {
           title={t("resources.import.header")}
           note={t("resources.import.header_note")}
           icon="BEResourcesBoxes64"
+          {...parentProps}
         />
         <Layout.BackendPanel>
           <div>{this.renderRoutes()}</div>

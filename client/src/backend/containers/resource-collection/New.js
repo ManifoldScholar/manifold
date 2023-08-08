@@ -65,6 +65,12 @@ export class ResourceCollectionNewContainer extends PureComponent {
       t
     );
 
+    const parentProps = {
+      parentTitle: project.attributes.titleFormatted,
+      parentSubtitle: project.attributes.subtitle,
+      parentId: project.id
+    };
+
     return (
       <Authorize
         entity={project}
@@ -87,6 +93,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
             title={t("resource_collections.forms.new_title")}
             note={t("resource_collections.forms.new_instructions")}
             icon="ResourceCollection64"
+            {...parentProps}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
