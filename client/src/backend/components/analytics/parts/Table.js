@@ -64,6 +64,7 @@ function Table({
           <Utility.Pagination
             pagination={pagination}
             paginationClickHandler={paginationClickHandler}
+            paginationTarget="#pagination-target"
           />
         </div>
       )}

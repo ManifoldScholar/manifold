@@ -37,7 +37,7 @@ export default class ListEntitiesListPagination extends PureComponent {
   }
 
   get paginationTarget() {
-    return this.props.paginationTarget;
+    return this.props.paginationTarget ?? "#";
   }
 
   get padding() {
