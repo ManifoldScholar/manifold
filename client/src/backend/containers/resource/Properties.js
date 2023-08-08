@@ -48,7 +48,7 @@ export class ResourcePropertiesContainer extends PureComponent {
           onSuccess={this.handleSuccess}
           className="form-secondary"
         >
-          <Resource.Form.KindPicker name="attributes[kind]" />
+          <Resource.Form.KindPicker name="attributes[kind]" includeButtons />
           <Form.TextInput
             label={t("resources.title_label")}
             name="attributes[title]"

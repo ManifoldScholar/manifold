@@ -18,6 +18,7 @@ export const SelectWrapper = styled.div`
   ${({ $only }) =>
     $only &&
     `display: block;
+    ${respond(`display: block;`, 65)}
   ${respond(`padding-bottom: 28px;`, 65)}`}
 `;
 
