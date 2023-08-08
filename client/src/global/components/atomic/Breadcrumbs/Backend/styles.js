@@ -14,7 +14,7 @@ export const BackendOuter = styled(Outer)`
   border-radius: var(--box-border-radius);
   text-transform: none;
   font-weight: var(--font-weight-regular);
-  overflow-x: scroll;
+  overflow-x: auto;
 
   ${respond(
     `
