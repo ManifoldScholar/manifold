@@ -41,7 +41,7 @@ export const Wrapper = styled("section", transientOptions)`
   }}
 
   background-color: ${({ $bgColor }) => $bgColor};
-  background-image: ${({ $bgImage }) => $bgImage && `url($bgImage)`};
+  background-image: ${({ $bgImage }) => $bgImage && `url(${$bgImage})`};
 
   ${({ $preview }) => $preview && previewStyles}
 `;
