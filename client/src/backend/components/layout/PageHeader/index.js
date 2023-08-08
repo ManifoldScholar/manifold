@@ -40,7 +40,8 @@ const COMPONENT_MAP = {
   count: Count,
   article: Article,
   resource: Resource,
-  resourceCollection: Resource
+  resourceCollection: Resource,
+  resources: Resource
 };
 
 export default function PageHeader({

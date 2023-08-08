@@ -66,6 +66,12 @@ export class ResourceNewContainer extends PureComponent {
 
     const breadcrumbs = getBreadcrumbs(null, project, belongsToJournalIssue, t);
 
+    const parentProps = {
+      parentTitle: project.attributes.titleFormatted,
+      parentSubtitle: project.attributes.subtitle,
+      parentId: project.id
+    };
+
     return (
       <Authorize
         entity={project}
@@ -86,6 +92,7 @@ export class ResourceNewContainer extends PureComponent {
             title={t("resources.new.title")}
             note={t("resources.new.instructions")}
             icon="BEResourcesBox64"
+            {...parentProps}
           />
           <Layout.BackendPanel>
             <FormContainer.Form
