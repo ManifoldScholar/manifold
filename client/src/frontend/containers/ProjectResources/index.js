@@ -90,8 +90,7 @@ export default function ProjectResourcesContainer({
         resourcesMeta={meta}
         filterProps={filterProps}
         paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator,
-          paginationTarget: "#"
+          paginationClickHandler: paginationClickHandlerCreator
         }}
         itemHeadingLevel={3}
       />

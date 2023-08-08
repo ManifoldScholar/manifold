@@ -77,8 +77,7 @@ export default function JournalIssuesList({ journal }) {
         issues={issues}
         issuesMeta={meta}
         paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator,
-          paginationTarget: "#"
+          paginationClickHandler: paginationClickHandlerCreator
         }}
         parentView
       />

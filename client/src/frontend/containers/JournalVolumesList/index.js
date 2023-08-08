@@ -60,8 +60,7 @@ export default function JournalVolumesList({ journal }) {
         volumes={volumes}
         meta={meta}
         paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
-          paginationTarget: "#"
+          paginationClickHandler: page => () => setPageNumber(page)
         }}
       />
     </>

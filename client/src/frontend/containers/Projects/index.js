@@ -64,8 +64,7 @@ export default function ProjectsContainer() {
           meta={meta}
           filterProps={filterProps}
           paginationProps={{
-            paginationClickHandler: paginationClickHandlerCreator,
-            paginationTarget: "#"
+            paginationClickHandler: paginationClickHandlerCreator
           }}
           bgColor="neutral05"
           className="flex-grow"
