@@ -14,7 +14,7 @@ exports[`backend/components/resource/form/KindPicker matches the snapshot when r
       resources.new.kind
     </label>
     <div
-      class="css-ze28ur-SelectWrapper e1rz3qld4"
+      class="css-gicdk7-SelectWrapper e1rz3qld4"
     >
       <div
         class="css-1idpiku-Wrapper eon8abq0"
