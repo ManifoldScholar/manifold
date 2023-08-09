@@ -2,7 +2,7 @@
 import lh from "helpers/linkHandler";
 
 export const getBreadcrumbs = (project, locationState, isJournalIssue, t) =>
-  locationState
+  locationState?.id && locationState?.label
     ? [
         { to: null, label: t("glossary.project_title_case_other") },
         {
