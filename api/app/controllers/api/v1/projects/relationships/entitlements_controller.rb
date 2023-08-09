@@ -5,7 +5,7 @@ module API
         class EntitlementsController < AbstractProjectChildController
           include API::V1::BuildsScopedEntitlements
 
-          resourceful! Entitlement, authorize_options: { except: [:index] } do
+          resourceful! Entitlement, authorize_options: { except: [:index, :create] } do
             Entitlement.filtered(
               with_pagination!(entitlement_filter_params),
               scope: Entitlement.where(subject_type: "Project", subject_id: params[:project_id])
@@ -22,6 +22,7 @@ module API
           end
 
           def create
+            authorize_action_for Entitlement, for: @project
             @entitlement = build_entitlement_for @project
 
             inputs = scoped_entitlement_inputs_for @entitlement
