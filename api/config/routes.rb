@@ -187,6 +187,9 @@ Rails.application.routes.draw do
         end
       end
 
+      post "projects/:id/ingest", to: "ingests#create"
+      post "texts/:id/ingest", to: "ingests#create"
+
       resources :twitter_queries, only: [:show, :update, :destroy], controller: "projects/relationships/twitter_queries" do
         scope module: :twitter_queries do
           namespace :relationships do
