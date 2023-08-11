@@ -72,33 +72,46 @@ module Updaters
 
     run_callbacks "update_attributes" do
       attr = adjusted_attributes
-      attachmentize_attributes!(attr)
+      attachmentize_attributes!(attr, model)
       model.assign_attributes(attr)
     end
   end
 
-  def attachmentize_attributes!(attr)
+  def attachmentize_attributes!(attr, model)
     return unless attachment_fields.count.positive?
 
     attachment_fields.each do |field|
       remove_key = "remove_#{field}".to_sym
       remove_param = attr.extract!(remove_key)[remove_key]
-      attachment = attachment_from_params!(attr, field)
+      attachment = attachment_from_params!(attr, field, model)
       attr[field] = attachment unless attachment.nil? || remove_param
       attr[field] = nil if remove_param
     end
   end
 
-  def attachment_from_params!(attributes, key)
+  def attachment_from_params!(attributes, key, model)
     params = attributes.extract!(key)[key]
     return nil if params.nil?
 
-    data, filename = params.values_at(:data, :filename)
+    data, filename, alt_text = params.values_at(:data, :filename, :alt_text)
+
+    return update_attachment_alt_text(alt_text, key, model) if data.nil? && alt_text
+
     Shrine.data_uri(data).tap do |data_file|
       data_file.original_filename = filename
+      data_file.alt_text = alt_text if alt_text
     end
   rescue ::Shrine::Plugins::DataUri::ParseError
     nil
+  end
+
+  def update_attachment_alt_text(alt_text, key, model)
+    attachment = model.send(key)
+    return unless attachment.present?
+
+    attachment.metadata[:alt_text] = alt_text
+
+    attachment
   end
 
   def adjusted_relationships

@@ -718,7 +718,7 @@ module Validation
   end
 
   def attachment(name)
-    { name => [:data, :filename, :content_type] }
+    { name => [:data, :filename, :content_type, :alt_text] }
   end
 
   def allowed_meta

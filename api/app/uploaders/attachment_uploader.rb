@@ -15,6 +15,7 @@ class AttachmentUploader < Shrine
 
     analyzers[:mini_magick].call io
   }
+  plugin :add_metadata
 
   Attacher.promote_block do
     conf = record.shrine_configuration_for name
@@ -47,6 +48,10 @@ class AttachmentUploader < Shrine
       attachment_options: attachment_options
     )
     outcome
+  end
+
+  add_metadata :alt_text do |io, _context|
+    io.alt_text unless io.alt_text.nil?
   end
 
   class Attachment
