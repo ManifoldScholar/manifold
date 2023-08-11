@@ -56,7 +56,7 @@ module V1
     typed_attribute :toc_section_id, Types::String.optional.meta(read_only: true), if: INCLUDE_TOC
 
     typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :cover_alt_text, Types::String.optional do |object, params|
+    typed_attribute :cover_alt_text, Types::String.optional do |object, _params|
       object.cover.metadata["alt_text"] unless object.cover.nil?
     end
 

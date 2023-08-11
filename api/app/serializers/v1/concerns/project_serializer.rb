@@ -24,7 +24,7 @@ module V1
         typed_attribute :recently_updated, Types::Bool.meta(read_only: true), &:recently_updated?
         typed_attribute :updated, Types::Bool.meta(read_only: true), &:updated?
         typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
-        typed_attribute :avatar_alt_text, Types::String.optional do |object, params|
+        typed_attribute :avatar_alt_text, Types::String.optional do |object, _params|
           object.avatar.metadata["alt_text"] unless object.avatar.nil?
         end
         typed_attribute :is_journal_issue, Types::Bool.meta(read_only: true), &:journal_issue?
@@ -36,11 +36,11 @@ module V1
         when_full do
           metadata(metadata: true, properties: true, formatted: true)
           typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
-          typed_attribute :hero_alt_text, Types::String.optional do |object, params|
+          typed_attribute :hero_alt_text, Types::String.optional do |object, _params|
             object.hero.metadata["alt_text"] unless object.hero.nil?
           end
           typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)
-          typed_attribute :cover_alt_text, Types::String.optional do |object, params|
+          typed_attribute :cover_alt_text, Types::String.optional do |object, _params|
             object.cover.metadata["alt_text"] unless object.cover.nil?
           end
           typed_attribute :hashtag, Types::String.optional
