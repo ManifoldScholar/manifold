@@ -38,7 +38,7 @@ module V1
     typed_attribute :manually_sorted, Types::Bool.meta(read_only: true), &:manually_sorted?
     typed_attribute :projects_count, Types::Integer.meta(read_only: true), &:collection_projects_count
     typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :hero_alt_text, Types::String.optional do |object, params|
+    typed_attribute :hero_alt_text, Types::String.optional do |object, _params|
       object.hero.metadata["alt_text"] unless object.hero.nil?
     end
     typed_attribute :custom_icon_styles, Types::Serializer::Attachment.meta(read_only: true)
