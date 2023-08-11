@@ -40,6 +40,7 @@ function ProjectCollectionSummaryEntityCollection({
   const projects = getProjects();
   const headerLayout = getHeaderLayout(projectCollection);
   const image = getHeroImage(headerLayout, projectCollection);
+  const imageAlt = projectCollection.attributes.heroAltText;
   const totalprojectCount =
     projectCollection.relationships.collectionProjects?.length;
 
@@ -50,6 +51,7 @@ function ProjectCollectionSummaryEntityCollection({
       IconComponent={ProjectCollectionIcon}
       iconProps={{ collection: projectCollection }}
       image={image}
+      imageAlt={imageAlt}
       headerLayout={headerLayout}
       headerWidth="100%"
       headerLink={lh.link("frontendProjectCollection", slug)}

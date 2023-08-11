@@ -42,6 +42,20 @@ export class ProjectCollectionSettings extends PureComponent {
     const { projectCollection, t } = this.props;
     if (!projectCollection) return null;
 
+    const formatData = data => {
+      const { heroAltText, hero, ...rest } = data?.attributes ?? {};
+
+      const finalHeroData =
+        typeof heroAltText === "string"
+          ? { ...hero, altText: heroAltText }
+          : hero;
+
+      return {
+        ...data,
+        attributes: { hero: finalHeroData, ...rest }
+      };
+    };
+
     return (
       <Authorize
         entity={projectCollection}
@@ -61,6 +75,7 @@ export class ProjectCollectionSettings extends PureComponent {
             onSuccess={this.onSuccess}
             className="form-secondary project-collection-form"
             flushOnUnmount={false}
+            formatData={formatData}
           >
             <ProjectCollection.Form.Fields
               handleDestroy={this.handleDestroy}

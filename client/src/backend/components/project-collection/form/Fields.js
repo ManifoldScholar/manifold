@@ -85,6 +85,8 @@ class Fields extends Component {
           readFrom="attributes[heroStyles][small]"
           name="attributes[hero]"
           remove="attributes[removeHero]"
+          altTextName="attributes[heroAltText]"
+          altTextLabel={t("project_collections.hero_alt_label")}
         />
         <Form.Select
           name="attributes[heroLayout]"

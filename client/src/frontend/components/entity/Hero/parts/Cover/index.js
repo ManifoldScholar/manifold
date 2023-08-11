@@ -5,11 +5,12 @@ import * as Styled from "./styles";
 
 export default function HeroCover({ entity }) {
   const cover = entity.attributes.coverStyles?.medium ?? false;
+  const alt = entity.attributes.coverAltText;
 
   return (
     <Styled.Cover>
       {cover ? (
-        <img src={cover} alt="" loading="lazy" />
+        <img src={cover} alt={alt ?? ""} loading="lazy" />
       ) : (
         <EntityAvatar entity={entity} />
       )}

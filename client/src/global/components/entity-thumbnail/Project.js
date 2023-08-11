@@ -51,6 +51,10 @@ export default class EntityThumbnailProject extends PureComponent {
     return this.attr.avatarMeta[this.avatarStyle]?.height;
   }
 
+  get alt() {
+    return this.attr.avatarAltText;
+  }
+
   get icon() {
     return (
       <UniqueIcons.ProjectPlaceholderUnique
@@ -69,7 +73,7 @@ export default class EntityThumbnailProject extends PureComponent {
   get image() {
     return (
       <img
-        alt=""
+        alt={this.alt ?? ""}
         src={this.src}
         width={this.width}
         height={this.height}

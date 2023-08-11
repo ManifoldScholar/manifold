@@ -7,6 +7,21 @@ import { textsAPI } from "api";
 
 export default function TextPropertiesContainer({ text }) {
   const { t } = useTranslation();
+
+  const formatData = data => {
+    const { coverAltText, cover, ...rest } = data?.attributes ?? {};
+
+    const finalCoverData =
+      typeof coverAltText === "string"
+        ? { ...cover, altText: coverAltText }
+        : cover;
+
+    return {
+      ...data,
+      attributes: { cover: finalCoverData, ...rest }
+    };
+  };
+
   return (
     <section>
       <FormContainer.Form
@@ -15,6 +30,7 @@ export default function TextPropertiesContainer({ text }) {
         update={textsAPI.update}
         create={textsAPI.create}
         className="form-secondary"
+        formatData={formatData}
       >
         <Form.FieldGroup label={t("texts.properties.header")}>
           <Form.TextInput
@@ -53,6 +69,8 @@ export default function TextPropertiesContainer({ text }) {
             readFrom="attributes[coverStyles][small]"
             name="attributes[cover]"
             remove="attributes[removeCover]"
+            altTextName={"attributes[coverAltText]"}
+            altTextLabel={t("hero.cover_image_alt_label")}
           />
         </Form.FieldGroup>
         <Form.FieldGroup label={t("texts.properties.presentation_header")}>

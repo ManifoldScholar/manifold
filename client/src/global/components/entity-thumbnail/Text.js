@@ -45,11 +45,15 @@ export default class EntityThumbnailText extends PureComponent {
     return !!this.src;
   }
 
+  get imageAlt() {
+    return this.attr.coverAltText;
+  }
+
   get image() {
     const { width, height, className } = this.props;
     return (
       <img
-        alt=""
+        alt={this.imageAlt ?? ""}
         src={this.src}
         width={width}
         height={height}

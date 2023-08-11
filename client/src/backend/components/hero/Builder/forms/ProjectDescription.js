@@ -29,6 +29,26 @@ function ProjectDescription({
     setDirty(dirtyAttrs || dirtyRels);
   };
 
+  const formatData = data => {
+    const { coverAltText, cover, heroAltText, hero, ...rest } =
+      data?.attributes ?? {};
+
+    const finalCoverData =
+      typeof coverAltText === "string"
+        ? { ...cover, altText: coverAltText }
+        : cover;
+
+    const finalHeroData =
+      typeof heroAltText === "string"
+        ? { ...hero, altText: heroAltText }
+        : hero;
+
+    return {
+      ...data,
+      attributes: { cover: finalCoverData, hero: finalHeroData, ...rest }
+    };
+  };
+
   return (
     <Authorize
       entity={model}
@@ -50,6 +70,7 @@ function ProjectDescription({
           className="form-secondary"
           onSuccess={maybeCloseDrawer}
           onDirty={onDirty}
+          formatData={formatData}
         >
           <>
             {withDarkMode && (
@@ -79,6 +100,8 @@ function ProjectDescription({
               name="attributes[hero]"
               remove="attributes[removeHero]"
               instructions={t("hero.image_instructions")}
+              altTextName={"attributes[heroAltText]"}
+              altTextLabel={t("hero.image_alt_label")}
               wide
             />
             <Form.Upload
@@ -91,6 +114,8 @@ function ProjectDescription({
               instructions={t("hero.cover_image_instructions", {
                 entity: modelLabel
               })}
+              altTextName={"attributes[coverAltText]"}
+              altTextLabel={t("hero.cover_image_alt_label")}
               wide
             />
             <Form.TextArea

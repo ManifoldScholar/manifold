@@ -27,15 +27,22 @@ class TextCover extends PureComponent {
     return get(this.text.attributes, "coverStyles.small");
   }
 
+  get altText() {
+    return (
+      this.text.attributes.coverAltText ||
+      this.props.t("img_alts.entity_cover", {
+        entity: this.text.attributes.titlePlaintext
+      })
+    );
+  }
+
   render() {
     return (
       <Styled.Cover $hasCover={this.hasCover}>
         {this.hasCover ? (
           <Styled.Image
             src={this.text.attributes.coverStyles.small}
-            alt={this.props.t("img_alts.entity_cover", {
-              entity: this.text.attributes.titlePlaintext
-            })}
+            alt={this.altText}
           />
         ) : (
           <Utility.IconComposer size={78} icon="textsLoosePages64" />
