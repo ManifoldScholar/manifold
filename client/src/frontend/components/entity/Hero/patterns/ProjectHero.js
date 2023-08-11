@@ -23,6 +23,7 @@ export default function ProjectHero({ entity, mock }) {
     rightCallouts,
     copy,
     bgImage,
+    bgAlt,
     twitter,
     instagram,
     facebook,
@@ -94,7 +95,7 @@ export default function ProjectHero({ entity, mock }) {
         </>
       }
       BottomRightComponent={copy && <Credits copy={copy} />}
-      ImageComponent={bgImage && <Image image={bgImage} />}
+      ImageComponent={bgImage && <Image image={bgImage} alt={bgAlt} />}
     />
   );
 }

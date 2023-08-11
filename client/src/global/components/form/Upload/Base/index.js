@@ -7,6 +7,7 @@ import Instructions from "../../Instructions";
 import Empty from "../Empty";
 import Preview from "../Preview";
 import BaseLabel from "../../BaseLabel";
+import BaseInput from "../../BaseInput";
 import * as Styled from "./styles";
 
 export default class FormUpload extends Component {
@@ -95,64 +96,78 @@ export default class FormUpload extends Component {
     const InputWrapper = this.props.isBuilder
       ? Styled.AvatarBuilderDropzone
       : Styled.Dropzone;
+
+    const showAltTextInput =
+      this.props.altTextName &&
+      this.props.accepts.accepts.includes("image") &&
+      this.props.value;
+
     return (
-      <Errorable
-        className={this.props.wide ? "wide" : undefined}
-        name={this.props.name}
-        errors={this.props.errors}
-        label={this.props.label}
-        idForError={this.props.idForError}
-      >
-        {this.props.label ? (
-          <BaseLabel
-            id={this.props.inputId}
-            label={this.props.label}
-            $hasInstructions={isString(this.props.instructions)}
-            className={this.props.labelClass}
-          />
-        ) : null}
-        <Dropzone onDrop={this.handleFileDrop}>
-          {({ getRootProps, getInputProps }) => (
-            <InputWrapper
-              {...getRootProps({
-                style: this.props.inlineStyle,
-                tabIndex: null
-              })}
-            >
-              <Styled.Input
-                {...getInputProps({
-                  accept: this.props.accepts.accepts,
-                  multiple: false,
-                  id: this.props.inputId,
-                  "aria-describedby": `${this.props.idForError} ${this.props.idForInstructions}`,
-                  tabIndex: 0
+      <>
+        <Errorable
+          className={this.props.wide ? "wide" : undefined}
+          name={this.props.name}
+          errors={this.props.errors}
+          label={this.props.label}
+          idForError={this.props.idForError}
+        >
+          {this.props.label ? (
+            <BaseLabel
+              id={this.props.inputId}
+              label={this.props.label}
+              $hasInstructions={isString(this.props.instructions)}
+              className={this.props.labelClass}
+            />
+          ) : null}
+          <Dropzone onDrop={this.handleFileDrop}>
+            {({ getRootProps, getInputProps }) => (
+              <InputWrapper
+                {...getRootProps({
+                  style: this.props.inlineStyle,
+                  tabIndex: null
                 })}
-              />
-              {this.previewable ? (
-                <Preview
-                  preview={this.currentPreview}
-                  handleRemove={this.handleRemove}
-                  fileName={this.fileName}
-                  isBuilder={this.props.isBuilder}
+              >
+                <Styled.Input
+                  {...getInputProps({
+                    accept: this.props.accepts.accepts,
+                    multiple: false,
+                    id: this.props.inputId,
+                    "aria-describedby": `${this.props.idForError} ${this.props.idForInstructions}`,
+                    tabIndex: 0
+                  })}
                 />
-              ) : (
-                <Empty
-                  accepts={this.props.accepts}
-                  progress={this.props.progress}
-                  uploadError={this.props.uploadError}
-                  placeholder={this.props.placeholder}
-                />
-              )}
-            </InputWrapper>
+                {this.previewable ? (
+                  <Preview
+                    preview={this.currentPreview}
+                    handleRemove={this.handleRemove}
+                    fileName={this.fileName}
+                    isBuilder={this.props.isBuilder}
+                  />
+                ) : (
+                  <Empty
+                    accepts={this.props.accepts}
+                    progress={this.props.progress}
+                    uploadError={this.props.uploadError}
+                    placeholder={this.props.placeholder}
+                  />
+                )}
+              </InputWrapper>
+            )}
+          </Dropzone>
+          {this.props.instructions && (
+            <Instructions
+              instructions={this.props.instructions}
+              id={this.props.idForInstructions}
+            />
           )}
-        </Dropzone>
-        {this.props.instructions && (
-          <Instructions
-            instructions={this.props.instructions}
-            id={this.props.idForInstructions}
+        </Errorable>
+        {showAltTextInput && (
+          <BaseInput
+            name={this.props.altTextName}
+            label={this.props.altTextLabel}
           />
         )}
-      </Errorable>
+      </>
     );
   }
 }

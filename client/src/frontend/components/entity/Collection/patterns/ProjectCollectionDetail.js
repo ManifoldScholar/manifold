@@ -24,6 +24,7 @@ function ProjectCollectionDetailEntityCollection({
   } = projectCollection.attributes;
   const headerLayout = getHeaderLayout(projectCollection);
   const image = getHeroImage(headerLayout, projectCollection);
+  const imageAlt = projectCollection.attributes.heroAltText;
   const showPagination = !isEmpty(projectsMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(projectsMeta) && !isEmpty(filterProps);
 
@@ -36,6 +37,7 @@ function ProjectCollectionDetailEntityCollection({
       IconComponent={ProjectCollectionIcon}
       iconProps={{ collection: projectCollection }}
       image={image}
+      imageAlt={imageAlt}
       headerLayout={headerLayout}
       headerWidth="100%"
       filterProps={showFilters ? filterProps : null}

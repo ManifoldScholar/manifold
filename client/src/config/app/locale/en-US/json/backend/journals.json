@@ -20,6 +20,7 @@
       "submit_label": "Save and Continue",
       "logo": "Logo",
       "logo_instructions": "If a logo is set for the journal, it will appear vertically and horizontally centered over the hero.",
+      "logo_alt_label": "Logo Alt Text",
       "properties": {
         "header": "Properties",
         "slug_label": "Slug",

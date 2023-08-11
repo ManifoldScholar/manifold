@@ -21,6 +21,7 @@ function JournalSummaryEntityCollection({
   const issues = journal.relationships?.recentJournalIssues ?? [];
   const headerLayout = getHeaderLayout(journal);
   const image = getHeroImage(headerLayout, journal);
+  const imageAlt = journal.attributes.heroAltText;
 
   const totalIssueCount = journal.attributes?.journalIssuesCount;
   const footerLinkText =
@@ -33,6 +34,7 @@ function JournalSummaryEntityCollection({
       IconComponent={ProjectCollectionIcon}
       iconProps={{ collection: journal }}
       image={image}
+      imageAlt={imageAlt}
       headerLayout={headerLayout}
       headerLink={lh.link("frontendJournal", slug)}
       BodyComponent={props =>

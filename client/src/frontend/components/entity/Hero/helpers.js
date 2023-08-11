@@ -34,6 +34,7 @@ export const getPartsData = entity => {
     entity.attributes.heroStyles?.mediumLandscape
       ? entity.attributes.heroStyles
       : false;
+  const bgAlt = entity.attributes.heroAltText;
 
   const twitter = entity.attributes.twitterId;
   const instagram = entity.attributes.instagramId;
@@ -51,6 +52,7 @@ export const getPartsData = entity => {
     rightCallouts,
     copy,
     bgImage,
+    bgAlt,
     twitter,
     instagram,
     facebook,

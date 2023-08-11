@@ -19,6 +19,20 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
     const { resourceCollection, t } = this.props;
     if (!resourceCollection) return null;
 
+    const formatData = data => {
+      const { thumbnailAltText, thumbnail, ...rest } = data?.attributes ?? {};
+
+      const finalThumbnailData =
+        typeof thumbnailAltText === "string"
+          ? { ...thumbnail, altText: thumbnailAltText }
+          : thumbnail;
+
+      return {
+        ...data,
+        attributes: { thumbnail: finalThumbnailData, ...rest }
+      };
+    };
+
     return (
       <section>
         <FormContainer.Form
@@ -29,6 +43,7 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
             resourceCollectionsAPI.create(this.props.params.projectId, model)
           }
           className="form-secondary"
+          formatData={formatData}
         >
           <Form.TextInput
             label={t("resource_collections.forms.title_label")}
@@ -55,6 +70,8 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
             readFrom="attributes[thumbnailStyles][small]"
             name="attributes[thumbnail]"
             remove="attributes[removeThumbnail]"
+            altTextName="attributes[thumbnailAltText]"
+            altTextLabel={t("hero.cover_image_alt_label")}
           />
           <Form.Save text={t("resource_collections.forms.save")} />
         </FormContainer.Form>

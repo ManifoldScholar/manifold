@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 const SIZES = { retina: 2560, large: 1280, medium: 640 };
 const BREAKPOINT = breakpoints[60];
 
-export default function HeroImage({ image }) {
+export default function HeroImage({ image, alt }) {
   return (
     <Styled.Wrapper aria-hidden>
       <Styled.Image
@@ -16,7 +16,7 @@ export default function HeroImage({ image }) {
         `}
         sizes={`(max-width: ${BREAKPOINT}) ${SIZES.medium}px, (max-width: ${breakpoints[120]}) ${SIZES.large}px`}
         src={image.largeLandscape}
-        alt=""
+        alt={alt ?? ""}
       />
     </Styled.Wrapper>
   );

@@ -24,6 +24,7 @@ function Header({
   description,
   DescriptionComponent,
   image,
+  imageAlt,
   ImageComponent,
   headerLayout,
   headerWidth = "auto",
@@ -74,7 +75,7 @@ function Header({
       {image && (
         <Styled.Image
           src={image}
-          alt=""
+          alt={imageAlt ?? ""}
           width={getImageWidthAttr(layout)}
           height={imageSize}
           loading="lazy"

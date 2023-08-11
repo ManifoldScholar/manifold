@@ -20,6 +20,20 @@ function JournalPropertiesContainer({ journal }) {
     [createSubject]
   );
 
+  const formatData = data => {
+    const { avatarAltText, avatar, ...rest } = data?.attributes ?? {};
+
+    const finalAvatarData =
+      typeof avatarAltText === "string"
+        ? { ...avatar, altText: avatarAltText }
+        : avatar;
+
+    return {
+      ...data,
+      attributes: { avatar: finalAvatarData, ...rest }
+    };
+  };
+
   return (
     <Authorize
       entity={journal}
@@ -34,6 +48,7 @@ function JournalPropertiesContainer({ journal }) {
           update={journalsAPI.update}
           create={journalsAPI.create}
           className="form-secondary"
+          formatData={formatData}
         >
           {getModelValue => (
             <>

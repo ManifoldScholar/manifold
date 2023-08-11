@@ -115,7 +115,8 @@
       "orange": "Orange",
       "violet": "Violet",
       "white": "White",
-      "color_instructions": "Select A Different Background Color"
+      "color_instructions": "Select A Different Background Color",
+      "alt_label": "Thumbnail Alt Text"
     },
     "permissions": {
       "header": "Editor Permissions",

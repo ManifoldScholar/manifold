@@ -27,6 +27,20 @@ function ProjectPropertiesContainer({ project }) {
 
   const { t } = useTranslation();
 
+  const formatData = data => {
+    const { avatarAltText, avatar, ...rest } = data?.attributes ?? {};
+
+    const finalAvatarData =
+      typeof avatarAltText === "string"
+        ? { ...avatar, altText: avatarAltText }
+        : avatar;
+
+    return {
+      ...data,
+      attributes: { avatar: finalAvatarData, ...rest }
+    };
+  };
+
   return (
     <Authorize
       entity={project}
@@ -41,6 +55,7 @@ function ProjectPropertiesContainer({ project }) {
           update={projectsAPI.update}
           create={projectsAPI.create}
           className="form-secondary"
+          formatData={formatData}
         >
           <Form.FieldGroup label={t("projects.forms.properties.header")}>
             <Form.TextInput

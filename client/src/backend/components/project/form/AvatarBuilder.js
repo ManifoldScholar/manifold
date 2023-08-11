@@ -119,57 +119,65 @@ class AvatarBuilder extends Component {
     const t = this.props.t;
 
     return (
-      <GlobalForm.Errorable
-        className={this.props.wide ? "wide" : undefined}
-        name="attributes[avatar]"
-        errors={this.props.errors}
-        label="Avatar"
-      >
-        <div className="avatar-builder">
-          <Form.Label label={t("projects.thumbnail.thumbnail")} />
-          <div className="grid">
-            <div className="section current">
-              <span className="label" aria-hidden="true">
-                {t("common.current")}
-              </span>
-              <span className="label screen-reader-text">
-                {t("projects.thumbnail.current_thumbnail")}
-              </span>
-              {image
-                ? this.renderCoverImage(image)
-                : this.renderPlaceholderImage()}
-            </div>
-            <div className={pickerClasses}>
-              <span className="label" aria-hidden="true">
-                {t("common.default")}
-              </span>
-              <ColorPicker
-                onChange={this.onColorChange}
-                value={this.props.getModelValue("attributes[avatarColor]")}
-                label={t("projects.thumbnail.default_thumbnail")}
-                {...this.props}
-              />
-            </div>
-            <div className={uploadClasses}>
-              <span className="label" aria-hidden="true">
-                {t("common.custom")}
-              </span>
-              <Form.Upload
-                set={this.onUploadChange}
-                initialValue={this.props.getModelValue(
-                  "attributes[avatarStyles][smallSquare]"
-                )}
-                value={this.props.getModelValue("attributes[avatar]")}
-                placeholder="cover"
-                accepts="images"
-                label={t("projects.thumbnail.custom_thumbnail")}
-                labelClass="screen-reader-text"
-                isBuilder
-              />
+      <>
+        <GlobalForm.Errorable
+          className={this.props.wide ? "wide" : undefined}
+          name="attributes[avatar]"
+          errors={this.props.errors}
+          label="Avatar"
+        >
+          <div className="avatar-builder">
+            <Form.Label label={t("projects.thumbnail.thumbnail")} />
+            <div className="grid">
+              <div className="section current">
+                <span className="label" aria-hidden="true">
+                  {t("common.current")}
+                </span>
+                <span className="label screen-reader-text">
+                  {t("projects.thumbnail.current_thumbnail")}
+                </span>
+                {image
+                  ? this.renderCoverImage(image)
+                  : this.renderPlaceholderImage()}
+              </div>
+              <div className={pickerClasses}>
+                <span className="label" aria-hidden="true">
+                  {t("common.default")}
+                </span>
+                <ColorPicker
+                  onChange={this.onColorChange}
+                  value={this.props.getModelValue("attributes[avatarColor]")}
+                  label={t("projects.thumbnail.default_thumbnail")}
+                  {...this.props}
+                />
+              </div>
+              <div className={uploadClasses}>
+                <span className="label" aria-hidden="true">
+                  {t("common.custom")}
+                </span>
+                <Form.Upload
+                  set={this.onUploadChange}
+                  initialValue={this.props.getModelValue(
+                    "attributes[avatarStyles][smallSquare]"
+                  )}
+                  value={this.props.getModelValue("attributes[avatar]")}
+                  placeholder="cover"
+                  accepts="images"
+                  label={t("projects.thumbnail.custom_thumbnail")}
+                  labelClass="screen-reader-text"
+                  isBuilder
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </GlobalForm.Errorable>
+        </GlobalForm.Errorable>
+        {image && (
+          <GlobalForm.TextInput
+            label={t("projects.thumbnail.alt_label")}
+            name="attributes[avatarAltText]"
+          />
+        )}
+      </>
     );
   }
 }

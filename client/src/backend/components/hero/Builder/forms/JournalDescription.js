@@ -29,6 +29,26 @@ function JournalDescription({
     setDirty(dirtyAttrs || dirtyRels);
   };
 
+  const formatData = data => {
+    const { logoAltText, logo, heroAltText, hero, ...rest } =
+      data?.attributes ?? {};
+
+    const finalLogoData =
+      typeof logoAltText === "string"
+        ? { ...logo, altText: logoAltText }
+        : logo;
+
+    const finalHeroData =
+      typeof heroAltText === "string"
+        ? { ...hero, altText: heroAltText }
+        : hero;
+
+    return {
+      ...data,
+      attributes: { logo: finalLogoData, hero: finalHeroData, ...rest }
+    };
+  };
+
   return (
     <Authorize
       entity={model}
@@ -50,6 +70,7 @@ function JournalDescription({
           className="form-secondary"
           onSuccess={maybeCloseDrawer}
           onDirty={onDirty}
+          formatData={formatData}
         >
           {withDarkMode && (
             <Form.Switch
@@ -78,6 +99,8 @@ function JournalDescription({
             name="attributes[hero]"
             remove="attributes[removeHero]"
             instructions={t("hero.image_instructions")}
+            altTextName="attributes[heroAltText]"
+            altTextLabel={t("hero.image_alt_label")}
           />
           <Form.Select
             name="attributes[heroLayout]"
@@ -94,10 +117,12 @@ function JournalDescription({
             accepts="images"
             readFrom="attributes[logoStyles][small]"
             name="attributes[logo]"
-            remove="attributes[removeLog]"
+            remove="attributes[removeLogo]"
             instructions={t("journals.forms.logo_instructions", {
               entity: modelLabel
             })}
+            altTextName="attributes[logoAltText]"
+            altTextLabel={t("journals.forms.logo_alt_label")}
           />
           <Form.TextInput
             label={t("hero.background_color")}

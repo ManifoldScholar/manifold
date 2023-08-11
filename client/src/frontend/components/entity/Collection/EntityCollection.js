@@ -17,6 +17,7 @@ function EntityCollection({
   description,
   DescriptionComponent,
   image,
+  imageAlt,
   ImageComponent,
   headerLayout,
   headerWidth,
@@ -52,6 +53,7 @@ function EntityCollection({
           description={description}
           DescriptionComponent={DescriptionComponent}
           image={image}
+          imageAlt={imageAlt}
           ImageComponent={ImageComponent}
           headerLayout={headerLayout}
           headerWidth={headerWidth}

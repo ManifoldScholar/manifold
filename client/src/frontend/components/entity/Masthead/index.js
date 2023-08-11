@@ -10,31 +10,40 @@ const checkSizes = (image, parentImage, lg, med) => {
 };
 
 const getContent = (entity, parent) => {
-  const { heroBackgroundColor, heroStyles, logoStyles } =
-    entity.attributes ?? {};
+  const {
+    heroBackgroundColor,
+    heroStyles,
+    heroAltText,
+    logoStyles,
+    logoAltText
+  } = entity.attributes ?? {};
   const {
     heroBackgroundColor: parentColor,
     heroStyles: parentHero,
-    logoStyles: parentLogo
+    heroAltText: parentHeroAlt,
+    logoStyles: parentLogo,
+    logoAltText: parentLogoAlt
   } = parent?.attributes ?? {};
 
   const color = heroBackgroundColor ?? parentColor ?? null;
   const logo =
     (!parent || (parent && !heroStyles.largeLandscape)) &&
     checkSizes(logoStyles, parentLogo, "original", "medium");
+  const logoAlt = logoAltText ?? parentLogoAlt;
   const image = checkSizes(
     heroStyles,
     parentHero,
     "largeLandscape",
     "mediumLandscape"
   );
+  const imageAlt = heroAltText ?? parentHeroAlt;
 
-  return { image, logo, color };
+  return { image, imageAlt, logo, logoAlt, color };
 };
 
 export default function Masthead({ entity }) {
   if (!entity) return null;
-  const { image, logo, color } = getContent(
+  const { image, imageAlt, logo, logoAlt, color } = getContent(
     entity,
     entity.relationships?.journal
   );
@@ -51,7 +60,7 @@ export default function Masthead({ entity }) {
         `}
           sizes={`(max-width: ${breakpoints[60]}) 640px, (max-width: ${breakpoints[120]}) 1280px`}
           src={image.largeLandscape}
-          alt=""
+          alt={imageAlt ?? ""}
           loading="lazy"
         />
       )}
@@ -63,7 +72,7 @@ export default function Masthead({ entity }) {
             ${logo.medium} 1x
           `}
             src={logo.original}
-            alt=""
+            alt={logoAlt ?? ""}
             loading="lazy"
           />
         </Styled.LogoWrapper>
