@@ -69,7 +69,7 @@ module V1
       google_private_key_id: Types::String,
       google_client_email: Types::String,
       google_client_id: Types::String,
-      ga_tracking_id: Types::String
+      ga_four_tracking_id: Types::String
     )
     typed_attribute :email, Types::Hash.schema(
       from_address: Types::Serializer::Email,

@@ -132,7 +132,7 @@ class ManifoldContainer extends PureComponent {
   }
 
   receivedGaTrackingId(settings) {
-    const path = "attributes.integrations.gaTrackingId";
+    const path = "attributes.integrations.gaFourTrackingId";
     return has(settings, path) && get(settings, path) !== "";
   }
 

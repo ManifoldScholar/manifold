@@ -446,7 +446,7 @@ module Validation
           :google_client_email,
           :google_client_id,
           :google_oauth_client_id,
-          :ga_tracking_id
+          :ga_four_tracking_id
         ]
       },
       {
