@@ -8,7 +8,7 @@ module Updaters
     end
 
     # We use Shrine for supporting tus instead of paperclip
-    def attachment_from_params!(attributes, key)
+    def attachment_from_params!(attributes, key, _model = nil)
       attributes.extract!(key)[key].presence
     end
   end
