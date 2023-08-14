@@ -118,7 +118,7 @@ Manifold stores basic information about each reading group, the content that has
       has_project_collections: ProjectCollection.count.positive?,
       manifold_version: self.class.manifold_version,
       require_terms_and_conditions: Page.by_purpose(:terms_and_conditions).exists?,
-      google_analytics_enabled: integrations["ga_tracking_id"].present?,
+      google_analytics_enabled: integrations["ga_four_tracking_id"].present?,
       manifold_analytics_enabled: integrations["disable_internal_analytics"] != true
     }
   end

@@ -13,7 +13,7 @@ export default function CookiesForm() {
   const manifoldAnalyticsEnabled = !settings?.attributes?.general
     ?.disableInternalAnalytics;
   const googleAnalyticsEnabled = !!settings?.attributes?.integrations
-    ?.gaTrackingId;
+    ?.gaFourTrackingId;
 
   const { currentUser } = useFromStore("authentication") ?? {};
   const { consentManifoldAnalytics, consentGoogleAnalytics } =

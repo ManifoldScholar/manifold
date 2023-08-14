@@ -11,7 +11,7 @@ const cookie = new CookieHelper();
 function nullTracker(trackedEventIgnored) {}
 
 function getGoogleAnalyticsId(settings) {
-  return get(settings, "attributes.integrations.gaTrackingId");
+  return get(settings, "attributes.integrations.gaFourTrackingId");
 }
 
 function googleAnalyticsEnabled(settings) {

@@ -28,7 +28,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const manifoldAnalyticsEnabled = !settings?.attributes?.general
     ?.disableInternalAnalytics;
   const googleAnalyticsEnabled = !!settings?.attributes?.integrations
-    ?.gaTrackingId;
+    ?.gaFourTrackingId;
 
   const notifyUpdate = useNotification(() => ({
     level: 0,
