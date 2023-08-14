@@ -1205,7 +1205,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
                           },
                           "integrations": Object {
                             "facebookAppId": null,
-                            "gaTrackingId": null,
+                            "gaFourTrackingId": null,
                             "googleClientEmail": null,
                             "googleClientId": null,
                             "googleOauthClientId": null,
@@ -1302,7 +1302,7 @@ exports[`frontend/containers/ProjectResources/ProjectResources matches the snaps
                             },
                             "integrations": Object {
                               "facebookAppId": null,
-                              "gaTrackingId": null,
+                              "gaFourTrackingId": null,
                               "googleClientEmail": null,
                               "googleClientId": null,
                               "googleOauthClientId": null,

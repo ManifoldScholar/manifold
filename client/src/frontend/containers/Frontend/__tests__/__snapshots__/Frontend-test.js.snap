@@ -174,7 +174,7 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
             },
             "integrations": Object {
               "facebookAppId": null,
-              "gaTrackingId": null,
+              "gaFourTrackingId": null,
               "googleClientEmail": null,
               "googleClientId": null,
               "googleOauthClientId": null,
@@ -427,7 +427,7 @@ exports[`frontend/containers/Frontend/Frontend matches the snapshot 1`] = `
             },
             "integrations": Object {
               "facebookAppId": null,
-              "gaTrackingId": null,
+              "gaFourTrackingId": null,
               "googleClientEmail": null,
               "googleClientId": null,
               "googleOauthClientId": null,
