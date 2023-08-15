@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Navigation from "backend/components/navigation";
+import Layout from "backend/components/layout";
 import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
 import { ingestionSourcesAPI } from "api";
@@ -22,7 +22,7 @@ export default function AddEditAssetContainer({ textId, refresh }) {
 
   return (
     <section>
-      <Navigation.DrawerHeader title={title} />
+      <Layout.DrawerHeader title={title} />
       <AddEditAssetForm
         asset={asset}
         assetId={assetId}
