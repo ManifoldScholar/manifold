@@ -3,13 +3,18 @@ import PropTypes from "prop-types";
 import selectionHelpers from "./selectionHelpers";
 import { isMathMLNode } from "./mathHelpers";
 import isString from "lodash/isString";
+import lh from "helpers/linkHandler";
 
 export default class AnnotatableCaptureClick extends Component {
   static propTypes = {
     activeAnnotation: PropTypes.string,
     updateActiveAnnotation: PropTypes.func.isRequired,
     actions: PropTypes.object.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
+    textId: PropTypes.string.isRequired,
+    sectionId: PropTypes.string.isRequired,
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
   };
 
   doesElementContainAnnotationAndHighlight(el) {
@@ -100,6 +105,19 @@ export default class AnnotatableCaptureClick extends Component {
     const link = selectionHelpers.closest(el, "a");
     const annotationIds = this.elementAnnotationIds(el);
     if (link) return this.showLinkMenu(event, el, annotationIds, link);
+
+    const { hash } = this.props.location;
+
+    if (hash !== `#annotation-${annotationIds[0]}`) {
+      const url = lh.link(
+        "readerSection",
+        this.props.textId,
+        this.props.sectionId,
+        `#annotation-${annotationIds[0]}`
+      );
+      this.props.history.push(url);
+    }
+
     this.props.actions.openViewAnnotationsDrawer(annotationIds);
   }
 

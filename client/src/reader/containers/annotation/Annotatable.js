@@ -462,6 +462,10 @@ export class Annotatable extends Component {
             activeAnnotation={this.state.annotation}
             updateActiveAnnotation={this.setActiveAnnotation}
             actions={this.actions}
+            textId={this.props.textId}
+            sectionId={this.props.sectionId}
+            history={this.props.history}
+            location={this.props.location}
           >
             <div
               id="annotatableRef"
