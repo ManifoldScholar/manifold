@@ -216,8 +216,11 @@ class TextNode extends Component {
       const interactiveAttributes =
         isInteractive && !this.props.hasInteractiveAncestor
           ? {
-              tabIndex: 0,
-              role: "button",
+              href: textAnnotationIds.length
+                ? `#annotation-${textAnnotationIds[0]}`
+                : undefined,
+              tabIndex: removableHighlight ? 0 : undefined,
+              role: removableHighlight ? "button" : undefined,
               "aria-haspopup": removableHighlight ? "menu" : "dialog",
               "aria-label": removableHighlight
                 ? this.ariaLabelForHighlight(chunk)
@@ -225,20 +228,24 @@ class TextNode extends Component {
             }
           : {};
 
+      const props = {
+        key: index,
+        className: classes,
+        "data-removable-highlight-id": removableHighlightId,
+        "data-text-annotation-ids": textAnnotationIds,
+        "data-annotation-ids": map[index].map(a => a.id),
+        ...interactiveAttributes
+      };
+
+      const Tag = interactiveAttributes.href ? "a" : "span";
+
       return (
-        <span
-          key={index} // eslint-disable-line react/no-array-index-key
-          className={classes}
-          data-removable-highlight-id={removableHighlightId}
-          data-text-annotation-ids={textAnnotationIds}
-          data-annotation-ids={map[index].map(a => a.id)}
-          {...interactiveAttributes}
-        >
+        <Tag {...props}>
           {chunk}
           {endingResources.length > 0 ? (
             <Notation.Marker annotations={endingResources} />
           ) : null}
-        </span>
+        </Tag>
       );
     });
   }

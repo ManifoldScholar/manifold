@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
+import { useHistory } from "react-router-dom";
 
 function FollowLink({
   menu,
@@ -10,13 +11,17 @@ function FollowLink({
   direction,
   activeEvent,
   actions,
-  onKeyDown
+  onKeyDown,
+  annotationHref
 }) {
   const { link, annotationIds } = activeEvent;
   const { openViewAnnotationsDrawer } = actions;
 
+  const history = useHistory();
+
   function handleAnnotateClick() {
     if (!openViewAnnotationsDrawer || !annotationIds) return;
+    if (annotationHref) history.push(annotationHref);
     return openViewAnnotationsDrawer(annotationIds);
   }
   const { t } = useTranslation();
@@ -57,7 +62,8 @@ FollowLink.propTypes = {
   activeEvent: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   direction: PropTypes.oneOf(["up", "down"]),
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
+  annotationHref: PropTypes.string
 };
 
 export default FollowLink;

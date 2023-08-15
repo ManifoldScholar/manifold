@@ -45,6 +45,7 @@ export default class AnnotatableCaptureClick extends Component {
 
   handleKeyUp = event => {
     if (!event || !event.target || event.key !== " ") return;
+    if (event.target.tagName === "A") return;
     // handle spacebar keyup like a click (see https://adrianroselli.com/2022/04/brief-note-on-buttons-enter-and-space.html)
     this.handleClick(event, true);
   };
@@ -59,10 +60,10 @@ export default class AnnotatableCaptureClick extends Component {
       const el = event.target;
       if (
         this.doesElementContainAnnotationAndHighlight(el) ||
-        this.doesElementContainRemovableHighlight(el) ||
-        this.doesElementContainAnnotation(el)
-      )
+        this.doesElementContainRemovableHighlight(el)
+      ) {
         event.preventDefault();
+      }
     }
   };
 
@@ -96,10 +97,18 @@ export default class AnnotatableCaptureClick extends Component {
   }
 
   handleAnnotationClick(event, el) {
-    event.preventDefault();
     const link = selectionHelpers.closest(el, "a");
+
+    const hashRegex = /#annotation-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/g;
+    const isAnnotationClick = hashRegex.test(link.hash);
+
+    if (!isAnnotationClick) event.preventDefault();
+
     const annotationIds = this.elementAnnotationIds(el);
-    if (link) return this.showLinkMenu(event, el, annotationIds, link);
+
+    if (!isAnnotationClick)
+      return this.showLinkMenu(event, el, annotationIds, link);
+
     this.props.actions.openViewAnnotationsDrawer(annotationIds);
   }
 
