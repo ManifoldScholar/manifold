@@ -1,5 +1,6 @@
 import { styledUnderline } from "../../../mixins/typography";
 import { annotationHighlightColors } from "../../../variables/colors";
+import { linkUnstyled } from "theme/styles/mixins";
 
 const underlineStyleKeys = ["solid", "dashes", "dots", "wavy"];
 
@@ -21,6 +22,12 @@ const defaultUnderline = (color = annotationHighlightColors.primaryBase) => `
 
 export default `
   .annotation-underline {
+    ${linkUnstyled}
+
+    .text-section & {
+      color: var(--reader-color);
+    }
+
     &:not(.inert) {
       cursor: pointer;
     }

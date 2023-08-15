@@ -13,6 +13,7 @@ import selectionHelpers from "./annotatable-components/selectionHelpers";
 import locationHelper from "helpers/location";
 import withReadingGroups from "hoc/withReadingGroups";
 import isEqual from "lodash/isEqual";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
@@ -436,6 +437,19 @@ export class Annotatable extends Component {
     this.restoreFocusAndSelection(focusAndSelectionNodes);
   };
 
+  getAnnotationUrl = () => {
+    if (!this.state.activeEvent.annotationIds?.length) return undefined;
+
+    const annotationId = this.state.activeEvent.annotationIds[0];
+    const url = lh.link(
+      "readerSection",
+      this.props.textId,
+      this.props.sectionId,
+      `#annotation-${annotationId}`
+    );
+    return url;
+  };
+
   render() {
     const { annotationState, selectionState, renderedAnnotations } = this.state;
     const pendingAnnotation =
@@ -484,6 +498,7 @@ export class Annotatable extends Component {
             activeAnnotation={this.activeAnnotationObject}
             annotationState={annotationState}
             setPopupRef={this.setPopupRef}
+            annotationHref={this.getAnnotationUrl()}
             clearSelection={() =>
               this.resetState({
                 restoreFocusTo: this.selectableRef,
