@@ -98,6 +98,8 @@ Rails.application.routes.draw do
         put :toggle_export_epub_v3, on: :member, path: "export_epub_v3"
 
         scope module: :texts do
+          resources :ingestions, only: [:create]
+
           namespace :relationships do
             resources :text_sections, only: [:index, :create]
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
@@ -166,6 +168,8 @@ Rails.application.routes.draw do
 
       resources :projects do
         scope module: :projects do
+          resources :ingestions, only: [:create]
+
           namespace :relationships do
             resources :action_callouts, only: [:index, :create]
             resources :entitlements, only: [:index, :create]
@@ -186,9 +190,6 @@ Rails.application.routes.draw do
           end
         end
       end
-
-      post "projects/:id/ingest", to: "ingests#create"
-      post "texts/:id/ingest", to: "ingests#create"
 
       resources :twitter_queries, only: [:show, :update, :destroy], controller: "projects/relationships/twitter_queries" do
         scope module: :twitter_queries do

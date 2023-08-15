@@ -1,6 +1,6 @@
 require "swagger_helper"
 
-RSpec.describe "Ingests API", type: :request do
+RSpec.describe "Project Ingestions API", type: :request do
   context "when an ingestion is triggered" do
     let!(:project) { FactoryBot.create(:project) }
     let!(:project_id) { project.id }
@@ -11,7 +11,7 @@ RSpec.describe "Ingests API", type: :request do
       }
     }
 
-    path "/projects/{project_id}/ingest" do
+    path "/projects/{project_id}/ingestions" do
       include_examples "an API create request",
             model: Ingestion,
             parent: "project",
@@ -22,27 +22,6 @@ RSpec.describe "Ingests API", type: :request do
                 {
                   data: {
                     attributes: attributes
-                  }
-                }
-              end
-            end
-    end
-
-    let!(:text) { FactoryBot.create(:text) }
-    let(:text_id) { text.id }
-
-    path "/texts/{text_id}/ingest" do
-      include_examples "an API create request",
-            model: Ingestion,
-            parent: "text",
-            url_parameters: [:text_id],
-            authorized_user: :admin,
-            included_relationships: [:creator] do
-              let(:body) do
-                {
-                  data: {
-                    attributes: attributes,
-                    relationships: {}
                   }
                 }
               end
