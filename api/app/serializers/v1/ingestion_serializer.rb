@@ -4,7 +4,7 @@ module V1
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :state, Types::String.enum("sleeping", "processing", "finished").meta(read_only: true)
-    typed_attribute :external_source_url, Types::Serializer::URL.meta(description: "Required if not uploading from a file")
+    typed_attribute :external_source_url, Types::Serializer::URL.optional.meta(description: "Required if not uploading from a file")
     typed_attribute :log, Types::Array.of(Types::String).meta(read_only: true)
     typed_attribute :source_file_name, Types::String.optional.meta(read_only: true)
     typed_attribute :ingestion_type, Types::String.optional
