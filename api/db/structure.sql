@@ -2316,8 +2316,8 @@ CREATE TABLE public.resources (
     comments_count integer DEFAULT 0,
     metadata jsonb DEFAULT '{}'::jsonb,
     events_count integer DEFAULT 0,
-    minimum_width integer,
-    minimum_height integer,
+    minimum_width character varying,
+    minimum_height character varying,
     iframe_allow_fullscreen boolean DEFAULT true,
     sort_title public.citext,
     attachment_data jsonb,
@@ -7062,5 +7062,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230425172153'),
 ('20230607190750'),
 ('20230607191531');
+('20230816233543');
 
 
