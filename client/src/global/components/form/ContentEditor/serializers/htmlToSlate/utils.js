@@ -75,14 +75,11 @@ const isInlineImage = (prev, next) => {
 
 const wrapBlockChildren = (children, isList) => {
   if (isList) {
-    const listChild = children.find(c => c.type === "ul" || c.type === "ol");
-    const restChildren = children.filter(
-      c => !(c.type === "ul" || c.type === "ol")
+    return children.map(c =>
+      isInline(c) || c.text
+        ? jsx("element", { type: "list-sibling", slateOnly: true }, c)
+        : c
     );
-    return [
-      jsx("element", { type: "list-sibling", slateOnly: true }, restChildren),
-      listChild
-    ];
   }
   return children.map((c, i) => {
     if (isInline(c) || c.text) {

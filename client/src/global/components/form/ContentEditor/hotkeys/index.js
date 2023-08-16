@@ -1,5 +1,8 @@
-import { increaseIndent, decreaseIndent } from "../utils/slate/listIndents";
-import { toggleMark, toggleOrWrapBlock } from "../utils/slate/transforms";
+import {
+  increaseIndent,
+  decreaseIndent
+} from "../utils/slate/transforms/listIndents";
+import { toggleMark, toggleOrWrapNode } from "../utils/slate/transforms";
 import { getListItemNode } from "../utils/slate/getters";
 import {
   handleLinkHotkey,
@@ -38,37 +41,37 @@ export const captureHotKeys = (e, editor) => {
     switch (e.keyCode) {
       case 48:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "p");
+        return toggleOrWrapNode(editor, "p");
       case 49:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "h1");
+        return toggleOrWrapNode(editor, "h1");
       case 50:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "h2");
+        return toggleOrWrapNode(editor, "h2");
       case 51:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "h3");
+        return toggleOrWrapNode(editor, "h3");
       case 52:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "h4");
+        return toggleOrWrapNode(editor, "h4");
       case 53:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "h5");
+        return toggleOrWrapNode(editor, "h5");
       case 54:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "h6");
+        return toggleOrWrapNode(editor, "h6");
       case 55:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "ol");
+        return toggleOrWrapNode(editor, "ol");
       case 56:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "ul");
+        return toggleOrWrapNode(editor, "ul");
       case 57:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "blockquote");
+        return toggleOrWrapNode(editor, "blockquote");
       case 69:
         e.preventDefault();
-        return toggleOrWrapBlock(editor, "pre");
+        return toggleOrWrapNode(editor, "pre");
     }
   }
 

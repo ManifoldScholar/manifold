@@ -24,7 +24,7 @@ export const getTextContent = (editor, iterator, str = "") => {
   return getTextContent(editor, iterator, nextStr);
 };
 
-export const getCommonBlock = editor => {
+export const getCommonBlock = (editor, condition = () => true) => {
   const range = Editor.unhangRange(editor, editor.selection, { voids: true });
 
   const [common, path] = Node.common(
@@ -33,12 +33,16 @@ export const getCommonBlock = editor => {
     range.focus.path
   );
 
-  if (Editor.isBlock(editor, common) || Editor.isEditor(common)) {
+  if (
+    (Editor.isBlock(editor, common) || Editor.isEditor(common)) &&
+    condition(common)
+  ) {
     return [common, path];
   } else {
     return Editor.above(editor, {
       at: path,
-      match: n => Editor.isBlock(editor, n) || Editor.isEditor(n)
+      match: n =>
+        (Editor.isBlock(editor, n) || Editor.isEditor(n)) && condition(n)
     });
   }
 };
@@ -71,17 +75,17 @@ export const isElementActive = (editor, format) => {
   const { selection } = editor;
   if (!selection) return false;
 
-  const [nearest] = Editor.above(editor, {
+  const nearest = Editor.above(editor, {
     at: Editor.unhangRange(editor, selection),
     match: n =>
       !Editor.isEditor(n) &&
       Element.isElement(n) &&
       !n.nodeName &&
       !n.slateOnly &&
-      n.type !== "li"
+      n.type === format
   });
 
-  return nearest?.type === format;
+  return nearest ? nearest[0].type === format : false;
 };
 
 export const isTextBlockActive = (editor, format) => {
