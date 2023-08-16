@@ -30,10 +30,11 @@ export const descriptions = {
   iframe:
     "Paste a YouTube or Vimeo embed URL into the editor to insert. Insert other iframe content via the modal.",
   span:
-    "Insert a span element in the current text block. Spans can be nested for styling.",
+    "Wrap the current selection or insert a span element at a cursor in the current text block. Spans can be nested in layout blocks and other spans for styling.",
   container:
-    "Wrap the current selection in an html block element. These elements can be nested.",
-  textBlock: "Insert or toggle the text block containing the current selection."
+    "Wrap the current selection, or current block if selection is at a cursor, in an html block element. These elements can be nested. To remove a layout block or move it up a level in the document, select the element in the breadcrumbs bar.",
+  textBlock:
+    "Insert or toggle the text block containing the current selection, or current text block if selection is at a cursor. These elements can be nested in layout blocks but not each other."
 };
 
 export const hotkeys = {
