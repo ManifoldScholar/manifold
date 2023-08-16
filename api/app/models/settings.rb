@@ -17,6 +17,8 @@ class Settings < ApplicationRecord
       social_share_message: "Shared from Manifold Scholarship",
       library_disabled: false,
       restricted_access: false,
+      restricted_access_heading: "Access to this project is restricted.",
+      restricted_access_body: "Only users granted permission may view this project's texts, resources, and other content.",
       disable_engagement: false,
       disable_reading_groups: false,
       disable_internal_analytics: false
