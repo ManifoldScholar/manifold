@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :ingestion_source do
     transient do
-      attachment_path { nil }
+      attachment_path { Rails.root.join("spec/data/assets/images/publication_resource.png") }
       default_source_identifier { ('a'..'z').to_a.shuffle[0,8].join }
     end
 
