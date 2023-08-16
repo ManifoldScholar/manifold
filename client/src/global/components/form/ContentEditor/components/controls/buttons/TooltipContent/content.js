@@ -21,7 +21,7 @@ export const labels = {
   redo: "Redo",
   img: "Image",
   iframe: "Iframe",
-  container: "Containers",
+  container: "Layout Blocks",
   textBlock: "Text Blocks"
 };
 
@@ -32,7 +32,7 @@ export const descriptions = {
   span:
     "Insert a span element in the current text block. Spans can be nested for styling.",
   container:
-    "Wrap the current selection in an html block element. Containers can be nested.",
+    "Wrap the current selection in an html block element. These elements can be nested.",
   textBlock: "Insert or toggle the text block containing the current selection."
 };
 

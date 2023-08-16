@@ -117,6 +117,9 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
             ]}
             {...menu}
           />
+          <Styled.ToolbarSpacer />
+        </Styled.ToolGroup>
+        <Styled.ToolGroup>
           <ReakitMenuItem as={SpanButton} format="span" {...menu} />
           <Styled.ToolbarSpacer />
         </Styled.ToolGroup>
@@ -129,9 +132,9 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               { format: "header", label: "Header" },
               { format: "footer", label: "Footer" },
               { format: "section", label: "Section" },
-              { format: "Figure", label: "Figure" },
+              { format: "figure", label: "Figure" },
               { format: "figcaption", label: "Figcaption" },
-              { format: "", label: "Container" }
+              { format: "", label: "Layout Block" }
             ]}
             color="var(--color-base-yellow20)"
             {...menu}

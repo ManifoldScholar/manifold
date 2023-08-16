@@ -42,6 +42,8 @@ export const TooltipIcon = styled.div`
   position: relative;
   width: max-content;
   margin-block-start: -3px;
+  margin-inline-start: 5px;
+  cursor: pointer;
 `;
 
 export const SelectWrapper = styled.div`
@@ -54,7 +56,7 @@ export const Select = styled.select`
   font-family: var(--font-family-sans);
   line-height: 22px;
   font-size: 14px;
-  width: 110px;
+  width: 120px;
   height: 28px;
   display: inline-block;
   border-radius: 4px;
@@ -80,7 +82,6 @@ export const Select = styled.select`
 export const SpanButton = styled(Select)`
   width: auto;
   padding-inline: 8px;
-  margin-inline-start: 8px;
 
   .backend & {
     &[data-active="true"] {

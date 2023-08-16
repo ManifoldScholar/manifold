@@ -152,6 +152,9 @@ export const ElementLabel = styled.span`
   padding-inline: 4px;
   padding-block-start: 2px;
   padding-block-end: 4px;
+  text-decoration: none;
+  text-transform: none;
+  font-variant: none;
 
   .scheme-dark & {
     background: ${({ $color }) => COLOR_MAP[$color].dark};
