@@ -320,7 +320,7 @@ module Validation
   end
 
   def ingestion_source_filter_params
-    params[:filter] = params[:filter].except(:kind) if params[:filter][:kind] == ""
+    params[:filter] = params[:filter].except(:kind) if !params[:filter].nil? && params[:filter][:kind] == ""
     params.permit(filter: [:order, :keyword, :kind])[:filter]
   end
 
