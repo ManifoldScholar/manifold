@@ -17,15 +17,13 @@ export default function ActionButtons({ actions, entity }) {
       "utility-button__icon--highlight": isProjectCollection
     });
 
+    const Tag = linkOrButtonProps.as ?? Link;
+
     const item = (
-      <Link
-        key={action.label}
-        {...linkOrButtonProps}
-        className="utility-button"
-      >
+      <Tag key={action.label} {...linkOrButtonProps} className="utility-button">
         <IconComposer icon={action.icon} size={26} className={iconClasses} />
         <span className="utility-button__text">{t(action.label)}</span>
-      </Link>
+      </Tag>
     );
 
     if (action.authorize) {
