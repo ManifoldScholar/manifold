@@ -27,7 +27,8 @@ export default function SlateElement({
   const editor = useSlateStatic();
   const { id } = ReactEditor.findKey(editor, element);
   const { selectedCrumb } = useHtmlBreadcrumbs();
-  const showHtml = selectedCrumb === id || selectedCrumb === "all";
+  const showHtml =
+    (selectedCrumb === id || selectedCrumb === "all") && !element.slateOnly;
 
   if (element.type === "br") {
     return (

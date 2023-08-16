@@ -3,7 +3,7 @@ import { useSlate, ReactEditor } from "slate-react";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels, descriptions } from "./TooltipContent/content";
-import { toggleOrWrapBlock } from "../../../utils/slate/transforms";
+import { toggleOrWrapNode } from "../../../utils/slate/transforms";
 import {
   isTextBlockActive,
   isElementActive
@@ -16,10 +16,12 @@ const getActiveBlock = (editor, opts, name) => {
   const active = opts
     .map(o => [o, isActive(editor, o)])
     .reduce((obj, o) => ({ ...obj, [o[0]]: o[1] }), {});
-  const activeCount = opts.map(o => isActive(editor, o)).filter(Boolean).length;
 
-  if (activeCount !== 1) return "";
-  return Object.keys(active).find(o => active[o]);
+  // I can't decide whether it's better to show as active the lowest block or show nothing as active if the selection is nested in multiple blocks.
+  // const activeCount = opts.map(o => isActive(editor, o)).filter(Boolean).length;
+  // if (activeCount !== 1) return "";
+
+  return Object.keys(active).find(o => active[o]) ?? "";
 };
 
 const BlockSelect = ({ options, name, color, ...rest }, ref) => {
@@ -51,7 +53,7 @@ const BlockSelect = ({ options, name, color, ...rest }, ref) => {
           onChange={e => {
             e.preventDefault();
             if (!selection) return;
-            toggleOrWrapBlock(editor, e.target.value);
+            toggleOrWrapNode(editor, e.target.value);
           }}
           tabIndex={-1}
         >
@@ -61,7 +63,7 @@ const BlockSelect = ({ options, name, color, ...rest }, ref) => {
       </Styled.SelectWrapper>
       <Tooltip
         content={
-          active ? (
+          active && name === "textBlock" ? (
             <TooltipContent label={labels[active]} hotkeys={hotkeys[active]} />
           ) : (
             <TooltipContent

@@ -3,7 +3,7 @@ import { useSlate, ReactEditor } from "slate-react";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { labels, descriptions } from "./TooltipContent/content";
-import { toggleOrWrapBlock } from "../../../utils/slate/transforms";
+import { toggleOrWrapNode } from "../../../utils/slate/transforms";
 import { isElementActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
 
@@ -29,7 +29,7 @@ const SpanButton = ({ format, ...rest }, ref) => {
         onClick={event => {
           event.preventDefault();
           if (!selection) return;
-          toggleOrWrapBlock(editor, format);
+          toggleOrWrapNode(editor, format);
         }}
         tabIndex={-1}
       >

@@ -4,7 +4,7 @@ import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys, labels } from "./TooltipContent/content";
-import { toggleOrWrapBlock } from "../../../utils/slate/transforms";
+import { toggleOrWrapNode } from "../../../utils/slate/transforms";
 import { isElementActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
 
@@ -29,7 +29,7 @@ const BlockButton = ({ format, icon, size, ...rest }, ref) => {
         onClick={event => {
           event.preventDefault();
           if (!selection) return;
-          toggleOrWrapBlock(editor, format);
+          toggleOrWrapNode(editor, format);
         }}
         tabIndex={-1}
       >

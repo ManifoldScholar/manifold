@@ -21,12 +21,14 @@ export const handleLinkHotkey = editor => {
   if (button[0]) button[0].click();
 };
 
-export const handleImageHotkey = () => {
+export const handleImageHotkey = e => {
+  e.preventDefault();
   const button = document.getElementsByName("img-modal-trigger");
   if (button[0]) button[0].click();
 };
 
-export const handleIframeHotkey = () => {
+export const handleIframeHotkey = e => {
+  e.preventDefault();
   const button = document.getElementsByName("iframe-modal-trigger");
   if (button[0]) button[0].click();
 };

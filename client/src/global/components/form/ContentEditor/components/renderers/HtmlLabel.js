@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import { rteElements, inlineNodes } from "../../utils/elements";
 import { formatNodeLabel } from "../../utils/slate/general";
-import { removeNode } from "../../utils/slate/removeNode";
-import { unwrapContainerBlock } from "../../utils/slate/transforms";
+import { removeNode } from "../../utils/slate/transforms/removeNode";
+import { unwrapNode } from "../../utils/slate/transforms";
 import IconComposer from "global/components/utility/IconComposer";
 import debounce from "lodash/debounce";
 import { useSlateStatic, ReactEditor } from "slate-react";
@@ -77,7 +77,7 @@ export default function HtmlLabel({ visible, element }) {
         <Styled.LiftButton
           onClick={e => {
             e.preventDefault();
-            unwrapContainerBlock({ editor, format: element.type, path });
+            unwrapNode({ editor, format: element.type, path });
           }}
           aria-label="Move node up one level in the html hierarchy"
           disabled={disableLift}

@@ -1,9 +1,9 @@
 import { Editor as SlateEditor, Transforms, Node, Point } from "slate";
 import { ReactEditor } from "slate-react";
-import { getListNode, getListItemNode } from "./getters";
-import { setSelectionAtPoint } from "./general";
-import { toggleOrWrapBlock } from "./transforms";
-import { rteElements } from "../elements";
+import { getListNode, getListItemNode } from "../getters";
+import { setSelectionAtPoint } from "../general";
+import { toggleOrWrapNode } from "./shared";
+import { rteElements } from "../../elements";
 import has from "lodash/has";
 
 const getTextLocation = (editor, iterator, path, str = "") => {
@@ -158,7 +158,7 @@ export const decreaseIndent = ({ editor, canUnwrapRoot }) => {
     const format = rteElements.includes(listParent?.type)
       ? listParent.type
       : "p";
-    return canUnwrapRoot ? toggleOrWrapBlock(editor, format) : null;
+    return canUnwrapRoot ? toggleOrWrapNode(editor, format) : null;
   }
 
   const nodeStart = SlateEditor.start(editor, path);
