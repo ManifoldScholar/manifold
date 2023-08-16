@@ -17,7 +17,7 @@ export default function CountHeader({
         <Styled.CountIcon icon={icon} />
       ) : null}
       <Styled.Title as={titleTag}>
-        {count && <Styled.Count>{count}</Styled.Count>}
+        <Styled.Count>{count}</Styled.Count>
         {titleString}
       </Styled.Title>
       {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
