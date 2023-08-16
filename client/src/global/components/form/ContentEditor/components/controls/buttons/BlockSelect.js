@@ -40,25 +40,6 @@ const BlockSelect = ({ options, name, color, ...rest }, ref) => {
 
   return (
     <Styled.SelectTooltipWrapper>
-      <Tooltip
-        content={
-          active ? (
-            <TooltipContent label={labels[active]} hotkeys={hotkeys[active]} />
-          ) : (
-            <TooltipContent
-              label={labels[name]}
-              description={descriptions[name]}
-            />
-          )
-        }
-        xOffset="0"
-        yOffset="43px"
-        delay={0}
-      >
-        <Styled.TooltipIcon>
-          <IconComposer icon="circlePlus24" size={16} />
-        </Styled.TooltipIcon>
-      </Tooltip>
       <Styled.SelectWrapper>
         <Styled.Select
           ref={ref}
@@ -78,6 +59,25 @@ const BlockSelect = ({ options, name, color, ...rest }, ref) => {
         </Styled.Select>
         <Styled.SelectIcon icon="disclosureDown24" size={16} />
       </Styled.SelectWrapper>
+      <Tooltip
+        content={
+          active ? (
+            <TooltipContent label={labels[active]} hotkeys={hotkeys[active]} />
+          ) : (
+            <TooltipContent
+              label={labels[name]}
+              description={descriptions[name]}
+            />
+          )
+        }
+        xOffset="0"
+        yOffset="43px"
+        delay={0}
+      >
+        <Styled.TooltipIcon>
+          <IconComposer icon="info16" size={14} />
+        </Styled.TooltipIcon>
+      </Tooltip>
     </Styled.SelectTooltipWrapper>
   );
 };
