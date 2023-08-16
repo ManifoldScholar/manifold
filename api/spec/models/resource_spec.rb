@@ -287,5 +287,25 @@ RSpec.describe Resource, type: :model do
     end
   end
 
+  context "when minimum dimensions are set" do
+    resource = FactoryBot.create(:resource)
+
+    it "is valid when dimensions are integers" do
+      resource.minimum_width = "100"
+      resource.minimum_height = "200"
+      expect(resource).to be_valid
+    end
+    it "is valid when dimensions have allowed units" do
+      resource.minimum_width = "100vw"
+      resource.minimum_height = "200px"
+      expect(resource).to be_valid
+    end
+    it "is invalid when dimensions have any other units" do
+      resource.minimum_width = "100%"
+      resource.minimum_height = "200pt"
+      expect(resource).to be_invalid
+    end
+  end
+
   it_should_behave_like "a collectable"
 end

@@ -78,11 +78,8 @@ class Resource < ApplicationRecord
             uniqueness: { scope: :project,
                           message: "has already been taken. " \
                                    "Verify resource content is unique to project" }
-  validates :minimum_height, :minimum_width,
-            numericality: true,
-            allow_nil: true,
-            allow_blank: true
   validate :validate_kind_fields
+  validate :validate_interactive_dimensions
 
   # Scopes
   scope :by_project, lambda { |project|
@@ -278,4 +275,15 @@ class Resource < ApplicationRecord
     candidates
   end
 
+  def allowed_units?(value)
+    return true if value.blank?
+
+    value.match(/^\d+(px|rem|vh|vw)*$/)
+  end
+
+  def validate_interactive_dimensions
+    errors.add(:minimum_width, "must be an integer or use allowed units") unless allowed_units?(minimum_width)
+
+    errors.add(:minimum_height, "must be an integer or use allowed units") unless allowed_units?(minimum_height)
+  end
 end
