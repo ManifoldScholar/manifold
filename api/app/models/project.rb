@@ -124,6 +124,7 @@ class Project < ApplicationRecord
   before_create :assign_publisher_defaults!
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job
+  before_validation :ensure_restricted_access_notice_content
 
   # Misc
   money_attributes :purchase_price
@@ -414,6 +415,16 @@ class Project < ApplicationRecord
 
   def trigger_creation_event
     Event.trigger(EventType[:project_created], self)
+  end
+
+  def ensure_restricted_access_notice_content
+    return unless restricted_access
+
+    self.restricted_access_heading = "Access to this project is restricted." unless restricted_access_heading?
+
+    return if restricted_access_body?
+
+    self.restricted_access_body = "Only users granted permission may view this project's texts, resources, and other content."
   end
 
   class << self

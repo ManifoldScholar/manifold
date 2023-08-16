@@ -380,6 +380,17 @@ RSpec.describe Project, type: :model do
     end
   end
 
+  context "when access is restricted" do
+    it "ensures notice content is present" do
+      project = FactoryBot.create(:project)
+      project.restricted_access = true
+      project.save
+
+      expect(project.restricted_access_body?).to be true
+      expect(project.restricted_access_heading?).to be true
+    end
+  end
+
   describe "#standalone?" do
     context "when :disabled" do
       it "returns false" do
