@@ -9,6 +9,7 @@ export default function BackendBreadcrumbs({
 }) {
   const { t } = useTranslation();
 
+  /* eslint-disable react/no-array-index-key */
   return (
     <Styled.BackendOuter
       aria-label={t("navigation.breadcrumbs.aria_label")}
@@ -20,7 +21,7 @@ export default function BackendBreadcrumbs({
             ? { to: crumb.to }
             : { as: "span", $noLink: true };
           return (
-            <Fragment key={crumb.label}>
+            <Fragment key={`${i}_${crumb.to}`}>
               <Styled.BackendBreadcrumb
                 {...maybeLinkProps}
                 aria-current={
