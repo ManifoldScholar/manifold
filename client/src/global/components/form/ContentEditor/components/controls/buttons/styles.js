@@ -88,6 +88,11 @@ export const SpanButton = styled(Select)`
       color: var(--drawer-bg-color);
       background-color: var(--color-base-blue45);
     }
+
+    &:hover {
+      background-color: var(--background-color);
+      color: var(--color);
+    }
   }
 `;
 
