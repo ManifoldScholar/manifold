@@ -6,6 +6,6 @@ class AddIframeAllowsToResources < ActiveRecord::Migration[6.1]
 
   def down
     remove_column :resources, :iframe_allows, :string, array: true
-    add_column :resources, :iframe_allow_fullscreen, :boolean
+    add_column :resources, :iframe_allow_fullscreen, :boolean, default: true
   end
 end
