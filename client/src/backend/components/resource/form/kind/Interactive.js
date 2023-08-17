@@ -34,6 +34,19 @@ class ResourceFormKindInteractive extends PureComponent {
           placeholder={this.props.t("resources.new.iframe_url_placeholder")}
           {...this.props}
         />
+        <Form.SwitchArray
+          name="attributes[iframeAllows]"
+          options={[
+            {
+              label: this.props.t("resources.new.iframe_allow_fullscreen"),
+              value: "fullscreen"
+            },
+            {
+              label: this.props.t("resources.new.iframe_allow_camera"),
+              value: "camera"
+            }
+          ]}
+        />
       </>
     );
   }

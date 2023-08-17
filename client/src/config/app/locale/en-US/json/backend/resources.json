@@ -38,6 +38,8 @@
       "width_height_instructions": "This field accepts a number or value with px, rem, vw, or vh units. If a number is entered with no unit specified, display will default to pixels.",
       "iframe_url": "iFrame URL",
       "iframe_url_placeholder": "Enter the iFrame URL",
+      "iframe_allow_camera": "Allow camera?",
+      "iframe_allow_fullscreen": "Allow fullscreen?",
       "link_url": "Link URL",
       "link_url_placeholder": "Enter link URL",
       "video_id": "Video ID",

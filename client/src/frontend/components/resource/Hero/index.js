@@ -47,8 +47,8 @@ export default class ResourceHero extends Component {
       case "interactive":
         output = (
           <Styled.Resource
-            style={{ minHeight: finalMinHeight }}
             className="resource-slide-interactive"
+            $minHeight={finalMinHeight}
           >
             <ResourcePlayer.Iframe
               resource={resource}
