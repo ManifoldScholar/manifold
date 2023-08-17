@@ -6,6 +6,7 @@ class Resource < ApplicationRecord
   ALLOWED_KINDS = %w(image video audio link pdf document file spreadsheet presentation
                      interactive).freeze
   ALLOWED_SUB_KINDS = %w(external_video).freeze
+  IFRAME_ALLOWS_ATTRIBUTES = %w(camera fullscreen).freeze
 
   # PaperTrail
   has_paper_trail meta: {
@@ -80,6 +81,7 @@ class Resource < ApplicationRecord
                                    "Verify resource content is unique to project" }
   validate :validate_kind_fields
   validate :validate_interactive_dimensions
+  validate :validate_iframe_allows
 
   # Scopes
   scope :by_project, lambda { |project|
@@ -285,5 +287,11 @@ class Resource < ApplicationRecord
     errors.add(:minimum_width, "must be an integer or use allowed units") unless allowed_units?(minimum_width)
 
     errors.add(:minimum_height, "must be an integer or use allowed units") unless allowed_units?(minimum_height)
+  end
+
+  def validate_iframe_allows
+    iframe_allows.each do |attr|
+      errors.add(:iframe_allows, "#{attr} is not an allowed iframe attribute") unless IFRAME_ALLOWS_ATTRIBUTES.include?(attr)
+    end
   end
 end

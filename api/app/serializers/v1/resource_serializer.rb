@@ -55,7 +55,7 @@ module V1
       typed_attribute :high_res_file_name, Types::String.optional.meta(read_only: true)
       typed_attribute :high_res_file_size, Types::String.optional.meta(read_only: true)
       typed_attribute :high_res_url, Types::String.optional.meta(read_only: true)
-      typed_attribute :iframe_allow_fullscreen, Types::Bool
+      typed_attribute :iframe_allows, Types::Array.of(Types::String)
       typed_attribute :transcript_content_type, Types::String.optional.meta(read_only: true)
       typed_attribute :transcript_file_name, Types::String.optional.meta(read_only: true)
       typed_attribute :transcript_file_size, Types::String.optional.meta(read_only: true)

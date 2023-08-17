@@ -2318,7 +2318,6 @@ CREATE TABLE public.resources (
     events_count integer DEFAULT 0,
     minimum_width character varying,
     minimum_height character varying,
-    iframe_allow_fullscreen boolean DEFAULT true,
     sort_title public.citext,
     attachment_data jsonb,
     high_res_data jsonb,
@@ -2329,7 +2328,8 @@ CREATE TABLE public.resources (
     variant_thumbnail_data jsonb,
     variant_poster_data jsonb,
     pending_sort_title character varying,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    iframe_allows character varying[] DEFAULT '{fullscreen}'::character varying[] NOT NULL
 );
 
 
@@ -7061,7 +7061,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230410195543'),
 ('20230425172153'),
 ('20230607190750'),
-('20230607191531');
-('20230816233543');
+('20230607191531'),
+('20230816233543'),
+('20230817212021');
 
 
