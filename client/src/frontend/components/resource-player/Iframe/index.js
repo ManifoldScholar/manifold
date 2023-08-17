@@ -19,16 +19,24 @@ export default class ResourcePlayerIframe extends Component {
       minimumWidth
     } = resource.attributes;
 
+    const finalMinHeight = /^\d+$/.test(minimumHeight)
+      ? `${minimumHeight}px`
+      : minimumHeight;
+
+    const finalMinWidth = /^\d+$/.test(minimumWidth)
+      ? `${minimumWidth}px`
+      : minimumWidth;
+
     return (
       <Styled.InteractiveWrapper>
         <Styled.Interactive
           src={externalUrl}
           title={titlePlaintext}
           style={{
-            minHeight: minimumHeight,
-            minWidth: Math.min(minimumWidth, 1135),
             ...styleProps
           }}
+          $minWidth={finalMinWidth}
+          $minHeight={finalMinHeight}
         />
       </Styled.InteractiveWrapper>
     );

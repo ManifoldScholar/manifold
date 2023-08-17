@@ -82,12 +82,32 @@ class ResourceListSlideInteractive extends PureComponent {
   }
 
   containerIsWideEnough() {
-    return this.minimumWidth() <= this.state.containerWidth;
+    const minWidth = this.minimumWidth();
+    if (/^\d+[px]*$/.test(minWidth))
+      return parseInt(minWidth, 10) <= this.state.containerWidth;
+    if (minWidth.includes("rem"))
+      return parseInt(minWidth, 10) * 16 <= this.state.containerWidth;
+    if (minWidth.includes("vw"))
+      return (
+        parseInt(minWidth, 10) * (window.innerWidth * 0.01) <=
+        this.state.containerWidth
+      );
+    return false;
   }
 
   containerIsTallEnough() {
     if (this.props.flexibleHeight) return true;
-    return this.minimumHeight() <= this.state.containerHeight;
+    const minHeight = this.minimumHeight();
+    if (/^\d+[px]*$/.test(minHeight))
+      return parseInt(minHeight, 10) <= this.state.containerHeight;
+    if (minHeight.includes("rem"))
+      return parseInt(minHeight, 10) * 16 <= this.state.containerHeight;
+    if (minHeight.includes("vh"))
+      return (
+        parseInt(minHeight, 10) * (window.innerHeight * 0.01) <=
+        this.state.containerHeight
+      );
+    return false;
   }
 
   minimumHeight() {

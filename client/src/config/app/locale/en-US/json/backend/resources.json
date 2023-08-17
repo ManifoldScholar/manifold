@@ -35,6 +35,7 @@
       "min_width_placeholder": "The minimum display width",
       "min_height": "Minimum Height",
       "min_height_placeholder": "The minimum display height",
+      "width_height_instructions": "This field accepts a number or value with px, rem, vw, or vh units. If a number is entered with no unit specified, display will default to pixels.",
       "iframe_url": "iFrame URL",
       "iframe_url_placeholder": "Enter the iFrame URL",
       "link_url": "Link URL",

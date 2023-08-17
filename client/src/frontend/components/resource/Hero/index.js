@@ -17,6 +17,11 @@ export default class ResourceHero extends Component {
   };
 
   getFigureByType = resource => {
+    const minHeight = resource.attributes.minimumHeight;
+    const finalMinHeight = /^\d+$/.test(minHeight)
+      ? `${minHeight}px`
+      : minHeight;
+
     let output = null;
     switch (resource.attributes.kind) {
       case "image":
@@ -42,7 +47,7 @@ export default class ResourceHero extends Component {
       case "interactive":
         output = (
           <Styled.Resource
-            style={{ minHeight: resource.attributes.minimumHeight }}
+            style={{ minHeight: finalMinHeight }}
             className="resource-slide-interactive"
           >
             <ResourcePlayer.Iframe
