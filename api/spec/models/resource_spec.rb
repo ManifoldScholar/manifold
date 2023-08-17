@@ -307,5 +307,14 @@ RSpec.describe Resource, type: :model do
     end
   end
 
+  it "validates iframe allows attributes" do
+    resource = FactoryBot.create(:resource)
+    resource.iframe_allows = ["fullscreen", "camera"]
+    expect(resource).to be_valid
+
+    resource.iframe_allows = ["fullscreen", "camera", "autoplay"]
+    expect(resource).to be_invalid
+  end
+
   it_should_behave_like "a collectable"
 end

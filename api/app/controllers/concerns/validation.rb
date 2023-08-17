@@ -259,8 +259,8 @@ module Validation
                   :title, :caption, :description, { tag_list: [] }, :kind, :sub_kind,
                   :alt_text, :copyright_status, :credit,
                   :allow_download, :external_type, :external_url, :external_id,
-                  :embed_code, :minimum_width, :minimum_height,
-                  :iframe_allow_fullscreen, metadata(Resource),
+                  :embed_code, :minimum_width, :minimum_height, { iframe_allows: [] },
+                  metadata(Resource),
                   :fingerprint, :pending_slug, :pending_sort_title]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
