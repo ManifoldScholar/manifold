@@ -18,9 +18,11 @@ export const Resource = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  min-height: 350px;
+  min-height: ${({ $minHeight }) =>
+    $minHeight ? `max(${$minHeight}, 350px)` : `350px`};
   max-height: 52vh;
   overflow: hidden;
+  overflow-x: auto;
   color: var(--color-neutral-text-extra-light);
   background-color: var(--color-base-neutral-black);
   margin-block-end: ${fluidScale("42px", "30px")};

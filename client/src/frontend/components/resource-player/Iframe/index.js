@@ -16,7 +16,8 @@ export default class ResourcePlayerIframe extends Component {
       externalUrl,
       titlePlaintext,
       minimumHeight,
-      minimumWidth
+      minimumWidth,
+      iframeAllows
     } = resource.attributes;
 
     const finalMinHeight = /^\d+$/.test(minimumHeight)
@@ -32,6 +33,7 @@ export default class ResourcePlayerIframe extends Component {
         <Styled.Interactive
           src={externalUrl}
           title={titlePlaintext}
+          allow={iframeAllows?.join(" ")}
           style={{
             ...styleProps
           }}
