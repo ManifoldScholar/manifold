@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
-import { respond, buttonUnstyled } from "theme/styles/mixins";
+import {
+  respond,
+  buttonUnstyled,
+  defaultFocusStyle
+} from "theme/styles/mixins";
 import { COLOR_MAP } from "../renderers/styles";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -103,4 +107,9 @@ export const ShowHideButton = styled.button`
   display: flex;
   align-items: center;
   margin-inline-start: auto;
+
+  &:focus-visible,
+  &:focus {
+    ${defaultFocusStyle}
+  }
 `;
