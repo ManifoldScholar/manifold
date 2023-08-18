@@ -6,11 +6,13 @@ function FigureList({ figures }) {
   return (
     <ul className="analytics-block__figure-list">
       {/* eslint-disable react/no-array-index-key */}
-      {figures.map((figure, index) => (
-        <li key={index} className="analytics-block__figure-list-item">
-          <Figure key={index} {...figure} />
-        </li>
-      ))}
+      {figures.map((figure, index) => {
+        return typeof figure?.stat === "number" ? (
+          <li key={index} className="analytics-block__figure-list-item">
+            <Figure key={index} {...figure} />
+          </li>
+        ) : null;
+      })}
       {/* eslint-enable react/no-array-index-key */}
     </ul>
   );
@@ -19,8 +21,7 @@ function FigureList({ figures }) {
 FigureList.propTypes = {
   figures: PropTypes.arrayOf(
     PropTypes.shape({
-      stat: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-        .isRequired,
+      stat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       caption: PropTypes.string.isRequired
     })
   )
