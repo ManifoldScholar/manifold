@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import {
   buttonUnstyled,
   defaultTransitionProps,
-  formLabelPrimary
+  formLabelPrimary,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -29,6 +30,11 @@ export const Button = styled.button`
   &[data-active="true"] {
     color: var(--drawer-bg-color);
     background-color: var(--color-accent-primary);
+  }
+
+  &:focus-visible,
+  &:focus {
+    ${defaultFocusStyle}
   }
 `;
 
@@ -77,6 +83,11 @@ export const Select = styled.select`
       color: var(--color);
     }
   }
+
+  &:focus-visible,
+  &:focus {
+    ${defaultFocusStyle}
+  }
 `;
 
 export const SpanButton = styled(Select)`
@@ -93,6 +104,11 @@ export const SpanButton = styled(Select)`
       background-color: var(--background-color);
       color: var(--color);
     }
+  }
+
+  &:focus-visible,
+  &:focus {
+    ${defaultFocusStyle}
   }
 `;
 
