@@ -7,7 +7,8 @@ import {
   textTruncate,
   respond,
   fluidScale,
-  formInputMessage
+  formInputMessage,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
@@ -125,12 +126,22 @@ export const Button = styled.button`
 
   padding-inline: 3px;
   ${respond(`padding-inline: 6px;`, 30)};
+
+  &:focus,
+  &:focus-visible {
+    ${defaultFocusStyle}
+  }
 `;
 
 export const DragHandle = styled.div`
   ${buttonUnstyled}
   cursor: grab;
   ${setHoverStyle()}
+
+  &:focus,
+  &:focus-visible {
+    ${defaultFocusStyle}
+  }
 `;
 
 export const Error = styled.span`
