@@ -43,13 +43,6 @@ export class TextStylesContainer extends PureComponent {
     };
   }
 
-  get buttonClasses() {
-    return classNames(
-      "buttons-icon-horizontal__button",
-      "button-icon-secondary"
-    );
-  }
-
   componentDidMount() {
     this.props.refresh();
   }
