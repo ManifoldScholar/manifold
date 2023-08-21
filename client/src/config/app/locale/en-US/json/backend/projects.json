@@ -1,15 +1,17 @@
 {
   "projects": {
-    "add_button_label": "Add a new project",
+    "add_button_label": "Add New Project",
     "unauthorized": "You are not allowed to manage projects.",
     "unauthorized_edit": "You are not allowed to edit this project.",
-    "add_button_label": "Add a new project",
+    "add_button_label": "Add New Project",
     "settings": "Project Settings",
     "activity": "Activity",
     "changes": "Project Changes",
     "twitter_queries": "Twitter Queries",
     "twitter_queries_instructions": "Manifold will periodically fetch tweets according to the queries specified below.",
-    "add_twitter_label": "Add a new twitter query",
+    "add_twitter_label": "Add New Twitter Query",
+    "manage_resources": "Manage Resources",
+    "manage_resource_collections": "Manage Resource Collections",
     "forms": {
       "title_label": "Title",
       "title_placeholder": "Enter Project Title",
@@ -120,7 +122,7 @@
     "permissions": {
       "header": "Editor Permissions",
       "instructions": "Use permissions to specify which users may modify this project in the backend, and the extent to which they can modify it.",
-      "button_label": "Grant editor permissions",
+      "button_label": "Grant Editor Permissions",
       "form_header": "Grant Permissions",
       "edit_header": "Edit Permission",
       "user_label": "User",

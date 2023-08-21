@@ -3,7 +3,7 @@
     "unauthorized": "You are not allowed to manage records.",
     "makers": {
       "header": "Manage Makers",
-      "button_label": "Add a new maker",
+      "button_label": "Add New Maker",
       "title": "$t(common.title)",
       "first_name": "First Name",
       "middle_name": "Middle Name",
@@ -15,7 +15,7 @@
     },
     "users": {
       "header": "Manage Users",
-      "button_label": "Add a new user",
+      "button_label": "Add New User",
       "new_header": "New User",
       "email": "Email",
       "role_label": "Role",
@@ -35,7 +35,7 @@
     },
     "pages": {
       "header": "Manage Pages",
-      "button_label": "Create a new page",
+      "button_label": "Add New Page",
       "back_label": "All Pages",
       "title_label": "Page Title",
       "title_placeholder": "Enter Page Title",
@@ -77,7 +77,7 @@
     },
     "features": {
       "header": "Manage Features",
-      "button_label": "Create a new feature",
+      "button_label": "Add New Feature",
       "back_label": "All Features",
       "publish": "Publish feature",
       "unpublish": "Unpublish feature",

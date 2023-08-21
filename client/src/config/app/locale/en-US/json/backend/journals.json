@@ -1,7 +1,7 @@
 {
   "journals": {
     "header": "Manage Journals",
-    "add_button_label": "Add a new journal",
+    "add_button_label": "Add New Journal",
     "unauthorized": "You are not allowed to manage journals.",
     "unauthorized_edit": "You are not allowed to edit this journal.",
     "settings": "Journal Settings",
@@ -48,7 +48,7 @@
   },
   "issues": {
     "header": "Manage Issues",
-    "add_button_label": "Create a new issue",
+    "add_button_label": "Add New Issue",
     "instructions": "Manage the journal's issues from this screen. Each issue references a Manifold project, which is the container for the issue's content.",
     "create_header": "Create Issue",
     "volume_instructions": "Optionally, select a volume.",
@@ -67,7 +67,7 @@
   },
   "volumes": {
     "header": "Manage Volumes",
-    "add_button_label": "Create a new volume",
+    "add_button_label": "Add New Volume",
     "create_header": "Create Volume",
     "edit_header": "Edit Volume",
     "slug_placeholder": "Enter Journal Volume Slug",

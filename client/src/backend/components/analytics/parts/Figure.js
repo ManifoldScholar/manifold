@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Figure({ stat, caption }) {
-  return (
+  return !isNaN(stat) ? (
     <figure>
       <div className="analytics-block__stat">{stat}</div>
       <figcaption className="analytics-block__caption">{caption}</figcaption>
     </figure>
-  );
+  ) : null;
 }
 
 Figure.propTypes = {

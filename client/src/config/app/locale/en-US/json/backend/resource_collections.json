@@ -1,6 +1,6 @@
 {
   "resource_collections": {
-    "add_button_label": "Add a new resource collection",
+    "add_button_label": "Add New Resource Collection",
     "settings": "Resource Collection Settings",
     "unauthorized": "You are not allowed to edit this resource collection.",
     "show_all_projects": "Show all",

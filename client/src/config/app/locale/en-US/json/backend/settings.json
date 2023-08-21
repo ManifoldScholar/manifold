@@ -137,7 +137,7 @@
       "mammoth_style_instructions": "Enter your <0>Mammoth style map</0> to convert your custom Word styles to HTML attributes."
     },
     "subjects": {
-      "add_button_label": "Add a new subject",
+      "add_button_label": "Add New Subject",
       "new_header": "New Subject",
       "name_label": "Name",
       "name_placeholder": "Enter Subject Name",
@@ -178,7 +178,7 @@
     },
     "export_targets": {
       "header": "Manage Export Targets",
-      "button_label": "Add a new export target",
+      "button_label": "Add New Export Target",
       "form_header": "New Export Target",
       "name_label": "name",
       "name_placeholder": "Name",

@@ -133,6 +133,8 @@ class ProjectEventsContainerImplementation extends PureComponent {
             showCount
             title={t("projects.activity")}
             titleIcon="BENews64"
+            titleStyle="bar"
+            titleTag="h2"
             unit={t("glossary.event", {
               count: eventsMeta?.pagination?.totalCount
             })}
