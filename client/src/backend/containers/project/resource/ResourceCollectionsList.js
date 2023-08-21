@@ -88,8 +88,9 @@ export class ProjectResourceCollectionsListContainerImplementation extends PureC
     return (
       <EntitiesList
         entityComponent={ResourceCollectionRow}
-        title={t("glossary.resource_collection_title_case_other")}
-        titleIcon="resourceCollection64"
+        title={t("projects.manage_resource_collections")}
+        titleStyle="bar"
+        titleTag="h2"
         entities={this.props.resourceCollections}
         unit={t("glossary.resource_collection", {
           count: this.props.resourceCollectionsMeta?.pagination?.totalCount

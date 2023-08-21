@@ -99,7 +99,10 @@ export class TextStylesContainer extends PureComponent {
             <p>{t("texts.stylesheets.instructions")}</p>
           </div>
 
-          <div className="entity-list__button-set-flex full-width">
+          <div
+            className="entity-list__button-set-flex full-width"
+            style={{ marginBlockEnd: "16px" }}
+          >
             <Link
               className="entity-list__button button-lozenge-secondary"
               to={lh.link("BackendTextStylesheetNew", this.text.id)}

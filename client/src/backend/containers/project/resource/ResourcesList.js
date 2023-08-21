@@ -80,8 +80,9 @@ class ProjectResourcesListContainerImplementation extends PureComponent {
     return (
       <EntitiesList
         entityComponent={ResourceRow}
-        title={t("glossary.resource_title_case_other")}
-        titleIcon="resourceCollection64"
+        title={t("projects.manage_resources")}
+        titleStyle="bar"
+        titleTag="h2"
         entities={this.props.resources}
         unit={t("glossary.resource", {
           count: resourcesMeta?.pagination?.totalCount

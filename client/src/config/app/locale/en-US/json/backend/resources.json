@@ -1,7 +1,7 @@
 {
   "resources": {
-    "add_button_label": "Add a new resource",
-    "bulk_add_label": "Bulk add resources",
+    "add_button_label": "Add New Resource",
+    "bulk_add_label": "Bulk Add Resources",
     "settings": "Resource Settings",
     "unauthorized": "You are not allowed to edit this resource.",
     "kinds": {
