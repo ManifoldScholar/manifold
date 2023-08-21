@@ -6,19 +6,18 @@ export default function useShowJournalsActive() {
 
   let id;
   let slug;
-  if (pathname.includes("projects")) {
+  if (
+    pathname.includes("projects") &&
+    !pathname.includes("project-collections")
+  ) {
     const idRegex = /[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/g;
     const parts = pathname.split("/");
     id = parts.find(p => p.match(idRegex));
 
     if (!id) {
-      const maybeSlug = parts[2];
-
-      if (maybeSlug) {
-        const isAllProjects =
-          maybeSlug === "all" || maybeSlug.startsWith("all?");
-        slug = !isAllProjects ? maybeSlug : undefined;
-      }
+      slug = parts.find(
+        p => !(p === "all" || p.startsWith("all?")) && p !== "backend"
+      );
     }
   }
 

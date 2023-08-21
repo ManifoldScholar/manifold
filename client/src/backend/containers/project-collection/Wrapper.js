@@ -15,9 +15,7 @@ import lh from "helpers/linkHandler";
 import classnames from "classnames";
 import HeadContent from "global/components/HeadContent";
 import withConfirmation from "hoc/withConfirmation";
-import Breadcrumbs, {
-  RegisterBreadcrumbs
-} from "global/components/atomic/Breadcrumbs";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { fluidScale } from "theme/styles/mixins";
 
 import Authorize from "hoc/Authorize";
@@ -308,7 +306,6 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
         <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
         <section className={wrapperClasses}>
           <div className="backend-panel">
-            <Breadcrumbs backend hideOnDesktop breadcrumbs={breadcrumbs} />
             <div
               className="container"
               style={{ marginBlockStart: fluidScale("30px", "20px") }}
