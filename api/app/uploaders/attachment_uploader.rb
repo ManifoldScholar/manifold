@@ -51,7 +51,7 @@ class AttachmentUploader < Shrine
   end
 
   add_metadata :alt_text do |io, _context|
-    io.respond_to?(:alt_text) ? io.alt_text : nil
+    io.try(:alt_text)
   end
 
   class Attachment

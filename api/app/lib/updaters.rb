@@ -107,9 +107,10 @@ module Updaters
 
   def update_attachment_alt_text(alt_text, key, model)
     attachment = model.send(key)
+
     return unless attachment.present?
 
-    attachment.metadata[:alt_text] = alt_text
+    attachment.add_metadata alt_text: alt_text
 
     attachment
   end
