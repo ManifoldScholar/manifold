@@ -7,7 +7,8 @@ import {
   textTruncate,
   respond,
   blockLabelRound,
-  fluidScale
+  fluidScale,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export const Item = styled.li`
@@ -85,11 +86,21 @@ export const Button = styled.button`
   padding-inline: 3px;
 
   ${respond(`padding-inline: 6px;`, 30)};
+
+  &:focus,
+  &:focus-visible {
+    ${defaultFocusStyle}
+  }
 `;
 
 export const DragHandle = styled(Button)`
   cursor: grab;
   ${setHoverStyle()}
+
+  &:focus,
+  &:focus-visible {
+    ${defaultFocusStyle}
+  }
 `;
 
 export const Tag = styled.div`
