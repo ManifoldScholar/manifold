@@ -120,11 +120,11 @@ class Project < ApplicationRecord
   delegate :issues_nav, to: :journal, prefix: true, allow_nil: true
 
   # Callbacks
+  before_validation :ensure_restricted_access_notice_content!
   before_update :prepare_to_reindex_children, if: :draft_changed?
   before_create :assign_publisher_defaults!
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job
-  before_validation :ensure_restricted_access_notice_content
 
   # Misc
   money_attributes :purchase_price
@@ -136,6 +136,7 @@ class Project < ApplicationRecord
             inclusion: { in: Money::Currency.all.map(&:iso_code) },
             allow_nil: true
   validates :draft, inclusion: { in: [true, false] }
+  validates :restricted_access_heading, :restricted_access_body, presence: { if: :restricted_access }
 
   enum standalone_mode: {
     disabled: 0,
@@ -417,14 +418,13 @@ class Project < ApplicationRecord
     Event.trigger(EventType[:project_created], self)
   end
 
-  def ensure_restricted_access_notice_content
+  def ensure_restricted_access_notice_content!
     return unless restricted_access
 
-    self.restricted_access_heading = "Access to this project is restricted." unless restricted_access_heading?
+    settings = Settings.instance
 
-    return if restricted_access_body?
-
-    self.restricted_access_body = "Only users granted permission may view this project's texts, resources, and other content."
+    self.restricted_access_heading = settings.default_restricted_access_heading unless restricted_access_heading?
+    self.restricted_access_body = settings.default_restricted_access_body unless restricted_access_body?
   end
 
   class << self
