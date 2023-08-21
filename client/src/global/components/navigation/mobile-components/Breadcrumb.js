@@ -14,8 +14,21 @@ class MobileBreadcrumb extends PureComponent {
   };
 
   get segments() {
+    const journalIsActive = this.props.journalIsActive;
     const segments = [];
-    const first = this.match(this.props.links);
+    if (typeof journalIsActive !== "boolean") return segments;
+
+    const firstMatch = this.match(this.props.links);
+    /* eslint-disable no-nested-ternary */
+    const first = journalIsActive
+      ? firstMatch.route === "frontendProjects"
+        ? { label: "titles.journals", route: "frontendJournals" }
+        : firstMatch.route === "backendProjects"
+        ? { label: "titles.journals", route: "backendJournals" }
+        : firstMatch
+      : firstMatch;
+    /* eslint-enable no-nested-ternary */
+
     if (first) {
       segments.push(first);
       const second = this.match(first.children);
