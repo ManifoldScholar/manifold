@@ -7,7 +7,12 @@ function FigureList({ figures }) {
     <ul className="analytics-block__figure-list">
       {/* eslint-disable react/no-array-index-key */}
       {figures.map((figure, index) => {
-        return typeof figure?.stat === "number" ? (
+        /* Allow 0 but filter NaN and undefined. */
+        const canRender =
+          (typeof figure?.stat === "number" && !isNaN(figure?.stat)) ||
+          typeof figure?.stat === "string";
+
+        return canRender ? (
           <li key={index} className="analytics-block__figure-list-item">
             <Figure key={index} {...figure} />
           </li>
