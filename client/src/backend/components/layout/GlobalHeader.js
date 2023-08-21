@@ -23,7 +23,7 @@ export default function LayoutHeader({
   const baseLinks = navigation.backend();
   const projectsLink = baseLinks.find(l => l.route === "backendProjects");
   projectsLink.dropdownContent = <ProjectsNav links={projectsLink.children} />;
-  projectsLink.disclosure = ProjectsButton;
+  projectsLink.toggle = ProjectsButton;
   const links = baseLinks.filter(l => l.route !== "backendProjects");
   links.splice(1, 0, projectsLink);
 

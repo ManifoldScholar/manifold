@@ -126,11 +126,21 @@ export class NavigationMobile extends Component {
 
   activeRoutes() {
     if (!this.props.links) return null;
+    const journalIsActive = this.props.journalIsActive;
+
     const active = [];
     this.props.links.forEach(link => {
       const route = lh.routeFromName(link.route);
       const match = matchPath(this.props.location.pathname, route) !== null;
-      if (match) active.push(link.route);
+      if (match) {
+        if (link.route === "frontendProjects" && journalIsActive) {
+          active.push("frontendJournals");
+        } else if (link.route === "backendProjects" && journalIsActive) {
+          active.push("backendJournals");
+        } else {
+          active.push(link.route);
+        }
+      }
     });
     return active;
   }
@@ -294,6 +304,7 @@ export class NavigationMobile extends Component {
           <MobileBreadcrumb
             links={this.props.links}
             location={this.props.location}
+            journalIsActive={this.props.journalIsActive}
           />
         )}
         <nav

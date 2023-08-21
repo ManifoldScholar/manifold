@@ -114,12 +114,12 @@ export class NavigationStatic extends PureComponent {
   renderStaticItem(link, index) {
     if (link.hideInNav) return null;
     if (link.dropdown) {
-      const Disclosure = link.disclosure;
+      const Toggle = link.toggle;
       return (
         <DisclosureNavigationMenu
           key={`${link.label}-${index}`}
           disclosure={
-            <Disclosure
+            <Toggle
               link={link}
               index={index}
               journalIsActive={this.props.journalIsActive}
