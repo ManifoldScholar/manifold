@@ -52,7 +52,7 @@ export default function PageHeader({
   hideBreadcrumbs,
   ...props
 }) {
-  const { breadcrumbs } = useContext(BreadcrumbsContext);
+  const { breadcrumbs } = useContext(BreadcrumbsContext) ?? {};
 
   const Type = COMPONENT_MAP[type] ?? Base;
 
