@@ -317,6 +317,8 @@ module Attachments
       add_shrine_attachment_configuration! config
 
       include AttachmentUploader::Attachment.new(field)
+
+      delegate :alt_text, to: field, prefix: true, allow_nil: true
     end
 
     private

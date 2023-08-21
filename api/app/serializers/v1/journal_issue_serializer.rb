@@ -14,9 +14,7 @@ module V1
       .meta(read_only: true)
     typed_attribute :avatar_meta, Types::Hash.meta(read_only: true)
     typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :avatar_alt_text, Types::String.optional do |object, _params|
-      object.avatar.metadata["alt_text"] unless object.avatar.nil?
-    end
+    typed_attribute :avatar_alt_text, Types::String.optional
     typed_attribute :recently_updated, Types::Bool.meta(read_only: true), &:recently_updated?
     typed_attribute :finished, Types::Bool.meta(read_only: true)
     typed_attribute :draft, Types::Bool.meta(read_only: true)
@@ -24,13 +22,9 @@ module V1
     typed_attribute :pending_sort_title, Types::String.optional
 
     typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :hero_alt_text, Types::String.optional do |object, _params|
-      object.project.hero.metadata["alt_text"] unless object.project.hero.nil?
-    end
+    typed_attribute :hero_alt_text, Types::String.optional
     typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :cover_alt_text, Types::String.optional do |object, _params|
-      object.project.cover.metadata["alt_text"] unless object.project.cover.nil?
-    end
+    typed_attribute :cover_alt_text, Types::String.optional
     typed_attribute :project_slug, Types::String.meta(read_only: true)
     typed_attribute :publication_date, Types::DateTime.optional
     typed_attribute :creator_names, Types::String.meta(read_only: true)
