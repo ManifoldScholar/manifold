@@ -99,13 +99,13 @@ export class TextStylesContainer extends PureComponent {
             <p>{t("texts.stylesheets.instructions")}</p>
           </div>
 
-          <div className="buttons-icon-horizontal maintain">
+          <div className="entity-list__button-set-flex full-width">
             <Link
-              className={this.buttonClasses}
+              className="entity-list__button button-lozenge-secondary"
               to={lh.link("BackendTextStylesheetNew", this.text.id)}
             >
               <IconComposer
-                icon="plus16"
+                icon="circlePlus32"
                 size={18}
                 className={classNames(
                   "button-icon-secondary__icon",
