@@ -59,8 +59,11 @@ class JournalIssue < ApplicationRecord
   delegate :avatar_color, to: :project
   delegate :avatar_meta, to: :project
   delegate :avatar_styles, to: :project
+  delegate :avatar_alt_text, to: :project
   delegate :cover_styles, to: :project
+  delegate :cover_alt_text, to: :project
   delegate :hero_styles, to: :project
+  delegate :hero_alt_text, to: :project
   delegate :publication_date, to: :project
   delegate :description, to: :project
   delegate :tag_list, to: :project

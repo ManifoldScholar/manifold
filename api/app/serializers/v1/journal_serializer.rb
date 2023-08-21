@@ -19,9 +19,7 @@ module V1
     typed_attribute :draft, Types::Bool
     typed_attribute :show_on_homepage, Types::Bool
     typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :avatar_alt_text, Types::String.optional do |object, _params|
-      object.avatar.metadata["alt_text"] unless object.avatar.nil?
-    end
+    typed_attribute :avatar_alt_text, Types::String.optional
     typed_attribute :tag_list, Types::Array.of(Types::String)
     typed_attribute :journal_issues_count, Types::Integer
     typed_attribute :journal_volumes_count, Types::Integer
@@ -34,15 +32,11 @@ module V1
     typed_attribute :hero_background_color, Types::String.optional
     typed_attribute :journal_issues_without_volume_count, Types::Integer.meta(read_only: true)
     typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :hero_alt_text, Types::String.optional do |object, _params|
-      object.hero.metadata["alt_text"] unless object.hero.nil?
-    end
+    typed_attribute :hero_alt_text, Types::String.optional
     typed_attribute :description, Types::String.optional
     typed_attribute :description_formatted, Types::String.meta(read_only: true)
     typed_attribute :logo_styles, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :logo_alt_text, Types::String.optional do |object, _params|
-      object.logo.metadata["alt_text"] unless object.logo.nil?
-    end
+    typed_attribute :logo_alt_text, Types::String.optional
     typed_attribute :entitlement_subject_url, Types::String.meta(read_only: true)
 
     typed_has_many :recent_journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: "journalVolume"
