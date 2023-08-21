@@ -382,12 +382,12 @@ RSpec.describe Project, type: :model do
 
   context "when access is restricted" do
     it "ensures notice content is present" do
-      project = FactoryBot.create(:project)
-      project.restricted_access = true
-      project.save
+      project = FactoryBot.create(:project, restricted_access: false)
 
-      expect(project.restricted_access_body?).to be true
-      expect(project.restricted_access_heading?).to be true
+      expect do
+        project.update! restricted_access: true
+      end.to change(project, :restricted_access_body?).from(false).to(true)
+      .and change(project, :restricted_access_heading?).from(false).to(true)
     end
   end
 

@@ -8,6 +8,9 @@ class Settings < ApplicationRecord
 
   SECTIONS = [:general, :integrations, :ingestion, :secrets, :email, :theme].freeze
 
+  DEFAULT_RESTRICTED_ACCESS_HEADING = "Access to this project is restricted.".freeze
+  DEFAULT_RESTRICTED_ACCESS_BODY = "Only users granted permission may view this project's texts, resources, and other content.".freeze
+
   # rubocop:disable Layout/LineLength
   DEFAULTS = {
     general: {
@@ -17,8 +20,8 @@ class Settings < ApplicationRecord
       social_share_message: "Shared from Manifold Scholarship",
       library_disabled: false,
       restricted_access: false,
-      restricted_access_heading: "Access to this project is restricted.",
-      restricted_access_body: "Only users granted permission may view this project's texts, resources, and other content.",
+      restricted_access_heading: DEFAULT_RESTRICTED_ACCESS_HEADING,
+      restricted_access_body: DEFAULT_RESTRICTED_ACCESS_BODY,
       disable_engagement: false,
       disable_reading_groups: false,
       disable_internal_analytics: false
@@ -132,6 +135,16 @@ Manifold stores basic information about each reading group, the content that has
         section[key] = value if section[key].blank?
       end
     end
+  end
+
+  # @return [String]
+  def default_restricted_access_heading
+    general.fetch(:restricted_access_heading, DEFAULT_RESTRICTED_ACCESS_HEADING)
+  end
+
+  # @return [String]
+  def default_restricted_access_body
+    general.fetch(:restricted_access_body, DEFAULT_RESTRICTED_ACCESS_BODY)
   end
 
   class << self
