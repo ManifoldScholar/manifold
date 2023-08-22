@@ -17,11 +17,6 @@ module Packaging
           external_id external_type external_url
         ].freeze
 
-        # Attributes that should be copied to {#root}/text
-        #
-        # @see #build_entries
-        TEXT_ENTRIES = %i[title description caption].freeze
-
         param :resource, Types.Instance(::Resource)
 
         delegate :slug, to: :resource
@@ -65,20 +60,14 @@ module Packaging
           Pathname.new(File.join("resources", slug))
         end
 
-        # rubocop:disable Metrics/AbcSize
         def build_entries(builder)
           ATTRIBUTE_ENTRIES.each do |attr|
             builder.simple! attr, root.join(attr.to_s), resource[attr]
           end
 
-          TEXT_ENTRIES.each do |attr|
-            builder.simple! attr, root.join("txt", attr.to_s), resource[attr]
-          end
-
-          builder.json! :metadata, root.join("metadata.json"), resource.metadata
+          builder.json! :metadata, root.join("metadata.json"), resource.packaging_metadata
           builder.json! :tags, root.join("tags.json"), resource.tag_list
         end
-        # rubocop:enable Metrics/AbcSize
 
         private
 

@@ -247,6 +247,16 @@ class Resource < ApplicationRecord
     external_video? && external_type == "vimeo"
   end
 
+  # @return [{ Symbol => Object }]
+  def packaging_metadata
+    metadata.with_indifferent_access
+      .merge(id: id)
+      .merge(slug: slug)
+      .merge(title: title_plaintext)
+      .merge(description: description_plaintext)
+      .merge(caption: caption_plaintext)
+  end
+
   private
 
   def parse_and_set_external_id!
