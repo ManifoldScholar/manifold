@@ -55,4 +55,8 @@ class TextTitle < ApplicationRecord
     value
   end
 
+  def packaging_metadata
+    slice(:title, :kind).compact
+  end
+
 end
