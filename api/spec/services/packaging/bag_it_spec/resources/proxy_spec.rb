@@ -13,7 +13,7 @@ RSpec.describe Packaging::BagItSpec::Resources::Proxy do
   # tags.json
   let(:arbitrary_entry_count) { 2 }
 
-  let(:proxy_entry_count) { described_class::TEXT_ENTRIES.length + described_class::ATTRIBUTE_ENTRIES.length + arbitrary_entry_count }
+  let(:proxy_entry_count) { described_class::ATTRIBUTE_ENTRIES.length + arbitrary_entry_count }
   let(:expected_entry_count) { proxy_entry_count + (attachment_proxy_count * attachment_entry_count) }
 
   it "has the expected number of attachment proxies" do
