@@ -13,6 +13,7 @@ module Packaging
         store :id
         store :reader_url, compose(Projects::GetReaderURL, inputs)
         store :title, :title_plaintext
+        store :slug
         store :description
         store :publication_date
         store :metadata
