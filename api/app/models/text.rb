@@ -424,9 +424,16 @@ class Text < ApplicationRecord
     update_attribute :exports_as_epub_v3, !exports_as_epub_v3
   end
 
+  def titles_packaging_metadata
+    titles.map { |t| t.packaging_metadata }
+  end
+
   # @return [{ Symbol => Object }]
   def packaging_metadata
     metadata.with_indifferent_access
+      .merge(id: id)
+      .merge(slug: slug)
+      .merge(titles: titles_packaging_metadata.compact)
       .merge(slice(:publication_date))
       .merge(collaborators: collaborator_packaging_metadata)
   end
