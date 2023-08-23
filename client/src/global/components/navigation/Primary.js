@@ -19,11 +19,12 @@ export default function NavigationPrimary(props) {
   const resourceCollections = useFromStore(
     `entityStore.entities.resourceCollections`
   );
+  const pages = useFromStore(`entityStore.entities.pages`);
 
   const to = getDestinationPath({
     mode: props.mode,
     pathname,
-    entities: { resources, resourceCollections }
+    entities: { resources, resourceCollections, pages }
   });
 
   const adminModeButton =
