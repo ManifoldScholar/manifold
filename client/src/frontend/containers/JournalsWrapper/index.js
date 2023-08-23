@@ -1,24 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { renderRoutes } from "react-router-config";
-import { RedirectToFirstMatch } from "helpers/router";
-import lh from "helpers/linkHandler";
+import { useRedirectToFirstMatch } from "hooks";
 
 export default function JournalsWrapper({ route }) {
-  return (
-    <>
-      <RedirectToFirstMatch
-        from={lh.link("frontendJournals")}
-        candidates={[
-          {
-            label: "All Journals",
-            route: "frontendJournalsList"
-          }
-        ]}
-      />
-      {renderRoutes(route.routes)}
-    </>
-  );
+  useRedirectToFirstMatch({
+    route: "frontendJournals",
+    candidates: [
+      {
+        label: "All Journals",
+        route: "frontendJournalsList"
+      }
+    ]
+  });
+
+  return renderRoutes(route.routes);
 }
 
 JournalsWrapper.propTypes = {

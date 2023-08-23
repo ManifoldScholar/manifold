@@ -15,9 +15,14 @@ export default function useShowJournalsActive() {
     id = parts.find(p => p.match(idRegex));
 
     if (!id) {
-      slug = parts.find(
-        p => !(p === "all" || p.startsWith("all?")) && p !== "backend"
-      );
+      slug = parts
+        .filter(Boolean)
+        .find(
+          p =>
+            !(p === "all" || p.startsWith("all?")) &&
+            p !== "backend" &&
+            p !== "projects"
+        );
     }
   }
 

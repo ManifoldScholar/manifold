@@ -1,93 +1,63 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Static from "global/components/navigation/Static";
 import Mobile from "global/components/navigation/Mobile";
-import { Link, withRouter } from "react-router-dom";
-import lh from "helpers/linkHandler";
+import { Link, useLocation } from "react-router-dom";
+import { getAdminModeLabel, getDestinationPath } from "./helpers";
+import { useFromStore } from "hooks";
 
-export class NavigationPrimary extends PureComponent {
-  static displayName = "Navigation.Primary";
+export default function NavigationPrimary(props) {
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
 
-  static propTypes = {
-    links: PropTypes.array,
-    location: PropTypes.object,
-    authentication: PropTypes.object,
-    visibility: PropTypes.object,
-    commonActions: PropTypes.object.isRequired,
-    mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
-    exact: PropTypes.bool,
-    desktopStyle: PropTypes.object,
-    mobileStyle: PropTypes.object,
-    t: PropTypes.func
-  };
+  const currentUser = props.authentication.currentUser;
 
-  static defaultProps = {
-    exact: false
-  };
+  const label = getAdminModeLabel({ currentUser, mode: props.mode, t });
 
-  backendButtonLabel(currentUser, mode) {
-    if (!currentUser) return null;
-    const t = this.props.t;
+  const resources = useFromStore(`entityStore.entities.resources`);
+  const resourceCollections = useFromStore(
+    `entityStore.entities.resourceCollections`
+  );
 
-    if (mode === "backend") {
-      switch (currentUser.attributes.kind) {
-        case "project_editor":
-        case "project_resource_editor":
-          return t("navigation.backend.exit_editor");
-        case "project_author":
-          return t("navigation.backend.exit_author");
-        default:
-          return t("navigation.backend.exit_admin");
-      }
-    } else {
-      switch (currentUser.attributes.kind) {
-        case "admin":
-        case "editor":
-        case "project_creator":
-        case "marketeer":
-          return t("navigation.backend.enter_admin");
-        case "project_editor":
-        case "project_resource_editor":
-          return t("navigation.backend.enter_editor");
-        case "project_author": // For now authors will not have access to the backend
-        default:
-          return null;
-      }
-    }
-  }
+  const to = getDestinationPath({
+    mode: props.mode,
+    pathname,
+    entities: { resources, resourceCollections }
+  });
 
-  render() {
-    const currentUser = this.props.authentication.currentUser;
+  const adminModeButton =
+    !!label && currentUser ? (
+      <Link className="mode-button" to={to}>
+        {label}
+      </Link>
+    ) : null;
 
-    const linkTo = this.props.mode === "backend" ? "frontend" : "backend";
-    const backendButtonLabel = this.backendButtonLabel(
-      currentUser,
-      this.props.mode
-    );
-    const backendButton =
-      backendButtonLabel && currentUser ? (
-        <Link className="mode-button" to={lh.link(linkTo)}>
-          {this.backendButtonLabel(currentUser, this.props.mode)}
-        </Link>
-      ) : null;
-
-    return (
-      <>
-        <Static
-          backendButton={backendButton}
-          {...this.props}
-          style={this.props.desktopStyle}
-        />
-        <Mobile
-          backendButton={backendButton}
-          {...this.props}
-          style={this.props.mobileStyle}
-          mode={this.props.mode}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <Static
+        backendButton={adminModeButton}
+        {...props}
+        style={props.desktopStyle}
+      />
+      <Mobile
+        backendButton={adminModeButton}
+        {...props}
+        style={props.mobileStyle}
+      />
+    </>
+  );
 }
 
-export default withTranslation()(withRouter(NavigationPrimary));
+NavigationPrimary.displayName = "Navigation.Primary";
+
+NavigationPrimary.propTypes = {
+  links: PropTypes.array,
+  authentication: PropTypes.object,
+  visibility: PropTypes.object,
+  commonActions: PropTypes.object.isRequired,
+  mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
+  exact: PropTypes.bool,
+  desktopStyle: PropTypes.object,
+  mobileStyle: PropTypes.object
+};

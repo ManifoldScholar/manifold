@@ -1,28 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { renderRoutes } from "react-router-config";
-import { RedirectToFirstMatch } from "helpers/router";
-import lh from "helpers/linkHandler";
+import { useRedirectToFirstMatch } from "hooks";
 
-export default class ProjectsWrapper extends Component {
-  static propTypes = {
-    route: PropTypes.object
-  };
+export default function ProjectsWrapper({ route }) {
+  useRedirectToFirstMatch({
+    route: "frontendProjects",
+    candidates: [
+      {
+        label: "All Projects",
+        route: "frontendProjectsAll"
+      }
+    ]
+  });
 
-  render() {
-    return (
-      <>
-        <RedirectToFirstMatch
-          from={lh.link("frontendProjects")}
-          candidates={[
-            {
-              label: "All Projects",
-              route: "frontendProjectsAll"
-            }
-          ]}
-        />
-        {renderRoutes(this.props.route.routes)}
-      </>
-    );
-  }
+  return renderRoutes(route.routes);
 }

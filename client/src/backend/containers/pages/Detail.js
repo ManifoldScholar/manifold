@@ -188,7 +188,8 @@ class PageDetailContainer extends PureComponent {
     return (
       <div>
         <RedirectToFirstMatch
-          from={lh.link("backendRecordsPage", this.id(this.props))}
+          route={"backendRecordsPage"}
+          id={this.id(this.props)}
           candidates={secondaryLinks}
         />
         {this.renderExistingHeader(page)}

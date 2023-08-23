@@ -8,8 +8,8 @@ import {
   useParams,
   useRouteMatch
 } from "react-router-dom";
-import { useFetch } from "hooks";
-import { RedirectToFirstMatch, childRoutes } from "helpers/router";
+import { useFetch, useRedirectToFirstMatch } from "hooks";
+import { childRoutes } from "helpers/router";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
@@ -22,6 +22,16 @@ export default function JournalWrapper({ route }) {
   const location = useLocation();
   const isHomePage = location.pathname === path;
 
+  useRedirectToFirstMatch({
+    route: "frontendJournal",
+    candidates: [
+      {
+        label: "All Journals",
+        route: "frontendJournalsAll"
+      }
+    ]
+  });
+
   if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
 
   if (!journal) return null;
@@ -33,15 +43,6 @@ export default function JournalWrapper({ route }) {
         debugLabel="JournalWrapper"
         project={journal}
         isProjectHomePage={isHomePage}
-      />
-      <RedirectToFirstMatch
-        from={lh.link("frontendJournal")}
-        candidates={[
-          {
-            label: "All Journals",
-            route: "frontendJournalsAll"
-          }
-        ]}
       />
       {childRoutes(route, {
         childProps: {
