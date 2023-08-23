@@ -155,7 +155,9 @@ export class ProjectWrapperContainer extends PureComponent {
           />
         )}
         <RedirectToFirstMatch
-          from={lh.link("backendProject", project.id)}
+          route={"backendProject"}
+          id={project.id}
+          slug={project.attributes.slug}
           candidates={secondaryLinks}
           state={this.props.location.state}
         />

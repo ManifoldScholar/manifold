@@ -231,7 +231,9 @@ export class TextWrapperContainer extends PureComponent {
             />
           )}
           <RedirectToFirstMatch
-            from={lh.link("backendText", text.id)}
+            route="backendText"
+            id={text.id}
+            slug={text.attributes.slug}
             candidates={secondaryLinks}
           />
           <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />

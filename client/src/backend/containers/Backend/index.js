@@ -83,7 +83,7 @@ export class BackendContainer extends PureComponent {
         <BodyClass className={"backend bg-neutral90"}>
           <>
             <RedirectToFirstMatch
-              from={lh.link("backend")}
+              route={"backend"}
               candidates={[
                 {
                   label: "Dashboard",

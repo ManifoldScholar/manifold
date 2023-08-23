@@ -28,3 +28,5 @@ export { default as useBlurOnLocationChange } from "./useBlurOnLocationChange";
 export { default as useConfirmation } from "./useConfirmation";
 
 export { default as useShowJournalsActive } from "./useShowJournalsActive";
+
+export { default as useRedirectToFirstMatch } from "./useRedirectToFirstMatch";

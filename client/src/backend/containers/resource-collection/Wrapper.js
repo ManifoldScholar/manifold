@@ -191,7 +191,9 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
             />
           )}
           <RedirectToFirstMatch
-            from={lh.link("backendResourceCollection", resourceCollection.id)}
+            route="backendResourceCollection"
+            id={resourceCollection.id}
+            slug={resourceCollection.attributes.slug}
             candidates={secondaryLinks}
           />
           <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />

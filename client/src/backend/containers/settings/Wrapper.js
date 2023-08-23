@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import Layout from "backend/components/layout";
-import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
 import HeadContent from "global/components/HeadContent";
@@ -40,7 +39,7 @@ export class SettingsWrapperContainer extends PureComponent {
           appendDefaultTitle
         />
         <RedirectToFirstMatch
-          from={lh.link("backendSettings")}
+          route={"backendSettings"}
           candidates={secondaryLinks}
         />
 

@@ -2,11 +2,16 @@ import React, { useCallback } from "react";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import { journalsAPI } from "api";
-import { childRoutes, RedirectToFirstMatch } from "helpers/router";
+import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
-import { useFetch, useApiCallback, useNotification } from "hooks";
+import {
+  useFetch,
+  useApiCallback,
+  useNotification,
+  useRedirectToFirstMatch
+} from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -67,6 +72,13 @@ function JournalWrapper({ match, route, history, confirm, location }) {
     });
   };
 
+  useRedirectToFirstMatch({
+    route: "backendJournal",
+    id: journal?.id,
+    slug: journal?.attributes.slug,
+    candidates: journal ? navigation.journal(journal) : []
+  });
+
   if (!journal) return null;
 
   const subpage = location.pathname.split("/")[4]?.replace("-", "_");
@@ -99,10 +111,6 @@ function JournalWrapper({ match, route, history, confirm, location }) {
             appendDefaultTitle
           />
         )}
-        <RedirectToFirstMatch
-          from={lh.link("backendJournal", journal.id)}
-          candidates={navigation.journal(journal)}
-        />
         <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
         <PageHeader
           type="journal"

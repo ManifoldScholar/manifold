@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
-import lh from "helpers/linkHandler";
 import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import navigation from "helpers/router/navigation";
 import HeadContent from "global/components/HeadContent";
@@ -38,7 +37,7 @@ class RecordsContainer extends PureComponent {
           />
         )}
         <RedirectToFirstMatch
-          from={lh.link("backendRecords")}
+          route={"backendRecords"}
           candidates={secondaryLinks}
         />
         <div>
