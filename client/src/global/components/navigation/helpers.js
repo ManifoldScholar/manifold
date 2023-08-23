@@ -33,7 +33,8 @@ const FE_ROUTE_REGEXES = {
   journal: /^\/journals\/([A-Za-z0-9-]+)$/,
   resource: /^\/projects\/([A-Za-z0-9-]+)\/resource\/([A-Za-z0-9-]+)$/,
   resourceCollection: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection\/([A-Za-z0-9-]+)$/,
-  projectCollection: /^\/projects\/project-collection\/([A-Za-z0-9?=-]+)$/
+  projectCollection: /^\/projects\/project-collection\/([A-Za-z0-9?=-]+)$/,
+  page: /^\/page\/([A-Za-z0-9-]+)$/
 };
 
 const idPattern =
@@ -49,7 +50,8 @@ const BE_ROUTE_REGEXES = {
   ),
   projectCollection: new RegExp(
     `^/backend/projects/project-collections/(${idPattern}|[A-Za-z0-9-]+)`
-  )
+  ),
+  page: /^\/backend\/records\/pages\/([0-9]+)\//
 };
 
 const getAdminPath = pathname => {
@@ -67,6 +69,10 @@ const getAdminPath = pathname => {
   if (FE_ROUTE_REGEXES.resourceCollection.test(pathname)) {
     const slug = pathname.split("/").pop();
     return `/backend/projects/resource-collection/${slug}`;
+  }
+  if (FE_ROUTE_REGEXES.page.test(pathname)) {
+    const slug = pathname.split("/").pop();
+    return `/backend/records/pages/${slug}`;
   }
 
   return `/backend/dashboard`;
@@ -90,6 +96,11 @@ const getFrontendPath = (pathname, entities) => {
     const projectId =
       entities.resourceCollections[id].relationships?.project?.data?.id;
     return `/projects/${projectId}/resource-collection/${id}`;
+  }
+  if (BE_ROUTE_REGEXES.page.test(pathname)) {
+    const pageId = pathname.split("/").find(part => !isNaN(parseInt(part, 10)));
+    const slug = entities.pages[pageId].attributes?.slug;
+    return `/page/${slug}`;
   }
 
   return "/";
