@@ -17,9 +17,12 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
       const displayName = data.name;
       const attachment =
         typeof data.attachment === "object" ? data.attachment : null;
+      const altText = data.attributes.attachmentData.metadata.altText;
+      const finalAttachment =
+        typeof altText === "string" ? { ...attachment, altText } : attachment;
       const attributes = {
         ...(displayName && { displayName }),
-        ...(attachment && { attachment })
+        ...(finalAttachment && { attachment: finalAttachment })
       };
 
       return asset
@@ -113,6 +116,9 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
               : undefined
           }
           required={!asset}
+          altTextName={"attributes[attachmentData][metadata][altText]"}
+          altTextLabel={t("texts.assets.alt_label")}
+          accepts="any"
         />
       </Form.FieldGroup>
       <Form.DrawerButtons

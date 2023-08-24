@@ -99,8 +99,8 @@ export default class FormUpload extends Component {
 
     const showAltTextInput =
       this.props.altTextName &&
-      this.props.accepts.accepts.includes("image") &&
-      this.props.value;
+      this.props.value &&
+      "gif jpeg jpg png svg".includes(this.props.value.split(".").pop());
 
     return (
       <>
