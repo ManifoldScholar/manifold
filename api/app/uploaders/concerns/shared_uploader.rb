@@ -11,9 +11,11 @@ module SharedUploader
   }.freeze
 
   BETTER_MARCEL = ->(io, analyzers) do
-    return Marcel::MimeType.for(io, name: io.path, extension: File.extname(io)) if io.respond_to? :path
-
-    analyzers[:marcel].call(io)
+    if io.respond_to? :path
+      Marcel::MimeType.for(io, name: io.path, extension: File.extname(io))
+    else
+      analyzers[:marcel].call(io)
+    end
   end
 
   included do
@@ -28,6 +30,10 @@ module SharedUploader
 
     add_metadata :sha256 do |io, _context|
       calculate_signature(io, :sha256, format: :hex)
+    end
+
+    add_metadata :alt_text do |io, _context|
+      io.try(:alt_text)
     end
 
     def generate_location(io, **options)
