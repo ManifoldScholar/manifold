@@ -146,7 +146,8 @@
       "url_label": "Asset URL",
       "upload_label": "Upload Asset File",
       "upload_instructions": "See documentation for supported file types.",
-      "copy_button_label": "Copy URL"
+      "copy_button_label": "Copy URL",
+      "alt_label": "Alt Text"
     }
   }
 }
