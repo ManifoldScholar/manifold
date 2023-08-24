@@ -14,6 +14,7 @@ const fileNameToResourceKind = fileName => {
     case "jpeg":
     case "jpg":
     case "png":
+    case "svg":
       return "image";
     case "pdf":
       return "pdf";

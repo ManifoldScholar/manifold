@@ -47,7 +47,7 @@ class IngestionSource < ApplicationRecord
     when "name"
       order(display_name: :asc)
     else
-      order(created_at: :asc)
+      order(updated_at: :desc)
     end
   end
 
