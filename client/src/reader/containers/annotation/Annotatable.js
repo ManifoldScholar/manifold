@@ -438,7 +438,7 @@ export class Annotatable extends Component {
   };
 
   getAnnotationUrl = () => {
-    if (!this.state.activeEvent.annotationIds?.length) return undefined;
+    if (!this.state.activeEvent?.annotationIds?.length) return undefined;
 
     const annotationId = this.state.activeEvent.annotationIds[0];
     const url = lh.link(
