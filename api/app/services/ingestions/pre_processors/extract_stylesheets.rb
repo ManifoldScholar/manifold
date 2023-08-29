@@ -25,7 +25,7 @@ module Ingestions
         return if stylesheet_exists?(content)
 
         position = stylesheets.count + 1
-        stylesheet_name = name(node, position)
+        stylesheet_name = name(node, content)
 
         {}.with_indifferent_access.tap do |hash|
           hash[:name] = stylesheet_name
@@ -82,8 +82,8 @@ module Ingestions
         Digest::MD5.hexdigest(raw_styles(node))
       end
 
-      def name(node, position)
-        external?(node) ? "stylesheet-#{position}" : "head-#{position}"
+      def name(node, content)
+        external?(node) ? "stylesheet-#{content}" : "head-#{content}"
       end
 
       def mapped_style_nodes
