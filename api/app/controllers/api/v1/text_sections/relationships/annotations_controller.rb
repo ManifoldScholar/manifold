@@ -5,11 +5,11 @@ module API
         # Annotations controller
         class AnnotationsController < ApplicationController
           before_action :set_annotation, only: [:update, :destroy]
-          before_action :set_text_section, only: [:create, :index]
+          before_action :set_text_section, only: [:create]
 
           config.pagination_enforced = true
 
-          resourceful! Annotation, authorize_options: { except: [:index] } do
+          resourceful! Annotation do
             scope = @text_section.nil? ? Annotation.all : @text_section.annotations
             scope = scope.with_read_ability(current_user, exclude_public_annotations?)
             scope = scope.includes(:reading_group, :reading_group_membership, :text, :creator)
@@ -21,16 +21,6 @@ module API
 
           record_analytics_for! Annotation do
             record_analytics_for_action :create, event: :create_resource
-          end
-
-          def index
-            @annotations = load_annotations
-            location = api_v1_text_section_relationships_annotations_url(@text_section.id)
-            render_multiple_resources(
-              @annotations,
-              include: [:creator],
-              location: location
-            )
           end
 
           def create

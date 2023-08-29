@@ -9,6 +9,7 @@ module V1
     typed_attribute :social_image, Types::Serializer::URL.optional
     typed_attribute :source_identifier, Types::String.optional
     typed_attribute :kind, Types::String.meta(example: "section")
+    typed_attribute :slug, Types::String
 
     typed_belongs_to :text
     typed_has_many :stylesheets
