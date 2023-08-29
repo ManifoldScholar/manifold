@@ -27,8 +27,12 @@ function SectionListItem(props) {
   const { t } = useTranslation();
 
   const editUrl = lh.link("backendTextSectionEdit", textId, section.id);
-
   const ingestUrl = lh.link("backendTextSectionIngestEdit", textId, section.id);
+  const propertiesUrl = lh.link(
+    "backendTextSectionProperties",
+    textId,
+    section.id
+  );
 
   const updateText = useApiCallback(textsAPI.update);
 
@@ -86,6 +90,13 @@ function SectionListItem(props) {
               <Utility.IconComposer size={24} icon="annotate24" />
             </Styled.Button>
           </Tooltip>
+          <Styled.Button
+            as={Link}
+            to={propertiesUrl}
+            aria-label={t("common.settings")}
+          >
+            <Utility.IconComposer size={24} icon="settings32" />
+          </Styled.Button>
           <Tooltip
             content={"Reginest section from source document."}
             xOffset="-100px"

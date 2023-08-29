@@ -288,6 +288,16 @@ const routes = {
                   helper: (t, i) =>
                     `/backend/projects/text/${t}/sections/ingestion/${i}/ingest`,
                   modal: false
+                },
+                {
+                  name: "backendTextSectionProperties",
+                  exact: true,
+                  component: "TextSectionProperties",
+                  path:
+                    "/backend/projects/text/:id/sections/:sectionId/properties",
+                  helper: (t, s) =>
+                    `/backend/projects/text/${t}/sections/${s}/properties`,
+                  modal: false
                 }
               ]
             },

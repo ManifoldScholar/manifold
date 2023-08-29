@@ -302,7 +302,8 @@ export class Annotatable extends Component {
       annotationState: "locked",
       drawerProps: {
         annotationIds: ids,
-        sectionId: this.props.sectionId
+        sectionId: this.props.sectionId,
+        textId: this.props.textId
       }
     });
     this.openDrawer("viewAnnotations", event, false);

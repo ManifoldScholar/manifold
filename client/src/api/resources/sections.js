@@ -1,7 +1,7 @@
 export default {
-  show(id) {
+  show(id, textId) {
     return {
-      endpoint: `/api/v1/text_sections/${id}`,
+      endpoint: `/api/v1/texts/${textId}/relationships/text_sections/${id}`,
       method: "GET",
       options: {}
     };

@@ -13,7 +13,8 @@ export default class ViewAnnotations extends PureComponent {
   static propTypes = {
     annotationIds: PropTypes.array.isRequired,
     sectionId: PropTypes.string.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    textId: PropTypes.string.isRequired
   };
 
   render() {
@@ -22,6 +23,7 @@ export default class ViewAnnotations extends PureComponent {
       <List
         closeDrawer={actions.closeDrawer}
         sectionId={this.props.sectionId}
+        textId={this.props.textId}
         annotationIds={this.props.annotationIds}
         createHandler={actions.createAnnotation}
         loginHandler={actions.showLogin}

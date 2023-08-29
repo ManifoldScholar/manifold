@@ -60,6 +60,7 @@ export default {
   TextSectionIngest: Text.Section.Ingest,
   TextSectionIngestEdit: Text.Section.Ingest,
   TextSectionIngestIngest: Ingestion.Ingest,
+  TextSectionProperties: Text.Section.Properties,
   TextTOC: Text.TableOfContents,
   TextTOCEntryNew: Text.TOCEntry,
   TextTOCEntryEdit: Text.TOCEntry,

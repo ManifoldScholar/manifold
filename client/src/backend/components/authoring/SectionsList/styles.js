@@ -87,7 +87,6 @@ export const Button = styled.button`
 
   ${respond(`padding-inline: 6px;`, 30)};
 
-  &:focus,
   &:focus-visible {
     ${defaultFocusStyle}
   }
@@ -97,7 +96,6 @@ export const DragHandle = styled(Button)`
   cursor: grab;
   ${setHoverStyle()}
 
-  &:focus,
   &:focus-visible {
     ${defaultFocusStyle}
   }
