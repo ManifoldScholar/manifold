@@ -142,7 +142,6 @@ export const Title = styled("h1", transientOptions)`
   color: ${({ $parent }) =>
     $parent ? `inherit` : `var(--color-base-neutral20)`};
   text-decoration: none;
-  ${respond(`white-space: nowrap;`, 65)}
 
   &:hover {
     ${({ $parent }) => $parent && defaultHoverStyle}
