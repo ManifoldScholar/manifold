@@ -227,7 +227,7 @@ export default function Header(props) {
             text.relationships.project.attributes.slug
           )}
           projectId={text.relationships.project.id}
-          projectTitle={text.relationships.project.attributes.titlePlaintext}
+          projectTitle={text.relationships.project.attributes.titleFormatted}
           isJournalArticle={
             text.relationships.project.attributes.isJournalIssue
           }
