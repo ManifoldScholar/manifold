@@ -19,6 +19,14 @@ export default function ReturnMenuBody({
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
   const { t } = useTranslation();
 
+  const maybeHtml = title => {
+    const hasTags = typeof title === "string" && title.match(/(<([^>]+)>)/gi);
+    return hasTags ? { dangerouslySetInnerHTML: { __html: title } } : {};
+  };
+
+  const maybeString = title =>
+    typeof title === "string" && !title.match(/(<([^>]+)>)/gi) ? title : null;
+
   return (
     <Styled.Menu aria-label="Site Navigation">
       <Styled.List>
@@ -30,7 +38,9 @@ export default function ReturnMenuBody({
                 ? t("reader.menus.return.issue_home")
                 : t("reader.menus.return.project_home")}
             </Styled.LinkText>
-            <Styled.EntityTitle>{entityTitle}</Styled.EntityTitle>
+            <Styled.EntityTitle {...maybeHtml(entityTitle)}>
+              {maybeString(entityTitle)}
+            </Styled.EntityTitle>
           </Styled.ItemLink>
         </Styled.Item>
         {context.isLibrary && !isLibraryDisabled && (
