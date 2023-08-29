@@ -36,7 +36,7 @@ function ReadingGroupAnnotationsContainer({
     onFilterChange: param => setFilters({ newState: param }),
     initialState: filters,
     resetState: baseFilters,
-    options: { memberships, texts }
+    options: { sortChron: true, memberships, texts }
   });
 
   const paginationClickHandlerCreator = page => {
