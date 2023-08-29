@@ -31,13 +31,13 @@ export class SectionContainer extends Component {
   static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const promises = [];
-    const { sectionId } = match.params;
+    const { sectionId, textId } = match.params;
     const sectionLoaded = sectionId
       ? isEntityLoaded("textSections", sectionId, state)
       : false;
 
     if (sectionId && !sectionLoaded) {
-      const sectionCall = sectionsAPI.show(sectionId);
+      const sectionCall = sectionsAPI.show(sectionId, textId);
       const { promise: two } = dispatch(
         request(sectionCall, requests.rSection)
       );
@@ -126,21 +126,26 @@ export class SectionContainer extends Component {
   }
 
   fetchAnnotations(props) {
-    const sectionId = props.match.params.sectionId;
+    const { sectionId, textId } = props.match.params;
 
-    const annotationsCall = annotationsAPI.forSection(sectionId);
+    const annotationsCall = annotationsAPI.forSection(sectionId, textId);
 
     props.dispatch(request(annotationsCall, requests.rAnnotations));
   }
 
   fetchResources(props) {
-    const resourcesCall = resourcesAPI.forSection(props.match.params.sectionId);
+    const { sectionId, textId } = props.match.params;
+
+    const resourcesCall = resourcesAPI.forSection(sectionId, textId);
     props.dispatch(request(resourcesCall, requests.rSectionResources));
   }
 
   fetchCollections(props) {
+    const { sectionId, textId } = props.match.params;
+
     const collectionsCall = resourceCollectionsAPI.forSection(
-      props.match.params.sectionId
+      sectionId,
+      textId
     );
     props.dispatch(
       request(collectionsCall, requests.rSectionResourceCollections)

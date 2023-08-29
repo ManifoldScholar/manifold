@@ -55,9 +55,9 @@ export default {
     };
   },
 
-  forSection(sectionId, filterIgnored = {}) {
+  forSection(sectionId, textId, filterIgnored = {}) {
     return {
-      endpoint: `/api/v1/text_sections/${sectionId}/relationships/resource_collections`,
+      endpoint: `/api/v1/texts/${textId}/relationships/text_sections/${sectionId}/resource_collections`,
       method: "GET",
       options: {}
     };

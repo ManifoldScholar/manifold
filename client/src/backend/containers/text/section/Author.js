@@ -13,7 +13,7 @@ export default function AuthorSectionContainer(props) {
   const { sectionId } = useParams();
 
   const { data: section } = useFetch({
-    request: [sectionsAPI.show, sectionId],
+    request: [sectionsAPI.show, sectionId, props.textId],
     condition: !!sectionId
   });
 

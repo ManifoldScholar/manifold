@@ -25,7 +25,8 @@ export class AnnotationList extends PureComponent {
     createHandler: PropTypes.func.isRequired,
     annotations: PropTypes.array,
     closeDrawer: PropTypes.func,
-    sectionId: PropTypes.string
+    sectionId: PropTypes.string,
+    textId: PropTypes.string
   };
 
   static defaultProps = {
@@ -46,8 +47,8 @@ export class AnnotationList extends PureComponent {
   }
 
   fetchAnnotations(props) {
-    const sId = this.props.sectionId;
-    const annotationsCall = annotationsAPI.forSection(sId, {
+    const { sectionId, textId } = this.props ?? {};
+    const annotationsCall = annotationsAPI.forSection(sectionId, textId, {
       ids: this.props.annotationIds
     });
     props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));

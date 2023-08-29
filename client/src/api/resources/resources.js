@@ -35,9 +35,9 @@ export default {
     };
   },
 
-  forSection(sectionId, filterIgnored = {}) {
+  forSection(sectionId, textId, filterIgnored = {}) {
     return {
-      endpoint: `/api/v1/text_sections/${sectionId}/relationships/resources`,
+      endpoint: `/api/v1/texts/${textId}/relationships/text_sections/${sectionId}/resources`,
       method: "GET",
       options: {}
     };

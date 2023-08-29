@@ -149,7 +149,6 @@ export const DragHandle = styled.div`
   cursor: grab;
   ${setHoverStyle()}
 
-  &:focus,
   &:focus-visible {
     ${defaultFocusStyle}
   }

@@ -1,13 +1,13 @@
 import isString from "lodash/isString";
 
 export default {
-  forSection(sectionId, filter = {}, page = {}) {
+  forSection(sectionId, textId, filter = {}, page = {}) {
     const filterParams = { ...filter };
     filterParams.orphaned = false;
 
     return {
       eagerLoad: true,
-      endpoint: `/api/v1/text_sections/${sectionId}/relationships/annotations`,
+      endpoint: `/api/v1/texts/${textId}/relationships/text_sections/${sectionId}/annotations`,
       method: "GET",
       options: {
         params: { filter: filterParams, page: { ...page, size: 25 } }

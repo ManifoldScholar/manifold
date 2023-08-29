@@ -13,7 +13,7 @@ export default function IngestSectionContainer({ textId }) {
   const { sectionId } = useParams();
 
   const { data: section } = useFetch({
-    request: [sectionsAPI.show, sectionId],
+    request: [sectionsAPI.show, sectionId, textId],
     condition: !!sectionId
   });
 
