@@ -175,6 +175,17 @@ class Annotation < ApplicationRecord
   scope :sans_private_annotations_not_owned_by, ->(user) { where(arel_exclude_private_annotations_not_owned_by(user)) }
   scope :non_private, -> { where(private: false) }
 
+  scope :with_order, ->(by = nil) do
+    case by
+    when "created_at ASC"
+      order(created_at: :asc)
+    when "created_at DESC"
+      order(created_at: :desc)
+    else
+      order(created: :desc)
+    end
+  end
+
   # Callbacks
   after_commit :enqueue_annotation_notifications, on: [:create]
   after_commit :maybe_enqueue_annotation_notifications, on: [:update]

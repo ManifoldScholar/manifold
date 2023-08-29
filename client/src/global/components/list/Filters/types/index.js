@@ -8,6 +8,7 @@ import { tagFilter as tags } from "./tag";
 import { orderCollectionFilter as orderCollection } from "./orderCollection";
 import { groupSortFilter as groupSort } from "./groupSort";
 import { groupStatusFilter as groupStatus } from "./groupStatus";
+import { sortChronFilter as sortChron } from "./sortChron";
 
 export default {
   sort,
@@ -19,5 +20,6 @@ export default {
   tags,
   orderCollection,
   groupSort,
-  groupStatus
+  groupStatus,
+  sortChron
 };
