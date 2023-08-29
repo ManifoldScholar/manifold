@@ -19,6 +19,7 @@ class TextSection < ApplicationRecord
   include Filterable
   include SerializedAbilitiesFor
   self.authorizer_name = "TextSectionAuthorizer"
+  include FriendlyId
 
   with_citation do |text_section|
     (text_section.text_citation_parts || {}).merge(
@@ -63,6 +64,7 @@ class TextSection < ApplicationRecord
   validates :position, numericality: { only_integer: true }
   validates :kind, inclusion: { in: ALLOWED_KINDS }
   validates :name, presence: { on: :from_api }
+  validates :slug, presence: true, uniqueness: true, allow_nil: true
 
   # Callbacks
   before_validation :update_body_json
@@ -104,6 +106,8 @@ class TextSection < ApplicationRecord
       text: [:project, :makers]
     )
   }
+
+  friendly_id :name, :use => :scoped, :scope => :text
 
   def should_index?
     text.present? && text.should_index?

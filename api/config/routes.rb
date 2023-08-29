@@ -102,10 +102,18 @@ Rails.application.routes.draw do
           resources :ingestions, only: [:create]
 
           namespace :relationships do
-            resources :text_sections, only: [:index, :create]
+            resources :text_sections, only: [:index, :create, :show]
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
             resources :ingestions, only: [:create], controller: "/api/v1/texts/relationships/text_section_ingestions"
             resources :ingestion_sources, only: [:index, :create]
+
+            resources :text_sections do
+              scope module: :text_sections do
+                resources :annotations, only: [:index]
+                resources :resources, only: [:index]
+                resources :resource_collections, only: [:index]
+              end
+            end
           end
         end
       end
@@ -147,12 +155,10 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :text_sections, only: [:show, :update, :destroy] do
+      resources :text_sections, only: [:update, :destroy] do
         scope module: :text_sections do
           namespace :relationships do
-            resources :annotations, only: [:index, :create, :update]
-            resources :resources, only: [:index]
-            resources :resource_collections, only: [:index]
+            resources :annotations, only: [:create, :update]
           end
         end
       end

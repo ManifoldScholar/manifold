@@ -108,6 +108,20 @@ COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 
 
 --
+-- Name: unaccent; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION unaccent; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
+
+
+--
 -- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -119,6 +133,36 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 --
 
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
+--
+-- Name: manifold_slugify(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.manifold_slugify(text) RETURNS text
+    LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
+    AS $_$
+  -- removes accents (diacritic signs) from a given string --
+  WITH "unaccented" AS (
+    SELECT unaccent(btrim($1)) AS "value"
+  ),
+  -- lowercases the string
+  "lowercase" AS (
+    SELECT lower("value") AS "value"
+    FROM "unaccented"
+  ),
+  -- replaces anything that's not a letter, number, hyphen('-'), or underscore('_') with a hyphen('-')
+  "hyphenated" AS (
+    SELECT regexp_replace("value", '[^a-z0-9_-]+', '-', 'gi') AS "value"
+    FROM "lowercase"
+  ),
+  -- trims hyphens('-') if they exist on the head or tail of the string
+  "trimmed" AS (
+    SELECT regexp_replace(regexp_replace("value", '-+$', ''), '^-+', '') AS "value"
+    FROM "hyphenated"
+  )
+  SELECT NULLIF("value", '') FROM "trimmed";
+$_$;
 
 
 SET default_tablespace = '';
@@ -331,6 +375,7 @@ CREATE TABLE public.text_sections (
     "position" bigint,
     body_hash bigint GENERATED ALWAYS AS (COALESCE(hashtextextended((body_json)::text, (0)::bigint), (0)::bigint)) STORED NOT NULL,
     node_root public.ltree GENERATED ALWAYS AS (public.text2ltree(((md5((id)::text) || '.'::text) || md5((COALESCE(hashtextextended((body_json)::text, (0)::bigint), (0)::bigint))::text)))) STORED NOT NULL,
+    slug text,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
 );
 
@@ -5606,6 +5651,13 @@ CREATE INDEX index_text_sections_on_text_id_and_position ON public.text_sections
 
 
 --
+-- Name: index_text_sections_on_text_id_and_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_text_sections_on_text_id_and_slug ON public.text_sections USING btree (text_id, slug);
+
+
+--
 -- Name: index_text_subjects_on_subject_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7069,4 +7121,5 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230607191531'),
 ('20230816233543'),
 ('20230817212021'),
+('20230823232509'),
 ('20230921024546');
