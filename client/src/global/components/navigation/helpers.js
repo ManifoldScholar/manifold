@@ -29,8 +29,8 @@ export const getAdminModeLabel = ({ currentUser, mode, t }) => {
 };
 
 const FE_ROUTE_REGEXES = {
-  project: /^\/projects\/?!(all)([A-Za-z0-9-]+)$/,
-  journal: /^\/journals\/?!(all)([A-Za-z0-9-]+)$/,
+  project: /^\/projects\/(?!(all))([A-Za-z0-9-]+)$/,
+  journal: /^\/journals\/(?!(all))([A-Za-z0-9-]+)$/,
   resource: /^\/projects\/([A-Za-z0-9-]+)\/resource\/([A-Za-z0-9-]+)$/,
   resourceCollection: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection\/([A-Za-z0-9-]+)$/,
   projectCollection: /^\/projects\/project-collection\/([A-Za-z0-9?=-]+)$/,
