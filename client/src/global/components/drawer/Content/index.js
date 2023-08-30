@@ -71,7 +71,7 @@ function DrawerContent(props, ref) {
     "drawer--backend": context === "backend"
   });
 
-  const { isExpanded } = useDropdownNavContext();
+  const { isExpanded } = useDropdownNavContext() ?? {};
 
   return (
     <Drawer

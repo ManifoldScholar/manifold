@@ -29,7 +29,7 @@ export default function DrawerWrapper({
     if (dispatch) dispatch(notificationActions.removeNotifications("drawer"));
   };
 
-  const { setIsExpanded } = useDropdownNavContext();
+  const { setIsExpanded } = useDropdownNavContext() ?? {};
 
   const handleLeaveEvent = e => {
     clearDrawerNotifications();
