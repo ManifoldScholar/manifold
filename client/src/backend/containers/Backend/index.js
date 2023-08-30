@@ -13,6 +13,7 @@ import lh from "helpers/linkHandler";
 import BodyClass from "hoc/BodyClass";
 import Authorize from "hoc/Authorize";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
+import { DropdownNavProvider } from "backend/components/layout/SecondaryNav/Projects/context";
 
 const { request } = entityStoreActions;
 
@@ -92,20 +93,22 @@ export class BackendContainer extends PureComponent {
               ]}
             />
             <Utility.ScrollToTop />
-            <Layout.GlobalHeader
-              visibility={this.props.visibility}
-              match={this.props.match}
-              location={this.props.location}
-              authentication={this.props.authentication}
-              commonActions={this.commonActions}
-            />
-            <BreadcrumbsProvider>
-              <div className="main-content">
-                {childRoutes(this.props.route, {
-                  childProps: this.childProps()
-                })}
-              </div>
-            </BreadcrumbsProvider>
+            <DropdownNavProvider>
+              <Layout.GlobalHeader
+                visibility={this.props.visibility}
+                match={this.props.match}
+                location={this.props.location}
+                authentication={this.props.authentication}
+                commonActions={this.commonActions}
+              />
+              <BreadcrumbsProvider>
+                <div className="main-content">
+                  {childRoutes(this.props.route, {
+                    childProps: this.childProps()
+                  })}
+                </div>
+              </BreadcrumbsProvider>
+            </DropdownNavProvider>
             <Footers.FrontendFooter
               pages={this.props.pages}
               authentication={this.props.authentication}

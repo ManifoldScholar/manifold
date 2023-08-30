@@ -5,6 +5,7 @@ import { useUID } from "react-uid";
 import Utility from "global/components/utility";
 import { notificationActions } from "actions";
 import Content from "../Content";
+import { useDropdownNavContext } from "backend/components/layout/SecondaryNav/Projects/context";
 import * as Styled from "./styles";
 
 export default function DrawerWrapper({
@@ -28,6 +29,8 @@ export default function DrawerWrapper({
     if (dispatch) dispatch(notificationActions.removeNotifications("drawer"));
   };
 
+  const { setIsExpanded } = useDropdownNavContext();
+
   const handleLeaveEvent = e => {
     clearDrawerNotifications();
 
@@ -38,6 +41,8 @@ export default function DrawerWrapper({
     if (closeUrl) {
       history.push(closeUrl, { noScroll: true });
     }
+
+    if (setIsExpanded) setIsExpanded(false);
   };
 
   const renderDrawerWrapper = headerId => {
@@ -61,7 +66,7 @@ export default function DrawerWrapper({
           : Styled.Overlay;
       return (
         <>
-          <Overlay />
+          <Overlay id="drawer-overlay" />
           <Content
             headerId={headerId}
             handleLeaveEvent={handleLeaveEvent}

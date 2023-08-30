@@ -7,8 +7,9 @@ import {
   defaultFocusStyle,
   buttonUnstyled
 } from "theme/styles/mixins";
+import { transientOptions } from "helpers/emotionHelpers";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled("div", transientOptions)`
   padding: 18px 24px 18px 20px;
   border-radius: 8px;
   background-color: var(--color-base-neutral100);

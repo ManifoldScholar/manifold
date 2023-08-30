@@ -6,6 +6,7 @@ import Notifications from "global/containers/Notifications";
 import FrontMatter from "../FrontMatter";
 import { DrawerContext } from "helpers/contexts";
 import { usePreventBodyScroll, useFromStore } from "hooks";
+import { useDropdownNavContext } from "backend/components/layout/SecondaryNav/Projects/context";
 import * as Styled from "./styles";
 
 function DrawerContent(props, ref) {
@@ -70,11 +71,13 @@ function DrawerContent(props, ref) {
     "drawer--backend": context === "backend"
   });
 
+  const { isExpanded } = useDropdownNavContext();
+
   return (
     <Drawer
       key="drawer"
       className={classes}
-      id={id}
+      id={id ?? "drawer-outer"}
       role="dialog"
       aria-modal={focusTrap}
       aria-label={ariaLabel}
@@ -88,6 +91,7 @@ function DrawerContent(props, ref) {
           escapeDeactivates: handleEscape,
           returnFocusOnDeactivate
         }}
+        paused={isExpanded}
       >
         <Inner>
           <FrontMatter {...props} />
