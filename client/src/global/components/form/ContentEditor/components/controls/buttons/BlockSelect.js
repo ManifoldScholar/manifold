@@ -1,8 +1,9 @@
 import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
+import { useTranslation } from "react-i18next";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { hotkeys, labels, descriptions } from "./TooltipContent/content";
+import { hotkeys } from "./TooltipContent/content";
 import { toggleOrWrapNode } from "../../../utils/slate/transforms";
 import {
   isTextBlockActive,
@@ -24,9 +25,11 @@ const getActiveBlock = (editor, opts, name) => {
   return Object.keys(active).find(o => active[o]) ?? "";
 };
 
-const BlockSelect = ({ options, name, color, ...rest }, ref) => {
+const BlockSelect = ({ options, name, color, ariaLabel, ...rest }, ref) => {
   const editor = useSlate();
   const { selection } = editor ?? {};
+
+  const { t } = useTranslation();
 
   const renderOptions = options.map(o => (
     <option key={o.format} value={o.format} hidden={!o.format}>
@@ -46,7 +49,7 @@ const BlockSelect = ({ options, name, color, ...rest }, ref) => {
         <Styled.Select
           ref={ref}
           {...rest}
-          aria-label="Text styles selector"
+          aria-label={ariaLabel}
           data-active={active !== ""}
           $color={color ?? "var(--color-accent-primary)"}
           value={active}
@@ -64,11 +67,14 @@ const BlockSelect = ({ options, name, color, ...rest }, ref) => {
       <Tooltip
         content={
           active && name === "textBlock" ? (
-            <TooltipContent label={labels[active]} hotkeys={hotkeys[active]} />
+            <TooltipContent
+              label={t(`editor.tooltips.labels.${active}`)}
+              hotkeys={hotkeys[active]}
+            />
           ) : (
             <TooltipContent
-              label={labels[name]}
-              description={descriptions[name]}
+              label={t(`editor.tooltips.labels.${name}`)}
+              description={t(`editor.tooltips.descriptions.${name}`)}
             />
           )
         }

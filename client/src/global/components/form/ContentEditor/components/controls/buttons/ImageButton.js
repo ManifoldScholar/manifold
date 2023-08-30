@@ -10,7 +10,7 @@ import { isElementActive } from "../../../utils/slate/getters";
 import { insertImage } from "../../../utils/slate/transforms";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { descriptions, labels, hotkeys } from "./TooltipContent/content";
+import { hotkeys } from "./TooltipContent/content";
 import { onModalClose } from "./utils";
 import * as Styled from "./styles";
 
@@ -45,7 +45,7 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
     e.preventDefault();
     if (!selection) return;
 
-    const heading = "Insert Image";
+    const heading = t("editor.forms.image_insert_heading");
     const form = <InsertImageForm urlRef={urlRef} altRef={altRef} />;
     if (confirm)
       confirm({
@@ -75,7 +75,7 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
       alt: attrs.alt
     };
 
-    const heading = "Update Image";
+    const heading = t("editor.forms.image_update_heading");
     const form = (
       <InsertImageForm
         defaultValues={defaultValues}
@@ -101,8 +101,8 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
     <Tooltip
       content={
         <TooltipContent
-          label={labels.img}
-          description={descriptions.img}
+          label={t(`editor.tooltips.labels.img`)}
+          description={t(`editor.tooltips.descriptions.img`)}
           hotkeys={hotkeys.img}
         />
       }
@@ -115,7 +115,7 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
           name="img-modal-trigger"
           ref={ref}
           {...rest}
-          aria-label="image"
+          aria-label={t("editor.controls.labels.image")}
           data-active={active}
           onClick={active ? updateImageData : getImageData}
           tabIndex={-1}

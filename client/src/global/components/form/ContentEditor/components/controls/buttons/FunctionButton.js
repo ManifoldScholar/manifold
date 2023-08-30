@@ -1,20 +1,23 @@
 import React, { forwardRef } from "react";
+import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { hotkeys, labels, descriptions } from "./TooltipContent/content";
+import { hotkeys } from "./TooltipContent/content";
 import * as Styled from "./styles";
 
 const FunctionButton = (
-  { ariaLabel, label, icon, onClick, isFirst, tooltip, ...rest },
+  { label, icon, onClick, isFirst, tooltip, ...rest },
   ref
 ) => {
+  const { t } = useTranslation();
+
   const Button = label ? Styled.StylesButton : Styled.Button;
   const renderButton = (
     <Button
       ref={ref}
       {...rest}
-      aria-label={ariaLabel}
+      aria-label={t("editor.controls.labels.format", { format: tooltip })}
       onClick={onClick}
       tabIndex={isFirst ? 0 : -1}
     >
@@ -27,9 +30,9 @@ const FunctionButton = (
     <Tooltip
       content={
         <TooltipContent
-          label={labels[tooltip]}
+          label={t(`editor.tooltips.labels.${tooltip}`)}
           hotkeys={hotkeys[tooltip]}
-          description={descriptions[tooltip]}
+          description={t(`editor.tooltips.descriptions.${tooltip}`)}
         />
       }
       xOffset="-50px"

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { rteElements, inlineNodes } from "../../utils/elements";
 import { formatNodeLabel } from "../../utils/slate/general";
 import { removeNode } from "../../utils/slate/transforms/removeNode";
@@ -13,6 +14,8 @@ import * as Styled from "./styles";
 export default function HtmlLabel({ visible, element }) {
   const editor = useSlateStatic();
   const inputRef = useRef(null);
+
+  const { t } = useTranslation();
 
   const { editingCrumb: editing } = useHtmlBreadcrumbs();
 
@@ -35,7 +38,7 @@ export default function HtmlLabel({ visible, element }) {
     path.length === 1 ||
     (element.type === "li" && !Editor.isEmpty(editor, element));
 
-  const disableLift = path.length === 2 || element.type === "li";
+  const disableLift = path.length <= 2 || element.type === "li";
 
   const updateClassName = e => {
     e.persist();
@@ -79,14 +82,14 @@ export default function HtmlLabel({ visible, element }) {
             e.preventDefault();
             unwrapNode({ editor, format: element.type, path });
           }}
-          aria-label="Move node up one level in the html hierarchy"
+          aria-label={t("editor.controls.labels.lift")}
           disabled={disableLift}
         >
           <IconComposer icon="arrowUp16" size={16} />
         </Styled.LiftButton>
         <Styled.DeleteButton
           onClick={handleDelete}
-          aria-label="Delete"
+          aria-label={t("actions.delete")}
           disabled={disableDelete}
         >
           <IconComposer icon="delete24" size={16} />

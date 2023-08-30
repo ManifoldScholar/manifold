@@ -10,6 +10,7 @@ import resourceCollections from "./resource_collections.json";
 import resources from "./resources.json";
 import settings from "./settings.json";
 import texts from "./texts.json";
+import editor from "./editor.json";
 
 export default {
   ...analytics,
@@ -22,5 +23,6 @@ export default {
   ...resourceCollections,
   ...resources,
   ...settings,
-  ...texts
+  ...texts,
+  ...editor
 };

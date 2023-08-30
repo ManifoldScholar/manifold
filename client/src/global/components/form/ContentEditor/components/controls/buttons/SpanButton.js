@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
+import { useTranslation } from "react-i18next";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { labels, descriptions } from "./TooltipContent/content";
 import { toggleOrWrapNode } from "../../../utils/slate/transforms";
 import { isElementActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
@@ -11,10 +11,15 @@ const SpanButton = ({ format, ...rest }, ref) => {
   const editor = useSlate();
   const { selection } = editor ?? {};
 
+  const { t } = useTranslation();
+
   return (
     <Tooltip
       content={
-        <TooltipContent label={labels.span} description={descriptions.span} />
+        <TooltipContent
+          label={t(`editor.tooltips.labels.span`)}
+          description={t(`editor.tooltips.descriptions.span`)}
+        />
       }
       xOffset="-75px"
       yOffset="43px"
@@ -24,7 +29,7 @@ const SpanButton = ({ format, ...rest }, ref) => {
         as="button"
         ref={ref}
         {...rest}
-        aria-label="Insert span element"
+        aria-label={t("editor.controls.labels.span")}
         data-active={isElementActive(editor, format)}
         onClick={event => {
           event.preventDefault();

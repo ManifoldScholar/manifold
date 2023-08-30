@@ -28,7 +28,7 @@ export const isImageUrl = url => {
   if (!url) return false;
   if (!isValidUrl(url)) return false;
   const ext = new URL(url).pathname.split(".").pop();
-  return ["gif", "jpg", "jpeg", "png"].includes(ext);
+  return ["gif", "jpg", "jpeg", "png", "svg"].includes(ext);
 };
 
 /* eslint-disable no-useless-escape */
