@@ -66,13 +66,11 @@ export const BreadcrumbsBar = styled.div`
   gap: 20px;
 `;
 
-export const BreadcrumbsScroller = styled.div`
+export const Breadcrumbs = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  overflow-x: scroll;
-  overflow-y: visible;
-  scrollbar-width: none;
+  column-gap: 8px;
 `;
 
 export const Breadcrumb = styled.button`

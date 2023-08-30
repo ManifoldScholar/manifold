@@ -208,7 +208,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
         </Styled.ToolGroup>
       </ReakitMenuBar>
       <Styled.BreadcrumbsBar $darkMode={darkMode}>
-        <Styled.BreadcrumbsScroller>
+        <Styled.Breadcrumbs>
           {!isEmpty(ancestors) &&
             Object.keys(ancestors)
               .sort(
@@ -246,7 +246,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
                   </Fragment>
                 );
               })}
-        </Styled.BreadcrumbsScroller>
+        </Styled.Breadcrumbs>
         <Styled.ShowHideButton
           onClick={onToggleHtmlOutlines}
           aria-label={
