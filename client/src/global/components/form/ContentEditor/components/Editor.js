@@ -191,7 +191,7 @@ export default function Editor({
             as="div"
             renderElement={renderElement}
             renderLeaf={renderLeaf}
-            placeholder="Section body..."
+            placeholder={t("editor.elements.placeholder")}
             spellCheck={false}
             onKeyDown={e => captureHotKeys(e, editor)}
           />

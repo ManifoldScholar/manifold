@@ -1,9 +1,10 @@
 import React, { forwardRef } from "react";
 import { useSlate, ReactEditor } from "slate-react";
+import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { hotkeys, labels } from "./TooltipContent/content";
+import { hotkeys } from "./TooltipContent/content";
 import { toggleMark } from "../../../utils/slate/transforms";
 import { isMarkActive } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
@@ -12,10 +13,15 @@ const MarkButton = ({ format, label, icon, isFirst, ...rest }, ref) => {
   const editor = useSlate();
   const { selection } = editor ?? {};
 
+  const { t } = useTranslation();
+
   return (
     <Tooltip
       content={
-        <TooltipContent label={labels[format]} hotkeys={hotkeys[format]} />
+        <TooltipContent
+          label={t(`editor.tooltips.labels.${format}`)}
+          hotkeys={hotkeys[format]}
+        />
       }
       xOffset="-75px"
       yOffset="43px"
@@ -24,7 +30,7 @@ const MarkButton = ({ format, label, icon, isFirst, ...rest }, ref) => {
       <Styled.Button
         ref={ref}
         {...rest}
-        aria-label={format}
+        aria-label={t("editor.controls.labels.format", { format })}
         data-active={isMarkActive(editor, format)}
         onClick={event => {
           event.preventDefault();

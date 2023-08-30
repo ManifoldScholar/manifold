@@ -1,4 +1,5 @@
 import React, { Fragment, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   MarkButton,
   BlockButton,
@@ -24,6 +25,8 @@ import isEmpty from "lodash/isEmpty";
 import * as Styled from "./styles";
 
 export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
+  const { t } = useTranslation();
+
   const menu = useMenuBarState({
     orientation: "horizontal",
     loop: true,
@@ -80,7 +83,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
     <>
       <ReakitMenuBar
         as={Styled.Toolbar}
-        aria-label="Rich text toolbar"
+        aria-label={t("editor.controls.labels.toolbar_rte")}
         {...menu}
       >
         <Styled.ToolGroup>
@@ -106,14 +109,17 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
             as={BlockSelect}
             name="textBlock"
             options={[
-              { format: "p", label: "Paragraph" },
-              { format: "h1", label: "Heading 1" },
-              { format: "h2", label: "Heading 2" },
-              { format: "h3", label: "Heading 3" },
-              { format: "h4", label: "Heading 4" },
-              { format: "h5", label: "Heading 5" },
-              { format: "h6", label: "Heading 6" },
-              { format: "", label: "Text Block" }
+              { format: "p", label: t("editor.tooltips.labels.p") },
+              { format: "h1", label: t("editor.tooltips.labels.h1") },
+              { format: "h2", label: t("editor.tooltips.labels.h2") },
+              { format: "h3", label: t("editor.tooltips.labels.h3") },
+              { format: "h4", label: t("editor.tooltips.labels.h4") },
+              { format: "h5", label: t("editor.tooltips.labels.h5") },
+              { format: "h6", label: t("editor.tooltips.labels.h6") },
+              {
+                format: "",
+                label: t("editor.controls.labels.text_block_select")
+              }
             ]}
             {...menu}
           />
@@ -128,13 +134,19 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
             as={BlockSelect}
             name="container"
             options={[
-              { format: "div", label: "Div" },
-              { format: "header", label: "Header" },
-              { format: "footer", label: "Footer" },
-              { format: "section", label: "Section" },
-              { format: "figure", label: "Figure" },
-              { format: "figcaption", label: "Figcaption" },
-              { format: "", label: "Layout Block" }
+              { format: "div", label: t("editor.tooltips.labels.div") },
+              { format: "header", label: t("editor.tooltips.labels.header") },
+              { format: "footer", label: t("editor.tooltips.labels.footer") },
+              { format: "section", label: t("editor.tooltips.labels.section") },
+              { format: "figure", label: t("editor.tooltips.labels.figure") },
+              {
+                format: "figcaption",
+                label: t("editor.tooltips.labels.figcaption")
+              },
+              {
+                format: "",
+                label: t("editor.controls.labels.layout_block_select")
+              }
             ]}
             color="var(--color-base-yellow20)"
             {...menu}
@@ -251,8 +263,8 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
           onClick={onToggleHtmlOutlines}
           aria-label={
             selectedCrumb === "all"
-              ? "Hide all HTML element outlines"
-              : "Show all HTML element outlines"
+              ? t("editor.controls.labels.hide_html")
+              : t("editor.controls.labels.show_html")
           }
         >
           <IconComposer icon="eyeball24" size={24} />

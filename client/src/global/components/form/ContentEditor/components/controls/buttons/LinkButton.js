@@ -8,7 +8,7 @@ import { useConfirmation } from "hooks";
 import Modal from "./insert/Modal";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { hotkeys, labels } from "./TooltipContent/content";
+import { hotkeys } from "./TooltipContent/content";
 import { onModalClose } from "./utils";
 import { wrapLink, unwrapLink } from "../../../utils/slate/transforms";
 import { isLinkActive } from "../../../utils/slate/getters";
@@ -38,7 +38,7 @@ const LinkButton = ({ icon, size, ...rest }, ref) => {
 
     if (active) return unwrapLink(editor);
 
-    const heading = "Insert Link";
+    const heading = t("editor.forms.link_insert_heading");
 
     const isCollapsed = Range.isCollapsed(selection);
     const defaultValues = !isCollapsed
@@ -65,7 +65,12 @@ const LinkButton = ({ icon, size, ...rest }, ref) => {
 
   return (
     <Tooltip
-      content={<TooltipContent label={labels.link} hotkeys={hotkeys.link} />}
+      content={
+        <TooltipContent
+          label={t(`editor.tooltips.labels.link`)}
+          hotkeys={hotkeys.link}
+        />
+      }
       xOffset="-75px"
       yOffset="43px"
       delay={0.5}
@@ -74,7 +79,7 @@ const LinkButton = ({ icon, size, ...rest }, ref) => {
         name="link-modal-trigger"
         ref={ref}
         {...rest}
-        aria-label="link"
+        aria-label={t("editor.controls.labels.link")}
         data-active={active}
         onClick={getLinkData}
         tabIndex={-1}

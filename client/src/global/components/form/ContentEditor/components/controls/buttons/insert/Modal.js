@@ -27,15 +27,15 @@ export default function InsertModal(props) {
       maxWidth={600}
       showCloseButton={false}
       closeOnOverlayClick={false}
-      labelledBy={`${uid}-label`}
-      describedBy={`${uid}-description`}
+      labelledBy={t("editor.forms.labelled_by_uid", { uid })}
+      describedBy={t("editor.forms.described_by_uid", { uid })}
       onEsc={props.reject}
     >
       <>
         <Styled.ModalHeader className="dialog__header">
           <Styled.Heading>
             <Styled.HeaderIcon icon={icon} />
-            <h2 id={`${uid}-label`}>{heading}</h2>
+            <h2 id={t("editor.forms.labelled_by_uid", { uid })}>{heading}</h2>
           </Styled.Heading>
           <Styled.CloseButton onClick={handleRejectClick} tabIndex={0}>
             <Styled.CloseText>{t("actions.close")}</Styled.CloseText>

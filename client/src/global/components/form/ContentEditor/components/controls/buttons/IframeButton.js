@@ -9,7 +9,7 @@ import Utility from "global/components/utility";
 import { isValidUrl } from "../../../utils/helpers";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
-import { descriptions, labels, hotkeys } from "./TooltipContent/content";
+import { hotkeys } from "./TooltipContent/content";
 import { onModalClose } from "./utils";
 import { insertIframe } from "../../../utils/slate/transforms";
 import { isElementActive } from "../../../utils/slate/getters";
@@ -47,7 +47,7 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
     e.preventDefault();
     if (!selection) return;
 
-    const heading = "Insert Iframe";
+    const heading = t("editor.forms.iframe_insert_heading");
     const form = <InsertIframeForm urlRef={urlRef} titleRef={titleRef} />;
     if (confirm)
       confirm({
@@ -79,7 +79,7 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
       title: attrs.title
     };
 
-    const heading = "Update Iframe";
+    const heading = t("editor.forms.iframe_update_heading");
     const form = (
       <InsertIframeForm
         defaultValues={defaultValues}
@@ -105,8 +105,8 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
     <Tooltip
       content={
         <TooltipContent
-          label={labels.iframe}
-          description={descriptions.iframe}
+          label={t(`editor.tooltips.labels.iframe`)}
+          description={t(`editor.tooltips.descriptions.iframe`)}
           hotkeys={hotkeys.iframe}
         />
       }
@@ -119,7 +119,7 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
           name="iframe-modal-trigger"
           ref={ref}
           {...rest}
-          aria-label="iframe"
+          aria-label={t("editor.controls.labels.iframe")}
           data-active={active}
           onClick={active ? updateIframeData : getIframeData}
           tabIndex={-1}
