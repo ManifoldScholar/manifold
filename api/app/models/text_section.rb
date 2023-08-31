@@ -64,7 +64,7 @@ class TextSection < ApplicationRecord
   validates :position, numericality: { only_integer: true }
   validates :kind, inclusion: { in: ALLOWED_KINDS }
   validates :name, presence: { on: :from_api }
-  validates :slug, presence: true, uniqueness: true, allow_nil: true
+  validates :slug, presence: true, allow_nil: true
 
   # Callbacks
   before_validation :update_body_json
@@ -107,7 +107,7 @@ class TextSection < ApplicationRecord
     )
   }
 
-  friendly_id :name, :use => :scoped, :scope => :text
+  friendly_id :name, use: :scoped, scope: :text
 
   def should_index?
     text.present? && text.should_index?
