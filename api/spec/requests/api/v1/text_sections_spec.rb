@@ -19,11 +19,14 @@ RSpec.describe "Text Sections", type: :request do
                       authorized_user: :admin
     end
 
-    path "/text_sections/{id}" do
+    path "/texts/{text_id}/relationships/text_sections/{id}" do
       include_examples "an API show request",
                        model: TextSection,
-                       included_relationships: [:stylesheets]
+                       included_relationships: [:stylesheets],
+                       url_parameters: [:text_id]
+    end
 
+    path "/text_sections/{id}" do
       include_examples "an API update request",
                        model: TextSection,
                        authorized_user: :admin

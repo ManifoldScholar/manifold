@@ -36,7 +36,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
       }
     }
   end
-  let(:path) { api_v1_text_section_relationships_annotations_path(text_section) }
+  let(:path) { api_v1_text_relationships_text_section_annotations_path(text_id: text.id, text_section_id: text_section) }
 
   describe "access to public annotations" do
     let!(:my_public_reading_group) { FactoryBot.create(:reading_group, privacy: "public") }
@@ -69,7 +69,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
 
     let(:api_response) { JSON.parse(response.body) }
     let(:included_ids) { api_response["data"].map { |a| a["id"] } }
-    let(:path) { api_v1_text_section_relationships_annotations_path(text_section) }
+    let(:path) { api_v1_text_relationships_text_section_annotations_path(text_id: text.id, text_section_id: text_section) }
     before(:each) { get path, headers: reader_headers }
 
     always_included = %w(my_private_annotation my_public_annotation my_annotation_in_my_public_reading_group my_annotation_in_my_private_reading_group)
@@ -153,6 +153,8 @@ RSpec.describe "Text Section Annotations API", type: :request do
   end
 
   describe "creates an annotation" do
+    let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
+
     context "when the user is an reader" do
       before(:each) { post path, headers: reader_headers, params: build_json_payload(annotation_params) }
       describe "the response" do
@@ -182,6 +184,8 @@ RSpec.describe "Text Section Annotations API", type: :request do
   end
 
   describe "creates a resource annotation" do
+    let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
+
     context "when the user is an reader" do
       before(:each) { post path, headers: reader_headers, params: build_json_payload(resource_params) }
       describe "the response" do
@@ -203,6 +207,8 @@ RSpec.describe "Text Section Annotations API", type: :request do
   end
 
   describe "creates a collection annotation" do
+    let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
+
     context "when the user is an reader" do
       before(:each) { post path, headers: reader_headers, params: build_json_payload(collection_params) }
       describe "the response" do
