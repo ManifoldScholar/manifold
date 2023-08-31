@@ -26,11 +26,13 @@
         "link": "Insert Link",
         "span": "Insert Span",
         "format": "Insert $t(editor.tooltips.labels.{{format}})",
-        "text_block_select": "Text Block",
-        "layout_block_select": "Layout Block",
+        "text_block_select": "Insert or toggle text block",
+        "text_block_select_placeholder": "Text Block",
+        "layout_block_select": "Wrap current selection in a layout block",
+        "layout_block_select_placeholder": "Layout Block",
         "show_html": "Show all HTML element outlines",
         "hide_html": "Hide all HTML element outlines",
-        "lift": "Move node up one level in the html hierarchy"
+        "lift": "Move node up one level in the HTML hierarchy"
       },
       "toggles": {
         "html_label": "HTML Editor",

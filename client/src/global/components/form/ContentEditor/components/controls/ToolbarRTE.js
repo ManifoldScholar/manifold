@@ -108,6 +108,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
           <ReakitMenuItem
             as={BlockSelect}
             name="textBlock"
+            ariaLabel={t("editor.controls.labels.text_block_select")}
             options={[
               { format: "p", label: t("editor.tooltips.labels.p") },
               { format: "h1", label: t("editor.tooltips.labels.h1") },
@@ -118,7 +119,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               { format: "h6", label: t("editor.tooltips.labels.h6") },
               {
                 format: "",
-                label: t("editor.controls.labels.text_block_select")
+                label: t("editor.controls.labels.text_block_select_placeholder")
               }
             ]}
             {...menu}
@@ -133,6 +134,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
           <ReakitMenuItem
             as={BlockSelect}
             name="container"
+            ariaLabel={t("editor.controls.labels.layout_block_select")}
             options={[
               { format: "div", label: t("editor.tooltips.labels.div") },
               { format: "header", label: t("editor.tooltips.labels.header") },
@@ -145,7 +147,9 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               },
               {
                 format: "",
-                label: t("editor.controls.labels.layout_block_select")
+                label: t(
+                  "editor.controls.labels.layout_block_select_placeholder"
+                )
               }
             ]}
             color="var(--color-base-yellow20)"
