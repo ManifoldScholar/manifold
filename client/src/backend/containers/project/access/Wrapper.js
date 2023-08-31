@@ -6,13 +6,21 @@ import lh from "helpers/linkHandler";
 import PermissionsContainer from "backend/containers/permission";
 import EntitlementsContainer from "backend/containers/entitlements";
 import Authorize from "hoc/Authorize";
+import Authorization from "helpers/authorization";
 import Layout from "backend/components/layout";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import Hero from "backend/components/hero";
 import withSettings from "hoc/withSettings";
+import connectAndFetch from "utils/connectAndFetch";
 
 class ProjectAccessWrapper extends Component {
+  static mapStateToProps = state => {
+    return {
+      authentication: state.authentication
+    };
+  };
+
   static displayName = "Project.Access.Wrapper";
 
   static propTypes = {
@@ -20,6 +28,7 @@ class ProjectAccessWrapper extends Component {
     route: PropTypes.object,
     history: PropTypes.object,
     match: PropTypes.object,
+    authentication: PropTypes.object,
     t: PropTypes.func
   };
 
@@ -32,8 +41,15 @@ class ProjectAccessWrapper extends Component {
   }
 
   render() {
-    const { project, updateProject, t } = this.props;
+    const { project, updateProject, t, authentication } = this.props;
     if (!project) return null;
+
+    const authorization = new Authorization();
+
+    const canGrantPermissions = authorization.authorizeKind({
+      authentication,
+      kind: ["admin", "editor"]
+    });
 
     const closeUrl = lh.link("backendProjectAccess", project.id);
     return (
@@ -44,10 +60,12 @@ class ProjectAccessWrapper extends Component {
           failureNotification
           failureRedirect={lh.link("backendProject", project.id)}
         >
-          <Layout.BackendPanel flush>
-            <PermissionsContainer.List entity={project} />
-          </Layout.BackendPanel>
-          <Layout.BackendPanel>
+          {canGrantPermissions && (
+            <Layout.BackendPanel flush>
+              <PermissionsContainer.List entity={project} />
+            </Layout.BackendPanel>
+          )}
+          <Layout.BackendPanel flush={!canGrantPermissions}>
             <EntitlementsContainer.List
               entity={project}
               preList={
@@ -115,4 +133,6 @@ class ProjectAccessWrapper extends Component {
   }
 }
 
-export default withTranslation()(withSettings(ProjectAccessWrapper));
+export default withTranslation()(
+  withSettings(connectAndFetch(ProjectAccessWrapper))
+);
