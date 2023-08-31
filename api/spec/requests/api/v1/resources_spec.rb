@@ -43,12 +43,13 @@ RSpec.describe "Resources", type: :request do
     let(:text_section) { FactoryBot.create(:text_section) }
     let(:resource) { FactoryBot.create(:resource, text_section: text_section) }
     let(:text_section_id) { text_section.id }
+    let!(:text_id) { text_section.text.id }
 
-    path "/text_sections/{text_section_id}/relationships/resources" do
+    path "/texts/{text_id}/relationships/text_sections/{text_section_id}/resources" do
       include_examples "an API index request",
                        parent: "text section",
                        model: Resource,
-                       url_parameters: [:text_section_id]
+                       url_parameters: [:text_section_id, :text_id]
     end
   end
 end

@@ -12,15 +12,17 @@ RSpec.describe "Annotations", type: :request do
 
   describe "for a text section" do
     let!(:parent) { FactoryBot.create(:text_section) }
-    let!(:annotation) { FactoryBot.create(:annotation, text_section: parent) }
     let!(:text_section_id) { parent.id }
+    let!(:text_id) { parent.text.id }
 
-    path "/text_sections/{text_section_id}/relationships/annotations" do
+    path "/texts/{text_id}/relationships/text_sections/{text_section_id}/annotations" do
       include_examples "an API index request",
                        parent: "text section",
                        model: Annotation,
-                       url_parameters: [:text_section_id]
+                       url_parameters: [:text_section_id, :text_id]
+    end
 
+    path "/text_sections/{text_section_id}/relationships/annotations" do
       include_examples "an API create request",
                        parent: "text section",
                        model: Annotation,
