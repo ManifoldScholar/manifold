@@ -80,6 +80,8 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
           accepts="images"
           name="attributes[cover]"
           readFrom="attributes[coverStyles][small]"
+          altTextName={"attributes[coverAltText]"}
+          altTextLabel={t("hero.cover_image_alt_label")}
         />
       </Form.FieldGroup>
       <Form.FieldGroup
