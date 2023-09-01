@@ -36,7 +36,7 @@ function Link({
 Link.displayName = "Utility.Pagination.Link";
 
 Link.propTypes = {
-  page: PropTypes.number.isRequired,
+  page: PropTypes.number,
   paginationClickHandler: PropTypes.func.isRequired,
   paginationTarget: PropTypes.string,
   disabled: PropTypes.bool,
