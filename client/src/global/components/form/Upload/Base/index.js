@@ -97,10 +97,13 @@ export default class FormUpload extends Component {
       ? Styled.AvatarBuilderDropzone
       : Styled.Dropzone;
 
-    const showAltTextInput =
-      this.props.altTextName &&
+    const valueIsImage =
       this.props.value &&
-      "gif jpeg jpg png svg".includes(this.props.value.split(".").pop());
+      (typeof this.props.value === "string"
+        ? "gif jpeg jpg png svg".includes(this.props.value.split(".").pop())
+        : this.props.value.content_type.includes("image"));
+
+    const showAltTextInput = this.props.altTextName && valueIsImage;
 
     return (
       <>
