@@ -6,11 +6,19 @@ import PropTypes from "prop-types";
 export default function TextTitle({ title }) {
   const maybeHtml = item => {
     const isHtml = !!item.__html;
-    return isHtml ? { dangerouslySetInnerHTML: { ...item } } : {};
+    const hasTags = typeof title === "string" && title.match(/(<([^>]+)>)/gi);
+    /* eslint-disable no-nested-ternary */
+    return isHtml
+      ? { dangerouslySetInnerHTML: { ...item } }
+      : hasTags
+      ? { dangerouslySetInnerHTML: { __html: title } }
+      : {};
   };
 
   const maybeReactNode = item => {
-    const isReactNode = React.isValidElement(item) || typeof item === "string";
+    const isReactNode =
+      React.isValidElement(item) ||
+      (typeof item === "string" && !title.match(/(<([^>]+)>)/gi));
     return isReactNode ? item : null;
   };
 

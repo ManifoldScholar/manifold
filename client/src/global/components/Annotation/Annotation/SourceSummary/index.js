@@ -26,12 +26,16 @@ class SourceSummary extends React.PureComponent {
   }
 
   get source() {
-    const { textTitle, textSectionTitle } = this.props.annotation.attributes;
+    const {
+      textTitleFormatted,
+      textSectionTitle
+    } = this.props.annotation.attributes;
+
     return (
       <Trans
         i18nKey="messages.annotation_summary.source"
         components={{
-          text: <TextTitle title={textTitle} />
+          text: <TextTitle title={textTitleFormatted} />
         }}
         values={{ section: textSectionTitle }}
       />
