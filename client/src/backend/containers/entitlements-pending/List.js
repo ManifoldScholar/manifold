@@ -75,7 +75,10 @@ function PendingEntitlementsList({
     const heading = t("modals.delete_entitlement");
     const message = t("modals.confirm_body");
     if (confirm)
-      confirm(heading, message, () => deleteEntitlement(id).then(refresh()));
+      confirm(heading, message, async () => {
+        await deleteEntitlement(id);
+        refresh();
+      });
   };
 
   const actions = [

@@ -112,7 +112,7 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
   return <EntityRow utility={utility} {...rowProps} />;
 }
 
-AssetRow.displayName = "EntitiesList.Entity.PendingEntitlementRow";
+AssetRow.displayName = "EntitiesList.Entity.AssetRow";
 
 AssetRow.propTypes = {
   entity: PropTypes.object,

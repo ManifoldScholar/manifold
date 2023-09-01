@@ -45,13 +45,6 @@ export default function PendingEntitlementRow({
       >
         <Utility.IconComposer icon="delete32" size={26} />
       </button>
-      {/* <button
-        className="entity-row__utility-button"
-        onClick={() => onEdit(entitlement.id)}
-        title={t("backend.actions.publish_feature")}
-      >
-        <Utility.IconComposer icon="annotate32" size={26} />
-      </button> */}
     </div>
   );
 
