@@ -162,7 +162,7 @@ export class SettingsThemeContainer extends PureComponent {
                 ]}
               />
             </Form.FieldGroup>
-            <Form.FieldGroup label={t("settings.theme.content_header")}>
+            <Form.FieldGroup label={t("settings.theme.content_signup_header")}>
               <Form.TextInput
                 wide
                 label={t("settings.theme.string_signup_terms_header")}
@@ -178,6 +178,10 @@ export class SettingsThemeContainer extends PureComponent {
                 label={t("settings.theme.string_signup_terms_two")}
                 name="attributes[theme][stringSignupTermsTwo]"
               />
+            </Form.FieldGroup>
+            <Form.FieldGroup
+              label={t("settings.theme.content_data_use_header")}
+            >
               <Form.TextInput
                 wide
                 label={t("settings.theme.string_data_use_header")}
@@ -187,6 +191,7 @@ export class SettingsThemeContainer extends PureComponent {
                 wide
                 label={t("settings.theme.string_data_use_copy")}
                 name="attributes[theme][stringDataUseCopy]"
+                instructions={t("settings.theme.data_use_copy_instructions")}
               />
               <Form.TextInput
                 wide
@@ -197,6 +202,9 @@ export class SettingsThemeContainer extends PureComponent {
                 wide
                 label={t("settings.theme.string_cookies_banner_copy")}
                 name="attributes[theme][stringCookiesBannerCopy]"
+                instructions={t(
+                  "settings.theme.cookies_banner_copy_instructions"
+                )}
               />
             </Form.FieldGroup>
             <Form.Save text={t("settings.save")} />
