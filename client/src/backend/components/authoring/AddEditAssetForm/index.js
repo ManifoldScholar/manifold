@@ -75,7 +75,6 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
       <Form.TextInput
         focusOnMount
         label={t("texts.assets.name_label")}
-        instructions={t("texts.assets.name_instructions")}
         renderValue={undefined}
         value={nameDefault}
         name="name"
