@@ -41,13 +41,14 @@ export const Drawer = styled.div`
 
   position: fixed;
   bottom: 0;
-  top: var(--library-header-height, 82px);
+  top: ${({ $fullHeight }) =>
+    $fullHeight ? 0 : `var(--library-header-height, 82px)`};
   width: 100%;
   overflow: auto;
   background-color: var(--drawer-bg-color);
   transition: transform ${defaultTransitionProps};
   padding: 20px var(--container-padding-inline-responsive) 33px;
-  z-index: 400;
+  z-index: 500;
 
   .utility-primary {
     color: var(--color-base-neutral-white);

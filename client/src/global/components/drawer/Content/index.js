@@ -70,6 +70,38 @@ function DrawerContent(props, ref) {
     "drawer--backend": context === "backend"
   });
 
+  const handleClickOutside = e => {
+    if (context === "reader" || context === "editor") return;
+
+    handleLeaveEvent(e);
+    // Return false here so the focus trap isn't actually deactivated. While we want to respond to outside clicks, we want to either fully close the drawer or maintain the focus trap depending on the user's choice in the confirm modal.
+    return false;
+  };
+
+  const handleBlur = e => {
+    if (focusTrap || !ref.current) return;
+    if (ref.current.contains(event.relatedTarget)) return;
+
+    handleLeaveEvent(e);
+  };
+
+  const inner = (
+    <Inner>
+      <FrontMatter {...props} />
+      {(connected || showNotifications) && (
+        <Notifications scope="drawer" style="drawer" animate={false} />
+      )}
+      <DrawerContext.Provider value={{ headerId }}>
+        {!!children &&
+          (typeof children === "string"
+            ? children
+            : React.cloneElement(children, {
+                closeDrawer: handleLeaveEvent
+              }))}
+      </DrawerContext.Provider>
+    </Inner>
+  );
+
   return (
     <Drawer
       key="drawer"
@@ -80,30 +112,24 @@ function DrawerContent(props, ref) {
       aria-label={ariaLabel}
       aria-labelledby={headerId}
       ref={ref}
+      onBlur={handleBlur}
+      $fullHeight={focusTrap}
     >
-      <FocusTrap
-        focusTrapOptions={{
-          checkCanFocusTrap,
-          allowOutsideClick: true,
-          escapeDeactivates: handleEscape,
-          returnFocusOnDeactivate
-        }}
-      >
-        <Inner>
-          <FrontMatter {...props} />
-          {(connected || showNotifications) && (
-            <Notifications scope="drawer" style="drawer" animate={false} />
-          )}
-          <DrawerContext.Provider value={{ headerId }}>
-            {!!children &&
-              (typeof children === "string"
-                ? children
-                : React.cloneElement(children, {
-                    closeDrawer: handleLeaveEvent
-                  }))}
-          </DrawerContext.Provider>
-        </Inner>
-      </FocusTrap>
+      {focusTrap ? (
+        <FocusTrap
+          focusTrapOptions={{
+            checkCanFocusTrap,
+            allowOutsideClick: context === "reader",
+            clickOutsideDeactivates: handleClickOutside,
+            escapeDeactivates: handleEscape,
+            returnFocusOnDeactivate
+          }}
+        >
+          {inner}
+        </FocusTrap>
+      ) : (
+        inner
+      )}
     </Drawer>
   );
 }

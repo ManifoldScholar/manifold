@@ -99,7 +99,8 @@ class MakersListContainerImplementation extends PureComponent {
     const active = match.params.id;
 
     const drawerProps = {
-      closeUrl: lh.link("backendRecordsMakers")
+      closeUrl: lh.link("backendRecordsMakers"),
+      focusTrap: false
     };
 
     const refetch = () =>
