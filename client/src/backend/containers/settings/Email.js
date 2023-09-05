@@ -171,10 +171,16 @@ export class SettingsEmailContainer extends PureComponent {
                 />
               </Form.FieldGroup>
             ) : null}
-            <Form.Save text={t("settings.save")} />
-            <div>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                rowGap: "20px"
+              }}
+            >
+              <Form.Save text={t("settings.save")} />
               <button
-                className="button-secondary button-secondary--dark button-secondary--with-room"
+                className="button-secondary button-secondary--dull button-secondary--outlined"
                 onClick={this.sendTestEmail}
               >
                 {t("settings.email.send_test")}
