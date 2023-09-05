@@ -9,7 +9,7 @@ class TextSectionViews extends Component {
 
   static propTypes = {
     withSort: PropTypes.bool,
-    data: PropTypes.array,
+    data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     t: PropTypes.func
   };
 
