@@ -95,7 +95,8 @@ class UsersListContainerImplementation extends PureComponent {
     const active = match.params.id;
 
     const drawerProps = {
-      closeUrl: lh.link("backendRecordsUsers")
+      closeUrl: lh.link("backendRecordsUsers"),
+      focusTrap: false
     };
 
     const refetch = () =>

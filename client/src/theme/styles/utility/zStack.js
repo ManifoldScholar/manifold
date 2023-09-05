@@ -23,7 +23,7 @@ export default `
   }
 
   .backend .header-app {
-    z-index: 500;
+    z-index: 450;
   }
 
   #global-notification-container .notifications-list {

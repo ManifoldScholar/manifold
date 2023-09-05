@@ -8,7 +8,7 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${transparentize("neutralBlack", 0.35)};
-  z-index: 400;
+  z-index: 500;
 
   .drawer-enter ~ & {
     opacity: 0.01;
