@@ -18,6 +18,10 @@ export const Hashtag = styled.a`
   font-weight: var(--font-weight-semibold);
 
   ${respond(`font-size: 18px;`, BREAKPOINT)}
+
+  &:hover {
+    color: var(--hover-color);
+  }
 `;
 
 export const Link = styled.a`
@@ -33,5 +37,9 @@ export const Link = styled.a`
 
   + div > ${Hashtag} {
     margin-block-start: 15px;
+  }
+
+  &:hover {
+    color: var(--hover-color);
   }
 `;
