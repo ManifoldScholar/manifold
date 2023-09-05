@@ -37,6 +37,8 @@ export const LinkCallout = styled(Link, transientOptions)`
     ${LinkIcon} {
       ${defaultHoverStyle}
     }
+
+    color: var(--hover-color);
   }
 `;
 
