@@ -82,6 +82,11 @@ function DrawerContent(props, ref) {
     if (focusTrap || !ref.current) return;
     if (ref.current.contains(event.relatedTarget)) return;
 
+    if (hasConfirm) {
+      const overlay = document.getElementById("global-overlay-container");
+      if (overlay.contains(event.relatedTarget)) return;
+    }
+
     handleLeaveEvent(e);
   };
 
