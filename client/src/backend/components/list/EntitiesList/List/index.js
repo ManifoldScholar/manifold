@@ -307,6 +307,7 @@ export default class ListEntities extends PureComponent {
                   padding={this.paginationPadding}
                   onPageClick={this.callback("onPageClick")}
                   style={this.paginationStyle}
+                  usesQueryParams={this.props.usesQueryParams}
                 />
               )}
             </div>

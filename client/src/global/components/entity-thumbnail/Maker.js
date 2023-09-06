@@ -27,7 +27,7 @@ export default class EntityThumbnailUser extends PureComponent {
   }
 
   get src() {
-    return this.attr.avatarStyles[this.variant];
+    return this.attr?.avatarStyles?.[this.variant];
   }
 
   get icon() {

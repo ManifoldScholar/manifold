@@ -1,12 +1,9 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import connectAndFetch from "utils/connectAndFetch";
 import ProjectCollection from "backend/components/project-collection";
-import { select, meta } from "utils/entityUtils";
 import { projectsAPI, collectionProjectsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 import EntitiesList, {
@@ -16,115 +13,60 @@ import EntitiesList, {
 import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import IconComposer from "global/components/utility/IconComposer";
+import { useHistory } from "react-router-dom";
+import {
+  usePaginationState,
+  useSetLocation,
+  useFetch,
+  useApiCallback
+} from "hooks";
 
-const { request } = entityStoreActions;
-const perPage = 12;
+function ProjectCollectionManageProjects({
+  projectCollection,
+  entitiesListSearchProps,
+  entitiesListSearchParams,
+  setScreenReaderStatus
+}) {
+  const { t } = useTranslation();
+  const history = useHistory();
 
-class ProjectCollectionManageProjectsImplementation extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      projects: select(requests.beProjects, state.entityStore),
-      projectsMeta: meta(requests.beProjects, state.entityStore),
-      collectionProjects: select(
-        requests.beCollectionProjects,
-        state.entityStore
-      )
-    };
-  };
+  const [pagination, setPageNumber] = usePaginationState(1, 12);
 
-  static displayName = "ProjectCollection.ManageProjects";
+  const { data: collectionProjects, refresh } = useFetch({
+    request: [collectionProjectsAPI.index, projectCollection.id],
+    options: { requestKey: requests.beCollectionProjects }
+  });
 
-  static propTypes = {
-    projectCollection: PropTypes.object.isRequired,
-    projects: PropTypes.array,
-    projectsMeta: PropTypes.object,
-    dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object,
-    entitiesListSearchProps: PropTypes.func.isRequired,
-    entitiesListSearchParams: PropTypes.object.isRequired,
-    t: PropTypes.func
-  };
+  const { data: projects, meta: projectsMeta } = useFetch({
+    request: [projectsAPI.index, entitiesListSearchParams.projects, pagination],
+    options: { requestKey: requests.beProjects }
+  });
 
-  componentDidMount() {
-    this.fetchProjects();
-    this.fetchCollectionProjects();
-  }
+  useSetLocation({
+    filters: entitiesListSearchParams.projects,
+    page: pagination.number
+  });
 
-  componentDidUpdate(prevProps) {
-    if (this.filtersChanged(prevProps)) return this.fetchProjects();
-  }
+  const addCollectionProject = useApiCallback(collectionProjectsAPI.create);
+  const removeCollectionProject = useApiCallback(collectionProjectsAPI.destroy);
 
-  get filters() {
-    return this.props.entitiesListSearchParams.projects || {};
-  }
+  if (!projectsMeta) return null;
 
-  get buttonClasses() {
-    return classNames(
-      "button-icon-secondary",
-      "button-icon-secondary--full",
-      "button-icon-secondary--centered",
-      "button-icon-secondary--smallcaps"
-    );
-  }
-
-  get buttonclassNamees() {
-    return classNames(
-      "button-icon-secondary__icon",
-      "button-icon-secondary__icon--right",
-      "button-icon-secondary__icon--short"
-    );
-  }
-
-  projectAddMessage(project) {
+  const projectAddMessage = project => {
     const title = project.attributes.title;
-    return this.props.t("project_collections.add_message", {
+    return t("project_collections.add_message", {
       title
     });
-  }
-
-  projectRemoveMessage(project) {
-    const title = project.attributes.title;
-    return this.props.t("project_collections.remove_message", {
-      title
-    });
-  }
-
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
-  projectsForProjectCollection(projectCollection) {
-    return projectCollection.relationships.collectionProjects.map(
-      cp => cp.relationships.project
-    );
-  }
-
-  fetchCollectionProjects() {
-    const action = request(
-      collectionProjectsAPI.index(this.props.projectCollection.id),
-      requests.beCollectionProjects
-    );
-    this.props.dispatch(action);
-  }
-
-  fetchProjects(eventIgnored = null, page = 1) {
-    const pagination = { number: page, size: perPage };
-    const action = request(
-      projectsAPI.index(this.filters, pagination),
-      requests.beProjects
-    );
-    this.props.dispatch(action);
-  }
-
-  updateHandlerCreator = page => {
-    return event => {
-      this.fetchProjects(event, page);
-    };
   };
 
-  collectionProjectParams(project) {
+  const projectRemoveMessage = project => {
+    const title = project.attributes.title;
+    return t("project_collections.remove_message", {
+      title
+    });
+  };
+
+  const collectionProjectParams = project => {
     return {
       attributes: {},
       type: "projectCollections",
@@ -137,43 +79,37 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
         }
       }
     };
-  }
+  };
 
-  findCollectionProjectForProject(project) {
-    return this.props.collectionProjects.find(cp => {
+  const findCollectionProjectForProject = project => {
+    return collectionProjects.find(cp => {
       return cp.relationships.project.id === project.id;
     });
-  }
-
-  handleProjectAdd = project => {
-    this.props.setScreenReaderStatus(this.projectAddMessage(project));
-    const call = collectionProjectsAPI.create(
-      this.props.projectCollection.id,
-      this.collectionProjectParams(project)
-    );
-    this.props.dispatch(
-      request(call, requests.beCollectionProjectsCreate, {
-        adds: requests.beCollectionProjects
-      })
-    );
   };
 
-  handleProjectRemove = project => {
-    this.props.setScreenReaderStatus(this.projectRemoveMessage(project));
-    const collectionProject = this.findCollectionProjectForProject(project);
+  const handleProjectAdd = async project => {
+    setScreenReaderStatus(projectAddMessage(project));
+
+    await addCollectionProject(
+      projectCollection.id,
+      collectionProjectParams(project)
+    );
+
+    refresh();
+  };
+
+  const handleProjectRemove = async project => {
+    setScreenReaderStatus(projectRemoveMessage(project));
+
+    const collectionProject = findCollectionProjectForProject(project);
     if (!collectionProject) return;
-    const call = collectionProjectsAPI.destroy(
-      this.props.projectCollection.id,
-      collectionProject.id
-    );
-    this.props.dispatch(
-      request(call, requests.beCollectionProjectsDestroy, {
-        removes: collectionProject
-      })
-    );
+
+    await removeCollectionProject(projectCollection.id, collectionProject.id);
+
+    refresh();
   };
 
-  projectCover = props => {
+  const projectCover = props => {
     const entity = props.entity;
     if (!entity) return null;
     return (
@@ -182,8 +118,8 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
         listStyle="grid"
         figure={
           <ProjectCollection.ProjectCover
-            removeHandler={this.handleProjectRemove}
-            addHandler={this.handleProjectAdd}
+            removeHandler={handleProjectRemove}
+            addHandler={handleProjectAdd}
             {...props}
           />
         }
@@ -192,18 +128,14 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
     );
   };
 
-  handleClose = () => {
-    const url = lh.link(
-      "backendProjectCollection",
-      this.props.projectCollection.id
-    );
-    return this.props.history.push(url);
+  const handleClose = () => {
+    const url = lh.link("backendProjectCollection", projectCollection.id);
+    return history.push(url);
   };
 
-  renderProjectCount(collectionProjects, projectsMeta) {
+  const renderProjectCount = () => {
     const count = collectionProjects.length || 0;
     const total = projectsMeta.pagination.totalCount || 0;
-    const t = this.props.t;
 
     return (
       <>
@@ -227,65 +159,73 @@ class ProjectCollectionManageProjectsImplementation extends PureComponent {
         </div>
       </>
     );
-  }
+  };
 
-  get selectedProjectIds() {
-    return this.props.collectionProjects.map(cp => cp.relationships.project.id);
-  }
+  const selectedProjectIds = collectionProjects.map(
+    cp => cp.relationships.project.id
+  );
 
-  render() {
-    if (!this.props.projectsMeta) return null;
-    const t = this.props.t;
+  const buttonClasses = classNames(
+    "button-icon-secondary",
+    "button-icon-secondary--full",
+    "button-icon-secondary--centered",
+    "button-icon-secondary--smallcaps"
+  );
 
-    return (
-      <>
-        <Layout.DrawerHeader
-          icon="BECollectionManual64"
-          title={this.props.projectCollection.attributes.title}
-          instructions={t("project_collections.manage_projects_instructions")}
-        />
-        <EntitiesList
-          entities={this.props.projects}
-          listStyle="grid"
-          entityComponent={this.projectCover}
-          entityComponentProps={{
-            selectedProjectIds: this.selectedProjectIds,
-            addable: true
-          }}
-          pagination={this.props.projectsMeta.pagination}
-          showCount={this.renderProjectCount(
-            this.props.collectionProjects,
-            this.props.projectsMeta
-          )}
-          callbacks={{
-            onPageClick: this.updateHandlerCreator
-          }}
-          search={
-            <Search {...this.props.entitiesListSearchProps("projects")} />
+  const iconClasses = classNames(
+    "button-icon-secondary__icon",
+    "button-icon-secondary__icon--right",
+    "button-icon-secondary__icon--short"
+  );
+
+  return (
+    <>
+      <Layout.DrawerHeader
+        icon="BECollectionManual64"
+        title={projectCollection.attributes.title}
+        instructions={t("project_collections.manage_projects_instructions")}
+      />
+      <EntitiesList
+        entities={projects}
+        listStyle="grid"
+        entityComponent={projectCover}
+        entityComponentProps={{
+          selectedProjectIds,
+          addable: true
+        }}
+        pagination={projectsMeta.pagination}
+        showCount={renderProjectCount()}
+        callbacks={{
+          onPageClick: page => e => {
+            e.preventDefault();
+            setPageNumber(page);
           }
-        />
+        }}
+        search={<Search {...entitiesListSearchProps("projects")} />}
+      />
 
-        <div className="actions">
-          <button className={this.buttonClasses} onClick={this.handleClose}>
-            <span>{t("actions.close")}</span>
-            <IconComposer
-              icon="close16"
-              size="default"
-              className={this.buttonclassNamees}
-            />
-          </button>
-        </div>
-      </>
-    );
-  }
+      <div className="actions">
+        <button className={buttonClasses} onClick={handleClose}>
+          <span>{t("actions.close")}</span>
+          <IconComposer icon="close16" size="default" className={iconClasses} />
+        </button>
+      </div>
+    </>
+  );
 }
 
-export const ProjectCollectionManageProjects = withFilteredLists(
-  withScreenReaderStatus(ProjectCollectionManageProjectsImplementation),
+ProjectCollectionManageProjects.displayName =
+  "ProjectCollection.ManageProjects";
+
+ProjectCollectionManageProjects.propTypes = {
+  projectCollection: PropTypes.object.isRequired,
+  entitiesListSearchProps: PropTypes.func.isRequired,
+  entitiesListSearchParams: PropTypes.object.isRequired
+};
+
+export default withFilteredLists(
+  withScreenReaderStatus(ProjectCollectionManageProjects),
   {
     projects: projectFilters()
   }
-);
-export default withTranslation()(
-  connectAndFetch(ProjectCollectionManageProjects)
 );

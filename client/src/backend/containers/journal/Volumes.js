@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { journalVolumesAPI } from "api";
 import { withRouter } from "react-router-dom";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, usePaginationState, useSetLocation } from "hooks";
 import EntitiesList, {
   Button,
   JournalVolumeRow
@@ -22,6 +22,10 @@ function JournalVolumesContainer({ refresh, journal, route }) {
   });
 
   const { t } = useTranslation();
+
+  useSetLocation({
+    page: pagination.number
+  });
 
   if (!data) return null;
 
@@ -45,7 +49,10 @@ function JournalVolumesContainer({ refresh, journal, route }) {
         pagination={meta.pagination}
         showCount
         callbacks={{
-          onPageClick: page => () => setPageNumber(page)
+          onPageClick: page => e => {
+            e.preventDefault();
+            setPageNumber(page);
+          }
         }}
         buttons={[
           <Button
@@ -55,6 +62,7 @@ function JournalVolumesContainer({ refresh, journal, route }) {
             authorizedFor="journalVolume"
           />
         ]}
+        usesQueryParams
       />
       {childRoutes(route, {
         drawer: true,
