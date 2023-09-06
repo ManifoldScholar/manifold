@@ -9,6 +9,7 @@ export default class ListEntitiesListPagination extends PureComponent {
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func.isRequired,
     paginationTarget: PropTypes.string,
+    usesQueryParams: PropTypes.bool,
     style: PropTypes.oneOf(["normal", "compact"]),
     padding: PropTypes.number
   };
@@ -37,6 +38,8 @@ export default class ListEntitiesListPagination extends PureComponent {
   }
 
   get paginationTarget() {
+    if (this.props.usesQueryParams) return undefined;
+
     return this.props.paginationTarget ?? "#";
   }
 

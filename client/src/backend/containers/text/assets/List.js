@@ -13,7 +13,8 @@ import {
   useFetch,
   usePaginationState,
   useFilterState,
-  useApiCallback
+  useApiCallback,
+  useSetLocation
 } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import withFilteredLists, { assetFilters } from "hoc/withFilteredLists";
@@ -38,6 +39,11 @@ function TextAssetsContainer({
   const { data: assets, meta, refresh } = useFetch({
     request: [ingestionSourcesAPI.index, text.id, filters, pagination],
     dependencies: [filters]
+  });
+
+  useSetLocation({
+    filters,
+    page: pagination.number
   });
 
   const renderChildRoutes = () => {
@@ -121,8 +127,12 @@ function TextAssetsContainer({
             count: meta?.pagination.totalCount
           })}
           callbacks={{
-            onPageClick: page => () => setPageNumber(page)
+            onPageClick: page => e => {
+              e.preventDefault();
+              setPageNumber(page);
+            }
           }}
+          usesQueryParams
         />
       )}
     </Styled.Wrapper>

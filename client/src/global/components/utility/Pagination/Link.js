@@ -12,14 +12,24 @@ function Link({
   ...props
 }) {
   const handler = paginationClickHandler(page);
-  const Component = typeof handler === "string" ? ReactRouterLink : "a";
-  const linkProps =
-    typeof handler === "string"
-      ? { to: handler }
-      : {
-          onClick: !disabled ? handler : event => event.preventDefault(),
-          href: paginationTarget ?? `?page=${page}`
-        };
+  let Component;
+  let linkProps;
+
+  if (typeof handler === "string") {
+    Component = ReactRouterLink;
+    linkProps = { to: handler };
+  } else if (paginationTarget === "#") {
+    Component = "button";
+    linkProps = {
+      onClick: !disabled ? handler : event => event.preventDefault()
+    };
+  } else {
+    Component = "a";
+    linkProps = {
+      onClick: !disabled ? handler : event => event.preventDefault(),
+      href: `?page=${page}`
+    };
+  }
 
   return (
     <Styled.Link
