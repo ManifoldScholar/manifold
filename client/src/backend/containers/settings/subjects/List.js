@@ -96,7 +96,8 @@ export class SettingsSubjectsListContainer extends PureComponent {
     const active = match.params.id;
 
     const drawerProps = {
-      closeUrl: lh.link("backendSettingsSubjects")
+      closeUrl: lh.link("backendSettingsSubjects"),
+      lockScroll: "always"
     };
 
     return (

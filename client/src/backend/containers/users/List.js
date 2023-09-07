@@ -96,7 +96,7 @@ class UsersListContainerImplementation extends PureComponent {
 
     const drawerProps = {
       closeUrl: lh.link("backendRecordsUsers"),
-      focusTrap: false
+      lockScroll: "always"
     };
 
     const refetch = () =>

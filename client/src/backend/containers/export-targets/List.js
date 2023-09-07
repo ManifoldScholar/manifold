@@ -65,7 +65,7 @@ export class ExportTargetsContainerImplementation extends PureComponent {
     const active = match.params.id || "";
     const drawerProps = {
       closeUrl: lh.link("backendSettingsExportTargets"),
-      focusTrap: false
+      lockScroll: "always"
     };
 
     return (
