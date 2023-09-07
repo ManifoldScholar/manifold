@@ -1,4 +1,4 @@
-import { ProjectEventsContainer } from "../Events";
+import ProjectEventsContainer from "../Events";
 import { project, route } from "./__fixtures__";
 
 describe("backend/containers/project/Events", () => {
