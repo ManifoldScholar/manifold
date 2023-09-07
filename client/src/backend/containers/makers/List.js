@@ -100,7 +100,7 @@ class MakersListContainerImplementation extends PureComponent {
 
     const drawerProps = {
       closeUrl: lh.link("backendRecordsMakers"),
-      focusTrap: false
+      lockScroll: "always"
     };
 
     const refetch = () =>
