@@ -3,7 +3,8 @@ import {
   buttonUnstyled,
   buttonAvatar,
   defaultTransitionProps,
-  defaultHoverStyle
+  defaultHoverStyle,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export const Button = styled.button`
@@ -43,6 +44,12 @@ export const Button = styled.button`
         &:hover {
           .avatar {
             ${defaultHoverStyle}
+          }
+        }
+
+        &:focus-visible {
+          .avatar {
+            ${defaultFocusStyle}
           }
         }
   `}
