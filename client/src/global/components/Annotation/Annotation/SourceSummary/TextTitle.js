@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 export default function TextTitle({ title }) {
   const maybeHtml = item => {
     const isHtml = !!item.__html;
-    const hasTags = typeof title === "string" && title.match(/(<([^>]+)>)/gi);
+    const hasTags =
+      typeof title === "string" && !!title.match(/(<([^>]+)|(&#)>)/gi)?.length;
     /* eslint-disable no-nested-ternary */
     return isHtml
       ? { dangerouslySetInnerHTML: { ...item } }
@@ -18,7 +19,7 @@ export default function TextTitle({ title }) {
   const maybeReactNode = item => {
     const isReactNode =
       React.isValidElement(item) ||
-      (typeof item === "string" && !title.match(/(<([^>]+)>)/gi));
+      (typeof item === "string" && !title.match(/(<([^>]+)|(&#)>)/gi)?.length);
     return isReactNode ? item : null;
   };
 
