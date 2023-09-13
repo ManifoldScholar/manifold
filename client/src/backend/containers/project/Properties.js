@@ -28,16 +28,24 @@ function ProjectPropertiesContainer({ project }) {
   const { t } = useTranslation();
 
   const formatData = data => {
-    const { avatarAltText, avatar, ...rest } = data?.attributes ?? {};
+    const { avatarAltText, avatar: avatarData, ...rest } =
+      data?.attributes ?? {};
 
+    /* eslint-disable no-nested-ternary */
     const finalAvatarData =
       typeof avatarAltText === "string"
-        ? { ...avatar, altText: avatarAltText }
-        : avatar;
+        ? { avatar: { ...avatarData, altText: avatarAltText } }
+        : avatarData
+        ? { avatar: avatarData }
+        : {};
+
+    const relationships = data.relationships?.subjects
+      ? { subjects: { data: data.relationships?.subjects } }
+      : {};
 
     return {
-      ...data,
-      attributes: { avatar: finalAvatarData, ...rest }
+      relationships,
+      attributes: { ...finalAvatarData, ...rest }
     };
   };
 

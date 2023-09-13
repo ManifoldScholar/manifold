@@ -28,8 +28,12 @@ function JournalPropertiesContainer({ journal }) {
         ? { ...avatar, altText: avatarAltText }
         : avatar;
 
+    const relationships = data.relationships?.subjects
+      ? { subjects: { data: data.relationships?.subjects } }
+      : {};
+
     return {
-      ...data,
+      relationships,
       attributes: { avatar: finalAvatarData, ...rest }
     };
   };
