@@ -108,7 +108,9 @@ export class FormSelect extends Component {
                 id={`${this.idPrefix}-${id}`}
                 aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
                 onChange={this.props.onChange}
-                value={this.props.optionsMeta?.stringValue || this.props.value}
+                value={
+                  this.props.optionsMeta?.stringValue ?? this.props.value ?? ""
+                }
                 ref={input => {
                   this.inputElement = input;
                 }}

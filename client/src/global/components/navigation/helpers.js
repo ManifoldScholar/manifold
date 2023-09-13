@@ -89,13 +89,16 @@ const getFrontendPath = (pathname, entities) => {
       ? `/projects/project-collection/${id}`
       : `/projects/project-collection/${pathname.split("/").pop()}`;
   if (BE_ROUTE_REGEXES.resource.test(pathname)) {
-    const projectId = entities.resources[id].relationships?.project?.data?.id;
-    return `/projects/${projectId}/resource/${id}`;
+    const projectId = entities.resources
+      ? entities.resources[id].relationships?.project?.data?.id
+      : "";
+    return projectId ? `/projects/${projectId}/resource/${id}` : "/";
   }
   if (BE_ROUTE_REGEXES.resourceCollection.test(pathname)) {
-    const projectId =
-      entities.resourceCollections[id].relationships?.project?.data?.id;
-    return `/projects/${projectId}/resource-collection/${id}`;
+    const projectId = entities.resourceCollections
+      ? entities.resourceCollections[id].relationships?.project?.data?.id
+      : "";
+    return projectId ? `/projects/${projectId}/resource-collection/${id}` : "/";
   }
   if (BE_ROUTE_REGEXES.page.test(pathname)) {
     const pageId = pathname.split("/").find(part => !isNaN(parseInt(part, 10)));
