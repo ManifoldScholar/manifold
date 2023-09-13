@@ -186,6 +186,7 @@ import RTELink24 from "./24/RTELink";
 import RTEImage24 from "./24/RTEImage";
 import CodeBlock24 from "./24/CodeBlock";
 import ProjectCollection32 from "./32/ProjectCollection";
+import Expand24 from "./24/Expand";
 
 export default {
   ActivityComments64,
@@ -262,6 +263,7 @@ export default {
   EditProfile24,
   EditorHTML24,
   EditorRTE24,
+  Expand24,
   Export24,
   EyeClosed32,
   EyeOpen16,

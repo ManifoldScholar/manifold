@@ -18,7 +18,7 @@
     "add_section_button_label": "Add New Section",
     "edit_section": "Edit Section",
     "toc_header": "Table of Contents",
-    "toc_instructions": "Add, edit, and order TOC entries below. Entries can be nested, up to a max of 10 levels, by dragging and dropping on the parent entry. Auto generating a TOC will clear all edits and set the TOC to a list of the text's sections.",
+    "toc_instructions": "Add, edit, and order TOC entries. Entries can be nested, up to a max of 10 levels, by dragging and dropping on the parent entry or into a nested list. If you are having trouble dragging an entry into position between other entries with nested children, try collapsing the children to make the drop target clearer. Auto generating a TOC will clear all edits and set the TOC to a list of the text's sections.",
     "add_toc_button_label": "Add TOC Entry",
     "add_toc_truncated": "Entry",
     "auto_toc_button_label": "Auto Generate TOC",

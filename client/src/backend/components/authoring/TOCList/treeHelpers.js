@@ -151,3 +151,14 @@ export const getParentId = (id, treeItems) => {
 const removeKey = (k, { [k]: _, ...o }) => o;
 export const removeKeys = (keys, o) =>
   keys.reduce((r, k) => removeKey(k, r), o);
+
+const childCount = item => {
+  return item.hasChildren ? item.children.length : 0;
+};
+
+export const getCollapseCount = (item, items) => {
+  return [
+    item.isExpanded ? childCount(item) : 0,
+    ...item.children?.map(c => getCollapseCount(items[c], items))
+  ].reduce((sum, val) => sum + val, 0);
+};
