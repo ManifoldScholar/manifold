@@ -71,6 +71,20 @@ export class ResourceCollectionNewContainer extends PureComponent {
       parentId: project.id
     };
 
+    const formatData = data => {
+      const { thumbnailAltText, thumbnail, ...rest } = data?.attributes ?? {};
+
+      const finalThumbnailData =
+        typeof thumbnailAltText === "string"
+          ? { ...thumbnail, altText: thumbnailAltText }
+          : thumbnail;
+
+      return {
+        ...data,
+        attributes: { thumbnail: finalThumbnailData, ...rest }
+      };
+    };
+
     return (
       <Authorize
         entity={project}
@@ -102,6 +116,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
               update={resourceCollectionsAPI.update}
               create={model => resourceCollectionsAPI.create(project.id, model)}
               onSuccess={this.handleSuccess}
+              formatData={formatData}
               className="form-secondary"
             >
               <Form.TextInput
@@ -128,6 +143,8 @@ export class ResourceCollectionNewContainer extends PureComponent {
                 readFrom="attributes[thumbnailStyles][small]"
                 name="attributes[thumbnail]"
                 remove="attributes[removeThumbnail]"
+                altTextName="attributes[thumbnailAltText]"
+                altTextLabel={t("hero.cover_image_alt_label")}
               />
               <Form.Save
                 text={t("resource_collections.forms.new_save")}
