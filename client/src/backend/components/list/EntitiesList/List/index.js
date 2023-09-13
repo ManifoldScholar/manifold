@@ -260,6 +260,7 @@ export default class ListEntities extends PureComponent {
                 pagination={this.pagination}
                 showCount={this.showCountInTitle}
                 titleTag={this.props.titleTag}
+                titleActions={this.props.titleActions}
               />
             )}
             <div className={contentsWrapperClassName}>

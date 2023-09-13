@@ -14,7 +14,8 @@ export default class ListEntitiesListTitle extends PureComponent {
     titleStyle: PropTypes.oneOf(["bar", "title", "section"]),
     pagination: PropTypes.object,
     showCount: PropTypes.bool,
-    titleTag: PropTypes.string
+    titleTag: PropTypes.string,
+    titleActions: PropTypes.arrayOf(PropTypes.object)
   };
 
   static defaultProps = {
@@ -67,6 +68,7 @@ export default class ListEntitiesListTitle extends PureComponent {
         title={this.title}
         titleIcon={this.titleIcon}
         titleTag={this.props.titleTag}
+        titleActions={this.props.titleActions}
       />
     );
   }

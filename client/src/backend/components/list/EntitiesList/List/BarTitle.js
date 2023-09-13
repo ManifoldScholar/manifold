@@ -39,6 +39,7 @@ export default class ListEntitiesListBarTitle extends PureComponent {
         title={this.title}
         type={this.count || this.props.titleTag ? "count" : "list"}
         hideBreadcrumbs={this.props.titleTag === "h2"}
+        actions={this.props.titleActions}
       />
     );
   }
