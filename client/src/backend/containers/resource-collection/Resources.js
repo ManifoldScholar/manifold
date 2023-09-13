@@ -168,8 +168,8 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
     const t = this.props.t;
 
     const toggleLabel = collectionFilterEnabled
-      ? t("resource_collections.show_all_projects")
-      : t("resource_collections.show_collection_projects");
+      ? "resource_collections.show_all_projects"
+      : "resource_collections.show_collection_projects";
 
     return (
       <EntitiesList
@@ -179,19 +179,16 @@ class ResourceCollectionResourcesContainerImplementation extends Component {
           onSwitchChange: this.handleSelect,
           switchValue: this.isInCollection
         }}
-        title={
-          <>
-            {t("glossary.resource_title_case_other")}
-            <button
-              style={{ marginLeft: "14px" }}
-              onClick={this.toggleCollectionOnly}
-              className="utility-button"
-            >
-              <span className="utility-button__text">{toggleLabel}</span>
-            </button>
-          </>
-        }
-        titleIcon="resourceCollection64"
+        title={t("glossary.resource_title_case_other")}
+        titleStyle="bar"
+        titleTag="h2"
+        titleActions={[
+          {
+            label: toggleLabel,
+            onClick: this.toggleCollectionOnly,
+            icon: collectionFilterEnabled ? "circlePlus24" : "circleMinus24"
+          }
+        ]}
         entities={this.props.resources}
         unit={t("glossary.resource", {
           count: this.props.resourcesMeta?.pagination?.totalCount
