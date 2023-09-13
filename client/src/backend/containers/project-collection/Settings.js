@@ -50,8 +50,12 @@ export class ProjectCollectionSettings extends PureComponent {
           ? { ...hero, altText: heroAltText }
           : hero;
 
+      const relationships = data.relationships?.subjects
+        ? { subjects: { data: data.relationships?.subjects } }
+        : {};
+
       return {
-        ...data,
+        relationships,
         attributes: { hero: finalHeroData, ...rest }
       };
     };
