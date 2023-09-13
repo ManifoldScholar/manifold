@@ -18,13 +18,19 @@ import {
 } from "./patterns";
 import * as Styled from "./styles";
 
+const htmlRegex = /(<([^>]+)>)|(&#)/gi;
+
 const maybeHtml = title => {
-  const hasTags = typeof title === "string" && title.match(/(<([^>]+)>)/gi);
+  const hasTags =
+    typeof title === "string" && !!title?.match(htmlRegex)?.length;
   return hasTags ? { dangerouslySetInnerHTML: { __html: title } } : {};
 };
 
-const maybeString = title =>
-  typeof title === "string" && !title.match(/(<([^>]+)>)/gi) ? title : null;
+const maybeString = title => {
+  return typeof title === "string" && !title?.match(htmlRegex)?.length
+    ? title
+    : null;
+};
 
 const maybeComponent = title => (React.isValidElement(title) ? title : null);
 

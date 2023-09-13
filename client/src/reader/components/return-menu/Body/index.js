@@ -20,12 +20,15 @@ export default function ReturnMenuBody({
   const { t } = useTranslation();
 
   const maybeHtml = title => {
-    const hasTags = typeof title === "string" && title.match(/(<([^>]+)>)/gi);
+    const hasTags =
+      typeof title === "string" && !!title.match(/(<([^>]+)>)|(&#)/gi)?.length;
     return hasTags ? { dangerouslySetInnerHTML: { __html: title } } : {};
   };
 
   const maybeString = title =>
-    typeof title === "string" && !title.match(/(<([^>]+)>)/gi) ? title : null;
+    typeof title === "string" && !title.match(/(<([^>]+)>)|(&#)/gi)?.length
+      ? title
+      : null;
 
   return (
     <Styled.Menu aria-label="Site Navigation">

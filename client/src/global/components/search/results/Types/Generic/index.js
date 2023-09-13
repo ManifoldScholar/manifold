@@ -27,7 +27,8 @@ function SearchResultsTypeGeneric(props) {
 
   const maybeHtml = item => {
     const hasHtml = !!item.__html;
-    const hasTags = typeof item === "string" && item.match(/(<([^>]+)>)/gi);
+    const hasTags =
+      typeof item === "string" && !!item.match(/(<([^>]+)|(&#)>)/gi)?.length;
     /* eslint-disable no-nested-ternary */
     return hasHtml
       ? { dangerouslySetInnerHTML: { ...item } }
@@ -39,7 +40,7 @@ function SearchResultsTypeGeneric(props) {
   const maybeReactNode = item => {
     const isReactNode =
       React.isValidElement(item) ||
-      (typeof item === "string" && !item.match(/(<([^>]+)>)/gi));
+      (typeof item === "string" && !item.match(/(<([^>]+)|(&#)>)/gi)?.length);
     return isReactNode ? item : null;
   };
 
