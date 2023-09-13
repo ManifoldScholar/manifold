@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -21,10 +21,6 @@ function TextTOCContainer({ text, route, confirm }) {
     formatTreeData(text.attributes?.toc)
   );
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    setTree(formatTreeData(text.attributes?.toc));
-  }, [text?.attributes.toc]);
 
   const updateText = useApiCallback(textsAPI.update);
 

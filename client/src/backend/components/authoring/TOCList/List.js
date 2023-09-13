@@ -10,7 +10,8 @@ import {
   getRootParentPosition,
   removeKeys,
   isValidParent,
-  getParentId
+  getParentId,
+  getCollapseCount
 } from "./treeHelpers";
 import { textsAPI } from "api";
 import { useApiCallback } from "hooks";
@@ -20,6 +21,12 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
   const { t } = useTranslation();
 
   const [dragging, setDragging] = useState(false);
+  const [pageHeightCount, setPageHeightCount] = useState(
+    Object.keys(tree.items).length - 1
+  );
+  const [dropzoneCount, setDropzoneCount] = useState(
+    Object.keys(tree.items).length - 1
+  );
 
   const updateText = useApiCallback(textsAPI.update);
 
@@ -61,18 +68,26 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
     const update = moveItemOnTree(tree, source, finalDestination);
     onReorderTOC(update);
 
-    const movedId = tree.items[source.parentId].children.at(source.index);
-    update.items[movedId].data.parentId = destination.parentId;
-
-    const expand = mutateTree(update, destination.parentId, {
-      isExpanded: true
-    });
-    setTree(expand);
+    setTree(update);
   };
 
   const renderItem = ({ item, provided, snapshot, depth }) => {
     const dragHandleProps = provided.dragHandleProps;
     delete dragHandleProps["aria-roledescription"];
+
+    const onCollapse = () => {
+      const update = mutateTree(tree, item.id, { isExpanded: false });
+      setTree(update);
+      const nestedCount = getCollapseCount(item, update.items);
+      setPageHeightCount(pageHeightCount - nestedCount);
+    };
+
+    const onExpand = () => {
+      const update = mutateTree(tree, item.id, { isExpanded: true });
+      setTree(update);
+      const nestedCount = getCollapseCount(update.items[item.id], update.items);
+      setPageHeightCount(pageHeightCount + nestedCount);
+    };
 
     return (
       <Entry
@@ -86,6 +101,8 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
         placeholder={provided.placeholder}
         textId={textId}
         onDelete={onDelete}
+        onCollapse={onCollapse}
+        onExpand={onExpand}
       />
     );
   };
@@ -99,21 +116,14 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
       : error;
   /* eslint-disable no-nested-ternary */
 
-  const [dropzoneCount, setDropzoneCount] = useState(
-    Object.keys(tree.items).length - 1
-  );
-
   const onDragStart = id => {
     setDragging(true);
-    const collapsedCount = tree.items[id].children.length;
-    setDropzoneCount(Object.keys(tree.items).length - 1 - collapsedCount);
+    const nestedCount = getCollapseCount(tree.items[id], tree.items);
+    setDropzoneCount(pageHeightCount - nestedCount);
   };
 
   return tree ? (
-    <Styled.Wrapper
-      className="full-width"
-      $count={Object.keys(tree.items).length - 1}
-    >
+    <Styled.Wrapper className="full-width" $count={pageHeightCount}>
       {error && <Styled.Error>{errorMessage}</Styled.Error>}
       {dragging && <Styled.Dropzone $count={dropzoneCount} />}
       <Styled.ScrollContainer $count={Object.keys(tree.items).length - 1}>

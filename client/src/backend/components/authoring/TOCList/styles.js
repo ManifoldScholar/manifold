@@ -127,9 +127,20 @@ export const Button = styled.button`
   padding-inline: 3px;
   ${respond(`padding-inline: 6px;`, 30)};
 
-  &:focus,
-  &:focus-visible {
+  ${({ $highlight }) => $highlight && `color: var(--highlight-color);`}
+
+  &:focus:not(:disabled),
+  &:focus-visible:not(:disabled) {
     ${defaultFocusStyle}
+  }
+
+  &:disabled {
+    cursor: default;
+    color: var(--color-neutral-ui-dull-light);
+
+    &:hover {
+      color: var(--color-neutral-ui-dull-light);
+    }
   }
 `;
 

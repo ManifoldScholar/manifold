@@ -15,11 +15,15 @@ export default function TOCEntry({
   isDragging,
   isdropTarget,
   textId,
-  onDelete
+  onDelete,
+  onCollapse,
+  onExpand
 }) {
   const { t } = useTranslation();
 
   const editUrl = lh.link("backendTextTOCEntryEdit", textId, entry.id);
+
+  const collapseExpandHandler = entry.isExpanded ? onCollapse : onExpand;
 
   return (
     <Styled.Item ref={innerRef} {...draggableProps}>
@@ -37,6 +41,14 @@ export default function TOCEntry({
           </Styled.Button>
           <Styled.Button as={Link} to={editUrl} aria-label={t("actions.edit")}>
             <Utility.IconComposer size={24} icon="annotate24" />
+          </Styled.Button>
+          <Styled.Button
+            onClick={collapseExpandHandler}
+            aria-label={t("actions.edit")}
+            disabled={!entry.hasChildren}
+            $highlight={entry.hasChildren}
+          >
+            <Utility.IconComposer size={24} icon="BEProject64" />
           </Styled.Button>
           <Styled.DragHandle
             aria-describedby="toc-drag-handle-instructions"
