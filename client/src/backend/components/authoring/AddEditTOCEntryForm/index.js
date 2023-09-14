@@ -71,7 +71,7 @@ export default function AddEditTOCEntryForm({
     key: s.id
   }));
 
-  const { id: sectionId, title: label, anchor } = entry?.data ?? {};
+  const { sectionId, title: label, anchor } = entry?.data ?? {};
 
   const model = useMemo(() => ({ id: textId, sectionId, label, anchor }), [
     textId,
