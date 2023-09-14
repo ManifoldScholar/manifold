@@ -86,7 +86,7 @@ export class FormBaseInput extends PureComponent {
   };
 
   renderValue(props) {
-    if (!props.renderValue) return props.value ?? "";
+    if (!props.renderValue) return props.value ?? undefined;
     return props.renderValue(props.value);
   }
 
