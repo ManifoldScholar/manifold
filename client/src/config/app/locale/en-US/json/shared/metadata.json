@@ -57,7 +57,7 @@
     "original_publisher": "original publisher",
     "original_publisher_place": "original publisher place",
     "original_publisher_place_placeholder": "Geographic location of the original publisher",
-    "original_publisher_placeholder": "Original publisher, for items that have been republished by a different publisher",
+    "original_publisher_placeholder": "Original publisher, if republished",
     "original_title": "original title",
     "original_title_placeholder": "Title of the original version",
     "pmcid": "pmcid",
