@@ -17,7 +17,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
       const displayName = data.name;
       const attachment =
         typeof data.attachment === "object" ? data.attachment : null;
-      const altText = data.attributes.attachmentData.metadata.altText;
+      const altText = data.attributes.attachmentData.metadata?.altText;
       const finalAttachment =
         typeof altText === "string" ? { ...attachment, altText } : attachment;
       const attributes = {
