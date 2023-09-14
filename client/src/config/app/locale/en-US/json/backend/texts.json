@@ -42,7 +42,7 @@
       "section_placeholder": "Section",
       "section_instructions": "For example, “chapter” for books or “article” for journals",
       "access_header": "Access",
-      "ignore_label": "Ignore Acess Restrictions?",
+      "ignore_label": "Ignore Access Restrictions?",
       "ignore_instructions": "When on, this text will be available to all readers regardless of project access settings.",
       "save": "Save Text"
     },
