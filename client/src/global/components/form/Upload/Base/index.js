@@ -101,7 +101,7 @@ export default class FormUpload extends Component {
       this.props.value &&
       (typeof this.props.value === "string"
         ? "gif jpeg jpg png svg".includes(this.props.value.split(".").pop())
-        : this.props.value.content_type.includes("image"));
+        : this.props.value.content_type?.includes("image"));
 
     const showAltTextInput = this.props.altTextName && valueIsImage;
 
