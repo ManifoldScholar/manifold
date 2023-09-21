@@ -6,6 +6,8 @@
 class AnnotationNode < ApplicationRecord
   include View
 
+  self.primary_key = :annotation_id
+
   belongs_to :annotation, inverse_of: :annotation_node
 
   belongs_to :start_node, class_name: "TextSectionNode"

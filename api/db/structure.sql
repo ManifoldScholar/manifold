@@ -346,13 +346,16 @@ CREATE VIEW public.annotation_nodes AS
     start_node.id AS start_node_id,
     end_node.id AS end_node_id,
     (ts.body_json #> ancestor_node.path) AS existing_node,
-    (ts.id IS NOT NULL) AS matches_text_section
+    (ts.id IS NOT NULL) AS matches_text_section,
+    start_node.extrapolated_at AS start_node_extrapolated_at,
+    end_node.extrapolated_at AS end_node_extrapolated_at,
+    ancestor_node.extrapolated_at AS ancestor_node_extrapolated_at
    FROM ((((public.annotations a
      LEFT JOIN public.text_section_nodes start_node ON (((start_node.text_section_id = a.text_section_id) AND (start_node.node_uuid = (a.start_node)::text))))
      LEFT JOIN public.text_section_nodes end_node ON (((end_node.text_section_id = a.text_section_id) AND (end_node.node_uuid = (a.end_node)::text))))
      LEFT JOIN public.text_section_nodes ancestor_node ON (((ancestor_node.node_path OPERATOR(public.@>) start_node.node_path) AND (ancestor_node.node_path OPERATOR(public.@>) end_node.node_path) AND (NOT ancestor_node.intermediate))))
      LEFT JOIN public.text_sections ts ON (((ts.id = a.text_section_id) AND (ts.body_hash = ancestor_node.body_hash))))
-  ORDER BY a.id, ancestor_node.depth DESC NULLS LAST, ancestor_node.extrapolated_at DESC NULLS LAST;
+  ORDER BY a.id, ancestor_node.extrapolated_at DESC NULLS LAST, ancestor_node.depth DESC NULLS LAST;
 
 
 --
@@ -815,8 +818,8 @@ CREATE TABLE public.journal_issues (
     journal_id uuid NOT NULL,
     journal_volume_id uuid,
     creator_id uuid,
-    number character varying DEFAULT ''::character varying NOT NULL,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    number character varying DEFAULT ''::character varying NOT NULL,
     sort_title integer DEFAULT 0 NOT NULL,
     pending_sort_title integer
 );
@@ -7065,6 +7068,5 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230607190750'),
 ('20230607191531'),
 ('20230816233543'),
-('20230817212021');
-
-
+('20230817212021'),
+('20230921024546');
