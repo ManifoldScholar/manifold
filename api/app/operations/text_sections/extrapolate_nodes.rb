@@ -9,6 +9,12 @@ module TextSections
   class ExtrapolateNodes
     include Dry::Monads[:do, :result]
     include QueryOperation
+    include ManifoldApi::Deps[
+      correct_intermediate_nodes: "text_sections.correct_intermediate_nodes",
+    ]
+
+    # Arel expression to match an intermediate tag.
+    TAG_IS_INTERMEDIATE = Arel.sql("tag").then { |tag| tag.not_eq(nil).and(tag.in(::TextSectionNode::INTERMEDIATE_TAGS)) }.to_sql
 
     FIRST_PART = <<~SQL
     WITH RECURSIVE nodes(
@@ -68,10 +74,14 @@ module TextSections
         node_uuid, text_digest, content,
         COALESCE(node_extra, '{}'::jsonb) AS node_extra,
         COALESCE(children_count, 0) AS children_count,
-        (tag IS NOT NULL AND tag IN ('mrow', 'mi', 'msup', 'mn', 'mo', 'thead', 'tbody', 'tfoot', 'tr', 'td', 'th')) AS intermediate,
+        (#{TAG_IS_INTERMEDIATE}) AS intermediate,
         CURRENT_TIMESTAMP AS extrapolated_at
       FROM nodes
-    ) INSERT INTO text_section_nodes (
+    )
+    SQL
+
+    FINAL_PART = <<~SQL
+    INSERT INTO text_section_nodes (
       text_section_id, body_hash,
       node_root, node_path, path,
       node_indices, depth, node_index,
@@ -154,11 +164,13 @@ module TextSections
     SQL
 
     def call(**args)
-      return Success(upserted: 0) if args[:text_section].present? && args[:text_section].body_json.blank?
+      corrected = yield correct_intermediate_nodes.(**args)
 
-      upserted = sql_update! FIRST_PART, interpolate(**args), SECOND_PART
+      return Success(upserted: 0, corrected: corrected) if args[:text_section].present? && args[:text_section].body_json.blank?
 
-      Success(upserted: upserted)
+      upserted = sql_update! FIRST_PART, interpolate(**args), SECOND_PART, FINAL_PART
+
+      Success(upserted: upserted, corrected: corrected)
     end
 
     private
