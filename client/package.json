@@ -274,7 +274,7 @@
     "slate": "^0.90.0"
   },
   "engines": {
-    "node": ">=8.0.0 <13.0.0"
+    "node": ">=8.0.0 <17.0.0"
   },
   "browserslist": [
     "defaults",
