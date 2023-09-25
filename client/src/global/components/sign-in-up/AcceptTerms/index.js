@@ -20,25 +20,23 @@ export default function AcceptTerms({ handleViewChange }) {
   const termsPage = pages?.find(
     p => p.attributes.purpose === "terms_and_conditions"
   );
+  const termsLink = termsPage?.attributes.isExternalLink
+    ? termsPage.attributes.externalLink
+    : `/page/${termsPage?.attributes.slug}`;
   const privacyPolicy = pages?.find(
     p => p.attributes.purpose === "privacy_policy"
   );
+  const privacyLink = privacyPolicy?.attributes.isExternalLink
+    ? privacyPolicy.attributes.externalLink
+    : `/page/${privacyPolicy?.attributes.slug}`;
 
   const checkboxLabel = privacyPolicy ? (
     <Trans
       i18nKey="forms.signin_overlay.accept_checkbox_label"
       values={{ installationName }}
       components={{
-        termsLink: termsPage ? (
-          <a href={`/page/${termsPage.attributes.slug}`}>#</a>
-        ) : (
-          <></>
-        ),
-        privacyLink: privacyPolicy ? (
-          <a href={`/page/${privacyPolicy.attributes.slug}`}>#</a>
-        ) : (
-          <></>
-        )
+        termsLink: termsPage ? <a href={termsLink}>#</a> : <></>,
+        privacyLink: privacyPolicy ? <a href={privacyLink}>#</a> : <></>
       }}
     />
   ) : (
@@ -46,11 +44,7 @@ export default function AcceptTerms({ handleViewChange }) {
       i18nKey="forms.signin_overlay.accept_checkbox_label_truncated"
       values={{ installationName }}
       components={{
-        termsLink: termsPage ? (
-          <a href={`/page/${termsPage.attributes.slug}`}>#</a>
-        ) : (
-          <></>
-        )
+        termsLink: termsPage ? <a href={termsPage}>#</a> : <></>
       }}
     />
   );
