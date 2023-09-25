@@ -451,11 +451,13 @@ class Text < ApplicationRecord
   def validate_toc
     return if toc.empty?
 
-    return if toc.all? do |toc_entry|
-      toc_entry[:source_path] || text_sections.find_by(id: toc_entry[:id])
-    end
+    toc.each do |toc_entry|
+      has_section = toc_entry[:source_path] || text_sections.find_by(id: toc_entry[:id])
+      has_name = toc_entry[:label].present?
 
-    errors.add(:toc, "entry must be linked to a text section")
+      errors.add(:toc, "entry must be linked to a text section") unless has_section
+      errors.add(:name, "cannot be blank") unless has_name
+    end
   end
 
   def global_styles
