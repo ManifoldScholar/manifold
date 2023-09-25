@@ -79,7 +79,7 @@ function DrawerContent(props, ref) {
   };
 
   const handleBlur = e => {
-    if (focusTrap || !ref.current) return;
+    if (focusTrap || !ref?.current) return;
     if (ref.current.contains(event.relatedTarget)) return;
 
     if (hasConfirm) {
