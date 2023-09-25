@@ -134,7 +134,7 @@ function PendingEntitlementsList({
             }
             pagination={meta.pagination}
             showCount
-            unit={t("glossary.entitlement", {
+            unit={t("glossary.pending_entitlement", {
               count: meta.pagination.totalCount
             })}
             callbacks={{
