@@ -44,11 +44,11 @@ window.ace.define(
       }
 
       .ace-kuroir .ace_marker-layer .ace_active-line {
-        background: var(--color-base-yellow20);
+        background: var(--color-base-yellow45);
       }
 
       .ace-kuroir .ace_gutter-active-line {
-        background-color: rgba(203, 220, 47, 0.22);
+        background-color: rgba(245, 228, 37, .5);
       }
 
       .ace-kuroir .ace_marker-layer .ace_selected-word {
