@@ -11,6 +11,8 @@ import {
   defaultFocusStyle
 } from "theme/styles/mixins";
 
+/* Styles here should be updated after FF implements the :has selector to remove the row-reverse in Inner and TitleWrapper. */
+
 export const Wrapper = styled.div`
   overflow: visible;
   position: relative;
@@ -43,8 +45,8 @@ export const Item = styled.div`
 
 export const TitleWrapper = styled.div`
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
-  gap: 12px;
   color: var(--color-neutral-text-extra-light);
   max-width: 55%;
 
@@ -58,6 +60,7 @@ export const ChildLink = styled.div`
   border-left: 1px solid currentColor;
   border-bottom: 1px solid currentColor;
   color: var(--color-neutral-ui-light);
+  margin-inline-end: 12px;
 `;
 
 export const Title = styled.div`
@@ -124,23 +127,20 @@ export const Inner = styled.div`
 export const Button = styled.button`
   ${buttonUnstyled}
 
+  color: var(--color-neutral-ui-light);
   padding-inline: 3px;
   ${respond(`padding-inline: 6px;`, 30)};
 
-  ${({ $highlight }) => $highlight && `color: var(--highlight-color);`}
-
-  &:focus:not(:disabled),
-  &:focus-visible:not(:disabled) {
+  &:focus-visible {
     ${defaultFocusStyle}
   }
 
-  &:disabled {
-    cursor: default;
-    color: var(--color-neutral-ui-dull-light);
+  &:hover {
+    color: var(--highlight-color);
+  }
 
-    &:hover {
-      color: var(--color-neutral-ui-dull-light);
-    }
+  &:hover ~ ${Title} {
+    color: var(--highlight-color);
   }
 `;
 
