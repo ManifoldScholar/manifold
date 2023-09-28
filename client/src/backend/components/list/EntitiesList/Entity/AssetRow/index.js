@@ -6,9 +6,7 @@ import EntityRow from "../Row";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
-const fileNameToResourceKind = fileName => {
-  const ext = fileName.split(".").pop();
-
+const extToTag = ext => {
   switch (ext.toLowerCase()) {
     case "gif":
     case "jpeg":
@@ -48,9 +46,8 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
   const {
     sourceIdentifier,
     displayName,
-    attachmentData: {
-      metadata: { filename, mimeType }
-    }
+    attachmentExtension,
+    attachmentContentType
   } = asset?.attributes ?? {};
 
   const src = `/api/proxy/ingestion_sources/${asset.id}`;
@@ -59,8 +56,8 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
     <Styled.IconWrapper>
       <EntityThumbnail.Asset
         entity={asset}
-        icon={fileNameToResourceKind(filename)}
-        isImage={mimeType.includes("image")}
+        icon={extToTag(attachmentExtension)}
+        isImage={attachmentContentType.includes("image")}
       />
     </Styled.IconWrapper>
   );
@@ -105,7 +102,7 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
     subtitle: <Styled.TruncateURL>{src}</Styled.TruncateURL>,
     figure,
     figureHasWrapper: true,
-    label: fileNameToResourceKind(filename),
+    label: extToTag(attachmentExtension),
     ...rest
   };
 

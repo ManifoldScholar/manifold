@@ -14,15 +14,16 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
 
   const formatData = useCallback(
     data => {
-      const displayName = data.name;
-      const attachment =
-        typeof data.attachment === "object" ? data.attachment : null;
-      const altText = data.attributes.attachmentData?.metadata?.altText;
-      const finalAttachment =
-        typeof altText === "string" ? { ...attachment, altText } : attachment;
+      const { attachmentAltText, attachment, ...rest } = data?.attributes ?? {};
+
+      const finalAttachmentData =
+        typeof attachmentAltText === "string"
+          ? { ...attachment, altText: attachmentAltText }
+          : attachment;
+
       const attributes = {
-        ...(displayName && { displayName }),
-        ...(finalAttachment && { attachment: finalAttachment })
+        ...{ attachment: finalAttachmentData },
+        ...rest
       };
 
       return asset
@@ -31,7 +32,9 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
             attributes: {
               ...attributes,
               sourceIdentifier:
-                asset?.sourceIdentifier ?? data.attachment?.filename,
+                asset?.sourceIdentifier ??
+                attachment?.filename ??
+                "filename missing",
               kind: asset?.kind ?? "publication_resource"
             }
           };
@@ -44,7 +47,6 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
     history.push(lh.link("backendTextAssets", textId));
   }, [history, textId, refresh]);
 
-  const origin = typeof window !== "undefined" ? window.location.origin : null;
   const src = `/api/proxy/ingestion_sources/${assetId}`;
 
   const onCopy = e => {
@@ -57,10 +59,6 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
   const createAsset = data => {
     return ingestionSourcesAPI.create(textId, data);
   };
-
-  const { displayName, sourceIdentifier } = asset?.attributes ?? {};
-
-  const nameDefault = displayName ?? sourceIdentifier;
 
   return (assetId && asset) || (!assetId && !asset) ? (
     <FormContainer.Form
@@ -75,9 +73,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
       <Form.TextInput
         focusOnMount
         label={t("texts.assets.name_label")}
-        renderValue={undefined}
-        value={nameDefault}
-        name="name"
+        name="attributes.displayName"
       />
       {assetId && (
         <>
@@ -103,19 +99,15 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
         </>
       )}
       <Form.FieldGroup
-        name="attachment"
+        name="attributes.attachment"
         label={t("texts.assets.upload_label")}
         instructions={t("texts.assets.upload_instructions")}
       >
         <Form.Upload
-          fileNameFrom="attributes[attachmentData][metadata][filename]"
-          value={
-            asset
-              ? `${origin}/system/${asset?.attributes?.attachmentData.id}`
-              : undefined
-          }
+          readFrom="attributes[attachmentStyles][small]"
+          name="attributes[attachment]"
           required={!asset}
-          altTextName={"attributes[attachmentData][metadata][altText]"}
+          altTextName={"attributes[attachmentAltText]"}
           altTextLabel={t("texts.assets.alt_label")}
           accepts="any"
         />

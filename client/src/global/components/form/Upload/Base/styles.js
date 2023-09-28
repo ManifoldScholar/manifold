@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { defaultFocusStyle, setHoverStyle } from "theme/styles/mixins";
+import BaseInput from "../../BaseInput";
 
 const BaseDropzone = styled.div`
   display: flex;
@@ -64,4 +65,8 @@ export const Input = styled.input`
       outline-color: var(--focus-color);
     }
   }
+`;
+
+export const AltTextInput = styled(BaseInput)`
+  margin-block-start: 20px;
 `;

@@ -7,7 +7,6 @@ import Instructions from "../../Instructions";
 import Empty from "../Empty";
 import Preview from "../Preview";
 import BaseLabel from "../../BaseLabel";
-import BaseInput from "../../BaseInput";
 import * as Styled from "./styles";
 
 export default class FormUpload extends Component {
@@ -163,13 +162,13 @@ export default class FormUpload extends Component {
               id={this.props.idForInstructions}
             />
           )}
+          {showAltTextInput && (
+            <Styled.AltTextInput
+              name={this.props.altTextName}
+              label={this.props.altTextLabel}
+            />
+          )}
         </Errorable>
-        {showAltTextInput && (
-          <BaseInput
-            name={this.props.altTextName}
-            label={this.props.altTextLabel}
-          />
-        )}
       </>
     );
   }
