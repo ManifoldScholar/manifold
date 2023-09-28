@@ -12,10 +12,10 @@ Array [
       Variant #1
     </label>
     <div
-      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
+      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm4"
     >
       <input
-        class="css-septlj-Input e1lcnawm0"
+        class="css-ehtbh7-Input e1lcnawm1"
       />
       <div
         class="css-qvrzjz-Wrapper e1c7itiz4"
@@ -59,10 +59,10 @@ Array [
       Variant #2
     </label>
     <div
-      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
+      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm4"
     >
       <input
-        class="css-septlj-Input e1lcnawm0"
+        class="css-ehtbh7-Input e1lcnawm1"
       />
       <div
         class="css-qvrzjz-Wrapper e1c7itiz4"
@@ -111,10 +111,10 @@ Array [
       High Resolution Image
     </label>
     <div
-      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
+      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm4"
     >
       <input
-        class="css-septlj-Input e1lcnawm0"
+        class="css-ehtbh7-Input e1lcnawm1"
       />
       <div
         class="css-qvrzjz-Wrapper e1c7itiz4"
@@ -163,10 +163,10 @@ Array [
       Thumbnail Image
     </label>
     <div
-      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
+      class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm4"
     >
       <input
-        class="css-septlj-Input e1lcnawm0"
+        class="css-ehtbh7-Input e1lcnawm1"
       />
       <div
         class="css-qvrzjz-Wrapper e1c7itiz4"
@@ -219,10 +219,10 @@ exports[`backend/components/resource/form/kind/Variants when kind is pdf matches
     Thumbnail Image
   </label>
   <div
-    class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm3"
+    class="css-15p6o1f-BaseDropzone-Dropzone e1lcnawm4"
   >
     <input
-      class="css-septlj-Input e1lcnawm0"
+      class="css-ehtbh7-Input e1lcnawm1"
     />
     <div
       class="css-qvrzjz-Wrapper e1c7itiz4"
