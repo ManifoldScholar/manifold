@@ -24,6 +24,7 @@ export default function TOCEntry({
   const editUrl = lh.link("backendTextTOCEntryEdit", textId, entry.id);
 
   const collapseExpandHandler = entry.isExpanded ? onCollapse : onExpand;
+  const icon = entry.isExpanded ? "DisclosureUp32" : "DisclosureDown32";
 
   return (
     <Styled.Item ref={innerRef} {...draggableProps}>
@@ -42,14 +43,6 @@ export default function TOCEntry({
           <Styled.Button as={Link} to={editUrl} aria-label={t("actions.edit")}>
             <Utility.IconComposer size={24} icon="annotate24" />
           </Styled.Button>
-          <Styled.Button
-            onClick={collapseExpandHandler}
-            aria-label={t("actions.edit")}
-            disabled={!entry.hasChildren}
-            $highlight={entry.hasChildren}
-          >
-            <Utility.IconComposer size={24} icon="BEProject64" />
-          </Styled.Button>
           <Styled.DragHandle
             aria-describedby="toc-drag-handle-instructions"
             {...dragHandleProps}
@@ -58,8 +51,17 @@ export default function TOCEntry({
           </Styled.DragHandle>
         </Styled.ButtonGroup>
         <Styled.TitleWrapper>
-          {!!depth && <Styled.ChildLink icon="tocLink16" />}
+          {entry.hasChildren && (
+            <Styled.Button
+              onClick={collapseExpandHandler}
+              aria-label={t("actions.edit")}
+              style={{ marginBlockStart: "2px" }}
+            >
+              <Utility.IconComposer size={28} icon={icon} />
+            </Styled.Button>
+          )}
           <Styled.Title>{entry.data ? entry.data.title : ""}</Styled.Title>
+          {!!depth && <Styled.ChildLink icon="tocLink16" />}
         </Styled.TitleWrapper>
       </Styled.Inner>
     </Styled.Item>
