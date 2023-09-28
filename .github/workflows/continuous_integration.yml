@@ -59,10 +59,10 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v1
 
-      - name: "Install Node 12.x"
+      - name: "Install Node 16.x"
         uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
+          node-version: "16.x"
 
       - name: "Install Yarn"
         run: |
@@ -162,10 +162,10 @@ jobs:
           wget https://github.com/jgm/pandoc/releases/download/2.2/pandoc-2.2-1-amd64.deb
           sudo dpkg -i pandoc-2.2-1-amd64.deb
 
-      - name: "Install Node 12.x"
+      - name: "Install Node 16.x"
         uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
+          node-version: "16.x"
 
       - name: "Install Yarn"
         run: |

@@ -152,12 +152,14 @@ function withFormOptions(WrappedComponent) {
     }
 
     static deriveStateFromOptions(optionsIn, props) {
-      const options = optionsIn.map(rawOption => {
-        return WithFormOptions.enhanceOption(
-          WithFormOptions.rawOptionToOption(rawOption),
-          props
-        );
-      });
+      const options = Array.isArray(optionsIn)
+        ? optionsIn.map(rawOption => {
+            return WithFormOptions.enhanceOption(
+              WithFormOptions.rawOptionToOption(rawOption),
+              props
+            );
+          })
+        : [];
       const valueMap = keyBy(options, "value");
       const labelMap = keyBy(options, "label");
       return { options, valueMap, labelMap };
