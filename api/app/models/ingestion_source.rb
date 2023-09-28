@@ -5,17 +5,18 @@ class IngestionSource < ApplicationRecord
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:display_name, :source_identifier].freeze
 
-  # Attachments
-  include IngestionSourceUploader::Attachment.new(:attachment)
-
   # Authorization
   include Authority::Abilities
   include Filterable
   include SerializedAbilitiesFor
   include SearchIndexable
+  include Attachments
   self.authorizer_name = "ProjectChildAuthorizer"
 
   classy_enum_attr :kind, enum: "IngestionSourceKind", allow_blank: false
+
+  # Attachments
+  manifold_has_attached_file :attachment, :resource
 
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze
@@ -67,6 +68,10 @@ class IngestionSource < ApplicationRecord
   # Validations
   validates :source_identifier, presence: true
   validates :attachment, presence: { on: :from_api }
+
+  def display_name
+    read_attribute(:display_name).presence || source_identifier
+  end
 
   class << self
     # @param [String] attachment_id
