@@ -1,4 +1,6 @@
 #!/usr/bin/env puma
+# frozen_string_literal: true
+
 require "dotenv"
 require "active_support/core_ext/object/blank"
 
@@ -43,16 +45,37 @@ tag "manifold-#{application}"
 environment rails_environment
 workers number_of_workers
 threads min_threads, max_threads
-nakayoshi_fork
+preload_app!
 fork_worker 1000
-wait_for_less_busy_worker
-on_refork do
-  3.times { GC.start }
-end
+wait_for_less_busy_worker 0.001
 
 plugin :tmp_restart
 bind "unix://#{socket}" if listen_on_socket
 bind "tcp://#{address}:#{port}" if listen_on_port
+
+on_refork do
+  3.times { GC.start }
+end
+
+on_worker_fork do
+  ActiveSupport.on_load(:active_record) do
+    ActiveRecord::Base.connection.disconnect!
+  end
+
+  # Ensure we disconnect from Rails cache on forking.
+  Rails.cache.redis.disconnect!
+
+  Redis.current.disconnect!
+
+  Redis::Objects.redis.disconnect!
+end
+
+on_worker_boot do
+  # Worker specific setup for Rails 4.1+
+  ActiveSupport.on_load(:active_record) do
+    ActiveRecord::Base.establish_connection
+  end
+end
 
 out_of_band do
   GC.start full_mark: false, immediate_sweep: false

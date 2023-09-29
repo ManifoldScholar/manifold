@@ -5,7 +5,7 @@ FactoryBot.define do
     association :subject, factory: :project
 
     expiration { "in 1 year" }
-    email { Faker::Internet.unique.safe_email }
+    email { Faker::Internet.unique.email }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
 

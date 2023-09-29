@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Entitlements::CreatePendingJob, type: :job do
-  let!(:email) { Faker::Internet.unique.safe_email }
+  let!(:email) { Faker::Internet.unique.email }
 
   let!(:pending_entitlement) { FactoryBot.create :pending_entitlement, email: email }
 

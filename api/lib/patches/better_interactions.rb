@@ -99,7 +99,7 @@ module Patches
     def compose(interaction, provided_inputs = {})
       super
     rescue ActiveInteraction::Interrupt => e
-      raise ActiveRecord::Rollback, e.errors.full_messages if in_transaction?
+      raise ActiveRecord::Rollback, e.errors if in_transaction?
 
       raise e
     end
@@ -303,7 +303,10 @@ module Patches
     def assimilate_errors!(model)
       return unless model.errors.any?
 
-      model.errors.each do |attribute, message|
+      model.errors.each do |error|
+        attribute = error.attribute
+        message = error.message
+
         if input?(attribute)
           errors.add attribute, message
         else

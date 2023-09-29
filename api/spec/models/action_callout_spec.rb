@@ -26,7 +26,7 @@ RSpec.describe ActionCallout do
       it "is invalid without a text" do
         action_callout.text = nil
         expect(action_callout).to_not be_valid
-        expect(action_callout.errors.keys).to include(:text)
+        expect(action_callout.errors.attribute_names).to include(:text)
       end
     end
 
@@ -36,7 +36,7 @@ RSpec.describe ActionCallout do
       it "is invalid without a text" do
         action_callout.text = nil
         expect(action_callout).to_not be_valid
-        expect(action_callout.errors.keys).to include(:text)
+        expect(action_callout.errors.attribute_names).to include(:text)
       end
     end
 
