@@ -76,7 +76,7 @@ RSpec.describe ContentBlock do
     end
 
     it "does not include non-render attribute errors" do
-      expect(subject.errors.keys).to include :req_attr
+      expect(subject.errors.attribute_names).to include :req_attr
       expect(subject.render_errors.keys).to_not include :req_attr
     end
   end

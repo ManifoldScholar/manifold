@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Version < PaperTrail::Version
 
   include Authority::Abilities

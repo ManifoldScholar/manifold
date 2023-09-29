@@ -1,4 +1,6 @@
-require 'simplecov'
+# frozen_string_literal: true
+
+require "simplecov"
 
 SimpleCov.start 'rails' do
   project_name "Manifold"

@@ -20,7 +20,7 @@ RSpec.describe "Entitlement Imports API", type: :request do
             :entitlement_import_row,
             entitlement_import: import,
             line_number: line_number,
-            email: Faker::Internet.unique.safe_email,
+            email: Faker::Internet.unique.email,
             subject: SystemEntitlement.fetch(:subscription)
           )
         end

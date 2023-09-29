@@ -7,7 +7,6 @@ require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
 require "test_prof/recipes/rspec/let_it_be"
 require "webmock/rspec"
-require "database_cleaner"
 require "dry/system/stubs"
 require "closure_tree/test/matcher"
 require "scanf"
@@ -88,8 +87,11 @@ RSpec.configure do |config|
 
   # Truncate all test database tables before running tests.
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:deletion)
+    DatabaseCleaner[:active_record].strategy = :transaction
+    DatabaseCleaner[:redis].strategy = :deletion
+
+    DatabaseCleaner[:active_record].clean_with(:truncation)
+    DatabaseCleaner[:redis].clean_with(:deletion)
 
     Scenic.database.views.select(&:materialized).each do |view|
       Scenic.database.refresh_materialized_view view.name, concurrently: false, cascade: false
@@ -123,16 +125,14 @@ RSpec.configure do |config|
   # Allow elastic search for tests tagged with elasticsearch
 
   config.around(:example) do |example|
-    disable_web_connect = true
-    disable_web_connect = false if example.metadata[:elasticsearch]
+    disable_web_connect = !example.metadata[:elasticsearch]
 
     if disable_web_connect
-      WebMock.disable_net_connect!(allow: allowed_net_connect) if disable_web_connect
+      WebMock.disable_net_connect!(allow: allowed_net_connect)
     else
       WebMock.allow_net_connect!
     end
 
     example.run
   end
-
 end

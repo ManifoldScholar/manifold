@@ -79,7 +79,7 @@ RSpec.describe "Pending Entitlements API", type: :request do
 
     let(:expiration) { nil }
     let(:subject_url) { project.to_entitlement_gid.to_s }
-    let(:email) { Faker::Internet.unique.safe_email }
+    let(:email) { Faker::Internet.unique.email }
 
     let(:attributes) do
       {

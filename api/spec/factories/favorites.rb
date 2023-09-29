@@ -16,8 +16,8 @@ FactoryBot.define do
 
     skip_create
 
-    association(:favoritable) { FactoryBot.create(:project) }
-    association(:user) { FactoryBot.create(:user) }
+    association(:favoritable, factory: :project)
+    association(:user)
 
     created_at { Time.current }
     updated_at { created_at }

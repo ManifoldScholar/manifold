@@ -2,8 +2,8 @@
 
 RSpec.describe Updaters::User do
   context "when changing an existing user's email" do
-    let!(:old_email) { Faker::Internet.unique.safe_email }
-    let!(:new_email) { Faker::Internet.unique.safe_email }
+    let!(:old_email) { Faker::Internet.unique.email }
+    let!(:new_email) { Faker::Internet.unique.email }
 
     let!(:user) { FactoryBot.create :user, email: old_email }
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Entitlements::CreateForRowJob, type: :job do
-  let(:email) { Faker::Internet.safe_email }
+  let(:email) { Faker::Internet.email }
   let!(:entitlement_subject) { FactoryBot.create :project }
   let!(:target) { nil }
 
