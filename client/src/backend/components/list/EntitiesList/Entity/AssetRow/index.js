@@ -98,8 +98,8 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
   );
 
   const rowProps = {
-    title: displayName ?? sourceIdentifier,
-    subtitle: <Styled.TruncateURL>{src}</Styled.TruncateURL>,
+    title: <Styled.Truncate>{displayName ?? sourceIdentifier}</Styled.Truncate>,
+    subtitle: <Styled.Truncate>{src}</Styled.Truncate>,
     figure,
     figureHasWrapper: true,
     label: extToTag(attachmentExtension),
