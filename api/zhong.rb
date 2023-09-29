@@ -4,10 +4,6 @@ require "./config/environment"
 Zhong.redis = Redis.new(url: ENV["RAILS_REDIS_URL"])
 
 Zhong.schedule do
-  category "social" do
-    every(1.hour, "queue_fetch_project_tweets") { ::QueueFetchProjectTweets.perform_later }
-  end
-
   category "caches" do
     every(15.minutes, "refresh_project_collections") do
       ::ProjectCollectionJobs::QueueCacheCollectionProjectsJob.perform_later
