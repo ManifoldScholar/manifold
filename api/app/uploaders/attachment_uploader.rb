@@ -7,7 +7,7 @@ class AttachmentUploader < Shrine
   plugin :tempfile
   plugin :derivatives, versions_compatibility: true
   plugin :remote_url, max_size: 20 * 1024 * 1024
-  plugin :determine_mime_type, analyzer: :marcel
+  plugin :determine_mime_type, analyzer: BETTER_MARCEL
   plugin :store_dimensions, analyzer: lambda { |io, analyzers|
     mime_type = determine_mime_type(io)
 
