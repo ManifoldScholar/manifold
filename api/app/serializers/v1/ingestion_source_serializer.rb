@@ -9,7 +9,7 @@ module V1
     typed_attribute :attachment_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :attachment_content_type, Types::String.optional.meta(read_only: true)
     typed_attribute :attachment_extension, Types::String.optional.meta(read_only: true)
-    typed_attribute :attachment_file_size, Types::String.optional.meta(read_only: true)
+    typed_attribute :attachment_file_size, Types::Integer.optional.meta(read_only: true)
     typed_attribute :attachment_alt_text, Types::String.optional
 
   end
