@@ -6,9 +6,9 @@ export const ButtonGroup = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
-  padding-inline-start: ${fluidScale("25px", "12px")};
+  padding-inline-start: ${fluidScale("25px", "8px")};
   flex-wrap: wrap;
-  max-width: 100px;
+  max-width: 75px;
   margin-inline-start: auto;
 
   ${respond(`flex-wrap: nowrap; max-width: none;`, 50)}
@@ -65,9 +65,9 @@ export const IconWrapper = styled.div`
   }
 `;
 
-export const TruncateURL = styled.span`
+export const Truncate = styled.span`
   display: inline-block;
-  max-width: 175px;
+  max-width: 150px;
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
