@@ -42,7 +42,9 @@ module Search
 
       searchkick_options = query_builder.to_search_options
 
-      Searchkick.search searchkick_options
+      # We call `#blank?` to ensure the results are eager-loaded to trigger an exception where necessary.
+      # This is necessary because newer versions of Searchkick lazy-load the results and we want to know about them now.
+      Searchkick.search(searchkick_options).tap(&:blank?)
     rescue Searchkick::InvalidQueryError => e
       raise e if raise_search_errors
 
@@ -69,6 +71,7 @@ module Search
     rescue KeywordSearch::ParseError
       search_components[:needle] = keyword
     end
+
     # @!attribute [r] search_components
     # @return [Hash]
     memoize def search_components

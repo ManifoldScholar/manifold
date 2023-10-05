@@ -8,6 +8,7 @@ RSpec.describe "Search Results", type: :request do
 
     around(:example) do |example|
       WebMock.disable_net_connect!(allow: [/127\.0\.0\.1:2?9200/, /localhost:2?9200/])
+      Journal.reindex
       Text.reindex
       Resource.reindex
       Annotation.reindex

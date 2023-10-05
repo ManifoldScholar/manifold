@@ -7,7 +7,9 @@ RSpec.describe Search::Query, elasticsearch: true, interaction: true do
   before do
     bovary && babble
 
+    Journal.reindex
     Project.reindex
+    Journal.searchkick_index.refresh
     Project.searchkick_index.refresh
   end
 
