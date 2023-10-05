@@ -223,8 +223,6 @@ class Project < ApplicationRecord
     where(journal_issue_id: nil)
   }
 
-  scope :by_draft, ->(draft = nil) { where(draft: to_boolean(draft)) unless draft.nil? }
-
   # Search
   scope :search_import, -> {
     includes(
