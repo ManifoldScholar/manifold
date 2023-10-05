@@ -8,6 +8,12 @@ module Sluggable
   end
 
   def slug_candidates
+    reserved_words = %w(all new edit session login logout users admin
+                        stylesheets assets javascripts)
+
+    return :id if title.blank?
+    return [[:title, :id]] if reserved_words.include?(title.downcase)
+
     [:title]
   end
 
