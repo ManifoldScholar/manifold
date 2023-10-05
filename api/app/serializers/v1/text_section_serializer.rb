@@ -10,6 +10,7 @@ module V1
     typed_attribute :source_identifier, Types::String.optional
     typed_attribute :kind, Types::String.meta(example: "section")
     typed_attribute :slug, Types::String
+    typed_attribute :hidden_in_reader, Types::Bool
 
     typed_belongs_to :text
     typed_has_many :stylesheets

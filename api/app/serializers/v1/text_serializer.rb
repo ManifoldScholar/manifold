@@ -133,8 +133,7 @@ module V1
       end
 
       def sections_map(object)
-        sections_ids = object.spine & object.text_sections.pluck(:id)
-        sections_ids.map { |id| Hash[id: id.to_s, name: object.text_sections.find(id).name] }
+        object.text_sections.where(id: object.spine).map(&:to_section_map)
       end
 
       def ingestion_source_download_url(object, params)

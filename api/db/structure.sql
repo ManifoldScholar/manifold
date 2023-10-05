@@ -376,6 +376,7 @@ CREATE TABLE public.text_sections (
     body_hash bigint GENERATED ALWAYS AS (COALESCE(hashtextextended((body_json)::text, (0)::bigint), (0)::bigint)) STORED NOT NULL,
     node_root public.ltree GENERATED ALWAYS AS (public.text2ltree(((md5((id)::text) || '.'::text) || md5((COALESCE(hashtextextended((body_json)::text, (0)::bigint), (0)::bigint))::text)))) STORED NOT NULL,
     slug text,
+    hidden_in_reader boolean DEFAULT false NOT NULL,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
 );
 
@@ -7122,4 +7123,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230816233543'),
 ('20230817212021'),
 ('20230823232509'),
-('20230921024546');
+('20230921024546'),
+('20231005175407');
+
+

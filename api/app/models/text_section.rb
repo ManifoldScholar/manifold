@@ -163,6 +163,10 @@ class TextSection < ApplicationRecord
     name
   end
 
+  def to_section_map
+    slice(:id, :name).merge(hidden: hidden_in_reader)
+  end
+
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def properties_for_text_nodes
     inline = Serializer::HTML::INLINE_ELEMENTS
