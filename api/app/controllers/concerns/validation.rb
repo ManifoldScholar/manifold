@@ -382,7 +382,7 @@ module Validation
 
   def text_section_params
     params.require(:data)
-    attributes = [:name, :body, :position, :kind, :slug]
+    attributes = [:name, :body, :position, :kind, :slug, :hidden_in_reader]
     param_config = structure_params(attributes: attributes)
     params.permit(param_config)
   end
