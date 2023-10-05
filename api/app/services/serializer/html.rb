@@ -126,7 +126,6 @@ module Serializer
       representation[:attributes] = node.attributes
         .transform_keys(&:to_sym)
         .transform_values(&:content)
-        .except(:style)
       merge_mathml_element_text_child(node, representation) if mathml_element?(representation)
       true
     end
