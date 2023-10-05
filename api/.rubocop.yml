@@ -296,6 +296,9 @@ Style/RedundantSelfAssignment:
 Style/SoleNestedConditional:
   Enabled: false
 
+Style/UnlessElse:
+  Enabled: false
+
 Naming/HeredocDelimiterNaming:
   Enabled: false
 

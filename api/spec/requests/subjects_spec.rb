@@ -19,13 +19,14 @@ RSpec.describe "Subject API", type: :request do
 
   describe "responds with a list of featured project subjects" do
     describe "the response" do
-      let(:params) {
+      let(:params) do
         {
           filter: {
             featured: true
           }
         }
-      }
+      end
+
       it "has a 200 status code" do
         FactoryBot.create(:project, subjects: [subject_a])
         FactoryBot.create(:project, featured: true, subjects: [subject_b])
