@@ -1,0 +1,17 @@
+name: "Setup Ruby"
+runs:
+  using: "composite"
+  steps:
+    - name: "Install Dependencies"
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: libpq-dev
+        version: 1.0
+
+    - name: "Install Ruby 2.7.8"
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler: 2.2.19
+        bundler-cache: true
+        ruby-version: 2.7.8
+        working-directory: api

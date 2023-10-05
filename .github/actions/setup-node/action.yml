@@ -1,0 +1,17 @@
+name: "Setup Node.js"
+runs:
+  using: "composite"
+  steps:
+    - name: "Install Node 16.x"
+      uses: actions/setup-node@v3
+      with:
+        node-version: "16"
+        cache: "yarn"
+        cache-dependency-path: ./client/yarn.lock
+
+    - name: "Install dependencies"
+      env:
+        NODE_ENV: development
+      working-directory: "./client"
+      shell: bash
+      run: yarn install --frozen-lockfile
