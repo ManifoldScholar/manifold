@@ -103,12 +103,13 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
         label={t("texts.assets.upload_label")}
         instructions={t("texts.assets.upload_instructions")}
       >
+        {/* Alt text field hidden per request until available for use in the editor. -LD */}
         <Form.Upload
           readFrom="attributes[attachmentStyles][small]"
           name="attributes[attachment]"
           required={!asset}
-          altTextName={"attributes[attachmentAltText]"}
-          altTextLabel={t("texts.assets.alt_label")}
+          // altTextName={"attributes[attachmentAltText]"}
+          // altTextLabel={t("texts.assets.alt_label")}
           accepts="any"
         />
       </Form.FieldGroup>
