@@ -76,6 +76,7 @@
         "header": "Header",
         "footer": "Footer",
         "section": "Section",
+        "article": "Article",
         "figure": "Figure",
         "figcaption": "Figcaption"
       },

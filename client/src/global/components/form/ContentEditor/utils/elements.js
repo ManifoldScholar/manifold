@@ -30,11 +30,12 @@ export const nestableElements = [
   "figure",
   "div",
   "section",
+  "article",
   "figcaption"
 ];
 
 // These elements are rendered in the RTE, but can't be created there. Their text children are editable, and these elements can be deleted in the RTE like any other block.
-export const renderedElements = ["br", "hr", "abbr", "sub", "sup"];
+export const renderedElements = ["br", "hr", "abbr", "sub", "sup", "cite"];
 
 // These elements are applied as marks to text leaves in Slate. They can be added and removed in the RTE. This probably needs some adjustment. For example, currently both del and s become "strikethrough" when serialized to Slate and there's no way to tell what the original tag was.
 export const markElements = ["i", "del", "em", "s", "strong", "u", "code"];
