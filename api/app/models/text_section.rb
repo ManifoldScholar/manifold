@@ -107,7 +107,17 @@ class TextSection < ApplicationRecord
     )
   }
 
-  friendly_id :name, use: :scoped, scope: :text
+  friendly_id :slug_candidates, use: :scoped, scope: :text
+
+  def slug_candidates
+    reserved_words = %w(all new edit session login logout users admin
+                        stylesheets assets javascripts)
+
+    return :id if name.blank?
+    return [[:name, :position]] if reserved_words.include?(name.downcase)
+
+    name
+  end
 
   def should_index?
     text.present? && text.should_index?
