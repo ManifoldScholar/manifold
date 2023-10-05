@@ -140,6 +140,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               { format: "header", label: t("editor.tooltips.labels.header") },
               { format: "footer", label: t("editor.tooltips.labels.footer") },
               { format: "section", label: t("editor.tooltips.labels.section") },
+              { format: "article", label: t("editor.tooltips.labels.article") },
               { format: "figure", label: t("editor.tooltips.labels.figure") },
               {
                 format: "figcaption",
