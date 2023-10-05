@@ -4,33 +4,30 @@ import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
 import { withTranslation } from "react-i18next";
+import { getNextVisible, getPrevVisible } from "./helpers/hiddenSections";
 
 class Pagination extends Component {
   static propTypes = {
     text: PropTypes.object.isRequired,
     sectionId: PropTypes.string,
-    spine: PropTypes.array,
+    sectionsMap: PropTypes.array,
     t: PropTypes.func
   };
 
-  getSiblingSection(id, shift) {
-    if (!this.props.spine) return;
-    let siblingSection = false;
-    const index = this.props.spine.indexOf(id);
-    if (this.props.spine[index + shift] || index !== -1) {
-      siblingSection = this.props.spine[index + shift];
-    }
-
-    return siblingSection;
-  }
-
-  getSectionPath(id) {
-    return lh.link("readerSection", this.props.text.attributes.slug, id);
+  getSectionPath(section) {
+    return lh.link(
+      "readerSection",
+      this.props.text.attributes.slug,
+      section.id
+    );
   }
 
   getPreviousLink() {
     let previousLink = null;
-    const previousNode = this.getSiblingSection(this.props.sectionId, -1);
+    const index = this.props.sectionsMap.findIndex(
+      section => section.id === this.props.sectionId
+    );
+    const previousNode = getPrevVisible(this.props.sectionsMap, index);
     if (previousNode) {
       const previousPath = this.getSectionPath(previousNode);
       previousLink = (
@@ -54,7 +51,10 @@ class Pagination extends Component {
 
   getNextLink() {
     let nextLink = null;
-    const nextNode = this.getSiblingSection(this.props.sectionId, 1);
+    const index = this.props.sectionsMap.findIndex(
+      section => section.id === this.props.sectionId
+    );
+    const nextNode = getNextVisible(this.props.sectionsMap, index);
     if (nextNode) {
       const nextPath = this.getSectionPath(nextNode);
       nextLink = (
