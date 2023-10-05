@@ -127,8 +127,8 @@ export class TextWrapperContainer extends PureComponent {
     const base = [
       {
         label: "actions.view",
-        route: "frontendProjectDetail",
-        slug: text.relationships.project.attributes.slug,
+        route: "reader",
+        slug: text.attributes.slug,
         icon: "eyeOpen32"
       },
       {
