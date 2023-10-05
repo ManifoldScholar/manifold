@@ -12,13 +12,13 @@ export default function InsertLinkForm({ urlRef, textRef, defaultValues }) {
         defaultValue={defaultValues?.text}
         ref={textRef}
         name="text"
-        label={t("editor.forms.link_url_label")}
+        label={t("editor.forms.link_text_label")}
       />
       <Input
         defaultValue={defaultValues?.url}
         ref={urlRef}
         name="url"
-        label={t("editor.forms.link_text_label")}
+        label={t("editor.forms.link_url_label")}
       />
     </Styled.Form>
   );
