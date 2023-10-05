@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
+import { getNextVisible } from "./helpers/hiddenSections";
 
 class NextSection extends PureComponent {
   static propTypes = {
@@ -13,21 +14,15 @@ class NextSection extends PureComponent {
     t: PropTypes.func
   };
 
-  getNextSectionName(map, sectionId) {
-    const index = map.findIndex(section => section.id === sectionId);
-    if (!map[index + 1] || index === -1) return null;
-    return map[index + 1];
-  }
-
   getSectionPath(id) {
     return lh.link("readerSection", this.props.text.attributes.slug, id);
   }
 
   renderSectionLink() {
-    const nextSection = this.getNextSectionName(
-      this.props.sectionsMap,
-      this.props.sectionId
+    const index = this.props.sectionsMap.findIndex(
+      section => section.id === this.props.sectionId
     );
+    const nextSection = getNextVisible(this.props.sectionsMap, index);
     const { text } = this.props;
     if (!nextSection || !nextSection.name) return null;
     return (

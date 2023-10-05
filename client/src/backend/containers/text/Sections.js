@@ -62,6 +62,7 @@ export default function TextSectionsContainer({
             textId: text.id,
             sectionIngest: true,
             nextPosition: text.attributes?.sectionsMap?.length + 1,
+            startSectionId: text?.attributes?.startTextSectionId,
             refresh
           }
         })}

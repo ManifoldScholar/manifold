@@ -7,13 +7,24 @@ import { sectionsAPI } from "api";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
-export default function SectionPropertiesForm({ section, textId }) {
+export default function SectionPropertiesForm({
+  section,
+  textId,
+  refreshText,
+  startSectionId
+}) {
   const { t } = useTranslation();
   const history = useHistory();
 
   const onSuccess = () => {
+    if (refreshText) refreshText();
     history.push(lh.link("backendTextSections", textId));
   };
+
+  const disableHide = startSectionId === section?.id;
+  const hideInstructions = disableHide
+    ? t("texts.section.hide_start_instructions")
+    : t("texts.section.hide_instructions");
 
   return (
     <Styled.Form
@@ -29,6 +40,12 @@ export default function SectionPropertiesForm({ section, textId }) {
         placeholder={t("texts.properties.slug_placeholder")}
         name="attributes[slug]"
       />
+      <Form.Switch
+        label={t("texts.section.hide_label")}
+        instructions={hideInstructions}
+        name="attributes[hiddenInReader]"
+        disabled={disableHide}
+      />
       <Form.DrawerButtons
         showCancel
         cancelUrl={lh.link("backendTextSections", textId)}
@@ -42,5 +59,6 @@ SectionPropertiesForm.displayName = "Text.Sections.PropertiesForm";
 
 SectionPropertiesForm.propTypes = {
   textId: PropTypes.string.isRequired,
-  section: PropTypes.object
+  section: PropTypes.object,
+  refreshText: PropTypes.func.isRequired
 };

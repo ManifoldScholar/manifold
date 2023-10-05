@@ -254,7 +254,7 @@ export class SectionContainer extends Component {
           <Section.Pagination
             text={text}
             sectionId={this.props.section.id}
-            spine={text.attributes.spine}
+            sectionsMap={text.attributes.sectionsMap}
           />
         </div>
         {this.showLabel() && (

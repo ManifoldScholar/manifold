@@ -100,7 +100,10 @@
       "ingest_id_label": "Text Section Id",
       "ingest_id_placeholder": "This ingestion will create a new section.",
       "reingest_instructions": "Reingesting this section will overwrite the existing section content, including any changes made in the editor. If you want to keep both versions, you can ingest this file into a new section from the previous page.",
-      "reingest_url_instructions": "Manifold can also reingest from a Google Doc or HTML URL."
+      "reingest_url_instructions": "Manifold can also reingest from a Google Doc or HTML URL.",
+      "hide_label": "Hide in reader navigation?",
+      "hide_instructions": "Exclude this section from the reader section order. Note: a section with this setting activated will still be available via direct link.",
+      "hide_start_instructions": "This section is currently the text's starting section and cannot be hidden."
     },
     "toc": {
       "edit_header": "Edit TOC Entry",
