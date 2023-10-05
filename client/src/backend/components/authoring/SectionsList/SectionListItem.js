@@ -98,7 +98,7 @@ function SectionListItem(props) {
             <Utility.IconComposer size={24} icon="settings32" />
           </Styled.Button>
           <Tooltip
-            content={"Reginest section from source document."}
+            content={"Reingest section from source document."}
             xOffset="-100px"
             yOffset="43px"
           >
