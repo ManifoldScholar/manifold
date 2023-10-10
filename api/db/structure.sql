@@ -2640,7 +2640,7 @@ CREATE VIEW public.text_export_statuses AS
 
 CREATE VIEW public.text_section_aggregations AS
  SELECT text_sections.text_id,
-    jsonb_agg(jsonb_build_object('label', text_sections.name, 'id', text_sections.id, 'source_path', text_sections.source_identifier) ORDER BY text_sections.legacy_position) AS auto_generated_toc
+    jsonb_agg(jsonb_build_object('label', text_sections.name, 'id', text_sections.id, 'source_path', text_sections.source_identifier, 'position', text_sections."position") ORDER BY text_sections."position") AS auto_generated_toc
    FROM public.text_sections
   GROUP BY text_sections.text_id;
 
@@ -7124,6 +7124,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230817212021'),
 ('20230823232509'),
 ('20230921024546'),
-('20231005175407');
+('20231005175407'),
+('20231010184158');
 
 
