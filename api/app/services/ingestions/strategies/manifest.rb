@@ -109,7 +109,7 @@ module Ingestions
           examiner = Strategy::Manifest::TextSection.new self,
                                                          source,
                                                          ingestion_sources,
-                                                         index
+                                                         index + 1
           attributes = examiner.attributes
           build_path = context.write_build_file "#{examiner.source_identifier}.html",
                                                 examiner.raw_html
