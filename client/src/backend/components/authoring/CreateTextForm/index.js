@@ -25,8 +25,8 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
     setSections(newOrder);
   };
 
-  const handleDeleteSection = section => {
-    const update = sections.filter(s => s.id !== section.id);
+  const handleDeleteSection = id => {
+    const update = sections.filter(s => s.id !== id);
     setSections(update);
   };
 

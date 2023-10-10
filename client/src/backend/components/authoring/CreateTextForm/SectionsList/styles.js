@@ -3,7 +3,8 @@ import {
   fluidScale,
   buttonUnstyled,
   utilityPrimary,
-  dragging
+  dragging,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export const Section = styled.li`
@@ -38,6 +39,10 @@ export const ButtonGroup = styled.div`
 export const Button = styled.button`
   ${buttonUnstyled}
   ${utilityPrimary}
+
+  &:focus-visible {
+    ${defaultFocusStyle}
+  }
 `;
 
 export const DragHandle = styled(Button)`

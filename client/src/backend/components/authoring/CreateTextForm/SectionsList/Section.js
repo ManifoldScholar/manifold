@@ -5,6 +5,10 @@ import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
 export default function Section({ section, onDelete, index }) {
+  const handleDelete = e => {
+    e.preventDefault();
+    onDelete(section.id);
+  };
   return (
     <Draggable draggableId={section.id} index={index}>
       {(provided, snapshot) => (
@@ -15,7 +19,7 @@ export default function Section({ section, onDelete, index }) {
         >
           <span>{section.name}</span>
           <Styled.ButtonGroup>
-            <Styled.Button onClick={() => onDelete(section.id)}>
+            <Styled.Button onClick={handleDelete}>
               <IconComposer icon="delete32" size={24} />
             </Styled.Button>
             <Styled.DragHandle as="div" {...provided.dragHandleProps}>
