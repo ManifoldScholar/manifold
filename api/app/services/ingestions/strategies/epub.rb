@@ -56,7 +56,8 @@ module Ingestions
       end
 
       def text_sections
-        inspector.spine_item_nodes.map.with_index do |node, position|
+        inspector.spine_item_nodes.map.with_index do |node, index|
+          position = index + 1
           examiner = Strategy::Epub::TextSection.new self, node, position
           attributes = examiner.attributes
           build_path = context.write_build_file attributes[:source_identifier],
