@@ -70,7 +70,7 @@ const serializeNode = node => {
 
   if (!node.type) return new Element("div", attrs, children);
 
-  const el = new Element(node.type, attrs, children);
+  const el = node.slateOnly ? null : new Element(node.type, attrs, children);
   return el ?? new Document(children);
 };
 
