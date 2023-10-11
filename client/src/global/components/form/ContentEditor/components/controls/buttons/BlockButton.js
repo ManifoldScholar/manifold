@@ -1,19 +1,50 @@
 import React, { forwardRef } from "react";
+import { Transforms, Editor } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys } from "./TooltipContent/content";
-import { toggleOrWrapNode } from "../../../utils/slate/transforms";
-import { isElementActive } from "../../../utils/slate/getters";
+import { toggleOrWrapNode, removeNode } from "../../../utils/slate/transforms";
+import {
+  isElementActive,
+  getNearestOfType
+} from "../../../utils/slate/getters";
 import * as Styled from "./styles";
+
+const LIST_TYPES = ["ol", "ul"];
 
 const BlockButton = ({ format, icon, size, ...rest }, ref) => {
   const editor = useSlate();
   const { selection } = editor ?? {};
 
   const { t } = useTranslation();
+
+  const active = isElementActive(editor, format);
+
+  const onClick = e => {
+    e.preventDefault();
+
+    if (!selection) return;
+
+    if (active) {
+      const { path } = getNearestOfType(editor, [format]);
+
+      if (LIST_TYPES.includes(format)) return removeNode(editor, path);
+
+      if (format === "pre") Editor.removeMark(editor, "code", true);
+
+      Transforms.wrapNodes(
+        editor,
+        { type: "p", children: [] },
+        { at: path, mode: "lowest" }
+      );
+      return removeNode(editor, [...path, 0]);
+    }
+
+    toggleOrWrapNode(editor, format);
+  };
 
   return (
     <Tooltip
@@ -31,12 +62,8 @@ const BlockButton = ({ format, icon, size, ...rest }, ref) => {
         ref={ref}
         {...rest}
         aria-label={t("editor.controls.labels.format", { format })}
-        data-active={isElementActive(editor, format)}
-        onClick={event => {
-          event.preventDefault();
-          if (!selection) return;
-          toggleOrWrapNode(editor, format);
-        }}
+        data-active={active}
+        onClick={onClick}
         tabIndex={-1}
       >
         {icon && <Utility.IconComposer icon={icon} size={size} />}

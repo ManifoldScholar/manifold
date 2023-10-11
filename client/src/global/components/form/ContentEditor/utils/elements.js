@@ -31,7 +31,9 @@ export const nestableElements = [
   "div",
   "section",
   "article",
-  "figcaption"
+  "figcaption",
+  "blockquote",
+  "pre"
 ];
 
 // These elements are rendered in the RTE, but can't be created there. Their text children are editable, and these elements can be deleted in the RTE like any other block.

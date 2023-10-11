@@ -1,6 +1,7 @@
 import { Transforms, Editor, Element, Node } from "slate";
 import { ReactEditor } from "slate-react";
 import isEqual from "lodash/isEqual";
+import has from "lodash/has";
 
 const LIST_TYPES = ["ol", "ul"];
 
@@ -11,9 +12,21 @@ const handleLiTextChild = ({ editor, node, path, format }) => {
   const end = node.text.substring(focus.offset);
 
   const children = [
-    { type: "list-sibling", slateOnly: true, children: [{ text: start }] },
+    ...(start && [
+      {
+        type: "list-sibling",
+        slateOnly: true,
+        children: [{ text: start }]
+      }
+    ]),
     { type: format, children: [{ text: target }] },
-    { type: "list-sibling", slateOnly: true, children: [{ text: end }] }
+    ...(end && [
+      {
+        type: "list-sibling",
+        slateOnly: true,
+        children: [{ text: end }]
+      }
+    ])
   ];
 
   Transforms.insertNodes(editor, children, { at: path });
@@ -22,12 +35,21 @@ const handleLiTextChild = ({ editor, node, path, format }) => {
 export const toggleTextBlock = ({
   editor,
   format,
-  node,
+  node: initialNode,
   path,
   split = false
 }) => {
-  if (node.text && Node.parent(editor, path).type === "li")
-    return handleLiTextChild({ editor, node, path, format });
+  if (
+    initialNode &&
+    has(initialNode, "text") &&
+    Node.parent(editor, path).type === "li"
+  )
+    return handleLiTextChild({ editor, node: initialNode, path, format });
+
+  const node =
+    initialNode && has(initialNode, "text")
+      ? Node.parent(editor, path)
+      : initialNode;
 
   if (node.type === "pre") Editor.removeMark(editor, "code", true);
 

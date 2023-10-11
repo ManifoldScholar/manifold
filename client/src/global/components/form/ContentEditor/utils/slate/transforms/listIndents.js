@@ -2,7 +2,7 @@ import { Editor as SlateEditor, Transforms, Node, Point } from "slate";
 import { ReactEditor } from "slate-react";
 import { getListNode, getListItemNode } from "../getters";
 import { setSelectionAtPoint } from "../general";
-import { toggleOrWrapNode } from "./shared";
+import { unwrapNode } from "./shared";
 import { rteElements } from "../../elements";
 import has from "lodash/has";
 
@@ -158,7 +158,12 @@ export const decreaseIndent = ({ editor, canUnwrapRoot }) => {
     const format = rteElements.includes(listParent?.type)
       ? listParent.type
       : "p";
-    return canUnwrapRoot ? toggleOrWrapNode(editor, format) : null;
+
+    if (canUnwrapRoot) {
+      Transforms.setNodes(editor, { type: format }, { at: path });
+      return unwrapNode({ editor, format, path });
+    }
+    return null;
   }
 
   const nodeStart = SlateEditor.start(editor, path);
