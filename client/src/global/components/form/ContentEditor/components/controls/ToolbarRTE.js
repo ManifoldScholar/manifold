@@ -107,32 +107,6 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
         <Styled.ToolGroup>
           <ReakitMenuItem
             as={BlockSelect}
-            name="textBlock"
-            ariaLabel={t("editor.controls.labels.text_block_select")}
-            options={[
-              { format: "p", label: t("editor.tooltips.labels.p") },
-              { format: "h1", label: t("editor.tooltips.labels.h1") },
-              { format: "h2", label: t("editor.tooltips.labels.h2") },
-              { format: "h3", label: t("editor.tooltips.labels.h3") },
-              { format: "h4", label: t("editor.tooltips.labels.h4") },
-              { format: "h5", label: t("editor.tooltips.labels.h5") },
-              { format: "h6", label: t("editor.tooltips.labels.h6") },
-              {
-                format: "",
-                label: t("editor.controls.labels.text_block_select_placeholder")
-              }
-            ]}
-            {...menu}
-          />
-          <Styled.ToolbarSpacer />
-        </Styled.ToolGroup>
-        <Styled.ToolGroup>
-          <ReakitMenuItem as={SpanButton} format="span" {...menu} />
-          <Styled.ToolbarSpacer />
-        </Styled.ToolGroup>
-        <Styled.ToolGroup>
-          <ReakitMenuItem
-            as={BlockSelect}
             name="container"
             ariaLabel={t("editor.controls.labels.layout_block_select")}
             options={[
@@ -156,6 +130,32 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
             color="var(--color-base-yellow20)"
             {...menu}
           />
+          <Styled.ToolbarSpacer />
+        </Styled.ToolGroup>
+        <Styled.ToolGroup>
+          <ReakitMenuItem
+            as={BlockSelect}
+            name="textBlock"
+            ariaLabel={t("editor.controls.labels.text_block_select")}
+            options={[
+              { format: "p", label: t("editor.tooltips.labels.p") },
+              { format: "h1", label: t("editor.tooltips.labels.h1") },
+              { format: "h2", label: t("editor.tooltips.labels.h2") },
+              { format: "h3", label: t("editor.tooltips.labels.h3") },
+              { format: "h4", label: t("editor.tooltips.labels.h4") },
+              { format: "h5", label: t("editor.tooltips.labels.h5") },
+              { format: "h6", label: t("editor.tooltips.labels.h6") },
+              {
+                format: "",
+                label: t("editor.controls.labels.text_block_select_placeholder")
+              }
+            ]}
+            {...menu}
+          />
+          <Styled.ToolbarSpacer />
+        </Styled.ToolGroup>
+        <Styled.ToolGroup>
+          <ReakitMenuItem as={SpanButton} format="span" {...menu} />
           <Styled.ToolbarSpacer />
         </Styled.ToolGroup>
         <Styled.ToolGroup>
