@@ -127,8 +127,8 @@ export const COLOR_MAP = {
   },
   blue: { light: "var(--color-base-blue75)", dark: "var(--color-base-blue45)" },
   yellow: {
-    dark: "var(--color-base-yellow20)",
-    light: "var(--color-base-orange75)"
+    dark: "var(--color-base-violet45)",
+    light: "var(--color-base-violet75)"
   }
 };
 

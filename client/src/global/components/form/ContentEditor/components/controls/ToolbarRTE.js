@@ -127,7 +127,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
                 )
               }
             ]}
-            color="var(--color-base-yellow20)"
+            color="var(--color-base-violet45)"
             {...menu}
           />
           <Styled.ToolbarSpacer />
