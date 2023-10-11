@@ -14,7 +14,8 @@ import * as Styled from "./styles";
 const defaultValue = [
   {
     type: "section",
-    children: [{ type: "p", children: [{ text: "" }] }]
+    children: [{ type: "p", children: [{ text: "" }] }],
+    slateOnly: true
   }
 ];
 

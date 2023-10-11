@@ -186,7 +186,8 @@ export const htmlToSlate = html => {
     return [
       {
         type: "section",
-        children: slateContent
+        children: slateContent,
+        slateOnly: true
       }
     ];
   }
@@ -194,7 +195,8 @@ export const htmlToSlate = html => {
     return [
       {
         type: "section",
-        children: slateContent[0].children
+        children: slateContent[0].children,
+        slateOnly: true
       }
     ];
   }
@@ -202,7 +204,8 @@ export const htmlToSlate = html => {
     return [
       {
         type: "section",
-        children: [{ type: "p", children: [{ text: "" }] }]
+        children: [{ type: "p", children: [{ text: "" }] }],
+        slateOnly: true
       }
     ];
 
