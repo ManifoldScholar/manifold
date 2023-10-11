@@ -1,10 +1,23 @@
-import { Transforms } from "slate";
+import { Transforms, Node } from "slate";
 import { ReactEditor } from "slate-react";
 import { rteElements } from "../../elements";
+import has from "lodash/has";
 
-export const wrapLayoutBlock = ({ editor, format, node, path, split }) => {
+export const wrapLayoutBlock = ({
+  editor,
+  format,
+  node: initialNode,
+  path: initialPath,
+  split
+}) => {
   if (split)
     return Transforms.wrapNodes(editor, { type: format }, { split: true });
+
+  const node =
+    initialNode && has(initialNode, "text")
+      ? Node.parent(editor, initialPath)
+      : initialNode;
+  const path = ReactEditor.findPath(editor, node);
 
   Transforms.removeNodes(editor);
 
