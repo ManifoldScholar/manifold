@@ -182,20 +182,20 @@ export const htmlToSlate = html => {
   parser.write(html);
   parser.end();
 
-  if (slateContent.length > 1) {
-    return [
-      {
-        type: "section",
-        children: slateContent,
-        slateOnly: true
-      }
-    ];
-  }
   if (slateContent.length === 1 && !slateContent[0].type) {
     return [
       {
         type: "section",
         children: slateContent[0].children,
+        slateOnly: true
+      }
+    ];
+  }
+  if (slateContent.length >= 1) {
+    return [
+      {
+        type: "section",
+        children: slateContent,
         slateOnly: true
       }
     ];
