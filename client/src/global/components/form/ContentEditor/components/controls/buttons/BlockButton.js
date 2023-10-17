@@ -19,7 +19,7 @@ const BlockButton = ({ format, icon, size, ...rest }, ref) => {
 
   const { t } = useTranslation();
 
-  const active = isElementActive(editor, format);
+  const [active] = isElementActive(editor, format);
 
   const onClick = e => {
     e.preventDefault();

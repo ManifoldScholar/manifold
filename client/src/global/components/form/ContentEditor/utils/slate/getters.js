@@ -73,7 +73,7 @@ export const getNearestOfType = (editor, types) => {
 
 export const isElementActive = (editor, format) => {
   const { selection } = editor;
-  if (!selection) return false;
+  if (!selection) return [false];
 
   const nearest = Editor.above(editor, {
     at: Editor.unhangRange(editor, selection),
@@ -85,12 +85,12 @@ export const isElementActive = (editor, format) => {
       n.type === format
   });
 
-  return nearest ? nearest[0].type === format : false;
+  return nearest ? [nearest[0].type === format, nearest[1]] : [false];
 };
 
 export const isTextBlockActive = (editor, format) => {
   const { selection } = editor;
-  if (!selection) return false;
+  if (!selection) return [false];
 
   const block = Editor.above(editor, {
     at: Editor.unhangRange(editor, selection),
@@ -102,7 +102,7 @@ export const isTextBlockActive = (editor, format) => {
       n.type === format
   });
 
-  return block ? block[0]?.type === format : false;
+  return block ? [block[0]?.type === format, block[1]] : [false];
 };
 
 export const isMarkActive = (editor, format) => {

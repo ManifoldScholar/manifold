@@ -30,7 +30,7 @@ const SpanButton = ({ format, ...rest }, ref) => {
         ref={ref}
         {...rest}
         aria-label={t("editor.controls.labels.span")}
-        data-active={isElementActive(editor, format)}
+        data-active={isElementActive(editor, format)[0]}
         onClick={event => {
           event.preventDefault();
           if (!selection) return;

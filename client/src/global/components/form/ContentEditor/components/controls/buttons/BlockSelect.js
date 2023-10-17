@@ -15,14 +15,16 @@ import * as Styled from "./styles";
 const getActiveBlock = (editor, opts, name) => {
   const isActive = name === "textBlock" ? isTextBlockActive : isElementActive;
   const active = opts
-    .map(o => [o, isActive(editor, o)])
-    .reduce((obj, o) => ({ ...obj, [o[0]]: o[1] }), {});
+    .map(o => [o, isActive(editor, o)].flat())
+    .filter(o => o[1])
+    .sort((a, b) => a[2].length > b[2].length)
+    .pop();
 
   // I can't decide whether it's better to show as active the lowest block or show nothing as active if the selection is nested in multiple blocks.
   // const activeCount = opts.map(o => isActive(editor, o)).filter(Boolean).length;
   // if (activeCount !== 1) return "";
 
-  return Object.keys(active).find(o => active[o]) ?? "";
+  return active ? active[0] : "";
 };
 
 const BlockSelect = ({ options, name, color, ariaLabel, ...rest }, ref) => {

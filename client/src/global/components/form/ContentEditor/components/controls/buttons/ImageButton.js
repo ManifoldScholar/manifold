@@ -95,7 +95,7 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
       });
   };
 
-  const active = isElementActive(editor, "img");
+  const [active] = isElementActive(editor, "img");
 
   return (
     <Tooltip
