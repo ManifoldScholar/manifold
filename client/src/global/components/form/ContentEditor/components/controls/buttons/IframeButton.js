@@ -99,7 +99,7 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
       });
   };
 
-  const active = isElementActive(editor, "iframe");
+  const [active] = isElementActive(editor, "iframe");
 
   return (
     <Tooltip
