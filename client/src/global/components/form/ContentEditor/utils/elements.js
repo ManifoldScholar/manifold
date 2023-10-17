@@ -11,11 +11,9 @@ export const rteElements = [
   "h6",
   "ol",
   "ul",
-  "blockquote",
   "li",
   "a",
   "list-sibling",
-  "pre",
   "img",
   "iframe"
 ];

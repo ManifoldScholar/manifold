@@ -115,6 +115,11 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               { format: "footer", label: t("editor.tooltips.labels.footer") },
               { format: "section", label: t("editor.tooltips.labels.section") },
               { format: "article", label: t("editor.tooltips.labels.article") },
+              {
+                format: "blockquote",
+                label: t("editor.tooltips.labels.blockquote")
+              },
+              { format: "pre", label: t("editor.tooltips.labels.pre") },
               { format: "figure", label: t("editor.tooltips.labels.figure") },
               {
                 format: "figcaption",
@@ -204,7 +209,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
             format="ul"
             {...menu}
           />
-          <ReakitMenuItem
+          {/* <ReakitMenuItem
             as={BlockButton}
             icon="blockQuote24"
             format="blockquote"
@@ -215,7 +220,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
             icon="codeBlock24"
             format="pre"
             {...menu}
-          />
+          /> */}
           <Styled.ToolbarSpacer />
         </Styled.ToolGroup>
         <Styled.ToolGroup>
