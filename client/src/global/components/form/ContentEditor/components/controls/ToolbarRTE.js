@@ -243,7 +243,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
                   ? "green"
                   : inlineNodes.includes(tag)
                   ? "blue"
-                  : "yellow";
+                  : "violet";
 
                 return (
                   <Fragment key={a}>

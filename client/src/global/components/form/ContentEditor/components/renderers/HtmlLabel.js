@@ -30,7 +30,7 @@ export default function HtmlLabel({ visible, element }) {
     ? "green"
     : inlineNodes.includes(element.type)
     ? "blue"
-    : "yellow";
+    : "violet";
 
   const path = ReactEditor.findPath(editor, element);
 

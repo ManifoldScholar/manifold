@@ -126,7 +126,7 @@ export const COLOR_MAP = {
     dark: "var(--color-accent-primary)"
   },
   blue: { light: "var(--color-base-blue75)", dark: "var(--color-base-blue45)" },
-  yellow: {
+  violet: {
     dark: "var(--color-base-violet45)",
     light: "var(--color-base-violet75)"
   }
@@ -244,7 +244,7 @@ export const getHtmlOutlineStyles = (nodeName, darkMode) => {
     ? "green"
     : inlineNodes.includes(nodeName)
     ? "blue"
-    : "yellow";
+    : "violet";
 
   return {
     outline: "2px dotted",
