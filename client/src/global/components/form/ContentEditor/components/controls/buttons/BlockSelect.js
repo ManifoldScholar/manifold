@@ -66,7 +66,10 @@ const BlockSelect = ({ options, name, color, ariaLabel, ...rest }, ref) => {
       </Styled.SelectWrapper>
       <Tooltip
         content={
-          active && name === "textBlock" ? (
+          active &&
+          (name === "textBlock" ||
+            active === "blockquote" ||
+            active === "pre") ? (
             <TooltipContent
               label={t(`editor.tooltips.labels.${active}`)}
               hotkeys={hotkeys[active]}

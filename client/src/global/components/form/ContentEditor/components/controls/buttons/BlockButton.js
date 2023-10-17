@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Transforms, Editor } from "slate";
+import { Editor } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
@@ -12,8 +12,6 @@ import {
   getNearestOfType
 } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
-
-const LIST_TYPES = ["ol", "ul"];
 
 const BlockButton = ({ format, icon, size, ...rest }, ref) => {
   const editor = useSlate();
@@ -31,16 +29,9 @@ const BlockButton = ({ format, icon, size, ...rest }, ref) => {
     if (active) {
       const { path } = getNearestOfType(editor, [format]);
 
-      if (LIST_TYPES.includes(format)) return removeNode(editor, path);
-
       if (format === "pre") Editor.removeMark(editor, "code", true);
 
-      Transforms.wrapNodes(
-        editor,
-        { type: "p", children: [] },
-        { at: path, mode: "lowest" }
-      );
-      return removeNode(editor, [...path, 0]);
+      return removeNode(editor, path);
     }
 
     toggleOrWrapNode(editor, format);
