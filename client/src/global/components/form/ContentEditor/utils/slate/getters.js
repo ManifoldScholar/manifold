@@ -85,7 +85,10 @@ export const isElementActive = (editor, format) => {
       n.type === format
   });
 
-  return nearest ? [nearest[0].type === format, nearest[1]] : [false];
+  const [node, path] = nearest ?? [];
+
+  // Include path in return so we can determine highest or lowest for display.
+  return nearest ? [node.type === format, path] : [false];
 };
 
 export const isTextBlockActive = (editor, format) => {
@@ -102,7 +105,10 @@ export const isTextBlockActive = (editor, format) => {
       n.type === format
   });
 
-  return block ? [block[0]?.type === format, block[1]] : [false];
+  const [node, path] = block ?? [];
+
+  // Include path in return so we can determine highest or lowest for display.
+  return block ? [node?.type === format, path] : [false];
 };
 
 export const isMarkActive = (editor, format) => {
