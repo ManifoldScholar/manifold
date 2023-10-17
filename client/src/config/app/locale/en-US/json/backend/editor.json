@@ -26,10 +26,10 @@
         "link": "Insert Link",
         "span": "Insert Span",
         "format": "Insert $t(editor.tooltips.labels.{{format}})",
-        "text_block_select": "Insert or toggle text block",
+        "text_block_select": "Set text block",
         "text_block_select_placeholder": "Text Block",
-        "layout_block_select": "Wrap current selection in a layout block",
-        "layout_block_select_placeholder": "Layout Block",
+        "layout_block_select": "Wrap current selection in a container",
+        "layout_block_select_placeholder": "Container",
         "show_html": "Show all HTML element outlines",
         "hide_html": "Hide all HTML element outlines",
         "lift": "Move node up one level in the HTML hierarchy"
@@ -70,8 +70,8 @@
         "redo": "Redo",
         "img": "Image",
         "iframe": "Iframe",
-        "container": "Layout Blocks",
-        "textBlock": "Text Blocks",
+        "container": "Container",
+        "textBlock": "Text Block",
         "div": "Div",
         "header": "Header",
         "footer": "Footer",
@@ -83,9 +83,9 @@
       "descriptions": {
         "img": "Paste an image URL into the editor to insert.",
         "iframe": "Paste a YouTube or Vimeo embed URL into the editor to insert. Insert other iframe content via the modal.",
-        "span": "Wrap the current selection or insert a span element at a cursor in the current text block. Spans can be nested in layout blocks and other spans for styling.",
-        "container": "Wrap the current selection, or current block if selection is at a cursor, in an html block element. These elements can be nested. To remove a layout block or move it up a level in the document, select the element in the breadcrumbs bar.",
-        "textBlock": "Insert or toggle the text block containing the current selection, or current text block if selection is at a cursor. These elements can be nested in layout blocks but not each other."
+        "span": "Wrap the current selection or insert a span element at a cursor in the current block. Spans can be nested in containers and other spans for styling.",
+        "container": "Wrap the current selection, or current block if selection is at a cursor, in an html block element. These elements can be nested. To remove a container or move it up a level in the document hierarchy, select the element in the breadcrumbs bar.",
+        "textBlock": "Set the text block for the current selection, or current block if selection is at a cursor. These blocks can be wrapped in containers."
       }
     }
   }
