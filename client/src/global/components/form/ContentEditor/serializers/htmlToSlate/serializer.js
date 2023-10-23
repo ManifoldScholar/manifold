@@ -69,33 +69,20 @@ const flatten = nodes => {
   return result;
 };
 
-const deserializeMarkTag = (el, context, isFirstChild, isLastChild) => {
+const deserializeMarkTag = el => {
   const nodes = assignTextMarkAttributes(el);
   if (!Array.isArray(nodes[0])) {
     const [node, attrs] = nodes;
-    return deserializeText(node, attrs, context, isFirstChild, isLastChild);
+    return deserializeText(node, attrs);
   }
   return flatten(nodes)
-    .map(([node, attrs], i) => {
-      const adjustedFirstChild = isFirstChild && i === 0;
-      const adjustedLastChild = isLastChild && i === test.length - 1;
-      return deserializeText(
-        node,
-        attrs,
-        context,
-        adjustedFirstChild,
-        adjustedLastChild
-      );
+    .map(([node, attrs]) => {
+      return deserializeText(node, attrs);
     })
     .filter(Boolean);
 };
 
-const deserializeElement = ({
-  el,
-  index = 0,
-  childrenLength = 0,
-  context = ""
-}) => {
+const deserializeElement = el => {
   if (el.type !== ElementType.Tag && el.type !== ElementType.Text) return null;
   if (blackList.includes(el.type)) return null;
 
@@ -113,15 +100,12 @@ const deserializeElement = ({
     return jsx("element", { type: "p" }, [{ text: "" }]);
   }
 
-  const isFirstChild = index === 0;
-  const isLastChild = index === childrenLength - 1;
-
   if (el.type === ElementType.Text) {
     return deserializeText(el);
   }
 
   if (Object.keys(markTags).includes(nodeName)) {
-    return deserializeMarkTag(el, context, isFirstChild, isLastChild);
+    return deserializeMarkTag(el);
   }
 
   if (isSlateVoid(nodeName) && nodeName !== "img" && nodeName !== "iframe") {
@@ -148,23 +132,17 @@ const deserializeElement = ({
   }
 };
 
-const deserializeDom = ({ dom, childrenLength, context }) => {
+const deserializeDom = dom => {
   const nodes = dom
-    .map((el, i) =>
-      deserializeElement({ el, index: i, childrenLength, context })
-    )
+    .map(el => deserializeElement(el))
     .filter(Boolean)
     .map(element => addTextNodeToEmptyChildren(element));
   return nodes;
 };
 
-const deserializeChildren = (children, context) => {
+const deserializeChildren = children => {
   if (!children) return [];
-  const nodes = deserializeDom({
-    dom: children,
-    childrenLength: children.length,
-    context
-  }).filter(Boolean);
+  const nodes = deserializeDom(children).filter(Boolean);
   return nodes;
 };
 
@@ -174,7 +152,7 @@ export const htmlToSlate = html => {
     if (error) {
       // TODO:  Handle error
     } else {
-      slateContent = deserializeDom({ dom });
+      slateContent = deserializeDom(dom);
     }
   });
 
