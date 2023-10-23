@@ -98,9 +98,9 @@ export const captureHotKeys = (e, editor) => {
       return handleLinkHotkey(editor);
     case "g":
       e.preventDefault();
-      return handleImageHotkey(editor);
+      return handleImageHotkey();
     case "m":
       e.preventDefault();
-      return handleIframeHotkey(editor);
+      return handleIframeHotkey();
   }
 };

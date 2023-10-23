@@ -22,13 +22,13 @@ export const handleLinkHotkey = editor => {
 };
 
 export const handleImageHotkey = e => {
-  e.preventDefault();
+  if (e) e.preventDefault();
   const button = document.getElementsByName("img-modal-trigger");
   if (button[0]) button[0].click();
 };
 
 export const handleIframeHotkey = e => {
-  e.preventDefault();
+  if (e) e.preventDefault();
   const button = document.getElementsByName("iframe-modal-trigger");
   if (button[0]) button[0].click();
 };
