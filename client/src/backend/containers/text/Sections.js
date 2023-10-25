@@ -23,9 +23,9 @@ export default function TextSectionsContainer({
     const drawerRoutes = { ...route, routes: routes.filter(r => !r.editor) };
     const editorRoute = { ...route, routes: [routes.find(r => r.editor)] };
 
-    const globalStylesheet = text.relationships.stylesheets?.find(
-      s => s.attributes.appliesToAllTextSections
-    );
+    const appliesToAllStylesheets = text.relationships.stylesheets
+      ?.filter(s => s.attributes.appliesToAllTextSections)
+      .map(s => s.id);
 
     return (
       <>
@@ -44,7 +44,7 @@ export default function TextSectionsContainer({
           },
           childProps: {
             textId: text.id,
-            globalStylesheetId: globalStylesheet?.id,
+            appliesToAllStylesheets,
             nextPosition: text.attributes?.sectionsMap?.length + 1,
             refresh
           }

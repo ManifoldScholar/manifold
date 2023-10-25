@@ -33,7 +33,7 @@ const getInitialHtmlValue = value => {
 export default function EditSectionForm({
   section,
   textId,
-  globalStylesheetId,
+  appliesToAllStylesheets,
   refresh
 }) {
   const { t } = useTranslation();
@@ -83,13 +83,15 @@ export default function EditSectionForm({
     setWarnErrors
   };
 
-  const globalStylesheet = useFromStore(
-    `entityStore.entities.stylesheets["${globalStylesheetId}"]`
-  );
+  const stylesheetData = useFromStore(`entityStore.entities.stylesheets`);
+
+  const appliedStylesheets = Object.keys(stylesheetData)
+    .filter(id => appliesToAllStylesheets.find(s => s === id))
+    .map(id => stylesheetData[id]);
 
   const stylesheets = Array.isArray(section?.relationships.stylesheets)
-    ? [...section?.relationships.stylesheets, globalStylesheet]
-    : [globalStylesheet];
+    ? [...section?.relationships.stylesheets, ...appliedStylesheets]
+    : [...appliedStylesheets];
 
   const handleSaveAndCloseClick = e => {
     if (hasErrors) {
