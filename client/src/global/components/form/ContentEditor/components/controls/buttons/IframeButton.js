@@ -6,7 +6,6 @@ import Modal from "./insert/Modal";
 import InsertIframeForm from "./insert/IframeForm";
 import { useConfirmation } from "hooks";
 import Utility from "global/components/utility";
-import { isValidUrl } from "../../../utils/helpers";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
 import { hotkeys } from "./TooltipContent/content";
@@ -27,7 +26,7 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
     const url = urlRef?.current?.inputElement?.value;
     if (!url) return;
     const title = titleRef?.current?.inputElement?.value;
-    if (!isValidUrl(url)) return;
+    if (!url) return;
     close();
     return insertIframe(editor, url, title);
   };
