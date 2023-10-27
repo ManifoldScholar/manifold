@@ -1,4 +1,10 @@
-import React, { useCallback, useState, useRef, useMemo } from "react";
+import React, {
+  useCallback,
+  useState,
+  useRef,
+  useMemo,
+  useEffect
+} from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import ContentEditor from "global/components/form/ContentEditor";
@@ -9,6 +15,7 @@ import { useHistory } from "react-router-dom";
 import { serializeToSlate } from "global/components/form/ContentEditor/serializers";
 import { formatHtml } from "global/components/form/ContentEditor/utils/helpers";
 import { useFromStore } from "hooks";
+import has from "lodash/has";
 import * as Styled from "./styles";
 
 const defaultValue = [
@@ -21,7 +28,12 @@ const defaultValue = [
 
 const getInitialSlateValue = value => {
   if (value && typeof value === "string")
-    return serializeToSlate(formatHtml(value));
+    try {
+      return serializeToSlate(formatHtml(value));
+    } catch (e) {
+      return { error: "serializer error", default: defaultValue };
+    }
+
   return defaultValue;
 };
 
@@ -83,6 +95,18 @@ export default function EditSectionForm({
     setWarnErrors
   };
 
+  useEffect(() => {
+    if (has(initialSlateValue, "error")) {
+      setHasErrors([
+        {
+          source: { pointer: "/data/attributes/body" },
+          detail: t(`errors.invalid_html_switch`)
+        }
+      ]);
+      setWarnErrors("switch");
+    }
+  }, [initialSlateValue, t]);
+
   const stylesheetData = useFromStore(`entityStore.entities.stylesheets`);
 
   const appliedStylesheets = Object.keys(stylesheetData)
@@ -103,7 +127,7 @@ export default function EditSectionForm({
 
   const saveRef = useRef();
 
-  return (
+  return section ? (
     <Styled.Form
       model={section}
       name={"be-text-section-update"}
@@ -137,7 +161,7 @@ export default function EditSectionForm({
         />
       </Styled.ButtonOverlay>
     </Styled.Form>
-  );
+  ) : null;
 }
 
 EditSectionForm.displayName = "Text.Sections.EditForm";
