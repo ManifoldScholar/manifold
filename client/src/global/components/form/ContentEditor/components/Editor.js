@@ -25,7 +25,6 @@ export default function Editor({
   setHasErrors,
   warnErrors,
   setWarnErrors,
-  errors: formErrors = [],
   nextRef,
   htmlMode,
   toggleHtmlMode
@@ -105,8 +104,11 @@ export default function Editor({
 
   const onValidateHtml = messages => {
     const errorFound = messages.find(msg => msg.type === "error");
-    if (!errorFound) setWarnErrors(false);
-    setHasErrors(errorFound);
+    if (!errorFound) {
+      setHasErrors(false);
+      return setWarnErrors(false);
+    }
+    setWarnErrors("switch");
   };
 
   const htmlProps = {
@@ -168,10 +170,9 @@ export default function Editor({
         {
           source: { pointer: "/data/attributes/body" },
           detail: t(`errors.invalid_html_${warnErrors}`)
-        },
-        ...formErrors
+        }
       ]
-    : [...formErrors];
+    : hasErrors;
 
   return (
     <>

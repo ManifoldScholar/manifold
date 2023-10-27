@@ -10,6 +10,7 @@ import throttle from "lodash/throttle";
 import { serializeToHtml, removeFormatting } from "../serializers";
 import { clearSlate } from "../utils/slate/general";
 import isEqual from "lodash/isEqual";
+import has from "lodash/has";
 import Editor from "./Editor";
 import { HtmlBreadcrumbsContext } from "../contexts/htmlBreadcrumbsContext";
 import * as Styled from "./styles";
@@ -33,11 +34,15 @@ export default function EditorWrapper({
   const prevSlate = useRef(initialSlateValue);
   const prevHtml = useRef(initialHtmlValue);
 
-  const [htmlMode, toggleHtmlMode] = useState(false);
+  const [htmlMode, toggleHtmlMode] = useState(has(initialSlateValue, "error"));
   const [selectedCrumb, setSelectedCrumb] = useState();
   const [editingCrumb, setEditingCrumb] = useState(false);
   const [localHtml, setLocalHtml] = useState(initialHtmlValue);
-  const [localSlate, setLocalSlate] = useState(initialSlateValue);
+  const [localSlate, setLocalSlate] = useState(
+    has(initialSlateValue, "error")
+      ? initialSlateValue.default
+      : initialSlateValue
+  );
 
   // The value prop on the Slate provider component is unhelpfully named. It is really initialSlateValue and is only read once, so it's easy for Slate to get out of sync when waiting for data from the api. This resets the editor each time the form model changes.
   /* eslint-disable react-hooks/exhaustive-deps */
