@@ -67,7 +67,10 @@ export default function Editor({
     [theme, darkMode]
   );
 
-  const renderLeaf = useCallback(props => <Leaf {...props} />, []);
+  const renderLeaf = useCallback(
+    props => <Leaf {...props} darkMode={darkMode} />,
+    [darkMode]
+  );
 
   const toggleEditorView = () => {
     if (htmlMode) {

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { rteElements, inlineNodes } from "../../utils/elements";
+import { rteElements, inlineNodes, markElements } from "../../utils/elements";
 import { formatNodeLabel } from "../../utils/slate/general";
 import { removeNode } from "../../utils/slate/transforms/removeNode";
 import { unwrapNode } from "../../utils/slate/transforms";
@@ -28,11 +28,11 @@ export default function HtmlLabel({ visible, element }) {
   /* eslint-disable no-nested-ternary */
   const color = rteElements.includes(element.type)
     ? "green"
-    : inlineNodes.includes(element.type)
+    : inlineNodes.includes(element.type) || markElements.includes(element.type)
     ? "blue"
     : "violet";
 
-  const path = ReactEditor.findPath(editor, element);
+  const path = element.path ? ReactEditor.findPath(editor, element) : [];
 
   const disableDelete =
     path.length === 1 ||

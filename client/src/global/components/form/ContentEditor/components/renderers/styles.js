@@ -5,7 +5,7 @@ import {
   formLabelPrimary,
   respond
 } from "theme/styles/mixins";
-import { rteElements, inlineNodes } from "../../utils/elements";
+import { rteElements, inlineNodes, markElements } from "../../utils/elements";
 
 export const ButtonGroup = styled.div`
   display: none;
@@ -242,7 +242,7 @@ export const getHtmlOutlineStyles = (nodeName, darkMode) => {
   /* eslint-disable no-nested-ternary */
   const color = rteElements.includes(nodeName)
     ? "green"
-    : inlineNodes.includes(nodeName)
+    : inlineNodes.includes(nodeName) || markElements.includes(nodeName)
     ? "blue"
     : "violet";
 
