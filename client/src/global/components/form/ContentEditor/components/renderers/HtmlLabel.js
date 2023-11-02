@@ -32,7 +32,9 @@ export default function HtmlLabel({ visible, element }) {
     ? "blue"
     : "violet";
 
-  const path = element.path ? ReactEditor.findPath(editor, element) : [];
+  const path = !markElements.includes(element.type)
+    ? ReactEditor.findPath(editor, element)
+    : [];
 
   const disableDelete =
     path.length === 1 ||
