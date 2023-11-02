@@ -17,7 +17,7 @@ const getActiveBlock = (editor, opts, name) => {
   const active = opts
     .map(o => [o, isActive(editor, o)].flat())
     .filter(o => o[1])
-    .sort((a, b) => a[2].length > b[2].length)
+    .sort((a, b) => a[2].length - b[2].length)
     .pop();
 
   // I can't decide whether it's better to show as active the lowest block or show nothing as active if the selection is nested in multiple blocks.
