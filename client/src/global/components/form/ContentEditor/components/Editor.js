@@ -108,7 +108,7 @@ export default function Editor({
       setHasErrors(false);
       return setWarnErrors(false);
     }
-    setWarnErrors("switch");
+    setHasErrors(true);
   };
 
   const htmlProps = {
@@ -165,14 +165,17 @@ export default function Editor({
     setDarkMode(val);
   };
 
+  /* eslint-disable no-nested-ternary */
   const errors = warnErrors
-    ? [
-        {
-          source: { pointer: "/data/attributes/body" },
-          detail: t(`errors.invalid_html_${warnErrors}`)
-        }
-      ]
-    : hasErrors;
+    ? Array.isArray(hasErrors)
+      ? hasErrors
+      : [
+          {
+            source: { pointer: "/data/attributes/body" },
+            detail: t(`errors.invalid_html_${warnErrors}`)
+          }
+        ]
+    : [];
 
   return (
     <>
