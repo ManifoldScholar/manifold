@@ -41,7 +41,7 @@ const withHtmlAwareBreaks = editor => {
       if (isCollapsed && liIsEmpty)
         return decreaseIndent({ editor, canUnwrapRoot: true });
       // Since the new element we're inserting is an element in an existing list, we'll keep the classname around in case indents are handled with classes
-      next.htmlAttrs = { class: htmlAttrs?.class };
+      next.htmlAttrs = htmlAttrs?.class ? { class: htmlAttrs?.class } : {};
     }
 
     try {
