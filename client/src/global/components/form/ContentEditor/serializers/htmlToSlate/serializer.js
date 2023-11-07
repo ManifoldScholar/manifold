@@ -108,7 +108,11 @@ const deserializeElement = el => {
     return deserializeMarkTag(el);
   }
 
-  if (isSlateVoid(nodeName) && nodeName !== "img" && nodeName !== "iframe") {
+  if (
+    isSlateVoid(nodeName, { children: el.children, htmlAttrs: el.attribs }) &&
+    nodeName !== "img" &&
+    nodeName !== "iframe"
+  ) {
     return deserializeVoid(el, nodeName, el.childNodes);
   }
 
