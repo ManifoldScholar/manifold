@@ -15,11 +15,12 @@ export const rteElements = [
   "a",
   "list-sibling",
   "img",
-  "iframe"
+  "iframe",
+  "video"
 ];
 
 // These elements are removable/insertable via the RTE but their contents cannot be edited as text.
-export const rteVoids = ["img", "iframe"];
+export const rteVoids = ["img", "iframe", "video"];
 
 // HTML container elements that nest in the RTE
 export const nestableElements = [

@@ -81,10 +81,10 @@ export default function SlateElement({
       </Image>
     );
   }
-  if (element.type === "iframe") {
+  if (element.type === "iframe" || element.type === "video") {
     return (
       <Image
-        as="iframe"
+        as={element.type}
         attributes={attributes}
         element={element}
         showHtml={showHtml}

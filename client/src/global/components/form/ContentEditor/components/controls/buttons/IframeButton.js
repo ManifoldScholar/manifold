@@ -35,8 +35,10 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
     const url = urlRef?.current?.inputElement?.value ?? attrs.src;
     if (!url) return;
     const title = titleRef?.current?.inputElement?.value;
+    const type = /api\/proxy\//.test(url) ? "video" : "iframe";
     close();
     Transforms.setNodes(editor, {
+      type,
       htmlAttrs: { ...attrs, src: url, title }
     });
     ReactEditor.focus(editor);
@@ -66,9 +68,10 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
       Editor.nodes(editor, {
         at: Editor.unhangRange(editor, selection),
         match: n =>
-          !Editor.isEditor(n) &&
-          SlateElement.isElement(n) &&
-          n.type === "iframe"
+          (!Editor.isEditor(n) &&
+            SlateElement.isElement(n) &&
+            n.type === "iframe") ||
+          n.type === "video"
       })
     );
 
@@ -98,7 +101,10 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
       });
   };
 
-  const [active] = isElementActive(editor, "iframe");
+  const [activeIframe] = isElementActive(editor, "iframe");
+  const [activeVideo] = isElementActive(editor, "video");
+
+  const active = activeIframe || activeVideo;
 
   return (
     <Tooltip

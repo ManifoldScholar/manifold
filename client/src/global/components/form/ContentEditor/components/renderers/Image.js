@@ -40,7 +40,7 @@ export default function ImageRenderer({
   };
 
   const wrapperClassName = classNames({
-    "responsive-iframe": as === "iframe"
+    "responsive-iframe": as === "iframe" || as === "video"
   });
 
   const { htmlAttrs } = element ?? {};
@@ -64,6 +64,7 @@ export default function ImageRenderer({
             src={htmlAttrs.src}
             alt={!as ? htmlAttrs.alt : undefined}
             title={as ? htmlAttrs.title : undefined}
+            controls={as === "video" ? true : undefined}
             $selected={selected && focused}
             className={className}
             width={htmlAttrs?.width}
@@ -71,7 +72,11 @@ export default function ImageRenderer({
           />
           <Styled.ButtonGroup $visible={selected}>
             <Styled.InteriorButton
-              onClick={as === "iframe" ? handleIframeHotkey : handleImageHotkey}
+              onClick={
+                as === "iframe" || as === "video"
+                  ? handleIframeHotkey
+                  : handleImageHotkey
+              }
             >
               <Utility.IconComposer icon="annotate24" size={24} />
             </Styled.InteriorButton>

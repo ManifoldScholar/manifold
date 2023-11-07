@@ -5,16 +5,28 @@ import {
   nestableElements,
   rteVoids
 } from "../utils/elements";
+import has from "lodash/has";
 
-export const isSlateVoid = element => {
+const isHtmlVideo = element => {
+  const { htmlAttrs, children } = element ?? {};
+  const src = htmlAttrs?.src;
+  if (!src || !/api\/proxy\//.test(src)) return true;
+  if (!children || !children.length > 1) return true;
+  if (children.length === 1 && !has(children[0], "text")) return true;
+  return false;
+};
+
+export const isSlateVoid = (type, element) => {
   const isRteEl =
-    (rteElements.includes(element) ||
-      nestableElements.includes(element) ||
-      element === "span") &&
-    !rteVoids.includes(element);
-  const isRendered = renderedElements.includes(element);
-  const isMark = markElements.includes(element);
-  return !(isRteEl || isRendered || isMark);
+    (rteElements.includes(type) ||
+      nestableElements.includes(type) ||
+      type === "span") &&
+    !rteVoids.includes(type);
+  const isRendered = renderedElements.includes(type);
+  const isMark = markElements.includes(type);
+  const isAssetVideo = type === "video" ? !isHtmlVideo(element) : false;
+
+  return !(isRteEl || isRendered || isMark || isAssetVideo);
 };
 
 /* eslint-disable no-param-reassign */
@@ -22,7 +34,7 @@ const withVoids = editor => {
   const { isVoid } = editor;
 
   editor.isVoid = element => {
-    return isSlateVoid(element.type) || isVoid(element);
+    return isSlateVoid(element.type, element) || isVoid(element);
   };
 
   return editor;

@@ -11,7 +11,8 @@ export default `
 
     iframe,
     object,
-    embed {
+    embed,
+    video {
       position: absolute;
       top: 0;
       left: 0;
