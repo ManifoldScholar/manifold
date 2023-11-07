@@ -27,14 +27,28 @@ const withHtmlAwareBreaks = editor => {
       match: n => Editor.isBlock(editor, n) && !n.slateOnly
     });
     // Remove all attributes other than the type/tag and marks, so we don't copy id, classes, anything that can't be updated in the RTE
-    const { children, htmlAttrs, slateOnly, inline, ...next } = block;
+    const {
+      children,
+      htmlAttrs,
+      slateOnly,
+      inline,
+      nodeName,
+      srcdoc,
+      htmlChildren,
+      ...next
+    } = block;
     // Insert a paragraph if this node type isn't editable in the RTE; handle unwrapping the list item if we're on an empty li
     if (
       !rteElements.includes(next.type) &&
       !nestableElements.includes(next.type)
     )
       next.type = "p";
-    if (next.type === "a" || next.type === "img" || next.type === "iframe")
+    if (
+      next.type === "a" ||
+      next.type === "img" ||
+      next.type === "iframe" ||
+      next.type === "video"
+    )
       next.type = "p";
     if (next.type === "li") {
       const liIsEmpty = Editor.isEmpty(editor, block);
