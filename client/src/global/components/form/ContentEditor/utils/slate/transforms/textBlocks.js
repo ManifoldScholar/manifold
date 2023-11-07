@@ -74,12 +74,12 @@ export const toggleTextBlock = ({
         {
           type,
           slateOnly: undefined,
-          htmlAttrs
+          htmlAttrs: type !== "li" ? htmlAttrs : undefined
         },
         { split }
       );
       if (type === "li") {
-        Transforms.wrapNodes(editor, { type: format, children: [] });
+        Transforms.wrapNodes(editor, { type: format, htmlAttrs, children: [] });
       }
       if (format === "pre") Editor.addMark(editor, "code", true);
       ReactEditor.focus(editor);
