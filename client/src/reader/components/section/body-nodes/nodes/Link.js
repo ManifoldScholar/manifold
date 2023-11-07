@@ -15,6 +15,13 @@ class LinkNode extends Component {
     return this.props.attributes.hasOwnProperty("href");
   }
 
+  isProxyUri() {
+    if (this.hasUri()) {
+      return /api\/proxy\//.test(this.props.attributes.href);
+    }
+    return false;
+  }
+
   isAbsoluteUri() {
     if (!this.hasUri()) {
       return false;
@@ -50,7 +57,7 @@ class LinkNode extends Component {
   }
 
   render() {
-    if (!this.hasUri() || this.isAbsoluteUri()) {
+    if (!this.hasUri() || this.isAbsoluteUri() || this.isProxyUri()) {
       const Tag = this.props.tag;
       return (
         <Tag
