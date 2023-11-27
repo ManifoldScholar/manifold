@@ -366,12 +366,17 @@ class Text < ApplicationRecord
   # @api private
   # @return [void]
   def ensure_toc_uids!
+    return unless respond_to?(:toc)
+
     toc.each(&:ensure_uid!)
   end
 
   # @api private
   # @return [void]
   def migrate_toc!
+    # When Sidekiq indexes, it doesn't necessarily query for all model attributes. In that
+    # case, we don't want this method to run.
+    return unless respond_to?(:toc)
     return unless persisted?
 
     ensure_toc_uids!
