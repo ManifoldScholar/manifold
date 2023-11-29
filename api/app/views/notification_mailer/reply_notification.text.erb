@@ -1,4 +1,4 @@
-<%= @comment.creator.full_name %> replied to your comment on "<%= @comment.title %>."
+<%= @comment.creator&.full_name || "A deleted user" %> replied to your comment on "<%= @comment.title %>."
 
 -----------------------------------------------------------
 <%= @comment.body %>

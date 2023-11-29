@@ -1486,7 +1486,7 @@ CREATE TABLE public.ingestions (
     strategy character varying,
     external_source_url character varying,
     ingestion_type character varying,
-    creator_id uuid NOT NULL,
+    creator_id uuid,
     text_id uuid,
     project_id uuid NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -6494,7 +6494,7 @@ ALTER TABLE ONLY public.reading_group_text_sections
 --
 
 ALTER TABLE ONLY public.ingestions
-    ADD CONSTRAINT fk_rails_a143919a1e FOREIGN KEY (creator_id) REFERENCES public.users(id) ON DELETE RESTRICT;
+    ADD CONSTRAINT fk_rails_a143919a1e FOREIGN KEY (creator_id) REFERENCES public.users(id) ON DELETE SET NULL;
 
 
 --
@@ -7125,6 +7125,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230823232509'),
 ('20230921024546'),
 ('20231005175407'),
-('20231010184158');
+('20231010184158'),
+('20231129172116');
 
 
