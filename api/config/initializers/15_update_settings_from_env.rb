@@ -1,6 +1,8 @@
 Rails.application.configure do
   config.after_initialize do
     Settings.potentially_update_from_environment!
+
+    Settings.instance.refresh_formatted_attributes_cache! if Settings.table_exists?
   rescue NoMethodError
     Rails.logger.warn <<~TEXT
         Unable to update settings from environment due to NoMethodError. This could be due
