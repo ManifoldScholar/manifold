@@ -48,5 +48,11 @@ export const Instructions = styled.span`
 
 export const Button = styled.button`
   width: max-content;
-  color: var(--highlight-color);
+  color: var(--color-base-red75);
+  border-color: var(--color-base-red75);
+
+  &:hover {
+    background-color: var(--color-base-red75);
+    color: white;
+  }
 `;
