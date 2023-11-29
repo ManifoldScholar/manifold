@@ -20,7 +20,7 @@ module Notifications
 
     def excluded
       @excluded ||= [creator].tap do |out|
-        out << parent.creator if parent.present?
+        out << parent.creator if parent&.creator.present?
       end.compact
     end
   end

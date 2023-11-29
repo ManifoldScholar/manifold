@@ -237,7 +237,7 @@
       },
       "delete": {
         "header": "Delete your account",
-        "description": "This will delete your entire account and record from our databases.",
+        "description": "This will delete your entire account and any annotations you created from our database. Projects and texts that you created will not be deleted. It is not possible to recover deleted accounts so proceed with caution.",
         "button_label": "Delete my account",
         "confirm_header": "Are you sure you want to delete your account?",
         "confirm_instructions": "Please enter your email to continue.",

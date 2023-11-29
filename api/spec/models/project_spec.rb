@@ -55,9 +55,9 @@ RSpec.describe Project, type: :model do
     expect(project).to be_valid
   end
 
-  it "is invalid without a creator" do
+  it "is valid without a creator" do
     project = FactoryBot.build(:project, creator: nil)
-    expect(project).to_not be_valid
+    expect(project).to be_valid
   end
 
   it "triggers an event on create" do
