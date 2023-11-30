@@ -244,4 +244,13 @@ class TextSection < ApplicationRecord
   def remove_linked_toc_entries
     text.remove_toc_entry!(id)
   end
+
+  class << self
+    # @return [void]
+    def extrapolate_all_nodes!
+      find_each do |text_section|
+        TextSections::ExtrapolateNodesJob.perform_later text_section
+      end
+    end
+  end
 end
