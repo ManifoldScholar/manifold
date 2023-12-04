@@ -36,7 +36,7 @@ class ApplicationController < ActionController::API
   end
 
   def default_per_page
-    20
+    Kaminari.config.default_per_page
   end
 
   def min_per_page
@@ -44,7 +44,7 @@ class ApplicationController < ActionController::API
   end
 
   def max_per_page
-    100
+    Kaminari.config.max_per_page
   end
 
   def page_number
