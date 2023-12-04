@@ -1,4 +1,5 @@
 require "redcarpet/compat"
+require "image_processing/mini_magick"
 require "uber/inheritable_attr"
 require "to_week_range"
 require "auth_token"
