@@ -77,7 +77,7 @@ module JSONAPI
 
   def build_meta(options, collection)
     meta = options.key?(:meta) && options[:meta].respond_to?(:key?) ? options[:meta] : {}
-    meta[:pagination] = pagination_dict(collection) if collection.respond_to?(:current_page)
+    meta[:pagination] = collection.respond_to?(:current_page) && !skip_pagination ? pagination_dict(collection) : { skipped: true }
     camelize_hash(meta)
   end
 

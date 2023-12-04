@@ -12,6 +12,8 @@ module Filtering
       option :scope, Filtering::Types::Scope
 
       option :user, Filtering::Types::User.optional, optional: true
+
+      option :skip_pagination, Filtering::Types::Bool.optional, default: proc { false }, as: :skip_pagination_option
     end
 
     include ManifoldApi::Deps[
@@ -31,6 +33,9 @@ module Filtering
     # @return [ActiveRecord::Relation] with kaminari data from {.by_pagination}.
     attr_reader :results
 
+    # @return [Boolean]
+    attr_reader :skip_pagination
+
     # @return [Searchkick::Relation]
     # @return [ActiveRecord::Relation] with kaminari data from {.by_pagination}.
     def call
@@ -42,8 +47,8 @@ module Filtering
         @ids = @filtered_scope.distinct.reorder(nil).pluck(:id)
 
         filter_with_searchkick!
-      elsif params[:page]
-        @results = @filtered_scope.page(params[:page]).per(params[:per_page] || model.default_per_page)
+      elsif should_apply_pagination?
+        @results = @filtered_scope.page(params[:page]).per(params[:per_page])
       else
         @results = @filtered_scope.all
       end
@@ -58,6 +63,8 @@ module Filtering
     # @return [void]
     def set_up!
       @params = normalize_params
+
+      @skip_pagination = @params[:skip_pagination] || skip_pagination_option
     end
 
     # This will filter the given scope by the provided hash of params,
@@ -150,7 +157,7 @@ module Filtering
       filter = Search::FilterScope.new do |f|
         f.where :id, @ids
         f.typeahead params[:typeahead], model::TYPEAHEAD_ATTRIBUTES
-        f.paginate params[:page], params[:per_page]
+        f.paginate params[:page], params[:per_page] unless skip_pagination
       end
 
       model.lookup search_query, filter
@@ -175,6 +182,10 @@ module Filtering
 
     def search_query
       params[:keyword].presence || "*"
+    end
+
+    def should_apply_pagination?
+      !skip_pagination && params[:page].present?
     end
 
     def should_filter_with_searchkick?
