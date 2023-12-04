@@ -51,12 +51,18 @@ class ApplicationController < ActionController::API
     params.dig(:page, :number).to_i.clamp(1, Float::INFINITY)
   end
 
-  def with_pagination!(filter_params, enforced: pagination_enforced)
+  def with_pagination!(filter_params)
     filter_params = {} if filter_params.nil?
 
-    return filter_params if !enforced && params.dig(:no_pagination)
+    filter_params[:skip_pagination] = skip_pagination
+
+    return filter_params if skip_pagination
 
     filter_params.merge(page: page_number, per_page: page_size)
+  end
+
+  def skip_pagination
+    !pagination_enforced && params.dig(:no_pagination)
   end
 
   def pagination_dict(object)
@@ -65,6 +71,7 @@ class ApplicationController < ActionController::API
       current_page: object.current_page.to_i,
       next_page: object.next_page.to_i,
       prev_page: object.prev_page.to_i,
+      skipped: false,
       total_pages: object.total_pages.to_i,
       total_count: object.total_count.to_i
     }
