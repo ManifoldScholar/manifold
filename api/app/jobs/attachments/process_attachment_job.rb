@@ -1,10 +1,11 @@
-require "image_processing/mini_magick"
+# frozen_string_literal: true
 
 module Attachments
   class ProcessAttachmentJob < ApplicationJob
     include ExclusiveJob
 
-    concurrency 3, drop: false unless Rails.env.test?
+    concurrency 1, drop: false unless Rails.env.test?
+
     retry_on ::MiniMagick::Error, wait: 10.seconds, attempts: 3
 
     queue_as :default
@@ -57,6 +58,5 @@ module Attachments
       }
     end
     # rubocop:enable Metrics/MethodLength
-
   end
 end
