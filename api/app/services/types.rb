@@ -75,6 +75,8 @@ module Types
 
   HTTP_URI = URI.constrained_type.new(URI, rule: HTTP_SCHEME)
 
+  SAFE_BOOL = Params::Bool.fallback { false }
+
   SHA512_HEX = Types::String.constrained(format: /\A[a-z0-9]{128}\z/)
 
   SHA512_DIGEST = Types.Instance(Digest::SHA512)
