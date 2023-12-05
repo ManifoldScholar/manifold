@@ -171,15 +171,21 @@ Manifold stores basic information about each reading group, the content that has
     end
 
     def require_terms_and_conditions?
-      instance.calculated[:require_terms_and_conditions]
+      RequestStore.fetch(:require_terms_and_conditions) do
+        instance.calculated[:require_terms_and_conditions]
+      end
     end
 
     def google_analytics_enabled?
-      instance.calculated[:google_analytics_enabled]
+      RequestStore.fetch(:google_analytics_enabled) do
+        instance.calculated[:google_analytics_enabled]
+      end
     end
 
     def manifold_analytics_enabled?
-      instance.calculated[:manifold_analytics_enabled]
+      RequestStore.fetch(:manifold_analytics_enabled) do
+        instance.calculated[:manifold_analytics_enabled]
+      end
     end
 
     def update_from_environment?
