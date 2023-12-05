@@ -7,6 +7,7 @@ class ApplicationController < ActionController::API
   include JSONAPI
   include Authority::Controller
 
+  before_action :store_skip_pagination!
   before_action :set_paper_trail_whodunnit
 
   rescue_from APIExceptions::StandardError, with: :render_error_response
@@ -61,9 +62,14 @@ class ApplicationController < ActionController::API
     filter_params.merge(page: page_number, per_page: page_size)
   end
 
+  # @return [Boolean]
   def skip_pagination
-    !pagination_enforced && params.dig(:no_pagination)
+    RequestStore.fetch :skip_pagination do
+      !pagination_enforced && Types::SAFE_BOOL.(params.dig(:no_pagination))
+    end
   end
+
+  alias store_skip_pagination! skip_pagination
 
   def pagination_dict(object)
     {

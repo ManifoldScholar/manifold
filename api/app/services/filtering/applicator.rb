@@ -64,7 +64,7 @@ module Filtering
     def set_up!
       @params = normalize_params
 
-      @skip_pagination = @params[:skip_pagination] || skip_pagination_option
+      @skip_pagination = @params[:skip_pagination] || RequestStore[:skip_pagination] || skip_pagination_option
     end
 
     # This will filter the given scope by the provided hash of params,
