@@ -4,14 +4,13 @@ module API
     class TagsController < ApplicationController
 
       resourceful! Tag, authorize_options: { except: [:index] } do
-        Tag.filtered(tag_filter_params || {})
+        Tag.filtered(with_pagination!(tag_filter_params || {}))
       end
 
       def index
         @tags = load_tags
         render_multiple_resources @tags, serializer: ::V1::TagSerializer
       end
-
     end
   end
 end
