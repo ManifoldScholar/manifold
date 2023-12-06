@@ -46,9 +46,10 @@ class ProjectAccessWrapper extends Component {
 
     const authorization = new Authorization();
 
-    const canGrantPermissions = authorization.authorizeKind({
+    const canGrantPermissions = authorization.authorizeAbility({
       authentication,
-      kind: ["admin", "editor"]
+      entity: project,
+      ability: "managePermissions"
     });
 
     const closeUrl = lh.link("backendProjectAccess", project.id);
