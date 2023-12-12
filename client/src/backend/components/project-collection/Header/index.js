@@ -37,7 +37,7 @@ class ProjectCollectionHeader extends PureComponent {
       }
     ];
 
-    const manage = smart
+    const manage = !smart
       ? [
           {
             label: t("project_collections.manage", {
