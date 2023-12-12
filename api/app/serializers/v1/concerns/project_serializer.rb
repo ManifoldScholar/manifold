@@ -120,7 +120,10 @@ module V1
               id: Types::Serializer::ID,
               label: Types::String
             )
-          ).meta(read_only: true).optional
+          ).meta(read_only: true).optional do |object, params|
+            journal = object.journal
+            journal.issues_nav(user: params[:current_user]) if journal.present?
+          end
         end
       end
 
