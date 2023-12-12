@@ -43,7 +43,7 @@ class JournalAuthorizer < ApplicationAuthorizer
   # @param [User] user
   # @param [Hash] _options
   def drafts_readable_by?(user, _options = {})
-    has_any_role? user, *RoleName.draft_access
+    has_any_role?(user, *RoleName.draft_access) || issues_editable_by?(user)
   end
 
   def fully_readable_by?(_user, _options = {})
@@ -70,6 +70,14 @@ class JournalAuthorizer < ApplicationAuthorizer
     options[:subject] = resource
 
     user.can_manage? Entitlement, options
+  end
+
+  private
+
+  def issues_editable_by?(user)
+    resource.journal_issues.includes(:project).any? do |journal_issue|
+      user.has_cached_role?(:project_editor, journal_issue.project)
+    end
   end
 
   class << self
@@ -104,14 +112,19 @@ class JournalAuthorizer < ApplicationAuthorizer
     # @param [User] user
     # @param [Hash] _options
     def drafts_readable_by?(user, _options = {})
-      marketeer_permissions?(user)
+      marketeer_permissions?(user) || issues_updatable_by?(user)
     end
 
-    # @see Project.build_read_ability_scope_for
     # @param [User] user
     # @param [Hash] _options
     def fully_readable_by(_user, _options = {})
       true
+    end
+
+    private
+
+    def issues_updatable_by?(user)
+      JournalIssue.with_update_ability(user).exists?
     end
   end
 end
