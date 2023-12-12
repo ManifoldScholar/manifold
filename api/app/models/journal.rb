@@ -130,9 +130,19 @@ class Journal < ApplicationRecord
     journal_issues.where(journal_volume: nil).count
   end
 
-  def issues_nav
-    issue_projects = journal_issues.map { |i| i.project }
-    issue_projects&.map { |p| { id: p.id, label: p.sort_title } }
+  # This method is named a little oddly, as it actually returns references to projects.
+  #
+  # It is used in the admin section to allow navigating between project issues that users
+  # have access to.
+  #
+  # @param [User] user
+  # @return [<Hash>]
+  def issues_nav(user: nil)
+    journal_issues.for_nav(user).each_with_object([]) do |issue, entries|
+      project = issue.project
+
+      entries << project.to_nav_entry if project.present?
+    end
   end
 
   class << self

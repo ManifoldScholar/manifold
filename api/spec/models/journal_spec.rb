@@ -17,6 +17,10 @@ RSpec.describe Journal, type: :model do
 
       let_it_be(:journal_issue) { FactoryBot.create :journal_issue, project: project, journal: journal }
 
+      let_it_be(:other_project) { FactoryBot.create :project }
+
+      let_it_be(:other_issue) { FactoryBot.create :journal_issue, journal: journal, project: other_project }
+
       describe ".with_read_ability" do
         it "can find the journal for the user" do
           expect(described_class.with_read_ability(reader)).to include journal
@@ -32,6 +36,15 @@ RSpec.describe Journal, type: :model do
       describe ".with_update_or_issue_update_ability" do
         it "can find the journal for the user" do
           expect(described_class.with_update_or_issue_update_ability(reader)).to include journal
+        end
+      end
+
+      describe "#issues_nav" do
+        let_it_be(:nav_entries) { journal.issues_nav(user: reader) }
+
+        it "has the right number of issues_nav", :aggregate_failures do
+          expect(nav_entries).to include project.to_nav_entry
+          expect(nav_entries).not_to include other_project.to_nav_entry
         end
       end
 

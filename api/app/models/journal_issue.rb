@@ -55,6 +55,14 @@ class JournalIssue < ApplicationRecord
     where(project: Project.with_read_ability(user)).or(where(journal: Journal.with_update_ability(user)))
   end
 
+  scope :for_nav, ->(user = nil) do
+    with_update_ability(user).with_attached_project
+  end
+
+  scope :with_attached_project, -> do
+    includes(:project).where(id: Project.select(:journal_issue_id))
+  end
+
   delegate :avatar, to: :project
   delegate :avatar_color, to: :project
   delegate :avatar_meta, to: :project
