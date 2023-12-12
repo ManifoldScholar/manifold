@@ -145,4 +145,15 @@ class JournalIssue < ApplicationRecord
   def content_block_ids
     content_blocks.pluck[:id]
   end
+
+  class << self
+    # A {User} with update permissions on a {Project} associated with a {JournalIssue}
+    # should be able to see the parent {Journal}.
+    #
+    # @see Journal.arel_with_draft_access_from_issues
+    # @return [ActiveRecord::Relation<JournalIssue>] `SELECT DISTINCT journal_id FROM journal_issues`
+    def accessible_journal_ids_for(user)
+      where(project: Project.with_update_ability(user)).distinct.select(:journal_id)
+    end
+  end
 end

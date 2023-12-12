@@ -179,11 +179,14 @@ class Journal < ApplicationRecord
       end
     end
 
+    # @see .arel_with_draft_access_from_issues
     # @see .arel_with_roles_for
     # @param [User] user
     # @return [Arel::Nodes::Or]
     def arel_with_draft_roles_for(user)
-      arel_with_roles_for(user, RoleName.for_draft_access)
+      arel_with_roles_for(user, RoleName.for_draft_access).or(
+        arel_with_draft_access_from_issues(user)
+      )
     end
 
     # @see RoleName.for_access
@@ -197,6 +200,14 @@ class Journal < ApplicationRecord
       has_global_role = global.any? { |role| user.has_cached_role? role, :any }
 
       arel_attr_in_query(primary_key, query).or(arel_quote(has_global_role))
+    end
+
+    # @param [User] user
+    # @return [Arel::Nodes::In]
+    def arel_with_draft_access_from_issues(user)
+      issue_query = JournalIssue.accessible_journal_ids_for(user)
+
+      arel_attr_in_query(primary_key, issue_query)
     end
   end
 end
