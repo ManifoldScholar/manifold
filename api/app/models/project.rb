@@ -329,6 +329,15 @@ class Project < ApplicationRecord
     twitter_queries.length.positive?
   end
 
+  # @see Journal#issues_nav
+  # @return [Hash]
+  def to_nav_entry
+    {
+      id: id,
+      label: sort_title,
+    }
+  end
+
   def to_s
     title
   end
