@@ -39,9 +39,16 @@ function ProjectPropertiesContainer({ project }) {
         ? { avatar: avatarData }
         : {};
 
-    const relationships = data.relationships?.subjects
-      ? { subjects: { data: data.relationships?.subjects } }
-      : {};
+    const { subjects, journalVolume } = data.relationships ?? {};
+
+    const relationships = {
+      ...(subjects && { subjects: { data: subjects } }),
+      ...(journalVolume && {
+        journalVolume: {
+          data: journalVolume
+        }
+      })
+    };
 
     return {
       relationships,
