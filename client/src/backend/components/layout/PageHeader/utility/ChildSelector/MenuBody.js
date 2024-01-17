@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
+import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
@@ -17,7 +18,9 @@ function ChildSelectorMenuBody(props, ref) {
       <li key={link.id}>
         <Styled.Link {...maybeLinkProps} onClick={dropDownProps.toggleVisible}>
           {link.active && <Styled.LinkIcon icon="checkmark16" size={16} />}
-          <Styled.LinkText>{t(link.label)}</Styled.LinkText>
+          <Styled.LinkText {...maybeHtml(link.label)}>
+            {maybeReactNode(t(link.label))}
+          </Styled.LinkText>
         </Styled.Link>
       </li>
     );

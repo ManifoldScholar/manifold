@@ -5,6 +5,7 @@ import Collecting from "frontend/components/collecting";
 import withSearchResultHelper from "../searchResultHelper";
 import Excerpts from "./Excerpts";
 import Collapse from "global/components/Collapse";
+import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import * as Styled from "./styles";
 
 function SearchResultsTypeGeneric(props) {
@@ -24,25 +25,6 @@ function SearchResultsTypeGeneric(props) {
   } = props;
 
   const { t } = useTranslation();
-
-  const maybeHtml = item => {
-    const hasHtml = !!item.__html;
-    const hasTags =
-      typeof item === "string" && !!item.match(/(<([^>]+)|(&#)>)/gi)?.length;
-    /* eslint-disable no-nested-ternary */
-    return hasHtml
-      ? { dangerouslySetInnerHTML: { ...item } }
-      : hasTags
-      ? { dangerouslySetInnerHTML: { __html: item } }
-      : {};
-  };
-
-  const maybeReactNode = item => {
-    const isReactNode =
-      React.isValidElement(item) ||
-      (typeof item === "string" && !item.match(/(<([^>]+)|(&#)>)/gi)?.length);
-    return isReactNode ? item : null;
-  };
 
   const maybeWithLink = ({ to, children, tabIndex = 0, ariaHidden = null }) => {
     return to ? (

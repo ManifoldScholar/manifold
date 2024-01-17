@@ -16,15 +16,10 @@ import {
   Article,
   Resource
 } from "./patterns";
+import { maybeHtml } from "helpers/maybeHtml";
 import * as Styled from "./styles";
 
-const htmlRegex = /(<([^>]+)>)|(&#)/gi;
-
-const maybeHtml = title => {
-  const hasTags =
-    typeof title === "string" && !!title?.match(htmlRegex)?.length;
-  return hasTags ? { dangerouslySetInnerHTML: { __html: title } } : {};
-};
+const htmlRegex = /(<([^>]+)>)|(&#)|(&[a-z]*;)/gi;
 
 const maybeString = title => {
   return typeof title === "string" && !title?.match(htmlRegex)?.length
