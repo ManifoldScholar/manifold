@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import * as Styled from "./styles";
 
 export default function BackendBreadcrumbs({
@@ -30,7 +31,9 @@ export default function BackendBreadcrumbs({
                     : null
                 }
               >
-                <Styled.Label>{crumb.label}</Styled.Label>
+                <Styled.Label {...maybeHtml(crumb.label)}>
+                  {maybeReactNode(crumb.label)}
+                </Styled.Label>
               </Styled.BackendBreadcrumb>
               {i < breadcrumbs.length - 1 && (
                 <Styled.Spacer icon="disclosureDown16" size={16} />

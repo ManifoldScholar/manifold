@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet-async";
 import Utility from "../utility";
+import unescape from "lodash/unescape";
 
 import config from "config";
 import get from "lodash/get";
@@ -32,7 +33,7 @@ export class HeadContentComponent extends Component {
   }
 
   get title() {
-    return this.props.title;
+    return unescape(this.props.title);
   }
 
   get appendedTitle() {

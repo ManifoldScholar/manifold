@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
+import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import * as Styled from "./styles";
 
 export default function FrontendBreadcrumbs({
@@ -27,7 +28,9 @@ export default function FrontendBreadcrumbs({
             }
           >
             {i === 0 && <IconComposer icon="arrowLeft16" size={24} />}
-            <Styled.Label>{crumb.label}</Styled.Label>
+            <Styled.Label {...maybeHtml(crumb.label)}>
+              {maybeReactNode(crumb.label)}
+            </Styled.Label>
           </Styled.Breadcrumb>
         ))}
       </Styled.Inner>

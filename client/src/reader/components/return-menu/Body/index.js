@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
+import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import Authorize from "hoc/Authorize";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
@@ -19,17 +20,6 @@ export default function ReturnMenuBody({
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
   const { t } = useTranslation();
 
-  const maybeHtml = title => {
-    const hasTags =
-      typeof title === "string" && !!title.match(/(<([^>]+)>)|(&#)/gi)?.length;
-    return hasTags ? { dangerouslySetInnerHTML: { __html: title } } : {};
-  };
-
-  const maybeString = title =>
-    typeof title === "string" && !title.match(/(<([^>]+)>)|(&#)/gi)?.length
-      ? title
-      : null;
-
   return (
     <Styled.Menu aria-label="Site Navigation">
       <Styled.List>
@@ -42,7 +32,7 @@ export default function ReturnMenuBody({
                 : t("reader.menus.return.project_home")}
             </Styled.LinkText>
             <Styled.EntityTitle {...maybeHtml(entityTitle)}>
-              {maybeString(entityTitle)}
+              {maybeReactNode(entityTitle)}
             </Styled.EntityTitle>
           </Styled.ItemLink>
         </Styled.Item>
