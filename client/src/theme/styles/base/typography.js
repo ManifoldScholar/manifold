@@ -20,11 +20,18 @@ export default `
     text-decoration-thickness: inherit;
   }
 
+  a,
+  span,
+  div {
+    text-underline-offset: 1px;
+  }
+
   mtext {
     font-family: Latin Modern Roman, LMRoman12, STIX Two Text;
   }
   math {
     font-family: Latin Modern Math, STIX Two Math;
+    text-underline-position: under;
   }
 
   .font-sans-serif,
