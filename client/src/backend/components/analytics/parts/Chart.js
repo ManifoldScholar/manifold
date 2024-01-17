@@ -58,7 +58,7 @@ const LoadableChart = Loadable({
 
 function Chart({ options, data, tooltipLabel, height = 170 }) {
   const { t } = useTranslation();
-  const shapedData = data.map(point => shapeData(point));
+  const shapedData = data?.map(point => shapeData(point));
   const start = shapedData[0]?.x.getTime() || "auto";
   const end = shapedData[shapedData.length - 1]?.x.getTime() || "auto";
   const xAxisDomain = [start, end];
