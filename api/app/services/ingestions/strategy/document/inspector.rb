@@ -18,6 +18,7 @@ module Ingestions
           dublin_core_metadata("dc.title") ||
             first_tag_content("title") ||
             header_with_title_class_content ||
+            original_filename ||
             File.basename(source, ".*").titleize
         end
 
@@ -111,6 +112,13 @@ module Ingestions
           convertible_sources.detect do |convertible_source|
             File.basename(convertible_source).downcase.start_with? "index."
           end
+        end
+
+        def original_filename
+          return if ingestion.external_source_url.present?
+
+          filename = ingestion.source_data.with_indifferent_access[:metadata][:filename]
+          File.basename(filename, ".*").titleize
         end
 
         def basename
