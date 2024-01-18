@@ -34,6 +34,7 @@ export const Item = styled.li`
 
 export const Inner = styled.div`
   border: 0;
+  padding-inline-start: 19px;
 `;
 
 export const Message = styled.span`
