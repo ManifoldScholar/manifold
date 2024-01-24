@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# rubocop:disable Layout/LineLength
 module Patches
   module BetterEnums
     extend ActiveSupport::Concern
@@ -7,6 +10,8 @@ module Patches
     UNSET = Dux.null("UNSET")
 
     included do
+      include Patches::BetterEnums::BuildsDryType
+
       delegate :base_config, :type_casted, to: :class
     end
 
@@ -35,8 +40,7 @@ module Patches
       to_s
     end
 
-    # rubocop:disable Metrics/BlockLength, Layout/LineLength
-    class_methods do
+    module ClassMethods
       # Make this enum an {Patches::BetterEnums::ApplicableEnum ApplicableEnum}.
       #
       # @api private
@@ -106,14 +110,14 @@ module Patches
             other_value = Arel::Nodes.build_quoted or_else
 
             statement.else(other_value)
-          end
+            end
         end
 
         constrain(only: only, except: except).each_with_object(statement) do |enum, statement|
           value = yield enum
 
           statement.when(enum.to_s).then(value)
-        end
+          end
       end
 
       def as_case_order(initial = nil, **options)
@@ -206,7 +210,7 @@ module Patches
         false
       end
 
-      class_methods do
+      module ClassMethods
         # @param [Object] owner
         # @return [Patches::BetterEnum::ApplicableEnum, nil]
         def fetch_for(owner)
@@ -240,11 +244,87 @@ module Patches
       end
     end
 
+    module BuildsDryType
+      extend ActiveSupport::Concern
+
+      module ClassMethods
+        # @return [Dry::Types::Type]
+        def dry_type
+          return base_class.dry_type if base_class != self
+
+          @dry_type ||= build_dry_type
+        end
+
+        # @api private
+        # @return [void]
+        def inherited(klass)
+          super.tap do
+            rebuild_dry_type! unless self == ClassyEnum::Base
+          end
+        end
+
+        protected
+
+        # @return [void]
+        def rebuild_dry_type!
+          return base_class.rebuild_dry_type! if base_class != self
+
+          @dry_type = build_dry_type
+        end
+
+        private
+
+        # @return [Dry::Types::Type]
+        def build_dry_type
+          ::Types.Constructor(base_class) do |input|
+            base_class.build(input) if input.in?(base_class)
+          end.constrained(type: base_class).then do |t|
+            apply_dry_type_default_to(t)
+          end.then do |t|
+            apply_dry_type_fallback_to(t)
+          end
+        end
+
+        # @param [Dry::Types::Type] type
+        # @return [Dry::Types::Type]
+        def apply_dry_type_default_to(type)
+          if config.dry_type_default.present?
+            type.default { base_class.build(config.dry_type_default) }
+          else
+            type
+          end
+        end
+
+        # @param [Dry::Types::Type] type
+        # @return [Dry::Types::Type]
+        def apply_dry_type_fallback_to(type)
+          if config.dry_type_fallback.present?
+            type.fallback { base_class.build(config.dry_type_fallback) }
+          else
+            type
+          end
+        end
+
+        # @return [void]
+        def dry_type_default!
+          base_config.dry_type_default = @option
+
+          rebuild_dry_type!
+        end
+
+        # @return [void]
+        def dry_type_fallback!
+          base_config.dry_type_fallback = @option
+
+          rebuild_dry_type!
+        end
+      end
+    end
+
     class InapplicableEnum < StandardError; end
 
     class InvalidOwner < StandardError; end
   end
-  # rubocop:enable Metrics/BlockLength, Layout/LineLength
 
   module ProperlyQuoteEnums
     def _type_cast(value)
@@ -266,6 +346,7 @@ module Patches
     end
   end
 end
+# rubocop:enable Layout/LineLength
 
 ClassyEnum::Base.include Patches::BetterEnums
 ActiveRecord::ConnectionAdapters::AbstractAdapter.prepend Patches::ProperlyQuoteEnums

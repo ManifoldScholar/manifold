@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HTMLNodes
   class Node < Types::FlexibleStruct
     include Enumerable
@@ -5,7 +7,7 @@ module HTMLNodes
     HTML_NODES = Types::Array.of(HTMLNodes::Node).default { [] }.freeze
     ATTRIBUTES = Types::Hash.default { {} }.freeze
 
-    EPUB_TYPE_ATTR = "data-epub-type".freeze
+    EPUB_TYPE_ATTR = "data-epub-type"
 
     ATTRIBUTES_TO_COPY = [
       [EPUB_TYPE_ATTR, "epub:type"],
@@ -20,7 +22,7 @@ module HTMLNodes
       end
     end
 
-    attribute :node_type, Types::ENUM_OF_TYPE[SourceNodeKind]
+    attribute? :node_type, SourceNodeKind.dry_type
     attribute? :tag, Types::String
     attribute? :content, Types::String
     attribute? :node_uuid, Types::String
@@ -28,7 +30,7 @@ module HTMLNodes
     attribute? :children, HTML_NODES
     attribute? :node_attributes, ATTRIBUTES
 
-    delegate :comment?, :element?, :text?, to: :node_type
+    delegate :comment?, :element?, :text?, :unknown?, to: :node_type
 
     # @!attribute [r] attributes_for_epub
     # @return [{ String => Object }]
