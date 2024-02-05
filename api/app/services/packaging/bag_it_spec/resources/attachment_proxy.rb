@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module BagItSpec
     module Resources
@@ -24,7 +26,6 @@ module Packaging
         def build_entries(builder)
           builder.attachment! :file, root.join(original_filename), uploaded_file
           builder.json! :metadata, root.join("metadata.json"), metadata
-          builder.simple! :mimetype, root.join("mimetype"), content_type
         end
 
         private

@@ -247,21 +247,42 @@ class Resource < ApplicationRecord
     external_video? && external_type == "vimeo"
   end
 
+  def external_video_service_url
+    if youtube?
+      URI::HTTPS.build(host: "www.youtube.com", path: "/watch", query: { v: external_id }.to_query).to_s
+    elsif vimeo?
+      URI.join("https://vimeo.com/", external_id).to_s
+    end
+  end
+
+  def external_video_packaging_metadata
+    return {} unless external_video?
+
+    slice(:sub_kind, :external_id, :external_type, :external_video_service_url)
+  end
+
   # @return [{ Symbol => Object }]
   def packaging_metadata
+    simplified = {
+      title: title_plaintext,
+      description: description_plaintext,
+      caption: caption_plaintext,
+      tags: tag_list,
+    }.compact
+
     metadata.with_indifferent_access
-      .merge(id: id)
-      .merge(slug: slug)
-      .merge(title: title_plaintext)
-      .merge(description: description_plaintext)
-      .merge(caption: caption_plaintext)
+      .merge(slice(:id, :slug, :kind, :external_url, :created_at, :updated_at))
+      .merge(**simplified)
+      .merge(external_video_packaging_metadata)
   end
 
   private
 
   def parse_and_set_external_id!
-    outcome = Resources::ExtractExternalVideoId.run external_id: external_id,
-                                                    external_type: external_type
+    outcome = Resources::ExtractExternalVideoId.run(
+      external_id: external_id,
+      external_type: external_type
+    )
 
     if outcome.valid?
       self.external_id = outcome.result
