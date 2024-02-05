@@ -230,8 +230,6 @@ class ListEntitiesListSearch extends PureComponent {
                       )}
                     >
                       {this.filterParams.map((param, i) => {
-                        const SelectLabel =
-                          i > 0 ? Styled.EmptySelectLabel : Styled.SelectLabel;
                         return (
                           <div
                             key={i}
@@ -240,11 +238,17 @@ class ListEntitiesListSearch extends PureComponent {
                             )}
                           >
                             <div>
-                              <SelectLabel>
-                                {i === 0
-                                  ? t("filters.labels.filter_results")
-                                  : "\u00A0"}
-                              </SelectLabel>
+                              {i === 0 ? (
+                                <Styled.SelectLabel>
+                                  {t("filters.labels.filter_results")}
+                                </Styled.SelectLabel>
+                              ) : (
+                                this.searchStyle === "horizontal" && (
+                                  <Styled.EmptySelectLabel>
+                                    {"\u00A0"}
+                                  </Styled.EmptySelectLabel>
+                                )
+                              )}
                               <div className="rel">
                                 <label
                                   htmlFor={`${id}-filter-${i}`}
