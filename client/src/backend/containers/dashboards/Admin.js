@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import EntitiesList, {
   Button,
   Search,
@@ -21,37 +21,12 @@ import { useTranslation } from "react-i18next";
 
 export function DashboardsAdminContainer({
   entitiesListSearchProps,
-  entitiesListSearchParams,
-  saveSearchState,
-  savedSearchPaginationState
+  entitiesListSearchParams
 }) {
-  const {
-    number: projectPageNumber,
-    size: projectPageSize
-  } = savedSearchPaginationState("projects") || { number: 1, size: 5 };
-  const {
-    number: journalPageNumber,
-    size: journalPageSize
-  } = savedSearchPaginationState("journals") || { number: 1, size: 5 };
-
-  const [projectsPagination, setProjectsPageNumber] = usePaginationState(
-    projectPageNumber,
-    projectPageSize
-  );
-  const [journalsPagination, setJournalsPageNumber] = usePaginationState(
-    journalPageNumber,
-    journalPageSize
-  );
+  const [projectsPagination, setProjectsPageNumber] = usePaginationState(1, 5);
+  const [journalsPagination, setJournalsPageNumber] = usePaginationState(1, 5);
 
   const authentication = useAuthentication();
-
-  const saveProjectsSearch = useCallback(() => {
-    saveSearchState("projects", projectsPagination);
-  }, [saveSearchState, projectsPagination]);
-
-  const saveJournalsSearch = useCallback(() => {
-    saveSearchState("journals", journalsPagination);
-  }, [saveSearchState, journalsPagination]);
 
   const projectFiltersWithDefaults = useMemo(
     () => ({
@@ -70,21 +45,11 @@ export function DashboardsAdminContainer({
   );
 
   const { data: projects, meta: projectsMeta } = useFetch({
-    request: [
-      projectsAPI.index,
-      projectFiltersWithDefaults,
-      projectsPagination
-    ],
-    afterFetch: saveProjectsSearch
+    request: [projectsAPI.index, projectFiltersWithDefaults, projectsPagination]
   });
 
   const { data: journals, meta: journalsMeta } = useFetch({
-    request: [
-      journalsAPI.index,
-      journalFiltersWithDefaults,
-      journalsPagination
-    ],
-    afterFetch: saveJournalsSearch
+    request: [journalsAPI.index, journalFiltersWithDefaults, journalsPagination]
   });
 
   const authorization = new Authorization();
@@ -137,6 +102,7 @@ export function DashboardsAdminContainer({
             search={
               <Search
                 searchStyle="vertical"
+                onFilterChange={() => setProjectsPageNumber(1)}
                 {...entitiesListSearchProps("projects")}
               />
             }
@@ -184,6 +150,7 @@ export function DashboardsAdminContainer({
             search={
               <Search
                 searchStyle="vertical"
+                onFilterChange={() => setJournalsPageNumber(1)}
                 {...entitiesListSearchProps("journals")}
               />
             }

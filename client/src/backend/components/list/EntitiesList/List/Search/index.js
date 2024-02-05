@@ -18,6 +18,7 @@ class ListEntitiesListSearch extends PureComponent {
     setParam: PropTypes.func.isRequired,
     onReset: PropTypes.func.isRequired,
     searchStyle: PropTypes.oneOf(["horizontal", "vertical"]),
+    onFilterChange: PropTypes.func,
     t: PropTypes.func
   };
 
@@ -115,12 +116,14 @@ class ListEntitiesListSearch extends PureComponent {
     const value = event.target.value;
     const { setParam } = this.props;
     setParam(param, value);
+    if (this.props.onFilterChange) this.props.onFilterChange();
   }
 
   submitKeywordForm = event => {
     event.preventDefault();
     const { setParam } = this.props;
     setParam(this.keywordParam, this.state.keyword);
+    if (this.props.onFilterChange) this.props.onFilterChange();
   };
 
   ensureParamObject(param) {
