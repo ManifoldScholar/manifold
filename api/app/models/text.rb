@@ -436,10 +436,8 @@ class Text < ApplicationRecord
   # @return [{ Symbol => Object }]
   def packaging_metadata
     metadata.with_indifferent_access
-      .merge(id: id)
-      .merge(slug: slug)
+      .merge(slice(:id, :slug, :publication_date, :created_at, :updated_at))
       .merge(titles: titles_packaging_metadata.compact)
-      .merge(slice(:publication_date))
       .merge(collaborators: collaborator_packaging_metadata)
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module Preservation
     class ExportProjectMetadata < ActiveInteraction::Base
@@ -16,8 +18,12 @@ module Packaging
         store :slug
         store :description
         store :publication_date
+        store :created_at
+        store :updated_at
         store :metadata
         store :collaborators, :collaborator_packaging_metadata
+        store :text_ids
+        store :resource_ids
       end
 
       private

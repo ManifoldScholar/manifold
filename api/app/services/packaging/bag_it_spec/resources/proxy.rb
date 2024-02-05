@@ -8,15 +8,6 @@ module Packaging
 
         include Packaging::BagItSpec::BuildsEntries
 
-        # Attributes that should be copied to files
-        # of the same name in the top-level {#root}.
-        #
-        # @see #build_entries
-        ATTRIBUTE_ENTRIES = %i[
-          kind sub_kind
-          external_id external_type external_url
-        ].freeze
-
         param :resource, Types.Instance(::Resource)
 
         delegate :slug, to: :resource
@@ -61,12 +52,7 @@ module Packaging
         end
 
         def build_entries(builder)
-          ATTRIBUTE_ENTRIES.each do |attr|
-            builder.simple! attr, root.join(attr.to_s), resource[attr]
-          end
-
           builder.json! :metadata, root.join("metadata.json"), resource.packaging_metadata
-          builder.json! :tags, root.join("tags.json"), resource.tag_list
         end
 
         private

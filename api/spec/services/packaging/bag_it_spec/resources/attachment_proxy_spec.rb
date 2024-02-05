@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Packaging::BagItSpec::Resources::AttachmentProxy do
@@ -8,5 +10,9 @@ RSpec.describe Packaging::BagItSpec::Resources::AttachmentProxy do
 
   subject { attachment_proxy }
 
-  it { is_expected.to have(3).entries }
+  it { is_expected.to have(2).entries }
+
+  its(:entries) { are_expected.to include :file }
+
+  its(:entries) { are_expected.to include :metadata }
 end

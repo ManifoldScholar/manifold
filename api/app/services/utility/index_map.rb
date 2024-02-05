@@ -53,6 +53,11 @@ module Utility
       end
     end
 
+    # @param [#to_s] key
+    def include?(key)
+      cache.key? key.to_s
+    end
+
     # @return [<Object>]
     def to_a
       each_value.to_a
