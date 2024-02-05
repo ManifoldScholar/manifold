@@ -74,6 +74,7 @@ export default `
       &--vertical {
         display: block;
         margin: 0;
+        padding-block-start: 30px;
       }
     }
 
@@ -91,6 +92,10 @@ export default `
             padding-top: 0;
           }
           padding-top: 30px;
+        }
+
+        & + & {
+          margin-block-start: 30px;
         }
       }
 
