@@ -1,4 +1,4 @@
-import { LogContainer } from "../Log";
+import LogContainer from "../Log";
 import { project } from "./__fixtures__";
 
 describe("backend/containers/project/Log", () => {

@@ -1,4 +1,4 @@
-import { ProjectResourcesListContainer } from "../ResourcesList";
+import ProjectResourcesListContainer from "../ResourcesList";
 
 describe("backend/containers/project/resource/ResourcesList", () => {
   beforeEach(() => {

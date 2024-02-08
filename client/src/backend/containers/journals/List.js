@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, usePaginationState, useSetLocation } from "hooks";
 import { journalsAPI } from "api";
 import withFilteredLists, { journalFilters } from "hoc/withFilteredLists";
 import HeadContent from "global/components/HeadContent";
@@ -24,6 +24,11 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
 
   const { data, meta } = useFetch({
     request: [journalsAPI.index, journalFiltersWithDefaults, pagination]
+  });
+
+  useSetLocation({
+    filters: journalFiltersWithDefaults,
+    page: pagination.number
   });
 
   const { t } = useTranslation();
@@ -50,7 +55,10 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
         showCount
         showCountInTitle
         callbacks={{
-          onPageClick: page => () => setPageNumber(page)
+          onPageClick: page => e => {
+            e.preventDefault();
+            setPageNumber(page);
+          }
         }}
         buttons={[
           <Button
@@ -60,6 +68,7 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
             type="add"
           />
         ]}
+        usesQueryParams
       />
     </>
   );

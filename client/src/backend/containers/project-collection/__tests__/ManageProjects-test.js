@@ -1,4 +1,4 @@
-import { ProjectCollectionManageProjects } from "../ManageProjects";
+import ProjectCollectionManageProjects from "../ManageProjects";
 
 describe("backend/containers/project-collection/ManageProjects", () => {
   def("project", () => factory("project"));

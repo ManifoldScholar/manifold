@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { journalsAPI } from "api";
 import { withRouter } from "react-router-dom";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, usePaginationState, useSetLocation } from "hooks";
 import EntitiesList, {
   Button,
   JournalIssueRow
@@ -21,6 +21,11 @@ function JournalIssuesContainer({ refresh, journal, route }) {
 
   const { data, refresh: refreshIssues, meta } = useFetch({
     request: [journalsAPI.journalIssues, journal.id, pagination, filters]
+  });
+
+  useSetLocation({
+    filters,
+    page: pagination.number
   });
 
   const { t } = useTranslation();
@@ -48,7 +53,10 @@ function JournalIssuesContainer({ refresh, journal, route }) {
         pagination={meta.pagination}
         showCount
         callbacks={{
-          onPageClick: page => () => setPageNumber(page)
+          onPageClick: page => e => {
+            e.preventDefault();
+            setPageNumber(page);
+          }
         }}
         buttons={[
           <Button
@@ -59,6 +67,7 @@ function JournalIssuesContainer({ refresh, journal, route }) {
             authorizedTo="update"
           />
         ]}
+        usesQueryParams
       />
       {childRoutes(route, {
         drawer: true,

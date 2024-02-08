@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
-import { listUnstyled, utilityPrimary, fluidScale } from "theme/styles/mixins";
+import {
+  listUnstyled,
+  utilityPrimary,
+  fluidScale,
+  buttonUnstyled
+} from "theme/styles/mixins";
 
 const LINK_PADDING = 7;
 
@@ -45,6 +50,7 @@ export const Pages = styled.div`
 `;
 
 export const Link = styled.a`
+  ${buttonUnstyled}
   display: flex;
   align-items: center;
   gap: 8px;

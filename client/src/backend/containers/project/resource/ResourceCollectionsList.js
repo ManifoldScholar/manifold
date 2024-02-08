@@ -1,10 +1,7 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
 import { projectsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
-import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
@@ -14,117 +11,77 @@ import EntitiesList, {
 import withFilteredLists, {
   resourceCollectionFilters
 } from "hoc/withFilteredLists";
+import { usePaginationState, useSetLocation, useFetch } from "hooks";
 
-const { request } = entityStoreActions;
-const perPage = 5;
+function ProjectResourceCollectionsListContainer({
+  project,
+  entitiesListSearchProps,
+  entitiesListSearchParams
+}) {
+  const { t } = useTranslation();
 
-export class ProjectResourceCollectionsListContainerImplementation extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      resourceCollections: select(
-        requests.beResourceCollections,
-        state.entityStore
-      ),
-      resourceCollectionsMeta: meta(
-        requests.beResourceCollections,
-        state.entityStore
-      )
-    };
-  };
+  const [pagination, setPageNumber] = usePaginationState(1, 10);
 
-  static displayName = "Project.CollectionsList";
-
-  static propTypes = {
-    project: PropTypes.object,
-    resourceCollections: PropTypes.array,
-    resourceCollectionsMeta: PropTypes.object,
-    dispatch: PropTypes.func,
-    entitiesListSearchProps: PropTypes.func.isRequired,
-    entitiesListSearchParams: PropTypes.object.isRequired,
-    t: PropTypes.func
-  };
-
-  componentDidMount() {
-    this.fetchCollections(1);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.filtersChanged(prevProps)) return this.fetchCollections();
-  }
-
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
-  fetchCollections(page) {
-    const pagination = { number: page, size: perPage };
-    const action = request(
-      projectsAPI.resourceCollections(
-        this.props.project.id,
-        this.props.entitiesListSearchParams.resourceCollections,
+  const { data: resourceCollections, meta: resourceCollectionsMeta } = useFetch(
+    {
+      request: [
+        projectsAPI.resourceCollections,
+        project.id,
+        entitiesListSearchParams.resourceCollections,
         pagination
-      ),
-      requests.beResourceCollections
-    );
-    this.props.dispatch(action);
-  }
+      ],
+      options: { requestKey: requests.beResourceCollections }
+    }
+  );
 
-  handleCollectionsPageChange(event, page) {
-    this.fetchCollections(page);
-  }
+  useSetLocation({
+    filters: entitiesListSearchParams.resourceCollections,
+    page: pagination.number
+  });
 
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleCollectionsPageChange(event, page);
-    };
-  };
+  if (!resourceCollections || !resourceCollectionsMeta) return null;
 
-  render() {
-    if (!this.props.resourceCollections) return null;
-    const { project, t } = this.props;
-
-    return (
-      <EntitiesList
-        entityComponent={ResourceCollectionRow}
-        title={t("projects.manage_resource_collections")}
-        titleStyle="bar"
-        titleTag="h2"
-        entities={this.props.resourceCollections}
-        unit={t("glossary.resource_collection", {
-          count: this.props.resourceCollectionsMeta?.pagination?.totalCount
-        })}
-        pagination={this.props.resourceCollectionsMeta.pagination}
-        showCount
-        callbacks={{
-          onPageClick: this.pageChangeHandlerCreator
-        }}
-        search={
-          <Search
-            {...this.props.entitiesListSearchProps("resourceCollections")}
-          />
+  return (
+    <EntitiesList
+      entityComponent={ResourceCollectionRow}
+      title={t("projects.manage_resource_collections")}
+      titleStyle="bar"
+      titleTag="h2"
+      entities={resourceCollections}
+      unit={t("glossary.resource_collection", {
+        count: resourceCollectionsMeta?.pagination?.totalCount
+      })}
+      pagination={resourceCollectionsMeta.pagination}
+      showCount
+      callbacks={{
+        onPageClick: page => e => {
+          e.preventDefault();
+          setPageNumber(page);
         }
-        buttons={[
-          <Button
-            path={lh.link("backendProjectResourceCollectionsNew", project.id)}
-            text={t("resource_collections.add_button_label")}
-            authorizedFor={project}
-            authorizedTo="createResourceCollections"
-            type="add"
-          />
-        ]}
-      />
-    );
-  }
+      }}
+      search={<Search {...entitiesListSearchProps("resourceCollections")} />}
+      buttons={[
+        <Button
+          path={lh.link("backendProjectResourceCollectionsNew", project.id)}
+          text={t("resource_collections.add_button_label")}
+          authorizedFor={project}
+          authorizedTo="createResourceCollections"
+          type="add"
+        />
+      ]}
+      usesQueryParams
+    />
+  );
 }
 
-export const ProjectResourceCollectionsListContainer = withFilteredLists(
-  ProjectResourceCollectionsListContainerImplementation,
-  {
-    resourceCollections: resourceCollectionFilters()
-  }
-);
-export default withTranslation()(
-  connectAndFetch(ProjectResourceCollectionsListContainer)
-);
+ProjectResourceCollectionsListContainer.displayName = "Project.CollectionsList";
+
+ProjectResourceCollectionsListContainer.propTypes = {
+  project: PropTypes.object,
+  entitiesListSearchProps: PropTypes.func.isRequired,
+  entitiesListSearchParams: PropTypes.object.isRequired
+};
+
+export default withFilteredLists(ProjectResourceCollectionsListContainer, {
+  resourceCollections: resourceCollectionFilters()
+});

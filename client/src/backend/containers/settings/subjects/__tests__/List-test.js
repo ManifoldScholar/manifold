@@ -1,4 +1,4 @@
-import { SettingsSubjectsListContainer } from "../List";
+import SettingsSubjectsListContainer from "../List";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 
 describe("backend/containers/settings/subjects/List", () => {

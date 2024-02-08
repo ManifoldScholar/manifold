@@ -1,4 +1,4 @@
-import { ProjectResourceCollectionsListContainer } from "../ResourceCollectionsList";
+import ProjectResourceCollectionsListContainer from "../ResourceCollectionsList";
 
 describe("backend/containers/project/resource/ResourceCollectionsList", () => {
   def("pagination", () => fixtures.pagination());

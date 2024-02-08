@@ -1,10 +1,7 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
 import { projectsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
-import { select, meta } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
@@ -12,121 +9,87 @@ import EntitiesList, {
   ResourceRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { resourceFilters } from "hoc/withFilteredLists";
+import { usePaginationState, useSetLocation, useFetch } from "hooks";
 
-const { request } = entityStoreActions;
-const perPage = 5;
+function ProjectResourcesListContainer({
+  project,
+  entitiesListSearchParams,
+  entitiesListSearchProps
+}) {
+  const { t } = useTranslation();
 
-class ProjectResourcesListContainerImplementation extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      resources: select(requests.beResources, state.entityStore),
-      resourcesMeta: meta(requests.beResources, state.entityStore)
-    };
-  };
+  const [pagination, setPageNumber] = usePaginationState(1, 10);
 
-  static displayName = "Project.ResourcesList";
+  const { data: resources, meta: resourcesMeta } = useFetch({
+    request: [
+      projectsAPI.resources,
+      project.id,
+      entitiesListSearchParams.resources,
+      pagination
+    ],
+    options: { requestKey: requests.beResources }
+  });
 
-  static propTypes = {
-    project: PropTypes.object,
-    resources: PropTypes.array,
-    resourcesMeta: PropTypes.object,
-    dispatch: PropTypes.func,
-    t: PropTypes.func
-  };
+  useSetLocation({
+    filters: entitiesListSearchParams.resources,
+    page: pagination.number
+  });
 
-  constructor(props) {
-    super(props);
-    this.state = { filter: {} };
-  }
+  if (!resources || !resourcesMeta) return null;
 
-  componentDidMount() {
-    this.fetchResources();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.filtersChanged(prevProps)) return this.fetchResources();
-  }
-
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
-  fetchResources(page = 1) {
-    const pagination = { number: page, size: perPage };
-    const filters = this.props.entitiesListSearchParams.resources;
-    const action = request(
-      projectsAPI.resources(this.props.project.id, filters, pagination),
-      requests.beResources
-    );
-    this.props.dispatch(action);
-  }
-
-  handleResourcesPageChange(event, page) {
-    this.fetchResources(page);
-  }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleResourcesPageChange(event, page);
-    };
-  };
-
-  render() {
-    if (!this.props.resources) return null;
-    const { project, t, resourcesMeta } = this.props;
-
-    return (
-      <EntitiesList
-        entityComponent={ResourceRow}
-        title={t("projects.manage_resources")}
-        titleStyle="bar"
-        titleTag="h2"
-        entities={this.props.resources}
-        unit={t("glossary.resource", {
-          count: resourcesMeta?.pagination?.totalCount
-        })}
-        pagination={resourcesMeta.pagination}
-        showCount
-        callbacks={{
-          onPageClick: this.pageChangeHandlerCreator
-        }}
-        search={
-          <Search
-            {...resourceFilters.dynamicParams(
-              this.props.entitiesListSearchProps("resources"),
-              project
-            )}
-          />
+  return (
+    <EntitiesList
+      entityComponent={ResourceRow}
+      title={t("projects.manage_resources")}
+      titleStyle="bar"
+      titleTag="h2"
+      entities={resources}
+      unit={t("glossary.resource", {
+        count: resourcesMeta?.pagination?.totalCount
+      })}
+      pagination={resourcesMeta.pagination}
+      showCount
+      callbacks={{
+        onPageClick: page => e => {
+          e.preventDefault();
+          setPageNumber(page);
         }
-        buttons={[
-          <Button
-            path={lh.link("backendProjectResourcesNew", project.id)}
-            text={t("resources.add_button_label")}
-            authorizedFor={project}
-            authorizedTo="createResources"
-            type="add"
-          />,
-          <Button
-            path={lh.link("backendResourceImport", project.id)}
-            text={t("resources.bulk_add_label")}
-            authorizedFor={project}
-            authorizedTo="createResources"
-            icon="BEResourcesBoxes64"
-          />
-        ]}
-      />
-    );
-  }
+      }}
+      search={
+        <Search
+          {...resourceFilters.dynamicParams(
+            entitiesListSearchProps("resources"),
+            project
+          )}
+        />
+      }
+      buttons={[
+        <Button
+          path={lh.link("backendProjectResourcesNew", project.id)}
+          text={t("resources.add_button_label")}
+          authorizedFor={project}
+          authorizedTo="createResources"
+          type="add"
+        />,
+        <Button
+          path={lh.link("backendResourceImport", project.id)}
+          text={t("resources.bulk_add_label")}
+          authorizedFor={project}
+          authorizedTo="createResources"
+          icon="BEResourcesBoxes64"
+        />
+      ]}
+      usesQueryParams
+    />
+  );
 }
 
-export const ProjectResourcesListContainer = withFilteredLists(
-  ProjectResourcesListContainerImplementation,
-  {
-    resources: resourceFilters.defaultParams()
-  }
-);
-export default withTranslation()(
-  connectAndFetch(ProjectResourcesListContainer)
-);
+ProjectResourcesListContainer.displayName = "Project.ResourcesList";
+
+ProjectResourcesListContainer.propTypes = {
+  project: PropTypes.object
+};
+
+export default withFilteredLists(ProjectResourcesListContainer, {
+  resources: resourceFilters.defaultParams()
+});

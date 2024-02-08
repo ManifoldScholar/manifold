@@ -5,7 +5,7 @@ import { entitlementImportsAPI } from "api";
 import EntitiesList, {
   EntitlementImportRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, usePaginationState, useSetLocation } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
 
 export default function EntitlementImportsList() {
@@ -15,6 +15,10 @@ export default function EntitlementImportsList() {
 
   const { data: csvImports, meta } = useFetch({
     request: [entitlementImportsAPI.index, null, pagination]
+  });
+
+  useSetLocation({
+    page: pagination.number
   });
 
   const actions = [
@@ -41,8 +45,12 @@ export default function EntitlementImportsList() {
           count: meta.pagination?.totalCount
         })}
         callbacks={{
-          onPageClick: page => () => setPageNumber(page)
+          onPageClick: page => e => {
+            e.preventDefault();
+            setPageNumber(page);
+          }
         }}
+        usesQueryParams
       />
     </>
   ) : null;

@@ -12,7 +12,8 @@ import {
   useFetch,
   usePaginationState,
   useFilterState,
-  useApiCallback
+  useApiCallback,
+  useSetLocation
 } from "hooks";
 import { childRoutes } from "helpers/router";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
@@ -36,6 +37,11 @@ function PendingEntitlementsList({
   const { data: entitlements, meta, refresh } = useFetch({
     request: [pendingEntitlementsAPI.index, filters, pagination],
     dependencies: [filters]
+  });
+
+  useSetLocation({
+    filters,
+    page: pagination.number
   });
 
   const renderChildRoutes = () => {
@@ -138,8 +144,12 @@ function PendingEntitlementsList({
               count: meta.pagination.totalCount
             })}
             callbacks={{
-              onPageClick: page => () => setPageNumber(page)
+              onPageClick: page => e => {
+                e.preventDefault();
+                setPageNumber(page);
+              }
             }}
+            usesQueryParams
           />
         </>
       )}

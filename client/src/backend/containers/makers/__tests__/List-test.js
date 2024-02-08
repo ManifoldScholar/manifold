@@ -1,4 +1,4 @@
-import { MakersListContainer } from "../List";
+import MakersListContainer from "../List";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 
 describe("backend/containers/makers/List", () => {

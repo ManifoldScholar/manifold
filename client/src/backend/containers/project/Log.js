@@ -1,102 +1,64 @@
-import React, { PureComponent } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import { entityStoreActions } from "actions";
-import { select, meta } from "utils/entityUtils";
+import { useTranslation } from "react-i18next";
 import { projectsAPI, requests } from "api";
-import { connect } from "react-redux";
 import lh from "helpers/linkHandler";
 import EntitiesList, { LogRow } from "backend/components/list/EntitiesList";
+import { usePaginationState, useSetLocation, useFetch } from "hooks";
 
 import Authorize from "hoc/Authorize";
 
-const perPage = 5;
-const { request } = entityStoreActions;
+export default function LogContainer({ project }) {
+  const { t } = useTranslation();
 
-export class LogContainer extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      versions: select(requests.beVersions, state.entityStore),
-      versionsMeta: meta(requests.beVersions, state.entityStore)
-    };
-  };
+  const [pagination, setPageNumber] = usePaginationState(1, 5);
 
-  static displayName = "Project.Log";
+  const filters = useRef({});
 
-  static propTypes = {
-    versions: PropTypes.array,
-    versionsMeta: PropTypes.object,
-    project: PropTypes.object.isRequired,
-    dispatch: PropTypes.func,
-    t: PropTypes.func
-  };
+  const { data: versions, meta: versionsMeta } = useFetch({
+    request: [projectsAPI.versions, project.id, filters.current, pagination],
+    options: { requestKey: requests.beVersions }
+  });
 
-  constructor() {
-    super();
-    this.lastFetchedPage = null;
-    this.state = { filter: {} };
-  }
+  useSetLocation({
+    page: pagination.number
+  });
 
-  componentDidMount() {
-    this.fetchVersions(1);
-  }
+  if (!versions || !versionsMeta) return null;
 
-  fetchVersions(page) {
-    this.lastFetchedPage = page;
-    const pagination = { number: page, size: perPage };
-    const action = request(
-      projectsAPI.versions(
-        this.props.project.id,
-        this.state.filter,
-        pagination
-      ),
-      requests.beVersions
-    );
-    this.props.dispatch(action);
-  }
-
-  handleVersionsPageChange(event, page) {
-    this.fetchVersions(page);
-  }
-
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleVersionsPageChange(event, page);
-    };
-  };
-
-  render() {
-    const { project, t, versionsMeta } = this.props;
-
-    return (
-      <Authorize
-        entity={project}
-        ability="readLog"
-        failureNotification
-        failureRedirect={lh.link("backendProject", project.id)}
-      >
-        {this.props.versions && (
-          <EntitiesList
-            title={t("projects.changes")}
-            titleStyle="bar"
-            titleTag="h2"
-            titleIcon="BEActivity64"
-            entities={this.props.versions}
-            entityComponent={LogRow}
-            pagination={versionsMeta.pagination}
-            showCount
-            unit={t("glossary.change", {
-              count: versionsMeta?.pagination?.totalCount
-            })}
-            callbacks={{
-              onPageClick: this.pageChangeHandlerCreator
-            }}
-          />
-        )}
-      </Authorize>
-    );
-  }
+  return (
+    <Authorize
+      entity={project}
+      ability="readLog"
+      failureNotification
+      failureRedirect={lh.link("backendProject", project.id)}
+    >
+      <EntitiesList
+        title={t("projects.changes")}
+        titleStyle="bar"
+        titleTag="h2"
+        titleIcon="BEActivity64"
+        entities={versions}
+        entityComponent={LogRow}
+        pagination={versionsMeta.pagination}
+        showCount
+        unit={t("glossary.change", {
+          count: versionsMeta?.pagination?.totalCount
+        })}
+        callbacks={{
+          onPageClick: page => e => {
+            e.preventDefault();
+            setPageNumber(page);
+          }
+        }}
+        usesQueryParams
+      />
+    </Authorize>
+  );
 }
-export default withTranslation()(
-  connect(LogContainer.mapStateToProps)(LogContainer)
-);
+
+LogContainer.displayName = "Project.Log";
+
+LogContainer.propTypes = {
+  project: PropTypes.object.isRequired
+};
