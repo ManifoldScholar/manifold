@@ -24,7 +24,7 @@ function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
   const [pagination, setPageNumber] = usePaginationState(1, 10);
 
   const { data: members, meta, refresh } = useFetch({
-    request: [readingGroupsAPI.members, id, pagination]
+    request: [readingGroupsAPI.members, id, null, pagination]
   });
 
   useSetLocation({ page: pagination.number });
