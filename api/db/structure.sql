@@ -2792,6 +2792,24 @@ CREATE VIEW public.text_summaries AS
 
 
 --
+-- Name: throttled_requests; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.throttled_requests (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    ip inet,
+    email public.citext,
+    matched text,
+    match_type text,
+    path text,
+    occurrences bigint DEFAULT 0 NOT NULL,
+    last_occurred_at timestamp without time zone,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
 -- Name: thumbnail_fetch_attempts; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3774,6 +3792,14 @@ ALTER TABLE ONLY public.text_titles
 
 ALTER TABLE ONLY public.texts
     ADD CONSTRAINT texts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: throttled_requests throttled_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.throttled_requests
+    ADD CONSTRAINT throttled_requests_pkey PRIMARY KEY (id);
 
 
 --
@@ -5722,6 +5748,27 @@ CREATE UNIQUE INDEX index_texts_on_slug ON public.texts USING btree (slug);
 
 
 --
+-- Name: index_throttled_requests_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_throttled_requests_on_email ON public.throttled_requests USING btree (email);
+
+
+--
+-- Name: index_throttled_requests_on_ip; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_throttled_requests_on_ip ON public.throttled_requests USING btree (ip);
+
+
+--
+-- Name: index_throttled_requests_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_throttled_requests_uniqueness ON public.throttled_requests USING btree (ip, email, matched, match_type, path);
+
+
+--
 -- Name: index_thumbnail_fetch_attempts_on_resource_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7126,6 +7173,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230921024546'),
 ('20231005175407'),
 ('20231010184158'),
-('20231129172116');
+('20231129172116'),
+('20240220212417');
 
 

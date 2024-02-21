@@ -1,25 +1,10 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.shared_context "authenticated request" do
-  def token(user, password)
-    params = { email: user.email, password: password }
-    post api_v1_tokens_path, params: params
-
-    if response.successful?
-      data = JSON.parse(response.body)
-
-      data.dig("meta", "authToken").tap do |token|
-        raise "Received no token: #{token}" if token.blank?
-      end
-    else
-      data = JSON.parse(response.body)
-
-      errors = Array(data.dig("errors"))
-      
-      raise "Unable to receive token: #{errors.to_sentence}"
-    end
-  rescue JSON::ParserError => e
-    raise "Was unable to parse token: #{e.message}"
+  def token(user, _password)
+    AuthToken.encode_user(user)
   end
 
   def build_bearer_token(token)
@@ -37,14 +22,13 @@ RSpec.shared_context "authenticated request" do
     public_send("#{user_type}_auth")
   end
 
-
-  let(:password) { "testTest123" }
-  let(:anonymous_headers) { { "content-type" => "application/json" } }
+  let_it_be(:password) { "testTest123" }
+  let_it_be(:anonymous_headers) { { "content-type" => "application/json" } }
 
   RoleName.globals.each do |role|
-    let(:"#{role}_email") { "#{role}@castironcoding.com" }
-    let(role.to_sym) do
-      FactoryBot.create(
+    let_it_be(:"#{role}_email") { "#{role}@castironcoding.com" }
+    let_it_be(role.to_sym, refind: true) do
+      User.find_by(email: public_send("#{role}_email")) || FactoryBot.create(
         :user,
         role.to_sym,
         email: public_send("#{role}_email"),
@@ -53,9 +37,9 @@ RSpec.shared_context "authenticated request" do
       )
     end
 
-    let(:"#{role}_token")   { token public_send(role), password }
+    let(:"#{role}_token") { token public_send(role), password }
     let(:"#{role}_headers") { build_headers public_send(:"#{role}_token") }
-    let(:"#{role}_auth")    { build_bearer_token public_send(:"#{role}_token") }
+    let(:"#{role}_auth") { build_bearer_token public_send(:"#{role}_token") }
   end
 
   let(:another_reader_email) { "another-reader@castironcoding.com" }
