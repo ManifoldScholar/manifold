@@ -129,19 +129,33 @@ RSpec.describe "Reading Groups API", type: :request do
   end
 
   describe "creates a reading_group" do
-    let (:path) { api_v1_reading_groups_path }
-    let(:attributes) {
+    let(:path) { api_v1_reading_groups_path }
+
+    let(:attributes) do
       {
         name: "My Reading Group"
       }
-    }
-    let(:valid_params) {
+    end
+
+    let(:valid_params) do
       build_json_payload(attributes: attributes)
-    }
+    end
 
     it "has a 201 CREATED status code" do
       post path, headers: reader_headers, params: valid_params
+
       expect(response).to have_http_status(201)
+    end
+
+    it "is rate-limited" do
+      expect do
+        12.times do
+          post path, headers: reader_headers, params: valid_params
+        end
+      end.to change(ReadingGroup, :count).by(10)
+        .and change(ThrottledRequest, :count).by(1)
+
+      expect(response).to have_http_status(503)
     end
   end
 

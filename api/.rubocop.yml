@@ -141,6 +141,10 @@ Lint/RedundantSafeNavigation:
 Lint/TrailingCommaInAttributeDeclaration:
   Enabled: true
 
+Lint/UnusedBlockArgument:
+  Exclude:
+    - "config/initializers/*.rb"
+
 Lint/UselessMethodDefinition:
   Enabled: true
 

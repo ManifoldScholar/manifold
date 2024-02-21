@@ -155,12 +155,24 @@ RSpec.describe "Text Section Annotations API", type: :request do
   describe "creates an annotation" do
     let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
 
-    context "when the user is an reader" do
-      before(:each) { post path, headers: reader_headers, params: build_json_payload(annotation_params) }
-      describe "the response" do
-        it "has a 201 status code" do
-          expect(response).to have_http_status(201)
-        end
+    context "when the user is a reader" do
+      it "has a 201 status code" do
+        expect do
+          post path, headers: reader_headers, params: build_json_payload(annotation_params)
+        end.to change(Annotation, :count).by(1)
+
+        expect(response).to have_http_status(201)
+      end
+
+      it "is rate-limited" do
+        expect do
+          7.times do
+            post path, headers: reader_headers, params: build_json_payload(annotation_params)
+          end
+        end.to change(Annotation, :count).by(5)
+          .and change(ThrottledRequest, :count).by(1)
+
+        expect(response).to have_http_status(503)
       end
     end
 

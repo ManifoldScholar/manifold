@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "Comments API", type: :request do
@@ -5,10 +7,10 @@ RSpec.describe "Comments API", type: :request do
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:annotation) { FactoryBot.create(:annotation) }
-  let(:resource) { FactoryBot.create(:resource) }
-  let(:comment_a) { FactoryBot.create(:comment, creator: reader, subject: annotation) }
-  let(:comment_b) { FactoryBot.create(:comment, creator: reader, subject: resource) }
+  let_it_be(:annotation, refind: true) { FactoryBot.create(:annotation) }
+  let_it_be(:resource, refind: true) { FactoryBot.create(:resource) }
+  let_it_be(:comment_a, refind: true) { FactoryBot.create(:comment, creator: reader, subject: annotation) }
+  let_it_be(:comment_b, refind: true) { FactoryBot.create(:comment, creator: reader, subject: resource) }
 
   context "when subject is an annotation" do
     describe "sends a list of comments" do
@@ -94,11 +96,11 @@ RSpec.describe "Comments API", type: :request do
     describe "creates a comment" do
       let(:path) { api_v1_annotation_relationships_comments_path(annotation, comment_a) }
 
-      let(:params) {
+      let(:params) do
         build_json_payload(attributes: {
           body: "John Rambo was here.",
         })
-      }
+      end
 
       context "when the user is an admin" do
         let(:headers) { admin_headers }
@@ -107,19 +109,41 @@ RSpec.describe "Comments API", type: :request do
           api_response = JSON.parse(response.body)
           expect(api_response["data"]["id"]).to_not be nil
         end
+
+        it "is not rate-limited" do
+          expect do
+            12.times do
+              post path, headers: headers, params: params
+            end
+          end.to change(Comment, :count).by(12)
+            .and keep_the_same(ThrottledRequest, :count)
+
+          expect(response).to have_http_status(201)
+        end
       end
 
       context "when the user is a reader" do
         let(:headers) { reader_headers }
+
         it("returns a saved comment") do
           post path, headers: headers, params: params
           api_response = JSON.parse(response.body)
           expect(api_response["data"]["id"]).to_not be nil
         end
+
+        it "is rate-limited" do
+          expect do
+            12.times do
+              post path, headers: headers, params: params
+            end
+          end.to change(Comment, :count).by(10)
+            .and change(ThrottledRequest, :count).by(1)
+
+          expect(response).to have_http_status(503)
+        end
       end
     end
   end
-
 
   context "when subject is a resource" do
     describe "sends a list of comments" do

@@ -1,25 +1,36 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "Users API", type: :request do
-
   include_context("authenticated request")
   include_context("param helpers")
 
   let(:first_name) { "John" }
-  let(:attributes) {
+
+  let(:attributes) do
     {
       first_name: first_name,
       last_name: "Higgins",
+      email: "jon.higgens@example.com",
       password: "testtest123",
-      email: "jon@higgins.com",
       password_confirmation: "testtest123",
       avatar: image_params,
-      role: "reader"
+      role: "reader",
     }
-  }
-  let(:valid_params) {
+  end
+
+  let(:valid_params) do
     build_json_payload(attributes: attributes)
-  }
+  end
+
+  def params_with_email_offset(offset:, attributes: self.attributes, email_base: "test.email", **options)
+    prefix = [email_base, offset].compact_blank.join(?+)
+
+    attributes = attributes.merge(email: "#{prefix}@example.com")
+
+    build_json_payload(attributes: attributes, **options)
+  end
 
   describe "sends a list of users" do
     let(:path) { api_v1_users_path }
@@ -43,38 +54,79 @@ RSpec.describe "Users API", type: :request do
   describe "creates a user" do
     let(:path) { api_v1_users_path }
 
-    context do
-      let(:api_response) { JSON.parse(response.body) }
-      before(:each) { allow(AccountMailer).to receive(:welcome).and_call_original }
-      before(:each) { post path, headers: anonymous_headers, params: valid_params }
-      it "sets the first name correctly" do
+    before do
+      allow(AccountMailer).to receive(:welcome).and_call_original
+    end
+
+    def make_request!(headers: anonymous_headers, params: valid_params)
+      post path, headers: headers, params: params
+    end
+
+    it "creates the user" do
+      expect do
+        make_request!
+      end.to change(User, :count).by(1)
+
+      api_response = JSON.parse(response.body)
+
+      aggregate_failures do
         expect(api_response["data"]["attributes"]["firstName"]).to eq(first_name)
-      end
 
-      it "accepts an avatar file upload and adds it to the user" do
-        url = api_response["data"]["attributes"]["avatarStyles"]["original"]
-        expect(url.blank?).to be false
-      end
+        expect(api_response["data"]["attributes"]["avatarStyles"]["original"]).to be_present
 
-      it "sends a welcome message" do
         expect(AccountMailer).to have_received(:welcome).once
       end
     end
 
+    it "is rate-limited" do
+      expect do
+        7.times do |n|
+          make_request! params: params_with_email_offset(offset: n + 1)
+        end
+      end.to change(User, :count).by(5)
+        .and change(ThrottledRequest, :count).by(1)
+
+      expect(response).to have_http_status(503)
+    end
+
     it "tells the welcome mailer that the user was created by the admin when meta[createdByAdmin] is true" do
       valid_params = build_json_payload(attributes: attributes, meta: { created_by_admin: true })
-      allow(AccountMailer).to receive(:welcome).and_call_original
-      post path, headers: anonymous_headers, params: valid_params
+
+      expect do
+        make_request! params: valid_params
+      end.to change(User, :count).by(1)
+
       expect(AccountMailer).to have_received(:welcome).with(anything, created_by_admin: true)
     end
 
     it "does not tell the welcome mailer that the user was created by the admin when meta[createdByAdmin] is absent" do
       valid_params = build_json_payload(attributes: attributes)
-      allow(AccountMailer).to receive(:welcome).and_call_original
-      post path, headers: anonymous_headers, params: valid_params
-      expect(AccountMailer).to have_received(:welcome).with(anything,  created_by_admin: false)
+
+      expect do
+        make_request! params: valid_params
+      end.to change(User, :count).by(1)
+
+      expect(AccountMailer).to have_received(:welcome).with(anything, created_by_admin: false)
     end
 
+    context "when the ip is blocklisted directly" do
+      before do
+        Rack::Attack.blocklist_ip("127.0.0.1")
+      end
+
+      after do
+        Rack::Attack.configuration.anonymous_blocklists.clear
+      end
+
+      it "does not allow registration to occur" do
+        expect do
+          make_request!
+        end.to keep_the_same(User, :count)
+          .and change(ThrottledRequest, :count).by(1)
+
+        expect(response).to have_http_status(503)
+      end
+    end
   end
 
   describe "sends a user" do
