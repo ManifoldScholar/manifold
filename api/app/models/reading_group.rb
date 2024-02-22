@@ -43,7 +43,7 @@ class ReadingGroup < ApplicationRecord
   delegate :annotations_count, :highlights_count, :comments_count, :memberships_count, to: :reading_group_count
 
   validates :privacy, inclusion: { in: %w(public private anonymous) }
-  validates :name, presence: true, spam: { if: :public?, on: :create, type: "title" }
+  validates :name, presence: true, spam: { if: :public?, type: "title" }
   validates :invitation_code, uniqueness: true, presence: true
 
   validate :maybe_prevent_public_group_creation!, on: :create, if: :public?

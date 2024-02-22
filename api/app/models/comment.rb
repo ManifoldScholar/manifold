@@ -42,7 +42,7 @@ class Comment < ApplicationRecord
 
   delegate :project, to: :subject
 
-  validates :body, presence: true, spam: { on: :create, type: "comment" }
+  validates :body, presence: true, spam: { type: "comment" }
 
   after_commit :enqueue_comment_notifications, on: [:create]
   after_commit :trigger_event_creation, on: [:create]

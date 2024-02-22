@@ -35,18 +35,26 @@ RSpec.shared_examples_for "a model with spam detection" do
       akismet_enabled!
     end
 
-    it "only checks on create" do
+    it "it can catch spam on update" do
       akismet_stub_comment_check!(situation: :not_spam)
 
       instance_has_no_spam!
 
       expect do
         instance.save!
-      end.to execute_safely
+      end.to change(described_class, :count).by(1)
 
       akismet_stub_comment_check!(situation: :spam)
 
-      instance_has_no_spam!
+      instance_has_spam!
+
+      expect(instance).to have_spam_detected
+
+      expect(instance).to be_in described_class.where(id: instance.id).detected_as_spam
+
+      expect do
+        instance.save!
+      end.to raise_error ActiveRecord::RecordInvalid, /spam/
     end
 
     context "when the content is not spammy" do

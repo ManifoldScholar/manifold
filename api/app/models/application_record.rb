@@ -1,4 +1,6 @@
-# Base class for Manifold models to inherit from
+# frozen_string_literal: true
+
+# @abstract Base class for Manifold models to inherit from
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
@@ -6,6 +8,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   include ClassyEnum::ActiveRecord
   include ArelHelpers
+  include DetectsSpam
   include SliceWith
   include ValuesAt
   include WithAdvisoryLock::Concern
