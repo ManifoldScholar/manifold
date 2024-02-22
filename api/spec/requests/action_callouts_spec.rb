@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Action Callout API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:action_callout) { FactoryBot.create(:action_callout) }
   let(:path) { api_v1_action_callout_path(action_callout) }
   let(:api_response) { JSON.parse(response.body) }

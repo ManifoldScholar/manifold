@@ -1,10 +1,7 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Project ContentBlocks API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
-  let(:project) { FactoryBot.create(:project) }
+  let_it_be(:project, refind: true) { FactoryBot.create(:project) }
 
   describe "sends a list of project content blocks" do
     let(:path) { api_v1_project_relationships_content_blocks_path(project) }
@@ -50,5 +47,4 @@ RSpec.describe "Project ContentBlocks API", type: :request do
       end
     end
   end
-
 end

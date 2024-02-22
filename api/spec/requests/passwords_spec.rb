@@ -1,10 +1,7 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Passwords API", type: :request do
-
-  include_context("param helpers")
-
-  let(:user) { FactoryBot.create(:user) }
+  let_it_be(:user, refind: true) { FactoryBot.create(:user) }
 
   describe "reset password request" do
     describe "the response" do
@@ -28,13 +25,14 @@ RSpec.describe "Passwords API", type: :request do
   end
 
   describe "update password request" do
-    let(:update_params) {
+    let(:update_params) do
       {
         password: "testtest1234",
         password_confirmation: "testtest1234",
         reset_token: user.reset_password_token
       }
-    }
+    end
+
     describe "the response" do
       before(:each) {
         user.generate_reset_token
@@ -51,5 +49,4 @@ RSpec.describe "Passwords API", type: :request do
       end
     end
   end
-
 end

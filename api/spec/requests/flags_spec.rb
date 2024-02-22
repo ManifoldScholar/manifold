@@ -1,10 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Flags API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:comment) { FactoryBot.create(:comment, creator: reader) }
 
   describe "flags a comment" do
@@ -32,9 +28,7 @@ RSpec.describe "Flags API", type: :request do
         reloaded_comment = Comment.find(comment.id)
         expect(reloaded_comment.flags_count).to eq 1
       end
-
     end
-
   end
 
   describe "unflags a comment" do
@@ -64,9 +58,6 @@ RSpec.describe "Flags API", type: :request do
         reloaded_comment = Comment.find(comment.id)
         expect(reloaded_comment.flags_count).to eq 0
       end
-
     end
-
   end
-
 end

@@ -1,12 +1,9 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Project Text Categories API", type: :request do
+  let_it_be(:project, refind: true) { FactoryBot.create(:project) }
+  let_it_be(:text_category, refind: true) { FactoryBot.create(:category, project: project) }
 
-  include_context("authenticated request")
-  include_context("param helpers")
-
-  let(:project) { FactoryBot.create(:project) }
-  let(:text_category) { FactoryBot.create(:text_category) }
   let(:path) { api_v1_project_relationships_text_categories_path(project) }
 
   describe "sends project text categories" do
@@ -19,7 +16,6 @@ RSpec.describe "Project Text Categories API", type: :request do
   end
 
   describe "creates a new project text category" do
-
     let(:post_model) { { attributes: { title: "A new hope" } } }
 
     context "when the user is an admin" do
@@ -42,10 +38,6 @@ RSpec.describe "Project Text Categories API", type: :request do
           expect(response).to have_http_status(403)
         end
       end
-
     end
-
-
   end
-
 end

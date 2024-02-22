@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe "Comments API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let_it_be(:annotation, refind: true) { FactoryBot.create(:annotation) }
   let_it_be(:resource, refind: true) { FactoryBot.create(:resource) }
   let_it_be(:comment_a, refind: true) { FactoryBot.create(:comment, creator: reader, subject: annotation) }
@@ -104,6 +98,7 @@ RSpec.describe "Comments API", type: :request do
 
       context "when the user is an admin" do
         let(:headers) { admin_headers }
+
         it("returns a saved comment") do
           post path, headers: headers, params: params
           api_response = JSON.parse(response.body)

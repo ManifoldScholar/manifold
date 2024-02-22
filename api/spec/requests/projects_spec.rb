@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Projects API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:project) { FactoryBot.create(:project, draft: false) }
 
   describe "responds with a list of projects" do

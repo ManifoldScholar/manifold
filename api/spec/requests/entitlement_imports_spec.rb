@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe "Entitlement Imports API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   context "when fetching imports" do
     let(:path) { api_v1_entitlement_imports_path }
 

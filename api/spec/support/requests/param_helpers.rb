@@ -1,8 +1,6 @@
-require "rails_helper"
-require "base64"
+# frozen_string_literal: true
 
 RSpec.shared_context "param helpers" do
-
   def json_structure_from_factory(factory_name, **options)
     build_json_structure(options.merge({ attributes: FactoryBot.attributes_for(factory_name) }))
   end
@@ -93,4 +91,8 @@ RSpec.shared_context "param helpers" do
       mime_type: "text/markdown"
     )
   end
+end
+
+RSpec.configure do |config|
+  config.include_context "param helpers", type: :request
 end

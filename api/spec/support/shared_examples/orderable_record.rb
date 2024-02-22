@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-shared_examples_for "orderable api requests" do
-  include_context("authenticated request")
-  include_context("param helpers")
-
+RSpec.shared_examples_for "orderable api requests" do
   let(:path) { raise "Must be overridden" }
   let!(:object_a) { raise "Must be overridden" }
   let!(:object_b) { raise "Must be overridden" }
@@ -21,6 +18,5 @@ shared_examples_for "orderable api requests" do
       put __send__(path, object_a.id), headers: admin_headers, params: valid_params
       expect(api_response["data"]["attributes"]["position"]).to eq 2
     end
-
   end
 end

@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe "Users API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:first_name) { "John" }
 
   let(:attributes) do

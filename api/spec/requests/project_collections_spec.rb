@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Project Collections API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:project_collection) do
     pc = FactoryBot.create(:project_collection)
     pc.projects << FactoryBot.create(:project)
@@ -34,7 +31,6 @@ RSpec.describe "Project Collections API", type: :request do
           included = JSON.parse(response.body).dig("included").select { |record| record["type"] == "projects" }
           expect(included.length).to eq 1
         end
-
       end
     end
 

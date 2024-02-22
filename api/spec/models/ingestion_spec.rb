@@ -1,15 +1,14 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe Ingestion, type: :model do
-
   include_context("authenticated request")
   include_context("param helpers")
 
-  let(:attributes) {
+  let(:attributes) do
     {
-      source: markdown_source_params
+      source: markdown_source_params,
     }
-  }
+  end
 
   let(:ingestion) do
     ingestion = Ingestion.new(creator: admin)

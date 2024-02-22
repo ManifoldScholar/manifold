@@ -1,10 +1,7 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Project Events API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-  let(:project) { FactoryBot.create(:project) }
+  let_it_be(:project, refind: true) { FactoryBot.create(:project) }
 
   before(:each) do
     FactoryBot.create(:event, project: project, event_type: EventType[:tweet])
@@ -30,5 +27,4 @@ RSpec.describe "Project Events API", type: :request do
       end
     end
   end
-
 end

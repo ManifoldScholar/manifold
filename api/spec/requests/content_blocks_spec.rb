@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "ContentBlocks API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:content_block) { FactoryBot.create(:markdown_block) }
   let(:path) { api_v1_content_block_path(content_block) }
   let(:api_response) { JSON.parse(response.body) }

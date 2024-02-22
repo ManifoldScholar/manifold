@@ -6,6 +6,7 @@ require File.expand_path("../config/environment", __dir__)
 
 require "rspec/rails"
 require "test_prof/recipes/rspec/let_it_be"
+require "test_prof/recipes/rspec/factory_default"
 require "webmock/rspec"
 require "dry/system/stubs"
 require "closure_tree/test/matcher"
@@ -35,6 +36,11 @@ Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 ActiveJob::Uniqueness.test_mode!
+
+TestProf::FactoryDefault.configure do |config|
+  config.preserve_attributes = true
+  config.preserve_traits = true
+end
 
 RSpec.configure do |config|
   config.include TestHelpers
@@ -70,6 +76,10 @@ RSpec.configure do |config|
   # Clean up any jobs before each run.
   config.before(:each) do
     clear_enqueued_jobs
+  end
+
+  config.after do
+    RequestStore.clear!
   end
 
   config.before(:suite) do

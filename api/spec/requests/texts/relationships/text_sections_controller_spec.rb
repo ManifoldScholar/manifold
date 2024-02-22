@@ -1,10 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Text Text Sections API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:text) { FactoryBot.create(:text) }
   let(:path) { api_v1_text_relationships_text_sections_path(text) }
 
@@ -16,5 +12,4 @@ RSpec.describe "Text Text Sections API", type: :request do
       end
     end
   end
-
 end

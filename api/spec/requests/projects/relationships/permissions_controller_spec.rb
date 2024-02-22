@@ -1,10 +1,9 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Project Permissions API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-  let(:project) { FactoryBot.create(:project) }
-  let(:user) { FactoryBot.create(:user, :editor) }
+  let_it_be(:project, refind: true) { FactoryBot.create(:project) }
+  let_it_be(:user, refind: true) { FactoryBot.create(:user, :editor) }
+
   let(:params) { build_json_payload(attributes: { role_names: %w[project_editor] }, relationships: { user: { data: { id: user.id, type: "users" } } }) }
 
   describe "sends a list of project permissions" do

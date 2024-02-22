@@ -1,10 +1,7 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Project Twitter Queries API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
-  let(:project) { FactoryBot.create(:project) }
+  let_it_be(:project, refind: true) { FactoryBot.create(:project) }
 
   describe "sends a list of a project's twitter queries" do
     let(:path) { api_v1_project_relationships_twitter_queries_path(project) }

@@ -1,10 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Events API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:event) { FactoryBot.create(:event) }
 
   describe "destroys an event" do
@@ -32,4 +28,3 @@ RSpec.describe "Events API", type: :request do
     end
   end
 end
-

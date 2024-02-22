@@ -1,10 +1,7 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Resources API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
-  let(:resource) { FactoryBot.create(:resource) }
+  let_it_be(:resource, refind: true) { FactoryBot.create(:resource) }
 
   describe "updates a resource" do
     let(:path) { api_v1_resource_path(resource) }

@@ -1,16 +1,10 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Reading Groups API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
-  let(:reading_group) { FactoryBot.create(:reading_group, creator: reader) }
+  let_it_be(:reading_group, refind: true) { FactoryBot.create(:reading_group, creator: reader) }
 
   describe "responds with a list of reading groups" do
-
     describe "the response" do
-
       before(:each) { get api_v1_reading_groups_path, headers: headers }
 
       context "when the user is a reading group owner" do
@@ -31,63 +25,58 @@ RSpec.describe "Reading Groups API", type: :request do
 
   describe "sends a reading group" do
     describe "the response" do
-
       context "when the id is provided" do
         before(:each) { get api_v1_reading_group_path(reading_group), headers: headers }
-        context "when the user is the reading group owner" do
 
+        context "when the user is the reading group owner" do
           let(:headers) { reader_headers }
+
           it "has a 200 status code" do
             expect(response).to have_http_status(200)
           end
         end
 
         context "when the user is not in the reading group" do
-
           let(:headers) { another_reader_headers }
+
           it "has a 403 status code" do
             expect(response).to have_http_status(403)
           end
         end
 
         context "when the user is an admin" do
-
           let(:headers) { admin_headers }
+
           it "has a 200 status code" do
             expect(response).to have_http_status(200)
           end
         end
-
       end
 
       context "when the invitation code is provided" do
-
         before(:each) { get api_v1_reading_group_path(reading_group.invitation_code), headers: headers }
 
         context "when the user is not in the reading group" do
-
           let(:headers) { another_reader_headers }
+
           it "has a 200 status code" do
             expect(response).to have_http_status(200)
           end
         end
       end
-
     end
   end
 
   describe "updates a reading group" do
-
     let(:path) { api_v1_reading_group_path(reading_group) }
 
     context "when the user is the reading group owner" do
-
       let(:headers) { reader_headers }
-      let(:metadata) {
+      let(:metadata) do
         {
           name: "This is a new name"
         }
-      }
+      end
 
       describe "the response" do
         context "body" do

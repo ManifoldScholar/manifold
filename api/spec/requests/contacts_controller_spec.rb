@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Contacts API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:headers) { anonymous_headers }
   let(:valid_params) do
     { attributes: {

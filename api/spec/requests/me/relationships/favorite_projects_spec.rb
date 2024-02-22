@@ -1,15 +1,10 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "My Favorite Projects API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:path) { api_v1_me_relationships_favorite_projects_path }
 
   # Index action
   describe "sends the user's favorite projects" do
-
     context "when the user is not authenticated" do
       it "has a 401 status code" do
         get path
@@ -18,7 +13,6 @@ RSpec.describe "My Favorite Projects API", type: :request do
     end
 
     context "when the user is authenticated" do
-
       let(:favorite_project) { FactoryBot.create(:project) }
       let(:favorite) { reader.favorite(favorite_project) }
 
@@ -40,5 +34,4 @@ RSpec.describe "My Favorite Projects API", type: :request do
       end
     end
   end
-
 end

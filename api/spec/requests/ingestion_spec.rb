@@ -1,22 +1,18 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Ingestions API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
-  let(:attributes) {
+  let(:attributes) do
     {
       source: markdown_source_params,
       ingestionType: "epub"
     }
-  }
-  let(:valid_params) {
+  end
+
+  let(:valid_params) do
     build_json_payload(attributes: attributes)
-  }
+  end
 
   describe "creates an ingestion" do
-
     let(:project) { FactoryBot.create(:project) }
     let(:path) { api_v1_project_relationships_ingestions_path(project) }
     let(:api_response) { JSON.parse(response.body) }

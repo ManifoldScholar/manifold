@@ -1,8 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Text Section Annotations API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
 
   let(:project) { FactoryBot.create(:project) }
   let(:text) { FactoryBot.create(:text, project: project) }
@@ -23,6 +21,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
       }
     }
   end
+
   let(:collection_params) do
     {
       attributes: FactoryBot.build(:collection_annotation).attributes,
@@ -36,6 +35,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
       }
     }
   end
+
   let(:path) { api_v1_text_relationships_text_section_annotations_path(text_id: text.id, text_section_id: text_section) }
 
   describe "access to public annotations" do
