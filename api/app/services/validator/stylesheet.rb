@@ -1,10 +1,8 @@
-require "memoist"
+# frozen_string_literal: true
 
 module Validator
-  # This class takes an CSS string input and validates to ensure it follows our CSS
-  # rules.
+  # This class takes an CSS string input and validates to ensure it follows our CSS rules.
   class Stylesheet
-
     extend Memoist
 
     def initialize(config = nil)
@@ -31,7 +29,7 @@ module Validator
     # creates a string that looks like `"\\25cf  "` by converting the character to its
     # ordinal value, casting that to a hexadecimal string (`to_s(16)`), and then
     # rjustifying that string so it is zerofilled 4-width, which is what CSS expects.
-    # rubocop:disable Style/CharacterLiteral, Style/RescueStandardError
+    # rubocop:disable Style/RescueStandardError
     def encode_css_for_parser(string)
       parts = string.chars.map do |c|
         c.encode("binary", "utf-8")
@@ -40,7 +38,7 @@ module Validator
       end
       parts.join
     end
-    # rubocop:enable Style/CharacterLiteral, Style/RescueStandardError
+    # rubocop:enable Style/RescueStandardError
 
     # Removes disallowed declarations from declarations
     # @param declarations [String]
@@ -96,15 +94,14 @@ module Validator
     # @param css [String]
     # @return [String]
     def extract_at_rules(css)
-      out = ""
+      out = "".dup
       css.each_line do |line|
-        # rubocop:disable Style/DoubleNegation
-        if !!(line =~ /^(\s*)@(.*);(\s*)$/)
+        case line
+        when /^(\s*)@(.*);(\s*)$/
           @out << line
         else
           out << line
         end
-        # rubocop:enable Style/DoubleNegation
       end
       out
     end
@@ -121,7 +118,7 @@ module Validator
 
     # Reset the validator state
     def reset
-      @out = ""
+      @out = "".dup
       @parser = CssParser::Parser.new
     end
 
@@ -376,7 +373,6 @@ module Validator
       pattern = Regexp.union(@config.exclusions.selectors)
       (sel =~ pattern).nil?
     end
-
   end
 
   class InvalidCondition < KeyError

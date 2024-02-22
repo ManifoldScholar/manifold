@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 # Includes strong parameter configuration
 module Validation
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/MethodLength
   def user_params
     params.require(:data)
     persistent_ui = {
@@ -40,7 +41,6 @@ module Validation
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
-  # rubocop:enable Metrics/MethodLength
 
   def reading_group_membership_params
     params.require(:data)
@@ -247,7 +247,6 @@ module Validation
     params.permit(param_config)
   end
 
-  # rubocop:disable Metrics/MethodLength
   def resource_params
     params.require(:data)
     attributes = [attachment(:attachment), :remove_attachment,
@@ -266,7 +265,6 @@ module Validation
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
-  # rubocop:enable Metrics/MethodLength
 
   def resource_metadata_params
     params.require(:data)
@@ -284,7 +282,6 @@ module Validation
     params.permit(param_config)
   end
 
-  # rubocop:disable Metrics/MethodLength
   def ingestion_params
     params.require(:data)
 
@@ -308,7 +305,6 @@ module Validation
 
     params.permit(param_config)
   end
-  # rubocop:enable Metrics/MethodLength
 
   def ingestion_source_params
     params.require(:data)
@@ -404,109 +400,26 @@ module Validation
     params.permit(param_config)
   end
 
-  # rubocop:disable Metrics/MethodLength
+  # @see SettingSections
+  # @api private
+  BASE_SETTING_ATTRIBUTES = {
+    **SettingSections[:strong_params],
+    google_service: %i[data],
+  }.freeze
+
   def settings_params
     params.require(:data)
+
     attributes = [
-      {
-        general: [
-          :installation_name,
-          :default_publisher,
-          :default_publisher_place,
-          :head_description,
-          :social_share_message,
-          :contact_email,
-          :copyright,
-          :press_site,
-          :terms_url,
-          :head_title,
-          :twitter,
-          :facebook,
-          :library_disabled,
-          :all_standalone,
-          :library_redirect_url,
-          :home_redirect_url,
-          :restricted_access,
-          :restricted_access_heading,
-          :restricted_access_body,
-          :disable_engagement,
-          :disable_reading_groups,
-          :disable_internal_analytics
-        ]
-      },
-      {
-        secrets: [
-          :facebook_app_secret,
-          :twitter_app_secret,
-          :twitter_access_token_secret,
-          :google_private_key,
-          :google_oauth_client_secret,
-          :smtp_settings_password
-        ]
-      },
-      {
-        ingestion: [
-          :global_styles,
-          :mammoth_style_map
-        ]
-      },
-      {
-        integrations: [
-          :facebook_app_id,
-          :twitter_app_id,
-          :twitter_access_token,
-          :google_project_id,
-          :google_private_key_id,
-          :google_client_email,
-          :google_client_id,
-          :google_oauth_client_id,
-          :ga_four_tracking_id
-        ]
-      },
-      {
-        email: [
-          :from_address,
-          :from_name,
-          :reply_to_address,
-          :reply_to_name,
-          :closing,
-          :delivery_method,
-          :smtp_settings_address,
-          :smtp_settings_port,
-          :smtp_settings_user_name,
-          :sendmail_settings_location,
-          :sendmail_settings_arguments
-        ]
-      },
-      {
-        theme: [
-          :logo_styles,
-          :typekit_id,
-          :header_offset,
-          :top_bar_text,
-          :top_bar_url,
-          :top_bar_color,
-          :top_bar_mode,
-          :accent_color,
-          :header_foreground_color,
-          :header_foreground_active_color,
-          :header_background_color,
-          :string_signup_terms_header,
-          :string_signup_terms_one,
-          :string_signup_terms_two,
-          :string_data_use_header,
-          :string_data_use_copy,
-          :string_cookies_banner_header,
-          :string_cookies_banner_copy
-        ]
-      },
+      BASE_SETTING_ATTRIBUTES,
       :remove_press_logo, attachment(:press_logo),
       :remove_press_logo_footer, attachment(:press_logo_footer),
       :remove_press_logo_mobile, attachment(:press_logo_mobile),
       :remove_favicon, attachment(:favicon),
-      { google_service: [:data] }
     ]
+
     param_config = structure_params(attributes: attributes)
+
     params.permit(param_config)
   end
 
@@ -546,7 +459,6 @@ module Validation
 
     params.permit(param_config)
   end
-  # rubocop:enable Metrics/MethodLength
 
   def maker_params
     params.require(:data)

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module SettingsService
   # After reading settings from `ENV`, merge them into
   # their respective attributes on {Settings}.
   #
-  # @see [Settings::ReadFromEnv]
+  # @see Settings::ReadFromEnv
   class UpdateFromEnv < ActiveInteraction::Base
-    object :settings, default: proc { Settings.instance }
+    record :settings, default: proc { Settings.instance }
 
     # @return [void]
     def execute
@@ -14,13 +16,13 @@ module SettingsService
         settings.merge_settings_into! section, section_settings
       end
 
-      unless settings.save
-        errors.add :base, settings.errors.full_messages.to_sentence
+      return if settings.save
 
-        return false
-      end
+      # :nocov:
+      errors.add :base, settings.errors.full_messages.to_sentence
 
-      nil
+      return false
+      # :nocov:
     end
   end
 end
