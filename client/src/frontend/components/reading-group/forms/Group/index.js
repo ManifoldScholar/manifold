@@ -8,16 +8,26 @@ import config from "config";
 import memoize from "lodash/memoize";
 import withConfirmation from "hoc/withConfirmation";
 import { ClassNames } from "@emotion/react";
+import { connect } from "react-redux";
+import { select } from "utils/entityUtils";
 import * as Styled from "./styles";
 
 class ReadingGroupForm extends React.PureComponent {
   static displayName = "ReadingGroup.Forms.GroupSettings";
 
+  static mapStateToProps = state => {
+    return {
+      allowPublic: !select(requests.settings, state.entityStore).attributes
+        .general.disablePublicReadingGroups
+    };
+  };
+
   static propTypes = {
     mode: PropTypes.oneOf(["new", "edit"]),
     group: PropTypes.object,
     onSuccess: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
+    allowPublic: PropTypes.bool.isRequired
   };
 
   static defaultProps = {
@@ -108,8 +118,33 @@ class ReadingGroupForm extends React.PureComponent {
     this.setState({ courseEnabled: newEvent.target.value === "true" });
   };
 
+  get privacyOptions() {
+    const { t, allowPublic } = this.props;
+    const publicOption = allowPublic
+      ? [
+          {
+            label: t("forms.reading_group.privacy_options.public"),
+            value: "public"
+          }
+        ]
+      : [];
+
+    return [
+      ...publicOption,
+      {
+        label: t("forms.reading_group.privacy_options.private"),
+        value: "private"
+      },
+      {
+        label: t("forms.reading_group.privacy_options.anonymous"),
+        value: "anonymous"
+      }
+    ];
+  }
+
   render() {
     const { group, onSuccess, t } = this.props;
+
     return (
       <Styled.Form
         model={this.isNew ? this.memoizedNewGroup() : group}
@@ -137,20 +172,7 @@ class ReadingGroupForm extends React.PureComponent {
               defaultValue={"private"}
               beforeOnChange={this.warnOnPrivacyChange}
               instructions={t("forms.reading_group.privacy_instructions")}
-              options={[
-                {
-                  label: t("forms.reading_group.privacy_options.public"),
-                  value: "public"
-                },
-                {
-                  label: t("forms.reading_group.privacy_options.private"),
-                  value: "private"
-                },
-                {
-                  label: t("forms.reading_group.privacy_options.anonymous"),
-                  value: "anonymous"
-                }
-              ]}
+              options={this.privacyOptions}
               inline
               wide
             />
@@ -245,4 +267,6 @@ class ReadingGroupForm extends React.PureComponent {
   }
 }
 
-export default withConfirmation(withTranslation()(ReadingGroupForm));
+export default withConfirmation(
+  withTranslation()(connect(ReadingGroupForm.mapStateToProps)(ReadingGroupForm))
+);
