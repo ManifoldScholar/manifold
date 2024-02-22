@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Provide filterable attributes for basic StoreModel classes.
 module HasFilteredAttributes
   extend ActiveSupport::Concern
 
@@ -6,7 +9,7 @@ module HasFilteredAttributes
   end
 
   def as_filtered_json(options = nil)
-    parameter_filter.filter as_json(options)
+    parameter_filter.filter as_json(options || {})
   end
 
   class_methods do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SettingsService
   # Read settings from `ENV` and transform into a suitable hash
   # that can be merged into {Settings}.
@@ -47,12 +49,14 @@ module SettingsService
     # The value is potentially stored in the filesystem.
     def read_from_file(setting, value)
       config_path = Rails.application.root.join("..", value)
+
       return unless config_path.file?
 
       case setting
       when :google_service
-        data = JSON.parse(File.read(config_path)).to_h
-        SettingsService::AdjustGoogleConfig.run! config: data
+        config = JSON.parse(config_path.read).to_h
+
+        SettingsService::AdjustGoogleConfig.run! config: config
       end
     end
   end
