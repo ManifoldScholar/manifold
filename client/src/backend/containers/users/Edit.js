@@ -162,6 +162,8 @@ export class UsersEditContainer extends PureComponent {
               className: "utility-button__icon--notice"
             }
           ]}
+          instructions={t("records.users.not_established_warning")}
+          instructionsAreWarning
         />
 
         <section>

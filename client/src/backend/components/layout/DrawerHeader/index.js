@@ -15,7 +15,8 @@ export default class DrawerEntityHeader extends PureComponent {
     buttons: PropTypes.array,
     icon: PropTypes.string,
     buttonLayout: PropTypes.oneOf(["stack", "inline"]),
-    small: PropTypes.bool
+    small: PropTypes.bool,
+    instructionsAreWarning: PropTypes.bool
   };
 
   static defaultProps = {
@@ -50,7 +51,7 @@ export default class DrawerEntityHeader extends PureComponent {
               </Styled.TitleWrapper>
             )}
             {this.props.instructions && (
-              <Styled.Instructions>
+              <Styled.Instructions $warning={this.props.instructionsAreWarning}>
                 {this.props.instructions}
               </Styled.Instructions>
             )}

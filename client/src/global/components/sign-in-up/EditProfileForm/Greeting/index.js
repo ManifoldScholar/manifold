@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
-export default function ProfileGreeting({ mode }) {
+export default function ProfileGreeting({ mode, warn }) {
   const formData = useContext(FormContext);
   const nickname = formData.getModelValue("attributes[nickname]");
+
+  const { t } = useTranslation();
 
   return mode === "new" ? (
     <Trans
@@ -19,13 +21,20 @@ export default function ProfileGreeting({ mode }) {
       values={{ name: nickname }}
     />
   ) : (
-    <Styled.Heading>
-      <Trans
-        i18nKey="forms.signin_overlay.greeting"
-        components={[<Styled.Nickname />]}
-        values={{ name: nickname }}
-      />
-    </Styled.Heading>
+    <>
+      <Styled.Heading>
+        <Trans
+          i18nKey="forms.signin_overlay.greeting"
+          components={[<Styled.Nickname />]}
+          values={{ name: nickname }}
+        />
+      </Styled.Heading>
+      {warn && (
+        <Styled.NotVerifiedWarning>
+          {t("forms.signin_overlay.not_verified_warning")}
+        </Styled.NotVerifiedWarning>
+      )}
+    </>
   );
 }
 

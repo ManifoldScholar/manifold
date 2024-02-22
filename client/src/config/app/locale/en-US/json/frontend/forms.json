@@ -186,7 +186,8 @@
       "update_notification_header": "Profile updated successfully!",
       "terms_header": "First things first...",
       "accept_checkbox_label": "I agree to {{installationName}}'s <privacyLink>privacy policy</privacyLink> and <termsLink>terms and conditions.</termsLink>",
-      "accept_checkbox_label_truncated": "I agree to {{installationName}}'s <termsLink>terms and conditions.</termsLink>"
+      "accept_checkbox_label_truncated": "I agree to {{installationName}}'s <termsLink>terms and conditions.</termsLink>",
+      "not_verified_warning": "It looks like you haven't verified your email. You will not be able to engage with projects or reading groups on Manifold until you do so."
     },
     "attribute_map": {
       "cancel": "Cancel mapping of {{name}} to {{mapping}}",
