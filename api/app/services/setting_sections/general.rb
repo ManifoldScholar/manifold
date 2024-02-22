@@ -20,7 +20,9 @@ module SettingSections
     attribute :restricted_access_body, :string, default: DEFAULT_RESTRICTED_ACCESS_BODY
 
     attribute :disable_engagement, :boolean, default: false
+    attribute :disable_public_reading_groups, :boolean, default: false
     attribute :disable_reading_groups, :boolean, default: false
+    attribute :disable_spam_detection, :boolean, default: false
     attribute :disable_internal_analytics, :boolean, default: false
 
     attribute :contact_email, :string
@@ -33,6 +35,8 @@ module SettingSections
     attribute :press_site, :string
     attribute :terms_url, :string
     attribute :twitter, :string
+
+    alias public_reading_groups_disabled? disable_public_reading_groups
 
     delegate :restricted_access_body_formatted, to: :parent, allow_nil: true
 

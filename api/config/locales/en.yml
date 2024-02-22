@@ -57,6 +57,9 @@ en:
   activerecord:
     attributes:
     errors:
+      messages:
+        public_reading_groups_disabled: "Public reading groups are disabled"
+        spam: is spam
       models:
         resource:
           attributes:

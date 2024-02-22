@@ -122,7 +122,8 @@ RSpec.describe "Reading Groups API", type: :request do
 
     let(:attributes) do
       {
-        name: "My Reading Group"
+        name: "My Reading Group",
+        privacy: "public",
       }
     end
 
@@ -130,21 +131,129 @@ RSpec.describe "Reading Groups API", type: :request do
       build_json_payload(attributes: attributes)
     end
 
-    it "has a 201 CREATED status code" do
+    def making_the_request
       post path, headers: reader_headers, params: valid_params
+    end
 
-      expect(response).to have_http_status(201)
+    it "creates the reading group" do
+      expect do
+        making_the_request
+      end.to change(ReadingGroup, :count).by(1)
+
+      expect(response).to have_http_status(:created)
     end
 
     it "is rate-limited" do
       expect do
         12.times do
-          post path, headers: reader_headers, params: valid_params
+          making_the_request
         end
       end.to change(ReadingGroup, :count).by(10)
         .and change(ThrottledRequest, :count).by(1)
 
       expect(response).to have_http_status(503)
+    end
+
+    context "when public reading groups are disabled" do
+      before do
+        settings = Settings.current
+
+        settings.general.disable_public_reading_groups = true
+
+        settings.save!
+      end
+
+      context "with an anonymous reading group" do
+        let(:attributes) do
+          {
+            name: "My Reading Group",
+            privacy: "anonymous",
+          }
+        end
+
+        it "gets created anyway" do
+          expect do
+            making_the_request
+          end.to change(ReadingGroup, :count).by(1)
+
+          expect(response).to have_http_status(:created)
+        end
+      end
+
+      context "with a private reading group" do
+        let(:attributes) do
+          {
+            name: "My Reading Group",
+            privacy: "private",
+          }
+        end
+
+        it "gets created anyway" do
+          expect do
+            making_the_request
+          end.to change(ReadingGroup, :count).by(1)
+
+          expect(response).to have_http_status(:created)
+        end
+      end
+
+      context "with a public reading group" do
+        let(:attributes) do
+          {
+            name: "My Reading Group",
+            privacy: "public",
+          }
+        end
+
+        it "does not create the reading group" do
+          expect do
+            making_the_request
+          end.to keep_the_same(ReadingGroup, :count)
+
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
+    end
+
+    context "with spam detection enabled" do
+      before do
+        akismet_enabled!
+        akismet_stub_comment_check!(situation: :spam)
+      end
+
+      context "with a private reading group" do
+        let(:attributes) do
+          {
+            name: "My Reading Group",
+            privacy: "private",
+          }
+        end
+
+        it "gets created anyway" do
+          expect do
+            making_the_request
+          end.to change(ReadingGroup, :count).by(1)
+
+          expect(response).to have_http_status(:created)
+        end
+      end
+
+      context "with a public reading group" do
+        let(:attributes) do
+          {
+            name: "My Reading Group",
+            privacy: "public",
+          }
+        end
+
+        it "does not create the reading group" do
+          expect do
+            making_the_request
+          end.to keep_the_same(ReadingGroup, :count)
+
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
     end
   end
 

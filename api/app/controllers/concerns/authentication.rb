@@ -14,16 +14,17 @@ module Authentication
 
   CURRENT_USER_PRELOADS = %w(roles favorites).freeze
 
+  # @param [User, nil]
+  attr_reader :current_user
+
   private
 
   def load_current_user
     @current_user = User.preload(CURRENT_USER_PRELOADS).find(decoded_auth_token[:user_id])
   rescue JWT::DecodeError
     nil
-  end
-
-  def current_user
-    @current_user
+  else
+    RequestStore[:current_user] = @current_user
   end
 
   # This method gets the current user based on the user_id included

@@ -1,16 +1,13 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe Annotation, type: :model do
+  let_it_be(:creator, refind: true) { FactoryBot.create :user }
+  let_it_be(:project, refind: true) { FactoryBot.create :project, creator: creator }
+  let_it_be(:text, refind: true) { FactoryBot.create :text, project: project, creator: creator }
+  let_it_be(:text_section) { FactoryBot.create :text_section, text: text }
+
   before(:each) do
-    @annotation = FactoryBot.build(:annotation)
-  end
-
-  it "has a valid annotation factory" do
-    expect(FactoryBot.build(:annotation)).to be_valid
-  end
-
-  it "has a valid resource annotation factory" do
-    expect(FactoryBot.build(:resource_annotation)).to be_valid
+    @annotation = FactoryBot.build(:annotation, text_section: text_section, creator: creator)
   end
 
   it "knows what project it belongs to" do
@@ -145,44 +142,44 @@ RSpec.describe Annotation, type: :model do
   end
 
   describe "the with_read_ability scope" do
-    let(:private_group) { FactoryBot.create(:reading_group, privacy: "private") }
-    let(:private_group_member) do
-      user = FactoryBot.create(:user)
-      FactoryBot.create(:reading_group_membership, user: user, reading_group: private_group)
-      user
+    let_it_be(:private_group, refind: true) { FactoryBot.create(:reading_group, privacy: "private") }
+    let_it_be(:private_group_member, refind: true) do
+      FactoryBot.create(:user).tap do |user|
+        FactoryBot.create(:reading_group_membership, user: user, reading_group: private_group)
+      end
     end
 
-    let(:public_group) { FactoryBot.create(:reading_group, privacy: "public") }
-    let(:public_group_member) do
-      user = FactoryBot.create(:user)
-      FactoryBot.create(:reading_group_membership, user: user, reading_group: public_group)
-      user
+    let_it_be(:public_group, refind: true) { FactoryBot.create(:reading_group, privacy: "public") }
+    let_it_be(:public_group_member, refind: true) do
+      FactoryBot.create(:user).tap do |user|
+        FactoryBot.create(:reading_group_membership, user: user, reading_group: public_group)
+      end
     end
 
-    let(:anonymous_group) { FactoryBot.create(:reading_group, privacy: "anonymous") }
-    let(:anonymous_group_member) do
-      user = FactoryBot.create(:user)
-      FactoryBot.create(:reading_group_membership, user: user, reading_group: anonymous_group)
-      user
+    let_it_be(:anonymous_group, refind: true) { FactoryBot.create(:reading_group, privacy: "anonymous") }
+    let_it_be(:anonymous_group_member, refind: true) do
+      FactoryBot.create(:user).tap do |user|
+        FactoryBot.create(:reading_group_membership, user: user, reading_group: anonymous_group)
+      end
     end
 
-    let(:all_groups_member) do
-      all_groups_member = FactoryBot.create(:user)
-      FactoryBot.create(:reading_group_membership, user: all_groups_member, reading_group: private_group)
-      FactoryBot.create(:reading_group_membership, user: all_groups_member, reading_group: public_group)
-      FactoryBot.create(:reading_group_membership, user: all_groups_member, reading_group: anonymous_group)
-      all_groups_member
+    let_it_be(:all_groups_member, refind: true) do
+      FactoryBot.create(:user).tap do |all_groups_member|
+        FactoryBot.create(:reading_group_membership, user: all_groups_member, reading_group: private_group)
+        FactoryBot.create(:reading_group_membership, user: all_groups_member, reading_group: public_group)
+        FactoryBot.create(:reading_group_membership, user: all_groups_member, reading_group: anonymous_group)
+      end
     end
 
-    let(:private_group_annotation) { FactoryBot.create(:annotation, private: false, reading_group: private_group) }
-    let(:public_group_annotation) { FactoryBot.create(:annotation, private: false, reading_group: public_group) }
-    let(:anonymous_group_annotation) { FactoryBot.create(:annotation, private: false, reading_group: anonymous_group) }
-    let(:public_annotation) { FactoryBot.create(:annotation, private: false, reading_group: nil) }
-    let(:private_annotation) { FactoryBot.create(:annotation, private: true, reading_group: nil) }
-    let(:resource_annotation) { FactoryBot.create(:annotation, private: false, format: Annotation::TYPE_RESOURCE, resource: FactoryBot.create(:resource))}
-    let(:all_groups_member_private_annotation) { FactoryBot.create(:annotation, private: true, reading_group: nil, creator: all_groups_member) }
+    let_it_be(:private_group_annotation, refind: true) { FactoryBot.create(:annotation, private: false, reading_group: private_group) }
+    let_it_be(:public_group_annotation, refind: true) { FactoryBot.create(:annotation, private: false, reading_group: public_group) }
+    let_it_be(:anonymous_group_annotation, refind: true) { FactoryBot.create(:annotation, private: false, reading_group: anonymous_group) }
+    let_it_be(:public_annotation, refind: true) { FactoryBot.create(:annotation, private: false, reading_group: nil) }
+    let_it_be(:private_annotation, refind: true) { FactoryBot.create(:annotation, private: true, reading_group: nil) }
+    let_it_be(:resource_annotation, refind: true) { FactoryBot.create(:annotation, private: false, format: Annotation::TYPE_RESOURCE, resource: FactoryBot.create(:resource))}
+    let_it_be(:all_groups_member_private_annotation, refind: true) { FactoryBot.create(:annotation, private: true, reading_group: nil, creator: all_groups_member) }
 
-    let(:reader) { FactoryBot.create(:user) }
+    let_it_be(:reader, refind: true) { FactoryBot.create(:user) }
 
     shared_examples_for "a readable annotation" do |label, annotation_sym, exclude_public = false|
       it "when the annotation is a #{label}" do
@@ -201,8 +198,8 @@ RSpec.describe Annotation, type: :model do
 
     context "when filtering, the annotation" do
       context "when the user is not in any groups" do
-        let(:user) { reader }
-        let(:private_group_annotation_by_former_group_member) do
+        let_it_be(:user, refind: true) { reader }
+        let_it_be(:private_group_annotation_by_former_group_member, refind: true) do
           FactoryBot.create(:annotation, private: false, reading_group: private_group, creator: user)
         end
         let(:public_group_annotation_by_former_group_member) do
@@ -318,6 +315,12 @@ RSpec.describe Annotation, type: :model do
           it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
         end
       end
+    end
+  end
+
+  context "when detecting spam" do
+    it_behaves_like "a model with spam detection" do
+      let(:instance) { FactoryBot.build :annotation }
     end
   end
 end

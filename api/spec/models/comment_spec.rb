@@ -1,4 +1,4 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe Comment, type: :model do
   it "has a valid comment factory" do
@@ -55,6 +55,12 @@ RSpec.describe Comment, type: :model do
         comment = FactoryBot.create(:comment, parent: @comment)
         expect(comment.sort_order).to eq 0
       end
+    end
+  end
+
+  context "when detecting spam" do
+    it_behaves_like "a model with spam detection" do
+      let(:instance) { FactoryBot.build :comment }
     end
   end
 end

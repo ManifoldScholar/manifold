@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # An annotation captures a highlighted or annotated range. This model is currently
 # a likely candidate for refactoring into a "range" model that can be used by various
 # other manifold records.
@@ -14,10 +16,10 @@ class Annotation < ApplicationRecord
   include SearchIndexable
 
   # Constants
-  TYPE_ANNOTATION = "annotation".freeze
-  TYPE_HIGHLIGHT = "highlight".freeze
-  TYPE_RESOURCE = "resource".freeze
-  TYPE_COLLECTION = "resource_collection".freeze
+  TYPE_ANNOTATION = "annotation"
+  TYPE_HIGHLIGHT = "highlight"
+  TYPE_RESOURCE = "resource"
+  TYPE_COLLECTION = "resource_collection"
   ANNOTATION_FORMATS = [
     TYPE_ANNOTATION,
     TYPE_HIGHLIGHT,
@@ -65,7 +67,7 @@ class Annotation < ApplicationRecord
             presence: true,
             inclusion: { in: ANNOTATION_FORMATS }
   validate :valid_subject?
-  validates :body, presence: true, if: :annotation?
+  validates :body, presence: true, spam: { type: "annotation", if: :public?, on: :create }, if: :annotation?
 
   # Delegations
   delegate :id, to: :project, allow_nil: true, prefix: true

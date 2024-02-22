@@ -1,4 +1,4 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Reading Group Abilities", :authorizer do
   let(:user) { FactoryBot.create :user }
@@ -45,16 +45,10 @@ RSpec.describe "Reading Group Abilities", :authorizer do
   end
 
   context "when reading groups are disabled" do
-    before(:all) do
+    before do
       settings = Settings.instance
-      settings.general[:disable_reading_groups] = true
-      settings.save
-    end
-
-    after(:all) do
-      settings = Settings.instance
-      settings.general[:disable_reading_groups] = false
-      settings.save
+      settings.general.disable_reading_groups = true
+      settings.save!
     end
 
     context "when the reading group was created by the reader" do

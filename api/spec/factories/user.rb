@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
     first_name { "John" }
@@ -28,6 +30,12 @@ FactoryBot.define do
 
     trait :reader do
       role { :reader }
+    end
+
+    trait :with_confirmed_email do
+      after(:create) do |user, _evaluator|
+        user.mark_email_confirmed!
+      end
     end
   end
 end

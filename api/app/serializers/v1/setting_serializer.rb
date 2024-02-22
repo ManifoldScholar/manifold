@@ -26,7 +26,9 @@ module V1
       restricted_access_body_formatted: Types::String,
 
       disable_engagement: Types::Bool,
+      disable_public_reading_groups: Types::Bool,
       disable_reading_groups: Types::Bool,
+      disable_spam_detection: Types::Bool,
       disable_internal_analytics: Types::Bool,
 
       contact_email: Types::Serializer::Email.optional,
@@ -138,6 +140,7 @@ module V1
     end
 
     typed_section_attribute :secrets, Types::Hash.schema(
+      akismet_api_key: Types::String,
       facebook_app_secret: Types::String,
       twitter_app_secret: Types::String,
       twitter_access_token_secret: Types::String,

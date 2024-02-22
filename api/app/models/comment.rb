@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # A comment is about a subject.
 class Comment < ApplicationRecord
-
   # Closure Tree
   has_closure_tree order: "sort_order", numeric_order: true, dependent: :destroy
 
@@ -41,10 +42,8 @@ class Comment < ApplicationRecord
 
   delegate :project, to: :subject
 
-  # Validations
-  validates :body, :subject, presence: true
+  validates :body, presence: true, spam: { on: :create, type: "comment" }
 
-  # Callbacks
   after_commit :enqueue_comment_notifications, on: [:create]
   after_commit :trigger_event_creation, on: [:create]
 
@@ -87,5 +86,4 @@ class Comment < ApplicationRecord
   def enqueue_comment_notifications
     Notifications::EnqueueCommentNotificationsJob.perform_later id
   end
-
 end

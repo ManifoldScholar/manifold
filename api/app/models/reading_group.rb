@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A reading group is a cohort of users who are collaboratively consuming Manifold content.
 class ReadingGroup < ApplicationRecord
   include Authority::Abilities
@@ -41,8 +43,10 @@ class ReadingGroup < ApplicationRecord
   delegate :annotations_count, :highlights_count, :comments_count, :memberships_count, to: :reading_group_count
 
   validates :privacy, inclusion: { in: %w(public private anonymous) }
-  validates :name, presence: true
+  validates :name, presence: true, spam: { if: :public?, on: :create, type: "title" }
   validates :invitation_code, uniqueness: true, presence: true
+
+  validate :maybe_prevent_public_group_creation!, on: :create, if: :public?
 
   before_validation :ensure_invitation_code
   before_validation :upcase_invitation_code
@@ -107,6 +111,13 @@ class ReadingGroup < ApplicationRecord
     reading_group_memberships.where(user: creator).first_or_create! do |rgm|
       rgm[:role] = :moderator
     end
+  end
+
+  private
+
+  # @return [void]
+  def maybe_prevent_public_group_creation!
+    errors.add :base, :public_reading_groups_disabled if Settings.current.public_reading_groups_disabled?
   end
 
   class << self
