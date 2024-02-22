@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 # Other authorizers should subclass this one
+#
+# @abstract
 class ApplicationAuthorizer < Authority::Authorizer
   include ActiveSupport::Configurable
   include SerializableAuthorization
@@ -30,6 +34,13 @@ class ApplicationAuthorizer < Authority::Authorizer
 
   def known_user?(user)
     user.role.present?
+  end
+
+  # @param [User] user
+  def trusted_or_established_user?(user)
+    return false if user.blank?
+
+    user.established? || user.trusted?
   end
 
   # @param [User] user
@@ -196,5 +207,49 @@ class ApplicationAuthorizer < Authority::Authorizer
       user.has_cached_role? role, actual_on
     end
 
+    # Authorizers that should override their create check
+    # in order to ensure that a user has been trusted or
+    # established in the instance in order to create the
+    # associated resource.
+    #
+    # @return [void]
+    def requires_trusted_or_established_user!
+      include RequiresTrustedOrEstablishedUser
+    end
+  end
+
+  # @api private
+  module RequiresTrustedOrEstablishedUser
+    extend ActiveSupport::Concern
+
+    included do
+      prepend RequiresTrustedOrEstablishedUser::WrapperMethods
+    end
+
+    # Override this in authorizers where only certain models
+    # require a reputation in order to create them.
+    #
+    # For instance, public reading groups.
+    # @abstract
+    def requires_reputation_to_create?
+      true
+    end
+
+    # Boolean complement of {#requires_reputation_to_create?},
+    # defined for legibility.
+    def requires_no_reputation_to_create?
+      !requires_reputation_to_create?
+    end
+
+    # This module gets prepended during inclusion
+    #
+    # @api private
+    module WrapperMethods
+      def creatable_by?(user, options = {})
+        return false unless requires_no_reputation_to_create? || trusted_or_established_user?(user)
+
+        super
+      end
+    end
   end
 end

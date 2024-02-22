@@ -1,4 +1,9 @@
+# frozen_string_literal: true
+
+# @see ReadingGroup
 class ReadingGroupAuthorizer < ApplicationAuthorizer
+  requires_trusted_or_established_user!
+
   def creatable_by?(user, _options = {})
     return false unless known_user?(user)
     return false if reading_groups_disabled?
@@ -23,6 +28,11 @@ class ReadingGroupAuthorizer < ApplicationAuthorizer
   end
 
   private
+
+  # Only public reading groups need reputation to create.
+  def requires_reputation_to_create?
+    resource.public?
+  end
 
   def moderator?(user)
     user.has_role?(:moderator, resource)

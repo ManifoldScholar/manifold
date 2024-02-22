@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 RSpec.describe "Text Section Annotations API", type: :request do
+  let_it_be(:creator, refind: true) { FactoryBot.create(:user) }
+  let_it_be(:project, refind: true) { FactoryBot.create(:project, creator: creator) }
+  let_it_be(:text, refind: true) { FactoryBot.create(:text, project: project, creator: creator) }
+  let_it_be(:text_section) { FactoryBot.create(:text_section, text: text) }
+  let_it_be(:resource, refind: true) { FactoryBot.create(:resource, creator: creator, project: project) }
+  let_it_be(:collection, refind: true) { FactoryBot.create(:resource_collection, project: project) }
 
-  let(:project) { FactoryBot.create(:project) }
-  let(:text) { FactoryBot.create(:text, project: project) }
-  let(:text_section) { FactoryBot.create(:text_section, text: text) }
-  let(:resource) { FactoryBot.create(:resource, project: text_section.project) }
-  let(:collection) { FactoryBot.create(:resource_collection, project: text_section.project) }
-  let(:annotation_params) { { attributes: FactoryBot.attributes_for(:annotation) } }
   let(:resource_params) do
     {
-      attributes: FactoryBot.build(:resource_annotation).attributes,
+      attributes: FactoryBot.attributes_for(:resource_annotation, resource: resource, creator: creator),
       relationships: {
         resource: {
           data: {
@@ -24,7 +24,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
 
   let(:collection_params) do
     {
-      attributes: FactoryBot.build(:collection_annotation).attributes,
+      attributes: FactoryBot.attributes_for(:collection_annotation, collection: collection, creator: creator),
       relationships: {
         resource_collection: {
           data: {
@@ -39,74 +39,92 @@ RSpec.describe "Text Section Annotations API", type: :request do
   let(:path) { api_v1_text_relationships_text_section_annotations_path(text_id: text.id, text_section_id: text_section) }
 
   describe "access to public annotations" do
-    let!(:my_public_reading_group) { FactoryBot.create(:reading_group, privacy: "public") }
-    let!(:my_private_reading_group) { FactoryBot.create(:reading_group, privacy: "private") }
-    let!(:my_public_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: my_public_reading_group, user: reader) }
-    let!(:my_private_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: my_private_reading_group, user: reader) }
-    let!(:other_reader_in_my_public_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: my_public_reading_group, user: another_reader) }
-    let!(:other_reader_in_my_private_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: my_private_reading_group, user: another_reader) }
+    let_it_be(:my_public_reading_group) { FactoryBot.create(:reading_group, privacy: "public") }
+    let_it_be(:my_private_reading_group) { FactoryBot.create(:reading_group, privacy: "private") }
+    let_it_be(:my_public_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: my_public_reading_group, user: reader) }
+    let_it_be(:my_private_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: my_private_reading_group, user: reader) }
+    let_it_be(:other_reader_in_my_public_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: my_public_reading_group, user: another_reader) }
+    let_it_be(:other_reader_in_my_private_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: my_private_reading_group, user: another_reader) }
 
-    let!(:other_public_reading_group) { FactoryBot.create(:reading_group, privacy: "public") }
-    let!(:other_private_reading_group) { FactoryBot.create(:reading_group, privacy: "private") }
-    let!(:reader_in_other_public_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: other_public_reading_group, user: another_reader) }
-    let!(:reader_in_other_private_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: other_private_reading_group, user: another_reader) }
+    let_it_be(:other_public_reading_group) { FactoryBot.create(:reading_group, privacy: "public") }
+    let_it_be(:other_private_reading_group) { FactoryBot.create(:reading_group, privacy: "private") }
+    let_it_be(:reader_in_other_public_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: other_public_reading_group, user: another_reader) }
+    let_it_be(:reader_in_other_private_reading_group_membership) { FactoryBot.create(:reading_group_membership, reading_group: other_private_reading_group, user: another_reader) }
 
     # Always Visible
-    let!(:my_private_annotation) { FactoryBot.create(:annotation, text_section: text_section, creator: reader, private: true) }
-    let!(:my_public_annotation) { FactoryBot.create(:annotation, text_section: text_section, creator: reader, private: false) }
-    let!(:my_annotation_in_my_public_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: reader, reading_group: my_public_reading_group) }
-    let!(:my_annotation_in_my_private_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: reader, reading_group: my_private_reading_group) }
+    let_it_be(:my_private_annotation) { FactoryBot.create(:annotation, text_section: text_section, creator: reader, private: true) }
+    let_it_be(:my_public_annotation) { FactoryBot.create(:annotation, text_section: text_section, creator: reader, private: false) }
+    let_it_be(:my_annotation_in_my_public_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: reader, reading_group: my_public_reading_group) }
+    let_it_be(:my_annotation_in_my_private_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: reader, reading_group: my_private_reading_group) }
 
     # Always Hidden
-    let!(:other_private_annotation) { FactoryBot.create(:annotation, text_section: text_section, private: true) }
-    let!(:other_reader_annotation_in_other_private_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: other_private_reading_group) }
+    let_it_be(:other_private_annotation) { FactoryBot.create(:annotation, text_section: text_section, private: true) }
+    let_it_be(:other_reader_annotation_in_other_private_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: other_private_reading_group) }
 
     # Sometimes Visible
-    let!(:other_public_annotation) { FactoryBot.create(:annotation, text_section: text_section, private: false) }
-    let!(:other_reader_annotation_in_my_private_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: my_private_reading_group) }
-    let!(:other_reader_annotation_in_my_public_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: my_public_reading_group) }
-    let!(:other_reader_annotation_in_other_public_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: other_public_reading_group) }
+    let_it_be(:other_public_annotation) { FactoryBot.create(:annotation, text_section: text_section, private: false) }
+    let_it_be(:other_reader_annotation_in_my_private_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: my_private_reading_group) }
+    let_it_be(:other_reader_annotation_in_my_public_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: my_public_reading_group) }
+    let_it_be(:other_reader_annotation_in_other_public_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: other_public_reading_group) }
 
     let(:api_response) { JSON.parse(response.body) }
-    let(:included_ids) { api_response["data"].map { |a| a["id"] } }
+    let(:included_ids) { api_response["data"].pluck("id") }
     let(:path) { api_v1_text_relationships_text_section_annotations_path(text_id: text.id, text_section_id: text_section) }
-    before(:each) { get path, headers: reader_headers }
 
     always_included = %w(my_private_annotation my_public_annotation my_annotation_in_my_public_reading_group my_annotation_in_my_private_reading_group)
     always_excluded = %w(other_private_annotation other_reader_annotation_in_other_private_reading_group)
 
+    def make_the_request!
+      expect do
+        get path, headers: reader_headers
+      end.to execute_safely
+    end
+
     context "when the project has disabled engagement, visible annotations" do
-      let(:project) { FactoryBot.create(:project, disable_engagement: true) }
+      before do
+        project.update! disable_engagement: true
+      end
 
       included_annotations = always_included + %w(other_reader_annotation_in_my_private_reading_group other_reader_annotation_in_my_public_reading_group)
       excluded_annotations = always_excluded + %w(other_public_annotation other_reader_annotation_in_other_public_reading_group)
 
       included_annotations.each do |annotation|
         it "includes #{annotation}" do
+          make_the_request!
+
           expect(included_ids).to include(send(annotation).id)
         end
       end
+
       excluded_annotations.each do |annotation|
         it "excludes #{annotation}" do
+          make_the_request!
+
           expect(included_ids).to_not include(send(annotation).id)
         end
       end
     end
 
     context "when the project has allowed engagement in the collection, visible annotations" do
-      let(:project) { FactoryBot.create(:project, disable_engagement: false) }
+      before do
+        project.update! disable_engagement: false
+      end
 
       included_annotations = always_included + %w(other_public_annotation other_reader_annotation_in_my_private_reading_group other_reader_annotation_in_my_public_reading_group other_reader_annotation_in_other_public_reading_group)
-      excluded_annotations = always_excluded + %w()
+      excluded_annotations = always_excluded
 
       included_annotations.each do |annotation|
         it "includes #{annotation}" do
+          make_the_request!
+
           expect(included_ids).to include(send(annotation).id)
         end
       end
 
       excluded_annotations.each do |annotation|
         it "excludes #{annotation}" do
+          make_the_request!
+
           expect(included_ids).to_not include(send(annotation).id)
         end
       end
@@ -152,13 +170,25 @@ RSpec.describe "Text Section Annotations API", type: :request do
     end
   end
 
-  describe "creates an annotation" do
+  context "when creating an annotation" do
+    let(:annotation_privacy) { :is_public }
+
+    let(:annotation_params) do
+      {
+        attributes: FactoryBot.attributes_for(:annotation, annotation_privacy, creator: creator, text_section: text_section),
+      }
+    end
+
     let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
+
+    let(:params) do
+      build_json_payload(annotation_params)
+    end
 
     context "when the user is a reader" do
       it "has a 201 status code" do
         expect do
-          post path, headers: reader_headers, params: build_json_payload(annotation_params)
+          post path, headers: reader_headers, params: params
         end.to change(Annotation, :count).by(1)
 
         expect(response).to have_http_status(201)
@@ -167,29 +197,81 @@ RSpec.describe "Text Section Annotations API", type: :request do
       it "is rate-limited" do
         expect do
           7.times do
-            post path, headers: reader_headers, params: build_json_payload(annotation_params)
+            post path, headers: reader_headers, params: params
           end
         end.to change(Annotation, :count).by(5)
           .and change(ThrottledRequest, :count).by(1)
 
         expect(response).to have_http_status(503)
       end
-    end
 
-    context "when the user is not authenticated" do
-      before(:each) { post path, params: build_json_payload(annotation_params) }
-      describe "the response" do
-        it "has a 401 status code" do
-          expect(response).to have_http_status(401)
+      context "with spam detection enabled" do
+        before do
+          akismet_enabled!
+          akismet_stub_comment_check!(situation: :spam)
+        end
+
+        context "when the annotation is private" do
+          let(:annotation_privacy) { :is_private }
+
+          it "gets created anyway" do
+            expect do
+              post path, headers: admin_headers, params: params
+            end.to change(Annotation, :count).by(1)
+
+            expect(response).to have_http_status(:created)
+          end
+        end
+
+        context "when the annotation is public" do
+          let(:annotation_privacy) { :is_public }
+
+          it "does not create the annotation" do
+            expect do
+              post path, headers: reader_headers, params: params
+            end.to keep_the_same(Annotation, :count)
+
+            expect(response).to have_http_status(:unprocessable_entity)
+          end
         end
       end
     end
 
+    context "when the user is not authenticated" do
+      it "is not authorized to create an annotation" do
+        expect do
+          post path, params: params
+        end.to keep_the_same(Annotation, :count)
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
     context "when the user is an admin" do
-      before(:each) { post path, headers: admin_headers, params: build_json_payload(annotation_params) }
-      describe "the response" do
-        it "has a 201 status code" do
-          expect(response).to have_http_status(201)
+      it "creates the annotation" do
+        expect do
+          post path, headers: admin_headers, params: params
+        end.to change(Annotation, :count).by(1)
+
+        expect(response).to have_http_status(:created)
+      end
+
+      context "with spam detection enabled" do
+        before do
+          akismet_enabled!
+          akismet_stub_comment_check!(situation: :spam)
+        end
+
+        context "when the annotation is public" do
+          let(:annotation_privacy) { :is_public }
+
+          it "gets created anyway" do
+            expect do
+              post path, headers: admin_headers, params: params
+            end.to change(Annotation, :count).by(1)
+
+            expect(response).to have_http_status(:created)
+          end
         end
       end
     end

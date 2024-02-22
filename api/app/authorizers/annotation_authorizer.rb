@@ -1,9 +1,8 @@
-class AnnotationAuthorizer < ApplicationAuthorizer
+# frozen_string_literal: true
 
-  # There are cases where all users can CRUD annotations.
-  def self.default(_able, _user, _options = {})
-    true
-  end
+# @see Annotation
+class AnnotationAuthorizer < ApplicationAuthorizer
+  requires_trusted_or_established_user!
 
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def creatable_by?(user, _options = {})
@@ -46,6 +45,15 @@ class AnnotationAuthorizer < ApplicationAuthorizer
 
   private
 
+  def trusted_or_established_user?(user)
+    user&.created?(resource) || super
+  end
+
+  # Only public annotations need reputation to create.
+  def requires_reputation_to_create?
+    annotation_is_public?
+  end
+
   def user_can_notate_text?(user)
     resource&.text&.notatable_by? user
   end
@@ -74,4 +82,10 @@ class AnnotationAuthorizer < ApplicationAuthorizer
     resource.reading_group.users.exclude? user
   end
 
+  class << self
+    # There are cases where all users can CRUD annotations.
+    def default(_able, _user, _options = {})
+      true
+    end
+  end
 end

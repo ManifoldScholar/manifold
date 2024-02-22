@@ -105,6 +105,14 @@ class User < ApplicationRecord
 
   alias email_confirmed? email_confirmed
 
+  # This is used to check whether the user is permitted to create certain kinds
+  # of public content.
+  #
+  # For now, it is just based on whether or not they have confirmed their email.
+  def established?
+    email_confirmed?
+  end
+
   def search_data
     {
       search_result_type: search_result_type,
@@ -232,6 +240,10 @@ class User < ApplicationRecord
     update_column :kind, kind if kind_changed?
   ensure
     @synchronizing_global_role = false
+  end
+
+  def trusted?
+    has_any_role?(:admin, :editor, :moderator) || has_role?(:project_editor, :any)
   end
 
   class << self

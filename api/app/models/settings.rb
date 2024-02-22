@@ -30,7 +30,7 @@ class Settings < ApplicationRecord
   has_formatted_attributes :string_data_use_copy, include_wrap: false, container: :theme
   has_formatted_attributes :string_cookies_banner_copy, include_wrap: false, container: :theme
 
-  delegate :default_restricted_access_heading, :default_restricted_access_body, to: :general
+  delegate :default_restricted_access_heading, :default_restricted_access_body, :public_reading_groups_disabled?, to: :general
 
   after_update :update_oauth_providers!
 

@@ -7,6 +7,7 @@ module SettingSections
   #
   # @see SettingSections::Integrations
   class Secrets < Base
+    attribute :akismet_api_key, :string
     attribute :facebook_app_secret, :string
     attribute :google_private_key, :string
     attribute :smtp_settings_password, :string

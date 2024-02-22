@@ -136,6 +136,33 @@ RSpec.describe "Comments API", type: :request do
 
           expect(response).to have_http_status(503)
         end
+
+        context "when the comment is spammy" do
+          before do
+            akismet_enabled!
+            akismet_stub_comment_check!(situation: :spam)
+          end
+
+          it "does not create a comment" do
+            expect do
+              post path, headers: headers, params: params
+            end.to keep_the_same(Comment, :count)
+
+            expect(response).to have_http_status(:unprocessable_entity)
+          end
+        end
+      end
+
+      context "when the user is a reader with an unconfirmed email" do
+        let(:headers) { another_reader_headers }
+
+        it "does not create a comment" do
+          expect do
+            post path, headers: headers, params: params
+          end.to keep_the_same(Comment, :count)
+
+          expect(response).to have_http_status(:forbidden)
+        end
       end
     end
   end

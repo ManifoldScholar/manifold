@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
+# @see Comment
 class CommentAuthorizer < ApplicationAuthorizer
+  requires_trusted_or_established_user!
 
   expose_abilities [:read_deleted]
-
-  def self.default(_able, _user, _options = {})
-    true
-  end
 
   def creatable_by?(user, options = {})
     return comment_is_on_readable_annotation_for?(user) if comment_is_on_annotation?
@@ -44,4 +44,13 @@ class CommentAuthorizer < ApplicationAuthorizer
     resource.on_annotation?
   end
 
+  def trusted_or_established_user?(user)
+    user&.created?(resource) || super
+  end
+
+  class << self
+    def default(_able, _user, _options = {})
+      true
+    end
+  end
 end
