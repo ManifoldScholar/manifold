@@ -31,7 +31,8 @@
       "last_name": "$t(records.makers.last_name)",
       "submit_label": "Save User",
       "unsubscribe": "Unsubscribe",
-      "reset_password": "Reset Password"
+      "reset_password": "Reset Password",
+      "not_established_warning": "This user has not yet verified their email and will not be able to engage with public projects and reading groups."
     },
     "pages": {
       "header": "Manage Pages",

@@ -15,3 +15,9 @@ export const Heading = styled.h4`
   ${headingPrimary}
   margin-block-end: 25px;
 `;
+
+export const NotVerifiedWarning = styled.span`
+  display block;
+  margin-block-end: 25px;
+  color: var(--error-color);
+`;
