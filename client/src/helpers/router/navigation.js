@@ -3,8 +3,13 @@ import memoize from "lodash/memoize";
 // Labels reference i18n keys in /shared/page-titles.json.
 
 class Navigation {
-  static frontend = memoize((authentication, settings) => {
+  static frontend(authentication, settings) {
     if (settings.attributes.general.libraryDisabled) return [];
+
+    const hideRGs =
+      settings.attributes.general.disableReadingGroups ||
+      (!authentication.currentUser &&
+        settings.attributes.general.disablePublicReadingGroups);
 
     return [
       {
@@ -40,12 +45,12 @@ class Navigation {
           }
         ]
       },
-      !settings.attributes.general.disableReadingGroups && {
+      !hideRGs && {
         label: "titles.groups",
         route: "frontendPublicReadingGroups"
       }
     ].filter(x => x);
-  });
+  }
 
   static backend = memoize(() => {
     return [
