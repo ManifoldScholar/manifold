@@ -43,6 +43,13 @@ class Settings < ApplicationRecord
 
   alias google_analytics_enabled? google_analytics_enabled
 
+  # @return [Boolean]
+  def manifold_analytics_enabled
+    !general.disable_internal_analytics?
+  end
+
+  alias manifold_analytics_enabled? manifold_analytics_enabled
+
   # @!endgroup
 
   SECTIONS.each do |section|
@@ -88,7 +95,7 @@ class Settings < ApplicationRecord
       manifold_version: self.class.manifold_version,
       require_terms_and_conditions: Page.by_purpose(:terms_and_conditions).exists?,
       google_analytics_enabled: google_analytics_enabled,
-      manifold_analytics_enabled: integrations["disable_internal_analytics"] != true
+      manifold_analytics_enabled: manifold_analytics_enabled,
     }
   end
 
