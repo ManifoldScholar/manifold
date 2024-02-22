@@ -35,6 +35,9 @@ module V1
         typed_attribute :email_confirmation_sent_at, Types::DateTime.optional.meta(read_only: true), private: true
         typed_attribute :email_confirmed_at, Types::DateTime.optional.meta(read_only: true), private: true
         typed_attribute :email_confirmed, Types::Bool.meta(read_only: true)
+        typed_attribute :established, Types::Bool.meta(read_only: true) do |object|
+          object.established?
+        end
 
         typed_attribute :nickname, Types::String
         typed_attribute :first_name, Types::String
