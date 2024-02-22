@@ -67,7 +67,7 @@ class Annotation < ApplicationRecord
             presence: true,
             inclusion: { in: ANNOTATION_FORMATS }
   validate :valid_subject?
-  validates :body, presence: true, spam: { type: "annotation", if: :public?, on: :create }, if: :annotation?
+  validates :body, presence: true, spam: { type: "annotation", if: :public? }, if: :annotation?
 
   # Delegations
   delegate :id, to: :project, allow_nil: true, prefix: true
