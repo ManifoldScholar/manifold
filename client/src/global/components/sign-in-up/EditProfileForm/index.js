@@ -81,7 +81,12 @@ export default function EditProfileForm({ hideOverlay, mode }) {
         formatData={formatAttributes}
         update={updateUser}
       >
-        <Greeting mode={mode} warn={!currentUser.attributes.established} />
+        <Greeting
+          mode={mode}
+          warn={!currentUser.attributes.established}
+          userId={currentUser.id}
+          hideOverlay={hideOverlay}
+        />
         <h2 className="screen-reader-text">
           {t("forms.signin_overlay.update_sr_title")}
         </h2>

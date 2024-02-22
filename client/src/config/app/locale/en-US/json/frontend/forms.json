@@ -187,7 +187,10 @@
       "terms_header": "First things first...",
       "accept_checkbox_label": "I agree to {{installationName}}'s <privacyLink>privacy policy</privacyLink> and <termsLink>terms and conditions.</termsLink>",
       "accept_checkbox_label_truncated": "I agree to {{installationName}}'s <termsLink>terms and conditions.</termsLink>",
-      "not_verified_warning": "It looks like you haven't verified your email. You will not be able to engage with projects or reading groups on Manifold until you do so."
+      "not_verified_warning": "It looks like you haven't verified your email. You will not be able to engage with projects or reading groups on Manifold until you do so.",
+      "resend_verification": "Resend Verification Email",
+      "email_success_notification": "Verification email sent!",
+      "email_failure_notiication": "Verification email could not be sent. Please try again."
     },
     "attribute_map": {
       "cancel": "Cancel mapping of {{name}} to {{mapping}}",

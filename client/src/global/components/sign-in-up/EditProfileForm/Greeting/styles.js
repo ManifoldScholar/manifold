@@ -18,6 +18,14 @@ export const Heading = styled.h4`
 
 export const NotVerifiedWarning = styled.span`
   display block;
-  margin-block-end: 25px;
   color: var(--error-color);
+`;
+
+export const NotVerifiedWrapper = styled.div`
+  margin-block-end: 60px;
+
+  > * + * {
+    margin-block-start: 20px;
+    width: 100%;
+  }
 `;
