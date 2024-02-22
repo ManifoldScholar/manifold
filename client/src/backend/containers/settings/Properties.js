@@ -211,11 +211,19 @@ export class SettingsPropertiesContainer extends PureComponent {
                   />
                   <Form.Switch
                     wide
-                    label={t("settings.properties.reading_groups_label")}
+                    label={t("settings.properties.public_reading_groups_label")}
                     instructions={t(
-                      "settings.properties.reading_groups_instructions"
+                      "settings.properties.public_reading_groups_instructions"
                     )}
-                    name="attributes[general][disableReadingGroups]"
+                    name="attributes[general][disablePublicReadingGroups]"
+                  />
+                  <Form.Switch
+                    wide
+                    label={t("settings.properties.spam_detection_label")}
+                    instructions={t(
+                      "settings.properties.spam_detection_instructions"
+                    )}
+                    name="attributes[general][disableSpamDetection]"
                   />
                 </Form.FieldGroup>
                 <Form.Save text={t("settings.save")} />

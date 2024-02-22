@@ -53,7 +53,11 @@
       "public_comments_label": "Disable Public Annotations and Comments",
       "public_comments_instructions": "When on, this setting will prevent users from commenting or annotating publicly. All reading groups will behave as private reading groups.",
       "reading_groups_label": "Disable Reading Groups",
-      "reading_groups_instructions": "When on, this setting will prevent users from creating or joining reading groups."
+      "reading_groups_instructions": "When on, this setting will prevent users from creating or joining reading groups.",
+      "public_reading_groups_label": "Disable Public Reading Groups",
+      "public_reading_groups_instructions": "When on, this setting will prevent users from creating public reading groups.",
+      "spam_detection_label": "Disable Spam Detection",
+      "spam_detection_instructions": "Do not use Akisment for spam detection and blocking."
     },
     "theme": {
       "header": "Theme Settings",
