@@ -32,6 +32,8 @@ export const Instructions = styled.span`
   font-size: 17px;
   display: inline-block;
   margin-block-start: 12px;
+
+  ${({ $warning }) => $warning && `color: var(--error-color);`}
 `;
 
 export const ButtonGroup = styled.div`
