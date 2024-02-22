@@ -1,7 +1,6 @@
-shared_examples_for "an API destroy request" do |options|
-  include_context("authenticated request")
-  include_context("param helpers")
+# frozen_string_literal: true
 
+RSpec.shared_examples_for "an API destroy request" do |options|
   api_spec_helper = APIDocs::Helpers::Request.new(options, :destroy)
 
   let(:resource_instance) do

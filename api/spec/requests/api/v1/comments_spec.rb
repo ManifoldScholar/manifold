@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Comments", type: :request do
   context "for an annotation" do
-    let(:parent) { FactoryBot.create(:annotation) }
-    let(:resource) { FactoryBot.create(:comment, subject: parent) }
-    let(:annotation_id) { parent.id }
+    let_it_be(:parent, refind: true) { FactoryBot.create(:annotation) }
+    let_it_be(:resource, refind: true) { FactoryBot.create(:comment, subject: parent) }
+    let_it_be(:annotation_id) { parent.id }
 
     path "/annotations/{annotation_id}/relationships/comments/{id}" do
       include_examples "an API show request", parent: "annotation", model: Comment, url_parameters: [:annotation_id]
@@ -19,9 +21,9 @@ RSpec.describe "Comments", type: :request do
   end
 
   context "for a resource" do
-    let(:parent) { FactoryBot.create(:resource) }
-    let(:resource) { FactoryBot.create(:comment, subject: parent) }
-    let(:resource_id) { parent.id }
+    let_it_be(:parent, refind: true) { FactoryBot.create(:resource) }
+    let_it_be(:resource, refind: true) { FactoryBot.create(:comment, subject: parent) }
+    let_it_be(:resource_id) { parent.id }
 
     path "/resources/{resource_id}/relationships/comments/{id}" do
       include_examples "an API show request", parent: "resource", model: Comment, url_parameters: [:resource_id]
@@ -42,9 +44,9 @@ RSpec.describe "Comments", type: :request do
 
   describe "when taking the form of a flag" do
     context "when attached to a comment" do
-      let!(:comment) { FactoryBot.create(:comment, creator: admin) }
-      let!(:comment_id) { comment.id }
-      let!(:flag) { FactoryBot.create(:flag, flaggable: comment, creator: admin) }
+      let_it_be(:comment, refind: true) { FactoryBot.create(:comment, creator: admin) }
+      let_it_be(:comment_id) { comment.id }
+      let_it_be(:flag, refind: true) { FactoryBot.create(:flag, flaggable: comment, creator: admin) }
 
       path "/comments/{comment_id}/relationships/flags" do
         include_examples "an API create request",

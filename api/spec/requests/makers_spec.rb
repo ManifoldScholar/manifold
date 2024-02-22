@@ -1,10 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Makers API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:maker) { FactoryBot.create(:maker) }
 
   describe "sends a list of makers" do

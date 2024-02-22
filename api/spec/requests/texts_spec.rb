@@ -1,10 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Texts API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   describe "sends a list of texts" do
     let(:path) { api_v1_texts_path }
     before(:each) { get path }

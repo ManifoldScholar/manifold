@@ -1,10 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Subject API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:subject_a) { FactoryBot.create(:subject) }
   let(:subject_b) { FactoryBot.create(:subject, name: "Rowan") }
 

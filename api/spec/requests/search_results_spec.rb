@@ -1,8 +1,8 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Search Results API", elasticsearch: true, type: :request do
-  let!(:bovary) { FactoryBot.create :project, title: "Madame Bovary", description: "The force will be with you, always" }
-  let!(:babble) { FactoryBot.create :project, title: "Madame Babble", description: "Peace be with you" }
+  let_it_be(:bovary, refind: true) { FactoryBot.create :project, title: "Madame Bovary", description: "The force will be with you, always" }
+  let_it_be(:babble, refind: true) { FactoryBot.create :project, title: "Madame Babble", description: "Peace be with you" }
 
   before do
     bovary && babble

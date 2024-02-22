@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Tokens API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   describe "creates a token" do
     let(:path) { api_v1_tokens_path }
     let(:params) { { email: reader.email, password: password } }

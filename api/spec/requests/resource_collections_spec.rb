@@ -1,18 +1,12 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Resource Collections API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:collection) { FactoryBot.create(:resource_collection) }
 
   describe "updates a collection" do
-
     let(:path) { api_v1_resource_collection_path(collection) }
 
     context "when the user is an admin" do
-
       let(:headers) { admin_headers }
 
       describe "the response" do
@@ -29,7 +23,6 @@ RSpec.describe "Resource Collections API", type: :request do
     end
 
     describe "destroys a collection" do
-
       let(:path) { api_v1_resource_collection_path(collection) }
 
       context "when the user is an admin" do
@@ -43,7 +36,6 @@ RSpec.describe "Resource Collections API", type: :request do
       end
 
       context "when the user is a reader" do
-
         let(:headers) { reader_headers }
 
         it "has a 403 FORBIDDEN status code" do
@@ -53,5 +45,4 @@ RSpec.describe "Resource Collections API", type: :request do
       end
     end
   end
-
 end

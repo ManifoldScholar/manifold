@@ -1,11 +1,8 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "ProjectCollection CollectionProject API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
-  let(:project_collection) { FactoryBot.create(:project_collection) }
-  let(:project) { FactoryBot.create(:project) }
+  let_it_be(:project_collection, refind: true) { FactoryBot.create(:project_collection) }
+  let_it_be(:project, refind: true) { FactoryBot.create(:project) }
 
   describe "creates a new CollectionProject for the ProjectCollection" do
     let(:path) { api_v1_project_collection_relationships_collection_projects_path(project_collection) }

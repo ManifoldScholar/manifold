@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Annotations", type: :request do
@@ -11,9 +13,9 @@ RSpec.describe "Annotations", type: :request do
   end
 
   describe "for a text section" do
-    let!(:parent) { FactoryBot.create(:text_section) }
-    let!(:text_section_id) { parent.id }
-    let!(:text_id) { parent.text.id }
+    let_it_be(:parent, refind: true) { FactoryBot.create(:text_section) }
+    let_it_be(:text_section_id) { parent.id }
+    let_it_be(:text_id) { parent.text.id }
 
     path "/texts/{text_id}/relationships/text_sections/{text_section_id}/annotations" do
       include_examples "an API index request",
@@ -40,9 +42,9 @@ RSpec.describe "Annotations", type: :request do
   end
 
   describe "for me" do
-    let!(:text) { FactoryBot.create :text }
-    let!(:text_section) { FactoryBot.create(:text_section, text: text) }
-    let!(:annotation) do
+    let_it_be(:text, refind: true) { FactoryBot.create :text }
+    let_it_be(:text_section, refind: true) { FactoryBot.create(:text_section, text: text) }
+    let_it_be(:annotation, refind: true) do
       FactoryBot.create(:annotation, creator: admin, text_section: text_section)
     end
 
@@ -67,9 +69,9 @@ RSpec.describe "Annotations", type: :request do
   end
 
   describe "for a reading group" do
-    let!(:parent) { FactoryBot.create(:reading_group) }
-    let!(:annotation) { FactoryBot.create(:annotation, reading_group: parent) }
-    let!(:reading_group_id) { parent.id }
+    let_it_be(:parent, refind: true) { FactoryBot.create(:reading_group) }
+    let_it_be(:annotation, refind: true) { FactoryBot.create(:annotation, reading_group: parent) }
+    let_it_be(:reading_group_id) { parent.id }
 
     path "/reading_groups/{reading_group_id}/relationships/annotations" do
       include_examples "an API index request",
@@ -82,9 +84,9 @@ RSpec.describe "Annotations", type: :request do
   end
 
   context "when managing flagging" do
-    let!(:annotation) { FactoryBot.create(:annotation, creator: admin) }
-    let!(:annotation_id) { annotation.id }
-    let!(:flag) { FactoryBot.create(:flag, creator: admin, flaggable: annotation) }
+    let_it_be(:annotation, refind: true) { FactoryBot.create(:annotation, creator: admin) }
+    let_it_be(:annotation_id) { annotation.id }
+    let_it_be(:flag, refind: true) { FactoryBot.create(:flag, creator: admin, flaggable: annotation) }
 
     path "/annotations/{annotation_id}/relationships/flags" do
       include_examples "an API create request",

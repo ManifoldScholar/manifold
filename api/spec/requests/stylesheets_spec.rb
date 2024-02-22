@@ -1,25 +1,21 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Stylesheets API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
-  let(:attributes) {
+  let(:attributes) do
     {
       name: "Rambo Stylez",
       rawStyles: ".some-class {\n    font-weight: bold;\n}",
       position: 1
     }
-  }
-  let(:valid_params) {
-    build_json_payload(attributes: attributes)
-  }
+  end
 
-  let(:text) { FactoryBot.create(:text) }
+  let(:valid_params) do
+    build_json_payload(attributes: attributes)
+  end
+
+  let_it_be(:text, refind: true) { FactoryBot.create(:text) }
 
   describe "creates an stylesheet" do
-
     let(:path) { api_v1_text_relationships_stylesheets_path(text) }
     let(:api_response) { JSON.parse(response.body) }
 
@@ -63,7 +59,6 @@ RSpec.describe "Stylesheets API", type: :request do
   end
 
   describe "destroys a stylesheet" do
-
     let(:stylesheet) { FactoryBot.create(:stylesheet, text: text, creator: admin, position: 1) }
     let(:path) { api_v1_stylesheet_path(stylesheet) }
 
@@ -89,7 +84,6 @@ RSpec.describe "Stylesheets API", type: :request do
   end
 
   describe "sends a single stylesheet" do
-
     let(:stylesheet) { FactoryBot.create(:stylesheet, text: text, creator: admin, position: 1) }
     let(:path) { api_v1_stylesheet_path(stylesheet) }
 
@@ -111,5 +105,4 @@ RSpec.describe "Stylesheets API", type: :request do
       end
     end
   end
-
 end

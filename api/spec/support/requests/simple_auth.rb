@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context "simple auth request" do
   let(:current_user) { FactoryBot.create :user }
 

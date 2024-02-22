@@ -1,8 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Me API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
   let(:path) { api_v1_me_path }
 
   describe "updates the current user" do

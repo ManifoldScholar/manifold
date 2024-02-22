@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "My Annotations API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:another_user) { FactoryBot.create(:user) }
   let(:text) { FactoryBot.create(:text) }
   let(:text_section) { FactoryBot.create(:text_section, text: text) }

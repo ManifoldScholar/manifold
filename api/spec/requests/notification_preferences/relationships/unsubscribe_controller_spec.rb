@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "NotificationPreferences Unsubscribe API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
   let(:user) { FactoryBot.create(:user) }
   let(:token) { UnsubscribeToken.generate user }
 
@@ -16,5 +13,4 @@ RSpec.describe "NotificationPreferences Unsubscribe API", type: :request do
       end
     end
   end
-
 end

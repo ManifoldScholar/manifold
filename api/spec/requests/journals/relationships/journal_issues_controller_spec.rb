@@ -1,10 +1,7 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Journal JournalIssues API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
-  let(:journal) { FactoryBot.create(:journal) }
+  let_it_be(:journal, refind: true) { FactoryBot.create(:journal) }
 
   describe "creates a journal issue" do
     let(:path) { api_v1_journal_relationships_journal_issues_path(journal) }
@@ -14,7 +11,7 @@ RSpec.describe "Journal JournalIssues API", type: :request do
 
       context "when a project is provided" do
         let(:project) { FactoryBot.create(:project) }
-        let(:params) {
+        let(:params) do
           {
             attributes: { number: 1 },
             relationships: {
@@ -26,7 +23,7 @@ RSpec.describe "Journal JournalIssues API", type: :request do
               }
             }
           }
-        }
+        end
 
         describe "the response" do
           it "has a 201 CREATED status code" do
@@ -37,11 +34,11 @@ RSpec.describe "Journal JournalIssues API", type: :request do
       end
 
       context "when no project is provided" do
-        let(:params) {
+        let(:params) do
           {
             attributes: { number: "1", pendingSlug: "test" }
           }
-        }
+        end
 
         describe "the response" do
           it "has a 201 CREATED status code" do
@@ -50,7 +47,6 @@ RSpec.describe "Journal JournalIssues API", type: :request do
           end
         end
       end
-
     end
   end
 end

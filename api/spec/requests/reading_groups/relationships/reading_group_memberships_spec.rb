@@ -1,10 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Reading Group Memberships API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:members_per_group) { 3 }
 
   before(:each) do
@@ -18,7 +14,6 @@ RSpec.describe "Reading Group Memberships API", type: :request do
 
   describe "sends a list of reading group memberships" do
     describe "the response" do
-
       let(:headers) { reader_headers }
 
       before(:each) do
@@ -38,10 +33,6 @@ RSpec.describe "Reading Group Memberships API", type: :request do
         data = JSON.parse(response.body)["data"]
         expect(data.length).to eq members_per_group
       end
-
-   end
+    end
   end
-
-
-
 end

@@ -1,10 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Pages API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   describe "sends a page" do
     describe "the response" do
       it "has a 200 status code" do
@@ -13,5 +9,4 @@ RSpec.describe "Pages API", type: :request do
       end
     end
   end
-
 end

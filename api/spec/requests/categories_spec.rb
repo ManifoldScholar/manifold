@@ -1,12 +1,7 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Categories API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
-
   describe "sends a category" do
-
     let(:category) { FactoryBot.create(:category, role: Category::ROLE_TEXT) }
 
     describe "the response" do
@@ -17,10 +12,7 @@ RSpec.describe "Categories API", type: :request do
     end
   end
 
-
-
   describe "updates a text" do
-
     it_should_behave_like "orderable api requests" do
       let(:path) { "api_v1_category_path" }
       let!(:object_a) { FactoryBot.create(:category, position: 1) }

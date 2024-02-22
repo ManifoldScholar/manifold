@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe "Email Confirmations" do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let!(:user) { FactoryBot.create :user, password: password, password_confirmation: password }
 
   context "GET /api/v1/email_confirmations/:user_id" do

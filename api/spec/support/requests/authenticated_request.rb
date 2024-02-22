@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.shared_context "authenticated request" do
   def token(user, _password)
     AuthToken.encode_user(user)
@@ -31,6 +29,7 @@ RSpec.shared_context "authenticated request" do
       User.find_by(email: public_send("#{role}_email")) || FactoryBot.create(
         :user,
         role.to_sym,
+        :with_confirmed_email,
         email: public_send("#{role}_email"),
         password: password,
         password_confirmation: password,
@@ -42,19 +41,27 @@ RSpec.shared_context "authenticated request" do
     let(:"#{role}_auth") { build_bearer_token public_send(:"#{role}_token") }
   end
 
-  let(:another_reader_email) { "another-reader@castironcoding.com" }
-  let(:another_reader) { FactoryBot.create(:user, :reader, email: another_reader_email, password: password, password_confirmation: password) }
+  let_it_be(:another_reader_email) { "another-reader@castironcoding.com" }
+  let_it_be(:another_reader, refind: true) do
+    User.find_by(email: another_reader_email) || FactoryBot.create(
+      :user, :reader, email: another_reader_email, password: password, password_confirmation: password
+    )
+  end
   let(:another_reader_token) { token(another_reader, password) }
   let(:another_reader_headers) { build_headers(another_reader_token) }
 
-  let(:author_email) { "project_author@castironcoding.com" }
-  let(:authored_project) { FactoryBot.create :project }
-  let(:author) do
-    FactoryBot.create(:user, email: author_email, password: password, password_confirmation: password).tap do |author|
+  let_it_be(:author_email) { "project_author@castironcoding.com" }
+  let_it_be(:authored_project, refind: true) { FactoryBot.create :project }
+  let_it_be(:author, refind: true) do
+    User.find_by(email: author_email) || FactoryBot.create(:user, :with_confirmed_email, email: author_email, password: password, password_confirmation: password).tap do |author|
       author.add_role :project_author, authored_project
     end
   end
   let(:author_token) { token author, password }
   let(:author_headers) { build_headers author_token }
   let(:author_auth) { build_bearer_token author_headers }
+end
+
+RSpec.configure do |config|
+  config.include_context "authenticated request", type: :request
 end

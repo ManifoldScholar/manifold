@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "ProjectExportations API", type: :request do
-  include_context "authenticated request"
-  include_context "param helpers"
-
   let(:request_method) { raise "must set request method" }
 
   def expect_making_the_request(method: request_method, path: request_path, headers: admin_headers, **options)

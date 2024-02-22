@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe "Pending Entitlements API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   context "when fetching entitlements" do
     let(:filter) do
       {}

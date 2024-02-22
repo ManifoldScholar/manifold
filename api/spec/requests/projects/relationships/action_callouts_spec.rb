@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Project ActionCallout API", type: :request do
-  include_context("authenticated request")
-  include_context("param helpers")
-
   let(:project) { FactoryBot.create(:project) }
 
   describe "sends a list of project call to actions" do
@@ -50,5 +47,4 @@ RSpec.describe "Project ActionCallout API", type: :request do
       end
     end
   end
-
 end

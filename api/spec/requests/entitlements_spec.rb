@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Entitlements API", type: :request do
-  include_context "authenticated request"
-  include_context "param helpers"
-
   let(:request_method) { raise "must set request method" }
 
   let!(:target_user) { FactoryBot.create :user }

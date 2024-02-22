@@ -1,9 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe "Project Uncollected Resorces API", type: :request do
-
-  include_context("authenticated request")
-  include_context("param helpers")
   let(:project) { FactoryBot.create(:project) }
 
   describe "sends a list of uncollected project resources" do
@@ -15,5 +12,4 @@ RSpec.describe "Project Uncollected Resorces API", type: :request do
       end
     end
   end
-
 end

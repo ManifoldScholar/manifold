@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Action Callouts", type: :request do
@@ -54,5 +56,4 @@ RSpec.describe "Action Callouts", type: :request do
                        description: conditional_requirements
     end
   end
-
 end
