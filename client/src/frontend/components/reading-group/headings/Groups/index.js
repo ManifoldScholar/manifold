@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { Navigation, Title } from "../parts";
+import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 function GroupsHeading({ currentUser }) {
@@ -21,24 +22,36 @@ function GroupsHeading({ currentUser }) {
     }
   ];
 
+  const {
+    attributes: {
+      general: { disablePublicReadingGroups }
+    }
+  } = useFromStore("settings", "select");
+
   return (
     <header>
       <Styled.Container>
         <Styled.Flex>
-          {!currentUser && (
+          {!currentUser ? (
             <Title
               title={t("navigation.reading_group.public_groups")}
               icon="annotationGroup24"
             />
-          )}
-          {currentUser && (
+          ) : (
             <>
-              <Navigation
-                ariaLabel={t("navigation.reading_group.label")}
-                links={links}
-                layout="flex"
-                padLinks
-              />
+              {disablePublicReadingGroups ? (
+                <Title
+                  title={t("navigation.reading_group.my_groups")}
+                  icon="annotationGroup24"
+                />
+              ) : (
+                <Navigation
+                  ariaLabel={t("navigation.reading_group.label")}
+                  links={links}
+                  layout="flex"
+                  padLinks
+                />
+              )}
               <Styled.CreateButton
                 to={lh.link("frontendMyReadingGroupsNew")}
                 className="button-tertiary"
