@@ -2,6 +2,79 @@
 ENV["RAILS_ENV"] ||= "test"
 require "spec_helper"
 
+require "simplecov"
+
+SimpleCov.start "rails" do
+  project_name "Manifold"
+
+  enable_coverage :branch
+
+  add_filter "app/models/concerns/arel_helpers.rb"
+  add_filter "app/services/system_upgrades/upgrades"
+  add_filter "app/services/demonstration"
+  add_filter "app/services/importer"
+  add_filter "app/services/testing"
+  add_filter "lib/generators"
+  add_filter "lib/paperclip_migrator.rb"
+  add_filter "lib/patches/better_enums.rb"
+  add_filter "lib/patches/better_interactions.rb"
+  add_filter "lib/templates"
+
+  add_group "Authorizers", %w[
+    app/authorizers
+  ]
+
+  add_group "Decorators", %w[
+    app/decorators
+  ]
+
+  add_group "Enums", %w[app/enums]
+
+  add_group "Fingerprinting", %w[
+    app/jobs/fingerprints
+    app/models/concerns/calculates_fingerprints.rb
+    app/models/concerns/stores_fingerprints.rb
+    app/services/collaborators/calculate_fingerprint.rb
+    app/services/fingerprints
+    app/services/fingerprints.rb
+    app/services/texts/calculate_fingerprint.rb
+    app/services/text_sections/calculate_fingerprint.rb
+    app/services/text_titles/calculate_fingerprint.rb
+  ]
+
+  add_group "Ingestion", %w[
+    app/models/ingestion.rb
+    app/models/ingestion_source.rb
+    app/services/ingestions
+  ]
+
+  add_group "Packaging", %w[
+    app/enums/core_media_type_kind.rb
+    app/enums/export_kind.rb
+    app/enums/referenced_path_strategy.rb
+    app/enums/source_node_kind.rb
+    app/jobs/packaging
+    app/jobs/text_exports/prune_job.rb
+    app/jobs/texts/automate_exports_job.rb
+    app/models/cached_external_source.rb
+    app/models/cached_external_source_link.rb
+    app/models/text_export.rb
+    app/models/text_export_status.rb
+    app/services/cached_external_sources
+    app/services/html_nodes
+    app/services/packaging
+    app/services/text_exports/prune.rb
+    app/services/texts/automate_exports.rb
+    app/services/epub_check.rb
+  ]
+
+  add_group "Patches", %w[lib/patches]
+
+  add_group "Serializers", %w[app/serializers]
+
+  add_group "Services", %w[app/services]
+end
+
 require File.expand_path("../config/environment", __dir__)
 
 require "rspec/rails"
@@ -41,6 +114,8 @@ TestProf::FactoryDefault.configure do |config|
   config.preserve_attributes = true
   config.preserve_traits = true
 end
+
+Rails.application.eager_load!
 
 RSpec.configure do |config|
   config.include TestHelpers
