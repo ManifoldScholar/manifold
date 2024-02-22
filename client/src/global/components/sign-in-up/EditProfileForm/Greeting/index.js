@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { FormContext } from "helpers/contexts";
+import ResendEmailConfirm from "../ResendEmailConfirm";
 import * as Styled from "./styles";
 
-export default function ProfileGreeting({ mode, warn }) {
+export default function ProfileGreeting({ mode, warn, userId, hideOverlay }) {
   const formData = useContext(FormContext);
   const nickname = formData.getModelValue("attributes[nickname]");
 
@@ -30,9 +31,12 @@ export default function ProfileGreeting({ mode, warn }) {
         />
       </Styled.Heading>
       {warn && (
-        <Styled.NotVerifiedWarning>
-          {t("forms.signin_overlay.not_verified_warning")}
-        </Styled.NotVerifiedWarning>
+        <Styled.NotVerifiedWrapper>
+          <Styled.NotVerifiedWarning>
+            {t("forms.signin_overlay.not_verified_warning")}
+          </Styled.NotVerifiedWarning>
+          <ResendEmailConfirm id={userId} hideOverlay={hideOverlay} />
+        </Styled.NotVerifiedWrapper>
       )}
     </>
   );
@@ -42,5 +46,7 @@ ProfileGreeting.displayName = "Global.SignInUp.EditProfileForm.Greeting";
 
 ProfileGreeting.propTypes = {
   mode: PropTypes.oneOf(["new", "existing"]),
-  nickname: PropTypes.string
+  userId: PropTypes.string,
+  hideOverlay: PropTypes.func,
+  warn: PropTypes.bool
 };
