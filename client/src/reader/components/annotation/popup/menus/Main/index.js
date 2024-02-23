@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useCurrentUser } from "hooks";
 import PropTypes from "prop-types";
 import Menu from "../../parts/Menu";
 import MenuItems from "./Items";
@@ -21,6 +22,19 @@ function MainMenu({
     ...restProps
   };
   const { t } = useTranslation();
+  const currentUser = useCurrentUser();
+
+  const { readingGroups, currentReadingGroup } = itemProps;
+
+  // Users who are neither trusted nor established cannot create public annotations or highlights.
+  const isPublic =
+    currentReadingGroup === "public" ||
+    readingGroups.find(group => group.id === currentReadingGroup)?.attributes
+      ?.privacy === "public";
+  const established = currentUser?.attributes.established;
+  const trusted = currentUser?.attributes.trusted;
+
+  const permitAnnotation = established || trusted || !isPublic;
 
   return (
     <Menu
@@ -33,9 +47,13 @@ function MainMenu({
       onKeyDown={onKeyDown}
     >
       <MenuItems.Share {...itemProps} onClick={() => openSubmenu("share")} />
-      <MenuItems.Notate {...itemProps} />
-      <MenuItems.Annotate {...itemProps} />
-      <MenuItems.Highlight {...itemProps} />
+      {permitAnnotation && (
+        <>
+          <MenuItems.Notate {...itemProps} />
+          <MenuItems.Annotate {...itemProps} />
+          <MenuItems.Highlight {...itemProps} />
+        </>
+      )}
       <MenuItems.CurrentReadingGroup
         {...itemProps}
         onClick={() => openSubmenu("readingGroup")}
