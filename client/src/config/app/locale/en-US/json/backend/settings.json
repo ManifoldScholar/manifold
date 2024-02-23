@@ -52,12 +52,13 @@
       "home_redirect_instructions": "If set, this URL will be used instead of the Library Page Redirect URL for requests to the Manifold home page.",
       "public_comments_label": "Disable Public Annotations and Comments",
       "public_comments_instructions": "When on, this setting will prevent users from commenting or annotating publicly. All reading groups will behave as private reading groups.",
-      "reading_groups_label": "Disable Reading Groups",
+      "reading_groups_label": "Disable All Reading Groups",
       "reading_groups_instructions": "When on, this setting will prevent users from creating or joining reading groups.",
       "public_reading_groups_label": "Disable Public Reading Groups",
-      "public_reading_groups_instructions": "When on, this setting will prevent users from creating public reading groups.",
+      "public_reading_groups_instructions": "When on, this setting will prevent users from creating public reading groups. Members of existing public reading groups will still see those groups in their reading group lists.",
       "spam_detection_label": "Disable Spam Detection",
-      "spam_detection_instructions": "Do not use Akisment for spam detection and blocking."
+      "spam_detection_instructions": "Do not use Akisment for spam detection and blocking.",
+      "akismet_key_label": "Akismet API Key"
     },
     "theme": {
       "header": "Theme Settings",
