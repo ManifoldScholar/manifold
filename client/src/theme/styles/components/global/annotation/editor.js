@@ -203,13 +203,13 @@ export default `
         border-radius: var(--box-border-radius);
 
         &:disabled {
-          color: inherit;
-          background-color: var(--color-accent-primary-dull);
+          color: var(--color-base-neutral75);
+          background-color: var(--color-base-neutral05);
           cursor: default;
         }
 
-        &:active,
-        &:hover {
+        &:active:not(:disabled),
+        &:hover:not(:disabled) {
           color: inherit;
         }
       }

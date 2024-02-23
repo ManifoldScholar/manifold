@@ -11,6 +11,7 @@ import RGMenuItem from "reader/components/annotation/popup/parts/RGMenuItem";
 import { ReaderContext } from "helpers/contexts";
 import withCurrentUser from "hoc/withCurrentUser";
 import withReadingGroups from "hoc/withReadingGroups";
+import * as Styled from "./styles";
 
 class AnnotationEditor extends PureComponent {
   static displayName = "Annotation.Editor";
@@ -111,6 +112,27 @@ class AnnotationEditor extends PureComponent {
     return currentGroup.attributes.name;
   }
 
+  get showUnverifiedMessage() {
+    const established = this.props.currentUser?.attributes.established;
+
+    if (established) return false;
+
+    const currentGroup = this.props.currentAnnotatingReadingGroup;
+
+    if (currentGroup === "private") return false;
+    if (currentGroup === "public") return true;
+
+    if (currentGroup?.attributes.privacy === "public") return true;
+
+    return false;
+  }
+
+  get disableSubmit() {
+    if (/^\s*$/.test(this.state.body)) return true;
+
+    return this.showUnverifiedMessage;
+  }
+
   setReadingGroupFromAnnotationEdit() {
     const { annotation } = this.props;
     if (annotation.attributes.readingGroupId) {
@@ -122,14 +144,16 @@ class AnnotationEditor extends PureComponent {
     }
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
+
     const {
       currentAnnotatingReadingGroup,
       closeOnSave,
       saveAnnotation,
       annotation
     } = this.props;
+
     const { errorsIgnored, ...attributes } = this.state;
     const mutableAttributes = { ...attributes };
     mutableAttributes.private = currentAnnotatingReadingGroup === "private";
@@ -143,18 +167,13 @@ class AnnotationEditor extends PureComponent {
     }
     const updatedAnnotation = { ...annotation, attributes: mutableAttributes };
 
-    const promise = saveAnnotation(updatedAnnotation);
-    if (closeOnSave && promise) {
-      promise.then(
-        () => {
-          this.handleCancel();
-        },
-        () => {}
-      );
+    try {
+      await saveAnnotation(updatedAnnotation);
+
+      if (closeOnSave) this.handleCancel();
+    } catch (err) {
+      this.handleErrors(err.body.errors);
     }
-    promise.catch(response => {
-      this.handleErrors(response.body.errors);
-    });
   };
 
   handleBodyChange = event => {
@@ -348,12 +367,20 @@ class AnnotationEditor extends PureComponent {
                   {t("actions.cancel")}
                 </span>
               </button>
-              <button className="button-secondary" disabled={!this.state.body}>
+              <button
+                className="button-secondary"
+                disabled={this.disableSubmit}
+              >
                 {t("actions.save")}
               </button>
             </div>
           </div>
         </form>
+        {this.showUnverifiedMessage && (
+          <Styled.UnverifiedMessage>
+            To publicly annotate texts you must first verify your email
+          </Styled.UnverifiedMessage>
+        )}
       </div>
     );
   }
