@@ -41,6 +41,10 @@
     "thumbnail_change": "Changing this will remove the {{label}}'s current avatar image",
     "thumbnail_change_body": "Do you wish to proceed?",
     "unsubscribe": "Are you sure?",
-    "unsubscribe_body": "This user will be unsubscribed from all Manifold email notifications."
+    "unsubscribe_body": "This user will be unsubscribed from all Manifold email notifications.",
+    "unverify": "Are you sure you want to revoke verification?",
+    "unverify_body": "This user will no longer be able to annotate, comment, or create reading groups until they are verified by another admin or complete email verification.",
+    "verify": "Are you sure you want to verify this user?",
+    "verify_body": "Verified users can annotate and comment on Manifold texts and create public reading groups."
   }
 }

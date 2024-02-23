@@ -105,6 +105,24 @@ export class UsersEditContainer extends PureComponent {
     });
   };
 
+  verifyUser = () => {
+    const t = this.props.t;
+    const verified = this.user.attributes.admin_verified;
+    const heading = verified ? t("modals.unverify") : t("modals.verify");
+    const message = verified
+      ? t("modals.unverify_body")
+      : t("modals.verify_body");
+    this.props.confirm(heading, message, () => {
+      const adjustedUser = { ...this.user };
+      adjustedUser.attributes.admin_verified = !verified;
+
+      const call = usersAPI.update(this.user.id, adjustedUser);
+      const options = { notificationScope: "drawer" };
+      const userRequest = request(call, requests.beUserUpdate, options);
+      return this.props.dispatch(userRequest);
+    });
+  };
+
   closeResetDialog() {
     this.setState({ resetPassword: null });
   }
@@ -146,14 +164,21 @@ export class UsersEditContainer extends PureComponent {
           title={`${attr.firstName} ${attr.lastName}`}
           buttons={[
             {
-              onClick: this.handleResetPasswordClick,
-              icon: "key32",
-              label: t("records.users.reset_password")
+              onClick: this.verifyUser,
+              icon: "privacy24",
+              label: user.attributes.admin_verified
+                ? t("records.users.block")
+                : t("records.users.verify")
             },
             {
               onClick: this.unsubscribeUser,
               icon: "mail32",
               label: t("records.users.unsubscribe")
+            },
+            {
+              onClick: this.handleResetPasswordClick,
+              icon: "key32",
+              label: t("records.users.reset_password")
             },
             {
               onClick: this.handleUserDestroy,
@@ -164,6 +189,7 @@ export class UsersEditContainer extends PureComponent {
           ]}
           instructions={t("records.users.not_established_warning")}
           instructionsAreWarning
+          buttonLayout="grid"
         />
 
         <section>
