@@ -100,9 +100,24 @@ RSpec.describe "Annotation Abilities", :authorizer do
           subject.clear_email_confirmation!
         end
 
-        abilities = { create: false, read: true, update: false, delete: false }
+        abilities = { create: true, read: true, update: false, delete: false }
 
         the_subject_behaves_like "instance abilities", Annotation, abilities
+
+        context "when the subject is the resource creator" do
+          before do
+            FactoryBot.create(:reading_group_membership, reading_group: reading_group, user: creator)
+
+            reading_group.reload
+          end
+
+          let_it_be(:subject, refind: true) { creator }
+
+          abilities = { create: true, read: true, update: true, delete: true }
+
+          the_subject_behaves_like "instance abilities", Annotation, abilities
+        end
+
       end
     end
 

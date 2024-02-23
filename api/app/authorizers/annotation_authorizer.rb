@@ -47,7 +47,10 @@ class AnnotationAuthorizer < ApplicationAuthorizer
 
   # Only public annotations need reputation to create.
   def requires_reputation_to_create?
-    annotation_is_public?
+    return true if annotation_is_public? && !annotation_in_reading_group?
+    return true if annotation_in_reading_group? && !reading_group_is_private?
+
+    false
   end
 
   def user_can_notate_text?(user)
