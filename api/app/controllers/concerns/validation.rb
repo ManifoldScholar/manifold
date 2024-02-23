@@ -36,7 +36,7 @@ module Validation
                   persistent_ui, notification_preferences_by_kind, :unsubscribe,
                   :consent_manifold_analytics, :consent_google_analytics,
                   :terms_and_conditions_accepted_at]
-    attributes << :role if current_user&.admin?
+    attributes += %i[admin_verified role] if current_user&.admin?
     relationships = [:makers]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
