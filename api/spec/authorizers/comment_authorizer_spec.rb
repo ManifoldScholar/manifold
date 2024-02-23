@@ -4,6 +4,14 @@ RSpec.describe "Comment Abilities", :authorizer do
   let_it_be(:creator, refind: true) { FactoryBot.create(:user, :reader) }
   let_it_be(:object, refind: true) { FactoryBot.create(:comment, creator: creator) }
 
+  context "when the subject is an anonymous user" do
+    let_it_be(:subject) { AnonymousUser.new }
+
+    the_subject_behaves_like "instance abilities", Comment, create: false, read: true, update: false, delete: false
+
+    the_subject_behaves_like "class abilities", Comment, create: false, read: true, update: false, destroy: false
+  end
+
   context "when the subject is an admin" do
     let_it_be(:subject, refind: true) { FactoryBot.create(:user, :admin) }
 
@@ -13,8 +21,7 @@ RSpec.describe "Comment Abilities", :authorizer do
   context "when the subject is an editor" do
     let_it_be(:subject, refind: true) { FactoryBot.create(:user, :editor) }
 
-    abilities = { create: true, read: true, update: false, delete: true }
-    the_subject_behaves_like "instance abilities", Comment, abilities
+    the_subject_behaves_like "instance abilities", Comment, create: true, read: true, update: false, delete: true
   end
 
   context "when the subject is a reader" do
@@ -25,24 +32,27 @@ RSpec.describe "Comment Abilities", :authorizer do
         subject.mark_email_confirmed!
       end
 
-      abilities = { create: true, read: true, update: false, delete: false }
-      the_subject_behaves_like "instance abilities", Comment, abilities
+      the_subject_behaves_like "instance abilities", Comment, create: true, read: true, update: false, delete: false
+
+      the_subject_behaves_like "class abilities", Comment, create: true, read: true, update: true, destroy: true
+
     end
 
     context "with an unconfirmed email" do
       before do
-        subject.prepare_email_confirmation!
+        subject.clear_email_confirmation!
       end
 
-      abilities = { create: false, read: true, update: false, delete: false }
-      the_subject_behaves_like "instance abilities", Comment, abilities
+      the_subject_behaves_like "instance abilities", Comment, create: false, read: true, update: false, delete: false
+
+      the_subject_behaves_like "class abilities", Comment, create: false, read: true, update: true, destroy: true
     end
   end
 
   context "when the subject is the resource creator" do
     let_it_be(:subject, refind: true) { creator }
 
-    the_subject_behaves_like "instance abilities", Comment, all: true
+    the_subject_behaves_like "instance abilities", Comment, read: true, update: true, destroy: true
   end
 
   context "when the comment is on an annotation in a closed project with disabled engagement" do
@@ -66,10 +76,10 @@ RSpec.describe "Comment Abilities", :authorizer do
 
     context "with an unconfirmed email" do
       before do
-        subject.prepare_email_confirmation!
+        subject.clear_email_confirmation!
       end
 
-      the_subject_behaves_like "instance abilities", Comment, all: true
+      the_subject_behaves_like "instance abilities", Comment, create: false, read: true, update: true, destroy: true
     end
   end
 
@@ -100,7 +110,7 @@ RSpec.describe "Comment Abilities", :authorizer do
 
       context "with an unconfirmed email" do
         before do
-          subject.prepare_email_confirmation!
+          subject.clear_email_confirmation!
         end
 
         the_subject_behaves_like "instance abilities", Comment, { create: false, read: true, update: false, delete: false}

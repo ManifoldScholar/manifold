@@ -1,8 +1,7 @@
-require "naught"
+# frozen_string_literal: true
 
 module TestHelpers
   module AuthorizationHelpers
-
     def test_ability_for?(ability, abilities)
       abilities[:read_only] == true ||
         abilities[:all] == true ||
@@ -50,5 +49,4 @@ module TestHelpers
       end
     end.new
   end
-
 end

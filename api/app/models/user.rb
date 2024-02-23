@@ -221,6 +221,12 @@ class User < ApplicationRecord
 
   # @api private
   # @return [void]
+  def clear_email_confirmation!
+    ManifoldApi::Container["users.clear_email_confirmation"].(self).value!
+  end
+
+  # @api private
+  # @return [void]
   def mark_email_confirmed!
     ManifoldApi::Container["users.mark_email_confirmed"].(self).value!
   end

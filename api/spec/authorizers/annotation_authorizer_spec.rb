@@ -65,7 +65,7 @@ RSpec.describe "Annotation Abilities", :authorizer do
   context "when the subject is the resource creator" do
     let_it_be(:subject, refind: true) { creator }
 
-    abilities = { all: true }
+    abilities = { read: true, update: true, delete: true }
 
     the_subject_behaves_like "instance abilities", Annotation, abilities
   end
@@ -97,7 +97,7 @@ RSpec.describe "Annotation Abilities", :authorizer do
 
       context "with an unconfirmed email" do
         before do
-          subject.prepare_email_confirmation!
+          subject.clear_email_confirmation!
         end
 
         abilities = { create: false, read: true, update: false, delete: false }
@@ -139,7 +139,7 @@ RSpec.describe "Annotation Abilities", :authorizer do
 
       context "with an unconfirmed email" do
         before do
-          subject.prepare_email_confirmation!
+          subject.clear_email_confirmation!
         end
 
         abilities = { create: false, read: true, update: false, delete: false }
