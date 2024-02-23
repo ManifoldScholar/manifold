@@ -107,14 +107,14 @@ export class UsersEditContainer extends PureComponent {
 
   verifyUser = () => {
     const t = this.props.t;
-    const verified = this.user.attributes.admin_verified;
+    const verified = this.user.attributes.adminVerified;
     const heading = verified ? t("modals.unverify") : t("modals.verify");
     const message = verified
       ? t("modals.unverify_body")
       : t("modals.verify_body");
     this.props.confirm(heading, message, () => {
       const adjustedUser = { ...this.user };
-      adjustedUser.attributes.admin_verified = !verified;
+      adjustedUser.attributes.adminVerified = !verified;
 
       const call = usersAPI.update(this.user.id, adjustedUser);
       const options = { notificationScope: "drawer" };
@@ -151,6 +151,13 @@ export class UsersEditContainer extends PureComponent {
     const user = this.user;
     const t = this.props.t;
 
+    const establishedWarningProps = !user.attributes.established
+      ? {
+          instructions: t("records.users.not_established_warning"),
+          instructionsAreWarning: true
+        }
+      : {};
+
     return (
       <div>
         {this.state.resetPassword ? (
@@ -166,7 +173,7 @@ export class UsersEditContainer extends PureComponent {
             {
               onClick: this.verifyUser,
               icon: "privacy24",
-              label: user.attributes.admin_verified
+              label: user.attributes.adminVerified
                 ? t("records.users.block")
                 : t("records.users.verify")
             },
@@ -187,9 +194,8 @@ export class UsersEditContainer extends PureComponent {
               className: "utility-button__icon--notice"
             }
           ]}
-          instructions={t("records.users.not_established_warning")}
-          instructionsAreWarning
           buttonLayout="grid"
+          {...establishedWarningProps}
         />
 
         <section>
