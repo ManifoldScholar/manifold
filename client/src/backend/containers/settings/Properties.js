@@ -211,6 +211,14 @@ export class SettingsPropertiesContainer extends PureComponent {
                   />
                   <Form.Switch
                     wide
+                    label={t("settings.properties.reading_groups_label")}
+                    instructions={t(
+                      "settings.properties.reading_groups_instructions"
+                    )}
+                    name="attributes[general][disableReadingGroups]"
+                  />
+                  <Form.Switch
+                    wide
                     label={t("settings.properties.public_reading_groups_label")}
                     instructions={t(
                       "settings.properties.public_reading_groups_instructions"
@@ -225,6 +233,15 @@ export class SettingsPropertiesContainer extends PureComponent {
                     )}
                     name="attributes[general][disableSpamDetection]"
                   />
+                  {getModelValue(
+                    "attributes[general][disableSpamDetection]"
+                  ) === false && (
+                    <Form.TextInput
+                      password
+                      label={t("settings.properties.akismet_key_label")}
+                      name="attributes[secrets]akismetAPIKey"
+                    />
+                  )}
                 </Form.FieldGroup>
                 <Form.Save text={t("settings.save")} />
               </>
