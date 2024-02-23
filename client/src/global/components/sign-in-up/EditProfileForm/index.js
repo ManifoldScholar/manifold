@@ -84,6 +84,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
         <Greeting
           mode={mode}
           warn={!currentUser.attributes.established}
+          trusted={currentUser.attributes.trusted}
           userId={currentUser.id}
           hideOverlay={hideOverlay}
         />
