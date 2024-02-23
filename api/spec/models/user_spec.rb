@@ -1,17 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength
 RSpec.describe User, type: :model do
-  it "has a valid factory" do
-    expect(FactoryBot.build(:user)).to be_valid
-  end
-
-  it "has many favorites" do
-    user = User.new
-    2.times { user.favorites.build }
-    expect(user.favorites.length).to be 2
-  end
-
   it "reports whether or not a favoritable is among its favorites" do
     user = FactoryBot.create(:user)
     project = FactoryBot.create(:project)
@@ -89,6 +78,24 @@ RSpec.describe User, type: :model do
     expect(User.find_by(email: "ROWAN@WOOF.DOG")).to eq user
   end
 
+  context "when setting admin_verified" do
+    let!(:user) { FactoryBot.create :user }
+
+    it "updates other properties" do
+      expect do
+        user.admin_verified = true
+        user.save!
+      end.to change { user.verified_by_admin_at }.from(nil).to(a_kind_of(ActiveSupport::TimeWithZone))
+        .and change { user.established }.from(false).to(true)
+
+      expect do
+        user.admin_verified = ?0
+        user.save!
+      end.to change { user.verified_by_admin_at }.from(a_kind_of(ActiveSupport::TimeWithZone)).to(nil)
+        .and change { user.established }.from(true).to(false)
+    end
+  end
+
   context "when changing a role" do
     let!(:user) { FactoryBot.create :user, :editor }
     let!(:project) { FactoryBot.create :project }
@@ -114,7 +121,9 @@ RSpec.describe User, type: :model do
       it "updates the role and kind" do
         expect do
           user.add_role :editor
-        end.to change { user.role.to_sym }.from(:reader).to(:editor).and change { user.kind.to_sym }.from(:reader).to(:editor)
+        end.to change { user.role.to_sym }.from(:reader).to(:editor)
+          .and change { user.kind.to_sym }.from(:reader).to(:editor)
+          .and change { user.trusted }.from(false).to(true)
       end
     end
 

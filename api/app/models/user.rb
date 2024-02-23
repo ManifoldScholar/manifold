@@ -19,7 +19,7 @@ class User < ApplicationRecord
   classy_enum_attr :role, enum: "RoleName", allow_blank: false, default: :reader
   classy_enum_attr :kind, enum: "RoleName", allow_blank: false, default: :reader
 
-  rolify after_add: :synchronize_kind!, after_remove: :synchronize_kind!
+  rolify after_add: :recalculate_role_derivations!, after_remove: :recalculate_role_derivations!
 
   has_many :identities, inverse_of: :user, autosave: true, dependent: :destroy
   has_many :annotations, -> { sans_orphaned_from_text }, foreign_key: "creator_id", dependent: :destroy,
@@ -63,11 +63,14 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, email_format: { message: "is not valid" }
   validates :first_name, :last_name, presence: true
 
+  before_validation :infer_established!
   before_validation :infer_kind!
   before_validation :infer_role!
+  before_validation :infer_trusted!
 
   after_save :sync_global_role!, if: :saved_change_to_role?
   after_save :prepare_email_confirmation!, if: :saved_change_to_email?
+  after_touch :synchronize_established!
 
   # Attachments
   manifold_has_attached_file :avatar, :image
@@ -82,20 +85,38 @@ class User < ApplicationRecord
 
   # Scopes
   scope :by_email, ->(email) { where(arel_table[:email].matches("#{email}%")) if email.present? }
-  scope :with_order, lambda { |by|
+  scope :with_order, ->(by) do
     return order(:last_name, :first_name) unless by.present?
 
     order(by)
-  }
+  end
   scope :by_role, ->(role) { RoleName[role].then { |r| with_role(r.to_sym) if r.present? } }
   scope :by_cached_role, ->(*role) { where(role: role) }
   scope :email_confirmed, -> { where.not(email_confirmed_at: nil) }
+  scope :email_unconfirmed, -> { where(email_confirmed_at: nil) }
+
+  scope :established, -> { where(established: true) }
+  scope :unestablished, -> { where(established: false) }
+  scope :trusted, -> { where(trusted: true) }
+  scope :untrusted, -> { where(trusted: false) }
 
   # Search
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   delegate *RoleName.global_predicates, to: :role
   delegate *RoleName.scoped_predicates, to: :kind
+
+  # @!attribute [rw] admin_verified
+  # @return [Boolean]
+  def admin_verified
+    verified_by_admin_at?
+  end
+
+  alias admin_verified? admin_verified
+
+  def admin_verified=(value)
+    self.verified_by_admin_at = ManifoldApi::Container["utility.booleanize"].(value) ? Time.current : nil
+  end
 
   # @!attribute [r] email_confirmed
   # @return [Boolean]
@@ -104,14 +125,6 @@ class User < ApplicationRecord
   end
 
   alias email_confirmed? email_confirmed
-
-  # This is used to check whether the user is permitted to create certain kinds
-  # of public content.
-  #
-  # For now, it is just based on whether or not they have confirmed their email.
-  def established?
-    email_confirmed?
-  end
 
   def search_data
     {
@@ -238,12 +251,9 @@ class User < ApplicationRecord
     add_role role.to_sym
     infer_kind!
     update_column :kind, kind if kind_changed?
+    synchronize_trusted!(force: true)
   ensure
     @synchronizing_global_role = false
-  end
-
-  def trusted?
-    has_any_role?(:admin, :editor, :moderator) || has_role?(:project_editor, :any)
   end
 
   class << self
@@ -260,6 +270,21 @@ class User < ApplicationRecord
 
   private
 
+  # @return [Boolean]
+  def calculate_established
+    verified_by_admin_at? || email_confirmed?
+  end
+
+  # @return [Boolean]
+  def calculate_trusted
+    has_any_role?(:admin, :editor, :moderator, :marketeer) || has_role?(:project_editor, :any)
+  end
+
+  # @return [void]
+  def infer_established!
+    self.established = calculate_established
+  end
+
   # @see RoleName.fetch_for_kind
   # @return [void]
   def infer_kind!
@@ -272,7 +297,24 @@ class User < ApplicationRecord
     self.role = RoleName.fetch_for(self) unless will_save_change_to_role?
   end
 
-  # @param [Role]
+  # @return [void]
+  def infer_trusted!
+    self.trusted = calculate_trusted
+  end
+
+  # @param [Role] role
+  # @return [void]
+  def recalculate_role_derivations!(role)
+    synchronize_kind! role
+    synchronize_trusted!
+  end
+
+  # @return [void]
+  def synchronize_established!
+    update_column :established, calculate_established
+  end
+
+  # @param [Role] role
   # @return [void]
   def synchronize_kind!(role)
     sync_notification_preferences! role
@@ -285,6 +327,13 @@ class User < ApplicationRecord
     updates[:kind] = RoleName.fetch_for_kind(self) if role.global? || role.scoped?
 
     update_columns updates if updates.any?
+  end
+
+  # @return [void]
+  def synchronize_trusted!(force: false)
+    return if !force && @synchronizing_global_role
+
+    update_column :trusted, calculate_trusted
   end
 
   def password_not_blank!

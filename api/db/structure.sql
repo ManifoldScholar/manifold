@@ -1168,7 +1168,10 @@ CREATE TABLE public.users (
     terms_and_conditions_accepted_at timestamp without time zone,
     email_confirmation_token text,
     email_confirmation_sent_at timestamp(6) without time zone,
-    email_confirmed_at timestamp(6) without time zone
+    email_confirmed_at timestamp(6) without time zone,
+    verified_by_admin_at timestamp without time zone,
+    established boolean DEFAULT false NOT NULL,
+    trusted boolean DEFAULT false NOT NULL
 );
 
 
@@ -5986,6 +5989,13 @@ CREATE INDEX index_users_on_email_confirmed_at ON public.users USING btree (emai
 
 
 --
+-- Name: index_users_on_established; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_established ON public.users USING btree (established);
+
+
+--
 -- Name: index_users_on_import_source_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6004,6 +6014,13 @@ CREATE INDEX index_users_on_kind ON public.users USING btree (kind);
 --
 
 CREATE INDEX index_users_on_role ON public.users USING btree (role);
+
+
+--
+-- Name: index_users_on_trusted; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_trusted ON public.users USING btree (trusted);
 
 
 --
@@ -7174,6 +7191,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231005175407'),
 ('20231010184158'),
 ('20231129172116'),
-('20240220212417');
+('20240220212417'),
+('20240223163849');
 
 

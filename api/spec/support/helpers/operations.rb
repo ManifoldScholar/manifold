@@ -17,6 +17,8 @@ RSpec.shared_context "operation helpers" do
   include TestHelpers::Operations
 
   let(:operation) { described_class.new }
+  let(:operation_args) { [] }
+  let(:operation_options) { {} }
 end
 
 RSpec.configure do |config|
