@@ -98,15 +98,26 @@ class AnnotationEditor extends PureComponent {
     return this.props.t("navigation.reading_group.my_private_annotations");
   }
 
+  get currentGroupObject() {
+    if (
+      this.props.currentAnnotatingReadingGroup === "public" ||
+      this.props.currentAnnotatingReadingGroup === "private" ||
+      !this.props.currentAnnotatingReadingGroup
+    )
+      return null;
+
+    return this.readingGroups.find(
+      group => group.id === this.props.currentAnnotatingReadingGroup
+    );
+  }
+
   get currentGroupName() {
     if (this.props.currentAnnotatingReadingGroup === "public")
       return this.publicLabel;
     if (this.props.currentAnnotatingReadingGroup === "private")
       return this.privateLabel;
 
-    const currentGroup = this.readingGroups.find(
-      group => group.id === this.props.currentAnnotatingReadingGroup
-    );
+    const currentGroup = this.currentGroupObject;
 
     if (!currentGroup) return this.setReadingGroup("private");
     return currentGroup.attributes.name;
@@ -123,9 +134,7 @@ class AnnotationEditor extends PureComponent {
     if (currentGroup === "private") return false;
     if (currentGroup === "public") return true;
 
-    if (currentGroup?.attributes.privacy === "public") return true;
-
-    return false;
+    return this.currentGroupObject?.attributes.privacy === "public";
   }
 
   get disableSubmit() {
