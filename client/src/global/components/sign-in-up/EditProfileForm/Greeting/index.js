@@ -5,7 +5,13 @@ import { FormContext } from "helpers/contexts";
 import ResendEmailConfirm from "../ResendEmailConfirm";
 import * as Styled from "./styles";
 
-export default function ProfileGreeting({ mode, warn, userId, hideOverlay }) {
+export default function ProfileGreeting({
+  mode,
+  warn,
+  userId,
+  hideOverlay,
+  trusted
+}) {
   const formData = useContext(FormContext);
   const nickname = formData.getModelValue("attributes[nickname]");
 
@@ -33,7 +39,9 @@ export default function ProfileGreeting({ mode, warn, userId, hideOverlay }) {
       {warn && (
         <Styled.NotVerifiedWrapper>
           <Styled.NotVerifiedWarning>
-            {t("forms.signin_overlay.not_verified_warning")}
+            {trusted
+              ? t("forms.signin_overlay.trusted_not_verified_warning")
+              : t("forms.signin_overlay.not_verified_warning")}
           </Styled.NotVerifiedWarning>
           <ResendEmailConfirm id={userId} hideOverlay={hideOverlay} />
         </Styled.NotVerifiedWrapper>
@@ -48,5 +56,6 @@ ProfileGreeting.propTypes = {
   mode: PropTypes.oneOf(["new", "existing"]),
   userId: PropTypes.string,
   hideOverlay: PropTypes.func,
-  warn: PropTypes.bool
+  warn: PropTypes.bool,
+  trusted: PropTypes.bool
 };

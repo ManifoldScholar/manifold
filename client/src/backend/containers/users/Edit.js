@@ -151,12 +151,13 @@ export class UsersEditContainer extends PureComponent {
     const user = this.user;
     const t = this.props.t;
 
-    const establishedWarningProps = !user.attributes.established
-      ? {
-          instructions: t("records.users.not_established_warning"),
-          instructionsAreWarning: true
-        }
-      : {};
+    const establishedWarningProps =
+      !user.attributes.established && !user.attributes.trusted
+        ? {
+            instructions: t("records.users.not_established_warning"),
+            instructionsAreWarning: true
+          }
+        : {};
 
     return (
       <div>

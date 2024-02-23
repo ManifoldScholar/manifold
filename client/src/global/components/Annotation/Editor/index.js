@@ -114,8 +114,9 @@ class AnnotationEditor extends PureComponent {
 
   get showUnverifiedMessage() {
     const established = this.props.currentUser?.attributes.established;
+    const trusted = this.props.currentUser?.attributes.trusted;
 
-    if (established) return false;
+    if (established || trusted) return false;
 
     const currentGroup = this.props.currentAnnotatingReadingGroup;
 
