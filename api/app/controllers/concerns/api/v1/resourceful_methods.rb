@@ -87,8 +87,12 @@ module API
           end
         end
 
-        def #{method_names[:authorize_and_create_resource]}(params, updater = ::Updaters::Default)
-          #{method_names[:resource_scope]}.build().tap do |resource|
+        def #{method_names[:authorize_and_create_resource]}(params, updater = ::Updaters::Default, assign_before_auth: [])
+          build_param_keys = Array(assign_before_auth).map(&:to_sym)
+
+          build_params = Hash(params.dig(:data, :attributes)&.slice(*build_param_keys))
+
+          #{method_names[:resource_scope]}.build(build_params).tap do |resource|
             authorize_action_for resource
             resource.creator = current_user if resource.respond_to?(:creator=)
             updater.new(params).update(resource)
