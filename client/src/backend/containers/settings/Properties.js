@@ -239,7 +239,7 @@ export class SettingsPropertiesContainer extends PureComponent {
                     <Form.TextInput
                       password
                       label={t("settings.properties.akismet_key_label")}
-                      name="attributes[secrets]akismetAPIKey"
+                      name="attributes[secrets][akismetAPIKey]"
                     />
                   )}
                 </Form.FieldGroup>
