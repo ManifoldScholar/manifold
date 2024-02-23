@@ -15,7 +15,7 @@ export const Form = styled(GlobalForm.Form)`
   input[type="text"],
   input[type="password"],
   input[type="email"] {
-    color: var(--input-color);
+    color: var(--color-neutral-text-dark);
     border-width: 3px;
 
     &:focus-visible {
