@@ -14,7 +14,7 @@ export default class DrawerEntityHeader extends PureComponent {
     children: PropTypes.any,
     buttons: PropTypes.array,
     icon: PropTypes.string,
-    buttonLayout: PropTypes.oneOf(["stack", "inline"]),
+    buttonLayout: PropTypes.oneOf(["stack", "inline", "grid"]),
     small: PropTypes.bool,
     instructionsAreWarning: PropTypes.bool
   };
@@ -29,7 +29,7 @@ export default class DrawerEntityHeader extends PureComponent {
   }
 
   get inlineButtons() {
-    return this.props.buttonLayout !== "stack";
+    return !this.props.buttonLayout || this.props.buttonLayout === "inline";
   }
 
   render() {
@@ -58,6 +58,7 @@ export default class DrawerEntityHeader extends PureComponent {
             {this.props.children}
             {this.props.buttons.length > 0 && (
               <Styled.ButtonGroup
+                $grid={this.props.buttonLayout === "grid"}
                 className={classNames({
                   "utility-button-group": true,
                   "utility-button-group--stack": this.stackButtons,

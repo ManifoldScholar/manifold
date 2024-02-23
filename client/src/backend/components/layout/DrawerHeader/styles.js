@@ -38,4 +38,8 @@ export const Instructions = styled.span`
 
 export const ButtonGroup = styled.div`
   margin-top: 24px;
+
+  ${({ $grid }) =>
+    $grid &&
+    `display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px;`}
 `;

@@ -32,6 +32,8 @@
       "submit_label": "Save User",
       "unsubscribe": "Unsubscribe",
       "reset_password": "Reset Password",
+      "verify": "Verify",
+      "block": "Revoke Verification",
       "not_established_warning": "This user has not yet verified their email and will not be able to engage with public projects and reading groups."
     },
     "pages": {
