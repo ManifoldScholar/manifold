@@ -9,9 +9,10 @@ module Users
     ]
 
     # @param [User] user
+    # @param [Boolean] force
     # @return [Dry::Monads::Result]
-    def call(user)
-      return Success() unless needs_new_token?(user)
+    def call(user, force: false)
+      return Success() unless force || needs_new_token?(user)
 
       new_token = email_confirmation_verifier.generate user.email, purpose: :email
 

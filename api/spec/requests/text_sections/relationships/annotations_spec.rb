@@ -205,6 +205,20 @@ RSpec.describe "Text Section Annotations API", type: :request do
         expect(response).to have_http_status(503)
       end
 
+      context "when the user has not confirmed their email" do
+        before do
+          reader.clear_email_confirmation!
+        end
+
+        it "does not create a public annotation" do
+          expect do
+            post path, headers: reader_headers, params: params
+          end.to keep_the_same(Annotation, :count)
+
+          expect(response).to have_http_status(:forbidden)
+        end
+      end
+
       context "with spam detection enabled" do
         before do
           akismet_enabled!

@@ -9,12 +9,17 @@ class ApplicationAuthorizer < Authority::Authorizer
 
   config.allowed_by_default = false
 
-  delegate :admin_permissions?, :editor_permissions?,
-           :project_creator_permissions?, :marketeer_permissions?,
-           :creator_or_has_editor_permissions?, :reader_permissions?,
-           :creator_or_has_admin_permissions?,
-           :creator_or_has_marketeer_permissions?,
-           :editor_of_any_project?, to: :class
+  delegate(
+    :admin_permissions?, :editor_permissions?,
+    :project_creator_permissions?, :marketeer_permissions?,
+    :creator_or_has_editor_permissions?, :reader_permissions?,
+    :creator_or_has_admin_permissions?,
+    :creator_or_has_marketeer_permissions?,
+    :editor_of_any_project?,
+    :trusted_or_established_user?,
+    :authenticated?,
+    to: :class
+  )
 
   def has_any_role?(user, *roles, on: resource)
     roles.flatten.any? do |role|
@@ -80,6 +85,11 @@ class ApplicationAuthorizer < Authority::Authorizer
   end
 
   class << self
+    # @param [User, AnonymousUser, nil] user
+    def authenticated?(user)
+      user.present? && user.kind_of?(User) && user.persisted?
+    end
+
     # Any class method from Authority::Authorizer that isn't overridden
     # will call its authorizer's default method.
     #
@@ -205,6 +215,13 @@ class ApplicationAuthorizer < Authority::Authorizer
       actual_on = role_name.acts_global? ? :any : on
 
       user.has_cached_role? role, actual_on
+    end
+
+    # @param [User] user
+    def trusted_or_established_user?(user)
+      return false if user.blank?
+
+      user.established? || user.trusted?
     end
 
     # Authorizers that should override their create check

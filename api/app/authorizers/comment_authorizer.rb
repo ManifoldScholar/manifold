@@ -44,13 +44,17 @@ class CommentAuthorizer < ApplicationAuthorizer
     resource.on_annotation?
   end
 
-  def trusted_or_established_user?(user)
-    user&.created?(resource) || super
-  end
-
   class << self
-    def default(_able, _user, _options = {})
+    def readable_by?(...)
       true
+    end
+
+    def creatable_by?(user, _options = {})
+      trusted_or_established_user?(user)
+    end
+
+    def default(_able, user, _options = {})
+      authenticated?(user)
     end
   end
 end

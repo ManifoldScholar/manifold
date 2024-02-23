@@ -1,6 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-shared_examples_for "instance abilities" do |klass, abilities|
+RSpec.shared_examples_for "instance abilities" do |klass, abilities|
   include TestHelpers::AuthorizationHelpers
   extend TestHelpers::AuthorizationHelpers
 
@@ -9,14 +9,21 @@ shared_examples_for "instance abilities" do |klass, abilities|
     verb = subject_can ? "CAN" : "CAN'T"
     assertion = subject_can ? :to : :to_not
 
-    it "the subject #{verb} #{ability.upcase} the #{klass.to_s.downcase}" do
-      skip unless test_ability_for?(ability, abilities)
-      expect(object).send(assertion, send(matcher_for_ability(ability), subject))
+    if test_ability_for?(ability, abilities)
+      it "the subject #{verb} #{ability.upcase} the #{klass.to_s.downcase}" do
+        skip("Not testing instance-level #{ability} within this context") unless test_ability_for?(ability, abilities)
+
+        expect(object).send(assertion, send(matcher_for_ability(ability), subject))
+      end
+    else
+      it "does not test if the subject can #{ability}" do
+        skip "skipped in this context"
+      end
     end
   end
 end
 
-shared_examples_for "class abilities" do |klass, abilities|
+RSpec.shared_examples_for "class abilities" do |klass, abilities|
   include TestHelpers::AuthorizationHelpers
   extend TestHelpers::AuthorizationHelpers
 
@@ -25,14 +32,21 @@ shared_examples_for "class abilities" do |klass, abilities|
     verb = subject_can ? "CAN" : "CAN'T"
     assertion = subject_can ? :to : :to_not
 
-    it "the subject #{verb} #{ability} any #{klass.to_s.pluralize}" do
-      skip unless test_ability_for?(ability, abilities)
-      expect(klass).send(assertion, send(matcher_for_ability(ability), subject))
+    if test_ability_for?(ability, abilities)
+      it "the subject #{verb} #{ability} any #{klass.to_s.pluralize}" do
+        skip("Not testing class-level #{ability} within this context") unless test_ability_for?(ability, abilities)
+
+        expect(klass).send(assertion, send(matcher_for_ability(ability), subject))
+      end
+    else
+      it "does not test if the subject can #{ability}" do
+        skip "skipped in this context"
+      end
     end
   end
 end
 
-shared_examples_for "unauthenticated user" do |klass|
+RSpec.shared_examples_for "unauthenticated user" do |klass|
   class_name = klass.name.underscore
 
   let(:subject) { anonymous_user }

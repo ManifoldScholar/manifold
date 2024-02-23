@@ -154,6 +154,20 @@ RSpec.describe "Reading Groups API", type: :request do
       expect(response).to have_http_status(503)
     end
 
+    context "when the user has an unconfirmed email" do
+      before do
+        reader.clear_email_confirmation!
+      end
+
+      it "does not create a public reading group" do
+        expect do
+          making_the_request
+        end.to keep_the_same(ReadingGroup, :count)
+
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
     context "when public reading groups are disabled" do
       before do
         settings = Settings.current

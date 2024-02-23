@@ -45,10 +45,6 @@ class AnnotationAuthorizer < ApplicationAuthorizer
 
   private
 
-  def trusted_or_established_user?(user)
-    user&.created?(resource) || super
-  end
-
   # Only public annotations need reputation to create.
   def requires_reputation_to_create?
     annotation_is_public?

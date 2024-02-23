@@ -28,7 +28,7 @@ module API
       end
 
       def create
-        @reading_group = authorize_and_create_reading_group(reading_group_params)
+        @reading_group = authorize_and_create_reading_group(reading_group_params, assign_before_auth: :privacy)
         render_single_resource @reading_group
       end
 
