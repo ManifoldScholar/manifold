@@ -7,6 +7,7 @@ import { readingGroupsAPI, requests } from "api";
 import config from "config";
 import memoize from "lodash/memoize";
 import withConfirmation from "hoc/withConfirmation";
+import withCurrentUser from "hoc/withCurrentUser";
 import { ClassNames } from "@emotion/react";
 import { connect } from "react-redux";
 import { select } from "utils/entityUtils";
@@ -119,15 +120,20 @@ class ReadingGroupForm extends React.PureComponent {
   };
 
   get privacyOptions() {
-    const { t, allowPublic } = this.props;
-    const publicOption = allowPublic
-      ? [
-          {
-            label: t("forms.reading_group.privacy_options.public"),
-            value: "public"
-          }
-        ]
-      : [];
+    const { t, allowPublic, currentUser } = this.props;
+
+    const established = currentUser?.attributes.established;
+    const trusted = currentUser?.attributes.trusted;
+
+    const publicOption =
+      allowPublic && (established || trusted)
+        ? [
+            {
+              label: t("forms.reading_group.privacy_options.public"),
+              value: "public"
+            }
+          ]
+        : [];
 
     return [
       ...publicOption,
@@ -267,6 +273,10 @@ class ReadingGroupForm extends React.PureComponent {
   }
 }
 
-export default withConfirmation(
-  withTranslation()(connect(ReadingGroupForm.mapStateToProps)(ReadingGroupForm))
+export default withCurrentUser(
+  withConfirmation(
+    withTranslation()(
+      connect(ReadingGroupForm.mapStateToProps)(ReadingGroupForm)
+    )
+  )
 );
