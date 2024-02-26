@@ -59,8 +59,9 @@ class PoweredBy extends PureComponent {
       ? this.manifoldLinkProps
       : {};
 
-    const version = this.props.settings?.attributes?.calculated?.manifoldVersion
-      ?.version;
+    const version = this.props.withVersion
+      ? this.props.settings?.attributes?.calculated?.manifoldVersion?.version
+      : null;
 
     return (
       <Styled.Wrapper
