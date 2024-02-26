@@ -38,7 +38,8 @@
       "email_verified_at": "Email confirmed {{date}}",
       "email_not_verified": "Email not confirmed",
       "trusted": "Trusted account",
-      "no_public_engagement": "Public engagement disabled"
+      "no_public_engagement": "Public engagement disabled",
+      "admin_verified": "Admin verified"
     },
     "pages": {
       "header": "Manage Pages",
