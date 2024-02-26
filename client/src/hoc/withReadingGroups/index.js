@@ -113,7 +113,9 @@ export default function withReadingGroups(WrappedComponent) {
       if (!this.props.readingGroups) return [];
       if (this.canEngagePublicly) return this.props.readingGroups;
       return this.props.readingGroups.filter(
-        rg => rg.attributes.privacy === "private"
+        rg =>
+          rg.attributes.privacy === "private" ||
+          rg.attributes.privacy === "anonymous"
       );
     }
 
