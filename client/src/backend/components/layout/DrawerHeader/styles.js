@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import {
   fluidScale,
   headingQuaternary,
-  subtitlePrimary
+  subtitlePrimary,
+  respond
 } from "theme/styles/mixins";
 import Utility from "global/components/utility";
 
@@ -41,5 +42,21 @@ export const ButtonGroup = styled.div`
 
   ${({ $grid }) =>
     $grid &&
-    `display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px;`}
+    `
+    > *:not(:last-child) {
+      margin-right: 1em;
+    }
+    ${respond(
+      `
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 12px;
+
+    > *:not(:last-child) {
+      margin-right: 0;
+    }
+    `,
+      40
+    )}`}
 `;

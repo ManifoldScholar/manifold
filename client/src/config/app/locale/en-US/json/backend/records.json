@@ -32,9 +32,13 @@
       "submit_label": "Save User",
       "unsubscribe": "Unsubscribe",
       "reset_password": "Reset Password",
-      "verify": "Verify",
-      "block": "Revoke Verification",
-      "not_established_warning": "This user has not yet verified their email and will not be able to engage with public projects and reading groups."
+      "verify": "Admin Verify",
+      "block": "Revoke Admin Verification",
+      "not_established_warning": "This user has not yet verified their email and will not be able to engage with public projects and reading groups.",
+      "email_verified_at": "Email confirmed {{date}}",
+      "email_not_verified": "Email not confirmed",
+      "trusted": "Trusted account",
+      "no_public_engagement": "Public engagement disabled"
     },
     "pages": {
       "header": "Manage Pages",
