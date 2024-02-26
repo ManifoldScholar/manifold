@@ -12,6 +12,7 @@ import FormContainer from "global/containers/form";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
+import * as Styled from "./styles";
 
 const { request, flush } = entityStoreActions;
 
@@ -145,19 +146,54 @@ export class UsersEditContainer extends PureComponent {
     );
   };
 
+  humanReadableDate = date => {
+    return this.props.t("dates.date", {
+      val: new Date(date),
+      formatParams: {
+        val: { year: "numeric", month: "long", day: "numeric" }
+      }
+    });
+  };
+
+  get noPublicEngagement() {
+    const attr = this.user.attributes;
+    return !(attr.trusted || attr.established);
+  }
+
+  get userVerificationList() {
+    const t = this.props.t;
+    const attr = this.user.attributes;
+
+    const emailMessage = attr.emailConfirmed
+      ? t("records.users.email_verified_at", {
+          date: this.humanReadableDate(attr.emailConfirmedAt)
+        })
+      : t("records.users.email_not_verified");
+
+    return (
+      <>
+        <li>
+          <span>{emailMessage}</span>
+        </li>
+        {attr.trusted && (
+          <li>
+            <span>{t("records.users.trusted")}</span>
+          </li>
+        )}
+        {this.noPublicEngagement && (
+          <li>
+            <span>{t("records.users.no_public_engagement")}</span>
+          </li>
+        )}
+      </>
+    );
+  }
+
   render() {
     if (!this.user) return null;
     const attr = this.user.attributes;
     const user = this.user;
     const t = this.props.t;
-
-    const establishedWarningProps =
-      !user.attributes.established && !user.attributes.trusted
-        ? {
-            instructions: t("records.users.not_established_warning"),
-            instructionsAreWarning: true
-          }
-        : {};
 
     return (
       <div>
@@ -196,9 +232,12 @@ export class UsersEditContainer extends PureComponent {
             }
           ]}
           buttonLayout="grid"
-          {...establishedWarningProps}
         />
-
+        <Styled.UserVerification
+          $warn={this.noPublicEngagement || !attr.emailConfirmed}
+        >
+          {this.userVerificationList}
+        </Styled.UserVerification>
         <section>
           <FormContainer.Form
             model={this.user}
