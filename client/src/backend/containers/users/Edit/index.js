@@ -172,14 +172,19 @@ export class UsersEditContainer extends PureComponent {
 
     return (
       <>
-        <li>
-          <span>{emailMessage}</span>
-        </li>
-        {attr.trusted && (
+        {/* eslint-disable no-nested-ternary */}
+        {attr.trusted ? (
           <li>
             <span>{t("records.users.trusted")}</span>
           </li>
-        )}
+        ) : attr.adminVerified ? (
+          <li>
+            <span>{t("records.users.admin_verified")}</span>
+          </li>
+        ) : null}
+        <li>
+          <span>{emailMessage}</span>
+        </li>
         {this.noPublicEngagement && (
           <li>
             <span>{t("records.users.no_public_engagement")}</span>
@@ -233,9 +238,7 @@ export class UsersEditContainer extends PureComponent {
           ]}
           buttonLayout="grid"
         />
-        <Styled.UserVerification
-          $warn={this.noPublicEngagement || !attr.emailConfirmed}
-        >
+        <Styled.UserVerification $warn={this.noPublicEngagement}>
           {this.userVerificationList}
         </Styled.UserVerification>
         <section>
