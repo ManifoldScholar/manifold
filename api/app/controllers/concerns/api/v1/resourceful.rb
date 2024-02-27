@@ -73,10 +73,10 @@ module API
       # @param [Symbol] ok
       # @param [Symbol] error
       # @return [Symbol]
-      def build_status_for(model, ok, error, context)
+      def build_status_for(model, ok, error, _context)
         return ok unless action_name == "update" || action_name == "create"
 
-        model.valid?(context) ? ok : error
+        model.errors.none? ? ok : error
       end
 
       # @api private
