@@ -108,8 +108,9 @@ export default function EditSectionForm({
   }, [initialSlateValue, t]);
 
   const stylesheetData = useFromStore(`entityStore.entities.stylesheets`);
+  const stylesheetDataKeys = stylesheetData ? Object.keys(stylesheetData) : [];
 
-  const appliedStylesheets = Object.keys(stylesheetData)
+  const appliedStylesheets = stylesheetDataKeys
     .filter(id => appliesToAllStylesheets.find(s => s === id))
     .map(id => stylesheetData[id]);
 
