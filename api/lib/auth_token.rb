@@ -50,6 +50,8 @@ class AuthToken
       when /\ABearer (?<token>\S+)\z/
         fetch_real_email_for(Regexp.last_match[:token])
       end
+    rescue JWT::DecodeError, JWT::ExpiredSignature
+      nil
     end
 
     # Get the real email from a possibly suffixed email address.
