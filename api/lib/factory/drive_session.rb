@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 module Factory
   # Returns a drive session object; used by the drive_resource importer
   class DriveSession
-
-    # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/PerceivedComplexity
@@ -46,7 +46,6 @@ module Factory
         "client_x509_cert_url": client_x509_cert_url
       }
     end
-    # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/PerceivedComplexity
@@ -57,6 +56,5 @@ module Factory
 
       GoogleDrive::Session.from_service_account_key(StringIO.new(config.to_json))
     end
-
   end
 end
