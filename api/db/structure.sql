@@ -2426,7 +2426,8 @@ CREATE TABLE public.settings (
     press_logo_mobile_data jsonb,
     favicon_data jsonb,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    ingestion jsonb DEFAULT '{}'::jsonb
+    ingestion jsonb DEFAULT '{}'::jsonb,
+    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 
@@ -7192,6 +7193,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231010184158'),
 ('20231129172116'),
 ('20240220212417'),
-('20240223163849');
+('20240223163849'),
+('20240327194259');
 
 

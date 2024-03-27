@@ -183,8 +183,16 @@ Style/GlobalStdStream:
 Style/HashAsLastArrayItem:
   Enabled: true
 
+# False positive with non-hash objects that have a `values` method.
+Style/HashEachMethods:
+  Enabled: false
+
 Style/HashLikeCase:
   Enabled: true
+
+# Guard clauses do not always make more sense.
+Style/IfUnlessModifier:
+  Enabled: false
 
 Style/MultilineBlockChain:
   Enabled: false
@@ -268,9 +276,6 @@ Style/ClassAndModuleChildren:
     - api/app/enums/**/*.rb
 
 Style/ExponentialNotation:
-  Enabled: true
-
-Style/HashEachMethods:
   Enabled: true
 
 Style/HashTransformKeys:
