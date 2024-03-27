@@ -3,7 +3,7 @@ using Refinements::HandleRenamedCollections
 #
 # Its intention is to divorce all dependencies on Paperclip itself so that migrations
 # will continue to work even after we eventually remove the Paperclip gem.
-# rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
 # rubocop:disable Style/GuardClause
 module PaperclipMigrator
   FIELD_NAMES = %w[file_name file_size content_type updated_at].freeze
@@ -301,4 +301,4 @@ module PaperclipMigrator
   end
 end
 # rubocop:enable Style/GuardClause
-# rubocop:enable Metrics/MethodLength, Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength

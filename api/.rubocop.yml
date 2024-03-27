@@ -37,6 +37,7 @@ Metrics/AbcSize:
   Exclude:
     - "app/operations/**/*.rb"
     - "app/services/collections"
+    - "lib/**/*.rb"
   Max: 22
 
 Layout/HashAlignment:
