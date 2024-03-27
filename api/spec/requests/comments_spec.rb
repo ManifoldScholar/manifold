@@ -88,7 +88,7 @@ RSpec.describe "Comments API", type: :request do
     end
 
     describe "creates a comment" do
-      let(:path) { api_v1_annotation_relationships_comments_path(annotation, comment_a) }
+      let(:path) { api_v1_annotation_relationships_comments_path(annotation) }
 
       let(:params) do
         build_json_payload(attributes: {

@@ -14,6 +14,7 @@ module SettingSections
     :general,
     :ingestion,
     :integrations,
+    :rate_limiting,
     :secrets,
     :theme,
   ].freeze

@@ -15,6 +15,7 @@ class Settings < ApplicationRecord
   attribute :email, SettingSections::Email.to_type, default: {}
   attribute :ingestion, SettingSections::Ingestion.to_type, default: {}
   attribute :integrations, SettingSections::Integrations.to_type, default: {}
+  attribute :rate_limiting, SettingSections::RateLimiting.to_type, default: {}
   attribute :secrets, SettingSections::Secrets.to_type, default: {}
   attribute :theme, SettingSections::Theme.to_type, default: {}
 
@@ -54,6 +55,26 @@ class Settings < ApplicationRecord
 
   SECTIONS.each do |section|
     include SettingSections::Accessors.new(section)
+  end
+
+  # @param [:all, ManifoldEnv::Types::THROTTLED_CATEGORIES] category
+  # @return [void]
+  def disable_rate_limiting!(category)
+    rate_limiting.disable! category
+
+    rate_limiting_will_change!
+
+    save!
+  end
+
+  # @param [:all, ManifoldEnv::Types::THROTTLED_CATEGORIES] category
+  # @return [void]
+  def enable_rate_limiting!(category)
+    rate_limiting.enable! category
+
+    rate_limiting_will_change!
+
+    save!
   end
 
   # @param [Symbol] section
