@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { tocDrawer } from "../styles";
-import { defaultTransitionProps } from "theme/styles/mixins";
+import { defaultTransitionProps, defaultFocusStyle } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
 const toggleWidth = "24px";
@@ -30,7 +30,15 @@ export const ItemLink = styled(Link, transientOptions)`
   }
 
   ${({ $active }) =>
-    $active && `background-color: var(--box-x-strong-bg-color);`}
+    $active &&
+    `
+      background-color: var(--box-x-strong-bg-color);
+
+      &:focus-visible {
+        ${defaultFocusStyle}
+        outline-offset: -2px;
+      }
+    `}
 `;
 
 export const Toggle = styled.span`
