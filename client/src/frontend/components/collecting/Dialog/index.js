@@ -62,7 +62,11 @@ function CollectingDialog({
           <Styled.Icon icon="TextsLoosePages64" size={48} />
         </Styled.Header>
         <Styled.Fields>
-          <SectionLabel as="legend" label={`${t("forms.add_to")}:`} />
+          <SectionLabel
+            as="legend"
+            headingAs="h3"
+            label={`${t("forms.add_to")}:`}
+          />
           <Styled.Group>
             <Checkbox
               label={t("forms.my_starred_label")}
