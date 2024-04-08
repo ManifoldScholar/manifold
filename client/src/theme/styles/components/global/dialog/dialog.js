@@ -2,7 +2,8 @@ import {
   utilityPrimary,
   panelRounded,
   respond,
-  rgba
+  rgba,
+  buttonUnstyled
 } from "theme/styles/mixins";
 import { dialog } from "theme/styles/variables/crossComponent";
 
@@ -52,12 +53,13 @@ export default `
   }
 
   &__close {
+    ${buttonUnstyled}
     position: absolute;
     top: auto;
     right: 32px;
     cursor: pointer;
   }
-  
+
   p:not([class]) {
     font-size: 18px;
     font-weight: var(--font-weight-regular);
