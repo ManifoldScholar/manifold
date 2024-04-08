@@ -144,17 +144,15 @@ class DialogWrapper extends PureComponent {
                 style={this.style()}
               >
                 {this.props.showCloseButton ? (
-                  <div
+                  <button
                     onClick={this.handleCloseClick}
                     className="dialog__close"
-                    role="button"
-                    tabIndex="0"
                   >
                     <IconComposer icon="close16" size={24} />
                     <span className="screen-reader-text">
                       {this.props.t("modals.close")}
                     </span>
-                  </div>
+                  </button>
                 ) : null}
                 {this.renderChildren()}
               </div>
