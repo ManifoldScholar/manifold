@@ -9,8 +9,6 @@ import { uiPanelMenu } from "../uiPanelMenu";
 
 export default `
   .appearance-menu {
-    --focus-color: var(--hover-color);
-
     ${uiPanelMenu}
 
     &__list {
