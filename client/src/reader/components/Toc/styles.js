@@ -8,7 +8,8 @@ import {
   utilityPrimary,
   defaultTransitionProps,
   fluidScale,
-  listUnstyled
+  listUnstyled,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -96,6 +97,11 @@ export const FooterButton = styled.button`
   &.focus-visible {
     background-color: var(--color-base-neutral30);
     outline: 0;
+  }
+
+  &.focus-visible {
+    ${defaultFocusStyle}
+    outline-offset: -2px;
   }
 
   ${respond(
