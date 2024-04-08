@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import IconComposer from "global/components/utility/IconComposer";
-import { buttonUnstyled, defaultTransitionProps } from "theme/styles/mixins";
+import {
+  buttonUnstyled,
+  defaultTransitionProps,
+  defaultFocusStyle
+} from "theme/styles/mixins";
 
 export const Item = styled.li`
   font-size: 16px;
@@ -22,6 +26,11 @@ export const Link = styled.a`
     color: var(--color-base-neutral90);
     background-color: var(--color-base-neutral20);
     outline: 0;
+  }
+
+  &.focus-visible {
+    ${defaultFocusStyle}
+    outline-offset: -2px;
   }
 `;
 
