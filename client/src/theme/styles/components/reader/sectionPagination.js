@@ -18,6 +18,7 @@ export default `
     &__inner {
       display: flex;
       justify-content: space-between;
+      flexwrap: wrap;
     }
 
     &__link {
