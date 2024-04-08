@@ -35,9 +35,6 @@ export default function UIPanel(props) {
           }}
         >
           <div>
-            <button className="screen-reader-text" onClick={props.hidePanel}>
-              Close Panel
-            </button>
             {React.createElement(props.bodyComponent, {
               ...props,
               closeCallback: props.hidePanel

@@ -116,6 +116,5 @@ DrawerWrapper.propTypes = {
   includeDrawerFrontMatter: PropTypes.bool,
   returnFocusOnDeactivate: PropTypes.bool,
   focusTrap: PropTypes.bool,
-  includeSRCloseButton: PropTypes.bool,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
