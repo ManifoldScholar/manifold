@@ -11,7 +11,7 @@ import {
   reactSlideTransition
 } from "theme/styles/mixins";
 
-export const Menu = styled.nav`
+export const Menu = styled.div`
   ${reactSlideTransition("left")}
   max-width: ${fluidScale("390px", "330px")};
   background-color: var(--box-bg-color);
