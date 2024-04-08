@@ -13,8 +13,8 @@ export default function FooterPartNavigation({ children }) {
     <div>
       <Styled.Nav $mobile aria-hidden>
         <Styled.List>
-          <li role="presentation">
-            <Styled.Group role="presentation">
+          <li>
+            <Styled.Group>
               {withoutIcons.map(link => (
                 <Styled.Item key={`${link.to}${link.title}`}>
                   <Styled.Link item={link} />
@@ -22,8 +22,8 @@ export default function FooterPartNavigation({ children }) {
               ))}
             </Styled.Group>
           </li>
-          <li role="presentation">
-            <Styled.Group role="presentation">
+          <li>
+            <Styled.Group>
               {withIcons.map(link => (
                 <Styled.Item key={`${link.to}${link.title}`}>
                   <Styled.Link item={link} />
@@ -36,9 +36,9 @@ export default function FooterPartNavigation({ children }) {
       <Styled.Nav aria-label="Site & Social Links">
         <Styled.List>
           {groupedLinks.map((linkGroup, linkGroupIndex) => (
-            <li key={linkGroupIndex} role="presentation">
+            <li key={linkGroupIndex}>
               {linkGroup.length > 0 && (
-                <Styled.Group role="presentation">
+                <Styled.Group>
                   {linkGroup.map(link => (
                     <Styled.Item key={`${link.to}${link.title}`}>
                       <Styled.Link item={link} />
@@ -48,8 +48,8 @@ export default function FooterPartNavigation({ children }) {
               )}
             </li>
           ))}
-          <li role="presentation">
-            <Styled.Group role="presentation">
+          <li>
+            <Styled.Group>
               {withIcons.map(link => (
                 <Styled.Item key={`${link.to}${link.title}`}>
                   <Styled.Link item={link} />
