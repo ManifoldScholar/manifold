@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { textTruncate, defaultFocusStyle } from "theme/styles/mixins";
+import { defaultFocusStyle } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 
 const iconSize = `28px`;
@@ -28,7 +28,7 @@ export const Label = styled.label`
 export const Item = styled.span`
   display: grid;
   grid-template-columns: auto 1fr auto;
-  align-items: center;
+  max-height: 28px;
 `;
 
 export const Input = styled.input`
@@ -76,5 +76,10 @@ export const Icon = styled(IconComposer)`
 `;
 
 export const Title = styled.span`
-  ${textTruncate}
+  display: block;
+  margin-block-start: 2px;
+`;
+
+export const Lock = styled(IconComposer)`
+  margin-block-start: 4px;
 `;
