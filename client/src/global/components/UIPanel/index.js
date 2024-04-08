@@ -13,7 +13,7 @@ export default function UIPanel(props) {
 
   const handleOutsideClick = e => {
     const header = document.querySelector(".reader-header");
-    if (header.contains(e.target)) {
+    if (header?.contains(e.target)) {
       return true;
     }
     return props.hidePanel(e);
