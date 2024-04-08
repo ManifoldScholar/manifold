@@ -412,9 +412,9 @@ class AppearanceMenuBody extends Component {
     return (
       <div className="appearance-menu control-menu">
         <div className="control-menu__header">
-          <div className="control-menu__heading">
+          <h2 className="control-menu__heading">
             {this.props.t("reader.menus.appearance.adjust_appearance") + ":"}
-          </div>
+          </h2>
         </div>
         <ul className="appearance-menu__list">
           {this.renderFontControls()}
