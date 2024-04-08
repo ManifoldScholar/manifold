@@ -120,6 +120,7 @@ export default function Header(props) {
 
     return (
       <button
+        id="toc-drawer-toggle"
         className={buttonClassName}
         onClick={handleContentsButtonClick}
         aria-haspopup
@@ -286,17 +287,6 @@ export default function Header(props) {
           resetTypography={resetTypography}
           hidePanel={commonActions.hideAppearancePanel}
         />
-        {/* <UserMenuBody
-              visible={visibility.uiPanels.user}
-              callbacks={commonActions}
-              context="reader"
-            /> */}
-        {/* <UIPanel
-              id="user"
-              visibility={visibility.uiPanels}
-              bodyComponent={UserMenuBody}
-              // Props required by body component
-            /> */}
       </div>
       {renderOptionsToggle()}
       <HeaderNotifications />

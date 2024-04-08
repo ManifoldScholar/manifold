@@ -12,7 +12,6 @@ export default function FrontMatter(props) {
     context,
     padding,
     includeDrawerFrontMatter = true,
-    includeSRCloseButton = true,
     headerId,
     handleLeaveEvent,
     fullScreenTitle
@@ -61,15 +60,6 @@ export default function FrontMatter(props) {
           ) : null}
         </Bar>
       )}
-      {!hasClose && includeSRCloseButton && (
-        <button
-          onClick={handleLeaveEvent}
-          tabIndex="0"
-          className="screen-reader-text"
-        >
-          {t("actions.close")}
-        </button>
-      )}
     </>
   );
 }
@@ -84,7 +74,6 @@ FrontMatter.propTypes = {
   context: PropTypes.oneOf(["backend", "frontend", "reader", "editor"]),
   padding: PropTypes.oneOf(["none", "default", "large", "xl"]),
   includeDrawerFrontMatter: PropTypes.bool,
-  includeSRCloseButton: PropTypes.bool,
   headerId: PropTypes.string.isRequired,
   handleLeaveEvent: PropTypes.func.isRequired
 };

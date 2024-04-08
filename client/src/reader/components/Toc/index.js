@@ -56,6 +56,9 @@ class Toc extends PureComponent {
   UIHideTocDrawer = () => {
     if (this.props.tocDrawerVisible) {
       this.props.hideTocDrawer();
+
+      const toggleEl = document.getElementById("toc-drawer-toggle");
+      if (toggleEl) toggleEl.focus();
     }
   };
 
@@ -139,9 +142,7 @@ class Toc extends PureComponent {
       identifier: "toc-drawer",
       entrySide: "left",
       closeCallback: this.UIHideTocDrawer,
-      includeDrawerFrontMatter: false,
-      returnFocusOnDeactivate: false,
-      includeSRCloseButton: true
+      includeDrawerFrontMatter: false
     };
 
     return (
