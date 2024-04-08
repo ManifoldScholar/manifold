@@ -21,7 +21,7 @@ export default function ReturnMenuBody({
   const { t } = useTranslation();
 
   return (
-    <Styled.Menu aria-label="Site Navigation">
+    <Styled.Menu>
       <Styled.List>
         <Styled.Item>
           <Styled.ItemLink to={returnUrl}>
