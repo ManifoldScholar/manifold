@@ -23,6 +23,8 @@ export const List = styled.ul`
   color: var(--color-neutral-text-dark);
   white-space: nowrap;
   background-color: var(--color-base-neutral05);
+  overflow: auto;
+  max-block-size: calc(100vh - var(--reader-header-height));
 
   ${({ $visible, $context }) =>
     $visible
