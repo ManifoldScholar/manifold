@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
-import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
 function CollectingDialogCheckbox({
@@ -46,7 +45,7 @@ function CollectingDialogCheckbox({
           <Styled.Icon icon={icon} size="default" />
         </Styled.IconWrapper>
         <Styled.Title>{label}</Styled.Title>
-        {showLock && <IconComposer icon="lock16" size={18} />}
+        {showLock && <Styled.Lock icon="lock16" size={18} />}
       </Styled.Item>
     </Styled.Label>
   );
