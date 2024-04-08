@@ -85,7 +85,12 @@ class PoweredBy extends PureComponent {
                   {this.props.children}
                   <Styled.LogoText as="div" $tiny>
                     Powered by Manifold Scholarship. Learn more at{" "}
-                    <a {...this.manifoldLinkProps}>manifoldapp.org</a>
+                    <a {...this.manifoldLinkProps}>
+                      <span className="screen-reader-text">
+                        Opens in new tab or window
+                      </span>
+                      manifoldapp.org
+                    </a>
                   </Styled.LogoText>
                 </Styled.Copyright>
               )}
