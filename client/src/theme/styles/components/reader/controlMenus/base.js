@@ -2,7 +2,8 @@ import {
   buttonUnstyled,
   utilityPrimary,
   defaultTransitionProps,
-  transparentize
+  transparentize,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export default `
@@ -33,7 +34,7 @@ export default `
     &__button {
       ${buttonUnstyled}
       ${utilityPrimary}
-    width: 100%;
+      width: 100%;
       min-height: 48px;
       padding: 12px 10px 10px;
       font-size: 13px;
@@ -46,6 +47,11 @@ export default `
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--color-interaction-light);
         outline: 0;
+      }
+
+      &.focus-visible {
+        ${defaultFocusStyle}
+        outline-offset: -2px;
       }
 
       &:disabled {
