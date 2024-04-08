@@ -16,6 +16,8 @@ export const Menu = styled.nav`
   max-width: ${fluidScale("390px", "330px")};
   background-color: var(--box-bg-color);
   box-shadow: 0 12px 22px -3px ${rgba("neutralBlack", 0.13)};
+  overflow: auto;
+  max-block-size: calc(100vh - var(--reader-header-height));
 `;
 
 export const List = styled.ul`
