@@ -32,9 +32,9 @@ export default function FrontMatter(props) {
             <Styled.Title>
               {icon && <Styled.TitleIcon icon={icon} size={24} />}
               {title && (
-                <span id={headerId}>
+                <Styled.TitleText id={headerId}>
                   {typeof title === "object" ? t(title.key) : title}
-                </span>
+                </Styled.TitleText>
               )}
             </Styled.Title>
           ) : null}

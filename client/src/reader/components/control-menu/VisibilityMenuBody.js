@@ -280,9 +280,9 @@ class VisibilityMenuBody extends PureComponent {
     return (
       <div className="visibility-menu control-menu">
         <div className="control-menu__header">
-          <div className="control-menu__heading">
+          <h2 className="control-menu__heading">
             {this.props.t("reader.menus.visibility.show_the_following")}
-          </div>
+          </h2>
         </div>
         <ul className="visibility-menu__section-list">
           {this.renderCheckboxGroup("highlight", filter.highlight)}

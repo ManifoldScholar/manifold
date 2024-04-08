@@ -54,13 +54,17 @@ export const BarReader = styled.div`
 `;
 
 export const Title = styled.div`
-  ${utilityPrimary}
   display: flex;
   flex-grow: 1;
   align-items: center;
   min-height: 24px;
+`;
+
+export const TitleText = styled.h2`
+  ${utilityPrimary}
   font-size: 13px;
   letter-spacing: 0.125em;
+  margin: 0;
 `;
 
 export const TitleIcon = styled(Utility.IconComposer)`
