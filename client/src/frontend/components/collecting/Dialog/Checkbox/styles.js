@@ -17,6 +17,8 @@ export const Label = styled.label`
   }
 
   .icon-star-fill {
+    color: var(--strong-color);
+
     &__background {
       fill: ${highlightBgColor};
     }
