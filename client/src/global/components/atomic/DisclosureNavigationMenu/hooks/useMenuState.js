@@ -22,7 +22,8 @@ export default function useMenuState(initialVisible = false, onBlur) {
   }
 
   function handleKeyDown(event) {
-    if (event.key !== "Escape") return;
+    if (event.key !== "Escape" || !visible) return;
+    event.preventDefault();
     typeof onBlur === "function" ? onBlur() : setVisible(false);
     if (disclosureRef.current) disclosureRef.current.focus();
   }
