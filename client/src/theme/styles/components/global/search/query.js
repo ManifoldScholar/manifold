@@ -20,7 +20,7 @@ export default `
       font-weight: var(--font-weight-regular);
       color: var(--strong-color) !important;
       background-color: var(--color-base-neutral05);
-      border: 3px solid transparent;
+      border: 2px solid var(--box-color);
       outline: none;
       appearance: none;
 
