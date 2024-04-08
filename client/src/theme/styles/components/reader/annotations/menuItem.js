@@ -49,8 +49,7 @@ export default `
       overflow: hidden;
       font-size: 17px;
       font-family: var(--font-family-sans);
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      text-wrap: wrap;
     }
   }
 `;
