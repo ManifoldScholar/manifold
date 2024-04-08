@@ -147,6 +147,12 @@ export default `
     }
   }
 
+  &__button-text {
+    &--dark {
+      color: var(--strong-color);
+    }
+  }
+
   &__button-icon {
     margin-left: 1em;
 

@@ -126,7 +126,7 @@ export default function Header(props) {
         aria-haspopup
         aria-expanded={visibility.uiPanels.tocDrawer}
       >
-        <span className="reader-header__button-text">
+        <span className="reader-header__button-text reader-header__button-text--dark">
           {t("reader.header.contents")}
         </span>
         <Utility.IconComposer
