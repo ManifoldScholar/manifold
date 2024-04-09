@@ -73,6 +73,7 @@ class GroupFilter extends Component {
           filters={this.filters}
           updateFilterState={this.handleFilterChange}
           hideSearch
+          visibleLabels
         />
       </div>
     );

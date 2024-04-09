@@ -15,7 +15,8 @@ function FiltersGroup(props) {
     onReset,
     showReset,
     setScreenReaderStatus,
-    className
+    className,
+    visibleLabels = false
   } = props;
 
   const searchInput = useRef(null);
@@ -55,7 +56,11 @@ function FiltersGroup(props) {
       {!!filters?.length && (
         <Styled.SelectGroup $count={filters?.length}>
           {filters.map(filter => (
-            <Filter key={filter.label} {...filter} />
+            <Filter
+              key={filter.label}
+              visibleLabel={visibleLabels}
+              {...filter}
+            />
           ))}
         </Styled.SelectGroup>
       )}
@@ -77,7 +82,8 @@ FiltersGroup.propTypes = {
   updateFilterState: PropTypes.func,
   hideSearch: PropTypes.bool,
   setScreenReaderStatus: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  visibleLabels: PropTypes.bool
 };
 
 export default withScreenReaderStatus(FiltersGroup);

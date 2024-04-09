@@ -3,14 +3,17 @@ import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import * as Styled from "./styles";
 
-function Filter({ label, value, options, onChange }) {
+function Filter({ label, value, options, onChange, visibleLabel = false }) {
   const uid = useUID();
 
   return (
     <Styled.Wrapper>
-      <label htmlFor={uid} className="screen-reader-text">
+      <Styled.Label
+        className={!visibleLabel ? "screen-reader-text" : undefined}
+        htmlFor={uid}
+      >
         {label}
-      </label>
+      </Styled.Label>
       <Styled.Select id={uid} onChange={onChange} value={value}>
         {options.map(({ value: optValue, label: optLabel }) => (
           <option key={optValue} value={optValue}>
@@ -18,7 +21,11 @@ function Filter({ label, value, options, onChange }) {
           </option>
         ))}
       </Styled.Select>
-      <Styled.Icon icon="disclosureDown16" size={20} />
+      <Styled.Icon
+        icon="disclosureDown16"
+        size={20}
+        $visibleLabel={visibleLabel}
+      />
     </Styled.Wrapper>
   );
 }

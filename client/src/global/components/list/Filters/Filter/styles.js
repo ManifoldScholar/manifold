@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
-import { defaultTransitionProps, filterSelectBase } from "theme/styles/mixins";
+import {
+  defaultTransitionProps,
+  filterSelectBase,
+  utilityPrimary
+} from "theme/styles/mixins";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -10,6 +14,13 @@ export const borderStyles = `
 
 export const Wrapper = styled.div`
   position: relative;
+`;
+
+export const Label = styled.label`
+  ${utilityPrimary}
+  font-size: 13px;
+  display: block;
+  margin-block-end: 8px;
 `;
 
 export const Select = styled.select`
@@ -33,7 +44,7 @@ export const Select = styled.select`
 
 export const Icon = styled(IconComposer)`
   position: absolute;
-  top: 50%;
+  top: ${({ $visibleLabel }) => ($visibleLabel ? "70%" : "50%")};
   right: 12px;
   width: 24px;
   height: 24px;
