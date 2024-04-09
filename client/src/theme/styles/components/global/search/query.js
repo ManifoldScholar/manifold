@@ -84,6 +84,7 @@ export default `
       ${listUnstyled}
       display: flex;
       flex-wrap: wrap;
+      row-gap: 12px;
 
       > *:not(:last-child) {
         margin-right: 36px;
