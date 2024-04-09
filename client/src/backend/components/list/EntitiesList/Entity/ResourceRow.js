@@ -53,6 +53,10 @@ class ResourceRow extends PureComponent {
     );
   }
 
+  get titlePlainText() {
+    return this.resource.attributes.titlePlaintext;
+  }
+
   get createdAt() {
     return this.resource.attributes.createdAt;
   }
@@ -101,6 +105,7 @@ class ResourceRow extends PureComponent {
         onRowClick={this.onRowClick}
         rowClickMode="block"
         title={this.title}
+        titlePlainText={this.titlePlainText}
         label={this.kind}
         meta={
           <FormattedDate

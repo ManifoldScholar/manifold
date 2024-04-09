@@ -78,7 +78,7 @@
     "view": "View",
     "view_all": "View all",
     "view_contents": "$t(actions.view) Contents",
-    "view_item": "$(actions.view) {{item}}",
+    "view_item": "$t(actions.view) {{item}}",
     "view_resource": "$t(actions.view) $t(glossary.resource_one)",
     "visit": "Visit",
     "zoom": "Zoom"
