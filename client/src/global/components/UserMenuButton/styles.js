@@ -30,6 +30,11 @@ export const Button = styled.button`
           outline: 0;
         }
 
+        &.focus-visible {
+          outline: 2px solid;
+          outline-offset: -2px;
+        }
+
         .avatar {
           width: 32px;
           height: 32px;
