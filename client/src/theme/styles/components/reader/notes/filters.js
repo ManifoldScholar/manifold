@@ -22,6 +22,7 @@ export default `
       ${respond(`display: flex;`, 50)}
       ${respond(`display: block;`, 65)}
       ${respond(`display: flex;`, 75)}
+      ${respond(`display: block;`, 120)}
     }
 
     &__checkbox {
@@ -45,6 +46,11 @@ export default `
           `margin-top: 0;
         margin-left: 28px;`,
           75
+        )}
+        ${respond(
+          `margin-top: 8px;
+        margin-left: 0;`,
+          120
         )}
       }
     }

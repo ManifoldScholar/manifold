@@ -17,8 +17,6 @@ const columnGapDesktop = "16px";
 const breakpoint = breakpoints[50];
 const collapseDuration = "350ms";
 const collapseEasing = "linear";
-const seeAllMinWidth = "109px";
-const groupSelectMinWidth = entityFilterForm.selectMinWidth;
 const inputGap = entityFilterForm.gap;
 
 export default `
@@ -28,25 +26,28 @@ export default `
     ${drawerPadding("padding-left", "narrow")}
     display: flex;
     flex-wrap: wrap;
-    gap: ${inputGap}px;
-    align-items: center;
+    gap: 18px;
+    align-items: start;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 28px;
+
+    ${respond(`gap: 36px`, 120)}
   }
 
   &__header-start {
-    flex-grow: 999;
+    flex-shrink: 0;
   }
 
   &__header-end {
     display: flex;
-    flex-basis: ${seeAllMinWidth};
     flex-grow: 1;
+    flex-direction: column;
+    align-items: end;
     gap: ${inputGap}px;
 
-    &--has-select {
-      flex-basis: calc(${groupSelectMinWidth}px + ${inputGap}px + ${seeAllMinWidth});
-    }
+    ${respond(`flex-direction: row;`, 40)}
+    ${respond(`flex-direction: column;`, 65)}
+    ${respond(`flex-direction: row;`, 75)}
   }
 
   &__see-all {
@@ -54,6 +55,11 @@ export default `
     padding: 6px 9px 8px 13px;
     font-size: 13px;
     border-color: var(--select-border-color);
+    width: 100%;
+
+    ${respond(`width: auto;`, 40)}
+    ${respond(`width: 100%;`, 65)}
+    ${respond(`width: auto;`, 75)}
   }
 
   &__see-all-icon {
@@ -96,7 +102,7 @@ export default `
     display: grid;
     grid-template: 'icon label' auto / ${iconSize} 1fr;
     column-gap: ${columnGapMobile};
-    align-items: center;
+    align-items: start;
 
     ${respond(`column-gap: ${columnGapDesktop};`, breakpoint)}
   }
