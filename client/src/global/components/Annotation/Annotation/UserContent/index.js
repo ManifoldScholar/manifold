@@ -266,6 +266,7 @@ class AnnotationDetail extends PureComponent {
                               ? this.handleUnflag
                               : this.handleFlag
                           }
+                          aria-pressed={annotation.attributes.flagged}
                         >
                           {annotation.attributes.flagged
                             ? t("actions.unflag")
