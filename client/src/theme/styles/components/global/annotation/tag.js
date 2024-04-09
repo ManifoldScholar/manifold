@@ -1,7 +1,10 @@
-import { defaultTransitionProps, textTruncate } from "theme/styles/mixins";
+import {
+  defaultTransitionProps,
+  textTruncate,
+  respond
+} from "theme/styles/mixins";
 
-const CREATOR_TAG_WIDTH = "167px";
-const GROUP_TAG_WIDTH = "167px";
+export const TAG_WIDTH = "335px";
 const COUNT_WIDTH = "56px";
 
 export default `
@@ -16,19 +19,21 @@ export default `
     font-family: var(--font-family-sans);
 
     &--group {
-      max-width: ${GROUP_TAG_WIDTH};
+      ${textTruncate}
+      width: max-content;
+      max-width: min(100%, ${TAG_WIDTH});
       font-size: 14px;
+
+      ${respond(`margin-inline-start: auto;`, 120)}
     }
 
     &--creator {
-      width: ${CREATOR_TAG_WIDTH};
+      ${textTruncate}
+      width: max-content;
+      max-width: min(100%, ${TAG_WIDTH});
       font-size: 12px;
-    }
 
-    &__left-align {
-      display: flex;
-      align-items: flex-start;
-      width: ${GROUP_TAG_WIDTH};
+      ${respond(`margin-inline-start: auto;`, 120)}
     }
 
     &__inner {

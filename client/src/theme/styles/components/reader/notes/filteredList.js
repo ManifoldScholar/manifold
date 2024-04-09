@@ -10,6 +10,7 @@ import {
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
+import { TAG_WIDTH } from "theme/styles/components/global/annotation/tag";
 
 const iconSize = "24px";
 const columnGapMobile = "10px";
@@ -114,8 +115,6 @@ export default `
     font-size: 18px;
     font-weight: var(--font-weight-medium);
     line-height: 1.4;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     cursor: inherit;
 
     ${respond(`font-size: 21px;`, breakpoint)}
@@ -131,6 +130,8 @@ export default `
     &--expanded {
       transform: rotate(0);
     }
+
+    ${respond(`top: 4px;`, breakpoint)}
   }
 
   &__group {
@@ -174,16 +175,6 @@ export default `
     column-gap: ${columnGapMobile};
 
     ${respond(`column-gap: ${columnGapDesktop};`, breakpoint)}
-
-    ${respond(
-      `
-        grid-template: ". icon inner" auto / ${iconSize} ${iconSize} minmax(
-            0,
-            1fr
-          );
-      `,
-      95
-    )}
   }
 
   &__item-icon {
@@ -197,7 +188,7 @@ export default `
     grid-area: inner;
     align-items: baseline;
 
-    ${respond(`flex-direction: row;`, 95)}
+    ${respond(`flex-direction: row;`, 120)}
   }
 
   &__item-text {
@@ -230,11 +221,15 @@ export default `
 
   &__item-tag {
     margin-top: 12px;
+    width: 100%;
 
     ${respond(
       `margin-top: -3px;
-    margin-left: 40px;`,
-      95
+    margin-left: 24px;
+    width: auto;
+    flex-basis: ${TAG_WIDTH};
+    `,
+      120
     )}
   }
 }
