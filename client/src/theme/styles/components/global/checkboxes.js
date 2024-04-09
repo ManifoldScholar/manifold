@@ -37,10 +37,12 @@ export default `
       vertical-align: middle;
       background-color: var(--color-base-neutral-white);
       border-radius: 3px;
+      border: 1px solid var(--color-base-neutral90);
 
       .checkbox--gray & {
         background-color: var(--color-base-neutral20);
       }
+
     }
 
     &__icon {
@@ -52,6 +54,10 @@ export default `
       .checkbox--gray &,
       .checkbox--white & {
         color: var(--color-base-neutral90);
+      }
+
+      .checkbox--white & {
+        top: -1px;
       }
 
       .checkbox.checked & {

@@ -75,12 +75,16 @@ export const RadioToggle = styled.span`
   transition: background-color ${defaultTransitionProps};
   width: 1.25em;
   height: 1.25em;
-  padding-top: 0.313em;
+  padding-top: 0.25em;
   text-align: center;
   border-radius: 100%;
 
   .bg-neutral90 & {
     background-color: var(--color-neutral-ui-dark);
+  }
+
+  .search-menu & {
+    border: 1px solid var(--color);
   }
 
   ${RadioInput}:focus ~ &,
