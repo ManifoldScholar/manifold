@@ -468,11 +468,11 @@ export default `
         --highlight-color: var(--color-base-neutral45);
         --hover-color: var(--color-base-neutral45);
 
-        ${fillOnFocus(rgba("neutral70", 0.2))}
-
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled),
+        &.focus-visible:not(:disabled) {
           color: var(--color-neutral-text-extra-dark);
           background-color: var(--highlight-color);
+          outline: 0;
         }
       }
     }
