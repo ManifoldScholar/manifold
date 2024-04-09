@@ -342,7 +342,10 @@ class EntitiesListRow extends PureComponent {
                         className="screen-reader-text"
                       >
                         {this.props.t("actions.view_item", {
-                          item: this.titlePlainText
+                          item:
+                            typeof this.titlePlainText === "string"
+                              ? this.titlePlainText
+                              : "item"
                         })}
                       </span>
                     </h3>
