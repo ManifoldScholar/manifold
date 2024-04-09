@@ -5,7 +5,8 @@ import {
   buttonUnstyled,
   defaultTransitionProps,
   textTruncate,
-  buttonAvatar
+  buttonAvatar,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
@@ -84,6 +85,11 @@ export default `
       background-color: var(--box-medium-bg-color);
       outline: 0;
     }
+
+    &.focus-visible {
+      ${defaultFocusStyle}
+      outline-offset: -2px;
+    }
   }
 
   &__section-button-inner {
@@ -148,6 +154,11 @@ export default `
       color: inherit;
       background-color: var(--box-medium-bg-color);
       outline: 0;
+    }
+
+    &.focus-visible {
+      ${defaultFocusStyle}
+      outline-offset: -2px;
     }
   }
 
