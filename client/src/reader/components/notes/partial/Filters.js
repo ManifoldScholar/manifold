@@ -59,20 +59,18 @@ class Filters extends Component {
   render() {
     return (
       <fieldset className="notes-filters">
-        <div className="notes-filters__inner">
-          <legend className="notes-filters__label">
-            {this.props.t("actions.show") + ":"}
-          </legend>
-          <div className="notes-filters__checkbox-group">
-            {this.renderCheckBox(
-              this.props.t("glossary.highlight_title_case_other"),
-              "highlight"
-            )}
-            {this.renderCheckBox(
-              this.props.t("glossary.annotation_title_case_other"),
-              "annotation"
-            )}
-          </div>
+        <legend className="notes-filters__legend">
+          {this.props.t("actions.show") + ":"}
+        </legend>
+        <div className="notes-filters__checkbox-group">
+          {this.renderCheckBox(
+            this.props.t("glossary.highlight_title_case_other"),
+            "highlight"
+          )}
+          {this.renderCheckBox(
+            this.props.t("glossary.annotation_title_case_other"),
+            "annotation"
+          )}
         </div>
       </fieldset>
     );
