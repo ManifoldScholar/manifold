@@ -4,26 +4,24 @@ export default `
   .notes-filters {
     ${utilityPrimary}
     flex-grow: 999;
-    flex-wrap: wrap;
     padding: 0;
     margin: 0;
     font-size: 13px;
     border: 0;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    padding-right: 12px;
 
-    &__inner {
-      display: flex;
-      gap: 8px;
-      align-items: baseline;
-      padding-right: 12px;
-    }
-
-    &__label {
-      display: inline-block;
+    &__legend {
       padding-right: 18px;
+      float: left;
     }
 
     &__checkbox-group {
       ${respond(`display: flex;`, 50)}
+      ${respond(`display: block;`, 65)}
+      ${respond(`display: flex;`, 75)}
     }
 
     &__checkbox {
@@ -37,6 +35,16 @@ export default `
           `margin-top: 0;
         margin-left: 28px;`,
           50
+        )}
+        ${respond(
+          `margin-top: 8px;
+        margin-left: 0;`,
+          65
+        )}
+        ${respond(
+          `margin-top: 0;
+        margin-left: 28px;`,
+          75
         )}
       }
     }
