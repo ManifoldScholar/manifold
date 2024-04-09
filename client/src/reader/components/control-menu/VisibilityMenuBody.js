@@ -58,10 +58,10 @@ class VisibilityMenuBody extends PureComponent {
       highlight: { yours: true, others: true },
       annotation: { yours: true, others: true },
       resource: { all: true },
-      readingGroups: Object.assign(this.readingGroupFilterBase(true), {
-        all: false,
-        private: true,
-        public: true
+      readingGroups: Object.assign(this.readingGroupFilterBase(false), {
+        all: true,
+        private: false,
+        public: false
       })
     };
     return this.props.filterChangeHandler(filter);
@@ -262,13 +262,41 @@ class VisibilityMenuBody extends PureComponent {
     );
   }
 
-  renderFooterButtons() {
+  showAllPressed(filters) {
+    const { annotation, highlight, readingGroups, resource } = filters ?? {};
+    if (!annotation || !highlight || !readingGroups || !resource) return false;
+    if (Object.values(annotation).some(val => !val)) return false;
+    if (Object.values(highlight).some(val => !val)) return false;
+    if (Object.values(resource).some(val => !val)) return false;
+    if (!readingGroups?.all) return false;
+    return true;
+  }
+
+  hideAllPressed(filters) {
+    const { annotation, highlight, readingGroups, resource } = filters ?? {};
+    if (!annotation || !highlight || !readingGroups || !resource) return false;
+    if (Object.values(annotation).some(val => val)) return false;
+    if (Object.values(highlight).some(val => val)) return false;
+    if (Object.values(resource).some(val => val)) return false;
+    if (Object.values(readingGroups).some(val => val)) return false;
+    return true;
+  }
+
+  renderFooterButtons(filters) {
     return (
       <li className="visibility-menu__footer">
-        <button onClick={this.showAll} className="control-menu__button">
+        <button
+          onClick={this.showAll}
+          className="control-menu__button"
+          aria-pressed={this.showAllPressed(filters)}
+        >
           {this.props.t("actions.show_all")}
         </button>
-        <button onClick={this.hideAll} className="control-menu__button">
+        <button
+          onClick={this.hideAll}
+          className="control-menu__button"
+          aria-pressed={this.hideAllPressed(filters)}
+        >
           {this.props.t("actions.hide_all")}
         </button>
       </li>
@@ -290,7 +318,7 @@ class VisibilityMenuBody extends PureComponent {
           {this.renderCheckboxGroup("resource", filter.resource)}
           {(this.canAccessReadingGroups || this.canEngagePublicly) &&
             this.renderReadingGroups()}
-          {this.renderFooterButtons()}
+          {this.renderFooterButtons(filter)}
         </ul>
       </div>
     );
