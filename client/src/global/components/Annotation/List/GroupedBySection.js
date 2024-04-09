@@ -49,7 +49,7 @@ export default class GroupedBySection extends PureComponent {
                 className={this.selectionListClassNames}
               >
                 <div className="selection-group-heading">
-                  <h4>{group.name}</h4>
+                  <h3>{group.name}</h3>
                 </div>
                 <ul className={this.notesListClassNames}>
                   {group.annotations.map(annotation => {
