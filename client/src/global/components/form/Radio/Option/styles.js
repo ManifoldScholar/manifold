@@ -27,7 +27,7 @@ export const WrapperLabel = styled.label`
 
   ${respond(`font-size: 16px;`, 60)}
 
-  & + & {
+  not:(.search-query__filter-list-group) > & + & {
     margin-top: 18px;
   }
 

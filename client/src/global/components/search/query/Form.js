@@ -188,9 +188,9 @@ class SearchQueryForm extends PureComponent {
           "search-query__filter-group--inline": this.typeIsReader
         })}
       >
-        <div className="search-query__group-label">
-          <legend>{this.props.t("search.scopes_label")}</legend>
-        </div>
+        <legend className="search-query__group-label">
+          {this.props.t("search.scopes_label")}
+        </legend>
         <div className="search-query__filter-group-list">
           {this.availableScopes.map(option => (
             <Option
