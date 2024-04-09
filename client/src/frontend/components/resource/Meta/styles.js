@@ -11,6 +11,10 @@ export const Meta = styled.section`
   /* Meta.List label color */
   li > span {
     color: var(--color-neutral-text-dark);
+
+    .bg-neutral90 & {
+      color: var(--color-neutral-text-light);
+    }
   }
 `;
 
