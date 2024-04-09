@@ -140,6 +140,11 @@ export const DrawerReader = styled(Drawer)`
     ${drawerPadding("padding-left", "narrow")}
     margin-top: 0;
   }
+
+  &.wide {
+    ${respond(`width: 585px;`, 75)}
+    ${respond(`width: 920px;`, 120)}
+  }
 `;
 
 export const DrawerOverlay = styled(Drawer)`

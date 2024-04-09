@@ -119,11 +119,7 @@ class GroupItem extends Component {
       ? { className: "annotation-tag--group" }
       : { icon: "lock16", iconSize: 14, className: "annotation-tag--group" };
 
-    return (
-      <span className="annotation-tag__left-align">
-        <Tag {...tagProps}>{this.currentGroupName}</Tag>
-      </span>
-    );
+    return <Tag {...tagProps}>{this.currentGroupName}</Tag>;
   }
 
   render() {
