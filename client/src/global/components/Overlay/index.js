@@ -17,7 +17,8 @@ function Overlay({
   history,
   triggerScrollToTop,
   id,
-  children
+  children,
+  ariaLabel
 }) {
   const overlayRef = useRef(null);
   const headerId = useUID();
@@ -58,6 +59,7 @@ function Overlay({
             <Header
               title={title}
               subtitle={subtitle}
+              ariaLabel={ariaLabel}
               icon={icon}
               onCloseClick={handleCloseEvent}
               headerId={headerId}
@@ -86,7 +88,8 @@ Overlay.propTypes = {
   contentWidth: PropTypes.number,
   appearance: PropTypes.string,
   triggerScrollToTop: PropTypes.any,
-  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  ariaLabel: PropTypes.string
 };
 
 export default Overlay;
