@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
+import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Drawer from "global/containers/drawer";
 import Drawers from "./Drawers";
 import upperFirst from "lodash/upperFirst";
 import isFunction from "lodash/isFunction";
 
-export default class AnnotatableDrawer extends PureComponent {
+class AnnotatableDrawer extends PureComponent {
   static propTypes = {
     drawerState: PropTypes.string,
     actions: PropTypes.object.isRequired
@@ -53,7 +54,8 @@ export default class AnnotatableDrawer extends PureComponent {
       open: this.isOpen,
       closeCallback: this.closeDrawer,
       lockScroll: "always",
-      identifier: "annotations-drawer"
+      identifier: "annotations-drawer",
+      title: this.props.t("actions.annotate")
     };
     if (DrawerContents && isFunction(DrawerContents.drawerProps)) {
       drawerProps = Object.assign(drawerProps, DrawerContents.drawerProps());
@@ -66,3 +68,5 @@ export default class AnnotatableDrawer extends PureComponent {
     );
   }
 }
+
+export default withTranslation()(AnnotatableDrawer);
