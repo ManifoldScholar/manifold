@@ -17,10 +17,8 @@ exports[`backend/components/dialog/Wrapper matches the snapshot 1`] = `
       role="dialog"
       style="max-width:400px"
     >
-      <div
+      <button
         class="dialog__close"
-        role="button"
-        tabindex="0"
       >
         <svg
           aria-hidden="true"
@@ -40,7 +38,7 @@ exports[`backend/components/dialog/Wrapper matches the snapshot 1`] = `
         >
           modals.close
         </span>
-      </div>
+      </button>
       <div>
         a child node.
       </div>

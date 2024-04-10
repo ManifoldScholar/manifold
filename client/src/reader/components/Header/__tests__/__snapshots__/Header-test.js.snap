@@ -19,10 +19,11 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
         aria-expanded={false}
         aria-haspopup={true}
         className="reader-header__button reader-header__button--gray reader-header__button--pad-default"
+        id="toc-drawer-toggle"
         onClick={[Function]}
       >
         <span
-          className="reader-header__button-text"
+          className="reader-header__button-text reader-header__button-text--dark"
         >
           reader.header.contents
         </span>

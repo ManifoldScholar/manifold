@@ -20,11 +20,6 @@ exports[`global/components/UIPanel matches the snapshot 1`] = `
       }
     >
       <div>
-        <button
-          className="screen-reader-text"
-        >
-          Close Panel
-        </button>
         <Component
           bodyComponent={[Function]}
           id="show"
