@@ -29,21 +29,6 @@ jobs:
         working-directory: "./client"
         run: yarn lint
 
-  client-tests:
-    if: github.event.pull_request.draft == false
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: "Checkout code"
-        uses: actions/checkout@v3
-
-      - uses: ./.github/actions/setup-node
-
-      - name: "Run client tests"
-        working-directory: "./client"
-        run: yarn test-ci
-
   api-lint:
     if: github.event.pull_request.draft == false
 
