@@ -17,7 +17,8 @@ export default `
 
   position: fixed;
   top: 0;
-  width: 100%;
+  right: 0;
+  left: 0;
   box-shadow: 0 -10px 20px 7px ${rgba("neutralBlack", 0.25)};
 
   &__inner {
@@ -182,14 +183,29 @@ export default `
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 110px;
+    width: fit-content;
+    padding-inline: 12px;
 
     ${respond(`display: none;`, 50)}
+
+    > span {
+      display: none;
+      ${respond(`display: inline;`, 20)}
+    }
   }
 
   &__options-button-icon {
-    margin-right: -10px;
-    margin-left: 3px;
+    ${respond(
+      `
+      margin-right: -10px;
+      margin-left: 3px;
+      `,
+      20
+    )}
+
+    &--options {
+      ${respond(`display: none;`, 20)}
+    }
   }
 
   &__nav-list {

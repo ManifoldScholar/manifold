@@ -90,16 +90,24 @@ export default function Header(props) {
         onClick={handleOptionsToggleClick}
         aria-hidden
         tabIndex={-1}
-        className="reader-header__button reader-header__button--pad-default reader-header__options-button"
+        className="reader-header__button reader-header__options-button"
       >
-        {mobileOptionsExpanded
-          ? t("actions.close")
-          : t("glossary.option_title_case_other")}
-        {mobileOptionsExpanded && (
+        <span>
+          {mobileOptionsExpanded
+            ? t("actions.close")
+            : t("glossary.option_title_case_other")}
+        </span>
+        {mobileOptionsExpanded ? (
           <Utility.IconComposer
             icon="close32"
             size="default"
             className="reader-header__options-button-icon"
+          />
+        ) : (
+          <Utility.IconComposer
+            icon="menu32"
+            size="default"
+            className="reader-header__options-button-icon reader-header__options-button-icon--options"
           />
         )}
       </button>
