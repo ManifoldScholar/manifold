@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
@@ -142,12 +143,13 @@ class Toc extends PureComponent {
       identifier: "toc-drawer",
       entrySide: "left",
       closeCallback: this.UIHideTocDrawer,
-      includeDrawerFrontMatter: false
+      includeDrawerFrontMatter: false,
+      ariaLabel: this.props.t("glossary.table_of_contents")
     };
 
     return (
       <Styled.TocDrawer {...drawerProps}>
-        <Styled.Toc aria-label="Table of Contents">
+        <Styled.Toc>
           {this.renderContents()}
           {!isEmpty(this.metadata) ? (
             <Styled.Footer>
@@ -163,4 +165,4 @@ class Toc extends PureComponent {
   }
 }
 
-export default withRouter(Toc);
+export default withTranslation()(withRouter(Toc));

@@ -14,7 +14,8 @@ export default function FrontMatter(props) {
     includeDrawerFrontMatter = true,
     headerId,
     handleLeaveEvent,
-    fullScreenTitle
+    fullScreenTitle,
+    ariaLabel
   } = props;
 
   const hasTitle = title || icon;
@@ -26,7 +27,7 @@ export default function FrontMatter(props) {
 
   return (
     <>
-      {includeDrawerFrontMatter && (
+      {includeDrawerFrontMatter ? (
         <Bar $padLateral={padding === "none"} $padBottom={!!fullScreenTitle}>
           {hasTitle && !fullScreenTitle ? (
             <Styled.Title>
@@ -37,7 +38,13 @@ export default function FrontMatter(props) {
                 </Styled.TitleText>
               )}
             </Styled.Title>
-          ) : null}
+          ) : (
+            ariaLabel && (
+              <span id={headerId} className="screen-reader-text">
+                {ariaLabel}
+              </span>
+            )
+          )}
           {fullScreenTitle ? (
             <Styled.FullScreenTitle>
               {icon && <Styled.FullScreenTitleIcon icon={icon} size={32} />}
@@ -59,6 +66,12 @@ export default function FrontMatter(props) {
             </Styled.CloseButton>
           ) : null}
         </Bar>
+      ) : (
+        ariaLabel && (
+          <span id={headerId} className="screen-reader-text">
+            {ariaLabel}
+          </span>
+        )
       )}
     </>
   );
