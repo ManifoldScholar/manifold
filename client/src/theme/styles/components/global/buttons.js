@@ -421,6 +421,10 @@ export default `
       background-color: var(--color-accent-primary-dull);
     }
 
+    &.focus-visible {
+      outline-color: var(--strong-color);
+    }
+
     &:active {
       background-color: var(--color-accent-primary-medium);
     }
