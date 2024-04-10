@@ -297,11 +297,24 @@ exports[`Reader.Header Component matches the snapshot 1`] = `
   </div>
   <button
     aria-hidden={true}
-    className="reader-header__button reader-header__button--pad-default reader-header__options-button"
+    className="reader-header__button reader-header__options-button"
     onClick={[Function]}
     tabIndex={-1}
   >
-    glossary.option_title_case_other
+    <span>
+      glossary.option_title_case_other
+    </span>
+    <IconComposer
+      className="reader-header__options-button-icon reader-header__options-button-icon--options"
+      fill="currentColor"
+      icon="menu32"
+      size="default"
+      svgProps={
+        Object {
+          "aria-hidden": true,
+        }
+      }
+    />
   </button>
   <HeaderNotification />
 </header>
