@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import { resourcesAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -63,6 +64,10 @@ export class NotationResourceDetailContainer extends PureComponent {
         <Overlay
           closeCallback={this.handleClose}
           appearance="overlay-full bg-neutral90"
+          ariaLabel={
+            this.props.resource.attributes?.titlePlaintext ??
+            this.props.t("glossary.resource_one")
+          }
         >
           <div className="notation-detail">
             <Notation.Resource.Detail
@@ -76,4 +81,6 @@ export class NotationResourceDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(NotationResourceDetailContainer);
+export default withTranslation()(
+  connectAndFetch(NotationResourceDetailContainer)
+);
