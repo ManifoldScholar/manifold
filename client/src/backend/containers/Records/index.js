@@ -32,7 +32,9 @@ class RecordsContainer extends PureComponent {
       >
         {subpage && (
           <HeadContent
-            title={`${t(`titles.${subpage}`)} | ${t("common.admin")}`}
+            title={`${t(
+              `titles.${subpage === "reading-groups" ? "groups" : subpage}`
+            )} | ${t("common.admin")}`}
             appendDefaultTitle
           />
         )}
