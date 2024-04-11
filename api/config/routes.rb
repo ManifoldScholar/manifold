@@ -100,6 +100,7 @@ Rails.application.routes.draw do
       resources :journal_issues, except: [:create]
       resources :journal_volumes, except: [:create, :index]
       resources :ingestion_sources, except: [:create, :index]
+      resources :annotations, only: [:index]
 
       resources :texts do
         put :toggle_export_epub_v3, on: :member, path: "export_epub_v3"
