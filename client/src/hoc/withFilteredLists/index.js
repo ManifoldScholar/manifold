@@ -9,6 +9,7 @@ import keywordFilter from "./keywordFilter";
 import journalFilters from "./journalFilters";
 import entitlementFilters from "./entitlementFilters";
 import assetFilters from "./assetFilters";
+import readingGroupFilters from "./readingGroupFilters";
 
 export default withFilters;
 
@@ -22,5 +23,6 @@ export {
   keywordFilter,
   journalFilters,
   entitlementFilters,
-  assetFilters
+  assetFilters,
+  readingGroupFilters
 };
