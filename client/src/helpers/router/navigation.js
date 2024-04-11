@@ -112,6 +112,12 @@ class Navigation {
             route: "backendRecordsEntitlements",
             entity: "entitlement",
             ability: "update"
+          },
+          {
+            label: "titles.groups",
+            route: "backendRecordsReadingGroups",
+            entity: "readingGroup",
+            ability: "update"
           }
         ]
       },
@@ -388,6 +394,12 @@ class Navigation {
         label: "Entitlements",
         route: "backendRecordsEntitlements",
         entity: "entitlementImport",
+        ability: "update"
+      },
+      {
+        label: "titles.groups",
+        route: "backendRecordsReadingGroups",
+        entity: "readingGroup",
         ability: "update"
       }
     ];
