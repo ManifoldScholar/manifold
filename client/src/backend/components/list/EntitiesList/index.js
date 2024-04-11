@@ -29,6 +29,7 @@ import JournalIssueRow from "./Entity/JournalIssueRow";
 import PendingEntitlementRow from "./Entity/PendingEntitlementRow";
 import EntitlementImportRow from "./Entity/EntitlementImportRow";
 import AssetRow from "./Entity/AssetRow";
+import ReadingGroupRow from "./Entity/ReadingGroupRow";
 
 export default List;
 export {
@@ -61,5 +62,6 @@ export {
   JournalIssueRow,
   PendingEntitlementRow,
   EntitlementImportRow,
-  AssetRow
+  AssetRow,
+  ReadingGroupRow
 };

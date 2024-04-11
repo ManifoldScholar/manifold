@@ -25,6 +25,7 @@ import EntitlementsPending from "backend/containers/entitlements-pending";
 import Analytics from "backend/containers/analytics";
 import Journals from "backend/containers/journals";
 import Journal from "backend/containers/journal";
+import ReadingGroups from "backend/containers/reading-groups";
 
 export default {
   Backend,
@@ -156,5 +157,6 @@ export default {
   EntitlementsPendingNew: EntitlementsPending.AddEdit,
   EntitlementsPendingEdit: EntitlementsPending.AddEdit,
   EntitlementsPendingImport: EntitlementsPending.Import,
-  CSVEntitlementImports: EntitlementsPending.CSVImports
+  CSVEntitlementImports: EntitlementsPending.CSVImports,
+  ReadingGroupsList: ReadingGroups.List
 };
