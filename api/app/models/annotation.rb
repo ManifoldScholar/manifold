@@ -183,6 +183,8 @@ class Annotation < ApplicationRecord
       order(created_at: :asc)
     when "created_at DESC"
       order(created_at: :desc)
+    when "created_by"
+      order(creator_id: :desc)
     else
       order(created: :desc)
     end
@@ -196,6 +198,14 @@ class Annotation < ApplicationRecord
   delegate :node, to: :annotation_node, prefix: :derived, allow_nil: true
 
   class << self
+    def arel_order_test
+      users = User.arel_table
+
+      test = arel_table.join(users, Arel::Nodes::OuterJoin).on(arel_table[:creator_id].eq(users[:id])).order(users[:name].desc)
+
+      binding.pry
+    end
+
     # @param [User, nil] user
     # @return [Arel::Nodes::Not]
     def arel_exclude_private_annotations_not_owned_by(user)

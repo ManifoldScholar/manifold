@@ -2,18 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
-import { readingGroupsAPI } from "api";
+import { annotationsAPI } from "api";
 import EntitiesList, {
   Search,
-  ReadingGroupRow
+  AnnotationRow
 } from "backend/components/list/EntitiesList";
 import { useFetch, usePaginationState, useFilterState } from "hooks";
 import { childRoutes } from "helpers/router";
-import withFilteredLists, { readingGroupFilters } from "hoc/withFilteredLists";
+import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
 
-function ReadingGroupsList({
+function AnnotationsList({
   route,
   location,
   entitiesListSearchProps,
@@ -22,16 +22,16 @@ function ReadingGroupsList({
   const { t } = useTranslation();
 
   const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const baseFilters = entitiesListSearchParams.initialreadingGroups;
+  const baseFilters = entitiesListSearchParams.initialannotations;
   const [filters, setFilters] = useFilterState(baseFilters);
 
-  const { data: readingGroups, meta, refresh } = useFetch({
-    request: [readingGroupsAPI.index, filters, pagination],
+  const { data: annotations, meta, refresh } = useFetch({
+    request: [annotationsAPI.index, filters, pagination],
     dependencies: [filters]
   });
 
   const renderChildRoutes = () => {
-    const closeUrl = lh.link("backendRecordsReadingGroups");
+    const closeUrl = lh.link("backendRecordsAnnotations");
 
     return childRoutes(route, {
       drawer: true,
@@ -46,7 +46,7 @@ function ReadingGroupsList({
   };
 
   const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
-    "readingGroups"
+    "annotations"
   );
   const updatedSetParam = (param, value) => {
     setParam(param, value);
@@ -60,12 +60,12 @@ function ReadingGroupsList({
   return (
     <>
       {renderChildRoutes()}
-      {readingGroups && (
+      {annotations && (
         <>
-          <PageHeader type="list" title={t("titles.groups")} />
+          <PageHeader type="list" title={t("titles.annotations")} />
           <EntitiesList
-            entityComponent={ReadingGroupRow}
-            entities={readingGroups}
+            entityComponent={AnnotationRow}
+            entities={annotations}
             search={
               <Search
                 {...searchProps}
@@ -75,7 +75,7 @@ function ReadingGroupsList({
             }
             pagination={meta.pagination}
             showCount
-            unit={t("glossary.reading_group", {
+            unit={t("glossary.annotation", {
               count: meta.pagination.totalCount
             })}
             callbacks={{
@@ -88,13 +88,13 @@ function ReadingGroupsList({
   );
 }
 
-export default withFilteredLists(withConfirmation(ReadingGroupsList), {
-  readingGroups: readingGroupFilters()
+export default withFilteredLists(withConfirmation(AnnotationsList), {
+  annotations: annotationFilters()
 });
 
-ReadingGroupsList.displayName = "ReadingGroups.List";
+AnnotationsList.displayName = "Annotations.List";
 
-ReadingGroupsList.propTypes = {
+AnnotationsList.propTypes = {
   route: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   confirm: PropTypes.func,
