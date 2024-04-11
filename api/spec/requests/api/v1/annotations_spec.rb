@@ -7,6 +7,10 @@ RSpec.describe "Annotations", type: :request do
     TextSections::ExtrapolateNodes.new.call
   end
 
+  path "/annotations" do
+    include_examples "an API index request", model: Annotation
+  end
+
   path "/annotations/{id}" do
     include_examples "an API update request", model: Annotation, authorized_user: :admin
     include_examples "an API destroy request", model: Annotation, authorized_user: :admin
