@@ -117,5 +117,10 @@
     "avatar_for_name": "{{name}}'s avatar",
     "publisher_logo": "Publisher Logo: Click to return to the browse page",
     "entity_cover": "Cover of {{entity}}"
+  },
+  "powered_by": {
+    "reader_text": "Powered by Manifold Scholarship. Learn more at",
+    "frontend_text": "Powered by",
+    "version": "v{{number}}"
   }
 }

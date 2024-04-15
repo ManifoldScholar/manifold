@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 import withPluginReplacement from "hoc/withPluginReplacement";
 import Utility from "global/components/utility";
 import { FrontendModeContext } from "helpers/contexts";
@@ -13,7 +14,8 @@ class PoweredBy extends PureComponent {
 
   static propTypes = {
     dull: PropTypes.bool,
-    withVersion: PropTypes.bool
+    withVersion: PropTypes.bool,
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -63,6 +65,8 @@ class PoweredBy extends PureComponent {
       ? this.props.settings?.attributes?.calculated?.manifoldVersion?.version
       : null;
 
+    const { t } = this.props;
+
     return (
       <Styled.Wrapper
         as={this.wrapWithLink ? "a" : "div"}
@@ -84,22 +88,26 @@ class PoweredBy extends PureComponent {
                 <Styled.Copyright>
                   {this.props.children}
                   <Styled.LogoText as="div" $tiny>
-                    Powered by Manifold Scholarship. Learn more at{" "}
-                    <a {...this.manifoldLinkProps}>
-                      <span className="screen-reader-text">
-                        Opens in new tab or window
-                      </span>
-                      manifoldapp.org
-                    </a>
+                    {t("powered_by.reader_text")}
+                  </Styled.LogoText>
+                  <Styled.LogoText as="a" $tiny {...this.manifoldLinkProps}>
+                    <span className="screen-reader-text">
+                      {t("navigation.external_links_opens_in_new")}
+                    </span>
+                    manifoldapp.org
                   </Styled.LogoText>
                 </Styled.Copyright>
               )}
               {(this.isStandaloneFooter || this.isLibraryFooter) && (
                 <Styled.LogoText>
-                  <Styled.LogoText $neutral>Powered by </Styled.LogoText>{" "}
-                  <Styled.LogoText $white>Manifold</Styled.LogoText>{" "}
+                  <Styled.LogoText $neutral>
+                    {t("powered_by.frontend_text")}
+                  </Styled.LogoText>
+                  <Styled.LogoText $white>{t("app.manifold")}</Styled.LogoText>
                   {version && (
-                    <Styled.LogoText $white> v{version}</Styled.LogoText>
+                    <Styled.LogoText $white>
+                      {t("powered_by.version", { number: version })}
+                    </Styled.LogoText>
                   )}
                 </Styled.LogoText>
               )}
@@ -115,5 +123,7 @@ class PoweredBy extends PureComponent {
 }
 
 export default withSettings(
-  withPluginReplacement(PoweredBy, "Global.Components.Footers.PoweredBy")
+  withPluginReplacement(
+    withTranslation()(PoweredBy, "Global.Components.Footers.PoweredBy")
+  )
 );
