@@ -388,7 +388,7 @@ class AnnotationEditor extends PureComponent {
         </form>
         {this.showUnverifiedMessage && (
           <Styled.UnverifiedMessage>
-            To publicly annotate texts you must first verify your email
+            {t("reader.notes.unverified_message")}
           </Styled.UnverifiedMessage>
         )}
       </div>
