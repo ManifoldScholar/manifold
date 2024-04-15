@@ -180,15 +180,18 @@ export default `
   &__item-icon {
     grid-area: icon;
     color: var(--weak-color);
+
+    ${respond(`align-self: center;`, 120)}
   }
 
   &__item-inner {
     display: flex;
     flex-direction: column;
+    gap: 12px;
     grid-area: inner;
-    align-items: baseline;
+    align-items: start;
 
-    ${respond(`flex-direction: row;`, 120)}
+    ${respond(`flex-direction: row; align-items: center; gap: 40px`, 120)}
   }
 
   &__item-text {
@@ -220,17 +223,9 @@ export default `
   }
 
   &__item-tag {
-    margin-top: 12px;
-    width: 100%;
-
-    ${respond(
-      `margin-top: -3px;
-    margin-left: 24px;
-    width: auto;
-    flex-basis: ${TAG_WIDTH};
-    `,
-      120
-    )}
+    width: ${TAG_WIDTH};
+    flex-shrink: 0;
+    display: flex;
   }
 }
 `;
