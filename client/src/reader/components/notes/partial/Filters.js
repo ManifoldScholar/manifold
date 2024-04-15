@@ -36,7 +36,7 @@ class Filters extends Component {
     return (
       <label
         htmlFor={checkboxId}
-        className="notes-filters__checkbox checkbox checkbox--gray"
+        className="notes-filters__checkbox checkbox checkbox--white"
       >
         <input
           type="checkbox"

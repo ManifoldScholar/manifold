@@ -5,6 +5,7 @@ import {
   drawerPadding
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
+import { ZOOM_BREAKPOINT } from "theme/styles/components/reader/readerHeader";
 
 function drawerSlideTransition(
   from = "right",
@@ -123,9 +124,11 @@ export const Drawer = styled.div`
 export const DrawerReader = styled(Drawer)`
   --Dropzone-max-width: 350px;
 
-  top: var(--reader-header-height);
+  top: calc(var(--reader-header-height) * 2);
   z-index: 150;
   padding: 0 !important;
+
+  ${respond(`top: var(--reader-header-height);`, ZOOM_BREAKPOINT)}
 
   .panel-exit & {
     transform: translateX(0);

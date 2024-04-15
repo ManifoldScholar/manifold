@@ -8,6 +8,8 @@ import {
   defaultTransitionProps
 } from "theme/styles/mixins";
 
+export const ZOOM_BREAKPOINT = "290px";
+
 export default `
 .reader-header {
   --padding-lateral: var(--container-padding-inline-narrow);
@@ -24,15 +26,22 @@ export default `
   &__inner {
     position: relative;
     display: grid;
-    grid-template: "menu-group-left title-bar menu-group-right" 46px / max-content 1fr max-content;
-    width: 200vw;
+    grid-template: "menu-group-left" 46px
+                    "menu-group-right" 46px / 100%;
+    width: 100vw;
     background-color: var(--box-bg-color);
     transition: transform var(--transition-duration-default) ease-out;
 
-    &--shifted {
-      transform: translateX(-100vw);
-    }
+    ${respond(
+      `grid-template: "menu-group-left title-bar menu-group-right" 46px / max-content 1fr max-content;
+      width: 200vw;
 
+      &--shifted {
+        transform: translateX(-100vw);
+      }
+      `,
+      ZOOM_BREAKPOINT
+    )}
     ${respond(`width: 100%;`, 50)}
   }
 
@@ -180,12 +189,13 @@ export default `
     position: absolute;
     top: 0;
     right: 0;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: flex-end;
     width: fit-content;
     padding-inline: 12px;
 
+    ${respond(`display: inline;`, ZOOM_BREAKPOINT)}
     ${respond(`display: none;`, 50)}
 
     > span {
@@ -195,14 +205,6 @@ export default `
   }
 
   &__options-button-icon {
-    ${respond(
-      `
-      margin-right: -10px;
-      margin-left: 3px;
-      `,
-      20
-    )}
-
     &--options {
       ${respond(`display: none;`, 20)}
     }
