@@ -60,6 +60,10 @@ export default `
       top: -1px;
       color: var(--strong-color);
       background-color: var(--box-medium-bg-color);
+
+      > svg {
+        top: 1px;
+      }
     }
   }
 `;

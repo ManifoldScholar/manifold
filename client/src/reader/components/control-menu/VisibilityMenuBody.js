@@ -111,7 +111,7 @@ class VisibilityMenuBody extends PureComponent {
         return "annotate24";
       case "resource":
         return "resource24";
-      case "reading group":
+      case "reading-group":
         return "readingGroup24";
       default:
         return "";
@@ -119,6 +119,7 @@ class VisibilityMenuBody extends PureComponent {
   };
 
   renderFilter(format, label, children) {
+    const flex = format !== "reading-group";
     return (
       <li key={`visibility-${format}`} className="visibility-menu__section">
         <fieldset className="visibility-menu__group">
@@ -130,7 +131,12 @@ class VisibilityMenuBody extends PureComponent {
             />
             <span className="visibility-menu__group-name">{label}</span>
           </legend>
-          <div className="visibility-menu__filters control-menu__section">
+          <div
+            className={classNames(
+              "visibility-menu__filters control-menu__section",
+              { "visibility-menu__filters--flex": flex }
+            )}
+          >
             {children}
           </div>
         </fieldset>
@@ -195,7 +201,7 @@ class VisibilityMenuBody extends PureComponent {
     const label = this.canAccessReadingGroups
       ? this.props.t("glossary.reading_group_title_case_other")
       : this.props.t("common.visibility_title_case");
-    return this.renderFilter("reading group", label, children);
+    return this.renderFilter("reading-group", label, children);
   }
 
   renderCheckboxGroup(format, filterState = {}, flex) {

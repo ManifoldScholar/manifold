@@ -3,9 +3,11 @@ import {
   rgba,
   listUnstyled,
   tailUp,
-  defaultTransitionProps
+  defaultTransitionProps,
+  respond
 } from "theme/styles/mixins";
 import { headerLayout } from "theme/styles/variables/crossComponent";
+import { ZOOM_BREAKPOINT } from "theme/styles/components/reader/readerHeader";
 
 const { menuSlideDistance } = headerLayout;
 
@@ -24,7 +26,13 @@ export const List = styled.ul`
   white-space: nowrap;
   background-color: var(--color-base-neutral05);
   overflow: auto;
-  max-block-size: calc(100vh - var(--reader-header-height));
+  max-block-size: calc(100vh - var(--reader-header-height) * 2);
+
+  ${respond(
+    `max-block-size: calc(100vh - var(--reader-header-height));`,
+    ZOOM_BREAKPOINT
+  )}
+
 
   ${({ $visible, $context }) =>
     $visible

@@ -12,6 +12,17 @@ export default `
       ${listUnstyled}
     }
 
+    &__filters {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+
+      &--flex {
+        ${respond(`flex-direction: row; gap: 32px;`, 20)}
+      }
+    }
+
     &__group {
       padding: 0;
       margin: 0;
@@ -35,16 +46,11 @@ export default `
 
     &__checkbox {
       & + & {
-        margin-left: 32px;
+        margin-left: 0;
       }
 
-      &--flex{
+      &--flex {
         display: flex;
-
-        & + & {
-          margin-top: 14px;
-          margin-left: 0;
-        }
       }
     }
 

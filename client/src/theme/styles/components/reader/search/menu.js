@@ -7,6 +7,7 @@ import {
   tailUp
 } from "theme/styles/mixins";
 import { headerLayout } from "theme/styles/variables/crossComponent";
+import { ZOOM_BREAKPOINT } from "../readerHeader";
 
 export default `
   /* Search Menu button and panel global styles (see header styles for context specific styles) */
@@ -67,6 +68,13 @@ export default `
     max-width: 100vw;
     white-space: nowrap;
     background-color: var(--color-base-neutral10);
+    max-block-size: calc(100vh - var(--reader-header-height) * 2);
+    overflow: auto;
+
+    ${respond(
+      `max-block-size: calc(100vh - var(--reader-header-height));`,
+      ZOOM_BREAKPOINT
+    )}
 
     .header-app & {
       z-index: 1; /* ensure menu is on top of .header-app */
