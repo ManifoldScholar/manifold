@@ -106,6 +106,7 @@ export const Copyright = styled.div`
 export const LogoText = styled("span", transientOptions)`
   display: inline-block;
   color: var(--PoweredBy-text-color);
+  margin-inline-end: .25em;
 
   ${({ $neutral }) =>
     $neutral &&

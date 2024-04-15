@@ -76,6 +76,7 @@
   },
   "external_links": {
     "view_on_social": "View this project on {{service}}",
-    "share_on_social": "Share on {{service}}"
+    "share_on_social": "Share on {{service}}",
+    "opens_in_new": "Opens in new tab or window"
   }
 }
