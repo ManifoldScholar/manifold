@@ -1,10 +1,6 @@
-import {
-  defaultTransitionProps,
-  textTruncate,
-  respond
-} from "theme/styles/mixins";
+import { defaultTransitionProps, textTruncate } from "theme/styles/mixins";
 
-export const TAG_WIDTH = "335px";
+export const TAG_WIDTH = "200px";
 const COUNT_WIDTH = "56px";
 
 export default `
@@ -23,8 +19,6 @@ export default `
       width: max-content;
       max-width: min(100%, ${TAG_WIDTH});
       font-size: 14px;
-
-      ${respond(`margin-inline-start: auto;`, 120)}
     }
 
     &--creator {
@@ -32,8 +26,6 @@ export default `
       width: max-content;
       max-width: min(100%, ${TAG_WIDTH});
       font-size: 12px;
-
-      ${respond(`margin-inline-start: auto;`, 120)}
     }
 
     &__inner {
