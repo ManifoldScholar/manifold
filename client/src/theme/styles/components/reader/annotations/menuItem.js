@@ -46,7 +46,6 @@ export default `
       display: block;
       grid-area: label;
       min-height: 22px;
-      overflow: hidden;
       font-size: 17px;
       font-family: var(--font-family-sans);
       text-wrap: wrap;

@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import GlobalForm from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
-import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
 import RGMenuItem from "reader/components/annotation/popup/parts/RGMenuItem";
@@ -283,17 +281,6 @@ class AnnotationEditor extends PureComponent {
               />
             ))}
         </div>
-        {this.canAccessReadingGroups && (
-          <div className="annotation-group-options__footer">
-            <Link
-              to={lh.link("frontendMyReadingGroups")}
-              className="annotation-manage-groups-link"
-            >
-              <span>{this.props.t("actions.manage_groups")}</span>
-              <IconComposer icon="link24" size="default" />
-            </Link>
-          </div>
-        )}
       </div>
     );
   }
