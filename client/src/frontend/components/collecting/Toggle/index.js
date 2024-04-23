@@ -80,7 +80,8 @@ function CollectingToggle({
   const useOutlinedStarIcon = outlined && view === "add";
 
   const screenReaderButtonText = () => {
-    if (hasReadingGroups) return t("actions.toggle_collecting");
+    if (hasReadingGroups)
+      return t("actions.toggle_collecting", { title: collectableTitle });
     switch (view) {
       case "add":
       case "add-active":
