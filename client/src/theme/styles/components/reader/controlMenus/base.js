@@ -31,6 +31,12 @@ export default `
       font-weight: var(--font-weight-medium);
     }
 
+    &__legend {
+      ${utilityPrimary}
+      font-size: 13px;
+      margin-block-end: 18px;
+    }
+
     &__button {
       ${buttonUnstyled}
       ${utilityPrimary}
@@ -56,6 +62,7 @@ export default `
 
       &:disabled {
         color: ${transparentize("neutral75", 0.5)};
+        cursor: default;
       }
     }
   }
