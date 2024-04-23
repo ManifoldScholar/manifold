@@ -104,6 +104,10 @@ class FilteredList extends PureComponent {
               icon="link24"
               size="default"
               className="notes-filtered-list__see-all-icon button-primary__icon"
+              svgProps={{
+                role: "img",
+                title: this.props.t("external_links.opens_in_new")
+              }}
             />
           </button>
         </div>
