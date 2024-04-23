@@ -92,7 +92,7 @@ class PoweredBy extends PureComponent {
                   </Styled.LogoText>
                   <Styled.LogoText as="a" $tiny {...this.manifoldLinkProps}>
                     <span className="screen-reader-text">
-                      {t("navigation.external_links_opens_in_new")}
+                      {t("external_links.opens_in_new")}
                     </span>
                     manifoldapp.org
                   </Styled.LogoText>

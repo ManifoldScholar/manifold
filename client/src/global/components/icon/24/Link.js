@@ -69,10 +69,13 @@ export default class Link extends Component {
       viewBox: this.viewBox
     };
 
-    const svgProps = Object.assign(baseSvgProps, this.props.svgProps);
+    const { title, ...restProps } = this.props.svgProps;
+
+    const svgProps = Object.assign(baseSvgProps, restProps);
 
     return (
       <svg {...svgProps}>
+        {title && <title>{title}</title>}
         <path
           fill={this.fill}
           d="M15.9993,19.0001 L15.9993,13.0591 L16.9993,13.0591 L16.9993,20.0001 L3.9993,20.0001 L3.9993,7.0001 L10.9993,7.0001 L10.9993,8.0001 L4.9993,8.0001 L4.9993,19.0001 L15.9993,19.0001 Z M11.9993,4.0001 L19.9993,4.0001 L19.9993,12.0001 L18.9993,12.0001 L18.9993,5.7071 L10.8533,13.8541 L10.1453,13.1461 L18.2923,5.0001 L11.9993,5.0001 L11.9993,4.0001 Z"
