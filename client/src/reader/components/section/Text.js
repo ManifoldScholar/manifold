@@ -58,8 +58,18 @@ export default class Text extends Component {
     return null;
   }
 
+  componentDidMount() {
+    if (this.el && this.props.location.state?.pageChange) {
+      this.el.focus();
+    }
+  }
+
   componentDidUpdate() {
     this.checkRequestAnnotationHash();
+
+    if (this.el && this.props.location.state?.pageChange) {
+      this.el.focus();
+    }
   }
 
   // If the URL points to annotation that's not currently visible (not in
@@ -119,9 +129,11 @@ export default class Text extends Component {
     return (
       <HtmlClass className={fontSizeClass}>
         <div
+          id="focus-on-page-change"
           ref={el => {
             this.el = el;
           }}
+          tabIndex={-1}
           className="main-content"
           style={{ flexGrow: 1 }}
         >
