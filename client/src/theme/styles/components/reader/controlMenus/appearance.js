@@ -16,6 +16,8 @@ export default `
     }
 
     &__section {
+      padding: 24px 30px 28px 28px;
+
       &:nth-child(even) {
         background-color: var(--box-medium-bg-color);
       }
@@ -23,7 +25,13 @@ export default `
       &:last-child {
         padding: 0;
         border-top: none;
-        ${respond(`padding: 30px 28px;`, 40)}
+        ${respond(`padding: 24px 30px 28px 28px;`, 40)}
+      }
+
+      &:has(.appearance-menu__font-control-group) {
+        & .control-menu__legend {
+          margin-block-end: 0;
+        }
       }
     }
 
@@ -64,6 +72,11 @@ export default `
         ${defaultHoverStyle}
         border-color: var(--hover-color);
       }
+
+      .appearance-menu__radio-input.focus-visible ~ & {
+        outline: 1px solid;
+        outline-offset: 4px;
+      }
     }
 
     &__button-base {
@@ -92,7 +105,6 @@ export default `
         "font-style size-sans" auto / 1fr auto;
       grid-row-gap: 23px;
       padding-top: 16px;
-      padding-bottom: 16px;
 
       ${respond(`grid-row-gap: 29px;`, 50)}
     }
@@ -166,10 +178,6 @@ export default `
       &:not(:first-child) {
         margin-left: 15px;
       }
-    }
-
-    &__color-buttons-container {
-      padding: 15px 0;
     }
 
     &__color-scheme {

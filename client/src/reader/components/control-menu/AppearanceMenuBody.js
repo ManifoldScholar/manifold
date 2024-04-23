@@ -212,7 +212,7 @@ class AppearanceMenuBody extends Component {
     return (
       <fieldset className="appearance-menu__radio-group">
         <legend className="screen-reader-text">
-          {this.props.t("reader.menus.appearance.select_font")}
+          {this.props.t("reader.menus.appearance.font_style")}
         </legend>
         <div className="appearance-menu__radio-stack">
           {this.fontStyleOptions.map(option => (
@@ -247,8 +247,8 @@ class AppearanceMenuBody extends Component {
 
     return (
       <fieldset className="appearance-menu__radio-group">
-        <legend className="screen-reader-text">
-          {this.props.t("reader.menus.appearance.select_color")}
+        <legend className="control-menu__legend">
+          {this.props.t("reader.menus.appearance.color_scheme")}
         </legend>
         {this.colorSchemeOptions.map(option => (
           <label key={option.value} className={labelClassName(option)}>
@@ -280,85 +280,88 @@ class AppearanceMenuBody extends Component {
     );
 
     return (
-      <li className="appearance-menu__section control-menu__section">
-        <div className="appearance-menu__font-control-group">
-          <div className="appearance-menu__font-style-control">
-            {this.renderFontStyleControl()}
-          </div>
-          <div className="appearance-menu__font-size-control appearance-menu__font-size-control--serif">
-            <div
-              role="group"
-              aria-label={this.props.t("reader.menus.appearance.adjust_font")}
-            >
-              <button
-                className={fontSizeButtonClass}
-                disabled={this.serifDisabled}
-                aria-disabled={!this.fontSizeDecreasable}
-                onClick={event => {
-                  this.decrementSizeHandler(event, this.fontSizeDecreasable);
-                }}
+      <li className="appearance-menu__section">
+        <fieldset>
+          <legend className="control-menu__legend">
+            {this.props.t("reader.menus.appearance.font")}
+          </legend>
+          <div className="appearance-menu__font-control-group">
+            <div className="appearance-menu__font-style-control">
+              {this.renderFontStyleControl()}
+            </div>
+            <div className="appearance-menu__font-size-control appearance-menu__font-size-control--serif">
+              <div
+                role="group"
+                aria-label={this.props.t("reader.menus.appearance.adjust_font")}
               >
-                <Utility.IconComposer icon="MinusUnique" size={30} />
-                <span className="screen-reader-text">
-                  {this.props.t("reader.menus.appearance.decrease_font")}
-                </span>
-              </button>
-              <button
-                className={fontSizeButtonClass}
-                disabled={this.serifDisabled}
-                aria-disabled={!this.fontSizeIncreasable}
-                onClick={event => {
-                  this.incrementSizeHandler(event, this.fontSizeIncreasable);
-                }}
-              >
-                <Utility.IconComposer icon="PlusUnique" size={30} />
-                <span className="screen-reader-text">
-                  {this.props.t("reader.menus.appearance.increase_font")}
-                </span>
-              </button>
+                <button
+                  className={fontSizeButtonClass}
+                  disabled={this.serifDisabled}
+                  aria-disabled={!this.fontSizeDecreasable}
+                  onClick={event => {
+                    this.decrementSizeHandler(event, this.fontSizeDecreasable);
+                  }}
+                >
+                  <Utility.IconComposer icon="MinusUnique" size={30} />
+                  <span className="screen-reader-text">
+                    {this.props.t("reader.menus.appearance.decrease_font")}
+                  </span>
+                </button>
+                <button
+                  className={fontSizeButtonClass}
+                  disabled={this.serifDisabled}
+                  aria-disabled={!this.fontSizeIncreasable}
+                  onClick={event => {
+                    this.incrementSizeHandler(event, this.fontSizeIncreasable);
+                  }}
+                >
+                  <Utility.IconComposer icon="PlusUnique" size={30} />
+                  <span className="screen-reader-text">
+                    {this.props.t("reader.menus.appearance.increase_font")}
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div className="appearance-menu__font-size-control appearance-menu__font-size-control--sans">
+              <div>
+                <button
+                  className={fontSizeButtonClass}
+                  disabled={this.sansDisabled}
+                  aria-disabled={!this.fontSizeDecreasable}
+                  onClick={event => {
+                    this.decrementSizeHandler(event, this.fontSizeDecreasable);
+                  }}
+                >
+                  <Utility.IconComposer icon="MinusUnique" size={30} />
+                  <span className="screen-reader-text">
+                    {this.props.t("reader.menus.appearance.decrease_font")}
+                  </span>
+                </button>
+                <button
+                  className={fontSizeButtonClass}
+                  disabled={this.sansDisabled}
+                  aria-disabled={!this.fontSizeIncreasable}
+                  onClick={event => {
+                    this.incrementSizeHandler(event, this.fontSizeIncreasable);
+                  }}
+                >
+                  <Utility.IconComposer icon="PlusUnique" size={30} />
+                  <span className="screen-reader-text">
+                    {this.props.t("reader.menus.appearance.increase_font")}
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
-          <div className="appearance-menu__font-size-control appearance-menu__font-size-control--sans">
-            <div>
-              <button
-                className={fontSizeButtonClass}
-                disabled={this.sansDisabled}
-                aria-disabled={!this.fontSizeDecreasable}
-                onClick={event => {
-                  this.decrementSizeHandler(event, this.fontSizeDecreasable);
-                }}
-              >
-                <Utility.IconComposer icon="MinusUnique" size={30} />
-                <span className="screen-reader-text">
-                  {this.props.t("reader.menus.appearance.decrease_font")}
-                </span>
-              </button>
-              <button
-                className={fontSizeButtonClass}
-                disabled={this.sansDisabled}
-                aria-disabled={!this.fontSizeIncreasable}
-                onClick={event => {
-                  this.incrementSizeHandler(event, this.fontSizeIncreasable);
-                }}
-              >
-                <Utility.IconComposer icon="PlusUnique" size={30} />
-                <span className="screen-reader-text">
-                  {this.props.t("reader.menus.appearance.increase_font")}
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
+        </fieldset>
       </li>
     );
   }
 
   renderColorSchemeControls() {
     return (
-      <li className="appearance-menu__section control-menu__section">
-        <div className="appearance-menu__color-buttons-container">
-          {this.renderColorSchemeControl()}
-        </div>
+      <li className="appearance-menu__section">
+        {this.renderColorSchemeControl()}
       </li>
     );
   }
@@ -371,12 +374,15 @@ class AppearanceMenuBody extends Component {
     );
 
     return (
-      <li className="appearance-menu__section control-menu__section">
+      <li className="appearance-menu__section">
         <div
           role="group"
           aria-label={this.props.t("reader.menus.appearance.adjust_margin")}
           className="appearance-menu__control-margins"
         >
+          <div className="control-menu__legend">
+            {this.props.t("reader.menus.appearance.margins")}
+          </div>
           <button
             className={buttonClass}
             aria-disabled={!this.marginIncreaseable}
