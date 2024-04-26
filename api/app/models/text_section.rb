@@ -52,7 +52,7 @@ class TextSection < ApplicationRecord
 
   # Delegation
   delegate :citation_parts, to: :text, prefix: true, allow_nil: true
-  delegate :source_path, to: :ingestion_source
+  delegate :source_path, to: :ingestion_source, allow_nil: true
   delegate :project, to: :text, allow_nil: true
   delegate :metadata, to: :text, allow_nil: true
   delegate :title, to: :text, prefix: true, allow_nil: true
