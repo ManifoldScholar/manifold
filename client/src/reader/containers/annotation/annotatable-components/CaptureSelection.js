@@ -308,6 +308,7 @@ class AnnotatableCaptureSelection extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */
     return (
       <div
+        id="text-section-interactive-region"
         ref={this.props.setSelectableRef}
         role="region"
         aria-label={this.props.t("reader.section_label")}
