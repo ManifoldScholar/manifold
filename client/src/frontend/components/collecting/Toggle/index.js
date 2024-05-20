@@ -31,7 +31,15 @@ function determineView(collected, hovered, confirmed, isCollecting) {
 }
 
 function normalizeTitle(collectable) {
-  if (collectable.attributes?.title) return collectable.attributes.title;
+  const attrs = collectable.attributes;
+  if (!attrs) return "";
+
+  if (attrs.titlePlaintext) return attrs.titlePlaintext;
+  if (attrs.title) return attrs.title;
+  if (attrs.name) {
+    if (attrs.textTitle) return `${attrs.textTitle}: ${attrs.name}`;
+    return attrs.name;
+  }
   if (collectable.label) return collectable.label;
   return "";
 }

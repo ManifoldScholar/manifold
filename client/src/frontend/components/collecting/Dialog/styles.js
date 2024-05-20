@@ -20,16 +20,16 @@ export const Inner = styled.div`
 
 export const Header = styled.header`
   display: flex;
-  align-items: baseline;
+  align-items: center;
   padding-inline-end: ${lateralPadding};
   padding-inline-start: ${lateralPadding};
 `;
 
 export const Title = styled.h2`
   margin: 0;
+  margin-block-start: -8px;
   font-size: 20px;
   font-weight: var(--font-weight-regular);
-  transform: translateY(-75%);
 `;
 
 export const Icon = styled(IconComposer)`
