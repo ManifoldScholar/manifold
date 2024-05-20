@@ -114,4 +114,10 @@ export default `
       }
     }
   }
+
+  .previous {
+    &:focus-visible {
+      outline: 2px solid var(--focus-color);
+    }
+  }
 `;

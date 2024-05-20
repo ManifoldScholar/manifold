@@ -279,7 +279,7 @@ export class Annotatable extends Component {
       );
       this.appendLastSelectionAnnotation(selectionAnnotation);
       this.resetState({
-        restoreFocusTo: this.selectableRef,
+        restoreFocusTo: this.pendingAnnotationNode,
         restoreSelectionTo: this.pendingAnnotationNode
       });
     });
