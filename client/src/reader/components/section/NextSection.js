@@ -27,7 +27,10 @@ class NextSection extends PureComponent {
     if (!nextSection || !nextSection.name) return null;
     return (
       <Link
-        to={this.getSectionPath(nextSection.id)}
+        to={{
+          pathname: this.getSectionPath(nextSection.id),
+          state: { pageChange: true }
+        }}
         className="section-next-section__link"
       >
         <header className="section-next-section__header">

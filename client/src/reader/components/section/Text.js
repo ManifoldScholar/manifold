@@ -59,16 +59,20 @@ export default class Text extends Component {
   }
 
   componentDidMount() {
-    if (this.el && this.props.location.state?.pageChange) {
-      this.el.focus();
+    const el = document.getElementById("text-section-interactive-region");
+
+    if (el && this.props.location.state?.pageChange) {
+      el.focus();
     }
   }
 
   componentDidUpdate() {
     this.checkRequestAnnotationHash();
 
-    if (this.el && this.props.location.state?.pageChange) {
-      this.el.focus();
+    const el = document.getElementById("text-section-interactive-region");
+
+    if (el && this.props.location.state?.pageChange) {
+      el.focus();
     }
   }
 
@@ -128,15 +132,7 @@ export default class Text extends Component {
 
     return (
       <HtmlClass className={fontSizeClass}>
-        <div
-          id="focus-on-page-change"
-          ref={el => {
-            this.el = el;
-          }}
-          tabIndex={-1}
-          className="main-content"
-          style={{ flexGrow: 1 }}
-        >
+        <div className="main-content" style={{ flexGrow: 1 }}>
           <section className={readerAppearanceClass}>
             <Annotation.Annotatable
               currentUser={this.props.authentication.currentUser}
