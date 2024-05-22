@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+LOCATION="Portland"
+COUNTRY="US"
+STATE="Oregon"
+ORGANIZATION="Manifold Scholarship"
+UNIT="Web"
+COMMONNAME="127.0.0.1"
+KEYNAME="manifold"
+DIR="/etc/nginx/ssl"
+SUBJECT="/C=${COUNTRY}/ST=${STATE}/L=${LOCATION}/O=${ORGANIZATION}/OU=${UNIT}/CN=${COMMONNAME}"
+CERTPATH="${DIR}/${KEYNAME}.crt"
+KEYPATH="${DIR}/${KEYNAME}.key"
+
+
+if [ -f $CERTPATH ]; then
+  exit
+fi
+
+if [ -f $KEYPATH ]; then
+  exit
+fi
+
+mkdir -p $DIR
+echo "Creating self-signed certificate..."
+openssl req -new -newkey rsa:2048 -x509 -sha256 -days 730 -nodes -out $CERTPATH -keyout $KEYPATH -subj "${SUBJECT}"

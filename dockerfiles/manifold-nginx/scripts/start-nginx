@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+install-self-signed-cert
+echo "Starting Nginx..."
+nginx -g 'daemon off;'

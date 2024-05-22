@@ -1,0 +1,94 @@
+# Copied from github.com/ManifoldScholar/manifold-docker-compose (v8.1.1)
+version: "3"
+services:
+  postgres:
+    image: postgres:11-alpine
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: 'manifold_production'
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
+    networks:
+      - network1
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.7
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      xpack.security.enabled: 'false'
+    networks:
+      - network1
+  redis:
+    image: redis:alpine
+    volumes:
+      - ./data/redis:/data
+    networks:
+      - network1
+  api_cable:
+    image: manifoldscholarship/manifold-api:${MANIFOLD_TAG}
+    volumes:
+      - ./data/api/public:/opt/manifold/api/public
+      - ./data/sockets:/manifold_sockets
+    env_file:
+      - ./environment/manifold.env
+    networks:
+      - network1
+    command: ["./start-and-run", "bin/cable"]
+  api_clockwork:
+    image: manifoldscholarship/manifold-api:${MANIFOLD_TAG}
+    volumes:
+      - ./data/api/public:/opt/manifold/api/public
+      - ./data/sockets:/manifold_sockets
+    env_file:
+      - ./environment/manifold.env
+      - ./environment/rails.env
+    networks:
+      - network1
+    command: ["./start-and-run", "bin/zhong zhong.rb"]
+  api_rails:
+    image: manifoldscholarship/manifold-api:${MANIFOLD_TAG}
+    volumes:
+      - ./data/api/public:/opt/manifold/api/public
+      - ./data/sockets:/manifold_sockets
+    env_file:
+      - ./environment/manifold.env
+    command: ["./start-and-run", "bin/puma -C config/puma.rb"]
+    networks:
+      - network1
+  api_sidekiq:
+    image: manifoldscholarship/manifold-api:${MANIFOLD_TAG}
+    volumes:
+      - ./data/api/public:/opt/manifold/api/public
+      - ./data/sockets:/manifold_sockets
+    env_file:
+      - ./environment/manifold.env
+    networks:
+      - network1
+    command: ["./start-and-run", "bin/sidekiq"]
+  client:
+    image: manifoldscholarship/manifold-client:${MANIFOLD_TAG}
+    env_file:
+      - ./environment/manifold.env
+    volumes:
+      - ./data/api/public:/opt/manifold/api/public
+      - ./data/sockets:/manifold_sockets
+    command: yarn run start-docker
+    networks:
+      - network1
+  proxy:
+    image: manifoldscholarship/manifold-nginx:${MANIFOLD_TAG}
+    volumes:
+      - ./data/nginx/ssl:/etc/nginx/ssl
+      - ./data/api/public:/opt/manifold/api/public
+      - ./data/sockets:/manifold_sockets
+    ports:
+     - "4000:80"
+     - "4001:443"
+    command: ["start-nginx"]
+    networks:
+      - network1
+#volumes:
+#  manifold_data:
+#  manifold_sockets:
+
+networks:
+  network1:
