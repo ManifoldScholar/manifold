@@ -21,7 +21,7 @@ env:
   COMPOSE_DOCKER_CLI_BUILD: 1
 
 jobs:
-  build-api:
+  build:
     runs-on: ubuntu-latest
     steps:
       - id: setup
@@ -50,6 +50,22 @@ jobs:
             name=${{ env.REGISTRY }}/${{ env.REPO_LOWER }}/api
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
+      - name: Retag action for Client
+        id: meta-client
+        uses: docker/metadata-action@v4.1.1
+        with:
+          images: |
+            name=${{ env.REGISTRY }}/${{ env.REPO_LOWER }}/client
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+      - name: Retag action for Nginx
+        id: meta-nginx
+        uses: docker/metadata-action@v4.1.1
+        with:
+          images: |
+            name=${{ env.REGISTRY }}/${{ env.REPO_LOWER }}/nginx
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
       - name: Build and push API
         uses: scientist-softserv/actions/build-and-push@v0.0.22
         with:
@@ -57,7 +73,17 @@ jobs:
           location: /api
           subdir: .
           tags: ${{ steps.meta-api.outputs.tags }}
-
-  # build-client:
-
-  # build-nginx:
+      - name: Build and push Client
+        uses: scientist-softserv/actions/build-and-push@v0.0.22
+        with:
+          type: client
+          location: /client
+          subdir: .
+          tags: ${{ steps.meta-client.outputs.tags }}
+      - name: Build and push Nginx
+        uses: scientist-softserv/actions/build-and-push@v0.0.22
+        with:
+          type: nginx
+          location: /nginx
+          subdir: .
+          tags: ${{ steps.meta-nginx.outputs.tags }}
