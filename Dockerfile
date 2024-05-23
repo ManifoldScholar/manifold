@@ -20,7 +20,7 @@ RUN sed -i '/<policy domain="coder" rights="none" pattern="PDF" \/>/d' \
 COPY api /opt/manifold/api
 WORKDIR /opt/manifold/api
 ENV RAILS_LOG_TO_STDOUT=1
-RUN gem install bundler:2.2.17
+RUN gem install bundler:2.2.19
 RUN bundle install
 COPY bin/start-and-run /opt/manifold/api/start-and-run
 
