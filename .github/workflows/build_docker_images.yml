@@ -1,0 +1,38 @@
+name: Build Docker Images
+run-name: Build Docker Images of ${{ github.ref_name }} by @${{ github.actor }}
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+
+jobs:
+  build-api:
+    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.22
+    secrets: inherit
+    with:
+      platforms: "linux/amd64"
+      webTarget: api_rails
+
+  build-client:
+    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.22
+    secrets: inherit
+    with:
+      platforms: "linux/amd64"
+      webTarget: client
+
+  build-nginx:
+    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.22
+    secrets: inherit
+    with:
+      platforms: "linux/amd64"
+      webTarget: nginx
