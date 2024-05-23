@@ -15,24 +15,50 @@ on:
         required: false
         default: false
 
+env:
+  REGISTRY: ghcr.io
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+
 jobs:
   build-api:
-    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.22
+    runs-on: ubuntu-latest
     secrets: inherit
-    with:
-      platforms: "linux/amd64"
-      webTarget: api_rails
+    steps:
+      - id: setup
+        name: Setup
+        uses: scientist-softserv/actions/setup-env@v0.0.22
+        with:
+          token: ${{ secrets.CHECKOUT_TOKEN || secrets.GITHUB_TOKEN }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+        with:
+          limit-access-to-actor: true
+      - name: Retag action for API
+        id: meta-api
+        uses: docker/metadata-action@v4.1.1
+        with:
+          images: |
+            name=${{ env.REGISTRY }}/${{ env.REPO_LOWER }}/api
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+      - name: Build and push API
+        uses: scientist-softserv/actions/build-and-push@v0.0.22
+        with:
+          type: api_rails
+          location: /api
+          subdir: .
+          tags: ${{ steps.meta-api.outputs.tags }}
 
-  build-client:
-    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.22
-    secrets: inherit
-    with:
-      platforms: "linux/amd64"
-      webTarget: client
+  # build-client:
 
-  build-nginx:
-    uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.22
-    secrets: inherit
-    with:
-      platforms: "linux/amd64"
-      webTarget: nginx
+  # build-nginx:
