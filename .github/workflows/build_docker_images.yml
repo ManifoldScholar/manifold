@@ -22,6 +22,7 @@ jobs:
     with:
       platforms: "linux/amd64"
       webTarget: api_rails
+      type: api_rails
 
   build-client:
     uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.22
@@ -29,6 +30,7 @@ jobs:
     with:
       platforms: "linux/amd64"
       webTarget: client
+      type: client
 
   build-nginx:
     uses: scientist-softserv/actions/.github/workflows/build.yaml@v0.0.22
@@ -36,3 +38,4 @@ jobs:
     with:
       platforms: "linux/amd64"
       webTarget: nginx
+      type: nginx
