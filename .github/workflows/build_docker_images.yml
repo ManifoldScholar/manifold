@@ -23,7 +23,6 @@ env:
 jobs:
   build-api:
     runs-on: ubuntu-latest
-    secrets: inherit
     steps:
       - id: setup
         name: Setup
