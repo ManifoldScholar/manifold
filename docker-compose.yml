@@ -24,7 +24,7 @@ services:
     networks:
       - network1
   api_cable:
-    image: manifoldscholarship/manifold-api:${MANIFOLD_TAG}
+    image: ghcr.io/scientist-softserv/princeton-manifold/api:${TAG:-latest}
     volumes:
       - ./data/api/public:/opt/manifold/api/public
       - ./data/sockets:/manifold_sockets
@@ -34,7 +34,7 @@ services:
       - network1
     command: ["./start-and-run", "bin/cable"]
   api_clockwork:
-    image: manifoldscholarship/manifold-api:${MANIFOLD_TAG}
+    image: ghcr.io/scientist-softserv/princeton-manifold/api:${TAG:-latest}
     volumes:
       - ./data/api/public:/opt/manifold/api/public
       - ./data/sockets:/manifold_sockets
@@ -45,7 +45,7 @@ services:
       - network1
     command: ["./start-and-run", "bin/zhong zhong.rb"]
   api_rails:
-    image: manifoldscholarship/manifold-api:${MANIFOLD_TAG}
+    image: ghcr.io/scientist-softserv/princeton-manifold/api:${TAG:-latest}
     volumes:
       - ./data/api/public:/opt/manifold/api/public
       - ./data/sockets:/manifold_sockets
@@ -55,7 +55,7 @@ services:
     networks:
       - network1
   api_sidekiq:
-    image: manifoldscholarship/manifold-api:${MANIFOLD_TAG}
+    image: ghcr.io/scientist-softserv/princeton-manifold/api:${TAG:-latest}
     volumes:
       - ./data/api/public:/opt/manifold/api/public
       - ./data/sockets:/manifold_sockets
@@ -65,7 +65,7 @@ services:
       - network1
     command: ["./start-and-run", "bin/sidekiq"]
   client:
-    image: manifoldscholarship/manifold-client:${MANIFOLD_TAG}
+    image: ghcr.io/scientist-softserv/princeton-manifold/client:${TAG:-latest}
     env_file:
       - ./environment/manifold.env
     volumes:
@@ -75,7 +75,7 @@ services:
     networks:
       - network1
   proxy:
-    image: manifoldscholarship/manifold-nginx:${MANIFOLD_TAG}
+    image: ghcr.io/scientist-softserv/princeton-manifold/nginx:${TAG:-latest}
     volumes:
       - ./data/nginx/ssl:/etc/nginx/ssl
       - ./data/api/public:/opt/manifold/api/public
