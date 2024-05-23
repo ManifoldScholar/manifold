@@ -63,6 +63,11 @@ services:
 
   client:
     image: ghcr.io/scientist-softserv/princeton-manifold/client:${TAG:-latest}
+    build:
+      context: .
+      target: manifold-client
+      args:
+        - EXTRA_APK_PACKAGES=less vim bash rsync
     env_file:
       - ./environment/manifold.env
     volumes:
@@ -74,6 +79,11 @@ services:
 
   proxy:
     image: ghcr.io/scientist-softserv/princeton-manifold/nginx:${TAG:-latest}
+    build:
+      context: .
+      target: manifold-nginx
+      args:
+        - EXTRA_APK_PACKAGES=less vim bash rsync
     volumes:
       - ./data/nginx/ssl:/etc/nginx/ssl
       - ./data/api/public:/opt/manifold/api/public
