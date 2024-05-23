@@ -22,7 +22,7 @@ WORKDIR /opt/manifold/api
 ENV RAILS_LOG_TO_STDOUT=1
 RUN gem install bundler:2.2.17
 RUN bundle install
-COPY dockerfiles/manifold-api/scripts/start-and-run /opt/manifold/api/start-and-run
+COPY bin/start-and-run /opt/manifold/api/start-and-run
 
 ####################################################################################################
 # Manifold Client
