@@ -17,7 +17,7 @@ ENV MAMMOTH_PATH=/usr/lib/node_modules/mammoth/bin/mammoth
 RUN sed -i '/<policy domain="coder" rights="none" pattern="PDF" \/>/d' \
     /etc/ImageMagick-6/policy.xml
 
-COPY manifold-src/api /opt/manifold/api
+COPY api /opt/manifold/api
 WORKDIR /opt/manifold/api
 ENV RAILS_LOG_TO_STDOUT=1
 RUN gem install bundler:2.2.17
@@ -31,7 +31,7 @@ COPY dockerfiles/manifold-api/scripts/start-and-run /opt/manifold/api/start-and-
 # - github.com/ManifoldScholar/manifold-docker-build/blob/v8.1.1/dockerfiles/manifold-client/Dockerfile
 ####################################################################################################
 FROM node:16.16.0
-COPY manifold-src/client /opt/manifold/client
+COPY client /opt/manifold/client
 WORKDIR /opt/manifold/client
 RUN yarn install
 RUN cat /dev/null > /opt/manifold/client/dist/manifold/ssr/ssr.config.js
