@@ -44,7 +44,6 @@ doc
 
 ### Environments ###
 /.env
-/.env*
 !.env.sample
 
 ## Development services ###

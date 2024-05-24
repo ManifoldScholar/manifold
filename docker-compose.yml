@@ -12,7 +12,7 @@ x-api: &api
     - ./data/api/public:/opt/manifold/api/public
     - ./data/sockets:/manifold_sockets
   env_file:
-    - ./environment/manifold.env
+    - .env.development
   networks:
     - internal
 
@@ -49,8 +49,9 @@ services:
   api_clockwork:
     <<: *api
     env_file:
-      - ./environment/manifold.env
-      - ./environment/rails.env
+      - .env.development
+    environment:
+      - SERVER_PORT=4000
     command: ["./start-and-run", "bin/zhong zhong.rb"]
 
   api_rails:
@@ -69,7 +70,7 @@ services:
       args:
         - EXTRA_APK_PACKAGES=less vim bash rsync
     env_file:
-      - ./environment/manifold.env
+      - .env.development
     volumes:
       - ./data/api/public:/opt/manifold/api/public
       - ./data/sockets:/manifold_sockets
