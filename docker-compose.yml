@@ -18,7 +18,7 @@ x-api: &api
 
 services:
   postgres:
-    image: postgres:11-alpine
+    image: postgres:13.12-alpine
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
     environment:
