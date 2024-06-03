@@ -17,6 +17,7 @@ spec:
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+        checksum/princeton-manifold-production-env: {{ include (print $.Template.BasePath "/configmap-env.yaml") . | sha256sum }}
       labels:
         {{- include "princeton-manifold.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
@@ -36,6 +37,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "princeton-manifold.fullname" . }}-env
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

@@ -105,3 +105,12 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+env:
+  rails_secret_key: $RAILS_SECRET_KEY
+
+externalPostgresql:
+  host: acid-postgres-cluster-delta.postgres.svc.cluster.local
+  username: princeton-manifold
+  password: $DB_PASSWORD
+  database: princeton_manifold_production

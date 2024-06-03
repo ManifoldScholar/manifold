@@ -60,3 +60,19 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create default fully qualified service names.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "princeton-manifold.redis.fullname" -}}
+{{- printf "%s-%s" .Release.Name "redis" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "princeton-manifold.redis.host" -}}
+{{- printf "%s-master" (include "princeton-manifold.redis.fullname" .) -}}
+{{- end -}}
+
+{{- define "princeton-manifold.redis.url" -}}
+{{- printf "redis://:%s@%s:%s" .Values.redis.auth.password (include "princeton-manifold.redis.host" .) "6379/0" -}}
+{{- end -}}
