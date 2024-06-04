@@ -10,7 +10,14 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: github
+
+sharedVolume:
+  storage:
+    size: 20Gi
+  className: efs-sc
+
 nameOverride: ""
 fullnameOverride: ""
 
@@ -87,18 +94,18 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+volumes:
+  - name: shared-storage
+    persistentVolumeClaim:
+      claimName: princeton-manifold-shared-pvc
 
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+volumeMounts:
+  - mountPath: /opt/manifold/api/public
+    name: shared-storage
+    subPath: api
+  - mountPath: /opt/manifold/client
+    name: shared-storage
+    subPath: client
 
 nodeSelector: {}
 

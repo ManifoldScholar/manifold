@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "princeton-manifold.fullname" . }}-shared-pvc
+  labels:
+    {{- include "princeton-manifold.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.sharedVolume.storage.size }}
+  storageClassName: {{ .Values.sharedVolume.className }}
