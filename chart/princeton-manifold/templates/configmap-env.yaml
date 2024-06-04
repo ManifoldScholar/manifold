@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "princeton-manifold.fullname" . }}-env
+  labels:
+    app.kubernetes.io/name: {{ include "princeton-manifold.name" . }}
+    helm.sh/chart: {{ include "princeton-manifold.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  API_CABLE_SOCKET=/manifold_sockets/manifold-cable
+  API_PORT=3020
+  API_SOCKET=/manifold_sockets/manifold-api
+  CLIENT_BROWSER_API_CABLE_URL=https://princeton-manifold-production.softserv.cloud/cable
+  CLIENT_BROWSER_API_URL=https://princeton-manifold-production.softserv.cloud
+  CLIENT_SERVER_API_URL=http://princeton-manifold-production-api:3020
+  CLIENT_SERVER_PROXIES=false
+  CLIENT_SERVER_SOCKET=/manifold_sockets/manifold-client
+  DOMAIN=princeton-manifold-production.softserv.cloud
+  ELASTICSEARCH_URL=http://princeton-manifold-production-elasticsearch:9200
+  NODE_ENV=production
+  RAILS_DB_HOST={{ .Values.externalPostgresql.host }}
+  RAILS_DB_NAME={{ .Values.externalPostgresql.database }}
+  RAILS_DB_PASS={{ .Values.externalPostgresql.password }}
+  RAILS_DB_PORT=5432
+  RAILS_DB_USER={{ .Values.externalPostgresql.username }}
+  RAILS_ENV=production
+  RAILS_REDIS_URL={{ template "princeton-manifold.redis.url" . }}
+  RAILS_SECRET_KEY={{ .Values.env.rails_secret_key }}
+  SSL_ENABLED=true
