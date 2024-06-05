@@ -83,6 +83,11 @@ api:
     repository: ghcr.io/scientist-softserv/princeton-manifold/api
     pullPolicy: IfNotPresent
     tag: ""
+client:
+  image:
+    repository: ghcr.io/scientist-softserv/princeton-manifold/client
+    pullPolicy: IfNotPresent
+    tag: ""
 
 livenessProbe:
   httpGet:
