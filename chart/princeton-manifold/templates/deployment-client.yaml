@@ -32,7 +32,7 @@ spec:
           command: ["yarn", "run", "build", "&&", "yarn", "run", "start"]
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.client.image.repository }}:{{ .Values.client.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.client.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - configMapRef:

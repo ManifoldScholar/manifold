@@ -2,24 +2,20 @@
 
 release_name="${1:-princeton-manifold-production}"
 namespace="${2:-princeton-manifold-production}"
+tag=$(git rev-parse --short=8 HEAD)
 
-API_IMAGE="${API_IMAGE:-ghcr.io/scientist-softserv/princeton-manifold/api}"
-CLIENT_IMAGE="${CLIENT_IMAGE:-ghcr.io/scientist-softserv/princeton-manifold/client}"
-NGINX_IMAGE="${NGINX_IMAGE:-ghcr.io/scientist-softserv/princeton-manifold/nginx}"
-DEPLOY_TAG=$(git rev-parse --short=8 HEAD)
+DEPLOY_TAG="${DEPLOY_TAG:-$tag}"
+echo $DEPLOY_TAG
 
-# helm repo update
-#
-# helm upgrade \
-#     --install \
-#     --atomic \
-#     --timeout 15m0s \
-#     --set api.image.repository="$API_IMAGE" \
-#     --set client.image.repository="$CLIENT_IMAGE" \
-#     --set nginx.image.repository="$NGINX_IMAGE" \
-#     --set image.tag="$DEPLOY_TAG" \
-#     $HELM_EXTRA_ARGS \
-#     --namespace="$namespace" \
-#     --create-namespace \
-#     "$release_name" \
-#     ./chart/princeton-manifold
+helm repo update
+
+helm upgrade \
+    --install \
+    --atomic \
+    --timeout 15m0s \
+    --set image.tag="$DEPLOY_TAG" \
+    $HELM_EXTRA_ARGS \
+    --namespace="$namespace" \
+    --create-namespace \
+    "$release_name" \
+    ./chart/princeton-manifold
