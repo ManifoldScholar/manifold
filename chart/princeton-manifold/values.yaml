@@ -78,6 +78,12 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+api:
+  image:
+    repository: ghcr.io/scientist-softserv/princeton-manifold/api
+    pullPolicy: IfNotPresent
+    tag: ""
+
 livenessProbe:
   httpGet:
     path: /
