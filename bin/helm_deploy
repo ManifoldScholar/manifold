@@ -1,0 +1,21 @@
+#!/bin/sh
+
+release_name="${1:-princeton-manifold-production}"
+namespace="${2:-princeton-manifold-production}"
+tag=$(git rev-parse --short=8 HEAD)
+
+DEPLOY_TAG="${DEPLOY_TAG:-$tag}"
+echo $DEPLOY_TAG
+
+helm repo update
+
+helm upgrade \
+    --install \
+    --atomic \
+    --timeout 15m0s \
+    --set image.tag="$DEPLOY_TAG" \
+    $HELM_EXTRA_ARGS \
+    --namespace="$namespace" \
+    --create-namespace \
+    "$release_name" \
+    ./chart/princeton-manifold

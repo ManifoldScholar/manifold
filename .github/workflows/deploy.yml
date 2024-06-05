@@ -1,0 +1,22 @@
+name: "Deploy"
+run-name: Deploy (${{ github.ref_name }} -> ${{ inputs.environment }}) by @${{ github.actor }}
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deploy to Environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+
+jobs:
+  deploy:
+    uses: scientist-softserv/actions/.github/workflows/deploy.yaml@v0.0.22
+    secrets: inherit
