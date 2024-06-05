@@ -167,7 +167,7 @@ $_$;
 
 SET default_tablespace = '';
 
-SET default_table_access_method = heap;
+-- SET default_table_access_method = heap;
 
 --
 -- Name: action_callouts; Type: TABLE; Schema: public; Owner: -

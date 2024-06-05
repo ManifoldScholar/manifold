@@ -5,7 +5,6 @@ namespace="${2:-princeton-manifold-production}"
 tag=$(git rev-parse --short=8 HEAD)
 
 DEPLOY_TAG="${DEPLOY_TAG:-$tag}"
-echo $DEPLOY_TAG
 
 helm repo update
 
@@ -14,6 +13,7 @@ helm upgrade \
     --atomic \
     --timeout 15m0s \
     --set image.tag="$DEPLOY_TAG" \
+    --set nginx.image.tag="$DEPLOY_TAG" \
     $HELM_EXTRA_ARGS \
     --namespace="$namespace" \
     --create-namespace \

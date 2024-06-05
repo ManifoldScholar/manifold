@@ -3,6 +3,11 @@ replicaCount: 1
 imagePullSecrets:
   - name: github
 
+volumes:
+  - name: shared-storage
+    persistentVolumeClaim:
+      claimName: princeton-manifold-production-shared-pvc
+
 resources:
   limits:
     memory: "4Gi"
@@ -32,17 +37,20 @@ ingress:
         - princeton-manifold-production.softserv.cloud
       secretName: production-princeton-manifold-tls
 
-podSecurityContext:
-  runAsUser: 1001
-  runAsGroup: 101
-  fsGroup: 101
-  fsGroupChangePolicy: "OnRootMismatch"
-
 redis:
   enabled: true
   architecture: standalone
   auth:
     password: $REDIS_PASSWORD # FIXME need to set
+
+env:
+  rails_secret_key: $RAILS_SECRET_KEY
+
+externalPostgresql:
+  host: acid-postgres-cluster-delta.postgres.svc.cluster.local
+  username: princeton_manifold
+  password: $DB_PASSWORD
+  database: princeton_manifold_production
 
 nginx:
   enabled: true
