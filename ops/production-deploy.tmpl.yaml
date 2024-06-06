@@ -44,7 +44,7 @@ redis:
     password: $REDIS_PASSWORD # FIXME need to set
 
 env:
-  rails_secret_key: $RAILS_SECRET_KEY
+  rails_secret_key: $SECRET_KEY_BASE
 
 postgresql:
   enabled: true
