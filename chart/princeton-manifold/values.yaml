@@ -110,12 +110,18 @@ volumes:
       claimName: princeton-manifold-shared-pvc
 
 volumeMounts:
-  - mountPath: /opt/manifold/api/public
+  - mountPath: /opt/manifold/api/public/system
     name: shared-storage
-    subPath: api
+    subPath: system
+  - mountPath: /opt/manifold/api/public/system/cache
+    name: shared-storage
+    subPath: cache
   - mountPath: /opt/manifold/api/data
     name: shared-storage
     subPath: data
+  - mountPath: /manifold_sockets
+    name: shared-storage
+    subPath: sockets
 
 nodeSelector: {}
 
