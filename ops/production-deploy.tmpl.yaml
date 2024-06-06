@@ -51,7 +51,7 @@ postgresql:
   image:
     repository: bitnami/postgresql
     tag: 14.5.0-debian-11-r35
-    auth:
+  auth:
     database: princeton_manifold_production
     password: $DB_PASSWORD
     username: princeton_manifold

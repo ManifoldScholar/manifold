@@ -19,11 +19,11 @@ data:
   DOMAIN: princeton-manifold-production.softserv.cloud
   ELASTICSEARCH_URL: http://princeton-manifold-production-elasticsearch:9200
   NODE_ENV: production
-  RAILS_DB_HOST: {{ .Values.externalPostgresql.host }}
-  RAILS_DB_NAME: {{ .Values.externalPostgresql.database }}
-  RAILS_DB_PASS: {{ .Values.externalPostgresql.password }}
+  RAILS_DB_HOST: princeton-manifold-production-postgresql
+  RAILS_DB_NAME: {{ .Values.postgresql.auth.database }}
+  RAILS_DB_PASS: {{ .Values.postgresql.auth.password }}
   RAILS_DB_PORT: "5432"
-  RAILS_DB_USER: {{ .Values.externalPostgresql.username }}
+  RAILS_DB_USER: {{ .Values.postgresql.auth.username }}
   RAILS_ENV: production
   RAILS_REDIS_URL: {{ template "princeton-manifold.redis.url" . }}
   RAILS_SECRET_KEY: {{ .Values.env.rails_secret_key }}
