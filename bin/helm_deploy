@@ -7,7 +7,9 @@ tag=$(git rev-parse --short=8 HEAD)
 DEPLOY_TAG="${DEPLOY_TAG:-$tag}"
 
 helm repo update
+cd chart/princeton-manifold
 helm dependency build
+cd -
 
 helm upgrade \
     --install \
