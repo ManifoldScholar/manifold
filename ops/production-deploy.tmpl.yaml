@@ -71,5 +71,6 @@ nginx:
   service:
     type: ClusterIP
   image:
-    repository: ghcr.io/scientist-softserv/princeton-manifold/nginx
+    registry: ghcr.io
+    repository: scientist-softserv/princeton-manifold/nginx
     tag: $TAG
