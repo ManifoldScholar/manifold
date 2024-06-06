@@ -1,10 +1,13 @@
 apiVersion: v2
-version: 0.1.0
+version: 0.2.0
 type: application
 name: princeton-manifold
 description: An implementation of the Manifold application for Princeton University
 appVersion: "v8.1.1"
 dependencies:
+- name: postgresql
+  repository: oci://registry-1.docker.io/bitnamicharts
+  version: 11.9.13
 - name: elasticsearch
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 19.21.2

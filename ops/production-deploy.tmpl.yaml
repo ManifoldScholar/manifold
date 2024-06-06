@@ -46,11 +46,25 @@ redis:
 env:
   rails_secret_key: $RAILS_SECRET_KEY
 
-externalPostgresql:
-  host: acid-postgres-cluster-delta.postgres.svc.cluster.local
-  username: princeton_manifold
-  password: $DB_PASSWORD
-  database: princeton_manifold_production
+postgresql:
+  enabled: true
+  image:
+    repository: bitnami/postgresql
+    tag: 14.5.0-debian-11-r35
+    auth:
+    database: princeton_manifold_production
+    password: $DB_PASSWORD
+    username: princeton_manifold
+  containerPorts:
+    postgresql: 5432
+  primary:
+    service:
+      ports:
+        postgresql: 5432
+  readReplicas:
+    service:
+      ports:
+        postgresql: 5432
 
 nginx:
   enabled: true
