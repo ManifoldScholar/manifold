@@ -30,10 +30,9 @@ spec:
       containers:
         - name: {{ .Chart.Name }}-client
           command:
-            - bash
-            - -l
-            - -c
-            - "yarn run build && yarn run start"
+            - yarn
+            - run
+            - start
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.client.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
