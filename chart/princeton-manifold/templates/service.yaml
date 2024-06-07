@@ -8,8 +8,9 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: 80
       protocol: TCP
       name: http
   selector:
-    {{- include "princeton-manifold.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/name: {{ include "princeton-manifold.name" . }}-api
+    app.kubernetes.io/instance: {{ .Release.Name }}
