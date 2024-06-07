@@ -14,6 +14,3 @@ dependencies:
 - name: redis
   repository: oci://registry-1.docker.io/bitnamicharts
   version: 17.16.0
-- name: nginx
-  repository: oci://registry-1.docker.io/bitnamicharts
-  version: 16.0.7
