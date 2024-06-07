@@ -49,6 +49,10 @@ service:
   type: ClusterIP
   port: 80
 
+serviceApi:
+  type: ClusterIP
+  port: 3020
+
 ingress:
   enabled: false
   className: ""
