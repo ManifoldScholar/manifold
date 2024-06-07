@@ -70,7 +70,103 @@ nginx:
   enabled: true
   service:
     type: ClusterIP
-  image:
-    registry: ghcr.io
-    repository: scientist-softserv/princeton-manifold/nginx
-    tag: $TAG
+  serverBlock: |-
+    upstream manifold_api {
+      server unix:/manifold_sockets/manifold-api;
+     }
+
+     upstream manifold_cable {
+      server unix:/manifold_sockets/manifold-cable;
+     }
+
+     upstream manifold_client {
+      server unix:/manifold_sockets/manifold-client;
+     }
+
+    server {
+      listen 80;
+      root /opt/manifold/client/dist/build/client/build;
+
+      add_header Strict-Transport-Security "max-age=15768000; includeSubdomains; preload";
+      add_header X-Frame-Options DENY;
+      add_header X-Content-Type-Options nosniff;
+
+      include includes/manifold-server-local;
+
+      client_max_body_size 100M;
+      client_body_timeout 600s;
+      proxy_send_timeout 600s;
+      proxy_read_timeout 600s;
+
+      error_page 500 502 503 504 /50x.html;
+
+      location = /50x.html {
+          root  /opt/manifold/client/dist/build/client/build/static;
+        }
+
+      location /api {
+
+        location ~ ^/(api/static|api/sidekiq/images|api/sidekiq/stylesheets|api/sidekiq/javascripts)/ {
+          root /opt/manifold/api/public;
+        }
+
+        proxy_set_header X-Forwarded-Host $http_host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_set_header X-Sendfile-Type X-Accel-Redirect;
+        proxy_set_header X-Accel-Mapping /opt/manifold/api/public=/__send_file_accel/;
+        proxy_pass http://manifold_api;
+      }
+
+      location /__send_file_accel {
+        internal;
+        alias /opt/manifold/api/public;
+      }
+
+      location /system {
+        root /opt/manifold/api/public;
+      }
+
+      location /auth {
+        proxy_set_header X-Forwarded-Host $http_host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_pass http://manifold_api;
+      }
+
+      location /cable {
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header X-Forwarded-Host $http_host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+        proxy_pass http://manifold_cable;
+      }
+
+      location / {
+
+        include includes/manifold-client-local;
+
+        proxy_set_header X-Forwarded-Host $http_host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Port $server_port;
+
+        if (-f $request_filename/index.html) {
+          rewrite (.*) $1/index.html break;
+        }
+
+        if (-f $request_filename.html) {
+          rewrite (.*) $1.html break;
+        }
+
+        if (!-f $request_filename) {
+          proxy_pass http://manifold_client;
+          break;
+        }
+      }
+    }
