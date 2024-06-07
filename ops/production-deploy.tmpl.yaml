@@ -67,7 +67,7 @@ postgresql:
         postgresql: 5432
 
 nginx:
-  enabled: true
+  enabled: false
   service:
     type: ClusterIP
   image:
