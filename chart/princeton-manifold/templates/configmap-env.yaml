@@ -8,12 +8,14 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
+  API_CABLE_PORT: "3021"
   API_CABLE_SOCKET: /manifold_sockets/manifold-cable
   API_PORT: "3020"
   API_SOCKET: /manifold_sockets/manifold-api
   CLIENT_BROWSER_API_CABLE_URL: https://princeton-manifold-production.softserv.cloud/cable
   CLIENT_BROWSER_API_URL: https://princeton-manifold-production.softserv.cloud
   CLIENT_SERVER_API_URL: http://princeton-manifold-production-api:3020
+  CLIENT_SERVER_PORT: "3010"
   CLIENT_SERVER_PROXIES: "false"
   CLIENT_SERVER_SOCKET: /manifold_sockets/manifold-client
   DOMAIN: princeton-manifold-production.softserv.cloud

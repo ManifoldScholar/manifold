@@ -35,7 +35,7 @@ COPY client /opt/manifold/client
 WORKDIR /opt/manifold/client
 RUN yarn install
 RUN cat /dev/null > /opt/manifold/client/dist/manifold/ssr/ssr.config.js
-RUN yarn run build
+RUN yarn run build:dev
 
 ####################################################################################################
 # Manifold nginx
