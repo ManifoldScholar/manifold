@@ -6,7 +6,8 @@
 ####################################################################################################
 FROM ruby:2.7.8 as manifold-api
 RUN apt-get -o Acquire::Check-Valid-Until=false update
-RUN apt-get install -y libicu-dev postgresql-client nano curl software-properties-common ghostscript
+RUN apt-get install -y libicu-dev postgresql-client nano curl software-properties-common ghostscript \
+    vim less
 
 # We need Node and Mammoth for Word text ingestion
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
