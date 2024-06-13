@@ -31,10 +31,21 @@ COPY bin/start-and-run /opt/manifold/api/start-and-run
 # - github.com/ManifoldScholar/manifold-docker-build/blob/v8.1.1/dockerfiles/manifold-client/Dockerfile
 ####################################################################################################
 FROM node:16.16.0 as manifold-client
+RUN apt-get -o Acquire::Check-Valid-Until=false update
+RUN apt-get install -y vim less
+
 COPY client /opt/manifold/client
 WORKDIR /opt/manifold/client
 RUN yarn install
 RUN cat /dev/null > /opt/manifold/client/dist/manifold/ssr/ssr.config.js
+
+# NOTE: These are production values. They get overwritten locally. They are required to
+#       be in the image because `yarn run build` uses them to populate browser.config.js.
+#       @see client/script/build-browser-config.js
+ENV CLIENT_BROWSER_API_CABLE_URL="https://princeton-manifold-production.softserv.cloud/cable"
+ENV CLIENT_BROWSER_API_URL="https://princeton-manifold-production.softserv.cloud"
+ENV DOMAIN="princeton-manifold-production.softserv.cloud"
+ENV SSL_ENABLED="true"
 RUN yarn run build
 
 ####################################################################################################
