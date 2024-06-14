@@ -19,7 +19,7 @@ data:
   CLIENT_SERVER_PROXIES: "true"
   CLIENT_SERVER_SOCKET: /manifold_sockets/manifold-client
   DOMAIN: princeton-manifold-production.softserv.cloud
-  ELASTICSEARCH_URL: http://princeton-manifold-production-elasticsearch:9200
+  ELASTICSEARCH_URL: http://princeton-manifold-production-es:9200
   NODE_ENV: production
   RAILS_DB_HOST: princeton-manifold-production-postgresql
   RAILS_DB_NAME: {{ .Values.postgresql.auth.database }}
