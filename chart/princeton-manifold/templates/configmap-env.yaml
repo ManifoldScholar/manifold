@@ -16,7 +16,7 @@ data:
   CLIENT_BROWSER_API_URL: https://princeton-manifold-production.softserv.cloud
   CLIENT_SERVER_API_URL: http://princeton-manifold-production-api:3020
   CLIENT_SERVER_PORT: "3010"
-  CLIENT_SERVER_PROXIES: "false"
+  CLIENT_SERVER_PROXIES: "true"
   CLIENT_SERVER_SOCKET: /manifold_sockets/manifold-client
   DOMAIN: princeton-manifold-production.softserv.cloud
   ELASTICSEARCH_URL: http://princeton-manifold-production-elasticsearch:9200
