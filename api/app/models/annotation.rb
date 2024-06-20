@@ -259,7 +259,17 @@ class Annotation < ApplicationRecord
   end
 
   def should_index?
-    !(private? || project&.draft? || format != "annotation")
+    !unindexable?
+  end
+
+  def unindexable?
+    return true if private? || reading_group.try(:private?)
+
+    return true if project.try(:draft?)
+
+    return true if format != "annotation"
+
+    return false
   end
 
   def to_s
