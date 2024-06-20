@@ -328,10 +328,8 @@ class Annotation < ApplicationRecord
   end
 
   class << self
-    def filtered(params, scope: all, user: nil)
-      scope = scope.includes(:annotation_node)
-
-      super(params, scope: scope, user: user)
+    def apply_filtering_loads
+      eager_load(:annotation_node, :creator, :membership_comments, :project, text_section: { text: %i[titles] })
     end
 
     # @param [ReadingGroupMembership, String] rgm

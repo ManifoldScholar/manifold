@@ -71,7 +71,7 @@ module Filtering
     # and either prepare the
     # @return [void]
     def filter_with_database!
-      @filtered_scope = filter_with_database
+      @filtered_scope = filter_with_database.apply_filtering_loads
     end
 
     # This will sieve the results from {#filter_with_database!} and

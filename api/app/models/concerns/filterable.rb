@@ -17,5 +17,11 @@ module Filterable
     def filtered(params, scope: all, user: nil, skip_pagination: false)
       ManifoldApi::Container["filtering.apply"].(params, scope: scope, user: user, skip_pagination: skip_pagination)
     end
+
+    # @abstract
+    # @return [ActiveRecord::Relation<Filterable>]
+    def apply_filtering_loads
+      all
+    end
   end
 end
