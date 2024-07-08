@@ -24,11 +24,11 @@ readinessProbe:
 ingress:
   enabled: true
   hosts:
-    - host: https://princeton-manifold-production.softserv.cloud
+    - host: princeton-manifold-production.softserv.cloud
       paths:
         - path: /
           pathType: ImplementationSpecific
-    - host: https://openpublishing.princeton.edu
+    - host: openpublishing.princeton.edu
       paths:
         - path: /
           pathType: ImplementationSpecific
