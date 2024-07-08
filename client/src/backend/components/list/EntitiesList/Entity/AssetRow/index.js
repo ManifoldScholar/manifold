@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
 const extToTag = ext => {
-  switch (ext.toLowerCase()) {
+  switch (ext?.toLowerCase()) {
     case "gif":
     case "jpeg":
     case "jpg":
