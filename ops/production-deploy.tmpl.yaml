@@ -24,10 +24,6 @@ readinessProbe:
 ingress:
   enabled: true
   hosts:
-    - host: princeton-manifold-production.softserv.cloud
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
     - host: openpublishing.princeton.edu
       paths:
         - path: /
@@ -38,7 +34,6 @@ ingress:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
   tls:
     - hosts:
-        - princeton-manifold-production.softserv.cloud
         - openpublishing.princeton.edu
       secretName: production-princeton-manifold-tls
 
