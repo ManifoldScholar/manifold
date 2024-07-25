@@ -1,3 +1,5 @@
+OmniAuth.config.allowed_request_methods = [:get, :post]
+
 ManifoldEnv.oauth.configure do |config|
   config.provider :facebook do |provider|
     provider.strategy_options do |hsh|

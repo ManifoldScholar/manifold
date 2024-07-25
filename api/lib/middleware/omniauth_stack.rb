@@ -42,7 +42,11 @@ class OmniauthStack
         end
 
         ManifoldEnv.oauth.enabled.each do |enabled_provider|
-          provider(*enabled_provider.provider_args)
+          if enabled_provider.provider_args[0] == :cas
+            provider :cas, host: enabled_provider.custom.host, url: enabled_provider.custom.site + "/cas"
+          else
+            provider(*enabled_provider.provider_args)
+          end
         end
       end
     end

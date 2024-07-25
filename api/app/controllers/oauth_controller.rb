@@ -3,6 +3,7 @@ class OauthController < ApplicationController
   skip_after_action :set_content_type
 
   def authorize
+    Rails.logger.error("***** OmniAuth #{params.inspect} #{omniauth_hash.inspect}")
     outcome = ExternalAuth::FindUser.run(
       provider: params[:provider],
       auth_hash: omniauth_hash
