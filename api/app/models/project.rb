@@ -20,6 +20,7 @@ class Project < ApplicationRecord
   include Metadata
   include HasFormattedAttributes
   include HasSortTitle
+  include ProjectOrdering
   include WithPermittedUsers
   include Sluggable
   include SearchIndexable
@@ -76,7 +77,7 @@ class Project < ApplicationRecord
   has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
   has_many :events, -> { order "events.created_at DESC" }, dependent: :destroy,
                                                            inverse_of: :project
-  has_many :resources, -> { with_order }, dependent: :destroy, inverse_of: :project
+  has_many :resources, -> { in_default_order }, dependent: :destroy, inverse_of: :project
   has_many :resource_collections, dependent: :destroy, inverse_of: :project
   has_many :collection_resources, through: :resource_collections, inverse_of: :project
   has_many :project_subjects, dependent: :destroy, inverse_of: :project
@@ -191,7 +192,11 @@ class Project < ApplicationRecord
       .where(is_same_project.and(in_same_collection))
   end)
 
-  scope :with_order, ->(by = nil) { by.present? ? order(by) : order(:sort_title, :title) }
+  scope :in_default_order, -> { in_specific_order(Settings.default_project_sort, mode: :standard) }
+
+  scope :in_title_order, -> { lazily_order(:title, :asc) }
+
+  scope :with_order, ->(by = nil) { by.present? ? order(by) : in_default_order }
 
   scope :by_standalone_mode_enforced, ->(enforced) { to_boolean(enforced) ? standalone_enforced : standalone_unforced }
 
@@ -459,6 +464,38 @@ class Project < ApplicationRecord
       return none if user.blank?
 
       where arel_with_roles_for(user, RoleName.for_project_update)
+    end
+
+    # @param [:collection, :standard] mode
+    def in_default_order_for(mode)
+      case mode
+      when :collection
+        lazily_order(:created_at, :desc)
+      else
+        lazily_order(:title, :asc)
+      end
+    end
+
+    # @param [String] value (@see ProjectOrdering::ALLOWED_SORT_VALUES)
+    # @return [ActiveRecord::Relation]
+    def in_specific_order(value, mode: :standard)
+      return in_default_order_for(mode) unless value.in?(ProjectOrdering::ALLOWED_SORT_VALUES)
+
+      mapping = ProjectOrdering::ALLOWED_SORT_MAPPING.fetch(value)
+
+      lazily_order(mapping.property, mapping.direction).then do |scope|
+        next scope if mapping.property == "title"
+
+        scope.order(arel_table[:title].asc.nulls_last)
+      end
+    end
+
+    # @param ["asc", "desc"] direction
+    # @return [Arel]
+    def title_order_expression(direction: "asc")
+      direction = Filtering::Types::SortDirection[direction]
+
+      %i[sort_title title].map { |attr| arel_table[attr].public_send(direction) }
     end
 
     private

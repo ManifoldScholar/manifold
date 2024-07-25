@@ -57,7 +57,8 @@ class ReadingGroup < ApplicationRecord
 
   scope :by_keyword, ->(value) { build_keyword_scope(value) if value.present? }
   scope :with_sort_order, ->(value) { build_sort_order_scope(value) }
-  scope :with_order, ->(by = nil) { by.present? ? order(by) : order(created_at: :desc) }
+  scope :in_default_order, -> { order(created_at: :desc) }
+  scope :with_order, ->(by = nil) { by.present? ? order(by) : in_default_order }
   scope :non_public, -> { where.not(privacy: "public") }
   scope :visible_to_public, -> { where(privacy: "public") }
   scope :visible_to, ->(user) do

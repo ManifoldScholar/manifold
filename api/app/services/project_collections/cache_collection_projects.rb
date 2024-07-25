@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectCollections
   class CacheCollectionProjects < ActiveInteraction::Base
     record :project_collection
@@ -8,12 +10,12 @@ module ProjectCollections
     delegate :number_of_projects, to: :project_collection
     delegate :projects, to: :project_collection
     delegate :collection_projects, to: :project_collection
-    delegate :project_sorting, to: :project_collection
+    delegate :sort_order, to: :project_collection
 
     validate :must_be_smart!
 
     def execute
-      valid_projects = query.limit(number_of_projects).order(project_sorting)
+      valid_projects = query.limit(number_of_projects).in_specific_order(sort_order, mode: :collection)
 
       return project_collection if valid_projects.pluck(:id) == projects.pluck(:id)
 
@@ -62,6 +64,5 @@ module ProjectCollections
         array << Project.by_subject(subjects) if subjects.exists?
       end
     end
-
   end
 end

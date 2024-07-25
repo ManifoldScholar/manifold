@@ -9,6 +9,7 @@ class ApplicationRecord < ActiveRecord::Base
   include ClassyEnum::ActiveRecord
   include ArelHelpers
   include DetectsSpam
+  include LazyOrdering
   include SliceWith
   include ValuesAt
   include WithAdvisoryLock::Concern

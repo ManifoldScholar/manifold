@@ -188,6 +188,12 @@ RSpec.describe Project, type: :model do
         results = Project.filtered(featured: 1)
         expect(results.length).to be 1
       end
+
+      it "applies a default scope" do
+        scope = described_class.filtered({})
+
+        expect(scope.order_values).to have(2).items
+      end
     end
   end
 

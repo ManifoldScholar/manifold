@@ -4,6 +4,8 @@ module Filtering
   module Types
     include Dry.Types
 
+    ModelKlass = Class.constrained(lt: ::Filterable)
+
     Params = Coercible::Hash.map(Coercible::String, Any).constructor do |value|
       case value
       when ActionController::Parameters
@@ -16,6 +18,8 @@ module Filtering
     end.fallback { {} }
 
     Scope = Instance(::ActiveRecord::Relation)
+
+    SortDirection = Dry::Types["coercible.string"].default("asc").enum("asc", "desc").fallback("asc")
 
     User = Instance(::AnonymousUser) | Instance(::User)
   end

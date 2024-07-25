@@ -1,19 +1,16 @@
+# frozen_string_literal: true
+
 class ProjectCollection < ApplicationRecord
-
-  # Constants
-  ALLOWED_SORT_KEYS = %w(created_at updated_at publication_date title).freeze
-  ALLOWED_SORT_DIRECTIONS = %w(asc desc).freeze
-
-  # Concerns
-  include Entitleable
-  include HasFormattedAttributes
-  include Filterable
-  include Attachments
-  include TrackedCreator
   include Authority::Abilities
+  include Attachments
+  include Entitleable
+  include Filterable
+  include HasFormattedAttributes
+  include ProjectOrdering
   include SerializedAbilitiesFor
-  include Taggable
   include Sluggable
+  include TrackedCreator
+  include Taggable
   include WithProjectCollectionLayout
 
   # Attachments
@@ -43,11 +40,11 @@ class ProjectCollection < ApplicationRecord
   scope :with_projects, lambda { |presence|
     where(id: CollectionProject.select(:project_collection_id)) if presence.present?
   }
-  scope :with_order, lambda { |by|
-    return order(position: :asc) unless by.present?
 
-    order(by)
-  }
+  scope :in_default_order, -> { order(position: :asc) }
+
+  scope :with_order, ->(by) { by.present? ? order(by) : in_default_order }
+
   scope :after_homepage_start_date, lambda { |date|
     no_date = arel_table[:homepage_end_date].eq(nil)
     after_date = arel_table[:homepage_start_date].lteq(date)
@@ -81,12 +78,16 @@ class ProjectCollection < ApplicationRecord
                               allow_nil: true
   validate :valid_homepage_start_date!, :valid_homepage_end_date!
 
+  # Introspection helper
+  #
+  # @api private
+  # @return
   def project_sorting
-    column, _delimiter, direction = sort_order.rpartition "_"
-    column = "created_at" unless ALLOWED_SORT_KEYS.include? column
-    direction = "desc" unless ALLOWED_SORT_DIRECTIONS.include? direction
+    Project.in_specific_order(sort_order, mode: :collection).order_values.each_with_object([]) do |ordering, tuples|
+      next unless ordering.respond_to?(:expr) && ordering.respond_to?(:direction)
 
-    "projects.#{column} #{direction}, projects.title asc NULLS LAST"
+      tuples << [ordering.try(:expr).try(:name).to_s, ordering.try(:direction).to_s]
+    end
   end
 
   def manually_sorted?
@@ -120,7 +121,7 @@ class ProjectCollection < ApplicationRecord
   def reset_sort_order!
     return unless smart? && manually_sorted?
 
-    self.sort_order = "created_at_desc"
+    self.sort_order = DEFAULT_COLLECTION_SORT_VALUE
   end
 
   def cache_collection_projects!
