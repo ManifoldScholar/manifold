@@ -7,7 +7,7 @@
 FROM ruby:2.7.8 as manifold-api
 RUN apt-get -o Acquire::Check-Valid-Until=false update
 RUN apt-get install -y libicu-dev postgresql-client nano curl software-properties-common ghostscript \
-    vim less
+    vim less gettext
 
 # We need Node and Mammoth for Word text ingestion
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
@@ -21,6 +21,7 @@ RUN sed -i '/<policy domain="coder" rights="none" pattern="PDF" \/>/d' \
 COPY api /opt/manifold/api
 WORKDIR /opt/manifold/api
 ENV RAILS_LOG_TO_STDOUT=1
+RUN envsubst < config/oauth.tmpl.yml > config/oauth.yml
 RUN gem install bundler:2.2.19
 RUN bundle install
 COPY bin/start-and-run /opt/manifold/api/start-and-run
