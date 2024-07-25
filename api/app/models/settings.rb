@@ -132,6 +132,10 @@ class Settings < ApplicationRecord
       end
     end
 
+    def default_project_sort
+      current.general.default_project_sort
+    end
+
     # Check if we {.update_from_environment? should update from the environment}
     # and {#update_from_environment! do so}.
     # @return [void]

@@ -33,6 +33,7 @@ module V1
 
       contact_email: Types::Serializer::Email.optional,
       copyright: Types::String.optional,
+      default_project_sort: Types::String.optional,
       default_publisher: Types::String.optional,
       default_publisher_place: Types::String.optional,
       facebook: Types::String.optional,

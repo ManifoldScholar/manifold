@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A resource is any asset our source document that is associated with a text.
 class Resource < ApplicationRecord
 
@@ -106,11 +108,9 @@ class Resource < ApplicationRecord
       .where("collection_resources.resource_collection_id = ?", id)
       .order("collection_resources.position ASC")
   }
-  scope :with_order, lambda { |by = nil|
-    return order(:sort_title, :created_at) unless by.present?
 
-    order(by)
-  }
+  scope :in_default_order, -> { order(sort_title: :asc, created_at: :asc) }
+  scope :with_order, ->(by = nil) { by.present? ? order(by) : in_default_order }
 
   # Callbacks
   before_validation :update_kind, :set_fingerprint!

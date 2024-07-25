@@ -83,13 +83,9 @@ class User < ApplicationRecord
   with_parsed_name :first_name, :last_name
   has_secure_password
 
-  # Scopes
   scope :by_email, ->(email) { where(arel_table[:email].matches("#{email}%")) if email.present? }
-  scope :with_order, ->(by) do
-    return order(:last_name, :first_name) unless by.present?
-
-    order(by)
-  end
+  scope :in_default_order, -> { order(:last_name, :first_name) }
+  scope :with_order, ->(by) { by.present? ? order(by) : in_default_order }
   scope :by_role, ->(role) { RoleName[role].then { |r| with_role(r.to_sym) if r.present? } }
   scope :by_cached_role, ->(*role) { where(role: role) }
   scope :email_confirmed, -> { where.not(email_confirmed_at: nil) }

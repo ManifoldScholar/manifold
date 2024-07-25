@@ -14,6 +14,8 @@ module Filtering
       option :user, Filtering::Types::User.optional, optional: true
 
       option :skip_pagination, Filtering::Types::Bool.optional, default: proc { false }, as: :skip_pagination_option
+
+      option :model, Filtering::Types::ModelKlass, default: proc { scope.model }
     end
 
     include ManifoldApi::Deps[
@@ -24,7 +26,8 @@ module Filtering
 
     around_searchkick_filters :nullify_current_scope!
 
-    delegate :model, to: :scope
+    # @return [Filtering::Config]
+    attr_reader :config
 
     # @return [ActiveSupport::HashWithIndifferentAccess]
     attr_reader :params
@@ -62,6 +65,8 @@ module Filtering
 
     # @return [void]
     def set_up!
+      @config = model.filtering_config
+
       @params = normalize_params
 
       @skip_pagination = @params[:skip_pagination] || RequestStore[:skip_pagination] || skip_pagination_option
@@ -116,8 +121,10 @@ module Filtering
 
     # @return [ActiveRecord::Relation]
     def apply_database_filters
-      params.reduce scope do |query, (key, value)|
-        apply_database_filter query, key, value
+      maybe_apply_default_order do
+        params.reduce scope do |query, (key, value)|
+          apply_database_filter query, key, value
+        end
       end
     end
 
@@ -129,6 +136,8 @@ module Filtering
     # @param [Object] value
     # @return [ActiveRecord::Relation]
     def apply_database_filter(query, key, value)
+      return query if config.blacklisted_param?(key)
+
       unless param_requires_user?(key)
         maybe_scope_by_param.(query, key, value)
       else
@@ -163,6 +172,21 @@ module Filtering
       model.lookup search_query, filter
     end
 
+    # @return [ActiveRecord::Relation]
+    def maybe_apply_default_order
+      return yield unless should_apply_default_order?
+
+      initial_order_values = scope.order_values
+
+      final_scope = yield
+
+      final_order_values = final_scope.order_values
+
+      return final_scope unless initial_order_values == final_order_values
+
+      config.apply_default_order!(final_scope)
+    end
+
     # Newer versions of Searchkick require that the current_scope be nil.
     # Since we call this in a concern that is called from a scope, current_scope
     # is always set even if we do `ActiveRecord::Relation#model`. This remedies that
@@ -182,6 +206,10 @@ module Filtering
 
     def search_query
       params[:keyword].presence || "*"
+    end
+
+    def should_apply_default_order?
+      config.should_apply_default_order?(params)
     end
 
     def should_apply_pagination?

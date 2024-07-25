@@ -27,6 +27,7 @@ module SettingSections
 
     attribute :contact_email, :string
     attribute :copyright, :string
+    attribute :default_project_sort, :string, default: "title_asc"
     attribute :default_publisher, :string
     attribute :default_publisher_place, :string
     attribute :facebook, :string

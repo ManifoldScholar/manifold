@@ -47,12 +47,13 @@ RSpec.describe ProjectCollection, type: :model do
     let(:project_collection) { FactoryBot.create(:project_collection, sort_order: "updated_at_desc") }
 
     it "returns a string order argument joined to project" do
-      expect(project_collection.project_sorting).to eq "projects.updated_at desc, projects.title asc NULLS LAST"
+      expect(project_collection.project_sorting).to match_array [["updated_at", "desc"]]
     end
 
     it "defaults to created_at desc if invalid attribute" do
       project_collection.update sort_order: "bad_attribute"
-      expect(project_collection.project_sorting).to eq "projects.created_at desc, projects.title asc NULLS LAST"
+
+      expect(project_collection.project_sorting).to match_array [["created_at", "desc"]]
     end
   end
 
