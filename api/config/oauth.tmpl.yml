@@ -1,0 +1,28 @@
+oauth:
+  cas:
+    client_id: $CAS_CLIENT_ID
+    client_secret: $CAS_CLIENT_SECRET
+    descriptive_name: Princeton CAS
+    host: fed.princeton.edu
+    protocol: https
+    email_key: 'mail'
+    name_key: 'displayname'
+    nickname_key: 'givenname'
+    uid_key: 'campusid'
+    # WARN: The values below are placeholders
+    endpoints:
+      authorize:
+        uri: '/cas/login'
+        method: 'GET'
+        query:
+          another: 'param'
+      token:
+        uri: '/oauth/token'
+        method: 'POST'
+        query:
+          another: 'param'
+      userinfo:
+        uri: '/api/v1/me'
+        method: 'GET'
+        query:
+          another: 'param'
