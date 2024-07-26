@@ -3,7 +3,6 @@ class OauthController < ApplicationController
   skip_after_action :set_content_type
 
   def authorize
-    Rails.logger.error("***** OmniAuth #{params.inspect} #{omniauth_hash.inspect}")
     outcome = ExternalAuth::FindUser.run(
       provider: params[:provider],
       auth_hash: omniauth_hash
@@ -34,7 +33,17 @@ class OauthController < ApplicationController
     HEREDOC
   end
 
+  # OVERRIDE: Alter hash structure to include info returned by CAS that is required to create a new User
+  # @see app/services/external_auth/upsert_user.rb
+  # @see app/services/external_auth/provisioners/user.rb
   def omniauth_hash
-    request.env["omniauth.auth"]
+    return request.env["omniauth.auth"] unless params[:provider] == "cas"
+
+    omniauth_hash = request.env["omniauth.auth"]
+    omniauth_hash.info.merge!(
+      email: omniauth_hash.extra.pustatus == "guest" ? omniauth_hash.extra.uid : omniauth_hash.extra.mail,
+      name: omniauth_hash.extra.displayname.presence || omniauth_hash.extra.pudisplayname
+    )
+    omniauth_hash
   end
 end
