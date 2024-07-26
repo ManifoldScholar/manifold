@@ -18,10 +18,5 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Load secrets into OAuth config"
-        run: envsubst < api/config/oauth.tmpl.yml > api/config/oauth.yml;
-      - name: "Do deploy"
-        uses: scientist-softserv/actions/.github/workflows/deploy.yaml@v0.0.22
-        secrets: inherit
+    uses: scientist-softserv/actions/.github/workflows/deploy.yaml@v0.0.22
+    secrets: inherit
