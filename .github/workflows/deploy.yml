@@ -1,7 +1,4 @@
-# This file is modeled after:
-# - github.com/scientist-softserv/actions/blob/v0.0.22/.github/workflows/deploy.yaml
-# This is so that we can inject the step "Load secrets into OAuth config" into the deployment
-name: Deploy
+name: "Deploy"
 run-name: Deploy (${{ github.ref_name }} -> ${{ inputs.environment }}) by @${{ github.actor }}
 on:
   workflow_dispatch:
@@ -19,49 +16,12 @@ on:
         required: false
         default: false
 
-env:
-  REGISTRY: ghcr.io
-
 jobs:
-  deployment:
+  deploy:
     runs-on: ubuntu-latest
-    container: dtzar/helm-kubectl:3.9.4
-    environment: ${{ inputs.environment }}
-    env:
-      CAS_CLIENT_ID: ${{ secrets.CAS_CLIENT_ID }}
-      CAS_CLIENT_SECRET: ${{ secrets.CAS_CLIENT_SECRET }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      HELM_EXPERIMENTAL_OCI: 1
-      HELM_EXTRA_ARGS: >
-        --values ops/${{ inputs.environment }}-deploy.yaml
-      HELM_RELEASE_NAME: ${{ github.event.repository.name }}-${{ inputs.environment }}
-      KUBECONFIG: ./kubeconfig.yml
-      KUBECONFIG_FILE: ${{ secrets.KUBECONFIG_FILE }}
-      KUBE_NAMESPACE: ${{ github.event.repository.name }}-${{ inputs.environment }}
-      REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
-      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
-
     steps:
-      - id: setup
-        name: Setup
-        uses: scientist-softserv/actions/setup-env@v0.0.22
-        with:
-          token: ${{ secrets.CHECKOUT_TOKEN || secrets.GITHUB_TOKEN }}
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
-        with:
-          limit-access-to-actor: true
-
-      - name: Load secrets into OAuth config
+      - name: "Load secrets into OAuth config"
         run: envsubst < api/config/oauth.tmpl.yml > api/config/oauth.yml;
-
-      - name: Do deploy
-        run: |
-          echo $KUBECONFIG_FILE | base64 -d > $KUBECONFIG;
-          DOLLAR=$ envsubst < ops/${{ inputs.environment }}-deploy.tmpl.yaml > ops/${{ inputs.environment }}-deploy.yaml;
-          export DEPLOY_TAG=${TAG};
-          export DEPLOY_IMAGE=ghcr.io/${REPO_LOWER};
-          export WORKER_IMAGE=ghcr.io/${REPO_LOWER}/worker;
-          ./bin/helm_deploy ${{ format('{0}-{1}', github.event.repository.name, inputs.environment) }} ${{ format('{0}-{1}', github.event.repository.name, inputs.environment) }}
+      - name: "Do deploy"
+        uses: scientist-softserv/actions/.github/workflows/deploy.yaml@v0.0.22
+        secrets: inherit
