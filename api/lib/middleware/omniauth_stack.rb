@@ -27,7 +27,7 @@ class OmniauthStack
     @middleware_stack ||= build_middleware_stack
   end
 
-  def build_middleware_stack
+  def build_middleware_stack # rubocop:disable Metrics/MethodLength
     session_store = Rails.application.config.session_store
     session_options = Rails.application.config.session_options
 
