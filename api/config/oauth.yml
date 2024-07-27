@@ -1,18 +1,18 @@
 oauth:
   cas:
-    client_id: $CAS_CLIENT_ID
-    client_secret: $CAS_CLIENT_SECRET
     descriptive_name: Princeton CAS
     host: fed.princeton.edu
     protocol: https
-    email_key: 'mail'
-    name_key: 'displayname'
-    nickname_key: 'givenname'
-    uid_key: 'campusid'
-    # WARN: The values below are placeholders
+    # WARN: The values below are unused placeholders
+    client_id: AAABBBCCCDDDEEEFFF
+    client_secret: AAABBBCCCDDDEEEFFF
+    email_key: 'email'
+    name_key: 'name'
+    nickname_key: 'nickname'
+    uid_key: 'id'
     endpoints:
       authorize:
-        uri: '/cas/login'
+        uri: '/oauth/authorize'
         method: 'GET'
         query:
           another: 'param'
