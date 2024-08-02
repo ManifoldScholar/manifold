@@ -35,6 +35,32 @@ class AnnotatableCaptureSelection extends Component {
 
   componentDidMount() {
     window.addEventListener("keyup", this.handleKeyUp);
+
+    window.addEventListener("copy", e => {
+      const manifoldSelection = this.props.selectionState?.selection?.text;
+
+      // include native selection on the off chance that the popup wasn't triggered
+      // happens after hot-reload in dev, probably unlikely in prod
+      const nativeSelection = this.mapNativeSelection(this.nativeSelection)
+        ?.text;
+
+      const selection = manifoldSelection ?? nativeSelection;
+
+      if (selection) {
+        e.preventDefault();
+        e.clipboardData.setData("text/plain", selection);
+      }
+    });
+
+    window.addEventListener("contextmenu", e => {
+      const targetIsLastSelection =
+        e.target.getAttribute("data-annotation-ids") === "selection";
+
+      if (targetIsLastSelection) {
+        const nativeSelection = document.getSelection();
+        nativeSelection.setBaseAndExtent(e.target, 0, e.target, 1);
+      }
+    });
   }
 
   componentDidUpdate(prevProps) {
