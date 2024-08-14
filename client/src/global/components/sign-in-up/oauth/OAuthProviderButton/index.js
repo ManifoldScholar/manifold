@@ -18,7 +18,7 @@ export default function OAuthProviderButton({ provider, icon }) {
 
   return enabled ? (
     <Styled.Button
-      className="button-secondary button-secondary--dark"
+      className="button-secondary"
       onClick={() => dispatch(oauthActions.prompt(provider))}
       type="button"
     >
