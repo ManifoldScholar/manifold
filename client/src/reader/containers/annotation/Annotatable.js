@@ -56,7 +56,7 @@ export class Annotatable extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.annotations?.length !== prevProps.annotations?.length)
+    if (!isEqual(this.props.annotations, prevProps.annotations))
       this.setState({ renderedAnnotations: this.props.annotations });
 
     const { selection } = this.state.selectionState ?? {};
