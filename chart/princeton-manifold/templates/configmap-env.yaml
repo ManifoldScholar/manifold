@@ -14,10 +14,10 @@ data:
   API_PORT: "3020"
   CLIENT_BROWSER_API_CABLE_URL: https://openpublishing.princeton.edu/cable
   CLIENT_BROWSER_API_URL: https://openpublishing.princeton.edu
-  CLIENT_SERVER_API_URL: http://princeton-manifold-production-api:3020
+  CLIENT_SERVER_API_URL: http://princeton-manifold-production-api-rails:3020
   CLIENT_SERVER_HOST: princeton-manifold-production-client
   CLIENT_SERVER_PORT: "3010"
-  CLIENT_SERVER_PROXIES: "false"
+  CLIENT_SERVER_PROXIES: "true"
   DOMAIN: openpublishing.princeton.edu
   ELASTICSEARCH_URL: http://princeton-manifold-production-es:9200
   NODE_ENV: production
