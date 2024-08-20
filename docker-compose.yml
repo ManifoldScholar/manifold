@@ -85,6 +85,8 @@ services:
       target: manifold-nginx
       args:
         - EXTRA_APK_PACKAGES=less vim bash rsync
+    env_file:
+      - .env.development
     volumes:
       - ./data/nginx/ssl:/etc/nginx/ssl
       - ./data/api/public:/opt/manifold/api/public
@@ -92,7 +94,6 @@ services:
     ports:
      - "4000:80"
      - "4001:443"
-    command: ["start-nginx"]
     networks:
       - internal
 #volumes:

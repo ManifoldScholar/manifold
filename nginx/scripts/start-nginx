@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+# Ensure the Docker scripts gets executed. This includes calling `envsubst`
+# on the nginx conf template
+bash /docker-entrypoint.sh
+
 install-self-signed-cert
 echo "Starting Nginx..."
 nginx -g 'daemon off;'
