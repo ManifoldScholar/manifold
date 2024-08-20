@@ -70,4 +70,6 @@ COPY nginx/scripts/start-nginx /usr/local/bin/start-nginx
 
 VOLUME ["/manifold_sockets","/manifold_data"]
 
+CMD [ "start-nginx" ]
+
 EXPOSE 80 443
