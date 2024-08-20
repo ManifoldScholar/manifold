@@ -131,9 +131,6 @@ volumeMounts:
   - mountPath: /opt/manifold/api/data
     name: shared-storage
     subPath: data
-  - mountPath: /manifold_sockets
-    name: shared-storage
-    subPath: sockets
 
 nodeSelector: {}
 
