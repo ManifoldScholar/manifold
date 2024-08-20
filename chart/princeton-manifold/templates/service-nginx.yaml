@@ -6,6 +6,11 @@ metadata:
     {{- include "princeton-manifold.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
   selector:
     app.kubernetes.io/name: nginx
     app.kubernetes.io/instance: {{ .Release.Name }}
