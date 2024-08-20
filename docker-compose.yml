@@ -94,7 +94,6 @@ services:
     ports:
      - "4000:80"
      - "4001:443"
-    command: ["start-nginx"]
     networks:
       - internal
 #volumes:
