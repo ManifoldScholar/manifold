@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "princeton-manifold.fullname" . }}-api-cable
+  labels:
+    {{- include "princeton-manifold.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.serviceApiCable.type }}
+  ports:
+    - port: {{ .Values.serviceApiCable.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "princeton-manifold.name" . }}-api-cable
+    app.kubernetes.io/instance: {{ .Release.Name }}

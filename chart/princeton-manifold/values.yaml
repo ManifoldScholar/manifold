@@ -49,9 +49,17 @@ service:
   type: ClusterIP
   port: 80
 
-serviceApi:
+serviceApiRails:
   type: ClusterIP
   port: 3020
+
+serviceApiCable:
+  type: ClusterIP
+  port: 3021
+
+serviceClient:
+  type: ClusterIP
+  port: 3010
 
 ingress:
   enabled: false
