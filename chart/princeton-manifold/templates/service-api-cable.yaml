@@ -11,5 +11,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app.kubernetes.io/name: {{ include "princeton-manifold.name" . }}-api-cable
+    app.kubernetes.io/name: cable
     app.kubernetes.io/instance: {{ .Release.Name }}

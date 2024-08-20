@@ -7,5 +7,5 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   selector:
-    app.kubernetes.io/name: {{ include "princeton-manifold.name" . }}-nginx
+    app.kubernetes.io/name: nginx
     app.kubernetes.io/instance: {{ .Release.Name }}
