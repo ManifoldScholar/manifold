@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "princeton-manifold.fullname" . }}-api-cable
+  name: {{ include "princeton-manifold.fullname" . }}-api-sidekiq
   labels:
     {{- include "princeton-manifold.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: cable
+      app.kubernetes.io/name: sidekiq
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
@@ -17,7 +17,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app.kubernetes.io/name: cable
+        app.kubernetes.io/name: sidekiq
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       {{- with .Values.imagePullSecrets }}
@@ -28,28 +28,9 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: cable
+        - name: sidekiq
           command:
-            - bin/cable
-          ports:
-            - containerPort: 3021
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.api.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          envFrom:
-            - configMapRef:
-                name: {{ include "princeton-manifold.fullname" . }}-env
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
-          volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-        - name: clockwork
-          command:
-            - bin/zhong
-            - zhong.rb
+            - bin/sidekiq
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.api.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
