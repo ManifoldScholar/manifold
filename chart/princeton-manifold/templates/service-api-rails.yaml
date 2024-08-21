@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "princeton-manifold.fullname" . }}-api-rails
+  labels:
+    {{- include "princeton-manifold.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.serviceApiRails.type }}
+  ports:
+    - port: {{ .Values.serviceApiRails.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: rails
+    app.kubernetes.io/instance: {{ .Release.Name }}

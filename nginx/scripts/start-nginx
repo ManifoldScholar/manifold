@@ -3,4 +3,7 @@ set -e
 
 install-self-signed-cert
 echo "Starting Nginx..."
-nginx -g 'daemon off;'
+
+# Ensure the Docker entrypoint scripts get executed. This includes
+# calling `envsubst` on the nginx conf template
+bash /docker-entrypoint.sh nginx -g 'daemon off;'

@@ -1,13 +1,13 @@
 upstream manifold_api {
-  server unix:/manifold_sockets/manifold-api;
+  server ${API_HOST}:${API_PORT};
  }
 
  upstream manifold_cable {
-  server unix:/manifold_sockets/manifold-cable;
+  server ${API_CABLE_HOST}:${API_CABLE_PORT};
  }
 
  upstream manifold_client {
-  server unix:/manifold_sockets/manifold-client;
+  server ${CLIENT_SERVER_HOST}:${CLIENT_SERVER_PORT};
  }
 
 server {

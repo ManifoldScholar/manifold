@@ -10,7 +10,6 @@ x-api: &api
       - EXTRA_APK_PACKAGES=less vim bash rsync
   volumes:
     - ./data/api/public:/opt/manifold/api/public
-    - ./data/sockets:/manifold_sockets
   env_file:
     - .env.development
   networks:
@@ -73,7 +72,6 @@ services:
       - .env.development
     volumes:
       - ./data/api/public:/opt/manifold/api/public
-      - ./data/sockets:/manifold_sockets
     command: yarn run start-docker
     networks:
       - internal
@@ -85,19 +83,16 @@ services:
       target: manifold-nginx
       args:
         - EXTRA_APK_PACKAGES=less vim bash rsync
+    env_file:
+      - .env.development
     volumes:
       - ./data/nginx/ssl:/etc/nginx/ssl
       - ./data/api/public:/opt/manifold/api/public
-      - ./data/sockets:/manifold_sockets
     ports:
      - "4000:80"
      - "4001:443"
-    command: ["start-nginx"]
     networks:
       - internal
-#volumes:
-#  manifold_data:
-#  manifold_sockets:
 
 networks:
   internal:

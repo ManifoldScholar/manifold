@@ -60,7 +60,7 @@ FROM nginx:1.25 as manifold-nginx
 RUN apt-get -o Acquire::Check-Valid-Until=false update
 RUN apt-get install -y openssl
 
-COPY nginx/config/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/config/default.conf.template /etc/nginx/templates/default.conf.template
 
 COPY nginx/includes/manifold-client-local /etc/nginx/includes/manifold-client-local
 COPY nginx/includes/manifold-server-local /etc/nginx/includes/manifold-server-local
@@ -69,5 +69,7 @@ COPY nginx/scripts/install-self-signed-cert /usr/local/bin/install-self-signed-c
 COPY nginx/scripts/start-nginx /usr/local/bin/start-nginx
 
 VOLUME ["/manifold_sockets","/manifold_data"]
+
+CMD [ "start-nginx" ]
 
 EXPOSE 80 443

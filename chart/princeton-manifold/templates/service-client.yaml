@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "princeton-manifold.fullname" . }}-client
+  labels:
+    {{- include "princeton-manifold.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.serviceClient.type }}
+  ports:
+    - port: {{ .Values.serviceClient.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: client
+    app.kubernetes.io/instance: {{ .Release.Name }}
