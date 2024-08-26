@@ -110,7 +110,7 @@ class Resource < ApplicationRecord
   }
 
   scope :in_default_order, -> { order(sort_title: :asc, created_at: :asc) }
-  scope :with_order, ->(by = nil) { by.present? ? order(by) : in_default_order }
+  scope :with_order, ->(by = nil) { by.present? ? reorder(by) : in_default_order }
 
   # Callbacks
   before_validation :update_kind, :set_fingerprint!
