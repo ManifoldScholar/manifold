@@ -162,9 +162,6 @@ GEM
       database_cleaner-core (~> 2.0.0)
       redis
     date (3.3.3)
-    debase (0.2.4.1)
-      debase-ruby_core_source (>= 0.10.2)
-    debase-ruby_core_source (3.2.1)
     declarative (0.0.20)
     device_detector (1.0.7)
     diff-lcs (1.5.0)
@@ -660,8 +657,6 @@ GEM
     rubocop-rspec (1.44.1)
       rubocop (~> 0.87)
       rubocop-ast (>= 0.7.1)
-    ruby-debug-ide (0.7.3)
-      rake (>= 0.8.1)
     ruby-progressbar (1.13.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
@@ -772,7 +767,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
-    unicode (0.4.4.4)
+    unicode (0.4.4.5)
     unicode-display_width (1.8.0)
     uuid (2.3.9)
       macaddr (~> 1.0)
@@ -838,7 +833,6 @@ DEPENDENCIES
   data_uri (~> 0.1.0)
   database_cleaner-active_record (~> 2.1.0)
   database_cleaner-redis (~> 2.0)
-  debase
   dotenv-rails (~> 2.0)
   draper (~> 3.1)
   dry-effects
@@ -927,7 +921,6 @@ DEPENDENCIES
   rswag (~> 2.0)
   rubocop (~> 0.60)
   rubocop-rspec (~> 1.32)
-  ruby-debug-ide
   rubyzip (~> 2.3.1)
   scanf (~> 1.0.0)
   scenic (~> 1.4)

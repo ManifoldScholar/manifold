@@ -148,11 +148,9 @@ group :development, :test do
 end
 
 group :development do
-  gem "debase"
   gem "listen", "~> 3.2"
   gem "rubocop", "~> 0.60"
   gem "rubocop-rspec", "~> 1.32"
-  gem "ruby-debug-ide"
   gem "simplecov", require: false
   gem "spring"
   gem "spring-commands-rspec", "~> 1.0.4"
