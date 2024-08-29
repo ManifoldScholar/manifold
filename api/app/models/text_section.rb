@@ -109,6 +109,34 @@ class TextSection < ApplicationRecord
 
   friendly_id :slug_candidates, use: :scoped, scope: :text
 
+  def has_duplicate_source_identifier?
+    # :nocov:
+    return false if text.blank? || new_record?
+    # :nocov:
+
+    text.text_sections.where.not(id: id).exists?(source_identifier: source_identifier)
+  end
+
+  def has_unique_source_identifier?
+    # :nocov:
+    return false if text.blank? || new_record?
+    # :nocov:
+
+    !has_duplicate_source_identifier?
+  end
+
+  # @!attribute [r] packaging_base_path
+  # @return [String]
+  def packaging_base_path
+    "text/#{packaging_identifier}".gsub(/\A(.+)(?<!\.xhtml)\z/, '\1.xhtml')
+  end
+
+  # @!attribute [r] packaging_identifier
+  # @return [String]
+  def packaging_identifier
+    has_unique_source_identifier? ? source_identifier : slug
+  end
+
   def slug_candidates
     reserved_words = %w(all new edit session login logout users admin
                         stylesheets assets javascripts)
