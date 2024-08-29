@@ -52,8 +52,9 @@ module Packaging
 
       private
 
+      # @see TextSection#packaging_base_path
       def build_base_path
-        "text/#{text_section.source_identifier}".gsub(/\A(.+)(?<!\.xhtml)\z/, '\1.xhtml')
+        text_section.packaging_base_path
       end
 
       def default_landmark
