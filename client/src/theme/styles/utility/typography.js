@@ -43,7 +43,10 @@ const readerFontSizeClasses = readerFontSizes
   .map(
     ({ desktop, mobile }, index) => `
     .font-size-${index} {
-      font-size: ${fluidScale(desktop, mobile)};
+      font-size: calc(${fluidScale(
+        desktop,
+        mobile
+      )} * var(--font-size-adjustment));
     }
   `
   )
@@ -80,6 +83,12 @@ export default `
 
   .truncate-text-overflow {
     ${textTruncate}
+  }
+
+  @property --font-size-adjustment {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 1;
   }
 
   ${readerFontSizeClasses}
