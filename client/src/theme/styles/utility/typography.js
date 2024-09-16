@@ -46,7 +46,7 @@ const readerFontSizeClasses = readerFontSizes
       font-size: calc(${fluidScale(
         desktop,
         mobile
-      )} * var(--font-size-adjustment));
+      )} * clamp(0.5, var(--font-size-adjustment), 1.5));
     }
   `
   )
