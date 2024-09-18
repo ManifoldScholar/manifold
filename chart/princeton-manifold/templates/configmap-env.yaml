@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
+  ALLOW_SIGNUP: "false"
   API_CABLE_HOST: princeton-manifold-production-api-cable
   API_CABLE_PORT: "3021"
   API_HOST: princeton-manifold-production-api-rails

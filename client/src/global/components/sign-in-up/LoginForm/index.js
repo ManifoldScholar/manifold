@@ -20,7 +20,7 @@ export default function LoginForm({
   hideOverlay,
   willRedirect
 }) {
-  const signupEnabled = process.env.REACT_APP_ALLOW_SIGNUP === 'true';
+  const signupEnabled = process.env.ALLOW_SIGNUP === 'true';
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const authentication = useFromStore("authentication");
