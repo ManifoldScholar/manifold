@@ -20,6 +20,7 @@ export default function LoginForm({
   hideOverlay,
   willRedirect
 }) {
+  const signupEnabled = process.env.ALLOW_SIGNUP === 'true';
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const authentication = useFromStore("authentication");
@@ -116,9 +117,11 @@ export default function LoginForm({
           <SharedStyles.ViewLink onClick={e => handleViewChange("password", e)}>
             {t("forms.signin_overlay.forgot_password")}
           </SharedStyles.ViewLink>
-          <SharedStyles.ViewLink onClick={e => handleViewChange("terms", e)}>
-            {t("forms.signin_overlay.need_account")}
-          </SharedStyles.ViewLink>
+          {signupEnabled && (
+            <SharedStyles.ViewLink onClick={e => handleViewChange("terms", e)}>
+              {t("forms.signin_overlay.need_account")}
+            </SharedStyles.ViewLink>
+          )}
         </SharedStyles.LinksWrapper>
         <OAuthOptions />
       </div>
