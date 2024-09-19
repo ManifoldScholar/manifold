@@ -32,7 +32,7 @@
         "featured_label": "In primo piano",
         "featured_instructions": "I progetti in primo piano possono essere inclusi automaticamente nelle raccolte di progetti intelligenti..",
         "finished_label": "Finito",
-        "finished_instructions": "Negli elenchi, Manifold mostrer� la data di pubblicazione dei progetti finiti.",
+        "finished_instructions": "Negli elenchi, Manifold mostrerà la data di pubblicazione dei progetti finiti.",
         "standalone_label": "Standalone Mode",
         "standalone_instructions": "Se abilitato, questo progetto sarà sempre renderizzato in modalità standalone quando\"?mode=standalone\" viene aggiunto all'URL. Se la modalità standalone è applicata, questo progetto verrà sempre renderizzato in modalità standalone.",
         "standalone_options": {
@@ -62,7 +62,7 @@
       },
       "exports": {
         "location_placeholder": "Scegliere una posizione di esportazione",
-        "instructions": "Manifold consente di esportare una copia di conservazione del progetto su un target di esportazione esterno. Per avviare un'esportazione, selezionare uno dei target configurati di seguito e premere il pulsante. L'esportazione avviene in background e pu� richiedere alcuni minuti per essere completata",
+        "instructions": "Manifold consente di esportare una copia di conservazione del progetto su un target di esportazione esterno. Per avviare un'esportazione, selezionare uno dei target configurati di seguito e premere il pulsante. L'esportazione avviene in background e può richiedere alcuni minuti per essere completata",
         "no_targets": "Non sono stati creati obiettivi di esportazione su questa istanza. I target di esportazione possono essere gestiti nel backend in Impostazioni > Target di esportazione",
         "no_targets_unauthorized": "Non sono stati creati obiettivi di esportazione su questa istanza. Solo gli amministratori possono creare target di esportazione. Per impostare i target di esportazione, contattare l'amministratore di questa istanza Manifold",
         "add_target_label": "Creare un nuovo obiettivo di esportazione",
@@ -77,7 +77,7 @@
         "descript_label": "Breve descrizione",
         "layout_header": "Layout",
         "texts_prompt": "Il progetto prevede più di un testo?",
-        "texts_instructions": "I progetti manifold possono includere un singolo testo o pi� testi",
+        "texts_instructions": "I progetti manifold possono includere un singolo testo o più testi",
         "resources_prompt": "Hai risorse da aggiungere oltre ai testi che state caricando?",
         "resources_instructions": "Arricchisci i vostri testi con i media o create un progetto composto solo da risorse multimediali",
         "extended_descript_label": "Descrizione estesa",
