@@ -1,0 +1,106 @@
+{
+  "layout": {
+    "add_block": "Aggiungere un blocco di contenuto\"{{blockTitle}}\"",
+    "delete_block": "Eliminare il blocco di contenuti\"{{blockTitle}}\"",
+    "edit_block": "Modifica del blocco di contenuto\"{{blockTitle}}\"",
+    "hide_block": "Nascondere il blocco di contenuto\"{{blockTitle}}\"",
+    "show_block": "Mostra il blocco di contenuto\"{{blockTitle}}\"",
+    "authorized": "Autorizzato",
+    "unauthorized": "Non autorizzato",
+    "markdown_block_title": "Markdown",
+    "recent_activity_block_title": "Attività recenti",
+    "metadata_block_title": "Metadata",
+    "table_of_contents_block_title": "$t(glossary.table_of_contents_title_case)",
+    "resources_block_title": "$t(glossary.resource_title_case_other)",
+    "texts_block_title": "$t(glossary.text_title_case_other)",
+    "blocks": "Blocchi:",
+    "layout": "Layout:",
+    "normal": "Normale",
+    "shaded": "Sfumato",
+    "customize_blocks_message": "Personalizzare il resto del contenuto della pagina del progetto. Aggiungete, eliminate e riordinate i blocchi di contenuto, modificate le impostazioni e attivate la visibilit�",
+    "left_side": "Lato sinistro",
+    "right_side": "cLato destro",
+    "buttons": "pulsanti",
+    "links": "links",
+    "description_and_images": "Descrizione + immagini",
+    "description_and_images_description": "Testo della descrizione, immagine di copertina e immagine di sfondo",
+    "hero_block": "Hero Block",
+    "hero_block_instructions": "L'Hero Block è la parte superiore della pagina {{entità}}. Personalizzatene il contenuto, il layout e le impostazioni qui.",
+    "calls_to_action": "Calls-to-Action",
+    "calls_to_action_description": "Pulsanti e collegamenti a risorse correlate",
+    "social_links": "Social Links",
+    "social_links_description": "Link alle piattaforme social e hashtag",
+    "visibility_options": {
+      "always": "Sempre visibile",
+      "authorized": "Visibile solo se autorizzato",
+      "unauthorized": "Visibile solo se non autorizzato"
+    }
+  },
+  "hero": {
+    "dark_mode": "Dark Mode",
+    "description_placeholder": "Descrivere il{{entity}}",
+    "description_instructions": "Inserire una breve descrizione della propria {{entità}}. Questo campo accetta Markdown di base",
+    "image_label": "Immagine di sfondo",
+    "image_alt_label": "Testo Alt dell'immagine di sfondo",
+    "image_instructions": "Le immagini saranno ridimensionate a 1280x800 e ritagliate lungo il bordo inferiore",
+    "layout": "Hero Layout:",
+    "square_inset": "Inserto quadrato",
+    "wide_inset": "Ampio inserto",
+    "full_bleed": "senza margini",
+    "background_color": "Colore di sfondo",
+    "background_color_instructions": "Inserire un colore in uno dei seguenti formati: Parola chiave colore CSS, esadecimale, rgb, rgba, hsl, hsla o hwb. Lasciare vuoto per ripristinare il colore di sfondo predefinito.",
+    "image_credits": "Crediti immagine",
+    "image_credits_placeholder": "Aggiungere i crediti delle immagini",
+    "image_credits_instructions": "Inserire i crediti delle immagini per l'eroe e la copertina. Questo campo accetta il Markdown di base.",
+    "cover_image": "Immagine di copertina",
+    "cover_image_alt_label": "Testo Alt dell'immagine di copertina",
+    "cover_image_instructions": "Se è stata impostata una copertura per il {{entity}}, apparirà sopra l'hero, a destra della descrizione",
+    "social_id": "{{social}} ID",
+    "social_placeholder": "Inserire il{{entity}} {{social}} ID",
+    "hashtag": "Hashtag",
+    "hashtag_placeholder": "Inserire {{entity}} Hashtag"
+  },
+  "call_to_action": {
+    "edit_drawer_title": "modifica Call-to-Action",
+    "create_drawer_title": "Nuova Call-to-Action",
+    "text_select_placeholder": "Selezionare il testo",
+    "input_labels": {
+      "title": "Titolo",
+      "type": "Tipo",
+      "visibility": "Visibilità",
+      "text": "Collegamento al testo",
+      "url": "URL",
+      "download": "Scarica il file",
+      "save": "Risparmiare"
+    }
+  },
+  "content_blocks": {
+    "texts": {
+      "show_author_names": "Mostrare i nomi degli autori?",
+      "show_descriptions": "Mostrare le descrizioni?",
+      "show_subtitles": "Mostrare i sottotitoli?",
+      "show_cover_images": "Mostrare le immagini di copertina?",
+      "show_dates": "Date della mostra?",
+      "show_category_labels": "Mostrare le etichette di categoria?",
+      "show_uncategorized_texts": "Mostrare i testi non autorizzati?",
+      "add_text_category": "Aggiungi una categoria di testo",
+      "include_texts_in_category": "Includi i testi in queste categorie"
+    },
+    "resources": {
+      "default_title_message": "Se vuoto, il titolo del blocco sar� predefinito come \"$t(layout.resources_block_title)\"",
+      "collections_switch": "Show all collections?",
+      "collections_switch_info": "Se impostato, tutte le raccolte di risorse saranno incluse nel blocco. Altrimenti, verranno mostrate solo le selezioni in evidenza",
+      "select_collection_placeholder": "Aggiungere una raccolta di risorse",
+      "select_collection": "Mostra collezioni specifiche"
+    },
+    "markdown": {
+      "body": "Body",
+      "style": "Style"
+    },
+    "toc": {
+      "depth": "Profondit�",
+      "select_text": "Seleziona un$t(glossary.text_one)",
+      "show_text_title": "Mostra $t(glossary.text_one) titolo?"
+    }
+  }
+}
