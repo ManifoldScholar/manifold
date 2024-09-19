@@ -31,12 +31,14 @@ describe("global/components/sign-in-up/LoginForm", () => {
     expect($handleViewChange).toHaveBeenCalled();
   });
 
-  it("should trigger handleViewChange callback when show create is clicked", () => {
-    $handleViewChange.mockClear();
-    $wrapper
-      .find('button')
-      .at(1)
-      .simulate("click");
-    expect($handleViewChange).toHaveBeenCalled();
-  });
+  if (process.env.ALLOW_SIGNUP === "true") {
+    it("should trigger handleViewChange callback when show create is clicked", () => {
+      $handleViewChange.mockClear();
+      $wrapper
+        .find('button')
+        .at(1)
+        .simulate("click");
+      expect($handleViewChange).toHaveBeenCalled();
+    });
+  };
 });
