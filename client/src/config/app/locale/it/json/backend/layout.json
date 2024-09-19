@@ -17,7 +17,7 @@
     "layout": "Layout:",
     "normal": "Normale",
     "shaded": "Sfumato",
-    "customize_blocks_message": "Personalizzare il resto del contenuto della pagina del progetto. Aggiungete, eliminate e riordinate i blocchi di contenuto, modificate le impostazioni e attivate la visibilit�",
+    "customize_blocks_message": "Personalizzare il resto del contenuto della pagina del progetto. Aggiungete, eliminate e riordinate i blocchi di contenuto, modificate le impostazioni e attivate la visibilità",
     "left_side": "Lato sinistro",
     "right_side": "cLato destro",
     "buttons": "pulsanti",
@@ -87,7 +87,7 @@
       "include_texts_in_category": "Includi i testi in queste categorie"
     },
     "resources": {
-      "default_title_message": "Se vuoto, il titolo del blocco sar� predefinito come \"$t(layout.resources_block_title)\"",
+      "default_title_message": "Se vuoto, il titolo del blocco sarà predefinito come \"$t(layout.resources_block_title)\"",
       "collections_switch": "Show all collections?",
       "collections_switch_info": "Se impostato, tutte le raccolte di risorse saranno incluse nel blocco. Altrimenti, verranno mostrate solo le selezioni in evidenza",
       "select_collection_placeholder": "Aggiungere una raccolta di risorse",
@@ -98,7 +98,7 @@
       "style": "Style"
     },
     "toc": {
-      "depth": "Profondit�",
+      "depth": "Profondità",
       "select_text": "Seleziona un$t(glossary.text_one)",
       "show_text_title": "Mostra $t(glossary.text_one) titolo?"
     }

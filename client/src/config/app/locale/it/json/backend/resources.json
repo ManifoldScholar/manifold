@@ -35,7 +35,7 @@
       "min_width_placeholder": "Larghezza minima di visualizzazione",
       "min_height": "Altezza minima",
       "min_height_placeholder": "Altezza minima di visualizzazione",
-      "width_height_instructions": "Questo campo accetta un numero o un valore con unità px, rem, vw o vh. Se viene inserito solo un numero senza unit�, la visualizzazione predefinita sarà in pixel.",
+      "width_height_instructions": "Questo campo accetta un numero o un valore con unità px, rem, vw o vh. Se viene inserito solo un numero senza unità, la visualizzazione predefinita sarà in pixel.",
       "iframe_url": "URL iFrame",
       "iframe_url_placeholder": "Inserisci l'URL dell'iFrame",
       "iframe_allow_camera": "Permettere l'uso della fotocamera?",

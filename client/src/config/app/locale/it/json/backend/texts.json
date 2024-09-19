@@ -24,7 +24,7 @@
     "auto_toc_button_label": "Generazione automatica della TOC",
     "auto_toc_truncated": "Auto",
     "properties": {
-      "header": "Propriet�",
+      "header": "Proprietà",
       "title_label": "Titolo",
       "title_placeholder": "Inserire il titolo del testo",
       "subtitle_label": "Sottotitolo",
@@ -37,7 +37,7 @@
       "cover_label": "Cover",
       "presentation_header": "Presentazione",
       "published_label": "Pubblicato?",
-      "published_instructions": "Quando è acceso, un\"published\" Il badge apparir� accanto al testo negli elenchi di testi..",
+      "published_instructions": "Quando è acceso, un\"published\" Il badge apparirà accanto al testo negli elenchi di testi..",
       "section_label": "Sezione Etichetta",
       "section_placeholder": "Sezione",
       "section_instructions": "Ad esempio, capitolo per i libri o articolo per le riviste",
@@ -63,7 +63,7 @@
       "strategy_label": "Strategia",
       "no_strategy": "Nessuno",
       "id_label": "ID testo",
-      "id_placeholder": "Questa ingestione creer� un nuovo testo",
+      "id_placeholder": "Questa ingestione creerà un nuovo testo",
       "error": {
         "heading": "Errore di ingestione fatale",
         "body_cable": "L'applicazione client non è in grado di connettersi al websocket del server. Assicurarsi che il servizio 'cable' di Manifold sia disponibile nella seguente posizione:<br/><br/><em>{{cable}}</em>",
@@ -77,7 +77,7 @@
       }
     },
     "create": {
-      "drawer_instructions": "Creare un nuovo testo Manifold nel progetto corrente. Una volta creato il testo, � possibile aggiungere contenuti gestendo le sezioni e gli asset del testo..",
+      "drawer_instructions": "Creare un nuovo testo Manifold nel progetto corrente. Una volta creato il testo, è possibile aggiungere contenuti gestendo le sezioni e gli asset del testo..",
       "text_title": "Titolo del testo",
       "title_placeholder": "Titolo del nuovo testo",
       "cover_section_label": "Copertina",
@@ -99,7 +99,7 @@
       "url_instructions": "Manifold può anche ingerire una sezione dall'URL del suo file Google Doc o HTML",
       "ingest_id_label": "Testo Id sezione",
       "ingest_id_placeholder": "Questa ingestione creerà una nuova sezione",
-      "reingest_instructions": "Il reinserimento di questa sezione sovrascriverà il contenuto della sezione esistente, comprese le modifiche apportate nell'editor. Se si desidera mantenere entrambe le versioni, � possibile inserire questo file in una nuova sezione dalla pagina precedente",
+      "reingest_instructions": "Il reinserimento di questa sezione sovrascriverà il contenuto della sezione esistente, comprese le modifiche apportate nell'editor. Se si desidera mantenere entrambe le versioni, è possibile inserire questo file in una nuova sezione dalla pagina precedente",
       "reingest_url_instructions": "Manifold può anche essere reingaggiato da un documento di Google o da un URL HTML",
       "hide_label": "Nascondi nella navigazione del lettore?",
       "hide_instructions": "Esclude questa sezione dall'ordine delle sezioni del lettore. Nota: una sezione con questa impostazione attivata sarà comunque disponibile tramite link diretto.",
@@ -125,21 +125,21 @@
       "ingested": "(Ingested)",
       "user_created": "Utente creato",
       "edit": {
-        "instructions": "Questo foglio di stile è stato ingerito come parte del documento sorgente. È possibile apportarvi modifiche. Tuttavia, se il documento di origine viene reingerito, le modifiche andranno perse. Se si desidera aggiungere stili a questo testo, si consiglia di creare un nuovo foglio di stile aggiuntivo anzich� modificare questo foglio..",
+        "instructions": "Questo foglio di stile è stato ingerito come parte del documento sorgente. È possibile apportarvi modifiche. Tuttavia, se il documento di origine viene reingerito, le modifiche andranno perse. Se si desidera aggiungere stili a questo testo, si consiglia di creare un nuovo foglio di stile aggiuntivo anzichè modificare questo foglio..",
         "name_label": "Nome",
         "source_styles_label": "Stili sorgente",
         "source_styles_instructions": "Questi sono gli stili sorgente grezzi, che possono essere modificati",
         "validated_styles_label": "Stili convalidati",
         "validated_styles_instructions": "Il seguente input è di sola lettura. Contiene gli stili convalidati che sono inclusi nel lettore per questo testo",
         "all_sections_label": "Si applica a tutte le sezioni",
-        "all_sections_instructions": "Quando � impostato, gli stili di questo foglio di stile saranno applicati a tutte le sezioni del testo, sia quelle esistenti che quelle aggiunte in seguito. Disattivare questa opzione per selezionare le singole sezioni a cui applicare gli stili.",
+        "all_sections_instructions": "Quando è impostato, gli stili di questo foglio di stile saranno applicati a tutte le sezioni del testo, sia quelle esistenti che quelle aggiunte in seguito. Disattivare questa opzione per selezionare le singole sezioni a cui applicare gli stili.",
         "sections_label": "Applicare a queste sezioni di testo",
         "sections_placeholder": "Aggiungi una sezione di testo",
         "save": "Salvare il foglio di stile"
       }
     },
     "assets": {
-      "header": "Attivit�",
+      "header": "Attività",
       "instructions": "Le risorse sono file associati a un testo. Gli asset hanno URL stabili e possono essere resi nel lettore Manifold",
       "add_button_label": "Aggiungi una nuova attività",
       "edit_header": "Modifica attività",

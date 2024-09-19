@@ -59,7 +59,7 @@
     "exclude": "Escludi",
     "manage_collection_instructions": "Seleziona una Collezione di progetti dall'elenco per modificarne il contenuto e le impostazioni",
     "create_collection": "Crea una nuova collezione",
-    "create_collection_instructions": "Seleziona una raccolta per modificarne le impostazioni, la visibilit� e i contenuti.",
+    "create_collection_instructions": "Seleziona una raccolta per modificarne le impostazioni, la visibilità e i contenuti.",
     "change_visibility": "Modifica della visibilità di {{entity}} a {{visibility}}",
     "collection_is_visible": "La collezione è visibile",
     "collection_is_not_visible": "La collezione non è visibile",

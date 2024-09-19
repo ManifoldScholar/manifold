@@ -33,7 +33,7 @@
         "margin_size_increased": "I margini dei lettori sono aumentati",
         "margin_size_decreased_min": "Margini del lettore ridotti alla dimensione minima",
         "margin_size_increased_max": "Margini del lettore aumentati alla dimensione massima",
-        "reset_option_message": "Il lettore {{appearanceType}} � impostato su{{option}}.",
+        "reset_option_message": "Il lettore {{appearanceType}} è impostato su{{option}}.",
         "citation": {
           "citation_style": "Stile citazione:",
           "copied": "Copiato!"
@@ -71,7 +71,7 @@
           "my_notes": "Le mie $t(glossary.note_title_case_other)",
           "all_notes": "Le mie $t(glossary.note_other) per gruppo:",
           "orphaned_notes": "Le mie note sulle versioni precedenti",
-          "no_orphans_message": "Quando un testo viene modificato, Manifold cerca di inserire le annotazioni nel testo aggiornato. Se il passaggio annotato non esiste pi� nel testo, le annotazioni appariranno qui",
+          "no_orphans_message": "Quando un testo viene modificato, Manifold cerca di inserire le annotazioni nel testo aggiornato. Se il passaggio annotato non esiste più nel testo, le annotazioni appariranno qui",
           "unverified_message": "Per annotare pubblicamente i testi è necessario verificare il proprio indirizzo e-mail"
         },
         "return": {
