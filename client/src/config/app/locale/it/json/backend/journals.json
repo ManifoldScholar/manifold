@@ -1,0 +1,92 @@
+{
+  "journals": {
+    "header": "Gestire i giornali",
+    "add_button_label": "Aggiungi nuovo giornale",
+    "unauthorized": "Non è possibile gestire i giornali.",
+    "unauthorized_edit": "Non sei autorizzato a modificare questo giornale",
+    "settings": "Impostazioni del giornale",
+    "volume_number": "Volume {{volNum}}",
+    "issue_number": "Problema{{issNum}}",
+    "volume_issue_number": "Vol., {{volNum}}, No., {{issNum}}",
+    "forms": {
+      "new_header": "Nuovo giornale",
+      "new_instructions": "Inserire il nome del giornale e una breve descrizione. Premere Salva per continuare.",
+      "title_descript_label": "Titolo e descrizione",
+      "title_label": "Titolo",
+      "title_placeholder": "Inserire il titolo del giornale",
+      "subtitle_label": "Sottotitolo",
+      "subtitle_placeholder": "Inserire il sottotitolo del giornale",
+      "descript_label": "Breve descrizione",
+      "submit_label": "Salva e continua",
+      "logo": "Logo",
+      "logo_instructions": "Se è stato impostato un logo per il giornale, questo apparir� verticalmente e orizzontalmente centrato sull'eroe.",
+      "logo_alt_label": "Logo Alt Text",
+      "properties": {
+        "header": "Propriet�",
+        "slug_label": "Slug",
+        "slug_placeholder": "Inserisci slug giornale",
+        "presentation_header": "Presentazione",
+        "draft_mode_label": "Modalit� bozza",
+        "draft_mode_instructions": "Una bozza di progetto è visibile solo agli utenti che possono modificarla",
+        "show_home_label": "Mostra in home page",
+        "show_home_instructions": "Se selezionato, questo giornale sar� evidenziato nella home page",
+        "homepage_priority_label": "Priorit� della pagina iniziale",
+        "homepage_priority_instructions": "Le riviste con un numero pi� alto verranno visualizzate per prime sulla home page",
+        "social_header": "Social",
+        "social_card_label": "Titolo della Social Card",
+        "social_card_placeholder": "Facoltativamente, inserire il titolo della tessera sociale",
+        "social_descript_label": "Descrizione della Social Card",
+        "social_descript_placeholder": "Facoltativamente, inserire una descrizione della tessera social",
+        "social_image_label": "Immagine della social card",
+        "taxonomy_header": "Tassonomia",
+        "subjects_label": "Soggetti",
+        "subjects_placeholder": "Selezionare un soggetto",
+        "tags_label": "Tags",
+        "tags_placeholder": "Inserisci i tag",
+        "save": "Salva il giornale"
+      }
+    }
+  },
+  "issues": {
+    "header": "Gestire i problemi",
+    "add_button_label": "Aggiungi nuovo numero",
+    "instructions": "Gestire i numeri della rivista da questa schermata. Ogni numero fa riferimento a un progetto Manifold, che è il contenitore dei contenuti del numero",
+    "create_header": "Creare un problema",
+    "volume_instructions": "Opzionalmente, selezionare un volume.",
+    "associated_project": "Associato$t(glossary.project_title_case_one)",
+    "project_instructions": "I contenuti dei numeri sono archiviati in progetti. Selezionare un contenuto esistente o lasciare vuoto per creare un nuovo progetto",
+    "update_issue": "$t(actions.update) $t(glossary.issue_title_case_one)",
+    "create_issue": "$t(actions.create) $t(glossary.issue_title_case_one)",
+    "forms": {
+      "number_label": "Numero di emissione",
+      "sort_number_label": "Numero di fascicolo",
+      "sort_number_placeholder": "Inserire il numero di ordinamento",
+      "sort_number_instructions": "Questo campo viene utilizzato solo per ordinare numericamente i numeri negli elenchi. Se vuoto, Manifold cercherà di ricavare un numero dal numero del problema",
+      "volume_label": "$t(volumes.number)",
+      "volume_instructions": "Opzionalmente, selezionare un volume."
+    }
+  },
+  "volumes": {
+    "header": "Gestire i volumi",
+    "add_button_label": "Aggiungi nuovo volume",
+    "create_header": "Crea volume",
+    "edit_header": "Modifica del volume",
+    "slug_placeholder": "Inserire lo slug del volume del giornale",
+    "update_volume": "Aggiornamento Volume del giornale",
+    "create_volume": "Creare il volume del giornale",
+    "number": "Numero di volume",
+    "number_truncated": "Numbero",
+    "no_volume": "No volume"
+  },
+  "access": {
+    "title": "Configurare le restrizioni di accesso",
+    "description": "Abilitare le restrizioni di accesso e regolare la messaggistica",
+    "restricted_label": "L'accesso al giornale è limitato",
+    "open_access_label": "Il giornale è Open Access",
+    "notice_header_label": "Intestazione dell'avviso di accesso limitato",
+    "notice_body_label": "Avviso di accesso limitato Corpo",
+    "notice_header_placeholder": "L'accesso a questo giornale è limitato",
+    "notice_body_placeholder": "Solo gli utenti che hanno ottenuto l'autorizzazione possono visualizzare i volumi e i numeri di questo giornale",
+    "save": "Aggiornare le impostazioni di accesso"
+  }
+}

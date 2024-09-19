@@ -1,0 +1,91 @@
+{
+  "editor": {
+    "forms": {
+      "iframe_insert_heading": "Inserisci Iframe",
+      "iframe_update_heading": "Aggiorna Iframe",
+      "iframe_url_label": "Iframe Url",
+      "title_label": "Titolo",
+      "image_insert_heading": "Inserisci immagine",
+      "image_update_heading": "Inserisci immagine",
+      "image_url_label": "Immagine Url",
+      "alt_text_label": "Alt Text",
+      "link_insert_heading": "Inserisci Link",
+      "link_url_label": "Url",
+      "link_text_label": "Testo",
+      "labelled_by_uid": "{{uid}}-label",
+      "described_by_uid": "{{uid}}-descrizione"
+    },
+    "controls": {
+      "labels": {
+        "toolbar_html": "HTML Toolbar",
+        "toolbar_rte": "Rich Text Toolbar",
+        "show_styles": "Mostra gli stili",
+        "hide_styles": "Nascondi stili",
+        "iframe": "Inserisci Iframe",
+        "image": "Inserisci Image",
+        "link": "Inserisci Link",
+        "span": "Inserisci Span",
+        "format": "Inserisci $t(editor.tooltips.labels.{{format}})",
+        "text_block_select": "Impostare il blocco di testo",
+        "text_block_select_placeholder": "Blocco di testo",
+        "layout_block_select": "Inserisci la selezione corrente in un contenitore",
+        "layout_block_select_placeholder": "Contenitore",
+        "show_html": "Mostra tutti i contorni degli elementi HTML",
+        "hide_html": "Nascondere tutti i contorni degli elementi HTML",
+        "lift": "Spostare il nodo di un livello superiore nella gerarchia HTML"
+      },
+      "toggles": {
+        "html_label": "HTML Editor",
+        "html_label_mobile": "HTML",
+        "rte_label": "Rich Text Editor",
+        "rte_label_mobile": "Rich Text",
+        "dark_mode_label": "Scuro",
+        "light_mode_label": "Chiaro"
+      }
+    },
+    "elements": {
+      "placeholder": "Sezione corpo..."
+    },
+    "tooltips": {
+      "labels": {
+        "p": "Paragraph",
+        "span": "Span",
+        "h1": "Heading 1",
+        "h2": "Heading 2",
+        "h3": "Heading 3",
+        "h4": "Heading 4",
+        "h5": "Heading 5",
+        "h6": "Heading 6",
+        "ol": "Elenco numerato",
+        "ul": "Elenco puntato",
+        "blockquote": "Blocco note",
+        "link": "Link",
+        "pre": "Blocco codice",
+        "italic": "Italic",
+        "strikethrough": "Strikethrough",
+        "bold": "Bold",
+        "underline": "Underline",
+        "code": "Code",
+        "undo": "Undo",
+        "redo": "Redo",
+        "img": "Image",
+        "iframe": "Iframe",
+        "container": "Container",
+        "textBlock": "Blocco di testo",
+        "div": "Div",
+        "header": "Header",
+        "footer": "Footer",
+        "section": "Sezione",
+        "article": "Articolo",
+        "figure": "Figura",
+        "figcaption": "Figcaption"
+      },
+      "descriptions": {
+        "img": "Incollare l'URL di un'immagine nell'editor per inserirla",
+        "iframe": "Incollare un URL di incorporazione di YouTube o Vimeo nell'editor per inserirlo. Inserire altri contenuti iframe tramite il modale.",
+        "span": "Avvolgi la selezione corrente o inserisci un elemento span in corrispondenza di un cursore nel blocco corrente. Gli span possono essere annidati in contenitori e altri span per lo stile.",
+        "container": "Avvolgi la selezione corrente, o il blocco corrente se la selezione � in corrispondenza di un cursore, in un elemento di blocco html. Questi elementi possono essere annidati. Per rimuovere un contenitore o spostarlo di un livello nella gerarchia del documento, selezionare l'elemento nella barra delle breadcrumbs.",
+        "textBlock": "Imposta il blocco di testo per la selezione corrente o il blocco corrente se la selezione si trova su un cursore. Questi blocchi possono essere avvolti in contenitori." }
+    }
+  }
+}
