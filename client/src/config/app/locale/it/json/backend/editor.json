@@ -84,8 +84,9 @@
         "img": "Incollare l'URL di un'immagine nell'editor per inserirla",
         "iframe": "Incollare un URL di incorporazione di YouTube o Vimeo nell'editor per inserirlo. Inserire altri contenuti iframe tramite il modale.",
         "span": "Avvolgi la selezione corrente o inserisci un elemento span in corrispondenza di un cursore nel blocco corrente. Gli span possono essere annidati in contenitori e altri span per lo stile.",
-        "container": "Avvolgi la selezione corrente, o il blocco corrente se la selezione � in corrispondenza di un cursore, in un elemento di blocco html. Questi elementi possono essere annidati. Per rimuovere un contenitore o spostarlo di un livello nella gerarchia del documento, selezionare l'elemento nella barra delle breadcrumbs.",
-        "textBlock": "Imposta il blocco di testo per la selezione corrente o il blocco corrente se la selezione si trova su un cursore. Questi blocchi possono essere avvolti in contenitori." }
+        "container": "Avvolgi la selezione corrente, o il blocco corrente se la selezione è in corrispondenza di un cursore, in un elemento di blocco html. Questi elementi possono essere annidati. Per rimuovere un contenitore o spostarlo di un livello nella gerarchia del documento, selezionare l'elemento nella barra delle breadcrumbs.",
+        "textBlock": "Imposta il blocco di testo per la selezione corrente o il blocco corrente se la selezione si trova su un cursore. Questi blocchi possono essere avvolti in contenitori."
+      }
     }
   }
 }

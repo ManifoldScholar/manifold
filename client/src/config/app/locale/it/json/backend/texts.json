@@ -102,7 +102,7 @@
       "reingest_instructions": "Il reinserimento di questa sezione sovrascriverà il contenuto della sezione esistente, comprese le modifiche apportate nell'editor. Se si desidera mantenere entrambe le versioni, � possibile inserire questo file in una nuova sezione dalla pagina precedente",
       "reingest_url_instructions": "Manifold può anche essere reingaggiato da un documento di Google o da un URL HTML",
       "hide_label": "Nascondi nella navigazione del lettore?",
-      "hide_instructions": "Esclude questa sezione dall'ordine delle sezioni del lettore. Nota: una sezione con questa impostazione attivata sar� comunque disponibile tramite link diretto.",
+      "hide_instructions": "Esclude questa sezione dall'ordine delle sezioni del lettore. Nota: una sezione con questa impostazione attivata sarà comunque disponibile tramite link diretto.",
       "hide_start_instructions": "Questa sezione è attualmente la sezione iniziale del testo e non può essere nascosta"
     },
     "toc": {
@@ -130,7 +130,7 @@
         "source_styles_label": "Stili sorgente",
         "source_styles_instructions": "Questi sono gli stili sorgente grezzi, che possono essere modificati",
         "validated_styles_label": "Stili convalidati",
-        "validated_styles_instructions": "Il seguente input � di sola lettura. Contiene gli stili convalidati che sono inclusi nel lettore per questo testo",
+        "validated_styles_instructions": "Il seguente input è di sola lettura. Contiene gli stili convalidati che sono inclusi nel lettore per questo testo",
         "all_sections_label": "Si applica a tutte le sezioni",
         "all_sections_instructions": "Quando � impostato, gli stili di questo foglio di stile saranno applicati a tutte le sezioni del testo, sia quelle esistenti che quelle aggiunte in seguito. Disattivare questa opzione per selezionare le singole sezioni a cui applicare gli stili.",
         "sections_label": "Applicare a queste sezioni di testo",
