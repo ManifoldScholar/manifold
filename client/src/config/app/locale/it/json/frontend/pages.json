@@ -1,0 +1,42 @@
+{
+  "pages": {
+    "events": "Eventi",
+    "events_all": "Vedi tutti gli eventi",
+    "journals": "Riviste",
+    "issues": "Fascicoli",
+    "issues_all": "Tutti i fascicoli",
+    "projects": "Libri",
+    "projects_all": "Tutti i libri",
+    "project_collections": "Collane",
+    "resource_collections_all": "Tutte le collane",
+    "resources_all": "Tutte le risorse digitali",
+    "my_notes": "Le mie note + Commenti",
+    "my_notes_truncated": "Le mie note",
+    "my_starred": "I miei preferiti",
+    "my_groups": "I miei gruppi di lettura",
+    "public_groups": "Gruppi di lettura pubblici",
+    "reading_group": {
+      "homepage_edit_header": "Modifica Home Page",
+      "homepage_edit_instructions": "Organizzare e modificare i contenuti della pagina iniziale del gruppo di lettura. Cercare nuovi contenuti da aggiungere. Creare le proprie categorie e aggiungere o modificare le descrizioni delle categorie. Spostare i contenuti tra le categorie e all'interno dei tipi di contenuto trascinandoli con la maniglia.",
+      "search_title": "Cerca + aggiungi contenuto:",
+      "search_instructions": "Cercare e rendere preferito il contenuto che si desidera aggiungere alla home page.",
+      "search_button_label": "$t(actions.add) $t(common.content)"
+    },
+    "data_use": {
+      "header": "Che dati conservate su di me?",
+      "internal_analytics": "Internal Analytics",
+      "annotations": "Annotazioni e commenti",
+      "reading_groups": "Gruppi di lettura"
+    },
+    "subheaders": {
+      "journal_info": "Info sulla rivista",
+      "full_description": "Descrizione completa",
+      "tags_list": "Lista dei Tag",
+      "variants": "Varianti scaricabili",
+      "resource_slideshow": "slideshow delle risorse",
+      "resource_list": "Lista delle risorse",
+      "group_details": "Dettagli del gruppo",
+      "group_summary": "Presentazione del gruppo"
+    }
+  }
+}
