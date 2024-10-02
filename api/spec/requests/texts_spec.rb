@@ -11,36 +11,44 @@ RSpec.describe "Texts API", type: :request do
     end
   end
 
-  describe "sends a text" do
-    let(:text) { FactoryBot.create(:text) }
-    let(:text_id ) { text.id }
-    let(:stylesheet) { FactoryBot.create(:stylesheet, text_id: text_id) }
-    let(:path) { api_v1_text_path(text) }
-    let(:api_response) { JSON.parse(response.body) }
+  describe "GET /api/v1/texts/:id" do
+    let_it_be(:text, refind: true) { FactoryBot.create(:text) }
+    let_it_be(:stylesheet, refind: true) { FactoryBot.create(:stylesheet, text: text) }
 
-    before(:each) do
-      stylesheet
-      get path
-    end
+    context "with an existing text" do
+      it "finds the text and includes the stylesheet" do
+        expect do
+          get api_v1_text_path text
+        end.to execute_safely
 
-    describe "the response" do
-      it "has a 200 status code" do
-        expect(response).to have_http_status(200)
-      end
+        expect(response).to have_http_status :ok
 
-      it "includes the text's stylesheets" do
-        text.reload
-        included = api_response["included"].find_index do |inc|
-          inc["id"] == stylesheet.id
+        expect(response.parsed_body).to satisfy("include the stylesheet") do |api_response|
+          included_index = api_response["included"].find_index do |inc|
+            inc["id"] == stylesheet.id
+          end
+
+          included_index.present?
         end
-        expect(included).to_not be nil
       end
     end
 
+    context "with a soft-deleted text" do
+      before do
+        text.soft_delete!
+      end
+
+      it "does not find the text" do
+        expect do
+          get api_v1_text_path text
+        end.to execute_safely
+
+        expect(response).to have_http_status :not_found
+      end
+    end
   end
 
   describe "updates a text" do
-
     it_should_behave_like "orderable api requests" do
       let(:path) { "api_v1_text_path" }
       let!(:object_a) { FactoryBot.create(:text, position: 1) }
@@ -48,8 +56,34 @@ RSpec.describe "Texts API", type: :request do
     end
   end
 
+  describe "DELETE /api/v1/texts/:id" do
+    let_it_be(:text, refind: true) { FactoryBot.create(:text) }
+
+    context "as an admin" do
+      it "soft-deletes the text" do
+        expect do
+          delete api_v1_text_path(text), headers: admin_headers
+        end.to keep_the_same(Text, :count)
+          .and have_enqueued_job(SoftDeletions::PurgeJob).once.with(text)
+
+        expect(response).to have_http_status :no_content
+      end
+    end
+
+    context "as a reader" do
+      it "does nothing" do
+        expect do
+          delete api_v1_text_path(text), headers: reader_headers
+        end.to keep_the_same(Text, :count)
+          .and have_enqueued_job(SoftDeletions::PurgeJob).exactly(0).times
+
+        expect(response).to have_http_status :forbidden
+      end
+    end
+  end
+
   describe "toggling API export" do
-    let!(:text) { FactoryBot.create :text, exports_as_epub_v3: false }
+    let_it_be(:text, refind: true) { FactoryBot.create :text, exports_as_epub_v3: false }
 
     it "toggles the export" do
       expect do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Projects controller
@@ -39,7 +41,7 @@ module API
 
       def destroy
         @project = load_and_authorize_project
-        @project.destroy
+        @project.async_destroy
       end
 
       protected
@@ -52,7 +54,7 @@ module API
       end
 
       def scope_for_projects
-        Project.friendly
+        Project.existing.friendly
       end
 
       def scope_visibility
@@ -63,11 +65,10 @@ module API
         # apply both the read and update scopes, but then we have to join roles on both
         # which I suspect is less efficient. Note that the with_update_ability is applied
         # automatically through the filterable concern. -ZD
-        return Project.with_read_ability current_user unless project_filter_params&.dig(:with_update_ability)
+        return Project.existing.with_read_ability current_user unless project_filter_params&.dig(:with_update_ability)
 
-        Project.all
+        Project.existing.all
       end
-
     end
   end
 end

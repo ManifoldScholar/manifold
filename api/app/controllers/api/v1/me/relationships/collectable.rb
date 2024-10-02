@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Me
@@ -56,7 +58,7 @@ module API
                     scope: current_user.public_send(association_name)
                   )
                 else
-                  current_user.public_send(association_name)
+                  current_user.public_send(association_name).existing
                 end
               end
             end
