@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 # Connects texts to resources that were sources for text sections during ingestion
 #
 # @see IngestionSourceUploader
 class IngestionSource < ApplicationRecord
-  # Constants
   TYPEAHEAD_ATTRIBUTES = [:display_name, :source_identifier].freeze
 
-  # Authorization
   include Authority::Abilities
   include Filterable
   include SerializedAbilitiesFor
@@ -19,10 +19,10 @@ class IngestionSource < ApplicationRecord
   manifold_has_attached_file :attachment, :resource
 
   # Constants
-  KIND_COVER_IMAGE = "cover_image".freeze
-  KIND_NAVIGATION = "navigation".freeze
-  KIND_SECTION = "section".freeze
-  KIND_PUBLICATION_RESOURCE = "publication_resource".freeze
+  KIND_COVER_IMAGE = "cover_image"
+  KIND_NAVIGATION = "navigation"
+  KIND_SECTION = "section"
+  KIND_PUBLICATION_RESOURCE = "publication_resource"
   ALLOWED_KINDS = [
     KIND_COVER_IMAGE,
     KIND_NAVIGATION,
@@ -58,7 +58,7 @@ class IngestionSource < ApplicationRecord
              batch_size: 500)
 
   # Associations
-  belongs_to :text
+  belongs_to :text, inverse_of: :ingestion_sources
 
   # Delegations
   delegate :project, to: :text

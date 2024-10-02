@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe "Projects API", type: :request do
-  let(:project) { FactoryBot.create(:project, draft: false) }
+  let_it_be(:project, refind: true) { FactoryBot.create(:project, draft: false) }
 
   describe "responds with a list of projects" do
     before(:each) { get api_v1_projects_path, headers: reader_headers }
@@ -24,25 +24,45 @@ RSpec.describe "Projects API", type: :request do
     end
   end
 
-  describe "sends a single project" do
-    let(:path) { api_v1_project_path(project) }
+  describe "GET /api/v1/projects/:id" do
+    let(:headers) { nil }
 
-    context "when the user is an reader" do
-      before(:each) { get path, headers: reader_headers }
-      describe "the response" do
-        it "has a 200 status code" do
-          expect(response).to have_http_status(200)
+    shared_examples_for "finding the project" do
+      context "with an existing project" do
+        it "finds the project" do
+          expect do
+            get api_v1_project_path(project)
+          end.to execute_safely
+
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
+      context "when the project has been soft-deleted" do
+        before do
+          project.soft_delete!
+        end
+
+        it "does not find the project" do
+          expect do
+            get api_v1_project_path(project)
+          end.to execute_safely
+
+          expect(response).to have_http_status(:not_found)
         end
       end
     end
 
-    context "when the user is an admin" do
-      before(:each) { get path, headers: admin_headers }
-      describe "the response" do
-        it "has a 200 status code" do
-          expect(response).to have_http_status(200)
-        end
-      end
+    context "as an admin" do
+      let(:headers) { admin_headers }
+
+      include_examples "finding the project"
+    end
+
+    context "as a reader" do
+      let(:headers) { reader_headers }
+
+      include_examples "finding the project"
     end
   end
 
@@ -187,24 +207,41 @@ RSpec.describe "Projects API", type: :request do
     end
   end
 
-  describe "destroys a project" do
-    let(:path) { api_v1_project_path(project) }
+  describe "DELETE /api/v1/projects/:id" do
+    context "as an admin" do
+      it "soft-deletes the project" do
+        expect do
+          delete api_v1_project_path(project), headers: admin_headers
+        end.to keep_the_same(Project, :count)
+          .and have_enqueued_job(SoftDeletions::PurgeJob).once.with(project)
 
-    context "when the user is an admin" do
-      let(:headers) { admin_headers }
+        expect(response).to have_http_status(:no_content)
+      end
 
-      it "has a 204 NO CONTENT status code" do
-        delete path, headers: headers
-        expect(response).to have_http_status(204)
+      context "when the project has already been soft-deleted" do
+        before do
+          project.async_destroy
+        end
+
+        it "is not found and skipped" do
+          expect do
+            delete api_v1_project_path(project), headers: admin_headers
+          end.to keep_the_same(Project, :count)
+            .and have_enqueued_job(SoftDeletions::PurgeJob).exactly(0).times
+
+          expect(response).to have_http_status(:not_found)
+        end
       end
     end
 
-    context "when the user is a reader" do
-      let(:headers) { reader_headers }
+    context "as a reader" do
+      it "does nothing" do
+        expect do
+          delete api_v1_project_path(project), headers: reader_headers
+        end.to keep_the_same(Project, :count)
+          .and have_enqueued_job(SoftDeletions::PurgeJob).exactly(0).times
 
-      it "has a 403 FORBIDDEN status code" do
-        delete path, headers: headers
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status :forbidden
       end
     end
   end

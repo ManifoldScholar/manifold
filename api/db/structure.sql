@@ -632,7 +632,9 @@ CREATE TABLE public.projects (
     open_access boolean DEFAULT false NOT NULL,
     disable_engagement boolean DEFAULT false,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    journal_issue_id uuid
+    journal_issue_id uuid,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -2614,7 +2616,9 @@ CREATE TABLE public.texts (
     toc jsonb DEFAULT '[]'::jsonb NOT NULL,
     page_list jsonb DEFAULT '[]'::jsonb NOT NULL,
     landmarks jsonb DEFAULT '[]'::jsonb NOT NULL,
-    structure_titles jsonb DEFAULT '{}'::jsonb NOT NULL
+    structure_titles jsonb DEFAULT '{}'::jsonb NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -4933,6 +4937,13 @@ CREATE INDEX index_projects_export_configuration_exports_as_bag_it ON public.pro
 
 
 --
+-- Name: index_projects_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_projects_on_deleted_at ON public.projects USING btree (deleted_at);
+
+
+--
 -- Name: index_projects_on_fingerprint; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4944,6 +4955,13 @@ CREATE INDEX index_projects_on_fingerprint ON public.projects USING btree (finge
 --
 
 CREATE UNIQUE INDEX index_projects_on_journal_issue_id ON public.projects USING btree (journal_issue_id);
+
+
+--
+-- Name: index_projects_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_projects_on_marked_for_purge_at ON public.projects USING btree (marked_for_purge_at);
 
 
 --
@@ -5710,10 +5728,24 @@ CREATE INDEX index_texts_on_created_at ON public.texts USING brin (created_at);
 
 
 --
+-- Name: index_texts_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_texts_on_deleted_at ON public.texts USING btree (deleted_at);
+
+
+--
 -- Name: index_texts_on_fingerprint; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_texts_on_fingerprint ON public.texts USING btree (fingerprint);
+
+
+--
+-- Name: index_texts_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_texts_on_marked_for_purge_at ON public.texts USING btree (marked_for_purge_at);
 
 
 --
@@ -7174,6 +7206,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240220212417'),
 ('20240223163849'),
 ('20240327194259'),
+('20241001182627'),
 ('20241206175512');
 
 
