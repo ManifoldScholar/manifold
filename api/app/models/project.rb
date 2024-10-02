@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 # The project model is the primary unit of Manifold.
 class Project < ApplicationRecord
-  # Constants
   TYPEAHEAD_ATTRIBUTES = [:title, :maker_names].freeze
 
-  # Concerns
   include Authority::Abilities
   include Collectable
   include Entitleable
@@ -24,9 +24,9 @@ class Project < ApplicationRecord
   include WithPermittedUsers
   include Sluggable
   include SearchIndexable
+  include SoftDeletable
+  include TimestampScopes
   include WithConfigurableAvatar
-
-  # Magic
 
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :restricted_access_body, include_wrap: false

@@ -339,7 +339,7 @@ class Annotation < ApplicationRecord
 
   class << self
     def apply_filtering_loads
-      includes(:annotation_node, :creator, :membership_comments, :project, text_section: { text: %i[titles] })
+      super.includes(:annotation_node, :creator, :membership_comments, :project, text_section: { text: %i[titles] })
     end
 
     # @param [ReadingGroupMembership, String] rgm
