@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 # A single Text
 class Text < ApplicationRecord
-
   TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
 
-  # Concerns
   include Authority::Abilities
   include Collectable
   include SerializedAbilitiesFor
@@ -17,19 +17,18 @@ class Text < ApplicationRecord
   include Metadata
   include Attachments
   include SearchIndexable
+  include SoftDeletable
   include TableOfContentsWithCollected
+  include TimestampScopes
 
-  # PaperTrail
   has_paper_trail meta: {
     parent_item_id: :project_id,
     parent_item_type: "Project",
     title_fallback: :title_plaintext
   }
 
-  # Default Scope
   default_scope { order(position: :asc).preload(:titles, :text_subjects, :category) }
 
-  # Magic
   has_formatted_attributes :description
   with_metadata %w(
     series_title container_title isbn issn doi unique_identifier language
@@ -63,7 +62,7 @@ class Text < ApplicationRecord
   acts_as_list scope: [:project_id, :category_id]
 
   # Associations
-  belongs_to :project, optional: true, touch: true
+  belongs_to :project, inverse_of: :texts, optional: true, touch: true
   belongs_to :category, optional: true
   belongs_to :start_text_section, optional: true, class_name: "TextSection",
              inverse_of: :text_started_by
@@ -71,7 +70,7 @@ class Text < ApplicationRecord
   has_many :titles, class_name: "TextTitle", autosave: true, dependent: :destroy, inverse_of: :text
   has_many :text_subjects, dependent: :destroy
   has_many :subjects, through: :text_subjects
-  has_many :ingestion_sources, dependent: :destroy
+  has_many :ingestion_sources, dependent: :destroy, inverse_of: :text
   has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text, autosave: true
   has_one :text_section_aggregation, inverse_of: :text
