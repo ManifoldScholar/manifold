@@ -32,6 +32,8 @@ class ReadingGroup < ApplicationRecord
 
   has_many :annotated_texts, -> { distinct.reorder(nil) }, through: :annotations, source: :text
 
+  has_many :annotation_flags, through: :annotations, source: :flags
+
   has_many :reading_group_categories, -> { in_order }, inverse_of: :reading_group, dependent: :destroy
 
   collects_reading_group_entry! "ReadingGroupProject", categorized: true

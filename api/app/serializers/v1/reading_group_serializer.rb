@@ -27,6 +27,10 @@ module V1
       object.annotations_count + object.highlights_count
     end
 
+    typed_attribute :annotation_flags_count, Types::Integer.meta(read_only: true) do |object, _params|
+      object.annotation_flags.size
+    end
+
     typed_attribute :current_user_counts, Users::ReadingGroupCount::SCHEMA.meta(read_only: true) do |object, params|
       params[:current_user].then do |user|
         next Users::ReadingGroupCount.new if user.blank? || user.anonymous?
