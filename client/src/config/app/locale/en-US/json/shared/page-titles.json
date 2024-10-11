@@ -3,6 +3,7 @@
     "__note": "These page titles are used for HTML head content and SR route announcements. See /helpers/router/navigation.js",
     "access": "Access",
     "analytics": "Analytics",
+    "annotations": "Annotations",
     "assets": "Assets",
     "collaborators": "People",
     "contents": "Table of Contents",
