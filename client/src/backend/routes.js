@@ -805,6 +805,22 @@ const routes = {
       ]
     },
     {
+      name: "backendReadingGroups",
+      exact: false,
+      component: "ReadingGroupsWrapper",
+      path: "/backend/reading-groups/:id?",
+      helper: () => `/backend/reading-groups`,
+      routes: [
+        {
+          name: "backendReadinGroupsList",
+          exact: true,
+          component: "ReadingGroupsList",
+          path: "/backend/reading-groups",
+          helper: () => "/backend/reading-groups"
+        }
+      ]
+    },
+    {
       name: "backendRecords",
       exact: false,
       component: "Records",
