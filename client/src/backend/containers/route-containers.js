@@ -26,6 +26,7 @@ import Analytics from "backend/containers/analytics";
 import Journals from "backend/containers/journals";
 import Journal from "backend/containers/journal";
 import ReadingGroups from "backend/containers/reading-groups";
+import Annotations from "backend/containers/annotations";
 
 export default {
   Backend,
@@ -157,5 +158,6 @@ export default {
   EntitlementsPendingEdit: EntitlementsPending.AddEdit,
   EntitlementsPendingImport: EntitlementsPending.Import,
   CSVEntitlementImports: EntitlementsPending.CSVImports,
-  ReadingGroupsList: ReadingGroups.List
+  ReadingGroupsList: ReadingGroups.List,
+  AnnotationsList: Annotations.List
 };
