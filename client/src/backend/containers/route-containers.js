@@ -159,6 +159,7 @@ export default {
   EntitlementsPendingEdit: EntitlementsPending.AddEdit,
   EntitlementsPendingImport: EntitlementsPending.Import,
   CSVEntitlementImports: EntitlementsPending.CSVImports,
+  ReadingGroupsWrapper: ReadingGroups.Wrapper,
   ReadingGroupsList: ReadingGroups.List,
   AnnotationsList: Annotations.List
 };
