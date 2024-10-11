@@ -184,6 +184,8 @@ class Annotation < ApplicationRecord
       order(created_at: :asc)
     when "created_at DESC"
       order(created_at: :desc)
+    when "created_by"
+      order(creator_id: :desc)
     else
       order(created: :desc)
     end
