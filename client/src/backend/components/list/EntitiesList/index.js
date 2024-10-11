@@ -30,6 +30,7 @@ import PendingEntitlementRow from "./Entity/PendingEntitlementRow";
 import EntitlementImportRow from "./Entity/EntitlementImportRow";
 import AssetRow from "./Entity/AssetRow";
 import ReadingGroupRow from "./Entity/ReadingGroupRow";
+import AnnotationRow from "./Entity/AnnotationRow";
 
 export default List;
 export {
@@ -63,5 +64,6 @@ export {
   PendingEntitlementRow,
   EntitlementImportRow,
   AssetRow,
-  ReadingGroupRow
+  ReadingGroupRow,
+  AnnotationRow
 };
