@@ -8,10 +8,8 @@ import EntitiesList, {
   ReadingGroupRow
 } from "backend/components/list/EntitiesList";
 import { useFetch, usePaginationState, useFilterState } from "hooks";
-import { childRoutes } from "helpers/router";
 import withFilteredLists, { readingGroupFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
-import PageHeader from "backend/components/layout/PageHeader";
 
 function ReadingGroupsList({
   route,
@@ -21,32 +19,17 @@ function ReadingGroupsList({
 }) {
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 7);
+  const [pagination, setPageNumber] = usePaginationState(1, 10);
   const baseFilters = entitiesListSearchParams.initialreadingGroups;
   const [filters, setFilters] = useFilterState({
     ...baseFilters,
-    privacy: "public"
+    order: "created_at_desc"
   });
 
   const { data: readingGroups, meta, refresh } = useFetch({
     request: [readingGroupsAPI.index, filters, pagination],
     dependencies: [filters]
   });
-
-  const renderChildRoutes = () => {
-    const closeUrl = lh.link("backendRecordsReadingGroups");
-
-    return childRoutes(route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        wide: true,
-        closeUrl,
-        showNotifications: location.pathname.includes("import")
-      },
-      childProps: { refresh }
-    });
-  };
 
   const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
     "readingGroups"
@@ -62,13 +45,16 @@ function ReadingGroupsList({
 
   return (
     <>
-      {renderChildRoutes()}
       {readingGroups && (
         <>
-          <PageHeader type="list" title={t("titles.groups")} />
           <EntitiesList
             entityComponent={ReadingGroupRow}
             entities={readingGroups}
+            title={t("glossary.reading_group_title_case", {
+              count: meta.pagination.totalCount
+            })}
+            titleIcon="ReadingGroup24"
+            titleStyle="bar"
             search={
               <Search
                 {...searchProps}
@@ -78,6 +64,7 @@ function ReadingGroupsList({
             }
             pagination={meta.pagination}
             showCount
+            showCountInTitle
             unit={t("glossary.reading_group", {
               count: meta.pagination.totalCount
             })}
