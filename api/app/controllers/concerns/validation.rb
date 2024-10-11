@@ -508,7 +508,7 @@ module Validation
   end
 
   def reading_group_filter_params
-    params.permit(filter: [:keyword, :sort_order, :archived])[:filter] || {}
+    params.permit(filter: [:keyword, :sort_order, :archived, :privacy])[:filter] || {}
   end
 
   def reading_group_membership_filter_params
