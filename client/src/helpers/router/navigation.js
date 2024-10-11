@@ -78,6 +78,10 @@ class Navigation {
         route: "backendJournals"
       },
       {
+        label: "titles.groups",
+        route: "backendReadingGroups"
+      },
+      {
         label: "titles.records",
         route: "backendRecords",
         entity: ["user", "maker", "page", "feature"],

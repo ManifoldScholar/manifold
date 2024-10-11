@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import lh from "helpers/linkHandler";
 import EntityRow from "./Row";
+import Utility from "global/components/utility";
 import { useTranslation } from "react-i18next";
 
 function ReadingGroupRow({ active, entity, ...props }) {
@@ -30,13 +31,30 @@ function ReadingGroupRow({ active, entity, ...props }) {
         date={createdAt}
       />
     ),
-    label: privacy,
+    label: { text: privacy, level: privacy === "public" ? "notice" : "" },
     active: active === id,
     onRowClick: lh.link("frontendReadingGroupDetail", id),
     rowClickMode: "inline"
   };
 
-  return <EntityRow {...props} {...additionalProps} />;
+  const utility = (
+    <div className="entity-row__utility">
+      <button
+        className="entity-row__utility-button"
+        title={t("backend.actions.publish_feature")}
+      >
+        <Utility.IconComposer icon="BEActivity64" size={26} />
+      </button>
+      <button
+        className="entity-row__utility-button"
+        title={t("backend.actions.publish_feature")}
+      >
+        <Utility.IconComposer icon="delete32" size={26} />
+      </button>
+    </div>
+  );
+
+  return <EntityRow utility={utility} {...props} {...additionalProps} />;
 }
 
 ReadingGroupRow.propTypes = {
