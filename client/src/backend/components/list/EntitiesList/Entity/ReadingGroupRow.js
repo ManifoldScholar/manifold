@@ -13,7 +13,8 @@ function ReadingGroupRow({ active, entity, ...props }) {
     privacy,
     membershipsCount,
     createdAt,
-    allAnnotationsCount
+    allAnnotationsCount,
+    annotationFlagsCount
   } = attributes;
   const { t } = useTranslation();
 
@@ -31,7 +32,19 @@ function ReadingGroupRow({ active, entity, ...props }) {
         date={createdAt}
       />
     ),
-    label: { text: privacy, level: privacy === "public" ? "notice" : "" },
+    label: [
+      { text: privacy, level: privacy === "public" ? "notice" : "" },
+      ...(annotationFlagsCount
+        ? [
+            {
+              text: t("records.annotations.flag_count", {
+                count: annotationFlagsCount
+              }),
+              level: "error"
+            }
+          ]
+        : [])
+    ],
     active: active === id,
     onRowClick: lh.link("frontendReadingGroupDetail", id),
     rowClickMode: "inline"
