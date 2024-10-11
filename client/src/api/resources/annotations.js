@@ -1,6 +1,16 @@
 import isString from "lodash/isString";
 
 export default {
+  index(filter = {}, page = {}) {
+    return {
+      endpoint: "/api/v1/annotations",
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   forSection(sectionId, textId, filter = {}, page = {}) {
     const filterParams = { ...filter };
     filterParams.orphaned = false;

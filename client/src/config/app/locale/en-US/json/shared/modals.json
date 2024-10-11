@@ -5,6 +5,7 @@
     "close": "Close modal",
     "collecting_search": "<0>Add Content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</2>",
     "confirm_body": "This action cannot be undone.",
+    "delete_annotation": "Are you sure you want to delete this annotation?",
     "delete_asset": "Are you sure you want to delete this asset?",
     "delete_block": "Are you sure you want to delete this content block?",
     "delete_category": "Are you sure you want to delete this category?",

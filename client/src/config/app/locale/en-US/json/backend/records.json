@@ -1,6 +1,11 @@
 {
   "records": {
     "unauthorized": "You are not allowed to manage records.",
+    "annotations": {
+      "flag_count_one": "1 Flag",
+      "flag_count_other": "{{ count }} Flags",
+      "remove_label": "Remove annotation"
+    },
     "makers": {
       "header": "Manage Makers",
       "button_label": "Add New Maker",

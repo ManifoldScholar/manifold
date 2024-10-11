@@ -10,6 +10,7 @@ import journalFilters from "./journalFilters";
 import entitlementFilters from "./entitlementFilters";
 import assetFilters from "./assetFilters";
 import readingGroupFilters from "./readingGroupFilters";
+import annotationFilters from "./annotationFilters";
 
 export default withFilters;
 
@@ -24,5 +25,6 @@ export {
   journalFilters,
   entitlementFilters,
   assetFilters,
-  readingGroupFilters
+  readingGroupFilters,
+  annotationFilters
 };
