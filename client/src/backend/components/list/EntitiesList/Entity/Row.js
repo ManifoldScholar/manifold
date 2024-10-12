@@ -250,7 +250,7 @@ class EntitiesListRow extends PureComponent {
     return (
       <Link
         className={className}
-        to={{ pathname: url, state: this.props.linkState, hash: "test" }}
+        to={{ pathname: url, state: this.props.linkState }}
         aria-describedby={`${id}-describedby`}
       >
         {child}
