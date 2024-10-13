@@ -808,36 +808,36 @@ const routes = {
       name: "backendReadingGroups",
       exact: false,
       component: "ReadingGroupsWrapper",
-      path: "/backend/reading-groups/:id?",
-      helper: () => `/backend/reading-groups`,
+      path: "/backend/groups/:id?",
+      helper: () => `/backend/groups`,
       routes: [
         {
           name: "backendReadingGroupsList",
           exact: true,
           component: "ReadingGroupsList",
-          path: "/backend/reading-groups",
-          helper: () => "/backend/reading-groups"
+          path: "/backend/groups",
+          helper: () => "/backend/groups"
         },
         {
           name: "backendReadingGroup",
           exact: false,
           component: "ReadingGroupWrapper",
-          path: "/backend/reading-groups/:id",
-          helper: j => `/backend/reading-groups/${j}`,
+          path: "/backend/groups/:id",
+          helper: g => `/backend/groups/${g}`,
           routes: [
             {
               name: "backendReadingGroupMembers",
               exact: true,
               component: "ReadingGroupMembers",
-              path: "/backend/reading-groups/:id/members",
-              helper: j => `/backend/reading-groups/${j}/members`
+              path: "/backend/groups/:id/members",
+              helper: g => `/backend/groups/${g}/members`
             },
             {
               name: "backendReadingGroupAnnotations",
               exact: true,
               component: "ReadingGroupAnnotations",
-              path: "/backend/reading-groups/:id/annotations",
-              helper: j => `/backend/reading-groups/${j}/annotations`
+              path: "/backend/groups/:id/annotations",
+              helper: g => `/backend/groups/${g}/annotations`
             }
           ]
         }
