@@ -26,6 +26,7 @@
     "delete_permissions": "Are you sure you want to remove all permissions from this user?",
     "delete_project": "Are you sure you want to delete this project?",
     "delete_project_collection": "Are you sure you want to delete this project collection?",
+    "delete_reading_group": "Are you sure you want to delete this reading group?",
     "delete_resource": "Are you sure you want to delete this resource?",
     "delete_resource_collection": "Are you sure you want to delete this resource collection?",
     "delete_section": "Are you sure you want to delete this section?",

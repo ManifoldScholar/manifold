@@ -27,12 +27,12 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
     removes: readingGroup
   });
 
-  const notifyDestroy = useNotification(j => ({
+  const notifyDestroy = useNotification(rg => ({
     level: 0,
-    id: `JOURNAL_DESTROYED_${j.id}`,
-    heading: t("notifications.readingGroup_delete"),
+    id: `READING_GROUP_DESTROYED_${rg.id}`,
+    heading: t("notifications.reading_group_delete"),
     body: t("notifications.delete_entity_body", {
-      title: j?.attributes?.title
+      title: rg?.name
     }),
     expiration: 5000
   }));
@@ -49,7 +49,7 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
   }, [destroy, history, readingGroup, notifyDestroy]);
 
   const handleReadingGroupDestroy = useCallback(() => {
-    const heading = t("modals.delete_readingGroup");
+    const heading = t("modals.delete_reading_group");
     const message = t("modals.confirm_body");
     confirm(heading, message, destroyAndRedirect);
   }, [destroyAndRedirect, confirm, t]);
@@ -58,7 +58,7 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
     {
       label: "actions.view",
       route: "frontendReadingGroupDetail",
-      slug: readingGroup?.attributes.slug,
+      slug: readingGroup?.id,
       icon: "eyeOpen32"
     },
     {
@@ -104,7 +104,7 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
         failureFatalError={{
           detail: t("groups.unauthorized_edit")
         }}
-        ability={["read"]}
+        ability={["update"]}
       >
         {subpage && (
           <HeadContent
@@ -122,7 +122,6 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
           subtitle={`${capitalize(readingGroup.attributes.privacy)} Group`}
           actions={utility}
           secondaryLinks={navigation.readingGroup(readingGroup)}
-          issues={readingGroup.attributes.issuesNav}
         />
         <Layout.BackendPanel
           sidebar={
