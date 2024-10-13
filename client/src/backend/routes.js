@@ -863,13 +863,36 @@ const routes = {
               component: "UsersNew",
               path: "/backend/records/users/new",
               helper: () => "/backend/records/users/new"
+            }
+            // {
+            //   name: "backendRecordsUser",
+            //   exact: true,
+            //   component: "UsersEdit",
+            //   path: "/backend/records/users/:id",
+            //   helper: u => `/backend/records/users/${u}`
+            // },
+          ]
+        },
+        {
+          name: "backendRecordsUser",
+          exact: false,
+          component: "UserWrapper",
+          path: "/backend/records/user/:id",
+          helper: u => `/backend/records/user/${u}`,
+          routes: [
+            {
+              name: "backendRecordsUserProperties",
+              exact: true,
+              component: "UserProperties",
+              path: "/backend/records/user/:id/properties",
+              helper: u => `/backend/records/user/${u}/properties`
             },
             {
-              name: "backendRecordsUser",
+              name: "backendRecordsUserActivity",
               exact: true,
-              component: "UsersEdit",
-              path: "/backend/records/users/:id",
-              helper: u => `/backend/records/users/${u}`
+              component: "UserProperties",
+              path: "/backend/records/user/:id/activity",
+              helper: u => `/backend/records/user/${u}/activity`
             }
           ]
         },

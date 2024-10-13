@@ -28,6 +28,7 @@ import Journal from "backend/containers/journal";
 import ReadingGroups from "backend/containers/reading-groups";
 import ReadingGroup from "backend/containers/reading-group";
 import Annotations from "backend/containers/annotations";
+import User from "backend/containers/user";
 
 export default {
   Backend,
@@ -165,5 +166,7 @@ export default {
   ReadingGroupWrapper: ReadingGroup.Wrapper,
   ReadingGroupMembers: ReadingGroup.Members,
   ReadingGroupAnnotations: ReadingGroup.Annotations,
-  AnnotationsList: Annotations.List
+  AnnotationsList: Annotations.List,
+  UserWrapper: User.Wrapper,
+  UserProperties: User.Properties
 };
