@@ -435,6 +435,26 @@ class Navigation {
     ];
   });
 
+  static user = memoize(user => {
+    const args = [user.id];
+    return [
+      {
+        label: "titles.properties",
+        route: "backendRecordsUserProperties",
+        entity: user,
+        ability: "update",
+        args
+      },
+      {
+        label: "titles.activity",
+        route: "backendRecordsUserActivity",
+        entity: user,
+        ability: "update",
+        args
+      }
+    ];
+  });
+
   static resource = memoize(resource => {
     const externalVideo = resource.attributes.externalVideo;
     const project = resource.relationships.project;
