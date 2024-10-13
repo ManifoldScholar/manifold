@@ -25,7 +25,7 @@ function ReadingGroupMembersContainer({
   const filters = useMemo(() => ({ withUpdateAbility: true }), []);
 
   const { data, refresh: refreshMembers, meta } = useFetch({
-    request: [readingGroupsAPI.members, readingGroup.id, pagination, filters]
+    request: [readingGroupsAPI.members, readingGroup.id, filters, pagination]
   });
 
   const { t } = useTranslation();

@@ -28,8 +28,8 @@ function ReadingGroupAnnotationsContainer({
     request: [
       readingGroupsAPI.annotations,
       readingGroup.id,
-      pagination,
-      filters
+      filters,
+      pagination
     ]
   });
 
