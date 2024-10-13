@@ -374,6 +374,26 @@ class Navigation {
     ];
   });
 
+  static readingGroup = memoize(group => {
+    const args = [group.id];
+    return [
+      {
+        label: "titles.members",
+        route: "backendReadingGroupMembers",
+        entity: group,
+        ability: "update",
+        args
+      },
+      {
+        label: "titles.annotations",
+        route: "backendJournalLayout",
+        entity: group,
+        ability: "update",
+        args
+      }
+    ];
+  });
+
   static records = memoize(() => {
     return [
       {
