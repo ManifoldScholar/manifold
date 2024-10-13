@@ -105,7 +105,7 @@ class UsersListContainerImplementation extends PureComponent {
     return (
       <>
         {childRoutes(this.props.route, {
-          drawer: true,
+          drawer: false,
           drawerProps,
           childProps: { refetch }
         })}
