@@ -1001,13 +1001,6 @@ const routes = {
           helper: () => `/backend/records/entitlement-imports`
         },
         {
-          name: "backendRecordsReadingGroups",
-          exact: true,
-          component: "ReadingGroupsList",
-          path: "/backend/records/reading-groups",
-          helper: () => `/backend/records/reading-groups`
-        },
-        {
           name: "backendRecordsAnnotations",
           exact: true,
           component: "AnnotationsList",
