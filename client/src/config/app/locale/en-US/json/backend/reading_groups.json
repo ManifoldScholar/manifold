@@ -1,0 +1,10 @@
+{
+  "reading_groups": {
+    "members_header": "Manage Members",
+    "role_options": {
+      "moderator": "Moderator",
+      "member": "Member"
+    },
+    "remove_member": "Remove from group"
+  }
+}
