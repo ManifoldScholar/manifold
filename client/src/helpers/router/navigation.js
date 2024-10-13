@@ -386,7 +386,7 @@ class Navigation {
       },
       {
         label: "titles.annotations",
-        route: "backendJournalLayout",
+        route: "backendReadingGroupAnnotations",
         entity: group,
         ability: "update",
         args
