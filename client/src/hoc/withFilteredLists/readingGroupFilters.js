@@ -12,12 +12,8 @@ export default function readingGroupFilters({ snapshotState = false } = {}) {
       {
         label: "Order",
         name: "sort_order",
-        value: "default",
+        value: "created_at_desc",
         options: [
-          {
-            label: "Sort",
-            value: "default"
-          },
           {
             label: "A-Z",
             value: "name_asc"
