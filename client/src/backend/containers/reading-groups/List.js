@@ -6,13 +6,19 @@ import EntitiesList, {
   Search,
   ReadingGroupRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, usePaginationState, useFilterState } from "hooks";
+import {
+  useFetch,
+  usePaginationState,
+  useFilterState,
+  useApiCallback
+} from "hooks";
 import withFilteredLists, { readingGroupFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 
 function ReadingGroupsList({
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
+  confirm
 }) {
   const { t } = useTranslation();
 
@@ -40,12 +46,25 @@ function ReadingGroupsList({
     setFilters({ newState: baseFilters });
   };
 
+  const destroyRG = useApiCallback(readingGroupsAPI.destroy);
+
+  const onDelete = (id, name) => {
+    const heading = t("modals.delete_reading_group", { name });
+    const message = t("modals.confirm_body");
+    if (confirm)
+      confirm(heading, message, async () => {
+        await destroyRG(id);
+        refresh();
+      });
+  };
+
   return (
     <>
       {readingGroups && (
         <>
           <EntitiesList
             entityComponent={ReadingGroupRow}
+            entityComponentProps={{ onDelete }}
             entities={readingGroups}
             title={t("glossary.reading_group_title_case", {
               count: meta.pagination.totalCount
