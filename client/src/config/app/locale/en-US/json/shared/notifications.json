@@ -11,6 +11,7 @@
     "feature_delete": "The feature has been deleted.",
     "journal_delete": "The journal has been destroyed.",
     "page_delete": "The page has been deleted.",
+    "reading_group_delete": "The reading group has been destroyed.",
     "resource_collection_delete": "The resource collection has been destroyed.",
     "resource_delete": "The resource has been destroyed.",
     "text_delete": "The text has been destroyed.",
