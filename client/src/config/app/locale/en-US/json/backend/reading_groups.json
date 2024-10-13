@@ -1,6 +1,7 @@
 {
   "reading_groups": {
     "members_header": "Manage Members",
+    "annotations_header": "Manage Annotations",
     "role_options": {
       "moderator": "Moderator",
       "member": "Member"
