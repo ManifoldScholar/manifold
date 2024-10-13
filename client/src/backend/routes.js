@@ -812,11 +812,27 @@ const routes = {
       helper: () => `/backend/reading-groups`,
       routes: [
         {
-          name: "backendReadinGroupsList",
+          name: "backendReadingGroupsList",
           exact: true,
           component: "ReadingGroupsList",
           path: "/backend/reading-groups",
           helper: () => "/backend/reading-groups"
+        },
+        {
+          name: "backendReadingGroup",
+          exact: false,
+          component: "ReadingGroupWrapper",
+          path: "/backend/reading-groups/:id",
+          helper: j => `/backend/reading-groups/${j}`,
+          routes: [
+            {
+              name: "backendReadingGroupMembers",
+              exact: true,
+              component: "ReadingGroupMembers",
+              path: "/backend/reading-groups/:id/members",
+              helper: j => `/backend/reading-groups/${j}/members`
+            }
+          ]
         }
       ]
     },

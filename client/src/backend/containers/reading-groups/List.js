@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import { readingGroupsAPI } from "api";
 import EntitiesList, {
   Search,
@@ -12,8 +11,6 @@ import withFilteredLists, { readingGroupFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 
 function ReadingGroupsList({
-  route,
-  location,
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
