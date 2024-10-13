@@ -28,18 +28,19 @@ export const getAdminModeLabel = ({ currentUser, mode, t }) => {
   }
 };
 
+const idPattern =
+  "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}";
+const idRegex = new RegExp(idPattern, "g");
+
 const FE_ROUTE_REGEXES = {
   project: /^\/projects\/(?!(all))([A-Za-z0-9-]+)$/,
   journal: /^\/journals\/(?!(all))([A-Za-z0-9-]+)$/,
   resource: /^\/projects\/([A-Za-z0-9-]+)\/resource\/([A-Za-z0-9-]+)$/,
   resourceCollection: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection\/([A-Za-z0-9-]+)$/,
   projectCollection: /^\/projects\/project-collection\/([A-Za-z0-9?=-]+)$/,
-  page: /^\/page\/([A-Za-z0-9-]+)$/
+  page: /^\/page\/([A-Za-z0-9-]+)$/,
+  readingGroup: new RegExp(`^/groups/${idPattern}`)
 };
-
-const idPattern =
-  "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}";
-const idRegex = new RegExp(idPattern, "g");
 
 const BE_ROUTE_REGEXES = {
   project: new RegExp(`^/backend/projects/${idPattern}/`),
@@ -51,12 +52,15 @@ const BE_ROUTE_REGEXES = {
   projectCollection: new RegExp(
     `^/backend/projects/project-collections/(${idPattern}|[A-Za-z0-9-]+)`
   ),
-  page: /^\/backend\/records\/pages\/([0-9]+)\//
+  page: /^\/backend\/records\/pages\/([0-9]+)\//,
+  readingGroup: new RegExp(`^/backend/groups/${idPattern}/`)
 };
 
 const getAdminPath = pathname => {
   if (FE_ROUTE_REGEXES.project.test(pathname)) return `/backend${pathname}`;
   if (FE_ROUTE_REGEXES.journal.test(pathname)) return `/backend${pathname}`;
+  if (FE_ROUTE_REGEXES.readingGroup.test(pathname))
+    return `/backend${pathname}`;
   if (FE_ROUTE_REGEXES.projectCollection.test(pathname)) {
     const noParams = pathname.split("?").filter(Boolean)[0];
     const slug = noParams.split("/").pop();
@@ -84,6 +88,7 @@ const getFrontendPath = (pathname, entities) => {
 
   if (BE_ROUTE_REGEXES.project.test(pathname)) return `/projects/${id}`;
   if (BE_ROUTE_REGEXES.journal.test(pathname)) return `/journals/${id}`;
+  if (BE_ROUTE_REGEXES.readingGroup.test(pathname)) return `/groups/${id}`;
   if (BE_ROUTE_REGEXES.projectCollection.test(pathname))
     return id
       ? `/projects/project-collection/${id}`
