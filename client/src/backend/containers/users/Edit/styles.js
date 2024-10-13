@@ -18,7 +18,7 @@ export const UserVerification = styled.ul`
   }
 
   > li > span {
-    margin-inline-start: -8px;
+    margin-inline-start: 4px;
   }
 
   ${respond(`margin-block-start: -20px;`, 65)}
