@@ -831,6 +831,13 @@ const routes = {
               component: "ReadingGroupMembers",
               path: "/backend/reading-groups/:id/members",
               helper: j => `/backend/reading-groups/${j}/members`
+            },
+            {
+              name: "backendReadingGroupAnnotations",
+              exact: true,
+              component: "ReadingGroupAnnotations",
+              path: "/backend/reading-groups/:id/annotations",
+              helper: j => `/backend/reading-groups/${j}/annotations`
             }
           ]
         }
