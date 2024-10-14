@@ -854,45 +854,36 @@ const routes = {
           name: "backendRecordsUsers",
           exact: true,
           component: "UsersList",
-          path: "/backend/records/users/:id?",
-          helper: () => "/backend/records/users",
-          routes: [
-            {
-              name: "backendRecordsUsersNew",
-              exact: true,
-              component: "UsersNew",
-              path: "/backend/records/users/new",
-              helper: () => "/backend/records/users/new"
-            }
-            // {
-            //   name: "backendRecordsUser",
-            //   exact: true,
-            //   component: "UsersEdit",
-            //   path: "/backend/records/users/:id",
-            //   helper: u => `/backend/records/users/${u}`
-            // },
-          ]
+          path: "/backend/records/users",
+          helper: () => "/backend/records/users"
         },
         {
           name: "backendRecordsUser",
           exact: false,
           component: "UserWrapper",
-          path: "/backend/records/user/:id",
-          helper: u => `/backend/records/user/${u}`,
+          path: "/backend/records/users/:id",
+          helper: u => `/backend/records/users/${u}`,
           routes: [
+            {
+              name: "backendRecordsUserNew",
+              exact: true,
+              component: "UserWrapper",
+              path: "/backend/records/users/new",
+              helper: () => "/backend/records/users/new"
+            },
             {
               name: "backendRecordsUserProperties",
               exact: true,
               component: "UserProperties",
-              path: "/backend/records/user/:id/properties",
-              helper: u => `/backend/records/user/${u}/properties`
+              path: "/backend/records/users/:id/properties",
+              helper: u => `/backend/records/users/${u}/properties`
             },
             {
               name: "backendRecordsUserActivity",
               exact: true,
               component: "UserProperties",
-              path: "/backend/records/user/:id/activity",
-              helper: u => `/backend/records/user/${u}/activity`
+              path: "/backend/records/users/:id/activity",
+              helper: u => `/backend/records/users/${u}/activity`
             }
           ]
         },
