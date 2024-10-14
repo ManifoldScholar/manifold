@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
-import { respond } from "theme/styles/mixins";
 
 export const UserVerification = styled.ul`
   list-style-type: square;
   list-style-position: inside;
-  margin-block-start: 10px;
-  margin-block-end: 40px;
+  margin-block-start: -10px;
+  margin-block-end: 0;
   padding-block: 15px;
   padding-inline: 20px;
   font-family: var(--font-family-sans);
-  border: 1px solid
+  border: 2px solid
     ${({ $warn }) =>
       $warn ? `var(--error-color)` : `var(--color-accent-primary)`};
 
@@ -20,6 +19,4 @@ export const UserVerification = styled.ul`
   > li > span {
     margin-inline-start: 4px;
   }
-
-  ${respond(`margin-block-start: -20px;`, 65)}
 `;

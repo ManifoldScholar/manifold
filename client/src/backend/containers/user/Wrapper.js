@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import { usersAPI } from "api";
@@ -15,16 +15,28 @@ import {
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
+import Dialog from "global/components/dialog";
+import UserNew from "./New";
 import capitalize from "lodash/capitalize";
 
 function UserWrapper({ match, route, history, confirm, location }) {
   const { t } = useTranslation();
+
+  const id = match.params.id;
+
+  const [passwordModalOpen, toggleOpen] = useState(false);
+  const [passwordModalProps, setModalProps] = useState(null);
+
   const { data: user, refresh } = useFetch({
-    request: [usersAPI.show, match.params.id]
+    request: [usersAPI.show, id],
+    condition: id !== "new"
   });
+
   const destroy = useApiCallback(usersAPI.destroy, {
     removes: user
   });
+
+  const update = useApiCallback(usersAPI.update);
 
   const notifyDestroy = useNotification(u => ({
     level: 0,
@@ -53,7 +65,56 @@ function UserWrapper({ match, route, history, confirm, location }) {
     confirm(heading, message, destroyAndRedirect);
   }, [destroyAndRedirect, confirm, t]);
 
+  const handleResetPasswordClick = () => {
+    new Promise((resolve, reject) => {
+      setModalProps({
+        resolve,
+        reject
+      });
+      toggleOpen(true);
+    }).then(
+      () => toggleOpen(false),
+      () => toggleOpen(false)
+    );
+  };
+
+  const verifyUser = () => {
+    const verified = user.attributes.adminVerified;
+    const heading = verified ? t("modals.unverify") : t("modals.verify");
+    const message = verified
+      ? t("modals.unverify_body")
+      : t("modals.verify_body");
+    const adjustedUser = { ...user };
+    adjustedUser.attributes.adminVerified = !verified;
+    confirm(heading, message, () => update(id, adjustedUser));
+  };
+
+  const unsubscribeUser = () => {
+    const heading = t("modals.unsubscribe");
+    const message = t("modals.unsubscribe_body");
+    const adjustedUser = { ...user };
+    adjustedUser.attributes.unsubscribe = true;
+    confirm(heading, message, () => update(id, adjustedUser));
+  };
+
   const utility = [
+    {
+      onClick: verifyUser,
+      icon: "privacy24",
+      label: user?.attributes.adminVerified
+        ? t("records.users.block")
+        : t("records.users.verify")
+    },
+    {
+      onClick: unsubscribeUser,
+      icon: "mail32",
+      label: t("records.users.unsubscribe")
+    },
+    {
+      onClick: handleResetPasswordClick,
+      icon: "key32",
+      label: t("records.users.reset_password")
+    },
     {
       label: "actions.delete",
       authorize: "delete",
@@ -75,9 +136,11 @@ function UserWrapper({ match, route, history, confirm, location }) {
     candidates: user ? navigation.user(user) : []
   });
 
+  if (id === "new") return <UserNew />;
+
   if (!user) return null;
 
-  const subpage = location.pathname.split("/")[4]?.replace("-", "_");
+  const subpage = location.pathname.split("/")[5]?.replace("-", "_");
 
   return (
     <div>
@@ -90,9 +153,9 @@ function UserWrapper({ match, route, history, confirm, location }) {
       >
         {subpage && (
           <HeadContent
-            title={`${t(`titles.${subpage}`)} | ${user.attributes.name} | ${t(
-              "common.admin"
-            )}`}
+            title={`${t(`titles.${subpage}`)} | ${
+              user.attributes.fullName
+            } | ${t("common.admin")}`}
             appendDefaultTitle
           />
         )}
@@ -116,6 +179,9 @@ function UserWrapper({ match, route, history, confirm, location }) {
           <div>{renderRoutes()}</div>
         </Layout.BackendPanel>
       </Authorize>
+      {passwordModalOpen ? (
+        <Dialog.ResetPassword user={user} {...passwordModalProps} />
+      ) : null}
     </div>
   );
 }
