@@ -163,7 +163,7 @@ function UserWrapper({ match, route, history, confirm, location }) {
           type="user"
           icon="Avatar24"
           title={user.attributes.fullName}
-          subtitle={capitalize(user.attributes.role)}
+          subtitle={t(`records.users.role_options.${user.attributes.role}`)}
           actions={utility}
           secondaryLinks={navigation.user(user)}
         />
