@@ -105,8 +105,6 @@ export default {
   ContentBlockEdit: Content.Edit,
   Records,
   UsersList: Users.List,
-  UsersNew: Users.New,
-  UsersEdit: Users.Edit,
   MakersList: Makers.List,
   MakersNew: Makers.New,
   MakersEdit: Makers.Edit,

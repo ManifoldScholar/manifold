@@ -7,7 +7,6 @@ import { select, meta } from "utils/entityUtils";
 import { usersAPI, requests } from "api";
 import get from "lodash/get";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
 import EntitiesList, {
   Button,
   Search,
@@ -94,21 +93,8 @@ class UsersListContainerImplementation extends PureComponent {
     const { users, usersMeta } = this.props;
     const active = match.params.id;
 
-    const drawerProps = {
-      closeUrl: lh.link("backendRecordsUsers"),
-      lockScroll: "always"
-    };
-
-    const refetch = () =>
-      this.fetchUsers(usersMeta?.pagination?.currentPage ?? 1);
-
     return (
       <>
-        {childRoutes(this.props.route, {
-          drawer: false,
-          drawerProps,
-          childProps: { refetch }
-        })}
         <EntitiesList
           entityComponent={UserRow}
           entityComponentProps={{ active }}
@@ -124,7 +110,7 @@ class UsersListContainerImplementation extends PureComponent {
           search={<Search {...entitiesListSearchProps("users")} />}
           buttons={[
             <Button
-              path={lh.link("backendRecordsUsersNew")}
+              path={lh.link("backendRecordsUserNew")}
               text={t("records.users.button_label")}
               authorizedFor="user"
               type="add"
