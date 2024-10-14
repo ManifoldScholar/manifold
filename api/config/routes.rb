@@ -220,6 +220,13 @@ Rails.application.routes.draw do
         collection do
           get "whoami"
         end
+
+        scope module: :users do
+          namespace :relationships do
+            resources :annotations, only: [:index]
+            resources :reading_groups, only: [:index]
+          end
+        end
       end
 
       resource :me, only: [:show, :update, :destroy], controller: "me"
