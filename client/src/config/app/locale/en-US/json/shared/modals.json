@@ -43,6 +43,8 @@
     "remove_category": "Are you sure you want to remove this category from your collection?",
     "remove_category_body": "Any items in this category will also be deleted.",
     "reset_password": "Are you sure you want to reset this password?",
+    "set_password": "Set New Password",
+    "set_password_body": "Set a custom password for this user. The new password will not be sent automatically to the user.",
     "thumbnail_change": "Changing this will remove the {{label}}'s current avatar image",
     "thumbnail_change_body": "Do you wish to proceed?",
     "unsubscribe": "Are you sure?",
