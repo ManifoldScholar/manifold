@@ -17,7 +17,6 @@ import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
 import Dialog from "global/components/dialog";
 import UserNew from "./New";
-import capitalize from "lodash/capitalize";
 
 function UserWrapper({ match, route, history, confirm, location }) {
   const { t } = useTranslation();

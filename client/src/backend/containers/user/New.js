@@ -25,13 +25,8 @@ export default function NewUserWrapper() {
             label: "titles.properties",
             route: "backendRecordsUserNew",
             entity: "user",
-            ability: "update"
-          },
-          {
-            label: "titles.activity",
-            route: "backendRecordsUserActivity",
-            entity: "user",
-            ability: "update"
+            ability: "update",
+            args: ["new"]
           }
         ]}
       />
@@ -43,13 +38,8 @@ export default function NewUserWrapper() {
                 label: "titles.properties",
                 route: "backendRecordsUserNew",
                 entity: "user",
-                ability: "update"
-              },
-              {
-                label: "titles.activity",
-                route: "backendRecordsUserActivity",
-                entity: "user",
-                ability: "update"
+                ability: "update",
+                args: ["new"]
               }
             ]}
             panel
