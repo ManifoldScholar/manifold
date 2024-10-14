@@ -43,7 +43,8 @@ class FormGeneratedPasswordInput extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state !== prevState) this.setValueFromCurrentState();
+    if (this.state !== prevState || this.props.value === undefined)
+      this.setValueFromCurrentState();
   }
 
   get idPrefix() {
@@ -71,7 +72,7 @@ class FormGeneratedPasswordInput extends Component {
 
   handlePasswordChange(event) {
     event.preventDefault();
-    const value = event.target.value;
+    const value = event.target.value || null;
     this.setState({ password: value });
   }
 
