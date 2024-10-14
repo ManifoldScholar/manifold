@@ -881,7 +881,7 @@ const routes = {
             {
               name: "backendRecordsUserActivity",
               exact: true,
-              component: "UserProperties",
+              component: "UserActivity",
               path: "/backend/records/users/:id/activity",
               helper: u => `/backend/records/users/${u}/activity`
             }
