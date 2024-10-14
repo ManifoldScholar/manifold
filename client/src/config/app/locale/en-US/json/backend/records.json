@@ -35,6 +35,7 @@
       "first_name": "$t(records.makers.first_name)",
       "last_name": "$t(records.makers.last_name)",
       "submit_label": "Save User",
+      "create_label": "Create User",
       "unsubscribe": "Unsubscribe",
       "reset_password": "Reset Password",
       "verify": "Admin Verify",
