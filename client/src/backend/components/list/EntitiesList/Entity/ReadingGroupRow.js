@@ -22,7 +22,7 @@ function ReadingGroupRow({ active, entity, onDelete, ...props }) {
     title: name,
     subtitle: `${membershipsCount} ${t("glossary.member", {
       count: membershipsCount
-    })}, ${allAnnotationsCount} ${t("glossary.annotation", {
+    })} | ${allAnnotationsCount} ${t("glossary.annotation", {
       count: allAnnotationsCount
     })}`,
     meta: (
