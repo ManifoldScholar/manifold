@@ -7,7 +7,7 @@ import LabelSet from "../LabelSet";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
-function AnnotationRow({ entity, onDelete }) {
+function AnnotationRow({ entity, onDelete, hideCreator }) {
   const { id, attributes } = entity;
   const {
     subject,
@@ -54,7 +54,7 @@ function AnnotationRow({ entity, onDelete }) {
                   />
                 </Styled.MetaOne>
                 <Styled.MetaTwo className="entity-row__subtitle entity-row__subtitle--in-rows">
-                  <span>{creatorName}</span>
+                  {!hideCreator && <span>{creatorName}</span>}
                   <span dangerouslySetInnerHTML={{ __html: textTitle }} />
                 </Styled.MetaTwo>
                 <Styled.Subject className="entity-row__title entity-row__title">

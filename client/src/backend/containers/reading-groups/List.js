@@ -59,38 +59,36 @@ function ReadingGroupsList({
   };
 
   return (
-    <>
-      {readingGroups && (
-        <>
-          <EntitiesList
-            entityComponent={ReadingGroupRow}
-            entityComponentProps={{ onDelete }}
-            entities={readingGroups}
-            title={t("glossary.reading_group_title_case", {
-              count: meta.pagination.totalCount
-            })}
-            titleIcon="ReadingGroup24"
-            titleStyle="bar"
-            search={
-              <Search
-                {...searchProps}
-                setParam={updatedSetParam}
-                onReset={updatedOnReset}
-              />
-            }
-            pagination={meta.pagination}
-            showCount
-            showCountInTitle
-            unit={t("glossary.reading_group", {
-              count: meta.pagination.totalCount
-            })}
-            callbacks={{
-              onPageClick: page => () => setPageNumber(page)
-            }}
-          />
-        </>
-      )}
-    </>
+    readingGroups && (
+      <>
+        <EntitiesList
+          entityComponent={ReadingGroupRow}
+          entityComponentProps={{ onDelete }}
+          entities={readingGroups}
+          title={t("glossary.reading_group_title_case", {
+            count: meta.pagination.totalCount
+          })}
+          titleIcon="ReadingGroup24"
+          titleStyle="bar"
+          search={
+            <Search
+              {...searchProps}
+              setParam={updatedSetParam}
+              onReset={updatedOnReset}
+            />
+          }
+          pagination={meta.pagination}
+          showCount
+          showCountInTitle
+          unit={t("glossary.reading_group", {
+            count: meta.pagination.totalCount
+          })}
+          callbacks={{
+            onPageClick: page => () => setPageNumber(page)
+          }}
+        />
+      </>
+    )
   );
 }
 
