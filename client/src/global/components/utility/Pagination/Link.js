@@ -18,7 +18,9 @@ function Link({
       ? { to: handler }
       : {
           onClick: !disabled ? handler : event => event.preventDefault(),
-          href: paginationTarget ?? `?page=${page}`
+          ...(paginationTarget !== false && {
+            href: paginationTarget ?? `?page=${page}`
+          })
         };
 
   return (
