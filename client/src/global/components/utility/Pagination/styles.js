@@ -56,6 +56,7 @@ export const Link = styled.a`
   gap: 8px;
   padding: ${LINK_PADDING}px;
   text-decoration: none;
+  cursor: pointer;
 
   &[aria-disabled="true"] {
     pointer-events: none;
