@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import { annotationsAPI } from "api";
 import EntitiesList, {
   Search,
@@ -13,14 +12,11 @@ import {
   useFilterState,
   useApiCallback
 } from "hooks";
-import { childRoutes } from "helpers/router";
 import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
 
 function AnnotationsList({
-  route,
-  location,
   confirm,
   entitiesListSearchProps,
   entitiesListSearchParams
@@ -29,27 +25,15 @@ function AnnotationsList({
 
   const [pagination, setPageNumber] = usePaginationState(1, 10);
   const baseFilters = entitiesListSearchParams.initialannotations;
-  const [filters, setFilters] = useFilterState(baseFilters);
+  const [filters, setFilters] = useFilterState({
+    ...baseFilters,
+    formats: ["annotation"]
+  });
 
   const { data: annotations, meta, refresh } = useFetch({
     request: [annotationsAPI.index, filters, pagination],
     dependencies: [filters]
   });
-
-  const renderChildRoutes = () => {
-    const closeUrl = lh.link("backendRecordsAnnotations");
-
-    return childRoutes(route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        wide: true,
-        closeUrl,
-        showNotifications: location.pathname.includes("import")
-      },
-      childProps: { refresh }
-    });
-  };
 
   const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
     "annotations"
@@ -77,31 +61,28 @@ function AnnotationsList({
 
   return (
     <>
-      {renderChildRoutes()}
-      {annotations && (
-        <>
-          <PageHeader type="list" title={t("titles.annotations")} />
-          <EntitiesList
-            entityComponent={AnnotationRow}
-            entityComponentProps={{ onDelete }}
-            entities={annotations}
-            search={
-              <Search
-                {...searchProps}
-                setParam={updatedSetParam}
-                onReset={updatedOnReset}
-              />
-            }
-            pagination={meta.pagination}
-            showCount
-            unit={t("glossary.annotation", {
-              count: meta.pagination.totalCount
-            })}
-            callbacks={{
-              onPageClick: page => () => setPageNumber(page)
-            }}
-          />
-        </>
+      <PageHeader type="list" title={t("titles.annotations")} />
+      {!!annotations && (
+        <EntitiesList
+          entityComponent={AnnotationRow}
+          entityComponentProps={{ onDelete }}
+          entities={annotations}
+          search={
+            <Search
+              {...searchProps}
+              setParam={updatedSetParam}
+              onReset={updatedOnReset}
+            />
+          }
+          pagination={meta.pagination}
+          showCount
+          unit={t("glossary.annotation", {
+            count: meta.pagination.totalCount
+          })}
+          callbacks={{
+            onPageClick: page => () => setPageNumber(page)
+          }}
+        />
       )}
     </>
   );
@@ -114,8 +95,6 @@ export default withFilteredLists(withConfirmation(AnnotationsList), {
 AnnotationsList.displayName = "Annotations.List";
 
 AnnotationsList.propTypes = {
-  route: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   confirm: PropTypes.func,
   location: PropTypes.object.isRequired,
   entitiesListSearchProps: PropTypes.func,
