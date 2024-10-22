@@ -225,6 +225,7 @@ Rails.application.routes.draw do
           namespace :relationships do
             resources :annotations, only: [:index]
             resources :reading_groups, only: [:index]
+            resources :reading_group_memberships, only: [:index]
           end
         end
       end
