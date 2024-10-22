@@ -13,16 +13,25 @@ export const Toggle = styled(Collapse.Toggle)`
 `;
 
 /* eslint-disable prettier/prettier */
-export const Item = styled.li``;
+export const Item = styled.li`
+  position: relative;
+`;
 /* eslint-enable prettier/prettier */
 
 export const Inner = styled.div`
   border: 0;
-  padding-block-end: 20px;
+  padding-inline-end: 0;
+  padding-block-end: 0;
+  border-bottom: 1px solid var(--color-neutral-ui-dull-light);
+
+  &:has(.collapse__content--hidden:not(.collapse__content--stub-only)) {
+    border-bottom: 0px;
+  }
 `;
 
 export const Subject = styled.span`
   max-width: 90%;
+  padding-block-end: 14px;
 `;
 
 export const MetaOne = styled.div`
@@ -35,7 +44,7 @@ export const MetaTwo = styled.div`
   gap: 12px;
   margin-block: 8px;
 
-  > span + span::before {
+  > * + *::before {
     content: "|";
     margin-inline-end: 12px;
   }
@@ -43,7 +52,6 @@ export const MetaTwo = styled.div`
 
 export const Content = styled(Collapse.Content)`
   position: relative;
-  border-bottom: 1px solid var(--color-neutral-ui-dull-light);
 `;
 
 export const Overlay = styled.div`
@@ -72,7 +80,7 @@ export const Overlay = styled.div`
   opacity: 1;
   background: linear-gradient(
     var(--Overlay-bg-transparent),
-    90%,
+    70%,
     var(--Overlay-bg)
   );
   transition: opacity var(--collapse-duration) ease var(--collapse-delay),
@@ -81,9 +89,16 @@ export const Overlay = styled.div`
   .collapse__content--visible & {
     opacity: 0;
   }
+
+  border-bottom: 1px solid var(--color-neutral-ui-dull-light);
 `;
 
 export const Utility = styled.div`
+  position: absolute;
+  height: 120px;
+  top: 0;
+  right: 19px;
   z-index: 5;
-  margin-top: 25px;
+  display: flex;
+  align-items: center;
 `;
