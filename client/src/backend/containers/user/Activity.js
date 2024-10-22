@@ -16,7 +16,10 @@ export default function UserActivity({ user }) {
     5
   );
 
-  const filters = useMemo(() => ({}), []);
+  const filters = useMemo(
+    () => ({ formats: ["annotation"], order: "created_at DESC" }),
+    []
+  );
 
   const { data: annotations, meta: annotationsMeta } = useFetch({
     request: [usersAPI.annotations, user.id, filters, annotationsPagination]
@@ -40,6 +43,7 @@ export default function UserActivity({ user }) {
             })}
             titleStyle="section"
             pagination={rgMeta?.pagination}
+            paginationTarget={false}
             showCount
             unit={t("glossary.reading_group", {
               count: rgMeta?.pagination.totalCount
@@ -57,6 +61,7 @@ export default function UserActivity({ user }) {
             entityComponentProps={{ hideCreator: true }}
             entities={annotations}
             pagination={annotationsMeta?.pagination}
+            paginationTarget={false}
             showCount
             unit={t("glossary.annotation", {
               count: annotationsMeta?.pagination.totalCount
