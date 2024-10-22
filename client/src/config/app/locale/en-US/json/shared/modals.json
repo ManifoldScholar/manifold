@@ -19,6 +19,7 @@
     "delete_journal": "Are you sure you want to delete this journal?",
     "delete_maker": "Are you sure you want to delete this maker?",
     "delete_membership": "Are you sure you want to remove {{ name }} from the group?",
+    "delete_membership_group": "Are you sure you want to remove {{ name }} from {{ rg }}?",
     "delete_membership_body": "Something about what happens to their activity in the group",
     "delete_note": "Are you sure you want to remove this notation?",
     "delete_note_body": "Pressing yes will remove the notation from this spot in the text. It will not remove it from the project.",
