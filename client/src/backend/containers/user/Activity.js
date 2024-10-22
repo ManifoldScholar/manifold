@@ -1,14 +1,15 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { usersAPI } from "api";
-import { useFetch, usePaginationState } from "hooks";
+import { usersAPI, readingGroupMembershipsAPI } from "api";
+import { useFetch, usePaginationState, useApiCallback } from "hooks";
 import Layout from "backend/components/layout";
 import EntitiesList, {
-  ReadingGroupRow,
+  ReadingGroupMembershipRow,
   AnnotationRow
 } from "backend/components/list/EntitiesList";
+import withConfirmation from "hoc/withConfirmation";
 
-export default function UserActivity({ user }) {
+function UserActivityContainer({ user, confirm }) {
   const { t } = useTranslation();
 
   const [annotationsPagination, setAnnotationsPageNumber] = usePaginationState(
@@ -27,16 +28,29 @@ export default function UserActivity({ user }) {
 
   const [rgPagination, setRgPageNumber] = usePaginationState(1, 5);
 
-  const { data: rgMemberships, meta: rgMeta } = useFetch({
-    request: [usersAPI.readingGroups, user.id, null, rgPagination]
+  const { data: rgMemberships, meta: rgMeta, refresh: refreshRgs } = useFetch({
+    request: [usersAPI.readingGroupMemberships, user.id, null, rgPagination]
   });
+
+  const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
+
+  const onDelete = (id, name, rg) => {
+    const heading = t("modals.delete_membership_group", { name, rg });
+    const message = t("modals.delete_membership_body");
+    if (confirm)
+      confirm(heading, message, async () => {
+        await deleteMembership(id);
+        refreshRgs();
+      });
+  };
 
   return (
     <>
       {!!rgMemberships && (
         <Layout.BackendPanel flush>
           <EntitiesList
-            entityComponent={ReadingGroupRow}
+            entityComponent={ReadingGroupMembershipRow}
+            entityComponentProps={{ onDelete }}
             entities={rgMemberships}
             title={t("glossary.reading_group_title_case", {
               count: rgMeta?.pagination.totalCount
@@ -77,3 +91,5 @@ export default function UserActivity({ user }) {
     </>
   );
 }
+
+export default withConfirmation(UserActivityContainer);
