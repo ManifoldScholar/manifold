@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { usersAPI, readingGroupMembershipsAPI } from "api";
+import { usersAPI, readingGroupMembershipsAPI, annotationsAPI } from "api";
 import { useFetch, usePaginationState, useApiCallback } from "hooks";
 import Layout from "backend/components/layout";
 import EntitiesList, {
@@ -22,9 +22,25 @@ function UserActivityContainer({ user, confirm }) {
     []
   );
 
-  const { data: annotations, meta: annotationsMeta } = useFetch({
+  const {
+    data: annotations,
+    meta: annotationsMeta,
+    refresh: refreshAnnotations
+  } = useFetch({
     request: [usersAPI.annotations, user.id, filters, annotationsPagination]
   });
+
+  const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
+
+  const onDeleteAnnotation = id => {
+    const heading = t("modals.delete_annotation");
+    const message = t("modals.confirm_body");
+    if (confirm)
+      confirm(heading, message, async () => {
+        await deleteAnnotation(id);
+        refreshAnnotations();
+      });
+  };
 
   const [rgPagination, setRgPageNumber] = usePaginationState(1, 5);
 
@@ -34,7 +50,7 @@ function UserActivityContainer({ user, confirm }) {
 
   const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
 
-  const onDelete = (id, name, rg) => {
+  const onDeleteMembership = (id, name, rg) => {
     const heading = t("modals.delete_membership_group", { name, rg });
     const message = t("modals.delete_membership_body");
     if (confirm)
@@ -50,7 +66,7 @@ function UserActivityContainer({ user, confirm }) {
         <Layout.BackendPanel flush>
           <EntitiesList
             entityComponent={ReadingGroupMembershipRow}
-            entityComponentProps={{ onDelete }}
+            entityComponentProps={{ onDelete: onDeleteMembership }}
             entities={rgMemberships}
             title={t("glossary.reading_group_title_case", {
               count: rgMeta?.pagination.totalCount
@@ -72,7 +88,10 @@ function UserActivityContainer({ user, confirm }) {
         <Layout.BackendPanel>
           <EntitiesList
             entityComponent={AnnotationRow}
-            entityComponentProps={{ hideCreator: true }}
+            entityComponentProps={{
+              hideCreator: true,
+              onDelete: onDeleteAnnotation
+            }}
             entities={annotations}
             pagination={annotationsMeta?.pagination}
             paginationTarget={false}
