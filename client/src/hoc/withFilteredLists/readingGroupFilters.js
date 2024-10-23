@@ -10,6 +10,25 @@ export default function readingGroupFilters({ snapshotState = false } = {}) {
         value: ""
       },
       {
+        label: "Privacy",
+        name: "privacy",
+        value: "",
+        options: [
+          { label: "All reading groups", value: "" },
+          { label: "Public groups", value: "public" },
+          { label: "Private groups", value: "private" }
+        ]
+      },
+      {
+        label: "Flags",
+        name: "flags",
+        value: "",
+        options: [
+          { label: "With and without flags", value: "" },
+          { label: "With flagged annotations", value: "true" }
+        ]
+      },
+      {
         label: "Order",
         name: "sort_order",
         value: "created_at_desc",

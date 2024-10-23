@@ -67,6 +67,7 @@ class ReadingGroup < ApplicationRecord
   scope :visible_to, ->(user) do
     where(id: ReadingGroupVisibility.visible_to(user).select(:reading_group_id))
   end
+  scope :with_flags, ->(value = nil) { build_flags_scope if value.present? }
 
   def private?
     privacy == "private"
@@ -125,6 +126,10 @@ class ReadingGroup < ApplicationRecord
   end
 
   class << self
+    def build_flags_scope
+      joins(:annotation_flags)
+    end
+
     def build_keyword_scope(value)
       escaped = value.gsub("%", "\\%")
 
