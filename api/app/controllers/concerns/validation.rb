@@ -585,7 +585,7 @@ module Validation
     coerce_filter_to_hash(:filter, :formats)
     params.permit(
       filter: [
-        :orphaned, :text, :text_section, :reading_group_membership, :order,
+        :orphaned, :text, :text_section, :reading_group_membership, :order, :privacy, :flags, :keyword,
         { ids: [] },
         [{ formats: [] }]
       ]

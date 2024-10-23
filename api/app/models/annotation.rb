@@ -177,6 +177,9 @@ class Annotation < ApplicationRecord
   scope :sans_public_annotations_not_owned_by, ->(user) { where(arel_exclude_public_annotations_not_owned_by(user)) }
   scope :sans_private_annotations_not_owned_by, ->(user) { where(arel_exclude_private_annotations_not_owned_by(user)) }
   scope :non_private, -> { where(private: false) }
+  scope :by_privacy, ->(value = nil) { where(private: value) if value.present? }
+  scope :with_flags, ->(value = nil) { where("flags_count > 0") if value.present? }
+  scope :by_keyword, ->(value) { build_keyword_scope(value) if value.present? }
 
   scope :with_order, ->(by = nil) do
     case by
@@ -359,6 +362,18 @@ class Annotation < ApplicationRecord
       condition = arel_grouping arel_expr_in_query(id, made_by_member).or(arel_expr_in_query(id, commented_on_by_member))
 
       includes(:membership_comments).where(condition)
+    end
+
+    def build_keyword_scope(value)
+      escaped = value.gsub("%", "\\%")
+
+      needle = "%#{escaped}%"
+
+      body_matches = where arel_table[:body].matches(needle)
+
+      creator_matches = joins(:creator).where(User.arel_table[:first_name].matches(needle).or(User.arel_table[:last_name].matches(needle)))
+
+      creator_matches.or(body_matches)
     end
   end
 end
