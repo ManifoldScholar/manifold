@@ -14,7 +14,7 @@
     "flag_one": "{{count}} flag",
     "flag_other": "{{count}} flags",
     "my_starred": "You have starred <0>{{count}}</0> {{ unit }}",
-    "range": "Showing <0>{{start}}-{{end}}</0> of <0>{{total}}</0> {{unit}}:",
+    "range": "Showing <0>{{start}}-{{end}}</0> of <0>{{total}}</0> {{unit}}",
     "range_sr": "{{total}} {{unit}}. Showing results {{start}} through {{end}}.",
     "text_annotations_one": "This text has {{count}} annotation",
     "text_annotations_other": "This text has {{count}} annotations",
