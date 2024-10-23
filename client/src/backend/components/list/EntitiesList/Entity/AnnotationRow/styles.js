@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Collapse from "global/components/Collapse";
-import { buttonUnstyled } from "theme/styles/mixins";
+import { buttonUnstyled, respond } from "theme/styles/mixins";
 
 export const Toggle = styled(Collapse.Toggle)`
   ${buttonUnstyled}
@@ -12,11 +12,9 @@ export const Toggle = styled(Collapse.Toggle)`
   }
 `;
 
-/* eslint-disable prettier/prettier */
 export const Item = styled.li`
   position: relative;
 `;
-/* eslint-enable prettier/prettier */
 
 export const Inner = styled.div`
   border: 0;
@@ -27,6 +25,10 @@ export const Inner = styled.div`
   &:has(.collapse__content--hidden:not(.collapse__content--stub-only)) {
     border-bottom: 0px;
   }
+`;
+
+export const Text = styled.div`
+  max-inline-size: 100%;
 `;
 
 export const Subject = styled.span`
@@ -41,13 +43,39 @@ export const MetaOne = styled.div`
 
 export const MetaTwo = styled.div`
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 6px;
   margin-block: 8px;
+  max-inline-size: 100%;
 
-  > * + *::before {
-    content: "|";
-    margin-inline-end: 12px;
+  > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-inline-size: 80%;
   }
+
+  ${respond(
+    `
+    flex-direction: row;
+    gap: 12px;
+
+    > * {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-inline-size: 50%;
+    }
+
+    > * + *::before {
+      content: "|";
+      margin-inline-end: 12px;
+    }
+    `,
+    50
+  )};
 `;
 
 export const Content = styled(Collapse.Content)`

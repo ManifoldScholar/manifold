@@ -17,7 +17,10 @@ function AnnotationRow({ entity, onDelete, hideCreator }) {
     createdAt,
     textTitle,
     creatorName,
-    creatorId
+    creatorId,
+    orphaned,
+    textSlug,
+    textSectionId
   } = attributes;
   const { t } = useTranslation();
 
@@ -25,7 +28,7 @@ function AnnotationRow({ entity, onDelete, hideCreator }) {
     <Collapse>
       <Styled.Item className="entity-row entity-list__entity scheme-dark">
         <Styled.Inner className="entity-row__inner entity-row__inner--in-rows">
-          <div className="entity-row__text entity-row__text--in-rows">
+          <Styled.Text className="entity-row__text entity-row__text--in-rows">
             <Styled.MetaOne>
               <FormattedDate format="MMMM dd, yyyy" date={createdAt} />
               <LabelSet
@@ -35,6 +38,14 @@ function AnnotationRow({ entity, onDelete, hideCreator }) {
                         {
                           text: isPrivate ? "private" : "public",
                           level: "notice"
+                        }
+                      ]
+                    : []),
+                  ...(orphaned
+                    ? [
+                        {
+                          text: "previous",
+                          level: ""
                         }
                       ]
                     : []),
@@ -57,7 +68,17 @@ function AnnotationRow({ entity, onDelete, hideCreator }) {
                   {creatorName}
                 </a>
               )}
-              <span dangerouslySetInnerHTML={{ __html: textTitle }} />
+              <a
+                href={lh.link(
+                  "readerSection",
+                  textSlug,
+                  textSectionId,
+                  `#annotation-${id}`
+                )}
+                dangerouslySetInnerHTML={{
+                  __html: textTitle ?? "[Text Title Missing]"
+                }}
+              />
             </Styled.MetaTwo>
             <Styled.Toggle>
               <Styled.Content stubHeight={60}>
@@ -69,7 +90,7 @@ function AnnotationRow({ entity, onDelete, hideCreator }) {
                 <Styled.Overlay />
               </Styled.Content>
             </Styled.Toggle>
-          </div>
+          </Styled.Text>
         </Styled.Inner>
         <Styled.Utility>
           <button
