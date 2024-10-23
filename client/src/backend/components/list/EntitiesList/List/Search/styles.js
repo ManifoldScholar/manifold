@@ -30,6 +30,7 @@ export const Select = styled.select`
   padding-left: 13px;
   overflow: hidden;
   font-size: 16px;
+  line-height: 1.5;
   font-weight: var(--font-weight-regular);
   text-overflow: ellipsis;
   text-transform: none;
