@@ -29,14 +29,14 @@
       "sort_results": "Sort results",
       "by_kind": "Filter by kind",
       "by_member": "Filter by member",
-      "order_collection": "Order collection by:",
+      "order_collection": "Order collection by",
       "by_section": "Filter by text section",
       "tag": "Tag",
       "by_text": "Filter by text",
       "by_status": "Filter by status",
       "by_role": "Filter by role",
       "by_draft": "Filter by draft",
-      "order_results": "Order results:"
+      "order_results": "Order results"
     },
     "default_options": {
       "type": "Type",
