@@ -9,7 +9,7 @@ module API
       end
 
       def create
-        @flag = Flag.create(creator: current_user, flaggable: @subject)
+        @flag = Flag.create(creator: current_user, flaggable: @subject, message: flag_params[:message])
         authorize_action_for @flag
         render_single_resource(
           @subject.reload,

@@ -338,6 +338,10 @@ module Validation
     params.permit(param_config)
   end
 
+  def flag_params
+    params.permit(:message)
+  end
+
   def category_params
     params.require(:data)
     attributes = [:title, :role, :position]
