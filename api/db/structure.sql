@@ -1374,7 +1374,8 @@ CREATE TABLE public.flags (
     flaggable_id uuid,
     flaggable_type character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    message text
 );
 
 
@@ -7263,8 +7264,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240223163849'),
 ('20240327194259'),
 ('20241001182627'),
+('20241025000218'),
 ('20241206175512'),
 ('20241210200353'),
 ('20241218232725');
-
-
