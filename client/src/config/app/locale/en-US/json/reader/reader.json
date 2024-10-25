@@ -92,6 +92,12 @@
     "my_public_annotations": "My Public $t(glossary.annotation_title_case_other)",
     "full_text": "Full Text",
     "section_description": "Start reading this text on {{appName}}",
-    "section_label": "Text Section"
+    "section_label": "Text Section",
+    "report_annotation": {
+      "header": "Report annotation header",
+      "instructions": "Report annotation instructions",
+      "placeholder": "Report annotation placeholder",
+      "message_input_label": "Message"
+    }
   }
 }

@@ -8,7 +8,7 @@ import {
 const TextAreaBase = styled.textarea`
   width: 100%;
   resize: vertical;
-  border: 1px solid var(--TextArea-border-color);
+  border: 1px solid var(--TextArea-border-color, transparent);
   outline: none;
   transition: border-color ${defaultTransitionProps};
 
@@ -18,7 +18,6 @@ const TextAreaBase = styled.textarea`
 `;
 
 export const TextAreaPrimary = styled(TextAreaBase)`
-  --TextArea-border-color: transparent;
   --TextArea-focus-color: var(--hover-color);
 
   ${formInputPrimary}

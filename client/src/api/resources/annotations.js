@@ -61,12 +61,14 @@ export default {
     };
   },
 
-  flag(annotation) {
+  flag(annotation, message) {
     const id = isString(annotation) ? annotation : annotation.id;
     return {
       endpoint: `/api/v1/annotations/${id}/relationships/flags`,
       method: "POST",
-      options: {}
+      options: {
+        body: JSON.stringify({ message })
+      }
     };
   },
 
