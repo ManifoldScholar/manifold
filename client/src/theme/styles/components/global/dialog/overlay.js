@@ -12,9 +12,12 @@ export default `
       background-color: ${transparentize("neutralBlack", 0.35)};
     }
 
-    .browse &,
-    .reader & {
+    .browse & {
       background-color: ${transparentize("neutralWhite", 0.1)};
+    }
+
+    .reader & {
+      background-color: ${transparentize("neutralBlack", 0.7)};
     }
   }
 `;
