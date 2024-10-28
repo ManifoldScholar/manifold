@@ -94,7 +94,6 @@ export const Overlay = styled.div`
 export const Creator = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
 `;
 
 export const CreatorName = styled.div`
