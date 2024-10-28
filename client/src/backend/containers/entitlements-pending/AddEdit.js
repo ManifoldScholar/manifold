@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
 import { pendingEntitlementsAPI } from "api";
 
-export default function EntitlementNewContainer({ refresh }) {
+export default function EntitlementAddEditContainer({ refresh }) {
   const { t } = useTranslation();
   const { id } = useParams();
 
@@ -31,6 +31,8 @@ export default function EntitlementNewContainer({ refresh }) {
   );
 }
 
-EntitlementNewContainer.displayName = "PendingEntitlements.Create";
+EntitlementAddEditContainer.displayName = "PendingEntitlements.CreateEdit";
 
-EntitlementNewContainer.propTypes = {};
+EntitlementAddEditContainer.propTypes = {
+  refresh: PropTypes.func.isRequired
+};

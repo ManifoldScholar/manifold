@@ -1016,10 +1016,19 @@ const routes = {
         },
         {
           name: "backendRecordsAnnotations",
-          exact: true,
+          exact: false,
           component: "AnnotationsList",
           path: "/backend/records/annotations",
-          helper: () => `/backend/records/annotations`
+          helper: () => `/backend/records/annotations`,
+          routes: [
+            {
+              name: "backendRecordsAnnotationsDetail",
+              exact: true,
+              component: "AnnotationDetail",
+              path: "/backend/records/annotations/:id",
+              helper: a => `/backend/records/annotations/${a}`
+            }
+          ]
         }
       ]
     },
