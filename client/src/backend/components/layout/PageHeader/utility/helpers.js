@@ -32,10 +32,15 @@ export const getLinkOrButtonProps = action => {
         };
   }
 
-  if (action.route)
+  if (action.route) {
+    const params = action.routeParams
+      ? action.routeParams
+      : [action.slug, action.resourceSlug];
+
     return {
-      to: lh.link(action.route, action.slug, action.resourceSlug)
+      to: lh.link(action.route, ...params)
     };
+  }
 
   return { as: "button", onClick: action.onClick };
 };
