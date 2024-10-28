@@ -1,39 +1,33 @@
 import styled from "@emotion/styled";
-import Collapse from "global/components/Collapse";
-import { buttonUnstyled, respond } from "theme/styles/mixins";
+import { linkUnstyled, respond } from "theme/styles/mixins";
+import { Link as RouterLink } from "react-router-dom";
 
-export const Toggle = styled(Collapse.Toggle)`
-  ${buttonUnstyled}
-  width: 100%;
-  text-align: left;
+export const Item = styled.li`
+  position: relative;
+`;
+
+export const Link = styled(RouterLink)`
+  ${linkUnstyled}
+  display: block;
+  margin-block-start: 12px;
 
   &:hover {
     color: var(--color);
   }
 `;
 
-export const Item = styled.li`
-  position: relative;
-`;
-
-export const Inner = styled.div`
-  border: 0;
-  padding-inline-end: 0;
-  padding-block-end: 0;
-  border-bottom: 1px solid var(--color-neutral-ui-dull-light);
-
-  &:has(.collapse__content--hidden:not(.collapse__content--stub-only)) {
-    border-bottom: 0px;
-  }
-`;
-
-export const Text = styled.div`
-  max-inline-size: 100%;
-`;
-
 export const Body = styled.span`
-  max-width: 90%;
-  padding-block-end: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-inline-size: 95%;
+  font-weight: var(--font-weight-medium);
+
+  a &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const MetaOne = styled.div`
@@ -76,58 +70,4 @@ export const MetaTwo = styled.div`
     `,
     50
   )};
-`;
-
-export const Content = styled(Collapse.Content)`
-  position: relative;
-`;
-
-export const Overlay = styled.div`
-  --Overlay-bg: rgba(247, 247, 247, 1);
-  --Overlay-bg-transparent: rgba(247, 247, 247, 0);
-
-  .overlay-full & {
-    --Overlay-bg: rgba(236, 236, 236, 1);
-    --Overlay-bg-transparent: rgba(236, 236, 236, 0);
-  }
-
-  .scheme-dark & {
-    --Overlay-bg: rgba(46, 46, 46, 1);
-    --Overlay-bg-transparent: rgba(46, 46, 46, 0);
-  }
-
-  .scheme-dark .overlay-full & {
-    --Overlay-bg: rgba(54, 54, 54, 1);
-    --Overlay-bg-transparent: rgba(54, 54, 54, 0);
-  }
-
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 1;
-  background: linear-gradient(
-    var(--Overlay-bg-transparent),
-    70%,
-    var(--Overlay-bg)
-  );
-  transition: opacity var(--collapse-duration) ease var(--collapse-delay),
-    visibility var(--collapse-duration);
-
-  .collapse__content--visible & {
-    opacity: 0;
-  }
-
-  border-bottom: 1px solid var(--color-neutral-ui-dull-light);
-`;
-
-export const Utility = styled.div`
-  position: absolute;
-  height: 120px;
-  top: 0;
-  right: 19px;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 `;

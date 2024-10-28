@@ -4,16 +4,13 @@ import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import FormattedDate from "global/components/FormattedDate";
-import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 export default function AnnotationMetadata({
-  id,
   creator,
   createdAt,
-  textSlug,
-  textSectionId,
-  textTitle
+  textTitle,
+  readingGroupName
 }) {
   const { t } = useTranslation();
 
@@ -31,19 +28,21 @@ export default function AnnotationMetadata({
         </Styled.Item>
         <Styled.Label>{t("glossary.text_title_case_one")}</Styled.Label>
         <Styled.Item>
-          <a
-            href={lh.link(
-              "readerSection",
-              textSlug,
-              textSectionId,
-              `#annotation-${id}`
-            )}
+          <span
             dangerouslySetInnerHTML={{
               __html:
                 textTitle ?? t("records.annotations.text_title_placeholder")
             }}
           />
         </Styled.Item>
+        {readingGroupName && (
+          <>
+            <Styled.Label>{t("glossary.reading_group_one")}</Styled.Label>
+            <Styled.Item>
+              <span>{readingGroupName}</span>
+            </Styled.Item>
+          </>
+        )}
         <Styled.Label>{t("glossary.creator_one")}</Styled.Label>
         <Styled.Item>
           {creator && (

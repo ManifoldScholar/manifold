@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { DrawerContext } from "helpers/contexts";
-import Button from "./Button";
+import Button from "../PageHeader/utility/ActionButtons/Button";
 import * as Styled from "./styles";
 
 export default class DrawerEntityHeader extends PureComponent {
@@ -67,7 +67,7 @@ export default class DrawerEntityHeader extends PureComponent {
               >
                 {this.props.buttons &&
                   this.props.buttons.map(button => (
-                    <Button key={button.label} {...button} />
+                    <Button key={button.label} action={button} iconSize={24} />
                   ))}
               </Styled.ButtonGroup>
             )}

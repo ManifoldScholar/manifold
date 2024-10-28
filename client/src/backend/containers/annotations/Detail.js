@@ -33,9 +33,7 @@ function AnnotationDetailContainer({ refresh, confirm }) {
       });
   }, [id, confirm, deleteAnnotation, t, refresh]);
 
-  if (!annotation) return null;
-
-  const { attributes, relationships } = annotation;
+  const { attributes, relationships } = annotation ?? {};
 
   const {
     body,
@@ -43,28 +41,32 @@ function AnnotationDetailContainer({ refresh, confirm }) {
     createdAt,
     textTitle,
     textSlug,
-    textSectionId
-  } = attributes;
+    textSectionId,
+    readingGroupName
+  } = attributes ?? {};
 
   const { creator, flags } = relationships ?? {};
 
   const metadataProps = {
-    id,
     creator,
     createdAt,
-    textSlug,
-    textSectionId,
-    textTitle
+    textTitle,
+    readingGroupName
   };
 
   const handleUnflag = () => {};
 
-  return (
+  return id ? (
     <section>
       <Layout.DrawerHeader
         title={t("records.annotations.detail_header")}
-        instructions={!id && t("entitlements.pending.add_instructions")}
         buttons={[
+          {
+            label: "actions.view",
+            route: "readerSection",
+            routeParams: [textSlug, textSectionId, `#annotation-${id}`],
+            icon: "eyeOpen32"
+          },
           {
             label: t("actions.delete"),
             icon: "delete24",
@@ -72,20 +74,24 @@ function AnnotationDetailContainer({ refresh, confirm }) {
             entity: annotation,
             onClick: onDelete
           },
-          {
-            label: "Clear all flags",
-            icon: "circleMinus24",
-            ability: "update",
-            entity: annotation,
-            onClick: handleUnflag
-          }
+          ...(flagsCount
+            ? [
+                {
+                  label: "Clear all flags",
+                  icon: "circleMinus24",
+                  ability: "update",
+                  entity: annotation,
+                  onClick: handleUnflag
+                }
+              ]
+            : [])
         ]}
       />
       {!!flagsCount && <FlagsList flags={flags} />}
       <Body body={body} />
       <Metadata {...metadataProps} />
     </section>
-  );
+  ) : null;
 }
 
 export default withConfirmation(AnnotationDetailContainer);
