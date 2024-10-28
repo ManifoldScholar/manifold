@@ -93,7 +93,7 @@ class AnnotationMeta extends PureComponent {
           </div>
         )}
         {annotation.attributes.flagsCount > 0 && (
-          <Authorize kind="admin">
+          <Authorize ability="create" entity="comment">
             <div className="annotation-tag__inner annotation-tag--secondary">
               {t("counts.flag", { count: annotation.attributes.flagsCount })}
             </div>

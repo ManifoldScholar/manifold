@@ -4,7 +4,10 @@
     "annotations": {
       "flag_count_one": "1 Flag",
       "flag_count_other": "{{ count }} Flags",
-      "remove_label": "Remove annotation"
+      "remove_label": "Remove annotation",
+      "detail_header": "Annotation Detail",
+      "metadata_header": "Metadata",
+      "text_title_placeholder": "[Text Title Missing]"
     },
     "makers": {
       "header": "Manage Makers",

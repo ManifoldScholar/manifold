@@ -83,9 +83,9 @@ function AnnotationRow({ entity, onDelete, hideCreator }) {
             <Styled.Toggle>
               <Styled.Content stubHeight={60}>
                 {body && (
-                  <Styled.Subject className="entity-row__title entity-row__title">
+                  <Styled.Body className="entity-row__title entity-row__title">
                     {body}
-                  </Styled.Subject>
+                  </Styled.Body>
                 )}
                 <Styled.Overlay />
               </Styled.Content>
@@ -93,6 +93,13 @@ function AnnotationRow({ entity, onDelete, hideCreator }) {
           </Styled.Text>
         </Styled.Inner>
         <Styled.Utility>
+          <a
+            className="entity-row__utility-button"
+            title={t("records.annotations.remove_label")}
+            href={lh.link("backendRecordsAnnotationsDetail", id)}
+          >
+            <Utility.IconComposer icon="annotate24" size={26} />
+          </a>
           <button
             className="entity-row__utility-button"
             title={t("records.annotations.remove_label")}

@@ -6,18 +6,14 @@ import EntitiesList, {
   Search,
   AnnotationRow
 } from "backend/components/list/EntitiesList";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useApiCallback
-} from "hooks";
+import { useFetch, usePaginationState, useFilterState } from "hooks";
 import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
-import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
+import lh from "helpers/linkHandler";
+import { childRoutes } from "helpers/router";
 
 function AnnotationsList({
-  confirm,
+  route,
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
@@ -47,25 +43,26 @@ function AnnotationsList({
     setFilters({ newState: baseFilters });
   };
 
-  const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
+  const renderChildRoutes = () => {
+    const closeUrl = lh.link("backendRecordsAnnotations");
 
-  const onDelete = id => {
-    const heading = t("modals.delete_annotation");
-    const message = t("modals.confirm_body");
-    if (confirm)
-      confirm(heading, message, async () => {
-        await deleteAnnotation(id);
-        refresh();
-      });
+    return childRoutes(route, {
+      drawer: true,
+      drawerProps: {
+        lockScroll: "always",
+        closeUrl
+      },
+      childProps: { refresh }
+    });
   };
 
   return (
     <>
+      {renderChildRoutes()}
       <PageHeader type="list" title={t("titles.annotations")} />
       {!!annotations && (
         <EntitiesList
           entityComponent={AnnotationRow}
-          entityComponentProps={{ onDelete }}
           entities={annotations}
           search={
             <Search
@@ -88,15 +85,14 @@ function AnnotationsList({
   );
 }
 
-export default withFilteredLists(withConfirmation(AnnotationsList), {
+export default withFilteredLists(AnnotationsList, {
   annotations: annotationFilters()
 });
 
 AnnotationsList.displayName = "Annotations.List";
 
 AnnotationsList.propTypes = {
-  confirm: PropTypes.func,
-  location: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
   entitiesListSearchProps: PropTypes.func,
   entitiesListSearchParams: PropTypes.object
 };

@@ -11,6 +11,14 @@ export default {
     };
   },
 
+  show(id) {
+    return {
+      endpoint: `/api/v1/annotations/${id}`,
+      method: "GET",
+      options: {}
+    };
+  },
+
   forSection(sectionId, textId, filter = {}, page = {}) {
     const filterParams = { ...filter };
     filterParams.orphaned = false;
