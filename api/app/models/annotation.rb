@@ -177,7 +177,19 @@ class Annotation < ApplicationRecord
   scope :sans_public_annotations_not_owned_by, ->(user) { where(arel_exclude_public_annotations_not_owned_by(user)) }
   scope :sans_private_annotations_not_owned_by, ->(user) { where(arel_exclude_private_annotations_not_owned_by(user)) }
   scope :non_private, -> { where(private: false) }
-  scope :by_privacy, ->(value = nil) { where(private: value) if value.present? }
+  scope :by_privacy, ->(value = nil) {
+    case value
+    when "private"
+      left_outer_joins(:reading_group)
+        .where(reading_groups: { privacy: %w[private anonymous] })
+        .or(where(private: true))
+    when "public"
+      left_outer_joins(:reading_group)
+        .where(reading_groups: { privacy: "public" })
+        .or(where(reading_groups: { id: nil }))
+        .where(private: false)
+    end
+  }
   scope :with_flags, ->(value = nil) { where("flags_count > 0") if value.present? }
   scope :by_keyword, ->(value) { build_keyword_scope(value) if value.present? }
 
@@ -373,7 +385,7 @@ class Annotation < ApplicationRecord
 
       creator_matches = joins(:creator).where(User.arel_table[:first_name].matches(needle).or(User.arel_table[:last_name].matches(needle)))
 
-      creator_matches.or(body_matches)
+      creator_matches.or(body_matches).distinct
     end
   end
 end

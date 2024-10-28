@@ -15,8 +15,8 @@ export default function readingGroupFilters({ snapshotState = false } = {}) {
         value: "",
         options: [
           { label: "All annotations", value: "" },
-          { label: "Public annotations", value: "false" },
-          { label: "Private annotations", value: "true" }
+          { label: "Public annotations", value: "public" },
+          { label: "Private annotations", value: "private" }
         ]
       },
       {
