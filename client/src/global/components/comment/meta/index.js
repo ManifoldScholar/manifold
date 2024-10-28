@@ -67,7 +67,7 @@ class CommentMeta extends PureComponent {
               {t("common.deleted_title_case")}
             </div>
           ) : null}
-          <Authorize kind="admin">
+          <Authorize ability="create" entity="comment">
             {comment.attributes.flagsCount > 0 ? (
               <div className="marker marker--secondary">
                 {t("counts.flag", { count: comment.attributes.flagsCount })}

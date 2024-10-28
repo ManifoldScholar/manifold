@@ -31,7 +31,7 @@ export const Text = styled.div`
   max-inline-size: 100%;
 `;
 
-export const Subject = styled.span`
+export const Body = styled.span`
   max-width: 90%;
   padding-block-end: 14px;
 `;
@@ -129,4 +129,5 @@ export const Utility = styled.div`
   z-index: 5;
   display: flex;
   align-items: center;
+  gap: 8px;
 `;
