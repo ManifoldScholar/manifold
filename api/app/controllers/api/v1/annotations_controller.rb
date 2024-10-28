@@ -4,7 +4,7 @@ module API
       config.pagination_enforced = true
 
       resourceful! Annotation do
-        Annotation.includes(:creator)
+        Annotation.includes([:creator, :flags])
           .filtered(with_pagination!(annotation_filter_params))
       end
 
@@ -13,6 +13,14 @@ module API
         render_multiple_resources(
           @annotations,
           include: [:creator]
+        )
+      end
+
+      def show
+        @annotation = load_annotation
+        render_single_resource(
+          @annotation,
+          include: [:creator, :flags]
         )
       end
     end

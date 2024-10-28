@@ -11,6 +11,7 @@ module V1
     typed_attribute :start_node, Types::String.meta(example: "start")
     typed_attribute :end_char, Types::Integer
     typed_attribute :end_node, Types::String.meta(example: "end")
+    typed_has_many :flags, serializer: ::V1::FlagSerializer, record_type: "flag"
     typed_attribute :flags_count, Types::Integer.meta(read_only: true)
     typed_attribute :format, Types::String.enum("annotation", "highlight", "resource", "resource_collection")
     typed_attribute :subject, Types::String

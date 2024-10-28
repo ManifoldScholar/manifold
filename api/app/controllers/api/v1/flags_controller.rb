@@ -13,6 +13,7 @@ module API
         authorize_action_for @flag
         render_single_resource(
           @subject.reload,
+          serializer: ::V1::AnnotationSerializer,
           location: nil
         )
       end
@@ -23,6 +24,7 @@ module API
         @flag.destroy
         render_single_resource(
           @subject.reload,
+          serializer: ::V1::AnnotationSerializer,
           location: nil
         )
       end
