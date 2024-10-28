@@ -165,6 +165,7 @@ export default {
   ReadingGroupMembers: ReadingGroup.Members,
   ReadingGroupAnnotations: ReadingGroup.Annotations,
   AnnotationsList: Annotations.List,
+  AnnotationDetail: Annotations.Detail,
   UserWrapper: User.Wrapper,
   UserProperties: User.Properties,
   UserActivity: User.Activity

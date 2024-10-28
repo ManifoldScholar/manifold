@@ -2,11 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
-function SectionLabel({ label, as = "header", headingAs = "h2", id }) {
+function SectionLabel({
+  label,
+  as = "header",
+  headingAs = "h2",
+  id,
+  color = "default"
+}) {
   const HTag = headingAs;
 
   return (
-    <Styled.Label as={as}>
+    <Styled.Label as={as} $color={color}>
       <HTag id={id}>{label}</HTag>
     </Styled.Label>
   );
@@ -19,7 +25,7 @@ SectionLabel.propTypes = {
   as: PropTypes.string,
   headingAs: PropTypes.string,
   id: PropTypes.string,
-  secondary: PropTypes.bool
+  color: PropTypes.oneOf(["default", "error"])
 };
 
 export default SectionLabel;
