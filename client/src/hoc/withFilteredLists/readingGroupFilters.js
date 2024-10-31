@@ -16,7 +16,8 @@ export default function readingGroupFilters({ snapshotState = false } = {}) {
         options: [
           { label: "All reading groups", value: "" },
           { label: "Public groups", value: "public" },
-          { label: "Private groups", value: "private" }
+          { label: "Private groups", value: "private" },
+          { label: "Anonymous groups", value: "anonymous" }
         ]
       },
       {
