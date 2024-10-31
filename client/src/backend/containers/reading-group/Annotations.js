@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Authorize from "hoc/Authorize";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -6,23 +6,53 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { readingGroupsAPI, annotationsAPI } from "api";
 import { withRouter } from "react-router-dom";
-import { useFetch, usePaginationState, useApiCallback } from "hooks";
+import {
+  useFetch,
+  usePaginationState,
+  useApiCallback,
+  useFilterState
+} from "hooks";
 import EntitiesList, {
+  Search,
   AnnotationRow
 } from "backend/components/list/EntitiesList";
 import withConfirmation from "hoc/withConfirmation";
+import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
 
 function ReadingGroupAnnotationsContainer({
   refresh,
   readingGroup,
   route,
-  confirm
+  confirm,
+  entitiesListSearchProps,
+  entitiesListSearchParams
 }) {
   const closeUrl = lh.link("backendReadingGroupAnnotations", readingGroup.id);
 
   const [pagination, setPageNumber] = usePaginationState();
 
-  const filters = useMemo(() => ({ withUpdateAbility: true }), []);
+  const baseFilters = entitiesListSearchParams.initialannotations;
+  const [filters, setFilters] = useFilterState({
+    ...baseFilters,
+    formats: ["annotation"]
+  });
+
+  const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
+    "annotations"
+  );
+  const updatedSetParam = (param, value) => {
+    setParam(param, value);
+    setFilters({ newState: { ...filters, [param.as || param.name]: value } });
+  };
+  const updatedOnReset = () => {
+    onReset();
+    setFilters({
+      newState: {
+        ...baseFilters,
+        formats: ["annotation"]
+      }
+    });
+  };
 
   const { data, refresh: refreshAnnotations, meta } = useFetch({
     request: [
@@ -67,6 +97,13 @@ function ReadingGroupAnnotationsContainer({
           count: meta?.pagination?.totalCount || 0
         })}
         pagination={meta.pagination}
+        search={
+          <Search
+            {...searchProps}
+            setParam={updatedSetParam}
+            onReset={updatedOnReset}
+          />
+        }
         showCount
         callbacks={{
           onPageClick: page => () => setPageNumber(page)
@@ -95,4 +132,10 @@ ReadingGroupAnnotationsContainer.propTypes = {
   readingGroup: PropTypes.object
 };
 
-export default withRouter(withConfirmation(ReadingGroupAnnotationsContainer));
+export default withRouter(
+  withConfirmation(
+    withFilteredLists(ReadingGroupAnnotationsContainer, {
+      annotations: annotationFilters({ includePrivacy: false })
+    })
+  )
+);
