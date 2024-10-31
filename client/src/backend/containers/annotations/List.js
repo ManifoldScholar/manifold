@@ -40,7 +40,12 @@ function AnnotationsList({
   };
   const updatedOnReset = () => {
     onReset();
-    setFilters({ newState: baseFilters });
+    setFilters({
+      newState: {
+        ...baseFilters,
+        formats: ["annotation"]
+      }
+    });
   };
 
   const renderChildRoutes = () => {

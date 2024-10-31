@@ -1,4 +1,7 @@
-export default function readingGroupFilters({ snapshotState = false } = {}) {
+export default function annotationFilters({
+  snapshotState = false,
+  includePrivacy = true
+} = {}) {
   return {
     config: {
       snapshotState
@@ -9,16 +12,20 @@ export default function readingGroupFilters({ snapshotState = false } = {}) {
         name: "keyword",
         value: ""
       },
-      {
-        label: "Privacy",
-        name: "privacy",
-        value: "",
-        options: [
-          { label: "All annotations", value: "" },
-          { label: "Public annotations", value: "public" },
-          { label: "Private annotations", value: "private" }
-        ]
-      },
+      ...(includePrivacy
+        ? [
+            {
+              label: "Privacy",
+              name: "privacy",
+              value: "",
+              options: [
+                { label: "All annotations", value: "" },
+                { label: "Public annotations", value: "public" },
+                { label: "Private annotations", value: "private" }
+              ]
+            }
+          ]
+        : []),
       {
         label: "Flags",
         name: "flags",

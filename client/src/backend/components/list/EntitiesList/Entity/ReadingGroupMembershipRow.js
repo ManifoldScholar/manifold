@@ -48,7 +48,7 @@ function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {
         title={t("reading_groups.remove_member")}
         onClick={() => onDelete(id, name, readingGroup.attributes.name)}
       >
-        <Utility.IconComposer icon="close32" size={26} />
+        <Utility.IconComposer icon="circleMinus24" size={26} />
       </button>
     </>
   );
