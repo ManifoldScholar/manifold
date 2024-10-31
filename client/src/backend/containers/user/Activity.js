@@ -69,7 +69,7 @@ function UserActivityContainer({ user, confirm }) {
             entityComponentProps={{ onDelete: onDeleteMembership }}
             entities={rgMemberships}
             title={t("glossary.reading_group_title_case", {
-              count: rgMeta?.pagination.totalCount
+              count: 10
             })}
             titleStyle="section"
             pagination={rgMeta?.pagination}

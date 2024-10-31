@@ -13,7 +13,7 @@ function ReadingGroupRow({ active, entity, onDelete, ...props }) {
     privacy,
     membershipsCount,
     createdAt,
-    allAnnotationsCount,
+    annotationsCount,
     annotationFlagsCount
   } = attributes;
   const { t } = useTranslation();
@@ -22,8 +22,8 @@ function ReadingGroupRow({ active, entity, onDelete, ...props }) {
     title: name,
     subtitle: `${membershipsCount} ${t("glossary.member", {
       count: membershipsCount
-    })} | ${allAnnotationsCount} ${t("glossary.annotation", {
-      count: allAnnotationsCount
+    })} | ${annotationsCount} ${t("glossary.annotation", {
+      count: annotationsCount
     })}`,
     meta: (
       <FormattedDate
