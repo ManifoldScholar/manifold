@@ -64,11 +64,11 @@ class ReadingGroup < ApplicationRecord
   scope :with_order, ->(by = nil) { by.present? ? order(by) : in_default_order }
   scope :non_public, -> { where.not(privacy: "public") }
   scope :visible_to_public, -> { where(privacy: "public") }
-  scope :with_privacy, ->(value = "public") { where(privacy: value) }
+  scope :with_privacy, ->(value = nil) { where(privacy: value) if value.present? }
   scope :visible_to, ->(user) do
     where(id: ReadingGroupVisibility.visible_to(user).select(:reading_group_id))
   end
-  scope :with_flags, ->(value = nil) { build_flags_scope if value.present? }
+  scope :with_flags, ->(value = nil) { joins(:annotation_flags) if value.present? }
 
   def private?
     privacy == "private"
@@ -127,10 +127,6 @@ class ReadingGroup < ApplicationRecord
   end
 
   class << self
-    def build_flags_scope
-      joins(:annotation_flags)
-    end
-
     def build_keyword_scope(value)
       escaped = value.gsub("%", "\\%")
 
