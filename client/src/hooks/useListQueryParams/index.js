@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useMemo, useState } from "react";
+import { useEffect, useCallback, useMemo, useState, useRef } from "react";
 import queryString from "query-string";
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -34,6 +34,8 @@ export default function useListQueryParams({
     [number, setNumber]
   );
 
+  const filtersReset = useRef(initFilters);
+
   const [filters, setFilterState] = useState({
     ...initFilters,
     ...filterParams
@@ -46,7 +48,7 @@ export default function useListQueryParams({
 
       history.push({
         pathname,
-        query
+        search: query
       });
     },
     [page, history, pathname]
@@ -54,8 +56,8 @@ export default function useListQueryParams({
 
   const setFilters = useCallback(
     newState => {
-      setFilterState(newState);
       updateFilterParams(newState);
+      setFilterState(newState);
     },
     [setFilterState, updateFilterParams]
   );
@@ -78,9 +80,9 @@ export default function useListQueryParams({
       typeof initSearchProps.onReset === "function"
     )
       initSearchProps.onReset();
-    setFilters(initFilters);
-    updateFilterParams(initFilters);
-  }, [initSearchProps, setFilters, updateFilterParams, initFilters]);
+    setFilters(filtersReset?.current);
+    updateFilterParams(filtersReset?.current);
+  }, [initSearchProps, setFilters, updateFilterParams]);
 
   useEffect(() => {
     const parsed = parseInt(page, 10);
