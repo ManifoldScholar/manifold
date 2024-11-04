@@ -6,21 +6,21 @@ export default function useListQueryParams({
   initPage = 1,
   initSize = 20,
   initFilters,
-  collectionProjects,
+  collectionPagination,
   initSearchProps
-}) {
+} = {}) {
   const history = useHistory();
   const { pathname, search } = useLocation();
   const { page, ...filterParams } = queryString.parse(search);
 
   const [number, setNumber] = useState(page || initPage);
   const [size] = useState(initSize);
+  const [collection] = useState(collectionPagination);
 
-  const pagination = useMemo(() => ({ number, size, collectionProjects }), [
-    number,
-    size,
-    collectionProjects
-  ]);
+  const pagination = useMemo(
+    () => ({ number, size, collectionProjects: collection }),
+    [number, size, collection]
+  );
 
   const setPageNumber = useCallback(
     pageNumber => {
@@ -43,19 +43,19 @@ export default function useListQueryParams({
 
   const updateFilterParams = useCallback(
     nextFilters => {
-      const params = page ? { ...nextFilters, page } : nextFilters;
-      const query = queryString.stringify(params);
+      const query = queryString.stringify({ page: number, ...nextFilters });
 
       history.push({
         pathname,
         search: query
       });
     },
-    [page, history, pathname]
+    [history, pathname, number]
   );
 
   const setFilters = useCallback(
     newState => {
+      setNumber(1);
       updateFilterParams(newState);
       setFilterState(newState);
     },
@@ -69,7 +69,9 @@ export default function useListQueryParams({
         typeof initSearchProps.setParam === "function"
       )
         initSearchProps.setParam(field, value);
-      setFilters({ ...filters, [field.as || field.name]: value });
+
+      const key = field.as || field.name;
+      setFilters({ ...filters, [key]: value });
     },
     [initSearchProps, setFilters, filters]
   );
