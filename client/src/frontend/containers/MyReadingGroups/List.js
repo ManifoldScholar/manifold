@@ -10,37 +10,24 @@ import GroupsTable from "frontend/components/reading-group/tables/Groups";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useSetLocation,
-  useCurrentUser
-} from "hooks";
+import { useFetch, useCurrentUser, useListQueryParams } from "hooks";
 import * as Styled from "./styles";
 
 const DEFAULT_SORT_ORDER = "";
 
 function MyReadingGroupsListContainer({ route }) {
-  const [pagination, setPageNumber] = usePaginationState();
-  const baseFilters = {
+  const filtersReset = {
     sort_order: DEFAULT_SORT_ORDER,
     archived: "false"
   };
-  const [filters, setFilters] = useFilterState(baseFilters);
+
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initFilters: filtersReset
+  });
 
   const { data: readingGroups, meta, refresh } = useFetch({
     request: [meAPI.readingGroups, filters, pagination]
   });
-
-  useSetLocation({ filters, page: pagination.number });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
 
   const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
 
@@ -77,11 +64,10 @@ function MyReadingGroupsListContainer({ route }) {
             <GroupsTable
               readingGroups={readingGroups}
               pagination={meta?.pagination}
-              onPageClick={paginationClickHandlerCreator}
               filterProps={{
-                onFilterChange: param => setFilters({ newState: param }),
+                onFilterChange: state => setFilters(state),
                 initialState: filters,
-                resetState: baseFilters
+                resetState: filtersReset
               }}
               showStatusFilter
               onArchive={refresh}

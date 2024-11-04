@@ -8,13 +8,7 @@ import EntitiesList, {
   Search,
   PendingEntitlementRow
 } from "backend/components/list/EntitiesList";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useApiCallback,
-  useSetLocation
-} from "hooks";
+import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import { childRoutes } from "helpers/router";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -30,18 +24,15 @@ function PendingEntitlementsList({
 }) {
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const baseFilters = entitiesListSearchParams.initialentitlements;
-  const [filters, setFilters] = useFilterState(baseFilters);
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: entitiesListSearchParams.initialentitlements,
+    initSearchProps: entitiesListSearchProps("entitlements")
+  });
 
   const { data: entitlements, meta, refresh } = useFetch({
     request: [pendingEntitlementsAPI.index, filters, pagination],
     dependencies: [filters]
-  });
-
-  useSetLocation({
-    filters,
-    page: pagination.number
   });
 
   const renderChildRoutes = () => {
@@ -57,18 +48,6 @@ function PendingEntitlementsList({
       },
       childProps: { refresh }
     });
-  };
-
-  const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
-    "entitlements"
-  );
-  const updatedSetParam = (param, value) => {
-    setParam(param, value);
-    setFilters({ newState: { ...filters, [param.as || param.name]: value } });
-  };
-  const updatedOnReset = () => {
-    onReset();
-    setFilters({ newState: baseFilters });
   };
 
   const onEdit = id => {
@@ -131,25 +110,12 @@ function PendingEntitlementsList({
                 authorizedFor="entitlement"
               />
             ]}
-            search={
-              <Search
-                {...searchProps}
-                setParam={updatedSetParam}
-                onReset={updatedOnReset}
-              />
-            }
+            search={<Search {...searchProps} />}
             pagination={meta.pagination}
             showCount
             unit={t("glossary.pending_entitlement", {
               count: meta.pagination.totalCount
             })}
-            callbacks={{
-              onPageClick: page => e => {
-                e.preventDefault();
-                setPageNumber(page);
-              }
-            }}
-            usesQueryParams
           />
         </>
       )}

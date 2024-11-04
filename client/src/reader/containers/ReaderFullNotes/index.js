@@ -157,8 +157,7 @@ function ReaderFullNotesContainer({
         readingGroup={readingGroup}
         filterProps={filterProps}
         paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
-          paginationTarget: "#group-annotations"
+          paginationClickHandler: page => () => setPageNumber(page)
         }}
         refresh={refresh}
         nested

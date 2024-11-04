@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useFetch, usePaginationState, useFromStore } from "hooks";
+import { useFetch, useListQueryParams, useFromStore } from "hooks";
 import { journalVolumesAPI } from "api";
 import EntityHeadContent from "frontend/components/entity/HeadContent";
 import EntityMasthead from "frontend/components/entity/Masthead";
@@ -11,7 +11,9 @@ import lh from "helpers/linkHandler";
 
 export default function JournalVolumesList({ journal }) {
   const { id } = useParams();
-  const [pagination, setPageNumber] = usePaginationState(1, 5);
+
+  const { pagination } = useListQueryParams({ initSize: 5 });
+
   const { data: volumes, meta } = useFetch({
     request: [journalVolumesAPI.index, id, pagination]
   });
@@ -59,9 +61,6 @@ export default function JournalVolumesList({ journal }) {
         journal={journal}
         volumes={volumes}
         meta={meta}
-        paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page)
-        }}
       />
     </>
   );

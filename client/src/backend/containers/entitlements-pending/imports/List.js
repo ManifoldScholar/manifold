@@ -5,20 +5,18 @@ import { entitlementImportsAPI } from "api";
 import EntitiesList, {
   EntitlementImportRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, usePaginationState, useSetLocation } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
 
 export default function EntitlementImportsList() {
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
+  const { pagination } = useListQueryParams({
+    initSize: 10
+  });
 
   const { data: csvImports, meta } = useFetch({
     request: [entitlementImportsAPI.index, null, pagination]
-  });
-
-  useSetLocation({
-    page: pagination.number
   });
 
   const actions = [
@@ -44,13 +42,6 @@ export default function EntitlementImportsList() {
         unit={t("glossary.import", {
           count: meta.pagination?.totalCount
         })}
-        callbacks={{
-          onPageClick: page => e => {
-            e.preventDefault();
-            setPageNumber(page);
-          }
-        }}
-        usesQueryParams
       />
     </>
   ) : null;

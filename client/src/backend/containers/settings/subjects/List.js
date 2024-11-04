@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { subjectsAPI, requests } from "api";
@@ -8,24 +8,18 @@ import EntitiesList, {
   Button,
   SubjectRow
 } from "backend/components/list/EntitiesList";
-import { usePaginationState, useSetLocation, useFetch } from "hooks";
+import { useListQueryParams, useFetch } from "hooks";
 import { useParams } from "react-router-dom";
 
 export default function SettingsSubjectsListContainer({ route }) {
   const { t } = useTranslation();
   const { id } = useParams();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-
-  const filters = useRef({});
+  const { pagination, filters } = useListQueryParams({ initSize: 10 });
 
   const { data: subjects, meta: subjectsMeta } = useFetch({
     request: [subjectsAPI.index, filters.current, pagination],
     options: { requestKey: requests.beSubjects }
-  });
-
-  useSetLocation({
-    page: pagination.number
   });
 
   if (!subjects || !subjectsMeta) return null;
@@ -50,12 +44,6 @@ export default function SettingsSubjectsListContainer({ route }) {
           })}
           pagination={subjectsMeta.pagination}
           showCountInHeader
-          callbacks={{
-            onPageClick: page => e => {
-              e.preventDefault();
-              setPageNumber(page);
-            }
-          }}
           buttons={[
             <Button
               path={lh.link("backendSettingsSubjectsNew")}
@@ -64,7 +52,6 @@ export default function SettingsSubjectsListContainer({ route }) {
               type="add"
             />
           ]}
-          usesQueryParams
         />
       )}
     </>

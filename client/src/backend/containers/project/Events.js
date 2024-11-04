@@ -9,12 +9,7 @@ import EntitiesList, {
   EventRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { eventFilters } from "hoc/withFilteredLists";
-import {
-  usePaginationState,
-  useSetLocation,
-  useFetch,
-  useApiCallback
-} from "hooks";
+import { useListQueryParams, useFetch, useApiCallback } from "hooks";
 
 import Authorize from "hoc/Authorize";
 
@@ -26,22 +21,15 @@ function ProjectEventsContainer({
 }) {
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-
-  const { data: events, meta: eventsMeta, refresh } = useFetch({
-    request: [
-      projectsAPI.events,
-      project.id,
-      entitiesListSearchParams.events,
-      pagination
-    ],
-    options: { requestKey: requests.beEvents },
-    dependencies: [entitiesListSearchParams.events]
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: entitiesListSearchParams.events,
+    initSearchProps: entitiesListSearchProps("events")
   });
 
-  useSetLocation({
-    filters: entitiesListSearchParams.events,
-    page: pagination.number
+  const { data: events, meta: eventsMeta, refresh } = useFetch({
+    request: [projectsAPI.events, project.id, filters, pagination],
+    options: { requestKey: requests.beEvents }
   });
 
   const destroyEvent = useApiCallback(eventsAPI.destroy);
@@ -81,14 +69,7 @@ function ProjectEventsContainer({
             count: eventsMeta?.pagination?.totalCount
           })}
           pagination={eventsMeta.pagination}
-          callbacks={{
-            onPageClick: page => e => {
-              e.preventDefault();
-              setPageNumber(page);
-            }
-          }}
-          search={<Search {...entitiesListSearchProps("events")} />}
-          usesQueryParams
+          search={<Search {...searchProps} />}
         />
       </section>
     </Authorize>

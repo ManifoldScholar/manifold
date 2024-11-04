@@ -9,7 +9,7 @@ import EntitiesList, {
   ResourceRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { resourceFilters } from "hoc/withFilteredLists";
-import { usePaginationState, useSetLocation, useFetch } from "hooks";
+import { useListQueryParams, useFetch } from "hooks";
 
 function ProjectResourcesListContainer({
   project,
@@ -18,21 +18,18 @@ function ProjectResourcesListContainer({
 }) {
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-
-  const { data: resources, meta: resourcesMeta } = useFetch({
-    request: [
-      projectsAPI.resources,
-      project.id,
-      entitiesListSearchParams.resources,
-      pagination
-    ],
-    options: { requestKey: requests.beResources }
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: entitiesListSearchParams.resources,
+    initSearchProps: resourceFilters.dynamicParams(
+      entitiesListSearchProps("resources"),
+      project
+    )
   });
 
-  useSetLocation({
-    filters: entitiesListSearchParams.resources,
-    page: pagination.number
+  const { data: resources, meta: resourcesMeta } = useFetch({
+    request: [projectsAPI.resources, project.id, filters, pagination],
+    options: { requestKey: requests.beResources }
   });
 
   if (!resources || !resourcesMeta) return null;
@@ -49,20 +46,7 @@ function ProjectResourcesListContainer({
       })}
       pagination={resourcesMeta.pagination}
       showCount
-      callbacks={{
-        onPageClick: page => e => {
-          e.preventDefault();
-          setPageNumber(page);
-        }
-      }}
-      search={
-        <Search
-          {...resourceFilters.dynamicParams(
-            entitiesListSearchProps("resources"),
-            project
-          )}
-        />
-      }
+      search={<Search {...searchProps} />}
       buttons={[
         <Button
           path={lh.link("backendProjectResourcesNew", project.id)}
@@ -79,7 +63,6 @@ function ProjectResourcesListContainer({
           icon="BEResourcesBoxes64"
         />
       ]}
-      usesQueryParams
     />
   );
 }

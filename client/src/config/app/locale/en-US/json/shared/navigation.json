@@ -72,7 +72,8 @@
     "user_links": "User Links",
     "skip_to_main": "Skip to main content",
     "return_to_reader": "Return to Reader",
-    "visit_collection": "Visit Collection Page"
+    "visit_collection": "Visit Collection Page",
+    "go_to_page": "Go to page {{page}}"
   },
   "external_links": {
     "view_on_social": "View this project on {{service}}",

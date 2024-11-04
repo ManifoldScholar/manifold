@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { entityStoreActions } from "actions";
@@ -11,19 +11,12 @@ import EntitiesList, {
   ProjectRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
-import {
-  useFetch,
-  usePaginationState,
-  useFromStore,
-  useSetLocation
-} from "hooks";
+import { useFetch, useFromStore, useListQueryParams } from "hooks";
 import { useDispatch } from "react-redux";
 
 const { flush } = entityStoreActions;
 
 function ProjectsListContainer({
-  savedSearchPaginationState,
-  saveSearchState,
   entitiesListSearchParams,
   entitiesListSearchProps
 }) {
@@ -34,33 +27,20 @@ function ProjectsListContainer({
 
   const { t } = useTranslation();
 
-  const { number, size, collectionProjects } =
-    savedSearchPaginationState("projectsList") ?? {};
-
-  const [pagination, setPageNumber] = usePaginationState(
-    number,
-    size,
-    collectionProjects
-  );
-
-  const filters = useMemo(() => {
-    return {
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 20,
+    initFilters: {
       ...entitiesListSearchParams.projectsList,
       withUpdateAbility:
         currentUser?.attributes?.abilities?.viewDrafts || undefined
-    };
-  }, [entitiesListSearchParams.projectsList, currentUser]);
+    },
+    initSearchProps: entitiesListSearchProps("projectsList")
+  });
 
   const { data: projects, meta: projectsMeta } = useFetch({
     request: [projectsAPI.index, filters, pagination],
     options: { requestKey: requests.beProjects }
   });
-
-  useSetLocation({ filters, page: pagination.number });
-
-  useEffect(() => {
-    if (saveSearchState) saveSearchState("projectsList", pagination);
-  }, [pagination, saveSearchState]);
 
   useEffect(() => {
     return () => dispatch(flush(requests.beProjects));
@@ -87,13 +67,7 @@ function ProjectsListContainer({
         pagination={projectsMeta.pagination}
         showCountInTitle
         showCount
-        callbacks={{
-          onPageClick: page => e => {
-            e.preventDefault();
-            setPageNumber(page);
-          }
-        }}
-        search={<Search {...entitiesListSearchProps("projectsList")} />}
+        search={<Search {...searchProps} />}
         buttons={[
           <Button
             path={lh.link("backendProjectsNew")}
@@ -102,7 +76,6 @@ function ProjectsListContainer({
             type="add"
           />
         ]}
-        usesQueryParams
       />
     </>
   );

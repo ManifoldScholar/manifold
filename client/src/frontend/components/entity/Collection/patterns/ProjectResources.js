@@ -18,7 +18,6 @@ function ProjectResourcesEntityCollection({
 }) {
   const { t } = useTranslation();
 
-  const showPagination = !isEmpty(resourcesMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(resourcesMeta) && !isEmpty(filterProps);
 
   return resources && project ? (
@@ -45,7 +44,7 @@ function ProjectResourcesEntityCollection({
             }
       }
       paginationProps={
-        !showPagination
+        isEmpty(resourcesMeta)
           ? {}
           : {
               pagination: get(resourcesMeta, "pagination"),

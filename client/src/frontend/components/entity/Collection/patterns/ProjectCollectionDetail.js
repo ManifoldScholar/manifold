@@ -25,7 +25,6 @@ function ProjectCollectionDetailEntityCollection({
   const headerLayout = getHeaderLayout(projectCollection);
   const image = getHeroImage(headerLayout, projectCollection);
   const imageAlt = projectCollection.attributes.heroAltText;
-  const showPagination = !isEmpty(projectsMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(projectsMeta) && !isEmpty(filterProps);
 
   const { t } = useTranslation();
@@ -63,7 +62,7 @@ function ProjectCollectionDetailEntityCollection({
             }
       }
       paginationProps={
-        !showPagination
+        isEmpty(projectsMeta)
           ? {}
           : {
               pagination: get(projectsMeta, "pagination"),

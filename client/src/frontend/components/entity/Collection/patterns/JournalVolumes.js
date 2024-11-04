@@ -19,7 +19,7 @@ function JournalVolumesEntityCollection({
         <Journal.VolumeList journal={journal} volumes={volumes} />
       )}
       paginationProps={
-        !meta || !paginationProps
+        !meta
           ? {}
           : {
               pagination: meta.pagination,

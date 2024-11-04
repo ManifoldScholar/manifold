@@ -15,11 +15,9 @@ import has from "lodash/has";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import {
   useFetch,
-  usePaginationState,
-  useFilterState,
   useFromStore,
-  useSetLocation,
-  useListFilters
+  useListFilters,
+  useListQueryParams
 } from "hooks";
 
 export default function ProjectCollectionDetailContainer() {
@@ -28,16 +26,20 @@ export default function ProjectCollectionDetailContainer() {
     request: [projectCollectionsAPI.show, id]
   });
 
-  const baseFilters = {
-    collectionOrder: id
-  };
-  const [filters, setFilters] = useFilterState(baseFilters);
-  const [pagination, setPageNumber] = usePaginationState();
+  const filtersReset = useMemo(
+    () => ({
+      collectionOrder: id
+    }),
+    [id]
+  );
+
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initFilters: filtersReset
+  });
+
   const { data: projects, meta } = useFetch({
     request: [projectsAPI.index, filters, pagination]
   });
-
-  useSetLocation({ filters, page: pagination.number });
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -48,21 +50,14 @@ export default function ProjectCollectionDetailContainer() {
   }, [dispatch, uid]);
 
   const filterProps = useListFilters({
-    onFilterChange: param => setFilters({ newState: param }),
+    onFilterChange: state => setFilters(state),
     initialState: filters,
-    resetState: baseFilters,
+    resetState: filtersReset,
     options: {
       featured: true,
       featuredLabel: t("filters.featured_projects")
     }
   });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
 
   const breadcrumbs = useMemo(
     () => [
@@ -127,9 +122,6 @@ export default function ProjectCollectionDetailContainer() {
         projects={projects}
         projectsMeta={meta}
         filterProps={filterProps}
-        paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator
-        }}
         bgColor="neutral05"
         className="flex-grow"
       />
