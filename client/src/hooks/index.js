@@ -4,6 +4,7 @@ export { default as useFetch } from "./api/useFetch";
 export { default as usePaginationState } from "./api/usePaginationState";
 export { default as useFilterState } from "./api/useFilterState";
 export { default as useSetLocation } from "./useSetLocation";
+export { default as useListQueryParams } from "./useListQueryParams";
 
 export { default as useCurrentUser } from "./useCurrentUser";
 
