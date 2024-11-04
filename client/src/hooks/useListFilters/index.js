@@ -36,9 +36,17 @@ export default function useListFilters({
           return setFilters({ ...filters, keyword: search });
         case "subject":
           if (e.target.value === "featured") {
-            return setFilters({ featured: true });
+            return setFilters({
+              ...filters,
+              subject: undefined,
+              featured: true
+            });
           }
-          return setFilters({ subject: e.target.value });
+          return setFilters({
+            ...filters,
+            featured: undefined,
+            subject: e.target.value || undefined
+          });
         default:
           return setFilters({ ...filters, [label]: e.target.value });
       }
