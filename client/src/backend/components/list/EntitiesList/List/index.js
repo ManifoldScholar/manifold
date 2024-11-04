@@ -37,9 +37,6 @@ export default class ListEntities extends PureComponent {
     const callbacks = props[propName];
     const callbackInvalid = callbacks !== null && !isPlainObject(callbacks);
     if (callbackInvalid) return new Error(this.errors.callbackInvalid);
-    const missingOnPageClick =
-      props.pagination && !isFunction(callbacks.onPageClick);
-    if (missingOnPageClick) return new Error(this.errors.missingOnPageClick);
   };
 
   static validateShowCounts = (props, propName) => {
