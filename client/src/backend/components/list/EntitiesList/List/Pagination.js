@@ -8,7 +8,6 @@ export default class ListEntitiesListPagination extends PureComponent {
   static propTypes = {
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func,
-    usesQueryParams: PropTypes.bool,
     style: PropTypes.oneOf(["normal", "compact"]),
     padding: PropTypes.number
   };

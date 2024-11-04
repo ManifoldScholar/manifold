@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Authorize from "hoc/Authorize";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { journalsAPI } from "api";
 import { withRouter } from "react-router-dom";
-import { useFetch, usePaginationState, useSetLocation } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 import EntitiesList, {
   Button,
   JournalIssueRow
@@ -15,17 +15,13 @@ import EntitiesList, {
 function JournalIssuesContainer({ refresh, journal, route }) {
   const closeUrl = lh.link("backendJournalIssues", journal.id);
 
-  const [pagination, setPageNumber] = usePaginationState();
-
-  const filters = useMemo(() => ({ withUpdateAbility: true }), []);
+  const { pagination, filters } = useListQueryParams({
+    initSize: 10,
+    initFilters: { withUpdateAbility: true }
+  });
 
   const { data, refresh: refreshIssues, meta } = useFetch({
     request: [journalsAPI.journalIssues, journal.id, pagination, filters]
-  });
-
-  useSetLocation({
-    filters,
-    page: pagination.number
   });
 
   const { t } = useTranslation();
@@ -52,12 +48,6 @@ function JournalIssuesContainer({ refresh, journal, route }) {
         })}
         pagination={meta.pagination}
         showCount
-        callbacks={{
-          onPageClick: page => e => {
-            e.preventDefault();
-            setPageNumber(page);
-          }
-        }}
         buttons={[
           <Button
             path={lh.link("backendJournalIssueNew", journal.id)}
@@ -67,7 +57,6 @@ function JournalIssuesContainer({ refresh, journal, route }) {
             authorizedTo="update"
           />
         ]}
-        usesQueryParams
       />
       {childRoutes(route, {
         drawer: true,

@@ -10,7 +10,7 @@ import EntitiesList, {
   UserRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { userFilters } from "hoc/withFilteredLists";
-import { usePaginationState, useSetLocation, useFetch } from "hooks";
+import { useListQueryParams, useFetch } from "hooks";
 import { useParams } from "react-router-dom";
 
 function UsersListContainer({
@@ -21,16 +21,15 @@ function UsersListContainer({
   const { t } = useTranslation();
   const { id } = useParams();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-
-  const { data: users, meta: usersMeta, refresh } = useFetch({
-    request: [usersAPI.index, entitiesListSearchParams.users, pagination],
-    options: { requestKey: requests.beUsers }
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: entitiesListSearchParams.users,
+    initSearchProps: entitiesListSearchProps("users")
   });
 
-  useSetLocation({
-    filters: entitiesListSearchParams.users,
-    page: pagination.number
+  const { data: users, meta: usersMeta, refresh } = useFetch({
+    request: [usersAPI.index, filters, pagination],
+    options: { requestKey: requests.beUsers }
   });
 
   if (!users || !usersMeta) return null;
@@ -56,13 +55,7 @@ function UsersListContainer({
         unit={t("glossary.user", { count: usersMeta.pagination.totalCount })}
         pagination={usersMeta.pagination}
         showCount
-        callbacks={{
-          onPageClick: page => e => {
-            e.preventDefault();
-            setPageNumber(page);
-          }
-        }}
-        search={<Search {...entitiesListSearchProps("users")} />}
+        search={<Search {...searchProps} />}
         buttons={[
           <Button
             path={lh.link("backendRecordsUsersNew")}
@@ -71,7 +64,6 @@ function UsersListContainer({
             type="add"
           />
         ]}
-        usesQueryParams
       />
     </>
   );

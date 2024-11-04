@@ -11,7 +11,7 @@ import EntitiesList, {
 import withFilteredLists, {
   resourceCollectionFilters
 } from "hoc/withFilteredLists";
-import { usePaginationState, useSetLocation, useFetch } from "hooks";
+import { useListQueryParams, useFetch } from "hooks";
 
 function ProjectResourceCollectionsListContainer({
   project,
@@ -20,24 +20,23 @@ function ProjectResourceCollectionsListContainer({
 }) {
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: entitiesListSearchParams.resourceCollections,
+    initSearchProps: entitiesListSearchProps("resourceCollections")
+  });
 
   const { data: resourceCollections, meta: resourceCollectionsMeta } = useFetch(
     {
       request: [
         projectsAPI.resourceCollections,
         project.id,
-        entitiesListSearchParams.resourceCollections,
+        filters,
         pagination
       ],
       options: { requestKey: requests.beResourceCollections }
     }
   );
-
-  useSetLocation({
-    filters: entitiesListSearchParams.resourceCollections,
-    page: pagination.number
-  });
 
   if (!resourceCollections || !resourceCollectionsMeta) return null;
 
@@ -53,13 +52,7 @@ function ProjectResourceCollectionsListContainer({
       })}
       pagination={resourceCollectionsMeta.pagination}
       showCount
-      callbacks={{
-        onPageClick: page => e => {
-          e.preventDefault();
-          setPageNumber(page);
-        }
-      }}
-      search={<Search {...entitiesListSearchProps("resourceCollections")} />}
+      search={<Search {...searchProps} />}
       buttons={[
         <Button
           path={lh.link("backendProjectResourceCollectionsNew", project.id)}
@@ -69,7 +62,6 @@ function ProjectResourceCollectionsListContainer({
           type="add"
         />
       ]}
-      usesQueryParams
     />
   );
 }

@@ -5,22 +5,17 @@ import { meAPI } from "api";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useListFilters,
-  useSetLocation
-} from "hooks";
+import { useFetch, useListFilters, useListQueryParams } from "hooks";
 
 const INIT_FILTER_STATE = {
   formats: ["highlight", "annotation", "bookmark"]
 };
 
 export default function MyAnnotationsContainer() {
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const [filters, setFilters] = useFilterState(INIT_FILTER_STATE);
-  useSetLocation({ filters, page: pagination.number });
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initSize: 10,
+    initFilters: INIT_FILTER_STATE
+  });
 
   const { data: annotations, meta } = useFetch({
     request: [meAPI.annotations, filters, pagination]
@@ -30,18 +25,11 @@ export default function MyAnnotationsContainer() {
   });
 
   const filterProps = useListFilters({
-    onFilterChange: param => setFilters({ newState: param }),
+    onFilterChange: state => setFilters(state),
     initialState: filters,
     resetState: INIT_FILTER_STATE,
     options: { texts: annotatedTexts }
   });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
 
   const { t } = useTranslation();
 
@@ -54,9 +42,6 @@ export default function MyAnnotationsContainer() {
         annotatedTexts={annotatedTexts}
         filterProps={{ ...filterProps, hideSearch: true }}
         isFiltered={"text" in filters}
-        paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator
-        }}
       />
       <CollectionNavigation />
     </>

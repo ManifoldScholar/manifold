@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import withFilteredLists, { makerFilters } from "hoc/withFilteredLists";
 import { useParams } from "react-router-dom";
-import { usePaginationState, useSetLocation, useFetch } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 
 import EntitiesList, {
   Search,
@@ -22,16 +22,15 @@ function MakersListContainer({
   const { t } = useTranslation();
   const { id } = useParams();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-
-  const { data: makers, meta: makersMeta, refresh } = useFetch({
-    request: [makersAPI.index, entitiesListSearchParams.makers, pagination],
-    options: { requestKey: requests.beMakers }
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: entitiesListSearchParams.makers,
+    initSearchProps: entitiesListSearchProps("makers")
   });
 
-  useSetLocation({
-    filters: entitiesListSearchParams.makers,
-    page: pagination.number
+  const { data: makers, meta: makersMeta, refresh } = useFetch({
+    request: [makersAPI.index, filters, pagination],
+    options: { requestKey: requests.beMakers }
   });
 
   if (!makers || !makersMeta) return null;
@@ -60,7 +59,7 @@ function MakersListContainer({
               authorizedFor="maker"
             />
           ]}
-          search={<Search {...entitiesListSearchProps("makers")} />}
+          search={<Search {...searchProps} />}
           entities={makers}
           entityComponent={MakerRow}
           entityComponentProps={{ active: id }}
@@ -69,13 +68,6 @@ function MakersListContainer({
           unit={t("glossary.maker", {
             count: makersMeta.pagination.totalCount
           })}
-          callbacks={{
-            onPageClick: page => e => {
-              e.preventDefault();
-              setPageNumber(page);
-            }
-          }}
-          usesQueryParams
         />
       )}
     </>

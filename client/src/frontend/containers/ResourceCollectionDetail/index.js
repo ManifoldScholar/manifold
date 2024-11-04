@@ -273,8 +273,7 @@ export class ResourceCollectionDetailContainer extends PureComponent {
           slideshowResourcesMeta={slideshowResourcesMeta}
           dispatch={dispatch}
           paginationProps={{
-            paginationClickHandler: this.pageChangeHandlerCreator,
-            paginationTarget: `#${PAGINATION_TARGET}`
+            paginationClickHandler: this.pageChangeHandlerCreator
           }}
           filterProps={{
             onFilterChange: this.filterChange,

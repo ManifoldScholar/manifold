@@ -9,13 +9,7 @@ import EntitiesList, {
   Search,
   AssetRow
 } from "backend/components/list/EntitiesList";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useApiCallback,
-  useSetLocation
-} from "hooks";
+import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import withFilteredLists, { assetFilters } from "hoc/withFilteredLists";
 import { ingestionSourcesAPI } from "api";
@@ -32,18 +26,15 @@ function TextAssetsContainer({
   const { t } = useTranslation();
   const history = useHistory();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const baseFilters = entitiesListSearchParams.initialassets;
-  const [filters, setFilters] = useFilterState(baseFilters);
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: entitiesListSearchParams.initialassets,
+    initSearchProps: entitiesListSearchProps("assets")
+  });
 
   const { data: assets, meta, refresh } = useFetch({
     request: [ingestionSourcesAPI.index, text.id, filters, pagination],
     dependencies: [filters]
-  });
-
-  useSetLocation({
-    filters,
-    page: pagination.number
   });
 
   const renderChildRoutes = () => {
@@ -67,18 +58,6 @@ function TextAssetsContainer({
         })}
       </>
     );
-  };
-
-  const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
-    "assets"
-  );
-  const updatedSetParam = (param, value) => {
-    setParam(param, value);
-    setFilters({ newState: { ...filters, [param.as || param.name]: value } });
-  };
-  const updatedOnReset = () => {
-    onReset();
-    setFilters({ newState: baseFilters });
   };
 
   const onEdit = id => {
@@ -114,25 +93,12 @@ function TextAssetsContainer({
               text={t("texts.assets.add_button_label")}
             />
           ]}
-          search={
-            <Search
-              {...searchProps}
-              setParam={updatedSetParam}
-              onReset={updatedOnReset}
-            />
-          }
+          search={<Search {...searchProps} />}
           pagination={meta?.pagination}
           showCount
           unit={t("glossary.asset", {
             count: meta?.pagination.totalCount
           })}
-          callbacks={{
-            onPageClick: page => e => {
-              e.preventDefault();
-              setPageNumber(page);
-            }
-          }}
-          usesQueryParams
         />
       )}
     </Styled.Wrapper>

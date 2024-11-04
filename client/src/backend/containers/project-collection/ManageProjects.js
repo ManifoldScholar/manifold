@@ -14,12 +14,7 @@ import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import IconComposer from "global/components/utility/IconComposer";
 import { useHistory } from "react-router-dom";
-import {
-  usePaginationState,
-  useSetLocation,
-  useFetch,
-  useApiCallback
-} from "hooks";
+import { useListQueryParams, useFetch, useApiCallback } from "hooks";
 
 function ProjectCollectionManageProjects({
   projectCollection,
@@ -30,7 +25,11 @@ function ProjectCollectionManageProjects({
   const { t } = useTranslation();
   const history = useHistory();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 12);
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 12,
+    initFilters: entitiesListSearchParams.projects,
+    initSearchProps: entitiesListSearchProps("projects")
+  });
 
   const { data: collectionProjects, refresh } = useFetch({
     request: [collectionProjectsAPI.index, projectCollection.id],
@@ -38,13 +37,8 @@ function ProjectCollectionManageProjects({
   });
 
   const { data: projects, meta: projectsMeta } = useFetch({
-    request: [projectsAPI.index, entitiesListSearchParams.projects, pagination],
+    request: [projectsAPI.index, filters, pagination],
     options: { requestKey: requests.beProjects }
-  });
-
-  useSetLocation({
-    filters: entitiesListSearchParams.projects,
-    page: pagination.number
   });
 
   const addCollectionProject = useApiCallback(collectionProjectsAPI.create);
@@ -195,13 +189,7 @@ function ProjectCollectionManageProjects({
         }}
         pagination={projectsMeta.pagination}
         showCount={renderProjectCount()}
-        callbacks={{
-          onPageClick: page => e => {
-            e.preventDefault();
-            setPageNumber(page);
-          }
-        }}
-        search={<Search {...entitiesListSearchProps("projects")} />}
+        search={<Search {...searchProps} />}
       />
 
       <div className="actions">

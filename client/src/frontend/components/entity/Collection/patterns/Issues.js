@@ -47,7 +47,7 @@ function IssuesEntityCollection({
             }
       }
       paginationProps={
-        !issuesMeta || !paginationProps
+        !issuesMeta
           ? {}
           : {
               pagination: get(issuesMeta, "pagination"),

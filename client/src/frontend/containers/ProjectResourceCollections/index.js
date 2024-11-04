@@ -12,14 +12,16 @@ import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityHeadContent from "frontend/components/entity/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 
 export default function ProjectResourceCollectionsContainer({
   project,
   journalBreadcrumbs
 }) {
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
   const { id } = useParams();
+
+  const { pagination } = useListQueryParams({ initSize: 10 });
+
   const { data: resourceCollections, meta, uid } = useFetch({
     request: [projectsAPI.resourceCollections, id, null, pagination]
   });
@@ -70,9 +72,6 @@ export default function ProjectResourceCollectionsContainer({
         <EntityCollection.ProjectResourceCollections
           resourceCollections={resourceCollections}
           resourceCollectionsMeta={meta}
-          paginationProps={{
-            paginationClickHandler: page => () => setPageNumber(page)
-          }}
           itemHeadingLevel={2}
         />
       )}

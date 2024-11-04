@@ -28,10 +28,6 @@ export default class Table extends PureComponent {
     });
   }
 
-  get paginationTarget() {
-    return "#pagination-target";
-  }
-
   get entityCountProps() {
     return {
       pagination: this.props.pagination,
@@ -57,11 +53,7 @@ export default class Table extends PureComponent {
         />
         <Body {...this.props} markup="table" label={countLabel} />
         <Body {...this.props} markup="dl" label={countLabel} />
-        <Pagination
-          pagination={pagination}
-          paginationTarget={this.paginationTarget}
-          onPageClick={onPageClick}
-        />
+        <Pagination pagination={pagination} onPageClick={onPageClick} />
       </div>
     );
   }

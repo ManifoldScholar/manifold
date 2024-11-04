@@ -10,21 +10,18 @@ import lh from "helpers/linkHandler";
 import EntityHeadContent from "frontend/components/entity/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "frontend/components/entity/Collection";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useSetLocation,
-  useListFilters
-} from "hooks";
+import { useFetch, useListFilters, useListQueryParams } from "hooks";
 
 export default function ProjectResourcesContainer({
   project,
   journalBreadcrumbs
 }) {
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const [filters, setFilters] = useFilterState();
   const { id } = useParams();
+
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initSize: 10
+  });
+
   const { data: resources, meta } = useFetch({
     request: [projectsAPI.resources, id, filters, pagination]
   });
@@ -36,28 +33,19 @@ export default function ProjectResourcesContainer({
     dispatch(action);
   }, [dispatch]);
 
-  useSetLocation({ filters, page: pagination.number });
-
   const { slug, resourceKinds, resourceTags, titlePlaintext } =
     project?.attributes ?? {};
 
   const filterProps = useListFilters({
-    onFilterChange: param => setFilters({ newState: param }),
+    onFilterChange: state => setFilters(state),
     initialState: filters,
-    resetState: {},
+    resetState: null,
     options: {
       sort: true,
       kinds: resourceKinds,
       tags: resourceTags
     }
   });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
 
   const breadcrumbs = useMemo(() => {
     const projectCrumb = {
@@ -89,9 +77,6 @@ export default function ProjectResourcesContainer({
         resources={resources}
         resourcesMeta={meta}
         filterProps={filterProps}
-        paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator
-        }}
         itemHeadingLevel={3}
       />
     </>
