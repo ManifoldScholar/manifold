@@ -21,7 +21,6 @@ class MembersTable extends PureComponent {
     members: PropTypes.array.isRequired,
     readingGroup: PropTypes.object.isRequired,
     pagination: PropTypes.object.isRequired,
-    onPageClick: PropTypes.func.isRequired,
     onRemoveMember: PropTypes.func.isRequired,
     t: PropTypes.func
   };
@@ -41,10 +40,6 @@ class MembersTable extends PureComponent {
 
   get pagination() {
     return this.props.pagination;
-  }
-
-  get onPageClick() {
-    return this.props.onPageClick;
   }
 
   get alignCenter() {
@@ -88,7 +83,6 @@ class MembersTable extends PureComponent {
       <Table
         models={this.members}
         pagination={this.pagination}
-        onPageClick={this.onPageClick}
         unit={t("glossary.member", { count: this.members.length })}
         linkCreator={model =>
           lh.link("frontendReadingGroupAnnotations", readingGroup.id, {

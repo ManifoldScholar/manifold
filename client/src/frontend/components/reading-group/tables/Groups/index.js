@@ -18,7 +18,6 @@ export default function GroupsTable(props) {
   const {
     readingGroups: groups,
     pagination,
-    onPageClick,
     filterProps,
     showStatusFilter = false,
     currentUser,
@@ -49,7 +48,6 @@ export default function GroupsTable(props) {
     <Table
       models={groups}
       pagination={pagination}
-      onPageClick={onPageClick}
       unit={t("glossary.group", { count: groups.length })}
       linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
       filters={<ListFilters {...listFilterProps} />}
@@ -189,7 +187,6 @@ GroupsTable.displayName = "ReadingGroup.Table.Groups";
 GroupsTable.propTypes = {
   readingGroups: PropTypes.array.isRequired,
   pagination: PropTypes.object.isRequired,
-  onPageClick: PropTypes.func.isRequired,
   filterProps: PropTypes.object,
   currentUser: PropTypes.object,
   hideActions: PropTypes.bool,

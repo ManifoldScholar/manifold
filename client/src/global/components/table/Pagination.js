@@ -12,14 +12,11 @@ export default class TablePagination extends React.PureComponent {
   }
 
   render() {
-    const { pagination, onPageClick } = this.props;
+    const { pagination } = this.props;
 
     return (
       <div className={this.paginationClassNames}>
-        <Utility.Pagination
-          pagination={pagination}
-          paginationClickHandler={onPageClick}
-        />
+        <Utility.Pagination pagination={pagination} />
       </div>
     );
   }
