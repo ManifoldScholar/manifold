@@ -2,6 +2,7 @@
   "modals": {
     "auto_generate_toc": "The auto generated table of contents will replace all current entries.",
     "auto_generate_toc_body": "Are you sure you want to proceed?",
+    "bulk_delete": "{{ count }} {{ unit }} will be deleted. Are you sure you want to proceed?",
     "close": "Close modal",
     "collecting_search": "<0>Add Content</0><1>{{heading}}</1><2>To add content to your Reading Group, search for it by keyword and type, when you have found content you wish to add, select the star icon for that item to add it to your group.</2>",
     "confirm_body": "This action cannot be undone.",

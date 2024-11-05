@@ -4,6 +4,19 @@ import { Link as RouterLink } from "react-router-dom";
 
 export const Item = styled.li`
   position: relative;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+`;
+
+export const Inner = styled.div`
+  inline-size: 100%;
+`;
+
+export const Checkbox = styled.div`
+  margin-inline-start: 20px;
 `;
 
 export const Link = styled(RouterLink)`
