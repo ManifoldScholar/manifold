@@ -14,26 +14,26 @@ export default function useListQueryParams({
   const { page, ...filterParams } = queryString.parse(search);
 
   const [number, setNumber] = useState(page || initPage);
-  const [size] = useState(initSize);
-  const [collection] = useState(collectionPagination);
+  const size = useRef(initSize);
+  const collection = useRef(collectionPagination);
 
+  // Pagination
   const pagination = useMemo(
-    () => ({ number, size, collectionProjects: collection }),
-    [number, size, collection]
+    () => ({
+      number,
+      size: size.current,
+      collectionProjects: collection.current
+    }),
+    [number]
   );
 
-  const setPageNumber = useCallback(
-    pageNumber => {
-      if (
-        typeof pageNumber === "number" &&
-        pageNumber >= 1 &&
-        number !== pageNumber
-      )
-        setNumber(pageNumber);
-    },
-    [number, setNumber]
-  );
+  useEffect(() => {
+    const parsed = parseInt(page, 10);
 
+    if (parsed >= 1 && parsed !== number) setNumber(parsed);
+  }, [page, number]);
+
+  // Filters
   const filtersReset = useRef(initFilters);
 
   const [filters, setFilterState] = useState({
@@ -43,25 +43,26 @@ export default function useListQueryParams({
 
   const updateFilterParams = useCallback(
     nextFilters => {
-      const query = queryString.stringify({ page: number, ...nextFilters });
+      const query = queryString.stringify({ page: 1, ...nextFilters });
 
       history.push({
         pathname,
         search: query
       });
     },
-    [history, pathname, number]
+    [history, pathname]
   );
 
+  // Frontend updates a filters object
   const setFilters = useCallback(
     newState => {
-      setNumber(1);
       updateFilterParams(newState);
       setFilterState(newState);
     },
     [setFilterState, updateFilterParams]
   );
 
+  // Most backend list still use entityListSearchProps which set filters individually
   const setFilter = useCallback(
     (field, value) => {
       if (
@@ -76,6 +77,7 @@ export default function useListQueryParams({
     [initSearchProps, setFilters, filters]
   );
 
+  // Legacy reset function for entityListSearchProps; frontend uses setFilters
   const onReset = useCallback(() => {
     if (
       initSearchProps?.onReset &&
@@ -86,12 +88,6 @@ export default function useListQueryParams({
     updateFilterParams(filtersReset?.current);
   }, [initSearchProps, setFilters, updateFilterParams]);
 
-  useEffect(() => {
-    const parsed = parseInt(page, 10);
-
-    if (parsed >= 1 && parsed !== number) setNumber(parsed);
-  }, [page, number]);
-
   const searchProps = useMemo(
     () => ({ ...initSearchProps, onReset, setParam: setFilter }),
     [initSearchProps, onReset, setFilter]
@@ -99,10 +95,8 @@ export default function useListQueryParams({
 
   return {
     pagination,
-    setPageNumber,
     filters,
     setFilters,
-    onReset,
     searchProps
   };
 }
