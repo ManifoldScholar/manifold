@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import classNames from "classnames";
 import { matchPath } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -39,6 +40,10 @@ class MobileBreadcrumb extends PureComponent {
     return segments;
   }
 
+  get isBackend() {
+    return this.props.location.pathname.includes("backend");
+  }
+
   match(links) {
     if (!links) return null;
     return links.find(link => {
@@ -64,7 +69,12 @@ class MobileBreadcrumb extends PureComponent {
     const size = segments.length;
 
     return (
-      <nav className="breadcrumb-list hide-82">
+      <nav
+        className={classNames("breadcrumb-list", {
+          "hide-100": this.isBackend,
+          "hide-82": !this.isBackend
+        })}
+      >
         {this.segments.map(link => {
           count += 1;
           return (

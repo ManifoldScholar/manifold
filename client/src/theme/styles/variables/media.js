@@ -3,6 +3,7 @@ import { containerWidth } from "./layout";
 export const breakpoints = {
   120: containerWidth.full,
   110: "1130px",
+  100: "1060px",
   95: "1024px",
   90: "960px",
   85: "880px",

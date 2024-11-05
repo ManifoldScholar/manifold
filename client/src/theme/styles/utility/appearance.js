@@ -49,6 +49,10 @@ export default `
     ${show(82, "block")}
   }
 
+  .show-100 {
+    ${show(100, "block")}
+  }
+
   .hide-60 {
     ${hide(60)}
   }
@@ -59,6 +63,10 @@ export default `
 
   .hide-82 {
     ${hide(82)}
+  }
+
+  .hide-100 {
+    ${hide(100)}
   }
 
   .rel {
