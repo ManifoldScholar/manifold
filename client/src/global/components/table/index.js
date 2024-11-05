@@ -11,7 +11,6 @@ export default class Table extends PureComponent {
 
   static propTypes = {
     pagination: PropTypes.object.isRequired,
-    onPageClick: PropTypes.func.isRequired,
     unit: PropTypes.string.isRequired,
     filters: PropTypes.node,
     filterCount: PropTypes.number,
@@ -37,13 +36,7 @@ export default class Table extends PureComponent {
   }
 
   render() {
-    const {
-      pagination,
-      onPageClick,
-      countLabel,
-      filters,
-      filterCount
-    } = this.props;
+    const { pagination, countLabel, filters, filterCount } = this.props;
     return (
       <div className={this.containerClassNames}>
         <Filters
@@ -53,7 +46,7 @@ export default class Table extends PureComponent {
         />
         <Body {...this.props} markup="table" label={countLabel} />
         <Body {...this.props} markup="dl" label={countLabel} />
-        <Pagination pagination={pagination} onPageClick={onPageClick} />
+        <Pagination pagination={pagination} />
       </div>
     );
   }
