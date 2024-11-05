@@ -291,7 +291,8 @@ export class NavigationMobile extends Component {
 
   render() {
     const navClasses = classnames({
-      "hide-82": true,
+      "hide-82": this.props.mode === "frontend",
+      "hide-100": this.props.mode === "backend",
       "nested-nav": true,
       "nested-nav--open": this.state.open,
       "nested-nav--dark": this.props.mode === "backend"
