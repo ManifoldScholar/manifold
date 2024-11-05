@@ -7,7 +7,8 @@
       "remove_label": "Remove annotation",
       "detail_header": "Annotation Detail",
       "metadata_header": "Metadata",
-      "text_title_placeholder": "[Text Title Missing]"
+      "text_title_placeholder": "[Text Title Missing]",
+      "bulk_actions": "Bulk Actions"
     },
     "makers": {
       "header": "Manage Makers",

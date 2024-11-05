@@ -3,11 +3,19 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import FormattedDate from "global/components/FormattedDate";
 import LabelSet from "../LabelSet";
+import Checkbox from "backend/containers/annotations/bulkActions/Checkbox";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
-function AnnotationRow({ entity, hideCreator }) {
+function AnnotationRow({
+  entity,
+  hideCreator,
+  bulkActionsActive,
+  bulkSelection,
+  dispatchSelection,
+  handleSelectAllUncheck
+}) {
   const { id, attributes } = entity;
   const {
     body,
@@ -24,9 +32,25 @@ function AnnotationRow({ entity, hideCreator }) {
 
   const isPrivate = notePrivate || readingGroupPrivacy === "private";
 
+  const isSelected = !!bulkSelection.filters || bulkSelection.ids?.includes(id);
+
+  const onSelect = () => dispatchSelection({ type: "add", payload: id });
+  const onClear = bulkSelection.filters
+    ? handleSelectAllUncheck(id)
+    : () => dispatchSelection({ type: "remove", payload: id });
+
   return (
     <Styled.Item className="entity-row entity-list__entity scheme-dark">
-      <div className="entity-row__inner entity-row__inner--in-rows">
+      {bulkActionsActive && (
+        <Styled.Checkbox>
+          <Checkbox
+            checked={isSelected}
+            onSelect={onSelect}
+            onClear={onClear}
+          />
+        </Styled.Checkbox>
+      )}
+      <Styled.Inner className="entity-row__inner entity-row__inner--in-rows">
         <div className="entity-row__text entity-row__text--in-rows">
           <Styled.MetaOne>
             <FormattedDate format="MMMM dd, yyyy" date={createdAt} />
@@ -87,14 +111,18 @@ function AnnotationRow({ entity, hideCreator }) {
             )}
           </Styled.Link>
         </div>
-      </div>
+      </Styled.Inner>
     </Styled.Item>
   );
 }
 
 AnnotationRow.propTypes = {
   entity: PropTypes.object,
-  active: PropTypes.string
+  hideCreator: PropTypes.bool,
+  bulkActionsActive: PropTypes.bool,
+  bulkSelection: PropTypes.object,
+  dispatchSelection: PropTypes.func,
+  handleSelectAllUncheck: PropTypes.func
 };
 
 export default AnnotationRow;

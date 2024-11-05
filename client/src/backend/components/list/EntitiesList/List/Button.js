@@ -16,7 +16,9 @@ export default class ListEntitiesListButtonSet extends PureComponent {
     text: PropTypes.string.isRequired,
     authorizedFor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     authorizedTo: PropTypes.string,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    className: PropTypes.string,
+    disabled: PropTypes.bool
   };
 
   static defaultProps = {
@@ -63,7 +65,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
   }
 
   render() {
-    const buttonClassNames = classNames({
+    const buttonClassNames = classNames(this.props.className, {
       "entity-list__button": true,
       "button-lozenge-secondary": true
     });
@@ -72,7 +74,9 @@ export default class ListEntitiesListButtonSet extends PureComponent {
     const isButton = tag === "button";
 
     const Tag = isButton ? "button" : Link;
-    const buttonProps = isButton ? { onClick } : { to: this.path };
+    const buttonProps = isButton
+      ? { onClick, disabled: this.props.disabled }
+      : { to: this.path };
 
     return this.maybeAuthorize(
       <Tag
