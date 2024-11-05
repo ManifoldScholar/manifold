@@ -31,7 +31,7 @@ export default function userFilters({ snapshotState = false } = {}) {
       },
       {
         label: "Role",
-        name: "role",
+        name: "role_name",
         options: roleOptions
       },
       {
