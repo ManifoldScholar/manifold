@@ -92,6 +92,7 @@ class User < ApplicationRecord
   scope :in_default_order, -> { order(:last_name, :first_name) }
   scope :with_order, ->(by) { by.present? ? order(by) : in_default_order }
   scope :by_role, ->(role) { RoleName[role].then { |r| with_role(r.to_sym) if r.present? } }
+  scope :by_role_name, ->(name) { by_role(name) }
   scope :by_cached_role, ->(*role) { where(role: role) }
   scope :email_confirmed, -> { where.not(email_confirmed_at: nil) }
   scope :email_unconfirmed, -> { where(email_confirmed_at: nil) }

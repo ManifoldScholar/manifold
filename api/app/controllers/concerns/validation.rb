@@ -548,7 +548,7 @@ module Validation
   end
 
   def user_filter_params
-    params.permit(filter: [:keyword, :typeahead, :role, :order])[:filter]
+    params.permit(filter: [:keyword, :typeahead, :role_name, :order])[:filter]
   end
 
   def event_filter_params
