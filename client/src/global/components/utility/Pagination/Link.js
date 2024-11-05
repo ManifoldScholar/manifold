@@ -29,7 +29,7 @@ function Link({ page, paginationClickHandler, disabled, children, ...props }) {
   const update = { ...params, page };
 
   const to =
-    typeof handler === "string" ? handler : `${queryString.stringify(update)}`;
+    typeof handler === "string" ? handler : `?${queryString.stringify(update)}`;
 
   return (
     <Styled.Link
