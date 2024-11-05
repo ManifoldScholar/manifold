@@ -21,8 +21,15 @@ export default `
 
       ${respond(
         `grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;`,
-        82
+        100
       )}
+
+      :not(.backend) & {
+        ${respond(
+          `grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;`,
+          82
+        )}
+      }
     }
 
     .header-logo,
