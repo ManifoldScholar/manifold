@@ -1,11 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { resourceCollectionsAPI, projectsAPI, requests } from "api";
-import { connect } from "react-redux";
-import { entityStoreActions } from "actions";
-import { select, meta } from "utils/entityUtils";
-import find from "lodash/find";
+import { useListQueryParams, useFetch, useApiCallback } from "hooks";
 import EntitiesList, {
   Search,
   ResourceRow
@@ -13,213 +10,126 @@ import EntitiesList, {
 import withFilteredLists, { resourceFilters } from "hoc/withFilteredLists";
 import isNil from "lodash/isNil";
 
-const { request, flush } = entityStoreActions;
-const perPage = 5;
+function ResourceCollectionResourcesContainer({
+  resourceCollection,
+  entitiesListSearchProps,
+  entitiesListSearchParams
+}) {
+  const { t } = useTranslation();
 
-class ResourceCollectionResourcesContainerImplementation extends Component {
-  static mapStateToProps = state => {
-    return {
-      resources: select(requests.beResources, state.entityStore),
-      resourcesMeta: meta(requests.beResources, state.entityStore)
-    };
-  };
+  const { project, resources: collectionResources } =
+    resourceCollection?.relationships ?? {};
 
-  static displayName = "ResourceCollection.Resources";
+  const { pagination, filters, setFilters, searchProps } = useListQueryParams({
+    initSize: 5,
+    initFilters: entitiesListSearchParams.resources,
+    initSearchProps: resourceFilters.dynamicParams(
+      entitiesListSearchProps("resources"),
+      project
+    )
+  });
 
-  static propTypes = {
-    dispatch: PropTypes.func,
-    resourceCollection: PropTypes.object,
-    resources: PropTypes.array,
-    resourcesMeta: PropTypes.object,
-    t: PropTypes.func
-  };
+  const { data: resources, meta, refresh } = useFetch({
+    request: [projectsAPI.resources, project.id, filters, pagination],
+    dependencies: [filters],
+    options: { requestKey: requests.beResources }
+  });
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      collectionOnly: false
-    };
-  }
+  const updateCollection = useApiCallback(resourceCollectionsAPI.update);
 
-  componentDidMount() {
-    this.fetchResources();
-  }
+  if (!resourceCollection) return null;
 
-  componentDidUpdate(prevProps) {
-    if (this.filtersChanged(prevProps)) return this.fetchResources();
-  }
-
-  componentWillUnmount() {
-    this.props.dispatch(flush(requests.beResources));
-  }
-
-  get project() {
-    return this.props.project;
-  }
-
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
-  fetchResources(page = 1) {
-    const pagination = { number: page, size: perPage };
-    const filters = this.props.entitiesListSearchParams.resources;
-    const projectId = this.props.resourceCollection.relationships.project.id;
-    const action = request(
-      projectsAPI.resources(projectId, filters, pagination),
-      requests.beResources
-    );
-    this.props.dispatch(action);
-  }
-
-  updateResources(resources, changeTypeIgnored) {
-    const adjustedResources = resources.map(e => {
+  const updateResources = async data => {
+    const adjustedResources = data.map(r => {
       return {
-        id: e.id,
-        type: e.type
+        id: r.id,
+        type: r.type
       };
     });
-    const resourceCollection = {
+
+    const update = {
       type: "resourceCollections",
-      id: this.props.resourceCollection.id,
+      id: resourceCollection.id,
       relationships: { resources: { data: adjustedResources } }
     };
-    const call = resourceCollectionsAPI.update(
-      resourceCollection.id,
-      resourceCollection
-    );
-    const resourceCollectionRequest = request(
-      call,
-      requests.beResourceCollectionUpdate
-    );
-    this.props.dispatch(resourceCollectionRequest);
-  }
 
-  handleResourcesPageChange(event, page) {
-    this.fetchResources(page);
-  }
+    await updateCollection(resourceCollection.id, update);
 
-  pageChangeHandlerCreator = page => {
-    return event => {
-      this.handleResourcesPageChange(event, page);
-    };
+    refresh();
   };
 
-  addToCollection(entity, collectionResources) {
-    const newEntities = collectionResources.slice(0);
-    newEntities.push(entity);
-    this.updateResources(newEntities, "select");
-  }
+  const addRemoveResource = (event, resource) => {
+    event.preventDefault();
 
-  removeFromCollection(entity, collectionResources) {
-    const newEntities = collectionResources.filter(compare => {
-      return compare.id !== entity.id;
+    const isInCollection = !!collectionResources.find(
+      r => r.id === resource.id
+    );
+
+    if (isInCollection) {
+      const update = collectionResources.filter(r => r.id !== resource.id);
+      return updateResources(update);
+    }
+
+    const update = [...collectionResources, resource];
+    return updateResources(update);
+  };
+
+  const toggleCollectionOnly = event => {
+    event.preventDefault();
+
+    setFilters({
+      ...filters,
+      resourceCollection: filters.resourceCollection
+        ? null
+        : resourceCollection.id
     });
-    this.updateResources(newEntities, "remove");
-  }
-
-  handleSelect = (event, resource) => {
-    event.preventDefault();
-    if (this.isInCollection(resource)) {
-      this.removeFromCollection(
-        resource,
-        this.props.resourceCollection.relationships.resources
-      );
-    } else if (!this.isInCollection(resource)) {
-      this.addToCollection(
-        resource,
-        this.props.resourceCollection.relationships.resources
-      );
-    } else {
-      return null;
-    }
   };
 
-  isInCollection = resource => {
-    if (!this.props.resourceCollection.relationships.resources) return false;
-    return !!find(
-      this.props.resourceCollection.relationships.resources,
-      cResource => {
-        return cResource.id === resource.id;
-      }
-    );
-  };
+  const collectionFilterEnabled = !isNil(filters.resourceCollection);
 
-  toggleCollectionOnly = event => {
-    event.preventDefault();
-    const { setParam } = this.props.entitiesListSearchProps("resources");
-    const params = this.props.entitiesListSearchParams.resources;
-    if (params.resourceCollection) {
-      setParam({ name: "resourceCollection" }, null);
-    } else {
-      setParam(
-        { name: "resourceCollection" },
-        this.props.resourceCollection.id
-      );
-    }
-  };
+  const toggleLabel = collectionFilterEnabled
+    ? "resource_collections.show_all_projects"
+    : "resource_collections.show_collection_projects";
 
-  render() {
-    if (!this.props.resources) return null;
-    const params = this.props.entitiesListSearchParams.resources;
-    const collectionFilterEnabled = !isNil(params.resourceCollection);
-    const t = this.props.t;
-
-    const toggleLabel = collectionFilterEnabled
-      ? "resource_collections.show_all_projects"
-      : "resource_collections.show_collection_projects";
-
-    return (
-      <EntitiesList
-        entityComponent={ResourceRow}
-        entityComponentProps={{
-          showSwitch: true,
-          onSwitchChange: this.handleSelect,
-          switchValue: this.isInCollection
-        }}
-        title={t("glossary.resource_title_case_other")}
-        titleStyle="bar"
-        titleTag="h2"
-        titleActions={[
-          {
-            label: toggleLabel,
-            onClick: this.toggleCollectionOnly,
-            icon: collectionFilterEnabled ? "circlePlus24" : "circleMinus24"
-          }
-        ]}
-        entities={this.props.resources}
-        unit={t("glossary.resource", {
-          count: this.props.resourcesMeta?.pagination?.totalCount
-        })}
-        pagination={this.props.resourcesMeta.pagination}
-        showCount
-        callbacks={{
-          onPageClick: this.pageChangeHandlerCreator
-        }}
-        search={
-          <Search
-            {...resourceFilters.dynamicParams(
-              this.props.entitiesListSearchProps("resources"),
-              this.project
-            )}
-          />
+  return (
+    <EntitiesList
+      entityComponent={ResourceRow}
+      entityComponentProps={{
+        showSwitch: true,
+        onSwitchChange: addRemoveResource,
+        switchValue: id => !!collectionResources.find(r => r.id === id)
+      }}
+      title={t("glossary.resource_title_case_other")}
+      titleStyle="bar"
+      titleTag="h2"
+      titleActions={[
+        {
+          label: toggleLabel,
+          onClick: toggleCollectionOnly,
+          icon: collectionFilterEnabled ? "circlePlus24" : "circleMinus24"
         }
-      />
-    );
-  }
+      ]}
+      entities={resources}
+      unit={t("glossary.resource", {
+        count: meta?.pagination?.totalCount
+      })}
+      pagination={meta.pagination}
+      showCount
+      search={<Search {...searchProps} />}
+    />
+  );
 }
 
-export const ResourceCollectionResourcesContainer = withFilteredLists(
-  ResourceCollectionResourcesContainerImplementation,
-  {
-    resources: resourceFilters.defaultParams()
-  }
-);
+export default withFilteredLists(ResourceCollectionResourcesContainer, {
+  resources: resourceFilters.defaultParams()
+});
 
-export default withTranslation()(
-  connect(ResourceCollectionResourcesContainer.mapStateToProps)(
-    ResourceCollectionResourcesContainer
-  )
-);
+ResourceCollectionResourcesContainer.displayName =
+  "ResourceCollection.Resources";
+
+ResourceCollectionResourcesContainer.propTypes = {
+  dispatch: PropTypes.func,
+  resourceCollection: PropTypes.object,
+  resources: PropTypes.array,
+  resourcesMeta: PropTypes.object
+};

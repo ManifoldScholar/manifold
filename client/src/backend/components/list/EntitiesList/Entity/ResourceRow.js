@@ -80,7 +80,7 @@ class ResourceRow extends PureComponent {
       <div className="toggle-indicator">
         <Toggle
           onClick={event => this.onSwitchChange(event, this.resource)}
-          $checked={this.switchValue(this.resource)}
+          $checked={this.switchValue(this.resource.id)}
           role="button"
           tabIndex="0"
         >

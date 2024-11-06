@@ -1,10 +1,8 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { entityStoreActions } from "actions";
+import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import isArray from "lodash/isArray";
-import { select, meta } from "utils/entityUtils";
+import { useFetch, useListQueryParams, useApiCallback } from "hooks";
 import {
   projectsAPI,
   exportTargetsAPI,
@@ -20,55 +18,34 @@ import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import * as Styled from "./styles";
 
-const { request } = entityStoreActions;
+export default function ProjectExportations({
+  project,
+  projectExportationsPerPage = 20
+}) {
+  const { t } = useTranslation();
 
-export class ProjecExportations extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      projectExportations: select(
-        requests.beProjectExportations,
-        state.entityStore
-      ),
-      projectExportationsMeta: meta(
-        requests.beProjectExportations,
-        state.entityStore
-      ),
-      exportTargets: select(requests.beExportTargets, state.entityStore)
-    };
-  };
+  const { pagination } = useListQueryParams({
+    initSize: projectExportationsPerPage
+  });
 
-  static displayName = "Project.Exportations.List";
+  const { data: projectExportations, meta, refresh } = useFetch({
+    request: [projectsAPI.project_exportations, project.id, {}, pagination],
+    options: { requestKey: requests.beProjectExportations }
+  });
 
-  static propTypes = {
-    // the following arguments are required to render the component,
-    // but can be null until the async network request is fulfilled
-    projectExportations: PropTypes.array,
-    projectExportationsMeta: PropTypes.object,
-    exportTargets: PropTypes.array,
-    project: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    projectExportationsPerPage: PropTypes.number,
-    t: PropTypes.func
-  };
+  const { data: exportTargets } = useFetch({
+    request: [exportTargetsAPI.index],
+    options: { requestKey: requests.beExportTargets }
+  });
 
-  static defaultProps = {
-    projectExportationsPerPage: 20
-  };
-
-  componentDidMount() {
-    this.fetchExportations(1);
-    this.fetchExportTargets();
-  }
-
-  get exportTargetSelectOptions() {
+  const exportTargetSelectOptions = () => {
     const targets = [
       {
-        label: this.props.t("projects.forms.exports.location_placeholder"),
+        label: t("projects.forms.exports.location_placeholder"),
         value: "",
         internalValue: ""
       }
     ];
-    const { exportTargets } = this.props;
 
     if (!isArray(exportTargets)) return targets;
 
@@ -80,158 +57,114 @@ export class ProjecExportations extends PureComponent {
       })
     );
     return targets;
-  }
-
-  get hasExportTargets() {
-    return this.props.exportTargets && this.props.exportTargets.length > 0;
-  }
-
-  pageChangeHandlerCreator = page => {
-    return () => this.fetchExportations(page);
   };
 
-  onDelete = projectExportation => {
-    const { dispatch } = this.props;
+  const deleteExportation = useApiCallback(projectExportationsAPI.destroy, {
+    refreshes: requests.beProjectExportations
+  });
 
-    const options = projectExportationsAPI.destroy(projectExportation.id);
-
-    const action = request(options, requests.beProjectExportationDestroy, {
-      refreshes: requests.beProjectExportations
-    });
-
-    dispatch(action);
+  const onDelete = projectExportation => {
+    deleteExportation(projectExportation.id);
   };
 
-  dispatch(action) {
-    this.props.dispatch(action);
-  }
+  const active = false;
 
-  fetchExportTargets() {
-    const action = request(exportTargetsAPI.index(), requests.beExportTargets);
-    this.dispatch(action);
-  }
+  if (!projectExportations) return null;
 
-  fetchExportations(page) {
-    const pagination = {
-      number: page,
-      size: this.props.projectExportationsPerPage
-    };
-    const action = request(
-      projectsAPI.project_exportations(this.props.project.id, {}, pagination),
-      requests.beProjectExportations
-    );
-    this.dispatch(action);
-  }
+  const hasExportTargets = !!exportTargets?.length;
 
-  render() {
-    const active = false;
-    const {
-      projectExportations,
-      project,
-      projectExportationsMeta,
-      t
-    } = this.props;
-
-    if (!projectExportations || !projectExportationsMeta) return null;
-
-    const { pagination } = projectExportationsMeta;
-
-    return (
-      <Authorize
-        entity={project}
-        ability="manageProjectExportations"
-        failureNotification
-        failureRedirect={lh.link("backendProject", project.id)}
+  return (
+    <Authorize
+      entity={project}
+      ability="manageProjectExportations"
+      failureNotification
+      failureRedirect={lh.link("backendProject", project.id)}
+    >
+      <Styled.Form
+        className="form-secondary"
+        suppressModelErrors
+        name={requests.beProjectExportationCreate}
+        model={{
+          attributes: {
+            project_id: project.id,
+            export_target_id: ""
+          }
+        }}
+        update={() => null}
+        create={projectExportationsAPI.create}
+        onSuccess={refresh}
+        doNotWarn
       >
-        <Styled.Form
-          className="form-secondary"
-          suppressModelErrors
-          name={requests.beProjectExportationCreate}
-          model={{
-            attributes: {
-              project_id: project.id,
-              export_target_id: ""
-            }
-          }}
-          update={() => null}
-          create={projectExportationsAPI.create}
-          onSuccess={() => this.fetchExportations(1)}
-          doNotWarn
-        >
-          <Form.FieldGroup label="Project Exports">
-            {this.hasExportTargets && (
-              <Form.Instructions
-                instructions={t("projects.forms.exports.instructions")}
-              />
-            )}
-            {!this.hasExportTargets && (
-              <>
-                <Authorize entity="exportTarget" ability="create">
-                  <Form.Instructions
-                    instructions={t("projects.forms.exports.no_targets")}
-                  />
-                  <div>
-                    <Button
-                      path={lh.link("backendSettingsExportTargetsNew")}
-                      text={t("projects.forms.exports.add_target_label")}
-                      type="add"
-                    />
-                  </div>
-                </Authorize>
-                <Authorize
-                  entity="exportTarget"
-                  ability="create"
-                  successBehavior="hide"
-                >
-                  <Form.Instructions
-                    instructions={t(
-                      "projects.forms.exports.no_targets_unauthorized"
-                    )}
-                  />
-                </Authorize>
-              </>
-            )}
-            {this.hasExportTargets && (
-              <>
-                <Form.Select
-                  rounded
-                  wide
-                  name="attributes[export_target_id]"
-                  label={t("projects.forms.exports.new_export_label")}
-                  options={this.exportTargetSelectOptions}
-                />
-                <Form.Errors wide names={["attributes[base]"]} />
-                <Form.Save
-                  text={t("projects.forms.exports.save")}
-                  wide={false}
-                />
-              </>
-            )}
-          </Form.FieldGroup>
-        </Styled.Form>
-        {this.hasExportTargets && (
-          <div style={{ marginTop: 25 }}>
-            <EntitiesList
-              entityComponent={ProjectExportationRow}
-              entityComponentProps={{ active, onDelete: this.onDelete }}
-              showCount
-              indented
-              pagination={pagination}
-              callbacks={{
-                onPageClick: this.pageChangeHandlerCreator
-              }}
-              entities={projectExportations}
-              unit={t("glossary.export", {
-                count: projectExportations?.length
-              })}
+        <Form.FieldGroup label="Project Exports">
+          {hasExportTargets && (
+            <Form.Instructions
+              instructions={t("projects.forms.exports.instructions")}
             />
-          </div>
-        )}
-      </Authorize>
-    );
-  }
+          )}
+          {!hasExportTargets && (
+            <>
+              <Authorize entity="exportTarget" ability="create">
+                <Form.Instructions
+                  instructions={t("projects.forms.exports.no_targets")}
+                />
+                <div>
+                  <Button
+                    path={lh.link("backendSettingsExportTargetsNew")}
+                    text={t("projects.forms.exports.add_target_label")}
+                    type="add"
+                  />
+                </div>
+              </Authorize>
+              <Authorize
+                entity="exportTarget"
+                ability="create"
+                successBehavior="hide"
+              >
+                <Form.Instructions
+                  instructions={t(
+                    "projects.forms.exports.no_targets_unauthorized"
+                  )}
+                />
+              </Authorize>
+            </>
+          )}
+          {hasExportTargets && (
+            <>
+              <Form.Select
+                rounded
+                wide
+                name="attributes[export_target_id]"
+                label={t("projects.forms.exports.new_export_label")}
+                options={exportTargetSelectOptions()}
+              />
+              <Form.Errors wide names={["attributes[base]"]} />
+              <Form.Save text={t("projects.forms.exports.save")} wide={false} />
+            </>
+          )}
+        </Form.FieldGroup>
+      </Styled.Form>
+      {hasExportTargets && (
+        <div style={{ marginTop: 25 }}>
+          <EntitiesList
+            entityComponent={ProjectExportationRow}
+            entityComponentProps={{ active, onDelete }}
+            showCount
+            indented
+            pagination={meta.pagination}
+            entities={projectExportations}
+            unit={t("glossary.export", {
+              count: projectExportations?.length
+            })}
+          />
+        </div>
+      )}
+    </Authorize>
+  );
 }
 
-export default withTranslation()(
-  connect(ProjecExportations.mapStateToProps)(ProjecExportations)
-);
+ProjectExportations.displayName = "Project.Exportations.List";
+
+ProjectExportations.propTypes = {
+  project: PropTypes.object.isRequired,
+  projectExportationsPerPage: PropTypes.number
+};
