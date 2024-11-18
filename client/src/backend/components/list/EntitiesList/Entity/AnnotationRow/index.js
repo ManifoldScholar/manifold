@@ -32,10 +32,11 @@ function AnnotationRow({
 
   const isPrivate = notePrivate || readingGroupPrivacy === "private";
 
-  const isSelected = !!bulkSelection.filters || bulkSelection.ids?.includes(id);
+  const isSelected =
+    !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
 
   const onSelect = () => dispatchSelection({ type: "add", payload: id });
-  const onClear = bulkSelection.filters
+  const onClear = bulkSelection?.filters
     ? handleSelectAllUncheck(id)
     : () => dispatchSelection({ type: "remove", payload: id });
 
