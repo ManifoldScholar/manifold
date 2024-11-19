@@ -810,6 +810,13 @@ const routes = {
           helper: g => `/backend/groups/${g}`,
           routes: [
             {
+              name: "backendReadingGroupDetails",
+              exact: true,
+              component: "ReadingGroupDetails",
+              path: "/backend/groups/:id/details",
+              helper: g => `/backend/groups/${g}/details`
+            },
+            {
               name: "backendReadingGroupMembers",
               exact: true,
               component: "ReadingGroupMembers",
