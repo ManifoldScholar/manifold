@@ -11,7 +11,19 @@ export const DeleteButton = styled(Button)`
   }
 
   &:disabled {
-    color: var(--color-neutral-text-light);
+    color: var(--color-base-neutral75);
     pointer-events: none;
+  }
+`;
+
+export const Toggle = styled(Button)`
+  &.active {
+    color: var(--color-neutral-text-light);
+
+    &:hover {
+      color: var(--color-neutral-text-extra-dark);
+      background: var(--color-neutral-text-light);
+      border: var(--color-neutral-text-light);
+    }
   }
 `;
