@@ -7,7 +7,7 @@ export function bulkActionsReducer(state, action) {
     case "removeAndClear":
       return { filters: null, ids: action.payload };
     case "setFilters":
-      return { ...state, filters: action.payload };
+      return { ids: [], filters: action.payload };
     case "reset":
       return action.payload;
     default:

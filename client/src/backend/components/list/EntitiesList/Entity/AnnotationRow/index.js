@@ -13,8 +13,8 @@ function AnnotationRow({
   hideCreator,
   bulkActionsActive,
   bulkSelection,
-  dispatchSelection,
-  handleSelectAllUncheck
+  addItem,
+  removeItem
 }) {
   const { id, attributes } = entity;
   const {
@@ -35,19 +35,14 @@ function AnnotationRow({
   const isSelected =
     !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
 
-  const onSelect = () => dispatchSelection({ type: "add", payload: id });
-  const onClear = bulkSelection?.filters
-    ? handleSelectAllUncheck(id)
-    : () => dispatchSelection({ type: "remove", payload: id });
-
   return (
     <Styled.Item className="entity-row entity-list__entity scheme-dark">
       {bulkActionsActive && (
         <Styled.Checkbox>
           <Checkbox
             checked={isSelected}
-            onSelect={onSelect}
-            onClear={onClear}
+            onSelect={() => addItem(id)}
+            onClear={() => removeItem(id)}
           />
         </Styled.Checkbox>
       )}
