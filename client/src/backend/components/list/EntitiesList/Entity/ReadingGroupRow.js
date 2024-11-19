@@ -46,7 +46,7 @@ function ReadingGroupRow({ active, entity, onDelete, ...props }) {
         : [])
     ],
     active: active === id,
-    onRowClick: lh.link("backendReadingGroupMembers", id),
+    onRowClick: lh.link("backendReadingGroupDetails", id),
     rowClickMode: "inline"
   };
 
