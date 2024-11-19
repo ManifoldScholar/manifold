@@ -164,6 +164,7 @@ export default {
   ReadingGroupWrapper: ReadingGroup.Wrapper,
   ReadingGroupMembers: ReadingGroup.Members,
   ReadingGroupAnnotations: ReadingGroup.Annotations,
+  ReadingGroupDetails: ReadingGroup.Details,
   AnnotationsList: Annotations.List,
   AnnotationDetail: Annotations.Detail,
   UserWrapper: User.Wrapper,
