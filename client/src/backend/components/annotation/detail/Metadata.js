@@ -67,10 +67,8 @@ export default function AnnotationMetadata({
 AnnotationMetadata.displayName = "Annotation.Detail.Metadata";
 
 AnnotationMetadata.propTypes = {
-  id: PropTypes.string.isRequired,
   creator: PropTypes.object,
-  createdAt: PropTypes.string.isRequired,
-  textSlug: PropTypes.string,
-  textSectionId: PropTypes.string,
-  textTitle: PropTypes.string
+  createdAt: PropTypes.string,
+  textTitle: PropTypes.string,
+  readingGroupName: PropTypes.string
 };
