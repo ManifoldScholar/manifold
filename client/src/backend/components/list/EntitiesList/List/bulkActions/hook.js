@@ -52,7 +52,7 @@ export default function useBulkActions(records, filters) {
   const removeItem = id =>
     bulkSelection?.filters
       ? handleSelectAllUncheck(id)
-      : () => dispatchSelection({ type: "remove", payload: id });
+      : dispatchSelection({ type: "remove", payload: id });
 
   return {
     bulkActionsActive,
