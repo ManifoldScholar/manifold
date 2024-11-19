@@ -14,6 +14,11 @@ import {
 } from "hooks";
 import withFilteredLists, { readingGroupFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
+import {
+  useBulkActions,
+  SelectAll,
+  BulkActionButtons
+} from "backend/components/list/EntitiesList/List/bulkActions";
 
 function ReadingGroupsList({
   entitiesListSearchProps,
@@ -34,16 +39,31 @@ function ReadingGroupsList({
     dependencies: [filters]
   });
 
+  const {
+    bulkActionsActive,
+    toggleBulkActions,
+    resetBulkSelection,
+    handleSelectAll,
+    bulkSelection,
+    bulkSelectionEmpty,
+    addItem,
+    removeItem
+  } = useBulkActions(readingGroups, filters);
+
   const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
     "readingGroups"
   );
   const updatedSetParam = (param, value) => {
     setParam(param, value);
     setFilters({ newState: { ...filters, [param.as || param.name]: value } });
+
+    if (!bulkSelectionEmpty) resetBulkSelection();
   };
   const updatedOnReset = () => {
     onReset();
     setFilters({ newState: baseFilters });
+
+    if (!bulkSelectionEmpty) resetBulkSelection();
   };
 
   const destroyRG = useApiCallback(readingGroupsAPI.destroy);
@@ -58,12 +78,40 @@ function ReadingGroupsList({
       });
   };
 
+  const bulkDelete = useApiCallback(readingGroupsAPI.bulkDelete);
+
+  const unit = t("glossary.reading_group", {
+    count: meta?.pagination?.totalCount
+  });
+
+  const onBulkDelete = () => {
+    const count = bulkSelection.filters
+      ? meta?.pagination?.totalCount
+      : bulkSelection.ids.length;
+    const heading = t("modals.bulk_delete", { count, unit });
+    const message = t("modals.confirm_body");
+    if (confirm)
+      confirm(heading, message, async () => {
+        const params = bulkSelection.filters
+          ? { filters: bulkSelection.filters }
+          : { annotationIds: bulkSelection.ids };
+        await bulkDelete(params);
+        refresh();
+      });
+  };
+
   return (
     readingGroups && (
       <>
         <EntitiesList
           entityComponent={ReadingGroupRow}
-          entityComponentProps={{ onDelete }}
+          entityComponentProps={{
+            onDelete,
+            bulkActionsActive,
+            bulkSelection,
+            addItem,
+            removeItem
+          }}
           entities={readingGroups}
           title={t("glossary.reading_group_title_case", {
             count: meta.pagination.totalCount
@@ -78,14 +126,32 @@ function ReadingGroupsList({
             />
           }
           pagination={meta.pagination}
-          showCount
+          showCount={
+            bulkActionsActive ? (
+              <SelectAll
+                pagination={meta.pagination}
+                unit={unit}
+                onSelect={handleSelectAll}
+                onClear={resetBulkSelection}
+                allSelected={!!bulkSelection.filters}
+              />
+            ) : (
+              true
+            )
+          }
           showCountInTitle
-          unit={t("glossary.reading_group", {
-            count: meta.pagination.totalCount
-          })}
+          unit={unit}
           callbacks={{
             onPageClick: page => () => setPageNumber(page)
           }}
+          buttons={[
+            <BulkActionButtons
+              active={bulkActionsActive}
+              onBulkDelete={onBulkDelete}
+              toggleBulkActions={toggleBulkActions}
+              actionsDisabled={bulkSelectionEmpty}
+            />
+          ]}
         />
       </>
     )
