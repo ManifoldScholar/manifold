@@ -118,12 +118,6 @@ class Navigation {
             ability: "update"
           },
           {
-            label: "titles.groups",
-            route: "backendRecordsReadingGroups",
-            entity: "readingGroup",
-            ability: "update"
-          },
-          {
             label: "titles.annotations",
             route: "backendRecordsAnnotations",
             entity: "annotation",

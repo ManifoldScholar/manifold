@@ -34,3 +34,5 @@ export default function Buttons({
     </>
   );
 }
+
+Buttons.displayName = "List.Entities.List.BulkActionButtons";
