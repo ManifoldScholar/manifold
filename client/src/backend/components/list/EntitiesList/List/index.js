@@ -48,8 +48,14 @@ export default class ListEntities extends PureComponent {
 
   static validateEnsureButton = (propValue, key) => {
     const value = propValue[key];
-    if (!value) return;
-    if (!value.type || value.type.displayName !== "List.Entities.List.Button") {
+    if (!value || typeof value) return;
+    if (
+      !value.type ||
+      !(
+        value.type.displayName === "List.Entities.List.Button" ||
+        value.type.displayName === "List.Entities.List.BulkActionButtons"
+      )
+    ) {
       return new Error(this.errors.invalidButton);
     }
   };
