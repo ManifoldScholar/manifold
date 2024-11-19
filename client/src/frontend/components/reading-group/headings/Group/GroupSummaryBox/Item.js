@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
-function GroupSummaryItem({ labelText, icon, children }) {
+function GroupSummaryItem({ labelText, icon, children, block }) {
   return (
     <div>
       <Styled.Term>
@@ -13,7 +13,7 @@ function GroupSummaryItem({ labelText, icon, children }) {
           textStyle={"large"}
         />
       </Styled.Term>
-      <Styled.Value>{children}</Styled.Value>
+      <Styled.Value $block={block}>{children}</Styled.Value>
     </div>
   );
 }

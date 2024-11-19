@@ -378,6 +378,13 @@ class Navigation {
     const args = [group.id];
     return [
       {
+        label: "titles.details",
+        route: "backendReadingGroupDetails",
+        entity: group,
+        ability: "read",
+        args
+      },
+      {
         label: "titles.members",
         route: "backendReadingGroupMembers",
         entity: group,

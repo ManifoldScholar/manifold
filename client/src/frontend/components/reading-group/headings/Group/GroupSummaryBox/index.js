@@ -45,7 +45,7 @@ function collectedIdsForCollectionByType(readingGroup) {
   );
 }
 
-function GroupSummaryBox({ readingGroup }) {
+function GroupSummaryBox({ readingGroup, isBackend }) {
   const uid = useUID();
   const { t } = useTranslation();
   const {
@@ -54,7 +54,8 @@ function GroupSummaryBox({ readingGroup }) {
     annotationsCount,
     membershipsCount,
     currentUserRole,
-    currentUserCounts
+    currentUserCounts,
+    creatorName
   } = readingGroup.attributes;
   const collected = collectedIdsForCollectionByType(readingGroup);
 
@@ -76,9 +77,15 @@ function GroupSummaryBox({ readingGroup }) {
           <Item labelText={t("glossary.member_other")} icon="readingGroup24">
             {membershipsCount}
           </Item>
-          <Item labelText={t("common.role")} icon="avatar24">
-            {currentUserRole}
-          </Item>
+          {isBackend ? (
+            <Item labelText={t("glossary.creator_one")} icon="avatar24" block>
+              {creatorName}
+            </Item>
+          ) : (
+            <Item labelText={t("common.role")} icon="avatar24">
+              {currentUserRole}
+            </Item>
+          )}
         </Section>
         <Section label={t("glossary.group_one")}>
           <Item
@@ -94,20 +101,22 @@ function GroupSummaryBox({ readingGroup }) {
             {highlightsCount}
           </Item>
         </Section>
-        <Section label={t("common.yours")}>
-          <Item
-            labelText={t("glossary.annotation_other")}
-            icon="interactAnnotate32"
-          >
-            {currentUserCounts.annotationsCount}
-          </Item>
-          <Item
-            labelText={t("glossary.highlight_other")}
-            icon="interactHighlight32"
-          >
-            {currentUserCounts.highlightsCount}
-          </Item>
-        </Section>
+        {!isBackend && (
+          <Section label={t("common.yours")}>
+            <Item
+              labelText={t("glossary.annotation_other")}
+              icon="interactAnnotate32"
+            >
+              {currentUserCounts.annotationsCount}
+            </Item>
+            <Item
+              labelText={t("glossary.highlight_other")}
+              icon="interactHighlight32"
+            >
+              {currentUserCounts.highlightsCount}
+            </Item>
+          </Section>
+        )}
         <Section label={t("common.content")} columns={2}>
           <Item labelText={t("glossary.project_other")} icon="BELibrary64">
             {getCollectedCount("projects")}
@@ -136,7 +145,8 @@ function GroupSummaryBox({ readingGroup }) {
 GroupSummaryBox.displayName = "ReadingGroup.GroupSummaryBox";
 
 GroupSummaryBox.propTypes = {
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
+  isBackend: PropTypes.bool
 };
 
 export default GroupSummaryBox;
