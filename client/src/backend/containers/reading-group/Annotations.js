@@ -14,15 +14,14 @@ import {
 } from "hooks";
 import EntitiesList, {
   Search,
-  AnnotationRow,
-  Button
+  AnnotationRow
 } from "backend/components/list/EntitiesList";
 import withConfirmation from "hoc/withConfirmation";
 import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
 import {
   useBulkActions,
   SelectAll,
-  DeleteButton
+  BulkActionButtons
 } from "backend/components/list/EntitiesList/List/bulkActions";
 
 function ReadingGroupAnnotationsContainer({
@@ -153,30 +152,12 @@ function ReadingGroupAnnotationsContainer({
             onPageClick: page => () => setPageNumber(page)
           }}
           buttons={[
-            <>
-              {bulkActionsActive && (
-                <DeleteButton
-                  tag="button"
-                  onClick={onBulkDelete}
-                  text={t("actions.delete")}
-                  authorizedFor="annotation"
-                  type="delete"
-                  icon="delete24"
-                  disabled={bulkSelectionEmpty}
-                />
-              )}
-              <Button
-                tag="button"
-                onClick={toggleBulkActions}
-                text={
-                  bulkActionsActive
-                    ? t("actions.exit")
-                    : t("records.annotations.bulk_actions")
-                }
-                authorizedFor="annotation"
-                type="delete"
-              />
-            </>
+            <BulkActionButtons
+              active={bulkActionsActive}
+              onBulkDelete={onBulkDelete}
+              toggleBulkActions={toggleBulkActions}
+              actionsDisabled={bulkSelectionEmpty}
+            />
           ]}
         />
       )}
