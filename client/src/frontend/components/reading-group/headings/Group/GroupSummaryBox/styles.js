@@ -36,9 +36,10 @@ export const Term = styled.dt`
 `;
 
 export const Value = styled.dd`
-  display: inline;
+  display: ${({ $block }) => ($block ? "block" : "inline")};
   margin: 0;
   color: var(--strong-color);
+  margin-inline-start: ${({ $block }) => ($block ? "34px" : 0)};
 `;
 
 export const SectionLabel = styled.h3`
