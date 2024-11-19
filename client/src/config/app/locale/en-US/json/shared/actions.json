@@ -11,6 +11,7 @@
     "archive": "Archive",
     "back": "Back",
     "browse": "Browse",
+    "bulk_delete": "Bulk Delete",
     "cancel": "Cancel",
     "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
     "clear_selection": "Clear Selection",
