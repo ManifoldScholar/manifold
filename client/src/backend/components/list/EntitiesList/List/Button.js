@@ -11,7 +11,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
   static propTypes = {
     tag: PropTypes.oneOf(["button", "link"]),
     path: PropTypes.string,
-    type: PropTypes.oneOf(["add", "import", "reload"]),
+    type: PropTypes.oneOf(["add", "import", "reload", "bulkActions"]),
     icon: PropTypes.string,
     text: PropTypes.string.isRequired,
     authorizedFor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),

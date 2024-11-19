@@ -22,7 +22,7 @@ GroupSummaryItem.displayName = "ReadingGroup.GroupSummaryBox.Item";
 
 GroupSummaryItem.propTypes = {
   labelText: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   icon: PropTypes.string
 };
 
