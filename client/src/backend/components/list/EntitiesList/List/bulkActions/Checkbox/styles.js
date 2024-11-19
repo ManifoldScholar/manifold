@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import { screenReaderText, defaultFocusStyle } from "theme/styles/mixins";
 
+export const Outer = styled.div`
+  margin-inline-start: 20px;
+`;
+
 export const Wrapper = styled.label`
   display: flex !important;
   gap: 11px;

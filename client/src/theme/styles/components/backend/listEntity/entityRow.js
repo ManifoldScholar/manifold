@@ -15,6 +15,15 @@ export default `
     list-style: none;
     user-select: none;
 
+    &--bulk-actions {
+      position: relative;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid;
+    }
+
     &__inner {
       position: relative;
       display: flex;
@@ -23,6 +32,10 @@ export default `
       border-bottom: 1px solid var(--color-neutral-ui-dull-light);
       transition: background-color var(--transition-duration-default) ease-out,
         box-shadow var(--transition-duration-default) ease-out;
+
+      .entity-row--bulk-actions & {
+        inline-size: 100%;
+      }
 
       &--in-grid {
         ${respond(

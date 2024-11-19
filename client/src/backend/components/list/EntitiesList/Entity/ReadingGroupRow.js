@@ -4,9 +4,19 @@ import FormattedDate from "global/components/FormattedDate";
 import lh from "helpers/linkHandler";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
+import Checkbox from "../List/bulkActions/Checkbox";
 import { useTranslation } from "react-i18next";
 
-function ReadingGroupRow({ active, entity, onDelete, ...props }) {
+function ReadingGroupRow({
+  active,
+  entity,
+  onDelete,
+  bulkActionsActive,
+  bulkSelection,
+  addItem,
+  removeItem,
+  ...props
+}) {
   const { id, attributes } = entity;
   const {
     name,
@@ -16,7 +26,11 @@ function ReadingGroupRow({ active, entity, onDelete, ...props }) {
     annotationsCount,
     annotationFlagsCount
   } = attributes;
+
   const { t } = useTranslation();
+
+  const isSelected =
+    !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
 
   const additionalProps = {
     title: name,
@@ -47,10 +61,17 @@ function ReadingGroupRow({ active, entity, onDelete, ...props }) {
     ],
     active: active === id,
     onRowClick: lh.link("backendReadingGroupDetails", id),
-    rowClickMode: "inline"
+    rowClickMode: "inline",
+    prepend: bulkActionsActive && (
+      <Checkbox
+        checked={isSelected}
+        onSelect={() => addItem(id)}
+        onClear={() => removeItem(id)}
+      />
+    )
   };
 
-  const utility = (
+  const utility = !bulkActionsActive ? (
     <button
       className="entity-row__utility-button"
       title={t("backend.actions.publish_feature")}
@@ -58,6 +79,8 @@ function ReadingGroupRow({ active, entity, onDelete, ...props }) {
     >
       <Utility.IconComposer icon="delete32" size={26} />
     </button>
+  ) : (
+    undefined
   );
 
   return <EntityRow utility={utility} {...props} {...additionalProps} />;

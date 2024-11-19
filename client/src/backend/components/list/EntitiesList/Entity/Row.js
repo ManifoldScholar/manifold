@@ -75,6 +75,10 @@ class EntitiesListRow extends PureComponent {
     return [label];
   }
 
+  get prepend() {
+    return this.props.prepend;
+  }
+
   get hasLabels() {
     return this.labels.length > 0;
   }
@@ -101,6 +105,10 @@ class EntitiesListRow extends PureComponent {
 
   get hasMeta() {
     return has(this.props, "meta");
+  }
+
+  get hasPrepend() {
+    return has(this.props, "prepend");
   }
 
   get utility() {
@@ -150,6 +158,13 @@ class EntitiesListRow extends PureComponent {
 
   get isDragging() {
     return this.props.isDragging;
+  }
+
+  get itemClassNames() {
+    return classNames({
+      "entity-row entity-list__entity": true,
+      "scheme-dark entity-row--bulk-actions": this.hasPrepend
+    });
   }
 
   get figureClassNames() {
@@ -319,7 +334,8 @@ class EntitiesListRow extends PureComponent {
     return (
       <UIDConsumer>
         {id => (
-          <li className="entity-row entity-list__entity">
+          <li className={this.itemClassNames}>
+            {this.hasPrepend && <>{this.prepend}</>}
             {this.blockLink(
               <div className={this.rowClassNames}>
                 {this.figure &&
