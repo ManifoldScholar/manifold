@@ -1,6 +1,6 @@
 import Checkbox from "./Checkbox";
 import SelectAll from "./SelectAll";
 import useBulkActions from "./hook";
-import { DeleteButton } from "./DeleteButton";
+import BulkActionButtons from "./Buttons";
 
-export { Checkbox, SelectAll, DeleteButton, useBulkActions };
+export { Checkbox, SelectAll, BulkActionButtons, useBulkActions };

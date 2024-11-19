@@ -3,10 +3,8 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { annotationsAPI } from "api";
 import EntitiesList, {
-  Button,
   Search,
-  AnnotationRow,
-  DeleteButton
+  AnnotationRow
 } from "backend/components/list/EntitiesList";
 import {
   useFetch,
@@ -21,7 +19,8 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import {
   useBulkActions,
-  SelectAll
+  SelectAll,
+  BulkActionButtons
 } from "backend/components/list/EntitiesList/List/bulkActions";
 
 function AnnotationsList({
@@ -151,30 +150,12 @@ function AnnotationsList({
             onPageClick: page => () => setPageNumber(page)
           }}
           buttons={[
-            <>
-              {bulkActionsActive && (
-                <DeleteButton
-                  tag="button"
-                  onClick={onBulkDelete}
-                  text={t("actions.delete")}
-                  authorizedFor="annotation"
-                  type="delete"
-                  icon="delete24"
-                  disabled={bulkSelectionEmpty}
-                />
-              )}
-              <Button
-                tag="button"
-                onClick={toggleBulkActions}
-                text={
-                  bulkActionsActive
-                    ? t("actions.exit")
-                    : t("records.annotations.bulk_actions")
-                }
-                authorizedFor="annotation"
-                type="delete"
-              />
-            </>
+            <BulkActionButtons
+              active={bulkActionsActive}
+              onBulkDelete={onBulkDelete}
+              toggleBulkActions={toggleBulkActions}
+              actionsDisabled={bulkSelectionEmpty}
+            />
           ]}
         />
       )}
