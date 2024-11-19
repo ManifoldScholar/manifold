@@ -15,6 +15,10 @@ module V1
     typed_attribute :comments_count, Types::Integer.meta(read_only: true)
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
     typed_attribute :creator_id, Types::Serializer::ID.meta(read_only: true)
+    typed_attribute :creator_name,
+                    Types::String.meta(read_only: true) do |object, _params|
+                      object.creator_name if object.creator.present?
+                    end
     typed_attribute :course, Types::Hash.schema(
       enabled: Types::Bool,
       starts_on: Types::Date.optional,
