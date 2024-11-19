@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import FormattedDate from "global/components/FormattedDate";
 import LabelSet from "../LabelSet";
-import Checkbox from "backend/containers/annotations/bulkActions/Checkbox";
+import Checkbox from "../../List/bulkActions/Checkbox";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";

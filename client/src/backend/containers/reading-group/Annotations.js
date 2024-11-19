@@ -14,10 +14,16 @@ import {
 } from "hooks";
 import EntitiesList, {
   Search,
-  AnnotationRow
+  AnnotationRow,
+  Button
 } from "backend/components/list/EntitiesList";
 import withConfirmation from "hoc/withConfirmation";
 import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
+import {
+  useBulkActions,
+  SelectAll,
+  DeleteButton
+} from "backend/components/list/EntitiesList/List/bulkActions";
 
 function ReadingGroupAnnotationsContainer({
   refresh,
@@ -27,32 +33,14 @@ function ReadingGroupAnnotationsContainer({
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
-  const closeUrl = lh.link("backendReadingGroupAnnotations", readingGroup.id);
+  const { t } = useTranslation();
 
   const [pagination, setPageNumber] = usePaginationState();
-
   const baseFilters = entitiesListSearchParams.initialannotations;
   const [filters, setFilters] = useFilterState({
     ...baseFilters,
     formats: ["annotation"]
   });
-
-  const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
-    "annotations"
-  );
-  const updatedSetParam = (param, value) => {
-    setParam(param, value);
-    setFilters({ newState: { ...filters, [param.as || param.name]: value } });
-  };
-  const updatedOnReset = () => {
-    onReset();
-    setFilters({
-      newState: {
-        ...baseFilters,
-        formats: ["annotation"]
-      }
-    });
-  };
 
   const { data, refresh: refreshAnnotations, meta } = useFetch({
     request: [
@@ -63,21 +51,61 @@ function ReadingGroupAnnotationsContainer({
     ]
   });
 
-  const { t } = useTranslation();
+  const {
+    bulkActionsActive,
+    toggleBulkActions,
+    resetBulkSelection,
+    handleSelectAll,
+    bulkSelection,
+    bulkSelectionEmpty,
+    addItem,
+    removeItem
+  } = useBulkActions(data, filters);
 
-  const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
+  const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
+    "annotations"
+  );
+  const updatedSetParam = (param, value) => {
+    setParam(param, value);
+    setFilters({ newState: { ...filters, [param.as || param.name]: value } });
 
-  const onDelete = (id, name) => {
-    const heading = t("modals.delete_annotation", { name });
+    if (!bulkSelectionEmpty) resetBulkSelection();
+  };
+  const updatedOnReset = () => {
+    onReset();
+    setFilters({
+      newState: {
+        ...baseFilters,
+        formats: ["annotation"]
+      }
+    });
+
+    if (!bulkSelectionEmpty) resetBulkSelection();
+  };
+
+  const bulkDelete = useApiCallback(annotationsAPI.bulkDelete);
+
+  const unit = t("glossary.annotation", {
+    count: meta?.pagination?.totalCount
+  });
+
+  const onBulkDelete = () => {
+    const count = bulkSelection.filters
+      ? meta?.pagination?.totalCount
+      : bulkSelection.ids.length;
+    const heading = t("modals.bulk_delete", { count, unit });
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
-        await deleteAnnotation(id);
-        refreshAnnotations();
+        const params = bulkSelection.filters
+          ? { filters: bulkSelection.filters }
+          : { annotationIds: bulkSelection.ids };
+        await bulkDelete(params);
+        refresh();
       });
   };
 
-  if (!data) return null;
+  const closeUrl = lh.link("backendReadingGroupAnnotations", readingGroup.id);
 
   return (
     <Authorize
@@ -86,29 +114,72 @@ function ReadingGroupAnnotationsContainer({
       failureNotification
       failureRedirect={lh.link("backendReadingGroups")}
     >
-      <EntitiesList
-        entityComponent={AnnotationRow}
-        entityComponentProps={{ readingGroup, onDelete }}
-        title={t("reading_groups.annotations_header")}
-        titleStyle="bar"
-        titleTag="h2"
-        entities={data}
-        unit={t("glossary.annotation", {
-          count: meta?.pagination?.totalCount || 0
-        })}
-        pagination={meta.pagination}
-        search={
-          <Search
-            {...searchProps}
-            setParam={updatedSetParam}
-            onReset={updatedOnReset}
-          />
-        }
-        showCount
-        callbacks={{
-          onPageClick: page => () => setPageNumber(page)
-        }}
-      />
+      {!!data && (
+        <EntitiesList
+          entityComponent={AnnotationRow}
+          entityComponentProps={{
+            bulkActionsActive,
+            bulkSelection,
+            addItem,
+            removeItem
+          }}
+          title={t("reading_groups.annotations_header")}
+          titleStyle="bar"
+          titleTag="h2"
+          entities={data}
+          unit={unit}
+          pagination={meta.pagination}
+          search={
+            <Search
+              {...searchProps}
+              setParam={updatedSetParam}
+              onReset={updatedOnReset}
+            />
+          }
+          showCount={
+            bulkActionsActive ? (
+              <SelectAll
+                pagination={meta.pagination}
+                unit={unit}
+                onSelect={handleSelectAll}
+                onClear={resetBulkSelection}
+                allSelected={!!bulkSelection.filters}
+              />
+            ) : (
+              true
+            )
+          }
+          callbacks={{
+            onPageClick: page => () => setPageNumber(page)
+          }}
+          buttons={[
+            <>
+              {bulkActionsActive && (
+                <DeleteButton
+                  tag="button"
+                  onClick={onBulkDelete}
+                  text={t("actions.delete")}
+                  authorizedFor="annotation"
+                  type="delete"
+                  icon="delete24"
+                  disabled={bulkSelectionEmpty}
+                />
+              )}
+              <Button
+                tag="button"
+                onClick={toggleBulkActions}
+                text={
+                  bulkActionsActive
+                    ? t("actions.exit")
+                    : t("records.annotations.bulk_actions")
+                }
+                authorizedFor="annotation"
+                type="delete"
+              />
+            </>
+          ]}
+        />
+      )}
       {childRoutes(route, {
         drawer: true,
         drawerProps: {
@@ -121,7 +192,7 @@ function ReadingGroupAnnotationsContainer({
           refresh,
           refreshAnnotations,
           readingGroup,
-          closeUrl: lh.link("backendReadingGroupAnnotations", readingGroup.id)
+          closeUrl
         }
       })}
     </Authorize>
