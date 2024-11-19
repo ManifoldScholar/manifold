@@ -47,9 +47,9 @@ function ReadingGroupMembersContainer({
   return (
     <Authorize
       entity={readingGroup}
-      ability="read"
+      ability="update"
       failureNotification
-      failureRedirect={lh.link("backendReadingGroup", readingGroup.id)}
+      failureRedirect={lh.link("backendReadingGroups")}
     >
       <EntitiesList
         entityComponent={ReadingGroupMemberRow}
