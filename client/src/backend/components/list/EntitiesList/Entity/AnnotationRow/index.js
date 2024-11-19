@@ -28,6 +28,7 @@ function AnnotationRow({
     creatorId,
     orphaned
   } = attributes;
+
   const { t } = useTranslation();
 
   const isPrivate = notePrivate || readingGroupPrivacy === "private";
@@ -38,13 +39,11 @@ function AnnotationRow({
   return (
     <Styled.Item className="entity-row entity-list__entity scheme-dark">
       {bulkActionsActive && (
-        <Styled.Checkbox>
-          <Checkbox
-            checked={isSelected}
-            onSelect={() => addItem(id)}
-            onClear={() => removeItem(id)}
-          />
-        </Styled.Checkbox>
+        <Checkbox
+          checked={isSelected}
+          onSelect={() => addItem(id)}
+          onClear={() => removeItem(id)}
+        />
       )}
       <Styled.Inner className="entity-row__inner entity-row__inner--in-rows">
         <div className="entity-row__text entity-row__text--in-rows">
