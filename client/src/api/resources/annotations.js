@@ -87,5 +87,13 @@ export default {
       method: "DELETE",
       options: {}
     };
+  },
+
+  bulkDelete(args) {
+    return {
+      endpoint: `/api/v1/annotations/bulk_delete`,
+      method: "POST",
+      options: args
+    };
   }
 };
