@@ -5,7 +5,8 @@ import { annotationsAPI } from "api";
 import EntitiesList, {
   Button,
   Search,
-  AnnotationRow
+  AnnotationRow,
+  DeleteButton
 } from "backend/components/list/EntitiesList";
 import {
   useFetch,
@@ -18,9 +19,10 @@ import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import useBulkActions from "./bulkActions/hook";
-import SelectAll from "./bulkActions/SelectAll";
-import * as Styled from "./styles";
+import {
+  useBulkActions,
+  SelectAll
+} from "backend/components/list/EntitiesList/List/bulkActions";
 
 function AnnotationsList({
   route,
@@ -151,7 +153,7 @@ function AnnotationsList({
           buttons={[
             <>
               {bulkActionsActive && (
-                <Styled.DeleteButton
+                <DeleteButton
                   tag="button"
                   onClick={onBulkDelete}
                   text={t("actions.delete")}
