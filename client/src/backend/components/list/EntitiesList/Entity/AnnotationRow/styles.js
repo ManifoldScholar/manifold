@@ -15,10 +15,6 @@ export const Inner = styled.div`
   inline-size: 100%;
 `;
 
-export const Checkbox = styled.div`
-  margin-inline-start: 20px;
-`;
-
 export const Link = styled(RouterLink)`
   ${linkUnstyled}
   display: block;

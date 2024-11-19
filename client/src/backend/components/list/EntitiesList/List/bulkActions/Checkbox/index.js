@@ -17,17 +17,19 @@ export default function BulkActionsCheckbox({ onSelect, onClear, checked }) {
   };
 
   return (
-    <Styled.Wrapper htmlFor={uid}>
-      <Styled.Input
-        id={uid}
-        type="checkbox"
-        onChange={handleChange}
-        data-checked={checked}
-      />
-      <Styled.Checkbox>
-        <IconComposer icon="checkmark16" size={16} />
-      </Styled.Checkbox>
-    </Styled.Wrapper>
+    <Styled.Outer>
+      <Styled.Wrapper htmlFor={uid}>
+        <Styled.Input
+          id={uid}
+          type="checkbox"
+          onChange={handleChange}
+          data-checked={checked}
+        />
+        <Styled.Checkbox>
+          <IconComposer icon="checkmark16" size={16} />
+        </Styled.Checkbox>
+      </Styled.Wrapper>
+    </Styled.Outer>
   );
 }
 
