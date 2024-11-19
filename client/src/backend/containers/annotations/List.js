@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { annotationsAPI } from "api";
@@ -18,9 +18,8 @@ import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import { bulkActionsReducer } from "./bulkActions/reducer";
+import useBulkActions from "./bulkActions/hook";
 import SelectAll from "./bulkActions/SelectAll";
-import isEqual from "lodash/isEqual";
 import * as Styled from "./styles";
 
 function AnnotationsList({
@@ -30,20 +29,6 @@ function AnnotationsList({
   entitiesListSearchParams
 }) {
   const { t } = useTranslation();
-
-  const initSelectionState = useMemo(
-    () => ({
-      ids: [],
-      filters: null
-    }),
-    []
-  );
-
-  const [bulkActionsActive, setBulkActions] = useState(false);
-  const [bulkSelection, dispatchSelection] = useReducer(
-    bulkActionsReducer,
-    initSelectionState
-  );
 
   const [pagination, setPageNumber] = usePaginationState(1, 10);
   const baseFilters = entitiesListSearchParams.initialannotations;
@@ -57,14 +42,16 @@ function AnnotationsList({
     dependencies: [filters]
   });
 
-  const visibleIds = useMemo(() => annotations?.map(a => a.id), [annotations]);
-
-  const handleSelectAllUncheck = removeId => () => {
-    dispatchSelection({
-      type: "removeAndClear",
-      payload: visibleIds.filter(id => id !== removeId)
-    });
-  };
+  const {
+    bulkActionsActive,
+    toggleBulkActions,
+    resetBulkSelection,
+    handleSelectAll,
+    bulkSelection,
+    bulkSelectionEmpty,
+    addItem,
+    removeItem
+  } = useBulkActions(annotations, filters);
 
   const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
     "annotations"
@@ -73,11 +60,7 @@ function AnnotationsList({
     setParam(param, value);
     setFilters({ newState: { ...filters, [param.as || param.name]: value } });
 
-    if (!isEqual(bulkSelection, initSelectionState))
-      dispatchSelection({
-        type: "reset",
-        payload: initSelectionState
-      });
+    if (!bulkSelectionEmpty) resetBulkSelection();
   };
   const updatedOnReset = () => {
     onReset();
@@ -88,14 +71,10 @@ function AnnotationsList({
       }
     });
 
-    if (!isEqual(bulkSelection, initSelectionState))
-      dispatchSelection({
-        type: "reset",
-        payload: initSelectionState
-      });
+    if (!bulkSelectionEmpty) resetBulkSelection();
   };
 
-  const bulkDelete = useApiCallback(annotationsAPI.destroy);
+  const bulkDelete = useApiCallback(annotationsAPI.bulkDelete);
 
   const unit = t("glossary.annotation", {
     count: meta?.pagination?.totalCount
@@ -109,7 +88,10 @@ function AnnotationsList({
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
-        await bulkDelete(bulkSelection);
+        const params = bulkSelection.filters
+          ? { filters: bulkSelection.filters }
+          : { annotationIds: bulkSelection.ids };
+        await bulkDelete(params);
         refresh();
       });
   };
@@ -136,9 +118,9 @@ function AnnotationsList({
           entityComponent={AnnotationRow}
           entityComponentProps={{
             bulkActionsActive,
-            dispatchSelection,
             bulkSelection,
-            handleSelectAllUncheck
+            addItem,
+            removeItem
           }}
           entities={annotations}
           search={
@@ -154,15 +136,8 @@ function AnnotationsList({
               <SelectAll
                 pagination={meta.pagination}
                 unit={unit}
-                onSelect={() =>
-                  dispatchSelection({ type: "setFilters", payload: filters })
-                }
-                onClear={() =>
-                  dispatchSelection({
-                    type: "reset",
-                    payload: initSelectionState
-                  })
-                }
+                onSelect={handleSelectAll}
+                onClear={resetBulkSelection}
                 allSelected={!!bulkSelection.filters}
               />
             ) : (
@@ -183,12 +158,12 @@ function AnnotationsList({
                   authorizedFor="annotation"
                   type="delete"
                   icon="delete24"
-                  disabled={isEqual(initSelectionState, bulkSelection)}
+                  disabled={bulkSelectionEmpty}
                 />
               )}
               <Button
                 tag="button"
-                onClick={() => setBulkActions(!bulkActionsActive)}
+                onClick={toggleBulkActions}
                 text={
                   bulkActionsActive
                     ? t("actions.exit")
