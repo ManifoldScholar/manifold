@@ -5577,13 +5577,6 @@ CREATE INDEX index_text_section_nodes_actual_ancestors ON public.text_section_no
 
 
 --
--- Name: index_text_section_nodes_by_id_and_hash; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_text_section_nodes_by_id_and_hash ON public.text_section_nodes USING btree (text_section_id, body_hash);
-
-
---
 -- Name: index_text_section_nodes_by_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5605,24 +5598,10 @@ CREATE INDEX index_text_section_nodes_extrapolation ON public.text_section_nodes
 
 
 --
--- Name: index_text_section_nodes_on_node_path; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_text_section_nodes_on_node_path ON public.text_section_nodes USING gist (node_path);
-
-
---
 -- Name: index_text_section_nodes_on_text_section_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_text_section_nodes_on_text_section_id ON public.text_section_nodes USING btree (text_section_id);
-
-
---
--- Name: index_text_section_nodes_pairing; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_text_section_nodes_pairing ON public.text_section_nodes USING btree (node_path) INCLUDE (path);
 
 
 --
@@ -7194,6 +7173,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231129172116'),
 ('20240220212417'),
 ('20240223163849'),
-('20240327194259');
+('20240327194259'),
+('20241206175512');
 
 
