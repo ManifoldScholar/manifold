@@ -6,6 +6,8 @@ module Attachments
 
     concurrency 1, drop: false unless Rails.env.test?
 
+    discard_on ActiveJob::DeserializationError, ActiveRecord::RecordNotFound
+
     retry_on ::MiniMagick::Error, wait: 10.seconds, attempts: 3
 
     queue_as :default
