@@ -6,16 +6,12 @@ import EntitiesList, {
   Search,
   ReadingGroupRow
 } from "backend/components/list/EntitiesList";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useApiCallback
-} from "hooks";
+import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import withFilteredLists, { readingGroupFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import {
   useBulkActions,
+  useClearBulkSelectionWithFilters,
   SelectAll,
   BulkActionButtons
 } from "backend/components/list/EntitiesList/List/bulkActions";
@@ -27,11 +23,13 @@ function ReadingGroupsList({
 }) {
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const baseFilters = entitiesListSearchParams.initialreadingGroups;
-  const [filters, setFilters] = useFilterState({
-    ...baseFilters,
-    order: "created_at_desc"
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: {
+      ...entitiesListSearchParams.initialreadingGroups,
+      order: "created_at_desc"
+    },
+    initSearchProps: entitiesListSearchProps("readingGroups")
   });
 
   const { data: readingGroups, meta, refresh } = useFetch({
@@ -50,21 +48,12 @@ function ReadingGroupsList({
     removeItem
   } = useBulkActions(readingGroups, filters);
 
-  const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
-    "readingGroups"
+  const { onReset, setParam } = useClearBulkSelectionWithFilters(
+    searchProps.onReset,
+    searchProps.setParam,
+    resetBulkSelection,
+    bulkSelectionEmpty
   );
-  const updatedSetParam = (param, value) => {
-    setParam(param, value);
-    setFilters({ newState: { ...filters, [param.as || param.name]: value } });
-
-    if (!bulkSelectionEmpty) resetBulkSelection();
-  };
-  const updatedOnReset = () => {
-    onReset();
-    setFilters({ newState: baseFilters });
-
-    if (!bulkSelectionEmpty) resetBulkSelection();
-  };
 
   const destroyRG = useApiCallback(readingGroupsAPI.destroy);
 
@@ -119,11 +108,7 @@ function ReadingGroupsList({
           titleIcon="ReadingGroup24"
           titleStyle="bar"
           search={
-            <Search
-              {...searchProps}
-              setParam={updatedSetParam}
-              onReset={updatedOnReset}
-            />
+            <Search {...searchProps} setParam={setParam} onReset={onReset} />
           }
           pagination={meta.pagination}
           showCount={
@@ -141,9 +126,6 @@ function ReadingGroupsList({
           }
           showCountInTitle
           unit={unit}
-          callbacks={{
-            onPageClick: page => () => setPageNumber(page)
-          }}
           buttons={[
             <BulkActionButtons
               active={bulkActionsActive}

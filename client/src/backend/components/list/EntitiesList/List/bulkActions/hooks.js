@@ -66,3 +66,27 @@ export default function useBulkActions(records, filters) {
     removeItem
   };
 }
+
+export const useClearBulkSelectionWithFilters = (
+  baseOnReset,
+  baseSetFilter,
+  resetBulkSelection,
+  bulkSelectionEmpty
+) => {
+  const setParam = useCallback(
+    (param, value) => {
+      baseSetFilter(param, value);
+
+      if (!bulkSelectionEmpty) resetBulkSelection();
+    },
+    [bulkSelectionEmpty, resetBulkSelection, baseSetFilter]
+  );
+
+  const onReset = useCallback(() => {
+    baseOnReset();
+
+    if (!bulkSelectionEmpty) resetBulkSelection();
+  }, [bulkSelectionEmpty, resetBulkSelection, baseOnReset]);
+
+  return { setParam, onReset };
+};
