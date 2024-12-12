@@ -5,7 +5,7 @@ runs:
     - name: "Install Dependencies"
       uses: awalsh128/cache-apt-pkgs-action@latest
       with:
-        packages: libpq-dev
+        packages: imagemagick libpq-dev
         version: 1.0
 
     - name: "Install Ruby 2.7.8"
