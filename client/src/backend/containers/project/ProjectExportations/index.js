@@ -29,7 +29,7 @@ export default function ProjectExportations({
   });
 
   const { data: projectExportations, meta, refresh } = useFetch({
-    request: [projectsAPI.project_exportations, project.id, {}, pagination],
+    request: [projectsAPI.project_exportations, project.id, null, pagination],
     options: { requestKey: requests.beProjectExportations }
   });
 
