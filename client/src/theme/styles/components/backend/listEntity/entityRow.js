@@ -138,6 +138,10 @@ export default `
       height: 100%;
       text-decoration: none;
 
+      .entity-row--bulk-actions & {
+        inline-size: 100%;
+      }
+
       &.entity-row__row-link--in-grid {
         transition: background-color var(--transition-duration-default) ease-out,
           box-shadow var(--transition-duration-default) ease-out;

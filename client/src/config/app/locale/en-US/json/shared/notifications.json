@@ -1,5 +1,8 @@
 {
   "notifications": {
+    "bulk_delete_success": "Bulk delete completed.",
+    "bulk_delete_success_body_one": "{{count}} {{entity}} has been removed.",
+    "bulk_delete_success_body_other": "{{count}} {{entity}} have been removed.",
     "delete_entity_body": "{{title}} has passed into the endless night.",
     "delete_record_body": "And we're sorry to see it go.",
     "email_failure": "Manifold was unable to send a test email.",
