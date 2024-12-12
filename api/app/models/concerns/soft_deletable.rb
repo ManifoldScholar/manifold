@@ -3,12 +3,13 @@
 module SoftDeletable
   extend ActiveSupport::Concern
 
+  SOFT_DELETABLE_DEPENDENTS = %i[destroy delete_all].freeze
+
   include Filterable
 
   included do
     define_model_callbacks :mark_for_purge, :soft_delete
 
-    scope :existing, -> { sans_deleted }
     scope :only_deleted, -> { with_deleted.where.not(deleted_at: nil) }
     scope :with_deleted, -> { unscope(where: :deleted_at) }
     scope :sans_deleted, -> { with_deleted.where(deleted_at: nil) }
@@ -133,6 +134,16 @@ module SoftDeletable
       existing
     end
 
+    # @return [void]
+    def async_destroy_all
+      find_each(&:async_destroy)
+    end
+
+    # @return [ActiveRecord::Relation]
+    def existing
+      sans_deleted
+    end
+
     def soft_deletable?
       self < SoftDeletable
     end
@@ -140,8 +151,14 @@ module SoftDeletable
     # @return [<ActiveRecord::Reflection::AssociationReflection>]
     def soft_deletable_associations
       reflect_on_all_associations.select do |assoc|
-        assoc.options[:dependent].present? && assoc.klass.try(:soft_deletable?)
+        soft_deletable_association?(assoc)
       end
+    end
+
+    # @api private
+    # @param [ActiveRecord::Reflection::AssociationReflection] assoc
+    def soft_deletable_association?(assoc)
+      assoc.options[:dependent].in?(SOFT_DELETABLE_DEPENDENTS) && assoc.klass.try(:soft_deletable?)
     end
   end
 end

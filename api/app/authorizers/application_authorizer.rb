@@ -21,6 +21,12 @@ class ApplicationAuthorizer < Authority::Authorizer
     to: :class
   )
 
+  # @note By default, defer to the class option. In general, bulk deletion should not
+  #   be determined by resource-level concerns (except for {UserAuthorizer}).
+  def bulk_deletable_by?(user, options = {})
+    self.class.bulk_deletable_by?(user, options)
+  end
+
   def has_any_role?(user, *roles, on: resource)
     roles.flatten.any? do |role|
       has_role?(user, role, on: on)
@@ -88,6 +94,12 @@ class ApplicationAuthorizer < Authority::Authorizer
     # @param [User, AnonymousUser, nil] user
     def authenticated?(user)
       user.present? && user.kind_of?(User) && user.persisted?
+    end
+
+    # @param [User, AnonymousUser, nil] user
+    # @param [Hash] options
+    def bulk_deletable_by?(user, _options = {})
+      has_any_role? user, :admin
     end
 
     # Any class method from Authority::Authorizer that isn't overridden

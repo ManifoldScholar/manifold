@@ -8,6 +8,7 @@ class ReadingGroup < ApplicationRecord
   include Filterable
   include ReceivesEntitlements
   include SerializedAbilitiesFor
+  include SoftDeletable
   include TrackedCreator
 
   resourcify
@@ -178,6 +179,10 @@ class ReadingGroup < ApplicationRecord
 
     def arel_id_is_null_or_within_scope(scope)
       arel_table[:id].eq(nil).or(arel_table[:id].in(Arel.sql(scope.to_sql)))
+    end
+
+    def soft_deletable_association?(assoc)
+      assoc.klass == ::Annotation || super
     end
   end
 end

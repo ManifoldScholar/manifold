@@ -14,6 +14,7 @@ class Annotation < ApplicationRecord
   include Filterable
   include FlaggableResource
   include SearchIndexable
+  include SoftDeletable
 
   # Constants
   TYPE_ANNOTATION = "annotation"

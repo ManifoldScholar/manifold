@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Users
-  class ReadingGroupCount < Types::FlexibleStruct
+  class ReadingGroupCount < ::Types::FlexibleStruct
     ZERO = Types::Integer.default(0)
 
     SCHEMA = Types::Hash.schema(

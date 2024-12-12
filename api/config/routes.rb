@@ -32,6 +32,12 @@ Rails.application.routes.draw do
         resources :text_sections, only: %[index]
       end
 
+      scope as: :bulk_delete, controller: :bulk_deletions, path: "bulk_delete" do
+        delete :annotations
+        delete :reading_groups
+        delete :users
+      end
+
       resources :action_callouts, only: [:show, :update, :destroy]
       resources :contacts, only: [:create]
       resources :content_blocks, only: [:show, :update, :destroy]
