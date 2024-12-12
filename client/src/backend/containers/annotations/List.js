@@ -6,12 +6,7 @@ import EntitiesList, {
   Search,
   AnnotationRow
 } from "backend/components/list/EntitiesList";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useApiCallback
-} from "hooks";
+import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -19,6 +14,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import {
   useBulkActions,
+  useClearBulkSelectionWithFilters,
   SelectAll,
   BulkActionButtons
 } from "backend/components/list/EntitiesList/List/bulkActions";
@@ -31,11 +27,13 @@ function AnnotationsList({
 }) {
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const baseFilters = entitiesListSearchParams.initialannotations;
-  const [filters, setFilters] = useFilterState({
-    ...baseFilters,
-    formats: ["annotation"]
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: {
+      ...entitiesListSearchParams.initialannotations,
+      formats: ["annotation"]
+    },
+    initSearchProps: entitiesListSearchProps("annotations")
   });
 
   const { data: annotations, meta, refresh } = useFetch({
@@ -54,26 +52,12 @@ function AnnotationsList({
     removeItem
   } = useBulkActions(annotations, filters);
 
-  const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
-    "annotations"
+  const { onReset, setParam } = useClearBulkSelectionWithFilters(
+    searchProps.onReset,
+    searchProps.setParam,
+    resetBulkSelection,
+    bulkSelectionEmpty
   );
-  const updatedSetParam = (param, value) => {
-    setParam(param, value);
-    setFilters({ newState: { ...filters, [param.as || param.name]: value } });
-
-    if (!bulkSelectionEmpty) resetBulkSelection();
-  };
-  const updatedOnReset = () => {
-    onReset();
-    setFilters({
-      newState: {
-        ...baseFilters,
-        formats: ["annotation"]
-      }
-    });
-
-    if (!bulkSelectionEmpty) resetBulkSelection();
-  };
 
   const bulkDelete = useApiCallback(annotationsAPI.bulkDelete);
 
@@ -125,11 +109,7 @@ function AnnotationsList({
           }}
           entities={annotations}
           search={
-            <Search
-              {...searchProps}
-              setParam={updatedSetParam}
-              onReset={updatedOnReset}
-            />
+            <Search {...searchProps} setParam={setParam} onReset={onReset} />
           }
           pagination={meta.pagination}
           showCount={
@@ -146,9 +126,6 @@ function AnnotationsList({
             )
           }
           unit={unit}
-          callbacks={{
-            onPageClick: page => () => setPageNumber(page)
-          }}
           buttons={[
             <BulkActionButtons
               active={bulkActionsActive}
