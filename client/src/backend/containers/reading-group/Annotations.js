@@ -4,9 +4,14 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import { readingGroupsAPI, annotationsAPI } from "api";
+import { readingGroupsAPI, bulkDeleteAPI } from "api";
 import { withRouter } from "react-router-dom";
-import { useFetch, useApiCallback, useListQueryParams } from "hooks";
+import {
+  useFetch,
+  useApiCallback,
+  useListQueryParams,
+  useNotification
+} from "hooks";
 import EntitiesList, {
   Search,
   AnnotationRow
@@ -66,11 +71,22 @@ function ReadingGroupAnnotationsContainer({
     bulkSelectionEmpty
   );
 
-  const bulkDelete = useApiCallback(annotationsAPI.bulkDelete);
+  const bulkDelete = useApiCallback(bulkDeleteAPI.annotations);
 
   const unit = t("glossary.annotation", {
     count: meta?.pagination?.totalCount
   });
+
+  const notifyBulkDelete = useNotification(count => ({
+    level: 0,
+    id: "BULK_DELETE_SUCCESS",
+    heading: t("notifications.bulk_delete_success"),
+    body: t("notifications.bulk_delete_success_body", {
+      count,
+      entity: t("glossary.annotation", { count })
+    }),
+    expiration: 5000
+  }));
 
   const onBulkDelete = () => {
     const count = bulkSelection.filters
@@ -81,10 +97,13 @@ function ReadingGroupAnnotationsContainer({
     if (confirm)
       confirm(heading, message, async () => {
         const params = bulkSelection.filters
-          ? { filters: bulkSelection.filters }
-          : { annotationIds: bulkSelection.ids };
+          ? { filters: bulkSelection.filters, ids: [] }
+          : { filters: {}, ids: bulkSelection.ids };
         await bulkDelete(params);
+        const res = await bulkDelete(params);
+        notifyBulkDelete(res.bulk_deletions.total);
         refresh();
+        resetBulkSelection();
       });
   };
 

@@ -1,12 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { readingGroupsAPI } from "api";
+import { readingGroupsAPI, bulkDeleteAPI } from "api";
 import EntitiesList, {
   Search,
   ReadingGroupRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, useApiCallback, useListQueryParams } from "hooks";
+import {
+  useFetch,
+  useApiCallback,
+  useListQueryParams,
+  useNotification
+} from "hooks";
 import withFilteredLists, { readingGroupFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import {
@@ -67,7 +72,18 @@ function ReadingGroupsList({
       });
   };
 
-  const bulkDelete = useApiCallback(readingGroupsAPI.bulkDelete);
+  const bulkDelete = useApiCallback(bulkDeleteAPI.readingGroups);
+
+  const notifyBulkDelete = useNotification(count => ({
+    level: 0,
+    id: "BULK_DELETE_SUCCESS",
+    heading: t("notifications.bulk_delete_success"),
+    body: t("notifications.bulk_delete_success_body", {
+      count,
+      entity: t("glossary.reading_group", { count })
+    }),
+    expiration: 5000
+  }));
 
   const unit = t("glossary.reading_group", {
     count: meta?.pagination?.totalCount
@@ -82,10 +98,12 @@ function ReadingGroupsList({
     if (confirm)
       confirm(heading, message, async () => {
         const params = bulkSelection.filters
-          ? { filters: bulkSelection.filters }
-          : { annotationIds: bulkSelection.ids };
-        await bulkDelete(params);
+          ? { filters: bulkSelection.filters, ids: [] }
+          : { filters: {}, ids: bulkSelection.ids };
+        const res = await bulkDelete(params);
+        notifyBulkDelete(res.bulk_deletions.total);
         refresh();
+        resetBulkSelection();
       });
   };
 

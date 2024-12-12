@@ -1,75 +1,63 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
+import Checkbox from "../List/bulkActions/Checkbox";
+import { useCurrentUser } from "hooks";
 
-class UserRow extends PureComponent {
-  static displayName = "EntitiesList.Entity.UserRow";
+function UserRow({
+  entity,
+  bulkActionsActive,
+  bulkSelection,
+  addItem,
+  removeItem,
+  ...props
+}) {
+  const { t } = useTranslation();
+  const currentUser = useCurrentUser();
 
-  static propTypes = {
-    entity: PropTypes.object,
-    currentUserId: PropTypes.string,
-    active: PropTypes.string,
-    t: PropTypes.func
+  const { id, attributes } = entity;
+
+  const isSelected =
+    !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
+
+  const additionalProps = {
+    title: `${attributes.firstName} ${attributes.lastName}`,
+    figure: <EntityThumbnail.User entity={entity} />,
+    figureSize: "small",
+    figureShape: "circle",
+    label: [
+      { text: t(`records.users.role_options.${attributes.role}`), level: "" },
+      ...(id === currentUser.id
+        ? [
+            {
+              text: t("common.you"),
+              level: "notice"
+            }
+          ]
+        : [])
+    ],
+    onRowClick: lh.link("backendRecordsUser", id),
+    rowClickMode: "block",
+    prepend: bulkActionsActive && (
+      <Checkbox
+        checked={isSelected}
+        onSelect={() => addItem(id)}
+        onClear={() => removeItem(id)}
+      />
+    )
   };
 
-  get entity() {
-    return this.props.entity;
-  }
-
-  get attributes() {
-    return this.entity.attributes;
-  }
-
-  get role() {
-    return (
-      <>
-        {this.isCurrentUser(this.id)}
-        {this.attributes.role
-          ? this.props.t(`records.users.role_options.${this.attributes.role}`)
-          : null}
-      </>
-    );
-  }
-
-  get name() {
-    const { firstName, lastName } = this.attributes;
-    return `${firstName} ${lastName}`;
-  }
-
-  get id() {
-    return this.entity.id;
-  }
-
-  get active() {
-    return this.props.active === this.id;
-  }
-
-  isCurrentUser(id) {
-    let output = "";
-    if (this.props.currentUserId === id) {
-      output = <span className="specifier">{this.props.t("common.you")}</span>;
-    }
-    return output;
-  }
-
-  render() {
-    return (
-      <EntityRow
-        {...this.props}
-        onRowClick={lh.link("backendRecordsUser", this.id)}
-        rowClickMode="block"
-        title={this.name}
-        figure={<EntityThumbnail.User entity={this.entity} />}
-        figureSize={"small"}
-        figureShape={"circle"}
-        label={this.role}
-        active={this.active}
-      />
-    );
-  }
+  return <EntityRow {...props} {...additionalProps} />;
 }
 
-export default withTranslation()(UserRow);
+UserRow.displayName = "EntitiesList.Entity.UserRow";
+
+UserRow.propTypes = {
+  entity: PropTypes.object,
+  currentUserId: PropTypes.string
+};
+
+export default UserRow;
