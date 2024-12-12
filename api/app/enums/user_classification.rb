@@ -1,7 +1,11 @@
-class UserClassification < ClassyEnum::Base
-  include ActiveSupport::Configurable
+# frozen_string_literal: true
 
-  config.unique = false
+class UserClassification < ClassyEnum::Base
+  extend Dry::Core::ClassAttributes
+
+  defines :unique, type: ::Users::Types::Bool
+
+  unique false
 
   def cli?
     command_line?
@@ -23,7 +27,7 @@ class UserClassification < ClassyEnum::Base
   end
 
   def unique?
-    config.unique.present?
+    self.class.unique
   end
 
   class << self
@@ -39,13 +43,17 @@ class UserClassification::Default < UserClassification
 end
 
 class UserClassification::Anonymous < UserClassification
-  config.unique = true
+  unique true
 end
 
 class UserClassification::CommandLine < UserClassification
-  config.unique = true
+  unique true
+end
+
+class UserClassification::Deleted < UserClassification
+  unique true
 end
 
 class UserClassification::Testing < UserClassification
-  config.unique = true
+  unique true
 end

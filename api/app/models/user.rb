@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The User model
 class User < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:title, :first_name, :last_name, :email].freeze
@@ -15,6 +17,7 @@ class User < ApplicationRecord
   include Attachments
   include WithParsedName
   include SearchIndexable
+  include SoftDeletable
 
   classy_enum_attr :role, enum: "RoleName", allow_blank: false, default: :reader
   classy_enum_attr :kind, enum: "RoleName", allow_blank: false, default: :reader
@@ -25,7 +28,7 @@ class User < ApplicationRecord
   has_many :annotations, -> { sans_orphaned_from_text }, foreign_key: "creator_id", dependent: :destroy,
            inverse_of: :creator
   has_many :annotated_texts, -> { distinct }, through: :annotations, source: :text
-  has_many :favorites
+  has_many :favorites, inverse_of: :user
   has_many :favorite_projects, through: :favorites, source: :favoritable,
            source_type: "Project"
   has_many :favorite_texts, through: :favorites, source: :favoritable, source_type: "Text"
@@ -67,6 +70,8 @@ class User < ApplicationRecord
   before_validation :infer_kind!
   before_validation :infer_role!
   before_validation :infer_trusted!
+
+  before_soft_delete :prune_attached_records!
 
   after_save :sync_global_role!, if: :saved_change_to_role?
   after_save :prepare_email_confirmation!, if: :saved_change_to_email?
@@ -304,6 +309,13 @@ class User < ApplicationRecord
     self.trusted = calculate_trusted
   end
 
+  # @see Users::PruneAttachedRecords
+  # @see Users::AttachedRecordsPruner
+  # @return [void]
+  def prune_attached_records!
+    ManifoldApi::Container["users.prune_attached_records"].(self).value!
+  end
+
   # @param [Role] role
   # @return [void]
   def recalculate_role_derivations!(role)
@@ -350,7 +362,7 @@ class User < ApplicationRecord
 
       classy_enum_attr :classification, enum: "UserClassification", allow_blank: false
 
-      delegate :anonymous?, :cli?, :command_line?, to: :classification
+      delegate :anonymous?, :cli?, :command_line?, :deleted?, to: :classification
     end
 
     def default_classification?
@@ -372,6 +384,10 @@ class User < ApplicationRecord
 
       def cli_user(&block)
         fetch_by_classification :command_line, &block
+      end
+
+      def deleted_user(&block)
+        fetch_by_classification :deleted, &block
       end
 
       def testing_user(&block)

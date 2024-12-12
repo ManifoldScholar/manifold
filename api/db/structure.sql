@@ -262,7 +262,9 @@ CREATE TABLE public.annotations (
     events_count integer DEFAULT 0,
     orphaned boolean DEFAULT false NOT NULL,
     flags_count integer DEFAULT 0,
-    reading_group_id uuid
+    reading_group_id uuid,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -1133,7 +1135,9 @@ CREATE TABLE public.reading_groups (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     reading_group_kind_id uuid,
-    course jsonb DEFAULT '{}'::jsonb NOT NULL
+    course jsonb DEFAULT '{}'::jsonb NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -1173,7 +1177,9 @@ CREATE TABLE public.users (
     email_confirmed_at timestamp(6) without time zone,
     verified_by_admin_at timestamp without time zone,
     established boolean DEFAULT false NOT NULL,
-    trusted boolean DEFAULT false NOT NULL
+    trusted boolean DEFAULT false NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -4034,10 +4040,24 @@ CREATE INDEX index_annotations_on_creator_id ON public.annotations USING btree (
 
 
 --
+-- Name: index_annotations_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_annotations_on_deleted_at ON public.annotations USING btree (deleted_at);
+
+
+--
 -- Name: index_annotations_on_format; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_annotations_on_format ON public.annotations USING btree (format);
+
+
+--
+-- Name: index_annotations_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_annotations_on_marked_for_purge_at ON public.annotations USING btree (marked_for_purge_at);
 
 
 --
@@ -5217,10 +5237,24 @@ CREATE INDEX index_reading_groups_on_creator_id ON public.reading_groups USING b
 
 
 --
+-- Name: index_reading_groups_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reading_groups_on_deleted_at ON public.reading_groups USING btree (deleted_at);
+
+
+--
 -- Name: index_reading_groups_on_invitation_code; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_reading_groups_on_invitation_code ON public.reading_groups USING btree (invitation_code);
+
+
+--
+-- Name: index_reading_groups_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reading_groups_on_marked_for_purge_at ON public.reading_groups USING btree (marked_for_purge_at);
 
 
 --
@@ -5994,6 +6028,13 @@ CREATE INDEX index_user_collected_texts_on_user_id ON public.user_collected_text
 
 
 --
+-- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_deleted_at ON public.users USING btree (deleted_at);
+
+
+--
 -- Name: index_users_on_email_confirmed_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6019,6 +6060,13 @@ CREATE UNIQUE INDEX index_users_on_import_source_id ON public.users USING btree 
 --
 
 CREATE INDEX index_users_on_kind ON public.users USING btree (kind);
+
+
+--
+-- Name: index_users_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_marked_for_purge_at ON public.users USING btree (marked_for_purge_at);
 
 
 --
@@ -6131,6 +6179,13 @@ CREATE UNIQUE INDEX udx_users_anonymous ON public.users USING btree (classificat
 --
 
 CREATE UNIQUE INDEX udx_users_cli ON public.users USING btree (classification) WHERE ((classification)::text = 'command_line'::text);
+
+
+--
+-- Name: udx_users_deleted; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX udx_users_deleted ON public.users USING btree (classification) WHERE ((classification)::text = 'deleted'::text);
 
 
 --
@@ -7207,6 +7262,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240223163849'),
 ('20240327194259'),
 ('20241001182627'),
-('20241206175512');
+('20241206175512'),
+('20241210200353');
 
 

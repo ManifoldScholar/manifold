@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Authority.configure do |config|
   # USER_METHOD
   # ===========
@@ -48,6 +50,7 @@ Authority.configure do |config|
     read_drafts: "drafts_readable",
     fully_read: "fully_readable",
     list: "listable",
+    bulk_delete: "bulk_deletable",
     manage: "manageable",
     manage_project_exportations: "project_exportations_manageable",
     create_project_exportations: "project_exportations_creatable",
