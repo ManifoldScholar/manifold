@@ -73,6 +73,9 @@ export default class ApiClient {
     if (json.meta) {
       out.meta = json.meta;
     }
+    if (json.bulk_deletions) {
+      out.bulk_deletions = json.bulk_deletions;
+    }
     return Promise.resolve({ json: out, response });
   };
 
