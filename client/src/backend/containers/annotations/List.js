@@ -1,12 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { annotationsAPI } from "api";
+import { annotationsAPI, bulkDeleteAPI } from "api";
 import EntitiesList, {
   Search,
   AnnotationRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, useApiCallback, useListQueryParams } from "hooks";
+import {
+  useFetch,
+  useApiCallback,
+  useListQueryParams,
+  useNotification
+} from "hooks";
 import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -59,11 +64,22 @@ function AnnotationsList({
     bulkSelectionEmpty
   );
 
-  const bulkDelete = useApiCallback(annotationsAPI.bulkDelete);
+  const bulkDelete = useApiCallback(bulkDeleteAPI.annotations);
 
   const unit = t("glossary.annotation", {
     count: meta?.pagination?.totalCount
   });
+
+  const notifyBulkDelete = useNotification(count => ({
+    level: 0,
+    id: "BULK_DELETE_SUCCESS",
+    heading: t("notifications.bulk_delete_success"),
+    body: t("notifications.bulk_delete_success_body", {
+      count,
+      entity: t("glossary.annotation", { count })
+    }),
+    expiration: 5000
+  }));
 
   const onBulkDelete = () => {
     const count = bulkSelection.filters
@@ -74,10 +90,12 @@ function AnnotationsList({
     if (confirm)
       confirm(heading, message, async () => {
         const params = bulkSelection.filters
-          ? { filters: bulkSelection.filters }
-          : { annotationIds: bulkSelection.ids };
-        await bulkDelete(params);
+          ? { filters: bulkSelection.filters, ids: [] }
+          : { filters: {}, ids: bulkSelection.ids };
+        const res = await bulkDelete(params);
+        notifyBulkDelete(res.bulk_deletions.total);
         refresh();
+        resetBulkSelection();
       });
   };
 
