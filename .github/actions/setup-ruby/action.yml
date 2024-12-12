@@ -2,11 +2,11 @@ name: "Setup Ruby"
 runs:
   using: "composite"
   steps:
-    - name: "Install Dependencies"
-      uses: awalsh128/cache-apt-pkgs-action@latest
-      with:
-        packages: libpq-dev
-        version: 1.0
+    - name: "Install Dependent libraries"
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get -yqq install imagemagick libpq-dev libvips libvips-dev
 
     - name: "Install Ruby 2.7.8"
       uses: ruby/setup-ruby@v1
