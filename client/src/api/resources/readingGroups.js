@@ -118,13 +118,5 @@ export default {
       method: "DELETE",
       options: {}
     };
-  },
-
-  bulkDelete(args) {
-    return {
-      endpoint: `/api/v1/reading_groups/bulk_delete`,
-      method: "POST",
-      options: args
-    };
   }
 };
