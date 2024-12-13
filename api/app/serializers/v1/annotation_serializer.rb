@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
 module V1
   class AnnotationSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
 
+    FLAG_METADATA_VISIBLE = ->(object, params) { flag_metadata_visible?(object, params) }
+
     current_user_is_creator?
+
     abilities
 
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
@@ -11,8 +16,6 @@ module V1
     typed_attribute :start_node, Types::String.meta(example: "start")
     typed_attribute :end_char, Types::Integer
     typed_attribute :end_node, Types::String.meta(example: "end")
-    typed_has_many :flags, serializer: ::V1::FlagSerializer, record_type: "flag"
-    typed_attribute :flags_count, Types::Integer.meta(read_only: true)
     typed_attribute :format, Types::String.enum("annotation", "highlight", "resource", "resource_collection")
     typed_attribute :subject, Types::String
     typed_attribute :body, Types::String.meta(description: "Only required if format is annotation")
@@ -37,6 +40,7 @@ module V1
     typed_attribute :is_anonymous, Types::Bool.optional.meta(read_only: true) do |object, params|
       anonymous?(object, params)
     end
+
     typed_attribute :creator_name, Types::String.meta(read_only: true) do |object, params|
       next object.creator&.full_name if creator_identity_visible?(object, params)
 
@@ -49,10 +53,14 @@ module V1
       creator_identity_visible?(object, params) ? camelize_hash(object.creator_avatar_styles) : {}
     end
 
-    typed_attribute :flagged, Types::Bool.meta(read_only: true) do |object, params|
-      next false unless authenticated?(params)
+    typed_attribute(:flagged, Types::Bool.meta(read_only: true)) do |object, params|
+      object.flagged_by?(params[:current_user])
+    end
 
-      object.flags.where(creator: params[:current_user]).count.positive?
+    typed_has_many :flags, serializer: ::V1::FlagSerializer, record_type: "flag", if: FLAG_METADATA_VISIBLE
+
+    ::FlagStatus::COUNTS.each do |attr|
+      typed_attribute attr, Types::Integer.meta(read_only: true), if: FLAG_METADATA_VISIBLE
     end
 
     typed_belongs_to :creator,
@@ -73,12 +81,17 @@ module V1
     end
 
     class << self
+      def flag_metadata_visible?(object, params)
+        admin?(params) || moderator?(object, params)
+      end
 
       def include_abilities?(_object, _params)
         true
       end
 
       def moderator?(object, params)
+        return false unless object.reading_group_id?
+
         params[:current_user]&.can_update? object.reading_group
       end
 
