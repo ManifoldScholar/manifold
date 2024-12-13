@@ -1,5 +1,7 @@
 # The base application controller
 class ApplicationController < ActionController::API
+  # Base error handler, before any concerns.
+  rescue_from StandardError, with: :render_error_response
 
   include ActiveSupport::Configurable
   include Authentication
@@ -11,6 +13,8 @@ class ApplicationController < ActionController::API
   before_action :set_paper_trail_whodunnit
 
   rescue_from APIExceptions::StandardError, with: :render_error_response
+  rescue_from Authority::SecurityViolation, with: :authority_forbidden
+  rescue_from ActiveRecord::RecordNotFound, with: :respond_with_resource_not_found
 
   config_accessor :pagination_enforced, instance_writer: false do
     false
@@ -133,7 +137,7 @@ class ApplicationController < ActionController::API
     render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
   end
 
-  def respond_with_resource_not_found
+  def respond_with_resource_not_found(*)
     options = {
       status: 404,
       title: I18n.t("controllers.errors.not_found.title").titlecase,

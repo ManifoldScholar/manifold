@@ -29,6 +29,7 @@ Authority.configure do |config|
     edit: "update",
     update: "update",
     destroy: "delete",
+    resolve_flags: "resolve_flags",
     lookup: "lookup"
   }
 
@@ -51,6 +52,7 @@ Authority.configure do |config|
     fully_read: "fully_readable",
     list: "listable",
     bulk_delete: "bulk_deletable",
+    resolve_flags: "flags_resolvable",
     manage: "manageable",
     manage_project_exportations: "project_exportations_manageable",
     create_project_exportations: "project_exportations_creatable",
