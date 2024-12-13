@@ -170,6 +170,10 @@ module V1
           hash.deep_transform_keys { |key| key.to_s.camelize(:lower) }.symbolize_keys!
         end
 
+        def admin?(params)
+          authenticated?(params) && params[:current_user].admin?
+        end
+
         def authenticated?(params)
           params[:current_user].present?
         end

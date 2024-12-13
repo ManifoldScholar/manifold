@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 module API
   module V1
     class AnnotationsController < ApplicationController
       config.pagination_enforced = true
 
       resourceful! Annotation do
-        Annotation.includes([:creator, :flags])
-          .filtered(with_pagination!(annotation_filter_params))
+        Annotation.filtered(with_pagination!(annotation_filter_params))
       end
 
       def index

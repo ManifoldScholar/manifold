@@ -27,6 +27,11 @@ class ApplicationAuthorizer < Authority::Authorizer
     self.class.bulk_deletable_by?(user, options)
   end
 
+  # @note Defer to class option by default.
+  def flags_resolvable_by?(user, options = {})
+    self.class.flags_resolvable_by?(user, options)
+  end
+
   def has_any_role?(user, *roles, on: resource)
     roles.flatten.any? do |role|
       has_role?(user, role, on: on)
@@ -99,7 +104,7 @@ class ApplicationAuthorizer < Authority::Authorizer
     # @param [User, AnonymousUser, nil] user
     # @param [Hash] options
     def bulk_deletable_by?(user, _options = {})
-      has_any_role? user, :admin
+      admin_permissions?(user)
     end
 
     # Any class method from Authority::Authorizer that isn't overridden
@@ -113,6 +118,12 @@ class ApplicationAuthorizer < Authority::Authorizer
       # 'Whitelist' strategy for security: anything not explicitly allowed is
       # considered forbidden.
       config.allowed_by_default
+    end
+
+    # @param [User, AnonymousUser, nil] user
+    # @param [Hash] options
+    def flags_resolvable_by?(user, _options = {})
+      admin_permissions?(user)
     end
 
     def reading_groups_disabled?
