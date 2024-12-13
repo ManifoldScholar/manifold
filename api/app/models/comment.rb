@@ -67,10 +67,6 @@ class Comment < ApplicationRecord
     parent && parent.creator_id == creator_id
   end
 
-  def flagged_by?(user)
-    flags.where(creator: user).count.positive?
-  end
-
   def author_created
     creator.project_author_of? project
   end

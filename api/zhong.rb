@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "./config/boot"
 require "./config/environment"
 
@@ -5,6 +7,10 @@ Zhong.redis = Redis.new(url: ENV["RAILS_REDIS_URL"])
 
 Zhong.schedule do
   category "caches" do
+    every(10.minutes, "refresh_all_flag_status_data") do
+      ::Flags::RefreshAllStatusDataJob.perform_later
+    end
+
     every(15.minutes, "refresh_project_collections") do
       ::ProjectCollectionJobs::QueueCacheCollectionProjectsJob.perform_later
     end
