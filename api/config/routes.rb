@@ -1,7 +1,17 @@
+# frozen_string_literal: true
+
 require "sidekiq/web"
 require "zhong/web"
 
 Rails.application.routes.draw do
+  concern :flaggable do
+    resource :flags, controller: "/api/v1/flags", only: [:create, :destroy] do
+      member do
+        delete :resolve_all
+      end
+    end
+  end
+
   concern :permissible do
     resources :permissions,
               only: [:create, :index, :show, :update, :destroy],
@@ -127,13 +137,13 @@ Rails.application.routes.draw do
 
       resources :comments, only: [:show, :update, :destroy] do
         namespace :relationships do
-          resource :flags, controller: "/api/v1/flags", only: [:create, :destroy]
+          concerns :flaggable
         end
       end
 
       resources :annotations, only: [:update, :destroy], controller: "text_sections/relationships/annotations" do
         namespace :relationships do
-          resource :flags, controller: "/api/v1/flags", only: [:create, :destroy]
+          concerns :flaggable
           resources :comments, controller: "/api/v1/comments"
         end
       end

@@ -1,17 +1,6 @@
+# frozen_string_literal: true
+
 class FlagAuthorizer < ApplicationAuthorizer
-
-  def self.default(_able, _user, _options = {})
-    false
-  end
-
-  def self.creatable_by?(_user, _options = {})
-    true
-  end
-
-  def self.deletable_by?(_user, _options = {})
-    true
-  end
-
   def creatable_by?(user, _options = {})
     known_user?(user)
   end
@@ -20,4 +9,17 @@ class FlagAuthorizer < ApplicationAuthorizer
     creator_or_has_editor_permissions?(user, resource)
   end
 
+  class << self
+    def default(_able, _user, _options = {})
+      false
+    end
+
+    def creatable_by?(user, _options = {})
+      authenticated? user
+    end
+
+    def deletable_by?(user, _options = {})
+      authenticated? user
+    end
+  end
 end

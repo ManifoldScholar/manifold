@@ -19,7 +19,6 @@ module Users
     PRESERVED_RECORDS = [
       ::Comment,
       ::EntitlementImport,
-      ::Flag,
       ::Ingestion,
       ::Page,
       ::PendingEntitlement,
@@ -45,6 +44,8 @@ module Users
       prepare!
 
       run_callbacks :execute do
+        yield purge_flags!
+
         yield prune_empty_reading_groups!
 
         yield replace_creators_in_preserved_records!
@@ -58,6 +59,18 @@ module Users
     # @return [void]
     def prepare!
       @deleted_user = User.deleted_user
+    end
+
+    # {Flag}s do not need to be preserved.
+    #
+    # @note We use `delete_all` here for efficiency and because the scheduled task
+    #   {Flags::RefreshAllStatusData} will perform the necessary cleanup on flagged
+    #   records.
+    # @return [void]
+    def purge_flags!
+      user.created_flags.delete_all
+
+      Success()
     end
 
     # This will prune all {ReadingGroup}s that currently only have the current {User}

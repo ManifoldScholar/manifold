@@ -9,8 +9,6 @@ module API
 
       authority_actions annotations: "bulk_delete", reading_groups: "bulk_delete", users: "bulk_delete"
 
-      rescue_from StandardError, with: :render_error_response
-
       def annotations
         bulk_delete! ::Annotation
       end

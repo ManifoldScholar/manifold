@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Comments controller
     class CommentsController < ApplicationController
       before_action :set_subject
 
+      INCLUDES = %i[creator flags].freeze
+
       resourceful! Comment, authorize_options: { except: [:index, :show] } do
         Comment.filtered(
           with_pagination!(comment_filter_params),
-          scope: comment_scope.roots_and_descendants_preordered
+          scope: comment_scope.includes(*INCLUDES).roots_and_descendants_preordered
         )
       end
 
@@ -19,7 +23,7 @@ module API
         @comments = load_comments
         render_multiple_resources(
           @comments,
-          include: includes,
+          include: INCLUDES,
           location: index_location
         )
       end
@@ -36,8 +40,8 @@ module API
         @comment = authorize_and_create_comment(comment_params)
         render_single_resource(
           @comment,
-          location: comment_location(@comment),
-          include: includes
+          include: INCLUDES,
+          location: comment_location(@comment)
         )
       end
 
@@ -56,10 +60,6 @@ module API
       end
 
       private
-
-      def includes
-        [:creator]
-      end
 
       def comment_location(comment)
         case comment.subject_type
@@ -90,7 +90,6 @@ module API
           @subject = Resource.friendly.find(params[:resource_id])
         end
       end
-
     end
   end
 end
