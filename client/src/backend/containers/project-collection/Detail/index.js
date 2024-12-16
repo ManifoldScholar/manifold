@@ -45,6 +45,7 @@ export class ProjectCollectionDetail extends PureComponent {
 
   render() {
     const { collectionProjects, projectCollection, t } = this.props;
+
     if (!projectCollection || !collectionProjects) return null;
     const projects = collectionProjects.map(cp => cp.relationships.project);
 

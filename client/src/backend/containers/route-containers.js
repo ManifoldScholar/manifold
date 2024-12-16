@@ -70,6 +70,7 @@ export default {
   ProjectCollectionDetail: ProjectCollection.Detail,
   ProjectCollectionManageProjects: ProjectCollection.ManageProjects,
   ProjectCollectionSettings: ProjectCollection.Settings,
+  ProjectCollectionNew: ProjectCollection.New,
   ProjectWrapper: Project.Wrapper,
   ProjectTexts: Project.Texts,
   ProjectTextIngestionNew: Project.Text.Ingestion.New,

@@ -363,6 +363,14 @@ const routes = {
           helper: () => "/backend/projects/project-collections",
           routes: [
             {
+              name: "backendProjectCollectionsNew",
+              exact: true,
+              component: "ProjectCollectionNew",
+              path: "/backend/projects/project-collections/new",
+              helper: () => `/backend/projects/project-collections/new`,
+              modal: true
+            },
+            {
               name: "backendProjectCollection",
               exact: false,
               component: "ProjectCollectionDetail",
@@ -385,6 +393,14 @@ const routes = {
                   path: "/backend/projects/project-collections/:id/settings",
                   helper: pc =>
                     `/backend/projects/project-collections/${pc}/settings`
+                },
+                {
+                  name: "backendProjectCollectionNew",
+                  exact: true,
+                  component: "ProjectCollectionNew",
+                  path: "/backend/projects/project-collections/:id/new",
+                  helper: pc =>
+                    `/backend/projects/project-collections/${pc}/new`
                 }
               ]
             }

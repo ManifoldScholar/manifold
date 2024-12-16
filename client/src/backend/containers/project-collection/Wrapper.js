@@ -5,10 +5,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { collectionProjectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
-import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import ProjectCollection from "backend/components/project-collection";
-import New from "./New";
-import Drawer from "global/components/drawer";
 import { childRoutes } from "helpers/router";
 import size from "lodash/size";
 import lh from "helpers/linkHandler";
@@ -54,11 +51,6 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     t: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { showNew: false, newFormDirty: false };
-  }
-
   componentDidMount() {
     this.fetchProjectCollections();
     this.fetchProjectCollection();
@@ -73,7 +65,10 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params.id !== this.props.match.params.id) {
+    if (
+      prevProps.match.params.id !== this.props.match.params.id &&
+      this.props.match.params.id !== "new"
+    ) {
       this.fetchProjectCollection();
       this.fetchCollectionProjects();
     }
@@ -92,7 +87,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 
   fetchProjectCollection = (page = 1, perPage = 12) => {
     const id = this.props.match.params.id;
-    if (!id) return Promise.resolve();
+    if (!id || id === "new") return Promise.resolve();
 
     const pageParams = { number: page, size: perPage };
     const pagination = { collectionProjects: pageParams };
@@ -106,7 +101,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 
   fetchCollectionProjects = () => {
     const id = this.props.match.params.id;
-    if (!id) return Promise.resolve();
+    if (!id || id === "new") return Promise.resolve();
     const call = collectionProjectsAPI.index(id);
     const { promise } = this.props.dispatch(
       request(call, requests.beCollectionProjects)
@@ -191,28 +186,10 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     this.props.history.push(url);
   };
 
-  handleShowNew = event => {
-    if (event) event.preventDefault();
-    this.setState({ showNew: true });
-  };
-
-  handleHideNew = event => {
-    if (event) event.preventDefault();
-    if (this.state.newFormDirty) {
-      const heading = this.props.t("messages.confirm");
-      const message = this.props.t("messages.unsaved_changes");
-      return this.props.confirm(heading, message, () =>
-        this.setState({ showNew: false })
-      );
-    }
-    this.setState({ showNew: false });
-  };
-
   handleNewSuccess = projectCollection => {
     this.fetchProjectCollections();
     const path = lh.link("backendProjectCollection", projectCollection.id);
     this.props.history.push(path);
-    this.handleHideNew();
   };
 
   handleToggleVisibility = (projectCollection, visible) => {
@@ -233,15 +210,27 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       refreshProjectCollection: this.fetchProjectCollection,
       refreshProjectCollections: this.fetchProjectCollections,
       refreshCollectionProjects: this.fetchCollectionProjects,
-      drawerProps: {
-        closeUrl: lh.link("backendProjectCollections")
-      }
+      handleNewSuccess: this.handleNewSuccess
     };
   }
 
   renderChildRoutes() {
+    const id = this.props.match.params.id;
+
+    if (id && id !== "new")
+      return childRoutes(this.props.route, {
+        childProps: this.childProps
+      });
+
     return childRoutes(this.props.route, {
-      childProps: this.childProps
+      childProps: this.childProps,
+      drawer: true,
+      drawerProps: {
+        size: "flexible",
+        padding: "large",
+        lockScroll: "always",
+        closeUrl: lh.link("backendProjectCollections")
+      }
     });
   }
 
@@ -260,7 +249,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     if (!projectCollections) return null;
 
     const wrapperClasses = classnames("project-collections", {
-      "active-collection": this.props.match.params.id || this.state.showNew,
+      "active-collection": this.props.match.params.id,
       empty: this.noProjectCollections
     });
 
@@ -317,7 +306,6 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
                   onCollectionSelect={this.handleCollectionSelect}
                   onCollectionOrderChange={this.handleCollectionOrderChange}
                   onToggleVisibility={this.handleToggleVisibility}
-                  onShowNew={this.handleShowNew}
                 />
               )}
               <div className="panel">
@@ -326,27 +314,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
                     projectCollection={collectionForHeader}
                   />
                 )}
-                <Drawer.Wrapper
-                  closeCallback={this.handleHideNew}
-                  open={this.state.showNew}
-                  context="backend"
-                  size="flexible"
-                  padding="large"
-                  lockScroll="always"
-                >
-                  <New
-                    successHandler={this.handleNewSuccess}
-                    setDirty={val => this.setState({ newFormDirty: val })}
-                    {...this.childProps}
-                  />
-                </Drawer.Wrapper>
-                {this.noProjectCollections ? (
-                  <EntityCollectionPlaceholder.ProjectCollectionsBackend
-                    onClick={this.handleShowNew}
-                  />
-                ) : (
-                  this.renderChildRoutes()
-                )}
+                <div>{this.renderChildRoutes()}</div>
               </div>
             </div>
           </div>
