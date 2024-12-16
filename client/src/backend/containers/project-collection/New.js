@@ -14,8 +14,7 @@ class ProjectCollectionNew extends PureComponent {
   static propTypes = {
     buildUpdateProjectCollection: PropTypes.func.isRequired,
     buildCreateProjectCollection: PropTypes.func.isRequired,
-    successHandler: PropTypes.func.isRequired,
-    setDirty: PropTypes.func.isRequired,
+    handleNewSuccess: PropTypes.func.isRequired,
     t: PropTypes.func
   };
 
@@ -35,12 +34,6 @@ class ProjectCollectionNew extends PureComponent {
     };
   }
 
-  onDirty = session => {
-    const dirtyAttrs = Object.keys(session.attributes).length;
-    const dirtyRels = Object.keys(session.relationships).length;
-    this.props.setDirty(dirtyAttrs || dirtyRels);
-  };
-
   render() {
     return (
       <Authorize
@@ -55,8 +48,7 @@ class ProjectCollectionNew extends PureComponent {
             name="backend-project-collection-create"
             update={this.props.buildUpdateProjectCollection}
             create={this.props.buildCreateProjectCollection}
-            onSuccess={this.props.successHandler}
-            onDirty={this.onDirty}
+            onSuccess={this.props.handleNewSuccess}
             className="form-secondary project-collection-form"
           >
             <ProjectCollection.Form.Fields {...this.props} />
