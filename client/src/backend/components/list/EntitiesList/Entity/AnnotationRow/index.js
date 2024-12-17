@@ -21,7 +21,7 @@ function AnnotationRow({
     body,
     private: notePrivate,
     readingGroupPrivacy,
-    flagsCount,
+    unresolvedFlagsCount,
     createdAt,
     textTitle,
     creatorName,
@@ -67,11 +67,11 @@ function AnnotationRow({
                       }
                     ]
                   : []),
-                ...(flagsCount
+                ...(unresolvedFlagsCount
                   ? [
                       {
                         text: t("records.annotations.flag_count", {
-                          count: flagsCount
+                          count: unresolvedFlagsCount
                         }),
                         level: "error"
                       }

@@ -16,7 +16,7 @@ function AnnotationDetailContainer({ refresh, confirm }) {
   const { t } = useTranslation();
   const { id } = useParams();
 
-  const { data: annotation } = useFetch({
+  const { data: annotation, refresh: refreshAnnotation } = useFetch({
     request: [annotationsAPI.show, id],
     condition: !!id
   });
@@ -38,6 +38,8 @@ function AnnotationDetailContainer({ refresh, confirm }) {
   const {
     body,
     flagsCount,
+    unresolvedFlagsCount,
+    resolvedFlagsCount,
     createdAt,
     textTitle,
     textSlug,
@@ -54,7 +56,17 @@ function AnnotationDetailContainer({ refresh, confirm }) {
     readingGroupName
   };
 
-  const handleUnflag = () => {};
+  const resolveFlags = useApiCallback(annotationsAPI.resolveAllFlags);
+
+  const handleResolveFlags = useCallback(() => {
+    const heading = t("modals.resolve_flags");
+    const message = t("modals.confirm_body");
+    if (confirm)
+      confirm(heading, message, async () => {
+        await resolveFlags(id);
+        refreshAnnotation();
+      });
+  }, [id, confirm, resolveFlags, t, refreshAnnotation]);
 
   return id ? (
     <section>
@@ -74,20 +86,26 @@ function AnnotationDetailContainer({ refresh, confirm }) {
             entity: annotation,
             onClick: onDelete
           },
-          ...(flagsCount
+          ...(unresolvedFlagsCount
             ? [
                 {
-                  label: "Clear all flags",
+                  label: t("records.annotations.resolve_all_label"),
                   icon: "circleMinus24",
                   ability: "update",
                   entity: annotation,
-                  onClick: handleUnflag
+                  onClick: handleResolveFlags
                 }
               ]
             : [])
         ]}
       />
-      {!!flagsCount && <FlagsList flags={flags} />}
+      {!!flagsCount && (
+        <FlagsList
+          flags={flags}
+          resolvedFlagsCount={resolvedFlagsCount}
+          unresolvedFlagsCount={unresolvedFlagsCount}
+        />
+      )}
       <Body body={body} />
       <Metadata {...metadataProps} />
     </section>
