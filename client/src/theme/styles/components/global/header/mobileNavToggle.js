@@ -11,7 +11,7 @@ export default `
 
     ${respond(`display: none;`, 100)}
 
-    :not(.backend) & {
+    body:not(.backend) & {
       ${respond(`display: none;`, 82)}
     }
 
