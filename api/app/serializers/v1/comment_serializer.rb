@@ -17,11 +17,16 @@ module V1
       object.deleted == true ? deleted_body(object, params) : object.body
     end
 
-    typed_attribute :subject_id, Types::Serializer::ID.meta(read_only: true), if: ADMIN_METADATA_VISIBLE
-    typed_attribute :subject_type, Types::String.meta(read_only: true), if: ADMIN_METADATA_VISIBLE
-    typed_attribute :subject_title, Types::String.meta(read_only: true), if: ADMIN_METADATA_VISIBLE
-    typed_attribute(:project_id, Types::Serializer::ID.meta(read_only: true), if: ADMIN_METADATA_VISIBLE) do |object, _params|
-      object.project.id
+    if ADMIN_METADATA_VISIBLE
+      typed_attribute :subject_id, Types::Serializer::ID.meta(read_only: true)
+      typed_attribute :subject_type, Types::String.meta(read_only: true)
+      typed_attribute :subject_title, Types::String.optional.meta(read_only: true)
+      typed_attribute :subject_text_title, Types::String.optional.meta(read_only: true)
+      typed_attribute :subject_text_slug, Types::String.optional.meta(read_only: true)
+      typed_attribute :subject_text_section_id, Types::String.optional.meta(read_only: true)
+      typed_attribute(:project_slug, Types::String.meta(read_only: true)) do |object, _params|
+        object.project.slug
+      end
     end
 
     typed_attribute(:flagged, Types::Bool.meta(read_only: true)) do |object, params|
