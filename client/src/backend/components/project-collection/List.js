@@ -13,7 +13,6 @@ export default function ProjectCollectionList(props) {
   const { t } = useTranslation();
 
   const {
-    projectCollection,
     projectCollections,
     onCollectionSelect,
     onToggleVisibility,
@@ -24,7 +23,7 @@ export default function ProjectCollectionList(props) {
 
   const newPath =
     id && id !== "new"
-      ? lh.link("backendProjectCollectionNew", projectCollection.id)
+      ? lh.link("backendProjectCollectionNew", id)
       : lh.link("backendProjectCollectionsNew");
 
   return (
