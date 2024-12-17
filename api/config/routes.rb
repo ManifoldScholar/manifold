@@ -135,7 +135,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :comments, only: [:show, :update, :destroy] do
+      resources :comments, only: [:index, :show, :update, :destroy] do
         namespace :relationships do
           concerns :flaggable
         end
