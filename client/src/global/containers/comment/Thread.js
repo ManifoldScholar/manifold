@@ -79,24 +79,6 @@ export class CommentThread extends PureComponent {
     );
   };
 
-  handleCommentFlag = (event, comment) => {
-    const call = commentsAPI.flag(comment);
-    this.props.dispatch(
-      request(call, requests.rCommentFlag, {
-        refreshes: `comments-for-${this.props.subject.id}`
-      })
-    );
-  };
-
-  handleCommentUnflag = (event, comment) => {
-    const call = commentsAPI.unflag(comment);
-    this.props.dispatch(
-      request(call, requests.rCommentUnflag, {
-        refreshes: `comments-for-${this.props.subject.id}`
-      })
-    );
-  };
-
   handleNextClick = pagination => {
     const nextPage =
       pagination.perPage === 1 ? pagination.currentPage : pagination.nextPage;
@@ -162,8 +144,6 @@ export class CommentThread extends PureComponent {
                 handleDelete={this.handleCommentDelete}
                 handleRestore={this.handleCommentRestore}
                 handleDestroy={this.handleCommentDestroy}
-                handleFlag={this.handleCommentFlag}
-                handleUnflag={this.handleCommentUnflag}
                 showLogin={showLogin}
               />
             );

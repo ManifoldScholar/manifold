@@ -7,31 +7,41 @@ import Wrapper from "global/components/dialog/Wrapper";
 import { Unwrapped } from "global/components/form";
 import { FormContext } from "helpers/contexts";
 import { useApiCallback } from "hooks";
-import { annotationsAPI } from "api";
+import { annotationsAPI, commentsAPI } from "api";
 import * as Styled from "./styles";
 
-export default function FlagAnnotationModal({ setOpen, annotationId }) {
+export default function FlagAnnotationModal({
+  setOpen,
+  id,
+  annotationId,
+  type
+}) {
   const { t } = useTranslation();
 
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const id = useUID();
-  const errorId = `${id}-error`;
+  const uid = useUID();
+  const errorId = `${uid}-error`;
 
   const flagAnnotation = useApiCallback(annotationsAPI.flag);
+  const flagComment = useApiCallback(commentsAPI.flag, {
+    refreshes: `comments-for-${annotationId}`
+  });
 
   const handleSubmit = useCallback(
     async e => {
       e.preventDefault();
       try {
-        const res = await flagAnnotation(annotationId, message);
+        const handleFlag =
+          type === "annotations" ? flagAnnotation : flagComment;
+        const res = await handleFlag(id, message);
         if (res?.data) return setOpen(false);
       } catch (err) {
         setErrors(err);
       }
     },
-    [annotationId, message, flagAnnotation, setOpen]
+    [id, type, message, flagAnnotation, flagComment, setOpen]
   );
 
   return (
@@ -42,7 +52,14 @@ export default function FlagAnnotationModal({ setOpen, annotationId }) {
       closeOnOverlayClick={false}
     >
       <header className="dialog__header">
-        <h2>{t("reader.report_annotation.header")}</h2>
+        <h2>
+          {t("reader.report_annotation.header", {
+            type:
+              type === "annotations"
+                ? t("glossary.annotation_title_case_one")
+                : t("glossary.comment_title_case_one")
+          })}
+        </h2>
       </header>
       <Styled.Instructions>
         {t("reader.report_annotation.instructions")}
@@ -53,7 +70,7 @@ export default function FlagAnnotationModal({ setOpen, annotationId }) {
             rows={5}
             value={message}
             onChange={e => setMessage(e.target.value)}
-            id={id}
+            id={uid}
             placeholder={t("reader.report_annotation.placeholder")}
             aria-describedby={errorId}
             name="message"
@@ -87,6 +104,7 @@ export default function FlagAnnotationModal({ setOpen, annotationId }) {
 FlagAnnotationModal.displayName = "Annotation.Annotation.UserContent.FlagModal";
 
 FlagAnnotationModal.propTypes = {
-  annotationId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   setOpen: PropTypes.func.isRequired
 };
