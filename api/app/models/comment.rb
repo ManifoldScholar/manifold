@@ -84,6 +84,14 @@ class Comment < ApplicationRecord
     subject.text_title if subject.respond_to? :text_title
   end
 
+  def subject_text_slug
+    subject.text_slug if subject.respond_to? :text_slug
+  end
+
+  def subject_text_section_id
+    subject.text_section.id if subject.respond_to? :text_section
+  end
+
   def reply_to_self?
     parent && parent.creator_id == creator_id
   end
