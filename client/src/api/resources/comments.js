@@ -1,6 +1,16 @@
 import isString from "lodash/isString";
 
 export default {
+  adminIndex(filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/comments`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   index(subject, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/${subject.type}/${subject.id}/relationships/comments`,
