@@ -32,6 +32,14 @@ export default {
     };
   },
 
+  show(id) {
+    return {
+      endpoint: `/api/v1/comments/${id}`,
+      method: "GET",
+      options: {}
+    };
+  },
+
   update(id, comment) {
     const data = { attributes: comment };
     return {
@@ -65,6 +73,14 @@ export default {
     const id = isString(comment) ? comment : comment.id;
     return {
       endpoint: `/api/v1/comments/${id}/relationships/flags`,
+      method: "DELETE",
+      options: {}
+    };
+  },
+
+  resolveAllFlags(commentId) {
+    return {
+      endpoint: `/api/v1/comments/${commentId}/relationships/flags/resolve_all`,
       method: "DELETE",
       options: {}
     };
