@@ -60,7 +60,7 @@ module V1
     typed_has_many :flags, serializer: ::V1::FlagSerializer, record_type: "flag", if: FLAG_METADATA_VISIBLE
 
     ::FlagStatus::COUNTS.each do |attr|
-      typed_attribute attr, Types::Integer.meta(read_only: true), if: FLAG_METADATA_VISIBLE
+      typed_attribute attr, Types::Integer.meta(read_only: true)
     end
 
     typed_belongs_to :creator,
