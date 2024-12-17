@@ -29,6 +29,7 @@ import ReadingGroups from "backend/containers/reading-groups";
 import ReadingGroup from "backend/containers/reading-group";
 import Annotations from "backend/containers/annotations";
 import User from "backend/containers/user";
+import Comments from "backend/containers/comments";
 
 export default {
   Backend,
@@ -167,6 +168,8 @@ export default {
   ReadingGroupDetails: ReadingGroup.Details,
   AnnotationsList: Annotations.List,
   AnnotationDetail: Annotations.Detail,
+  CommentsList: Comments.List,
+  CommentDetail: Comments.Detail,
   UserWrapper: User.Wrapper,
   UserProperties: User.Properties,
   UserActivity: User.Activity

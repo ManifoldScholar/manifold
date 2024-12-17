@@ -33,6 +33,7 @@ import ReadingGroupRow from "./Entity/ReadingGroupRow";
 import ReadingGroupMemberRow from "./Entity/ReadingGroupMemberRow";
 import ReadingGroupMembershipRow from "./Entity/ReadingGroupMembershipRow";
 import AnnotationRow from "./Entity/AnnotationRow";
+import CommentRow from "./Entity/CommentRow";
 
 export default List;
 export {
@@ -69,5 +70,6 @@ export {
   ReadingGroupRow,
   ReadingGroupMemberRow,
   ReadingGroupMembershipRow,
-  AnnotationRow
+  AnnotationRow,
+  CommentRow
 };

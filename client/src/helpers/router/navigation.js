@@ -84,7 +84,7 @@ class Navigation {
       {
         label: "titles.records",
         route: "backendRecords",
-        entity: ["user", "maker", "page", "feature"],
+        entity: ["user", "maker", "page", "feature", "annotation", "comment"],
         ability: "update",
         children: [
           {
@@ -121,6 +121,12 @@ class Navigation {
             label: "titles.annotations",
             route: "backendRecordsAnnotations",
             entity: "annotation",
+            ability: "update"
+          },
+          {
+            label: "titles.comments",
+            route: "backendRecordsComments",
+            entity: "comment",
             ability: "update"
           }
         ]
@@ -431,6 +437,12 @@ class Navigation {
         label: "titles.annotations",
         route: "backendRecordsAnnotations",
         entity: "annotation",
+        ability: "update"
+      },
+      {
+        label: "titles.comments",
+        route: "backendRecordsComments",
+        entity: "comment",
         ability: "update"
       }
     ];
