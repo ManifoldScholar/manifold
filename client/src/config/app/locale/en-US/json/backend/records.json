@@ -4,6 +4,8 @@
     "annotations": {
       "flag_count_one": "1 Flag",
       "flag_count_other": "{{ count }} Flags",
+      "resolved_flags_count": "Resolved count: {{ count }}",
+      "resolve_all_label": "Resolve all flags",
       "remove_label": "Remove annotation",
       "detail_header": "Annotation Detail",
       "metadata_header": "Metadata",

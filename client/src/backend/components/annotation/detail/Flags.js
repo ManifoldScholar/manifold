@@ -5,7 +5,11 @@ import Form from "global/components/form";
 import FormattedDate from "global/components/FormattedDate";
 import * as Styled from "./styles";
 
-export default function FlagsList({ flags }) {
+export default function FlagsList({
+  flags,
+  resolvedFlagsCount,
+  unresolvedFlagsCount
+}) {
   const { t } = useTranslation();
 
   return (
@@ -14,15 +18,24 @@ export default function FlagsList({ flags }) {
         headingAs="h3"
         label={t("glossary.flag_other")}
         id="flags-list-header"
-        color="error"
+        color={unresolvedFlagsCount ? "error" : undefined}
       />
       <Styled.FlagsList>
+        {!!resolvedFlagsCount && (
+          <Styled.FlagWrapper>
+            <span>
+              {t("records.annotations.resolved_flags_count", {
+                count: resolvedFlagsCount
+              })}
+            </span>
+          </Styled.FlagWrapper>
+        )}
         {flags.map(f => {
           const {
-            attributes: { message, createdAt },
+            attributes: { message, createdAt, resolved },
             relationships: { creator }
           } = f;
-          return (
+          return !resolved ? (
             <Styled.FlagWrapper>
               <Styled.FlagMeta>
                 <FormattedDate format="MMM dd, yyyy" date={createdAt} />
@@ -30,7 +43,7 @@ export default function FlagsList({ flags }) {
               </Styled.FlagMeta>
               <Styled.FlagMessage>{message}</Styled.FlagMessage>
             </Styled.FlagWrapper>
-          );
+          ) : null;
         })}
       </Styled.FlagsList>
     </>
@@ -40,5 +53,6 @@ export default function FlagsList({ flags }) {
 FlagsList.displayName = "Annotation.Detail.FlagsList";
 
 FlagsList.propTypes = {
-  flags: PropTypes.arrayOf(PropTypes.object)
+  flags: PropTypes.arrayOf(PropTypes.object),
+  hasResolvedFlags: PropTypes.bool
 };

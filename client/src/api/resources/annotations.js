@@ -87,5 +87,13 @@ export default {
       method: "DELETE",
       options: {}
     };
+  },
+
+  resolveAllFlags(annotationId) {
+    return {
+      endpoint: `/api/v1/annotations/${annotationId}/relationships/flags/resolve_all`,
+      method: "DELETE",
+      options: {}
+    };
   }
 };
