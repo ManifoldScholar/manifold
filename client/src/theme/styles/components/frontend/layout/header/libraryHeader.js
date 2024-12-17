@@ -24,7 +24,7 @@ export default `
         100
       )}
 
-      :not(.backend) & {
+      body:not(.backend) & {
         ${respond(
           `grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;`,
           82
