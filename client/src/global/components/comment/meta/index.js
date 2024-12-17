@@ -68,9 +68,11 @@ class CommentMeta extends PureComponent {
             </div>
           ) : null}
           <Authorize ability="create" entity="comment">
-            {comment.attributes.flagsCount > 0 ? (
+            {comment.attributes.unresolvedFlagsCount > 0 ? (
               <div className="marker marker--secondary">
-                {t("counts.flag", { count: comment.attributes.flagsCount })}
+                {t("counts.flag", {
+                  count: comment.attributes.unresolvedFlagsCount
+                })}
               </div>
             ) : null}
           </Authorize>

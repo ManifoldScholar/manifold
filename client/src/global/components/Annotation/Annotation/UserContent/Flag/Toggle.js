@@ -2,21 +2,25 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useApiCallback } from "hooks";
-import { annotationsAPI } from "api";
+import { annotationsAPI, commentsAPI } from "api";
 import Modal from "./Modal";
 import * as Styled from "../styles";
 
-export default function FlagModalToggle({ annotation }) {
+export default function FlagModalToggle({ record, annotationId }) {
   const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
 
   const unflagAnnotation = useApiCallback(annotationsAPI.unflag);
+  const unflagComment = useApiCallback(commentsAPI.unflag);
+
+  const handleUnflag =
+    record.type === "annotations" ? unflagAnnotation : unflagComment;
 
   return (
     <>
-      {annotation?.attributes?.flagged ? (
-        <Styled.SecondaryButton onClick={() => unflagAnnotation(annotation.id)}>
+      {record?.attributes?.flagged ? (
+        <Styled.SecondaryButton onClick={() => handleUnflag(record.id)}>
           {t("actions.unflag")}
         </Styled.SecondaryButton>
       ) : (
@@ -24,7 +28,14 @@ export default function FlagModalToggle({ annotation }) {
           {t("actions.flag")}
         </Styled.SecondaryButton>
       )}
-      {open && <Modal setOpen={setOpen} annotationId={annotation.id} />}
+      {open && (
+        <Modal
+          setOpen={setOpen}
+          id={record.id}
+          annotationId={annotationId}
+          type={record.type}
+        />
+      )}
     </>
   );
 }
@@ -32,5 +43,6 @@ export default function FlagModalToggle({ annotation }) {
 FlagModalToggle.displayName = "Annotation.Annotation.UserContent.FlagToggle";
 
 FlagModalToggle.propTypes = {
-  annotation: PropTypes.object.isRequired
+  record: PropTypes.object.isRequired,
+  annotationId: PropTypes.string
 };
