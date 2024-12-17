@@ -94,9 +94,9 @@
     "section_description": "Start reading this text on {{appName}}",
     "section_label": "Text Section",
     "report_annotation": {
-      "header": "Report annotation header",
-      "instructions": "Report annotation instructions",
-      "placeholder": "Report annotation placeholder",
+      "header": "Report {{ type }}",
+      "instructions": "Administrators of this instance will be notified.",
+      "placeholder": "Optionally, include a message about why you are reporting this content.",
       "message_input_label": "Message"
     }
   }

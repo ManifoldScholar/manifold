@@ -5,6 +5,7 @@ import CommentContainer from "global/containers/comment";
 import Meta from "global/components/comment/meta";
 import Deleted from "global/components/comment/deleted";
 import Helper from "global/components/helper";
+import FlagToggle from "global/components/Annotation/Annotation/UserContent/Flag/Toggle";
 import * as Styled from "global/components/Annotation/Annotation/UserContent/styles";
 
 import Authorize from "hoc/Authorize";
@@ -137,7 +138,7 @@ class CommentDetail extends PureComponent {
   }
 
   renderComment() {
-    const { comment, parent, t } = this.props;
+    const { comment, parent, t, subject } = this.props;
     const { creator } = comment.relationships;
 
     return (
@@ -197,17 +198,7 @@ class CommentDetail extends PureComponent {
                   </li>
                 )}
                 <li>
-                  <Styled.SecondaryButton
-                    onClick={
-                      comment.attributes.flagged
-                        ? this.handleUnflag
-                        : this.handleFlag
-                    }
-                  >
-                    {comment.attributes.flagged
-                      ? t("actions.unflag")
-                      : t("actions.flag")}
-                  </Styled.SecondaryButton>
+                  <FlagToggle record={comment} annotationId={subject?.id} />
                 </li>
               </Styled.UtilityList>
             )}
