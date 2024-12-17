@@ -12,6 +12,9 @@
       "text_title_placeholder": "[Text Title Missing]",
       "bulk_actions": "Bulk Actions"
     },
+    "comments": {
+      "detail_header": "Comment Detail"
+    },
     "makers": {
       "header": "Manage Makers",
       "button_label": "Add New Maker",

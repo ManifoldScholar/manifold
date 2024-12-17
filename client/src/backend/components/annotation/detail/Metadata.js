@@ -10,7 +10,9 @@ export default function AnnotationMetadata({
   creator,
   createdAt,
   textTitle,
-  readingGroupName
+  subjectTitle,
+  readingGroupName,
+  isComment
 }) {
   const { t } = useTranslation();
 
@@ -26,15 +28,31 @@ export default function AnnotationMetadata({
         <Styled.Item>
           <FormattedDate format="MMMM dd, yyyy" date={createdAt} />
         </Styled.Item>
-        <Styled.Label>{t("glossary.text_title_case_one")}</Styled.Label>
-        <Styled.Item>
-          <span
-            dangerouslySetInnerHTML={{
-              __html:
-                textTitle ?? t("records.annotations.text_title_placeholder")
-            }}
-          />
-        </Styled.Item>
+        {(!isComment || textTitle) && (
+          <>
+            <Styled.Label>{t("glossary.text_title_case_one")}</Styled.Label>
+            <Styled.Item>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html:
+                    textTitle ?? t("records.annotations.text_title_placeholder")
+                }}
+              />
+            </Styled.Item>
+          </>
+        )}
+        {subjectTitle && (
+          <>
+            <Styled.Label>{t("glossary.resource_one")}</Styled.Label>
+            <Styled.Item>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: subjectTitle
+                }}
+              />
+            </Styled.Item>
+          </>
+        )}
         {readingGroupName && (
           <>
             <Styled.Label>{t("glossary.reading_group_one")}</Styled.Label>
@@ -70,5 +88,6 @@ AnnotationMetadata.propTypes = {
   creator: PropTypes.object,
   createdAt: PropTypes.string,
   textTitle: PropTypes.string,
+  subjectTitle: PropTypes.string,
   readingGroupName: PropTypes.string
 };
