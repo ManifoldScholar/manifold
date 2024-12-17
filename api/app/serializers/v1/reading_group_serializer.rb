@@ -31,8 +31,12 @@ module V1
       object.annotations_count + object.highlights_count
     end
 
-    typed_attribute :annotation_flags_count, Types::Integer.meta(read_only: true) do |object, _params|
-      object.annotation_flags.size
+    typed_attribute :annotation_flags_count, Types::Integer.meta(read_only: true) do |object, params|
+      if params[:current_user].try(:admin?)
+        object.annotations.sum(:unresolved_flags_count)
+      else
+        0
+      end
     end
 
     typed_attribute :current_user_counts, Users::ReadingGroupCount::SCHEMA.meta(read_only: true) do |object, params|
