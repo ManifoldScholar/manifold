@@ -4,7 +4,7 @@ module V1
   class CommentSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
 
-    FLAG_METADATA_VISIBLE = ->(object, params) { flag_metadata_visible?(object, params) }
+    ADMIN_METADATA_VISIBLE = ->(object, params) { admin_metadata_visible?(object, params) }
 
     abilities
     typed_attribute :parent_id, Types::Serializer::ID.optional
@@ -17,11 +17,18 @@ module V1
       object.deleted == true ? deleted_body(object, params) : object.body
     end
 
+    typed_attribute :subject_id, Types::Serializer::ID.meta(read_only: true), if: ADMIN_METADATA_VISIBLE
+    typed_attribute :subject_type, Types::String.meta(read_only: true), if: ADMIN_METADATA_VISIBLE
+    typed_attribute :subject_title, Types::String.meta(read_only: true), if: ADMIN_METADATA_VISIBLE
+    typed_attribute(:project_id, Types::Serializer::ID.meta(read_only: true), if: ADMIN_METADATA_VISIBLE) do |object, _params|
+      object.project.id
+    end
+
     typed_attribute(:flagged, Types::Bool.meta(read_only: true)) do |object, params|
       object.flagged_by?(params[:current_user])
     end
 
-    typed_has_many :flags, serializer: ::V1::FlagSerializer, record_type: "flag", if: FLAG_METADATA_VISIBLE
+    typed_has_many :flags, serializer: ::V1::FlagSerializer, record_type: "flag", if: ADMIN_METADATA_VISIBLE
 
     ::FlagStatus::COUNTS.each do |attr|
       typed_attribute attr, Types::Integer.meta(read_only: true)
@@ -30,7 +37,7 @@ module V1
     has_one_creator
 
     class << self
-      def flag_metadata_visible?(_object, params)
+      def admin_metadata_visible?(_object, params)
         admin?(params)
       end
 

@@ -536,7 +536,7 @@ module Validation
   end
 
   def comment_filter_params
-    params.permit(filter: [])[:filter]
+    params.permit(filter: [:order, :flags, :keyword])[:filter]
   end
 
   def version_filter_params
