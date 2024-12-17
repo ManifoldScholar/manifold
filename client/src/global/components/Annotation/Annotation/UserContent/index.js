@@ -159,7 +159,7 @@ export default function AnnotationDetail({
                     </Authorize>
                     {verifiedUser && (
                       <li>
-                        <FlagToggle annotation={annotation} />
+                        <FlagToggle record={annotation} />
                       </li>
                     )}
                     {showInlineCommentsToggle && (

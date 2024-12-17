@@ -92,10 +92,12 @@ class AnnotationMeta extends PureComponent {
             {t("common.private_title_case")}
           </div>
         )}
-        {annotation.attributes.flagsCount > 0 && (
+        {annotation.attributes.unresolvedFlagsCount > 0 && (
           <Authorize ability="create" entity="comment">
             <div className="annotation-tag__inner annotation-tag--secondary">
-              {t("counts.flag", { count: annotation.attributes.flagsCount })}
+              {t("counts.flag", {
+                count: annotation.attributes.unresolvedFlagsCount
+              })}
             </div>
           </Authorize>
         )}
