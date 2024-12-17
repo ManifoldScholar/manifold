@@ -28,6 +28,27 @@ class Comment < ApplicationRecord
     where(id: ids)
   }
 
+  scope :with_flags, ->(value = nil) {
+                       where(arel_table[:unresolved_flags_count].gteq(1)) if value.present?
+                     }
+
+  scope :with_order, ->(by = nil) do
+    case by
+    when "created_at ASC"
+      reorder(created_at: :asc)
+    when "created_at DESC"
+      reorder(created_at: :desc)
+    when "created_by"
+      reorder(creator_id: :desc)
+    when "subject"
+      reorder(subject_id: :desc)
+    else
+      reorder(created: :desc)
+    end
+  end
+
+  scope :by_keyword, ->(value) { build_keyword_scope(value) if value.present? }
+
   # Associations
   belongs_to :subject, polymorphic: true, counter_cache: :comments_count
   belongs_to :parent, class_name: "Comment", optional: true, inverse_of: :children,
@@ -81,5 +102,23 @@ class Comment < ApplicationRecord
 
   def enqueue_comment_notifications
     Notifications::EnqueueCommentNotificationsJob.perform_later id
+  end
+
+  class << self
+    def build_keyword_scope(value)
+      escaped = value.gsub("%", "\\%")
+
+      needle = "%#{escaped}%"
+
+      body_matches = where arel_table[:body].matches(needle)
+
+      creator_matches = left_outer_joins(:creator)
+        .where(User.arel_table[:first_name]
+        .matches(needle)
+        .or(User.arel_table[:last_name]
+          .matches(needle)))
+
+      creator_matches.or(body_matches).distinct
+    end
   end
 end
