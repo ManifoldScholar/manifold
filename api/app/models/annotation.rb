@@ -190,7 +190,7 @@ class Annotation < ApplicationRecord
         .where(private: false)
     end
   }
-  scope :with_flags, ->(value = nil) { where("flags_count > 0") if value.present? }
+  scope :with_flags, ->(value = nil) { where("unresolved_flags_count > 0") if value.present? }
   scope :by_keyword, ->(value) { build_keyword_scope(value) if value.present? }
 
   scope :with_order, ->(by = nil) do
