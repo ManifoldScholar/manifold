@@ -1036,6 +1036,22 @@ const routes = {
               helper: a => `/backend/records/annotations/${a}`
             }
           ]
+        },
+        {
+          name: "backendRecordsComments",
+          exact: false,
+          component: "CommentsList",
+          path: "/backend/records/comments",
+          helper: () => `/backend/records/comments`,
+          routes: [
+            {
+              name: "backendRecordsCommentsDetail",
+              exact: true,
+              component: "CommentDetail",
+              path: "/backend/records/comments/:id",
+              helper: c => `/backend/records/comments/${c}`
+            }
+          ]
         }
       ]
     },
