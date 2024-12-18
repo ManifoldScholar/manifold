@@ -79,7 +79,7 @@ export default function UserProperties({ user, saveLabel }) {
             name={"this-is-a-test"}
             update={usersAPI.update}
             create={createUser}
-            handleSuccess={!user ? redirectToUser : undefined}
+            onSuccess={!user ? redirectToUser : undefined}
             className="form-secondary"
             notificationScope="drawer"
           >
