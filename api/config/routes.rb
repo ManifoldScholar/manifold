@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
       scope as: :bulk_delete, controller: :bulk_deletions, path: "bulk_delete" do
         delete :annotations
+        delete :comments
         delete :reading_groups
         delete :users
       end

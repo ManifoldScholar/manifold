@@ -13,6 +13,7 @@ class Comment < ApplicationRecord
   include FlaggableResource
   include TrackedCreator
   include Filterable
+  include SoftDeletable
 
   # Scopes
   scope :by_creator, ->(creator) { where(creator: creator) }
@@ -28,9 +29,9 @@ class Comment < ApplicationRecord
     where(id: ids)
   }
 
-  scope :with_flags, ->(value = nil) {
-                       where(arel_table[:unresolved_flags_count].gteq(1)) if value.present?
-                     }
+  scope :with_flags, ->(value = nil) do
+    where(arel_table[:unresolved_flags_count].gteq(1)) if value.present?
+  end
 
   scope :with_order, ->(by = nil) do
     case by
