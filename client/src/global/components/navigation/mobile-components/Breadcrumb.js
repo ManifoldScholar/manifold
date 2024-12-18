@@ -52,7 +52,10 @@ class MobileBreadcrumb extends PureComponent {
       if (link.matchType === "link" || link.externalUrl) {
         return this.props.location.pathname === this.pathForLink(link);
       }
-      return matchPath(this.props.location.pathname, route) !== null;
+      return (
+        matchPath(this.props.location.pathname, route) !== null ||
+        this.props.location.pathname.startsWith(route.path)
+      );
     });
   }
 
