@@ -219,12 +219,13 @@ export class NavigationStatic extends PureComponent {
           className="site-nav__list"
         >
           {this.props.links.map((link, index) => {
-            if (link.ability)
+            if (link.ability || link.kind)
               return (
                 <Authorize
                   key={`${link.route}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
+                  kind={link.kind}
                 >
                   {this.renderStaticItem(link, index)}
                 </Authorize>
