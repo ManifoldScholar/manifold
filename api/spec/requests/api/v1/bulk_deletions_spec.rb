@@ -49,6 +49,23 @@ RSpec.describe "Bulk Deletions", type: :request do
     end
   end
 
+  describe "DELETE /api/v1/bulk_delete/comments" do
+    let_it_be(:comment, refind: true) { FactoryBot.create :comment }
+    let_it_be(:subcomment, refind: true) { FactoryBot.create :comment, parent: comment }
+
+    let(:ids) { [comment.id] }
+
+    it "deletes the record and its children", :aggregate_failures do
+      expect do
+        delete(api_v1_bulk_delete_comments_path, **request_options)
+      end.to change(Comment.only_deleted, :count).by(2)
+        .and have_enqueued_job(SoftDeletions::PurgeJob).once.with(comment)
+        .and have_enqueued_job(SoftDeletions::PurgeJob).exactly(0).times.with(subcomment)
+
+      expect(response).to have_http_status :ok
+    end
+  end
+
   describe "DELETE /api/v1/bulk_delete/reading_groups" do
     let_it_be(:reading_group_1, refind: true) { FactoryBot.create :reading_group }
     let_it_be(:reading_group_2, refind: true) { FactoryBot.create :reading_group }
