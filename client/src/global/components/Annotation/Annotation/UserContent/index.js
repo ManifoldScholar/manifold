@@ -223,23 +223,21 @@ class AnnotationDetail extends PureComponent {
                     <Styled.UtilityList
                       $isFlagged={annotation.attributes.flagged}
                     >
-                      {this.includeComments ? (
-                        <Authorize entity={"comment"} ability={"create"}>
-                          <li>
-                            <Styled.Button
-                              ref={this.replyToggleRef}
-                              onClick={
-                                this.state.action === "replying"
-                                  ? this.stopReply
-                                  : this.startReply
-                              }
-                              aria-expanded={this.state.action === "replying"}
-                            >
-                              {t("actions.reply")}
-                            </Styled.Button>
-                          </li>
-                        </Authorize>
-                      ) : null}
+                      <Authorize entity={"comment"} ability={"create"}>
+                        <li>
+                          <Styled.Button
+                            ref={this.replyToggleRef}
+                            onClick={
+                              this.state.action === "replying"
+                                ? this.stopReply
+                                : this.startReply
+                            }
+                            aria-expanded={this.state.action === "replying"}
+                          >
+                            {t("actions.reply")}
+                          </Styled.Button>
+                        </li>
+                      </Authorize>
                       <Authorize entity={annotation} ability={"update"}>
                         <li>
                           <Styled.Button
