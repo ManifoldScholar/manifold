@@ -7,10 +7,14 @@ module API
     class BulkDeletionsController < ApplicationController
       include MonadicControllerActions
 
-      authority_actions annotations: "bulk_delete", reading_groups: "bulk_delete", users: "bulk_delete"
+      authority_actions annotations: "bulk_delete", comments: "bulk_delete", reading_groups: "bulk_delete", users: "bulk_delete"
 
       def annotations
         bulk_delete! ::Annotation
+      end
+
+      def comments
+        bulk_delete! ::Comment
       end
 
       def reading_groups

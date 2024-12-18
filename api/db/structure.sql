@@ -291,7 +291,9 @@ CREATE TABLE public.comments (
     events_count integer DEFAULT 0,
     resolved_flags_count bigint DEFAULT 0 NOT NULL,
     unresolved_flags_count bigint DEFAULT 0 NOT NULL,
-    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -4219,6 +4221,20 @@ CREATE INDEX index_comments_on_creator_id ON public.comments USING btree (creato
 
 
 --
+-- Name: index_comments_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_deleted_at ON public.comments USING btree (deleted_at);
+
+
+--
+-- Name: index_comments_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_marked_for_purge_at ON public.comments USING btree (marked_for_purge_at);
+
+
+--
 -- Name: index_comments_on_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7314,4 +7330,5 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20241210200353'),
 ('20241212183245'),
 ('20241212214525'),
-('20241218232725');
+('20241218232725'),
+('20241218212943');

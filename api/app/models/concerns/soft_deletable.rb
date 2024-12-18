@@ -111,7 +111,7 @@ module SoftDeletable
 
       case association.options[:dependent]
       when :destroy
-        associated_records.find_each(&:soft_destroy)
+        associated_records.find_each(&:soft_delete)
       when :delete_all
         associated_records.sans_deleted.update_all(deleted_at: Time.current)
       end
