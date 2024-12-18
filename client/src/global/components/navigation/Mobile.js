@@ -270,6 +270,7 @@ export class NavigationMobile extends Component {
                         key={`${link.route}-wrapped`}
                         entity={link.entity}
                         ability={link.ability}
+                        kind={link.kind}
                       >
                         {this.renderItem(link, index)}
                       </Authorize>

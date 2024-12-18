@@ -69,7 +69,9 @@ class Navigation {
           },
           {
             label: "titles.project_collections",
-            route: "backendProjectCollections"
+            route: "backendProjectCollections",
+            entity: "projectCollection",
+            ability: "update"
           }
         ]
       },
@@ -79,7 +81,9 @@ class Navigation {
       },
       {
         label: "titles.groups",
-        route: "backendReadingGroups"
+        route: "backendReadingGroups",
+        entity: "readingGroup",
+        kind: "admin"
       },
       {
         label: "titles.records",
@@ -437,13 +441,13 @@ class Navigation {
         label: "titles.annotations",
         route: "backendRecordsAnnotations",
         entity: "annotation",
-        ability: "update"
+        kind: "admin"
       },
       {
         label: "titles.comments",
         route: "backendRecordsComments",
         entity: "comment",
-        ability: "update"
+        kind: "admin"
       }
     ];
   });
