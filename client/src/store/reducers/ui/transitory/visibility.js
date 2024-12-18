@@ -5,7 +5,7 @@ export const initialState = {
   loginOverlay: false,
   userMenu: false,
   visibilityFilters: {
-    highlight: { yours: true, others: true },
+    highlight: { yours: true, others: false },
     annotation: { yours: true, others: true },
     resource: { all: true },
     readingGroups: { all: true }
