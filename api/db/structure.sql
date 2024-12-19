@@ -2390,7 +2390,8 @@ CREATE TABLE public.resources (
     variant_poster_data jsonb,
     pending_sort_title character varying,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    iframe_allows character varying[] DEFAULT '{fullscreen}'::character varying[] NOT NULL
+    iframe_allows character varying[] DEFAULT '{fullscreen}'::character varying[] NOT NULL,
+    captions_track_data jsonb
 );
 
 
@@ -7263,6 +7264,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20240327194259'),
 ('20241001182627'),
 ('20241206175512'),
-('20241210200353');
+('20241210200353'),
+('20241218232725');
 
 
