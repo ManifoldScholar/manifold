@@ -158,6 +158,16 @@ export default `
 
   .rh5v-Captions_component {
     position: relative;
+
+    &:has(.rh5v-Captions_activeTrackItem) {
+      svg {
+        fill: var(--hover-color);
+
+        &:hover {
+          fill: var(--color-interaction-dark);
+        }
+      }
+    }
   }
 
   .rh5v-Captions_component:hover {
@@ -178,7 +188,8 @@ export default `
   }
 
   .rh5v-Captions_icon {
-    padding: 5px;
+    padding: 1px;
+    margin-block-start: 4px;
   }
 
   .rh5v-Captions_trackList {

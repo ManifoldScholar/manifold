@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./Video.styles";
 
 class ResourceFormKindVideo extends PureComponent {
   static displayName = "Resource.Form.Kind.Video";
@@ -42,15 +43,26 @@ class ResourceFormKindVideo extends PureComponent {
 
   renderVideoAttachmentForm() {
     return (
-      <Form.Upload
-        layout="square"
-        label={this.props.t("resources.new.video_file")}
-        accepts="video"
-        readFrom="attributes[attachmentFileName]"
-        name="attributes[attachment]"
-        remove="attributes[removeAttachment]"
-        {...this.props}
-      />
+      <Styled.Group>
+        <Form.Upload
+          layout="square"
+          label={this.props.t("resources.new.video_file")}
+          accepts="video"
+          readFrom="attributes[attachmentFileName]"
+          name="attributes[attachment]"
+          remove="attributes[removeAttachment]"
+          {...this.props}
+        />
+        <Form.Upload
+          layout="landscape"
+          label={this.props.t("resources.new.captions")}
+          accepts="vtt"
+          readFrom="attributes[captionsTrackFileName]"
+          name="attributes[captionsTrack]"
+          remove="attributes[removeCaptionsTrack]"
+          {...this.props}
+        />
+      </Styled.Group>
     );
   }
 
