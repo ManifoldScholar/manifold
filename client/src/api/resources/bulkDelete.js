@@ -9,6 +9,16 @@ export default {
     };
   },
 
+  comments(params) {
+    return {
+      endpoint: "/api/v1/bulk_delete/comments",
+      method: "DELETE",
+      options: {
+        body: JSON.stringify({ bulk_delete: params })
+      }
+    };
+  },
+
   readingGroups(params) {
     return {
       endpoint: "/api/v1/bulk_delete/reading_groups",
