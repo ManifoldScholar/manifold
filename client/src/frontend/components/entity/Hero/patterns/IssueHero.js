@@ -1,13 +1,22 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { CalloutList, Cover, Credits, Meta, Social, Title } from "../parts";
 import EntityMasthead from "frontend/components/entity/Masthead";
 import { getAuth, getPartsData } from "../helpers";
 import EntityHero from "../EntityHero";
 import Authorization from "helpers/authorization";
+import { useEventTracker } from "hooks";
 
 export default function IssueHero({ entity, mock }) {
   const authorization = useRef(new Authorization());
+
+  const trackEvent = useEventTracker();
+
+  const trackIssueEvent = useCallback(
+    eventType => trackEvent(eventType, entity.type, entity.id),
+    [entity, trackEvent]
+  );
+
   if (!entity) return null;
 
   const { showErrors, authorized } = getAuth(entity, authorization);
@@ -25,6 +34,7 @@ export default function IssueHero({ entity, mock }) {
     contributors,
     cover
   } = getPartsData(entity);
+
   return (
     <>
       <EntityMasthead entity={entity} />
@@ -44,6 +54,7 @@ export default function IssueHero({ entity, mock }) {
             )}
             {callouts && (
               <CalloutList
+                track={trackIssueEvent}
                 authorized={authorized || mock}
                 callouts={orderedCallouts}
                 showErrors={showErrors || mock}
@@ -68,6 +79,7 @@ export default function IssueHero({ entity, mock }) {
             {cover && <Cover entity={entity} />}
             {callouts && (
               <CalloutList
+                track={trackIssueEvent}
                 authorized={authorized || mock}
                 callouts={callouts}
                 showErrors={showErrors || mock}

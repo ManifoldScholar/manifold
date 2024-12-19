@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { CalloutList, Meta, Social, Title, Credits } from "../parts";
 import EntityMasthead from "frontend/components/entity/Masthead";
 import EntityHero from "../EntityHero";
 import { getAuth, getPartsData } from "../helpers";
 import Authorization from "helpers/authorization";
+import { useEventTracker } from "hooks";
 
 export default function JournalHero({ entity, mock }) {
   const authorization = useRef(new Authorization());
@@ -22,6 +23,14 @@ export default function JournalHero({ entity, mock }) {
     contributors,
     copy
   } = getPartsData(entity);
+
+  const trackEvent = useEventTracker();
+
+  const trackJournalEvent = useCallback(
+    eventType => trackEvent(eventType, entity.type, entity.id),
+    [entity, trackEvent]
+  );
+
   return (
     <>
       <EntityMasthead entity={entity} />
@@ -41,6 +50,7 @@ export default function JournalHero({ entity, mock }) {
             )}
             {!!callouts.length && (
               <CalloutList
+                track={trackJournalEvent}
                 authorized={authorized || mock}
                 callouts={orderedCallouts}
                 showErrors={showErrors || mock}
@@ -63,6 +73,7 @@ export default function JournalHero({ entity, mock }) {
         TopRightComponent={
           !!callouts.length && (
             <CalloutList
+              track={trackJournalEvent}
               authorized={authorized || mock}
               callouts={callouts}
               showErrors={showErrors || mock}
