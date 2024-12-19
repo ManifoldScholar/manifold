@@ -11,7 +11,8 @@ export default function HeroCalloutList({
   inline = false,
   mobileVisible = false,
   darkMode = false,
-  buttonSize = "lg"
+  buttonSize = "lg",
+  track
 }) {
   const visible = authorized
     ? callouts
@@ -33,6 +34,7 @@ export default function HeroCalloutList({
               callout={callout}
               darkMode={darkMode}
               buttonSize={buttonSize}
+              track={track}
             />
           ))}
         </Styled.List>
@@ -45,6 +47,7 @@ export default function HeroCalloutList({
               key={callout.id}
               callout={callout}
               darkMode={darkMode}
+              track={track}
               isLink
             />
           ))}
@@ -63,5 +66,6 @@ HeroCalloutList.propTypes = {
   inline: PropTypes.bool,
   mobileVisible: PropTypes.bool,
   darkMode: PropTypes.bool,
-  buttonSize: PropTypes.oneOf(["sm", "lg"])
+  buttonSize: PropTypes.oneOf(["sm", "lg"]),
+  track: PropTypes.func
 };
