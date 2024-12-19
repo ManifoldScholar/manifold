@@ -104,23 +104,49 @@ class ResourcePlayerVideo extends Component {
     this.props.dispatch(notificationActions.addNotification(notification));
   };
 
+  trackRef = el => {
+    if (!el) return;
+
+    el.addEventListener("load", () => {
+      if (!el.track?.cues) return;
+      Array.from(el.track.cues).forEach(c => {
+        // eslint-disable-next-line no-param-reassign
+        c.line = -3;
+      });
+    });
+  };
+
   renderFileVideo() {
     if (!this.state.inBrowser) return null;
 
     const {
       variantPosterStyles,
-      attachmentStyles
+      attachmentStyles,
+      captionsTrackUrl
     } = this.props.resource.attributes;
+
+    // Use the proxy if running over ports in dev to avoid CORS error
+    const captionsSrc =
+      process.env.NODE_ENV === "development"
+        ? captionsTrackUrl.replace("3020", "3010")
+        : captionsTrackUrl;
 
     return (
       <Styled.VideoWrapper>
         <Video
           ref={this.playerRef}
-          controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
           poster={variantPosterStyles.mediumLandscape}
           onError={this.handleError}
         >
           <source src={attachmentStyles.original} type="video/mp4" />
+          {!!captionsTrackUrl && (
+            <track
+              kind="captions"
+              src={captionsSrc}
+              srcLang="en"
+              ref={this.trackRef}
+            />
+          )}
         </Video>
       </Styled.VideoWrapper>
     );

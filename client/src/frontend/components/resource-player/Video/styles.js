@@ -6,6 +6,13 @@ export const VideoWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+
+  video::cue {
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.75);
+    color: var(--color-base-neutral-white);
+    font-family: var(--font-family-heading);
+  }
 `;
 
 export const Video = styled.iframe`

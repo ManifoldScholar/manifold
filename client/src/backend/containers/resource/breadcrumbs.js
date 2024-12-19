@@ -24,7 +24,7 @@ export const getBreadcrumbs = (resource, project, belongsToJournalIssue, t) => {
           }
         ];
 
-  return belongsToJournalIssue
+  return belongsToJournalIssue && project.relationships.journal
     ? [
         {
           to: lh.link("backendJournals"),
