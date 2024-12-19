@@ -64,6 +64,18 @@ function AnnotationsList({
     bulkSelectionEmpty
   );
 
+  const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
+
+  const onDelete = id => {
+    const heading = t("modals.delete_annotation");
+    const message = t("modals.confirm_body");
+    if (confirm)
+      confirm(heading, message, async () => {
+        await destroyAnnotation(id);
+        refresh();
+      });
+  };
+
   const bulkDelete = useApiCallback(bulkDeleteAPI.annotations);
 
   const unit = t("glossary.annotation", {
@@ -123,7 +135,8 @@ function AnnotationsList({
             bulkActionsActive,
             bulkSelection,
             addItem,
-            removeItem
+            removeItem,
+            onDelete
           }}
           entities={annotations}
           search={

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import FormattedDate from "global/components/FormattedDate";
 import LabelSet from "../LabelSet";
 import Checkbox from "../../List/bulkActions/Checkbox";
+import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -14,7 +15,8 @@ function AnnotationRow({
   bulkActionsActive,
   bulkSelection,
   addItem,
-  removeItem
+  removeItem,
+  onDelete
 }) {
   const { id, attributes } = entity;
   const {
@@ -35,6 +37,18 @@ function AnnotationRow({
 
   const isSelected =
     !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
+
+  const utility = !bulkActionsActive ? (
+    <button
+      className="entity-row__utility-button"
+      title={t("backend.actions.publish_feature")}
+      onClick={() => onDelete(id)}
+    >
+      <Utility.IconComposer icon="delete32" size={26} />
+    </button>
+  ) : (
+    undefined
+  );
 
   return (
     <Styled.Item className="entity-row entity-list__entity scheme-dark">
@@ -106,6 +120,7 @@ function AnnotationRow({
             )}
           </Styled.Link>
         </div>
+        <div className="entity-row__utility">{utility}</div>
       </Styled.Inner>
     </Styled.Item>
   );
