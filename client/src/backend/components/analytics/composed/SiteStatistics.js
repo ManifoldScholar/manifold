@@ -48,6 +48,11 @@ class SiteStatistics extends Component {
         icon: "interactComment32",
         label: this.props.t("glossary.comment_title_case_other"),
         value: this.stats.totalCommentCount
+      },
+      {
+        icon: "download24",
+        label: this.props.t("glossary.download_title_case_other"),
+        value: this.stats.totalDownloadCount ?? 0
       }
     ];
   }
