@@ -63,16 +63,6 @@ export default {
     };
   },
 
-  readingGroups(id, filter = {}, page = {}) {
-    return {
-      endpoint: `/api/v1/users/${id}/relationships/reading_groups`,
-      method: "GET",
-      options: {
-        params: { filter, page }
-      }
-    };
-  },
-
   readingGroupMemberships(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/users/${id}/relationships/reading_group_memberships`,
