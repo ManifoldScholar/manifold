@@ -177,7 +177,12 @@ function ReadingGroupAnnotationsContainer({
 }
 
 ReadingGroupAnnotationsContainer.propTypes = {
-  readingGroup: PropTypes.object
+  readingGroup: PropTypes.object,
+  refresh: PropTypes.func,
+  route: PropTypes.string,
+  confirm: PropTypes.func,
+  entitiesListSearchProps: PropTypes.func,
+  entitiesListSearchParams: PropTypes.object
 };
 
 export default withRouter(

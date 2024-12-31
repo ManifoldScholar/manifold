@@ -46,7 +46,7 @@ function CommentRow({
         />
       </>
     ) : (
-      "View Parent Annotation"
+      t("records.comments.view_parent")
     );
 
   const subjectLink =
@@ -127,8 +127,9 @@ CommentRow.propTypes = {
   hideCreator: PropTypes.bool,
   bulkActionsActive: PropTypes.bool,
   bulkSelection: PropTypes.object,
-  dispatchSelection: PropTypes.func,
-  handleSelectAllUncheck: PropTypes.func
+  addItem: PropTypes.func,
+  removeItem: PropTypes.func,
+  onDelete: PropTypes.func
 };
 
 export default CommentRow;

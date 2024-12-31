@@ -87,7 +87,10 @@ function ReadingGroupMembersContainer({
 }
 
 ReadingGroupMembersContainer.propTypes = {
-  readingGroup: PropTypes.object
+  readingGroup: PropTypes.object,
+  refresh: PropTypes.func,
+  route: PropTypes.string,
+  confirm: PropTypes.func
 };
 
 export default withRouter(withConfirmation(ReadingGroupMembersContainer));
