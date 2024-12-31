@@ -6,4 +6,13 @@
       <em><%= @resource.body %></em>
     </p>
   </div>
+
+  <% if @message %>
+    <div style="margin-block: 30px;">
+      <span style="display: block; margin-block-start: 15px;">
+        With the latest flag, the user included this comment:
+      </span>
+      <p><em><%= @message %></em></p>
+    </div>
+  <% end %>
 </div>

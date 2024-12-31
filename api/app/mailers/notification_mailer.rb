@@ -10,10 +10,11 @@ class NotificationMailer < ApplicationMailer
     mail(to: @user.email, subject: "Your #{frequency.to_s.capitalize} Manifold Summary")
   end
 
-  def flag_notification(user, resource)
+  def flag_notification(user, resource, message)
     user_assignment user
     @resource = resource.decorate
     @kind = resource.class.name.downcase
+    @message = message
     subject = "#{indefinite_article_for @kind} #{@kind} has been flagged"
     mail(to: @user.email, subject: subject)
   end
