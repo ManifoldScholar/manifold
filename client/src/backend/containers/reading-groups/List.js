@@ -165,10 +165,7 @@ export default withFilteredLists(withConfirmation(ReadingGroupsList), {
 ReadingGroupsList.displayName = "ReadingGroups.List";
 
 ReadingGroupsList.propTypes = {
-  route: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   confirm: PropTypes.func,
-  location: PropTypes.object.isRequired,
   entitiesListSearchProps: PropTypes.func,
   entitiesListSearchParams: PropTypes.object
 };

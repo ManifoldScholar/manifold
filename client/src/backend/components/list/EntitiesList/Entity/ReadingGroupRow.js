@@ -88,7 +88,12 @@ function ReadingGroupRow({
 
 ReadingGroupRow.propTypes = {
   entity: PropTypes.object,
-  active: PropTypes.string
+  active: PropTypes.bool,
+  bulkActionsActive: PropTypes.bool,
+  bulkSelection: PropTypes.object,
+  addItem: PropTypes.func,
+  removeItem: PropTypes.func,
+  onDelete: PropTypes.func
 };
 
 export default ReadingGroupRow;

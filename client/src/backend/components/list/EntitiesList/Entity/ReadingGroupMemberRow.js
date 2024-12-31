@@ -47,8 +47,8 @@ export default function ReadingGroupMemberRow({
       title={name}
       subtitle={meta}
       figure={<EntityThumbnail.User entity={user} />}
-      figureSize={"small"}
-      figureShape={"circle"}
+      figureSize="small"
+      figureShape="circle"
       label={
         attributes.role
           ? t(`reading_groups.role_options.${attributes.role}`)
@@ -64,7 +64,6 @@ ReadingGroupMemberRow.displayName = "EntitiesList.Entity.ReadingGroupMemberRow";
 
 ReadingGroupMemberRow.propTypes = {
   entity: PropTypes.object,
-  currentUserId: PropTypes.string,
   active: PropTypes.string,
-  t: PropTypes.func
+  onDelete: PropTypes.func
 };

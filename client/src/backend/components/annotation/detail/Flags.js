@@ -54,5 +54,6 @@ FlagsList.displayName = "Annotation.Detail.FlagsList";
 
 FlagsList.propTypes = {
   flags: PropTypes.arrayOf(PropTypes.object),
-  hasResolvedFlags: PropTypes.bool
+  resolvedFlagsCount: PropTypes.number,
+  unresolvedFlagsCount: PropTypes.number
 };

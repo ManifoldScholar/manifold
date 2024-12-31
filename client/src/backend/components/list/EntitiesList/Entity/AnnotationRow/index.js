@@ -68,7 +68,9 @@ function AnnotationRow({
                 ...(!isPrivate
                   ? [
                       {
-                        text: isPrivate ? "private" : "public",
+                        text: isPrivate
+                          ? t("common.private")
+                          : t("common.public"),
                         level: "notice"
                       }
                     ]
@@ -76,7 +78,7 @@ function AnnotationRow({
                 ...(orphaned
                   ? [
                       {
-                        text: "previous",
+                        text: t("record.annotations.orphaned_tag"),
                         level: ""
                       }
                     ]
@@ -106,7 +108,8 @@ function AnnotationRow({
             )}
             <span
               dangerouslySetInnerHTML={{
-                __html: textTitle ?? "[Text Title Missing]"
+                __html:
+                  textTitle ?? t("records.annotations.text_title_placeholder")
               }}
             />
           </Styled.MetaTwo>
@@ -131,8 +134,9 @@ AnnotationRow.propTypes = {
   hideCreator: PropTypes.bool,
   bulkActionsActive: PropTypes.bool,
   bulkSelection: PropTypes.object,
-  dispatchSelection: PropTypes.func,
-  handleSelectAllUncheck: PropTypes.func
+  addItem: PropTypes.func,
+  removeItem: PropTypes.func,
+  onDelete: PropTypes.func
 };
 
 export default AnnotationRow;
