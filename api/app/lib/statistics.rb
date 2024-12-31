@@ -9,6 +9,8 @@ class Statistics
   include SerializedAbilitiesFor
   include Redis::Objects
 
+  DOWNLOAD_EVENT_NAMES = %w(download_project download_journal).freeze
+
   lock :transaction, timeout: 1, expiration: 15
   value :this_week, marshal: true
   value :last_week, marshal: true
@@ -97,6 +99,10 @@ class Statistics
 
   def total_user_count
     User.count
+  end
+
+  def total_download_count
+    Analytics::Event.where(name: %w(download_project download_journal)).count
   end
 
   private
