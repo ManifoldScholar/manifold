@@ -12,6 +12,7 @@ RSpec.describe "Annotations", type: :request do
   end
 
   path "/annotations/{id}" do
+    include_examples "an API show request", model: Annotation
     include_examples "an API update request", model: Annotation, authorized_user: :admin
     include_examples "an API destroy request", model: Annotation, authorized_user: :admin
   end
@@ -69,6 +70,23 @@ RSpec.describe "Annotations", type: :request do
                            required: true
                          }
                        ]
+    end
+  end
+
+  describe "for a user" do
+    let_it_be(:user) { FactoryBot.create :user }
+    let_it_be(:annotation, refind: true) do
+      FactoryBot.create(:annotation, creator: user)
+    end
+    let_it_be(:user_id) { user.id }
+
+    path "/users/{user_id}/relationships/annotations" do
+      include_examples "an API index request",
+                       parent: "user",
+                       model: Annotation,
+                       included_relationships: [:creator, :flags],
+                       url_parameters: [:user_id],
+                       paginated: true
     end
   end
 
