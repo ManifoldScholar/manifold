@@ -5,10 +5,12 @@ module Notifications
     # @param [String] flag_id
     def perform(user_id, flag_id)
       user = User.find(user_id)
-      resource = Flag.find(flag_id)&.flaggable
+      flag = Flag.find(flag_id)
+      resource = flag&.flaggable
+      message = flag&.message
       raise ActiveRecord::RecordNotFound unless resource.present?
 
-      NotificationMailer.flag_notification(user, resource).deliver
+      NotificationMailer.flag_notification(user, resource, message).deliver
     rescue ActiveRecord::RecordNotFound
       Rails.logger.error("ActiveRecord::RecordNotFound error in SendFlagNotificationJob")
       Rails.logger.error(
