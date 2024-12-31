@@ -6,7 +6,7 @@ module API
           before_action :set_user, only: [:index]
 
           resourceful! Annotation do
-            scope = Annotation.created_by(@user).sans_archived_reading_group_memberships.sans_orphaned_from_text
+            scope = Annotation.created_by(@user).sans_archived_reading_group_memberships
 
             Annotation.filtered(
               with_pagination!(annotation_filter_params),

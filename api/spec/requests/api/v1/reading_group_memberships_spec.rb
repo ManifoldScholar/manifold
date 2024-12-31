@@ -1,9 +1,10 @@
 require "swagger_helper"
 
 RSpec.describe "ReadingGroupMembership", type: :request do
-  let!(:user) { FactoryBot.create(:user) }
-  let!(:reading_group) { FactoryBot.create(:reading_group) }
-  let(:reading_group_id) { reading_group.id }
+  let_it_be(:user) { FactoryBot.create(:user) }
+  let_it_be(:user_id) { user.id }
+  let_it_be(:reading_group) { FactoryBot.create(:reading_group) }
+  let_it_be(:reading_group_id) { reading_group.id }
 
   path "/reading_group_memberships" do
     include_examples "an API create request",
@@ -44,5 +45,13 @@ RSpec.describe "ReadingGroupMembership", type: :request do
                      parent: "reading group",
                      url_parameters: [:reading_group_id],
                      authorized_user: :admin
+  end
+
+  path "/users/{user_id}/relationships/reading_group_memberships" do
+    include_examples "an API index request",
+                     model: ReadingGroupMembership,
+                     parent: "user",
+                     url_parameters: [:user_id],
+                     included_relationships: [:reading_group]
   end
 end

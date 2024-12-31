@@ -18,5 +18,18 @@ RSpec.describe "Annotations API", type: :request do
       expect(response).to have_http_status(200)
     end
 
+    context "when fetching an annotation detail" do
+      let(:annotation) { FactoryBot.create(:annotation) }
+      let(:path) { api_v1_annotations_path(annotation) }
+
+      it "renders successfully" do
+        expect do
+          get path, headers: admin_headers
+        end.to execute_safely
+
+        expect(response).to have_http_status(200)
+      end
+    end
+
   end
 end
