@@ -6,6 +6,7 @@ module Analytics
     SHARE_EVENT_MATCHER = "share".freeze
     CITE_EVENT_MATCHER = "cite".freeze
     LEAVE_EVENT_MATCHER = "leave".freeze
+    DOWNLOAD_EVENT_MATCHER = "download".freeze
 
     record :analytics_visit, class: Analytics::Visit
     string :visit_token, default: nil
@@ -13,6 +14,7 @@ module Analytics
     object :request, class: ActionDispatch::Request, default: nil
 
     class << self
+      # rubocop:disable Metrics/MethodLength
       def record_event(inputs)
         interaction = case inputs[:name]
                       when VIEW_EVENT_MATCHER
@@ -24,12 +26,17 @@ module Analytics
                       when SHARE_EVENT_MATCHER, CITE_EVENT_MATCHER
                         inputs[:name] = Analytics::Event.event_name_for(inputs[:name], TextSection)
                         Analytics::RecordCustomEvent
+                      when DOWNLOAD_EVENT_MATCHER
+                        klass = inputs[:record_type].classify.constantize
+                        inputs[:name] = Analytics::Event.event_name_for(inputs[:name], klass)
+                        Analytics::RecordCustomEvent
                       else
                         Analytics::RecordCustomEvent
                       end
 
         interaction.run inputs
       end
+      # rubocop:enable Metrics/MethodLength
     end
 
     private

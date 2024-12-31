@@ -165,6 +165,14 @@ RSpec.shared_context "with a single project" do
   let(:actual_projects_count) { 1 }
 
   let(:actual_texts_count) { project.texts.size }
+
+  let(:project_downloads_count) { visits.count }
+
+  let_it_be(:project_download_events) do
+    visits.map do |visit|
+      FactoryBot.create(:analytics_event, visit: visit, name: Analytics::Event.event_name_for(:download, Project), properties: { "project" => project.id })
+    end
+  end
 end
 
 RSpec.shared_context "with a single text" do
