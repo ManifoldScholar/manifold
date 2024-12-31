@@ -57,7 +57,10 @@ UserRow.displayName = "EntitiesList.Entity.UserRow";
 
 UserRow.propTypes = {
   entity: PropTypes.object,
-  currentUserId: PropTypes.string
+  bulkActionsActive: PropTypes.bool,
+  bulkSelection: PropTypes.object,
+  addItem: PropTypes.func,
+  removeItem: PropTypes.func
 };
 
 export default UserRow;

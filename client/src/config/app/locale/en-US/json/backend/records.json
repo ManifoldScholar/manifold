@@ -10,10 +10,12 @@
       "detail_header": "Annotation Detail",
       "metadata_header": "Metadata",
       "text_title_placeholder": "[Text Title Missing]",
-      "bulk_actions": "Bulk Actions"
+      "bulk_actions": "Bulk Actions",
+      "orphaned_tag": "Previous"
     },
     "comments": {
-      "detail_header": "Comment Detail"
+      "detail_header": "Comment Detail",
+      "view_parent": "View Parent Annotation"
     },
     "makers": {
       "header": "Manage Makers",

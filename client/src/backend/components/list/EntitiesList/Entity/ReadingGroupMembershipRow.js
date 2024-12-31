@@ -29,9 +29,8 @@ function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {
       ...(readingGroup.attributes.privacy === "public"
         ? [
             {
-              text: readingGroup.attributes.privacy,
-              level:
-                readingGroup.attributes.privacy === "public" ? "notice" : ""
+              text: t("common.public"),
+              level: "notice"
             }
           ]
         : [])
@@ -58,7 +57,8 @@ function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {
 
 ReadingGroupMembershipRow.propTypes = {
   entity: PropTypes.object,
-  active: PropTypes.string
+  active: PropTypes.string,
+  onDelete: PropTypes.func
 };
 
 export default ReadingGroupMembershipRow;

@@ -19,7 +19,7 @@ export default function NewUserWrapper() {
       <PageHeader
         type="user"
         icon="Avatar24"
-        title="New User"
+        title={t("records.users.new_header")}
         secondaryLinks={[
           {
             label: "titles.properties",

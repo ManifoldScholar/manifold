@@ -106,5 +106,6 @@ FlagAnnotationModal.displayName = "Annotation.Annotation.UserContent.FlagModal";
 FlagAnnotationModal.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  setOpen: PropTypes.func.isRequired
+  setOpen: PropTypes.func.isRequired,
+  annotationId: PropTypes.string
 };

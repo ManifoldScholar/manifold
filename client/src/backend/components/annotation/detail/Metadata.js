@@ -89,5 +89,6 @@ AnnotationMetadata.propTypes = {
   createdAt: PropTypes.string,
   textTitle: PropTypes.string,
   subjectTitle: PropTypes.string,
-  readingGroupName: PropTypes.string
+  readingGroupName: PropTypes.string,
+  isComment: PropTypes.bool
 };
