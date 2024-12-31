@@ -102,7 +102,7 @@ class Statistics
   end
 
   def total_download_count
-    Analytics::Event.where(name: %w(download_project download_journal)).count
+    Analytics::Event.where(name: DOWNLOAD_EVENT_NAMES).count
   end
 
   private
