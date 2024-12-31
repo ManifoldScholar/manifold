@@ -39,7 +39,8 @@ RSpec.describe NotificationMailer, type: :mailer do
   end
 
   describe "flag notification" do
-    let(:mail) { NotificationMailer.flag_notification(user, flagged_comment) }
+    @message = "This is a flag message"
+    let(:mail) { NotificationMailer.flag_notification(user, flagged_comment, @message) }
 
     it "renders without exception" do
       expect(mail.body.encoded).to include(user.first_name)
