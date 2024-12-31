@@ -13,15 +13,15 @@ export default function Downloads({ data, width = 25, rangeInWords }) {
       })
     : t("analytics.downloads");
 
-  return data && !!data.length ? (
+  return (
     <Block
       width={width}
       icon="download24"
       title={t("glossary.download_title_case_other")}
     >
-      <Figure stat={`${data[0].downloads ?? 0}`} caption={caption} />
+      <Figure stat={data?.value} caption={caption} />
     </Block>
-  ) : null;
+  );
 }
 
 Downloads.displayName = "Analytics.Composed.Downloads";

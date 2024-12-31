@@ -10,7 +10,7 @@ import { dashboardLayoutBreakpoint } from "theme/styles/variables/crossComponent
  * Grid layouts in the RangePicker component also need to be defined per context.
  */
 
-const ITEM_MIN_WIDTH = 250;
+const ITEM_MIN_WIDTH = 275;
 const GAP = 30;
 const STACK_BREAKPOINT = ITEM_MIN_WIDTH * 2 + GAP;
 const TWO_COL_BREAKPOINT = 1150;
@@ -48,6 +48,10 @@ export default `
 
           .range-picker {
             grid-template-columns: repeat(4, minmax(0, 1fr));
+
+            &--stacked {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
           }
 
           .range-picker__preset-group-inner {
