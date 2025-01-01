@@ -37,6 +37,7 @@
     "hide": "Hide",
     "hide_all": "Hide all",
     "hide_description": "$t(actions.hide) Description",
+    "hide_comments": "$t(actions.hide) Comments",
     "import": "Import",
     "join": "Join",
     "join_group": "$t(actions.join) this group",

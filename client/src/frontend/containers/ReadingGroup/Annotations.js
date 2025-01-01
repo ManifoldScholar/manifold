@@ -15,7 +15,7 @@ function ReadingGroupAnnotationsContainer({
 
   const { id } = useParams();
 
-  const { data: annotations, meta } = useFetch({
+  const { data: annotations, meta, refresh: refreshAnnotations } = useFetch({
     request: [readingGroupsAPI.annotations, id, filters, pagination],
     dependencies: [fetchVersion]
   });
@@ -38,7 +38,8 @@ function ReadingGroupAnnotationsContainer({
         annotationsMeta={meta}
         filterProps={{ ...filterProps, hideSearch: true }}
         isFiltered={!!Object.keys(filters).length}
-        refresh={refresh}
+        refreshGroup={refresh}
+        refreshAnnotations={refreshAnnotations}
         nested
       />
     </Styled.Body>

@@ -105,7 +105,9 @@ export class CommentEditor extends PureComponent {
   createComment(props, state) {
     const comment = this.commentFromPropsAndState(props, state);
     const call = commentsAPI.create(props.subject, comment);
-    const options = { adds: `comments-for-${props.subject.id}` };
+    const options = {
+      adds: `comments-for-${props.subject.id}`
+    };
     const createRequest = request(call, requests.rCommentCreate, options);
     this.processRequest(createRequest);
   }
@@ -138,6 +140,7 @@ export class CommentEditor extends PureComponent {
 
   handleSuccess() {
     this.setState(this.initialState(this.props));
+    if (this.props.onSuccess) this.props.onSuccess();
     if (this.props.cancel) this.props.cancel();
   }
 

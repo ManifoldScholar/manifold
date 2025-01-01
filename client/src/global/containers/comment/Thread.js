@@ -11,7 +11,7 @@ import { commentsAPI } from "api";
 import Utility from "global/components/utility";
 
 const { request } = entityStoreActions;
-const perPage = 50;
+const perPage = 10;
 
 export class CommentThread extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
@@ -44,7 +44,7 @@ export class CommentThread extends PureComponent {
 
   componentDidMount() {
     if (this.props.subject && !this.props.comments) {
-      this.fetchComments({ number: 1, size: 1 });
+      this.fetchComments({ number: 1, size: perPage });
     }
   }
 

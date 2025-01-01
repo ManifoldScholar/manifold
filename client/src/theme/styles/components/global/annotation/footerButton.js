@@ -61,6 +61,10 @@ export default `
     &__text {
       ${drawerIndent("padding-left")}
       transform: translateY(-1px);
+
+      &--hide {
+        padding-left: 1rem;
+      }
     }
 
     &__arrow-icon {
