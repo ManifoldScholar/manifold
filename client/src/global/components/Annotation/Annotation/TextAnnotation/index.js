@@ -13,7 +13,8 @@ class Annotation extends PureComponent {
     visitHandler: PropTypes.func.isRequired,
     displayFormat: PropTypes.string,
     deleteHandler: PropTypes.func,
-    showCommentsToggleAsBlock: PropTypes.bool
+    showCommentsToggleAsBlock: PropTypes.bool,
+    refresh: PropTypes.func
   };
 
   get annotationListClassNames() {
@@ -46,6 +47,7 @@ class Annotation extends PureComponent {
             includeComments={false}
             includeMarkers={false}
             showCommentsToggleAsBlock={this.showCommentsToggleAsBlock}
+            refresh={this.props.refresh}
           />
         </ul>
       </>
