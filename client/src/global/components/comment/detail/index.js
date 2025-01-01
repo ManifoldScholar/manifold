@@ -18,10 +18,8 @@ class CommentDetail extends PureComponent {
     handleDelete: PropTypes.func.isRequired,
     handleDestroy: PropTypes.func.isRequired,
     handleRestore: PropTypes.func.isRequired,
-    handleFlag: PropTypes.func.isRequired,
     comment: PropTypes.object.isRequired,
     showLogin: PropTypes.func,
-    handleUnflag: PropTypes.func,
     parent: PropTypes.object,
     t: PropTypes.func
   };
@@ -35,14 +33,6 @@ class CommentDetail extends PureComponent {
     this.replyToggleRef = React.createRef();
     this.editToggleRef = React.createRef();
   }
-
-  handleFlag = event => {
-    this.props.handleFlag(event, this.props.comment);
-  };
-
-  handleUnflag = event => {
-    this.props.handleUnflag(event, this.props.comment);
-  };
 
   handleDelete = event => {
     this.props.handleDelete(event, this.props.comment);
