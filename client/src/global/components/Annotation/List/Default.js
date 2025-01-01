@@ -5,7 +5,8 @@ import Annotation from "../Annotation";
 function AnnotationListDefault({
   annotations,
   handleVisitAnnotation,
-  showCommentsToggleAsBlock
+  showCommentsToggleAsBlock,
+  refresh
 }) {
   return (
     <ul className="notes-list notes-list--pad-top">
@@ -17,6 +18,7 @@ function AnnotationListDefault({
               annotation={annotation}
               displayFormat="fullPage"
               showCommentsToggleAsBlock={showCommentsToggleAsBlock}
+              refresh={refresh}
             />
           </li>
         );
@@ -29,7 +31,8 @@ AnnotationListDefault.displayName = "Annotation.List.Default";
 AnnotationListDefault.propTypes = {
   annotations: PropTypes.array,
   handleVisitAnnotation: PropTypes.func,
-  showCommentsToggleAsBlock: PropTypes.bool
+  showCommentsToggleAsBlock: PropTypes.bool,
+  refresh: PropTypes.func
 };
 
 export default AnnotationListDefault;

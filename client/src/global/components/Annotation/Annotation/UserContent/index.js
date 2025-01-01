@@ -23,7 +23,8 @@ export default function AnnotationDetail({
   includeMarkers,
   annotation,
   showCommentsToggleAsBlock,
-  showLogin
+  showLogin,
+  refresh
 }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -74,16 +75,15 @@ export default function AnnotationDetail({
     return res.promise;
   };
 
-  const loadComments = () => {
-    setShowComments(true);
+  const toggleComments = () => {
+    setShowComments(!showComments);
 
-    if (threadRef?.current) threadRef.current.focus();
+    if (!showComments && threadRef?.current) threadRef.current.focus();
   };
 
   const showCommentsToggle = !!commentsCount && !showComments;
 
-  const showBlockCommentsToggle =
-    showCommentsToggleAsBlock && showCommentsToggle;
+  const showBlockCommentsToggle = showCommentsToggleAsBlock && !!commentsCount;
   const showInlineCommentsToggle =
     !showBlockCommentsToggle && showCommentsToggle;
 
@@ -96,6 +96,11 @@ export default function AnnotationDetail({
     const trusted = currentUser?.attributes.trusted;
 
     return established || trusted;
+  };
+
+  const onReplySuccess = () => {
+    if (refresh) refresh();
+    setShowComments(true);
   };
 
   return (
@@ -165,7 +170,7 @@ export default function AnnotationDetail({
                     {showInlineCommentsToggle && (
                       <InlineToggle
                         active={action === "editing"}
-                        loadComments={loadComments}
+                        loadComments={toggleComments}
                         commentsCount={commentsCount}
                       />
                     )}
@@ -174,6 +179,7 @@ export default function AnnotationDetail({
                     <CommentContainer.Editor
                       subject={annotation}
                       cancel={stopReply}
+                      onSuccess={onReplySuccess}
                       initialOpen
                     />
                   )}
@@ -206,8 +212,9 @@ export default function AnnotationDetail({
       </li>
       {showBlockCommentsToggle && (
         <BlockToggle
-          loadComments={loadComments}
+          toggleComments={toggleComments}
           commentsCount={commentsCount}
+          expanded={showComments}
         />
       )}
     </>
