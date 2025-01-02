@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import EntityCollection from "frontend/components/entity/Collection/EntityCollection";
 import AllLink from "frontend/components/event/AllLink";
 import Authorization from "helpers/authorization";
@@ -55,6 +56,8 @@ function ContentBlock({
   hideBottomBorder,
   ...passThroughProps
 }) {
+  const { t } = useTranslation();
+
   const authorization = new Authorization();
   const typeComponent = typeToBlockComponent(block.attributes.type);
   const entityIsJournalIssue =
@@ -69,7 +72,7 @@ function ContentBlock({
   const headerProps = hideHeader
     ? {}
     : {
-        title: getTitle(block, typeComponent, hideDefaultHeader),
+        title: t(getTitle(block, typeComponent, hideDefaultHeader)),
         icon: getIcon(block, typeComponent, entityIsJournalIssue),
         description: descriptionFormatted
       };

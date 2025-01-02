@@ -72,7 +72,9 @@
     "user_links": "Link utente",
     "skip_to_main": "Vai al contenuto principale",
     "return_to_reader": "Ritorno al lettore",
-    "visit_collection": "Visita la pagina della collezione"
+    "visit_collection": "Visita la pagina della collezione",
+    "see_all_issues": "See all issues",
+    "visit_journal": "Visit the journal page"
   },
   "external_links": {
     "view_on_social": "Visualizza questo progetto su{{service}}",

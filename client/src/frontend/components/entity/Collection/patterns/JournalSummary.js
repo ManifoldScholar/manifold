@@ -6,6 +6,7 @@ import ThumbnailGrid from "global/components/entity/ThumbnailGrid";
 import { FooterLink, ProjectCollectionIcon } from "../parts";
 import EntityCollection from "../EntityCollection";
 import { getHeroImage, getHeaderLayout } from "../helpers";
+import { useTranslation } from "react-i18next";
 
 function JournalSummaryEntityCollection({
   journal,
@@ -14,6 +15,8 @@ function JournalSummaryEntityCollection({
   limit = 4,
   ...passThroughProps
 }) {
+  const { t } = useTranslation();
+
   if (!journal) return null;
 
   const { title, descriptionFormatted: description, slug } =
@@ -25,7 +28,9 @@ function JournalSummaryEntityCollection({
 
   const totalIssueCount = journal.attributes?.journalIssuesCount;
   const footerLinkText =
-    totalIssueCount > limit ? "See all issues" : "Visit the journal page";
+    totalIssueCount > limit
+      ? t("navigation.see_all_issues")
+      : t("navigation.visit_journal");
 
   return (
     <EntityCollection

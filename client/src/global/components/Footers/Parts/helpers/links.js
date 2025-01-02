@@ -22,11 +22,11 @@ export function manifoldLinks() {
   const links = [
     {
       to: lh.link("frontendProjectsAll"),
-      title: "Projects"
+      title: "glossary.project_title_case_other"
     },
     {
       to: lh.link("frontend"),
-      title: "Home"
+      title: "common.home"
     }
   ];
   return links;
@@ -57,11 +57,11 @@ export function authenticationLink({
   if (authenticated)
     return {
       onClick: commonActions.logout,
-      title: "Log Out"
+      title: "navigation.user.log_out"
     };
   return {
     onClick: commonActions.toggleSignInUpOverlay,
-    title: "Log In"
+    title: "navigation.user.log_in"
   };
 }
 

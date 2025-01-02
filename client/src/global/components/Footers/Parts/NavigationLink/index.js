@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import Utility from "global/components/utility";
 import has from "lodash/has";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 export default function FooterPartsNavigationLink({
   item,
   hideLabel,
   className
 }) {
+  const { t } = useTranslation();
+
   const icon = theItem => {
     if (!theItem.icon) return null;
     return <Utility.IconComposer icon={theItem.icon} size={24} />;
@@ -23,7 +26,9 @@ export default function FooterPartsNavigationLink({
       >
         {icon(item)}
         {!hideLabel && (
-          <span className="app-footer-navigation__link-text">{item.title}</span>
+          <span className="app-footer-navigation__link-text">
+            {t(item.title)}
+          </span>
         )}
       </Link>
     );
@@ -34,7 +39,7 @@ export default function FooterPartsNavigationLink({
       <a target={target} rel={item.rel} href={item.href} className={className}>
         {icon(item)}
         <span className={classNames({ "screen-reader-text": hideLabel })}>
-          {item.title}
+          {t(item.title)}
         </span>
       </a>
     );
@@ -51,7 +56,7 @@ export default function FooterPartsNavigationLink({
         {icon(item)}
         {!hideLabel && (
           <span className={classNames({ "screen-reader-text": hideLabel })}>
-            {item.title}
+            {t(item.title)}
           </span>
         )}
       </span>

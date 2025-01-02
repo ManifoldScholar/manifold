@@ -29,7 +29,8 @@ ProjectContentBlockTableOfContentsBlock.propTypes = {
   block: PropTypes.object.isRequired
 };
 
-ProjectContentBlockTableOfContentsBlock.title = "Table of Contents";
+ProjectContentBlockTableOfContentsBlock.title =
+  "glossary.table_of_contents_title_case";
 ProjectContentBlockTableOfContentsBlock.icon = "toc64";
 
 export default ProjectContentBlockTableOfContentsBlock;

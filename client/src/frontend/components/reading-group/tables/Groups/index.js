@@ -66,7 +66,7 @@ export default function GroupsTable(props) {
               <LinkedName
                 name={model.attributes.name}
                 to={lh.link("frontendReadingGroupDetail", model.id)}
-                tag={!hideTags ? model.attributes.privacy : null}
+                tag={!hideTags ? t(`common.${model.attributes.privacy}`) : null}
               />
               <IconComposer
                 icon="arrowRight16"
@@ -95,7 +95,9 @@ export default function GroupsTable(props) {
                 outlined
               />
             ) : (
-              model.attributes.currentUserRole
+              t(
+                `forms.reading_group_member.role_options.${model.attributes.currentUserRole}`
+              )
             );
           }}
         </Column>

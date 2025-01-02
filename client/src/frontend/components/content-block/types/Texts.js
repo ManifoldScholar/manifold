@@ -12,7 +12,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   };
 
   static get title() {
-    return "Texts";
+    return "glossary.text_title_case_other";
   }
 
   static get icon() {

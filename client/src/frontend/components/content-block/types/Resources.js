@@ -14,7 +14,7 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
   };
 
   static get title() {
-    return "Resources";
+    return "glossary.resource_title_case_other";
   }
 
   static get icon() {
