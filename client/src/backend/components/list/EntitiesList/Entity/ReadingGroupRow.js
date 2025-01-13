@@ -74,7 +74,7 @@ function ReadingGroupRow({
   const utility = !bulkActionsActive ? (
     <button
       className="entity-row__utility-button"
-      title={t("backend.actions.publish_feature")}
+      title={t("actions.delete")}
       onClick={() => onDelete(id)}
     >
       <Utility.IconComposer icon="delete32" size={26} />

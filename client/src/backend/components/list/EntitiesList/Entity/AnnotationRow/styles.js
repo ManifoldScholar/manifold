@@ -8,7 +8,6 @@ export const Item = styled.li`
   gap: 24px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid;
 `;
 
 export const Inner = styled.div`

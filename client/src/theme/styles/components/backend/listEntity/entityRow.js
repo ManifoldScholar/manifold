@@ -21,7 +21,6 @@ export default `
       gap: 24px;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid;
     }
 
     &__inner {
