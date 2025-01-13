@@ -375,7 +375,7 @@ class AnnotationEditor extends PureComponent {
         </form>
         {this.showUnverifiedMessage && (
           <Styled.UnverifiedMessage>
-            {t("reader.notes.unverified_message")}
+            {t("reader.menus.notes.unverified_message")}
           </Styled.UnverifiedMessage>
         )}
       </div>
