@@ -140,6 +140,7 @@ export default function AnnotationDetail({
                     <Authorize entity={annotation} ability={"update"}>
                       <li>
                         <Styled.Button
+                          className="confirmable-button"
                           ref={editToggleRef}
                           onClick={startEdit}
                           aria-expanded={action === "editing"}
