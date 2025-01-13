@@ -80,6 +80,24 @@ class ResourcePlayerVideo extends Component {
     };
   }
 
+  get captionsSrc() {
+    if (process.env.NODE_ENV !== "development")
+      return this.props.resource?.attributes?.captionsTrackUrl;
+    if (!this.props.resource.attributes.captionsTrackUrl) return null;
+
+    const trackUrl = new URL(this.props.resource.attributes.captionsTrackUrl);
+    const host = trackUrl.host;
+
+    // Use the proxy if running over ports in dev to avoid CORS error
+    if (host.includes("localhost")) {
+      const appUrl = new URL(window.location.href);
+      const appPort = appUrl.port;
+      trackUrl.port = appPort;
+    }
+
+    return trackUrl;
+  }
+
   renderVideoByService() {
     if (!this.iframeSrc) return null;
 
@@ -107,6 +125,9 @@ class ResourcePlayerVideo extends Component {
   trackRef = el => {
     if (!el) return;
 
+    // ::cue pseudo-elements cannot be positioned with css. Move
+    // them up from the default position, so they aren't covered
+    // by the controls overlay.
     el.addEventListener("load", () => {
       if (!el.track?.cues) return;
       Array.from(el.track.cues).forEach(c => {
@@ -125,12 +146,6 @@ class ResourcePlayerVideo extends Component {
       captionsTrackUrl
     } = this.props.resource.attributes;
 
-    // Use the proxy if running over ports in dev to avoid CORS error
-    const captionsSrc =
-      process.env.NODE_ENV === "development"
-        ? captionsTrackUrl.replace("3020", "3010")
-        : captionsTrackUrl;
-
     return (
       <Styled.VideoWrapper>
         <Video
@@ -142,7 +157,7 @@ class ResourcePlayerVideo extends Component {
           {!!captionsTrackUrl && (
             <track
               kind="captions"
-              src={captionsSrc}
+              src={this.captionsSrc.toString()}
               srcLang="en"
               ref={this.trackRef}
             />
