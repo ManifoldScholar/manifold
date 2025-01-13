@@ -22,7 +22,7 @@
     "delete_maker": "Are you sure you want to delete this maker?",
     "delete_membership": "Are you sure you want to remove {{ name }} from the group?",
     "delete_membership_group": "Are you sure you want to remove {{ name }} from {{ rg }}?",
-    "delete_membership_body": "Something about what happens to their activity in the group",
+    "delete_membership_body": "The user will no longer be a member of the group, but the user's annotations will not be deleted. To remove annotations, delete them from the Annotations tab or remove the user entirely.",
     "delete_note": "Are you sure you want to remove this notation?",
     "delete_note_body": "Pressing yes will remove the notation from this spot in the text. It will not remove it from the project.",
     "delete_page": "Are you sure you want to delete this page?",
