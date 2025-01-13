@@ -6,7 +6,7 @@ export const Group = styled.div`
   gap: 40px;
 
   > * {
-    inline-size: max(200px, min(calc(50% - 20px), 400px));
+    flex-basis: 350px;
     display: flex;
     flex-direction: column;
 
