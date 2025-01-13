@@ -23,7 +23,8 @@ export default function FlagsList({
       <Styled.FlagsList>
         {!!resolvedFlagsCount && (
           <Styled.FlagWrapper>
-            <span>
+            <span style={{ color: "var(--color-neutral-text-extra-light)" }}>
+              <b>{resolvedFlagsCount}</b>{" "}
               {t("records.annotations.resolved_flags_count", {
                 count: resolvedFlagsCount
               })}
@@ -41,7 +42,7 @@ export default function FlagsList({
                 <FormattedDate format="MMM dd, yyyy" date={createdAt} />
                 <span>{creator.attributes.fullName}</span>
               </Styled.FlagMeta>
-              <Styled.FlagMessage>{message}</Styled.FlagMessage>
+              {message && <Styled.FlagMessage>{message}</Styled.FlagMessage>}
             </Styled.FlagWrapper>
           ) : null;
         })}

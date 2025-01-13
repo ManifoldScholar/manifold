@@ -19,11 +19,13 @@ export const FlagsList = styled.ul`
 `;
 
 export const FlagWrapper = styled.li`
-  border-bottom: 1px solid;
-  padding-bottom: 20px;
-
   & + & {
     margin-block-start: 20px;
+  }
+
+  &:not(:only-child):not(:last-child) {
+    border-bottom: 1px solid var(--color-neutral-ui-dull-light);
+    padding-bottom: 20px;
   }
 `;
 
@@ -31,11 +33,12 @@ export const FlagMeta = styled.div`
   display: flex;
   justify-content: space-between;
   font-family: var(--font-family-copy);
-  margin-block-end: 8px;
 `;
 
 export const FlagMessage = styled.p`
   font-size: var(--font-size-60);
+  color: var(--color-neutral-text-extra-light);
+  margin-block-start: 8px;
 `;
 
 export const Toggle = styled(Collapse.Toggle)`
@@ -50,7 +53,7 @@ export const Toggle = styled(Collapse.Toggle)`
 
 export const Content = styled(Collapse.Content)`
   position: relative;
-  border: 1px solid;
+  border: 1px solid var(--color-neutral-ui-dull-light);
   padding: 8px;
   padding-inline: 12px;
   border-radius: 8px;
@@ -94,6 +97,7 @@ export const Overlay = styled.div`
 export const Creator = styled.div`
   display: flex;
   align-items: center;
+  color: var(--color-neutral-text-extra-light);
 `;
 
 export const CreatorName = styled.div`
@@ -117,13 +121,14 @@ export const Item = styled.dd`
   margin-block-end: 30px;
   font-family: var(--font-family-heading);
   font-size: var(--font-size-60);
+  color: var(--color-neutral-text-extra-light);
 
   a {
     ${linkUnstyled}
   }
 
   &:not(:last-child) {
-    border-bottom: 1px solid;
+    border-bottom: 1px solid var(--color-neutral-ui-dull-light);
     padding-block-end: 10px;
   }
 `;
