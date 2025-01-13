@@ -8,7 +8,7 @@ module API
       end
 
       def show
-        expires_in 3.hours, public: true
+        expires_in 10.minutes, public: true
         render_single_resource Statistics.new,
                                serializer: ::V1::StatisticsSerializer,
                                location: "[:api, :v1, :statistics]"
