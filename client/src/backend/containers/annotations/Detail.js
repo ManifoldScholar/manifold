@@ -2,9 +2,10 @@ import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useFetch, useApiCallback } from "hooks";
 import { annotationsAPI } from "api";
+import lh from "helpers/linkHandler";
 import {
   FlagsList,
   Body,
@@ -15,6 +16,7 @@ import withConfirmation from "hoc/withConfirmation";
 function AnnotationDetailContainer({ refresh, confirm }) {
   const { t } = useTranslation();
   const { id } = useParams();
+  const history = useHistory();
 
   const { data: annotation, refresh: refreshAnnotation } = useFetch({
     request: [annotationsAPI.show, id],
@@ -30,8 +32,9 @@ function AnnotationDetailContainer({ refresh, confirm }) {
       confirm(heading, message, async () => {
         await deleteAnnotation(id);
         refresh();
+        history.push(lh.link("backendRecordsAnnotations"));
       });
-  }, [id, confirm, deleteAnnotation, t, refresh]);
+  }, [id, confirm, deleteAnnotation, t, history, refresh]);
 
   const { attributes, relationships } = annotation ?? {};
 

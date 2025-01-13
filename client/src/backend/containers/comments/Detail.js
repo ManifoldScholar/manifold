@@ -2,9 +2,10 @@ import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useFetch, useApiCallback } from "hooks";
 import { commentsAPI } from "api";
+import lh from "helpers/linkHandler";
 import {
   FlagsList,
   Body,
@@ -15,6 +16,7 @@ import withConfirmation from "hoc/withConfirmation";
 function CommentDetailContainer({ refresh, confirm }) {
   const { t } = useTranslation();
   const { id } = useParams();
+  const history = useHistory();
 
   const { data: comment, refresh: refreshComment } = useFetch({
     request: [commentsAPI.show, id],
@@ -30,8 +32,9 @@ function CommentDetailContainer({ refresh, confirm }) {
       confirm(heading, message, async () => {
         await deleteComment(id);
         refresh();
+        history.push(lh.link("backendRecordsComments"));
       });
-  }, [id, confirm, deleteComment, t, refresh]);
+  }, [id, confirm, deleteComment, t, history, refresh]);
 
   const { attributes, relationships } = comment ?? {};
 
