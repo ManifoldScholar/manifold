@@ -5,7 +5,8 @@ import {
   listHorizontal,
   buttonUnstyled,
   utilityPrimary,
-  defaultHoverStyle
+  defaultHoverStyle,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export const Inner = styled.div`
@@ -49,6 +50,14 @@ export const Button = styled.button`
   &[aria-expanded="true"] {
     ${defaultHoverStyle}
     margin-bottom: 15px;
+  }
+
+  &:hover:not([disabled]) {
+    ${defaultHoverStyle}
+  }
+
+  &:focus-visible:not([disabled]) {
+    ${defaultFocusStyle}
   }
 `;
 
