@@ -8,17 +8,27 @@ export default function SelectAll({
   unit,
   onSelect,
   onClear,
-  allSelected
+  allSelected,
+  idsSelected
 }) {
   const { t } = useTranslation();
+
   return (
     <Styled.Total role="status">
       <span>
-        <Trans
-          i18nKey={"counts.bulk_actions_match"}
-          values={{ total: pagination.totalCount, unit }}
-          components={[<Styled.Highlighted />]}
-        />
+        {allSelected || !!idsSelected ? (
+          <Trans
+            i18nKey={"counts.bulk_actions_match"}
+            values={{ total: idsSelected || pagination.totalCount, unit }}
+            components={[<Styled.Highlighted />]}
+          />
+        ) : (
+          <Trans
+            i18nKey={"counts.range"}
+            values={{ start: 1, end: 10, total: pagination.totalCount, unit }}
+            components={[<Styled.Highlighted />]}
+          />
+        )}
       </span>
       <Styled.Select onClick={allSelected ? onClear : onSelect}>
         {allSelected ? t("actions.clear_selection") : t("actions.select_all")}

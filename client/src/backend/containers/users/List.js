@@ -116,6 +116,7 @@ function UsersListContainer({
             onSelect={handleSelectAll}
             onClear={resetBulkSelection}
             allSelected={!!bulkSelection.filters}
+            idsSelected={bulkSelection.ids.length}
           />
         ) : (
           true
