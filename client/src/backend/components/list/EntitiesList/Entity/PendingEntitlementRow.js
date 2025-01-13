@@ -41,7 +41,7 @@ export default function PendingEntitlementRow({
       <button
         className="entity-row__utility-button"
         onClick={() => onDelete(entitlement.id)}
-        title={t("backend.actions.publish_feature")}
+        title={t("actions.delete")}
       >
         <Utility.IconComposer icon="delete32" size={26} />
       </button>
