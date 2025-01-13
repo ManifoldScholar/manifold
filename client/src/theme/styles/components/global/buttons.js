@@ -309,6 +309,24 @@ export default `
       }
     }
 
+    &--red {
+      border-color: var(--error-color);
+      color: var(--error-color);
+
+      &:hover:not([disabled]),
+      &:active:not([disabled]) {
+        color: var(--color-neutral-text-extra-dark);
+        background-color: var(--color-base-red45);
+        border-color: var(--color-base-red45);
+      }
+
+      &.focus-visible:not([disabled]) {
+        color: var(--color-base-neutral90);
+        background-color: var(--color-base-red20);
+        outline: 0;
+      }
+    }
+
     &--full {
       width: 100%;
     }
@@ -564,7 +582,7 @@ export default `
     &:hover,
     &.focus-visible,
     &--active {
-      color: var(--button-tertiary-hover-color, --color-neutral-text-extra-dark);
+      color: var(--color-neutral-text-extra-dark);
       background-color: var(--button-tertiary-bg-hover-color);
       border-color: var(--button-tertiary-bg-hover-color);
       outline: 0;
@@ -578,14 +596,6 @@ export default `
     &--outlined {
       background-color: transparent;
       border-color: currentColor;
-    }
-
-    &--red {
-      --button-tertiary-bg-hover-color: var(--error-color);
-      --button-tertiary-hover-color: var(--color-base-neutral-white);
-
-      background-color: var(--color-base-red45);
-      color: var(--color-base-neutral100);
     }
   }
 

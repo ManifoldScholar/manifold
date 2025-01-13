@@ -1,14 +1,16 @@
 import styled from "@emotion/styled";
-
-export const Instructions = styled.p`
-  margin-block-end: 24px;
-`;
+import { respond } from "theme/styles/mixins";
 
 export const Form = styled.form`
   --TextArea-border-color: var(--color);
 
   textarea {
     block-size: 150px !important;
+    font-size: 18px;
+  }
+
+  > * + * {
+    margin-block-start: 24px;
   }
 `;
 
@@ -17,10 +19,11 @@ export const ButtonGroup = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 20px;
-  margin-block-start: 20px;
+  margin-inline-start: auto;
 
   > button {
-    padding-inline: 16px;
-    padding-block: 12px;
-  }
+    flex-grow: 0;
+    flex-basis: 50%;
+
+    ${respond(`flex-basis: max-content`, 65)}
 `;
