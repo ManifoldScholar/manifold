@@ -5,6 +5,7 @@ import { useUID } from "react-uid";
 import { useTranslation } from "react-i18next";
 import Wrapper from "global/components/dialog/Wrapper";
 import { Unwrapped } from "global/components/form";
+import IconComposer from "global/components/utility/IconComposer";
 import { FormContext } from "helpers/contexts";
 import { useApiCallback } from "hooks";
 import { annotationsAPI, commentsAPI } from "api";
@@ -44,10 +45,16 @@ export default function FlagAnnotationModal({
     [id, type, message, flagAnnotation, flagComment, setOpen]
   );
 
+  const buttonClasses = classNames(
+    "buttons-icon-horizontal__button",
+    "buttons-icon-horizontal__button--in-dialog",
+    "button-icon-secondary"
+  );
+
   return (
     <Wrapper
       className="dialog"
-      maxWidth={800}
+      maxWidth={600}
       showCloseButton={false}
       closeOnOverlayClick={false}
     >
@@ -61,11 +68,9 @@ export default function FlagAnnotationModal({
           })}
         </h2>
       </header>
-      <Styled.Instructions>
-        {t("reader.report_annotation.instructions")}
-      </Styled.Instructions>
+      <p>{t("reader.report_annotation.instructions")}</p>
       <FormContext.Provider value={{ styleType: "primary" }}>
-        <Styled.Form className="dialog_body">
+        <Styled.Form className="dialog__body">
           <Unwrapped.TextArea
             rows={5}
             value={message}
@@ -81,17 +86,31 @@ export default function FlagAnnotationModal({
           <Styled.ButtonGroup>
             <button
               type="submit"
-              className={classNames("button-tertiary button-tertiary--red")}
+              className={classNames(
+                buttonClasses,
+                "button-icon-secondary--red"
+              )}
               onClick={handleSubmit}
             >
+              <IconComposer
+                icon="checkmark16"
+                size="default"
+                className="button-icon-secondary__icon"
+              />
               {t("actions.report")}
             </button>
             <button
               className={classNames(
-                "button-tertiary button-tertiary--neutral button-primary--rounded"
+                buttonClasses,
+                "button-icon-secondary--dull"
               )}
               onClick={() => setOpen(false)}
             >
+              <IconComposer
+                icon="close16"
+                size="default"
+                className="button-icon-secondary__icon"
+              />
               {t("actions.cancel")}
             </button>
           </Styled.ButtonGroup>
