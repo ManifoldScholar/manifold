@@ -31,8 +31,7 @@ function ReadingGroupsList({
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 10,
     initFilters: {
-      ...entitiesListSearchParams.initialreadingGroups,
-      order: "created_at_desc"
+      ...entitiesListSearchParams.initialreadingGroups
     },
     initSearchProps: entitiesListSearchProps("readingGroups")
   });
@@ -50,7 +49,8 @@ function ReadingGroupsList({
     bulkSelection,
     bulkSelectionEmpty,
     addItem,
-    removeItem
+    removeItem,
+    addPage
   } = useBulkActions(readingGroups, filters);
 
   const { onReset, setParam } = useClearBulkSelectionWithFilters(
@@ -107,6 +107,8 @@ function ReadingGroupsList({
       });
   };
 
+  const currentPageIds = readingGroups?.map(a => a.id);
+
   return (
     readingGroups && (
       <>
@@ -136,7 +138,9 @@ function ReadingGroupsList({
                 unit={unit}
                 onSelect={handleSelectAll}
                 onClear={resetBulkSelection}
+                onSelectPage={() => addPage(currentPageIds)}
                 allSelected={!!bulkSelection.filters}
+                idsSelectedCount={bulkSelection.ids.length}
               />
             ) : (
               true

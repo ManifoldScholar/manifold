@@ -53,7 +53,8 @@ function CommentsList({
     bulkSelection,
     bulkSelectionEmpty,
     addItem,
-    removeItem
+    removeItem,
+    addPage
   } = useBulkActions(comments, filters);
 
   const { onReset, setParam } = useClearBulkSelectionWithFilters(
@@ -123,6 +124,8 @@ function CommentsList({
     });
   };
 
+  const currentPageIds = comments?.map(a => a.id);
+
   return (
     <>
       {renderChildRoutes()}
@@ -148,8 +151,10 @@ function CommentsList({
                 pagination={meta.pagination}
                 unit={unit}
                 onSelect={handleSelectAll}
+                onSelectPage={() => addPage(currentPageIds)}
                 onClear={resetBulkSelection}
                 allSelected={!!bulkSelection.filters}
+                idsSelectedCount={bulkSelection.ids.length}
               />
             ) : (
               true

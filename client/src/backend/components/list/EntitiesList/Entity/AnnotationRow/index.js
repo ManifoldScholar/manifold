@@ -78,7 +78,7 @@ function AnnotationRow({
                 ...(orphaned
                   ? [
                       {
-                        text: t("record.annotations.orphaned_tag"),
+                        text: t("records.annotations.orphaned_tag"),
                         level: ""
                       }
                     ]

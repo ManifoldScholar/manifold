@@ -1,6 +1,6 @@
 {
   "counts": {
-    "bulk_actions_match": "<0>{{total}}</0> matching {{unit}}",
+    "bulk_actions_match": "<0>{{total}}</0> {{unit}} selected",
     "categorized_and_uncategorized_issues": "$t(counts.categorized_issues, {{count}}) {{uncategorized}}",
     "categorized_issues_one": "There is <strong>{{count}}</strong> issue in <strong>{{categoryCount}}</strong> {{volume}}",
     "categorized_issues_other": "There are <strong>{{count}}</strong> issues in <strong>{{categoryCount}}</strong> {{volume}}",

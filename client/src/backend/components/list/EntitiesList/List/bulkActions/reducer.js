@@ -4,6 +4,8 @@ export function bulkActionsReducer(state, action) {
       return { ...state, ids: [...state.ids, action.payload] };
     case "remove":
       return { ...state, ids: state.ids.filter(id => id !== action.payload) };
+    case "addPage":
+      return { filters: null, ids: action.payload };
     case "removeAndClear":
       return { filters: null, ids: action.payload };
     case "setFilters":

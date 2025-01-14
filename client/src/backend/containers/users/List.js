@@ -49,7 +49,8 @@ function UsersListContainer({
     bulkSelection,
     bulkSelectionEmpty,
     addItem,
-    removeItem
+    removeItem,
+    addPage
   } = useBulkActions(users, filters);
 
   const { onReset, setParam } = useClearBulkSelectionWithFilters(
@@ -94,6 +95,8 @@ function UsersListContainer({
 
   if (!users || !usersMeta) return null;
 
+  const currentPageIds = users?.map(a => a.id);
+
   return (
     <EntitiesList
       entityComponent={UserRow}
@@ -115,7 +118,9 @@ function UsersListContainer({
             unit={unit}
             onSelect={handleSelectAll}
             onClear={resetBulkSelection}
+            onSelectPage={() => addPage(currentPageIds)}
             allSelected={!!bulkSelection.filters}
+            idsSelectedCount={bulkSelection.ids.length}
           />
         ) : (
           true
