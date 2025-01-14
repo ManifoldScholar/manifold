@@ -61,7 +61,8 @@ function ReadingGroupAnnotationsContainer({
     bulkSelection,
     bulkSelectionEmpty,
     addItem,
-    removeItem
+    removeItem,
+    addPage
   } = useBulkActions(data, filters);
 
   const { onReset, setParam } = useClearBulkSelectionWithFilters(
@@ -109,6 +110,8 @@ function ReadingGroupAnnotationsContainer({
 
   const closeUrl = lh.link("backendReadingGroupAnnotations", readingGroup.id);
 
+  const currentPageIds = data?.map(a => a.id);
+
   return (
     <Authorize
       entity={readingGroup}
@@ -141,7 +144,9 @@ function ReadingGroupAnnotationsContainer({
                 unit={unit}
                 onSelect={handleSelectAll}
                 onClear={resetBulkSelection}
+                onSelectPage={() => addPage(currentPageIds)}
                 allSelected={!!bulkSelection.filters}
+                idsSelectedCount={bulkSelection.ids.length}
               />
             ) : (
               true

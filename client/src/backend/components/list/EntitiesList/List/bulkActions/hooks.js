@@ -1,6 +1,15 @@
-import React, { useState, useReducer, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useReducer,
+  useMemo,
+  useCallback,
+  useEffect,
+  useRef
+} from "react";
 import { bulkActionsReducer } from "./reducer";
 import isEqual from "lodash/isEqual";
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 
 export default function useBulkActions(records, filters) {
   const [bulkActionsActive, setBulkActionsActive] = useState(false);
@@ -42,17 +51,31 @@ export default function useBulkActions(records, filters) {
     });
   };
 
-  const resetBulkSelection = () =>
-    dispatchSelection({
-      type: "reset",
-      payload: initSelectionState
-    });
+  const resetBulkSelection = useCallback(
+    () =>
+      dispatchSelection({
+        type: "reset",
+        payload: initSelectionState
+      }),
+    [initSelectionState]
+  );
 
   const addItem = id => dispatchSelection({ type: "add", payload: id });
   const removeItem = id =>
     bulkSelection?.filters
       ? handleSelectAllUncheck(id)
       : dispatchSelection({ type: "remove", payload: id });
+  const addPage = ids => dispatchSelection({ type: "addPage", payload: ids });
+
+  const { search } = useLocation();
+  const { page } = queryString.parse(search);
+  const pageRef = useRef(page ?? "1");
+
+  useEffect(() => {
+    if (page && page !== pageRef.current) {
+      resetBulkSelection();
+    }
+  }, [page, resetBulkSelection]);
 
   return {
     bulkActionsActive,
@@ -63,7 +86,8 @@ export default function useBulkActions(records, filters) {
     bulkSelection,
     bulkSelectionEmpty,
     addItem,
-    removeItem
+    removeItem,
+    addPage
   };
 }
 

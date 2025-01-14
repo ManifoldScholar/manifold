@@ -54,7 +54,8 @@ function AnnotationsList({
     bulkSelection,
     bulkSelectionEmpty,
     addItem,
-    removeItem
+    removeItem,
+    addPage
   } = useBulkActions(annotations, filters);
 
   const { onReset, setParam } = useClearBulkSelectionWithFilters(
@@ -124,6 +125,8 @@ function AnnotationsList({
     });
   };
 
+  const currentPageIds = annotations?.map(a => a.id);
+
   return (
     <>
       {renderChildRoutes()}
@@ -150,7 +153,9 @@ function AnnotationsList({
                 unit={unit}
                 onSelect={handleSelectAll}
                 onClear={resetBulkSelection}
+                onSelectPage={() => addPage(currentPageIds)}
                 allSelected={!!bulkSelection.filters}
+                idsSelectedCount={bulkSelection.ids.length}
               />
             ) : (
               true
