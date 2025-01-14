@@ -1,0 +1,9 @@
+backup-*.tar
+bin/console
+bin/dbconsole
+coverage
+data
+dump.sql
+log
+public/system
+tmp

@@ -33,5 +33,6 @@ data/*
 !data/.gitkeep
 examples.txt
 .rspec-local
+dump.sql
 
 coverage

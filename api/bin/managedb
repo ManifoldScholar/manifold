@@ -1,0 +1,187 @@
+#!/bin/bash
+
+set -eu
+
+### Project-specific variables
+
+# Bash array to contain the paths to archive.
+# * Separate with spaces
+# * Quote if path contains spaces or weird characters
+declare -a ARCHIVE_PATHS=(data public/system)
+
+### Do not edit past this point
+
+### Private Variables
+MODE=${1?'Provide a mode: backup or restore'}
+BACKUP_FILE="${2:-backup-$(date +'%Y-%m-%d-%s').tar}"
+SQL_FILE=dump.sql
+PROJECT_ROOT="$(realpath $(dirname "$0")/..)"
+RESTORE_TMP=""
+
+warn() {
+  local msg="${1:-""}"
+
+  echo "$msg" >&2
+}
+
+# Check that we are in docker
+check_env() {
+  if [ ! -f /.dockerenv ]; then
+    warn "!! Re-executing this script in docker."
+    warn
+
+    if [ "$MODE" = "restore" ]; then
+      exec docker compose exec web bin/restore "$BACKUP_FILE"
+    elif [ "$MODE" = "backup" ]; then
+      exec docker compose exec web bin/backup
+    else
+      print_help
+
+      exit 1
+    fi
+  fi
+}
+
+print_help() {
+  warn "This script needs to be called with a valid mode, e.g."
+  warn "  docker compose exec web bin/backup [PATH]"
+  warn "  docker compose exec web bin/restore PATH"
+}
+
+show_help() {
+  print_help
+
+  exit 0
+}
+
+backup_dump_db() {
+  warn "** Dumping the database..."
+
+  pg_dump -O -x --clean --if-exists -w -f $SQL_FILE
+}
+
+backup_make_tarball() {
+  warn "** Generating a tarball..."
+
+  tar -chf $BACKUP_FILE "$SQL_FILE" "${ARCHIVE_PATHS[@]}"
+}
+
+backup_cleanup() {
+  warn "** Cleaning up the backup..."
+
+  if [ -f "$SQL_FILE" ]; then
+    rm $SQL_FILE
+  fi
+}
+
+backup_main() {
+  backup_dump_db
+  backup_make_tarball
+  backup_cleanup
+
+  warn "** Backed up to:"
+
+  echo "$BACKUP_FILE"
+}
+
+restore_cleanup() {
+  warn "** Cleaning up restore tmpdir..."
+
+  if [ -d "$RESTORE_TMP" ]; then
+    rm -rf "$RESTORE_TMP"
+  fi
+
+  for path in "${ARCHIVE_PATHS[@]}"; do
+    local target_path="${PROJECT_ROOT}/${path}"
+    local backup_path="${target_path}.bak"
+
+    if [ -r "$backup_path" ]; then
+      rm -rf "$backup_path"
+    fi
+  done
+}
+
+restore_extract() {
+  warn "** Extracting the tarball..."
+
+  if [ ! -r "$BACKUP_FILE" ]; then
+    warn "Backup file not found"
+    exit 1
+  fi
+
+  RESTORE_TMP="$(mktemp -d)"
+
+  tar xf "$BACKUP_FILE" --directory "$RESTORE_TMP" --warning=no-unknown-keyword
+}
+
+restore_db() {
+  warn "** Restoring the database..."
+
+  local dumpfile="${RESTORE_TMP}/${SQL_FILE}"
+
+  if [ -f "$dumpfile" ]; then
+    psql -o /dev/null -q -P pager=off -v ON_ERROR_STOP=1 --single-transaction -f "$dumpfile"
+  else
+    warn "'${SQL_FILE}' not in backup, skipping"
+  fi
+}
+
+# This will iterate through the defined archive paths,
+# making sure to back up the current directories until
+# the _entire_ restoration process is complete
+restore_paths() {
+  warn "** Restoring directories..."
+
+  for path in "${ARCHIVE_PATHS[@]}"; do
+    local source_path="${RESTORE_TMP}/${path}"
+    local target_path="${PROJECT_ROOT}/${path}"
+    local backup_path="${target_path}.bak"
+
+    if [[ -d "${source_path}" && -d "${target_path}" ]]; then
+      cp -rf "${source_path}"/* "${target_path}"
+    elif [ -r "$source_path" ]; then
+      if [ -r "$target_path" ]; then
+        mv -f "$target_path" "$backup_path"
+      fi
+
+      mv -f "$source_path" "$PROJECT_ROOT"
+    else
+      warn "'${path}' not in backup, skipping"
+    fi
+  done
+}
+
+restore_main() {
+  restore_extract
+
+  restore_db
+
+  restore_paths
+
+  restore_cleanup
+}
+
+# Parse args and run
+main() {
+  case "$MODE" in
+    backup)
+      (
+        cd "$PROJECT_ROOT";
+        backup_main
+      )
+      ;;
+    restore)
+      (
+        cd "$PROJECT_ROOT";
+        restore_main
+      )
+      ;;
+    *)
+      show_help
+      ;;
+  esac
+}
+
+check_env
+
+main

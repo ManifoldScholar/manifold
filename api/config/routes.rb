@@ -269,6 +269,8 @@ Rails.application.routes.draw do
       resources :passwords, only: [:create, :update]
       post "passwords/admin_reset_password" => "passwords#admin_reset_password"
 
+      get "ping", to: "status#ping", via: %i[get head]
+
       get "*path", to: "errors#error_404", via: :all
     end
   end

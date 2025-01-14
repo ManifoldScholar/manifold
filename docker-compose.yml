@@ -1,0 +1,297 @@
+services:
+  postgres:
+    image: postgres:13-alpine
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all
+    shm_size: 2g
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: password
+      POSTGRES_DB: 'manifold_development'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      xpack.security.enabled: 'false'
+      discovery.type: single-node
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    restart: unless-stopped
+    healthcheck:
+      test: curl -s -f "http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=80s" >/dev/null || exit 1
+      interval: 100s
+      timeout: 120s
+      retries: 20
+      start_period: 120s
+  redis:
+    image: bitnami/redis:6.2.7-debian-10-r34
+    platform: linux/amd64
+    environment:
+      - "ALLOW_EMPTY_PASSWORD=yes"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+  test-redis:
+    image: bitnami/redis:6.2.7-debian-10-r34
+    platform: linux/amd64
+    environment:
+      - "ALLOW_EMPTY_PASSWORD=yes"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+  migrations:
+    build:
+      context: api
+      dockerfile: docker/development/Dockerfile
+    command: bin/ensure-db
+    depends_on:
+      postgres:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file: docker/manifold.env
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: "no"
+    volumes:
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+  web:
+    tty: true
+    stdin_open: true
+    build:
+      context: api
+      dockerfile: docker/development/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    env_file:
+      - ./docker/manifold.env
+    environment:
+      PUMA_APPLICATION: API
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-s", "-o", "/dev/null", "http://localhost:13110/api/v1/ping"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - "13110:13110"
+    restart: unless-stopped
+    volumes:
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+  cable:
+    build:
+      context: api
+      dockerfile: docker/development/Dockerfile
+    command: bin/cable -C config.puma.rb cable/config.ru
+    depends_on:
+      postgres:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    env_file:
+      - ./docker/manifold.env
+    environment:
+      PUMA_APPLICATION: CABLE
+    healthcheck:
+      test: ["CMD", "wscat", "-c", "ws://127.0.0.1:13120"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - "13120:13120"
+    restart: unless-stopped
+    volumes:
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+  worker:
+    build:
+      context: api
+      dockerfile: docker/development/Dockerfile
+    command: "bin/sidekiq"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    env_file:
+      - ./docker/manifold.env
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: unless-stopped
+    volumes:
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+  clock:
+    build:
+      context: api
+      dockerfile: docker/development/Dockerfile
+    command: bin/zhong zhong.rb
+    depends_on:
+      postgres:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    env_file:
+      - ./docker/manifold.env
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: unless-stopped
+    volumes:
+      - ./api/public/system/:/srv/app/public/system
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+  spec:
+    build:
+      context: api
+      dockerfile: docker/development/Dockerfile
+    command: tail -f /dev/null
+    depends_on:
+      postgres:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    env_file:
+      - ./docker/manifold.env
+    environment:
+      - RACK_ENV=test
+      - RAILS_ENV=test
+      - RAILS_REDIS_URL=redis://test-redis:6379
+      - REDIS_URL=redis://test-redis:6379
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: unless-stopped
+    volumes:
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+
+volumes:
+  bundle-cache:
+    driver: local
+  esdata:
+    driver: local
+  postgres-data:
+    driver: local
+  rails-data:
+    driver: local
+  rails-log:
+    driver: local
+  rails-tmp:
+    driver: local
+  redis-data:
+    driver: local
+  uploads:
+    driver: local
