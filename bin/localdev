@@ -10,4 +10,4 @@ cd "$ROOT"
 
 docker-compose up -d
 
-exec "${ROOT}/client_dev"
+exec "${ROOT}/bin/client_dev"
