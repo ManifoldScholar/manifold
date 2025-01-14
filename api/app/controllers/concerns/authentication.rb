@@ -63,6 +63,10 @@ module Authentication
   # Returns user with auth token
   def render_authenticated_user(user, include_token: true, status: :ok)
     if user
+      @current_user = user
+
+      RequestStore[:current_user] = user
+
       render_jsonapi user,
                      serializer: ::V1::CurrentUserSerializer,
                      params: { include_private_data: true },

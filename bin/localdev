@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This will ensure that docker is running, then launch
+# the client in the current terminal table.
+
+set -eu
+
+ROOT="$(realpath "$(dirname "$0")/..")"
+
+cd "$ROOT"
+
+docker-compose up -d
+
+exec "${ROOT}/client_dev"

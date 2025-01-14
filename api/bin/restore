@@ -1,0 +1,5 @@
+#!/bin/bash
+
+RESTORE_FILE="${1?'Provide a file to restore as the first arg to this script'}"
+
+exec "$(dirname $0)/managedb" restore "$RESTORE_FILE"
