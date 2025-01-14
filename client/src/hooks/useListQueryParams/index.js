@@ -78,12 +78,16 @@ export default function useListQueryParams({
   }, [setFilters, updateFilterParams]);
 
   const searchProps = useCallback(() => {
-    const values = Object.keys(initSearchProps?.values).reduce((obj, next) => {
-      return {
-        ...obj,
-        [next]: filters[next] ?? initSearchProps.values[next]
-      };
-    }, {});
+    if (!initSearchProps) return {};
+
+    const values = initSearchProps?.values
+      ? Object.keys(initSearchProps.values).reduce((obj, next) => {
+          return {
+            ...obj,
+            [next]: filters[next] ?? initSearchProps.values[next]
+          };
+        }, {})
+      : filters;
 
     return {
       ...initSearchProps,
