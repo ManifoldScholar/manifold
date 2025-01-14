@@ -65,38 +65,38 @@ export default function useListQueryParams({
   // Most backend list still use entityListSearchProps which set filters individually
   const setFilter = useCallback(
     (field, value) => {
-      if (
-        initSearchProps?.setParam &&
-        typeof initSearchProps.setParam === "function"
-      )
-        initSearchProps.setParam(field, value);
-
       const key = field.as || field.name;
       setFilters({ ...filters, [key]: value });
     },
-    [initSearchProps, setFilters, filters]
+    [setFilters, filters]
   );
 
   // Legacy reset function for entityListSearchProps; frontend uses setFilters
   const onReset = useCallback(() => {
-    if (
-      initSearchProps?.onReset &&
-      typeof initSearchProps.onReset === "function"
-    )
-      initSearchProps.onReset();
     setFilters(filtersReset?.current);
     updateFilterParams(filtersReset?.current);
-  }, [initSearchProps, setFilters, updateFilterParams]);
+  }, [setFilters, updateFilterParams]);
 
-  const searchProps = useMemo(
-    () => ({ ...initSearchProps, onReset, setParam: setFilter }),
-    [initSearchProps, onReset, setFilter]
-  );
+  const searchProps = useCallback(() => {
+    const values = Object.keys(initSearchProps?.values).reduce((obj, next) => {
+      return {
+        ...obj,
+        [next]: filters[next] ?? initSearchProps.values[next]
+      };
+    }, {});
+
+    return {
+      ...initSearchProps,
+      values,
+      onReset,
+      setParam: setFilter
+    };
+  }, [initSearchProps, onReset, setFilter, filters]);
 
   return {
     pagination,
     filters,
     setFilters,
-    searchProps
+    searchProps: searchProps()
   };
 }
