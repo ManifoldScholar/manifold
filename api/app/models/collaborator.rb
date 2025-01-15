@@ -1,8 +1,5 @@
 # Tracks the relationship between texts and makers
 class Collaborator < ApplicationRecord
-  ROLE_CREATOR = "creator".freeze
-  ROLE_CONTRIBUTOR = "contributor".freeze
-
   acts_as_list scope: [:collaboratable_id, :collaboratable_type]
 
   # Authority

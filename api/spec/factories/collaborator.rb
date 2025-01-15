@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :collaborator do
-    role { Collaborator::ROLE_CREATOR }
+    role { CollaboratorRole::Author }
     association :collaboratable, factory: :project
     maker
   end

@@ -1,18 +1,14 @@
 class CollaboratorRole < ClassyEnum::Base
   def gepub_add_method
-    :"add_#{self}"
+    :"add_contributor"
   end
 end
 
-class CollaboratorRole::Creator < CollaboratorRole
-end
-
-class CollaboratorRole::Contributor < CollaboratorRole
-end
-
 class CollaboratorRole::Author < CollaboratorRole
+  def gepub_add_method
+    :"add_creator"
+  end
 end
-
 class CollaboratorRole::Editor < CollaboratorRole
 end
 class CollaboratorRole::EditedBy < CollaboratorRole

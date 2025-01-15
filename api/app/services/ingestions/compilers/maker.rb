@@ -43,7 +43,7 @@ module Ingestions
 
       def collaborator_attributes
         {
-          role: Collaborator::ROLE_CREATOR
+          role: CollaboratorRole::Author
         }
       end
 
