@@ -11,6 +11,10 @@ class Collaborator < ApplicationRecord
   belongs_to :collaboratable, polymorphic: true
   belongs_to :maker
 
+  classy_enum_attr :role, class_name: 'CollaboratorRole'
+
+  before_update :set_role_priority
+
   scope :by_role, ->(role = nil) { where(role: role) if role.present? }
 
   delegate :name, to: :maker, prefix: true
@@ -21,5 +25,9 @@ class Collaborator < ApplicationRecord
 
   def to_s
     "#{role} #{maker}"
+  end
+
+  def set_role_priority
+    priority = CollaboratorRole.find_index(role)
   end
 end
