@@ -261,10 +261,13 @@ CREATE TABLE public.annotations (
     resource_collection_id uuid,
     events_count integer DEFAULT 0,
     orphaned boolean DEFAULT false NOT NULL,
-    flags_count integer DEFAULT 0,
+    flags_count bigint DEFAULT 0 NOT NULL,
     reading_group_id uuid,
     deleted_at timestamp without time zone,
-    marked_for_purge_at timestamp without time zone
+    marked_for_purge_at timestamp without time zone,
+    resolved_flags_count bigint DEFAULT 0 NOT NULL,
+    unresolved_flags_count bigint DEFAULT 0 NOT NULL,
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL
 );
 
 
@@ -283,9 +286,14 @@ CREATE TABLE public.comments (
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false,
     children_count integer DEFAULT 0,
-    flags_count integer DEFAULT 0,
+    flags_count bigint DEFAULT 0 NOT NULL,
     sort_order integer,
-    events_count integer DEFAULT 0
+    events_count integer DEFAULT 0,
+    resolved_flags_count bigint DEFAULT 0 NOT NULL,
+    unresolved_flags_count bigint DEFAULT 0 NOT NULL,
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -871,8 +879,8 @@ CREATE TABLE public.journal_issues (
     journal_id uuid NOT NULL,
     journal_volume_id uuid,
     creator_id uuid,
-    number character varying DEFAULT ''::character varying NOT NULL,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    number character varying DEFAULT ''::character varying NOT NULL,
     sort_title integer DEFAULT 0 NOT NULL,
     pending_sort_title integer
 );
@@ -1373,12 +1381,30 @@ CREATE TABLE public.features (
 
 CREATE TABLE public.flags (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    creator_id uuid,
-    flaggable_id uuid,
-    flaggable_type character varying,
+    creator_id uuid NOT NULL,
+    flaggable_id uuid NOT NULL,
+    flaggable_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    message text,
+    resolved_by_creator boolean DEFAULT false NOT NULL,
+    resolved_at timestamp without time zone
 );
+
+
+--
+-- Name: flag_statuses; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.flag_statuses AS
+ SELECT flags.flaggable_type,
+    flags.flaggable_id,
+    COALESCE(array_agg(DISTINCT flags.creator_id) FILTER (WHERE (NOT flags.resolved_by_creator)), '{}'::uuid[]) AS flagger_ids,
+    count(DISTINCT flags.id) AS flags_count,
+    count(DISTINCT flags.id) FILTER (WHERE (flags.resolved_at IS NOT NULL)) AS resolved_flags_count,
+    count(DISTINCT flags.id) FILTER (WHERE (flags.resolved_at IS NULL)) AS unresolved_flags_count
+   FROM public.flags
+  GROUP BY flags.flaggable_type, flags.flaggable_id;
 
 
 --
@@ -1623,6 +1649,88 @@ CREATE TABLE public.makers (
     prefix character varying,
     cached_full_name character varying
 );
+
+
+--
+-- Name: texts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.texts (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    publication_date date,
+    description character varying,
+    toc_legacy text,
+    page_list_legacy text,
+    landmarks_legacy text,
+    structure_titles_legacy text,
+    project_id uuid,
+    category_id uuid,
+    creator_id uuid,
+    start_text_section_id uuid,
+    "position" integer,
+    legacy_spine character varying[] DEFAULT '{}'::character varying[],
+    metadata jsonb DEFAULT '{}'::jsonb,
+    slug character varying,
+    citations jsonb DEFAULT '{}'::jsonb,
+    section_kind character varying,
+    events_count integer DEFAULT 0,
+    cover_data jsonb,
+    published boolean DEFAULT false NOT NULL,
+    fingerprint text NOT NULL,
+    export_configuration jsonb DEFAULT '{}'::jsonb NOT NULL,
+    ignore_access_restrictions boolean DEFAULT false,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    toc jsonb DEFAULT '[]'::jsonb NOT NULL,
+    page_list jsonb DEFAULT '[]'::jsonb NOT NULL,
+    landmarks jsonb DEFAULT '[]'::jsonb NOT NULL,
+    structure_titles jsonb DEFAULT '{}'::jsonb NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
+);
+
+
+--
+-- Name: makers_with_collaborator_roles; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.makers_with_collaborator_roles AS
+ SELECT DISTINCT texts.id AS commentable_id,
+    'text'::text AS commentable_type,
+    collaborators.role,
+    collaborators.id AS collaborator_id,
+    collaborators.priority,
+    collaborators.importance,
+    makers.display_name,
+    makers.id AS maker_id
+   FROM ((public.texts
+     JOIN public.collaborators ON ((collaborators.collaboratable_id = texts.id)))
+     JOIN public.makers ON ((collaborators.maker_id = makers.id)))
+UNION
+ SELECT DISTINCT projects.id AS commentable_id,
+    'project'::text AS commentable_type,
+    collaborators.role,
+    collaborators.id AS collaborator_id,
+    collaborators.priority,
+    collaborators.importance,
+    makers.display_name,
+    makers.id AS maker_id
+   FROM ((public.projects
+     JOIN public.collaborators ON ((collaborators.collaboratable_id = projects.id)))
+     JOIN public.makers ON ((collaborators.maker_id = makers.id)))
+UNION
+ SELECT DISTINCT journals.id AS commentable_id,
+    'journal'::text AS commentable_type,
+    collaborators.role,
+    collaborators.id AS collaborator_id,
+    collaborators.priority,
+    collaborators.importance,
+    makers.display_name,
+    makers.id AS maker_id
+   FROM ((public.journals
+     JOIN public.collaborators ON ((collaborators.collaboratable_id = journals.id)))
+     JOIN public.makers ON ((collaborators.maker_id = makers.id)));
 
 
 --
@@ -2589,46 +2697,6 @@ CREATE TABLE public.text_exports (
     integrity_check jsonb DEFAULT '{}'::jsonb NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: texts; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.texts (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    publication_date date,
-    description character varying,
-    toc_legacy text,
-    page_list_legacy text,
-    landmarks_legacy text,
-    structure_titles_legacy text,
-    project_id uuid,
-    category_id uuid,
-    creator_id uuid,
-    start_text_section_id uuid,
-    "position" integer,
-    legacy_spine character varying[] DEFAULT '{}'::character varying[],
-    metadata jsonb DEFAULT '{}'::jsonb,
-    slug character varying,
-    citations jsonb DEFAULT '{}'::jsonb,
-    section_kind character varying,
-    events_count integer DEFAULT 0,
-    cover_data jsonb,
-    published boolean DEFAULT false NOT NULL,
-    fingerprint text NOT NULL,
-    export_configuration jsonb DEFAULT '{}'::jsonb NOT NULL,
-    ignore_access_restrictions boolean DEFAULT false,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    toc jsonb DEFAULT '[]'::jsonb NOT NULL,
-    page_list jsonb DEFAULT '[]'::jsonb NOT NULL,
-    landmarks jsonb DEFAULT '[]'::jsonb NOT NULL,
-    structure_titles jsonb DEFAULT '{}'::jsonb NOT NULL,
-    deleted_at timestamp without time zone,
-    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -4198,6 +4266,20 @@ CREATE INDEX index_comments_on_creator_id ON public.comments USING btree (creato
 
 
 --
+-- Name: index_comments_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_deleted_at ON public.comments USING btree (deleted_at);
+
+
+--
+-- Name: index_comments_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_marked_for_purge_at ON public.comments USING btree (marked_for_purge_at);
+
+
+--
 -- Name: index_comments_on_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4510,6 +4592,20 @@ CREATE INDEX index_export_targets_on_strategy ON public.export_targets USING btr
 --
 
 CREATE INDEX index_flags_on_flaggable_type_and_flaggable_id ON public.flags USING btree (flaggable_type, flaggable_id);
+
+
+--
+-- Name: index_flags_on_resolved_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_flags_on_resolved_at ON public.flags USING btree (resolved_at);
+
+
+--
+-- Name: index_flags_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_flags_uniqueness ON public.flags USING btree (creator_id, flaggable_type, flaggable_id);
 
 
 --
@@ -6361,6 +6457,14 @@ ALTER TABLE ONLY public.resource_imports
 
 
 --
+-- Name: flags fk_rails_4a17c6b2e1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.flags
+    ADD CONSTRAINT fk_rails_4a17c6b2e1 FOREIGN KEY (creator_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: users_roles fk_rails_4a41696df6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7275,3 +7379,4 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20241218212943');
 ('20250115212958'),
 ('20250115214357');
+('20250115224908');
