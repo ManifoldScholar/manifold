@@ -11,7 +11,7 @@ class Collaborator < ApplicationRecord
   belongs_to :collaboratable, polymorphic: true
   belongs_to :maker
 
-  classy_enum_attr :role, class_name: "CollaboratorRole"
+  classy_enum_attr :role, class_name: "CollaboratorRole", default: CollaboratorRole::Other
 
   before_update :set_role_priority
 

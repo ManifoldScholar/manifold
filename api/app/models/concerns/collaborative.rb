@@ -22,6 +22,7 @@ module Collaborative
     has_many :makers, through: :collaborators
     has_many :creators, through: :creator_collaborators, source: "maker"
     has_many :contributors, through: :contributor_collaborators, source: "maker"
+    has_many :makers_with_collaborator_roles, as: :commentable
 
     scope :with_collaborators, ->(role = nil) { where(id: Collaborator.by_role(role).select(:collaboratable_id)) }
     scope :sans_collaborators, ->(role = nil) { where.not(id: Collaborator.by_role(role).select(:collaboratable_id)) }

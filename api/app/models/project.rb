@@ -59,7 +59,6 @@ class Project < ApplicationRecord
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
-  has_many :makers_with_collaborator_roles, as: :commentable
   has_many :collection_project_rankings
   has_many :project_collections, through: :collection_projects, dependent: :destroy
   has_many :texts, dependent: :destroy, inverse_of: :project
