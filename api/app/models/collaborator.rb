@@ -11,7 +11,7 @@ class Collaborator < ApplicationRecord
   belongs_to :collaboratable, polymorphic: true
   belongs_to :maker
 
-  classy_enum_attr :role, class_name: 'CollaboratorRole'
+  classy_enum_attr :role, class_name: "CollaboratorRole"
 
   before_update :set_role_priority
 
@@ -28,6 +28,6 @@ class Collaborator < ApplicationRecord
   end
 
   def set_role_priority
-    priority = CollaboratorRole.find_index(role)
+    self.priority = CollaboratorRole.find_index(role)
   end
 end
