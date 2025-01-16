@@ -71,6 +71,7 @@ class Text < ApplicationRecord
   has_many :text_subjects, dependent: :destroy
   has_many :subjects, through: :text_subjects
   has_many :ingestion_sources, dependent: :destroy, inverse_of: :text
+  has_many :makers_with_collaborator_roles, as: :commentable
   has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text, autosave: true
   has_one :text_section_aggregation, inverse_of: :text

@@ -39,6 +39,7 @@ class Journal < ApplicationRecord
   end
 
   has_many :journal_subjects, dependent: :destroy, inverse_of: :journal
+  has_many :makers_with_collaborator_roles, as: :commentable
   has_many :subjects, through: :journal_subjects
   has_many :action_callouts,
            -> { order(:position) },

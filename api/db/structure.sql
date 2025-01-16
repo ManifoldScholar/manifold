@@ -1697,36 +1697,51 @@ CREATE TABLE public.texts (
 
 CREATE VIEW public.makers_with_collaborator_roles AS
  SELECT DISTINCT texts.id AS commentable_id,
-    'text'::text AS commentable_type,
+    'Text'::text AS commentable_type,
     collaborators.role,
     collaborators.id AS collaborator_id,
     collaborators.priority,
     collaborators.importance,
+    makers.prefix,
+    makers.suffix,
     makers.display_name,
+    makers.first_name,
+    makers.middle_name,
+    makers.last_name,
     makers.id AS maker_id
    FROM ((public.texts
      JOIN public.collaborators ON ((collaborators.collaboratable_id = texts.id)))
      JOIN public.makers ON ((collaborators.maker_id = makers.id)))
 UNION
  SELECT DISTINCT projects.id AS commentable_id,
-    'project'::text AS commentable_type,
+    'Project'::text AS commentable_type,
     collaborators.role,
     collaborators.id AS collaborator_id,
     collaborators.priority,
     collaborators.importance,
+    makers.prefix,
+    makers.suffix,
     makers.display_name,
+    makers.first_name,
+    makers.middle_name,
+    makers.last_name,
     makers.id AS maker_id
    FROM ((public.projects
      JOIN public.collaborators ON ((collaborators.collaboratable_id = projects.id)))
      JOIN public.makers ON ((collaborators.maker_id = makers.id)))
 UNION
  SELECT DISTINCT journals.id AS commentable_id,
-    'journal'::text AS commentable_type,
+    'Journal'::text AS commentable_type,
     collaborators.role,
     collaborators.id AS collaborator_id,
     collaborators.priority,
     collaborators.importance,
+    makers.prefix,
+    makers.suffix,
     makers.display_name,
+    makers.first_name,
+    makers.middle_name,
+    makers.last_name,
     makers.id AS maker_id
    FROM ((public.journals
      JOIN public.collaborators ON ((collaborators.collaboratable_id = journals.id)))
