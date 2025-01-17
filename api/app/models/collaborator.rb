@@ -28,6 +28,6 @@ class Collaborator < ApplicationRecord
   end
 
   def set_role_priority
-    self.priority = CollaboratorRole.find_index(role)
+    self.priority = role.priority
   end
 end

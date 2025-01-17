@@ -1382,6 +1382,23 @@ CREATE TABLE public.flags (
 
 
 --
+-- Name: flattened_collaborators; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.flattened_collaborators AS
+ SELECT (((collaborators.collaboratable_id)::text || '-'::text) || (collaborators.maker_id)::text) AS id,
+    collaborators.collaboratable_id,
+    collaborators.collaboratable_type,
+    collaborators.maker_id,
+    array_agg(collaborators.role ORDER BY collaborators.priority) AS roles,
+    min(collaborators.priority) AS priority,
+    min(collaborators.importance) AS importance
+   FROM public.collaborators
+  WHERE (collaborators.maker_id IS NOT NULL)
+  GROUP BY collaborators.collaboratable_id, collaborators.collaboratable_type, collaborators.maker_id;
+
+
+--
 -- Name: friendly_id_slugs; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1623,103 +1640,6 @@ CREATE TABLE public.makers (
     prefix character varying,
     cached_full_name character varying
 );
-
-
---
--- Name: texts; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.texts (
-    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    publication_date date,
-    description character varying,
-    toc_legacy text,
-    page_list_legacy text,
-    landmarks_legacy text,
-    structure_titles_legacy text,
-    project_id uuid,
-    category_id uuid,
-    creator_id uuid,
-    start_text_section_id uuid,
-    "position" integer,
-    legacy_spine character varying[] DEFAULT '{}'::character varying[],
-    metadata jsonb DEFAULT '{}'::jsonb,
-    slug character varying,
-    citations jsonb DEFAULT '{}'::jsonb,
-    section_kind character varying,
-    events_count integer DEFAULT 0,
-    cover_data jsonb,
-    published boolean DEFAULT false NOT NULL,
-    fingerprint text NOT NULL,
-    export_configuration jsonb DEFAULT '{}'::jsonb NOT NULL,
-    ignore_access_restrictions boolean DEFAULT false,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    toc jsonb DEFAULT '[]'::jsonb NOT NULL,
-    page_list jsonb DEFAULT '[]'::jsonb NOT NULL,
-    landmarks jsonb DEFAULT '[]'::jsonb NOT NULL,
-    structure_titles jsonb DEFAULT '{}'::jsonb NOT NULL,
-    deleted_at timestamp without time zone,
-    marked_for_purge_at timestamp without time zone
-);
-
-
---
--- Name: makers_with_collaborator_roles; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.makers_with_collaborator_roles AS
- SELECT DISTINCT texts.id AS commentable_id,
-    'Text'::text AS commentable_type,
-    collaborators.role,
-    collaborators.id AS collaborator_id,
-    collaborators.priority,
-    collaborators.importance,
-    makers.prefix,
-    makers.suffix,
-    makers.display_name,
-    makers.first_name,
-    makers.middle_name,
-    makers.last_name,
-    makers.id AS maker_id
-   FROM ((public.texts
-     JOIN public.collaborators ON ((collaborators.collaboratable_id = texts.id)))
-     JOIN public.makers ON ((collaborators.maker_id = makers.id)))
-UNION
- SELECT DISTINCT projects.id AS commentable_id,
-    'Project'::text AS commentable_type,
-    collaborators.role,
-    collaborators.id AS collaborator_id,
-    collaborators.priority,
-    collaborators.importance,
-    makers.prefix,
-    makers.suffix,
-    makers.display_name,
-    makers.first_name,
-    makers.middle_name,
-    makers.last_name,
-    makers.id AS maker_id
-   FROM ((public.projects
-     JOIN public.collaborators ON ((collaborators.collaboratable_id = projects.id)))
-     JOIN public.makers ON ((collaborators.maker_id = makers.id)))
-UNION
- SELECT DISTINCT journals.id AS commentable_id,
-    'Journal'::text AS commentable_type,
-    collaborators.role,
-    collaborators.id AS collaborator_id,
-    collaborators.priority,
-    collaborators.importance,
-    makers.prefix,
-    makers.suffix,
-    makers.display_name,
-    makers.first_name,
-    makers.middle_name,
-    makers.last_name,
-    makers.id AS maker_id
-   FROM ((public.journals
-     JOIN public.collaborators ON ((collaborators.collaboratable_id = journals.id)))
-     JOIN public.makers ON ((collaborators.maker_id = makers.id)));
 
 
 --
@@ -2686,6 +2606,46 @@ CREATE TABLE public.text_exports (
     integrity_check jsonb DEFAULT '{}'::jsonb NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: texts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.texts (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    publication_date date,
+    description character varying,
+    toc_legacy text,
+    page_list_legacy text,
+    landmarks_legacy text,
+    structure_titles_legacy text,
+    project_id uuid,
+    category_id uuid,
+    creator_id uuid,
+    start_text_section_id uuid,
+    "position" integer,
+    legacy_spine character varying[] DEFAULT '{}'::character varying[],
+    metadata jsonb DEFAULT '{}'::jsonb,
+    slug character varying,
+    citations jsonb DEFAULT '{}'::jsonb,
+    section_kind character varying,
+    events_count integer DEFAULT 0,
+    cover_data jsonb,
+    published boolean DEFAULT false NOT NULL,
+    fingerprint text NOT NULL,
+    export_configuration jsonb DEFAULT '{}'::jsonb NOT NULL,
+    ignore_access_restrictions boolean DEFAULT false,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    toc jsonb DEFAULT '[]'::jsonb NOT NULL,
+    page_list jsonb DEFAULT '[]'::jsonb NOT NULL,
+    landmarks jsonb DEFAULT '[]'::jsonb NOT NULL,
+    structure_titles jsonb DEFAULT '{}'::jsonb NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -4189,6 +4149,13 @@ CREATE INDEX index_categories_on_project_id ON public.categories USING btree (pr
 --
 
 CREATE INDEX index_collaborators_on_maker_id ON public.collaborators USING btree (maker_id);
+
+
+--
+-- Name: index_collaborators_sort_order; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_collaborators_sort_order ON public.collaborators USING btree (collaboratable_id, collaboratable_type, priority, role, importance);
 
 
 --
