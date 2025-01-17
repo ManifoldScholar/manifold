@@ -52,7 +52,7 @@ module V1
       typed_attribute :image_credits_formatted, Types::String.meta(read_only: true)
       typed_attribute :pending_slug, Types::String
 
-      typed_has_many :flattened_collaborators,
+      typed_has_many :collaborators,
                      serializer: FlattenedCollaboratorSerializer,
                      record_type: "flattened_collaborator"
 

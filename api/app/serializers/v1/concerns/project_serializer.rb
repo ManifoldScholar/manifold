@@ -81,7 +81,7 @@ module V1
           typed_has_one :journal_volume, record_type: "journalVolume"
           typed_has_one :journal_issue, record_type: "journalIssue"
 
-          typed_has_many :flattened_collaborators,
+          typed_has_many :collaborators,
                          serializer: FlattenedCollaboratorSerializer,
                          record_type: "flattened_collaborator"
 

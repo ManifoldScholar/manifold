@@ -261,10 +261,13 @@ CREATE TABLE public.annotations (
     resource_collection_id uuid,
     events_count integer DEFAULT 0,
     orphaned boolean DEFAULT false NOT NULL,
-    flags_count integer DEFAULT 0,
+    flags_count bigint DEFAULT 0 NOT NULL,
     reading_group_id uuid,
     deleted_at timestamp without time zone,
-    marked_for_purge_at timestamp without time zone
+    marked_for_purge_at timestamp without time zone,
+    resolved_flags_count bigint DEFAULT 0 NOT NULL,
+    unresolved_flags_count bigint DEFAULT 0 NOT NULL,
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL
 );
 
 
@@ -283,9 +286,14 @@ CREATE TABLE public.comments (
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false,
     children_count integer DEFAULT 0,
-    flags_count integer DEFAULT 0,
+    flags_count bigint DEFAULT 0 NOT NULL,
     sort_order integer,
-    events_count integer DEFAULT 0
+    events_count integer DEFAULT 0,
+    resolved_flags_count bigint DEFAULT 0 NOT NULL,
+    unresolved_flags_count bigint DEFAULT 0 NOT NULL,
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -1373,12 +1381,30 @@ CREATE TABLE public.features (
 
 CREATE TABLE public.flags (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    creator_id uuid,
-    flaggable_id uuid,
-    flaggable_type character varying,
+    creator_id uuid NOT NULL,
+    flaggable_id uuid NOT NULL,
+    flaggable_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    message text,
+    resolved_by_creator boolean DEFAULT false NOT NULL,
+    resolved_at timestamp without time zone
 );
+
+
+--
+-- Name: flag_statuses; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.flag_statuses AS
+ SELECT flags.flaggable_type,
+    flags.flaggable_id,
+    COALESCE(array_agg(DISTINCT flags.creator_id) FILTER (WHERE (NOT flags.resolved_by_creator)), '{}'::uuid[]) AS flagger_ids,
+    count(DISTINCT flags.id) AS flags_count,
+    count(DISTINCT flags.id) FILTER (WHERE (flags.resolved_at IS NOT NULL)) AS resolved_flags_count,
+    count(DISTINCT flags.id) FILTER (WHERE (flags.resolved_at IS NULL)) AS unresolved_flags_count
+   FROM public.flags
+  GROUP BY flags.flaggable_type, flags.flaggable_id;
 
 
 --
@@ -4222,6 +4248,20 @@ CREATE INDEX index_comments_on_creator_id ON public.comments USING btree (creato
 
 
 --
+-- Name: index_comments_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_deleted_at ON public.comments USING btree (deleted_at);
+
+
+--
+-- Name: index_comments_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_marked_for_purge_at ON public.comments USING btree (marked_for_purge_at);
+
+
+--
 -- Name: index_comments_on_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4534,6 +4574,20 @@ CREATE INDEX index_export_targets_on_strategy ON public.export_targets USING btr
 --
 
 CREATE INDEX index_flags_on_flaggable_type_and_flaggable_id ON public.flags USING btree (flaggable_type, flaggable_id);
+
+
+--
+-- Name: index_flags_on_resolved_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_flags_on_resolved_at ON public.flags USING btree (resolved_at);
+
+
+--
+-- Name: index_flags_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_flags_uniqueness ON public.flags USING btree (creator_id, flaggable_type, flaggable_id);
 
 
 --
@@ -6385,6 +6439,14 @@ ALTER TABLE ONLY public.resource_imports
 
 
 --
+-- Name: flags fk_rails_4a17c6b2e1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.flags
+    ADD CONSTRAINT fk_rails_4a17c6b2e1 FOREIGN KEY (creator_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: users_roles fk_rails_4a41696df6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7295,8 +7357,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20241210200353'),
 ('20241212183245'),
 ('20241212214525'),
+('20241218212943'),
 ('20241218232725'),
-('20241218212943');
 ('20250115212958'),
-('20250115214357');
+('20250115214357'),
 ('20250115224908');
+
+

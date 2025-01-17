@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe V1::ProjectSerializer do
   it_behaves_like "a serializer", partial_by_default: true
+  it_behaves_like "a collaborative serializer"
 
   describe "when the collection is search results", elasticsearch: true do
     let(:object) do

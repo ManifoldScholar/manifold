@@ -40,34 +40,34 @@ class CollaboratorRole::Illustrator < CollaboratorRole
   config.priority = 9000
 end
 class CollaboratorRole::Photographer < CollaboratorRole
-  config.priority = 10000
+  config.priority = 10_000
 end
 class CollaboratorRole::Artist < CollaboratorRole
-  config.priority = 11000
+  config.priority = 11_000
 end
 class CollaboratorRole::Contributor < CollaboratorRole
-  config.priority = 12000
+  config.priority = 12_000
 end
 class CollaboratorRole::SeriesEditor < CollaboratorRole
-  config.priority = 13000
+  config.priority = 13_000
 end
 class CollaboratorRole::EssayBy < CollaboratorRole
-  config.priority = 14000
+  config.priority = 14_000
 end
 class CollaboratorRole::RetoldBy < CollaboratorRole
-  config.priority = 15000
+  config.priority = 15_000
 end
 class CollaboratorRole::AdaptedBy < CollaboratorRole
-  config.priority = 16000
+  config.priority = 16_000
 end
 class CollaboratorRole::CollectedBy < CollaboratorRole
-  config.priority = 17000
+  config.priority = 17_000
 end
 class CollaboratorRole::Agent < CollaboratorRole
-  config.priority = 18000
+  config.priority = 18_000
 end
 class CollaboratorRole::OtherProprietor < CollaboratorRole
-  config.priority = 19000
+  config.priority = 19_000
 end
 class CollaboratorRole::Other < CollaboratorRole
 end
