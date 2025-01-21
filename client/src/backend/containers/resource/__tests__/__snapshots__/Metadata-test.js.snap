@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`backend/containers/resource/Metadata matches the snapshot when rendered 1`] = `"<section><form class=\\" css-45hpsz-Form ezbpect0\\" data-id=\\"submit\\"><div class=\\"wide ep2gwrw0 css-og67sx-Wrapper-FormButtonsWrapper eon8abq0\\"><input class=\\"button-secondary button-secondary--outlined\\" type=\\"submit\\" value=\\"metadata.save\\"></div></form></section>"`;
