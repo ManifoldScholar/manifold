@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`backend/components/content-block/TypeForm/types/Markdown matches the snapshot when rendered 1`] = `"<label for=\\"textarea-1\\" class=\\"css-bmmdfg-PrimaryLabel e11et4nf2\\">content_blocks.markdown.body</label><textarea id=\\"textarea-1\\" name=\\"attributes[body]\\" aria-describedby=\\"textarea-error-1 textarea-instructions-1\\" style=\\"height:300px\\" class=\\"css-x0tafa-TextAreaBase-TextAreaPrimary epknsgy1\\"></textarea>"`;
