@@ -1,11 +1,6 @@
 import baseConfig from "./browser-base.config";
-import {
-  DefinePlugin,
-  HotModuleReplacementPlugin,
-  NamedModulesPlugin
-} from "webpack";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
-import { mergeWithRules} from "webpack-merge";
+import { mergeWithRules } from "webpack-merge";
 import environment from "../helpers/environment";
 import paths from "../helpers/paths";
 
@@ -16,8 +11,6 @@ const browserConfig = {
       `webpack-dev-server/client?http://0.0.0.0:${environment.devPort}`
     ]
   },
-
-  devtool: "cheap-module-eval-source-map",
 
   mode: "development",
   module: {
@@ -50,11 +43,19 @@ const browserConfig = {
     }
   },
   plugins: [
-    new NamedModulesPlugin(),
-    new HotModuleReplacementPlugin(),
-    new ReactRefreshWebpackPlugin()
-  ]
-}
+    new ReactRefreshWebpackPlugin({
+      overlay: {
+        sockHost: process.env.DOMAIN || "localhost",
+        sockPort: environment.devPort
+      }
+    })
+  ],
+
+  optimization: {
+    moduleIds: "named",
+    // runtimeChunk: "single"
+  }
+};
 
 const config = mergeWithRules({
   module: {
@@ -63,13 +64,10 @@ const config = mergeWithRules({
       exclude: "replace",
       use: {
         loader: "match",
-        options: "replace",
-      },
-    },
-  },
-})(baseConfig, browserConfig)
-
-// const util = require('util')
-// console.log(util.inspect(config, {showHidden: false, depth: null, colors: true}))
+        options: "replace"
+      }
+    }
+  }
+})(baseConfig, browserConfig);
 
 export default config;
