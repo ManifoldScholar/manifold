@@ -37,9 +37,7 @@
     "_watch:banner": "node ./script/banner.js",
     "_watch:ssr": "IS_BUILD=true node -r @babel/register node_modules/.bin/webpack --color --watch --config ./webpack/config/ssr-dev.config.js",
     "_watch:browser": "node -r @babel/register webpack/servers/webpack-dev-server --no-inline",
-    "_wait:builds": "node script/wait.js --name=\"SSR\" --base=${BUILD_IN}dist/manifold/ --on=ssr/manifold-client-ssr-rescue.js,ssr/manifold-client-ssr.js,manifest.json",
-    "storybook": "start-storybook -p 3030",
-    "build-storybook": "build-storybook -o ./storybook-static"
+    "_wait:builds": "node script/wait.js --name=\"SSR\" --base=${BUILD_IN}dist/manifold/ --on=ssr/manifold-client-ssr-rescue.js,ssr/manifold-client-ssr.js,manifest.json"
   },
   "lint-staged": {
     "*.js": "yarn fix",
@@ -204,13 +202,6 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
-    "@storybook/addon-a11y": "^5.1",
-    "@storybook/addon-actions": "^5.1",
-    "@storybook/addon-knobs": "^5.1",
-    "@storybook/addons": "^5.1",
-    "@storybook/core": "^5.1",
-    "@storybook/react": "^5.1",
-    "@storybook/theming": "^5.1",
     "@types/react": "^16.9.17",
     "autoprefixer": "^9.0",
     "babel-core": "^7.0.0-bridge.0",
@@ -252,8 +243,6 @@
     "react-test-renderer": "^16.8",
     "regenerator-runtime": "^0.13.1",
     "rimraf": "^3.x",
-    "storybook-addon-jsx": "^7.1.1",
-    "storybook-react-router": "^1.0.3",
     "string-replace-loader": "^2.3.0",
     "style-loader": "^1.x",
     "transform-imports": "^2.0.0",
