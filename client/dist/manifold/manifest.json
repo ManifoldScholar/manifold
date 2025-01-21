@@ -1,38 +1,22 @@
 {
   "assetsByChunkName": {
-    "ace-editor": [
-      "build/chunk-ace-editor-9818721a3738c4cb73a0.js",
-      "build/chunk-ace-editor-9818721a3738c4cb73a0.js.map"
-    ],
     "build/manifold-client-browser": [
-      "build/manifold-client-browser-9818721a3738c4cb73a0.js",
-      "build/manifold-client-browser-9818721a3738c4cb73a0.js.map"
+      "build/manifold-client-browser-5c9930f83775033a5efd.js"
     ],
-    "build/manifold-client-print": [
-      "build/manifold-client-print-9818721a3738c4cb73a0.css",
-      "build/manifold-client-print-9818721a3738c4cb73a0.js",
-      "build/manifold-client-print-9818721a3738c4cb73a0.css.map",
-      "build/manifold-client-print-9818721a3738c4cb73a0.js.map"
+    "ace-editor": [
+      "build/chunk-676-ebcd7ef24279c7af0c03.js",
+      "build/chunk-ace-editor-006fdbf253a79a8a2182.js"
     ],
-    "recharts": [
-      "build/chunk-recharts-9818721a3738c4cb73a0.js",
-      "build/chunk-recharts-9818721a3738c4cb73a0.js.map"
+    "autolinker": [
+      "build/chunk-autolinker-3a787970ce186973f9c4.js"
     ],
     "swagger-ui": [
-      "build/chunk-swagger-ui-9818721a3738c4cb73a0.js",
-      "build/chunk-swagger-ui-9818721a3738c4cb73a0.js.map"
+      "build/chunk-650-e5c9e23e5eaed0500583.js",
+      "build/chunk-swagger-ui-b73c4e50734283212c72.js"
     ],
-    "vendors~autolinker": [
-      "build/chunk-vendors~autolinker-9818721a3738c4cb73a0.js",
-      "build/chunk-vendors~autolinker-9818721a3738c4cb73a0.js.map"
-    ],
-    "vendors~recharts": [
-      "build/chunk-vendors~recharts-9818721a3738c4cb73a0.js",
-      "build/chunk-vendors~recharts-9818721a3738c4cb73a0.js.map"
-    ],
-    "vendors~swagger-ui": [
-      "build/chunk-vendors~swagger-ui-9818721a3738c4cb73a0.js",
-      "build/chunk-vendors~swagger-ui-9818721a3738c4cb73a0.js.map"
+    "recharts": [
+      "build/chunk-909-34121d2bcf42816510b4.js",
+      "build/chunk-recharts-201d0d8fd04a091eec05.js"
     ]
   }
 }

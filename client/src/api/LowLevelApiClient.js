@@ -51,6 +51,7 @@ export default class LowLevelApiClient {
 
     const out = fetch(endpoint, fetchConfig).catch(error => {
       return new Promise((resolve, reject) => {
+        console.error(error);
         reject({
           response: {
             status: 503,
