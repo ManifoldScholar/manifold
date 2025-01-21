@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`global/components/sign-in-up/CreateUserForm matches the snapshot 1`] = `"forms.signin_overlay.oauth_instructions"`;
