@@ -204,13 +204,5 @@
     "__CABLE_URL__": true,
     "socket": true,
     "def": "readonly"
-  },
-  "overrides": [
-    {
-      "files": [ "*.stories.js" ],
-      "rules": {
-        "no-console": 0
-      }
-    }
-  ]
+  }
 }
