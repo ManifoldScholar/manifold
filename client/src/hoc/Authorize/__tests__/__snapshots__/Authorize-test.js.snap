@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`hoc/Authorize when ability does not match matches the snapshot when rendered 1`] = `""`;
-
-exports[`hoc/Authorize when ability matches matches the snapshot when rendered 1`] = `"<div>How is babby formed?</div>"`;
-
-exports[`hoc/Authorize when kind does not match matches the snapshot when rendered 1`] = `""`;
-
-exports[`hoc/Authorize when kind matches matches the snapshot when rendered 1`] = `"<div>How is babby formed?</div>"`;

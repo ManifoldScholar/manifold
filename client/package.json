@@ -18,7 +18,6 @@
     "start": "npm-run-all _serve:ssr",
     "start-docker": "npm-run-all _build:browser-config _serve:ssr",
     "watch": "BUILD_IN=tmp/client/ npm-run-all _watch:banner --parallel _watch:ssr _watch:browser _build:ssr:rescue _serve:ssr:rescue",
-    "test": "TZ=America/Los_Angeles jest --verbose",
     "fix": "npm-run-all \"fix:js {*}\" --",
     "lint": "npm-run-all \"lint:js {*}\" --",
     "fix:js": "./script/lint-javascript --fix",
@@ -42,44 +41,6 @@
   "lint-staged": {
     "*.js": "yarn fix",
     "*.scss": "yarn fix"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
-    "modulePaths": [
-      "node_modules",
-      "src"
-    ],
-    "setupFiles": [
-      "./src/test/setup.js"
-    ],
-    "setupFilesAfterEnv": [
-      "jest-enzyme",
-      "bdd-lazy-var/global",
-      "./src/test/setup/withApp.js",
-      "./src/test/setup/withFormContext.js",
-      "./src/test/setup/quietConsole.js"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/.*/__mocks__",
-      "<rootDir>/.*/__fixtures__"
-    ],
-    "testEnvironment": "enzyme",
-    "testEnvironmentOptions": {
-      "enzymeAdapter": "react16"
-    },
-    "globals": {
-      "__BROWSER__": false,
-      "__SERVER__": true,
-      "TZ": "PST"
-    }
   },
   "dependencies": {
     "@atlaskit/tree": "^8.6.3",
@@ -206,7 +167,6 @@
     "autoprefixer": "^9.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10",
-    "babel-jest": "^24.x",
     "babel-loader": "^8.0.0",
     "babel-plugin-dynamic-import-node": "^2.2",
     "babel-plugin-module-resolver": "^3.0",
@@ -217,8 +177,6 @@
     "copy-webpack-plugin": "^5.x",
     "core-js": "2.6.9",
     "css-loader": "^3.x",
-    "enzyme": "^3.x",
-    "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.x",
     "eslint-config-airbnb": "18.x",
     "eslint-config-prettier": "^6.3.0",
@@ -229,9 +187,6 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "faker": "^4.1.0",
     "file-loader": "^4.x",
-    "jest": "^24.x",
-    "jest-environment-enzyme": "^7.1.2",
-    "jest-enzyme": "^7.1.2",
     "jscodeshift": "^0.6.0",
     "lint-staged": "^9.x",
     "mini-css-extract-plugin": "^1.0",
