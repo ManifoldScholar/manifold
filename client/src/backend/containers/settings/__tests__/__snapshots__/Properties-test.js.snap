@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`backend/containers/settings/Properties matches the snapshot when rendered 1`] = `"<header class=\\"css-oqpkis-Header ecdc3152\\"><div class=\\"css-1k4if3i-Content ecdc3151\\"><div class=\\"css-80hm9f-Row e12ljl8g17\\"><div class=\\"css-afmy3i-TitleWrapper e12ljl8g4\\"><h1 class=\\"css-ytpeqb-Title e12ljl8g3\\">Settings</h1></div></div></div></header><div class=\\"backend-panel\\"><div class=\\"container\\"><div class=\\"panel\\"></div></div></div>"`;
