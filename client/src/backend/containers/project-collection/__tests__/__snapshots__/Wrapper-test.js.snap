@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`backend/containers/project-collection/Wrapper when there are no project collections matches the snapshot when rendered 1`] = `""`;
-
-exports[`backend/containers/project-collection/Wrapper when there are project collections matches the snapshot when rendered 1`] = `""`;
