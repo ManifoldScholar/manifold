@@ -217,8 +217,10 @@
     "slate": "^0.90.0"
   },
   "engines": {
-    "node": ">=8.0.0 <19.0.0"
+    "node": "20.x",
+    "yarn": "4.6.0"
   },
+  "packageManager": "yarn@4.6.0",
   "browserslist": [
     "defaults",
     "not IE 11"
