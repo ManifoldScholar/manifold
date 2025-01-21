@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import swaggerUIConstructor from "swagger-ui-react/swagger-ui-es-bundle-core";
+import swaggerUIConstructor from "swagger-ui";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/apiDocsStyles";
 
@@ -24,6 +24,7 @@ export default class SwaggerUI extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     const ui = swaggerUIConstructor({
       plugins: this.props.plugins,
       tagsSorter: "alpha",
