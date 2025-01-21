@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`backend/components/dialog/Confirm matches the snapshot 1`] = `
-<mockConstructor
-  name={[Function]}
->
-  <Component />
-</mockConstructor>
-`;

@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`backend/containers/makers/Edit matches the snapshot when rendered 1`] = `"<header class=\\"css-ibt74g-Header ewz6knw5\\"><h2 class=\\" css-4532mb-TitleWrapper ewz6knw4\\"><span class=\\"css-183oh9-Title ewz6knw2\\">John Milton</span></h2><div class=\\"utility-button-group utility-button-group--inline css-5f51mp-ButtonGroup ewz6knw0\\"></div></header><section></section>"`;
