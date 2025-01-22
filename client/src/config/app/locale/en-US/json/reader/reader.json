@@ -39,7 +39,8 @@
       },
       "citation": {
         "citation_style": "Citation style:",
-        "copied": "Copied!"
+        "copied": "Copied!",
+        "custom_label": "Suggested citation"
       },
       "popup": {
         "cite": "Cite",
