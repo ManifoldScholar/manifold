@@ -40,3 +40,10 @@ export const Actions = styled.div`
     flex-grow: 1;
   }
 `;
+
+export const Copyright = styled.div`
+  margin-block-end: 4px;
+  > * + * {
+    margin-block-start: 8px;
+  }
+`;

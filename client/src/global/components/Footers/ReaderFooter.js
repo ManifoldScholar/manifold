@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import withPluginReplacement from "hoc/withPluginReplacement";
 import FooterParts from "./Parts";
+import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
 class ReaderFooter extends Component {
@@ -9,11 +10,23 @@ class ReaderFooter extends Component {
   }
 
   get copyright() {
-    if (!this.text.attributes.metadataFormatted.rights) return null;
+    const metadata = this.text.attributes.metadataFormatted;
+    if (!metadata.rights && !metadata.citationOverride) return null;
+
+    const html = metadata.citationOverride
+      ? `<p>${
+          this.text.attributes.metadataFormatted.rights
+        }<p><p><span style="font-style: italic;">${this.props.t(
+          "reader.footer_citation_label"
+        )}</span> ${
+          this.text.attributes.metadataFormatted.citationOverride
+        }</p>`
+      : metadata.rights;
+
     return (
-      <div
+      <Styled.Copyright
         dangerouslySetInnerHTML={{
-          __html: this.text.attributes.metadataFormatted.rights
+          __html: html
         }}
       />
     );
@@ -30,7 +43,6 @@ class ReaderFooter extends Component {
   }
 }
 
-export default withPluginReplacement(
-  ReaderFooter,
-  "Global.Components.Footers.ReaderFooter"
+export default withTranslation()(
+  withPluginReplacement(ReaderFooter, "Global.Components.Footers.ReaderFooter")
 );
