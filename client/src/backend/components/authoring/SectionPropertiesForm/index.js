@@ -40,6 +40,11 @@ export default function SectionPropertiesForm({
         placeholder={t("texts.properties.slug_placeholder")}
         name="attributes[slug]"
       />
+      <Form.TextArea
+        label={t("metadata.citation_override")}
+        instructions={t("metadata.citation_override_instructions")}
+        name="attributes[metadata][citationOverride]"
+      />
       <Form.Switch
         label={t("texts.section.hide_label")}
         instructions={hideInstructions}
