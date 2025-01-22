@@ -65,9 +65,11 @@ class List extends Component {
         </Styled.ListItem>
       );
 
+    const label = key === "citationOverride" ? "citation" : key;
+
     return (
       <Styled.ListItem key={key}>
-        <Item label={key} value={value} />
+        <Item label={label} value={value} />
       </Styled.ListItem>
     );
   }
