@@ -18,6 +18,10 @@ export default function MetadataForm({ model, ...restProps }) {
   const baseStructure = () => {
     return [
       {
+        label: t("metadata.categories.citation"),
+        children: intersection(["citationOverride"], properties)
+      },
+      {
         label: t("metadata.categories.copyright"),
         children: intersection(
           [
@@ -114,6 +118,7 @@ export default function MetadataForm({ model, ...restProps }) {
   const componentAndPropsFor = prop => {
     switch (prop) {
       case "rights":
+      case "citationOverride":
         return { component: Form.TextArea, props: null };
       case "resourcesDoi":
         return { component: Form.MaskedTextInput, props: { mask: "doi" } };

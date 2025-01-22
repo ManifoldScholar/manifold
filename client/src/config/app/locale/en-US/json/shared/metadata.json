@@ -14,8 +14,11 @@
       "copyright": "Copyright",
       "identity": "Identity",
       "other": "Other",
-      "publisher": "Publisher"
+      "publisher": "Publisher",
+      "citation": "Citation"
     },
+    "citation_override": "Citation override",
+    "citation_override_instructions": "Add a suggested citation. If set, will override any auto-generated citations for this entity. Accepts markdown.",
     "chapter_number": "chapter number",
     "collection_number": "collection number",
     "collection_title": "collection title",
