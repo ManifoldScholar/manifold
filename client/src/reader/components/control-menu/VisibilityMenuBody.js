@@ -55,8 +55,7 @@ class VisibilityMenuBody extends PureComponent {
 
   showAll = () => {
     const filter = {
-      highlight: { yours: true, others: true },
-      annotation: { yours: true, others: true },
+      annotation: { yours: true, others: true, highlights: true },
       resource: { all: true },
       readingGroups: Object.assign(this.readingGroupFilterBase(false), {
         all: true,
@@ -69,8 +68,7 @@ class VisibilityMenuBody extends PureComponent {
 
   hideAll = () => {
     const filter = {
-      highlight: { yours: false, others: false },
-      annotation: { yours: false, others: false },
+      annotation: { yours: false, others: false, highlights: false },
       resource: { all: false },
       readingGroups: Object.assign(this.readingGroupFilterBase(false), {
         all: false,
@@ -107,8 +105,6 @@ class VisibilityMenuBody extends PureComponent {
     switch (format) {
       case "annotation":
         return "comment24";
-      case "highlight":
-        return "annotate24";
       case "resource":
         return "resource24";
       case "reading-group":
@@ -119,7 +115,7 @@ class VisibilityMenuBody extends PureComponent {
   };
 
   renderFilter(format, label, children) {
-    const flex = format !== "reading-group";
+    const flex = format !== "reading-group" && format !== "annotation";
     return (
       <li key={`visibility-${format}`} className="visibility-menu__section">
         <fieldset className="visibility-menu__group">
@@ -237,8 +233,13 @@ class VisibilityMenuBody extends PureComponent {
 
   renderCheckbox(key, label, filterState, format, index, flex) {
     const checkboxId = format + "-checkbox-" + index;
+    /* eslint-disable no-nested-ternary */
     const adjustedLabel =
-      key === "all" ? this.props.t("actions.show_all") : label;
+      key === "all"
+        ? this.props.t("actions.show_all")
+        : key === "highlights"
+        ? this.props.t("reader.menus.visibility.highlights_label")
+        : label;
     const checkboxClasses = classNames({
       "checkbox checkbox--white": true,
       "visibility-menu__checkbox": true,
@@ -269,20 +270,18 @@ class VisibilityMenuBody extends PureComponent {
   }
 
   showAllPressed(filters) {
-    const { annotation, highlight, readingGroups, resource } = filters ?? {};
-    if (!annotation || !highlight || !readingGroups || !resource) return false;
+    const { annotation, readingGroups, resource } = filters ?? {};
+    if (!annotation || !readingGroups || !resource) return false;
     if (Object.values(annotation).some(val => !val)) return false;
-    if (Object.values(highlight).some(val => !val)) return false;
     if (Object.values(resource).some(val => !val)) return false;
     if (!readingGroups?.all) return false;
     return true;
   }
 
   hideAllPressed(filters) {
-    const { annotation, highlight, readingGroups, resource } = filters ?? {};
-    if (!annotation || !highlight || !readingGroups || !resource) return false;
+    const { annotation, readingGroups, resource } = filters ?? {};
+    if (!annotation || !readingGroups || !resource) return false;
     if (Object.values(annotation).some(val => val)) return false;
-    if (Object.values(highlight).some(val => val)) return false;
     if (Object.values(resource).some(val => val)) return false;
     if (Object.values(readingGroups).some(val => val)) return false;
     return true;
@@ -319,8 +318,7 @@ class VisibilityMenuBody extends PureComponent {
           </h2>
         </div>
         <ul className="visibility-menu__section-list">
-          {this.renderCheckboxGroup("highlight", filter.highlight)}
-          {this.renderCheckboxGroup("annotation", filter.annotation)}
+          {this.renderCheckboxGroup("annotation", filter.annotation, true)}
           {this.renderCheckboxGroup("resource", filter.resource)}
           {(this.canAccessReadingGroups || this.canEngagePublicly) &&
             this.renderReadingGroups()}
