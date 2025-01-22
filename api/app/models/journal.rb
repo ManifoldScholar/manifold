@@ -31,7 +31,7 @@ class Journal < ApplicationRecord
   with_metadata %w(
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version
-    series_number edition issue volume rights rights_territory restrictions rights_holder
+    series_number edition issue volume rights rights_territory restrictions rights_holder citation_override
   )
 
   has_sort_title do |journal|

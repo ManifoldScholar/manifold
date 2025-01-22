@@ -35,7 +35,7 @@ class Project < ApplicationRecord
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version
     series_number edition issue volume rights rights_territory restrictions rights_holder
-    resources_doi
+    resources_doi citation_override
   )
   with_citation do |project|
     {
