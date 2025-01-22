@@ -60,7 +60,8 @@
       },
       "visibility": {
         "all_reading_groups": "All $t(glossary.reading_group_title_case_other)",
-        "show_the_following": "Show the following:"
+        "show_the_following": "Show the following:",
+        "highlights_label": "Your highlights"
       },
       "notes": {
         "delete_notation": "$t(actions.delete) $t(glossary.notation_title_case_other)",
