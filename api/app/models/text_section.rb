@@ -6,6 +6,7 @@ class TextSection < ApplicationRecord
   # Misc. Concerns
   include Citable
   include SearchIndexable
+  include Metadata
 
   # Constants
   KIND_COVER_IMAGE = "cover_image".freeze
@@ -27,6 +28,10 @@ class TextSection < ApplicationRecord
       container_title: text_section.text_title
     )
   end
+
+  with_metadata %w(
+    citation_override
+  )
 
   # Ordering
   acts_as_list scope: :text
@@ -54,7 +59,7 @@ class TextSection < ApplicationRecord
   delegate :citation_parts, to: :text, prefix: true, allow_nil: true
   delegate :source_path, to: :ingestion_source, allow_nil: true
   delegate :project, to: :text, allow_nil: true
-  delegate :metadata, to: :text, allow_nil: true
+  delegate :metadata, to: :text, prefix: true, allow_nil: true
   delegate :title, to: :text, prefix: true, allow_nil: true
   delegate :creator_names_array, to: :text, prefix: true, allow_nil: true
   delegate :slug, to: :text, prefix: true

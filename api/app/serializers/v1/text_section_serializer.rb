@@ -24,6 +24,7 @@ module V1
       )
       typed_attribute :body, Types::String.optional
       typed_attribute :citations, Types::Serializer::Citations
+      metadata(metadata: true, properties: true, formatted: true)
     end
 
   end
