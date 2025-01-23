@@ -32,6 +32,7 @@ module APIDocs
           rights_territory: Types::String,
           restrictions: Types::String,
           rights_holder: Types::String,
+          citation_override: Types::String
         }
 
         REQUIRED_CREATE_ATTRIBUTES = [:title].freeze

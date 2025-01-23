@@ -25,7 +25,8 @@ module APIDocs
           rights_territory: Types::String,
           restrictions: Types::String,
           rights_holder: Types::String,
-          original_publication_date: Types::DateTime
+          original_publication_date: Types::DateTime,
+          citation_override: Types::String
         }.freeze
 
         REQUEST_ATTRIBUTES = {
