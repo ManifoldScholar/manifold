@@ -14,6 +14,14 @@ export const sortFilter = (filters, updateFilters, params, t) => ({
     {
       label: t("filters.sort_options.reverse_alpha"),
       value: "sort_title DESC"
+    },
+    {
+      label: t("filters.collection_sort_options.created_at_asc"),
+      value: "created_at ASC"
+    },
+    {
+      label: t("filters.collection_sort_options.created_at_desc"),
+      value: "created_at DESC"
     }
   ]
 });
