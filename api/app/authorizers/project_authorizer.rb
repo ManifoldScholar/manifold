@@ -98,7 +98,8 @@ class ProjectAuthorizer < ApplicationAuthorizer
     has_any_role? user, *RoleName.draft_access
   end
 
-  def publicly_engageable_by?(_user, _options = {})
+  def publicly_engageable_by?(user, _options = {})
+    return false unless user&.trusted? || user&.established?
     !resource.disable_engagement? && !Settings.instance.general[:disable_engagement]
   end
 
