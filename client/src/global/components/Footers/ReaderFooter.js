@@ -13,15 +13,14 @@ class ReaderFooter extends Component {
     const metadata = this.text.attributes.metadataFormatted;
     if (!metadata.rights && !metadata.citationOverride) return null;
 
-    const html = metadata.citationOverride
-      ? `<p>${
-          this.text.attributes.metadataFormatted.rights
-        }<p><p><span style="font-style: italic;">${this.props.t(
-          "reader.footer_citation_label"
-        )}</span> ${
-          this.text.attributes.metadataFormatted.citationOverride
-        }</p>`
-      : metadata.rights;
+    const html =
+      metadata.citationOverride && metadata.rights
+        ? `<p>${
+            metadata.rights
+          }<p><p><span style="font-style: italic;">${this.props.t(
+            "reader.footer_citation_label"
+          )}</span> ${metadata.citationOverride}</p>`
+        : metadata.rights ?? metadata.citationOverride;
 
     return (
       <Styled.Copyright

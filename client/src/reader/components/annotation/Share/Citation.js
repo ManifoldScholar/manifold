@@ -92,9 +92,12 @@ export class AnnotationShareEditor extends PureComponent {
     const copiedText = this.state.copied
       ? this.props.t("reader.menus.citation.copied")
       : null;
-    const citations = this.props.section.attributes.citations;
-    const citationOverride = this.props.section.attributes.metadata
-      .citationOverride;
+
+    const { attributes } = this.props.section ?? {};
+    const {
+      citations,
+      metadata: { citationOverride }
+    } = attributes ?? {};
 
     return (
       <div className="annotation-editor citation">
