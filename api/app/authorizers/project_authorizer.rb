@@ -99,8 +99,9 @@ class ProjectAuthorizer < ApplicationAuthorizer
   end
 
   def publicly_engageable_by?(user, _options = {})
-    return false unless user&.trusted? || user&.established?
-    !resource.disable_engagement? && !Settings.instance.general[:disable_engagement]
+    return false if resource.disable_engagement? || Settings.instance.general.disable_engagement?
+
+    trusted_or_established_user?(user)
   end
 
   # @note If a project does not have restricted access, this always returns true.
