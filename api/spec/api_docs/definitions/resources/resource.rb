@@ -47,6 +47,7 @@ module APIDocs
           alt_text: Types::String,
           credit: Types::String,
           copyright_status: Types::String,
+          citation_override: Types::String
         }
 
         class << self
