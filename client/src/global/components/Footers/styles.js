@@ -43,6 +43,7 @@ export const Actions = styled.div`
 
 export const Copyright = styled.div`
   margin-block-end: 4px;
+
   > * + * {
     margin-block-start: 8px;
   }
