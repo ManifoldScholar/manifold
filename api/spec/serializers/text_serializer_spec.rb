@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe V1::TextSerializer do
   it_behaves_like "a serializer", partial_by_default: true
+  it_behaves_like "a collaborative serializer"
 
   describe "when the object is a text summary and the serialization is partial" do
     let(:object) do

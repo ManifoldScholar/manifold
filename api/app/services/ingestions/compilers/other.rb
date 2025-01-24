@@ -1,12 +1,12 @@
 module Ingestions
   module Compilers
-    class Contributor < Ingestions::Compilers::Maker
+    class Other < Ingestions::Compilers::Maker
 
       private
 
       def collaborator_attributes
         {
-          role: CollaboratorRole::Contributor
+          role: CollaboratorRole::Other
         }
       end
     end

@@ -1,8 +1,5 @@
 # Tracks the relationship between texts and makers
 class Collaborator < ApplicationRecord
-  ROLE_CREATOR = "creator".freeze
-  ROLE_CONTRIBUTOR = "contributor".freeze
-
   acts_as_list scope: [:collaboratable_id, :collaboratable_type]
 
   # Authority
@@ -14,6 +11,10 @@ class Collaborator < ApplicationRecord
   belongs_to :collaboratable, polymorphic: true
   belongs_to :maker
 
+  classy_enum_attr :role, class_name: "CollaboratorRole", default: CollaboratorRole::Other
+
+  before_update :set_role_priority
+
   scope :by_role, ->(role = nil) { where(role: role) if role.present? }
 
   delegate :name, to: :maker, prefix: true
@@ -24,5 +25,9 @@ class Collaborator < ApplicationRecord
 
   def to_s
     "#{role} #{maker}"
+  end
+
+  def set_role_priority
+    self.priority = role.priority
   end
 end

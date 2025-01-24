@@ -110,6 +110,9 @@ module V1
       typed_has_many :stylesheets
       typed_has_many :creators, serializer: MakerSerializer, record_type: "maker"
       typed_has_many :contributors, serializer: MakerSerializer, record_type: "maker"
+      typed_has_many :collaborators,
+                     serializer: FlattenedCollaboratorSerializer,
+                     record_type: "flattened_collaborator"
       typed_has_many :text_sections
       typed_has_one :toc_section, serializer: TextSectionSerializer, record_type: "textSection"
 
@@ -141,8 +144,6 @@ module V1
 
         object.last_finished_ingestion&.source_url
       end
-
-end
-
+    end
   end
 end

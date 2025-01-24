@@ -81,6 +81,10 @@ module V1
           typed_has_one :journal_volume, record_type: "journalVolume"
           typed_has_one :journal_issue, record_type: "journalIssue"
 
+          typed_has_many :collaborators,
+                         serializer: FlattenedCollaboratorSerializer,
+                         record_type: "flattened_collaborator"
+
           typed_has_many :texts,
                          object_method_name: :text_summaries,
                          id_method_name: :text_summary_ids,

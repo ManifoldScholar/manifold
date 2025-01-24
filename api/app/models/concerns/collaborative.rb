@@ -10,18 +10,19 @@ module Collaborative
     # "If you use a hash-style where option, then record creation via this association
     # will be automatically scoped using the hash." -- Love, Rails
     has_many :creator_collaborators,
-             -> { where(role: Collaborator::ROLE_CREATOR).order(:position) },
+             -> { where(role: CollaboratorRole::Author).order(:position) },
              as: :collaboratable,
              class_name: "Collaborator",
              inverse_of: :collaboratable
     has_many :contributor_collaborators,
-             -> { where(role: Collaborator::ROLE_CONTRIBUTOR).order(:position) },
+             -> { where(role: CollaboratorRole::Other).order(:position) },
              as: :collaboratable,
              class_name: "Collaborator"
 
     has_many :makers, through: :collaborators
     has_many :creators, through: :creator_collaborators, source: "maker"
     has_many :contributors, through: :contributor_collaborators, source: "maker"
+    has_many :flattened_collaborators, as: :collaboratable
 
     scope :with_collaborators, ->(role = nil) { where(id: Collaborator.by_role(role).select(:collaboratable_id)) }
     scope :sans_collaborators, ->(role = nil) { where.not(id: Collaborator.by_role(role).select(:collaboratable_id)) }

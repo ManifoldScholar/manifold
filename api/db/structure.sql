@@ -496,7 +496,10 @@ CREATE TABLE public.collaborators (
     updated_at timestamp without time zone NOT NULL,
     "position" integer,
     collaboratable_type character varying,
-    collaboratable_id uuid
+    collaboratable_id uuid,
+    other_description character varying,
+    priority integer,
+    importance integer
 );
 
 
@@ -1402,6 +1405,23 @@ CREATE VIEW public.flag_statuses AS
     count(DISTINCT flags.id) FILTER (WHERE (flags.resolved_at IS NULL)) AS unresolved_flags_count
    FROM public.flags
   GROUP BY flags.flaggable_type, flags.flaggable_id;
+
+
+--
+-- Name: flattened_collaborators; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.flattened_collaborators AS
+ SELECT (((collaborators.collaboratable_id)::text || '-'::text) || (collaborators.maker_id)::text) AS id,
+    collaborators.collaboratable_id,
+    collaborators.collaboratable_type,
+    collaborators.maker_id,
+    array_agg(collaborators.role ORDER BY collaborators.priority) AS roles,
+    min(collaborators.priority) AS priority,
+    min(collaborators.importance) AS importance
+   FROM public.collaborators
+  WHERE (collaborators.maker_id IS NOT NULL)
+  GROUP BY collaborators.collaboratable_id, collaborators.collaboratable_type, collaborators.maker_id;
 
 
 --
@@ -4155,6 +4175,13 @@ CREATE INDEX index_categories_on_project_id ON public.categories USING btree (pr
 --
 
 CREATE INDEX index_collaborators_on_maker_id ON public.collaborators USING btree (maker_id);
+
+
+--
+-- Name: index_collaborators_sort_order; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_collaborators_sort_order ON public.collaborators USING btree (collaboratable_id, collaboratable_type, priority, role, importance);
 
 
 --
@@ -7330,5 +7357,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20241210200353'),
 ('20241212183245'),
 ('20241212214525'),
+('20241218212943'),
 ('20241218232725'),
-('20241218212943');
+('20250115212958'),
+('20250115214357'),
+('20250115224908');
+
+
