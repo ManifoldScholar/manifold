@@ -129,7 +129,7 @@ export default function AddEditCollaboratorForm({
               onClick={addRole}
             >
               <Utility.IconComposer icon="circlePlus32" />
-              <span>Add Role</span>
+              <span>{t("projects.contributor.add_role_label")}</span>
             </Styled.RoleButton>
           </Form.FieldGroup>
           <Form.DrawerButtons
