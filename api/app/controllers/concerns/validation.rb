@@ -149,10 +149,18 @@ module Validation
 
   def collaborator_params
     params.require(:data)
-    attributes = [:role]
+    attributes = [:role, :position]
     relationships = [:maker, :collaboratable]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
+  end
+
+  def collaborator_list_params
+    params.require(:data)
+    attributes = [:role, :position]
+    relationships = [:maker, :collaboratable]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit([param_config])
   end
 
   def resource_collection_params
@@ -598,6 +606,10 @@ module Validation
 
   def subject_filter_params
     params.permit(filter: [:featured, :keyword, :typeahead, :used])[:filter] || {}
+  end
+
+  def collaborator_filter_params
+    params.permit(filter: [:maker])[:filter] || {}
   end
 
   def entitlement_filter_params
