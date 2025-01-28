@@ -71,17 +71,26 @@ function AnnotationDetailContainer({ refresh, confirm }) {
       });
   }, [id, confirm, resolveFlags, t, refreshAnnotation]);
 
+  const viewButton =
+    !!textSlug && !!textSectionId
+      ? {
+          label: "actions.view",
+          route: "readerSection",
+          routeParams: [textSlug, textSectionId, `#annotation-${id}`],
+          icon: "eyeOpen32"
+        }
+      : {
+          label: "records.comments.view_unavailable",
+          icon: "eyeClosed32",
+          disabled: true
+        };
+
   return id ? (
     <section>
       <Layout.DrawerHeader
         title={t("records.annotations.detail_header")}
         buttons={[
-          {
-            label: "actions.view",
-            route: "readerSection",
-            routeParams: [textSlug, textSectionId, `#annotation-${id}`],
-            icon: "eyeOpen32"
-          },
+          viewButton,
           {
             label: t("actions.delete"),
             icon: "delete24",
