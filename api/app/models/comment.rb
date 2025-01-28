@@ -62,8 +62,6 @@ class Comment < ApplicationRecord
           dependent: :destroy,
           inverse_of: :subject
 
-  delegate :project, to: :subject
-
   validates :body, presence: true, spam: { type: "comment" }
 
   after_commit :enqueue_comment_notifications, on: [:create]
@@ -77,20 +75,34 @@ class Comment < ApplicationRecord
     subject.is_a? Annotation
   end
 
+  # @return [Project, nil]
+  def project
+    subject.try(:project)
+  end
+
+  # @return [String, nil]
+  def project_slug
+    project.try(:slug)
+  end
+
+  # @return [String, nil]
   def subject_title
-    subject.title if subject.respond_to? :title
+    subject.try(:title)
   end
 
+  # @return [String, nil]
   def subject_text_title
-    subject.text_title if subject.respond_to? :text_title
+    subject.try(:text_title)
   end
 
+  # @return [String, nil]
   def subject_text_slug
-    subject.text_slug if subject.respond_to? :text_slug
+    subject.try(:text_slug)
   end
 
+  # @return [String, nil]
   def subject_text_section_id
-    subject.text_section.id if subject.respond_to? :text_section
+    subject.try(:text_section).try(:id)
   end
 
   def reply_to_self?

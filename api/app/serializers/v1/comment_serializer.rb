@@ -24,9 +24,7 @@ module V1
       typed_attribute :subject_text_title, Types::String.optional.meta(read_only: true)
       typed_attribute :subject_text_slug, Types::String.optional.meta(read_only: true)
       typed_attribute :subject_text_section_id, Types::String.optional.meta(read_only: true)
-      typed_attribute(:project_slug, Types::String.meta(read_only: true)) do |object, _params|
-        object.project.slug
-      end
+      typed_attribute :project_slug, Types::String.optional.meta(read_only: true)
     end
 
     typed_attribute(:flagged, Types::Bool.meta(read_only: true)) do |object, params|
