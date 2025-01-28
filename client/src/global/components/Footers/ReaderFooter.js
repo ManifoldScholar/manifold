@@ -15,11 +15,7 @@ class ReaderFooter extends Component {
 
     const html =
       metadata.citationOverride && metadata.rights
-        ? `<p>${
-            metadata.rights
-          }<p><p><span style="font-style: italic;">${this.props.t(
-            "reader.footer_citation_label"
-          )}</span> ${metadata.citationOverride}</p>`
+        ? `<p>${metadata.citationOverride}</p><p>${metadata.rights}<p>`
         : metadata.rights ?? metadata.citationOverride;
 
     return (
