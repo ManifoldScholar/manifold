@@ -1,5 +1,8 @@
 import Category from "./category";
-import Collaborators from "./Collaborators";
+import {
+  List as CollaboratorsList,
+  Add as AddCollaborator
+} from "./collaborators";
 import Layout from "./Layout";
 import Events from "./Events";
 import ProjectExportations from "./ProjectExportations";
@@ -20,7 +23,8 @@ import Access from "./access";
 
 export default {
   Category,
-  Collaborators,
+  CollaboratorsList,
+  AddCollaborator,
   Layout,
   Events,
   ProjectExportations,

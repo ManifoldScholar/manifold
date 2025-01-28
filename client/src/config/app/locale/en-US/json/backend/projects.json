@@ -12,6 +12,9 @@
     "add_twitter_label": "Add New Twitter Query",
     "manage_resources": "Manage Resources",
     "manage_resource_collections": "Manage Resource Collections",
+    "contributors_header": "Manage Contributors",
+    "add_contributor_label": "Add Contributor",
+    "contributor_edit_header": "Edit {{name}}",
     "forms": {
       "title_label": "Title",
       "title_placeholder": "Enter Project Title",
@@ -171,6 +174,14 @@
       "save_query": "Save Twitter Query",
       "no_tweets": "No tweets have been fetched yet.",
       "tweets_fetched": "{{count}} Tweets fetched"
+    },
+    "contributor": {
+      "name_label": "Maker",
+      "roles_header": "Roles",
+      "role_label": "Role",
+      "position_label": "Position",
+      "position_instructions": "Optionally, display this contributor in a specific order among contributors with this role.",
+      "add_role_label": "Add Role"
     }
   }
 }
