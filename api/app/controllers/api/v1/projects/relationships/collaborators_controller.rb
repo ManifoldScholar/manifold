@@ -6,7 +6,7 @@ module API
         class CollaboratorsController < AbstractProjectChildController
 
           resourceful! Collaborator, authorize_options: { except: [:index, :show] } do
-            @project.collaborators
+            @project.collaborators.filtered(collaborator_filter_params)
           end
 
           def index
@@ -23,12 +23,16 @@ module API
             render_single_resource(@collaborator)
           end
 
+          def destroy
+            @collaborators = load_collaborators
+            @collaborators.destroy_all
+          end
+
           private
 
           def load_collaborator
             @project.collaborators.find(params[:id])
           end
-
         end
       end
     end

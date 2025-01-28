@@ -5,6 +5,8 @@ class Collaborator < ApplicationRecord
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
+  include Filterable
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Associations
@@ -16,6 +18,7 @@ class Collaborator < ApplicationRecord
   before_update :set_role_priority
 
   scope :by_role, ->(role = nil) { where(role: role) if role.present? }
+  scope :by_maker, ->(maker = nil) { where(maker: maker) if maker.present? }
 
   delegate :name, to: :maker, prefix: true
 
