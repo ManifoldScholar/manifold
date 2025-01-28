@@ -19,8 +19,8 @@ export default function JournalHero({ entity, mock }) {
     hashtag,
     social,
     description,
+    flattenedCollaborators,
     creators,
-    contributors,
     copy
   } = getPartsData(entity);
 
@@ -41,10 +41,10 @@ export default function JournalHero({ entity, mock }) {
         )}
         TopLeftComponent={
           <>
-            {(creators || contributors || description) && (
+            {(flattenedCollaborators || description) && (
               <Meta
                 creators={creators}
-                contributors={contributors}
+                flattenedCollaborators={flattenedCollaborators}
                 description={description}
               />
             )}

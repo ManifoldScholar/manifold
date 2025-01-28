@@ -1,44 +1,57 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import MakerAvatar from "./Avatar";
+import capitalize from "lodash/capitalize";
+import partition from "lodash/partition";
 import * as Styled from "./styles";
 
-export default function HeroMeta({ creators, contributors, description }) {
-  const { t } = useTranslation();
+export default function HeroMeta({
+  creators,
+  flattenedCollaborators,
+  description
+}) {
   const showAvatars =
     creators?.length <= 2 &&
     creators.every(creator => creator.attributes?.avatarStyles?.smallSquare);
 
+  const [authors, others] = partition(flattenedCollaborators, fc =>
+    creators.find(c => c.id === fc.relationships.maker.id)
+  );
+
+  const renderCollaboratorWithRoles = collaborator => (
+    <Styled.Name key={collaborator.id}>
+      {collaborator.attributes.makerName}
+      <Styled.Roles>
+        {collaborator.attributes.roles
+          .map(r => capitalize(r).replaceAll("_", " "))
+          .join(", ")}
+      </Styled.Roles>
+    </Styled.Name>
+  );
+
   return (
     <Styled.Wrapper>
-      {!!creators?.length && (
+      {!!authors?.length && (
         <Styled.Creators>
-          {!showAvatars && <span className="italic">{t("common.by")} </span>}
-          {creators.map(creator =>
+          {authors.map(author =>
             showAvatars ? (
-              <MakerAvatar key={creator.id} maker={creator} />
+              <MakerAvatar
+                key={authors.id}
+                maker={creators.find(
+                  c => c.id === author.relationships.maker.id
+                )}
+              />
             ) : (
-              <Styled.Name key={creator.id}>
-                {creator.attributes?.fullName}
-              </Styled.Name>
+              renderCollaboratorWithRoles(author)
             )
           )}
         </Styled.Creators>
       )}
-      {!!contributors?.length && (
+      {!!others?.length && (
         <Styled.Contributors>
-          <span className="italic">
-            {t("glossary.contributor_title_case", {
-              count: contributors.length
-            })}
-            :{" "}
-          </span>
-          {contributors.map(contributor => (
-            <Styled.Name key={contributor.id}>
-              {contributor.attributes.fullName}
-            </Styled.Name>
-          ))}
+          {others.map(collaborator =>
+            renderCollaboratorWithRoles(collaborator)
+          )}
         </Styled.Contributors>
       )}
       {description && (

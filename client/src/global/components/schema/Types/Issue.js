@@ -9,6 +9,7 @@ import {
 } from "../helpers";
 import BaseSchema from "../BaseSchema";
 import config from "config";
+import partition from "lodash/partition";
 
 export default function Issue({ issue }) {
   const { attributes, relationships } = issue;
@@ -26,7 +27,12 @@ export default function Issue({ issue }) {
     avatarStyles,
     number
   } = attributes;
-  const { creators, contributors } = relationships;
+  const { creators, flattenedCollaborators } = relationships;
+
+  /* eslint-disable-next-line no-unused-vars */
+  const [authors, others] = partition(flattenedCollaborators, fc =>
+    creators.find(c => c.id === fc.relationships.maker.id)
+  );
 
   const issueData = {
     "@type": "PublicationIssue",
@@ -43,7 +49,7 @@ export default function Issue({ issue }) {
         }
       : null,
     author: renderNamesList(creators),
-    contributor: renderNamesList(contributors),
+    contributor: renderNamesList(others),
     copyrightHolder: metadata.rightsHolder,
     copyrightNotice: metadata.rights,
     dateCreated: createdAt,

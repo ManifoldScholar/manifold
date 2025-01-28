@@ -50,14 +50,14 @@ export const Creators = styled(NamesList)`
 `;
 
 export const Name = styled.span`
-  margin-left: 0.5ch;
-
   &:not(:last-child) {
-    &::after {
-      display: inline;
-      content: ", ";
-    }
+    margin-inline-end: 1.25ch;
   }
+`;
+
+export const Roles = styled.span`
+  font-style: italic;
+  margin-inline-start: 0.75ch;
 `;
 
 export const Description = styled.div`
