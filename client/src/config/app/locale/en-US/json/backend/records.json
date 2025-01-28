@@ -16,7 +16,8 @@
     },
     "comments": {
       "detail_header": "Comment Detail",
-      "view_parent": "View Parent Annotation"
+      "view_parent": "View Parent Annotation",
+      "view_unavailable": "View Unavailable"
     },
     "makers": {
       "header": "Manage Makers",

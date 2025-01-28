@@ -74,20 +74,25 @@ function CommentDetailContainer({ refresh, confirm }) {
       });
   }, [id, confirm, resolveFlags, t, refreshComment]);
 
+  /* eslint-disable no-nested-ternary */
   const viewProps =
     subjectType === "Resource"
+      ? !!projectSlug && !!subjectId
+        ? {
+            route: "frontendProjectResource",
+            routeParams: [projectSlug, subjectId]
+          }
+        : null
+      : !!subjectTextSlug && !!subjectTextSectionId
       ? {
-          route: "frontendProjectResource",
-          routeParams: [projectSlug, subjectId]
-        }
-      : {
           route: "readerSection",
           routeParams: [
             subjectTextSlug,
             subjectTextSectionId,
             `#annotation-${subjectId}`
           ]
-        };
+        }
+      : null;
 
   return id ? (
     <section>
@@ -95,10 +100,14 @@ function CommentDetailContainer({ refresh, confirm }) {
         title={t("records.comments.detail_header")}
         buttons={[
           {
-            label: "actions.view",
-            icon: "eyeOpen32",
+            label: viewProps
+              ? "actions.view"
+              : "records.comments.view_unavailable",
+            icon: viewProps ? "eyeOpen32" : "eyeClosed32",
+            disabled: !viewProps,
             ...viewProps
           },
+
           {
             label: t("actions.delete"),
             icon: "delete24",

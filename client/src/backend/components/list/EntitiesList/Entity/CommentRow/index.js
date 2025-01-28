@@ -49,10 +49,12 @@ function CommentRow({
       t("records.comments.view_parent")
     );
 
-  const subjectLink =
-    subjectType === "Resource"
+  /* eslint-disable no-nested-ternary */
+  const subjectLink = subjectId
+    ? subjectType === "Resource"
       ? lh.link("backendResource", subjectId)
-      : lh.link("backendRecordsAnnotationsDetail", subjectId);
+      : lh.link("backendRecordsAnnotationsDetail", subjectId)
+    : null;
 
   const utility = !bulkActionsActive ? (
     <button
@@ -104,7 +106,11 @@ function CommentRow({
                 {creator?.attributes?.fullName}
               </Link>
             )}
-            <Link to={{ pathname: subjectLink }}>{subjectLabel}</Link>
+            {subjectLink ? (
+              <Link to={{ pathname: subjectLink }}>{subjectLabel}</Link>
+            ) : (
+              <span>{subjectLabel}</span>
+            )}
           </Styled.MetaTwo>
           <Styled.Link
             to={{ pathname: lh.link("backendRecordsCommentsDetail", id) }}
