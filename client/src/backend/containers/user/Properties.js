@@ -76,7 +76,6 @@ export default function UserProperties({ user, saveLabel }) {
           )}
           <FormContainer.Form
             model={user ?? { attributes: { role: "reader" } }}
-            name={"this-is-a-test"}
             update={usersAPI.update}
             create={createUser}
             onSuccess={!user ? redirectToUser : undefined}

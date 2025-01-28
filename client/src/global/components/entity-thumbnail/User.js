@@ -19,7 +19,7 @@ export default class EntityThumbnailUser extends PureComponent {
   };
 
   get attr() {
-    return this.props.entity.attributes;
+    return this.props.entity?.attributes;
   }
 
   get variant() {
