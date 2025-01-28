@@ -26,7 +26,7 @@ import InputError from "./InputError";
 import Errorable from "./Errorable";
 import Errors from "./Errors";
 import Divider from "./Divider";
-import Picker from "./Picker";
+import Picker, { BasePicker } from "./Picker";
 import Label from "./BaseLabel";
 import FieldWrapper from "./FieldWrapper";
 import { InputGroupPrimary, InputGroupSecondary } from "./InputGroup/styles";
@@ -71,5 +71,6 @@ export default {
 export const Unwrapped = {
   TextArea: FormTextArea,
   Input: FormBaseInput,
-  Toggle
+  Toggle,
+  Picker: BasePicker
 };

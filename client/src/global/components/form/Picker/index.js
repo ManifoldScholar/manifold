@@ -727,6 +727,10 @@ export class PickerComponent extends PureComponent {
   }
 }
 
+export const BasePicker = withTranslation()(
+  withScreenReaderStatus(withFormOptions(PickerComponent), false)
+);
+
 export default withTranslation()(
   setter(withScreenReaderStatus(withFormOptions(PickerComponent), false))
 );

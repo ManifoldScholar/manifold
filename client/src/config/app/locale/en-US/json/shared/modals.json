@@ -13,6 +13,7 @@
     "delete_category_body": "Any texts belonging to this category will become uncategorized.",
     "delete_comment": "Are you sure you want to delete this comment?",
     "delete_content_block": "Are you sure you want to delete this content block?",
+    "delete_contributor": "Are you sure you want to delete this contributor?",
     "delete_cta": "Are you sure you want to delete this call-to-action?",
     "delete_entitlement": "Are you sure you want to delete this entitlement?",
     "delete_event": "Are you sure you want to delete this event?",
