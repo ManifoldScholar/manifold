@@ -129,6 +129,11 @@ Rails.application.routes.draw do
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
             resources :ingestions, only: [:create], controller: "/api/v1/texts/relationships/text_section_ingestions"
             resources :ingestion_sources, only: [:index, :create]
+            resources :collaborators, only: [:index, :show] do
+              collection do
+                delete :destroy
+              end
+            end
 
             resources :text_sections do
               scope module: :text_sections do
