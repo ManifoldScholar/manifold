@@ -32,7 +32,7 @@ export default function ProjectHero({ entity, mock }) {
     social,
     description,
     creators,
-    contributors
+    flattenedCollaborators
   } = getPartsData(entity);
 
   const darkMode = !!(bgImage || entity.attributes.darkMode);
@@ -52,10 +52,10 @@ export default function ProjectHero({ entity, mock }) {
       )}
       TopLeftComponent={
         <>
-          {(creators || contributors || description) && (
+          {(flattenedCollaborators || description) && (
             <Meta
               creators={creators}
-              contributors={contributors}
+              flattenedCollaborators={flattenedCollaborators}
               description={description}
             />
           )}

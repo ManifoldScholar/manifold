@@ -4,6 +4,7 @@ import lh from "helpers/linkHandler";
 import { renderOffer, renderSeries, renderNamesList } from "../helpers";
 import BaseSchema from "../BaseSchema";
 import config from "config";
+import partition from "lodash/partition";
 
 export default class Project extends PureComponent {
   static displayName = "Schema.Project";
@@ -72,8 +73,13 @@ export default class Project extends PureComponent {
       updatedAt,
       avatarStyles
     } = this.attributes;
-    const { creators, contributors } = this.relationships;
+    const { creators, flattenedCollaborators } = this.relationships;
     const hostname = config.services.client.url;
+
+    /* eslint-disable-next-line no-unused-vars */
+    const [authors, others] = partition(flattenedCollaborators, fc =>
+      creators.find(c => c.id === fc.relationships.maker.id)
+    );
 
     return {
       "@type": "Book",
@@ -83,7 +89,7 @@ export default class Project extends PureComponent {
       isbn: metadata.isbn,
       doi: metadata.doi,
       author: renderNamesList(creators),
-      contributor: renderNamesList(contributors),
+      contributor: renderNamesList(others),
       copyrightHolder: metadata.rightsHolder,
       dateCreated: createdAt,
       dateModified: updatedAt,
