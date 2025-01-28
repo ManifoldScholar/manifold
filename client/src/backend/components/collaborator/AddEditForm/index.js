@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { FormContext } from "helpers/contexts";
 import Form, { Unwrapped } from "global/components/form";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import { useHistory } from "react-router-dom";
 import { makersAPI, collaboratorsAPI } from "api";
 import { useApiCallback } from "hooks";
@@ -11,7 +10,12 @@ import capitalize from "lodash/capitalize";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
-export default function AddEditCollaboratorForm({ projectId, refresh }) {
+export default function AddEditCollaboratorForm({
+  entityId,
+  entityType,
+  closeUrl,
+  refresh
+}) {
   const { t } = useTranslation();
   const history = useHistory();
 
@@ -48,14 +52,14 @@ export default function AddEditCollaboratorForm({ projectId, refresh }) {
         },
         relationships: {
           maker: { data: { id: makerId.id } },
-          collaboratable: { data: { id: projectId, type: "Project" } }
+          collaboratable: { data: { id: entityId, type: entityType } }
         }
       }));
     const { errors } = await createCollaborator(contributions);
 
     if (!errors) {
       if (refresh) refresh();
-      history.push(lh.link("backendProjectCollaborators", projectId));
+      history.push(closeUrl);
     }
   };
 
@@ -130,7 +134,7 @@ export default function AddEditCollaboratorForm({ projectId, refresh }) {
           </Form.FieldGroup>
           <Form.DrawerButtons
             showCancel
-            cancelUrl={lh.link("backendProjectCollaborators", projectId)}
+            cancelUrl={closeUrl}
             submitLabel="actions.save"
           />
         </Form.FieldGroup>
@@ -142,6 +146,8 @@ export default function AddEditCollaboratorForm({ projectId, refresh }) {
 AddEditCollaboratorForm.displayName = "Collaborator.AddEdit.Form";
 
 AddEditCollaboratorForm.propTypes = {
-  projectId: PropTypes.string.isRequired,
+  entityId: PropTypes.string.isRequired,
+  entityType: PropTypes.oneOf(["Project", "Text"]).isRequired,
+  closeUrl: PropTypes.string.isRequired,
   refresh: PropTypes.func
 };
