@@ -193,12 +193,12 @@ const routes = {
               helper: t => `/backend/projects/text/${t}/collaborators`,
               routes: [
                 {
-                  name: "backendTextCollaborator",
+                  name: "backendTextCollaboratorNew",
                   exact: true,
-                  component: "MakersEdit",
-                  path: "/backend/projects/text/:tId/collaborators/:id",
-                  helper: (tId, id) =>
-                    `/backend/projects/text/${tId}/collaborators/${id}`
+                  component: "TextAddCollaborator",
+                  path: "/backend/projects/text/:tId/collaborators/new",
+                  helper: tId =>
+                    `/backend/projects/text/${tId}/collaborators/new`
                 }
               ]
             },
