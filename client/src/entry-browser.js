@@ -5,7 +5,6 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
-import "focus-visible";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "global/containers/App";

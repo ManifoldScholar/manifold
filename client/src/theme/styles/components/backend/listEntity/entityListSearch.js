@@ -24,7 +24,7 @@ export default `
       margin-top: -2px;
       margin-left: 14px;
 
-      &.focus-visible {
+      &:focus-visible {
         color: var(--color-accent-primary);
         outline: 0;
       }
@@ -44,7 +44,7 @@ export default `
         display: block;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         color: var(--color-accent-primary-pale);
         outline: 0;
       }

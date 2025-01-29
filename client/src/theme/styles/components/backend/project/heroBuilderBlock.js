@@ -59,7 +59,7 @@ export default `
       align-items: center;
       font-family: var(--font-family-sans);
 
-      .hero-builder-block__header.focus-visible & {
+      .hero-builder-block__header:focus-visible & {
         svg {
           color: var(--hover-color);
         }

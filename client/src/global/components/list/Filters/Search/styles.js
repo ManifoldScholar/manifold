@@ -44,7 +44,7 @@ export const Input = styled.input`
     color: var(--color);
   }
 
-  &.focus-visible::placeholder {
+  &:focus-visible::placeholder {
     color: var(--focus-color);
   }
 `;
