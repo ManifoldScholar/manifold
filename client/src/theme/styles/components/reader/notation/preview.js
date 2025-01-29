@@ -50,7 +50,7 @@ export default `
 
       &:hover,
       &.active,
-      &.focus-visible {
+      &:focus-visible {
         ${defaultHoverStyle}
         outline: 0;
       }

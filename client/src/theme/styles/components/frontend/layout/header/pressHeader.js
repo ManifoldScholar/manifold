@@ -24,7 +24,7 @@ export default `
     }
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       outline: 0;
 
       &::after {

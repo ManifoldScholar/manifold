@@ -49,7 +49,7 @@ export default `
       z-index: -1;
       opacity: 0;
 
-      &.focus-visible ~ .citation__label {
+      &:focus-visible ~ .citation__label {
         ${defaultFocusStyle}
         outline-offset: 4px;
       }
