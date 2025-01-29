@@ -97,7 +97,7 @@ export const ControlBar = styled.div`
     outline: none;
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       --Icon-color: var(--hover-color);
     }
   }

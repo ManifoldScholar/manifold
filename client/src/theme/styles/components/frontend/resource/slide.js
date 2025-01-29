@@ -151,7 +151,7 @@ export default `
     }
 
     .resource-preview-wrapper {
-      &.focus-visible {
+      &:focus-visible {
         border: 0;
         outline: 0;
 

@@ -24,7 +24,7 @@ export const ItemLink = styled(Link, transientOptions)`
   transition: background-color ${defaultTransitionProps};
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     color: inherit;
     outline: 0;
   }

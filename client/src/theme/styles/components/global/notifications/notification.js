@@ -91,7 +91,7 @@ export default `
 
         ${respond(`right: 26px;`, 120)}
 
-        &.focus-visible {
+        &:focus-visible {
           outline-color: var(--color-base-neutral90);
         }
 

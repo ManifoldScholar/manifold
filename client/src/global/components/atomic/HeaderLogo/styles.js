@@ -20,7 +20,7 @@ export const Link = styled.a`
   }
 
   &[href]:hover,
-  &[href].focus-visible {
+  &[href]:focus-visible {
     color: var(--hover-color);
     outline: 0;
   }

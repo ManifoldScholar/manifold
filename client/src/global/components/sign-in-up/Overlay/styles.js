@@ -83,7 +83,7 @@ export const FormContainer = styled.div`
   ${respond(`padding-top: 126px;`, 90)}
 
   form {
-    &:focus:not(.focus-visible) {
+    &:focus:not(:focus-visible) {
       outline: 0;
     }
 

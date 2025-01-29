@@ -92,7 +92,7 @@ export default `
       z-index: -1;
       opacity: 0;
 
-      &.focus-visible ~ .color-picker__indicator {
+      &:focus-visible ~ .color-picker__indicator {
         ${defaultFocusStyle}
         outline-color: var(--focus-color);
         outline-offset: 3px;
