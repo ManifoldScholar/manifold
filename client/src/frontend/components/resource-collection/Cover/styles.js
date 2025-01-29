@@ -41,7 +41,7 @@ export const Cover = styled(Link, transientOptions)`
   ${respond(`padding-top: 160px;`, 80)}
 
   &[href]:hover,
-  &[href].focus-visible {
+  &[href]:focus-visible {
     color: var(--hover-color);
     outline: 0;
     box-shadow: 0 20px 30px 2px ${rgba("neutralBlack", 0.13)};
