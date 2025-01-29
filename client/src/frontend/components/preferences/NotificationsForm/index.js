@@ -5,7 +5,7 @@ import Form from "global/components/form";
 import Collapse from "global/components/Collapse";
 import RadioGroup from "../RadioGroup";
 import ProjectPreferences from "../ProjectPreferences";
-import humps from "humps";
+import humps from "utils/humps";
 import Authorization from "helpers/authorization";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
