@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CategoryHeader } from "./parts";
+import { CategoryHeader, MarkdownBody } from "./parts";
 import {
   CollectedProjects,
   CollectedTexts,
@@ -18,7 +18,8 @@ function Category({
   responses,
   callbacks,
   activeType,
-  dragProps
+  dragProps,
+  newMarkdownBlock
 }) {
   const categoryMapping = mappings[category?.id] || null;
 
@@ -53,6 +54,8 @@ function Category({
     };
   }
 
+  const isMarkdown = category.attributes?.markdownOnly;
+
   return (
     <Styled.Wrapper {...getWrapperProps()}>
       <Styled.Category $isDragging={dragProps?.snapshot.isDragging}>
@@ -62,16 +65,25 @@ function Category({
           groupId={groupId}
           onCategoryEdit={callbacks.onCategoryEdit}
           onCategoryRemove={callbacks.onCategoryRemove}
+          initExpanded={
+            newMarkdownBlock && newMarkdownBlock === category.attributes.title
+          }
         />
         <Styled.Inner>
-          <CollectedProjects {...getCollectedProps("projects")} />
-          <CollectedJournalIssues {...getCollectedProps("journalIssues")} />
-          <CollectedTexts {...getCollectedProps("texts")} />
-          <CollectedTextSections {...getCollectedProps("textSections")} />
-          <CollectedResourceCollections
-            {...getCollectedProps("resourceCollections")}
-          />
-          <CollectedResources {...getCollectedProps("resources")} />
+          {isMarkdown ? (
+            <MarkdownBody category={category} />
+          ) : (
+            <>
+              <CollectedProjects {...getCollectedProps("projects")} />
+              <CollectedJournalIssues {...getCollectedProps("journalIssues")} />
+              <CollectedTexts {...getCollectedProps("texts")} />
+              <CollectedTextSections {...getCollectedProps("textSections")} />
+              <CollectedResourceCollections
+                {...getCollectedProps("resourceCollections")}
+              />
+              <CollectedResources {...getCollectedProps("resources")} />
+            </>
+          )}
         </Styled.Inner>
       </Styled.Category>
     </Styled.Wrapper>

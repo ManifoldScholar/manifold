@@ -24,4 +24,8 @@ export const Category = styled("article", transientOptions)`
 export const Inner = styled.div`
   padding: calc(32px - ${collectableTypeVerticalPadding})
     clamp(20px, 2.857vw, 32px);
+
+  .collapse__content--visible + & div.markdown-body {
+    display: none;
+  }
 `;

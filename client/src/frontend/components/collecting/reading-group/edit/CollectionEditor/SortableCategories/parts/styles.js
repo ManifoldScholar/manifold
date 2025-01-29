@@ -74,3 +74,11 @@ export const TypeHeaderText = styled.h4`
   font-size: 13px;
   color: inherit;
 `;
+
+export const MarkdownBody = styled.div`
+  font-family: var(--font-family-heading);
+  color: inherit;
+  font-size: 16px;
+  line-height: 1.438;
+  color: var(--color-base-neutral90);
+`;
