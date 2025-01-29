@@ -236,10 +236,6 @@ object-assign
  */
 
 /*!
- * exports.
- */
-
-/*!
  * extglob <https://github.com/jonschlinkert/extglob>
  *
  * Copyright (c) 2015, Jon Schlinkert.
@@ -481,10 +477,6 @@ object-assign
  *
  * Copyright (c) 2015-2017, Jon Schlinkert.
  * Released under the MIT License.
- */
-
-/*!
- * regexp patterns.
  */
 
 /*!
