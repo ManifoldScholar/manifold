@@ -1,0 +1,29 @@
+ignores: [
+  # dependencies
+
+  # browser polyfills of node packages
+  # required to run Swagger UI
+  "buffer",
+  "stream-browserify",
+
+  # used by date-fns
+  "date-fns-tz",
+
+  # required by API service for word ingestion
+  "mammoth",
+
+  # TODO might be OK to remove; check after swagger ui upgrade
+  "swagger-ui-react",
+
+  # devDependencies
+
+  # used by yarn scripts
+  "@babel/register",
+
+  # webpack dependencies
+  "css-loader",
+  "string-replace-loader",
+  "style-loader",
+  "webpack-cli"
+]
+skip-missing: true
