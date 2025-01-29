@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -27,12 +27,17 @@ function CollectionEditor({
 
   const collection = getEntityCollection(readingGroup);
 
+  const [newMarkdownBlock, setNewMarkdownBlock] = useState(null);
+
   function createCategory(attributes) {
     const call = readingGroupsAPI.createCategory(readingGroup.id, {
       attributes
     });
     const createRequest = request(call, requests.feReadingGroupCategoryCreate);
-    dispatch(createRequest).promise.then(() => refresh());
+    dispatch(createRequest).promise.then(() => {
+      setNewMarkdownBlock(attributes.markdownOnly ? attributes.title : null);
+      refresh();
+    });
   }
 
   function updateCategory(category) {
@@ -130,7 +135,10 @@ function CollectionEditor({
 
   return (
     <Styled.Editor>
-      <CategoryCreator onSubmit={createCategory} />
+      <Styled.CategoryInputs>
+        <CategoryCreator onSubmit={createCategory} />
+        <CategoryCreator onSubmit={createCategory} isMarkdown />
+      </Styled.CategoryInputs>
       <SortableCategories
         collection={collection}
         responses={responses}
@@ -145,6 +153,7 @@ function CollectionEditor({
             responses={responses}
             callbacks={callbacks}
             activeType={activeType}
+            newMarkdownBlock={newMarkdownBlock}
           />
         )}
       </SortableCategories>

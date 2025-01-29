@@ -45,6 +45,7 @@
     "password_reset_body": "Automatically send the user a new password or set one yourself.",
     "remove_category": "Are you sure you want to remove this category from your collection?",
     "remove_category_body": "Any items in this category will also be deleted.",
+    "remove_markdown_block": "Are you sure you want to remove this markdown block?",
     "reset_password": "Are you sure you want to reset this password?",
     "resolve_flags": "Are you sure you want to resolve all flags?",
     "set_password": "Set New Password",
