@@ -15,7 +15,7 @@ export default `
       ${respond(`display: none;`, 82)}
     }
 
-    &.focus-visible {
+    &:focus-visible {
       ${defaultHoverStyle}
       outline: 0;
     }

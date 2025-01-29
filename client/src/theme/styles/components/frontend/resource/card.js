@@ -41,7 +41,7 @@ export default `
       text-decoration: none;
 
       &:hover,
-      &.focus-visible {
+      &:focus-visible {
         outline: 0;
       }
 
@@ -76,9 +76,9 @@ export default `
       ${respond(`font-size: 14px;`, 85)}
 
       .resource-card__preview-link:hover &,
-      .resource-card__preview-link.focus-visible &,
+      .resource-card__preview-link:focus-visible &,
       .resource-preview-wrapper:hover &,
-      .resource-preview-wrapper.focus-visible & {
+      .resource-preview-wrapper:focus-visible & {
         color: var(--color-base-neutral-white);
         background-color: var(--hover-color);
       }
@@ -114,7 +114,7 @@ export default `
       ${respond(`width: calc(100% - 155px);`, 40)}
 
       &--hover,
-      &.focus-visible {
+      &:focus-visible {
         cursor: pointer;
         outline: 0;
       }
@@ -147,7 +147,7 @@ export default `
 
       &:hover,
       .resource-card__info--hover &,
-      .resource-card__info.focus-visible & {
+      .resource-card__info:focus-visible & {
         color: var(--color-base-neutral-white);
         background-color: var(--hover-color);
       }
@@ -185,7 +185,7 @@ export default `
       border: none;
 
       &:hover,
-      &.focus-visible {
+      &:focus-visible {
         outline: 0;
 
         .icon-thumbnail-primary {

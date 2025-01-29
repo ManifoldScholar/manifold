@@ -51,7 +51,7 @@ export const Select = styled.select`
   ${borderStyles}
   transition: border-color ${defaultTransitionProps};
 
-  &.focus-visible {
+  &:focus-visible {
     border-color: var(--hover-color);
   }
 

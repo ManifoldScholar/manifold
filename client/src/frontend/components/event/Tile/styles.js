@@ -38,7 +38,7 @@ export const Tile = styled.article`
       cursor: pointer;
 
       &:hover,
-      &.focus-visible {
+      &:focus-visible {
         --Icon-color: var(--color-interaction-light);
         --Icon-bg-color: var(--strong-color);
 

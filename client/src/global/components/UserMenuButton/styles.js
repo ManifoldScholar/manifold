@@ -24,14 +24,14 @@ export const Button = styled.button`
         padding-left: var(--padding-lateral-narrow);
 
         &:hover,
-        &.focus-visible,
+        &:focus-visible,
         &[aria-expanded='true'] {
           color: var(--color-neutral-text-extra-dark);
           background-color: var(--color-interaction-light);
           outline: 0;
         }
 
-        &.focus-visible {
+        &:focus-visible {
           outline: 2px solid;
           outline-offset: -2px;
         }

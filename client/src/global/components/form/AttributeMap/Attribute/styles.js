@@ -86,7 +86,7 @@ export const ColumnAvailable = styled.div`
   ${respond(`width: 300px;`, 110)}
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     ${ColumnName} {
       background-color: var(--color-accent-primary-pale);
     }

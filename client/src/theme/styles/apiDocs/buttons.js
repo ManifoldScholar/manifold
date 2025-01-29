@@ -18,7 +18,7 @@ export default `
       border-color ${defaultTransitionProps};
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       color: var(--strong-color);
       background-color: var(--color-interaction-light);
       border-color: var(--color-interaction-light);

@@ -15,7 +15,7 @@ export const Form = styled.form`
     border-radius: 8px;
     font-family: var(--font-family-sans);
 
-    &.focus-visible {
+    &:focus-visible {
       &::placeholder {
         color: var(--focus-color);
       }
@@ -51,7 +51,7 @@ export const SearchButton = styled.div`
       color: var(--color-base-neutral30);
     }
 
-    &.focus-visible {
+    &:focus-visible {
       color: var(--color-base-neutral-white);
       border-color: var(--focus-color);
     }

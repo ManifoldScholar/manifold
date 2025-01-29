@@ -94,12 +94,12 @@ export const FooterButton = styled.button`
   transition: background-color ${defaultTransitionProps};
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     background-color: var(--color-base-neutral30);
     outline: 0;
   }
 
-  &.focus-visible {
+  &:focus-visible {
     ${defaultFocusStyle}
     outline-offset: -2px;
   }
