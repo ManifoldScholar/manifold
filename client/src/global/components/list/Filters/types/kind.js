@@ -1,4 +1,4 @@
-import humps from "humps";
+import humps from "utils/humps";
 
 const getKindOptions = (kinds, t) =>
   kinds.map(kind => {
