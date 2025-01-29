@@ -43,7 +43,7 @@ padding: 0 22px;
   transition: background-color ${defaultTransitionProps};
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     color: inherit;
     background-color: var(--color-base-neutral30);
     outline: 0;

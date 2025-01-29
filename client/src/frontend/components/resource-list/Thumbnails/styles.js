@@ -32,7 +32,7 @@ export const Link = styled(LinkComponent)`
   transition: none;
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     --Thumbnail-box-shadow: 0 20px 30px 2px ${rgba("neutralBlack", 0.13)};
 
     outline: none;
