@@ -24,27 +24,27 @@ export default class SwaggerUI extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
-    const ui = swaggerUIConstructor({
-      plugins: this.props.plugins,
-      tagsSorter: "alpha",
-      spec: this.props.spec,
-      layout: this.props.layout,
-      url: this.props.url,
-      requestInterceptor: this.requestInterceptor,
-      responseInterceptor: this.responseInterceptor,
-      onComplete: this.onComplete,
-      docExpansion: this.props.docExpansion,
-      defaultModelExpandDepth: this.props.defaultModelExpandDepth
-    });
+    // const ui = swaggerUIConstructor({
+    //   plugins: this.props.plugins,
+    //   tagsSorter: "alpha",
+    //   spec: this.props.spec,
+    //   layout: this.props.layout,
+    //   url: this.props.url,
+    //   requestInterceptor: this.requestInterceptor,
+    //   responseInterceptor: this.responseInterceptor,
+    //   onComplete: this.onComplete,
+    //   docExpansion: this.props.docExpansion,
+    //   defaultModelExpandDepth: this.props.defaultModelExpandDepth
+    // });
 
-    this.system = ui;
-    this.SwaggerUIComponent = ui.getComponent("App", "root");
+    // this.system = ui;
+    // this.SwaggerUIComponent = ui.getComponent("App", "root");
 
-    this.forceUpdate();
+    // this.forceUpdate();
   }
 
   render() {
+    return null;
     return this.SwaggerUIComponent ? (
       <>
         <GlobalStyles styles={styles} />
