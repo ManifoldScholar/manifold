@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import InputError from "../InputError";
-import brackets2dots from "brackets2dots";
+import { brackets2dots } from "utils/string";
 import has from "lodash/has";
 import FieldWrapper from "../FieldWrapper";
 

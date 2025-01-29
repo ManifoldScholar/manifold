@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import Notation from "reader/containers/notation";
 import PropTypes from "prop-types";
-import humps from "humps";
+import humps from "utils/humps";
 
 export default class NewNotation extends PureComponent {
   static drawerProps = () => {

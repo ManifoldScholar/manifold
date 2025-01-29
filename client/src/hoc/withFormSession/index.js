@@ -4,7 +4,7 @@ import hoistStatics from "hoist-non-react-statics";
 import { connect } from "react-redux";
 import get from "lodash/get";
 import has from "lodash/has";
-import brackets2dots from "brackets2dots";
+import { brackets2dots } from "utils/string";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import humps from "humps";
+import humps from "utils/humps";
 import isString from "lodash/isString";
 import * as Styled from "./styles";
 

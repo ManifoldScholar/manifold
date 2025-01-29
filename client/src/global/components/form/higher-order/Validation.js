@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GlobalForm from "global/components/form";
-import brackets2dots from "brackets2dots";
+import { brackets2dots } from "utils/string";
 
 export default class FormHigherOrderValidation extends Component {
   static displayName = "Form.HigherOrder.Validation";
