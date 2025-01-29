@@ -50,7 +50,7 @@ export const itemLinkStyles = `
   text-decoration: none;
   letter-spacing: 0.004em;
 
-  &.focus-visible {
+  &:focus-visible {
     ${defaultHoverStyle}
     outline-offset: -3px;
   }
@@ -64,7 +64,7 @@ const linkContentStyles = `
   transition: color ${defaultTransitionProps};
 
   ${ItemLink}:hover &,
-  ${ItemLink}.focus-visible & {
+  ${ItemLink}:focus-visible & {
     ${defaultHoverStyle}
   }
 `;
@@ -121,7 +121,7 @@ export const MoreLink = styled.a`
   transition: color ${defaultTransitionProps};
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     ${defaultHoverStyle}
     outline-offset: -3px;
 

@@ -120,7 +120,7 @@ export default `
       transition: background-color ${defaultTransitionProps};
 
       &:hover,
-      &.focus-visible {
+      &:focus-visible {
         color: inherit;
         background-color: var(--box-bg-color);
 
@@ -155,7 +155,7 @@ export default `
 
       &--with-link {
         &:hover,
-        &.focus-visible {
+        &:focus-visible {
           outline: 0;
         }
       }
@@ -173,7 +173,7 @@ export default `
     &__sr-link {
       ${screenReaderText}
 
-      &.focus-visible {
+      &:focus-visible {
         outline: 0;
 
         ~ .table__name-container {

@@ -11,7 +11,7 @@ export default `
     transition: none;
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       color: var(--group-button-hover-color);
       background-color: var(
         --group-button-hover-bg-color,
@@ -37,7 +37,7 @@ export default `
       color: var(--group-button-private-icon-color);
 
       .annotation-popup-menu-item:hover &,
-      .annotation-popup-menu-item.focus-visible & {
+      .annotation-popup-menu-item:focus-visible & {
         color: inherit;
       }
     }

@@ -25,7 +25,7 @@ export const loginFormPrimary = `
         margin-left: 0;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         color: var(--hover-color);
       }
     }

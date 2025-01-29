@@ -131,17 +131,17 @@ export default `
       outline: 0;
     }
 
-    &.button-active:not(.focus-visible),
+    &.button-active:not(:focus-visible),
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       background-color: var(--color-interaction-light);
     }
 
-    &.button-active.focus-visible {
+    &.button-active:focus-visible {
       background-color: var(--color-interaction-dark);
     }
 
-    &.focus-visible {
+    &:focus-visible {
       color: var(--color-neutral-text-extra-dark);
       outline: 2px solid;
       outline-offset: -2px;

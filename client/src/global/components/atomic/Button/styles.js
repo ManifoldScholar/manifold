@@ -9,7 +9,7 @@ const HERO_BREAKPOINT = breakpoints[60];
 const aSecondaryButton = `
   background-color: var(--color-base-neutral10);
 
-  &.focus-visible {
+  &:focus-visible {
     outline: 0;
     border-color: var(--color-base-neutral70);
   }
@@ -26,13 +26,13 @@ const aSecondaryButtonDark = `
   border-color: var(--color-neutral-ui-light);
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     color: var(--color-base-neutral95);
     background-color: var(--color-base-neutral30);
     border-color: var(--color-base-neutral30);
   }
 
-  &.focus-visible {
+  &:focus-visible {
     border-color: var(--color-base-neutral75);
   }
 `;
@@ -71,12 +71,12 @@ export const Button = styled("button", transientOptions)`
   line-height: 18px;
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     color: var(--color-base-neutral90);
     background-color: var(--color-accent-primary-dull);
   }
 
-  &.focus-visible {
+  &:focus-visible {
     outline: 0;
     border-color: var(--color-accent-primary);
   }
