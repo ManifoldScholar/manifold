@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import hoistStatics from "hoist-non-react-statics";
 import get from "lodash/get";
 import has from "lodash/has";
-import brackets2dots from "brackets2dots";
 import withFormContext from "hoc/withFormContext";
+import { brackets2dots } from "utils/string";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";

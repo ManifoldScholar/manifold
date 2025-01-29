@@ -1,11 +1,11 @@
 import React, { memo, useRef } from "react";
 import { useParams } from "react-router-dom";
-import nl2br from "nl2br";
 import BodyNodes from "reader/components/section/body-nodes";
 import Wrapper from "./Wrapper";
 import { maybeTruncateChildren } from "./helpers";
 import blacklist from "./elementBlacklist";
 import { useFromStore } from "hooks";
+import { nl2br } from "utils/string";
 
 function AnnotationWithNodes({ annotation, selection }) {
   const {

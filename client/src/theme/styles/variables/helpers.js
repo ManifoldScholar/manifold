@@ -1,4 +1,4 @@
-import humps from "humps";
+import humps from "utils/humps";
 
 export function createCustomPropertyName(namespace, tokenKey) {
   const prefix = namespace ? `${namespace}-` : "";
