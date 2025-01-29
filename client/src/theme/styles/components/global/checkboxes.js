@@ -95,7 +95,7 @@ export default `
       }
     }
 
-    input.focus-visible {
+    input:focus-visible {
       outline: 0;
 
       ~ .checkbox__indicator {

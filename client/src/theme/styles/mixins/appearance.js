@@ -32,11 +32,11 @@ export const defaultHoverStyle = `color: var(--hover-color);`;
 
 export function setFocusStyle(property = "outline", value = "solid 2px") {
   return `
-    &:focus:not(.focus-visible) {
+    &:focus:not(:focus-visible) {
       outline: 0;
     }
 
-    &.focus-visible {
+    &:focus-visible {
       ${property}: ${value};
     }
   `;
@@ -64,7 +64,7 @@ export function fillOnFocus(color = "var(--hover-color)") {
   return `
     ${setFocusStyle("background-color", color)}
 
-    &.focus-visible {
+    &:focus-visible {
       outline: 0;
     }
   `;
@@ -157,7 +157,7 @@ export const buttonTrimPrimary = `
     color: var(--color-accent-primary-medium);
   }
 
-  &.focus-visible {
+  &:focus-visible {
     color: var(--color-base-neutral95);
     outline: 0;
   }
@@ -202,7 +202,7 @@ export const unstyledSelect = `
   outline: 0;
   appearance: none;
 
-  &.focus-visible:-moz-focusring {
+  &:focus-visible:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 var(--medium-color);
   }
@@ -224,7 +224,7 @@ export const selectPrimary = `
     line-height: var(--line-height);
     border: 2px solid var(--color-neutral40);
 
-    &.focus-visible {
+    &:focus-visible {
       border-color: var(--focus-color);
     }
   }
@@ -250,7 +250,7 @@ const inputBase = `
   background-color: var(--input-bg-color);
   border-color: var(--input-border-color);
 
-  &.focus-visible {
+  &:focus-visible {
     outline: none;
     border-color: var(--focus-color);
   }
@@ -283,7 +283,7 @@ export const inputQuaternary = `
   appearance: none;
   outline: none;
 
-  &.focus-visible {
+  &:focus-visible {
     outline: none;
 
     &::placeholder {

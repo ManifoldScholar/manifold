@@ -19,7 +19,7 @@ export default `
     ${outlineOnFocus()}
   }
 
-  main[tabindex='-1'].focus-visible {
+  main[tabindex='-1']:focus-visible {
     outline: none;
   }
 
