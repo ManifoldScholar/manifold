@@ -13,6 +13,7 @@ module V1
 
     typed_attribute :slug, Types::String.meta(read_only: true)
     typed_attribute :position, Types::Integer
+    typed_attribute :markdown_only, Types::Bool
 
     ReadingGroupCategory.formatted_attributes.each do |attribute|
       name = attribute.attribute_name.to_sym
