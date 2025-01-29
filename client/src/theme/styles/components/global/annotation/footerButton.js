@@ -31,7 +31,7 @@ export default `
     transition: color ${defaultTransitionProps}, background-color ${defaultTransitionProps};
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       color: var(--strong-color);
       background-color: var(--box-strong-bg-color);
     }

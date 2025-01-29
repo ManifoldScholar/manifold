@@ -104,7 +104,7 @@ export default `
         outline: none;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         ${outlineOnFocus("var(--menu-bg-color)")}
         outline-offset: 2px;
       }

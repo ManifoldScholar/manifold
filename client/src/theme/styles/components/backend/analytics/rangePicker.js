@@ -73,7 +73,7 @@ export default `
         60
       )}
 
-      &.focus-visible {
+      &:focus-visible {
         border-color: var(--focus-color);
         outline: 0;
       }

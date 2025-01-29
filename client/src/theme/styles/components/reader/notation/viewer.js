@@ -159,7 +159,7 @@ export default `
       transition: background-color ${defaultTransitionProps};
 
       &:hover,
-      &.focus-visible {
+      &:focus-visible {
         background-color: var(--color-notification-error-light);
         outline: 0;
       }
@@ -222,7 +222,7 @@ export default `
         cursor: pointer;
 
         &.highlighted,
-        a.focus-visible {
+        a:focus-visible {
           outline: 0;
         }
       }

@@ -27,7 +27,7 @@ export default `
   .sr-collecting-toggle {
     ${screenReaderText}
 
-    &.focus-visible ~ .collecting-toggle {
+    &:focus-visible ~ .collecting-toggle {
       ${defaultFocusStyle}
       outline-color: var(--focus-color);
     }

@@ -31,7 +31,7 @@ export default `
         margin-top: 5px;
 
         &:hover,
-        &.focus-visible {
+        &:focus-visible {
           color: var(--error-color);
         }
       }

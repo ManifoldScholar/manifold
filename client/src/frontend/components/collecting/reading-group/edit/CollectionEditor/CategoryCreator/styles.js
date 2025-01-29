@@ -62,7 +62,7 @@ export const Button = styled.button`
     background-color ${defaultTransitionProps};
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     color: var(--strong-color);
     background-color: var(--color-accent-primary-light);
     outline: none;

@@ -95,7 +95,7 @@ export default `
           color: inherit;
         }
 
-        &.focus-visible {
+        &:focus-visible {
           color: inherit;
           outline-color: var(--color-neutral-ui-dark);
         }
@@ -135,7 +135,7 @@ export default `
           color: inherit;
         }
 
-        &.focus-visible {
+        &:focus-visible {
           color: inherit;
           outline-color: var(--color-base-neutral70);
         }
