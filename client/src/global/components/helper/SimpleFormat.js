@@ -1,8 +1,8 @@
 import React, { PureComponent, createElement } from "react";
 import PropTypes from "prop-types";
-import nl2br from "nl2br";
 import he from "he";
 import Loadable from "@docusaurus/react-loadable";
+import { nl2br } from "utils/string";
 
 const formattedText = props => {
   const sanitized = he.encode(props.text);
