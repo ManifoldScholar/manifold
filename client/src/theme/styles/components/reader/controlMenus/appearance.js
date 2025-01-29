@@ -68,12 +68,12 @@ export default `
       }
 
       .appearance-menu__font-style:hover &,
-      .appearance-menu__radio-input.focus-visible ~ & {
+      .appearance-menu__radio-input:focus-visible ~ & {
         ${defaultHoverStyle}
         border-color: var(--hover-color);
       }
 
-      .appearance-menu__radio-input.focus-visible ~ & {
+      .appearance-menu__radio-input:focus-visible ~ & {
         outline: 1px solid;
         outline-offset: 4px;
       }

@@ -73,7 +73,7 @@ export default `
     position: relative;
   }
 
-  .no-focus-outline.focus-visible {
+  .no-focus-outline:focus-visible {
     outline: none;
   }
 
@@ -109,7 +109,7 @@ export default `
     transition: none;
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       color: var(--color-base-neutral85);
       background-color: var(--color-interaction-light);
       border-color: var(--color-interaction-light);

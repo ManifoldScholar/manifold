@@ -56,7 +56,7 @@ export const GroupHeader = styled("div", transientOptions)`
         }
       }
 
-      &.focus-visible {
+      &:focus-visible {
         background-color: var(--box-medium-bg-color);
         color: var(--strong-color);
 
