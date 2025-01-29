@@ -54,7 +54,7 @@ module API
           end
 
           def reading_group_category_params
-            attributes = [:title, :description, :position]
+            attributes = [:title, :description, :position, :markdown_only]
             relationships = [:projects, :resources, :resource_collections, :texts]
 
             param_config = structure_params(attributes: attributes, relationships: relationships)
