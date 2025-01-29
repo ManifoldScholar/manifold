@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import mapKeys from "lodash/mapKeys";
-import startsWith from "lodash/startsWith";
+import { attributesToProps } from "html-react-parser";
 import humps from "utils/humps";
 import smoothScroll from "utils/smoothScroll";
-import attrConvert from "react-attr-converter";
 
 export default RenderComponent => {
   class ValidatedNode extends Component {
@@ -61,21 +59,8 @@ export default RenderComponent => {
       return object;
     }
 
-    cleanAttributes(attr) {
-      const mapped = mapKeys(attr, (attributeValue, attributeName) => {
-        if (startsWith(attributeName, "data")) {
-          return humps.decamelize(attributeName, { separator: "-" });
-        }
-        return attrConvert(attributeName);
-      });
-      if (mapped.hasOwnProperty("style")) {
-        mapped.style = this.styleStringToObject(mapped.style);
-      }
-      return mapped;
-    }
-
     render() {
-      const attributes = this.cleanAttributes(this.props.attributes);
+      const attributes = attributesToProps(this.props.attributes);
 
       // We need to keep track of the child's dom element so that we can scroll to it.
       attributes.ref = el => (this.el = el);
