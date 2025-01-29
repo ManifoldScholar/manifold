@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import mapKeys from "lodash/mapKeys";
-import humps from "humps";
 import startsWith from "lodash/startsWith";
-import smoothScroll from "../../../../../utils/smoothScroll";
+import humps from "utils/humps";
+import smoothScroll from "utils/smoothScroll";
 import attrConvert from "react-attr-converter";
 
 export default RenderComponent => {
