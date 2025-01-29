@@ -6848,13 +6848,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"focus-visible@npm:^5.0.1":
-  version: 5.2.0
-  resolution: "focus-visible@npm:5.2.0"
-  checksum: 10c0/bc746775e4c17d05faf7219a91fd5ae6fec320b87f20cde5402eff17fab148b6253f25748f0235b3110528a1335ee0c6d4dc3692cc6b6174d0ebd253dd28a50d
-  languageName: node
-  linkType: hard
-
 "follow-redirects@npm:^1.0.0":
   version: 1.14.8
   resolution: "follow-redirects@npm:1.14.8"
@@ -9671,7 +9664,6 @@ __metadata:
     fast-copy: "npm:^2.1.0"
     filesize: "npm:^4.x"
     focus-trap-react: "npm:10.0.1"
-    focus-visible: "npm:^5.0.1"
     he: "npm:^1.2.0"
     hoist-non-react-statics: "npm:^3.0"
     http-proxy-middleware: "npm:^0.17.2"
