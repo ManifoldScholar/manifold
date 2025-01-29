@@ -44,10 +44,31 @@ export function capitalize(s, all = false) {
   return s && s[0].toUpperCase() + s.slice(1);
 }
 
+// https://github.com/wilmoore/brackets2dots.js/blob/master/index.js
+const REPLACE_BRACKETS = /\[([^\[\]]+)\]/g;
+const LFT_RT_TRIM_DOTS = /^[.]*|[.]*$/g;
+
+export function brackets2dots(string) {
+  return {}.toString.call(string) == "[object String]"
+    ? string.replace(REPLACE_BRACKETS, ".$1").replace(LFT_RT_TRIM_DOTS, "")
+    : "";
+}
+
+// https://www.npmjs.com/package/nl2br
+export function nl2br(str, isXhtml) {
+  var breakTag = isXhtml || typeof isXhtml === "undefined" ? "<br />" : "<br>";
+  return (str + "").replace(
+    /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g,
+    "$1" + breakTag + "$2"
+  );
+}
+
 export default {
   repeat,
   pad,
   possessivize,
   hash,
-  capitalize
+  capitalize,
+  brackets2dots,
+  nl2br
 };
