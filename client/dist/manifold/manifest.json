@@ -1,7 +1,7 @@
 {
   "assetsByChunkName": {
     "build/manifold-client-browser": [
-      "build/manifold-client-browser-5c9930f83775033a5efd.js"
+      "build/manifold-client-browser-3250748de5942f93dce3.js"
     ],
     "ace-editor": [
       "build/chunk-676-ebcd7ef24279c7af0c03.js",
@@ -11,8 +11,8 @@
       "build/chunk-autolinker-3a787970ce186973f9c4.js"
     ],
     "swagger-ui": [
-      "build/chunk-650-e5c9e23e5eaed0500583.js",
-      "build/chunk-swagger-ui-b73c4e50734283212c72.js"
+      "build/chunk-202-3661a7a5a258a59fd3a3.js",
+      "build/chunk-swagger-ui-f84dda1bea2f596ef8c4.js"
     ],
     "recharts": [
       "build/chunk-909-34121d2bcf42816510b4.js",
