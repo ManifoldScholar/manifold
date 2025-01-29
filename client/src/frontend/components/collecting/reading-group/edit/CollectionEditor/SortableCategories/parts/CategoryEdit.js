@@ -12,6 +12,19 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
     return readingGroupsAPI.updateCategory(groupId, categoryId, data);
   }
 
+  const isMarkdown = category.attributes?.markdownOnly;
+
+  const nameLabel = isMarkdown ? t("common.title") : t("forms.category.name");
+  const descriptionLabel = isMarkdown
+    ? t("common.body")
+    : t("forms.category.description");
+  const descriptionPlaceholder = isMarkdown
+    ? t("forms.category.markdown_body_placeholder")
+    : t("forms.category.description_placeholder");
+  const descriptionInstructions = isMarkdown
+    ? undefined
+    : t("forms.category.description_instructions");
+
   return (
     <FormContainer.Form
       model={category}
@@ -23,17 +36,17 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
       <Form.FieldGroup>
         <Form.TextInput
           wide
-          label={t("forms.category.name")}
+          label={nameLabel}
           name="attributes[title]"
           placeholder={t("forms.category.name_placeholder")}
         />
         <Form.TextArea
           wide
           height={122}
-          label={t("forms.category.description")}
+          label={descriptionLabel}
           name="attributes[description]"
-          placeholder={t("forms.category.description_placeholder")}
-          instructions={t("forms.category.description_instructions")}
+          placeholder={descriptionPlaceholder}
+          instructions={descriptionInstructions}
         />
       </Form.FieldGroup>
       <Form.Save text="Save" theme="frontend" cancelCallback={onCancel} />

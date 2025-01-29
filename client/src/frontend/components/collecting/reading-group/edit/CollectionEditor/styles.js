@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { respond } from "theme/styles/mixins";
 
 export const categoryVerticalPadding = `19px`;
 
@@ -14,4 +15,13 @@ export const Editor = styled.div`
   > * + * {
     margin-top: ${categoryVerticalPadding};
   }
+`;
+
+export const CategoryInputs = styled.div`
+  display: grid;
+  column-gap: 40px;
+  row-gap: 25px;
+  grid-template-columns: 1fr;
+
+  ${respond(`grid-template-columns: 1fr 1fr;`, 85)}
 `;
