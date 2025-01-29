@@ -17,8 +17,6 @@ import {
 } from "actions";
 import { meAPI, requests } from "api";
 import { select, loaded } from "utils/entityUtils";
-import ReactGA from "react-ga4";
-import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "routes";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
@@ -26,6 +24,7 @@ import { FrontendModeContext } from "helpers/contexts";
 import { entityStoreActions } from "actions";
 import CookiesBanner from "global/components/CookiesBanner";
 import Utility from "global/components/utility";
+import { Helmet } from "react-helmet-async";
 
 const { request } = entityStoreActions;
 const routes = getRoutes();
@@ -168,7 +167,13 @@ class ManifoldContainer extends PureComponent {
     const tkId = get(this.props.settings, "attributes.theme.typekitId");
     const tkEnabled = !!tkId;
     if (!tkEnabled) return null;
-    return <Typekit kitId={tkId} />;
+    return (
+      <Helmet>
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
+        <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
+        <link rel="stylesheet" href={`https://use.typekit.net/${tkId}.css`} />
+      </Helmet>
+    );
   }
 
   render() {
