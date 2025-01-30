@@ -35,6 +35,7 @@ export default function ProjectsContainer() {
     initialState: filters,
     resetState: filterReset,
     options: {
+      entityType: "project",
       sort: true,
       subjects,
       featured: true,
