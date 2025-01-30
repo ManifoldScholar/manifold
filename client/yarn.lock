@@ -9731,7 +9731,6 @@ __metadata:
     react-error-boundary: "npm:^3.1.4"
     react-ga4: "npm:^1.4.1"
     react-helmet-async: "npm:^1"
-    react-html5video: "npm:^2.x"
     react-i18next: "npm:^11.15.3"
     react-json-tree: "npm:^0.x"
     react-redux: "npm:^7.x"
@@ -12241,16 +12240,6 @@ __metadata:
     react: ^16.6.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
   checksum: 10c0/8f3e6d26beff61d2ed18f7b41561df3e4d83a7582914c7196aa65158c7f3cce939276547d7a0b8987952d9d44131406df74efba02d1f8fa8a3940b49e6ced70b
-  languageName: node
-  linkType: hard
-
-"react-html5video@npm:^2.x":
-  version: 2.5.1
-  resolution: "react-html5video@npm:2.5.1"
-  peerDependencies:
-    react: ">=15.0.0"
-    react-dom: ">=15.0.0"
-  checksum: 10c0/01c0ce0bb5c34db3da12e89b8c3242a0723cd4356b8a448825f9cbe7d236fae8283455358b781d59f1b71c0e02706c81b40dde9960b9028b1d24f3e21676b9e4
   languageName: node
   linkType: hard
 

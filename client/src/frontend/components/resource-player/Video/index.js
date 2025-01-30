@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { DefaultPlayer as Video } from "react-html5video";
 import withDispatch from "hoc/withDispatch";
 import { notificationActions } from "actions";
 import { withTranslation } from "react-i18next";
@@ -18,16 +17,7 @@ class ResourcePlayerVideo extends Component {
   constructor() {
     super();
     this.playerRef = React.createRef();
-    this.state = { inBrowser: false };
   }
-
-  /* eslint-disable react/no-did-mount-set-state */
-  componentDidMount() {
-    if (!this.state.inBrowser) {
-      this.setState({ inBrowser: true });
-    }
-  }
-  /* eslint-enable react/no-did-mount-set-state */
 
   get subKind() {
     return this.props.resource.attributes.subKind;
@@ -81,21 +71,15 @@ class ResourcePlayerVideo extends Component {
   }
 
   get captionsSrc() {
-    if (process.env.NODE_ENV !== "development")
-      return this.props.resource?.attributes?.captionsTrackUrl;
     if (!this.props.resource.attributes.captionsTrackUrl) return null;
 
     const trackUrl = new URL(this.props.resource.attributes.captionsTrackUrl);
-    const host = trackUrl.host;
 
-    // Use the proxy if running over ports in dev to avoid CORS error
-    if (host.includes("localhost")) {
-      const appUrl = new URL(window.location.href);
-      const appPort = appUrl.port;
-      trackUrl.port = appPort;
-    }
+    return trackUrl.pathname;
+  }
 
-    return trackUrl;
+  get allowDownload() {
+    return this.props.resource.attributes.allowDownload;
   }
 
   renderVideoByService() {
@@ -103,43 +87,25 @@ class ResourcePlayerVideo extends Component {
 
     return (
       <Styled.VideoWrapper>
-        <Styled.Video title={this.iframeTitle} {...this.iframeProps} />
+        <Styled.Iframe title={this.iframeTitle} {...this.iframeProps} />
       </Styled.VideoWrapper>
     );
   }
 
   handleError = eventIgnored => {
-    const hasDownload = this.props.resource.attributes.allowDownload;
     const t = this.props.t;
     const notification = {
       level: 1,
       id: `VIDEO_PLAYBACK_ERROR`,
       heading: t("errors.video_playback.heading"),
-      body: `${t("errors.video_playback.body")} ${hasDownload &&
+      body: `${t("errors.video_playback.body")} ${this.allowDownload &&
         t("errors.video_playback.download")}`,
       expiration: 5000
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   };
 
-  trackRef = el => {
-    if (!el) return;
-
-    // ::cue pseudo-elements cannot be positioned with css. Move
-    // them up from the default position, so they aren't covered
-    // by the controls overlay.
-    el.addEventListener("load", () => {
-      if (!el.track?.cues) return;
-      Array.from(el.track.cues).forEach(c => {
-        // eslint-disable-next-line no-param-reassign
-        c.line = -3;
-      });
-    });
-  };
-
   renderFileVideo() {
-    if (!this.state.inBrowser) return null;
-
     const {
       variantPosterStyles,
       attachmentStyles,
@@ -148,10 +114,12 @@ class ResourcePlayerVideo extends Component {
 
     return (
       <Styled.VideoWrapper>
-        <Video
-          ref={this.playerRef}
+        <Styled.Video
+          controls
+          controlsList={!this.allowDownload ? "nodownload" : undefined}
           poster={variantPosterStyles.mediumLandscape}
           onError={this.handleError}
+          loading="lazy"
         >
           <source src={attachmentStyles.original} type="video/mp4" />
           {!!captionsTrackUrl && (
@@ -159,10 +127,9 @@ class ResourcePlayerVideo extends Component {
               kind="captions"
               src={this.captionsSrc.toString()}
               srcLang="en"
-              ref={this.trackRef}
             />
           )}
-        </Video>
+        </Styled.Video>
       </Styled.VideoWrapper>
     );
   }
