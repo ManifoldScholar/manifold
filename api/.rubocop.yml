@@ -177,6 +177,9 @@ Style/CharacterLiteral:
 Style/ExplicitBlockArgument:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
 Style/GlobalStdStream:
   Enabled: false
 
