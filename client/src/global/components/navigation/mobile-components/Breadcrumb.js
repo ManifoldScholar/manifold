@@ -21,13 +21,14 @@ class MobileBreadcrumb extends PureComponent {
 
     const firstMatch = this.match(this.props.links);
     /* eslint-disable no-nested-ternary */
-    const first = journalIsActive
-      ? firstMatch.route === "frontendProjects"
-        ? { label: "titles.journals", route: "frontendJournals" }
-        : firstMatch.route === "backendProjects"
-        ? { label: "titles.journals", route: "backendJournals" }
-        : firstMatch
-      : firstMatch;
+    const first =
+      journalIsActive && firstMatch
+        ? firstMatch.route === "frontendProjects"
+          ? { label: "titles.journals", route: "frontendJournals" }
+          : firstMatch.route === "backendProjects"
+          ? { label: "titles.journals", route: "backendJournals" }
+          : firstMatch
+        : firstMatch;
     /* eslint-enable no-nested-ternary */
 
     if (first) {
