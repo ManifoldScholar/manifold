@@ -36,13 +36,14 @@
     "getter-return": 0,
     "prefer-promise-reject-errors": 0,
     "no-else-return": 0,
+    "no-console": ["error", { "allow": ["warn", "error"] }],
 
     "jsx-a11y/label-has-associated-control": 0,
     "jsx-a11y/control-has-associated-label": 0,
 
     ///////// END NEW //////////////////
 
-    "camelcase": ['error', {
+    "camelcase": ["error", {
       "properties": "never",
       "ignoreDestructuring": false,
       "allow": [
