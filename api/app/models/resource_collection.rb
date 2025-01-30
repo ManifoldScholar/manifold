@@ -1,29 +1,23 @@
-# A collection of resources
+# frozen_string_literal: true
+
+# A collection of {Resource}s.
 class ResourceCollection < ApplicationRecord
-
-  include HasFormattedAttributes
-
-  # Constants
-  TYPEAHEAD_ATTRIBUTES = [:title].freeze
-
-  # Concerns
-  include Collectable
-  include Filterable
   include Attachments
   include Authority::Abilities
+  include Collectable
+  include Filterable
+  include HasFormattedAttributes
   include Sluggable
   include SerializedAbilitiesFor
   include SearchIndexable
 
-  self.authorizer_name = "ProjectChildAuthorizer"
+  TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
-  # PaperTrail
   has_paper_trail meta: {
     parent_item_id: :project_id,
     parent_item_type: "Project"
   }
 
-  # Associations
   belongs_to :project, counter_cache: true
   has_many :collection_resources,
            dependent: :destroy
@@ -40,20 +34,16 @@ class ResourceCollection < ApplicationRecord
                            include_wrap: false
   has_formatted_attribute :description
 
-  # Attachments
   manifold_has_attached_file :thumbnail, :image
 
-  # Validations
   validates :title, presence: true
 
-  # Scopes
   scope :with_order, lambda { |by|
     return order(:title) unless by.present?
 
     order(by)
   }
 
-  # Search
   searchkick(callbacks: :async,
              batch_size: 500,
              word_start: TYPEAHEAD_ATTRIBUTES,
@@ -61,7 +51,6 @@ class ResourceCollection < ApplicationRecord
 
   scope :search_import, -> { includes(:project) }
 
-  # Callbacks
   after_commit :trigger_creation_event, on: [:create]
 
   def search_data
@@ -100,5 +89,4 @@ class ResourceCollection < ApplicationRecord
   def trigger_creation_event
     Event.trigger(EventType[:resource_collection_added], self)
   end
-
 end

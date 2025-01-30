@@ -1,6 +1,13 @@
+# frozen_string_literal: true
+
 # This is a shared authorizer for dependents of {Project projects}
-# that all share the same sort of
+# that all share the same sort of logic.
+#
+# @abstract
+# @see ProjectPropertyAuthorizer
 class ProjectChildAuthorizer < ApplicationAuthorizer
+  delegate :project, to: :resource
+
   # By default, we defer to {ProjectAuthorizer#updatable_by?}.
   def default(_adjective, user, options = {})
     with_project { |p| p.updatable_by? user, options }
@@ -30,6 +37,16 @@ class ProjectChildAuthorizer < ApplicationAuthorizer
 
   def publicly_engageable_by?(user, options = {})
     with_project { |p| p.publicly_engageable_by? user, options }
+  end
+
+  private
+
+  def project_editor_or_author?(user)
+    # :nocov:
+    return false if project.blank?
+    # :nocov:
+
+    user.project_editor_of?(project) || user.project_author_of?(project)
   end
 
   class << self
