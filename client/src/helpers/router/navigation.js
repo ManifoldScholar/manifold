@@ -76,6 +76,10 @@ class Navigation {
         ]
       },
       {
+        label: "titles.projects",
+        route: "backendProjectsAll"
+      },
+      {
         label: "titles.journals",
         route: "backendJournals"
       },
