@@ -30,7 +30,7 @@ export default function bootstrap(getState, dispatch, cookieHelper) {
       () => {
         ch.notice("Initialization: settings loaded", "ok_hand");
       },
-      (err) => {
+      err => {
         console.error(err);
         ch.error("Initialization: settings failed to load");
       }

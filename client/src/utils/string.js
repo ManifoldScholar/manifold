@@ -45,18 +45,20 @@ export function capitalize(s, all = false) {
 }
 
 // https://github.com/wilmoore/brackets2dots.js/blob/master/index.js
+// eslint-disable-next-line no-useless-escape
 const REPLACE_BRACKETS = /\[([^\[\]]+)\]/g;
 const LFT_RT_TRIM_DOTS = /^[.]*|[.]*$/g;
 
 export function brackets2dots(string) {
-  return {}.toString.call(string) == "[object String]"
+  return {}.toString.call(string) === "[object String]"
     ? string.replace(REPLACE_BRACKETS, ".$1").replace(LFT_RT_TRIM_DOTS, "")
     : "";
 }
 
 // https://www.npmjs.com/package/nl2br
 export function nl2br(str, isXhtml) {
-  var breakTag = isXhtml || typeof isXhtml === "undefined" ? "<br />" : "<br>";
+  const breakTag =
+    isXhtml || typeof isXhtml === "undefined" ? "<br />" : "<br>";
   return (str + "").replace(
     /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g,
     "$1" + breakTag + "$2"
