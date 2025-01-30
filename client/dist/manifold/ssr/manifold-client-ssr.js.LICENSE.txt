@@ -91,47 +91,6 @@ object-assign
  */
 
 /*!
- * URI.js - Mutating URLs
- *
- * Version: 1.19.11
- *
- * Author: Rodney Rehm
- * Web: http://medialize.github.io/URI.js/
- *
- * Licensed under
- *   MIT License http://www.opensource.org/licenses/mit-license
- *
- */
-
-/*!
- * URI.js - Mutating URLs
- * IPv6 Support
- *
- * Version: 1.19.11
- *
- * Author: Rodney Rehm
- * Web: http://medialize.github.io/URI.js/
- *
- * Licensed under
- *   MIT License http://www.opensource.org/licenses/mit-license
- *
- */
-
-/*!
- * URI.js - Mutating URLs
- * Second Level Domain (SLD) Support
- *
- * Version: 1.19.11
- *
- * Author: Rodney Rehm
- * Web: http://medialize.github.io/URI.js/
- *
- * Licensed under
- *   MIT License http://www.opensource.org/licenses/mit-license
- *
- */
-
-/*!
  * arr-diff <https://github.com/jonschlinkert/arr-diff>
  *
  * Copyright (c) 2014 Jon Schlinkert, contributors.
@@ -682,8 +641,6 @@ object-assign
 /*! Rule::       \/ */
 
 /*! https://mths.be/he v1.2.0 by @mathias | MIT license */
-
-/*! https://mths.be/punycode v1.4.0 by @mathias */
 
 /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */
 
