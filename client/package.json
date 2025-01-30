@@ -46,12 +46,12 @@
   "dependencies": {
     "@atlaskit/tree": "^8.6.3",
     "@castiron/style-mixins": "^1.0.6",
-    "@docusaurus/react-loadable": "5.5.0",
     "@emotion/babel-plugin": "^11.3.0",
     "@emotion/cache": "^11.5.0",
     "@emotion/react": "^11.5.0",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@loadable/component": "^5.16.4",
     "actioncable": "~5.0.2",
     "autolinker": "^1.x",
     "buffer": "^6.0.3",

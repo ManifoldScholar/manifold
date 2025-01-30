@@ -1,7 +1,11 @@
 import React from "react";
-import SwaggerUI from "./Loader";
+import loadable from "@loadable/component";
 import Layout from "./SwaggerUIComponents/Layout";
 import AuthorizeOperationBtn from "./SwaggerUIComponents/AuthorizeOperationBtn";
+
+const SwaggerUI = loadable(() =>
+  import(/* webpackChunkName: "swagger-ui" */ "./SwaggerUi")
+);
 
 export default class ApiDocs extends React.Component {
   constructor(props) {
