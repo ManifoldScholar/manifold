@@ -56,7 +56,6 @@ module API
       end
 
       # Include conditional for every resource type added
-      # rubocop:disable Style/GuardClause
       def find_parent_resource
         if params.key?(:project_id)
           Project.friendly.find params[:project_id]
@@ -64,7 +63,6 @@ module API
           raise "cannot derive parent resource for permissions"
         end
       end
-      # rubocop:enable Style/GuardClause
 
       # @return [ActiveRecord::Relation<Permission>
       def permissions_scope

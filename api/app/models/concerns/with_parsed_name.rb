@@ -57,12 +57,10 @@ module WithParsedName
   private
 
   def validate_parts!(parts)
-    # rubocop:disable Style/GuardClause
     if parts[:particle].present? && parts[:given].blank?
       parts[:given] = parts[:particle]
       parts[:particle] = nil
     end
-    # rubocop:enable Style/GuardClause
   end
 
   def nickname_not_blank!

@@ -1,6 +1,6 @@
 module Collections
   module Operations
-    # rubocop:disable Style/GuardClause, Metrics/MethodLength
+    # rubocop:disable Metrics/MethodLength
     class CollectorLookups
       extend Dry::Initializer
 
@@ -108,6 +108,6 @@ module Collections
         "#{model.model_name}(#{model.id.inspect})"
       end
     end
-    # rubocop:enable Style/GuardClause, Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength
   end
 end
