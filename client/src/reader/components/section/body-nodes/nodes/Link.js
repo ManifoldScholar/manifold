@@ -29,6 +29,7 @@ class LinkNode extends Component {
 
     try {
       // will only succeed if this.href is a full URL
+      // eslint-disable-next-line no-unused-vars
       const url = new URL(this.href);
       return true;
     } catch (_) {
