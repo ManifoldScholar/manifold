@@ -1,28 +1,28 @@
 import React, { PureComponent, createElement } from "react";
 import PropTypes from "prop-types";
 import he from "he";
-import Loadable from "@docusaurus/react-loadable";
+import loadable from "@loadable/component";
 import { nl2br } from "utils/string";
+
+const Loaded = loadable.lib(() =>
+  import(/* webpackChunkName: "autolinker" */ "autolinker")
+);
 
 const formattedText = props => {
   const sanitized = he.encode(props.text);
   const formatted = nl2br(sanitized);
 
-  const Loaded = Loadable({
-    loader: () => import(/* webpackChunkName: "autolinker" */ "autolinker"),
-    render(autolinker) {
-      return (
+  return (
+    <Loaded>
+      {({ default: autolinker }) => (
         <p
           dangerouslySetInnerHTML={{
             __html: autolinker.link(formatted)
           }}
         />
-      );
-    },
-    loading: () => <p dangerouslySetInnerHTML={{ __html: sanitized }} />
-  });
-
-  return <Loaded {...props} />;
+      )}
+    </Loaded>
+  );
 };
 
 formattedText.propTypes = {

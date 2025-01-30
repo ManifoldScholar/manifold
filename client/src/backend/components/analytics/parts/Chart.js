@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Loadable from "@docusaurus/react-loadable";
 import cloneDeep from "lodash/cloneDeep";
 import merge from "lodash/merge";
 import isDate from "date-fns/isDate";
-import chartOptions from "./chartOptions";
+import loadable from "@loadable/component";
 import { useTranslation } from "react-i18next";
+import chartOptions from "./chartOptions";
 
 function stringToDate(dateStr) {
   // TODO: Remove hardcoded time zone once it's removed from the API.
@@ -20,41 +20,7 @@ function shapeData({ x, y }) {
   };
 }
 
-/* eslint-disable react/prop-types */
-const LoadableChart = Loadable({
-  loader: () => import(/* webpackChunkName: "recharts" */ "./Recharts"),
-  loading: () => null,
-  render(loaded, props) {
-    const {
-      LineChart,
-      Line,
-      XAxis,
-      CartesianGrid,
-      Tooltip,
-      ResponsiveContainer
-    } = loaded;
-    const {
-      data,
-      chartProps,
-      gridProps,
-      xAxisProps,
-      tooltipProps,
-      lineProps
-    } = props;
-
-    return (
-      <ResponsiveContainer>
-        <LineChart data={data} {...chartProps}>
-          <CartesianGrid {...gridProps} />
-          <XAxis dataKey="x" {...xAxisProps} />
-          <Tooltip {...tooltipProps} />
-          <Line dataKey="y" {...lineProps} />
-        </LineChart>
-      </ResponsiveContainer>
-    );
-  }
-});
-/* eslint-enable react/prop-types */
+const LoadableChart = loadable(() => import("./LoadableChart"));
 
 function Chart({ options, data, tooltipLabel, height = 170 }) {
   const { t } = useTranslation();
