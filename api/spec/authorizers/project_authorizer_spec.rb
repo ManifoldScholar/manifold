@@ -206,7 +206,7 @@ RSpec.describe "Project Abilities", :authorizer do
     let(:draft) { true }
 
     before do
-      user.add_role :project_resource_editor, project
+      user.add_role :project_property_manager, project
     end
 
     include_examples "read only"
@@ -286,7 +286,7 @@ RSpec.describe "Project Abilities", :authorizer do
 
     context "when the user is a project resource editor for the project" do
       before do
-        user.add_role :project_resource_editor, project
+        user.add_role :project_property_manager, project
       end
 
       it { is_expected.to be_authorized_to :read, project }

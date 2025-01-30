@@ -26,6 +26,8 @@ FactoryBot.define do
 
     trait :project_read_access do
       association :subject, factory: :project
+
+      read_access
     end
 
     trait :for_user do

@@ -1,19 +1,19 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe RoleName do
   subject { described_class.new }
 
-  let(:admin) { FactoryBot.create :user, :admin }
-  let(:editor) { FactoryBot.create :user, :editor }
-  let(:project_creator) { FactoryBot.create :user, :project_creator }
-  let(:marketeer) { FactoryBot.create :user, :marketeer }
-  let(:reader) { FactoryBot.create :user, :reader }
+  let_it_be(:admin) { FactoryBot.create :user, :admin }
+  let_it_be(:editor) { FactoryBot.create :user, :editor }
+  let_it_be(:project_creator) { FactoryBot.create :user, :project_creator }
+  let_it_be(:marketeer) { FactoryBot.create :user, :marketeer }
+  let_it_be(:reader) { FactoryBot.create :user, :reader }
 
-  let(:project) { FactoryBot.create :project }
+  let_it_be(:project) { FactoryBot.create :project }
 
-  let(:project_author) { FactoryBot.create(:user).tap { |u| u.add_role :project_author, project } }
-  let(:project_resource_editor) { FactoryBot.create(:user).tap { |u| u.add_role :project_resource_editor, project } }
-  let(:project_editor) { FactoryBot.create(:user).tap { |u| u.add_role :project_editor, project } }
+  let_it_be(:project_author) { FactoryBot.create(:user).tap { |u| u.add_role :project_author, project } }
+  let_it_be(:project_property_manager) { FactoryBot.create(:user).tap { |u| u.add_role :project_property_manager, project } }
+  let_it_be(:project_editor) { FactoryBot.create(:user).tap { |u| u.add_role :project_editor, project } }
 
   describe RoleName::Admin, enum: true do
     it { is_expected.to be_an_admin }
@@ -66,14 +66,14 @@ RSpec.describe RoleName do
     it { is_expected.to be_applicable_for_kind project_editor }
   end
 
-  describe RoleName::ProjectResourceEditor, enum: true do
-    it { is_expected.to be_a_project_resource_editor }
+  describe RoleName::ProjectPropertyManager, enum: true do
+    it { is_expected.to be_a_project_property_manager }
     it { is_expected.to be_scoped }
     it { is_expected.not_to be_an_entitlement }
     it { is_expected.to have_expected_resource }
     it { is_expected.not_to be_visible_to_editor }
-    it { is_expected.not_to be_applicable_for project_resource_editor }
-    it { is_expected.to be_applicable_for_kind project_resource_editor }
+    it { is_expected.not_to be_applicable_for project_property_manager }
+    it { is_expected.to be_applicable_for_kind project_property_manager }
   end
 
   describe RoleName::ProjectAuthor, enum: true do
@@ -95,7 +95,7 @@ RSpec.describe RoleName do
     it { is_expected.to be_applicable_for reader }
     it { is_expected.to be_applicable_for project_author }
     it { is_expected.to be_applicable_for project_editor }
-    it { is_expected.to be_applicable_for project_resource_editor }
+    it { is_expected.to be_applicable_for project_property_manager }
     it { is_expected.to be_applicable_for_kind reader }
   end
 
@@ -154,7 +154,7 @@ RSpec.describe RoleName do
         expect(described_class.fetch_for_kind(marketeer)).to be_a_marketeer
         expect(described_class.fetch_for_kind(project_author)).to be_a_project_author
         expect(described_class.fetch_for_kind(project_editor)).to be_a_project_editor
-        expect(described_class.fetch_for_kind(project_resource_editor)).to be_a_project_resource_editor
+        expect(described_class.fetch_for_kind(project_property_manager)).to be_a_project_property_manager
         expect(described_class.fetch_for_kind(reader)).to be_a_reader
       end
     end

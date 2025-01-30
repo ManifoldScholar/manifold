@@ -76,6 +76,10 @@ class Navigation {
         ]
       },
       {
+        label: "titles.projects",
+        route: "backendProjectsAll"
+      },
+      {
         label: "titles.journals",
         route: "backendJournals"
       },
@@ -88,7 +92,7 @@ class Navigation {
       {
         label: "titles.records",
         route: "backendRecords",
-        entity: ["user", "maker", "page", "feature", "annotation", "comment"],
+        entity: ["user", "maker", "page", "feature"],
         ability: "update",
         children: [
           {

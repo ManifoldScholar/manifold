@@ -154,7 +154,7 @@ module Ingestions
 
         private
 
-        # rubocop:disable Metrics/MethodLength, Style/GuardClause
+        # rubocop:disable Metrics/MethodLength
         def infer_defaults!(definition_definer: infer_definition_definer,
                             interaction_namespace: infer_interaction_namespace,
                             interaction_parent: "#{interaction_namespace}::Abstract#{infer_noun_klass}".safe_constantize)
@@ -188,7 +188,7 @@ module Ingestions
             end
           end
         end
-        # rubocop:enable Metrics/MethodLength, Style/GuardClause
+        # rubocop:enable Metrics/MethodLength
 
         def infer_definition_definer
           infer_noun.to_sym

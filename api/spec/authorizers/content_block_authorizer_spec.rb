@@ -41,11 +41,11 @@ RSpec.describe "Content Block Abilities", :authorizer do
     the_subject_behaves_like "instance abilities", ContentBlock, all: true
   end
 
-  context 'when the subject is a reader and project_resource_editor of the content block\'s project' do
+  context 'when the subject is a reader and project_property_manager of the content block\'s project' do
     before(:each) do
       @metadata_maintainer = FactoryBot.create(:user)
       @content_block = FactoryBot.create(:content_block)
-      @metadata_maintainer.add_role :project_resource_editor, @content_block.project
+      @metadata_maintainer.add_role :project_property_manager, @content_block.project
     end
     let(:subject) { @metadata_maintainer }
     let(:object) { @content_block }

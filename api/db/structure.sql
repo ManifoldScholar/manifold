@@ -880,8 +880,8 @@ CREATE TABLE public.journal_issues (
     journal_id uuid NOT NULL,
     journal_volume_id uuid,
     creator_id uuid,
-    number character varying DEFAULT ''::character varying NOT NULL,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    number character varying DEFAULT ''::character varying NOT NULL,
     sort_title integer DEFAULT 0 NOT NULL,
     pending_sort_title integer
 );
@@ -3046,7 +3046,7 @@ CREATE VIEW public.user_derived_roles AS
             WHEN 'project_creator'::text THEN 3
             WHEN 'marketeer'::text THEN 4
             WHEN 'project_editor'::text THEN 5
-            WHEN 'project_resource_editor'::text THEN 6
+            WHEN 'project_property_manager'::text THEN 6
             WHEN 'project_author'::text THEN 7
             WHEN 'reader'::text THEN 8
             ELSE 20
@@ -7363,4 +7363,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250115212958'),
 ('20250115214357'),
 ('20250115224908'),
-('20250122221150');
+('20250122221150'),
+('20250128220613');
+
+

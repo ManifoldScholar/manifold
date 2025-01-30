@@ -2,25 +2,12 @@
 
 # A resource is any asset our source document that is associated with a text.
 class Resource < ApplicationRecord
-
-  # Constants
-  TYPEAHEAD_ATTRIBUTES = [:title].freeze
-  ALLOWED_KINDS = %w(image video audio link pdf document file spreadsheet presentation
-                     interactive).freeze
-  ALLOWED_SUB_KINDS = %w(external_video).freeze
-  IFRAME_ALLOWS_ATTRIBUTES = %w(camera fullscreen).freeze
-
-  # PaperTrail
-  has_paper_trail meta: {
-    parent_item_id: :project_id,
-    parent_item_type: "Project"
-  }
-  # Concerns
   include Authority::Abilities
   include Collectable
   include SerializedAbilitiesFor
   include TrackedCreator
   include Filterable
+  include ProjectProperty
   include Attachments
   include ResourceAttachmentValidation
   include ResourceAttributeResets
@@ -32,7 +19,17 @@ class Resource < ApplicationRecord
   include Metadata
   include SearchIndexable
 
-  # Magic
+  TYPEAHEAD_ATTRIBUTES = [:title].freeze
+  ALLOWED_KINDS = %w(image video audio link pdf document file spreadsheet presentation
+                     interactive).freeze
+  ALLOWED_SUB_KINDS = %w(external_video).freeze
+  IFRAME_ALLOWS_ATTRIBUTES = %w(camera fullscreen).freeze
+
+  has_paper_trail meta: {
+    parent_item_id: :project_id,
+    parent_item_type: "Project"
+  }
+
   with_metadata %w(
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version
@@ -41,7 +38,6 @@ class Resource < ApplicationRecord
   )
   has_sort_title :sort_title_candidate
 
-  # Associations
   belongs_to :project, counter_cache: true
   has_one :thumbnail_fetch_attempt, dependent: :destroy
   has_one :resource_created_event, -> { where event_type: EventType[:resource_added] },
@@ -71,7 +67,6 @@ class Resource < ApplicationRecord
                            include_wrap: false
   has_formatted_attribute :description
 
-  # Validation
   validates :title, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
   validates :sub_kind,
@@ -86,7 +81,6 @@ class Resource < ApplicationRecord
   validate :validate_interactive_dimensions
   validate :validate_iframe_allows
 
-  # Scopes
   scope :by_project, lambda { |project|
     return all unless project.present?
 
@@ -113,14 +107,12 @@ class Resource < ApplicationRecord
   scope :in_default_order, -> { order(sort_title: :asc, created_at: :asc) }
   scope :with_order, ->(by = nil) { by.present? ? reorder(by) : in_default_order }
 
-  # Callbacks
   before_validation :update_kind, :set_fingerprint!
   before_validation :parse_and_set_external_id!, if: :external_video?
   before_update :reset_stale_fields
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_commit :trigger_event_creation, on: [:create]
 
-  # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,

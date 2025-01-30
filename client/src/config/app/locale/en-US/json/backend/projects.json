@@ -129,7 +129,7 @@
       "user_label": "User",
       "user_placeholder": "Select a User",
       "modify_project": "Can modify project?",
-      "modify_resource": "Can modify resource metadata?",
+      "modify_project_properties": "Can modify project resources and texts?",
       "author": "Is a project author?",
       "submit_label": "Save Permissions",
       "project_editor": "Project Editor",

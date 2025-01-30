@@ -2,8 +2,6 @@
 
 # The User model
 class User < ApplicationRecord
-  TYPEAHEAD_ATTRIBUTES = [:title, :first_name, :last_name, :email].freeze
-
   include Authority::Abilities
   include Authority::UserAbilities
   include Collector
@@ -18,6 +16,8 @@ class User < ApplicationRecord
   include WithParsedName
   include SearchIndexable
   include SoftDeletable
+
+  TYPEAHEAD_ATTRIBUTES = [:title, :first_name, :last_name, :email].freeze
 
   classy_enum_attr :role, enum: "RoleName", allow_blank: false, default: :reader
   classy_enum_attr :kind, enum: "RoleName", allow_blank: false, default: :reader
@@ -152,8 +152,8 @@ class User < ApplicationRecord
     has_role? :project_editor, resource
   end
 
-  def project_resource_editor_of?(resource)
-    has_role? :project_resource_editor, resource
+  def project_property_manager_of?(resource)
+    has_role? :project_property_manager, resource
   end
 
   # @return [Favorite]

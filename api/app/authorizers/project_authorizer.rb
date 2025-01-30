@@ -1,3 +1,11 @@
+# frozen_string_literal: true
+
+# An authorizer for {Project} that also controls access to a number of other
+# models owned or otherwise associated to a project.
+#
+# @see ProjectChildAuthorizer
+# @see ProjectProperty
+# @see ProjectPropertyAuthorizer
 class ProjectAuthorizer < ApplicationAuthorizer
   expose_abilities [
     :read_drafts, :read_log, :manage_resources, :create_resources,
@@ -38,11 +46,29 @@ class ProjectAuthorizer < ApplicationAuthorizer
     has_any_role? user, :admin, :editor, :marketeer, :project_editor
   end
 
-  alias resources_creatable_by? updatable_by?
-  alias resource_collections_manageable_by? updatable_by?
-  alias resource_collections_creatable_by? updatable_by?
-  alias texts_manageable_by? updatable_by?
-  alias texts_creatable_by? updatable_by?
+  # @!group Project Property Access Control
+
+  # Whether things like {Text}s, {Resource}s, and {ResourceCollection}s
+  # can be managed by the given {User}.
+  #
+  # @see RoleName::ProjectPropertyManager
+  # @param [User] user
+  # @param [Hash] options
+  def properties_manageable_by?(user, options = {})
+    updatable_by?(user, options) || has_role?(user, :project_property_manager)
+  end
+
+  alias properties_creatable_by? properties_manageable_by?
+
+  alias resources_creatable_by? properties_manageable_by?
+  alias resources_manageable_by? properties_manageable_by?
+  alias resource_collections_manageable_by? properties_manageable_by?
+  alias resource_collections_creatable_by? properties_manageable_by?
+  alias texts_manageable_by? properties_manageable_by?
+  alias texts_creatable_by? properties_manageable_by?
+
+  # @!endgroup
+
   alias twitter_queries_creatable_by? updatable_by?
   alias twitter_queries_manageable_by? updatable_by?
   alias events_manageable_by? updatable_by?
@@ -119,14 +145,6 @@ class ProjectAuthorizer < ApplicationAuthorizer
     end
 
     has_any_role? user, *RoleName.full_read_access
-  end
-
-  # @see #updatable_by?
-  # @see RoleName::ProjectResourceEditor
-  # @param [User] user
-  # @param [Hash] _options
-  def resources_manageable_by?(user, _options = {})
-    updatable_by?(user) || has_role?(user, :project_resource_editor)
   end
 
   # Can the user manage or create any of the entities

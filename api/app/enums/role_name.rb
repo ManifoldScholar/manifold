@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoleName < ClassyEnum::Base
   applicable!
 
@@ -260,7 +262,7 @@ class RoleName::ProjectEditor < RoleName
   provides_full_read_access!
 end
 
-class RoleName::ProjectResourceEditor < RoleName
+class RoleName::ProjectPropertyManager < RoleName
   scoped!
 
   can_update_projects!

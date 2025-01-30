@@ -2,17 +2,17 @@
 
 # A single Text
 class Text < ApplicationRecord
-  TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
+  extend Memoist
 
   include Authority::Abilities
   include Collectable
   include SerializedAbilitiesFor
   include Sluggable
   include StoresFingerprints
-  extend Memoist
   include Collaborative
   include Citable
   include Filterable
+  include ProjectProperty
   include TrackedCreator
   include Metadata
   include Attachments
@@ -20,6 +20,8 @@ class Text < ApplicationRecord
   include SoftDeletable
   include TableOfContentsWithCollected
   include TimestampScopes
+
+  TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
 
   has_paper_trail meta: {
     parent_item_id: :project_id,
@@ -58,10 +60,8 @@ class Text < ApplicationRecord
     exports_as_epub_v3: [:boolean, { default: false, store_key: :epub_v3 }]
   )
 
-  # Acts as List
   acts_as_list scope: [:project_id, :category_id]
 
-  # Associations
   belongs_to :project, inverse_of: :texts, optional: true, touch: true
   belongs_to :category, optional: true
   belongs_to :start_text_section, optional: true, class_name: "TextSection",
@@ -95,7 +95,6 @@ class Text < ApplicationRecord
            dependent: :destroy,
            inverse_of: :text
 
-  # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
   delegate :publication_date, to: :project, prefix: true, allow_nil: true
   delegate :title, to: :category, prefix: true
@@ -112,12 +111,10 @@ class Text < ApplicationRecord
 
   after_initialize :migrate_toc!
 
-  # Validation
   validate :validate_start_text_section
   validate :validate_toc
   validate :ensure_main_title_present!, on: :from_api
 
-  # Scopes
   scope :published, ->(published) { where(published: published) if published.present? }
   scope :by_category, ->(category) { where(category: category) if category.present? }
   scope :uncategorized, -> { where(category: nil) }
@@ -127,14 +124,11 @@ class Text < ApplicationRecord
   scope :with_current_epub_v3_export, -> { where(id: TextExportStatus.current_text_ids) }
   scope :pending_epub_v3_export, -> { exports_as_epub_v3.sans_current_epub_v3_export }
 
-  # Attachments
   manifold_has_attached_file :cover, :image
 
-  # Callbacks
   after_commit :trigger_text_added_event, on: [:create, :update]
   after_commit :inject_global_stylesheet, on: :create
 
-  # Search
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,

@@ -2,6 +2,12 @@
 
 FactoryBot.define do
   factory :user do
+    transient do
+      authored_projects { [] }
+      edited_projects { [] }
+      property_managed_projects { [] }
+    end
+
     first_name { "John" }
     last_name { "Rambo" }
     sequence(:email) { |n| "john#{SecureRandom.uuid}-@rambo.com" }
@@ -30,6 +36,20 @@ FactoryBot.define do
 
     trait :reader do
       role { :reader }
+    end
+
+    after(:create) do |user, evaluator|
+      role_mapping = {
+        project_author: Array(evaluator.authored_projects),
+        project_editor: Array(evaluator.edited_projects),
+        project_property_manager: Array(evaluator.property_managed_projects),
+      }
+
+      role_mapping.each do |role, projects|
+        projects.each do |project|
+          user.add_role role, project
+        end
+      end
     end
 
     trait :with_confirmed_email do

@@ -54,6 +54,8 @@ Authority.configure do |config|
     bulk_delete: "bulk_deletable",
     resolve_flags: "flags_resolvable",
     manage: "manageable",
+    manage_properties: "properties_manageable",
+    create_properties: "properties_creatable",
     manage_project_exportations: "project_exportations_manageable",
     create_project_exportations: "project_exportations_creatable",
     manage_resources: "resources_manageable",

@@ -11,7 +11,7 @@ import EntitiesList, {
   ProjectRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
-import { useFetch, useFromStore, useListQueryParams } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 import { useDispatch } from "react-redux";
 
 const { flush } = entityStoreActions;
@@ -20,9 +20,6 @@ function ProjectsListContainer({
   entitiesListSearchParams,
   entitiesListSearchProps
 }) {
-  const authentication = useFromStore("authentication");
-  const { currentUser } = authentication ?? {};
-
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
@@ -31,8 +28,7 @@ function ProjectsListContainer({
     initSize: 20,
     initFilters: {
       ...entitiesListSearchParams.projectsList,
-      withUpdateAbility:
-        currentUser?.attributes?.abilities?.viewDrafts || undefined
+      withUpdateAbility: true
     },
     initSearchProps: entitiesListSearchProps("projectsList")
   });
