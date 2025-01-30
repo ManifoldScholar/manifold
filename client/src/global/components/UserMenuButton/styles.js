@@ -11,6 +11,7 @@ export const Button = styled.button`
   ${buttonUnstyled}
   height: 100%;
   vertical-align: middle;
+  outline: 0;
 
   .avatar {
     ${buttonAvatar(42, "var(--header-foreground-color)")}
