@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import URI from "urijs";
 import { Link } from "react-router-dom";
+import config from "config";
 import validatedNode from "../higher-order/ValidatedNode";
 
 class LinkNode extends Component {
@@ -11,36 +11,38 @@ class LinkNode extends Component {
     children: PropTypes.array
   };
 
-  hasUri() {
-    return this.props.attributes.hasOwnProperty("href");
+  get href() {
+    return this.props.attributes.href;
   }
 
-  isProxyUri() {
-    if (this.hasUri()) {
-      return /api\/proxy\//.test(this.props.attributes.href);
-    }
-    return false;
+  get hasHref() {
+    return !!("href" in this.props.attributes);
   }
 
-  isAbsoluteUri() {
-    if (!this.hasUri()) {
-      return false;
-    }
+  get isProxyURL() {
+    if (!this.hasHref) return false;
+    return /api\/proxy\//.test(this.href);
+  }
+
+  get isAbsoluteURL() {
+    if (!this.hasHref) return false;
 
     try {
-      return URI.parse(this.props.attributes.href).protocol;
-    } catch (e) {
+      // will only succeed if this.href is a full URL
+      const url = new URL(this.href);
       return true;
+    } catch (_) {
+      // return false for relative links; otherwise treat malformed URLs as absolute
+      return !this.href.startsWith("/");
     }
   }
 
   adjustedAttributes() {
-    const parsedURI = URI.parse(this.props.attributes.href);
-    const pathname = parsedURI.path;
-    const query = parsedURI.query;
+    const parsedURI = new URL(this.href, config.services.client.url);
+    const { pathname, search: query, hash } = parsedURI;
     const adjustedAttributes = { to: { pathname, query } };
-    if (parsedURI.fragment) {
-      adjustedAttributes.to.hash = `#${parsedURI.fragment}`;
+    if (hash) {
+      adjustedAttributes.to.hash = hash;
     }
     delete Object.assign(adjustedAttributes, this.props.attributes).href;
     return adjustedAttributes;
@@ -57,7 +59,7 @@ class LinkNode extends Component {
   }
 
   render() {
-    if (!this.hasUri() || this.isAbsoluteUri() || this.isProxyUri()) {
+    if (!this.hasHref || this.isAbsoluteURL || this.isProxyURL) {
       const Tag = this.props.tag;
       return (
         <Tag
