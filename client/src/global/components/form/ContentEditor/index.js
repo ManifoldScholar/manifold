@@ -1,14 +1,7 @@
-import React from "react";
+import loadable from "@loadable/component";
 import setter from "../setter";
-import Loadable from "@docusaurus/react-loadable";
 
-const Editor = Loadable({
-  loader: () => import("./components/Wrapper").then(editor => editor.default),
-  render(EditorComponent, props) {
-    return <EditorComponent {...props} />;
-  },
-  loading: () => null
-});
+const Editor = loadable(() => import("./components/Wrapper"));
 
 export default setter(Editor);
 
