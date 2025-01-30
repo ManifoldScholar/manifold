@@ -115,7 +115,6 @@ export const buttonUnstyled = `
   background: transparent;
   border: 0;
   border-radius: 0;
-  outline: none;
   appearance: none;
 `;
 
