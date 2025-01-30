@@ -1958,7 +1958,8 @@ CREATE TABLE public.reading_group_categories (
     slug text NOT NULL,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    markdown_only boolean DEFAULT false
 );
 
 
@@ -7361,6 +7362,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20241218232725'),
 ('20250115212958'),
 ('20250115214357'),
-('20250115224908');
+('20250115224908'),
+('20250129200019');
 
 

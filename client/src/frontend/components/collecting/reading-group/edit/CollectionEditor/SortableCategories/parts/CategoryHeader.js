@@ -12,18 +12,22 @@ function CategoryHeader({
   groupId,
   dragProps,
   onCategoryEdit,
-  onCategoryRemove
+  onCategoryRemove,
+  initExpanded
 }) {
   const { t } = useTranslation();
 
   return (
     <>
-      <Collapse>
+      <Collapse initialVisible={initExpanded}>
         <Styled.Header>
           <Styled.Title>{category?.attributes.title}</Styled.Title>
           {dragProps && (
             <Styled.Actions>
-              <CategoryRemove onRemove={() => onCategoryRemove(category)} />
+              <CategoryRemove
+                isMarkdown={!!category.attributes.markdownOnly}
+                onRemove={() => onCategoryRemove(category)}
+              />
               <Styled.Action as={Collapse.Toggle}>
                 <IconComposer icon="annotate32" size="default" />
                 <span className="screen-reader-text">
@@ -71,7 +75,8 @@ CategoryHeader.propTypes = {
     snapshot: PropTypes.object.isRequired
   }),
   onCategoryEdit: PropTypes.func,
-  onCategoryRemove: PropTypes.func
+  onCategoryRemove: PropTypes.func,
+  initExpanded: PropTypes.bool
 };
 
 export default CategoryHeader;
