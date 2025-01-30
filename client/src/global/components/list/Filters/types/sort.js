@@ -1,5 +1,5 @@
 export const sortFilter = (filters, updateFilters, params, t) => {
-  const includePublished = params.entityType === "project";
+  const includePublished = params?.entityType === "project";
 
   return {
     label: t("filters.labels.sort_results"),
