@@ -1,43 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import loadable from "@loadable/component";
 import setter from "../setter";
 import withDispatch from "hoc/withDispatch";
-import Errorable from "../Errorable";
-import Loadable from "@docusaurus/react-loadable";
-import BaseLabel from "../BaseLabel";
-import Instructions from "../Instructions";
 
-/* eslint-disable react/prop-types */
-export const CodeAreaInput = Loadable({
-  loader: () =>
-    import(/* webpackChunkName: "ace-editor" */ "./Ace").then(
-      ace => ace.default
-    ),
-  render(Editor, props) {
-    return (
-      <Errorable
-        className="wide"
-        name={props.name}
-        errors={props.errors}
-        label={props.label}
-      >
-        {props.label && (
-          <BaseLabel
-            as="h4"
-            label={props.label}
-            hasInstructions={!!props.instructions}
-          />
-        )}
-        {props.instructions ? (
-          <Instructions instructions={props.instructions} />
-        ) : null}
-        <Editor {...props} />
-      </Errorable>
-    );
-  },
-  loading: () => null
-});
-/* eslint-enable react/prop-types */
+const CodeAreaInput = loadable(() =>
+  import(/* webpackChunkName: "ace-editor" */ "./AceEditor")
+);
 
 class FormCodeArea extends Component {
   static displayName = "Form.CodeArea";
