@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @see Entitlement
 class EntitlementAuthorizer < ApplicationAuthorizer
   # By default, we defer to {ProjectAuthorizer#updatable_by?}.
@@ -45,30 +47,38 @@ class EntitlementAuthorizer < ApplicationAuthorizer
   class << self
     # @param [Symbol] _adjective
     # @param [User] user
-    # @param [Hash] _options
+    # @param [Hash] options
+    # @option options [ApplicationRecord] :for
     # @return [Boolean]
-    def default(_adjective, user, _options = {})
-      might_access? user
+    def default(_adjective, user, options = {})
+      might_access? user, options
     end
 
     # @param [User] user
-    # @param [Hash] _options
-    def creatable_by?(user, _options = {})
-      might_access? user
+    # @param [Hash] options
+    # @option options [ApplicationRecord] :for
+    def creatable_by?(user, options = {})
+      might_access? user, options
     end
 
     # @param [User] user
-    # @param [Hash] _options
-    def manageable_by?(user, _options = {})
-      might_access? user
+    # @param [Hash] options
+    # @option options [ApplicationRecord] :for
+    def manageable_by?(user, options = {})
+      might_access? user, options
     end
 
     # @param [User] user
-    # @param [Hash] _options
+    # @param [Hash] options
+    # @option options [ApplicationRecord] :for
     def readable_by?(user, options = {})
-      return true unless options
-      return admin_permissions?(user) if options[:unscoped]
-      return options[:for].updatable_by? user if options[:for]
+      if options.present?
+        if options[:unscoped]
+          return admin_permissions?(user)
+        elsif options[:for]
+          return might_access_scoped?(user, options)
+        end
+      end
 
       true
     end
@@ -79,13 +89,24 @@ class EntitlementAuthorizer < ApplicationAuthorizer
 
     private
 
-    def might_access?(user)
-      editor_permissions?(user) || provided_by?(user)
+    # @param [User] user
+    # @param [Hash] options
+    # @option options [ApplicationRecord] :for
+    def might_access?(user, options)
+      editor_permissions?(user) || provided_by?(user) || might_access_scoped?(user, options)
+    end
+
+    # @param [User] user
+    # @param [Hash] options
+    # @option options [ApplicationRecord] :for
+    def might_access_scoped?(user, options)
+      return false unless options && options[:for].respond_to?(:updatable_by?)
+
+      options[:for].updatable_by?(user)
     end
 
     def provided_by?(user)
       Entitler.has? user
     end
   end
-
 end
