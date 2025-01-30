@@ -29,6 +29,10 @@ jobs:
         working-directory: "./client"
         run: yarn lint
 
+      - name: "Check for unused dependencies"
+        working-directory: "./client"
+        run: yarn depcheck
+
   api-lint:
     if: github.event.pull_request.draft == false
 
