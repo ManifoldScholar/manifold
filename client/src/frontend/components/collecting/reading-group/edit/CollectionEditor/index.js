@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import findKey from "lodash/findKey";
 import { readingGroupsAPI, collectingAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import CategoryCreator from "./CategoryCreator";
@@ -76,38 +75,60 @@ function CollectionEditor({
   function determineMovePosition(destinationId, type, direction) {
     if (direction === "down") return 1;
     const destinationCollectables =
-      collection.attributes.categoryMappings[destinationId][type];
+      collection.attributes.categoryMappings[destinationId]?.[type];
     return destinationCollectables?.length + 1 || 1;
   }
 
-  function handleCollectableMove({ id, type, direction }) {
-    const mappings = collection.attributes.categoryMappings;
-    const sourceId = findKey(mappings, category =>
-      category[type]?.includes(id)
-    );
-    // get array of IDs and move '$uncategorized$' to end to reflect UI order
-    const sortedCategories = [
-      ...Object.keys(mappings).slice(1),
-      Object.keys(mappings)[0]
-    ];
-    const sourceIndex = sortedCategories.indexOf(sourceId);
+  const validateTargetPosition = (targetPosition, direction) => {
+    if (targetPosition === 0 || targetPosition > categories.length + 1)
+      return targetPosition;
 
-    if (sourceIndex === sortedCategories.length - 1 && direction === "down") {
-      announce(t("messages.cannot_move_down"));
-      return;
+    const destination = categories.find(
+      c => c.attributes.position === targetPosition
+    );
+
+    if (destination?.attributes.markdownOnly) {
+      const next =
+        direction === "down" ? targetPosition + 1 : targetPosition - 1;
+      return validateTargetPosition(next, direction);
     }
-    if (sourceIndex === 0 && direction === "up") {
+
+    return targetPosition;
+  };
+
+  const handleCollectableMove = sourceId => ({ id, type, direction }) => {
+    const sourcePosition =
+      sourceId === "$uncategorized$"
+        ? categories.length + 1
+        : categories.find(c => c.id === sourceId)?.attributes.position;
+
+    const initialTargetPosition =
+      direction === "down" ? sourcePosition + 1 : sourcePosition - 1;
+
+    const targetPosition = validateTargetPosition(
+      initialTargetPosition,
+      direction
+    );
+
+    if (targetPosition === 0) {
       announce(t("messages.cannot_move_up"));
       return;
     }
 
-    const destinationId =
-      direction === "down"
-        ? sortedCategories[sourceIndex + 1]
-        : sortedCategories[sourceIndex - 1];
-    const destination = collection.attributes.categories.find(
-      c => c.id === destinationId
+    if (targetPosition > categories.length + 1) {
+      announce(t("messages.cannot_move_down"));
+      return;
+    }
+
+    const destination = categories.find(
+      c => c.attributes.position === targetPosition
     );
+
+    const destinationId =
+      targetPosition === categories.length + 1
+        ? "$uncategorized$"
+        : destination.id;
+
     const position = determineMovePosition(destinationId, type, direction);
 
     const updatedCollectable = {
@@ -119,10 +140,11 @@ function CollectionEditor({
     updateCollectable(updatedCollectable);
     announce(
       t("messages.item_moved_category", {
-        category: destination?.title.plaintext || t("common.uncategorized")
+        category:
+          destination?.attributes.title.plaintext || t("common.uncategorized")
       })
     );
-  }
+  };
 
   const callbacks = {
     onCategoryEdit: refresh,
