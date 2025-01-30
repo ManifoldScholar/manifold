@@ -9,6 +9,7 @@
 //
 // https://github.com/domchristie/humps/blob/master/humps.js
 
+/* eslint-disable */
 (function(global) {
   var _processKeys = function(convert, obj, options) {
     if (
