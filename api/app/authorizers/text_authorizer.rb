@@ -1,17 +1,33 @@
-class TextAuthorizer < ProjectChildAuthorizer
+# frozen_string_literal: true
 
+# @see Text
+class TextAuthorizer < ProjectPropertyAuthorizer
   expose_abilities [:notate, :engage_publicly]
 
-  def notatable_by?(user, _options = {})
-    user.project_editor_of?(resource.project) ||
-      user.project_author_of?(resource.project) ||
-      resource.project.resources_manageable_by?(user)
+  delegate :ignore_access_restrictions?, to: :resource
+  delegate :readable_by?, to: :project, allow_nil: true, prefix: true
+
+  def notatable_by?(user, options = {})
+    project_editor_or_author?(user) || manageable_by?(user, options)
   end
 
   def readable_by?(user, options = {})
-    return true if resource.ignore_access_restrictions && resource.project.readable_by?(user)
+    return true if ignore_access_restrictions? && project_readable_by?(user, options)
 
-    with_project { |p| p.fully_readable_by? user, options }
+    super
   end
 
+  # @see ProjectAuthorizer#texts_creatable_by?
+  def specifically_creatable_by?(user, options = {})
+    with_project do |p|
+      p.texts_creatable_by?(user, options)
+    end
+  end
+
+  # @see ProjectAuthorizer#texts_manageable_by?
+  def specifically_manageable_by?(user, options = {})
+    with_project do |p|
+      p.texts_manageable_by?(user, options)
+    end
+  end
 end

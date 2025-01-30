@@ -15,7 +15,7 @@ export default function DashboardContainer() {
         "marketeer",
         "project_creator",
         "project_editor",
-        "project_resource_editor"
+        "project_property_manager"
       ]}
       failureNotification
     >
