@@ -1,6 +1,6 @@
 import React from "react";
-import format from "date-fns/format";
-import isDate from "date-fns/isDate";
+import { format } from "date-fns/format";
+import { isDate } from "date-fns/isDate";
 
 const HIGHLIGHT_COLOR = "#61CAFF";
 const AXIS_COLOR = "#9a9a9a";

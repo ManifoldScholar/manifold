@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { statisticsAPI, analyticReportsAPI, requests } from "api";
-import subDays from "date-fns/subDays";
-import intervalToDuration from "date-fns/intervalToDuration";
-import formatDuration from "date-fns/formatDuration";
-import startOfDay from "date-fns/startOfDay";
-import endOfDay from "date-fns/endOfDay";
-import sub from "date-fns/sub";
+import { subDays } from "date-fns/subDays";
+import { intervalToDuration } from "date-fns/intervalToDuration";
+import { formatDuration } from "date-fns/formatDuration";
+import { startOfDay } from "date-fns/startOfDay";
+import { endOfDay } from "date-fns/endOfDay";
+import { sub } from "date-fns/sub";
 import uuid from "uuid";
 
 const { request } = entityStoreActions;
