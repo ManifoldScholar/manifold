@@ -27,10 +27,9 @@ function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
 
   const onDelete = useCallback(
     makerId => {
-      const heading = t("modals.delete_contributor");
-      const message = t("modals.confirm_body");
+      const heading = t("modals.remove_contributor");
       if (confirm)
-        confirm(heading, message, async () => {
+        confirm(heading, null, async () => {
           await destroyCollaborator("projects", project.id, { maker: makerId });
           refresh();
         });
