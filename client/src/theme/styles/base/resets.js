@@ -1,5 +1,3 @@
-import { logicalWithFallback } from "@castiron/style-mixins";
-
 /**
  * Resets
  *
@@ -42,7 +40,7 @@ export default `
 
   /* Set core body defaults */
   body {
-    ${logicalWithFallback({ "min-block-size": "100vh" })}
+    min-block-size: 100vh;
     text-rendering: geometricPrecision;
   }
 
@@ -56,10 +54,8 @@ export default `
   img,
   picture {
     display: block;
-    ${logicalWithFallback({
-      "max-inline-size": "100%",
-      "block-size": "auto"
-    })}
+    max-inline-size: 100%;
+    block-size: auto;
   }
 
   /* Inherit fonts for inputs and buttons */
