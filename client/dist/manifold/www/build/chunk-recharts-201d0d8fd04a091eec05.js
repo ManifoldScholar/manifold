@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmanifold_client=self.webpackChunkmanifold_client||[]).push([[563],{32851:(e,i,n)=>{n.r(i),n.d(i,{CartesianGrid:()=>l.d,Line:()=>s.N,LineChart:()=>a.b,ResponsiveContainer:()=>o.u,Tooltip:()=>r.m,XAxis:()=>t.W});var a=n(20579),s=n(74496),t=n(77984),l=n(69107),r=n(82747),o=n(44653)}}]);
