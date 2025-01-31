@@ -4,7 +4,7 @@ import backend from "./json/backend";
 import reader from "./json/reader";
 import frontend from "./json/frontend";
 import shared from "./json/shared";
-import enUS from "date-fns/locale/en-US";
+import { enUS } from "date-fns/locale/en-US";
 
 export default {
   translation: {
