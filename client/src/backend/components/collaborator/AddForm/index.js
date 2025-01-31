@@ -8,7 +8,7 @@ import { makersAPI, collaboratorsAPI } from "api";
 import { useApiCallback } from "hooks";
 import capitalize from "lodash/capitalize";
 
-export default function AddEditCollaboratorForm({
+export default function AddCollaboratorForm({
   entityId,
   entityType,
   closeUrl,
@@ -100,9 +100,9 @@ export default function AddEditCollaboratorForm({
   );
 }
 
-AddEditCollaboratorForm.displayName = "Collaborator.AddEdit.Form";
+AddCollaboratorForm.displayName = "Collaborator.AddEdit.Form";
 
-AddEditCollaboratorForm.propTypes = {
+AddCollaboratorForm.propTypes = {
   entityId: PropTypes.string.isRequired,
   entityType: PropTypes.oneOf(["Project", "Text"]).isRequired,
   closeUrl: PropTypes.string.isRequired,

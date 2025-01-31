@@ -1,2 +1,2 @@
-export Add from "./AddEdit";
+export Add from "./Add";
 export List from "./List";
