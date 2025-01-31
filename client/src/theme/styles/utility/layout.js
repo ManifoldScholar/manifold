@@ -1,4 +1,3 @@
-import { logicalWithFallback } from "@castiron/style-mixins";
 import {
   containerPrototype,
   containerFocus,
@@ -16,7 +15,7 @@ export const readerContainerWidthClasses = readerContainerWidths
   .map(
     (width, index) => `
     &.container-width-${index} {
-      ${logicalWithFallback({ "max-inline-size": width })}
+      max-inline-size: ${width};
     }
   `
   )
