@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import cloneDeep from "lodash/cloneDeep";
 import merge from "lodash/merge";
-import isDate from "date-fns/isDate";
+import { isDate } from "date-fns/isDate";
 import loadable from "@loadable/component";
 import { useTranslation } from "react-i18next";
 import chartOptions from "./chartOptions";

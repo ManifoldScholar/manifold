@@ -6,7 +6,7 @@ import setter from "../setter";
 import Errorable from "global/components/form/Errorable";
 import PickerComponent from "./PickerComponent";
 import isDate from "lodash/isDate";
-import format from "date-fns/format";
+import { format } from "date-fns/format";
 import Instructions from "../Instructions";
 
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
