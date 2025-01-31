@@ -1,22 +1,18 @@
 {
   "assetsByChunkName": {
     "build/manifold-client-browser": [
-      "build/manifold-client-browser-50b68e9fd34198bd7aae.js"
+      "build/manifold-client-browser-bc086a2a3689d8396152.js"
     ],
     "ace-editor": [
       "build/chunk-676-ebcd7ef24279c7af0c03.js",
-      "build/chunk-ace-editor-006fdbf253a79a8a2182.js"
+      "build/chunk-ace-editor-8c3b13220eeded612f1d.js"
     ],
     "autolinker": [
       "build/chunk-autolinker-3a787970ce186973f9c4.js"
     ],
     "swagger-ui": [
-      "build/chunk-202-3661a7a5a258a59fd3a3.js",
-      "build/chunk-swagger-ui-8be9e669e0334f453037.js"
-    ],
-    "recharts": [
-      "build/chunk-909-34121d2bcf42816510b4.js",
-      "build/chunk-recharts-201d0d8fd04a091eec05.js"
+      "build/chunk-650-64190349dc7f39fdc2ff.js",
+      "build/chunk-swagger-ui-0f0a252dc224c5eca180.js"
     ]
   }
 }
