@@ -10,7 +10,7 @@ shared_examples_for "a collaborative serializer" do
       collaborator = FactoryBot.create :collaborator
       object.collaborators = [collaborator]
       subject = described_class.new(object, params: { full: true })
-      expect(subject.serializable_hash[:data][:relationships][:collaborators].count).to be 1
+      expect(subject.serializable_hash[:data][:relationships][:flattenedCollaborators].count).to be 1
     end
   end
 end

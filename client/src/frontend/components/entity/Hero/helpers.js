@@ -43,7 +43,7 @@ export const getPartsData = entity => {
   const social = !!twitter || !!instagram || !!facebook || !!hashtag;
 
   const description = entity.attributes.descriptionFormatted;
-  const { creators, contributors } = entity.relationships;
+  const { creators, flattenedCollaborators } = entity.relationships;
   const cover = entity.attributes.coverStyles?.medium;
   return {
     callouts,
@@ -60,7 +60,7 @@ export const getPartsData = entity => {
     social,
     description,
     creators,
-    contributors,
+    flattenedCollaborators,
     cover
   };
 };

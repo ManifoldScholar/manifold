@@ -112,6 +112,12 @@ Rails.application.routes.draw do
       resources :journal_volumes, except: [:create, :index]
       resources :ingestion_sources, except: [:create, :index]
       resources :annotations, only: [:index, :show]
+      resources :collaborators do
+        collection do
+          get :roles
+          post :create_from_roles
+        end
+      end
 
       resources :texts do
         put :toggle_export_epub_v3, on: :member, path: "export_epub_v3"
@@ -124,6 +130,11 @@ Rails.application.routes.draw do
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
             resources :ingestions, only: [:create], controller: "/api/v1/texts/relationships/text_section_ingestions"
             resources :ingestion_sources, only: [:index, :create]
+            resources :collaborators, only: [:index, :show] do
+              collection do
+                delete :destroy
+              end
+            end
 
             resources :text_sections do
               scope module: :text_sections do
@@ -207,7 +218,11 @@ Rails.application.routes.draw do
             resources :events, only: [:index]
             resources :twitter_queries, only: [:index, :create]
             resources :resource_imports, only: [:create, :update, :show]
-            resources :collaborators, only: [:index, :show]
+            resources :collaborators, only: [:index, :show] do
+              collection do
+                delete :destroy
+              end
+            end
             resources :text_categories, only: [:index, :create, :show]
             resources :texts, only: [:create]
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"

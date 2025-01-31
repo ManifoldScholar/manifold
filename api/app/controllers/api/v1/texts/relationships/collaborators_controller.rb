@@ -1,12 +1,13 @@
 module API
   module V1
-    module Projects
+    module Texts
       module Relationships
-        # Responds with collaborators in a project
-        class CollaboratorsController < AbstractProjectChildController
+        # Responds with collaborators for a text
+        class CollaboratorsController < ApplicationController
+          before_action :set_text, only: [:index, :destroy, :show]
 
           resourceful! Collaborator, authorize_options: { except: [:index, :show] } do
-            @project.collaborators.filtered(collaborator_filter_params)
+            @text.collaborators.filtered(collaborator_filter_params)
           end
 
           def index
@@ -14,7 +15,7 @@ module API
             render_multiple_resources(
               @collaborators,
               include: %w(maker),
-              location: api_v1_project_relationships_collaborators_url(@project)
+              location: api_v1_text_relationships_collaborators_url(@text)
             )
           end
 
@@ -32,8 +33,12 @@ module API
 
           private
 
+          def set_text
+            @text = Text.friendly.find(params[:text_id])
+          end
+
           def load_collaborator
-            @project.collaborators.find(params[:id])
+            @text.collaborators.find(params[:id])
           end
 
           def maker_filter_present?
