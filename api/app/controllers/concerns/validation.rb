@@ -149,18 +149,10 @@ module Validation
 
   def collaborator_params
     params.require(:data)
-    attributes = [:role, :position]
+    attributes = [:role]
     relationships = [:maker, :collaboratable]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
-  end
-
-  def collaborator_list_params
-    params.require(:data)
-    attributes = [:role, :position]
-    relationships = [:maker, :collaboratable]
-    param_config = structure_params(attributes: attributes, relationships: relationships)
-    params.permit([param_config])
   end
 
   def resource_collection_params

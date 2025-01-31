@@ -24,6 +24,8 @@ module API
           end
 
           def destroy
+            return render_no_maker_error unless maker_filter_present?
+
             @collaborators = load_collaborators
             @collaborators.destroy_all
           end
@@ -32,6 +34,18 @@ module API
 
           def load_collaborator
             @project.collaborators.find(params[:id])
+          end
+
+          def maker_filter_present?
+            maker_id = collaborator_filter_params[:maker]
+
+            maker_id.present?
+          end
+
+          def render_no_maker_error
+            message = "Maker filter is required"
+
+            render json: { errors: [message] }, status: :unprocessable_entity
           end
         end
       end
