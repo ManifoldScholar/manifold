@@ -2,18 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
-import AddEditCollaboratorForm from "backend/components/collaborator/AddEditForm";
+import AddCollaboratorForm from "backend/components/collaborator/AddForm";
 import lh from "helpers/linkHandler";
 
-// Not using edit for now, but can adapt this container following pattern from assets if we do later
-
-export default function AddEditCollaboratorContainer({ projectId, refresh }) {
+export default function AddCollaboratorContainer({ projectId, refresh }) {
   const { t } = useTranslation();
 
   return (
     <section>
       <Layout.DrawerHeader title={t("projects.add_contributor_label")} />
-      <AddEditCollaboratorForm
+      <AddCollaboratorForm
         entityId={projectId}
         entityType="Project"
         closeUrl={lh.link("backendProjectCollaborators", projectId)}
@@ -23,9 +21,9 @@ export default function AddEditCollaboratorContainer({ projectId, refresh }) {
   );
 }
 
-AddEditCollaboratorContainer.displayName = "Project.Collaborators.AddEdit";
+AddCollaboratorContainer.displayName = "Project.Collaborators.Add";
 
-AddEditCollaboratorContainer.propTypes = {
+AddCollaboratorContainer.propTypes = {
   projectId: PropTypes.string.isRequired,
   refresh: PropTypes.func
 };
