@@ -1,5 +1,5 @@
 import get from "lodash/get";
-import { respondBase, fluidScaleBase } from "@castiron/style-mixins";
+import { fluidScaleBase } from "@castiron/style-mixins";
 import { breakpoints } from "../variables/media";
 
 // for replacing Sass `@include respond($break65 - 1, max)`
@@ -10,7 +10,11 @@ export function breakpointLessOne(value) {
 
 export function respond(content, size, operator = "min", aspect = "width") {
   const pxSize = get(breakpoints, size, size);
-  return respondBase(content, pxSize, operator, aspect);
+  return `
+    @media all and (${operator}-${aspect}: ${pxSize}) {
+      ${content}
+    }
+  `;
 }
 
 export function fluidScale(max, min, maxVw, minVw) {
