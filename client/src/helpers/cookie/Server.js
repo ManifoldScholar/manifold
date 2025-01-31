@@ -1,4 +1,4 @@
-import cookie from "cookie";
+import * as cookie from "cookie";
 
 export default class ServerCookie {
   constructor(req, res) {

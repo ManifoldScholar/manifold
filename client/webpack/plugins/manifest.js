@@ -1,6 +1,6 @@
 import paths from "../helpers/paths";
 import fs from "fs";
-import mkdirp from "mkdirp";
+import { mkdirp } from "mkdirp";
 
 function filterOutHMRAssets(group) {
   return (
