@@ -112,7 +112,7 @@ Rails.application.routes.draw do
       resources :journal_volumes, except: [:create, :index]
       resources :ingestion_sources, except: [:create, :index]
       resources :annotations, only: [:index, :show]
-      resources :collaborators, only: [:create] do
+      resources :collaborators do
         collection do
           get :roles
         end
@@ -131,6 +131,7 @@ Rails.application.routes.draw do
             resources :ingestion_sources, only: [:index, :create]
             resources :collaborators, only: [:index, :show] do
               collection do
+                post :create_from_roles
                 delete :destroy
               end
             end
@@ -219,6 +220,7 @@ Rails.application.routes.draw do
             resources :resource_imports, only: [:create, :update, :show]
             resources :collaborators, only: [:index, :show] do
               collection do
+                post :create_from_roles
                 delete :destroy
               end
             end
