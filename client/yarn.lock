@@ -15,16 +15,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@atlaskit/tree@npm:^8.6.3":
-  version: 8.8.5
-  resolution: "@atlaskit/tree@npm:8.8.5"
+"@atlaskit/tree@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@atlaskit/tree@npm:9.0.0"
   dependencies:
     "@babel/runtime": "npm:^7.0.0"
     css-box-model: "npm:^1.2.0"
     react-beautiful-dnd-next: "npm:11.0.5"
   peerDependencies:
-    react: ^16.8.0
-  checksum: 10c0/f1539d3ae9c2515cf45ace414325e5b843f746677bc19f6760f7744feed15cdc03d88652223bd516eb7676d823596eaf14984b983a846a45b47df646150b9aa9
+    react: ^18.2.0
+  checksum: 10c0/9faf5e3ca0bb00ab9d982d4f8bdf31e7a75ef9e2aadc466b0e836bce196b9735d35e65cc2f55ac9f309c7aa10530a6234a67c162364136a6a6f41365f583f150
   languageName: node
   linkType: hard
 
@@ -8471,7 +8471,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "manifold-client@workspace:."
   dependencies:
-    "@atlaskit/tree": "npm:^8.6.3"
+    "@atlaskit/tree": "npm:^9.0.0"
     "@babel/core": "npm:^7.26.7"
     "@babel/plugin-proposal-decorators": "npm:^7.25.9"
     "@babel/plugin-proposal-export-default-from": "npm:^7.25.9"
@@ -8546,7 +8546,7 @@ __metadata:
     react: "npm:^18.x"
     react-ace: "npm:7.0.5"
     react-attr-converter: "npm:^0.3.1"
-    react-beautiful-dnd: "npm:^13.0.0"
+    react-beautiful-dnd: "npm:^13.1.1"
     react-collapse: "npm:^5.0.0"
     react-datepicker: "npm:^3.3.0"
     react-dom: "npm:^18.x"
@@ -10698,9 +10698,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-beautiful-dnd@npm:^13.0.0":
-  version: 13.1.0
-  resolution: "react-beautiful-dnd@npm:13.1.0"
+"react-beautiful-dnd@npm:^13.1.1":
+  version: 13.1.1
+  resolution: "react-beautiful-dnd@npm:13.1.1"
   dependencies:
     "@babel/runtime": "npm:^7.9.2"
     css-box-model: "npm:^1.2.0"
@@ -10710,9 +10710,9 @@ __metadata:
     redux: "npm:^4.0.4"
     use-memo-one: "npm:^1.1.1"
   peerDependencies:
-    react: ^16.8.5 || ^17.0.0
-    react-dom: ^16.8.5 || ^17.0.0
-  checksum: 10c0/f42bbaec4b10bb0eea07317140ce10c92eec5c7b5274dffe0da4a10717d1939ad48425d9cd6a74b709617e01fded2b37a3584ef0744adca62f3c5192c763b425
+    react: ^16.8.5 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.5 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/5bc04f6dcfededc6e5c90e696cda07816a018eada52f7438ded839f03786e3f319aa8a0bc7b14b86fb26a12c0e5ba53e8c5a4bf3832a8f827dd70f1410675525
   languageName: node
   linkType: hard
 
