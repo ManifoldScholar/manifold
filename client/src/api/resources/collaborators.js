@@ -18,17 +18,17 @@ export default {
 
   create(collaborators) {
     return {
-      endpoint: `/api/v1/collaborators`,
+      endpoint: `/api/v1/collaborators/create_from_roles`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "collaborators", data: collaborators })
+        body: JSON.stringify({ data: collaborators })
       }
     };
   },
 
   show(entityType, entityId, id) {
     return {
-      endpoint: `/api/v1/${entityType}/${entityId}/relationships/permissions/${id}`,
+      endpoint: `/api/v1/${entityType}/${entityId}/relationships/collaborators/${id}`,
       method: "GET"
     };
   },
