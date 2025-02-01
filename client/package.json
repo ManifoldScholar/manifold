@@ -44,7 +44,7 @@
     "*.scss": "yarn fix"
   },
   "dependencies": {
-    "@atlaskit/tree": "^8.6.3",
+    "@atlaskit/tree": "^9.0.0",
     "@castiron/style-mixins": "^2.0.0",
     "@emotion/babel-plugin": "^11.13.5",
     "@emotion/cache": "^11.14.0",
@@ -86,7 +86,7 @@
     "react": "^18.x",
     "react-ace": "7.0.5",
     "react-attr-converter": "^0.3.1",
-    "react-beautiful-dnd": "^13.0.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-collapse": "^5.0.0",
     "react-datepicker": "^3.3.0",
     "react-dom": "^18.x",
