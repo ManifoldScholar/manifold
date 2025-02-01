@@ -1,5 +1,4 @@
 import React from "react";
-import * as ReactDOMServer from "react-dom/server";
 import PropTypes from "prop-types";
 import {
   getAnnotationStyles,
