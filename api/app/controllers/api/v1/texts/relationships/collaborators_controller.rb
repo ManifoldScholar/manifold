@@ -4,7 +4,11 @@ module API
       module Relationships
         # Responds with collaborators for a text
         class CollaboratorsController < ApplicationController
-          before_action :set_text, only: [:index, :destroy, :show]
+          include API::V1::ManagesFlattenedCollaborators
+
+          authority_actions create_from_roles: "create"
+
+          before_action :set_text
 
           resourceful! Collaborator, authorize_options: { except: [:index, :show] } do
             @text.collaborators.filtered(collaborator_filter_params)
@@ -24,7 +28,14 @@ module API
             render_single_resource(@collaborator)
           end
 
+          def create_from_roles
+            @collaborators = collaborators_from_roles(collaborators_from_roles_params, @text.id, Text.name)
+            render_multiple_resources(@collaborators, serializer: ::V1::CollaboratorSerializer)
+          end
+
           def destroy
+            return render_no_maker_error unless maker_param_present?
+
             @collaborators = load_collaborators
             @collaborators.destroy_all
           end

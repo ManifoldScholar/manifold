@@ -42,16 +42,17 @@ export default function AddCollaboratorForm({
 
   const onSubmit = async e => {
     e.preventDefault();
-    const contributions = roles.map(role => ({
+
+    const data = {
       attributes: {
-        role
+        roles
       },
       relationships: {
-        maker: { data: { id: makerId.id } },
+        maker: { data: { id: makerId.id, type: "maker" } },
         collaboratable: { data: { id: entityId, type: entityType } }
       }
-    }));
-    const { errors } = await createCollaborator(contributions);
+    };
+    const { errors } = await createCollaborator(data);
 
     if (!errors) {
       if (refresh) refresh();
