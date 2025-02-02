@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import classNames from "classnames";
 import Notifications from "global/containers/Notifications";
 import FrontMatter from "../FrontMatter";

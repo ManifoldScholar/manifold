@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import { useUID } from "react-uid";
 import TrapContent from "./Content";
 import { usePreventBodyScroll } from "hooks";
