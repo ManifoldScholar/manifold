@@ -8,7 +8,7 @@ import memoize from "lodash/memoize";
 import UserLinks from "./mobile-components/UserLinks";
 import MobileSearch from "./mobile-components/Search";
 import MobileBreadcrumb from "./mobile-components/Breadcrumb";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import IconComposer from "global/components/utility/IconComposer";
 import { FrontendModeContext } from "helpers/contexts";
 
