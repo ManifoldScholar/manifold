@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`reader/components/annotation/popup/menus/Main matches the snapshot when rendered 1`] = `"<div hidden=\\"\\" style=\\"display: none;\\" role=\\"menu\\" tabindex=\\"-1\\" data-dialog=\\"true\\" aria-label=\\"actions.annotate\\" class=\\"annotation-popup__menu\\"><div class=\\"annotation-popup__menu-inner\\"></div><div class=\\"annotation-popup__tail\\"></div></div>"`;

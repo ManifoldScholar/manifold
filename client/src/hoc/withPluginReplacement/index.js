@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "../hoist-non-react-statics";
 import { connect } from "react-redux";
 import pluginRegistry from "services/plugin/registry";
 
