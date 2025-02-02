@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { requests } from "api";
 import { select, loaded } from "utils/entityUtils";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "../hoist-non-react-statics";
 import { connect } from "react-redux";
 import { uiReadingGroupActions } from "actions";
 import { ReaderContext } from "helpers/contexts";

@@ -1,5 +1,5 @@
 import React from "react";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "../hoist-non-react-statics";
 import { connect } from "react-redux";
 
 function getDisplayName(WrappedComponent) {
