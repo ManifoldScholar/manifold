@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "hoc/hoist-non-react-statics";
 import get from "lodash/get";
 import has from "lodash/has";
 import withFormContext from "hoc/withFormContext";
