@@ -62,7 +62,7 @@
     "dotenv": "^16.4.7",
     "fast-copy": "^3.0.2",
     "filesize": "^10.1.6",
-    "focus-trap-react": "10.0.1",
+    "focus-trap-react": "11.x",
     "he": "^1.2.0",
     "hoist-non-react-statics": "^3.0",
     "html-react-parser": "^5.2.2",
