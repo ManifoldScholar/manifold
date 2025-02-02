@@ -64,7 +64,6 @@
     "filesize": "^10.1.6",
     "focus-trap-react": "11.x",
     "he": "^1.2.0",
-    "hoist-non-react-statics": "^3.0",
     "html-react-parser": "^5.2.2",
     "http-proxy-middleware": "^0.17.2",
     "http-shutdown": "^1.2.2",
