@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import { useUID } from "react-uid";
 import Header from "./Header";
 
