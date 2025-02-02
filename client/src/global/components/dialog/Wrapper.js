@@ -5,7 +5,7 @@ import { withTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import isString from "lodash/isString";
 import IconComposer from "global/components/utility/IconComposer";
 import BodyClass from "hoc/BodyClass";
