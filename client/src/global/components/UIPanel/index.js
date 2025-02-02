@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { CSSTransition } from "react-transition-group";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 
 export default function UIPanel(props) {
   const visibility = props.visibility[props.id];
