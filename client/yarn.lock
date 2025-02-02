@@ -6722,7 +6722,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.0, hoist-non-react-statics@npm:^3.1.0, hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1, hoist-non-react-statics@npm:^3.3.2":
+"hoist-non-react-statics@npm:^3.1.0, hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.1, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -8520,7 +8520,6 @@ __metadata:
     filesize: "npm:^10.1.6"
     focus-trap-react: "npm:11.x"
     he: "npm:^1.2.0"
-    hoist-non-react-statics: "npm:^3.0"
     html-react-parser: "npm:^5.2.2"
     http-proxy-middleware: "npm:^0.17.2"
     http-shutdown: "npm:^1.2.2"
