@@ -1,5 +1,5 @@
 import React from "react";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "../hoist-non-react-statics";
 import withSettings from "hoc/withSettings";
 import { Route } from "react-router-dom";
 import frontendRoutes from "frontend/routes";

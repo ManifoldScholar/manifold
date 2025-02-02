@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "../hoist-non-react-statics";
 import memoize from "lodash/memoize";
 import isPlainObject from "lodash/isPlainObject";
 import pickBy from "lodash/pickBy";
