@@ -6125,26 +6125,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"focus-trap-react@npm:10.0.1":
-  version: 10.0.1
-  resolution: "focus-trap-react@npm:10.0.1"
+"focus-trap-react@npm:11.x":
+  version: 11.0.3
+  resolution: "focus-trap-react@npm:11.0.3"
   dependencies:
-    focus-trap: "npm:^7.1.0"
-    tabbable: "npm:^6.0.1"
+    focus-trap: "npm:^7.6.4"
+    tabbable: "npm:^6.2.0"
   peerDependencies:
-    prop-types: ^15.8.1
-    react: ">=16.3.0"
-    react-dom: ">=16.3.0"
-  checksum: 10c0/c0dc8e2d4c8b4bec48edecc7e923b6f12a33793d7f98698952dcbcb8dee5488b157dae2000b7c064399f0313a43354e05ca5046cb945ee4a7c3b1db604c62929
+    "@types/react": ^18.0.0 || ^19.0.0
+    "@types/react-dom": ^18.0.0 || ^19.0.0
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  checksum: 10c0/5a4829720901e32ef8cb0783a91e06262e079ab4a0537ffa21d866b1b70d6d383a4ee14baa19e84d952a304b4b08814a1c1fbdb2307d79a2995977735376ae45
   languageName: node
   linkType: hard
 
-"focus-trap@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "focus-trap@npm:7.1.0"
+"focus-trap@npm:^7.6.4":
+  version: 7.6.4
+  resolution: "focus-trap@npm:7.6.4"
   dependencies:
-    tabbable: "npm:^6.0.1"
-  checksum: 10c0/4fdb75b34db1dd192ec54161dc0dfa10aa367627a8745455dadfc7d84208788bf59741c9e5e0c19f102021c2f01af41330745611e771389e88d39da6b59c2cef
+    tabbable: "npm:^6.2.0"
+  checksum: 10c0/ed810d47fd904a5e0269e822d98e634c6cbdd7222046c712ef299bdd26a422db754e3cec04e6517065b12be4b47f65c21f6244e0c07a308b1060985463d518cb
   languageName: node
   linkType: hard
 
@@ -8517,7 +8518,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^4.2.0"
     fast-copy: "npm:^3.0.2"
     filesize: "npm:^10.1.6"
-    focus-trap-react: "npm:10.0.1"
+    focus-trap-react: "npm:11.x"
     he: "npm:^1.2.0"
     hoist-non-react-statics: "npm:^3.0"
     html-react-parser: "npm:^5.2.2"
@@ -13081,10 +13082,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tabbable@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "tabbable@npm:6.0.1"
-  checksum: 10c0/0455492c01e77092d8ccc506e83709cbd28c280e9dd3b12cbebd273c25d72d909d45470f8066e40519fd1c7b04868c47c7b467c85f3b943c52a10a6260e2f3e8
+"tabbable@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "tabbable@npm:6.2.0"
+  checksum: 10c0/ced8b38f05f2de62cd46836d77c2646c42b8c9713f5bd265daf0e78ff5ac73d3ba48a7ca45f348bafeef29b23da7187c72250742d37627883ef89cbd7fa76898
   languageName: node
   linkType: hard
 
