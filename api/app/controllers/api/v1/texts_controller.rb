@@ -53,7 +53,7 @@ module API
       protected
 
       def includes
-        [:project, :category, :creators, :contributors, :stylesheets]
+        [:project, :category, :creators, :contributors, :flattened_collaborators, :stylesheets]
       end
 
       def scope_for_texts

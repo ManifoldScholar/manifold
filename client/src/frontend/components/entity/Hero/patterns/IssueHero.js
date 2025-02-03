@@ -31,7 +31,7 @@ export default function IssueHero({ entity, mock }) {
     social,
     description,
     creators,
-    contributors,
+    flattenedCollaborators,
     cover
   } = getPartsData(entity);
 
@@ -45,10 +45,10 @@ export default function IssueHero({ entity, mock }) {
         )}
         TopLeftComponent={
           <>
-            {(creators || contributors || description) && (
+            {(flattenedCollaborators || description) && (
               <Meta
                 creators={creators}
-                contributors={contributors}
+                flattenedCollaborators={flattenedCollaborators}
                 description={description}
               />
             )}

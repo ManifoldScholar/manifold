@@ -600,6 +600,10 @@ module Validation
     params.permit(filter: [:featured, :keyword, :typeahead, :used])[:filter] || {}
   end
 
+  def collaborator_filter_params
+    params.permit(filter: [:maker])[:filter] || {}
+  end
+
   def entitlement_filter_params
     params.permit(filter: [:keyword])[:filter] || {}
   end

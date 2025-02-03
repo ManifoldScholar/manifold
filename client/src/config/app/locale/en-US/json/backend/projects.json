@@ -12,6 +12,8 @@
     "add_twitter_label": "Add New Twitter Query",
     "manage_resources": "Manage Resources",
     "manage_resource_collections": "Manage Resource Collections",
+    "contributors_header": "Manage Contributors",
+    "add_contributor_label": "Add Contributor",
     "forms": {
       "title_label": "Title",
       "title_placeholder": "Enter Project Title",
