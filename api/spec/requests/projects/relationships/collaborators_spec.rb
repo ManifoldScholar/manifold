@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Project Collaborators API", type: :request do
+  it_behaves_like "a controller handling flattened collaborators", :project
 
   let(:project) { FactoryBot.create(:project) }
   let(:maker) { FactoryBot.create(:maker) }

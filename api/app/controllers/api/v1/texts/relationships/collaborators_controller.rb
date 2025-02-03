@@ -6,7 +6,7 @@ module API
         class CollaboratorsController < ApplicationController
           include API::V1::ManagesFlattenedCollaborators
 
-          authority_actions create_from_roles: "create"
+          authority_actions create_from_roles: :create
 
           before_action :set_text
 
