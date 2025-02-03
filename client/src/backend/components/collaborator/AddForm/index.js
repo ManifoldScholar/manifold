@@ -44,15 +44,14 @@ export default function AddCollaboratorForm({
     e.preventDefault();
 
     const data = {
-      attributes: {
-        roles
-      },
-      relationships: {
-        maker: { data: { id: makerId.id, type: "maker" } },
-        collaboratable: { data: { id: entityId, type: entityType } }
-      }
+      roles,
+      maker: { data: { id: makerId.id, type: "maker" } }
     };
-    const { errors } = await createCollaborator(data);
+    const { errors } = await createCollaborator(
+      `${entityType.toLowerCase()}s`,
+      entityId,
+      data
+    );
 
     if (!errors) {
       if (refresh) refresh();

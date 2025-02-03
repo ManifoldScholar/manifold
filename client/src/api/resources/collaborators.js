@@ -16,9 +16,9 @@ export default {
     };
   },
 
-  create(collaborators) {
+  create(entityType, entityId, collaborators) {
     return {
-      endpoint: `/api/v1/collaborators/create_from_roles`,
+      endpoint: `/api/v1/${entityType}/${entityId}/relationships/collaborators/create_from_roles`,
       method: "POST",
       options: {
         body: JSON.stringify({ data: collaborators })
