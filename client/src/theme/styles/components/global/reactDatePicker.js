@@ -93,5 +93,17 @@ export default `
       background-color: var(--box-strong-bg-color);
     }
   }
+
+  &__aria-live {
+    position: absolute;
+    clip-path: circle(0);
+    border: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    width: 1px;
+    white-space: nowrap;
+  }
 }
 `;
