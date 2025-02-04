@@ -71,6 +71,7 @@ function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
             {children}
           </div>
         )}
+        popperPlacement="bottom-start"
       />
     </>
   );
