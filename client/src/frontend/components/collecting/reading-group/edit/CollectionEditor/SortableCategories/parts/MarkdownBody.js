@@ -5,7 +5,7 @@ export default function MarkdownBody({ category }) {
   const descriptionFormatted = category?.attributes?.descriptionFormatted;
 
   return descriptionFormatted ? (
-    <Styled.MarkdownBody
+    <Styled.MarkdownContent
       className="markdown-body"
       dangerouslySetInnerHTML={{ __html: descriptionFormatted }}
     />
