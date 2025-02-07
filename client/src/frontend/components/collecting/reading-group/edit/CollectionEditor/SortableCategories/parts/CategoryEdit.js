@@ -16,7 +16,7 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
 
   const nameLabel = isMarkdown ? t("common.title") : t("forms.category.name");
   const descriptionLabel = isMarkdown
-    ? t("common.body")
+    ? t("common.content")
     : t("forms.category.description");
   const descriptionPlaceholder = isMarkdown
     ? t("forms.category.markdown_body_placeholder")
@@ -34,12 +34,14 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
       className="form-secondary"
     >
       <Form.FieldGroup>
-        <Form.TextInput
-          wide
-          label={nameLabel}
-          name="attributes[title]"
-          placeholder={t("forms.category.name_placeholder")}
-        />
+        {!isMarkdown && (
+          <Form.TextInput
+            wide
+            label={nameLabel}
+            name="attributes[title]"
+            placeholder={t("forms.category.name_placeholder")}
+          />
+        )}
         <Form.TextArea
           wide
           height={122}
