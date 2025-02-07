@@ -33,11 +33,13 @@ function Category({ category, mappings, responses, onUncollect }) {
   }
 
   const {
-    attributes: { title, descriptionFormatted }
+    attributes: { title, descriptionFormatted, markdownOnly }
   } = category;
 
+  const CategoryComponent = markdownOnly ? Styled.Markdown : Styled.Category;
+
   return (
-    <Styled.Category>
+    <CategoryComponent>
       <Styled.Header>
         <Styled.Title>{title}</Styled.Title>
         {descriptionFormatted && (
@@ -56,7 +58,7 @@ function Category({ category, mappings, responses, onUncollect }) {
         />
         <CollectedResources {...getCollectedProps("resources")} />
       </div>
-    </Styled.Category>
+    </CategoryComponent>
   );
 }
 

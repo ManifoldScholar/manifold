@@ -6,6 +6,7 @@ import {
   rgba
 } from "theme/styles/mixins";
 import { collectableTypeVerticalPadding } from "../styles";
+import { Description } from "frontend/components/collecting/reading-group/static/Category/styles";
 
 const shadowSize = `10px`;
 const halfShadowSize = `5px`;
@@ -75,10 +76,6 @@ export const TypeHeaderText = styled.h4`
   color: inherit;
 `;
 
-export const MarkdownBody = styled.div`
-  font-family: var(--font-family-heading);
-  color: inherit;
-  font-size: 16px;
-  line-height: 1.438;
-  color: var(--color-base-neutral90);
+export const MarkdownContent = styled(Description)`
+  margin: 0;
 `;
