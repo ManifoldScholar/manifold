@@ -23,5 +23,5 @@ export const CategoryInputs = styled.div`
   row-gap: 25px;
   grid-template-columns: 1fr;
 
-  ${respond(`grid-template-columns: 1fr 1fr;`, 85)}
+  ${respond(`grid-template-columns: 1fr auto;`, 85)}
 `;

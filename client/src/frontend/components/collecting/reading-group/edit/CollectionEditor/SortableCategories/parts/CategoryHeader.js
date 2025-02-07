@@ -17,15 +17,17 @@ function CategoryHeader({
 }) {
   const { t } = useTranslation();
 
+  const { markdownOnly, title } = category?.attributes ?? {};
+
   return (
     <>
       <Collapse initialVisible={initExpanded}>
         <Styled.Header>
-          <Styled.Title>{category?.attributes.title}</Styled.Title>
+          {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
           {dragProps && (
             <Styled.Actions>
               <CategoryRemove
-                isMarkdown={!!category.attributes.markdownOnly}
+                isMarkdown={!!markdownOnly}
                 onRemove={() => onCategoryRemove(category)}
               />
               <Styled.Action as={Collapse.Toggle}>

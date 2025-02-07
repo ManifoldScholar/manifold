@@ -11,6 +11,8 @@ const inputHeight = collectableMinHeight;
 export const CategoryCreator = styled.form`
   --label-color: var(--color-base-neutral80);
   --label-margin-bottom: 20px;
+
+  align-self: end;
 `;
 
 export const Label = styled.label`
@@ -69,4 +71,9 @@ export const Button = styled.button`
   > * + * {
     margin-inline-start: 0.75em;
   }
+`;
+
+export const MarkdownButton = styled(Button)`
+  border-radius: var(--box-border-radius);
+  margin-inline-start: auto;
 `;

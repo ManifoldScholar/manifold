@@ -20,6 +20,7 @@ export const Header = styled.header`
   background-color: var(--box-medium-bg-color);
   border-top-left-radius: var(--box-border-radius);
   border-top-right-radius: var(--box-border-radius);
+  min-block-size: 52px;
 `;
 
 export const Title = styled.h3`
@@ -40,6 +41,10 @@ export const Actions = styled.div`
   align-items: center;
   margin-inline-start: 10px;
   color: var(--color);
+
+  &:only-child {
+    margin-inline-start: auto;
+  }
 `;
 
 export const Action = styled.div`

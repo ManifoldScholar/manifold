@@ -159,7 +159,11 @@ function CollectionEditor({
     <Styled.Editor>
       <Styled.CategoryInputs>
         <CategoryCreator onSubmit={createCategory} />
-        <CategoryCreator onSubmit={createCategory} isMarkdown />
+        <CategoryCreator
+          onSubmit={createCategory}
+          count={categories?.length ?? 0}
+          isMarkdown
+        />
       </Styled.CategoryInputs>
       <SortableCategories
         collection={collection}
