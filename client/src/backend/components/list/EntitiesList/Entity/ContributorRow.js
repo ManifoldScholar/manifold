@@ -32,7 +32,10 @@ function ContributorRow({ entity, onDelete, ...props }) {
     <span className="entity-row__utility">
       <button
         className="entity-row__utility-button"
-        onClick={() => onDelete(makerId)}
+        onClick={e => {
+          e.preventDefault();
+          onDelete(makerId);
+        }}
         title={t("actions.delete")}
       >
         <Utility.IconComposer icon="delete32" size={26} />
