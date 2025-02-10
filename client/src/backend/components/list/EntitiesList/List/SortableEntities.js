@@ -58,10 +58,13 @@ export default class SortableEntities extends PureComponent {
         orderedEntities: this.setOrderByChange(source.index, destination.index)
       },
       () => {
-        this.reorderCallback({
-          id: entity.id,
-          position: this.getAdjustedPosition(destination.index)
-        });
+        this.reorderCallback(
+          {
+            id: entity.id,
+            position: this.getAdjustedPosition(destination.index)
+          },
+          this.state.orderedEntities
+        );
       }
     );
   };
