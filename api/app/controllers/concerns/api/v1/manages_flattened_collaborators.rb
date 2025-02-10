@@ -48,6 +48,29 @@ module API
 
         render json: { errors: [message] }, status: :unprocessable_entity
       end
+
+      def position_params
+        params.require(:data)
+        collaborator = [:id, :type, :position]
+        param_config = { data: { collaborators: [collaborator] } }
+        params.permit(param_config)
+      end
+
+      def update_positions(params)
+        raw_params = params.to_unsafe_h
+
+        collaborators = raw_params.dig(:data, :collaborators)
+
+        collaborators.each_with_object([]) do |collaborator_params, arr|
+          id = collaborator_params[:id]
+          position = collaborator_params[:position] ||= arr.size
+
+          @collaborator = Collaborator.find(id)
+          @collaborator.position = position
+          @collaborator.save
+          arr << @collaborator
+        end
+      end
     end
   end
 end
