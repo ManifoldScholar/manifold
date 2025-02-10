@@ -21,7 +21,7 @@ function ContributorRow({ entity, onDelete, ...props }) {
   const additionalProps = {
     title: attributes.makerName,
     subtitle: roles.map(r => capitalize(r).replaceAll("_", " ")).join(", "),
-    figure: <EntityThumbnail.User entity={maker} />,
+    figure: <EntityThumbnail.Maker entity={maker} />,
     figureSize: "small",
     figureShape: "circle",
     onRowClick: lh.link("backendRecordsMaker", makerId),

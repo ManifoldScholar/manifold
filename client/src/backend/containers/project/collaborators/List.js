@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { collaboratorsAPI } from "api";
@@ -11,6 +11,7 @@ import EntitiesList, {
 import Authorization from "helpers/authorization";
 import { useApiCallback } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
+import Form from "global/components/form";
 
 function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
   const { t } = useTranslation();
@@ -37,6 +38,52 @@ function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
     [project.id, confirm, destroyCollaborator, t, refresh]
   );
 
+  const [ordered, setOrdered] = useState([]);
+
+  const onReorder = (_change, flattenedCollaborators) => {
+    const update = flattenedCollaborators.map((fc, i) => ({
+      id: fc.id,
+      position: i + 1,
+      collaborators: fc.attributes.collaborators
+    }));
+    setOrdered(update);
+  };
+
+  const reorderCollaborators = useApiCallback(collaboratorsAPI.reorder);
+
+  const onSubmit = async e => {
+    e.preventDefault();
+
+    if (!ordered.length) return;
+
+    let offset = 0;
+
+    const data = ordered
+      .map(fc => {
+        const collaborators = fc.collaborators.map((c, i) => {
+          const cData = {
+            id: c,
+            type: "collaborators",
+            position: offset + fc.position + i
+          };
+
+          if (i > 0) offset += 1;
+
+          return cData;
+        });
+        return collaborators;
+      })
+      .flat();
+
+    const { errors } = await reorderCollaborators("projects", project.id, {
+      collaborators: data
+    });
+
+    if (!errors) {
+      if (refresh) refresh();
+    }
+  };
+
   return (
     <section>
       {childRoutes(route, {
@@ -44,26 +91,35 @@ function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
         drawerProps: { closeUrl },
         childProps: { refresh, projectId: project.id }
       })}
-      <EntitiesList
-        className="full-width"
-        title={t("projects.contributors_header")}
-        titleStyle="bar"
-        titleTag="h2"
-        entityComponent={ContributorRow}
-        entityComponentProps={canUpdate ? { onDelete } : null}
-        entities={project?.relationships?.flattenedCollaborators ?? []}
-        buttons={
-          canUpdate
-            ? [
-                <Button
-                  path={lh.link("backendProjectCollaboratorNew", project.id)}
-                  type="add"
-                  text={t("projects.add_contributor_label")}
-                />
-              ]
-            : []
-        }
-      />
+      <form
+        onSubmit={onSubmit}
+        method="post"
+        className="backend form-secondary"
+      >
+        <EntitiesList
+          className="full-width"
+          title={t("projects.contributors_header")}
+          titleStyle="bar"
+          titleTag="h2"
+          callbacks={{ onReorder }}
+          sortableStyle="tight"
+          entityComponent={ContributorRow}
+          entityComponentProps={canUpdate ? { onDelete } : null}
+          entities={project?.relationships?.flattenedCollaborators ?? []}
+          buttons={
+            canUpdate
+              ? [
+                  <Button
+                    path={lh.link("backendProjectCollaboratorNew", project.id)}
+                    type="add"
+                    text={t("projects.add_contributor_label")}
+                  />
+                ]
+              : []
+          }
+        />
+        <Form.Save marginTop />
+      </form>
     </section>
   );
 }

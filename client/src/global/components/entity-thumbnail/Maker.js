@@ -6,7 +6,7 @@ export default class EntityThumbnailUser extends PureComponent {
   static displayName = "EntityThumbnail.Maker";
 
   static propTypes = {
-    entity: PropTypes.object.isRequired,
+    entity: PropTypes.object,
     variant: PropTypes.string.isRequired,
     width: PropTypes.string,
     height: PropTypes.string,
@@ -19,7 +19,7 @@ export default class EntityThumbnailUser extends PureComponent {
   };
 
   get attr() {
-    return this.props.entity.attributes;
+    return this.props.entity?.attributes;
   }
 
   get variant() {

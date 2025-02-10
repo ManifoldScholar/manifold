@@ -12,4 +12,6 @@ export const FormButtonsWrapper = styled(FieldWrapper)`
     display: inline-block;
     width: auto;
   }
+
+  ${({ $marginTop }) => $marginTop && `margin-block-start: 40px;`}
 `;
