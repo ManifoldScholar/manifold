@@ -1419,10 +1419,13 @@ CREATE VIEW public.flattened_collaborators AS
     collaborators.maker_id,
     array_agg(collaborators.role ORDER BY collaborators.priority) AS roles,
     min(collaborators.priority) AS priority,
-    min(collaborators.importance) AS importance
+    min(collaborators.importance) AS importance,
+    array_agg(collaborators.id) AS collaborators,
+    min(collaborators."position") AS min_position
    FROM public.collaborators
   WHERE (collaborators.maker_id IS NOT NULL)
-  GROUP BY collaborators.collaboratable_id, collaborators.collaboratable_type, collaborators.maker_id;
+  GROUP BY collaborators.collaboratable_id, collaborators.collaboratable_type, collaborators.maker_id
+  ORDER BY (min(collaborators."position"));
 
 
 --
@@ -7366,4 +7369,5 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250115224908'),
 ('20250122221150'),
 ('20250128220613'),
-('20250129200019');
+('20250129200019'),
+('20250210192150');

@@ -84,4 +84,58 @@ shared_examples_for "a controller handling flattened collaborators" do | factory
       end
     end
   end
+
+  describe "updates collaborator positions" do
+    let_it_be(:collaborator_one) {
+      FactoryBot.create(:collaborator, maker: maker_one, collaboratable: object, role: :author, position: 1)
+    }
+    let_it_be(:collaborator_two) {
+      FactoryBot.create(:collaborator, maker: maker_one, collaboratable: object, role: :editor, position: 2)
+    }
+    let_it_be(:collaborator_three) {
+      FactoryBot.create(:collaborator, maker: maker_two, collaboratable: object, role: :editor, position: 3)
+    }
+
+    let(:collaborators) do
+      [
+        { id: collaborator_one.id, type: "collaborators", position: 3 },
+        { id: collaborator_two.id, type: "collaborators", position: 2 },
+        { id: collaborator_three.id, type: "collaborators", position: 1 },
+      ]
+    end
+
+    let(:params) do
+      {
+        data: {
+          collaborators: collaborators,
+        }
+      }
+    end
+    let(:path) do
+      url_for([:reorder, :api, :v1, object, :relationships, :collaborators])
+    end
+
+    context "when the user is a project_creator" do
+      let(:headers) { project_creator_headers }
+
+      it "assigns collaborator positions from params" do
+        expect do
+          post path, headers: headers, params: params.to_json
+        end.to change { collaborator_three.reload.position}.to(1)
+        .and keep_the_same { collaborator_two.reload.position }
+        .and change { collaborator_one.reload.position }.to(3)
+      end
+    end
+
+    context "when there is no authenticated user" do
+      let(:headers) { anonymous_headers }
+
+      it "does not reorder collaborators" do
+        expect do
+          post path, headers: headers, params: params.to_json
+        end.to keep_the_same { collaborator_one.reload.position }
+        .and keep_the_same { object.collaborators }
+      end
+    end
+  end
 end

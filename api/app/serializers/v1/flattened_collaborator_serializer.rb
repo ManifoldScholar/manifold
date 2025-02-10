@@ -6,5 +6,6 @@ module V1
     typed_attribute :maker_name, Types::String
     typed_belongs_to :maker, serializer: ::V1::MakerSerializer
     typed_belongs_to :collaboratable, polymorphic: true
+    typed_attribute :collaborators, Types::Array.of(Types::Serializer::ID.meta(read_only: true))
   end
 end

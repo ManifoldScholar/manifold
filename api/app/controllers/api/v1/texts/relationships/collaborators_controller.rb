@@ -6,7 +6,7 @@ module API
         class CollaboratorsController < ApplicationController
           include API::V1::ManagesFlattenedCollaborators
 
-          authority_actions create_from_roles: :create
+          authority_actions create_from_roles: :create, reorder: :update
 
           before_action :set_text
 
@@ -30,6 +30,11 @@ module API
 
           def create_from_roles
             @collaborators = collaborators_from_roles(collaborators_from_roles_params, @text.id, Text.name)
+            render_multiple_resources(@collaborators, serializer: ::V1::CollaboratorSerializer)
+          end
+
+          def reorder
+            @collaborators = update_positions(position_params)
             render_multiple_resources(@collaborators, serializer: ::V1::CollaboratorSerializer)
           end
 

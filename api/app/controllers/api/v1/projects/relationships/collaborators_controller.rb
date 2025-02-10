@@ -6,7 +6,7 @@ module API
         class CollaboratorsController < AbstractProjectChildController
           include API::V1::ManagesFlattenedCollaborators
 
-          authority_actions create_from_roles: "create"
+          authority_actions create_from_roles: :create, reorder: :update
 
           resourceful! Collaborator, authorize_options: { except: [:index, :show] } do
             @project.collaborators.filtered(collaborator_filter_params)
@@ -28,6 +28,11 @@ module API
 
           def create_from_roles
             @collaborators = collaborators_from_roles(collaborators_from_roles_params, @project.id, Project.name)
+            render_multiple_resources(@collaborators, serializer: ::V1::CollaboratorSerializer)
+          end
+
+          def reorder
+            @collaborators = update_positions(position_params)
             render_multiple_resources(@collaborators, serializer: ::V1::CollaboratorSerializer)
           end
 
