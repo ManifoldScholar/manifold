@@ -59,7 +59,7 @@ export default `
         -webkit-touch-callout: none;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         color: var(--color-accent-primary);
         outline: 0;
       }

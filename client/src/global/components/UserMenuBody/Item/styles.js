@@ -22,13 +22,13 @@ export const Link = styled.a`
     background-color ${defaultTransitionProps};
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     color: var(--color-base-neutral90);
     background-color: var(--color-base-neutral20);
     outline: 0;
   }
 
-  &.focus-visible {
+  &:focus-visible {
     ${defaultFocusStyle}
     outline-offset: -2px;
   }
@@ -42,7 +42,7 @@ export const Icon = styled(IconComposer)`
   transition: color ${defaultTransitionProps};
 
   ${Link}:hover &,
-  ${Link}.focus-visible & {
+  ${Link}:focus-visible & {
     color: var(--color-base-neutral90);
   }
 `;

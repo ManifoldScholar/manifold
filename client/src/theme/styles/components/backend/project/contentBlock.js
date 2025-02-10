@@ -53,7 +53,7 @@ export default `
         cursor: not-allowed;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         border-color: var(--color-accent-primary);
         outline: 0;
 

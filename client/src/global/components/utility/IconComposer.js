@@ -7,7 +7,7 @@ import classNames from "classnames";
 
 import MissingIcon from "./MissingIcon";
 
-import humps from "humps";
+import humps from "utils/humps";
 
 export default class IconComposer extends PureComponent {
   static displayName = "IconComposer";
