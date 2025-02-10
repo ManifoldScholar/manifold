@@ -8541,7 +8541,7 @@ __metadata:
     path-browserify: "npm:^1.0.1"
     prettier: "npm:^1.5.2"
     pretty-error: "npm:^4.0.0"
-    prop-types: "npm:^15.5.10"
+    prop-types: "npm:^15.8.1"
     qs: "npm:^6.14.0"
     query-string: "npm:^7.x"
     react: "npm:^18.x"
@@ -8551,7 +8551,7 @@ __metadata:
     react-collapse: "npm:^5.1.1"
     react-datepicker: "npm:^8.x"
     react-dom: "npm:^18.x"
-    react-dropzone: "npm:^10.2.1"
+    react-dropzone: "npm:^10.2.2"
     react-error-boundary: "npm:^3.1.4"
     react-ga4: "npm:^2.1.0"
     react-helmet-async: "npm:^1"
@@ -8568,7 +8568,7 @@ __metadata:
     react-swipeable: "npm:^5.x"
     react-text-mask: "npm:5.x"
     react-transition-group: "npm:^4.3.0"
-    react-uid: "npm:^2.2.0"
+    react-uid: "npm:^2.4.0"
     reakit: "npm:^1.3.11"
     recharts: "npm:^2.15.1"
     redux: "npm:^4.0"
@@ -10783,7 +10783,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dropzone@npm:^10.2.1":
+"react-dropzone@npm:^10.2.2":
   version: 10.2.2
   resolution: "react-dropzone@npm:10.2.2"
   dependencies:
@@ -11167,18 +11167,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-uid@npm:^2.2.0":
-  version: 2.3.2
-  resolution: "react-uid@npm:2.3.2"
+"react-uid@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "react-uid@npm:2.4.0"
   dependencies:
     tslib: "npm:^2.0.0"
   peerDependencies:
-    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10c0/3e10d205d90b771975cbfd6550ad0e0d57d864587a00e8109cc8879f44b5fe8b3b5cb40f16c1e9bafc5c854e594ffba577a0df9089dafdb76cdc4f0a88c95238
+  checksum: 10c0/5e01e8d3a4144d160af26f7ea8300887ed8379ee14b1fad7979ea755d5bfa4badfdab531cb7d4495488e94083f829bd5b28a8f6661522b11729fceb42dcf73ea
   languageName: node
   linkType: hard
 
