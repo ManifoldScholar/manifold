@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { collaboratorsAPI } from "api";
+import { collaboratorsAPI, projectsAPI } from "api";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
@@ -49,34 +49,26 @@ function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
     setOrdered(update);
   };
 
-  const reorderCollaborators = useApiCallback(collaboratorsAPI.reorder);
+  const updateProject = useApiCallback(projectsAPI.update);
 
   const onSubmit = async e => {
     e.preventDefault();
 
     if (!ordered.length) return;
 
-    let offset = 0;
-
     const data = ordered
       .map(fc => {
-        const collaborators = fc.collaborators.map((c, i) => {
-          const cData = {
-            id: c,
-            type: "collaborators",
-            position: offset + fc.position + i
-          };
-
-          if (i > 0) offset += 1;
-
-          return cData;
-        });
+        const collaborators = fc.collaborators.map(c => ({
+          id: c,
+          type: "collaborators"
+        }));
         return collaborators;
       })
       .flat();
 
-    const { errors } = await reorderCollaborators("projects", project.id, {
-      collaborators: data
+    const { errors } = await updateProject(project.id, {
+      attributes: {},
+      relationships: { collaborators: { data } }
     });
 
     if (!errors) {
