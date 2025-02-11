@@ -137,19 +137,6 @@ RSpec.describe "Projects API", type: :request do
           patch path, headers: headers, params: params
           expect(project.contributors.reload.pluck(:id)).to contain_exactly(john.id, jim.id)
         end
-
-        it("are sorted correctly after being set") do
-          project.contributors << jenny
-          project.contributors << john
-          project.save
-          expect(project.contributors.reload.pluck(:id)).to eq([jenny.id, john.id])
-          params = build_json_payload(relationships: { contributors: { data: [
-                                        { type: "makers", id: john.id },
-                                        { type: "makers", id: jenny.id }
-                                      ] } })
-          patch path, headers: headers, params: params
-          expect(project.contributors.reload.pluck(:id)).to eq([john.id, jenny.id])
-        end
       end
 
       describe "its creators" do
@@ -162,18 +149,23 @@ RSpec.describe "Projects API", type: :request do
           patch path, headers: headers, params: params
           expect(project.creators.reload.pluck(:id)).to contain_exactly(jim.id, john.id)
         end
+      end
+
+      describe "its collaborators" do
+        let(:john_collaborator) { FactoryBot.create(:collaborator, maker_id: john.id) }
+        let(:jenny_collaborator) { FactoryBot.create(:collaborator, maker_id: jenny.id) }
 
         it("are sorted correctly after being set") do
-          project.creators << jenny
-          project.creators << john
+          project.collaborators << jenny_collaborator
+          project.collaborators << john_collaborator
           project.save
-          expect(project.creators.pluck(:id)).to eq([jenny.id, john.id])
-          params = build_json_payload(relationships: { creators: { data: [
-                                        { type: "makers", id: john.id },
-                                        { type: "makers", id: jenny.id }
+          expect(project.collaborators.pluck(:id)).to eq([jenny_collaborator.id, john_collaborator.id])
+          params = build_json_payload(relationships: { collaborators: { data: [
+                                        { type: "collaborator", id: john_collaborator.id },
+                                        { type: "collaborator", id: jenny_collaborator.id }
                                       ] } })
           patch path, headers: headers, params: params
-          expect(project.creators.reload.pluck(:id)).to eq([john.id, jenny.id])
+          expect(project.collaborators.reload.pluck(:id)).to eq([john_collaborator.id, jenny_collaborator.id])
         end
       end
 
