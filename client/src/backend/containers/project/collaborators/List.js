@@ -71,7 +71,7 @@ function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
       relationships: { collaborators: { data } }
     });
 
-    if (!errors) {
+    if (errors) {
       if (refresh) refresh();
     }
   };
