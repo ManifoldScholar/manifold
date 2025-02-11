@@ -16,8 +16,16 @@ class ProjectContentTypeFormResources extends PureComponent {
     return this.props.getModelValue("attributes[showAllCollections]");
   }
 
+  get showResources() {
+    return this.props.getModelValue("attributes[showResources]");
+  }
+
   get collections() {
     return this.props.project.relationships.resourceCollections;
+  }
+
+  get resources() {
+    return this.props.project.relationships.resources;
   }
 
   render() {
@@ -58,6 +66,34 @@ class ProjectContentTypeFormResources extends PureComponent {
               options={this.collections}
               listStyle="rows"
               showAddRemoveAll
+              reorderable
+              listRowComponent="FormOptionRow"
+            />
+          </>
+        ) : null}
+        <Form.Switch
+          label={this.props.t("content_blocks.resources.resources_switch")}
+          instructions={this.props.t(
+            "content_blocks.resources.resources_switch_info"
+          )}
+          name="attributes[showResources]"
+          wide
+          isPrimary
+        />
+        {this.showResources ? (
+          <>
+            <Form.Picker
+              placeholder={this.props.t(
+                "content_blocks.resources.select_resource_placeholder"
+              )}
+              label={this.props.t("content_blocks.resources.select_resources")}
+              instructions={this.props.t(
+                "content_blocks.resources.select_resources_info"
+              )}
+              optionToLabel={r => r.attributes.title}
+              name="relationships[featuredResources]"
+              options={this.resources}
+              listStyle="rows"
               reorderable
               listRowComponent="FormOptionRow"
             />

@@ -91,7 +91,12 @@
       "collections_switch": "Show all collections?",
       "collections_switch_info": "If set, all resource collections will be included in the block. Otherwise, only featured selections will be shown.",
       "select_collection_placeholder": "Add a Resource Collection",
-      "select_collection": "Show Specific Collections"
+      "select_collection": "Show Specific Collections",
+      "resources_switch": "Show resources in addition to collections?",
+      "resources_switch_info": "If set, individual resources will be displayed in addition to selected resource collections.",
+      "select_resource_placeholder": "Add a Resource",
+      "select_resources": "Show These Resources",
+      "select_resources_info": "Select up to 10 resources to display. If none are selected, the first 10 resources in default order will be displayed."
     },
     "markdown": {
       "body": "Body",

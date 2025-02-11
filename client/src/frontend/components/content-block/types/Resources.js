@@ -60,6 +60,11 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
   }
 
   get visibleResources() {
+    if (!this.block.attributes.showResources) return [];
+
+    if (this.block.relationships.featuredResources?.length)
+      return this.block.relationships.featuredResources;
+
     return this.entity.relationships.resources;
   }
 
@@ -95,17 +100,22 @@ export default class ProjectContentBlockResourcesBlock extends PureComponent {
             />
           </>
         )}
-        <h3 className="screen-reader-text">Single Resources</h3>
-        <ResourceList.Thumbnails resources={this.visibleResources} />
-        <EntityListTotal
-          linkTo={lh.link(
-            "frontendProjectResources",
-            this.entity.attributes.slug
-          )}
-          entityName="Resource"
-          count={this.resourcesTotal}
-          alignLeft={this.isSparse}
-        />
+        {this.hasVisibleResources && (
+          <>
+            <h3 className="screen-reader-text">Single Resources</h3>
+            <ResourceList.Thumbnails resources={this.visibleResources} />
+
+            <EntityListTotal
+              linkTo={lh.link(
+                "frontendProjectResources",
+                this.entity.attributes.slug
+              )}
+              entityName="Resource"
+              count={this.resourcesTotal}
+              alignLeft={this.isSparse}
+            />
+          </>
+        )}
       </>
     );
   }
