@@ -45,7 +45,7 @@ export default {
 
   collectionResources(id, filterParams = {}, page = {}) {
     const filter = filterParams;
-    filter.collection_order = id;
+    filter.resource_collection = id;
     return {
       endpoint: `/api/v1/resource_collections/${id}/relationships/resources`,
       method: "GET",

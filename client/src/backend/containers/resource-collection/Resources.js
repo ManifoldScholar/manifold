@@ -91,7 +91,7 @@ function ResourceCollectionResourcesContainer({
     ? "resource_collections.show_all_projects"
     : "resource_collections.show_collection_projects";
 
-  return (
+  return resources ? (
     <EntitiesList
       entityComponent={ResourceRow}
       entityComponentProps={{
@@ -113,11 +113,11 @@ function ResourceCollectionResourcesContainer({
       unit={t("glossary.resource", {
         count: meta?.pagination?.totalCount
       })}
-      pagination={meta.pagination}
+      pagination={meta?.pagination}
       showCount
       search={<Search {...searchProps} />}
     />
-  );
+  ) : null;
 }
 
 export default withFilteredLists(ResourceCollectionResourcesContainer, {
