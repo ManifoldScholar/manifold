@@ -85,6 +85,9 @@ module V1
                          serializer: ::V1::FlattenedCollaboratorSerializer,
                          record_type: "flattenedCollaborator"
 
+          typed_has_many :collaborators,
+                         serializer: ::V1::CollaboratorSerializer
+
           typed_has_many :texts,
                          object_method_name: :text_summaries,
                          id_method_name: :text_summary_ids,

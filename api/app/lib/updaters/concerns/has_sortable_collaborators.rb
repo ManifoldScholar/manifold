@@ -3,24 +3,17 @@ module Updaters
     module HasSortableCollaborators
       extend ActiveSupport::Concern
 
-      COLLABORATOR_KINDS = %w(contributor creator).freeze
-
       included do
-        set_callback :save, :after, :sort_relationships
+        set_callback :save, :after, :sort_collaborators
       end
 
-      def sort_relationships
-        COLLABORATOR_KINDS.each do |kind|
-          sort_collaborators kind if @model.respond_to? "#{kind}_collaborators".to_sym
-        end
-      end
+      def sort_collaborators
+        collaborators = relationships.dig :collaborators, :data
 
-      def sort_collaborators(kind)
-        makers = relationships.to_h.dig "#{kind}s", :data
-        return unless makers && !makers.empty?
+        return unless collaborators && !collaborators.empty?
 
-        @model.__send__("#{kind}_collaborators").each do |collaborator|
-          index = makers.find_index { |c| c[:id] == collaborator.maker_id }
+        @model.collaborators.each_with_index do |collaborator, _i|
+          index = collaborators.find_index { |c| c[:id] == collaborator.id }
           position = index + 1
           collaborator.set_list_position(position)
         end
