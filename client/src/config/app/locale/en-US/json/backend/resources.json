@@ -16,6 +16,7 @@
       "presentation": "Presentation",
       "interactive": "Interactive"
     },
+    "featured_label": "Featured",
     "title_label": "Title",
     "title_placeholder": "Enter a resource title",
     "descript_label": "Description",
@@ -66,7 +67,9 @@
       "title_instructions": "This field accepts Markdown.",
       "sort_title_label": "Sort Title",
       "sort_title_placeholder": "Enter sort title",
-      "sort_title_instructions": "This field is only used to sort resources alphabetically in lists. If blank, sorting is based on resource title.",
+      "sort_title_instructions": "An alternate title used when sorting alphabetically by title. Has no impact on the default sort order; use Featured instead.",
+      "sort_order_label": "Featured",
+      "sort_order_instructions": "By default, resources are shown from newest to oldest. Featured resources are moved to the start of the list.",
       "fingerprint_label": "Fingerprint",
       "fingerprint_placeholder": "Enter fingerprint",
       "fingerprint_instructions": "The fingerprint is used to indentify resources during bulk resource imports.",
