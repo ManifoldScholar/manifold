@@ -89,8 +89,11 @@ class Resource < ApplicationRecord
   scope :by_resource_collection, lambda { |collection|
     return all unless collection.present?
 
+    id_from_slug = ResourceCollection.friendly.find(collection)
+    id = id_from_slug || collection
+
     joins(:collection_resources)
-      .where("collection_resources.resource_collection_id = ?", collection)
+      .where("collection_resources.resource_collection_id = ?", id)
   }
   scope :by_kind, lambda { |kind|
     return all unless kind.present?
