@@ -50,7 +50,7 @@ module API
         [:creators, :contributors, :texts, :text_categories, :events,
          :resource_collections, :resources, :subjects, :twitter_queries,
          :permitted_users, :content_blocks, :action_callouts, :journal,
-         :journal_volume, :journal_issue, :flattened_collaborators]
+         :journal_volume, :journal_issue, :flattened_collaborators, :collaborators]
       end
 
       def scope_for_projects
