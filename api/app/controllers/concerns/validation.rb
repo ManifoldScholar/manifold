@@ -261,7 +261,7 @@ module Validation
                   :allow_download, :external_type, :external_url, :external_id,
                   :embed_code, :minimum_width, :minimum_height, { iframe_allows: [] },
                   metadata(Resource),
-                  :fingerprint, :pending_slug, :pending_sort_title]
+                  :fingerprint, :pending_slug, :pending_sort_title, :sort_order]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

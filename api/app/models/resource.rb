@@ -104,7 +104,7 @@ class Resource < ApplicationRecord
       .order("collection_resources.position ASC")
   }
 
-  scope :in_default_order, -> { order(sort_title: :asc, created_at: :asc) }
+  scope :in_default_order, -> { order(sort_order: :asc, created_at: :desc) }
   scope :with_order, ->(by = nil) { by.present? ? reorder(by) : in_default_order }
 
   before_validation :update_kind, :set_fingerprint!
