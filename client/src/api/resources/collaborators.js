@@ -26,16 +26,6 @@ export default {
     };
   },
 
-  reorder(entityType, entityId, collaborators) {
-    return {
-      endpoint: `/api/v1/${entityType}/${entityId}/relationships/collaborators/reorder`,
-      method: "POST",
-      options: {
-        body: JSON.stringify({ data: collaborators })
-      }
-    };
-  },
-
   show(entityType, entityId, id) {
     return {
       endpoint: `/api/v1/${entityType}/${entityId}/relationships/collaborators/${id}`,
