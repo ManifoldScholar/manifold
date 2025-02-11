@@ -524,15 +524,13 @@ module Validation
   end
 
   def resource_filter_params
-    params.with_defaults(
-      filter: { order: "sort_title ASC" }
-    ).permit(filter: [:keyword,
-                      :kind,
-                      :tag,
-                      :order,
-                      :collection_order,
-                      :project,
-                      :resource_collection])[:filter]
+    params.permit(filter: [:keyword,
+                           :kind,
+                           :tag,
+                           :order,
+                           :collection_order,
+                           :project,
+                           :resource_collection])[:filter]
   end
 
   def comment_filter_params
