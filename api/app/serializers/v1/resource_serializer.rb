@@ -22,6 +22,7 @@ module V1
     typed_attribute :project_slug, Types::String.meta(read_only: true)
     typed_attribute :slug, Types::String.meta(read_only: true)
     typed_attribute :sort_title, Types::String.meta(read_only: true)
+    typed_attribute :sort_order, Types::Integer
     typed_attribute :sub_kind, Types::String.optional
     typed_attribute :title, Types::String
     typed_attribute :title_formatted, Types::String.meta(read_only: true)

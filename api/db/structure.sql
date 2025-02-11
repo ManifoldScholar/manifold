@@ -2442,7 +2442,8 @@ CREATE TABLE public.resources (
     pending_sort_title character varying,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     iframe_allows character varying[] DEFAULT '{fullscreen}'::character varying[] NOT NULL,
-    captions_track_data jsonb
+    captions_track_data jsonb,
+    sort_order integer
 );
 
 
@@ -7370,4 +7371,5 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250122221150'),
 ('20250128220613'),
 ('20250129200019'),
-('20250210192150');
+('20250210192150'),
+('20250210230256');
