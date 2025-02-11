@@ -52,7 +52,7 @@ class JournalIssue < ApplicationRecord
   end
 
   scope :with_read_ability, ->(user = nil) do
-    where(project: Project.with_read_ability(user)).or(where(journal: Journal.with_update_ability(user)))
+    where(project: Project.with_read_ability(user)).or(where(journal: Journal.with_read_ability(user)))
   end
 
   scope :for_nav, ->(user = nil) do

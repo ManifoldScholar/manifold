@@ -262,6 +262,17 @@ class RoleName::ProjectEditor < RoleName
   provides_full_read_access!
 end
 
+class RoleName::JournalEditor < RoleName
+  any_editor!
+
+  scoped!
+
+  can_update_projects!
+  can_update_journals!
+  provides_draft_access!
+  provides_full_read_access!
+end
+
 class RoleName::ProjectPropertyManager < RoleName
   scoped!
 
