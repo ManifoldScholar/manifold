@@ -28,8 +28,9 @@ function defaultParams({ snapshotState = false } = {}) {
       {
         label: "Order",
         name: "order",
-        value: "title",
+        value: "",
         options: [
+          { label: "In default order", value: "" },
           { label: "Alphabetical by title", value: "sort_title ASC" },
           { label: "Newest resources first", value: "created_at DESC" }
         ]

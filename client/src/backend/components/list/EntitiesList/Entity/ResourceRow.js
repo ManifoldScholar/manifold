@@ -98,6 +98,19 @@ class ResourceRow extends PureComponent {
     );
   }
 
+  get sortOrder() {
+    return this.props.entity.attributes.sortOrder;
+  }
+
+  get labels() {
+    if (!this.sortOrder) return this.kind;
+
+    return [
+      this.kind,
+      { text: this.props.t("resources.featured_label"), level: "notice" }
+    ];
+  }
+
   render() {
     return (
       <EntityRow
@@ -106,7 +119,7 @@ class ResourceRow extends PureComponent {
         rowClickMode="block"
         title={this.title}
         titlePlainText={this.titlePlainText}
-        label={this.kind}
+        label={this.labels}
         meta={
           <FormattedDate
             prefix={this.props.t("dates.created_title_case")}
