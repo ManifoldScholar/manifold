@@ -56,7 +56,10 @@ class IngestionSource < ApplicationRecord
 
   belongs_to :text, inverse_of: :ingestion_sources
 
-  delegate :project, to: :text
+  has_one :project, through: :text
+
+  # Delegations
+  delegate :source_path_map, to: :text
   delegate *IngestionSourceKind.predicates, to: :kind
   delegate :content_type, to: :attachment, allow_nil: true
 
@@ -65,6 +68,50 @@ class IngestionSource < ApplicationRecord
 
   def display_name
     read_attribute(:display_name).presence || source_identifier
+  end
+
+  def packaging_key
+    [
+      source_path,
+      attachment.try(:original_filename),
+      fallback_packaging_name,
+    ].compact.first
+  end
+
+  def packaging_name
+    [
+      base_source_path,
+      attachment.try(:original_filename),
+      fallback_packaging_name,
+    ].compact.first
+  end
+
+  def packaging_path
+    source_path_map.fetch(packaging_key)
+  rescue KeyError
+    # :nocov:
+    proxy_path
+    # :nocov:
+  end
+
+  def proxy_path
+    self.class.proxy_path self
+  end
+
+  def to_s
+    "ingestion source #{id}"
+  end
+
+  private
+
+  def base_source_path
+    File.basename(source_path) if source_path?
+  end
+
+  def fallback_packaging_name
+    ext = ::MIME::Types[content_type].first.try(:extensions).try(:first)
+
+    ["ingestion-source-#{id}", ext].compact.join(?.)
   end
 
   class << self
@@ -80,13 +127,5 @@ class IngestionSource < ApplicationRecord
         ingestion_source
       )
     end
-  end
-
-  def proxy_path
-    self.class.proxy_path self
-  end
-
-  def to_s
-    "ingestion source #{id}"
   end
 end

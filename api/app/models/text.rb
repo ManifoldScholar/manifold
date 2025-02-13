@@ -266,7 +266,7 @@ class Text < ApplicationRecord
 
   memoize def source_path_map
     ingestion_sources.each_with_object({}) do |s, map|
-      map[s.source_path] = s.proxy_path
+      map[s.packaging_key] = s.proxy_path
     end
   end
 
