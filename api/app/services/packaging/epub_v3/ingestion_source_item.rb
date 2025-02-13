@@ -11,13 +11,12 @@ module Packaging
       attribute :ingestion_source, Types.Instance(::IngestionSource)
 
       delegate :id, to: :ingestion_source, prefix: true
-      delegate *IngestionSourceKind.predicates, :content_type, :kind, :text, :source_path, to: :ingestion_source
-      delegate :source_path_map, to: :text
+      delegate *IngestionSourceKind.predicates, :content_type, :kind, :packaging_name, :packaging_path, :source_path, to: :ingestion_source
 
       # @!attribute [r] manifold_path
       # @return [String]
       memoize def manifold_path
-        source_path_map.fetch(source_path)
+        packaging_path
       end
 
       # @return [File]
@@ -32,7 +31,7 @@ module Packaging
       private
 
       def build_base_path
-        File.join("assets", File.basename(source_path))
+        File.join("assets", packaging_name)
       end
     end
   end
