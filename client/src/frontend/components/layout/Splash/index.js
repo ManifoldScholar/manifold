@@ -58,17 +58,13 @@ export default function Splash(props) {
           <Styled.Buttons>
             {linkText && linkUrl ? (
               <a href={linkUrl} target="blank" className="utility-button">
-                <span
-                  className={classNames(
-                    "utility-button__text",
-                    "utility-button__text--large",
-                    {
-                      "utility-button__text--dark-green": mode === "light"
-                    }
-                  )}
+                <Styled.Button
+                  className={classNames({
+                    "utility-button__text--dark-green": mode === "light"
+                  })}
                 >
                   {linkText}
-                </span>
+                </Styled.Button>
               </a>
             ) : null}
             {includeSignUp && !authenticated ? (
@@ -78,17 +74,13 @@ export default function Splash(props) {
                 tabIndex="0"
                 to={lh.link("frontendSignUp")}
               >
-                <span
-                  className={classNames(
-                    "utility-button__text",
-                    "utility-button__text--large",
-                    {
-                      "utility-button__text--dark-green": mode === "light"
-                    }
-                  )}
+                <Styled.Button
+                  className={classNames({
+                    "utility-button__text--dark-green": mode === "light"
+                  })}
                 >
                   Sign Up
-                </span>
+                </Styled.Button>
               </Link>
             ) : null}
           </Styled.Buttons>
