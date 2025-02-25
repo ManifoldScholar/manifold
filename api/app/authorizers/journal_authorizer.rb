@@ -19,7 +19,7 @@ class JournalAuthorizer < ApplicationAuthorizer
   # @param [User] user
   # @param [Hash] _options
   def updatable_by?(user, _options = {})
-    has_any_role? user, :admin, :editor, :marketeer, :project_editor
+    has_any_role? user, :admin, :editor, :marketeer, :project_editor, :journal_editor
   end
 
   def journal_administered_by?(user, _options = {})
