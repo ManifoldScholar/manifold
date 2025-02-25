@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
-import LoadingBlock from "global/components/loading-block";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityHeadContent from "frontend/components/entity/HeadContent";
@@ -48,7 +47,7 @@ export default function ProjectResourceCollectionsContainer({
       : [projectCrumb, collectionsCrumb].filter(Boolean);
   }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
-  if (!project) return <LoadingBlock />;
+  if (!project || !resourceCollections) return null;
 
   return (
     <>
