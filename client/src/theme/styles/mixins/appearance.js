@@ -392,29 +392,3 @@ export const draggable = `
 export const dragging = `
   box-shadow: 0 31px 26px -13px rgba(0 0 0 / 0.33);
 `;
-
-export function reactSlideTransition(
-  from = "right",
-  selector = "&",
-  prefix = "panel"
-) {
-  return `
-    .${prefix}-enter ${selector} {
-      transform: translateX(${from === "right" ? "100%" : "-100%"});
-    }
-
-    .${prefix}-enter-active ${selector} {
-      transition: transform ${defaultTransitionProps};
-      transform: translateX(0);
-    }
-
-    .${prefix}-exit ${selector} {
-      transform: translateX(0);
-    }
-
-    .${prefix}-exit.${prefix}-exit-active ${selector} {
-      transition: transform ${defaultTransitionProps};
-      transform: translateX(${from === "right" ? "100%" : "-100%"});
-    }
-  `;
-}

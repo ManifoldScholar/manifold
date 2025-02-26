@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { respond, utilityPrimary, transparentize } from "theme/styles/mixins";
-import { containerPaddingInline } from "theme/styles/variables/layout";
 import { transientOptions } from "helpers/emotionHelpers";
 
 export const SlideShow = styled.div`
@@ -10,11 +9,14 @@ export const SlideShow = styled.div`
 
 export const Footer = styled.footer`
   position: relative;
-  padding: 10px ${containerPaddingInline.responsive};
+  display: flex;
+  flex-direction: column-reverse;
+  row-gap: 1.25rem;
   color: var(--color-neutral-text-dark);
 
   ${respond(
-    `display: flex;
+    `
+    flex-direction: row;
     justify-content: flex-end;
     width: 100%;
     padding: 17px 23px;
@@ -25,10 +27,6 @@ export const Footer = styled.footer`
 `;
 
 export const Pagination = styled.div`
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  width: 100%;
   color: var(--color-neutral-text-light);
   text-align: center;
   background-color: ${transparentize("neutral90", 0.1)};
@@ -38,7 +36,6 @@ export const Pagination = styled.div`
 
   ${respond(
     `
-    position: static;
     width: 160px;
     padding-block-start: 2px;
     text-align: right;
@@ -54,19 +51,14 @@ export const Pagination = styled.div`
 export const Ordinal = styled("span", transientOptions)`
   ${utilityPrimary}
   display: inline-block;
-  padding: 11px 0 13px;
   font-size: 13px;
   letter-spacing: 0.05em;
 
-  ${respond(
-    `padding: 0;
-    font-size: 16px;`,
-    60
-  )}
+  ${respond(`font-size: 16px;`, 60)}
 
   ${({ $isMobile }) =>
     $isMobile
-      ? respond(`display: none`, 60)
+      ? respond(`display: none;`, 60)
       : `display: none; ${respond(`display: inline-block`, 60)}`}
 `;
 
@@ -75,64 +67,44 @@ export const ArrowsWrapper = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  padding-block: 11px 14px;
 
-  ${respond(`justify-content: flex-end; margin-block-start: 13px;`, 60)}
+  ${respond(
+    `justify-content: flex-end;
+    margin-block-start: 13px;
+    padding-block: 0;`,
+    60
+  )}
 `;
 
 export const SlidesWrapper = styled.div`
   position: relative;
-  display: flex;
-  width: 100%;
+  contain: paint;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  grid-template-rows: 1fr;
   height: 52vw;
   min-height: 350px;
   max-height: 52vh;
-  overflow: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overflow-x: auto;
   color: var(--color-neutral-text-extra-light);
   background-color: var(--color-base-neutral-black);
+
+  @supports (scrollbar-color: auto) {
+    scrollbar-color: var(--color-interaction-light)
+      var(--color-base-neutral-black);
+    scrollbar-width: auto;
+  }
 `;
 
 export const Slide = styled.figure`
-  position: absolute;
-  top: 0;
-  left: 0;
+  --VideoResource-inline-size: 100%;
+
+  position: relative;
+  scroll-snap-align: start;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  opacity: 1;
-
-  &.left-enter {
-    transform: translate3d(100%, 0, 0);
-  }
-
-  &.left-enter-active {
-    transition: transform 0.4s var(--transition-timing-function);
-    transform: translate3d(0, 0, 0);
-  }
-
-  &.left-exit {
-    transform: translate3d(0, 0, 0);
-  }
-
-  &.left-exit-active {
-    transition: transform 0.4s var(--transition-timing-function);
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  &.right-enter {
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  &.right-enter-active {
-    transition: transform 0.4s var(--transition-timing-function);
-    transform: translate3d(0, 0, 0);
-  }
-
-  &.right-exit {
-    transform: translate3d(0, 0, 0);
-  }
-
-  &.right-exit-active {
-    transition: transform 0.4s var(--transition-timing-function);
-    transform: translate3d(100%, 0, 0);
-  }
 `;

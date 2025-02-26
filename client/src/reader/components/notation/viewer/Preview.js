@@ -4,33 +4,16 @@ import Resourceish from "frontend/components/resourceish";
 import Link from "./Link";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default class NotationViewerPreview extends PureComponent {
-  static displayName = "NotationViewer.Preview";
-
-  static propTypes = {
-    entry: PropTypes.object,
-    params: PropTypes.object,
-    actions: PropTypes.shape({
-      startDestroy: PropTypes.func,
-      makeActive: PropTypes.func
-    }).isRequired
-  };
-
-  render() {
-    const { entry, params } = this.props;
-
-    if (!entry) return null;
-
-    const { notation } = entry;
-
-    /* eslint-disable jsx-a11y/anchor-is-valid                                          */
-    /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
-    /* false positive, as the child Link component does in fact render an a tag with a  */
-    /* href.                                                                            */
-    return (
-      <div className="notation-preview-footer">
+export default function NotationViewerPreview({ entry, params }) {
+  return (
+    <div inert={!entry ? "" : undefined} className="notation-preview-footer">
+      {entry && (
+        /* eslint-disable jsx-a11y/anchor-is-valid                                          */
+        /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
+        /* false positive, as the child Link component does in fact render an a tag with a  */
+        /* href.                                                                            */
         <Link
-          notation={notation}
+          notation={entry.notation}
           params={params}
           className="notation-preview-footer__link"
         >
@@ -42,7 +25,7 @@ export default class NotationViewerPreview extends PureComponent {
                 className="notation-preview-footer__cube-icon"
               />
               <Resourceish.Thumbnail
-                resourceish={notation}
+                resourceish={entry.notation}
                 showTitle={false}
                 showKind={false}
                 iconOnly
@@ -50,7 +33,7 @@ export default class NotationViewerPreview extends PureComponent {
               <figcaption
                 className="notation-preview-footer__figcaption"
                 dangerouslySetInnerHTML={{
-                  __html: notation.attributes.titleFormatted
+                  __html: entry.notation.attributes.titleFormatted
                 }}
               />
             </figure>
@@ -61,8 +44,18 @@ export default class NotationViewerPreview extends PureComponent {
             />
           </div>
         </Link>
-      </div>
-    );
-    /* eslint-enable jsx-a11y/anchor-is-valid */
-  }
+      )}
+    </div>
+  );
 }
+
+NotationViewerPreview.displayName = "NotationViewer.Preview";
+
+NotationViewerPreview.propTypes = {
+  entry: PropTypes.object,
+  params: PropTypes.object,
+  actions: PropTypes.shape({
+    startDestroy: PropTypes.func,
+    makeActive: PropTypes.func
+  }).isRequired
+};

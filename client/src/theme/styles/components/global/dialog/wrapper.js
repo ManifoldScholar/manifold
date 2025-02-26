@@ -13,8 +13,11 @@ export default `
     padding-left: var(--container-padding-inline-responsive);
     visibility: visible;
     opacity: 1;
-    transition: opacity ${defaultTransitionProps},
-      visibility ${defaultTransitionProps};
+    transition: opacity ${defaultTransitionProps};
+
+    @starting-style {
+      opacity: 0;
+    }
 
     ${respond(
       `
@@ -23,10 +26,5 @@ export default `
     `,
       120
     )}
-
-    &.dialog-appear {
-      visibility: visible;
-      opacity: 0;
-    }
   }
 `;

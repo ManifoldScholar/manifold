@@ -18,11 +18,10 @@ const UserMenuBody = forwardRef(
       <Styled.List
         ref={ref}
         className={className}
-        $context={context}
-        $visible={visible}
+        data-context={context}
+        inert={!visible ? "" : undefined}
         {...props}
       >
-        {context !== "reader" && <Styled.Tail />}
         {!!currentUser && (
           <Item
             to={lh.link("frontendStarred")}
