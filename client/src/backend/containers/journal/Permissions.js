@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import Layout from "backend/components/layout";
 import { FormContext } from "helpers/contexts";
 import Form, { Unwrapped } from "global/components/form";
-import Utility from "global/components/utility";
 import { useApiCallback, useFetch } from "hooks";
 import { usersAPI, permissionsAPI } from "api";
 import withConfirmation from "hoc/withConfirmation";
@@ -35,14 +34,20 @@ function JournalPermissions({ journal, confirm }) {
       relationships: { user: { data: { id: user.id, type: "users" } } },
       attributes: { roleNames: ["journal_editor"] }
     };
-    const { data: res, errors } = await createPermission(journal, permission);
 
-    if (!errors) {
-      setEditors(val);
-      setPermissions([
-        ...permissions,
-        { id: res.id, userId: res.relationships?.user?.data?.id }
-      ]);
+    try {
+      const { data: res, errors } = await createPermission(journal, permission);
+
+      if (!errors) {
+        setEditors(val);
+        setPermissions([
+          ...permissions,
+          { id: res.id, userId: res.relationships?.user?.data?.id }
+        ]);
+      }
+    } catch (e) {
+      // eslint-disable-next-line
+      console.debug(e);
     }
   };
 
@@ -62,7 +67,8 @@ function JournalPermissions({ journal, confirm }) {
 
   const handleDelete = id => {
     const heading = t("modals.remove_journal_editor");
-    confirm(heading, null, () => doDelete(id));
+    const message = t("modals.remove_journal_editor_body");
+    confirm(heading, message, () => doDelete(id));
   };
 
   return (
@@ -80,20 +86,8 @@ function JournalPermissions({ journal, confirm }) {
           placeholder={t("projects.permissions.user_placeholder")}
           predictive
           isMultiple
-          listRowComponent="UserRow"
-          listRowProps={{
-            hideLabels: true,
-            rowClickMode: "none",
-            utilityOverride: id => (
-              <button
-                className="entity-row__utility-button"
-                onClick={() => handleDelete(id)}
-                title={t("actions.delete")}
-              >
-                <Utility.IconComposer icon="delete32" size={26} />
-              </button>
-            )
-          }}
+          listRowComponent="JournalEditorRow"
+          listRowProps={{ handleDelete }}
           set={handleCreate}
           value={editors}
         />
