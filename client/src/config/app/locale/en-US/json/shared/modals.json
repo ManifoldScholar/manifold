@@ -44,6 +44,7 @@
     "remove_category": "Are you sure you want to remove this category from your collection?",
     "remove_category_body": "Any items in this category will also be deleted.",
     "remove_journal_editor": "Are you sure you want to remove this editor?",
+    "remove_journal_editor_body": "They will lose access to any issues of this journal for which project-level permissions are not set.",
     "remove_markdown_block": "Are you sure you want to remove this markdown block?",
     "remove_contributor": "Are you sure you want to remove this contributor?",
     "reset_password": "Are you sure you want to reset this password?",

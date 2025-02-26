@@ -13,10 +13,6 @@ function UserRow({
   bulkSelection,
   addItem,
   removeItem,
-  hideLabels,
-  rowClickMode,
-  utility,
-  utilityOverride,
   ...props
 }) {
   const { t } = useTranslation();
@@ -32,24 +28,21 @@ function UserRow({
     figure: <EntityThumbnail.User entity={entity} />,
     figureSize: "small",
     figureShape: "circle",
-    label: hideLabels
-      ? undefined
-      : [
-          {
-            text: t(`records.users.role_options.${attributes.role}`),
-            level: ""
-          },
-          ...(id === currentUser.id
-            ? [
-                {
-                  text: t("common.you"),
-                  level: "notice"
-                }
-              ]
-            : [])
-        ],
-    onRowClick:
-      rowClickMode === "none" ? undefined : lh.link("backendRecordsUser", id),
+    label: [
+      {
+        text: t(`records.users.role_options.${attributes.role}`),
+        level: ""
+      },
+      ...(id === currentUser.id
+        ? [
+            {
+              text: t("common.you"),
+              level: "notice"
+            }
+          ]
+        : [])
+    ],
+    onRowClick: lh.link("backendRecordsUser", id),
     rowClickMode: "block",
     prepend: bulkActionsActive && (
       <Checkbox
@@ -57,8 +50,7 @@ function UserRow({
         onSelect={() => addItem(id)}
         onClear={() => removeItem(id)}
       />
-    ),
-    utility: utilityOverride(id) ?? utility
+    )
   };
 
   return <EntityRow {...props} {...additionalProps} />;
