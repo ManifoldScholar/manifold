@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import startsWith from "lodash/startsWith";
 import classNames from "classnames";
-import {
-  TransitionGroup as ReactTransitionGroup,
-  CSSTransition
-} from "react-transition-group";
 import IconComposer from "global/components/utility/IconComposer";
 import { withTranslation } from "react-i18next";
 
@@ -33,14 +29,6 @@ class ProjectCollectionAddButton extends Component {
     const view = props.selected ? "remove" : "add";
     if (startsWith(state.view, view)) return null;
     return { view };
-  }
-
-  get transitionProps() {
-    return {
-      mountOnEnter: true,
-      timeout: 600,
-      classNames: "collecting-toggle__text"
-    };
   }
 
   get selected() {
@@ -145,11 +133,9 @@ class ProjectCollectionAddButton extends Component {
     const { key, text } = this.determineText();
 
     return (
-      <ReactTransitionGroup>
-        <CSSTransition key={key} {...this.transitionProps}>
-          <span className="collecting-toggle__text">{text}</span>
-        </CSSTransition>
-      </ReactTransitionGroup>
+      <span key={key} className="collecting-toggle__text">
+        {text}
+      </span>
     );
   }
 

@@ -1,18 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import { CSSTransition } from "react-transition-group";
 import { FocusTrap } from "focus-trap-react";
+import * as Styled from "./styles";
+import classNames from "classnames";
 
 export default function UIPanel(props) {
-  const visibility = props.visibility[props.id];
-  const visibilityClass = classNames({
-    "panel-hidden": !visibility,
-    "panel-visible": visibility
-  });
+  const visible = props.visibility[props.id];
 
   const handleOutsideClick = e => {
-    const header = document.querySelector(".reader-header");
+    const header = document.querySelector(".reader-header, .header-app");
     if (header?.contains(e.target)) {
       return true;
     }
@@ -20,29 +16,21 @@ export default function UIPanel(props) {
   };
 
   return (
-    <CSSTransition
-      key={props.id}
-      in={visibility}
-      classNames="panel"
-      timeout={200}
-      unmountOnExit
+    <FocusTrap
+      active={visible}
+      focusTrapOptions={{
+        allowOutsideClick: handleOutsideClick,
+        escapeDeactivates: e => props.hidePanel(e)
+      }}
     >
-      <div className={visibilityClass}>
-        <FocusTrap
-          focusTrapOptions={{
-            allowOutsideClick: handleOutsideClick,
-            escapeDeactivates: e => props.hidePanel(e)
-          }}
-        >
-          <div>
-            {React.createElement(props.bodyComponent, {
-              ...props,
-              closeCallback: props.hidePanel
-            })}
-          </div>
-        </FocusTrap>
-      </div>
-    </CSSTransition>
+      <Styled.Panel inert={!visible ? "" : undefined}>
+        {React.createElement(props.bodyComponent, {
+          ...props,
+          closeCallback: props.hidePanel,
+          className: classNames(props.bodyClassName, "panel")
+        })}
+      </Styled.Panel>
+    </FocusTrap>
   );
 }
 

@@ -120,4 +120,11 @@ export default `
   .inline-block {
     display: inline-block;
   }
+
+  .has-scroll-lock {
+    overflow: hidden;
+    scrollbar-gutter: stable;
+    position: absolute;
+    width: 100%;
+  }
 `;

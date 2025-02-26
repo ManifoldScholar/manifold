@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { CSSTransition } from "react-transition-group";
 import classNames from "classnames";
 import Body from "./Body";
 import Annotation from "reader/containers/annotation";
@@ -69,11 +68,10 @@ export default class Text extends Component {
   componentDidUpdate() {
     this.checkRequestAnnotationHash();
 
-    const el = document.getElementById("text-section-interactive-region");
-
-    if (el && this.props.location.state?.pageChange) {
-      el.focus();
-    }
+    // const el = document.getElementById("text-section-interactive-region");
+    // if (el && this.props.location.state?.pageChange) {
+    //   el.focus();
+    // }
   }
 
   // If the URL points to annotation that's not currently visible (not in
@@ -165,16 +163,8 @@ export default class Text extends Component {
               )}
             />
           </section>
-          {/* eslint-disable no-unused-vars */}
-          <CSSTransition
-            appear
-            classNames="text-child"
-            timeout={{ enter: 500, exit: 500 }}
-            unmountOnExit
-          >
-            {state => React.cloneElement(this.props.children, { key: page })}
-          </CSSTransition>
-          {/* eslint-enable no-unused-vars */}
+          {React.Children.count(this.props.children) > 0 &&
+            cloneElement(this.props.children, { key: page })}
         </div>
       </HtmlClass>
     );

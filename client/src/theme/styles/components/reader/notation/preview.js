@@ -13,31 +13,12 @@ export default `
     width: 100%;
     background-color: var(--color-base-neutral-white);
     border-top: 1px solid var(--color-base-neutral50);
-    /* This gets overwritten during a show/hide */
-    transition: margin ${defaultTransitionProps};
+    transition: transform ${defaultTransitionProps};
 
     ${respond(`bottom: 0;`, 50)}
 
-    &.notation-enter {
-      bottom: -100px;
-    }
-
-    &.notation-enter-active {
-      bottom: 44px;
-      transition: bottom ${defaultTransitionProps};
-
-      ${respond(`bottom: 0;`, 50)}
-    }
-
-    &.notation-exit {
-      bottom: 44px;
-
-      ${respond(`bottom: 0;`, 50)}
-    }
-
-    &.notation-exit-active {
-      bottom: -100px;
-      transition: bottom ${defaultTransitionProps};
+    &:empty {
+      transform: translateY(100%);
     }
 
     .scheme-dark & {
