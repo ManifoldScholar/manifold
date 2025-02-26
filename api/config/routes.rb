@@ -199,6 +199,7 @@ Rails.application.routes.draw do
             resources :entitlements, only: [:index, :create]
             resources :journal_issues, only: [:index, :create]
             resources :journal_volumes, only: [:index, :create]
+            concerns [:permissible]
           end
         end
       end

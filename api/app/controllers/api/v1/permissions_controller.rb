@@ -59,6 +59,8 @@ module API
       def find_parent_resource
         if params.key?(:project_id)
           Project.friendly.find params[:project_id]
+        elsif params.key?(:journal_id)
+          Journal.friendly.find params[:journal_id]
         else
           raise "cannot derive parent resource for permissions"
         end
