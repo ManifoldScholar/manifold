@@ -43,6 +43,7 @@
     "password_reset_body": "Automatically send the user a new password or set one yourself.",
     "remove_category": "Are you sure you want to remove this category from your collection?",
     "remove_category_body": "Any items in this category will also be deleted.",
+    "remove_journal_editor": "Are you sure you want to remove this editor?",
     "remove_markdown_block": "Are you sure you want to remove this markdown block?",
     "remove_contributor": "Are you sure you want to remove this contributor?",
     "reset_password": "Are you sure you want to reset this password?",

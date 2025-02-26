@@ -45,6 +45,10 @@
         "tags_placeholder": "Enter Tags",
         "save": "Save Journal"
       }
+    },
+    "permissions": {
+      "header": "Journal Editors",
+      "instructions": "Journal editors can modify this journal and all of its issues. In addition, editors can create and delete issues and grant permissions for the projects associated with those issues."
     }
   },
   "issues": {
