@@ -81,6 +81,7 @@ export default function UserProperties({ user, saveLabel }) {
             onSuccess={!user ? redirectToUser : undefined}
             className="form-secondary"
             notificationScope="drawer"
+            name="be-user"
           >
             <Form.TextInput
               focusOnMount
