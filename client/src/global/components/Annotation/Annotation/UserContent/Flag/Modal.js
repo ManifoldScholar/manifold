@@ -7,7 +7,7 @@ import Wrapper from "global/components/dialog/Wrapper";
 import { Unwrapped } from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
 import { FormContext } from "helpers/contexts";
-import { useApiCallback } from "hooks";
+import { useApiCallback, useFromStore } from "hooks";
 import { annotationsAPI, commentsAPI } from "api";
 import * as Styled from "./styles";
 
@@ -51,6 +51,9 @@ export default function FlagAnnotationModal({
     "button-icon-secondary"
   );
 
+  const colorScheme = useFromStore("ui.persistent.reader.colors.colorScheme");
+  const styleType = colorScheme === "dark" ? "secondary" : "primary";
+
   return (
     <Wrapper
       className="dialog"
@@ -59,17 +62,17 @@ export default function FlagAnnotationModal({
       closeOnOverlayClick={false}
     >
       <header className="dialog__header">
-        <h2>
+        <Styled.Heading>
           {t("reader.report_annotation.header", {
             type:
               type === "annotations"
                 ? t("glossary.annotation_title_case_one")
                 : t("glossary.comment_title_case_one")
           })}
-        </h2>
+        </Styled.Heading>
       </header>
       <p>{t("reader.report_annotation.instructions")}</p>
-      <FormContext.Provider value={{ styleType: "primary" }}>
+      <FormContext.Provider value={{ styleType }}>
         <Styled.Form className="dialog__body">
           <Unwrapped.TextArea
             rows={5}
