@@ -16,7 +16,7 @@ export default class ResourceListThumbnails extends Component {
     return (
       <Styled.Grid>
         {this.props.resources.map(resource => {
-          const { projectSlug } = resource.attributes;
+          const { projectSlug } = resource.attributes ?? {};
           return (
             <li key={resource.id}>
               <Styled.Link

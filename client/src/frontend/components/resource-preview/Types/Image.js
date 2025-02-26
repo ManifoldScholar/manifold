@@ -26,7 +26,7 @@ export default class ResourcePreviewImage extends Component {
 
     return (
       <Styled.Preview>
-        <Styled.Image src={this.src} alt={this.altText} />
+        <Styled.Image src={this.src} alt={this.altText} loading="lazy" />
       </Styled.Preview>
     );
   }

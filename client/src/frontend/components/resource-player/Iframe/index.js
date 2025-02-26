@@ -39,6 +39,7 @@ export default class ResourcePlayerIframe extends Component {
           }}
           $minWidth={finalMinWidth}
           $minHeight={finalMinHeight}
+          loading="lazy"
         />
       </Styled.InteractiveWrapper>
     );

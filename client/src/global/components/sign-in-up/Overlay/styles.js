@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import {
   transparentize,
-  defaultTransitionProps,
   respond,
   defaultFocusStyle,
   headerContainerPrimary,
-  containerPrototype
+  containerPrototype,
+  defaultTransitionProps
 } from "theme/styles/mixins";
 
 export const Dialog = styled.div`
@@ -23,26 +23,15 @@ export const Dialog = styled.div`
   font-family: var(--font-family-copy);
   color: var(--color);
   background-color: ${transparentize("neutral90", 0.025)};
-  opacity: 1;
-  transition: opacity 0s linear;
   z-index: 600;
+  transition: opacity ${defaultTransitionProps};
+
+  &[inert] {
+    opacity: 0;
+  }
 
   a {
     text-decoration: underline;
-  }
-
-  .overlay-full-enter > & {
-    opacity: 0;
-  }
-
-  .overlay-full-enter-active > & {
-    opacity: 1;
-    transition: opacity ${defaultTransitionProps};
-  }
-
-  .overlay-full-exit > & {
-    opacity: 0;
-    transition: opacity ${defaultTransitionProps};
   }
 `;
 
