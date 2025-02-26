@@ -35,12 +35,14 @@ export default `
   /* Set core root defaults */
   html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
     font-size: 100%;
   }
 
   /* Set core body defaults */
   body {
     min-block-size: 100vh;
+    min-block-size: 100dvh;
     text-rendering: geometricPrecision;
   }
 
