@@ -62,6 +62,7 @@ export class NotationResourceDetailContainer extends PureComponent {
           resource={this.props.resource}
         />
         <Overlay
+          open
           closeCallback={this.handleClose}
           appearance="overlay-full bg-neutral90"
           ariaLabel={

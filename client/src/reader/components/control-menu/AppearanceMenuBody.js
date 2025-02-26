@@ -17,7 +17,8 @@ class AppearanceMenuBody extends Component {
     incrementMargins: PropTypes.func,
     decrementMargins: PropTypes.func,
     resetTypography: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
+    className: PropTypes.string
   };
 
   handleFontStyleControl = event => {
@@ -415,8 +416,13 @@ class AppearanceMenuBody extends Component {
   }
 
   render() {
+    const { className } = this.props;
     return (
-      <div className="appearance-menu control-menu">
+      <div
+        className={classNames("appearance-menu control-menu", {
+          [className]: !!className
+        })}
+      >
         <div className="control-menu__header">
           <h2 className="control-menu__heading">
             {this.props.t("reader.menus.appearance.adjust_appearance") + ":"}

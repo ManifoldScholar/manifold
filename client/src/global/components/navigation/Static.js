@@ -166,6 +166,7 @@ export class NavigationStatic extends PureComponent {
           toggleVisibility={this.props.commonActions.toggleSearchPanel}
           visibility={this.props.visibility.uiPanels}
           bodyComponent={SearchMenu.Body}
+          bodyClassName="search-menu"
           searchType={projectId ? "project" : "library"}
           projectId={projectId}
           initialState={{

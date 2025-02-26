@@ -6,12 +6,10 @@ import Single from "./Single";
 import Preview from "./Preview";
 
 import { connect } from "react-redux";
-import { CSSTransition } from "react-transition-group";
 import { uiReaderActions, entityStoreActions } from "actions";
 import { annotationsAPI, requests } from "api";
 import { bindActionCreators } from "redux";
 import throttle from "lodash/throttle";
-import isNil from "lodash/isNil";
 import { scrollOptions } from "utils/domUtils";
 import withConfirmation from "hoc/withConfirmation";
 import { withTranslation } from "react-i18next";
@@ -331,18 +329,11 @@ class NotationViewerList extends PureComponent {
             );
           })}
         </ul>
-        <CSSTransition
-          in={!isNil(this.state.previewEntry)}
-          classNames="notation"
-          timeout={{ enter: 300, exit: 300 }}
-          unmountOnExit
-        >
-          <Preview
-            entry={this.state.previewEntry}
-            actions={this.actions}
-            params={{ textId, sectionId, textSlug }}
-          />
-        </CSSTransition>
+        <Preview
+          entry={this.state.previewEntry}
+          actions={this.actions}
+          params={{ textId, sectionId, textSlug }}
+        />
       </nav>
     );
   }

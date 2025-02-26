@@ -171,25 +171,11 @@ export default `
       display: block;
       padding: var(--text-top-padding) 14px 0 32px;
       line-height: 1;
-
-      &-enter {
-        opacity: 0;
-      }
-
-      &-enter-active {
-        opacity: 1;
-        transition: opacity calc(var(--transition-duration-default) * 3)
+      transition: opacity calc(var(--transition-duration-default) * 3)
           var(--transition-timing-function);
-      }
 
-      &-exit {
-        opacity: 1;
-      }
-
-      &-exit.collecting-toggle__text-exit-active {
+      @starting-style {
         opacity: 0;
-        transition: opacity calc(var(--transition-duration-default) * 3)
-          var(--transition-timing-function);
       }
     }
 

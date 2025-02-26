@@ -1,8 +1,7 @@
-import { respond, rgba, reactSlideTransition } from "theme/styles/mixins";
+import { respond, rgba } from "theme/styles/mixins";
 import { ZOOM_BREAKPOINT } from "./readerHeader";
 
 export const uiPanelMenu = `
-  ${reactSlideTransition()}
   position: absolute;
   top: 0;
   right: 0;
@@ -18,10 +17,4 @@ export const uiPanelMenu = `
   )}
 
   ${respond(`width: auto;`, 50)}
-
-  .panel-hidden {
-    .screen-reader-text {
-      visibility: hidden;
-    }
-  }
 `;
