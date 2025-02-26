@@ -9,7 +9,6 @@ import FatalError from "global/components/FatalError";
 import SignInUp from "global/components/sign-in-up";
 import has from "lodash/has";
 import get from "lodash/get";
-import { CSSTransition } from "react-transition-group";
 import {
   uiVisibilityActions,
   routingActions,
@@ -194,17 +193,10 @@ class ManifoldContainer extends PureComponent {
           {this.props.confirm}
           <LoadingBar loading={this.props.loading} />
           <ColorScheme settings={this.props.settings} />
-          <CSSTransition
-            in={this.props.visibility.signInUpOverlay}
-            timeout={{ enter: 300, exit: 300 }}
-            unmountOnExit
-          >
-            <SignInUp.Overlay
-              key="signInUpOverlay"
-              hideOverlay={hideOverlay}
-              hash={get(this, "props.routing.locationBeforeTransitions.hash")}
-            />
-          </CSSTransition>
+          <SignInUp.Overlay
+            active={this.props.visibility.signInUpOverlay}
+            hideOverlay={hideOverlay}
+          />
           {fatalError.error ? (
             <div className="global-container">
               <FatalError

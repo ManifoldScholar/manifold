@@ -278,6 +278,7 @@ export default function Header(props) {
           sectionId={sectionId}
           searchType="reader"
           bodyComponent={SearchMenu.Body}
+          bodyClassName="search-menu"
           hidePanel={commonActions.hideSearchPanel}
         />
         <UIPanel

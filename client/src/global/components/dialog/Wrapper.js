@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import { CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 import { FocusTrap } from "focus-trap-react";
@@ -44,6 +43,12 @@ class DialogWrapper extends PureComponent {
 
   get overlayRole() {
     return this.props.closeOnOverlayClick ? "button" : null;
+  }
+
+  get style() {
+    const style = {};
+    if (this.props.maxWidth) style.maxWidth = this.props.maxWidth;
+    return style;
   }
 
   setDialogClassName = additionalClassNames => {
@@ -91,12 +96,6 @@ class DialogWrapper extends PureComponent {
     return this.doClose();
   };
 
-  style() {
-    const style = {};
-    if (this.props.maxWidth) style.maxWidth = this.props.maxWidth;
-    return style;
-  }
-
   renderChildren() {
     if (isString(this.props.children.type)) return this.props.children;
     if (React.Children.count(this.props.children) !== 1)
@@ -109,57 +108,48 @@ class DialogWrapper extends PureComponent {
 
   render() {
     const output = (
-      <CSSTransition
-        in={!this.state.leaving}
-        classNames="dialog"
-        appear
-        enter={false}
-        timeout={{ enter: 1, exit: 200 }}
-        unmountOnExit
-      >
-        <BodyClass className={"no-scroll"}>
-          <FocusTrap
-            focusTrapOptions={{
-              escapeDeactivates: this.handleEscape
-            }}
-          >
-            <div className="dialog-wrapper">
-              {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
-              {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-              <div
-                className="dialog-overlay"
-                onClick={this.handleOverlayClick}
-                role={this.overlayRole}
-              />
-              <div
-                role="dialog"
-                aria-modal
-                aria-labelledby={this.props.labelledBy}
-                aria-describedby={this.props.describedBy}
-                className={classnames(
-                  "dialog",
-                  this.props.className,
-                  this.state.additionalClassNames
-                )}
-                style={this.style()}
-              >
-                {this.props.showCloseButton ? (
-                  <button
-                    onClick={this.handleCloseClick}
-                    className="dialog__close"
-                  >
-                    <IconComposer icon="close16" size={24} />
-                    <span className="screen-reader-text">
-                      {this.props.t("modals.close")}
-                    </span>
-                  </button>
-                ) : null}
-                {this.renderChildren()}
-              </div>
+      <BodyClass className={"no-scroll"}>
+        <FocusTrap
+          focusTrapOptions={{
+            escapeDeactivates: this.handleEscape
+          }}
+        >
+          <div className="dialog-wrapper">
+            {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
+            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+            <div
+              className="dialog-overlay"
+              onClick={this.handleOverlayClick}
+              role={this.overlayRole}
+            />
+            <div
+              role="dialog"
+              aria-modal
+              aria-labelledby={this.props.labelledBy}
+              aria-describedby={this.props.describedBy}
+              className={classnames(
+                "dialog",
+                this.props.className,
+                this.state.additionalClassNames
+              )}
+              style={this.style}
+            >
+              {this.props.showCloseButton ? (
+                <button
+                  onClick={this.handleCloseClick}
+                  className="dialog__close"
+                >
+                  <IconComposer icon="close16" size={24} />
+                  <span className="screen-reader-text">
+                    {this.props.t("modals.close")}
+                  </span>
+                </button>
+              ) : null}
+              {this.renderChildren()}
             </div>
-          </FocusTrap>
-        </BodyClass>
-      </CSSTransition>
+          </div>
+        </FocusTrap>
+      </BodyClass>
     );
 
     // Because this renders in a portal, it cannot render on the server. We probably never
