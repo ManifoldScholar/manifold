@@ -13,6 +13,7 @@ import throttle from "lodash/throttle";
 import { websocketActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import config from "config";
+import { Prompt } from "react-router-dom";
 
 const { request, flush } = entityStoreActions;
 
@@ -263,7 +264,8 @@ export class IngestionIngest extends Component {
     }
 
     return (
-      <div>
+      <>
+        <Prompt message={this.props.t("messages.unsaved_changes")} />
         <div className="ingestion-output">
           <Heading
             ingestion={this.props.ingestion}
@@ -307,7 +309,7 @@ export class IngestionIngest extends Component {
             </button>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
