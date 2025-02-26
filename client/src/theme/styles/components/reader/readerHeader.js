@@ -1,5 +1,4 @@
 import {
-  reactSlideTransition,
   respond,
   rgba,
   listHorizontal,
@@ -14,8 +13,6 @@ export default `
 .reader-header {
   --padding-lateral: var(--container-padding-inline-narrow);
   --padding-lateral-narrow: 11px;
-
-  ${reactSlideTransition("right", ".search-menu")}
 
   position: fixed;
   top: 0;
@@ -239,10 +236,14 @@ export default `
     width: 100%;
 
     &--left {
+      --Panel-starting-transform: translateX(-100%);
+
       left: 0;
     }
 
     &--right {
+      --Panel-starting-transform: translateX(100%);
+
       right: 0;
     }
   }

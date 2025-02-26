@@ -8,14 +8,13 @@ import {
   buttonUnstyled,
   defaultHoverStyle,
   defaultTransitionProps,
-  reactSlideTransition,
   respond
 } from "theme/styles/mixins";
 import { ZOOM_BREAKPOINT } from "theme/styles/components/reader/readerHeader";
 
 export const Menu = styled.div`
-  ${reactSlideTransition("left")}
-  max-width: ${fluidScale("390px", "330px")};
+  position: absolute;
+  inline-size: ${fluidScale("390px", "330px")};
   background-color: var(--box-bg-color);
   box-shadow: 0 12px 22px -3px ${rgba("neutralBlack", 0.13)};
   overflow: auto;

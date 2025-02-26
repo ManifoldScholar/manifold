@@ -88,6 +88,7 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
 
     return (
       <Overlay
+        open
         closeCallback={this.handleClose}
         appearance="overlay-full bg-neutral90"
       >
