@@ -276,9 +276,10 @@ function handleRequest(state, action) {
 function handleFlush(state, action) {
   const metasToFlush = action.payload;
   const responses = { ...state.responses };
-  metasToFlush.forEach(meta => {
-    delete responses[meta];
-  });
+  if (metasToFlush?.length)
+    metasToFlush.forEach(meta => {
+      delete responses[meta];
+    });
   let entities = state.entities;
   if (Object.keys(responses).length === 0) {
     entities = {};
