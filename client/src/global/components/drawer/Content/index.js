@@ -24,11 +24,12 @@ function DrawerContent(props, ref) {
     handleLeaveEvent,
     lockScroll = false,
     hasConfirm,
-    showNotifications
+    showNotifications,
+    open
   } = props;
 
   const connected = useFromStore("websocket.connected");
-  usePreventBodyScroll(lockScroll);
+  usePreventBodyScroll(lockScroll && open);
 
   // Waits for animation to finish before focusing in trap.
   const checkCanFocusTrap = trapContainers => {
@@ -119,9 +120,11 @@ function DrawerContent(props, ref) {
       ref={ref}
       onBlur={handleBlur}
       $fullHeight={focusTrap}
+      inert={!open ? "" : undefined}
     >
-      {focusTrap ? (
+      {focusTrap && lockScroll ? (
         <FocusTrap
+          active={open}
           focusTrapOptions={{
             checkCanFocusTrap,
             allowOutsideClick: context === "reader",
@@ -157,5 +160,6 @@ DrawerContent.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   handleLeaveEvent: PropTypes.func.isRequired,
   lockScroll: PropTypes.bool,
-  hasConfirm: PropTypes.bool
+  hasConfirm: PropTypes.bool,
+  open: PropTypes.bool
 };

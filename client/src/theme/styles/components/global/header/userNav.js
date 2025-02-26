@@ -1,15 +1,7 @@
-import {
-  respond,
-  listUnstyled,
-  defaultTransitionProps
-} from "theme/styles/mixins";
+import { respond, listUnstyled } from "theme/styles/mixins";
 import { headerLayout } from "theme/styles/variables/crossComponent";
 
-const {
-  paddingVerticalMobile,
-  paddingVerticalDesktop,
-  menuSlideDistance
-} = headerLayout;
+const { paddingVerticalMobile, paddingVerticalDesktop } = headerLayout;
 
 export default `
   .user-nav {
@@ -51,18 +43,10 @@ export default `
       margin-right: 4px;
     }
 
-    @keyframes menuSlideFade {
-      from {
-        transform: translateY(${-1 * parseInt(menuSlideDistance, 10)}px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     .search-menu {
+      --Panel-starting-transform: translateY(-4rem);
+      --Panel-starting-opacity: 0;
+
       top: 100%;
     }
 
@@ -70,30 +54,6 @@ export default `
       padding: 28px 22px 22px;
 
       ${respond(`padding: 20px 24px 22px;`, 40)}
-    }
-
-    .panel-enter .search-menu {
-      opacity: 0;
-      transform: translateY(${-1 * parseInt(menuSlideDistance, 10)}px);
-    }
-
-    .panel-enter-active .search-menu {
-      opacity: 1;
-      transition: opacity ${defaultTransitionProps},
-        transform ${defaultTransitionProps};
-      transform: translateY(0);
-    }
-
-    .panel-exit .search-menu {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .panel-exit-active .search-menu {
-      opacity: 0;
-      transition: opacity ${defaultTransitionProps},
-        transform ${defaultTransitionProps};
-      transform: translateY(${-1 * parseInt(menuSlideDistance, 10)}px);
     }
   }
 `;

@@ -52,5 +52,6 @@ export const PrevIconSm = styled(IconSm)`
 `;
 
 export const Text = styled.span`
+  transform: translateY(-8%);
   ${respond(`display: none;`, 60)}
 `;
