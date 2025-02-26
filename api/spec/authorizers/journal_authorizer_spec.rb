@@ -22,6 +22,7 @@ RSpec.describe "Journal Abilities", :authorizer do
     include_examples "unauthorized to manage journal permissions"
     include_examples "unauthorized to manage journal entitlements"
     include_examples "unauthorized to manage journal issues"
+    include_examples "unauthorized to manage journal issue projects"
   end
 
   shared_examples_for "full access" do
@@ -30,6 +31,7 @@ RSpec.describe "Journal Abilities", :authorizer do
     include_examples "authorized to manage journal permissions"
     include_examples "authorized to manage journal entitlements"
     include_examples "authorized to manage journal issues"
+    include_examples "authorized to manage journal issue projects"
   end
 
   shared_examples_for "not admin" do
@@ -43,6 +45,7 @@ RSpec.describe "Journal Abilities", :authorizer do
     include_examples "unauthorized to manage journal permissions"
     include_examples "unauthorized to manage journal entitlements"
     include_examples "unauthorized to manage journal issues"
+    include_examples "unauthorized to manage journal issue projects"
   end
 
   shared_examples_for "read access" do
@@ -96,6 +99,41 @@ RSpec.describe "Journal Abilities", :authorizer do
     end
   end
 
+  shared_examples_for "authorized to manage journal issue projects" do
+    it "is able to create journal issue projects" do
+      is_expected.to be_able_to(
+        :create
+      ).on(journal_issue.project)
+    end
+    it "is able to read journal issue projects" do
+      is_expected.to be_able_to(
+        :read
+      ).on(journal_issue.project)
+    end
+    it "is able to update journal issue projects" do
+      is_expected.to be_able_to(
+        :update
+      ).on(journal_issue.project)
+    end
+    it "is able to destroy journal issue projects" do
+      is_expected.to be_able_to(
+        :destroy
+      ).on(journal_issue.project)
+    end
+  end
+
+  shared_examples_for "unauthorized to manage journal issue projects" do
+   it "is unable to manage journal issue projects" do
+      is_expected.to be_unable_to(
+        :manage_permissions,
+        :create_permissions,
+        :create,
+        :update,
+        :destroy
+      ).on(journal_issue.project)
+    end
+  end
+
   shared_examples_for "unauthorized to create new journals" do
     it { is_expected.to be_unable_to(:create).on(journal)}
   end
@@ -141,6 +179,7 @@ RSpec.describe "Journal Abilities", :authorizer do
   context "when the user is a project editor" do
     before do
       user.add_role :project_editor, journal
+      user.remove_role :reader
     end
 
     include_examples "authorized to manage journal issues"
@@ -154,15 +193,22 @@ RSpec.describe "Journal Abilities", :authorizer do
   context "when the user is a journal editor" do
     before do
       user.add_role :journal_editor, journal
+      user.remove_role :reader
     end
 
     include_examples "authorized to manage journal issues"
-
+    include_examples "authorized to manage journal issue projects"
     include_examples "unauthorized to create new journals"
     include_examples "unauthorized to delete journals"
     include_examples "not admin"
     include_examples "read access"
     include_examples "edit access"
-  end
 
+    context "when the journal issue is a draft" do
+      let!(:journal_issue) { FactoryBot.create :draft_journal_issue, journal: journal }
+
+      include_examples "authorized to manage journal issues"
+      include_examples "authorized to manage journal issue projects"
+    end
+  end
 end
