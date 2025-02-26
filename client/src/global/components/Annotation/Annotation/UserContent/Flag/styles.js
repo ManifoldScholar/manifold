@@ -27,3 +27,7 @@ export const ButtonGroup = styled.div`
 
     ${respond(`flex-basis: max-content`, 65)}
 `;
+
+export const Heading = styled.h2`
+  color: ${$dark => ($dark ? `var(--strong-color)` : `var(--box-color)`)};
+`;
