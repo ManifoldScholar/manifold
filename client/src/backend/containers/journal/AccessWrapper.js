@@ -4,9 +4,22 @@ import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import EntitlementsContainer from "backend/containers/entitlements";
 import Authorize from "hoc/Authorize";
+import Authorization from "helpers/authorization";
+import Layout from "backend/components/layout";
+import { useFromStore } from "hooks";
+import Permissions from "./Permissions";
 
 export default function JournalAccessWrapper({ journal, route }) {
   const closeUrl = lh.link("backendJournalAccess", journal.id);
+
+  const authorization = new Authorization();
+  const authentication = useFromStore("authentication");
+
+  const canGrantPermissions = authorization.authorizeAbility({
+    authentication,
+    entity: journal,
+    ability: "managePermissions"
+  });
 
   return journal ? (
     <>
@@ -16,7 +29,10 @@ export default function JournalAccessWrapper({ journal, route }) {
         failureNotification
         failureRedirect={lh.link("backendJournal", journal.id)}
       >
-        <EntitlementsContainer.List entity={journal} />
+        {canGrantPermissions && <Permissions journal={journal} />}
+        <Layout.BackendPanel flush={!canGrantPermissions}>
+          <EntitlementsContainer.List entity={journal} />
+        </Layout.BackendPanel>
       </Authorize>
       {childRoutes(route, {
         drawer: true,
@@ -34,6 +50,5 @@ JournalAccessWrapper.displayName = "Journal.Access.Wrapper";
 
 JournalAccessWrapper.propTypes = {
   journal: PropTypes.object,
-  updateJournal: PropTypes.func,
   route: PropTypes.object
 };
