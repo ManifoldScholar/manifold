@@ -25,7 +25,7 @@ export default function FlagModalToggle({ record, annotationId }) {
         </Styled.SecondaryButton>
       ) : (
         <Styled.SecondaryButton onClick={() => setOpen(true)}>
-          {t("actions.flag")}
+          {t("actions.report")}
         </Styled.SecondaryButton>
       )}
       {open && (
