@@ -21,6 +21,9 @@ const getStylesForType = type => {
       `;
     case "slide":
       return `
+      appearance: none;
+      padding: 0;
+
       &:focus-visible {
         border: 0;
         outline: 0;

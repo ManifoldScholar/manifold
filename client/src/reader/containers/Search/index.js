@@ -69,6 +69,7 @@ class SearchContainer extends PureComponent {
   render() {
     return (
       <Overlay
+        open
         triggerScrollToTop={this.searchNum}
         closeCallback={this.close}
         title={this.props.t("search.results")}

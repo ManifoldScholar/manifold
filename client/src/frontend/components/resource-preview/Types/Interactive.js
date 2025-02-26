@@ -28,7 +28,11 @@ export default class ResourcePreviewInteractive extends Component {
   render() {
     return (
       <Styled.InteractiveWrapper>
-        <ResourcePlayer.Iframe {...this.props} styleProps={this.styleProps} />
+        <ResourcePlayer.Iframe
+          {...this.props}
+          styleProps={this.styleProps}
+          loading="lazy"
+        />
       </Styled.InteractiveWrapper>
     );
   }

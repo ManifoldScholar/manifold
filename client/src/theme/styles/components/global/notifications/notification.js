@@ -11,7 +11,8 @@ export default `
   .notification {
     --color: var(--color-neutral-text-extra-dark);
 
-    width: 100%;
+    inline-size: 100%;
+    margin-block-end: var(--Notification-margin-block-end);
     color: var(--color);
 
     &--notice {
@@ -27,7 +28,32 @@ export default `
     }
 
     &--context-drawer {
+      margin-block-end: 26px;
       background-color: var(--color-base-neutral90);
+      transition: opacity var(--transition-duration-default);
+
+      @starting-style {
+        opacity: 0;
+      }
+    }
+
+    &--context-header {
+      transition: transform var(--transition-duration-default) ease-out,
+        opacity var(--transition-duration-default) ease-out;
+
+      @starting-style {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      .notifications-list.removing & {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      & + & {
+        border-block-start: 1px solid var(--color-neutral-ui-extra-dark);
+      }
     }
 
     &__container {
