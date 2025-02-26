@@ -31,7 +31,7 @@ export default class ResourceListSlideImage extends Component {
     return (
       <>
         {this.props.enableZoom && <Zoom resource={this.props.resource} />}
-        <Styled.Image src={this.src} alt={this.altText} />
+        <Styled.Image src={this.src} alt={this.altText} loading="lazy" />
       </>
     );
   }

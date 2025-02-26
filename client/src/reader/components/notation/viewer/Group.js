@@ -1,9 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import {
-  TransitionGroup as ReactTransitionGroup,
-  CSSTransition
-} from "react-transition-group";
 import classNames from "classnames";
 import Single from "./Single";
 import Notation from "./Notation";
@@ -82,20 +78,15 @@ export default class NotationViewerGroup extends PureComponent {
         className="notation-preview-group"
       >
         <div className="group-highlighted-notation-wrapper">
-          <CSSTransition
-            classNames="highlight"
-            timeout={{ enter: 200, exit: 200 }}
-          >
-            <Single
-              entry={activeEntry}
-              params={params}
-              actions={actions}
-              showTitle={false}
-              active={activeAnnotation === activeEntry.annotation.id}
-            />
-          </CSSTransition>
+          <Single
+            key={activeEntry}
+            entry={activeEntry}
+            params={params}
+            actions={actions}
+            showTitle={false}
+            active={activeAnnotation === activeEntry.annotation.id}
+          />
         </div>
-
         <ul className={thumbClasses}>
           {entries.map(entry => {
             const { notation, annotation } = entry;

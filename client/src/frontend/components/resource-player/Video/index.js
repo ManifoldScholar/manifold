@@ -66,7 +66,10 @@ class ResourcePlayerVideo extends Component {
       src: this.iframeSrc,
       frameBorder: "0",
       allowFullScreen: true,
-      type: this.externalType === "youtube" ? "text/html" : null
+      type: this.externalType === "youtube" ? "text/html" : null,
+      loading: "lazy",
+      width: 560,
+      height: 315
     };
   }
 
