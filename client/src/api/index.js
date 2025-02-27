@@ -29,7 +29,6 @@ export ingestionsAPI from "./resources/ingestions";
 export stylesheetsAPI from "./resources/stylesheets";
 export searchResultsAPI from "./resources/searchResults";
 export testMailsAPI from "./resources/testMails";
-export twitterQueriesAPI from "./resources/twitterQueries";
 export permissionsAPI from "./resources/permissions";
 export requests from "./requests";
 export ApiClient from "./client";

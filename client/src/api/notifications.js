@@ -189,45 +189,6 @@ export default {
       expiration: defaultExpiration
     };
   },
-  [r.beTwitterQueryUpdate]: payloadIgnored => {
-    return {
-      level: 0,
-      heading: "Success!",
-      body: `This Twitter query has been updated.`,
-      expiration: defaultExpiration
-    };
-  },
-  [r.beTwitterQueryCreate]: payload => {
-    let query = null;
-    if (payload && payload.data && payload.data.attributes) {
-      query = payload.data.attributes.query;
-    }
-    const msg = query
-      ? `This project will now fetch tweets for "${query}".`
-      : "The Twitter query has been created.";
-    return {
-      level: 0,
-      heading: "Success!",
-      body: msg,
-      expiration: defaultExpiration
-    };
-  },
-  [r.beTwitterQueryDestroy]: payloadIgnored => {
-    return {
-      level: 0,
-      heading: "Success!",
-      body: "The twitter query has been deleted.",
-      expiration: defaultExpiration
-    };
-  },
-  [r.beTwitterQueryFetch]: payloadIgnored => {
-    return {
-      level: 0,
-      heading: "Success!",
-      body: `Tweets have been fetched.`,
-      expiration: defaultExpiration
-    };
-  },
   [r.bePermissionCreate]: payloadIgnored => {
     return {
       level: 0,

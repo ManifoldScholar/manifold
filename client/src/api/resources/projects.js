@@ -95,16 +95,6 @@ export default {
     };
   },
 
-  twitterQueries(id, page = {}) {
-    return {
-      endpoint: `/api/v1/projects/${id}/relationships/twitter_queries`,
-      method: "GET",
-      options: {
-        params: { page }
-      }
-    };
-  },
-
   versions(id, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/projects/${id}/relationships/versions`,
