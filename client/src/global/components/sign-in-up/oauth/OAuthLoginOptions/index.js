@@ -14,9 +14,7 @@ export default function OAuthLoginOptions() {
   return (
     <Styled.Wrapper>
       <OAuthMonitor />
-      <OAuthProviderButton provider="facebook" icon="socialFacebook32" />
       <OAuthProviderButton provider="google" icon="socialEmail32" />
-      <OAuthProviderButton provider="twitter" icon="socialTwitter32" />
       {customOAuthProviders.map(provider => (
         <OAuthProviderButton key={provider.name} provider={provider.name} />
       ))}
