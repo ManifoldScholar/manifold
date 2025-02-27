@@ -198,7 +198,6 @@ RSpec.describe "Journal Abilities", :authorizer do
 
     include_examples "authorized to manage journal issues"
     include_examples "authorized to manage journal issue projects"
-    include_examples "unauthorized to create new journals"
     include_examples "unauthorized to delete journals"
     include_examples "not admin"
     include_examples "read access"

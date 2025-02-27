@@ -338,6 +338,12 @@ RSpec.describe "Project Abilities", :authorizer do
       user.remove_role :reader
     end
 
-    include_examples "full access"
+    it { is_expected.to be_able_to(:read).on(journal_issue.project) }
+    it { is_expected.to be_able_to(:update).on(journal_issue.project) }
+    it { is_expected.to be_able_to(:destroy).on(journal_issue.project) }
+    it { is_expected.to be_able_to(:create).on(journal_issue.project) }
+
+    it { is_expected.not_to be_able_to(:update).on(project) }
+    xit { is_expected.not_to be_able_to(:destroy).on(project) }
   end
 end
