@@ -18,7 +18,6 @@ import CollectionProjectRow from "./Entity/CollectionProjectRow";
 import ResourceRow from "./Entity/ResourceRow";
 import ResourceCollectionRow from "./Entity/ResourceCollectionRow";
 import SubjectRow from "./Entity/SubjectRow";
-import TwitterQueryRow from "./Entity/TwitterQueryRow";
 import UserRow from "./Entity/UserRow";
 import TagRow from "./Entity/TagRow";
 import StringRow from "./Entity/StringRow";
@@ -57,7 +56,6 @@ export {
   ResourceRow,
   ResourceCollectionRow,
   SubjectRow,
-  TwitterQueryRow,
   UserRow,
   TagRow,
   StringRow,

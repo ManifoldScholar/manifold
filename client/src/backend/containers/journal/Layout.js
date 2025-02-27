@@ -33,7 +33,7 @@ function JournalLayoutContainer({ journal, refresh, history, route }) {
       failureRedirect={lh.link("backendJournal", journal.id)}
     >
       <Hero.Builder
-        include={["journalDescription", "actionCallouts", "social"]}
+        include={["journalDescription", "actionCallouts"]}
         dispatch={dispatch}
         history={history}
         actionCallouts={actionCallouts}

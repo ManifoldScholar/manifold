@@ -11,7 +11,6 @@ import Makers from "backend/containers/makers";
 import Ingestion from "backend/containers/ingestion";
 import ProjectCollection from "backend/containers/project-collection";
 import Permission from "backend/containers/permission";
-import TwitterQuery from "backend/containers/twitter-query";
 import Records from "backend/containers/Records";
 import Users from "backend/containers/users";
 import Pages from "backend/containers/pages";
@@ -101,9 +100,6 @@ export default {
   ProjectEntitlements: Project.ProjectEntitlements,
   ProjectExportations: Project.ProjectExportations,
   ProjectMetadata: Project.Metadata,
-  ProjectSocialWrapper: Project.Social.Wrapper,
-  TwitterQueryNew: TwitterQuery.New,
-  TwitterQueryEdit: TwitterQuery.Edit,
   ProjectLayout: Project.Layout,
   ContentBlockNew: Content.New,
   ContentBlockEdit: Content.Edit,
