@@ -44,7 +44,7 @@ export default function AcceptTerms({ handleViewChange }) {
       i18nKey="forms.signin_overlay.accept_checkbox_label_truncated"
       values={{ installationName }}
       components={{
-        termsLink: termsPage ? <a href={termsPage}>#</a> : <></>
+        termsLink: termsPage ? <a href={termsLink}>#</a> : <></>
       }}
     />
   );
