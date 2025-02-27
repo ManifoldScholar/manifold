@@ -1,5 +1,5 @@
 import React from "react";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "../hoist-non-react-statics";
 import { ManifoldAnalyticsContext } from "helpers/contexts";
 
 function getDisplayName(WrappedComponent) {

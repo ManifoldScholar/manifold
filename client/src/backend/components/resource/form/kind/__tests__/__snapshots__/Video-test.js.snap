@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`backend/components/resource/form/kind/Video matches the snapshot when rendered 1`] = `"<label for=\\"switch-input-1\\" class=\\"css-4ymze7-Label e2dgthi0\\"><span class=\\"css-lj83hv-LabelTextPrimary e2dgthi2\\">resources.new.video_source</span><input type=\\"checkbox\\" id=\\"switch-input-1\\" class=\\"css-1xi7143-BaseInput-InputSwitch e2dgthi6\\"><span class=\\"toggle-indicator css-z42ajb-IndicatorSwitchOuter e2dgthi9\\"><span aria-hidden=\\"true\\" class=\\"css-1mj677n-IndicatorSwitchInner e2dgthi8\\"></span></span></label>"`;
-
-exports[`backend/components/resource/form/kind/Video when sub kind is external_video matches the snapshot when rendered 1`] = `"<label for=\\"switch-input-1\\" class=\\"css-4ymze7-Label e2dgthi0\\"><span class=\\"css-lj83hv-LabelTextPrimary e2dgthi2\\">resources.new.video_source</span><input type=\\"checkbox\\" id=\\"switch-input-1\\" class=\\"css-1xi7143-BaseInput-InputSwitch e2dgthi6\\"><span class=\\"toggle-indicator css-z42ajb-IndicatorSwitchOuter e2dgthi9\\"><span aria-hidden=\\"true\\" class=\\"css-1mj677n-IndicatorSwitchInner e2dgthi8\\"></span></span></label>"`;

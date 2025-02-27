@@ -28,7 +28,7 @@ export default `
         color: var(--color);
       }
 
-      &.focus-visible {
+      &:focus-visible {
         outline: 0;
 
         &::placeholder {

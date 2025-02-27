@@ -19,8 +19,7 @@ export const eventEntity = {
 
 export const headerLayout = {
   paddingVerticalMobile: "9px",
-  paddingVerticalDesktop: "19px",
-  menuSlideDistance: "30px"
+  paddingVerticalDesktop: "19px"
 };
 
 export const standaloneHeaderLayout = {

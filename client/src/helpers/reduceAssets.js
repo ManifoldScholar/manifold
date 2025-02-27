@@ -13,12 +13,7 @@ export default function reduceAssets(ext, stats) {
   return reduce(
     chunks,
     (entries, assets, chunkName) => {
-      if (
-        ![
-          "build/manifold-client-browser",
-          "build/manifold-client-print"
-        ].includes(chunkName)
-      )
+      if (!["build/manifold-client-browser"].includes(chunkName))
         return entries;
       if (isString(assets) && test(assets)) entries.push(assets);
       if (isArray(assets)) {

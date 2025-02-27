@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Dialog from "global/components/dialog";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "../hoist-non-react-statics";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";

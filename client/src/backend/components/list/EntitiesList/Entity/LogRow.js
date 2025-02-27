@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import humps from "humps";
+import humps from "utils/humps";
 import EntityRow from "./Row";
 import { Trans, withTranslation } from "react-i18next";
 

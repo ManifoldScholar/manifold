@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import { useUID } from "react-uid";
 import Header from "./Header";
 
 import BodyClass from "hoc/BodyClass";
 
 function Overlay({
+  open = true,
   title,
   subtitle,
   icon,
@@ -40,17 +41,18 @@ function Overlay({
   }, [triggerScrollToTop]);
 
   return (
-    <BodyClass className="no-scroll overlay">
+    <BodyClass className={open ? "no-scroll overlay" : ""}>
       <div
         className={appearance || "overlay-full"}
-        key="globalOverlay"
         ref={overlayRef}
         id={id}
         role="dialog"
         aria-modal
         aria-labelledby={headerId}
+        inert={!open ? "" : undefined}
       >
         <FocusTrap
+          active={open}
           focusTrapOptions={{
             escapeDeactivates: e => handleCloseEvent(e)
           }}

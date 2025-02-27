@@ -1,22 +1,22 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import loadable from "@loadable/component";
 import Tile from "./Tile/index";
 import lh from "helpers/linkHandler";
-import Loadable from "@docusaurus/react-loadable";
+
+const Loaded = loadable.lib(() =>
+  import(/* webpackChunkName: "autolinker" */ "autolinker")
+);
 
 /* eslint-disable react/prop-types */
-const autolinkTweet = props => {
-  const Loaded = Loadable({
-    loader: () => import(/* webpackChunkName: "autolinker" */ "autolinker"),
-    render(Autolinker) {
-      const excerpt = Autolinker.default.link(props.excerpt, props.options);
+const autolinkTweet = props => (
+  <Loaded fallback={<p dangerouslySetInnerHTML={{ __html: props.excerpt }} />}>
+    {({ default: autolinker }) => {
+      const excerpt = autolinker.default.link(props.excerpt, props.options);
       return <p dangerouslySetInnerHTML={{ __html: excerpt }} />;
-    },
-    loading: () => <p dangerouslySetInnerHTML={{ __html: props.excerpt }} />
-  });
-
-  return <Loaded {...props} />;
-};
+    }}
+  </Loaded>
+);
 /* eslint-enable react/prop-types */
 
 export default class Event extends PureComponent {
