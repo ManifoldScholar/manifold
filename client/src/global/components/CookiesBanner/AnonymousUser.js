@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NarrowBanner from "./NarrowBanner";
 import FormEmbedBanner from "./FormEmbedBanner";
 import { useFromStore } from "hooks";
@@ -9,9 +9,12 @@ const cookie = new CookieHelper();
 
 export default function AnonymousUserBanner() {
   const [showForm, setShowForm] = useState(false);
-  const [consentNeeded, setConsentNeeded] = useState(
-    !cookie.read("anonAnalyticsConsent")
-  );
+  const [consentNeeded, setConsentNeeded] = useState(false);
+
+  useEffect(() => {
+    const hasConsentCookie = !!cookie.read("anonAnalyticsConsent");
+    setConsentNeeded(!hasConsentCookie);
+  }, []);
 
   const settings = useFromStore("settings", "select");
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
@@ -33,7 +36,9 @@ export default function AnonymousUserBanner() {
           : all
       };
 
-      cookie.write("anonAnalyticsConsent", prefs, { expires: 365 });
+      cookie.write("anonAnalyticsConsent", JSON.stringify(prefs), {
+        expires: 365
+      });
 
       ReactGA.gtag("consent", "default", {
         analytics_storage: prefs.consentGoogleAnalytics ? "granted" : "denied"
