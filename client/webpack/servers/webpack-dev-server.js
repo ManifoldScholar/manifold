@@ -3,6 +3,7 @@ import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 import webpackConfig from "../config/browser-dev.config";
 import ch from "../../src/helpers/consoleHelpers";
+import paths from "../helpers/paths";
 
 const compiler = webpack(webpackConfig);
 let timer;
@@ -40,7 +41,9 @@ const serverOptions = {
   allowedHosts,
   port: environment.devPort,
   headers: { "Access-Control-Allow-Origin": "*" },
-  // webSocketServer: "sockjs"
+  static: {
+    directory: paths.root
+  }
 };
 
 const server = new WebpackDevServer(serverOptions, compiler);
