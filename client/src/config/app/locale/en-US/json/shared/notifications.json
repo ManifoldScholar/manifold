@@ -18,6 +18,7 @@
     "resource_collection_delete": "The resource collection has been destroyed.",
     "resource_delete": "The resource has been destroyed.",
     "text_delete": "The text has been destroyed.",
+    "user_delete": "{{name}} has been removed.",
     "volume_body": "Volume #{{number}} has passed into the endless night.",
     "volume_delete": "The volume has been destroyed."
   }
