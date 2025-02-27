@@ -23,7 +23,7 @@ export default function useGoogleAnalytics(location, settings) {
   const [gaInitialized, setGaInitialized] = useState(false);
   const { currentUser } = useFromStore("authentication") ?? {};
 
-  const anonConsent = cookie.read("anonAnalyticsConsent");
+  const anonConsent = JSON.parse(cookie.read("anonAnalyticsConsent") ?? "{}");
 
   const consentGoogleAnalytics =
     currentUser?.attributes?.consentGoogleAnalytics ||
