@@ -294,13 +294,6 @@ class Navigation {
         args
       },
       {
-        label: "titles.social",
-        route: "backendProjectSocial",
-        entity: project,
-        ability: "manageSocials",
-        args
-      },
-      {
         label: "titles.exports",
         route: "backendProjectExportations",
         entity: project,

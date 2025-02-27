@@ -20,8 +20,7 @@ class Builder extends PureComponent {
       PropTypes.oneOf([
         "projectDescription",
         "journalDescription",
-        "actionCallouts",
-        "social"
+        "actionCallouts"
       ])
     ),
     model: PropTypes.object.isRequired,
@@ -103,10 +102,6 @@ class Builder extends PureComponent {
     this.setState({ drawer: Forms.JournalDescription });
   };
 
-  openSocialDrawer = () => {
-    this.setState({ drawer: Forms.Social });
-  };
-
   toggleActionCallouts = () => {
     this.setState({ actionCalloutsOpen: !this.state.actionCalloutsOpen });
   };
@@ -179,15 +174,6 @@ class Builder extends PureComponent {
                       />
                     )}
                   </Block>
-                )}
-                {include.includes("social") && (
-                  <Block
-                    title={t("layout.social_links")}
-                    description={t("layout.social_links_description")}
-                    onEdit={this.openSocialDrawer}
-                    ariaControls={`${id}-drawer`}
-                    ariaExpanded={this.state.drawer === Forms.Social}
-                  />
                 )}
               </div>
             </section>

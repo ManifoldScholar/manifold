@@ -15,7 +15,6 @@ import ProjectPage from "./ProjectPage";
 import Resource from "./resource";
 import ResourceCollections from "./ResourceCollections";
 import Resources from "./Resources";
-import Social from "./social";
 import Text from "./text";
 import Texts from "./Texts";
 import Wrapper from "./Wrapper";
@@ -37,7 +36,6 @@ export default {
   Resource,
   ResourceCollections,
   Resources,
-  Social,
   Text,
   Texts,
   Wrapper,

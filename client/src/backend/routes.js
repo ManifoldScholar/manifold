@@ -559,31 +559,6 @@ const routes = {
               helper: p => `/backend/projects/${p}/metadata`
             },
             {
-              name: "backendProjectSocial",
-              exact: false,
-              component: "ProjectSocialWrapper",
-              path: "/backend/projects/:pId/social/:type(twitter-query)?/:qId?",
-              helper: p => `/backend/projects/${p}/social`,
-              routes: [
-                {
-                  name: "backendProjectSocialTwitterQueryNew",
-                  exact: true,
-                  component: "TwitterQueryNew",
-                  path: "/backend/projects/:pId/social/twitter-query/new",
-                  helper: pId =>
-                    `/backend/projects/${pId}/social/twitter-query/new`
-                },
-                {
-                  name: "backendProjectSocialTwitterQuery",
-                  exact: true,
-                  component: "TwitterQueryEdit",
-                  path: "/backend/projects/:pId/social/twitter-query/:id",
-                  helper: (pId, id) =>
-                    `/backend/projects/${pId}/social/twitter-query/${id}`
-                }
-              ]
-            },
-            {
               name: "backendProjectExportations",
               exact: false,
               component: "ProjectExportations",
