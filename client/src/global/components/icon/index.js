@@ -141,13 +141,11 @@ import Share24 from "./24/Share";
 import Share32 from "./32/Share";
 import SocialCite32 from "./32/SocialCite";
 import SocialEmail32 from "./32/SocialEmail";
-import SocialFacebook32 from "./32/SocialFacebook";
 import SocialGithub32 from "./32/SocialGithub";
 import SocialGoogle32 from "./32/SocialGoogle";
 import SocialInstagram32 from "./32/SocialInstagram";
 import SocialLinkedIn32 from "./32/SocialLinkedIn";
 import SocialSlack32 from "./32/SocialSlack";
-import SocialTwitter32 from "./32/SocialTwitter";
 import Speaker24 from "./24/Speaker";
 import SpeakerMuted24 from "./24/SpeakerMuted";
 import StarSquircle32 from "./32/StarSquircle";
@@ -346,13 +344,11 @@ export default {
   Share32,
   SocialCite32,
   SocialEmail32,
-  SocialFacebook32,
   SocialGithub32,
   SocialGoogle32,
   SocialInstagram32,
   SocialLinkedIn32,
   SocialSlack32,
-  SocialTwitter32,
   Speaker24,
   SpeakerMuted24,
   StarSquircle32,

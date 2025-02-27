@@ -19,8 +19,6 @@ export class HeadContentComponent extends Component {
     imageHeight: PropTypes.string,
     locale: PropTypes.string,
     charset: PropTypes.string,
-    twitterCard: PropTypes.string,
-    twitterSite: PropTypes.string,
     description: PropTypes.string,
     appendDefaultTitle: PropTypes.bool,
     settings: PropTypes.object
@@ -44,13 +42,6 @@ export class HeadContentComponent extends Component {
 
   get socialTitle() {
     return this.props.socialTitle || this.appendedTitle;
-  }
-
-  get twitterSite() {
-    const twitter =
-      get(this.props.settings, "attributes.general.twitter") ||
-      this.props.twitterSite;
-    return `@${twitter}`;
   }
 
   get description() {
@@ -94,8 +85,6 @@ export class HeadContentComponent extends Component {
     this.addOpenGraph(meta, "description", null, this.description);
     this.addOpenGraph(meta, "imageWidth", "image:width");
     this.addOpenGraph(meta, "imageHeight", "image:height");
-    this.addMeta(meta, "twitterCard", "twitter:card");
-    this.addMeta(meta, "twitterSite", "twitter:site", this.twitterSite);
     return meta;
   }
 
