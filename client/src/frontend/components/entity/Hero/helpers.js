@@ -36,12 +36,6 @@ export const getPartsData = entity => {
       : false;
   const bgAlt = entity.attributes.heroAltText;
 
-  const twitter = entity.attributes.twitterId;
-  const instagram = entity.attributes.instagramId;
-  const facebook = entity.attributes.facebookId;
-  const hashtag = entity.attributes.hashtag;
-  const social = !!twitter || !!instagram || !!facebook || !!hashtag;
-
   const description = entity.attributes.descriptionFormatted;
   const { creators, flattenedCollaborators } = entity.relationships;
   const cover = entity.attributes.coverStyles?.medium;
@@ -53,11 +47,6 @@ export const getPartsData = entity => {
     copy,
     bgImage,
     bgAlt,
-    twitter,
-    instagram,
-    facebook,
-    hashtag,
-    social,
     description,
     creators,
     flattenedCollaborators,

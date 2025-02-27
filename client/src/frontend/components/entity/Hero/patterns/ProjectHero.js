@@ -1,14 +1,6 @@
 import React, { useRef, useCallback } from "react";
 import PropTypes from "prop-types";
-import {
-  CalloutList,
-  Cover,
-  Credits,
-  Image,
-  Meta,
-  Social,
-  Title
-} from "../parts";
+import { CalloutList, Cover, Credits, Image, Meta, Title } from "../parts";
 import EntityHero from "../EntityHero";
 import { getAuth, getPartsData } from "../helpers";
 import Authorization from "helpers/authorization";
@@ -25,11 +17,6 @@ export default function ProjectHero({ entity, mock }) {
     copy,
     bgImage,
     bgAlt,
-    twitter,
-    instagram,
-    facebook,
-    hashtag,
-    social,
     description,
     creators,
     flattenedCollaborators
@@ -80,16 +67,6 @@ export default function ProjectHero({ entity, mock }) {
             />
           )}
         </>
-      }
-      BottomLeftComponent={
-        social && (
-          <Social
-            twitter={twitter}
-            facebook={facebook}
-            instagram={instagram}
-            hashtag={hashtag}
-          />
-        )
       }
       TopRightComponent={
         <>

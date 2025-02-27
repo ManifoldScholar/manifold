@@ -17,7 +17,6 @@ import paginationCount from "./paginationCount";
 import search from "./search";
 import sectionHeading from "./sectionHeading";
 import sectionHeadingSecondary from "./sectionHeadingSecondary";
-import shareNavPrimary from "./shareNavPrimary";
 import skipToMain from "./skipToMain";
 import table from "./table";
 import userMenu from "./userMenu";
@@ -37,7 +36,6 @@ export default `
   ${loadingBar}
   ${sectionHeading}
   ${sectionHeadingSecondary}
-  ${shareNavPrimary}
   ${userMenu}
   ${instructionalCopy}
   ${search}
