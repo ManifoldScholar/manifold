@@ -30,18 +30,18 @@ const Inner = styled.div`
     `flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    gap: ${fluidScale("120px", "60px", 120, 90)};
+    gap: ${fluidScale("60px", "40px", 120, 90)};
     `,
     breakpoints[90]
   )}
 `;
 
 export const NarrowInner = styled(Inner)`
-  padding-block: ${fluidScale("60px", "40px")};
+  padding-block: ${fluidScale("40px", "20px")};
 `;
 
 export const SelectionInner = styled(Inner)`
-  padding-block: ${fluidScale("80px", "50px")};
+  padding-block: ${fluidScale("48px", "24px")};
 `;
 
 export const TextWrapper = styled.div`
@@ -64,10 +64,19 @@ export const Heading = styled.span`
   margin-block-end: 8px;
 `;
 
-export const ButtonWrapper = styled.div`
+export const AsideWrapper = styled.div`
+  flex-shrink: 0;
   display: flex;
-  width: 310px;
-  gap: 20px;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const ButtonWrapper = styled.div`
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 12px;
 `;
 
 export const Button = styled("button", transientOptions)`
