@@ -9,7 +9,7 @@ RSpec.describe "Comment Abilities", :authorizer do
 
     the_subject_behaves_like "instance abilities", Comment, create: false, read: true, update: false, delete: false
 
-    the_subject_behaves_like "class abilities", Comment, create: false, read: true, update: false, destroy: false
+    the_subject_behaves_like "class abilities", Comment, create: false, read: true, update: false, delete: false
   end
 
   context "when the subject is an admin" do
@@ -34,7 +34,7 @@ RSpec.describe "Comment Abilities", :authorizer do
 
       the_subject_behaves_like "instance abilities", Comment, create: true, read: true, update: false, delete: false
 
-      the_subject_behaves_like "class abilities", Comment, create: true, read: true, update: true, destroy: true
+      the_subject_behaves_like "class abilities", Comment, create: true, read: true, update: true, delete: true
 
     end
 
@@ -45,14 +45,14 @@ RSpec.describe "Comment Abilities", :authorizer do
 
       the_subject_behaves_like "instance abilities", Comment, create: false, read: true, update: false, delete: false
 
-      the_subject_behaves_like "class abilities", Comment, create: false, read: true, update: true, destroy: true
+      the_subject_behaves_like "class abilities", Comment, create: false, read: true, update: true, delete: true
     end
   end
 
   context "when the subject is the resource creator" do
     let_it_be(:subject, refind: true) { creator }
 
-    the_subject_behaves_like "instance abilities", Comment, read: true, update: true, destroy: true
+    the_subject_behaves_like "instance abilities", Comment, read: true, update: true, delete: true
   end
 
   context "when the comment is on an annotation in a closed project with disabled engagement" do
@@ -79,7 +79,7 @@ RSpec.describe "Comment Abilities", :authorizer do
         subject.clear_email_confirmation!
       end
 
-      the_subject_behaves_like "instance abilities", Comment, create: false, read: true, update: true, destroy: true
+      the_subject_behaves_like "instance abilities", Comment, create: false, read: true, update: true, delete: true
     end
   end
 

@@ -16,6 +16,12 @@ RSpec.shared_context "authenticated request" do
     }
   end
 
+  def build_headers_for(user)
+    token = AuthToken.encode_user(user)
+
+    build_headers token
+  end
+
   def get_user_token(user_type)
     public_send("#{user_type}_auth")
   end

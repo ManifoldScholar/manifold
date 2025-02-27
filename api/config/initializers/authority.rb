@@ -46,7 +46,6 @@ Authority.configure do |config|
     read: "readable",
     update: "updatable",
     delete: "deletable",
-    destroy: "deleteable",
     read_deleted: "deleted_readable",
     read_drafts: "drafts_readable",
     fully_read: "fully_readable",

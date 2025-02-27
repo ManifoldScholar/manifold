@@ -25,6 +25,23 @@ class ProjectAuthorizer < ApplicationAuthorizer
     ]
   end.freeze
 
+  # @note This should not actually be caught by any verbs for this model,
+  #   but we add it here to prevent the authorizer from short-circuiting
+  #   to the necessarily-permissive class-level {ProjectAuthorizer.default}.
+  def default(_adjective, user, _options = {})
+    # :nocov:
+    has_any_role?(user, :admin)
+    # :nocov:
+  end
+
+  # Admins, editors, marketeers, and project creators can create projects.
+  #
+  # @param [User] user
+  # @param [Hash] _options
+  def creatable_by?(user, _options = {})
+    has_any_role?(user, :admin, :editor, :marketeer, :project_creator)
+  end
+
   # First, we check to see if the project is a draft. If so, {#drafts_readable_by? it must be readable}.
   # Otherwise, we allow a project to be read.
   #
@@ -43,7 +60,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # @param [User] user
   # @param [Hash] _options
   def updatable_by?(user, options = {})
-    has_any_role?(user, :admin, :editor, :marketeer, :project_editor) || with_journal { |j| j.updatable_by? user, options}
+    has_any_role?(user, :admin, :editor, :marketeer, :project_editor) || with_journal { |j| j.updatable_by? user, options }
   end
 
   # @!group Project Property Access Control
@@ -173,7 +190,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
     #
     # @param [User] user
     # @param [Hash] _options
-    def creatable_by?(user, options = {})
+    def creatable_by?(user, _options = {})
       project_creator_permissions?(user) || user.journal_editor?
     end
 
@@ -183,7 +200,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
     #
     # @param [User] user
     # @param [Hash] _options
-    def deletable_by?(user, options = {})
+    def deletable_by?(user, _options = {})
       has_any_role?(user, :admin, :editor, :project_editor)
     end
 

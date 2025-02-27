@@ -82,17 +82,17 @@ RSpec.describe "Project Abilities", :authorizer do
   end
 
   shared_examples_for "no access" do
-    it { is_expected.to be_unable_to(:read, :create, :update, :destroy).on(project) }
+    it { is_expected.to be_unable_to(:read, :create, :update, :delete).on(project) }
   end
 
   shared_examples_for "read only" do
     it "can only read the project" do
-      expect(user).to be_able_to(:read).on(project).and be_unable_to(:create, :update, :destroy).on(project)
+      expect(user).to be_able_to(:read).on(project).and be_unable_to(:create, :update, :delete).on(project)
     end
   end
 
   shared_examples_for "full access" do
-    it("can perform all CRUD actions") { is_expected.to be_able_to(:create, :read, :update, :destroy).on(project) }
+    it("can perform all CRUD actions") { is_expected.to be_able_to(:create, :read, :update, :delete).on(project) }
 
     include_examples "authorized to manage project children"
     include_examples "authorized to manage project entitlements"
@@ -114,7 +114,7 @@ RSpec.describe "Project Abilities", :authorizer do
     end
 
     context "when the project is published" do
-      it { is_expected.to be_able_to(:read).on(project).and be_unable_to(:create, :update, :destroy).on(project) }
+      it { is_expected.to be_able_to(:read).on(project).and be_unable_to(:create, :update, :delete).on(project) }
 
       include_examples "unauthorized to manage project children"
       include_examples "unauthorized to manage project entitlements"
@@ -158,7 +158,7 @@ RSpec.describe "Project Abilities", :authorizer do
       let(:draft) { true }
 
       it "can only create a draft project" do
-        is_expected.to be_able_to(:create).on(project).and be_unable_to(:destroy, :update, :read).on(project)
+        is_expected.to be_able_to(:create).on(project).and be_unable_to(:delete, :update, :read).on(project)
       end
 
       include_examples "unauthorized to manage project children"
@@ -192,8 +192,8 @@ RSpec.describe "Project Abilities", :authorizer do
       user.add_role :project_editor, project
     end
 
-    it "can read, update, and destroy the project" do
-      is_expected.to be_able_to(:read, :update, :destroy).on(project).and be_unable_to(:create).on(project)
+    it "can read, update, and delete the project" do
+      is_expected.to be_able_to(:read, :update, :delete).on(project).and be_unable_to(:create).on(project)
     end
 
     include_examples "authorized to manage project children"
@@ -333,17 +333,23 @@ RSpec.describe "Project Abilities", :authorizer do
     let!(:user) { FactoryBot.create :user }
     let!(:journal) { FactoryBot.create :journal}
     let!(:journal_issue) { FactoryBot.create :journal_issue, journal: journal }
+
     before do
       user.add_role :journal_editor, journal
-      user.remove_role :reader
     end
 
     it { is_expected.to be_able_to(:read).on(journal_issue.project) }
     it { is_expected.to be_able_to(:update).on(journal_issue.project) }
-    it { is_expected.to be_able_to(:destroy).on(journal_issue.project) }
-    it { is_expected.to be_able_to(:create).on(journal_issue.project) }
+    it { is_expected.not_to be_able_to(:create).on(journal_issue.project) }
 
-    it { is_expected.not_to be_able_to(:update).on(project) }
-    xit { is_expected.not_to be_able_to(:destroy).on(project) }
+    it "cannot delete a journal issue's project directly (delete the journal issue itself)" do
+      is_expected.not_to be_able_to(:delete).on(journal_issue.project)
+    end
+
+    context "against an unassociated project" do
+      it { is_expected.not_to be_able_to(:update).on(project) }
+      it { is_expected.not_to be_able_to(:delete).on(project) }
+      it { is_expected.not_to be_able_to(:create).on(project) }
+    end
   end
 end

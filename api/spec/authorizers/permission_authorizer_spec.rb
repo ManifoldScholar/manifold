@@ -35,7 +35,9 @@ RSpec.describe "Permission Abilities", :authorizer do
 
   context "when the subject is the creator of the permission's project" do
     let(:subject) { FactoryBot.create(:user, :project_creator) }
-    let(:object) { FactoryBot.create(:project, creator: subject) }
+    let(:project) { FactoryBot.create(:project, creator: subject) }
+    let(:object) { Permission.new(resource: project, role_names: %[project_editor]) }
+
     the_subject_behaves_like "instance abilities", Permission, all: true
   end
 end

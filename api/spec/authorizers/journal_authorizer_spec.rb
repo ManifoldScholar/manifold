@@ -17,7 +17,7 @@ RSpec.describe "Journal Abilities", :authorizer do
   subject { user }
 
   shared_examples_for "no access" do
-    it { is_expected.to be_unable_to(:read, :create, :update, :destroy).on(journal) }
+    it { is_expected.to be_unable_to(:read, :create, :update, :delete).on(journal) }
 
     include_examples "unauthorized to manage journal permissions"
     include_examples "unauthorized to manage journal entitlements"
@@ -26,12 +26,11 @@ RSpec.describe "Journal Abilities", :authorizer do
   end
 
   shared_examples_for "full access" do
-    it("can perform all CRUD actions") { is_expected.to be_able_to(:create, :read, :update, :destroy).on(journal) }
+    it("can perform all CRUD actions") { is_expected.to be_able_to(:create, :read, :update, :delete).on(journal) }
 
     include_examples "authorized to manage journal permissions"
     include_examples "authorized to manage journal entitlements"
     include_examples "authorized to manage journal issues"
-    include_examples "authorized to manage journal issue projects"
   end
 
   shared_examples_for "not admin" do
@@ -40,7 +39,7 @@ RSpec.describe "Journal Abilities", :authorizer do
   end
 
   shared_examples_for "read only" do
-    it { is_expected.to be_able_to(:read).on(journal).and be_unable_to(:create, :update, :destroy).on(journal)}
+    it { is_expected.to be_able_to(:read).on(journal).and be_unable_to(:create, :update, :delete).on(journal)}
 
     include_examples "unauthorized to manage journal permissions"
     include_examples "unauthorized to manage journal entitlements"
@@ -80,7 +79,7 @@ RSpec.describe "Journal Abilities", :authorizer do
         :create,
         :read,
         :update,
-        :destroy
+        :delete
       ).on(journal_issue)
 
     end
@@ -94,31 +93,26 @@ RSpec.describe "Journal Abilities", :authorizer do
         :create,
         :read,
         :update,
-        :destroy
+        :delete
       ).on(journal_issue)
     end
   end
 
   shared_examples_for "authorized to manage journal issue projects" do
-    it "is able to create journal issue projects" do
-      is_expected.to be_able_to(
-        :create
-      ).on(journal_issue.project)
+    it "is not able to create journal issue projects directly" do
+      is_expected.not_to be_able_to(:create).on(journal_issue.project)
     end
+
     it "is able to read journal issue projects" do
-      is_expected.to be_able_to(
-        :read
-      ).on(journal_issue.project)
+      is_expected.to be_able_to(:read).on(journal_issue.project)
     end
+
     it "is able to update journal issue projects" do
-      is_expected.to be_able_to(
-        :update
-      ).on(journal_issue.project)
+      is_expected.to be_able_to(:update).on(journal_issue.project)
     end
-    it "is able to destroy journal issue projects" do
-      is_expected.to be_able_to(
-        :destroy
-      ).on(journal_issue.project)
+
+    it "cannot delete a journal issue's project directly (delete the journal issue itself)" do
+      is_expected.not_to be_able_to(:delete).on(journal_issue.project)
     end
   end
 
@@ -129,17 +123,17 @@ RSpec.describe "Journal Abilities", :authorizer do
         :create_permissions,
         :create,
         :update,
-        :destroy
+        :delete
       ).on(journal_issue.project)
     end
   end
 
   shared_examples_for "unauthorized to create new journals" do
-    it { is_expected.to be_unable_to(:create).on(journal)}
+    it { is_expected.to be_unable_to(:create).on(journal) }
   end
 
   shared_examples_for "unauthorized to delete journals" do
-    it { is_expected.to be_unable_to(:delete).on(journal)}
+    it { is_expected.to be_unable_to(:delete).on(journal) }
   end
 
   shared_examples_for "unauthorized to manage journal entitlements" do

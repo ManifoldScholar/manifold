@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Journal Issues controller
     class JournalIssuesController < ApplicationController
+      include AuthorizesJSONAPIRelationships
 
       resourceful! JournalIssue, authorize_options: { except: [:index, :show] } do
         JournalIssue.filtered(
@@ -10,6 +13,8 @@ module API
           user: current_user
         )
       end
+
+      before_action :maybe_enforce_project_access!, only: :update
 
       def index
         @journal_issues = load_journal_issues
@@ -34,7 +39,14 @@ module API
         @journal_issue.destroy
       end
 
-      protected
+      private
+
+      # Check to make sure that the user is authorized to update the project, if present.
+      #
+      # @return [void]
+      def maybe_enforce_project_access!
+        authorize_jsonapi_relationship_in! journal_issue_params, Project
+      end
 
       def includes
         [:journal, :journal_volume, :project, "project.creators", "project.contributors",
@@ -51,7 +63,6 @@ module API
       def scope_for_journal_issues
         JournalIssue.all
       end
-
     end
   end
 end
