@@ -3,7 +3,8 @@ import {
   containerPrototype,
   respond,
   headingPrimary,
-  headingSecondary
+  headingSecondary,
+  defaultTransitionProps
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -135,6 +136,15 @@ export const Buttons = styled.div`
     margin-inline-start: 1em;
 
     ${respond(`margin-inline-start: 2em;`, 40)}
+  }
+`;
+
+export const Button = styled.span`
+  font-size: 14px;
+  transition: color ${defaultTransitionProps};
+
+  .utility-button:not(:disabled):hover & {
+    color: var(--color-base-neutral80);
   }
 `;
 

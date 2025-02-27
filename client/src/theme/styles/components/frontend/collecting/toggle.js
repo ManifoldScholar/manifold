@@ -51,6 +51,10 @@ export default `
     white-space: nowrap;
     cursor: pointer;
 
+    &--inline {
+      margin-block-start: 3px;
+    }
+
     &--project-cover {
       --toggle-size: 28px;
       --text-top-padding: 7px;

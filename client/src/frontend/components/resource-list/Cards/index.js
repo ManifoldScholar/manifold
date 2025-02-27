@@ -29,14 +29,14 @@ export default class ResourceListCards extends PureComponent {
       <Styled.List>
         {this.props.resources.map(resource => {
           return (
-            <Styled.Item key={resource.id}>
+            <li key={resource.id}>
               <Resource.Card
                 resourceCollection={resourceCollection}
                 resource={resource}
                 project={project}
                 itemHeadingLevel={itemHeadingLevel}
               />
-            </Styled.Item>
+            </li>
           );
         })}
       </Styled.List>

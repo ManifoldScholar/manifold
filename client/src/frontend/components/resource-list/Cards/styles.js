@@ -5,22 +5,12 @@ export const List = styled.ul`
   --column-gap: 30px;
 
   ${listUnstyled}
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   column-gap: var(--column-gap);
   row-gap: 18px;
 
   ${respond(`--column-gap: 4.858vw;`, 85)}
-`;
 
-export const Item = styled.li`
-  flex-basis: 100%;
-
-  ${respond(
-    `
-      flex-grow: 1;
-      flex-basis: calc(50% - var(--column-gap));
-    `,
-    75
-  )}
+  ${respond(`grid-template-columns: repeat(2, 1fr);`, 75)}
 `;

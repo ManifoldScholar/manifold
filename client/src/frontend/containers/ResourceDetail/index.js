@@ -7,7 +7,6 @@ import { entityStoreActions, fatalErrorActions } from "actions";
 import { select } from "utils/entityUtils";
 import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import LoadingBlock from "global/components/loading-block";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityHeadContent from "frontend/components/entity/HeadContent";
 import some from "lodash/some";
@@ -159,7 +158,7 @@ export class ResourceDetailContainer extends PureComponent {
     const { project, resource } = this.props;
 
     if (!project || !resource) {
-      return <LoadingBlock />;
+      return null;
     }
 
     return (
@@ -171,7 +170,7 @@ export class ResourceDetailContainer extends PureComponent {
         <CheckFrontendMode debugLabel="ResourceDetail" isProjectSubpage />
         <EntityHeadContent entity={resource} parentEntity={project} />
         <RegisterBreadcrumbs breadcrumbs={this.breadcrumbs()} />
-        {resource ? (
+        {resource && (
           <Resource.Detail
             projectId={project.id}
             projectUrl={this.projectUrl()}
@@ -179,8 +178,6 @@ export class ResourceDetailContainer extends PureComponent {
             resource={resource}
             dispatch={this.props.dispatch}
           />
-        ) : (
-          <LoadingBlock />
         )}
       </>
     );

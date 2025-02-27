@@ -28,90 +28,150 @@ export const getAdminModeLabel = ({ currentUser, mode, t }) => {
   }
 };
 
-const idPattern =
-  "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}";
-const idRegex = new RegExp(idPattern, "g");
-
-const FE_ROUTE_REGEXES = {
-  project: /^\/projects\/(?!(all))([A-Za-z0-9-]+)$/,
-  journal: /^\/journals\/(?!(all))([A-Za-z0-9-]+)$/,
-  resource: /^\/projects\/([A-Za-z0-9-]+)\/resource\/([A-Za-z0-9-]+)$/,
-  resourceCollection: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection\/([A-Za-z0-9-]+)$/,
-  projectCollection: /^\/projects\/project-collection\/([A-Za-z0-9?=-]+)$/,
-  page: /^\/page\/([A-Za-z0-9-]+)$/,
-  readingGroup: new RegExp(`^/groups/${idPattern}`)
+const FE_ROUTE_MAP = {
+  resource: {
+    regex: /^\/projects\/([A-Za-z0-9-]+)\/resource/,
+    link: `/backend/projects/resource`
+  },
+  resourceCollectionResource: {
+    regex: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection\/([A-Za-z0-9-]+)\/resource/,
+    link: `/backend/projects/resource`
+  },
+  resourceCollection: {
+    regex: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection/,
+    link: `/backend/projects/resource-collection`
+  },
+  projectCollection: {
+    regex: /^\/projects\/project-collection/,
+    link: `/backend/projects/project-collections`,
+    hasAdminList: true
+  },
+  project: {
+    regex: /^\/projects/,
+    link: `/backend/projects`,
+    hasAdminList: true
+  },
+  journal: {
+    regex: /^\/journals/,
+    link: `/backend/journals`,
+    hasAdminList: true
+  },
+  page: { regex: /^\/page/, link: `/backend/records/pages` },
+  readingGroup: {
+    regex: /^\/groups/,
+    link: `/backend/groups`,
+    hasAdminList: true
+  }
 };
 
-const BE_ROUTE_REGEXES = {
-  project: new RegExp(`^/backend/projects/${idPattern}/`),
-  journal: new RegExp(`^/backend/journals/${idPattern}/`),
-  resource: new RegExp(`^/backend/projects/resource/${idPattern}/`),
-  resourceCollection: new RegExp(
-    `^/backend/projects/resource-collection/${idPattern}/`
-  ),
-  projectCollection: new RegExp(
-    `^/backend/projects/project-collections/(${idPattern}|[A-Za-z0-9-]+)`
-  ),
-  page: /^\/backend\/records\/pages\/([0-9]+)\//,
-  readingGroup: new RegExp(`^/backend/groups/${idPattern}/`)
+const BE_ROUTE_MAP = {
+  resourceCollection: {
+    regex: /^\/backend\/projects\/resource-collection/,
+    link: `/projects/[pId]/resource-collection`
+  },
+  resource: {
+    regex: /^\/backend\/projects\/resource/,
+    link: `/projects/[pId]/resource`
+  },
+  projectCollection: {
+    regex: /^\/backend\/projects\/project-collections/,
+    link: `/projects/project-collection`,
+    hasList: `/projects/project-collections`
+  },
+  project: {
+    regex: /^\/backend\/projects/,
+    link: `/projects`,
+    hasList: true
+  },
+  journal: {
+    regex: /^\/backend\/journals/,
+    link: `/journals`,
+    hasList: true
+  },
+  page: { regex: /^\/backend\/records\/pages/, link: `/page` },
+  readingGroup: {
+    regex: /^\/backend\/groups/,
+    link: `/groups`,
+    hasList: true
+  }
+};
+
+const extractIdentifier = (pathname, basePath) => {
+  const identifier = pathname.replace(basePath, "").split("/")[1];
+  return identifier === "all" ? null : identifier;
 };
 
 const getAdminPath = pathname => {
-  if (FE_ROUTE_REGEXES.project.test(pathname)) return `/backend${pathname}`;
-  if (FE_ROUTE_REGEXES.journal.test(pathname)) return `/backend${pathname}`;
-  if (FE_ROUTE_REGEXES.readingGroup.test(pathname))
-    return `/backend${pathname}`;
-  if (FE_ROUTE_REGEXES.projectCollection.test(pathname)) {
-    const noParams = pathname.split("?").filter(Boolean)[0];
-    const slug = noParams.split("/").pop();
-    return `/backend/projects/project-collections/${slug}`;
-  }
-  if (FE_ROUTE_REGEXES.resource.test(pathname)) {
-    const slug = pathname.split("/").pop();
-    return `/backend/projects/resource/${slug}`;
-  }
-  if (FE_ROUTE_REGEXES.resourceCollection.test(pathname)) {
-    const slug = pathname.split("/").pop();
-    return `/backend/projects/resource-collection/${slug}`;
-  }
-  if (FE_ROUTE_REGEXES.page.test(pathname)) {
-    const slug = pathname.split("/").pop();
-    return `/backend/records/pages/${slug}`;
-  }
+  const routeKey = Object.keys(FE_ROUTE_MAP).find(key => {
+    return FE_ROUTE_MAP[key]?.regex.test(pathname);
+  });
+  const route = FE_ROUTE_MAP[routeKey];
 
-  return `/backend/dashboard`;
+  if (!route) return `/backend/dashboard`;
+
+  const identifier = extractIdentifier(pathname, route.regex);
+
+  if (!identifier)
+    return route.hasAdminList ? route.link : `/backend/dashboard`;
+
+  return `${route.link}/${identifier}`;
+};
+
+const getPageSlug = (id, pages) => {
+  return pages?.[id]?.attributes?.slug;
+};
+
+const getProjectId = (id, records) => {
+  return records?.[id]?.relationships?.project?.data?.id;
+};
+
+const handlePageRoute = (id, pages) => {
+  if (!id) return `/`;
+
+  const slug = getPageSlug(id, pages);
+
+  return slug ? `${BE_ROUTE_MAP.page.link}/${slug}` : `/`;
+};
+
+const handleRouteWithProjectId = (id, entities, routeKey) => {
+  if (!id) return `/`;
+
+  const records =
+    routeKey === "resourceCollection"
+      ? entities.resourceCollections
+      : entities.resources;
+
+  const projectId = getProjectId(id, records);
+
+  return projectId
+    ? `${BE_ROUTE_MAP[routeKey].link.replace("[pId]", projectId)}/${id}`
+    : `/`;
 };
 
 const getFrontendPath = (pathname, entities) => {
-  const match = pathname.match(idRegex);
-  const id = match?.length ? match[0] : null;
+  const routeKey = Object.keys(BE_ROUTE_MAP).find(key => {
+    return BE_ROUTE_MAP[key]?.regex.test(pathname);
+  });
 
-  if (BE_ROUTE_REGEXES.project.test(pathname)) return `/projects/${id}`;
-  if (BE_ROUTE_REGEXES.journal.test(pathname)) return `/journals/${id}`;
-  if (BE_ROUTE_REGEXES.readingGroup.test(pathname)) return `/groups/${id}`;
-  if (BE_ROUTE_REGEXES.projectCollection.test(pathname))
-    return id
-      ? `/projects/project-collection/${id}`
-      : `/projects/project-collection/${pathname.split("/").pop()}`;
-  if (BE_ROUTE_REGEXES.resource.test(pathname)) {
-    const projectId = entities.resources
-      ? entities.resources[id].relationships?.project?.data?.id
-      : "";
-    return projectId ? `/projects/${projectId}/resource/${id}` : "/";
-  }
-  if (BE_ROUTE_REGEXES.resourceCollection.test(pathname)) {
-    const projectId = entities.resourceCollections
-      ? entities.resourceCollections[id].relationships?.project?.data?.id
-      : "";
-    return projectId ? `/projects/${projectId}/resource-collection/${id}` : "/";
-  }
-  if (BE_ROUTE_REGEXES.page.test(pathname)) {
-    const pageId = pathname.split("/").find(part => !isNaN(parseInt(part, 10)));
-    const slug = entities.pages[pageId].attributes?.slug;
-    return `/page/${slug}`;
-  }
+  const route = BE_ROUTE_MAP[routeKey];
 
-  return "/";
+  if (!route) return `/`;
+
+  const identifier = extractIdentifier(pathname, route.regex);
+
+  if (routeKey === "page") return handlePageRoute(identifier, entities.pages);
+  if (routeKey === "resource" || routeKey === "resourceCollection")
+    return handleRouteWithProjectId(identifier, entities, routeKey);
+
+  /* eslint-disable no-nested-ternary */
+  if (!identifier)
+    return route.hasList
+      ? typeof route.hasList === "string"
+        ? route.hasList
+        : route.link
+      : `/`;
+
+  return `${route.link}/${identifier}`;
 };
 
 export const getDestinationPath = ({ mode, pathname, entities }) => {

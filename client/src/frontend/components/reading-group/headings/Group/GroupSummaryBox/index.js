@@ -82,7 +82,7 @@ function GroupSummaryBox({ readingGroup, isBackend }) {
               {creatorName}
             </Item>
           ) : (
-            <Item labelText={t("common.role")} icon="avatar24">
+            <Item labelText={t("common.role_one")} icon="avatar24">
               {currentUserRole}
             </Item>
           )}

@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import LoadingBlock from "global/components/loading-block";
 import { uiFrontendModeActions } from "actions";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
@@ -61,7 +60,7 @@ export default function ProjectResourcesContainer({
       : [projectCrumb, resourcesCrumb].filter(Boolean);
   }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
-  if (!project) return <LoadingBlock />;
+  if (!project) return null;
 
   return (
     <>
