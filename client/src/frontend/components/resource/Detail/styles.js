@@ -53,18 +53,6 @@ export const MetadataWrapper = styled.div`
     `,
     65
   )}
-
-  .share-nav-primary {
-    margin-block-end: ${fluidScale("32px", "25px")};
-    color: var(--color-neutral-text-dark);
-
-    &:not(:first-child) {
-      margin-block-start: ${fluidScale("32px", "25px")};
-    }
-
-    &__label::after {
-      content: ":";
-    }
   }
 `;
 

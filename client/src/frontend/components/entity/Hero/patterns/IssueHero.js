@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from "react";
 import PropTypes from "prop-types";
-import { CalloutList, Cover, Credits, Meta, Social, Title } from "../parts";
+import { CalloutList, Cover, Credits, Meta, Title } from "../parts";
 import EntityMasthead from "frontend/components/entity/Masthead";
 import { getAuth, getPartsData } from "../helpers";
 import EntityHero from "../EntityHero";
@@ -24,11 +24,6 @@ export default function IssueHero({ entity, mock }) {
     callouts,
     orderedCallouts,
     copy,
-    twitter,
-    instagram,
-    facebook,
-    hashtag,
-    social,
     description,
     creators,
     flattenedCollaborators,
@@ -63,16 +58,6 @@ export default function IssueHero({ entity, mock }) {
               />
             )}
           </>
-        }
-        BottomLeftComponent={
-          social && (
-            <Social
-              twitter={twitter}
-              facebook={facebook}
-              instagram={instagram}
-              hashtag={hashtag}
-            />
-          )
         }
         TopRightComponent={
           <>
