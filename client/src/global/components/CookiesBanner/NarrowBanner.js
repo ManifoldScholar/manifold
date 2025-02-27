@@ -14,13 +14,13 @@ export default function NarrowBanner({
   const { t } = useTranslation();
 
   return (
-    <Styled.Banner>
+    <Styled.Banner className="bg-neutral95">
       <Styled.NarrowInner>
         <Styled.TextWrapper>
           <Styled.Heading>{t("messages.cookies_banner.header")}</Styled.Heading>
           <p dangerouslySetInnerHTML={{ __html: message }} />
         </Styled.TextWrapper>
-        <div>
+        <Styled.AsideWrapper>
           {error && <Styled.Error>{t("errors.cookies_banner")}</Styled.Error>}
           <Styled.ButtonWrapper>
             <Styled.Button
@@ -38,7 +38,7 @@ export default function NarrowBanner({
               {t("messages.cookies_banner.settings_button_label")}
             </Styled.Button>
           </Styled.ButtonWrapper>
-        </div>
+        </Styled.AsideWrapper>
       </Styled.NarrowInner>
     </Styled.Banner>
   );
