@@ -40,10 +40,7 @@ function UserWrapper({ match, route, history, confirm, location }) {
   const notifyDestroy = useNotification(u => ({
     level: 0,
     id: `USER_DESTROYED_${u.id}`,
-    heading: t("notifications.reading_group_delete"),
-    body: t("notifications.delete_entity_body", {
-      title: u?.name
-    }),
+    heading: t("notifications.user_delete", { name: u.attributes.fullName }),
     expiration: 5000
   }));
 
