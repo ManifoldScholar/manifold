@@ -17,4 +17,8 @@ FactoryBot.define do
       restricted_access { true }
     end
   end
+
+  factory :draft_project, parent: :project do
+    draft { true }
+  end
 end

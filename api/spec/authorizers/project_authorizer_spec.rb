@@ -328,4 +328,22 @@ RSpec.describe "Project Abilities", :authorizer do
       it { is_expected.not_to be_authorized_to :fully_read, project }
     end
   end
+
+  context "when the user is an editor of an associated journal" do
+    let!(:user) { FactoryBot.create :user }
+    let!(:journal) { FactoryBot.create :journal}
+    let!(:journal_issue) { FactoryBot.create :journal_issue, journal: journal }
+    before do
+      user.add_role :journal_editor, journal
+      user.remove_role :reader
+    end
+
+    it { is_expected.to be_able_to(:read).on(journal_issue.project) }
+    it { is_expected.to be_able_to(:update).on(journal_issue.project) }
+    it { is_expected.to be_able_to(:destroy).on(journal_issue.project) }
+    it { is_expected.to be_able_to(:create).on(journal_issue.project) }
+
+    it { is_expected.not_to be_able_to(:update).on(project) }
+    xit { is_expected.not_to be_able_to(:destroy).on(project) }
+  end
 end
