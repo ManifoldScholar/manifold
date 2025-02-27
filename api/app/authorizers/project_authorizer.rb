@@ -42,8 +42,8 @@ class ProjectAuthorizer < ApplicationAuthorizer
   #
   # @param [User] user
   # @param [Hash] _options
-  def updatable_by?(user, _options = {})
-    has_any_role? user, :admin, :editor, :marketeer, :project_editor
+  def updatable_by?(user, options = {})
+    has_any_role?(user, :admin, :editor, :marketeer, :project_editor) || with_journal { |j| j.updatable_by? user, options}
   end
 
   # @!group Project Property Access Control
@@ -113,15 +113,15 @@ class ProjectAuthorizer < ApplicationAuthorizer
   #
   # @param [User] user
   # @param [Hash] _options
-  def deletable_by?(user, _options = {})
-    has_any_role? user, :admin, :editor, :project_editor
+  def deletable_by?(user, options = {})
+    has_any_role?(user, :admin, :editor, :project_editor) || with_journal { |j| j.deletable_by? user, options }
   end
 
   # @see RoleName.draft_access
   # @param [User] user
   # @param [Hash] _options
-  def drafts_readable_by?(user, _options = {})
-    has_any_role? user, *RoleName.draft_access
+  def drafts_readable_by?(user, options = {})
+    has_any_role?(user, *RoleName.draft_access) || with_journal { |j| j.readable_by? user, options }
   end
 
   def publicly_engageable_by?(user, _options = {})
@@ -173,8 +173,8 @@ class ProjectAuthorizer < ApplicationAuthorizer
     #
     # @param [User] user
     # @param [Hash] _options
-    def creatable_by?(user, _options = {})
-      project_creator_permissions?(user)
+    def creatable_by?(user, options = {})
+      project_creator_permissions?(user) || user.journal_editor?
     end
 
     # {RoleName::Admin Admins} and {RoleName::Editor editors} can delete any project.
@@ -183,8 +183,8 @@ class ProjectAuthorizer < ApplicationAuthorizer
     #
     # @param [User] user
     # @param [Hash] _options
-    def deletable_by?(user, _options = {})
-      has_any_role? user, :admin, :editor, :project_editor
+    def deletable_by?(user, options = {})
+      has_any_role?(user, :admin, :editor, :project_editor)
     end
 
     # @see .marketeer_permissions?
