@@ -88,7 +88,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-datepicker": "^8.x",
     "react-dom": "^18.x",
-    "react-dropzone": "^10.2.2",
+    "react-dropzone": "^14.x",
     "react-error-boundary": "^3.1.4",
     "react-ga4": "^2.1.0",
     "react-helmet-async": "^1",
