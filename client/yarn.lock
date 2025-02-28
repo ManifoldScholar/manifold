@@ -8558,7 +8558,6 @@ __metadata:
     react-ace: "npm:7.0.5"
     react-attr-converter: "npm:^0.3.1"
     react-beautiful-dnd: "npm:^13.1.1"
-    react-collapse: "npm:^5.1.1"
     react-datepicker: "npm:^8.x"
     react-dom: "npm:^18.x"
     react-dropzone: "npm:^10.2.2"
@@ -10705,15 +10704,6 @@ __metadata:
     react: ^16.8.5 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.5 || ^17.0.0 || ^18.0.0
   checksum: 10c0/5bc04f6dcfededc6e5c90e696cda07816a018eada52f7438ded839f03786e3f319aa8a0bc7b14b86fb26a12c0e5ba53e8c5a4bf3832a8f827dd70f1410675525
-  languageName: node
-  linkType: hard
-
-"react-collapse@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "react-collapse@npm:5.1.1"
-  peerDependencies:
-    react: ">=16.3.0"
-  checksum: 10c0/78804c8b652da770e27fd8b89eb48d959858c4d76bf1e95845fce2f4f255c5c5096cd0a8f4897b17a9e65938e5d50174fc2fb6d6a45c47aec9db6307b04044e8
   languageName: node
   linkType: hard
 
