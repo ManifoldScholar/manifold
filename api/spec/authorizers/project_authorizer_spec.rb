@@ -341,6 +341,8 @@ RSpec.describe "Project Abilities", :authorizer do
     it { is_expected.to be_able_to(:read).on(journal_issue.project) }
     it { is_expected.to be_able_to(:update).on(journal_issue.project) }
     it { is_expected.not_to be_able_to(:create).on(journal_issue.project) }
+    it { is_expected.to be_able_to(:manage_entitlements).on(journal_issue.project) }
+    it { is_expected.to be_able_to(:create_entitlements).on(journal_issue.project) }
 
     it "cannot delete a journal issue's project directly (delete the journal issue itself)" do
       is_expected.not_to be_able_to(:delete).on(journal_issue.project)

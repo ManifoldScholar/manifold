@@ -58,6 +58,7 @@ class EntitlementAuthorizer < ApplicationAuthorizer
     # @param [Hash] options
     # @option options [ApplicationRecord] :for
     def creatable_by?(user, options = {})
+      return false if user.marketeer?
       might_access? user, options
     end
 
@@ -65,6 +66,7 @@ class EntitlementAuthorizer < ApplicationAuthorizer
     # @param [Hash] options
     # @option options [ApplicationRecord] :for
     def manageable_by?(user, options = {})
+      return false if user.marketeer?
       might_access? user, options
     end
 
