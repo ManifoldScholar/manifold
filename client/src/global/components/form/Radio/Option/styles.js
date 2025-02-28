@@ -75,7 +75,6 @@ export const RadioToggle = styled.span`
   transition: background-color ${defaultTransitionProps};
   width: 1.25em;
   height: 1.25em;
-  padding-top: 0.25em;
   text-align: center;
   border-radius: 100%;
 
@@ -94,10 +93,13 @@ export const RadioToggle = styled.span`
   }
 
   &::before {
-    display: inline-block;
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    transform: translate(-50%, -50%);
     width: 0.625em;
     height: 0.625em;
-    vertical-align: top;
+    display: block;
     content: "";
     background-color: var(--color-base-neutral90);
     border-radius: 100%;
