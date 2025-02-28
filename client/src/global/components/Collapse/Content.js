@@ -13,7 +13,7 @@ const getAnimationParams = (height, maxDuration) => {
   */
   const maxDurationSecs = maxDuration > 5 ? maxDuration / 1000 : maxDuration;
   const duration = (
-    clamp(height / 700, 0.3, maxDurationSecs ?? 0.5) * 1000
+    clamp(height / 800, 0.2, maxDurationSecs ?? 0.5) * 1000
   ).toFixed(0);
   const delay = clamp(duration / 10, 25, 75).toFixed(0);
   const diff = duration - delay;
