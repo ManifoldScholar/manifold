@@ -78,4 +78,5 @@ export const ImageBuilder = styled.img`
   width: 120px;
   height: 120px;
   background: var(--color-base-neutral20);
+  object-fit: cover;
 `;
