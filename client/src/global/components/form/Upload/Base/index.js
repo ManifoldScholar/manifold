@@ -126,7 +126,7 @@ export default class FormUpload extends Component {
               <InputWrapper
                 {...getRootProps({
                   style: this.props.inlineStyle,
-                  tabIndex: null
+                  tabIndex: undefined
                 })}
               >
                 <Styled.Input
