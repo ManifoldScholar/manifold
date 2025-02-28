@@ -28,8 +28,6 @@
     "hero_block_instructions": "The Hero Block is the top of your {{entity}} page. Customize its content, layout, and settings here.",
     "calls_to_action": "Calls-to-Action",
     "calls_to_action_description": "Buttons and links to related resources",
-    "social_links": "Social Links",
-    "social_links_description": "Links to social platforms and hashtag",
     "visibility_options": {
       "always": "Always Visible",
       "authorized": "Visible Only When Authorized",
@@ -55,8 +53,6 @@
     "cover_image": "Cover Image",
     "cover_image_alt_label": "Cover Image Alt Text",
     "cover_image_instructions": "If a cover is set for the {{entity}}, it will appear over the hero, to the right of the description.",
-    "social_id": "{{social}} ID",
-    "social_placeholder": "Enter the {{entity}} {{social}} ID",
     "hashtag": "Hashtag",
     "hashtag_placeholder": "Enter {{entity}} Hashtag"
   },
