@@ -136,7 +136,7 @@ module V1
 
       class_methods do
         def filtered_events(project)
-          project.events.excluding_type(%w(comment_created text_annotated))
+          project.events.excluding_type(%w(comment_created text_annotated tweet))
         end
       end
     end
