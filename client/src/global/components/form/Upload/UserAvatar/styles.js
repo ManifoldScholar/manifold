@@ -66,20 +66,12 @@ export const DropzoneOutline = styled.div`
 `;
 
 export const DropzoneInput = styled.input`
-  display: block !important;
-  position: absolute;
-  inset-inline-start: 0;
-  inset-block-start: 0;
-  inline-size: 100%;
-  block-size: 100%;
-  opacity: 0;
-  cursor: pointer;
   &:hover {
     + ${DropzoneOutline} ${UploadLink} {
       color: var(--hover-color);
     }
   }
-  &:focus {
+  &:focus-visible {
     outline: 0;
     + ${DropzoneOutline} ${UploadLink} {
       ${defaultFocusStyle}
