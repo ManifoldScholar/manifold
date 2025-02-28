@@ -2,7 +2,6 @@ import ActivityComments64 from "./64/ActivityComments";
 import ActivityEgg64 from "./64/ActivityEgg";
 import ActivityResource64 from "./64/ActivityResource";
 import ActivityText64 from "./64/ActivityText";
-import ActivityTweet64 from "./64/ActivityTweet";
 import Annotate24 from "./24/Annotate";
 import Annotate32 from "./32/Annotate";
 import AnnotationGroup24 from "./24/AnnotationGroup";
@@ -190,7 +189,6 @@ export default {
   ActivityEgg64,
   ActivityResource64,
   ActivityText64,
-  ActivityTweet64,
   Annotate24,
   Annotate32,
   AnnotationGroup24,

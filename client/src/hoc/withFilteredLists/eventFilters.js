@@ -3,10 +3,7 @@
 const EVENT_TYPES = {
   project_created: "Project Created",
   text_added: "Text Added",
-  text_annotated: "Text Annotated",
-  resource_added: "Resource Added",
-  comment_created: "Comment Created",
-  tweet: "Tweet"
+  resource_added: "Resource Added"
 };
 
 export default function eventFilters({ snapshotState = false } = {}) {
