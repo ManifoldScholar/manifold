@@ -139,6 +139,8 @@ export const Time = styled.div`
 `;
 
 export const Volume = styled.div`
+  display: flex;
+  align-items: center;
   text-align: left;
 `;
 
@@ -152,13 +154,15 @@ export const Mute = styled.button`
 
 export const ThumbInput = styled.div`
   position: absolute;
-  left: 0;
+  inset-block-start: 50%;
+  inset-inline-start: 0;
   width: 20px;
   height: 20px;
   pointer-events: none;
   background: var(--color-accent-primary);
   border: 3px solid var(--color-base-neutral-black);
   border-radius: 50%;
+  transform: translate(-50%, -40%);
 `;
 
 export const RangeInput = styled.input`
@@ -172,10 +176,7 @@ export const RangeInput = styled.input`
   border-radius: 0;
   outline: 0;
   appearance: none;
-
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 
   &::-webkit-slider-runnable-track {
     height: 3px;
