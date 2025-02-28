@@ -301,7 +301,7 @@ class Project < ApplicationRecord
   end
 
   def filtered_events
-    events.excluding_type(%w(comment_created text_annotated))
+    events.excluding_type(%w(comment_created text_annotated tweet))
   end
 
   def filtered_event_count
