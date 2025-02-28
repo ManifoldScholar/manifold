@@ -106,9 +106,10 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # @param [User] user
   # @param [Hash] options
   def entitlements_creatable_by?(user, options = {})
+    return false if resource.draft? && !has_any_role?(user, :admin, :editor)
     options ||= {}
 
-    options[:subject] = resource
+    options[:for] = resource
 
     user.can_create? Entitlement, options
   end
@@ -117,9 +118,10 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # @param [User] user
   # @param [Hash] options
   def entitlements_manageable_by?(user, options = {})
+    return false if resource.draft? && !has_any_role?(user, :admin, :editor)
     options ||= {}
 
-    options[:subject] = resource
+    options[:for] = resource
 
     user.can_manage? Entitlement, options
   end
