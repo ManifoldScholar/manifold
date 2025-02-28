@@ -18,7 +18,6 @@ export default class IconComputedSocial extends PureComponent {
       email: "socialEmail32",
       slack: "socialSlack32",
       linkedIn: "socialLinkedIn32",
-      instagram: "socialInstagram32",
       github: "socialGithub32",
       google: "socialGoogle32"
     };

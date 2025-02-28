@@ -142,7 +142,6 @@ import SocialCite32 from "./32/SocialCite";
 import SocialEmail32 from "./32/SocialEmail";
 import SocialGithub32 from "./32/SocialGithub";
 import SocialGoogle32 from "./32/SocialGoogle";
-import SocialInstagram32 from "./32/SocialInstagram";
 import SocialLinkedIn32 from "./32/SocialLinkedIn";
 import SocialSlack32 from "./32/SocialSlack";
 import Speaker24 from "./24/Speaker";
@@ -344,7 +343,6 @@ export default {
   SocialEmail32,
   SocialGithub32,
   SocialGoogle32,
-  SocialInstagram32,
   SocialLinkedIn32,
   SocialSlack32,
   Speaker24,
