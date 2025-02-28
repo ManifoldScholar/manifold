@@ -16,7 +16,7 @@
       "body": "Your browser is not able to play this video.",
       "download": "You may download it and play it locally using the download button below."
     },
-    "audio_playback": "{{ error }}<br/>This audio file is not playable in your browser.<br/><br/>Click the download button to listen to the file on your device.",
+    "audio_playback": "There was an error with playback.<br/>If available, you can download the resource and listen to it on your device.",
     "unauthorized": {
       "heading": "Access Denied",
       "body": "You must be logged in to manage notification preferences.",
