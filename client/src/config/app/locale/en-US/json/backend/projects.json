@@ -7,9 +7,6 @@
     "settings": "Project Settings",
     "activity": "Activity",
     "changes": "Project Changes",
-    "twitter_queries": "Twitter Queries",
-    "twitter_queries_instructions": "Manifold will periodically fetch tweets according to the queries specified below.",
-    "add_twitter_label": "Add New Twitter Query",
     "manage_resources": "Manage Resources",
     "manage_resource_collections": "Manage Resource Collections",
     "contributors_header": "Manage Contributors",
@@ -87,7 +84,6 @@
         "extended_descript_prompt": "Do you need additional space to describe your project?",
         "extended_descript_instructions": "A freeform content block can be used to add text contextualizing your project.",
         "activity_prompt": "Will your project change frequently?",
-        "activity_instructions": "Manifold can showcase the evolution of your project on the platform and in the Twitterverse.",
         "save": "Save and Continue"
       }
     },
@@ -160,19 +156,6 @@
         "pending": "Pending",
         "failure": "Failure"
       }
-    },
-    "social": {
-      "title": "New Twitter Query",
-      "fetch_label": "Fetch Tweets",
-      "twitter_learn_more": "Learn more about Twitter <0>search operators</0>.",
-      "query": "Query",
-      "query_placeholder": "Enter query",
-      "fetch_tweets_by": "Fetch tweets by:",
-      "most_recent": "Most Recent",
-      "most_popular": "Most Popular",
-      "save_query": "Save Twitter Query",
-      "no_tweets": "No tweets have been fetched yet.",
-      "tweets_fetched": "{{count}} Tweets fetched"
     }
   }
 }

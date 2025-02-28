@@ -37,8 +37,6 @@
     "delete_subject": "Are you sure you want to delete this subject?",
     "delete_text": "Are you sure you want to delete this text?",
     "delete_text_body": "All annotations and highlights of this text will also be deleted. $t(modals.confirm_body)",
-    "delete_twitter": "Are you sure you want to delete this twitter query?",
-    "delete_twitter_body": "<p>This action will delete the query along with all events associated with it.</p> <p>This action cannot be undone.</p> <p>Set the query to inactive to prevent fetching while preserving existing tweet events.</p>",
     "delete_user": "Are you sure you want delete this user?",
     "delete_volume": "Are you sure you want to delete this volume?",
     "password_reset": "How would you like to reset the user's password?",
