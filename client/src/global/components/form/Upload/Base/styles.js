@@ -36,27 +36,17 @@ export const AvatarBuilderDropzone = styled(BaseDropzone)`
 `;
 
 export const Prompt = styled.span`
+  cursor: pointer;
   text-decoration-line: underline;
   transition: color var(--transition-duration-default)
     var(--transition-timing-function);
+
+  &:hover {
+    color: var(--hover-color);
+  }
 `;
 
 export const Input = styled.input`
-  display: block !important;
-  position: absolute;
-  inset-inline-start: 0;
-  inset-block-start: 0;
-  inline-size: 100%;
-  block-size: 100%;
-  opacity: 0;
-  cursor: pointer;
-
-  &:hover {
-    + * ${Prompt} {
-      color: var(--hover-color);
-    }
-  }
-
   &:focus-visible {
     outline: 0;
 
