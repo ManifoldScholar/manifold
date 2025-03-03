@@ -8,7 +8,7 @@ const compileEnv = require("../transforms/env");
 import path from "path";
 import merge from "webpack-merge";
 
-const config = merge(baseConfig("web"), {
+const config = merge(baseConfig(), {
   entry: {
     "build/manifold-client-browser": ["./src/entry-browser.js"]
   },

@@ -186,6 +186,7 @@
   "packageManager": "yarn@4.6.0",
   "browserslist": [
     "defaults",
-    "not IE 11"
+    "not IE 11",
+    "node >= 20"
   ]
 }
