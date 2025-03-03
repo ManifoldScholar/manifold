@@ -11,7 +11,7 @@ import environment from "../helpers/environment";
 import merge from "webpack-merge";
 const compileEnv = require("../transforms/env");
 
-const config = merge(baseConfig("node"), {
+const config = merge(baseConfig(["node", "browserslist"]), {
   entry: {
     "ssr/manifold-client-ssr": ["./src/entry-ssr.js"]
   },
