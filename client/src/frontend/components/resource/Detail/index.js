@@ -7,6 +7,7 @@ import LinkComponent from "../Link";
 import Meta from "../Meta";
 import Title from "../Title";
 import VariantList from "../VariantList";
+import Share from "../Share";
 import { useSelector } from "react-redux";
 import { meta } from "utils/entityUtils";
 import * as Styled from "./styles";
@@ -66,6 +67,7 @@ export default function ResourceDetail({ resource }) {
         )}
         <Styled.MetadataWrapper>
           <LinkComponent attributes={attr} />
+          <Share title={attr?.title} />
           <Meta resource={resource} layout={"secondary"} />
           <VariantList resource={resource} />
         </Styled.MetadataWrapper>
