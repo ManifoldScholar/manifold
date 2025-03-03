@@ -7,9 +7,11 @@ import paths from "../helpers/paths";
 const nameTemplate = environment.production ? "[name]-[contenthash]" : "[name]";
 
 /* eslint-disable global-require */
-export default function buildWebpackConfiguration(target = "web") {
+export default function buildWebpackConfiguration(
+  target = ["web", "browserslist"]
+) {
   function styleLoader() {
-    if (target !== "web") return null;
+    if (!target.includes("web")) return null;
     if (environment.isBuild) return MiniCssExtractPlugin.loader;
     return "style-loader";
   }
