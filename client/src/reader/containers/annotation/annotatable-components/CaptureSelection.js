@@ -8,6 +8,7 @@ import {
   findFirstMathUuidNode,
   findLastMathUuidNode
 } from "./mathHelpers";
+import { generateFragment } from "./fragment-generation-utils";
 
 class AnnotatableCaptureSelection extends Component {
   static propTypes = {
@@ -162,7 +163,6 @@ class AnnotatableCaptureSelection extends Component {
       const { selectionState } = this.props;
       const selection = this.mapNativeSelection(this.nativeSelection);
       if (!selection) return this.props.updateSelection(this.emptySelection());
-      window.getSelection().empty();
       let complete = selectionComplete;
       if (selectionState.selectionComplete) complete = true;
       const { x, y } = this.getEventXY(event);
@@ -171,9 +171,11 @@ class AnnotatableCaptureSelection extends Component {
         selectionAnnotation: this.mapSelectionToAnnotation(selection),
         selectionComplete: complete,
         popupTriggerX: selection && x ? x : selectionState.popupTriggerX,
-        popupTriggerY: selection && y ? y : selectionState.popupTriggerY
+        popupTriggerY: selection && y ? y : selectionState.popupTriggerY,
+        textFragment: generateFragment(window.getSelection())
       });
       this.props.updateSelection(newState);
+      window.getSelection().empty();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log("There was an error in updateSelection: %o", error);

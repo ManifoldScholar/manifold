@@ -180,6 +180,7 @@
     "slate-hyperscript": "^0.77.0",
     "slate-react": "^0.90.0",
     "swagger-ui-react": "4.9.0",
+    "text-fragments-polyfill": "^6.3.0",
     "text-mask-addons": "^3.7.1",
     "tinycolor2": "^1.4.1",
     "tus-js-client": "^1.5.1",
