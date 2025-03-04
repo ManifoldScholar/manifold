@@ -56,8 +56,11 @@
         "you_highlighted": "You Highlighted",
         "reader_highlighted": "A Reader Highlighted",
         "attach_resource": "Attach resource to $t(glossary.selection_one)",
-        "share_selection": "$t(actions.share) $t(glossary.selection_one)",
-        "follow_link": "Follow link"
+        "app_share": "External App",
+        "share_selection": "$t(actions.share) $t(glossary.selection_one) with external app",
+        "follow_link": "Follow link",
+        "copy": "Copy URL",
+        "copy_selection": "Copy link to selection"
       },
       "visibility": {
         "all_reading_groups": "All $t(glossary.reading_group_title_case_other)",
