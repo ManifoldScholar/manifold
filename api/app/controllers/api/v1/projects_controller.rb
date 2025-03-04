@@ -48,7 +48,7 @@ module API
 
       def includes
         [:creators, :contributors, :texts, :text_categories, :events,
-         :resource_collections, :resources, :subjects, :twitter_queries,
+         :resource_collections, :resources, :subjects,
          :permitted_users, :content_blocks, :action_callouts, :journal,
          :journal_volume, :journal_issue, :flattened_collaborators, :collaborators]
       end
