@@ -45,9 +45,6 @@ module V1
     when_full do
       metadata(metadata: true, properties: true, formatted: true)
       typed_attribute :hashtag, Types::String.optional
-      typed_attribute :twitter_id, Types::String.optional
-      typed_attribute :instagram_id, Types::String.optional
-      typed_attribute :facebook_id, Types::String.optional
       typed_attribute :image_credits, Types::String.optional
       typed_attribute :image_credits_formatted, Types::String.meta(read_only: true)
       typed_attribute :pending_slug, Types::String

@@ -36,12 +36,10 @@ module V1
       default_project_sort: Types::String.optional,
       default_publisher: Types::String.optional,
       default_publisher_place: Types::String.optional,
-      facebook: Types::String.optional,
       home_redirect_url: Types::String.optional,
       library_redirect_url: Types::String.optional,
       press_site: Types::String.optional,
-      terms_url: Types::Serializer::URL.optional,
-      twitter: Types::String.optional
+      terms_url: Types::Serializer::URL.optional
     )
 
     typed_section_attribute :ingestion, Types::Hash.schema(
@@ -74,14 +72,11 @@ module V1
     typed_attribute :string_cookies_banner_copy_formatted, Types::String.meta(read_only: true)
 
     typed_section_attribute :integrations, Types::Hash.schema(
-      facebook_app_id: Types::String.optional,
       ga_four_tracking_id: Types::String.optional,
       google_client_email: Types::String.optional,
       google_client_id: Types::String.optional,
       google_private_key_id: Types::String.optional,
-      google_project_id: Types::String.optional,
-      twitter_access_token: Types::String.optional,
-      twitter_app_id: Types::String.optional
+      google_project_id: Types::String.optional
     )
 
     typed_section_attribute :email, Types::Hash.schema(
@@ -133,18 +128,13 @@ module V1
     end
 
     typed_attribute :oauth, Types::Hash.schema(
-      facebook: Types::Serializer::Oauth,
-      googleOauth2: Types::Serializer::Oauth,
-      twitter: Types::Serializer::Oauth
+      googleOauth2: Types::Serializer::Oauth
     ).meta(read_only: true) do |_object, _params|
       ManifoldEnv.oauth.as_json
     end
 
     typed_section_attribute :secrets, Types::Hash.schema(
       akismet_api_key: Types::String,
-      facebook_app_secret: Types::String,
-      twitter_app_secret: Types::String,
-      twitter_access_token_secret: Types::String,
       google_private_key: Types::String,
       smtp_settings_password: Types::String
     )
