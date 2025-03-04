@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
-import { useEventTracker } from "hooks";
+import { useEventTracker, useShare } from "hooks";
 import { t } from "i18next";
 
 function ShareMenu({
@@ -23,6 +23,20 @@ function ShareMenu({
     actions.openCitationDrawer();
   }
 
+  function trackShareEvent() {
+    trackEvent("share", section.type, section.id);
+  }
+
+  const { onClick: onShareClick, canRender: canShare } = useShare(
+    section.attributes.name,
+    true
+  );
+
+  const handleShareClick = async () => {
+    const { err } = (await onShareClick()) ?? {};
+    if (!err) trackShareEvent();
+  };
+
   return (
     <Menu
       menu={menu}
@@ -39,6 +53,16 @@ function ShareMenu({
           label={t("reader.menus.popup.cite")}
           srLabel={t("reader.menus.popup.cite_selection")}
           icon="socialCite32"
+        />
+      )}
+      {canShare && (
+        <MenuItem
+          menu={{ ...menu, visible }}
+          onClick={handleShareClick}
+          kind="any"
+          label={t("reader.menus.popup.app_share")}
+          srLabel={t("reader.menus.popup.share_selection")}
+          icon="link24"
         />
       )}
       <MenuItem

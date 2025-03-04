@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function useShare(title) {
+export default function useShare(title, shareOnly = false) {
   const { t } = useTranslation();
 
   const [copied, setCopied] = useState(false);
@@ -12,10 +12,10 @@ export default function useShare(title) {
   }, []);
 
   useEffect(() => {
-    if (copied && isMounted) {
+    if (copied) {
       window.setTimeout(() => setCopied(false), 1500);
     }
-  }, [copied, isMounted]);
+  }, [copied]);
 
   if (!isMounted)
     return {
@@ -29,10 +29,13 @@ export default function useShare(title) {
   const shareData = { title, url };
 
   /* eslint-disable */
-  const onShare = () => {
-    navigator?.share(shareData).catch(error => {
-      console.error(error);
-    });
+  const onShare = async () => {
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      console.error(err);
+      return { err };
+    }
   };
 
   const onCopy = () => {
@@ -42,9 +45,18 @@ export default function useShare(title) {
 
   const shareSupported =
     typeof navigator?.canShare === "function" && navigator.canShare(shareData);
+
+  if (shareOnly)
+    return {
+      canRender: shareSupported,
+      onClick: onShare,
+      icon: "share24",
+      label: t("actions.share")
+    };
+
   const clipboardSupported = navigator?.clipboard;
 
-  const canRenderShare = !!(shareSupported || clipboardSupported);
+  const canRender = !!(shareSupported || clipboardSupported);
 
   /* eslint-disable no-nested-ternary */
   const icon = shareSupported
@@ -57,11 +69,17 @@ export default function useShare(title) {
     : copied
     ? t("actions.copied")
     : t("actions.copy");
+  const srLabel = shareSupported
+    ? t("actions.share")
+    : copied
+    ? t("actions.copy_link_to", { title })
+    : t("actions.share_title", { title });
 
   return {
-    canRender: canRenderShare,
+    canRender,
     onClick: shareSupported ? onShare : onCopy,
     icon,
-    label
+    label,
+    srLabel
   };
 }
