@@ -18,7 +18,8 @@ class VisibilityMenuBody extends PureComponent {
   static propTypes = {
     filter: PropTypes.object,
     filterChangeHandler: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
+    className: PropTypes.string
   };
 
   static contextType = ReaderContext;
@@ -309,9 +310,13 @@ class VisibilityMenuBody extends PureComponent {
   }
 
   render() {
-    const { filter } = this.props;
+    const { filter, className } = this.props;
     return (
-      <div className="visibility-menu control-menu">
+      <div
+        className={classNames("visibility-menu control-menu", {
+          [className]: !!className
+        })}
+      >
         <div className="control-menu__header">
           <h2 className="control-menu__heading">
             {this.props.t("reader.menus.visibility.show_the_following")}

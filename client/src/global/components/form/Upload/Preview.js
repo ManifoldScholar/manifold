@@ -8,8 +8,7 @@ import has from "lodash/has";
 import isString from "lodash/isString";
 import isObject from "lodash/isObject";
 import startsWith from "lodash/startsWith";
-
-const path = require("path");
+import path from "path-browserify";
 
 export default class FormUploadPreview extends PureComponent {
   static propTypes = {

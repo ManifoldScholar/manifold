@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { CSSTransition } from "react-transition-group";
 import { useUID } from "react-uid";
 import Utility from "global/components/utility";
 import { notificationActions } from "actions";
@@ -40,58 +39,53 @@ export default function DrawerWrapper({
     }
   };
 
-  const renderDrawerWrapper = headerId => {
-    if (lockScroll === "hover") {
-      return (
-        <Utility.EdgeLockScroll>
-          <Content
-            headerId={headerId}
-            handleLeaveEvent={handleLeaveEvent}
-            hasConfirm={!!closeUrl}
-            {...props}
-          />
-        </Utility.EdgeLockScroll>
-      );
-    }
-
-    if (lockScroll === "always") {
-      const Overlay =
-        identifier === "notes-drawer" || identifier === "annotations-drawer"
-          ? Styled.NotesOverlay
-          : Styled.Overlay;
-      return (
-        <>
-          <Overlay />
-          <Content
-            headerId={headerId}
-            handleLeaveEvent={handleLeaveEvent}
-            hasConfirm={!!closeUrl}
-            lockScroll
-            {...props}
-          />
-        </>
-      );
-    }
-
+  if (lockScroll === "hover") {
     return (
-      <Content
-        headerId={headerId}
-        handleLeaveEvent={handleLeaveEvent}
-        hasConfirm={!!closeUrl}
-        {...props}
-      />
+      <Utility.EdgeLockScroll>
+        <Content
+          headerId={uid}
+          handleLeaveEvent={handleLeaveEvent}
+          hasConfirm={!!closeUrl}
+          open={open}
+          {...props}
+        />
+      </Utility.EdgeLockScroll>
     );
-  };
+  }
+
+  if (lockScroll === "always") {
+    return (
+      <>
+        <Styled.Overlay
+          inert={!open ? "" : undefined}
+          style={{
+            "--z-index":
+              identifier === "notes-drawer" ||
+              identifier === "annotations-drawer"
+                ? 150
+                : 500
+          }}
+        />
+        <Content
+          headerId={uid}
+          handleLeaveEvent={handleLeaveEvent}
+          hasConfirm={!!closeUrl}
+          lockScroll
+          open={open}
+          {...props}
+        />
+      </>
+    );
+  }
 
   return (
-    <CSSTransition
-      in={open}
-      classNames="drawer"
-      timeout={{ enter: 500, exit: 300 }}
-      unmountOnExit
-    >
-      {renderDrawerWrapper(uid)}
-    </CSSTransition>
+    <Content
+      headerId={uid}
+      handleLeaveEvent={handleLeaveEvent}
+      hasConfirm={!!closeUrl}
+      open={open}
+      {...props}
+    />
   );
 }
 

@@ -13,7 +13,8 @@ export default function ReturnMenuBody({
   isJournalArticle,
   projectTitle: entityTitle,
   toggleSignInUpOverlay,
-  moreLink
+  moreLink,
+  className
 }) {
   const context = useContext(FrontendModeContext);
   const settings = useFromStore("settings", "select");
@@ -21,7 +22,7 @@ export default function ReturnMenuBody({
   const { t } = useTranslation();
 
   return (
-    <Styled.Menu>
+    <Styled.Menu className={className}>
       <Styled.List>
         <Styled.Item>
           <Styled.ItemLink to={returnUrl}>
@@ -93,5 +94,6 @@ ReturnMenuBody.propTypes = {
   projectTitle: PropTypes.string.isRequired,
   toggleSignInUpOverlay: PropTypes.func.isRequired,
   moreLink: PropTypes.string,
-  settings: PropTypes.object
+  settings: PropTypes.object,
+  className: PropTypes.string
 };
