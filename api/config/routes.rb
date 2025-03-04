@@ -216,7 +216,6 @@ Rails.application.routes.draw do
             resources :resources, only: [:index, :create]
             resources :resource_collections, only: [:index, :create]
             resources :events, only: [:index]
-            resources :twitter_queries, only: [:index, :create]
             resources :resource_imports, only: [:create, :update, :show]
             resources :collaborators, only: [:index, :show] do
               collection do
@@ -229,14 +228,6 @@ Rails.application.routes.draw do
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
             resources :versions, only: [:index]
             concerns [:permissible]
-          end
-        end
-      end
-
-      resources :twitter_queries, only: [:show, :update, :destroy], controller: "projects/relationships/twitter_queries" do
-        scope module: :twitter_queries do
-          namespace :relationships do
-            resource :fetch, controller: "twitter_query_fetch", only: [:create]
           end
         end
       end
