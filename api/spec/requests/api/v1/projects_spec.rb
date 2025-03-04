@@ -10,7 +10,6 @@ RSpec.describe "Projects API", type: :request do
     :resource_collections,
     :resources,
     :subjects,
-    :twitter_queries,
     :permitted_users,
     :content_blocks,
     :action_callouts
