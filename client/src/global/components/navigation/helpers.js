@@ -29,10 +29,6 @@ export const getAdminModeLabel = ({ currentUser, mode, t }) => {
 };
 
 const FE_ROUTE_MAP = {
-  resource: {
-    regex: /^\/projects\/([A-Za-z0-9-]+)\/resource/,
-    link: `/backend/projects/resource`
-  },
   resourceCollectionResource: {
     regex: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection\/([A-Za-z0-9-]+)\/resource/,
     link: `/backend/projects/resource`
@@ -40,6 +36,10 @@ const FE_ROUTE_MAP = {
   resourceCollection: {
     regex: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection/,
     link: `/backend/projects/resource-collection`
+  },
+  resource: {
+    regex: /^\/projects\/([A-Za-z0-9-]+)\/resource/,
+    link: `/backend/projects/resource`
   },
   projectCollection: {
     regex: /^\/projects\/project-collection/,
