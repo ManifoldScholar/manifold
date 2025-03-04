@@ -50,9 +50,6 @@ module V1
           typed_attribute :purchase_price_currency, Types::String.optional.meta(example: "USD")
           typed_attribute :purchase_price, Types::Float.optional.meta(read_only: true)
           typed_attribute :purchase_call_to_action, Types::String.optional
-          typed_attribute :twitter_id, Types::String.optional
-          typed_attribute :instagram_id, Types::String.optional
-          typed_attribute :facebook_id, Types::String.optional
           typed_attribute :description_formatted, Types::String.meta(read_only: true)
           typed_attribute :resource_kinds, Types::Array.of(Types::String).meta(read_only: true)
           typed_attribute :dark_mode, Types::Bool
@@ -104,7 +101,6 @@ module V1
                          id_method_name: :resources_for_project_detail_ids,
                          object_method_name: :resources_for_project_detail
           typed_has_many :subjects
-          typed_has_many :twitter_queries
           typed_has_many :permitted_users, serializer: ::V1::UserSerializer
           typed_has_many :content_blocks, polymorphic: true
           typed_has_many :action_callouts
