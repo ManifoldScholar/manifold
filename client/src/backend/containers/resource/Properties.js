@@ -44,12 +44,17 @@ export class ResourcePropertiesContainer extends PureComponent {
   };
 
   render() {
-    const resource = this.props.resource.attributes;
-    const t = this.props.t;
+    const { resource, t } = this.props;
+    const { attributes } = resource ?? {};
+    const sortOrderBool = !!attributes?.sortOrder;
+
     return (
       <section>
         <FormContainer.Form
-          model={this.props.resource}
+          model={{
+            ...resource,
+            attributes: { ...resource.attributes, sortOrder: sortOrderBool }
+          }}
           name="backend-resource-update"
           update={resourcesAPI.update}
           create={model =>
@@ -69,7 +74,7 @@ export class ResourcePropertiesContainer extends PureComponent {
           <Form.Switch
             label={t("resources.properties.sort_order_label")}
             name="attributes[sortOrder]"
-            value={!!resource.sortOrder}
+            value={sortOrderBool}
             placeholder={t("resources.properties.sort_order_placeholder")}
             instructions={t("resources.properties.sort_order_instructions")}
           />
