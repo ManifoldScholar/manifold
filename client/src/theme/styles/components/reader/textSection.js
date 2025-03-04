@@ -32,6 +32,14 @@ export default `
       background-color: var(--selection-bg-color);
     }
 
+    *::target-text {
+      background-color: var(--color-base-violet20);
+
+      .scheme-dark & {
+        background-color: var(--color-base-violet75);
+      }
+    }
+
     &.font-sans-serif {
       font-family: var(--font-family-sans);
       font-weight: var(--font-weight-light);
