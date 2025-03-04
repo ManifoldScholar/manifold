@@ -2,14 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
-import { useEventTracker, useShare } from "hooks";
+import { useEventTracker, useShare, useCopyLinkToSelection } from "hooks";
 import { t } from "i18next";
 
 function ShareMenu({
   menu,
   visible,
   direction,
+  text,
   section,
+  selectionState,
   actions,
   onBackClick,
   onKeyDown
@@ -36,6 +38,13 @@ function ShareMenu({
     const { err } = (await onShareClick()) ?? {};
     if (!err) trackShareEvent();
   };
+
+  const {
+    onClick: onCopyClick,
+    label: copyLabel,
+    icon: copyIcon,
+    srLabel: copySrLabel
+  } = useCopyLinkToSelection(text, section, selectionState);
 
   return (
     <Menu
@@ -67,6 +76,14 @@ function ShareMenu({
       )}
       <MenuItem
         menu={{ ...menu, visible }}
+        onClick={onCopyClick}
+        kind="any"
+        label={copyLabel}
+        srLabel={copySrLabel}
+        icon={copyIcon}
+      />
+      <MenuItem
+        menu={{ ...menu, visible }}
         onClick={onBackClick}
         kind="any"
         label={t("navigation.back")}
@@ -86,7 +103,9 @@ ShareMenu.propTypes = {
   onKeyDown: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   direction: PropTypes.oneOf(["up", "down"]),
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
+  text: PropTypes.object,
+  selectionState: PropTypes.object
 };
 
 export default ShareMenu;
