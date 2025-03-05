@@ -8,7 +8,7 @@ import {
   findFirstMathUuidNode,
   findLastMathUuidNode
 } from "./mathHelpers";
-import { generateFragment } from "./fragment-generation-utils";
+import { generateFragment } from "./text-fragments-polyfill/fragment-generation-utils";
 
 class AnnotatableCaptureSelection extends Component {
   static propTypes = {

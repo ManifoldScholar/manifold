@@ -16,7 +16,7 @@
 
 /* eslint-disable */
 
-import * as fragments from "text-fragments-polyfill/src/text-fragment-utils.js";
+import * as fragments from "./text-fragment-utils";
 
 const MAX_EXACT_MATCH_LENGTH = 300;
 const MIN_LENGTH_WITHOUT_CONTEXT = 20;
