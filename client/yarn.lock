@@ -14745,11 +14745,6 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
-text-fragments-polyfill@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/text-fragments-polyfill/-/text-fragments-polyfill-6.3.0.tgz#95eacc2f0c662ce5b9de0cca5f5fad6fd1b0a357"
-  integrity sha512-aQNC0vTgWHaBkdlhqgC6tYkZrWp9h6Y0hn02cR5mc9qN/LNtRCOslAgbZQ3TtCgOa76TNMPe9bgnLmtIzAWLfw==
-
 text-mask-addons@^3.7.1:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/text-mask-addons/-/text-mask-addons-3.8.0.tgz#17b61ef665a4f36811f2ea1f01a223b4be61ab26"
