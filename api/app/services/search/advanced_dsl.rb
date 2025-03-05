@@ -13,10 +13,6 @@ module Search
     # @see #each_analyzer_and_fuzzy_value
     ANALYZER_FUZZIES = ANALYZERS.product([true, false]).freeze
 
-    included do
-      include Elasticsearch::DSL
-    end
-
     # @param [<#to_hash>] queries
     # @return [Hash]
     def extracted_bool_should(*queries)

@@ -11,7 +11,7 @@ RSpec.describe "Projects API", type: :request do
       end
     end
 
-    describe "it allows searching by keyword", :elasticsearch do
+    describe "it allows searching by keyword" do
       before(:each) do
         FactoryBot.create(:project, title: "foo")
         path = api_v1_projects_path(params: { filter: { keyword: "foo" } })

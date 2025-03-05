@@ -143,7 +143,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context "can be searched", :elasticsearch do
+  context "can be searched" do
     let(:first) { "189274891457612" }
     let(:last) { "HIOUFHAOASJDFIO" }
     let(:email) { "#{first}@#{last}.com" }
