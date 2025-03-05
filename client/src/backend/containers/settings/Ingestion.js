@@ -49,6 +49,7 @@ export class SettingsIngestionContainer extends PureComponent {
             <Form.CodeArea
               label={t("settings.ingestion.mammoth_style_label")}
               name="attributes[ingestion][mammothStyleMap]"
+              mode="text"
               instructions={
                 <Trans
                   i18nKey="settings.ingestion.mammoth_style_instructions"
