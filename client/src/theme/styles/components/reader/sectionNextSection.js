@@ -14,9 +14,13 @@ export default `
       background-color: var(--color-base-neutral90);
     }
 
+    &__container {
+      padding-block-start: ${fluidScale("64px", "0px")};
+      padding-block-end: ${fluidScale("130px", "50px")};
+    }
+
     &__link {
-      display: block;
-      padding: ${fluidScale("64px", "0px")} 0 ${fluidScale("130px", "50px")};
+      display: inline-block;
       text-decoration: none;
     }
 
