@@ -38,7 +38,8 @@ export class Annotatable extends Component {
     bodySelector: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired,
     annotations: PropTypes.array,
-    notations: PropTypes.array
+    notations: PropTypes.array,
+    metaTitle: PropTypes.string
   };
 
   static defaultProps = {
@@ -495,6 +496,7 @@ export class Annotatable extends Component {
             actions={this.actions}
             text={this.props.text}
             section={this.props.section}
+            metaTitle={this.props.metaTitle}
             activeEvent={this.state.activeEvent}
             activeAnnotation={this.activeAnnotationObject}
             annotationState={annotationState}

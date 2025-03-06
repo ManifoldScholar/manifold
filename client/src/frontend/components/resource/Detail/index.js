@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { meta } from "utils/entityUtils";
 import * as Styled from "./styles";
 
-export default function ResourceDetail({ resource }) {
+export default function ResourceDetail({ resource, projectTitle }) {
   const { t } = useTranslation();
   const commentsMeta = useSelector(state =>
     meta(`comments-for-${resource.id}`, state.entityStore)
@@ -26,6 +26,10 @@ export default function ResourceDetail({ resource }) {
   };
 
   const attr = resource.attributes;
+
+  const shareTitle = projectTitle
+    ? `${attr.title} | ${projectTitle}`
+    : attr.title;
 
   return (
     <Styled.Container>
@@ -67,7 +71,7 @@ export default function ResourceDetail({ resource }) {
         )}
         <Styled.MetadataWrapper>
           <LinkComponent attributes={attr} />
-          <Share title={attr?.title} />
+          <Share title={shareTitle} />
           <Meta resource={resource} layout={"secondary"} />
           <VariantList resource={resource} />
         </Styled.MetadataWrapper>
@@ -79,7 +83,6 @@ export default function ResourceDetail({ resource }) {
 ResourceDetail.displayName = "Resource.Detail";
 
 ResourceDetail.propTypes = {
-  projectUrl: PropTypes.string,
-  resourceUrl: PropTypes.string.isRequired,
-  resource: PropTypes.object
+  resource: PropTypes.object,
+  projectTitle: PropTypes.string
 };

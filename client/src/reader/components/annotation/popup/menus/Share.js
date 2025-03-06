@@ -14,7 +14,8 @@ function ShareMenu({
   selectionState,
   actions,
   onBackClick,
-  onKeyDown
+  onKeyDown,
+  metaTitle
 }) {
   const trackEvent = useEventTracker();
 
@@ -30,7 +31,7 @@ function ShareMenu({
   }
 
   const { onClick: onShareClick, canRender: canShare } = useShare(
-    section.attributes.name,
+    metaTitle ?? section.attributes.name,
     selectionState.textFragment,
     true
   );

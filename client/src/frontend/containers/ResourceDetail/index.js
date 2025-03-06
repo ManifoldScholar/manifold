@@ -174,6 +174,7 @@ export class ResourceDetailContainer extends PureComponent {
           <Resource.Detail
             projectId={project.id}
             projectUrl={this.projectUrl()}
+            projectTitle={project.attributes.titlePlaintext}
             resourceUrl={this.resourceUrl()}
             resource={resource}
             dispatch={this.props.dispatch}
