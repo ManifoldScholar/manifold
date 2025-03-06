@@ -51,7 +51,6 @@ export default function useCopyLinkToSelection(text, section, selectionState) {
   /* eslint-disable */
   const onClick = () => {
     const href = generateUrl();
-    console.log({ href });
     navigator?.clipboard.writeText(href).then(() => setCopied(true));
   };
   /* eslint-enable */
