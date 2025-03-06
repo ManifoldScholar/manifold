@@ -1,5 +1,13 @@
 class JournalAuthorizer < ApplicationAuthorizer
-  expose_abilities [:read_drafts, :update_makers, :fully_read, :create_entitlements, :manage_entitlements]
+  expose_abilities [
+    :read_drafts,
+    :update_makers,
+    :fully_read,
+    :create_entitlements,
+    :manage_entitlements,
+    :manage_permissions,
+    :create_permissions
+  ]
 
   # First, we check to see if the journal is a draft. If so, {#drafts_readable_by? it must be readable}.
   # Otherwise, we allow a journal to be read.

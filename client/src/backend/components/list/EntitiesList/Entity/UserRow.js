@@ -29,7 +29,10 @@ function UserRow({
     figureSize: "small",
     figureShape: "circle",
     label: [
-      { text: t(`records.users.role_options.${attributes.role}`), level: "" },
+      {
+        text: t(`records.users.role_options.${attributes.role}`),
+        level: ""
+      },
       ...(id === currentUser.id
         ? [
             {
