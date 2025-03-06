@@ -26,7 +26,8 @@ export default class Text extends Component {
     match: PropTypes.object,
     children: PropTypes.object,
     visibility: PropTypes.object,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    metaTitle: PropTypes.string
   };
 
   constructor(props) {
@@ -147,6 +148,7 @@ export default class Text extends Component {
               location={this.props.location}
               history={this.props.history}
               section={this.props.section}
+              metaTitle={this.props.metaTitle}
               render={(pendingAnnotation, adjustedAnnotations) => (
                 <div className={containerClass}>
                   <div

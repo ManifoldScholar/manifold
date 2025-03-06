@@ -243,7 +243,7 @@ export class SectionContainer extends Component {
           appendDefaultTitle
         />
         {this.renderRoutes()}
-        <Section.Text {...this.props} />
+        <Section.Text metaTitle={metaTitle} {...this.props} />
         <div>
           <Section.NextSection
             sectionsMap={text.attributes.sectionsMap}

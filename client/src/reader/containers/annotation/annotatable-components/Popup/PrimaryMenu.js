@@ -16,7 +16,8 @@ function PrimaryMenu({
   activeAnnotation,
   direction,
   visible,
-  clearSelection
+  clearSelection,
+  metaTitle
 }) {
   const {
     menus,
@@ -65,6 +66,7 @@ function PrimaryMenu({
         section={section}
         selectionState={selectionState}
         actions={actions}
+        metaTitle={metaTitle}
         {...submenuProps}
       />
       <Menus.ReadingGroup
