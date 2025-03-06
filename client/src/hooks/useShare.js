@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { urlWithTextFragment } from "./useCopyLinkToSelection";
 
-export default function useShare(title, shareOnly = false) {
+export default function useShare(title, urlTextFragment, shareOnly = false) {
   const { t } = useTranslation();
 
   const [copied, setCopied] = useState(false);
@@ -25,7 +26,10 @@ export default function useShare(title, shareOnly = false) {
       label: t("actions.share")
     };
 
-  const url = window.location.toString();
+  const baseUrl = window.location.toString();
+  const { status, fragment } = urlTextFragment ?? {};
+  const url = status === 0 ? urlWithTextFragment(baseUrl, fragment) : baseUrl;
+
   const shareData = { title, url };
 
   /* eslint-disable */

@@ -31,6 +31,7 @@ function ShareMenu({
 
   const { onClick: onShareClick, canRender: canShare } = useShare(
     section.attributes.name,
+    selectionState.textFragment,
     true
   );
 
@@ -44,7 +45,7 @@ function ShareMenu({
     label: copyLabel,
     icon: copyIcon,
     srLabel: copySrLabel
-  } = useCopyLinkToSelection(text, section, selectionState);
+  } = useCopyLinkToSelection(text, section, selectionState.textFragment);
 
   return (
     <Menu

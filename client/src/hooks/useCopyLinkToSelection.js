@@ -2,7 +2,22 @@ import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 
-export default function useCopyLinkToSelection(text, section, selectionState) {
+export const urlWithTextFragment = (url, fragment) => {
+  const prefix = fragment.prefix
+    ? `${encodeURIComponent(fragment.prefix)}-,`
+    : "";
+  const suffix = fragment.suffix
+    ? `,-${encodeURIComponent(fragment.suffix)}`
+    : "";
+  const start = encodeURIComponent(fragment.textStart);
+  const end = fragment.textEnd
+    ? `,${encodeURIComponent(fragment.textEnd)}`
+    : "";
+
+  return `${url}#:~:text=${prefix}${start}${end}${suffix}`;
+};
+
+export default function useCopyLinkToSelection(text, section, urlTextFragment) {
   const { t } = useTranslation();
 
   const getBaseUrl = useCallback(() => {
@@ -19,26 +34,14 @@ export default function useCopyLinkToSelection(text, section, selectionState) {
     const url = getBaseUrl();
     if (!url) return null;
 
-    const { status, fragment } = selectionState?.textFragment ?? {};
+    const { status, fragment } = urlTextFragment ?? {};
 
     if (status === 0) {
-      const prefix = fragment.prefix
-        ? `${encodeURIComponent(fragment.prefix)}-,`
-        : "";
-      const suffix = fragment.suffix
-        ? `,-${encodeURIComponent(fragment.suffix)}`
-        : "";
-      const start = encodeURIComponent(fragment.textStart);
-      const end = fragment.textEnd
-        ? `,${encodeURIComponent(fragment.textEnd)}`
-        : "";
-      const href = `${url}#:~:text=${prefix}${start}${end}${suffix}`;
-
-      return href;
+      return urlWithTextFragment(url, fragment);
     }
 
     return url;
-  }, [selectionState, getBaseUrl]);
+  }, [urlTextFragment, getBaseUrl]);
 
   const [copied, setCopied] = useState(false);
 
