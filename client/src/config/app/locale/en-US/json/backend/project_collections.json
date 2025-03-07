@@ -25,11 +25,14 @@
     "projects_shown": "Projects Shown:",
     "projects_shown_instructions": "Number of projects shown in homepage blade (0 - 40).  Will show all if none is set.",
     "custom_icon": "Custom Icon",
-    "social_image": "Social Card Image",
-    "social_title": "Social Card Title",
-    "social_title_placeholder": "Optionally, Enter a Social Card Title",
-    "social_description": "Social Card Description",
-    "social_description_placeholder": "Optionally, Enter a Social Card Description",
+    "social_header": "Open Graph",
+    "social_title": "Open Graph Title",
+    "social_title_placeholder": "Optionally, enter a social title",
+    "social_title_instructions": "If blank, Title will be used in og:title meta tags.",
+    "social_description": "Open Graph Description",
+    "social_description_placeholder": "Optionally, enter a description",
+    "social_image": "Open Graph Image",
+    "social_image_instructions": "If blank, hero will be used for og:image meta tags.",
     "book_stack_icon": "Stack of books",
     "lamp_icon": "Lamp",
     "new_icon": "English word \"New\" with round background",
@@ -64,6 +67,7 @@
     "collection_is_visible": "Collection is visible",
     "collection_is_not_visible": "Collection is not visible",
     "save_button_label": "$t(actions.save) Project Collection",
-    "hero_alt_label": "Hero Image Alt Text"
+    "hero_alt_label": "Hero Image Alt Text",
+    "display_header": "Display Settings"
   }
 }

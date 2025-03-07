@@ -21,7 +21,7 @@ class SmartAttributes extends Component {
           if (!formProps.getModelValue("attributes[smart]")) return null;
 
           return (
-            <>
+            <Form.FieldGroup label={t("glossary.project_other")}>
               <Form.NumberInput
                 label={t("project_collections.number_projects")}
                 name="attributes[numberOfProjects]"
@@ -57,7 +57,7 @@ class SmartAttributes extends Component {
                 optionToValue={tag => tag.attributes.name}
                 allowNew
               />
-            </>
+            </Form.FieldGroup>
           );
         }}
       </FormContext.Consumer>
