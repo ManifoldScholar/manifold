@@ -6,7 +6,6 @@ module V1
     typed_attribute :text_slug, Types::String
     typed_attribute :text_title, Types::String
     typed_attribute :name, Types::String.optional
-    typed_attribute :social_image, Types::Serializer::URL.optional
     typed_attribute :source_identifier, Types::String.optional
     typed_attribute :kind, Types::String.meta(example: "section")
     typed_attribute :slug, Types::String
@@ -25,6 +24,9 @@ module V1
       typed_attribute :body, Types::String.optional
       typed_attribute :citations, Types::Serializer::Citations
       metadata(metadata: true, properties: true, formatted: true)
+      typed_attribute :social_description, Types::String.meta(read_only: true).optional
+      typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
+      typed_attribute :project_social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
     end
 
   end
