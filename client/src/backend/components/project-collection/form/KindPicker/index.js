@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Utility from "frontend/components/utility";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 class KindPicker extends Component {
   static displayName = "ProjectCollection.Form.KindPicker";
@@ -27,7 +28,7 @@ class KindPicker extends Component {
       : t("project_collections.manual");
 
     return (
-      <div>
+      <Styled.Wrapper>
         <span className="screen-reader-text">
           {t("project_collections.collection_kind_instructions")}
         </span>
@@ -44,7 +45,7 @@ class KindPicker extends Component {
             icon: "BECollectionSmart64"
           }}
         />
-      </div>
+      </Styled.Wrapper>
     );
   }
 }

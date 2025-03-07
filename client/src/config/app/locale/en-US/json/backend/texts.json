@@ -44,7 +44,9 @@
       "access_header": "Access",
       "ignore_label": "Ignore Access Restrictions?",
       "ignore_instructions": "When on, this text will be available to all readers regardless of project access settings.",
-      "save": "Save Text"
+      "save": "Save Text",
+      "social_instructions": "These properties will be used for og meta tags in the Reader for all sections of this text.",
+      "social_image_instructions": "If blank, Cover then parent project image will be used as fallbacks for og:image meta tags."
     },
     "ingestion": {
       "instructions": "Manifold can ingest texts from single files or a .zip collection. See the <1>documentation</1> for supported file types and directory structure.",

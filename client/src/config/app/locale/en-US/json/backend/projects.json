@@ -47,7 +47,8 @@
         "restrictions_header": "Restrictions",
         "disable_public_label": "Disable Public Annotations and Comments",
         "disable_public_instructions": "When on, this setting will prevent users from commenting or annotating publicly on this project. Reading group annotations will only appear for group members.",
-        "save": "Save Project"
+        "save": "Save Project",
+        "social_image_instructions": "If blank, Cover then Thumbnail will be used as fallbacks for og:image meta tags."
       },
       "access": {
         "title": "Configure Access Restrictions",

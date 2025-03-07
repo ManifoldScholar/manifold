@@ -152,6 +152,37 @@ function ProjectPropertiesContainer({ project }) {
               allowNew
             />
           </Form.FieldGroup>
+          <Form.FieldGroup label={t("journals.forms.properties.social_header")}>
+            <Form.TextInput
+              label={t("journals.forms.properties.social_card_label")}
+              name="attributes[socialTitle]"
+              placeholder={t(
+                "journals.forms.properties.social_card_placeholder"
+              )}
+              instructions={t(
+                "journals.forms.properties.social_card_instructions"
+              )}
+            />
+            <Form.TextArea
+              wide
+              label={t("journals.forms.properties.social_description_label")}
+              name="attributes[socialDescription]"
+              placeholder={t(
+                "journals.forms.properties.social_description_placeholder"
+              )}
+            />
+            <Form.Upload
+              layout="portrait"
+              label={t("journals.forms.properties.social_image_label")}
+              accepts="images"
+              readFrom="attributes[socialImageStyles][small]"
+              name="attributes[socialImage]"
+              remove="attributes[removeSocialImage]"
+              instructions={t(
+                "projects.forms.properties.social_image_instructions"
+              )}
+            />
+          </Form.FieldGroup>
           <Form.FieldGroup
             label={t("projects.forms.properties.presentation_header")}
           >
