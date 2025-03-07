@@ -102,7 +102,7 @@ class Text < ApplicationRecord
   delegate :title_plaintext, to: :title_main, allow_nil: true
   delegate :subtitle_formatted, to: :title_subtitle, allow_nil: true
   delegate :subtitle_plaintext, to: :title_subtitle, allow_nil: true
-  delegate :social_image, to: :project
+  delegate :social_image, to: :project, prefix: true
   delegate :auto_generated_toc, to: :text_section_aggregation, allow_nil: true
   delegate :texts_nav, to: :project, prefix: true, allow_nil: true
   delegate :journal_nav, to: :project, prefix: true, allow_nil: true
@@ -125,6 +125,8 @@ class Text < ApplicationRecord
   scope :pending_epub_v3_export, -> { exports_as_epub_v3.sans_current_epub_v3_export }
 
   manifold_has_attached_file :cover, :image
+  manifold_has_attached_file :social_image, :image
+  manifold_has_attached_file :project_social_image, :image
 
   after_commit :trigger_text_added_event, on: [:create, :update]
   after_commit :inject_global_stylesheet, on: :create

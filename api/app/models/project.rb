@@ -148,6 +148,7 @@ class Project < ApplicationRecord
   # Attachments
   manifold_has_attached_file :cover, :image
   manifold_has_attached_file :hero, :image
+  manifold_has_attached_file :social_image, :image
 
   scope :by_featured, lambda { |featured|
     next all if featured.nil?
@@ -261,10 +262,6 @@ class Project < ApplicationRecord
     {
       hidden: draft?
     }
-  end
-
-  def social_image
-    hero? ? hero_styles[:medium] : nil
   end
 
   def journal_issue?
