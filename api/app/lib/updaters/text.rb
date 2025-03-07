@@ -5,7 +5,7 @@ module Updaters
     include ::Updaters::Concerns::HasSortableCollaborators
 
     def attachment_fields
-      [:cover]
+      [:cover, :social_image]
     end
 
   end

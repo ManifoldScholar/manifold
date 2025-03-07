@@ -648,7 +648,10 @@ CREATE TABLE public.projects (
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     journal_issue_id uuid,
     deleted_at timestamp without time zone,
-    marked_for_purge_at timestamp without time zone
+    marked_for_purge_at timestamp without time zone,
+    social_image_data jsonb,
+    social_description text,
+    social_title text
 );
 
 
@@ -2677,7 +2680,10 @@ CREATE TABLE public.texts (
     landmarks jsonb DEFAULT '[]'::jsonb NOT NULL,
     structure_titles jsonb DEFAULT '{}'::jsonb NOT NULL,
     deleted_at timestamp without time zone,
-    marked_for_purge_at timestamp without time zone
+    marked_for_purge_at timestamp without time zone,
+    social_image_data jsonb,
+    social_description text,
+    social_title text
 );
 
 
@@ -7372,6 +7378,5 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250128220613'),
 ('20250129200019'),
 ('20250210192150'),
-('20250210230256');
-
-
+('20250210230256'),
+('20250306230246');

@@ -80,7 +80,9 @@ module Validation
                   :standalone_mode, :standalone_mode_press_bar_text, :restricted_access,
                   :standalone_mode_press_bar_url, :finished, :restricted_access_heading,
                   :restricted_access_body, :open_access, :disable_engagement,
-                  :journal_issue_pending_sort_title, :journal_issue_number, :pending_slug]
+                  :journal_issue_pending_sort_title, :journal_issue_number, :pending_slug,
+                  :social_title, attachment(:social_image), :remove_social_image,
+                  :social_description]
     relationships = [:collaborators, :creators, :contributors, :subjects, :journal_volume]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -375,7 +377,9 @@ module Validation
     attributes = [:title, :position, :description, :publication_date,
                   metadata(Text), :section_kind, :subtitle, :published,
                   :pending_slug, attachment(:cover), :remove_cover,
-                  :ignore_access_restrictions, :start_text_section_id, { toc: nested_toc }, { section_names: [] }]
+                  :ignore_access_restrictions, :start_text_section_id, { toc: nested_toc },
+                  { section_names: [] }, :social_title, attachment(:social_image),
+                  :remove_social_image, :social_description]
     relationships = [:category, :contributors, :creators, :collaborators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
