@@ -121,13 +121,18 @@ function JournalPropertiesContainer({ journal }) {
                   placeholder={t(
                     "journals.forms.properties.social_card_placeholder"
                   )}
+                  instructions={t(
+                    "journals.forms.properties.social_card_instructions"
+                  )}
                 />
                 <Form.TextArea
                   wide
-                  label={t("journals.forms.properties.social_descript_label")}
+                  label={t(
+                    "journals.forms.properties.social_description_label"
+                  )}
                   name="attributes[socialDescription]"
                   placeholder={t(
-                    "journals.forms.properties.social_descript_placeholder"
+                    "journals.forms.properties.social_description_placeholder"
                   )}
                 />
                 <Form.Upload
@@ -137,6 +142,9 @@ function JournalPropertiesContainer({ journal }) {
                   readFrom="attributes[socialImageStyles][small]"
                   name="attributes[socialImage]"
                   remove="attributes[removeSocialImage]"
+                  instructions={t(
+                    "journals.forms.properties.social_image_instructions"
+                  )}
                 />
               </Form.FieldGroup>
               <Form.FieldGroup
