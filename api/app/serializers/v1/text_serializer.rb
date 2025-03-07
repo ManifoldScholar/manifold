@@ -126,6 +126,11 @@ module V1
         id: Types::Serializer::ID,
         label: Types::String
       ).meta(read_only: true).optional
+
+      typed_attribute :social_description, Types::String.optional
+      typed_attribute :social_title, Types::String.optional
+      typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
+      typed_attribute :project_social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
     end
 
     class << self
