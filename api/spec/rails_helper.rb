@@ -209,18 +209,7 @@ RSpec.configure do |config|
     /googleapis\.com/
   ]
 
-  # config.around(:each, elasticsearch: true) do |example|
-  #   WebMock.allow_net_connect!
-  #   Searchkick.callbacks(nil) do
-  #     example.run
-  #   end
-  #   WebMock.disable_net_connect!(allow: allowed_net_connect)
-  # end
-
-  # Allow elastic search for tests tagged with elasticsearch
-
   config.around(:example) do |example|
-    disable_web_connect = !example.metadata[:elasticsearch]
 
     if disable_web_connect
       WebMock.disable_net_connect!(allow: allowed_net_connect)

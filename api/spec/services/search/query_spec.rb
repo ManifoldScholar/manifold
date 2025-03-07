@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Search::Query, elasticsearch: true, interaction: true do
+RSpec.describe Search::Query, interaction: true do
   let!(:bovary) { FactoryBot.create :project, title: "Madame Bovary", description: "The force will be with you, always" }
   let!(:babble) { FactoryBot.create :project, title: "Madame Babble", description: "Peace be with you" }
 
@@ -49,7 +49,7 @@ RSpec.describe Search::Query, elasticsearch: true, interaction: true do
 
       it "should raise an error" do
         perform_within_expectation! valid: false, raises: true do |e|
-          e.to raise_error(Searchkick::InvalidQueryError)
+          e.to raise_error(InvalidQueryError)
         end
       end
     end
@@ -67,7 +67,7 @@ RSpec.describe Search::Query, elasticsearch: true, interaction: true do
 
       it "should raise an error" do
         perform_within_expectation! valid: false, raises: true do |e|
-          e.to raise_error(Searchkick::InvalidQueryError)
+          e.to raise_error(InvalidQueryError)
         end
       end
     end
