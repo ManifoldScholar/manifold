@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
 import { useEventTracker, useShare, useCopyLinkToSelection } from "hooks";
+import { useMetaTitle } from "frontend/components/entity/useEntityHeadContent";
 import { t } from "i18next";
 
 function ShareMenu({
@@ -14,10 +15,11 @@ function ShareMenu({
   selectionState,
   actions,
   onBackClick,
-  onKeyDown,
-  metaTitle
+  onKeyDown
 }) {
   const trackEvent = useEventTracker();
+
+  const metaTitle = useMetaTitle(section, text);
 
   const canCite = section && !!Object.keys(section.attributes.citations).length;
 
@@ -33,7 +35,8 @@ function ShareMenu({
   const { onClick: onShareClick, canRender: canShare } = useShare(
     metaTitle ?? section.attributes.name,
     selectionState.textFragment,
-    true
+    true,
+    !metaTitle
   );
 
   const handleShareClick = async () => {

@@ -3,7 +3,12 @@ import { useTranslation } from "react-i18next";
 import { urlWithTextFragment } from "./useCopyLinkToSelection";
 import useFromStore from "./useFromStore";
 
-export default function useShare(title, urlTextFragment, shareOnly = false) {
+export default function useShare(
+  title,
+  urlTextFragment,
+  shareOnly = false,
+  appendDefaultTitle = true
+) {
   const { t } = useTranslation();
 
   const [copied, setCopied] = useState(false);
@@ -31,7 +36,8 @@ export default function useShare(title, urlTextFragment, shareOnly = false) {
 
   const headTitle = settings?.attributes.general.headTitle;
 
-  const appendedTitle = headTitle ? `${title} | ${headTitle}` : title;
+  const appendedTitle =
+    headTitle && appendDefaultTitle ? `${title} | ${headTitle}` : title;
 
   const baseUrl = window.location.toString();
   const { status, fragment } = urlTextFragment ?? {};
