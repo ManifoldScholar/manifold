@@ -28,8 +28,6 @@ module V1
     typed_attribute :project_slug, Types::String.meta(read_only: true)
     typed_attribute :publication_date, Types::DateTime.optional
     typed_attribute :creator_names, Types::String.meta(read_only: true)
-    typed_attribute :journal_social_description, Types::String.meta(read_only: true).optional
-    typed_attribute :journal_social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
 
     typed_belongs_to :journal_volume, record_type: "journalVolume"
     typed_belongs_to :journal
@@ -38,6 +36,5 @@ module V1
     typed_has_many :texts, serializer: ::V1::TextSerializer
     typed_has_many :text_categories, serializer: ::V1::CategorySerializer, record_type: :category
     typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
-
   end
 end
