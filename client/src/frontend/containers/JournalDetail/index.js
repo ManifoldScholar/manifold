@@ -2,7 +2,8 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import EntityHeadContent from "frontend/components/entity/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
+import HeadContent from "global/components/HeadContent";
 import EntityHero from "frontend/components/entity/Hero";
 import EntityCollection from "frontend/components/entity/Collection";
 import { FooterLink } from "frontend/components/entity/Collection/parts";
@@ -51,6 +52,8 @@ function JournalDetailContainer({ journal }) {
         ];
   }, [slug, titlePlaintext, t, libraryDisabled]);
 
+  const headContentProps = useEntityHeadContent(journal);
+
   if (!journal) return null;
 
   const {
@@ -63,7 +66,7 @@ function JournalDetailContainer({ journal }) {
     <>
       <CheckFrontendMode debugLabel="JournalDetail" isProjectHomePage />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
-      <EntityHeadContent entity={journal} />
+      <HeadContent {...headContentProps} />
       <EntityHero.Journal entity={journal} />
       {!volumes?.length && !issues?.length && (
         <Authorize entity={journal} ability="update">

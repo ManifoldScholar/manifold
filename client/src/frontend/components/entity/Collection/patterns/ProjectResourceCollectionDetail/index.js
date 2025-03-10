@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import ResourceList from "frontend/components/resource-list";
 import ResourceCollection from "frontend/components/resource-collection";
-import { useListFilters } from "hooks";
 import EntityCollection from "../../EntityCollection";
 import SlideshowSection from "./SlideshowSection";
 import * as shapes from "../../shapes";
@@ -17,7 +16,7 @@ function ProjectResourceCollectionDetail({
   slideshowResourcesMeta,
   project,
   meta,
-  filterProps: passedFilterProps,
+  filterProps,
   paginationProps,
   dispatch,
   listHeaderId,
@@ -25,16 +24,7 @@ function ProjectResourceCollectionDetail({
 }) {
   const { t } = useTranslation();
 
-  const showPagination = !isEmpty(meta) && !isEmpty(paginationProps);
   const totalCount = resourceCollection.attributes.collectionResourcesCount;
-  const filterProps = useListFilters({
-    ...passedFilterProps,
-    options: {
-      sort: true,
-      kinds: resourceCollection.attributes.resourceKinds,
-      tags: resourceCollection.attributes.resourceTags
-    }
-  });
 
   return (
     <EntityCollection
@@ -83,7 +73,7 @@ function ProjectResourceCollectionDetail({
             }
       }
       paginationProps={
-        !showPagination
+        isEmpty(meta)
           ? {}
           : {
               pagination: get(meta, "pagination"),

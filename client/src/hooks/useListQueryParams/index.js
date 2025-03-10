@@ -7,7 +7,8 @@ export default function useListQueryParams({
   initSize = 20,
   initFilters,
   collectionPagination,
-  initSearchProps
+  initSearchProps,
+  scrollTargetId
 } = {}) {
   const history = useHistory();
   const { pathname, search } = useLocation();
@@ -47,10 +48,11 @@ export default function useListQueryParams({
 
       history.push({
         pathname,
-        search: query
+        search: query,
+        hash: scrollTargetId ? `#${scrollTargetId}` : undefined
       });
     },
-    [history, pathname]
+    [history, pathname, scrollTargetId]
   );
 
   // Frontend updates a filters object

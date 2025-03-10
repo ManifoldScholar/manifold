@@ -10,15 +10,10 @@ import { entityStoreActions as store } from "actions";
 import { projectCollectionsAPI, projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import has from "lodash/has";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import {
-  useFetch,
-  useFromStore,
-  useListFilters,
-  useListQueryParams
-} from "hooks";
+import { useFetch, useListFilters, useListQueryParams } from "hooks";
 
 export default function ProjectCollectionDetailContainer() {
   const { id } = useParams();
@@ -43,7 +38,6 @@ export default function ProjectCollectionDetailContainer() {
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const settings = useFromStore("settings", "select");
 
   useEffect(() => {
     return () => dispatch(store.flush(uid));
@@ -69,31 +63,9 @@ export default function ProjectCollectionDetailContainer() {
     [t]
   );
 
+  const headContentProps = useEntityHeadContent(projectCollection);
+
   if (!projectCollection) return null;
-
-  const ogDescription = () => {
-    if (!projectCollection) return null;
-    const {
-      descriptionPlaintext,
-      socialDescription
-    } = projectCollection.attributes;
-    return socialDescription || descriptionPlaintext;
-  };
-
-  const ogTitle = () => {
-    if (!projectCollection || !settings) return null;
-    const { socialTitle, title } = projectCollection.attributes;
-    return socialTitle || `\u201c${title}\u201d`;
-  };
-
-  const ogImage = () => {
-    if (!projectCollection) return null;
-    const { socialImageStyles, heroStyles } = projectCollection.attributes;
-    if (has(socialImageStyles, "mediumLandscape"))
-      return socialImageStyles.mediumLandscape;
-    if (has(heroStyles, "mediumLandscape")) return heroStyles.mediumLandscape;
-    return null;
-  };
 
   return (
     <>
@@ -108,12 +80,7 @@ export default function ProjectCollectionDetailContainer() {
         />
       )}
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
-      <HeadContent
-        title={ogTitle()}
-        description={ogDescription()}
-        image={ogImage()}
-        appendDefaultTitle
-      />
+      <HeadContent {...headContentProps} />
       <h1 className="screen-reader-text">
         {projectCollection.attributes.title}
       </h1>

@@ -6,7 +6,8 @@ import { useParams } from "react-router-dom";
 import { uiFrontendModeActions } from "actions";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
-import EntityHeadContent from "frontend/components/entity/HeadContent";
+import HeadContent from "global/components/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useListFilters, useListQueryParams } from "hooks";
@@ -60,16 +61,17 @@ export default function ProjectResourcesContainer({
       : [projectCrumb, resourcesCrumb].filter(Boolean);
   }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
+  const headContentProps = useEntityHeadContent(
+    project,
+    null,
+    t("glossary.resource_title_case_other")
+  );
+
   if (!project) return null;
 
   return (
     <>
-      <EntityHeadContent
-        entity={project}
-        titleOverride={`${t(
-          "glossary.resource_title_case_other"
-        )} | ${titlePlaintext}`}
-      />
+      <HeadContent {...headContentProps} />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <EntityCollection.ProjectResources
         project={project}
