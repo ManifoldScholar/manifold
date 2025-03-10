@@ -64,8 +64,8 @@ class TextSection < ApplicationRecord
   delegate :title, to: :text, prefix: true, allow_nil: true
   delegate :creator_names_array, to: :text, prefix: true, allow_nil: true
   delegate :slug, to: :text, prefix: true
-  delegate :social_image_data, to: :text
-  delegate :social_description, to: :text
+  delegate :social_image_data, to: :text, allow_nil: true
+  delegate :social_description, to: :text, allow_nil: true
 
   manifold_has_attached_file :social_image, :image
 
