@@ -183,7 +183,7 @@
     "node": "20.x",
     "yarn": "4.6.0"
   },
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@4.7.0",
   "browserslist": [
     "defaults",
     "not IE 11",
