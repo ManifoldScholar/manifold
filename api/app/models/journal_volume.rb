@@ -7,15 +7,9 @@ class JournalVolume < ApplicationRecord
   include SerializedAbilitiesFor
   include Filterable
   include Sluggable
-  include Attachments
 
   belongs_to :journal, counter_cache: true
   has_many :journal_issues, -> { in_reverse_order }, dependent: :nullify
-
-  delegate :social_image, to: :journal, prefix: true
-  delegate :social_description, to: :journal, prefix: true
-
-  manifold_has_attached_file :journal_social_image, :image
 
   validates :journal_id, presence: true
   validates :number, presence: true

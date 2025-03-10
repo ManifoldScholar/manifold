@@ -14,7 +14,6 @@ class JournalIssue < ApplicationRecord
   include HasFormattedAttributes
   include SearchIndexable
   include HasSortTitle
-  include Attachments
 
   belongs_to :journal, counter_cache: true
   belongs_to :journal_volume, optional: true, counter_cache: true
@@ -93,10 +92,6 @@ class JournalIssue < ApplicationRecord
   delegate :metadata, to: :project
   delegate :finished, to: :project
   delegate :draft, to: :project
-  delegate :social_image, to: :journal, prefix: true
-  delegate :social_description, to: :journal, prefix: true
-
-  manifold_has_attached_file :journal_social_image, :image
 
   # Search
   scope :search_import, -> {

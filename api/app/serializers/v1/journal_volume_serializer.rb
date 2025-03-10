@@ -18,8 +18,6 @@ module V1
     when_full do
       typed_belongs_to :journal
       typed_attribute :pending_slug, Types::String
-      typed_attribute :journal_social_description, Types::String.meta(read_only: true).optional
-      typed_attribute :journal_social_image_styles, Types::Serializer::Attachment.meta(read_only: true).optional
     end
   end
 end

@@ -26,7 +26,6 @@ module V1
       metadata(metadata: true, properties: true, formatted: true)
       typed_attribute :social_description, Types::String.meta(read_only: true).optional
       typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
-      typed_attribute :project_social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
     end
 
   end

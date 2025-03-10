@@ -64,12 +64,10 @@ class TextSection < ApplicationRecord
   delegate :title, to: :text, prefix: true, allow_nil: true
   delegate :creator_names_array, to: :text, prefix: true, allow_nil: true
   delegate :slug, to: :text, prefix: true
-  delegate :social_image, to: :project, prefix: true
-  delegate :social_image, to: :text
+  delegate :social_image_data, to: :text
   delegate :social_description, to: :text
 
   manifold_has_attached_file :social_image, :image
-  manifold_has_attached_file :project_social_image, :image
 
   # Validation
   validates :position, numericality: { only_integer: true }

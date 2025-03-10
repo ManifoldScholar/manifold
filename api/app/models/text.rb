@@ -126,7 +126,6 @@ class Text < ApplicationRecord
 
   manifold_has_attached_file :cover, :image
   manifold_has_attached_file :social_image, :image
-  manifold_has_attached_file :project_social_image, :image
 
   after_commit :trigger_text_added_event, on: [:create, :update]
   after_commit :inject_global_stylesheet, on: :create
