@@ -5,10 +5,13 @@ import { Redirect } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Schema from "global/components/schema";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import EntityHeadContent from "frontend/components/entity/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
+import HeadContent from "global/components/HeadContent";
 import IssueDetail from "frontend/containers/IssueDetail";
 
 function ProjectDetailContainer({ project, response, journalBreadcrumbs }) {
+  const headContentProps = useEntityHeadContent(project);
+
   if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
 
   if (!project) return null;
@@ -19,7 +22,7 @@ function ProjectDetailContainer({ project, response, journalBreadcrumbs }) {
   return (
     <>
       <CheckFrontendMode debugLabel="ProjectDetail" isProjectHomePage />
-      <EntityHeadContent entity={project} />
+      <HeadContent {...headContentProps} />
       <Project.Detail project={project} />
       <Schema.Project project={project} />
     </>

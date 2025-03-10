@@ -9,7 +9,8 @@ import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
-import EntityHeadContent from "frontend/components/entity/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
+import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useListQueryParams } from "hooks";
 
@@ -47,6 +48,12 @@ export default function ProjectResourceCollectionsContainer({
       : [projectCrumb, collectionsCrumb].filter(Boolean);
   }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
+  const headContentProps = useEntityHeadContent(
+    project,
+    null,
+    t("glossary.resource_collection_title_case_other")
+  );
+
   if (!project || !resourceCollections) return null;
 
   return (
@@ -55,12 +62,7 @@ export default function ProjectResourceCollectionsContainer({
         debugLabel="ProjectResourceCollections"
         isProjectSubpage
       />
-      <EntityHeadContent
-        entity={project}
-        titleOverride={`${t(
-          "glossary.resource_collection_title_case_other"
-        )} | ${titlePlaintext}`}
-      />
+      <HeadContent {...headContentProps} />
       <h1 className="screen-reader-text">
         {`${titlePlaintext} ${t("glossary.resource_collection_other")}`}
       </h1>

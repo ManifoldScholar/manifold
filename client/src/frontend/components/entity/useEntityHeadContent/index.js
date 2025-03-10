@@ -7,7 +7,7 @@ const appendHeadTitle = (entityTitle, headTitle) => {
 };
 
 const maybeAppendParentTitle = (entityTitle, parent) => {
-  const { socialTitle, titlePlaintext } = parent.attributes ?? {};
+  const { socialTitle, titlePlaintext } = parent?.attributes ?? {};
   const parentTitle = socialTitle ?? titlePlaintext;
   if (parentTitle) return `${entityTitle} | ${parentTitle}`;
   return entityTitle;
@@ -26,7 +26,7 @@ const maybeSubstituteNumber = (titlePlaintext, number, type, t) => {
 
 const maybeSocialTitle = (socialTitle, ...args) => {
   if (socialTitle) return socialTitle;
-  return maybeSubstituteNumber(args);
+  return maybeSubstituteNumber(...args);
 };
 
 const maybePrepend = (entityTitle, prepend) => {
@@ -37,12 +37,16 @@ const maybePrepend = (entityTitle, prepend) => {
 export const useMetaTitle = (entity, parent, prepend) => {
   const { t } = useTranslation();
   const settings = useFromStore("settings", "select");
+
+  if (!entity?.attributes) return undefined;
+
   const headTitle = settings?.attributes.general.headTitle;
 
-  const { socialTitle, titlePlaintext, number } = entity.attributes;
+  const { socialTitle, titlePlaintext, title, number } = entity.attributes;
+  const baseTitle = titlePlaintext ?? title;
 
   const entityTitle = maybePrepend(
-    maybeSocialTitle(socialTitle, titlePlaintext, number, entity.type, t),
+    maybeSocialTitle(socialTitle, baseTitle, number, entity.type, t),
     prepend
   );
 
@@ -53,7 +57,7 @@ export const useMetaTitle = (entity, parent, prepend) => {
 };
 
 export const useMetaDescription = (entity, parent) => {
-  const { socialDescription, descriptionPlaintext } = entity.attributes;
+  const { socialDescription, descriptionPlaintext } = entity?.attributes ?? {};
   if (socialDescription) return socialDescription;
   if (descriptionPlaintext) return descriptionPlaintext;
 
@@ -112,6 +116,8 @@ const fallbackImageFor = (entity, parent) => {
 };
 
 export const useMetaImage = (entity, parent) => {
+  if (!entity?.attributes) return undefined;
+
   const { socialImageStyles } = entity.attributes;
 
   if (socialImageStyles?.mediumLandscape)
@@ -120,10 +126,12 @@ export const useMetaImage = (entity, parent) => {
   return fallbackImageFor(entity, parent);
 };
 
-export const useEntityHeadContent = (entity, parent, titlePrepend) => {
+const useEntityHeadContent = (entity, parent, titlePrepend) => {
   const title = useMetaTitle(entity, parent, titlePrepend);
   const description = useMetaDescription(entity, parent);
   const image = useMetaImage(entity, parent);
 
   return { title, description, image };
 };
+
+export default useEntityHeadContent;

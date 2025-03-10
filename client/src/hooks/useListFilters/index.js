@@ -11,12 +11,12 @@ export default function useListFilters({
 }) {
   const [filters, setFilters] = useState(initialState || {});
   const prevFilters = useRef(initialState || {});
-  const previnitialState = useRef(initialState || {});
+  const prevInitialState = useRef(initialState || {});
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (!isEqual(initialState, previnitialState.current)) {
-      previnitialState.current = initialState;
+    if (!isEqual(initialState, prevInitialState.current)) {
+      prevInitialState.current = initialState;
       prevFilters.current = initialState;
       setFilters(initialState);
       return;

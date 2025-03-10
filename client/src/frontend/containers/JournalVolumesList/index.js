@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetch, useListQueryParams, useFromStore } from "hooks";
 import { journalVolumesAPI } from "api";
-import EntityHeadContent from "frontend/components/entity/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
+import HeadContent from "global/components/HeadContent";
 import EntityMasthead from "frontend/components/entity/Masthead";
 import EntityCollection from "frontend/components/entity/Collection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
@@ -46,6 +47,8 @@ export default function JournalVolumesList({ journal }) {
         ];
   }, [slug, titlePlaintext, t, libraryDisabled]);
 
+  const headContentProps = useEntityHeadContent(journal);
+
   if (!journal || !volumes || !meta) return null;
 
   return (
@@ -54,7 +57,7 @@ export default function JournalVolumesList({ journal }) {
         {`${titlePlaintext}: ${t("glossary.volume_title_case_other")}`}
       </h1>
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
-      <EntityHeadContent entity={journal} />
+      <HeadContent {...headContentProps} />
       <EntityMasthead entity={journal} />
       <EntityCollection.JournalVolumes
         title={`${titlePlaintext}: ${t("glossary.volume_title_case_other")}`}
