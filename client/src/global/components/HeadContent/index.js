@@ -12,7 +12,6 @@ import withSettings from "hoc/withSettings";
 export class HeadContentComponent extends Component {
   static propTypes = {
     title: PropTypes.string,
-    socialTitle: PropTypes.string,
     image: PropTypes.string,
     siteName: PropTypes.string,
     imageWidth: PropTypes.string,
@@ -38,10 +37,6 @@ export class HeadContentComponent extends Component {
     if (this.props.appendDefaultTitle)
       return `${this.title} | ${this.defaultTitle}`;
     return this.title;
-  }
-
-  get socialTitle() {
-    return this.props.socialTitle || this.appendedTitle;
   }
 
   get description() {
@@ -81,7 +76,7 @@ export class HeadContentComponent extends Component {
     this.addOpenGraph(meta, "siteName", "site_name", this.defaultTitle);
     this.addOpenGraph(meta, "locale");
     this.addOpenGraph(meta, "image", null, this.image);
-    this.addOpenGraph(meta, "title", null, this.socialTitle);
+    this.addOpenGraph(meta, "title", null, this.appendedTitle);
     this.addOpenGraph(meta, "description", null, this.description);
     this.addOpenGraph(meta, "imageWidth", "image:width");
     this.addOpenGraph(meta, "imageHeight", "image:height");
