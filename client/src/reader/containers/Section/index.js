@@ -14,12 +14,10 @@ import { entityStoreActions } from "actions";
 import uniq from "lodash/uniq";
 import difference from "lodash/difference";
 import get from "lodash/get";
-import isNil from "lodash/isNil";
-import remove from "lodash/remove";
 import some from "lodash/some";
 import isEqual from "lodash/isEqual";
 import { childRoutes } from "helpers/router";
-import HeadContent from "global/components/HeadContent";
+import HeadContent from "./HeadContent";
 import values from "lodash/values";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import withSettings from "hoc/withSettings";
@@ -208,26 +206,7 @@ export class SectionContainer extends Component {
 
   render() {
     if (!this.props.section || !this.props.text) return null;
-    const { text, section, settings } = this.props;
-    const { project } = text.relationships;
-    const textTitle = text.attributes.titlePlaintext;
-    const sectionTitle = section.attributes.name;
-    const projectTitle = project.attributes.titlePlainText;
-
-    const parts = remove(
-      uniq([sectionTitle, textTitle, projectTitle]),
-      v => !isNil(v)
-    );
-    const append = settings.attributes.general.installationName;
-    let metaTitle = "";
-    if (parts.length === 1) metaTitle = `\u201c${parts[0]}\u201d`;
-    if (parts.length === 2 || parts.length === 3)
-      metaTitle = `\u201c${parts[0]}\u201d in \u201c${parts[1]}\u201d`;
-    let sectionDescription = text.attributes.description;
-    if (!sectionDescription)
-      sectionDescription = this.props.t("reader.section_description", {
-        appName: append
-      });
+    const { text, section } = this.props;
 
     return (
       <>
@@ -236,14 +215,9 @@ export class SectionContainer extends Component {
           resource={this.props.section}
         />
         {this.renderStyles(this.props)}
-        <HeadContent
-          title={metaTitle}
-          image={section.attributes.socialImage}
-          description={sectionDescription}
-          appendDefaultTitle
-        />
+        <HeadContent section={section} text={text} />
         {this.renderRoutes()}
-        <Section.Text metaTitle={metaTitle} {...this.props} />
+        <Section.Text {...this.props} />
         <div>
           <Section.NextSection
             sectionsMap={text.attributes.sectionsMap}

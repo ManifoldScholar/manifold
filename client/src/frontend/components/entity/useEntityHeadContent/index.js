@@ -42,8 +42,14 @@ export const useMetaTitle = (entity, parent, prepend) => {
 
   const headTitle = settings?.attributes.general.headTitle;
 
-  const { socialTitle, titlePlaintext, title, number } = entity.attributes;
-  const baseTitle = titlePlaintext ?? title;
+  const {
+    socialTitle,
+    titlePlaintext,
+    title,
+    name,
+    number
+  } = entity.attributes;
+  const baseTitle = titlePlaintext ?? title ?? name;
 
   const entityTitle = maybePrepend(
     maybeSocialTitle(socialTitle, baseTitle, number, entity.type, t),
