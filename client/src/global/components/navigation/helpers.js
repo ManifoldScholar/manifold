@@ -5,6 +5,7 @@ export const getAdminModeLabel = ({ currentUser, mode, t }) => {
     switch (currentUser.attributes.kind) {
       case "project_editor":
       case "project_property_manager":
+      case "journal_editor":
         return t("navigation.backend.exit_editor");
       case "project_author":
         return t("navigation.backend.exit_author");
@@ -20,6 +21,7 @@ export const getAdminModeLabel = ({ currentUser, mode, t }) => {
         return t("navigation.backend.enter_admin");
       case "project_editor":
       case "project_property_manager":
+      case "journal_editor":
         return t("navigation.backend.enter_editor");
       case "project_author": // For now authors will not have access to the backend
       default:

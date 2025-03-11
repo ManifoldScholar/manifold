@@ -6,6 +6,7 @@ import Mobile from "global/components/navigation/Mobile";
 import { Link, useLocation } from "react-router-dom";
 import { getAdminModeLabel, getDestinationPath } from "./helpers";
 import { useFromStore } from "hooks";
+import Authorization from "helpers/authorization";
 
 export default function NavigationPrimary(props) {
   const { t } = useTranslation();
@@ -27,12 +28,25 @@ export default function NavigationPrimary(props) {
     entities: { resources, resourceCollections, pages }
   });
 
-  const adminModeButton =
-    !!label && currentUser ? (
-      <Link className="mode-button" to={to}>
-        {label}
-      </Link>
-    ) : null;
+  const authorization = new Authorization();
+  const canAccessAdmin = authorization.authorizeKind({
+    authentication: props.authentication,
+    kind: [
+      "admin",
+      "editor",
+      "marketeer",
+      "project_creator",
+      "project_editor",
+      "project_property_manager",
+      "journal_editor"
+    ]
+  });
+
+  const adminModeButton = canAccessAdmin ? (
+    <Link className="mode-button" to={to}>
+      {label}
+    </Link>
+  ) : null;
 
   return (
     <>
