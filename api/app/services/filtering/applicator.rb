@@ -22,9 +22,7 @@ module Filtering
       maybe_scope_by_param: "filtering.maybe_scope_by_param",
     ]
 
-    define_model_callbacks :database_filters, :searchkick_filters
-
-    around_searchkick_filters :nullify_current_scope!
+    define_model_callbacks :database_filters
 
     # @return [Filtering::Config]
     attr_reader :config
@@ -46,11 +44,7 @@ module Filtering
 
       filter_with_database!
 
-      if should_filter_with_searchkick?
-        @ids = @filtered_scope.distinct.reorder(nil).pluck(:id)
-
-        filter_with_searchkick!
-      elsif should_apply_pagination?
+      if should_apply_pagination?
         @results = @filtered_scope.page(params[:page]).per(params[:per_page])
       else
         @results = @filtered_scope.all
@@ -79,26 +73,6 @@ module Filtering
       @filtered_scope = filter_with_database.apply_filtering_loads
     end
 
-    # This will sieve the results from {#filter_with_database!} and
-    # check to make sure our page isn't something absurd. If the :page
-    # provided exceeds the total pages of search results, it will re-run
-    # the search with the last page instead.
-    #
-    # @note This step only runs if {#should_filter_with_searchkick?}.
-    # @see #exceeds_total_pages?
-    # @return [void]
-    def filter_with_searchkick!
-      @results = filter_with_searchkick
-
-      return unless exceeds_total_pages?(@results)
-
-      params[:page] = results.total_pages
-
-      @results = filter_with_searchkick
-    end
-
-    # @!endgroup
-
     # @!group Filtering Actions
 
     # @return [ActiveRecord::Relation]
@@ -107,15 +81,6 @@ module Filtering
         apply_database_filters
       end
     end
-
-    # @return [Searchkick::Relation]
-    def filter_with_searchkick
-      run_callbacks :searchkick_filters do
-        apply_searchkick_filters
-      end
-    end
-
-    # @!endgroup
 
     # @!group Database Filtering
 
@@ -152,25 +117,11 @@ module Filtering
     # Match a certain pattern of param keys that conform to a scope on the
     # model that take the provided user as their argument.
     #
-    # @param [String] key
-    def param_requires_user?(key)
+    # @param [String] , elasticsearch: true     def param_requires_user?(key)
       key.start_with?("with_") && key.end_with?("_ability", "_role")
     end
 
     # @!endgroup
-
-    # @!group Searchkick Filtering
-
-    # @return [Searchkick::Relation]
-    def apply_searchkick_filters
-      filter = Search::FilterScope.new do |f|
-        f.where :id, @ids
-        f.typeahead params[:typeahead], model::TYPEAHEAD_ATTRIBUTES
-        f.paginate params[:page], params[:per_page] unless skip_pagination
-      end
-
-      model.lookup search_query, filter
-    end
 
     # @return [ActiveRecord::Relation]
     def maybe_apply_default_order
@@ -214,14 +165,6 @@ module Filtering
 
     def should_apply_pagination?
       !skip_pagination && params[:page].present?
-    end
-
-    def should_filter_with_searchkick?
-      return false unless params.key?(:keyword)
-      return false if has_keyword_scope?
-      return false unless @filtered_scope.exists?
-
-      return true
     end
 
     # @!endgroup

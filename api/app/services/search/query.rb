@@ -44,8 +44,8 @@ module Search
 
       # We call `#blank?` to ensure the results are eager-loaded to trigger an exception where necessary.
       # This is necessary because newer versions of Searchkick lazy-load the results and we want to know about them now.
-      Searchkick.search(searchkick_options).tap(&:blank?)
-    rescue Searchkick::InvalidQueryError => e
+      # Searchkick.search(searchkick_options).tap(&:blank?)
+    rescue InvalidQueryError => e
       raise e if raise_search_errors
 
       return empty_resultset
@@ -97,7 +97,7 @@ module Search
 
       fake_options = inputs.slice(:per_page).merge(page: page_number)
 
-      Searchkick::Results.new nil, fake_response, fake_options
+      # Searchkick::Results.new nil, fake_response, fake_options
     end
   end
 end
