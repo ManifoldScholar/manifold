@@ -75,7 +75,8 @@ export class BackendContainer extends PureComponent {
           "marketeer",
           "project_creator",
           "project_editor",
-          "project_property_manager"
+          "project_property_manager",
+          "journal_editor"
         ]}
         failureRedirect={lh.link("frontendLogin")}
         failureNotification
