@@ -6,7 +6,6 @@ import { readingGroupsAPI, collectingAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import CategoryCreator from "./CategoryCreator";
 import SortableCategories from "./SortableCategories";
-import CategoriesList from "./SortableCategories/CategoriesList";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import * as Styled from "./styles";
 
@@ -167,22 +166,12 @@ function CollectionEditor({
       </Styled.CategoryInputs>
       <SortableCategories
         collection={collection}
+        categories={categories}
         responses={responses}
         callbacks={callbacks}
-      >
-        {(categoryOrder, mappings, activeType) => (
-          <CategoriesList
-            groupId={readingGroup.id}
-            categories={categories}
-            categoryOrder={categoryOrder}
-            mappings={mappings}
-            responses={responses}
-            callbacks={callbacks}
-            activeType={activeType}
-            newMarkdownBlock={newMarkdownBlock}
-          />
-        )}
-      </SortableCategories>
+        groupId={readingGroup.id}
+        newMarkdownBlock={newMarkdownBlock}
+      />
     </Styled.Editor>
   );
 }
