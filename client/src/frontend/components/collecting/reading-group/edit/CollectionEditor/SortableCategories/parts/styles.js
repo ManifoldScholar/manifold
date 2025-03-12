@@ -21,6 +21,8 @@ export const Header = styled.header`
   border-top-left-radius: var(--box-border-radius);
   border-top-right-radius: var(--box-border-radius);
   min-block-size: 52px;
+
+  ${({ $dragging }) => $dragging && `border-radius: var(--box-border-radius)`}
 `;
 
 export const Title = styled.h3`

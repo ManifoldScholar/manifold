@@ -2,14 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
-import { getCollectableIcon } from "../helpers/resolvers";
+import { getCollectableIcon } from "./helpers";
 import * as Styled from "./styles";
 
-function Empty({ type }) {
+function Empty({ type, wrapperRef, dragState }) {
   const { t } = useTranslation();
 
   return (
-    <Styled.WrapperEmpty>
+    <Styled.WrapperEmpty
+      ref={wrapperRef}
+      $hidden={dragState?.type === "is-over"}
+    >
       <Styled.CollectableEmpty>
         <IconComposer icon={getCollectableIcon(type)} size={32} />
         <Styled.Label>{t("forms.category.empty_placeholder")}</Styled.Label>
