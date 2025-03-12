@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import Category from "./Category";
+import Content from "./Category/Content";
 
 const CATEGORY_ID = "$uncategorized$";
 
@@ -12,7 +12,7 @@ function Uncategorized(props) {
     attributes: { title: t("common.uncategorized_title_case") }
   };
 
-  return <Category category={category} {...props} />;
+  return <Content category={category} {...props} />;
 }
 
 Uncategorized.displayName =

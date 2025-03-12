@@ -1,21 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Collectable from "./Collectable";
-import Empty from "./Empty";
 
 const CollectablesList = React.memo(function CollectablesList({
   type,
   collectedIds,
   responses,
   onRemove,
-  onMove
+  onMove,
+  categoryId
 }) {
   const hasCollectables = collectedIds.length > 0;
 
   if (!hasCollectables)
     return (
       <li key="empty">
-        <Empty type={type} />
+        <Collectable type={type} index={0} id="empty" categoryId={categoryId} />
       </li>
     );
 
@@ -28,6 +28,7 @@ const CollectablesList = React.memo(function CollectablesList({
         responses={responses}
         onRemove={onRemove}
         onMove={onMove}
+        categoryId={categoryId}
       />
     </li>
   ));
