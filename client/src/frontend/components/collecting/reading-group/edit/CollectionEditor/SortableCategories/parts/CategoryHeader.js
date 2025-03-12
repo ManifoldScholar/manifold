@@ -1,30 +1,53 @@
-import React from "react";
+import * as React from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
 import IconComposer from "global/components/utility/IconComposer";
 import CategoryEdit from "./CategoryEdit";
 import CategoryRemove from "./CategoryRemove";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import * as Styled from "./styles";
 
 function CategoryHeader({
   category,
   groupId,
-  dragProps,
+  dragHandleRef,
   onCategoryEdit,
   onCategoryRemove,
   initExpanded
 }) {
   const { t } = useTranslation();
 
-  const { markdownOnly, title } = category?.attributes ?? {};
+  const { markdownOnly, title, descriptionPlaintext } =
+    category?.attributes ?? {};
+
+  const [dragging, setDragging] = useState();
+
+  useEffect(() => {
+    return monitorForElements({
+      onDragStart({ source }) {
+        if (source.data.type === "categories") {
+          setDragging(true);
+        }
+      },
+      onDrop({ source }) {
+        if (source.data.type === "categories") {
+          setDragging(false);
+        }
+      }
+    });
+  }, []);
 
   return (
     <>
       <Collapse initialVisible={initExpanded}>
-        <Styled.Header>
+        <Styled.Header $dragging={dragging}>
           {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
-          {dragProps && (
+          {markdownOnly && dragging && (
+            <Styled.Title>{descriptionPlaintext}</Styled.Title>
+          )}
+          {dragHandleRef && (
             <Styled.Actions>
               <CategoryRemove
                 isMarkdown={!!markdownOnly}
@@ -36,13 +59,13 @@ function CategoryHeader({
                   {t("forms.category.edit")}
                 </span>
               </Styled.Action>
-              <Styled.Action {...dragProps.provided.dragHandleProps}>
+              <Styled.Action ref={dragHandleRef}>
                 <IconComposer icon="grabber32" size="default" />
               </Styled.Action>
             </Styled.Actions>
           )}
         </Styled.Header>
-        {dragProps && (
+        {dragHandleRef && (
           <Collapse.Content maxDuration={400}>
             {(visible, toggleVisible) => {
               return (

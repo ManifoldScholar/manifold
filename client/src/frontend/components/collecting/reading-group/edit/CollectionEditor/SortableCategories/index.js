@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import useSortableCategories from "./useSortableCategories";
 import Uncategorized from "./Uncategorized";
-import DraggableEventHelper from "../helpers/draggableEvent";
+import CategoriesList from "./CategoriesList";
 import * as Styled from "./styles";
 
 function setCategoriesFromProps(collection) {
@@ -23,157 +23,91 @@ function setMappingsFromProps(collection) {
   return { ...categoryMappings };
 }
 
-function setInitialState(collection) {
-  return {
-    categories: setCategoriesFromProps(collection),
-    mappings: setMappingsFromProps(collection)
-  };
-}
-
-function init(initialState) {
-  return initialState;
-}
-
-function sortingReducer(state, action) {
-  switch (action.type) {
-    case "sortCategories":
-      return { ...state, categories: action.payload };
-    case "sortMappings": {
-      const { categoryId, type, sortedCollectables } = action.payload;
-      return {
-        ...state,
-        mappings: {
-          ...state.mappings,
-          [categoryId]: {
-            ...state.mappings[categoryId],
-            [type]: sortedCollectables
-          }
-        }
-      };
-    }
-    case "migrateMapping": {
-      const {
-        type,
-        source: {
-          categoryId: sourceCategoryId,
-          updatedCollectables: sourceCollectables
-        },
-        destination: {
-          categoryId: destinationCategoryId,
-          updatedCollectables: destinationCollectables
-        }
-      } = action.payload;
-      return {
-        ...state,
-        mappings: {
-          ...state.mappings,
-          [sourceCategoryId]: {
-            ...state.mappings[sourceCategoryId],
-            [type]: sourceCollectables
-          },
-          [destinationCategoryId]: {
-            ...state.mappings[destinationCategoryId],
-            [type]: destinationCollectables
-          }
-        }
-      };
-    }
-    case "reset":
-      return init(action.payload);
-    default:
-      throw new Error();
-  }
-}
-
-function SortableCategories({ collection, responses, callbacks, children }) {
-  const initialState = setInitialState(collection);
-  const [state, dispatch] = useReducer(sortingReducer, initialState, init);
+export default function SortableCategories({
+  collection,
+  responses,
+  callbacks,
+  ...listProps
+}) {
+  const [categories, setCategories] = useState(
+    setCategoriesFromProps(collection)
+  );
+  const [mappings, setMappings] = useState(setMappingsFromProps(collection));
 
   useEffect(() => {
-    dispatch({ type: "reset", payload: initialState });
+    setCategories(setCategoriesFromProps(collection));
   }, [JSON.stringify(collection)]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const [activeType, setActiveType] = useState(null);
+  const onCategoryDrop = (result, sourceId) => {
+    const priorPosition = categories.find(c => c.id === sourceId).position;
+    const position = result.findIndex(c => c.id === sourceId) + 1;
 
-  const { categories, mappings } = state;
-  const { onCategoryDrag, onCollectableDrag } = callbacks;
+    if (position === 0 || position === priorPosition) return;
 
-  function handleDragStart({ type }) {
-    setActiveType(type);
-  }
+    setCategories(result);
+    callbacks.onCategoryDrag({
+      id: sourceId,
+      position
+    });
+  };
 
-  function handleDragEnd(draggable) {
-    setActiveType(null);
+  const onCollectableDrop = (result, source) => {
+    const {
+      data: { type, id }
+    } = source;
+    if (!type || !id) return;
 
-    const draggableHelper = new DraggableEventHelper(
-      draggable,
-      categories,
-      mappings
+    const priorCategoryId = Object.keys(result).find(m =>
+      mappings[m][type].includes(id)
     );
+    const categoryId = Object.keys(result).find(m =>
+      result[m][type].includes(id)
+    );
+    if (!categoryId) return;
 
-    if (!draggableHelper.actionable) return;
+    const priorPosition =
+      mappings[priorCategoryId]?.[type].findIndex(c => c === id) + 1;
+    const position = result[categoryId][type].findIndex(c => c === id) + 1;
 
-    switch (draggableHelper.action) {
-      case "sortCategories": {
-        dispatch({
-          type: "sortCategories",
-          payload: draggableHelper.sortedCategories
-        });
-        return onCategoryDrag(draggableHelper.sortedCategory);
-      }
-      case "sortMappings": {
-        dispatch({
-          type: "sortMappings",
-          payload: {
-            categoryId: draggableHelper.destinationCategoryId,
-            type: draggableHelper.type,
-            sortedCollectables: draggableHelper.sortedType
-          }
-        });
-        return onCollectableDrag(draggableHelper.sortedCollectable);
-      }
-      case "migrateMapping": {
-        dispatch({
-          type: "migrateMapping",
-          payload: {
-            type: draggableHelper.type,
-            source: {
-              categoryId: draggableHelper.sourceCategoryId,
-              updatedCollectables: draggableHelper.updatedSourceType
-            },
-            destination: {
-              categoryId: draggableHelper.destinationCategoryId,
-              updatedCollectables: draggableHelper.updatedDestinationType
-            }
-          }
-        });
-        return onCollectableDrag(draggableHelper.sortedCollectable);
-      }
-      default:
-        return null;
-    }
-  }
+    if (position === 0) return;
+
+    if (priorCategoryId === categoryId && priorPosition === position) return;
+
+    setMappings(result);
+    callbacks.onCollectableDrag({
+      groupingId: categoryId,
+      id,
+      position,
+      type
+    });
+  };
+
+  const { active, scrollableRef } = useSortableCategories(
+    categories,
+    onCategoryDrop,
+    mappings,
+    onCollectableDrop
+  );
 
   return (
-    <DragDropContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <Droppable droppableId="categories" type="categories">
-        {provided => (
-          <Styled.Categories
-            ref={provided.innerRef}
-            $active={activeType === "categories"}
-          >
-            {children(categories, mappings, activeType)}
-            {provided.placeholder}
-          </Styled.Categories>
-        )}
-      </Droppable>
+    <>
+      <div ref={scrollableRef}>
+        <Styled.Categories $active={active}>
+          <CategoriesList
+            categoryOrder={categories}
+            mappings={mappings}
+            responses={responses}
+            callbacks={callbacks}
+            {...listProps}
+          />
+        </Styled.Categories>
+      </div>
       <Uncategorized
         mappings={mappings}
         responses={responses}
         callbacks={callbacks}
-        activeType={activeType}
       />
-    </DragDropContext>
+    </>
   );
 }
 
@@ -183,8 +117,5 @@ SortableCategories.displayName =
 SortableCategories.propTypes = {
   collection: PropTypes.object.isRequired,
   responses: PropTypes.object.isRequired,
-  callbacks: PropTypes.object.isRequired,
-  children: PropTypes.func.isRequired
+  callbacks: PropTypes.object.isRequired
 };
-
-export default SortableCategories;

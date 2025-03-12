@@ -28,7 +28,7 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
   return (
     <FormContainer.Form
       model={category}
-      name={`${requests.feReadingGroupCategoryUpdate}-${category.attributes.slug}`}
+      name={`${requests.feReadingGroupCategoryUpdate}-${category.attributes?.slug}`}
       update={doUpdate}
       onSuccess={onSuccess}
       className="form-secondary"

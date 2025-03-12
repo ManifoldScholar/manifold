@@ -9,4 +9,6 @@ export const Type = styled("section", transientOptions)`
   padding-block-start: ${collectableTypeVerticalPadding};
   padding-block-end: ${collectableTypeVerticalPadding};
   box-sizing: border-box;
+
+  ${({ $hidden }) => $hidden && `display: none;`}
 `;
