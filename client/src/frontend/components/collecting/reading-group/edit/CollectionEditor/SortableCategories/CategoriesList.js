@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DraggableCategory from "./DraggableCategory";
+import Category from "./Category";
 
 const CategoriesList = React.memo(function CategoriesList({
   categoryOrder,
@@ -13,7 +13,7 @@ const CategoriesList = React.memo(function CategoriesList({
     if (!category) return null;
 
     return (
-      <DraggableCategory
+      <Category
         key={id}
         id={id}
         index={index}
