@@ -76,13 +76,13 @@ export const useMetaDescription = (entity, parent) => {
 
 const maybeCoverImage = (entity, fallback) => {
   if (entity.attributes.coverStyles)
-    return entity.attributes.coverStyles.mediumSquare;
+    return entity.attributes.coverStyles.medium;
   return fallback;
 };
 
 const maybeAvatarImage = (entity, fallback) => {
   if (entity.attributes.avatarStyles)
-    return entity.attributes.avatarStyles.mediumSquare;
+    return entity.attributes.avatarStyles.medium;
   return fallback;
 };
 
