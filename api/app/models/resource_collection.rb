@@ -44,6 +44,7 @@ class ResourceCollection < ApplicationRecord
     order(by)
   }
 
+  pg_search_scope :keyword_search, against: TYPEAHEAD_ATTRIBUTES
   searchkick(callbacks: :async,
              batch_size: 500,
              word_start: TYPEAHEAD_ATTRIBUTES,
