@@ -93,7 +93,7 @@ export default `
       hyphens: none;
       line-height: 1.45;
 
-      &.focus-visible {
+      &:focus-visible {
         outline: 0;
       }
 
@@ -110,7 +110,7 @@ export default `
       font-weight: var(--font-weight-semibold);
 
       a:hover &,
-      a.focus-visible & {
+      a:focus-visible & {
         text-decoration-line: underline;
       }
 

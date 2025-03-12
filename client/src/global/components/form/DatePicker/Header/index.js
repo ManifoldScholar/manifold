@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
-import format from "date-fns/format";
+import { format } from "date-fns/format";
 import * as Styled from "./styles";
 
 export default function DatePickerHeader({

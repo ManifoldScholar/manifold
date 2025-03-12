@@ -1,5 +1,4 @@
 import {
-  reactSlideTransition,
   respond,
   rgba,
   listHorizontal,
@@ -14,8 +13,6 @@ export default `
 .reader-header {
   --padding-lateral: var(--container-padding-inline-narrow);
   --padding-lateral-narrow: 11px;
-
-  ${reactSlideTransition("right", ".search-menu")}
 
   position: fixed;
   top: 0;
@@ -131,17 +128,17 @@ export default `
       outline: 0;
     }
 
-    &.button-active:not(.focus-visible),
+    &.button-active:not(:focus-visible),
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       background-color: var(--color-interaction-light);
     }
 
-    &.button-active.focus-visible {
+    &.button-active:focus-visible {
       background-color: var(--color-interaction-dark);
     }
 
-    &.focus-visible {
+    &:focus-visible {
       color: var(--color-neutral-text-extra-dark);
       outline: 2px solid;
       outline-offset: -2px;
@@ -239,10 +236,14 @@ export default `
     width: 100%;
 
     &--left {
+      --Panel-starting-transform: translateX(-100%);
+
       left: 0;
     }
 
     &--right {
+      --Panel-starting-transform: translateX(100%);
+
       right: 0;
     }
   }

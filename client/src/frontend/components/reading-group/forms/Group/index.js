@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import { UnmountClosed as Collapse } from "react-collapse";
+import Collapse from "global/components/Collapse";
 import Form from "global/components/form";
 import { readingGroupsAPI, requests } from "api";
 import config from "config";
@@ -243,8 +243,8 @@ class ReadingGroupForm extends React.PureComponent {
                 />
               )}
             </ClassNames>
-            <Styled.DatesOuter>
-              <Collapse isOpened={this.state.courseEnabled}>
+            <Collapse initialVisible={this.state.courseEnabled}>
+              <Collapse.Content>
                 <Styled.DatesInner>
                   <Form.DatePicker
                     label={t("forms.reading_group.course_start_date")}
@@ -255,8 +255,8 @@ class ReadingGroupForm extends React.PureComponent {
                     name="attributes[course][endsOn]"
                   />
                 </Styled.DatesInner>
-              </Collapse>
-            </Styled.DatesOuter>
+              </Collapse.Content>
+            </Collapse>
             <Form.Switch
               wide
               isPrimary
