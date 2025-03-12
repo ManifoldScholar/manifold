@@ -3,6 +3,7 @@
 class Event < ApplicationRecord
 
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
+  KEYWORD_SEARCH_ATTRIBUTES = %i[subject_title subject_subtitle excerpt].freeze
 
   # ClassyEnum
   include ClassyEnum::ActiveRecord
@@ -49,6 +50,7 @@ class Event < ApplicationRecord
   validates :event_type, presence: true
 
   # Search
+  pg_search_scope :keyword_search, against: KEYWORD_SEARCH_ATTRIBUTES
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,

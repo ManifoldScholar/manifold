@@ -116,6 +116,7 @@ class Resource < ApplicationRecord
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_commit :trigger_event_creation, on: [:create]
 
+  pg_search_scope :keyword_search, against: TYPEAHEAD_ATTRIBUTES
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
