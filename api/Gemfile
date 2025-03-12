@@ -91,6 +91,7 @@ gem "paper_trail", "~> 14.0"
 gem "paper_trail-association_tracking", "~> 2.2.1"
 gem "paper_trail-globalid", "~> 0.2"
 gem "pg", "~> 1.2"
+gem 'pg_search'
 gem "premailer-rails", "~> 1.0"
 gem "pry-rails", "~> 0.3.9"
 gem "puma", "~> 6.4"
