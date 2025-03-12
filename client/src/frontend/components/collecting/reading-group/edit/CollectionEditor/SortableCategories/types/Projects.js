@@ -1,17 +1,20 @@
 import React from "react";
-import { TypeHeader } from "../parts";
+import TypeHeader from "../parts/TypeHeader";
 import { useTranslation } from "react-i18next";
 import SortableCollectables from "../../SortableCollectables";
 import { collectedShape } from "./helpers";
+import useDragMonitor from "./useDragMonitor";
 import * as Styled from "./styles";
 
-function CollectedProjects({ showDropzone, ...restProps }) {
+function CollectedProjects(props) {
   const { t } = useTranslation();
 
+  const { hidden, active } = useDragMonitor("projects");
+
   return (
-    <Styled.Type $active={showDropzone}>
+    <Styled.Type $active={active} $hidden={hidden}>
       <TypeHeader heading={`${t("glossary.project_title_case_other")}:`} />
-      <SortableCollectables type="projects" {...restProps} />
+      <SortableCollectables type="projects" {...props} />
     </Styled.Type>
   );
 }
