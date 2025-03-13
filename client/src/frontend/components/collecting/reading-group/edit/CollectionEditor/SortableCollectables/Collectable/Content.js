@@ -28,7 +28,6 @@ export default function Content({
         ref={collectableRef}
         tabIndex={-1}
         data-collectable-id={id}
-        onBlur={() => collectableRef.current.setAttribute("style", "")}
       >
         <Styled.Header>
           <IconComposer icon={getCollectableIcon(type)} size={36} />

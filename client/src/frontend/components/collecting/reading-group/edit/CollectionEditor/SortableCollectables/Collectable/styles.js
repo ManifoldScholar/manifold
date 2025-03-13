@@ -6,6 +6,10 @@ import {
   utilityPrimary,
   panelRounded
 } from "theme/styles/mixins";
+import {
+  collapsed,
+  collapsible
+} from "../../SortableCategories/Category/styles";
 
 const collectableMinHeight = `50px`;
 const collectableVerticalPadding = `5px`;
@@ -14,7 +18,8 @@ export const Wrapper = styled.div`
   padding-block-start: ${collectableVerticalPadding};
   padding-block-end: ${collectableVerticalPadding};
 
-  ${({ $hidden }) => $hidden && `display: none;`}
+  ${collapsible}
+  ${({ $hidden }) => $hidden && collapsed};
 `;
 
 export const WrapperEmpty = styled(Wrapper)`
@@ -24,7 +29,8 @@ export const WrapperEmpty = styled(Wrapper)`
   width: 100%;
   height: calc(${collectableMinHeight} + ${collectableVerticalPadding} * 2);
 
-  ${({ $hidden }) => $hidden && `display: none;`}
+  ${collapsible}
+  ${({ $hidden }) => $hidden && collapsed};
 `;
 
 export const Collectable = styled.article`
