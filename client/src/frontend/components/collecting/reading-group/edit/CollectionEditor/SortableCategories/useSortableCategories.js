@@ -4,8 +4,7 @@ import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/r
 import invariant from "tiny-invariant";
 import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-// import { autoScrollForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
-// import { unsafeOverflowAutoScrollForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/unsafe-overflow/element";
+import { autoScrollWindowForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
 
 const reorder = (dropTargetData, list, startIndex, finishIndex) => {
   if (startIndex === -1 || finishIndex === -1) {
@@ -142,7 +141,6 @@ export default function useSortableCategories(
           onDragStart({ source }) {
             if (source?.data?.type === "categories") {
               setActive(true);
-              scrollTo(0, 650);
             }
           },
           onDrop({ source, location }) {
@@ -155,35 +153,8 @@ export default function useSortableCategories(
               onCollectableDrop(result, source);
             }
           }
-        })
-        // autoScrollForElements({
-        //   canScroll({ source }) {
-        //     return !!source?.type === "categories";
-        //   },
-        //   getConfiguration: () => ({ maxScrollSpeed: "standard" }),
-        //   element: scrollContainer
-        // })
-        // unsafeOverflowAutoScrollForElements({
-        //   element: scrollContainer,
-        //   getConfiguration: () => ({ maxScrollSpeed: "standard" }),
-        //   canScroll({ source }) {
-        //     return !!source?.type === "categories";
-        //   },
-        //   getOverflow() {
-        //     return {
-        //       forLeftEdge: {
-        //         top: 1000,
-        //         left: 1000,
-        //         bottom: 1000
-        //       },
-        //       forRightEdge: {
-        //         top: 1000,
-        //         right: 1000,
-        //         bottom: 1000
-        //       }
-        //     };
-        //   }
-        // })
+        }),
+        autoScrollWindowForElements()
       );
     }
   }, [categories, onCategoryDrop, scrollableRef, mappings, onCollectableDrop]);
