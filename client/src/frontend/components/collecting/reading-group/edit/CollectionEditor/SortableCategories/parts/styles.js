@@ -3,7 +3,8 @@ import {
   buttonUnstyled,
   utilityPrimary,
   textTruncate,
-  rgba
+  rgba,
+  defaultTransitionProps
 } from "theme/styles/mixins";
 import { collectableTypeVerticalPadding } from "../styles";
 import { Description } from "frontend/components/collecting/reading-group/static/Category/styles";
@@ -17,12 +18,25 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
-  background-color: var(--box-medium-bg-color);
+  background-color: ${({ $bg }) =>
+    $bg ? `var(--dropzone-bg-color)` : `var(--box-medium-bg-color)`};
+  transition: background-color ${defaultTransitionProps};
   border-top-left-radius: var(--box-border-radius);
   border-top-right-radius: var(--box-border-radius);
   min-block-size: 52px;
 
   ${({ $dragging }) => $dragging && `border-radius: var(--box-border-radius)`}
+`;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: min(1vw, 16px);
+  ${textTruncate}
+
+  svg {
+    margin-block-start: -4px;
+  }
 `;
 
 export const Title = styled.h3`

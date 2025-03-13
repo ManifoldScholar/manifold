@@ -12,21 +12,31 @@ export default function Content({
   callbacks,
   newMarkdownBlock,
   collapsed,
+  manualCollapsed,
+  setManualCollapsed,
   ...bodyProps
 }) {
   const isMarkdown = category?.attributes?.markdownOnly;
 
   const hidden =
-    dragState?.type === "has-left" ||
-    (isMarkdown && dragState?.type === "collectable");
+    dragState?.status === "has-left" ||
+    (isMarkdown && !!dragState?.type && dragState.type !== "categories");
 
   const isDragging = dragState
-    ? dragState.type !== "idle" && dragState.type !== "collectable"
+    ? dragState.status !== "idle" && dragState.type === "categories"
     : false;
+
+  const collectableOver =
+    manualCollapsed &&
+    dragState?.status === "is-over" &&
+    !!dragState?.type &&
+    dragState?.type !== "categories";
+
+  const displayAsCollapsed = collapsed || (!isDragging && manualCollapsed);
 
   return (
     <Styled.Wrapper ref={wrapperRef} $hidden={hidden}>
-      <Styled.Category ref={categoryRef} $isDragging={isDragging}>
+      <Styled.Category tabIndex={-1} ref={categoryRef} $isDragging={isDragging}>
         <CategoryHeader
           dragHandleRef={dragHandleRef}
           category={category}
@@ -36,8 +46,11 @@ export default function Content({
           initExpanded={
             newMarkdownBlock && newMarkdownBlock === category.attributes.title
           }
+          setCollapsed={() => setManualCollapsed(!manualCollapsed)}
+          manualCollapsed={manualCollapsed}
+          collectableOver={collectableOver}
         />
-        <Styled.Inner $collapsed={collapsed}>
+        <Styled.Inner $collapsed={displayAsCollapsed}>
           {isMarkdown ? (
             <MarkdownBody category={category} />
           ) : (

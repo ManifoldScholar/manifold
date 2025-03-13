@@ -11,7 +11,7 @@ function Empty({ type, wrapperRef, dragState }) {
   return (
     <Styled.WrapperEmpty
       ref={wrapperRef}
-      $hidden={dragState?.type === "is-over"}
+      $hidden={dragState?.status === "is-over"}
     >
       <Styled.CollectableEmpty>
         <IconComposer icon={getCollectableIcon(type)} size={32} />
