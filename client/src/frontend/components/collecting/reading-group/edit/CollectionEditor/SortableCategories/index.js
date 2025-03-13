@@ -54,15 +54,15 @@ export default function SortableCategories({
     if (!type || !id) return;
 
     const priorCategoryId = Object.keys(result).find(m =>
-      mappings[m][type].includes(id)
+      mappings[m]?.[type]?.includes(id)
     );
     const categoryId = Object.keys(result).find(m =>
-      result[m][type].includes(id)
+      result[m]?.[type]?.includes(id)
     );
     if (!categoryId) return;
 
     const priorPosition =
-      mappings[priorCategoryId]?.[type].findIndex(c => c === id) + 1;
+      mappings[priorCategoryId]?.[type]?.findIndex(c => c === id) + 1;
     const position = result[categoryId][type].findIndex(c => c === id) + 1;
 
     if (position === 0) return;
