@@ -36,7 +36,7 @@ export default function Content({
 
   return (
     <Styled.Wrapper ref={wrapperRef} $hidden={hidden}>
-      <Styled.Category tabIndex={-1} ref={categoryRef} $isDragging={isDragging}>
+      <Styled.Category tabIndex={-1} ref={categoryRef}>
         <CategoryHeader
           dragHandleRef={dragHandleRef}
           category={category}

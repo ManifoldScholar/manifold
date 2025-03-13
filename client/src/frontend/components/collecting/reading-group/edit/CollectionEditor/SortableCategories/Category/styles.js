@@ -3,10 +3,24 @@ import {
   panelRounded,
   dragging,
   utilityPrimary,
-  textTruncate
+  textTruncate,
+  defaultTransitionProps
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 import { categoryVerticalPadding } from "../../styles";
+
+export const collapsible = `
+  height: auto;
+  opacity: 1;
+  transition: height ${defaultTransitionProps},
+    opacity ${defaultTransitionProps}, padding-block ${defaultTransitionProps};
+`;
+export const collapsed = `
+  height: 0;
+  opacity: 0;
+  padding-block: 0;
+  pointer-events: none;
+  overflow: hidden;
+`;
 
 export const Shadow = styled.div`
   ${panelRounded}
@@ -19,27 +33,26 @@ export const Wrapper = styled.div`
   padding-block-end: ${categoryVerticalPadding};
   margin-top: 0;
 
-  ${({ $hidden }) => $hidden && `display: none;`}
+  ${collapsible}
+  ${({ $hidden }) => $hidden && collapsed};
 `;
 
-export const Category = styled("article", transientOptions)`
+export const Category = styled.article`
   ${panelRounded}
 
-  ${({ $isDragging }) => $isDragging && dragging}
+  ${({ $preview }) => $preview && dragging}
 `;
 
 export const Inner = styled.div`
+  position: relative;
   padding: 22px clamp(20px, 2.857vw, 32px);
 
   .collapse__content--visible + & div.markdown-body {
     display: none;
   }
 
-  display: ${({ $collapsed }) => ($collapsed ? `none` : `block`)};
-`;
-
-export const Content = styled.div`
-  display: ${({ $collapsed }) => ($collapsed ? `none` : `block`)};
+  ${collapsible}
+  ${({ $collapsed }) => $collapsed && collapsed};
 `;
 
 export const Title = styled.h3`

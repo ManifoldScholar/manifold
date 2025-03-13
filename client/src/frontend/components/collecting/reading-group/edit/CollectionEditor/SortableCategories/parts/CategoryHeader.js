@@ -42,21 +42,26 @@ function CategoryHeader({
     });
   }, []);
 
+  const kind = markdownOnly ? "block" : "category";
+  const collapseToggleLabel = manualCollapsed
+    ? `forms.expand_${kind}`
+    : `forms.collapse_${kind}`;
+
   return (
     <>
       <Collapse initialVisible={initExpanded}>
         <Styled.Header
-          $dragging={categoryDragActive || manualCollapsed}
+          $borderRadius={categoryDragActive || manualCollapsed}
           $bg={collectableOver}
         >
           <Styled.TitleWrapper>
-            <Styled.Action onClick={setCollapsed}>
+            <Styled.Action as="button" onClick={setCollapsed}>
               <IconComposer
                 icon={manualCollapsed ? "disclosureDown24" : "disclosureUp24"}
                 size="default"
               />
               <span className="screen-reader-text">
-                {t("forms.category.edit")}
+                {t(collapseToggleLabel)}
               </span>
             </Styled.Action>
             {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
@@ -76,7 +81,7 @@ function CategoryHeader({
                   {t("forms.category.edit")}
                 </span>
               </Styled.Action>
-              <Styled.Action ref={dragHandleRef}>
+              <Styled.Action as="button" ref={dragHandleRef} data-drag-handle>
                 <IconComposer icon="grabber32" size="default" />
               </Styled.Action>
             </Styled.Actions>

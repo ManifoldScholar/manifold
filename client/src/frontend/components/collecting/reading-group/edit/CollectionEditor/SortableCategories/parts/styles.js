@@ -25,7 +25,8 @@ export const Header = styled.header`
   border-top-right-radius: var(--box-border-radius);
   min-block-size: 52px;
 
-  ${({ $dragging }) => $dragging && `border-radius: var(--box-border-radius)`}
+  ${({ $borderRadius }) =>
+    $borderRadius && `border-radius: var(--box-border-radius)`}
 `;
 
 export const TitleWrapper = styled.div`
@@ -67,6 +68,10 @@ export const Action = styled.div`
   ${buttonUnstyled}
   ${utilityPrimary}
   font-size: 12px;
+
+  &[data-drag-handle] {
+    cursor: grab;
+  }
 `;
 
 export const Inner = styled.div`
