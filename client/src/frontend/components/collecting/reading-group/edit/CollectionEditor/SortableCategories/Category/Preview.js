@@ -7,7 +7,7 @@ export default function Preview({ category, active, container }) {
     active &&
     createPortal(
       <Styled.Wrapper>
-        <Styled.Category>
+        <Styled.Category $preview>
           <Styled.Inner>
             <Styled.Title>{category?.attributes.title}</Styled.Title>
           </Styled.Inner>
