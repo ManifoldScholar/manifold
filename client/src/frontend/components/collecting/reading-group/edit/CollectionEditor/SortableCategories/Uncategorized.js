@@ -12,7 +12,7 @@ function Uncategorized(props) {
     attributes: { title: t("common.uncategorized_title_case") }
   };
 
-  return <Category category={category} isStatic {...props} />;
+  return <Category id={CATEGORY_ID} category={category} isStatic {...props} />;
 }
 
 Uncategorized.displayName =
