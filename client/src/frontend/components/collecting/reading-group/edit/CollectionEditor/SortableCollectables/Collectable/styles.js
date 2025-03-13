@@ -6,7 +6,6 @@ import {
   utilityPrimary,
   panelRounded
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const collectableMinHeight = `50px`;
 const collectableVerticalPadding = `5px`;
@@ -28,7 +27,7 @@ export const WrapperEmpty = styled(Wrapper)`
   ${({ $hidden }) => $hidden && `display: none;`}
 `;
 
-export const Collectable = styled("article", transientOptions)`
+export const Collectable = styled.article`
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
@@ -36,7 +35,7 @@ export const Collectable = styled("article", transientOptions)`
   padding-inline-start: 14px;
   border-radius: var(--box-border-radius);
 
-  ${({ $isDragging }) => $isDragging && dragging}
+  ${({ $preview }) => $preview && dragging}
 `;
 
 export const CollectableEmpty = styled.div`

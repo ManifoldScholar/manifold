@@ -23,9 +23,8 @@ export default function Collectable({
   return (
     <>
       <Shadow
-        dragging={dragState?.dragging}
         active={
-          dragState?.type === "is-over" && dragState?.closestEdge === "top"
+          dragState?.status === "is-over" && dragState?.closestEdge === "top"
         }
       />
       {id !== "empty" ? (
@@ -46,16 +45,15 @@ export default function Collectable({
         />
       )}
       <Shadow
-        dragging={dragState?.dragging}
         active={
-          dragState?.type === "is-over" && dragState?.closestEdge === "bottom"
+          dragState?.status === "is-over" && dragState?.closestEdge === "bottom"
         }
       />
       <Preview
         id={id}
         type={type}
         responses={responses}
-        active={dragState?.type === "preview"}
+        active={dragState?.status === "preview"}
         container={dragState?.container}
       />
     </>
