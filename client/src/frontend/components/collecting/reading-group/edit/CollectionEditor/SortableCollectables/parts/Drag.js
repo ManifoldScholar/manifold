@@ -6,10 +6,12 @@ import * as Styled from "./styles";
 function Drag({ dragHandleRef, onFocus, onBlur }) {
   return (
     <Styled.Action
-      as="div"
+      as="span"
+      tabIndex={0}
       ref={dragHandleRef}
       onFocus={onFocus}
       onBlur={onBlur}
+      data-drag-handle
     >
       <IconComposer icon="grabber32" size="default" />
       <span className="screen-reader-text">Drag item</span>

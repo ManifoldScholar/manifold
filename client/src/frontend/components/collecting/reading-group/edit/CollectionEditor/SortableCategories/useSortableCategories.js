@@ -51,7 +51,7 @@ const handleAddCollectableToCategory = (source, dropTargetData, mappings) => {
   if (!currentCategory || !targetCategory) return mappings;
 
   const currentCategoryList = mappings[currentCategory][source.data.type];
-  const targetCategoryList = mappings[targetCategory]
+  const targetCategoryList = mappings[targetCategory]?.[source.data.type]
     ? [...mappings[targetCategory][source.data.type], source.data.id]
     : [source.data.id];
 
@@ -99,7 +99,7 @@ const handleCollectableDrop = (source, location, mappings) => {
   }
 
   const currentCategoryList = mappings[currentCategory][source.data.type];
-  const targetCategoryList = mappings[targetCategory]
+  const targetCategoryList = mappings[targetCategory]?.[source.data.type]
     ? [...mappings[targetCategory][source.data.type], source.data.id]
     : [source.data.id];
 

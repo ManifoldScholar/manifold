@@ -52,8 +52,9 @@ export default function Content({
           >
             <Drag
               dragHandleRef={dragHandleRef}
-              onFocus={() => {
-                setKeyboardActionsVisible(true);
+              onFocus={e => {
+                if (e.target.matches(":focus-visible"))
+                  setKeyboardActionsVisible(true);
               }}
               onBlur={() => {
                 if (reverseTabDirection) {
