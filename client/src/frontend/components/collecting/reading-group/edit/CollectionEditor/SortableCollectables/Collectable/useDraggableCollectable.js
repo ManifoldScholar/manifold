@@ -12,10 +12,8 @@ import {
   attachClosestEdge,
   extractClosestEdge
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
+import { triggerPostMoveFlash } from "@atlaskit/pragmatic-drag-and-drop-flourish/trigger-post-move-flash";
 import { isShallowEqual } from "../../helpers/utils";
-
-const idle = { type: "idle" };
-const dragging = { type: "dragging" };
 
 export default function useDraggableCollectable({
   type,
@@ -27,7 +25,7 @@ export default function useDraggableCollectable({
   const wrapperRef = useRef(null);
   const dragHandleRef = useRef(null);
 
-  const [dragState, setDragState] = useState({ type: "idle" });
+  const [dragState, setDragState] = useState({ status: "idle" });
 
   useEffect(() => {
     if (!collectableRef.current) {
@@ -60,8 +58,8 @@ export default function useDraggableCollectable({
             return;
           }
           setDragState({
-            type: "is-over",
-            dragging: source.data.rect,
+            status: "is-over",
+            type: source.data.type,
             closestEdge
           });
         },
@@ -78,8 +76,8 @@ export default function useDraggableCollectable({
           }
           // optimization - Don't update react state if we don't need to.
           const proposed = {
-            type: "is-over",
-            dragging: source.data.rect,
+            status: "is-over",
+            type: source.data.type,
             closestEdge
           };
           setDragState(current => {
@@ -94,13 +92,13 @@ export default function useDraggableCollectable({
             return;
           }
           if (source.data.id === id) {
-            setDragState({ type: "has-left" });
+            setDragState({ status: "has-left", type: source.data.type });
             return;
           }
-          setDragState(idle);
+          setDragState({ status: "idle" });
         },
         onDrop() {
-          setDragState(idle);
+          setDragState({ status: "idle" });
         }
       });
     }
@@ -125,10 +123,22 @@ export default function useDraggableCollectable({
             rect: element.getBoundingClientRect()
           }),
           onDragStart: () => {
-            setDragState(dragging);
+            setDragState({ status: "dragging", type });
           },
           onDrop: () => {
-            setDragState(idle);
+            setTimeout(() => {
+              const newEl = document.querySelector(
+                `[data-collectable-id="${id}"]`
+              );
+              newEl.focus();
+              newEl.setAttribute(
+                "style",
+                "outline: 2px solid var(--hover-color)"
+              );
+              newEl.scrollIntoView({ block: "center" });
+            }, 750);
+            triggerPostMoveFlash(collectableEl);
+            setDragState({ status: "idle" });
           },
           onGenerateDragPreview({ nativeSetDragImage, location }) {
             setCustomNativeDragPreview({
@@ -139,12 +149,12 @@ export default function useDraggableCollectable({
               }),
               render({ container }) {
                 setDragState({
-                  type: "preview",
+                  status: "preview",
                   container,
-                  dragging: collectableEl.getBoundingClientRect()
+                  type
                 });
 
-                return () => setDragState({ type: "dragging" });
+                return () => setDragState({ status: "dragging", type });
               }
             });
           }
@@ -175,8 +185,8 @@ export default function useDraggableCollectable({
               return;
             }
             setDragState({
-              type: "is-over",
-              dragging: source.data.rect,
+              status: "is-over",
+              type: source.data.type,
               closestEdge
             });
           },
@@ -193,8 +203,8 @@ export default function useDraggableCollectable({
             }
             // optimization - Don't update react state if we don't need to.
             const proposed = {
-              type: "is-over",
-              dragging: source.data.rect,
+              status: "is-over",
+              type: source.data.type,
               closestEdge
             };
             setDragState(current => {
@@ -209,13 +219,13 @@ export default function useDraggableCollectable({
               return;
             }
             if (source.data.id === id) {
-              setDragState({ type: "has-left" });
+              setDragState({ status: "has-left", type: source.data.type });
               return;
             }
-            setDragState(idle);
+            setDragState({ status: "idle" });
           },
           onDrop() {
-            setDragState(idle);
+            setDragState({ status: "idle" });
           }
         })
       );

@@ -4,8 +4,8 @@ import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/r
 import invariant from "tiny-invariant";
 import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import { autoScrollForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
-import { unsafeOverflowAutoScrollForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/unsafe-overflow/element";
+// import { autoScrollForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
+// import { unsafeOverflowAutoScrollForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/unsafe-overflow/element";
 
 const reorder = (dropTargetData, list, startIndex, finishIndex) => {
   if (startIndex === -1 || finishIndex === -1) {
@@ -45,10 +45,37 @@ export const handleCategoryDrop = (source, location, categories) => {
   return reorder(dropTargetData, categories, startIndex, finishIndex);
 };
 
-export const handleCollectableDrop = (source, location, mappings) => {
+const handleAddCollectableToCategory = (source, dropTargetData, mappings) => {
+  const currentCategory = source.data.categoryId;
+  const targetCategory = dropTargetData.id;
+
+  if (!currentCategory || !targetCategory) return mappings;
+
+  const currentCategoryList = mappings[currentCategory][source.data.type];
+  const targetCategoryList = mappings[targetCategory]
+    ? [...mappings[targetCategory][source.data.type], source.data.id]
+    : [source.data.id];
+
+  return {
+    ...mappings,
+    [currentCategory]: {
+      ...mappings[currentCategory],
+      [source.data.type]: currentCategoryList.filter(c => c !== source.data.id)
+    },
+    [targetCategory]: {
+      ...mappings[targetCategory],
+      [source.data.type]: targetCategoryList
+    }
+  };
+};
+
+const handleCollectableDrop = (source, location, mappings) => {
   const dropTargetData = getTargetData(location);
 
   if (!dropTargetData || !source) return mappings;
+
+  if (dropTargetData.category)
+    return handleAddCollectableToCategory(source, dropTargetData, mappings);
 
   const currentCategory = source.data.categoryId;
   const targetCategory = dropTargetData.categoryId;
@@ -128,35 +155,35 @@ export default function useSortableCategories(
               onCollectableDrop(result, source);
             }
           }
-        }),
-        autoScrollForElements({
-          canScroll({ source }) {
-            return !!source?.type === "categories";
-          },
-          getConfiguration: () => ({ maxScrollSpeed: "standard" }),
-          element: scrollContainer
-        }),
-        unsafeOverflowAutoScrollForElements({
-          element: scrollContainer,
-          getConfiguration: () => ({ maxScrollSpeed: "standard" }),
-          canScroll({ source }) {
-            return !!source?.type === "categories";
-          },
-          getOverflow() {
-            return {
-              forLeftEdge: {
-                top: 1000,
-                left: 1000,
-                bottom: 1000
-              },
-              forRightEdge: {
-                top: 1000,
-                right: 1000,
-                bottom: 1000
-              }
-            };
-          }
         })
+        // autoScrollForElements({
+        //   canScroll({ source }) {
+        //     return !!source?.type === "categories";
+        //   },
+        //   getConfiguration: () => ({ maxScrollSpeed: "standard" }),
+        //   element: scrollContainer
+        // })
+        // unsafeOverflowAutoScrollForElements({
+        //   element: scrollContainer,
+        //   getConfiguration: () => ({ maxScrollSpeed: "standard" }),
+        //   canScroll({ source }) {
+        //     return !!source?.type === "categories";
+        //   },
+        //   getOverflow() {
+        //     return {
+        //       forLeftEdge: {
+        //         top: 1000,
+        //         left: 1000,
+        //         bottom: 1000
+        //       },
+        //       forRightEdge: {
+        //         top: 1000,
+        //         right: 1000,
+        //         bottom: 1000
+        //       }
+        //     };
+        //   }
+        // })
       );
     }
   }, [categories, onCategoryDrop, scrollableRef, mappings, onCollectableDrop]);

@@ -15,25 +15,28 @@ function CategoryHeader({
   dragHandleRef,
   onCategoryEdit,
   onCategoryRemove,
-  initExpanded
+  initExpanded,
+  setCollapsed,
+  manualCollapsed,
+  collectableOver
 }) {
   const { t } = useTranslation();
 
   const { markdownOnly, title, descriptionPlaintext } =
     category?.attributes ?? {};
 
-  const [dragging, setDragging] = useState();
+  const [categoryDragActive, setCategoryDragActive] = useState();
 
   useEffect(() => {
     return monitorForElements({
       onDragStart({ source }) {
         if (source.data.type === "categories") {
-          setDragging(true);
+          setCategoryDragActive(true);
         }
       },
       onDrop({ source }) {
         if (source.data.type === "categories") {
-          setDragging(false);
+          setCategoryDragActive(false);
         }
       }
     });
@@ -42,11 +45,25 @@ function CategoryHeader({
   return (
     <>
       <Collapse initialVisible={initExpanded}>
-        <Styled.Header $dragging={dragging}>
-          {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
-          {markdownOnly && dragging && (
-            <Styled.Title>{descriptionPlaintext}</Styled.Title>
-          )}
+        <Styled.Header
+          $dragging={categoryDragActive || manualCollapsed}
+          $bg={collectableOver}
+        >
+          <Styled.TitleWrapper>
+            <Styled.Action onClick={setCollapsed}>
+              <IconComposer
+                icon={manualCollapsed ? "disclosureDown24" : "disclosureUp24"}
+                size="default"
+              />
+              <span className="screen-reader-text">
+                {t("forms.category.edit")}
+              </span>
+            </Styled.Action>
+            {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
+            {markdownOnly && (categoryDragActive || manualCollapsed) && (
+              <Styled.Title>{descriptionPlaintext}</Styled.Title>
+            )}
+          </Styled.TitleWrapper>
           {dragHandleRef && (
             <Styled.Actions>
               <CategoryRemove
