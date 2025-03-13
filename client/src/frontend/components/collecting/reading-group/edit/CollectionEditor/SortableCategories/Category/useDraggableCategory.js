@@ -13,14 +13,15 @@ import {
   attachClosestEdge,
   extractClosestEdge
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
-import { triggerPostMoveFlash } from "@atlaskit/pragmatic-drag-and-drop-flourish/trigger-post-move-flash";
 import { isShallowEqual } from "../../helpers/utils";
+import { highlightDroppedEl } from "../../helpers/dnd";
 
 export default function useDraggableCategory({
   id,
   index,
   category,
-  isStatic = false
+  isStatic = false,
+  onDropInto
 }) {
   const categoryRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -38,8 +39,7 @@ export default function useDraggableCategory({
         setDragState({ type: source.data.type });
       },
       onDrop({ source }) {
-        if (source.data.type === "categories")
-          setTimeout(() => setCollapsed(false), 500);
+        if (source.data.type === "categories") setCollapsed(false);
         setDragState({ type: null });
       }
     });
@@ -68,11 +68,7 @@ export default function useDraggableCategory({
           },
           onDrop: () => {
             setDragState({ status: "idle" });
-            setTimeout(() => {
-              categoryEl.focus();
-              categoryEl.scrollIntoView({ block: "center" });
-            }, 750);
-            triggerPostMoveFlash(categoryEl);
+            highlightDroppedEl({ element: categoryEl });
           },
           onGenerateDragPreview({ nativeSetDragImage, location }) {
             setCustomNativeDragPreview({
@@ -152,11 +148,12 @@ export default function useDraggableCategory({
           },
           onDrop() {
             setDragState({ status: "idle" });
+            if (typeof onDropInto === "function") onDropInto();
           }
         })
       );
     }
-  }, [category, id, index, isStatic, isMarkdown]);
+  }, [category, id, index, isStatic, isMarkdown, onDropInto]);
 
   if (isStatic) return { collapsed };
 
