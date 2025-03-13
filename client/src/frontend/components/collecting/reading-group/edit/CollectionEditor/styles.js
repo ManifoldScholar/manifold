@@ -11,6 +11,7 @@ export const Editor = styled.div`
   font-size: 17px;
   font-weight: var(--font-weight-medium);
   color: var(--strong-color);
+  position: relative;
 
   > * + * {
     margin-top: ${categoryVerticalPadding};

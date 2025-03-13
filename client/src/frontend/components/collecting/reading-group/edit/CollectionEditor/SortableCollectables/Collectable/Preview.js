@@ -10,7 +10,7 @@ export default function Preview({ id, type, responses, active, container }) {
     active &&
     createPortal(
       <Styled.Wrapper>
-        <Styled.Collectable>
+        <Styled.Collectable $preview>
           <Styled.Header>
             <IconComposer icon={getCollectableIcon(type)} size={36} />
             <Styled.Title>

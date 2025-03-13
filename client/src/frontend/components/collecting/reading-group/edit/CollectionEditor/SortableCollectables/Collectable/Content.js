@@ -23,10 +23,12 @@ export default function Content({
   const groupLabelId = useUID();
 
   return (
-    <Styled.Wrapper ref={wrapperRef} $hidden={dragState?.type === "has-left"}>
+    <Styled.Wrapper ref={wrapperRef} $hidden={dragState?.status === "has-left"}>
       <Styled.Collectable
         ref={collectableRef}
-        $isDragging={dragState?.type !== "idle"}
+        tabIndex={-1}
+        data-collectable-id={id}
+        onBlur={() => collectableRef.current.setAttribute("style", "")}
       >
         <Styled.Header>
           <IconComposer icon={getCollectableIcon(type)} size={36} />
