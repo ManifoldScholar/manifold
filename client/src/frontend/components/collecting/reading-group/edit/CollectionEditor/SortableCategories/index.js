@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import useSortableCategories from "./useSortableCategories";
 import Uncategorized from "./Uncategorized";
@@ -33,10 +33,6 @@ export default function SortableCategories({
     setCategoriesFromProps(collection)
   );
   const [mappings, setMappings] = useState(setMappingsFromProps(collection));
-
-  useEffect(() => {
-    setCategories(setCategoriesFromProps(collection));
-  }, [JSON.stringify(collection)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onCategoryDrop = (result, sourceId) => {
     const priorPosition = categories.find(c => c.id === sourceId).position;
@@ -90,24 +86,22 @@ export default function SortableCategories({
   );
 
   return (
-    <>
-      <div ref={scrollableRef}>
-        <Styled.Categories $active={active}>
-          <CategoriesList
-            categoryOrder={categories}
-            mappings={mappings}
-            responses={responses}
-            callbacks={callbacks}
-            {...listProps}
-          />
-        </Styled.Categories>
-      </div>
+    <Styled.Container ref={scrollableRef}>
+      <Styled.Categories $active={active}>
+        <CategoriesList
+          categoryOrder={categories}
+          mappings={mappings}
+          responses={responses}
+          callbacks={callbacks}
+          {...listProps}
+        />
+      </Styled.Categories>
       <Uncategorized
         mappings={mappings}
         responses={responses}
         callbacks={callbacks}
       />
-    </>
+    </Styled.Container>
   );
 }
 
