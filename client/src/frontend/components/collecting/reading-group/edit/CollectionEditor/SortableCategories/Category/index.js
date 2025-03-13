@@ -14,11 +14,16 @@ export default function Category({
 }) {
   const [manualCollapsed, setManualCollapsed] = useState(false);
 
+  const onDropInto = () => {
+    if (manualCollapsed) setManualCollapsed(false);
+  };
+
   const { dragState, ...contentProps } = useDraggableCategory({
     id,
     index,
     category,
-    isStatic
+    isStatic,
+    onDropInto
   });
 
   return (

@@ -14,7 +14,11 @@
       "description_instructions": "Enter a brief description of the category. This field accepts basic Markdown.",
       "empty_placeholder": "Drag here to add",
       "markdown_body_placeholder": "Enter markdown content",
-      "add_markdown": "Add markdown block"
+      "add_markdown": "Add markdown block",
+      "expand_category": "Expand category content",
+      "collapse_category": "Collapse category content",
+      "expand_block": "Expand block content",
+      "collapse_block": "Collapse block content"
     },
     "reading_group": {
       "drawer_title": "New Reading Group",
