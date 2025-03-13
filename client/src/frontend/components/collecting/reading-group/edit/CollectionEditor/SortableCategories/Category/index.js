@@ -1,39 +1,53 @@
 import * as React from "react";
+import { useState } from "react";
 import Shadow from "./Shadow";
 import Preview from "./Preview";
 import Content from "./Content";
 import useDraggableCategory from "./useDraggableCategory";
 
-export default function Category({ id, index, category, ...restProps }) {
+export default function Category({
+  id,
+  index,
+  category,
+  isStatic,
+  ...restProps
+}) {
+  const [manualCollapsed, setManualCollapsed] = useState(false);
+
   const { dragState, ...contentProps } = useDraggableCategory({
     id,
     index,
-    category
+    category,
+    isStatic
   });
 
   return (
     <>
       <Shadow
-        dragging={dragState?.dragging}
         active={
-          dragState?.type === "is-over" && dragState?.closestEdge === "top"
+          dragState?.status === "is-over" &&
+          dragState?.closestEdge === "top" &&
+          dragState?.type === "categories"
         }
       />
       <Content
         dragState={dragState}
         category={category}
+        manualCollapsed={manualCollapsed}
+        setManualCollapsed={setManualCollapsed}
         {...contentProps}
         {...restProps}
       />
       <Shadow
-        dragging={dragState?.dragging}
         active={
-          dragState?.type === "is-over" && dragState?.closestEdge === "bottom"
+          dragState?.status === "is-over" &&
+          dragState?.closestEdge === "bottom" &&
+          dragState?.type === "categories"
         }
       />
       <Preview
         category={category}
-        active={dragState?.type === "preview"}
+        active={dragState?.status === "preview"}
         container={dragState?.container}
       />
     </>
