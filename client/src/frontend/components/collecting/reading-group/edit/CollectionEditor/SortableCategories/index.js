@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import useSortableCategories from "./useSortableCategories";
+import useAccessibleSort from "./useAccessibleSort";
 import Uncategorized from "./Uncategorized";
-import CategoriesList from "./CategoriesList";
+import Category from "./Category";
 import * as Styled from "./styles";
 
-function setCategoriesFromProps(collection) {
+function setCategoriesFromProps(collection, categoriesData) {
   const {
     attributes: { categories }
   } = collection;
-  const sortedCategories = categories.map(cat => ({
-    id: cat.id,
-    position: cat.position
-  }));
+  const sortedCategories = categories.map(cat => {
+    const {
+      attributes: { markdownOnly, titlePlaintext }
+    } = categoriesData?.find(c => cat.id === c.id) ?? { attributes: {} };
+    return {
+      id: cat.id,
+      position: cat.position,
+      markdownOnly,
+      title: titlePlaintext
+    };
+  });
   return sortedCategories;
 }
 
@@ -25,12 +33,13 @@ function setMappingsFromProps(collection) {
 
 export default function SortableCategories({
   collection,
+  categories: categoriesData,
   responses,
   callbacks,
   ...listProps
 }) {
   const [categories, setCategories] = useState(
-    setCategoriesFromProps(collection)
+    setCategoriesFromProps(collection, categoriesData)
   );
   const [mappings, setMappings] = useState(setMappingsFromProps(collection));
 
@@ -85,21 +94,35 @@ export default function SortableCategories({
     onCollectableDrop
   );
 
+  const { onCollectableMove } = useAccessibleSort(
+    categories,
+    mappings,
+    onCollectableDrop
+  );
+
   return (
     <Styled.Container ref={scrollableRef}>
       <Styled.Categories $active={active}>
-        <CategoriesList
-          categoryOrder={categories}
-          mappings={mappings}
-          responses={responses}
-          callbacks={callbacks}
-          {...listProps}
-        />
+        {categories.map((c, index) => {
+          const category = categoriesData.find(cat => cat.id === c.id);
+          return (
+            <Category
+              key={c.id}
+              id={c.id}
+              index={index}
+              category={category}
+              mappings={mappings}
+              responses={responses}
+              callbacks={{ ...callbacks, onCollectableMove }}
+              {...listProps}
+            />
+          );
+        })}
       </Styled.Categories>
       <Uncategorized
         mappings={mappings}
         responses={responses}
-        callbacks={callbacks}
+        callbacks={{ ...callbacks, onCollectableMove }}
       />
     </Styled.Container>
   );

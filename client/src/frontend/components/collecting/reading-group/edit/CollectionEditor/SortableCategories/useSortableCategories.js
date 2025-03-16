@@ -44,7 +44,11 @@ export const handleCategoryDrop = (source, location, categories) => {
   return reorder(dropTargetData, categories, startIndex, finishIndex);
 };
 
-const handleAddCollectableToCategory = (source, dropTargetData, mappings) => {
+export const handleAddCollectableToCategory = (
+  source,
+  dropTargetData,
+  mappings
+) => {
   const currentCategory = source.data.categoryId;
   const targetCategory = dropTargetData.id;
 
