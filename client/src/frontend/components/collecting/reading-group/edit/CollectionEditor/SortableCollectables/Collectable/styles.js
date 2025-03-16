@@ -42,6 +42,10 @@ export const Collectable = styled.article`
   border-radius: var(--box-border-radius);
 
   ${({ $preview }) => $preview && dragging}
+
+  &:focus-visible {
+    outline: none;
+  }
 `;
 
 export const CollectableEmpty = styled.div`
