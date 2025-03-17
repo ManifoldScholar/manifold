@@ -26,6 +26,8 @@ export default function Category({
     onDropInto
   });
 
+  if (!category) return null;
+
   return (
     <>
       <Shadow

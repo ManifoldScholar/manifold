@@ -45,75 +45,77 @@ export default function useDraggableCategory({
   }, []);
 
   useEffect(() => {
-    const wrapperEl = wrapperRef.current;
-    invariant(wrapperEl);
+    if (category) {
+      const wrapperEl = wrapperRef.current;
+      invariant(wrapperEl);
 
-    return dropTargetForElements({
-      element: wrapperEl,
-      getIsSticky: () => true,
-      getData: ({ element, input }) => {
-        const data = { id, index, category };
-        return attachClosestEdge(data, {
-          element,
-          input,
-          allowedEdges: ["top", "bottom"]
-        });
-      },
-      canDrop: ({ source }) => {
-        if (isMarkdown && source.data.type !== "categories") return false;
-        if (isStatic && source.data.type === "categories") return false;
-        return !!source.data.type;
-      },
-      onDragEnter({ source, self }) {
-        if (source.data.id === id) {
-          return;
-        }
-        const closestEdge = extractClosestEdge(self.data);
-        if (!closestEdge) {
-          return;
-        }
-        setDragState({
-          status: "is-over",
-          type: source.data.type,
-          closestEdge
-        });
-      },
-      onDrag({ source, self }) {
-        if (source.data.id === id) {
-          return;
-        }
-        const closestEdge = extractClosestEdge(self.data);
-        if (!closestEdge) {
-          return;
-        }
-        const proposed = {
-          status: "is-over",
-          type: source.data.type,
-          closestEdge
-        };
-        setDragState(current => {
-          if (isShallowEqual(proposed, current)) {
-            return current;
+      return dropTargetForElements({
+        element: wrapperEl,
+        getIsSticky: () => true,
+        getData: ({ element, input }) => {
+          const data = { id, index, category };
+          return attachClosestEdge(data, {
+            element,
+            input,
+            allowedEdges: ["top", "bottom"]
+          });
+        },
+        canDrop: ({ source }) => {
+          if (isMarkdown && source.data.type !== "categories") return false;
+          if (isStatic && source.data.type === "categories") return false;
+          return !!source.data.type;
+        },
+        onDragEnter({ source, self }) {
+          if (source.data.id === id) {
+            return;
           }
-          return proposed;
-        });
-      },
-      onDragLeave({ source }) {
-        if (source.data.id === id) {
-          setDragState({ status: "has-left", type: "categories" });
-          return;
+          const closestEdge = extractClosestEdge(self.data);
+          if (!closestEdge) {
+            return;
+          }
+          setDragState({
+            status: "is-over",
+            type: source.data.type,
+            closestEdge
+          });
+        },
+        onDrag({ source, self }) {
+          if (source.data.id === id) {
+            return;
+          }
+          const closestEdge = extractClosestEdge(self.data);
+          if (!closestEdge) {
+            return;
+          }
+          const proposed = {
+            status: "is-over",
+            type: source.data.type,
+            closestEdge
+          };
+          setDragState(current => {
+            if (isShallowEqual(proposed, current)) {
+              return current;
+            }
+            return proposed;
+          });
+        },
+        onDragLeave({ source }) {
+          if (source.data.id === id) {
+            setDragState({ status: "has-left", type: "categories" });
+            return;
+          }
+          setDragState({ status: "idle" });
+        },
+        onDrop() {
+          setDragState({ status: "idle" });
+          if (typeof onDropInto === "function") onDropInto();
         }
-        setDragState({ status: "idle" });
-      },
-      onDrop() {
-        setDragState({ status: "idle" });
-        if (typeof onDropInto === "function") onDropInto();
-      }
-    });
+      });
+    }
   }, [category, id, index, isStatic, isMarkdown, onDropInto]);
 
   useEffect(() => {
-    if (!isStatic) {
+    if (!isStatic && category) {
       const categoryEl = categoryRef.current;
       const dragHandleEl = dragHandleRef.current;
       invariant(categoryEl && dragHandleEl);

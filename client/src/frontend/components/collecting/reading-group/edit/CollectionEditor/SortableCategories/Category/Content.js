@@ -44,7 +44,7 @@ export default function Content({
           onCategoryEdit={callbacks.onCategoryEdit}
           onCategoryRemove={callbacks.onCategoryRemove}
           initExpanded={
-            newMarkdownBlock && newMarkdownBlock === category.attributes.title
+            newMarkdownBlock && newMarkdownBlock === category?.attributes.title
           }
           setCollapsed={() => setManualCollapsed(!manualCollapsed)}
           manualCollapsed={manualCollapsed}
