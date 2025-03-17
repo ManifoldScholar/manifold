@@ -8,11 +8,14 @@ import SortableCategories from "./SortableCategories";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import * as Styled from "./styles";
 
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
-
 const { request } = entityStoreActions;
 
-function CollectionEditor({ readingGroup, categories, responses, refresh }) {
+export default function CollectionEditor({
+  readingGroup,
+  categories,
+  responses,
+  refresh
+}) {
   const dispatch = useDispatch();
 
   const collection = getEntityCollection(readingGroup);
@@ -103,5 +106,3 @@ CollectionEditor.propTypes = {
   refresh: PropTypes.func.isRequired,
   categories: PropTypes.array
 };
-
-export default withScreenReaderStatus(CollectionEditor);
