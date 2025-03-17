@@ -12,7 +12,7 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
     return readingGroupsAPI.updateCategory(groupId, categoryId, data);
   }
 
-  const isMarkdown = category.attributes?.markdownOnly;
+  const isMarkdown = category?.attributes?.markdownOnly;
 
   const nameLabel = isMarkdown ? t("common.title") : t("forms.category.name");
   const descriptionLabel = isMarkdown
@@ -28,7 +28,7 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
   return (
     <FormContainer.Form
       model={category}
-      name={`${requests.feReadingGroupCategoryUpdate}-${category.attributes?.slug}`}
+      name={`${requests.feReadingGroupCategoryUpdate}-${category?.attributes?.slug}`}
       update={doUpdate}
       onSuccess={onSuccess}
       className="form-secondary"

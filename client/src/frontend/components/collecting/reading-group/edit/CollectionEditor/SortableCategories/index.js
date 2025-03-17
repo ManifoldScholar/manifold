@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import isEqual from "lodash/isEqual";
 import useSortableCategories from "./useSortableCategories";
 import useAccessibleSort from "./useAccessibleSort";
 import Uncategorized from "./Uncategorized";
@@ -42,6 +43,16 @@ export default function SortableCategories({
     setCategoriesFromProps(collection, categoriesData)
   );
   const [mappings, setMappings] = useState(setMappingsFromProps(collection));
+
+  useEffect(() => {
+    const update = setCategoriesFromProps(collection, categoriesData);
+    if (!isEqual(update, categories)) setCategories(update);
+  }, [categoriesData, collection, categories]);
+
+  useEffect(() => {
+    const update = setMappingsFromProps(collection);
+    if (!isEqual(update, mappings)) setMappings(update);
+  }, [collection, mappings]);
 
   const onCategoryDrop = (result, sourceId) => {
     const priorPosition = categories.find(c => c.id === sourceId).position;
