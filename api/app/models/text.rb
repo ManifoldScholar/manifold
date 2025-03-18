@@ -129,6 +129,7 @@ class Text < ApplicationRecord
   after_commit :trigger_text_added_event, on: [:create, :update]
   after_commit :inject_global_stylesheet, on: :create
 
+  pg_search_scope :keyword_search, against: TYPEAHEAD_ATTRIBUTES
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,

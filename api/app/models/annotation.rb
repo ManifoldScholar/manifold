@@ -94,6 +94,7 @@ class Annotation < ApplicationRecord
   delegate :text_nodes, to: :text_section, prefix: true
 
   # Search
+  pg_search_scope :keyword_search, against: [:title, :body]
   searchkick(callbacks: :async,
              batch_size: 500,
              highlight: [:title, :body])
