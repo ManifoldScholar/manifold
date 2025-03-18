@@ -2,7 +2,7 @@
 class Maker < ApplicationRecord
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:first_name, :last_name].freeze
-  KEYWORD_SEARCH_ATTRIBUTES = %i[name first_name middle_name last_name display_name].freeze
+  KEYWORD_SEARCH_ATTRIBUTES = %i[first_name middle_name last_name display_name].freeze
 
   PACKAGING_ATTRIBUTES = %i[id name first_name middle_name last_name display_name suffix prefix].freeze
 
