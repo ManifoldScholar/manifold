@@ -10,6 +10,7 @@ module Filterable
   extend ActiveSupport::Concern
 
   include LazyOrdering
+  include PgSearch::Model
 
   included do
     extend Dry::Core::ClassAttributes
