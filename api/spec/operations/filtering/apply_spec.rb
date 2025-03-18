@@ -26,18 +26,6 @@ RSpec.shared_examples "common filtering examples" do |use_pg_search|
       expect(operation.call({per_page: 3}, model: Project, scope: Project.all, skip_pagination: true, user: admin_user, use_pg_search: use_pg_search).length).to eq(30)
     end
 
-    it "performs keyword search on Maker model" do
-      stub_request(:get, /elasticsearch/).to_return(status: 200, body: "", headers: {})
-      FactoryBot.create_list(:maker, 10)
-      FactoryBot.create_list(:maker, 10, first_name: "Rocky", last_name: "Balboa", name: "Rocky Balboa")
-      aggregate_failures("multiple filters") do
-        expect(operation.call({keyword: "Rocky"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: use_pg_search).length).to eq(10)
-        expect(operation.call({keyword: "Balboa"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: use_pg_search).length).to eq(10)
-        expect(operation.call({keyword: "Rocky Balboa"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: use_pg_search).length).to eq(10)
-        expect(operation.call({keyword: "Rambo"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: use_pg_search).length).to eq(10)
-        expect(operation.call({keyword: "Luke"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: use_pg_search).length).to eq(0)
-      end
-    end
 end
 
 RSpec.describe Filtering::Apply, type: :operation do
@@ -52,6 +40,30 @@ RSpec.describe Filtering::Apply, type: :operation do
   context "PG Search" do
     include_examples "common filtering examples", true do
       let(:operation) { described_class.new }
+    end
+
+    it "performs keyword search on Maker model" do
+      stub_request(:get, /elasticsearch/).to_return(status: 200, body: "", headers: {})
+      FactoryBot.create_list(:maker, 10)
+      FactoryBot.create_list(:maker, 10, first_name: "Rocky", last_name: "Balboa", name: "Rocky Balboa")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "Rocky"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "Balboa"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "Rocky Balboa"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "Rambo"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "Luke"}, model: Maker, scope: Maker.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
+
+    it "performs keyword search on Event model" do
+      stub_request(:get, /elasticsearch/).to_return(status: 200, body: "", headers: {})
+      FactoryBot.create_list(:event, 10, subject_title: "hello")
+      FactoryBot.create_list(:event, 9, subject_title: "goodbye")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: Event, scope: Event.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "goodbye"}, model: Event, scope: Event.all, user: admin_user, use_pg_search: true).length).to eq(9)
+        expect(operation.call({keyword: "Luke"}, model: Event, scope: Event.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
     end
   end
 end
