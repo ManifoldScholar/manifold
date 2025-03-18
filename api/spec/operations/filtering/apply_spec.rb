@@ -43,7 +43,6 @@ RSpec.describe Filtering::Apply, type: :operation do
     end
 
     it "performs keyword search on Maker model" do
-      stub_request(:get, /elasticsearch/).to_return(status: 200, body: "", headers: {})
       FactoryBot.create_list(:maker, 10)
       FactoryBot.create_list(:maker, 10, first_name: "Rocky", last_name: "Balboa", name: "Rocky Balboa")
       aggregate_failures("multiple filters") do
@@ -56,13 +55,26 @@ RSpec.describe Filtering::Apply, type: :operation do
     end
 
     it "performs keyword search on Event model" do
-      stub_request(:get, /elasticsearch/).to_return(status: 200, body: "", headers: {})
       FactoryBot.create_list(:event, 10, subject_title: "hello")
       FactoryBot.create_list(:event, 9, subject_title: "goodbye")
       aggregate_failures("multiple filters") do
         expect(operation.call({keyword: "hello"}, model: Event, scope: Event.all, user: admin_user, use_pg_search: true).length).to eq(10)
         expect(operation.call({keyword: "goodbye"}, model: Event, scope: Event.all, user: admin_user, use_pg_search: true).length).to eq(9)
         expect(operation.call({keyword: "Luke"}, model: Event, scope: Event.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
+
+    it "performs keyword search on Journal Issue model" do
+      FactoryBot.create_list(:journal_issue_with_title, 10, journal_attributes: {title: "hello"}, journal_volume_attributes: {number: 1}, project_attributes: {description: "foo"})
+      FactoryBot.create_list(:journal_issue_with_title, 9, journal_attributes: {title: "goodbye"}, journal_volume_attributes: {number: 3}, project_attributes: {description: "bar"})
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: JournalIssue, scope: JournalIssue.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "goodbye"}, model: JournalIssue, scope: JournalIssue.all, user: admin_user, use_pg_search: true).length).to eq(9)
+        expect(operation.call({keyword: "1"}, model: JournalIssue, scope: JournalIssue.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "3"}, model: JournalIssue, scope: JournalIssue.all, user: admin_user, use_pg_search: true).length).to eq(9)
+        expect(operation.call({keyword: "foo"}, model: JournalIssue, scope: JournalIssue.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "bar"}, model: JournalIssue, scope: JournalIssue.all, user: admin_user, use_pg_search: true).length).to eq(9)
+        expect(operation.call({keyword: "Luke"}, model: JournalIssue, scope: JournalIssue.all, user: admin_user, use_pg_search: true).length).to eq(0)
       end
     end
   end
