@@ -77,5 +77,19 @@ RSpec.describe Filtering::Apply, type: :operation do
         expect(operation.call({keyword: "Luke"}, model: JournalIssue, scope: JournalIssue.all, user: admin_user, use_pg_search: true).length).to eq(0)
       end
     end
+
+    it "performs keyword search on Text model" do
+      first_text = FactoryBot.create(:text, description: "foo")
+      second_text = FactoryBot.create(:text, description: "bar")
+      FactoryBot.create(:text_title, text: first_text, value: "hello")
+      FactoryBot.create(:text_title, text: second_text, value: "goodbye")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: Text, scope: Text.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "goodbye"}, model: Text, scope: Text.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "foo"}, model: Text, scope: Text.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "bar"}, model: Text, scope: Text.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "Luke"}, model: Text, scope: Text.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
   end
 end
