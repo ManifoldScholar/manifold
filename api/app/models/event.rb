@@ -5,7 +5,6 @@ class Event < ApplicationRecord
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
   KEYWORD_SEARCH_ATTRIBUTES = %i[subject_title subject_subtitle excerpt].freeze
 
-
   # ClassyEnum
   include ClassyEnum::ActiveRecord
   classy_enum_attr :event_type

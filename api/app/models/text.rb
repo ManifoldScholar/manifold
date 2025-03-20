@@ -24,7 +24,6 @@ class Text < ApplicationRecord
 
   TYPEAHEAD_ATTRIBUTES = %i[title makers].freeze
 
-
   has_paper_trail meta: {
     parent_item_id: :project_id,
     parent_item_type: "Project",
@@ -131,7 +130,7 @@ class Text < ApplicationRecord
   after_commit :trigger_text_added_event, on: [:create, :update]
   after_commit :inject_global_stylesheet, on: :create
 
-  has_keyword_search! associated_against: {titles: [:value]}, against: [:description]
+  has_keyword_search! associated_against: { titles: [:value] }, against: [:description]
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
