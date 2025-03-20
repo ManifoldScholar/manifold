@@ -57,3 +57,12 @@ bin/pspec-failures
 You can still use regular rspec commands for specific tags or individual spec files if you should need to. Parallelization is intended mainly for speeding up global test runs when necessary.
 
 `SimpleCov` transparently detects the presence of `parallel_tests`, and handles the merging the coverage information without any intervention on our part.
+
+## Setting up Dev Database
+
+We have an `import.tar` file that contains a number of sample projects and texts you can use for development. Ask around and someone can provide it to you. Once you get it, extract it and run the `import:projects` rake task on it:
+
+```bash
+tar -xf import.tar
+docker compose exec web bin/rake 'manifold:import:projects[import]'
+```
