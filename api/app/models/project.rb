@@ -27,6 +27,7 @@ class Project < ApplicationRecord
   include SoftDeletable
   include TimestampScopes
   include WithConfigurableAvatar
+  include HasKeywordSearch
 
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :restricted_access_body, include_wrap: false
@@ -239,7 +240,16 @@ class Project < ApplicationRecord
     )
   }
 
-  pg_search_scope :keyword_search, against: TYPEAHEAD_ATTRIBUTES
+  has_keyword_search!(
+    against: %i[title subtitle description],
+    associated_against: {
+      creator: %i[first_name last_name],
+      makers: %i[first_name last_name display_name],
+      texts: %i[social_title],
+      subjects: %i[name],
+      tags: %i[name]
+    }
+  )
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,

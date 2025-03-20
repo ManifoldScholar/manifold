@@ -9,6 +9,7 @@ class Subject < ApplicationRecord
   include SerializedAbilitiesFor
   include Filterable
   include SearchIndexable
+  include HasKeywordSearch
 
   # Associations
   has_many :text_subjects, dependent: :destroy
@@ -40,7 +41,7 @@ class Subject < ApplicationRecord
   alias_attribute :title, :name
 
   # Search
-  pg_search_scope :keyword_search, against: TYPEAHEAD_ATTRIBUTES
+  has_keyword_search! against: %i[name]
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500)
