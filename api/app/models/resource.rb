@@ -18,6 +18,7 @@ class Resource < ApplicationRecord
   include Sluggable
   include Metadata
   include SearchIndexable
+  include HasKeywordSearch
 
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
   ALLOWED_KINDS = %w(image video audio link pdf document file spreadsheet presentation
@@ -115,7 +116,7 @@ class Resource < ApplicationRecord
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_commit :trigger_event_creation, on: [:create]
 
-  pg_search_scope :keyword_search, against: TYPEAHEAD_ATTRIBUTES
+  has_keyword_search! against: %i[title description]
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,

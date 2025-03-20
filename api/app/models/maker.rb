@@ -17,6 +17,7 @@ class Maker < ApplicationRecord
   include SerializedAbilitiesFor
   include WithParsedName
   include SearchIndexable
+  include HasKeywordSearch
 
   # Associations
   has_many :collaborators, dependent: :destroy
@@ -37,7 +38,7 @@ class Maker < ApplicationRecord
   validate :name_is_present!
 
   # Search
-  pg_search_scope :keyword_search, against: KEYWORD_SEARCH_ATTRIBUTES
+  has_keyword_search! against: KEYWORD_SEARCH_ATTRIBUTES
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500)

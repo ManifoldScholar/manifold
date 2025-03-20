@@ -14,6 +14,13 @@ class JournalIssue < ApplicationRecord
   include HasFormattedAttributes
   include SearchIndexable
   include HasSortTitle
+  include HasKeywordSearch
+
+  has_keyword_search! associated_against: {
+    journal: [:title],
+    journal_volume: [:number],
+    project: [:description]
+  }
 
   belongs_to :journal, counter_cache: true
   belongs_to :journal_volume, optional: true, counter_cache: true
@@ -100,11 +107,6 @@ class JournalIssue < ApplicationRecord
     )
   }
 
-  pg_search_scope :keyword_search, associated_against: {
-    journal: [:title],
-    journal_volume: [:number],
-    project: [:description]
-  }
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
