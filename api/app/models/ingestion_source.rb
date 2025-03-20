@@ -53,7 +53,6 @@ class IngestionSource < ApplicationRecord
   end
 
   # Search
-  pg_search_scope :keyword_search, against: TYPEAHEAD_ATTRIBUTES
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500)
