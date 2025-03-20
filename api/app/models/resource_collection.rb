@@ -10,6 +10,7 @@ class ResourceCollection < ApplicationRecord
   include Sluggable
   include SerializedAbilitiesFor
   include SearchIndexable
+  include HasKeywordSearch
 
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
@@ -44,7 +45,12 @@ class ResourceCollection < ApplicationRecord
     order(by)
   }
 
-  pg_search_scope :keyword_search, against: TYPEAHEAD_ATTRIBUTES
+  has_keyword_search!(
+    against: %i[title description],
+    associated_against: {
+      project: %i[title]
+    }
+  )
   searchkick(callbacks: :async,
              batch_size: 500,
              word_start: TYPEAHEAD_ATTRIBUTES,

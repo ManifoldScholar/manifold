@@ -8,6 +8,7 @@ class Tag < ActsAsTaggableOn::Tag
   include SerializedAbilitiesFor
   include Filterable
   include SearchIndexable
+  include HasKeywordSearch
 
   scope :by_kind, lambda { |kind|
     joins(:taggings).where(taggings: { taggable_type: kind }) if kind.present?
@@ -16,7 +17,7 @@ class Tag < ActsAsTaggableOn::Tag
   alias_attribute :title, :name
 
   # Search
-  pg_search_scope :keyword_search, against: TYPEAHEAD_ATTRIBUTES
+  has_keyword_search! against: %i[name]
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500)

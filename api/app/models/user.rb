@@ -16,6 +16,7 @@ class User < ApplicationRecord
   include WithParsedName
   include SearchIndexable
   include SoftDeletable
+  include HasKeywordSearch
 
   TYPEAHEAD_ATTRIBUTES = [:title, :first_name, :last_name, :email].freeze
 
@@ -103,6 +104,7 @@ class User < ApplicationRecord
   scope :untrusted, -> { where(trusted: false) }
 
   # Search
+  has_keyword_search! against: %i[first_name last_name email]
   searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   delegate *RoleName.global_predicates, to: :role
