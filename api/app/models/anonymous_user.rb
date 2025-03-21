@@ -15,6 +15,10 @@ AnonymousUser = Naught.build do |config|
     RUBY
   end
 
+  def roles
+    []
+  end
+
   def role
     nil
   end
