@@ -24,6 +24,7 @@ class Journal < ApplicationRecord
   include WithPermittedUsers
   include WithProjectCollectionLayout
   include WithConfigurableAvatar
+  include HasKeywordSearch
 
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :title, include_wrap: false
@@ -84,6 +85,13 @@ class Journal < ApplicationRecord
 
   scope :search_import, -> { includes(:collaborators, :makers) }
 
+  has_keyword_search!(
+    against: %i[title subtitle description],
+    associated_against: {
+      creator: %i[first_name last_name nickname],
+      makers: %i[first_name last_name display_name]
+    }
+  )
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
