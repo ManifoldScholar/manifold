@@ -91,5 +91,51 @@ RSpec.describe Filtering::Apply, type: :operation do
         expect(operation.call({keyword: "Luke"}, model: Text, scope: Text.all, user: admin_user, use_pg_search: true).length).to eq(0)
       end
     end
+
+    it "performs keyword search on User model" do
+      FactoryBot.create_list(:user, 10, first_name: "hello", last_name: "foo")
+      FactoryBot.create_list(:user, 9, first_name: "goodbye", last_name: "bar")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: User, scope: User.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "goodbye"}, model: User, scope: User.all, user: admin_user, use_pg_search: true).length).to eq(9)
+        expect(operation.call({keyword: "foo"}, model: User, scope: User.all, user: admin_user, use_pg_search: true).length).to eq(10)
+        expect(operation.call({keyword: "bar"}, model: User, scope: User.all, user: admin_user, use_pg_search: true).length).to eq(9)
+        expect(operation.call({keyword: "Luke"}, model: User, scope: User.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
+
+    it "performs keyword search on Tag model" do
+      FactoryBot.create(:tag, name: "hello")
+      FactoryBot.create(:tag, name: "goodbye")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: Tag, scope: Tag.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "goodbye"}, model: Tag, scope: Tag.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "Luke"}, model: Tag, scope: Tag.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
+
+    it "performs keyword search on Ingestion Source model" do
+      FactoryBot.create(:ingestion_source, display_name: "hello", source_identifier: "foo")
+      FactoryBot.create(:ingestion_source, display_name: "goodbye", source_identifier: "bar")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: IngestionSource, scope: IngestionSource.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "goodbye"}, model: IngestionSource, scope: IngestionSource.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "foo"}, model: IngestionSource, scope: IngestionSource.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "bar"}, model: IngestionSource, scope: IngestionSource.all, user: admin_user, use_pg_search: true).length).to eq(1)
+        expect(operation.call({keyword: "Luke"}, model: IngestionSource, scope: IngestionSource.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
+
+    it "performs keyword search on Resource model" do
+      FactoryBot.create_list(:resource, 5, title: "hello", description: "foo")
+      FactoryBot.create_list(:resource, 4, title: "goodbye", description: "bar")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: Resource, scope: Resource.all, user: admin_user, use_pg_search: true).length).to eq(5)
+        expect(operation.call({keyword: "goodbye"}, model: Resource, scope: Resource.all, user: admin_user, use_pg_search: true).length).to eq(4)
+        expect(operation.call({keyword: "foo"}, model: Resource, scope: Resource.all, user: admin_user, use_pg_search: true).length).to eq(5)
+        expect(operation.call({keyword: "bar"}, model: Resource, scope: Resource.all, user: admin_user, use_pg_search: true).length).to eq(4)
+        expect(operation.call({keyword: "Luke"}, model: Resource, scope: Resource.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
   end
 end
