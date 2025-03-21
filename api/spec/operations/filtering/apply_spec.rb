@@ -137,5 +137,17 @@ RSpec.describe Filtering::Apply, type: :operation do
         expect(operation.call({keyword: "Luke"}, model: Resource, scope: Resource.all, user: admin_user, use_pg_search: true).length).to eq(0)
       end
     end
+
+    it "performs keyword search on Journal model" do
+      FactoryBot.create_list(:journal, 5, title: "hello", description: "foo")
+      FactoryBot.create_list(:journal, 4, title: "goodbye", description: "bar")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: Journal, scope: Journal.all, user: admin_user, use_pg_search: true).length).to eq(5)
+        expect(operation.call({keyword: "goodbye"}, model: Journal, scope: Journal.all, user: admin_user, use_pg_search: true).length).to eq(4)
+        expect(operation.call({keyword: "foo"}, model: Journal, scope: Journal.all, user: admin_user, use_pg_search: true).length).to eq(5)
+        expect(operation.call({keyword: "bar"}, model: Journal, scope: Journal.all, user: admin_user, use_pg_search: true).length).to eq(4)
+        expect(operation.call({keyword: "Luke"}, model: Journal, scope: Journal.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
   end
 end
