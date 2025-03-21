@@ -149,5 +149,29 @@ RSpec.describe Filtering::Apply, type: :operation do
         expect(operation.call({keyword: "Luke"}, model: Journal, scope: Journal.all, user: admin_user, use_pg_search: true).length).to eq(0)
       end
     end
+
+    it "performs keyword search on Project model" do
+      FactoryBot.create_list(:project, 5, title: "hello", description: "foo")
+      FactoryBot.create_list(:project, 4, title: "goodbye", description: "bar")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: Project, scope: Project.all, user: admin_user, use_pg_search: true).length).to eq(5)
+        expect(operation.call({keyword: "goodbye"}, model: Project, scope: Project.all, user: admin_user, use_pg_search: true).length).to eq(4)
+        expect(operation.call({keyword: "foo"}, model: Project, scope: Project.all, user: admin_user, use_pg_search: true).length).to eq(5)
+        expect(operation.call({keyword: "bar"}, model: Project, scope: Project.all, user: admin_user, use_pg_search: true).length).to eq(4)
+        expect(operation.call({keyword: "Luke"}, model: Project, scope: Project.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
+
+    it "performs keyword search on Resource Collection model" do
+      FactoryBot.create_list(:resource_collection, 5, title: "hello", description: "foo")
+      FactoryBot.create_list(:resource_collection, 4, title: "goodbye", description: "bar")
+      aggregate_failures("multiple filters") do
+        expect(operation.call({keyword: "hello"}, model: ResourceCollection, scope: ResourceCollection.all, user: admin_user, use_pg_search: true).length).to eq(5)
+        expect(operation.call({keyword: "goodbye"}, model: ResourceCollection, scope: ResourceCollection.all, user: admin_user, use_pg_search: true).length).to eq(4)
+        expect(operation.call({keyword: "foo"}, model: ResourceCollection, scope: ResourceCollection.all, user: admin_user, use_pg_search: true).length).to eq(5)
+        expect(operation.call({keyword: "bar"}, model: ResourceCollection, scope: ResourceCollection.all, user: admin_user, use_pg_search: true).length).to eq(4)
+        expect(operation.call({keyword: "Luke"}, model: ResourceCollection, scope: ResourceCollection.all, user: admin_user, use_pg_search: true).length).to eq(0)
+      end
+    end
   end
 end
