@@ -13,7 +13,7 @@ module API
         if outcome.valid?
           render_jsonapi outcome.result,
                          include: [:model, :"model.creator", :"model.creators"],
-                         serializer: ::V1::SearchResultSerializer,
+                         serializer: select_serializer(outcome),
                          meta: {
                            keyword: search_options.dig(:keyword),
                            pagination: pagination_dict(outcome.result)
@@ -24,6 +24,14 @@ module API
       end
 
       private
+
+      def select_serializer(outcome)
+        if outcome.result.first.is_a?(PgSearch::Document)
+          ::V1::PgSearchSerializer
+        else
+          ::V1::SearchResultSerializer
+        end
+      end
 
       def render_error(outcome)
         options = {

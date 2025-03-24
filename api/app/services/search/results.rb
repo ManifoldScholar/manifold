@@ -42,6 +42,8 @@ module Search
 
     def adjusted_results
       @adjusted_results ||= begin
+        # Remove these conditionals when removing Searchkick
+        return @searchkick_results unless @searchkick_results.respond_to?(:options)
         return @searchkick_results.results if @searchkick_results.options[:load]
 
         inject_associations(@searchkick_results)

@@ -240,6 +240,10 @@ class Project < ApplicationRecord
     )
   }
 
+  has_multisearch! websearch: true,
+    against: %i[title subtitle description],
+    additional_attributes: ->(project) { { title: project.title } }
+
   has_keyword_search!(
     against: %i[title subtitle description],
     associated_against: {
