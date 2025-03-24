@@ -2,6 +2,7 @@
 class Maker < ApplicationRecord
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:first_name, :last_name].freeze
+  KEYWORD_SEARCH_ATTRIBUTES = %i[first_name middle_name last_name display_name].freeze
 
   PACKAGING_ATTRIBUTES = %i[id name first_name middle_name last_name display_name suffix prefix].freeze
 
@@ -14,6 +15,7 @@ class Maker < ApplicationRecord
   include SerializedAbilitiesFor
   include WithParsedName
   include SearchIndexable
+  include HasKeywordSearch
 
   # Associations
   has_many :collaborators, dependent: :destroy
@@ -34,6 +36,7 @@ class Maker < ApplicationRecord
   validate :name_is_present!
 
   # Search
+  has_keyword_search! against: KEYWORD_SEARCH_ATTRIBUTES
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500)

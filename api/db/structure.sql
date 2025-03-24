@@ -1790,6 +1790,39 @@ CREATE VIEW public.permissions AS
 
 
 --
+-- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pg_search_documents (
+    id bigint NOT NULL,
+    content text,
+    searchable_type character varying,
+    searchable_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: pg_search_documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.pg_search_documents_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: pg_search_documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.pg_search_documents_id_seq OWNED BY public.pg_search_documents.id;
+
+
+--
 -- Name: project_collection_subjects; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3149,6 +3182,13 @@ ALTER TABLE ONLY public.pages ALTER COLUMN id SET DEFAULT nextval('public.pages_
 
 
 --
+-- Name: pg_search_documents id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents ALTER COLUMN id SET DEFAULT nextval('public.pg_search_documents_id_seq'::regclass);
+
+
+--
 -- Name: project_collection_subjects id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -3553,6 +3593,14 @@ ALTER TABLE ONLY public.pending_entitlement_transitions
 
 ALTER TABLE ONLY public.pending_entitlements
     ADD CONSTRAINT pending_entitlements_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pg_search_documents pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT pg_search_documents_pkey PRIMARY KEY (id);
 
 
 --
@@ -4908,6 +4956,13 @@ CREATE INDEX index_pending_entitlements_on_subject_type_and_subject_id ON public
 --
 
 CREATE INDEX index_pending_entitlements_on_user_id ON public.pending_entitlements USING btree (user_id);
+
+
+--
+-- Name: index_pg_search_documents_on_searchable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_searchable ON public.pg_search_documents USING btree (searchable_type, searchable_id);
 
 
 --
@@ -7379,4 +7434,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250129200019'),
 ('20250210192150'),
 ('20250210230256'),
-('20250306230246');
+('20250306230246'),
+('20250312204629');
+
+
