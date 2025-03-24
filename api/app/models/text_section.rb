@@ -9,6 +9,7 @@ class TextSection < ApplicationRecord
   include SearchIndexable
   include Metadata
   include Attachments
+  include HasKeywordSearch
 
   # Constants
   KIND_COVER_IMAGE = "cover_image"
@@ -89,6 +90,9 @@ class TextSection < ApplicationRecord
   scope :ordered, -> { order(position: :asc) }
 
   # Search
+  has_multisearch! websearch: true,
+    against: [:name, :body],
+    additional_attributes: ->(text_section) { { title: text_section.name } }
   searchkick(
     callbacks: :async,
     batch_size: 25,

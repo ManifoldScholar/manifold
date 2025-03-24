@@ -12,6 +12,7 @@ class Annotation < ApplicationRecord
   include TrackedCreator
   include Filterable
   include FlaggableResource
+  include HasKeywordSearch
   include SearchIndexable
   include SoftDeletable
 
@@ -93,6 +94,9 @@ class Annotation < ApplicationRecord
   delegate :text_nodes, to: :text_section, prefix: true
 
   # Search
+  has_multisearch! websearch: true,
+    against: [:subject, :body],
+    additional_attributes: ->(annotation) { { title: annotation.subject } }
   searchkick(callbacks: :async,
              batch_size: 500,
              highlight: [:title, :body])
