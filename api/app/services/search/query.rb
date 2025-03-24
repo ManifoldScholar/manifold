@@ -25,7 +25,7 @@ module Search
 
     # @return [Search::Results]
     def execute
-      results = perform_search
+      results = ENV['US_PG_SEARCH'] ? PgSearch.multisearch(keyword) : perform_search
 
       ::Search::Results.new results
     end
