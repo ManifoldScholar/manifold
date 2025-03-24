@@ -9,7 +9,6 @@ import FatalError from "global/components/FatalError";
 import SignInUp from "global/components/sign-in-up";
 import has from "lodash/has";
 import get from "lodash/get";
-import { CSSTransition } from "react-transition-group";
 import {
   uiVisibilityActions,
   routingActions,
@@ -17,8 +16,6 @@ import {
 } from "actions";
 import { meAPI, requests } from "api";
 import { select, loaded } from "utils/entityUtils";
-import ReactGA from "react-ga4";
-import Typekit from "react-typekit";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "routes";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
@@ -26,6 +23,7 @@ import { FrontendModeContext } from "helpers/contexts";
 import { entityStoreActions } from "actions";
 import CookiesBanner from "global/components/CookiesBanner";
 import Utility from "global/components/utility";
+import { Helmet } from "react-helmet-async";
 
 const { request } = entityStoreActions;
 const routes = getRoutes();
@@ -168,7 +166,13 @@ class ManifoldContainer extends PureComponent {
     const tkId = get(this.props.settings, "attributes.theme.typekitId");
     const tkEnabled = !!tkId;
     if (!tkEnabled) return null;
-    return <Typekit kitId={tkId} />;
+    return (
+      <Helmet>
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
+        <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
+        <link rel="stylesheet" href={`https://use.typekit.net/${tkId}.css`} />
+      </Helmet>
+    );
   }
 
   render() {
@@ -189,17 +193,10 @@ class ManifoldContainer extends PureComponent {
           {this.props.confirm}
           <LoadingBar loading={this.props.loading} />
           <ColorScheme settings={this.props.settings} />
-          <CSSTransition
-            in={this.props.visibility.signInUpOverlay}
-            timeout={{ enter: 300, exit: 300 }}
-            unmountOnExit
-          >
-            <SignInUp.Overlay
-              key="signInUpOverlay"
-              hideOverlay={hideOverlay}
-              hash={get(this, "props.routing.locationBeforeTransitions.hash")}
-            />
-          </CSSTransition>
+          <SignInUp.Overlay
+            active={this.props.visibility.signInUpOverlay}
+            hideOverlay={hideOverlay}
+          />
           {fatalError.error ? (
             <div className="global-container">
               <FatalError

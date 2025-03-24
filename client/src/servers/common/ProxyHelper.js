@@ -22,6 +22,7 @@ class ProxyHelper {
     this.defineProxy(app, "/browser.config.js", this.assetTarget);
     this.defineProxy(app, "/build", this.assetTarget);
     this.defineProxy(app, "/static", this.assetTarget);
+    this.defineProxy(app, "/ws", this.assetTarget);
     this.defineProxy(app, /.*hot-update.*$/, this.assetTarget);
   }
 

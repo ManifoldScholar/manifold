@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Notification from "global/components/Notification";
-import {
-  TransitionGroup as ReactTransitionGroup,
-  CSSTransition
-} from "react-transition-group";
 import { connect } from "react-redux";
 import classNames from "classnames";
 import { commonActions } from "actions/helpers";
@@ -37,8 +33,7 @@ export class NotificationsComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: 0,
-      updating: false
+      removing: false
     };
     this.commonActions = commonActions(props.dispatch);
   }
@@ -54,18 +49,6 @@ export class NotificationsComponent extends Component {
     return nextProps.notifications !== this.props.notifications;
   }
 
-  componentDidUpdate() {
-    if (this.notificationList) {
-      this.setState(
-        {
-          height: this.notificationList.offsetHeight,
-          updating: false
-        },
-        this.updateNotifications
-      );
-    }
-  }
-
   // Only necessary for debugging/testing notifications before they exist.
   componentWillUnmount() {
     if (this.timer) clearTimeout(this.timer);
@@ -74,46 +57,18 @@ export class NotificationsComponent extends Component {
     }
   }
 
-  updateNotifications() {
-    const listHeight = this.notificationList.offsetHeight;
-
-    if (this.props.animate === true) {
-      this.timer = setTimeout(() => {
-        if (!this.state.updating) {
-          this.setState({
-            updating: true
-          });
-          this.timer = null;
-        }
-        if (this.notificationList) {
-          this.notificationList.setAttribute(
-            "style",
-            "transform: translate3d(0, 0px, 0); height: auto;"
-          );
-        }
-      }, 200);
-      this.notificationList.setAttribute(
-        "style",
-        "transform: " +
-          "translate3d(0, " +
-          (this.state.height - listHeight) +
-          "px, 0);" +
-          "height:" +
-          this.state.height +
-          "px;"
-      );
-    }
+  get filteredNotifications() {
+    return this.props.notifications.notifications.filter(
+      notification => notification.scope === this.props.scope
+    );
   }
 
-  filteredNotifications = () => {
-    const notifications = this.props.notifications.notifications;
-    return notifications.filter(notification => {
-      if (notification.scope === this.props.scope) {
-        return true;
-      }
-      return false;
+  get listClass() {
+    return classNames(`notifications-list--context-${this.props.style}`, {
+      "notifications-list": true,
+      "notifications-list--updating": this.state.updating
     });
-  };
+  }
 
   // Debug wrapper method to pass random notification in.
   // NB: Do not use to produce actual notifications.
@@ -131,13 +86,6 @@ export class NotificationsComponent extends Component {
     }
   };
 
-  listClass() {
-    return classNames(`notifications-list--context-${this.props.style}`, {
-      "notifications-list": true,
-      "notifications-list--updating": this.state.updating
-    });
-  }
-
   removeNotification = id => {
     const notification = this.props.notifications.notifications.find(
       listNotification => listNotification.id === id
@@ -147,38 +95,13 @@ export class NotificationsComponent extends Component {
       notification.removeNotification();
     }
 
-    this.commonActions.clearNotifications();
+    // allow time for exit transition to run before unmounting
+    this.notificationList?.classList.add("removing");
+    setTimeout(() => {
+      this.commonActions.clearNotifications();
+      this.notificationList?.classList.remove("removing");
+    }, 200);
   };
-
-  renderNotifications() {
-    let notificationList = null;
-    if (this.props.notifications.notifications.length > 0) {
-      notificationList = this.filteredNotifications().map(notification => {
-        return (
-          <CSSTransition
-            mountOnEnter
-            key={notification.id}
-            classNames="notification"
-            timeout={{ enter: 500, exit: 500 }}
-            unmountOnExit
-          >
-            <div className="notifications-list__inner">
-              <Notification
-                style={this.props.style}
-                id={notification.id}
-                level={notification.level}
-                heading={notification.heading}
-                body={notification.body}
-                removeNotification={this.removeNotification}
-              />
-            </div>
-          </CSSTransition>
-        );
-      });
-    }
-
-    return <ReactTransitionGroup>{notificationList}</ReactTransitionGroup>;
-  }
 
   render() {
     return (
@@ -188,9 +111,19 @@ export class NotificationsComponent extends Component {
             this.notificationList = notificationList;
           }}
           key="notifications-list"
-          className={this.listClass()}
+          className={this.listClass}
         >
-          {this.renderNotifications()}
+          {this.filteredNotifications.map(notification => (
+            <Notification
+              key={notification.id}
+              style={this.props.style}
+              id={notification.id}
+              level={notification.level}
+              heading={notification.heading}
+              body={notification.body}
+              removeNotification={this.removeNotification}
+            />
+          ))}
         </div>
       </section>
     );

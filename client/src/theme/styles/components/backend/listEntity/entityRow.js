@@ -121,7 +121,7 @@ export default `
       padding-top: 9px;
       padding-bottom: 9px;
 
-      &.focus-visible {
+      &:focus-visible {
         outline: 0;
       }
     }
@@ -146,7 +146,7 @@ export default `
           box-shadow var(--transition-duration-default) ease-out;
 
         &:hover,
-        &.focus-visible {
+        &:focus-visible {
           outline: 0;
 
           ${respond(
@@ -421,13 +421,13 @@ export default `
 
       .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):hover
         &,
-      .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active).focus-visible
+      .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):focus-visible
         & {
         text-decoration-line: underline;
       }
 
       .entity-row__row-link--in-grid:hover &,
-      .entity-row__row-link--in-grid.focus-visible & {
+      .entity-row__row-link--in-grid:focus-visible & {
         ${respond(
           `text-decoration-line: underline;`,
           breakpointLessOne(65),

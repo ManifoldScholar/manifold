@@ -16,7 +16,7 @@ export const Wrapper = styled("div", transientOptions)`
     $library &&
     `
       &:hover,
-      &.focus-visible {
+      &:focus-visible {
         --PoweredBy-svg-color: var(--color-base-neutral95);
         --PoweredBy-text-color: var(--color-base-neutral95);
 
@@ -65,7 +65,7 @@ export const LogoWrapper = styled("div", transientOptions)`
       display: inline-block;
 
       &:hover,
-      &.focus-visible {
+      &:focus-visible {
         --PoweredBy-svg-color: var(--color-base-neutral-white);
         --PoweredBy-text-color: var(--color-base-neutral-white);
 

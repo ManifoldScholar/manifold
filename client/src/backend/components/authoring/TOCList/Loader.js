@@ -1,5 +1,5 @@
 import React from "react";
-import Loadable from "@docusaurus/react-loadable";
+import loadable from "@loadable/component";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
 import * as Styled from "./styles";
 
@@ -9,14 +9,7 @@ const Loading = ({ timedOut, retry }) => {
   return null;
 };
 
-const TOCList = Loadable({
-  loader: () => import("./List"),
-  render(loaded, props) {
-    const List = loaded.default;
-    return <List {...props} />;
-  },
-  loading: Loading
-});
+const TOCList = loadable(() => import("./List"));
 
 const Fallback = ({ error }) => {
   return (
@@ -30,7 +23,7 @@ const Fallback = ({ error }) => {
 export default function Loader(props) {
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
-      <TOCList {...props} />
+      <TOCList fallback={Loading} {...props} />
     </ErrorBoundary>
   );
 }

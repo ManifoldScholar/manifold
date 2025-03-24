@@ -3,6 +3,7 @@ import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 import webpackConfig from "../config/browser-dev.config";
 import ch from "../../src/helpers/consoleHelpers";
+import paths from "../helpers/paths";
 
 const compiler = webpack(webpackConfig);
 let timer;
@@ -24,24 +25,29 @@ compiler.hooks.compile.tap("ManifoldWebpackDevServer", params => {
 });
 
 const hot = !process.env.DISABLE_HMR;
-const allowedHosts = ["manifold.lvh", "localhost", "127.0.0.1", "manifold-dev.lvh", "manifold-stable.lvh", "manifold-dev.ngrok.io"];
+const allowedHosts = [
+  "manifold.lvh",
+  "localhost",
+  "127.0.0.1",
+  "manifold-dev.lvh",
+  "manifold-stable.lvh",
+  "manifold-dev.ngrok.io"
+];
 if (process.env.DOMAIN) allowedHosts.push(process.env.DOMAIN);
 
 const serverOptions = {
   hot,
+  host: process.env.DOMAIN || "localhost",
   allowedHosts,
-  quiet: false,
-  noInfo: false,
-  inline: false,
-  lazy: false,
+  port: environment.devPort,
   headers: { "Access-Control-Allow-Origin": "*" },
-  sockHost: process.env.DOMAIN || "localhost",
-  sockPort: environment.devPort,
-  stats: {
-    modules: false,
-    colors: true
+  static: {
+    directory: paths.root
   }
 };
 
-const server = new WebpackDevServer(compiler, serverOptions);
-server.listen(environment.devPort);
+const server = new WebpackDevServer(serverOptions, compiler);
+
+(async () => {
+  await server.start();
+})();
