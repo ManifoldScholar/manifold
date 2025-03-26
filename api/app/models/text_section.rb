@@ -88,6 +88,7 @@ class TextSection < ApplicationRecord
   scope :ordered, -> { order(position: :asc) }
 
   # Search
+  has_multisearch! websearch: true
   searchkick(
     callbacks: :async,
     batch_size: 25,

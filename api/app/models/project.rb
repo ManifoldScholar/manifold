@@ -50,6 +50,8 @@ class Project < ApplicationRecord
     project.title[/^((a|the|an) )?(?<title>.*)$/i, :title]
   end
 
+  has_multisearch! websearch: true
+
   # PaperTrail
   has_paper_trail
 
