@@ -22,7 +22,7 @@ export default function Overlay({ hideOverlay, active = false }) {
         aria-labelledby={uid}
         inert={!active ? "" : undefined}
       >
-        <TrapContent uid={uid} hideOverlay={hideOverlay} />
+        {active && <TrapContent uid={uid} hideOverlay={hideOverlay} />}
       </Styled.Dialog>
     </FocusTrap>
   );
