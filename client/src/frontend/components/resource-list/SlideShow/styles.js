@@ -92,12 +92,6 @@ export const SlidesWrapper = styled.div`
   overflow-x: auto;
   color: var(--color-neutral-text-extra-light);
   background-color: var(--color-base-neutral-black);
-
-  @supports (scrollbar-color: auto) {
-    scrollbar-color: var(--color-interaction-light)
-      var(--color-base-neutral-black);
-    scrollbar-width: auto;
-  }
 `;
 
 export const Slide = styled.figure`
