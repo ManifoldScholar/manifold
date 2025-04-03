@@ -4,7 +4,6 @@ import { useState, useLayoutEffect, useEffect } from "react";
 
 const scrollLockStyles = {
   overflow: "hidden",
-  scrollbarGutter: "stable",
   position: "absolute",
   width: "100%"
 };
