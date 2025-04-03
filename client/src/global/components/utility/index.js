@@ -1,5 +1,4 @@
 import Pagination from "./Pagination/index";
-import EdgeLockScroll from "./EdgeLockScroll";
 import EntityCount from "./EntityCount/index";
 import IconComposer from "./IconComposer";
 import LockBodyScroll from "./LockBodyScroll";
@@ -11,7 +10,6 @@ import RouteAnnouncer from "./RouteAnnouncer";
 
 export default {
   Pagination,
-  EdgeLockScroll,
   EntityCount,
   IconComposer,
   LockBodyScroll,
