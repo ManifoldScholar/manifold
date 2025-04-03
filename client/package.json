@@ -36,7 +36,7 @@
     "_serve:ssr:rescue:render": "SSR_RESCUE=TRUE nodemon -q ${BUILD_IN}dist/manifold/ssr/manifold-client-ssr.js --watch ${BUILD_IN}dist/manifold/ssr/manifold-client-ssr.js",
     "_watch:banner": "node ./script/banner.js",
     "_watch:ssr": "IS_BUILD=true node -r @babel/register node_modules/.bin/webpack --color --watch --config ./webpack/config/ssr-dev.config.js",
-    "_watch:browser": "node -r @babel/register webpack/servers/webpack-dev-server --progress --color",
+    "_watch:browser": "node -r @babel/register node_modules/.bin/webpack serve --progress --color --config ./webpack/config/browser-dev.config.js",
     "_wait:builds": "node script/wait.js --name=\"SSR\" --base=${BUILD_IN}dist/manifold/ --on=ssr/manifold-client-ssr-rescue.js,ssr/manifold-client-ssr.js,manifest.json"
   },
   "lint-staged": {
