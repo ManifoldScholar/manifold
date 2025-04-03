@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
-import Utility from "global/components/utility";
 import { notificationActions } from "actions";
 import Content from "../Content";
 import * as Styled from "./styles";
 
 export default function DrawerWrapper({
-  lockScroll = "hover",
+  lockScroll = "always",
   open = false,
   dispatch,
   history,
@@ -38,20 +37,6 @@ export default function DrawerWrapper({
       history.push(closeUrl, { noScroll: true });
     }
   };
-
-  if (lockScroll === "hover") {
-    return (
-      <Utility.EdgeLockScroll>
-        <Content
-          headerId={uid}
-          handleLeaveEvent={handleLeaveEvent}
-          hasConfirm={!!closeUrl}
-          open={open}
-          {...props}
-        />
-      </Utility.EdgeLockScroll>
-    );
-  }
 
   if (lockScroll === "always") {
     return (
