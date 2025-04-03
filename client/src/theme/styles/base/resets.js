@@ -37,6 +37,10 @@ export default `
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
     font-size: 100%;
+    @supports (scrollbar-color: auto) {
+      scrollbar-color: var(--color-accent-primary);
+      scrollbar-width: auto;
+    }
   }
 
   /* Set core body defaults */
