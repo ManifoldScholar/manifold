@@ -39,6 +39,9 @@ const browserConfig = {
   devServer: {
     hot: true,
     liveReload: false,
+    client: {
+      overlay: false // use react-refresh overlay instead
+    },
     host: process.env.DOMAIN || "localhost",
     allowedHosts,
     port: environment.devPort,
@@ -52,14 +55,7 @@ const browserConfig = {
       directory: paths.root
     }
   },
-  plugins: [
-    new ReactRefreshWebpackPlugin({
-      overlay: {
-        sockHost: process.env.DOMAIN || "localhost",
-        sockPort: environment.devPort
-      }
-    })
-  ],
+  plugins: [new ReactRefreshWebpackPlugin()],
 
   optimization: {
     moduleIds: "named"
