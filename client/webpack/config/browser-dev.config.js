@@ -4,14 +4,17 @@ import { mergeWithRules } from "webpack-merge";
 import environment from "../helpers/environment";
 import paths from "../helpers/paths";
 
-const browserConfig = {
-  entry: {
-    "build/manifold-client-browser": [
-      "webpack/hot/only-dev-server",
-      `webpack-dev-server/client?http://0.0.0.0:${environment.devPort}`
-    ]
-  },
+const allowedHosts = [
+  "manifold.lvh",
+  "localhost",
+  "127.0.0.1",
+  "manifold-dev.lvh",
+  "manifold-stable.lvh",
+  "manifold-dev.ngrok.io"
+];
+if (process.env.DOMAIN) allowedHosts.push(process.env.DOMAIN);
 
+const browserConfig = {
   mode: "development",
   module: {
     rules: [
@@ -35,11 +38,18 @@ const browserConfig = {
 
   devServer: {
     hot: true,
+    liveReload: false,
+    host: process.env.DOMAIN || "localhost",
+    allowedHosts,
+    port: environment.devPort,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
       "Access-Control-Allow-Headers":
         "X-Requested-With, content-type, Authorization"
+    },
+    static: {
+      directory: paths.root
     }
   },
   plugins: [
@@ -52,7 +62,7 @@ const browserConfig = {
   ],
 
   optimization: {
-    moduleIds: "named",
+    moduleIds: "named"
     // runtimeChunk: "single"
   }
 };
