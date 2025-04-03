@@ -28,12 +28,13 @@ export const Wrapper = styled("article", transientOptions)`
 
     --Thumbnail-before-opacity: ${$minimal ? 0 : 1};
     --Thumbnail-before-background-color: ${
-      $minimal ? "var(--hover-color)" : transparentize("neutral90", 0.3)
+      $minimal ? "var(--hover-color)" : transparentize("neutral90", 0.15)
     };
     --Thumbnail-before-display: ${$iconOnly ? "none" : "block"};
 
     color: var(--Thumbnail-color, var(--color-base-neutral-white));
-    background-position: 0 0;
+    background-color:
+    background-position: center;
     background-size: cover;
   `}
 

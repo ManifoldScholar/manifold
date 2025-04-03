@@ -7,9 +7,11 @@ import {
 } from "theme/styles/mixins";
 
 export const Card = styled.article`
+  --color: var(--strong-color);
   --Thumbnail-Icon-background-color: transparent;
 
   display: flex;
+  color: var(--color);
 `;
 
 export const Preview = styled.div`
