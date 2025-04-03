@@ -40,6 +40,7 @@ class NotationViewerLink extends PureComponent {
         <Link
           className={className}
           to={{ pathname: url, state: { noScroll: true } }}
+          aria-label={notation.attributes.title}
         >
           {children}
         </Link>
