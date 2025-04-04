@@ -12,6 +12,7 @@
     "metadata_block_title": "Metadata",
     "table_of_contents_block_title": "$t(glossary.table_of_contents_title_case)",
     "resources_block_title": "$t(glossary.resource_title_case_other)",
+    "resources_block_resources_subtitle": "Single Resources",
     "texts_block_title": "$t(glossary.text_title_case_other)",
     "blocks": "Blocks:",
     "layout": "Layout:",

@@ -22,10 +22,6 @@ export const Grid = styled.ul`
 `;
 
 export const Link = styled(LinkComponent)`
-  --Thumbnail-background-color: var(
-    --card-bg-color,
-    var(--color-base-neutral05)
-  );
   --Thumbnail-border-radius: var(--box-border-radius);
   --Thumbnail-Icon-background-color: transparent;
 

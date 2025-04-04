@@ -42,4 +42,8 @@ export const Link = styled.a`
       75
     )}
   }
+
+  .screen-reader-text {
+    color: initial;
+  }
 `;

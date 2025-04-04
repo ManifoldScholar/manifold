@@ -517,7 +517,7 @@ export default `
 
     &--dark {
       justify-content: flex-start;
-      color: var(--color-neutral-ui-extra-light);
+      color: var(--color-neutral-text-extra-light);
       text-align: left;
       background-color: var(--color-base-neutral80);
 

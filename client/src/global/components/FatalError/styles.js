@@ -51,7 +51,6 @@ export const Message = styled.h3`
   font-family: var(--font-family-heading);
   font-weight: var(--font-weight-regular);
   line-height: 1.333;
-  color: var(--color-base-neutral50);
 `;
 
 export const ErrorTitle = styled.h1`
@@ -91,7 +90,6 @@ export const StackTitle = styled.h3`
 export const Footnote = styled.div`
   font-size: 12px;
   font-style: italic;
-  color: var(--color-base-neutral40);
   text-align: center;
 `;
 

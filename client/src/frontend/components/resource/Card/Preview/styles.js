@@ -51,7 +51,7 @@ export const TextWrapper = styled.div`
   line-height: 13px;
   color: var(--color);
   white-space: nowrap;
-  background-color: var(--color-base-neutral20);
+  background-color: var(--color-base-neutral30);
   transition: color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
