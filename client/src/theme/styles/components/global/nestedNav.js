@@ -166,7 +166,7 @@ export default `
   &__link,
   &__button,
   &__disclosure-button {
-    &.focus-visible {
+    &:focus-visible {
       ${defaultHoverStyle}
       outline: 0;
     }

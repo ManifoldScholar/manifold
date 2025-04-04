@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { UIDConsumer } from "react-uid";
 import Preview from "./Types";
-import { CSSTransition } from "react-transition-group";
 import GlobalOverlay from "global/components/Overlay";
 import has from "lodash/has";
 import capitalize from "lodash/capitalize";
@@ -84,20 +83,14 @@ export default class ResourcePreview extends Component {
       <UIDConsumer>
         {id => (
           <>
-            <CSSTransition
-              in={this.state.overlayOpen}
-              classNames="overlay-full"
-              timeout={{ enter: 300, exit: 300 }}
-              unmountOnExit
+            <GlobalOverlay
+              open={this.state.overlayOpen}
+              appearance="overlay-full bg-neutral90"
+              closeCallback={this.closeOverlay}
+              id={id}
             >
-              <GlobalOverlay
-                appearance="overlay-full bg-neutral90"
-                closeCallback={this.closeOverlay}
-                id={id}
-              >
-                <PreviewComponent resource={this.props.resource} />
-              </GlobalOverlay>
-            </CSSTransition>
+              <PreviewComponent resource={this.props.resource} />
+            </GlobalOverlay>
             <Styled.PreviewToggle
               onClick={this.handleOpenPreviewClick}
               aria-controls={id}

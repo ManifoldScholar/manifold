@@ -49,7 +49,7 @@ export default `
       }
 
       .section-next-section__link:hover &,
-      .section-next-section__link.focus-visible & {
+      .section-next-section__link:focus-visible & {
         ${defaultHoverStyle}
       }
     }

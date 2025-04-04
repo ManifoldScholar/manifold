@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { transientOptions } from "helpers/emotionHelpers";
 import { respond, fluidShrink } from "theme/styles/mixins";
-import { lSetAspectRatio } from "@castiron/style-mixins";
 
 const maxWidth = `640px`;
 const hideBreakpoint = `675px`;
@@ -86,7 +85,7 @@ export const Block = styled.div`
 `;
 
 export const TypeIcon = styled.div`
-  ${lSetAspectRatio(1, 1)}
+  aspect-ratio: 1 / 1;
   display: flex;
   grid-row: 1 / 3;
   grid-column: 1;

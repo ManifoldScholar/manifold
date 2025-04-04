@@ -21,16 +21,6 @@ import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import { createServerFetchDataContext } from "hooks/api/contexts/InternalContext";
 
-// Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
-// default TLS value appears to fix this. I believe this issue has
-// been addressed in Node 10.x, and in theory we can remove this once
-// we no longer need to support Node 8 and 9.
-// See https://github.com/nodejs/node/issues/21513
-// See https://github.com/nodejs/node/issues/16196#issuecomment-393091912
-const tls = require("tls");
-
-tls.DEFAULT_ECDH_CURVE = "auto";
-
 const socket = config.services.client.rescueEnabled
   ? null
   : config.services.client.socket;
