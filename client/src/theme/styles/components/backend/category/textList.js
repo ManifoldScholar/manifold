@@ -40,6 +40,7 @@ export default `
     }
 
     &__text {
+      contain: paint;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
