@@ -15,20 +15,6 @@ export default class DialogConfirm extends PureComponent {
     message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
   };
 
-  static contextTypes = {
-    pauseKeyboardEvents: PropTypes.func,
-    unpauseKeyboardEvents: PropTypes.func
-  };
-
-  componentDidMount() {
-    if (this.context.pauseKeyboardEvents) this.context.pauseKeyboardEvents();
-  }
-
-  componentWillUnmount() {
-    if (this.context.unpauseKeyboardEvents)
-      this.context.unpauseKeyboardEvents();
-  }
-
   render() {
     return (
       <UIDConsumer name={id => `dialog-${id}`}>
