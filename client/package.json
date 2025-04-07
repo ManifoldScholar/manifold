@@ -110,7 +110,7 @@
     "redux-actions": "^2.0",
     "redux-promise": "^0.6",
     "serialize-javascript": "^6.0.2",
-    "serve-static": "^1.16.2",
+    "serve-static": "^2.2.0",
     "slate": "^0.90.0",
     "slate-history": "^0.86.0",
     "slate-hyperscript": "^0.77.0",
