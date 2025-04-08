@@ -6,12 +6,12 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import * as Styled from "./styles";
 
 export default function AddSectionForm({ textId, nextPosition, refresh }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [openInEditor, setOpenInEditor] = useState(false);
 
@@ -37,18 +37,18 @@ export default function AddSectionForm({ textId, nextPosition, refresh }) {
       if (refresh) refresh();
 
       if (openInEditor)
-        return history.push(lh.link("backendTextSectionEdit", textId, res.id));
+        return navigate(lh.link("backendTextSectionEdit", textId, res.id));
 
-      history.push(lh.link("backendTextSections", textId));
+      navigate(lh.link("backendTextSections", textId));
     },
-    [history, textId, refresh, openInEditor]
+    [navigate, textId, refresh, openInEditor]
   );
 
   const buttonClasses = "button-secondary button-secondary--outlined";
 
   const handleCancelClick = e => {
     e.preventDefault();
-    history.push(lh.link("backendTextSections", textId));
+    navigate(lh.link("backendTextSections", textId));
   };
 
   const handleEditorClick = () => {

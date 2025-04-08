@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import Collapse from "global/components/Collapse";
 import { GroupSettingsForm } from "frontend/components/reading-group/forms";
 import withConfirmation from "hoc/withConfirmation";
@@ -19,7 +19,7 @@ function ReadingGroupSettings({
   confirm,
   onArchive
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function doDuplicate({ name, copyAnnotations, archive, openOnProceed }) {
@@ -47,7 +47,7 @@ function ReadingGroupSettings({
     const duplicateRequest = request(call, requests.feReadingGroupClone, {});
     dispatch(duplicateRequest).promise.then(({ data: { id } }) => {
       if (openOnProceed) {
-        history.push(lh.link("frontendReadingGroupDetail", id));
+        navigate(lh.link("frontendReadingGroupDetail", id));
       } else {
         closeDrawer();
       }

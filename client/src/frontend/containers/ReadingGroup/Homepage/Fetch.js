@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { readingGroupsAPI } from "api";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { childRoutes } from "helpers/router";
 import { useFetch } from "hooks";
 import * as Styled from "../styles";
@@ -12,7 +12,7 @@ function ReadingGroupHomepageFetchContainer({
   refresh,
   fetchVersion
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { data: projects } = useFetch({
     request: [readingGroupsAPI.collected, readingGroup.id, "projects"],
@@ -64,7 +64,7 @@ function ReadingGroupHomepageFetchContainer({
           readingGroup,
           categories,
           responses,
-          history,
+          navigate,
           refresh
         }
       })}
