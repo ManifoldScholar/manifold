@@ -106,9 +106,13 @@ export default function useDraggableCategory({
           }
           setDragState({ status: "idle" });
         },
-        onDrop() {
+        onDrop({ source }) {
           setDragState({ status: "idle" });
-          if (typeof onDropInto === "function") onDropInto();
+          if (
+            typeof onDropInto === "function" &&
+            source.data.type !== "categories"
+          )
+            onDropInto();
         }
       });
     }
