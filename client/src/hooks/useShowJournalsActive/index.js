@@ -1,4 +1,4 @@
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import useFromStore from "../useFromStore";
 
 export default function useShowJournalsActive() {
