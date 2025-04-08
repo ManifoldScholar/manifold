@@ -5,7 +5,7 @@ import HighlightAnnotation from "./HighlightAnnotation";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import { annotationsAPI, requests } from "api";
 
 const { request } = entityStoreActions;
