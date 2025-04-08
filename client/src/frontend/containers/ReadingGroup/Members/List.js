@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom-v5-compat";
 import { useTranslation } from "react-i18next";
 import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
@@ -13,7 +13,7 @@ import withConfirmation from "hoc/withConfirmation";
 
 function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const { pagination } = useListQueryParams({ initSize: 10 });
@@ -50,7 +50,7 @@ function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
         dispatch,
         readingGroup,
         onRemoveClick: removeMember,
-        onEditSuccess: () => history.push(membersRoute)
+        onEditSuccess: () => navigate(membersRoute)
       }
     });
   };

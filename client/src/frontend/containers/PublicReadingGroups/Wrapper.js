@@ -1,8 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { childRoutes } from "helpers/router";
 import { useFromStore } from "hooks";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import lh from "helpers/linkHandler";
 
 function PublicReadingGroupsContainer({ route }) {
@@ -12,11 +11,11 @@ function PublicReadingGroupsContainer({ route }) {
     }
   } = useFromStore("settings", "select");
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   if (disablePublicReadingGroups && pathname === "/groups")
-    history.push(lh.link("frontendMyReadingGroups"));
+    navigate(lh.link("frontendMyReadingGroups"));
 
   return childRoutes(route);
 }

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { sectionsAPI } from "api";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
@@ -14,11 +14,11 @@ export default function SectionPropertiesForm({
   startSectionId
 }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onSuccess = () => {
     if (refreshText) refreshText();
-    history.push(lh.link("backendTextSections", textId));
+    navigate(lh.link("backendTextSections", textId));
   };
 
   const disableHide = startSectionId === section?.id;

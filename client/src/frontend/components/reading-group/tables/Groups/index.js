@@ -12,7 +12,7 @@ import { ArchiveGroup, EditGroup, JoinGroup, LeaveGroup } from "./actions";
 import { ListFilters } from "global/components/list";
 import lh from "helpers/linkHandler";
 import { useListFilters } from "hooks";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 
 export default function GroupsTable(props) {
   const {
@@ -33,7 +33,7 @@ export default function GroupsTable(props) {
     options: { groupSort: true, groupStatus: showStatusFilter }
   });
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const userCanJoin = group => {
     if (group.attributes.currentUserRole !== "none") return false;
@@ -41,7 +41,7 @@ export default function GroupsTable(props) {
   };
 
   const handleJoinSuccess = group => {
-    history.push(lh.link("frontendReadingGroupDetail", group.id));
+    navigate(lh.link("frontendReadingGroupDetail", group.id));
   };
 
   return (
