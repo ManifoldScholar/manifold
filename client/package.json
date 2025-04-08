@@ -99,6 +99,7 @@
     "react-router": "^5.x",
     "react-router-config": "^5.x",
     "react-router-dom": "^5.x",
+    "react-router-dom-v5-compat": "^6.x",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-side-effect": "^2.1",
     "react-sociable": "^0.x",
