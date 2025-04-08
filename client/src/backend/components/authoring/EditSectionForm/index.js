@@ -11,7 +11,7 @@ import ContentEditor from "global/components/form/ContentEditor";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { serializeToSlate } from "global/components/form/ContentEditor/serializers";
 import { formatHtml } from "global/components/form/ContentEditor/utils/helpers";
 import { useFromStore } from "hooks";
@@ -49,7 +49,7 @@ export default function EditSectionForm({
   refresh
 }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const initialSlateValue = useMemo(() => {
     return getInitialSlateValue(section?.attributes.body);
@@ -83,8 +83,8 @@ export default function EditSectionForm({
   const onSuccess = useCallback(() => {
     if (!closeOnSave) return;
     if (refresh) refresh();
-    history.push(lh.link("backendTextSections", textId));
-  }, [history, textId, refresh, closeOnSave]);
+    navigate(lh.link("backendTextSections", textId));
+  }, [navigate, textId, refresh, closeOnSave]);
 
   const [hasErrors, setHasErrors] = useState(false);
   const [warnErrors, setWarnErrors] = useState(false);

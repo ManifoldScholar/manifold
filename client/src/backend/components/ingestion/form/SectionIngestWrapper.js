@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
 import Upload from "./Upload";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { ingestionsAPI } from "api";
 import lh from "helpers/linkHandler";
 
@@ -13,7 +13,7 @@ export default function SectionIngestionFormWrapper({
   cancelUrl
 }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const createIngestion = model => {
@@ -26,9 +26,9 @@ export default function SectionIngestionFormWrapper({
 
   const onSuccess = useCallback(
     res => {
-      history.push(lh.link("backendTextSectionIngestIngest", textId, res.id));
+      navigate(lh.link("backendTextSectionIngestIngest", textId, res.id));
     },
-    [history, textId]
+    [navigate, textId]
   );
 
   return (
@@ -43,7 +43,6 @@ export default function SectionIngestionFormWrapper({
       <Upload
         header={sectionId ? t("texts.reingest") : undefined}
         cancelUrl={cancelUrl}
-        history={history}
         location={location}
         sectionId={sectionId}
         sectionIngest
