@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import lh from "helpers/linkHandler";
 import { usersAPI } from "api";
 import Form from "global/components/form";
@@ -9,7 +9,7 @@ import * as Styled from "./styles";
 
 export default function UserProperties({ user, saveLabel }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { attributes } = user ?? {};
 
@@ -57,7 +57,7 @@ export default function UserProperties({ user, saveLabel }) {
 
   const redirectToUser = result => {
     const path = lh.link("backendRecordsUser", result.id);
-    history.push(path, { keepNotifications: true });
+    navigate(path, { keepNotifications: true });
   };
 
   const createUser = formValue => {

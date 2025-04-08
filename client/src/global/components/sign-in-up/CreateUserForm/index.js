@@ -9,7 +9,7 @@ import { useFromStore } from "hooks";
 import CreateFormFields from "./CreateFormFields";
 import Form from "global/components/form";
 import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import * as SharedStyles from "../styles";
 
 export default function CreateUserForm({
@@ -20,7 +20,7 @@ export default function CreateUserForm({
   const settings = useFromStore("settings", "select");
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const authentication = useFromStore("authentication");
   const { currentUser } = authentication ?? {};
@@ -77,8 +77,9 @@ export default function CreateUserForm({
       if (!willRedirect && !redirectToHomeOnSignup)
         handleViewChange("create-update");
       if (redirectToHomeOnSignup && !location?.state?.postLoginRedirect) {
-        history.replace(location, {
-          postLoginRedirect: "/"
+        navigate(location, {
+          postLoginRedirect: "/",
+          replace: true
         });
       }
     }
@@ -87,7 +88,7 @@ export default function CreateUserForm({
     handleViewChange,
     willRedirect,
     redirectToHomeOnSignup,
-    history,
+    navigate,
     location
   ]);
 

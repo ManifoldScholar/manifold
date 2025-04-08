@@ -5,7 +5,7 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { textsAPI } from "api";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import {
   formatTreeData,
   formatTOCData
@@ -20,7 +20,7 @@ export default function AddEditTOCEntryForm({
   setTree
 }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const formatDataOnSubmit = useCallback(
     (data, model) => {
@@ -60,9 +60,9 @@ export default function AddEditTOCEntryForm({
   const onSuccess = useCallback(
     (_, res) => {
       setTree(formatTreeData(res.data?.attributes?.toc));
-      history.push(lh.link("backendTextTOC", textId));
+      navigate(lh.link("backendTextTOC", textId));
     },
-    [textId, history, setTree]
+    [textId, navigate, setTree]
   );
 
   const sectionOptions = sections.map(s => ({

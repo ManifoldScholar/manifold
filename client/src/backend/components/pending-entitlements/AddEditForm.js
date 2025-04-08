@@ -5,16 +5,16 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { pendingEntitlementsAPI, projectsAPI, journalsAPI } from "api";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 
 export default function AddEditEntitlementForm({ refresh, entitlement }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
-    history.push(lh.link("backendRecordsEntitlements"));
-  }, [history, refresh]);
+    navigate(lh.link("backendRecordsEntitlements"));
+  }, [navigate, refresh]);
 
   const formatData = data => {
     const { expiresOn, ...rest } = data.attributes;
