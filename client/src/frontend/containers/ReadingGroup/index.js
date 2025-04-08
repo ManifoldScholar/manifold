@@ -1,6 +1,10 @@
 import React, { useState, useMemo } from "react";
 import { readingGroupsAPI } from "api";
-import { useParams, useHistory, useLocation } from "react-router-dom";
+import {
+  useParams,
+  useNavigate,
+  useLocation
+} from "react-router-dom-v5-compat";
 import { childRoutes } from "helpers/router";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -16,7 +20,7 @@ import Authorize from "hoc/Authorize";
 
 export default function ReadingGroup({ route }) {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -61,7 +65,7 @@ export default function ReadingGroup({ route }) {
     settings,
     refresh: () => setFetchVersion(prev => prev + 1),
     fetchVersion,
-    history,
+    navigate,
     route,
     readingGroup,
     dispatch
@@ -70,7 +74,7 @@ export default function ReadingGroup({ route }) {
   const handleClose = () => {
     const { pathname, search = "" } = location;
     const url = `${pathname}${search}`;
-    history.push(url);
+    navigate(url);
   };
 
   const settingsProps = {
@@ -108,7 +112,6 @@ export default function ReadingGroup({ route }) {
             <RegisterBreadcrumbs {...breadcrumbProps} />
             <GroupHeading
               readingGroup={readingGroup}
-              history={history}
               location={location}
             />
             {childRoutes(route, { childProps })}

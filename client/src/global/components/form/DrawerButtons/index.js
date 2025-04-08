@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -15,14 +15,14 @@ export default function DrawerButtons({
   onSaveAndCloseClick,
   saveRef
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const buttonClasses = "button-secondary button-secondary--outlined";
 
   const handleCancelClick = e => {
     e.preventDefault();
-    cancelUrl ? history.push(cancelUrl) : history.goBack();
+    navigate(cancelUrl ? cancelUrl : -1);
   };
 
   return (
