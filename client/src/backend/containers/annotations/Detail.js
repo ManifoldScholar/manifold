@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom-v5-compat";
 import { useFetch, useApiCallback } from "hooks";
 import { annotationsAPI } from "api";
 import lh from "helpers/linkHandler";
@@ -21,7 +21,7 @@ function AnnotationDetailContainer({
 }) {
   const { t } = useTranslation();
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { data: annotation, refresh: refreshAnnotation } = useFetch({
     request: [annotationsAPI.show, id],
@@ -39,12 +39,10 @@ function AnnotationDetailContainer({
 
         if (readingGroup) {
           refreshAnnotations();
-          history.push(
-            lh.link("backendReadingGroupAnnotations", readingGroup.id)
-          );
+          navigate(lh.link("backendReadingGroupAnnotations", readingGroup.id));
         } else {
           refresh();
-          history.push(lh.link("backendRecordsAnnotations"));
+          navigate(lh.link("backendRecordsAnnotations"));
         }
       });
   }, [

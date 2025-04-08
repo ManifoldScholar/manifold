@@ -7,12 +7,12 @@ import SectionsList from "./SectionsList";
 import { useUIDSeed } from "react-uid";
 import { textsAPI } from "api";
 import lh from "helpers/linkHandler";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 
 export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
   const { t } = useTranslation();
   const uidSeed = useUIDSeed();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [sectionName, setSectionName] = useState();
   const [sections, setSections] = useState([]);
@@ -52,8 +52,8 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
 
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
-    history.push(lh.link("backendProjectTexts", projectId));
-  }, [history, projectId, refresh]);
+    navigate(lh.link("backendProjectTexts", projectId));
+  }, [navigate, projectId, refresh]);
 
   return (
     <FormContainer.Form
