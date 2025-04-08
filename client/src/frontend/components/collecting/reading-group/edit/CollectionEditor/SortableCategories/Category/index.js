@@ -12,7 +12,7 @@ export default function Category({
   isStatic,
   ...restProps
 }) {
-  const [manualCollapsed, setManualCollapsed] = useState(false);
+  const [manualCollapsed, setManualCollapsed] = useState(true);
 
   const onDropInto = () => {
     if (manualCollapsed) setManualCollapsed(false);

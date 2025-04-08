@@ -22,9 +22,9 @@ export default function Content({
     dragState?.status === "has-left" ||
     (isMarkdown && !!dragState?.type && dragState.type !== "categories");
 
-  const isDragging = dragState
-    ? dragState.status !== "idle" && dragState.type === "categories"
-    : false;
+  // const isDragging = dragState
+  //   ? dragState.status !== "idle" && dragState.type === "categories"
+  //   : false;
 
   const collectableOver =
     manualCollapsed &&
@@ -32,7 +32,7 @@ export default function Content({
     !!dragState?.type &&
     dragState?.type !== "categories";
 
-  const displayAsCollapsed = collapsed || (!isDragging && manualCollapsed);
+  // const displayAsCollapsed = collapsed || (!isDragging && manualCollapsed);
 
   return (
     <Styled.Wrapper ref={wrapperRef} $hidden={hidden}>
@@ -50,7 +50,7 @@ export default function Content({
           manualCollapsed={manualCollapsed}
           collectableOver={collectableOver}
         />
-        <Styled.Inner $collapsed={displayAsCollapsed}>
+        <Styled.Inner $collapsed={manualCollapsed}>
           {isMarkdown ? (
             <MarkdownBody category={category} />
           ) : (

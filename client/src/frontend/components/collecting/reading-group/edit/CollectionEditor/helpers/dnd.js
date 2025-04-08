@@ -6,7 +6,6 @@ export const highlightDroppedEl = ({ element, selector }) => {
     if (!el) return;
 
     el.focus();
-    el.scrollIntoView({ block: "center" });
     el.animate(
       [
         {
