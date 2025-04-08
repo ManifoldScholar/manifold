@@ -1,4 +1,8 @@
-import { utilityPrimary, defaultTransitionProps } from "theme/styles/mixins";
+import {
+  utilityPrimary,
+  defaultTransitionProps,
+  buttonUnstyled
+} from "theme/styles/mixins";
 import { invalidFormElement } from "./mixins";
 
 export default `
@@ -158,5 +162,10 @@ export default `
     &.invalid {
       ${invalidFormElement}
     }
+  }
+
+  .opblock-control-arrow {
+    ${buttonUnstyled}
+    padding-inline: 0.5rem;
   }
 `;
