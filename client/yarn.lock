@@ -1489,6 +1489,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.7.6":
+  version: 7.27.0
+  resolution: "@babel/runtime@npm:7.27.0"
+  dependencies:
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 10c0/35091ea9de48bd7fd26fb177693d64f4d195eb58ab2b142b893b7f3fa0f1d7c677604d36499ae0621a3703f35ba0c6a8f6c572cc8f7dc0317213841e493cf663
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.16.7":
   version: 7.16.7
   resolution: "@babel/template@npm:7.16.7"
@@ -2199,6 +2208,13 @@ __metadata:
   version: 2.10.1
   resolution: "@popperjs/core@npm:2.10.1"
   checksum: 10c0/7f2bd70a482adc302e222255d117aa01002acaa293595473d828c1d72d471af797f895e1671fb74d50479ed6c2dba0db5a2a1ae32681095412954253bf4e3f07
+  languageName: node
+  linkType: hard
+
+"@remix-run/router@npm:1.23.0":
+  version: 1.23.0
+  resolution: "@remix-run/router@npm:1.23.0"
+  checksum: 10c0/eaef5cb46a1e413f7d1019a75990808307e08e53a39d4cf69c339432ddc03143d725decef3d6b9b5071b898da07f72a4a57c4e73f787005fcf10162973d8d7d7
   languageName: node
   linkType: hard
 
@@ -7426,6 +7442,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"history@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "history@npm:5.3.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.7.6"
+  checksum: 10c0/812ec839386222d6437bd78d9f05db32e47d105ada0ad8834b32626919dd2fee7a10001bc489510f93a8069d02f118214bd8d42a82f7cf9daf8e84fbcbbb2016
+  languageName: node
+  linkType: hard
+
 "hoist-non-react-statics@npm:^2.5.0":
   version: 2.5.5
   resolution: "hoist-non-react-statics@npm:2.5.5"
@@ -9244,6 +9269,7 @@ __metadata:
     react-router: "npm:^5.x"
     react-router-config: "npm:^5.x"
     react-router-dom: "npm:^5.x"
+    react-router-dom-v5-compat: "npm:^6.30.0"
     react-router-redux: "npm:^5.0.0-alpha.9"
     react-side-effect: "npm:^2.1"
     react-sociable: "npm:^0.x"
@@ -11728,6 +11754,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-router-dom-v5-compat@npm:^6.30.0":
+  version: 6.30.0
+  resolution: "react-router-dom-v5-compat@npm:6.30.0"
+  dependencies:
+    "@remix-run/router": "npm:1.23.0"
+    history: "npm:^5.3.0"
+    react-router: "npm:6.30.0"
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+    react-router-dom: 4 || 5
+  checksum: 10c0/68ad2e7afd663d3601b3172bc6868d1a3860da8ae88ca796e7383900440fca6fe0982511e6ef861b906194d02f576c790447a027b08fd2361601e9902ed913ff
+  languageName: node
+  linkType: hard
+
 "react-router-dom@npm:^5.x":
   version: 5.3.3
   resolution: "react-router-dom@npm:5.3.3"
@@ -11775,6 +11816,17 @@ __metadata:
   peerDependencies:
     react: ">=15"
   checksum: 10c0/f08f38231161f977095a162c68e6a49d8b3add43162cc730ff57522b4f8f6d2fd29b488248b38f9d902060176f6e20a79b14f5478f2e0388f7e6ee3588c879d2
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.30.0":
+  version: 6.30.0
+  resolution: "react-router@npm:6.30.0"
+  dependencies:
+    "@remix-run/router": "npm:1.23.0"
+  peerDependencies:
+    react: ">=16.8"
+  checksum: 10c0/e6f20cf5c47ec057a057a4cfb9a55983d0a5b4b3314d20e07f0a70e59e004f51778d4dac415aee1e4e64db69cc4cd72e5acf8fd60dcf07d909895b8863b0b023
   languageName: node
   linkType: hard
 

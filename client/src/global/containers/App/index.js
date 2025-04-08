@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { BrowserRouter, StaticRouter } from "react-router-dom";
+import { CompatRouter } from "react-router-dom-v5-compat";
 import Dialog from "global/components/dialog";
 import { Provider } from "react-redux";
 import Manifold from "global/containers/Manifold";
@@ -101,15 +102,17 @@ class App extends Component {
       <Provider store={this.props.store} key="provider">
         <UIDReset prefix="uid_">
           <Router {...routerProps}>
-            <Analytics
-              dispatch={this.props.store.dispatch}
-              settings={this.settings}
-            >
-              <HelmetProvider context={this.props.helmetContext}>
-                <GlobalStyles styles={styles} />
-                <Manifold confirm={this.renderConfirm()} />
-              </HelmetProvider>
-            </Analytics>
+            <CompatRouter>
+              <Analytics
+                dispatch={this.props.store.dispatch}
+                settings={this.settings}
+              >
+                <HelmetProvider context={this.props.helmetContext}>
+                  <GlobalStyles styles={styles} />
+                  <Manifold confirm={this.renderConfirm()} />
+                </HelmetProvider>
+              </Analytics>
+            </CompatRouter>
           </Router>
         </UIDReset>
       </Provider>
