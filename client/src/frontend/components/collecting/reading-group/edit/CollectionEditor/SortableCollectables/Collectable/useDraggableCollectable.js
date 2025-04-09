@@ -12,7 +12,6 @@ import {
   extractClosestEdge
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import { isShallowEqual } from "../../helpers/utils";
-import { highlightDroppedEl } from "../../helpers/dnd";
 
 export default function useDraggableCollectable({
   type,
@@ -114,14 +113,14 @@ export default function useDraggableCollectable({
           id,
           index,
           categoryId,
-          rect: element.getBoundingClientRect()
+          rect: element.getBoundingClientRect(),
+          element: collectableEl
         }),
         onDragStart: () => {
           setDragState({ status: "dragging", type });
         },
         onDrop: () => {
           setDragState({ status: "idle" });
-          highlightDroppedEl({ selector: `[data-collectable-id="${id}"]` });
         },
         onGenerateDragPreview({ nativeSetDragImage, location }) {
           setCustomNativeDragPreview({
