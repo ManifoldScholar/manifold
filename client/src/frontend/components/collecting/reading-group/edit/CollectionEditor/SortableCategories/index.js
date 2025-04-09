@@ -145,6 +145,25 @@ export default function SortableCategories({
     onCategoryDrop
   );
 
+  const onCategoryRemove = category => {
+    callbacks.onCategoryRemove(category);
+    setCategories(categories.filter(c => c.id !== category.id));
+  };
+
+  const onCollectableRemove = categoryId => collectable => {
+    callbacks.onCollectableRemove(collectable);
+    const update = {
+      ...mappings,
+      [categoryId]: {
+        ...mappings[categoryId],
+        [collectable.type]: mappings[categoryId][collectable.type].filter(
+          c => c !== collectable.id
+        )
+      }
+    };
+    setMappings(update);
+  };
+
   return (
     <Styled.Container ref={scrollableRef}>
       <Styled.Categories $active={active}>
@@ -159,10 +178,12 @@ export default function SortableCategories({
               mappings={mappings}
               responses={responses}
               callbacks={{
-                ...callbacks,
+                onCategoryRemove,
+                onCollectableRemove: onCollectableRemove(c.id),
                 onCollectableMove,
                 onCategoryMove,
-                onCollectableSort
+                onCollectableSort,
+                onCategoryEditError: callbacks.onCategoryEditError
               }}
               targetCategory={targetCategory}
               {...listProps}
@@ -174,10 +195,12 @@ export default function SortableCategories({
         mappings={mappings}
         responses={responses}
         callbacks={{
-          ...callbacks,
+          onCategoryRemove,
+          onCollectableRemove: onCollectableRemove("$uncategorized$"),
           onCollectableMove,
           onCategoryMove,
-          onCollectableSort
+          onCollectableSort,
+          onCategoryEditError: callbacks.onCategoryEditError
         }}
         targetCategory={targetCategory}
       />
