@@ -18,5 +18,5 @@ export const highlightDroppedEl = ({ element, selector }) => {
         iterations: 1
       }
     );
-  }, 750);
+  }, 500);
 };

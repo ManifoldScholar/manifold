@@ -5,10 +5,8 @@ import Collectable from "./Collectable";
 const CollectablesList = React.memo(function CollectablesList({
   type,
   collectedIds,
-  responses,
-  onRemove,
-  onMove,
-  categoryId
+  categoryId,
+  ...collectableProps
 }) {
   const hasCollectables = collectedIds.length > 0;
 
@@ -25,10 +23,8 @@ const CollectablesList = React.memo(function CollectablesList({
         id={id}
         index={index}
         type={type}
-        responses={responses}
-        onRemove={onRemove}
-        onMove={onMove}
         categoryId={categoryId}
+        {...collectableProps}
       />
     </li>
   ));
