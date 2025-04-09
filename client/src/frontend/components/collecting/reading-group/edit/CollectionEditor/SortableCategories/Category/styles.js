@@ -25,7 +25,7 @@ export const collapsed = `
 export const Shadow = styled.div`
   ${panelRounded}
   background-color: var(--weak-color);
-  height: 64px;
+  height: 52.8px;
 `;
 
 export const Wrapper = styled.div`
@@ -33,7 +33,6 @@ export const Wrapper = styled.div`
   padding-block-end: ${categoryVerticalPadding};
   margin-top: 0;
 
-  ${collapsible}
   ${({ $hidden }) => $hidden && collapsed};
 `;
 
