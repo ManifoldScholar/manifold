@@ -1,6 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable
+} from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 
 export default class SortableEntities extends PureComponent {
