@@ -151,10 +151,10 @@ export default function useSortableCategories(
             if (source?.data?.type === "categories") {
               setActive(false);
               const result = handleCategoryDrop(source, location, categories);
-              onCategoryDrop(result, source.data.id);
+              onCategoryDrop(result, source.data.id, source.data.element);
             } else {
               const result = handleCollectableDrop(source, location, mappings);
-              onCollectableDrop(result, source);
+              onCollectableDrop(result, source, source.data.element);
             }
           }
         }),

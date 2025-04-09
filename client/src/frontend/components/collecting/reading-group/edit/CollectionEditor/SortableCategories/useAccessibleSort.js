@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { announce } from "@atlaskit/pragmatic-drag-and-drop-live-region";
 import { handleAddCollectableToCategory } from "./useSortableCategories";
-import { highlightDroppedEl } from "../helpers/dnd";
 import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge";
 
 const omitMarkdownBlocks = (index, direction, categories) => {
@@ -68,13 +67,12 @@ export default function useAccessibleSort(
       { id: target.id },
       mappings
     );
-    onCollectableDrop(result, { data: { id, type } }, false);
+    onCollectableDrop(result, { data: { id, type } });
     announce(
       t("messages.item_moved_category", {
         category: target.title || t("common.uncategorized")
       })
     );
-    highlightDroppedEl({ selector: `[data-collectable-id="${id}"]` });
   };
 
   const onCollectableSort = sourceId => ({ id, type, direction }) => {
@@ -96,13 +94,12 @@ export default function useAccessibleSort(
         })
       }
     };
-    onCollectableDrop(result, { data: { id, type } }, false);
+    onCollectableDrop(result, { data: { id, type } });
     announce(
       t("messages.item_moved_position", {
         direction
       })
     );
-    highlightDroppedEl({ selector: `[data-collectable-id="${id}"]` });
   };
 
   const onCategoryMove = element => (id, direction) => {
@@ -116,13 +113,12 @@ export default function useAccessibleSort(
       indexOfTarget: finishIndex,
       closestEdgeOfTarget: direction === "down" ? "bottom" : "top"
     });
-    onCategoryDrop(result, id, false);
+    onCategoryDrop(result, id, element);
     announce(
       t("messages.category_moved", {
         direction
       })
     );
-    highlightDroppedEl({ element });
   };
 
   return {
