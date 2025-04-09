@@ -4,7 +4,7 @@ import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import classNames from "classnames";
 import { withRouter } from "react-router-dom";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Chip from "./Chip";
 import { withTranslation } from "react-i18next";
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Slot from "./Slot";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import { actionCalloutsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import * as Styled from "./styles";
