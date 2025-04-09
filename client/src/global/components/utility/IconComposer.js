@@ -7,15 +7,6 @@ import endsWith from "lodash/endsWith";
 import humps from "utils/humps";
 import MissingIcon from "./MissingIcon";
 
-IconComposer.propTypes = {
-  icon: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  fill: PropTypes.string,
-  stroke: PropTypes.string,
-  svgProps: PropTypes.object
-};
-
 export default function IconComposer({
   icon = MissingIcon,
   fill = "currentColor",
@@ -39,3 +30,12 @@ export default function IconComposer({
 
   return React.createElement(IconComponent ?? MissingIcon, props);
 }
+
+IconComposer.propTypes = {
+  icon: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  fill: PropTypes.string,
+  stroke: PropTypes.string,
+  svgProps: PropTypes.object
+};
