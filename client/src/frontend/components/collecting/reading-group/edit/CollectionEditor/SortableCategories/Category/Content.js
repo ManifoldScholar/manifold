@@ -49,6 +49,7 @@ export default function Content({
           setCollapsed={() => setManualCollapsed(!manualCollapsed)}
           manualCollapsed={manualCollapsed}
           collectableOver={collectableOver}
+          onCategoryMove={callbacks.onCategoryMove(categoryRef?.current)}
         />
         <Styled.Inner $collapsed={manualCollapsed}>
           {isMarkdown ? (

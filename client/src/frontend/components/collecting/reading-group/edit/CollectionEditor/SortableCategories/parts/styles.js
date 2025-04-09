@@ -72,6 +72,10 @@ export const Action = styled.div`
   &[data-drag-handle] {
     cursor: grab;
   }
+
+  & + & {
+    margin-block-start: 12px;
+  }
 `;
 
 export const Inner = styled.div`

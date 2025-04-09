@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Shadow from "./Shadow";
 import Preview from "./Preview";
 import Content from "./Content";
@@ -10,6 +10,7 @@ export default function Category({
   index,
   category,
   isStatic,
+  targetCategory,
   ...restProps
 }) {
   const [manualCollapsed, setManualCollapsed] = useState(true);
@@ -25,6 +26,10 @@ export default function Category({
     isStatic,
     onDropInto
   });
+
+  useEffect(() => {
+    if (targetCategory === id) setManualCollapsed(false);
+  }, [targetCategory, setManualCollapsed, id]);
 
   if (!category) return null;
 

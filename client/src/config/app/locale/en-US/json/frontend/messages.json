@@ -5,6 +5,8 @@
     "cannot_move_up": "Cannot move up. Item is already in the first category.",
     "cannot_move_down": "Cannot move down. Item is already in the last category.",
     "item_moved_category": "Item moved to category {{category}}",
+    "item_moved_position": "Item moved {{direction}} one position",
+    "category_moved": "Category moved {{direction}} one position",
     "collected": "You collected {{title}}",
     "uncollected": "You uncollected {{title}}",
     "confirm": "Are you sure?",

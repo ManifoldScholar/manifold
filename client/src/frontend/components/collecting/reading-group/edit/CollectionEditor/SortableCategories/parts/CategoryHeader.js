@@ -6,6 +6,7 @@ import Collapse from "global/components/Collapse";
 import IconComposer from "global/components/utility/IconComposer";
 import CategoryEdit from "./CategoryEdit";
 import CategoryRemove from "./CategoryRemove";
+import Disclosure from "frontend/components/collecting/Disclosure";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import * as Styled from "./styles";
 
@@ -18,7 +19,8 @@ function CategoryHeader({
   initExpanded,
   setCollapsed,
   manualCollapsed,
-  collectableOver
+  collectableOver,
+  onCategoryMove
 }) {
   const { t } = useTranslation();
 
@@ -44,8 +46,8 @@ function CategoryHeader({
 
   const kind = markdownOnly ? "block" : "category";
   const collapseToggleLabel = manualCollapsed
-    ? `forms.expand_${kind}`
-    : `forms.collapse_${kind}`;
+    ? `forms.category.expand_${kind}`
+    : `forms.category.collapse_${kind}`;
 
   return (
     <>
@@ -81,9 +83,41 @@ function CategoryHeader({
                   {t("forms.category.edit")}
                 </span>
               </Styled.Action>
-              <Styled.Action as="button" ref={dragHandleRef} data-drag-handle>
-                <IconComposer icon="grabber32" size="default" />
-              </Styled.Action>
+              <Disclosure.Provider>
+                <Disclosure.Toggle>
+                  <Styled.Action
+                    as="button"
+                    ref={dragHandleRef}
+                    data-drag-handle
+                  >
+                    <IconComposer icon="grabber32" size="default" />
+                  </Styled.Action>
+                </Disclosure.Toggle>
+                <Disclosure.Content>
+                  {({ closeMenu }) => (
+                    <>
+                      <Styled.Action
+                        as="button"
+                        onClick={() => {
+                          closeMenu();
+                          onCategoryMove(category.id, "up");
+                        }}
+                      >
+                        {t("forms.category.move_up")}
+                      </Styled.Action>
+                      <Styled.Action
+                        as="button"
+                        onClick={() => {
+                          closeMenu();
+                          onCategoryMove(category.id, "down");
+                        }}
+                      >
+                        {t("forms.category.move_down")}
+                      </Styled.Action>
+                    </>
+                  )}
+                </Disclosure.Content>
+              </Disclosure.Provider>
             </Styled.Actions>
           )}
         </Styled.Header>

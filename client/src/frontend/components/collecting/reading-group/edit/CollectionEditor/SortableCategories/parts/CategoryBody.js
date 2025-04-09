@@ -32,7 +32,8 @@ export default function CategoryBody({
       collectedIds: getCollectedIdsByType(type),
       responses: getResponsesByType(type),
       onRemove: callbacks.onCollectableRemove,
-      onMove: callbacks.onCollectableMove(category?.id)
+      onMove: callbacks.onCollectableMove(category?.id),
+      onSort: callbacks.onCollectableSort(category?.id)
     };
   }
 

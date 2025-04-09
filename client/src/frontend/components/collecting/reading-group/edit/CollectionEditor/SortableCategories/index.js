@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import isEqual from "lodash/isEqual";
 import useSortableCategories from "./useSortableCategories";
@@ -17,7 +17,6 @@ function setCategoriesFromProps(collection, categoriesData) {
     } = categoriesData?.find(c => cat.id === c.id) ?? { attributes: {} };
     return {
       id: cat.id,
-      position: cat.position,
       markdownOnly,
       title: titlePlaintext
     };
@@ -42,32 +41,58 @@ export default function SortableCategories({
   const [categories, setCategories] = useState(
     setCategoriesFromProps(collection, categoriesData)
   );
+  const prevCategories = useRef(categories);
+  const prevCatsFromProps = useRef(
+    setCategoriesFromProps(collection, categoriesData)
+  );
   const [mappings, setMappings] = useState(setMappingsFromProps(collection));
+  const prevMappings = useRef(mappings);
+  const prevMapsFromProps = useRef(setMappingsFromProps(collection));
 
   useEffect(() => {
     const update = setCategoriesFromProps(collection, categoriesData);
-    if (!isEqual(update, categories)) setCategories(update);
+    if (!isEqual(prevCategories.current, categories)) {
+      prevCategories.current = categories;
+    } else if (
+      !isEqual(prevCatsFromProps.current, update) &&
+      !isEqual(update, categories)
+    ) {
+      setCategories(update);
+      prevCatsFromProps.current = update;
+    } else {
+      prevCatsFromProps.current = update;
+    }
   }, [categoriesData, collection, categories]);
 
   useEffect(() => {
     const update = setMappingsFromProps(collection);
-    if (!isEqual(update, mappings)) setMappings(update);
+    if (!isEqual(prevMappings.current, mappings)) {
+      prevMappings.current = mappings;
+    } else if (
+      !isEqual(prevMapsFromProps.current, update) &&
+      !isEqual(update, mappings)
+    ) {
+      setMappings(update);
+      prevMapsFromProps.current = update;
+    } else {
+      prevMapsFromProps.current = update;
+    }
   }, [collection, mappings]);
 
-  const onCategoryDrop = (result, sourceId) => {
-    const priorPosition = categories.find(c => c.id === sourceId).position;
+  const onCategoryDrop = (result, sourceId, setLocal = true) => {
+    const priorPosition = categories.findIndex(c => c.id === sourceId) + 1;
     const position = result.findIndex(c => c.id === sourceId) + 1;
 
     if (position === 0 || position === priorPosition) return;
 
-    setCategories(result);
+    if (setLocal) setCategories(result);
     callbacks.onCategoryDrag({
       id: sourceId,
       position
     });
   };
 
-  const onCollectableDrop = (result, source) => {
+  const onCollectableDrop = (result, source, setLocal = true) => {
     const {
       data: { type, id }
     } = source;
@@ -89,7 +114,7 @@ export default function SortableCategories({
 
     if (priorCategoryId === categoryId && priorPosition === position) return;
 
-    setMappings(result);
+    if (setLocal) setMappings(result);
     callbacks.onCollectableDrag({
       groupingId: categoryId,
       id,
@@ -105,10 +130,16 @@ export default function SortableCategories({
     onCollectableDrop
   );
 
-  const { onCollectableMove } = useAccessibleSort(
+  const {
+    onCollectableMove,
+    onCollectableSort,
+    onCategoryMove,
+    targetCategory
+  } = useAccessibleSort(
     categories,
     mappings,
-    onCollectableDrop
+    onCollectableDrop,
+    onCategoryDrop
   );
 
   return (
@@ -124,7 +155,13 @@ export default function SortableCategories({
               category={category}
               mappings={mappings}
               responses={responses}
-              callbacks={{ ...callbacks, onCollectableMove }}
+              callbacks={{
+                ...callbacks,
+                onCollectableMove,
+                onCategoryMove,
+                onCollectableSort
+              }}
+              targetCategory={targetCategory}
               {...listProps}
             />
           );
@@ -133,7 +170,13 @@ export default function SortableCategories({
       <Uncategorized
         mappings={mappings}
         responses={responses}
-        callbacks={{ ...callbacks, onCollectableMove }}
+        callbacks={{
+          ...callbacks,
+          onCollectableMove,
+          onCategoryMove,
+          onCollectableSort
+        }}
+        targetCategory={targetCategory}
       />
     </Styled.Container>
   );
