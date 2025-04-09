@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { announce } from "@atlaskit/pragmatic-drag-and-drop-live-region";
 import { handleAddCollectableToCategory } from "./useSortableCategories";
 import { highlightDroppedEl } from "../helpers/dnd";
+import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge";
 
 const omitMarkdownBlocks = (index, direction, categories) => {
   const destination = categories[index];
@@ -42,9 +44,12 @@ const getTargetCategory = (sourceId, categories, direction, t) => {
 export default function useAccessibleSort(
   categories,
   mappings,
-  onCollectableDrop
+  onCollectableDrop,
+  onCategoryDrop
 ) {
   const { t } = useTranslation();
+
+  const [targetCategory, setTargetCategory] = useState(null);
 
   const onCollectableMove = sourceId => ({ id, type, direction }) => {
     const target = getTargetCategory(
@@ -56,12 +61,14 @@ export default function useAccessibleSort(
 
     if (!target) return;
 
+    setTargetCategory(target.id);
+
     const result = handleAddCollectableToCategory(
       { data: { id, type, categoryId: sourceId } },
       { id: target.id },
       mappings
     );
-    onCollectableDrop(result, { data: { id, type } });
+    onCollectableDrop(result, { data: { id, type } }, false);
     announce(
       t("messages.item_moved_category", {
         category: target.title || t("common.uncategorized")
@@ -70,5 +77,58 @@ export default function useAccessibleSort(
     highlightDroppedEl({ selector: `[data-collectable-id="${id}"]` });
   };
 
-  return { onCollectableMove };
+  const onCollectableSort = sourceId => ({ id, type, direction }) => {
+    const list = mappings[sourceId][type];
+
+    const startIndex = list.findIndex(m => m === id);
+    const finishIndex = direction === "down" ? startIndex + 1 : startIndex - 1;
+
+    const result = {
+      ...mappings,
+      [sourceId]: {
+        ...mappings[sourceId],
+        [type]: reorderWithEdge({
+          axis: "vertical",
+          list,
+          startIndex,
+          indexOfTarget: finishIndex,
+          closestEdgeOfTarget: direction === "down" ? "bottom" : "top"
+        })
+      }
+    };
+    onCollectableDrop(result, { data: { id, type } }, false);
+    announce(
+      t("messages.item_moved_position", {
+        direction
+      })
+    );
+    highlightDroppedEl({ selector: `[data-collectable-id="${id}"]` });
+  };
+
+  const onCategoryMove = element => (id, direction) => {
+    const startIndex = categories.findIndex(c => c.id === id);
+    const finishIndex = direction === "down" ? startIndex + 1 : startIndex - 1;
+
+    const result = reorderWithEdge({
+      axis: "vertical",
+      list: categories,
+      startIndex,
+      indexOfTarget: finishIndex,
+      closestEdgeOfTarget: direction === "down" ? "bottom" : "top"
+    });
+    onCategoryDrop(result, id, false);
+    announce(
+      t("messages.category_moved", {
+        direction
+      })
+    );
+    highlightDroppedEl({ element });
+  };
+
+  return {
+    onCollectableMove,
+    onCategoryMove,
+    onCollectableSort,
+    targetCategory
+  };
 }

@@ -18,6 +18,10 @@ export const Action = styled.button`
       ${defaultFocusStyle}
     }
   }
+
+  & + & {
+    margin-block-start: 12px;
+  }
 `;
 
 export const ActionPadded = styled(Action)`
