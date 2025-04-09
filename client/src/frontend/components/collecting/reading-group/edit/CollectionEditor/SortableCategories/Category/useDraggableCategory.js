@@ -13,7 +13,6 @@ import {
   extractClosestEdge
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import { isShallowEqual } from "../../helpers/utils";
-import { highlightDroppedEl } from "../../helpers/dnd";
 
 export default function useDraggableCategory({
   id,
@@ -132,14 +131,14 @@ export default function useDraggableCategory({
           category,
           id,
           index,
-          rect: element.getBoundingClientRect()
+          rect: element.getBoundingClientRect(),
+          element: categoryEl
         }),
         onDragStart: () => {
           setDragState({ status: "dragging", type: "categories" });
         },
         onDrop: () => {
           setDragState({ status: "idle" });
-          highlightDroppedEl({ element: categoryEl });
         },
         onGenerateDragPreview({ nativeSetDragImage, location }) {
           setCustomNativeDragPreview({

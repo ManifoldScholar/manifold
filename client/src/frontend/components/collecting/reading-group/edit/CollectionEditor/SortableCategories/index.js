@@ -5,6 +5,7 @@ import useSortableCategories from "./useSortableCategories";
 import useAccessibleSort from "./useAccessibleSort";
 import Uncategorized from "./Uncategorized";
 import Category from "./Category";
+import { highlightDroppedEl, highlightNewEl } from "../helpers/dnd";
 import * as Styled from "./styles";
 
 function setCategoriesFromProps(collection, categoriesData) {
@@ -79,20 +80,21 @@ export default function SortableCategories({
     }
   }, [collection, mappings]);
 
-  const onCategoryDrop = (result, sourceId, setLocal = true) => {
+  const onCategoryDrop = (result, sourceId, element) => {
     const priorPosition = categories.findIndex(c => c.id === sourceId) + 1;
     const position = result.findIndex(c => c.id === sourceId) + 1;
 
     if (position === 0 || position === priorPosition) return;
 
-    if (setLocal) setCategories(result);
+    setCategories(result);
     callbacks.onCategoryDrag({
       id: sourceId,
       position
     });
+    highlightDroppedEl({ element });
   };
 
-  const onCollectableDrop = (result, source, setLocal = true) => {
+  const onCollectableDrop = (result, source) => {
     const {
       data: { type, id }
     } = source;
@@ -114,13 +116,14 @@ export default function SortableCategories({
 
     if (priorCategoryId === categoryId && priorPosition === position) return;
 
-    if (setLocal) setMappings(result);
+    setMappings(result);
     callbacks.onCollectableDrag({
       groupingId: categoryId,
       id,
       position,
       type
     });
+    highlightNewEl({ selector: `[data-collectable-id="${id}"]` });
   };
 
   const { active, scrollableRef } = useSortableCategories(
