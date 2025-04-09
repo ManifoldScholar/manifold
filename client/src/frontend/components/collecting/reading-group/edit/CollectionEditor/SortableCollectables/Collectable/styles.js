@@ -1,11 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  defaultTransitionProps,
-  respond,
-  dragging,
-  utilityPrimary,
-  panelRounded
-} from "theme/styles/mixins";
+import { dragging, utilityPrimary, panelRounded } from "theme/styles/mixins";
 import {
   collapsed,
   collapsible
@@ -96,57 +90,6 @@ export const Actions = styled.div`
   align-items: center;
   margin-inline-start: 10px;
   color: var(--color);
-  transition: transform var(--transition-duration-default)
-    ${defaultTransitionProps};
-  transform: translateX(80px);
-
-  ${respond(
-    `transition: none;
-    transform: translateX(0);`,
-    50,
-    "max"
-  )}
-
-  ${({ $keyboardActions }) =>
-    $keyboardActions &&
-    `
-      transition: transform ${defaultTransitionProps};
-      transform: translateX(0);
-      `}
-`;
-
-export const TabGroup = styled.div`
-  display: inherit;
-  gap: inherit;
-`;
-
-export const KeyboardActions = styled.div`
-  display: inherit;
-  gap: inherit;
-  align-items: inherit;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity ${defaultTransitionProps},
-    visibility transform var(--transition-duration-default)
-      var(--transition-duration-default) var(--transition-timing-function);
-
-  ${respond(
-    `
-      width: 0;
-      margin-left: 0;
-      transition: none;`,
-    50,
-    "max"
-  )}
-
-  ${({ $visible }) =>
-    $visible &&
-    `
-      visibility: visible;
-      opacity: 1;
-      transition: opacity var(--transition-duration-default) calc(var(--  transition-duration-default) / 2) var(--transition-timing-function),
-      visibility var(--transition-duration-default) calc(var(--transition-duration-default) / 2) var(--transition-timing-function);
-      `}
 `;
 
 export const Label = styled.span`
