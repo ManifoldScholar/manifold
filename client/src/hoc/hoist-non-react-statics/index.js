@@ -54,7 +54,7 @@ TYPE_STATICS[React.forwardRef] = FORWARD_REF_STATICS;
 TYPE_STATICS[React.memo] = MEMO_STATICS;
 
 function getStatics(component) {
-  return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS;
+  return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS; // eslint-disable-line dot-notation
 }
 
 const defineProperty = Object.defineProperty;
@@ -100,7 +100,7 @@ export default function hoistNonReactStatics(
         try {
           // Avoid failures from read-only properties
           defineProperty(targetComponent, key, descriptor);
-        } catch (e) {}
+        } catch (e) {} // eslint-disable-line no-empty
       }
     }
   }

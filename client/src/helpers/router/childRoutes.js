@@ -32,7 +32,7 @@ const renderChildRoutes = (route, renderOptions) => {
       };
     }
 
-    let rendered = (
+    const rendered = (
       <childRoute.component
         {...adjustedProps}
         {...options.childProps}

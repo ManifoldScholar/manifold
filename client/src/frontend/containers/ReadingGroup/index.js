@@ -110,10 +110,7 @@ export default function ReadingGroup({ route }) {
         <section>
           <div className="container">
             <RegisterBreadcrumbs {...breadcrumbProps} />
-            <GroupHeading
-              readingGroup={readingGroup}
-              location={location}
-            />
+            <GroupHeading readingGroup={readingGroup} location={location} />
             {childRoutes(route, { childProps })}
             {showSearchDialog && (
               <SearchDialog heading={groupName} onClose={onCloseSearch} />

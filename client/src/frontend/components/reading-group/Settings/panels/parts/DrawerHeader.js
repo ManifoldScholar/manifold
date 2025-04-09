@@ -1,16 +1,20 @@
-import React from "react";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
 import { useArchiveOrActivateGroup } from "frontend/components/reading-group/hooks";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
 import { readingGroupsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
+import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
 export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const membership =
     readingGroup.relationships.currentUserReadingGroupMembership;
@@ -35,7 +39,7 @@ export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
         options
       );
       dispatch(readingGroupRequest).promise.then(() => {
-        history.push(lh.link("frontendMyReadingGroups"));
+        navigate(lh.link("frontendMyReadingGroups"));
       });
     });
   }

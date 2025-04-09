@@ -77,6 +77,7 @@ class EntryBrowser {
   render = () => {
     const cache = createCache({ key: "emotion" });
     if (this.ssrIsPresent) {
+      // eslint-disable-next-line no-unused-vars
       const hydrationRoot = hydrateRoot(
         this.root,
         <CacheProvider value={cache}>
@@ -84,8 +85,8 @@ class EntryBrowser {
         </CacheProvider>
       );
     } else {
-      const renderRoot = createRoot(this.root); // createRoot(container!) if you use TypeScript
-      root.render(
+      const renderRoot = createRoot(this.root);
+      renderRoot.render(
         <CacheProvider value={cache}>
           <App store={this.store} />
         </CacheProvider>

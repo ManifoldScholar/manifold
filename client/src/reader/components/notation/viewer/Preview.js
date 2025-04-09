@@ -1,4 +1,3 @@
-import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Resourceish from "frontend/components/resourceish";
 import Link from "./Link";
