@@ -22,7 +22,7 @@ export default function DrawerButtons({
 
   const handleCancelClick = e => {
     e.preventDefault();
-    navigate(cancelUrl ? cancelUrl : -1);
+    navigate(cancelUrl ?? -1);
   };
 
   return (

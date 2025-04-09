@@ -2,11 +2,8 @@ import {
   defaultTransitionProps,
   defaultHoverStyle,
   respond,
-  rgba,
-  fluidScale,
-  tailUp
+  fluidScale
 } from "theme/styles/mixins";
-import { headerLayout } from "theme/styles/variables/crossComponent";
 import { ZOOM_BREAKPOINT } from "../readerHeader";
 
 export default `
