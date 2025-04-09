@@ -14,13 +14,13 @@ function CategoryHeader({
   category,
   groupId,
   dragHandleRef,
-  onCategoryEdit,
   onCategoryRemove,
   initExpanded,
   setCollapsed,
   manualCollapsed,
   collectableOver,
-  onCategoryMove
+  onCategoryMove,
+  onCategoryEditError
 }) {
   const { t } = useTranslation();
 
@@ -129,11 +129,9 @@ function CategoryHeader({
                   <CategoryEdit
                     category={category}
                     groupId={groupId}
-                    onSuccess={() => {
-                      onCategoryEdit();
-                      toggleVisible();
-                    }}
+                    onSuccess={toggleVisible}
                     onCancel={toggleVisible}
+                    onError={onCategoryEditError}
                   />
                 </Styled.Inner>
               );

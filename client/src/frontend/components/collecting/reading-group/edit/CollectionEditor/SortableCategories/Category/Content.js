@@ -41,7 +41,7 @@ export default function Content({
           dragHandleRef={dragHandleRef}
           category={category}
           groupId={groupId}
-          onCategoryEdit={callbacks.onCategoryEdit}
+          onCategoryEditError={callbacks.onCategoryEditError}
           onCategoryRemove={callbacks.onCategoryRemove}
           initExpanded={
             newMarkdownBlock && newMarkdownBlock === category?.attributes.title
