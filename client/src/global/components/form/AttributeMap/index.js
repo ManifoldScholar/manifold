@@ -1,6 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Droppable
+} from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Mapping from "./Mapping";
 import Instructions from "../Instructions";
 import Attribute from "./Attribute";

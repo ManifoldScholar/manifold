@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import classNames from "classnames";

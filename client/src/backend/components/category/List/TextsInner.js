@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import TextInner from "./TextInner";
 import { withTranslation } from "react-i18next";
 

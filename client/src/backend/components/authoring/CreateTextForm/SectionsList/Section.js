@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 

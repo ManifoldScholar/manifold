@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import TextsInner from "./TextsInner";
 

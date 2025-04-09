@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Droppable, DragDropContext } from "react-beautiful-dnd";
+import {
+  Droppable,
+  DragDropContext
+} from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Section from "./Section";
 import { useUID } from "react-uid";
 
