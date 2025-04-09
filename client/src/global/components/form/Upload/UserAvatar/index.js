@@ -112,9 +112,7 @@ export default class UserAvatarUpload extends Component {
           ) : null}
           <Dropzone onDrop={this.handleFileDrop}>
             {({ getRootProps, getInputProps }) => (
-              <Styled.Dropzone
-                {...getRootProps()}
-              >
+              <Styled.Dropzone {...getRootProps()}>
                 <Styled.DropzoneInput
                   {...getInputProps({
                     accept: "image/*",
