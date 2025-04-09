@@ -15,6 +15,63 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@atlaskit/atlassian-context@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@atlaskit/atlassian-context@npm:0.2.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.0.0"
+  peerDependencies:
+    react: ^18.2.0
+  checksum: 10c0/c9481e62c0ac8986352c74d95750f2191e9c0cb2c807337987c400ec716884089d2e858a73b79bdb4d47abf04cc4fbe735aa7fdd8072e1a733bacd40e789cdd6
+  languageName: node
+  linkType: hard
+
+"@atlaskit/codemod-utils@npm:^4.2.5":
+  version: 4.2.5
+  resolution: "@atlaskit/codemod-utils@npm:4.2.5"
+  dependencies:
+    "@babel/runtime": "npm:^7.0.0"
+  checksum: 10c0/7f1a2ed337f5ef423411cfb937feb8941d696bb0e6aa71b2dddf66cda33e53530884b81eac641a9ed1a8cd5821974868ce6e278e2e00110a4c759625af70a22f
+  languageName: node
+  linkType: hard
+
+"@atlaskit/ds-lib@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@atlaskit/ds-lib@npm:4.0.0"
+  dependencies:
+    "@atlaskit/platform-feature-flags": "npm:^1.1.0"
+    "@babel/runtime": "npm:^7.0.0"
+    bind-event-listener: "npm:^3.0.0"
+    react-uid: "npm:^2.2.0"
+  peerDependencies:
+    react: ^18.2.0
+  checksum: 10c0/3b42595e40c7d7fa42bd41a07391a0e0d44804cacd1d14bb755e51adc2b865a77fabeb04d9441593251edca356cc6c109aeebc555166584640739840fea72c3c
+  languageName: node
+  linkType: hard
+
+"@atlaskit/feature-gate-js-client@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@atlaskit/feature-gate-js-client@npm:5.0.0"
+  dependencies:
+    "@atlaskit/atlassian-context": "npm:^0.2.0"
+    "@babel/runtime": "npm:^7.0.0"
+    "@statsig/client-core": "npm:^3.10.0"
+    "@statsig/js-client": "npm:^3.10.0"
+    eventemitter2: "npm:^4.1.0"
+  checksum: 10c0/10ce6f33267532e1b68401eb5baeb9394a6027a4bb8ed0108215aa314b8186bd929f927355542854475ae0058bb04b4d4418d86721a80006cf4f6a41d54cf102
+  languageName: node
+  linkType: hard
+
+"@atlaskit/platform-feature-flags@npm:^1.1.0":
+  version: 1.1.1
+  resolution: "@atlaskit/platform-feature-flags@npm:1.1.1"
+  dependencies:
+    "@atlaskit/feature-gate-js-client": "npm:^5.0.0"
+    "@babel/runtime": "npm:^7.0.0"
+  checksum: 10c0/3bdd0e19b4d4066f9bb5a1ab968ae847ff320c669feac9f5d15bc6de62a232114f5b9e47e9987565eb8c95b2a93d42fd86bc9893e58d37aa99cca4c9a69006ec
+  languageName: node
+  linkType: hard
+
 "@atlaskit/pragmatic-drag-and-drop-auto-scroll@npm:^2.1.0":
   version: 2.1.0
   resolution: "@atlaskit/pragmatic-drag-and-drop-auto-scroll@npm:2.1.0"
@@ -25,7 +82,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@atlaskit/pragmatic-drag-and-drop-hitbox@npm:^1.0.3":
+"@atlaskit/pragmatic-drag-and-drop-hitbox@npm:^1.0.0, @atlaskit/pragmatic-drag-and-drop-hitbox@npm:^1.0.3":
   version: 1.0.3
   resolution: "@atlaskit/pragmatic-drag-and-drop-hitbox@npm:1.0.3"
   dependencies:
@@ -44,6 +101,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-autoscroll@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-autoscroll@npm:2.0.1"
+  dependencies:
+    "@atlaskit/pragmatic-drag-and-drop": "npm:^1.5.0"
+    "@babel/runtime": "npm:^7.0.0"
+    css-box-model: "npm:^1.2.0"
+  checksum: 10c0/a2094ca44c40d0ac7b1d16efb71ec01cad08bd02c480b668ac6c649db15ff7799574a90ca7b3529ab72519e81cfb78265fa251f661b9b2775487d2fd0c227bc3
+  languageName: node
+  linkType: hard
+
+"@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration@npm:2.0.2"
+  dependencies:
+    "@atlaskit/pragmatic-drag-and-drop": "npm:^1.5.0"
+    "@atlaskit/pragmatic-drag-and-drop-hitbox": "npm:^1.0.0"
+    "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-autoscroll": "npm:^2.0.0"
+    "@atlaskit/tokens": "npm:^4.5.0"
+    "@babel/runtime": "npm:^7.0.0"
+    "@emotion/react": "npm:^11.7.1"
+    bind-event-listener: "npm:^3.0.0"
+    tiny-invariant: "npm:^1.2.0"
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 10c0/88bad83eddba40f13ae30ecdb561e13bdcda900753b8e4f32347c1480c02c836af29d10c0cfdc5f0c9067091f5166e809d9927aaabf42b74acb695a7f192c046
+  languageName: node
+  linkType: hard
+
 "@atlaskit/pragmatic-drag-and-drop@npm:^1.1.0, @atlaskit/pragmatic-drag-and-drop@npm:^1.4.0, @atlaskit/pragmatic-drag-and-drop@npm:^1.5.0":
   version: 1.5.0
   resolution: "@atlaskit/pragmatic-drag-and-drop@npm:1.5.0"
@@ -52,6 +139,22 @@ __metadata:
     bind-event-listener: "npm:^3.0.0"
     raf-schd: "npm:^4.0.3"
   checksum: 10c0/c5130e746c228c9b80f5dc231cba7a6e2341c29468c9dbc60d272d7e9099db0c5e2d3ee024dee71d11b2241ae1b0498acaccdde0951445b1d2aa624ddb1f9cb9
+  languageName: node
+  linkType: hard
+
+"@atlaskit/tokens@npm:^4.5.0":
+  version: 4.7.0
+  resolution: "@atlaskit/tokens@npm:4.7.0"
+  dependencies:
+    "@atlaskit/ds-lib": "npm:^4.0.0"
+    "@atlaskit/platform-feature-flags": "npm:^1.1.0"
+    "@babel/runtime": "npm:^7.0.0"
+    "@babel/traverse": "npm:^7.23.2"
+    "@babel/types": "npm:^7.20.0"
+    bind-event-listener: "npm:^3.0.0"
+  peerDependencies:
+    react: ^18.2.0
+  checksum: 10c0/0f02d56a25c7f56ba8aeef5bcdbbcfeaf8951567e0ddd68379cadf9e73b7f4ddb8dee5a128cf6f5c3def4664dadb43267916a06906bf8c867cfddfea7e7583b1
   languageName: node
   linkType: hard
 
@@ -1670,6 +1773,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/types@npm:^7.20.0, @babel/types@npm:^7.26.10, @babel/types@npm:^7.27.0":
+  version: 7.27.0
+  resolution: "@babel/types@npm:7.27.0"
+  dependencies:
+    "@babel/helper-string-parser": "npm:^7.25.9"
+    "@babel/helper-validator-identifier": "npm:^7.25.9"
+  checksum: 10c0/6f1592eabe243c89a608717b07b72969be9d9d2fce1dee21426238757ea1fa60fdfc09b29de9e48d8104311afc6e6fb1702565a9cc1e09bc1e76f2b2ddb0f6e1
+  languageName: node
+  linkType: hard
+
 "@babel/types@npm:^7.24.5, @babel/types@npm:^7.26.7":
   version: 7.26.7
   resolution: "@babel/types@npm:7.26.7"
@@ -1687,16 +1800,6 @@ __metadata:
     "@babel/helper-string-parser": "npm:^7.25.9"
     "@babel/helper-validator-identifier": "npm:^7.25.9"
   checksum: 10c0/0278053b69d7c2b8573aa36dc5242cad95f0d965e1c0ed21ccacac6330092e59ba5949753448f6d6eccf6ad59baaef270295cc05218352e060ea8c68388638c4
-  languageName: node
-  linkType: hard
-
-"@babel/types@npm:^7.26.10, @babel/types@npm:^7.27.0":
-  version: 7.27.0
-  resolution: "@babel/types@npm:7.27.0"
-  dependencies:
-    "@babel/helper-string-parser": "npm:^7.25.9"
-    "@babel/helper-validator-identifier": "npm:^7.25.9"
-  checksum: 10c0/6f1592eabe243c89a608717b07b72969be9d9d2fce1dee21426238757ea1fa60fdfc09b29de9e48d8104311afc6e6fb1702565a9cc1e09bc1e76f2b2ddb0f6e1
   languageName: node
   linkType: hard
 
@@ -1789,7 +1892,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.14.0":
+"@emotion/react@npm:^11.14.0, @emotion/react@npm:^11.7.1":
   version: 11.14.0
   resolution: "@emotion/react@npm:11.14.0"
   dependencies:
@@ -2299,6 +2402,22 @@ __metadata:
   version: 4.6.0
   resolution: "@sindresorhus/is@npm:4.6.0"
   checksum: 10c0/33b6fb1d0834ec8dd7689ddc0e2781c2bfd8b9c4e4bacbcb14111e0ae00621f2c264b8a7d36541799d74888b5dccdf422a891a5cb5a709ace26325eedc81e22e
+  languageName: node
+  linkType: hard
+
+"@statsig/client-core@npm:3.15.3, @statsig/client-core@npm:^3.10.0":
+  version: 3.15.3
+  resolution: "@statsig/client-core@npm:3.15.3"
+  checksum: 10c0/1d7ad4baa4ad0ff9454e1023b6552a3ae203e535c85165e9e6007a9bd876b751dcb28f4a845171da0873b21f3a65ca9edb371fec75fb08f9df5343360c6ed755
+  languageName: node
+  linkType: hard
+
+"@statsig/js-client@npm:^3.10.0":
+  version: 3.15.3
+  resolution: "@statsig/js-client@npm:3.15.3"
+  dependencies:
+    "@statsig/client-core": "npm:3.15.3"
+  checksum: 10c0/a0e14af4c826229542a0113a2d33fed6b8d29e2c5ace7362305974d9639547cc038c8579a3cf39d9323b8f802d52642ef6889a440f3bda8e1f02d0c5b34088bb
   languageName: node
   linkType: hard
 
@@ -6406,6 +6525,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eventemitter2@npm:^4.1.0":
+  version: 4.1.2
+  resolution: "eventemitter2@npm:4.1.2"
+  checksum: 10c0/32b5ca5d9db342e697a857fa61e0349bcba77baca958a2590e7faa30530eaa831d7d620408a11c990e9d1c503a89254423f900085b09b60afa341809c20f57bb
+  languageName: node
+  linkType: hard
+
 "eventemitter3@npm:^4.0.0, eventemitter3@npm:^4.0.1":
   version: 4.0.7
   resolution: "eventemitter3@npm:4.0.7"
@@ -9154,10 +9280,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "manifold-client@workspace:."
   dependencies:
+    "@atlaskit/codemod-utils": "npm:^4.2.5"
     "@atlaskit/pragmatic-drag-and-drop": "npm:^1.5.0"
     "@atlaskit/pragmatic-drag-and-drop-auto-scroll": "npm:^2.1.0"
     "@atlaskit/pragmatic-drag-and-drop-hitbox": "npm:^1.0.3"
     "@atlaskit/pragmatic-drag-and-drop-live-region": "npm:^1.3.0"
+    "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration": "npm:^2.0.2"
     "@atlaskit/tree": "npm:^9.0.0"
     "@babel/core": "npm:^7.26.10"
     "@babel/plugin-proposal-decorators": "npm:^7.25.9"
@@ -11845,7 +11973,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-uid@npm:^2.4.0":
+"react-uid@npm:^2.2.0, react-uid@npm:^2.4.0":
   version: 2.4.0
   resolution: "react-uid@npm:2.4.0"
   dependencies:
@@ -13862,7 +13990,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiny-invariant@npm:^1.3.1, tiny-invariant@npm:^1.3.3":
+"tiny-invariant@npm:^1.2.0, tiny-invariant@npm:^1.3.1, tiny-invariant@npm:^1.3.3":
   version: 1.3.3
   resolution: "tiny-invariant@npm:1.3.3"
   checksum: 10c0/65af4a07324b591a059b35269cd696aba21bef2107f29b9f5894d83cc143159a204b299553435b03874ebb5b94d019afa8b8eff241c8a4cfee95872c2e1c1c4a

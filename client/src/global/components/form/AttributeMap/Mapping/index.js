@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Attribute from "../Attribute";
 import isNil from "lodash/isNil";
 import * as Styled from "./styles";
