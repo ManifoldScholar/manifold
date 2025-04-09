@@ -24,7 +24,6 @@ export const Menu = styled.div`
     `max-block-size: calc(100vh - var(--reader-header-height));`,
     ZOOM_BREAKPOINT
   )}
-
 `;
 
 export const List = styled.ul`

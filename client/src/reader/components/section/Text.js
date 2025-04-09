@@ -164,7 +164,7 @@ export default class Text extends Component {
             />
           </section>
           {React.Children.count(this.props.children) > 0 &&
-            cloneElement(this.props.children, { key: page })}
+            React.cloneElement(this.props.children, { key: page })}
         </div>
       </HtmlClass>
     );
