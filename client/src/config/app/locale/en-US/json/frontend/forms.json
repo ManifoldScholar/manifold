@@ -18,7 +18,13 @@
       "expand_category": "Expand category content",
       "collapse_category": "Collapse category content",
       "expand_block": "Expand block content",
-      "collapse_block": "Collapse block content"
+      "collapse_block": "Collapse block content",
+      "move_up": "Move up",
+      "move_down": "Move down",
+      "collectable_move_up": "Move up one position",
+      "collectable_move_down": "Move down one position",
+      "collectable_category_up": "Move up one category",
+      "collectable_category_down": "Move down one category"
     },
     "reading_group": {
       "drawer_title": "New Reading Group",
