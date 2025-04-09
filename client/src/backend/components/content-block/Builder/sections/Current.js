@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Header from "./parts/Header";
 import resolver from "../../helpers/resolver";
 import Block from "../Block";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
 
