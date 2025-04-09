@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { readingGroupsAPI, collectingAPI, requests } from "api";
@@ -6,6 +7,7 @@ import { entityStoreActions } from "actions";
 import CategoryCreator from "./CategoryCreator";
 import SortableCategories from "./SortableCategories";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
+import { useNotification } from "hooks";
 import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
@@ -17,6 +19,15 @@ export default function CollectionEditor({
   refresh
 }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
+  const notifyUpdateError = useNotification(() => ({
+    level: 2,
+    id: "READING_GROUP_UPDATE_FAILURE",
+    heading: t("notifications.reading_group_update_failure"),
+    body: t("notifications.reading_group_update_failure_body"),
+    expiration: 5000
+  }));
 
   const collection = getEntityCollection(readingGroup);
 
@@ -42,7 +53,11 @@ export default function CollectionEditor({
       changes
     );
     const updateRequest = request(call, requests.feReadingGroupCategoryUpdate);
-    dispatch(updateRequest).promise.then(() => refresh());
+    dispatch(updateRequest).promise.catch(err => {
+      console.error(err);
+      notifyUpdateError();
+      refresh();
+    });
   }
 
   function removeCategory(category) {
@@ -51,27 +66,45 @@ export default function CollectionEditor({
       call,
       requests.feReadingGroupCategoryDestroy
     );
-    dispatch(destroyRequest).promise.then(() => refresh());
+    dispatch(destroyRequest).promise.catch(err => {
+      console.error(err);
+      notifyUpdateError();
+      refresh();
+    });
   }
 
   function updateCollectable(collectable) {
     const call = collectingAPI.collect([collectable], readingGroup);
     const updateRequest = request(call, requests.feCollectCollectable);
-    dispatch(updateRequest).promise.then(() => refresh());
+    dispatch(updateRequest).promise.catch(err => {
+      console.error(err);
+      notifyUpdateError();
+      refresh();
+    });
   }
 
   function removeCollectable(collectable) {
     const call = collectingAPI.remove([collectable], readingGroup);
     const updateRequest = request(call, requests.feCollectCollectable);
-    dispatch(updateRequest).promise.then(() => refresh());
+    dispatch(updateRequest).promise.catch(err => {
+      console.error(err);
+      notifyUpdateError();
+      refresh();
+    });
+  }
+
+  function onCategoryEditError(err) {
+    console.error(err);
+    notifyUpdateError();
+    refresh();
   }
 
   const callbacks = {
-    onCategoryEdit: refresh,
     onCategoryDrag: updateCategory,
     onCategoryRemove: removeCategory,
     onCollectableDrag: updateCollectable,
-    onCollectableRemove: removeCollectable
+    onCollectableRemove: removeCollectable,
+    onCategoryEditError
   };
 
   return (

@@ -5,7 +5,7 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { readingGroupsAPI, requests } from "api";
 
-function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
+function CategoryEdit({ category, groupId, onSuccess, onCancel, onError }) {
   const { t } = useTranslation();
 
   function doUpdate(categoryId, data) {
@@ -31,6 +31,7 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
       name={`${requests.feReadingGroupCategoryUpdate}-${category?.attributes?.slug}`}
       update={doUpdate}
       onSuccess={onSuccess}
+      onError={onError}
       className="form-secondary"
     >
       <Form.FieldGroup>
