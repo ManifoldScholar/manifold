@@ -47,7 +47,7 @@ class ProjectContentSectionsAvailable extends PureComponent {
               isDropDisabled
               direction="horizontal"
             >
-              {provided => (
+              {(provided, snapshot) => (
                 <div ref={provided.innerRef}>
                   <Block
                     currentBlocks={this.props.currentBlocks}
@@ -55,6 +55,7 @@ class ProjectContentSectionsAvailable extends PureComponent {
                     type={type}
                     index={index}
                     onClickAdd={this.props.onClickAdd}
+                    isDragging={snapshot.draggingFromThisWith === type}
                   />
                   {provided.placeholder}
                 </div>
