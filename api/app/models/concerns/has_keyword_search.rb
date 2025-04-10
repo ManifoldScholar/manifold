@@ -6,8 +6,10 @@ module HasKeywordSearch
     extend Dry::Core::ClassAttributes
 
     defines :keyword_search_options, type: ::Types::Hash.map(::Types::Symbol, ::Types::Any)
+    defines :multisearch_options, type: ::Types::Hash.map(::Types::Symbol, ::Types::Any)
 
     keyword_search_options({}.freeze)
+    multisearch_options({}.freeze)
   end
 
   module ClassMethods
@@ -17,6 +19,12 @@ module HasKeywordSearch
       keyword_search_options options.freeze
 
       pg_search_scope :keyword_search, **options
+    end
+
+    def has_multisearch!(**options)
+      multisearch_options options.freeze
+
+      multisearchable(**options)
     end
     # rubocop:enable Naming/PredicateName
 

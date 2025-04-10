@@ -1796,8 +1796,9 @@ CREATE VIEW public.permissions AS
 CREATE TABLE public.pg_search_documents (
     id bigint NOT NULL,
     content text,
+    title text,
     searchable_type character varying,
-    searchable_id bigint,
+    searchable_id uuid,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );

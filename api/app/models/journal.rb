@@ -85,6 +85,10 @@ class Journal < ApplicationRecord
 
   scope :search_import, -> { includes(:collaborators, :makers) }
 
+  has_multisearch! websearch: true,
+    against: %i[title subtitle description],
+    additional_attributes: ->(journal) { { title: journal.title } }
+
   has_keyword_search!(
     against: %i[title subtitle description],
     associated_against: {

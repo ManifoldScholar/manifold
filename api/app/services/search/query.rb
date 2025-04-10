@@ -10,6 +10,7 @@ module Search
 
     boolean :debug, default: proc { Rails.env.development? }
     boolean :raise_search_errors, default: proc { Rails.env.development? }
+    boolean :use_pg_search, default: proc { ENV["USE_PG_SEARCH"] }
 
     integer :page_number, default: 1
 
@@ -25,8 +26,15 @@ module Search
 
     # @return [Search::Results]
     def execute
-      results = perform_search
-
+      results = if use_pg_search
+                  PgSearch.multisearch(keyword)
+                    .with_pg_search_highlight
+                    .with_pg_search_rank
+                    .where(searchable_type: facets)
+                    .page(page_number).per(per_page)
+                else
+                  perform_search
+                end
       ::Search::Results.new results
     end
 
