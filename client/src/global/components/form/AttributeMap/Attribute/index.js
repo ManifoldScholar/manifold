@@ -25,33 +25,55 @@ class FormColumnMapAttribute extends PureComponent {
   render() {
     return (
       <Draggable draggableId={this.props.name} index={this.props.index}>
-        {provided => {
+        {(provided, snapshot) => {
           return (
-            <Styled.ColumnListing>
-              <Styled.ColumnAvailable
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-              >
-                <Styled.ColumnName $matched={this.props.matched}>
-                  {this.props.name}
-                </Styled.ColumnName>
-              </Styled.ColumnAvailable>
-              {this.props.mapping && (
-                <Styled.Cancel
-                  onClick={this.handleCancel}
-                  $well={this.props.inWell}
+            <>
+              <Styled.ColumnListing>
+                <Styled.ColumnAvailable
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
                 >
-                  <span className="screen-reader-text">
-                    {this.props.t("forms.attribute_map.cancel", {
-                      name: this.props.name,
-                      mapping: this.props.mapping
-                    })}
-                  </span>
-                  <IconComposer icon="close16" size="default" />
-                </Styled.Cancel>
+                  <Styled.ColumnName $matched={this.props.matched}>
+                    {this.props.name}
+                  </Styled.ColumnName>
+                </Styled.ColumnAvailable>
+                {this.props.mapping && (
+                  <Styled.Cancel
+                    onClick={this.handleCancel}
+                    $well={this.props.inWell}
+                  >
+                    <span className="screen-reader-text">
+                      {this.props.t("forms.attribute_map.cancel", {
+                        name: this.props.name,
+                        mapping: this.props.mapping
+                      })}
+                    </span>
+                    <IconComposer icon="close16" size="default" />
+                  </Styled.Cancel>
+                )}
+              </Styled.ColumnListing>
+              {snapshot.isDragging && (
+                <Styled.ColumnListing className="drag-placeholder">
+                  <Styled.ColumnAvailable>
+                    <Styled.ColumnName $matched={this.props.matched}>
+                      {this.props.name}
+                    </Styled.ColumnName>
+                  </Styled.ColumnAvailable>
+                  {this.props.mapping && (
+                    <Styled.Cancel $well={this.props.inWell}>
+                      <span className="screen-reader-text">
+                        {this.props.t("forms.attribute_map.cancel", {
+                          name: this.props.name,
+                          mapping: this.props.mapping
+                        })}
+                      </span>
+                      <IconComposer icon="close16" size="default" />
+                    </Styled.Cancel>
+                  )}
+                </Styled.ColumnListing>
               )}
-            </Styled.ColumnListing>
+            </>
           );
         }}
       </Draggable>

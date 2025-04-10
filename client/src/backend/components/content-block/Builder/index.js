@@ -180,7 +180,7 @@ export class ProjectContent extends PureComponent {
 
   render() {
     return (
-      <section className="backend-project-content">
+      <section className="backend-project-content rbd-migration-resets">
         <UIDConsumer name={id => `content-block-builder-${id}`}>
           {id => (
             <div
