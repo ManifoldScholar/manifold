@@ -3,6 +3,7 @@
 class Event < ApplicationRecord
 
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
+  KEYWORD_SEARCH_ATTRIBUTES = %i[subject_title subject_subtitle excerpt].freeze
 
   # ClassyEnum
   include ClassyEnum::ActiveRecord
@@ -17,6 +18,8 @@ class Event < ApplicationRecord
   include Filterable
   include HasFormattedAttributes
   include SearchIndexable
+  include HasKeywordSearch
+  has_keyword_search! against: KEYWORD_SEARCH_ATTRIBUTES
 
   has_formatted_attribute :subject_title
 

@@ -528,6 +528,9 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
+    pg_search (2.3.6)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     premailer (1.21.0)
       addressable
       css_parser (>= 1.12.0)
@@ -900,6 +903,7 @@ DEPENDENCIES
   paper_trail-globalid (~> 0.2)
   parallel_tests (~> 2.29.2)
   pg (~> 1.2)
+  pg_search
   premailer-rails (~> 1.0)
   pry-rails (~> 0.3.9)
   puma (~> 6.4)
