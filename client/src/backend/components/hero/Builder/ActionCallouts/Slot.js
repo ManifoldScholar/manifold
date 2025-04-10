@@ -90,7 +90,9 @@ class Slot extends PureComponent {
                     actionCallout={actionCallout}
                     history={this.history}
                     model={this.model}
-                    isDragging={snapshot.draggingFromThisWith === actionCallout.id}
+                    isDragging={
+                      snapshot.draggingFromThisWith === actionCallout.id
+                    }
                   />
                 ))}
                 {provided.placeholder}
