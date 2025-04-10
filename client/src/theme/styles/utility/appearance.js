@@ -130,6 +130,7 @@ export default `
 
   .drag-placeholder {
     opacity: .5;
+    pointer-events: none;
   }
 
   .rbd-migration-resets {

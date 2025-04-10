@@ -13,14 +13,15 @@ export default function SectionList({ sections, setSectionOrder, onDelete }) {
   return (
     <DragDropContext onDragEnd={setSectionOrder}>
       <Droppable droppableId={id}>
-        {provided => (
-          <ul {...provided.droppableProps} ref={provided.innerRef}>
+        {(provided, snapshot) => (
+          <ul {...provided.droppableProps} ref={provided.innerRef} className="rbd-migration-resets">
             {sections.map((section, i) => (
               <Section
                 key={section.id}
                 section={section}
                 index={i}
                 onDelete={onDelete}
+                isDragging={snapshot.draggingFromThisWith === section.id}
               />
             ))}
             {provided.placeholder}

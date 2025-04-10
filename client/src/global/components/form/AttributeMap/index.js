@@ -112,7 +112,7 @@ class FormColumnMap extends PureComponent {
           onDragEnd={this.onDragEnd}
         >
           <FieldWrapper>
-            <Styled.ColumnMap>
+            <Styled.ColumnMap className="rbd-migration-resets">
               <Styled.ColumnMappable>
                 <Styled.ColumnHeading>
                   {t("forms.attribute_map.spreadsheet_cols")}

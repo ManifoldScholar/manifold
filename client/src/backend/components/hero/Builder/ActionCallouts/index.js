@@ -157,7 +157,7 @@ export default class ActionCallouts extends PureComponent {
 
   render() {
     return (
-      <Styled.CalloutsContainer>
+      <Styled.CalloutsContainer className="rbd-migration-resets">
         <DragDropContext
           onDragStart={this.onDragStart}
           onDragEnd={this.onDragEnd}

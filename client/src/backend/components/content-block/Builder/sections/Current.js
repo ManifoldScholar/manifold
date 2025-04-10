@@ -65,7 +65,7 @@ class ProjectContentSectionsCurrent extends PureComponent {
             type={zone.toUpperCase()}
             droppableId={`current-${zone}`}
           >
-            {provided => (
+            {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
                 className={classNames("content-block-list full-width", {
@@ -81,6 +81,7 @@ class ProjectContentSectionsCurrent extends PureComponent {
                     entity={block}
                     type={block.attributes.type}
                     index={index}
+                    isDragging={snapshot.draggingFromThisWith === block.id}
                   />
                 ))}
                 {provided.placeholder}
