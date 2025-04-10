@@ -147,33 +147,37 @@ export default class SortableEntities extends PureComponent {
                 })}
               >
                 {this.entities.map((entity, index) => (
-                  <Draggable
-                    key={this.entityKey(index)}
-                    draggableId={this.entityKey(index)}
-                    index={index}
-                  >
-                    {(provided, snapshot) => (
-                      <>
+                  <>
+                    <Draggable
+                      key={this.entityKey(index)}
+                      draggableId={this.entityKey(index)}
+                      index={index}
+                    >
+                      {(draggableProvided, draggableSnapshot) => (
+                        <>
+                          <EntityComponent
+                            innerRef={draggableProvided.innerRef}
+                            entity={entity}
+                            dragHandleProps={draggableProvided.dragHandleProps}
+                            draggableProps={draggableProvided.draggableProps}
+                            useDragHandle={this.useDragHandle}
+                            isDragging={draggableSnapshot.isDragging}
+                            {...this.entityComponentProps}
+                          />
+                        </>
+                      )}
+                    </Draggable>
+                    {snapshot.draggingFromThisWith === entity.id && (
+                      <div
+                        className={classNames("entity-row", "drag-placeholder")}
+                      >
                         <EntityComponent
-                          innerRef={provided.innerRef}
                           entity={entity}
-                          dragHandleProps={provided.dragHandleProps}
-                          draggableProps={provided.draggableProps}
-                          useDragHandle={this.useDragHandle}
-                          isDragging={snapshot.isDragging}
                           {...this.entityComponentProps}
                         />
-                        {snapshot.isDragging && (
-                          <div className={classNames("entity-row", "drag-placeholder")}>
-                            <EntityComponent
-                              entity={entity}
-                              {...this.entityComponentProps}
-                            />
-                          </div>
-                        )}
-                      </>
+                      </div>
                     )}
-                  </Draggable>
+                  </>
                 ))}
                 {provided.placeholder}
               </ul>

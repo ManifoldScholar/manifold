@@ -34,7 +34,7 @@ export default function Section({ section, onDelete, index, isDragging }) {
         <Styled.Section className="drag-placeholder">
           <span>{section.name}</span>
           <Styled.ButtonGroup>
-            <Styled.Button>
+            <Styled.Button as="div">
               <IconComposer icon="delete32" size={24} />
             </Styled.Button>
             <Styled.DragHandle as="div">

@@ -4,7 +4,6 @@ import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd
 import classNames from "classnames";
 import Current from "./in-list/Current";
 import Available from "./in-list/Available";
-import AvailablePlaceholder from "./in-list/AvailablePlaceholder";
 import typeResolver from "../../helpers/resolver";
 import isFunction from "lodash/isFunction";
 
@@ -100,7 +99,7 @@ export default class ProjectContentBlock extends PureComponent {
             entityCallbacks={this.props.entityCallbacks}
             typeComponent={TypeComponent}
             onClickAdd={this.handleClickAdd}
-            disabled={this.disabled}
+            disabled
           />
         </div>
       );
@@ -124,7 +123,6 @@ export default class ProjectContentBlock extends PureComponent {
                   `${baseClass}--${this.props.context}`,
                   {
                     [`${baseClass}--active`]: !this.disabled,
-                    [`${baseClass}--inactive`]: this.disabled,
                     [`${baseClass}--is-dragging`]: snapshot.isDragging
                   }
                 )}
@@ -135,7 +133,6 @@ export default class ProjectContentBlock extends PureComponent {
                   dragHandleProps={provided.dragHandleProps}
                   typeComponent={TypeComponent}
                   onClickAdd={this.handleClickAdd}
-                  disabled={this.disabled}
                 />
               </div>
             );
@@ -150,16 +147,11 @@ export default class ProjectContentBlock extends PureComponent {
               "drag-placeholder"
             )}
           >
-            {this.inAvailableList ? (
-              <AvailablePlaceholder typeComponent={TypeComponent} />
-            ) : (
-              <ListContextBlock
-                entity={this.props.entity}
-                entityCallbacks={this.props.entityCallbacks}
-                typeComponent={TypeComponent}
-                disabled={true}
-              />
-            )}
+            <ListContextBlock
+              entity={this.props.entity}
+              entityCallbacks={this.props.entityCallbacks}
+              typeComponent={TypeComponent}
+            />
           </div>
         )}
       </>

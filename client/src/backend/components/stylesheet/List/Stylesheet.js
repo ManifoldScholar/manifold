@@ -126,7 +126,7 @@ class CategoryList extends PureComponent {
         {this.props.isDragging && (
           <div className={classNames(baseClass, "drag-placeholder")}>
             <div className={`${baseClass}__inner`}>
-              <Link className={`${baseClass}__details`} to={this.editUrl}>
+              <span className={`${baseClass}__details`}>
                 <div className={`${baseClass}__icon`}>
                   <Utility.IconComposer icon="resourceDocument64" size={50} />
                 </div>
@@ -145,7 +145,7 @@ class CategoryList extends PureComponent {
                     />
                   </span>
                 </div>
-              </Link>
+              </span>
               <div className={`${baseClass}__utility`}>
                 <button
                   className={`${baseClass}__button ${baseClass}__button--notice`}
@@ -155,12 +155,12 @@ class CategoryList extends PureComponent {
                     {t("texts.stylesheets.delete_button_label")}
                   </span>
                 </button>
-                <Link className={`${baseClass}__button`} to={this.editUrl}>
+                <span className={`${baseClass}__button`}>
                   <Utility.IconComposer icon="annotate32" size={26} />
                   <span className="screen-reader-text">
                     {t("texts.stylesheets.edit_button_label")}
                   </span>
-                </Link>
+                </span>
                 <div className={`${baseClass}__button`}>
                   <Utility.IconComposer icon="grabber32" size={26} />
                 </div>

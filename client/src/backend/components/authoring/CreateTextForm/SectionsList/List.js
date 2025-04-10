@@ -14,7 +14,11 @@ export default function SectionList({ sections, setSectionOrder, onDelete }) {
     <DragDropContext onDragEnd={setSectionOrder}>
       <Droppable droppableId={id}>
         {(provided, snapshot) => (
-          <ul {...provided.droppableProps} ref={provided.innerRef} className="rbd-migration-resets">
+          <ul
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className="rbd-migration-resets"
+          >
             {sections.map((section, i) => (
               <Section
                 key={section.id}

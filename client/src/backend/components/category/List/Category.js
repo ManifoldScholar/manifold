@@ -144,6 +144,20 @@ class CategoryListCategory extends PureComponent {
                 </span>
                 {this.title}
               </h2>
+              <div className="text-categories__utility">
+                <span className="text-categories__button text-categories__button--notice">
+                  <Utility.IconComposer icon="delete32" size={26} />
+                  <span className="screen-reader-text">
+                    {this.props.t("projects.category.delete")}
+                  </span>
+                </span>
+                <span className="text-categories__button">
+                  <Utility.IconComposer icon="annotate32" size={26} />
+                </span>
+                <div className="text-categories__button">
+                  <Utility.IconComposer icon="grabber32" size={26} />
+                </div>
+              </div>
             </header>
             <Texts
               category={this.category}

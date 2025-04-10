@@ -39,6 +39,9 @@ class FormColumnMapMapping extends PureComponent {
                     index={this.props.index}
                     unLink={this.props.unLink}
                     mapping={this.props.name}
+                    isDragging={
+                      snapshot.draggingFromThisWith === this.props.match
+                    }
                     inWell
                   />
                 ) : null}

@@ -83,16 +83,23 @@ export default class Chip extends PureComponent {
           )}
         </Draggable>
         {this.props.isDragging && (
-          <div className={classNames("action-callout-slot__chip", "drag-placeholder")}>
+          <div
+            className={classNames(
+              "action-callout-slot__chip",
+              "drag-placeholder"
+            )}
+          >
             <div className="action-callout-slot__chip-inner">
-              <button
-                type="button"
-                className="action-callout-slot__button"
-              >
+              <span className="action-callout-slot__button">
                 <span className="action-callout-slot__chip-title">
                   {this.title}
                 </span>
-              </button>
+              </span>
+              <span className="action-callout-slot__chip-utility">
+                <div className="action-callout-slot__button action-callout-slot__button--draggable">
+                  <Utility.IconComposer icon="grabber32" size={24} />
+                </div>
+              </span>
             </div>
           </div>
         )}
