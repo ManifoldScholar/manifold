@@ -15,7 +15,7 @@ export default function CategoryListTexts({
 
   return (
     <Droppable type="text" droppableId={categoryId}>
-      {provided => (
+      {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
           className={classNames({
@@ -29,6 +29,7 @@ export default function CategoryListTexts({
             texts={texts}
             category={category}
             onTextKeyboardMove={onTextKeyboardMove}
+            dragging={snapshot.draggingFromThisWith}
           />
           {provided.placeholder}
         </div>
