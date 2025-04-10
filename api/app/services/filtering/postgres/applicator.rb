@@ -53,13 +53,13 @@ module Filtering
       private
 
       def apply_keyword_search!
-        @results = model.keyword_search(params[:keyword])
+        @results = model.keyword_search(params[:keyword]).page(params[:page]).per(params[:per_page])
 
         return unless exceeds_total_pages?(@results)
 
         params[:page] = results.total_pages
 
-        @results = model.keyword_search
+        @results = model.keyword_search.page(params[:page]).per(params[:per_page])
       end
 
       # @!group Steps
@@ -150,7 +150,7 @@ module Filtering
       end
 
       def should_apply_keyword_search?
-        return false unless params.key?(:keyword)
+        return false unless params.key?(:keyword) && params[:keyword].present?
         return false if has_keyword_scope?
         return false unless @filtered_scope.exists?
 
