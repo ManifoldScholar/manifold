@@ -112,10 +112,11 @@
     "redux-promise": "^0.6",
     "serialize-javascript": "^6.0.2",
     "serve-static": "^2.2.0",
-    "slate": "^0.90.0",
-    "slate-history": "^0.86.0",
-    "slate-hyperscript": "^0.77.0",
-    "slate-react": "^0.90.0",
+    "slate": "^0.112.0",
+    "slate-dom": "^0.112.2",
+    "slate-history": "^0.110.3",
+    "slate-hyperscript": "^0.100.0",
+    "slate-react": "^0.112.1",
     "stream-browserify": "^3.0.0",
     "swagger-ui": "5.x",
     "swagger-ui-react": "5.x",
@@ -175,10 +176,6 @@
     "webpack-dev-server": "^5.x",
     "webpack-merge": "^6.x",
     "webpack-node-externals": "^3.0.0"
-  },
-  "resolutions": {
-    "htmlparser2": "~7.0.0",
-    "slate": "^0.90.0"
   },
   "engines": {
     "node": "20.x",
