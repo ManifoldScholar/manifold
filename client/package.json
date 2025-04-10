@@ -103,7 +103,6 @@
     "react-router-dom-v5-compat": "^6.x",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-side-effect": "2.1.2",
-    "react-sociable": "^0.x",
     "react-text-mask": "^5.5.0",
     "react-uid": "^2.4.0",
     "reakit": "^1.3.11",
