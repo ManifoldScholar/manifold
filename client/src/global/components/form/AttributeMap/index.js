@@ -140,7 +140,7 @@ class FormColumnMap extends PureComponent {
                   {t("forms.attribute_map.available")}
                 </Styled.ColumnHeading>
                 <Droppable droppableId="attributesAvailable" isDropDisabled>
-                  {(provided, snapshotIgnored) => (
+                  {(provided, snapshot) => (
                     <Styled.Available ref={provided.innerRef}>
                       {sortedAttributes.map((attribute, index) => {
                         return (
@@ -148,6 +148,9 @@ class FormColumnMap extends PureComponent {
                             key={attribute}
                             name={attribute}
                             index={index}
+                            isDragging={
+                              snapshot.draggingFromThisWith === attribute
+                            }
                           />
                         );
                       })}
