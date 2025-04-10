@@ -104,6 +104,15 @@ export default function buildWebpackConfiguration(
               maxSize: 15000
             }
           }
+        },
+
+        // https://github.com/securingsincity/react-ace/issues/725#issuecomment-1288926325
+        {
+          test: [/ace-builds.*\/worker-.*$/, /ace-builds.*\/theme-.*$/],
+          type: "asset/resource",
+          generator: {
+            filename: `build/${nameTemplate}[ext]`
+          }
         }
       ]
     },
