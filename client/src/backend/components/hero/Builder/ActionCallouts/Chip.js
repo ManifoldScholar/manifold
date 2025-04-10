@@ -13,7 +13,8 @@ export default class Chip extends PureComponent {
     index: PropTypes.number.isRequired,
     history: PropTypes.object.isRequired,
     model: PropTypes.object.isRequired,
-    actionCalloutEditRoute: PropTypes.string.isRequired
+    actionCalloutEditRoute: PropTypes.string.isRequired,
+    isDragging: PropTypes.bool
   };
 
   onEdit = event => {
@@ -43,24 +44,48 @@ export default class Chip extends PureComponent {
 
   render() {
     return (
-      <Draggable
-        index={this.index}
-        draggableId={this.id}
-        key={this.id}
-        type="actionCallout"
-      >
-        {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            className={classNames({
-              "action-callout-slot__chip": true,
-              "action-callout-slot__chip--is-dragging": snapshot.isDragging
-            })}
-          >
+      <>
+        <Draggable
+          index={this.index}
+          draggableId={this.id}
+          key={this.id}
+          type="actionCallout"
+        >
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              className={classNames({
+                "action-callout-slot__chip": true,
+                "action-callout-slot__chip--is-dragging": snapshot.isDragging
+              })}
+            >
+              <div className="action-callout-slot__chip-inner">
+                <button
+                  onClick={this.onEdit}
+                  type="button"
+                  className="action-callout-slot__button"
+                >
+                  <span className="action-callout-slot__chip-title">
+                    {this.title}
+                  </span>
+                </button>
+                <span className="action-callout-slot__chip-utility">
+                  <div
+                    className="action-callout-slot__button action-callout-slot__button--draggable"
+                    {...provided.dragHandleProps}
+                  >
+                    <Utility.IconComposer icon="grabber32" size={24} />
+                  </div>
+                </span>
+              </div>
+            </div>
+          )}
+        </Draggable>
+        {this.props.isDragging && (
+          <div className={classNames("action-callout-slot__chip", "drag-placeholder")}>
             <div className="action-callout-slot__chip-inner">
               <button
-                onClick={this.onEdit}
                 type="button"
                 className="action-callout-slot__button"
               >
@@ -68,18 +93,10 @@ export default class Chip extends PureComponent {
                   {this.title}
                 </span>
               </button>
-              <span className="action-callout-slot__chip-utility">
-                <div
-                  className="action-callout-slot__button action-callout-slot__button--draggable"
-                  {...provided.dragHandleProps}
-                >
-                  <Utility.IconComposer icon="grabber32" size={24} />
-                </div>
-              </span>
             </div>
           </div>
         )}
-      </Draggable>
+      </>
     );
   }
 }

@@ -75,9 +75,9 @@ export default class CategoryList extends Component {
         onDragStart={this.onDragStart}
         onDragEnd={this.onDragEnd}
       >
-        <section className="ordered-records">
+        <section className="ordered-records rbd-migration-resets">
           <Droppable type="category" droppableId="categories">
-            {provided => (
+            {(provided, snapshot) => (
               <div
                 className={classNames({
                   "ordered-records__dropzone": true,
@@ -93,6 +93,7 @@ export default class CategoryList extends Component {
                     callbacks={this.callbacks}
                     stylesheet={stylesheet}
                     key={stylesheet.id}
+                    isDragging={snapshot.draggingFromThisWith === stylesheet.id}
                   />
                 ))}
                 {provided.placeholder}

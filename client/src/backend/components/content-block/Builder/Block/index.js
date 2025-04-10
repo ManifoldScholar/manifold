@@ -17,7 +17,8 @@ export default class ProjectContentBlock extends PureComponent {
     entity: PropTypes.object,
     context: PropTypes.oneOf(["available", "current"]),
     disabled: PropTypes.func,
-    onClickAdd: PropTypes.func
+    onClickAdd: PropTypes.func,
+    isDragging: PropTypes.bool
   };
 
   static defaultProps = {
@@ -105,15 +106,15 @@ export default class ProjectContentBlock extends PureComponent {
       );
 
     return (
-      <Draggable
-        type={TypeComponent.top ? "TOP" : "BOTTOM"}
-        isDragDisabled={this.disabled}
-        draggableId={this.draggableId}
-        index={this.index}
-      >
-        {(provided, snapshot) => {
-          return (
-            <>
+      <>
+        <Draggable
+          type={TypeComponent.top ? "TOP" : "BOTTOM"}
+          isDragDisabled={this.disabled}
+          draggableId={this.draggableId}
+          index={this.index}
+        >
+          {(provided, snapshot) => {
+            return (
               <div
                 {...provided.draggableProps}
                 ref={provided.innerRef}
@@ -137,21 +138,31 @@ export default class ProjectContentBlock extends PureComponent {
                   disabled={this.disabled}
                 />
               </div>
-              {this.inAvailableList && snapshot.isDragging && (
-                <div
-                  className={classNames(
-                    baseClass,
-                    `${baseClass}--${this.props.context}`,
-                    `${baseClass}--inactive`
-                  )}
-                >
-                  <AvailablePlaceholder typeComponent={TypeComponent} />
-                </div>
-              )}
-            </>
-          );
-        }}
-      </Draggable>
+            );
+          }}
+        </Draggable>
+        {this.props.isDragging && (
+          <div
+            className={classNames(
+              baseClass,
+              `${baseClass}--${this.props.context}`,
+              `${baseClass}--inactive`,
+              "drag-placeholder"
+            )}
+          >
+            {this.inAvailableList ? (
+              <AvailablePlaceholder typeComponent={TypeComponent} />
+            ) : (
+              <ListContextBlock
+                entity={this.props.entity}
+                entityCallbacks={this.props.entityCallbacks}
+                typeComponent={TypeComponent}
+                disabled={true}
+              />
+            )}
+          </div>
+        )}
+      </>
     );
   }
 }
