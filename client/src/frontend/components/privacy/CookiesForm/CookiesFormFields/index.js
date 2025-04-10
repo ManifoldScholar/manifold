@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import humps from "humps";
+import humps from "utils/humps";
 import { useTranslation } from "react-i18next";
 import RadioGroup from "frontend/components/preferences/RadioGroup";
 import { useFromStore } from "hooks";

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { FormContext } from "helpers/contexts";
 import Form, { Unwrapped } from "global/components/form";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { makersAPI, collaboratorsAPI } from "api";
 import { useApiCallback } from "hooks";
 import capitalize from "lodash/capitalize";
@@ -15,7 +15,7 @@ export default function AddCollaboratorForm({
   refresh
 }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [makerId, setMakerId] = useState("");
   const [roles, setRoles] = useState([]);
@@ -55,7 +55,7 @@ export default function AddCollaboratorForm({
 
     if (!errors) {
       if (refresh) refresh();
-      history.push(closeUrl);
+      navigate(closeUrl);
     }
   };
 

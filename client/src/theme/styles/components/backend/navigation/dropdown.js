@@ -22,7 +22,7 @@ export default `
         cursor: pointer;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         outline: 0;
       }
 

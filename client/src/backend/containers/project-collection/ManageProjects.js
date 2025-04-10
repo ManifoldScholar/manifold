@@ -13,7 +13,7 @@ import EntitiesList, {
 import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import IconComposer from "global/components/utility/IconComposer";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { useListQueryParams, useFetch, useApiCallback } from "hooks";
 
 function ProjectCollectionManageProjects({
@@ -23,7 +23,7 @@ function ProjectCollectionManageProjects({
   setScreenReaderStatus
 }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 12,
@@ -124,7 +124,7 @@ function ProjectCollectionManageProjects({
 
   const handleClose = () => {
     const url = lh.link("backendProjectCollection", projectCollection.id);
-    return history.push(url);
+    return navigate(url);
   };
 
   const renderProjectCount = () => {

@@ -24,7 +24,6 @@ import {
   entityStoreActions
 } from "actions";
 import { setPersistentUI } from "actions/ui/persistentUi";
-import { CSSTransition } from "react-transition-group";
 import get from "lodash/get";
 import ScrollAware from "hoc/ScrollAware";
 import BodyClass from "hoc/BodyClass";
@@ -146,13 +145,6 @@ export class ReaderContainer extends Component {
     return `reader ${colorScheme}`;
   }
 
-  get transitionProps() {
-    return {
-      classNames: "overlay-full",
-      timeout: { enter: 200, exit: 200 }
-    };
-  }
-
   setPersistentUI = props => {
     const user = props.authentication.currentUser;
     if (!user) return null;
@@ -199,30 +191,26 @@ export class ReaderContainer extends Component {
   renderTextMetaOverlay() {
     const text = this.props.text;
     return (
-      <CSSTransition {...this.transitionProps}>
-        <Overlay closeCallback={this.toggleMeta} appearance="overlay-full">
-          <TextMeta
-            title={text.attributes.titlePlaintext}
-            subtitle={text.attributes.subtitle}
-            meta={text.attributes.metadataFormatted}
-          />
-        </Overlay>
-      </CSSTransition>
+      <Overlay open closeCallback={this.toggleMeta} appearance="overlay-full">
+        <TextMeta
+          title={text.attributes.titlePlaintext}
+          subtitle={text.attributes.subtitle}
+          meta={text.attributes.metadataFormatted}
+        />
+      </Overlay>
     );
   }
 
   renderNotesOverlay() {
     return (
       <Authorize kind="any">
-        <CSSTransition {...this.transitionProps}>
-          <ReaderFullNotes
-            text={this.props.text}
-            match={this.props.match}
-            history={this.props.history}
-            dispatch={this.props.dispatch}
-            closeCallback={this.props.history.goBack}
-          />
-        </CSSTransition>
+        <ReaderFullNotes
+          text={this.props.text}
+          match={this.props.match}
+          history={this.props.history}
+          dispatch={this.props.dispatch}
+          closeCallback={this.props.history.goBack}
+        />
       </Authorize>
     );
   }

@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useMemo, useState, useRef } from "react";
 import queryString from "query-string";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 
 export default function useListQueryParams({
   initPage = 1,
@@ -10,7 +10,7 @@ export default function useListQueryParams({
   initSearchProps,
   scrollTargetId
 } = {}) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { pathname, search } = useLocation();
   const { page, ...filterParams } = queryString.parse(search);
 
@@ -46,13 +46,13 @@ export default function useListQueryParams({
     nextFilters => {
       const query = queryString.stringify({ page: 1, ...nextFilters });
 
-      history.push({
+      navigate({
         pathname,
         search: query,
         hash: scrollTargetId ? `#${scrollTargetId}` : undefined
       });
     },
-    [history, pathname, scrollTargetId]
+    [navigate, pathname, scrollTargetId]
   );
 
   // Frontend updates a filters object

@@ -1,6 +1,10 @@
+import { config } from "ace-builds";
+import kuroirUrl from "ace-builds/src-noconflict/theme-kuroir";
+config.setModuleUrl("ace-builds/src-noconflict/theme-kuroir", kuroirUrl);
+
 /* eslint-disable max-len, no-unused-vars */
 window.ace.define(
-  "ace/theme/kuroir",
+  "ace-builds/src-noconflict/theme-kuroir",
   ["require", "exports", "module", "ace/lib/dom"],
   (acequire, _exports, module) => {
     exports = _exports;

@@ -1,4 +1,8 @@
-import { createStore as _createStore, applyMiddleware, compose } from "redux";
+import {
+  legacy_createStore as _createStore,
+  applyMiddleware,
+  compose
+} from "redux";
 import thunkMiddleware from "./middleware/thunkMiddleware";
 import oauthMiddleware from "./middleware/oauthMiddleware";
 import entityStoreMiddleware from "./middleware/entityStoreMiddleware";

@@ -54,7 +54,7 @@ export default `
           }
         }
 
-        &.focus-visible {
+        &:focus-visible {
           outline-offset: 2px;
         }
 

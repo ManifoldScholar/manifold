@@ -151,7 +151,7 @@ export const Excerpt = styled.blockquote`
   border-left: 4px solid var(--color-neutral-ui-dull-dark);
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     background-color: var(--color-base-neutral05);
     outline: 0;
   }

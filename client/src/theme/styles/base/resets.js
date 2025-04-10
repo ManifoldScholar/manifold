@@ -1,5 +1,3 @@
-import { logicalWithFallback } from "@castiron/style-mixins";
-
 /**
  * Resets
  *
@@ -37,12 +35,18 @@ export default `
   /* Set core root defaults */
   html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
     font-size: 100%;
+    @supports (scrollbar-color: auto) {
+      scrollbar-color: var(--color-accent-primary);
+      scrollbar-width: auto;
+    }
   }
 
   /* Set core body defaults */
   body {
-    ${logicalWithFallback({ "min-block-size": "100vh" })}
+    min-block-size: 100vh;
+    min-block-size: 100dvh;
     text-rendering: geometricPrecision;
   }
 
@@ -56,10 +60,8 @@ export default `
   img,
   picture {
     display: block;
-    ${logicalWithFallback({
-      "max-inline-size": "100%",
-      "block-size": "auto"
-    })}
+    max-inline-size: 100%;
+    block-size: auto;
   }
 
   /* Inherit fonts for inputs and buttons */
