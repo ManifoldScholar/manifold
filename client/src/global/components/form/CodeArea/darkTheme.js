@@ -1,6 +1,13 @@
+import { config } from "ace-builds";
+import idleFingersUrl from "ace-builds/src-noconflict/theme-idle_fingers";
+config.setModuleUrl(
+  "ace-builds/src-noconflict/theme-idle_fingers",
+  idleFingersUrl
+);
+
 /* eslint-disable max-len, no-unused-vars */
 window.ace.define(
-  "ace/theme/idle_fingers",
+  "ace-builds/src-noconflict/theme-idle_fingers",
   ["require", "exports", "module", "ace/lib/dom"],
   (acequire, _exports, module) => {
     exports = _exports;
