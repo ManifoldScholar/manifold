@@ -19,6 +19,7 @@ class CategoryListCategory extends PureComponent {
     callbacks: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool,
     t: PropTypes.func
   };
 
@@ -60,9 +61,13 @@ class CategoryListCategory extends PureComponent {
     const project = this.project;
 
     return (
-      <Draggable type="category" index={this.props.index} draggableId={this.id}>
-        {(provided, snapshot) => (
-          <>
+      <>
+        <Draggable
+          type="category"
+          index={this.props.index}
+          draggableId={this.id}
+        >
+          {(provided, snapshot) => (
             <div
               ref={provided.innerRef}
               {...provided.draggableProps}
@@ -123,10 +128,33 @@ class CategoryListCategory extends PureComponent {
                 onTextKeyboardMove={this.props.onTextKeyboardMove}
               />
             </div>
-            {provided.placeholder}
-          </>
+          )}
+        </Draggable>
+        {this.props.isDragging && (
+          <div
+            className={classNames(
+              "text-categories__category",
+              "drag-placeholder"
+            )}
+          >
+            <header className="text-categories__header">
+              <h2 className="text-categories__label">
+                <span className="text-categories__label-type--light">
+                  {this.props.t("glossary.category_title_case_one") + ": "}
+                </span>
+                {this.title}
+              </h2>
+            </header>
+            <Texts
+              category={this.category}
+              callbacks={this.callbacks}
+              texts={this.texts}
+              activeType={this.props.activeType}
+              onTextKeyboardMove={this.props.onTextKeyboardMove}
+            />
+          </div>
         )}
-      </Draggable>
+      </>
     );
   }
 }

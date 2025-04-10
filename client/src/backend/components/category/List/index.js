@@ -153,10 +153,10 @@ class CategoryList extends PureComponent {
         onDragStart={this.onDragStart}
         onDragEnd={this.onDragEnd}
       >
-        <section className="text-categories">
+        <section className="text-categories rbd-migration-resets">
           {!!this.categories?.length && (
             <Droppable type="category" droppableId="categories">
-              {provided => (
+              {(provided, snapshot) => (
                 <div
                   className={classNames({
                     "text-categories__dropzone": true,
@@ -173,6 +173,7 @@ class CategoryList extends PureComponent {
                     project={this.project}
                     callbacks={this.callbacks}
                     onTextKeyboardMove={this.onTextKeyboardMove}
+                    dragging={snapshot.draggingFromThisWith}
                   />
                   {provided.placeholder}
                 </div>
