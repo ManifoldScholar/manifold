@@ -12,6 +12,7 @@ class CategoryListTexts extends PureComponent {
     texts: PropTypes.array.isRequired,
     callbacks: PropTypes.object.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
+    dragging: PropTypes.string,
     t: PropTypes.func
   };
 
@@ -57,27 +58,43 @@ class CategoryListTexts extends PureComponent {
   }
 
   renderTexts() {
-    return this.texts.map((text, index) => (
-      <Draggable type="text" index={index} key={text.id} draggableId={text.id}>
-        {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            className={classNames("texts-list__text", {
-              "texts-list__text--is-dragging": snapshot.isDragging
-            })}
+    return this.texts.map((text, index) => {
+      const isDragging = this.props.dragging === text.id;
+
+      return (
+        <>
+          <Draggable
+            type="text"
+            index={index}
+            key={text.id}
+            draggableId={text.id}
           >
-            <TextInner
-              text={text}
-              category={this.props.category}
-              callbacks={this.callbacks}
-              onTextKeyboardMove={this.props.onTextKeyboardMove}
-              dragHandleProps={provided.dragHandleProps}
-            />
-          </div>
-        )}
-      </Draggable>
-    ));
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                className={classNames("texts-list__text", {
+                  "texts-list__text--is-dragging": snapshot.isDragging
+                })}
+              >
+                <TextInner
+                  text={text}
+                  category={this.props.category}
+                  callbacks={this.callbacks}
+                  onTextKeyboardMove={this.props.onTextKeyboardMove}
+                  dragHandleProps={provided.dragHandleProps}
+                />
+              </div>
+            )}
+          </Draggable>
+          {isDragging && (
+            <div className={classNames("texts-list__text", "drag-placeholder")}>
+              <TextInner text={text} category={this.props.category} />
+            </div>
+          )}
+        </>
+      );
+    });
   }
 
   render() {
