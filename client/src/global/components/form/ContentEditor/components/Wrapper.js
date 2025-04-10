@@ -101,7 +101,7 @@ export default function EditorWrapper({
               setEditingCrumb
             }}
           >
-            <Slate editor={editor} value={localSlate} onChange={onChangeSlate}>
+            <Slate editor={editor} initialValue={localSlate} onChange={onChangeSlate}>
               <Editor
                 localHtml={localHtml}
                 setLocalHtml={setLocalHtml}
