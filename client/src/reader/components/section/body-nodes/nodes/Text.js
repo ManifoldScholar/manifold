@@ -231,7 +231,6 @@ class TextNode extends Component {
       const previousTabIndex = previous ? { tabIndex: -1 } : {};
 
       const props = {
-        key: index,
         className: classes,
         "data-removable-highlight-id": removableHighlightId,
         "data-text-annotation-ids": textAnnotationIds,
@@ -243,7 +242,7 @@ class TextNode extends Component {
       const Tag = interactiveAttributes.href ? "a" : "span";
 
       return (
-        <Tag {...props}>
+        <Tag key={index} {...props}>
           {chunk}
           {endingResources.length > 0 ? (
             <Notation.Marker annotations={endingResources} />
