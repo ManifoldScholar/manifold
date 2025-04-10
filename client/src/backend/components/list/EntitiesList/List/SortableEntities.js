@@ -136,39 +136,50 @@ export default class SortableEntities extends PureComponent {
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="sortableEntities">
-          {(provided, snapshot) => (
-            <ul
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className={classNames(this.props.className, {
-                "show-dropzone": snapshot.isDraggingOver
-              })}
-            >
-              {this.entities.map((entity, index) => (
-                <Draggable
-                  key={this.entityKey(index)}
-                  draggableId={this.entityKey(index)}
-                  index={index}
-                >
-                  {/* eslint-disable-next-line no-shadow */}
-                  {(provided, snapshot) => (
-                    <EntityComponent
-                      innerRef={provided.innerRef}
-                      entity={entity}
-                      dragHandleProps={provided.dragHandleProps}
-                      draggableProps={provided.draggableProps}
-                      useDragHandle={this.useDragHandle}
-                      isDragging={snapshot.isDragging}
-                      {...this.entityComponentProps}
-                    />
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </ul>
-          )}
-        </Droppable>
+        <div className="rbd-migration-resets">
+          <Droppable droppableId="sortableEntities">
+            {(provided, snapshot) => (
+              <ul
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                className={classNames(this.props.className, {
+                  "show-dropzone": snapshot.isDraggingOver
+                })}
+              >
+                {this.entities.map((entity, index) => (
+                  <Draggable
+                    key={this.entityKey(index)}
+                    draggableId={this.entityKey(index)}
+                    index={index}
+                  >
+                    {(provided, snapshot) => (
+                      <>
+                        <EntityComponent
+                          innerRef={provided.innerRef}
+                          entity={entity}
+                          dragHandleProps={provided.dragHandleProps}
+                          draggableProps={provided.draggableProps}
+                          useDragHandle={this.useDragHandle}
+                          isDragging={snapshot.isDragging}
+                          {...this.entityComponentProps}
+                        />
+                        {snapshot.isDragging && (
+                          <div className={classNames("entity-row", "drag-placeholder")}>
+                            <EntityComponent
+                              entity={entity}
+                              {...this.entityComponentProps}
+                            />
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </div>
       </DragDropContext>
     );
   }
