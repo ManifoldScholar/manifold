@@ -11,11 +11,18 @@ import {
   defaultFocusStyle
 } from "theme/styles/mixins";
 
-export const Item = styled.li`
-  & + & {
-    padding-block-start: 16px;
+export const Wrapper = styled.div`
+  ul > * + *:not([data-rbd-drop-indicator]) {
+    margin-block-start: 16px;
   }
+`;
+
+export const Item = styled.li`
   color: var(--color-neutral-text-extra-light);
+
+  &:first-child {
+    margin-block-start: 16px;
+  }
 `;
 
 export const Title = styled.div`

@@ -5,6 +5,7 @@ import Section from "./SectionListItem";
 import { sectionsAPI } from "api";
 import { useApiCallback } from "hooks";
 import { useTranslation } from "react-i18next";
+import * as Styled from "./styles";
 
 export default function SectionsList({
   sections = [],
@@ -33,7 +34,7 @@ export default function SectionsList({
   };
 
   return sections.length ? (
-    <div className="full-width">
+    <Styled.Wrapper className="full-width">
       <EntitiesList
         entities={sections}
         entityComponent={Section}
@@ -42,7 +43,7 @@ export default function SectionsList({
         callbacks={{ onReorder }}
         error={errorMessage}
       />
-    </div>
+    </Styled.Wrapper>
   ) : null;
 }
 
