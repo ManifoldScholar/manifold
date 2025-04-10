@@ -57,9 +57,7 @@ module Filtering
 
         return unless exceeds_total_pages?(@results)
 
-        params[:page] = results.total_pages
-
-        @results = model.keyword_search.page(params[:page]).per(params[:per_page])
+        @results = model.keyword_search.page(results.total_pages).per(params[:per_page])
       end
 
       # @!group Steps
