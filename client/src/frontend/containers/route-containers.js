@@ -1,44 +1,85 @@
+import loadable from "@loadable/component";
 import NotFound from "global/containers/NotFound";
-import ApiDocs from "frontend/containers/Api";
-import Frontend from "frontend/containers/Frontend";
-import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
-import Projects from "frontend/containers/Projects";
-import ProjectCollections from "frontend/containers/ProjectCollections";
-import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail";
-import ProjectWrapper from "frontend/containers/ProjectWrapper";
-import ProjectDetail from "frontend/containers/ProjectDetail";
-import ProjectSearch from "frontend/containers/ProjectSearch";
-import ProjectResources from "frontend/containers/ProjectResources";
-import ResourceDetail from "frontend/containers/ResourceDetail";
-import ProjectResourceCollections from "frontend/containers/ProjectResourceCollections";
-import ResourceCollectionDetail from "frontend/containers/ResourceCollectionDetail";
-import EventList from "frontend/containers/EventList";
-import Search from "frontend/containers/Search";
-import Contact from "frontend/containers/Contact";
-import PasswordReset from "frontend/containers/PasswordReset";
-import Page from "frontend/containers/Page";
-import Subscriptions from "frontend/containers/Subscriptions";
-import Unsubscribe from "frontend/containers/Unsubscribe";
-import Home from "frontend/containers/Home";
+
 import MyReadingGroups from "frontend/containers/MyReadingGroups";
 import PublicReadingGroups from "frontend/containers/PublicReadingGroups";
 import ReadingGroup from "frontend/containers/ReadingGroup";
 import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
 import ReadingGroupAnnotations from "frontend/containers/ReadingGroup/Annotations";
 import ReadingGroupHomepage from "frontend/containers/ReadingGroup/Homepage";
-import Login from "frontend/containers/Login";
-import MyStarred from "frontend/containers/MyStarred";
-import MyAnnotations from "frontend/containers/MyAnnotations";
-import IssuesList from "frontend/containers/IssuesList";
-import JournalsWrapper from "frontend/containers/JournalsWrapper";
-import JournalsList from "frontend/containers/JournalsList";
-import JournalWrapper from "frontend/containers/JournalWrapper";
-import JournalDetail from "frontend/containers/JournalDetail";
-import VolumeDetail from "frontend/containers/VolumeDetail";
-import JournalVolumesList from "frontend/containers/JournalVolumesList";
-import JournalIssuesList from "frontend/containers/JournalIssuesList";
-import PrivacySettings from "frontend/containers/PrivacySettings";
-import DataUse from "frontend/containers/DataUse";
+
+const ApiDocs = loadable(() => import("frontend/containers/Api"));
+const Frontend = loadable(() => import("frontend/containers/Frontend"));
+const ProjectsWrapper = loadable(() =>
+  import("frontend/containers/ProjectsWrapper")
+);
+const Projects = loadable(() => import("frontend/containers/Projects"));
+const ProjectCollections = loadable(() =>
+  import("frontend/containers/ProjectCollections")
+);
+const ProjectCollectionDetail = loadable(() =>
+  import("frontend/containers/ProjectCollectionDetail")
+);
+const ProjectWrapper = loadable(() =>
+  import("frontend/containers/ProjectWrapper")
+);
+const ProjectDetail = loadable(() =>
+  import("frontend/containers/ProjectDetail")
+);
+const ProjectSearch = loadable(() =>
+  import("frontend/containers/ProjectSearch")
+);
+const ProjectResources = loadable(() =>
+  import("frontend/containers/ProjectResources")
+);
+const ResourceDetail = loadable(() =>
+  import("frontend/containers/ResourceDetail")
+);
+const ProjectResourceCollections = loadable(() =>
+  import("frontend/containers/ProjectResourceCollections")
+);
+const ResourceCollectionDetail = loadable(() =>
+  import("frontend/containers/ResourceCollectionDetail")
+);
+const EventList = loadable(() => import("frontend/containers/EventList"));
+const Search = loadable(() => import("frontend/containers/Search"));
+const Contact = loadable(() => import("frontend/containers/Contact"));
+const PasswordReset = loadable(() =>
+  import("frontend/containers/PasswordReset")
+);
+const Page = loadable(() => import("frontend/containers/Page"));
+const Subscriptions = loadable(() =>
+  import("frontend/containers/Subscriptions")
+);
+const Unsubscribe = loadable(() => import("frontend/containers/Unsubscribe"));
+const Home = loadable(() => import("frontend/containers/Home"));
+const Login = loadable(() => import("frontend/containers/Login"));
+const MyStarred = loadable(() => import("frontend/containers/MyStarred"));
+const MyAnnotations = loadable(() =>
+  import("frontend/containers/MyAnnotations")
+);
+const IssuesList = loadable(() => import("frontend/containers/IssuesList"));
+const JournalsWrapper = loadable(() =>
+  import("frontend/containers/JournalsWrapper")
+);
+const JournalsList = loadable(() => import("frontend/containers/JournalsList"));
+const JournalWrapper = loadable(() =>
+  import("frontend/containers/JournalWrapper")
+);
+const JournalDetail = loadable(() =>
+  import("frontend/containers/JournalDetail")
+);
+const VolumeDetail = loadable(() => import("frontend/containers/VolumeDetail"));
+const JournalVolumesList = loadable(() =>
+  import("frontend/containers/JournalVolumesList")
+);
+const JournalIssuesList = loadable(() =>
+  import("frontend/containers/JournalIssuesList")
+);
+const PrivacySettings = loadable(() =>
+  import("frontend/containers/PrivacySettings")
+);
+const DataUse = loadable(() => import("frontend/containers/DataUse"));
 
 export default {
   NotFound,
