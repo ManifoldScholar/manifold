@@ -63,7 +63,7 @@ module HasFormattedAttributes
     # @param [Hash] options
     # @return [void]
     def has_formatted_attribute(attribute, **options)
-      formatted_attributes.define! attribute, options
+      formatted_attributes.define! attribute, **options
     end
 
     def inherited(subclass)

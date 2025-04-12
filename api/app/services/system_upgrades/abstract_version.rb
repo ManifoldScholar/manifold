@@ -42,8 +42,8 @@ module SystemUpgrades
 
     private
 
-    def tag_version!
-      logger.tagged(version_string, &Proc.new)
+    def tag_version!(&block)
+      logger.tagged(version_string, &block)
     end
 
     class << self

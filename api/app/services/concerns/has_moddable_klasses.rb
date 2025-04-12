@@ -25,11 +25,11 @@ module HasModdableKlasses
           end
       RUBY
       class_eval <<~RUBY, __FILE__, __LINE__ + 1
-          def #{@reference_name}
+          def #{@reference_name}(&block)
             return nil if abstract?
 
             #{@ivar}.tap do |klass|
-              klass.class_eval(&Proc.new) if block_given?
+              klass.class_eval(&block) if block_given?
             end
           end
 

@@ -16,7 +16,7 @@ RSpec.shared_context "param helpers" do
   end
 
   def build_json_payload(**options)
-    build_json_structure(options).to_json
+    build_json_structure(**options).to_json
   end
 
   def adjust_attributes(attributes, type)

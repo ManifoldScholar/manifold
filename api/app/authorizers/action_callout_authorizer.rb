@@ -30,9 +30,9 @@ class ActionCalloutAuthorizer < ApplicationAuthorizer
     with_calloutable { |p| p.fully_readable_by? user, options }
   end
 
-  def with_calloutable
-    return with_journal(&Proc.new) if resource.calloutable.is_a? Journal
-    return with_project(&Proc.new) if resource.calloutable.is_a? Project
+  def with_calloutable(&block)
+    return with_journal(&block) if resource.calloutable.is_a? Journal
+    return with_project(&block) if resource.calloutable.is_a? Project
 
     false
   end
