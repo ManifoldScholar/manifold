@@ -68,9 +68,9 @@ module ExportStrategies
       # @yield a class-evaled block
       # @yieldreturn [void]
       # @return [void]
-      def connection
+      def connection(&block)
         connection_klass.tap do |klass|
-          klass.class_eval(&Proc.new) if block_given?
+          klass.class_eval(&block) if block_given?
         end
       end
 
@@ -110,9 +110,9 @@ module ExportStrategies
       # @yield a class-evaled block
       # @yieldreturn [void]
       # @return [void]
-      def uploader
+      def uploader(&block)
         uploader_klass.tap do |klass|
-          klass.class_eval(&Proc.new) if block_given?
+          klass.class_eval(&block) if block_given?
         end
       end
 

@@ -1,15 +1,15 @@
 class ApplicationJob < ActiveJob::Base
-  def match_result(result)
-    Dry::Matcher::ResultMatcher.(result, &Proc.new)
+  def match_result(result, &block)
+    Dry::Matcher::ResultMatcher.(result, &block)
   end
 
-  def match_result_on_failure(result)
+  def match_result_on_failure(result, &block)
     match_result(result) do |m|
       m.success do
         # This block intentionally left blank
       end
 
-      m.failure(&Proc.new)
+      m.failure(&block)
     end
   end
 

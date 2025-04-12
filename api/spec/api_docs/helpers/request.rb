@@ -88,7 +88,7 @@ module APIDocs
 
         type = action == :index ? human_resource_name_plural : human_resource_name
         key = @options[:parent].present? ? "swagger.#{@action}.summary_with_parent" : "swagger.#{@action}.summary"
-        I18n.t(key, string_vars(type))
+        I18n.t(key, **string_vars(type))
       end
 
       def response_description?
@@ -276,7 +276,7 @@ module APIDocs
         options = {
           paginated: paginated?
         }
-        resource_klass(resource_name).send(type_method(type_from_action(action, :response)), options)
+        resource_klass(resource_name).send(type_method(type_from_action(action, :response)), **options)
       end
     end
   end

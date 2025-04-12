@@ -31,7 +31,7 @@ module ExportStrategies
     # @yieldreturn [Dry::Monads::Result, nil]
     # @return [Dry::Monads::Result]
     # rubocop:disable Metrics/MethodLength
-    def connect!
+    def connect!(&block)
       raise "Must provide a block to connect!" unless block_given?
 
       haltable! do
@@ -43,7 +43,7 @@ module ExportStrategies
           end
 
           run_callbacks :connect do
-            establish_connection!(&Proc.new)
+            establish_connection!(&block)
           end
         end
       end
@@ -71,10 +71,10 @@ module ExportStrategies
     # @yieldparam [Utility::Captor::CaptureAttempt] captor
     # @yieldreturn [void]
     # @return [Object]
-    def capture(**options)
+    def capture(**options, &block)
       raise "Block required" unless block_given?
 
-      Utility::Captor.capture(options, &Proc.new)
+      Utility::Captor.capture(options, &block)
     end
 
     # @abstract

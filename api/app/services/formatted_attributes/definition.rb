@@ -104,7 +104,7 @@ module FormattedAttributes
     # @param [String] value
     # @return [String]
     def format(value)
-      SimpleFormatter.run!(input: value, include_wrap: include_wrap?, renderer_options: renderer_options.as_json)
+      SimpleFormatter.run!(input: value.to_s, include_wrap: include_wrap?, renderer_options: renderer_options.as_json)
     end
 
     # @param [String] value

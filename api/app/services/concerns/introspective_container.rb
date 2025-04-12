@@ -63,7 +63,7 @@ module IntrospectiveContainer
     # @param [Boolean] memoize
     # @param [<#to_s>] klasses
     # @param [{ #to_s => #to_s }] pairs
-    def register_simple_callables_in(namespace, *klasses, memoize: true, **pairs)
+    def register_simple_callables_in(namespace, *klasses, memoize: true, **pairs, &block)
       mapping = simple_registry_mapping(klasses: klasses, pairs: pairs, namespace: namespace)
 
       self.namespace namespace.to_s do
@@ -73,7 +73,7 @@ module IntrospectiveContainer
           end
         end
 
-        instance_eval(&Proc.new) if block_given?
+        instance_eval(&block) if block_given?
       end
     end
 

@@ -127,7 +127,7 @@ class RoleName < ClassyEnum::Base
     end
 
     def scoped_predicates(**options)
-      scoped(options).map(&:predicate_name)
+      scoped(**options).map(&:predicate_name)
     end
 
     # @!endgroup
