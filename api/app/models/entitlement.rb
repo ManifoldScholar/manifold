@@ -95,11 +95,11 @@ class Entitlement < ApplicationRecord
   # itself, e.g. to test the {SystemEntitlementKind}.
   #
   # @see #has_subject?
-  def for_system_entitlement?
+  def for_system_entitlement?(&block)
     return false unless has_subject? SystemEntitlement
     return true unless block_given?
 
-    subject.instance_exec(subject, &Proc.new)
+    subject.instance_exec(subject, &block)
   end
 
   # @param [#===, nil] kind

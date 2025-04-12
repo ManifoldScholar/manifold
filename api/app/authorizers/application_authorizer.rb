@@ -75,24 +75,24 @@ class ApplicationAuthorizer < Authority::Authorizer
   # @yieldparam [Project] project
   # @yieldreturn [Boolean]
   # @return [Boolean]
-  def with_project
+  def with_project(&block)
     project = resource.project
 
     return false if project.blank?
 
-    project.then(&Proc.new)
+    project.then(&block)
   end
 
   # @yield [journal] do something with a journal if it is present on the resource.
   # @yieldparam [Journal] journal
   # @yieldreturn [Boolean]
   # @return [Boolean]
-  def with_journal
+  def with_journal(&block)
     journal = resource.journal
 
     return false if journal.blank?
 
-    journal.then(&Proc.new)
+    journal.then(&block)
   end
 
   class << self

@@ -39,7 +39,7 @@ module Collections
     # @return [<#to_s>]
     attr_reader :collectable_entries
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       @collectables = collectable_models.map do |collectable|

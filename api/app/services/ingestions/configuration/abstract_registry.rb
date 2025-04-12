@@ -55,7 +55,7 @@ module Ingestions
 
         options[:position] = calculate_position(position)
 
-        new_definition = definition_klass.new options
+        new_definition = definition_klass.new(**options)
 
         unless new_definition.valid?
           raise Ingestions::Configuration::InvalidDefinition,
@@ -167,7 +167,7 @@ module Ingestions
                                                                           interaction,
                                                                           &block)
 
-                registry.add configurator.to_h
+                registry.add(**configurator.to_h)
               end
 
               expose definition_definer
