@@ -84,6 +84,10 @@ export const Editable = styled(BaseEditable)`
   &:focus-visible {
     outline: none;
   }
+
+  *[data-slate-placeholder] {
+    top: auto !important;
+  }
 `;
 
 export const Controls = styled.div`
