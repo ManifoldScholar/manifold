@@ -1,5 +1,5 @@
 import baseConfig from "./base.config";
-import { DefinePlugin } from "webpack";
+import { DefinePlugin, ProvidePlugin } from "webpack";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 const ManifestPlugin = require("../plugins/manifest");
 import paths from "../helpers/paths";
@@ -10,13 +10,8 @@ import merge from "webpack-merge";
 
 const config = merge(baseConfig("web"), {
   entry: {
-    "build/manifold-client-browser": ["./src/entry-browser.js"],
-    "build/manifold-client-print": ["./src/theme/print.js"]
+    "build/manifold-client-browser": ["./src/entry-browser.js"]
   },
-
-  // Webpack mocks node's global "process". We don't want it to in this case, because
-  // we're mocking it ourselves via the .env file that we generate for the client.
-  node: { process: false },
 
   // Browser javascript is written into the www folder in the dist directory.
   output: {
@@ -40,16 +35,20 @@ const config = merge(baseConfig("web"), {
       fileName: "manifest.json"
     }),
 
-    new CopyWebpackPlugin([
+    new CopyWebpackPlugin({
       // We always want to include the env.js file in the client build. This file is
       // loaded by the client, and it provides an environment of sorts for the browser
       // code.
-      {
-        from: "webpack/templates/www_env.ejs",
-        to: `${paths.build}/www/browser.config.js`,
-        transform: compileEnv
-      }
-    ])
+      patterns: [
+        {
+          from: "webpack/templates/www_env.ejs",
+          to: `${paths.build}/www/browser.config.js`,
+          transform: compileEnv
+        }
+      ]
+    }),
+
+    new ProvidePlugin({ Buffer: ["buffer", "Buffer"] })
   ]
 });
 
