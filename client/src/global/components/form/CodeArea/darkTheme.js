@@ -1,5 +1,6 @@
 import { config } from "ace-builds";
 import idleFingersUrl from "ace-builds/src-noconflict/theme-idle_fingers";
+
 config.setModuleUrl(
   "ace-builds/src-noconflict/theme-idle_fingers",
   idleFingersUrl
