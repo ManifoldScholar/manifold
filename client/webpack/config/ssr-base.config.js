@@ -28,12 +28,7 @@ const config = merge(baseConfig("node"), {
     __filename: false
   },
 
-  devtool: "none",
-
-  // If we're watching, let's not watch node_modules
-  watchOptions: {
-    ignored: /node_modules/
-  },
+  devtool: false,
 
   plugins: [
     new DefinePlugin({
@@ -57,13 +52,15 @@ const config = merge(baseConfig("node"), {
       maxChunks: 1
     }),
 
-    new CopyWebpackPlugin([
-      {
-        from: "webpack/templates/node_env.ejs",
-        to: `${paths.build}/ssr/ssr.config.js`,
-        transform: compileEnv
-      }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "webpack/templates/node_env.ejs",
+          to: `${paths.build}/ssr/ssr.config.js`,
+          transform: compileEnv
+        }
+      ]
+    }),
 
     // Isomorphic fetch requires iconv-loader which has a dynamic include that Webpack can't
     // really handle. We replace it with a noop javascript object, since we don't really need

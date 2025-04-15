@@ -4,9 +4,9 @@ import environment from "../helpers/environment";
 import plugins from "../helpers/plugins";
 import paths from "../helpers/paths";
 
-const nameTemplate = environment.production ? "[name]-[hash]" : "[name]";
+const nameTemplate = environment.production ? "[name]-[contenthash]" : "[name]";
 
-/* eslint-disable  global-require */
+/* eslint-disable global-require */
 export default function buildWebpackConfiguration(target = "web") {
   function styleLoader() {
     if (target !== "web") return null;
@@ -17,17 +17,19 @@ export default function buildWebpackConfiguration(target = "web") {
   const webpackConfiguration = {
     mode: environment.name,
     context: paths.root,
+    bail: environment.production,
 
     output: {
       chunkFilename: `build/chunk-${nameTemplate}.js`,
       path: paths.build,
+      pathinfo: environment.development,
       publicPath: "/",
       filename: `${nameTemplate}.js`
     },
 
     target,
 
-    devtool: "source-map",
+    devtool: environment.production ? "source-map" : "eval-cheap-source-map",
 
     module: {
       rules: [
@@ -42,18 +44,19 @@ export default function buildWebpackConfiguration(target = "web") {
           loader: "string-replace-loader",
           options: {
             search: "if (unsafePseudoClasses",
-            replace: "if (false && unsafePseudoClasses",
-          },
+            replace: "if (false && unsafePseudoClasses"
+          }
         },
         // Javascript loader
         {
-          test: /\.js$/,
+          test: /\.m?js$/,
           include: [paths.src, paths.plugins],
           use: [
             {
-              loader: "babel-loader",
+              loader: require.resolve("babel-loader"),
               options: {
-                cacheDirectory: true
+                cacheDirectory: true,
+                compact: environment.production
               }
             }
           ]
@@ -62,7 +65,7 @@ export default function buildWebpackConfiguration(target = "web") {
         // CSS loader: css > style or css extract into separate file.
         {
           test: /\.css$/,
-          // include: [paths.src, paths.plugins],
+          include: [paths.src, paths.plugins],
           use: [
             styleLoader(),
             {
@@ -74,21 +77,31 @@ export default function buildWebpackConfiguration(target = "web") {
           ].filter(loader => loader !== null)
         },
 
-        // url-loader includes small file in the bundle, inline, and passes large files to
-        // file-loader
         {
-          test: /\.(woff|woff2|ttf|eot|svg|gif|jpg|jpeg|png)$/i,
+          type: "asset",
+          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
           include: [paths.src, paths.plugins],
-          use: [
-            {
-              loader: "url-loader",
-              options: {
-                limit: 15000, // inline files 15k or less
-                name: `build/assets/${nameTemplate}.[ext]`,
-                fallback: "file-loader"
-              }
+          generator: {
+            filename: `build/assets/${nameTemplate}.[ext]`
+          },
+          parser: {
+            dataUrlCondition: {
+              maxSize: 15000
             }
-          ]
+          }
+        },
+
+        {
+          type: "asset/resource",
+          test: [/\.woff2?$/, /\.ttf$/, /\.eot$/],
+          generator: {
+            filename: `build/assets/${nameTemplate}[ext]`
+          },
+          parser: {
+            dataUrlCondition: {
+              maxSize: 15000
+            }
+          }
         }
       ]
     },
@@ -108,19 +121,19 @@ export default function buildWebpackConfiguration(target = "web") {
     },
 
     plugins: [
-      new MiniCssExtractPlugin({
-        filename: `${nameTemplate}.css`,
-        chunkFilename: `chunk-${nameTemplate}.css`
-      }),
+      environment.isBuild &&
+        new MiniCssExtractPlugin({
+          filename: `${nameTemplate}.css`,
+          chunkFilename: `chunk-${nameTemplate}.css`
+        }),
 
       new CircularDependencyPlugin({
         exclude: /a\.js|node_modules|src\/global\/containers\/comment\/|src\/global\/components\/comment\//,
         failOnError: true,
         cwd: paths.root
       })
-    ]
+    ].filter(Boolean)
   };
   return webpackConfiguration;
 }
-
 /* eslint-enable global-require */
