@@ -3,7 +3,7 @@ import get from "lodash/get";
 import CookieHelper from "helpers/cookie/Browser";
 import config from "config";
 import ch from "helpers/consoleHelpers";
-import uuid from "uuid";
+import { v1 as uuidv1 } from "uuid";
 import { entityStoreActions, currentUserActions } from "actions";
 import { analyticEventsAPI, requests } from "api";
 import { useFromStore } from "hooks";
@@ -18,13 +18,13 @@ function manifoldAnalyticsEnabled(settings) {
 }
 
 function generateVisitorToken() {
-  const token = uuid.v1();
+  const token = uuidv1();
   cookie.write("visitorToken", token, { expires: 365 });
   return token;
 }
 
 function generateVisitToken() {
-  const token = uuid.v1();
+  const token = uuidv1();
   cookie.write("visitToken", token, { expires: 1 });
   return token;
 }
