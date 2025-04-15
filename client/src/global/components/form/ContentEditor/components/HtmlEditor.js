@@ -12,6 +12,7 @@ import "../../CodeArea/lightTheme";
 import cssWorkerUrl from "ace-builds/src-noconflict/worker-css";
 import htmlWorkerUrl from "ace-builds/src-noconflict/worker-html";
 import jsWorkerUrl from "ace-builds/src-noconflict/worker-javascript";
+
 config.setModuleUrl("ace/mode/css_worker", cssWorkerUrl);
 config.setModuleUrl("ace/mode/html_worker", htmlWorkerUrl);
 config.setModuleUrl("ace/mode/javascript_worker", jsWorkerUrl);

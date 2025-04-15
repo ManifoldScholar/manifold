@@ -35,10 +35,12 @@ export default function LoadableWaveform({ resource }) {
   });
 
   useEffect(() => {
-    wavesurfer?.on("error", error => {
-      console.error(error);
-      setIsErrored(true);
-    });
+    if (wavesurfer) {
+      wavesurfer.on("error", error => {
+        console.error(error);
+        setIsErrored(true);
+      });
+    }
   }, [wavesurfer]);
 
   const duration = wavesurfer?.getDuration();
@@ -48,29 +50,37 @@ export default function LoadableWaveform({ resource }) {
   const muted = wavesurfer?.getMuted();
 
   function startPlayback() {
-    if (!isReady) return null;
+    if (!isReady || !wavesurfer) return null;
     setStarted(true);
-    wavesurfer?.playPause();
+    wavesurfer.playPause();
   }
 
   function togglePlayback() {
-    wavesurfer?.playPause();
+    if (wavesurfer) {
+      wavesurfer.playPause();
+    }
   }
 
   function handleProgressClick(event) {
     const current = (event.target.value / 100) * duration;
-    const progress = current / duration;
-    wavesurfer?.seekTo(progress);
+    const updatedProgress = current / duration;
+    if (wavesurfer) {
+      wavesurfer.seekTo(updatedProgress);
+    }
   }
 
   function toggleMute() {
-    wavesurfer?.setMuted(!muted);
+    if (wavesurfer) {
+      wavesurfer.setMuted(!muted);
+    }
   }
 
   function setVolume(event) {
-    const volume = parseInt(event.target.value, 10);
-    wavesurfer?.setMuted(false);
-    wavesurfer?.setVolume(volume / 100);
+    if (wavesurfer) {
+      const newVolume = parseInt(event.target.value, 10);
+      wavesurfer.setMuted(false);
+      wavesurfer.setVolume(newVolume / 100);
+    }
   }
 
   if (isErrored) {
