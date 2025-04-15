@@ -9229,7 +9229,7 @@ __metadata:
     true-case-path: "npm:^2.2.1"
     tus-js-client: "npm:^4.3.1"
     use-resize-observer: "npm:^9.1.0"
-    uuid: "https://registry.npmjs.org/uuid/-/uuid-2.0.2.tgz"
+    uuid: "npm:^11.x"
     wait-on: "npm:^8.0.3"
     wavesurfer.js: "npm:^7.9.4"
     webpack: "npm:^5.x"
@@ -14287,10 +14287,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@https://registry.npmjs.org/uuid/-/uuid-2.0.2.tgz":
-  version: 2.0.2
-  resolution: "uuid@npm:2.0.2"
-  checksum: 10c0/a0a40e501fe790e5cdde1c559c06a72b38455b42be81d1b241328fc7f384bbc74e871bca49fd56b813a8bd6a0ac318f1a81e2e8144332e2e35b205f8e32933fb
+"uuid@npm:^11.x":
+  version: 11.1.0
+  resolution: "uuid@npm:11.1.0"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 10c0/34aa51b9874ae398c2b799c88a127701408cd581ee89ec3baa53509dd8728cbb25826f2a038f9465f8b7be446f0fbf11558862965b18d21c993684297628d4d3
   languageName: node
   linkType: hard
 
