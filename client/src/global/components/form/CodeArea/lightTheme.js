@@ -1,5 +1,6 @@
 import { config } from "ace-builds";
 import kuroirUrl from "ace-builds/src-noconflict/theme-kuroir";
+
 config.setModuleUrl("ace-builds/src-noconflict/theme-kuroir", kuroirUrl);
 
 /* eslint-disable max-len, no-unused-vars */
