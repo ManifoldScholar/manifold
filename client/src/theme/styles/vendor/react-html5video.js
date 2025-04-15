@@ -153,7 +153,7 @@ export default `
     margin: 0;
     cursor: pointer;
     opacity: 0;
-    -webkit-appearance: slider-vertical;
+    appearance: slider-vertical;
   }
 
   .rh5v-Captions_component {
