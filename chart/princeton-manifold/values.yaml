@@ -91,12 +91,12 @@ resources:
 
 api:
   image:
-    repository: ghcr.io/scientist-softserv/princeton-manifold/api
+    repository: ghcr.io/notch8/princeton-manifold/api
     pullPolicy: IfNotPresent
     tag: ""
 client:
   image:
-    repository: ghcr.io/scientist-softserv/princeton-manifold/client
+    repository: ghcr.io/notch8/princeton-manifold/client
     pullPolicy: IfNotPresent
     tag: ""
 

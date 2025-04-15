@@ -2,7 +2,7 @@
 version: "3"
 
 x-api: &api
-  image: ghcr.io/scientist-softserv/princeton-manifold/api:${TAG:-latest}
+  image: ghcr.io/notch8/princeton-manifold/api:${TAG:-latest}
   build:
     context: .
     target: manifold-api
@@ -62,7 +62,7 @@ services:
     command: ["./start-and-run", "bin/sidekiq"]
 
   client:
-    image: ghcr.io/scientist-softserv/princeton-manifold/client:${TAG:-latest}
+    image: ghcr.io/notch8/princeton-manifold/client:${TAG:-latest}
     build:
       context: .
       target: manifold-client
@@ -77,7 +77,7 @@ services:
       - internal
 
   nginx:
-    image: ghcr.io/scientist-softserv/princeton-manifold/nginx:${TAG:-latest}
+    image: ghcr.io/notch8/princeton-manifold/nginx:${TAG:-latest}
     build:
       context: .
       target: manifold-nginx
