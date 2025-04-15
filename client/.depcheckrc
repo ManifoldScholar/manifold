@@ -19,11 +19,12 @@ ignores: [
 
   # used by yarn scripts
   "@babel/register",
+  "rimraf",
 
   # webpack dependencies
   "css-loader",
   "string-replace-loader",
   "style-loader",
-  "webpack-cli"
+  "webpack-cli",
 ]
 skip-missing: true
