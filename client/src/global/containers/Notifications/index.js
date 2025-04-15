@@ -96,10 +96,14 @@ export class NotificationsComponent extends Component {
     }
 
     // allow time for exit transition to run before unmounting
-    this.notificationList?.classList.add("removing");
+    if (this.notificationList) {
+      this.notificationList.classList.add("removing");
+    }
     setTimeout(() => {
       this.commonActions.clearNotifications();
-      this.notificationList?.classList.remove("removing");
+      if (this.notificationList) {
+        this.notificationList.classList.remove("removing");
+      }
     }, 200);
   };
 

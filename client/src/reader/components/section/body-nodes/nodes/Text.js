@@ -242,6 +242,7 @@ class TextNode extends Component {
       const Tag = interactiveAttributes.href ? "a" : "span";
 
       return (
+        // eslint-disable-next-line react/no-array-index-key
         <Tag key={index} {...props}>
           {chunk}
           {endingResources.length > 0 ? (
