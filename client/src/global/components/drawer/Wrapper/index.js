@@ -46,7 +46,8 @@ export default function DrawerWrapper({
           style={{
             "--z-index":
               identifier === "notes-drawer" ||
-              identifier === "annotations-drawer"
+              identifier === "annotations-drawer" ||
+              identifier === "toc-drawer"
                 ? 150
                 : 500
           }}
