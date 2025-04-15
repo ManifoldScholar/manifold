@@ -111,7 +111,7 @@ export default function buildWebpackConfiguration(
           test: [/ace-builds.*\/worker-.*$/, /ace-builds.*\/theme-.*$/],
           type: "asset/resource",
           generator: {
-            filename: `build/${nameTemplate}[ext]`
+            filename: `build/[name][ext]`
           }
         }
       ]
