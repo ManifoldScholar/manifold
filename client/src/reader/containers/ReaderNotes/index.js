@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { useParams, useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom-v5-compat";
+import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { readingGroupsAPI, meAPI, requests } from "api";
 import groupBy from "lodash/groupBy";

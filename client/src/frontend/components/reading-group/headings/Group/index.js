@@ -8,7 +8,7 @@ import ManageGroup from "./ManageGroup";
 import GroupSummaryBox from "./GroupSummaryBox";
 import * as Styled from "./styles";
 
-function GroupHeading({ readingGroup, history, location }) {
+function GroupHeading({ readingGroup, location }) {
   const { t } = useTranslation();
 
   const {
@@ -58,7 +58,6 @@ function GroupHeading({ readingGroup, history, location }) {
         <Styled.Container>
           <ManageGroup
             readingGroup={readingGroup}
-            history={history}
             location={location}
           />
         </Styled.Container>
@@ -71,7 +70,6 @@ GroupHeading.displayName = "ReadingGroup.GroupHeading";
 
 GroupHeading.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 };
 
