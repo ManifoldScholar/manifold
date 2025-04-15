@@ -9183,7 +9183,6 @@ __metadata:
     query-string: "npm:^7.x"
     react: "npm:^18.x"
     react-ace: "npm:^14.x"
-    react-attr-converter: "npm:^0.3.1"
     react-beautiful-dnd: "npm:^13.1.1"
     react-datepicker: "npm:^8.x"
     react-dom: "npm:^18.x"
@@ -11305,13 +11304,6 @@ __metadata:
     react: ^0.13.0 || ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^0.13.0 || ^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10c0/dbc77970836f13bad88365903d077edd68cc1955857290475bc067e0b801181c1d60a9ee08cf89b20895fe312dbb169c072c5b23338d7176f9f658db7929732f
-  languageName: node
-  linkType: hard
-
-"react-attr-converter@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "react-attr-converter@npm:0.3.1"
-  checksum: 10c0/c460dafcbcca6058a2589c69bace1947c1614ca06865561ded3503095618c87318e508ec93edde18044a89ca90520adc5c38aeefb3b45683f40eb9ba6616fc64
   languageName: node
   linkType: hard
 
