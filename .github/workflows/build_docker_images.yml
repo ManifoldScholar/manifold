@@ -26,7 +26,7 @@ jobs:
     steps:
       - id: setup
         name: Setup
-        uses: scientist-softserv/actions/setup-env@v0.0.22
+        uses: notch8/actions/setup-env@v0.0.22
         with:
           token: ${{ secrets.CHECKOUT_TOKEN || secrets.GITHUB_TOKEN }}
       - name: Set up Docker Buildx
@@ -51,7 +51,7 @@ jobs:
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
       - name: Build and push API
-        uses: scientist-softserv/actions/build-and-push@v0.0.22
+        uses: notch8/actions/build-and-push@v0.0.22
         with:
           type: api_rails
           location: /api
@@ -63,7 +63,7 @@ jobs:
     steps:
       - id: setup
         name: Setup
-        uses: scientist-softserv/actions/setup-env@v0.0.22
+        uses: notch8/actions/setup-env@v0.0.22
         with:
           token: ${{ secrets.CHECKOUT_TOKEN || secrets.GITHUB_TOKEN }}
       - name: Set up Docker Buildx
@@ -88,7 +88,7 @@ jobs:
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
       - name: Build and push Client
-        uses: scientist-softserv/actions/build-and-push@v0.0.22
+        uses: notch8/actions/build-and-push@v0.0.22
         with:
           type: client
           location: /client
@@ -100,7 +100,7 @@ jobs:
     steps:
       - id: setup
         name: Setup
-        uses: scientist-softserv/actions/setup-env@v0.0.22
+        uses: notch8/actions/setup-env@v0.0.22
         with:
           token: ${{ secrets.CHECKOUT_TOKEN || secrets.GITHUB_TOKEN }}
       - name: Set up Docker Buildx
@@ -125,7 +125,7 @@ jobs:
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
       - name: Build and push Nginx
-        uses: scientist-softserv/actions/build-and-push@v0.0.22
+        uses: notch8/actions/build-and-push@v0.0.22
         with:
           type: nginx
           location: /nginx
