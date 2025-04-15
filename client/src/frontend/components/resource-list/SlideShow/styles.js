@@ -90,6 +90,7 @@ export const SlidesWrapper = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   overflow-x: auto;
+  overflow-y: hidden;
   color: var(--color-neutral-text-extra-light);
   background-color: var(--color-base-neutral-black);
 `;
