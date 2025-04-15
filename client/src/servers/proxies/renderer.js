@@ -34,7 +34,7 @@ export default function makeRendererProxy(requestHandler) {
             res.end(msg);
           } else {
             ch.error(
-              `Rendering fallback failed to render inn server-developmet.js`
+              `Rendering fallback failed to render in server-development.js`
             );
             res.setHeader("Content-Type", "text/html");
             res.end(exceptionRenderer(error));

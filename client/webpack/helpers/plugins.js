@@ -3,9 +3,11 @@ import paths from "./paths";
 import fs from "fs";
 
 class Plugins {
-
   constructor() {
-    this.pluginNoOp = path.resolve(paths.root, "src/utils/plugins/missingPluginsManifest.js");
+    this.pluginNoOp = path.resolve(
+      paths.root,
+      "src/utils/plugins/missingPluginsManifest.js"
+    );
     this.componentsEntry = path.resolve(paths.plugins, "components.js");
     this.stylesEntry = path.resolve(paths.plugins, "styles.js");
     this.hasComponents = fs.existsSync(this.componentsEntry);
@@ -14,15 +16,18 @@ class Plugins {
 
   get webpackAliases() {
     const baseAliases = {
-      plugins$: this.pluginNoOp
+      plugins$: this.pluginNoOp,
+      stream: "stream-browserify"
     };
 
     let aliases = baseAliases;
 
     if (this.hasStyles) {
       const stylesAlias = require(this.stylesEntry).default;
-      if (stylesAlias.hasOwnProperty("variables")) aliases["userVariables$"] = stylesAlias.variables;
-      if (stylesAlias.hasOwnProperty("styles")) aliases["userStyles$"] = stylesAlias.styles;
+      if (stylesAlias.hasOwnProperty("variables"))
+        aliases["userVariables$"] = stylesAlias.variables;
+      if (stylesAlias.hasOwnProperty("styles"))
+        aliases["userStyles$"] = stylesAlias.styles;
     }
 
     if (this.hasComponents) {
@@ -32,9 +37,9 @@ class Plugins {
     if (this.hasPlugins && this.plugins.hasOwnProperty("components")) {
       aliases = Object.assign(aliases, { plugins$: this.pluginsEntry });
     }
+
     return aliases;
   }
-
 }
 
-export default new Plugins;
+export default new Plugins();
