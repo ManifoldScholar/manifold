@@ -3,7 +3,7 @@ import { useUID } from "react-uid";
 import { useTranslation } from "react-i18next";
 import { getCollectableIcon } from "./helpers";
 import { Title, Remove } from "../parts";
-import Disclosure from "frontend/components/collecting/Disclosure";
+import PopoverMenu from "global/components/popover/Menu";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 import { Action } from "../parts/styles";
@@ -18,7 +18,11 @@ export default function Content({
   collectableRef,
   wrapperRef,
   dragHandleRef,
-  dragState
+  dragState,
+  index,
+  collectableCount,
+  categoryIndex,
+  categoryCount
 }) {
   const groupLabelId = useUID();
 
@@ -37,51 +41,42 @@ export default function Content({
         </Styled.Header>
         <Styled.Actions role="group" aria-labelledby={groupLabelId}>
           <Remove id={id} type={type} onRemove={onRemove} />
-          <Disclosure.Provider>
-            <Disclosure.Toggle>
+          <PopoverMenu
+            disclosure={
               <Action ref={dragHandleRef} data-drag-handle>
                 <IconComposer icon="grabber32" size="default" />
+                <span className="screen-reader-text">
+                  {t("forms.category.reorder_collectable")}
+                </span>
               </Action>
-            </Disclosure.Toggle>
-            <Disclosure.Content>
-              {({ closeMenu }) => (
-                <>
-                  <Action
-                    onClick={() => {
-                      closeMenu();
-                      onSort({ id, type, direction: "up" });
-                    }}
-                  >
-                    {t("forms.category.collectable_move_up")}
-                  </Action>
-                  <Action
-                    onClick={() => {
-                      closeMenu();
-                      onSort({ id, type, direction: "down" });
-                    }}
-                  >
-                    {t("forms.category.collectable_move_down")}
-                  </Action>
-                  <Action
-                    onClick={() => {
-                      closeMenu();
-                      onMove({ id, type, direction: "up" });
-                    }}
-                  >
-                    {t("forms.category.collectable_category_up")}
-                  </Action>
-                  <Action
-                    onClick={() => {
-                      closeMenu();
-                      onMove({ id, type, direction: "down" });
-                    }}
-                  >
-                    {t("forms.category.collectable_category_down")}
-                  </Action>
-                </>
-              )}
-            </Disclosure.Content>
-          </Disclosure.Provider>
+            }
+            actions={[
+              {
+                id: "up",
+                label: t("forms.category.collectable_move_up"),
+                onClick: () => onSort({ id, type, direction: "up" }),
+                disabled: index === 0
+              },
+              {
+                id: "down",
+                label: t("forms.category.collectable_move_down"),
+                onClick: () => onSort({ id, type, direction: "down" }),
+                disabled: index === collectableCount - 1
+              },
+              {
+                id: "up_category",
+                label: t("forms.category.collectable_category_up"),
+                onClick: () => onMove({ id, type, direction: "up" }),
+                disabled: categoryIndex === 0
+              },
+              {
+                id: "down_category",
+                label: t("forms.category.collectable_category_down"),
+                onClick: () => onMove({ id, type, direction: "down" }),
+                disabled: categoryIndex === categoryCount - 1
+              }
+            ]}
+          />
         </Styled.Actions>
       </Styled.Collectable>
     </Styled.Wrapper>
