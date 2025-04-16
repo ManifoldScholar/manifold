@@ -30,4 +30,5 @@ data:
   RAILS_ENV: production
   RAILS_REDIS_URL: {{ template "princeton-manifold.redis.url" . }}
   RAILS_SECRET_KEY: {{ .Values.env.rails_secret_key }}
+  REDIS_URL: {{ template "princeton-manifold.redis.url" . }}
   SSL_ENABLED: "true"
