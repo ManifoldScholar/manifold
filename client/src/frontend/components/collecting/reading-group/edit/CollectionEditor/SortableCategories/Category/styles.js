@@ -3,23 +3,22 @@ import {
   panelRounded,
   dragging,
   utilityPrimary,
-  textTruncate,
-  defaultTransitionProps
+  textTruncate
 } from "theme/styles/mixins";
 import { categoryVerticalPadding } from "../../styles";
 
 export const collapsible = `
-  height: auto;
-  opacity: 1;
-  transition: height ${defaultTransitionProps},
-    opacity ${defaultTransitionProps}, padding-block ${defaultTransitionProps};
+  overflow-y: clip;
+  transition-property: opacity, height, padding-block;
+  transition-duration: 0.5s;
+  transition-delay: 0.2s, 0s, 0s;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
 `;
 export const collapsed = `
   height: 0;
   opacity: 0;
   padding-block: 0;
-  pointer-events: none;
-  overflow: hidden;
+  transition-delay: 0s;
 `;
 
 export const Shadow = styled.div`
@@ -51,7 +50,10 @@ export const Inner = styled.div`
   }
 
   ${collapsible}
-  ${({ $collapsed }) => $collapsed && collapsed};
+
+  &[inert] {
+    ${collapsed}
+  }
 `;
 
 export const Title = styled.h3`
