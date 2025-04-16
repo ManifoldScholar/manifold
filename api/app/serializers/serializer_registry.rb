@@ -20,7 +20,7 @@ class SerializerRegistry
     options = map_relationship_options(options)
     register_relationship(relationship_name, :has_one, options)
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-            has_one(relationship_name, options, &block)
+            has_one(relationship_name, options, &)
     RUBY
   end
   # rubocop:enable Lint/UnusedMethodArgument
@@ -30,7 +30,7 @@ class SerializerRegistry
     options = map_relationship_options(options)
     register_relationship(relationship_name, :belongs_to, options)
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-            belongs_to(relationship_name, options, &block)
+            belongs_to(relationship_name, options, &)
     RUBY
   end
 
@@ -39,7 +39,7 @@ class SerializerRegistry
     options = map_relationship_options(options)
     register_relationship(relationship_name, :has_many, options)
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-            has_many(relationship_name, options, &block)
+            has_many(relationship_name, options, &)
     RUBY
   end
 
