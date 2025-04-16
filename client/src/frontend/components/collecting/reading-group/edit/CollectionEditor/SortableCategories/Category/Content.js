@@ -55,7 +55,7 @@ export default function Content({
           index={index}
           categoryCount={categoryCount}
         />
-        <Styled.Inner $collapsed={manualCollapsed}>
+        <Styled.Inner inert={manualCollapsed ? "" : undefined}>
           {isMarkdown ? (
             <MarkdownBody category={category} />
           ) : (
