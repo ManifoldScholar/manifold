@@ -1,6 +1,5 @@
 module Collections
   module Operations
-    # rubocop:disable Metrics/MethodLength
     class CollectorLookups
       extend Dry::Initializer
 
@@ -39,7 +38,7 @@ module Collections
       # @return [Collections::CollectableDefinition]
       def collectable_definition(type, data_path: :collectable_type)
         with_operation_data_path data_path do
-          definition.collectables[type].yield_self do |defn|
+          definition.collectables[type].then do |defn|
             next Success defn if defn.present?
 
             operation_error :unknown_collectable_type, "Unknown collectable type: #{type.to_s.inspect}"
@@ -108,6 +107,5 @@ module Collections
         "#{model.model_name}(#{model.id.inspect})"
       end
     end
-    # rubocop:enable Metrics/MethodLength
   end
 end

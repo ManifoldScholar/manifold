@@ -16,5 +16,4 @@ RSpec.describe IngestionSource, type: :model do
     ingestion_source = FactoryBot.create(:ingestion_source)
     expect(ingestion_source.project).to be_a Project
   end
-
 end

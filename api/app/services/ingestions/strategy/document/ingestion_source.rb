@@ -2,7 +2,6 @@ module Ingestions
   module Strategy
     module Document
       class IngestionSource
-
         def initialize(context, inspector, source)
           @context = context
           @inspector = inspector
@@ -41,7 +40,6 @@ module Ingestions
 
           ::IngestionSource::KIND_PUBLICATION_RESOURCE
         end
-
       end
     end
   end

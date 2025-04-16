@@ -47,7 +47,6 @@ module ExportStrategies
       # @param [Integer] min_value
       # @param [Integer] max_value
       # @return [void]
-      # rubocop:disable Naming/PredicateName
       def has_port!(attribute_name = :port, default:, min_value: MIN_TCP_PORT, max_value: MAX_TCP_PORT)
         attribute attribute_name, :integer, default: default
 
@@ -60,7 +59,6 @@ module ExportStrategies
           }
         )
       end
-      # rubocop:enable Naming/PredicateName
 
       # Augment the {.connection_klass subclass} of {ExportTargets::AbstractConnection}
       # for this specific strategy.

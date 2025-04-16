@@ -2,7 +2,6 @@ module APIDocs
   module Definitions
     module Resources
       class ExportTarget
-
         REQUIRED_CREATE_ATTRIBUTES = [:name]
 
         class << self

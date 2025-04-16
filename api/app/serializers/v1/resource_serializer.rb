@@ -1,6 +1,5 @@
 module V1
   class ResourceSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     metadata(metadata: false, properties: false, formatted: true)

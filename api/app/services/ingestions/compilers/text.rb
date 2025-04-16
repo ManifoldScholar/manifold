@@ -35,7 +35,7 @@ module Ingestions
       def add_pending_slug!(attributes)
         title = text_titles.find { |t| t["kind"] == "main" } || text_titles.first
         value = title&.fetch("value", nil)
-        value = value&.downcase == "index" ? "untitled" : value
+        value = "untitled" if value&.downcase == "index"
         attributes[:pending_slug] = value
       end
 
@@ -59,7 +59,6 @@ module Ingestions
         info "services.ingestions.compiler.text.log.desc",
              desc: text.description
       end
-
     end
   end
 end

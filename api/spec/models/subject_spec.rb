@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Subject, type: :model do
-
   it "has many text subjects" do
     subject = FactoryBot.create(:subject)
     3.times { subject.text_subjects.build }
@@ -16,7 +15,6 @@ RSpec.describe Subject, type: :model do
 
   it "is invalid without a name" do
     subject = FactoryBot.build(:subject, name: nil)
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
   end
-
 end

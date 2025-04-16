@@ -1,5 +1,4 @@
 class AnalyticReportAuthorizer < ApplicationAuthorizer
-
   class << self
     def default(_able, user, _options = {})
       admin_permissions?(user)
@@ -14,9 +13,7 @@ class AnalyticReportAuthorizer < ApplicationAuthorizer
       return false unless user.present?
 
       scope_readable = options[:report_scope]&.updatable_by?(user, options)
-      admin_permissions?(user) && (scope_readable.nil? ? true : scope_readable)
+      admin_permissions?(user) && (scope_readable.nil? || scope_readable)
     end
-
   end
-
 end

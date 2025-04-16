@@ -9,6 +9,5 @@ FactoryBot.define do
     trait :as_draft do
       draft { true }
     end
-
   end
 end

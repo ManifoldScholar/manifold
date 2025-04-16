@@ -7,14 +7,14 @@ RSpec.describe ResourceImports::ParseCSV do
 
     expect do
       ResourceImports::ParseCSV.run resource_import: import
-    end.to_not raise_error
+    end.not_to raise_error
   end
 
   context "when utf-8 encoded sheet" do
     let(:path) { fixture_file_upload(Rails.root.join("spec", "data", "resource_import", "utf-8.csv"), "text/csv") }
     let(:import) { FactoryBot.create(:resource_import_csv, data: path) }
 
-    before(:each) do
+    before do
       ResourceImports::ParseCSV.run resource_import: import
     end
 

@@ -41,5 +41,4 @@ RSpec.describe "Text", type: :request do
                     url_parameters: [:project_id],
                     authorized_user: :admin
   end
-
 end

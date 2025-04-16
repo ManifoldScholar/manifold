@@ -8,6 +8,5 @@ module Updaters
         :thumbnail
       ]
     end
-
   end
 end

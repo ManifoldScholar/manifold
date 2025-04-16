@@ -1,13 +1,13 @@
 # The "Core Media Type" MIME groups as defined by the EPUBv3 spec.
 #
 # @see https://www.w3.org/publishing/epub3/epub-spec.html#sec-cmt-supported
-# rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Style/Alias
+# rubocop:disable Style/Alias
 class CoreMediaTypeKind < ClassyEnum::Base
   CSS = "text/css".freeze
 
   XHTML = "application/xhtml+xml".freeze
 
-  MIME_TYPE = %r{\A(?<base_type>[^/]+)/(?<subtype>[^/]+)\z}.freeze
+  MIME_TYPE = %r{\A(?<base_type>[^/]+)/(?<subtype>[^/]+)\z}
 
   config.mime_pattern = nil
   config.mime_types = []
@@ -135,7 +135,7 @@ class CoreMediaTypeKind < ClassyEnum::Base
     end
   end
 end
-# rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Style/Alias
+# rubocop:enable, Style/Alias
 
 class CoreMediaTypeKind::Image < CoreMediaTypeKind
   mime_types! "image/gif", "image/jpeg", "image/png", "image/svg+xml"

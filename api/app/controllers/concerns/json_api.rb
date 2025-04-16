@@ -81,9 +81,8 @@ module JSONAPI
     camelize_hash(meta)
   end
 
-  # rubocop:disable Metrics/AbcSize
   def build_params(options, _collection)
-    params = (options[:params] || {})
+    params = options[:params] || {}
     params[:action] = request.params[:action]
     params[:current_user] = current_user
     params[:authority_user] = authority_user
@@ -93,7 +92,6 @@ module JSONAPI
     params[:filters] = request.params[:filter].presence || {}.with_indifferent_access
     params
   end
-  # rubocop:enable Metrics/AbcSize
 
   def build_include(options, _collection)
     return [] unless options.key?(:include)

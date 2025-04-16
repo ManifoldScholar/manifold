@@ -29,7 +29,6 @@ module Ingestions
       def raw_html
         PandocRuby.latex(contents, :s).to_html
       end
-
     end
   end
 end

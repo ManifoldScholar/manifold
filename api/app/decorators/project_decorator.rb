@@ -29,5 +29,4 @@ class ProjectDecorator < ApplicationDecorator
   def creator_list
     creators.map(&:name).join(", ")
   end
-
 end

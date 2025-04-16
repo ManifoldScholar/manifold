@@ -161,7 +161,6 @@ module Ingestions
           ingestion_source[:source_identifier] == section[:source_identifier]
         end
       end
-
     end
   end
 end

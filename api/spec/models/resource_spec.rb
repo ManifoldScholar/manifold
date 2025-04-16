@@ -12,7 +12,7 @@ RSpec.describe Resource, type: :model do
 
   it "is invalid without a title" do
     resource = FactoryBot.build(:resource, title: "")
-    expect(resource).to_not be_valid
+    expect(resource).not_to be_valid
   end
 
   it "updates the sort_title when saved" do
@@ -38,7 +38,7 @@ RSpec.describe Resource, type: :model do
   context "when creating" do
     it "sets the fingerprint if none provided" do
       resource = FactoryBot.create(:resource)
-      expect(resource.fingerprint).to_not be_nil
+      expect(resource.fingerprint).not_to be_nil
     end
 
     it "does not overwrite provided fingerprint" do
@@ -69,7 +69,7 @@ RSpec.describe Resource, type: :model do
                                external_id: "https://www.youtube.com?v=lVrAwK7FaOw")
       end
 
-      before(:each) { resource.save }
+      before { resource.save }
 
       it "sets the :external_id" do
         expect(resource.external_id).to eq "lVrAwK7FaOw"
@@ -85,7 +85,7 @@ RSpec.describe Resource, type: :model do
                                external_id: "https://www.youtube.com?v=lVrAwK7FaOw")
       end
 
-      before(:each) { resource.save }
+      before { resource.save }
 
       it "sets an error on :external_id" do
         expect(resource.errors[:external_id]).to include "is an invalid format for vimeo"
@@ -140,7 +140,7 @@ RSpec.describe Resource, type: :model do
   end
 
   context "can be filtered" do
-    before(:each) do
+    before do
       @project_a = FactoryBot.create(:project, title: "project_a")
       @project_b = FactoryBot.create(:project, title: "project_b")
       @collection_a = FactoryBot.create(:resource_collection, title: "collection_a", project: @project_a)
@@ -199,7 +199,7 @@ RSpec.describe Resource, type: :model do
       context "when resource is a #{kind} upload" do
         it "is invalid without an attachment" do
           resource = FactoryBot.build(:resource, kind: kind)
-          expect(resource).to_not be_valid
+          expect(resource).not_to be_valid
         end
       end
     end
@@ -207,26 +207,26 @@ RSpec.describe Resource, type: :model do
     context "when resource is an iframe" do
       it "is invalid without an external url" do
         resource = FactoryBot.build(:resource, kind: "interactive", external_url: nil)
-        expect(resource).to_not be_valid
+        expect(resource).not_to be_valid
       end
     end
 
     context "when resource is an external video" do
       it "is invalid without an external id" do
         resource = FactoryBot.build(:resource, kind: "video", sub_kind: "external_video", external_type: "youtube")
-        expect(resource).to_not be_valid
+        expect(resource).not_to be_valid
       end
 
       it "is invalid without an external type" do
         resource = FactoryBot.build(:resource, kind: "video", sub_kind: "external_video", external_id: "abcd1234")
-        expect(resource).to_not be_valid
+        expect(resource).not_to be_valid
       end
     end
 
     context "when resource is a link" do
       it "is invalid without an external url" do
         resource = FactoryBot.build(:resource, kind: "link", external_url: nil)
-        expect(resource).to_not be_valid
+        expect(resource).not_to be_valid
       end
     end
   end
@@ -282,7 +282,7 @@ RSpec.describe Resource, type: :model do
       resource.reload # Reload to pick up backgrounded attachment versions.
       resource.attachment_original.rewind
       sha = Digest::SHA256.hexdigest(resource.attachment_original.read).to_s
-      expect(resource.attachment_checksum).to_not eq nil
+      expect(resource.attachment_checksum).not_to eq nil
       expect(resource.attachment_checksum).to eq sha
     end
   end
@@ -295,11 +295,13 @@ RSpec.describe Resource, type: :model do
       resource.minimum_height = "200"
       expect(resource).to be_valid
     end
+
     it "is valid when dimensions have allowed units" do
       resource.minimum_width = "100vw"
       resource.minimum_height = "200px"
       expect(resource).to be_valid
     end
+
     it "is invalid when dimensions have any other units" do
       resource.minimum_width = "100%"
       resource.minimum_height = "200pt"
@@ -316,5 +318,5 @@ RSpec.describe Resource, type: :model do
     expect(resource).to be_invalid
   end
 
-  it_should_behave_like "a collectable"
+  it_behaves_like "a collectable"
 end

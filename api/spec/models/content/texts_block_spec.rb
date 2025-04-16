@@ -23,7 +23,7 @@ RSpec.describe Content::TextsBlock do
   end
 
   it "has the correct available attributes" do
-    expect(texts_block.available_attributes).to match_array [:show_authors, :show_descriptions, :show_subtitles, :show_covers, :show_dates, :show_category_labels, :title, :description, :show_uncategorized]
+    expect(texts_block.available_attributes).to contain_exactly(:show_authors, :show_descriptions, :show_subtitles, :show_covers, :show_dates, :show_category_labels, :title, :description, :show_uncategorized)
   end
 
   it "has a formatted description" do
@@ -47,10 +47,10 @@ RSpec.describe Content::TextsBlock do
       end
 
       context "when show_uncategorized is false" do
-        before(:each) { texts_block.update(show_uncategorized: false) }
+        before { texts_block.update(show_uncategorized: false) }
 
         it "excludes project texts without a category" do
-          expect(texts_block.texts).to match_array [text_a, text_b]
+          expect(texts_block.texts).to contain_exactly(text_a, text_b)
         end
       end
     end
@@ -75,7 +75,7 @@ RSpec.describe Content::TextsBlock do
       end
 
       context "when show_uncategorized is false" do
-        before(:each) { texts_block.update(show_uncategorized: false) }
+        before { texts_block.update(show_uncategorized: false) }
 
         it "returns the related category texts" do
           expect(texts_block.texts).to eq category_a.texts
@@ -88,5 +88,5 @@ RSpec.describe Content::TextsBlock do
     it { is_expected.to be_renderable }
   end
 
-  it_should_behave_like "a model with formatted attributes"
+  it_behaves_like "a model with formatted attributes"
 end

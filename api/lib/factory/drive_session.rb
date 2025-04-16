@@ -25,7 +25,7 @@ module Factory
         end
       end
 
-      db_config = db_config.nil? ? {} : db_config
+      db_config = {} if db_config.nil?
 
       client_x509_cert_url = nil
 
@@ -34,16 +34,16 @@ module Factory
                                (env_config.dig(:integrations, :google_client_email) || db_config["google_client_email"])
       end
       {
-        "type": "service_account",
-        "project_id": env_config.dig(:integrations, :google_project_id) || db_config["google_project_id"],
-        "private_key_id": env_config.dig(:integrations, :google_private_key_id) || db_config["google_private_key_id"],
-        "private_key": env_config.dig(:secrets, :google_private_key) || db_config["google_private_key"],
-        "client_email": env_config.dig(:integrations, :google_client_email) || db_config["google_client_email"],
-        "client_id": env_config.dig(:integrations, :google_client_id) || db_config["google_client_id"],
-        "auth_uri": Rails.configuration.manifold.google.auth_uri,
-        "token_uri": Rails.configuration.manifold.google.token_uri,
-        "auth_provider_x509_cert_url": Rails.configuration.manifold.google.auth_provider_x509_cert_url,
-        "client_x509_cert_url": client_x509_cert_url
+        type: "service_account",
+        project_id: env_config.dig(:integrations, :google_project_id) || db_config["google_project_id"],
+        private_key_id: env_config.dig(:integrations, :google_private_key_id) || db_config["google_private_key_id"],
+        private_key: env_config.dig(:secrets, :google_private_key) || db_config["google_private_key"],
+        client_email: env_config.dig(:integrations, :google_client_email) || db_config["google_client_email"],
+        client_id: env_config.dig(:integrations, :google_client_id) || db_config["google_client_id"],
+        auth_uri: Rails.configuration.manifold.google.auth_uri,
+        token_uri: Rails.configuration.manifold.google.token_uri,
+        auth_provider_x509_cert_url: Rails.configuration.manifold.google.auth_provider_x509_cert_url,
+        client_x509_cert_url: client_x509_cert_url
       }
     end
     # rubocop:enable Metrics/MethodLength

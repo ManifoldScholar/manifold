@@ -65,7 +65,6 @@ module Ingestions
           "<meta name='dc.#{tag}' content='#{content}'>"
         end.presence || []
       end
-
     end
   end
 end

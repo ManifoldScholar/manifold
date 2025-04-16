@@ -7,10 +7,11 @@ RSpec.describe "Project Text Categories API", type: :request do
   let(:path) { api_v1_project_relationships_text_categories_path(project) }
 
   describe "sends project text categories" do
-    before(:each) { get path }
+    before { get path }
+
     describe "the response" do
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -20,22 +21,22 @@ RSpec.describe "Project Text Categories API", type: :request do
 
     context "when the user is an admin" do
       let(:headers) { admin_headers }
-      before(:each) { post path, headers: headers, params: build_json_payload(post_model) }
+      before { post path, headers: headers, params: build_json_payload(post_model) }
 
       describe "the response" do
         it "has a 201 CREATED status code" do
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(:created)
         end
       end
     end
 
     context "when the user is an reader" do
       let(:headers) { reader_headers }
-      before(:each) { post path, headers: headers, params: build_json_payload(post_model) }
+      before { post path, headers: headers, params: build_json_payload(post_model) }
 
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end

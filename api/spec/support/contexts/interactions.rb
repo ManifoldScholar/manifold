@@ -4,7 +4,7 @@ RSpec.shared_context 'interaction testing' do
   end
 
   let(:valid_outcome) do
-    double("valid interaction", :invalid? => false, :valid? => true, result: valid_outcome_result)
+    double("valid interaction", invalid?: false, valid?: true, result: valid_outcome_result)
   end
 
   let(:valid_outcome_result) do

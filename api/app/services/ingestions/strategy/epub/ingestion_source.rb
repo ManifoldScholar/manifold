@@ -3,7 +3,6 @@ module Ingestions
     module Epub
       # Inspects a single epub ingestion source
       class IngestionSource
-
         def initialize(source_node, epub_inspector)
           @source_node = source_node
           @epub_inspector = epub_inspector
@@ -64,7 +63,6 @@ module Ingestions
         def href
           @source_node.attribute("href")&.value
         end
-
       end
     end
   end

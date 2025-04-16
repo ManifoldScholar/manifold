@@ -166,5 +166,4 @@ class AttachmentUploader < Shrine
       to_io&.path
     end
   end
-
 end

@@ -52,7 +52,7 @@ RSpec.describe "Category Abilities", :authorizer, :project_role_tests do
     the_subject_behaves_like "instance abilities", Category, read_only: true
   end
 
-  context "when the subject is a reader and project_author of the category's project " do
+  context "when the subject is a reader and project_author of the category's project" do
     subject { project_author }
 
     the_subject_behaves_like "instance abilities", Category, read_only: true

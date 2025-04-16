@@ -1,6 +1,5 @@
 module UnsubscribeToken
   class << self
-
     delegate :verify, to: :verifier
 
     def generate(user)

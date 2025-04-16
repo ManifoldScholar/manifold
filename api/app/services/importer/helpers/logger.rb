@@ -4,7 +4,6 @@ module Importer
   module Helpers
     # Logger helper for Drive Resources importer
     class Logger
-
       extend Forwardable
       def_delegators :@logger, :info, :warn, :debug, :error
 
@@ -80,7 +79,6 @@ module Importer
       def log_google_drive_error(error)
         @logger.warn "        GoogleDrive::Error #{error}"
       end
-
     end
   end
 end

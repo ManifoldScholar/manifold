@@ -33,7 +33,7 @@ module V1
         make_meta
 
         def initialize(resource, options = {})
-          super(resource, options)
+          super
           @params[:root] = self.class unless @params.key? :root
         end
       end

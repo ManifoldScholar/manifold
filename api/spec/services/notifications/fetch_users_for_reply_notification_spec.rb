@@ -5,7 +5,7 @@ RSpec.describe Notifications::FetchUsersForReplyNotification do
   let(:parent_author) { FactoryBot.create(:user) }
   let(:subject) { FactoryBot.create(:annotation, creator: subject_author) }
 
-  before(:each) do
+  before do
     subject_author.update(notification_preferences_by_kind: { replies_to_me: NotificationFrequency[:always] })
     parent_author.update(notification_preferences_by_kind: { replies_to_me: NotificationFrequency[:always] })
   end
@@ -14,7 +14,7 @@ RSpec.describe Notifications::FetchUsersForReplyNotification do
     it "the returned users includes the annotation creator" do
       comment = FactoryBot.create(:comment, subject: subject)
       outcome = described_class.run comment: comment
-      expect(outcome.result.include? subject_author).to be true
+      expect(outcome.result.include?(subject_author)).to be true
     end
   end
 
@@ -24,13 +24,12 @@ RSpec.describe Notifications::FetchUsersForReplyNotification do
 
     it "the returned users includes the subject creator" do
       outcome = described_class.run comment: comment
-      expect(outcome.result.include? subject_author).to be true
+      expect(outcome.result.include?(subject_author)).to be true
     end
 
     it "the returned users includes the parent comment creator" do
       outcome = described_class.run comment: comment
-      expect(outcome.result.include? parent_author).to be true
+      expect(outcome.result.include?(parent_author)).to be true
     end
-
   end
 end

@@ -8,7 +8,7 @@ RSpec.describe "Subject API", type: :request do
     describe "the response" do
       it "has a 200 status code" do
         get api_v1_subjects_path
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -29,7 +29,7 @@ RSpec.describe "Subject API", type: :request do
         get api_v1_subjects_path(params: params)
         entities = JSON.parse(response.body)["data"]
         expect(entities.count).to eq(1)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -38,7 +38,7 @@ RSpec.describe "Subject API", type: :request do
     describe "the response" do
       it "has a 200 status code" do
         get api_v1_subject_path(subject_a)
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end

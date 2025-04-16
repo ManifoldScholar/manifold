@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe ReadingGroupMembership, type: :model do
-
   it "has a valid factory" do
     expect(FactoryBot.build(:reading_group_membership)).to be_valid
   end

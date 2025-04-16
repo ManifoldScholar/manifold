@@ -6,6 +6,5 @@ module Updaters
     def attachment_fields
       [:avatar]
     end
-
   end
 end

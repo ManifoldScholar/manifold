@@ -3,7 +3,7 @@ require "swagger_helper"
 RSpec.describe "Tokens", type: :request do
   include_context("authenticated request")
 
-  before(:each) do
+  before do
     admin.touch
   end
 
@@ -22,10 +22,10 @@ RSpec.describe "Tokens", type: :request do
                      included_relationships: [:favorites],
                      request_body: false,
                      success_response_code: "200",
-                     description: "Returns all information about the user "\
-                     "(as well as a login token) when given the proper username "\
-                     "and password.\n\nThe meta tag containing the authToken exists at "\
-                     "the top level in the response like so:\n"\
+                     description: "Returns all information about the user " \
+                     "(as well as a login token) when given the proper username " \
+                     "and password.\n\nThe meta tag containing the authToken exists at " \
+                     "the top level in the response like so:\n" \
                      '{ "data": {}, "meta": {"authToken": "...."}, "included": [] }',
                      summary: "Retrieve an authentication token"
   end

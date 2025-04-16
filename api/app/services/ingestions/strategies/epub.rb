@@ -3,7 +3,6 @@ require "memoist"
 module Ingestions
   module Strategies
     class Epub < Ingestions::Strategies::AbstractStrategy
-
       extend Memoist
 
       def perform
@@ -24,7 +23,6 @@ module Ingestions
         end
       end
 
-      # rubocop:disable Metrics/AbcSize
       def attributes
         {}.with_indifferent_access.tap do |hash|
           hash[:publication_date] = inspector.date_node&.text
@@ -35,7 +33,6 @@ module Ingestions
           hash[:page_list] = structure_attributes.page_list
         end
       end
-      # rubocop:enable Metrics/AbcSize
 
       def relationships
         {}.with_indifferent_access.tap do |hash|

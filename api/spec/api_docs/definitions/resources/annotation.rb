@@ -2,7 +2,6 @@ module APIDocs
   module Definitions
     module Resources
       class Annotation
-
         REQUIRED_CREATE_ATTRIBUTES = [
           :start_node,
           :end_node,
@@ -18,9 +17,7 @@ module APIDocs
         }
 
         class << self
-
           include APIDocs::Definitions::Resource
-
         end
       end
     end

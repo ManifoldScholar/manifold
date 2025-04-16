@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Ingestions::Pickers::Converter do
-
   context "when no converter is found" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.epub") }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
@@ -9,7 +8,7 @@ RSpec.describe Ingestions::Pickers::Converter do
     let!(:outcome) { Ingestions::Pickers::Converter.run context: context, source_path: path }
 
     it "is not valid" do
-      expect(outcome).to_not be_valid
+      expect(outcome).not_to be_valid
     end
   end
 

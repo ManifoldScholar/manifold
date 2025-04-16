@@ -33,7 +33,5 @@ class IngestionUploader < TusUploader
 
       RUBY
     end
-
   end
-
 end

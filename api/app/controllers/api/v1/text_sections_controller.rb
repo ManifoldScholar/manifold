@@ -2,7 +2,6 @@ module API
   module V1
     # Sections controller
     class TextSectionsController < ApplicationController
-
       resourceful! TextSection, authorize_options: { except: [:index] }
 
       def update
@@ -15,7 +14,6 @@ module API
         @text_section = load_text_section
         @text_section.destroy
       end
-
     end
   end
 end

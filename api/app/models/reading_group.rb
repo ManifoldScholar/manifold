@@ -53,8 +53,8 @@ class ReadingGroup < ApplicationRecord
 
   before_validation :ensure_invitation_code
   before_validation :upcase_invitation_code
-  after_save :ensure_creator_membership
   before_destroy :update_annotations_privacy
+  after_save :ensure_creator_membership
 
   scope :for_serialization, -> { includes(:reading_group_kind, :reading_group_count, reading_group_memberships: :user) }
 
@@ -151,7 +151,6 @@ class ReadingGroup < ApplicationRecord
       end
     end
 
-    # rubocop:disable Metrics/AbcSize
     def apply_sort_order_scope_value(value)
       case value
       when /\A(?<attr>created_at|name)(?:_(?<dir>asc|desc))\z/i
@@ -172,7 +171,6 @@ class ReadingGroup < ApplicationRecord
         all
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     def build_sort_order_direction(value)
       /desc/i.match?(value) ? :desc : :asc

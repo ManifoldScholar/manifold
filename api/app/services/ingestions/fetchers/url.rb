@@ -1,7 +1,6 @@
 module Ingestions
   module Fetchers
     class URL < Ingestions::Fetchers::AbstractFetcher
-
       def perform
         fetch
         { file: temp_file }
@@ -25,7 +24,6 @@ module Ingestions
       def fetch
         IO.copy_stream(URI(url).open, temp_file.path)
       end
-
     end
   end
 end

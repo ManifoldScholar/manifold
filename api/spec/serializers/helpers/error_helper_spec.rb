@@ -3,7 +3,7 @@ RSpec.describe V1::Helpers::Errors do
   let(:errors) { base.errors }
   let(:helper) { V1::Helpers::Errors.new(errors) }
   let(:result) { helper.for_serialization }
-  before(:each) { base.valid? }
+  before { base.valid? }
 
   it "returns an array" do
     expect(result).to be_instance_of Array

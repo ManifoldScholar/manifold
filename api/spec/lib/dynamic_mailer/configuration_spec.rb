@@ -2,8 +2,7 @@ require "dynamic_mailer/configuration"
 require "rails_helper"
 
 RSpec.describe DynamicMailer::Configuration do
-
-  let(:smtp_settings) {
+  let(:smtp_settings) do
     Settings.new(
       secrets: {
         smtp_settings_password: "password"
@@ -15,8 +14,8 @@ RSpec.describe DynamicMailer::Configuration do
         smtp_settings_user_name: "user"
       }
     )
-  }
-  let(:sendmail_settings) {
+  end
+  let(:sendmail_settings) do
     Settings.new(
       email: {
         delivery_method: "sendmail",
@@ -24,7 +23,7 @@ RSpec.describe DynamicMailer::Configuration do
         sendmail_settings_arguments: "-glorp"
       }
     )
-  }
+  end
 
   let(:smtp_instance) { described_class.new(smtp_settings) }
   let(:sendmail_instance) { described_class.new(sendmail_settings) }
@@ -66,7 +65,6 @@ RSpec.describe DynamicMailer::Configuration do
     expect(smtp_instance.sendmail_config).to eq(
       location: "/usr/sbin/sendmail",
       arguments: "-i"
-     )
+    )
   end
-
 end

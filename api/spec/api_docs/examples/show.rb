@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples_for "an API show request" do |options|
+RSpec.shared_context "an API show request" do |options|
   api_spec_helper = APIDocs::Helpers::Request.new(options, :show)
 
   if api_spec_helper.instantiate_before_test?

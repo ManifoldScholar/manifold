@@ -35,7 +35,6 @@ module Packaging
       # @abstract
       # @param [Packaging::BagItSpec::Entries::Builder] builder
       # @return [void]
-      # rubocop:disable Lint/UnusedMethodArgument
       def build_entries(builder)
         # :nocov:
         raise NotImplementedError, "Must implement #{self.class}##{__method__}"

@@ -15,7 +15,7 @@ RSpec.describe Notifications::ComposeDigestEvents, interaction: true do
   let!(:b_resource_event) { past_event :resource_added, on: project_b }
   let!(:c_collection_event) { past_event :resource_collection_added, on: project_c }
 
-  before(:each) do
+  before do
     user.collect_model! project_a
     user.collect_model! project_c
   end
@@ -36,7 +36,7 @@ RSpec.describe Notifications::ComposeDigestEvents, interaction: true do
 
   describe "the results" do
     context "when projects only" do
-      before(:each) do
+      before do
         set_user_preferences! digest: :weekly, projects: :always
       end
 
@@ -45,12 +45,12 @@ RSpec.describe Notifications::ComposeDigestEvents, interaction: true do
 
         events = @outcome.result
 
-        expect(events["projects"].values).to match_array [[a_text_event], [b_resource_event], [c_collection_event]]
+        expect(events["projects"].values).to contain_exactly([a_text_event], [b_resource_event], [c_collection_event])
       end
     end
 
     context "when followed projects only" do
-      before(:each) do
+      before do
         set_user_preferences! digest: :weekly, followed_projects: :always
       end
 
@@ -59,7 +59,7 @@ RSpec.describe Notifications::ComposeDigestEvents, interaction: true do
 
         events = @outcome.result
 
-        expect(events["projects"].values).to match_array [[a_text_event], [c_collection_event]]
+        expect(events["projects"].values).to contain_exactly([a_text_event], [c_collection_event])
       end
     end
 
@@ -72,7 +72,7 @@ RSpec.describe Notifications::ComposeDigestEvents, interaction: true do
 
           events = @outcome.result
 
-          expect(events["annotations_and_comments"].values).to match_array [[a_annotation_event], [c_comment_event]]
+          expect(events["annotations_and_comments"].values).to contain_exactly([a_annotation_event], [c_comment_event])
         end
 
         it "to the user's visible projects" do
@@ -82,7 +82,7 @@ RSpec.describe Notifications::ComposeDigestEvents, interaction: true do
 
           events = @outcome.result
 
-          expect(events["annotations_and_comments"].values).to match_array [[a_annotation_event], [b_annotation_event], [c_comment_event]]
+          expect(events["annotations_and_comments"].values).to contain_exactly([a_annotation_event], [b_annotation_event], [c_comment_event])
         end
       end
     end

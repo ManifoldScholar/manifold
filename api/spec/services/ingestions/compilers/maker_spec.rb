@@ -10,7 +10,7 @@ RSpec.describe Ingestions::Compiler do
     FactoryBot.create(:maker)
     maker_b = FactoryBot.create(:maker)
     text = FactoryBot.create(:text, makers: [maker_b])
-    attributes = { name: "calibre (3.48.0) [https://calibre-ebook.com]"}
+    attributes = { name: "calibre (3.48.0) [https://calibre-ebook.com]" }
     Ingestions::Compilers::Maker.run(
       text: text,
       manifest: {},
@@ -19,5 +19,4 @@ RSpec.describe Ingestions::Compiler do
     )
     expect(text.makers.count).to be 1
   end
-
 end

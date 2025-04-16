@@ -9,26 +9,26 @@ module Ingestions
         @fetchers = Ingestions::Configuration::FetcherRegistry.new
       end
 
-      def configure(&block)
-        evaluate(&block) if block_given?
+      def configure(&)
+        evaluate(&) if block_given?
 
         self
       end
 
-      def fetchers(&block)
-        @fetchers.configure(&block)
+      def fetchers(&)
+        @fetchers.configure(&)
       end
 
       expose :fetchers
 
-      def converters(&block)
-        @converters.configure(&block)
+      def converters(&)
+        @converters.configure(&)
       end
 
       expose :converters
 
-      def strategies(&block)
-        @strategies.configure(&block)
+      def strategies(&)
+        @strategies.configure(&)
       end
 
       expose :strategies

@@ -50,5 +50,4 @@ class TwitterQuery < ApplicationRecord
   def reset_most_recent_tweet_id
     self.most_recent_tweet_id = nil
   end
-
 end

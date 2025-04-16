@@ -8,7 +8,7 @@ FactoryBot.define do
   end
 
   factory :read_action_callout, parent: :action_callout do
-    kind { :read}
+    kind { :read }
     text
   end
 

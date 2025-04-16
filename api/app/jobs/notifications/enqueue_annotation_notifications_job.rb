@@ -1,6 +1,5 @@
 module Notifications
   class EnqueueAnnotationNotificationsJob < ApplicationJob
-
     # @param [String] annotation_id
     def perform(annotation_id)
       annotation = Annotation.find(annotation_id)
@@ -20,6 +19,5 @@ module Notifications
         "  Failed to enqueue notifications for #<Annotation:#{annotation_id}>"
       )
     end
-
   end
 end

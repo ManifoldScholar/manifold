@@ -1,6 +1,5 @@
 # A value object representing a text's title.
 class TextTitle < ApplicationRecord
-
   # Constants
   KIND_MAIN = "main".freeze
   KIND_ACRONYM = "acronym".freeze
@@ -58,5 +57,4 @@ class TextTitle < ApplicationRecord
   def packaging_metadata
     slice(:title, :kind).compact
   end
-
 end

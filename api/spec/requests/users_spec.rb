@@ -30,18 +30,20 @@ RSpec.describe "Users API", type: :request do
   describe "sends a list of users" do
     let(:path) { api_v1_users_path }
     context "when the user is an reader" do
-      before(:each) { get path, headers: reader_headers }
+      before { get path, headers: reader_headers }
+
       describe "the response" do
         it "has a 403 status code" do
-          expect(@response).to have_http_status(403)
+          expect(@response).to have_http_status(:forbidden)
         end
       end
     end
 
     context "when the user is an admin" do
-      before(:each) { get path, headers: admin_headers}
+      before { get path, headers: admin_headers }
+
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -81,7 +83,7 @@ RSpec.describe "Users API", type: :request do
       end.to change(User, :count).by(5)
         .and change(ThrottledRequest, :count).by(1)
 
-      expect(response).to have_http_status(503)
+      expect(response).to have_http_status(:service_unavailable)
     end
 
     it "tells the welcome mailer that the user was created by the admin when meta[createdByAdmin] is true" do
@@ -119,54 +121,56 @@ RSpec.describe "Users API", type: :request do
         end.to keep_the_same(User, :count)
           .and change(ThrottledRequest, :count).by(1)
 
-        expect(response).to have_http_status(503)
+        expect(response).to have_http_status(:service_unavailable)
       end
     end
   end
 
   describe "sends a user" do
-
     let(:path) { api_v1_user_path(reader) }
     let(:api_response) { JSON.parse(response.body) }
 
     context "when the user is the user being requested" do
-      before(:each) { get path, headers: reader_headers }
+      before { get path, headers: reader_headers }
+
       describe "the response" do
         it "has a 200 status code" do
-          expect(@response).to have_http_status(200)
+          expect(@response).to have_http_status(:ok)
         end
       end
     end
 
     context "when the user is somebody else" do
-      before(:each) { get path, headers: author_headers }
+      before { get path, headers: author_headers }
+
       describe "the response" do
         it "has a 403 status code" do
-          expect(@response).to have_http_status(403)
+          expect(@response).to have_http_status(:forbidden)
         end
       end
     end
 
     context "when the user is an admin" do
-      before(:each) { get path, headers: admin_headers }
+      before { get path, headers: admin_headers }
+
       describe "the response" do
         it "has a 200 status code" do
-          expect(@response).to have_http_status(200)
+          expect(@response).to have_http_status(:ok)
         end
       end
     end
   end
 
   describe "sends the current user" do
-
-    let(:path) { whoami_api_v1_users_path() }
+    let(:path) { whoami_api_v1_users_path }
     let(:api_response) { JSON.parse(response.body) }
 
     context "when the user is a reader" do
-      before(:each) { get path, headers: reader_headers }
+      before { get path, headers: reader_headers }
+
       describe "the response" do
         it "has a 200 status code" do
-          expect(@response).to have_http_status(200)
+          expect(@response).to have_http_status(:ok)
         end
 
         it "contains the correct user" do
@@ -177,24 +181,25 @@ RSpec.describe "Users API", type: :request do
   end
 
   describe "destroys a user" do
-
     let(:path) { api_v1_user_path(reader) }
     let(:api_response) { JSON.parse(response.body) }
 
     context "when the user is an admin" do
-      before(:each) { delete path, headers: admin_headers }
+      before { delete path, headers: admin_headers }
+
       describe "the response" do
         it "has a 204 status code" do
-          expect(@response).to have_http_status(204)
+          expect(@response).to have_http_status(:no_content)
         end
       end
     end
 
     context "when the user is a reader" do
-      before(:each) { delete path, headers: reader_headers }
+      before { delete path, headers: reader_headers }
+
       describe "the response" do
         it "has a 403 status code" do
-          expect(@response).to have_http_status(403)
+          expect(@response).to have_http_status(:forbidden)
         end
       end
     end

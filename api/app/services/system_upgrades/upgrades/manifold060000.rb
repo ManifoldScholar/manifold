@@ -17,7 +17,6 @@ module SystemUpgrades
         Content::TextsBlock
       ].freeze
 
-      # rubocop:disable Metrics/MethodLength
       def perform!
         migrate_ingestion_uploader_attachments!
 
@@ -46,7 +45,6 @@ module SystemUpgrades
           end
         end
       end
-      # rubocop:enable Metrics/MethodLength
 
       def populate_formatted_attribute_caches!
         log_with_separator("Populating database cache for formatted attributes")

@@ -4,7 +4,7 @@ module ExportStrategies
       include Shared::PipelineOperation
 
       DOT = ".".freeze
-      DOUBLE_DOT = /\.\./.freeze
+      DOUBLE_DOT = /\.\./
 
       # @param [String] input
       # @return [String]

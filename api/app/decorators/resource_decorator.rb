@@ -6,5 +6,4 @@ class ResourceDecorator < ApplicationDecorator
   def url
     ClientURL.call(:resource_show, project_slug: project.slug, resource_slug: slug)
   end
-
 end

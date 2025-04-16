@@ -69,6 +69,5 @@ module Attachments
       error_message = errors.join("/n    ")
       logger.error msg + error_message
     end
-
   end
 end

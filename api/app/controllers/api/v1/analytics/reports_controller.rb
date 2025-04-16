@@ -2,7 +2,6 @@ module API
   module V1
     module Analytics
       class ReportsController < ApplicationController
-
         attr_reader :report_scope, :report_type
 
         before_action :set_report_type
@@ -41,7 +40,6 @@ module API
         def valid_report_type?
           @report_type.is_a?(AnalyticsReportType)
         end
-
       end
     end
   end

@@ -1,6 +1,5 @@
 # A resource is any asset our source document that is associated with a text.
 class ResourceImport < ApplicationRecord
-
   include Statesman::Adapters::ActiveRecordQueries
   include TrackedCreator
   include Attachments
@@ -96,7 +95,7 @@ class ResourceImport < ApplicationRecord
   end
 
   def google_drive_storage?
-    storage_type == "google_drive" && !storage_identifier.blank?
+    storage_type == "google_drive" && storage_identifier.present?
   end
 
   def import_errors_count
@@ -134,5 +133,4 @@ class ResourceImport < ApplicationRecord
     self.column_map = {}
     save
   end
-
 end

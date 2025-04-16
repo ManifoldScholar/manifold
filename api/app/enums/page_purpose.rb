@@ -17,6 +17,7 @@ class PagePurpose < ClassyEnum::Base
     end
   end
 end
+
 class PagePurpose::TermsAndConditions < PagePurpose
   policy!
 end

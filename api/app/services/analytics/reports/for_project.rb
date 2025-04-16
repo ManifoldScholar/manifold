@@ -1,7 +1,6 @@
 module Analytics
   module Reports
     class ForProject < Analytics::Reports::ScopedBuilder
-
       validate :resource_is_project!
 
       def resource_is_project!
@@ -165,7 +164,6 @@ module Analytics
       end
 
       # END ANALYTICS
-
     end
   end
 end

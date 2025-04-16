@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Demonstration::DataLoader do
-
   let(:loader) { Demonstration::DataLoader.new }
   let(:settings) { Settings.instance }
 
@@ -11,5 +10,4 @@ RSpec.describe Demonstration::DataLoader do
     settings.reload
     expect(settings.general["ga_tracking_id"]).to eq("rowan")
   end
-
 end

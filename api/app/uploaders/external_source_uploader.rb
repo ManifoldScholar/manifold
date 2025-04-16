@@ -40,5 +40,4 @@ class ExternalSourceUploader < Shrine
       RUBY
     end
   end
-
 end

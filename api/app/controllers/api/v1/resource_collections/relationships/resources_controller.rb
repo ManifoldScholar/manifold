@@ -4,7 +4,6 @@ module API
       module Relationships
         # Responds with resources in a collection
         class ResourcesController < ApplicationController
-
           before_action :set_collection, only: [:index]
 
           resourceful! Resource, authorize_options: { except: [:index, :show] } do
@@ -41,7 +40,6 @@ module API
             @collection = ResourceCollection.friendly
               .find(params[:resource_collection_id])
           end
-
         end
       end
     end

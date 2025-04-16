@@ -9,14 +9,14 @@ RSpec.describe "ProjectCollection Abilities", :authorizer do
 
   context 'when the subject is a reader of a visible project collection' do
     let(:subject) { FactoryBot.create(:user) }
-    let(:object) { FactoryBot.create(:project_collection, visible: true )}
+    let(:object) { FactoryBot.create(:project_collection, visible: true) }
 
     the_subject_behaves_like "instance abilities", ProjectCollection, read_only: true
   end
 
   context 'when the subject is a reader of a not visible project collection' do
     let(:subject) { FactoryBot.create(:user) }
-    let(:object) { FactoryBot.create(:project_collection, visible: false )}
+    let(:object) { FactoryBot.create(:project_collection, visible: false) }
 
     the_subject_behaves_like "instance abilities", ProjectCollection, none: true
   end

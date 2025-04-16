@@ -12,11 +12,11 @@ RSpec.describe "Text Sections", type: :request do
                        parent: "text",
                        url_parameters: [:text_id]
 
-     include_examples "an API create request",
-                      model: TextSection,
-                      parent: :text,
-                      url_parameters: [:text_id],
-                      authorized_user: :admin
+      include_examples "an API create request",
+                       model: TextSection,
+                       parent: :text,
+                       url_parameters: [:text_id],
+                       authorized_user: :admin
     end
 
     path "/texts/{text_id}/relationships/text_sections/{id}" do

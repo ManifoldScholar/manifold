@@ -1,5 +1,4 @@
 class ProjectRestrictedChildAuthorizer < ProjectChildAuthorizer
-
   # This one is a bit more complex. Restricted children can be read by users who can
   # update the project. Controllers will need to pass in the project. For example:
   # authorize_action_for TwitterQuery, for: @project
@@ -15,5 +14,4 @@ class ProjectRestrictedChildAuthorizer < ProjectChildAuthorizer
   def readable_by?(user, _options = {})
     resource.project.updatable_by? user
   end
-
 end

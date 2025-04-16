@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe TextSection, type: :model do
-
   it "has a valid factory" do
     expect(FactoryBot.build(:text_section)).to be_valid
   end
@@ -28,12 +27,11 @@ RSpec.describe TextSection, type: :model do
   it "does not destroy stylesheet records on destroy" do
     text_section = FactoryBot.create(:text_section)
     text_section.stylesheets << FactoryBot.create(:stylesheet)
-    expect { text_section.destroy }.to_not change { Stylesheet.count }
+    expect { text_section.destroy }.not_to change { Stylesheet.count }
   end
 
   context "collapses body_json into searchable text nodes" do
-
-    let(:text_section) {
+    let(:text_section) do
       body_json = {
         "node_uuid" => "A",
         "tag" => "section",
@@ -83,12 +81,11 @@ RSpec.describe TextSection, type: :model do
         ]
       }
       FactoryBot.create(:text_section, body_json: body_json)
-    }
+    end
 
     it "collapses text nodes wrapped in inline tags into larger block-level chunks" do
       expect(text_section.properties_for_text_nodes.length).to be 2
     end
-
   end
 
   context "when created from an api request" do

@@ -19,7 +19,7 @@ RSpec.describe "Stylesheets API", type: :request do
     let(:path) { api_v1_text_relationships_stylesheets_path(text) }
     let(:api_response) { JSON.parse(response.body) }
 
-    before(:each) do
+    before do
       post path, headers: admin_headers, params: valid_params
     end
 
@@ -35,22 +35,20 @@ RSpec.describe "Stylesheets API", type: :request do
     it "sets the raw styles correctly" do
       expect(api_response["data"]["attributes"]["rawStyles"]).to eq(attributes[:rawStyles])
     end
-
   end
 
   describe "updates a stylesheet" do
-    let(:stylesheet) { FactoryBot.create(:stylesheet, text: text, creator: admin)}
+    let(:stylesheet) { FactoryBot.create(:stylesheet, text: text, creator: admin) }
     let(:api_response) { JSON.parse(response.body) }
 
     it "updates the name attribute" do
-      valid_params = build_json_payload(attributes: { name: "Rambo Stoolz"})
+      valid_params = build_json_payload(attributes: { name: "Rambo Stoolz" })
       put api_v1_stylesheet_path(stylesheet.id), headers: admin_headers, params: valid_params
       expect(api_response["data"]["attributes"]["name"]).to eq("Rambo Stoolz")
     end
 
     describe "updates a text" do
-
-      it_should_behave_like "orderable api requests" do
+      it_behaves_like "orderable api requests" do
         let(:path) { "api_v1_stylesheet_path" }
         let!(:object_a) { FactoryBot.create(:stylesheet, position: 1) }
         let!(:object_b) { FactoryBot.create(:stylesheet, position: 2, text: object_a.text) }
@@ -63,22 +61,20 @@ RSpec.describe "Stylesheets API", type: :request do
     let(:path) { api_v1_stylesheet_path(stylesheet) }
 
     context "when the user is an admin" do
-
       let(:headers) { admin_headers }
 
       it "has a 204 NO CONTENT status code" do
         delete path, headers: headers
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:no_content)
       end
     end
 
     context "when the user is a reader" do
-
       let(:headers) { reader_headers }
 
       it "has a 403 FORBIDDEN status code" do
         delete path, headers: headers
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end
@@ -88,19 +84,21 @@ RSpec.describe "Stylesheets API", type: :request do
     let(:path) { api_v1_stylesheet_path(stylesheet) }
 
     context "when the user is an reader" do
-      before(:each) { get path, headers: reader_headers }
+      before { get path, headers: reader_headers }
+
       describe "the response" do
         it "has a 200 status code" do
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
 
     context "when the user is an admin" do
-      before(:each) { get path, headers: admin_headers }
+      before { get path, headers: admin_headers }
+
       describe "the response" do
         it "has a 200 status code" do
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end

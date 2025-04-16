@@ -47,6 +47,5 @@ module ResourceImports
       detection = CharlockHolmes::EncodingDetector.detect(content)
       CharlockHolmes::Converter.convert content, detection[:encoding], VALID_ENCODING
     end
-
   end
 end

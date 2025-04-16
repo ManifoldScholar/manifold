@@ -41,14 +41,11 @@ module HasSortTitle
   end
 
   class_methods do
-    # rubocop:disable Naming/PredicateName
     def has_sort_title(updater = nil, &updater_block)
       raise ArgumentError, "Must specify some sort of updater" if updater.blank? && updater_block.nil?
 
       @sort_title_updater = block_given? ? updater_block : updater
     end
-    # rubocop:enable Naming/PredicateName
-
     # @!attribute [r] sort_title_updater
     # @return [Symbol, #call]
     attr_reader :sort_title_updater

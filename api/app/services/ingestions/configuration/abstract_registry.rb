@@ -44,7 +44,6 @@ module Ingestions
                                     "Unknown definition: #{name}")
       end
 
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       # @api private
       # @param [Integer, :first, (:before, Symbol), (:last, Symbol)] position
       # @param [{ Symbol => Object }] options (@see Ingestions::Configuration::AbstractDefinition#initialize)
@@ -77,15 +76,14 @@ module Ingestions
 
         new_definition
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
-      def configure(&block)
+      def configure(&)
         @configuring = true
 
         if block_given?
           configurator = configurator_klass.new self
 
-          configurator.evaluate(&block)
+          configurator.evaluate(&)
         end
 
         self
@@ -154,7 +152,6 @@ module Ingestions
 
         private
 
-        # rubocop:disable Metrics/MethodLength
         def infer_defaults!(definition_definer: infer_definition_definer,
                             interaction_namespace: infer_interaction_namespace,
                             interaction_parent: "#{interaction_namespace}::Abstract#{infer_noun_klass}".safe_constantize)
@@ -188,7 +185,6 @@ module Ingestions
             end
           end
         end
-        # rubocop:enable Metrics/MethodLength
 
         def infer_definition_definer
           infer_noun.to_sym

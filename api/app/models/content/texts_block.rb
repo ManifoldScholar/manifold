@@ -1,6 +1,5 @@
 module Content
   class TextsBlock < ::ContentBlock
-
     include ::HasFormattedAttributes
 
     config.required_render_attributes = %i{has_texts}.freeze
@@ -24,7 +23,6 @@ module Content
     validates :show_authors, :show_descriptions, :show_subtitles, :show_covers,
               :show_dates, :show_category_labels, inclusion: { in: [true, false] }
 
-    # rubocop:disable Naming/PredicateName
     def has_texts
       scope = project_texts
       scope = scope.by_category(included_categories) if included_categories.present?
@@ -33,7 +31,6 @@ module Content
       scope.or(project_texts.uncategorized)
       scope.count.positive?
     end
-    # rubocop:enable Naming/PredicateName
 
     def text_ids
       texts.group(:id).pluck(:id)

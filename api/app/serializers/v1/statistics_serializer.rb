@@ -1,6 +1,5 @@
 module V1
   class StatisticsSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :readers_this_week, Types::Float.meta(read_only: true)

@@ -105,7 +105,6 @@ module Ingestions
           </html>
         HEREDOC
       end
-
     end
   end
 end

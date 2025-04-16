@@ -1,6 +1,5 @@
 # Tracks the relationship between projects and subjects
 class ProjectSubject < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -16,5 +15,4 @@ class ProjectSubject < ApplicationRecord
   def to_s
     subject.title
   end
-
 end

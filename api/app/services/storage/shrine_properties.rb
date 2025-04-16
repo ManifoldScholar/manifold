@@ -1,8 +1,6 @@
 module Storage
   class ShrineProperties
-
     class << self
-
       def fetch
         models_with_shrine_properties.inject({}) { |memo, model| memo.tap { |m| m[model.name.to_sym] = shrine_attributes_for(model) } }
       end
@@ -36,8 +34,6 @@ module Storage
       def tables
         ActiveRecord::Base.connection.tables - %w(schema_migrations comment_hierarchies comments) + %w(settings)
       end
-
     end
-
   end
 end

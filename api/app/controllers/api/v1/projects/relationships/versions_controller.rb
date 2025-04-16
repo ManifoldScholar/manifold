@@ -3,7 +3,6 @@ module API
     module Projects
       module Relationships
         class VersionsController < AbstractProjectChildController
-
           resourceful! Version, authorize_options: { except: [:index] } do
             Version.filtered(
               with_pagination!(version_filter_params),
@@ -20,7 +19,6 @@ module API
               serializer: ::V1::VersionSerializer
             )
           end
-
         end
       end
     end

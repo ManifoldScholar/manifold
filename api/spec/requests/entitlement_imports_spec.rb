@@ -27,7 +27,7 @@ RSpec.describe "Entitlement Imports API", type: :request do
         get path, headers: admin_headers
       end.to execute_safely
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 

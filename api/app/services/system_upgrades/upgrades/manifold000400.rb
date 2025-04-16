@@ -1,14 +1,13 @@
 module SystemUpgrades
   module Upgrades
     class Manifold000400 < SystemUpgrades::AbstractVersion
-
       def perform!
         create_twitter_queries
       end
 
       private
 
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       def create_twitter_queries
         logger.info("===================================================================")
         logger.info("Create Twitter Queries                                             ")
@@ -32,7 +31,7 @@ module SystemUpgrades
           end
         end
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
 
       def build_query(following)
         parts = []
@@ -47,11 +46,10 @@ module SystemUpgrades
                  else
                    ""
                  end
-          parts.push "#{base}#{v.strip}" unless v.blank?
+          parts.push "#{base}#{v.strip}" if v.present?
         end
         parts.join(" ")
       end
-
     end
   end
 end

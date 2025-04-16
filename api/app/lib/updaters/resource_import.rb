@@ -28,6 +28,5 @@ module Updaters
     def remove_state!(attributes)
       attributes.delete(:state)
     end
-
   end
 end

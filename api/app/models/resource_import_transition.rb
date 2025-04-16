@@ -1,5 +1,4 @@
 class ResourceImportTransition < ApplicationRecord
-
   # If your transition table doesn't have the default `updated_at` timestamp column,
   # you'll need to configure the `updated_timestamp_column` option, setting it to
   # another column name (e.g. `:updated_on`) or `nil`.
@@ -19,5 +18,4 @@ class ResourceImportTransition < ApplicationRecord
 
     last_transition.update_column(:most_recent, true)
   end
-
 end

@@ -11,7 +11,7 @@ RSpec.describe "Journal Abilities", :authorizer do
   end
 
   let!(:user) { FactoryBot.create :user, *user_traits }
-  let!(:journal) { FactoryBot.create :journal, *journal_traits}
+  let!(:journal) { FactoryBot.create :journal, *journal_traits }
   let!(:journal_issue) { FactoryBot.create :journal_issue, journal: journal }
 
   subject { user }
@@ -39,7 +39,7 @@ RSpec.describe "Journal Abilities", :authorizer do
   end
 
   shared_examples_for "read only" do
-    it { is_expected.to be_able_to(:read).on(journal).and be_unable_to(:create, :update, :delete).on(journal)}
+    it { is_expected.to be_able_to(:read).on(journal).and be_unable_to(:create, :update, :delete).on(journal) }
 
     include_examples "unauthorized to manage journal permissions"
     include_examples "unauthorized to manage journal entitlements"
@@ -48,15 +48,15 @@ RSpec.describe "Journal Abilities", :authorizer do
   end
 
   shared_examples_for "read access" do
-    it { is_expected.to be_able_to(:read).on(journal)}
+    it { is_expected.to be_able_to(:read).on(journal) }
   end
 
   shared_examples_for "edit access" do
-    it { is_expected.to be_able_to(:update).on(journal)}
+    it { is_expected.to be_able_to(:update).on(journal) }
   end
 
   shared_examples_for "delete access" do
-    it { is_expected.to be_able_to(:delete).on(journal)}
+    it { is_expected.to be_able_to(:delete).on(journal) }
   end
 
   shared_examples_for "authorized to manage journal entitlements" do
@@ -81,12 +81,11 @@ RSpec.describe "Journal Abilities", :authorizer do
         :update,
         :delete
       ).on(journal_issue)
-
     end
   end
 
   shared_examples_for "unauthorized to manage journal issues" do
-   it "is unable to manage journal issues" do
+    it "is unable to manage journal issues" do
       is_expected.to be_unable_to(
         :manage_permissions,
         :create_permissions,
@@ -117,7 +116,7 @@ RSpec.describe "Journal Abilities", :authorizer do
   end
 
   shared_examples_for "unauthorized to manage journal issue projects" do
-   it "is unable to manage journal issue projects" do
+    it "is unable to manage journal issue projects" do
       is_expected.to be_unable_to(
         :manage_permissions,
         :create_permissions,

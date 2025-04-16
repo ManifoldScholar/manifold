@@ -3,7 +3,6 @@ module APIDocs
     module Resources
       module Analytics
         class Event
-
           REQUIRED_CREATE_ATTRIBUTES = [name].freeze
 
           REQUEST_ATTRIBUTES = {

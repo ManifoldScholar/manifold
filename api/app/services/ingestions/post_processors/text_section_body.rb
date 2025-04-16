@@ -88,7 +88,7 @@ module Ingestions
       def map_uri(input_uri, cd_source_path,
                   source_path_map, section_source_map)
         new_uri = URI(input_uri)
-        if !new_uri.path.blank? && !new_uri.scheme
+        if new_uri.path.present? && !new_uri.scheme
           new_path = uri_to_app_uri(new_uri, cd_source_path,
                                     source_path_map, section_source_map)
           new_uri.path = new_path if new_path
@@ -127,7 +127,6 @@ module Ingestions
                        end
         CGI.unescape package_path
       end
-
     end
   end
 end

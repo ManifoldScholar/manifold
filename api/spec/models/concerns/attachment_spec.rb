@@ -64,7 +64,7 @@ RSpec.describe Attachments do
     describe "its styles hash" do
       it "has nil values for all keys except :original" do
         expect(instance.resource_styles.except(:original).values).to all(be_nil)
-        expect(instance.resource_styles[:original]).to_not be_nil
+        expect(instance.resource_styles[:original]).not_to be_nil
       end
     end
   end
@@ -83,16 +83,15 @@ RSpec.describe Attachments do
       it "returns the original url" do
         expect(attachable.image_sans_styles_original.url).to be_instance_of String
       end
-
     end
 
     context "after processing" do
       before { perform_enqueued_jobs { attachable.save } }
+
       it "returns the original url" do
         expect(attachable.image_sans_styles_original.url).to be_instance_of String
       end
     end
-
   end
 
   describe "determining whether to show placeholder" do
@@ -114,6 +113,7 @@ RSpec.describe Attachments do
 
       context "after processing" do
         before { perform_enqueued_jobs { attachable.save } }
+
         it "returns false" do
           expect(attachable.show_attached_placeholder?).to eq false
         end
@@ -144,34 +144,33 @@ RSpec.describe Attachments do
     include_examples "an Attachment defined method", :attached_is_spreadsheet?, false
     include_examples "an Attachment defined method", :attached_is_text_document?, false
     include_examples "an Attachment defined method", :attached_is_presentation?, false
-    include_examples "an Attachment defined method", :attached_meta, { :large_landscape => {:width=>1280, :height=>800},
-                                                                       :medium => {:width=>640, :height=>640},
-                                                                       :medium_landscape => {:width=>640, :height=>400},
-                                                                       :medium_portrait => {:width=>400, :height=>640},
-                                                                       :medium_square => {:width=>640, :height=>640},
-                                                                       :original => {:width=>642, :height=>642},
-                                                                       :small => {:width=>320, :height=>320},
-                                                                       :small_landscape => {:width=>320, :height=>200},
-                                                                       :small_portrait => {:width=>200, :height=>320},
-                                                                       :small_square => {:width=>320, :height=>320} }
-    include_examples "an Attachment defined method", :manifold_attachment_image_styles, { :large_landscape => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"1280x800.0^", :extent=>"1280x800.0^"},
-                                                                                          :medium => {:resize=>"640x640", :convert=>"jpg", :background=>"none", :gravity=>"north"},
-                                                                                          :medium_landscape => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"640x400^", :extent=>"640x400"},
-                                                                                          :medium_portrait => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"400.0x640^", :extent=>"400"},
-                                                                                          :medium_square => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"640x640^", :extent=>"640x640"},
-                                                                                          :small => {:resize=>"320x320", :convert=>"jpg", :background=>"none", :gravity=>"north"},
-                                                                                          :small_landscape => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"320x200^", :extent=>"320x200"},
-                                                                                          :small_portrait => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"200x320^", :extent=>"200x320"},
-                                                                                          :small_square => {:convert=>"jpg", :background=>"none", :gravity=>"north", :thumbnail=>"320x320^", :extent=>"320x320"} }
-    include_examples "an Attachment defined method", :manifold_attachment_alpha_styles, { :large_landscape => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"1280x800.0^", :extent=>"1280x800.0^"},
-                                                                                          :medium => {:resize=>"640x640", :convert=>"png", :background=>"none", :gravity=>"north"},
-                                                                                          :medium_landscape => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"640x400^", :extent=>"640x400"},
-                                                                                          :medium_portrait => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"400.0x640^", :extent=>"400"},
-                                                                                          :medium_square => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"640x640^", :extent=>"640x640"},
-                                                                                          :small => {:resize=>"320x320", :convert=>"png", :background=>"none", :gravity=>"north"},
-                                                                                          :small_landscape => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"320x200^", :extent=>"320x200"},
-                                                                                          :small_portrait => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"200x320^", :extent=>"200x320"},
-                                                                                          :small_square => {:convert=>"png", :background=>"none", :gravity=>"north", :thumbnail=>"320x320^", :extent=>"320x320"} }
-
+    include_examples "an Attachment defined method", :attached_meta, { large_landscape: { width: 1280, height: 800 },
+                                                                       medium: { width: 640, height: 640 },
+                                                                       medium_landscape: { width: 640, height: 400 },
+                                                                       medium_portrait: { width: 400, height: 640 },
+                                                                       medium_square: { width: 640, height: 640 },
+                                                                       original: { width: 642, height: 642 },
+                                                                       small: { width: 320, height: 320 },
+                                                                       small_landscape: { width: 320, height: 200 },
+                                                                       small_portrait: { width: 200, height: 320 },
+                                                                       small_square: { width: 320, height: 320 } }
+    include_examples "an Attachment defined method", :manifold_attachment_image_styles, { large_landscape: { convert: "jpg", background: "none", gravity: "north", thumbnail: "1280x800.0^", extent: "1280x800.0^" },
+                                                                                          medium: { resize: "640x640", convert: "jpg", background: "none", gravity: "north" },
+                                                                                          medium_landscape: { convert: "jpg", background: "none", gravity: "north", thumbnail: "640x400^", extent: "640x400" },
+                                                                                          medium_portrait: { convert: "jpg", background: "none", gravity: "north", thumbnail: "400.0x640^", extent: "400" },
+                                                                                          medium_square: { convert: "jpg", background: "none", gravity: "north", thumbnail: "640x640^", extent: "640x640" },
+                                                                                          small: { resize: "320x320", convert: "jpg", background: "none", gravity: "north" },
+                                                                                          small_landscape: { convert: "jpg", background: "none", gravity: "north", thumbnail: "320x200^", extent: "320x200" },
+                                                                                          small_portrait: { convert: "jpg", background: "none", gravity: "north", thumbnail: "200x320^", extent: "200x320" },
+                                                                                          small_square: { convert: "jpg", background: "none", gravity: "north", thumbnail: "320x320^", extent: "320x320" } }
+    include_examples "an Attachment defined method", :manifold_attachment_alpha_styles, { large_landscape: { convert: "png", background: "none", gravity: "north", thumbnail: "1280x800.0^", extent: "1280x800.0^" },
+                                                                                          medium: { resize: "640x640", convert: "png", background: "none", gravity: "north" },
+                                                                                          medium_landscape: { convert: "png", background: "none", gravity: "north", thumbnail: "640x400^", extent: "640x400" },
+                                                                                          medium_portrait: { convert: "png", background: "none", gravity: "north", thumbnail: "400.0x640^", extent: "400" },
+                                                                                          medium_square: { convert: "png", background: "none", gravity: "north", thumbnail: "640x640^", extent: "640x640" },
+                                                                                          small: { resize: "320x320", convert: "png", background: "none", gravity: "north" },
+                                                                                          small_landscape: { convert: "png", background: "none", gravity: "north", thumbnail: "320x200^", extent: "320x200" },
+                                                                                          small_portrait: { convert: "png", background: "none", gravity: "north", thumbnail: "200x320^", extent: "200x320" },
+                                                                                          small_square: { convert: "png", background: "none", gravity: "north", thumbnail: "320x320^", extent: "320x320" } }
   end
 end

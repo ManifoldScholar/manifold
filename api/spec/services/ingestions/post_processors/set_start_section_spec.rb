@@ -4,11 +4,10 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
   include TestHelpers::IngestionHelper
 
   shared_examples_for "the start section assignment" do |section_name|
-
-    before(:each) { described_class.run(manifest: manifest, text: text, context: context) }
+    before { described_class.run(manifest: manifest, text: text, context: context) }
 
     it "determines the start_text_section_id" do
-      expect(text.start_text_section).to_not be_nil
+      expect(text.start_text_section).not_to be_nil
       expect(text.start_text_section.name).to eq section_name
     end
   end
@@ -58,5 +57,4 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
       include_examples "the start section assignment", "Section 2"
     end
   end
-
 end

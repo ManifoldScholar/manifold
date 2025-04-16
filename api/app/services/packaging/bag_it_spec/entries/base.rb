@@ -14,7 +14,6 @@ module Packaging
         # @abstract
         # @param [BagIt::Bag] bag
         # @return [void]
-        # rubocop:disable Lint/UnusedMethodArgument
         def add_to!(bag)
           # :nocov:
           raise NotImplementedError, "must implement #{self.class}##{__method__}"

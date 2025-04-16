@@ -1,7 +1,6 @@
 module Ingestions
   module TextSection
     class Updater < Ingestions::AbstractInteraction
-
       hash :manifest, strip: false
       object :text
       string :text_section_id

@@ -43,7 +43,7 @@ RSpec.describe "Entitlements", type: :request do
                        model: Entitlement,
                        url_parameters: [:project_id],
                        authorized_user: :admin,
-                       description: "Creates an entitlement to be associated with the project "\
+                       description: "Creates an entitlement to be associated with the project " \
                        "ID provided in the endpoint." do
         let(:body) do
           {

@@ -2,8 +2,8 @@ module Utility
   # Return a filename that has the correct extension for use with Epub or other
   # established archiving formats.
   class StripExtension < ActiveInteraction::Base
-    COMPRESSED_TARBALL = /\A(.+?)\.(tar\.[a-z]{2,})\z/i.freeze
-    STANDARD = /\A(.+?)\.([^.\s]+)\z/i.freeze
+    COMPRESSED_TARBALL = /\A(.+?)\.(tar\.[a-z]{2,})\z/i
+    STANDARD = /\A(.+?)\.([^.\s]+)\z/i
 
     string :filename
 

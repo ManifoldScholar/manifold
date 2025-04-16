@@ -35,7 +35,6 @@ module Attachments
       "#{super}:#{params[:klass]}:#{params[:id]}"
     end
 
-    # rubocop:disable Metrics/MethodLength
     # https://shrinerb.com/docs/upgrading-to-3#dual-support
     def normalize_args(args)
       if args.one?
@@ -59,6 +58,5 @@ module Attachments
         record: record
       }
     end
-    # rubocop:enable Metrics/MethodLength
   end
 end

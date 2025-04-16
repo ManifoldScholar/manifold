@@ -65,74 +65,71 @@ RSpec.describe Ingestions::Strategies::Document do
 
   context "when structured HTML file" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "structured", "index.html") }
-    let(:toc) {
-      [{"label"=>"Header 0",
-        "anchor"=>"header-0",
-        "source_path"=>"index.html",
-        "children"=>[]
-       },
-        {"label"=>"Header 1",
-        "anchor"=>"header-1",
-        "source_path"=>"index.html",
-        "children"=>
-          [{"label"=>"Header 1.1",
-            "anchor"=>"header-1-1",
-            "source_path"=>"index.html",
-            "children"=>[]},
-           {"label"=>"Header 1.2",
-            "anchor"=>"header-1-2",
-            "source_path"=>"index.html",
-            "children"=>
-              [{"label"=>"Header 1.2.1",
-                "anchor"=>"header-1-2-1",
-                "source_path"=>"index.html",
-                "children"=>
-                  [{"label"=>"Header 1.2.1.1",
-                    "anchor"=>"header-1-2-1-1",
-                    "source_path"=>"index.html",
-                    "children"=>[]},
-                   {"label"=>"Header 1.2.1.2",
-                    "anchor"=>"header-1-2-1-2",
-                    "source_path"=>"index.html",
-                    "children"=>
-                      [{"label"=>"Header 1.2.1.2.1",
-                        "anchor"=>"header-1-2-1-2-1",
-                        "source_path"=>"index.html",
-                        "children"=>[]}]},
-                   {"label"=>"Header 1.2.1.3",
-                    "anchor"=>"header-1-2-1-3",
-                    "source_path"=>"index.html",
-                    "children"=>[]}]}]},
-           {"label"=>"Header 1.3",
-            "anchor"=>"header-1-3",
-            "source_path"=>"index.html",
-            "children"=>[]}]},
-       {"label"=>"Header 2",
-        "anchor"=>"header-2",
-        "source_path"=>"index.html",
-        "children"=>[]},
-       {"label"=>"Header 3",
-        "anchor"=>"header-3",
-        "source_path"=>"index.html",
-        "children"=>[
-          {"label"=>"Header 3-1",
-           "anchor"=>"header-3-1",
-           "source_path"=>"index.html",
-           "children"=>[]}
-        ]}
-      ]
-    }
+    let(:toc) do
+      [{ "label" => "Header 0",
+        "anchor" => "header-0",
+        "source_path" => "index.html",
+        "children" => [] },
+       { "label" => "Header 1",
+       "anchor" => "header-1",
+       "source_path" => "index.html",
+       "children" =>
+         [{ "label" => "Header 1.1",
+           "anchor" => "header-1-1",
+           "source_path" => "index.html",
+           "children" => [] },
+          { "label" => "Header 1.2",
+           "anchor" => "header-1-2",
+           "source_path" => "index.html",
+           "children" =>
+             [{ "label" => "Header 1.2.1",
+               "anchor" => "header-1-2-1",
+               "source_path" => "index.html",
+               "children" =>
+                 [{ "label" => "Header 1.2.1.1",
+                   "anchor" => "header-1-2-1-1",
+                   "source_path" => "index.html",
+                   "children" => [] },
+                  { "label" => "Header 1.2.1.2",
+                   "anchor" => "header-1-2-1-2",
+                   "source_path" => "index.html",
+                   "children" =>
+                     [{ "label" => "Header 1.2.1.2.1",
+                       "anchor" => "header-1-2-1-2-1",
+                       "source_path" => "index.html",
+                       "children" => [] }] },
+                  { "label" => "Header 1.2.1.3",
+                   "anchor" => "header-1-2-1-3",
+                   "source_path" => "index.html",
+                   "children" => [] }] }] },
+          { "label" => "Header 1.3",
+           "anchor" => "header-1-3",
+           "source_path" => "index.html",
+           "children" => [] }] },
+       { "label" => "Header 2",
+        "anchor" => "header-2",
+        "source_path" => "index.html",
+        "children" => [] },
+       { "label" => "Header 3",
+        "anchor" => "header-3",
+        "source_path" => "index.html",
+        "children" => [
+          { "label" => "Header 3-1",
+           "anchor" => "header-3-1",
+           "source_path" => "index.html",
+           "children" => [] }
+        ] }]
+    end
 
     it "does not have an empty TOC" do
       manifest = described_class.run(context: context).result
-      expect(manifest[:attributes][:toc]).to_not eq []
+      expect(manifest[:attributes][:toc]).not_to eq []
     end
 
     it "correctly generates the TOC and excludes blank entries" do
       manifest = described_class.run(context: context).result
       expect(manifest[:attributes][:toc]).to eq toc
     end
-
   end
 
   context "when HTML file" do
@@ -200,7 +197,6 @@ RSpec.describe Ingestions::Strategies::Document do
   end
 
   context "when latex" do
-
     let(:path) { Rails.root.join("spec", "data", "ingestion", "latex", "example.tex") }
 
     it "has one text section" do
@@ -211,11 +207,9 @@ RSpec.describe Ingestions::Strategies::Document do
     it "has one ingestion source for every unique source file" do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 1
     end
-
   end
 
   context "when google doc", slow: true do
-
     let(:url) { "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing" }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, external_source_url: url }
 
@@ -234,18 +228,16 @@ RSpec.describe Ingestions::Strategies::Document do
     end
 
     it "has one text section" do
-      expected = [{"source_identifier"=>"eacf331f0ffc35d4b482f1d15a887d3b", "name"=>"Google Doc Prime", "kind"=>"section", "position"=>1, "build"=>"build/index.html"}]
+      expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "Google Doc Prime", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
       expect(manifest[:relationships][:text_sections]).to eq expected
     end
 
     it "has one ingestion source" do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 1
     end
-
   end
 
   context "when microsoft word" do
-
     let(:path) { Rails.root.join("spec", "data", "ingestion", "ms_word", "example.docx") }
 
     it "correctly sets the text title based on styled title text", odd_fs: true do
@@ -256,11 +248,8 @@ RSpec.describe Ingestions::Strategies::Document do
       expect(manifest["relationships"]["text_sections"][0]["name"]).to eq "Text Styled as Title"
     end
 
-
     it "has an ingestion source for document and each media item", odd_fs: true do
       expect(manifest[:relationships][:ingestion_sources].length).to eq 2
     end
-
   end
-
 end

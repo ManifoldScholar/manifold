@@ -1,225 +1,1060 @@
+plugins:
+  - rubocop-factory_bot
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
+
 AllCops:
-  TargetRubyVersion: 2.7
-  DisplayCopNames: true
+  NewCops: enable
   Exclude:
-    - "vendor/**/*"
-    - "db/**/*"
-    - "bin/**/*"
-    - "spec/**/*"
+    - ".pryrc"
+    - "bin/*"
+    - "config/puma.rb"
+    - "srv/app/lib/tempates/rspec/**/*.rb"
+    - "srv/app/spec/models/content_block_spec.rb"
+    - "db/migrate/**/*.rb"
+    - "db/schema.rb"
     - "tmp/**/*"
-    - "lib/patches/**/*"
-    - "lib/templates/**/*"
-    - "api/vendor/**/*"
-    - "api/tmp/**/*"
-    - "api/db/**/*"
-    - "api/bin/**/*"
-    - "api/spec/**/*"
-    - "api/lib/patches/**/*"
-    - "api/lib/templates/**/*"
+    - "vendor/**/*"
+  SuggestExtensions: false
+  TargetRubyVersion: 3.2
 
-Metrics/BlockLength:
+Bundler/OrderedGems:
   Enabled: false
 
-Metrics/MethodLength:
-  Exclude:
-    - "app/controllers/concerns/validation.rb"
-    - "app/operations/**/*.rb"
-  Max: 15
-
-Metrics/ModuleLength:
+FactoryBot/AssociationStyle:
+  # Explicit is better.
   Enabled: false
 
-Metrics/ClassLength:
+FactoryBot/ConsistentParenthesesStyle:
   Enabled: false
 
-Metrics/AbcSize:
+FactoryBot/CreateList:
+  Enabled: false
+
+FactoryBot/ExcessiveCreateList:
   Enabled: true
-  Exclude:
-    - "app/operations/**/*.rb"
-    - "app/services/collections"
-    - "lib/**/*.rb"
-  Max: 22
 
-Layout/HashAlignment:
-  EnforcedLastArgumentHashStyle: ignore_implicit
+FactoryBot/FactoryAssociationWithStrategy:
+  Enabled: true
+
+FactoryBot/FactoryNameStyle:
+  Enabled: true
+
+FactoryBot/IdSequence:
+  Enabled: true
+
+FactoryBot/RedundantFactoryOption:
+  Enabled: true
+
+FactoryBot/SyntaxMethods:
+  Enabled: false
+
+Gemspec/AddRuntimeDependency:
+  Enabled: true
+
+Gemspec/DeprecatedAttributeAssignment:
+  Enabled: true
+
+Gemspec/DevelopmentDependencies:
+  Enabled: true
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+Layout/ArgumentAlignment:
+  Enabled: false
 
 Layout/DotPosition:
-  EnforcedStyle: leading
-
-Layout/HeredocIndentation:
   Enabled: false
-
-Layout/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
-
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
 
 Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
-Layout/EmptyLinesAroundClassBody:
+Layout/ExtraSpacing:
+  AllowForAlignment: true
+  AllowBeforeTrailingComments: true
+
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+Layout/HashAlignment:
+  Enabled: false
+
+Layout/HeredocIndentation:
+  Enabled: false
+
+Layout/LineContinuationLeadingSpace:
+  Enabled: true
+
+Layout/LineContinuationSpacing:
+  Enabled: true
+
+Layout/LineEndStringConcatenationIndentation:
   Enabled: false
 
 Layout/LineLength:
+  AllowedPatterns:
+    - def .+!\(.+\)
+  Max: 180
   Exclude:
-    - "app/services/setting_sections/*.rb"
-  Max: 140
+    - "spec/**/*.rb"
 
-Layout/BeginEndAlignment: # (new in 0.91)
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Layout/SpaceAroundOperators:
+  AllowForAlignment: true
+
+Layout/SpaceBeforeBrackets:
   Enabled: true
 
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+
+Lint/AmbiguousAssignment:
+  Enabled: true
+
+# It's never actually ambiguous if you know ruby even a little, and parenthesizing it looks worse.
 Lint/AmbiguousBlockAssociation:
   Enabled: false
 
-# This complains about perfectly valid delegation syntax
+# PEMDAS
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: false
+
 Lint/AmbiguousOperator:
   Enabled: false
 
-Lint/RedundantCopDisableDirective:
+Lint/AmbiguousRange:
   Enabled: true
 
-Lint/DeprecatedOpenSSLConstant:
+Lint/ArrayLiteralInRegexp:
   Enabled: true
 
-Lint/MixedRegexpCaptureTypes:
+Lint/ConstantOverwrittenInRescue:
+  Enabled: true
+
+Lint/ConstantReassignment:
+  Enabled: true
+
+Lint/CopDirectiveSyntax:
+  Enabled: true
+
+Lint/DeprecatedConstants:
+  Enabled: true
+
+Lint/DuplicateBranch:
   Enabled: false
 
-Lint/RaiseException:
+Lint/DuplicateMagicComment:
   Enabled: true
 
-Lint/StructNewOverride:
+Lint/DuplicateMatchPattern:
   Enabled: true
 
-Lint/ScriptPermission:
-  Enabled: false
-
-Lint/BinaryOperatorWithIdenticalOperands:
+Lint/DuplicateRegexpCharacterClassElement:
   Enabled: true
 
-Lint/DuplicateElsifCondition:
+Lint/DuplicateSetElement:
   Enabled: true
 
-Lint/EmptyConditionalBody:
+Lint/EmptyBlock:
   Enabled: true
 
-Lint/FloatComparison:
+Lint/EmptyClass:
+  Enabled: true
+
+Lint/EmptyInPattern:
+  Enabled: true
+
+Lint/HashNewWithKeywordArgumentsAsDefault:
+  Enabled: true
+
+Lint/IncompatibleIoSelectWithFiberScheduler:
+  Enabled: true
+
+Lint/ItWithoutArgumentsInBlock:
+  Enabled: true
+
+Lint/LambdaWithoutLiteralBlock:
+  Enabled: true
+
+Lint/LiteralAssignmentInCondition:
   Enabled: true
 
 Lint/MissingSuper:
   Enabled: false
 
-Lint/OutOfRangeRegexpRef:
+Lint/MixedCaseRange:
   Enabled: true
 
-Lint/SelfAssignment:
+Lint/NonAtomicFileOperation:
   Enabled: true
 
-Lint/TopLevelReturnWithArgument:
+Lint/NoReturnInBeginEndBlocks:
   Enabled: true
 
-Lint/UnreachableLoop:
+Lint/NumberedParameterAssignment:
   Enabled: true
 
-Lint/DuplicateRescueException:
+Lint/NumericOperationWithConstantResult:
   Enabled: true
 
-Lint/ConstantDefinitionInBlock:
+Lint/OrAssignmentToConstant:
   Enabled: true
 
-Lint/DuplicateRequire:
+Lint/RedundantDirGlobSort:
   Enabled: true
 
-Lint/EmptyFile:
+Lint/RedundantTypeConversion:
+  Enabled: true
+Lint/RedundantRegexpQuantifiers:
   Enabled: true
 
-Lint/HashCompareByIdentity:
+Lint/RefinementImportMethods:
   Enabled: true
 
-Lint/IdentityComparison:
+Lint/RequireRangeParentheses:
   Enabled: true
 
-Lint/RedundantSafeNavigation:
+Lint/RequireRelativeSelfPath:
   Enabled: true
 
-Lint/TrailingCommaInAttributeDeclaration:
+Lint/SharedMutableDefault:
+  Enabled: true
+
+Lint/SuppressedExceptionInNumberConversion:
+  Enabled: true
+
+Lint/SymbolConversion:
+  Enabled: true
+
+Lint/ToEnumArguments:
+  Enabled: false
+
+Lint/TripleQuotes:
+  Enabled: true
+
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+Lint/UnescapedBracketInRegexp:
+  Enabled: true
+
+Lint/UnexpectedBlockArity:
+  Enabled: true
+
+Lint/UnmodifiedReduceAccumulator:
   Enabled: true
 
 Lint/UnusedBlockArgument:
-  Exclude:
-    - "config/initializers/*.rb"
-
-Lint/UselessMethodDefinition:
-  Enabled: true
-
-Lint/UselessTimes:
-  Enabled: true
-
-# We know where accessors should go.
-Style/AccessorGrouping:
   Enabled: false
 
-Style/ArrayCoercion:
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+Lint/UselessConstantScoping:
   Enabled: true
 
-Style/BisectedAttrAccessor:
+Lint/UselessDefined:
   Enabled: true
 
-Style/CaseLikeIf:
+Lint/UselessNumericOperation:
   Enabled: true
+
+Lint/UselessRescue:
+  Enabled: true
+
+Lint/UselessRuby2Keywords:
+  Enabled: true
+
+Metrics/AbcSize:
+  Exclude:
+    - "app/operations/**/*.rb"
+    - "app/services/**/*.rb"
+    - "lib/support/**/*.rb"
+    - "spec/**/*.rb"
+  Max: 25
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CollectionLiteralLength:
+  Enabled: true
+
+Metrics/CyclomaticComplexity:
+  AllowedPatterns:
+    - ^detect_
+    - ^has_.+!
+  Exclude:
+    - "app/operations/**/*.rb"
+    - "app/services/**/*.rb"
+    - "lib/**/*.rb"
+    - "spec/**/*.rb"
+
+Metrics/MethodLength:
+  Exclude:
+    - "app/services/harvesting/**/*.rb"
+    - "lib/support/**/*.rb"
+    - "spec/**/*.rb"
+  Max: 30
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "app/operations/**/*.rb"
+    - "app/services/**/*.rb"
+    - "lib/support/**/*.rb"
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/BinaryOperatorParameterName:
+  Enabled: false
+
+Naming/BlockForwarding:
+  Enabled: true
+
+Naming/ConstantName:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Naming/MethodParameterName:
+  Enabled: false
+
+Naming/MethodName:
+  Enabled: false
+
+Naming/PredicateName:
+  ForbiddenPrefixes:
+    - is_
+  NamePrefix:
+    - is_
+
+Naming/VariableNumber:
+  Enabled: false
+
+Rails/ActionControllerFlashBeforeRender:
+  Enabled: true
+
+Rails/ActionControllerTestCase:
+  Enabled: true
+
+Rails/ActionOrder:
+  Enabled: true
+
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: true
+
+Rails/ActiveSupportOnLoad:
+  Enabled: true
+
+Rails/AddColumnIndex:
+  Enabled: true
+
+Rails/AfterCommitOverride:
+  Enabled: true
+
+Rails/AttributeDefaultBlockValue:
+  Enabled: true
+
+Rails/Blank:
+  Enabled: false
+
+Rails/CompactBlank:
+  Enabled: true
+
+Rails/DangerousColumnNames:
+  Enabled: true
+
+Rails/Date:
+  Enabled: false
+
+Rails/Delegate:
+  Enabled: false
+
+# False positives
+Rails/DeprecatedActiveModelErrorsMethods:
+  Enabled: false
+
+Rails/DotSeparatedKeys:
+  Enabled: true
+
+Rails/DuplicateAssociation:
+  Enabled: true
+
+Rails/DuplicateScope:
+  Enabled: true
+
+Rails/DurationArithmetic:
+  Enabled: true
+
+Rails/EagerEvaluationLogMessage:
+  Enabled: true
+
+Rails/EnumSyntax:
+  Enabled: true
+
+Rails/EnvLocal:
+  Enabled: true
+
+Rails/ExpandedDateRange:
+  Enabled: true
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/FindById:
+  Enabled: true
+
+# False positives with other APIs that include a `where(...).each` paradigm.
+Rails/FindEach:
+  Enabled: false
+
+Rails/FreezeTime:
+  Enabled: true
+
+Rails/I18nLazyLookup:
+  Enabled: true
+
+Rails/I18nLocaleAssignment:
+  Enabled: true
+
+Rails/I18nLocaleTexts:
+  Enabled: true
+
+Rails/IgnoredColumnsAssignment:
+  Enabled: true
+
+Rails/Inquiry:
+  Enabled: true
+
+Rails/MailerName:
+  Enabled: true
+
+Rails/MatchRoute:
+  Enabled: true
+
+Rails/MigrationClassName:
+  Enabled: true
+
+Rails/MultipleRoutePaths:
+  Enabled: true
+
+Rails/NegateInclude:
+  Enabled: false
+
+# That's what html_safe is for.
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/Pluck:
+  Enabled: true
+
+Rails/PluckInWhere:
+  Enabled: true
+
+Rails/RedundantActiveRecordAllMethod:
+  Enabled: false
+
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: true
+
+Rails/RedundantTravelBack:
+  Enabled: true
+
+Rails/RenderInline:
+  Enabled: true
+
+Rails/RenderPlainText:
+  Enabled: true
+
+Rails/ResponseParsedBody:
+  Enabled: true
+
+Rails/RootJoinChain:
+  Enabled: true
+
+Rails/RootPathnameMethods:
+  Enabled: true
+
+Rails/RootPublicPath:
+  Enabled: true
+
+Rails/SelectMap:
+  Enabled: true
+
+Rails/ShortI18n:
+  Enabled: true
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/SquishedSQLHeredocs:
+  Enabled: false
+
+Rails/StripHeredoc:
+  Enabled: false
+
+Rails/StrongParametersExpect:
+  Enabled: true
+
+Rails/ThreeStateBooleanColumn:
+  Enabled: true
+
+Rails/TimeZoneAssignment:
+  Enabled: true
+
+Rails/ToFormattedS:
+  Enabled: true
+
+Rails/ToSWithArgument:
+  Enabled: true
+
+Rails/TopLevelHashWithIndifferentAccess:
+  Enabled: true
+
+Rails/TransactionExitStatement:
+  Enabled: true
+
+Rails/UnusedIgnoredColumns:
+  Enabled: true
+
+Rails/UnusedRenderContent:
+  Enabled: true
+
+Rails/WhereEquals:
+  Enabled: true
+
+Rails/WhereExists:
+  Enabled: true
+
+Rails/WhereMissing:
+  Enabled: true
+
+Rails/WhereNotWithMultipleConditions:
+  Enabled: true
+
+Rails/WhereNot:
+  Enabled: true
+
+Rails/WhereRange:
+  Enabled: true
+
+RSpec/BeEmpty:
+  Enabled: true
+
+RSpec/BeEq:
+  Enabled: true
+
+RSpec/BeNil:
+  Enabled: true
+
+RSpec/ChangeByZero:
+  Enabled: true
+
+RSpec/ClassCheck:
+  Enabled: false
+
+RSpec/ContainExactly:
+  Enabled: true
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - spec/requests/**/*.rb
+
+RSpec/DuplicatedMetadata:
+  Enabled: true
+
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - spec/policies/**/*.rb
+
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: false
+
+RSpec/EmptyMetadata:
+  Enabled: true
+
+RSpec/Eq:
+  Enabled: true
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/ExampleWording:
+  Enabled: false
+
+RSpec/ExcessiveDocstringSpacing:
+  Enabled: true
+
+RSpec/ExpectActual:
+  Enabled: false
+
+RSpec/IdenticalEqualityAssertion:
+  Enabled: true
+
+RSpec/ImplicitSubject:
+  Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false
+
+RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/LeadingSubject:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MatchArray:
+  Enabled: true
+
+RSpec/MetadataStyle:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
+
+RSpec/NoExpectationExample:
+  Enabled: true
+
+RSpec/PendingWithoutReason:
+  Enabled: false
+
+RSpec/PredicateMatcher:
+  Enabled: true
+
+RSpec/ReceiveMessages:
+  Enabled: true
+
+RSpec/RedundantAround:
+  Enabled: true
+
+# The next two cops don't work right when using helpers that set up contexts
+RSpec/RepeatedDescription:
+  Enabled: false
+
+RSpec/RepeatedExample:
+  Enabled: false
+
+RSpec/ScatteredLet:
+  Enabled: false
+
+# False positives that don't understand other context building helpers.
+RSpec/ScatteredSetup:
+  Enabled: false
+
+RSpec/SkipBlockInsideExample:
+  Enabled: true
+
+RSpec/SortMetadata:
+  Enabled: false
+
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+RSpec/SpecFilePathSuffix:
+  Enabled: true
+
+RSpec/SubjectDeclaration:
+  Enabled: true
+
+RSpec/VerifiedDoubleReference:
+  Enabled: true
+
+RSpec/VerifiedDoubles:
+  IgnoreNameless: true
+  IgnoreSymbolicNames: true
+
+RSpec/VoidExpect:
+  Enabled: false
+
+RSpecRails/AvoidSetupHook:
+  Enabled: true
+
+RSpecRails/HaveHttpStatus:
+  Enabled: true
+
+RSpecRails/InferredSpecType:
+  Enabled: false
+
+RSpecRails/MinitestAssertions:
+  Enabled: true
+
+RSpecRails/NegationBeValid:
+  Enabled: false
+
+RSpecRails/TravelAround:
+  Enabled: true
+
+Security/CompoundHash:
+  Enabled: true
+
+Security/IoMethods:
+  Enabled: true
+
+Style/AmbiguousEndlessMethodDefinition:
+  Enabled: true
+
+Style/ArgumentsForwarding:
+  Enabled: false
+
+Style/ArrayIntersect:
+  Enabled: true
+
+Style/ArrayJoin:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/BitwisePredicate:
+  Enabled: true
+
+Style/CaseEquality:
+  Enabled: false
 
 Style/CharacterLiteral:
   Enabled: false
 
+Style/ClassCheck:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/CollectionCompact:
+  Enabled: true
+
+Style/CombinableDefined:
+  Enabled: true
+
+Style/ComparableBetween:
+  Enabled: true
+
+Style/ComparableClamp:
+  Enabled: true
+
+Style/ConcatArrayLiterals:
+  Enabled: true
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/DataInheritance:
+  Enabled: true
+
+Style/DigChain:
+  Enabled: true
+
+Style/DirEmpty:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentDynamicEvalDefinition:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/EmptyHeredoc:
+  Enabled: false
+
+Style/EmptyLiteral:
+  Enabled: false
+
+Style/EndlessMethod:
+  Enabled: true
+
+Style/EnvHome:
+  Enabled: true
+
+Style/ExactRegexpMatch:
+  Enabled: true
+
 Style/ExplicitBlockArgument:
   Enabled: false
+
+Style/FetchEnvVar:
+  Enabled: false
+
+Style/FileEmpty:
+  Enabled: true
+
+Style/FileRead:
+  Enabled: true
+
+Style/FileNull:
+  Enabled: true
+
+Style/FileTouch:
+  Enabled: true
+
+Style/FileWrite:
+  Enabled: true
+
+Style/FormatString:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
 
 Style/GuardClause:
   Enabled: false
 
-Style/GlobalStdStream:
-  Enabled: false
-
-Style/HashAsLastArrayItem:
+Style/HashConversion:
   Enabled: true
 
-# False positive with non-hash objects that have a `values` method.
+# Detection flags things that aren't hashes.
 Style/HashEachMethods:
   Enabled: false
 
-Style/HashLikeCase:
+Style/HashExcept:
   Enabled: true
 
-# Guard clauses do not always make more sense.
+Style/HashSlice:
+  Enabled: true
+
+Style/IfWithBooleanLiteralBranches:
+  Enabled: true
+
 Style/IfUnlessModifier:
   Enabled: false
+
+Style/InPatternThen:
+  Enabled: true
+
+Style/ItAssignment:
+  Enabled: true
+
+Style/KeywordArgumentsMerging:
+  Enabled: true
+
+Style/Lambda:
+  Enabled: false
+
+Style/LambdaCall:
+  Enabled: false
+
+Style/MagicCommentFormat:
+  Enabled: true
+
+Style/MapCompactWithConditionalBlock:
+  Enabled: true
+
+Style/MapIntoArray:
+  Enabled: true
+
+Style/MapToHash:
+  Enabled: true
+
+Style/MapToSet:
+  Enabled: true
+
+Style/MinMaxComparison:
+  Enabled: true
 
 Style/MultilineBlockChain:
   Enabled: false
 
-Style/OptionalBooleanParameter:
-  Enabled: true
-
-Style/RedundantAssignment:
-  Enabled: true
-
-Style/RedundantBegin:
+Style/MultilineIfModifier:
   Enabled: false
 
-Style/RedundantFileExtensionInRequire:
+Style/MultilineInPatternThen:
   Enabled: true
 
-Style/SingleArgumentDig:
+Style/NegatedIfElseCondition:
+  Enabled: true
+
+Style/NestedFileDirname:
+  Enabled: true
+
+Style/Next:
   Enabled: false
 
-Style/StringConcatenation:
+Style/NilLambda:
+  Enabled: true
+
+Style/NumberedParameters:
+  Enabled: true
+
+Style/NumberedParametersLimit:
+  Enabled: true
+
+Style/NumericPredicate:
   Enabled: false
+
+Style/ObjectThen:
+  Enabled: true
+
+Style/OpenStructUse:
+  Enabled: true
+
+Style/OperatorMethodCall:
+  Enabled: true
+
+Style/QuotedSymbols:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+# This clobbers unexpected method calls
+Style/PreferredHashMethods:
+  Enabled: false
+
+Style/RaiseArgs:
+  Enabled: false
+
+Style/RedundantArgument:
+  Enabled: true
+
+Style/RedundantArrayConstructor:
+  Enabled: true
+
+Style/RedundantConstantBase:
+  Enabled: false
+
+Style/RedundantCurrentDirectoryInPath:
+  Enabled: true
+
+Style/RedundantDoubleSplatHashBraces:
+  Enabled: true
+
+Style/RedundantEach:
+  Enabled: false
+
+Style/RedundantFetchBlock:
+  Enabled: false
+
+Style/RedundantFilterChain:
+  Enabled: true
+
+Style/RedundantFormat:
+  Enabled: true
+
+Style/RedundantHeredocDelimiterQuotes:
+  Enabled: true
+
+Style/RedundantInitialize:
+  Enabled: true
+
+Style/RedundantInterpolationUnfreeze:
+  Enabled: true
+
+Style/RedundantLineContinuation:
+  Enabled: true
+
+Style/RedundantParentheses:
+  Enabled: true
+
+Style/RedundantRegexpArgument:
+  Enabled: true
+
+Style/RedundantRegexpConstructor:
+  Enabled: true
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/RedundantSelfAssignmentBranch:
+  Enabled: true
+
+Style/RedundantStringEscape:
+  Enabled: true
+
+Style/RescueModifier:
+  Enabled: true
+  Exclude:
+    - "spec/**/*.rb"
+
+Style/ReturnNilInPredicateMethodDefinition:
+  Enabled: true
+
+Style/SafeNavigationChainLength:
+  Enabled: false
+
+Style/SelectByRegexp:
+  Enabled: true
+
+Style/SendWithLiteralMethodName:
+  Enabled: true
+
+Style/SingleLineDoEndBlock:
+  Enabled: true
+
+Style/SoleNestedConditional:
+  Enabled: false
+
+Style/StringChars:
+  Enabled: true
 
 Style/StringLiterals:
-  EnforcedStyle: double_quotes
+  Enabled: false
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+Style/SuperArguments:
+  Enabled: true
+
+Style/SuperWithArgsParentheses:
+  Enabled: true
+
+Style/SwapValues:
+  Enabled: true
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  Enabled: false
 
 Style/TrailingCommaInArrayLiteral:
   Enabled: false
@@ -227,116 +1062,17 @@ Style/TrailingCommaInArrayLiteral:
 Style/TrailingCommaInHashLiteral:
   Enabled: false
 
-Style/CollectionMethods:
-  Enabled: false
-
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/FormatStringToken:
-  Enabled: false
-
-Style/ClassCheck:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
-
-Style/FormatString:
-  Enabled: false
-
-Style/Lambda:
-  Enabled: false
-
-# This is acceptable Ruby syntax for callables
-Style/LambdaCall:
-  Enabled: false
-
-Style/Not:
-  Enabled: false
-
-Style/SymbolProc:
-  Enabled: false
-
-Style/PercentLiteralDelimiters:
-  Enabled: false
-
-Style/RedundantReturn:
-  Enabled: false
-
-Style/SymbolArray:
-  Enabled: false
-
-Style/AccessModifierDeclarations:
-  Enabled: false
-
-Style/ClassAndModuleChildren:
-  Enabled: true
-  Exclude:
-    # classy_enum generates them this way for clarity,
-    # since they need to be loaded in one file to work.
-    - app/enums/**/*.rb
-    - api/app/enums/**/*.rb
-
-Style/ExponentialNotation:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
-
-Style/RedundantFetchBlock:
-  Enabled: true
-
-Style/RedundantRegexpCharacterClass:
-  Enabled: true
-
-Style/RedundantRegexpEscape:
-  Enabled: true
-
-Style/SlicingWithRange:
-  Enabled: false
-
-Style/ClassEqualityComparison:
-  Enabled: true
-
-# We do this so rarely, that when we do it's generally for a good reason
-Style/CombinableLoops:
-  Enabled: false
-
-Style/KeywordParametersOrder:
-  Enabled: true
-
-Style/RedundantSelfAssignment:
-  Enabled: true
-
-# It's often the case that breaking a complex condition into nested conditions can make
-# the code more readable. All the changes suggested by this rule, IMO, made our code
-# more complex and less legible.
-Style/SoleNestedConditional:
+Style/TrailingUnderscoreVariable:
   Enabled: false
 
 Style/UnlessElse:
   Enabled: false
 
-Naming/HeredocDelimiterNaming:
+Style/WordArray:
   Enabled: false
 
-Naming/PredicateName:
-  ForbiddenPrefixes: ["is_"]
+Style/YAMLFileRead:
+  Enabled: true
 
-Naming/AccessorMethodName:
+Style/ZeroLengthPredicate:
   Enabled: false
-
-Naming/MethodParameterName:
-  AllowedNames:
-    - "as"
-    - "at"
-    - "ok"
-    - "id"
-    - "io"
-    - "e"
-    - "on"
-    - "to"

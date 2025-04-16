@@ -2,7 +2,6 @@ require "cssbeautify"
 
 # A stylesheet
 class Stylesheet < ApplicationRecord
-
   # Concerns
   include TrackedCreator
 
@@ -70,5 +69,4 @@ class Stylesheet < ApplicationRecord
   def set_hashed_content
     self.hashed_content = Digest::MD5.hexdigest raw_styles
   end
-
 end

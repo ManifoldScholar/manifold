@@ -28,7 +28,7 @@ module WithParsedName
     parts.each do |key, value|
       next unless respond_to? KEY_MAP[key]
 
-      write_attribute(KEY_MAP[key], value)
+      self[KEY_MAP[key]] = value
     end
   end
 

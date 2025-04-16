@@ -7,7 +7,7 @@ RSpec.describe Content::ScaffoldProjectContent do
     template = Content::ScaffoldTemplate.new(kind)
 
     context "when kind is '#{kind}'" do
-      before(:each) { described_class.run project: project, kind: kind }
+      before { described_class.run project: project, kind: kind }
 
       it "creates a content block for each block in #{template.kind} template" do
         expected = template.content_blocks.keys
@@ -36,7 +36,7 @@ RSpec.describe Content::ScaffoldProjectContent do
 
           expect do
             described_class.run project: project, configuration: configuration
-          end.to_not change { project.content_blocks.where(type: block).count }.from(0)
+          end.not_to change { project.content_blocks.where(type: block).count }.from(0)
         end
       end
     end
@@ -94,17 +94,17 @@ RSpec.describe Content::ScaffoldProjectContent do
     it "does not create blocks" do
       expect do
         described_class.run project: FactoryBot.build(:project)
-      end.to_not change(project.content_blocks, :count)
+      end.not_to change(project.content_blocks, :count)
     end
   end
 
   context "when project has content blocks" do
-    before(:each) { FactoryBot.create(:content_block, project: project) }
+    before { FactoryBot.create(:content_block, project: project) }
 
     it "does not create blocks" do
       expect do
         described_class.run project: project
-      end.to_not change(project.content_blocks, :count)
+      end.not_to change(project.content_blocks, :count)
     end
   end
 end

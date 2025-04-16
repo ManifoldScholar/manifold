@@ -1,6 +1,6 @@
 class ApplicationJob < ActiveJob::Base
-  def match_result(result, &block)
-    Dry::Matcher::ResultMatcher.(result, &block)
+  def match_result(result, &)
+    Dry::Matcher::ResultMatcher.(result, &)
   end
 
   def match_result_on_failure(result, &block)
@@ -51,13 +51,11 @@ class ApplicationJob < ActiveJob::Base
       @advisory_lock_retry_wait ||= 5.minutes
     end
 
-    attr_writer :advisory_lock_retry_wait
+    attr_writer :advisory_lock_retry_wait, :advisory_lock_timeout
 
     def advisory_lock_timeout
       @advisory_lock_timeout ||= 60
     end
-
-    attr_writer :advisory_lock_timeout
   end
 
   # @!endgroup

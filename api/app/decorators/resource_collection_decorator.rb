@@ -8,5 +8,4 @@ class ResourceCollectionDecorator < ApplicationDecorator
                    project_slug: project.slug,
                    resource_collection_slug: slug)
   end
-
 end

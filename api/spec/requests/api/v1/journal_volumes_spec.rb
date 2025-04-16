@@ -16,6 +16,5 @@ RSpec.describe "JournalVolumes", type: :request do
       include_examples "an API index request", parent: "journal", model: JournalVolume, resource_name: "journal_volume", url_parameters: [:journal_id]
       include_examples "an API create request", parent: "journal", model: JournalVolume, resource_name: "journal_volume", url_parameters: [:journal_id], authorized_user: :admin
     end
-
   end
 end

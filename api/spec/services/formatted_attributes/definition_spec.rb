@@ -4,7 +4,7 @@ RSpec.describe FormattedAttributes::Definition do
   let(:attribute_name) { :title }
   let(:definition) { described_class.new(attribute_name, options) }
   let(:container) { nil }
-  let(:include_wrap)  { true }
+  let(:include_wrap) { true }
   let(:renderer_options) { {} }
 
   let(:options) do
@@ -62,8 +62,6 @@ RSpec.describe FormattedAttributes::Definition do
         allow(dig).to receive(:dig) do |value|
           case value
           when attribute_name then raw_value
-          else
-            nil
           end
         end
       end
@@ -74,8 +72,6 @@ RSpec.describe FormattedAttributes::Definition do
         allow(ba).to receive(:[]) do |value|
           case value
           when attribute_name then raw_value
-          else
-            nil
           end
         end
       end
@@ -107,7 +103,7 @@ RSpec.describe FormattedAttributes::Definition do
       end
 
       context "with a blank model" do
-        let(:model_instance) { maybe_wrap_container double("blank model", :blank? => true) }
+        let(:model_instance) { maybe_wrap_container double("blank model", blank?: true) }
 
         it "returns nil" do
           expect(definition.extract_raw_from(model_instance)).to be_nil
@@ -141,8 +137,8 @@ RSpec.describe FormattedAttributes::Definition do
     its(:key) { is_expected.to eq :title }
     its(:path) { is_expected.to eq "title" }
 
-    it { is_expected.to be_match :title }
-    it { is_expected.to be_match "title" }
+    it { is_expected.to match :title }
+    it { is_expected.to match "title" }
 
     include_examples "accessor examples"
   end
@@ -156,9 +152,9 @@ RSpec.describe FormattedAttributes::Definition do
     its(:key) { is_expected.to eq :metadata__title }
     its(:path) { is_expected.to eq "metadata.title" }
 
-    it { is_expected.to be_match :metadata__title }
-    it { is_expected.to be_match "metadata.title" }
-    it { is_expected.to be_match "title" }
+    it { is_expected.to match :metadata__title }
+    it { is_expected.to match "metadata.title" }
+    it { is_expected.to match "title" }
 
     include_examples "accessor examples"
   end

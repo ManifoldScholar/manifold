@@ -9,7 +9,7 @@ module ExportStrategies
       include Shared::PipelineOperation
 
       # @api private
-      ABSOLUTE_PATH = %r{\A/.+}.freeze
+      ABSOLUTE_PATH = %r{\A/.+}
 
       # @param [String] input
       # @return [String]

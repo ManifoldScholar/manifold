@@ -10,7 +10,7 @@ RSpec.shared_examples_for "a collectable" do
 
       let(:collector_factory) { definition.collector.model_name.singular }
 
-      let(:collectable_factory) { associations&.collectable&.singular}
+      let(:collectable_factory) { associations&.collectable&.singular }
 
       let(:entry_factory) { associations&.entry&.singular }
 
@@ -43,7 +43,7 @@ RSpec.shared_examples_for "a collectable" do
         FactoryBot.create entry_factory, entry_attributes
       end
 
-      before(:each) do
+      before do
         skip "not collected via #{collector_name}" if collectable_definition.blank?
       end
 

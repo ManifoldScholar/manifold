@@ -1,6 +1,5 @@
 module APIDocs
   class Config
-
     class << self
       include Helpers::Inflections
 
@@ -18,7 +17,6 @@ module APIDocs
         defined
       end
 
-      # rubocop:disable Metrics/MethodLength
       def swagger_docs
         {
           "v1/swagger.json" => {
@@ -40,9 +38,6 @@ module APIDocs
           }
         }
       end
-      # rubocop:enable Metrics/MethodLength
-
     end
-
   end
 end

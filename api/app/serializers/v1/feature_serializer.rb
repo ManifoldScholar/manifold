@@ -1,6 +1,5 @@
 module V1
   class FeatureSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     abilities
@@ -14,7 +13,7 @@ module V1
     typed_attribute :link_text, Types::String
     typed_attribute :link_url, Types::Serializer::URL
     typed_attribute :link_target, Types::String.optional.meta(
-      description: "Where to display the linked URL. Additional information can be found "\
+      description: "Where to display the linked URL. Additional information can be found " \
                    "<a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target'>here</a>"
     )
     typed_attribute :style, Types::String.enum("dark", "light")
@@ -42,6 +41,5 @@ module V1
     typed_attribute :include_sign_up, Types::Bool
     typed_attribute :foreground_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :background_styles, Types::Serializer::Attachment.meta(read_only: true)
-
   end
 end
