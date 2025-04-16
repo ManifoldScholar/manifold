@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ResourceImportRow, type: :model, slow: true do
@@ -257,7 +259,7 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
           row = row_with_collections
           expect do
             row.state_machine.transition_to(:importing)
-          end.to change { ResourceCollection.count }.from(0).to(2)
+          end.to change(ResourceCollection, :count).from(0).to(2)
         end
       end
 

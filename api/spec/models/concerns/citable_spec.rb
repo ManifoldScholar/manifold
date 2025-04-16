@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Citable do
@@ -72,7 +74,7 @@ RSpec.describe Citable do
     end
 
     model do
-      include Citable
+      include described_class
 
       has_many :children, class_name: 'CitableChild'
 
@@ -95,7 +97,7 @@ RSpec.describe Citable do
     end
 
     model do
-      include Citable
+      include described_class
 
       belongs_to :citable_class
 

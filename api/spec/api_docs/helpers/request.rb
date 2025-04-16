@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Helpers
     class Request
@@ -60,7 +62,7 @@ module APIDocs
       def downcase_first(string)
         return nil if string.nil?
 
-        string[0, 1].downcase + string[1..-1]
+        string[0, 1].downcase + string[1..]
       end
 
       def transform_type(type)
@@ -223,7 +225,7 @@ module APIDocs
       def merge_additional_parameters(parameters)
         return parameters unless @options.key?(:additional_parameters)
 
-        keys = @options[:additional_parameters].map { |p| p[:name] }
+        keys = @options[:additional_parameters].pluck(:name)
         parameters.reject { |p| keys.include? p } + @options[:additional_parameters]
       end
 

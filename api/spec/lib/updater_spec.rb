@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Updaters::Default do
   let(:updatable) do
     FactoryBot.create(:user)

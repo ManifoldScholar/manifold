@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe UserClassification do
   let(:option) { described_class.instance_variable_get(:@option) }
-  let(:enum) { UserClassification[option] }
+  let(:enum) { described_class[option] }
 
   subject { enum }
 

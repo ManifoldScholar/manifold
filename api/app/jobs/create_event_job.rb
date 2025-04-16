@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Simple job to create a new event in the background.
 class CreateEventJob < ApplicationJob
   include ExclusiveJob

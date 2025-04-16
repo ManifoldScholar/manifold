@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Analytics
   class FetchVisit < ActiveInteraction::Base
     with_options default: nil do

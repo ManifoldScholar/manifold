@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   # This represents the uploader for a given subclass of {ExportStrategies::AbstractStrategy}.
   #

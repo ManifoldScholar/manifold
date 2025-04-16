@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Defines an interaction that generates a fingerprint for a model.
 module FingerprintInteraction
   extend ActiveSupport::Concern

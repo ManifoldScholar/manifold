@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 shared_examples_for "an ingestion registry" do |definition|
@@ -20,6 +22,6 @@ shared_examples_for "an ingestion registry" do |definition|
       registry.configure do
         eval definition
       end
-    end.to change { registry.length }.from(0).to(1)
+    end.to change(registry, :length).from(0).to(1)
   end
 end

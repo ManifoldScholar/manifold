@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
@@ -20,7 +22,7 @@ module APIDocs
 
           variant_poster: Types::Serializer::Upload,
           remove_variant_poster: Types::Bool
-        }
+        }.freeze
 
         METADATA_ATTRIBUTES = {
           series_title: Types::String,
@@ -47,7 +49,7 @@ module APIDocs
           credit: Types::String,
           copyright_status: Types::String,
           citation_override: Types::String
-        }
+        }.freeze
 
         class << self
           include ::APIDocs::Definitions::Resource

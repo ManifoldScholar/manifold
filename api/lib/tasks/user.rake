@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Manifold
   module UserTask
     def self.create_user(args)

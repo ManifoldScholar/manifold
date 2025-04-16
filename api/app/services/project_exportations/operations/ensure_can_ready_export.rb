@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectExportations
   module Operations
     # Ensure that the {ProjectExportation} is ready to receive a BagItSpec export.

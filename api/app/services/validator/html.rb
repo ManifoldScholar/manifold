@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Validator
   # This class takes an HTML string input and validates it. In doing so, it will parse the
   # HTML and transform it into a valid HTML structure that can be consumed by the Manifold
@@ -40,8 +42,7 @@ module Validator
       fragment.traverse do |node|
         strip = false
         tag = node.name
-        ancestors = []
-        node.ancestors.each { |n| ancestors.push(n.name) }
+        ancestors = node.ancestors.map { |n| n.name }
         if tag == "p"
           strip = true if ancestors.include?("p")
         end

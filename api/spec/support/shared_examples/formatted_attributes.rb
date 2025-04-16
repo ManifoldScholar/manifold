@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples_for "a model with formatted attributes" do
   let(:fa_config) { described_class.formatted_attributes }
 

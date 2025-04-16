@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
@@ -10,11 +12,11 @@ module APIDocs
           :format,
           :subject,
           :body
-        ]
+        ].freeze
 
         REQUEST_ATTRIBUTES = {
           section_id: Types::Serializer::ID
-        }
+        }.freeze
 
         class << self
           include APIDocs::Definitions::Resource

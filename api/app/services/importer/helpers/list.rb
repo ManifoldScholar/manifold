@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class is used in place of the GoogleDrive gem's list class, which provides an
 # enumerable interface to Google worksheets. The reason we override it is because our
 # current implementation assumes that the data in the worksheet begins on row 4, and that

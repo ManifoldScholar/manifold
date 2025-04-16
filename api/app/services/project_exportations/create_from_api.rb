@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectExportations
   class CreateFromAPI < ActiveInteraction::Base
     hash :data do

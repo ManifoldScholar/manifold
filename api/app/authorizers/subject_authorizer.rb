@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubjectAuthorizer < ApplicationAuthorizer
   def self.default(_able, user, _options = {})
     admin_permissions?(user)

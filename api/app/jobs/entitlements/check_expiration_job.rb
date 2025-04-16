@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Entitlements
   class CheckExpirationJob < ApplicationJob
     queue_as :default

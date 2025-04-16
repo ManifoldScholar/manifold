@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utility
   class FetchExtensionForContentType < ActiveInteraction::Base
     OVERRIDES = {

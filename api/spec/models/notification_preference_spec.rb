@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe NotificationPreference, type: :model do
@@ -20,10 +22,10 @@ RSpec.describe NotificationPreference, type: :model do
   it "has a scope that returns preferences by frequency" do
     user.notification_preferences_by_kind = { followed_projects: "always", replies_to_me: "always" }
     user.save
-    expect(NotificationPreference.by_frequency("always").count).to eq 2
+    expect(described_class.by_frequency("always").count).to eq 2
   end
 
   it "has a scope that returns preferences by kind" do
-    expect(NotificationPreference.by_kind(:replies_to_me).count).to eq 1
+    expect(described_class.by_kind(:replies_to_me).count).to eq 1
   end
 end

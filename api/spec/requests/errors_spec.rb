@@ -2,14 +2,14 @@
 
 RSpec.describe "API Error Handling", type: :request do
   context "when requesting a non-existing route" do
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     it "conforms to expectations" do
       expect do
         get "/api/v1/rambo/bananas"
       end.to execute_safely
 
-      api_response = JSON.parse(response.body)
+      api_response = response.parsed_body
 
       aggregate_failures do
         expect(api_response).to include_json(

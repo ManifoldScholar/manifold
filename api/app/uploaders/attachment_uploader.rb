@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @see Attachments
 class AttachmentUploader < Shrine
   include SharedUploader

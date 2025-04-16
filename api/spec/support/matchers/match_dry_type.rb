@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec::Matchers.define :match_dry_type do |expected|
   DRY_TYPE = Types.Instance(Dry::Types::Type)
 

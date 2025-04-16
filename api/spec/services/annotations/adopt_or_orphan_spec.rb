@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Annotations::AdoptOrOrphan do
@@ -55,7 +57,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
           the flour...than longen folk to goon on pilgrimages.
         TEXT
       )
-      Annotations::AdoptOrOrphan.run annotation: annotation
+      described_class.run annotation: annotation
 
       first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
       last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
@@ -72,7 +74,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
         text_section: text_section,
         subject: "bell pepper artichoke.    \n Nori grape silver beet broccoli kombu"
       )
-      Annotations::AdoptOrOrphan.run annotation: annotation
+      described_class.run annotation: annotation
 
       first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
       last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
@@ -89,7 +91,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
         text_section: text_section,
         subject: "kombu"
       )
-      Annotations::AdoptOrOrphan.run annotation: annotation
+      described_class.run annotation: annotation
       expect(annotation.orphaned).to be true
     end
   end
@@ -132,7 +134,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
                                         start_node: "F",
                                         end_node: "G",
                                         subject: "three, four, five,")
-        Annotations::AdoptOrOrphan.run annotation: @annotation
+        described_class.run annotation: @annotation
       end
 
       it "has the correct start node" do
@@ -167,7 +169,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
                                            start_node: "B",
                                            end_node: "C",
                                            subject: "One, two, blue, three, four,") # client trims subjects, so removing ending space here
-            Annotations::AdoptOrOrphan.run annotation: annotation
+            described_class.run annotation: annotation
 
             first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
             last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
@@ -187,7 +189,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
                                              start_char: "12",
                                              end_char: "15",
                                              subject: "blue")
-              Annotations::AdoptOrOrphan.run annotation: annotation
+              described_class.run annotation: annotation
 
               first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
               last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
@@ -207,8 +209,8 @@ RSpec.describe Annotations::AdoptOrOrphan do
                                            start_node: "B",
                                            end_node: "D",
                                            subject: "One, two, blue, five, six.")
-            Annotations::AdoptOrOrphan.run annotation: annotation
-            expect(annotation.orphaned).to eq true
+            described_class.run annotation: annotation
+            expect(annotation.orphaned).to be true
           end
         end
       end
@@ -220,8 +222,8 @@ RSpec.describe Annotations::AdoptOrOrphan do
                                          start_node: "H",
                                          end_node: "E",
                                          subject: "Seven, eight.")
-          Annotations::AdoptOrOrphan.run annotation: annotation
-          expect(annotation.orphaned).to eq true
+          described_class.run annotation: annotation
+          expect(annotation.orphaned).to be true
         end
 
         context "when nodes have duplicate content" do
@@ -231,8 +233,8 @@ RSpec.describe Annotations::AdoptOrOrphan do
                                            start_node: "F",
                                            end_node: "F",
                                            subject: "blue")
-            Annotations::AdoptOrOrphan.run annotation: annotation
-            expect(annotation.orphaned).to eq true
+            described_class.run annotation: annotation
+            expect(annotation.orphaned).to be true
           end
         end
       end
@@ -274,7 +276,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
     end
 
     it "adopts it correctly" do
-      Annotations::AdoptOrOrphan.run annotation: annotation
+      described_class.run annotation: annotation
 
       first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
       last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
@@ -329,12 +331,12 @@ RSpec.describe Annotations::AdoptOrOrphan do
     end
 
     it "does not orphan the annotaton" do
-      Annotations::AdoptOrOrphan.run annotation: annotation
+      described_class.run annotation: annotation
 
       first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
       last_char = last_char_as_string(annotation: annotation, json: text_section.body_json)
 
-      expect(annotation.orphaned).to eq false
+      expect(annotation.orphaned).to be false
       expect(annotation.start_char).to eq 5
       expect(annotation.end_char).to eq 7
       expect(first_char).to eq "p"

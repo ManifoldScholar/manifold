@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Configuration
     # @abstract
@@ -59,7 +61,7 @@ module Ingestions
         end
 
         def valid_interaction?(interaction)
-          return unless inherited_from?
+          return false unless inherited_from?
 
           Dux.inherits(inherited_from)[interaction]
         end

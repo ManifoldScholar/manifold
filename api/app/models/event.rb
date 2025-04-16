@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Events are things that happen in relation to a project. Events populate the project
 # activity feed.
 class Event < ApplicationRecord

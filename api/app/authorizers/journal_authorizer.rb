@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class JournalAuthorizer < ApplicationAuthorizer
   expose_abilities [
     :read_drafts,

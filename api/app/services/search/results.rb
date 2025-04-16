@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "forwardable"
 module Search
   # Search::Results wraps raw Searchkick::Results and injects parent record IDs and slugs
@@ -113,8 +115,8 @@ module Search
 
     def result_model_reference(result)
       [
-        result.dig("_source", "search_result_type") || result.dig("search_result_type"),
-        result.dig("_id")
+        result.dig("_source", "search_result_type") || result["search_result_type"],
+        result["_id"]
       ]
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Job to fetch youtube and vimeo thumbnails in the background.
 class FetchResourceThumbnail < ApplicationJob
   queue_as :low_priority

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "stringio"
 
 # Connects texts to resources that were sources for text sections during ingestion

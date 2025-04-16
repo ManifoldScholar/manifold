@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Factory
   # Factory class for creating Event models
   class Event

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Serves as a composite, polymorphic collection of all a user's collected records.
 #
 # Not used directly, but used in several cases where the entire collection needs to be rendered.

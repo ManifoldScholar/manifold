@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Citable
   extend ActiveSupport::Concern
 
@@ -19,7 +21,7 @@ module Citable
     base = respond_to?(:metadata) ? metadata : {}
     base ||= {}
     supplement = self.class.generate_citation(self) || {}
-    base.merge(supplement).with_indifferent_access.delete_if { |_k, v| v.blank? }
+    base.merge(supplement).with_indifferent_access.compact_blank!
   end
 
   def citable?

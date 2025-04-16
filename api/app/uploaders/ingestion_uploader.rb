@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IngestionUploader < TusUploader
   include SharedUploader
 

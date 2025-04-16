@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # An idiomatic concern that composes ClassyEnum with Statesman in a standard way.
 #
 module HasStateMachine

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormattedAttributes
   class RefreshModelCachesJob < ApplicationJob
     queue_as :default

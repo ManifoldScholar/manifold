@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SerializerRegistry
   include Enumerable
   attr_reader :klass, :entries, :full, :active
@@ -95,7 +97,7 @@ class SerializerRegistry
   private
 
   def filter_to_types(values)
-    values.map { |_, v| [v[:key], v[:type]] }.to_h
+    values.to_h { |_, v| [v[:key], v[:type]] }
   end
 
   def build_camelize_proc(attribute, block = nil)

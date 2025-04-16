@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoleKind < ClassyEnum::Base
   def entitlement?
     config.entitlement.present?

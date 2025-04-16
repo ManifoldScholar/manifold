@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   module Operations
     # Split a path by its component parts and pass each component through `Zaru`

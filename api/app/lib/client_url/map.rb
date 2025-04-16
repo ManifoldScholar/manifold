@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ClientURL
   class Map
     def initialize

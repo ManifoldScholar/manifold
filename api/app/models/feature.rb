@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Model representing a home page feature
 class Feature < ApplicationRecord
   # Authority

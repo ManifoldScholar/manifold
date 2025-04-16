@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TextSectionAuthorizer < ProjectChildAuthorizer
   expose_abilities [:engage_publicly]
 

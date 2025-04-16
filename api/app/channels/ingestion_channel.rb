@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IngestionChannel < ApplicationCable::Channel
   def ingestion
     @ingestion ||= Ingestion.find(params[:ingestion])

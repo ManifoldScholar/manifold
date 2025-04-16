@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Content::ScaffoldProjectContent do
@@ -17,7 +19,7 @@ RSpec.describe Content::ScaffoldProjectContent do
   end
 
   shared_examples_for "configured blocks" do |option|
-    block = "Content::" + option.to_s.camelize + "Block"
+    block = "Content::#{option.to_s.camelize}Block"
 
     describe ":#{option}" do
       context "when true" do

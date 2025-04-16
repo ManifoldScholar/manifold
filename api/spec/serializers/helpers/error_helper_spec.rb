@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 RSpec.describe V1::Helpers::Errors do
   let(:base) { FactoryBot.build(:user, email: nil, password: "a", password_confirmation: "b") }
   let(:errors) { base.errors }
-  let(:helper) { V1::Helpers::Errors.new(errors) }
+  let(:helper) { described_class.new(errors) }
   let(:result) { helper.for_serialization }
   before { base.valid? }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe SystemUpgrades::AbstractVersion do
@@ -8,7 +10,7 @@ RSpec.describe SystemUpgrades::AbstractVersion do
   end
 
   it "creates an UpgradeResult record on first execution" do
-    expect { Test000100.run }.to change { UpgradeResult.count }.by 1
+    expect { Test000100.run }.to change(UpgradeResult, :count).by 1
   end
 
   context "the corresponding UpgradeResult" do

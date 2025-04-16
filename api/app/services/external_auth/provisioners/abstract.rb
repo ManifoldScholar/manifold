@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalAuth
   module Provisioners
     # Apply data to a user from an OmniAuth hash

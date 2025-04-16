@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Patches
   module FriendlyIdUniqueness
     def unset_slug_if_invalid; end

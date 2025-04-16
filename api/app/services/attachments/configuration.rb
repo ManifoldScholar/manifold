@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Attachments
   class Configuration < Types::FlexibleStruct
     attribute :field, Types::ATTRIBUTE_NAME

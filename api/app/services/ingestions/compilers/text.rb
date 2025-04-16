@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Compilers
     class Text < AbstractInteraction
@@ -51,9 +53,9 @@ module Ingestions
         end
 
         info "services.ingestions.compiler.text.log.lang",
-             lang: text.metadata.dig("language")
+             lang: text.metadata["language"]
         info "services.ingestions.compiler.text.log.rights",
-             rights: text.metadata.dig("rights")
+             rights: text.metadata["rights"]
         info "services.ingestions.compiler.text.log.date",
              date: text.publication_date
         info "services.ingestions.compiler.text.log.desc",

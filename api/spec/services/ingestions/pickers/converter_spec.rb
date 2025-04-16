@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Pickers::Converter do
@@ -5,7 +7,7 @@ RSpec.describe Ingestions::Pickers::Converter do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.epub") }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { Ingestions::Context.new(ingestion) }
-    let!(:outcome) { Ingestions::Pickers::Converter.run context: context, source_path: path }
+    let!(:outcome) { described_class.run context: context, source_path: path }
 
     it "is not valid" do
       expect(outcome).not_to be_valid
@@ -16,7 +18,7 @@ RSpec.describe Ingestions::Pickers::Converter do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single", "minimal-single.md") }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { Ingestions::Context.new(ingestion) }
-    let!(:outcome) { Ingestions::Pickers::Converter.run context: context, source_path: path.to_s }
+    let!(:outcome) { described_class.run context: context, source_path: path.to_s }
 
     it "returns the correct converter" do
       expect(outcome.result.interaction).to eq Ingestions::Converters::Markdown
@@ -27,7 +29,7 @@ RSpec.describe Ingestions::Pickers::Converter do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { Ingestions::Context.new(ingestion) }
-    let!(:outcome) { Ingestions::Pickers::Converter.run context: context, source_path: path.to_s }
+    let!(:outcome) { described_class.run context: context, source_path: path.to_s }
 
     it "returns the correct converter" do
       expect(outcome.result.interaction).to eq Ingestions::Converters::HTML

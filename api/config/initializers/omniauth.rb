@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ManifoldEnv.oauth.configure do |config|
   config.provider :facebook do |provider|
     provider.strategy_options do |hsh|

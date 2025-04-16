@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class is responsible for determining which
 # strategy (if any) should be used to ingest a text.
 module Ingestions

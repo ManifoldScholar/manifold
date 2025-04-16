@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Analytics
   module Reports
     class AnalyticsResult < ActiveInteraction::Base

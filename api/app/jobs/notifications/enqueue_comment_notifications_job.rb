@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Notifications
   class EnqueueCommentNotificationsJob < ApplicationJob
     # @param [String] comment_id

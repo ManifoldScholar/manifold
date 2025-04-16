@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utility
   # Small class to deal with awkward cases where a library's block method
   # doesn't pass through the return value from within the block, but we

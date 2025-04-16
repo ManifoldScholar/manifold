@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TextExport < ApplicationRecord
   include HasExportKind
   include ExportUploader::Attachment.new(:asset)

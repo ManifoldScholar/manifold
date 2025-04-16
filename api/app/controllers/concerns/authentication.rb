@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "auth_token"
 
 # Includes authentication related functionality
@@ -57,7 +59,7 @@ module Authentication
   # JWT's are stored in the Authorization header using this format:
   # Bearer somerandomstring.encoded-payload.anotherrandomstring
   def http_auth_token
-    @http_auth_token ||= request.headers["Authorization"].split(" ").last if request.headers["Authorization"].present?
+    @http_auth_token ||= request.headers["Authorization"].split.last if request.headers["Authorization"].present?
   end
 
   # Returns user with auth token

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Serializer::HTML do
-  let(:serializer) { Serializer::HTML.new }
+  let(:serializer) { described_class.new }
 
   it "should wrap top level siblings in a div element" do
     node = "<p>AAA</p><p>BBB</p>"

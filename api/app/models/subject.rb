@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A subject
 class Subject < ApplicationRecord
   # Constants

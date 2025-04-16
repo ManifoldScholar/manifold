@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FavoriteAuthorizer < ApplicationAuthorizer
   def self.default(_able, _user, _options = {})
     true

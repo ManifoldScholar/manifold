@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Permissions::Save do
@@ -11,7 +13,7 @@ RSpec.describe Permissions::Save do
   end
 
   it "correctly updates roles" do
-    outcome = Permissions::Save.run permission: permission
+    outcome = described_class.run permission: permission
     expect(outcome.result.role_names).to include "project_editor", "project_author"
   end
 end

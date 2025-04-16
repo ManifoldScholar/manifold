@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Content::TableOfContentsBlock do
@@ -8,11 +10,11 @@ RSpec.describe Content::TableOfContentsBlock do
   end
 
   it "is configurable" do
-    expect(toc_block.configurable?).to eq true
+    expect(toc_block.configurable?).to be true
   end
 
   it "responds to :text" do
-    expect(toc_block.respond_to?(:text)).to eq true
+    expect(toc_block.respond_to?(:text)).to be true
   end
 
   it "is invalid if :text belongs to a different project" do
@@ -47,13 +49,13 @@ RSpec.describe Content::TableOfContentsBlock do
   describe "#renderable?" do
     context "when :text is present" do
       it "is true" do
-        expect(FactoryBot.build(:toc_block).renderable?).to eq true
+        expect(FactoryBot.build(:toc_block).renderable?).to be true
       end
     end
 
     context "when :text is not present" do
       it "is false" do
-        expect(FactoryBot.build(:toc_block, content_block_references: []).renderable?).to eq false
+        expect(FactoryBot.build(:toc_block, content_block_references: []).renderable?).to be false
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PersistentUI
   # TODO: Keys here are stored as snake_case and returned as camelCase.
   # May need refactoring when /me endpoint is refactored.

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class ReadingGroupSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
@@ -91,7 +93,7 @@ module V1
       next unless params[:current_user].present?
       next unless object.public?
 
-      !ReadingGroupMembership.where(reading_group: object, user: params[:current_user]).exists?
+      !ReadingGroupMembership.exists?(reading_group: object, user: params[:current_user])
     end
 
     link_with_meta :join, if: CAN_JOIN, method: "POST" do |object, _params|

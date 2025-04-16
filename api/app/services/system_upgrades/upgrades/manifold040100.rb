@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SystemUpgrades
   module Upgrades
     class Manifold040100 < SystemUpgrades::AbstractVersion
@@ -32,8 +34,10 @@ module SystemUpgrades
         logger.info("resources on the fly, which was inefficient. Now we cache these    ")
         logger.info("counts.                                                            ")
         logger.info("===================================================================")
-        Project.find_each { |p| Project.reset_counters(p.id, :resources) }
-        Project.find_each { |p| Project.reset_counters(p.id, :resource_collections) }
+        Project.find_each do |p|
+          Project.reset_counters(p.id, :resources)
+          Project.reset_counters(p.id, :resource_collections)
+        end
       end
 
       def update_resource_sort_titles!
@@ -56,8 +60,10 @@ module SystemUpgrades
         logger.info("===================================================================")
         TextTitle.find_each { |tt| tt.update_db_cache_for_formatted_value && tt.save }
         Text.find_each { |t| t.update_db_cache_for_formatted_description && t.save }
-        Project.find_each { |t| t.update_db_cache_for_formatted_title && t.save }
-        Project.find_each { |t| t.update_db_cache_for_formatted_subtitle && t.save }
+        Project.find_each do |t|
+          t.update_db_cache_for_formatted_title && t.save
+          t.update_db_cache_for_formatted_subtitle && t.save
+        end
 
         Maker.find_each { |t| t.cache_name && t.save }
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ResourceCollection, type: :model do
@@ -18,7 +20,7 @@ RSpec.describe ResourceCollection, type: :model do
   it "destroys associated annotations" do
     collection = FactoryBot.create(:resource_collection)
     FactoryBot.create(:annotation, resource_collection: collection)
-    expect { collection.destroy }.to change { Annotation.count }.from(1).to(0)
+    expect { collection.destroy }.to change(Annotation, :count).from(1).to(0)
   end
 
   it "enqueues a COLLECTION_ADDED event on creation" do

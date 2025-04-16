@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Content
   class ReferenceConfiguration
     attr_reader :name, :required, :multiple, :source

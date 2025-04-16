@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "When re-ingesting a text using the Document strategy", integration: true do

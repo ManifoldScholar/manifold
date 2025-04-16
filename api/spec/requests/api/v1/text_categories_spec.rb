@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Text Categories", type: :request do

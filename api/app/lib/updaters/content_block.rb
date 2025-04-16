@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates a ContentBlock model from JSON-API style params
   class ContentBlock
@@ -27,7 +29,7 @@ module Updaters
                                      configuration.source
       end.flatten
 
-      assign_association! relationships.reject(&:nil?)
+      assign_association! relationships.compact
     end
 
     def assign_association!(relationships)
@@ -37,7 +39,7 @@ module Updaters
     def build_association_references(association, kind, source)
       return if association.blank?
 
-      data = association.dig("data")
+      data = association["data"]
 
       if data.is_a? Array
         data.map.with_index do |attr, index|

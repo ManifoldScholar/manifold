@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This allows us to create a `dry-container` that has a little less boilerplate.
 module IntrospectiveContainer
   extend ActiveSupport::Concern

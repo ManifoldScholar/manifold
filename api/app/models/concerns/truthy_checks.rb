@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Model concern that helps with truthy checks
 module TruthyChecks
   extend ActiveSupport::Concern

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Defines a sliceable PORO object
 module Sliceable
   extend ActiveSupport::Concern

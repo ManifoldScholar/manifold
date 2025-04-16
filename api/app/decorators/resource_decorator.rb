@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourceDecorator < ApplicationDecorator
   delegate_all
   decorates_association :resource_collection

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Wrapper class that can build field queries the way that
   # Searchkick does, with both fuzzy and boosted direct matching,

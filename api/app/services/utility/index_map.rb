@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utility
   # Store a collection of values, uniquely indexed by an attribute.
   #

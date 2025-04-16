@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A section in a text
 class TextSection < ApplicationRecord
   attribute :body_json, :indifferent_hash
@@ -9,9 +11,9 @@ class TextSection < ApplicationRecord
   include Attachments
 
   # Constants
-  KIND_COVER_IMAGE = "cover_image".freeze
-  KIND_NAVIGATION = "navigation".freeze
-  KIND_SECTION = "section".freeze
+  KIND_COVER_IMAGE = "cover_image"
+  KIND_NAVIGATION = "navigation"
+  KIND_SECTION = "section"
   ALLOWED_KINDS = [KIND_COVER_IMAGE, KIND_NAVIGATION, KIND_SECTION].freeze
 
   # Authority
@@ -211,7 +213,7 @@ class TextSection < ApplicationRecord
 
       if (inline.include?(node["parent"]) && nodes[-1]) || once_more
         # Append inline content to previous node
-        nodes[-1][:content] = nodes[-1][:content].dup.insert(0, node["content"] + " ")
+        nodes[-1][:content] = nodes[-1][:content].dup.insert(0, "#{node["content"]} ")
         # Collect wrapped up uuids
         nodes[-1][:contains] << node[:node_uuid]
         nodes[-1][:node_uuid] = node[:node_uuid]

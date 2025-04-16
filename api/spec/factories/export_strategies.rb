@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :export_strategies_abstract_strategy, class: "ExportStrategies::AbstractStrategy" do
     factory :export_strategies_abstract_ssh_strategy, class: "ExportStrategies::AbstractSSHStrategy" do

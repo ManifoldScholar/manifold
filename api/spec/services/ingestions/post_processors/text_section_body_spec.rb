@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::PostProcessors::TextSectionBody do
@@ -17,7 +19,7 @@ RSpec.describe Ingestions::PostProcessors::TextSectionBody do
   it "correctly maps an html encoded path to a string path" do
     expect do
       described_class.run text: text, text_section: text_section, context: context
-    end.to change { text_section.body }
+    end.to change(text_section, :body)
 
     image = Nokogiri::HTML.fragment(text_section.body).at("img")
     source = text.ingestion_sources.find_by(source_path: "images/an image.png")

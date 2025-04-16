@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormattedAttributes
   class Definition
     extend Dry::Initializer
@@ -54,7 +56,7 @@ module FormattedAttributes
       elsif container_or_model.respond_to?(attribute)
         container_or_model.public_send(attribute)
       elsif container_or_model.respond_to?(:dig)
-        container_or_model.dig(attribute)
+        container_or_model[attribute]
       elsif container_or_model.respond_to?(:[])
         container_or_model[attribute]
       else
@@ -119,7 +121,7 @@ module FormattedAttributes
 
     # @return [void]
     def derive_attributes!
-      @path = [container, attribute].select(&:present?).join(".").freeze
+      @path = [container, attribute].compact_blank.join(".").freeze
 
       @attribute_name = attribute.to_s.freeze
 

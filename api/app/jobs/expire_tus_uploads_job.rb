@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This will expire all uploads that have not
 # already been promoted from `tus` storage.
 class ExpireTusUploadsJob < ApplicationJob

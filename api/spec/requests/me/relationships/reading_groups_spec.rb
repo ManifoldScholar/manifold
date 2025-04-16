@@ -19,7 +19,7 @@ RSpec.describe "My Reading Groups API", type: :request do
         get path, headers: reader_headers
       end
 
-      let(:api_response) { JSON.parse(response.body) }
+      let(:api_response) { response.parsed_body }
 
       describe "the response" do
         it "includes an array of data" do

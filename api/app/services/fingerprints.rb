@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Global namespace & derivation methods for fingerprinting
 # models.
 #
@@ -7,9 +9,11 @@ module Fingerprints
   # Error raised when a fingerprint interaction {#derive_fingerprint_interaction_for cannot be derived}.
   class UnknownFingerprintInteraction < StandardError; end
 
+  module_function
+
   # @param [ApplicationRecord, #model_name] model
   # @return [Class]
-  module_function def derive_fingerprint_interaction_for(model)
+  def derive_fingerprint_interaction_for(model)
     klass_name = "#{model.model_name.collection.camelize}::CalculateFingerprint"
 
     klass_name.constantize
@@ -19,7 +23,7 @@ module Fingerprints
 
   # @param [ApplicationRecord, #model_name] model
   # @return [Symbol]
-  module_function def derive_fingerprint_interaction_key_for(model)
+  def derive_fingerprint_interaction_key_for(model)
     model.model_name.i18n_key
   end
 end

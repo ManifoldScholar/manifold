@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 shared_examples_for "a serializer" do |partial_by_default: false|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OauthController < ApplicationController
   skip_after_action :set_content_type
 

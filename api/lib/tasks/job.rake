@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :manifold do
   namespace :job do
     desc "Queue all projects for tweet fetching"

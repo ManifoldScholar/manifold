@@ -5,7 +5,7 @@ RSpec.describe AuthToken do
   let_it_be(:email) { "test+alias@example.com" }
   let_it_be(:user, refind: true) { FactoryBot.create :user, :admin, email: email }
 
-  let(:encoded_token) { AuthToken.encode_user(user) }
+  let(:encoded_token) { described_class.encode_user(user) }
 
   describe ".decode" do
     it "handles a valid token correctly" do
@@ -33,17 +33,17 @@ RSpec.describe AuthToken do
 
   describe ".authorized_admin?" do
     it "handles a valid token correctly" do
-      expect(described_class.authorized_admin?("Bearer #{encoded_token}")).to eq true
+      expect(described_class.authorized_admin?("Bearer #{encoded_token}")).to be true
     end
 
     it "handles invalid tokens correctly" do
-      expect(described_class.authorized_admin?("Bearer InvalidTokenData")).to eq false
+      expect(described_class.authorized_admin?("Bearer InvalidTokenData")).to be false
     end
 
     it "handles an empty header correctly", :aggregate_failures do
-      expect(described_class.authorized_admin?("")).to eq false
-      expect(described_class.authorized_admin?(nil)).to eq false
-      expect(described_class.authorized_admin?("Bearer")).to eq false
+      expect(described_class.authorized_admin?("")).to be false
+      expect(described_class.authorized_admin?(nil)).to be false
+      expect(described_class.authorized_admin?("Bearer")).to be false
     end
   end
 

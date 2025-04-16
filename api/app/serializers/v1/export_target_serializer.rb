@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class ExportTargetSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer

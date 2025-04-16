@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Content
   class MetadataBlock < ::ContentBlock
     config.required_render_attributes = %i{has_metadata}.freeze

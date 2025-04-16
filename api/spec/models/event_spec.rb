@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
@@ -21,11 +23,11 @@ RSpec.describe Event, type: :model do
     it "by title" do
       @event_a = FactoryBot.create(:event, subject_title: "Aquemini")
       @event_b = FactoryBot.create(:event, subject_title: "ATLiens")
-      Event.reindex
-      Event.searchkick_index.refresh
-      results = Event.filtered({ keyword: "Aquemini" })
+      described_class.reindex
+      described_class.searchkick_index.refresh
+      results = described_class.filtered({ keyword: "Aquemini" })
       expect(results.length).to be 1
-      results = Event.filtered({ keyword: "ATLiens" })
+      results = described_class.filtered({ keyword: "ATLiens" })
       expect(results.length).to be 1
     end
   end
@@ -38,9 +40,9 @@ RSpec.describe Event, type: :model do
     end
 
     it "by type" do
-      results = Event.filtered({ type: EventType[:tweet] })
+      results = described_class.filtered({ type: EventType[:tweet] })
       expect(results.length).to be 2
-      results = Event.filtered({ type: EventType[:project_created] })
+      results = described_class.filtered({ type: EventType[:project_created] })
       expect(results.length).to be 1
     end
   end

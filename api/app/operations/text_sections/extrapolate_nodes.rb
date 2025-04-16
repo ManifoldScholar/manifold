@@ -43,7 +43,7 @@ module TextSections
           body_json IS NOT NULL AND body_json <> 'null'::jsonb
     SQL
 
-    SECOND_PART = <<~SQL
+    SECOND_PART = <<~SQL.freeze
       UNION ALL
       SELECT
         text_section_id, body_hash,

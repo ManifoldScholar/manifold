@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormattedAttributes
   # Refresh an individual model's formatted attributes cache
   #

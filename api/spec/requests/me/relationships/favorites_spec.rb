@@ -32,7 +32,7 @@ RSpec.describe "My Favorites API", type: :request do
     context "when the user is a reader" do
       before { get path, headers: reader_headers }
 
-      let(:api_response) { JSON.parse(response.body) }
+      let(:api_response) { response.parsed_body }
 
       describe "the response" do
         it "includes an array of data" do
@@ -62,7 +62,7 @@ RSpec.describe "My Favorites API", type: :request do
     context "when there is an authenticated user" do
       before { post path, headers: reader_headers, params: params }
 
-      let(:api_response) { JSON.parse(response.body) }
+      let(:api_response) { response.parsed_body }
 
       describe "the response" do
         it "has a 201 status code" do

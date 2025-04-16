@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module BagItSpec
     # A wrapper around a {Text} and its current {TextExport} that represents

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec::Matchers.define :match_serialized_html_node do |expected|
   def build_match_node(node)
     out = {}

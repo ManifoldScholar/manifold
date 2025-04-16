@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReadingGroupCategory < ApplicationRecord
   include Authority::Abilities
   include CollectionGrouping

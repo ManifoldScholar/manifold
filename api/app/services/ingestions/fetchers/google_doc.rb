@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Fetchers
     class GoogleDoc < Ingestions::Fetchers::AbstractFetcher

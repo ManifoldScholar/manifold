@@ -19,7 +19,7 @@ RSpec.describe "My Favorite Projects API", type: :request do
       before { favorite }
       before { get path, headers: reader_headers }
 
-      let(:api_response) { JSON.parse(response.body) }
+      let(:api_response) { response.parsed_body }
 
       it "sends the correct favorite project" do
         expect(api_response["data"][0]["id"]).to eq favorite_project.id

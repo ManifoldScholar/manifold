@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HTMLNodes
   class ExtractNamespaces < ActiveInteraction::Base
     EPUB_PREFIX = /\A(?<name>[^:]+):\s+(?<url>.+)\z/

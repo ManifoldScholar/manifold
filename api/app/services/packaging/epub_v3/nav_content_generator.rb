@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     # A rewrite of `GEPUB::Book#nav_doc` to better support our use cases. Namely, including

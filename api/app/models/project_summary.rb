@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectSummary < ApplicationRecord
   include Attachments
   include View

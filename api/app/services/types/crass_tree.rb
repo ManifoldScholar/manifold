@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class CrassTree < Types::FlexibleStruct
     attribute :children, Types::Array.of(Types::CrassNode)

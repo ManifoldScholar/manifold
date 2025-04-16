@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "securerandom"
 
 module V1
@@ -15,7 +17,7 @@ module V1
 
     class Errors
       def initialize(errors)
-        @time = Time.now
+        @time = Time.zone.now
         @random = SecureRandom.hex(6)
         @errors = errors
       end

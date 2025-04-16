@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalAuth
   module Provisioners
     class User < Abstract

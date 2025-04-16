@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FlattenedCollaborator < ApplicationRecord
   belongs_to :maker
   belongs_to :collaboratable, polymorphic: true

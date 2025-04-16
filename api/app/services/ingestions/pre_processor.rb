@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   class PreProcessor < AbstractInteraction
     hash :manifest, strip: false

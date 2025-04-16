@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalAuth
   class UpsertUser < ActiveInteraction::Base
     include AuthAction

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectExportations
   # Create a {ProjectExportation}.
   class Create < ActiveInteraction::Base

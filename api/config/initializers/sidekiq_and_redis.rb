@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Sidekiq.configure_server do |config|
   config.redis = ManifoldEnv.redis.sidekiq_options
 end

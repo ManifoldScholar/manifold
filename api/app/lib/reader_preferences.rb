@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReaderPreferences
   def initialize(raw_reader_preferences = {})
     self.preferences = raw_reader_preferences

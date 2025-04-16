@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
   class CustomOauthEndpoint
     def initialize(provider:, name:, uri:, method: :get, query: {})

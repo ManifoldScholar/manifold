@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectExportations
   # @see ProjectExportations::Create
   # @see ProjectExportations::Perform

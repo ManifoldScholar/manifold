@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module ResourceCollections
@@ -10,7 +12,7 @@ module API
             ids = @collection.resources.pluck(:id)
             Resource.filtered(
               with_pagination!(resource_filter_params),
-              scope: Resource.all.where("resources.id IN (?)", ids)
+              scope: Resource.all.where(resources: { id: ids })
             )
           end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectRestrictedChildAuthorizer < ProjectChildAuthorizer
   # This one is a bit more complex. Restricted children can be read by users who can
   # update the project. Controllers will need to pass in the project. For example:

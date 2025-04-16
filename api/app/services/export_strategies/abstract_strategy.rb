@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   # @abstract
   class AbstractStrategy
@@ -99,7 +101,7 @@ module ExportStrategies
       # @see ExportStrategies::AbstractConnection
       # @return [Class]
       def parent_connection_klass
-        AbstractStrategy == self ? ExportStrategies::AbstractConnection : superclass.connection_klass
+        self == AbstractStrategy ? ExportStrategies::AbstractConnection : superclass.connection_klass
       end
 
       # Augment the {.uploader_klass subclass} of {ExportTargets::AbstractUploader}
@@ -138,7 +140,7 @@ module ExportStrategies
       # @see ExportStrategies::AbstractUploader
       # @return [Class]
       def parent_uploader_klass
-        AbstractStrategy == self ? ExportStrategies::AbstractUploader : superclass.uploader_klass
+        self == AbstractStrategy ? ExportStrategies::AbstractUploader : superclass.uploader_klass
       end
     end
   end

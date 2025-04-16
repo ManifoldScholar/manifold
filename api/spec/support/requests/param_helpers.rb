@@ -25,10 +25,10 @@ RSpec.shared_context "param helpers" do
   end
 
   def adjust_attributes_for_request(attributes)
-    attributes.map do |k, v|
+    attributes.to_h do |k, v|
       next [k, v] unless v.respond_to? :path
       [k, file_param(v.path, v.content_type, v.original_filename)]
-    end.to_h
+    end
   end
 
   def adjust_attributes_for_response(attributes)
@@ -36,11 +36,11 @@ RSpec.shared_context "param helpers" do
   end
 
   def relationship_payload(name, models)
-    Hash[name, models]
+    { name => models }
   end
 
   def expect_updated_param(param, value, expected_value = nil, expected_param = nil)
-    attributes = Hash[param, value]
+    attributes = { param => value }
     expected_value ||= value
     expected_param ||= param
     patch(path, headers: headers, params: build_json_payload(attributes: attributes))

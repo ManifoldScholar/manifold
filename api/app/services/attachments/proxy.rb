@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Attachments
   class Proxy
     extend Dry::Initializer

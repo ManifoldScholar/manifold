@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EntitlementAuditAction < ClassyEnum::Base
   def change_role?
     add_role? || remove_role?

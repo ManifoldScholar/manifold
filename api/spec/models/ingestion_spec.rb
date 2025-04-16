@@ -11,7 +11,7 @@ RSpec.describe Ingestion, type: :model do
   end
 
   let(:ingestion) do
-    ingestion = Ingestion.new(creator: admin)
+    ingestion = described_class.new(creator: admin)
     Updaters::Ingestion.new(build_json_structure(attributes: attributes)).update(ingestion)
     return ingestion
   end

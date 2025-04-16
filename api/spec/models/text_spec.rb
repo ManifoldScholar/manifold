@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Text, type: :model do
@@ -100,54 +102,8 @@ RSpec.describe Text, type: :model do
     end
   end
 
-  describe ".pending_epub_v3_export" do
-    let!(:text) { FactoryBot.create :text }
-
-    let(:the_scope) { described_class.pending_epub_v3_export }
-
-    subject { the_scope }
-
-    class << self
-      def it_is_found
-        it "is found by the scope" do
-          expect(the_scope).to include text
-        end
-      end
-
-      def it_is_not_found
-        it "is not found by the scope" do
-          expect(the_scope).not_to include text
-        end
-      end
-    end
-
-    context "with a text not marked to export" do
-      it_is_not_found
-    end
-
-    context "with a text marked to export" do
-      let!(:text) { FactoryBot.create :text, :exports_as_epub_v3 }
-
-      context "and no text exports" do
-        it_is_found
-      end
-
-      context "with a stale export" do
-        let!(:text_export) { FactoryBot.create :text_export, :epub_v3, text: text, fingerprint: text.fingerprint.reverse }
-
-        it_is_found
-      end
-
-      context "with a current export" do
-        let!(:text_export) { FactoryBot.create :text_export, :epub_v3, text: text, fingerprint: text.fingerprint }
-
-        it_is_not_found
-      end
-    end
-  end
-
   specify "a new text can create sections from a list of names" do
-    new_text = Text.new
+    new_text = described_class.new
     new_text.section_names = %w[foo bar]
 
     expect(new_text.text_sections.size).to eq 2

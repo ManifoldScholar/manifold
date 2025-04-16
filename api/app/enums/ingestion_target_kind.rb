@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IngestionTargetKind < ClassyEnum::Base
   def ingest(user, ingestion)
     outcome = nil

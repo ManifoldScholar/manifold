@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Layout/LineLength
 module Collections
   Mapping = MultiKeyable::Map.from(

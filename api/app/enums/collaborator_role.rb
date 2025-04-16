@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CollaboratorRole < ClassyEnum::Base
   config.priority = 1_000_000 # default at the bottom
 

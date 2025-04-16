@@ -17,7 +17,7 @@ RSpec.describe "Stylesheets API", type: :request do
 
   describe "creates an stylesheet" do
     let(:path) { api_v1_text_relationships_stylesheets_path(text) }
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     before do
       post path, headers: admin_headers, params: valid_params
@@ -39,7 +39,7 @@ RSpec.describe "Stylesheets API", type: :request do
 
   describe "updates a stylesheet" do
     let(:stylesheet) { FactoryBot.create(:stylesheet, text: text, creator: admin) }
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     it "updates the name attribute" do
       valid_params = build_json_payload(attributes: { name: "Rambo Stoolz" })

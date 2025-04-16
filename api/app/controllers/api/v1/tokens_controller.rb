@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "auth_token"
 
 module API

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Projects
   # Calculate a fingerprint for a {Project}.
   class CalculateFingerprint < ActiveInteraction::Base

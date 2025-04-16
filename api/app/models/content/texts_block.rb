@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Content
   class TextsBlock < ::ContentBlock
     include ::HasFormattedAttributes

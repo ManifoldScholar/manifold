@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module APIDocs
   class Config
     class << self
       include Helpers::Inflections
 
       def swagger_root
-        File.join(Rails.root, "public/api/static/docs")
+        Rails.public_path.join('api/static/docs')
       end
 
       def definitions

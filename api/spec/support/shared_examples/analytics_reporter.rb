@@ -233,7 +233,7 @@ RSpec.shared_examples_for "analytics reporter visits" do
       it "should return results for all analytics" do
         analytics = running_the_interaction!.data.map { |h| h["name"] }
 
-        expect(analytics.to_set).to eq described_class.analytics.map(&:to_s).to_set
+        expect(analytics.to_set).to eq described_class.analytics.to_set(&:to_s)
       end
 
       it "should return a cached result after first run" do

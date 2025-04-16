@@ -37,7 +37,7 @@ RSpec.describe "Contacts API", type: :request do
         end
 
         it "has the field errors" do
-          errors = JSON.parse(response.body)["errors"]
+          errors = response.parsed_body["errors"]
           expect(errors).to eq [{ "detail" => "is required", "source" => { "pointer" => "/data/attributes/message" } }]
         end
       end

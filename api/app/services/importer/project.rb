@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Importer
   # This class imports a project.json file into Manifold
   class Project

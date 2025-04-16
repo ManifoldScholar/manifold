@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Content::ResourcesBlock do
@@ -11,11 +13,11 @@ RSpec.describe Content::ResourcesBlock do
   end
 
   it "is configurable" do
-    expect(resources_block.configurable?).to eq true
+    expect(resources_block.configurable?).to be true
   end
 
   it "responds to :featured_collections" do
-    expect(resources_block.respond_to?(:featured_collections)).to eq true
+    expect(resources_block.respond_to?(:featured_collections)).to be true
   end
 
   describe "#renderable?" do
