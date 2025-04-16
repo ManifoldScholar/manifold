@@ -14,6 +14,8 @@ export default function Content({
   collapsed,
   manualCollapsed,
   setManualCollapsed,
+  index,
+  categoryCount,
   ...bodyProps
 }) {
   const isMarkdown = category?.attributes?.markdownOnly;
@@ -50,6 +52,8 @@ export default function Content({
           manualCollapsed={manualCollapsed}
           collectableOver={collectableOver}
           onCategoryMove={callbacks.onCategoryMove(categoryRef?.current)}
+          index={index}
+          categoryCount={categoryCount}
         />
         <Styled.Inner $collapsed={manualCollapsed}>
           {isMarkdown ? (
@@ -58,6 +62,8 @@ export default function Content({
             <CategoryBody
               category={category}
               callbacks={callbacks}
+              index={index}
+              categoryCount={categoryCount}
               {...bodyProps}
             />
           )}

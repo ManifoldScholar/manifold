@@ -24,6 +24,7 @@ const CollectablesList = React.memo(function CollectablesList({
         index={index}
         type={type}
         categoryId={categoryId}
+        collectableCount={collectedIds.length}
         {...collectableProps}
       />
     </li>
