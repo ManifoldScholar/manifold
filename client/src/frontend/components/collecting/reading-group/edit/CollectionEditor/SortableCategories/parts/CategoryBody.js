@@ -12,7 +12,9 @@ export default function CategoryBody({
   category,
   mappings,
   responses,
-  callbacks
+  callbacks,
+  index,
+  categoryCount
 }) {
   const categoryMapping = mappings[category?.id] || null;
 
@@ -30,6 +32,8 @@ export default function CategoryBody({
     return {
       categoryId: category?.id || "",
       collectedIds: getCollectedIdsByType(type),
+      categoryIndex: index,
+      categoryCount,
       responses: getResponsesByType(type),
       onRemove: callbacks.onCollectableRemove,
       onMove: callbacks.onCollectableMove(category?.id),

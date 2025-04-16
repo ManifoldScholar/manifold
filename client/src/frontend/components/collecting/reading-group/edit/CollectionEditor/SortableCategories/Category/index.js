@@ -47,6 +47,7 @@ export default function Category({
         category={category}
         manualCollapsed={manualCollapsed}
         setManualCollapsed={setManualCollapsed}
+        index={index}
         {...contentProps}
         {...restProps}
       />

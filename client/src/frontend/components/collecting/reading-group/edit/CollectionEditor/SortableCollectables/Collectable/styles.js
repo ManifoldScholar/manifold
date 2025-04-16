@@ -84,6 +84,9 @@ export const Header = styled.header`
 `;
 
 export const Actions = styled.div`
+  --PopoverMenu-inset-block-start: calc(100% + 10px);
+  --PopoverMenu-inset-inline-end: -20px;
+
   display: flex;
   flex-shrink: 0;
   gap: min(1vw, 10px);

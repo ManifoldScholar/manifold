@@ -130,6 +130,7 @@
     "tinycolor2": "^1.6.0",
     "tus-js-client": "^4.3.1",
     "use-resize-observer": "^9.1.0",
+    "usehooks-ts": "^3.1.1",
     "uuid": "^11.x",
     "wavesurfer.js": "^7.9.4"
   },
