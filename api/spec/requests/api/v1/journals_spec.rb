@@ -25,11 +25,11 @@ RSpec.describe "Journals API", type: :request do
   end
 
   path "/journals" do
-    let(:'filter[draft]') { nil }
-    let(:'filter[keyword]') { nil }
-    let(:'filter[typeahead]') { nil }
-    let(:'filter[with_update_ability]') { nil }
-    let(:'filter[with_creator_role]') { nil }
+    let(:'filter[draft]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[keyword]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[typeahead]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[with_update_ability]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[with_creator_role]') { nil } # rubocop:todo RSpec/VariableName
 
     include_examples "an API index request", model: Journal, additional_parameters: [
       { name: "filter[draft]", in: :query, type: :boolean },

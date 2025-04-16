@@ -228,7 +228,7 @@ class TextSection < ApplicationRecord
         node_uuid: node["node_uuid"],
         text_section_id: id
       )
-      next [false, nodes]
+      next [false, nodes] # rubocop:todo Lint/UnmodifiedReduceAccumulator
     end
     nodes.reverse.map.with_index(1) { |node, index| node.merge(position: index) }
   end

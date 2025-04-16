@@ -43,7 +43,7 @@ module Search
 
     def adjusted_results
       @adjusted_results ||= begin
-        return @searchkick_results.results if @searchkick_results.options[:load]
+        return @searchkick_results.results if @searchkick_results.options[:load] # rubocop:todo Lint/NoReturnInBeginEndBlocks
 
         inject_associations(@searchkick_results)
       end

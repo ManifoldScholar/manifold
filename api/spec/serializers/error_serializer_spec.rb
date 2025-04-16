@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe V1::ErrorSerializer do
-  let(:subject) { described_class.new(errors) }
+  let(:subject) { described_class.new(errors) } # rubocop:todo RSpec/SubjectDeclaration
   let(:project) do
     project = Project.new
     project.save

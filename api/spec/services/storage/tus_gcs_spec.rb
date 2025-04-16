@@ -4,7 +4,7 @@ require "rails_helper"
 require "storage/tus_gcs"
 
 RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true do
-  before(:all) do
+  before(:all) do # rubocop:todo RSpec/BeforeAfterAll
     Settings.instance.update_from_environment!
   end
 
@@ -12,7 +12,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
     WebMock.allow_net_connect!
   end
 
-  around do
+  around do # rubocop:todo RSpec/AroundBlock
     if bucket.present?
       example.run
     else
@@ -129,7 +129,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
       expect(response.each.to_a.join).to eq("a" * 16 * 1024 + "b" * 3)
     end
 
-    it "handles multibyte characters" do
+    it "handles multibyte characters" do # rubocop:todo RSpec/NoExpectationExample
       gcs.create_file("foo")
       gcs.patch_file("foo", StringIO.new("😃"))
     end
@@ -146,7 +146,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
       expect(gcs.info_exists?("foo")).to be false
     end
 
-    it "doesn't raise an error if file is missing" do
+    it "doesn't raise an error if file is missing" do # rubocop:todo RSpec/NoExpectationExample
       gcs.delete_file("not-a-real-file")
     end
   end

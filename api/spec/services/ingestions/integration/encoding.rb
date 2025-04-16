@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "When ingesting document with varying character encoding", integration: true do
+RSpec.describe "When ingesting document with varying character encoding", integration: true do # rubocop:todo RSpec/DescribeClass
   include TestHelpers::IngestionHelper
 
   context "when non-latin HTML" do

@@ -4,7 +4,7 @@
 module MoneyAttributes
   extend ActiveSupport::Concern
 
-  included do
+  included do # rubocop:todo Lint/EmptyBlock
   end
 
   class_methods do

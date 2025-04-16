@@ -33,16 +33,16 @@ RSpec.describe "Projects API", type: :request do
   end
 
   path "/projects" do
-    let(:'filter[draft]') { nil }
-    let(:'filter[featured]') { nil }
-    let(:'filter[subject]') { nil }
-    let(:'filter[keyword]') { nil }
-    let(:'filter[order]') { nil }
-    let(:'filter[typeahead]') { nil }
-    let(:'filter[with_update_ability]') { nil }
-    let(:'filter[collection_order]') { nil }
-    let(:'filter[with_creator_role]') { nil }
-    let(:'filter[standalone_mode_enforced]') { nil }
+    let(:'filter[draft]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[featured]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[subject]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[keyword]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[order]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[typeahead]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[with_update_ability]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[collection_order]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[with_creator_role]') { nil } # rubocop:todo RSpec/VariableName
+    let(:'filter[standalone_mode_enforced]') { nil } # rubocop:todo RSpec/VariableName
 
     include_examples "an API index request", model: Project, additional_parameters: [
       { name: "filter[draft]", in: :query, type: :boolean },

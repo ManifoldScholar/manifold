@@ -6,7 +6,7 @@ RSpec.describe FormattedAttributes::RefreshCacheJob, type: :job do
   let!(:project) { FactoryBot.create :project }
 
   it "refreshes an individual model's formatted attributes" do
-    expect(project).to receive(:refresh_formatted_attributes_cache!).once.and_call_original
+    expect(project).to receive(:refresh_formatted_attributes_cache!).once.and_call_original # rubocop:todo RSpec/MessageSpies
 
     expect do
       described_class.perform_now project

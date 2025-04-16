@@ -4,7 +4,7 @@ require "with_model"
 require "rails_helper"
 
 RSpec.describe ContentBlock do
-  class self::RenderBlock < ContentBlock
+  class self::RenderBlock < ContentBlock # rubocop:todo Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
     config.required_render_attributes = %i{render_attr_a render_attr_b}.freeze
 
     has_configured_attributes render_attr_a: :string,
@@ -41,7 +41,7 @@ RSpec.describe ContentBlock do
     let(:project) { FactoryBot.create(:project) }
 
     context "when required_render_attributes are all present" do
-      let(:subject) do
+      let(:subject) do # rubocop:todo RSpec/SubjectDeclaration
         subject = self.class::RenderBlock.new
         subject.render_attr_a = "Set"
         subject.render_attr_b = true
@@ -57,7 +57,7 @@ RSpec.describe ContentBlock do
     end
 
     context "when required_render_attributes are not all present" do
-      let(:subject) { self.class::RenderBlock.create(project: project) }
+      let(:subject) { self.class::RenderBlock.create(project: project) } # rubocop:todo RSpec/SubjectDeclaration
 
       it "is invalid" do
         expect(subject.renderable?).to be false
@@ -66,7 +66,7 @@ RSpec.describe ContentBlock do
   end
 
   describe "#render_errors" do
-    let(:subject) { self.class::RenderBlock.create(project: FactoryBot.create(:project)) }
+    let(:subject) { self.class::RenderBlock.create(project: FactoryBot.create(:project)) } # rubocop:todo RSpec/SubjectDeclaration
 
     it "returns a hash of errors" do
       expect(subject.render_errors).to be_a Hash
@@ -83,7 +83,7 @@ RSpec.describe ContentBlock do
   end
 
   describe "#incomplete_render_attributes" do
-    let(:subject) { self.class::RenderBlock.create(project: FactoryBot.create(:project)) }
+    let(:subject) { self.class::RenderBlock.create(project: FactoryBot.create(:project)) } # rubocop:todo RSpec/SubjectDeclaration
 
     it "returns an array of incomplete render attributes" do
       expect(subject.incomplete_render_attributes).to contain_exactly(:render_attr_a, :render_attr_b)

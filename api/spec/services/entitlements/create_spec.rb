@@ -19,7 +19,7 @@ RSpec.describe Entitlements::Create, interaction: true do
     context "when providing read_access" do
       let(:read_access) { true }
 
-      it "creates an entitlement" do
+      it "creates an entitlement" do # rubocop:todo RSpec/NoExpectationExample
         perform_within_expectation! do |e|
           e.to change(Entitlement, :count).and change { target_user.reload.has_role?(:read_access, entitled_subject) }
         end
@@ -108,7 +108,7 @@ RSpec.describe Entitlements::Create, interaction: true do
     context "when providing read_access" do
       let(:read_access) { true }
 
-      it "creates an entitlement" do
+      it "creates an entitlement" do # rubocop:todo RSpec/NoExpectationExample
         perform_within_expectation! do |e|
           e.to change(Entitlement, :count).and change { target_user.reload.has_role?(:read_access, entitled_subject) }
         end
@@ -132,7 +132,7 @@ RSpec.describe Entitlements::Create, interaction: true do
     context "when subscribing the user" do
       let(:subscriber) { true }
 
-      it "creates an entitlement" do
+      it "creates an entitlement" do # rubocop:todo RSpec/NoExpectationExample
         perform_within_expectation! do |e|
           e.to change(Entitlement, :count).and change { target_user.reload.has_role?(:subscriber, entitled_subject) }
         end

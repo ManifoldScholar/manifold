@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe "Reading Group Abilities", :authorizer do
+RSpec.describe "Reading Group Abilities", :authorizer do # rubocop:todo RSpec/DescribeClass
   let(:user) { FactoryBot.create :user }
 
   subject { user }

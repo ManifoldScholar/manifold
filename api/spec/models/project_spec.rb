@@ -294,7 +294,7 @@ RSpec.describe Project, type: :model do
     end
 
     shared_examples_for "a valid filtered collection" do
-      it "does not duplicate items across pages" do
+      it "does not duplicate items across pages" do # rubocop:todo RSpec/NoExpectationExample
         pages.map { |number| filter! number }
       end
 
@@ -406,13 +406,13 @@ RSpec.describe Project, type: :model do
       end
     end
 
-    context "when :enabled" do
+    context "when :enabled" do # rubocop:todo RSpec/RepeatedExampleGroupBody
       it "returns true" do
         expect(FactoryBot.create(:project, standalone_mode: "disabled").standalone?).to be false
       end
     end
 
-    context "when :enforced" do
+    context "when :enforced" do # rubocop:todo RSpec/RepeatedExampleGroupBody
       it "returns true" do
         expect(FactoryBot.create(:project, standalone_mode: "disabled").standalone?).to be false
       end

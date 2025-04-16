@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "When re-ingesting a text using the Document strategy", integration: true do
+RSpec.describe "When re-ingesting a text using the Document strategy", integration: true do # rubocop:todo RSpec/DescribeClass
   include TestHelpers::IngestionHelper
   let(:before_path) { Rails.root.join("spec", "data", "ingestion", "html", "reingestion", "before.html") }
   let(:after_path) { Rails.root.join("spec", "data", "ingestion", "html", "reingestion", "after.html") }

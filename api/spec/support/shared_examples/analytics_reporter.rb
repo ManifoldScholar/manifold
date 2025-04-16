@@ -294,7 +294,7 @@ RSpec.shared_examples_for "analytics reporter events" do
       else
         expect(actual).to eq expected
       end
-    rescue Exception => e
+    rescue Exception => e # rubocop:todo Lint/RescueException, Lint/UselessRescue
       raise e
     end
   end

@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :entitlement do
     transient do
-      user { create :user }
+      user { create :user } # rubocop:todo FactoryBot/FactoryAssociationWithStrategy
     end
 
     target { user }
@@ -37,7 +37,7 @@ FactoryBot.define do
     end
 
     trait :for_reading_group do
-      target { create :reading_group, with_user: user }
+      target { create :reading_group, with_user: user } # rubocop:todo FactoryBot/FactoryAssociationWithStrategy
     end
 
     trait :with_expiration do

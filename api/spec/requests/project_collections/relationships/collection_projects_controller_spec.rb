@@ -6,7 +6,7 @@ RSpec.describe "ProjectCollection CollectionProject API", type: :request do
 
   describe "creates a new CollectionProject for the ProjectCollection" do
     let(:path) { api_v1_project_collection_relationships_collection_projects_path(project_collection) }
-    let(:collectionProject) { { attributes: {}, relationships: { project: { data: { type: "projects", id: project.id } } } } }
+    let(:collectionProject) { { attributes: {}, relationships: { project: { data: { type: "projects", id: project.id } } } } } # rubocop:todo RSpec/VariableName
 
     context "when the user is an admin" do
       let(:headers) { admin_headers }

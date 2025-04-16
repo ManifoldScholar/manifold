@@ -28,14 +28,16 @@ RSpec.describe Packaging::Preservation::ExportProjectToBagIt, interaction: true,
     end
 
     it "handles failures" do
-      call_result = double("matcher result")
+      call_result = double("matcher result") # rubocop:todo RSpec/VerifiedDoubles
 
-      expect(call_result).to receive(:success).once
-      expect(call_result).to receive(:failure).once.and_yield(:failure, "some arbitrary reason")
+      expect(call_result).to receive(:success).once # rubocop:todo RSpec/MessageSpies
+      expect(call_result).to receive(:failure).once.and_yield(:failure, "some arbitrary reason") # rubocop:todo RSpec/MessageSpies
 
-      expect(bagit_pipeline).to receive_message_chain(:with_step_args, :call).and_yield(call_result)
+      # rubocop:todo RSpec/StubbedMock
+      expect(bagit_pipeline).to receive_message_chain(:with_step_args, :call).and_yield(call_result) # rubocop:todo RSpec/MessageChain, RSpec/StubbedMock
+      # rubocop:enable RSpec/StubbedMock
 
-      allow_any_instance_of(described_class).to receive(:bagit_pipeline).and_return(bagit_pipeline)
+      allow_any_instance_of(described_class).to receive(:bagit_pipeline).and_return(bagit_pipeline) # rubocop:todo RSpec/AnyInstance
 
       perform_within_expectation! valid: false do |e|
         e.to execute_safely.and keep_the_same(ProjectExport, :count)

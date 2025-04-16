@@ -27,7 +27,7 @@ class Category < ApplicationRecord
   validates :title, presence: true
   validates :role,
             inclusion: { in: [ROLE_TEXT, ROLE_RESOURCE],
-                         message: "%<value>s is not a valid category role" }
+                         message: "%<value>s is not a valid category role" } # rubocop:todo Rails/I18nLocaleTexts
 
   def to_s
     title

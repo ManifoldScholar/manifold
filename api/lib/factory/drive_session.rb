@@ -6,7 +6,7 @@ module Factory
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/PerceivedComplexity
-    def self.config
+    def self.config # rubocop:todo Metrics/AbcSize
       env_config = SettingsService::ReadFromEnv.run.result
 
       db_config = ActiveRecord::Base.connection_pool.with_connection do |conn|

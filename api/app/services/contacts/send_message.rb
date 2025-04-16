@@ -7,7 +7,7 @@ module Contacts
     string :message
 
     validates :full_name, :email, :message, presence: true
-    validates :email, email_format: { message: "is not a valid email address" }
+    validates :email, email_format: { message: "is not a valid email address" } # rubocop:todo Rails/I18nLocaleTexts
 
     def execute
       ContactMailer.contact_message(full_name, email, message).deliver

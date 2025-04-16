@@ -14,7 +14,7 @@ RSpec.describe ExportUploader do
       end
     end
 
-    allow_any_instance_of(EpubCheck).to receive(:execute).and_return outcome.new({})
+    allow_any_instance_of(EpubCheck).to receive(:execute).and_return outcome.new({}) # rubocop:todo RSpec/AnyInstance
 
     perform_enqueued_jobs { text_export.save }
   end
