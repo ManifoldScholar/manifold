@@ -7,13 +7,13 @@ RSpec.describe Comment, type: :model do
 
   it "enqueues a COMMENT_CREATED event on creation" do
     subject = FactoryBot.create(:annotation)
-    expect(CreateEventJob).to receive(:perform_later).with(EventType[:comment_created], any_args)
+    expect(CreateEventJob).to receive(:perform_later).with(EventType[:comment_created], any_args) # rubocop:todo RSpec/MessageSpies
     FactoryBot.create(:comment, subject: subject)
   end
 
   it "does not enqueues a COMMENT_CREATED when subject is private" do
     subject = FactoryBot.create(:annotation, private: true)
-    expect(CreateEventJob).not_to receive(:perform_later).with(EventType[:comment_created], any_args)
+    expect(CreateEventJob).not_to receive(:perform_later).with(EventType[:comment_created], any_args) # rubocop:todo RSpec/MessageSpies
     FactoryBot.create(:comment, subject: subject)
   end
 

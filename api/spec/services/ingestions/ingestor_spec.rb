@@ -58,7 +58,7 @@ RSpec.describe Ingestions::Ingestor do
     end
 
     context "when Google Doc", slow: true do
-      before(:all) do
+      before(:all) do # rubocop:todo RSpec/BeforeAfterAll
         Settings.instance.update_from_environment!
       end
 
@@ -97,7 +97,7 @@ RSpec.describe Ingestions::Ingestor do
 
     context "when reingesting a document" do
       let(:text) { FactoryBot.create(:text, title: "original") }
-      let!(:userStylesheet) do
+      let!(:userStylesheet) do # rubocop:todo RSpec/VariableName
         FactoryBot.create(
           :stylesheet,
           raw_styles: ".invalid { position: relative }",
@@ -157,7 +157,7 @@ RSpec.describe Ingestions::Ingestor do
 
       describe "a reingestion with failures" do
         it "does not persist updates" do
-          allow_any_instance_of(Ingestions::Compilers::TextSection)
+          allow_any_instance_of(Ingestions::Compilers::TextSection) # rubocop:todo RSpec/AnyInstance
             .to receive(:text_section).and_raise(::Ingestions::IngestionError)
 
           expect do

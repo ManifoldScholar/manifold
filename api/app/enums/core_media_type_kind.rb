@@ -3,7 +3,7 @@
 # The "Core Media Type" MIME groups as defined by the EPUBv3 spec.
 #
 # @see https://www.w3.org/publishing/epub3/epub-spec.html#sec-cmt-supported
-# rubocop:disable Style/Alias
+# rubocop:disable Style/Alias, Lint/MissingCopEnableDirective
 class CoreMediaTypeKind < ClassyEnum::Base
   CSS = "text/css"
 

@@ -33,7 +33,7 @@ RSpec.describe "Tokens API", type: :request do
       end
     end
 
-    context "when the username or password are incorrect" do
+    context "when the username or password are incorrect" do # rubocop:todo RSpec/RepeatedExampleGroupDescription
       before { post path, params: invalid_params }
 
       describe "the response" do
@@ -43,7 +43,7 @@ RSpec.describe "Tokens API", type: :request do
       end
     end
 
-    context "when the username or password are incorrect" do
+    context "when the username or password are incorrect" do # rubocop:todo RSpec/RepeatedExampleGroupDescription
       before { post path, params: nonexistent_user_params }
 
       describe "the response" do

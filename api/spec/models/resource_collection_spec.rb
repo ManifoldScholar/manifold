@@ -25,7 +25,7 @@ RSpec.describe ResourceCollection, type: :model do
 
   it "enqueues a COLLECTION_ADDED event on creation" do
     project = FactoryBot.create(:project)
-    expect(CreateEventJob).to receive(:perform_later).with(EventType[:resource_collection_added], any_args)
+    expect(CreateEventJob).to receive(:perform_later).with(EventType[:resource_collection_added], any_args) # rubocop:todo RSpec/MessageSpies
     FactoryBot.create(:resource_collection, project: project)
   end
 

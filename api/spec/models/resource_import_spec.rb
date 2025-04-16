@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "rails_helper"
-include ActiveJob::TestHelper
+include ActiveJob::TestHelper # rubocop:todo Style/MixinUsage
 
 RSpec.shared_examples "after importing" do
   include_context "resource import"
@@ -92,7 +92,7 @@ RSpec.shared_examples "after parsing" do
 end
 
 RSpec.describe ResourceImport, type: :model, slow: true do
-  before(:all) do
+  before(:all) do # rubocop:todo RSpec/BeforeAfterAll
     Settings.instance.update_from_environment!
   end
 

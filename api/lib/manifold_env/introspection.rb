@@ -41,7 +41,7 @@ module ManifoldEnv
     attr_reader :throttled
 
     # @param [Hash] env
-    def initialize(env = {})
+    def initialize(env = {}) # rubocop:todo Metrics/AbcSize
       @request = Rack::Request.new(env)
       @params = parse_json_params
       @authorized_admin = request.get? ? nil : AuthToken.authorized_admin?(request.env["HTTP_AUTHORIZATION"])

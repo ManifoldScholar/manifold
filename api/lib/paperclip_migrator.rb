@@ -117,7 +117,7 @@ module PaperclipMigrator
 
     hash :options, strip: false, default: {}
 
-    def execute
+    def execute # rubocop:todo Metrics/AbcSize
       # First we convert the data as it exists in paperclip
       shrine_data = shrine_data_for instance, attachment_name, *style_names, options.symbolize_keys
 
@@ -180,7 +180,7 @@ module PaperclipMigrator
   class PseudoAttachment
     attr_reader :attachment_name, :attachment_fields, :default_style, :instance, :interpolated_values, :style_names, :hashes, :paths
 
-    def initialize(instance:, attachment_name:, style_names: [], default_style: :original)
+    def initialize(instance:, attachment_name:, style_names: [], default_style: :original) # rubocop:todo Metrics/AbcSize
       @base_path = Shrine.storages[:store].directory
       @attachment_name = attachment_name
       @instance = instance
@@ -268,7 +268,7 @@ module PaperclipMigrator
       end
     end
 
-    def shrine_data_for(style)
+    def shrine_data_for(style) # rubocop:todo Metrics/AbcSize
       hash = @hashes.fetch(style)
 
       original_path = @paths.fetch(style)

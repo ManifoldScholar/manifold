@@ -9,7 +9,7 @@ RSpec.describe Flag, type: :model do
 
   it "enqueues an EnqueueFlagNotificationsJob job on create" do
     comment = FactoryBot.create(:comment)
-    expect(Notifications::EnqueueFlagNotificationsJob).to receive(:perform_later)
+    expect(Notifications::EnqueueFlagNotificationsJob).to receive(:perform_later) # rubocop:todo RSpec/MessageSpies
     FactoryBot.create(:flag, flaggable: comment)
   end
 

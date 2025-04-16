@@ -21,14 +21,14 @@ RSpec.shared_context "an API update request" do |options|
     tags api_spec_helper.tags
 
     response api_spec_helper.success_response_code, api_spec_helper.success_description, focus: api_spec_helper.focus do
-      let(:Authorization) { get_user_token(api_spec_helper.authorized_user) } if api_spec_helper.requires_auth?
+      let(:Authorization) { get_user_token(api_spec_helper.authorized_user) } if api_spec_helper.requires_auth? # rubocop:todo RSpec/VariableName
       schema api_spec_helper.response
       run_test!
     end
 
     unless api_spec_helper.exclude_401
       response "401", I18n.t("swagger.not_authenticated"), focus: api_spec_helper.focus do
-        let(:Authorization) {}
+        let(:Authorization) {} # rubocop:todo Lint/EmptyBlock, RSpec/VariableName
         run_test!
       end
     end

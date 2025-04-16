@@ -36,15 +36,15 @@ module TestHelpers
       config.impersonate User
       config.predicates_return false
 
-      def role
+      def role # rubocop:todo Lint/NestedMethodDefinition
         nil
       end
 
-      def kind
+      def kind # rubocop:todo Lint/NestedMethodDefinition
         nil
       end
 
-      def can_read?(resource, options = {})
+      def can_read?(resource, options = {}) # rubocop:todo Lint/NestedMethodDefinition
         resource.readable_by? self, options
       end
     end.new

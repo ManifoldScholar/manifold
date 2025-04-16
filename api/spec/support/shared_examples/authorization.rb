@@ -13,7 +13,7 @@ RSpec.shared_examples_for "instance abilities" do |klass, abilities|
       it "the subject #{verb} #{ability.upcase} the #{klass.to_s.downcase}" do
         skip("Not testing instance-level #{ability} within this context") unless test_ability_for?(ability, abilities)
 
-        expect(object).send(assertion, send(matcher_for_ability(ability), subject))
+        expect(object).send(assertion, send(matcher_for_ability(ability), subject)) # rubocop:todo RSpec/MissingExpectationTargetMethod
       end
     else
       it "does not test if the subject can #{ability}" do
@@ -36,7 +36,7 @@ RSpec.shared_examples_for "class abilities" do |klass, abilities|
       it "the subject #{verb} #{ability} any #{klass.to_s.pluralize}" do
         skip("Not testing class-level #{ability} within this context") unless test_ability_for?(ability, abilities)
 
-        expect(klass).send(assertion, send(matcher_for_ability(ability), subject))
+        expect(klass).send(assertion, send(matcher_for_ability(ability), subject)) # rubocop:todo RSpec/MissingExpectationTargetMethod
       end
     else
       it "does not test if the subject can #{ability}" do
@@ -49,5 +49,5 @@ end
 RSpec.shared_context "unauthenticated user" do |klass|
   klass.name.underscore
 
-  let(:subject) { anonymous_user }
+  let(:subject) { anonymous_user } # rubocop:todo RSpec/SubjectDeclaration
 end

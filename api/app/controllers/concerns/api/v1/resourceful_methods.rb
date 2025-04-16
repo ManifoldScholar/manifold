@@ -58,7 +58,7 @@ module API
       private
 
       # rubocop:disable Metrics/AbcSize
-      def define_methods!
+      def define_methods! # rubocop:todo Metrics/MethodLength
         _resource_configuration = self
 
         define_method(:resource_configuration) { _resource_configuration }

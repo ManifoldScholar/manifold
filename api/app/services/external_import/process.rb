@@ -31,7 +31,7 @@ module ExternalImport
 
     private
 
-    UNKNOWN_TEXT_FMT = %(has unknown text id: "%<remote>s" => "%<local>s")
+    UNKNOWN_TEXT_FMT = %(has unknown text id: "%<remote>s" => "%<local>s") # rubocop:todo Lint/UselessConstantScoping
 
     # @return [void]
     def texts_must_exist!

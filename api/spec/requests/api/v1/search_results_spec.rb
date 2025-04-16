@@ -25,8 +25,8 @@ RSpec.describe "Search Results", type: :request do
       let(:project) { project_resource.id }
       let(:text) { nil }
       let(:text_section) { nil }
-      let(:'page[number]') { 1 }
-      let(:'page[size]') { 10 }
+      let(:'page[number]') { 1 } # rubocop:todo RSpec/VariableName
+      let(:'page[size]') { 10 } # rubocop:todo RSpec/VariableName
       let(:raw) { nil }
       let(:facets) { [] }
 

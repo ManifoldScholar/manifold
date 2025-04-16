@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Notifications::FetchUsersForReplyNotification do
   let(:subject_author) { FactoryBot.create(:user) }
   let(:parent_author) { FactoryBot.create(:user) }
-  let(:subject) { FactoryBot.create(:annotation, creator: subject_author) }
+  let(:subject) { FactoryBot.create(:annotation, creator: subject_author) } # rubocop:todo RSpec/SubjectDeclaration
 
   before do
     subject_author.update(notification_preferences_by_kind: { replies_to_me: NotificationFrequency[:always] })

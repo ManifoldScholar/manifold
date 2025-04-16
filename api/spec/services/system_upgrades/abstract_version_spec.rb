@@ -3,18 +3,20 @@
 require "rails_helper"
 
 RSpec.describe SystemUpgrades::AbstractVersion do
-  class Test000100 < SystemUpgrades::AbstractVersion
+  # rubocop:todo RSpec/LeakyConstantDeclaration
+  class Test000100 < SystemUpgrades::AbstractVersion # rubocop:todo Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
     def perform!
-      logger.debug "Test"
+  logger.debug "Test" # rubocop:todo Layout/IndentationWidth
     end
   end
+  # rubocop:enable RSpec/LeakyConstantDeclaration
 
   it "creates an UpgradeResult record on first execution" do
     expect { Test000100.run }.to change(UpgradeResult, :count).by 1
   end
 
   context "the corresponding UpgradeResult" do
-    before(:context) do
+    before(:context) do # rubocop:todo RSpec/BeforeAfterAll
       Test000100.run
     end
 
@@ -28,17 +30,17 @@ RSpec.describe SystemUpgrades::AbstractVersion do
   end
 
   context "when upgrade has already been run" do
-    before(:context) do
+    before(:context) do # rubocop:todo RSpec/BeforeAfterAll
       Test000100.run
     end
 
     it "does not run upgrade without force option" do
-      expect_any_instance_of(Test000100).not_to receive(:perform!)
+      expect_any_instance_of(Test000100).not_to receive(:perform!) # rubocop:todo RSpec/AnyInstance
       Test000100.run
     end
 
     it "does run upgrade with force option" do
-      expect_any_instance_of(Test000100).to receive(:perform!)
+      expect_any_instance_of(Test000100).to receive(:perform!) # rubocop:todo RSpec/AnyInstance
       Test000100.run force: true
     end
   end

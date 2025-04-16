@@ -33,7 +33,7 @@ RSpec.describe Resource, type: :model do
 
   it "enqueues a RESOURCE_ADDED event on creation" do
     project = FactoryBot.create(:project)
-    expect(CreateEventJob).to receive(:perform_later).with(EventType[:resource_added], any_args)
+    expect(CreateEventJob).to receive(:perform_later).with(EventType[:resource_added], any_args) # rubocop:todo RSpec/MessageSpies
     FactoryBot.create(:resource, project: project)
   end
 
@@ -195,7 +195,9 @@ RSpec.describe Resource, type: :model do
   end
 
   describe "kind validations" do
-    KINDS = %w(image audio video spreadsheet document file presentation).freeze
+    # rubocop:todo RSpec/LeakyConstantDeclaration
+    KINDS = %w(image audio video spreadsheet document file presentation).freeze # rubocop:todo Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
+    # rubocop:enable RSpec/LeakyConstantDeclaration
 
     KINDS.each do |kind|
       context "when resource is a #{kind} upload" do

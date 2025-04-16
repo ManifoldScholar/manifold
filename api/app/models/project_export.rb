@@ -5,7 +5,7 @@ class ProjectExport < ApplicationRecord
   include HasExportKind
 
   belongs_to :project, inverse_of: :project_exports
-  has_many :project_export_statuses, inverse_of: :project_export
+  has_many :project_export_statuses, inverse_of: :project_export # rubocop:todo Rails/HasManyOrHasOneDependent
 
   upsert_keys %i[project_id export_kind fingerprint]
 

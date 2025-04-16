@@ -201,11 +201,13 @@ module Validator
     # @param declarations [Array]
     # @return [String]
     def compose_rule_set(selector, declarations)
+      # rubocop:todo Naming/HeredocDelimiterNaming
       <<~END
         #{selector} {
         #{declarations.map { |d| "    #{d}" }.join("\n")}
         }
       END
+      # rubocop:enable Naming/HeredocDelimiterNaming
     end
 
     # Is the color in grayscale?

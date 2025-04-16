@@ -47,20 +47,20 @@ RSpec.describe FormattedAttributes::Definition do
   shared_examples_for "accessor examples" do
     def maybe_wrap_container(accessor)
       if container
-        double("model instance", container => accessor)
+        double("model instance", container => accessor) # rubocop:todo RSpec/VerifiedDoubles
       else
         accessor
       end
     end
 
     let(:model_instance) do
-      double("model instance")
+      double("model instance") # rubocop:todo RSpec/VerifiedDoubles
     end
 
-    let(:method_accessor) { double("method accessor", attribute_name => raw_value) }
+    let(:method_accessor) { double("method accessor", attribute_name => raw_value) } # rubocop:todo RSpec/VerifiedDoubles
 
     let(:dig_accessor) do
-      double("dig accessor").tap do |dig|
+      double("dig accessor").tap do |dig| # rubocop:todo RSpec/VerifiedDoubles
         allow(dig).to receive(:dig) do |value|
           case value
           when attribute_name then raw_value
@@ -70,7 +70,7 @@ RSpec.describe FormattedAttributes::Definition do
     end
 
     let(:bracket_accessor) do
-      double("bracket accessor").tap do |ba|
+      double("bracket accessor").tap do |ba| # rubocop:todo RSpec/VerifiedDoubles
         allow(ba).to receive(:[]) do |value|
           case value
           when attribute_name then raw_value
@@ -105,7 +105,7 @@ RSpec.describe FormattedAttributes::Definition do
       end
 
       context "with a blank model" do
-        let(:model_instance) { maybe_wrap_container double("blank model", blank?: true) }
+        let(:model_instance) { maybe_wrap_container double("blank model", blank?: true) } # rubocop:todo RSpec/VerifiedDoubles
 
         it "returns nil" do
           expect(definition.extract_raw_from(model_instance)).to be_nil
