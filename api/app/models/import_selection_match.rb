@@ -13,7 +13,7 @@ class ImportSelectionMatch < ApplicationRecord
   alias end_node node_uuid
 
   scope :sans_range, -> { where(start_char: nil) }
-  scope :with_range, -> { where.not(start_char: nil, end_char: nil) }
+  scope :with_range, -> { where.not(start_char: nil, end_char: nil) } # rubocop:todo Rails/WhereNotWithMultipleConditions
   def has_range?
     start_char? && end_char?
   end

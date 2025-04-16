@@ -11,7 +11,7 @@ RSpec.describe V1::ProjectSerializer do
       FactoryBot.create(:project, title: "test")
       Project.filtered(keyword: "test")
     end
-    let(:subject) { described_class.new(object, include: [:texts], params: { full: true }) }
+    let(:subject) { described_class.new(object, include: [:texts], params: { full: true }) } # rubocop:todo RSpec/SubjectDeclaration
 
     it "successfully serializes the object to a String value" do
       expect(subject.serialized_json).to be_instance_of String
@@ -23,7 +23,7 @@ RSpec.describe V1::ProjectSerializer do
       FactoryBot.create(:project)
       return ProjectSummary.first
     end
-    let(:subject) { described_class.new(object) }
+    let(:subject) { described_class.new(object) } # rubocop:todo RSpec/SubjectDeclaration
 
     it "does not include attributes or relationships that are not supported by project summaries" do
       expect(subject.serialized_json).to be_instance_of String
@@ -59,7 +59,7 @@ RSpec.describe V1::ProjectSerializer do
       let(:included_cb) { hash[:included].find { |o| o[:id] == toc_cb_id } }
       let(:text) { object.texts.first }
       let(:included_text) { hash[:included].find { |o| o[:id] == text.id } }
-      let(:subject) { described_class.new(object, include: [:texts, :content_blocks], params: { full: true, include_toc: [text.id] }) }
+      let(:subject) { described_class.new(object, include: [:texts, :content_blocks], params: { full: true, include_toc: [text.id] }) } # rubocop:todo RSpec/SubjectDeclaration
 
       it "includes the content blocks" do
         expect(included_cb).to be_a Hash
@@ -89,7 +89,7 @@ RSpec.describe V1::ProjectSerializer do
     context "when params includes a authorized_user" do
       let(:admin) { FactoryBot.create(:user, :admin) }
       let(:params) { { authority_user: admin, full: true } }
-      let(:subject) { described_class.new(object, include: [:texts], params: params) }
+      let(:subject) { described_class.new(object, include: [:texts], params: params) } # rubocop:todo RSpec/SubjectDeclaration
 
       it "has a populated abilities hash" do
         hash = subject.serializable_hash

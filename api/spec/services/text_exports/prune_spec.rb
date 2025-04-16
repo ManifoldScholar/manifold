@@ -10,7 +10,7 @@ RSpec.describe TextExports::Prune, interaction: true, packaging: true do
     end
   end
 
-  it "destroys the prunable exports" do
+  it "destroys the prunable exports" do # rubocop:todo RSpec/NoExpectationExample
     perform_within_expectation! do |e|
       e.to change(TextExport, :count).by(-1)
     end

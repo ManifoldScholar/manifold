@@ -13,7 +13,7 @@ RSpec.describe NotificationMailer, type: :mailer do
   end
   let(:flagged_comment) { FactoryBot.create(:comment, flags_count: 3) }
   let(:reading_group_membership) { FactoryBot.create(:reading_group_membership) }
-  let(:events) do
+  let(:events) do # rubocop:todo RSpec/OverwritingSetup
     {
       projects: Event
         .where(project: [project_one.id, project_two.id])

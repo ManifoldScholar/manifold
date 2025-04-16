@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe ProjectExportations::PerformJob, type: :job do
   let!(:project_exportation) { FactoryBot.create :project_exportation }
   it "calls the interaction" do
-    expect(ProjectExportations::Perform).to receive(:run!).once
+    expect(ProjectExportations::Perform).to receive(:run!).once # rubocop:todo RSpec/MessageSpies
 
     expect do
       described_class.perform_now project_exportation: project_exportation

@@ -34,7 +34,7 @@ RSpec.describe Utility::Counter do
   context "with a non-zero initial value" do
     let(:initial_value) { 7 }
 
-    it "resets to the initial value after counting" do
+    it "resets to the initial value after counting" do # rubocop:todo RSpec/NoExpectationExample
       test_counter! expected: 4 do |c|
         c.decrement 3
       end

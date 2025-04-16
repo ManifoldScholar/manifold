@@ -33,7 +33,7 @@ class ReadingGroupMembership < ApplicationRecord
 
   belongs_to :user, optional: false
   belongs_to :reading_group, optional: false
-  has_one :reading_group_membership_count
+  has_one :reading_group_membership_count # rubocop:todo Rails/HasManyOrHasOneDependent
 
   delegate :full_name, to: :user, prefix: true
   delegate :anonymous?, to: :reading_group, prefix: true

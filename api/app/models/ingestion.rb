@@ -50,11 +50,13 @@ class Ingestion < ApplicationRecord
   end
 
   %w(DEBUG INFO WARN ERROR FATAL UNKNOWN).each do |severity|
+    # rubocop:todo Naming/HeredocDelimiterNaming
     class_eval <<-EOT, __FILE__, __LINE__ + 1
       def #{severity.downcase}(message = nil, progname = nil, &block)
         add("#{severity}", message, progname, &block)
       end
     EOT
+    # rubocop:enable Naming/HeredocDelimiterNaming
   end
 
   before_validation :infer_kind!

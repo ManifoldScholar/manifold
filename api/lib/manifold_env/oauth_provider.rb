@@ -13,7 +13,7 @@ module ManifoldEnv
 
     CREDENTIAL_KEYS = %i(id secret).freeze
 
-    validates :credentials, presence: { message: "are unset" }
+    validates :credentials, presence: { message: "are unset" } # rubocop:todo Rails/I18nLocaleTexts
 
     attr_reader :name
 

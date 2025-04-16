@@ -28,7 +28,7 @@ module Analytics
       end
 
       def sub_placeholders(sql)
-        sql = super
+        sql = super # rubocop:todo Lint/ShadowedArgument
         sql.gsub(RESOURCE_PLACEHOLDER, quote(respond_to?(:resource) ? valid_resource.id : nil))
       end
     end

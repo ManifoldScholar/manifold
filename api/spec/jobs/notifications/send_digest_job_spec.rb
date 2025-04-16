@@ -30,8 +30,8 @@ RSpec.describe Notifications::SendDigestJob, type: :job do
     end
 
     it "sends a digest email to the user" do
-      expect(Notifications::SendDigest).to receive(:run).with(frequency: "daily", user: user).and_call_original
-      expect(NotificationMailer).to receive(:digest).with(user, "daily", a_kind_of(Hash)).and_call_original
+      expect(Notifications::SendDigest).to receive(:run).with(frequency: "daily", user: user).and_call_original # rubocop:todo RSpec/MessageSpies
+      expect(NotificationMailer).to receive(:digest).with(user, "daily", a_kind_of(Hash)).and_call_original # rubocop:todo RSpec/MessageSpies
 
       expect do
         described_class.perform_now user.id, "daily"

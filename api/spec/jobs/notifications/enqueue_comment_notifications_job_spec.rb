@@ -9,7 +9,7 @@ RSpec.describe Notifications::EnqueueCommentNotificationsJob, type: :job do
     let(:text_section) { FactoryBot.create(:text_section, text: text) }
     let(:parent_creator) { FactoryBot.create(:user) }
     let(:subject_creator) { FactoryBot.create(:user) }
-    let(:subject) { FactoryBot.create(:annotation, text_section: text_section, creator: subject_creator) }
+    let(:subject) { FactoryBot.create(:annotation, text_section: text_section, creator: subject_creator) } # rubocop:todo RSpec/SubjectDeclaration
     let(:editor) { FactoryBot.create(:user, :editor) }
     let(:project_editor) { FactoryBot.create(:user) }
     let(:author) { FactoryBot.create(:user) }

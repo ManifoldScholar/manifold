@@ -47,11 +47,11 @@ class Annotation < ApplicationRecord
           dependent: :destroy,
           inverse_of: :subject
 
-  has_one :annotation_node, -> { preload(ancestor_node: :children) }, inverse_of: :annotation
+  has_one :annotation_node, -> { preload(ancestor_node: :children) }, inverse_of: :annotation # rubocop:todo Rails/HasManyOrHasOneDependent
 
-  has_one :annotation_reading_group_membership
+  has_one :annotation_reading_group_membership # rubocop:todo Rails/HasManyOrHasOneDependent
   has_one :reading_group_membership, through: :annotation_reading_group_membership
-  has_many :annotation_membership_comments
+  has_many :annotation_membership_comments # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :membership_comments, through: :annotation_membership_comments, source: :comment
 
   # Validations
@@ -102,7 +102,7 @@ class Annotation < ApplicationRecord
   scope :only_annotations, -> { where(format: "annotation") }
   scope :only_highlights, -> { where(format: "highlight") }
   scope :created_by, ->(user) { where(creator: user) }
-  scope :sans_orphaned_from_text, -> { where.not(text_section: nil) }
+  scope :sans_orphaned_from_text, -> { where.not(text_section: nil) } # rubocop:todo Rails/DuplicateScope
   scope :by_text, lambda { |text|
     joins(:text_section).where(text_sections: { text: text }) if text.present?
   }
@@ -168,7 +168,7 @@ class Annotation < ApplicationRecord
   scope :with_orphaned, lambda { |orphaned|
     where.not(text_section: nil).where(orphaned: orphaned) if orphaned.present?
   }
-  scope :with_existing_text, lambda {
+  scope :with_existing_text, lambda { # rubocop:todo Rails/DuplicateScope
     where.not(text_section: nil)
   }
 

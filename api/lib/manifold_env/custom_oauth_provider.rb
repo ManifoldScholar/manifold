@@ -98,7 +98,7 @@ module ManifoldEnv
       end
     end
 
-    def build_strategy_class
+    def build_strategy_class # rubocop:todo Metrics/AbcSize
       provider = self
 
       Class.new(OmniAuth::Strategies::OAuth2) do

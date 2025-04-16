@@ -8,7 +8,7 @@ RSpec.describe Packaging::Exportation::ExportTextToEpubV3Job, packaging: true, t
 
   shared_examples_for "a called interaction" do
     it "calls the interaction" do
-      expect(Packaging::Exportation::ExportTextToEpubV3).to receive(:run!).with(force: force, text: text)
+      expect(Packaging::Exportation::ExportTextToEpubV3).to receive(:run!).with(force: force, text: text) # rubocop:todo RSpec/MessageSpies
 
       expect do
         described_class.perform_now(text, force: force)

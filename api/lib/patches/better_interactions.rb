@@ -220,6 +220,7 @@ module Patches
     # @option options [Symbol, nil] guard_target
     # @return [Boolean]
     # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:todo Metrics/PerceivedComplexity
     def transition_to!(target_state, on:, assimilate: false, check_if_transitionable: true, error: :something_went_wrong, guard_error: :cannot_transition, metadata: {}, **options)
       model = on.is_a?(Symbol) ? __send__(on) : on
 
@@ -239,6 +240,7 @@ module Patches
 
       halt!
     end
+    # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity, Metrics/ParameterLists
 
     # Ensure that a given model can attempt to trigger an event, purely based on its current state.
@@ -276,6 +278,7 @@ module Patches
     # @option options [Symbol, nil] guard_target
     # @return [Boolean]
     # rubocop:disable Metrics/CyclomaticComplexity, Metrics/ParameterLists
+    # rubocop:todo Metrics/PerceivedComplexity
     def trigger!(event, on:, assimilate: false, check_if_triggerable: true, error: :something_went_wrong, guard_error: :cannot_trigger, **options)
       model = on.is_a?(Symbol) ? __send__(on) : on
 
@@ -295,6 +298,7 @@ module Patches
 
       halt!
     end
+    # rubocop:enable Metrics/PerceivedComplexity
     # rubocop:enable Metrics/CyclomaticComplexity, Metrics/ParameterLists
 
     # @!endgroup
@@ -389,7 +393,7 @@ module Patches
       # rather than simply joining its parent (if any).
       #
       # @return [void]
-      def always_start_new_transaction!(value = true)
+      def always_start_new_transaction!(value = true) # rubocop:todo Style/OptionalBooleanParameter
         self.always_start_new_transaction = value
       end
 

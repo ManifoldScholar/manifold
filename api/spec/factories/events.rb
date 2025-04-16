@@ -21,13 +21,13 @@ FactoryBot.define do
     trait :resource_added do
       event_type { :resource_added }
 
-      subject { create(:resource, project: project) }
+      subject { create(:resource, project: project) } # rubocop:todo FactoryBot/FactoryAssociationWithStrategy
     end
 
     trait :text_added do
       event_type { :text_added }
 
-      subject { create(:text, project: project) }
+      subject { create(:text, project: project) } # rubocop:todo FactoryBot/FactoryAssociationWithStrategy
     end
 
     trait :text_annotated do
@@ -49,7 +49,7 @@ FactoryBot.define do
     trait :resource_collection_added do
       event_type { :resource_collection_added }
 
-      subject { create(:resource_collection, project: project) }
+      subject { create(:resource_collection, project: project) } # rubocop:todo FactoryBot/FactoryAssociationWithStrategy
     end
   end
 end

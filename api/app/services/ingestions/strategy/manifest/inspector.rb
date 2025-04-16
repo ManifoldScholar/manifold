@@ -54,8 +54,8 @@ module Ingestions
         def toc_start_section_item(items = toc)
           @toc_start_section_item ||= begin
             items.each do |item|
-              return item if item["start_section"].present?
-              return toc_start_section_item(item["children"]) if item["children"].present?
+              return item if item["start_section"].present? # rubocop:todo Lint/NoReturnInBeginEndBlocks
+              return toc_start_section_item(item["children"]) if item["children"].present? # rubocop:todo Lint/NoReturnInBeginEndBlocks
             end
 
             nil

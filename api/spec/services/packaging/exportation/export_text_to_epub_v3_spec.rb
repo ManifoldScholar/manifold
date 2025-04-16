@@ -20,14 +20,16 @@ RSpec.describe Packaging::Exportation::ExportTextToEpubV3, interaction: true, pa
     end
 
     it "handles failures" do
-      call_result = double("matcher result")
+      call_result = double("matcher result") # rubocop:todo RSpec/VerifiedDoubles
 
-      expect(call_result).to receive(:success).once
-      expect(call_result).to receive(:failure).once.and_yield("some arbitrary reason")
+      expect(call_result).to receive(:success).once # rubocop:todo RSpec/MessageSpies
+      expect(call_result).to receive(:failure).once.and_yield("some arbitrary reason") # rubocop:todo RSpec/MessageSpies
 
-      expect(book_pipeline).to receive_message_chain(:with_step_args, :call).and_yield(call_result)
+      # rubocop:todo RSpec/StubbedMock
+      expect(book_pipeline).to receive_message_chain(:with_step_args, :call).and_yield(call_result) # rubocop:todo RSpec/MessageChain, RSpec/StubbedMock
+      # rubocop:enable RSpec/StubbedMock
 
-      allow_any_instance_of(described_class).to receive(:book_pipeline).and_return(book_pipeline)
+      allow_any_instance_of(described_class).to receive(:book_pipeline).and_return(book_pipeline) # rubocop:todo RSpec/AnyInstance
 
       expect do
         @outcome = described_class.run text: text

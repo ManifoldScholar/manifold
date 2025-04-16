@@ -104,7 +104,7 @@ module Patches
       def as_case_statement(initial = nil, or_else: UNSET, only: [], except: [])
         quoted_expr = Arel::Nodes.build_quoted initial if initial.present?
 
-        statement = Arel::Nodes::Case.new(quoted_expr).tap do |statement|
+        statement = Arel::Nodes::Case.new(quoted_expr).tap do |statement| # rubocop:todo Lint/ShadowingOuterLocalVariable
           unless or_else == UNSET
             other_value = Arel::Nodes.build_quoted or_else
 
@@ -112,7 +112,7 @@ module Patches
           end
         end
 
-        constrain(only: only, except: except).each_with_object(statement) do |enum, statement|
+        constrain(only: only, except: except).each_with_object(statement) do |enum, statement| # rubocop:todo Lint/ShadowingOuterLocalVariable
           value = yield enum
 
           statement.when(enum.to_s).then(value)

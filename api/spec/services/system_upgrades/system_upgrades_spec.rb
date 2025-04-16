@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
 RSpec.describe SystemUpgrades do
-  class Test000100 < SystemUpgrades::AbstractVersion
+  # rubocop:todo RSpec/LeakyConstantDeclaration
+  class Test000100 < SystemUpgrades::AbstractVersion # rubocop:todo Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
     def perform!
-      logger.debug "Test"
+  logger.debug "Test" # rubocop:todo Layout/IndentationWidth
     end
   end
+  # rubocop:enable RSpec/LeakyConstantDeclaration
 
-  class Test000200 < SystemUpgrades::AbstractVersion
+  # rubocop:todo RSpec/LeakyConstantDeclaration
+  class Test000200 < SystemUpgrades::AbstractVersion # rubocop:todo Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
     def perform!
-      logger.debug "Test"
+  logger.debug "Test" # rubocop:todo Layout/IndentationWidth
     end
   end
+  # rubocop:enable RSpec/LeakyConstantDeclaration
 
   it "retrieves and orders upgrade version files", :aggregate_failures do
     upgrades = described_class.eager_load_upgrades!

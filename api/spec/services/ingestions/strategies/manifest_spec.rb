@@ -87,8 +87,8 @@ RSpec.describe Ingestions::Strategies::Manifest do
     include_examples "outcome assertions"
   end
 
-  context "when the manifest is composed of nested, remote sources", slow: true do
-    before(:all) do
+  context "when the manifest is composed of nested, remote sources", slow: true do # rubocop:todo RSpec/RepeatedExampleGroupDescription
+    before(:all) do # rubocop:todo RSpec/BeforeAfterAll
       Settings.instance.update_from_environment!
     end
 
@@ -105,8 +105,8 @@ RSpec.describe Ingestions::Strategies::Manifest do
     end
   end
 
-  context "when the manifest is composed of nested, remote sources", slow: true do
-    before(:all) do
+  context "when the manifest is composed of nested, remote sources", slow: true do # rubocop:todo RSpec/RepeatedExampleGroupDescription
+    before(:all) do # rubocop:todo RSpec/BeforeAfterAll
       Settings.instance.update_from_environment!
     end
 

@@ -53,7 +53,7 @@ RSpec.describe "Project Collections API", type: :request do
 
   describe "creates a collection" do
     let(:path) { api_v1_project_collections_path }
-    let(:subject) { FactoryBot.create(:subject) }
+    let(:subject) { FactoryBot.create(:subject) } # rubocop:todo RSpec/SubjectDeclaration
     let(:attributes) do
       {
         title: "Project Collection",
