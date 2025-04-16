@@ -51,9 +51,9 @@ class Text < ApplicationRecord
   end
   with_citable_children :text_sections
 
-  attribute :structure_titles, :indifferent_hash, default: {}
-  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: []
-  attribute :landmarks, Texts::LandmarkEntry.to_array_type, default: []
+  attribute :structure_titles, :indifferent_hash, default: -> { {} }
+  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: -> { [] }
+  attribute :landmarks, Texts::LandmarkEntry.to_array_type, default: -> { [] }
 
   jsonb_accessor(
     :export_configuration,
@@ -106,9 +106,8 @@ class Text < ApplicationRecord
   delegate :texts_nav, to: :project, prefix: true, allow_nil: true
   delegate :journal_nav, to: :project, prefix: true, allow_nil: true
 
-  before_validation :ensure_toc_uids!
-
   after_initialize :migrate_toc!
+  before_validation :ensure_toc_uids!
 
   validate :validate_start_text_section
   validate :validate_toc
@@ -495,5 +494,4 @@ class Text < ApplicationRecord
 
     stylesheets.create global_stylesheet_attributes
   end
-
 end

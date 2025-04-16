@@ -1,7 +1,5 @@
 require "rails_helper"
 
-# rubocop:disable Layout/LineLength
-# rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::Stylesheet do
   let(:scope_selector) { Rails.configuration.manifold.css_validator.defaults.class_scope }
   let(:dark_scope_selector) { Rails.configuration.manifold.css_validator.defaults.dark_scope }
@@ -284,5 +282,4 @@ RSpec.describe Validator::Stylesheet do
     results = validator.validate(selector)
     expect(results).to eq_ignoring_whitespace "#{valid}"
   end
-
 end

@@ -56,7 +56,6 @@ RSpec.describe Ingestions::Ingestor do
     end
 
     context "when Google Doc", slow: true do
-
       before(:all) do
         Settings.instance.update_from_environment!
       end
@@ -143,14 +142,14 @@ RSpec.describe Ingestions::Ingestor do
         it "does not change the text's slug" do
           expect do
             described_class.run ingestion: ingestion
-          end.to_not change(text, :slug)
+          end.not_to change(text, :slug)
         end
 
         it "does not revalidate user stylesheets" do
           expect do
             described_class.run ingestion: ingestion
             userStylesheet.reload
-          end.to_not change(userStylesheet, :styles)
+          end.not_to change(userStylesheet, :styles)
         end
       end
 
@@ -161,7 +160,7 @@ RSpec.describe Ingestions::Ingestor do
 
           expect do
             described_class.run ingestion: ingestion
-          end.to_not change { text.reload.title }
+          end.not_to change { text.reload.title }
         end
       end
     end

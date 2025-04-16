@@ -30,7 +30,6 @@ module ExportStrategies
     # @yieldparam [Object] connection
     # @yieldreturn [Dry::Monads::Result, nil]
     # @return [Dry::Monads::Result]
-    # rubocop:disable Metrics/MethodLength
     def connect!(&block)
       raise "Must provide a block to connect!" unless block_given?
 
@@ -52,7 +51,6 @@ module ExportStrategies
         clean_up!
       end
     end
-    # rubocop:enable Metrics/MethodLength
 
     # @see ExportStrategies::AbstractUploader#call
     # @param [ExportStrategies::UploadPayload] payload
@@ -71,10 +69,10 @@ module ExportStrategies
     # @yieldparam [Utility::Captor::CaptureAttempt] captor
     # @yieldreturn [void]
     # @return [Object]
-    def capture(**options, &block)
+    def capture(**options, &)
       raise "Block required" unless block_given?
 
-      Utility::Captor.capture(options, &block)
+      Utility::Captor.capture(options, &)
     end
 
     # @abstract

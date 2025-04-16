@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Factory::Event do
-
   let(:factory) { Factory::Event.new }
 
   it "resolves a subject keyword argument to an event subject" do
@@ -25,14 +24,14 @@ RSpec.describe Factory::Event do
   end
 
   it "raises an exception when it's not given a subject" do
-    expect{factory.create(EventType[:project_created])}
+    expect { factory.create(EventType[:project_created]) }
       .to raise_error(Factory::Errors::NoEventSubject)
   end
 
   it "creates a valid event" do
     project = FactoryBot.create(:project)
     event = factory.create(EventType[:project_created], subject: project)
-    match = I18n.t("services.factory.event.event_title.project_created")
+    I18n.t("services.factory.event.event_title.project_created")
     expect(event).to be_valid
   end
 
@@ -79,9 +78,9 @@ RSpec.describe Factory::Event do
 
   it "raises an exception if the subject can't be resolved to a project" do
     user = FactoryBot.create(:user)
-    expect{
+    expect do
       factory.create(EventType[:text_added], subject: user)
-    }.to raise_error(Factory::Errors::NoEventProject)
+    end.to raise_error(Factory::Errors::NoEventProject)
   end
 
   it "correctly reports whether an i18n key is set" do
@@ -97,5 +96,4 @@ RSpec.describe Factory::Event do
     event = factory.create(EventType[:text_annotated], subject: annotation)
     expect(event.attribution_name).to eq "Alexander Hamilton"
   end
-
 end

@@ -27,6 +27,5 @@ module ResourceImports
 
       ResourceImportRow::ROW_TYPE_IGNORED
     end
-
   end
 end

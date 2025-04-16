@@ -18,5 +18,4 @@ class CommentDecorator < ApplicationDecorator
                      annotation_anchor: "annotation-#{subject.id}")
     end
   end
-
 end

@@ -21,5 +21,4 @@ class AnnotationDecorator < ApplicationDecorator
                    annotation_anchor: "annotation-#{id}")
   end
   alias subject_url reader_url
-
 end

@@ -2,7 +2,6 @@ module APIDocs
   module Definitions
     module Resources
       class Favorite
-
         REQUIRED_CREATE_RELATIONSHIPS = [:favoritable].freeze
 
         class << self

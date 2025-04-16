@@ -34,7 +34,7 @@ RSpec.describe Utility::IndexMap do
     let!(:item_1) { index_class.new "foo" }
     let!(:item_2) { index_class.new "bar" }
 
-    before :each do
+    before do
       index_map << item_1
       index_map.store item_2
     end
@@ -45,7 +45,7 @@ RSpec.describe Utility::IndexMap do
     its(:length) { is_expected.to eq 2 }
     its(:first) { is_expected.to eq item_1 }
     its(:last) { is_expected.to eq item_2 }
-    its(:to_a) { is_expected.to match_array [item_1, item_2] }
+    its(:to_a) { is_expected.to contain_exactly(item_1, item_2) }
     its(:to_h) { is_expected.to eq item_1.identifier => item_1, item_2.identifier => item_2 }
 
     it "can look up by indexed key" do

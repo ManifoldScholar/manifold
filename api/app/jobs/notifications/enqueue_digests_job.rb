@@ -1,6 +1,5 @@
 module Notifications
   class EnqueueDigestsJob < ApplicationJob
-
     # @param [String] frequency
     def perform(frequency)
       return unless frequency.present?

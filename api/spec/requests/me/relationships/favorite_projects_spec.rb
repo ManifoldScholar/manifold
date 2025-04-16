@@ -8,7 +8,7 @@ RSpec.describe "My Favorite Projects API", type: :request do
     context "when the user is not authenticated" do
       it "has a 401 status code" do
         get path
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
@@ -16,10 +16,10 @@ RSpec.describe "My Favorite Projects API", type: :request do
       let(:favorite_project) { FactoryBot.create(:project) }
       let(:favorite) { reader.favorite(favorite_project) }
 
-      before(:each) { favorite }
-      before(:each) { get path, headers: reader_headers }
+      before { favorite }
+      before { get path, headers: reader_headers }
 
-      let(:api_response) { api_response = JSON.parse(response.body) }
+      let(:api_response) { JSON.parse(response.body) }
 
       it "sends the correct favorite project" do
         expect(api_response["data"][0]["id"]).to eq favorite_project.id
@@ -30,7 +30,7 @@ RSpec.describe "My Favorite Projects API", type: :request do
       end
 
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end

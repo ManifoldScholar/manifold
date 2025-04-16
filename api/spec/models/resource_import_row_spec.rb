@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe ResourceImportRow, type: :model, slow: true do
-
   include_context "resource import"
 
   def make_row(resource_values, map)
@@ -11,7 +10,7 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
     row
   end
 
-  let(:base) {
+  let(:base) do
     {
       "title" => "The Borg",
       "kind" => "",
@@ -63,12 +62,12 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
       "resource_collections" => "",
       "special_instructions" => ""
     }
-  }
+  end
 
-  let(:column_map) {
-    keys = Array (1..base.length)
+  let(:column_map) do
+    keys = Array(1..base.length)
     keys.zip(base.keys).to_h
-  }
+  end
 
   let(:image_values) do
     {
@@ -169,22 +168,20 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
 
   it "is invalid without a resource_import" do
     rir = FactoryBot.build(:resource_import_row, resource_import: nil)
-    expect(rir).to_not be_valid
+    expect(rir).not_to be_valid
   end
 
   it "enqueues an Import job when its state transitions to queued" do
     rir = make_row(image_values, column_map)
     ActiveJob::Base.queue_adapter = :test
-    expect {
+    expect do
       rir.state_machine.transition_to(:queued)
-    }.to have_enqueued_job(ResourceImportRows::ImportJob)
+    end.to have_enqueued_job(ResourceImportRows::ImportJob)
   end
 
   describe "after importing" do
-
     RSpec.shared_examples "Imported resource rows" do |type|
       context "a valid #{type} resource row" do
-
         let(:row) { make_row(eval("#{type}_values"), column_map) }
 
         it "the resource exists" do
@@ -221,7 +218,6 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
     include_examples "Imported resource rows", "presentation"
     include_examples "Imported resource rows", "interactive"
 
-
     # Generating styles in tests is too slow, but this test was useful during
     # development, so I'm leaving it for now --ZD
     #
@@ -234,7 +230,6 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
     # end
 
     context "when the resource row is invalid" do
-
       it "include the serialized resource errors" do
         row = FactoryBot.create(:resource_import_row)
         row.state_machine.transition_to(:importing)
@@ -246,7 +241,6 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
         row.state_machine.transition_to(:importing)
         expect(row.state_machine.in_state?(:failed)).to be true
       end
-
     end
 
     context "when the resource row is marked skip" do
@@ -276,7 +270,5 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
         end
       end
     end
-
   end
-
 end

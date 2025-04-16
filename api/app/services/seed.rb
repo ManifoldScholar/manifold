@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength, Metrics/MethodLength
+# rubocop:disable Layout/LineLength
 class Seed
   extend ActiveModel::Callbacks
 
@@ -105,4 +105,4 @@ class Seed
     end
   end
 end
-# rubocop:enable Layout/LineLength, Metrics/MethodLength
+# rubocop:enable Layout/LineLength

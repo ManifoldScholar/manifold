@@ -196,7 +196,6 @@ class ApplicationController < ActionController::API
     # @param [Boolean] authorize
     # @yieldreturn [ActiveRecord::Relation]
     # @return [void]
-    # rubocop:disable Lint/UnusedMethodArgument
     def resourceful!(model, authorize: true, **other_options, &model_scope)
       include API::V1::Resourceful
 
@@ -220,5 +219,4 @@ class ApplicationController < ActionController::API
       yield
     end
   end
-
 end

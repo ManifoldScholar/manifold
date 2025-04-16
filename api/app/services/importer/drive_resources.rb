@@ -7,7 +7,6 @@ module Importer
   # This class imports an existing project's resources into Manifold from a Google drive
   # sheet and a google drive directory
   class DriveResources
-
     REQUIRED_RESOURCE_COLUMNS = %w(Title Filename).freeze
     REQUIRED_COLLECTION_COLUMNS = %w(Title Thumbnail).freeze
     COLLECTION_SIMPLE_ATTRIBUTES = {
@@ -192,7 +191,7 @@ module Importer
 
     def update_boolean_attributes(model, row, boolean_attributes)
       boolean_attributes.each do |sheet_attr, model_attr|
-        value = TRUTHY_VALUES.include?(row[sheet_attr]) ? true : false
+        value = TRUTHY_VALUES.include?(row[sheet_attr]) || false
         model.send("#{model_attr}=", value)
       end
     end
@@ -264,7 +263,7 @@ module Importer
     def fingerprint(row)
       candidates = ["Local ID", "Filename", "URL", "Title"]
       field = candidates.detect do |candidate|
-        row.key?(candidate) && !row[candidate].blank?
+        row.key?(candidate) && row[candidate].present?
       end
       fingerprint = Digest::MD5.hexdigest(row[field])
       @logger.log_fingerprint(fingerprint)
@@ -273,8 +272,8 @@ module Importer
 
     def validate_resources_sheet
       raise_missing_sheet_error("resources") if resources_sheet.nil?
-      raise_missing_column_error(resources_sheet) unless
-        (REQUIRED_RESOURCE_COLUMNS - Helpers::List.new(resources_sheet).keys).blank?
+      raise_missing_column_error(resources_sheet) if
+        (REQUIRED_RESOURCE_COLUMNS - Helpers::List.new(resources_sheet).keys).present?
     end
 
     def validate_spreadsheet
@@ -283,8 +282,8 @@ module Importer
 
     def validate_collections_sheet
       raise_missing_sheet_error("collections") if collections_sheet.nil?
-      raise_missing_column_error(collections_sheet) unless
-        (REQUIRED_COLLECTION_COLUMNS - Helpers::List.new(collections_sheet).keys).blank?
+      raise_missing_column_error(collections_sheet) if
+        (REQUIRED_COLLECTION_COLUMNS - Helpers::List.new(collections_sheet).keys).present?
     end
 
     def find_or_initialize_resource(fingerprint)

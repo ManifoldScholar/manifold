@@ -1,7 +1,6 @@
 require "swagger_helper"
 
 RSpec.describe "Test Mail", type: :request do
-
   include_context("authenticated request")
 
   path "/test_mails" do

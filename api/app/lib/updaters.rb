@@ -81,7 +81,7 @@ module Updaters
     return unless attachment_fields.count.positive?
 
     attachment_fields.each do |field|
-      remove_key = "remove_#{field}".to_sym
+      remove_key = :"remove_#{field}"
       remove_param = attr.extract!(remove_key)[remove_key]
       attachment = attachment_from_params!(attr, field, model)
       attr[field] = attachment unless attachment.nil? || remove_param

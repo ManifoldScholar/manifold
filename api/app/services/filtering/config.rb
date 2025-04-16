@@ -12,7 +12,7 @@ module Filtering
       option :order_scope_name, Filtering::Types::Symbol, default: proc { :with_order }
     end
 
-    SCOPE_PATTERN = /\A(?:by|with)_(?<param_name>.+)$/.freeze
+    SCOPE_PATTERN = /\A(?:by|with)_(?<param_name>.+)$/
 
     EXCLUDED_SCOPES = %i[
       by_cached_role

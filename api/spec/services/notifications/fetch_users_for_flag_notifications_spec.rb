@@ -12,14 +12,14 @@ RSpec.describe Notifications::FetchUsersForFlagNotification do
       editor.update(notification_preferences_by_kind: do_notify)
       flag = FactoryBot.create(:flag)
       outcome = described_class.run flag: flag
-      expect(outcome.result.include? editor).to be true
+      expect(outcome.result.include?(editor)).to be true
     end
 
     it "the returned users does not include the editor when the editor does not want notification" do
       editor.update(notification_preferences_by_kind: do_not_notify)
       flag = FactoryBot.create(:flag)
       outcome = described_class.run flag: flag
-      expect(outcome.result.include? editor).to be false
+      expect(outcome.result.include?(editor)).to be false
     end
   end
 end

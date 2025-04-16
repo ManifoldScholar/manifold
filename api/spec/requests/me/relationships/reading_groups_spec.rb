@@ -7,10 +7,10 @@ RSpec.describe "My Reading Groups API", type: :request do
     let(:path) { api_v1_me_relationships_reading_groups_path }
 
     context "when the user is not authenticated" do
-      before(:each) { get path }
+      before { get path }
 
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe "My Reading Groups API", type: :request do
         end
 
         it "has a 200 status code" do
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end

@@ -5,10 +5,11 @@ RSpec.describe "Project Uncollected Resorces API", type: :request do
 
   describe "sends a list of uncollected project resources" do
     let(:path) { api_v1_project_relationships_uncollected_resources_path(project) }
-    before(:each) { get path }
+    before { get path }
+
     describe "the response" do
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end

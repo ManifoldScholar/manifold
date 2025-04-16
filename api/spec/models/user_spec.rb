@@ -19,37 +19,37 @@ RSpec.describe User, type: :model do
 
   it "should not be valid without a password" do
     user = FactoryBot.build(:user, password: nil, password_confirmation: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should be not be valid with a short password" do
     user = FactoryBot.build(:user, password: "short", password_confirmation: "short")
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid with a confirmation mismatch" do
     user = FactoryBot.build(:user, password: "short", password_confirmation: "long")
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid without email" do
     user = FactoryBot.build(:user, email: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid without first_name" do
     user = FactoryBot.build(:user, first_name: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid without last_name" do
     user = FactoryBot.build(:user, last_name: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid with an invalid role" do
     user = FactoryBot.build(:user, role: "dog")
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "has a correctly formatted full name" do
@@ -148,8 +148,8 @@ RSpec.describe User, type: :model do
     let(:last) { "HIOUFHAOASJDFIO" }
     let(:email) { "#{first}@#{last}.com" }
 
-    before(:each) do
-      user = FactoryBot.create(:user, first_name: first, last_name: last, email: email)
+    before do
+      FactoryBot.create(:user, first_name: first, last_name: last, email: email)
       User.reindex
       User.searchkick_index.refresh
     end
@@ -178,7 +178,7 @@ RSpec.describe User, type: :model do
 
     it "generates a reset password token" do
       user.generate_reset_token
-      expect(user.reset_password_token).to_not be_nil
+      expect(user.reset_password_token).not_to be_nil
     end
 
     it "expires the reset password token after one hour" do
@@ -197,7 +197,7 @@ RSpec.describe User, type: :model do
 
     it "can be generated automatically" do
       user.force_reset_password
-      expect(user.password).to_not eq("password")
+      expect(user.password).not_to eq("password")
       expect(user.password.length).to eq(12)
       expect(user).to be_valid
     end
@@ -215,7 +215,7 @@ RSpec.describe User, type: :model do
 
     it "should not be valid with an empty password" do
       user.password = user.password_confirmation = " "
-      expect(user).to_not be_valid
+      expect(user).not_to be_valid
     end
 
     it "should be valid with a new (valid) password" do

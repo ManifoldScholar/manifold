@@ -1,7 +1,6 @@
 require "swagger_helper"
 
 RSpec.describe "Feature", type: :request do
-
   let(:resource) { FactoryBot.create(:feature) }
 
   path "/features" do

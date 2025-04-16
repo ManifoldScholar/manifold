@@ -1,7 +1,6 @@
 module API
   module Proxy
     class IngestionSourcesController < ActionController::API
-
       def show
         source = IngestionSource.find(params[:id])
         raise ActionController::RoutingError unless source.attachment
@@ -22,7 +21,6 @@ module API
           disposition: "inline"
         )
       end
-
     end
   end
 end

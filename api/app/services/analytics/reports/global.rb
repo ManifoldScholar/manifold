@@ -1,7 +1,6 @@
 module Analytics
   module Reports
     class Global < Analytics::Reports::Builder
-
       TOP_PROJECTS_LIMIT = 5
       SEARCH_TERM_LIMIT = 5
 
@@ -202,7 +201,6 @@ module Analytics
       end
 
       # END ANALYTICS
-
     end
   end
 end

@@ -44,7 +44,6 @@ module Ingestions
 
         info key, kind: text_title.kind.titleize, name: text_title.value
       end
-
     end
   end
 end

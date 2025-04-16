@@ -1,6 +1,5 @@
 module DynamicMailer
   class Configuration
-
     def initialize(settings)
       @settings = settings
     end
@@ -66,6 +65,5 @@ module DynamicMailer
 
       value
     end
-
   end
 end

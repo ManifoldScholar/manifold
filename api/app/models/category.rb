@@ -1,6 +1,5 @@
 # Used to group texts and resources in a project
 class Category < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -31,5 +30,4 @@ class Category < ApplicationRecord
   def to_s
     title
   end
-
 end

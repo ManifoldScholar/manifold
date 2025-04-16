@@ -1,7 +1,6 @@
 module SystemUpgrades
   module Upgrades
     class Manifold010000 < SystemUpgrades::AbstractVersion
-
       def perform!
         delete_creatorless_annotations
       end
@@ -21,7 +20,6 @@ module SystemUpgrades
           .where("users.id is null")
           .destroy_all
       end
-
     end
   end
 end

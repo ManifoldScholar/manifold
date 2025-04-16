@@ -7,6 +7,5 @@ module Updaters
     def attachment_fields
       [:cover, :social_image]
     end
-
   end
 end

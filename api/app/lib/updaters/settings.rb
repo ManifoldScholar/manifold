@@ -24,6 +24,5 @@ module Updaters
 
       ::SettingsService::AdjustGoogleConfig.run! config: data
     end
-
   end
 end

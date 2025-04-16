@@ -13,17 +13,19 @@ RSpec.describe "My Annotations API", type: :request do
     end
 
     context "when the user is not authenticated" do
-      before(:each) { get path }
+      before { get path }
+
       it "has a 401 status code" do
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
     context "when the user is a reader" do
-      before(:each) do
+      before do
         annotation
         get path, headers: reader_headers, params: params
       end
+
       let(:api_response) { JSON.parse(response.body) }
 
       describe "the response" do
@@ -32,7 +34,7 @@ RSpec.describe "My Annotations API", type: :request do
         end
 
         it "has a 200 status code" do
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
 
         it "includes meta[:annotated] stating whether the user annotated the text" do

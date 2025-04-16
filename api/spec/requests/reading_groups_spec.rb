@@ -5,19 +5,19 @@ RSpec.describe "Reading Groups API", type: :request do
 
   describe "responds with a list of reading groups" do
     describe "the response" do
-      before(:each) { get api_v1_reading_groups_path, headers: headers }
+      before { get api_v1_reading_groups_path, headers: headers }
 
       context "when the user is a reading group owner" do
         let(:headers) { reader_headers }
         it "has a 403 status code" do
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
 
       context "when the user is an admin" do
         let(:headers) { admin_headers }
         it "has a 200 status code" do
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -26,13 +26,13 @@ RSpec.describe "Reading Groups API", type: :request do
   describe "sends a reading group" do
     describe "the response" do
       context "when the id is provided" do
-        before(:each) { get api_v1_reading_group_path(reading_group), headers: headers }
+        before { get api_v1_reading_group_path(reading_group), headers: headers }
 
         context "when the user is the reading group owner" do
           let(:headers) { reader_headers }
 
           it "has a 200 status code" do
-            expect(response).to have_http_status(200)
+            expect(response).to have_http_status(:ok)
           end
         end
 
@@ -40,7 +40,7 @@ RSpec.describe "Reading Groups API", type: :request do
           let(:headers) { another_reader_headers }
 
           it "has a 403 status code" do
-            expect(response).to have_http_status(403)
+            expect(response).to have_http_status(:forbidden)
           end
         end
 
@@ -48,19 +48,19 @@ RSpec.describe "Reading Groups API", type: :request do
           let(:headers) { admin_headers }
 
           it "has a 200 status code" do
-            expect(response).to have_http_status(200)
+            expect(response).to have_http_status(:ok)
           end
         end
       end
 
       context "when the invitation code is provided" do
-        before(:each) { get api_v1_reading_group_path(reading_group.invitation_code), headers: headers }
+        before { get api_v1_reading_group_path(reading_group.invitation_code), headers: headers }
 
         context "when the user is not in the reading group" do
           let(:headers) { another_reader_headers }
 
           it "has a 200 status code" do
-            expect(response).to have_http_status(200)
+            expect(response).to have_http_status(:ok)
           end
         end
       end
@@ -84,34 +84,32 @@ RSpec.describe "Reading Groups API", type: :request do
         end
 
         it "has a 200 OK status code" do
-          patch path, headers: headers, params: build_json_payload()
-          expect(response).to have_http_status(200)
+          patch path, headers: headers, params: build_json_payload
+          expect(response).to have_http_status(:ok)
         end
       end
     end
 
     context "when the user is not the reading group owner" do
-
       let(:headers) { another_reader_headers }
-      let(:metadata) {{ name: "This is a new name" }}
+      let(:metadata) { { name: "This is a new name" } }
 
       describe "the response" do
         it "has a 403 status code" do
-          patch path, headers: headers, params: build_json_payload()
-          expect(response).to have_http_status(403)
+          patch path, headers: headers, params: build_json_payload
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
 
     context "when the user is an admin" do
-
       let(:headers) { admin_headers }
-      let(:metadata) {{ name: "This is a new name" }}
+      let(:metadata) { { name: "This is a new name" } }
 
       describe "the response" do
         it "has a 200 status code" do
-          patch path, headers: headers, params: build_json_payload()
-          expect(response).to have_http_status(200)
+          patch path, headers: headers, params: build_json_payload
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -151,7 +149,7 @@ RSpec.describe "Reading Groups API", type: :request do
       end.to change(ReadingGroup, :count).by(10)
         .and change(ThrottledRequest, :count).by(1)
 
-      expect(response).to have_http_status(503)
+      expect(response).to have_http_status(:service_unavailable)
     end
 
     context "when the user has an unconfirmed email" do
@@ -275,32 +273,29 @@ RSpec.describe "Reading Groups API", type: :request do
     let(:path) { api_v1_reading_group_path(reading_group) }
 
     context "when the user is an admin" do
-
       let(:headers) { admin_headers }
 
       it "has a 204 NO CONTENT status code" do
         delete path, headers: headers
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:no_content)
       end
     end
 
     context "when the user is the creator" do
-
       let(:headers) { reader_headers }
 
       it "has a 204 NO CONTENT status code" do
         delete path, headers: headers
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:no_content)
       end
     end
 
     context "when the user is the not the creator" do
-
       let(:headers) { another_reader_headers }
 
       it "has a 403 FORBIDDEN status code" do
         delete path, headers: headers
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end
@@ -330,7 +325,7 @@ RSpec.describe "Reading Groups API", type: :request do
       it "is forbidden" do
         expect_request.to keep_the_same(ReadingGroup, :count)
 
-        expect(response).to have_http_status 403
+        expect(response).to have_http_status :forbidden
       end
     end
 

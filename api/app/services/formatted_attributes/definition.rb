@@ -123,7 +123,7 @@ module FormattedAttributes
 
       @attribute_name = attribute.to_s.freeze
 
-      @key = @path.gsub(/\./, "__").to_sym.freeze
+      @key = @path.gsub('.', "__").to_sym.freeze
 
       @methods_module = FormattedAttributes::Methods.new(self)
 

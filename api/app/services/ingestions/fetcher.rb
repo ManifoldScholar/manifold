@@ -16,6 +16,5 @@ module Ingestions
       info "services.ingestions.fetcher.log.download_external",
            url: url
     end
-
   end
 end

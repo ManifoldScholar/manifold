@@ -3,7 +3,6 @@ using Refinements::HandleRenamedCollections
 #
 # Its intention is to divorce all dependencies on Paperclip itself so that migrations
 # will continue to work even after we eventually remove the Paperclip gem.
-# rubocop:disable Metrics/MethodLength
 module PaperclipMigrator
   FIELD_NAMES = %w[file_name file_size content_type updated_at].freeze
   HASH_DATA = ":class/:attachment/:id/:style/:updated_at".freeze
@@ -216,8 +215,8 @@ module PaperclipMigrator
     # @return [{ Symbol => { Symbol => Object }}] styles mapped to shrine data objects
     # @return [{ Symbol => Object }] when there is only one style
     def to_shrine_data
-      style_names.each_with_object({}) do |style_name, h|
-        h[style_name] = shrine_data_for(style_name)
+      style_names.index_with do |style_name|
+        shrine_data_for(style_name)
       end.compact.tap do |h|
         return h[default_style] unless has_additional_styles?
       end
@@ -299,4 +298,3 @@ module PaperclipMigrator
     end
   end
 end
-# rubocop:enable Metrics/MethodLength

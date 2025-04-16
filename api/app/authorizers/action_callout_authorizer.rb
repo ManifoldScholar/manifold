@@ -1,5 +1,4 @@
 class ActionCalloutAuthorizer < ApplicationAuthorizer
-
   # By default, we defer to {calloutable#updatable_by?}.
   def default(_adjective, user, options = {})
     with_calloutable { |p| p.updatable_by? user, options }
@@ -30,9 +29,9 @@ class ActionCalloutAuthorizer < ApplicationAuthorizer
     with_calloutable { |p| p.fully_readable_by? user, options }
   end
 
-  def with_calloutable(&block)
-    return with_journal(&block) if resource.calloutable.is_a? Journal
-    return with_project(&block) if resource.calloutable.is_a? Project
+  def with_calloutable(&)
+    return with_journal(&) if resource.calloutable.is_a? Journal
+    return with_project(&) if resource.calloutable.is_a? Project
 
     false
   end
@@ -44,5 +43,4 @@ class ActionCalloutAuthorizer < ApplicationAuthorizer
       true
     end
   end
-
 end

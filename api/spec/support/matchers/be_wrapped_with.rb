@@ -16,4 +16,3 @@ RSpec::Matchers.define :be_wrapped_with do |tagname|
     "checks to see if the provided string is wrapped in a tag"
   end
 end
-

@@ -17,7 +17,7 @@ RSpec.describe Entitlements::ProcessImportJob, type: :job do
     expect do
       described_class.perform_now import
     end.to(
-      change { import.current_state(force_reload: true ) }.from("pending").to("success")
+      change { import.current_state(force_reload: true) }.from("pending").to("success")
       .and(change(EntitlementImportRow, :count).by_at_least(6))
       .and(change(Entitlement, :count).by_at_least(1))
     )

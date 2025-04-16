@@ -10,7 +10,6 @@ RSpec.describe ContentBlock do
                               req_attr: :string
 
     validates :req_attr, presence: true
-
   end
 
   let(:content_block) { FactoryBot.create(:content_block) }
@@ -26,7 +25,7 @@ RSpec.describe ContentBlock do
 
   describe "#reference_configurations" do
     it "returns an array of Content::ReferenceConfigurations" do
-      expect(content_block.reference_configurations).to all(is_a? Content::ReferenceConfiguration)
+      expect(content_block.reference_configurations).to all(is_a?(Content::ReferenceConfiguration))
     end
   end
 
@@ -77,7 +76,7 @@ RSpec.describe ContentBlock do
 
     it "does not include non-render attribute errors" do
       expect(subject.errors.attribute_names).to include :req_attr
-      expect(subject.render_errors.keys).to_not include :req_attr
+      expect(subject.render_errors.keys).not_to include :req_attr
     end
   end
 
@@ -85,7 +84,7 @@ RSpec.describe ContentBlock do
     let(:subject) { self.class::RenderBlock.create(project: FactoryBot.create(:project)) }
 
     it "returns an array of incomplete render attributes" do
-      expect(subject.incomplete_render_attributes).to match_array [:render_attr_a, :render_attr_b]
+      expect(subject.incomplete_render_attributes).to contain_exactly(:render_attr_a, :render_attr_b)
     end
   end
 end

@@ -5,10 +5,11 @@ RSpec.describe "Text Text Sections API", type: :request do
   let(:path) { api_v1_text_relationships_text_sections_path(text) }
 
   describe "sends text text sections" do
-    before(:each) { get path }
+    before { get path }
+
     describe "the response" do
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end

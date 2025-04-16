@@ -1,6 +1,5 @@
 module Analytics
   class RecordEvent < ActiveInteraction::Base
-
     VIEW_EVENT_MATCHER = "view resource".freeze
     SEARCH_EVENT_MATCHER = "search resource".freeze
     SHARE_EVENT_MATCHER = "share".freeze
@@ -14,7 +13,6 @@ module Analytics
     object :request, class: ActionDispatch::Request, default: nil
 
     class << self
-      # rubocop:disable Metrics/MethodLength
       def record_event(inputs)
         interaction = case inputs[:name]
                       when VIEW_EVENT_MATCHER
@@ -36,7 +34,6 @@ module Analytics
 
         interaction.run inputs
       end
-      # rubocop:enable Metrics/MethodLength
     end
 
     private
@@ -59,6 +56,5 @@ module Analytics
     def valid_visitor_token
       @valid_visitor_token ||= valid_visitor_token || request.headers["HTTP_VISITOR_TOKEN"]
     end
-
   end
 end

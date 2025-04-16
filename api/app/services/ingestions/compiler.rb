@@ -1,6 +1,5 @@
 module Ingestions
   class Compiler < AbstractInteraction
-
     hash :manifest, strip: false
 
     def execute

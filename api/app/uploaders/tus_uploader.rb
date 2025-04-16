@@ -30,5 +30,4 @@ class TusUploader < Shrine
     # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/PerceivedComplexity
   end
-
 end

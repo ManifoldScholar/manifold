@@ -1,5 +1,4 @@
 class NotificationMailer < ApplicationMailer
-
   before_action :hide_valediction
 
   def digest(user, frequency, digest_events)

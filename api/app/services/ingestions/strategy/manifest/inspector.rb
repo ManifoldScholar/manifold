@@ -2,7 +2,6 @@ module Ingestions
   module Strategy
     module Manifest
       class Inspector
-
         attr_reader :ingestion, :context, :source_map, :toc
 
         def initialize(context)

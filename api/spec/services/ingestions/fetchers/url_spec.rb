@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Ingestions::Fetchers::URL, slow: true do
-
   before(:all) do
     Settings.instance.update_from_environment!
     url = "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3"
@@ -12,5 +11,4 @@ RSpec.describe Ingestions::Fetchers::URL, slow: true do
   end
 
   include_examples "a fetcher"
-
 end

@@ -46,7 +46,7 @@ RSpec.shared_examples_for "class abilities" do |klass, abilities|
   end
 end
 
-RSpec.shared_examples_for "unauthenticated user" do |klass|
+RSpec.shared_context "unauthenticated user" do |klass|
   class_name = klass.name.underscore
 
   let(:subject) { anonymous_user }

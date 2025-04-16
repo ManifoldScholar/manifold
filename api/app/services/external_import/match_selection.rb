@@ -5,7 +5,7 @@ module ExternalImport
     boolean :reset_matches, default: false
 
     delegate :already_matched?, :short_body?, to: :import_selection
-    # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/AbcSize, Layout/DotPosition
+    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize
     def execute
       if already_matched?
         return unless reset_matches
@@ -54,7 +54,6 @@ module ExternalImport
 
       compose ExternalImport::MatchRange, import_selection_match: match
     end
-    # rubocop:enable Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/AbcSize, Layout/DotPosition
-
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Layout/DotPosition
   end
 end

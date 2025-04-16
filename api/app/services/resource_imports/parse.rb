@@ -32,6 +32,5 @@ module ResourceImports
       resource_import.resource_import_rows.reload
       resource_import
     end
-
   end
 end

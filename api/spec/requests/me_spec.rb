@@ -12,19 +12,21 @@ RSpec.describe "Me API", type: :request do
     let(:api_response) { JSON.parse(response.body) }
 
     context "when the user has not authenticated" do
-      before(:each) { patch path, params: update_params }
+      before { patch path, params: update_params }
+
       describe "the response" do
         it "has a 401 status" do
-          expect(response).to have_http_status(401)
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end
 
     context "when the user is a reader" do
       describe "the response" do
-        before(:each) { patch path, headers: reader_headers, params: update_params }
+        before { patch path, headers: reader_headers, params: update_params }
+
         it "has a 200 status" do
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
 
@@ -32,9 +34,10 @@ RSpec.describe "Me API", type: :request do
         let(:headers) { reader_headers }
         it("contains the updated first name") { expect_updated_param("firstName", "Janko") }
         it("contains the updated last name") { expect_updated_param("lastName", "Rambozo") }
+
         describe "the avatar" do
           let(:params) { build_json_payload(attributes: { avatar: image_params }) }
-          before(:each) { patch path, headers: reader_headers, params: params }
+          before { patch path, headers: reader_headers, params: params }
 
           it("has an updated avatar") {
             reader.reload
@@ -47,13 +50,15 @@ RSpec.describe "Me API", type: :request do
 
   describe "sends the current user" do
     context "when the user is a reader" do
-      before(:each) { get path, headers: reader_headers }
+      before { get path, headers: reader_headers }
+
       let(:api_response) { JSON.parse(response.body) }
 
       describe "the response" do
         it "has a 200 status code" do
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
+
         it "contains the logged in user ID" do
           expect(api_response["data"]["id"]).to eq reader.id
         end
@@ -61,11 +66,11 @@ RSpec.describe "Me API", type: :request do
     end
 
     context "when there is not an authenticated user" do
-      before(:each) { get path }
+      before { get path }
 
       describe "the response" do
         it "has a 401 status code" do
-          expect(response).to have_http_status(401)
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end

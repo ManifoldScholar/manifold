@@ -1,6 +1,5 @@
 module V1
   class MakerSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     abilities
@@ -13,6 +12,5 @@ module V1
     typed_attribute :suffix, Types::String.optional
     typed_attribute :prefix, Types::String.optional
     typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
-
   end
 end

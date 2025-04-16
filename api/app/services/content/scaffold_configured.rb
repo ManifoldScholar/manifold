@@ -1,6 +1,5 @@
 module Content
   class ScaffoldConfigured
-
     def initialize(configuration)
       @configuration = configuration
       @content_blocks = configured_blocks(configuration)

@@ -1,6 +1,5 @@
 module Analytics
   class RecordLeaveEventJob < ApplicationJob
-
     attr_reader :visit_id, :record_type, :record_id, :time
 
     # @param analytics_visit [String] The ID of the existing analytics visit
@@ -57,6 +56,5 @@ module Analytics
       ends_at = [time, visit.ended_at, event_ended_at].compact.max
       visit.update_attribute(:ended_at, ends_at)
     end
-
   end
 end

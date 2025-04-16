@@ -143,7 +143,7 @@ class JournalIssue < ApplicationRecord
   end
 
   def recently_updated?
-    updated? && updated_at >= Time.current - 1.week
+    updated? && updated_at >= 1.week.ago
   end
 
   def content_blocks

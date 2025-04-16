@@ -159,7 +159,7 @@ RSpec.configure do |config|
   config.include ActiveJob::TestHelper
 
   # Clean up any jobs before each run.
-  config.before(:each) do
+  config.before do
     clear_enqueued_jobs
   end
 
@@ -219,7 +219,7 @@ RSpec.configure do |config|
 
   # Allow elastic search for tests tagged with elasticsearch
 
-  config.around(:example) do |example|
+  config.around do |example|
     disable_web_connect = !example.metadata[:elasticsearch]
 
     if disable_web_connect

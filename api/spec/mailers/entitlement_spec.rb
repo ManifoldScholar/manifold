@@ -8,7 +8,7 @@ RSpec.describe EntitlementMailer, type: :mailer do
     let(:mail) { EntitlementMailer.created user, entitlement }
 
     it "renders the headers" do
-      expect(mail.subject).to match /access granted/i
+      expect(mail.subject).to match(/access granted/i)
       expect(mail.to).to eq([user.email])
     end
 
@@ -22,7 +22,7 @@ RSpec.describe EntitlementMailer, type: :mailer do
     let(:mail) { EntitlementMailer.pending pending_entitlement }
 
     it "renders the headers" do
-      expect(mail.subject).to match /pending/
+      expect(mail.subject).to match(/pending/)
       expect(mail.to).to eq([pending_entitlement.email])
     end
 

@@ -17,7 +17,7 @@ RSpec.describe "Ingestions API", type: :request do
     let(:path) { api_v1_project_relationships_ingestions_path(project) }
     let(:api_response) { JSON.parse(response.body) }
 
-    before(:each) do
+    before do
       post path, headers: admin_headers, params: valid_params
     end
 

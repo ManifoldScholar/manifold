@@ -31,6 +31,6 @@ RSpec.describe CollectionResource, type: :model do
                                            resource_collection: collection,
                                            resource: another_resource)
     collection.reload
-    expect(collection_resource).to_not be_valid
+    expect(collection_resource).not_to be_valid
   end
 end

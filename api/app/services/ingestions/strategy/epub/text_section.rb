@@ -5,7 +5,6 @@ module Ingestions
     module Epub
       # Inspects epub for a single text section
       class TextSection
-
         def initialize(strategy, spine_node, position)
           @spine_node = spine_node
           @context = strategy.context
@@ -112,7 +111,6 @@ module Ingestions
               key[:label].include?("Contents")
           end
         end
-
       end
     end
   end

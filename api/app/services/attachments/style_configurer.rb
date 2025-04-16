@@ -36,6 +36,5 @@ module Attachments
       !shrine_uploaded_file.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
     end
     # rubocop:enable Lint/Void
-
   end
 end

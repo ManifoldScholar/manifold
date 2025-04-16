@@ -37,8 +37,8 @@ class Entitlement < ApplicationRecord
                      }
 
   before_validation :infer_kind!
-  after_save :check_state!
   after_create :link_users!
+  after_save :check_state!
 
   validate :kind_must_be_known!
   validate :must_specify_correct_roles!
@@ -95,18 +95,17 @@ class Entitlement < ApplicationRecord
   # itself, e.g. to test the {SystemEntitlementKind}.
   #
   # @see #has_subject?
-  def for_system_entitlement?(&block)
+  def for_system_entitlement?(&)
     return false unless has_subject? SystemEntitlement
     return true unless block_given?
 
-    subject.instance_exec(subject, &block)
+    subject.instance_exec(subject, &)
   end
 
   # @param [#===, nil] kind
   def has_subject?(kind = nil)
     return subject.present? if kind.blank?
 
-    # rubocop:disable Style/CaseEquality
     kind === subject
     # rubocop:enable Style/CaseEquality
   end
@@ -138,10 +137,10 @@ class Entitlement < ApplicationRecord
   # @yield [m]
   # @yieldparam [Dry::Matcher] m
   # @yieldreturn [object]
-  def on_subject(&block)
+  def on_subject(&)
     raise "Must provide a block" unless block_given?
 
-    Entitlements::Subjects::Matcher.call(self, &block)
+    Entitlements::Subjects::Matcher.call(self, &)
   end
 
   # @!attribute [r] subject_url

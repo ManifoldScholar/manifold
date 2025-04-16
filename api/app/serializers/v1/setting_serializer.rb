@@ -119,7 +119,7 @@ module V1
       manifold_version: Types::Hash.schema(
         version: Types::String,
         segments: Types::Array.of(Types::Integer).optional.meta(
-          description: "An array of integers representing the major, minor and patch version. "\
+          description: "An array of integers representing the major, minor and patch version. " \
           "This will default to null if the version does not adhere to a semantic versioning format."
         )
       )

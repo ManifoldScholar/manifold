@@ -1,5 +1,4 @@
 RSpec::Matchers.define :eq_ignoring_whitespace do |compare|
-
   def strip(string)
     string.gsub(/\s+/, "")
   end
@@ -22,7 +21,6 @@ RSpec::Matchers.define :eq_ignoring_whitespace do |compare|
     to not match: #{object_instance}
     END
     out
-
   end
 
   description do

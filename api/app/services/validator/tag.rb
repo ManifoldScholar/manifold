@@ -1,7 +1,6 @@
 module Validator
   # Responsible for ensuring that a single tag (a Nokogiri node) is valid
   class Tag
-
     include StyleHelpers
 
     UNITS = %w(em ex % px cm mm in pt pc ch rem vh vw vmin vmax).freeze
@@ -211,6 +210,5 @@ module Validator
       unit = unit(value)
       (unit.nil? && value =~ /^[0-9]+$/) || unit == "px"
     end
-
   end
 end

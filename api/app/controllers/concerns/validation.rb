@@ -685,8 +685,8 @@ module Validation
     data << { meta: allowed_meta }
     data << { attributes: attributes } unless attributes.nil?
     unless relationships.nil?
-      relationships_config = relationships.each_with_object({}) do |relationship, config|
-        config[relationship] = { data: [:type, :id, :_remove] }
+      relationships_config = relationships.index_with do |relationship|
+        { data: [:type, :id, :_remove] }
       end
       data << { relationships: relationships_config }
     end
@@ -701,7 +701,7 @@ module Validation
     def filter_param_method_for(klass)
       prefix = klass.model_name.singular
 
-      :"#{prefix}_filter_params".yield_self do |filter_method|
+      :"#{prefix}_filter_params".then do |filter_method|
         filter_method if method_defined? filter_method
       end
     end

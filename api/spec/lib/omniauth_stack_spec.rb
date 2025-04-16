@@ -7,11 +7,11 @@ RSpec.describe OmniauthStack, middleware: true do
 
   subject { middleware }
 
-  before(:each) do
+  before do
     allow(middleware).to receive(:call_with_stack)
   end
 
-  context '#skip?' do
+  describe '#skip?' do
     it 'skips any path with /api' do
       expect(middleware.skip?(env_for('/api/v1/categories'))).to be_truthy
     end

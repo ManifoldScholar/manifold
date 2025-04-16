@@ -10,7 +10,6 @@ module API
         params.permit(param_config)
       end
 
-      # rubocop:disable Metrics/MethodLength
       def collaborators_from_roles(params, collaboratable_id, collaboratable_type)
         raw_params = params.to_unsafe_h
 
@@ -35,7 +34,6 @@ module API
           arr << @collaborator
         end
       end
-      # rubocop:enable Metrics/MethodLength
 
       def maker_param_present?
         maker_id = collaborator_filter_params[:maker]

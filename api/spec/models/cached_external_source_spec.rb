@@ -22,7 +22,7 @@ RSpec.describe CachedExternalSource, packaging: true, type: :model do
 
     its(:kind) { is_expected.to be_image }
 
-    it_should_behave_like "an unfetched external source"
+    it_behaves_like "an unfetched external source"
   end
 
   context "with a stylesheet" do
@@ -30,6 +30,6 @@ RSpec.describe CachedExternalSource, packaging: true, type: :model do
 
     its(:kind) { is_expected.to be_style }
 
-    it_should_behave_like "an unfetched external source"
+    it_behaves_like "an unfetched external source"
   end
 end

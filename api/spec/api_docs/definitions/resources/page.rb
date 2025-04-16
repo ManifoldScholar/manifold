@@ -2,7 +2,6 @@ module APIDocs
   module Definitions
     module Resources
       class Page
-
         REQUIRED_CREATE_ATTRIBUTES = [
           :title
         ].freeze

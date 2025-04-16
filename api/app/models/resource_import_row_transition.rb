@@ -1,5 +1,4 @@
 class ResourceImportRowTransition < ApplicationRecord
-
   belongs_to :resource_import_row, inverse_of: :resource_import_row_transitions
 
   after_destroy :update_most_recent, if: :most_recent?
@@ -15,5 +14,4 @@ class ResourceImportRowTransition < ApplicationRecord
 
     last_transition.update_column(:most_recent, true)
   end
-
 end

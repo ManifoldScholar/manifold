@@ -1,9 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Notifications::SendCommentNotificationJob, type: :job do
-
   describe "#perform" do
-
     let(:user) { FactoryBot.create(:user) }
     let(:comment) { FactoryBot.create(:comment) }
 
@@ -12,7 +10,5 @@ RSpec.describe Notifications::SendCommentNotificationJob, type: :job do
       mail = ActionMailer::Base.deliveries.last
       expect(mail.to).to eq [user.email]
     end
-
   end
-
 end

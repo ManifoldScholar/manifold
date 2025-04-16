@@ -64,6 +64,5 @@ module Ingestions
       ensure_root
       ensure_working_dirs
     end
-
   end
 end

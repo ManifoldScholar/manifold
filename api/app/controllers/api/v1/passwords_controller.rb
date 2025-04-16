@@ -48,7 +48,6 @@ module API
           ]
         }, status: :unprocessable_entity
       end
-
     end
   end
 end

@@ -2,7 +2,6 @@ module Ingestions
   module Strategy
     module Document
       class Inspector
-
         attr_reader :ingestion, :context
 
         def initialize(context)

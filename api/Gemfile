@@ -114,7 +114,7 @@ gem "shrine-tus", "~> 2.0"
 gem "sidekiq", "< 6"
 gem "signet", "~> 0.10"
 gem "sinatra", "~>2.2"
-gem 'sorted_set', '~> 1.0', '>= 1.0.3'
+gem "sorted_set", "~> 1.0", ">= 1.0.3"
 gem "statesman", "~> 3.4"
 gem "statesman-events", "~> 0.0.1"
 gem "store_model", "~> 2.2.0"
@@ -151,8 +151,11 @@ end
 
 group :development do
   gem "listen", "~> 3.2"
-  gem "rubocop", "~> 0.60"
-  gem "rubocop-rspec", "~> 1.32"
+  gem "rubocop", "1.74.0", require: false
+  gem "rubocop-factory_bot", "2.27.1", require: false
+  gem "rubocop-rails", "2.30.3", require: false
+  gem "rubocop-rspec", "3.5.0", require: false
+  gem "rubocop-rspec_rails", "2.31.0", require: false
   gem "simplecov", require: false
   gem "spring"
   gem "spring-commands-rspec", "~> 1.0.4"

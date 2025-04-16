@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/AbcSize
 module CollectsReadingGroupEntries
   extend ActiveSupport::Concern
 
@@ -43,4 +42,3 @@ module CollectsReadingGroupEntries
     end
   end
 end
-# rubocop:enable Metrics/AbcSize

@@ -28,13 +28,12 @@ RSpec.describe "Ingestions", type: :request do
     let(:text_id) { text.id }
 
     path "/texts/{text_id}/relationships/ingestions" do
-     include_examples "an API create request",
-                      model: Ingestion,
-                      parent: "text",
-                      url_parameters: [:text_id],
-                      authorized_user: :admin,
-                      included_relationships: [:creator]
+      include_examples "an API create request",
+                       model: Ingestion,
+                       parent: "text",
+                       url_parameters: [:text_id],
+                       authorized_user: :admin,
+                       included_relationships: [:creator]
     end
-
   end
 end

@@ -1,6 +1,5 @@
 module V1
   class JournalVolumeSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     abilities

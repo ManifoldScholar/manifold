@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Collaborator, type: :model do
-
   it "has a valid factory" do
     expect(FactoryBot.build(:collaborator)).to be_valid
   end

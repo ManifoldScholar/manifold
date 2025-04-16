@@ -1,5 +1,6 @@
 class EventType < ClassyEnum::Base
 end
+
 class EventType::ProjectCreated < EventType
 end
 

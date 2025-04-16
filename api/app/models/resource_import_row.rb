@@ -1,6 +1,5 @@
 # A resource is any asset our source document that is associated with a text.
 class ResourceImportRow < ApplicationRecord
-
   ROW_TYPE_DATA = "data".freeze
   ROW_TYPE_IGNORED = "ignored".freeze
   ROW_TYPE_HEADER = "header".freeze
@@ -99,5 +98,4 @@ class ResourceImportRow < ApplicationRecord
     candidates << %w(title attachment.attachment).map { |c| value_for(c) }.join
     candidates
   end
-
 end

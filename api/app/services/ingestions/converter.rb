@@ -7,6 +7,5 @@ module Ingestions
 
       compose converter.interaction
     end
-
   end
 end

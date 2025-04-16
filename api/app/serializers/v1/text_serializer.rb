@@ -1,6 +1,5 @@
 module V1
   class TextSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     INCLUDE_TOC = proc do |object, params|
@@ -102,7 +101,7 @@ module V1
       typed_attribute :spine, Types::Array.of(Types::Serializer::ID).meta(read_only: true)
       typed_attribute :pending_slug, Types::String
       typed_attribute :section_kind, Types::String.optional.meta(
-        description: "The label used for sections within the text. "\
+        description: "The label used for sections within the text. " \
         'Values might be, for example, "chapter" or "unit"'
       )
 

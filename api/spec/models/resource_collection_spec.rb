@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe ResourceCollection, type: :model do
-
   it "has a valid factory" do
     expect(FactoryBot.build(:resource_collection)).to be_valid
   end
@@ -13,7 +12,7 @@ RSpec.describe ResourceCollection, type: :model do
 
   it "is invalid without a title" do
     collection = FactoryBot.build(:resource_collection, title: "")
-    expect(collection).to_not be_valid
+    expect(collection).not_to be_valid
   end
 
   it "destroys associated annotations" do
@@ -28,5 +27,5 @@ RSpec.describe ResourceCollection, type: :model do
     FactoryBot.create(:resource_collection, project: project)
   end
 
-  it_should_behave_like "a collectable"
+  it_behaves_like "a collectable"
 end

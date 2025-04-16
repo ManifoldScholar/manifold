@@ -24,5 +24,4 @@ RSpec.describe "When ingesting document with varying character encoding", integr
       expect(text.result.text_sections.first.body).to eq_ignoring_whitespace compare
     end
   end
-
 end

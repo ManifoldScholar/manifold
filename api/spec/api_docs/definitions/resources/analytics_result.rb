@@ -3,9 +3,7 @@ module APIDocs
     module Resources
       class AnalyticsResult
         class << self
-
           include APIDocs::Definitions::Resource
-
         end
       end
     end

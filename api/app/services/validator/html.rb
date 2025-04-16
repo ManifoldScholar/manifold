@@ -4,7 +4,6 @@ module Validator
   # frontend. This mainly involves insuring proper nesting, and making sure that the
   # structure will work with ReactDom.
   class HTML
-
     VOID_ELEMENTS = %w(area base br col embed hr img input keygen
                        link meta param source track wbr).freeze
 
@@ -93,7 +92,6 @@ module Validator
       end
     end
 
-    # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/CyclomaticComplexity
     def tag_valid_with_parent?(tag, parent)
       case tag
@@ -114,7 +112,6 @@ module Validator
       end
       true
     end
-    # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

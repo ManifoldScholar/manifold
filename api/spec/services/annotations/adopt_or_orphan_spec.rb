@@ -126,7 +126,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
     end
 
     describe "determines the start/end nodes by subject content" do
-      before(:each) do
+      before do
         @annotation = FactoryBot.create(:annotation,
                                         text_section: text_section,
                                         start_node: "F",
@@ -166,7 +166,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
                                            text_section: text_section,
                                            start_node: "B",
                                            end_node: "C",
-                                           subject: "One, two, blue, three, four,") #client trims subjects, so removing ending space here
+                                           subject: "One, two, blue, three, four,") # client trims subjects, so removing ending space here
             Annotations::AdoptOrOrphan.run annotation: annotation
 
             first_char = first_char_as_string(annotation: annotation, json: text_section.body_json)
@@ -269,7 +269,7 @@ RSpec.describe Annotations::AdoptOrOrphan do
       )
     end
 
-    let (:text_section) do
+    let(:text_section) do
       FactoryBot.create(:text_section, body_json: body_json)
     end
 
@@ -303,14 +303,14 @@ RSpec.describe Annotations::AdoptOrOrphan do
         "children" => [{
             "tag" => "div",
             "children" => [one],
-            "node_type": "element"
+            node_type: "element"
           },
-          {
-            "tag" => "div",
-            "children" => [two],
-            "node_type": "element"
-          }],
-        "node_type": "element"
+                       {
+                         "tag" => "div",
+                         "children" => [two],
+                         node_type: "element"
+                       }],
+        node_type: "element"
       }
     end
 
@@ -325,7 +325,8 @@ RSpec.describe Annotations::AdoptOrOrphan do
         end_node: "two",
         text_section: text_section,
         subject: "paragraph\n\nanother"
-      )    end
+      )
+    end
 
     it "does not orphan the annotaton" do
       Annotations::AdoptOrOrphan.run annotation: annotation
@@ -348,8 +349,6 @@ RSpec.describe Annotations::AdoptOrOrphan do
 
     if node[:children].present?
       node[:children].find { |child| find_node_by_uuid(node: child, uuid: uuid) }
-    else
-      nil
     end
   end
 
@@ -357,17 +356,13 @@ RSpec.describe Annotations::AdoptOrOrphan do
     start_node = json[:children].map { |n| find_node_by_uuid(node: n, uuid: annotation.start_node) }.find { |n| !n.nil? }
     start_node_text = start_node[:content]
     start_index = annotation.start_char - 1
-    first_char = start_node_text[start_index]
-
-    first_char
+    start_node_text[start_index]
   end
 
   def last_char_as_string(annotation:, json:)
     end_node = json[:children].map { |n| find_node_by_uuid(node: n, uuid: annotation.end_node) }.find { |n| !n.nil? }
     end_node_text = end_node[:content]
     end_index = annotation.end_char - 1
-    last_char = end_node_text[end_index]
-
-    last_char
+    end_node_text[end_index]
   end
 end

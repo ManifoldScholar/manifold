@@ -67,7 +67,7 @@ namespace :manifold do
           Manifold::Rake.logger.info("Updating text from JSON data: #{touched_text.title}")
           text_data = JSON.parse(File.read(metadata_path))
           # Cast all metadata to strings.
-          touched_text.metadata = text_data["data"].transform_values { |v| v.to_s; }
+          touched_text.metadata = text_data["data"].transform_values { |v| v.to_s }
           # Set the slug if present.
           touched_text.pending_slug = text_data["slug"].to_s if text_data["slug"].present?
           if touched_text.valid?

@@ -1,7 +1,6 @@
 module Analytics
   module Reports
     class PaginatedBuilder < Analytics::Reports::Builder
-
       PAGINATION_PLACEHOLDER = "{{ PAGINATION }}".freeze
 
       integer :page, default: 1
@@ -39,7 +38,6 @@ module Analytics
       def cte_for_count
         self.class.base_ctes.first
       end
-
     end
   end
 end

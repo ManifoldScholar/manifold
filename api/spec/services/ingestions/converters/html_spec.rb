@@ -8,7 +8,6 @@ RSpec.describe Ingestions::Converters::HTML do
   let(:parsed) { Nokogiri::HTML(output.result) }
 
   describe "when ingesting html with inline styles" do
-
     let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "with_inline_styles", "index.html") }
 
     it "has a style tag with the extracted inline styles assigned to classes" do
@@ -25,7 +24,6 @@ RSpec.describe Ingestions::Converters::HTML do
   end
 
   describe "when ingesting html with non-latin characters" do
-
     let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "non_latin", "index.html") }
 
     it "has the correct content" do
@@ -35,11 +33,9 @@ RSpec.describe Ingestions::Converters::HTML do
         expect(paragraph.text.strip).to eq expected
       end
     end
-
   end
 
   describe "when ingesting html with headers that do not have IDs" do
-
     let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "without_header_ids", "index.html") }
     let(:headers) { parsed.xpath("//h1 | //h2 | //h3 | //h4 | //h5 | //h6") }
 
@@ -54,8 +50,5 @@ RSpec.describe Ingestions::Converters::HTML do
       expect(ids.length > 0).to be true
       expect(ids.uniq.length).to eq ids.length
     end
-
   end
-
-
 end

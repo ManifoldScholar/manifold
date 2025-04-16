@@ -1,6 +1,5 @@
 module V1
   class VersionSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :item_type, Types::String.meta(read_only: true)
@@ -10,9 +9,9 @@ module V1
 
     # Strip out lateral, nil-nil changes and updated_at
     typed_attribute :object_changes, Types::Hash.meta(
-      description: "Each key contains an array of values that describe how that project has changed over time. "\
-      "This could be a history of changes for the project regarding title, description, slug, etc.\n"\
-      'For example: "featured": [ false, true ]\n'\
+      description: "Each key contains an array of values that describe how that project has changed over time. " \
+      "This could be a history of changes for the project regarding title, description, slug, etc.\n" \
+      'For example: "featured": [ false, true ]\n' \
       'This means the project was changed from "not featured" to "featured"',
       read_only: true
     ) do |object|
@@ -54,8 +53,6 @@ module V1
 
         object.object["title"] || object.title_fallback || object.object_changes["title"] || object.item_id
       end
-
     end
-
   end
 end

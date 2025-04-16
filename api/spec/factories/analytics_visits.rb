@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :analytics_visit, class: Analytics::Visit do
+  factory :analytics_visit, class: 'Analytics::Visit' do
     transient do
       visit_duration { 60.minutes }
     end
@@ -15,6 +15,6 @@ FactoryBot.define do
     os { Faker::Computer.platform }
     device_type { "Desktop" }
     started_at { Time.current - (rand * 100).hours }
-    ended_at { visit_duration.present? ? (started_at + visit_duration) : nil}
+    ended_at { visit_duration.present? ? (started_at + visit_duration) : nil }
   end
 end

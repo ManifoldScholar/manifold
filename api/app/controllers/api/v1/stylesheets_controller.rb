@@ -56,7 +56,6 @@ module API
       def set_text
         @text = Text.friendly.find(params[:text_id]) if params[:text_id]
       end
-
     end
   end
 end

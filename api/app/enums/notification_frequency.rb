@@ -12,6 +12,7 @@ class NotificationFrequency < ClassyEnum::Base
     config.nondigest.present?
   end
 end
+
 class NotificationFrequency::Never < NotificationFrequency
   config.digest = true
   config.nondigest = true

@@ -2,7 +2,6 @@ module APIDocs
   module Definitions
     module Resources
       class ActionCallout
-
         REQUIRED_CREATE_ATTRIBUTES = [
           :title,
           :kind,
@@ -17,13 +16,11 @@ module APIDocs
         }
 
         class << self
-
           include APIDocs::Definitions::Resource
 
           def create_attributes
             request_attributes.except(:remove_attachment)
           end
-
         end
       end
     end

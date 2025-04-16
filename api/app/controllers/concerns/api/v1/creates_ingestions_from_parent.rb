@@ -22,7 +22,7 @@ module API
       # @return [ApplicationRecord]
       attr_reader :ingestion_parent
 
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       def create
         @ingestion = ::Updaters::Ingestion
           .new(ingestion_params)
@@ -48,7 +48,7 @@ module API
 
         render_single_resource @ingestion, serializer: ::V1::IngestionSerializer
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
 
       # @api private
       # @raise [ActiveRecord::RecordNotFound]

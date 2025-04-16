@@ -32,8 +32,8 @@ module Utility
 
       # @return [{ Symbol => Object }]
       def to_options
-        HTTPARTY_OPTIONS.each_with_object({}) do |option_name, h|
-          h[option_name] = public_send(option_name)
+        HTTPARTY_OPTIONS.index_with do |option_name|
+          public_send(option_name)
         end
       end
 

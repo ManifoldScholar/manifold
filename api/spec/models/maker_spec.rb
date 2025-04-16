@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Maker, type: :model do
-
   it "has a valid factory" do
     expect(FactoryBot.build(:maker)).to be_valid
   end
@@ -13,7 +12,8 @@ RSpec.describe Maker, type: :model do
   end
 
   describe "its name" do
-    let(:maker) do  FactoryBot.create(:maker,
+    let(:maker) do
+      FactoryBot.create(:maker,
                                       name: nil,
                                       prefix: "Sir",
                                       first_name: "Stubblin",
@@ -35,12 +35,12 @@ RSpec.describe Maker, type: :model do
     end
 
     it "is invalid without a single first or last name" do
-      expect(FactoryBot.build(:maker, name: nil, first_name: nil, last_name: nil)).to_not be_valid
+      expect(FactoryBot.build(:maker, name: nil, first_name: nil, last_name: nil)).not_to be_valid
     end
   end
 
   describe "its with_order scope" do
-    before(:each) do
+    before do
       Maker.create(name: "Rowan Ono")
       Maker.create(name: "Ida")
       Maker.create(name: "Sir Stubblin Champflin III")
@@ -48,11 +48,10 @@ RSpec.describe Maker, type: :model do
 
     it "returns the correct order" do
       expect(Maker.with_order.pluck(:last_name, :first_name)).to eq [
-                                                                      %w(Champflin Stubblin),
-                                                                      [nil, "Ida"],
-                                                                      %w(Ono Rowan)
-                                                                    ]
+        %w(Champflin Stubblin),
+        [nil, "Ida"],
+        %w(Ono Rowan)
+      ]
     end
   end
-
 end

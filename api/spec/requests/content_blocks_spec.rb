@@ -12,7 +12,7 @@ RSpec.describe "ContentBlocks API", type: :request do
       describe "the response" do
         it "has a 200 status code" do
           get path, headers: headers
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -23,7 +23,7 @@ RSpec.describe "ContentBlocks API", type: :request do
       describe "the response" do
         it "has a 200 status code" do
           get path, headers: headers
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe "ContentBlocks API", type: :request do
       describe "the response" do
         it "has a 200 OK status code" do
           patch path, headers: headers, params: build_json_payload
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
 
         context "body" do
@@ -69,14 +69,14 @@ RSpec.describe "ContentBlocks API", type: :request do
     context "when the user is an admin" do
       it "has a 204 status code" do
         delete path, headers: admin_headers
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:no_content)
       end
     end
 
     context "when the user is a reader" do
       it "has a 403 FORBIDDEN status code" do
         delete path, headers: reader_headers
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end

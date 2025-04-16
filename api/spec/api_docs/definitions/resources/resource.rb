@@ -2,7 +2,6 @@ module APIDocs
   module Definitions
     module Resources
       class Resource
-
         REQUEST_ATTRIBUTES = {
           attachment: Types::Serializer::Upload,
           remove_attachment: Types::Bool,

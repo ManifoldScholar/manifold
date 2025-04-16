@@ -2,7 +2,6 @@ module Packaging
   module EpubV3
     module BookCompilation
       # Set the language for the Epub
-      # rubocop:disable Style/ConditionalAssignment
       class SetLanguage
         include Dry::Transaction::Operation
 

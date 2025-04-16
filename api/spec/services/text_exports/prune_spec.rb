@@ -14,4 +14,3 @@ RSpec.describe TextExports::Prune, interaction: true, packaging: true do
     end
   end
 end
-

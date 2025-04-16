@@ -16,7 +16,7 @@ RSpec.describe ExternalAuth::Payload do
       errors:   outcome_errors,
       provider: provider,
       user:     user,
-      :valid? => outcome_valid
+      valid?: outcome_valid
     })
   end
 

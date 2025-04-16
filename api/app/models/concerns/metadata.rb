@@ -18,7 +18,7 @@ module Metadata
   def filter_metadata(properties = metadata_properties)
     return unless metadata_changed?
 
-    write_attribute(:metadata, metadata.slice(*properties))
+    self[:metadata] = metadata.slice(*properties)
   end
 
   def metadata=(value)
@@ -29,7 +29,7 @@ module Metadata
 
   def metadata_formatted
     metadata.each_with_object({}) do |(k, _v), out|
-      next unless respond_to? "#{k}_formatted".to_sym
+      next unless respond_to? :"#{k}_formatted"
 
       out[k] = send("#{k}_formatted")
     end

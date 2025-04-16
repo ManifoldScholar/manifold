@@ -6,6 +6,5 @@ module Updaters
     def attachment_fields
       []
     end
-
   end
 end

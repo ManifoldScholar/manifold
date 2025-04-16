@@ -3,7 +3,6 @@ module API
     module ProjectCollections
       module Relationships
         class CollectionProjectsController < ApplicationController
-
           before_action :set_project_collection
 
           resourceful! CollectionProject,
@@ -29,16 +28,16 @@ module API
             render_single_resource @collection_project, location: location
           end
 
-          def destroy
-            @collection_project = load_and_authorize_collection_project
-            @collection_project.destroy
-          end
-
           def update
             @collection_project = load_and_authorize_collection_project
             ::Updaters::Default.new(collection_project_params).update(@collection_project)
             render_single_resource(@collection_project,
                                    location: location)
+          end
+
+          def destroy
+            @collection_project = load_and_authorize_collection_project
+            @collection_project.destroy
           end
 
           private
@@ -55,7 +54,6 @@ module API
           def includes
             %w()
           end
-
         end
       end
     end

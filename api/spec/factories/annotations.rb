@@ -7,7 +7,7 @@ FactoryBot.define do
     subject { "This is the selected passage." }
     body { "This is the body." }
     format { Annotation::TYPE_ANNOTATION }
-    association :text_section, factory: :text_section
+    association :text_section
     association :creator, factory: :user
 
     trait :is_public do
@@ -21,11 +21,11 @@ FactoryBot.define do
 
   factory :resource_annotation, parent: :annotation do
     format { Annotation::TYPE_RESOURCE }
-    association :resource, factory: :resource
+    association :resource
   end
 
   factory :collection_annotation, parent: :annotation do
     format { Annotation::TYPE_COLLECTION }
-    association :resource_collection, factory: :resource_collection
+    association :resource_collection
   end
 end

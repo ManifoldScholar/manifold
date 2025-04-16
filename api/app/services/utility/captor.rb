@@ -13,10 +13,10 @@ module Utility
     # @yieldparam [Utility::Captor::CaptureAttempt] captor
     # @yieldreturn [void]
     # @return [Object] (@see #store!)
-    def capture(&block)
+    def capture(&)
       raise "Block required" unless block_given?
 
-      CaptureAttempt.new(self).call(&block)
+      CaptureAttempt.new(self).call(&)
     end
 
     class << self
@@ -24,10 +24,10 @@ module Utility
       # @yield [captor]
       # @yieldparam [Utility::Captor::CaptureAttempt] captor
       # @return [Object]
-      def capture(**options, &block)
+      def capture(**options, &)
         raise "Block required" unless block_given?
 
-        new(options).capture(&block)
+        new(options).capture(&)
       end
     end
 

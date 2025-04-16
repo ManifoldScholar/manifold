@@ -55,9 +55,9 @@ class Ingestion < ApplicationRecord
     EOT
   end
 
+  before_validation :infer_kind!
   before_save :commit_log
   before_update :commit_log
-  before_validation :infer_kind!
 
   def reset_strategy
     self.strategy = nil
@@ -154,5 +154,4 @@ class Ingestion < ApplicationRecord
       "text"
     end
   end
-
 end

@@ -1,7 +1,6 @@
 module Analytics
   module Reports
     class ForText < Analytics::Reports::ScopedBuilder
-
       validate :resource_is_text!
 
       def resource_is_text!
@@ -171,7 +170,6 @@ module Analytics
       end
 
       # END ANALYTICS
-
     end
   end
 end

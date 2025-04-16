@@ -12,6 +12,5 @@ module Notifications
         .digest(user, NotificationFrequency.fetch(frequency), events)
         .deliver
     end
-
   end
 end

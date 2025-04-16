@@ -1,8 +1,6 @@
 module Storage
   class Migrate
-
     class << self
-
       def migrate_store_to_mirror
         Storage::ShrineProperties.fetch.each do |klass_name, properties|
           klass = klass_name.to_s.constantize
@@ -33,7 +31,6 @@ module Storage
         msg = "Unable to migrate #{model.name}:#{model.id}:#{property} due to Shrine::FileNotFound"
         Rails.logger.warn(msg)
       end
-
     end
   end
 end

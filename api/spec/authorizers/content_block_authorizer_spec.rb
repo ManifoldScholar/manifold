@@ -30,11 +30,12 @@ RSpec.describe "Content Block Abilities", :authorizer do
   end
 
   context 'when the subject is a reader and project_editor of the content block\'s project' do
-    before(:each) do
+    before do
       @maintainer = FactoryBot.create(:user)
       @content_block = FactoryBot.create(:content_block)
       @maintainer.add_role :project_editor, @content_block.project
     end
+
     let(:subject) { @maintainer }
     let(:object) { @content_block }
 
@@ -42,11 +43,12 @@ RSpec.describe "Content Block Abilities", :authorizer do
   end
 
   context 'when the subject is a reader and project_property_manager of the content block\'s project' do
-    before(:each) do
+    before do
       @metadata_maintainer = FactoryBot.create(:user)
       @content_block = FactoryBot.create(:content_block)
       @metadata_maintainer.add_role :project_property_manager, @content_block.project
     end
+
     let(:subject) { @metadata_maintainer }
     let(:object) { @content_block }
 
@@ -54,11 +56,12 @@ RSpec.describe "Content Block Abilities", :authorizer do
   end
 
   context 'when the subject is a reader and project_author of a specific content_block' do
-    before(:each) do
+    before do
       @author = FactoryBot.create(:user)
       @content_block = FactoryBot.create(:content_block)
       @author.add_role :project_author, @content_block.project
     end
+
     let(:subject) { @author }
     let(:object) { @content_block }
 

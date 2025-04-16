@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/AbcSize
 module Collectable
   extend ActiveSupport::Concern
 
@@ -96,4 +95,3 @@ module Collectable
     end
   end
 end
-# rubocop:enable Metrics/AbcSize

@@ -1,7 +1,6 @@
 module API
   module V1
     class AnalyticsController < Ahoy::BaseController
-
       before_action :fetch_visit, only: :create
       before_action :get_report_type, only: :show
 
@@ -19,7 +18,7 @@ module API
 
       def create
         @outcome = Analytics::RecordEvent.record_event analytics_attributes
-        @outcome.valid? ? head(204) : render(json: { errors: @outcome.errors.messages }, status: 400)
+        @outcome.valid? ? head(:no_content) : render(json: { errors: @outcome.errors.messages }, status: :bad_request)
       end
 
       private
@@ -30,7 +29,7 @@ module API
 
       def get_report_type
         @report_type = AnalyticsReportType.build(params[:report_type])
-        head 404 unless @report_type.is_a?(AnalyticsReportType)
+        head :not_found unless @report_type.is_a?(AnalyticsReportType)
       end
 
       def analytics_attributes
@@ -41,11 +40,10 @@ module API
         return unless analytics_filter_params[:record_type].present? && analytics_filter_params[:record_id].present?
 
         scope_class = analytics_filter_params[:record_type].safe_constantize
-        return head(400) unless scope_class.present?
+        return head(:bad_request) unless scope_class.present?
 
         scope_class.find(analytics_filter_params[:record_id])
       end
-
     end
   end
 end

@@ -8,7 +8,7 @@ module JSONAPI
 
     option :attribute_parser, Types::Implements(Types::FlexibleStruct), optional: true
 
-    option :type, Types::String.optional, optional: true, default: proc { nil }
+    option :type, Types::String.optional, optional: true, default: proc {}
     option :allow_blank_type, Types::Bool, optional: true, default: proc { true }
 
     def call
