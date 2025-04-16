@@ -19,6 +19,8 @@
       "collapse_category": "Collapse category content",
       "expand_block": "Expand block content",
       "collapse_block": "Collapse block content",
+      "reorder_category": "Reorder category",
+      "reorder_collectable": "Reorder item",
       "move_up": "Move up",
       "move_down": "Move down",
       "collectable_move_up": "Move up one position",
