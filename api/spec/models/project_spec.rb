@@ -46,7 +46,7 @@ RSpec.describe Project, type: :model do
     text_b = FactoryBot.create(:text, project: project, published: true)
     FactoryBot.create(:text, project: project, published: false)
 
-    expect(project.published_texts).to match_array [text_a, text_b]
+    expect(project.published_texts).to contain_exactly(text_a, text_b)
   end
 
   it "is valid with a creator" do
@@ -62,14 +62,14 @@ RSpec.describe Project, type: :model do
 
   it "triggers an event on create" do
     expect do
-      project = FactoryBot.create(:project)
+      FactoryBot.create(:project)
     end.to have_enqueued_job(CreateEventJob)
   end
 
   it "does not trigger an event on new" do
     expect do
-      project = FactoryBot.build(:project)
-    end.to_not have_enqueued_job(CreateEventJob)
+      FactoryBot.build(:project)
+    end.not_to have_enqueued_job(CreateEventJob)
   end
 
   it "is created as a draft" do
@@ -79,7 +79,7 @@ RSpec.describe Project, type: :model do
 
   it "is invalid without draft state" do
     project = FactoryBot.build(:project, draft: nil)
-    expect(project).to_not be_valid
+    expect(project).not_to be_valid
   end
 
   it "reports that it's following twitter accounts if at least one twitter_query association" do
@@ -97,9 +97,9 @@ RSpec.describe Project, type: :model do
     project = FactoryBot.create(:project)
     collection = FactoryBot.create(:resource_collection, project: project)
     resource_1 = FactoryBot.create(:resource, project: project)
-    resource_2 = FactoryBot.create(:resource, project: project)
-    resource_3 = FactoryBot.create(:resource, project: project)
-    collection_resource = FactoryBot.create(
+    FactoryBot.create(:resource, project: project)
+    FactoryBot.create(:resource, project: project)
+    FactoryBot.create(
       :collection_resource,
       resource: resource_1,
       resource_collection: collection
@@ -130,7 +130,7 @@ RSpec.describe Project, type: :model do
     end
 
     context "when there are models" do
-      before(:each) do
+      before do
         @user = FactoryBot.create(:user)
         @subject_a = FactoryBot.create(:subject, name: "subject_a")
         @subject_b = FactoryBot.create(:subject, name: "subject_b")
@@ -233,17 +233,17 @@ RSpec.describe Project, type: :model do
   context "when avatar is not present" do
     it "is invalid without an avatar color" do
       project = FactoryBot.build(:project, avatar_color: nil)
-      expect(project).to_not be_valid
+      expect(project).not_to be_valid
     end
 
     it "is invalid with an avatar color not in list" do
       project = FactoryBot.build(:project, avatar_color: "none more black")
-      expect(project).to_not be_valid
+      expect(project).not_to be_valid
     end
   end
 
   context "when citations are updated" do
-    before(:each) do
+    before do
       @calling_class = FactoryBot.create(:project, title: "A Title")
       @child_class = FactoryBot.create(:text, project: @calling_class)
     end
@@ -259,7 +259,7 @@ RSpec.describe Project, type: :model do
     let(:total_page_count) { pages.length }
 
     let!(:expected_page_counts) do
-      pages.map { |i| [i, (i%3).nonzero? ? 3 : 1] }.to_h
+      pages.index_with { |i| (i % 3).nonzero? ? 3 : 1 }
     end
 
     let_it_be(:other_projects) { FactoryBot.create_list :project, 7, draft: false, tag_list: "other" }
@@ -330,7 +330,7 @@ RSpec.describe Project, type: :model do
         end
       end
 
-      it_should_behave_like "a valid filtered collection"
+      it_behaves_like "a valid filtered collection"
     end
 
     context "for a smart collection" do
@@ -338,12 +338,12 @@ RSpec.describe Project, type: :model do
         FactoryBot.create(:project_collection, :smart, tag_list: tag_list)
       end
 
-      it_should_behave_like "a valid filtered collection"
+      it_behaves_like "a valid filtered collection"
     end
   end
 
   context "it correctly scopes the visible projects" do
-    before(:each) do
+    before do
       FactoryBot.create(:project, draft: false)
       FactoryBot.create(:project, draft: true)
 
@@ -373,7 +373,7 @@ RSpec.describe Project, type: :model do
   end
 
   context "when default publisher info is set" do
-    before(:each) do
+    before do
       settings = Settings.instance
       settings.general = { default_publisher: "Cast Iron Coding", default_publisher_place: "Portland, OR" }
       settings.save
@@ -463,11 +463,11 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  it_should_behave_like "a model that stores its fingerprint" do
+  it_behaves_like "a model that stores its fingerprint" do
     subject { FactoryBot.create :project }
   end
 
-  it_should_behave_like "a model with formatted attributes"
+  it_behaves_like "a model with formatted attributes"
 
-  it_should_behave_like "a collectable"
+  it_behaves_like "a collectable"
 end

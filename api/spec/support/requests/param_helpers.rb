@@ -25,10 +25,10 @@ RSpec.shared_context "param helpers" do
   end
 
   def adjust_attributes_for_request(attributes)
-    attributes.map { |k,v|
+    attributes.map do |k, v|
       next [k, v] unless v.respond_to? :path
       [k, file_param(v.path, v.content_type, v.original_filename)]
-    }.to_h
+    end.to_h
   end
 
   def adjust_attributes_for_response(attributes)
@@ -49,7 +49,7 @@ RSpec.shared_context "param helpers" do
   end
 
   def file_param(path, content_type, file_name)
-    data = Base64.encode64(File.open(path, "rb").read)
+    data = Base64.encode64(File.binread(path))
     {
       content_type: content_type,
       data: "data:#{content_type};base64,#{data}",

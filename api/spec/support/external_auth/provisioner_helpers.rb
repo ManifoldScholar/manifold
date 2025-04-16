@@ -9,7 +9,7 @@ module ExternalAuth::ProvisionerSpecs
     def each_hook
       return enum_for(__method__) unless block_given?
 
-      ( DEFAULT_HOOKS + HOOKS ).each do |hook|
+      (DEFAULT_HOOKS + HOOKS).each do |hook|
         yield hook
       end
     end
@@ -172,8 +172,8 @@ module ExternalAuth::ProvisionerSpecs
         attributes.flatten!
 
         set_attributes "copied #{attributes.map(&:inspect).to_sentence} from auth_hash.info" do
-          attribute_expectations = attributes.each_with_object({}) do |attr, hsh|
-            hsh[attr] = auth_hash.info[attr]
+          attribute_expectations = attributes.index_with do |attr|
+            auth_hash.info[attr]
           end
 
           attribute_expectations
@@ -193,7 +193,7 @@ RSpec.shared_context 'an external auth provisioner' do
 
   subject { provisioner }
 
-  before(:each) do
+  before do
     each_hook do |hook|
       allow(provisioner).to receive(hook).and_call_original
     end

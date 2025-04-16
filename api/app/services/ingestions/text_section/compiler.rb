@@ -1,7 +1,6 @@
 module Ingestions
   module TextSection
     class Compiler < Ingestions::AbstractInteraction
-
       hash :manifest, strip: false
       record :text
       string :text_section_id, default: ""

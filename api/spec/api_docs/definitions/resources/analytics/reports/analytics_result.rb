@@ -4,7 +4,6 @@ module APIDocs
       module Analytics
         module Reports
           class AnalyticsResult
-
             REQUIRED_CREATE_ATTRIBUTES = [name].freeze
 
             REQUEST_ATTRIBUTES = {

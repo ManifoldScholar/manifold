@@ -1,3 +1,2 @@
 class JournalIssueAuthorizer < JournalChildAuthorizer
-
 end

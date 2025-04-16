@@ -71,7 +71,6 @@ class Resource < ApplicationRecord
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
   validates :sub_kind,
             inclusion: { in: ALLOWED_SUB_KINDS },
-            allow_nil: true,
             allow_blank: true
   validates :fingerprint,
             uniqueness: { scope: :project,
@@ -125,7 +124,6 @@ class Resource < ApplicationRecord
     includes(:resource_collections, :project)
   }
 
-  # rubocop:disable Metrics/AbcSize
   def search_data
     {
       search_result_type: search_result_type,
@@ -137,7 +135,6 @@ class Resource < ApplicationRecord
       keywords: (tag_list + attachment_file_name).reject(&:blank?)
     }.merge(search_hidden)
   end
-  # rubocop:enable Metrics/AbcSize
 
   def search_hidden
     project.present? ? project.search_hidden : { hidden: true }
@@ -176,7 +173,7 @@ class Resource < ApplicationRecord
   end
 
   def sort_title_candidate
-    candidate = pending_sort_title.blank? ? title_plaintext : pending_sort_title
+    candidate = pending_sort_title.presence || title_plaintext
     candidate.delete "\"", "'"
   end
 
@@ -192,7 +189,7 @@ class Resource < ApplicationRecord
     return :video if %w(mp4 webm).include?(ext)
     return :video if sub_kind == "external_video"
     return :audio if ["mp3"].include?(ext)
-    return :link if !attachment.present? && !external_url.blank?
+    return :link if !attachment.present? && external_url.present?
 
     # We return a default because we always want the resource kind to be valid. If it's
     # not valid, we have a problem because it will prevent Paperclip from processing

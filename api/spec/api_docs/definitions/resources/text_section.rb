@@ -2,7 +2,6 @@ module APIDocs
   module Definitions
     module Resources
       class TextSection
-
         METADATA_ATTRIBUTES = {
           citation_override: Types::String
         }.freeze

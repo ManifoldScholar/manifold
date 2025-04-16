@@ -14,7 +14,7 @@ module Collections
 
     option :collects, Types::ModelProxies, as: :collectable_models, default: proc { [] }
 
-    option :grouping, Types::ModelProxy.optional, optional: true, default: proc { nil }
+    option :grouping, Types::ModelProxy.optional, optional: true, default: proc {}
 
     option :entry_prefix, Types::String, default: proc { collector.model_name.name }
 

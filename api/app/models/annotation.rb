@@ -4,7 +4,6 @@
 # a likely candidate for refactoring into a "range" model that can be used by various
 # other manifold records.
 class Annotation < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -167,7 +166,7 @@ class Annotation < ApplicationRecord
     where(format: formats) if formats.present?
   }
   scope :with_orphaned, lambda { |orphaned|
-    where.not(text_section: nil).where(orphaned: orphaned) unless orphaned.blank?
+    where.not(text_section: nil).where(orphaned: orphaned) if orphaned.present?
   }
   scope :with_existing_text, lambda {
     where.not(text_section: nil)

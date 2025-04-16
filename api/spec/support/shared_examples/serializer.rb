@@ -22,6 +22,7 @@ shared_examples_for "a serializer" do |partial_by_default: false|
         end
       end
     end
+
     context "when full serialization is requested" do
       let(:subject) { described_class.new(object, params: { full: true }) }
 

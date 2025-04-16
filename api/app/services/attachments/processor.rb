@@ -46,7 +46,7 @@ module Attachments
     end
 
     def mime_and_extension?
-      shrine_uploaded_file&.mime_type && shrine_uploaded_file&.extension
+      shrine_uploaded_file&.mime_type && shrine_uploaded_file.extension
     end
 
     # rubocop:disable Lint/Void

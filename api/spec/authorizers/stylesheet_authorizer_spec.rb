@@ -14,12 +14,13 @@ RSpec.describe "Stylesheet Abilities", :authorizer do
   end
 
   context "when the subject is a reader and project_editor of the stylesheet's project" do
-    before(:each) do
+    before do
       @maintainer = FactoryBot.create(:user)
       @text = FactoryBot.create(:text)
       @stylesheet = FactoryBot.create(:stylesheet, text: @text)
       @maintainer.add_role :project_editor, @text.project
     end
+
     let(:subject) { @maintainer }
     let(:object) { @stylesheet }
 
@@ -27,11 +28,12 @@ RSpec.describe "Stylesheet Abilities", :authorizer do
   end
 
   context "when the subject is a reader with no relation to the stylesheet's project" do
-    before(:each) do
+    before do
       @maintainer = FactoryBot.create(:user)
       @text = FactoryBot.create(:text)
       @stylesheet = FactoryBot.create(:stylesheet, text: @text)
     end
+
     let(:subject) { @maintainer }
     let(:object) { @stylesheet }
 

@@ -126,6 +126,5 @@ class Statistics
         yield instance
       end
     end
-
   end
 end

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-shared_examples_for "a controller handling flattened collaborators" do | factory |
+shared_examples_for "a controller handling flattened collaborators" do |factory|
   let_it_be(:maker_one) { FactoryBot.create(:maker) }
   let_it_be(:maker_two) { FactoryBot.create(:maker) }
   let_it_be(:object) { FactoryBot.create(factory) }
@@ -40,15 +40,15 @@ shared_examples_for "a controller handling flattened collaborators" do | factory
   end
 
   describe "deletes all collaborators associated with a maker" do
-    let_it_be(:collaborator_one) {
+    let_it_be(:collaborator_one) do
       FactoryBot.create(:collaborator, maker: maker_one, collaboratable: object, role: :author)
-    }
-    let_it_be(:collaborator_two) {
+    end
+    let_it_be(:collaborator_two) do
       FactoryBot.create(:collaborator, maker: maker_one, collaboratable: object, role: :editor)
-    }
-    let_it_be(:collaborator_three) {
+    end
+    let_it_be(:collaborator_three) do
       FactoryBot.create(:collaborator, maker: maker_two, collaboratable: object, role: :editor)
-    }
+    end
 
     let(:filter) { { maker: maker_one.id } }
     let(:params) { { filter: filter } }

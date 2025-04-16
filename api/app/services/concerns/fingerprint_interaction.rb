@@ -118,7 +118,6 @@ module FingerprintInteraction
     end
   end
 
-  # rubocop:disable Layout/LineLength
   class_methods do
     # @return [Symbol, nil]
     attr_reader :fingerprint_target
@@ -137,5 +136,4 @@ module FingerprintInteraction
       alias_method :fingerprint_target, @fingerprint_target
     end
   end
-  # rubocop:enable Layout/LineLength
 end

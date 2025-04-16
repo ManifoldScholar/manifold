@@ -1,8 +1,6 @@
 module SystemUpgrades
   module Upgrades
     class Manifold050200 < SystemUpgrades::AbstractVersion
-
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       def perform!
         update_attachments_for_shrine_v3!
       end
@@ -29,7 +27,6 @@ module SystemUpgrades
           end
         end
       end
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
     end
   end
 end

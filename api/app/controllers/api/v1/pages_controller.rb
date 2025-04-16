@@ -2,7 +2,6 @@ module API
   module V1
     # Pages controller
     class PagesController < ApplicationController
-
       resourceful! Page, authorize_options: { except: [:index, :show] } do
         Page.all
       end

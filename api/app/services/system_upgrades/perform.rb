@@ -14,7 +14,6 @@ module SystemUpgrades
     attr_reader :upgrade_interactions
 
     # @return [String]
-    # rubocop:disable Lint/UnderscorePrefixedVariableName
     def execute
       applied = false
 
@@ -32,7 +31,7 @@ module SystemUpgrades
 
     private
 
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def reindex_records
       logger.info("[-ANY-]===================================================================")
       logger.info("[-ANY-]Reindex All Records                                                ")
@@ -56,7 +55,7 @@ module SystemUpgrades
         logger.error(e)
       end
     end
-    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     def filtered_upgrades
       return upgrade_interactions unless version.present?

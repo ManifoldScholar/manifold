@@ -1,8 +1,6 @@
 require "rails_helper"
 
-# rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::HTML do
-
   html_config = Rails.configuration.manifold.html_validator
   excluded_css_properties = [
     'position',
@@ -17,10 +15,10 @@ RSpec.describe Validator::HTML do
   let(:validator) { Validator::HTML.new }
 
   it "handles ASCII encoding" do
-    pointer = File.open(Rails.root.join('spec','data','ingestion','fragments','ascii_section.html'))
+    pointer = File.open(Rails.root.join('spec', 'data', 'ingestion', 'fragments', 'ascii_section.html'))
     doc = Nokogiri::XML(pointer, nil)
     fragment = doc.css("body").children.to_s.strip
-    expect(validator.validate(fragment)).to_not eq ""
+    expect(validator.validate(fragment)).not_to eq ""
   end
 
   it "should wrap top level siblings in a div element" do
@@ -187,5 +185,4 @@ RSpec.describe Validator::HTML do
     valid = "<image href=\"images/cover.jpg\" data-xlink-href=\"images/cover.jpg\"></image>"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
-
 end

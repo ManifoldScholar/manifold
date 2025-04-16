@@ -1,4 +1,3 @@
-# rubocop:disable Naming/PredicateName
 module HasCollectables
   extend ActiveSupport::Concern
 
@@ -23,4 +22,3 @@ module HasCollectables
     end
   end
 end
-# rubocop:enable Naming/PredicateName

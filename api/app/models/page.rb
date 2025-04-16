@@ -1,6 +1,5 @@
 # Model representing a page of content
 class Page < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -55,5 +54,4 @@ class Page < ApplicationRecord
   def policy_page?
     purpose.in? PagePurpose.policy
   end
-
 end

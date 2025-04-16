@@ -27,7 +27,7 @@ class EntitlementKind < ClassyEnum::Base
   end
 
   def known?
-    not unknown?
+    !unknown?
   end
 
   class << self

@@ -39,7 +39,5 @@ RSpec.describe SystemUpgrades::AbstractVersion do
       expect_any_instance_of(Test000100).to receive(:perform!)
       Test000100.run force: true
     end
-
   end
-
 end

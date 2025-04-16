@@ -110,7 +110,6 @@ module ManifoldEnv
       end.presence
     end
 
-    # rubocop:disable Style/CaseEquality
     def indifferently_compare(left, right)
       if right.is_a?(String)
         left.to_s == right

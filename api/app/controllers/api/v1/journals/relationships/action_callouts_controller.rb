@@ -3,7 +3,6 @@ module API
     module Journals
       module Relationships
         class ActionCalloutsController < AbstractJournalChildController
-
           resourceful! ActionCallout, authorize_options: { except: [:index] } do
             @journal.action_callouts
           end
@@ -33,7 +32,6 @@ module API
 
             api_v1_action_callout_url(@action_callout, journal_id: @journal.id)
           end
-
         end
       end
     end

@@ -1,6 +1,5 @@
 # A subject
 class Subject < ApplicationRecord
-
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
@@ -31,7 +30,7 @@ class Subject < ApplicationRecord
   scope :by_used, lambda { |used|
     return all unless used.present?
 
-    joins(:project_subjects).where("project_subjects.id IS NOT NULL").group(:id)
+    joins(:project_subjects).where.not(project_subjects: { id: nil }).group(:id)
   }
 
   # Validations

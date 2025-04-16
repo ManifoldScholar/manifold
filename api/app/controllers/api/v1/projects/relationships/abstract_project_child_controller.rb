@@ -3,7 +3,6 @@ module API
     module Projects
       module Relationships
         class AbstractProjectChildController < ApplicationController
-
           before_action :set_project
           before_action :authorize_project
 
@@ -25,7 +24,6 @@ module API
             id = params[:project_id]
             @project = Project.friendly.find(id) if id
           end
-
         end
       end
     end

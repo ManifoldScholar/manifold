@@ -56,7 +56,6 @@ module API
       private
 
       # rubocop:disable Metrics/AbcSize
-      # rubocop:disable Lint/UnderscorePrefixedVariableName
       def define_methods!
         _resource_configuration = self
 
@@ -136,7 +135,6 @@ module API
           method_names[:resource_scope] = :"scope_for_#{the_collection_name}"
         end
       end
-
     end
   end
 end

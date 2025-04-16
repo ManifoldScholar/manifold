@@ -35,5 +35,4 @@ class IngestionSourceUploader < Shrine
       RUBY
     end
   end
-
 end

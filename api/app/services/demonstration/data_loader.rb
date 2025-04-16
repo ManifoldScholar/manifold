@@ -3,7 +3,6 @@ require "open-uri"
 module Demonstration
   # Loads demo data into the Manifold installation
   class DataLoader
-
     def initialize
       @logger = Logger.new($stdout)
       @logger.formatter = proc { |severity, _datetime, _progname, msg|

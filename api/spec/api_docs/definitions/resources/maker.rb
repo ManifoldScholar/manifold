@@ -2,7 +2,6 @@ module APIDocs
   module Definitions
     module Resources
       class Maker
-
         REQUIRED_CREATE_ATTRIBUTES = [].freeze
 
         REQUEST_ATTRIBUTES = {

@@ -20,11 +20,10 @@ RSpec.describe "Resource Import API", type: :request do
   let_it_be(:resource_import, refind: true) { FactoryBot.create(:resource_import, project: project) }
 
   describe "creates a resource_import model" do
-
     let(:path) { api_v1_project_relationships_resource_imports_path(project) }
     let(:api_response) { JSON.parse(response.body) }
 
-    before(:each) do
+    before do
       post path, headers: admin_headers, params: valid_params
     end
 
@@ -35,8 +34,7 @@ RSpec.describe "Resource Import API", type: :request do
   end
 
   describe "updates a resource_import model" do
-
-    before(:each) do
+    before do
       @resource_import = FactoryBot.create(:resource_import, project: project)
     end
 
@@ -44,7 +42,7 @@ RSpec.describe "Resource Import API", type: :request do
 
     it "has a 200 SUCCESS status code" do
       put path, headers: admin_headers, params: valid_params
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
 
     it "changes the state of the import model" do
@@ -56,7 +54,7 @@ RSpec.describe "Resource Import API", type: :request do
   end
 
   describe "sends a single resource import model" do
-    before(:each) do
+    before do
       @resource_import = FactoryBot.create(:resource_import, project: project)
     end
 
@@ -67,7 +65,7 @@ RSpec.describe "Resource Import API", type: :request do
       describe "the response" do
         it "has a 200 status code" do
           get path, headers: headers
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -77,7 +75,7 @@ RSpec.describe "Resource Import API", type: :request do
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
           get path, headers: headers
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end

@@ -6,5 +6,4 @@ class TextDecorator < ApplicationDecorator
   def reader_url
     ClientURL.call(:reader_text, text_slug: slug)
   end
-
 end

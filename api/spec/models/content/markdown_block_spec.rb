@@ -12,15 +12,15 @@ RSpec.describe Content::MarkdownBlock do
   end
 
   it "is invalid if style is blank" do
-    expect(FactoryBot.build(:markdown_block, style: "")).to_not be_valid
+    expect(FactoryBot.build(:markdown_block, style: "")).not_to be_valid
   end
 
   it "is invalid if style is not \"shaded\" or \"normal\"" do
-    expect(FactoryBot.build(:markdown_block, style: "camo")).to_not be_valid
+    expect(FactoryBot.build(:markdown_block, style: "camo")).not_to be_valid
   end
 
   it "has the correct available attributes" do
-    expect(markdown_block.available_attributes).to match_array [:style, :body]
+    expect(markdown_block.available_attributes).to contain_exactly(:style, :body)
   end
 
   describe "#renderable?" do
@@ -37,5 +37,5 @@ RSpec.describe Content::MarkdownBlock do
     end
   end
 
-  it_should_behave_like "a model with formatted attributes"
+  it_behaves_like "a model with formatted attributes"
 end

@@ -1,13 +1,12 @@
 module V1
   class StylesheetSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :name, Types::String
     typed_attribute :source_identifier, Types::String.optional.meta(read_only: true)
     typed_attribute :styles, Types::String.optional.meta(
       read_only: true,
-      description: "Validated, scoped, and transformed styles that will be "\
+      description: "Validated, scoped, and transformed styles that will be " \
       "applied in the reader."
     )
     typed_attribute :ingested, Types::Bool.meta(read_only: true)
@@ -24,6 +23,5 @@ module V1
       typed_belongs_to :text
       typed_has_many :text_sections
     end
-
   end
 end

@@ -35,7 +35,6 @@ module Ingestions
           klass_name.pluralize.underscore
         end
       end
-
     end
   end
 end

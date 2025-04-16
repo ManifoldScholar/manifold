@@ -43,6 +43,5 @@ module Attachments
     def process_image
       ImageProcessing::MiniMagick.apply(config).loader(page: 0).call(file_resource)
     end
-
   end
 end

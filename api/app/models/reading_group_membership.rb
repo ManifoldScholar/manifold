@@ -39,11 +39,11 @@ class ReadingGroupMembership < ApplicationRecord
   delegate :moderator?, :member?, to: :role
 
   before_validation :ensure_anonymous_label
-  after_save :ensure_user_roles!
-  after_commit :enqueue_notification, on: [:create]
   after_create :create_entitlements!
   before_destroy :remove_entitlements!
   after_destroy :remove_user_roles!
+  after_save :ensure_user_roles!
+  after_commit :enqueue_notification, on: [:create]
 
   aasm do
     state :active, initial: true

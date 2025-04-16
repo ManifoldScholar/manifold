@@ -8,7 +8,7 @@ module Updaters
     end
 
     def adjusted_attributes
-      attr = super()
+      attr = super
       return attr unless attributes_include_strategy_configuration?(attr)
 
       merge_strategy_configuration!(attr)
@@ -29,6 +29,5 @@ module Updaters
       updates = attr["configuration"][strategy]
       attr["configuration"][strategy] = base.merge(updates)
     end
-
   end
 end

@@ -1,7 +1,6 @@
 module Ingestions
   module Fetchers
     class GoogleDoc < Ingestions::Fetchers::AbstractFetcher
-
       def perform
         fetch
         { title: drive_file_pointer.title, file: temp_file }
@@ -54,7 +53,6 @@ module Ingestions
         raise Fetchers::FetchFailed,
               "Unable to start google drive session due to authorization error."
       end
-
     end
   end
 end

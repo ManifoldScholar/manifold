@@ -18,7 +18,7 @@ module StiPreload
       #
       # Assumes store_full_sti_class is true, the default.
       def preload_sti
-        types_in_db = \
+        types_in_db =
           base_class
             .unscoped
             .select(inheritance_column)

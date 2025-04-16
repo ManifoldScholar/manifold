@@ -2,20 +2,20 @@ class ReferencedPathStrategy < ClassyEnum::Base
   include ActiveSupport::Configurable
   include Dry::Monads::Result::Mixin
 
-  EXTERNAL_LINK = %r{\Ahttps?://}i.freeze
+  EXTERNAL_LINK = %r{\Ahttps?://}i
   INGESTION_SOURCE_PROXY = %r{\A
   /api/proxy/ingestion_sources
   /(?<ingestion_source_id>[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})
-  }xmsi.freeze
+  }xmsi
   LEGACY_INGESTION_SOURCE_PATH = %r{\A
   /system/(?<attachment_id>ingestion\S+)
-  }xmsi.freeze
+  }xmsi
   SECTION_READ_LINK = %r{\A
   /read
   /(?<text_id>[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})
   /section
   /(?<text_section_id>[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12})
-  }xmsi.freeze
+  }xmsi
 
   def known?
     !unknown?

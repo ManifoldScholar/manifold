@@ -45,5 +45,4 @@ class ExportUploader < Shrine
       RUBY
     end
   end
-
 end

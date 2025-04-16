@@ -6,7 +6,7 @@ RSpec.describe "Search Results", type: :request do
     let!(:text_resource) { FactoryBot.create(:text) }
     let!(:project_resource) { FactoryBot.create(:project, title: keyword, texts: [text_resource]) }
 
-    around(:example) do |example|
+    around do |example|
       WebMock.disable_net_connect!(allow: [/127\.0\.0\.1:2?9200/, /localhost:2?9200/, /elasticsearch:9200/])
       Journal.reindex
       Text.reindex

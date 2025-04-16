@@ -1,5 +1,4 @@
 module ManifoldEnv
-  # rubocop:disable Metrics/ParameterLists
   # rubocop:disable Metrics/MethodLength
   class CustomOauthProvider
     def initialize(

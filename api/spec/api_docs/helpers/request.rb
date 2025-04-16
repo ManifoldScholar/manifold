@@ -1,7 +1,6 @@
 module APIDocs
   module Helpers
     class Request
-
       include Helpers::Inflections
 
       attr_accessor :action, :options

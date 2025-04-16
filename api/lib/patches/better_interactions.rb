@@ -217,7 +217,7 @@ module Patches
     # @option options [Symbol, nil] error_target
     # @option options [Symbol, nil] guard_target
     # @return [Boolean]
-    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/ParameterLists
+    # rubocop:disable Metrics/CyclomaticComplexity
     def transition_to!(target_state, on:, assimilate: false, check_if_transitionable: true, error: :something_went_wrong, guard_error: :cannot_transition, metadata: {}, **options)
       model = on.is_a?(Symbol) ? __send__(on) : on
 

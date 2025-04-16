@@ -6,11 +6,11 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
     Settings.instance.update_from_environment!
   end
 
-  before(:each) do
+  before do
     WebMock.allow_net_connect!
   end
 
-  around(:example) do
+  around do
     if bucket.present?
       example.run
     else
@@ -30,7 +30,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
 
   describe "#create" do
     it "creates new empty file" do
-      gcs.create_file("the-unique-file-id", info = {})
+      gcs.create_file("the-unique-file-id", {})
       expect(gcs.get_file("the-unique-file-id").each.to_a.join).to eq ""
     end
   end

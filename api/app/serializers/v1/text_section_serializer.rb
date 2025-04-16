@@ -1,6 +1,5 @@
 module V1
   class TextSectionSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :text_slug, Types::String
@@ -27,6 +26,5 @@ module V1
       typed_attribute :social_description, Types::String.meta(read_only: true).optional
       typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
     end
-
   end
 end

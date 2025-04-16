@@ -3,7 +3,7 @@
 require "swagger_helper"
 
 RSpec.describe "Action Callouts", type: :request do
-  conditional_requirements = <<~HEREDOC.freeze
+  conditional_requirements = <<~HEREDOC
     Requirements:
     * Requires text relationship if type is read or toc
     * Requires url if type is link

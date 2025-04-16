@@ -10,7 +10,7 @@ module ExportStrategies
     # Matches an attribute name that ends with `password` that isn't `sftp_password`.
     #
     # @api private
-    NON_SFTP_PASSWORD = /(?<!sftp_)password\z/.freeze
+    NON_SFTP_PASSWORD = /(?<!sftp_)password\z/
     filter_attributes! NON_SFTP_PASSWORD, :private_key
 
     DEFAULT_TARGET_NAME_FORMAT = "%s-%t.%e".freeze

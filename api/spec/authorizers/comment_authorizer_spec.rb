@@ -35,7 +35,6 @@ RSpec.describe "Comment Abilities", :authorizer do
       the_subject_behaves_like "instance abilities", Comment, create: true, read: true, update: false, delete: false
 
       the_subject_behaves_like "class abilities", Comment, create: true, read: true, update: true, delete: true
-
     end
 
     context "with an unconfirmed email" do
@@ -56,7 +55,7 @@ RSpec.describe "Comment Abilities", :authorizer do
   end
 
   context "when the comment is on an annotation in a closed project with disabled engagement" do
-    let_it_be(:project, refind: true) { FactoryBot.create(:project, :with_restricted_access, disable_engagement: true ) }
+    let_it_be(:project, refind: true) { FactoryBot.create(:project, :with_restricted_access, disable_engagement: true) }
     let_it_be(:user, refind: true) { FactoryBot.create(:user) }
     let_it_be(:reading_group, refind: true) { FactoryBot.create(:reading_group) }
     let_it_be(:reading_group_membership, refind: true) { FactoryBot.create(:reading_group_membership, reading_group: reading_group, user: user) }
@@ -105,7 +104,7 @@ RSpec.describe "Comment Abilities", :authorizer do
           subject.mark_email_confirmed!
         end
 
-        the_subject_behaves_like "instance abilities", Comment, { create: true, read: true, update: false, delete: false}
+        the_subject_behaves_like "instance abilities", Comment, { create: true, read: true, update: false, delete: false }
       end
 
       context "with an unconfirmed email" do
@@ -113,7 +112,7 @@ RSpec.describe "Comment Abilities", :authorizer do
           subject.clear_email_confirmation!
         end
 
-        the_subject_behaves_like "instance abilities", Comment, { create: false, read: true, update: false, delete: false}
+        the_subject_behaves_like "instance abilities", Comment, { create: false, read: true, update: false, delete: false }
       end
     end
   end

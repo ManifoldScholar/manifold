@@ -5,13 +5,11 @@ module NotificationPreferences
     has_many :notification_preferences, dependent: :destroy, autosave: true, inverse_of: model_name.i18n_key
 
     # Returns users that have opted into a digest for a given frequency
-    # rubocop:disable Layout/LineLength
     scope :with_digest_for_frequency, ->(frequency) { where(id: NotificationPreference.for_user(:digest, frequency)) }
 
     # Returns users that have notification preferences matching
     # the given kind and frequency.
     scope :with_notification_for_frequency, ->(kind, frequency) { where(id: NotificationPreference.for_user(kind, frequency)) if kind.present? && frequency.present? }
-    # rubocop:enable Layout/LineLength
   end
 
   # @!attribute [rw] notification_preferences_by_kind

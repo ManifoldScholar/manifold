@@ -2,7 +2,6 @@ module APIDocs
   module Definitions
     module Resources
       class User
-
         BODY_RESPONSE_DESCRIPTION = <<~HEREDOC.freeze
           Some user data is private and only returned if the user resource being returned is the same as the user requesting the resource, or if the user requesting the user resource is authorized to update that user. Private data includes the following attributes:
           * email
@@ -35,7 +34,7 @@ module APIDocs
               colors: Types::Hash, # TODO: Flesh out class abilities
               typography: Types::Hash, # TODO: Flesh out class abilities
               reading_groups: Types::Hash # TODO: Flesh out class abilities
-              ),
+            ),
               locale: Types::Hash
           ),
           notification_preferences_by_kind: Types::Array.of(
@@ -57,13 +56,11 @@ module APIDocs
         }.freeze
 
         class << self
-
           include APIDocs::Definitions::Resource
 
           def create_attributes
             request_attributes.except(:unsubscribe, :remove_avatar)
           end
-
         end
       end
     end

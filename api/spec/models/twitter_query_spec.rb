@@ -6,22 +6,21 @@ RSpec.describe TwitterQuery, type: :model do
   end
 
   context "its most_recent_tweet_id" do
-
-    let(:query) {
+    let(:query) do
       query = FactoryBot.create(:twitter_query)
       query.most_recent_tweet_id = 5
       query.save
       query
-    }
+    end
 
     it "is reset when query is changed" do
       query.query = "#changed"
-      expect{ query.save }.to change{query.most_recent_tweet_id}.to nil
+      expect { query.save }.to change { query.most_recent_tweet_id }.to nil
     end
 
     it "is not reset when query is unchanged" do
       query.result_type = "popular"
-      expect{ query.save }.to_not change{query.most_recent_tweet_id}
+      expect { query.save }.not_to change { query.most_recent_tweet_id }
     end
   end
 

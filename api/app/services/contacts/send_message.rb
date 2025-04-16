@@ -10,6 +10,5 @@ module Contacts
     def execute
       ContactMailer.contact_message(full_name, email, message).deliver
     end
-
   end
 end

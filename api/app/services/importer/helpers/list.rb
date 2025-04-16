@@ -42,7 +42,7 @@ module Importer
       # Iterates over Hash-like object (GoogleDrive::ListRow) for each row
       # (except for the first row).
       # Keys of the object are colum names (the first row).
-      def each(&_block)
+      def each(&)
         for i in 0...size
           yield(self[i])
         end

@@ -11,11 +11,11 @@ module Packaging
 
       # @api private
       # @see #normalize_path_for_gepub
-      EPUB_PREFIX = %r{epub/?}.freeze
+      EPUB_PREFIX = %r{epub/?}
 
       # @api private
       # @see #normalize_path_for_gepub
-      INITIAL_SLASH = %r{\A/}.freeze
+      INITIAL_SLASH = %r{\A/}
 
       # @!attribute [r] base_path
       # @see #build_base_path

@@ -2,7 +2,6 @@ module API
   module V1
     # SearchResultsController
     class SearchResultsController < ApplicationController
-
       record_analytics! do
         record_analytics_for_action :index, event: :search
       end
@@ -46,7 +45,6 @@ module API
           text_section: p[:text_section].presence
         }
       end
-
     end
   end
 end

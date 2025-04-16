@@ -4,7 +4,6 @@ require "signet"
 module Factory
   # Returns an analytics session object; used by the statistics model
   class AnalyticsSession
-
     def create_analytics_session
       return nil unless settings_valid?
 

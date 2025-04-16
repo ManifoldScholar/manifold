@@ -4,7 +4,7 @@ RSpec.describe V1::EntitlementSerializer do
   let(:main_trait) { raise "must set" }
   let(:target_trait) { :for_user }
   let(:other_traits) { :read_access }
-  let!(:entitlement) { FactoryBot.create :entitlement, main_trait, target_trait, *Array(other_traits)}
+  let!(:entitlement) { FactoryBot.create :entitlement, main_trait, target_trait, *Array(other_traits) }
   let(:serialized_object) { entitlement }
 
   shared_examples_for "multiple variations" do

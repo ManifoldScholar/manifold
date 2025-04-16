@@ -71,10 +71,9 @@ class NotificationMailerPreview < ActionMailer::Preview
   end
 
   def events
-    out = {
+    {
       projects: Event.where(project: Project.pluck(:id)).by_subject_type(%w(Text Resource Collection)).group_by(&:project),
       annotations_and_comments: Event.where(project: Project.pluck(:id)).by_subject_type(%w(Annotation Comment)).group_by(&:project)
     }
-    out
   end
 end

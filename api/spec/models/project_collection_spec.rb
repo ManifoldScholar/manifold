@@ -47,13 +47,13 @@ RSpec.describe ProjectCollection, type: :model do
     let(:project_collection) { FactoryBot.create(:project_collection, sort_order: "updated_at_desc") }
 
     it "returns a string order argument joined to project" do
-      expect(project_collection.project_sorting).to match_array [["updated_at", "desc"]]
+      expect(project_collection.project_sorting).to contain_exactly(["updated_at", "desc"])
     end
 
     it "defaults to created_at desc if invalid attribute" do
       project_collection.update sort_order: "bad_attribute"
 
-      expect(project_collection.project_sorting).to match_array [["created_at", "desc"]]
+      expect(project_collection.project_sorting).to contain_exactly(["created_at", "desc"])
     end
   end
 
@@ -70,7 +70,7 @@ RSpec.describe ProjectCollection, type: :model do
       it "does not change the sort_order" do
         pc = FactoryBot.create(:project_collection, sort_order: "title_asc")
         pc.smart = true
-        expect { pc.save }.to_not change(pc, :sort_order)
+        expect { pc.save }.not_to change(pc, :sort_order)
       end
     end
   end
@@ -86,13 +86,13 @@ RSpec.describe ProjectCollection, type: :model do
 
     context "when homepage == false" do
       it "excludes the collection" do
-        expect(ProjectCollection.by_visible_on_homepage).to_not include no_homepage
+        expect(ProjectCollection.by_visible_on_homepage).not_to include no_homepage
       end
     end
 
     context "when visible == false" do
       it "excludes the collection" do
-        expect(ProjectCollection.by_visible_on_homepage).to_not include not_visible
+        expect(ProjectCollection.by_visible_on_homepage).not_to include not_visible
       end
     end
 
@@ -117,13 +117,13 @@ RSpec.describe ProjectCollection, type: :model do
 
       context "when current date before date range" do
         it "excludes the collection" do
-          expect(ProjectCollection.by_visible_on_homepage).to_not include pending
+          expect(ProjectCollection.by_visible_on_homepage).not_to include pending
         end
       end
 
       context "when current date after date range" do
         it "excludes the collection" do
-          expect(ProjectCollection.by_visible_on_homepage).to_not include expired
+          expect(ProjectCollection.by_visible_on_homepage).not_to include expired
         end
       end
     end

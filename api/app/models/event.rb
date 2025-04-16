@@ -1,7 +1,6 @@
 # Events are things that happen in relation to a project. Events populate the project
 # activity feed.
 class Event < ApplicationRecord
-
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
   # ClassyEnum
@@ -118,5 +117,4 @@ class Event < ApplicationRecord
 
     project.touch
   end
-
 end

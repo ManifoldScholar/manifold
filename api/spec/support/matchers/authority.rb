@@ -99,8 +99,6 @@ RSpec::Matchers.define :be_able_to do |*verbs|
       message << "but could not #{inspect_actions(@disallowed, as_or: true)}"
     end
 
-    "#{prefix}, #{suffix}"
-
     [prefix, suffix].join(", ")
   end
 
@@ -114,8 +112,6 @@ RSpec::Matchers.define :be_able_to do |*verbs|
     suffix = [].tap do |message|
       message << "but was able to #{inspect_actions(@allowed)}"
     end
-
-    "#{prefix}, #{suffix}"
 
     [prefix, suffix].join(", ")
   end
@@ -151,8 +147,6 @@ RSpec::Matchers.define :allow_a_user_to do |*verbs|
       message << "but could not #{inspect_actions(@disallowed, as_or: true)}"
     end
 
-    "#{prefix}, #{suffix}"
-
     [prefix, suffix].join(", ")
   end
 
@@ -166,8 +160,6 @@ RSpec::Matchers.define :allow_a_user_to do |*verbs|
     suffix = [].tap do |message|
       message << "but was able to #{inspect_actions(@allowed)}"
     end
-
-    "#{prefix}, #{suffix}"
 
     [prefix, suffix].join(", ")
   end

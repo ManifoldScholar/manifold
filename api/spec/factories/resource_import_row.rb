@@ -9,6 +9,5 @@ FactoryBot.define do
       values { %w(a b c) }
       row_type { ResourceImportRow::ROW_TYPE_HEADER }
     end
-
   end
 end

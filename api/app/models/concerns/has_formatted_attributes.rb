@@ -39,8 +39,6 @@ module HasFormattedAttributes
   end
 
   module ClassMethods
-    # rubocop:disable Naming/PredicateName
-
     # @!scope class
     # @return [FormattedAttributes::Configuration]
     attr_accessor :formatted_attributes
@@ -84,7 +82,5 @@ module HasFormattedAttributes
         end
       end
     end
-
-    # rubocop:enable Naming/PredicateName
   end
 end

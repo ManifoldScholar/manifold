@@ -42,7 +42,6 @@ module Importer
       end
     end
 
-    # rubocop:disable all
     def upsert_project(include_texts)
       project = find_project
       project.draft = false
@@ -72,7 +71,7 @@ module Importer
     def import_resources(project)
       drive_sheet = @project_json[:resource_drive_sheet]
       drive_dir = @project_json[:resource_drive_dir]
-      return unless !drive_sheet.blank? && !drive_dir.blank?
+      return unless drive_sheet.present? && drive_dir.present?
 
       importer = Importer::DriveResources.new(project.id, drive_sheet, drive_dir,
                                               @creator, @logger)
@@ -141,7 +140,7 @@ module Importer
     def import_texts(project, texts, **attrs)
       return unless texts
 
-      texts = texts.is_a?(Array) ? texts : [texts]
+      texts = [texts] unless texts.is_a?(Array)
       texts.each do |text_file_name|
         text_path = "#{@path}/texts/#{text_file_name}"
         text = import_text(project, text_path)

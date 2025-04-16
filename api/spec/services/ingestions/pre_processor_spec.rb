@@ -17,5 +17,4 @@ RSpec.describe Ingestions::PreProcessor do
     compare = "<div><p>Είναι πλέον</p><p>Είναι πλέον</p></div>"
     expect(text.text_sections.first.body).to eq_ignoring_whitespace compare
   end
-
 end

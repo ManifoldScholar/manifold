@@ -1,5 +1,4 @@
 class ReadingGroupMembershipDecorator < ApplicationDecorator
-
   delegate_all
 
   def member_full_name
@@ -17,5 +16,4 @@ class ReadingGroupMembershipDecorator < ApplicationDecorator
   def count
     object.reading_group.reading_group_memberships.count
   end
-
 end

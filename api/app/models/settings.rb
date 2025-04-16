@@ -11,13 +11,13 @@ class Settings < ApplicationRecord
 
   self.filter_attributes = [*SECTIONS.dup, :fa_cache]
 
-  attribute :general, SettingSections::General.to_type, default: {}
-  attribute :email, SettingSections::Email.to_type, default: {}
-  attribute :ingestion, SettingSections::Ingestion.to_type, default: {}
-  attribute :integrations, SettingSections::Integrations.to_type, default: {}
-  attribute :rate_limiting, SettingSections::RateLimiting.to_type, default: {}
-  attribute :secrets, SettingSections::Secrets.to_type, default: {}
-  attribute :theme, SettingSections::Theme.to_type, default: {}
+  attribute :general, SettingSections::General.to_type, default: -> { {} }
+  attribute :email, SettingSections::Email.to_type, default: -> { {} }
+  attribute :ingestion, SettingSections::Ingestion.to_type, default: -> { {} }
+  attribute :integrations, SettingSections::Integrations.to_type, default: -> { {} }
+  attribute :rate_limiting, SettingSections::RateLimiting.to_type, default: -> { {} }
+  attribute :secrets, SettingSections::Secrets.to_type, default: -> { {} }
+  attribute :theme, SettingSections::Theme.to_type, default: -> { {} }
 
   validates :singleton_guard, inclusion: [0], uniqueness: true
 

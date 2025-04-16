@@ -8,7 +8,7 @@ RSpec.describe Ingestions::Converters::MsWord do
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let(:context) { create_context(ingestion) }
 
-    before(:each) do
+    before do
       @sources = Dir.glob(context.source_root + "/**/*.docx")
       @sources.each do |source|
         described_class.run context: context, source_path: context.rel(source)
@@ -36,5 +36,4 @@ RSpec.describe Ingestions::Converters::MsWord do
       end
     end
   end
-
 end

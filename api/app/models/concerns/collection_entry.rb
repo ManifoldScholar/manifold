@@ -18,7 +18,7 @@ module CollectionEntry
   # @!attribute [r] collectable_id
   # @return [String]
   def collectable_id
-    read_attribute collectable_associations.collectable.foreign_key
+    self[collectable_associations.collectable.foreign_key]
   end
 
   module ClassMethods

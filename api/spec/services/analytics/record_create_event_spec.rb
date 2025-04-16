@@ -10,7 +10,7 @@ RSpec.describe Analytics::RecordCreateEvent do
       it "should create a create event for an annotation" do
         expect do
           described_class.run analytics_visit: visit, record: annotation
-        end.to change{ Analytics::Event.where(name: "create_annotation").count }.by 1
+        end.to change { Analytics::Event.where(name: "create_annotation").count }.by 1
       end
     end
 

@@ -10,7 +10,6 @@ module API
             outcome.valid?
             render_single_resource outcome.result
           end
-
         end
       end
     end

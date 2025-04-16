@@ -1,7 +1,6 @@
 module Analytics
   module Reports
     class AnalyticsResult < ActiveInteraction::Base
-
       PARSEABLE_VALUES = %i[meta data].freeze
 
       attr_reader(:id, :data, :reports, :start_date, :end_date)
@@ -45,7 +44,6 @@ module Analytics
       def input_hash
         Digest::SHA2.hexdigest inputs.except(:data).reduce("") { |m, i| m + i.to_s }
       end
-
     end
   end
 end

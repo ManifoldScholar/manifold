@@ -16,10 +16,11 @@ RSpec.describe Ingestions::PostProcessor do
 
   describe "the text section bodies" do
     it "generates the body" do
-      expect(text.text_sections.pluck(:body)).to_not include nil
+      expect(text.text_sections.pluck(:body)).not_to include nil
     end
+
     it "generates the body_json" do
-      expect(text.text_sections.pluck(:body_json)).to_not include nil
+      expect(text.text_sections.pluck(:body_json)).not_to include nil
     end
   end
 

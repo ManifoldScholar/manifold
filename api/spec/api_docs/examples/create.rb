@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples_for "an API create request" do |options|
+RSpec.shared_context "an API create request" do |options|
   api_spec_helper = APIDocs::Helpers::Request.new(options, :create)
 
   let(:body) { json_structure_from_factory(api_spec_helper.factory, type: :request) } if api_spec_helper.response_body?

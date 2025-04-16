@@ -4,7 +4,6 @@ module API
       module Relationships
         # Imports resources into a project
         class ResourceImportsController < AbstractProjectChildController
-
           resourceful! ResourceImport do
             @project.resource_imports
           end
@@ -42,7 +41,6 @@ module API
               project_id: @project.id
             )
           end
-
         end
       end
     end

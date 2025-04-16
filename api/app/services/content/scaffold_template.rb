@@ -1,6 +1,5 @@
 module Content
   class ScaffoldTemplate
-
     DEFAULT = ActiveSupport::OrderedHash.new
     DEFAULT["Content::RecentActivityBlock"] = {}
     DEFAULT["Content::TextsBlock"] = {}
@@ -69,6 +68,5 @@ module Content
 
       DEFAULT
     end
-
   end
 end

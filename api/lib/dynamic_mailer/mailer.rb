@@ -19,7 +19,6 @@ module DynamicMailer
 
     private
 
-    # rubocop:disable Metrics/MethodLength
     def handle_exception(e)
       msg =
         case e.class.name
@@ -38,7 +37,6 @@ module DynamicMailer
         end
       raise APIExceptions::StandardError, msg
     end
-    # rubocop:enable Metrics/MethodLength
 
     def add_defaults!(mail)
       mail.from = @config.from unless mail.from
@@ -63,6 +61,5 @@ module DynamicMailer
       mailer = Mail::Sendmail.new(@config.sendmail_config)
       mailer.deliver!(mail)
     end
-
   end
 end

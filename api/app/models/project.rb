@@ -122,8 +122,8 @@ class Project < ApplicationRecord
 
   # Callbacks
   before_validation :ensure_restricted_access_notice_content!
-  before_update :prepare_to_reindex_children, if: :draft_changed?
   before_create :assign_publisher_defaults!
+  before_update :prepare_to_reindex_children, if: :draft_changed?
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job
 
@@ -244,7 +244,6 @@ class Project < ApplicationRecord
              batch_size: 500,
              highlight: [:title, :body])
 
-  # rubocop:disable Metrics/AbcSize
   def search_data
     {
       search_result_type: search_result_type,
@@ -256,7 +255,6 @@ class Project < ApplicationRecord
       metadata: metadata.values.reject(&:blank?)
     }.merge(search_hidden)
   end
-  # rubocop:enable Metrics/AbcSize
 
   def search_hidden
     {
@@ -351,7 +349,7 @@ class Project < ApplicationRecord
   end
 
   def recently_updated?
-    updated? && updated_at >= Time.current - 1.week
+    updated? && updated_at >= 1.week.ago
   end
 
   def reindex_children
@@ -497,7 +495,6 @@ class Project < ApplicationRecord
 
     private
 
-    # rubocop:disable Metrics/AbcSize
     # This creates a case statement to be supplied to `where`.
     #
     # * If the project is a draft, only show for users with draft access roles
@@ -518,7 +515,6 @@ class Project < ApplicationRecord
         stmt.else(true)
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     # @see .arel_with_roles_for
     # @param [User] user

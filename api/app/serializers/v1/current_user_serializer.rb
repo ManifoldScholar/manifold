@@ -1,6 +1,5 @@
 module V1
   class CurrentUserSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
     include ::V1::Concerns::UserAttributes
 
@@ -38,7 +37,6 @@ module V1
     end
 
     class << self
-
       private
 
       def models_with_authorization
@@ -52,6 +50,5 @@ module V1
         models.select { |klass| klass.respond_to? :readable_by? }
       end
     end
-
   end
 end

@@ -20,12 +20,12 @@ module TestHelpers
     end
 
     def matcher_for_ability(ability)
-      "be_#{Authority.abilities.fetch(ability)}_by".to_sym
+      :"be_#{Authority.abilities.fetch(ability)}_by"
     end
 
     # Roughly...
     def indefinite_article_for(klass)
-      return nil if klass == Settings || klass == Statistics
+      return nil if [Settings, Statistics].include?(klass)
       return "a " unless %w(a e i o u).include? klass.to_s.downcase.first
       "an "
     end

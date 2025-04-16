@@ -56,7 +56,6 @@ module Ingestions
         info "services.ingestions.conversion.log.perform",
              source: File.basename(source_path)
       end
-
     end
   end
 end

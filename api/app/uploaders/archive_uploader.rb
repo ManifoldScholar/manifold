@@ -60,5 +60,4 @@ class ArchiveUploader < Shrine
       RUBY
     end
   end
-
 end

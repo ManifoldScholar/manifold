@@ -35,7 +35,6 @@ RSpec.describe ExternalAuth::Provisioners::User, external_auth_provisioner: true
         set_attributes("set the user's name to the twitter name") do
           { name: auth_hash.info.name }
         end
-
       end
     end
   end

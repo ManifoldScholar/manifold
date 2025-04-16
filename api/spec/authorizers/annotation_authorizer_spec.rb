@@ -117,7 +117,6 @@ RSpec.describe "Annotation Abilities", :authorizer do
 
           the_subject_behaves_like "instance abilities", Annotation, abilities
         end
-
       end
     end
 

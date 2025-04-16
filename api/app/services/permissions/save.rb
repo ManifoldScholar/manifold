@@ -30,6 +30,5 @@ module Permissions
       Permission.fetch!(@resource, @user) if permission.role_names.present?
     end
     # rubocop:enable Metrics/AbcSize
-
   end
 end

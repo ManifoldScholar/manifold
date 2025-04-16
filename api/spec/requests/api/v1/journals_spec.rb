@@ -39,5 +39,4 @@ RSpec.describe "Journals API", type: :request do
 
     include_examples "an API create request", model: Journal, authorized_user: :admin
   end
-
 end

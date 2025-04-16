@@ -54,7 +54,7 @@ module API
       # @return [void]
       def render_single_resource(model, ok_status: default_ok_status, error_status: :unprocessable_entity, **options)
         options[:serializer] ||= model_serializer
-        options[:serializer] = error_serializer if (action_name == "update" || action_name == "create") && !model.valid?(options[:context])
+        options[:serializer] = error_serializer if ["update", "create"].include?(action_name) && !model.valid?(options[:context])
         options[:location] ||= build_location_for model
         options[:status] ||= build_status_for model, ok_status, error_status, options[:context]
         options[:full] = true
@@ -74,7 +74,7 @@ module API
       # @param [Symbol] error
       # @return [Symbol]
       def build_status_for(model, ok, error, _context)
-        return ok unless action_name == "update" || action_name == "create"
+        return ok unless ["update", "create"].include?(action_name)
 
         model.errors.none? ? ok : error
       end
@@ -103,7 +103,6 @@ module API
         end
       end
 
-      # rubocop:disable Metrics/MethodLength
       class_methods do
         def setup_resources!(model:, authorize: true, authorize_options: {}, &model_scope)
           self.resource_configuration = API::V1::ResourcefulMethods.new(
@@ -148,7 +147,6 @@ module API
           "::V1::#{detect_model_name}Serializer".safe_constantize
         end
       end
-      # rubocop:enable Metrics/MethodLength
     end
   end
 end

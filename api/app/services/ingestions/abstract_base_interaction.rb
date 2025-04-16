@@ -7,7 +7,7 @@ module Ingestions
     private
 
     def compose(interaction_klass, **composed_inputs)
-      super interaction_klass, composed_inputs.merge(shared_inputs)
+      super(interaction_klass, composed_inputs.merge(shared_inputs))
     end
 
     def compose_into(target, interaction_klass, **composed_inputs)

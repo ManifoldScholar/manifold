@@ -1,6 +1,5 @@
 # A section in a text
 class TextSection < ApplicationRecord
-
   attribute :body_json, :indifferent_hash
 
   # Misc. Concerns
@@ -77,9 +76,9 @@ class TextSection < ApplicationRecord
 
   # Callbacks
   before_validation :update_body_json
+  after_destroy :remove_linked_toc_entries
   after_save :extrapolate_nodes!
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
-  after_destroy :remove_linked_toc_entries
 
   # Scopes
   scope :in_texts, lambda { |texts|
@@ -204,7 +203,7 @@ class TextSection < ApplicationRecord
     slice(:id, :name).merge(hidden: hidden_in_reader)
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def properties_for_text_nodes
     inline = Serializer::HTML::INLINE_ELEMENTS
     *, nodes = text_nodes.reverse.inject([false, []]) do |(once_more, nodes), node|
@@ -231,7 +230,7 @@ class TextSection < ApplicationRecord
     end
     nodes.reverse.map.with_index(1) { |node, index| node.merge(position: index) }
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   def text_nodes(node = body_json, nodes = [], parent = nil)
     if node["node_type"] == "text"

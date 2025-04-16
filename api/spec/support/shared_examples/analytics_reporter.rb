@@ -4,7 +4,7 @@ RSpec.shared_context "with analytics visits" do
   let_it_be(:admin) { FactoryBot.create(:user, :admin) }
 
   def running_the_interaction!(**inputs)
-    report_scope = try(:scope)
+    try(:scope)
 
     described_class.run!(
       resource: try(:scope),
@@ -16,7 +16,7 @@ RSpec.shared_context "with analytics visits" do
   alias_method :run_the_interaction!, :running_the_interaction!
 
   def running_the_interaction(**inputs)
-    report_scope = try(:scope)
+    try(:scope)
 
     described_class.run(
       resource: try(:scope),
@@ -37,7 +37,7 @@ RSpec.shared_context "with analytics visits" do
     max_offset.downto(0).map do |offset|
       day = from_date - offset.days
 
-      result = {}.tap do |res|
+      {}.tap do |res|
         res["x"] = day.to_s
         res["y"] = offset == 0 ? visitor_count : repeat_visitor_count
       end
@@ -57,8 +57,8 @@ RSpec.shared_context "with analytics visits" do
 
   let_it_be(:tokens) do
     Timecop.freeze do
-      repeat_visitors.each_with_object({}) { |u, h| h[u] = SecureRandom.uuid }
-        .merge(single_visitors.each_with_object({}) { |u, h| h[u] = SecureRandom.uuid })
+      repeat_visitors.index_with { |u| SecureRandom.uuid }
+        .merge(single_visitors.index_with { |u| SecureRandom.uuid })
     end
   end
 
@@ -295,7 +295,6 @@ RSpec.shared_examples_for "analytics reporter events" do
         expect(actual).to eq expected
       end
     rescue Exception => e
-
       raise e
     end
   end

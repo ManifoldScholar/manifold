@@ -9,6 +9,5 @@ module Updaters
         :variant_format_two, :variant_poster, :captions_track
       ]
     end
-
   end
 end

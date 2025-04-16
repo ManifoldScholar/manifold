@@ -5,6 +5,5 @@ module ProjectCollectionJobs
         ProjectCollectionJobs::CacheCollectionProjectsJob.perform_later project_collection
       end
     end
-
   end
 end

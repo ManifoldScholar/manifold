@@ -37,7 +37,6 @@ module ProxiedAssociations
   end
   # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
-  # rubocop:disable Naming/PredicateName
   class_methods do
     def available_relationships
       reference_configurations.map(&:name)
@@ -89,5 +88,4 @@ module ProxiedAssociations
       RUBY
     end
   end
-  # rubocop:enable Naming/PredicateName
 end

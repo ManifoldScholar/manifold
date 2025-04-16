@@ -14,6 +14,5 @@ module Ingestions
     def execute
       Ingestion.create(source: source, external_source_url: url, project: project, creator: creator)
     end
-
   end
 end

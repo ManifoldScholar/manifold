@@ -41,6 +41,6 @@ RSpec.describe ProjectChildAuthorizer do
   context "with a text section" do
     let!(:project_child) { FactoryBot.create :text_section, text: text }
 
-    it_should_behave_like "supports restricted access"
+    it_behaves_like "supports restricted access"
   end
 end

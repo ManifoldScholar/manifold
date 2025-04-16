@@ -22,53 +22,51 @@ RSpec.describe "My Favorites API", type: :request do
     let(:path) { api_v1_me_relationships_favorites_path }
 
     context "when the user is not authenticated" do
-      before(:each) { get path }
+      before { get path }
+
       it "has a 401 status code" do
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
     context "when the user is a reader" do
+      before { get path, headers: reader_headers }
 
-      before(:each) { get path, headers: reader_headers }
       let(:api_response) { JSON.parse(response.body) }
 
       describe "the response" do
-
         it "includes an array of data" do
           expect(api_response["data"]).to be_instance_of Array
         end
+
         it "has a 200 status code" do
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
   end
 
   describe "creates a favorite" do
-
     let(:path) { api_v1_me_relationships_favorites_path }
 
     context "when the user is not authenticated" do
-
-      before(:each) { post path }
+      before { post path }
 
       describe "the response" do
-
         it "has a 401 status code" do
-          expect(response).to have_http_status(401)
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end
 
     context "when there is an authenticated user" do
+      before { post path, headers: reader_headers, params: params }
 
-      before(:each) { post path, headers: reader_headers, params: params}
       let(:api_response) { JSON.parse(response.body) }
 
       describe "the response" do
         it "has a 201 status code" do
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(:created)
         end
 
         it "includes the current user id" do
@@ -88,51 +86,53 @@ RSpec.describe "My Favorites API", type: :request do
 
   # Show action
   describe "sends a favorite" do
-
     let(:path) { api_v1_me_relationships_favorite_path(reader_favorite) }
     let(:your_path) { api_v1_me_relationships_favorite_path(not_my_favorite) }
 
     context "when there is not an authenticated user" do
-      before(:each) { get path }
+      before { get path }
+
       describe "the response" do
         it "has a 401 status code" do
-          expect(response).to have_http_status(401)
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end
 
     context "when there is an authenticated user" do
-      before(:each) { get path, headers: reader_headers }
+      before { get path, headers: reader_headers }
+
       describe "the response" do
         it "has a 204 status code" do
-          expect(@response).to have_http_status(200)
+          expect(@response).to have_http_status(:ok)
         end
       end
-
     end
   end
 
   # Destroy action
   describe "destroys a favorite" do
-
     let(:path) { api_v1_me_relationships_favorite_path(reader_favorite) }
 
     context "when the user has not authenticated" do
-      before(:each) { delete path}
+      before { delete path }
+
       describe "the response" do
         it "has a 401 status code" do
-          expect(response).to have_http_status(401)
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end
 
     context "when the user is a reader" do
-      before(:each) { delete path, headers: reader_headers }
+      before { delete path, headers: reader_headers }
+
       describe "the response" do
         it "has a 204 no content status code" do
-          expect(response).to have_http_status(204)
+          expect(response).to have_http_status(:no_content)
         end
       end
+
       describe "the favorite" do
         it "is destroyed" do
           expect(reader.favorite?(reader_favorite)).to be false

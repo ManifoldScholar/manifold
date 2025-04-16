@@ -40,19 +40,19 @@ RSpec.describe "When re-ingesting a text using the Document strategy", integrati
   it "changes the text timestamp during re-ingestion" do
     pre = text.updated_at
     post = after_text.reload.updated_at
-    expect(pre).to_not eq post
+    expect(pre).not_to eq post
   end
 
   it "changes body when its re-ingested" do
     pre = section.body
     post = after_text.text_sections.first.reload.body
-    expect(pre).to_not eq post
+    expect(pre).not_to eq post
   end
 
   it "changes body_json when its re-ingested" do
     pre = section.body
     post = after_text.text_sections.first.reload.body
-    expect(pre).to_not eq post
+    expect(pre).not_to eq post
   end
 
   it "fails to move the annotation when the subject is ambiguous" do
@@ -78,5 +78,4 @@ RSpec.describe "When re-ingesting a text using the Document strategy", integrati
     Annotations::AdoptOrOrphan.run annotation: annotation
     expect(annotation.reload.orphaned).to be false
   end
-
 end

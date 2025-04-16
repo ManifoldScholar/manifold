@@ -1,6 +1,5 @@
 # Tracks the relationship between texts and subjects
 class TextSubject < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -13,5 +12,4 @@ class TextSubject < ApplicationRecord
   def to_s
     subject.title
   end
-
 end

@@ -14,14 +14,12 @@ module V1
     end
 
     class Errors
-
       def initialize(errors)
         @time = Time.now
         @random = SecureRandom.hex(6)
         @errors = errors
       end
 
-      # rubocop:disable Metrics/MethodLength
       def for_serialization
         collected_errors = []
         titles = []
@@ -44,7 +42,6 @@ module V1
         end
         collected_errors
       end
-      # rubocop:enable Metrics/MethodLength
 
       private
 
@@ -65,7 +62,6 @@ module V1
       def pointer(attribute)
         format("/data/attributes/%<attribute>s", attribute: attribute.to_s.camelize(:lower))
       end
-
     end
   end
 end

@@ -2,7 +2,6 @@ module Testing
   class CollectEverything < ActiveInteraction::Base
     object :collector
 
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def execute
       definition = Collections::Mapping[collector]
 
@@ -32,5 +31,4 @@ module Testing
       end.to_h
     end
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 end

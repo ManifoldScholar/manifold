@@ -9,7 +9,6 @@ module Search
   # model instances. If Searchkick is returning raw elastic search results, we can
   # execute a performant query and inject parent slugs needed for link creation.
   class Results
-
     include ActiveSupport::Inflector
 
     MODEL_INCLUDES = {
@@ -48,8 +47,8 @@ module Search
       end
     end
 
-    def each_with_hit(&block)
-      adjusted_results.zip(@searchkick_results.hits).each(&block)
+    def each_with_hit(&)
+      adjusted_results.zip(@searchkick_results.hits).each(&)
     end
 
     # @note Introspection methods, used in tests
@@ -124,6 +123,5 @@ module Search
         models << result_model_reference(result)
       end
     end
-
   end
 end

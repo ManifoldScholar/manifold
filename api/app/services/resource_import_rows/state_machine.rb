@@ -67,6 +67,5 @@ module ResourceImportRows
     after_transition(to: [:imported, :failed], after_commit: true) do |row|
       row.resource_import.state_machine.transition_to(:imported)
     end
-
   end
 end

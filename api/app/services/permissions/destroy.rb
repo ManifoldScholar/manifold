@@ -14,6 +14,5 @@ module Permissions
         @user.remove_role role, @resource
       end
     end
-
   end
 end

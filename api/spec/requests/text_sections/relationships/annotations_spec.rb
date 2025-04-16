@@ -100,7 +100,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
         it "excludes #{annotation}" do
           make_the_request!
 
-          expect(included_ids).to_not include(send(annotation).id)
+          expect(included_ids).not_to include(send(annotation).id)
         end
       end
     end
@@ -125,17 +125,18 @@ RSpec.describe "Text Section Annotations API", type: :request do
         it "excludes #{annotation}" do
           make_the_request!
 
-          expect(included_ids).to_not include(send(annotation).id)
+          expect(included_ids).not_to include(send(annotation).id)
         end
       end
     end
   end
 
   describe "responds with a list of annotations" do
-    before(:each) { get path, headers: reader_headers }
+    before { get path, headers: reader_headers }
+
     describe "the response" do
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -147,24 +148,26 @@ RSpec.describe "Text Section Annotations API", type: :request do
       describe "the response" do
         it "has a 204 NO CONTENT status code" do
           delete path, headers: reader_headers
-          expect(response).to have_http_status(204)
+          expect(response).to have_http_status(:no_content)
         end
       end
     end
+
     context "when the user is not the author of the annotation" do
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
           annotation = FactoryBot.create(:annotation, creator: author)
           delete api_v1_annotation_path(annotation), headers: reader_headers
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
+
     context "when the user is an admin" do
       describe "the response" do
         it "has a 204 NO CONTENT status code" do
           delete path, headers: admin_headers
-          expect(response).to have_http_status(204)
+          expect(response).to have_http_status(:no_content)
         end
       end
     end
@@ -191,7 +194,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
           post path, headers: reader_headers, params: params
         end.to change(Annotation, :count).by(1)
 
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
       end
 
       it "is rate-limited" do
@@ -202,7 +205,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
         end.to change(Annotation, :count).by(5)
           .and change(ThrottledRequest, :count).by(1)
 
-        expect(response).to have_http_status(503)
+        expect(response).to have_http_status(:service_unavailable)
       end
 
       context "when the user has not confirmed their email" do
@@ -295,20 +298,22 @@ RSpec.describe "Text Section Annotations API", type: :request do
     let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
 
     context "when the user is an reader" do
-      before(:each) { post path, headers: reader_headers, params: build_json_payload(resource_params) }
+      before { post path, headers: reader_headers, params: build_json_payload(resource_params) }
+
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
-          a = response.body
-          expect(response).to have_http_status(403)
+          response.body
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
 
     context "when the user is an admin" do
-      before(:each) { post path, headers: admin_headers, params: build_json_payload(resource_params) }
+      before { post path, headers: admin_headers, params: build_json_payload(resource_params) }
+
       describe "the response" do
         it "has a 201 status code" do
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(:created)
         end
       end
     end
@@ -318,20 +323,22 @@ RSpec.describe "Text Section Annotations API", type: :request do
     let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
 
     context "when the user is an reader" do
-      before(:each) { post path, headers: reader_headers, params: build_json_payload(collection_params) }
+      before { post path, headers: reader_headers, params: build_json_payload(collection_params) }
+
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
-          a = response.body
-          expect(response).to have_http_status(403)
+          response.body
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
 
     context "when the user is an admin" do
-      before(:each) { post path, headers: admin_headers, params: build_json_payload(collection_params) }
+      before { post path, headers: admin_headers, params: build_json_payload(collection_params) }
+
       describe "the response" do
         it "has a 201 status code" do
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(:created)
         end
       end
     end

@@ -45,7 +45,6 @@ module Ingestions
       def write_file
         context.write_build_file "global-styles.css", global_styles
       end
-
     end
   end
 end

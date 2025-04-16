@@ -2,7 +2,6 @@ module API
   module V1
     # Journal Volumes controller
     class JournalVolumesController < ApplicationController
-
       resourceful! JournalVolume, authorize_options: { except: [:index, :show] } do
         JournalVolume.all
       end
@@ -35,7 +34,6 @@ module API
       def scope_for_journal_volumes
         JournalVolume.friendly
       end
-
     end
   end
 end

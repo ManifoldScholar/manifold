@@ -52,7 +52,6 @@ module Ingestions
 
         info key, source_path: ingestion_source.source_path
       end
-
     end
   end
 end

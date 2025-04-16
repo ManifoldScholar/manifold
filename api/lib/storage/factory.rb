@@ -6,9 +6,7 @@ require "storage/tus_gcs"
 
 module Storage
   class Factory
-
     class << self
-
       DEFAULT_PATH = "public".freeze
       DEFAULT_TUS_PATH = "data".freeze
       PRIMARY_PREFIX = "system".freeze
@@ -198,8 +196,6 @@ module Storage
       def test?
         Rails.env.test?
       end
-
     end
-
   end
 end

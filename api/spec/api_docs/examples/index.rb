@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples_for "an API index request" do |options|
+RSpec.shared_context "an API index request" do |options|
   api_spec_helper = APIDocs::Helpers::Request.new(options, :index)
 
   get api_spec_helper.summary do

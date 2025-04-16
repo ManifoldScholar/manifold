@@ -4,7 +4,7 @@ RSpec.describe "Reading Group Memberships API", type: :request do
   let(:reading_group) { FactoryBot.create(:reading_group) }
 
   describe "creates a reading_group" do
-    let (:path) { api_v1_reading_group_memberships_path }
+    let(:path) { api_v1_reading_group_memberships_path }
 
     let(:attributes) do
       {}
@@ -23,17 +23,17 @@ RSpec.describe "Reading Group Memberships API", type: :request do
 
     it "has a 201 CREATED status code when the membership is for the authenticated user" do
       post path, headers: reader_headers, params: valid_params
-      expect(response).to have_http_status(201)
+      expect(response).to have_http_status(:created)
     end
 
     it "has a 201 CREATED status code when the membership is for an admin user" do
       post path, headers: admin_headers, params: valid_params
-      expect(response).to have_http_status(201)
+      expect(response).to have_http_status(:created)
     end
 
     it "has a 403 FORBIDDEN status code when the membership is NOT for the authenticated user" do
       post path, headers: another_reader_headers, params: valid_params
-      expect(response).to have_http_status(403)
+      expect(response).to have_http_status(:forbidden)
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.describe "Reading Group Memberships API", type: :request do
 
       it "has a 204 NO CONTENT status code" do
         delete path, headers: headers
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:no_content)
       end
     end
 
@@ -55,7 +55,7 @@ RSpec.describe "Reading Group Memberships API", type: :request do
 
       it "has a 204 NO CONTENT status code" do
         delete path, headers: headers
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:no_content)
       end
     end
 
@@ -64,7 +64,7 @@ RSpec.describe "Reading Group Memberships API", type: :request do
 
       it "has a 403 FORBIDDEN status code" do
         delete path, headers: headers
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end
@@ -104,14 +104,14 @@ RSpec.describe "Reading Group Memberships API", type: :request do
     end
 
     context "when the membership is already archived" do
-      before(:each) do
+      before do
         reading_group_membership.archive!
       end
 
       it "fails" do
         expect_request.to keep_the_same { reading_group_membership.reload.archived? }
 
-        expect(response).to have_http_status 422
+        expect(response).to have_http_status :unprocessable_entity
       end
     end
   end
@@ -133,7 +133,7 @@ RSpec.describe "Reading Group Memberships API", type: :request do
     end
 
     context "when the membership is archived" do
-      before(:each) do
+      before do
         reading_group_membership.archive!
       end
 
@@ -158,7 +158,7 @@ RSpec.describe "Reading Group Memberships API", type: :request do
       it "fails" do
         expect_request.to keep_the_same { reading_group_membership.reload.active? }
 
-        expect(response).to have_http_status 422
+        expect(response).to have_http_status :unprocessable_entity
       end
     end
   end

@@ -5,5 +5,5 @@ RSpec.describe Feature, type: :model do
     expect(FactoryBot.build(:feature)).to be_valid
   end
 
-  it_should_behave_like "a model with formatted attributes"
+  it_behaves_like "a model with formatted attributes"
 end

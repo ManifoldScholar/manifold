@@ -33,6 +33,5 @@ module ResourceImports
     def session
       @session ||= ::Factory::DriveSession.create_service_account_session
     end
-
   end
 end

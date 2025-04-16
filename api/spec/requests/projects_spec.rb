@@ -4,22 +4,23 @@ RSpec.describe "Projects API", type: :request do
   let_it_be(:project, refind: true) { FactoryBot.create(:project, draft: false) }
 
   describe "responds with a list of projects" do
-    before(:each) { get api_v1_projects_path, headers: reader_headers }
+    before { get api_v1_projects_path, headers: reader_headers }
+
     describe "the response" do
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
     describe "it allows searching by keyword", :elasticsearch do
-      before(:each) do
+      before do
         FactoryBot.create(:project, title: "foo")
         path = api_v1_projects_path(params: { filter: { keyword: "foo" } })
         get path, headers: reader_headers
       end
 
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -75,7 +76,7 @@ RSpec.describe "Projects API", type: :request do
       it "has a 201 SUCCESS status code" do
         params = build_json_payload(attributes: { title: "foo" })
         post path, headers: headers, params: params
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
       end
     end
 
@@ -83,7 +84,7 @@ RSpec.describe "Projects API", type: :request do
       it "has a 401 status code" do
         params = build_json_payload(attributes: { title: "foo" })
         post path, params: params
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
@@ -93,7 +94,7 @@ RSpec.describe "Projects API", type: :request do
       it "has a 403 status code" do
         params = build_json_payload(attributes: { title: "foo" })
         post path, headers: headers, params: params
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end
@@ -182,7 +183,7 @@ RSpec.describe "Projects API", type: :request do
 
         it "has a 200 OK status code" do
           patch path, headers: headers, params: build_json_payload
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -193,7 +194,7 @@ RSpec.describe "Projects API", type: :request do
       describe "the response" do
         it "has a 403 forbidden status code" do
           patch path, headers: headers, params: build_json_payload
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end

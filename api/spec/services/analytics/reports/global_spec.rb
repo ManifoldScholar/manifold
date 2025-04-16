@@ -27,7 +27,7 @@ RSpec.describe Analytics::Reports::Global do
 
       l_repeat_visitors = {
         "numerator" => repeat_visitor_count,
-        "denominator" => (visitor_count)
+        "denominator" => visitor_count
       }
 
       l_average_visit_duration = { "value" => visit_duration.seconds.to_i }

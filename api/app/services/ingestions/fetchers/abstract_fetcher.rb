@@ -45,7 +45,6 @@ module Ingestions
       def tmp_pointer(name, ext)
         Tempfile.new([name, ".#{ext}"])
       end
-
     end
   end
 end

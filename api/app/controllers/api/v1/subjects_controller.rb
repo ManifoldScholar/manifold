@@ -2,7 +2,6 @@ module API
   module V1
     # subjects controller
     class SubjectsController < ApplicationController
-
       resourceful! Subject, authorize_options: { except: [:index, :show] } do
         Subject.filtered(filter_options)
       end
@@ -42,7 +41,6 @@ module API
 
         with_pagination!(subject_filter_params)
       end
-
     end
   end
 end

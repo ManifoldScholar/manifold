@@ -1,7 +1,6 @@
 module Updaters
   # Updates a Project model from JSON-API style params
   class Project
-
     include ::Updaters
     include ::Updaters::Concerns::HasSortableCollaborators
 
@@ -19,7 +18,6 @@ module Updaters
       clone
     end
 
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def post_update(model)
       @model = model
       return unless model.journal_issue
@@ -39,7 +37,6 @@ module Updaters
       end
       model.journal_issue.save if touched
     end
-    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     def unset_journal_volume?
       relationships.key?(:journal_volume) && relationships.dig(:journal_volume, :data, :_remove) == true
