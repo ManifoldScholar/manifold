@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
+import PopoverMenu from "global/components/popover/Menu";
 import IconComposer from "global/components/utility/IconComposer";
 import CategoryEdit from "./CategoryEdit";
 import CategoryRemove from "./CategoryRemove";
-import Disclosure from "frontend/components/collecting/Disclosure";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import * as Styled from "./styles";
 
@@ -20,7 +20,9 @@ function CategoryHeader({
   manualCollapsed,
   collectableOver,
   onCategoryMove,
-  onCategoryEditError
+  onCategoryEditError,
+  index,
+  categoryCount
 }) {
   const { t } = useTranslation();
 
@@ -83,41 +85,34 @@ function CategoryHeader({
                   {t("forms.category.edit")}
                 </span>
               </Styled.Action>
-              <Disclosure.Provider>
-                <Disclosure.Toggle>
+              <PopoverMenu
+                disclosure={
                   <Styled.Action
                     as="button"
                     ref={dragHandleRef}
                     data-drag-handle
                   >
                     <IconComposer icon="grabber32" size="default" />
+                    <span className="screen-reader-text">
+                      {t("forms.category.reorder_category")}
+                    </span>
                   </Styled.Action>
-                </Disclosure.Toggle>
-                <Disclosure.Content>
-                  {({ closeMenu }) => (
-                    <>
-                      <Styled.Action
-                        as="button"
-                        onClick={() => {
-                          closeMenu();
-                          onCategoryMove(category.id, "up");
-                        }}
-                      >
-                        {t("forms.category.move_up")}
-                      </Styled.Action>
-                      <Styled.Action
-                        as="button"
-                        onClick={() => {
-                          closeMenu();
-                          onCategoryMove(category.id, "down");
-                        }}
-                      >
-                        {t("forms.category.move_down")}
-                      </Styled.Action>
-                    </>
-                  )}
-                </Disclosure.Content>
-              </Disclosure.Provider>
+                }
+                actions={[
+                  {
+                    id: "up",
+                    label: t("forms.category.move_up"),
+                    onClick: () => onCategoryMove(category.id, "up"),
+                    disabled: index === 0
+                  },
+                  {
+                    id: "down",
+                    label: t("forms.category.move_down"),
+                    onClick: () => onCategoryMove(category.id, "down"),
+                    disabled: index === categoryCount - 1
+                  }
+                ]}
+              />
             </Styled.Actions>
           )}
         </Styled.Header>

@@ -186,6 +186,7 @@ export default function SortableCategories({
                 onCategoryEditError: callbacks.onCategoryEditError
               }}
               targetCategory={targetCategory}
+              categoryCount={categories.length}
               {...listProps}
             />
           );

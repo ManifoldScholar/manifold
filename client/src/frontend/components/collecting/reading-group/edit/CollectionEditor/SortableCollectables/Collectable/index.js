@@ -33,6 +33,7 @@ export default function Collectable({
           type={type}
           responses={responses}
           dragState={dragState}
+          index={index}
           {...restProps}
           {...contentProps}
         />

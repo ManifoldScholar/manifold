@@ -14,6 +14,8 @@ const halfShadowSize = `5px`;
 
 export const Header = styled.header`
   --label-margin-bottom: 18px;
+  --PopoverMenu-inset-block-start: calc(100% + 11px);
+  --PopoverMenu-inset-inline-end: -20px;
 
   display: flex;
   justify-content: space-between;
