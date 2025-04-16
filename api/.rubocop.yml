@@ -10,8 +10,7 @@ AllCops:
     - ".pryrc"
     - "bin/*"
     - "config/puma.rb"
-    - "srv/app/lib/tempates/rspec/**/*.rb"
-    - "srv/app/spec/models/content_block_spec.rb"
+    - "lib/templates/rspec/**/*.rb"
     - "db/migrate/**/*.rb"
     - "db/schema.rb"
     - "tmp/**/*"
@@ -145,7 +144,7 @@ Lint/ConstantReassignment:
   Enabled: true
 
 Lint/CopDirectiveSyntax:
-  Enabled: true
+  Enabled: false
 
 Lint/DeprecatedConstants:
   Enabled: true

@@ -105,7 +105,7 @@ module APIDocs
         return nil if included.empty?
 
         docs = "Included relationships:\n* "
-        docs << included.join("\n* ")
+        "#{docs}#{included.join('\n* ')}"
       end
 
       def description

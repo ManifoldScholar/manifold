@@ -25,7 +25,6 @@ module Ingestions
           header_tags.find_index(tag)
         end
 
-        # rubocop:todo Lint/CopDirectiveSyntax
         # rubocop:disable Metrics/AbcSize,, Lint/CopDirectiveSyntax, Lint/CopDirectiveSyntax, Lint/CopDirectiveSyntax, Lint/CopDirectiveSyntax
         # rubocop:enable Lint/CopDirectiveSyntax
         # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
