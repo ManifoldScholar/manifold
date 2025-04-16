@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EntitlementTransition < ApplicationRecord
   belongs_to :entitlement, inverse_of: :transitions
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   # @see ExportTargetStrategy::SFTPPassword
   class SFTPPasswordStrategy < AbstractSSHStrategy

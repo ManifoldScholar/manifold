@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Authorizer for an {ExportTarget}.
 class ExportTargetAuthorizer < ApplicationAuthorizer
   expose_abilities %i[read_secrets]

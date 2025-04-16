@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Validator::Stylesheet do
   let(:scope_selector) { Rails.configuration.manifold.css_validator.defaults.class_scope }
   let(:dark_scope_selector) { Rails.configuration.manifold.css_validator.defaults.dark_scope }
-  let(:validator) { Validator::Stylesheet.new }
+  let(:validator) { described_class.new }
   let(:blacklisted_property) { "font-family" }
 
   it "should return a string" do
@@ -167,7 +169,7 @@ RSpec.describe Validator::Stylesheet do
 
     valid_test_cases.each do |test_case|
       it "it does allow non-blacklisted selector when selector is #{test_case[0]} selector: #{test_case[1]}" do
-        valid = scope_selector + " " + test_case[1]
+        valid = "#{scope_selector} #{test_case[1]}"
         expect(validator.validate(test_case[1])).to eq_ignoring_whitespace compact(valid)
       end
     end
@@ -266,20 +268,20 @@ RSpec.describe Validator::Stylesheet do
     selector = "p { color: blue }"
     valid = "#{scope_selector} p { color: blue; }"
     results = validator.validate(selector)
-    expect(results).to eq_ignoring_whitespace "#{valid}"
+    expect(results).to eq_ignoring_whitespace valid.to_s
   end
 
   it "allows classes that contain the word body" do
     selector = ".bodytext { text-indent: 1em; }"
     valid = "#{scope_selector} .bodytext { text-indent: 1em; }"
     results = validator.validate(selector)
-    expect(results).to eq_ignoring_whitespace "#{valid}"
+    expect(results).to eq_ignoring_whitespace valid.to_s
   end
 
   it "maps UTF8 characters to hexadecimal equivalent" do
     selector = ".foo > li:before{content:\"●  \"}"
     valid = ".manifold-text-section .foo > li:before {content: \"\\25cf  \";}"
     results = validator.validate(selector)
-    expect(results).to eq_ignoring_whitespace "#{valid}"
+    expect(results).to eq_ignoring_whitespace valid.to_s
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Page, type: :model do
@@ -7,7 +9,7 @@ RSpec.describe Page, type: :model do
 
   it "creates a slug from the nav title" do
     FactoryBot.create(:page, nav_title: "My Page", slug: nil)
-    page = Page.last
+    page = described_class.last
     expect(page.slug).to eq("my-page")
   end
 

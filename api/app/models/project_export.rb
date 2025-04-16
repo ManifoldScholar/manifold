@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectExport < ApplicationRecord
   include ArchiveUploader::Attachment.new(:asset)
   include HasExportKind

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "sti_preload"
 
 class ContentBlock < ApplicationRecord

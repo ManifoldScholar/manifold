@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CachedExternalSources
   module Operation
     extend ActiveSupport::Concern

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Notifications
   class EnqueueAnnotationNotificationsJob < ApplicationJob
     # @param [String] annotation_id

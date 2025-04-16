@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Notifications
   class SendReplyNotificationJob < ApplicationJob
     # @param [String] user_id

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OurTypes
   # Wrapper around a JSONB column that always provides an indifferent hash.
   class IndifferentHash < ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Jsonb

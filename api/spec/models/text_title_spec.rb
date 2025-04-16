@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe TextTitle, type: :model do
   it "belongs to a text" do
-    text_title = TextTitle.new
+    text_title = described_class.new
     text = Text.new
     text_title.text = text
     expect(text_title.text).to be text

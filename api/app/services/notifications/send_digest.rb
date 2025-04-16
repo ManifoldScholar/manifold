@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Notifications
   class SendDigest < ActiveInteraction::Base
     object :user
@@ -6,7 +8,7 @@ module Notifications
 
     def execute
       events = compose Notifications::ComposeDigestEvents, inputs
-      return if events.values.reject(&:blank?).none? # No news is... not news
+      return if events.values.compact_blank.none? # No news is... not news
 
       NotificationMailer
         .digest(user, NotificationFrequency.fetch(frequency), events)

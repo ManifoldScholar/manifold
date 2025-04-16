@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
   def creatable_by?(user, _options = {})
     return false unless known_user?(user)
@@ -27,7 +29,7 @@ class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
     return false if reading_groups_disabled?
     return true if admin_permissions?(user)
 
-    resource.reading_group.users.where(id: user).exists?
+    resource.reading_group.users.exists?(id: user)
   end
 
   class << self
@@ -42,7 +44,7 @@ class ReadingGroupMembershipAuthorizer < ApplicationAuthorizer
       return true if admin_permissions? user
 
       if options[:reading_group]
-        options[:reading_group].users.where(id: user).exists?
+        options[:reading_group].users.exists?(id: user)
       else
         true
       end

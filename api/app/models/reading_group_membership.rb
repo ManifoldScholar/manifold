@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A reading group is a cohort of users who are collaboratively consuming Manifold content.
 class ReadingGroupMembership < ApplicationRecord
   upsert_keys %i[reading_group_id user_id]

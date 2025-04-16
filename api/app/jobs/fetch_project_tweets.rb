@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Simple job to fetch project tweets in the background.
 class FetchProjectTweets < ApplicationJob
   queue_as :default

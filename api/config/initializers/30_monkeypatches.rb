@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require Rails.root.join("lib", "patches", "better_interactions").to_s
 require Rails.root.join("lib", "patches", "metadown_custom_renderer").to_s
 require Rails.root.join("lib", "patches", "better_enums").to_s
@@ -33,7 +35,7 @@ module FastJsonapi
         return serializer_map[serializer_key] if serializer_map.key?(serializer_key)
 
         namespace = name.gsub(/()?\w+Serializer$/, "")
-        serializer_name = serializer_key.to_s.classify + "Serializer"
+        serializer_name = "#{serializer_key.to_s.classify}Serializer"
         (namespace + serializer_name).to_sym
       end
     end

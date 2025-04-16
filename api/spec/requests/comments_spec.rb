@@ -100,7 +100,7 @@ RSpec.describe "Comments API", type: :request do
 
         it("returns a saved comment") do
           post path, headers: headers, params: params
-          api_response = JSON.parse(response.body)
+          api_response = response.parsed_body
           expect(api_response["data"]["id"]).not_to be_nil
         end
 
@@ -121,7 +121,7 @@ RSpec.describe "Comments API", type: :request do
 
         it("returns a saved comment") do
           post path, headers: headers, params: params
-          api_response = JSON.parse(response.body)
+          api_response = response.parsed_body
           expect(api_response["data"]["id"]).not_to be_nil
         end
 
@@ -259,7 +259,7 @@ RSpec.describe "Comments API", type: :request do
         let(:headers) { admin_headers }
         it("returns a saved comment") do
           post path, headers: headers, params: params
-          api_response = JSON.parse(response.body)
+          api_response = response.parsed_body
           expect(api_response["data"]["id"]).not_to be_nil
         end
       end
@@ -268,7 +268,7 @@ RSpec.describe "Comments API", type: :request do
         let(:headers) { reader_headers }
         it("returns a saved comment") do
           post path, headers: headers, params: params
-          api_response = JSON.parse(response.body)
+          api_response = response.parsed_body
           expect(api_response["data"]["id"]).not_to be_nil
         end
       end

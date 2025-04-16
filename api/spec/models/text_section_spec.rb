@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe TextSection, type: :model do
@@ -6,7 +8,7 @@ RSpec.describe TextSection, type: :model do
   end
 
   it "belongs to a text" do
-    text_section = TextSection.new
+    text_section = described_class.new
     text = Text.new
     text_section.text = text
     expect(text_section.text).to be text
@@ -18,7 +20,7 @@ RSpec.describe TextSection, type: :model do
   end
 
   it "belongs to an ingestion source" do
-    text_section = TextSection.new
+    text_section = described_class.new
     ingestion_source = IngestionSource.new
     text_section.ingestion_source = ingestion_source
     expect(text_section.ingestion_source).to be ingestion_source
@@ -27,7 +29,7 @@ RSpec.describe TextSection, type: :model do
   it "does not destroy stylesheet records on destroy" do
     text_section = FactoryBot.create(:text_section)
     text_section.stylesheets << FactoryBot.create(:stylesheet)
-    expect { text_section.destroy }.not_to change { Stylesheet.count }
+    expect { text_section.destroy }.not_to change(Stylesheet, :count)
   end
 
   context "collapses body_json into searchable text nodes" do

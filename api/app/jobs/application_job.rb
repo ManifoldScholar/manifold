@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationJob < ActiveJob::Base
   def match_result(result, &)
     Dry::Matcher::ResultMatcher.(result, &)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @see IngestionSource
 class IngestionSourceUploader < Shrine
   include SharedUploader

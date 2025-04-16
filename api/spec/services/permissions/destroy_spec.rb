@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Permissions::Destroy do
@@ -12,7 +14,7 @@ RSpec.describe Permissions::Destroy do
 
   it "correctly removes roles" do
     user.add_role "project_author", project
-    Permissions::Destroy.run permission: permission
+    described_class.run permission: permission
     expect(user.roles).not_to include "project_editor", "project_author"
   end
 end

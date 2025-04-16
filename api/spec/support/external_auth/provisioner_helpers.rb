@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module ExternalAuth::ProvisionerSpecs
-  DEFAULT_HOOKS = %i(random_password)
+  DEFAULT_HOOKS = %i(random_password).freeze
 
-  HOOKS = %i(name_to_nickname first_and_last_name twitter_details)
+  HOOKS = %i(name_to_nickname first_and_last_name twitter_details).freeze
 
-  PROVIDER_NAMES = %i[facebook google twitter]
+  PROVIDER_NAMES = %i[facebook google twitter].freeze
 
   concern :GlobalHelpers do
     def each_hook
@@ -29,7 +31,7 @@ module ExternalAuth::ProvisionerSpecs
         if Faker::Omniauth.respond_to?(provider)
           Faker::Omniauth.__send__(provider)
         else
-          raise NoMethodError, "Faker::Omniauth does not implement :#{provider}", caller[2..-1]
+          raise NoMethodError, "Faker::Omniauth does not implement :#{provider}", caller[2..]
         end
       end
     end

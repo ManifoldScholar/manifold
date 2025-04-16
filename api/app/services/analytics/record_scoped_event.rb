@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Analytics
   class RecordScopedEvent < Analytics::RecordEvent
     object :record, class: ApplicationRecord, default: nil

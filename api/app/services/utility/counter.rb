@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utility
   # Simple counter for approaches that won't easily work with `reduce`.
   class Counter

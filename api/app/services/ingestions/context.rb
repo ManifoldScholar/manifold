@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   class Context
     include Ingestions::Concerns::Loggable

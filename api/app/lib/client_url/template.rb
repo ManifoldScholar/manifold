@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ClientURL
   class Template
     def initialize(uri, client_url: Rails.configuration.manifold.url)

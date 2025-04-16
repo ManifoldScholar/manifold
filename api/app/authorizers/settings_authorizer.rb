@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SettingsAuthorizer < ApplicationAuthorizer
   expose_abilities [:read_secrets]
 

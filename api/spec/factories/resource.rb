@@ -1,4 +1,6 @@
-RESOURCE_SAMPLES ||= Rails.root.join("spec", "data", "resource_import")
+# frozen_string_literal: true
+
+RESOURCE_SAMPLES = Rails.root.join("spec", "data", "resource_import")
 
 FactoryBot.define do
   factory :resource do

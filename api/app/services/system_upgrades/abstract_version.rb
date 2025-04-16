@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SystemUpgrades
   class AbstractVersion < ActiveInteraction::Base
     include SystemUpgrades::HasLogger

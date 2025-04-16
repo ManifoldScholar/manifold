@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :db do
   task kill: :environment do
     rails_db_name = ENV["RAILS_DB_NAME"]

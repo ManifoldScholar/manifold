@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalAuth
   class FindUser < ActiveInteraction::Base
     include AuthAction

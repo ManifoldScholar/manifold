@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "with_model"
 require "rails_helper"
 
@@ -50,7 +52,7 @@ RSpec.describe ContentBlock do
       end
 
       it "is valid" do
-        expect(subject.renderable?).to eq true
+        expect(subject.renderable?).to be true
       end
     end
 
@@ -58,7 +60,7 @@ RSpec.describe ContentBlock do
       let(:subject) { self.class::RenderBlock.create(project: project) }
 
       it "is invalid" do
-        expect(subject.renderable?).to eq false
+        expect(subject.renderable?).to be false
       end
     end
   end

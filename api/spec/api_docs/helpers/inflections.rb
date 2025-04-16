@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Helpers
     module Inflections

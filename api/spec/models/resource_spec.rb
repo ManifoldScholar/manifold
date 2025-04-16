@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Resource, type: :model do
@@ -50,13 +52,13 @@ RSpec.describe Resource, type: :model do
   it "destroys associated annotations" do
     resource = FactoryBot.create(:resource)
     FactoryBot.create(:annotation, resource: resource)
-    expect { resource.destroy }.to change { Annotation.count }.from(1).to(0)
+    expect { resource.destroy }.to change(Annotation, :count).from(1).to(0)
   end
 
   it "destroys associated creation event" do
     resource = FactoryBot.create(:resource)
     FactoryBot.create(:event, subject: resource, event_type: "resource_added")
-    expect { resource.destroy }.to change { Event.count }.from(1).to(0)
+    expect { resource.destroy }.to change(Event, :count).from(1).to(0)
   end
 
   describe "#parse_and_set_external_id!" do
@@ -155,14 +157,14 @@ RSpec.describe Resource, type: :model do
       collection.resources << @resource_a
       collection.resources << @resource_b
       collection.save
-      results = Resource.filtered({ collection_order: collection.id })
+      results = described_class.filtered({ collection_order: collection.id })
       expect(results.first.id).to eq @resource_a.id
     end
 
     it "to only include those belonging to a project" do
-      results = Resource.filtered({ project: @project_a })
+      results = described_class.filtered({ project: @project_a })
       expect(results.length).to be 2
-      results = Resource.filtered({ project: @project_b })
+      results = described_class.filtered({ project: @project_b })
       expect(results.length).to be 1
     end
 
@@ -171,23 +173,23 @@ RSpec.describe Resource, type: :model do
       @collection_resource_a = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_a)
       @collection_resource_b = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_b)
       @collection_resource_c = FactoryBot.create(:collection_resource, resource_collection: @collection_b, resource: @resource_d)
-      results = Resource.filtered({ resource_collection: @collection_a.id })
+      results = described_class.filtered({ resource_collection: @collection_a.id })
       expect(results.length).to be 2
-      results = Resource.filtered({ resource_collection: @collection_b.id })
+      results = described_class.filtered({ resource_collection: @collection_b.id })
       expect(results.length).to be 1
     end
 
     it "by kind" do
       # TBD: Expand this test. Right now all factory resources are links to avoid dealing
       # with attachments.
-      results = Resource.filtered({ kind: "link" })
+      results = described_class.filtered({ kind: "link" })
       expect(results.length).to be 3
     end
 
     it "by tag" do
-      results = Resource.filtered({ tag: "dog" })
+      results = described_class.filtered({ tag: "dog" })
       expect(results.length).to be 2
-      results = Resource.filtered({ tag: "test" })
+      results = described_class.filtered({ tag: "test" })
       expect(results.length).to be 1
     end
   end
@@ -282,7 +284,7 @@ RSpec.describe Resource, type: :model do
       resource.reload # Reload to pick up backgrounded attachment versions.
       resource.attachment_original.rewind
       sha = Digest::SHA256.hexdigest(resource.attachment_original.read).to_s
-      expect(resource.attachment_checksum).not_to eq nil
+      expect(resource.attachment_checksum).not_to be_nil
       expect(resource.attachment_checksum).to eq sha
     end
   end

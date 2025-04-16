@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples_for "a collectable" do
   Collections::Mapping.each do |definition|
     collector_name = definition.collector.name

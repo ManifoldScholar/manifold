@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utility
   # Return a filename that has the correct extension for use with Epub or other
   # established archiving formats.

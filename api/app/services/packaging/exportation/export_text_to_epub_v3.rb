@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module Exportation
     class ExportTextToEpubV3 < ActiveInteraction::Base

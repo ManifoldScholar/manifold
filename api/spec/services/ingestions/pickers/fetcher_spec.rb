@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Pickers::Fetcher do
   let(:root) { Dir.mktmpdir }
-  let!(:outcome) { Ingestions::Pickers::Fetcher.run url: url, root: root }
+  let!(:outcome) { described_class.run url: url, root: root }
 
   context "when no fetcher is found" do
     let(:url) { "an/invalid/file.fail" }

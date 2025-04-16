@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Maker, type: :model do
@@ -6,7 +8,7 @@ RSpec.describe Maker, type: :model do
   end
 
   it "has many collaborators" do
-    maker = Maker.new
+    maker = described_class.new
     5.times { maker.collaborators << Collaborator.new }
     expect(maker.collaborators.length).to be 5
   end
@@ -41,13 +43,13 @@ RSpec.describe Maker, type: :model do
 
   describe "its with_order scope" do
     before do
-      Maker.create(name: "Rowan Ono")
-      Maker.create(name: "Ida")
-      Maker.create(name: "Sir Stubblin Champflin III")
+      described_class.create(name: "Rowan Ono")
+      described_class.create(name: "Ida")
+      described_class.create(name: "Sir Stubblin Champflin III")
     end
 
     it "returns the correct order" do
-      expect(Maker.with_order.pluck(:last_name, :first_name)).to eq [
+      expect(described_class.with_order.pluck(:last_name, :first_name)).to eq [
         %w(Champflin Stubblin),
         [nil, "Ida"],
         %w(Ono Rowan)

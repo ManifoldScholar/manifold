@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This collection decorator will delegate all methods to scope
 # for seamless usage.
 #

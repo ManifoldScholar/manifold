@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReadingGroupMemberships
   # Upsert an {EntitlementUserLink} for any active {Entitlement}s that
   # target a given {ReadingGroupMembership}'s {ReadingGroup}.

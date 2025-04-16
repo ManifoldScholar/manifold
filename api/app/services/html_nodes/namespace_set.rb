@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HTMLNodes
   class NamespaceSet < Types::FlexibleStruct
     attribute :epub_prefixes, Types::Array.of(HTMLNodes::EpubPrefix).default { [] }

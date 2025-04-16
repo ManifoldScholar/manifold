@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Analytics
   class RecordLeaveEvent < Analytics::RecordScopedEvent
     def execute

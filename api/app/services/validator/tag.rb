@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Validator
   # Responsible for ensuring that a single tag (a Nokogiri node) is valid
   class Tag

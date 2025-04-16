@@ -133,7 +133,7 @@ module Annotations
       node_subset.each do |node|
         node_text_iterator = 0
         node_content = collapse(node[:content])
-        node_content.split("") do
+        node_content.chars do
           if haystack_iterator == first_index
             updates[:start_node] = node[:node_uuid]
           elsif haystack_iterator == last_index

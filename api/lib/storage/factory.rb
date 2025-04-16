@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "shrine/storage/file_system"
 require "shrine/storage/memory"
 require "shrine/storage/tus"
@@ -7,12 +9,12 @@ require "storage/tus_gcs"
 module Storage
   class Factory
     class << self
-      DEFAULT_PATH = "public".freeze
-      DEFAULT_TUS_PATH = "data".freeze
-      PRIMARY_PREFIX = "system".freeze
-      MIRROR_PREFIX = "mirror".freeze
-      CACHE_PREFIX = "system/cache".freeze
-      TUS_PREFIX = "tus".freeze
+      DEFAULT_PATH = "public"
+      DEFAULT_TUS_PATH = "data"
+      PRIMARY_PREFIX = "system"
+      MIRROR_PREFIX = "mirror"
+      CACHE_PREFIX = "system/cache"
+      TUS_PREFIX = "tus"
 
       def shrine_storages
         {

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Analytics
   module Reports
     class ScopedBuilder < Analytics::Reports::Builder
-      RESOURCE_PLACEHOLDER = "{{ SCOPE ID }}".freeze
+      RESOURCE_PLACEHOLDER = "{{ SCOPE ID }}"
 
       string :record_id, default: nil
       string :record_type, default: nil

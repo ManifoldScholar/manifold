@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Texts
   # Calculate a fingerprint for a {Text}.
   class CalculateFingerprint < ActiveInteraction::Base

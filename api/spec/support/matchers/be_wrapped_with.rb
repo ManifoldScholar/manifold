@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec::Matchers.define :be_wrapped_with do |tagname|
   match do |object_instance|
     object_instance.start_with?("<#{tagname}>") &&

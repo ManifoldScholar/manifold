@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module JSONAPI
   module Operations
     class Error
@@ -65,7 +67,7 @@ module JSONAPI
 
         return nil if index.blank?
 
-        ["/data", index, path].select(&:present?).join("/")
+        ["/data", index, path].compact_blank.join("/")
       end
 
       def source
@@ -85,7 +87,7 @@ module JSONAPI
       private
 
       def calculate_pointer
-        parts = [operation_pointer, data_pointer, provided_pointer].select(&:present?)
+        parts = [operation_pointer, data_pointer, provided_pointer].compact_blank
 
         File.join(*parts)
       end

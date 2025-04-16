@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIExceptions
   class AccessDeniedError < ::StandardError; end
   class StandardError < ::StandardError; end

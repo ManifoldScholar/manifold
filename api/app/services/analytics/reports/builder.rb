@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module Analytics
   module Reports
     class Builder < ActiveInteraction::Base
-      TIME_ZONE = "PST".freeze
-      VISIT_DATE_PLACEHOLDER = "{{ VISIT DATE FILTER }}".freeze
-      START_DATE_PLACEHOLDER = "{{ START DATE }}".freeze
-      END_DATE_PLACEHOLDER = "{{ END DATE }}".freeze
-      TZ_PLACEHOLDER = "{{ TIME ZONE }}".freeze
-      GENERATE_SERIES_PLACEHOLDER = "{{ GENERATE_SERIES }}".freeze
+      TIME_ZONE = "PST"
+      VISIT_DATE_PLACEHOLDER = "{{ VISIT DATE FILTER }}"
+      START_DATE_PLACEHOLDER = "{{ START DATE }}"
+      END_DATE_PLACEHOLDER = "{{ END DATE }}"
+      TZ_PLACEHOLDER = "{{ TIME ZONE }}"
+      GENERATE_SERIES_PLACEHOLDER = "{{ GENERATE_SERIES }}"
 
       attr_reader :cached_result
 

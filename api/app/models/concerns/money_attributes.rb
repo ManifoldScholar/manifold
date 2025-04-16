@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Model concern that money calculations
 module MoneyAttributes
   extend ActiveSupport::Concern

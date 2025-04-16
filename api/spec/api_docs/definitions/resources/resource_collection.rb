@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
@@ -5,7 +7,7 @@ module APIDocs
         REQUEST_ATTRIBUTES = {
           thumbnail: Types::Serializer::Upload,
           remove_thumbnail: Types::Bool
-        }
+        }.freeze
 
         class << self
           include APIDocs::Definitions::Resource

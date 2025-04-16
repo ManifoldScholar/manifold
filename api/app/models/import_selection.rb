@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImportSelection < ApplicationRecord
   has_many :import_selection_matches, dependent: :destroy, counter_cache: :matches_count
 

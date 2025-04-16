@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @abstract
 class TusUploader < Shrine
   plugin :tus

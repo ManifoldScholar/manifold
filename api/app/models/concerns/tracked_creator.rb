@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Model concern that tracks who created a record
 module TrackedCreator
   extend ActiveSupport::Concern

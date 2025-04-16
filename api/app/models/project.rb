@@ -249,10 +249,10 @@ class Project < ApplicationRecord
       search_result_type: search_result_type,
       title: title,
       full_text: description_plaintext,
-      keywords: (tag_list + texts.map(&:title) + subjects.map(&:title) + hashtag).reject(&:blank?),
+      keywords: (tag_list + texts.map(&:title) + subjects.map(&:title) + hashtag).compact_blank,
       creator: creator&.full_name,
       makers: makers.map(&:full_name),
-      metadata: metadata.values.reject(&:blank?)
+      metadata: metadata.values.compact_blank
     }.merge(search_hidden)
   end
 
@@ -403,7 +403,7 @@ class Project < ApplicationRecord
     return if metadata[attr].present?
 
     settings = Settings.instance
-    default = settings.general.dig("default_#{attr}")
+    default = settings.general["default_#{attr}"]
 
     return unless default.present?
 

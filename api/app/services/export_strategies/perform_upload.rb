@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   class PerformUpload < ActiveInteraction::Base
     include ExportStrategies::Import[attach_export_pipeline: "pipelines.export_and_attach", upload_pipeline: "pipelines.upload"]

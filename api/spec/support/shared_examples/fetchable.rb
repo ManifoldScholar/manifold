@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for "a fetcher" do
   it "returns an tempfile pointer" do
     expect(@result[:file]).to be_instance_of Tempfile

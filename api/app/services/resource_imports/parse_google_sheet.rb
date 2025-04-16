@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceImports
   class ParseGoogleSheet < ActiveInteraction::Base
     record :resource_import

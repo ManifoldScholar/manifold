@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 # The "Core Media Type" MIME groups as defined by the EPUBv3 spec.
 #
 # @see https://www.w3.org/publishing/epub3/epub-spec.html#sec-cmt-supported
 # rubocop:disable Style/Alias
 class CoreMediaTypeKind < ClassyEnum::Base
-  CSS = "text/css".freeze
+  CSS = "text/css"
 
-  XHTML = "application/xhtml+xml".freeze
+  XHTML = "application/xhtml+xml"
 
   MIME_TYPE = %r{\A(?<base_type>[^/]+)/(?<subtype>[^/]+)\z}
 

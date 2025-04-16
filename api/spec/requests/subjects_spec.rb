@@ -27,7 +27,7 @@ RSpec.describe "Subject API", type: :request do
         FactoryBot.create(:project, subjects: [subject_a])
         FactoryBot.create(:project, featured: true, subjects: [subject_b])
         get api_v1_subjects_path(params: params)
-        entities = JSON.parse(response.body)["data"]
+        entities = response.parsed_body["data"]
         expect(entities.count).to eq(1)
         expect(response).to have_http_status(:ok)
       end

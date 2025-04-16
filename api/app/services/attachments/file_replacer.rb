@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Attachments
   class FileReplacer < ActiveInteraction::Base
     string :klass_name

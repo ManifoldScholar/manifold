@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # An interface that defines a {CollectionEntry} for a {ReadingGroup}.
 module ReadingGroupEntry
   extend ActiveSupport::Concern

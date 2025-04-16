@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectExportations
   class Perform < ActiveInteraction::Base
     include ProjectExportations::Import[upload_pipeline: "pipelines.upload"]

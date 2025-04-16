@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "faker"
 require "open-uri"
 module Demonstration

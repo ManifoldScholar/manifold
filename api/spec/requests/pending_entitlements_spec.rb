@@ -89,7 +89,7 @@ RSpec.describe "Pending Entitlements API", type: :request do
     end
 
     def find_created!
-      resp = JSON.parse response.body
+      resp = response.parsed_body
 
       @created = PendingEntitlement.find resp.dig("data", "id") rescue nil
     end

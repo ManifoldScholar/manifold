@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module StiPreload
   unless Rails.application.config.eager_load
     extend ActiveSupport::Concern

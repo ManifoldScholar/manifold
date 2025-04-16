@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TestHelpers
   module AuthorityMatcherHelpers
     def validate_verb!(verb)

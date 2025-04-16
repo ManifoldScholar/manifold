@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Converters
     class Markdown < Ingestions::Converters::AbstractConverter

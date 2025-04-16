@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Content
   class ScaffoldTemplate
     DEFAULT = ActiveSupport::OrderedHash.new

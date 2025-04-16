@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 require "with_model"
 
@@ -17,7 +19,7 @@ RSpec.describe Attachments do
     end
 
     model do
-      include Attachments
+      include described_class
 
       manifold_has_attached_file :attached, :image
       manifold_has_attached_file :resource, :resource
@@ -38,7 +40,7 @@ RSpec.describe Attachments do
   shared_examples_for "an Attachment defined method" do |method, expected = nil|
     describe "##{method}" do
       it "is defined" do
-        expect(instance.respond_to?(method)).to eq true
+        expect(instance.respond_to?(method)).to be true
       end
 
       unless expected.nil?
@@ -107,7 +109,7 @@ RSpec.describe Attachments do
     context "when attachment is image" do
       context "before processing" do
         it "returns true" do
-          expect(attachable.show_attached_placeholder?).to eq true
+          expect(attachable.show_attached_placeholder?).to be true
         end
       end
 
@@ -115,14 +117,14 @@ RSpec.describe Attachments do
         before { perform_enqueued_jobs { attachable.save } }
 
         it "returns false" do
-          expect(attachable.show_attached_placeholder?).to eq false
+          expect(attachable.show_attached_placeholder?).to be false
         end
       end
     end
 
     context "when attachment is not image" do
       it "returns false" do
-        expect(attachable.show_resource_placeholder?).to eq false
+        expect(attachable.show_resource_placeholder?).to be false
       end
     end
   end

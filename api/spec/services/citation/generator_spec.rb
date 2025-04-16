@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Citation::Generator do
-  let(:generator) { Citation::Generator.new }
+  let(:generator) { described_class.new }
   let(:author_1) { FactoryBot.create(:maker) }
   let(:author_2) { FactoryBot.create(:maker) }
 

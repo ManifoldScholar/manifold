@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TestHelpers
   def compact(string)
     return "" unless string.respond_to? :split

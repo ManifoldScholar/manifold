@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SettingsService
   # Get the current version of Manifold
   #

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :analytics_visit, class: 'Analytics::Visit' do
     transient do

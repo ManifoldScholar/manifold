@@ -92,7 +92,7 @@ class Resource < ApplicationRecord
     id = id_from_slug || collection
 
     joins(:collection_resources)
-      .where("collection_resources.resource_collection_id = ?", id)
+      .where(collection_resources: { resource_collection_id: id })
   }
   scope :by_kind, lambda { |kind|
     return all unless kind.present?
@@ -102,7 +102,7 @@ class Resource < ApplicationRecord
   scope :with_collection_order, lambda { |collection_id|
     id = ResourceCollection.friendly.find(collection_id)
     joins(:collection_resources)
-      .where("collection_resources.resource_collection_id = ?", id)
+      .where(collection_resources: { resource_collection_id: id })
       .order("collection_resources.position ASC")
   }
 
@@ -128,11 +128,11 @@ class Resource < ApplicationRecord
     {
       search_result_type: search_result_type,
       title: title_plaintext,
-      full_text: [description_plaintext, caption].reject(&:blank?).join("\n"),
+      full_text: [description_plaintext, caption].compact_blank.join("\n"),
       parent_project: project&.id,
       parent_keywords: resource_collections.map(&:title) + [project&.title],
-      metadata: metadata.values.reject(&:blank?),
-      keywords: (tag_list + attachment_file_name).reject(&:blank?)
+      metadata: metadata.values.compact_blank,
+      keywords: (tag_list + attachment_file_name).compact_blank
     }.merge(search_hidden)
   end
 
@@ -141,7 +141,7 @@ class Resource < ApplicationRecord
   end
 
   def fetch_thumbnail?
-    return unless Thumbnail::Fetcher.accepts?(self)
+    return false unless Thumbnail::Fetcher.accepts?(self)
 
     !variant_thumbnail.present? || previous_changes.key?(:external_id)
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalImport
   class Perform < ActiveInteraction::Base
     import_filters ExternalImport::Process

@@ -9,7 +9,7 @@ RSpec.describe "Me API", type: :request do
     let(:update_params) do
       build_json_payload(attributes: { firstName: first_name, lastName: last_name })
     end
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     context "when the user has not authenticated" do
       before { patch path, params: update_params }
@@ -52,7 +52,7 @@ RSpec.describe "Me API", type: :request do
     context "when the user is a reader" do
       before { get path, headers: reader_headers }
 
-      let(:api_response) { JSON.parse(response.body) }
+      let(:api_response) { response.parsed_body }
 
       describe "the response" do
         it "has a 200 status code" do

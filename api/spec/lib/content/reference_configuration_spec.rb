@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Content::ReferenceConfiguration do
@@ -6,18 +8,18 @@ RSpec.describe Content::ReferenceConfiguration do
   end
 
   it "responds to :required" do
-    expect(configuration.respond_to?(:required)).to eq true
+    expect(configuration.respond_to?(:required)).to be true
   end
 
   it "responds to :name" do
-    expect(configuration.respond_to?(:name)).to eq true
+    expect(configuration.respond_to?(:name)).to be true
   end
 
   it "responds to :source" do
-    expect(configuration.respond_to?(:source)).to eq true
+    expect(configuration.respond_to?(:source)).to be true
   end
 
   it "responds to :multiple" do
-    expect(configuration.respond_to?(:multiple)).to eq true
+    expect(configuration.respond_to?(:multiple)).to be true
   end
 end

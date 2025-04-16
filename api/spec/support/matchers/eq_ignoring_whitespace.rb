@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec::Matchers.define :eq_ignoring_whitespace do |compare|
   def strip(string)
     string.gsub(/\s+/, "")

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   module Operations
     # @see ExportSelections::Selection#to_upload_state

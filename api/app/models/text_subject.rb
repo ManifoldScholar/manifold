@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Tracks the relationship between texts and subjects
 class TextSubject < ApplicationRecord
   # Authority

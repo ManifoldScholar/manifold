@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Makers
   # Calculate the fingerprint for a {Maker}
   class CalculateFingerprint < ActiveInteraction::Base

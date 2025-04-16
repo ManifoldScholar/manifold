@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExportKind < ClassyEnum::Base
   include ActiveModel::Validations
 

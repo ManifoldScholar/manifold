@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourceImportTransition < ApplicationRecord
   # If your transition table doesn't have the default `updated_at` timestamp column,
   # you'll need to configure the `updated_timestamp_column` option, setting it to

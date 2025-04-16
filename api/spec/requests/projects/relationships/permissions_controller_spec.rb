@@ -19,7 +19,7 @@ RSpec.describe "Project Permissions API", type: :request do
 
         it "has a data attribute" do
           get path, headers: headers
-          api_response = JSON.parse(response.body)
+          api_response = response.parsed_body
           expect(api_response).to be_a Hash
         end
       end
@@ -139,7 +139,7 @@ RSpec.describe "Project Permissions API", type: :request do
       it "destroys a permission successfully" do
         expect do
           delete @path, headers: headers
-        end.to change { Permission.count }.by(-1)
+        end.to change(Permission, :count).by(-1)
       end
     end
 

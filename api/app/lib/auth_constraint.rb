@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthConstraint
   attr_reader :request
 

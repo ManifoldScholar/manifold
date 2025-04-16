@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectExportationState < ClassyEnum::Base
 end
 

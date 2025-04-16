@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Namespace that contains services related to uploading exported {Project}s
 # with various {ExportTargetStrategy strategies}.
 module ExportStrategies

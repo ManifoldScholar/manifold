@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Attachments
   class Processor < ActiveInteraction::Base
     object :shrine_uploaded_file, class: Object

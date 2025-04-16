@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Tracks the relationship between projects and subjects
 class ProjectSubject < ApplicationRecord
   # Authority

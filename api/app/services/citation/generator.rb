@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "citeproc"
 require "csl/styles"
 
@@ -25,7 +27,7 @@ module Citation
       parts.push subject.metadata if subject.respond_to? :metadata
       parts.push(id: subject.id)
       parts.push(subject.citation_parts)
-      props = parts.reject(&:nil?).reduce({}, :merge)
+      props = parts.compact.reduce({}, :merge)
       props.transform_keys! { |key| key.to_s.tr("_", "-") }
       props
     end

@@ -21,7 +21,7 @@ RSpec.describe "Resource Import API", type: :request do
 
   describe "creates a resource_import model" do
     let(:path) { api_v1_project_relationships_resource_imports_path(project) }
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     before do
       post path, headers: admin_headers, params: valid_params

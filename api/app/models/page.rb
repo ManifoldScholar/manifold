@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Model representing a page of content
 class Page < ApplicationRecord
   # Authority

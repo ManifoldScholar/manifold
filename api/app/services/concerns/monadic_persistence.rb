@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MonadicPersistence
   extend ActiveSupport::Concern
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Roles
   class Remove
     include Dry::Monads[:result, :do]

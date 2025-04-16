@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Attachments
   class TypeMatcher
     extend Dry::Initializer

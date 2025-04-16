@@ -66,7 +66,7 @@ RSpec.describe "Entitlement Imports API", type: :request do
         expect do
           post path, headers: admin_headers, params: valid_params
 
-          resp = JSON.parse response.body
+          resp = response.parsed_body
 
           @entitlement = EntitlementImport.find resp.dig("data", "id") rescue nil
         end.to change(EntitlementImport, :count).by(1).and have_enqueued_job(Entitlements::ProcessImportJob).once

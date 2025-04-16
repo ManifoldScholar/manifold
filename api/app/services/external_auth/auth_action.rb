@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalAuth
   module AuthAction
     extend ActiveSupport::Concern

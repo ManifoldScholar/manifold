@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec::Matchers.define :have_attr_accessor do |field|
   match do |object_instance|
     object_instance.respond_to?(field) &&

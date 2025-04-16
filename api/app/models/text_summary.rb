@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TextSummary < ApplicationRecord
   include Attachments
   include TableOfContentsWithCollected

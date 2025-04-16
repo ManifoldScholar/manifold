@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class TwitterQuerySerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer

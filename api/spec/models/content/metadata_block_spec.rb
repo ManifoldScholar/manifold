@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Content::MetadataBlock do
@@ -9,12 +11,12 @@ RSpec.describe Content::MetadataBlock do
   end
 
   it "is configurable" do
-    expect(metadata_block.configurable?).to eq true
+    expect(metadata_block.configurable?).to be true
   end
 
   describe "#renderable?" do
     it "is true" do
-      expect(metadata_block.renderable?).to eq true
+      expect(metadata_block.renderable?).to be true
     end
   end
 end

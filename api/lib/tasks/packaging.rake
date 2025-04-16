@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :packaging do
   namespace :epub_v3 do
     desc "Export a text by its ID to an epub"

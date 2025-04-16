@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceImports
   class Parse < ActiveInteraction::Base
     record :resource_import

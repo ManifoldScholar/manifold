@@ -15,7 +15,7 @@ RSpec.describe "Ingestions API", type: :request do
   describe "creates an ingestion" do
     let(:project) { FactoryBot.create(:project) }
     let(:path) { api_v1_project_relationships_ingestions_path(project) }
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     before do
       post path, headers: admin_headers, params: valid_params

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VersionAuthorizer < ApplicationAuthorizer
   def self.readable_by?(user, options = {})
     return true if editor_permissions?(user)

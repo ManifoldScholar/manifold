@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReadingGroupCategoryAuthorizer < ApplicationAuthorizer
   config.allowed_by_default = true
 
