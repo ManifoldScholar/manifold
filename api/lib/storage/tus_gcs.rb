@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "google/cloud/storage"
 require "factory/drive_session"
 

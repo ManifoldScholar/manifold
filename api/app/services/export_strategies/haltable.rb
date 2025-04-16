@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   # Shared haltable concern for export strategies that ensures the result
   # returns a monadic response

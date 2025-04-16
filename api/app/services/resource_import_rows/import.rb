@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceImportRows
   class Import < ActiveInteraction::Base
     TRUTHY_VALUES = %w(true TRUE True 1 y yes Yes YES T).freeze

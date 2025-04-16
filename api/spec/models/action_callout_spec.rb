@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ActionCallout do
@@ -38,14 +40,6 @@ RSpec.describe ActionCallout do
         expect(action_callout).not_to be_valid
         expect(action_callout.errors.attribute_names).to include(:text)
       end
-    end
-
-    context "when download" do
-      let(:action_callout) { FactoryBot.create(:download_action_callout, kind: "download") }
-    end
-
-    context "when link" do
-      let(:action_callout) { FactoryBot.create(:link_action_callout, kind: "link") }
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReferencedPathStrategy < ClassyEnum::Base
   include ActiveSupport::Configurable
   include Dry::Monads::Result::Mixin

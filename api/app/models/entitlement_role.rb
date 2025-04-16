@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EntitlementRole < ApplicationRecord
   upsert_keys %i[name]
 

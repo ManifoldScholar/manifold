@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SystemUpgrades
   module Upgrades
     class Manifold000400 < SystemUpgrades::AbstractVersion
@@ -20,7 +22,7 @@ module SystemUpgrades
         cli_user = User.cli_user
         Project.find_each do |project|
           next unless project.respond_to? :tweet_fetch_config
-          next unless project.tweet_fetch_config.dig("following").is_a?(Array)
+          next unless project.tweet_fetch_config["following"].is_a?(Array)
 
           project.tweet_fetch_config["following"].each do |following|
             q = project.twitter_queries.create(

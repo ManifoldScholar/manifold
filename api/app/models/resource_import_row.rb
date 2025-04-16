@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # A resource is any asset our source document that is associated with a text.
 class ResourceImportRow < ApplicationRecord
-  ROW_TYPE_DATA = "data".freeze
-  ROW_TYPE_IGNORED = "ignored".freeze
-  ROW_TYPE_HEADER = "header".freeze
+  ROW_TYPE_DATA = "data"
+  ROW_TYPE_IGNORED = "ignored"
+  ROW_TYPE_HEADER = "header"
 
   include Statesman::Adapters::ActiveRecordQueries
   include Fingerprinted

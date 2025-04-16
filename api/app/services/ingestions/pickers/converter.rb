@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class is responsible for determining which
 # converter (if any) should be used to convert a source file.
 module Ingestions

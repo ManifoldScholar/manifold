@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Testing
   class IngestGoogleDoc < ActiveInteraction::Base
     record :project
@@ -11,7 +13,7 @@ module Testing
 
       @ingestion.save!
 
-      @logger = Logger.new(STDOUT)
+      @logger = Logger.new($stdout)
 
       compose Ingestions::Ingestor, ingestion: @ingestion, logger: @logger
     end

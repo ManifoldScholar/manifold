@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SerializableAuthorization
   extend ActiveSupport::Concern
   include ActiveSupport::Configurable

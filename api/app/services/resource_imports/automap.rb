@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceImports
   class Automap < ActiveInteraction::Base
     PSEUDONYMS = {

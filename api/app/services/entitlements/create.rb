@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Entitlements
   # Create an Entitlement
   class Create < AbstractCreate

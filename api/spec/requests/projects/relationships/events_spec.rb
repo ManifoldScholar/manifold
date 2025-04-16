@@ -22,7 +22,7 @@ RSpec.describe "Project Events API", type: :request do
 
     describe "the events returned" do
       it "do not include type comment_created or text_annotated" do
-        api_response = JSON.parse(response.body)
+        api_response = response.parsed_body
         event_types = api_response["data"].map { |event| event.dig("attributes", "eventType") }
         expect(event_types).not_to include EventType[:comment_created], EventType[:text_annotated]
       end

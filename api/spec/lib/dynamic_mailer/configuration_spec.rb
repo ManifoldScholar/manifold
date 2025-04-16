@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "dynamic_mailer/configuration"
 require "rails_helper"
 

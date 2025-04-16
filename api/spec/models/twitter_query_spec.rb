@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe TwitterQuery, type: :model do
@@ -15,12 +17,12 @@ RSpec.describe TwitterQuery, type: :model do
 
     it "is reset when query is changed" do
       query.query = "#changed"
-      expect { query.save }.to change { query.most_recent_tweet_id }.to nil
+      expect { query.save }.to change(query, :most_recent_tweet_id).to nil
     end
 
     it "is not reset when query is unchanged" do
       query.result_type = "popular"
-      expect { query.save }.not_to change { query.most_recent_tweet_id }
+      expect { query.save }.not_to change(query, :most_recent_tweet_id)
     end
   end
 

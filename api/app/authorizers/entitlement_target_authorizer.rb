@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @see Entitlement
 class EntitlementTargetAuthorizer < ApplicationAuthorizer
   # @param [Symbol] _adjective

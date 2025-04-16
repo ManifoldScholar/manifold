@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReadingGroups
   class JoinPublic
     # @return [Dry::Monads::Result]
@@ -34,9 +36,9 @@ module ReadingGroups
       end
 
       def membership_exists?
-        return unless user.present?
+        return false unless user.present?
 
-        ReadingGroupMembership.active.where(user: user, reading_group: reading_group).exists?
+        ReadingGroupMembership.active.exists?(user: user, reading_group: reading_group)
       end
     end
   end

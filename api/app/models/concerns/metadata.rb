@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Helpers for hash attributes
 module Metadata
   extend ActiveSupport::Concern
@@ -23,7 +25,7 @@ module Metadata
 
   def metadata=(value)
     base = metadata || {}
-    new = base.merge(value).delete_if { |_k, v| v.blank? }
+    new = base.merge(value).compact_blank!
     write_attribute(:metadata, new)
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # included in a resource model (one that implements {Authority::Abilities})
 module SerializedAbilitiesFor
   extend ActiveSupport::Concern

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalImport
   class Process < ActiveInteraction::Base
     string :source_path, default: proc { Rails.root.join("manifold-export.json").to_s }
@@ -29,7 +31,7 @@ module ExternalImport
 
     private
 
-    UNKNOWN_TEXT_FMT = %(has unknown text id: "%<remote>s" => "%<local>s").freeze
+    UNKNOWN_TEXT_FMT = %(has unknown text id: "%<remote>s" => "%<local>s")
 
     # @return [void]
     def texts_must_exist!

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EntitlementUserLink < ApplicationRecord
   upsert_keys %i[entitlement_id user_id]
 

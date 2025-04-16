@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RenderWithoutWrap < ::Redcarpet::Render::HTML
   # rubocop:disable Style/RegexpLiteral
   WRAPPED_IN_P = /\A<p>(.*)<\/p>\Z/m

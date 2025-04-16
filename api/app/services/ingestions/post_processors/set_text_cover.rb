@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module PostProcessors
     class SetTextCover < AbstractInteraction

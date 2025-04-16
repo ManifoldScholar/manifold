@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Transform JSON request param keys from JSON-conventional camelCase to
 # Rails-conventional snake_case:
 ActionDispatch::Request.parameter_parsers[Mime[:json].symbol] = lambda do |raw_post|

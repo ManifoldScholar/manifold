@@ -96,7 +96,7 @@ class Journal < ApplicationRecord
       full_text: description_plaintext,
       creator: creator&.full_name,
       makers: makers.map(&:full_name),
-      metadata: metadata.values.reject(&:blank?)
+      metadata: metadata.values.compact_blank
     }.merge(search_hidden)
   end
 

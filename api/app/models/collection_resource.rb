@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Tracks the relationship between collections and resources
 class CollectionResource < ApplicationRecord
   # Authority

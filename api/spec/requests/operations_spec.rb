@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "Operations API", type: :request do
@@ -31,7 +33,7 @@ RSpec.describe "Operations API", type: :request do
       it "adds and removes successfuly" do
         expect do
           post api_v1_operations_path, headers: auth_headers, params: update_params.to_json
-        end.to change { entry_klass.count }.by(1)
+        end.to change(entry_klass, :count).by(1)
 
         expect(response).to be_successful
 
@@ -50,7 +52,7 @@ RSpec.describe "Operations API", type: :request do
 
         expect do
           post api_v1_operations_path, headers: auth_headers, params: remove_params.to_json
-        end.to change { entry_klass.count }.by(-1)
+        end.to change(entry_klass, :count).by(-1)
 
         expect(response).to be_successful
       end

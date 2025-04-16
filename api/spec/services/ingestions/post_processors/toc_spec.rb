@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.shared_examples "toc items" do
@@ -11,7 +13,7 @@ RSpec.shared_examples "toc items" do
 
   context "when item does not have hash" do
     it "has the right anchor" do
-      expect(unhashed["anchor"]).to eq nil
+      expect(unhashed["anchor"]).to be_nil
     end
   end
 

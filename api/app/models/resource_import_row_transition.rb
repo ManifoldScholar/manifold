@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourceImportRowTransition < ApplicationRecord
   belongs_to :resource_import_row, inverse_of: :resource_import_row_transitions
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Permission < ApplicationRecord
   self.primary_key = :id
 
@@ -10,7 +12,6 @@ class Permission < ApplicationRecord
   scope :by_resource, ->(resource) { where resource: resource }
   scope :by_user, ->(user) { where(user: user) }
 
-  validates :user, :resource, presence: true
   validate :role_names_present!
 
   def readonly?

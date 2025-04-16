@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectCollectionAuthorizer < ApplicationAuthorizer
   def self.default(_able, user, _options = {})
     marketeer_permissions?(user)

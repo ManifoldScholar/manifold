@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A resource is any asset our source document that is associated with a text.
 class ResourceImport < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Model concern that includes relations to collaborators and scoped relations to creators
 # and contributors
 module Collaborative

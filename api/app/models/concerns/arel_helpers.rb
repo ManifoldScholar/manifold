@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Shared collection of (mostly Arel) class-level helpers for working with advanced
 # SQL selections.
 #

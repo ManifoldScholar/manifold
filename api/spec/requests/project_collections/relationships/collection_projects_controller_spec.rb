@@ -46,7 +46,7 @@ RSpec.describe "ProjectCollection CollectionProject API", type: :request do
       it "destroys a CollectionProject successfully" do
         expect do
           delete path, headers: headers
-        end.to change { CollectionProject.count }.by(-1)
+        end.to change(CollectionProject, :count).by(-1)
       end
     end
 

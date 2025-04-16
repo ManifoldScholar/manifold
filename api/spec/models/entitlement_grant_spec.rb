@@ -26,7 +26,7 @@ RSpec.describe EntitlementGrant, type: :model do
 
       ManifoldApi::Container["entitlements.populate_grants"].()
 
-      EntitlementGrant.where(user: user, resource: project).first!
+      described_class.where(user: user, resource: project).first!
     end
 
     subject { grant }

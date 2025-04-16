@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Permissions
   class Save < ActiveInteraction::Base
     object :permission

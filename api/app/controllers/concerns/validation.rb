@@ -571,7 +571,7 @@ module Validation
   end
 
   def search_params
-    params[:facets] = params[:facets].values if params.dig(:facets).respond_to? :values
+    params[:facets] = params[:facets].values if params[:facets].respond_to? :values
     params.permit(
       :keyword,
       :project,

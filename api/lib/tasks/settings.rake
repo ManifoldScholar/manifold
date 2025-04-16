@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :manifold do
   namespace :settings do
     desc "Update DB settings from environment"

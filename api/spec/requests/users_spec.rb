@@ -64,7 +64,7 @@ RSpec.describe "Users API", type: :request do
         make_request!
       end.to change(User, :count).by(1)
 
-      api_response = JSON.parse(response.body)
+      api_response = response.parsed_body
 
       aggregate_failures do
         expect(api_response["data"]["attributes"]["firstName"]).to eq(first_name)
@@ -128,7 +128,7 @@ RSpec.describe "Users API", type: :request do
 
   describe "sends a user" do
     let(:path) { api_v1_user_path(reader) }
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     context "when the user is the user being requested" do
       before { get path, headers: reader_headers }
@@ -163,7 +163,7 @@ RSpec.describe "Users API", type: :request do
 
   describe "sends the current user" do
     let(:path) { whoami_api_v1_users_path }
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     context "when the user is a reader" do
       before { get path, headers: reader_headers }
@@ -182,7 +182,7 @@ RSpec.describe "Users API", type: :request do
 
   describe "destroys a user" do
     let(:path) { api_v1_user_path(reader) }
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     context "when the user is an admin" do
       before { delete path, headers: admin_headers }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class ErrorSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
@@ -22,7 +24,7 @@ module V1
 
     # Based on https://github.com/Netflix/fast_jsonapi/issues/102#issuecomment-409984054
     def hash_for_collection
-      serialized_hash = super[:data]&.map { |err| err[:attributes] }
+      serialized_hash = super[:data]&.pluck(:attributes)
       with_root_key ? { errors: serialized_hash } : serialized_hash
     end
   end

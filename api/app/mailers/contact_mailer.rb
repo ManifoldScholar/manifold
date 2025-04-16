@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ContactMailer < ApplicationMailer
   def contact_message(full_name, email, message)
     installation_contact = @settings.general[:contact_email]

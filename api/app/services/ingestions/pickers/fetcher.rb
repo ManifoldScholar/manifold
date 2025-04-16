@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class is responsible for determining which
 # fetch (if any) should be used to fetch a url.
 module Ingestions

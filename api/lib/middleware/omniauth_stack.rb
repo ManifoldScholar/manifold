@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Selectively loads middleware required for OmniAuth
 # for any path outside of the `/api` namespace.
 class OmniauthStack

@@ -14,7 +14,7 @@ RSpec.describe SystemUpgrades do
   end
 
   it "retrieves and orders upgrade version files", :aggregate_failures do
-    upgrades = SystemUpgrades.eager_load_upgrades!
+    upgrades = described_class.eager_load_upgrades!
 
     expect(upgrades).to include(Test000100)
     expect(upgrades).to include(Test000200)

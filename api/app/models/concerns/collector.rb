@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # In the {Collections} domain, a `Collector` is a model that can collect something.
 # Currently, that is {ReadingGroup} and {User}.
 module Collector

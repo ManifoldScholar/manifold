@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImportSelectionMatch < ApplicationRecord
   belongs_to :import_selection, counter_cache: :matches_count
   belongs_to :text_section

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A concern that builds on {CalculatesFingerprints} that
 # augments a model to automatically calculate and store its
 # fingerprint upon validation.

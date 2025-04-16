@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::PreProcessor do
@@ -8,7 +10,7 @@ RSpec.describe Ingestions::PreProcessor do
   let(:context) { create_context(ingestion) }
   let(:manifest) do
     manifest = Ingestions::Strategies::Document.run(context: context).result
-    Ingestions::PreProcessor.run(context: context, manifest: manifest).result
+    described_class.run(context: context, manifest: manifest).result
   end
   let(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
   let!(:outcome) { Ingestions::PostProcessor.run(manifest: manifest, text: text, context: context) }

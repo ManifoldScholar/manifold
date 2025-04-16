@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TextDecorator < ApplicationDecorator
   delegate_all
   decorates_association :project

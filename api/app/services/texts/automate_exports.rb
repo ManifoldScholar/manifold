@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Texts
   class AutomateExports < ActiveInteraction::Base
     # @return [void]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Enhancements related to using `elasticsearch-dsl`.
   module AdvancedDSL

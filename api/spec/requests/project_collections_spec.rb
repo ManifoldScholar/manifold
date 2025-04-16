@@ -29,7 +29,7 @@ RSpec.describe "Project Collections API", type: :request do
         end
 
         it "does not include draft projects" do
-          included = JSON.parse(response.body).dig("included").select { |record| record["type"] == "projects" }
+          included = response.parsed_body["included"].select { |record| record["type"] == "projects" }
           expect(included.length).to eq 1
         end
       end
@@ -44,7 +44,7 @@ RSpec.describe "Project Collections API", type: :request do
         end
 
         it "does include draft projects" do
-          included = JSON.parse(response.body).dig("included").select { |record| record["type"] == "projects" }
+          included = response.parsed_body["included"].select { |record| record["type"] == "projects" }
           expect(included.length).to eq 2
         end
       end

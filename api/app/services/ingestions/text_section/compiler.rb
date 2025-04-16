@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module TextSection
     class Compiler < Ingestions::AbstractInteraction

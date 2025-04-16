@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectCollectionSubject < ApplicationRecord
   # Authority
   include Authority::Abilities

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class CrassNode < Types::FlexibleStruct
     NODES = Types::Array.of(Types::CrassNode)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     # Module that can be used to inject dependencies from {Packaging::EpubV3::Container}

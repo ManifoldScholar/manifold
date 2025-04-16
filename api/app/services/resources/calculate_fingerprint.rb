@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Resources
   # Calculate a fingerprint for a {Resource}.
   class CalculateFingerprint < ActiveInteraction::Base

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'interaction testing' do
   let(:interaction_inputs) do
     build_interaction_inputs

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Content::RecentActivityBlock do
@@ -9,12 +11,12 @@ RSpec.describe Content::RecentActivityBlock do
   end
 
   it "is configurable" do
-    expect(recent_activity_block.configurable?).to eq true
+    expect(recent_activity_block.configurable?).to be true
   end
 
   describe "#renderable?" do
     it "is true" do
-      expect(recent_activity_block.renderable?).to eq true
+      expect(recent_activity_block.renderable?).to be true
     end
   end
 end

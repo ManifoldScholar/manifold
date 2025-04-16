@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Simple job to process a resource import row
 module ResourceImportRows
   class ImportJob < ApplicationJob

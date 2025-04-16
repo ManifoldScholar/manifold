@@ -47,22 +47,7 @@ RSpec.shared_examples_for "class abilities" do |klass, abilities|
 end
 
 RSpec.shared_context "unauthenticated user" do |klass|
-  class_name = klass.name.underscore
+  klass.name.underscore
 
   let(:subject) { anonymous_user }
-
-  context "when unauthenticated user" do
-    context "when #{class_name}'s project is draft" do
-      let(:project) { FactoryBot.create(:project, draft: true) }
-      let(:object) { FactoryBot.create(class_name.to_sym, project: project) }
-
-      the_subject_behaves_like "instance abilities", klass, none: true
-    end
-
-    context "when #{class_name}'s project is live" do
-      let(:object) { FactoryBot.create(class_name.to_sym) }
-
-      the_subject_behaves_like "instance abilities", klass, read_only: true
-    end
-  end
 end

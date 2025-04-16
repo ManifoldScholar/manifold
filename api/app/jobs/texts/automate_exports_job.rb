@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Texts
   # @see Texts::AutomateExports
   class AutomateExportsJob < ApplicationJob

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalImport
   class CreateAnnotation < ActiveInteraction::Base
     object :text_section

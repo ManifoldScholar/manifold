@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectExportations
   module Pipelines
     class Upload

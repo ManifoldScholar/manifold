@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     class ReferencedItem < Types::FlexibleStruct

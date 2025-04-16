@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utility
   # Given a zip file, inspect it and return a list of entries with their respective sizes.
   class InspectZipFile < ActiveInteraction::Base

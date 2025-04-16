@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
@@ -33,7 +35,7 @@ module APIDocs
           rights_holder: Types::String,
           resources_doi: Types::String,
           citation_override: Types::String
-        }
+        }.freeze
 
         REQUIRED_CREATE_ATTRIBUTES = [:title].freeze
 

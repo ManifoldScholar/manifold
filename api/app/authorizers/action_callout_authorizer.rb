@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActionCalloutAuthorizer < ApplicationAuthorizer
   # By default, we defer to {calloutable#updatable_by?}.
   def default(_adjective, user, options = {})

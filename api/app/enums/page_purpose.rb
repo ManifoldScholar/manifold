@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PagePurpose < ClassyEnum::Base
   include ActiveSupport::Configurable
 

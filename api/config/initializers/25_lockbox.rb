@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 secret_key_base = Rails.application.secrets.secret_key_base
 
 secret_key_base = secret_key_base.presence || Lockbox.generate_key if Rails.env.test?

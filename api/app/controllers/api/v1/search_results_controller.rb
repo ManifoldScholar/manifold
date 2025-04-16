@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # SearchResultsController
@@ -14,7 +16,7 @@ module API
                          include: [:model, :"model.creator", :"model.creators"],
                          serializer: ::V1::SearchResultSerializer,
                          meta: {
-                           keyword: search_options.dig(:keyword),
+                           keyword: search_options[:keyword],
                            pagination: pagination_dict(outcome.result)
                          }
         else

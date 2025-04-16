@@ -25,12 +25,12 @@ RSpec.describe "Reading Group Memberships API", type: :request do
       end
 
       it "does not reveal user's personal information" do
-        data = JSON.parse(response.body)
+        data = response.parsed_body
         expect(data["included"].second["attributes"]["email"]).to be_nil
       end
 
       it "returns the correct number of members for the reading group" do
-        data = JSON.parse(response.body)["data"]
+        data = response.parsed_body["data"]
         expect(data.length).to eq members_per_group
       end
     end

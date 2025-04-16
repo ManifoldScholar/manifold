@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActionCallout < ApplicationRecord
   # Authorization
   include Authority::Abilities

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Analytics
   class RecordSearchEvent < Analytics::RecordCustomEvent
     validate :properties_contains_query

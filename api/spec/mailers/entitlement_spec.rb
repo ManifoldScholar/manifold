@@ -5,7 +5,7 @@ RSpec.describe EntitlementMailer, type: :mailer do
     let!(:user) { FactoryBot.create :user }
     let!(:entitlement) { FactoryBot.create :entitlement, :global_subscriber, target: user }
 
-    let(:mail) { EntitlementMailer.created user, entitlement }
+    let(:mail) { described_class.created user, entitlement }
 
     it "renders the headers" do
       expect(mail.subject).to match(/access granted/i)
@@ -19,7 +19,7 @@ RSpec.describe EntitlementMailer, type: :mailer do
 
   describe "pending" do
     let!(:pending_entitlement) { FactoryBot.create :pending_entitlement }
-    let(:mail) { EntitlementMailer.pending pending_entitlement }
+    let(:mail) { described_class.pending pending_entitlement }
 
     it "renders the headers" do
       expect(mail.subject).to match(/pending/)

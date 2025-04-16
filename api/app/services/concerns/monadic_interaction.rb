@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Methods to integrate ActiveInteractions more seamlessly with dry-transaction pipelines.
 module MonadicInteraction
   extend ActiveSupport::Concern

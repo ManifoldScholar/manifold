@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ResourceImports::ParseCSV do
@@ -6,7 +8,7 @@ RSpec.describe ResourceImports::ParseCSV do
     import = FactoryBot.create(:resource_import_csv, data: path)
 
     expect do
-      ResourceImports::ParseCSV.run resource_import: import
+      described_class.run resource_import: import
     end.not_to raise_error
   end
 
@@ -15,7 +17,7 @@ RSpec.describe ResourceImports::ParseCSV do
     let(:import) { FactoryBot.create(:resource_import_csv, data: path) }
 
     before do
-      ResourceImports::ParseCSV.run resource_import: import
+      described_class.run resource_import: import
     end
 
     it "parses and maintains the correct characters" do

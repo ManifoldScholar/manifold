@@ -67,7 +67,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     let_it_be(:other_reader_annotation_in_my_public_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: my_public_reading_group) }
     let_it_be(:other_reader_annotation_in_other_public_reading_group) { FactoryBot.create(:annotation, text_section: text_section, creator: another_reader, reading_group: other_public_reading_group) }
 
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
     let(:included_ids) { api_response["data"].pluck("id") }
     let(:path) { api_v1_text_relationships_text_section_annotations_path(text_id: text.id, text_section_id: text_section) }
 

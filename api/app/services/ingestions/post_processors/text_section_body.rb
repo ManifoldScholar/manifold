@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "pathname"
 require "uri"
 require "cgi"
@@ -120,10 +122,7 @@ module Ingestions
         package_path = if uri.absolute? || uri.path.start_with?("/")
                          uri.path[1..]
                        else
-                         File.expand_path("/" +
-                                            File.dirname(source_doc_path) +
-                                            "/" +
-                                            uri.path)[1..]
+                         File.expand_path("/#{File.dirname(source_doc_path)}/#{uri.path}")[1..]
                        end
         CGI.unescape package_path
       end

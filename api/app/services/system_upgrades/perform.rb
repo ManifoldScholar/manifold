@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SystemUpgrades
   class Perform < ActiveInteraction::Base
     include SystemUpgrades::HasLogger

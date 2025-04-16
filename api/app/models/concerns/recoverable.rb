@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Recoverable
   extend ActiveSupport::Concern
   class_methods do

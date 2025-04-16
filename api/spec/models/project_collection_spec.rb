@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ProjectCollection, type: :model do
@@ -86,44 +88,44 @@ RSpec.describe ProjectCollection, type: :model do
 
     context "when homepage == false" do
       it "excludes the collection" do
-        expect(ProjectCollection.by_visible_on_homepage).not_to include no_homepage
+        expect(described_class.by_visible_on_homepage).not_to include no_homepage
       end
     end
 
     context "when visible == false" do
       it "excludes the collection" do
-        expect(ProjectCollection.by_visible_on_homepage).not_to include not_visible
+        expect(described_class.by_visible_on_homepage).not_to include not_visible
       end
     end
 
     context "when homepage == true && visible == true" do
       context "when no date range" do
         it "includes the collection" do
-          expect(ProjectCollection.by_visible_on_homepage).to include no_range
+          expect(described_class.by_visible_on_homepage).to include no_range
         end
       end
 
       context "when current date in date range" do
         it "includes the collection" do
-          expect(ProjectCollection.by_visible_on_homepage).to include current
+          expect(described_class.by_visible_on_homepage).to include current
         end
       end
 
       context "when current date after start and no end date specified" do
         it "includes the collection" do
-          expect(ProjectCollection.by_visible_on_homepage).to include open_ended
+          expect(described_class.by_visible_on_homepage).to include open_ended
         end
       end
 
       context "when current date before date range" do
         it "excludes the collection" do
-          expect(ProjectCollection.by_visible_on_homepage).not_to include pending
+          expect(described_class.by_visible_on_homepage).not_to include pending
         end
       end
 
       context "when current date after date range" do
         it "excludes the collection" do
-          expect(ProjectCollection.by_visible_on_homepage).not_to include expired
+          expect(described_class.by_visible_on_homepage).not_to include expired
         end
       end
     end

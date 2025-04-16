@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context "resource import", shared_context: :metadata do
   before do
     allow_any_instance_of(ResourceImportRows::Import)

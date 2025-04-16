@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Resources
   class ExtractExternalVideoId < ActiveInteraction::Base
     string :external_id

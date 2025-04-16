@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   module Pipelines
     # Pipeline that takes a {ExportStrategies::Selection} an uploads its {ProjectExport} into the selected {ExportTarget}.

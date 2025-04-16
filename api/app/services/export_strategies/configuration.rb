@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   # Top-level configuration object for export targeting.
   #
@@ -13,7 +15,7 @@ module ExportStrategies
     NON_SFTP_PASSWORD = /(?<!sftp_)password\z/
     filter_attributes! NON_SFTP_PASSWORD, :private_key
 
-    DEFAULT_TARGET_NAME_FORMAT = "%s-%t.%e".freeze
+    DEFAULT_TARGET_NAME_FORMAT = "%s-%t.%e"
 
     STRATEGIES = ExportTargetStrategy.map(&:to_sym).freeze
     ENABLED_STRATEGIES = ExportTargetStrategy.enabled.freeze

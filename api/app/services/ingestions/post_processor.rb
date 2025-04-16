@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   class PostProcessor < AbstractInteraction
     hash :manifest, strip: false
@@ -66,9 +68,7 @@ module Ingestions
     end
 
     def manifest_spine
-      identifiers = manifest[:relationships][:text_sections].map do |ts|
-        ts[:source_identifier]
-      end
+      identifiers = manifest[:relationships][:text_sections].pluck(:source_identifier)
 
       text.text_sections
         .where(source_identifier: identifiers)

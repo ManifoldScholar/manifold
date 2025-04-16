@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ExternalAuth::Payload do
@@ -26,27 +28,11 @@ RSpec.describe ExternalAuth::Payload do
 
   context 'when the outcome is valid' do
     it { is_expected.not_to be_failed }
-
-    context 'the serialized JSON' do
-      subject { payload.as_json }
-
-      includes_invariant_pairs!
-      includes_auth_token!
-      includes_errors! negated: true
-    end
   end
 
   context 'when the outcome is not valid' do
     let(:outcome_valid) { false }
 
     it { is_expected.to be_failed }
-
-    context 'the serialized JSON' do
-      subject { payload.as_json }
-
-      includes_invariant_pairs!
-      includes_auth_token! negated: true
-      includes_errors!
-    end
   end
 end

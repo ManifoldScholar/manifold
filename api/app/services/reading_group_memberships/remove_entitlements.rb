@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReadingGroupMemberships
   # Remove all {EntitlementUserLink}s provided to the {ReadingGroup}
   # for the soon-to-be-destroyed {ReadingGroupMembership}.

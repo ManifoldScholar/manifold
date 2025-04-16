@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Helper service for creating Ingestions through the CLI.
 # Its primary use is in rake tasks where the source file is not being received as an
 # upload through Tus.

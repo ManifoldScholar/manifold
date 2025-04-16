@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SystemUpgrades
   module Upgrades
     class Manifold060000 < SystemUpgrades::AbstractVersion

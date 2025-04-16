@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The intention to export a {Project} (via {ProjectExport}) to an {ExportTarget}.
 #
 # @see ProjectExportationTransition

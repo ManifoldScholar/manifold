@@ -3,7 +3,7 @@
 RSpec.describe "ContentBlocks API", type: :request do
   let(:content_block) { FactoryBot.create(:markdown_block) }
   let(:path) { api_v1_content_block_path(content_block) }
-  let(:api_response) { JSON.parse(response.body) }
+  let(:api_response) { response.parsed_body }
 
   describe "sends a content block" do
     context "when the user is an admin" do
@@ -57,7 +57,7 @@ RSpec.describe "ContentBlocks API", type: :request do
             }
 
             patch path, headers: headers, params: build_json_payload(relationships: params)
-            api_response = JSON.parse(response.body)
+            api_response = response.parsed_body
             expect(api_response.dig("data", "relationships", "text", "data", "id")).to eq new_text.id
           end
         end

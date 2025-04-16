@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalImport
   class MatchRange < ActiveInteraction::Base
     object :import_selection_match

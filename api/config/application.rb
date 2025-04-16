@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails"
@@ -77,8 +79,7 @@ module ManifoldApi
 
     # The default locale is :en and all translations from
     # config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join("config",
-                                                 "locales", "**", "*.{rb,yml}")]
+    config.i18n.load_path += Rails.root.glob('config/locales/**/*.{rb,yml}')
     # config.i18n.default_locale = :de
 
     # Only loads a smaller set of middleware suitable for API only apps.

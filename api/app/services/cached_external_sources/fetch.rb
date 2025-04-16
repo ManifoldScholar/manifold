@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CachedExternalSources
   class Fetch
     include CachedExternalSources::Operation

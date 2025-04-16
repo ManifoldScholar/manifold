@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     # Recursively-runnable interaction to compile a given HTML node into a Nokogiri element,

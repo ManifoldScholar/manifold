@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module Preservation
     # Export a {Project} to a {ExportKind::BagIt BagIt spec archive}.

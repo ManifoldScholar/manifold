@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Patches
   # Allows ActiveModel error messages to be flattened into a single string
   module FlattenedErrors
-    DEFAULT_FLATTENED_ERROR = "Something went wrong".freeze
+    DEFAULT_FLATTENED_ERROR = "Something went wrong"
 
     # @return [String]
     def flattened_errors(default: DEFAULT_FLATTENED_ERROR, prefix: "")
@@ -510,7 +512,7 @@ ActiveInteraction::Base.prepend Patches::BetterInteractions
 ActiveInteraction.public_constant :Interrupt
 
 # Transactions need to be wrappable
-ActiveRecord::Base.include ActiveRecord::WrappedTransaction
+ActiveSupport.on_load(:active_record) { include ActiveRecord::WrappedTransaction }
 
 # ActiveRecord models should also be able to flatten their errors.
-ActiveRecord::Base.include Patches::FlattenedErrors
+ActiveSupport.on_load(:active_record) { include Patches::FlattenedErrors }

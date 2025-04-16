@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "google/apis/analytics_v3"
 require "google/api_client/auth/key_utils"
 

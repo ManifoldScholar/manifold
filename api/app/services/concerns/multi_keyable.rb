@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MultiKeyable
   extend ActiveSupport::Concern
 

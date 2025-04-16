@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
@@ -12,7 +14,7 @@ module APIDocs
           favicon: Types::Serializer::Upload,
           remove_favicon: Types::Bool,
           google_service: Types::Serializer::Upload.meta(description: "A json google service configuration file")
-        }
+        }.freeze
 
         class << self
           include APIDocs::Definitions::Resource

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Content::TextsBlock do
@@ -11,15 +13,15 @@ RSpec.describe Content::TextsBlock do
   end
 
   it "is configurable" do
-    expect(texts_block.configurable?).to eq true
+    expect(texts_block.configurable?).to be true
   end
 
   it "responds to :included_categories" do
-    expect(texts_block.respond_to?(:included_categories)).to eq true
+    expect(texts_block.respond_to?(:included_categories)).to be true
   end
 
   it "responds to :texts" do
-    expect(texts_block.respond_to?(:texts)).to eq true
+    expect(texts_block.respond_to?(:texts)).to be true
   end
 
   it "has the correct available attributes" do
@@ -27,7 +29,7 @@ RSpec.describe Content::TextsBlock do
   end
 
   it "has a formatted description" do
-    expect(texts_block.respond_to?(:description_formatted)).to eq true
+    expect(texts_block.respond_to?(:description_formatted)).to be true
   end
 
   describe "#texts" do

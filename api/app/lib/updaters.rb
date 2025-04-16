@@ -14,8 +14,8 @@ module Updaters
   attr_accessor :id, :type, :data, :attributes, :relationships, :context
 
   def initialize(params, context = nil)
-    @attributes = params.dig(:data, :attributes)&.to_h || {}
-    @relationships = params.dig(:data, :relationships)&.to_h || {}
+    @attributes = params.dig(:data, :attributes).to_h
+    @relationships = params.dig(:data, :relationships).to_h
     @context = context
   end
 
@@ -134,7 +134,7 @@ module Updaters
   # rubocop:enable Metrics/CyclomaticComplexity
 
   def update_belongs_to(model, name, to_add)
-    polymorphic = model.class.reflect_on_association(name).options.dig(:polymorphic)
+    polymorphic = model.class.reflect_on_association(name).options[:polymorphic]
     klass = if polymorphic
               to_add[:type].classify.constantize
             else
@@ -155,7 +155,7 @@ module Updaters
 
   def relationship_map(model, name, models)
     models.map do |related_model|
-      if related_model.dig(:id)
+      if related_model[:id]
         related_model_class = model.class.reflect_on_association(name).klass
         related_model_class.find(related_model[:id])
       end

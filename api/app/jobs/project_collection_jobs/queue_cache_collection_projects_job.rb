@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectCollectionJobs
   class QueueCacheCollectionProjectsJob < ApplicationJob
     def perform

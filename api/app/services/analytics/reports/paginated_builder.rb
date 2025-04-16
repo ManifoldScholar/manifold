@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Analytics
   module Reports
     class PaginatedBuilder < Analytics::Reports::Builder
-      PAGINATION_PLACEHOLDER = "{{ PAGINATION }}".freeze
+      PAGINATION_PLACEHOLDER = "{{ PAGINATION }}"
 
       integer :page, default: 1
       integer :per_page, default: 20

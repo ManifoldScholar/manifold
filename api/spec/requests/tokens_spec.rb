@@ -6,7 +6,7 @@ RSpec.describe "Tokens API", type: :request do
     let(:params) { { email: reader.email, password: password } }
     let(:invalid_params) { { email: reader.email, password: "boogers" } }
     let(:nonexistent_user_params) { { email: "123", password: "123" } }
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     describe "the response" do
       before { post path, params: params }

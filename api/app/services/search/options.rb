@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Helper class to build an `options` object for Searchkick.
   class Options < Types::FlexibleStruct

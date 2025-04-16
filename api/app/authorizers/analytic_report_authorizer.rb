@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnalyticReportAuthorizer < ApplicationAuthorizer
   class << self
     def default(_able, user, _options = {})

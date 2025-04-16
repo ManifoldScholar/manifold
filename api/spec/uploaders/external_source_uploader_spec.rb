@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 RSpec.describe ExternalSourceUploader do
   let(:attachment) { cached_external_source.reload.asset }

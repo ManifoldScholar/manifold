@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Analytics
   class RecordLeaveEventJob < ApplicationJob
     attr_reader :visit_id, :record_type, :record_id, :time
