@@ -9,7 +9,7 @@ module API
         class EventsController < AbstractProjectChildController
           resourceful! Event, authorize_options: { except: [:index] } do
             Event.filtered(
-              with_pagination!(event_filter_params),
+              **with_pagination!(event_filter_params),
               scope: @project.events.excluding_type(
                 [
                   EventType[:comment_created],

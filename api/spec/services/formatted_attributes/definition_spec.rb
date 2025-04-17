@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe FormattedAttributes::Definition do
   let(:attribute_name) { :title }
-  let(:definition) { described_class.new(attribute_name, options) }
   let(:container) { nil }
   let(:include_wrap) { true }
   let(:renderer_options) { {} }
@@ -21,6 +20,7 @@ RSpec.describe FormattedAttributes::Definition do
   let(:formatted_value) { "<p><em>italic</em> a <strong>bold</strong></p>" }
   let(:plaintext_value) { "italic a bold" }
 
+  let(:definition) { described_class.new(attribute_name, options) }
   subject { definition }
 
   it 'has equality via :path' do

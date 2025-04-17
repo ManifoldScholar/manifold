@@ -9,7 +9,7 @@ module API
 
           resourceful! ReadingGroupMembership do
             @user.reading_group_memberships.filtered(
-              with_pagination!(reading_group_membership_filter_params)
+              **with_pagination!(reading_group_membership_filter_params)
             )
           end
 

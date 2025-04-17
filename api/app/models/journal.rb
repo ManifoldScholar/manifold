@@ -156,7 +156,7 @@ class Journal < ApplicationRecord
     def build_update_ability_scope_for(user = nil)
       return none if user.blank?
 
-      where arel_with_roles_for(user, RoleName.for_journal_update)
+      where arel_with_roles_for(user, **RoleName.for_journal_update)
     end
 
     def build_update_or_issue_update_ability_for(user = nil)
@@ -170,7 +170,7 @@ class Journal < ApplicationRecord
                  }
                })
 
-      where(arel_with_roles_for(user, RoleName.for_journal_update)).or(where(id: include_journals))
+      where(arel_with_roles_for(user, **RoleName.for_journal_update)).or(where(id: include_journals))
     end
 
     private
@@ -193,7 +193,7 @@ class Journal < ApplicationRecord
     # @param [User] user
     # @return [Arel::Nodes::Or]
     def arel_with_draft_roles_for(user)
-      arel_with_roles_for(user, RoleName.for_draft_access).or(
+      arel_with_roles_for(user, **RoleName.for_draft_access).or(
         arel_with_draft_access_from_issues(user)
       )
     end

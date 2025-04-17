@@ -88,11 +88,9 @@ module Ingestions
         out = "\n"
         string.each_line do |line|
           line.strip!
-          out << if line.end_with?("{", "}")
-                   "  #{line}\n"
-                 else
-                   "    #{line}\n"
-                 end
+          space = "  #{line}\n"
+          tab = "    #{line}\n"
+          out = "#{out}#{line.end_with?('{', '}') ? space : tab}'"
         end
         out
       end

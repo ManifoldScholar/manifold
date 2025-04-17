@@ -21,6 +21,6 @@ RSpec.describe Packaging::BagItSpec::Compilation::GenerateBagInfo, packaging: tr
   end
 
   it "generates a resource proxy" do
-    expect(operation.call(state)).to match_dry_type Types::STRING_MAP
+    expect(operation.call(**state)).to match_dry_type Types::STRING_MAP
   end
 end

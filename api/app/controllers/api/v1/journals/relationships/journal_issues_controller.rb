@@ -9,7 +9,7 @@ module API
 
           resourceful! JournalIssue, authorize_options: { except: [:index] } do
             JournalIssue.filtered(
-              with_pagination!(journal_issue_filter_params), scope: @journal.journal_issues.in_reverse_order, user: current_user
+              **with_pagination!(journal_issue_filter_params), scope: @journal.journal_issues.in_reverse_order, user: current_user
             )
           end
 

@@ -11,7 +11,7 @@ module API
             scope = Annotation.created_by(@user).sans_archived_reading_group_memberships
 
             Annotation.filtered(
-              with_pagination!(annotation_filter_params),
+              **with_pagination!(annotation_filter_params),
               scope: scope
             )
           end

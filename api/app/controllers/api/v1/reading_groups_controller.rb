@@ -10,7 +10,7 @@ module API
 
       resourceful! ReadingGroup do
         ReadingGroup.includes(:reading_group_collection, :reading_group_kind, reading_group_memberships: %i[user])
-          .filtered(with_pagination!(reading_group_filter_params))
+          .filtered(**with_pagination!(reading_group_filter_params))
       end
 
       authority_actions do_clone: :update, join: :read
