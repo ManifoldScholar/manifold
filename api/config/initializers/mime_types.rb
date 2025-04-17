@@ -9,7 +9,7 @@
 Mime::Type.register "application/vnd.api+json", :jsonapi
 
 ActionController::Renderers.add :jsonapi do |json, options|
-  json = json.to_json(options) unless json.is_a?(String)
+  json = json.as_json(options) unless json.is_a?(String)
   self.content_type ||= Mime[:jsonapi]
   self.response_body = json
 end

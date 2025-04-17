@@ -32,7 +32,7 @@ module API
           title: "Manifold encountered an error",
           detail: outcome.errors.full_messages.join("; ")
         }
-        render json: { errors: build_api_error(options) }, status: :internal_server_error
+        render json: { errors: build_api_error(**options) }, status: :internal_server_error
       end
 
       def search_options

@@ -13,7 +13,7 @@ module SettingsService
       env_settings = compose SettingsService::ReadFromEnv
 
       env_settings.each do |(section, section_settings)|
-        settings.merge_settings_into! section, section_settings
+        settings.merge_settings_into! section, **section_settings
       end
 
       return if settings.save

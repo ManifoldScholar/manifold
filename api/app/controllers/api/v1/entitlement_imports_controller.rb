@@ -15,7 +15,7 @@ module API
       INCLUDES = %i[entitlement_import_rows entitlement_import_rows.subject entitlement_import_rows.target].freeze
 
       resourceful! EntitlementImport, authorize_options: { except: [:index] } do
-        EntitlementImport.preload(*INCLUSIONS).filtered(with_pagination!({}), scope: EntitlementImport.with_order)
+        EntitlementImport.preload(*INCLUSIONS).filtered(**with_pagination!({}), scope: EntitlementImport.with_order)
       end
 
       def index

@@ -8,7 +8,7 @@ module API
         class ResourceCollectionsController < AbstractProjectChildController
           resourceful! ResourceCollection, authorize_options: { except: [:index] } do
             ResourceCollection.filtered(
-              with_pagination!(resource_collection_filter_params),
+              **with_pagination!(resource_collection_filter_params),
               scope: @project.resource_collections
             )
           end

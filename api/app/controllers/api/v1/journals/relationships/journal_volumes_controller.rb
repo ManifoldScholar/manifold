@@ -7,7 +7,7 @@ module API
         class JournalVolumesController < AbstractJournalChildController
           resourceful! JournalVolume, authorize_options: { except: [:index] } do
             JournalIssue.filtered(
-              with_pagination!({}), scope: @journal.journal_volumes.in_reverse_order
+              **with_pagination!({}), scope: @journal.journal_volumes.in_reverse_order
             )
           end
 

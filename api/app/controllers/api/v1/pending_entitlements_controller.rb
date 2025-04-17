@@ -14,7 +14,7 @@ module API
 
       resourceful! PendingEntitlement, authorize_options: { except: [:index] } do
         PendingEntitlement.preload(*INCLUSIONS).filtered(
-          with_pagination!(
+          **with_pagination!(
             pending_entitlement_filter_params
           )
         )

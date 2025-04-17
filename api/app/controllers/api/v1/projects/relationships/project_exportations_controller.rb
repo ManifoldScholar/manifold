@@ -6,7 +6,7 @@ module API
       module Relationships
         class ProjectExportationsController < AbstractProjectChildController
           resourceful! ProjectExportation do
-            ProjectExportation.filtered(with_pagination!({}), scope: @project.project_exportations)
+            ProjectExportation.filtered(**with_pagination!({}), scope: @project.project_exportations)
           end
 
           def index

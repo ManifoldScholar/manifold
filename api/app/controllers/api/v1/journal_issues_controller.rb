@@ -8,7 +8,7 @@ module API
 
       resourceful! JournalIssue, authorize_options: { except: [:index, :show] } do
         JournalIssue.filtered(
-          with_pagination!(journal_issue_filter_params),
+          **with_pagination!(journal_issue_filter_params),
           scope: scope_visibility,
           user: current_user
         )

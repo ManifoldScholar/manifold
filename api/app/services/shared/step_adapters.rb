@@ -231,7 +231,10 @@ module Shared
       # @param [<Object>] args
       # @return [Dry::Monads::Result]
       def call(operation, _options, args)
-        Types::MONADIC_RESULT[operation.(*args)]
+        first = args.shift
+        arg_hash = {}
+        args.each { |hash| arg_hash.merge(hash) }
+        Types::MONADIC_RESULT[operation.(first, **arg_hash)]
       end
     end
 
