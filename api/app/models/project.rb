@@ -460,7 +460,7 @@ class Project < ApplicationRecord
     def build_update_ability_scope_for(user = nil)
       return none if user.blank?
 
-      where arel_with_roles_for(user, RoleName.for_project_update)
+      where arel_with_roles_for(user, **RoleName.for_project_update)
     end
 
     # @param [:collection, :standard] mode
@@ -522,14 +522,14 @@ class Project < ApplicationRecord
     # @param [User] user
     # @return [Arel::Nodes::Or]
     def arel_with_draft_roles_for(user)
-      arel_with_roles_for(user, RoleName.for_draft_access)
+      arel_with_roles_for(user, **RoleName.for_draft_access)
     end
 
     # @see .arel_with_roles_for
     # @param [User] user
     # @return [Arel::Nodes::Or]
     def arel_with_full_read_access_roles_for(user)
-      arel_with_roles_for(user, RoleName.for_full_read_access)
+      arel_with_roles_for(user, **RoleName.for_full_read_access)
     end
 
     # @see RoleName.for_access

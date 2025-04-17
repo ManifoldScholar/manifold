@@ -10,7 +10,7 @@ module API
 
       resourceful! Comment, authorize_options: { except: [:index, :show] } do
         Comment.filtered(
-          with_pagination!(comment_filter_params),
+          **with_pagination!(comment_filter_params),
           scope: comment_scope
         )
       end

@@ -10,7 +10,7 @@ module API
 
           resourceful! ReadingGroup do
             base = current_user.nil? ? ReadingGroup.none : current_user_reading_groups(reading_group_filter_params[:archived])
-            base.page(page_number).per(page_size).for_serialization.filtered(with_pagination!(reading_group_filter_params))
+            base.page(page_number).per(page_size).for_serialization.filtered(**with_pagination!(reading_group_filter_params))
           end
 
           def index

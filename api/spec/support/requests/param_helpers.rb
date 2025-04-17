@@ -2,7 +2,7 @@
 
 RSpec.shared_context "param helpers" do
   def json_structure_from_factory(factory_name, **options)
-    build_json_structure(options.merge({ attributes: FactoryBot.attributes_for(factory_name) }))
+    build_json_structure(**options, attributes: FactoryBot.attributes_for(factory_name))
   end
 
   def build_json_structure(attributes: {}, relationships: {}, meta: {}, type: :response)

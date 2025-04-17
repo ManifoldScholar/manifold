@@ -29,7 +29,7 @@ class SimpleFormatter < ActiveInteraction::Base
   end
 
   def initialize_renderer
-    renderer_klass.new(renderer_options)
+    renderer_klass.new(**renderer_options)
   end
 
   def renderer_klass

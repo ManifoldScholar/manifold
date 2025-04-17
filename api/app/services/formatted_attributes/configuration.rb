@@ -25,7 +25,7 @@ module FormattedAttributes
     # @param [Hash] options
     # @return [void]
     def define!(attribute, **options)
-      definition = FormattedAttributes::Definition.new(attribute, options)
+      definition = FormattedAttributes::Definition.new(attribute, **options)
 
       add! definition
 
