@@ -7,7 +7,7 @@ RSpec.shared_context "an API create request" do |options|
 
   post api_spec_helper.summary do
     api_spec_helper.parameters.each do |parameter_options|
-      parameter(parameter_options)
+      parameter(**parameter_options)
     end
 
     description api_spec_helper.response_description if api_spec_helper.response_description?
@@ -16,10 +16,9 @@ RSpec.shared_context "an API create request" do |options|
     security [apiKey: []] if api_spec_helper.requires_auth?
     tags api_spec_helper.tags
 
-    response api_spec_helper.success_response_code, api_spec_helper.success_description, focus: api_spec_helper.focus do
+    response(api_spec_helper.success_response_code, api_spec_helper.success_description, focus: api_spec_helper.focus) do
       let(:Authorization) { get_user_token(api_spec_helper.authorized_user) } if api_spec_helper.requires_auth? # rubocop:todo RSpec/VariableName
       schema api_spec_helper.response if api_spec_helper.response_body?
-
       run_test!
     end
 

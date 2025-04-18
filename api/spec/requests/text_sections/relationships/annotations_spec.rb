@@ -186,7 +186,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
 
     let(:params) do
-      build_json_payload(annotation_params)
+      build_json_payload(**annotation_params)
     end
 
     context "when the user is a reader" do
@@ -299,7 +299,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
 
     context "when the user is an reader" do
-      before { post path, headers: reader_headers, params: build_json_payload(resource_params) }
+      before { post path, headers: reader_headers, params: build_json_payload(**resource_params) }
 
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
@@ -310,7 +310,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     end
 
     context "when the user is an admin" do
-      before { post path, headers: admin_headers, params: build_json_payload(resource_params) }
+      before { post path, headers: admin_headers, params: build_json_payload(**resource_params) }
 
       describe "the response" do
         it "has a 201 status code" do
@@ -324,7 +324,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     let(:path) { api_v1_text_section_relationships_annotations_path(text_section_id: text_section.id) }
 
     context "when the user is an reader" do
-      before { post path, headers: reader_headers, params: build_json_payload(collection_params) }
+      before { post path, headers: reader_headers, params: build_json_payload(**collection_params) }
 
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
@@ -335,7 +335,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
     end
 
     context "when the user is an admin" do
-      before { post path, headers: admin_headers, params: build_json_payload(collection_params) }
+      before { post path, headers: admin_headers, params: build_json_payload(**collection_params) }
 
       describe "the response" do
         it "has a 201 status code" do
