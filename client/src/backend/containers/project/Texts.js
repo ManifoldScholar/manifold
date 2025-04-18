@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import cloneDeep from "lodash/cloneDeep";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 const { request } = entityStoreActions;
 
@@ -92,7 +93,8 @@ export class ProjectTextsContainer extends Component {
     this.setState({ categories });
   }
 
-  updateCategoryPosition = (category, position) => {
+  updateCategoryPosition = (category, position, callback, announce) => {
+    console.log({ announce });
     this.updateCategoryPositionInternal(category, position);
     const changes = {
       attributes: { position }
@@ -106,10 +108,28 @@ export class ProjectTextsContainer extends Component {
     );
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
+
+      if (announce) {
+        const announcement = this.props.t("actions.dnd.moved_to_position", {
+          title: category.attributes.title,
+          position
+        });
+        this.props.setScreenReaderStatus(announcement);
+      }
+
+      if (callback && typeof callback === "function") {
+        callback();
+      }
     });
   };
 
-  updateTextCategoryAndPosition = (text, category, position) => {
+  updateTextCategoryAndPosition = (
+    text,
+    category,
+    position,
+    callback,
+    announce
+  ) => {
     let catPayload;
     if (category) {
       catPayload = { id: category.id, type: "categories" };
@@ -121,11 +141,26 @@ export class ProjectTextsContainer extends Component {
       attributes: { position }
     };
     this.updateTextCategoryAndPositionInternal(text, category, changes);
+
     const call = textsAPI.update(text.id, changes);
     const options = { noTouch: true };
     const categoryRequest = request(call, requests.beTextUpdate, options);
+
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
+
+      if (announce) {
+        const announcement = this.props.t("actions.dnd.moved_to_category", {
+          title: text.attributes.title,
+          category: `${category?.attributes.title || "Uncategorized"}`,
+          position
+        });
+        this.props.setScreenReaderStatus(announcement);
+      }
+
+      if (callback && typeof callback === "function") {
+        callback();
+      }
     });
   };
 
@@ -249,7 +284,9 @@ export class ProjectTextsContainer extends Component {
             texts={this.state.texts}
             project={this.project}
             callbacks={this.callbacks}
+            setScreenReaderStatus={this.props.setScreenReaderStatus}
           />
+          {this.props.renderLiveRegion("alert")}
         </>
       </Authorize>
     );
@@ -257,5 +294,8 @@ export class ProjectTextsContainer extends Component {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ProjectTextsContainer))
+  withScreenReaderStatus(
+    withConfirmation(connectAndFetch(ProjectTextsContainer)),
+    false
+  )
 );

@@ -17,7 +17,10 @@ export default class ProjectContentBlock extends PureComponent {
     context: PropTypes.oneOf(["available", "current"]),
     disabled: PropTypes.func,
     onClickAdd: PropTypes.func,
-    isDragging: PropTypes.bool
+    isDragging: PropTypes.bool,
+    index: PropTypes.number,
+    entityCount: PropTypes.number,
+    announce: PropTypes.func
   };
 
   static defaultProps = {
@@ -100,6 +103,8 @@ export default class ProjectContentBlock extends PureComponent {
             typeComponent={TypeComponent}
             onClickAdd={this.handleClickAdd}
             disabled
+            index={this.props.index}
+            entityCount={this.props.entityCount}
           />
         </div>
       );
@@ -133,6 +138,9 @@ export default class ProjectContentBlock extends PureComponent {
                   dragHandleProps={provided.dragHandleProps}
                   typeComponent={TypeComponent}
                   onClickAdd={this.handleClickAdd}
+                  index={this.props.index}
+                  entityCount={this.props.entityCount}
+                  announce={this.props.announce}
                 />
               </div>
             );
@@ -151,6 +159,9 @@ export default class ProjectContentBlock extends PureComponent {
               entity={this.props.entity}
               entityCallbacks={this.props.entityCallbacks}
               typeComponent={TypeComponent}
+              index={this.props.index}
+              entityCount={this.props.entityCount}
+              announce={this.props.announce}
             />
           </div>
         )}

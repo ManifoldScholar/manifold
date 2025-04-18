@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import Text from "global/components/text";
 import Utility from "global/components/utility";
+import PopoverMenu from "global/components/popover/Menu";
 import { withTranslation } from "react-i18next";
 
 class TextInner extends Component {
@@ -17,16 +17,17 @@ class TextInner extends Component {
     callbacks: PropTypes.object.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
     category: PropTypes.object,
+    index: PropTypes.number.isRequired,
+    itemCount: PropTypes.number.isRequired,
+    categoryIndex: PropTypes.number.isRequired,
+    categoryCount: PropTypes.number.isRequired,
     t: PropTypes.func
   };
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      dragHandleFocused: false,
-      keyboardButtonFocused: false
-    };
+    this.popoverDisclosureRef = React.createRef();
   }
 
   get text() {
@@ -57,15 +58,49 @@ class TextInner extends Component {
     this.callbacks.destroyText(this.text);
   };
 
-  onTextKeyboardMove(direction) {
-    this.props.onTextKeyboardMove({
-      text: this.text,
-      sourceId: this.category?.id || "uncategorized",
-      direction
-    });
+  onTextKeyboardMove(action) {
+    const { index, categoryIndex } = this.props;
+
+    let destinationIndex, position;
+
+    switch (action) {
+      case "up_position":
+        destinationIndex = categoryIndex;
+        position = index + 1 - 1; // index starts with 0, positions start with 1
+        break;
+      case "down_position":
+        destinationIndex = categoryIndex;
+        position = index + 1 + 1; // index starts with 0, positions start with 1
+        break;
+      case "up_category":
+        destinationIndex = categoryIndex - 1;
+        position = 1;
+        break;
+      case "down_category":
+        destinationIndex = categoryIndex + 1;
+        position = 1;
+        break;
+      default:
+        break;
+    }
+
+    this.props.onTextKeyboardMove(
+      {
+        text: this.text,
+        destinationIndex,
+        position
+      },
+      () => {
+        if (this.popoverDisclosureRef?.current) {
+          this.popoverDisclosureRef.current.focus();
+        }
+      }
+    );
   }
 
   render() {
+    const { index, itemCount, categoryIndex, categoryCount } = this.props;
+
     return (
       <>
         <Link
@@ -104,13 +139,7 @@ class TextInner extends Component {
             </span>
           </div>
         </Link>
-        <div
-          className={classNames({
-            "texts-list__utility": true,
-            "texts-list__utility--keyboard-buttons-visible":
-              this.state.dragHandleFocused || this.state.keyboardButtonFocused
-          })}
-        >
+        <div className="texts-list__utility texts-list__utility--draggable">
           <button
             className="texts-list__button texts-list__button--notice"
             onClick={event => {
@@ -134,9 +163,8 @@ class TextInner extends Component {
 
           <div
             className="texts-list__button texts-list__drag-handle"
-            onFocus={() => this.setState({ dragHandleFocused: true })}
-            onBlur={() => this.setState({ dragHandleFocused: false })}
             {...this.dragHandleProps}
+            tabIndex={-1}
           >
             <Utility.IconComposer icon="grabber32" size={26} />
             <span className="screen-reader-text">
@@ -144,28 +172,45 @@ class TextInner extends Component {
             </span>
           </div>
           <div className="texts-list__keyboard-buttons">
-            <button
-              onClick={() => this.onTextKeyboardMove("up")}
-              onFocus={() => this.setState({ keyboardButtonFocused: true })}
-              onBlur={() => this.setState({ keyboardButtonFocused: false })}
-              className="texts-list__button"
-            >
-              <Utility.IconComposer icon="arrowUp32" size={26} />
-              <span className="screen-reader-text">
-                {this.props.t("projects.category.move_up")}
-              </span>
-            </button>
-            <button
-              onClick={() => this.onTextKeyboardMove("down")}
-              onFocus={() => this.setState({ keyboardButtonFocused: true })}
-              onBlur={() => this.setState({ keyboardButtonFocused: false })}
-              className="texts-list__button"
-            >
-              <Utility.IconComposer icon="arrowDown32" size={26} />
-              <span className="screen-reader-text">
-                {this.props.t("projects.category.move_down")}
-              </span>
-            </button>
+            <PopoverMenu
+              disclosure={
+                <button
+                  ref={this.popoverDisclosureRef}
+                  className="texts-list__button"
+                >
+                  <Utility.IconComposer icon="arrowUpDown32" size={26} />
+                  <span className="screen-reader-text">
+                    {this.props.t("actions.dnd.reorder")}
+                  </span>
+                </button>
+              }
+              actions={[
+                {
+                  id: "up",
+                  label: this.props.t("actions.dnd.move_up_position"),
+                  onClick: () => this.onTextKeyboardMove("up_position"),
+                  disabled: index === 0
+                },
+                {
+                  id: "down",
+                  label: this.props.t("actions.dnd.move_down_position"),
+                  onClick: () => this.onTextKeyboardMove("down_position"),
+                  disabled: index === itemCount - 1
+                },
+                {
+                  id: "up_category",
+                  label: this.props.t("actions.dnd.move_up_category"),
+                  onClick: () => this.onTextKeyboardMove("up_category"),
+                  disabled: categoryIndex === 0
+                },
+                {
+                  id: "down_category",
+                  label: this.props.t("actions.dnd.move_down_category"),
+                  onClick: () => this.onTextKeyboardMove("down_category"),
+                  disabled: categoryIndex === categoryCount - 1
+                }
+              ]}
+            />
           </div>
         </div>
       </>

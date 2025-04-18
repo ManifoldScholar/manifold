@@ -20,7 +20,8 @@ export const Popover = styled.div`
   display: flex;
   flex-direction: column;
   padding-block: 0.5em;
-  background-color: var(--background-color);
+  color: var(--color);
+  background-color: var(--PopoverMenu-background-color, var(--background-color));
   border-radius: var(--box-border-radius);
   box-shadow: 5px 15px 35px 8px ${rgba("neutralBlack", 0.13)};
   transition: display ${defaultTransitionProps},
@@ -38,9 +39,13 @@ export const Button = styled.button`
   ${buttonUnstyled}
   padding: 0.25em 20px 0.333em;
   text-align: end;
+  font-size: 16px;
+  font-family: var(--font-family-sans);
+  font-weight: normal;
+  letter-spacing: normal;
 
-  &:disabled {
-    opacity: 0.5;
+  &[aria-disabled="true"] {
+    color: var(--disabled-control-color);
     pointer-events: none;
   }
 `;

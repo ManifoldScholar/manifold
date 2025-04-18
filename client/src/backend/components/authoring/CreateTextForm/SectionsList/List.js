@@ -25,7 +25,9 @@ export default function SectionList({ sections, setSectionOrder, onDelete }) {
                 section={section}
                 index={i}
                 onDelete={onDelete}
+                setSectionOrder={setSectionOrder}
                 isDragging={snapshot.draggingFromThisWith === section.id}
+                sectionCount={sections.length}
               />
             ))}
             {provided.placeholder}

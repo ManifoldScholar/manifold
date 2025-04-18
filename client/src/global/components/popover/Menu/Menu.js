@@ -21,6 +21,7 @@ export default function PopoverMenu({ disclosure, actions }) {
 
   const Disclosure = cloneElement(disclosure, {
     id: toggleId,
+    type: "button",
     "aria-controls": id,
     "aria-haspopup": "menu",
     "aria-expanded": open,
@@ -35,9 +36,7 @@ export default function PopoverMenu({ disclosure, actions }) {
   useEffect(() => {
     if (popoverRef.current) {
       menuItems.current = [
-        ...popoverRef.current.querySelectorAll(
-          "[role='menuitem']:not(:disabled)"
-        )
+        ...popoverRef.current.querySelectorAll("[role='menuitem']")
       ];
     }
   }, []);
@@ -50,7 +49,7 @@ export default function PopoverMenu({ disclosure, actions }) {
     switch (event.key) {
       case "Escape":
         setOpen(false);
-        if (disclosure.ref.current) {
+        if (disclosure.ref?.current) {
           disclosure.ref.current.focus();
         }
         preventDefault = true;
@@ -122,15 +121,19 @@ export default function PopoverMenu({ disclosure, actions }) {
           aria-labelledby={toggleId}
           inert={!open ? "" : undefined}
         >
-          {actions.map(({ id, label, onClick, ...rest }) => (
+          {actions.map(({ id, label, onClick, disabled = false, ...rest }) => (
             <Styled.Button
               key={id}
+              type="button"
               role="menuitem"
               tabIndex={-1}
               onClick={() => {
-                setOpen(false);
-                if (onClick) onClick();
+                if (!disabled) {
+                  setOpen(false);
+                  if (onClick) onClick();
+                }
               }}
+              aria-disabled={disabled ? true : undefined}
               {...rest}
             >
               {label}

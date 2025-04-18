@@ -46,17 +46,16 @@ export default function withScreenReaderStatus(
       // remove message
       this.timeout = setTimeout(() => {
         this.setState({ message: null });
-      }, 1000);
+      }, 10000);
     };
 
-    renderLiveRegion = () => {
+    renderLiveRegion = (role = "status") => {
+      const roleProps =
+        role === "alert"
+          ? { role: "alert" }
+          : { role: "status", "aria-live": "polite" };
       return (
-        <div
-          role="status"
-          aria-live="polite"
-          aria-atomic
-          className="screen-reader-text"
-        >
+        <div {...roleProps} aria-atomic className="screen-reader-text">
           {this.state.message}
         </div>
       );

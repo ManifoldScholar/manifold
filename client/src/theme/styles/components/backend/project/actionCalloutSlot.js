@@ -4,7 +4,8 @@ import {
   utilityPrimary,
   defaultTransitionProps,
   lighten,
-  dragging
+  dragging,
+  revealOnFocus
 } from "theme/styles/mixins";
 
 export default `
@@ -33,7 +34,7 @@ export default `
     &__button {
       ${buttonUnstyled}
       ${utilityPrimary}
-      padding: 8px 0 8px 4px;
+      padding: 10px 4px;
       font-size: 12px;
       font-weight: var(--font-weight-semibold);
       color: var(--color-base-neutral45);
@@ -61,7 +62,7 @@ export default `
 
       &:focus-visible {
         color: var(--color-accent-primary);
-        outline: 0;
+        outline-offset: -4px;
       }
     }
 
@@ -80,7 +81,7 @@ export default `
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: 10px 15px;
+      padding-inline: 12px;
       font-size: 12px;
       line-height: 1.2;
       color: var(--color-base-neutral50);
@@ -102,10 +103,17 @@ export default `
     }
 
     &__chip-utility {
+      --PopoverMenu-inset-inline-end: -10px;
+
       display: flex;
       align-self: flex-start;
       margin-top: -4px;
       margin-left: 10px;
+      ${revealOnFocus(".action-callout-slot__utility-keyboard-buttons")}
+    }
+
+    &__utility-keyboard-buttons {
+      display: inherit;
     }
   }
 `;

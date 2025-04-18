@@ -6,8 +6,10 @@ import {
   Draggable
 } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import { withTranslation } from "react-i18next";
 
-export default class SortableEntities extends PureComponent {
+class SortableEntities extends PureComponent {
   static displayName = "List.Entities.List.SortableEntities";
 
   static cloneEntities(entities) {
@@ -73,6 +75,37 @@ export default class SortableEntities extends PureComponent {
     );
   };
 
+  onKeyboardMove = (draggableId, title, oldPos, newPos, callback) => {
+    if (oldPos === newPos) return;
+
+    const entity = this.findEntity(draggableId);
+
+    this.setState(
+      {
+        orderedEntities: this.setOrderByChange(oldPos, newPos)
+      },
+      () => {
+        this.reorderCallback(
+          {
+            id: entity.id,
+            position: this.getAdjustedPosition(newPos)
+          },
+          this.state.orderedEntities
+        );
+
+        const announcement = this.props.t("actions.dnd.moved_to_position", {
+          title,
+          position: newPos + 1
+        });
+        this.props.setScreenReaderStatus(announcement);
+
+        if (callback && typeof callback === "function") {
+          callback();
+        }
+      }
+    );
+  };
+
   get entities() {
     return this.state.orderedEntities;
   }
@@ -97,7 +130,8 @@ export default class SortableEntities extends PureComponent {
     return {
       ...this.props.entityComponentProps,
       listStyle: this.listStyle,
-      sortableStyle: this.sortableStyle
+      sortableStyle: this.sortableStyle,
+      onKeyboardMove: this.onKeyboardMove
     };
   }
 
@@ -135,56 +169,70 @@ export default class SortableEntities extends PureComponent {
     const EntityComponent = this.entityComponent;
 
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="rbd-migration-resets">
-          <Droppable droppableId="sortableEntities">
-            {(provided, snapshot) => (
-              <ul
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className={classNames(this.props.className, {
-                  "show-dropzone": snapshot.isDraggingOver
-                })}
-              >
-                {this.entities.map((entity, index) => (
-                  <>
-                    <Draggable
-                      key={this.entityKey(index)}
-                      draggableId={this.entityKey(index)}
-                      index={index}
-                    >
-                      {(draggableProvided, draggableSnapshot) => (
-                        <>
+      <>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <div className="rbd-migration-resets">
+            <Droppable droppableId="sortableEntities">
+              {(provided, snapshot) => (
+                <ul
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className={classNames(this.props.className, {
+                    "show-dropzone": snapshot.isDraggingOver
+                  })}
+                >
+                  {this.entities.map((entity, index) => (
+                    <>
+                      <Draggable
+                        key={this.entityKey(index)}
+                        draggableId={this.entityKey(index)}
+                        index={index}
+                      >
+                        {(draggableProvided, draggableSnapshot) => (
+                          <>
+                            <EntityComponent
+                              innerRef={draggableProvided.innerRef}
+                              entity={entity}
+                              dragHandleProps={
+                                draggableProvided.dragHandleProps
+                              }
+                              draggableProps={draggableProvided.draggableProps}
+                              useDragHandle={this.useDragHandle}
+                              isDragging={draggableSnapshot.isDragging}
+                              index={index}
+                              entityCount={this.entities.length}
+                              {...this.entityComponentProps}
+                            />
+                          </>
+                        )}
+                      </Draggable>
+                      {snapshot.draggingFromThisWith === entity.id && (
+                        <div
+                          className={classNames(
+                            "entity-row",
+                            "drag-placeholder"
+                          )}
+                        >
                           <EntityComponent
-                            innerRef={draggableProvided.innerRef}
                             entity={entity}
-                            dragHandleProps={draggableProvided.dragHandleProps}
-                            draggableProps={draggableProvided.draggableProps}
-                            useDragHandle={this.useDragHandle}
-                            isDragging={draggableSnapshot.isDragging}
+                            index={index}
+                            entityCount={this.entities.length}
                             {...this.entityComponentProps}
                           />
-                        </>
+                        </div>
                       )}
-                    </Draggable>
-                    {snapshot.draggingFromThisWith === entity.id && (
-                      <div
-                        className={classNames("entity-row", "drag-placeholder")}
-                      >
-                        <EntityComponent
-                          entity={entity}
-                          {...this.entityComponentProps}
-                        />
-                      </div>
-                    )}
-                  </>
-                ))}
-                {provided.placeholder}
-              </ul>
-            )}
-          </Droppable>
-        </div>
-      </DragDropContext>
+                    </>
+                  ))}
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </div>
+        </DragDropContext>
+        {this.props.renderLiveRegion("alert")}
+      </>
     );
   }
 }
+
+export default withTranslation()(withScreenReaderStatus(SortableEntities, false));

@@ -21,16 +21,6 @@ const getTargetCategory = (sourceId, categories, direction, t) => {
   const initialTargetIndex =
     direction === "down" ? sourceIndex + 1 : sourceIndex - 1;
 
-  if (initialTargetIndex === -1) {
-    announce(t("messages.cannot_move_up"));
-    return;
-  }
-
-  if (initialTargetIndex > categories.length) {
-    announce(t("messages.cannot_move_down"));
-    return;
-  }
-
   const targetIndex = omitMarkdownBlocks(
     initialTargetIndex,
     direction,

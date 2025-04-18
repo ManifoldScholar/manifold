@@ -7,6 +7,8 @@ import TextsInner from "./TextsInner";
 export default function CategoryListTexts({
   activeType,
   category,
+  categoryIndex,
+  categoryCount,
   texts = [],
   callbacks,
   onTextKeyboardMove
@@ -30,6 +32,8 @@ export default function CategoryListTexts({
             category={category}
             onTextKeyboardMove={onTextKeyboardMove}
             dragging={snapshot.draggingFromThisWith}
+            categoryIndex={categoryIndex}
+            categoryCount={categoryCount}
           />
           {provided.placeholder}
         </div>
@@ -43,5 +47,7 @@ CategoryListTexts.propTypes = {
   category: PropTypes.object,
   texts: PropTypes.array.isRequired,
   callbacks: PropTypes.object.isRequired,
-  onTextKeyboardMove: PropTypes.func.isRequired
+  onTextKeyboardMove: PropTypes.func.isRequired,
+  categoryIndex: PropTypes.number.isRequired,
+  categoryCount: PropTypes.number.isRequired
 };
