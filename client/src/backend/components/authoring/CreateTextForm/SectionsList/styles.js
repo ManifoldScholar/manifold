@@ -4,7 +4,8 @@ import {
   buttonUnstyled,
   utilityPrimary,
   dragging,
-  defaultFocusStyle
+  defaultFocusStyle,
+  revealOnFocus
 } from "theme/styles/mixins";
 
 export const Section = styled.li`
@@ -30,10 +31,14 @@ export const Section = styled.li`
   `}
 `;
 
+export const KeyboardButtons = styled.div``;
+
 export const ButtonGroup = styled.div`
   display: flex;
   flex-wrap: nowrap;
+  align-items: center;
   gap: 12px;
+  ${revealOnFocus(KeyboardButtons)}
 `;
 
 export const Button = styled.button`

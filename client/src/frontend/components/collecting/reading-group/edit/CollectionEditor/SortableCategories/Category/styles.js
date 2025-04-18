@@ -39,6 +39,10 @@ export const Category = styled.article`
   ${panelRounded}
 
   ${({ $preview }) => $preview && dragging}
+
+  &:focus-visible {
+    outline-color: var(--focus-color);
+  }
 `;
 
 export const Inner = styled.div`

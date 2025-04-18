@@ -6,7 +6,8 @@ import {
   draggable,
   dragging,
   textTruncate,
-  setHoverStyle
+  setHoverStyle,
+  revealOnFocus
 } from "theme/styles/mixins";
 
 const ITEM_INNER_PADDING = 10;
@@ -26,11 +27,6 @@ export default `
         breakpointLessOne(75),
         "max"
       )}
-
-      ul {
-        max-height: 1150px;
-        overflow-y: auto;
-      }
     }
 
     .actions {
@@ -61,6 +57,9 @@ export default `
   }
 
   .project-collection-list-item {
+    --PopoverMenu-inset-block-start: calc(100% + 10px);
+    --PopoverMenu-inset-inline-end: -10px;
+
     padding-top: 5px;
     padding-bottom: 5px;
 
@@ -147,6 +146,7 @@ export default `
       flex-shrink: 0;
       align-items: center;
       padding: ${ITEM_INNER_PADDING}px;
+      ${revealOnFocus(".project-collection-list-item__keyboard-buttons")}
     }
 
     &__icon-group-item {

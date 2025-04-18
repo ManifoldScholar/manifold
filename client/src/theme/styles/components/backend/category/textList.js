@@ -5,7 +5,7 @@ import {
   defaultTransitionProps,
   blockLabelRound,
   buttonUnstyled,
-  respond,
+  revealOnFocus,
   outlineOnFocus,
   lighten,
   fluidScale
@@ -40,7 +40,8 @@ export default `
     }
 
     &__text {
-      contain: paint;
+      --PopoverMenu-inset-block-start: calc(100% + 10px);
+
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -50,6 +51,10 @@ export default `
 
       &--is-dragging {
         ${dragging}
+
+        &:focus-visible {
+          opacity: 0;
+        }
       }
 
       &--placeholder {
@@ -144,21 +149,7 @@ export default `
       align-items: flex-start;
       justify-content: flex-start;
       margin-left: 14px;
-      transition: transform var(--transition-duration-default)
-        ${defaultTransitionProps};
-      transform: translateX(80px);
-
-      &--keyboard-buttons-visible {
-        transition: transform ${defaultTransitionProps};
-        transform: translateX(0);
-      }
-
-      ${respond(
-        `transition: none;
-      transform: translateX(0);`,
-        35,
-        "max"
-      )}
+      ${revealOnFocus(".texts-list__keyboard-buttons")}
 
       > * + * {
         margin-left: 14px;
@@ -180,33 +171,6 @@ export default `
 
     &__keyboard-buttons {
       display: inherit;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity ${defaultTransitionProps},
-        visibility var(--transition-duration-default) ${defaultTransitionProps};
-
-      .texts-list__utility--keyboard-buttons-visible & {
-        visibility: visible;
-        opacity: 1;
-        transition: opacity var(--transition-duration-default)
-            calc(var(--transition-duration-default) / 2)
-            var(--transition-timing-function),
-          visibility var(--transition-duration-default)
-            calc(var(--transition-duration-default) / 2)
-            var(--transition-timing-function);
-      }
-
-      ${respond(
-        `width: 0;
-      margin-left: 0;
-      transition: none;`,
-        35,
-        "max"
-      )}
-
-      > * + * {
-        margin-left: 14px;
-      }
     }
   }
 `;

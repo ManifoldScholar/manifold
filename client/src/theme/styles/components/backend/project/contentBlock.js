@@ -6,7 +6,8 @@ import {
   draggable,
   dragging,
   blockLabelRound,
-  buttonUnstyled
+  buttonUnstyled,
+  revealOnFocus
 } from "theme/styles/mixins";
 
 export default `
@@ -133,6 +134,7 @@ export default `
 
     &__button-list {
       display: flex;
+      ${revealOnFocus(".backend-content-block__utility-keyboard-buttons")}
 
       > * + * {
         margin-left: 2vw;
@@ -162,6 +164,10 @@ export default `
           color: inherit;
         }
       }
+    }
+
+    &__utility-keyboard-buttons {
+      display: inherit;
     }
   }
 `;

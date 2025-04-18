@@ -8,7 +8,8 @@ import {
   respond,
   blockLabelRound,
   fluidScale,
-  defaultFocusStyle
+  defaultFocusStyle,
+  revealOnFocus
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
@@ -57,10 +58,13 @@ export const BG = styled.div`
     $isDragging && `background-color: var(--drawer-bg-color)`}
 `;
 
+export const KeyboardButtons = styled.div``;
+
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   padding: 0;
+  ${revealOnFocus(KeyboardButtons)}
 
   &:hover ~ ${TitleWrapper} {
     color: var(--highlight-color);

@@ -1,9 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { readingGroupsAPI } from "api";
-import {
-  useNavigate,
-  useLocation
-} from "react-router-dom-v5-compat";
+import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { useParams } from "react-router-dom";
 import { childRoutes } from "helpers/router";
 import { useDispatch } from "react-redux";

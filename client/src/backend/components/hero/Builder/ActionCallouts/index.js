@@ -5,10 +5,12 @@ import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautif
 import { actionCalloutsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import * as Styled from "./styles";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import { withTranslation } from "react-i18next";
 
 const { request } = entityStoreActions;
 
-export default class ActionCallouts extends PureComponent {
+class ActionCallouts extends PureComponent {
   static displayName = "Project.Hero.Builder.ActionCallouts";
 
   static propTypes = {
@@ -92,6 +94,70 @@ export default class ActionCallouts extends PureComponent {
 
   onDragStart = () => {};
 
+  onKeyboardMove = ({ callout, index, slotIndex, direction, ...rest }) => {
+    const id = callout.id;
+    const sourceSlotId = this.slotIds[slotIndex];
+    const title = callout.attributes.title;
+    const position = index + 1;
+    const slotPosition = slotIndex + 1;
+
+    let destinationSlotIndex;
+    let destinationIndex;
+    let announcement;
+    switch (direction) {
+      case "up":
+        destinationSlotIndex = slotIndex;
+        destinationIndex = index - 1;
+        announcement = this.props.t("actions.dnd.moved_to_position", {
+          title,
+          position: position - 1
+        });
+        break;
+      case "down":
+        destinationSlotIndex = slotIndex;
+        destinationIndex = index + 1;
+        announcement = this.props.t("actions.dnd.moved_to_position", {
+          title,
+          position: position + 1
+        });
+        break;
+      case "left":
+        destinationSlotIndex = slotIndex - 1;
+        destinationIndex = 0;
+        announcement = this.props.t("actions.dnd.moved_to_group", {
+          title,
+          group: slotPosition - 1,
+          position: 1
+        });
+        break;
+      case "right":
+        destinationSlotIndex = slotIndex + 1;
+        destinationIndex = 0;
+        announcement = this.props.t("actions.dnd.moved_to_group", {
+          title,
+          group: slotPosition + 1,
+          position: 1
+        });
+        break;
+      default:
+        break;
+    }
+
+    const destinationSlotId = this.slotIds[destinationSlotIndex];
+
+    this.moveToSlot(id, sourceSlotId, destinationSlotId, destinationIndex);
+
+    const callback = () => {
+      if (rest.callback && typeof rest.callback === "function") {
+        rest.callback();
+      }
+      if (announcement) {
+        this.announce(announcement);
+      }
+    };
+    this.updateCallout(id, destinationSlotId, destinationIndex, callback);
+  };
+
   get model() {
     return this.props.model;
   }
@@ -100,7 +166,11 @@ export default class ActionCallouts extends PureComponent {
     return Object.keys(ActionCallouts.slots);
   }
 
-  updateCallout(id, slotId, index) {
+  get announce() {
+    return this.props.setScreenReaderStatus;
+  }
+
+  updateCallout(id, slotId, index, callback) {
     const baseAttributes = this.findSlot(slotId).attributes;
     const attributes = {
       ...baseAttributes,
@@ -116,9 +186,12 @@ export default class ActionCallouts extends PureComponent {
 
     const { refreshActionCallouts } = this.props;
     const refreshCallback = refreshActionCallouts || (() => {});
-    this.props
-      .dispatch(updateRequest)
-      .promise.then(refreshCallback, refreshCallback);
+    this.props.dispatch(updateRequest).promise.then(() => {
+      refreshCallback();
+      if (callback && typeof callback === "function") {
+        callback();
+      }
+    });
   }
 
   moveToSlot(id, sourceSlotId, destinationSlotId, destinationIndex) {
@@ -164,7 +237,7 @@ export default class ActionCallouts extends PureComponent {
         >
           {this.slotIds
             .filter(slot => this.props.actionCalloutSlots.includes(slot))
-            .map(slotId => {
+            .map((slotId, index) => {
               return (
                 <Slot
                   key={slotId}
@@ -174,11 +247,17 @@ export default class ActionCallouts extends PureComponent {
                   actionCalloutEditRoute={this.props.actionCalloutEditRoute}
                   actionCalloutNewRoute={this.props.actionCalloutNewRoute}
                   actionCallouts={this.actionCalloutsBySlot(slotId)}
+                  index={index}
+                  slotCount={this.slotIds.length}
+                  onKeyboardMove={this.onKeyboardMove}
                 />
               );
             })}
         </DragDropContext>
+        {this.props.renderLiveRegion("alert")}
       </Styled.CalloutsContainer>
     );
   }
 }
+
+export default withTranslation()(withScreenReaderStatus(ActionCallouts, false));
