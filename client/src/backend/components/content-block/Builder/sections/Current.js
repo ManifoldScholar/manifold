@@ -6,6 +6,7 @@ import Block from "../Block";
 import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 class ProjectContentSectionsCurrent extends PureComponent {
   static displayName = "Project.Content.Sections.Current";
@@ -20,6 +21,10 @@ class ProjectContentSectionsCurrent extends PureComponent {
   static defaultProps = {
     currentBlocks: []
   };
+
+  get announce() {
+    return this.props.setScreenReaderStatus;
+  }
 
   get topBlocks() {
     return this.props.currentBlocks.filter(
@@ -44,7 +49,7 @@ class ProjectContentSectionsCurrent extends PureComponent {
     const callbacks = this.props.entityCallbacks;
     /* eslint-disable no-param-reassign */
     return Object.keys(callbacks).reduce((memo, key) => {
-      memo[key] = () => callbacks[key](block);
+      memo[key] = addtlParams => callbacks[key](block, addtlParams);
       return memo;
     }, {});
     /* eslint-enable no-param-reassign */
@@ -57,41 +62,48 @@ class ProjectContentSectionsCurrent extends PureComponent {
 
   render() {
     return (
-      <div>
-        <Header subtitle={this.props.t("layout.layout")} />
-        {Object.keys(this.zones).map(zone => (
-          <Droppable
-            key={zone}
-            type={zone.toUpperCase()}
-            droppableId={`current-${zone}`}
-          >
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                className={classNames("content-block-list full-width", {
-                  "content-block-list--show-dropzone": this.showDropzone(zone)
-                })}
-              >
-                {this.zones[zone].blocks.map((block, index) => (
-                  <Block
-                    entityCallbacks={this.bindEntityCallbacks(block)}
-                    currentBlocks={this.props.currentBlocks}
-                    key={block.id}
-                    context="current"
-                    entity={block}
-                    type={block.attributes.type}
-                    index={index}
-                    isDragging={snapshot.draggingFromThisWith === block.id}
-                  />
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        ))}
-      </div>
+      <>
+        <div>
+          <Header subtitle={this.props.t("layout.layout")} />
+          {Object.keys(this.zones).map(zone => (
+            <Droppable
+              key={zone}
+              type={zone.toUpperCase()}
+              droppableId={`current-${zone}`}
+            >
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  className={classNames("content-block-list full-width", {
+                    "content-block-list--show-dropzone": this.showDropzone(zone)
+                  })}
+                >
+                  {this.zones[zone].blocks.map((block, index) => (
+                    <Block
+                      entityCallbacks={this.bindEntityCallbacks(block)}
+                      currentBlocks={this.props.currentBlocks}
+                      key={block.id}
+                      context="current"
+                      entity={block}
+                      type={block.attributes.type}
+                      index={index}
+                      entityCount={this.zones[zone].blocks.length}
+                      isDragging={snapshot.draggingFromThisWith === block.id}
+                      announce={this.announce}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          ))}
+        </div>
+        {this.props.renderLiveRegion("alert")}
+      </>
     );
   }
 }
 
-export default withTranslation()(ProjectContentSectionsCurrent);
+export default withTranslation()(
+  withScreenReaderStatus(ProjectContentSectionsCurrent, false)
+);

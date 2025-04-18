@@ -3,6 +3,8 @@ import {
   draggable,
   dragging,
   defaultHoverStyle,
+  defaultFocusStyle,
+  revealOnFocus,
   buttonUnstyled,
   panelRounded,
   rgba,
@@ -123,6 +125,11 @@ export default `
 
       &:focus-visible {
         outline: 0;
+
+        > * {
+          ${defaultFocusStyle}
+          outline-offset: -2px;
+        }
       }
     }
 
@@ -236,9 +243,16 @@ export default `
     }
 
     &__utility {
+      --PopoverMenu-inset-block-start: calc(100% + 10px);
+      --PopoverMenu-inset-inline-end: -9px;
+      --PopoverMenu-background-color: var(--box-bg-color);
+
       align-self: center;
       flex-shrink: 0;
+      display: flex;
+      gap: 6px;
       margin-inline-start: auto;
+      ${revealOnFocus(".entity-row__utility-keyboard-buttons")}
     }
 
     &__utility-button {
@@ -248,6 +262,10 @@ export default `
         cursor: move;
         cursor: grab;
       }
+    }
+
+    &__utility-keyboard-buttons {
+      display: inherit;
     }
 
     &__figure {

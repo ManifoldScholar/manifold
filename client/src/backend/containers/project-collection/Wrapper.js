@@ -16,6 +16,7 @@ import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { fluidScale } from "theme/styles/mixins";
 
 import Authorize from "hoc/Authorize";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 const { request, flush } = entityStoreActions;
 
@@ -173,12 +174,24 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   };
 
   handleCollectionOrderChange = result => {
-    const changes = { attributes: { position: result.position } };
-    this.updateProjectCollection(
-      changes,
-      { noTouch: true },
-      { id: result.id }
-    ).then(this.fetchProjectCollections);
+    const { id, title, position, announce, callback } = result;
+    const changes = { attributes: { position } };
+    const announcement = this.props.t("actions.dnd.moved_to_position", {
+      title,
+      position
+    });
+
+    this.updateProjectCollection(changes, { noTouch: true }, { id }).then(() =>
+      this.fetchProjectCollections().then(() => {
+        if (announce) {
+          this.props.setScreenReaderStatus(announcement);
+        }
+
+        if (callback && typeof callback === "function") {
+          callback();
+        }
+      })
+    );
   };
 
   handleCollectionSelect = collection => {
@@ -300,13 +313,16 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
               style={{ marginBlockStart: fluidScale("30px", "20px") }}
             >
               {this.hasProjectCollections && (
-                <ProjectCollection.List
-                  projectCollection={projectCollection}
-                  projectCollections={projectCollections}
-                  onCollectionSelect={this.handleCollectionSelect}
-                  onCollectionOrderChange={this.handleCollectionOrderChange}
-                  onToggleVisibility={this.handleToggleVisibility}
-                />
+                <>
+                  <ProjectCollection.List
+                    projectCollection={projectCollection}
+                    projectCollections={projectCollections}
+                    onCollectionSelect={this.handleCollectionSelect}
+                    onCollectionOrderChange={this.handleCollectionOrderChange}
+                    onToggleVisibility={this.handleToggleVisibility}
+                  />
+                  {this.props.renderLiveRegion("alert")}
+                </>
               )}
               <div className="panel">
                 {this.hasProjectCollections && (
@@ -325,5 +341,8 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ProjectCollectionWrapperContainer))
+  withScreenReaderStatus(
+    withConfirmation(connectAndFetch(ProjectCollectionWrapperContainer)),
+    false
+  )
 );

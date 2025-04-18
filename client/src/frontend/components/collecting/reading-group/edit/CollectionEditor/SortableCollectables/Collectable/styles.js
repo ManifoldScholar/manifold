@@ -13,6 +13,8 @@ export const Wrapper = styled.div`
   padding-block-end: ${collectableVerticalPadding};
 
   ${collapsible}
+  overflow: visible;
+
   ${({ $hidden }) => $hidden && collapsed};
 `;
 

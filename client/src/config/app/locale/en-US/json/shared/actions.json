@@ -84,7 +84,7 @@
     "toggle_to_state": "Toggle {{label}} to {{state}}",
     "uncollect": "Uncollect {{title}}",
     "unflag": "Unflag",
-    "unmute": "UnMute",
+    "unmute": "Unmute",
     "update": "Update",
     "view": "View",
     "view_all": "View all",
@@ -92,6 +92,19 @@
     "view_item": "$t(actions.view) {{item}}",
     "view_resource": "$t(actions.view) $t(glossary.resource_one)",
     "visit": "Visit",
-    "zoom": "Zoom"
+    "zoom": "Zoom",
+    "dnd": {
+      "move_up_position": "Move up one position",
+      "move_down_position": "Move down one position",
+      "move_up_category": "Move up one category",
+      "move_down_category": "Move down one category",
+      "move_left_group": "Move left one group",
+      "move_right_group": "Move right one group",
+      "moved_to_position": "{{title}} is now in position {{position}}",
+      "moved_to_category": "{{title}} is now in category {{category}}, position {{position}}",
+      "moved_to_group": "{{title}} is now in group {{group}}, position {{position}}",
+      "reorder_category": "Reorder category",
+      "reorder": "Reorder"
+    }
   }
 }
