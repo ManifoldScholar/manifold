@@ -10,7 +10,7 @@ RSpec.shared_context "an API destroy request" do |options|
 
   delete api_spec_helper.summary do
     api_spec_helper.parameters.each do |parameter_options|
-      parameter(parameter_options)
+      parameter(**parameter_options)
     end
     description api_spec_helper.response_description if api_spec_helper.response_description?
     produces api_spec_helper.content_type if api_spec_helper.delete_has_response_body?
