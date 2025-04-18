@@ -20,7 +20,10 @@ class Slot extends PureComponent {
     model: PropTypes.object.isRequired,
     actionCalloutEditRoute: PropTypes.string.isRequired,
     actionCalloutNewRoute: PropTypes.string.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
+    index: PropTypes.number,
+    slotCount: PropTypes.number,
+    onKeyboardMove: PropTypes.func
   };
 
   get title() {
@@ -93,6 +96,10 @@ class Slot extends PureComponent {
                     isDragging={
                       snapshot.draggingFromThisWith === actionCallout.id
                     }
+                    chipCount={this.actionCallouts.length}
+                    slotIndex={this.props.index}
+                    slotCount={this.props.slotCount}
+                    onKeyboardMove={this.props.onKeyboardMove}
                   />
                 ))}
                 {provided.placeholder}

@@ -21,6 +21,7 @@ export default function PopoverMenu({ disclosure, actions }) {
 
   const Disclosure = cloneElement(disclosure, {
     id: toggleId,
+    type: "button",
     "aria-controls": id,
     "aria-haspopup": "menu",
     "aria-expanded": open,
@@ -35,57 +36,58 @@ export default function PopoverMenu({ disclosure, actions }) {
   useEffect(() => {
     if (popoverRef.current) {
       menuItems.current = [
-        ...popoverRef.current.querySelectorAll(
-          "[role='menuitem']:not(:disabled)"
-        )
+        ...popoverRef.current.querySelectorAll("[role='menuitem']")
       ];
     }
   }, []);
 
-  const handleKeyDown = useCallback(event => {
-    let preventDefault = false;
-    const currentIndex = menuItems.current.indexOf(event.target);
-    const itemCount = menuItems.current.length;
+  const handleKeyDown = useCallback(
+    event => {
+      let preventDefault = false;
+      const currentIndex = menuItems.current.indexOf(event.target);
+      const itemCount = menuItems.current.length;
 
-    switch (event.key) {
-      case "Escape":
-        setOpen(false);
-        if (disclosure.ref.current) {
-          disclosure.ref.current.focus();
-        }
-        preventDefault = true;
-        break;
-      case "ArrowUp":
-        if (currentIndex - 1 >= 0) {
-          menuItems.current[currentIndex - 1].focus();
-        }
-        preventDefault = true;
-        break;
-      case "ArrowDown":
-        if (currentIndex + 1 < itemCount) {
-          menuItems.current[currentIndex + 1].focus();
-        }
-        preventDefault = true;
-        break;
-      case "Home":
-      case "PageUp":
-        menuItems.current[0].focus();
-        preventDefault = true;
-        break;
-      case "End":
-      case "PageDown":
-        menuItems.current[itemCount - 1].focus();
-        preventDefault = true;
-        break;
-      default:
-        break;
-    }
+      switch (event.key) {
+        case "Escape":
+          setOpen(false);
+          if (disclosure.ref?.current) {
+            disclosure.ref.current.focus();
+          }
+          preventDefault = true;
+          break;
+        case "ArrowUp":
+          if (currentIndex - 1 >= 0) {
+            menuItems.current[currentIndex - 1].focus();
+          }
+          preventDefault = true;
+          break;
+        case "ArrowDown":
+          if (currentIndex + 1 < itemCount) {
+            menuItems.current[currentIndex + 1].focus();
+          }
+          preventDefault = true;
+          break;
+        case "Home":
+        case "PageUp":
+          menuItems.current[0].focus();
+          preventDefault = true;
+          break;
+        case "End":
+        case "PageDown":
+          menuItems.current[itemCount - 1].focus();
+          preventDefault = true;
+          break;
+        default:
+          break;
+      }
 
-    if (preventDefault) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  }, []);
+      if (preventDefault) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    },
+    [disclosure.ref]
+  );
 
   useEventListener("keydown", handleKeyDown, popoverRef);
 
@@ -122,20 +124,26 @@ export default function PopoverMenu({ disclosure, actions }) {
           aria-labelledby={toggleId}
           inert={!open ? "" : undefined}
         >
-          {actions.map(({ id, label, onClick, ...rest }) => (
-            <Styled.Button
-              key={id}
-              role="menuitem"
-              tabIndex={-1}
-              onClick={() => {
-                setOpen(false);
-                if (onClick) onClick();
-              }}
-              {...rest}
-            >
-              {label}
-            </Styled.Button>
-          ))}
+          {actions.map(
+            ({ id: actionId, label, onClick, disabled = false, ...rest }) => (
+              <Styled.Button
+                key={actionId}
+                type="button"
+                role="menuitem"
+                tabIndex={-1}
+                onClick={() => {
+                  if (!disabled) {
+                    setOpen(false);
+                    if (onClick) onClick();
+                  }
+                }}
+                aria-disabled={disabled ? true : undefined}
+                {...rest}
+              >
+                {label}
+              </Styled.Button>
+            )
+          )}
         </Styled.Popover>
       )}
     </Styled.Wrapper>

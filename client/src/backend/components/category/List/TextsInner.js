@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import TextInner from "./TextInner";
+import TextInnerStatic from "./TextInnerStatic";
 import { withTranslation } from "react-i18next";
 
 class CategoryListTexts extends PureComponent {
@@ -13,21 +14,14 @@ class CategoryListTexts extends PureComponent {
     callbacks: PropTypes.object.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
     dragging: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
+    categoryIndex: PropTypes.number.isRequired,
+    categoryCount: PropTypes.number.isRequired
   };
 
   static defaultProps = {
     texts: []
   };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      dragHandleFocused: false,
-      keyboardButtonFocused: false
-    };
-  }
 
   get texts() {
     return this.props.texts;
@@ -62,13 +56,8 @@ class CategoryListTexts extends PureComponent {
       const isDragging = this.props.dragging === text.id;
 
       return (
-        <>
-          <Draggable
-            type="text"
-            index={index}
-            key={text.id}
-            draggableId={text.id}
-          >
+        <React.Fragment key={text.id}>
+          <Draggable type="text" index={index} draggableId={text.id}>
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
@@ -79,7 +68,11 @@ class CategoryListTexts extends PureComponent {
               >
                 <TextInner
                   text={text}
+                  index={index}
+                  itemCount={this.texts.length}
                   category={this.props.category}
+                  categoryIndex={this.props.categoryIndex}
+                  categoryCount={this.props.categoryCount}
                   callbacks={this.callbacks}
                   onTextKeyboardMove={this.props.onTextKeyboardMove}
                   dragHandleProps={provided.dragHandleProps}
@@ -89,10 +82,10 @@ class CategoryListTexts extends PureComponent {
           </Draggable>
           {isDragging && (
             <div className={classNames("texts-list__text", "drag-placeholder")}>
-              <TextInner text={text} category={this.props.category} />
+              <TextInnerStatic text={text} category={this.props.category} />
             </div>
           )}
-        </>
+        </React.Fragment>
       );
     });
   }

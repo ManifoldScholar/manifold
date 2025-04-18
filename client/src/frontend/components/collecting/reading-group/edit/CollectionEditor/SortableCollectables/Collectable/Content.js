@@ -46,32 +46,32 @@ export default function Content({
               <Action ref={dragHandleRef} data-drag-handle>
                 <IconComposer icon="grabber32" size="default" />
                 <span className="screen-reader-text">
-                  {t("forms.category.reorder_collectable")}
+                  {t("actions.dnd.reorder_collectable")}
                 </span>
               </Action>
             }
             actions={[
               {
                 id: "up",
-                label: t("forms.category.collectable_move_up"),
+                label: t("actions.dnd.move_up_position"),
                 onClick: () => onSort({ id, type, direction: "up" }),
                 disabled: index === 0
               },
               {
                 id: "down",
-                label: t("forms.category.collectable_move_down"),
+                label: t("actions.dnd.move_down_position"),
                 onClick: () => onSort({ id, type, direction: "down" }),
                 disabled: index === collectableCount - 1
               },
               {
                 id: "up_category",
-                label: t("forms.category.collectable_category_up"),
+                label: t("actions.dnd.move_up_category"),
                 onClick: () => onMove({ id, type, direction: "up" }),
                 disabled: categoryIndex === 0
               },
               {
                 id: "down_category",
-                label: t("forms.category.collectable_category_down"),
+                label: t("actions.dnd.move_down_category"),
                 onClick: () => onMove({ id, type, direction: "down" }),
                 disabled: categoryIndex === categoryCount - 1
               }

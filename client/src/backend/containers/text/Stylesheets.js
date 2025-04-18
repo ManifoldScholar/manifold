@@ -67,7 +67,7 @@ export class TextStylesContainer extends PureComponent {
     });
   };
 
-  updatePosition = (stylesheet, newPos) => {
+  updatePosition = (stylesheet, newPos, callback) => {
     const changes = {
       attributes: { position: newPos }
     };
@@ -80,6 +80,10 @@ export class TextStylesContainer extends PureComponent {
     );
     this.props.dispatch(stylesheetRequest).promise.then(() => {
       this.props.refresh();
+
+      if (callback && typeof callback === "function") {
+        callback();
+      }
     });
   };
 
