@@ -94,20 +94,20 @@ function CategoryHeader({
                   >
                     <IconComposer icon="grabber32" size="default" />
                     <span className="screen-reader-text">
-                      {t("forms.category.reorder_category")}
+                      {t("actions.dnd.reorder_category")}
                     </span>
                   </Styled.Action>
                 }
                 actions={[
                   {
                     id: "up",
-                    label: t("forms.category.move_up"),
+                    label: t("actions.dnd.move_up_position"),
                     onClick: () => onCategoryMove(category.id, "up"),
                     disabled: index === 0
                   },
                   {
                     id: "down",
-                    label: t("forms.category.move_down"),
+                    label: t("actions.dnd.move_down_position"),
                     onClick: () => onCategoryMove(category.id, "down"),
                     disabled: index === categoryCount - 1
                   }
