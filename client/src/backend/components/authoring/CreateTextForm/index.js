@@ -8,8 +8,15 @@ import { useUIDSeed } from "react-uid";
 import { textsAPI } from "api";
 import lh from "helpers/linkHandler";
 import { useNavigate } from "react-router-dom-v5-compat";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
-export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
+function CreateTextForm({
+  cancelUrl,
+  projectId,
+  refresh,
+  renderLiveRegion,
+  setScreenReaderStatus
+}) {
   const { t } = useTranslation();
   const uidSeed = useUIDSeed();
   const navigate = useNavigate();
@@ -18,11 +25,24 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
   const [sections, setSections] = useState([]);
 
   const setSectionOrder = result => {
-    const { draggableId, destination } = result ?? {};
+    const { draggableId, destination, title, announce, callback } =
+      result ?? {};
     const entity = sections.find(s => s.id === draggableId);
     const newOrder = sections.filter(s => s.id !== draggableId);
     newOrder.splice(destination.index, 0, entity);
     setSections(newOrder);
+
+    if (announce && title) {
+      const announcement = t("actions.dnd.moved_to_position", {
+        title,
+        position: destination.index + 1
+      });
+      setScreenReaderStatus(announcement);
+    }
+
+    if (callback && typeof callback === "function") {
+      callback();
+    }
   };
 
   const handleDeleteSection = id => {
@@ -121,6 +141,7 @@ export default function CreateTextForm({ cancelUrl, projectId, refresh }) {
         cancelUrl={cancelUrl}
         submitLabel="texts.create.save_button_label"
       />
+      {renderLiveRegion("alert")}
     </FormContainer.Form>
   );
 }
@@ -130,5 +151,9 @@ CreateTextForm.displayName = "Project.Texts.CreateForm";
 CreateTextForm.propTypes = {
   cancelUrl: PropTypes.string,
   projectId: PropTypes.string.isRequired,
-  onSuccess: PropTypes.func
+  onSuccess: PropTypes.func,
+  renderLiveRegion: PropTypes.func,
+  setScreenReaderStatus: PropTypes.func
 };
+
+export default withScreenReaderStatus(CreateTextForm, false);

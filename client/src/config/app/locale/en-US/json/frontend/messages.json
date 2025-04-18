@@ -2,8 +2,6 @@
   "messages": {
     "empty_journal_heading": "This journal is currently empty.",
     "empty_journal_body": "Add <0>volumes</0> or <1>issues</1> to see this page.",
-    "cannot_move_up": "Cannot move up. Item is already in the first category.",
-    "cannot_move_down": "Cannot move down. Item is already in the last category.",
     "item_moved_category": "Item moved to category {{category}}",
     "item_moved_position": "Item moved {{direction}} one position",
     "category_moved": "Category moved {{direction}} one position",

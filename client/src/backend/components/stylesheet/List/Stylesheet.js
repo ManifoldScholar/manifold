@@ -6,9 +6,10 @@ import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
+import PopoverMenu from "global/components/popover/Menu";
 import { withTranslation } from "react-i18next";
 
-class CategoryList extends PureComponent {
+class StylesheetList extends PureComponent {
   static displayName = "Stylesheet.List.Stylesheet";
 
   static propTypes = {
@@ -16,8 +17,17 @@ class CategoryList extends PureComponent {
     text: PropTypes.object.isRequired,
     callbacks: PropTypes.object.isRequired,
     t: PropTypes.func,
-    isDragging: PropTypes.bool
+    isDragging: PropTypes.bool,
+    index: PropTypes.number,
+    stylesheetCount: PropTypes.number,
+    onKeyboardMove: PropTypes.func
   };
+
+  constructor(props) {
+    super(props);
+
+    this.popoverDisclosureRef = React.createRef();
+  }
 
   get callbacks() {
     return this.props.callbacks;
@@ -57,7 +67,7 @@ class CategoryList extends PureComponent {
 
   render() {
     const baseClass = "ordered-records-item";
-    const t = this.props.t;
+    const { t, index, stylesheetCount, onKeyboardMove } = this.props;
 
     return (
       <>
@@ -114,9 +124,64 @@ class CategoryList extends PureComponent {
                   </Link>
                   <div
                     {...provided.dragHandleProps}
+                    tabIndex={-1}
                     className={`${baseClass}__button`}
                   >
                     <Utility.IconComposer icon="grabber32" size={26} />
+                  </div>
+                  <div className={`${baseClass}__keyboard-buttons`}>
+                    <PopoverMenu
+                      disclosure={
+                        <button
+                          ref={this.popoverDisclosureRef}
+                          className={`${baseClass}__button`}
+                        >
+                          <Utility.IconComposer
+                            icon="arrowUpDown32"
+                            size={26}
+                          />
+                          <span className="screen-reader-text">
+                            {t("actions.dnd.reorder")}
+                          </span>
+                        </button>
+                      }
+                      actions={[
+                        {
+                          id: "up",
+                          label: this.props.t("actions.dnd.move_up_position"),
+                          onClick: () =>
+                            onKeyboardMove({
+                              id: this.stylesheet.id,
+                              title: this.stylesheet.attributes.name,
+                              index,
+                              direction: "up",
+                              callback: () => {
+                                if (this.popoverDisclosureRef?.current) {
+                                  this.popoverDisclosureRef.current.focus();
+                                }
+                              }
+                            }),
+                          disabled: index === 0
+                        },
+                        {
+                          id: "down",
+                          label: this.props.t("actions.dnd.move_down_position"),
+                          onClick: () =>
+                            onKeyboardMove({
+                              id: this.stylesheet.id,
+                              title: this.stylesheet.attributes.name,
+                              index,
+                              direction: "down",
+                              callback: () => {
+                                if (this.popoverDisclosureRef?.current) {
+                                  this.popoverDisclosureRef.current.focus();
+                                }
+                              }
+                            }),
+                          disabled: index === stylesheetCount - 1
+                        }
+                      ]}
+                    />
                   </div>
                 </div>
               </div>
@@ -173,4 +238,4 @@ class CategoryList extends PureComponent {
   }
 }
 
-export default withTranslation()(CategoryList);
+export default withTranslation()(StylesheetList);

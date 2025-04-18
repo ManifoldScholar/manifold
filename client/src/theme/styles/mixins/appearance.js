@@ -392,3 +392,41 @@ export const draggable = `
 export const dragging = `
   box-shadow: 0 31px 26px -13px rgba(0 0 0 / 0.33);
 `;
+
+export function revealOnFocus(selector) {
+  return `
+    @supports selector(:has(a)) {
+      &:has(${selector}) {
+        margin-inline-end: -40px;
+        transition: margin-inline-end var(--transition-duration-default)
+          ${defaultTransitionProps};
+
+        ${respond(
+          `transition: none;
+                margin-inline-end: 0;`,
+          35,
+          "max"
+        )}
+      }
+
+      &:has(${selector}:focus-within) {
+        transition: margin-inline-end ${defaultTransitionProps};
+        margin-inline-end: 0;
+      }
+    }
+
+    ${selector} {
+      @supports selector(:has(a)) {
+        opacity: 0;
+        transition: opacity ${defaultTransitionProps};
+
+        &:focus-within {
+          opacity: 1;
+          transition: opacity var(--transition-duration-default)
+              calc(var(--transition-duration-default) / 2)
+              var(--transition-timing-function);
+        }
+      }
+    }
+  `;
+}

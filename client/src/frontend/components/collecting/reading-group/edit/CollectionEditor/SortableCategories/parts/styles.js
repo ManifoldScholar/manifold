@@ -75,6 +75,10 @@ export const Action = styled.div`
     cursor: grab;
   }
 
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+
   & + & {
     margin-block-start: 12px;
   }

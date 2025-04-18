@@ -5,6 +5,7 @@ import lh from "helpers/linkHandler";
 import Texts from "./Texts";
 import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Utility from "global/components/utility";
+import PopoverMenu from "global/components/popover/Menu";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
 
@@ -18,6 +19,7 @@ class CategoryListCategory extends PureComponent {
     texts: PropTypes.array.isRequired,
     callbacks: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
+    categoryCount: PropTypes.number.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
     isDragging: PropTypes.bool,
     t: PropTypes.func
@@ -26,6 +28,12 @@ class CategoryListCategory extends PureComponent {
   static defaultProps = {
     texts: []
   };
+
+  constructor(props) {
+    super(props);
+
+    this.popoverDisclosureRef = React.createRef();
+  }
 
   onDelete = event => {
     event.preventDefault();
@@ -59,6 +67,11 @@ class CategoryListCategory extends PureComponent {
   render() {
     const category = this.category;
     const project = this.project;
+    const {
+      index,
+      categoryCount,
+      callbacks: { updateCategoryPosition }
+    } = this.props;
 
     return (
       <>
@@ -112,16 +125,71 @@ class CategoryListCategory extends PureComponent {
                   <div
                     className="text-categories__button"
                     {...provided.dragHandleProps}
+                    tabIndex={-1}
                   >
                     <Utility.IconComposer icon="grabber32" size={26} />
                     <span className="screen-reader-text">
                       {this.props.t("projects.category.drag")}
                     </span>
                   </div>
+                  <div className="text-categories__keyboard-buttons">
+                    <PopoverMenu
+                      disclosure={
+                        <button
+                          ref={this.popoverDisclosureRef}
+                          className="text-categories__button"
+                        >
+                          <Utility.IconComposer
+                            icon="arrowUpDown32"
+                            size={26}
+                          />
+                          <span className="screen-reader-text">
+                            {this.props.t("actions.dnd.reorder")}
+                          </span>
+                        </button>
+                      }
+                      actions={[
+                        {
+                          id: "up_category",
+                          label: this.props.t("actions.dnd.move_up_category"),
+                          onClick: () =>
+                            updateCategoryPosition(
+                              category,
+                              index + 1 - 1,
+                              () => {
+                                if (this.popoverDisclosureRef?.current) {
+                                  this.popoverDisclosureRef.current.focus();
+                                }
+                              },
+                              true
+                            ), // index starts with 0, positions start with 1
+                          disabled: index === 0
+                        },
+                        {
+                          id: "down_category",
+                          label: this.props.t("actions.dnd.move_down_category"),
+                          onClick: () =>
+                            updateCategoryPosition(
+                              category,
+                              index + 1 + 1,
+                              () => {
+                                if (this.popoverDisclosureRef?.current) {
+                                  this.popoverDisclosureRef.current.focus();
+                                }
+                              },
+                              true
+                            ), // index starts with 0, positions start with 1
+                          disabled: index === categoryCount - 2 // subtract 1 for Uncategorized, which can't move
+                        }
+                      ]}
+                    />
+                  </div>
                 </div>
               </header>
               <Texts
                 category={this.category}
+                categoryIndex={this.props.index}
+                categoryCount={this.props.categoryCount}
                 callbacks={this.callbacks}
                 texts={this.texts}
                 activeType={this.props.activeType}
@@ -165,6 +233,8 @@ class CategoryListCategory extends PureComponent {
               texts={this.texts}
               activeType={this.props.activeType}
               onTextKeyboardMove={this.props.onTextKeyboardMove}
+              categoryIndex={this.props.index}
+              categoryCount={this.props.categoryCount}
             />
           </div>
         )}
