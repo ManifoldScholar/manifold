@@ -31,7 +31,7 @@ RSpec.describe "Project ContentBlocks API", type: :request do
 
       describe "the response" do
         it "has a 201 CREATED status code" do
-          post path, headers: headers, params: build_json_payload(params)
+          post path, headers: headers, params: build_json_payload(**params)
           expect(response).to have_http_status(:created)
         end
       end
@@ -42,7 +42,7 @@ RSpec.describe "Project ContentBlocks API", type: :request do
 
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
-          post path, headers: headers, params: build_json_payload(params)
+          post path, headers: headers, params: build_json_payload(**params)
           expect(response).to have_http_status(:forbidden)
         end
       end

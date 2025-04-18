@@ -27,7 +27,7 @@ module InteractionTesting
     end
 
     def perform_the_interaction!(**inputs)
-      described_class.run interaction_inputs.merge(inputs)
+      described_class.run(**interaction_inputs, **inputs)
     end
 
     def perform_within_expectation!(valid: true, raises: false, **inputs) # rubocop:todo Metrics/PerceivedComplexity
