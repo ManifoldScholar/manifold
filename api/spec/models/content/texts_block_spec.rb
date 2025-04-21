@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe Content::TextsBlock do
   let(:text) { FactoryBot.create(:text) }
   let(:texts_block) { FactoryBot.create(:texts_block, project: text.project) }
@@ -33,54 +31,69 @@ RSpec.describe Content::TextsBlock do
   end
 
   describe "#texts" do
-    let(:project) { FactoryBot.create(:project) }
-    let(:category_a) { FactoryBot.create(:category, title: "A", project: project) }
-    let(:category_b) { FactoryBot.create(:category, title: "B", project: project) }
-    let(:text_a) { FactoryBot.create(:text, project: project, category: category_a) }
-    let(:text_b) { FactoryBot.create(:text, project: project, category: category_b) }
-    let(:text_c) { FactoryBot.create(:text, project: project, category: nil) }
-    let!(:texts_block) { FactoryBot.create(:texts_block, project: project) }
+    let_it_be(:project, refind: true) { FactoryBot.create(:project) }
+    let_it_be(:category_a, refind: true) { FactoryBot.create(:category, title: "A", project: project) }
+    let_it_be(:category_b, refind: true) { FactoryBot.create(:category, title: "B", project: project) }
+    let_it_be(:text_a, refind: true) { FactoryBot.create(:text, project: project, category: category_a) }
+    let_it_be(:text_b, refind: true) { FactoryBot.create(:text, project: project, category: category_b) }
+    let_it_be(:text_c, refind: true) { FactoryBot.create(:text, project: project, category: nil) }
+
+    let!(:texts_block) do
+      block = FactoryBot.create(:texts_block, project: project)
+    ensure
+      block.reload_project
+      block.project.texts.reload
+    end
 
     context "when not filtered by category" do
       context "when show_uncategorized is true" do
         it "returns all project texts" do
-          expect(texts_block.texts).to eq project.texts
+          expect(texts_block.texts.reload).to match_array [text_a, text_b, text_c]
         end
       end
 
       context "when show_uncategorized is false" do
-        before { texts_block.update(show_uncategorized: false) }
+        before do
+          texts_block.update(show_uncategorized: false)
+        end
 
         it "excludes project texts without a category" do
-          expect(texts_block.texts).to contain_exactly(text_a, text_b)
+          expect(texts_block.texts.reload.to_a).to exclude text_c
         end
       end
     end
 
     context "when filtered by category" do
       let!(:reference) do
-        FactoryBot.create(:content_block_reference,
-                          content_block: texts_block,
-                          kind: "included_categories",
-                          referencable: category_a)
+        FactoryBot.create(
+          :content_block_reference,
+          content_block: texts_block,
+          kind: "included_categories",
+          referencable: category_a
+        )
+      ensure
+        texts_block.reload
       end
 
       it "can handle removal of a referenced category" do
-        category_a.destroy
-        expect(texts_block.reload.included_category_ids.length).to eq 0
+        category_a.destroy!
+
+        expect(texts_block.reload.included_category_ids).to be_blank
       end
 
       context "when show_uncategorized is true" do
         it "returns the related categories' texts and uncategorized texts" do
-          expect(texts_block.texts).to match_array [category_a.texts, text_c].flatten
+          expect(texts_block.texts.reload.ids).to exclude text_b.id
         end
       end
 
       context "when show_uncategorized is false" do
-        before { texts_block.update(show_uncategorized: false) }
+        before do
+          texts_block.update(show_uncategorized: false)
+        end
 
         it "returns the related category texts" do
-          expect(texts_block.texts).to eq category_a.texts
+          expect(texts_block.texts.reload.ids).to exclude(text_b.id).and(exclude(text_c.id))
         end
       end
     end

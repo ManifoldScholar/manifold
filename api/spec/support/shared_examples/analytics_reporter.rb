@@ -81,29 +81,27 @@ end
 RSpec.shared_context "with projects" do
   include_context "with analytics visits"
 
-  let_it_be(:reading_group) { FactoryBot.create(:reading_group) }
+  let_it_be(:reading_group, refind: true) { FactoryBot.create(:reading_group) }
 
   let_it_be(:created_at) { { created_at: 2.days.ago } }
 
   let_it_be(:project_count) { 2 }
-  let_it_be(:projects) { FactoryBot.create_list(:project, project_count, **created_at) }
+  let_it_be(:projects, refind: true) { FactoryBot.create_list(:project, project_count, **created_at) }
 
   let_it_be(:text_count) { 2 }
-  let_it_be(:texts) { projects.map { |p| FactoryBot.create_list(:text, text_count, project: p, **created_at) }.flatten }
+  let_it_be(:texts, refind: true) { projects.map { |p| FactoryBot.create_list(:text, text_count, project: p, **created_at) }.flatten }
 
-  let_it_be(:text_section_count) { 2 }
-
-  let_it_be(:text_sections) do
-    texts.map do |t|
+  let_it_be(:text_sections, refind: true) do
+    texts.flat_map do |t|
       FactoryBot.create_list(:text_section, 5, :with_simple_body, text: t, **created_at)
-    end.flatten
+    end
   ensure
     texts.each(&:reload)
   end
 
-  let(:actual_projects_count) { projects.size }
+  let(:actual_projects_count) { projects.count }
   let(:actual_projects) { projects.take(actual_projects_count) }
-  let(:actual_texts_count) { texts.size }
+  let(:actual_texts_count) { texts.count }
   let(:actual_texts) { texts.take(actual_texts_count) }
 
   let(:actual_text_sections) { actual_texts.flat_map(&:text_sections) }
@@ -158,13 +156,13 @@ end
 RSpec.shared_context "with a single project" do
   include_context "with projects"
 
-  let_it_be(:project) { projects.first }
+  let_it_be(:project, refind: true) { projects.first }
   let_it_be(:previous_favorite_count) { 1 }
   let_it_be(:previous_favorites) { FactoryBot.create_list(:favorite, previous_favorite_count, favoritable: project, created_at: 100.days.ago) }
 
   let(:actual_projects_count) { 1 }
 
-  let(:actual_texts_count) { project.texts.size }
+  let(:actual_texts_count) { project.texts.count }
 
   let(:project_downloads_count) { visits.count }
 

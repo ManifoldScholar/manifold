@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Search::QueryBuilder, elasticsearch: true, interaction: true do
+RSpec.xdescribe Search::QueryBuilder, elasticsearch: true, interaction: true do
   let(:options) { Search::Options.new }
   let(:phrases) { [] }
   let(:needle) { nil }

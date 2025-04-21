@@ -26,6 +26,8 @@ class Journal < ApplicationRecord
   include WithConfigurableAvatar
   include HasKeywordSearch
 
+  multisearch_draftable true
+
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :title, include_wrap: false
 
@@ -84,9 +86,7 @@ class Journal < ApplicationRecord
 
   scope :search_import, -> { includes(:collaborators, :makers) }
 
-  has_multisearch! websearch: true,
-    against: %i[title subtitle description],
-    additional_attributes: ->(journal) { { title: journal.title } }
+  multisearches! :description_plaintext
 
   has_keyword_search!(
     against: %i[title subtitle description],
@@ -95,26 +95,18 @@ class Journal < ApplicationRecord
       makers: %i[first_name last_name display_name]
     }
   )
+
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
              highlight: [:title, :body])
 
   def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description_plaintext,
-      creator: creator&.full_name,
-      makers: makers.map(&:full_name),
-      metadata: metadata.values.compact_blank
-    }.merge(search_hidden)
+    super.merge(creator: multisearch_creator)
   end
 
-  def search_hidden
-    {
-      hidden: draft?
-    }
+  def multisearch_full_text
+    description_plaintext
   end
 
   def to_s

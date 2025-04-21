@@ -51,6 +51,9 @@ class ResourceCollection < ApplicationRecord
       project: %i[title]
     }
   )
+
+  multisearch_parent_name :project
+
   searchkick(callbacks: :async,
              batch_size: 500,
              word_start: TYPEAHEAD_ATTRIBUTES,
@@ -61,17 +64,19 @@ class ResourceCollection < ApplicationRecord
   after_commit :trigger_creation_event, on: [:create]
 
   def search_data
-    {
-      search_result_type: search_result_type,
-      title: title_plaintext,
-      full_text: description_plaintext,
-      parent_project: project&.id,
-      parent_keywords: [project&.title]
-    }.merge(search_hidden)
+    super.merge(parent_project: project.try(:id))
   end
 
-  def search_hidden
-    project.present? ? project.search_hidden : { hidden: true }
+  def multisearch_title
+    title_plaintext
+  end
+
+  def multisearch_full_text
+    description_plaintext
+  end
+
+  def multisearch_parent_keywords
+    [project.try(:title)].compact
   end
 
   def resource_kinds

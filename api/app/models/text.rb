@@ -133,10 +133,10 @@ class Text < ApplicationRecord
   after_commit :trigger_text_added_event, on: [:create, :update]
   after_commit :inject_global_stylesheet, on: :create
 
-  has_multisearch! websearch: true,
-    against: %i[description],
-    additional_attributes: ->(text) { { title: text.title } }
+  multisearches! :description, secondary_from: :description_plaintext
+
   has_keyword_search! associated_against: { titles: [:value] }, against: [:description]
+
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
@@ -154,7 +154,7 @@ class Text < ApplicationRecord
   # During ingestion, texts can be created before they're added to a project.
   # We don't want to index those orphaned texts.
   def should_index?
-    project.present?
+    project.present? && super
   end
 
   def age
@@ -162,20 +162,19 @@ class Text < ApplicationRecord
   end
 
   def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description,
-      parent_project: project&.id,
-      keywords: titles.map(&:value),
-      parent_keywords: [project&.title],
-      makers: makers.map(&:full_name),
-      metadata: metadata.values
-    }.merge(search_hidden)
+    super.merge(parent_project: project&.id)
   end
 
-  def search_hidden
-    project.present? ? project.search_hidden : { hidden: true }
+  def multisearch_full_text
+    description_plaintext
+  end
+
+  def multisearch_keywords
+    titles.map(&:value)
+  end
+
+  def multisearch_parent_keywords
+    [project.try(:title)].compact
   end
 
   def title_main

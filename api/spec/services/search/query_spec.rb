@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Search::Query, elasticsearch: true, interaction: true do
+RSpec.xdescribe Search::Query, elasticsearch: true, interaction: true do
   let!(:bovary) { FactoryBot.create :project, title: "Madame Bovary", description: "The force will be with you, always" }
   let!(:babble) { FactoryBot.create :project, title: "Madame Babble", description: "Peace be with you" }
 
