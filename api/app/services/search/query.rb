@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Parse a search string along with some options and return {Search::Results results}, if any.
   #
@@ -10,7 +12,7 @@ module Search
 
     boolean :debug, default: proc { Rails.env.development? }
     boolean :raise_search_errors, default: proc { Rails.env.development? }
-    boolean :use_pg_search, default: proc { ENV["USE_PG_SEARCH"] }
+    boolean :use_pg_search, default: proc { ManifoldSearchConfig.use_pg_search? }
 
     integer :page_number, default: 1
 
@@ -24,24 +26,34 @@ module Search
     record :text, default: nil
     record :text_section, default: nil
 
-    # @return [Search::Results]
+    # @return [ActiveRecord::Relation<PgSearch::Document>] if strategy is pg
+    # @return [Search::Results] if elasticsearch
     def execute
-      results = if use_pg_search
-                  PgSearch.multisearch(keyword)
-                    .with_pg_search_highlight
-                    .with_pg_search_rank
-                    .where(searchable_type: facets)
-                    .page(page_number).per(per_page)
-                else
-                  perform_search
-                end
-      ::Search::Results.new results
+      if use_pg_search
+        search_via_postgres
+      else
+        results = search_via_elasticsearch
+
+        ::Search::Results.new results
+      end
     end
 
     private
 
+    def search_via_postgres
+      options = {
+        facets: facets,
+        project: project,
+        text: text,
+        text_section: text_section,
+      }
+
+      PgSearch::Document.faceted_search_for(keyword, **options)
+        .page(page_number).per(per_page)
+    end
+
     # @return [Searchkick::Results]
-    def perform_search
+    def search_via_elasticsearch
       return empty_resultset if keyword.blank?
 
       parse_search_components!

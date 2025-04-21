@@ -51,7 +51,8 @@ class Event < ApplicationRecord
   # Validation
   validates :event_type, presence: true
 
-  # Search
+  multisearch_parent_name :project
+
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
@@ -62,15 +63,19 @@ class Event < ApplicationRecord
   after_commit :touch_project!
 
   def search_data
-    {
-      search_result_type: search_result_type,
-      title: subject_title_formatted,
-      full_text: attribution_name,
-      parent_project: project&.id,
-      parent_keywords: [
-        project&.title
-      ]
-    }.merge(search_hidden)
+    super.merge(parent_project: project.try(:id))
+  end
+
+  def multisearch_title
+    subject_title_formatted
+  end
+
+  def multisearch_full_text
+    attribution_name
+  end
+
+  def multisearch_parent_keywords
+    [project.try(:title)].compact_blank
   end
 
   def search_hidden
@@ -121,5 +126,4 @@ class Event < ApplicationRecord
 
     project.touch
   end
-
 end

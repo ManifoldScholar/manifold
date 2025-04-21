@@ -94,10 +94,8 @@ class Annotation < ApplicationRecord
   delegate :text_node_for, to: :text_section, prefix: true
   delegate :text_nodes, to: :text_section, prefix: true
 
-  # Search
-  has_multisearch! websearch: true,
-    against: [:subject, :body],
-    additional_attributes: ->(annotation) { { title: annotation.subject } }
+  multisearches! :body, title_from: :subject, secondary_from: :body
+
   searchkick(callbacks: :async,
              batch_size: 500,
              highlight: [:title, :body])
@@ -268,23 +266,24 @@ class Annotation < ApplicationRecord
   end
 
   def search_data
-    {
-      search_result_type: search_result_type,
-      title: subject,
-      full_text: body,
-      creator: creator&.full_name,
+    super.merge(
+      creator: multisearch_creator,
       parent_project: project&.id,
       parent_text_section: text_section&.id,
-      parent_text: text&.id,
-      parent_keywords: [
-        text&.title
-      ],
-      hidden: false
-    }
+      parent_text: text&.id
+    )
   end
 
-  def should_index?
-    !unindexable?
+  def multisearch_full_text
+    body
+  end
+
+  def multisearch_parent_keywords
+    [text.try(:title)].compact_blank
+  end
+
+  def hidden_for_multisearch?
+    unindexable? || super
   end
 
   def unindexable?

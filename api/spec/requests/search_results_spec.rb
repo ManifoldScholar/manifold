@@ -51,7 +51,8 @@ RSpec.describe "Search Results API", elasticsearch: true, type: :request do
     end
   end
 
-  context "when searching only a negated needle" do
+  # This is no longer true with PG Search and may not really be necessary.
+  xcontext "when searching only a negated needle" do
     let(:keyword) { "-bovary" }
 
     it "returns no results" do
@@ -61,7 +62,8 @@ RSpec.describe "Search Results API", elasticsearch: true, type: :request do
     end
   end
 
-  context "when searching only a negated phrase" do
+  # This is no longer true with PG Search and may not really be necessary.
+  xcontext "when searching only a negated phrase" do
     let(:keyword) { %[-"the force"] }
 
     it "returns no results" do

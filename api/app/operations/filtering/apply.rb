@@ -12,7 +12,7 @@ module Filtering
     # @return [Searchkick::Relation]
     # @return [ActiveRecord::Relation] with kaminari data from {.by_pagination}.
     # rubocop:disable Metrics/ParameterLists - this extra pg toggle should be temporary
-    def call(raw_params, scope:, user:, model: scope.model, skip_pagination: false, use_pg_search: ENV["USE_PG_SEARCH"])
+    def call(raw_params, scope:, user:, model: scope.model, skip_pagination: false, use_pg_search: ManifoldSearchConfig.use_pg_search?)
       if use_pg_search
         Filtering::Postgres::Applicator.new(raw_params, model: model, scope: scope, user: user, skip_pagination: skip_pagination).call
       else

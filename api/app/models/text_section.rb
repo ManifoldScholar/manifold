@@ -1,6 +1,7 @@
-# A section in a text
-class TextSection < ApplicationRecord
+# frozen_string_literal
 
+# A section in a {Text}.
+class TextSection < ApplicationRecord
   attribute :body_json, :indifferent_hash
 
   # Misc. Concerns
@@ -38,12 +39,16 @@ class TextSection < ApplicationRecord
   # Ordering
   acts_as_list scope: :text
 
-  # Associations
   belongs_to :text, inverse_of: :text_sections
+
   has_one :project, through: :text
   has_one :text_started_by, class_name: "Text", foreign_key: "start_text_section_id",
           dependent: :nullify, inverse_of: :start_text_section
+
   belongs_to :ingestion_source, optional: true
+
+  has_one :journal, through: :project
+
   # We intentionally do not destroy annotations because we want to handle the orphans.
   has_many :annotations, dependent: :nullify
   has_many :resources, through: :annotations
@@ -83,15 +88,11 @@ class TextSection < ApplicationRecord
   after_destroy :remove_linked_toc_entries
 
   # Scopes
-  scope :in_texts, lambda { |texts|
-    where(text: texts)
-  }
+  scope :in_texts, ->(texts) { where(text: texts) }
   scope :ordered, -> { order(position: :asc) }
 
-  # Search
-  has_multisearch! websearch: true,
-    against: [:name, :body],
-    additional_attributes: ->(text_section) { { title: text_section.name } }
+  multisearches! :body_text
+
   searchkick(
     callbacks: :async,
     batch_size: 25,
@@ -114,11 +115,9 @@ class TextSection < ApplicationRecord
     }
   )
 
-  scope :search_import, lambda {
-    includes(
-      text: [:project, :makers]
-    )
-  }
+  scope :search_import, -> { includes(text: [:project, :makers]) }
+
+  alias_attribute :title, :name
 
   friendly_id :slug_candidates, use: :scoped, scope: :text
 
@@ -160,24 +159,20 @@ class TextSection < ApplicationRecord
     name
   end
 
-  def should_index?
-    text.present? && text.should_index?
-  end
-
   def search_data
-    {
-      search_result_type: search_result_type,
-      title: name,
+    super.merge(
       parent_text: text&.id,
       parent_project: project&.id,
-      parent_keywords: [],
-      makers: [],
       text_nodes: properties_for_text_nodes
-    }.merge(search_hidden)
+    )
   end
 
-  def search_hidden
-    text.present? ? text.search_hidden : { hidden: true }
+  def multisearchable_makers
+    []
+  end
+
+  def multisearchable_parent_keywords
+    []
   end
 
   def previous_section
@@ -186,10 +181,6 @@ class TextSection < ApplicationRecord
 
   def next_section
     text.section_after(position)
-  end
-
-  def title
-    name
   end
 
   def toc?
@@ -263,11 +254,33 @@ class TextSection < ApplicationRecord
     TextSectionJobs::EnqueueAdoptAnnotationsJob.perform_later annotations.pluck(:id)
   end
 
-  private
-
+  # @api private
   # @return [void]
   def extrapolate_nodes!
     ManifoldApi::Container["text_sections.extrapolate_nodes"].(text_section: self).value!
+  end
+
+  # @return [String]
+  def extracted_body_content
+    data = []
+
+    extract_content_from!(body_json, data: data)
+
+    data.join(" ")
+  end
+
+  private
+
+  def extract_content_from!(source, data: [])
+    case source
+    when Array
+      source.each { |item| extract_content_from!(item, data: data) }
+    when Hash
+      extract_content_from!(source["content"], data: data)
+      extract_content_from!(source["children"], data: data)
+    when /\S+/
+      data << source.to_s.squish
+    end
   end
 
   def maybe_adopt_or_orphan_annotations!
@@ -280,6 +293,7 @@ class TextSection < ApplicationRecord
     return unless body_changed?
 
     self.body_json = Serializer::HTML.serialize_as_json(body)
+    self.body_text = extracted_body_content
   end
 
   def remove_linked_toc_entries
@@ -292,6 +306,46 @@ class TextSection < ApplicationRecord
       find_each do |text_section|
         TextSections::ExtrapolateNodesJob.perform_later text_section
       end
+    end
+
+    # @api private
+    # @note Part of PG Search
+    def rebuild_pg_search_documents
+      connection.exec_update(<<~SQL)
+      INSERT INTO pg_search_documents
+      (
+        searchable_type, searchable_id,
+        journal_id, project_id, text_id, text_section_id,
+        search_result_type,
+        title, content,
+        created_at, updated_at
+      )
+      SELECT
+        'TextSection' AS searchable_type,
+        ts.id AS searchable_id,
+        ji.journal_id AS journal_id,
+        p.id AS project_id,
+        t.id AS text_id,
+        ts.id AS text_section_id,
+        'text_section' AS search_result_type,
+        ts.name AS title,
+        ts.body_text AS content,
+        ts.created_at, ts.updated_at
+      FROM text_sections ts
+      INNER JOIN texts t ON t.id = ts.text_id
+      INNER JOIN projects p ON p.id = t.project_id
+      LEFT OUTER JOIN journal_issues ji ON ji.id = p.journal_issue_id
+      WHERE NOT p.draft
+      ON CONFLICT (searchable_type, searchable_id) DO UPDATE SET
+        journal_id = EXCLUDED.journal_id,
+        project_id = EXCLUDED.project_id,
+        text_id = EXCLUDED.text_id,
+        text_section_id = EXCLUDED.text_section_id,
+        search_result_type = EXCLUDED.search_result_type,
+        title = EXCLUDED.title,
+        content = EXCLUDED.content,
+        updated_at = EXCLUDED.updated_at
+      SQL
     end
   end
 end

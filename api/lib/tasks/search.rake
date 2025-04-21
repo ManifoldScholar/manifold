@@ -33,6 +33,8 @@ namespace :manifold do
         Manifold::Rake.logger.info msg
         klass.constantize.reindex
       end
+
+      ManifoldApi::Container["search.rebuild_all"].().value!
     end
 
     namespace :reindex do

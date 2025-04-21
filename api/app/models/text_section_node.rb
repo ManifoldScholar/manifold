@@ -2,6 +2,10 @@
 
 # @see TextSections::ExtrapolateNodes
 class TextSectionNode < ApplicationRecord
+  include HasKeywordSearch
+
+  MAX_HIT_COUNT = 100
+
   # A list of HTML / MathML tags that should be treated as "intermediate".
   #
   # When figuring out the node to return for an annotation, intermediate nodes
@@ -30,11 +34,21 @@ class TextSectionNode < ApplicationRecord
   scope :terminal, -> { where(intermediate: false) }
   scope :with_intermediate_tag, -> { where(tag: INTERMEDIATE_TAGS) }
 
+  scope :current, -> { joins(:text_section).where(TextSection.arel_table[:body_hash].eq(arel_table[:body_hash])) }
+  scope :orphaned, -> { joins(:text_section).where(TextSection.arel_table[:body_hash].not_eq(arel_table[:body_hash])) }
+
   has_many :text_section_node_links, -> { in_order }, inverse_of: :parent, foreign_key: :parent_id
   has_many :ancestor_links, -> { in_reverse_order }, class_name: "TextSectionNodeLink", inverse_of: :child, foreign_key: :child_id
 
   has_many :parents, -> { terminal }, through: :ancestor_links, source: :parent
   has_many :children, through: :text_section_node_links, source: :child
+
+  has_keyword_search! against: :contained_content, using: {
+    tsearch: {
+      tsvector_column: :tsv_contained_content,
+    },
+  },
+  order_within_rank: "node_indices DESC, id ASC"
 
   def node
     node_extra.with_indifferent_access.merge(
@@ -62,6 +76,39 @@ class TextSectionNode < ApplicationRecord
       end
 
       target.merge!(child.node)
+    end
+  end
+
+  def hit_uuid
+    node_uuid || contained_node_uuids.first
+  end
+
+  # @api private
+  # @return [Hash]
+  def to_hit
+    {
+      content: contained_content,
+      content_highlighted: [pg_search_highlight],
+      node_uuid: hit_uuid,
+      position: pg_search_rank
+    }
+  end
+
+  class << self
+    # @param [String] keyword
+    # @return [<Hash>]
+    def hit_search_for(keyword)
+      hit_filter = Search::HitFilter.new
+
+      keyword_search(keyword)
+        .with_pg_search_rank
+        .with_pg_search_highlight
+        .limit(MAX_HIT_COUNT)
+        .each_with_object([]) do |node, hits|
+          next unless hit_filter.allow?(node)
+
+          hits << node.to_hit
+        end
     end
   end
 end

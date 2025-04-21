@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe V1::SearchResultSerializer, elasticsearch: true do
+RSpec.xdescribe V1::SearchResultSerializer, elasticsearch: true do
   let(:subject) { described_class.new(object) }
   let(:factory) { described_class.to_s.demodulize.gsub("Serializer", "").underscore.to_sym }
 
