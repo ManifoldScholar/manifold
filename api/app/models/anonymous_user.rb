@@ -26,4 +26,12 @@ AnonymousUser = Naught.build do |config|
   def can_read?(resource, *other)
     resource.readable_by? self, *other
   end
+
+  def has_cached_role?(...)
+    false
+  end
+
+  def has_role?(...)
+    false
+  end
 end

@@ -116,33 +116,36 @@ class Resource < ApplicationRecord
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_commit :trigger_event_creation, on: [:create]
 
-  has_multisearch! websearch: true,
-    against: %i[title description],
-    additional_attributes: ->(resource) { { title: resource.title } }
+  multisearch_parent_name :project
+
+  multisearches! :description_plaintext, secondary_from: :caption
+
   has_keyword_search! against: %i[title description]
+
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
              highlight: [:title, :body])
 
-  scope :search_import, lambda {
-    includes(:resource_collections, :project)
-  }
+  scope :search_import, -> { includes(:resource_collections, :project) }
 
   def search_data
-    {
-      search_result_type: search_result_type,
-      title: title_plaintext,
-      full_text: [description_plaintext, caption].compact_blank.join("\n"),
-      parent_project: project&.id,
-      parent_keywords: resource_collections.map(&:title) + [project&.title],
-      metadata: metadata.values.compact_blank,
-      keywords: (tag_list + attachment_file_name).compact_blank
-    }.merge(search_hidden)
+    super.merge(parent_project: project&.id)
   end
 
-  def search_hidden
-    project.present? ? project.search_hidden : { hidden: true }
+  def multisearch_full_text
+    [description_plaintext, caption].compact_blank.join("\n")
+  end
+
+  def multisearch_keywords
+    [*super, attachment_file_name].compact_blank
+  end
+
+  def multisearch_parent_keywords
+    [].tap do |a|
+      a.concat(resource_collections.map(&:title))
+      a << project.try(:title)
+    end.compact_blank
   end
 
   def fetch_thumbnail?

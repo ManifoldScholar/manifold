@@ -242,9 +242,9 @@ class Project < ApplicationRecord
     )
   }
 
-  has_multisearch! websearch: true,
-    against: %i[title subtitle description],
-    additional_attributes: ->(project) { { title: project.title } }
+  multisearch_draftable true
+
+  multisearches! :description
 
   has_keyword_search!(
     against: %i[title subtitle description],
@@ -256,27 +256,22 @@ class Project < ApplicationRecord
       tags: %i[name]
     }
   )
+
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
              highlight: [:title, :body])
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description_plaintext,
-      keywords: (tag_list + texts.map(&:title) + subjects.map(&:title) + hashtag).compact_blank,
-      creator: creator&.full_name,
-      makers: makers.map(&:full_name),
-      metadata: metadata.values.compact_blank
-    }.merge(search_hidden)
+  def multisearch_full_text
+    description_plaintext
   end
 
-  def search_hidden
-    {
-      hidden: draft?
-    }
+  def multisearch_keywords
+    Array(super).tap do |a|
+      a.concat(texts.map(&:title))
+      a.concat(subjects.map(&:title))
+      a << hashtag
+    end.compact_blank
   end
 
   def journal_issue?

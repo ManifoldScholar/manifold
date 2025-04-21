@@ -203,7 +203,11 @@ module APIDocs
       end
 
       def serializer
-        "V1::#{name.demodulize}Serializer".constantize
+        if name.demodulize == "SearchResult"
+          ::V1::PgSearchSerializer
+        else
+          "V1::#{name.demodulize}Serializer".constantize
+        end
       rescue NameError
         nil
       end

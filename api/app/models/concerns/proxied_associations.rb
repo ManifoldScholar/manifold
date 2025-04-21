@@ -11,6 +11,12 @@ module ProxiedAssociations
     after_commit :reset_reference_associations!
   end
 
+  def reload(...)
+    super
+  ensure
+    reset_reference_associations!
+  end
+
   def reset_reference_associations!
     @reference_associations = nil
   end

@@ -16,12 +16,6 @@ class JournalIssue < ApplicationRecord
   include HasSortTitle
   include HasKeywordSearch
 
-  has_keyword_search! associated_against: {
-    journal: [:title],
-    journal_volume: [:number],
-    project: [:description]
-  }
-
   belongs_to :journal, counter_cache: true
   belongs_to :journal_volume, optional: true, counter_cache: true
 
@@ -107,6 +101,16 @@ class JournalIssue < ApplicationRecord
     )
   }
 
+  has_keyword_search! associated_against: {
+    journal: [:title],
+    journal_volume: [:number],
+    project: [:description]
+  }
+
+  multisearch_parent_name :journal
+
+  multisearch_secondary_attr :description_plaintext
+
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500,
@@ -116,22 +120,15 @@ class JournalIssue < ApplicationRecord
     pending_sort_title.blank? ? number.to_i : pending_sort_title.to_i
   end
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description_plaintext,
-      keywords: (tag_list + texts.map(&:title) + hashtag).compact_blank,
-      creator: creator&.full_name,
-      makers: makers.map(&:full_name),
-      metadata: metadata.values.compact_blank
-    }.merge(search_hidden)
+  def multisearch_full_text
+    description_plaintext
   end
 
-  def search_hidden
-    {
-      hidden: journal.draft?
-    }
+  def multisearch_keywords
+    super.tap do |kw|
+      kw.concat(texts.map(&:title))
+      kw << hashtag
+    end.compact_blank
   end
 
   def title
