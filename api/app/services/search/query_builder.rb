@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 module Search
   # Receives the parsed search components from {Search::Query#parse_search_components!}
   # along with its {Search::Options options} and uses those to produce a suitable set
   # of options for `Searchkick`, with a custom query body.
   #
   # @see https://github.com/ankane/searchkick#advanced-search
-  class QueryBuilder < Types::FlexibleStruct
+  class QueryBuilder < ::Types::FlexibleStruct
     include ActiveModel::Validations
     include Search::AdvancedDSL
 
     attribute :options, ::Search::Options.default { ::Search::Options.new }
-    attribute :phrases, Types::Array.of(Types::String).default { [] }
-    attribute :needle, Types::String.optional.default { nil }
-    attribute :negated_needle, Types::String.optional.default { nil }
-    attribute :negated_phrases, Types::Array.of(Types::String).default { [] }
+    attribute :phrases, ::Types::Array.of(Types::String).default { [] }
+    attribute :needle, ::Types::String.optional.default { nil }
+    attribute :negated_needle, ::Types::String.optional.default { nil }
+    attribute :negated_phrases, ::Types::Array.of(Types::String).default { [] }
 
-    attribute :fields, Types::Array.of(Types.Instance(::Search::FieldInfo)).default { ::Search::Container[:"fields.all"] }
+    attribute :fields, ::Types::Array.of(Types.Instance(::Search::FieldInfo)).default { ::Search::Container[:"fields.all"] }
 
     delegate :apply_where_filters!, :apply_highlight!, :apply_indices_boost!,
              :apply_pagination!, :apply_select!, :searchkick_options,

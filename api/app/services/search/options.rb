@@ -1,9 +1,9 @@
 module Search
   # Helper class to build an `options` object for Searchkick.
-  class Options < Types::FlexibleStruct
-    FACET = Types::Coercible::String.enum("Project", "Journal", "Resource", "Text", "TextSection", "Annotation")
+  class Options < ::Types::FlexibleStruct
+    FACET = ::Types::Coercible::String.enum("Project", "Journal", "Resource", "Text", "TextSection", "Annotation")
     DEFAULT_FACETS = FACET.options[:mapping].keys.freeze
-    FACETS = Types::Array.of(FACET)
+    FACETS = ::Types::Array.of(FACET)
     FACETS_OPTION = FACETS.default { DEFAULT_FACETS.dup }.constructor do |value|
       Array(value).compact.presence || DEFAULT_FACETS.dup
     end
@@ -47,20 +47,20 @@ module Search
       }
     }.freeze
 
-    attribute :phrase, Types::Bool.default { false }
-    attribute :debug, Types::Bool.default { Rails.env.development? }
-    attribute :execute, Types::Bool.default { true }
-    attribute :load, Types::Bool.default { false }
+    attribute :phrase, ::Types::Bool.default { false }
+    attribute :debug, ::Types::Bool.default { Rails.env.development? }
+    attribute :execute, ::Types::Bool.default { true }
+    attribute :load, ::Types::Bool.default { false }
 
-    attribute? :page_number, Types::Coercible::Integer.constrained(gt: 0).default { 1 }
-    attribute? :per_page, Types::Coercible::Integer.constrained(gt: 0).default { 20 }
-    attribute? :padding, Types::Coercible::Integer.constrained(gteq: 0).default { 0 }
+    attribute? :page_number, ::Types::Coercible::Integer.constrained(gt: 0).default { 1 }
+    attribute? :per_page, ::Types::Coercible::Integer.constrained(gt: 0).default { 20 }
+    attribute? :padding, ::Types::Coercible::Integer.constrained(gteq: 0).default { 0 }
     attribute? :facets, FACETS_OPTION.default { DEFAULT_FACETS.dup }
 
-    attribute? :project, Types.Instance(Project).optional
-    attribute? :journal, Types.Instance(Journal).optional
-    attribute? :text, Types.Instance(Text).optional
-    attribute? :text_section, Types.Instance(TextSection).optional
+    attribute? :project, ::Types.Instance(Project).optional
+    attribute? :journal, ::Types.Instance(Journal).optional
+    attribute? :text, ::Types.Instance(Text).optional
+    attribute? :text_section, ::Types.Instance(TextSection).optional
 
     # @param [Elasticsearch::DSL::Search::Queries::Bool] bool
     # @return [void]

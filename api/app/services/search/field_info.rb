@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Wrapper class that can build field queries the way that
   # Searchkick does, with both fuzzy and boosted direct matching,
@@ -7,17 +9,17 @@ module Search
   # its interface will automatically use nested alternatives.
   #
   # rubocop:disable Metrics/MethodLength
-  class FieldInfo < Types::FlexibleStruct
+  class FieldInfo < ::Types::FlexibleStruct
     include Search::AdvancedDSL
 
-    attribute :name, Types::String
-    attribute :raw_boost, Types::Coercible::Float
-    attribute :fuzzy_multiplier, Types::Coercible::Float.default { 1.0 }
-    attribute :multiplier, Types::Coercible::Float.default { 10.0 }
-    attribute :phrase_multiplier, Types::Coercible::Float.default { 1000.0 }
-    attribute :slop, Types::Coercible::Float.default { 2.0 }
+    attribute :name, ::Types::String
+    attribute :raw_boost, ::Types::Coercible::Float
+    attribute :fuzzy_multiplier, ::Types::Coercible::Float.default { 1.0 }
+    attribute :multiplier, ::Types::Coercible::Float.default { 10.0 }
+    attribute :phrase_multiplier, ::Types::Coercible::Float.default { 1000.0 }
+    attribute :slop, ::Types::Coercible::Float.default { 2.0 }
 
-    attribute? :nested_prefix, Types::String.optional
+    attribute? :nested_prefix, ::Types::String.optional
 
     # @!attribute [r] analyzed_name
     # The actual field to search against.

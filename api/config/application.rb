@@ -41,10 +41,17 @@ require_relative "../lib/manifold_env"
 
 ActionMailer::Base.add_delivery_method :manifold_dynamic, DynamicMailer::Mailer
 
+require_relative "../lib/global_types/array_types"
+require_relative "../lib/patches/support_websearch"
+
 module ManifoldApi
   # Manifold main application
 
   class Application < Rails::Application
+    # Configure the path for configuration classes that should be used before initialization
+    # NOTE: path should be relative to the project root (Rails.root)
+    # config.anyway_config.autoload_static_config_path = "config/configs"
+    #
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0

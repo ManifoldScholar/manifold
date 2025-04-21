@@ -1,18 +1,12 @@
 require "swagger_helper"
 
 RSpec.describe "Search Results", type: :request do
-  context "can search a project", :elasticsearch do
+  context "can search a project" do
     let!(:keyword) { "bananas" }
     let!(:text_resource) { FactoryBot.create(:text) }
     let!(:project_resource) { FactoryBot.create(:project, title: keyword, texts: [text_resource]) }
 
     around(:example) do |example|
-      WebMock.disable_net_connect!(allow: [/127\.0\.0\.1:2?9200/, /localhost:2?9200/, /elasticsearch:9200/])
-      Journal.reindex
-      Text.reindex
-      Resource.reindex
-      Annotation.reindex
-      TextSection.reindex
       example.run
     end
 

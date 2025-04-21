@@ -1,4 +1,5 @@
-require "forwardable"
+# frozen_string_literal: true
+
 module Search
   # Search::Results wraps raw Searchkick::Results and injects parent record IDs and slugs
   # in an efficient manner. Except for places where it's injecting these values into the
@@ -9,9 +10,6 @@ module Search
   # model instances. If Searchkick is returning raw elastic search results, we can
   # execute a performant query and inject parent slugs needed for link creation.
   class Results
-
-    include ActiveSupport::Inflector
-
     MODEL_INCLUDES = {
       "text_section" => { text: { project: :makers } },
       "project" => [:makers],
@@ -20,7 +18,9 @@ module Search
       "annotation" => { text_section: { text: :project } }
     }.freeze
 
+    include ActiveSupport::Inflector
     include Enumerable
+
     extend Forwardable
 
     attr_reader :searchkick_results
@@ -42,6 +42,8 @@ module Search
 
     def adjusted_results
       @adjusted_results ||= begin
+        # Remove these conditionals when removing Searchkick
+        return @searchkick_results unless @searchkick_results.respond_to?(:options)
         return @searchkick_results.results if @searchkick_results.options[:load]
 
         inject_associations(@searchkick_results)
@@ -124,6 +126,5 @@ module Search
         models << result_model_reference(result)
       end
     end
-
   end
 end
