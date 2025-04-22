@@ -56,10 +56,7 @@ function GroupHeading({ readingGroup, location }) {
       </Collapse>
       {canUpdateGroup && (
         <Styled.Container>
-          <ManageGroup
-            readingGroup={readingGroup}
-            location={location}
-          />
+          <ManageGroup readingGroup={readingGroup} location={location} />
         </Styled.Container>
       )}
     </Styled.GroupHeader>
