@@ -3,9 +3,8 @@
 module FormattedAttributes
   class Definition
     extend Dry::Initializer
-    extend Memoist
+    include Dry::Core::Equalizer.new(:path)
 
-    include Equalizer.new(:path)
     include Sliceable
 
     param :attribute, type: Types::Coercible::Symbol
@@ -40,7 +39,7 @@ module FormattedAttributes
     # @return [String]
     attr_reader :path
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       derive_attributes!

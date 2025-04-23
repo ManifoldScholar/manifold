@@ -38,7 +38,7 @@ class SystemEntitlement < ApplicationRecord
         raise ActiveRecord::RecordNotFound.new(message, self, :kind, provided_kind)
       end
 
-      upsert! kind: kind
+      upsert!({ kind: kind })
     end
   end
 end

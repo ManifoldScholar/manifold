@@ -159,7 +159,7 @@ module Patches
       save_options = {}.tap do |h|
         h[:context] = save_context if save_context.present?
       end
-      return model if model.save(save_options)
+      return model if model.save(**save_options)
 
       absorb_model_errors!(model, assimilate: assimilate, save_context: save_context)
     end

@@ -7,7 +7,7 @@ module Packaging
     # Its {CollaboratorRole role} is determined upon creation and is used to
     # determine where it is inserted in the Epub metadata.
     class CollaboratorItem < Types::FlexibleStruct
-      include Dry::Equalizer.new(:id, :kind)
+      include Dry::Core::Equalizer.new(:id, :kind)
       include Dux.comparable(:position)
 
       attribute :collaborator, Types.Instance(Collaborator)

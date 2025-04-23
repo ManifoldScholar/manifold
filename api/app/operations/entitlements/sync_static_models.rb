@@ -26,7 +26,7 @@ module Entitlements
     def upsert_entitlement_roles!
       Try do
         RoleName.entitlements.each do |entitlement_role|
-          EntitlementRole.upsert! name: entitlement_role
+          EntitlementRole.upsert!({ name: entitlement_role })
         end
       end
     end
@@ -35,7 +35,7 @@ module Entitlements
     def upsert_system_entitlements!
       Try do
         SystemEntitlementKind.known.each do |kind|
-          SystemEntitlement.upsert! kind: kind
+          SystemEntitlement.upsert!({ kind: kind })
         end
       end
     end
