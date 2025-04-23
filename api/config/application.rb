@@ -48,10 +48,8 @@ module ManifoldApi
 
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 7.0
 
-    # TODO: Switch over to :zeitwerk autoloader.
-    # See https://weblog.rubyonrails.org/2019/2/22/zeitwerk-integration-in-rails-6-beta-2/#backwards-incompatibility
     config.autoload_paths += %W(#{config.root}/app/lib)
 
     config.action_mailer.delivery_method = :manifold_dynamic
@@ -88,6 +86,7 @@ module ManifoldApi
 
     config.eager_load_paths += [
       "#{config.root}/app/jobs",
+      "#{config.root}/app/models",
       "#{config.root}/app/operations",
       "#{config.root}/app/services",
       "#{config.root}/app/serializers",

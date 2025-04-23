@@ -7,7 +7,7 @@ module Ingestions
       include ActiveSupport::Configurable
       include ActiveModel::Model
       include Dux.comparable(:position)
-      include Equalizer.new(:name)
+      include Dry::Core::Equalizer.new(:name)
 
       delegate :inherited_from, :inherited_from?, :valid_interaction?, to: :class
 

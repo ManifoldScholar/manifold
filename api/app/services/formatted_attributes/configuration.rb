@@ -112,7 +112,6 @@ module FormattedAttributes
     def add!(definition)
       raise TypeError, "Must be a definition: #{definition.class}" unless definition.is_a?(FormattedAttributes::Definition)
       raise FormattedAttributes::AlreadyDefinedError, "Already defined #{definition.path.inspect}" unless @definitions.add?(definition)
-
       model.include definition.methods_module
 
       @cache_type.attribute definition.key, definition.cache_type.to_type, default: {}

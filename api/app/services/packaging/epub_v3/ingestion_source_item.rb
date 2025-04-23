@@ -4,7 +4,7 @@ module Packaging
   module EpubV3
     # Proxies an {IngestionSource} for Epub export.
     class IngestionSourceItem < Types::FlexibleStruct
-      include Dry::Equalizer.new(:ingestion_source_id)
+      include Dry::Core::Equalizer.new(:ingestion_source_id)
       include Dux.comparable(:manifold_path)
       include Packaging::EpubV3::HasPath
 

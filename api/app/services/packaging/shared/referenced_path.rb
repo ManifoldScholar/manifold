@@ -6,7 +6,7 @@ module Packaging
       extend Dry::Initializer
       extend Memoist
 
-      include Dry::Equalizer.new(:path)
+      include Dry::Core::Equalizer.new(:path)
 
       param :path, Types::Strict::String
 

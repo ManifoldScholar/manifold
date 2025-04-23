@@ -5,7 +5,7 @@ module Utility
     extend Dry::Initializer
     extend Memoist
 
-    include Dry::Equalizer.new(:name)
+    include Dry::Core::Equalizer.new(:name)
 
     MODEL_NAME = ->(_, proxy) do
       namespace = proxy.name.deconstantize.safe_constantize.then do |n|

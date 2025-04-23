@@ -20,7 +20,7 @@ RSpec.describe FormattedAttributes::Definition do
   let(:formatted_value) { "<p><em>italic</em> a <strong>bold</strong></p>" }
   let(:plaintext_value) { "italic a bold" }
 
-  let(:definition) { described_class.new(attribute_name, options) }
+  let(:definition) { described_class.new(attribute_name, **options) }
   subject { definition }
 
   it 'has equality via :path' do
@@ -139,8 +139,8 @@ RSpec.describe FormattedAttributes::Definition do
     its(:key) { is_expected.to eq :title }
     its(:path) { is_expected.to eq "title" }
 
-    it { is_expected.to match :title }
-    it { is_expected.to match "title" }
+    it { is_expected.to be_match :title }
+    it { is_expected.to be_match "title" }
 
     include_examples "accessor examples"
   end
@@ -154,9 +154,9 @@ RSpec.describe FormattedAttributes::Definition do
     its(:key) { is_expected.to eq :metadata__title }
     its(:path) { is_expected.to eq "metadata.title" }
 
-    it { is_expected.to match :metadata__title }
-    it { is_expected.to match "metadata.title" }
-    it { is_expected.to match "title" }
+    it { is_expected.to be_match :metadata__title }
+    it { is_expected.to be_match "metadata.title" }
+    it { is_expected.to be_match "title" }
 
     include_examples "accessor examples"
   end
