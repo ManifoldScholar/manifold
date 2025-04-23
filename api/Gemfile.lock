@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/ManifoldScholar/fast_jsonapi.git
-  revision: cd456be89cb9785ed9924b48548a3338df1d3bf5
-  branch: ts/upgrade-to-ruby-32
+  revision: 9557f91c33df875cdf1a59076259c566174799c0
+  branch: master
   specs:
     fast_jsonapi (1.6.0)
       activesupport (>= 4.2)
@@ -209,12 +209,11 @@ GEM
       dry-inflector (~> 1.0)
       dry-initializer (~> 3.0)
       zeitwerk (~> 2.6)
-    dry-equalizer (0.3.0)
     dry-events (1.0.1)
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.0, < 2)
     dry-inflector (1.0.0)
-    dry-initializer (3.1.1)
+    dry-initializer (3.2.0)
     dry-initializer-rails (3.1.1)
       dry-initializer (>= 2.4, < 4)
       rails (> 3.0)
@@ -869,8 +868,8 @@ DEPENDENCIES
   database_cleaner-redis (~> 2.0)
   dotenv-rails (~> 2.0)
   draper (~> 4.0.3)
+  dry-core (~> 1.0)
   dry-effects
-  dry-equalizer
   dry-initializer
   dry-initializer-rails
   dry-monads
@@ -883,7 +882,6 @@ DEPENDENCIES
   dux (~> 0.8.0)
   elasticsearch (~> 7.0)
   elasticsearch-dsl (~> 0.1.10)
-  equalizer
   factory_bot_rails (~> 6.2)
   faker (~> 3.2.1)
   fast_jsonapi!

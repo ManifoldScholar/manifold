@@ -3,7 +3,7 @@
 module Packaging
   module EpubV3
     class TitleItem < Types::FlexibleStruct
-      include Dry::Equalizer.new(:text_title_id)
+      include Dry::Core::Equalizer.new(:text_title_id)
       include Dux.comparable(:position)
 
       attribute :kind, Types::ENUM_OF_TYPE[TextTitleKind]
