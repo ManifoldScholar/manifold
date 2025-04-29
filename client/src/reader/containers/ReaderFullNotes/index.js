@@ -16,7 +16,7 @@ import {
 import withReadingGroups from "hoc/withReadingGroups";
 import EntityCollection from "frontend/components/entity/Collection";
 
-const INITIAL_FORMATS = ["highlight", "annotation", "bookmark"];
+const INITIAL_FORMATS = ["annotation"];
 const INITIAL_VISIBLE_FILTER_STATE = {
   keyword: "",
   textSection: "",

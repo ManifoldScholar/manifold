@@ -11,7 +11,11 @@ function ReadingGroupAnnotationsContainer({
   refresh,
   fetchVersion
 }) {
-  const { pagination, filters, setFilters } = useListQueryParams();
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initFilters: {
+      formats: ["annotation"]
+    }
+  });
 
   const { id } = useParams();
 

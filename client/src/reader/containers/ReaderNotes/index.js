@@ -10,7 +10,7 @@ import lh from "helpers/linkHandler";
 import { useFetch, useFilterState, useFromStore } from "hooks";
 import withReadingGroups from "hoc/withReadingGroups";
 
-const DEFAULT_FORMATS = ["highlight", "annotation", "bookmark"];
+const DEFAULT_FORMATS = ["annotation"];
 
 function getSectionName(text, sectionId) {
   const { sectionsMap } = text.attributes;
