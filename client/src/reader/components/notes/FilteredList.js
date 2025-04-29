@@ -67,16 +67,9 @@ class FilteredList extends PureComponent {
 
   renderHeading() {
     const { handleSeeAllClick, handleFilterChange } = this.props;
-    const { readingGroup, ...restFilters } = this.filters;
 
     return (
       <div className="notes-filtered-list__header">
-        <div className="notes-filtered-list__header-start">
-          <Partial.Filters
-            filterChangeHandler={handleFilterChange}
-            filters={restFilters}
-          />
-        </div>
         <div
           className={classNames({
             "notes-filtered-list__header-end": true,
