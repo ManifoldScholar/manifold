@@ -41,7 +41,7 @@ export default `
 
   &__header-end {
     display: flex;
-    flex-grow: 1;
+    flex-basis: 100%;
     flex-direction: column;
     align-items: end;
     gap: ${inputGap}px;
@@ -49,6 +49,7 @@ export default `
     ${respond(`flex-direction: row;`, 40)}
     ${respond(`flex-direction: column;`, 65)}
     ${respond(`flex-direction: row;`, 75)}
+    ${respond(`flex-basis: 70%;`, 120)}
   }
 
   &__see-all {
