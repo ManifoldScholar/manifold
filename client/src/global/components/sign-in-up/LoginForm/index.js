@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import actions from "actions/currentUser";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import OAuthOptions from "../oauth/OAuthLoginOptions";
 import Notifications from "global/containers/Notifications";
 import { useDispatch } from "react-redux";
 import {
@@ -120,7 +119,6 @@ export default function LoginForm({
             {t("forms.signin_overlay.need_account")}
           </SharedStyles.ViewLink>
         </SharedStyles.LinksWrapper>
-        <OAuthOptions />
       </div>
     </div>
   );
