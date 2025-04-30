@@ -3,12 +3,12 @@
 module MonadicControllerActions
   extend ActiveSupport::Concern
 
-  def handle_monadic_operation!(name, options, handle_default_failure: true, &block)
-    result = resolve(name).call options
+  def handle_monadic_operation!(name, handle_default_failure: true, **options, &block)
+    result = resolve(name).call(**options)
 
     handler_options = { handle_default_failure: handle_default_failure }
 
-    handle_monadic_result!(result, handler_options, &block)
+    handle_monadic_result!(result, **handler_options, &block)
   end
 
   def handle_monadic_result!(result, handle_default_failure: true)
