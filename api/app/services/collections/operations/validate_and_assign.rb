@@ -71,7 +71,7 @@ module Collections
       def assign!(collector, collectable, grouping)
         options = self.class.dry_initializer.attributes(self).merge(collector: collector, collectable: collectable, grouping: grouping)
 
-        assign = Collections::Operations::Assign.new options
+        assign = Collections::Operations::Assign.new(**options)
 
         assign.call
       end

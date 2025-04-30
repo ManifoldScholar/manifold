@@ -55,7 +55,9 @@ module FormattedAttributes
       elsif container_or_model.respond_to?(attribute)
         container_or_model.public_send(attribute)
       elsif container_or_model.respond_to?(:dig)
-        container_or_model[attribute]
+        # rubocop:disable Style/SingleArgumentDig
+        container_or_model.dig(attribute)
+        # rubocop:enable Style/SingleArgumentDig
       elsif container_or_model.respond_to?(:[])
         container_or_model[attribute]
       else

@@ -1,4 +1,3 @@
-
 require "rails_helper"
 
 RSpec.describe "Zeitwerk compliance" do
