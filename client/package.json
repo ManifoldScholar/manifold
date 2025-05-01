@@ -184,7 +184,7 @@
   },
   "engines": {
     "node": "20.x",
-    "yarn": "4.6.0"
+    "yarn": "4.x"
   },
   "packageManager": "yarn@4.9.1",
   "browserslist": [
