@@ -75,7 +75,7 @@ RSpec.describe Resources::ExtractExternalVideoId do
     let(:outcome) { described_class.run external_type: "vimeo", external_id: "https://youtube.com?v=123456" }
 
     it "returns an error on :external_id" do
-      expect(outcome.errors.keys).to include :external_id
+      expect(outcome.errors.attribute_names).to include :external_id
     end
   end
 end
