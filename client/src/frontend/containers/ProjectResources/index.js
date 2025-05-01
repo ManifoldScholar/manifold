@@ -14,16 +14,16 @@ import { useFetch, useListFilters, useListQueryParams } from "hooks";
 
 export default function ProjectResourcesContainer({
   project,
-  journalBreadcrumbs
+  journalBreadcrumbs,
 }) {
   const { id } = useParams();
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initSize: 10
+    initSize: 10,
   });
 
   const { data: resources, meta } = useFetch({
-    request: [projectsAPI.resources, id, filters, pagination]
+    request: [projectsAPI.resources, id, filters, pagination],
   });
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -37,24 +37,24 @@ export default function ProjectResourcesContainer({
     project?.attributes ?? {};
 
   const filterProps = useListFilters({
-    onFilterChange: state => setFilters(state),
+    onFilterChange: (state) => setFilters(state),
     initialState: filters,
     resetState: null,
     options: {
       sort: true,
       kinds: resourceKinds,
-      tags: resourceTags
-    }
+      tags: resourceTags,
+    },
   });
 
   const breadcrumbs = useMemo(() => {
     const projectCrumb = {
       to: lh.link("frontendProject", slug),
-      label: titlePlaintext
+      label: titlePlaintext,
     };
     const resourcesCrumb = {
       to: lh.link("frontendProjectResources", slug),
-      label: t("glossary.resource_other")
+      label: t("glossary.resource_other"),
     };
     return journalBreadcrumbs
       ? [...journalBreadcrumbs, resourcesCrumb].filter(Boolean)
@@ -64,7 +64,7 @@ export default function ProjectResourcesContainer({
   const headContentProps = useEntityHeadContent(
     project,
     null,
-    t("glossary.resource_title_case_other")
+    t("glossary.resource_title_case_other"),
   );
 
   if (!project) return null;
@@ -89,5 +89,5 @@ ProjectResourcesContainer.displayName =
 
 ProjectResourcesContainer.propTypes = {
   project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
+  journalBreadcrumbs: PropTypes.array,
 };

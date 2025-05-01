@@ -8,7 +8,7 @@ class ReturnVisits extends Component {
   static displayName = "Analytics.Composed.ReturnVisits";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get data() {
@@ -33,11 +33,11 @@ class ReturnVisits extends Component {
 
   get caption() {
     const totalVisitorCount = this.props.t("analytics.visitor_with_count", {
-      count: this.allVisits
+      count: this.allVisits,
     });
     return this.props.t("analytics.return_visit_count", {
       totalVisitorCount,
-      returnVisitorCount: this.returnVisits
+      returnVisitorCount: this.returnVisits,
     });
   }
 

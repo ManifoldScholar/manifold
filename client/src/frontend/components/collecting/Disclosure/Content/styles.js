@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   listUnstyled,
   defaultTransitionProps,
-  rgba
+  rgba,
 } from "theme/styles/mixins";
 
 export const Content = styled.ul`
@@ -23,7 +23,8 @@ export const Content = styled.ul`
   background-color: var(--color-base-neutral05);
   overflow: auto;
   max-block-size: calc(100vh - var(--reader-header-height) * 2);
-  transition: opacity ${defaultTransitionProps},
+  transition:
+    opacity ${defaultTransitionProps},
     transform ${defaultTransitionProps};
 
   border-radius: var(--box-border-radius);

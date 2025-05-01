@@ -15,17 +15,17 @@ export default function IssuesListContainer() {
   const filtersReset = useMemo(() => ({ standaloneModeEnforced: false }), []);
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filtersReset
+    initFilters: filtersReset,
   });
 
   const { data: issues, meta } = useFetch({
-    request: [journalIssuesAPI.index, filters, pagination]
+    request: [journalIssuesAPI.index, filters, pagination],
   });
 
   const filterProps = useListFilters({
-    onFilterChange: state => setFilters(state),
+    onFilterChange: (state) => setFilters(state),
     initialState: filters,
-    resetState: filtersReset
+    resetState: filtersReset,
   });
 
   const { t } = useTranslation();

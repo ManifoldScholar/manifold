@@ -35,22 +35,22 @@ export default `
         ${respond(
           `margin-top: 0;
         margin-left: 28px;`,
-          50
+          50,
         )}
         ${respond(
           `margin-top: 8px;
         margin-left: 0;`,
-          65
+          65,
         )}
         ${respond(
           `margin-top: 0;
         margin-left: 28px;`,
-          75
+          75,
         )}
         ${respond(
           `margin-top: 8px;
         margin-left: 0;`,
-          120
+          120,
         )}
       }
     }

@@ -14,12 +14,12 @@ class TopSearches extends Component {
     withAllLink: PropTypes.bool,
     data: PropTypes.array,
     pagination: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     withSort: false,
-    withAllLink: false
+    withAllLink: false,
   };
 
   get data() {
@@ -43,7 +43,7 @@ class TopSearches extends Component {
           rowComponent={SearchRow}
           headers={[
             this.props.t("analytics.search_term"),
-            this.props.t("analytics.search_count")
+            this.props.t("analytics.search_count"),
           ]}
           rows={this.data}
           paginationClickHandler={paginationClickHandler}

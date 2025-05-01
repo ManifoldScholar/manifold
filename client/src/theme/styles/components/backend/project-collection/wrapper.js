@@ -18,7 +18,7 @@ export default `
         }
       `,
         breakpointLessOne(75),
-        "max"
+        "max",
       )}
     }
 
@@ -31,7 +31,7 @@ export default `
         }
       `,
         breakpointLessOne(75),
-        "max"
+        "max",
       )}
     }
 
@@ -60,7 +60,7 @@ export default `
           }
         `,
           breakpointLessOne(75),
-          "max"
+          "max",
         )}
       }
     }

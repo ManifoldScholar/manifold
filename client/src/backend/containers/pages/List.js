@@ -8,7 +8,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { select } from "utils/entityUtils";
 import EntitiesList, {
   Button,
-  PageRow
+  PageRow,
 } from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
@@ -20,9 +20,9 @@ class PagesDashboardContainer extends PureComponent {
     return Promise.all([one]);
   };
 
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      pages: select(requests.gPages, state.entityStore)
+      pages: select(requests.gPages, state.entityStore),
     };
   };
 
@@ -30,7 +30,7 @@ class PagesDashboardContainer extends PureComponent {
 
   static propTypes = {
     pages: PropTypes.array,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -48,7 +48,7 @@ class PagesDashboardContainer extends PureComponent {
             type="add"
             text={t("records.pages.button_label")}
             authorizedFor="page"
-          />
+          />,
         ]}
       />
     );

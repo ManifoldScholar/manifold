@@ -5,5 +5,5 @@ import Slideshow from "./SlideShow";
 export default {
   Thumbnails,
   Cards,
-  Slideshow
+  Slideshow,
 };

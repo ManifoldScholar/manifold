@@ -11,7 +11,7 @@ import {
   removeKeys,
   isValidParent,
   getParentId,
-  getCollapseCount
+  getCollapseCount,
 } from "./treeHelpers";
 import { textsAPI } from "api";
 import { useApiCallback } from "hooks";
@@ -22,22 +22,22 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
 
   const [dragging, setDragging] = useState(false);
   const [pageHeightCount, setPageHeightCount] = useState(
-    Object.keys(tree.items).length - 1
+    Object.keys(tree.items).length - 1,
   );
   const [dropzoneCount, setDropzoneCount] = useState(
-    Object.keys(tree.items).length - 1
+    Object.keys(tree.items).length - 1,
   );
 
   const updateText = useApiCallback(textsAPI.update);
 
-  const onReorderTOC = async newTree => {
+  const onReorderTOC = async (newTree) => {
     setError(null);
     const newToc = formatTOCData(newTree);
     const res = await updateText(textId, { attributes: { toc: newToc } });
     if (res?.errors) setError("reorder");
   };
 
-  const onDelete = async entryId => {
+  const onDelete = async (entryId) => {
     setError(null);
     const toDelete = [entryId, ...getNestedTreeChildren(entryId, tree.items)];
     const update = removeKeys(toDelete, tree.items);
@@ -54,12 +54,12 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
     if (destination.parentId === "root" && isNaN(destination.index)) {
       const rootParentIndex = getRootParentPosition(
         source.parentId,
-        tree.items
+        tree.items,
       );
       finalDestination = { parentId: "root", index: rootParentIndex + 1 };
     } else if (!isValidParent(destination.parentId, tree.items)) {
       finalDestination = {
-        parentId: getParentId(destination.parentId, tree.items)
+        parentId: getParentId(destination.parentId, tree.items),
       };
     } else {
       finalDestination = destination;
@@ -107,16 +107,14 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
     );
   };
 
-  /* eslint-disable no-nested-ternary */
   const errorMessage =
     error === "reorder"
       ? t("errors.toc_reorder")
       : Array.isArray(error)
-      ? error.map(e => e.detail).join(". ")
-      : error;
-  /* eslint-disable no-nested-ternary */
+        ? error.map((e) => e.detail).join(". ")
+        : error;
 
-  const onDragStart = id => {
+  const onDragStart = (id) => {
     setDragging(true);
     const nestedCount = getCollapseCount(tree.items[id], tree.items);
     setDropzoneCount(pageHeightCount - nestedCount);
@@ -149,5 +147,5 @@ TOCList.displayName = "Text.TOC.List";
 TOCList.propTypes = {
   tree: PropTypes.object.isRequired,
   setTree: PropTypes.func.isRequired,
-  textId: PropTypes.string.isRequired
+  textId: PropTypes.string.isRequired,
 };

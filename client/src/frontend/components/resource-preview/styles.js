@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { transientOptions } from "helpers/emotionHelpers";
 
-const getStylesForType = type => {
+const getStylesForType = (type) => {
   switch (type) {
     case "card":
       return `

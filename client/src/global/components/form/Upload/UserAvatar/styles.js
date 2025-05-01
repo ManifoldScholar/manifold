@@ -3,7 +3,7 @@ import {
   defaultFocusStyle,
   buttonUnstyled,
   buttonRounded,
-  formLabelPrimary
+  formLabelPrimary,
 } from "theme/styles/mixins";
 import BaseAvatar from "global/components/avatar";
 

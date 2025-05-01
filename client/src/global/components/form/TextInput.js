@@ -21,13 +21,13 @@ export default class FormTextInput extends Component {
     join: PropTypes.func,
     wide: PropTypes.bool,
     disabled: PropTypes.bool,
-    buttons: PropTypes.array
+    buttons: PropTypes.array,
   };
 
   static defaultProps = {
     focusOnMount: false,
     password: false,
-    join: array => array.join(", ")
+    join: (array) => array.join(", "),
   };
 
   get idPrefix() {
@@ -42,7 +42,7 @@ export default class FormTextInput extends Component {
     return "text-input-instructions";
   }
 
-  renderValue = value => {
+  renderValue = (value) => {
     if (!value) return "";
     if (!isArray(value)) return value;
     return this.props.join(value);
@@ -54,7 +54,7 @@ export default class FormTextInput extends Component {
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <BaseInput
             id={`${this.idPrefix}-${id}`}
             idForError={`${this.idForErrorPrefix}-${id}`}

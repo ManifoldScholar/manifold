@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: "/api/v1/export_targets",
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -12,8 +12,8 @@ export default {
       endpoint: `/api/v1/export_targets/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "exportTarget", data: exportTarget })
-      }
+        body: JSON.stringify({ type: "exportTarget", data: exportTarget }),
+      },
     };
   },
 
@@ -21,7 +21,7 @@ export default {
     return {
       endpoint: `/api/v1/export_targets/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -30,8 +30,8 @@ export default {
       endpoint: "/api/v1/export_targets",
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "exportTarget", data: exportTarget })
-      }
+        body: JSON.stringify({ type: "exportTarget", data: exportTarget }),
+      },
     };
   },
 
@@ -39,7 +39,7 @@ export default {
     return {
       endpoint: `/api/v1/export_targets/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

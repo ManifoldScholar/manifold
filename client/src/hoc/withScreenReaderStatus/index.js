@@ -7,10 +7,10 @@ function getDisplayName(WrappedComponent) {
 
 export default function withScreenReaderStatus(
   WrappedComponent,
-  renderLiveRegion = true
+  renderLiveRegion = true,
 ) {
   const displayName = `WithScreenReaderStatus('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithScreenReaderStatus extends Component {
@@ -29,17 +29,17 @@ export default function withScreenReaderStatus(
 
     get childProps() {
       const base = {
-        setScreenReaderStatus: this.setStatus
+        setScreenReaderStatus: this.setStatus,
       };
       if (renderLiveRegion) return base;
       return {
         renderLiveRegion: this.renderLiveRegion,
         currentScreenReaderStatus: this.state.message,
-        ...base
+        ...base,
       };
     }
 
-    setStatus = message => {
+    setStatus = (message) => {
       // temporarily update state with new message
       this.setState({ message });
 

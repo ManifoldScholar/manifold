@@ -18,12 +18,12 @@ export class CallToActionEdit extends Component {
     calloutable: PropTypes.object.isRequired,
     closeRoute: PropTypes.string.isRequired,
     refreshActionCallouts: PropTypes.func,
-    actionCallout: PropTypes.object
+    actionCallout: PropTypes.object,
   };
 
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
-      actionCallout: select(requests.beActionCallout, state.entityStore)
+      actionCallout: select(requests.beActionCallout, state.entityStore),
     };
   };
 

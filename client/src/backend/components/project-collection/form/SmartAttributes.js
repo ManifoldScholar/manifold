@@ -10,14 +10,14 @@ class SmartAttributes extends Component {
 
   static propTypes = {
     projectCollection: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
     const t = this.props.t;
     return (
       <FormContext.Consumer>
-        {formProps => {
+        {(formProps) => {
           if (!formProps.getModelValue("attributes[smart]")) return null;
 
           return (
@@ -26,14 +26,14 @@ class SmartAttributes extends Component {
                 label={t("project_collections.number_projects")}
                 name="attributes[numberOfProjects]"
                 instructions={t(
-                  "project_collections.number_projects_instructions"
+                  "project_collections.number_projects_instructions",
                 )}
               />
               <Form.Switch
                 label={t("project_collections.featured_projects")}
                 name="attributes[featuredOnly]"
                 instructions={t(
-                  "project_collections.featured_projects_instructions"
+                  "project_collections.featured_projects_instructions",
                 )}
               />
               <Form.Picker
@@ -41,7 +41,7 @@ class SmartAttributes extends Component {
                 listStyle={"well"}
                 name="relationships[subjects]"
                 options={subjectsAPI.index}
-                optionToLabel={subject => subject.attributes.name}
+                optionToLabel={(subject) => subject.attributes.name}
                 placeholder={t("project_collections.subjects_placeholder")}
                 predictive
                 listRowComponent="SubjectRow"
@@ -53,8 +53,8 @@ class SmartAttributes extends Component {
                 name="attributes[tagList]"
                 placeholder={t("project_collections.tags_placeholder")}
                 options={tagsAPI.index}
-                optionToLabel={tag => tag.attributes.name}
-                optionToValue={tag => tag.attributes.name}
+                optionToLabel={(tag) => tag.attributes.name}
+                optionToValue={(tag) => tag.attributes.name}
                 allowNew
               />
             </Form.FieldGroup>

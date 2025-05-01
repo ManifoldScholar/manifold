@@ -8,7 +8,7 @@ class DrawerSwitch extends React.PureComponent {
     history: PropTypes.object.isRequired,
     wrapperProps: PropTypes.object.isRequired,
     match: PropTypes.object,
-    children: PropTypes.any
+    children: PropTypes.any,
   };
 
   defaultCloseCallback = () => {

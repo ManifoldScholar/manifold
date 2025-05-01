@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Editor, Range } from "slate";
-import { useSlate, ReactEditor } from "slate-react";
+import { useSlate } from "slate-react";
 import Utility from "global/components/utility";
 import InsertLinkForm from "./insert/LinkForm";
 import { useConfirmation } from "hooks";
@@ -23,7 +23,7 @@ const LinkButton = ({ icon, size, ...rest }, ref) => {
   const textRef = useRef(null);
   const { t } = useTranslation();
 
-  const addLink = close => {
+  const addLink = (close) => {
     const url = urlRef?.current?.inputElement?.value;
     const text = textRef?.current?.inputElement?.value;
     if (!url) return;
@@ -31,7 +31,7 @@ const LinkButton = ({ icon, size, ...rest }, ref) => {
     wrapLink(editor, url, text);
   };
 
-  const getLinkData = e => {
+  const getLinkData = (e) => {
     e.preventDefault();
     const { selection } = editor ?? {};
     if (!selection) return;
@@ -59,7 +59,7 @@ const LinkButton = ({ icon, size, ...rest }, ref) => {
         form,
         callback: addLink,
         closeCallback: onModalClose(editor, selection),
-        resolveLabel: t("actions.add")
+        resolveLabel: t("actions.add"),
       });
   };
 

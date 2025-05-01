@@ -9,25 +9,25 @@ class Search extends PureComponent {
   static displayName = "Global.Footers.Parts.Search";
 
   static propTypes = {
-    push: PropTypes.func.isRequired
+    push: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      keyword: ""
+      keyword: "",
     };
   }
 
-  updateSearchWord = event => {
+  updateSearchWord = (event) => {
     this.setState({ keyword: event.target.value });
   };
 
-  doSearch = event => {
+  doSearch = (event) => {
     event.preventDefault();
     const path = lh.link("frontendSearch");
     this.props.push(path, {
-      searchQueryState: { keyword: this.state.keyword }
+      searchQueryState: { keyword: this.state.keyword },
     });
     this.setState({ keyword: "" });
   };

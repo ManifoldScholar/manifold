@@ -8,7 +8,7 @@ export const wrapLayoutBlock = ({
   format,
   node: initialNode,
   path: initialPath,
-  split
+  split,
 }) => {
   if (split)
     return Transforms.wrapNodes(editor, { type: format }, { split: true });
@@ -26,18 +26,18 @@ export const wrapLayoutBlock = ({
       editor,
       {
         ...node,
-        children: [{ type: format, children: node.children }]
+        children: [{ type: format, children: node.children }],
       },
-      { at: path, select: true }
+      { at: path, select: true },
     );
   } else {
     Transforms.insertNodes(
       editor,
       {
         type: format,
-        children: [node]
+        children: [node],
       },
-      { at: path, select: true }
+      { at: path, select: true },
     );
   }
   ReactEditor.focus(editor);

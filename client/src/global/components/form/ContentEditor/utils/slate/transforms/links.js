@@ -1,9 +1,9 @@
 import { Transforms, Editor, Range, Element } from "slate";
 import { ReactEditor } from "slate-react";
 
-export const unwrapLink = editor => {
+export const unwrapLink = (editor) => {
   Transforms.unwrapNodes(editor, {
-    match: n => !Editor.isEditor(n) && Element.isElement(n) && n.type === "a"
+    match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === "a",
   });
   ReactEditor.focus(editor);
 };
@@ -15,7 +15,7 @@ export const wrapLink = (editor, url, text) => {
   const link = {
     type: "a",
     htmlAttrs: { href: url },
-    children: isCollapsed ? [{ text: text ?? url }] : []
+    children: isCollapsed ? [{ text: text ?? url }] : [],
   };
 
   if (isCollapsed) {

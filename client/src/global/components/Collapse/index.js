@@ -13,15 +13,15 @@ function Collapse({ initialVisible, children }) {
     type: "button",
     "aria-expanded": visible,
     "aria-controls": idSeed("content"),
-    onClick: toggleVisible
+    onClick: toggleVisible,
   };
   const labelProps = {
-    id: idSeed("label")
+    id: idSeed("label"),
   };
   const contentProps = {
     id: idSeed("content"),
     role: "region",
-    "aria-labelledby": idSeed("label")
+    "aria-labelledby": idSeed("label"),
   };
 
   const value = useMemo(
@@ -30,9 +30,9 @@ function Collapse({ initialVisible, children }) {
       toggleProps,
       labelProps,
       contentProps,
-      toggleVisible
+      toggleVisible,
     }),
-    [visible, idSeed] // eslint-disable-line react-hooks/exhaustive-deps
+    [visible, idSeed], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   useEffect(() => {
@@ -50,7 +50,7 @@ Collapse.displayName = "Global.Collapse";
 
 Collapse.propTypes = {
   initialVisible: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 Collapse.Toggle = Toggle;

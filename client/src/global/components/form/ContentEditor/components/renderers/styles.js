@@ -3,7 +3,7 @@ import {
   buttonUnstyled,
   defaultFocusStyle,
   formLabelPrimary,
-  respond
+  respond,
 } from "theme/styles/mixins";
 import { rteElements, inlineNodes, markElements } from "../../utils/elements";
 
@@ -123,13 +123,13 @@ export const HrInner = styled.span`
 export const COLOR_MAP = {
   green: {
     light: "var(--color-interaction-dark)",
-    dark: "var(--color-accent-primary)"
+    dark: "var(--color-accent-primary)",
   },
   blue: { light: "var(--color-base-blue75)", dark: "var(--color-base-blue45)" },
   violet: {
     dark: "var(--color-base-violet45)",
-    light: "var(--color-base-violet75)"
-  }
+    light: "var(--color-base-violet75)",
+  },
 };
 
 export const ElementLabel = styled.span`
@@ -239,12 +239,11 @@ export const LiftButton = styled(DeleteButton)`
 `;
 
 export const getHtmlOutlineStyles = (nodeName, darkMode) => {
-  /* eslint-disable no-nested-ternary */
   const color = rteElements.includes(nodeName)
     ? "green"
     : inlineNodes.includes(nodeName) || markElements.includes(nodeName)
-    ? "blue"
-    : "violet";
+      ? "blue"
+      : "violet";
 
   return {
     outline: "2px dotted",
@@ -252,6 +251,6 @@ export const getHtmlOutlineStyles = (nodeName, darkMode) => {
     borderRadius: "2px",
     borderTopLeftRadius: 0,
     outlineOffset: "6px",
-    position: "relative"
+    position: "relative",
   };
 };

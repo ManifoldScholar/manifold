@@ -24,7 +24,7 @@ function ReadingGroupRow({
     membershipsCount,
     createdAt,
     annotationsCount,
-    annotationFlagsCount
+    annotationFlagsCount,
   } = attributes;
 
   const { t } = useTranslation();
@@ -35,9 +35,9 @@ function ReadingGroupRow({
   const additionalProps = {
     title: name,
     subtitle: `${membershipsCount} ${t("glossary.member", {
-      count: membershipsCount
+      count: membershipsCount,
     })} | ${annotationsCount} ${t("glossary.annotation", {
-      count: annotationsCount
+      count: annotationsCount,
     })}`,
     meta: (
       <FormattedDate
@@ -52,12 +52,12 @@ function ReadingGroupRow({
         ? [
             {
               text: t("records.annotations.flag_count", {
-                count: annotationFlagsCount
+                count: annotationFlagsCount,
               }),
-              level: "error"
-            }
+              level: "error",
+            },
           ]
-        : [])
+        : []),
     ],
     active: active === id,
     onRowClick: lh.link("backendReadingGroupDetails", id),
@@ -68,7 +68,7 @@ function ReadingGroupRow({
         onSelect={() => addItem(id)}
         onClear={() => removeItem(id)}
       />
-    )
+    ),
   };
 
   const utility = !bulkActionsActive ? (
@@ -79,9 +79,7 @@ function ReadingGroupRow({
     >
       <Utility.IconComposer icon="delete32" size={26} />
     </button>
-  ) : (
-    undefined
-  );
+  ) : undefined;
 
   return <EntityRow utility={utility} {...props} {...additionalProps} />;
 }
@@ -93,7 +91,7 @@ ReadingGroupRow.propTypes = {
   bulkSelection: PropTypes.object,
   addItem: PropTypes.func,
   removeItem: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
 };
 
 export default ReadingGroupRow;

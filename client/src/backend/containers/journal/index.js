@@ -25,5 +25,5 @@ export default {
   VolumeEdit,
   VolumeNew,
   VolumeWrapper,
-  AccessWrapper
+  AccessWrapper,
 };

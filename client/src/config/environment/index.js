@@ -7,18 +7,18 @@ const baseConfig = {
   isBrowser,
   isServer,
   name,
-  skipSSR
+  skipSSR,
 };
 
 const environmentSpecificConfig = {
   development: {
     isProduction: false,
-    isDevelopment: true
+    isDevelopment: true,
   },
   production: {
     isProduction: true,
-    isDevelopment: false
-  }
+    isDevelopment: false,
+  },
 }[name];
 
 export default { ...baseConfig, ...environmentSpecificConfig };

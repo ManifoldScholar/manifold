@@ -12,5 +12,5 @@ Breadcrumbs.displayName = "Global.Atomic.Breadcrumbs";
 Breadcrumbs.propTypes = {
   breadcrumbs: PropTypes.array.isRequired,
   backend: PropTypes.bool,
-  hideOnDesktop: PropTypes.bool
+  hideOnDesktop: PropTypes.bool,
 };

@@ -31,16 +31,16 @@ function UserRow({
     label: [
       {
         text: t(`records.users.role_options.${attributes.role}`),
-        level: ""
+        level: "",
       },
       ...(id === currentUser.id
         ? [
             {
               text: t("common.you"),
-              level: "notice"
-            }
+              level: "notice",
+            },
           ]
-        : [])
+        : []),
     ],
     onRowClick: lh.link("backendRecordsUser", id),
     rowClickMode: "block",
@@ -50,7 +50,7 @@ function UserRow({
         onSelect={() => addItem(id)}
         onClear={() => removeItem(id)}
       />
-    )
+    ),
   };
 
   return <EntityRow {...props} {...additionalProps} />;
@@ -63,7 +63,7 @@ UserRow.propTypes = {
   bulkActionsActive: PropTypes.bool,
   bulkSelection: PropTypes.object,
   addItem: PropTypes.func,
-  removeItem: PropTypes.func
+  removeItem: PropTypes.func,
 };
 
 export default UserRow;

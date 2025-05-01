@@ -10,18 +10,19 @@ export default function useShowJournalsActive() {
     pathname.includes("projects") &&
     !pathname.includes("project-collections")
   ) {
-    const idRegex = /[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/g;
+    const idRegex =
+      /[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/g;
     const parts = pathname.split("/");
-    id = parts.find(p => p.match(idRegex));
+    id = parts.find((p) => p.match(idRegex));
 
     if (!id) {
       slug = parts
         .filter(Boolean)
         .find(
-          p =>
+          (p) =>
             !(p === "all" || p.startsWith("all?")) &&
             p !== "backend" &&
-            p !== "projects"
+            p !== "projects",
         );
     }
   }
@@ -30,7 +31,7 @@ export default function useShowJournalsActive() {
 
   if (!id) {
     id = projects
-      ? Object.keys(projects).find(p => projects[p].attributes.slug === slug)
+      ? Object.keys(projects).find((p) => projects[p].attributes.slug === slug)
       : null;
   }
 

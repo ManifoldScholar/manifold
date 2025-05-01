@@ -12,7 +12,7 @@ export default class CategoryListCategories extends PureComponent {
     activeType: PropTypes.string,
     callbacks: PropTypes.object.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
-    dragging: PropTypes.string
+    dragging: PropTypes.string,
   };
 
   get categories() {
@@ -38,9 +38,9 @@ export default class CategoryListCategories extends PureComponent {
   categoryTexts(category) {
     return this.texts
       .filter(
-        text =>
+        (text) =>
           text.relationships.category &&
-          text.relationships.category.id === category.id
+          text.relationships.category.id === category.id,
       )
       .sort((a, b) => {
         return a.attributes.position - b.attributes.position;

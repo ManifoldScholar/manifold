@@ -16,14 +16,14 @@ const { request } = entityStoreActions;
 export class ProjectLayoutContainer extends PureComponent {
   static displayName = "Project.Layout";
 
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       contentBlocks: select(requests.beProjectContentBlocks, state.entityStore),
       contentBlocksResponse: get(
         state.entityStore.responses,
-        requests.beProjectContentBlocks
+        requests.beProjectContentBlocks,
       ),
-      actionCallouts: select(requests.beActionCallouts, state.entityStore)
+      actionCallouts: select(requests.beActionCallouts, state.entityStore),
     };
   };
 
@@ -37,14 +37,14 @@ export class ProjectLayoutContainer extends PureComponent {
     history: PropTypes.object,
     dispatch: PropTypes.func,
     route: PropTypes.object,
-    refresh: PropTypes.func
+    refresh: PropTypes.func,
   };
 
   static fetchData = (getState, dispatch, location, match) => {
     if (!match || !match.params || !match.params.id) return;
     return Promise.all([
       ProjectLayoutContainer.fetchContentBlocks(match.params.id, dispatch),
-      ProjectLayoutContainer.fetchActionCallouts(match.params.id, dispatch)
+      ProjectLayoutContainer.fetchActionCallouts(match.params.id, dispatch),
     ]);
   };
 
@@ -71,21 +71,21 @@ export class ProjectLayoutContainer extends PureComponent {
 
     return {
       closeUrl: lh.link("backendProjectLayout", project.id),
-      lockScroll: "always"
+      lockScroll: "always",
     };
   }
 
   fetchContentBlocks = () => {
     ProjectLayoutContainer.fetchContentBlocks(
       this.projectId,
-      this.props.dispatch
+      this.props.dispatch,
     );
   };
 
   fetchActionCallouts = () => {
     ProjectLayoutContainer.fetchActionCallouts(
       this.projectId,
-      this.props.dispatch
+      this.props.dispatch,
     );
   };
 
@@ -97,7 +97,7 @@ export class ProjectLayoutContainer extends PureComponent {
       refresh,
       contentBlocks,
       contentBlocksResponse,
-      route
+      route,
     } = this.props;
     const project = this.props.project;
     if (!project) return null;
@@ -134,10 +134,10 @@ export class ProjectLayoutContainer extends PureComponent {
                 project,
                 refreshActionCallouts: this.fetchActionCallouts,
                 calloutable: project,
-                closeRoute: "backendProjectLayout"
+                closeRoute: "backendProjectLayout",
               },
               drawer: true,
-              drawerProps: { wide: true, closeCallback, ...this.drawerProps }
+              drawerProps: { wide: true, closeCallback, ...this.drawerProps },
             })
           }
         </ContentBlock.Builder>

@@ -19,7 +19,7 @@ function CollectedTextSections(props) {
       ResponseComponent={({ response }) => {
         const {
           id: nodeId,
-          attributes: { name, textSlug, textTitle }
+          attributes: { name, textSlug, textTitle },
         } = response;
         return (
           <TOC.Node
@@ -39,7 +39,7 @@ CollectedTextSections.displayName = "Collecting.CollectedTextSections";
 CollectedTextSections.propTypes = {
   collectedIds: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
-  nested: PropTypes.bool
+  nested: PropTypes.bool,
 };
 
 export default CollectedTextSections;

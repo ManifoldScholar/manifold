@@ -7,7 +7,7 @@ import EntityCollection from "frontend/components/entity/Collection/EntityCollec
 class Api extends Component {
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
-      authentication: state.authentication
+      authentication: state.authentication,
     };
   };
 
@@ -25,8 +25,8 @@ class Api extends Component {
   }
 
   fetchSchema() {
-    fetch(this.url).then(response => {
-      response.json().then(schema => {
+    fetch(this.url).then((response) => {
+      response.json().then((schema) => {
         this.setState({ schema: this.adjustedSchema(schema) });
       });
     });
@@ -35,18 +35,16 @@ class Api extends Component {
   get endpointCounts() {
     if (!this.state.schema) return 0;
     let count = 0;
-    Object.keys(this.state.schema.paths).forEach(path => {
+    Object.keys(this.state.schema.paths).forEach((path) => {
       count += Object.keys(this.state.schema.paths[path]).length;
     });
     return count;
   }
 
-  /* eslint-disable no-param-reassign */
   adjustedSchema(schema) {
     delete schema.host;
     return schema;
   }
-  /* eslint-enable no-param-reassign */
 
   render() {
     if (!this.state.schema) return null;
@@ -60,8 +58,8 @@ class Api extends Component {
             <p className="description">
               Nearly all changes to data stored in a Manifold installation occur over
               Manifold's API with a base URL of <em>${config.services.api}${
-          this.state.schema.basePath
-        }</em>.
+                this.state.schema.basePath
+              }</em>.
               The API is a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">
                 REST API
               </a>
@@ -79,8 +77,8 @@ class Api extends Component {
               Any requests you send to this instance using the documentation below
               will be sent with your current authorization token and will operate on the current data for
               <a href="${config.services.api}">${
-          config.services.api
-        }</a> so proceed with caution.
+                config.services.api
+              }</a> so proceed with caution.
             </p>
             <p className="description">
               Manifold's API documentation follows the <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md">

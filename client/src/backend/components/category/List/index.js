@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
   DragDropContext,
-  Droppable
+  Droppable,
 } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import Categories from "./Categories";
@@ -17,7 +17,7 @@ class CategoryList extends PureComponent {
     categories: PropTypes.array.isRequired,
     texts: PropTypes.array.isRequired,
     callbacks: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -25,11 +25,11 @@ class CategoryList extends PureComponent {
     this.state = { activeType: null };
   }
 
-  onDragStart = draggable => {
+  onDragStart = (draggable) => {
     this.setState({ activeType: draggable.type });
   };
 
-  onDragEnd = draggable => {
+  onDragEnd = (draggable) => {
     this.setState({ activeType: null });
     if (!draggable.destination) return;
     if (draggable.type === "category") this.updateCategoryPosition(draggable);
@@ -49,7 +49,7 @@ class CategoryList extends PureComponent {
       destination,
       position,
       callback,
-      true
+      true,
     );
   };
 
@@ -71,18 +71,18 @@ class CategoryList extends PureComponent {
 
   get uncategorizedTexts() {
     return this.texts
-      .filter(text => !text.relationships.category)
+      .filter((text) => !text.relationships.category)
       .sort((a, b) => {
         return a.attributes.position - b.attributes.position;
       });
   }
 
   findText(id) {
-    return this.texts.find(t => t.id === id);
+    return this.texts.find((t) => t.id === id);
   }
 
   findCategory(id) {
-    return this.categories.find(c => c.id === id);
+    return this.categories.find((c) => c.id === id);
   }
 
   updateCategoryPosition(draggable) {
@@ -90,7 +90,7 @@ class CategoryList extends PureComponent {
     const position = destination.index + 1;
     this.props.callbacks.updateCategoryPosition(
       this.findCategory(draggableId),
-      position
+      position,
     );
   }
 
@@ -102,7 +102,7 @@ class CategoryList extends PureComponent {
     this.props.callbacks.updateTextCategoryAndPosition(
       text,
       category,
-      position
+      position,
     );
   }
 
@@ -120,7 +120,7 @@ class CategoryList extends PureComponent {
                   className={classNames({
                     "text-categories__dropzone": true,
                     "text-categories__dropzone--active":
-                      this.state.activeType === "category"
+                      this.state.activeType === "category",
                   })}
                   ref={provided.innerRef}
                   {...provided.droppableProps}

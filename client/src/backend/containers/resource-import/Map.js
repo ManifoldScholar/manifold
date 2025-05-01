@@ -17,7 +17,7 @@ export class ResourceImportMap extends PureComponent {
     history: PropTypes.object.isRequired,
     create: PropTypes.func.isRequired,
     update: PropTypes.func.isRequired,
-    resourceImport: PropTypes.object.isRequired
+    resourceImport: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -27,13 +27,13 @@ export class ResourceImportMap extends PureComponent {
       const url = lh.link(
         "backendResourceImportEdit",
         projectId,
-        resourceImport.id
+        resourceImport.id,
       );
       this.props.history.push(url);
     }
   }
 
-  onSuccess = model => {
+  onSuccess = (model) => {
     const { projectId } = this.props.match.params;
     const importId = model.id;
     const url = lh.link("backendResourceImportResults", projectId, importId);
@@ -43,7 +43,7 @@ export class ResourceImportMap extends PureComponent {
   get buttonClasses() {
     return classNames(
       "buttons-icon-horizontal__button",
-      "button-icon-secondary"
+      "button-icon-secondary",
     );
   }
 
@@ -52,11 +52,11 @@ export class ResourceImportMap extends PureComponent {
     return lh.link(
       "backendResourceImportEdit",
       match.params.projectId,
-      match.params.id
+      match.params.id,
     );
   }
 
-  create = model => {
+  create = (model) => {
     return this.props.create(this.preSave(model));
   };
 
@@ -64,12 +64,10 @@ export class ResourceImportMap extends PureComponent {
     return this.props.update(id, this.preSave(model));
   };
 
-  /* eslint-disable no-param-reassign */
-  preSave = model => {
+  preSave = (model) => {
     model.attributes.state = "mapped";
     return model;
   };
-  /* eslint-enable no-param-reassign */
 
   render() {
     const { resourceImport, t } = this.props;
@@ -96,7 +94,7 @@ export class ResourceImportMap extends PureComponent {
                 to={this.backLinkUrl()}
                 className={classNames(
                   this.buttonClasses,
-                  "button-icon-secondary--dull"
+                  "button-icon-secondary--dull",
                 )}
               >
                 <IconComposer

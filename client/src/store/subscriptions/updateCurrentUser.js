@@ -23,7 +23,7 @@ function currentUserEntity(state) {
 function currentUserCollectionEntity(state) {
   if (!currentAuthUserId(state)) return null;
   const path = `entityStore.entities.userCollections.${currentAuthUserId(
-    state
+    state,
   )}-collection`;
   return get(state, path);
 }
@@ -59,7 +59,9 @@ function shouldUpdateCurrentUserCollection(lastState, currentState) {
 
 function updateCurrentUserCollection(state, store) {
   store.dispatch(
-    currentUserActions.replaceUserCollection(currentUserCollectionEntity(state))
+    currentUserActions.replaceUserCollection(
+      currentUserCollectionEntity(state),
+    ),
   );
 }
 

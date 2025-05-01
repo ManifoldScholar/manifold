@@ -10,7 +10,7 @@ export class AnnotationShareEditor extends PureComponent {
   static propTypes = {
     section: PropTypes.object,
     cancel: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -21,7 +21,7 @@ export class AnnotationShareEditor extends PureComponent {
 
     this.state = {
       style: styles[0],
-      copied: false
+      copied: false,
     };
   }
 
@@ -29,22 +29,22 @@ export class AnnotationShareEditor extends PureComponent {
     this.ci.focus();
   }
 
-  setStyle = event => {
+  setStyle = (event) => {
     this.setState({ style: event.target.value, copied: false });
   };
 
-  handleCancel = event => {
+  handleCancel = (event) => {
     event.preventDefault();
     if (this.props.cancel) {
       this.props.cancel(event);
     }
   };
 
-  handleCitationChange = event => {
+  handleCitationChange = (event) => {
     this.setState({ citation: event.target.value, copied: false });
   };
 
-  handleCopyClick = event => {
+  handleCopyClick = (event) => {
     event.preventDefault();
     const range = document.createRange();
     range.selectNode(this.ci);
@@ -69,7 +69,7 @@ export class AnnotationShareEditor extends PureComponent {
             key={style}
             className={classNames({
               citation__radio: true,
-              "citation__radio--active": style === selected
+              "citation__radio--active": style === selected,
             })}
           >
             <input
@@ -96,7 +96,7 @@ export class AnnotationShareEditor extends PureComponent {
     const { attributes } = this.props.section ?? {};
     const {
       citations,
-      metadata: { citationOverride }
+      metadata: { citationOverride },
     } = attributes ?? {};
 
     return (
@@ -111,12 +111,12 @@ export class AnnotationShareEditor extends PureComponent {
           )}
           <div
             className="citation__copyable"
-            ref={ci => {
+            ref={(ci) => {
               this.ci = ci;
             }}
             style={{ width: "100%" }}
             dangerouslySetInnerHTML={{
-              __html: citationOverride ?? citations[this.state.style]
+              __html: citationOverride ?? citations[this.state.style],
             }}
           />
           <div className="annotation-editor__actions">

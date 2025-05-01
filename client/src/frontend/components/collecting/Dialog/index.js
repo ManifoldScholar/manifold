@@ -13,7 +13,7 @@ function CollectingDialog({
   readingGroups,
   currentUser,
   onChange,
-  onClose
+  onClose,
 }) {
   const uidSeed = useUIDSeed();
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ function CollectingDialog({
   }
 
   function getReadingGroup(id) {
-    return readingGroups.find(rg => rg.id === id);
+    return readingGroups.find((rg) => rg.id === id);
   }
 
   function inReadingGroup(id) {
@@ -32,7 +32,7 @@ function CollectingDialog({
 
   function collectionForId(id) {
     if (id === "me") return currentUser;
-    return readingGroups.find(rg => rg.id === id);
+    return readingGroups.find((rg) => rg.id === id);
   }
 
   function onCheckboxChange(event) {
@@ -54,7 +54,7 @@ function CollectingDialog({
       describedBy={uidSeed("description")}
       closeCallback={onClose}
       maxWidth={550}
-      onClick={event => event.stopPropagation()}
+      onClick={(event) => event.stopPropagation()}
     >
       <Styled.Inner>
         <Styled.Header>
@@ -74,10 +74,10 @@ function CollectingDialog({
               onChange={onCheckboxChange}
               checked={inMyCollection()}
             />
-            {readingGroups.map(group => {
+            {readingGroups.map((group) => {
               const {
                 id,
-                attributes: { name, privacy }
+                attributes: { name, privacy },
               } = group;
               return (
                 <Checkbox
@@ -109,7 +109,7 @@ CollectingDialog.propTypes = {
   title: PropTypes.string.isRequired,
   readingGroups: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 };
 
 export default CollectingDialog;

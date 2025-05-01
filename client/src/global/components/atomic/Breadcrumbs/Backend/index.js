@@ -6,11 +6,10 @@ import * as Styled from "./styles";
 
 export default function BackendBreadcrumbs({
   breadcrumbs,
-  hideOnDesktop = false
+  hideOnDesktop = false,
 }) {
   const { t } = useTranslation();
 
-  /* eslint-disable react/no-array-index-key */
   return (
     <Styled.BackendOuter
       aria-label={t("navigation.breadcrumbs.aria_label")}
@@ -50,5 +49,5 @@ BackendBreadcrumbs.displayName = "Global.Atomic.Breadcrumbs.Backend";
 
 BackendBreadcrumbs.propTypes = {
   breadcrumbs: PropTypes.array.isRequired,
-  hideOnDesktop: PropTypes.bool
+  hideOnDesktop: PropTypes.bool,
 };

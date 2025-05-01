@@ -4,7 +4,7 @@ import {
   listUnstyled,
   defaultHoverStyle,
   buttonUnstyled,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export default `
@@ -227,7 +227,7 @@ export default `
         color: inherit;
         cursor: default;
       `,
-      40
+      40,
     )}
   }
 
@@ -251,7 +251,7 @@ export default `
         margin-right: 12px;
         font-size: 21px;
       `,
-      40
+      40,
     )}
   }
 

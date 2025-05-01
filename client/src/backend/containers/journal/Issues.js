@@ -9,7 +9,7 @@ import { withRouter } from "react-router-dom";
 import { useFetch, useListQueryParams } from "hooks";
 import EntitiesList, {
   Button,
-  JournalIssueRow
+  JournalIssueRow,
 } from "backend/components/list/EntitiesList";
 
 function JournalIssuesContainer({ refresh, journal, route }) {
@@ -17,11 +17,15 @@ function JournalIssuesContainer({ refresh, journal, route }) {
 
   const { pagination, filters } = useListQueryParams({
     initSize: 10,
-    initFilters: { withUpdateAbility: true }
+    initFilters: { withUpdateAbility: true },
   });
 
-  const { data, refresh: refreshIssues, meta } = useFetch({
-    request: [journalsAPI.journalIssues, journal.id, pagination, filters]
+  const {
+    data,
+    refresh: refreshIssues,
+    meta,
+  } = useFetch({
+    request: [journalsAPI.journalIssues, journal.id, pagination, filters],
   });
 
   const { t } = useTranslation();
@@ -44,7 +48,7 @@ function JournalIssuesContainer({ refresh, journal, route }) {
         titleTag="h2"
         entities={data}
         unit={t("glossary.issue_truncated", {
-          count: meta?.pagination?.totalCount || 0
+          count: meta?.pagination?.totalCount || 0,
         })}
         pagination={meta.pagination}
         showCount
@@ -55,7 +59,7 @@ function JournalIssuesContainer({ refresh, journal, route }) {
             text={t("issues.add_button_label")}
             authorizedFor={journal}
             authorizedTo="update"
-          />
+          />,
         ]}
       />
       {childRoutes(route, {
@@ -64,21 +68,21 @@ function JournalIssuesContainer({ refresh, journal, route }) {
           lockScroll: "always",
           wide: true,
           lockScrollClickCloses: false,
-          closeUrl
+          closeUrl,
         },
         childProps: {
           refresh,
           refreshIssues,
           journal,
-          closeUrl: lh.link("backendJournalIssues", journal.id)
-        }
+          closeUrl: lh.link("backendJournalIssues", journal.id),
+        },
       })}
     </Authorize>
   );
 }
 
 JournalIssuesContainer.propTypes = {
-  journal: PropTypes.object
+  journal: PropTypes.object,
 };
 
 export default withRouter(JournalIssuesContainer);

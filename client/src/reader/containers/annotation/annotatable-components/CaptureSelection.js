@@ -6,7 +6,7 @@ import {
   isMathMLNode,
   isMathMLWrapper,
   findFirstMathUuidNode,
-  findLastMathUuidNode
+  findLastMathUuidNode,
 } from "./mathHelpers";
 import { generateFragment } from "./text-fragments-polyfill/fragment-generation-utils";
 
@@ -20,13 +20,13 @@ class AnnotatableCaptureSelection extends Component {
       selectionComplete: PropTypes.bool,
       selectionAnnotation: PropTypes.object,
       popupTriggerX: PropTypes.number,
-      popupTriggerY: PropTypes.number
+      popupTriggerY: PropTypes.number,
     }),
     updateSelection: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     popupRef: PropTypes.object,
     setSelectableRef: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -37,13 +37,14 @@ class AnnotatableCaptureSelection extends Component {
   componentDidMount() {
     window.addEventListener("keyup", this.handleKeyUp);
 
-    window.addEventListener("copy", e => {
+    window.addEventListener("copy", (e) => {
       const manifoldSelection = this.props.selectionState?.selection?.text;
 
       // include native selection on the off chance that the popup wasn't triggered
       // happens after hot-reload in dev, probably unlikely in prod
-      const nativeSelection = this.mapNativeSelection(this.nativeSelection)
-        ?.text;
+      const nativeSelection = this.mapNativeSelection(
+        this.nativeSelection,
+      )?.text;
 
       const selection = manifoldSelection ?? nativeSelection;
 
@@ -53,7 +54,7 @@ class AnnotatableCaptureSelection extends Component {
       }
     });
 
-    window.addEventListener("contextmenu", e => {
+    window.addEventListener("contextmenu", (e) => {
       const targetIsLastSelection =
         e.target.getAttribute("data-annotation-ids") === "selection";
 
@@ -103,7 +104,7 @@ class AnnotatableCaptureSelection extends Component {
 
   firstAndLastAnnotationNode(id) {
     const nodes = document.querySelectorAll(`[data-annotation-ids*="${id}"]`);
-    const finder = n => n.nodeType === Node.TEXT_NODE;
+    const finder = (n) => n.nodeType === Node.TEXT_NODE;
 
     // If the node is our MathML styling wrapper, descend into it to retrieve text nodes.
     const firstNode = isMathMLWrapper(nodes[0])
@@ -126,7 +127,7 @@ class AnnotatableCaptureSelection extends Component {
       selectionAnnotation: null,
       popupTriggerX: null,
       popupTriggerY: null,
-      ...merge
+      ...merge,
     };
   }
 
@@ -146,7 +147,7 @@ class AnnotatableCaptureSelection extends Component {
     if (
       !selectionHelpers.parentContainsSelection(
         this.props.annotatableRef,
-        nativeSelection
+        nativeSelection,
       )
     )
       return true;
@@ -172,7 +173,7 @@ class AnnotatableCaptureSelection extends Component {
         selectionComplete: complete,
         popupTriggerX: selection && x ? x : selectionState.popupTriggerX,
         popupTriggerY: selection && y ? y : selectionState.popupTriggerY,
-        textFragment: generateFragment(window.getSelection())
+        textFragment: generateFragment(window.getSelection()),
       });
       this.props.updateSelection(newState);
       window.getSelection().empty();
@@ -192,14 +193,14 @@ class AnnotatableCaptureSelection extends Component {
 
     // 1. Find the closest element with a data-node-uuid attribute
     const startNode = selectionHelpers.findClosestTextNode(
-      range.startContainer
+      range.startContainer,
     );
     // 2. Create a new range that ends with the start point of our existing range
     const startRange = document.createRange();
     startRange.setStart(startNode, 0);
     try {
       startRange.setEnd(range.startContainer, range.startOffset + 1);
-    } catch (error) {
+    } catch (_) {
       startRange.setEnd(range.startContainer, range.startOffset);
     }
     // 3. Find the offset from the data-node-uuid start element
@@ -228,7 +229,7 @@ class AnnotatableCaptureSelection extends Component {
       endNode = startNode;
       endRange.setStart(endNode, 0);
       const endContainer = [...endNode.childNodes].find(
-        node => node.nodeType === Node.TEXT_NODE
+        (node) => node.nodeType === Node.TEXT_NODE,
       );
       endRange.setEnd(endContainer, endNode.textContent.length);
     } else {
@@ -249,7 +250,7 @@ class AnnotatableCaptureSelection extends Component {
     const { startNode, startChar, adjustStart } = this.findStartValues(range);
     const { endNode, endChar, adjustEnd } = this.findEndValues(
       range,
-      startNode
+      startNode,
     );
 
     // Adjust the selection range if we added characters to capture an entire mathematical expression.
@@ -261,7 +262,7 @@ class AnnotatableCaptureSelection extends Component {
       startChar,
       endNode: endNode.dataset.nodeUuid,
       endChar,
-      subject: this.extractText(range)
+      subject: this.extractText(range),
     };
     return annotation;
   }
@@ -269,10 +270,11 @@ class AnnotatableCaptureSelection extends Component {
   extractText(range) {
     try {
       const fragment = range.cloneContents();
-      const blockRegex = /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr|math)$/i;
+      const blockRegex =
+        /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr|math)$/i;
 
       let text = "";
-      fragment.childNodes.forEach(node => {
+      fragment.childNodes.forEach((node) => {
         if (node.nodeType === Node.ELEMENT_NODE) {
           text += node.innerText ?? node.textContent;
           if (blockRegex.test(node.nodeName)) {
@@ -285,7 +287,7 @@ class AnnotatableCaptureSelection extends Component {
       });
       text = text.trim();
       return text;
-    } catch (error) {
+    } catch (_) {
       return range.toString();
     }
   }
@@ -303,20 +305,20 @@ class AnnotatableCaptureSelection extends Component {
       anchorOffset: nativeSelection.anchorOffset,
       focusNode: nativeSelection.focusNode,
       focusOffset: nativeSelection.focusOffset,
-      startNode: selectionHelpers.findClosestTextNode(range.startContainer)
+      startNode: selectionHelpers.findClosestTextNode(range.startContainer),
     };
     return mappedSelection;
   }
 
-  handleTouchEnd = event => {
+  handleTouchEnd = (event) => {
     this.updateSelectionState(event, true);
   };
 
-  handleMouseUp = event => {
+  handleMouseUp = (event) => {
     this.updateSelectionState(event, true);
   };
 
-  handleKeyUp = event => {
+  handleKeyUp = (event) => {
     const { key, shiftKey } = event;
     if (key === "Shift" && shiftKey === false) {
       const selectionNode = window.getSelection().anchorNode;
@@ -325,7 +327,7 @@ class AnnotatableCaptureSelection extends Component {
     }
   };
 
-  handleMouseDown = event => {
+  handleMouseDown = (event) => {
     if (!this.props.selectionState.selectionComplete) return;
 
     this.updateSelectionState(event);
@@ -333,7 +335,7 @@ class AnnotatableCaptureSelection extends Component {
 
   render() {
     /* Element captures events that bubble from nested interactive elements */
-    /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */
+    /* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */
     return (
       <div
         id="text-section-interactive-region"

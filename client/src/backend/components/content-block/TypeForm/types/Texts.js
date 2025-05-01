@@ -8,7 +8,7 @@ class ProjectContentTypeFormTexts extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultAttributes = {
@@ -16,7 +16,7 @@ class ProjectContentTypeFormTexts extends PureComponent {
     showSubtitles: true,
     showCategoryLabels: true,
     showCovers: true,
-    showUncategorized: true
+    showUncategorized: true,
   };
 
   get categories() {
@@ -74,7 +74,7 @@ class ProjectContentTypeFormTexts extends PureComponent {
           />
           <Form.Switch
             label={this.props.t(
-              "content_blocks.texts.show_uncategorized_texts"
+              "content_blocks.texts.show_uncategorized_texts",
             )}
             name="attributes[showUncategorized]"
             isPrimary
@@ -84,9 +84,9 @@ class ProjectContentTypeFormTexts extends PureComponent {
           <Form.Picker
             placeholder={this.props.t("content_blocks.texts.add_text_category")}
             label={this.props.t(
-              "content_blocks.texts.include_texts_in_category"
+              "content_blocks.texts.include_texts_in_category",
             )}
-            optionToLabel={rc => rc.attributes.title}
+            optionToLabel={(rc) => rc.attributes.title}
             name="relationships[includedCategories]"
             options={this.categories}
             listStyle="rows"

@@ -10,12 +10,12 @@ export default function NavigationSecondary(props) {
   const { ariaLabel, links, panel } = props;
   const { t } = useTranslation();
 
-  const pathForLink = link => {
+  const pathForLink = (link) => {
     const args = link.args || [];
     return lh.link(link.route, ...args);
   };
 
-  const renderItem = link => {
+  const renderItem = (link) => {
     return (
       <li key={link.route}>
         <NavLink to={pathForLink(link)} activeClassName="active">
@@ -36,13 +36,13 @@ export default function NavigationSecondary(props) {
   const renderContents = () => {
     const navClasses = classnames({
       "secondary-nav": true,
-      "panel-nav": panel
+      "panel-nav": panel,
     });
 
     return (
       <nav className={navClasses} aria-label={getAriaLabel()}>
         <ul>
-          {links.map(link => {
+          {links.map((link) => {
             if (link.ability || link.kind)
               return (
                 <Authorize
@@ -78,5 +78,5 @@ NavigationSecondary.displayName = "Layout.SecondaryNav";
 NavigationSecondary.propTypes = {
   links: PropTypes.array,
   panel: PropTypes.bool,
-  ariaLabel: PropTypes.string
+  ariaLabel: PropTypes.string,
 };

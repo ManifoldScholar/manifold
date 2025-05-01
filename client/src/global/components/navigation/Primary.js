@@ -18,7 +18,7 @@ export default function NavigationPrimary(props) {
 
   const resources = useFromStore(`entityStore.entities.resources`);
   const resourceCollections = useFromStore(
-    `entityStore.entities.resourceCollections`
+    `entityStore.entities.resourceCollections`,
   );
   const pages = useFromStore(`entityStore.entities.pages`);
   const texts = useFromStore(`entityStore.entities.texts`);
@@ -26,7 +26,7 @@ export default function NavigationPrimary(props) {
   const to = getDestinationPath({
     mode: props.mode,
     pathname,
-    entities: { resources, resourceCollections, pages, texts }
+    entities: { resources, resourceCollections, pages, texts },
   });
 
   const authorization = new Authorization();
@@ -39,8 +39,8 @@ export default function NavigationPrimary(props) {
       "project_creator",
       "project_editor",
       "project_property_manager",
-      "journal_editor"
-    ]
+      "journal_editor",
+    ],
   });
 
   const adminModeButton = canAccessAdmin ? (
@@ -75,5 +75,5 @@ NavigationPrimary.propTypes = {
   mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
   exact: PropTypes.bool,
   desktopStyle: PropTypes.object,
-  mobileStyle: PropTypes.object
+  mobileStyle: PropTypes.object,
 };

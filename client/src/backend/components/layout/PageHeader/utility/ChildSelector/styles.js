@@ -5,7 +5,7 @@ import {
   listUnstyled,
   defaultTransitionProps,
   respond,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import { NavLink } from "react-router-dom";

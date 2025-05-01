@@ -3,5 +3,5 @@ import JournalDescription from "./JournalDescription";
 
 export default {
   JournalDescription,
-  ProjectDescription
+  ProjectDescription,
 };

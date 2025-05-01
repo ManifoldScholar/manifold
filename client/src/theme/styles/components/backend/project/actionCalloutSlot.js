@@ -5,7 +5,7 @@ import {
   defaultTransitionProps,
   lighten,
   dragging,
-  revealOnFocus
+  revealOnFocus,
 } from "theme/styles/mixins";
 
 export default `

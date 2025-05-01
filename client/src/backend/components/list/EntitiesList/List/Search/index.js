@@ -19,19 +19,19 @@ class ListEntitiesListSearch extends PureComponent {
     onReset: PropTypes.func.isRequired,
     searchStyle: PropTypes.oneOf(["horizontal", "vertical"]),
     onFilterChange: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     params: [],
     values: {},
-    searchStyle: "horizontal"
+    searchStyle: "horizontal",
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      keyword: ""
+      keyword: "",
     };
   }
 
@@ -48,13 +48,13 @@ class ListEntitiesListSearch extends PureComponent {
     }
   }
 
-  onSubmit = event => {
+  onSubmit = (event) => {
     event.preventDefault();
   };
 
   get filterParams() {
     return this.params.filter(
-      p => !this.reservedNames.includes(p.name) && !p.hidden
+      (p) => !this.reservedNames.includes(p.name) && !p.hidden,
     );
   }
 
@@ -119,7 +119,7 @@ class ListEntitiesListSearch extends PureComponent {
     if (this.props.onFilterChange) this.props.onFilterChange();
   }
 
-  submitKeywordForm = event => {
+  submitKeywordForm = (event) => {
     event.preventDefault();
     const { setParam } = this.props;
     setParam(this.keywordParam, this.state.keyword);
@@ -146,7 +146,7 @@ class ListEntitiesListSearch extends PureComponent {
   }
 
   paramByName(paramName) {
-    return this.params.find(p => p.name === paramName);
+    return this.params.find((p) => p.name === paramName);
   }
 
   hasParam(paramLike) {
@@ -154,7 +154,7 @@ class ListEntitiesListSearch extends PureComponent {
     return isPlainObject(param);
   }
 
-  resetSearch = event => {
+  resetSearch = (event) => {
     event.preventDefault();
     this.setState({ keyword: "" });
     this.props.onReset();
@@ -164,11 +164,10 @@ class ListEntitiesListSearch extends PureComponent {
     return classNames({
       [className]: true,
       [`${className}--horizontal`]: this.searchStyle === "horizontal",
-      [`${className}--vertical`]: this.searchStyle === "vertical"
+      [`${className}--vertical`]: this.searchStyle === "vertical",
     });
   }
 
-  /* eslint-disable react/no-array-index-key */
   /* these filters never change after render */
   render() {
     const baseClass = "entity-list-search";
@@ -187,8 +186,8 @@ class ListEntitiesListSearch extends PureComponent {
                   </span>
                 </button>
                 <div className={`${baseClass}__keyword-input-wrapper`}>
-                  <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
-                    {id => (
+                  <UIDConsumer name={(id) => `${this.idPrefix}-${id}`}>
+                    {(id) => (
                       <>
                         <label htmlFor={id} className="screen-reader-text">
                           {t("search.instructions")}
@@ -199,7 +198,7 @@ class ListEntitiesListSearch extends PureComponent {
                           value={this.state.keyword}
                           type="text"
                           placeholder={this.paramLabel(this.keywordParam)}
-                          onChange={e => this.setKeywordState(e)}
+                          onChange={(e) => this.setKeywordState(e)}
                         />
                       </>
                     )}
@@ -224,12 +223,12 @@ class ListEntitiesListSearch extends PureComponent {
           )}
           {this.hasOptions && (
             <Collapse.Content>
-              <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
-                {id => (
+              <UIDConsumer name={(id) => `${this.idPrefix}-${id}`}>
+                {(id) => (
                   <>
                     <div
                       className={this.classNameWithStyle(
-                        `${baseClass}__options`
+                        `${baseClass}__options`,
                       )}
                     >
                       {this.filterParams.map((param, i) => {
@@ -237,7 +236,7 @@ class ListEntitiesListSearch extends PureComponent {
                           <div
                             key={i}
                             className={this.classNameWithStyle(
-                              `${baseClass}__option`
+                              `${baseClass}__option`,
                             )}
                           >
                             <div>
@@ -264,7 +263,7 @@ class ListEntitiesListSearch extends PureComponent {
                                 </label>
                                 <Styled.Select
                                   id={`${id}-filter-${i}`}
-                                  onChange={e => this.setParam(e, param)}
+                                  onChange={(e) => this.setParam(e, param)}
                                   value={this.paramValue(param)}
                                 >
                                   {this.paramOptions(param).map(
@@ -275,7 +274,7 @@ class ListEntitiesListSearch extends PureComponent {
                                       >
                                         {option.label}
                                       </option>
-                                    )
+                                    ),
                                   )}
                                 </Styled.Select>
                                 <Styled.Icon icon="disclosureDown24" />
@@ -287,7 +286,7 @@ class ListEntitiesListSearch extends PureComponent {
                       {this.hasOrderParam && (
                         <div
                           className={this.classNameWithStyle(
-                            `${baseClass}__option`
+                            `${baseClass}__option`,
                           )}
                         >
                           <div>
@@ -303,7 +302,7 @@ class ListEntitiesListSearch extends PureComponent {
                               </label>
                               <Styled.Select
                                 id={`${id}-order`}
-                                onChange={e =>
+                                onChange={(e) =>
                                   this.setParam(e, this.orderParam)
                                 }
                                 value={this.paramValue(this.orderParam)}
@@ -316,7 +315,7 @@ class ListEntitiesListSearch extends PureComponent {
                                     >
                                       {option.label}
                                     </option>
-                                  )
+                                  ),
                                 )}
                               </Styled.Select>
                               <Styled.Icon icon="disclosureDown24" />

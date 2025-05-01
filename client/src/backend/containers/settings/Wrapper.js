@@ -13,7 +13,7 @@ export class SettingsWrapperContainer extends PureComponent {
   static propTypes = {
     route: PropTypes.object,
     location: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -28,13 +28,13 @@ export class SettingsWrapperContainer extends PureComponent {
       <Authorize
         entity="settings"
         failureFatalError={{
-          body: this.props.t("settings.unauthorized")
+          body: this.props.t("settings.unauthorized"),
         }}
         ability="update"
       >
         <HeadContent
           title={`${t(`titles.${subpageOverride ?? subpage}`)} | ${t(
-            "common.admin"
+            "common.admin",
           )}`}
           appendDefaultTitle
         />
@@ -55,5 +55,5 @@ export class SettingsWrapperContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  connect(SettingsWrapperContainer.mapStateToProps)(SettingsWrapperContainer)
+  connect(SettingsWrapperContainer.mapStateToProps)(SettingsWrapperContainer),
 );

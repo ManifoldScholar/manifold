@@ -10,7 +10,7 @@ class SearchMenuButton extends PureComponent {
     active: PropTypes.bool,
     className: PropTypes.string,
     iconSize: PropTypes.oneOf([22, 32]),
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get iconSize() {
@@ -21,7 +21,7 @@ class SearchMenuButton extends PureComponent {
     return this.iconSize === 32 ? "search24" : "search16";
   }
 
-  clickHandler = event => {
+  clickHandler = (event) => {
     event.stopPropagation();
     this.props.toggleSearchMenu();
   };
@@ -29,7 +29,7 @@ class SearchMenuButton extends PureComponent {
   render() {
     const buttonClass = classNames(this.props.className, {
       "button-search": true,
-      "button-active": this.props.active
+      "button-active": this.props.active,
     });
     return (
       <button

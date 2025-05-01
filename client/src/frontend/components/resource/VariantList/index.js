@@ -7,7 +7,7 @@ class ResourceVariantList extends Component {
   static displayName = "Resource.VariantList";
 
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
   };
 
   renderVariant(variant) {
@@ -28,10 +28,10 @@ class ResourceVariantList extends Component {
   renderVariants() {
     const variants = ["variantFormatOne", "variantFormatTwo", "highRes"];
     return variants
-      .map(variant => {
+      .map((variant) => {
         return this.renderVariant(variant);
       })
-      .filter(item => item);
+      .filter((item) => item);
   }
 
   render() {

@@ -8,7 +8,7 @@ export default class InputError extends Component {
     errors: PropTypes.array,
     name: PropTypes.string,
     idForError: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   hasErrors = () => {
@@ -24,7 +24,6 @@ export default class InputError extends Component {
     return `${out}.`;
   }
 
-  /* eslint-disable react/no-array-index-key */
   render() {
     if (this.hasErrors()) {
       return (

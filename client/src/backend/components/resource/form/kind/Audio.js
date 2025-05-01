@@ -7,7 +7,7 @@ class ResourceFormKindAudio extends PureComponent {
   static displayName = "Resource.Form.Kind.Audio";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

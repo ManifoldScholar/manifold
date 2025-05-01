@@ -26,7 +26,7 @@ export default function DrawerWrapper({
     if (dispatch) dispatch(notificationActions.removeNotifications("drawer"));
   };
 
-  const handleLeaveEvent = e => {
+  const handleLeaveEvent = (e) => {
     clearDrawerNotifications();
 
     if (closeCallback) {
@@ -49,7 +49,7 @@ export default function DrawerWrapper({
               identifier === "annotations-drawer" ||
               identifier === "toc-drawer"
                 ? 150
-                : 500
+                : 500,
           }}
         />
         <Content
@@ -96,5 +96,5 @@ DrawerWrapper.propTypes = {
   includeDrawerFrontMatter: PropTypes.bool,
   returnFocusOnDeactivate: PropTypes.bool,
   focusTrap: PropTypes.bool,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

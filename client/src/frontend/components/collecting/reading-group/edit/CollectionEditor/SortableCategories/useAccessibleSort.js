@@ -16,7 +16,7 @@ const omitMarkdownBlocks = (index, direction, categories) => {
 };
 
 const getTargetCategory = (sourceId, categories, direction) => {
-  const sourceIndex = categories.findIndex(c => c.id === sourceId);
+  const sourceIndex = categories.findIndex((c) => c.id === sourceId);
 
   const initialTargetIndex =
     direction === "down" ? sourceIndex + 1 : sourceIndex - 1;
@@ -24,7 +24,7 @@ const getTargetCategory = (sourceId, categories, direction) => {
   const targetIndex = omitMarkdownBlocks(
     initialTargetIndex,
     direction,
-    categories
+    categories,
   );
 
   return categories[targetIndex];
@@ -34,66 +34,71 @@ export default function useAccessibleSort(
   categories,
   mappings,
   onCollectableDrop,
-  onCategoryDrop
+  onCategoryDrop,
 ) {
   const { t } = useTranslation();
 
   const [targetCategory, setTargetCategory] = useState(null);
 
-  const onCollectableMove = sourceId => ({ id, type, direction }) => {
-    const target = getTargetCategory(
-      sourceId,
-      [...categories, { id: "$uncategorized$" }],
-      direction,
-      t
-    );
+  const onCollectableMove =
+    (sourceId) =>
+    ({ id, type, direction }) => {
+      const target = getTargetCategory(
+        sourceId,
+        [...categories, { id: "$uncategorized$" }],
+        direction,
+        t,
+      );
 
-    if (!target) return;
+      if (!target) return;
 
-    setTargetCategory(target.id);
+      setTargetCategory(target.id);
 
-    const result = handleAddCollectableToCategory(
-      { data: { id, type, categoryId: sourceId } },
-      { id: target.id },
-      mappings
-    );
-    onCollectableDrop(result, { data: { id, type } });
-    announce(
-      t("messages.item_moved_category", {
-        category: target.title || t("common.uncategorized")
-      })
-    );
-  };
-
-  const onCollectableSort = sourceId => ({ id, type, direction }) => {
-    const list = mappings[sourceId][type];
-
-    const startIndex = list.findIndex(m => m === id);
-    const finishIndex = direction === "down" ? startIndex + 1 : startIndex - 1;
-
-    const result = {
-      ...mappings,
-      [sourceId]: {
-        ...mappings[sourceId],
-        [type]: reorderWithEdge({
-          axis: "vertical",
-          list,
-          startIndex,
-          indexOfTarget: finishIndex,
-          closestEdgeOfTarget: direction === "down" ? "bottom" : "top"
-        })
-      }
+      const result = handleAddCollectableToCategory(
+        { data: { id, type, categoryId: sourceId } },
+        { id: target.id },
+        mappings,
+      );
+      onCollectableDrop(result, { data: { id, type } });
+      announce(
+        t("messages.item_moved_category", {
+          category: target.title || t("common.uncategorized"),
+        }),
+      );
     };
-    onCollectableDrop(result, { data: { id, type } });
-    announce(
-      t("messages.item_moved_position", {
-        direction
-      })
-    );
-  };
 
-  const onCategoryMove = element => (id, direction) => {
-    const startIndex = categories.findIndex(c => c.id === id);
+  const onCollectableSort =
+    (sourceId) =>
+    ({ id, type, direction }) => {
+      const list = mappings[sourceId][type];
+
+      const startIndex = list.findIndex((m) => m === id);
+      const finishIndex =
+        direction === "down" ? startIndex + 1 : startIndex - 1;
+
+      const result = {
+        ...mappings,
+        [sourceId]: {
+          ...mappings[sourceId],
+          [type]: reorderWithEdge({
+            axis: "vertical",
+            list,
+            startIndex,
+            indexOfTarget: finishIndex,
+            closestEdgeOfTarget: direction === "down" ? "bottom" : "top",
+          }),
+        },
+      };
+      onCollectableDrop(result, { data: { id, type } });
+      announce(
+        t("messages.item_moved_position", {
+          direction,
+        }),
+      );
+    };
+
+  const onCategoryMove = (element) => (id, direction) => {
+    const startIndex = categories.findIndex((c) => c.id === id);
     const finishIndex = direction === "down" ? startIndex + 1 : startIndex - 1;
 
     const result = reorderWithEdge({
@@ -101,13 +106,13 @@ export default function useAccessibleSort(
       list: categories,
       startIndex,
       indexOfTarget: finishIndex,
-      closestEdgeOfTarget: direction === "down" ? "bottom" : "top"
+      closestEdgeOfTarget: direction === "down" ? "bottom" : "top",
     });
     onCategoryDrop(result, id, element);
     announce(
       t("messages.category_moved", {
-        direction
-      })
+        direction,
+      }),
     );
   };
 
@@ -115,6 +120,6 @@ export default function useAccessibleSort(
     onCollectableMove,
     onCategoryMove,
     onCollectableSort,
-    targetCategory
+    targetCategory,
   };
 }

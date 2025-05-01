@@ -3,7 +3,7 @@ import {
   fluidScale,
   respond,
   utilityPrimary,
-  defaultHoverStyle
+  defaultHoverStyle,
 } from "theme/styles/mixins";
 
 export default `

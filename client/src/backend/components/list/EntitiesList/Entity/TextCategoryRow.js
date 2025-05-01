@@ -7,7 +7,7 @@ export default class TextCategoryRow extends PureComponent {
 
   static propTypes = {
     entity: PropTypes.object,
-    active: PropTypes.string
+    active: PropTypes.string,
   };
 
   get entity() {
@@ -25,7 +25,7 @@ export default class TextCategoryRow extends PureComponent {
   render() {
     const additionalProps = {
       title: this.entity,
-      active: this.active
+      active: this.active,
     };
 
     return <EntityRow {...this.props} {...additionalProps} />;

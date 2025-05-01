@@ -11,7 +11,7 @@ export default function ReadingGroupsWrapper({ route }) {
       ability="update"
       entity={["readingGroup"]}
       failureFatalError={{
-        body: t("readingGroup.unauthorized")
+        body: t("readingGroup.unauthorized"),
       }}
     >
       <div>
@@ -24,5 +24,5 @@ export default function ReadingGroupsWrapper({ route }) {
 }
 
 ReadingGroupsWrapper.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };

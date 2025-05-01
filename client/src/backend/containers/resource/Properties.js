@@ -13,7 +13,7 @@ export class ResourcePropertiesContainer extends PureComponent {
   static propTypes = {
     resource: PropTypes.object,
     params: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -25,7 +25,7 @@ export class ResourcePropertiesContainer extends PureComponent {
   initialState() {
     return {
       newKind: null,
-      changeKind: false
+      changeKind: false,
     };
   }
 
@@ -33,13 +33,13 @@ export class ResourcePropertiesContainer extends PureComponent {
     this.setState(this.initialState);
   };
 
-  formatData = data => {
+  formatData = (data) => {
     const { attributes, relationships } = data ?? {};
     const { sortOrder, ...rest } = attributes;
 
     return {
       relationships,
-      attributes: { ...rest, sortOrder: sortOrder ? 1 : null }
+      attributes: { ...rest, sortOrder: sortOrder ? 1 : null },
     };
   };
 
@@ -53,11 +53,11 @@ export class ResourcePropertiesContainer extends PureComponent {
         <FormContainer.Form
           model={{
             ...resource,
-            attributes: { ...resource.attributes, sortOrder: sortOrderBool }
+            attributes: { ...resource.attributes, sortOrder: sortOrderBool },
           }}
           name="backend-resource-update"
           update={resourcesAPI.update}
-          create={model =>
+          create={(model) =>
             resourcesAPI.create(this.props.params.projectId, model)
           }
           onSuccess={this.handleSuccess}
@@ -102,8 +102,8 @@ export class ResourcePropertiesContainer extends PureComponent {
             name="attributes[tagList]"
             placeholder={t("resources.properties.tags_placeholder")}
             options={tagsAPI.index}
-            optionToLabel={tag => tag.attributes.name}
-            optionToValue={tag => tag.attributes.name}
+            optionToLabel={(tag) => tag.attributes.name}
+            optionToValue={(tag) => tag.attributes.name}
             allowNew
           />
           <Form.TextArea
@@ -132,6 +132,6 @@ export class ResourcePropertiesContainer extends PureComponent {
 
 export default withTranslation()(
   connect(ResourcePropertiesContainer.mapStateToProps)(
-    ResourcePropertiesContainer
-  )
+    ResourcePropertiesContainer,
+  ),
 );

@@ -9,9 +9,8 @@ export default function CountHeader({
   count,
   titleTag,
   actions,
-  type
+  type,
 }) {
-  /* eslint-disable no-nested-ternary */
   return (
     <>
       <Styled.Row $compact>

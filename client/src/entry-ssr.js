@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import config from "config";
 import ch from "./helpers/consoleHelpers";
 import React from "react";
@@ -31,7 +30,7 @@ const port = config.services.client.rescueEnabled
 const respondWithRedirect = (res, redirectLocation) => {
   res.writeHead(302, {
     Location: redirectLocation,
-    "Content-Length": "0"
+    "Content-Length": "0",
   });
   res.end();
 };
@@ -44,7 +43,7 @@ const fatalErrorOutput = (errorComponent, store) => {
       disableBrowserRender
       stats={stats}
       store={store}
-    />
+    />,
   );
 };
 
@@ -55,15 +54,11 @@ const render = async (req, res, store) => {
   const helmetContext = {};
 
   const cache = createCache({ key: "emotion" });
-  const {
-    extractCriticalToChunks,
-    constructStyleTagsFromChunks
-  } = createEmotionServer(cache);
+  const { extractCriticalToChunks, constructStyleTagsFromChunks } =
+    createEmotionServer(cache);
 
-  const {
-    ServerFetchDataContext,
-    isFetchingComplete
-  } = createServerFetchDataContext();
+  const { ServerFetchDataContext, isFetchingComplete } =
+    createServerFetchDataContext();
 
   const appComponent = (
     <ServerFetchDataContext>
@@ -88,14 +83,14 @@ const render = async (req, res, store) => {
   try {
     ch.notice("Rendering application on server.", "floppy_disk");
     ReactDOM.renderToString(
-      <HtmlBody component={appComponent} stats={stats} store={store} />
+      <HtmlBody component={appComponent} stats={stats} store={store} />,
     );
 
     await isFetchingComplete();
     ch.notice("ResolveData completed.", "floppy_disk");
 
     renderString = ReactDOM.renderToString(
-      <HtmlBody component={appComponent} stats={stats} store={store} />
+      <HtmlBody component={appComponent} stats={stats} store={store} />,
     );
   } catch (renderError) {
     isError = true;
@@ -121,7 +116,7 @@ const render = async (req, res, store) => {
         stats,
         styleTags,
         helmetContext,
-        body: renderString
+        body: renderString,
       });
       if (isError) {
         res.statusCode = 500;
@@ -152,7 +147,7 @@ const requestHandler = (req, res) => {
   // 1. Run manifold bootstrap
   // 2. Fetch any data, as the user
   // 3. Send the response to the user
-  /* eslint-disable max-len */
+
   performBootstrap(req, res, store).then(
     () => {
       ch.plain("App bootstrapped");
@@ -161,7 +156,7 @@ const requestHandler = (req, res) => {
     () => {
       ch.error("App bootstrap failed", "rain_cloud");
       render(req, res, store);
-    }
+    },
   );
 };
 

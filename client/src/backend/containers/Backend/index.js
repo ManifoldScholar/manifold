@@ -17,7 +17,7 @@ import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 const { request } = entityStoreActions;
 
 export class BackendContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
@@ -25,14 +25,14 @@ export class BackendContainer extends PureComponent {
       notifications: state.notifications,
       routing: state.routing,
       pages: entityUtils.select(requests.gPages, state.entityStore),
-      settings: entityUtils.select(requests.settings, state.entityStore)
+      settings: entityUtils.select(requests.settings, state.entityStore),
     };
   };
 
   static fetchData = (getState, dispatch) => {
     if (!entityUtils.isLoaded(requests.gPages, getState())) {
       const pages = request(pagesAPI.index(), requests.gPages, {
-        oneTime: true
+        oneTime: true,
       });
       const { promise: one } = dispatch(pages);
       return Promise.all([one]);
@@ -48,7 +48,7 @@ export class BackendContainer extends PureComponent {
     pages: PropTypes.array,
     settings: PropTypes.object,
     route: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
   };
 
   constructor(props) {
@@ -62,7 +62,7 @@ export class BackendContainer extends PureComponent {
 
   childProps() {
     return {
-      dispatch: this.props.dispatch
+      dispatch: this.props.dispatch,
     };
   }
 
@@ -76,7 +76,7 @@ export class BackendContainer extends PureComponent {
           "project_creator",
           "project_editor",
           "project_property_manager",
-          "journal_editor"
+          "journal_editor",
         ]}
         failureRedirect={lh.link("frontendLogin")}
         failureNotification
@@ -88,8 +88,8 @@ export class BackendContainer extends PureComponent {
               candidates={[
                 {
                   label: "Dashboard",
-                  route: "backendDashboard"
-                }
+                  route: "backendDashboard",
+                },
               ]}
             />
             <Utility.ScrollToTop />
@@ -103,7 +103,7 @@ export class BackendContainer extends PureComponent {
             <BreadcrumbsProvider>
               <div className="main-content">
                 {childRoutes(this.props.route, {
-                  childProps: this.childProps()
+                  childProps: this.childProps(),
                 })}
               </div>
             </BreadcrumbsProvider>

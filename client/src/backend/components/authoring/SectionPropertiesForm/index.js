@@ -11,7 +11,7 @@ export default function SectionPropertiesForm({
   section,
   textId,
   refreshText,
-  startSectionId
+  startSectionId,
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -65,5 +65,5 @@ SectionPropertiesForm.displayName = "Text.Sections.PropertiesForm";
 SectionPropertiesForm.propTypes = {
   textId: PropTypes.string.isRequired,
   section: PropTypes.object,
-  refreshText: PropTypes.func.isRequired
+  refreshText: PropTypes.func,
 };

@@ -19,7 +19,6 @@ config.setModuleUrl("ace/mode/css_worker", cssWorkerUrl);
 config.setModuleUrl("ace/mode/html_worker", htmlWorkerUrl);
 config.setModuleUrl("ace/mode/javascript_worker", jsWorkerUrl);
 
-/* eslint-disable react/prop-types */
 export default function AceEditor(props) {
   return (
     <Errorable

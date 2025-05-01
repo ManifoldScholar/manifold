@@ -45,17 +45,20 @@ export const List = styled("ul", transientOptions)`
   font-size: ${fluidScale("18px", "16px")};
 
   ${({ $depth }) => `
-    --link-indent: calc(${firstLevelPadding} + ${nestedLevelPadding} * ${$depth -
-    1});
+    --link-indent: calc(${firstLevelPadding} + ${nestedLevelPadding} * ${
+      $depth - 1
+    });
 
-    ${$depth === 1 &&
+    ${
+      $depth === 1 &&
       `
       padding-top: 20px;
       padding-bottom: 20px;
       border-top: ${borderStyle};
       border-bottom: ${borderStyle};
       border-bottom-color: var(--List-last-child-border-color, ${borderColor});
-    `}
+    `
+    }
   `}
 
   ${({ $large }) =>

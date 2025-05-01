@@ -9,7 +9,7 @@ import {
   useFetch,
   useFromStore,
   useListFilters,
-  useListQueryParams
+  useListQueryParams,
 } from "hooks";
 
 export default function ProjectsContainer() {
@@ -18,11 +18,11 @@ export default function ProjectsContainer() {
   const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filterReset
+    initFilters: filterReset,
   });
 
   const { data: projects, meta } = useFetch({
-    request: [projectsAPI.index, filters, pagination]
+    request: [projectsAPI.index, filters, pagination],
   });
 
   const showPlaceholder =
@@ -31,7 +31,7 @@ export default function ProjectsContainer() {
   const { t } = useTranslation();
 
   const filterProps = useListFilters({
-    onFilterChange: param => setFilters(param),
+    onFilterChange: (param) => setFilters(param),
     initialState: filters,
     resetState: filterReset,
     options: {
@@ -39,8 +39,8 @@ export default function ProjectsContainer() {
       sort: true,
       subjects,
       featured: true,
-      featuredLabel: t("filters.featured_projects")
-    }
+      featuredLabel: t("filters.featured_projects"),
+    },
   });
 
   return meta ? (

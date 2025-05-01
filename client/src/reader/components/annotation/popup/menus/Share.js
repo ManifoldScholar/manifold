@@ -15,7 +15,7 @@ function ShareMenu({
   selectionState,
   actions,
   onBackClick,
-  onKeyDown
+  onKeyDown,
 }) {
   const trackEvent = useEventTracker();
 
@@ -36,7 +36,7 @@ function ShareMenu({
     metaTitle ?? section.attributes.name,
     selectionState.textFragment,
     true,
-    !metaTitle
+    !metaTitle,
   );
 
   const handleShareClick = async () => {
@@ -48,7 +48,7 @@ function ShareMenu({
     onClick: onCopyClick,
     label: copyLabel,
     icon: copyIcon,
-    srLabel: copySrLabel
+    srLabel: copySrLabel,
   } = useCopyLinkToSelection(text, section, selectionState.textFragment);
 
   return (
@@ -110,7 +110,7 @@ ShareMenu.propTypes = {
   direction: PropTypes.oneOf(["up", "down"]),
   visible: PropTypes.bool,
   text: PropTypes.object,
-  selectionState: PropTypes.object
+  selectionState: PropTypes.object,
 };
 
 export default ShareMenu;

@@ -11,7 +11,7 @@ export default function ConfirmModalBody({
   id,
   resolve,
   reject,
-  options
+  options,
 }) {
   const { t } = useTranslation();
 
@@ -20,15 +20,15 @@ export default function ConfirmModalBody({
   const buttonClasses = classNames(
     "buttons-icon-horizontal__button",
     "buttons-icon-horizontal__button--in-dialog",
-    "button-icon-secondary"
+    "button-icon-secondary",
   );
 
-  const handleResolveClick = event => {
+  const handleResolveClick = (event) => {
     event.preventDefault();
     resolve(event);
   };
 
-  const handleRejectClick = event => {
+  const handleRejectClick = (event) => {
     event.preventDefault();
     reject(event);
   };
@@ -91,5 +91,5 @@ ConfirmModalBody.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   resolve: PropTypes.func,
   reject: PropTypes.func.isRequired,
-  options: PropTypes.object
+  options: PropTypes.object,
 };

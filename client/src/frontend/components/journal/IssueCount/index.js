@@ -14,8 +14,8 @@ function Index({ count, unit, categoryCount, uncategorized = 0 }) {
           values={{
             count: categoryCount,
             uncategorized: t("counts.uncategorized_issues", {
-              count: uncategorized
-            })
+              count: uncategorized,
+            }),
           }}
           components={[<strong />]}
         />
@@ -35,8 +35,8 @@ function Index({ count, unit, categoryCount, uncategorized = 0 }) {
           categoryCount,
           volume: t("glossary.volume", { count: categoryCount }),
           uncategorized: t("counts.uncategorized_issues", {
-            count: uncategorized
-          })
+            count: uncategorized,
+          }),
         }}
         components={{ strong: <strong /> }}
       />
@@ -46,7 +46,7 @@ function Index({ count, unit, categoryCount, uncategorized = 0 }) {
         values={{
           count: categorized,
           categoryCount,
-          volume: t("glossary.volume", { count: categoryCount })
+          volume: t("glossary.volume", { count: categoryCount }),
         }}
         components={{ strong: <strong /> }}
       />
@@ -67,7 +67,7 @@ Index.propTypes = {
   count: PropTypes.number.isRequired,
   unit: PropTypes.string.isRequired,
   categoryCount: PropTypes.number,
-  uncategorized: PropTypes.number
+  uncategorized: PropTypes.number,
 };
 
 export default Index;

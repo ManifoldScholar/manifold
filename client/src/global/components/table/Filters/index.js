@@ -19,7 +19,7 @@ Filters.displayName = "GenericTable.Filters";
 Filters.propTypes = {
   filters: PropTypes.node,
   filterCount: PropTypes.number,
-  entityCountProps: PropTypes.object
+  entityCountProps: PropTypes.object,
 };
 
 export default Filters;

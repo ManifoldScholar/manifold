@@ -22,7 +22,7 @@ class SearchContainer extends PureComponent {
     setPage: PropTypes.func.isRequired,
     text: PropTypes.object,
     section: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -35,8 +35,8 @@ class SearchContainer extends PureComponent {
       { label: this.props.t("reader.full_text"), value: "TextSection" },
       {
         label: this.props.t("glossary.annotation_title_case_other"),
-        value: "Annotation"
-      }
+        value: "Annotation",
+      },
     ];
   }
 
@@ -59,7 +59,7 @@ class SearchContainer extends PureComponent {
     const { textId, sectionId } = this.props.match.params;
     if (textId && sectionId) {
       this.props.history.push(lh.link("readerSection", textId, sectionId), {
-        noScroll: true
+        noScroll: true,
       });
     } else {
       this.props.history.push(lh.link("reader", textId), { noScroll: true });
@@ -81,7 +81,7 @@ class SearchContainer extends PureComponent {
           <SearchQuery.Form
             initialState={{
               keyword: "",
-              scope: "text"
+              scope: "text",
             }}
             searchQueryState={this.props.searchQueryState}
             setQueryState={this.props.setQueryState}

@@ -13,7 +13,7 @@ function getPositionStyles(position) {
             order: 2;
             padding-top: 0;
           `,
-          65
+          65,
         )}
       `;
     case "left":

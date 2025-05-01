@@ -20,10 +20,10 @@ const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class FeatureDetailContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       feature: select(requests.beFeature, state.entityStore),
-      session: get(state.entityEditor.sessions, "backend-feature-update")
+      session: get(state.entityEditor.sessions, "backend-feature-update"),
     };
   };
 
@@ -36,11 +36,11 @@ class FeatureDetailContainer extends PureComponent {
     confirm: PropTypes.func.isRequired,
     feature: PropTypes.object,
     route: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   componentDidMount() {
@@ -71,7 +71,7 @@ class FeatureDetailContainer extends PureComponent {
     this.props.history.push(path);
   }
 
-  handleSuccess = featureIgnored => {
+  handleSuccess = (featureIgnored) => {
     this.redirectToFeatures();
   };
 
@@ -83,7 +83,7 @@ class FeatureDetailContainer extends PureComponent {
     this.props.confirm(heading, message, () => this.doDestroy(feature));
   };
 
-  doDestroy = feature => {
+  doDestroy = (feature) => {
     const call = featuresAPI.destroy(feature.id);
     const options = { removes: feature };
     const featureRequest = request(call, requests.beFeatureDestroy, options);
@@ -105,7 +105,7 @@ class FeatureDetailContainer extends PureComponent {
       id: `FEATURE_DESTROYED_${feature.id}`,
       heading: t("notifications.feature_delete"),
       body: t("notifications.delete_record_body"),
-      expiration: 3000
+      expiration: 3000,
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   }
@@ -116,7 +116,7 @@ class FeatureDetailContainer extends PureComponent {
     const { source, dirty } = session;
     const previewAttributes = {
       ...source.attributes,
-      ...dirty.attributes
+      ...dirty.attributes,
     };
     const preview = { ...source, attributes: previewAttributes };
     return preview;
@@ -159,7 +159,7 @@ class FeatureDetailContainer extends PureComponent {
         title={
           feature.attributes.header ||
           t("records.features.preview.no_title", {
-            position: feature.attributes.position
+            position: feature.attributes.position,
           })
         }
         actions={this.utility}
@@ -173,15 +173,15 @@ class FeatureDetailContainer extends PureComponent {
       {
         label: "actions.delete",
         icon: "delete32",
-        onClick: this.handleDestroy
-      }
+        onClick: this.handleDestroy,
+      },
     ];
   }
 
   renderRoutes() {
     const { feature } = this.props;
     return childRoutes(this.props.route, {
-      childProps: { feature, sessionName: "backend-feature-update" }
+      childProps: { feature, sessionName: "backend-feature-update" },
     });
   }
 
@@ -199,7 +199,7 @@ class FeatureDetailContainer extends PureComponent {
     return (
       <Authorize
         failureFatalError={{
-          body: t(`records.features.preview.unauthorized_${authProps.ability}`)
+          body: t(`records.features.preview.unauthorized_${authProps.ability}`),
         }}
         {...authProps}
       >
@@ -227,5 +227,5 @@ class FeatureDetailContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(FeatureDetailContainer))
+  withConfirmation(connectAndFetch(FeatureDetailContainer)),
 );

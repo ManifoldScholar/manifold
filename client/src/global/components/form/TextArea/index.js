@@ -21,11 +21,11 @@ export class FormTextArea extends Component {
     errors: PropTypes.array,
     name: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
   };
 
   static defaultProps = {
-    height: 100
+    height: 100,
   };
 
   static contextType = FormContext;
@@ -50,7 +50,7 @@ export class FormTextArea extends Component {
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <Errorable
             name={this.props.name}
             errors={this.props.errors}

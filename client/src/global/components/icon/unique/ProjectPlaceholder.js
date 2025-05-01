@@ -10,13 +10,13 @@ export default class SVGProjectPlaceholder extends Component {
     ariaLabel: PropTypes.bool,
     mode: PropTypes.oneOf(["responsive", "small", "large"]),
     className: PropTypes.string,
-    borderless: PropTypes.bool
+    borderless: PropTypes.bool,
   };
 
   static defaultProps = {
     mode: "responsive",
     ariaLabel: true,
-    borderless: false
+    borderless: false,
   };
 
   get blockClass() {
@@ -159,7 +159,7 @@ export default class SVGProjectPlaceholder extends Component {
       this.blockClass,
       this.className,
       `${this.blockClass}--${type}`,
-      `${this.blockClass}--${colorModifier}`
+      `${this.blockClass}--${colorModifier}`,
     );
   }
 

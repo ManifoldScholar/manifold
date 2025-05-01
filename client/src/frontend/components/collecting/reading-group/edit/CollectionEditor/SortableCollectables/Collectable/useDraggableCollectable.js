@@ -1,15 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useState, useRef, useEffect } from "react";
 import invariant from "tiny-invariant";
 import {
   draggable,
-  dropTargetForElements
+  dropTargetForElements,
 } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { preserveOffsetOnSource } from "@atlaskit/pragmatic-drag-and-drop/element/preserve-offset-on-source";
 import { setCustomNativeDragPreview } from "@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview";
 import {
   attachClosestEdge,
-  extractClosestEdge
+  extractClosestEdge,
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import { isShallowEqual } from "../../helpers/utils";
 
@@ -17,7 +16,7 @@ export default function useDraggableCollectable({
   type,
   id,
   index,
-  categoryId
+  categoryId,
 }) {
   const collectableRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -37,7 +36,7 @@ export default function useDraggableCollectable({
         return attachClosestEdge(data, {
           element,
           input,
-          allowedEdges: ["top", "bottom"]
+          allowedEdges: ["top", "bottom"],
         });
       },
       canDrop: ({ source }) => {
@@ -57,7 +56,7 @@ export default function useDraggableCollectable({
         setDragState({
           status: "is-over",
           type: source.data.type,
-          closestEdge
+          closestEdge,
         });
       },
       onDrag({ source, self }) {
@@ -74,9 +73,9 @@ export default function useDraggableCollectable({
         const proposed = {
           status: "is-over",
           type: source.data.type,
-          closestEdge
+          closestEdge,
         };
-        setDragState(current => {
+        setDragState((current) => {
           if (isShallowEqual(proposed, current)) {
             return current;
           }
@@ -95,7 +94,7 @@ export default function useDraggableCollectable({
       },
       onDrop() {
         setDragState({ status: "idle" });
-      }
+      },
     });
   }, [id, index, type, categoryId]);
 
@@ -114,7 +113,7 @@ export default function useDraggableCollectable({
           index,
           categoryId,
           rect: element.getBoundingClientRect(),
-          element: collectableEl
+          element: collectableEl,
         }),
         onDragStart: () => {
           setDragState({ status: "dragging", type });
@@ -127,19 +126,19 @@ export default function useDraggableCollectable({
             nativeSetDragImage,
             getOffset: preserveOffsetOnSource({
               element: collectableEl,
-              input: location.current.input
+              input: location.current.input,
             }),
             render({ container }) {
               setDragState({
                 status: "preview",
                 container,
-                type
+                type,
               });
 
               return () => setDragState({ status: "dragging", type });
-            }
+            },
           });
-        }
+        },
       });
     }
   }, [id, index, type, categoryId]);

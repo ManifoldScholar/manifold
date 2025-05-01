@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { oauthActions } from "actions";
 import { isOauthEvent } from "utils/oauth";
 import { useDispatch } from "react-redux";
@@ -12,7 +11,7 @@ export default function Monitor() {
   const oauth = useFromStore("oauth");
 
   useEffect(() => {
-    const onMessage = e => {
+    const onMessage = (e) => {
       if (isOauthEvent(e)) {
         dispatch(oauthActions.oauthResponse(e));
       }
@@ -37,7 +36,7 @@ export default function Monitor() {
 
   return oauth?.errors?.length ? (
     <ul>
-      {oauth.errors.map(error => (
+      {oauth.errors.map((error) => (
         <li key={error}>{error}</li>
       ))}
     </ul>

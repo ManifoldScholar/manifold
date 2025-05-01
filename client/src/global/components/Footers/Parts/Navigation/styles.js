@@ -3,7 +3,7 @@ import { transientOptions } from "helpers/emotionHelpers";
 import {
   respond,
   listUnstyled,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import NavigationLink from "../NavigationLink/index";
 
@@ -34,7 +34,7 @@ export const List = styled.ul`
     `
       gap: 90px;
     `,
-    90
+    90,
   )}
 
   > * {
@@ -53,7 +53,7 @@ export const Group = styled.ul`
     `
       max-width: 160px;
     `,
-    90
+    90,
   )}
 `;
 

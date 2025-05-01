@@ -7,7 +7,6 @@ export default function NotationViewerPreview({ entry, params }) {
   return (
     <div inert={!entry ? "" : undefined} className="notation-preview-footer">
       {entry && (
-        /* eslint-disable jsx-a11y/anchor-is-valid                                          */
         /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
         /* false positive, as the child Link component does in fact render an a tag with a  */
         /* href.                                                                            */
@@ -32,7 +31,7 @@ export default function NotationViewerPreview({ entry, params }) {
               <figcaption
                 className="notation-preview-footer__figcaption"
                 dangerouslySetInnerHTML={{
-                  __html: entry.notation.attributes.titleFormatted
+                  __html: entry.notation.attributes.titleFormatted,
                 }}
               />
             </figure>
@@ -55,6 +54,6 @@ NotationViewerPreview.propTypes = {
   params: PropTypes.object,
   actions: PropTypes.shape({
     startDestroy: PropTypes.func,
-    makeActive: PropTypes.func
-  }).isRequired
+    makeActive: PropTypes.func,
+  }).isRequired,
 };

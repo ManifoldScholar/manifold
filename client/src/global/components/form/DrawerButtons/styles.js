@@ -17,7 +17,7 @@ export const ButtonGroup = styled.div`
     flex-wrap: wrap;
     gap: 24px;
     `,
-    40
+    40,
   )}
 `;
 

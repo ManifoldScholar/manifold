@@ -7,5 +7,5 @@ export default {
   List,
   New,
   Detail,
-  Properties
+  Properties,
 };

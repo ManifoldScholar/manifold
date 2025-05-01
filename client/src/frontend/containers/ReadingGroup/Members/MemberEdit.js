@@ -15,13 +15,13 @@ function ReadingGroupMemberEditContainer({
   confirm,
   dispatch,
   onRemoveClick,
-  onEditSuccess
+  onEditSuccess,
 }) {
   const { membershipId } = useParams();
   const { t } = useTranslation();
 
   const { data: membership } = useFetch({
-    request: [readingGroupMembershipsAPI.show, membershipId]
+    request: [readingGroupMembershipsAPI.show, membershipId],
   });
 
   useEffect(() => {
@@ -37,8 +37,8 @@ function ReadingGroupMemberEditContainer({
             onClick: () => onRemoveClick(membership),
             icon: "delete24",
             label: t("actions.delete"),
-            className: "utility-button__icon utility-button__icon--notice"
-          }
+            className: "utility-button__icon utility-button__icon--notice",
+          },
         ]}
         buttonLayout="inline"
         small
@@ -58,7 +58,7 @@ ReadingGroupMemberEditContainer.propTypes = {
   confirm: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   onRemoveClick: PropTypes.func.isRequired,
-  onEditSuccess: PropTypes.func.isRequired
+  onEditSuccess: PropTypes.func.isRequired,
 };
 
 export default ReadingGroupMemberEditContainer;

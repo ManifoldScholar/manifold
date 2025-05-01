@@ -64,7 +64,7 @@ CategoryEdit.propTypes = {
   category: PropTypes.object.isRequired,
   groupId: PropTypes.string.isRequired,
   onSuccess: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
+  onCancel: PropTypes.func.isRequired,
 };
 
 export default CategoryEdit;

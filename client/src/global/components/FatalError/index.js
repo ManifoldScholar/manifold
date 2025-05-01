@@ -17,20 +17,20 @@ class FatalError extends PureComponent {
   static propTypes = {
     fatalError: PropTypes.shape({
       error: PropTypes.object,
-      type: PropTypes.string
+      type: PropTypes.string,
     }).isRequired,
     headerLineOne: PropTypes.string,
     headerLineTwo: PropTypes.string,
     dismiss: PropTypes.func,
     dispatch: PropTypes.func,
-    i18n: PropTypes.object
+    i18n: PropTypes.object,
   };
 
   get defaultHeaders() {
     const t = this.props.i18n.t;
     return {
       headerLineOne: t("errors.fatal.heading_line_one"),
-      headerLineTwo: t("errors.fatal.heading_line_two")
+      headerLineTwo: t("errors.fatal.heading_line_two"),
     };
   }
 
@@ -77,9 +77,9 @@ class FatalError extends PureComponent {
           id: "projectAuthorizationError",
           level: 1,
           heading: this.props.t(
-            "messages.project_authorization_warning.heading"
-          )
-        })
+            "messages.project_authorization_warning.heading",
+          ),
+        }),
       );
     }
 
@@ -87,7 +87,7 @@ class FatalError extends PureComponent {
       <Redirect
         to={{
           pathname: url,
-          state: { projectAuthorizationError: this.error }
+          state: { projectAuthorizationError: this.error },
         }}
       />
     );

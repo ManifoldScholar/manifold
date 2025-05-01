@@ -3,7 +3,7 @@ export function bulkActionsReducer(state, action) {
     case "add":
       return { ...state, ids: [...state.ids, action.payload] };
     case "remove":
-      return { ...state, ids: state.ids.filter(id => id !== action.payload) };
+      return { ...state, ids: state.ids.filter((id) => id !== action.payload) };
     case "addPage":
       return { filters: null, ids: action.payload };
     case "removeAndClear":

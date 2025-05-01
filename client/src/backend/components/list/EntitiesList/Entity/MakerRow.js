@@ -11,12 +11,12 @@ export default class MakerRow extends PureComponent {
     clickable: PropTypes.bool,
     entity: PropTypes.object,
     active: PropTypes.string,
-    withEditButton: PropTypes.bool
+    withEditButton: PropTypes.bool,
   };
 
   static defaultProps = {
     clickable: true,
-    withEditButton: false
+    withEditButton: false,
   };
 
   get maker() {
@@ -48,7 +48,7 @@ export default class MakerRow extends PureComponent {
     const linkProps = this.props.clickable
       ? {
           onRowClick: this.url,
-          rowClickMode: "block"
+          rowClickMode: "block",
         }
       : {};
 

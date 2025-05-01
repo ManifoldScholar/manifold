@@ -18,9 +18,9 @@ const { select } = entityUtils;
 const { request, flush } = entityStoreActions;
 
 class PageDetailContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      page: select(requests.bePage, state.entityStore)
+      page: select(requests.bePage, state.entityStore),
     };
   };
 
@@ -33,11 +33,11 @@ class PageDetailContainer extends PureComponent {
     route: PropTypes.object.isRequired,
     page: PropTypes.object,
     confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   componentDidMount() {
@@ -79,12 +79,12 @@ class PageDetailContainer extends PureComponent {
       id: `PAGE_DESTROYED_${feature.id}`,
       heading: t("notifications.page_delete"),
       body: t("notifications.delete_record_body"),
-      expiration: 3000
+      expiration: 3000,
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   }
 
-  handleSuccess = pageIgnored => {
+  handleSuccess = (pageIgnored) => {
     this.redirectToPages();
   };
 
@@ -158,14 +158,14 @@ class PageDetailContainer extends PureComponent {
         label: "actions.view",
         route: "frontendPage",
         slug: this.props.page.attributes.slug,
-        icon: "eyeOpen32"
+        icon: "eyeOpen32",
       },
       {
         label: "actions.delete",
         authorize: "update",
         icon: "delete32",
-        onClick: this.handleDestroy
-      }
+        onClick: this.handleDestroy,
+      },
     ];
   }
 
@@ -227,7 +227,7 @@ class PageDetailContainer extends PureComponent {
     return (
       <Authorize
         failureFatalError={{
-          body: t(`records.pages.unauthorized_${authProps.abiltiy}`)
+          body: t(`records.pages.unauthorized_${authProps.abiltiy}`),
         }}
         {...authProps}
       >
@@ -238,5 +238,5 @@ class PageDetailContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(PageDetailContainer))
+  withConfirmation(connectAndFetch(PageDetailContainer)),
 );

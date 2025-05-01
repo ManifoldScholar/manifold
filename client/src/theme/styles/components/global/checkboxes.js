@@ -20,7 +20,7 @@ export default `
           margin-left: 32px;
         }
       `,
-      50
+      50,
     )}
 
   + .instructions {

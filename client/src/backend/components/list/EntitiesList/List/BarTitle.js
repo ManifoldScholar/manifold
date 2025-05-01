@@ -11,7 +11,7 @@ export default class ListEntitiesListBarTitle extends PureComponent {
     titleIcon: PropTypes.string,
     titleLink: PropTypes.string,
     count: PropTypes.node,
-    titleTag: PropTypes.string
+    titleTag: PropTypes.string,
   };
 
   get title() {

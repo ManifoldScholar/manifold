@@ -7,7 +7,7 @@ function getDisplayName(WrappedComponent) {
 
 function withFormContext(WrappedComponent) {
   const displayName = `HigherOrder.WithFormContext('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithFormContext extends Component {
@@ -18,10 +18,10 @@ function withFormContext(WrappedComponent) {
     render() {
       return (
         <FormContext.Consumer>
-          {formProps =>
+          {(formProps) =>
             React.createElement(WrappedComponent, {
               ...this.props,
-              ...formProps
+              ...formProps,
             })
           }
         </FormContext.Consumer>

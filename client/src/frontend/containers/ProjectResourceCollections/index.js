@@ -16,14 +16,18 @@ import { useFetch, useListQueryParams } from "hooks";
 
 export default function ProjectResourceCollectionsContainer({
   project,
-  journalBreadcrumbs
+  journalBreadcrumbs,
 }) {
   const { id } = useParams();
 
   const { pagination } = useListQueryParams({ initSize: 10 });
 
-  const { data: resourceCollections, meta, uid } = useFetch({
-    request: [projectsAPI.resourceCollections, id, null, pagination]
+  const {
+    data: resourceCollections,
+    meta,
+    uid,
+  } = useFetch({
+    request: [projectsAPI.resourceCollections, id, null, pagination],
   });
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -37,11 +41,11 @@ export default function ProjectResourceCollectionsContainer({
   const breadcrumbs = useMemo(() => {
     const projectCrumb = {
       to: lh.link("frontendProject", slug),
-      label: titlePlaintext
+      label: titlePlaintext,
     };
     const collectionsCrumb = {
       to: lh.link("frontendProjectResourceCollections", slug),
-      label: t("glossary.resource_collection_other")
+      label: t("glossary.resource_collection_other"),
     };
     return journalBreadcrumbs
       ? [...journalBreadcrumbs, collectionsCrumb].filter(Boolean)
@@ -51,7 +55,7 @@ export default function ProjectResourceCollectionsContainer({
   const headContentProps = useEntityHeadContent(
     project,
     null,
-    t("glossary.resource_collection_title_case_other")
+    t("glossary.resource_collection_title_case_other"),
   );
 
   if (!project || !resourceCollections) return null;
@@ -85,5 +89,5 @@ ProjectResourceCollectionsContainer.displayName =
 
 ProjectResourceCollectionsContainer.propTypes = {
   project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
+  journalBreadcrumbs: PropTypes.array,
 };

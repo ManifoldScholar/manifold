@@ -7,13 +7,13 @@ export default class TextTitles extends Component {
   static propTypes = {
     text: PropTypes.object.isRequired,
     section: PropTypes.object.isRequired,
-    showSection: PropTypes.bool
+    showSection: PropTypes.bool,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      showSection: true
+      showSection: true,
     };
   }
 
@@ -37,18 +37,18 @@ export default class TextTitles extends Component {
     // Only toggle the title back showSection is coming from scrollAware
     if (this.props.showSection && this.state.showSection) {
       this.setState({
-        showSection: false
+        showSection: false,
       });
 
       setTimeout(() => {
         this.setState({
-          showSection: true
+          showSection: true,
         });
       }, 2500);
     }
   }
 
-  handleTitleClick = eventIgnored => {
+  handleTitleClick = (eventIgnored) => {
     this.toggleTitles();
   };
 
@@ -56,7 +56,7 @@ export default class TextTitles extends Component {
     const titleClass = classNames({
       "reader-header__title-bar": true,
       "reader-header__title-bar--show-section":
-        this.props.showSection && this.state.showSection
+        this.props.showSection && this.state.showSection,
     });
 
     return (

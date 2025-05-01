@@ -16,7 +16,7 @@ function HeadingTwo(props) {
     width: getSize(),
     height: getSize(),
     viewBox: "0 0 16 16",
-    fill
+    fill,
   };
   return (
     <svg {...baseSvgProps} {...svgProps}>
@@ -30,7 +30,7 @@ HeadingTwo.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   stroke: PropTypes.string,
   fill: PropTypes.string,
-  svgProps: PropTypes.object
+  svgProps: PropTypes.object,
 };
 
 export default HeadingTwo;

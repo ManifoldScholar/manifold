@@ -26,7 +26,7 @@ export const List = styled("ul", transientOptions)`
           flex-grow: 1;
         `
           : `flex-basis: auto`,
-        $count > 3 ? 120 : 75
+        $count > 3 ? 120 : 75,
       )}
     `}
   }

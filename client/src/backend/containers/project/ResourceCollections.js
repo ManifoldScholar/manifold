@@ -9,7 +9,7 @@ export default class ProjectResourcesCollectionsContainer extends PureComponent 
   static displayName = "Project.ResourceCollectionsContainer";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
   };
 
   render() {

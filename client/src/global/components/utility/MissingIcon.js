@@ -7,14 +7,14 @@ export default class MissingIcon extends Component {
     className: PropTypes.string,
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     stroke: PropTypes.string,
-    fill: PropTypes.string
+    fill: PropTypes.string,
   };
 
   static defaultProps = {
     className: "",
     size: "inherit",
     stroke: "currentColor",
-    fill: "currentColor"
+    fill: "currentColor",
   };
 
   get defaultHeight() {
@@ -64,7 +64,7 @@ export default class MissingIcon extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
     };
 
     return (

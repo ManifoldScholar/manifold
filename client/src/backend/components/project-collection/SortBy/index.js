@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 export default function ProjectCollectionSortBy({
   projectCollection,
-  sortChangeHandler
+  sortChangeHandler,
 }) {
   const { t } = useTranslation();
 
@@ -15,7 +15,7 @@ export default function ProjectCollectionSortBy({
 
   const sortOrder = projectCollection.attributes.sortOrder;
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     event.preventDefault();
     const order = isManualSort
       ? { sortBy: "created_at_asc" }
@@ -26,7 +26,7 @@ export default function ProjectCollectionSortBy({
   const filterProps = useListFilters({
     onFilterChange: sortChangeHandler,
     initialState: { sortBy: sortOrder },
-    options: { orderCollection: true }
+    options: { orderCollection: true },
   });
 
   const renderToggle = () => {
@@ -75,5 +75,5 @@ ProjectCollectionSortBy.displayName = "ProjectCollection.SortBy";
 
 ProjectCollectionSortBy.propTypes = {
   projectCollection: PropTypes.object,
-  sortChangeHandler: PropTypes.func.isRequired
+  sortChangeHandler: PropTypes.func.isRequired,
 };

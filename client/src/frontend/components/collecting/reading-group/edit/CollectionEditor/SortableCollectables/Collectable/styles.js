@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { dragging, utilityPrimary, panelRounded } from "theme/styles/mixins";
 import {
   collapsed,
-  collapsible
+  collapsible,
 } from "../../SortableCategories/Category/styles";
 
 const collectableMinHeight = `50px`;

@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
@@ -16,13 +15,13 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
     navigate(lh.link("backendRecordsEntitlements"));
   }, [navigate, refresh]);
 
-  const formatData = data => {
+  const formatData = (data) => {
     const { expiresOn, ...rest } = data.attributes;
     return {
       attributes: {
         expiration: expiresOn,
-        ...rest
-      }
+        ...rest,
+      },
     };
   };
 
@@ -40,7 +39,7 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
       create={pendingEntitlementsAPI.create}
       update={pendingEntitlementsAPI.update}
     >
-      {getValue => {
+      {(getValue) => {
         const type = getValue("entityType");
         const options =
           type === "journal" ? journalsAPI.index : projectsAPI.index;
@@ -73,12 +72,12 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
                 options={[
                   {
                     label: t("glossary.project_title_case_one"),
-                    value: "project"
+                    value: "project",
                   },
                   {
                     label: t("glossary.journal_title_case_one"),
-                    value: "journal"
-                  }
+                    value: "journal",
+                  },
                 ]}
                 value="project"
               />
@@ -88,8 +87,8 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
                   type ? t(`glossary.${type}_one`) : t(`glossary.project_one`)
                 }
                 options={options}
-                optionToLabel={entity => entity.attributes.titlePlaintext}
-                optionToValue={entity =>
+                optionToLabel={(entity) => entity.attributes.titlePlaintext}
+                optionToValue={(entity) =>
                   entity.attributes.entitlementSubjectUrl
                 }
                 listStyle="rows"

@@ -16,7 +16,7 @@ export default class FormHigherOrderValidation extends Component {
       .isRequired,
     onChange: PropTypes.func,
     setValue: PropTypes.func,
-    idForError: PropTypes.string
+    idForError: PropTypes.string,
   };
 
   static defaultProps = {};
@@ -24,7 +24,7 @@ export default class FormHigherOrderValidation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errors: {}
+      errors: {},
     };
   }
 
@@ -44,7 +44,7 @@ export default class FormHigherOrderValidation extends Component {
   }
 
   validate(value) {
-    this.props.validation.forEach(validation => {
+    this.props.validation.forEach((validation) => {
       if (validation === "required") this.validateRequired(value);
     });
   }
@@ -78,29 +78,28 @@ export default class FormHigherOrderValidation extends Component {
     const error = {
       detail,
       source: {
-        pointer: this.pointerFor(this.props.name)
-      }
+        pointer: this.pointerFor(this.props.name),
+      },
     };
     const errors = { ...this.state.errors, [key]: error };
     this.setState({ errors });
   }
 
   proxyOnChange(callback) {
-    return event => {
+    return (event) => {
       this.validate(event.target.value);
       callback(event);
     };
   }
 
   proxySetValue(callback) {
-    return value => {
+    return (value) => {
       this.validate(value);
       callback(value);
     };
   }
 
   render() {
-    /* eslint-disable no-unused-vars */
     const {
       validation,
       children,
@@ -109,7 +108,7 @@ export default class FormHigherOrderValidation extends Component {
       idForError,
       ...transfer
     } = this.props;
-    /* eslint-enable no-unused-vars */
+
     if (!this.props.validation) {
       return React.cloneElement(children, transfer);
     }

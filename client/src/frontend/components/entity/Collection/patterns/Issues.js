@@ -22,10 +22,10 @@ function IssuesEntityCollection({
     <EntityCollection
       icon={icon}
       filterProps={!issuesMeta || !filterProps ? null : filterProps}
-      BodyComponent={props => (
+      BodyComponent={(props) => (
         <ThumbnailGrid {...props}>
           {({ stack }) =>
-            issues.map(item => (
+            issues.map((item) => (
               <EntityThumbnail
                 entity={item}
                 stack={stack}
@@ -42,8 +42,8 @@ function IssuesEntityCollection({
           : {
               pagination: get(issuesMeta, "pagination"),
               unit: t("glossary.issue_truncated", {
-                count: issuesMeta?.pagination?.totalCount || 0
-              })
+                count: issuesMeta?.pagination?.totalCount || 0,
+              }),
             }
       }
       paginationProps={
@@ -51,7 +51,7 @@ function IssuesEntityCollection({
           ? {}
           : {
               pagination: get(issuesMeta, "pagination"),
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -66,7 +66,7 @@ IssuesEntityCollection.propTypes = {
   issuesMeta: PropTypes.object.isRequired,
   filterProps: shapes.filters,
   paginationProps: shapes.pagination,
-  icon: PropTypes.string
+  icon: PropTypes.string,
 };
 
 export default IssuesEntityCollection;

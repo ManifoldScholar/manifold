@@ -10,7 +10,7 @@ import lh from "helpers/linkHandler";
 import {
   FlagsList,
   Body,
-  Metadata
+  Metadata,
 } from "backend/components/annotation/detail";
 import withConfirmation from "hoc/withConfirmation";
 
@@ -21,7 +21,7 @@ function CommentDetailContainer({ refresh, confirm }) {
 
   const { data: comment, refresh: refreshComment } = useFetch({
     request: [commentsAPI.show, id],
-    condition: !!id
+    condition: !!id,
   });
 
   const deleteComment = useApiCallback(commentsAPI.destroy);
@@ -51,7 +51,7 @@ function CommentDetailContainer({ refresh, confirm }) {
     subjectTextSlug,
     subjectTextSectionId,
     subjectType,
-    projectSlug
+    projectSlug,
   } = attributes ?? {};
 
   const { creator, flags } = relationships ?? {};
@@ -60,7 +60,7 @@ function CommentDetailContainer({ refresh, confirm }) {
     creator,
     createdAt,
     subjectTitle,
-    textTitle: subjectTextTitle
+    textTitle: subjectTextTitle,
   };
 
   const resolveFlags = useApiCallback(commentsAPI.resolveAllFlags);
@@ -75,25 +75,24 @@ function CommentDetailContainer({ refresh, confirm }) {
       });
   }, [id, confirm, resolveFlags, t, refreshComment]);
 
-  /* eslint-disable no-nested-ternary */
   const viewProps =
     subjectType === "Resource"
       ? !!projectSlug && !!subjectId
         ? {
             route: "frontendProjectResource",
-            routeParams: [projectSlug, subjectId]
+            routeParams: [projectSlug, subjectId],
           }
         : null
       : !!subjectTextSlug && !!subjectTextSectionId
-      ? {
-          route: "readerSection",
-          routeParams: [
-            subjectTextSlug,
-            subjectTextSectionId,
-            `#annotation-${subjectId}`
-          ]
-        }
-      : null;
+        ? {
+            route: "readerSection",
+            routeParams: [
+              subjectTextSlug,
+              subjectTextSectionId,
+              `#annotation-${subjectId}`,
+            ],
+          }
+        : null;
 
   return id ? (
     <section>
@@ -106,7 +105,7 @@ function CommentDetailContainer({ refresh, confirm }) {
               : "records.comments.view_unavailable",
             icon: viewProps ? "eyeOpen32" : "eyeClosed32",
             disabled: !viewProps,
-            ...viewProps
+            ...viewProps,
           },
 
           {
@@ -114,7 +113,7 @@ function CommentDetailContainer({ refresh, confirm }) {
             icon: "delete24",
             ability: "delete",
             entity: comment,
-            onClick: onDelete
+            onClick: onDelete,
           },
           ...(unresolvedFlagsCount
             ? [
@@ -123,10 +122,10 @@ function CommentDetailContainer({ refresh, confirm }) {
                   icon: "circleMinus24",
                   ability: "update",
                   entity: comment,
-                  onClick: handleResolveFlags
-                }
+                  onClick: handleResolveFlags,
+                },
               ]
-            : [])
+            : []),
         ]}
       />
       {!!flagsCount && (
@@ -148,5 +147,5 @@ CommentDetailContainer.displayName = "Comments.CommentDetail";
 
 CommentDetailContainer.propTypes = {
   refresh: PropTypes.func.isRequired,
-  confirm: PropTypes.func.isRequired
+  confirm: PropTypes.func.isRequired,
 };

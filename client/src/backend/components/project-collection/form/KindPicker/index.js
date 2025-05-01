@@ -10,7 +10,7 @@ class KindPicker extends Component {
   static propTypes = {
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get isSmart() {
@@ -38,11 +38,11 @@ class KindPicker extends Component {
           label="kind"
           optionOne={{
             label: t("project_collections.manual"),
-            icon: "BECollectionManual64"
+            icon: "BECollectionManual64",
           }}
           optionTwo={{
             label: t("project_collections.smart"),
-            icon: "BECollectionSmart64"
+            icon: "BECollectionSmart64",
           }}
         />
       </Styled.Wrapper>

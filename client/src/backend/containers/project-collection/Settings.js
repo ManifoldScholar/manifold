@@ -17,11 +17,11 @@ export class ProjectCollectionSettings extends PureComponent {
     projectCollection: PropTypes.object,
     projectCollectionMeta: PropTypes.object,
     confirm: PropTypes.func.isRequired,
-    buildUpdateProjectCollection: PropTypes.func.isRequired
+    buildUpdateProjectCollection: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   handleDestroy = () => {
@@ -34,7 +34,7 @@ export class ProjectCollectionSettings extends PureComponent {
   onSuccess = () => {
     this.props.refreshCollectionProjects();
     this.props.history.push(
-      lh.link("backendProjectCollection", this.props.projectCollection.id)
+      lh.link("backendProjectCollection", this.props.projectCollection.id),
     );
   };
 
@@ -42,7 +42,7 @@ export class ProjectCollectionSettings extends PureComponent {
     const { projectCollection, t } = this.props;
     if (!projectCollection) return null;
 
-    const formatData = data => {
+    const formatData = (data) => {
       const { heroAltText, hero, ...rest } = data?.attributes ?? {};
 
       const finalHeroData =
@@ -56,7 +56,7 @@ export class ProjectCollectionSettings extends PureComponent {
 
       return {
         relationships,
-        attributes: { hero: finalHeroData, ...rest }
+        attributes: { hero: finalHeroData, ...rest },
       };
     };
 
@@ -67,7 +67,7 @@ export class ProjectCollectionSettings extends PureComponent {
         failureNotification
         failureRedirect={lh.link(
           "backendProjectCollection",
-          projectCollection.id
+          projectCollection.id,
         )}
       >
         <section>

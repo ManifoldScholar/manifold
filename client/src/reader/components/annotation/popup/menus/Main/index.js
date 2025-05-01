@@ -19,7 +19,7 @@ function MainMenu({
     menu: { ...menu, visible },
     direction,
     activeMenu,
-    ...restProps
+    ...restProps,
   };
   const { t } = useTranslation();
   const currentUser = useCurrentUser();
@@ -29,7 +29,7 @@ function MainMenu({
   // Users who are neither trusted nor established cannot create public annotations or highlights.
   const isPublic =
     currentReadingGroup === "public" ||
-    readingGroups.find(group => group.id === currentReadingGroup)?.attributes
+    readingGroups.find((group) => group.id === currentReadingGroup)?.attributes
       ?.privacy === "public";
   const established = currentUser?.attributes.established;
   const trusted = currentUser?.attributes.trusted;
@@ -71,9 +71,9 @@ MainMenu.propTypes = {
   visible: PropTypes.bool,
   activeMenu: PropTypes.string,
   lastActiveMenu: PropTypes.shape({
-    current: PropTypes.string
+    current: PropTypes.string,
   }),
-  direction: PropTypes.oneOf(["up", "down"])
+  direction: PropTypes.oneOf(["up", "down"]),
 };
 
 export default MainMenu;

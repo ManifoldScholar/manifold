@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default */
 import NewAnnotation from "./NewAnnotation";
 import NewNotation from "./NewNotation";
 import ViewAnnotations from "./ViewAnnotations";
@@ -8,6 +7,5 @@ export default {
   NewAnnotation,
   NewNotation,
   ViewAnnotations,
-  Citation
+  Citation,
 };
-/* eslint-enable import/no-named-as-default */

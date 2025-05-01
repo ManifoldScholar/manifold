@@ -16,7 +16,7 @@ export default class FieldGroup extends PureComponent {
     label: PropTypes.string,
     labelTag: PropTypes.oneOf(["h2", "span"]),
     theme: PropTypes.oneOf(["primary", "secondary"]),
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -25,7 +25,7 @@ export default class FieldGroup extends PureComponent {
     wide: false,
     instructions: null,
     labelTag: "h2",
-    theme: "primary"
+    theme: "primary",
   };
 
   static contextType = FormContext;
@@ -39,12 +39,12 @@ export default class FieldGroup extends PureComponent {
     return {
       role: "group",
       "aria-labelledby": `${id}-header`,
-      "aria-describedby": `${id}-instructions`
+      "aria-describedby": `${id}-instructions`,
     };
   }
 
   renderChildren(props) {
-    return React.Children.map(props.children, child => {
+    return React.Children.map(props.children, (child) => {
       if (!child) return null;
       if (isString(child.type)) {
         return child;
@@ -69,8 +69,8 @@ export default class FieldGroup extends PureComponent {
         : Styled.BaseGroup;
 
     return (
-      <UIDConsumer name={id => `field-group-${id}`}>
-        {id => (
+      <UIDConsumer name={(id) => `field-group-${id}`}>
+        {(id) => (
           <Styled.Section
             key="group"
             {...this.getAriaGroupAttributes(id)}

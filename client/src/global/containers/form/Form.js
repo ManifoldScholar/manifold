@@ -26,7 +26,7 @@ export class FormContainer extends PureComponent {
     return {
       session: get(state.entityEditor.sessions, ownProps.name),
       response: get(state.entityStore.responses, ownProps.name),
-      errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
+      errors: get(state.entityStore.responses, `${ownProps.name}.errors`),
     };
   };
 
@@ -38,7 +38,7 @@ export class FormContainer extends PureComponent {
     children: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.array,
-      PropTypes.element
+      PropTypes.element,
     ]),
     style: PropTypes.object,
     model: PropTypes.object,
@@ -59,7 +59,7 @@ export class FormContainer extends PureComponent {
     options: PropTypes.object,
     flushOnUnmount: PropTypes.bool,
     notificationScope: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
@@ -68,7 +68,7 @@ export class FormContainer extends PureComponent {
     notificationScope: "global",
     model: {
       attributes: {},
-      relationships: {}
+      relationships: {},
     },
     className: "form-secondary",
     debug: false,
@@ -76,7 +76,7 @@ export class FormContainer extends PureComponent {
     suppressModelErrors: false,
     flushOnUnmount: true,
     modelName: "This model",
-    options: {}
+    options: {},
   };
 
   constructor(props) {
@@ -84,7 +84,7 @@ export class FormContainer extends PureComponent {
     this.state = {
       preventDirtyWarning: false,
       submitKey: null,
-      submitRequested: false
+      submitRequested: false,
     };
   }
 
@@ -139,9 +139,7 @@ export class FormContainer extends PureComponent {
 
   createKey() {
     const keyLength = 6;
-    return Math.random()
-      .toString(36)
-      .substr(2, keyLength);
+    return Math.random().toString(36).substr(2, keyLength);
   }
 
   adjustedRelationships(relationships) {
@@ -153,10 +151,10 @@ export class FormContainer extends PureComponent {
         adjusted[key] = null;
       } else {
         const adjustedValue = isArray(value)
-          ? value.map(relation => pick(relation, ["id", "type", "_remove"]))
+          ? value.map((relation) => pick(relation, ["id", "type", "_remove"]))
           : pick(value, ["id", "type", "_remove"]);
         adjusted[key] = {
-          data: adjustedValue
+          data: adjustedValue,
         };
       }
     });
@@ -173,7 +171,7 @@ export class FormContainer extends PureComponent {
       ? this.props.formatData(dirty, source)
       : {
           attributes: dirty.attributes,
-          relationships: this.adjustedRelationships(dirty.relationships)
+          relationships: this.adjustedRelationships(dirty.relationships),
         };
 
     const call = this.props.update(source.id, args);
@@ -182,17 +180,17 @@ export class FormContainer extends PureComponent {
     const res = this.props.dispatch(action);
     if (res.hasOwnProperty("promise")) {
       res.promise.then(
-        data => {
+        (data) => {
           this.setState({ preventDirtyWarning: true }, () => {
             if (this.props.onSuccess)
               this.props.onSuccess(this.props.response.entity, data);
           });
         },
-        err => {
+        (err) => {
           if (this.props.onError) {
             this.props.onError(err);
           }
-        }
+        },
       );
     }
   }
@@ -200,7 +198,7 @@ export class FormContainer extends PureComponent {
   requestOptions() {
     return {
       ...this.props.options,
-      notificationScope: this.props.notificationScope
+      notificationScope: this.props.notificationScope,
     };
   }
 
@@ -213,7 +211,7 @@ export class FormContainer extends PureComponent {
       ? this.props.formatData(dirty, source)
       : {
           attributes: { ...source.attributes, ...dirty.attributes },
-          relationships: this.adjustedRelationships(dirty.relationships)
+          relationships: this.adjustedRelationships(dirty.relationships),
         };
     const call = callMethod(args);
 
@@ -222,17 +220,17 @@ export class FormContainer extends PureComponent {
 
     if (res.hasOwnProperty("promise")) {
       res.promise.then(
-        data => {
+        (data) => {
           this.setState({ preventDirtyWarning: true }, () => {
             if (this.props.onSuccess)
               this.props.onSuccess(this.props.response.entity, data);
           });
         },
-        err => {
+        (err) => {
           if (this.props.onError) {
             this.props.onError(err);
           }
-        }
+        },
       );
     }
   }
@@ -256,20 +254,20 @@ export class FormContainer extends PureComponent {
     this.setState({ submitRequested: true });
   };
 
-  contextProps = props => {
+  contextProps = (props) => {
     const out = {
       actions: {
-        set: bindActionCreators(set, props.dispatch)
+        set: bindActionCreators(set, props.dispatch),
       },
       dirtyModel: props.session.dirty,
       sourceModel: props.session.source,
-      getModelValue: name => this.lookupValue(name, this.props),
+      getModelValue: (name) => this.lookupValue(name, this.props),
       sessionKey: props.name,
       submitKey: this.state.submitKey,
       triggerSubmit: this.triggerSubmit,
       styleType: props.className.includes("form-secondary")
         ? "secondary"
-        : "primary"
+        : "primary",
     };
     if (!this.props.groupErrors) out.errors = props.errors || [];
     return out;
@@ -309,7 +307,7 @@ export class FormContainer extends PureComponent {
     if (!this.props.debug) return null;
     const debug = {
       session: this.props.session,
-      errors: this.props.errors
+      errors: this.props.errors,
     };
     return <Developer.Debugger object={debug} />;
   }

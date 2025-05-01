@@ -22,13 +22,13 @@ function SearchResultsTypeText({ result, highlightedAttribute }) {
     searchableId,
     searchableType,
     title,
-    parents: { project }
+    parents: { project },
   } = result.attributes ?? {};
 
   const collectable = {
     type: searchableType,
     id: searchableId,
-    attributes: { title }
+    attributes: { title },
   };
 
   const resultProps = {
@@ -38,7 +38,7 @@ function SearchResultsTypeText({ result, highlightedAttribute }) {
     parentUrl: lh.link("frontendProjectDetail", project?.slug),
     description: highlightedAttribute("fullText"),
     label: t("glossary.text_one"),
-    collectable
+    collectable,
   };
 
   return (
@@ -67,7 +67,7 @@ SearchResultsTypeText.displayName = "Search.Results.Type.Text";
 
 SearchResultsTypeText.propTypes = {
   result: PropTypes.object,
-  highlightedAttribute: PropTypes.func.isRequired
+  highlightedAttribute: PropTypes.func.isRequired,
 };
 
 export default withSearchResultHelper(SearchResultsTypeText);

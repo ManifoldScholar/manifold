@@ -9,10 +9,10 @@ import { withTranslation } from "react-i18next";
 class ProjectExportationRow extends PureComponent {
   static propTypes = {
     entity: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
-  onDelete = event => {
+  onDelete = (event) => {
     event.preventDefault();
     event.stopPropagation();
     this.props.onDelete(this.props.entity);
@@ -69,13 +69,13 @@ class ProjectExportationRow extends PureComponent {
     let size = "";
     if (this.attributes.packageSize) {
       size = this.props.t("projects.exports.project_size", {
-        size: filesize(this.attributes.packageSize)
+        size: filesize(this.attributes.packageSize),
       });
     }
 
     return this.props.t("projects.exports.success_message", {
       target: this.exportTargetName,
-      size
+      size,
     });
   }
 
@@ -110,14 +110,14 @@ class ProjectExportationRow extends PureComponent {
   get failureMessage() {
     return this.props.t("projects.exports.failure_message", {
       target: this.exportTargetName,
-      reason: this.metadataReason
+      reason: this.metadataReason,
     });
   }
 
   get pendingMessage() {
     return this.props.t("projects.exports.pending_message", {
       target: this.exportTargetName,
-      reason: this.metadataReason
+      reason: this.metadataReason,
     });
   }
 
@@ -130,7 +130,7 @@ class ProjectExportationRow extends PureComponent {
   get label() {
     return {
       text: this.translateState,
-      level: this.labelLevel
+      level: this.labelLevel,
     };
   }
 
@@ -147,8 +147,8 @@ class ProjectExportationRow extends PureComponent {
   render() {
     const {
       entity: {
-        attributes: { createdAt, exportedAt }
-      }
+        attributes: { createdAt, exportedAt },
+      },
     } = this.props;
 
     return (

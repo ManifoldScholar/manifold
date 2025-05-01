@@ -3,5 +3,5 @@ import Toggle from "./Toggle";
 
 export default {
   ConfirmableButton,
-  Toggle
+  Toggle,
 };

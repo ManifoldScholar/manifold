@@ -21,7 +21,7 @@ function CloseButton({ onClick }) {
 CloseButton.displayName = "Global.Overlay.Header.Close";
 
 CloseButton.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 export default CloseButton;

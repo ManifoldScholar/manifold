@@ -5,7 +5,7 @@ import {
   defaultFocusStyle,
   headerContainerPrimary,
   containerPrototype,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export const Dialog = styled.div`

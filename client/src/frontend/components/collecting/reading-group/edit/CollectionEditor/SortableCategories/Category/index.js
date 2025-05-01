@@ -24,7 +24,7 @@ export default function Category({
     index,
     category,
     isStatic,
-    onDropInto
+    onDropInto,
   });
 
   useEffect(() => {

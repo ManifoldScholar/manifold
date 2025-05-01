@@ -13,7 +13,7 @@ class FeaturesPropertiesContainer extends PureComponent {
     feature: PropTypes.object,
     onSuccess: PropTypes.func,
     sessionName: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -80,12 +80,12 @@ class FeaturesPropertiesContainer extends PureComponent {
                 { label: "", value: "" },
                 {
                   label: t("records.features.style_options.dark"),
-                  value: "dark"
+                  value: "dark",
                 },
                 {
                   label: t("records.features.style_options.light"),
-                  value: "light"
-                }
+                  value: "light",
+                },
               ]}
             />
             <Form.TextInput
@@ -138,16 +138,16 @@ class FeaturesPropertiesContainer extends PureComponent {
                 { label: "", value: "" },
                 {
                   label: t(
-                    "records.features.foreground_image_position.mode.relative"
+                    "records.features.foreground_image_position.mode.relative",
                   ),
-                  value: "relative"
+                  value: "relative",
                 },
                 {
                   label: t(
-                    "records.features.foreground_image_position.mode.absolute"
+                    "records.features.foreground_image_position.mode.absolute",
                   ),
-                  value: "absolute"
-                }
+                  value: "absolute",
+                },
               ]}
             />
             <Form.Save text={t("records.features.submit_label")} />

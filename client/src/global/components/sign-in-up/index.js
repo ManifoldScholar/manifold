@@ -3,5 +3,5 @@ import Interface from "./Interface";
 
 export default {
   Overlay,
-  Interface
+  Interface,
 };

@@ -45,6 +45,6 @@ class BrandedFooter extends Component {
 export default withRouter(
   withPluginReplacement(
     BrandedFooter,
-    "Global.Components.Footers.BrandedFooter"
-  )
+    "Global.Components.Footers.BrandedFooter",
+  ),
 );

@@ -33,7 +33,7 @@ export class FormBaseInput extends PureComponent {
     idForInstructions: PropTypes.string,
     renderValue: PropTypes.func,
     wide: PropTypes.bool,
-    defaultValue: PropTypes.string
+    defaultValue: PropTypes.string,
   };
 
   static contextType = FormContext;
@@ -57,17 +57,17 @@ export class FormBaseInput extends PureComponent {
     const secondary = this.context?.styleType === "secondary";
     return (
       <Styled.ActionGroup $secondary={secondary}>
-        {buttons.map(button => (
+        {buttons.map((button) => (
           <Styled.Action
             $secondary={secondary}
             type="button"
             key={button.label}
-            onClick={event =>
+            onClick={(event) =>
               button.onClick(
                 event,
                 this.inputElement,
                 this.notify,
-                this.props.set
+                this.props.set,
               )
             }
           >
@@ -78,7 +78,7 @@ export class FormBaseInput extends PureComponent {
     );
   }
 
-  notify = notification => {
+  notify = (notification) => {
     this.setState({ notification });
     this.timeout = setTimeout(() => {
       this.setState({ notification: null });
@@ -98,11 +98,11 @@ export class FormBaseInput extends PureComponent {
       buttons,
       instructions,
       wide,
-      className
+      className,
     } = this.props;
 
     const fieldClasses = classnames(className, {
-      wide
+      wide,
     });
     const Wrapper = buttons ? Styled.WrapperWithActions : Errorable;
 
@@ -126,7 +126,7 @@ export class FormBaseInput extends PureComponent {
           styleType={this.context?.styleType}
         />
         <InputComponent
-          ref={input => {
+          ref={(input) => {
             this.inputElement = input;
           }}
           id={id}
@@ -135,7 +135,7 @@ export class FormBaseInput extends PureComponent {
           type={this.props.inputType ?? this.props.type}
           placeholder={this.props.placeholder}
           onChange={this.props.onChange}
-          onKeyDown={e => {
+          onKeyDown={(e) => {
             if (this.props.onKeyDown)
               this.props.onKeyDown(e, this.inputElement);
           }}

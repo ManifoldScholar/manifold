@@ -13,5 +13,5 @@ export default {
   List,
   ListItem,
   ProjectCover,
-  SortBy
+  SortBy,
 };

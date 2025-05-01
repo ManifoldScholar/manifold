@@ -23,7 +23,7 @@ class Slot extends PureComponent {
     t: PropTypes.func,
     index: PropTypes.number,
     slotCount: PropTypes.number,
-    onKeyboardMove: PropTypes.func
+    onKeyboardMove: PropTypes.func,
   };
 
   get title() {
@@ -52,7 +52,7 @@ class Slot extends PureComponent {
     const actionCallout = { attributes };
     return this.props.history.push(
       lh.link(actionCalloutNewRoute, this.model.id),
-      { noScroll: true, actionCallout }
+      { noScroll: true, actionCallout },
     );
   };
 
@@ -63,7 +63,7 @@ class Slot extends PureComponent {
         {(provided, snapshot) => (
           <div
             className={classNames("action-callout-slot", {
-              "action-callout-slot--active": snapshot.isDraggingOver
+              "action-callout-slot--active": snapshot.isDraggingOver,
             })}
           >
             <div className="action-callout-slot__content">

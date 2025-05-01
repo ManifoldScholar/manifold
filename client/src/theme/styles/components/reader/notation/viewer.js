@@ -4,7 +4,7 @@ import {
   respond,
   defaultHoverStyle,
   defaultTransitionProps,
-  buttonUnstyled
+  buttonUnstyled,
 } from "theme/styles/mixins";
 
 const widths = readerContainerWidths
@@ -23,7 +23,7 @@ const widths = readerContainerWidths
         ${respond(`display: none;`, `${parseInt(width, 10) + 392}px`)}
       }
     }
-  `
+  `,
   )
   .join("");
 

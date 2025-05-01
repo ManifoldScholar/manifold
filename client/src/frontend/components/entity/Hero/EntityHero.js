@@ -11,7 +11,7 @@ export default function EntityHero({
   BottomRightComponent,
   ImageComponent,
   darkMode = false,
-  theme = "project"
+  theme = "project",
 }) {
   const resizeId = useRef(null);
   const rightColRef = useRef();
@@ -40,14 +40,12 @@ export default function EntityHero({
     }
   }, [isStandalone]);
 
-  /* eslint-disable no-nested-ternary */
   const WrapperComponent =
     theme === "journal"
       ? Styled.JournalWrapper
       : theme === "issue"
-      ? Styled.IssueWrapper
-      : Styled.Wrapper;
-  /* eslint-enable no-nested-ternary */
+        ? Styled.IssueWrapper
+        : Styled.Wrapper;
 
   return (
     <WrapperComponent $darkMode={darkMode} $standalone={isStandalone}>
@@ -82,24 +80,24 @@ EntityHero.propTypes = {
   TopRightComponent: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,
-    PropTypes.bool
+    PropTypes.bool,
   ]),
   BottomLeftComponent: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,
-    PropTypes.bool
+    PropTypes.bool,
   ]),
   BottomRightComponent: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,
     PropTypes.bool,
-    PropTypes.node
+    PropTypes.node,
   ]),
   ImageComponent: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,
-    PropTypes.bool
+    PropTypes.bool,
   ]),
   darkMode: PropTypes.bool,
-  theme: PropTypes.oneOf(["project", "journal", "issue"])
+  theme: PropTypes.oneOf(["project", "journal", "issue"]),
 };

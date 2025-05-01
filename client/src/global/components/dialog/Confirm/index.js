@@ -12,13 +12,13 @@ export default class DialogConfirm extends PureComponent {
     reject: PropTypes.func.isRequired,
     heading: PropTypes.string,
     options: PropTypes.object,
-    message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    message: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   };
 
   render() {
     return (
-      <UIDConsumer name={id => `dialog-${id}`}>
-        {id => (
+      <UIDConsumer name={(id) => `dialog-${id}`}>
+        {(id) => (
           <Wrapper
             className="dialog-confirm"
             maxWidth={400}

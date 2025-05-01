@@ -7,7 +7,7 @@ export default function ResourceListSlidePlaceholder() {
   return (
     <Styled.Placeholder
       style={{
-        backgroundImage: "url(/static/images/resource-collection.jpg)"
+        backgroundImage: "url(/static/images/resource-collection.jpg)",
       }}
     >
       <Styled.InfoWrapper>

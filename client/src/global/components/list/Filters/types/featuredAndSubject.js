@@ -1,8 +1,8 @@
-const getSubjectOptions = subjects =>
-  subjects.map(subject => {
+const getSubjectOptions = (subjects) =>
+  subjects.map((subject) => {
     return {
       label: subject.attributes.name,
-      value: subject.id
+      value: subject.id,
     };
   });
 
@@ -19,7 +19,7 @@ export const featuredAndSubjectFilter = (filters, updateFilters, params, t) => {
   return {
     label: t("filters.labels.filter_results"),
     value: filters.featured ? "featured" : filters.subject || "",
-    onChange: e => updateFilters(e, "subject"),
-    options: [{ label: t("filters.show_all"), value: "" }, ...options]
+    onChange: (e) => updateFilters(e, "subject"),
+    options: [{ label: t("filters.show_all"), value: "" }, ...options],
   };
 };

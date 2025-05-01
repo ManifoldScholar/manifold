@@ -14,9 +14,7 @@ function colorConstructor(color) {
 }
 
 export function rgba(color, alpha) {
-  return colorConstructor(color)
-    .setAlpha(alpha)
-    .toRgbString();
+  return colorConstructor(color).setAlpha(alpha).toRgbString();
 }
 
 export function transparentize(color, amount) {
@@ -28,19 +26,13 @@ export function transparentize(color, amount) {
 }
 
 export function uriEncodeHex(color) {
-  return colorConstructor(color)
-    .toHexString()
-    .replace("#", "%23");
+  return colorConstructor(color).toHexString().replace("#", "%23");
 }
 
 export function darken(color, amount) {
-  return colorConstructor(color)
-    .darken(amount)
-    .toHexString();
+  return colorConstructor(color).darken(amount).toHexString();
 }
 
 export function lighten(color, amount) {
-  return colorConstructor(color)
-    .lighten(amount)
-    .toHexString();
+  return colorConstructor(color).lighten(amount).toHexString();
 }

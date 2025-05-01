@@ -12,7 +12,7 @@ import get from "lodash/get";
 import {
   uiVisibilityActions,
   routingActions,
-  notificationActions
+  notificationActions,
 } from "actions";
 import { meAPI, requests } from "api";
 import { select, loaded } from "utils/entityUtils";
@@ -30,7 +30,7 @@ const routes = getRoutes();
 const { visibilityHide } = uiVisibilityActions;
 
 class ManifoldContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
@@ -41,7 +41,10 @@ class ManifoldContainer extends PureComponent {
       routing: state.routing,
       settings: select(requests.settings, state.entityStore),
       readingGroups: select(requests.feMyReadingGroups, state.entityStore),
-      readingGroupsLoaded: loaded(requests.feMyReadingGroups, state.entityStore)
+      readingGroupsLoaded: loaded(
+        requests.feMyReadingGroups,
+        state.entityStore,
+      ),
     };
   };
 
@@ -57,7 +60,7 @@ class ManifoldContainer extends PureComponent {
     location: PropTypes.object,
     history: PropTypes.object,
     confirm: PropTypes.element,
-    gaInitCallback: PropTypes.func
+    gaInitCallback: PropTypes.func,
   };
 
   constructor(props) {
@@ -76,7 +79,7 @@ class ManifoldContainer extends PureComponent {
     if (
       this.userJustLoggedOut(
         prevProps.authentication,
-        this.props.authentication
+        this.props.authentication,
       )
     )
       this.doPostLogout();
@@ -106,12 +109,8 @@ class ManifoldContainer extends PureComponent {
   }
 
   maybeFetchReadingGroups() {
-    const {
-      authentication,
-      readingGroupsLoaded,
-      settings,
-      dispatch
-    } = this.props;
+    const { authentication, readingGroupsLoaded, settings, dispatch } =
+      this.props;
     const { authenticated } = authentication;
     if (!authenticated) return;
     if (!settings) return;
@@ -180,7 +179,7 @@ class ManifoldContainer extends PureComponent {
 
     const hideOverlay = bindActionCreators(
       () => visibilityHide("signInUpOverlay"),
-      this.props.dispatch
+      this.props.dispatch,
     );
 
     return (
@@ -215,7 +214,7 @@ class ManifoldContainer extends PureComponent {
 }
 
 const Manifold = withRouter(
-  connect(ManifoldContainer.mapStateToProps)(ManifoldContainer)
+  connect(ManifoldContainer.mapStateToProps)(ManifoldContainer),
 );
 
 export default Manifold;

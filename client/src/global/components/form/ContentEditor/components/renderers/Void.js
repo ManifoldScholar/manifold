@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { ReactEditor, useFocused, useSelected } from "slate-react";
+import { useFocused, useSelected } from "slate-react";
 import Utility from "global/components/utility";
 import HtmlLabel from "./HtmlLabel";
 import { getHtmlOutlineStyles } from "./styles";
@@ -11,7 +11,7 @@ export default function VoidRenderer({
   attributes,
   theme,
   darkMode,
-  showHtml
+  showHtml,
 }) {
   const focused = useFocused();
   const selected = useSelected();

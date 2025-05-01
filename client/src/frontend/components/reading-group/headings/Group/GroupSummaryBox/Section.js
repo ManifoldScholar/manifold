@@ -16,7 +16,7 @@ GroupSummarySection.displayName = "ReadingGroup.GroupSummaryBox.Section";
 GroupSummarySection.propTypes = {
   label: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  columns: PropTypes.oneOf([1, 2])
+  columns: PropTypes.oneOf([1, 2]),
 };
 
 export default GroupSummarySection;

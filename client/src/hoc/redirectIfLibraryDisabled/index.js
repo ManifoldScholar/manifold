@@ -14,7 +14,7 @@ function getDisplayName(WrappedComponent) {
 
 export default function redirectIfLibraryDisabled(WrappedComponent) {
   const displayName = `redirectIfLibraryDisabled('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class RedirectIfLibraryDisabled extends React.PureComponent {
@@ -45,7 +45,7 @@ export default function redirectIfLibraryDisabled(WrappedComponent) {
     get currentRouteIsLibraryRoute() {
       const pathname = this.props.location.pathname;
       const branch = matchRoutes([frontendRoutes], pathname);
-      return branch.every(leaf => {
+      return branch.every((leaf) => {
         return leaf.route.isLibrary === true;
       });
     }
@@ -73,7 +73,7 @@ export default function redirectIfLibraryDisabled(WrappedComponent) {
   }
 
   const Decorated = withSettings(
-    withRouter(withDispatch(RedirectIfLibraryDisabled))
+    withRouter(withDispatch(RedirectIfLibraryDisabled)),
   );
 
   return hoistStatics(Decorated, WrappedComponent);

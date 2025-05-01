@@ -1,7 +1,7 @@
 import {
   buttonUnstyled,
   defaultHoverStyle,
-  respond
+  respond,
 } from "theme/styles/mixins";
 
 export default `

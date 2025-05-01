@@ -4,7 +4,7 @@ import {
   utilityPrimary,
   drawerIndent,
   containerPrototype,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -33,7 +33,7 @@ export const Grid = styled.div`
       "main metadata"
       "comments metadata";
     `,
-    65
+    65,
   )}
 `;
 
@@ -51,7 +51,7 @@ export const MetadataWrapper = styled.div`
     `
     padding-block-start: 10px;
     `,
-    65
+    65,
   )}
   }
 `;

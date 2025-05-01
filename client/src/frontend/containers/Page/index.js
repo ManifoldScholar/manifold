@@ -15,18 +15,18 @@ export class PageContainer extends Component {
     return Promise.all([one]);
   };
 
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       loading: state.ui.transitory.loading.active,
       settings: select(requests.settings, state.entityStore),
-      page: select(requests.gPage, state.entityStore)
+      page: select(requests.gPage, state.entityStore),
     };
   };
 
   static propTypes = {
     dispatch: PropTypes.func,
     settings: PropTypes.object,
-    page: PropTypes.object
+    page: PropTypes.object,
   };
 
   componentWillUnmount() {
@@ -44,7 +44,7 @@ export class PageContainer extends Component {
         <div
           className="container page-content"
           dangerouslySetInnerHTML={{
-            __html: this.props.page.attributes.bodyFormatted
+            __html: this.props.page.attributes.bodyFormatted,
           }}
         />
       </section>

@@ -13,13 +13,13 @@ class ResourceImportControlsParsed extends PureComponent {
     resourceImport: PropTypes.object,
     backLinkUrl: PropTypes.string,
     startImport: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get buttonClasses() {
     return classNames(
       "buttons-icon-horizontal__button",
-      "button-icon-secondary"
+      "button-icon-secondary",
     );
   }
 
@@ -39,7 +39,7 @@ class ResourceImportControlsParsed extends PureComponent {
           className="buttons-icon-horizontal"
           style={{
             marginTop: 30,
-            marginBottom: 0
+            marginBottom: 0,
           }}
         >
           <button
@@ -57,7 +57,7 @@ class ResourceImportControlsParsed extends PureComponent {
             to={this.props.backLinkUrl}
             className={classNames(
               this.buttonClasses,
-              "button-icon-secondary--dull"
+              "button-icon-secondary--dull",
             )}
           >
             <IconComposer

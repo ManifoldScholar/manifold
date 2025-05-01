@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import withProjectContext from "hoc/withProjectContext";
 import SignInUp from "global/components/sign-in-up";
 import { useRouteMatch } from "react-router-dom";

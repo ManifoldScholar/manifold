@@ -7,7 +7,7 @@ import classNames from "classnames";
 
 export default class LabelSet extends PureComponent {
   static propTypes = {
-    labels: PropTypes.array
+    labels: PropTypes.array,
   };
 
   get labels() {
@@ -24,7 +24,7 @@ export default class LabelSet extends PureComponent {
       "entity-row__label": true,
       "entity-row__label--notice": isNotice,
       "entity-row__label--warning": isWarning,
-      "entity-row__label--error": isError
+      "entity-row__label--error": isError,
     });
   }
 
@@ -34,7 +34,6 @@ export default class LabelSet extends PureComponent {
     return label;
   }
 
-  /* eslint-disable react/no-array-index-key */
   render() {
     return (
       <span className="entity-row__labels">

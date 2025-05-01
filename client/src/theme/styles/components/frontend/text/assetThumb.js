@@ -3,7 +3,7 @@ import {
   respond,
   subtitlePrimary,
   utilityPrimary,
-  listUnstyled
+  listUnstyled,
 } from "theme/styles/mixins";
 
 export default `

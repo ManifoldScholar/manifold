@@ -13,7 +13,7 @@ export default function EntityThumbnail({
   hideDescription = true,
   hideDate = false,
   stack = true,
-  parentView = false
+  parentView = false,
 }) {
   const urlParam =
     entity.type === "journalIssues"
@@ -56,5 +56,5 @@ EntityThumbnail.propTypes = {
   hideMeta: PropTypes.bool,
   hideDate: PropTypes.bool,
   hideDescription: PropTypes.bool,
-  stack: PropTypes.bool
+  stack: PropTypes.bool,
 };

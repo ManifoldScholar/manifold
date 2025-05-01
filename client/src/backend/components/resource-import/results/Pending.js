@@ -10,7 +10,7 @@ class ResourceImportResultsPending extends PureComponent {
 
   static propTypes = {
     resourceImportRow: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get icon() {
@@ -30,11 +30,11 @@ class ResourceImportResultsPending extends PureComponent {
                 <Link
                   to={lh.link("backendResource", resourceImportRow.resourceId)}
                 />
-              )
+              ),
             }}
             values={{
               resourceTitle: resourceImportRow.resourceTitle,
-              number: resourceImportRow.lineNumber
+              number: resourceImportRow.lineNumber,
             }}
           />
         </span>
@@ -43,7 +43,7 @@ class ResourceImportResultsPending extends PureComponent {
       return (
         <span>
           {t("resources.import.row_will_skip", {
-            number: resourceImportRow.lineNumber
+            number: resourceImportRow.lineNumber,
           })}
         </span>
       );
@@ -51,7 +51,7 @@ class ResourceImportResultsPending extends PureComponent {
     return (
       <span>
         {t("resources.import.row_will_create", {
-          number: resourceImportRow.lineNumber
+          number: resourceImportRow.lineNumber,
         })}
       </span>
     );

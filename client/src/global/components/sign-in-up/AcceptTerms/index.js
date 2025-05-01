@@ -18,13 +18,13 @@ export default function AcceptTerms({ handleViewChange }) {
   const textTwo = attributes?.theme?.stringSignupTermsTwo;
 
   const termsPage = pages?.find(
-    p => p.attributes.purpose === "terms_and_conditions"
+    (p) => p.attributes.purpose === "terms_and_conditions",
   );
   const termsLink = termsPage?.attributes.isExternalLink
     ? termsPage.attributes.externalLink
     : `/page/${termsPage?.attributes.slug}`;
   const privacyPolicy = pages?.find(
-    p => p.attributes.purpose === "privacy_policy"
+    (p) => p.attributes.purpose === "privacy_policy",
   );
   const privacyLink = privacyPolicy?.attributes.isExternalLink
     ? privacyPolicy.attributes.externalLink
@@ -36,7 +36,7 @@ export default function AcceptTerms({ handleViewChange }) {
       values={{ installationName }}
       components={{
         termsLink: termsPage ? <a href={termsLink}>#</a> : <></>,
-        privacyLink: privacyPolicy ? <a href={privacyLink}>#</a> : <></>
+        privacyLink: privacyPolicy ? <a href={privacyLink}>#</a> : <></>,
       }}
     />
   ) : (
@@ -44,7 +44,7 @@ export default function AcceptTerms({ handleViewChange }) {
       i18nKey="forms.signin_overlay.accept_checkbox_label_truncated"
       values={{ installationName }}
       components={{
-        termsLink: termsPage ? <a href={termsLink}>#</a> : <></>
+        termsLink: termsPage ? <a href={termsLink}>#</a> : <></>,
       }}
     />
   );
@@ -78,5 +78,5 @@ export default function AcceptTerms({ handleViewChange }) {
 AcceptTerms.displayName = "Global.SignInUp.AcceptTerms";
 
 AcceptTerms.propTypes = {
-  handleViewChange: PropTypes.func
+  handleViewChange: PropTypes.func,
 };

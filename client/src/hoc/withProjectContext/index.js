@@ -10,7 +10,7 @@ function getDisplayName(WrappedComponent) {
 
 export default function withProjectContext(WrappedComponent) {
   const displayName = `withProjectContext('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithProjectContext extends React.PureComponent {
@@ -27,8 +27,8 @@ export default function withProjectContext(WrappedComponent) {
           breadcrumbs={[
             {
               to: lh.link("frontendProjectDetail", projectContext.slug),
-              label: projectContext.titleFormatted
-            }
+              label: projectContext.titleFormatted,
+            },
           ]}
         />
       ) : null;

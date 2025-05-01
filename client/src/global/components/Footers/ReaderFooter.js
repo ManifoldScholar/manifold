@@ -16,12 +16,12 @@ class ReaderFooter extends Component {
     const html =
       metadata.citationOverride && metadata.rights
         ? `<p>${metadata.citationOverride}</p><p>${metadata.rights}<p>`
-        : metadata.rights ?? metadata.citationOverride;
+        : (metadata.rights ?? metadata.citationOverride);
 
     return (
       <Styled.Copyright
         dangerouslySetInnerHTML={{
-          __html: html
+          __html: html,
         }}
       />
     );
@@ -39,5 +39,5 @@ class ReaderFooter extends Component {
 }
 
 export default withTranslation()(
-  withPluginReplacement(ReaderFooter, "Global.Components.Footers.ReaderFooter")
+  withPluginReplacement(ReaderFooter, "Global.Components.Footers.ReaderFooter"),
 );

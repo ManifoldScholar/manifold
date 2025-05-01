@@ -25,7 +25,7 @@ TextNodeRow.propTypes = {
   count: PropTypes.number.isRequired,
   textSlug: PropTypes.string.isRequired,
   anchor: PropTypes.string,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
 };
 
 TextNodeRow.displayName = "Analytics.Block.Table.TextNodeRow";

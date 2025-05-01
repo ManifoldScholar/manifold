@@ -7,7 +7,7 @@ import {
   annotationsAPI,
   resourcesAPI,
   resourceCollectionsAPI,
-  requests
+  requests,
 } from "api";
 import { grab, isEntityLoaded } from "utils/entityUtils";
 import { entityStoreActions } from "actions";
@@ -37,7 +37,7 @@ export class SectionContainer extends Component {
     if (sectionId && !sectionLoaded) {
       const sectionCall = sectionsAPI.show(sectionId, textId);
       const { promise: two } = dispatch(
-        request(sectionCall, requests.rSection)
+        request(sectionCall, requests.rSection),
       );
       promises.push(two);
     }
@@ -49,8 +49,8 @@ export class SectionContainer extends Component {
       section: grab(
         "textSections",
         ownProps.match.params.sectionId,
-        state.entityStore
-      )
+        state.entityStore,
+      ),
     };
   };
 
@@ -66,7 +66,7 @@ export class SectionContainer extends Component {
     text: PropTypes.object.isRequired,
     appearance: PropTypes.object.isRequired,
     authentication: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -104,7 +104,7 @@ export class SectionContainer extends Component {
       const missing = this.hasMissingResourcesOrCollections(
         this.props.annotations,
         this.props.resources,
-        this.props.resourceCollections
+        this.props.resourceCollections,
       );
       if (missing) {
         if (some(missing, ["type", "resource"])) {
@@ -143,10 +143,10 @@ export class SectionContainer extends Component {
 
     const collectionsCall = resourceCollectionsAPI.forSection(
       sectionId,
-      textId
+      textId,
     );
     props.dispatch(
-      request(collectionsCall, requests.rSectionResourceCollections)
+      request(collectionsCall, requests.rSectionResourceCollections),
     );
   }
 
@@ -156,16 +156,16 @@ export class SectionContainer extends Component {
     const collections = collectionsIn || [];
     const needed = uniq(
       annotations
-        .map(a => {
+        .map((a) => {
           return {
             id: a.attributes.resourceId || a.attributes.resourceCollectionId,
-            type: a.attributes.format
+            type: a.attributes.format,
           };
         })
-        .filter(id => id !== null)
+        .filter((id) => id !== null),
     );
-    const has = resources.map(r => r.id);
-    const cHas = collections.map(r => r.id);
+    const has = resources.map((r) => r.id);
+    const cHas = collections.map((r) => r.id);
     has.concat(cHas);
     const diff = difference(needed, has);
     if (diff.length > 0) return diff;
@@ -179,19 +179,19 @@ export class SectionContainer extends Component {
     return false;
   }
 
-  renderStyles = props => {
+  renderStyles = (props) => {
     const globalStylesheet = props.text.relationships.stylesheets?.find(
-      s => s.attributes.appliesToAllTextSections
+      (s) => s.attributes.appliesToAllTextSections,
     );
     const stylesheets = globalStylesheet
       ? [globalStylesheet, ...values(props.section.relationships.stylesheets)]
       : values(props.section.relationships.stylesheets);
-    return stylesheets.map(stylesheet => {
+    return stylesheets.map((stylesheet) => {
       return (
         <style
           key={stylesheet.id}
           dangerouslySetInnerHTML={{
-            __html: `@layer stylesheets {${stylesheet.attributes.styles}}`
+            __html: `@layer stylesheets {${stylesheet.attributes.styles}}`,
           }}
         />
       );
@@ -242,5 +242,5 @@ export class SectionContainer extends Component {
 }
 
 export default withTranslation()(
-  connectAndFetch(withSettings(SectionContainer))
+  connectAndFetch(withSettings(SectionContainer)),
 );

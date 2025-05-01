@@ -17,16 +17,16 @@ import { useFetch } from "hooks";
 
 export default function ResourceDetailContainer({
   project,
-  journalBreadcrumbs
+  journalBreadcrumbs,
 }) {
   const { resourceId, resourceCollectionId } = useParams();
   const { data: resource } = useFetch({
     request: [resourcesAPI.show, resourceId],
-    options: { requestKey: requests.feResource }
+    options: { requestKey: requests.feResource },
   });
   const { data: collection } = useFetch({
     request: [resourceCollectionsAPI.show, resourceCollectionId],
-    condition: !!resourceCollectionId
+    condition: !!resourceCollectionId,
   });
 
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ export default function ResourceDetailContainer({
 
   useEffect(() => {
     const collectionIncludesResource = (c, r) => {
-      return some(c.relationships.resources, cR => {
+      return some(c.relationships.resources, (cR) => {
         return cR.id === r.id;
       });
     };
@@ -65,7 +65,7 @@ export default function ResourceDetailContainer({
           collection,
           journalBreadcrumbs,
           t,
-          pathname
+          pathname,
         })}
       />
       <Resource.Detail
@@ -78,7 +78,7 @@ export default function ResourceDetailContainer({
 
 ResourceDetailContainer.propTypes = {
   project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
+  journalBreadcrumbs: PropTypes.array,
 };
 
 ResourceDetailContainer.displayName = "Frontend.Containers.ResourceDetail";

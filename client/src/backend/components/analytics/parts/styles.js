@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   utilityPrimary,
   defaultTransitionProps,
-  unstyledSelect
+  unstyledSelect,
 } from "theme/styles/mixins";
 import Utility from "global/components/utility";
 

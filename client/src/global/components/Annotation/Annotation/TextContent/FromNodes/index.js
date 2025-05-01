@@ -13,7 +13,7 @@ function AnnotationWithNodes({ annotation, selection }) {
     startNode: startNodeId,
     endNode: endNodeId,
     startChar,
-    endChar
+    endChar,
   } = annotation?.attributes ?? {};
 
   const fallback = (
@@ -24,15 +24,15 @@ function AnnotationWithNodes({ annotation, selection }) {
 
   const { sectionId } = useParams();
   const bodyJSON = useFromStore(
-    `entityStore.entities.textSections["${sectionId}"].attributes.bodyJSON`
+    `entityStore.entities.textSections["${sectionId}"].attributes.bodyJSON`,
   );
 
   const length = selection?.replace("\n", " ")?.length;
-  /* eslint-disable no-nested-ternary */
+
   const contextCharLimit = length > 500 ? 25 : length > 200 ? 50 : 100;
 
   const textSplit = useRef(0);
-  const setSplit = val => (textSplit.current = val);
+  const setSplit = (val) => (textSplit.current = val);
 
   const haystack = annotationNode ?? bodyJSON;
 
@@ -45,7 +45,7 @@ function AnnotationWithNodes({ annotation, selection }) {
       target: startNodeId,
       startChar,
       limit: contextCharLimit,
-      setSplit
+      setSplit,
     });
     if (!adjustedStack) return null;
     const finalStack = maybeTruncateChildren({
@@ -53,7 +53,7 @@ function AnnotationWithNodes({ annotation, selection }) {
       target: endNodeId,
       endChar: subjectInSingleNode ? endChar - textSplit.current : endChar,
       limit: contextCharLimit,
-      fromStart: false
+      fromStart: false,
     });
     if (!finalStack) return null;
     return finalStack;
@@ -61,18 +61,19 @@ function AnnotationWithNodes({ annotation, selection }) {
 
   const finalStack = siftHaystack();
   const nodesToRender =
-    finalStack?.children ?? finalStack?.content ? [finalStack] : undefined;
+    (finalStack?.children ?? finalStack?.content) ? [finalStack] : undefined;
 
   const activeGroup = useFromStore(
-    `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`
+    `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`,
   );
   const memberships = useFromStore(
-    `entityStore.entities.readingGroupMemberships`
+    `entityStore.entities.readingGroupMemberships`,
   );
   const membership =
     typeof memberships === "object"
       ? Object.keys(memberships)?.find(
-          m => memberships[m].relationships.readingGroup.data.id === activeGroup
+          (m) =>
+            memberships[m].relationships.readingGroup.data.id === activeGroup,
         )
       : null;
   const annotationStyle =
@@ -85,7 +86,7 @@ function AnnotationWithNodes({ annotation, selection }) {
   const fragment = {
     nodeType: "element",
     tag: "div",
-    children: nodesToRender
+    children: nodesToRender,
   };
 
   const adjustedEndChar =
@@ -104,12 +105,12 @@ function AnnotationWithNodes({ annotation, selection }) {
           format: "annotation",
           ...annotation.attributes,
           startChar: textSplit ? startChar - textSplit.current - 1 : startChar,
-          endChar: adjustedEndChar
-        }
-      }
+          endChar: adjustedEndChar,
+        },
+      },
     ],
     location: { hash: `` },
-    isDetail: true
+    isDetail: true,
   });
 
   return <Wrapper>{iterator.visit(fragment, null, blacklist)}</Wrapper>;

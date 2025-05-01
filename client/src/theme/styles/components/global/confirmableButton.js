@@ -2,7 +2,7 @@ import {
   listUnstyled,
   buttonUnstyled,
   utilityPrimary,
-  defaultHoverStyle
+  defaultHoverStyle,
 } from "theme/styles/mixins";
 
 export default `

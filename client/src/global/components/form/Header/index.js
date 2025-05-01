@@ -9,7 +9,7 @@ export default class FormHeader extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    instructions: PropTypes.string
+    instructions: PropTypes.string,
   };
 
   render() {

@@ -15,15 +15,15 @@ export default class FatalErrorClientTrace extends PureComponent {
           id: index,
           method: parts[0].trim(),
           location: parts[1].replace("webpack-internal:///", ""),
-          orig: line
+          orig: line,
         };
       })
-      .filter(i => !!i);
+      .filter((i) => !!i);
   }
 
   static propTypes = {
     trace: PropTypes.string.isRequired,
-    truncate: PropTypes.number
+    truncate: PropTypes.number,
   };
 
   constructor(props) {
@@ -32,7 +32,7 @@ export default class FatalErrorClientTrace extends PureComponent {
   }
 
   componentDidMount() {
-    console.error(this.props.trace); // eslint-disable-line no-console
+    console.error(this.props.trace);
   }
 
   static getDerivedStateFromProps(props) {
@@ -58,7 +58,7 @@ export default class FatalErrorClientTrace extends PureComponent {
             {this.props.truncate ? "Truncated" : null} Client Stack
           </Styled.StackTitle>
           <Styled.LineList>
-            {this.state.stackLines.map(line => {
+            {this.state.stackLines.map((line) => {
               return (
                 <Styled.Line key={line.id}>
                   {line.method}

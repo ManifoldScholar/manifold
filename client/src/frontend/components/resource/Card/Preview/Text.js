@@ -12,13 +12,13 @@ function getContentForKind(resource, t) {
         return {
           text: t("actions.visit"),
           icon: "arrowRight16",
-          iconSize: "default"
+          iconSize: "default",
         };
       default:
         return {
           text: t("actions.view"),
           icon: "arrowRight16",
-          iconSize: "default"
+          iconSize: "default",
         };
     }
   }
@@ -29,19 +29,19 @@ function getContentForKind(resource, t) {
       return {
         text: t("actions.preview"),
         icon: "eyeOpen16",
-        iconSize: 21.333
+        iconSize: 21.333,
       };
     case "video":
       return {
         text: t("actions.play"),
         icon: "play16",
-        iconSize: 19.2
+        iconSize: 19.2,
       };
     default:
       return {
         text: t("actions.download"),
         icon: "arrowDown16",
-        iconSize: "default"
+        iconSize: "default",
       };
   }
 }
@@ -63,7 +63,7 @@ function Text({ resource }) {
 Text.displayName = "ResourceCard.Preview.Text";
 
 Text.propTypes = {
-  resource: PropTypes.object.isRequired
+  resource: PropTypes.object.isRequired,
 };
 
 export default Text;

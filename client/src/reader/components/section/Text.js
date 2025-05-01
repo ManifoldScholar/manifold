@@ -25,7 +25,7 @@ export default class Text extends Component {
     match: PropTypes.object,
     children: PropTypes.object,
     visibility: PropTypes.object,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -35,8 +35,8 @@ export default class Text extends Component {
       annotationsMemo: props.annotations,
       filteredAnnotations: Text.filterAnnotations(
         props.visibility.visibilityFilters,
-        props.annotations
-      )
+        props.annotations,
+      ),
     };
   }
 
@@ -48,10 +48,10 @@ export default class Text extends Component {
       return {
         filteredAnnotations: Text.filterAnnotations(
           props.visibility.visibilityFilters,
-          props.annotations
+          props.annotations,
         ),
         annotationMemo: props.annotations,
-        visibilityFiltersMemo: props.visibility.visibilityFilters
+        visibilityFiltersMemo: props.visibility.visibilityFilters,
       };
     }
     return null;
@@ -83,7 +83,7 @@ export default class Text extends Component {
     if (!locationHelper.hashed(location)) return;
     if (!locationHelper.hashTypeMatch(location, "annotation")) return;
     const hashId = locationHelper.hashId(location, "annotation");
-    const finder = a => a.id === hashId;
+    const finder = (a) => a.id === hashId;
     const filteredMatch = this.state.filteredAnnotations.find(finder);
     if (filteredMatch) return;
     const collectionMatch = this.props.annotations.find(finder);
@@ -98,7 +98,7 @@ export default class Text extends Component {
     const readerAppearanceClass = classNames({
       "reader-window": true,
       "scheme-light": colorScheme === "light",
-      "scheme-dark": colorScheme === "dark"
+      "scheme-dark": colorScheme === "dark",
     });
 
     // Font selection may be handled differently later, but for now, variants are based
@@ -106,7 +106,7 @@ export default class Text extends Component {
     let textSectionClass = classNames({
       "manifold-text-section text-section": true,
       "font-serif": typography.font === "serif",
-      "font-sans-serif": typography.font === "sans-serif"
+      "font-sans-serif": typography.font === "sans-serif",
     });
 
     // Apply a font-size class to the text-section

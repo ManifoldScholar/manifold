@@ -38,5 +38,5 @@ Item.displayName = "Meta.Item";
 Item.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string])
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
 };

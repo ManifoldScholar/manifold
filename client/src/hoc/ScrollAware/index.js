@@ -12,7 +12,7 @@ export default class ScrollAware extends Component {
     startPinned: PropTypes.bool,
     pinnedClass: PropTypes.string,
     notPinnedClass: PropTypes.string,
-    pinThreshold: PropTypes.number
+    pinThreshold: PropTypes.number,
   };
 
   static defaultProps = {
@@ -25,7 +25,7 @@ export default class ScrollAware extends Component {
     startPinned: true,
     pinnedClass: "pinned",
     notPinnedClass: "not-pinned",
-    pinThreshold: 50
+    pinThreshold: 50,
   };
 
   constructor() {
@@ -35,7 +35,7 @@ export default class ScrollAware extends Component {
       pinned: true,
       scroll: 0,
       direction: "down",
-      log: null
+      log: null,
     };
 
     this.throttleScroll = throttle(this.handleScroll, 500).bind(this);
@@ -111,7 +111,7 @@ export default class ScrollAware extends Component {
       pinned,
       direction,
       log,
-      scroll: this.getScrollTop()
+      scroll: this.getScrollTop(),
     });
   }
 
@@ -125,15 +125,15 @@ export default class ScrollAware extends Component {
     return React.cloneElement(firstChild, {
       scrollAware: {
         top: this.state.top,
-        pinned: this.state.pinned
-      }
+        pinned: this.state.pinned,
+      },
     });
   }
 
   render() {
     // Dynaimcally assign scroller classes based on props
     const scrollClasses = {
-      "scroll-aware": true
+      "scroll-aware": true,
     };
 
     scrollClasses[this.props.topClass] = this.state.top;

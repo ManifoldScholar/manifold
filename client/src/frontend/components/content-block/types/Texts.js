@@ -8,7 +8,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
 
   static propTypes = {
     block: PropTypes.object.isRequired,
-    entity: PropTypes.object.isRequired
+    entity: PropTypes.object.isRequired,
   };
 
   static get title() {
@@ -38,7 +38,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
 
   get uncategorizedTexts() {
     return this.filteredOrderedTexts(
-      text => !text.relationships || !text.relationships.category
+      (text) => !text.relationships || !text.relationships.category,
     );
   }
 
@@ -57,12 +57,12 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
       "showDates",
       "showDescriptions",
       "showSubtitles",
-      "showUncategorized"
+      "showUncategorized",
     ]);
   }
 
   textsForCategory(category) {
-    return this.filteredOrderedTexts(text => {
+    return this.filteredOrderedTexts((text) => {
       if (!text.relationships || !text.relationships.category) return false;
       return text.relationships.category.id === category.id;
     });
@@ -71,7 +71,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
   render() {
     return (
       <>
-        {this.categories.map(category => (
+        {this.categories.map((category) => (
           <TextList
             label={
               this.visibility.showCategoryLabels

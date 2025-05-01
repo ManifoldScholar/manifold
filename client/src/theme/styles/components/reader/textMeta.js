@@ -2,7 +2,7 @@ import {
   subtitlePrimary,
   headingPrimary,
   respond,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 
 export default `

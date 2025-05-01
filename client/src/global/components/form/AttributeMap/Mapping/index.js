@@ -15,7 +15,7 @@ class FormColumnMapMapping extends PureComponent {
     index: PropTypes.number.isRequired,
     match: PropTypes.string,
     unLink: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

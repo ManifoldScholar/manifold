@@ -41,8 +41,8 @@ function ResourceCollectionsPlaceholder({ id }) {
                   {t("actions.create_collection")}
                 </Link>
               </Authorize>
-            )
-          }
+            ),
+          },
         ]}
       />
     </Wrapper>
@@ -53,7 +53,7 @@ ResourceCollectionsPlaceholder.displayName =
   "Global.Entity.CollectionPlaceholder.ResourceCollections";
 
 ResourceCollectionsPlaceholder.propTypes = {
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
 };
 
 export default ResourceCollectionsPlaceholder;

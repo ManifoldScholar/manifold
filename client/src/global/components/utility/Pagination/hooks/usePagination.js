@@ -20,7 +20,7 @@ export default function usePagination({
   currentPage,
   totalCount,
   perPage,
-  padding = 2 // number of siblings to show on either side of current page
+  padding = 2, // number of siblings to show on either side of current page
 }) {
   const paginationRange = useMemo(() => {
     if (!currentPage || !totalCount || !perPage) return null;
@@ -57,7 +57,7 @@ export default function usePagination({
     if (showLeftDots && !showRightDots) {
       const rightRange = range(
         totalPageCount - visiblePageNumbers + 1,
-        totalPageCount
+        totalPageCount,
       );
       return [1, ELLIPSIS_CHAR, ...rightRange];
     }

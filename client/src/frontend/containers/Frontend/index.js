@@ -21,12 +21,12 @@ export class FrontendContainer extends Component {
   static fetchData = (getState, dispatch) => {
     if (!isLoaded(requests.gPages, getState())) {
       const pages = request(pagesAPI.index(), requests.gPages, {
-        oneTime: true
+        oneTime: true,
       });
       const subjects = request(
         subjectsAPI.index({ used: true }, {}, true),
         requests.feSubjects,
-        { oneTime: true }
+        { oneTime: true },
       );
       const promises = [];
       const pagesRes = dispatch(pages);
@@ -37,7 +37,7 @@ export class FrontendContainer extends Component {
     }
   };
 
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
@@ -45,7 +45,7 @@ export class FrontendContainer extends Component {
       notifications: state.notifications,
       frontendMode: state.ui.transitory.frontendMode,
       pages: select(requests.gPages, state.entityStore),
-      settings: select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore),
     };
   };
 
@@ -59,7 +59,7 @@ export class FrontendContainer extends Component {
     pages: PropTypes.array,
     settings: PropTypes.object,
     route: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
   };
 
   constructor(props) {
@@ -96,12 +96,12 @@ export class FrontendContainer extends Component {
   get mainClassName() {
     const hasPressLogo = get(
       this.props.settings,
-      "attributes.pressLogoStyles.small"
+      "attributes.pressLogoStyles.small",
     );
     return classNames({
       "main-content": true,
       "flex-viewport": true,
-      "extra-top": hasPressLogo
+      "extra-top": hasPressLogo,
     });
   }
 
@@ -121,7 +121,7 @@ export class FrontendContainer extends Component {
             settings={this.props.settings}
           />
           <main
-            ref={mainContainer => {
+            ref={(mainContainer) => {
               this.mainContainer = mainContainer;
             }}
             id="skip-to-main"

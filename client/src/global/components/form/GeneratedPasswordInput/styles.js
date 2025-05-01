@@ -4,7 +4,7 @@ import {
   respond,
   fluidScale,
   formInputBase,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 const VISIBILITY_TOGGLE_SIZE = 32;

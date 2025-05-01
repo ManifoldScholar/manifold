@@ -9,12 +9,12 @@ export default class DefaultSlide extends Component {
   static propTypes = {
     resource: PropTypes.object.isRequired,
     info: PropTypes.bool,
-    backgroundUrl: PropTypes.string
+    backgroundUrl: PropTypes.string,
   };
 
   static defaultProps = {
     backgroundUrl: "/static/images/resource-splash.png",
-    info: true
+    info: true,
   };
 
   render() {

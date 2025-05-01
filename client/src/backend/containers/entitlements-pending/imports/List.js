@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { entitlementImportsAPI } from "api";
 import EntitiesList, {
-  EntitlementImportRow
+  EntitlementImportRow,
 } from "backend/components/list/EntitiesList";
 import { useFetch, useListQueryParams } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -12,19 +12,19 @@ export default function EntitlementImportsList() {
   const { t } = useTranslation();
 
   const { pagination } = useListQueryParams({
-    initSize: 10
+    initSize: 10,
   });
 
   const { data: csvImports, meta } = useFetch({
-    request: [entitlementImportsAPI.index, null, pagination]
+    request: [entitlementImportsAPI.index, null, pagination],
   });
 
   const actions = [
     {
       label: "entitlements.imports.view_pending_label",
       route: "backendRecordsEntitlements",
-      icon: "eyeOpen32"
-    }
+      icon: "eyeOpen32",
+    },
   ];
 
   return csvImports ? (
@@ -40,7 +40,7 @@ export default function EntitlementImportsList() {
         pagination={meta.pagination}
         showCount
         unit={t("glossary.import", {
-          count: meta.pagination?.totalCount
+          count: meta.pagination?.totalCount,
         })}
       />
     </>
@@ -51,5 +51,5 @@ EntitlementImportsList.displayName = "EntitlementImports.List";
 
 EntitlementImportsList.propTypes = {
   entitiesListSearchProps: PropTypes.func,
-  entitiesListSearchParams: PropTypes.object
+  entitiesListSearchParams: PropTypes.object,
 };

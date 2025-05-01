@@ -7,7 +7,7 @@ class ResourceFormKindLink extends PureComponent {
   static displayName = "Resource.Form.Kind.Link";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

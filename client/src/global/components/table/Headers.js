@@ -10,9 +10,9 @@ export default class TableHeaders extends React.PureComponent {
         label: PropTypes.string,
         icon: PropTypes.string,
         align: PropTypes.string,
-        cellPadding: PropTypes.string
-      })
-    )
+        cellPadding: PropTypes.string,
+      }),
+    ),
   };
 
   static displayName = "GenericTable.Headers";
@@ -30,7 +30,7 @@ export default class TableHeaders extends React.PureComponent {
       table__th: true,
       "table__small-padding-left": cellPadding === "leftSmall",
       table__centered: cellAlignment === "center",
-      table__right: cellAlignment === "right"
+      table__right: cellAlignment === "right",
     });
   }
 
@@ -39,14 +39,14 @@ export default class TableHeaders extends React.PureComponent {
     return (
       <thead>
         <tr className={this.rowClassNames}>
-          {headers.map(header => {
+          {headers.map((header) => {
             return (
               <th
                 key={header.key}
                 scope="col"
                 className={this.cellClassNames(
                   header.cellPadding,
-                  header.align
+                  header.align,
                 )}
               >
                 <Utility.LabelWithIcon

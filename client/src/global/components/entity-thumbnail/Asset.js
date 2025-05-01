@@ -8,7 +8,7 @@ export default function EntityThumbnailAsset({
   height,
   className,
   icon,
-  isImage
+  isImage,
 }) {
   const { id } = entity ?? {};
 
@@ -39,5 +39,5 @@ EntityThumbnailAsset.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   className: PropTypes.string,
-  icon: PropTypes.string.isRequired
+  icon: PropTypes.string.isRequired,
 };

@@ -13,7 +13,7 @@ import * as Styled from "./styles";
 export default function NotificationsForm({
   showAllProjects,
   preferences,
-  setPreferences
+  setPreferences,
 }) {
   const authentication = useFromStore("authentication");
   const { t } = useTranslation();
@@ -27,11 +27,11 @@ export default function NotificationsForm({
 
     const isAdmin = authorization.authorizeKind({
       authentication,
-      kind: "admin"
+      kind: "admin",
     });
     const isProjectCreator = authorization.authorizeKind({
       authentication,
-      kind: "project_creator"
+      kind: "project_creator",
     });
 
     if (isAdmin || isProjectCreator)
@@ -44,21 +44,21 @@ export default function NotificationsForm({
   const unsubscribeAll = () => {
     const otherActivity = otherActivityOptions.reduce(
       (obj, option) => ({ ...obj, [option]: "never" }),
-      {}
+      {},
     );
     setPreferences({
       ...otherActivity,
       digest: "never",
-      digestCommentsAndAnnotations: "never"
+      digestCommentsAndAnnotations: "never",
     });
   };
 
-  const onPreferenceChange = e => {
+  const onPreferenceChange = (e) => {
     const update = { ...preferences, [e.target.name]: e.target.value };
     setPreferences(update);
   };
 
-  const onDigestChange = e => {
+  const onDigestChange = (e) => {
     const toInclude = e.target.value;
     const toExclude =
       e.target.value === "projects" ? "followedProjects" : "projects";
@@ -66,20 +66,20 @@ export default function NotificationsForm({
     const update = {
       ...preferences,
       [toInclude]: "always",
-      [toExclude]: "never"
+      [toExclude]: "never",
     };
 
     setPreferences(update);
   };
 
   const renderNotificationContent = () => {
-    return otherActivityOptions.map(item => {
+    return otherActivityOptions.map((item) => {
       const i18nKey = humps.decamelize(item, { separator: "_" }).toLowerCase();
       const label = t(
-        `forms.notifications.activity_preferences.${i18nKey}_label`
+        `forms.notifications.activity_preferences.${i18nKey}_label`,
       );
       const instructions = t(
-        `forms.notifications.activity_preferences.${i18nKey}_instructions`
+        `forms.notifications.activity_preferences.${i18nKey}_instructions`,
       );
 
       return (
@@ -123,5 +123,5 @@ export default function NotificationsForm({
 NotificationsForm.displayName = "Frontend.Preferences.NotificationsForm";
 
 NotificationsForm.propTypes = {
-  showAllProjects: PropTypes.bool
+  showAllProjects: PropTypes.bool,
 };

@@ -23,7 +23,7 @@ JournalIssueNew.propTypes = {
   journal: PropTypes.object.isRequired,
   closeUrl: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
-  refreshIssues: PropTypes.func.isRequired
+  refreshIssues: PropTypes.func.isRequired,
 };
 
 export default JournalIssueNew;

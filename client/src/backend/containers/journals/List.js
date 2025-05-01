@@ -8,20 +8,20 @@ import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
   Search,
-  JournalRow
+  JournalRow,
 } from "backend/components/list/EntitiesList";
 
 function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
   const { pagination, filters, searchProps } = useListQueryParams({
     initFilters: {
       withUpdateOrIssueUpdateAbility: true,
-      ...entitiesListSearchParams.journals
+      ...entitiesListSearchParams.journals,
     },
-    initSearchProps: entitiesListSearchProps("journals")
+    initSearchProps: entitiesListSearchProps("journals"),
   });
 
   const { data, meta } = useFetch({
-    request: [journalsAPI.index, filters, pagination]
+    request: [journalsAPI.index, filters, pagination],
   });
 
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
       <EntitiesList
         entityComponent={JournalRow}
         title={t("glossary.journal_title_case", {
-          count: meta.pagination.totalCount
+          count: meta.pagination.totalCount,
         })}
         titleIcon="Journals64"
         titleStyle="bar"
@@ -53,7 +53,7 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
             text={t("journals.add_button_label")}
             authorizedFor="journal"
             type="add"
-          />
+          />,
         ]}
       />
     </>
@@ -61,5 +61,5 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
 }
 
 export default withFilteredLists(JournalsList, {
-  journals: journalFilters()
+  journals: journalFilters(),
 });

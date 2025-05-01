@@ -15,7 +15,7 @@ export default `
     .annotation-comments {
       --Annotation-Detail-Inner-padding-block-start: ${fluidScale(
         "40px",
-        "32px"
+        "32px",
       )};
 
       ${drawerPadding("padding-right")}

@@ -16,6 +16,6 @@ export const Row = styled.div`
       flex-direction: row;
       justify-content: space-between;
     `,
-    65
+    65,
   )}
 `;

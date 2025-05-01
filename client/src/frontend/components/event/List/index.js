@@ -7,7 +7,7 @@ export default class EventList extends Component {
   static displayName = "Event.List";
 
   static propTypes = {
-    events: PropTypes.array.isRequired
+    events: PropTypes.array.isRequired,
   };
 
   render() {
@@ -15,7 +15,7 @@ export default class EventList extends Component {
 
     return (
       <Styled.List>
-        {this.props.events.map(event => {
+        {this.props.events.map((event) => {
           return <Styled.Item as={Event} event={event} key={event.id} />;
         })}
       </Styled.List>

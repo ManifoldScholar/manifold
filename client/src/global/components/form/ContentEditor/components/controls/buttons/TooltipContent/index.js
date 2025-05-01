@@ -8,12 +8,11 @@ export default function TooltipContent({ label, description, hotkeys = [] }) {
         <Styled.Label>{label}</Styled.Label>
         {description && <Styled.Description>{description}</Styled.Description>}
       </Styled.Header>
-      {hotkeys.map(hk => (
+      {hotkeys.map((hk) => (
         <Styled.HotKey key={hk.label}>
           <Styled.HotKeyLabel>{hk.label}</Styled.HotKeyLabel>
           <Styled.Keys>
             {hk.keys.map((k, i) => (
-              /* eslint-disable react/no-array-index-key */
               <Fragment key={`${k}_${i}`}>
                 <Styled.Key>{k}</Styled.Key>
                 {hk.inline && i === 0 && (

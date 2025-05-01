@@ -26,7 +26,7 @@ export class NavigationMobile extends Component {
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
     style: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static contextType = FrontendModeContext;
@@ -58,7 +58,7 @@ export class NavigationMobile extends Component {
   get initialState() {
     return {
       expanded: [],
-      open: false
+      open: false,
     };
   }
 
@@ -79,8 +79,8 @@ export class NavigationMobile extends Component {
     return lh.link(link.route, ...args);
   }
 
-  createExpandToggleHandler = memoize(key => {
-    return event => {
+  createExpandToggleHandler = memoize((key) => {
+    return (event) => {
       event.preventDefault();
       this.toggleExpanded(key);
     };
@@ -94,7 +94,7 @@ export class NavigationMobile extends Component {
     }
   };
 
-  toggleExpanded = key => {
+  toggleExpanded = (key) => {
     if (this.state.expanded.includes(key)) {
       this.collapse(key);
     } else {
@@ -129,7 +129,7 @@ export class NavigationMobile extends Component {
     const journalIsActive = this.props.journalIsActive;
 
     const active = [];
-    this.props.links.forEach(link => {
+    this.props.links.forEach((link) => {
       const route = lh.routeFromName(link.route);
       const match = matchPath(this.props.location.pathname, route) !== null;
       if (match) {
@@ -210,7 +210,7 @@ export class NavigationMobile extends Component {
       "nested-nav__item": true,
       "nested-nav__grid-item": true,
       "nested-nav__item--nested": hasChildren,
-      "nested-nav__item--open": expanded
+      "nested-nav__item--open": expanded,
     });
     const t = this.props.t;
 
@@ -240,7 +240,7 @@ export class NavigationMobile extends Component {
         )}
         {hasChildren && (
           <ul className="nested-nav__list nested-nav__list--nested">
-            {children.map(child => this.renderItem(child))}
+            {children.map((child) => this.renderItem(child))}
           </ul>
         )}
       </li>
@@ -253,7 +253,7 @@ export class NavigationMobile extends Component {
         <FocusTrap
           focusTrapOptions={{
             allowOutsideClick: true,
-            escapeDeactivates: this.closeNavigation.bind(this)
+            escapeDeactivates: this.closeNavigation.bind(this),
           }}
         >
           <div className="nested-nav__content">
@@ -296,7 +296,7 @@ export class NavigationMobile extends Component {
       "hide-100": this.props.mode === "backend",
       "nested-nav": true,
       "nested-nav--open": this.state.open,
-      "nested-nav--dark": this.props.mode === "backend"
+      "nested-nav--dark": this.props.mode === "backend",
     });
     const { t } = this.props;
 

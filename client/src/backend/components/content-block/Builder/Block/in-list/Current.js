@@ -17,7 +17,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
     dragHandleProps: PropTypes.object,
     index: PropTypes.number,
     entityCount: PropTypes.number,
-    announce: PropTypes.func
+    announce: PropTypes.func,
   };
 
   get entity() {
@@ -50,7 +50,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
 
     return (
       <TypeComponent>
-        {block => (
+        {(block) => (
           <div className={`${baseClass}__inner`}>
             <Identity
               icon={block.icon}

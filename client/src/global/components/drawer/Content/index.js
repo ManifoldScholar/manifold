@@ -25,16 +25,16 @@ function DrawerContent(props, ref) {
     lockScroll = false,
     hasConfirm,
     showNotifications,
-    open
+    open,
   } = props;
 
   const connected = useFromStore("websocket.connected");
   usePreventBodyScroll(lockScroll && open);
 
   // Waits for animation to finish before focusing in trap.
-  const checkCanFocusTrap = trapContainers => {
-    const results = trapContainers.map(trapContainer => {
-      return new Promise(resolve => {
+  const checkCanFocusTrap = (trapContainers) => {
+    const results = trapContainers.map((trapContainer) => {
+      return new Promise((resolve) => {
         const interval = setInterval(() => {
           if (getComputedStyle(trapContainer).visibility !== "hidden") {
             resolve();
@@ -46,7 +46,7 @@ function DrawerContent(props, ref) {
     return Promise.all(results);
   };
 
-  const handleEscape = e => {
+  const handleEscape = (e) => {
     e.preventDefault();
     handleLeaveEvent(e);
 
@@ -54,24 +54,23 @@ function DrawerContent(props, ref) {
     return true;
   };
 
-  /* eslint-disable no-nested-ternary */
   const Drawer =
     context === "reader"
       ? Styled.DrawerReader
       : context === "editor"
-      ? Styled.DrawerEditor
-      : position === "overlay"
-      ? Styled.DrawerOverlay
-      : Styled.Drawer;
+        ? Styled.DrawerEditor
+        : position === "overlay"
+          ? Styled.DrawerOverlay
+          : Styled.Drawer;
 
   const Inner = context === "editor" ? Styled.DrawerEditorInner : "div";
 
   // A variety of other classes depend on .drawer--backend
   const classes = classNames(entrySide, size, `pad-${padding}`, {
-    "drawer--backend": context === "backend"
+    "drawer--backend": context === "backend",
   });
 
-  const handleClickOutside = e => {
+  const handleClickOutside = (e) => {
     if (context === "reader" || context === "editor") return;
 
     handleLeaveEvent(e);
@@ -79,7 +78,7 @@ function DrawerContent(props, ref) {
     return false;
   };
 
-  const handleBlur = e => {
+  const handleBlur = (e) => {
     if (focusTrap || !ref?.current) return;
     if (ref.current.contains(event.relatedTarget)) return;
 
@@ -102,7 +101,7 @@ function DrawerContent(props, ref) {
           (typeof children === "string"
             ? children
             : React.cloneElement(children, {
-                closeDrawer: handleLeaveEvent
+                closeDrawer: handleLeaveEvent,
               }))}
       </DrawerContext.Provider>
     </Inner>
@@ -130,7 +129,7 @@ function DrawerContent(props, ref) {
             allowOutsideClick: context === "reader",
             clickOutsideDeactivates: handleClickOutside,
             escapeDeactivates: handleEscape,
-            returnFocusOnDeactivate
+            returnFocusOnDeactivate,
           }}
         >
           {inner}
@@ -161,5 +160,5 @@ DrawerContent.propTypes = {
   handleLeaveEvent: PropTypes.func.isRequired,
   lockScroll: PropTypes.bool,
   hasConfirm: PropTypes.bool,
-  open: PropTypes.bool
+  open: PropTypes.bool,
 };

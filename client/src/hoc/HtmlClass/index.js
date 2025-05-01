@@ -7,7 +7,7 @@ let lastHtmlElementClassValue = null;
 class HtmlClass extends Component {
   static propTypes = {
     className: PropTypes.string.isRequired,
-    children: PropTypes.object
+    children: PropTypes.object,
   };
 
   render() {
@@ -19,24 +19,24 @@ class HtmlClass extends Component {
 }
 
 function reducePropsToState(propsList) {
-  const classes = propsList.map(prop => {
+  const classes = propsList.map((prop) => {
     return prop.className;
   });
   return classes;
 }
 
 function handleStateChangeOnClient(classes) {
-  const htmlClasses = classes.map(className => className.trim());
+  const htmlClasses = classes.map((className) => className.trim());
   if (htmlClasses.join(",") === lastHtmlElementClassValue) return;
   const element = document.documentElement;
   if (!element || !element.dataset) return;
   if (element.dataset.addedClasses) {
     const previouslyAddedClasses = element.dataset.addedClasses.split(",");
-    previouslyAddedClasses.forEach(className => {
+    previouslyAddedClasses.forEach((className) => {
       element.classList.remove(className);
     });
   }
-  htmlClasses.forEach(className => {
+  htmlClasses.forEach((className) => {
     element.classList.add(className.trim());
   });
   lastHtmlElementClassValue = htmlClasses.join(",");
@@ -45,5 +45,5 @@ function handleStateChangeOnClient(classes) {
 
 export default withSideEffect(
   reducePropsToState,
-  handleStateChangeOnClient
+  handleStateChangeOnClient,
 )(HtmlClass);

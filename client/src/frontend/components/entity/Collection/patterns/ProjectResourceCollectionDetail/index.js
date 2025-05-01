@@ -31,7 +31,7 @@ function ProjectResourceCollectionDetail({
       title={resourceCollection.attributes.title}
       icon="resourceCollection64"
       collectingProps={{ collectable: resourceCollection }}
-      DescriptionComponent={props => (
+      DescriptionComponent={(props) => (
         <ResourceCollection.Description
           date={resourceCollection.attributes.createdAt}
           description={resourceCollection.attributes.descriptionFormatted}
@@ -40,7 +40,7 @@ function ProjectResourceCollectionDetail({
       )}
       headerLayout="title_description_image"
       headerWidth="100%"
-      ImageComponent={props => (
+      ImageComponent={(props) => (
         <SlideshowSection
           slideshowResourcesMeta={slideshowResourcesMeta}
           resourceCollection={resourceCollection}
@@ -52,7 +52,7 @@ function ProjectResourceCollectionDetail({
           {...props}
         />
       )}
-      BodyComponent={props => (
+      BodyComponent={(props) => (
         <ResourceList.Cards
           resourceCollection={resourceCollection}
           project={project}
@@ -68,8 +68,8 @@ function ProjectResourceCollectionDetail({
           : {
               pagination: get(meta, "pagination"),
               unit: t("glossary.resource", {
-                count: meta?.pagination?.totalCount || 0
-              })
+                count: meta?.pagination?.totalCount || 0,
+              }),
             }
       }
       paginationProps={
@@ -77,7 +77,7 @@ function ProjectResourceCollectionDetail({
           ? {}
           : {
               pagination: get(meta, "pagination"),
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -98,7 +98,7 @@ ProjectResourceCollectionDetail.propTypes = {
   filterProps: shapes.filters,
   paginationProps: shapes.pagination,
   dispatch: PropTypes.func,
-  listHeaderId: PropTypes.string
+  listHeaderId: PropTypes.string,
 };
 
 export default ProjectResourceCollectionDetail;

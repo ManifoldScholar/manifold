@@ -24,11 +24,11 @@ EntityCount.propTypes = {
   pagination: PropTypes.shape({
     currentPage: PropTypes.number.isRequired,
     perPage: PropTypes.number.isRequired,
-    totalCount: PropTypes.number.isRequired
+    totalCount: PropTypes.number.isRequired,
   }),
   count: PropTypes.number,
   unit: PropTypes.string.isRequired,
-  customTemplate: PropTypes.func
+  customTemplate: PropTypes.func,
 };
 
 export default EntityCount;

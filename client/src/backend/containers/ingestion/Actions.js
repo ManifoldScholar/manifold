@@ -13,7 +13,7 @@ class IngestionActions extends Component {
     start: PropTypes.func.isRequired,
     cancel: PropTypes.func.isRequired,
     complete: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -43,7 +43,7 @@ class IngestionActions extends Component {
   get buttonClasses() {
     return classNames(
       "buttons-icon-horizontal__button",
-      "button-icon-secondary"
+      "button-icon-secondary",
     );
   }
 
@@ -56,7 +56,7 @@ class IngestionActions extends Component {
 
     return (
       <button
-        ref={el => {
+        ref={(el) => {
           this.startButtonRef = el;
         }}
         onClick={this.props.start}
@@ -81,7 +81,7 @@ class IngestionActions extends Component {
         onClick={this.props.cancel}
         className={classNames(
           this.buttonClasses,
-          "button-icon-secondary--dull"
+          "button-icon-secondary--dull",
         )}
         disabled={this.inProgress}
       >

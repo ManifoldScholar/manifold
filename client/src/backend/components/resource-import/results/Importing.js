@@ -8,7 +8,7 @@ class ResourceImportResultsImporting extends PureComponent {
 
   static propTypes = {
     resourceImportRow: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -25,7 +25,7 @@ class ResourceImportResultsImporting extends PureComponent {
         />
         <span>
           {t("resources.import.row_importing", {
-            number: resourceImportRow.lineNumber
+            number: resourceImportRow.lineNumber,
           })}
         </span>
       </>

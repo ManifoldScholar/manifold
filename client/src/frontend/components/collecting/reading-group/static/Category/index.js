@@ -6,7 +6,7 @@ import {
   CollectedTextSections,
   CollectedResourceCollections,
   CollectedResources,
-  CollectedJournalIssues
+  CollectedJournalIssues,
 } from "frontend/components/collecting/collection-blocks";
 import * as Styled from "./styles";
 
@@ -28,12 +28,12 @@ function Category({ category, mappings, responses, onUncollect }) {
       collectedIds: getCollectedIdsByType(type),
       responses: getResponsesByType(type),
       onUncollect,
-      nested: true
+      nested: true,
     };
   }
 
   const {
-    attributes: { title, descriptionFormatted, markdownOnly }
+    attributes: { title, descriptionFormatted, markdownOnly },
   } = category;
 
   const CategoryComponent = markdownOnly ? Styled.Markdown : Styled.Category;
@@ -68,7 +68,7 @@ Category.propTypes = {
   category: PropTypes.object.isRequired,
   mappings: PropTypes.object,
   responses: PropTypes.object.isRequired,
-  onUncollect: PropTypes.func
+  onUncollect: PropTypes.func,
 };
 
 export default Category;

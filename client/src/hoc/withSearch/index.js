@@ -15,7 +15,7 @@ function getDisplayName(WrappedComponent) {
 
 function withSearch(WrappedComponent) {
   const displayName = `HigherOrder.WithSearchWrapper('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithSearch extends PureComponent {
@@ -23,11 +23,11 @@ function withSearch(WrappedComponent) {
 
     static displayName = displayName;
 
-    static mapStateToProps = state => {
+    static mapStateToProps = (state) => {
       return {
         results: select(requests.rSearchResults, state.entityStore),
         resultsMeta: meta(requests.rSearchResults, state.entityStore),
-        searchQueryState: get(state.ui, "transitory.search")
+        searchQueryState: get(state.ui, "transitory.search"),
       };
     };
 
@@ -35,7 +35,7 @@ function withSearch(WrappedComponent) {
       dispatch: PropTypes.func.isRequired,
       history: PropTypes.object.isRequired,
       location: PropTypes.object.isRequired,
-      searchQueryState: PropTypes.object.isRequired
+      searchQueryState: PropTypes.object.isRequired,
     };
 
     constructor(props) {
@@ -48,7 +48,7 @@ function withSearch(WrappedComponent) {
     componentDidMount() {
       const locationSearchStateQuery = get(
         this.props.location,
-        "state.searchQueryState"
+        "state.searchQueryState",
       );
       if (locationSearchStateQuery)
         return this.setQueryState(locationSearchStateQuery);
@@ -67,11 +67,11 @@ function withSearch(WrappedComponent) {
       // to ensure the location state has actually been changed.
       const locationSearchStateQuery = get(
         this.props.location,
-        "state.searchQueryState"
+        "state.searchQueryState",
       );
       const prevLocationSearchStateQuery = get(
         prevProps.location,
-        "state.searchQueryState"
+        "state.searchQueryState",
       );
       if (!locationSearchStateQuery) return null;
 
@@ -92,16 +92,16 @@ function withSearch(WrappedComponent) {
         searchStateQuery: this.props.searchQueryState,
         history: this.props.history,
         location: this.props.location,
-        ref: this.searchComponent
+        ref: this.searchComponent,
       };
     }
 
-    setQueryState = queryParams => {
+    setQueryState = (queryParams) => {
       return this.props.dispatch(uiSearchActions.setSearchQuery(queryParams));
     };
 
-    setPage = page => {
-      return event => {
+    setPage = (page) => {
+      return (event) => {
         event.preventDefault();
         this.doSearch(page);
       };
@@ -113,7 +113,7 @@ function withSearch(WrappedComponent) {
       query.page = pagination;
       const call = searchResultsAPI.index(query);
       const { promise: one } = this.props.dispatch(
-        request(call, requests.rSearchResults)
+        request(call, requests.rSearchResults),
       );
       one.then(
         () => {
@@ -122,14 +122,14 @@ function withSearch(WrappedComponent) {
         },
         () => {
           // do nothing
-        }
+        },
       );
     }
 
     render() {
       return React.createElement(WrappedComponent, {
         ...this.props,
-        ...this.childProps
+        ...this.childProps,
       });
     }
   }

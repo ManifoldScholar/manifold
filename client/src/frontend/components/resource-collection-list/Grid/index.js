@@ -9,14 +9,14 @@ export default class ResourceCollectionGrid extends Component {
 
   static propTypes = {
     resourceCollections: PropTypes.array.isRequired,
-    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6]),
   };
 
-  urlCreator = collection => {
+  urlCreator = (collection) => {
     return lh.link(
       "frontendProjectResourceCollection",
       collection.attributes.projectSlug,
-      collection.attributes.slug
+      collection.attributes.slug,
     );
   };
 
@@ -26,7 +26,7 @@ export default class ResourceCollectionGrid extends Component {
 
     return (
       <Styled.Grid>
-        {resourceCollections.map(collection => {
+        {resourceCollections.map((collection) => {
           return (
             <li key={collection.id}>
               <ResourceCollection.Cover

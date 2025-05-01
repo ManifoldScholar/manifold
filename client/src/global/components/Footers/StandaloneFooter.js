@@ -37,5 +37,5 @@ class StandaloneFooter extends Component {
 
 export default withPluginReplacement(
   StandaloneFooter,
-  "Global.Components.Footers.StandaloneFooter"
+  "Global.Components.Footers.StandaloneFooter",
 );

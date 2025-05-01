@@ -7,7 +7,7 @@ import { childRoutes } from "helpers/router";
 import EntitiesList, {
   Button,
   Search,
-  AssetRow
+  AssetRow,
 } from "backend/components/list/EntitiesList";
 import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
@@ -21,7 +21,7 @@ function TextAssetsContainer({
   route,
   confirm,
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -29,12 +29,16 @@ function TextAssetsContainer({
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 10,
     initFilters: entitiesListSearchParams.initialassets,
-    initSearchProps: entitiesListSearchProps("assets")
+    initSearchProps: entitiesListSearchProps("assets"),
   });
 
-  const { data: assets, meta, refresh } = useFetch({
+  const {
+    data: assets,
+    meta,
+    refresh,
+  } = useFetch({
     request: [ingestionSourcesAPI.index, text.id, filters, pagination],
-    dependencies: [filters]
+    dependencies: [filters],
   });
 
   const renderChildRoutes = () => {
@@ -49,24 +53,24 @@ function TextAssetsContainer({
             lockScrollClickCloses: false,
             closeUrl,
             size: "default",
-            padding: "default"
+            padding: "default",
           },
           childProps: {
             textId: text.id,
-            refresh
-          }
+            refresh,
+          },
         })}
       </>
     );
   };
 
-  const onEdit = id => {
+  const onEdit = (id) => {
     navigate(lh.link("backendTextAssetEdit", text.id, id));
   };
 
   const deleteAsset = useApiCallback(ingestionSourcesAPI.destroy);
 
-  const onDelete = id => {
+  const onDelete = (id) => {
     const heading = t("modals.delete_asset");
     const message = t("modals.confirm_body");
     if (confirm)
@@ -91,13 +95,13 @@ function TextAssetsContainer({
               path={lh.link("backendTextAssetNew", text.id)}
               type="add"
               text={t("texts.assets.add_button_label")}
-            />
+            />,
           ]}
           search={<Search {...searchProps} />}
           pagination={meta?.pagination}
           showCount
           unit={t("glossary.asset", {
-            count: meta?.pagination.totalCount
+            count: meta?.pagination.totalCount,
           })}
         />
       )}
@@ -106,12 +110,12 @@ function TextAssetsContainer({
 }
 
 export default withFilteredLists(withConfirmation(TextAssetsContainer), {
-  assets: assetFilters()
+  assets: assetFilters(),
 });
 
 TextAssetsContainer.displayName = "Text.Assets";
 
 TextAssetsContainer.propTypes = {
   text: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
 };

@@ -6,18 +6,18 @@ function Time({ time }) {
   const { t, i18n } = useTranslation();
   const localeParams = {
     minimumIntegerDigits: 2,
-    useGrouping: false
+    useGrouping: false,
   };
   const hours = Math.floor(time / 60 / 60).toLocaleString(
     i18n.language,
-    localeParams
+    localeParams,
   );
   const minutes = Math.floor((time - hours * 60 * 60) / 60).toLocaleString(
     i18n.language,
-    localeParams
+    localeParams,
   );
   const seconds = Math.floor(
-    time - hours * 60 * 60 - minutes * 60
+    time - hours * 60 * 60 - minutes * 60,
   ).toLocaleString(i18n.language, localeParams);
 
   const values =
@@ -28,7 +28,7 @@ function Time({ time }) {
           t("dates.hours_truncated"),
           t("dates.minutes_truncated"),
           t("dates.hours"),
-          t("dates.minutes")
+          t("dates.minutes"),
         ]
       : [
           minutes,
@@ -36,7 +36,7 @@ function Time({ time }) {
           t("dates.minutes_truncated"),
           t("dates.seconds_truncated"),
           t("dates.minutes"),
-          t("dates.seconds")
+          t("dates.seconds"),
         ];
 
   return (
@@ -58,7 +58,7 @@ function Time({ time }) {
 }
 
 Time.propTypes = {
-  time: PropTypes.number.isRequired
+  time: PropTypes.number.isRequired,
 };
 
 Time.displayName = "Analytics.Block.Time";

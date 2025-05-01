@@ -13,8 +13,8 @@ export default function IssueHero({ entity, mock }) {
   const trackEvent = useEventTracker();
 
   const trackIssueEvent = useCallback(
-    eventType => trackEvent(eventType, entity.type, entity.id),
-    [entity, trackEvent]
+    (eventType) => trackEvent(eventType, entity.type, entity.id),
+    [entity, trackEvent],
   );
 
   if (!entity) return null;
@@ -27,7 +27,7 @@ export default function IssueHero({ entity, mock }) {
     description,
     creators,
     flattenedCollaborators,
-    cover
+    cover,
   } = getPartsData(entity);
 
   return (
@@ -82,5 +82,5 @@ export default function IssueHero({ entity, mock }) {
 IssueHero.displayName = "Frontend.Entity.Hero.Issue";
 
 IssueHero.propTypes = {
-  entity: PropTypes.object.isRequired
+  entity: PropTypes.object.isRequired,
 };

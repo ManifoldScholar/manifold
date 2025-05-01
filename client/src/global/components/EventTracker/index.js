@@ -3,7 +3,7 @@ import { ManifoldAnalyticsContext } from "helpers/contexts";
 
 export const EVENTS = {
   VIEW_RESOURCE: "view resource",
-  VIEW_LIBRARY: "view library"
+  VIEW_LIBRARY: "view library",
 };
 
 export default class EventTracker extends React.PureComponent {
@@ -30,7 +30,7 @@ export default class EventTracker extends React.PureComponent {
     return {
       resourceType: this.resourceType,
       resourceId: this.resourceId,
-      event: this.eventName
+      event: this.eventName,
     };
   }
 
@@ -38,7 +38,7 @@ export default class EventTracker extends React.PureComponent {
     return {
       resourceType: this.resourceType,
       resourceId: this.resourceId,
-      event: "leave"
+      event: "leave",
     };
   }
 

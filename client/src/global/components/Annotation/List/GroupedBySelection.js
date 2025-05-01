@@ -12,13 +12,13 @@ export default class GroupedList extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     loginHandler: PropTypes.func.isRequired,
     annotations: PropTypes.array,
-    closeDrawer: PropTypes.func
+    closeDrawer: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      editorVisible: false
+      editorVisible: false,
     };
     this.annotateToggleRef = React.createRef();
   }
@@ -42,7 +42,7 @@ export default class GroupedList extends PureComponent {
         <ul className="selection-list">
           <GroupBySubject
             annotations={annotations}
-            render={group => (
+            render={(group) => (
               <li key={group.selection.hash} className="annotation-detail">
                 <TextContent
                   annotation={group.annotation}
@@ -55,11 +55,11 @@ export default class GroupedList extends PureComponent {
                   <Editor
                     annotation={{ attributes: {} }}
                     cancel={this.hideEditor}
-                    saveAnnotation={attr => saveAnnotation(attr, group)}
+                    saveAnnotation={(attr) => saveAnnotation(attr, group)}
                   />
                 )}
                 <ul className="annotation-list">
-                  {group.annotations.map(annotation => {
+                  {group.annotations.map((annotation) => {
                     return (
                       <UserContent
                         key={annotation.id}

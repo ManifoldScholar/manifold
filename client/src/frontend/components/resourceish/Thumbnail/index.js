@@ -19,9 +19,9 @@ class ResourceishThumbnail extends Component {
     const lookups = [
       "variantThumbnailStyles",
       "variantPosterStyles",
-      "attachmentStyles"
+      "attachmentStyles",
     ];
-    return lookups.find(lookup => {
+    return lookups.find((lookup) => {
       return has(attributes, `${lookup}.${variant}`);
     });
   }
@@ -33,13 +33,13 @@ class ResourceishThumbnail extends Component {
     variant: PropTypes.string,
     noCrop: PropTypes.bool,
     isPreview: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     showKind: true,
     showTitle: false,
-    variant: "smallPortrait"
+    variant: "smallPortrait",
   };
 
   get resourceish() {
@@ -106,7 +106,7 @@ class ResourceishThumbnail extends Component {
   get wrapperClassName() {
     return classNames({
       "icon-thumbnail-primary": true,
-      "bg-neutral90": this.showBackgroundImage
+      "bg-neutral90": this.showBackgroundImage,
     });
   }
 
@@ -144,7 +144,7 @@ class ResourceishThumbnail extends Component {
           {this.props.showTitle ? (
             <Styled.Title
               dangerouslySetInnerHTML={{
-                __html: this.resourceish.attributes.titleFormatted
+                __html: this.resourceish.attributes.titleFormatted,
               }}
             />
           ) : null}

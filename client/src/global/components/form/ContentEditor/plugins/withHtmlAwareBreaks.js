@@ -5,8 +5,7 @@ import { getListItemNode } from "../utils/slate/getters";
 
 // The plugins here provide sane defaults for dealing with enter/delete given that we have nested html structure, in particular nested blocks, which isn't accounted for in the default slate implementation.
 
-/* eslint-disable no-param-reassign */
-const withHtmlAwareBreaks = editor => {
+const withHtmlAwareBreaks = (editor) => {
   const { insertBreak, deleteBackward } = editor;
 
   editor.insertBreak = () => {
@@ -24,7 +23,7 @@ const withHtmlAwareBreaks = editor => {
     // Grab the nearest block node to determine what to insert
     const [block, blockPath] = Editor.above(editor, {
       at: selection,
-      match: n => Editor.isBlock(editor, n) && !n.slateOnly
+      match: (n) => Editor.isBlock(editor, n) && !n.slateOnly,
     });
     // Remove all attributes other than the type/tag and marks, so we don't copy id, classes, anything that can't be updated in the RTE
     const {
@@ -63,7 +62,7 @@ const withHtmlAwareBreaks = editor => {
         Transforms.insertNodes(
           editor,
           { ...next, children: [{ text: "" }] },
-          { at: selection, select: true }
+          { at: selection, select: true },
         );
       });
     } catch (e) {
@@ -82,12 +81,12 @@ const withHtmlAwareBreaks = editor => {
     if (Point.isBefore(start, selection.anchor) && textContent.length <= 1) {
       Transforms.unwrapNodes(editor, {
         at: path,
-        match: n => Editor.isInline(editor, n)
+        match: (n) => Editor.isInline(editor, n),
       });
 
       const [inline, inlinePath] =
         Editor.above(editor, {
-          match: n => n.type && Editor.isInline(editor, n)
+          match: (n) => n.type && Editor.isInline(editor, n),
         }) ?? [];
 
       if (inline) return removeEmptyInline(inline, inlinePath);
@@ -104,7 +103,7 @@ const withHtmlAwareBreaks = editor => {
       node.slateOnly &&
       Point.equals(selection.anchor, start)
     ) {
-      Transforms.unwrapNodes(editor, { at: path, match: n => n.slateOnly });
+      Transforms.unwrapNodes(editor, { at: path, match: (n) => n.slateOnly });
     }
   };
 
@@ -120,7 +119,7 @@ const withHtmlAwareBreaks = editor => {
 
       const [inline, inlinePath] =
         Editor.above(editor, {
-          match: n => n.type && Editor.isInline(editor, n)
+          match: (n) => n.type && Editor.isInline(editor, n),
         }) ?? [];
 
       if (inline) {
@@ -129,14 +128,14 @@ const withHtmlAwareBreaks = editor => {
 
       const [nearestBlock, path] =
         Editor.above(editor, {
-          match: n => Element.isElement(n) && Editor.isBlock(editor, n)
+          match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
         }) ?? [];
 
       maybeUnwrapSlateOnlyNode(nearestBlock, path);
 
       const [blockToTransform, transformPath] = nearestBlock.slateOnly
         ? Editor.above(editor, {
-            match: n => Element.isElement(n) && Editor.isBlock(editor, n)
+            match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
           })
         : [nearestBlock, path];
 
@@ -153,16 +152,16 @@ const withHtmlAwareBreaks = editor => {
           Transforms.setNodes(
             editor,
             { type: "p" },
-            { at: transformPath, select: true }
+            { at: transformPath, select: true },
           );
 
           if (blockToTransform.type === "li") {
             Transforms.unwrapNodes(editor, {
-              match: n =>
+              match: (n) =>
                 !Editor.isEditor(n) &&
                 Element.isElement(n) &&
                 (n.type === "ul" || n.type === "ol"),
-              split: true
+              split: true,
             });
           }
           return;

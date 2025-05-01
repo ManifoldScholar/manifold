@@ -31,7 +31,7 @@ function TocNode({ node, onClick, linkTo, active, children }) {
             collectable={{
               id: node.id,
               type: "textSections",
-              label: node.label
+              label: node.label,
             }}
             outlined={false}
             onDialogOpen={() => setHovering(true)}
@@ -52,7 +52,7 @@ TocNode.propTypes = {
   onClick: PropTypes.func.isRequired,
   linkTo: PropTypes.string.isRequired,
   active: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default TocNode;

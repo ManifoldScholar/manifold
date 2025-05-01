@@ -15,11 +15,11 @@ class ProjectContentSectionsCurrent extends PureComponent {
     currentBlocks: PropTypes.array.isRequired,
     entityCallbacks: PropTypes.object.isRequired,
     activeDraggableType: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    currentBlocks: []
+    currentBlocks: [],
   };
 
   get announce() {
@@ -28,31 +28,32 @@ class ProjectContentSectionsCurrent extends PureComponent {
 
   get topBlocks() {
     return this.props.currentBlocks.filter(
-      block => resolver.typeToBlockComponent(block.attributes.type).top === true
+      (block) =>
+        resolver.typeToBlockComponent(block.attributes.type).top === true,
     );
   }
 
   get bottomBlocks() {
     return this.props.currentBlocks.filter(
-      block => resolver.typeToBlockComponent(block.attributes.type).top !== true
+      (block) =>
+        resolver.typeToBlockComponent(block.attributes.type).top !== true,
     );
   }
 
   get zones() {
     return {
       top: { blocks: this.topBlocks, visible: false },
-      bottom: { blocks: this.bottomBlocks, visible: true }
+      bottom: { blocks: this.bottomBlocks, visible: true },
     };
   }
 
   bindEntityCallbacks(block) {
     const callbacks = this.props.entityCallbacks;
-    /* eslint-disable no-param-reassign */
+
     return Object.keys(callbacks).reduce((memo, key) => {
-      memo[key] = addtlParams => callbacks[key](block, addtlParams);
+      memo[key] = (addtlParams) => callbacks[key](block, addtlParams);
       return memo;
     }, {});
-    /* eslint-enable no-param-reassign */
   }
 
   showDropzone(zone) {
@@ -65,7 +66,7 @@ class ProjectContentSectionsCurrent extends PureComponent {
       <>
         <div>
           <Header subtitle={this.props.t("layout.layout")} />
-          {Object.keys(this.zones).map(zone => (
+          {Object.keys(this.zones).map((zone) => (
             <Droppable
               key={zone}
               type={zone.toUpperCase()}
@@ -75,7 +76,8 @@ class ProjectContentSectionsCurrent extends PureComponent {
                 <div
                   ref={provided.innerRef}
                   className={classNames("content-block-list full-width", {
-                    "content-block-list--show-dropzone": this.showDropzone(zone)
+                    "content-block-list--show-dropzone":
+                      this.showDropzone(zone),
                   })}
                 >
                   {this.zones[zone].blocks.map((block, index) => (
@@ -105,5 +107,5 @@ class ProjectContentSectionsCurrent extends PureComponent {
 }
 
 export default withTranslation()(
-  withScreenReaderStatus(ProjectContentSectionsCurrent, false)
+  withScreenReaderStatus(ProjectContentSectionsCurrent, false),
 );

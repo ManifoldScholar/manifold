@@ -39,7 +39,7 @@ function getFaviconLinks(store) {
 function getStylesheetLinks(stats) {
   const stylesheets = reduceAssets(".css", stats);
   if (!stylesheets?.length) return "";
-  return stylesheets.map(stylesheet => {
+  return stylesheets.map((stylesheet) => {
     const media = stylesheet.includes("print") ? "print" : "screen, projection";
     return `
       <link
@@ -57,7 +57,7 @@ export default function wrapHtmlBody({
   store,
   stats,
   styleTags = "",
-  body = ""
+  body = "",
 }) {
   const favicons = getFaviconLinks(store);
   const stylesheets = getStylesheetLinks(stats);

@@ -4,8 +4,8 @@ export default {
       endpoint: `/api/v1/projects/${projectId}/relationships/ingestions`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "ingestions", data: ingestion })
-      }
+        body: JSON.stringify({ type: "ingestions", data: ingestion }),
+      },
     };
   },
 
@@ -14,8 +14,8 @@ export default {
       endpoint: `/api/v1/ingestions/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "ingestions", data: ingestion })
-      }
+        body: JSON.stringify({ type: "ingestions", data: ingestion }),
+      },
     };
   },
 
@@ -23,7 +23,7 @@ export default {
     return {
       endpoint: `/api/v1/ingestions/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -32,8 +32,8 @@ export default {
       endpoint: `/api/v1/texts/${textId}/relationships/ingestions`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "ingestions", data: ingestion })
-      }
+        body: JSON.stringify({ type: "ingestions", data: ingestion }),
+      },
     };
-  }
+  },
 };

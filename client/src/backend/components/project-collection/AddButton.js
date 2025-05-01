@@ -15,13 +15,13 @@ class ProjectCollectionAddButton extends Component {
     handleRemove: PropTypes.func.isRequired,
     selected: PropTypes.bool,
     project: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      view: this.selected ? "remove" : "add"
+      view: this.selected ? "remove" : "add",
     };
   }
 
@@ -47,7 +47,7 @@ class ProjectCollectionAddButton extends Component {
     this.props.handleRemove(this.props.project);
   };
 
-  toggleInclude = event => {
+  toggleInclude = (event) => {
     event.preventDefault();
     event.stopPropagation();
     if (this.selected) {
@@ -57,7 +57,7 @@ class ProjectCollectionAddButton extends Component {
     }
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -80,12 +80,12 @@ class ProjectCollectionAddButton extends Component {
       case "add":
       case "add-active":
         return t("project_collections.include_title", {
-          title: project.attributes.titlePlaintext
+          title: project.attributes.titlePlaintext,
         });
       case "remove":
       case "remove-active":
         return t("project_collections.exclude_title", {
-          title: project.attributes.titlePlaintext
+          title: project.attributes.titlePlaintext,
         });
       default:
         return null;
@@ -114,17 +114,17 @@ class ProjectCollectionAddButton extends Component {
       case "remove-active":
         return {
           key: "add",
-          text: t("project_collections.exclude")
+          text: t("project_collections.exclude"),
         };
       case "add-active":
         return {
           key: "remove",
-          text: t("project_collections.include")
+          text: t("project_collections.include"),
         };
       default:
         return {
           key: "empty",
-          text: ""
+          text: "",
         };
     }
   }
@@ -154,7 +154,7 @@ class ProjectCollectionAddButton extends Component {
           onMouseLeave={this.deactivate}
           className={classNames({
             "collecting-toggle": true,
-            "collecting-toggle--small-project-cover": true
+            "collecting-toggle--small-project-cover": true,
           })}
           aria-hidden="true"
           tabIndex={-1}
@@ -162,7 +162,7 @@ class ProjectCollectionAddButton extends Component {
           <div
             className={classNames({
               "collecting-toggle__inner": true,
-              [`collecting-toggle__inner--${this.state.view}`]: true
+              [`collecting-toggle__inner--${this.state.view}`]: true,
             })}
             aria-hidden="true"
           >

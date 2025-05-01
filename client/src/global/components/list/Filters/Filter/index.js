@@ -38,10 +38,10 @@ export const filterShape = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
-    }).isRequired
+      label: PropTypes.string.isRequired,
+    }).isRequired,
   ).isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 Filter.propTypes = filterShape;

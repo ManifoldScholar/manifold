@@ -10,17 +10,17 @@ function ReadingGroupMemberForm({
   membership,
   readingGroup,
   confirm,
-  onSuccess
+  onSuccess,
 }) {
   const { t } = useTranslation();
 
   const [selectedStyle, setSelectedStyle] = useState(
-    membership.attributes.annotationStyle
+    membership.attributes.annotationStyle,
   );
 
   function warnOnRoleChange(initialValue, newValue) {
     const messages = t("messages.membership.role_change", {
-      returnObjects: true
+      returnObjects: true,
     });
     const msg = messages[`${initialValue}_to_${newValue}`];
     return msg ? confirm(messages.heading, msg, () => {}) : null;
@@ -57,12 +57,12 @@ function ReadingGroupMemberForm({
           options={[
             {
               label: t("forms.reading_group_member.role_options.member"),
-              value: "member"
+              value: "member",
             },
             {
               label: t("forms.reading_group_member.role_options.moderator"),
-              value: "moderator"
-            }
+              value: "moderator",
+            },
           ]}
           inline
           wide
@@ -82,33 +82,33 @@ function ReadingGroupMemberForm({
         name="attributes[annotationStyle]"
         beforeOnChange={handleStyleSelectChange}
         instructions={t(
-          "forms.reading_group_member.annotation_style_instructions"
+          "forms.reading_group_member.annotation_style_instructions",
         )}
         options={[
           {
             label: t(
-              "forms.reading_group_member.annotation_style_options.dashed"
+              "forms.reading_group_member.annotation_style_options.dashed",
             ),
-            value: "dashes"
+            value: "dashes",
           },
           {
             label: t(
-              "forms.reading_group_member.annotation_style_options.dotted"
+              "forms.reading_group_member.annotation_style_options.dotted",
             ),
-            value: "dots"
+            value: "dots",
           },
           {
             label: t(
-              "forms.reading_group_member.annotation_style_options.solid"
+              "forms.reading_group_member.annotation_style_options.solid",
             ),
-            value: "solid"
+            value: "solid",
           },
           {
             label: t(
-              "forms.reading_group_member.annotation_style_options.wavy"
+              "forms.reading_group_member.annotation_style_options.wavy",
             ),
-            value: "wavy"
-          }
+            value: "wavy",
+          },
         ]}
         rounded
       />
@@ -124,7 +124,7 @@ ReadingGroupMemberForm.propTypes = {
   membership: PropTypes.object.isRequired,
   readingGroup: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
-  onSuccess: PropTypes.func.isRequired
+  onSuccess: PropTypes.func.isRequired,
 };
 
 export default ReadingGroupMemberForm;

@@ -5,5 +5,5 @@ export const collectedShape = {
   collectedIds: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
   onRemove: PropTypes.func.isRequired,
-  showDropzone: PropTypes.bool
+  showDropzone: PropTypes.bool,
 };

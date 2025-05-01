@@ -32,7 +32,7 @@ function JournalsPlaceholder({ bgColor = "neutral05" }) {
                   <em />,
                   <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
                     #
-                  </a>
+                  </a>,
                 ]}
               />
             </p>
@@ -54,8 +54,8 @@ function JournalsPlaceholder({ bgColor = "neutral05" }) {
                   {t("actions.create_journal")}
                 </Link>
               </Authorize>
-            )
-          }
+            ),
+          },
         ]}
       />
     </Wrapper>
@@ -66,7 +66,7 @@ JournalsPlaceholder.displayName =
   "Global.Entity.CollectionPlaceholder.Journals";
 
 JournalsPlaceholder.propTypes = {
-  bgColor: PropTypes.oneOf(["white", "neutral05"])
+  bgColor: PropTypes.oneOf(["white", "neutral05"]),
 };
 
 export default JournalsPlaceholder;

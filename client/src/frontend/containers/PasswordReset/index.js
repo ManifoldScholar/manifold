@@ -10,9 +10,9 @@ import { get } from "lodash";
 const { request, flush } = entityStoreActions;
 
 export class PasswordResetContainer extends Component {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      response: get(state.entityStore.responses, requests.gPasswordReset)
+      response: get(state.entityStore.responses, requests.gPasswordReset),
     };
   };
 
@@ -20,19 +20,19 @@ export class PasswordResetContainer extends Component {
     dispatch: PropTypes.func,
     match: PropTypes.shape({
       params: PropTypes.shape({
-        resetToken: PropTypes.string
-      })
+        resetToken: PropTypes.string,
+      }),
     }).isRequired,
     history: PropTypes.object.isRequired,
     response: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor() {
     super();
     this.state = {
       password: "",
-      passwordConfirmation: ""
+      passwordConfirmation: "",
     };
   }
 
@@ -40,15 +40,15 @@ export class PasswordResetContainer extends Component {
     this.props.dispatch(flush([requests.gPasswordReset]));
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault(event.target);
     const action = passwordsAPI.update(
       this.state.password,
       this.state.passwordConfirmation,
-      this.props.match.params.resetToken
+      this.props.match.params.resetToken,
     );
     const changeRequest = request(action, requests.gPasswordReset);
-    this.props.dispatch(changeRequest).promise.then(response => {
+    this.props.dispatch(changeRequest).promise.then((response) => {
       this.postUpdate(response.data);
     });
   };
@@ -62,8 +62,8 @@ export class PasswordResetContainer extends Component {
     this.props.dispatch(
       currentUserActions.login({
         email: user.attributes.email,
-        password: this.state.password
-      })
+        password: this.state.password,
+      }),
     );
   }
 
@@ -71,7 +71,7 @@ export class PasswordResetContainer extends Component {
     this.props.history.push("/");
   }
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const name = event.target.name.replace("attributes[", "").replace("]", "");
     this.setState({ [name]: event.target.value });
   };
@@ -82,7 +82,7 @@ export class PasswordResetContainer extends Component {
     return (
       <section>
         <div className="container">
-          <form method="post" onSubmit={event => this.handleSubmit(event)}>
+          <form method="post" onSubmit={(event) => this.handleSubmit(event)}>
             <Form.Header
               styleType="primary"
               label={t("forms.password_reset.title")}

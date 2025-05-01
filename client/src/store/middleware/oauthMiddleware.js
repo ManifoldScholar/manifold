@@ -14,7 +14,7 @@ function tryToSignIn(dispatch, event) {
 }
 
 export default function oauthMiddleware({ dispatch, getStateIgnored }) {
-  return next => action => {
+  return (next) => (action) => {
     switch (action.type) {
       case `${O.oauthResponse}`:
         tryToSignIn(dispatch, event);

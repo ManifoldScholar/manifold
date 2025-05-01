@@ -16,7 +16,7 @@ function CommentRow({
   bulkSelection,
   addItem,
   removeItem,
-  onDelete
+  onDelete,
 }) {
   const { id, attributes, relationships } = entity;
   const {
@@ -25,7 +25,7 @@ function CommentRow({
     createdAt,
     subjectTitle,
     subjectId,
-    subjectType
+    subjectType,
   } = attributes;
 
   const { creator } = relationships ?? {};
@@ -41,7 +41,7 @@ function CommentRow({
         {`On ${subjectType}: `}
         <span
           dangerouslySetInnerHTML={{
-            __html: subjectTitle
+            __html: subjectTitle,
           }}
         />
       </>
@@ -49,7 +49,6 @@ function CommentRow({
       t("records.comments.view_parent")
     );
 
-  /* eslint-disable no-nested-ternary */
   const subjectLink = subjectId
     ? subjectType === "Resource"
       ? lh.link("backendResource", subjectId)
@@ -64,9 +63,7 @@ function CommentRow({
     >
       <Utility.IconComposer icon="delete32" size={26} />
     </button>
-  ) : (
-    undefined
-  );
+  ) : undefined;
 
   return (
     <Styled.Item className="entity-row entity-list__entity scheme-dark">
@@ -87,12 +84,12 @@ function CommentRow({
                   ? [
                       {
                         text: t("records.annotations.flag_count", {
-                          count: unresolvedFlagsCount
+                          count: unresolvedFlagsCount,
                         }),
-                        level: "error"
-                      }
+                        level: "error",
+                      },
                     ]
-                  : [])
+                  : []),
               ]}
             />
           </Styled.MetaOne>
@@ -100,7 +97,7 @@ function CommentRow({
             {!hideCreator && creator?.id && (
               <Link
                 to={{
-                  pathname: lh.link("backendRecordsUserProperties", creator.id)
+                  pathname: lh.link("backendRecordsUserProperties", creator.id),
                 }}
               >
                 {creator?.attributes?.fullName}
@@ -135,7 +132,7 @@ CommentRow.propTypes = {
   bulkSelection: PropTypes.object,
   addItem: PropTypes.func,
   removeItem: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
 };
 
 export default CommentRow;

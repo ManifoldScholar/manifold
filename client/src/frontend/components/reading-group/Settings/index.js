@@ -17,7 +17,7 @@ function ReadingGroupSettings({
   readingGroup,
   closeDrawer,
   confirm,
-  onArchive
+  onArchive,
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,19 +30,19 @@ function ReadingGroupSettings({
           attributes: {
             name,
             archive,
-            cloneOwnedAnnotations: copyAnnotations
-          }
-        }
-      })
+            cloneOwnedAnnotations: copyAnnotations,
+          },
+        },
+      }),
     };
     const {
       href: endpoint,
-      meta: { method }
+      meta: { method },
     } = readingGroup.links.clone;
     const call = {
       endpoint,
       method,
-      options
+      options,
     };
     const duplicateRequest = request(call, requests.feReadingGroupClone, {});
     dispatch(duplicateRequest).promise.then(({ data: { id } }) => {
@@ -79,7 +79,7 @@ ReadingGroupSettings.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   closeDrawer: PropTypes.func.isRequired,
   confirm: PropTypes.func.isRequired,
-  onArchive: PropTypes.func
+  onArchive: PropTypes.func,
 };
 
 export default withConfirmation(ReadingGroupSettings);

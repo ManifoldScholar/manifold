@@ -12,7 +12,7 @@ function JournalVolumeList({ volumes, journal }) {
 
   return (
     <Styled.Wrapper>
-      {volumes.map(volume => (
+      {volumes.map((volume) => (
         <EntityGroup
           key={volume.id}
           title={`${t("glossary.volume_title_case_one")} ${
@@ -21,7 +21,7 @@ function JournalVolumeList({ volumes, journal }) {
           to={lh.link(
             "frontendVolumeDetail",
             journal.attributes.slug,
-            volume.attributes.slug
+            volume.attributes.slug,
           )}
           entities={volume.relationships.journalIssues}
           parentView
@@ -36,7 +36,7 @@ JournalVolumeList.displayName = "Journal.VolumeList";
 
 JournalVolumeList.propTypes = {
   journal: PropTypes.object,
-  volumes: PropTypes.array
+  volumes: PropTypes.array,
 };
 
 export default JournalVolumeList;

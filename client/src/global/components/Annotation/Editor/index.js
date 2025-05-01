@@ -19,12 +19,12 @@ class AnnotationEditor extends PureComponent {
     annotation: PropTypes.object,
     cancel: PropTypes.func,
     closeOnSave: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     closeOnSave: true,
-    annotation: { attributes: {} }
+    annotation: { attributes: {} },
   };
 
   static contextType = ReaderContext;
@@ -35,7 +35,7 @@ class AnnotationEditor extends PureComponent {
       format: "annotation",
       body: props.annotation.attributes.body || "",
       errors: [],
-      pickerOpen: false
+      pickerOpen: false,
     };
   }
 
@@ -105,7 +105,7 @@ class AnnotationEditor extends PureComponent {
       return null;
 
     return this.readingGroups.find(
-      group => group.id === this.props.currentAnnotatingReadingGroup
+      (group) => group.id === this.props.currentAnnotatingReadingGroup,
     );
   }
 
@@ -152,14 +152,14 @@ class AnnotationEditor extends PureComponent {
     }
   }
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
 
     const {
       currentAnnotatingReadingGroup,
       closeOnSave,
       saveAnnotation,
-      annotation
+      annotation,
     } = this.props;
 
     const { errorsIgnored, ...attributes } = this.state;
@@ -184,7 +184,7 @@ class AnnotationEditor extends PureComponent {
     }
   };
 
-  handleBodyChange = event => {
+  handleBodyChange = (event) => {
     this.setState({ body: event.target.value });
   };
 
@@ -195,7 +195,7 @@ class AnnotationEditor extends PureComponent {
     }
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     if (
       !this.picker ||
       this.picker.contains(event.target) ||
@@ -206,7 +206,7 @@ class AnnotationEditor extends PureComponent {
     this.setState({ pickerOpen: false });
   };
 
-  setReadingGroup = id => {
+  setReadingGroup = (id) => {
     this.setState({ pickerOpen: false });
     this.props.setAnnotatingReadingGroup(id);
   };
@@ -229,7 +229,7 @@ class AnnotationEditor extends PureComponent {
       <select
         aria-labelledby={`${id}-label`}
         className="annotation-editor__group-select"
-        onChange={event => this.setReadingGroup(event.target.value)}
+        onChange={(event) => this.setReadingGroup(event.target.value)}
         value={this.props.currentAnnotatingReadingGroup}
       >
         {this.canEngagePublicly && (
@@ -237,7 +237,7 @@ class AnnotationEditor extends PureComponent {
         )}
         <option value="private">{this.privateLabel}</option>
         {this.hasReadingGroups &&
-          this.readingGroups.map(option => (
+          this.readingGroups.map((option) => (
             <option key={option.id} value={option.id}>
               {option.attributes.name}
             </option>
@@ -249,11 +249,11 @@ class AnnotationEditor extends PureComponent {
   renderOptions() {
     return (
       <div
-        ref={picker => (this.picker = picker)}
+        ref={(picker) => (this.picker = picker)}
         tabIndex="-1"
         className={classNames({
           "annotation-group-options": true,
-          "annotation-group-options--hidden": !this.state.pickerOpen
+          "annotation-group-options--hidden": !this.state.pickerOpen,
         })}
       >
         <div className="annotation-group-options__list">
@@ -271,7 +271,7 @@ class AnnotationEditor extends PureComponent {
             selected={this.isSelected("private")}
           />
           {this.hasReadingGroups &&
-            this.readingGroups.map(rg => (
+            this.readingGroups.map((rg) => (
               <RGMenuItem
                 key={rg.id}
                 label={rg.attributes.name}
@@ -289,7 +289,7 @@ class AnnotationEditor extends PureComponent {
     return (
       <div className="annotation-editor__group-picker" aria-hidden>
         <button
-          ref={pickerToggle => (this.pickerToggle = pickerToggle)}
+          ref={(pickerToggle) => (this.pickerToggle = pickerToggle)}
           tabIndex={-1}
           type="button"
           onClick={() => this.setState({ pickerOpen: !this.state.pickerOpen })}
@@ -319,7 +319,7 @@ class AnnotationEditor extends PureComponent {
               {t("reader.actions.annotate_passage")}
             </label>
             <textarea
-              ref={ci => {
+              ref={(ci) => {
                 this.ci = ci;
               }}
               id="annotation-textarea"
@@ -334,8 +334,8 @@ class AnnotationEditor extends PureComponent {
 
           <div className="annotation-editor__actions">
             {this.shouldShowReadingGroups && (
-              <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
-                {id => (
+              <UIDConsumer name={(id) => `${this.idPrefix}-${id}`}>
+                {(id) => (
                   <div className="annotation-editor__action">
                     <div className="annotation-editor__action-label">
                       <IconComposer
@@ -384,5 +384,5 @@ class AnnotationEditor extends PureComponent {
 }
 
 export default withTranslation()(
-  withReadingGroups(withCurrentUser(AnnotationEditor))
+  withReadingGroups(withCurrentUser(AnnotationEditor)),
 );

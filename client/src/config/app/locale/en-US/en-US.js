@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import base from "./json/base.json";
 import backend from "./json/backend";
 import reader from "./json/reader";
@@ -13,6 +12,6 @@ export default {
     ...frontend,
     ...reader,
     ...shared,
-    date_fns: enUS
-  }
+    date_fns: enUS,
+  },
 };

@@ -11,7 +11,7 @@ class ResourcePlayerVideo extends Component {
   static propTypes = {
     resource: PropTypes.object,
     dispatch: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor() {
@@ -69,7 +69,7 @@ class ResourcePlayerVideo extends Component {
       type: this.externalType === "youtube" ? "text/html" : null,
       loading: "lazy",
       width: 560,
-      height: 315
+      height: 315,
     };
   }
 
@@ -95,25 +95,23 @@ class ResourcePlayerVideo extends Component {
     );
   }
 
-  handleError = eventIgnored => {
+  handleError = (eventIgnored) => {
     const t = this.props.t;
     const notification = {
       level: 1,
       id: `VIDEO_PLAYBACK_ERROR`,
       heading: t("errors.video_playback.heading"),
-      body: `${t("errors.video_playback.body")} ${this.allowDownload &&
-        t("errors.video_playback.download")}`,
-      expiration: 5000
+      body: `${t("errors.video_playback.body")} ${
+        this.allowDownload && t("errors.video_playback.download")
+      }`,
+      expiration: 5000,
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   };
 
   renderFileVideo() {
-    const {
-      variantPosterStyles,
-      attachmentStyles,
-      captionsTrackUrl
-    } = this.props.resource.attributes;
+    const { variantPosterStyles, attachmentStyles, captionsTrackUrl } =
+      this.props.resource.attributes;
 
     return (
       <Styled.VideoWrapper>

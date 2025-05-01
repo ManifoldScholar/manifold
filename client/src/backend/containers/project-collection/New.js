@@ -15,7 +15,7 @@ class ProjectCollectionNew extends PureComponent {
     buildUpdateProjectCollection: PropTypes.func.isRequired,
     buildCreateProjectCollection: PropTypes.func.isRequired,
     handleNewSuccess: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -26,11 +26,11 @@ class ProjectCollectionNew extends PureComponent {
   get defaultModel() {
     return {
       attributes: {
-        numberOfProjects: 8
+        numberOfProjects: 8,
       },
       relationships: {
-        subjects: []
-      }
+        subjects: [],
+      },
     };
   }
 

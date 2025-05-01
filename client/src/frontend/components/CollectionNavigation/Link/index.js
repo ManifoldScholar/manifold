@@ -18,7 +18,7 @@ Link.displayName = "Frontend.Entity.CollectionNavigation.Link";
 Link.propTypes = {
   to: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired
+  icon: PropTypes.string.isRequired,
 };
 
 export default Link;

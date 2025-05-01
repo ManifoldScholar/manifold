@@ -28,12 +28,12 @@ export default `
         grid-column-end: -1;
       }`,
       `${STACK_BREAKPOINT - 1}px`,
-      "max"
+      "max",
     )}
 
     ${respond(
       `grid-template-columns: repeat(2, minmax(0, 1fr));`,
-      `${STACK_BREAKPOINT}px`
+      `${STACK_BREAKPOINT}px`,
     )}
 
     .range-picker,
@@ -58,7 +58,7 @@ export default `
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
           }
         `,
-        `${FOUR_COL_BREAKPOINT}px`
+        `${FOUR_COL_BREAKPOINT}px`,
       )}
     }
 
@@ -79,7 +79,7 @@ export default `
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
           }
         `,
-        `${THREE_COL_BREAKPOINT}px`
+        `${THREE_COL_BREAKPOINT}px`,
       )}
     }
 
@@ -88,7 +88,7 @@ export default `
 
       ${respond(
         `grid-template-columns: repeat(2, minmax(0, 1fr));`,
-        `${TWO_COL_BREAKPOINT}px`
+        `${TWO_COL_BREAKPOINT}px`,
       )}
     }
 

@@ -10,7 +10,7 @@ export default class ListEntitiesListSectionTitle extends PureComponent {
     title: PropTypes.node,
     titleLink: PropTypes.string,
     titleIcon: PropTypes.string,
-    count: PropTypes.node
+    count: PropTypes.node,
   };
 
   get count() {

@@ -12,14 +12,14 @@ export default function HeroCalloutList({
   mobileVisible = false,
   darkMode = false,
   buttonSize = "lg",
-  track
+  track,
 }) {
   const visible = authorized
     ? callouts
     : callouts.filter(
-        callout =>
+        (callout) =>
           callout.attributes.visibility === "always" ||
-          callout.attributes.visibility === "unauthorized"
+          callout.attributes.visibility === "unauthorized",
       );
   const [buttons, links] = partition(visible, "attributes.button");
 
@@ -27,7 +27,7 @@ export default function HeroCalloutList({
     <Styled.Wrapper $mobile={mobileVisible}>
       {buttons.length > 0 && (
         <Styled.List $inline={inline}>
-          {buttons.map(callout => (
+          {buttons.map((callout) => (
             <Callout
               showErrors={showErrors}
               key={callout.id}
@@ -41,7 +41,7 @@ export default function HeroCalloutList({
       )}
       {links.length > 0 && (
         <Styled.List $inline={inline}>
-          {links.map(callout => (
+          {links.map((callout) => (
             <Callout
               showErrors={showErrors}
               key={callout.id}
@@ -67,5 +67,5 @@ HeroCalloutList.propTypes = {
   mobileVisible: PropTypes.bool,
   darkMode: PropTypes.bool,
   buttonSize: PropTypes.oneOf(["sm", "lg"]),
-  track: PropTypes.func
+  track: PropTypes.func,
 };

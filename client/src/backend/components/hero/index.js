@@ -3,5 +3,5 @@ import Block from "./Builder/Block";
 
 export default {
   Builder,
-  Block
+  Block,
 };

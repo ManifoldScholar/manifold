@@ -4,7 +4,7 @@ import * as Styled from "./styles";
 import { useTranslation } from "react-i18next";
 
 export default function ReturnMenuButton({ toggleReaderMenu, expanded }) {
-  const onClick = e => {
+  const onClick = (e) => {
     e.stopPropagation();
     toggleReaderMenu();
   };
@@ -27,5 +27,5 @@ ReturnMenuButton.displayName = "ReturnMenuButton";
 
 ReturnMenuButton.propTypes = {
   toggleReaderMenu: PropTypes.func.isRequired,
-  expanded: PropTypes.bool
+  expanded: PropTypes.bool,
 };

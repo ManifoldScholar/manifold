@@ -6,7 +6,7 @@ import Notifications from "global/containers/Notifications";
 import { useDispatch } from "react-redux";
 import {
   handleAuthenticationSuccess,
-  handleAuthenticationFailure
+  handleAuthenticationFailure,
 } from "store/middleware/currentUserMiddleware";
 import Form from "global/components/form";
 import { tokensAPI } from "api";
@@ -17,14 +17,14 @@ import * as SharedStyles from "../styles";
 export default function LoginForm({
   handleViewChange,
   hideOverlay,
-  willRedirect
+  willRedirect,
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const authentication = useFromStore("authentication");
   const error = authentication?.error?.body;
 
-  const formatData = data => {
+  const formatData = (data) => {
     dispatch(actions.loginStart());
     return { email: data.email, password: data.password };
   };
@@ -35,28 +35,28 @@ export default function LoginForm({
       if (!authToken) {
         handleAuthenticationFailure(dispatch, {
           status: 500,
-          destroyCookie: true
+          destroyCookie: true,
         });
       }
       handleAuthenticationSuccess(dispatch, {
         authToken,
         user: res,
-        setCookie: true
+        setCookie: true,
       }).then(() => {
         if (hideOverlay) hideOverlay();
       });
     },
-    [dispatch, hideOverlay]
+    [dispatch, hideOverlay],
   );
 
   const onError = useCallback(
-    err => {
+    (err) => {
       handleAuthenticationFailure(dispatch, {
         status: err.status,
-        destroyCookie: true
+        destroyCookie: true,
       });
     },
-    [dispatch]
+    [dispatch],
   );
 
   return (
@@ -112,10 +112,12 @@ export default function LoginForm({
           </>
         </SharedStyles.Form>
         <SharedStyles.LinksWrapper>
-          <SharedStyles.ViewLink onClick={e => handleViewChange("password", e)}>
+          <SharedStyles.ViewLink
+            onClick={(e) => handleViewChange("password", e)}
+          >
             {t("forms.signin_overlay.forgot_password")}
           </SharedStyles.ViewLink>
-          <SharedStyles.ViewLink onClick={e => handleViewChange("terms", e)}>
+          <SharedStyles.ViewLink onClick={(e) => handleViewChange("terms", e)}>
             {t("forms.signin_overlay.need_account")}
           </SharedStyles.ViewLink>
         </SharedStyles.LinksWrapper>
@@ -129,5 +131,5 @@ LoginForm.displayName = "Global.SignInUp.LoginForm";
 LoginForm.propTypes = {
   handleViewChange: PropTypes.func,
   hideOverlay: PropTypes.func,
-  willRedirect: PropTypes.bool
+  willRedirect: PropTypes.bool,
 };

@@ -13,7 +13,7 @@ export const neutrals = {
   "gray-650": lighten("#000", 33.3), // #555555
   "gray-700": lighten("#000", 31.25), // #505050
   "gray-800": lighten("#000", 25), // #404040
-  "gray-900": lighten("#000", 18.75) // #303030
+  "gray-900": lighten("#000", 18.75), // #303030
 };
 
 export const colors = {
@@ -35,7 +35,7 @@ export const colors = {
   "scampi-purple": "#55a",
   "electric-violet": "#7300e5",
   "persian-red": "#cf3030",
-  "mango-tango": "#e97500"
+  "mango-tango": "#e97500",
 };
 
 export const theme = {
@@ -52,7 +52,7 @@ export const theme = {
   head: "#9012fe",
   patch: "#87C930",
   disabled: "#ebebeb",
-  options: "#0d5aa7"
+  options: "#0d5aa7",
 };
 
 export default `
@@ -96,11 +96,11 @@ export default `
     --opblock-isopen-summary-border-bottom-color: ${neutrals.black};
     --opblock-isopen-section-header-background-color: ${rgba(
       neutrals.white,
-      0.8
+      0.8,
     )};
     --opblock-isopen-section-header-box-shadow-color: ${rgba(
       neutrals.black,
-      0.1
+      0.1,
     )};
     --opblock-summary-method-background-color: ${neutrals.black};
     --opblock-summary-method-font-color: ${neutrals.white};
@@ -141,11 +141,11 @@ export default `
     --section-models-h5-font-color: ${neutrals["gray-50"]};
     --section-models-model-container-background-color: ${rgba(
       neutrals.black,
-      0.05
+      0.05,
     )};
     --section-models-model-container-background-color-hover: ${rgba(
       neutrals.black,
-      0.07
+      0.07,
     )};
     --section-models-model-box-background-color: ${rgba(neutrals.black, 0.1)};
     --section-models-model-title-font-color: ${neutrals["gray-700"]};

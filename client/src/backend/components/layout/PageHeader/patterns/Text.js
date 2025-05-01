@@ -16,12 +16,12 @@ export default function TextHeader({
   actions,
   note,
   texts,
-  hasSecondaryNav
+  hasSecondaryNav,
 }) {
   const { pathname } = useLocation();
   const textLinks = getTextLinks({
     texts,
-    pathname
+    pathname,
   });
 
   return (

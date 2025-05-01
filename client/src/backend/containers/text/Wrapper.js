@@ -20,9 +20,9 @@ import Authorize from "hoc/Authorize";
 const { request } = entityStoreActions;
 
 export class TextWrapperContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      text: select(requests.beText, state.entityStore)
+      text: select(requests.beText, state.entityStore),
     };
   };
 
@@ -37,11 +37,11 @@ export class TextWrapperContainer extends PureComponent {
     location: PropTypes.object,
     route: PropTypes.object,
     confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   componentDidMount() {
@@ -50,7 +50,7 @@ export class TextWrapperContainer extends PureComponent {
 
   componentDidUpdate() {
     const {
-      params: { id: nextId }
+      params: { id: nextId },
     } = this.props.match ?? {};
     const prevId = this.props.text?.id;
     if (nextId && prevId && nextId !== prevId) this.fetchText();
@@ -60,7 +60,7 @@ export class TextWrapperContainer extends PureComponent {
     this.props.dispatch(entityStoreActions.flush(requests.beText));
   }
 
-  fetchText = callback => {
+  fetchText = (callback) => {
     const call = textsAPI.show(this.props.match.params.id);
     const textRequest = request(call, requests.beText);
     this.props.dispatch(textRequest).promise.then(() => {
@@ -93,9 +93,9 @@ export class TextWrapperContainer extends PureComponent {
       id: `TEXT_DESTROYED_${this.props.text.id}`,
       heading: t("notifications.text_delete"),
       body: t("notifications.delete_entity_body", {
-        title: this.props.text.attributes.titlePlaintext
+        title: this.props.text.attributes.titlePlaintext,
       }),
-      expiration: 5000
+      expiration: 5000,
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   }
@@ -124,8 +124,8 @@ export class TextWrapperContainer extends PureComponent {
         exportsAsEpubV3,
         epubV3ExportUrl,
         ingestionSourceDownloadUrl,
-        ingestionExternalSourceUrl
-      }
+        ingestionExternalSourceUrl,
+      },
     } = text;
 
     const base = [
@@ -133,21 +133,21 @@ export class TextWrapperContainer extends PureComponent {
         label: "actions.view",
         route: "reader",
         slug: text.attributes.slug,
-        icon: "eyeOpen32"
+        icon: "eyeOpen32",
       },
       {
         label: "actions.delete",
         authorize: "delete",
         icon: "delete32",
-        onClick: this.handleTextDestroy
+        onClick: this.handleTextDestroy,
       },
       {
         label: exportsAsEpubV3
           ? t("texts.disable_epub")
           : t("texts.enable_epub"),
         icon: exportsAsEpubV3 ? "circleMinus24" : "circlePlus24",
-        onClick: this.toggleExportsAsEpubV3
-      }
+        onClick: this.toggleExportsAsEpubV3,
+      },
     ];
 
     const epubDownload = epubV3ExportUrl
@@ -156,8 +156,8 @@ export class TextWrapperContainer extends PureComponent {
             label: "texts.download_epub",
             href: epubV3ExportUrl,
             download: true,
-            icon: "download24"
-          }
+            icon: "download24",
+          },
         ]
       : [];
 
@@ -167,8 +167,8 @@ export class TextWrapperContainer extends PureComponent {
             label: "texts.download_source",
             href: ingestionSourceDownloadUrl,
             download: true,
-            icon: "download24"
-          }
+            icon: "download24",
+          },
         ]
       : [];
 
@@ -178,8 +178,8 @@ export class TextWrapperContainer extends PureComponent {
             label: "texts.visit_source",
             href: ingestionExternalSourceUrl,
             download: false,
-            icon: "link24"
-          }
+            icon: "link24",
+          },
         ]
       : [];
 
@@ -187,14 +187,12 @@ export class TextWrapperContainer extends PureComponent {
       ...base,
       ...epubDownload,
       ...ingestionSourceDownload,
-      ...externalLink
+      ...externalLink,
     ];
   }
 
   renderRoutes() {
-    /* eslint-disable no-unused-vars */
     const { match, history, location, ...otherProps } = this.props;
-    /* eslint-enable no-unused-vars */
     otherProps.refresh = this.fetchText;
     return childRoutes(this.props.route, { childProps: otherProps });
   }
@@ -209,7 +207,7 @@ export class TextWrapperContainer extends PureComponent {
       parentTitle: text.relationships.project.attributes.titleFormatted,
       parentSubtitle: text.relationships.project.attributes.subtitle,
       texts: text.attributes.projectTextsNav,
-      parentId: text.relationships.project.id
+      parentId: text.relationships.project.id,
     };
 
     const belongsToJournalIssue =
@@ -222,7 +220,7 @@ export class TextWrapperContainer extends PureComponent {
         <Authorize
           entity={text}
           failureFatalError={{
-            body: t("texts.unauthorized")
+            body: t("texts.unauthorized"),
           }}
           ability={["update"]}
         >
@@ -267,5 +265,5 @@ export class TextWrapperContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(TextWrapperContainer))
+  withConfirmation(connectAndFetch(TextWrapperContainer)),
 );

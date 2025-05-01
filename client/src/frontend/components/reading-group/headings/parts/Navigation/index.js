@@ -20,7 +20,7 @@ function ChildNavigation({ ariaLabel, links, layout = "grid", padLinks }) {
               isActive={isActive}
               $padded={padLinks}
               activeClassName={css(
-                `--box-bg-color: var(--color-base-neutral10); color: var(--strong-color);`
+                `--box-bg-color: var(--color-base-neutral10); color: var(--strong-color);`,
               )}
             >
               {icon && <IconComposer icon={icon} size="default" />}
@@ -43,11 +43,11 @@ ChildNavigation.propTypes = {
       text: PropTypes.string.isRequired,
       icon: PropTypes.string,
       exact: PropTypes.bool,
-      isActive: PropTypes.func
-    }).isRequired
+      isActive: PropTypes.func,
+    }).isRequired,
   ).isRequired,
   layout: PropTypes.oneOf(["flex", "grid"]),
-  padLinks: PropTypes.bool
+  padLinks: PropTypes.bool,
 };
 
 export default ChildNavigation;

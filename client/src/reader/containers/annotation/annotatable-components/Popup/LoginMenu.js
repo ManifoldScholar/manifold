@@ -8,7 +8,7 @@ function LoginMenu({ direction, actions, visible, clearSelection }) {
     menuArray: ["main"],
     defaultMenu: "main",
     visible,
-    clearSelection
+    clearSelection,
   });
 
   return (
@@ -27,7 +27,7 @@ LoginMenu.displayName = "Annotation.Popup.LoginMenu";
 LoginMenu.propTypes = {
   actions: PropTypes.object.isRequired,
   direction: PropTypes.oneOf(["up", "down"]),
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
 };
 
 export default LoginMenu;

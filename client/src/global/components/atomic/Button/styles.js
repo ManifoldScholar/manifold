@@ -60,7 +60,8 @@ export const Button = styled("button", transientOptions)`
   border: 2px solid transparent;
   border-radius: var(--box-border-radius);
   background-color: var(--color-accent-primary);
-  transition: background-color ${defaultTransitionProps},
+  transition:
+    background-color ${defaultTransitionProps},
     border-color ${defaultTransitionProps};
   font-family: var(--font-family-heading);
   font-size: 14px;

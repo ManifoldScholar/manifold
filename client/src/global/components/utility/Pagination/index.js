@@ -22,7 +22,7 @@ function Pagination({
       <span>
         {t("pagination.compact", {
           current: pagination.currentPage,
-          total: pagination.totalPages
+          total: pagination.totalPages,
         })}
       </span>
     );
@@ -44,7 +44,6 @@ function Pagination({
         <Styled.Column>
           <Styled.Pages>
             {pages.map((page, index) => (
-              // eslint-disable-next-line react/no-array-index-key
               <React.Fragment key={index}>
                 {page === ELLIPSIS_CHAR && (
                   <Styled.Ellipsis>{ELLIPSIS_CHAR}</Styled.Ellipsis>
@@ -90,11 +89,11 @@ Pagination.propTypes = {
     perPage: PropTypes.number,
     prevPage: PropTypes.number,
     totalCount: PropTypes.number,
-    totalPages: PropTypes.number
+    totalPages: PropTypes.number,
   }),
   padding: PropTypes.number,
   paginationClickHandler: PropTypes.func,
-  compact: PropTypes.bool
+  compact: PropTypes.bool,
 };
 
 export default Pagination;

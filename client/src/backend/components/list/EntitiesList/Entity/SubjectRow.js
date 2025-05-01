@@ -9,11 +9,11 @@ export default class SubjectRow extends PureComponent {
   static propTypes = {
     clickable: PropTypes.bool,
     entity: PropTypes.object,
-    active: PropTypes.string
+    active: PropTypes.string,
   };
 
   static defaultProps = {
-    clickable: true
+    clickable: true,
   };
 
   get subject() {
@@ -37,7 +37,7 @@ export default class SubjectRow extends PureComponent {
 
     const additionalProps = {
       title: this.name,
-      active: this.active
+      active: this.active,
     };
     if (clickable) {
       additionalProps.onRowClick = lh.link("backendSettingsSubject", this.id);

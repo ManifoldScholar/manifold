@@ -28,11 +28,11 @@ export class ProjectTextsContainer extends Component {
     confirm: PropTypes.func.isRequired,
     route: PropTypes.object,
     match: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   static getDerivedStateFromProps(props, state = {}) {
@@ -45,14 +45,14 @@ export class ProjectTextsContainer extends Component {
     return {
       categories: props.project.relationships.textCategories.slice(0),
       texts: props.project.relationships.texts.slice(0),
-      response: props.projectResponse
+      response: props.projectResponse,
     };
   }
 
   constructor(props) {
     super(props);
     this.state = this.constructor.getDerivedStateFromProps(props, {
-      categories: []
+      categories: [],
     });
   }
 
@@ -65,7 +65,7 @@ export class ProjectTextsContainer extends Component {
       destroyCategory: this.handleCategoryDestroy,
       destroyText: this.handleTextDestroy,
       updateCategoryPosition: this.updateCategoryPosition,
-      updateTextCategoryAndPosition: this.updateTextCategoryAndPosition
+      updateTextCategoryAndPosition: this.updateTextCategoryAndPosition,
     };
   }
 
@@ -73,14 +73,14 @@ export class ProjectTextsContainer extends Component {
     return classNames("entity-list__button", "button-lozenge-secondary");
   }
 
-  handleCategoryDestroy = category => {
+  handleCategoryDestroy = (category) => {
     const t = this.props.t;
     const heading = t("modals.delete_category");
     const message = t("modals.delete_category_body");
     this.props.confirm(heading, message, () => this.destroyCategory(category));
   };
 
-  handleTextDestroy = text => {
+  handleTextDestroy = (text) => {
     const t = this.props.t;
     const heading = t("modals.delete_text");
     const message = t("modals.delete_text_body");
@@ -88,7 +88,9 @@ export class ProjectTextsContainer extends Component {
   };
 
   updateCategoryPositionInternal(category, position) {
-    const categories = this.state.categories.filter(c => c.id !== category.id);
+    const categories = this.state.categories.filter(
+      (c) => c.id !== category.id,
+    );
     categories.splice(position - 1, 0, category);
     this.setState({ categories });
   }
@@ -96,14 +98,14 @@ export class ProjectTextsContainer extends Component {
   updateCategoryPosition = (category, position, callback, announce) => {
     this.updateCategoryPositionInternal(category, position);
     const changes = {
-      attributes: { position }
+      attributes: { position },
     };
     const call = textCategoriesAPI.update(category.id, changes);
     const options = { noTouch: true, notificationScope: "none" };
     const categoryRequest = request(
       call,
       requests.beTextCategoryUpdate,
-      options
+      options,
     );
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
@@ -111,7 +113,7 @@ export class ProjectTextsContainer extends Component {
       if (announce) {
         const announcement = this.props.t("actions.dnd.moved_to_position", {
           title: category.attributes.title,
-          position
+          position,
         });
         this.props.setScreenReaderStatus(announcement);
       }
@@ -127,7 +129,7 @@ export class ProjectTextsContainer extends Component {
     category,
     position,
     callback,
-    announce
+    announce,
   ) => {
     let catPayload;
     if (category) {
@@ -137,7 +139,7 @@ export class ProjectTextsContainer extends Component {
     }
     const changes = {
       relationships: { category: { data: catPayload } },
-      attributes: { position }
+      attributes: { position },
     };
     this.updateTextCategoryAndPositionInternal(text, category, changes);
 
@@ -152,7 +154,7 @@ export class ProjectTextsContainer extends Component {
         const announcement = this.props.t("actions.dnd.moved_to_category", {
           title: text.attributes.title,
           category: `${category?.attributes.title || "Uncategorized"}`,
-          position
+          position,
         });
         this.props.setScreenReaderStatus(announcement);
       }
@@ -164,15 +166,15 @@ export class ProjectTextsContainer extends Component {
   };
 
   updateTextCategoryAndPositionInternal(text, category, changes) {
-    const texts = this.state.texts.filter(t => t.id !== text.id);
-    const clone = cloneDeep(this.state.texts.find(t => t.id === text.id));
+    const texts = this.state.texts.filter((t) => t.id !== text.id);
+    const clone = cloneDeep(this.state.texts.find((t) => t.id === text.id));
     clone.attributes = Object.assign(clone.attributes, changes.attributes);
     clone.relationships.category = changes.relationships.category.data;
     texts.splice(clone.attributes.position - 1, 0, clone);
     this.setState({ texts });
   }
 
-  destroyCategory = category => {
+  destroyCategory = (category) => {
     const call = textCategoriesAPI.destroy(category.id);
     const categoryRequest = request(call, requests.beTextCategoryDestroy);
     this.props.dispatch(categoryRequest).promise.then(() => {
@@ -198,9 +200,9 @@ export class ProjectTextsContainer extends Component {
         lockScroll: "always",
         wide: true,
         lockScrollClickCloses: false,
-        closeUrl
+        closeUrl,
       },
-      childProps: { refresh, project: this.project }
+      childProps: { refresh, project: this.project },
     });
   }
 
@@ -231,7 +233,7 @@ export class ProjectTextsContainer extends Component {
                 size={16}
                 className={classNames(
                   "button-icon-secondary__icon",
-                  "button-icon-secondary__icon--large"
+                  "button-icon-secondary__icon--large",
                 )}
               />
               <span className="full" aria-hidden="true">
@@ -250,7 +252,7 @@ export class ProjectTextsContainer extends Component {
                 size={16}
                 className={classNames(
                   "button-icon-secondary__icon",
-                  "button-icon-secondary__icon--large"
+                  "button-icon-secondary__icon--large",
                 )}
               />
               <span className="full" aria-hidden="true">
@@ -269,7 +271,7 @@ export class ProjectTextsContainer extends Component {
                 size={18}
                 className={classNames(
                   "button-icon-secondary__icon",
-                  "button-icon-secondary__icon--large"
+                  "button-icon-secondary__icon--large",
                 )}
               />
               <span className="full" aria-hidden="true">
@@ -295,6 +297,6 @@ export class ProjectTextsContainer extends Component {
 export default withTranslation()(
   withScreenReaderStatus(
     withConfirmation(connectAndFetch(ProjectTextsContainer)),
-    false
-  )
+    false,
+  ),
 );

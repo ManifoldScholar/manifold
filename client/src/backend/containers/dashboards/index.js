@@ -3,5 +3,5 @@ import Author from "./Author";
 
 export default {
   Admin,
-  Author
+  Author,
 };

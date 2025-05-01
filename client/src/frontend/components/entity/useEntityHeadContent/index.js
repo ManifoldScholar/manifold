@@ -15,7 +15,7 @@ const maybeAppendParentTitle = (entityTitle, parent) => {
 
 const TYPE_MAP = {
   journalVolumes: "glossary.volume_one",
-  journalIssues: "glossary.issue_truncated_one"
+  journalIssues: "glossary.issue_truncated_one",
 };
 
 const maybeSubstituteNumber = (titlePlaintext, number, type, t) => {
@@ -42,23 +42,18 @@ export const useMetaTitle = (entity, parent, prepend) => {
 
   const headTitle = settings?.attributes.general.headTitle;
 
-  const {
-    socialTitle,
-    titlePlaintext,
-    title,
-    name,
-    number
-  } = entity.attributes;
+  const { socialTitle, titlePlaintext, title, name, number } =
+    entity.attributes;
   const baseTitle = titlePlaintext ?? title ?? name;
 
   const entityTitle = maybePrepend(
     maybeSocialTitle(socialTitle, baseTitle, number, entity.type, t),
-    prepend
+    prepend,
   );
 
   return appendHeadTitle(
     maybeAppendParentTitle(entityTitle, parent),
-    headTitle
+    headTitle,
   );
 };
 
@@ -69,7 +64,7 @@ export const useMetaDescription = (entity, parent) => {
 
   const {
     socialDescription: parentSocialDescription,
-    descriptionPlaintext: parentDescriptionPlaintext
+    descriptionPlaintext: parentDescriptionPlaintext,
   } = parent?.attributes ?? {};
   return parentSocialDescription ?? parentDescriptionPlaintext;
 };
@@ -112,7 +107,7 @@ const fallbackImageFor = (entity, parent) => {
     case "journalIssues":
       return maybeCoverImage(
         entity,
-        maybeAvatarImage(entity, fallbackImageFor(parent))
+        maybeAvatarImage(entity, fallbackImageFor(parent)),
       );
     case "journalVolumes":
       return fallbackImageFor(parent);

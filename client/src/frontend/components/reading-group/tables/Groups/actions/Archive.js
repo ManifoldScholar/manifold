@@ -8,7 +8,7 @@ function ArchiveGroup({ membership, confirm, onArchive }) {
   const { onClick, label } = useArchiveOrActivateGroup({
     membership,
     confirm,
-    callback: onArchive
+    callback: onArchive,
   });
 
   if (!membership) return null;
@@ -21,7 +21,7 @@ ArchiveGroup.displayName = "GroupsTable.Group.Archive";
 ArchiveGroup.propTypes = {
   membership: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
-  onArchive: PropTypes.func
+  onArchive: PropTypes.func,
 };
 
 export default withConfirmation(ArchiveGroup);

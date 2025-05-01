@@ -26,5 +26,5 @@ export default function IssueDetailContainer({ project, breadcrumbs }) {
 }
 
 IssueDetailContainer.propTypes = {
-  issue: PropTypes.object
+  issue: PropTypes.object,
 };

@@ -6,11 +6,11 @@ import {
   ResourceCollectionPlaceholder,
   ResourcePlaceholder,
   TextPlaceholder,
-  TextSectionPlaceholder
+  TextSectionPlaceholder,
 } from "./placeholders";
 import {
   getResponse,
-  idInResponses
+  idInResponses,
 } from "frontend/components/collecting/helpers";
 
 const placeholderMap = {
@@ -19,7 +19,7 @@ const placeholderMap = {
   resources: ResourcePlaceholder,
   texts: TextPlaceholder,
   textSections: TextSectionPlaceholder,
-  journalIssues: ProjectPlaceholder
+  journalIssues: ProjectPlaceholder,
 };
 
 function getPlaceholder(type) {
@@ -51,7 +51,7 @@ DeferredCollectable.propTypes = {
   responses: PropTypes.array.isRequired,
   type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  children: PropTypes.func.isRequired
+  children: PropTypes.func.isRequired,
 };
 
 export default DeferredCollectable;

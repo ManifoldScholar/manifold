@@ -24,5 +24,5 @@ export default function AnalyticsWrapperContainer({ route }) {
 }
 
 AnalyticsWrapperContainer.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };

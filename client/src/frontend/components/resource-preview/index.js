@@ -8,7 +8,7 @@ import capitalize from "lodash/capitalize";
 import * as Styled from "./styles";
 
 export default class ResourcePreview extends Component {
-  static canPreview = resource => {
+  static canPreview = (resource) => {
     return ResourcePreview.getPreviewableComponent(resource) !== null;
   };
 
@@ -17,13 +17,13 @@ export default class ResourcePreview extends Component {
   static propTypes = {
     resource: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired,
-    toggleType: PropTypes.string
+    toggleType: PropTypes.string,
   };
 
   constructor() {
     super();
     this.state = {
-      overlayOpen: false
+      overlayOpen: false,
     };
   }
 
@@ -35,7 +35,7 @@ export default class ResourcePreview extends Component {
     window.removeEventListener("keyup", this.handleEscape);
   }
 
-  static getPreviewableComponent = resource => {
+  static getPreviewableComponent = (resource) => {
     let component = null;
     const kind = resource.attributes.kind;
     const key = capitalize(kind);
@@ -49,18 +49,18 @@ export default class ResourcePreview extends Component {
     return ResourcePreview.getPreviewableComponent(resource);
   }
 
-  handleEscape = event => {
+  handleEscape = (event) => {
     if (event.keyCode === 27) {
       this.closeOverlay(event);
     }
   };
 
-  handleOpenPreviewClick = event => {
+  handleOpenPreviewClick = (event) => {
     event.stopPropagation();
     this.setState({ overlayOpen: true });
   };
 
-  closeOverlay = eventIgnored => {
+  closeOverlay = (eventIgnored) => {
     this.setState({ overlayOpen: false });
   };
 
@@ -81,7 +81,7 @@ export default class ResourcePreview extends Component {
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <>
             <GlobalOverlay
               open={this.state.overlayOpen}

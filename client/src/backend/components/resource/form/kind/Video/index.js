@@ -10,7 +10,7 @@ class ResourceFormKindVideo extends PureComponent {
   static propTypes = {
     sourceModel: PropTypes.object,
     getModelValue: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   renderExternalVideoForm() {
@@ -30,10 +30,10 @@ class ResourceFormKindVideo extends PureComponent {
           options={[
             {
               label: this.props.t("resources.new.select_source"),
-              value: ""
+              value: "",
             },
             { label: "Youtube", value: "youtube" },
-            { label: "Vimeo", value: "vimeo" }
+            { label: "Vimeo", value: "vimeo" },
           ]}
           {...this.props}
         />
@@ -74,7 +74,7 @@ class ResourceFormKindVideo extends PureComponent {
           name="attributes[subKind]"
           customValues={{
             true: "external_video",
-            false: ""
+            false: "",
           }}
           {...this.props}
           wide

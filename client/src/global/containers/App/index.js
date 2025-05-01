@@ -20,11 +20,11 @@ class App extends Component {
     staticContext: PropTypes.object,
     staticRequest: PropTypes.object,
     helmetContext: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    helmetContext: {}
+    helmetContext: {},
   };
 
   constructor(props) {
@@ -34,7 +34,7 @@ class App extends Component {
       store: null,
       routerConfirm: false,
       routerConfirmCallback: null,
-      routerConfirmMessage: null
+      routerConfirmMessage: null,
     };
   }
 
@@ -42,7 +42,7 @@ class App extends Component {
     this.setState({
       routerConfirm: true,
       routerConfirmMessage: message,
-      routerConfirmCallback: callback
+      routerConfirmCallback: callback,
     });
   };
 
@@ -52,15 +52,15 @@ class App extends Component {
         Router: StaticRouter,
         routerProps: {
           context: this.props.staticContext,
-          location: this.props.staticRequest.url
-        }
+          location: this.props.staticRequest.url,
+        },
       };
     }
     return {
       Router: BrowserRouter,
       routerProps: {
-        getUserConfirmation: this.getConfirmation
-      }
+        getUserConfirmation: this.getConfirmation,
+      },
     };
   }
 
@@ -71,16 +71,16 @@ class App extends Component {
   get settings() {
     return get(
       this.props.store.getState(),
-      "entityStore.entities.settings.0.attributes"
+      "entityStore.entities.settings.0.attributes",
     );
   }
 
-  resolveRouterConfirm = answer => {
+  resolveRouterConfirm = (answer) => {
     this.state.routerConfirmCallback(answer);
     this.setState({
       routerConfirm: false,
       routerConfirmMessage: null,
-      routerConfirmCallback: null
+      routerConfirmCallback: null,
     });
   };
 

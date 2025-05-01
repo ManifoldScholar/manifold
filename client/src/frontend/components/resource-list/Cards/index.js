@@ -12,22 +12,18 @@ export default class ResourceListCards extends PureComponent {
     project: PropTypes.object.isRequired,
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
-    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6]),
   };
 
   render() {
-    const {
-      resources,
-      resourceCollection,
-      project,
-      itemHeadingLevel
-    } = this.props;
+    const { resources, resourceCollection, project, itemHeadingLevel } =
+      this.props;
 
     if (!resources) return null;
 
     return (
       <Styled.List>
-        {this.props.resources.map(resource => {
+        {this.props.resources.map((resource) => {
           return (
             <li key={resource.id}>
               <Resource.Card

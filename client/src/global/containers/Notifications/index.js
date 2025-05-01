@@ -7,9 +7,9 @@ import { commonActions } from "actions/helpers";
 import config from "config";
 
 export class NotificationsComponent extends Component {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      notifications: state.notifications
+      notifications: state.notifications,
     };
   };
 
@@ -21,19 +21,19 @@ export class NotificationsComponent extends Component {
     addNotification: PropTypes.func,
     removeNotification: PropTypes.func,
     removeAllNotifications: PropTypes.func,
-    notifications: PropTypes.object
+    notifications: PropTypes.object,
   };
 
   static defaultProps = {
     scope: "global",
     animate: true,
-    style: "header"
+    style: "header",
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      removing: false
+      removing: false,
     };
     this.commonActions = commonActions(props.dispatch);
   }
@@ -59,36 +59,36 @@ export class NotificationsComponent extends Component {
 
   get filteredNotifications() {
     return this.props.notifications.notifications.filter(
-      notification => notification.scope === this.props.scope
+      (notification) => notification.scope === this.props.scope,
     );
   }
 
   get listClass() {
     return classNames(`notifications-list--context-${this.props.style}`, {
       "notifications-list": true,
-      "notifications-list--updating": this.state.updating
+      "notifications-list--updating": this.state.updating,
     });
   }
 
   // Debug wrapper method to pass random notification in.
   // NB: Do not use to produce actual notifications.
-  handleNotifications = event => {
+  handleNotifications = (event) => {
     const headings = ["Error", "Warning", "Hey, Listen!"];
     const copy = ["Dummy error message copy", ""];
     if (event.ctrlKey && event.keyCode === 78) {
       this.commonActions.addNotification({
         level: Math.floor(Math.random() * 3),
         heading: headings[Math.floor(Math.random() * 3)],
-        copy: copy[Math.floor(Math.random() * 2)]
+        copy: copy[Math.floor(Math.random() * 2)],
       });
     } else if (event.ctrlKey && event.keyCode === 82) {
       this.commonActions.clearNotifications();
     }
   };
 
-  removeNotification = id => {
+  removeNotification = (id) => {
     const notification = this.props.notifications.notifications.find(
-      listNotification => listNotification.id === id
+      (listNotification) => listNotification.id === id,
     );
 
     if (notification && notification.removeNotification) {
@@ -111,13 +111,13 @@ export class NotificationsComponent extends Component {
     return (
       <section className="notifications-container" role="alert">
         <div
-          ref={notificationList => {
+          ref={(notificationList) => {
             this.notificationList = notificationList;
           }}
           key="notifications-list"
           className={this.listClass}
         >
-          {this.filteredNotifications.map(notification => (
+          {this.filteredNotifications.map((notification) => (
             <Notification
               key={notification.id}
               style={this.props.style}
@@ -135,5 +135,5 @@ export class NotificationsComponent extends Component {
 }
 
 export default connect(NotificationsComponent.mapStateToProps)(
-  NotificationsComponent
+  NotificationsComponent,
 );

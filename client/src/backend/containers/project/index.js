@@ -1,7 +1,7 @@
 import Category from "./category";
 import {
   List as CollaboratorsList,
-  Add as AddCollaborator
+  Add as AddCollaborator,
 } from "./collaborators";
 import Layout from "./Layout";
 import Events from "./Events";
@@ -39,5 +39,5 @@ export default {
   Text,
   Texts,
   Wrapper,
-  Access
+  Access,
 };

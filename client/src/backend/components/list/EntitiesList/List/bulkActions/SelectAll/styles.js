@@ -3,7 +3,7 @@ import {
   utilityPrimary,
   defaultTransitionProps,
   buttonUnstyled,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Total = styled.p`

@@ -71,5 +71,5 @@ module.exports = {
   notice,
   error,
   plain,
-  background
+  background,
 };

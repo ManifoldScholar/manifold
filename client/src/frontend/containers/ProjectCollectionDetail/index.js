@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "frontend/components/entity/Collection";
@@ -18,22 +17,22 @@ import { useFetch, useListFilters, useListQueryParams } from "hooks";
 export default function ProjectCollectionDetailContainer() {
   const { id } = useParams();
   const { data: projectCollection, uid } = useFetch({
-    request: [projectCollectionsAPI.show, id]
+    request: [projectCollectionsAPI.show, id],
   });
 
   const filtersReset = useMemo(
     () => ({
-      collectionOrder: id
+      collectionOrder: id,
     }),
-    [id]
+    [id],
   );
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filtersReset
+    initFilters: filtersReset,
   });
 
   const { data: projects, meta } = useFetch({
-    request: [projectsAPI.index, filters, pagination]
+    request: [projectsAPI.index, filters, pagination],
   });
 
   const { t } = useTranslation();
@@ -44,23 +43,23 @@ export default function ProjectCollectionDetailContainer() {
   }, [dispatch, uid]);
 
   const filterProps = useListFilters({
-    onFilterChange: state => setFilters(state),
+    onFilterChange: (state) => setFilters(state),
     initialState: filters,
     resetState: filtersReset,
     options: {
       featured: true,
-      featuredLabel: t("filters.featured_projects")
-    }
+      featuredLabel: t("filters.featured_projects"),
+    },
   });
 
   const breadcrumbs = useMemo(
     () => [
       {
         to: lh.link("frontendProjectCollections"),
-        label: t("navigation.breadcrumbs.all_project_collections")
-      }
+        label: t("navigation.breadcrumbs.all_project_collections"),
+      },
     ],
-    [t]
+    [t],
   );
 
   const headContentProps = useEntityHeadContent(projectCollection);

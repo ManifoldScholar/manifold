@@ -8,7 +8,7 @@ import navigation from "helpers/router/navigation";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
 import Breadcrumbs, {
-  BreadcrumbsContext
+  BreadcrumbsContext,
 } from "global/components/atomic/Breadcrumbs";
 import { useShowJournalsActive } from "hooks";
 
@@ -17,12 +17,12 @@ export default function LibraryHeader({
   authentication,
   pages,
   visibility,
-  commonActions
+  commonActions,
 }) {
   const { t } = useTranslation();
   const { breadcrumbs } = useContext(BreadcrumbsContext);
 
-  const pageToLinkAttrs = page => ({
+  const pageToLinkAttrs = (page) => ({
     label: page.attributes.navTitle || page.attributes.title,
     newTab: page.attributes.openInNewTab,
     externalUrl: page.attributes.isExternalLink
@@ -30,7 +30,7 @@ export default function LibraryHeader({
       : null,
     route: !page.attributes.isExternalLink ? "frontendPage" : null,
     matchType: "link",
-    args: [page.attributes.slug]
+    args: [page.attributes.slug],
   });
   const links = () => {
     const routes = navigation.frontend(authentication, settings);
@@ -38,7 +38,7 @@ export default function LibraryHeader({
       return routes;
     }
     const pageLinks = pages
-      .filter(page => page.attributes.showInHeader)
+      .filter((page) => page.attributes.showInHeader)
       .map(pageToLinkAttrs);
     return [...routes, ...pageLinks];
   };
@@ -105,5 +105,5 @@ LibraryHeader.propTypes = {
   authentication: PropTypes.object,
   pages: PropTypes.arrayOf(PropTypes.object),
   visibility: PropTypes.object,
-  commonActions: PropTypes.object
+  commonActions: PropTypes.object,
 };

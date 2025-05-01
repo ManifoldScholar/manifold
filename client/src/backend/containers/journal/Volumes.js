@@ -9,7 +9,7 @@ import { withRouter } from "react-router-dom";
 import { useFetch, useListQueryParams } from "hooks";
 import EntitiesList, {
   Button,
-  JournalVolumeRow
+  JournalVolumeRow,
 } from "backend/components/list/EntitiesList";
 
 function JournalVolumesContainer({ refresh, journal, route }) {
@@ -17,8 +17,12 @@ function JournalVolumesContainer({ refresh, journal, route }) {
 
   const { pagination } = useListQueryParams({ initSize: 10 });
 
-  const { data, refresh: refreshVolumes, meta } = useFetch({
-    request: [journalVolumesAPI.index, journal.id, pagination]
+  const {
+    data,
+    refresh: refreshVolumes,
+    meta,
+  } = useFetch({
+    request: [journalVolumesAPI.index, journal.id, pagination],
   });
 
   const { t } = useTranslation();
@@ -40,7 +44,7 @@ function JournalVolumesContainer({ refresh, journal, route }) {
         titleTag="h2"
         entities={data}
         unit={t("glossary.volume", {
-          count: meta?.pagination?.totalCount || 0
+          count: meta?.pagination?.totalCount || 0,
         })}
         pagination={meta.pagination}
         showCount
@@ -50,7 +54,7 @@ function JournalVolumesContainer({ refresh, journal, route }) {
             type="add"
             text={t("volumes.add_button_label")}
             authorizedFor="journalVolume"
-          />
+          />,
         ]}
       />
       {childRoutes(route, {
@@ -59,21 +63,21 @@ function JournalVolumesContainer({ refresh, journal, route }) {
           lockScroll: "always",
           wide: true,
           lockScrollClickCloses: false,
-          closeUrl
+          closeUrl,
         },
         childProps: {
           refresh,
           refreshVolumes,
           journal,
-          closeUrl: lh.link("backendJournalVolumes", journal.id)
-        }
+          closeUrl: lh.link("backendJournalVolumes", journal.id),
+        },
       })}
     </Authorize>
   );
 }
 
 JournalVolumesContainer.propTypes = {
-  journal: PropTypes.object
+  journal: PropTypes.object,
 };
 
 export default withRouter(JournalVolumesContainer);

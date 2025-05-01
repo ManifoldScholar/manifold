@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { Transforms, Editor as SlateEditor } from "slate";
-import { withReact, ReactEditor, useSlate } from "slate-react";
+import { ReactEditor, useSlate } from "slate-react";
 import { HistoryEditor } from "slate-history";
 import Leaf from "./renderers/Leaf";
 import Element from "./renderers/Element";
@@ -27,7 +27,7 @@ export default function Editor({
   setWarnErrors,
   nextRef,
   htmlMode,
-  toggleHtmlMode
+  toggleHtmlMode,
 }) {
   const editor = useSlate();
   const aceRef = useRef();
@@ -53,22 +53,22 @@ export default function Editor({
       if (!isInView) {
         node.parentElement.scrollIntoView({
           behavior: "smooth",
-          block: "center"
+          block: "center",
         });
       }
     }
   }, [editor, editor.selection, htmlMode]);
 
-  const theme = stylesheets?.map(s => s?.attributes.styles).join("\n");
+  const theme = stylesheets?.map((s) => s?.attributes.styles).join("\n");
 
   const renderElement = useCallback(
-    props => <Element {...props} theme={theme} darkMode={darkMode} />,
-    [theme, darkMode]
+    (props) => <Element {...props} theme={theme} darkMode={darkMode} />,
+    [theme, darkMode],
   );
 
   const renderLeaf = useCallback(
-    props => <Leaf {...props} darkMode={darkMode} />,
-    [darkMode]
+    (props) => <Leaf {...props} darkMode={darkMode} />,
+    [darkMode],
   );
 
   const toggleEditorView = () => {
@@ -79,7 +79,7 @@ export default function Editor({
       Transforms.insertNodes(editor, json);
       Transforms.select(editor, {
         anchor: SlateEditor.start(editor, [0]),
-        focus: SlateEditor.start(editor, [0])
+        focus: SlateEditor.start(editor, [0]),
       });
       return toggleHtmlMode(false);
     }
@@ -90,7 +90,7 @@ export default function Editor({
     return toggleHtmlMode(true);
   };
 
-  const onClickToggle = val => e => {
+  const onClickToggle = (val) => (e) => {
     e.stopPropagation();
     e.preventDefault();
     if (hasErrors) {
@@ -102,8 +102,8 @@ export default function Editor({
     toggleEditorView();
   };
 
-  const onValidateHtml = messages => {
-    const errorFound = messages.find(msg => msg.type === "error");
+  const onValidateHtml = (messages) => {
+    const errorFound = messages.find((msg) => msg.type === "error");
     if (!errorFound) {
       setHasErrors(false);
       return setWarnErrors(false);
@@ -119,7 +119,7 @@ export default function Editor({
     aceRef,
     nextRef,
     prevRef: controlsRef,
-    darkMode
+    darkMode,
   };
 
   const cssProps = {
@@ -130,23 +130,23 @@ export default function Editor({
     aceRef,
     nextRef,
     prevRef: controlsRef,
-    darkMode
+    darkMode,
   };
 
   const codeAreaProps = showCss ? cssProps : htmlProps;
 
-  const toggleStyles = e => {
+  const toggleStyles = (e) => {
     e.preventDefault();
     toggleCss(!showCss);
   };
 
-  const onClickUndo = e => {
+  const onClickUndo = (e) => {
     e.preventDefault();
     if (!htmlMode) return HistoryEditor.undo(editor);
     aceRef.current.editor.undo();
   };
 
-  const onClickRedo = e => {
+  const onClickRedo = (e) => {
     e.preventDefault();
     if (!htmlMode) return HistoryEditor.redo(editor);
     aceRef.current.editor.redo();
@@ -156,24 +156,23 @@ export default function Editor({
     "manifold-text-section text-section font-size-2",
     {
       "scheme-dark": darkMode,
-      "scheme-light": !darkMode
-    }
+      "scheme-light": !darkMode,
+    },
   );
 
-  const onClickDarkModeToggle = val => e => {
+  const onClickDarkModeToggle = (val) => (e) => {
     e.preventDefault();
     setDarkMode(val);
   };
 
-  /* eslint-disable no-nested-ternary */
   const errors = warnErrors
     ? Array.isArray(hasErrors)
       ? hasErrors
       : [
           {
             source: { pointer: "/data/attributes/body" },
-            detail: t(`errors.invalid_html_${warnErrors}`)
-          }
+            detail: t(`errors.invalid_html_${warnErrors}`),
+          },
         ]
     : [];
 
@@ -200,7 +199,7 @@ export default function Editor({
             renderLeaf={renderLeaf}
             placeholder={t("editor.elements.placeholder")}
             spellCheck={false}
-            onKeyDown={e => captureHotKeys(e, editor)}
+            onKeyDown={(e) => captureHotKeys(e, editor)}
           />
         )}
         {htmlMode && <HtmlEditor {...codeAreaProps} />}
@@ -208,7 +207,7 @@ export default function Editor({
       {theme && !htmlMode && (
         <style
           dangerouslySetInnerHTML={{
-            __html: `@layer stylesheets {${theme}}`
+            __html: `@layer stylesheets {${theme}}`,
           }}
         />
       )}

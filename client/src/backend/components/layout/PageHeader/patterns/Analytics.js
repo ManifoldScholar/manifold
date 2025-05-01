@@ -5,7 +5,7 @@ export default function AnalyticsHeader({
   titleString,
   titleComponent,
   titleTag,
-  link
+  link,
 }) {
   return (
     <Styled.Row $compact>

@@ -4,7 +4,7 @@ import {
   formInstructions,
   respond,
   defaultTransitionProps,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Fieldset = styled.fieldset`
@@ -62,7 +62,7 @@ export const Toggle = styled.span`
           margin-top: 0;
           margin-left: 35px;
         }`,
-      50
+      50,
     )}
   }
 `;

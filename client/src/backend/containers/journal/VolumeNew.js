@@ -24,7 +24,7 @@ JournalVolumeNew.propTypes = {
   journal: PropTypes.object.isRequired,
   closeUrl: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
-  refreshVolumes: PropTypes.func.isRequired
+  refreshVolumes: PropTypes.func.isRequired,
 };
 
 export default JournalVolumeNew;

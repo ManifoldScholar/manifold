@@ -11,7 +11,7 @@ function Grid({ columns = 4, children }) {
 
 Grid.propTypes = {
   columns: PropTypes.oneOf([2, 3, 4]),
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 Grid.displayName = "Analytics.Grid";

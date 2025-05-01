@@ -10,7 +10,7 @@ import {
   useFetch,
   useApiCallback,
   useNotification,
-  useRedirectToFirstMatch
+  useRedirectToFirstMatch,
 } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
@@ -28,20 +28,20 @@ function UserWrapper({ match, route, history, confirm, location }) {
 
   const { data: user, refresh } = useFetch({
     request: [usersAPI.show, id],
-    condition: id !== "new"
+    condition: id !== "new",
   });
 
   const destroy = useApiCallback(usersAPI.destroy, {
-    removes: user
+    removes: user,
   });
 
   const update = useApiCallback(usersAPI.update);
 
-  const notifyDestroy = useNotification(u => ({
+  const notifyDestroy = useNotification((u) => ({
     level: 0,
     id: `USER_DESTROYED_${u.id}`,
     heading: t("notifications.user_delete", { name: u.attributes.fullName }),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const destroyAndRedirect = useCallback(() => {
@@ -51,7 +51,7 @@ function UserWrapper({ match, route, history, confirm, location }) {
         notifyDestroy(user);
         redirect();
       },
-      () => redirect()
+      () => redirect(),
     );
   }, [destroy, history, user, notifyDestroy]);
 
@@ -65,12 +65,12 @@ function UserWrapper({ match, route, history, confirm, location }) {
     new Promise((resolve, reject) => {
       setModalProps({
         resolve,
-        reject
+        reject,
       });
       toggleOpen(true);
     }).then(
       () => toggleOpen(false),
-      () => toggleOpen(false)
+      () => toggleOpen(false),
     );
   };
 
@@ -99,29 +99,29 @@ function UserWrapper({ match, route, history, confirm, location }) {
       icon: "privacy24",
       label: user?.attributes.adminVerified
         ? t("records.users.block")
-        : t("records.users.verify")
+        : t("records.users.verify"),
     },
     {
       onClick: unsubscribeUser,
       icon: "mail32",
-      label: t("records.users.unsubscribe")
+      label: t("records.users.unsubscribe"),
     },
     {
       onClick: handleResetPasswordClick,
       icon: "key32",
-      label: t("records.users.reset_password")
+      label: t("records.users.reset_password"),
     },
     {
       label: "actions.delete",
       authorize: "delete",
       icon: "delete32",
-      onClick: handleUserDestroy
-    }
+      onClick: handleUserDestroy,
+    },
   ];
 
   const renderRoutes = () => {
     return childRoutes(route, {
-      childProps: { refresh, user }
+      childProps: { refresh, user },
     });
   };
 
@@ -129,7 +129,7 @@ function UserWrapper({ match, route, history, confirm, location }) {
     route: "backendRecordsUser",
     id: user?.id,
     slug: user?.attributes.slug,
-    candidates: user ? navigation.user(user) : []
+    candidates: user ? navigation.user(user) : [],
   });
 
   if (id === "new") return <UserNew />;
@@ -143,7 +143,7 @@ function UserWrapper({ match, route, history, confirm, location }) {
       <Authorize
         entity={user}
         failureFatalError={{
-          detail: t("groups.unauthorized_edit")
+          detail: t("groups.unauthorized_edit"),
         }}
         ability={["update"]}
       >

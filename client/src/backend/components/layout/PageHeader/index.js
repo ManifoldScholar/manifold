@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import Breadcrumbs, {
-  BreadcrumbsContext
+  BreadcrumbsContext,
 } from "global/components/atomic/Breadcrumbs";
 import {
   Text,
@@ -14,20 +14,20 @@ import {
   Count,
   Analytics,
   Article,
-  Resource
+  Resource,
 } from "./patterns";
 import { maybeHtml } from "helpers/maybeHtml";
 import * as Styled from "./styles";
 
 const htmlRegex = /(<([^>]+)>)|(&#)|(&[a-z]*;)/gi;
 
-const maybeString = title => {
+const maybeString = (title) => {
   return typeof title === "string" && !title?.match(htmlRegex)?.length
     ? title
     : null;
 };
 
-const maybeComponent = title => (React.isValidElement(title) ? title : null);
+const maybeComponent = (title) => (React.isValidElement(title) ? title : null);
 
 const COMPONENT_MAP = {
   text: Text,
@@ -42,7 +42,7 @@ const COMPONENT_MAP = {
   article: Article,
   resource: Resource,
   resourceCollection: Resource,
-  resources: Resource
+  resources: Resource,
 };
 
 export default function PageHeader({
@@ -85,14 +85,14 @@ PageHeader.propTypes = {
   actions: PropTypes.arrayOf(PropTypes.object),
   note: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
+    PropTypes.node,
   ]),
   icon: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
+    PropTypes.node,
   ]),
   link: PropTypes.shape({ path: PropTypes.string, label: PropTypes.string }),
   type: PropTypes.string,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
 };

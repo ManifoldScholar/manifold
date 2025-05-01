@@ -10,7 +10,7 @@ class ProjectContentBlockInListPartsDelete extends PureComponent {
     baseClass: PropTypes.string.isRequired,
     clickHandler: PropTypes.func.isRequired,
     blockTitle: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -22,7 +22,7 @@ class ProjectContentBlockInListPartsDelete extends PureComponent {
         className={`${this.props.baseClass}__button ${this.props.baseClass}__button--delete`}
         onClick={this.props.clickHandler}
         aria-label={this.props.t("layout.delete_block", {
-          blockTitle: translatedTitle
+          blockTitle: translatedTitle,
         })}
       >
         <Utility.IconComposer icon="delete32" size={26} className={className} />

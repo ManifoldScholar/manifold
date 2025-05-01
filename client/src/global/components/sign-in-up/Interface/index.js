@@ -16,13 +16,13 @@ const VIEW_COMPONENT = {
   "create-update": Update,
   login: Login,
   logout: Logout,
-  password: ForgotPassword
+  password: ForgotPassword,
 };
 
 export default function SignInUpInterface({
   defaultView = "login",
   showLogout = false,
-  hideOverlay
+  hideOverlay,
 }) {
   const authentication = useFromStore("authentication");
   const location = useLocation();
@@ -51,10 +51,9 @@ export default function SignInUpInterface({
     hideOverlay,
     view,
     showLogout,
-    willRedirect
+    willRedirect,
   ]);
 
-  /* eslint-disable no-nested-ternary */
   const viewProps = {
     handleViewChange: updateView,
     redirectToHomeOnSignup: defaultView === "terms",
@@ -64,8 +63,8 @@ export default function SignInUpInterface({
       view === "update"
         ? "existing"
         : view === "create-update"
-        ? "new"
-        : undefined
+          ? "new"
+          : undefined,
   };
 
   const View = VIEW_COMPONENT[view];
@@ -77,5 +76,5 @@ SignInUpInterface.displayName = "Global.SignInUp.Interface";
 SignInUpInterface.propTypes = {
   defaultView: PropTypes.oneOf(Object.keys(VIEW_COMPONENT)),
   showLogout: PropTypes.bool,
-  hideOverlay: PropTypes.func
+  hideOverlay: PropTypes.func,
 };

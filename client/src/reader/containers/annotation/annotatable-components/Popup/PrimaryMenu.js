@@ -16,20 +16,15 @@ function PrimaryMenu({
   activeAnnotation,
   direction,
   visible,
-  clearSelection
+  clearSelection,
 }) {
-  const {
-    menus,
-    activeMenu,
-    lastActiveMenu,
-    setActiveMenu,
-    handleKeyDown
-  } = useAnnotationMenu({
-    menuArray: ["main", "share", "readingGroup"],
-    defaultMenu: "main",
-    visible,
-    clearSelection
-  });
+  const { menus, activeMenu, lastActiveMenu, setActiveMenu, handleKeyDown } =
+    useAnnotationMenu({
+      menuArray: ["main", "share", "readingGroup"],
+      defaultMenu: "main",
+      visible,
+      clearSelection,
+    });
 
   function handleReadingGroupSelect(id) {
     if (id === currentAnnotatingReadingGroup) return;
@@ -39,7 +34,7 @@ function PrimaryMenu({
   const submenuProps = {
     direction,
     onBackClick: () => setActiveMenu("main"),
-    onKeyDown: event => handleKeyDown(event)
+    onKeyDown: (event) => handleKeyDown(event),
   };
 
   return (
@@ -50,8 +45,8 @@ function PrimaryMenu({
         direction={direction}
         activeMenu={activeMenu}
         lastActiveMenu={lastActiveMenu}
-        openSubmenu={name => setActiveMenu(name)}
-        onKeyDown={event => handleKeyDown(event, "main")}
+        openSubmenu={(name) => setActiveMenu(name)}
+        onKeyDown={(event) => handleKeyDown(event, "main")}
         text={text}
         actions={actions}
         activeAnnotation={activeAnnotation}
@@ -91,7 +86,7 @@ PrimaryMenu.propTypes = {
   readingGroups: PropTypes.array,
   setAnnotatingReadingGroup: PropTypes.func,
   direction: PropTypes.oneOf(["up", "down"]),
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
 };
 
 export default withReadingGroups(PrimaryMenu);

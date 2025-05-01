@@ -5,5 +5,5 @@ import Video from "./Video";
 export default {
   Image,
   Interactive,
-  Video
+  Video,
 };

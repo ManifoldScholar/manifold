@@ -1,4 +1,3 @@
-import React from "react";
 import { Component } from "react";
 import PropTypes from "prop-types";
 import BodyNodes from "./body-nodes";
@@ -8,7 +7,7 @@ export default class Body extends Component {
     section: PropTypes.object,
     annotations: PropTypes.array,
     pendingAnnotation: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object,
   };
 
   shouldComponentUpdate(nextProps, nextStateIgnored) {

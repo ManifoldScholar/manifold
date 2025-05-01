@@ -5,7 +5,7 @@ import {
   headingSecondary,
   subtitlePrimary,
   respond,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 
 export default `
@@ -38,7 +38,7 @@ export default `
           flex-direction: row;
           align-items: center;
         `,
-          60
+          60,
         )}
 
         + li {
@@ -148,7 +148,7 @@ export default `
           margin-left: 12px;
           text-align: right;
         `,
-          60
+          60,
         )}
 
         a {

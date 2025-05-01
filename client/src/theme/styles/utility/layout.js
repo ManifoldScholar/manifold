@@ -1,7 +1,7 @@
 import {
   containerPrototype,
   containerFocus,
-  flexViewport
+  flexViewport,
 } from "../mixins/layout";
 
 export const readerContainerWidths = [
@@ -9,7 +9,7 @@ export const readerContainerWidths = [
   "916px",
   "790px",
   "680px",
-  "500px"
+  "500px",
 ];
 export const readerContainerWidthClasses = readerContainerWidths
   .map(
@@ -17,7 +17,7 @@ export const readerContainerWidthClasses = readerContainerWidths
     &.container-width-${index} {
       max-inline-size: ${width};
     }
-  `
+  `,
   )
   .join("");
 

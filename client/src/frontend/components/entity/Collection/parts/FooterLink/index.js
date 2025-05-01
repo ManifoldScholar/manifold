@@ -15,7 +15,7 @@ FooterLink.displayName = "Frontend.Entity.Collection.FooterLink";
 
 FooterLink.propTypes = {
   to: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
 };
 
 export default FooterLink;

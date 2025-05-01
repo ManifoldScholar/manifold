@@ -18,11 +18,11 @@ class DatePicker extends PureComponent {
     set: PropTypes.func.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     wide: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    setFormat: "yyyy-MM-dd"
+    setFormat: "yyyy-MM-dd",
   };
 
   get value() {
@@ -43,14 +43,14 @@ class DatePicker extends PureComponent {
     return new Date(adjusted);
   }
 
-  handleChange = date => {
+  handleChange = (date) => {
     this.props.set(date ? format(date, this.props.setFormat) : null);
     this.props.setScreenReaderStatus(
       date
         ? this.props.t("forms.date_picker.date_change_sr_status", {
-            date: format(date, "PPP")
+            date: format(date, "PPP"),
           })
-        : this.props.t("forms.date_picker.date_clear_sr_status")
+        : this.props.t("forms.date_picker.date_clear_sr_status"),
     );
   };
 
@@ -59,7 +59,7 @@ class DatePicker extends PureComponent {
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <Errorable
             className={this.props.wide ? "wide" : undefined}
             name={name}

@@ -19,7 +19,7 @@ class VisibilityMenuBody extends PureComponent {
     filter: PropTypes.object,
     filterChangeHandler: PropTypes.func,
     t: PropTypes.func,
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static contextType = ReaderContext;
@@ -27,10 +27,10 @@ class VisibilityMenuBody extends PureComponent {
   get readingGroups() {
     const { readingGroups } = this.props;
 
-    return readingGroups.map(readingGroup => {
+    return readingGroups.map((readingGroup) => {
       return {
         label: readingGroup.attributes.name,
-        value: readingGroup.attributes.id
+        value: readingGroup.attributes.id,
       };
     });
   }
@@ -46,12 +46,10 @@ class VisibilityMenuBody extends PureComponent {
   }
 
   readingGroupFilterBase(value = false) {
-    /* eslint-disable no-param-reassign */
     return this.props.readingGroups.reduce((map, obj) => {
       map[obj.id] = value;
       return map;
     }, {});
-    /* eslint-enable no-param-reassign */
   }
 
   showAll = () => {
@@ -61,8 +59,8 @@ class VisibilityMenuBody extends PureComponent {
       readingGroups: Object.assign(this.readingGroupFilterBase(false), {
         all: true,
         private: false,
-        public: false
-      })
+        public: false,
+      }),
     };
     return this.props.filterChangeHandler(filter);
   };
@@ -74,8 +72,8 @@ class VisibilityMenuBody extends PureComponent {
       readingGroups: Object.assign(this.readingGroupFilterBase(false), {
         all: false,
         private: false,
-        public: false
-      })
+        public: false,
+      }),
     };
     return this.props.filterChangeHandler(filter);
   };
@@ -86,7 +84,7 @@ class VisibilityMenuBody extends PureComponent {
     const filterGroup = { ...filter[group] };
     if (property === "all") {
       if (checked) {
-        Object.keys(filterGroup).forEach(p => {
+        Object.keys(filterGroup).forEach((p) => {
           filterGroup[p] = p === "all";
         });
       } else {
@@ -102,7 +100,7 @@ class VisibilityMenuBody extends PureComponent {
     return this.props.filterChangeHandler(filter);
   };
 
-  groupIcon = format => {
+  groupIcon = (format) => {
     switch (format) {
       case "annotation":
         return "comment24";
@@ -131,7 +129,7 @@ class VisibilityMenuBody extends PureComponent {
           <div
             className={classNames(
               "visibility-menu__filters control-menu__section",
-              { "visibility-menu__filters--flex": flex }
+              { "visibility-menu__filters--flex": flex },
             )}
           >
             {children}
@@ -144,15 +142,15 @@ class VisibilityMenuBody extends PureComponent {
   renderReadingGroups() {
     const { readingGroups, filter } = this.props;
     if (!readingGroups) return null;
-    /* eslint-disable no-param-reassign */
+
     const options = {
       ...readingGroups.reduce((map, obj) => {
         map[obj.id] = false;
         return map;
       }, {}),
-      ...filter.readingGroups
+      ...filter.readingGroups,
     };
-    /* eslint-enable no-param-reassign */
+
     const children = readingGroups.map((readingGroup, index) => {
       return this.renderCheckbox(
         readingGroup.id,
@@ -160,7 +158,7 @@ class VisibilityMenuBody extends PureComponent {
         options,
         "readingGroups",
         index + 3,
-        true
+        true,
       );
     });
     if (this.canEngagePublicly)
@@ -171,8 +169,8 @@ class VisibilityMenuBody extends PureComponent {
           options,
           "readingGroups",
           2,
-          true
-        )
+          true,
+        ),
       );
     children.unshift(
       this.renderCheckbox(
@@ -181,8 +179,8 @@ class VisibilityMenuBody extends PureComponent {
         options,
         "readingGroups",
         1,
-        true
-      )
+        true,
+      ),
     );
     children.unshift(
       this.renderCheckbox(
@@ -191,8 +189,8 @@ class VisibilityMenuBody extends PureComponent {
         options,
         "readingGroups",
         0,
-        true
-      )
+        true,
+      ),
     );
 
     const label = this.canAccessReadingGroups
@@ -226,25 +224,25 @@ class VisibilityMenuBody extends PureComponent {
           filterState,
           format,
           index,
-          flex
+          flex,
         );
-      })
+      }),
     );
   }
 
   renderCheckbox(key, label, filterState, format, index, flex) {
     const checkboxId = format + "-checkbox-" + index;
-    /* eslint-disable no-nested-ternary */
+
     const adjustedLabel =
       key === "all"
         ? this.props.t("actions.show_all")
         : key === "highlights"
-        ? this.props.t("reader.menus.visibility.highlights_label")
-        : label;
+          ? this.props.t("reader.menus.visibility.highlights_label")
+          : label;
     const checkboxClasses = classNames({
       "checkbox checkbox--white": true,
       "visibility-menu__checkbox": true,
-      "visibility-menu__checkbox--flex": flex
+      "visibility-menu__checkbox--flex": flex,
     });
     return (
       <label
@@ -256,7 +254,7 @@ class VisibilityMenuBody extends PureComponent {
           type="checkbox"
           id={checkboxId}
           checked={filterState[key] || false}
-          onChange={event => this.handleFilterClick(event, format, key)}
+          onChange={(event) => this.handleFilterClick(event, format, key)}
         />
         <div className="checkbox__indicator" aria-hidden="true">
           <IconComposer
@@ -273,8 +271,8 @@ class VisibilityMenuBody extends PureComponent {
   showAllPressed(filters) {
     const { annotation, readingGroups, resource } = filters ?? {};
     if (!annotation || !readingGroups || !resource) return false;
-    if (Object.values(annotation).some(val => !val)) return false;
-    if (Object.values(resource).some(val => !val)) return false;
+    if (Object.values(annotation).some((val) => !val)) return false;
+    if (Object.values(resource).some((val) => !val)) return false;
     if (!readingGroups?.all) return false;
     return true;
   }
@@ -282,9 +280,9 @@ class VisibilityMenuBody extends PureComponent {
   hideAllPressed(filters) {
     const { annotation, readingGroups, resource } = filters ?? {};
     if (!annotation || !readingGroups || !resource) return false;
-    if (Object.values(annotation).some(val => val)) return false;
-    if (Object.values(resource).some(val => val)) return false;
-    if (Object.values(readingGroups).some(val => val)) return false;
+    if (Object.values(annotation).some((val) => val)) return false;
+    if (Object.values(resource).some((val) => val)) return false;
+    if (Object.values(readingGroups).some((val) => val)) return false;
     return true;
   }
 
@@ -314,7 +312,7 @@ class VisibilityMenuBody extends PureComponent {
     return (
       <div
         className={classNames("visibility-menu control-menu", {
-          [className]: !!className
+          [className]: !!className,
         })}
       >
         <div className="control-menu__header">
@@ -335,5 +333,5 @@ class VisibilityMenuBody extends PureComponent {
 }
 
 export default withTranslation()(
-  withReadingGroups(withCurrentUser(VisibilityMenuBody))
+  withReadingGroups(withCurrentUser(VisibilityMenuBody)),
 );

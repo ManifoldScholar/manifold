@@ -5,17 +5,17 @@ export default {
     const lowLevelApiClient = new LowLevelApiClient();
     const results = lowLevelApiClient
       .call("/api/v1/tokens", "POST", { params: { email, password } })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           return Promise.reject(response);
         }
         return response.json().then(
-          json => {
+          (json) => {
             return { json, response };
           },
           () => {
             return { response };
-          }
+          },
         );
       })
       .then(({ json }) => {
@@ -28,7 +28,7 @@ export default {
     return {
       endpoint: "/api/v1/tokens",
       method: "POST",
-      options: { params: { email, password } }
+      options: { params: { email, password } },
     };
-  }
+  },
 };

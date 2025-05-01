@@ -24,12 +24,12 @@ export default function useArchiveGroup({ membership, confirm, callback }) {
     const call = {
       endpoint: archive,
       method: "POST",
-      options: {}
+      options: {},
     };
     const archiveRequest = request(
       call,
       requests.feReadingGroupMembershipArchive,
-      {}
+      {},
     );
     dispatch(archiveRequest).promise.then(doCallback);
   }
@@ -38,12 +38,12 @@ export default function useArchiveGroup({ membership, confirm, callback }) {
     const call = {
       endpoint: activate,
       method: "POST",
-      options: {}
+      options: {},
     };
     const activateRequest = request(
       call,
       requests.feReadingGroupMembershipActivate,
-      {}
+      {},
     );
     dispatch(activateRequest).promise.then(doCallback);
   }
@@ -58,6 +58,6 @@ export default function useArchiveGroup({ membership, confirm, callback }) {
 
   return {
     onClick,
-    label: archive ? t("actions.archive") : t("actions.activate")
+    label: archive ? t("actions.archive") : t("actions.activate"),
   };
 }

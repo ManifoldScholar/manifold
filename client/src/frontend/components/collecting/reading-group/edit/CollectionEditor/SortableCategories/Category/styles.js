@@ -3,7 +3,7 @@ import {
   panelRounded,
   dragging,
   utilityPrimary,
-  textTruncate
+  textTruncate,
 } from "theme/styles/mixins";
 import { categoryVerticalPadding } from "../../styles";
 

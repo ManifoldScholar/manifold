@@ -10,16 +10,16 @@ import * as Styled from "./styles";
 
 function setCategoriesFromProps(collection, categoriesData) {
   const {
-    attributes: { categories }
+    attributes: { categories },
   } = collection;
-  const sortedCategories = categories.map(cat => {
+  const sortedCategories = categories.map((cat) => {
     const {
-      attributes: { markdownOnly, titlePlaintext }
-    } = categoriesData?.find(c => cat.id === c.id) ?? { attributes: {} };
+      attributes: { markdownOnly, titlePlaintext },
+    } = categoriesData?.find((c) => cat.id === c.id) ?? { attributes: {} };
     return {
       id: cat.id,
       markdownOnly,
-      title: titlePlaintext
+      title: titlePlaintext,
     };
   });
   return sortedCategories;
@@ -27,7 +27,7 @@ function setCategoriesFromProps(collection, categoriesData) {
 
 function setMappingsFromProps(collection) {
   const {
-    attributes: { categoryMappings }
+    attributes: { categoryMappings },
   } = collection;
   return { ...categoryMappings };
 }
@@ -40,11 +40,11 @@ export default function SortableCategories({
   ...listProps
 }) {
   const [categories, setCategories] = useState(
-    setCategoriesFromProps(collection, categoriesData)
+    setCategoriesFromProps(collection, categoriesData),
   );
   const prevCategories = useRef(categories);
   const prevCatsFromProps = useRef(
-    setCategoriesFromProps(collection, categoriesData)
+    setCategoriesFromProps(collection, categoriesData),
   );
   const [mappings, setMappings] = useState(setMappingsFromProps(collection));
   const prevMappings = useRef(mappings);
@@ -81,36 +81,36 @@ export default function SortableCategories({
   }, [collection, mappings]);
 
   const onCategoryDrop = (result, sourceId, element) => {
-    const priorPosition = categories.findIndex(c => c.id === sourceId) + 1;
-    const position = result.findIndex(c => c.id === sourceId) + 1;
+    const priorPosition = categories.findIndex((c) => c.id === sourceId) + 1;
+    const position = result.findIndex((c) => c.id === sourceId) + 1;
 
     if (position === 0 || position === priorPosition) return;
 
     setCategories(result);
     callbacks.onCategoryDrag({
       id: sourceId,
-      position
+      position,
     });
     highlightDroppedEl({ element });
   };
 
   const onCollectableDrop = (result, source) => {
     const {
-      data: { type, id }
+      data: { type, id },
     } = source;
     if (!type || !id) return;
 
-    const priorCategoryId = Object.keys(result).find(m =>
-      mappings[m]?.[type]?.includes(id)
+    const priorCategoryId = Object.keys(result).find((m) =>
+      mappings[m]?.[type]?.includes(id),
     );
-    const categoryId = Object.keys(result).find(m =>
-      result[m]?.[type]?.includes(id)
+    const categoryId = Object.keys(result).find((m) =>
+      result[m]?.[type]?.includes(id),
     );
     if (!categoryId) return;
 
     const priorPosition =
-      mappings[priorCategoryId]?.[type]?.findIndex(c => c === id) + 1;
-    const position = result[categoryId][type].findIndex(c => c === id) + 1;
+      mappings[priorCategoryId]?.[type]?.findIndex((c) => c === id) + 1;
+    const position = result[categoryId][type].findIndex((c) => c === id) + 1;
 
     if (position === 0) return;
 
@@ -121,7 +121,7 @@ export default function SortableCategories({
       groupingId: categoryId,
       id,
       position,
-      type
+      type,
     });
     highlightNewEl({ selector: `[data-collectable-id="${id}"]` });
   };
@@ -130,36 +130,36 @@ export default function SortableCategories({
     categories,
     onCategoryDrop,
     mappings,
-    onCollectableDrop
+    onCollectableDrop,
   );
 
   const {
     onCollectableMove,
     onCollectableSort,
     onCategoryMove,
-    targetCategory
+    targetCategory,
   } = useAccessibleSort(
     categories,
     mappings,
     onCollectableDrop,
-    onCategoryDrop
+    onCategoryDrop,
   );
 
-  const onCategoryRemove = category => {
+  const onCategoryRemove = (category) => {
     callbacks.onCategoryRemove(category);
-    setCategories(categories.filter(c => c.id !== category.id));
+    setCategories(categories.filter((c) => c.id !== category.id));
   };
 
-  const onCollectableRemove = categoryId => collectable => {
+  const onCollectableRemove = (categoryId) => (collectable) => {
     callbacks.onCollectableRemove(collectable);
     const update = {
       ...mappings,
       [categoryId]: {
         ...mappings[categoryId],
         [collectable.type]: mappings[categoryId][collectable.type].filter(
-          c => c !== collectable.id
-        )
-      }
+          (c) => c !== collectable.id,
+        ),
+      },
     };
     setMappings(update);
   };
@@ -168,7 +168,7 @@ export default function SortableCategories({
     <Styled.Container ref={scrollableRef}>
       <Styled.Categories $active={active}>
         {categories.map((c, index) => {
-          const category = categoriesData.find(cat => cat.id === c.id);
+          const category = categoriesData.find((cat) => cat.id === c.id);
           return (
             <Category
               key={c.id}
@@ -183,7 +183,7 @@ export default function SortableCategories({
                 onCollectableMove,
                 onCategoryMove,
                 onCollectableSort,
-                onCategoryEditError: callbacks.onCategoryEditError
+                onCategoryEditError: callbacks.onCategoryEditError,
               }}
               targetCategory={targetCategory}
               categoryCount={categories.length}
@@ -201,7 +201,7 @@ export default function SortableCategories({
           onCollectableMove,
           onCategoryMove,
           onCollectableSort,
-          onCategoryEditError: callbacks.onCategoryEditError
+          onCategoryEditError: callbacks.onCategoryEditError,
         }}
         targetCategory={targetCategory}
       />
@@ -215,5 +215,5 @@ SortableCategories.displayName =
 SortableCategories.propTypes = {
   collection: PropTypes.object.isRequired,
   responses: PropTypes.object.isRequired,
-  callbacks: PropTypes.object.isRequired
+  callbacks: PropTypes.object.isRequired,
 };

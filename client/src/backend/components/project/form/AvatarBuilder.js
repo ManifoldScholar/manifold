@@ -19,14 +19,14 @@ class AvatarBuilder extends Component {
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
     wide: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
-  onColorChange = color => {
+  onColorChange = (color) => {
     if (
       this.props.getModelValue("attributes[avatar][data]") ||
       this.props.getModelValue("attributes[avatarStyles][smallSquare]")
@@ -36,7 +36,7 @@ class AvatarBuilder extends Component {
     this.setAvatarColor(color);
   };
 
-  onUploadChange = image => {
+  onUploadChange = (image) => {
     if (!image) return this.removeAvatar();
     this.setAvatarImage(image);
   };
@@ -57,10 +57,10 @@ class AvatarBuilder extends Component {
     return this.props.t("glossary.project_one");
   }
 
-  handleColorChange = color => {
+  handleColorChange = (color) => {
     const t = this.props.t;
     const heading = t("modals.thumbnail_change", {
-      label: this.label()
+      label: this.label(),
     });
     const message = t("modals.thumbnail_change_body");
     this.props.confirm(heading, message, () => {
@@ -82,7 +82,7 @@ class AvatarBuilder extends Component {
       <div
         role="img"
         aria-label={this.props.t("projects.thumbnail.thumbnail_label", {
-          title
+          title,
         })}
         className="preview"
         style={{ backgroundImage: `url(${image})` }}
@@ -109,12 +109,12 @@ class AvatarBuilder extends Component {
     const uploadClasses = classNames({
       section: true,
       upload: true,
-      active: image
+      active: image,
     });
     const pickerClasses = classNames({
       section: true,
       color: true,
-      active: !image
+      active: !image,
     });
     const t = this.props.t;
 
@@ -158,7 +158,7 @@ class AvatarBuilder extends Component {
                 <Form.Upload
                   set={this.onUploadChange}
                   initialValue={this.props.getModelValue(
-                    "attributes[avatarStyles][smallSquare]"
+                    "attributes[avatarStyles][smallSquare]",
                   )}
                   value={this.props.getModelValue("attributes[avatar]")}
                   placeholder="cover"

@@ -24,7 +24,7 @@ CoverAvatar.displayName = "Global.Atomic.EntityAvatar.Cover";
 
 CoverAvatar.propTypes = {
   entity: PropTypes.object,
-  stack: PropTypes.bool
+  stack: PropTypes.bool,
 };
 
 export default CoverAvatar;

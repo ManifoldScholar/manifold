@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 import { commentsAPI, bulkDeleteAPI } from "api";
 import EntitiesList, {
   Search,
-  CommentRow
+  CommentRow,
 } from "backend/components/list/EntitiesList";
 import {
   useFetch,
   useApiCallback,
   useListQueryParams,
-  useNotification
+  useNotification,
 } from "hooks";
 import withFilteredLists, { commentFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -21,28 +21,32 @@ import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
   SelectAll,
-  BulkActionButtons
+  BulkActionButtons,
 } from "backend/components/list/EntitiesList/List/bulkActions";
 
 function CommentsList({
   route,
   confirm,
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
 }) {
   const { t } = useTranslation();
 
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 10,
     initFilters: {
-      ...entitiesListSearchParams.initialcomments
+      ...entitiesListSearchParams.initialcomments,
     },
-    initSearchProps: entitiesListSearchProps("comments")
+    initSearchProps: entitiesListSearchProps("comments"),
   });
 
-  const { data: comments, meta, refresh } = useFetch({
+  const {
+    data: comments,
+    meta,
+    refresh,
+  } = useFetch({
     request: [commentsAPI.adminIndex, filters, pagination],
-    dependencies: [filters]
+    dependencies: [filters],
   });
 
   const {
@@ -54,19 +58,19 @@ function CommentsList({
     bulkSelectionEmpty,
     addItem,
     removeItem,
-    addPage
+    addPage,
   } = useBulkActions(comments, filters);
 
   const { onReset, setParam } = useClearBulkSelectionWithFilters(
     searchProps.onReset,
     searchProps.setParam,
     resetBulkSelection,
-    bulkSelectionEmpty
+    bulkSelectionEmpty,
   );
 
   const destroyComment = useApiCallback(commentsAPI.destroy);
 
-  const onDelete = id => {
+  const onDelete = (id) => {
     const heading = t("modals.delete_comment");
     const message = t("modals.confirm_body");
     if (confirm)
@@ -77,20 +81,20 @@ function CommentsList({
   };
 
   const unit = t("glossary.comment", {
-    count: meta?.pagination?.totalCount
+    count: meta?.pagination?.totalCount,
   });
 
   const bulkDelete = useApiCallback(bulkDeleteAPI.comments);
 
-  const notifyBulkDelete = useNotification(count => ({
+  const notifyBulkDelete = useNotification((count) => ({
     level: 0,
     id: "BULK_DELETE_SUCCESS",
     heading: t("notifications.bulk_delete_success"),
     body: t("notifications.bulk_delete_success_body", {
       count,
-      entity: t("glossary.comment", { count })
+      entity: t("glossary.comment", { count }),
     }),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const onBulkDelete = () => {
@@ -118,13 +122,13 @@ function CommentsList({
       drawer: true,
       drawerProps: {
         lockScroll: "always",
-        closeUrl
+        closeUrl,
       },
-      childProps: { refresh }
+      childProps: { refresh },
     });
   };
 
-  const currentPageIds = comments?.map(a => a.id);
+  const currentPageIds = comments?.map((a) => a.id);
 
   return (
     <>
@@ -138,7 +142,7 @@ function CommentsList({
             bulkSelection,
             addItem,
             removeItem,
-            onDelete
+            onDelete,
           }}
           entities={comments}
           search={
@@ -167,7 +171,7 @@ function CommentsList({
               onBulkDelete={onBulkDelete}
               toggleBulkActions={toggleBulkActions}
               actionsDisabled={bulkSelectionEmpty}
-            />
+            />,
           ]}
         />
       )}
@@ -176,7 +180,7 @@ function CommentsList({
 }
 
 export default withFilteredLists(withConfirmation(CommentsList), {
-  comments: commentFilters()
+  comments: commentFilters(),
 });
 
 CommentsList.displayName = "Comments.List";
@@ -185,5 +189,5 @@ CommentsList.propTypes = {
   route: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
   entitiesListSearchProps: PropTypes.func,
-  entitiesListSearchParams: PropTypes.object
+  entitiesListSearchParams: PropTypes.object,
 };

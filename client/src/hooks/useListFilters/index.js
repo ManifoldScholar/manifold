@@ -7,7 +7,7 @@ export default function useListFilters({
   onFilterChange,
   initialState,
   resetState,
-  options = {}
+  options = {},
 }) {
   const [filters, setFilters] = useState(initialState || {});
   const prevFilters = useRef(initialState || {});
@@ -39,30 +39,30 @@ export default function useListFilters({
             return setFilters({
               ...filters,
               subject: undefined,
-              featured: true
+              featured: true,
             });
           }
           return setFilters({
             ...filters,
             featured: undefined,
-            subject: e.target.value || undefined
+            subject: e.target.value || undefined,
           });
         default:
           return setFilters({ ...filters, [label]: e.target.value });
       }
     },
-    [filters, setFilters]
+    [filters, setFilters],
   );
 
   const featuredLabel = options.featuredLabel ?? "Featured";
 
   const activeTypes = options
     ? Object.keys(options)
-        .filter(option => Object.keys(filterTypes).includes(option))
-        .filter(option =>
+        .filter((option) => Object.keys(filterTypes).includes(option))
+        .filter((option) =>
           Array.isArray(options[option])
             ? options[option].length
-            : options[option]
+            : options[option],
         )
     : [];
   const finalTypes =
@@ -70,26 +70,24 @@ export default function useListFilters({
       ? [...activeTypes, "subjects"]
       : activeTypes;
   const activeFilters = finalTypes.length
-    ? finalTypes.map(type =>
+    ? finalTypes.map((type) =>
         filterTypes[type](
           filters,
           updateFilterState,
           {
             ...options,
-            featuredLabel
+            featuredLabel,
           },
-          t
-        )
+          t,
+        ),
       )
     : [];
 
-  /* eslint-disable no-nested-ternary */
   const showReset = !resetState
     ? false
     : !activeTypes.length
-    ? !!filters?.keyword
-    : !isEqual(resetState, filters);
-  /* eslint-disable no-nested-ternary */
+      ? !!filters?.keyword
+      : !isEqual(resetState, filters);
 
   const onReset = useCallback(() => {
     const newState = resetState || initialState;

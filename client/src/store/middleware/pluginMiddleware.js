@@ -1,7 +1,7 @@
 import pluginRegistry from "services/plugin/registry";
 
 export default function pluginMiddleware({ dispatchIgnored, getStateIgnored }) {
-  return next => action => {
+  return (next) => (action) => {
     let adjustedAction = action;
 
     if (action.type === "REGISTER_COMPONENT") {

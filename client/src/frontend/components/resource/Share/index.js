@@ -5,9 +5,8 @@ import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "../Link/styles";
 
 export default function Share({ title }) {
-  const { disabled, canRender, onClick, icon, label, srLabel } = useShare(
-    title
-  );
+  const { disabled, canRender, onClick, icon, label, srLabel } =
+    useShare(title);
 
   return canRender ? (
     <Styled.Link
@@ -28,5 +27,5 @@ export default function Share({ title }) {
 Share.displayName = "Resource.Detail.Share";
 
 Share.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };

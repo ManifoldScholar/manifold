@@ -23,24 +23,24 @@ export default function GroupsTable(props) {
     currentUser,
     hideActions,
     hideTags,
-    onArchive: refetch
+    onArchive: refetch,
   } = props;
 
   const { t } = useTranslation();
 
   const listFilterProps = useListFilters({
     ...filterProps,
-    options: { groupSort: true, groupStatus: showStatusFilter }
+    options: { groupSort: true, groupStatus: showStatusFilter },
   });
 
   const navigate = useNavigate();
 
-  const userCanJoin = group => {
+  const userCanJoin = (group) => {
     if (group.attributes.currentUserRole !== "none") return false;
     return !!group.links.join?.href;
   };
 
-  const handleJoinSuccess = group => {
+  const handleJoinSuccess = (group) => {
     navigate(lh.link("frontendReadingGroupDetail", group.id));
   };
 
@@ -49,7 +49,7 @@ export default function GroupsTable(props) {
       models={groups}
       pagination={pagination}
       unit={t("glossary.group", { count: groups.length })}
-      linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
+      linkCreator={(group) => lh.link("frontendReadingGroupDetail", group.id)}
       filters={<ListFilters {...listFilterProps} />}
       filterCount={listFilterProps.filters?.length}
     >
@@ -71,7 +71,7 @@ export default function GroupsTable(props) {
                 size={20}
                 className={classNames({
                   "table__link-arrow": true,
-                  "table__link-arrow--active": hovering
+                  "table__link-arrow--active": hovering,
                 })}
               />
             </>
@@ -126,8 +126,8 @@ export default function GroupsTable(props) {
               srLabel={`${model.attributes.annotationsCount} ${t(
                 "glossary.annotation",
                 {
-                  count: model.attributes.annotationsCount
-                }
+                  count: model.attributes.annotationsCount,
+                },
               )}.`}
             />
             <InlineValue
@@ -136,8 +136,8 @@ export default function GroupsTable(props) {
               srLabel={`${model.attributes.highlightsCount} ${t(
                 "glossary.highlight",
                 {
-                  count: model.attributes.highlightsCount
-                }
+                  count: model.attributes.highlightsCount,
+                },
               )}.`}
             />
             <InlineValue
@@ -146,8 +146,8 @@ export default function GroupsTable(props) {
               srLabel={`${model.attributes.commentsCount} ${t(
                 "glossary.comment",
                 {
-                  count: model.attributes.commentsCount
-                }
+                  count: model.attributes.commentsCount,
+                },
               )}.`}
             />
           </>
@@ -190,5 +190,5 @@ GroupsTable.propTypes = {
   filterProps: PropTypes.object,
   currentUser: PropTypes.object,
   hideActions: PropTypes.bool,
-  hideTags: PropTypes.bool
+  hideTags: PropTypes.bool,
 };

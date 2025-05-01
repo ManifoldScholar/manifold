@@ -21,13 +21,13 @@ export default `
 
       ${respond(
         `grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;`,
-        100
+        100,
       )}
 
       body:not(.backend) & {
         ${respond(
           `grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;`,
-          82
+          82,
         )}
       }
     }

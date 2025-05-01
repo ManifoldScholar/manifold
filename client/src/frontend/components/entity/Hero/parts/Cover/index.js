@@ -21,5 +21,5 @@ export default function HeroCover({ entity }) {
 HeroCover.displayName = "Frontend.Entity.Hero.Parts.Cover";
 
 HeroCover.propTypes = {
-  entity: PropTypes.object.isRequired
+  entity: PropTypes.object.isRequired,
 };

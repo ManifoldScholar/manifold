@@ -8,7 +8,7 @@ class AllCollectors extends Component {
   static displayName = "Analytics.Composed.AllCollectors";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get data() {

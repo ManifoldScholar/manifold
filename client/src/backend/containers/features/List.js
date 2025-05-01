@@ -8,16 +8,16 @@ import connectAndFetch from "utils/connectAndFetch";
 import entityUtils from "utils/entityUtils";
 import EntitiesList, {
   Button,
-  FeatureRow
+  FeatureRow,
 } from "backend/components/list/EntitiesList";
 
 const { select } = entityUtils;
 const { request } = entityStoreActions;
 
 class ContentFeaturesList extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      features: select(requests.beFeatures, state.entityStore)
+      features: select(requests.beFeatures, state.entityStore),
     };
   };
 
@@ -26,7 +26,7 @@ class ContentFeaturesList extends PureComponent {
   static propTypes = {
     features: PropTypes.array,
     dispatch: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -39,10 +39,10 @@ class ContentFeaturesList extends PureComponent {
     this.props.dispatch(featuresRequest);
   }
 
-  togglePublished = feature => {
+  togglePublished = (feature) => {
     if (!feature) return null;
     const attributes = {
-      live: !feature.attributes.live
+      live: !feature.attributes.live,
     };
     const call = featuresAPI.update(feature.id, { attributes });
     const featureRequest = request(call, requests.beFeatureUpdate);
@@ -58,7 +58,7 @@ class ContentFeaturesList extends PureComponent {
         titleStyle="bar"
         entityComponent={FeatureRow}
         entityComponentProps={{
-          onTogglePublish: this.togglePublished
+          onTogglePublish: this.togglePublished,
         }}
         entities={features}
         buttons={[
@@ -67,7 +67,7 @@ class ContentFeaturesList extends PureComponent {
             type="add"
             text={t("records.features.button_label")}
             authorizedFor="feature"
-          />
+          />,
         ]}
       />
     );

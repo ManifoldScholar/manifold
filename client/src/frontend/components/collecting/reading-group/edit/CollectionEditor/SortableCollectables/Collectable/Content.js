@@ -22,7 +22,7 @@ export default function Content({
   index,
   collectableCount,
   categoryIndex,
-  categoryCount
+  categoryCount,
 }) {
   const groupLabelId = useUID();
 
@@ -55,26 +55,26 @@ export default function Content({
                 id: "up",
                 label: t("actions.dnd.move_up_position"),
                 onClick: () => onSort({ id, type, direction: "up" }),
-                disabled: index === 0
+                disabled: index === 0,
               },
               {
                 id: "down",
                 label: t("actions.dnd.move_down_position"),
                 onClick: () => onSort({ id, type, direction: "down" }),
-                disabled: index === collectableCount - 1
+                disabled: index === collectableCount - 1,
               },
               {
                 id: "up_category",
                 label: t("actions.dnd.move_up_category"),
                 onClick: () => onMove({ id, type, direction: "up" }),
-                disabled: categoryIndex === 0
+                disabled: categoryIndex === 0,
               },
               {
                 id: "down_category",
                 label: t("actions.dnd.move_down_category"),
                 onClick: () => onMove({ id, type, direction: "down" }),
-                disabled: categoryIndex === categoryCount - 1
-              }
+                disabled: categoryIndex === categoryCount - 1,
+              },
             ]}
           />
         </Styled.Actions>

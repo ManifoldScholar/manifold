@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import { useTranslation } from "react-i18next";
@@ -9,7 +8,7 @@ function ChildSelectorMenuBody(props, ref) {
   const { links, visible, ...dropDownProps } = props;
   const { t } = useTranslation();
 
-  const renderItem = link => {
+  const renderItem = (link) => {
     const maybeLinkProps = link.route
       ? { to: lh.link(link.route, link.id) }
       : { as: "span", $noLink: true };
@@ -28,7 +27,7 @@ function ChildSelectorMenuBody(props, ref) {
 
   return (
     <Styled.Wrapper $visible={visible} ref={ref} {...dropDownProps}>
-      <Styled.List>{links.map(link => renderItem(link))}</Styled.List>
+      <Styled.List>{links.map((link) => renderItem(link))}</Styled.List>
     </Styled.Wrapper>
   );
 }

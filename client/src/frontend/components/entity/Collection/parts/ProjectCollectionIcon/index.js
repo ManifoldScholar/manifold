@@ -34,7 +34,7 @@ ProjectCollectionIcon.displayName =
   "Frontend.Entity.Collection.ProjectCollectionIcon";
 
 ProjectCollectionIcon.propTypes = {
-  collection: PropTypes.object.isRequired
+  collection: PropTypes.object.isRequired,
 };
 
 export default ProjectCollectionIcon;

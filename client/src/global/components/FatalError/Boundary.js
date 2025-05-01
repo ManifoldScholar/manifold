@@ -7,7 +7,7 @@ import locationHelper from "helpers/location";
 class FatalErrorBoundary extends Component {
   static propTypes = {
     children: PropTypes.node,
-    location: PropTypes.object
+    location: PropTypes.object,
   };
 
   constructor(props) {
@@ -41,8 +41,8 @@ class FatalErrorBoundary extends Component {
         heading: "Client Javascript Exception",
         body: this.body(error),
         clientTrace: error.stack,
-        clientTraceTruncate: 5
-      }
+        clientTraceTruncate: 5,
+      },
     };
   }
 

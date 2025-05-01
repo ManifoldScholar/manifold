@@ -7,13 +7,8 @@ import withSearch from "hoc/withSearch";
 import * as Styled from "./styles";
 
 const SearchContainer = forwardRef((props, ref) => {
-  const {
-    results,
-    resultsMeta,
-    searchQueryState,
-    setQueryState,
-    setPage
-  } = props;
+  const { results, resultsMeta, searchQueryState, setQueryState, setPage } =
+    props;
 
   const { t } = useTranslation();
 
@@ -23,7 +18,7 @@ const SearchContainer = forwardRef((props, ref) => {
     { label: t("glossary.resource_other"), value: "Resource" },
     { label: t("glossary.text_other"), value: "Text" },
     { label: t("glossary.annotation_other"), value: "Annotation" },
-    { label: t("glossary.full_text_other"), value: "TextSection" }
+    { label: t("glossary.full_text_other"), value: "TextSection" },
   ];
 
   return (
@@ -34,7 +29,7 @@ const SearchContainer = forwardRef((props, ref) => {
           <h2 className="screen-reader-text">{t("search.form")}</h2>
           <SearchQuery.Form
             initialState={{
-              keyword: ""
+              keyword: "",
             }}
             searchQueryState={searchQueryState}
             setQueryState={setQueryState}
@@ -66,7 +61,7 @@ SearchContainer.propTypes = {
   resultsMeta: PropTypes.object,
   searchQueryState: PropTypes.object.isRequired,
   setQueryState: PropTypes.func.isRequired,
-  setPage: PropTypes.func.isRequired
+  setPage: PropTypes.func.isRequired,
 };
 
 export default withSearch(SearchContainer);

@@ -12,7 +12,7 @@ class Notification extends Component {
     level: PropTypes.number,
     removeNotification: PropTypes.func,
     style: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   // Close notification in handler in case event access is required
@@ -27,7 +27,7 @@ class Notification extends Component {
       "notification--warning": this.props.level === 1,
       "notification--error": this.props.level === 2,
       "notification--context-drawer": this.props.style === "drawer",
-      "notification--context-header": this.props.style === "header"
+      "notification--context-header": this.props.style === "header",
     });
   }
 

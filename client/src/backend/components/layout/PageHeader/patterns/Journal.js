@@ -16,7 +16,7 @@ export default function JournalHeader({
   note,
   id,
   actions,
-  hasSecondaryNav
+  hasSecondaryNav,
 }) {
   const { pathname } = useLocation();
   const issueLinks = getIssueLinks({ issues, id, pathname });
@@ -24,7 +24,7 @@ export default function JournalHeader({
   const titleLinkProps = parent
     ? {
         as: NavLink,
-        to: lh.link("backendJournal", id)
+        to: lh.link("backendJournal", id),
       }
     : {};
 

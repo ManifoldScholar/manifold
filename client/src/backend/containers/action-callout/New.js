@@ -10,7 +10,7 @@ export class CallToActionNew extends PureComponent {
     location: PropTypes.object,
     refreshActionCallouts: PropTypes.func,
     calloutable: PropTypes.object,
-    closeRoute: PropTypes.string.isRequired
+    closeRoute: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -20,13 +20,13 @@ export class CallToActionNew extends PureComponent {
       kind: "link",
       location: "left",
       position: "top",
-      button: true
+      button: true,
     };
 
     if (props.location.state && props.location.state.actionCallout) {
       attributes = Object.assign(
         attributes,
-        props.location.state.actionCallout.attributes
+        props.location.state.actionCallout.attributes,
       );
     }
 

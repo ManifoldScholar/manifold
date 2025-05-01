@@ -9,12 +9,12 @@ export default class IconMinus extends Component {
     className: PropTypes.string,
     size: PropTypes.number,
     fill: PropTypes.string,
-    stroke: PropTypes.string
+    stroke: PropTypes.string,
   };
 
   static defaultProps = {
     size: 32,
-    fill: "currentColor"
+    fill: "currentColor",
   };
 
   render() {

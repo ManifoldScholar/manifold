@@ -5,7 +5,7 @@ import {
   CollectedTextSections,
   CollectedResourceCollections,
   CollectedResources,
-  CollectedJournalIssues
+  CollectedJournalIssues,
 } from "../types";
 
 export default function CategoryBody({
@@ -14,7 +14,7 @@ export default function CategoryBody({
   responses,
   callbacks,
   index,
-  categoryCount
+  categoryCount,
 }) {
   const categoryMapping = mappings[category?.id] || null;
 
@@ -37,7 +37,7 @@ export default function CategoryBody({
       responses: getResponsesByType(type),
       onRemove: callbacks.onCollectableRemove,
       onMove: callbacks.onCollectableMove(category?.id),
-      onSort: callbacks.onCollectableSort(category?.id)
+      onSort: callbacks.onCollectableSort(category?.id),
     };
   }
 

@@ -10,12 +10,12 @@ export default class EntityThumbnailUser extends PureComponent {
     variant: PropTypes.string.isRequired,
     width: PropTypes.string,
     height: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static defaultProps = {
     variant: "smallSquare",
-    attributes: {}
+    attributes: {},
   };
 
   get attr() {

@@ -15,7 +15,7 @@ export default function EntityMetadata(props) {
     prefix,
     recentlyUpdated,
     description,
-    stack
+    stack,
   } = props;
 
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ export default function EntityMetadata(props) {
         <Styled.TitleText
           $stack={stack}
           dangerouslySetInnerHTML={{
-            __html: title
+            __html: title,
           }}
         />
         {draft && !bumpDraftDown && (
@@ -58,5 +58,5 @@ EntityMetadata.propTypes = {
   entity: PropTypes.object,
   hideDescription: PropTypes.bool,
   hideDate: PropTypes.bool,
-  stack: PropTypes.bool
+  stack: PropTypes.bool,
 };

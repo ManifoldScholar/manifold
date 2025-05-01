@@ -6,7 +6,7 @@ import withSettings from "hoc/withSettings";
 
 class MobileSearch extends PureComponent {
   static propTypes = {
-    closeNavigation: PropTypes.func
+    closeNavigation: PropTypes.func,
   };
 
   static contextType = FrontendModeContext;

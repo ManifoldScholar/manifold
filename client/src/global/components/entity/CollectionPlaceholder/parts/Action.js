@@ -22,7 +22,7 @@ export const actionProps = {
   title: PropTypes.string,
   linkProps: PropTypes.object,
   buttonProps: PropTypes.object,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 Action.displayName = "Global.Entity.CollectionPlaceholder.Action";

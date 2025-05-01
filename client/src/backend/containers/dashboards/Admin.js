@@ -3,14 +3,14 @@ import EntitiesList, {
   Button,
   Search,
   ProjectRow,
-  JournalRow
+  JournalRow,
 } from "backend/components/list/EntitiesList";
 import lh from "helpers/linkHandler";
 import { useFetch, usePaginationState, useAuthentication } from "hooks";
 import { projectsAPI, journalsAPI } from "api";
 import withFilteredLists, {
   projectFilters,
-  journalFilters
+  journalFilters,
 } from "hoc/withFilteredLists";
 import Authorize from "hoc/Authorize";
 import DashboardComponents from "backend/components/dashboard";
@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 
 export function DashboardsAdminContainer({
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
 }) {
   const [projectsPagination, setProjectsPageNumber] = usePaginationState(1, 5);
   const [journalsPagination, setJournalsPageNumber] = usePaginationState(1, 5);
@@ -31,32 +31,40 @@ export function DashboardsAdminContainer({
   const projectFiltersWithDefaults = useMemo(
     () => ({
       withUpdateAbility: true,
-      ...entitiesListSearchParams.projects
+      ...entitiesListSearchParams.projects,
     }),
-    [entitiesListSearchParams?.projects]
+    [entitiesListSearchParams?.projects],
   );
 
   const journalFiltersWithDefaults = useMemo(
     () => ({
       withUpdateOrIssueUpdateAbility: true,
-      ...entitiesListSearchParams.journals
+      ...entitiesListSearchParams.journals,
     }),
-    [entitiesListSearchParams?.journals]
+    [entitiesListSearchParams?.journals],
   );
 
   const { data: projects, meta: projectsMeta } = useFetch({
-    request: [projectsAPI.index, projectFiltersWithDefaults, projectsPagination]
+    request: [
+      projectsAPI.index,
+      projectFiltersWithDefaults,
+      projectsPagination,
+    ],
   });
 
   const { data: journals, meta: journalsMeta } = useFetch({
-    request: [journalsAPI.index, journalFiltersWithDefaults, journalsPagination]
+    request: [
+      journalsAPI.index,
+      journalFiltersWithDefaults,
+      journalsPagination,
+    ],
   });
 
   const authorization = new Authorization();
   const canCreateProjects = authorization.authorizeAbility({
     authentication,
     entity: "project",
-    ability: "create"
+    ability: "create",
   });
 
   const { t } = useTranslation();
@@ -64,7 +72,7 @@ export function DashboardsAdminContainer({
   const noProjects =
     isEqual(
       entitiesListSearchParams?.projects,
-      entitiesListSearchParams?.initialProjects
+      entitiesListSearchParams?.initialProjects,
     ) && canCreateProjects
       ? t("dashboard.empty_message_creator")
       : t("dashboard.empty_message_generic");
@@ -79,10 +87,10 @@ export function DashboardsAdminContainer({
             entities={projects}
             entityComponent={ProjectRow}
             entityComponentProps={{
-              placeholderMode: "small"
+              placeholderMode: "small",
             }}
             title={t("glossary.project_title_case", {
-              count: projectsMeta?.pagination?.totalCount
+              count: projectsMeta?.pagination?.totalCount,
             })}
             titleLink={lh.link("backendProjects")}
             titleIcon="BEProject64"
@@ -91,12 +99,12 @@ export function DashboardsAdminContainer({
             showCount
             showCountInTitle
             unit={t("glossary.project", {
-              count: projectsMeta?.pagination?.totalCount
+              count: projectsMeta?.pagination?.totalCount,
             })}
             pagination={projectsMeta.pagination}
             paginationPadding={1}
             callbacks={{
-              onPageClick: page => () => setProjectsPageNumber(page)
+              onPageClick: (page) => () => setProjectsPageNumber(page),
             }}
             emptyMessage={noProjects}
             search={
@@ -113,7 +121,7 @@ export function DashboardsAdminContainer({
                 authorizedFor="project"
                 authorizedTo="create"
                 type="add"
-              />
+              />,
             ]}
           />
         </div>
@@ -128,10 +136,10 @@ export function DashboardsAdminContainer({
             entities={journals}
             entityComponent={JournalRow}
             entityComponentProps={{
-              placeholderMode: "small"
+              placeholderMode: "small",
             }}
             title={t("glossary.journal_title_case", {
-              count: journalsMeta?.pagination?.totalCount
+              count: journalsMeta?.pagination?.totalCount,
             })}
             titleLink={lh.link("backendJournals")}
             titleIcon="Journals64"
@@ -140,12 +148,12 @@ export function DashboardsAdminContainer({
             showCount
             showCountInTitle
             unit={t("glossary.journal", {
-              count: journalsMeta?.pagination?.totalCount
+              count: journalsMeta?.pagination?.totalCount,
             })}
             pagination={journalsMeta.pagination}
             paginationPadding={1}
             callbacks={{
-              onPageClick: page => () => setJournalsPageNumber(page)
+              onPageClick: (page) => () => setJournalsPageNumber(page),
             }}
             search={
               <Search
@@ -161,7 +169,7 @@ export function DashboardsAdminContainer({
                 authorizedFor="journal"
                 authorizedTo="create"
                 type="add"
-              />
+              />,
             ]}
           />
         </div>
@@ -174,7 +182,7 @@ export function DashboardsAdminContainer({
         type="analytics"
         link={{
           path: lh.link("backendAnalytics"),
-          label: t("actions.see_all")
+          label: t("actions.see_all"),
         }}
         titleTag="h2"
         title={t("analytics.global_header")}
@@ -187,7 +195,7 @@ export function DashboardsAdminContainer({
   const canSeeAnalytics = authorization.authorizeAbility({
     authentication,
     entity: "statistics",
-    ability: "read"
+    ability: "read",
   });
 
   const guts = canSeeAnalytics ? (
@@ -218,5 +226,5 @@ export function DashboardsAdminContainer({
 }
 export default withFilteredLists(DashboardsAdminContainer, {
   projects: projectFilters({ snapshotState: true }),
-  journals: journalFilters({ snapshotState: true })
+  journals: journalFilters({ snapshotState: true }),
 });

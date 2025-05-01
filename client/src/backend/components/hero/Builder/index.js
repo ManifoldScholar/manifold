@@ -20,8 +20,8 @@ class Builder extends PureComponent {
       PropTypes.oneOf([
         "projectDescription",
         "journalDescription",
-        "actionCallouts"
-      ])
+        "actionCallouts",
+      ]),
     ),
     model: PropTypes.object.isRequired,
     api: PropTypes.object,
@@ -36,7 +36,7 @@ class Builder extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     withDarkMode: PropTypes.bool,
     t: PropTypes.func,
-    confirm: PropTypes.func
+    confirm: PropTypes.func,
   };
 
   static defaultProps = {
@@ -46,11 +46,11 @@ class Builder extends PureComponent {
       "left-button",
       "left-link",
       "right-button",
-      "right-link"
+      "right-link",
     ],
     failureRedirectRoute: "backendProject",
     actionCalloutEditRoute: "backendProjectActionCalloutEdit",
-    actionCalloutNewRoute: "backendProjectActionCalloutNew"
+    actionCalloutNewRoute: "backendProjectActionCalloutNew",
   };
 
   get defaultModelLabel() {
@@ -62,7 +62,7 @@ class Builder extends PureComponent {
     this.state = {
       drawer: null,
       formDirty: false,
-      actionCalloutsOpen: false
+      actionCalloutsOpen: false,
     };
   }
 
@@ -71,7 +71,7 @@ class Builder extends PureComponent {
       const heading = this.props.t("messages.confirm");
       const message = this.props.t("messages.unsaved_changes");
       return this.props.confirm(heading, message, () =>
-        this.setState({ drawer: null })
+        this.setState({ drawer: null }),
       );
     }
     this.setState({ drawer: null });
@@ -111,8 +111,8 @@ class Builder extends PureComponent {
     const DrawerContents = this.drawerComponent;
 
     return (
-      <UIDConsumer name={id => `hero-builder-${id}`}>
-        {id => (
+      <UIDConsumer name={(id) => `hero-builder-${id}`}>
+        {(id) => (
           <>
             <section className="hero-builder">
               <div
@@ -126,7 +126,7 @@ class Builder extends PureComponent {
                 />
                 <Styled.Instructions id={`${id}-instructions`}>
                   {t("layout.hero_block_instructions", {
-                    entity: modelLabel ?? this.defaultModelLabel
+                    entity: modelLabel ?? this.defaultModelLabel,
                   })}
                 </Styled.Instructions>
 
@@ -193,7 +193,7 @@ class Builder extends PureComponent {
                   model={this.model}
                   withDarkMode={this.props.withDarkMode}
                   modelLabel={modelLabel ?? this.defaultModelLabel}
-                  setDirty={val => this.setState({ formDirty: val })}
+                  setDirty={(val) => this.setState({ formDirty: val })}
                 />
               ) : null}
             </Drawer.Wrapper>

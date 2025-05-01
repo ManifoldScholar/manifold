@@ -14,9 +14,9 @@ import withConfirmation from "hoc/withConfirmation";
 const { request, flush } = entityStoreActions;
 
 export class SettingsSubjectsEditContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      subject: select(requests.beSubject, state.entityStore)
+      subject: select(requests.beSubject, state.entityStore),
     };
   };
 
@@ -28,11 +28,11 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     subject: PropTypes.object,
     history: PropTypes.object,
     confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   componentDidMount() {
@@ -49,7 +49,7 @@ export class SettingsSubjectsEditContainer extends PureComponent {
     this.props.dispatch(flush([requests.beSubject, requests.beSubjectUpdate]));
   }
 
-  fetchSubject = id => {
+  fetchSubject = (id) => {
     const call = subjectsAPI.show(id);
     const subjectRequest = request(call, requests.beSubject);
     this.props.dispatch(subjectRequest);
@@ -85,8 +85,8 @@ export class SettingsSubjectsEditContainer extends PureComponent {
               onClick: this.handleSubjectDestroy,
               icon: "delete32",
               label: t("actions.delete"),
-              className: "utility-button__icon--notice"
-            }
+              className: "utility-button__icon--notice",
+            },
           ]}
         />
         <section>
@@ -111,5 +111,5 @@ export class SettingsSubjectsEditContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(SettingsSubjectsEditContainer))
+  withConfirmation(connectAndFetch(SettingsSubjectsEditContainer)),
 );

@@ -6,7 +6,7 @@ export default class FormCoverUploadPlaceholder extends Component {
   static displayName = "Form.CoverUploadPlaceholder";
 
   static propTypes = {
-    color: PropTypes.string
+    color: PropTypes.string,
   };
 
   render() {
@@ -20,7 +20,7 @@ export default class FormCoverUploadPlaceholder extends Component {
         viewBox="0 0 126.03632 126.25824"
       >
         {/* Disable max-length on linter for long SVG path declarations */}
-        {/* eslint-disable max-len */}
+        {}
         <g>
           <g>
             <Styled.Background d="M125.53632,126.25824H8.06415c-0.27637,0-0.5-0.22363-0.5-0.5s0.22363-0.5,0.5-0.5h116.97217V8.28656c0-0.27637,0.22363-0.5,0.5-0.5s0.5,0.22363,0.5,0.5v117.47168C126.03632,126.03461,125.81268,126.25824,125.53632,126.25824z" />
@@ -46,7 +46,7 @@ export default class FormCoverUploadPlaceholder extends Component {
         <g>
           <Styled.Background d="M6.01068,6.12183v105.00281h105.56836V6.12183H6.01068z M90.21796,72.24164c-2.44336,3.10938-6.09082,5.12891-10.00684,5.54199l-0.10352,0.00586l-44.97559,0.04004c-3.32471-0.2168-6.52832-2.3125-8.85547-5.75098c-2.7251-4.02637-2.89355-9.18896-0.43945-13.47412c2.30811-4.03027,6.37549-6.25879,10.88086-5.97266c2.10547,0.13623,4.15332,0.81396,5.93555,1.94482c0.38672-8.59277,7.49854-15.46387,16.18506-15.46387c6.66064,0,12.57275,4.04053,15.02588,10.15771c2.20117-0.75879,4.57324-0.98438,6.92285-0.6499c6.34863,0.90088,11.57617,6.16504,12.42969,12.51709C93.75604,65.15179,92.69061,69.09613,90.21796,72.24164z" />
         </g>
-        {/* eslint-enable max-len */}
+        {}
       </svg>
     );
   }

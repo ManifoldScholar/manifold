@@ -23,10 +23,10 @@ function ProjectsEntityCollection({
       title={t("pages.projects_all")}
       icon="projects64"
       filterProps={showFilters ? filterProps : null}
-      BodyComponent={props => (
+      BodyComponent={(props) => (
         <ThumbnailGrid {...props}>
           {({ stack }) =>
-            projects.map(item => (
+            projects.map((item) => (
               <EntityThumbnail key={item.id} entity={item} stack={stack} />
             ))
           }
@@ -38,8 +38,8 @@ function ProjectsEntityCollection({
           : {
               pagination: get(meta, "pagination"),
               unit: t("glossary.project", {
-                count: meta?.pagination?.totalCount || 0
-              })
+                count: meta?.pagination?.totalCount || 0,
+              }),
             }
       }
       paginationProps={
@@ -47,7 +47,7 @@ function ProjectsEntityCollection({
           ? {}
           : {
               pagination: get(meta, "pagination"),
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -61,7 +61,7 @@ ProjectsEntityCollection.propTypes = {
   projects: PropTypes.arrayOf(PropTypes.object).isRequired,
   meta: PropTypes.object,
   filterProps: shapes.filters,
-  paginationProps: shapes.pagination
+  paginationProps: shapes.pagination,
 };
 
 export default ProjectsEntityCollection;

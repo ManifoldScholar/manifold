@@ -7,23 +7,23 @@ function determineText(view, t) {
     case "remove-active":
       return {
         key: "remove",
-        text: t("actions.remove")
+        text: t("actions.remove"),
       };
     case "remove-confirm":
     case "remove-confirm-active":
       return {
         key: "remove-confirm",
-        text: t("messages.confirm")
+        text: t("messages.confirm"),
       };
     case "add-active":
       return {
         key: "add",
-        text: t("actions.add")
+        text: t("actions.add"),
       };
     default:
       return {
         key: "empty",
-        text: ""
+        text: "",
       };
   }
 }
@@ -43,7 +43,7 @@ function ToggleText({ view }) {
 ToggleText.displayName = "Collecting.Toggle.Text";
 
 ToggleText.propTypes = {
-  view: PropTypes.string
+  view: PropTypes.string,
 };
 
 export default ToggleText;

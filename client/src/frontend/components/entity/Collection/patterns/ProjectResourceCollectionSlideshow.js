@@ -18,11 +18,11 @@ function ProjectResourceCollectionSlideshow({
   ...passThroughProps
 }) {
   const handleEscape = useCallback(
-    event => {
+    (event) => {
       if (event.key !== "Escape") return;
       handleClose(event);
     },
-    [handleClose]
+    [handleClose],
   );
 
   useEffect(() => {
@@ -38,14 +38,14 @@ function ProjectResourceCollectionSlideshow({
     lh.link(
       "frontendProjectResourceCollection",
       resourceCollection.relationships.project.attributes.slug,
-      resourceCollection.attributes.slug
+      resourceCollection.attributes.slug,
     );
 
   return (
     <EntityCollection
       nested
       title={resourceCollection.attributes.title}
-      DescriptionComponent={props => (
+      DescriptionComponent={(props) => (
         <FormattedDate
           prefix={t("dates.collection_created")}
           format="MMMM yyyy"
@@ -56,7 +56,7 @@ function ProjectResourceCollectionSlideshow({
       icon="resourceCollection64"
       headerLayout="title_image"
       headerWidth="100%"
-      BodyComponent={props => (
+      BodyComponent={(props) => (
         <div {...props}>
           <h2 className="screen-reader-text">
             {t("pages.subheaders.resource_slideshow")}
@@ -70,7 +70,7 @@ function ProjectResourceCollectionSlideshow({
           />
         </div>
       )}
-      FooterComponent={props => (
+      FooterComponent={(props) => (
         <nav className="button-nav button-nav--stack" {...props}>
           <Link
             to={collectionUrl}
@@ -115,7 +115,7 @@ ProjectResourceCollectionSlideshow.propTypes = {
   slideshowResourcesMeta: PropTypes.object,
   dispatch: PropTypes.func,
   resourceCollectionUrl: PropTypes.string,
-  handleClose: PropTypes.func
+  handleClose: PropTypes.func,
 };
 
 export default ProjectResourceCollectionSlideshow;

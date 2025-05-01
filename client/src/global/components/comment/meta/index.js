@@ -11,7 +11,7 @@ class CommentMeta extends PureComponent {
     creator: PropTypes.object.isRequired,
     comment: PropTypes.object.isRequired,
     parent: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get avatarUrl() {
@@ -24,15 +24,15 @@ class CommentMeta extends PureComponent {
     return classNames({
       "annotation-meta__avatar": true,
       "annotation-meta__avatar-placeholder-container": !this.avatarUrl,
-      "annotation-meta__avatar-image-container": this.avatarUrl
+      "annotation-meta__avatar-image-container": this.avatarUrl,
     });
   }
 
   get name() {
     const {
       creator: {
-        attributes: { isCurrentUser, fullName }
-      }
+        attributes: { isCurrentUser, fullName },
+      },
     } = this.props;
     if (isCurrentUser) return this.props.t("common.me_title_case");
     return fullName;
@@ -71,7 +71,7 @@ class CommentMeta extends PureComponent {
             {comment.attributes.unresolvedFlagsCount > 0 ? (
               <div className="marker marker--secondary">
                 {t("counts.flag", {
-                  count: comment.attributes.unresolvedFlagsCount
+                  count: comment.attributes.unresolvedFlagsCount,
                 })}
               </div>
             ) : null}

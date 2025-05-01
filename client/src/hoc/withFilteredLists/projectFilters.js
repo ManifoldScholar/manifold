@@ -1,13 +1,13 @@
 export default function projectFilters({ snapshotState = false } = {}) {
   return {
     config: {
-      snapshotState
+      snapshotState,
     },
     params: [
       {
         label: "Search...",
         name: "keyword",
-        value: ""
+        value: "",
       },
       {
         label: "Draft",
@@ -16,8 +16,8 @@ export default function projectFilters({ snapshotState = false } = {}) {
         options: [
           { label: "All projects", value: "" },
           { label: "Only draft projects", value: "true" },
-          { label: "Only published projects", value: "false" }
-        ]
+          { label: "Only published projects", value: "false" },
+        ],
       },
       {
         label: "Creator",
@@ -25,8 +25,8 @@ export default function projectFilters({ snapshotState = false } = {}) {
         value: "",
         options: [
           { label: "Created by anyone", value: "" },
-          { label: "Created by me", value: "true" }
-        ]
+          { label: "Created by me", value: "true" },
+        ],
       },
       {
         label: "Order",
@@ -39,10 +39,10 @@ export default function projectFilters({ snapshotState = false } = {}) {
           { label: "Oldest projects first", value: "created_at ASC" },
           {
             label: "Most recently published",
-            value: "publication_date DESC"
-          }
-        ]
-      }
-    ]
+            value: "publication_date DESC",
+          },
+        ],
+      },
+    ],
   };
 }

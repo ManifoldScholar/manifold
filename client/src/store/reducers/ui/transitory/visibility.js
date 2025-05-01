@@ -7,7 +7,7 @@ export const initialState = {
   visibilityFilters: {
     annotation: { yours: true, others: true, highlights: true },
     resource: { all: true },
-    readingGroups: { all: true }
+    readingGroups: { all: true },
   },
   uiPanels: {
     tocDrawer: false,
@@ -17,8 +17,8 @@ export const initialState = {
     layers: false,
     search: false,
     visibility: false,
-    notes: false
-  }
+    notes: false,
+  },
 };
 
 const panelSolo = {
@@ -29,17 +29,17 @@ const panelSolo = {
   layers: true,
   search: true,
   visibility: true,
-  notes: true
+  notes: true,
 };
 
-const showMyNotes = state => {
+const showMyNotes = (state) => {
   const yours = true;
   const highlight = { ...state.visibilityFilters.highlight, yours };
   const annotation = { ...state.visibilityFilters.highlight, yours };
   const visibilityFilters = {
     ...state.visibilityFilters,
     highlight,
-    annotation
+    annotation,
   };
   return { ...state, visibilityFilters };
 };
@@ -97,7 +97,7 @@ const panelHide = (state, action) => {
   return { ...state, uiPanels: switchedPanels };
 };
 
-const allPanelsHide = state => {
+const allPanelsHide = (state) => {
   if (!Object.values(state.uiPanels).includes(true)) return state;
   return { ...state, uiPanels: initialState.uiPanels };
 };
@@ -113,7 +113,7 @@ export default handleActions(
     PANEL_HIDE: panelHide,
     PANEL_HIDE_ALL: allPanelsHide,
     SHOW_MY_NOTES: showMyNotes,
-    "@@reduxReactRouter/routerDidChange": allPanelsHide
+    "@@reduxReactRouter/routerDidChange": allPanelsHide,
   },
-  initialState
+  initialState,
 );

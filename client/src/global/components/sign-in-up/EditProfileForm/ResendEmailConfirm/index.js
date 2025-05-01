@@ -12,22 +12,22 @@ export default function ResendEmailConfirmation({ id, hideOverlay }) {
     level: 0,
     id: `CURRENT_USER_VERIFICATION_EMAIL_SENT`,
     heading: t("forms.signin_overlay.email_success_notification"),
-    expiration: 3000
+    expiration: 3000,
   }));
 
   const onClick = useCallback(
-    async e => {
+    async (e) => {
       e.preventDefault();
 
       try {
         await triggerConfirm(id);
         notifyEmailSent();
         if (hideOverlay) hideOverlay();
-      } catch (err) {
+      } catch (_) {
         if (hideOverlay) hideOverlay();
       }
     },
-    [id, triggerConfirm, notifyEmailSent, hideOverlay]
+    [id, triggerConfirm, notifyEmailSent, hideOverlay],
   );
 
   return (
@@ -45,5 +45,5 @@ ResendEmailConfirmation.displayName =
 
 ResendEmailConfirmation.propTypes = {
   id: PropTypes.string,
-  hideOverlay: PropTypes.func
+  hideOverlay: PropTypes.func,
 };

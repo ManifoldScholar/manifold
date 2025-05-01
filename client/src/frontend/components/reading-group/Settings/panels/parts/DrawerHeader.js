@@ -18,14 +18,12 @@ export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
 
   const membership =
     readingGroup.relationships.currentUserReadingGroupMembership;
-  const {
-    onClick: onArchiveClick,
-    label: archiveLabel
-  } = useArchiveOrActivateGroup({
-    membership,
-    confirm,
-    callback: onArchive
-  });
+  const { onClick: onArchiveClick, label: archiveLabel } =
+    useArchiveOrActivateGroup({
+      membership,
+      confirm,
+      callback: onArchive,
+    });
 
   function handleDelete() {
     const heading = t("messages.reading_group.destroy_heading");
@@ -36,7 +34,7 @@ export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
       const readingGroupRequest = request(
         call,
         requests.feReadingGroupDestroy,
-        options
+        options,
       );
       dispatch(readingGroupRequest).promise.then(() => {
         navigate(lh.link("frontendMyReadingGroups"));
@@ -53,8 +51,8 @@ export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
             icon: "duplicate24",
             label: t("actions.duplicate"),
             className: "utility-button__icon",
-            ...toggleProps
-          }
+            ...toggleProps,
+          },
         ]
       : []),
     ...(membership
@@ -63,16 +61,16 @@ export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
             onClick: onArchiveClick,
             icon: "archive24",
             label: archiveLabel,
-            className: "utility-button__icon"
-          }
+            className: "utility-button__icon",
+          },
         ]
       : []),
     {
       onClick: handleDelete,
       icon: "delete24",
       label: t("actions.delete"),
-      className: "utility-button__icon utility-button__icon--notice"
-    }
+      className: "utility-button__icon utility-button__icon--notice",
+    },
   ];
 
   return (
@@ -90,5 +88,5 @@ DrawerHeader.displayName = "ReadingGroup.Settings.DrawerHeader";
 DrawerHeader.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
-  onArchive: PropTypes.func
+  onArchive: PropTypes.func,
 };

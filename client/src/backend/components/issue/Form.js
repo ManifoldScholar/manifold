@@ -22,7 +22,7 @@ function IssueForm({ journalId, model, ...props }) {
       {...props}
       name={model ? "update-journal-issue" : "create-journal-issue"}
       update={journalIssuesAPI.update}
-      create={toCreate => journalIssuesAPI.create(journalId, toCreate)}
+      create={(toCreate) => journalIssuesAPI.create(journalId, toCreate)}
       className="form-secondary"
       model={model}
     >
@@ -35,7 +35,7 @@ function IssueForm({ journalId, model, ...props }) {
         instructions={t("issues.volume_instructions")}
         label={t("glossary.volume_title_case_one")}
         name="relationships[journalVolume]"
-        optionToLabel={volume => volume.attributes.number}
+        optionToLabel={(volume) => volume.attributes.number}
         predictive
         listStyle={"rows"}
         options={fetchJournalVolumes}
@@ -55,7 +55,7 @@ function IssueForm({ journalId, model, ...props }) {
           instructions={t("issues.project_instructions")}
           label={t("glossary.project_title_case_one")}
           name="relationships[project]"
-          optionToLabel={project => project.attributes.title}
+          optionToLabel={(project) => project.attributes.title}
           predictive
           listStyle={"rows"}
           options={fetchWritableProjects}
@@ -70,7 +70,7 @@ function IssueForm({ journalId, model, ...props }) {
 
 IssueForm.prop_types = {
   model: PropTypes.object,
-  journalId: PropTypes.string.isRequired
+  journalId: PropTypes.string.isRequired,
 };
 
 export default IssueForm;

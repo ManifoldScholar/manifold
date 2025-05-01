@@ -10,7 +10,7 @@ export default class StarFill extends Component {
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     fill: PropTypes.string,
     stroke: PropTypes.string,
-    svgProps: PropTypes.object
+    svgProps: PropTypes.object,
   };
 
   static defaultProps = {
@@ -18,7 +18,7 @@ export default class StarFill extends Component {
     size: "inherit",
     stroke: "currentColor",
     fill: "currentColor",
-    svgProps: {}
+    svgProps: {},
   };
 
   get defaultHeight() {
@@ -69,7 +69,7 @@ export default class StarFill extends Component {
       width: this.width,
       height: this.height,
       viewBox: this.viewBox,
-      fill: this.fill
+      fill: this.fill,
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);

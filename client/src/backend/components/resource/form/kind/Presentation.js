@@ -7,7 +7,7 @@ class ResourceFormKindPresentation extends PureComponent {
   static displayName = "Resource.Form.Kind.Presentation";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

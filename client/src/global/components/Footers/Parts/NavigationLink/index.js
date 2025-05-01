@@ -7,9 +7,9 @@ import classNames from "classnames";
 export default function FooterPartsNavigationLink({
   item,
   hideLabel,
-  className
+  className,
 }) {
-  const icon = theItem => {
+  const icon = (theItem) => {
     if (!theItem.icon) return null;
     return <Utility.IconComposer icon={theItem.icon} size={24} />;
   };

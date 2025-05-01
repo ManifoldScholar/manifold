@@ -15,7 +15,7 @@ function RemoveMember({ onClick }) {
 RemoveMember.displayName = "MembersTable.Member.Remove";
 
 RemoveMember.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 export default RemoveMember;

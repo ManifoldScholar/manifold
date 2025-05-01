@@ -3,7 +3,7 @@ import { Link as ReactRouterLink } from "react-router-dom";
 import {
   utilityPrimary,
   defaultTransitionProps,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 
 export const Link = styled(ReactRouterLink)`
@@ -18,7 +18,8 @@ export const Link = styled(ReactRouterLink)`
   background-color: var(--box-medium-bg-color);
   border: 1px solid var(--box-medium-bg-color);
   border-radius: 6px;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps},
     border-color ${defaultTransitionProps};
 

@@ -21,14 +21,14 @@ const getLastWeekDates = () => {
   const weekAgo = subWeeks(today, 1);
   return {
     start: startOfWeek(weekAgo),
-    end: endOfWeek(weekAgo)
+    end: endOfWeek(weekAgo),
   };
 };
 const getLastMonthDates = () => {
   const monthAgo = subMonths(today, 1);
   return {
     start: startOfMonth(monthAgo),
-    end: endOfMonth(monthAgo)
+    end: endOfMonth(monthAgo),
   };
 };
 
@@ -36,27 +36,27 @@ const presets = [
   {
     key: 0,
     label: "analytics.last_week",
-    ...getLastWeekDates()
+    ...getLastWeekDates(),
   },
   {
     key: 1,
     label: "analytics.last_month",
-    ...getLastMonthDates()
+    ...getLastMonthDates(),
   },
   {
     key: 2,
     label: "analytics.last_count_days",
     count: "7",
     start: subDays(today, 7),
-    end: today
+    end: today,
   },
   {
     key: 3,
     label: "analytics.last_count_days",
     count: "30",
     start: subDays(today, 30),
-    end: today
-  }
+    end: today,
+  },
 ];
 
 function RangePicker({
@@ -64,18 +64,18 @@ function RangePicker({
   initialStart,
   initialEnd,
   className,
-  setScreenReaderStatus
+  setScreenReaderStatus,
 }) {
   const [startDate, setStartDate] = useState(initialStart);
   const [endDate, setEndDate] = useState(initialEnd);
   const { t } = useTranslation();
 
-  const humanReadableDate = date => {
+  const humanReadableDate = (date) => {
     return t("dates.date", {
       val: date,
       formatParams: {
-        val: { year: "numeric", month: "long", day: "numeric" }
-      }
+        val: { year: "numeric", month: "long", day: "numeric" },
+      },
     });
   };
 
@@ -98,14 +98,14 @@ function RangePicker({
     setScreenReaderStatus(t("analytics.invalid_end_date", { date }));
   };
 
-  const validateAndSetStart = start => {
+  const validateAndSetStart = (start) => {
     if (!isBefore(start, endDate)) return handleInvalidStart();
     setStartDate(start);
     const date = humanReadableDate(start);
     setScreenReaderStatus(t("analytics.you_entered_date", { date }));
   };
 
-  const validateAndSetEnd = end => {
+  const validateAndSetEnd = (end) => {
     if (isBefore(end, startDate)) return handleInvalidEnd();
     setEndDate(end);
     const date = humanReadableDate(end);
@@ -119,7 +119,7 @@ function RangePicker({
 
   return (
     <UIDConsumer>
-      {id => (
+      {(id) => (
         <div className={`range-picker ${className}`}>
           <div className="range-picker__section">
             <DatePicker
@@ -169,7 +169,7 @@ RangePicker.propTypes = {
   onNewRangeSelected: PropTypes.func.isRequired,
   initialStart: PropTypes.instanceOf(Date).isRequired,
   initialEnd: PropTypes.instanceOf(Date).isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default withScreenReaderStatus(RangePicker);

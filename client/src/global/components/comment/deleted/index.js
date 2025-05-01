@@ -8,7 +8,7 @@ class CommentDeleted extends PureComponent {
   static propTypes = {
     comment: PropTypes.object.isRequired,
     subject: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

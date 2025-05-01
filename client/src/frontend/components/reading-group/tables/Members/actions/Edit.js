@@ -20,7 +20,7 @@ EditMember.displayName = "MembersTable.Member.Edit";
 
 EditMember.propTypes = {
   membership: PropTypes.object.isRequired,
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
 };
 
 export default EditMember;

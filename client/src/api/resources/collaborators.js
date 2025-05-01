@@ -4,15 +4,15 @@ export default {
       endpoint: `/api/v1/${entityType}/${entityId}/relationships/collaborators`,
       method: "GET",
       options: {
-        params: { filter }
-      }
+        params: { filter },
+      },
     };
   },
 
   roles() {
     return {
       endpoint: `/api/v1/collaborators/roles`,
-      method: "GET"
+      method: "GET",
     };
   },
 
@@ -21,15 +21,15 @@ export default {
       endpoint: `/api/v1/${entityType}/${entityId}/relationships/collaborators/create_from_roles`,
       method: "POST",
       options: {
-        body: JSON.stringify({ data: collaborators })
-      }
+        body: JSON.stringify({ data: collaborators }),
+      },
     };
   },
 
   show(entityType, entityId, id) {
     return {
       endpoint: `/api/v1/${entityType}/${entityId}/relationships/collaborators/${id}`,
-      method: "GET"
+      method: "GET",
     };
   },
 
@@ -38,8 +38,8 @@ export default {
       endpoint: `/api/v1/${entityType}/${entityId}/relationships/collaborators`,
       method: "DELETE",
       options: {
-        params: { filter }
-      }
+        params: { filter },
+      },
     };
-  }
+  },
 };

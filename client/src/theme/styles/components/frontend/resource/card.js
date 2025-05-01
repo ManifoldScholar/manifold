@@ -2,7 +2,7 @@ import {
   respond,
   defaultTransitionProps,
   utilityPrimary,
-  subtitlePrimary
+  subtitlePrimary,
 } from "theme/styles/mixins";
 
 export default `
@@ -142,7 +142,7 @@ export default `
       height: 35px;
       margin-top: -17.5px;
       font-size: 15px;`,
-        40
+        40,
       )}
 
       &:hover,

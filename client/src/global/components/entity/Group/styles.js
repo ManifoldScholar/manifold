@@ -3,7 +3,7 @@ import {
   headingPrimary,
   defaultTransitionProps,
   fluidScale,
-  respond
+  respond,
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import AtomicBox from "global/components/atomic/Box";
@@ -17,7 +17,8 @@ export const Box = styled(AtomicBox)`
 
 export const Icon = styled(IconComposer)`
   display: inline-block;
-  transition: opacity ${defaultTransitionProps},
+  transition:
+    opacity ${defaultTransitionProps},
     transform ${defaultTransitionProps};
   transform: translateY(3px);
 
@@ -75,7 +76,7 @@ export const GroupHeader = styled("div", transientOptions)`
       border-top-left-radius: var(--box-border-radius);
       border-top-right-radius: var(--box-border-radius);
     `,
-    60
+    60,
   )}
 `;
 

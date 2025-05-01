@@ -9,7 +9,7 @@ class FormUploadImagePreview extends PureComponent {
   static propTypes = {
     image: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
     handleRemove: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get imageUrl() {
@@ -40,7 +40,7 @@ class FormUploadImagePreview extends PureComponent {
                   data-id="remove"
                   onClick={this.props.handleRemove}
                 />,
-                <Prompt />
+                <Prompt />,
               ]}
             />
           </Styled.SecondaryText>

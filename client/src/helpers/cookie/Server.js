@@ -13,7 +13,7 @@ export default class ServerCookie {
   write(key, value, options = { path: "/", expires: 90 }) {
     this.res.setHeader(
       "Set-Cookie",
-      cookie.serialize(key, value, this.adjustedOptions(options))
+      cookie.serialize(key, value, this.adjustedOptions(options)),
     );
   }
 

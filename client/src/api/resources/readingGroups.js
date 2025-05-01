@@ -4,8 +4,8 @@ export default {
       endpoint: "/api/v1/reading_groups",
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -14,8 +14,8 @@ export default {
       endpoint: "/api/v1/public_reading_groups",
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -23,7 +23,7 @@ export default {
     return {
       endpoint: `/api/v1/reading_groups/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -31,7 +31,7 @@ export default {
     return {
       endpoint: `/api/v1/reading_groups/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -40,8 +40,8 @@ export default {
       endpoint: `/api/v1/reading_groups/${id}/relationships/reading_group_memberships`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -50,8 +50,8 @@ export default {
       endpoint: `/api/v1/reading_groups/${id}/relationships/annotations`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -60,7 +60,7 @@ export default {
       eagerLoad: true,
       endpoint: `/api/v1/reading_groups/${id}/relationships/${entity}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -68,7 +68,7 @@ export default {
     return {
       endpoint: `/api/v1/reading_groups/${id}/relationships/reading_group_categories`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -77,8 +77,8 @@ export default {
       endpoint: `/api/v1/reading_groups`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "readingGroups", data: readingGroup })
-      }
+        body: JSON.stringify({ type: "readingGroups", data: readingGroup }),
+      },
     };
   },
 
@@ -87,8 +87,8 @@ export default {
       endpoint: `/api/v1/reading_groups/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "readingGroup", data: readingGroup })
-      }
+        body: JSON.stringify({ type: "readingGroup", data: readingGroup }),
+      },
     };
   },
 
@@ -97,8 +97,11 @@ export default {
       endpoint: `/api/v1/reading_groups/${id}/relationships/reading_group_categories`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "readingGroupCategories", data: category })
-      }
+        body: JSON.stringify({
+          type: "readingGroupCategories",
+          data: category,
+        }),
+      },
     };
   },
 
@@ -107,8 +110,8 @@ export default {
       endpoint: `/api/v1/reading_groups/${groupId}/relationships/reading_group_categories/${categoryId}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "readingGroup", data: category })
-      }
+        body: JSON.stringify({ type: "readingGroup", data: category }),
+      },
     };
   },
 
@@ -116,7 +119,7 @@ export default {
     return {
       endpoint: `/api/v1/reading_groups/${groupId}/relationships/reading_group_categories/${categoryId}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

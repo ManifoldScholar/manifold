@@ -14,7 +14,7 @@ export default `
           max-width: 100%;
           max-height: 59px;
         `,
-        75
+        75,
       )}
 
       &--desktop {

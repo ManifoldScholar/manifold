@@ -16,7 +16,7 @@ export default function JournalVolumesList({ journal }) {
   const { pagination } = useListQueryParams({ initSize: 5 });
 
   const { data: volumes, meta } = useFetch({
-    request: [journalVolumesAPI.index, id, pagination]
+    request: [journalVolumesAPI.index, id, pagination],
   });
 
   const { t } = useTranslation();
@@ -29,21 +29,21 @@ export default function JournalVolumesList({ journal }) {
     const nestedCrumbs = [
       {
         to: lh.link("frontendJournalDetail", slug),
-        label: titlePlaintext
+        label: titlePlaintext,
       },
       {
         to: lh.link("frontendJournalAllVolumes", slug),
-        label: t("glossary.volume_other")
-      }
+        label: t("glossary.volume_other"),
+      },
     ];
     return libraryDisabled
       ? nestedCrumbs
       : [
           {
             to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
+            label: t("navigation.breadcrumbs.all_journals"),
           },
-          ...nestedCrumbs
+          ...nestedCrumbs,
         ];
   }, [slug, titlePlaintext, t, libraryDisabled]);
 

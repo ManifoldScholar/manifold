@@ -1,10 +1,9 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import { Trans } from "react-i18next";
 import {
   AnalyticsFactory,
   Grid,
-  RangePicker
+  RangePicker,
 } from "backend/components/analytics";
 import PageHeader from "backend/components/layout/PageHeader";
 import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
@@ -17,11 +16,8 @@ class AnalyticsSearchesContainer extends PureComponent {
   }
 
   render() {
-    const {
-      analytics,
-      analyticsPagination,
-      analyticsPaginationClickHandler
-    } = this.props;
+    const { analytics, analyticsPagination, analyticsPaginationClickHandler } =
+      this.props;
 
     return (
       <>

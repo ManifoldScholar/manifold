@@ -30,7 +30,7 @@ function Detail({ project }) {
 Detail.displayName = "Project.Detail";
 
 Detail.propTypes = {
-  project: PropTypes.object.isRequired
+  project: PropTypes.object.isRequired,
 };
 
 export default Detail;

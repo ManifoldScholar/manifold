@@ -5,7 +5,7 @@ import {
   renderOffer,
   renderSeries,
   renderVolumes,
-  renderIssues
+  renderIssues,
 } from "../helpers";
 import BaseSchema from "../BaseSchema";
 import config from "config";
@@ -22,13 +22,13 @@ export default function Journal({ journal }) {
     if (!journalVolumes.length && !uncategorizedCount) return null;
 
     const uncategorized =
-      journalIssues.filter(issue => !issue.attributes.journalVolumeNumber) ??
+      journalIssues.filter((issue) => !issue.attributes.journalVolumeNumber) ??
       [];
 
     return uncategorized.length
       ? [
           ...renderIssues(uncategorized),
-          ...renderVolumes(journalVolumes, null, true)
+          ...renderVolumes(journalVolumes, null, true),
         ]
       : [...renderVolumes(journalVolumes, null, true)];
   };
@@ -40,7 +40,7 @@ export default function Journal({ journal }) {
     publicationDate,
     createdAt,
     updatedAt,
-    avatarStyles
+    avatarStyles,
   } = attributes;
 
   const journalData = {
@@ -59,7 +59,7 @@ export default function Journal({ journal }) {
     hasPart: renderVolumesAndIssues(),
     isPartOf: renderSeries(metadata),
     image: avatarStyles && avatarStyles.small,
-    offers: renderOffer(attributes)
+    offers: renderOffer(attributes),
   };
 
   return <BaseSchema entity={journalData} />;
@@ -77,35 +77,35 @@ Journal.propTypes = {
         rightsHolder: PropTypes.string,
         rights: PropTypes.string,
         publisher: PropTypes.string,
-        seriesTitle: PropTypes.string
+        seriesTitle: PropTypes.string,
       }),
       purchaseUrl: PropTypes.string,
       purchasePrice: PropTypes.number,
       purchasePriceCurrency: PropTypes.string,
       avatarStyles: PropTypes.shape({
-        small: PropTypes.string
+        small: PropTypes.string,
       }),
       publicationDate: PropTypes.string,
       createdAt: PropTypes.string,
-      updatedAt: PropTypes.string
+      updatedAt: PropTypes.string,
     }),
     relationships: PropTypes.shape({
       journalIssues: PropTypes.arrayOf(
         PropTypes.shape({
           attributes: PropTypes.shape({
             number: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-            publicationDate: PropTypes.string
-          })
-        })
+            publicationDate: PropTypes.string,
+          }),
+        }),
       ),
       journalVolumes: PropTypes.arrayOf(
         PropTypes.shape({
           attributes: PropTypes.shape({
             number: PropTypes.number,
-            publicationDate: PropTypes.string
-          })
-        })
-      )
-    })
-  }).isRequired
+            publicationDate: PropTypes.string,
+          }),
+        }),
+      ),
+    }),
+  }).isRequired,
 };

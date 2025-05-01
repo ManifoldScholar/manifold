@@ -5,39 +5,39 @@ import {
   headingQuaternary,
   utilityPrimary,
   textTruncate,
-  styledUnderline
+  styledUnderline,
 } from "../mixins/typography";
 
 // Fluid font-size options for reader UI user preferences
 const readerFontSizes = [
   {
     desktop: "13px",
-    mobile: "12px"
+    mobile: "12px",
   },
   {
     desktop: "16px",
-    mobile: "14px"
+    mobile: "14px",
   },
   {
     desktop: "20px",
-    mobile: "16px"
+    mobile: "16px",
   },
   {
     desktop: "22px",
-    mobile: "18px"
+    mobile: "18px",
   },
   {
     desktop: "26px",
-    mobile: "20px"
+    mobile: "20px",
   },
   {
     desktop: "32px",
-    mobile: "24px"
+    mobile: "24px",
   },
   {
     desktop: "38px",
-    mobile: "28px"
-  }
+    mobile: "28px",
+  },
 ];
 const readerFontSizeClasses = readerFontSizes
   .map(
@@ -45,10 +45,10 @@ const readerFontSizeClasses = readerFontSizes
     .font-size-${index} {
       font-size: calc(${fluidScale(
         desktop,
-        mobile
+        mobile,
       )} * clamp(0.5, var(--font-size-adjustment), 1.5));
     }
-  `
+  `,
   )
   .join("");
 
@@ -56,11 +56,11 @@ const readerFontSizeClasses = readerFontSizes
 const styles = ["dashes", "dots", "wavy", "solid"];
 const underlineClasses = styles
   .map(
-    style => `
+    (style) => `
     .underline-${style} {
       ${styledUnderline(style)}
     }
-`
+`,
   )
   .join("");
 

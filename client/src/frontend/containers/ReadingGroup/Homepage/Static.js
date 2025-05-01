@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import {
   CollectionCategory,
-  CollectionPlaceholder
+  CollectionPlaceholder,
 } from "frontend/components/collecting/reading-group";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 
@@ -11,7 +11,7 @@ function ReadingGroupHomepageStaticContainer({
   readingGroup,
   categories,
   responses,
-  refresh
+  refresh,
 }) {
   const { t } = useTranslation();
 
@@ -32,14 +32,14 @@ function ReadingGroupHomepageStaticContainer({
   const uncategorized = {
     id: "$uncategorized$",
     attributes: {
-      title: t("common.uncategorized_title_case")
-    }
+      title: t("common.uncategorized_title_case"),
+    },
   };
 
   return (
     <>
       {hasPopulatedCategories &&
-        categories.map(category => (
+        categories.map((category) => (
           <CollectionCategory
             key={category.id}
             category={category}
@@ -68,7 +68,7 @@ ReadingGroupHomepageStaticContainer.propTypes = {
   categories: PropTypes.array,
   responses: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired
+  refresh: PropTypes.func.isRequired,
 };
 
 export default ReadingGroupHomepageStaticContainer;

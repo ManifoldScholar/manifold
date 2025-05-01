@@ -6,7 +6,7 @@ export default function Buttons({
   active,
   onBulkDelete,
   toggleBulkActions,
-  actionsDisabled
+  actionsDisabled,
 }) {
   const { t } = useTranslation();
 

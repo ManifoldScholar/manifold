@@ -16,32 +16,32 @@ function MyStarredContainer() {
     texts: 1,
     text_sections: 1,
     resource_collections: 1,
-    resources: 1
+    resources: 1,
   });
 
   const { data: projects } = useFetch({
     request: [meAPI.myCollected, "projects"],
-    dependencies: [fetchVersion.projects]
+    dependencies: [fetchVersion.projects],
   });
   const { data: texts } = useFetch({
     request: [meAPI.myCollected, "texts"],
-    dependencies: [fetchVersion.texts]
+    dependencies: [fetchVersion.texts],
   });
   const { data: textSections } = useFetch({
     request: [meAPI.myCollected, "text_sections"],
-    dependencies: [fetchVersion.text_sections]
+    dependencies: [fetchVersion.text_sections],
   });
   const { data: resourceCollections } = useFetch({
     request: [meAPI.myCollected, "resource_collections"],
-    dependencies: [fetchVersion.resource_collections]
+    dependencies: [fetchVersion.resource_collections],
   });
   const { data: resources } = useFetch({
     request: [meAPI.myCollected, "resources"],
-    dependencies: [fetchVersion.resources]
+    dependencies: [fetchVersion.resources],
   });
   const { data: journalIssues } = useFetch({
     request: [meAPI.myCollected, "journal_issues"],
-    dependencies: [fetchVersion.resources]
+    dependencies: [fetchVersion.resources],
   });
 
   const responses = {
@@ -50,17 +50,17 @@ function MyStarredContainer() {
     textSections,
     resourceCollections,
     resources,
-    journalIssues
+    journalIssues,
   };
 
   const currentUser = useCurrentUser();
   const collection = getEntityCollection(currentUser);
 
-  const onUncollect = useCallback(type => {
-    setFetchVersion(prevState => {
+  const onUncollect = useCallback((type) => {
+    setFetchVersion((prevState) => {
       return {
         ...prevState,
-        [type]: prevState[type] + 1
+        [type]: prevState[type] + 1,
       };
     });
   }, []);

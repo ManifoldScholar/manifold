@@ -20,9 +20,9 @@ export function collectedIdsForCollection(collection) {
   if (!collection) return [];
   const mappings = collection.attributes.categoryMappings;
   return flatMapDepth(
-    Object.values(mappings).map(mapping => Object.values(mapping)),
+    Object.values(mappings).map((mapping) => Object.values(mapping)),
     identity,
-    2
+    2,
   );
 }
 
@@ -38,18 +38,18 @@ export function inCollection(collectionOrEntity, collectable) {
 }
 
 export function inCollections(collectable, ...collectionsOrEntities) {
-  return collectionsOrEntities.some(collectionOrEntity =>
-    inCollection(collectionOrEntity, collectable)
+  return collectionsOrEntities.some((collectionOrEntity) =>
+    inCollection(collectionOrEntity, collectable),
   );
 }
 
 export function getResponse(id, responses) {
-  return responses.find(res => res.id === id);
+  return responses.find((res) => res.id === id);
 }
 
 export function idInResponses(id, responses) {
   if (responses?.length < 1) return false;
-  return responses.map(res => res.id).includes(id);
+  return responses.map((res) => res.id).includes(id);
 }
 
 export function hasItemsInCollection(entity) {

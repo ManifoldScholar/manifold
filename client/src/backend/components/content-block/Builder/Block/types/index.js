@@ -11,5 +11,5 @@ export default {
   RecentActivity,
   Resources,
   TableOfContents,
-  Texts
+  Texts,
 };

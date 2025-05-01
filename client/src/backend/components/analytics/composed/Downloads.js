@@ -9,7 +9,7 @@ export default function Downloads({ data, width = 25, rangeInWords }) {
 
   const caption = rangeInWords
     ? t("analytics.downloads_in_date_range", {
-        dateRange: rangeInWords
+        dateRange: rangeInWords,
       })
     : t("analytics.downloads");
 
@@ -29,5 +29,5 @@ Downloads.displayName = "Analytics.Composed.Downloads";
 Downloads.propTypes = {
   data: PropTypes.object.isRequired,
   width: PropTypes.number,
-  rangeInWords: PropTypes.string
+  rangeInWords: PropTypes.string,
 };

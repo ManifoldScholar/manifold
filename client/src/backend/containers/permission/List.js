@@ -8,16 +8,16 @@ import lh from "helpers/linkHandler";
 import entityUtils from "utils/entityUtils";
 import EntitiesList, {
   Button,
-  PermissionRow
+  PermissionRow,
 } from "backend/components/list/EntitiesList";
 
 const { select } = entityUtils;
 const { request } = entityStoreActions;
 
 export class PermissionContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      permissions: select(requests.bePermissions, state.entityStore)
+      permissions: select(requests.bePermissions, state.entityStore),
     };
   };
 
@@ -29,14 +29,14 @@ export class PermissionContainer extends PureComponent {
     linkName: PropTypes.string,
     dispatch: PropTypes.func,
     match: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
     const entity = this.props.entity;
     const action = request(
       permissionsAPI.index(entity, {}, {}),
-      requests.bePermissions
+      requests.bePermissions,
     );
     this.props.dispatch(action);
   }
@@ -58,7 +58,7 @@ export class PermissionContainer extends PureComponent {
             entityComponent={PermissionRow}
             entityComponentProps={{
               active,
-              linkName: listUrl
+              linkName: listUrl,
             }}
             buttons={[
               <Button
@@ -67,7 +67,7 @@ export class PermissionContainer extends PureComponent {
                 type="add"
                 authorizedTo="createPermissions"
                 authorizedFor={entity}
-              />
+              />,
             ]}
           />
         )}

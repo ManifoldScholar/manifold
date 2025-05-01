@@ -7,7 +7,7 @@ import {
   dragging,
   textTruncate,
   setHoverStyle,
-  revealOnFocus
+  revealOnFocus,
 } from "theme/styles/mixins";
 
 const ITEM_INNER_PADDING = 10;
@@ -25,7 +25,7 @@ export default `
           margin-right: 0;
         `,
         breakpointLessOne(75),
-        "max"
+        "max",
       )}
     }
 
@@ -39,7 +39,7 @@ export default `
           margin-top: 37px;
           margin-bottom: 25px;
         `,
-        75
+        75,
       )}
 
       ${respond(
@@ -47,7 +47,7 @@ export default `
           display: flex;
           flex-wrap: nowrap;
         `,
-        95
+        95,
       )}
     }
 

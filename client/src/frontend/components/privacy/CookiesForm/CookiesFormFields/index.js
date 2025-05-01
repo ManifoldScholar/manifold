@@ -10,7 +10,7 @@ export default function CookiesFormFields({
   cookiePrefs,
   setCookiePrefs,
   manifoldAnalyticsEnabled,
-  googleAnalyticsEnabled
+  googleAnalyticsEnabled,
 }) {
   const { t } = useTranslation();
   const settings = useFromStore("settings", "select");
@@ -34,7 +34,7 @@ export default function CookiesFormFields({
     }
   };
 
-  const onChange = pref => {
+  const onChange = (pref) => {
     const newVal = cookiePrefs[pref] === "yes" ? "no" : "yes";
     setCookiePrefs({ ...cookiePrefs, [pref]: newVal });
   };
@@ -44,7 +44,7 @@ export default function CookiesFormFields({
       {showNoCookiesMessage ? (
         <Styled.NoAnalyticsMessage>
           {t("forms.privacy.no_analytics_message", {
-            name: installationName
+            name: installationName,
           })}
         </Styled.NoAnalyticsMessage>
       ) : (
@@ -54,7 +54,7 @@ export default function CookiesFormFields({
               preference={{
                 key: "manifold",
                 label: getLocalized("internalAnalytics", "label"),
-                instructions: getLocalized("internalAnalytics", "description")
+                instructions: getLocalized("internalAnalytics", "description"),
               }}
               options={{ yes: t("common.yes"), no: t("common.no") }}
               value={cookiePrefs.manifold}
@@ -66,7 +66,7 @@ export default function CookiesFormFields({
               preference={{
                 key: "google",
                 label: getLocalized("googleAnalytics", "label"),
-                instructions: getLocalized("googleAnalytics", "description")
+                instructions: getLocalized("googleAnalytics", "description"),
               }}
               options={{ yes: t("common.yes"), no: t("common.no") }}
               value={cookiePrefs.google}
@@ -85,5 +85,5 @@ CookiesFormFields.propTypes = {
   cookiePrefs: PropTypes.object.isRequired,
   setCookiePrefs: PropTypes.func.isRequired,
   manifoldAnalyticsEnabled: PropTypes.bool,
-  googleAnalyticsEnabled: PropTypes.bool
+  googleAnalyticsEnabled: PropTypes.bool,
 };

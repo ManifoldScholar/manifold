@@ -8,7 +8,7 @@ class ConfirmableButton extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
     confirmHandler: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {};

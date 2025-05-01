@@ -20,7 +20,7 @@ export class HeadContentComponent extends Component {
     charset: PropTypes.string,
     description: PropTypes.string,
     appendDefaultTitle: PropTypes.bool,
-    settings: PropTypes.object
+    settings: PropTypes.object,
   };
 
   static defaultProps = { ...config.app.head.meta };
@@ -93,7 +93,7 @@ export class HeadContentComponent extends Component {
     const meta = this.buildMetaContent();
     const props = {
       meta,
-      title: this.title
+      title: this.title,
     };
     props.titleTemplate = this.titleTemplate(this.props);
     props.defaultTitle = this.defaultTitle;

@@ -5,7 +5,7 @@ import { useFetch, usePaginationState, useApiCallback } from "hooks";
 import Layout from "backend/components/layout";
 import EntitiesList, {
   ReadingGroupMembershipRow,
-  AnnotationRow
+  AnnotationRow,
 } from "backend/components/list/EntitiesList";
 import withConfirmation from "hoc/withConfirmation";
 
@@ -14,25 +14,25 @@ function UserActivityContainer({ user, confirm }) {
 
   const [annotationsPagination, setAnnotationsPageNumber] = usePaginationState(
     1,
-    5
+    5,
   );
 
   const filters = useMemo(
     () => ({ formats: ["annotation"], order: "created_at DESC" }),
-    []
+    [],
   );
 
   const {
     data: annotations,
     meta: annotationsMeta,
-    refresh: refreshAnnotations
+    refresh: refreshAnnotations,
   } = useFetch({
-    request: [usersAPI.annotations, user.id, filters, annotationsPagination]
+    request: [usersAPI.annotations, user.id, filters, annotationsPagination],
   });
 
   const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
 
-  const onDeleteAnnotation = id => {
+  const onDeleteAnnotation = (id) => {
     const heading = t("modals.delete_annotation");
     const message = t("modals.confirm_body");
     if (confirm)
@@ -44,8 +44,12 @@ function UserActivityContainer({ user, confirm }) {
 
   const [rgPagination, setRgPageNumber] = usePaginationState(1, 5);
 
-  const { data: rgMemberships, meta: rgMeta, refresh: refreshRgs } = useFetch({
-    request: [usersAPI.readingGroupMemberships, user.id, null, rgPagination]
+  const {
+    data: rgMemberships,
+    meta: rgMeta,
+    refresh: refreshRgs,
+  } = useFetch({
+    request: [usersAPI.readingGroupMemberships, user.id, null, rgPagination],
   });
 
   const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
@@ -69,17 +73,17 @@ function UserActivityContainer({ user, confirm }) {
             entityComponentProps={{ onDelete: onDeleteMembership }}
             entities={rgMemberships}
             title={t("glossary.reading_group_title_case", {
-              count: 10
+              count: 10,
             })}
             titleStyle="section"
             pagination={rgMeta?.pagination}
             paginationTarget={false}
             showCount
             unit={t("glossary.reading_group", {
-              count: rgMeta?.pagination.totalCount
+              count: rgMeta?.pagination.totalCount,
             })}
             callbacks={{
-              onPageClick: page => () => setRgPageNumber(page)
+              onPageClick: (page) => () => setRgPageNumber(page),
             }}
           />
         </Layout.BackendPanel>
@@ -90,19 +94,19 @@ function UserActivityContainer({ user, confirm }) {
             entityComponent={AnnotationRow}
             entityComponentProps={{
               hideCreator: true,
-              onDelete: onDeleteAnnotation
+              onDelete: onDeleteAnnotation,
             }}
             entities={annotations}
             pagination={annotationsMeta?.pagination}
             paginationTarget={false}
             showCount
             unit={t("glossary.annotation", {
-              count: annotationsMeta?.pagination.totalCount
+              count: annotationsMeta?.pagination.totalCount,
             })}
             title={t("titles.annotations")}
             titleStyle="section"
             callbacks={{
-              onPageClick: page => () => setAnnotationsPageNumber(page)
+              onPageClick: (page) => () => setAnnotationsPageNumber(page),
             }}
           />
         </Layout.BackendPanel>

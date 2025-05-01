@@ -18,8 +18,8 @@ class FormRadios extends Component {
       PropTypes.shape({
         value: PropTypes.any.isRequired,
         label: PropTypes.string.isRequired,
-        instructions: PropTypes.string
-      })
+        instructions: PropTypes.string,
+      }),
     ).isRequired,
     label: PropTypes.string,
     prompt: PropTypes.string,
@@ -30,11 +30,11 @@ class FormRadios extends Component {
     beforeOnChange: PropTypes.func,
     inputClasses: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    focusOnMount: PropTypes.bool
+    focusOnMount: PropTypes.bool,
   };
 
   static defaultProps = {
-    focusOnMount: false
+    focusOnMount: false,
   };
 
   get focusOnMount() {
@@ -49,14 +49,14 @@ class FormRadios extends Component {
     return {
       inline: this.props.inline,
       onChange: this.props.onChange,
-      value: this.props.value
+      value: this.props.value,
     };
   }
 
   get inputClasses() {
     return classnames(this.props.inputClasses, {
       "extra-space-bottom": true,
-      wide: this.props.wide
+      wide: this.props.wide,
     });
   }
 
@@ -75,7 +75,7 @@ class FormRadios extends Component {
   render() {
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <Errorable
             className={this.inputClasses}
             name={this.props.name}

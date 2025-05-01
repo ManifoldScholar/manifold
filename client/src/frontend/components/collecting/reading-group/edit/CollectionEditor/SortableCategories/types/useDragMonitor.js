@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 
 export default function useDragMonitor(type) {
@@ -18,7 +18,7 @@ export default function useDragMonitor(type) {
           return setHidden(false);
         }
         return setActive(false);
-      }
+      },
     });
   }, [type]);
 

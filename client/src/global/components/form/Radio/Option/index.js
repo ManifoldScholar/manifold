@@ -12,11 +12,11 @@ export default class FormRadioOption extends PureComponent {
     option: PropTypes.shape({
       value: PropTypes.any.isRequired,
       instructions: PropTypes.string,
-      label: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired,
     }),
     focusOnMount: PropTypes.bool,
     tabIndex: PropTypes.number,
-    groupName: PropTypes.string.isRequired
+    groupName: PropTypes.string.isRequired,
   };
 
   componentDidMount() {
@@ -55,7 +55,7 @@ export default class FormRadioOption extends PureComponent {
             value={this.option.value}
             checked={this.checked}
             onChange={this.props.onChange}
-            ref={input => {
+            ref={(input) => {
               this.inputElement = input;
             }}
           />

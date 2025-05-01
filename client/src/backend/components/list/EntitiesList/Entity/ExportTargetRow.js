@@ -8,7 +8,7 @@ class ExportTargetRow extends PureComponent {
   static propTypes = {
     entity: PropTypes.object.isRequired,
     active: PropTypes.string.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

@@ -10,7 +10,7 @@ export default function BaseHeader({
   actions,
   note,
   hasSecondaryNav,
-  type
+  type,
 }) {
   return (
     <>

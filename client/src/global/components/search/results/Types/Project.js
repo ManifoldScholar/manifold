@@ -21,17 +21,17 @@ function SearchResultsTypeProject({ result, highlightedAttribute }) {
   const collectable = {
     type: searchableType,
     id: searchableId,
-    attributes: { title }
+    attributes: { title },
   };
   const creators = model?.relationships?.creators ?? [];
 
   const resultProps = {
     url: lh.link("frontendProjectDetail", attributes.slug),
     title: highlightedAttribute("title"),
-    attribution: creators.map(c => c.attributes.fullName).join(", "),
+    attribution: creators.map((c) => c.attributes.fullName).join(", "),
     description: highlightedAttribute("fullText"),
     label: t("glossary.project_one"),
-    collectable
+    collectable,
   };
 
   return (
@@ -64,7 +64,7 @@ SearchResultsTypeProject.displayName = "Search.Results.Type.Project";
 
 SearchResultsTypeProject.propTypes = {
   result: PropTypes.object,
-  highlightedAttribute: PropTypes.func.isRequired
+  highlightedAttribute: PropTypes.func.isRequired,
 };
 
 export default withSearchResultHelper(SearchResultsTypeProject);

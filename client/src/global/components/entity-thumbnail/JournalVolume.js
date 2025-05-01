@@ -15,7 +15,7 @@ function EntityThumbnailJournalVolume({ width, height, className }) {
 EntityThumbnailJournalVolume.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default EntityThumbnailJournalVolume;

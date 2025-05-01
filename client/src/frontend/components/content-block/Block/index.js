@@ -15,13 +15,13 @@ function typeToBlockComponent(type) {
 function canUpdate(block, authorization) {
   return authorization.authorizeAbility({
     entity: block,
-    ability: "update"
+    ability: "update",
   });
 }
 
 function showBlock(block, authorization) {
   const {
-    attributes: { renderable, visible }
+    attributes: { renderable, visible },
   } = block;
   if (renderable) return true;
   if (!canUpdate(block, authorization)) return false;
@@ -30,7 +30,7 @@ function showBlock(block, authorization) {
 
 function getTitle(block, typeComponent, hideDefaultHeader) {
   const {
-    attributes: { title, renderable }
+    attributes: { title, renderable },
   } = block;
   if (!renderable) return typeComponent.placeholderTitle || typeComponent.title;
   if (title) return title;
@@ -63,7 +63,7 @@ function ContentBlock({
   if (!showBlock(block, authorization)) return null;
 
   const {
-    attributes: { descriptionFormatted, style }
+    attributes: { descriptionFormatted, style },
   } = block;
 
   const headerProps = hideHeader
@@ -71,7 +71,7 @@ function ContentBlock({
     : {
         title: getTitle(block, typeComponent, hideDefaultHeader),
         icon: getIcon(block, typeComponent, entityIsJournalIssue),
-        description: descriptionFormatted
+        description: descriptionFormatted,
       };
 
   const TypeComponent = typeComponent;
@@ -104,7 +104,7 @@ ContentBlock.propTypes = {
   entity: PropTypes.object.isRequired,
   hideHeader: PropTypes.bool,
   hideDefaultHeader: PropTypes.bool,
-  hideBottomBorder: PropTypes.bool
+  hideBottomBorder: PropTypes.bool,
 };
 
 export default ContentBlock;

@@ -2,8 +2,13 @@ import React from "react";
 import validatedNode from "../higher-order/ValidatedNode";
 
 function Video({ attributes, children }) {
-  const { height, width, style, controls: controlsAttr, ...renderAttrs } =
-    attributes ?? {};
+  const {
+    height,
+    width,
+    style,
+    controls: controlsAttr,
+    ...renderAttrs
+  } = attributes ?? {};
   const { height: styleH, width: styleW, ...renderStyles } = style ?? {};
 
   const h = parseInt(styleH ?? height, 10);

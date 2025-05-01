@@ -24,14 +24,14 @@ function ReadingGroupHomepageContainer({ route, readingGroup, ...restProps }) {
   return childRoutes(route, {
     childProps: {
       readingGroup,
-      ...restProps
-    }
+      ...restProps,
+    },
   });
 }
 
 ReadingGroupHomepageContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
 };
 
 export default ReadingGroupHomepageContainer;

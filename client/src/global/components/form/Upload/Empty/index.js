@@ -9,11 +9,11 @@ export default class FormUploadEmpty extends PureComponent {
     accepts: PropTypes.object,
     placeholder: PropTypes.string,
     progress: PropTypes.string,
-    uploadError: PropTypes.string
+    uploadError: PropTypes.string,
   };
 
   static defaultProps = {
-    placeholder: "cover"
+    placeholder: "cover",
   };
 
   get extensions() {

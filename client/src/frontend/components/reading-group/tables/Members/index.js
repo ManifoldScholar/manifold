@@ -22,7 +22,7 @@ class MembersTable extends PureComponent {
     readingGroup: PropTypes.object.isRequired,
     pagination: PropTypes.object.isRequired,
     onRemoveMember: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -49,7 +49,7 @@ class MembersTable extends PureComponent {
   avatarUrl(model) {
     return get(
       model,
-      "relationships.user.attributes.avatarStyles.mediumSquare"
+      "relationships.user.attributes.avatarStyles.mediumSquare",
     );
   }
 
@@ -84,10 +84,10 @@ class MembersTable extends PureComponent {
         models={this.members}
         pagination={this.pagination}
         unit={t("glossary.member", { count: this.members.length })}
-        linkCreator={model =>
+        linkCreator={(model) =>
           lh.link("frontendReadingGroupAnnotations", readingGroup.id, {
             page: 1,
-            readingGroupMembership: model.id
+            readingGroupMembership: model.id,
           })
         }
       >
@@ -105,7 +105,7 @@ class MembersTable extends PureComponent {
                   className={classNames({
                     table__avatar: true,
                     "table__avatar--image": this.avatarUrl(model),
-                    "table__avatar--placeholder": !this.avatarUrl(model)
+                    "table__avatar--placeholder": !this.avatarUrl(model),
                   })}
                 />
                 <LinkedName
@@ -115,8 +115,8 @@ class MembersTable extends PureComponent {
                     readingGroup.id,
                     {
                       page: 1,
-                      readingGroupMembership: model.id
-                    }
+                      readingGroupMembership: model.id,
+                    },
                   )}
                   tag={model.attributes.label}
                   hovering={hovering}
@@ -126,7 +126,7 @@ class MembersTable extends PureComponent {
                   size={20}
                   className={classNames({
                     "table__link-arrow": true,
-                    "table__link-arrow--active": hovering
+                    "table__link-arrow--active": hovering,
                   })}
                 />
               </>
@@ -152,8 +152,8 @@ class MembersTable extends PureComponent {
                 srLabel={`${model.attributes.annotationsCount} ${t(
                   "glossary.annotation",
                   {
-                    count: model.attributes.annotationsCount
-                  }
+                    count: model.attributes.annotationsCount,
+                  },
                 )}.`}
               />
               <InlineValue
@@ -162,8 +162,8 @@ class MembersTable extends PureComponent {
                 srLabel={`${model.attributes.highlightsCount} ${t(
                   "glossary.highlight",
                   {
-                    count: model.attributes.highlightsCount
-                  }
+                    count: model.attributes.highlightsCount,
+                  },
                 )}.`}
               />
               <InlineValue
@@ -172,8 +172,8 @@ class MembersTable extends PureComponent {
                 srLabel={`${model.attributes.commentsCount} ${t(
                   "glossary.comment",
                   {
-                    count: model.attributes.commentsCount
-                  }
+                    count: model.attributes.commentsCount,
+                  },
                 )}.`}
               />
             </>
@@ -187,7 +187,7 @@ class MembersTable extends PureComponent {
         </Column>
         {this.getUpdateAuthorizationStatus({
           entity: this.props.readingGroup,
-          ability: "update"
+          ability: "update",
         }) && (
           <Column
             header={t("tables.reading_group_members.headers.actions")}

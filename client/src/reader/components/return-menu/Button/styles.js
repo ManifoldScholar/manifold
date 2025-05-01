@@ -3,7 +3,7 @@ import {
   buttonUnstyled,
   utilityPrimary,
   respond,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -19,7 +19,8 @@ export const Button = styled("button", transientOptions)`
   padding-inline-end: var(--padding-lateral);
   padding-inline-start: var(--padding-lateral);
   font-size: 13px;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   ${respond(`font-size: 14px;`, 50)}

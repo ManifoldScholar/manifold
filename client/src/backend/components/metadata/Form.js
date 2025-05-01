@@ -19,7 +19,7 @@ export default function MetadataForm({ model, ...restProps }) {
     return [
       {
         label: t("metadata.categories.citation"),
-        children: intersection(["citationOverride"], properties)
+        children: intersection(["citationOverride"], properties),
       },
       {
         label: t("metadata.categories.copyright"),
@@ -30,17 +30,17 @@ export default function MetadataForm({ model, ...restProps }) {
             "rightsHolder",
             "rightsTerritory",
             "restrictions",
-            "credit"
+            "credit",
           ],
-          properties
-        )
+          properties,
+        ),
       },
       {
         label: t("metadata.categories.identity"),
         children: intersection(
           ["isbn", "issn", "doi", "resourcesDoi", "uniqueIdentifier"],
-          properties
-        )
+          properties,
+        ),
       },
       {
         label: t("metadata.categories.publisher"),
@@ -50,10 +50,10 @@ export default function MetadataForm({ model, ...restProps }) {
             "publisherPlace",
             "originalPublisher",
             "originalPublisherPlace",
-            "status"
+            "status",
           ],
-          properties
-        )
+          properties,
+        ),
       },
       {
         label: t("metadata.categories.bibliographic"),
@@ -67,34 +67,34 @@ export default function MetadataForm({ model, ...restProps }) {
             "issue",
             "volume",
             "originalTitle",
-            "originalPublicationDate"
+            "originalPublicationDate",
           ],
-          properties
-        )
+          properties,
+        ),
       },
       {
         label: t("metadata.categories.accessibility"),
-        children: intersection(["altText"], properties)
-      }
+        children: intersection(["altText"], properties),
+      },
     ];
   };
 
   const structure = () => {
     const filteredStructure = baseStructure().filter(
-      group => group.children?.length > 0
+      (group) => group.children?.length > 0,
     );
     const leftovers = difference(
       properties,
       reduce(
         filteredStructure,
         (used, group) => concat(used, group.children),
-        []
-      )
+        [],
+      ),
     );
     if (leftovers.length > 0) {
       filteredStructure.push({
         label: t("metadata.categories.other"),
-        children: leftovers
+        children: leftovers,
       });
     }
     return filteredStructure;
@@ -115,7 +115,7 @@ export default function MetadataForm({ model, ...restProps }) {
     }
   };
 
-  const componentAndPropsFor = prop => {
+  const componentAndPropsFor = (prop) => {
     switch (prop) {
       case "rights":
       case "citationOverride":
@@ -164,5 +164,5 @@ export default function MetadataForm({ model, ...restProps }) {
 MetadataForm.displayName = "Metadata.Form";
 
 MetadataForm.propTypes = {
-  model: PropTypes.object.isRequired
+  model: PropTypes.object.isRequired,
 };

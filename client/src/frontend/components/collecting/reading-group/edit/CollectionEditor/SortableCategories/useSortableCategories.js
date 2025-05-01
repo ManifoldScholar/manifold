@@ -21,13 +21,13 @@ const reorder = (dropTargetData, list, startIndex, finishIndex) => {
     list,
     startIndex,
     indexOfTarget: finishIndex,
-    closestEdgeOfTarget: closestEdge
+    closestEdgeOfTarget: closestEdge,
   });
 
   return reordered;
 };
 
-const getTargetData = location => {
+const getTargetData = (location) => {
   const target = location?.current?.dropTargets?.[0];
   if (!target) return null;
   return target.data;
@@ -38,8 +38,8 @@ export const handleCategoryDrop = (source, location, categories) => {
 
   if (!dropTargetData || !source) return categories;
 
-  const startIndex = categories.findIndex(c => c.id === source.data.id);
-  const finishIndex = categories.findIndex(c => c.id === dropTargetData.id);
+  const startIndex = categories.findIndex((c) => c.id === source.data.id);
+  const finishIndex = categories.findIndex((c) => c.id === dropTargetData.id);
 
   return reorder(dropTargetData, categories, startIndex, finishIndex);
 };
@@ -47,7 +47,7 @@ export const handleCategoryDrop = (source, location, categories) => {
 export const handleAddCollectableToCategory = (
   source,
   dropTargetData,
-  mappings
+  mappings,
 ) => {
   const currentCategory = source.data.categoryId;
   const targetCategory = dropTargetData.id;
@@ -63,12 +63,14 @@ export const handleAddCollectableToCategory = (
     ...mappings,
     [currentCategory]: {
       ...mappings[currentCategory],
-      [source.data.type]: currentCategoryList.filter(c => c !== source.data.id)
+      [source.data.type]: currentCategoryList.filter(
+        (c) => c !== source.data.id,
+      ),
     },
     [targetCategory]: {
       ...mappings[targetCategory],
-      [source.data.type]: targetCategoryList
-    }
+      [source.data.type]: targetCategoryList,
+    },
   };
 };
 
@@ -96,9 +98,9 @@ const handleCollectableDrop = (source, location, mappings) => {
           dropTargetData,
           list,
           source.data.index,
-          dropTargetData.index
-        )
-      }
+          dropTargetData.index,
+        ),
+      },
     };
   }
 
@@ -111,7 +113,9 @@ const handleCollectableDrop = (source, location, mappings) => {
     ...mappings,
     [currentCategory]: {
       ...mappings[currentCategory],
-      [source.data.type]: currentCategoryList.filter(c => c !== source.data.id)
+      [source.data.type]: currentCategoryList.filter(
+        (c) => c !== source.data.id,
+      ),
     },
     [targetCategory]: {
       ...mappings[targetCategory],
@@ -119,9 +123,9 @@ const handleCollectableDrop = (source, location, mappings) => {
         dropTargetData,
         targetCategoryList,
         targetCategoryList.length - 1,
-        dropTargetData.index
-      )
-    }
+        dropTargetData.index,
+      ),
+    },
   };
 };
 
@@ -129,7 +133,7 @@ export default function useSortableCategories(
   categories,
   onCategoryDrop,
   mappings,
-  onCollectableDrop
+  onCollectableDrop,
 ) {
   const [active, setActive] = useState(null);
 
@@ -156,9 +160,9 @@ export default function useSortableCategories(
               const result = handleCollectableDrop(source, location, mappings);
               onCollectableDrop(result, source, source.data.element);
             }
-          }
+          },
         }),
-        autoScrollWindowForElements()
+        autoScrollWindowForElements(),
       );
     }
   }, [categories, onCategoryDrop, scrollableRef, mappings, onCollectableDrop]);

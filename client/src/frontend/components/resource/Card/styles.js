@@ -3,7 +3,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import {
   respond,
   defaultTransitionProps,
-  subtitlePrimary
+  subtitlePrimary,
 } from "theme/styles/mixins";
 
 export const Card = styled.article`
@@ -79,7 +79,8 @@ export const ArrowWrapper = styled.div`
   text-decoration: none;
   background-color: var(--color-base-neutral20);
   border-radius: 100%;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   ${respond(
@@ -88,7 +89,7 @@ export const ArrowWrapper = styled.div`
     height: 35px;
     margin-block-start: -17.5px;
     font-size: 15px;`,
-    40
+    40,
   )}
 
   &:hover,
