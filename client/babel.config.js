@@ -9,7 +9,7 @@ const presets = [
     "@babel/preset-env",
     {
       useBuiltIns: "entry",
-      corejs: "3.41"
+      corejs: "3.42"
     }
   ]
 ];
