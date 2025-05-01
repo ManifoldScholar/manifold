@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: `/api/v1/action_callouts/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -12,8 +12,8 @@ export default {
       endpoint: `/api/v1/projects/${pId}/relationships/action_callouts`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "action_callout", data: actionCallout })
-      }
+        body: JSON.stringify({ type: "action_callout", data: actionCallout }),
+      },
     };
   },
 
@@ -22,8 +22,8 @@ export default {
       endpoint: `/api/v1/journals/${jId}/relationships/action_callouts`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "action_callout", data: actionCallout })
-      }
+        body: JSON.stringify({ type: "action_callout", data: actionCallout }),
+      },
     };
   },
 
@@ -32,8 +32,8 @@ export default {
       endpoint: `/api/v1/action_callouts/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "action_callout", data: actionCallout })
-      }
+        body: JSON.stringify({ type: "action_callout", data: actionCallout }),
+      },
     };
   },
 
@@ -41,7 +41,7 @@ export default {
     return {
       endpoint: `/api/v1/action_callouts/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

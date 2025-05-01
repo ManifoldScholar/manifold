@@ -10,11 +10,11 @@ class ResourceLink extends Component {
   static propTypes = {
     attributes: PropTypes.object,
     buttonClass: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    buttonClass: "button-primary"
+    buttonClass: "button-primary",
   };
 
   renderButton(attr) {

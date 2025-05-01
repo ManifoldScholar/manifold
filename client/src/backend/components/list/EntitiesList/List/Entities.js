@@ -13,7 +13,7 @@ export default class ListEntitiesListEntities extends PureComponent {
     emptyMessage: PropTypes.node,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
     sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
-    idForInstructions: PropTypes.string
+    idForInstructions: PropTypes.string,
   };
 
   get entities() {
@@ -36,7 +36,7 @@ export default class ListEntitiesListEntities extends PureComponent {
     return {
       ...this.props.entityComponentProps,
       listStyle: this.listStyle,
-      sortableStyle: this.sortableStyle
+      sortableStyle: this.sortableStyle,
     };
   }
 

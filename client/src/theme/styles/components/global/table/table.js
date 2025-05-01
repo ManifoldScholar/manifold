@@ -8,16 +8,16 @@ import {
   utilityPrimary,
   listUnstyled,
   defaultFocusStyle,
-  textTruncate
+  textTruncate,
 } from "theme/styles/mixins";
 
 const FULL_CONTAINER_WIDTH = parseInt(containerWidth.full, 10);
 const LAYOUT_BREAKPOINT = 65;
 const CELL_PADDING_VERTICAL = "16px";
 const CELL_PADDING_LATERAL_STATIC = 30;
-const CELL_PADDING_LATERAL_RESPONSIVE = `${(CELL_PADDING_LATERAL_STATIC /
-  FULL_CONTAINER_WIDTH) *
-  100}vw`;
+const CELL_PADDING_LATERAL_RESPONSIVE = `${
+  (CELL_PADDING_LATERAL_STATIC / FULL_CONTAINER_WIDTH) * 100
+}vw`;
 const CELL_PADDING_LATERAL = `min(${CELL_PADDING_LATERAL_STATIC}px, ${CELL_PADDING_LATERAL_RESPONSIVE})`;
 
 export default `
@@ -224,7 +224,7 @@ export default `
           padding: ${CELL_PADDING_VERTICAL} ${CELL_PADDING_LATERAL};
           font-size: 21px;
         `,
-        LAYOUT_BREAKPOINT
+        LAYOUT_BREAKPOINT,
       )}
     }
 
@@ -258,7 +258,7 @@ export default `
           line-height: inherit;
           white-space: normal;
         `,
-        LAYOUT_BREAKPOINT
+        LAYOUT_BREAKPOINT,
       )}
     }
 
@@ -330,7 +330,7 @@ export default `
             width: 1%;
             white-space: nowrap;
           `,
-          LAYOUT_BREAKPOINT
+          LAYOUT_BREAKPOINT,
         )}
       }
 

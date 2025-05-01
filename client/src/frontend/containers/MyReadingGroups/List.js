@@ -18,15 +18,19 @@ const DEFAULT_SORT_ORDER = "";
 function MyReadingGroupsListContainer({ route }) {
   const filtersReset = {
     sort_order: DEFAULT_SORT_ORDER,
-    archived: "false"
+    archived: "false",
   };
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filtersReset
+    initFilters: filtersReset,
   });
 
-  const { data: readingGroups, meta, refresh } = useFetch({
-    request: [meAPI.readingGroups, filters, pagination]
+  const {
+    data: readingGroups,
+    meta,
+    refresh,
+  } = useFetch({
+    request: [meAPI.readingGroups, filters, pagination],
   });
 
   const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
@@ -47,11 +51,11 @@ function MyReadingGroupsListContainer({ route }) {
       size: "wide",
       position: "overlay",
       lockScroll: "always",
-      closeUrl: lh.link("frontendMyReadingGroups")
+      closeUrl: lh.link("frontendMyReadingGroups"),
     },
     childProps: {
-      onSuccess: handleNewGroupSuccess
-    }
+      onSuccess: handleNewGroupSuccess,
+    },
   };
 
   return readingGroups ? (
@@ -65,9 +69,9 @@ function MyReadingGroupsListContainer({ route }) {
               readingGroups={readingGroups}
               pagination={meta?.pagination}
               filterProps={{
-                onFilterChange: state => setFilters(state),
+                onFilterChange: (state) => setFilters(state),
                 initialState: filters,
-                resetState: filtersReset
+                resetState: filtersReset,
               }}
               showStatusFilter
               onArchive={refresh}
@@ -83,7 +87,7 @@ function MyReadingGroupsListContainer({ route }) {
 }
 
 MyReadingGroupsListContainer.propTypes = {
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
 };
 
 export default MyReadingGroupsListContainer;

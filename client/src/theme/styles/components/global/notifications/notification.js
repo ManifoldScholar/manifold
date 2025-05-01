@@ -4,7 +4,7 @@ import {
   utilityPrimary,
   buttonUnstyled,
   respond,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 
 export default `
@@ -67,7 +67,7 @@ export default `
         max-width: calc(var(--container-width-full) - 50px);
         padding: 23px 26px 25px;
       `,
-        120
+        120,
       )}
 
       .notification--context-drawer & {

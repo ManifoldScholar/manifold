@@ -5,7 +5,7 @@ import config from "config";
 
 export default function webApp(
   name,
-  options = { proxyAPI: false, proxyDevAssets: false, proxyProdAssets: false }
+  options = { proxyAPI: false, proxyDevAssets: false, proxyProdAssets: false },
 ) {
   const devLogFormat = `[${name}] :method :url :status :response-time ms`;
   const logStyle = config.environment.isDevelopment ? devLogFormat : "combined";

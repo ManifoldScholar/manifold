@@ -35,7 +35,7 @@ export const Cover = styled.figure`
       width: 160px;
       height: 160px;
     `,
-      BREAKPOINT
+      BREAKPOINT,
     )}
   }
 `;

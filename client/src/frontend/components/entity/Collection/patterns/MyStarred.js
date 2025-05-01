@@ -9,7 +9,7 @@ import {
   CollectedTextSections,
   CollectedResourceCollections,
   CollectedResources,
-  CollectedJournalIssues
+  CollectedJournalIssues,
 } from "frontend/components/collecting/collection-blocks";
 import { collectedIdsForCollection } from "frontend/components/collecting/helpers";
 import EntityCollection from "../EntityCollection";
@@ -42,7 +42,7 @@ function MyStarredEntityCollection({
       collectedIds: getCollectedIdsByType(type),
       responses: getResponsesByType(type),
       onUncollect: () => onUncollect(type),
-      boxed: true
+      boxed: true,
     };
   }
 
@@ -62,7 +62,7 @@ function MyStarredEntityCollection({
               components={[<strong />]}
             />
           </span>
-        )
+        ),
       }}
       BodyComponent={() =>
         hasCollecteds ? (
@@ -90,7 +90,7 @@ MyStarredEntityCollection.displayName = "Frontend.Entity.Collection.MyStarred";
 MyStarredEntityCollection.propTypes = {
   collection: PropTypes.object.isRequired,
   responses: PropTypes.object.isRequired,
-  onUncollect: PropTypes.func.isRequired
+  onUncollect: PropTypes.func.isRequired,
 };
 
 export default MyStarredEntityCollection;

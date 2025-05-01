@@ -5,7 +5,7 @@ import {
   listUnstyled,
   defaultTransitionProps,
   defaultFocusStyle,
-  buttonUnstyled
+  buttonUnstyled,
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`

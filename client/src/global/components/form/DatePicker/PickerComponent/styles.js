@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   respond,
   defaultTransitionProps,
-  buttonUnstyled
+  buttonUnstyled,
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import BaseMaskedInput from "react-text-mask";
@@ -55,7 +55,7 @@ export const MaskedInput = styled(BaseMaskedInput)`
   ${respond(
     `height: 42px;
   font-size: 18px;`,
-    60
+    60,
   )}
 
   &:focus-visible {

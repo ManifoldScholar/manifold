@@ -15,12 +15,12 @@ export default class ResourceMeta extends Component {
     resource: PropTypes.object,
     layout: PropTypes.string,
     showIcon: PropTypes.bool,
-    showTags: PropTypes.bool
+    showTags: PropTypes.bool,
   };
 
   static defaultProps = {
     showIcon: true,
-    showTags: true
+    showTags: true,
   };
 
   generateResourceMetadataMap(baseMeta, resource) {
@@ -52,12 +52,12 @@ export default class ResourceMeta extends Component {
     const exclude = ["altText"];
     const filteredMetadata = pickBy(
       attr.metadataFormatted,
-      (v, k) => !exclude.includes(k) && !isNull(v) && v.length > 0
+      (v, k) => !exclude.includes(k) && !isNull(v) && v.length > 0,
     );
 
     const { metadata, keys } = this.generateResourceMetadataMap(
       filteredMetadata,
-      this.props.resource
+      this.props.resource,
     );
 
     return (

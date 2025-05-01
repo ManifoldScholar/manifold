@@ -6,14 +6,14 @@ class DefaultNode extends Component {
   static propTypes = {
     attributes: PropTypes.object,
     tag: PropTypes.string,
-    children: PropTypes.array
+    children: PropTypes.array,
   };
 
   render() {
     return React.createElement(
       this.props.tag,
       this.props.attributes,
-      this.props.children
+      this.props.children,
     );
   }
 }

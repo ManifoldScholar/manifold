@@ -18,10 +18,8 @@ function ProjectCollectionDetailEntityCollection({
   limit,
   ...passThroughProps
 }) {
-  const {
-    title,
-    descriptionFormatted: description
-  } = projectCollection.attributes;
+  const { title, descriptionFormatted: description } =
+    projectCollection.attributes;
   const headerLayout = getHeaderLayout(projectCollection);
   const image = getHeroImage(headerLayout, projectCollection);
   const imageAlt = projectCollection.attributes.heroAltText;
@@ -40,11 +38,11 @@ function ProjectCollectionDetailEntityCollection({
       headerLayout={headerLayout}
       headerWidth="100%"
       filterProps={showFilters ? filterProps : null}
-      BodyComponent={props =>
+      BodyComponent={(props) =>
         !!projects?.length && (
           <ThumbnailGrid {...props}>
             {({ stack }) =>
-              projects.map(item => (
+              projects.map((item) => (
                 <EntityThumbnail key={item.id} entity={item} stack={stack} />
               ))
             }
@@ -57,8 +55,8 @@ function ProjectCollectionDetailEntityCollection({
           : {
               pagination: get(projectsMeta, "pagination"),
               unit: t("glossary.project", {
-                count: projectsMeta?.pagination?.totalCount || 0
-              })
+                count: projectsMeta?.pagination?.totalCount || 0,
+              }),
             }
       }
       paginationProps={
@@ -66,7 +64,7 @@ function ProjectCollectionDetailEntityCollection({
           ? {}
           : {
               pagination: get(projectsMeta, "pagination"),
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -81,7 +79,7 @@ ProjectCollectionDetailEntityCollection.propTypes = {
   projectCollection: PropTypes.object.isRequired,
   projects: PropTypes.arrayOf(PropTypes.object),
   projectsMeta: PropTypes.object,
-  limit: PropTypes.number
+  limit: PropTypes.number,
 };
 
 export default ProjectCollectionDetailEntityCollection;

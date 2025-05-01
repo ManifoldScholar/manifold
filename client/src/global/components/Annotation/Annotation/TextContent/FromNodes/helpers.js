@@ -1,5 +1,5 @@
 const findNestedMatchIndex = (nodes, target) => {
-  return nodes.findIndex(n => {
+  return nodes.findIndex((n) => {
     return (
       n.nodeUuid === target ||
       (n.children && findNestedMatchIndex(n.children, target) >= 0)
@@ -11,7 +11,7 @@ const truncateStart = (content, startChar, limit) => {
   const split = Math.max(
     content.lastIndexOf(".", startChar - limit),
     content.lastIndexOf("?", startChar - limit),
-    content.lastIndexOf("!", startChar - limit)
+    content.lastIndexOf("!", startChar - limit),
   );
   if (split === -1) return { content };
   return { content: content.substring(split + 1), split };
@@ -27,7 +27,7 @@ const truncateEnd = (content, endChar, limit) => {
   const split = Math.max(
     content.indexOf(".", endChar + limit),
     content.indexOf("?", endChar + limit),
-    content.indexOf("!", endChar + limit)
+    content.indexOf("!", endChar + limit),
   );
   if (split === -1) return content;
   return content.substring(0, split + 1);
@@ -39,8 +39,8 @@ const maybeTruncateEnd = ({ node, endChar, limit }) => {
   return {
     adjustedNode: {
       ...node,
-      content: truncateEnd(node.content, endChar, limit)
-    }
+      content: truncateEnd(node.content, endChar, limit),
+    },
   };
 };
 
@@ -56,14 +56,14 @@ const maybeTruncateText = ({ fromStart, setSplit, target, node, ...args }) => {
   if (fromStart) {
     const { split, adjustedNode } = maybeTruncateStart({
       node: nodeToTruncate,
-      ...args
+      ...args,
     });
     if (split) setSplit(split);
     truncatedNode = adjustedNode;
   } else {
     const { adjustedNode } = maybeTruncateEnd({
       node: nodeToTruncate,
-      ...args
+      ...args,
     });
     truncatedNode = adjustedNode;
   }
@@ -85,7 +85,7 @@ export const maybeTruncateChildren = ({
       node,
       target,
       fromStart,
-      ...args
+      ...args,
     });
   }
 
@@ -94,15 +94,15 @@ export const maybeTruncateChildren = ({
     node: node.children[index],
     target,
     fromStart,
-    ...args
+    ...args,
   });
   if (fromStart)
     return {
       ...node,
-      children: [adjustedChild, ...node.children.slice(index + 1)]
+      children: [adjustedChild, ...node.children.slice(index + 1)],
     };
   return {
     ...node,
-    children: [...node.children.slice(0, index), adjustedChild]
+    children: [...node.children.slice(0, index), adjustedChild],
   };
 };

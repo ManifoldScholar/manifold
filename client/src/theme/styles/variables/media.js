@@ -17,7 +17,7 @@ export const breakpoints = {
   40: "480px",
   35: "450px",
   30: "400px",
-  20: "350px"
+  20: "350px",
 };
 
 export default ``;

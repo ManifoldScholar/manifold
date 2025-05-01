@@ -12,7 +12,7 @@ function Row({ label, value }) {
 
 Row.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
 };
 
 Row.displayName = "Analytics.Block.Table.Row";

@@ -26,7 +26,7 @@ Remove.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   onRemove: PropTypes.func.isRequired,
-  confirm: PropTypes.func.isRequired
+  confirm: PropTypes.func.isRequired,
 };
 
 export default withConfirmation(Remove);

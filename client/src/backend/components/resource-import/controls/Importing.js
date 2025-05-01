@@ -10,7 +10,7 @@ class ResourceImportControlsImporting extends PureComponent {
   static propTypes = {
     resourceImport: PropTypes.object.isRequired,
     refreshResults: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -29,7 +29,7 @@ class ResourceImportControlsImporting extends PureComponent {
           className="buttons-icon-horizontal"
           style={{
             marginTop: 30,
-            marginBottom: 0
+            marginBottom: 0,
           }}
         >
           <button

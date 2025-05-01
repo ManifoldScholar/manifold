@@ -8,7 +8,7 @@ function getDisplayName(WrappedComponent) {
 
 export default function withSearchResultHelper(WrappedComponent) {
   const displayName = `HigherOrder.WithSearchResultHelper('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithSearchResultHelper extends PureComponent {
@@ -17,23 +17,23 @@ export default function withSearchResultHelper(WrappedComponent) {
     static displayName = displayName;
 
     static propTypes = {
-      result: PropTypes.object
+      result: PropTypes.object,
     };
 
     get childProps() {
       return {
         highlightedAttribute: this.highlightedAttribute,
-        joinHighlightedFragments: this.joinHighlightedFragments
+        joinHighlightedFragments: this.joinHighlightedFragments,
       };
     }
 
-    joinHighlightedFragments = fragments => {
+    joinHighlightedFragments = (fragments) => {
       return compact(fragments)
-        .map(s => s.trim())
+        .map((s) => s.trim())
         .join("\u2026");
     };
 
-    highlightedAttribute = key => {
+    highlightedAttribute = (key) => {
       const { attributes } = this.props.result;
       const highlightedValue = attributes.highlights[key];
       if (highlightedValue) {
@@ -46,7 +46,7 @@ export default function withSearchResultHelper(WrappedComponent) {
     render() {
       return React.createElement(WrappedComponent, {
         ...this.props,
-        ...this.childProps
+        ...this.childProps,
       });
     }
   }

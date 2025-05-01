@@ -38,9 +38,9 @@ Range.propTypes = {
   pagination: PropTypes.shape({
     currentPage: PropTypes.number.isRequired,
     perPage: PropTypes.number.isRequired,
-    totalCount: PropTypes.number.isRequired
+    totalCount: PropTypes.number.isRequired,
   }).isRequired,
-  unit: PropTypes.string.isRequired
+  unit: PropTypes.string.isRequired,
 };
 
 export default Range;

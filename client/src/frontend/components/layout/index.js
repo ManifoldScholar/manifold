@@ -3,5 +3,5 @@ import Splash from "./Splash";
 
 export default {
   Header,
-  Splash
+  Splash,
 };

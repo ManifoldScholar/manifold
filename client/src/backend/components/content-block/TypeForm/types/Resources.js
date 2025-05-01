@@ -9,7 +9,7 @@ class ProjectContentTypeFormResources extends PureComponent {
   static propTypes = {
     project: PropTypes.object.isRequired,
     getModelValue: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get showAllCollections() {
@@ -35,7 +35,7 @@ class ProjectContentTypeFormResources extends PureComponent {
           label={this.props.t("common.title")}
           name="attributes[title]"
           instructions={this.props.t(
-            "content_blocks.resources.default_title_message"
+            "content_blocks.resources.default_title_message",
           )}
           focusOnMount
           wide
@@ -48,7 +48,7 @@ class ProjectContentTypeFormResources extends PureComponent {
         <Form.Switch
           label={this.props.t("content_blocks.resources.collections_switch")}
           instructions={this.props.t(
-            "content_blocks.resources.collections_switch_info"
+            "content_blocks.resources.collections_switch_info",
           )}
           name="attributes[showAllCollections]"
           wide
@@ -58,10 +58,10 @@ class ProjectContentTypeFormResources extends PureComponent {
           <>
             <Form.Picker
               placeholder={this.props.t(
-                "content_blocks.resources.select_collection_placeholder"
+                "content_blocks.resources.select_collection_placeholder",
               )}
               label={this.props.t("content_blocks.resources.select_collection")}
-              optionToLabel={rc => rc.attributes.title}
+              optionToLabel={(rc) => rc.attributes.title}
               name="relationships[featuredCollections]"
               options={this.collections}
               listStyle="rows"
@@ -74,7 +74,7 @@ class ProjectContentTypeFormResources extends PureComponent {
         <Form.Switch
           label={this.props.t("content_blocks.resources.resources_switch")}
           instructions={this.props.t(
-            "content_blocks.resources.resources_switch_info"
+            "content_blocks.resources.resources_switch_info",
           )}
           name="attributes[showResources]"
           wide
@@ -84,13 +84,13 @@ class ProjectContentTypeFormResources extends PureComponent {
           <>
             <Form.Picker
               placeholder={this.props.t(
-                "content_blocks.resources.select_resource_placeholder"
+                "content_blocks.resources.select_resource_placeholder",
               )}
               label={this.props.t("content_blocks.resources.select_resources")}
               instructions={this.props.t(
-                "content_blocks.resources.select_resources_info"
+                "content_blocks.resources.select_resources_info",
               )}
-              optionToLabel={r => r.attributes.title}
+              optionToLabel={(r) => r.attributes.title}
               name="relationships[featuredResources]"
               options={this.resources}
               listStyle="rows"

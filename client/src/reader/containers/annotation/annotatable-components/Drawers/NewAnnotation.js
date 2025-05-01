@@ -6,14 +6,14 @@ import AnnotationSelectionWrapper from "global/components/Annotation/Annotation/
 export default class NewAnnotation extends PureComponent {
   static propTypes = {
     pendingAnnotation: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
   };
 
-  saveAnnotation = annotation => {
+  saveAnnotation = (annotation) => {
     const { pendingAnnotation } = this.props;
     const attributes = {
       ...pendingAnnotation,
-      ...annotation.attributes
+      ...annotation.attributes,
     };
     const toCreate = { ...pendingAnnotation, attributes };
     return this.props.actions.createAnnotation(toCreate);

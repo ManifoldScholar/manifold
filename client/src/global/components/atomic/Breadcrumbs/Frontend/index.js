@@ -7,7 +7,7 @@ import * as Styled from "./styles";
 
 export default function FrontendBreadcrumbs({
   breadcrumbs,
-  hideOnDesktop = false
+  hideOnDesktop = false,
 }) {
   const { t } = useTranslation();
 
@@ -43,5 +43,5 @@ FrontendBreadcrumbs.displayName = "Global.Atomic.Breadcrumbs.Frontend";
 FrontendBreadcrumbs.propTypes = {
   breadcrumbs: PropTypes.array.isRequired,
   backend: PropTypes.bool,
-  hideOnDesktop: PropTypes.bool
+  hideOnDesktop: PropTypes.bool,
 };

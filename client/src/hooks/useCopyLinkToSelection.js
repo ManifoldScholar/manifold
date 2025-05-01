@@ -25,7 +25,7 @@ export default function useCopyLinkToSelection(text, section, urlTextFragment) {
     const readerUrl = lh.link(
       "readerSection",
       text.attributes.slug,
-      section.id
+      section.id,
     );
     return `${window.location.origin}${readerUrl}`;
   }, [text, section]);
@@ -51,12 +51,10 @@ export default function useCopyLinkToSelection(text, section, urlTextFragment) {
     }
   }, [copied]);
 
-  /* eslint-disable */
   const onClick = () => {
     const href = generateUrl();
     navigator?.clipboard.writeText(href).then(() => setCopied(true));
   };
-  /* eslint-enable */
 
   const icon = copied ? "checkmark16" : "RTELink24";
   const label = copied ? t("actions.copied") : t("reader.menus.popup.copy");

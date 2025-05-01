@@ -1,10 +1,10 @@
-import React, {
+import {
   useState,
   useReducer,
   useMemo,
   useCallback,
   useEffect,
-  useRef
+  useRef,
 } from "react";
 import { bulkActionsReducer } from "./reducer";
 import isEqual from "lodash/isEqual";
@@ -16,38 +16,38 @@ export default function useBulkActions(records, filters) {
 
   const toggleBulkActions = useCallback(
     () => setBulkActionsActive(!bulkActionsActive),
-    [bulkActionsActive, setBulkActionsActive]
+    [bulkActionsActive, setBulkActionsActive],
   );
 
   const initSelectionState = useMemo(
     () => ({
       ids: [],
-      filters: null
+      filters: null,
     }),
-    []
+    [],
   );
 
   const [bulkSelection, dispatchSelection] = useReducer(
     bulkActionsReducer,
-    initSelectionState
+    initSelectionState,
   );
 
   const bulkSelectionEmpty = isEqual(initSelectionState, bulkSelection);
 
-  const visibleIds = useMemo(() => records?.map(a => a.id), [records]);
+  const visibleIds = useMemo(() => records?.map((a) => a.id), [records]);
 
   const handleSelectAll = useCallback(() => {
     const { order, ...selectionFilters } = filters;
     return dispatchSelection({
       type: "setFilters",
-      payload: selectionFilters
+      payload: selectionFilters,
     });
   }, [filters]);
 
-  const handleSelectAllUncheck = removeId => {
+  const handleSelectAllUncheck = (removeId) => {
     dispatchSelection({
       type: "removeAndClear",
-      payload: visibleIds.filter(id => id !== removeId)
+      payload: visibleIds.filter((id) => id !== removeId),
     });
   };
 
@@ -55,17 +55,17 @@ export default function useBulkActions(records, filters) {
     () =>
       dispatchSelection({
         type: "reset",
-        payload: initSelectionState
+        payload: initSelectionState,
       }),
-    [initSelectionState]
+    [initSelectionState],
   );
 
-  const addItem = id => dispatchSelection({ type: "add", payload: id });
-  const removeItem = id =>
+  const addItem = (id) => dispatchSelection({ type: "add", payload: id });
+  const removeItem = (id) =>
     bulkSelection?.filters
       ? handleSelectAllUncheck(id)
       : dispatchSelection({ type: "remove", payload: id });
-  const addPage = ids => dispatchSelection({ type: "addPage", payload: ids });
+  const addPage = (ids) => dispatchSelection({ type: "addPage", payload: ids });
 
   const { search } = useLocation();
   const { page } = queryString.parse(search);
@@ -87,7 +87,7 @@ export default function useBulkActions(records, filters) {
     bulkSelectionEmpty,
     addItem,
     removeItem,
-    addPage
+    addPage,
   };
 }
 
@@ -95,7 +95,7 @@ export const useClearBulkSelectionWithFilters = (
   baseOnReset,
   baseSetFilter,
   resetBulkSelection,
-  bulkSelectionEmpty
+  bulkSelectionEmpty,
 ) => {
   const setParam = useCallback(
     (param, value) => {
@@ -103,7 +103,7 @@ export const useClearBulkSelectionWithFilters = (
 
       if (!bulkSelectionEmpty) resetBulkSelection();
     },
-    [bulkSelectionEmpty, resetBulkSelection, baseSetFilter]
+    [bulkSelectionEmpty, resetBulkSelection, baseSetFilter],
   );
 
   const onReset = useCallback(() => {

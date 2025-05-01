@@ -6,11 +6,11 @@ export default class IconComputedSocial extends PureComponent {
   static displayName = "IconComputed.Social";
 
   static propTypes = {
-    icon: PropTypes.string.isRequired
+    icon: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
-    size: 48
+    size: 48,
   };
 
   iconForValue(value) {
@@ -19,7 +19,7 @@ export default class IconComputedSocial extends PureComponent {
       slack: "socialSlack32",
       linkedIn: "socialLinkedIn32",
       github: "socialGithub32",
-      google: "socialGoogle32"
+      google: "socialGoogle32",
     };
     return map[value];
   }

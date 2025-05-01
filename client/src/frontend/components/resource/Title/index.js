@@ -13,12 +13,12 @@ class ResourceTitle extends Component {
     resource: PropTypes.object,
     showIcon: PropTypes.bool,
     showDate: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     showIcon: true,
-    showDate: true
+    showDate: true,
   };
 
   render() {

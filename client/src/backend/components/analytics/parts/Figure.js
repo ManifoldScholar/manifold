@@ -14,8 +14,8 @@ function Figure({ stat, caption }) {
 }
 
 Figure.propTypes = {
-  stat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  caption: PropTypes.string.isRequired
+  stat: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  caption: PropTypes.string.isRequired,
 };
 
 Figure.displayName = "Analytics.Block.Figure";

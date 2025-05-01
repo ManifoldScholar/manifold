@@ -11,21 +11,21 @@ class Pagination extends Component {
     text: PropTypes.object.isRequired,
     sectionId: PropTypes.string,
     sectionsMap: PropTypes.array,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   getSectionPath(section) {
     return lh.link(
       "readerSection",
       this.props.text.attributes.slug,
-      section.id
+      section.id,
     );
   }
 
   getPreviousLink() {
     let previousLink = null;
     const index = this.props.sectionsMap.findIndex(
-      section => section.id === this.props.sectionId
+      (section) => section.id === this.props.sectionId,
     );
     const previousNode = getPrevVisible(this.props.sectionsMap, index);
     if (previousNode) {
@@ -52,7 +52,7 @@ class Pagination extends Component {
   getNextLink() {
     let nextLink = null;
     const index = this.props.sectionsMap.findIndex(
-      section => section.id === this.props.sectionId
+      (section) => section.id === this.props.sectionId,
     );
     const nextNode = getNextVisible(this.props.sectionsMap, index);
     if (nextNode) {

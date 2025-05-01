@@ -66,5 +66,5 @@ export default {
   textCategory,
   textSection,
   user,
-  version
+  version,
 };

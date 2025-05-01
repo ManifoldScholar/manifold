@@ -6,7 +6,7 @@ import {
   lighten,
   respond,
   fluidScale,
-  revealOnFocus
+  revealOnFocus,
 } from "theme/styles/mixins";
 
 export default `

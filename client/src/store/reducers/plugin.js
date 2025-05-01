@@ -2,7 +2,7 @@ import { handleActions } from "redux-actions";
 
 const initialState = {
   plugins: [],
-  components: {}
+  components: {},
 };
 
 function registerPlugin(state, { payload }) {
@@ -21,7 +21,7 @@ function registerComponent(state, { payload }) {
 export default handleActions(
   {
     REGISTER_PLUGIN: registerPlugin,
-    REGISTER_COMPONENT: registerComponent
+    REGISTER_COMPONENT: registerComponent,
   },
-  initialState
+  initialState,
 );

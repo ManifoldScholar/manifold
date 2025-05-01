@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {
   AnalyticsFactory,
   Grid,
-  RangePicker
+  RangePicker,
 } from "backend/components/analytics";
 import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
 
@@ -17,19 +17,19 @@ class DashboardAnalytics extends Component {
     fetchAnalytics: PropTypes.func.isRequired,
     updateAnalyticsRange: PropTypes.func.isRequired,
     analyticsStartDate: PropTypes.instanceOf(Date),
-    analyticsEndDate: PropTypes.instanceOf(Date)
+    analyticsEndDate: PropTypes.instanceOf(Date),
   };
 
   get reports() {
     if (!this.props.analytics) return [];
     const {
-      attributes: { reports }
+      attributes: { reports },
     } = this.props.analytics;
     return reports;
   }
 
   find(name) {
-    return this.reports.find(element => element.name === name);
+    return this.reports.find((element) => element.name === name);
   }
 
   componentDidMount() {

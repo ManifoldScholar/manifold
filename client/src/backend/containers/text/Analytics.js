@@ -4,7 +4,7 @@ import lh from "helpers/linkHandler";
 import {
   AnalyticsFactory,
   Grid,
-  RangePicker
+  RangePicker,
 } from "backend/components/analytics";
 
 import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
@@ -20,14 +20,14 @@ export class AnalyticsContainer extends PureComponent {
     fetchAnalytics: PropTypes.func.isRequired,
     updateAnalyticsRange: PropTypes.func.isRequired,
     analyticsStartDate: PropTypes.instanceOf(Date),
-    analyticsEndDate: PropTypes.instanceOf(Date)
+    analyticsEndDate: PropTypes.instanceOf(Date),
   };
 
   componentDidMount() {
     const { text } = this.props;
     this.props.fetchAnalytics("text", {
       record_type: "Text",
-      record_id: text.id
+      record_id: text.id,
     });
   }
 
@@ -37,7 +37,7 @@ export class AnalyticsContainer extends PureComponent {
     if (nextId && prevId && nextId !== prevId)
       this.props.fetchAnalytics("text", {
         record_type: "Text",
-        record_id: nextId
+        record_id: nextId,
       });
   }
 
@@ -47,7 +47,7 @@ export class AnalyticsContainer extends PureComponent {
       analytics,
       updateAnalyticsRange,
       analyticsStartDate,
-      analyticsEndDate
+      analyticsEndDate,
     } = this.props;
 
     return (

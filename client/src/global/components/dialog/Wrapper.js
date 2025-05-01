@@ -25,19 +25,19 @@ class DialogWrapper extends PureComponent {
     labelledBy: PropTypes.string,
     describedBy: PropTypes.string,
     onEsc: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     showCloseButton: true,
-    closeOnOverlayClick: true
+    closeOnOverlayClick: true,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       leaving: false,
-      additionaClassNames: ""
+      additionaClassNames: "",
     };
   }
 
@@ -51,7 +51,7 @@ class DialogWrapper extends PureComponent {
     return style;
   }
 
-  setDialogClassName = additionalClassNames => {
+  setDialogClassName = (additionalClassNames) => {
     this.setState({ additionalClassNames });
   };
 
@@ -80,17 +80,17 @@ class DialogWrapper extends PureComponent {
     return this.closeWithNoAction();
   }
 
-  handleOverlayClick = event => {
+  handleOverlayClick = (event) => {
     event.stopPropagation();
     if (this.props.closeOnOverlayClick) this.doClose();
   };
 
-  handleCloseClick = event => {
+  handleCloseClick = (event) => {
     event.stopPropagation();
     this.doClose();
   };
 
-  handleEscape = e => {
+  handleEscape = (e) => {
     e.stopPropagation();
     if (this.props.onEsc) return this.props.onEsc(e);
     return this.doClose();
@@ -102,7 +102,7 @@ class DialogWrapper extends PureComponent {
       return this.props.children;
     return React.cloneElement(this.props.children, {
       triggerClose: this.handleCloseClick,
-      setDialogClassName: this.setDialogClassName
+      setDialogClassName: this.setDialogClassName,
     });
   }
 
@@ -111,12 +111,12 @@ class DialogWrapper extends PureComponent {
       <BodyClass className={"no-scroll"}>
         <FocusTrap
           focusTrapOptions={{
-            escapeDeactivates: this.handleEscape
+            escapeDeactivates: this.handleEscape,
           }}
         >
           <div className="dialog-wrapper">
             {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
-            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+            {}
             <div
               className="dialog-overlay"
               onClick={this.handleOverlayClick}
@@ -130,7 +130,7 @@ class DialogWrapper extends PureComponent {
               className={classnames(
                 "dialog",
                 this.props.className,
-                this.state.additionalClassNames
+                this.state.additionalClassNames,
               )}
               style={this.style}
             >

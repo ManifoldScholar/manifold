@@ -18,7 +18,7 @@ export default class NodeTreeIterator {
     const annotation = {
       id: "selection",
       attributes: pendingAnnotation,
-      type: "annotations"
+      type: "annotations",
     };
     return annotation;
   }
@@ -31,7 +31,7 @@ export default class NodeTreeIterator {
     this.annotationsMap = {};
     this.annotationStartMap = {};
     this.annotationEndMap = {};
-    this.annotations.forEach(a => {
+    this.annotations.forEach((a) => {
       this.annotationsMap[a.id] = a;
       if (this.annotationStartMap.hasOwnProperty(a.attributes.startNode)) {
         this.annotationStartMap[a.attributes.startNode].push(a.id);
@@ -51,7 +51,7 @@ export default class NodeTreeIterator {
     const hash = bodyProps.location.hash;
     if (!hash) return;
     const annotationUuid = new RegExp(
-      /^#(annotation)-([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12})/
+      /^#(annotation)-([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12})/,
     );
     const nodeHexDigest = new RegExp(/^#(node)-([a-f0-9]{40})/);
     const match = hash.match(annotationUuid) || hash.match(nodeHexDigest);
@@ -96,7 +96,7 @@ export default class NodeTreeIterator {
           {React.createElement(
             ComponentClass,
             { ...node, uuids: mathUuids },
-            node.children
+            node.children,
           )}
         </ErrorBoundary>
       );
@@ -104,7 +104,7 @@ export default class NodeTreeIterator {
     return React.createElement(
       ComponentClass,
       node,
-      this.visitChildren(node, blacklist)
+      this.visitChildren(node, blacklist),
     );
   }
 
@@ -129,7 +129,7 @@ export default class NodeTreeIterator {
       "tfoot",
       "thead",
       "tr",
-      "math"
+      "math",
     ];
     if (
       !parent ||
@@ -143,7 +143,7 @@ export default class NodeTreeIterator {
   startAnnotations(nodeUuid) {
     const annotationIds = this.annotationStartMap[nodeUuid];
     if (annotationIds) {
-      annotationIds.forEach(annotationId => {
+      annotationIds.forEach((annotationId) => {
         const annotation = this.annotationsMap[annotationId];
         this.openAnnotations[annotation.id] = annotation;
       });
@@ -153,7 +153,7 @@ export default class NodeTreeIterator {
   endAnnotations(nodeUuid) {
     const annotationIds = this.annotationEndMap[nodeUuid];
     if (annotationIds) {
-      annotationIds.forEach(annotationId => {
+      annotationIds.forEach((annotationId) => {
         const annotation = this.annotationsMap[annotationId];
         delete this.openAnnotations[annotation.id];
       });
@@ -164,7 +164,7 @@ export default class NodeTreeIterator {
     let mathUuids;
     if (node.tag === "math") {
       mathUuids = mathNodeHelpers.getUuids(node.children);
-      mathUuids.map(uuid => this.startAnnotations(uuid));
+      mathUuids.map((uuid) => this.startAnnotations(uuid));
     } else if (this.annotationStartMap.hasOwnProperty(node.nodeUuid)) {
       this.startAnnotations(node.nodeUuid);
     }
@@ -193,7 +193,7 @@ export default class NodeTreeIterator {
       scrollAnnotation,
       scrollNode,
       scrollToView,
-      scrollKey
+      scrollKey,
     };
     let out;
 
@@ -210,7 +210,7 @@ export default class NodeTreeIterator {
     }
 
     if (mathUuids) {
-      mathUuids.map(uuid => this.endAnnotations(uuid));
+      mathUuids.map((uuid) => this.endAnnotations(uuid));
     } else if (this.annotationEndMap.hasOwnProperty(node.nodeUuid)) {
       this.endAnnotations(node.nodeUuid);
     }

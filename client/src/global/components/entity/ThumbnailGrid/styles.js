@@ -12,7 +12,7 @@ const gridStyles = `
       margin-right: -26px;
       margin-left: -26px;
     `,
-    120
+    120,
   )}
 `;
 

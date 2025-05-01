@@ -5,5 +5,5 @@ import Iframe from "./Iframe";
 export default {
   Audio,
   Video,
-  Iframe
+  Iframe,
 };

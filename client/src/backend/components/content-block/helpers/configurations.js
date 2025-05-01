@@ -7,7 +7,7 @@ class Configurations {
       "Content::ResourcesBlock": true,
       "Content::MetadataBlock": false,
       "Content::TableOfContentsBlock": true,
-      "Content::MarkdownBlock": true
+      "Content::MarkdownBlock": true,
     };
   }
 

@@ -11,5 +11,5 @@ export default {
   Importing,
   Pending,
   Queued,
-  Skipped
+  Skipped,
 };

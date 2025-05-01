@@ -34,5 +34,5 @@ export default function AnnotationBody({ body }) {
 AnnotationBody.displayName = "Annotation.Detail.Body";
 
 AnnotationBody.propTypes = {
-  body: PropTypes.string
+  body: PropTypes.string,
 };

@@ -3,5 +3,5 @@ export { default } from "./Breadcrumbs";
 export {
   default as BreadcrumbsProvider,
   BreadcrumbsContext,
-  RegisterBreadcrumbs
+  RegisterBreadcrumbs,
 } from "./Context";

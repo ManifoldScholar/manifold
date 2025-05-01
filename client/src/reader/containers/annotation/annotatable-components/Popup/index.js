@@ -12,7 +12,7 @@ export default function AnnotatablePopup(props) {
 
   const showLinkMenu = activeEvent?.annotationIds && activeEvent?.link;
 
-  const setPopupRef = el => {
+  const setPopupRef = (el) => {
     popupRef.current = props.popupRef?.current || el;
     props.setPopupRef(el);
   };
@@ -21,7 +21,7 @@ export default function AnnotatablePopup(props) {
     popupRef: popupRef.current,
     locked: false,
     selectionState,
-    annotatableRef
+    annotatableRef,
   });
 
   return (
@@ -56,5 +56,5 @@ AnnotatablePopup.propTypes = {
   selectionState: PropTypes.object,
   annotatableRef: PropTypes.object,
   activeEvent: PropTypes.object,
-  setPopupRef: PropTypes.func
+  setPopupRef: PropTypes.func,
 };

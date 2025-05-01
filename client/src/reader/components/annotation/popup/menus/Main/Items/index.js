@@ -9,5 +9,5 @@ export default {
   CurrentReadingGroup,
   Highlight,
   Notate,
-  Share
+  Share,
 };

@@ -60,8 +60,8 @@ function CollectionBlockTemplate({
       icon={icon}
       BodyComponent={() => (
         <ListComponent>
-          {props =>
-            collectedIds.map(id => (
+          {(props) =>
+            collectedIds.map((id) => (
               <li key={id}>
                 <DeferredCollectable
                   id={id}
@@ -69,7 +69,7 @@ function CollectionBlockTemplate({
                   responses={responses}
                   {...props}
                 >
-                  {response => (
+                  {(response) => (
                     <ResponseComponent response={response} {...props} />
                   )}
                 </DeferredCollectable>
@@ -91,7 +91,7 @@ CollectionBlockTemplate.propTypes = {
   responses: PropTypes.array.isRequired,
   ListComponent: PropTypes.func.isRequired,
   ResponseComponent: PropTypes.func.isRequired,
-  nested: PropTypes.bool
+  nested: PropTypes.bool,
 };
 
 export default CollectionBlockTemplate;

@@ -10,11 +10,11 @@ class Info extends Component {
   static propTypes = {
     resource: PropTypes.object.isRequired,
     withBackground: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    withBackground: false
+    withBackground: false,
   };
 
   render() {

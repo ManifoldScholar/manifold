@@ -12,14 +12,14 @@ export default class EntityThumbnailProject extends PureComponent {
     width: PropTypes.string,
     height: PropTypes.string,
     className: PropTypes.string,
-    mode: PropTypes.string
+    mode: PropTypes.string,
   };
 
   static defaultProps = {
     mode: "responsive",
     variant: "small",
     attributes: {},
-    placeholderAttributes: {}
+    placeholderAttributes: {},
   };
 
   get attr() {

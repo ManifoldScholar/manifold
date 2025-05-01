@@ -3,5 +3,5 @@ import Empty from "./Empty";
 
 export default {
   List,
-  Empty
+  Empty,
 };

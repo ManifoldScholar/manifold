@@ -9,7 +9,7 @@ import entityUtils from "utils/entityUtils";
 import EntitiesList, {
   Button,
   Search,
-  EntitlementRow
+  EntitlementRow,
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { keywordFilter } from "hoc/withFilteredLists";
 
@@ -27,7 +27,7 @@ export class EntitlementsList extends PureComponent {
     linkName: PropTypes.string,
     dispatch: PropTypes.func,
     match: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -58,33 +58,27 @@ export class EntitlementsList extends PureComponent {
     dispatch(action);
   };
 
-  onDelete = entitlement => {
+  onDelete = (entitlement) => {
     const { dispatch } = this.props;
 
     const options = entitlementsAPI.destroy(entitlement.id);
 
     const action = request(options, requests.beProjectEntitlementDestroy, {
-      refreshes: requests.beProjectEntitlements
+      refreshes: requests.beProjectEntitlements,
     });
 
     dispatch(action);
   };
 
-  updateHandlerCreator = page => {
-    return eventIgnored => {
+  updateHandlerCreator = (page) => {
+    return (eventIgnored) => {
       this.fetchEntitlements(page);
     };
   };
 
   render() {
-    const {
-      match,
-      entity,
-      entitlements,
-      entitlementsMeta,
-      preList,
-      t
-    } = this.props;
+    const { match, entity, entitlements, entitlementsMeta, preList, t } =
+      this.props;
     const active = match.params.id;
     const listUrl = lh.nameFromType("backend", "Entitlement", entity);
     const newUrl = lh.nameFromType("backend", "EntitlementsNew", entity);
@@ -100,7 +94,7 @@ export class EntitlementsList extends PureComponent {
         {entitlements && (
           <EntitiesList
             title={t("entitlements.header", {
-              entity: entity.type.slice(0, -1)
+              entity: entity.type.slice(0, -1),
             })}
             instructions={instructions}
             preList={preList}
@@ -110,13 +104,13 @@ export class EntitlementsList extends PureComponent {
             entityComponentProps={{
               active,
               linkName: listUrl,
-              onDelete: this.onDelete
+              onDelete: this.onDelete,
             }}
             showCount
             paginationStyle="normal"
             pagination={entitlementsMeta.pagination}
             unit={t("glossary.entitlement", {
-              count: entitlementsMeta.pagination.totalCount
+              count: entitlementsMeta.pagination.totalCount,
             })}
             callbacks={{ onPageClick: this.updateHandlerCreator }}
             buttons={[
@@ -126,7 +120,7 @@ export class EntitlementsList extends PureComponent {
                 type="add"
                 authorizedTo="update"
                 authorizedFor={entity}
-              />
+              />,
             ]}
             search={
               <Search {...this.props.entitiesListSearchProps("entitlements")} />
@@ -140,7 +134,7 @@ export class EntitlementsList extends PureComponent {
   static mapStateToProps(state) {
     return {
       entitlements: select(requests.beProjectEntitlements, state.entityStore),
-      entitlementsMeta: meta(requests.beProjectEntitlements, state.entityStore)
+      entitlementsMeta: meta(requests.beProjectEntitlements, state.entityStore),
     };
   }
 }
@@ -148,7 +142,7 @@ export class EntitlementsList extends PureComponent {
 export default withTranslation()(
   connectAndFetch(
     withFilteredLists(EntitlementsList, {
-      entitlements: keywordFilter()
-    })
-  )
+      entitlements: keywordFilter(),
+    }),
+  ),
 );

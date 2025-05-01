@@ -4,8 +4,8 @@ export default {
       endpoint: "/api/v1/project_collections",
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -14,8 +14,8 @@ export default {
       endpoint: `/api/v1/project_collections/${id}`,
       method: "GET",
       options: {
-        params: { page }
-      }
+        params: { page },
+      },
     };
   },
 
@@ -26,9 +26,9 @@ export default {
       options: {
         body: JSON.stringify({
           type: "project_collections",
-          data: projectCollection
-        })
-      }
+          data: projectCollection,
+        }),
+      },
     };
   },
 
@@ -39,10 +39,10 @@ export default {
       options: {
         body: JSON.stringify({
           type: "project_collections",
-          data: projectCollection
+          data: projectCollection,
         }),
-        params: { page }
-      }
+        params: { page },
+      },
     };
   },
 
@@ -50,7 +50,7 @@ export default {
     return {
       endpoint: `/api/v1/project_collections/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -61,8 +61,8 @@ export default {
       endpoint: `/api/v1/project_collections/${id}/relationships/collection_projects`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -73,9 +73,9 @@ export default {
       options: {
         body: JSON.stringify({
           type: "project_collections",
-          data: collectionProject
-        })
-      }
+          data: collectionProject,
+        }),
+      },
     };
-  }
+  },
 };

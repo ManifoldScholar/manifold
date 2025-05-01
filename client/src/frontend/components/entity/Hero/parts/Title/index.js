@@ -30,5 +30,5 @@ HeroTitle.displayName = "Frontend.Entity.Hero.Parts.Title";
 
 HeroTitle.propTypes = {
   entity: PropTypes.object.isRequired,
-  standalone: PropTypes.bool
+  standalone: PropTypes.bool,
 };

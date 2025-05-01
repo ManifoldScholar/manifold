@@ -3,7 +3,7 @@ import {
   fluidScale,
   buttonUnstyled,
   listUnstyled,
-  utilityPrimary
+  utilityPrimary,
 } from "theme/styles/mixins";
 
 export default `

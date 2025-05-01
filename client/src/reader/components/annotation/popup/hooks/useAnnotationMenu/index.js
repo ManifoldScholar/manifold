@@ -2,14 +2,14 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { useMenuState } from "reakit/Menu";
 
 const MENU_OPTIONS = {
-  loop: true
+  loop: true,
 };
 
 export default function useAnnotationMenu({
   menuArray,
   defaultMenu,
   visible,
-  clearSelection
+  clearSelection,
 }) {
   const lastFocus = useRef();
   const lastActiveMenu = useRef();
@@ -20,7 +20,7 @@ export default function useAnnotationMenu({
    */
   /* eslint-disable react-hooks/rules-of-hooks */
   const menus = Object.fromEntries(
-    menuArray.map(menu => [menu, useMenuState(MENU_OPTIONS)])
+    menuArray.map((menu) => [menu, useMenuState(MENU_OPTIONS)]),
   );
   /* eslint-enable react-hooks/rules-of-hooks */
 
@@ -51,7 +51,7 @@ export default function useAnnotationMenu({
     (event, sourceMenu) => {
       const {
         key,
-        target: { dataset }
+        target: { dataset },
       } = event;
 
       if (key === "Escape") {
@@ -75,16 +75,16 @@ export default function useAnnotationMenu({
         }
       }
     },
-    [defaultMenu, clearSelection]
+    [defaultMenu, clearSelection],
   );
 
-  const setActiveMenu = useCallback(name => setMenu(name), []);
+  const setActiveMenu = useCallback((name) => setMenu(name), []);
 
   return {
     menus,
     activeMenu,
     lastActiveMenu,
     setActiveMenu,
-    handleKeyDown
+    handleKeyDown,
   };
 }

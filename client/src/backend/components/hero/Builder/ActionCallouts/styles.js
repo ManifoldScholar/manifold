@@ -14,6 +14,6 @@ export const CalloutsContainer = styled.div`
         flex-basis: calc(25%);
       }
     `,
-    85
+    85,
   )}
 `;

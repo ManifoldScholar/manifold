@@ -21,7 +21,7 @@ import { matchRoutes } from "react-router-config";
 import {
   uiColorActions,
   uiTypographyActions,
-  entityStoreActions
+  entityStoreActions,
 } from "actions";
 import { setPersistentUI } from "actions/ui/persistentUi";
 import get from "lodash/get";
@@ -37,7 +37,7 @@ const {
   decrementFontSize,
   incrementMargins,
   decrementMargins,
-  resetTypography
+  resetTypography,
 } = uiTypographyActions;
 const { setColorScheme } = uiColorActions;
 const { request, flush } = entityStoreActions;
@@ -63,13 +63,13 @@ export class ReaderContainer extends Component {
       section: grab(
         "textSections",
         ownProps.match.params.sectionId,
-        state.entityStore
+        state.entityStore,
       ),
       text: grab("texts", ownProps.match.params.textId, state.entityStore),
       resources: select(requests.rSectionResources, state.entityStore),
       resourceCollections: select(
         requests.rSectionResourceCollections,
-        state.entityStore
+        state.entityStore,
       ),
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
@@ -77,7 +77,7 @@ export class ReaderContainer extends Component {
       notifications: state.notifications,
       renderDevTools: state.developer.renderDevTools,
       settings: select(requests.settings, state.entityStore),
-      appearance
+      appearance,
     };
   };
 
@@ -95,13 +95,13 @@ export class ReaderContainer extends Component {
     loading: PropTypes.bool,
     notifications: PropTypes.object,
     route: PropTypes.object.isRequired,
-    hideTocDrawer: PropTypes.func
+    hideTocDrawer: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      showMeta: false
+      showMeta: false,
     };
     this.readerActions = this.makeReaderActions(props.dispatch);
     this.commonActions = commonActions(props.dispatch);
@@ -116,7 +116,7 @@ export class ReaderContainer extends Component {
     if (
       locationHelper.triggersScrollToTop(
         this.props.location,
-        prevProps.location
+        prevProps.location,
       )
     ) {
       window.scrollTo(0, 0);
@@ -145,7 +145,7 @@ export class ReaderContainer extends Component {
     return `reader ${colorScheme}`;
   }
 
-  setPersistentUI = props => {
+  setPersistentUI = (props) => {
     const user = props.authentication.currentUser;
     if (!user) return null;
     this.readerActions.setPersistentUI(user.attributes.persistentUi.reader);
@@ -154,22 +154,22 @@ export class ReaderContainer extends Component {
   shouldRedirect(props) {
     const matches = matchRoutes(
       props.route.routes,
-      this.props.location.pathname
+      this.props.location.pathname,
     );
     return matches.length === 0;
   }
 
-  makeReaderActions = dispatch => {
+  makeReaderActions = (dispatch) => {
     const b = bindActionCreators;
     return {
-      selectFont: b(el => selectFont(el), dispatch),
+      selectFont: b((el) => selectFont(el), dispatch),
       incrementFontSize: b(incrementFontSize, dispatch),
       decrementFontSize: b(decrementFontSize, dispatch),
       incrementMargins: b(incrementMargins, dispatch),
       decrementMargins: b(decrementMargins, dispatch),
       resetTypography: b(resetTypography, dispatch),
-      setColorScheme: b(el => setColorScheme(el), dispatch),
-      setPersistentUI: b(userUi => setPersistentUI(userUi), dispatch)
+      setColorScheme: b((el) => setColorScheme(el), dispatch),
+      setPersistentUI: b((userUi) => setPersistentUI(userUi), dispatch),
     };
   };
 
@@ -220,15 +220,13 @@ export class ReaderContainer extends Component {
     const path = lh.link(
       "readerSection",
       props.text.attributes.slug,
-      startTextSectionId
+      startTextSectionId,
     );
     return <Redirect to={path} />;
   }
 
   renderRoutes() {
-    /* eslint-disable no-unused-vars */
     const { route, ...otherProps } = this.props;
-    /* eslint-enable no-unused-vars */
     const childProps = { ...otherProps, ...this.readerActions };
 
     return childRoutes(this.props.route, { childProps, switch: false });

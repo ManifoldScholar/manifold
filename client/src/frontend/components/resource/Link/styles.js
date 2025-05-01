@@ -18,13 +18,13 @@ export const Link = styled.a`
     padding: 0.813em 1.438em;
     font-size: 14px;
     `,
-    50
+    50,
   )}
 
   ${respond(
     `
     display: flex;
     max-width: 100%;`,
-    65
+    65,
   )}
 `;

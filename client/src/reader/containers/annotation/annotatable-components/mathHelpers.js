@@ -42,22 +42,22 @@ export const mathMLElements = [
   "bvar",
   "share",
   "cerror",
-  "cbytes"
+  "cbytes",
 ];
 
-export const isMathMLNode = node => {
+export const isMathMLNode = (node) => {
   return node?.nodeName ? mathMLElements.includes(node.nodeName) : false;
 };
 
-export const isMathMLWrapper = node => {
+export const isMathMLWrapper = (node) => {
   return node ? node.dataset?.mathml : false;
 };
 
-export const isMathTagNode = node => {
+export const isMathTagNode = (node) => {
   return node ? node.nodeName === "math" : false;
 };
 
-export const findMathTagNode = node => {
+export const findMathTagNode = (node) => {
   if (isMathMLWrapper(node)) return node.firstChild;
   if (isMathTagNode(node)) return node;
 
@@ -67,29 +67,29 @@ export const findMathTagNode = node => {
   return findMathTagNode(parent);
 };
 
-const hasUuid = node => {
+const hasUuid = (node) => {
   return has(node.dataset, "nodeUuid");
 };
 
-const findFirstUuid = node => {
+const findFirstUuid = (node) => {
   if (hasUuid(node)) {
     return node;
   }
   return findFirstUuid(node.childNodes[0]);
 };
 
-const findLastUuid = node => {
+const findLastUuid = (node) => {
   if (hasUuid(node)) {
     return node;
   }
   return findLastUuid([...node.childNodes].pop());
 };
 
-export const findFirstMathUuidNode = node => {
+export const findFirstMathUuidNode = (node) => {
   const mathTagNode = findMathTagNode(node);
   return findFirstUuid(mathTagNode.childNodes[0]);
 };
-export const findLastMathUuidNode = node => {
+export const findLastMathUuidNode = (node) => {
   const mathTagNode = findMathTagNode(node);
   return findLastUuid([...mathTagNode.childNodes].pop());
 };

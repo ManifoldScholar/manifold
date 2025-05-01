@@ -15,5 +15,5 @@ export default {
   Copyright,
   PoweredBy,
   PressLogo,
-  Socials
+  Socials,
 };

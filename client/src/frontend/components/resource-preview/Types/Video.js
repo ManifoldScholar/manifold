@@ -7,7 +7,7 @@ export default class ResourcePreviewVideo extends Component {
   static displayName = "Resource.Preview.Video";
 
   static propTypes = {
-    resource: PropTypes.object.isRequired
+    resource: PropTypes.object.isRequired,
   };
 
   render() {

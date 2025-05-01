@@ -1,5 +1,4 @@
 import { Editor as SlateEditor, Transforms, Node, Point } from "slate";
-import { ReactEditor } from "slate-react";
 import { getListNode, getListItemNode } from "../getters";
 import { setSelectionAtPoint } from "../general";
 import { unwrapNode } from "./shared";
@@ -29,7 +28,7 @@ const nestListItem = ({ editor, srcPath, destPath, node, type }) => {
   const children = Array.isArray(node) ? node : [node];
   Transforms.removeNodes(editor, { at: srcPath });
   Transforms.insertNodes(editor, [{ type, children }], {
-    at: destPath
+    at: destPath,
   });
 };
 
@@ -46,15 +45,15 @@ const handleInlineItemChildren = ({ editor, at, nodes }) => {
     return Transforms.insertNodes(
       editor,
       [{ type: "list-sibling", slateOnly: true, children: nodes }],
-      { at }
+      { at },
     );
   return Transforms.unwrapNodes(editor, {
     at,
-    match: n => n.type === "list-sibling"
+    match: (n) => n.type === "list-sibling",
   });
 };
 
-const findListChild = iterator => {
+const findListChild = (iterator) => {
   const { value } = iterator.next();
   if (!value) return [];
   const [node, path] = value;
@@ -62,7 +61,7 @@ const findListChild = iterator => {
   return findListChild(iterator);
 };
 
-export const increaseIndent = editor => {
+export const increaseIndent = (editor) => {
   const [node, path] = getListItemNode(editor, editor.selection);
   const [listNode, listNodePath] = getListNode(editor, path);
 
@@ -82,11 +81,11 @@ export const increaseIndent = editor => {
         srcPath: listNodePath,
         destPath: listNodePath,
         node: listNode,
-        type: listType
+        type: listType,
       });
       const { path: selectionPath, offset } = getIndentSelectionLocation(
         editor,
-        [...listNodePath, 0, 0]
+        [...listNodePath, 0, 0],
       );
       setSelectionAtPoint(editor, selectionPath, offset);
     });
@@ -102,7 +101,7 @@ export const increaseIndent = editor => {
   if (subListNode) {
     return Transforms.moveNodes(editor, {
       at: path,
-      to: [...subListPath, subListNode.children.length]
+      to: [...subListPath, subListNode.children.length],
     });
   }
 
@@ -114,11 +113,11 @@ export const increaseIndent = editor => {
         srcPath: path,
         destPath,
         node,
-        type: listType
+        type: listType,
       });
       const { path: selectionPath, offset } = getIndentSelectionLocation(
         editor,
-        [...destPath, 0]
+        [...destPath, 0],
       );
       setSelectionAtPoint(editor, selectionPath, offset);
       return;
@@ -127,7 +126,7 @@ export const increaseIndent = editor => {
     handleInlineItemChildren({
       editor,
       at: [...prevItemPath, 0],
-      nodes: prevItem.children
+      nodes: prevItem.children,
     });
     const destPath = [...prevItemPath, 1];
     nestListItem({
@@ -135,11 +134,11 @@ export const increaseIndent = editor => {
       srcPath: path,
       destPath,
       node,
-      type: listType
+      type: listType,
     });
     const { path: selectionPath, offset } = getIndentSelectionLocation(editor, [
       ...destPath,
-      0
+      0,
     ]);
     setSelectionAtPoint(editor, selectionPath, offset);
   });

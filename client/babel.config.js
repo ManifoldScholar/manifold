@@ -2,16 +2,16 @@ const presets = [
   [
     "@babel/preset-react",
     {
-      runtime: "automatic"
-    }
+      runtime: "automatic",
+    },
   ],
   [
     "@babel/preset-env",
     {
       useBuiltIns: "entry",
-      corejs: "3.42"
-    }
-  ]
+      corejs: "3.42",
+    },
+  ],
 ];
 const plugins = [
   "@emotion",
@@ -22,9 +22,9 @@ const plugins = [
   [
     "module-resolver",
     {
-      root: ["./src"]
-    }
-  ]
+      root: ["./src"],
+    },
+  ],
 ];
 
 // We'd prefer to export a function, per babel 7 docs, but as far as we can tell,
@@ -32,5 +32,5 @@ const plugins = [
 // export a hash.
 module.exports = {
   presets,
-  plugins
+  plugins,
 };

@@ -9,32 +9,32 @@ function getContent(type, t) {
     case "projects":
       return {
         title: t("glossary.project_title_case_other"),
-        icon: "projects64"
+        icon: "projects64",
       };
     case "texts":
       return {
         title: t("glossary.text_title_case_other"),
-        icon: "textsStacked64"
+        icon: "textsStacked64",
       };
     case "textSections":
       return {
         title: t("glossary.text_section_title_case_other"),
-        icon: "toc64"
+        icon: "toc64",
       };
     case "resourceCollections":
       return {
         title: t("glossary.resource_collection_title_case_other"),
-        icon: "resourceCollection64"
+        icon: "resourceCollection64",
       };
     case "resources":
       return {
         title: t("glossary.resource_title_case_other"),
-        icon: "resources64"
+        icon: "resources64",
       };
     default:
       return {
         title: "",
-        icon: ""
+        icon: "",
       };
   }
 }
@@ -59,7 +59,7 @@ function Block({ type }) {
 Block.displayName = "CollectingAnimation.Block";
 
 Block.propTypes = {
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
 };
 
 export default Block;

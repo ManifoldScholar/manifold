@@ -9,7 +9,7 @@ class Visitors extends Component {
   static displayName = "Analytics.Composed.Visitors";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -35,7 +35,7 @@ class Visitors extends Component {
     const { rangeInWords } = this.props;
     const uniqueVisitorCount = this.total
       ? this.props.t("analytics.unique_visitor_with_count", {
-          count: this.total
+          count: this.total,
         })
       : null;
     return this.total !== null ? (
@@ -43,7 +43,7 @@ class Visitors extends Component {
         {rangeInWords
           ? this.props.t("analytics.visitors_in_date_range", {
               uniqueVisitorCount,
-              dateRange: rangeInWords
+              dateRange: rangeInWords,
             })
           : uniqueVisitorCount}
       </p>

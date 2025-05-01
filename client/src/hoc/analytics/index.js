@@ -12,15 +12,15 @@ function Analytics({ location, settings, children, dispatch }) {
   const { track: manifoldTrack } = useManifoldAnalytics(
     location,
     settings,
-    dispatch
+    dispatch,
   );
 
   const onTrack = useCallback(
-    trackedEvent => {
+    (trackedEvent) => {
       googleTrack(trackedEvent);
       manifoldTrack(trackedEvent);
     },
-    [googleTrack, manifoldTrack]
+    [googleTrack, manifoldTrack],
   );
 
   // Trigger a global leave event before unloading the client application.
@@ -45,7 +45,7 @@ Analytics.propTypes = {
   location: PropTypes.object.isRequired,
   settings: PropTypes.object,
   authToken: PropTypes.string,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
 };
 
 export default withRouter(withSettings(Analytics));

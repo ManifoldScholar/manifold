@@ -9,7 +9,7 @@ export default function DatePickerHeader({
   date,
   increaseMonth,
   decreaseMonth,
-  uid
+  uid,
 }) {
   const { t } = useTranslation();
 
@@ -23,7 +23,7 @@ export default function DatePickerHeader({
       </Styled.Prev>
       <Styled.Month id={`range-picker-dialog-label-${uid}`}>
         {format(date, "MMMM yyyy", {
-          locale: t("date_fns", { returnObjects: true })
+          locale: t("date_fns", { returnObjects: true }),
         })}
       </Styled.Month>
     </Styled.Header>
@@ -36,5 +36,5 @@ DatePickerHeader.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   decreaseMonth: PropTypes.func.isRequired,
   increaseMonth: PropTypes.func.isRequired,
-  uid: PropTypes.string.isRequired
+  uid: PropTypes.string.isRequired,
 };

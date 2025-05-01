@@ -23,7 +23,7 @@ const PlaceholderWrapper = ({ bgColor, style = {}, children }) => {
 
 PlaceholderWrapper.propTypes = {
   bgColor: PropTypes.oneOf(["white", "neutral05"]),
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 PlaceholderWrapper.displayName = "Global.Entity.CollectionPlaceholder.Wrapper";

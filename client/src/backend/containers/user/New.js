@@ -12,7 +12,7 @@ export default function NewUserWrapper() {
     <div>
       <HeadContent
         title={`${t(`titles.users`)} | ${t("common.new")} | ${t(
-          "common.admin"
+          "common.admin",
         )}`}
         appendDefaultTitle
       />
@@ -26,8 +26,8 @@ export default function NewUserWrapper() {
             route: "backendRecordsUserNew",
             entity: "user",
             ability: "update",
-            args: ["new"]
-          }
+            args: ["new"],
+          },
         ]}
       />
       <Layout.BackendPanel
@@ -39,8 +39,8 @@ export default function NewUserWrapper() {
                 route: "backendRecordsUserNew",
                 entity: "user",
                 ability: "update",
-                args: ["new"]
-              }
+                args: ["new"],
+              },
             ]}
             panel
             ariaLabel={t("users.settings")}

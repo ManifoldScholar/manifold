@@ -6,11 +6,11 @@ import memoize from "lodash/memoize";
 import config from "config";
 import { Link } from "react-router-dom";
 
-const urlFactory = memoize(url => new Url(url));
+const urlFactory = memoize((url) => new Url(url));
 
 class UserLink extends PureComponent {
   static propTypes = {
-    url: PropTypes.string.isRequired
+    url: PropTypes.string.isRequired,
   };
 
   get isReactRouterLink() {
@@ -23,17 +23,17 @@ class UserLink extends PureComponent {
 
   get linkProps() {
     const baseProps = {
-      className: this.props.className
+      className: this.props.className,
     };
     if (this.isReactRouterLink) {
       return Object.assign(baseProps, {
-        to: this.renderUrl
+        to: this.renderUrl,
       });
     }
     return Object.assign(baseProps, {
       href: this.renderUrl,
       target: "_blank",
-      rel: "noopener noreferrer"
+      rel: "noopener noreferrer",
     });
   }
 

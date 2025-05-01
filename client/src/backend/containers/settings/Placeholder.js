@@ -4,7 +4,7 @@ import Form from "global/components/form";
 
 export default class SettingsPlaceholder extends PureComponent {
   static propTypes = {
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
   };
 
   render() {

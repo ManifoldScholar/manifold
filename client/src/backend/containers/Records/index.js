@@ -14,7 +14,7 @@ class RecordsContainer extends PureComponent {
   static propTypes = {
     route: PropTypes.object,
     location: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -27,13 +27,13 @@ class RecordsContainer extends PureComponent {
         ability="update"
         entity={["user", "maker", "page", "feature", "exportTarget"]}
         failureFatalError={{
-          body: this.props.t("records.unauthorized")
+          body: this.props.t("records.unauthorized"),
         }}
       >
         {subpage && (
           <HeadContent
             title={`${t(
-              `titles.${subpage === "reading-groups" ? "groups" : subpage}`
+              `titles.${subpage === "reading-groups" ? "groups" : subpage}`,
             )} | ${t("common.admin")}`}
             appendDefaultTitle
           />

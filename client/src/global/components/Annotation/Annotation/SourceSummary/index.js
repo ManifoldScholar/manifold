@@ -12,12 +12,12 @@ class SourceSummary extends React.PureComponent {
     includeCreator: PropTypes.bool,
     viewable: PropTypes.bool,
     viewInText: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     includeDate: false,
-    includeCreator: false
+    includeCreator: false,
   };
 
   get creatorName() {
@@ -26,16 +26,14 @@ class SourceSummary extends React.PureComponent {
   }
 
   get source() {
-    const {
-      textTitleFormatted,
-      textSectionTitle
-    } = this.props.annotation.attributes;
+    const { textTitleFormatted, textSectionTitle } =
+      this.props.annotation.attributes;
 
     return (
       <Trans
         i18nKey="messages.annotation_summary.source"
         components={{
-          text: <TextTitle title={textTitleFormatted} />
+          text: <TextTitle title={textTitleFormatted} />,
         }}
         values={{ section: textSectionTitle }}
       />
@@ -58,8 +56,8 @@ class SourceSummary extends React.PureComponent {
     const {
       t,
       annotation: {
-        attributes: { currentUserIsCreator, creatorName }
-      }
+        attributes: { currentUserIsCreator, creatorName },
+      },
     } = this.props;
     if (currentUserIsCreator) return t("common.you_title_case");
     return creatorName;
@@ -68,8 +66,8 @@ class SourceSummary extends React.PureComponent {
   get action() {
     const {
       annotation: {
-        attributes: { format }
-      }
+        attributes: { format },
+      },
     } = this.props;
     return format === "highlight"
       ? "messages.annotation_summary.highlight"
@@ -79,7 +77,7 @@ class SourceSummary extends React.PureComponent {
   render() {
     const { onClick, onHover, annotation } = this.props;
 
-    const { textTitle, textSectionTitle } = annotation?.attributes;
+    const { textTitle, textSectionTitle } = annotation?.attributes ?? {};
     if (!textTitle) return null;
 
     /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -98,7 +96,9 @@ class SourceSummary extends React.PureComponent {
                 i18nKey={this.action}
                 components={{
                   text: <TextTitle title={textTitle} />,
-                  date: <FormattedDate date={annotation.attributes.createdAt} />
+                  date: (
+                    <FormattedDate date={annotation.attributes.createdAt} />
+                  ),
                 }}
                 values={{ creator: this.creator, section: textSectionTitle }}
               />

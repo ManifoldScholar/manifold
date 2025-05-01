@@ -5,5 +5,5 @@ import Properties from "./Properties";
 export default {
   Author,
   Ingest,
-  Properties
+  Properties,
 };

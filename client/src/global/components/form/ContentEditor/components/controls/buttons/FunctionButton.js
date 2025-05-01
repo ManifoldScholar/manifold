@@ -8,7 +8,7 @@ import * as Styled from "./styles";
 
 const FunctionButton = (
   { label, icon, onClick, isFirst, tooltip, ...rest },
-  ref
+  ref,
 ) => {
   const { t } = useTranslation();
 

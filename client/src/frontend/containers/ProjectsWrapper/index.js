@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { renderRoutes } from "react-router-config";
 import { useRedirectToFirstMatch } from "hooks";
 
@@ -9,9 +7,9 @@ export default function ProjectsWrapper({ route }) {
     candidates: [
       {
         label: "All Projects",
-        route: "frontendProjectsAll"
-      }
-    ]
+        route: "frontendProjectsAll",
+      },
+    ],
   });
 
   return renderRoutes(route.routes);

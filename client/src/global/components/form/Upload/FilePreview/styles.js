@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   utilityPrimary,
   formLabelPrimary,
-  buttonUnstyled
+  buttonUnstyled,
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 

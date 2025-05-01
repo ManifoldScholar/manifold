@@ -18,12 +18,12 @@ export class CommentThread extends PureComponent {
     const newState = {
       comments: select(
         `comments-for-${ownProps.subject.id}`,
-        state.entityStore
+        state.entityStore,
       ),
       commentsMeta: meta(
         `comments-for-${ownProps.subject.id}`,
-        state.entityStore
-      )
+        state.entityStore,
+      ),
     };
     return { ...ownProps, ...newState };
   };
@@ -35,11 +35,11 @@ export class CommentThread extends PureComponent {
     comments: PropTypes.array,
     commentsMeta: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    parentId: null
+    parentId: null,
   };
 
   componentDidMount() {
@@ -65,8 +65,8 @@ export class CommentThread extends PureComponent {
     const call = commentsAPI.update(comment.id, { deleted: true });
     this.props.dispatch(
       request(call, requests.rCommentUpdate, {
-        refreshes: `comments-for-${this.props.subject.id}`
-      })
+        refreshes: `comments-for-${this.props.subject.id}`,
+      }),
     );
   };
 
@@ -74,12 +74,12 @@ export class CommentThread extends PureComponent {
     const call = commentsAPI.update(comment.id, { deleted: false });
     this.props.dispatch(
       request(call, requests.rCommentUpdate, {
-        refreshes: `comments-for-${this.props.subject.id}`
-      })
+        refreshes: `comments-for-${this.props.subject.id}`,
+      }),
     );
   };
 
-  handleNextClick = pagination => {
+  handleNextClick = (pagination) => {
     const nextPage =
       pagination.perPage === 1 ? pagination.currentPage : pagination.nextPage;
     this.fetchComments({ number: nextPage, size: perPage });
@@ -87,7 +87,7 @@ export class CommentThread extends PureComponent {
 
   childrenOf(parentId) {
     const children = this.props.comments.filter(
-      c => c.attributes.parentId === parentId
+      (c) => c.attributes.parentId === parentId,
     );
     return children;
   }
@@ -127,13 +127,13 @@ export class CommentThread extends PureComponent {
     if (children.length <= 0) return null;
     const showLogin = bindActionCreators(
       () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
-      this.props.dispatch
+      this.props.dispatch,
     );
 
     return (
       <div className="annotation-comment-thread">
         <ul className="comment-list">
-          {children.map(comment => {
+          {children.map((comment) => {
             return (
               <Detail
                 subject={this.props.subject}
@@ -158,5 +158,5 @@ export class CommentThread extends PureComponent {
 }
 
 export default withTranslation()(
-  connect(CommentThread.mapStateToProps)(CommentThread)
+  connect(CommentThread.mapStateToProps)(CommentThread),
 );

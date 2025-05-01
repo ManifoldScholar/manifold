@@ -14,7 +14,7 @@ function GroupHeading({ readingGroup, location }) {
   const {
     name: groupName,
     abilities,
-    currentUserRole
+    currentUserRole,
   } = readingGroup.attributes;
   const canUpdateGroup = abilities.update;
   const isMember = currentUserRole !== "none";
@@ -67,7 +67,7 @@ GroupHeading.displayName = "ReadingGroup.GroupHeading";
 
 GroupHeading.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 export default GroupHeading;

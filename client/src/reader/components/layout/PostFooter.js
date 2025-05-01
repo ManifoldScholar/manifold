@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import withPluginReplacement from "hoc/withPluginReplacement";
 
 class LayoutPostFooter extends PureComponent {
@@ -11,5 +11,5 @@ class LayoutPostFooter extends PureComponent {
 
 export default withPluginReplacement(
   LayoutPostFooter,
-  "Reader.Components.Layout.PostFooter"
+  "Reader.Components.Layout.PostFooter",
 );

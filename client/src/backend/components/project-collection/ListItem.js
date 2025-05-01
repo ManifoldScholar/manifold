@@ -17,7 +17,7 @@ class ProjectCollectionListItem extends PureComponent {
     isDragging: PropTypes.bool,
     t: PropTypes.func,
     index: PropTypes.number,
-    itemCount: PropTypes.number
+    itemCount: PropTypes.number,
   };
 
   constructor(props) {
@@ -53,11 +53,11 @@ class ProjectCollectionListItem extends PureComponent {
       : t("common.visible");
     return t("project_collections.change_visibility", {
       entity: entity.attributes.title,
-      visibility
+      visibility,
     });
   }
 
-  toggleVisibility = event => {
+  toggleVisibility = (event) => {
     event.preventDefault();
     event.stopPropagation();
     const projectCollection = this.props.entity;
@@ -66,13 +66,13 @@ class ProjectCollectionListItem extends PureComponent {
     return this.props.visibilityToggleHandler(projectCollection, visibility);
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     event.preventDefault();
     event.stopPropagation();
     return this.props.clickHandler(this.props.entity);
   };
 
-  onKeyboardMove = direction => {
+  onKeyboardMove = (direction) => {
     const { entity, index, onReorder } = this.props;
     const newIndex = direction === "down" ? index + 1 : index - 1;
 
@@ -80,7 +80,7 @@ class ProjectCollectionListItem extends PureComponent {
       setTimeout(() => {
         // refs are unreliably here due to rerendering caused by ancestor components
         const disclosureToggleEl = document.querySelector(
-          `[data-disclosure-toggle-for="${entity.id}"]`
+          `[data-disclosure-toggle-for="${entity.id}"]`,
         );
         if (disclosureToggleEl) {
           disclosureToggleEl.focus();
@@ -93,7 +93,7 @@ class ProjectCollectionListItem extends PureComponent {
       title: entity.attributes.title,
       position: newIndex + 1,
       announce: true,
-      callback
+      callback,
     };
     onReorder(result);
   };
@@ -107,7 +107,7 @@ class ProjectCollectionListItem extends PureComponent {
       innerRef,
       dragHandleProps,
       draggableProps,
-      isDragging
+      isDragging,
     } = this.props;
     const t = this.props.t;
 
@@ -116,14 +116,13 @@ class ProjectCollectionListItem extends PureComponent {
     const selected = active === entity.id;
     const itemClass = classNames({
       "project-collection-list-item": true,
-      "project-collection-list-item--selected": selected
+      "project-collection-list-item--selected": selected,
     });
     const innerClass = classNames({
       "project-collection-list-item__inner": true,
-      "project-collection-list-item__inner--is-dragging": isDragging
+      "project-collection-list-item__inner--is-dragging": isDragging,
     });
 
-    /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
     return (
       <li ref={innerRef} className={itemClass} {...draggableProps}>
         <div className={innerClass}>
@@ -139,7 +138,7 @@ class ProjectCollectionListItem extends PureComponent {
             <span
               className={classNames(
                 "project-collection-list-item__icon-group-item",
-                "project-collection-list-item__count"
+                "project-collection-list-item__count",
               )}
             >
               {entity.attributes.projectsCount}
@@ -147,7 +146,7 @@ class ProjectCollectionListItem extends PureComponent {
             <button
               className={classNames(
                 "project-collection-list-item__icon-group-item",
-                "project-collection-list-item__button"
+                "project-collection-list-item__button",
               )}
               onClick={this.toggleVisibility}
               aria-label={this.ariaLabel}
@@ -163,7 +162,7 @@ class ProjectCollectionListItem extends PureComponent {
               className={classNames(
                 "project-collection-list-item__icon-group-item",
                 "project-collection-list-item__button",
-                "project-collection-list-item__button--drag-handle"
+                "project-collection-list-item__button--drag-handle",
               )}
               {...dragHandleProps}
               tabIndex={-1}
@@ -182,7 +181,7 @@ class ProjectCollectionListItem extends PureComponent {
                     data-disclosure-toggle-for={entity.id}
                     className={classNames(
                       "project-collection-list-item__icon-group-item",
-                      "project-collection-list-item__button"
+                      "project-collection-list-item__button",
                     )}
                   >
                     <Utility.IconComposer icon="arrowUpDown32" size={30} />
@@ -196,14 +195,14 @@ class ProjectCollectionListItem extends PureComponent {
                     id: "up",
                     label: this.props.t("actions.dnd.move_up_position"),
                     onClick: () => this.onKeyboardMove("up"),
-                    disabled: index === 0
+                    disabled: index === 0,
                   },
                   {
                     id: "down",
                     label: this.props.t("actions.dnd.move_down_position"),
                     onClick: () => this.onKeyboardMove("down"),
-                    disabled: index === itemCount - 1
-                  }
+                    disabled: index === itemCount - 1,
+                  },
                 ]}
               />
             </div>

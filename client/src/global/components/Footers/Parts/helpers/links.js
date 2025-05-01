@@ -1,16 +1,15 @@
-import React from "react";
 import lh from "helpers/linkHandler";
 import compact from "lodash/compact";
 
 function visiblePages(pages = []) {
-  return pages.filter(p => {
+  return pages.filter((p) => {
     return p.attributes.showInFooter && !p.attributes.hidden;
   });
 }
 
 function sortedPages(pages = []) {
   const out = [];
-  pages.map(page => {
+  pages.map((page) => {
     return page.attributes.purpose === "supplemental_content"
       ? out.unshift(page)
       : out.push(page);
@@ -22,26 +21,26 @@ export function manifoldLinks() {
   const links = [
     {
       to: lh.link("frontendProjectsAll"),
-      title: "Projects"
+      title: "Projects",
     },
     {
       to: lh.link("frontend"),
-      title: "Home"
-    }
+      title: "Home",
+    },
   ];
   return links;
 }
 
 export function pageLinks({ pages }) {
   const collection = sortedPages(visiblePages(pages || []));
-  return collection.map(page => {
+  return collection.map((page) => {
     const {
       navTitle,
       title: pageTitle,
       openInNewTab,
       slug,
       isExternalLink,
-      externalLink
+      externalLink,
     } = page.attributes;
     const title = navTitle || pageTitle;
     const to = isExternalLink ? null : lh.link("frontendPage", slug);
@@ -52,16 +51,16 @@ export function pageLinks({ pages }) {
 
 export function authenticationLink({
   authentication: { authenticated },
-  commonActions
+  commonActions,
 }) {
   if (authenticated)
     return {
       onClick: commonActions.logout,
-      title: "Log Out"
+      title: "Log Out",
     };
   return {
     onClick: commonActions.toggleSignInUpOverlay,
-    title: "Log In"
+    title: "Log In",
   };
 }
 
@@ -70,7 +69,7 @@ export function emailLink({ settings }) {
   return {
     title: "Email",
     to: lh.link("frontendContact"),
-    icon: "socialEmail32"
+    icon: "socialEmail32",
   };
 }
 

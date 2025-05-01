@@ -25,9 +25,7 @@ export default function PendingEntitlementRow({
 
   const figure = target ? (
     <EntityThumbnail.Project mode="responsive" entity={target} />
-  ) : (
-    undefined
-  );
+  ) : undefined;
 
   const meta = expiresOn && (
     <FormattedDate
@@ -54,7 +52,7 @@ export default function PendingEntitlementRow({
     meta,
     figure,
     figureSize: "small",
-    ...rest
+    ...rest,
   };
 
   return <EntityRow utility={utility} {...rowProps} />;
@@ -65,5 +63,5 @@ PendingEntitlementRow.displayName = "EntitiesList.Entity.PendingEntitlementRow";
 PendingEntitlementRow.propTypes = {
   entity: PropTypes.object,
   onDelete: PropTypes.func,
-  onEdit: PropTypes.func
+  onEdit: PropTypes.func,
 };

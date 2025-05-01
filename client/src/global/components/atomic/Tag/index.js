@@ -12,7 +12,7 @@ Tag.displayName = "Global.Atomic.Tag";
 
 Tag.propTypes = {
   children: PropTypes.string.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Tag;

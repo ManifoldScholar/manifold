@@ -18,7 +18,7 @@ export default class TextContent extends Component {
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     publishedVisible: PropTypes.bool,
     readUrl: PropTypes.string.isRequired,
-    onUncollect: PropTypes.func
+    onUncollect: PropTypes.func,
   };
 
   render() {
@@ -33,7 +33,7 @@ export default class TextContent extends Component {
       readUrl,
       datePrefix,
       publishedVisible,
-      onUncollect
+      onUncollect,
     } = this.props;
 
     return (

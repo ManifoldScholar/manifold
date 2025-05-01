@@ -16,7 +16,7 @@ function RTELink(props) {
     width: getSize(),
     height: getSize(),
     viewBox: "2 2 24 24",
-    fill
+    fill,
   };
   return (
     <svg {...baseSvgProps} {...svgProps}>
@@ -31,7 +31,7 @@ RTELink.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   stroke: PropTypes.string,
   fill: PropTypes.string,
-  svgProps: PropTypes.object
+  svgProps: PropTypes.object,
 };
 
 export default RTELink;

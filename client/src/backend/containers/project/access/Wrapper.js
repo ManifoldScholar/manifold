@@ -15,9 +15,9 @@ import withSettings from "hoc/withSettings";
 import connectAndFetch from "utils/connectAndFetch";
 
 class ProjectAccessWrapper extends Component {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      authentication: state.authentication
+      authentication: state.authentication,
     };
   };
 
@@ -29,7 +29,7 @@ class ProjectAccessWrapper extends Component {
     history: PropTypes.object,
     match: PropTypes.object,
     authentication: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get defaultIsRestricted() {
@@ -49,7 +49,7 @@ class ProjectAccessWrapper extends Component {
     const canGrantPermissions = authorization.authorizeAbility({
       authentication,
       entity: project,
-      ability: "managePermissions"
+      ability: "managePermissions",
     });
 
     const closeUrl = lh.link("backendProjectAccess", project.id);
@@ -101,7 +101,7 @@ class ProjectAccessWrapper extends Component {
                         label={t("projects.forms.access.notice_header_label")}
                         name="attributes[restrictedAccessHeading]"
                         placeholder={t(
-                          "projects.forms.access.notice_header_placeholder"
+                          "projects.forms.access.notice_header_placeholder",
                         )}
                         wide
                       />
@@ -109,7 +109,7 @@ class ProjectAccessWrapper extends Component {
                         label={t("projects.forms.access.notice_body_label")}
                         name="attributes[restrictedAccessBody]"
                         placeholder={t(
-                          "projects.forms.access.notice_body_placeholder"
+                          "projects.forms.access.notice_body_placeholder",
                         )}
                       />
                       <Form.Save text={t("projects.forms.access.save")} />
@@ -126,8 +126,8 @@ class ProjectAccessWrapper extends Component {
           childProps: {
             entity: project,
             closeUrl,
-            history: this.props.history
-          }
+            history: this.props.history,
+          },
         })}
       </>
     );
@@ -135,5 +135,5 @@ class ProjectAccessWrapper extends Component {
 }
 
 export default withTranslation()(
-  withSettings(connectAndFetch(ProjectAccessWrapper))
+  withSettings(connectAndFetch(ProjectAccessWrapper)),
 );

@@ -5,5 +5,5 @@ import Viewer from "./viewer";
 export default {
   Marker,
   Resource,
-  Viewer
+  Viewer,
 };

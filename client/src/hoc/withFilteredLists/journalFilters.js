@@ -1,13 +1,13 @@
 export default function journalFilters({ snapshotState = false } = {}) {
   return {
     config: {
-      snapshotState
+      snapshotState,
     },
     params: [
       {
         label: "Search...",
         name: "keyword",
-        value: ""
+        value: "",
       },
       {
         label: "Draft",
@@ -16,8 +16,8 @@ export default function journalFilters({ snapshotState = false } = {}) {
         options: [
           { label: "All journals", value: "" },
           { label: "Only draft journals", value: "true" },
-          { label: "Only published journals", value: "false" }
-        ]
+          { label: "Only published journals", value: "false" },
+        ],
       },
       {
         label: "Order",
@@ -27,9 +27,9 @@ export default function journalFilters({ snapshotState = false } = {}) {
           { label: "Most recently updated", value: "updated_at ASC" },
           { label: "Alphabetical by title", value: "sort_title ASC" },
           { label: "Newest journals first", value: "created_at DESC" },
-          { label: "Oldest journals first", value: "created_at ASC" }
-        ]
-      }
-    ]
+          { label: "Oldest journals first", value: "created_at ASC" },
+        ],
+      },
+    ],
   };
 }

@@ -10,11 +10,11 @@ import {
   useFetch,
   useApiCallback,
   useListQueryParams,
-  useNotification
+  useNotification,
 } from "hooks";
 import EntitiesList, {
   Search,
-  AnnotationRow
+  AnnotationRow,
 } from "backend/components/list/EntitiesList";
 import withConfirmation from "hoc/withConfirmation";
 import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
@@ -22,7 +22,7 @@ import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
   SelectAll,
-  BulkActionButtons
+  BulkActionButtons,
 } from "backend/components/list/EntitiesList/List/bulkActions";
 
 function ReadingGroupAnnotationsContainer({
@@ -31,7 +31,7 @@ function ReadingGroupAnnotationsContainer({
   route,
   confirm,
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
 }) {
   const { t } = useTranslation();
 
@@ -39,18 +39,22 @@ function ReadingGroupAnnotationsContainer({
     initSize: 20,
     initFilters: {
       ...entitiesListSearchParams.initialannotations,
-      formats: ["annotation"]
+      formats: ["annotation"],
     },
-    initSearchProps: entitiesListSearchProps("annotations")
+    initSearchProps: entitiesListSearchProps("annotations"),
   });
 
-  const { data, refresh: refreshAnnotations, meta } = useFetch({
+  const {
+    data,
+    refresh: refreshAnnotations,
+    meta,
+  } = useFetch({
     request: [
       readingGroupsAPI.annotations,
       readingGroup.id,
       filters,
-      pagination
-    ]
+      pagination,
+    ],
   });
 
   const {
@@ -62,21 +66,21 @@ function ReadingGroupAnnotationsContainer({
     bulkSelectionEmpty,
     addItem,
     removeItem,
-    addPage
+    addPage,
   } = useBulkActions(data, filters);
 
   const { onReset, setParam } = useClearBulkSelectionWithFilters(
     searchProps.onReset,
     searchProps.setParam,
     resetBulkSelection,
-    bulkSelectionEmpty
+    bulkSelectionEmpty,
   );
 
   const bulkDelete = useApiCallback(bulkDeleteAPI.annotations);
 
   const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
 
-  const onDelete = id => {
+  const onDelete = (id) => {
     const heading = t("modals.delete_annotation");
     const message = t("modals.confirm_body");
     if (confirm)
@@ -87,18 +91,18 @@ function ReadingGroupAnnotationsContainer({
   };
 
   const unit = t("glossary.annotation", {
-    count: meta?.pagination?.totalCount
+    count: meta?.pagination?.totalCount,
   });
 
-  const notifyBulkDelete = useNotification(count => ({
+  const notifyBulkDelete = useNotification((count) => ({
     level: 0,
     id: "BULK_DELETE_SUCCESS",
     heading: t("notifications.bulk_delete_success"),
     body: t("notifications.bulk_delete_success_body", {
       count,
-      entity: t("glossary.annotation", { count })
+      entity: t("glossary.annotation", { count }),
     }),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const onBulkDelete = () => {
@@ -122,7 +126,7 @@ function ReadingGroupAnnotationsContainer({
 
   const closeUrl = lh.link("backendReadingGroupAnnotations", readingGroup.id);
 
-  const currentPageIds = data?.map(a => a.id);
+  const currentPageIds = data?.map((a) => a.id);
 
   return (
     <Authorize
@@ -141,12 +145,12 @@ function ReadingGroupAnnotationsContainer({
             removeItem,
             onDelete,
             hideRG: true,
-            linkOverride: id =>
+            linkOverride: (id) =>
               lh.link(
                 "backendReadingGroupAnnotationDetail",
                 readingGroup.id,
-                id
-              )
+                id,
+              ),
           }}
           title={t("reading_groups.annotations_header")}
           titleStyle="bar"
@@ -178,7 +182,7 @@ function ReadingGroupAnnotationsContainer({
               onBulkDelete={onBulkDelete}
               toggleBulkActions={toggleBulkActions}
               actionsDisabled={bulkSelectionEmpty}
-            />
+            />,
           ]}
         />
       )}
@@ -188,14 +192,14 @@ function ReadingGroupAnnotationsContainer({
           lockScroll: "always",
           wide: true,
           lockScrollClickCloses: false,
-          closeUrl
+          closeUrl,
         },
         childProps: {
           refresh,
           refreshAnnotations,
           readingGroup,
-          closeUrl
-        }
+          closeUrl,
+        },
       })}
     </Authorize>
   );
@@ -207,13 +211,13 @@ ReadingGroupAnnotationsContainer.propTypes = {
   route: PropTypes.string,
   confirm: PropTypes.func,
   entitiesListSearchProps: PropTypes.func,
-  entitiesListSearchParams: PropTypes.object
+  entitiesListSearchParams: PropTypes.object,
 };
 
 export default withRouter(
   withConfirmation(
     withFilteredLists(ReadingGroupAnnotationsContainer, {
-      annotations: annotationFilters({ includePrivacy: false })
-    })
-  )
+      annotations: annotationFilters({ includePrivacy: false }),
+    }),
+  ),
 );

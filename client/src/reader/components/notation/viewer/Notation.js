@@ -13,12 +13,12 @@ export default class NotationViewerNotation extends PureComponent {
     notation: PropTypes.object,
     showTitle: PropTypes.bool,
     neverCrop: PropTypes.bool,
-    isPreview: PropTypes.bool
+    isPreview: PropTypes.bool,
   };
 
   static defaultProps = {
     showTitle: true,
-    neverCrop: false
+    neverCrop: false,
   };
 
   get variant() {

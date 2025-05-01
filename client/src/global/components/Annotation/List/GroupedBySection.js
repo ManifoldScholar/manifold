@@ -11,20 +11,20 @@ export default class GroupedBySection extends PureComponent {
     handleVisitAnnotation: PropTypes.func.isRequired,
     pagination: PropTypes.object,
     paginationClickHandler: PropTypes.func,
-    refresh: PropTypes.func
+    refresh: PropTypes.func,
   };
 
   get notesListClassNames() {
     return classNames({
       "notes-list": true,
-      "notes-list--pad-top": true
+      "notes-list--pad-top": true,
     });
   }
 
   get selectionListClassNames() {
     return classNames({
       "selection-list": true,
-      "selection-list--separated": true
+      "selection-list--separated": true,
     });
   }
 
@@ -42,7 +42,7 @@ export default class GroupedBySection extends PureComponent {
     return (
       <>
         <ul className={this.notesListClassNames}>
-          {groupedAnnotations.map(group => {
+          {groupedAnnotations.map((group) => {
             return (
               <li
                 key={group.sectionId}
@@ -52,7 +52,7 @@ export default class GroupedBySection extends PureComponent {
                   <h3>{group.name}</h3>
                 </div>
                 <ul className={this.notesListClassNames}>
-                  {group.annotations.map(annotation => {
+                  {group.annotations.map((annotation) => {
                     return (
                       <li key={annotation.id}>
                         <Annotation

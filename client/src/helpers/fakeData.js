@@ -6,8 +6,8 @@ const resources = [
       type: "audio",
       title: "Consectetur Ullamcorper",
       tags: ["Japan"],
-      position: 0
-    }
+      position: 0,
+    },
   },
   {
     id: 2,
@@ -26,8 +26,8 @@ const resources = [
         "mollis ornare vel eu leo. Praesent commodo cursus magna, " +
         "vel scelerisque nisl consectetur et.",
       link: "https://vimeo.com/89700651",
-      position: 1
-    }
+      position: 1,
+    },
   },
   {
     id: 3,
@@ -46,8 +46,8 @@ const resources = [
         "mollis ornare vel eu leo. Praesent commodo cursus magna, " +
         "vel scelerisque nisl consectetur et.",
       link: "https://youtu.be/YbcxU1IK7s4",
-      position: 2
-    }
+      position: 2,
+    },
   },
   {
     id: 4,
@@ -61,8 +61,8 @@ const resources = [
         "Cras mattis consectetur purus sit amet fermentum. Donec id elit non" +
         " mi porta gravida at eget metus. Curabitur blandit tempus porttitor.",
       link: "/static/placeholder/portrait-ndt01.jpg",
-      position: 3
-    }
+      position: 3,
+    },
   },
   {
     id: 5,
@@ -80,8 +80,8 @@ const resources = [
         "mollis ornare vel eu leo. Praesent commodo cursus magna, " +
         "vel scelerisque nisl consectetur et.",
       link: "/static/placeholder/portrait-unsplash01.jpg",
-      position: 4
-    }
+      position: 4,
+    },
   },
   {
     id: 6,
@@ -96,8 +96,8 @@ const resources = [
         " mi porta gravida at eget metus. Curabitur blandit tempus porttitor.",
       link: "#",
       tags: ["Japan", "Photography"],
-      position: 5
-    }
+      position: 5,
+    },
   },
   {
     id: 7,
@@ -106,8 +106,8 @@ const resources = [
       type: "presentation",
       title: "Etiam Dolor Ipsum",
       tags: ["Second Interview"],
-      position: 6
-    }
+      position: 6,
+    },
   },
   {
     id: 8,
@@ -115,8 +115,8 @@ const resources = [
     attributes: {
       type: "link",
       title: "Lorem ipsum dolor sit, adipiscing elit.",
-      position: 7
-    }
+      position: 7,
+    },
   },
   {
     id: 9,
@@ -125,8 +125,8 @@ const resources = [
       type: "file",
       title: "Venenatis Vehicula",
       tags: ["Photography", "Second Interview"],
-      position: 8
-    }
+      position: 8,
+    },
   },
   {
     id: 10,
@@ -135,8 +135,8 @@ const resources = [
       type: "document",
       title: "Dapibus Magna Elit Justo",
       tags: ["Japan", "Photography"],
-      position: 9
-    }
+      position: 9,
+    },
   },
   {
     id: 11,
@@ -145,8 +145,8 @@ const resources = [
       type: "pdf",
       title: "Vestibulum id ligula porta felis euismod semper.",
       tags: ["Second Interview"],
-      position: 10
-    }
+      position: 10,
+    },
   },
   {
     id: 12,
@@ -154,8 +154,8 @@ const resources = [
     attributes: {
       type: "document",
       title: "Dolor Sollicitudin Ultricies",
-      position: 11
-    }
+      position: 11,
+    },
   },
   {
     id: 13,
@@ -164,16 +164,16 @@ const resources = [
       type: "audio",
       title: "Parturient Dolor Ultricies Adipiscing",
       tags: ["Japan", "Second Interview"],
-      position: 12
-    }
-  }
+      position: 12,
+    },
+  },
 ];
 
 const resourceCollection = {
   id: "1234",
   attributes: {},
   links: {},
-  relationships: { resources }
+  relationships: { resources },
 };
 
 const resourceCollections = [
@@ -182,25 +182,25 @@ const resourceCollections = [
     type: "resourceCollections",
     attributes: {
       image: "/static/placeholder/background-waterfall.jpg",
-      title: "Recorded conversations with author; Pre-translated"
-    }
+      title: "Recorded conversations with author; Pre-translated",
+    },
   },
   {
     id: 2,
     type: "resourceCollections",
     attributes: {
       image: null,
-      title: "Slideshow: photos of original manuscript with handwritten notes"
-    }
+      title: "Slideshow: photos of original manuscript with handwritten notes",
+    },
   },
   {
     id: 3,
     type: "resourceCollections",
     attributes: {
       image: "/static/placeholder/background-coniferous.jpg",
-      title: "Untitled"
-    }
-  }
+      title: "Untitled",
+    },
+  },
 ];
 
 const events = [
@@ -219,8 +219,8 @@ const events = [
       attribution: undefined,
       attribution_url: undefined,
       excerpt: undefined,
-      project_id: "AAA-BBB"
-    }
+      project_id: "AAA-BBB",
+    },
   },
   {
     id: 2,
@@ -237,8 +237,8 @@ const events = [
       attribution: undefined,
       attribution_url: undefined,
       excerpt: undefined,
-      project_id: "AAA-BBB"
-    }
+      project_id: "AAA-BBB",
+    },
   },
   {
     id: 3,
@@ -255,8 +255,8 @@ const events = [
       attribution: undefined,
       attribution_url: undefined,
       excerpt: undefined,
-      project_id: "AAA-BBB"
-    }
+      project_id: "AAA-BBB",
+    },
   },
   {
     id: 4,
@@ -274,8 +274,8 @@ const events = [
       excerpt:
         "Maecenas sed diam eget risus varius blandit sit amet non magna. " +
         "Aenean lacinia bibendum nulla sed consectetur.",
-      project_id: "AAA-BBB"
-    }
+      project_id: "AAA-BBB",
+    },
   },
   {
     id: 5,
@@ -293,8 +293,8 @@ const events = [
       excerpt:
         "Praesent commodo cursus magna, vel scelerisque nisl consectetur et." +
         " Vestibulum id ligula porta felis euismod semper.",
-      project_id: "AAA-BBB"
-    }
+      project_id: "AAA-BBB",
+    },
   },
   {
     id: 6,
@@ -312,8 +312,8 @@ const events = [
       excerpt:
         "The lowdown on lefse (must be russet potatoes!) from Beatrice Ojakanga" +
         "s at the @AmSwedInstitute @UMinnPress",
-      project_id: "AAA-BBB"
-    }
+      project_id: "AAA-BBB",
+    },
   },
   {
     id: 5,
@@ -331,9 +331,9 @@ const events = [
       excerpt:
         "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. " +
         "Morbi leo risus, porta ac consectetur ac, vestibulum at eros.",
-      project_id: "AAA-BBB"
-    }
-  }
+      project_id: "AAA-BBB",
+    },
+  },
 ];
 
 const backendAuthors = [];
@@ -347,9 +347,9 @@ const backendEditors = [
       middle_name: "",
       last_name: "Garrish",
       display_name: "",
-      role: "creator"
+      role: "creator",
     },
-    avatar: "/static/placeholder/user-avatar-dreft01.jpg"
+    avatar: "/static/placeholder/user-avatar-dreft01.jpg",
   },
   {
     id: 2,
@@ -359,9 +359,9 @@ const backendEditors = [
       middle_name: "",
       last_name: "Gylling",
       display_name: "",
-      role: "creator"
+      role: "creator",
     },
-    avatar: "/static/placeholder/user-avatar-nornes01.jpg"
+    avatar: "/static/placeholder/user-avatar-nornes01.jpg",
   },
   {
     attributes: {
@@ -370,10 +370,10 @@ const backendEditors = [
       middle_name: "",
       last_name: "Weinstein",
       display_name: "",
-      role: "creator"
+      role: "creator",
     },
-    avatar: "/static/placeholder/user-avatar-rowan01.jpg"
-  }
+    avatar: "/static/placeholder/user-avatar-rowan01.jpg",
+  },
 ];
 
 export default {
@@ -382,5 +382,5 @@ export default {
   resourceCollections,
   resourceCollection,
   backendAuthors,
-  backendEditors
+  backendEditors,
 };

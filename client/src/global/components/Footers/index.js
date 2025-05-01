@@ -7,5 +7,5 @@ export default {
   DefaultFooter,
   FrontendFooter,
   ReaderFooter,
-  StandaloneFooter
+  StandaloneFooter,
 };

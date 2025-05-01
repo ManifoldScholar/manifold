@@ -16,13 +16,13 @@ class PagesNewContainer extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     form: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor() {
     super();
     this.defaultPage = {
-      attributes: { isExternalLink: false, kind: "default" }
+      attributes: { isExternalLink: false, kind: "default" },
     };
   }
 
@@ -31,14 +31,14 @@ class PagesNewContainer extends PureComponent {
     this.props.history.push(path);
   }
 
-  handleSuccess = page => {
+  handleSuccess = (page) => {
     this.redirectToPage(page);
   };
 
   renderPath() {
     const t = this.props.t;
     const isExternal = this.props.form.getModelValue(
-      "attributes[isExternalLink]"
+      "attributes[isExternalLink]",
     );
     if (isExternal)
       return (
@@ -95,5 +95,5 @@ class PagesNewContainer extends PureComponent {
 
 export default withFormSession(
   withTranslation()(connectAndFetch(PagesNewContainer)),
-  "backend-page-create"
+  "backend-page-create",
 );

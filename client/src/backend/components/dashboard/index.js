@@ -7,5 +7,5 @@ export default {
   Activity,
   Notifications,
   Counts,
-  Analytics
+  Analytics,
 };

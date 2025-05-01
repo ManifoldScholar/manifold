@@ -11,7 +11,7 @@ function EmptyRow({ message }) {
 }
 
 EmptyRow.propTypes = {
-  message: PropTypes.string.isRequired
+  message: PropTypes.string.isRequired,
 };
 
 EmptyRow.displayName = "Analytics.Block.Table.Row";

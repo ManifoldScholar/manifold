@@ -16,7 +16,7 @@ const ProjectSearch = forwardRef((props, ref) => {
     searchQueryState,
     setQueryState,
     setPage,
-    project
+    project,
   } = props;
 
   const { t } = useTranslation();
@@ -25,17 +25,17 @@ const ProjectSearch = forwardRef((props, ref) => {
     { label: t("glossary.resource_other"), value: "Resource" },
     { label: t("glossary.text_other"), value: "Text" },
     { label: t("glossary.annotation_other"), value: "Annotation" },
-    { label: t("glossary.full_text_one"), value: "TextSection" }
+    { label: t("glossary.full_text_one"), value: "TextSection" },
   ];
 
   const breadcrumbs = useMemo(
     () => [
       {
         to: lh.link("frontendProjectDetail", project?.attributes?.slug),
-        label: project?.attributes?.titlePlaintext
-      }
+        label: project?.attributes?.titlePlaintext,
+      },
     ],
-    [project?.attributes?.titlePlaintext, project?.attributes?.slug]
+    [project?.attributes?.titlePlaintext, project?.attributes?.slug],
   );
 
   return project ? (
@@ -49,7 +49,7 @@ const ProjectSearch = forwardRef((props, ref) => {
           <SearchQuery.Form
             initialState={{
               keyword: "",
-              scope: "project"
+              scope: "project",
             }}
             projectId={project.id}
             searchQueryState={searchQueryState}
@@ -84,7 +84,7 @@ ProjectSearch.propTypes = {
   resultsMeta: PropTypes.object,
   searchQueryState: PropTypes.object.isRequired,
   setQueryState: PropTypes.func.isRequired,
-  setPage: PropTypes.func.isRequired
+  setPage: PropTypes.func.isRequired,
 };
 
 export default withSearch(ProjectSearch);

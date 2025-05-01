@@ -7,7 +7,7 @@ class ResourceFormKindFile extends PureComponent {
   static displayName = "Resource.Form.Kind.File";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

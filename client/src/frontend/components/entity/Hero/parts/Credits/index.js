@@ -13,5 +13,5 @@ export default function HeroCredits({ copy }) {
 HeroCredits.displayName = "Frontend.Entity.Hero.Parts.Credits";
 
 HeroCredits.propTypes = {
-  copy: PropTypes.string.isRequired
+  copy: PropTypes.string.isRequired,
 };

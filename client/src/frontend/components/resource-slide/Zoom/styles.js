@@ -3,7 +3,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import {
   utilityPrimary,
   defaultTransitionProps,
-  defaultHoverStyle
+  defaultHoverStyle,
 } from "theme/styles/mixins";
 
 export const ZoomIndicator = styled.div`
@@ -19,7 +19,8 @@ export const ZoomIndicator = styled.div`
   cursor: pointer;
   background-color: var(--color-base-neutral95);
   opacity: 0.9;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   &:hover {

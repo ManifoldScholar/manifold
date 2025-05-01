@@ -10,15 +10,15 @@ import { select } from "utils/entityUtils";
 import PageHeader from "backend/components/layout/PageHeader";
 
 export class SettingsIntegrationsContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      settings: select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore),
     };
   };
 
   static propTypes = {
     settings: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -97,6 +97,6 @@ export class SettingsIntegrationsContainer extends PureComponent {
 
 export default withTranslation()(
   connect(SettingsIntegrationsContainer.mapStateToProps)(
-    SettingsIntegrationsContainer
-  )
+    SettingsIntegrationsContainer,
+  ),
 );

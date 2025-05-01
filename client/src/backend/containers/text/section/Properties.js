@@ -10,14 +10,14 @@ import { sectionsAPI } from "api";
 export default function TextSectionPropertiesContainer({
   textId,
   refresh,
-  startSectionId
+  startSectionId,
 }) {
   const { t } = useTranslation();
   const { sectionId } = useParams();
 
   const { data: section } = useFetch({
     request: [sectionsAPI.show, sectionId, textId],
-    condition: !!sectionId
+    condition: !!sectionId,
   });
 
   return sectionId ? (
@@ -39,5 +39,5 @@ TextSectionPropertiesContainer.propTypes = {
   textId: PropTypes.string.isRequired,
   nextPosition: PropTypes.number,
   refreshText: PropTypes.func.isRequired,
-  startSectionId: PropTypes.string.isRequired
+  startSectionId: PropTypes.string.isRequired,
 };

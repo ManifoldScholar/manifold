@@ -3,7 +3,7 @@ import {
   listUnstyled,
   utilityPrimary,
   defaultTransitionProps,
-  respond
+  respond,
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 

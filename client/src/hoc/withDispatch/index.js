@@ -8,11 +8,11 @@ function getDisplayName(WrappedComponent) {
 
 export default function withDispatch(WrappedComponent) {
   const displayName = `HigherOrder.WithDispatch('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithDispatch extends React.PureComponent {
-    static mapDispatchToProps = dispatch => {
+    static mapDispatchToProps = (dispatch) => {
       return { dispatch };
     };
 
@@ -28,7 +28,7 @@ export default function withDispatch(WrappedComponent) {
 
   const ConnectedWithSettings = connect(
     null,
-    WithDispatch.mapDispatchToProps
+    WithDispatch.mapDispatchToProps,
   )(WithDispatch);
 
   return hoistStatics(ConnectedWithSettings, WrappedComponent);

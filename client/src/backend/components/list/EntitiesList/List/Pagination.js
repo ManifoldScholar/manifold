@@ -9,11 +9,11 @@ export default class ListEntitiesListPagination extends PureComponent {
     pagination: PropTypes.object.isRequired,
     onPageClick: PropTypes.func,
     style: PropTypes.oneOf(["normal", "compact"]),
-    padding: PropTypes.number
+    padding: PropTypes.number,
   };
 
   static defaultProps = {
-    style: "normal"
+    style: "normal",
   };
 
   get pagination() {

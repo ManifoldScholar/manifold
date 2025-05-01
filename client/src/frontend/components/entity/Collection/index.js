@@ -35,5 +35,5 @@ export default {
   ProjectResourceCollectionDetail,
   ProjectResourceCollectionSlideshow,
   ProjectResourceCollections,
-  ReaderFullNotes
+  ReaderFullNotes,
 };

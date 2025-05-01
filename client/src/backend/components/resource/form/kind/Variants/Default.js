@@ -6,7 +6,7 @@ export default class ResourceFormKindVariantsDefault extends PureComponent {
   static displayName = "Resource.Form.Kind.Variants.Default";
 
   static propTypes = {
-    kind: PropTypes.string
+    kind: PropTypes.string,
   };
 
   render() {

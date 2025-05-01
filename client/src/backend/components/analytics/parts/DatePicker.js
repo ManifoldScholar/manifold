@@ -53,13 +53,13 @@ function DatePicker({ parentId, inputId, value, onChange, label }) {
           </button>
         </div>
       </div>
-    )
+    ),
   );
 
   return (
     <>
       <ReactDatePicker
-        renderCustomHeader={props => <Header uid={parentId} {...props} />}
+        renderCustomHeader={(props) => <Header uid={parentId} {...props} />}
         selected={value}
         onChange={onChange}
         onCalendarOpen={() => setPickerOpen(true)}
@@ -85,7 +85,7 @@ DatePicker.propTypes = {
   inputId: PropTypes.string.isRequired,
   value: PropTypes.instanceOf(Date).isRequired,
   onChange: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
 };
 
 export default DatePicker;

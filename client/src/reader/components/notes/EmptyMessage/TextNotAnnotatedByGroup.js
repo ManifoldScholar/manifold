@@ -16,7 +16,7 @@ const TextNotAnnotatedByGroup = ({ readingGroup }) => {
 };
 
 TextNotAnnotatedByGroup.propTypes = {
-  readingGroup: PropTypes.object
+  readingGroup: PropTypes.object,
 };
 
 export default TextNotAnnotatedByGroup;

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   listUnstyled,
   utilityPrimary,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`

@@ -11,7 +11,7 @@ class TableBody extends React.PureComponent {
   static propTypes = {
     rows: PropTypes.array,
     linkCreator: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get ariaLabel() {
@@ -22,10 +22,10 @@ class TableBody extends React.PureComponent {
   render() {
     const label = this.props.label;
     const context = {
-      markup: this.props.markup
+      markup: this.props.markup,
     };
 
-    const rows = this.props.models.map(model => {
+    const rows = this.props.models.map((model) => {
       return (
         <Row key={model.id} model={model} linkCreator={this.props.linkCreator}>
           {this.props.children}
@@ -36,14 +36,14 @@ class TableBody extends React.PureComponent {
     let i = 0;
     const headers = React.Children.map(
       this.props.children.filter(Boolean),
-      child => {
+      (child) => {
         return {
           key: i++,
           label: child.props.header,
           icon: child.props.headerIcon,
-          align: child.props.align
+          align: child.props.align,
         };
-      }
+      },
     );
 
     return (

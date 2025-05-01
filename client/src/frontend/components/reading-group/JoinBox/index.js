@@ -33,11 +33,11 @@ class JoinBox extends PureComponent {
   get messages() {
     return this.props.t("messages.reading_group.join", {
       name: this.props.readingGroup,
-      returnObjects: true
+      returnObjects: true,
     });
   }
 
-  updateCode = event => {
+  updateCode = (event) => {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
@@ -54,14 +54,14 @@ class JoinBox extends PureComponent {
       event.nativeEvent.stopImmediatePropagation();
     }
     this.fetchGroup().then(
-      response => {
+      (response) => {
         setTimeout(() => {
           this.openConfirmation(response.data);
         }, 0);
       },
       () => {
         this.openNotFound();
-      }
+      },
     );
   };
 
@@ -81,17 +81,17 @@ class JoinBox extends PureComponent {
     this.props.confirm(heading, compiledMessage, callback);
   }
 
-  doJoin = readingGroup => {
+  doJoin = (readingGroup) => {
     const fetch = request(
       readingGroupMembershipsAPI.create({
         userId: this.props.currentUser.id,
-        readingGroupId: readingGroup.id
+        readingGroupId: readingGroup.id,
       }),
       requests.feReadingGroupMembershipCreate,
-      { suppressErrors: true }
+      { suppressErrors: true },
     );
     const result = this.props.dispatch(fetch);
-    result.promise.then(theResult => {
+    result.promise.then((theResult) => {
       this.setState({ code: "" });
       this.props.onJoin(theResult);
     }, this.handleFailure);
@@ -101,7 +101,7 @@ class JoinBox extends PureComponent {
     const heading = this.messages.join_not_found_heading;
     const message = this.messages.join_not_found_message;
     this.props.confirm(heading, message, null, {
-      rejectLabel: this.props.t("common.okay")
+      rejectLabel: this.props.t("common.okay"),
     });
   }
 
@@ -109,7 +109,7 @@ class JoinBox extends PureComponent {
     const fetch = request(
       readingGroupsAPI.show(this.state.code),
       requests.feReadingGroupsLookup,
-      { suppressErrors: true }
+      { suppressErrors: true },
     );
     const result = this.props.dispatch(fetch);
     return result.promise;
@@ -124,8 +124,8 @@ class JoinBox extends PureComponent {
         instructions={t("forms.join_group.instructions")}
         actions={
           <Styled.Form onSubmit={this.handleSubmit}>
-            <UIDConsumer name={id => `join-box-${id}`}>
-              {id => (
+            <UIDConsumer name={(id) => `join-box-${id}`}>
+              {(id) => (
                 <Styled.Label htmlFor={id}>
                   <span className="screen-reader-text">
                     {t("forms.join_group.join_code")}
@@ -151,5 +151,5 @@ class JoinBox extends PureComponent {
 }
 
 export default withDispatch(
-  withCurrentUser(withConfirmation(withRouter(withTranslation()(JoinBox))))
+  withCurrentUser(withConfirmation(withRouter(withTranslation()(JoinBox)))),
 );

@@ -11,7 +11,7 @@ class NextSection extends PureComponent {
     text: PropTypes.object.isRequired,
     sectionId: PropTypes.string.isRequired,
     typography: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   getSectionPath(id) {
@@ -20,7 +20,7 @@ class NextSection extends PureComponent {
 
   renderSectionLink() {
     const index = this.props.sectionsMap.findIndex(
-      section => section.id === this.props.sectionId
+      (section) => section.id === this.props.sectionId,
     );
     const nextSection = getNextVisible(this.props.sectionsMap, index);
     const { text } = this.props;
@@ -29,7 +29,7 @@ class NextSection extends PureComponent {
       <Link
         to={{
           pathname: this.getSectionPath(nextSection.id),
-          state: { pageChange: true }
+          state: { pageChange: true },
         }}
         className="section-next-section__link"
       >
@@ -37,7 +37,7 @@ class NextSection extends PureComponent {
           {this.props.t("navigation.next_entity", {
             entity: text.attributes.sectionKind
               ? text.attributes.sectionKind
-              : "Chapter"
+              : "Chapter",
           })}
         </header>
         <div className="section-next-section__title">{nextSection.name}</div>

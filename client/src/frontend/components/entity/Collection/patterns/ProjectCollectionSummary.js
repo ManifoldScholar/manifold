@@ -21,13 +21,13 @@ function ProjectCollectionSummaryEntityCollection({
     title,
     slug,
     descriptionFormatted: description,
-    shortDescriptionFormatted: shortDescription
+    shortDescriptionFormatted: shortDescription,
   } = projectCollection.attributes;
 
-  const mapProjects = useCallback(collection => {
+  const mapProjects = useCallback((collection) => {
     if (!Array.isArray(collection.relationships.collectionProjects)) return [];
     return collection.relationships.collectionProjects.map(
-      cp => cp.relationships.project
+      (cp) => cp.relationships.project,
     );
   }, []);
 
@@ -55,11 +55,11 @@ function ProjectCollectionSummaryEntityCollection({
       headerLayout={headerLayout}
       headerWidth="100%"
       headerLink={lh.link("frontendProjectCollection", slug)}
-      BodyComponent={props =>
+      BodyComponent={(props) =>
         !!projects?.length && (
           <ThumbnailGrid {...props}>
             {({ stack }) =>
-              projects.map(item => (
+              projects.map((item) => (
                 <EntityThumbnail key={item.id} entity={item} stack={stack} />
               ))
             }
@@ -86,7 +86,7 @@ ProjectCollectionSummaryEntityCollection.propTypes = {
   projectCollection: PropTypes.object.isRequired,
   projects: PropTypes.arrayOf(PropTypes.object),
   projectsMeta: PropTypes.object,
-  limit: PropTypes.number
+  limit: PropTypes.number,
 };
 
 export default ProjectCollectionSummaryEntityCollection;

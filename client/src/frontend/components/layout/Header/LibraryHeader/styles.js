@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   headerContainerPrimary,
   respond,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
@@ -19,7 +19,7 @@ export const Inner = styled.div`
 
   ${respond(
     `grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;`,
-    75
+    75,
   )}
 `;
 
@@ -29,6 +29,7 @@ export const Border = styled.div`
   visibility: hidden;
   border-bottom: 1px solid var(--color-base-neutral40);
   opacity: 0;
-  transition: opacity ${defaultTransitionProps},
+  transition:
+    opacity ${defaultTransitionProps},
     visibility ${defaultTransitionProps};
 `;

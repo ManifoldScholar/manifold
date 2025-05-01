@@ -2,7 +2,7 @@ export default {
   index(projectCollectionId) {
     return {
       endpoint: `/api/v1/project_collections/${projectCollectionId}/relationships/collection_projects`,
-      method: "GET"
+      method: "GET",
     };
   },
 
@@ -13,9 +13,9 @@ export default {
       options: {
         body: JSON.stringify({
           type: "collectionProjects",
-          data: collectionProject
-        })
-      }
+          data: collectionProject,
+        }),
+      },
     };
   },
 
@@ -23,7 +23,7 @@ export default {
     return {
       endpoint: `/api/v1/project_collections/${projectCollectionId}/relationships/collection_projects/${collectionProjectId}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

@@ -33,13 +33,13 @@ T.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.object,
-    PropTypes.array
+    PropTypes.array,
   ]),
   components: PropTypes.object,
   translate: PropTypes.string,
   i18nKey: PropTypes.string,
   params: PropTypes.object,
-  values: PropTypes.object
+  values: PropTypes.object,
 };
 
 export default T;

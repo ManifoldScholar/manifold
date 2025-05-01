@@ -4,7 +4,7 @@ const initialState = {
   keyword: "",
   scope: null,
   facets: [],
-  searchNum: 0
+  searchNum: 0,
 };
 
 const setSearchQuery = (state, action) => {
@@ -20,7 +20,7 @@ const resetSearch = () => {
 export default handleActions(
   {
     SET_SEARCH_QUERY: setSearchQuery,
-    RESET_SEARCH: resetSearch
+    RESET_SEARCH: resetSearch,
   },
-  initialState
+  initialState,
 );

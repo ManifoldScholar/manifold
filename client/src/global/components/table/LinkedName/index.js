@@ -23,7 +23,7 @@ export default function LinkedName({ name, tag, to }) {
 LinkedName.propTypes = {
   to: PropTypes.string,
   name: PropTypes.string.isRequired,
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 LinkedName.displayName = "GenericTable.LinkedName";

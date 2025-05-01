@@ -6,7 +6,7 @@ import {
   defaultTransitionProps,
   fluidScale,
   respond,
-  fillOnFocus
+  fillOnFocus,
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -108,7 +108,7 @@ export const WrapperWithActions = styled.div`
         "label label label" auto
         "input notification actions" auto/1fr auto auto;
     `,
-    60
+    60,
   )}
 
   label {
@@ -141,7 +141,7 @@ export const ActionGroup = styled("div", transientOptions)`
       border-bottom: 1px solid;
       border-color: var(--border-color);
     `,
-    60
+    60,
   )}
 `;
 
@@ -158,7 +158,8 @@ export const Action = styled.button`
   border: 1px solid var(--color-base-neutral10);
   border-radius: 16px;
   transform: var(--Action-transform);
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   &:hover {

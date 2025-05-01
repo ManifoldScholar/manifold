@@ -13,9 +13,9 @@ import Form from "./Form";
 const { request, flush } = entityStoreActions;
 
 export class ExportTargetsEditContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      exportTarget: select(requests.beExportTarget, state.entityStore)
+      exportTarget: select(requests.beExportTarget, state.entityStore),
     };
   };
 
@@ -27,7 +27,7 @@ export class ExportTargetsEditContainer extends PureComponent {
     confirm: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -59,7 +59,7 @@ export class ExportTargetsEditContainer extends PureComponent {
     const exportTargetRequest = request(
       call,
       requests.beExportTargetDestroy,
-      options
+      options,
     );
 
     dispatch(exportTargetRequest).promise.then(() => {
@@ -94,8 +94,8 @@ export class ExportTargetsEditContainer extends PureComponent {
               onClick: this.handleExportTargetDestroy,
               icon: "delete32",
               label: this.props.t("actions.delete"),
-              className: "utility-button__icon--notice"
-            }
+              className: "utility-button__icon--notice",
+            },
           ]}
         />
         <Form model={this.exportTarget} />
@@ -105,5 +105,5 @@ export class ExportTargetsEditContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ExportTargetsEditContainer))
+  withConfirmation(connectAndFetch(ExportTargetsEditContainer)),
 );

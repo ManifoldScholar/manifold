@@ -5,5 +5,5 @@ import List from "./List";
 export default {
   DOI,
   Item,
-  List
+  List,
 };

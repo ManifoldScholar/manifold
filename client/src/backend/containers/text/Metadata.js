@@ -7,7 +7,7 @@ export default class TextMetadataContainer extends PureComponent {
   static displayName = "Text.Metadata";
 
   static propTypes = {
-    text: PropTypes.object
+    text: PropTypes.object,
   };
 
   render() {

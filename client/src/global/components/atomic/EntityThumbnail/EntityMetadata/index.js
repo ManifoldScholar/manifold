@@ -3,5 +3,5 @@ import Content from "./Content";
 
 export default {
   Wrapper,
-  Content
+  Content,
 };

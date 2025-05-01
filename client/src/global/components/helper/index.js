@@ -3,5 +3,5 @@ import UserLink from "./UserLink";
 
 export default {
   SimpleFormat,
-  UserLink
+  UserLink,
 };

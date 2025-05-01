@@ -18,26 +18,26 @@ class AppearanceMenuBody extends Component {
     decrementMargins: PropTypes.func,
     resetTypography: PropTypes.func,
     t: PropTypes.func,
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
-  handleFontStyleControl = event => {
+  handleFontStyleControl = (event) => {
     this.props.selectFont(event.target.value);
     this.props.setScreenReaderStatus(
       this.resetOptionMessage(
         this.props.t("reader.menus.appearance.font"),
-        event.target.value
-      )
+        event.target.value,
+      ),
     );
   };
 
-  handleColorSchemeControl = event => {
+  handleColorSchemeControl = (event) => {
     this.props.setColorScheme(event.target.value);
     this.props.setScreenReaderStatus(
       this.resetOptionMessage(
         this.props.t("reader.menus.appearance.color_scheme"),
-        event.target.value
-      )
+        event.target.value,
+      ),
     );
   };
 
@@ -57,20 +57,20 @@ class AppearanceMenuBody extends Component {
     }
   };
 
-  resetHandler = event => {
+  resetHandler = (event) => {
     event.stopPropagation();
     this.props.setColorScheme("light");
     this.props.resetTypography();
     this.props.setScreenReaderStatus(this.resetMessage);
   };
 
-  incrementMarginsHandler = event => {
+  incrementMarginsHandler = (event) => {
     event.stopPropagation();
     this.props.incrementMargins();
     this.props.setScreenReaderStatus(this.incrementMarginsMessage);
   };
 
-  decrementMarginsHandler = event => {
+  decrementMarginsHandler = (event) => {
     event.stopPropagation();
     this.props.decrementMargins();
     this.props.setScreenReaderStatus(this.decrementMarginsMessage);
@@ -79,7 +79,7 @@ class AppearanceMenuBody extends Component {
   resetOptionMessage(appearanceType, option) {
     return this.props.t("reader.menus.appearance.reset_option_message", {
       appearanceType,
-      option
+      option,
     });
   }
 
@@ -161,7 +161,7 @@ class AppearanceMenuBody extends Component {
       "appearance-menu__color-scheme": true,
       "appearance-menu__color-scheme--light": true,
       "appearance-menu__color-scheme--active": this.colorScheme === "light",
-      "appearance-menu__button-base": true
+      "appearance-menu__button-base": true,
     });
   }
 
@@ -170,7 +170,7 @@ class AppearanceMenuBody extends Component {
       "appearance-menu__color-scheme": true,
       "appearance-menu__color-scheme--dark": true,
       "appearance-menu__color-scheme--active": this.colorScheme === "dark",
-      "appearance-menu__button-base": true
+      "appearance-menu__button-base": true,
     });
   }
 
@@ -178,12 +178,12 @@ class AppearanceMenuBody extends Component {
     return [
       {
         label: "Serif",
-        value: "serif"
+        value: "serif",
       },
       {
         label: "Sans-serif",
-        value: "sans-serif"
-      }
+        value: "sans-serif",
+      },
     ];
   }
 
@@ -191,23 +191,23 @@ class AppearanceMenuBody extends Component {
     return [
       {
         label: "Light",
-        value: "light"
+        value: "light",
       },
       {
         label: "Dark",
-        value: "dark"
-      }
+        value: "dark",
+      },
     ];
   }
 
   renderFontStyleControl() {
-    const labelClassName = option =>
+    const labelClassName = (option) =>
       classNames({
         "appearance-menu__button-base": true,
         "appearance-menu__font-style": true,
         [`appearance-menu__font-style--${option.value}`]: true,
         "appearance-menu__font-style--active":
-          this.typography.font === option.value
+          this.typography.font === option.value,
       });
 
     return (
@@ -216,7 +216,7 @@ class AppearanceMenuBody extends Component {
           {this.props.t("reader.menus.appearance.font_style")}
         </legend>
         <div className="appearance-menu__radio-stack">
-          {this.fontStyleOptions.map(option => (
+          {this.fontStyleOptions.map((option) => (
             <label key={option.value} className={labelClassName(option)}>
               <input
                 value={option.value}
@@ -237,13 +237,13 @@ class AppearanceMenuBody extends Component {
   }
 
   renderColorSchemeControl() {
-    const labelClassName = option =>
+    const labelClassName = (option) =>
       classNames({
         "appearance-menu__button-base": true,
         "appearance-menu__color-scheme": true,
         [`appearance-menu__color-scheme--${option.value}`]: true,
         "appearance-menu__color-scheme--active":
-          this.colorScheme === option.value
+          this.colorScheme === option.value,
       });
 
     return (
@@ -251,7 +251,7 @@ class AppearanceMenuBody extends Component {
         <legend className="control-menu__legend">
           {this.props.t("reader.menus.appearance.color_scheme")}
         </legend>
-        {this.colorSchemeOptions.map(option => (
+        {this.colorSchemeOptions.map((option) => (
           <label key={option.value} className={labelClassName(option)}>
             <input
               value={option.value}
@@ -277,7 +277,7 @@ class AppearanceMenuBody extends Component {
     const fontSizeButtonClass = classNames(
       "appearance-menu__font-size-button",
       "appearance-menu__primary-hover-button",
-      "appearance-menu__button-base"
+      "appearance-menu__button-base",
     );
 
     return (
@@ -299,7 +299,7 @@ class AppearanceMenuBody extends Component {
                   className={fontSizeButtonClass}
                   disabled={this.serifDisabled}
                   aria-disabled={!this.fontSizeDecreasable}
-                  onClick={event => {
+                  onClick={(event) => {
                     this.decrementSizeHandler(event, this.fontSizeDecreasable);
                   }}
                 >
@@ -312,7 +312,7 @@ class AppearanceMenuBody extends Component {
                   className={fontSizeButtonClass}
                   disabled={this.serifDisabled}
                   aria-disabled={!this.fontSizeIncreasable}
-                  onClick={event => {
+                  onClick={(event) => {
                     this.incrementSizeHandler(event, this.fontSizeIncreasable);
                   }}
                 >
@@ -329,7 +329,7 @@ class AppearanceMenuBody extends Component {
                   className={fontSizeButtonClass}
                   disabled={this.sansDisabled}
                   aria-disabled={!this.fontSizeDecreasable}
-                  onClick={event => {
+                  onClick={(event) => {
                     this.decrementSizeHandler(event, this.fontSizeDecreasable);
                   }}
                 >
@@ -342,7 +342,7 @@ class AppearanceMenuBody extends Component {
                   className={fontSizeButtonClass}
                   disabled={this.sansDisabled}
                   aria-disabled={!this.fontSizeIncreasable}
-                  onClick={event => {
+                  onClick={(event) => {
                     this.incrementSizeHandler(event, this.fontSizeIncreasable);
                   }}
                 >
@@ -371,7 +371,7 @@ class AppearanceMenuBody extends Component {
     const buttonClass = classNames(
       "appearance-menu__margin-button",
       "appearance-menu__button-base",
-      "appearance-menu__primary-hover-button"
+      "appearance-menu__primary-hover-button",
     );
 
     return (
@@ -420,7 +420,7 @@ class AppearanceMenuBody extends Component {
     return (
       <div
         className={classNames("appearance-menu control-menu", {
-          [className]: !!className
+          [className]: !!className,
         })}
       >
         <div className="control-menu__header">

@@ -12,7 +12,7 @@ import HeadContent from "global/components/HeadContent";
 export default function JournalsListContainer() {
   const { pagination, filters } = useListQueryParams({ initSize: 8 });
   const { data: journals, meta } = useFetch({
-    request: [journalsAPI.index, filters, pagination]
+    request: [journalsAPI.index, filters, pagination],
   });
 
   const { t } = useTranslation();

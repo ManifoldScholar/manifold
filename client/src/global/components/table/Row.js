@@ -13,7 +13,7 @@ class TableRow extends React.PureComponent {
   static propTypes = {
     linkCreator: PropTypes.func,
     model: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
   };
 
   static contextType = TableHeaderContext;
@@ -44,23 +44,23 @@ class TableRow extends React.PureComponent {
       table__row: true,
       "table__row--is-link": this.hasRowLink,
       "table__row--is-hovering": this.state.hovering,
-      table__list: !this.isTable
+      table__list: !this.isTable,
     });
 
     if (!this.hasRowLink) return { className: rowClassNames };
     return {
-      onClick: event => {
+      onClick: (event) => {
         // do nothing if clicking nested link or button
         if (event.target.closest("a") || event.target.closest("button")) return;
         this.props.history.push(this.link);
       },
-      onMouseOver: event => {
+      onMouseOver: (event) => {
         // do nothing if hovering over nested link or button
         if (event.target.closest("a") || event.target.closest("button")) return;
         this.setState({ hovering: true });
       },
       onMouseOut: () => this.setState({ hovering: false }),
-      className: rowClassNames
+      className: rowClassNames,
     };
   };
 
@@ -72,7 +72,7 @@ class TableRow extends React.PureComponent {
   render() {
     const { children, model } = this.props;
 
-    const cells = React.Children.map(children.filter(Boolean), child => {
+    const cells = React.Children.map(children.filter(Boolean), (child) => {
       return (
         <Cell {...this.cellProps(child)}>
           {isFunction(child.props.children)

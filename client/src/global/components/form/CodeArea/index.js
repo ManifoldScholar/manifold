@@ -4,8 +4,8 @@ import loadable from "@loadable/component";
 import setter from "../setter";
 import withDispatch from "hoc/withDispatch";
 
-const CodeAreaInput = loadable(() =>
-  import(/* webpackChunkName: "ace-editor" */ "./AceEditor")
+const CodeAreaInput = loadable(
+  () => import(/* webpackChunkName: "ace-editor" */ "./AceEditor"),
 );
 
 class FormCodeArea extends Component {
@@ -21,15 +21,15 @@ class FormCodeArea extends Component {
     height: PropTypes.string,
     name: PropTypes.string,
     readOnly: PropTypes.bool,
-    mode: PropTypes.oneOf(["css", "javascript", "html"])
+    mode: PropTypes.oneOf(["css", "javascript", "html"]),
   };
 
   static defaultProps = {
     height: "200px",
-    readOnly: false
+    readOnly: false,
   };
 
-  onChange = value => {
+  onChange = (value) => {
     this.props.set(value);
   };
 
@@ -44,7 +44,7 @@ class FormCodeArea extends Component {
       editorProps: { $blockScrolling: true },
       onChange: this.onChange,
       value: this.value,
-      width: "100%"
+      width: "100%",
     };
 
     return <CodeAreaInput {...props} />;

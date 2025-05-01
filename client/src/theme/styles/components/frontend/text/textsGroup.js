@@ -17,7 +17,7 @@ export default `
       ${respond(
         `margin-bottom: -73px;
       margin-left: -45px;`,
-        75
+        75,
       )}
 
       ${respond(`margin-left: -65px;`, 80)}
@@ -33,7 +33,7 @@ export default `
           `width: 50%;
       padding-bottom: 73px;
       padding-left: 45px;`,
-          75
+          75,
         )}
 
         ${respond(`padding-left: 65px;`, 80)}

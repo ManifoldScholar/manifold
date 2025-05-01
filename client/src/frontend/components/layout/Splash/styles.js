@@ -4,7 +4,7 @@ import {
   respond,
   headingPrimary,
   headingSecondary,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -68,14 +68,14 @@ export const Left = styled.div`
     `
     width: 50%;
   `,
-    75
+    75,
   )}
 
   ${respond(
     `
     padding-inline-end: 4em;
   `,
-    95
+    95,
   )}
 
   p {
@@ -98,14 +98,14 @@ export const Heading = styled("h1", transientOptions)`
     `
     font-size: 24px;
   `,
-    60
+    60,
   )}
 
   ${respond(
     `
     font-size: 1.5em;
   `,
-    90
+    90,
   )}
 `;
 
@@ -159,7 +159,7 @@ export const Right = styled.figure`
     `
     display: block;
   `,
-    75
+    75,
   )}
 `;
 

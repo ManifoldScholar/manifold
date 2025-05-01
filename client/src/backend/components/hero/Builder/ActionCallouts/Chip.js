@@ -21,7 +21,7 @@ class Chip extends PureComponent {
     chipCount: PropTypes.number,
     slotIndex: PropTypes.number,
     slotCount: PropTypes.number,
-    onKeyboardMove: PropTypes.func
+    onKeyboardMove: PropTypes.func,
   };
 
   constructor(props) {
@@ -30,12 +30,12 @@ class Chip extends PureComponent {
     this.popoverDisclosureRef = React.createRef();
   }
 
-  onEdit = event => {
+  onEdit = (event) => {
     event.preventDefault();
     const { actionCalloutEditRoute } = this.props;
     return this.props.history.push(
       lh.link(actionCalloutEditRoute, this.modelId, this.id),
-      { noScroll: true }
+      { noScroll: true },
     );
   };
 
@@ -59,7 +59,7 @@ class Chip extends PureComponent {
     return this.props.index;
   }
 
-  onKeyboardMove = direction => {
+  onKeyboardMove = (direction) => {
     const { actionCallout, index, slotIndex } = this.props;
 
     this.props.onKeyboardMove({
@@ -70,12 +70,12 @@ class Chip extends PureComponent {
       callback: () => {
         // refs are unreliably here due to rerendering caused by ancestor components
         const disclosureToggleEl = document.querySelector(
-          `[data-disclosure-toggle-for="${this.chipId}"]`
+          `[data-disclosure-toggle-for="${this.chipId}"]`,
         );
         if (disclosureToggleEl) {
           disclosureToggleEl.focus();
         }
-      }
+      },
     });
   };
 
@@ -110,26 +110,26 @@ class Chip extends PureComponent {
                 id: "up",
                 label: this.props.t("actions.dnd.move_up_position"),
                 onClick: () => this.onKeyboardMove("up"),
-                disabled: index === 0
+                disabled: index === 0,
               },
               {
                 id: "down",
                 label: this.props.t("actions.dnd.move_down_position"),
                 onClick: () => this.onKeyboardMove("down"),
-                disabled: index === chipCount - 1
+                disabled: index === chipCount - 1,
               },
               {
                 id: "left",
                 label: this.props.t("actions.dnd.move_left_group"),
                 onClick: () => this.onKeyboardMove("left"),
-                disabled: slotIndex === 0
+                disabled: slotIndex === 0,
               },
               {
                 id: "right",
                 label: this.props.t("actions.dnd.move_right_group"),
                 onClick: () => this.onKeyboardMove("right"),
-                disabled: slotIndex === slotCount - 1
-              }
+                disabled: slotIndex === slotCount - 1,
+              },
             ]}
           />
         </div>
@@ -152,7 +152,7 @@ class Chip extends PureComponent {
               {...provided.draggableProps}
               className={classNames({
                 "action-callout-slot__chip": true,
-                "action-callout-slot__chip--is-dragging": snapshot.isDragging
+                "action-callout-slot__chip--is-dragging": snapshot.isDragging,
               })}
             >
               <div className="action-callout-slot__chip-inner">
@@ -174,7 +174,7 @@ class Chip extends PureComponent {
           <div
             className={classNames(
               "action-callout-slot__chip",
-              "drag-placeholder"
+              "drag-placeholder",
             )}
           >
             <div className="action-callout-slot__chip-inner">

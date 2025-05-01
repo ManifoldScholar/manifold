@@ -17,10 +17,10 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
     const state = getState();
     const promises = [];
     const resourceCall = resourceCollectionsAPI.show(
-      match.params.resourceCollectionId
+      match.params.resourceCollectionId,
     );
     const { promise: one } = dispatch(
-      request(resourceCall, requests.rResourceCollection)
+      request(resourceCall, requests.rResourceCollection),
     );
     promises.push(one);
 
@@ -30,7 +30,7 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
       const cr = resourceCollectionsAPI.collectionResources(
         match.params.resourceCollectionId,
         {},
-        { number: pp, size: perPage }
+        { number: pp, size: perPage },
       );
       const lookups = [requests.feSlideshow, requests.feCollectionResources];
       const { promise } = dispatch(request(cr, lookups));
@@ -43,10 +43,10 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
     const newState = {
       resourceCollection: select(
         requests.rResourceCollection,
-        state.entityStore
+        state.entityStore,
       ),
       slideshowResources: select(requests.feSlideshow, state.entityStore),
-      slideshowResourcesMeta: meta(requests.feSlideshow, state.entityStore)
+      slideshowResourcesMeta: meta(requests.feSlideshow, state.entityStore),
     };
     return { ...newState, ...ownProps };
   };
@@ -60,7 +60,7 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
     slideshowResources: PropTypes.array,
     slideshowResourcesMeta: PropTypes.object,
     dispatch: PropTypes.func,
-    history: PropTypes.object
+    history: PropTypes.object,
   };
 
   componentWillUnmount() {
@@ -68,11 +68,11 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
     this.props.dispatch(flush(requests.feCollectionResources));
   }
 
-  handleClose = event => {
+  handleClose = (event) => {
     if (event) event.preventDefault();
     const { textId, sectionId } = this.props.match.params;
     this.props.history.push(lh.link("readerSection", textId, sectionId), {
-      noScroll: true
+      noScroll: true,
     });
   };
 
@@ -81,7 +81,7 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
       resourceCollection,
       slideshowResources,
       slideshowResourcesMeta,
-      dispatch
+      dispatch,
     } = this.props;
 
     if (!resourceCollection || !slideshowResources) return null;

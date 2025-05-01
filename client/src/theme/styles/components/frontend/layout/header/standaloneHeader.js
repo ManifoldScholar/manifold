@@ -2,7 +2,7 @@ import {
   rgba,
   defaultTransitionProps,
   headerContainerPrimary,
-  respond
+  respond,
 } from "theme/styles/mixins";
 import { standaloneHeaderLayout } from "theme/styles/variables/crossComponent";
 
@@ -59,7 +59,7 @@ export default `
         `grid-template: "heading . user-nav" / auto minmax(75px, 1fr) max-content;
       padding-bottom: 0;
       -ms-grid-columns: auto minmax(75px, 1fr) max-content;`,
-        75
+        75,
       )}
 
       &--hidden {
@@ -67,7 +67,7 @@ export default `
 
         ${respond(
           `padding-top: ${standaloneHeaderLayout.paddingTopMobile};`,
-          60
+          60,
         )}
       }
     }
@@ -125,7 +125,7 @@ export default `
 
       ${respond(
         `padding-bottom: ${standaloneHeaderLayout.paddingVerticalDesktop};`,
-        75
+        75,
       )}
     }
 

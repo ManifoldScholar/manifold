@@ -25,7 +25,7 @@ export default function Splash(props) {
     bodyFormatted,
     linkText,
     linkUrl,
-    includeSignUp
+    includeSignUp,
   } = feature.attributes;
 
   return (
@@ -40,14 +40,14 @@ export default function Splash(props) {
           <Styled.Heading
             $color={headerColor}
             dangerouslySetInnerHTML={{
-              __html: headerFormatted || header
+              __html: headerFormatted || header,
             }}
           />
           {(subheaderFormatted || subheader) && (
             <Styled.Subheading
               $color={headerColor}
               dangerouslySetInnerHTML={{
-                __html: subheaderFormatted || subheader
+                __html: subheaderFormatted || subheader,
               }}
             />
           )}
@@ -60,7 +60,7 @@ export default function Splash(props) {
               <a href={linkUrl} target="blank" className="utility-button">
                 <Styled.Button
                   className={classNames({
-                    "utility-button__text--dark-green": mode === "light"
+                    "utility-button__text--dark-green": mode === "light",
                   })}
                 >
                   {linkText}
@@ -76,7 +76,7 @@ export default function Splash(props) {
               >
                 <Styled.Button
                   className={classNames({
-                    "utility-button__text--dark-green": mode === "light"
+                    "utility-button__text--dark-green": mode === "light",
                   })}
                 >
                   Sign Up
@@ -106,5 +106,5 @@ Splash.displayName = "Frontend.Components.Layout.Splash";
 Splash.propTypes = {
   authenticated: PropTypes.bool,
   feature: PropTypes.object,
-  preview: PropTypes.bool
+  preview: PropTypes.bool,
 };

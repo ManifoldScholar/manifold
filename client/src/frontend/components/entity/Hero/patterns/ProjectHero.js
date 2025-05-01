@@ -19,7 +19,7 @@ export default function ProjectHero({ entity, mock }) {
     bgAlt,
     description,
     creators,
-    flattenedCollaborators
+    flattenedCollaborators,
   } = getPartsData(entity);
 
   const darkMode = !!(bgImage || entity.attributes.darkMode);
@@ -27,8 +27,8 @@ export default function ProjectHero({ entity, mock }) {
   const trackEvent = useEventTracker();
 
   const trackProjectEvent = useCallback(
-    eventType => trackEvent(eventType, entity.type, entity.id),
-    [entity, trackEvent]
+    (eventType) => trackEvent(eventType, entity.type, entity.id),
+    [entity, trackEvent],
   );
 
   return (
@@ -91,5 +91,5 @@ export default function ProjectHero({ entity, mock }) {
 ProjectHero.displayName = "Frontend.Entity.Hero.Project";
 
 ProjectHero.propTypes = {
-  entity: PropTypes.object.isRequired
+  entity: PropTypes.object.isRequired,
 };

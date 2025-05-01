@@ -3,5 +3,5 @@ import List from "./List";
 
 export default {
   Form,
-  List
+  List,
 };

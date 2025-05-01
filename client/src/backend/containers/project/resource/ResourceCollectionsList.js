@@ -6,24 +6,24 @@ import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
   Search,
-  ResourceCollectionRow
+  ResourceCollectionRow,
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, {
-  resourceCollectionFilters
+  resourceCollectionFilters,
 } from "hoc/withFilteredLists";
 import { useListQueryParams, useFetch } from "hooks";
 
 function ProjectResourceCollectionsListContainer({
   project,
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
 }) {
   const { t } = useTranslation();
 
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 10,
     initFilters: entitiesListSearchParams.resourceCollections,
-    initSearchProps: entitiesListSearchProps("resourceCollections")
+    initSearchProps: entitiesListSearchProps("resourceCollections"),
   });
 
   const { data: resourceCollections, meta: resourceCollectionsMeta } = useFetch(
@@ -32,10 +32,10 @@ function ProjectResourceCollectionsListContainer({
         projectsAPI.resourceCollections,
         project.id,
         filters,
-        pagination
+        pagination,
       ],
-      options: { requestKey: requests.beResourceCollections }
-    }
+      options: { requestKey: requests.beResourceCollections },
+    },
   );
 
   if (!resourceCollections || !resourceCollectionsMeta) return null;
@@ -48,7 +48,7 @@ function ProjectResourceCollectionsListContainer({
       titleTag="h2"
       entities={resourceCollections}
       unit={t("glossary.resource_collection", {
-        count: resourceCollectionsMeta?.pagination?.totalCount
+        count: resourceCollectionsMeta?.pagination?.totalCount,
       })}
       pagination={resourceCollectionsMeta.pagination}
       showCount
@@ -60,7 +60,7 @@ function ProjectResourceCollectionsListContainer({
           authorizedFor={project}
           authorizedTo="createResourceCollections"
           type="add"
-        />
+        />,
       ]}
     />
   );
@@ -71,9 +71,9 @@ ProjectResourceCollectionsListContainer.displayName = "Project.CollectionsList";
 ProjectResourceCollectionsListContainer.propTypes = {
   project: PropTypes.object,
   entitiesListSearchProps: PropTypes.func.isRequired,
-  entitiesListSearchParams: PropTypes.object.isRequired
+  entitiesListSearchParams: PropTypes.object.isRequired,
 };
 
 export default withFilteredLists(ProjectResourceCollectionsListContainer, {
-  resourceCollections: resourceCollectionFilters()
+  resourceCollections: resourceCollectionFilters(),
 });

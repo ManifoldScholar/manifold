@@ -9,7 +9,7 @@ export const fontFamily = {
   serif: fontFamilySerif,
   copy: fontFamilySerif,
   heading: fontFamilySans,
-  mono: fontFamilyMono
+  mono: fontFamilyMono,
 };
 
 export const fontWeight = {
@@ -18,7 +18,7 @@ export const fontWeight = {
   medium: 500,
   regular: 400,
   semibold: 600,
-  bold: 700
+  bold: 700,
 };
 
 export const fontSize = {
@@ -28,7 +28,7 @@ export const fontSize = {
   50: "16px",
   40: "14px",
   30: "13px",
-  root: "16px"
+  root: "16px",
 };
 
 export const lineHeight = 1.2;

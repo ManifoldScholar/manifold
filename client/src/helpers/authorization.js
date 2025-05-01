@@ -61,7 +61,7 @@ class Authorization {
   }
 
   checkAbilitiesForEntities(entities, abilities, classAbilities) {
-    const found = entities.find(entity => {
+    const found = entities.find((entity) => {
       return this.checkAbilitiesForEntity(entity, abilities, classAbilities);
     });
     return found !== undefined;
@@ -72,7 +72,7 @@ class Authorization {
       return this.checkAbilitiesForEntityType(
         entity,
         abilities,
-        classAbilities
+        classAbilities,
       );
     if (isPlainObject(entity))
       return this.checkAbilitiesForEntityInstance(entity, abilities);
@@ -81,11 +81,11 @@ class Authorization {
 
   checkAbilitiesForEntityType(entityType, abilities, classAbilities) {
     // If we're checking multiple abilities, only one needs to exist.
-    const match = abilities.find(ability => {
+    const match = abilities.find((ability) => {
       return this.checkAbilityForEntityType(
         entityType,
         ability,
-        classAbilities
+        classAbilities,
       );
     });
     return match !== undefined;
@@ -99,7 +99,7 @@ class Authorization {
 
   checkAbilitiesForEntityInstance(entity, abilities) {
     // If we're checking multiple abilities, only one needs to exist.
-    const match = abilities.find(ability => {
+    const match = abilities.find((ability) => {
       return this.checkAbilityForEntityInstance(entity, ability);
     });
     return match !== undefined;

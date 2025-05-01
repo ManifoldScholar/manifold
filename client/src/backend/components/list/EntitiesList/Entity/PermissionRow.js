@@ -12,7 +12,7 @@ class PermissionRow extends PureComponent {
     entity: PropTypes.object,
     active: PropTypes.string,
     linkName: PropTypes.string.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get permission() {
@@ -59,8 +59,8 @@ class PermissionRow extends PureComponent {
   }
 
   roles() {
-    return this.permission.attributes.roleNames.map(role =>
-      this.roleName(role)
+    return this.permission.attributes.roleNames.map((role) =>
+      this.roleName(role),
     );
   }
 

@@ -21,24 +21,24 @@ export default function EditProfileForm({ hideOverlay, mode }) {
 
   const [cookiePrefs, setCookiePrefs] = useState({
     manifold: "yes",
-    google: "yes"
+    google: "yes",
   });
 
   const settings = useFromStore("settings", "select");
-  const manifoldAnalyticsEnabled = !settings?.attributes?.general
-    ?.disableInternalAnalytics;
-  const googleAnalyticsEnabled = !!settings?.attributes?.integrations
-    ?.gaFourTrackingId;
+  const manifoldAnalyticsEnabled =
+    !settings?.attributes?.general?.disableInternalAnalytics;
+  const googleAnalyticsEnabled =
+    !!settings?.attributes?.integrations?.gaFourTrackingId;
 
   const notifyUpdate = useNotification(() => ({
     level: 0,
     id: `CURRENT_USER_UPDATED`,
     heading: t("forms.signin_overlay.update_notification_header"),
-    expiration: 3000
+    expiration: 3000,
   }));
 
   const formatAttributes = useCallback(
-    data => {
+    (data) => {
       const consentAttrs =
         mode === "new"
           ? {
@@ -47,15 +47,15 @@ export default function EditProfileForm({ hideOverlay, mode }) {
                 : cookiePrefs.manifold === "yes",
               consentGoogleAnalytics: !googleAnalyticsEnabled
                 ? null
-                : cookiePrefs.google === "yes"
+                : cookiePrefs.google === "yes",
             }
           : {};
       return {
         ...consentAttrs,
-        ...data.attributes
+        ...data.attributes,
       };
     },
-    [mode, cookiePrefs, manifoldAnalyticsEnabled, googleAnalyticsEnabled]
+    [mode, cookiePrefs, manifoldAnalyticsEnabled, googleAnalyticsEnabled],
   );
 
   const updateUser = useCallback((_, data) => {
@@ -67,7 +67,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
     if (hideOverlay) hideOverlay();
   }, [notifyUpdate, hideOverlay]);
 
-  const redirect = route => () => {
+  const redirect = (route) => () => {
     if (hideOverlay) hideOverlay();
     navigate(lh.link(route));
   };
@@ -132,5 +132,5 @@ EditProfileForm.displayName = "Global.SignInUp.EditProfileForm";
 
 EditProfileForm.propTypes = {
   mode: PropTypes.oneOf(["new", "existing"]),
-  hideOverlay: PropTypes.func
+  hideOverlay: PropTypes.func,
 };

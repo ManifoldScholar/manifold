@@ -21,11 +21,11 @@ export class TextStylesContainer extends PureComponent {
     dispatch: PropTypes.func,
     refresh: PropTypes.func,
     confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   get text() {
@@ -39,7 +39,7 @@ export class TextStylesContainer extends PureComponent {
   get callbacks() {
     return {
       updatePosition: this.updatePosition,
-      confirmDestroy: this.confirmDestroy
+      confirmDestroy: this.confirmDestroy,
     };
   }
 
@@ -47,20 +47,20 @@ export class TextStylesContainer extends PureComponent {
     this.props.refresh();
   }
 
-  confirmDestroy = stylesheet => {
+  confirmDestroy = (stylesheet) => {
     const t = this.props.t;
     const heading = t("modals.delete_text");
     const message = t("modals.delete_text_body");
     this.props.confirm(heading, message, () => this.destroy(stylesheet));
   };
 
-  destroy = stylesheet => {
+  destroy = (stylesheet) => {
     const call = stylesheetsAPI.destroy(stylesheet.id);
     const options = { removes: stylesheet };
     const stylesheetRequest = request(
       call,
       requests.beStylesheetDestroy,
-      options
+      options,
     );
     this.props.dispatch(stylesheetRequest).promise.then(() => {
       this.props.refresh();
@@ -69,14 +69,14 @@ export class TextStylesContainer extends PureComponent {
 
   updatePosition = (stylesheet, newPos, callback) => {
     const changes = {
-      attributes: { position: newPos }
+      attributes: { position: newPos },
     };
     const call = stylesheetsAPI.update(stylesheet.id, changes);
     const options = { notificationScope: "none" };
     const stylesheetRequest = request(
       call,
       requests.beStylesheetUpdate,
-      options
+      options,
     );
     this.props.dispatch(stylesheetRequest).promise.then(() => {
       this.props.refresh();
@@ -109,7 +109,7 @@ export class TextStylesContainer extends PureComponent {
                 size={18}
                 className={classNames(
                   "button-icon-secondary__icon",
-                  "button-icon-secondary__icon--large"
+                  "button-icon-secondary__icon--large",
                 )}
               />
               <span>{t("texts.stylesheets.add_button_label")}</span>

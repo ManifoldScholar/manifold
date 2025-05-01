@@ -18,12 +18,12 @@ class ResourceRow extends PureComponent {
     onSwitchChange: PropTypes.func,
     switchValue: PropTypes.func,
     onRowClick: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get onRowClick() {
     if (this.props.onRowClick)
-      return event => {
+      return (event) => {
         event.preventDefault();
         event.stopPropagation();
         return this.props.onRowClick(this.resource);
@@ -47,7 +47,7 @@ class ResourceRow extends PureComponent {
     return (
       <span
         dangerouslySetInnerHTML={{
-          __html: this.resource.attributes.titleFormatted
+          __html: this.resource.attributes.titleFormatted,
         }}
       />
     );
@@ -79,7 +79,7 @@ class ResourceRow extends PureComponent {
     return (
       <div className="toggle-indicator">
         <Toggle
-          onClick={event => this.onSwitchChange(event, this.resource)}
+          onClick={(event) => this.onSwitchChange(event, this.resource)}
           $checked={this.switchValue(this.resource.id)}
           role="button"
           tabIndex="0"
@@ -107,7 +107,7 @@ class ResourceRow extends PureComponent {
 
     return [
       this.kind,
-      { text: this.props.t("resources.featured_label"), level: "notice" }
+      { text: this.props.t("resources.featured_label"), level: "notice" },
     ];
   }
 

@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 

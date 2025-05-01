@@ -11,7 +11,7 @@ import { withRouter } from "react-router-dom";
 
 function JournalLayoutContainer({ journal, refresh, history, route }) {
   const { data: actionCallouts, refresh: refreshActionCallouts } = useFetch({
-    request: [journalsAPI.actionCallouts, journal.id]
+    request: [journalsAPI.actionCallouts, journal.id],
   });
 
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function JournalLayoutContainer({ journal, refresh, history, route }) {
 
   const drawerProps = {
     closeUrl: lh.link("backendJournalLayout", journal?.id),
-    lockScroll: "always"
+    lockScroll: "always",
   };
 
   if (!journal) return null;
@@ -52,10 +52,10 @@ function JournalLayoutContainer({ journal, refresh, history, route }) {
         childProps: {
           calloutable: journal,
           refreshActionCallouts,
-          closeRoute: "backendJournalLayout"
+          closeRoute: "backendJournalLayout",
         },
         drawer: true,
-        drawerProps: { wide: true, ...drawerProps }
+        drawerProps: { wide: true, ...drawerProps },
       })}
     </Authorize>
   );
@@ -66,7 +66,7 @@ JournalLayoutContainer.propTypes = {
   location: PropTypes.object,
   history: PropTypes.object,
   route: PropTypes.object,
-  refresh: PropTypes.func
+  refresh: PropTypes.func,
 };
 
 export default withRouter(JournalLayoutContainer);

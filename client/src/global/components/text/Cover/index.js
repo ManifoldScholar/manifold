@@ -11,11 +11,11 @@ class TextCover extends PureComponent {
   static propTypes = {
     text: PropTypes.object.isRequired,
     iconOnly: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    iconOnly: false
+    iconOnly: false,
   };
 
   get text() {
@@ -31,7 +31,7 @@ class TextCover extends PureComponent {
     return (
       this.text.attributes.coverAltText ||
       this.props.t("img_alts.entity_cover", {
-        entity: this.text.attributes.titlePlaintext
+        entity: this.text.attributes.titlePlaintext,
       })
     );
   }

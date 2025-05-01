@@ -7,9 +7,9 @@ export default {
         body: JSON.stringify({ type: "analyticsEvent", data: event }),
         headers: {
           "VISIT-TOKEN": visitToken,
-          "VISITOR-TOKEN": visitorToken
-        }
-      }
+          "VISITOR-TOKEN": visitorToken,
+        },
+      },
     };
   },
 
@@ -17,7 +17,7 @@ export default {
     return {
       endpoint: "/api/v1/analytics",
       method: "GET",
-      options: { params }
+      options: { params },
     };
-  }
+  },
 };

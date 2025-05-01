@@ -13,5 +13,5 @@ export default {
   List,
   Notation,
   Fader,
-  Preview
+  Preview,
 };

@@ -10,7 +10,7 @@ export default class ResourceImportState extends PureComponent {
     resourceImport: PropTypes.object,
     updateImportState: PropTypes.func.isRequired,
     match: PropTypes.object,
-    fetch: PropTypes.func.isRequired
+    fetch: PropTypes.func.isRequired,
   };
 
   get finishUrl() {
@@ -23,16 +23,16 @@ export default class ResourceImportState extends PureComponent {
     return lh.link(
       "backendResourceImportMap",
       match.params.projectId,
-      match.params.id
+      match.params.id,
     );
   }
 
-  resetImport = event => {
+  resetImport = (event) => {
     event.preventDefault();
     this.props.updateImportState("mapped");
   };
 
-  startImport = event => {
+  startImport = (event) => {
     event.preventDefault();
     this.props.updateImportState("importing");
   };

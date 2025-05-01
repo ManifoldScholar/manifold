@@ -10,7 +10,7 @@ const { request } = entityStoreActions;
 export class UnsubscribeContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -37,5 +37,5 @@ export class UnsubscribeContainer extends Component {
 }
 
 export default connect(UnsubscribeContainer.mapStateToProps)(
-  UnsubscribeContainer
+  UnsubscribeContainer,
 );

@@ -16,9 +16,9 @@ function ProjectCollectionsBackendPlaceholder({ onClick }) {
           {
             title: t("actions.create_collection"),
             buttonProps: {
-              onClick
-            }
-          }
+              onClick,
+            },
+          },
         ]}
       />
     </Wrapper>
@@ -29,7 +29,7 @@ ProjectCollectionsBackendPlaceholder.displayName =
   "Global.Entity.CollectionPlaceholder.ProjectCollectionsBackend";
 
 ProjectCollectionsBackendPlaceholder.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ProjectCollectionsBackendPlaceholder;

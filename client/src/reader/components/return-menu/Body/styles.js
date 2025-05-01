@@ -8,7 +8,7 @@ import {
   buttonUnstyled,
   defaultHoverStyle,
   defaultTransitionProps,
-  respond
+  respond,
 } from "theme/styles/mixins";
 import { ZOOM_BREAKPOINT } from "theme/styles/components/reader/readerHeader";
 
@@ -22,7 +22,7 @@ export const Menu = styled.div`
 
   ${respond(
     `max-block-size: calc(100vh - var(--reader-header-height));`,
-    ZOOM_BREAKPOINT
+    ZOOM_BREAKPOINT,
   )}
 `;
 

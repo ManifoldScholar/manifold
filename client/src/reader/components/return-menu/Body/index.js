@@ -14,7 +14,7 @@ export default function ReturnMenuBody({
   projectTitle: entityTitle,
   toggleSignInUpOverlay,
   moreLink,
-  className
+  className,
 }) {
   const context = useContext(FrontendModeContext);
   const settings = useFromStore("settings", "select");
@@ -43,7 +43,7 @@ export default function ReturnMenuBody({
               to={lh.link(
                 isJournalArticle
                   ? "frontendJournalsList"
-                  : "frontendProjectsAll"
+                  : "frontendProjectsAll",
               )}
             >
               <Styled.LinkIcon
@@ -95,5 +95,5 @@ ReturnMenuBody.propTypes = {
   toggleSignInUpOverlay: PropTypes.func.isRequired,
   moreLink: PropTypes.string,
   settings: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
 };

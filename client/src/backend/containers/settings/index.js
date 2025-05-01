@@ -15,5 +15,5 @@ export default {
   Integrations,
   Email,
   Ingestion,
-  Subjects
+  Subjects,
 };

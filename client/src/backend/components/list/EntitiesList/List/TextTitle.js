@@ -11,7 +11,7 @@ export default class ListEntitiesListTextTitle extends PureComponent {
     titleIcon: PropTypes.string,
     titleLink: PropTypes.string,
     title: PropTypes.node,
-    count: PropTypes.number
+    count: PropTypes.number,
   };
 
   static defaultProps = {};
@@ -44,7 +44,7 @@ export default class ListEntitiesListTextTitle extends PureComponent {
     return {
       role: "status",
       "aria-live": "polite",
-      "aria-atomic": true
+      "aria-atomic": true,
     };
   }
 
@@ -67,7 +67,7 @@ export default class ListEntitiesListTextTitle extends PureComponent {
               </figure>
             )}
             {this.title}
-          </>
+          </>,
         )}
       </h2>
     );

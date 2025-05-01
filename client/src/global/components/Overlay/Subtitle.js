@@ -8,7 +8,7 @@ function Subtitle({ subtitle }) {
 Subtitle.displayName = "Global.Overlay.Header.Subtitle";
 
 Subtitle.propTypes = {
-  subtitle: PropTypes.string.isRequired
+  subtitle: PropTypes.string.isRequired,
 };
 
 export default Subtitle;

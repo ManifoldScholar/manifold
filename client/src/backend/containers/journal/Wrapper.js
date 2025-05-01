@@ -10,7 +10,7 @@ import {
   useFetch,
   useApiCallback,
   useNotification,
-  useRedirectToFirstMatch
+  useRedirectToFirstMatch,
 } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
@@ -20,18 +20,18 @@ import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 function JournalWrapper({ match, route, history, confirm, location }) {
   const { t } = useTranslation();
   const { data: journal, refresh } = useFetch({
-    request: [journalsAPI.show, match.params.id]
+    request: [journalsAPI.show, match.params.id],
   });
   const destroy = useApiCallback(journalsAPI.destroy, { removes: journal });
 
-  const notifyDestroy = useNotification(j => ({
+  const notifyDestroy = useNotification((j) => ({
     level: 0,
     id: `JOURNAL_DESTROYED_${j.id}`,
     heading: t("notifications.journal_delete"),
     body: t("notifications.delete_entity_body", {
-      title: j?.attributes?.title
+      title: j?.attributes?.title,
     }),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const destroyAndRedirect = useCallback(() => {
@@ -41,7 +41,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
         notifyDestroy(journal);
         redirect();
       },
-      () => redirect()
+      () => redirect(),
     );
   }, [destroy, history, journal, notifyDestroy]);
 
@@ -56,19 +56,19 @@ function JournalWrapper({ match, route, history, confirm, location }) {
       label: "actions.view",
       route: "frontendJournalDetail",
       slug: journal?.attributes.slug,
-      icon: "eyeOpen32"
+      icon: "eyeOpen32",
     },
     {
       label: "actions.delete",
       authorize: "delete",
       icon: "delete32",
-      onClick: handleJournalDestroy
-    }
+      onClick: handleJournalDestroy,
+    },
   ];
 
   const renderRoutes = () => {
     return childRoutes(route, {
-      childProps: { refresh, journal }
+      childProps: { refresh, journal },
     });
   };
 
@@ -76,7 +76,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
     route: "backendJournal",
     id: journal?.id,
     slug: journal?.attributes.slug,
-    candidates: journal ? navigation.journal(journal) : []
+    candidates: journal ? navigation.journal(journal) : [],
   });
 
   if (!journal) return null;
@@ -86,12 +86,12 @@ function JournalWrapper({ match, route, history, confirm, location }) {
   const breadcrumbs = [
     {
       to: lh.link("backendJournals"),
-      label: t("glossary.journal_title_case_other")
+      label: t("glossary.journal_title_case_other"),
     },
     {
       to: lh.link("backendJournals", journal.id),
-      label: journal.attributes.titlePlaintext
-    }
+      label: journal.attributes.titlePlaintext,
+    },
   ];
 
   return (
@@ -99,7 +99,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
       <Authorize
         entity={journal}
         failureFatalError={{
-          detail: t("journals.unauthorized_edit")
+          detail: t("journals.unauthorized_edit"),
         }}
         ability={["read"]}
       >

@@ -22,7 +22,7 @@ function CategoryHeader({
   onCategoryMove,
   onCategoryEditError,
   index,
-  categoryCount
+  categoryCount,
 }) {
   const { t } = useTranslation();
 
@@ -42,7 +42,7 @@ function CategoryHeader({
         if (source.data.type === "categories") {
           setCategoryDragActive(false);
         }
-      }
+      },
     });
   }, []);
 
@@ -103,14 +103,14 @@ function CategoryHeader({
                     id: "up",
                     label: t("actions.dnd.move_up_position"),
                     onClick: () => onCategoryMove(category.id, "up"),
-                    disabled: index === 0
+                    disabled: index === 0,
                   },
                   {
                     id: "down",
                     label: t("actions.dnd.move_down_position"),
                     onClick: () => onCategoryMove(category.id, "down"),
-                    disabled: index === categoryCount - 1
-                  }
+                    disabled: index === categoryCount - 1,
+                  },
                 ]}
               />
             </Styled.Actions>
@@ -146,11 +146,11 @@ CategoryHeader.propTypes = {
   groupId: PropTypes.string,
   dragProps: PropTypes.shape({
     provided: PropTypes.object.isRequired,
-    snapshot: PropTypes.object.isRequired
+    snapshot: PropTypes.object.isRequired,
   }),
   onCategoryEdit: PropTypes.func,
   onCategoryRemove: PropTypes.func,
-  initExpanded: PropTypes.bool
+  initExpanded: PropTypes.bool,
 };
 
 export default CategoryHeader;

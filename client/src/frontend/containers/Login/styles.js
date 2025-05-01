@@ -12,11 +12,11 @@ export const FormContainer = styled.div`
 
   ${respond(
     `max-width: calc(300px + var(--container-padding-inline-responsive) * 2);`,
-    35
+    35,
   )}
 
   ${respond(
     `max-width: calc(300px + var(--container-padding-inline-full) * 2);`,
-    120
+    120,
   )}
 `;

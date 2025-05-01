@@ -3,7 +3,7 @@ import {
   defaultFocusStyle,
   formLabelPrimary,
   respond,
-  formInputSecondary
+  formInputSecondary,
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import { transientOptions } from "helpers/emotionHelpers";

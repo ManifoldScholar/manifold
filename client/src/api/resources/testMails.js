@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: `/api/v1/test_mails`,
       method: "POST",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

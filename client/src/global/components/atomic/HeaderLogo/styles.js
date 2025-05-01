@@ -31,7 +31,7 @@ export const Link = styled.a`
         width: 32px;
         height: 32px;
       `,
-      40
+      40,
     )}
 
     ${respond(
@@ -39,7 +39,7 @@ export const Link = styled.a`
         width: min(4.32vw, 38px);
         height: min(4.32vw, 38px);
       `,
-      75
+      75,
     )}
   }
 

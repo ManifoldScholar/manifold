@@ -8,13 +8,13 @@ export default function Tooltip({
   content,
   xOffset = 0,
   yOffset = 20,
-  delay = 0
+  delay = 0,
 }) {
   const [userClosed, setUserClosed] = useState(false);
   const tooltipRef = useRef(null);
 
   useEffect(() => {
-    const handleEsc = e => {
+    const handleEsc = (e) => {
       if (e.key !== "Escape") return;
       setUserClosed(true);
     };
@@ -40,7 +40,7 @@ export default function Tooltip({
       {React.cloneElement(children, {
         "aria-describedby": uid,
         onBlur: resetEscape,
-        onMouseLeave: resetEscape
+        onMouseLeave: resetEscape,
       })}
       <Styled.Tooltip
         ref={tooltipRef}
@@ -62,5 +62,5 @@ Tooltip.displayName = "Global.Atomic.Tooltip";
 Tooltip.propTypes = {
   content: PropTypes.node,
   xOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  yOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  yOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

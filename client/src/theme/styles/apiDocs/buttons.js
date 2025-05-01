@@ -1,7 +1,7 @@
 import {
   utilityPrimary,
   defaultTransitionProps,
-  buttonUnstyled
+  buttonUnstyled,
 } from "theme/styles/mixins";
 import { invalidFormElement } from "./mixins";
 

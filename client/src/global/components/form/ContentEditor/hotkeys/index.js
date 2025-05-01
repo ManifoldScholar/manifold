@@ -1,6 +1,6 @@
 import {
   increaseIndent,
-  decreaseIndent
+  decreaseIndent,
 } from "../utils/slate/transforms/listIndents";
 import { toggleMark, toggleOrWrapNode } from "../utils/slate/transforms";
 import { getListItemNode } from "../utils/slate/getters";
@@ -8,7 +8,7 @@ import {
   handleLinkHotkey,
   handleImageHotkey,
   handleIframeHotkey,
-  insertSoftBreak
+  insertSoftBreak,
 } from "./handlers";
 
 export const captureHotKeys = (e, editor) => {
@@ -35,7 +35,6 @@ export const captureHotKeys = (e, editor) => {
 
   if (!e.metaKey && !e.ctrlKey) return;
 
-  /* eslint-disable default-case */
   // Prevent default only if we match a case so we don't block undo, paste, etc.
   if ((e.metaKey && e.altKey) || (e.ctrlKey && e.shiftKey)) {
     switch (e.keyCode) {

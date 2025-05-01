@@ -23,7 +23,7 @@ function JournalVolumesEntityCollection({
           ? {}
           : {
               pagination: meta.pagination,
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -41,7 +41,7 @@ JournalVolumesEntityCollection.propTypes = {
   paginationProps: PropTypes.object,
   countProps: PropTypes.object,
   title: PropTypes.string,
-  FooterComponent: PropTypes.func
+  FooterComponent: PropTypes.func,
 };
 
 export default JournalVolumesEntityCollection;

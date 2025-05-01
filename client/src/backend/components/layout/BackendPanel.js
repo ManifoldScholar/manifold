@@ -8,15 +8,15 @@ export default class BackendPanel extends PureComponent {
   static propTypes = {
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
+      PropTypes.node,
     ]),
     sidebar: PropTypes.object,
-    flush: PropTypes.bool
+    flush: PropTypes.bool,
   };
 
   get innerClass() {
     return classNames("container", {
-      flush: this.props.flush
+      flush: this.props.flush,
     });
   }
 

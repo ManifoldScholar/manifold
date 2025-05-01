@@ -7,7 +7,7 @@ import {
   utilityPrimary,
   subtitlePrimary,
   rgba,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import { eventEntity } from "theme/styles/variables/crossComponent";
 
@@ -19,7 +19,8 @@ export const Tile = styled.article`
   padding: 19px 17px 21px 0;
   margin-left: 10px;
   text-decoration: none;
-  transition: color var(--transition-duration-default) ease-out,
+  transition:
+    color var(--transition-duration-default) ease-out,
     box-shadow var(--transition-duration-default) ease-out;
 
   .backend & {
@@ -47,7 +48,7 @@ export const Tile = styled.article`
 
         ${respond(
           `box-shadow: 0 20px 30px 2px ${rgba("neutralBlack", 0.13)};`,
-          60
+          60,
         )}
       }
     `}
@@ -80,7 +81,8 @@ export const Icon = styled(IconComposer)`
   border-radius: 50%;
   /* clip bit of bg color showing on hover */
   clip-path: circle(49%);
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
   transform: translateX(-50%);
 
@@ -95,12 +97,12 @@ export const Icon = styled(IconComposer)`
   ${respond(
     `width: ${iconSize.med};
     height: ${iconSize.med};`,
-    60
+    60,
   )}
   ${respond(
     `width: ${iconSize.large};
     height: ${iconSize.large};`,
-    75
+    75,
   )}
 `;
 

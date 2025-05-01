@@ -4,7 +4,7 @@ import {
   headingPrimaryFontSizing,
   subtitlePrimary,
   overlayCopy,
-  utilityPrimary
+  utilityPrimary,
 } from "theme/styles/mixins";
 
 export default `
@@ -23,7 +23,7 @@ export default `
       align-items: center;
       justify-content: space-between;
     `,
-      95
+      95,
     )}
 
   .main {
@@ -76,7 +76,7 @@ export default `
           top: 0;
           right: 0;
         `,
-          95
+          95,
         )}
 
         .button-primary {

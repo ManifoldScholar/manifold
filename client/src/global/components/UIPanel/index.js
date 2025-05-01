@@ -7,7 +7,7 @@ import classNames from "classnames";
 export default function UIPanel(props) {
   const visible = props.visibility[props.id];
 
-  const handleOutsideClick = e => {
+  const handleOutsideClick = (e) => {
     const header = document.querySelector(".reader-header, .header-app");
     if (header?.contains(e.target)) {
       return true;
@@ -20,14 +20,14 @@ export default function UIPanel(props) {
       active={visible}
       focusTrapOptions={{
         allowOutsideClick: handleOutsideClick,
-        escapeDeactivates: e => props.hidePanel(e)
+        escapeDeactivates: (e) => props.hidePanel(e),
       }}
     >
       <Styled.Panel inert={!visible ? "" : undefined}>
         {React.createElement(props.bodyComponent, {
           ...props,
           closeCallback: props.hidePanel,
-          className: classNames(props.bodyClassName, "panel")
+          className: classNames(props.bodyClassName, "panel"),
         })}
       </Styled.Panel>
     </FocusTrap>
@@ -40,5 +40,5 @@ UIPanel.propTypes = {
   id: PropTypes.string,
   visibility: PropTypes.object,
   bodyComponent: PropTypes.elementType,
-  hidePanel: PropTypes.func
+  hidePanel: PropTypes.func,
 };

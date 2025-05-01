@@ -22,7 +22,7 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
   const urlRef = useRef(null);
   const altRef = useRef(null);
 
-  const addImage = close => {
+  const addImage = (close) => {
     const url = urlRef?.current?.inputElement?.value;
     if (!url) return;
     const alt = altRef?.current?.inputElement?.value;
@@ -30,18 +30,18 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
     return insertImage(editor, url, alt);
   };
 
-  const updateImage = attrs => close => {
+  const updateImage = (attrs) => (close) => {
     const url = urlRef?.current?.inputElement?.value ?? attrs.src;
     if (!url) return;
     const alt = altRef?.current?.inputElement?.value;
     close();
     Transforms.setNodes(editor, {
-      htmlAttrs: { ...attrs, src: url, alt }
+      htmlAttrs: { ...attrs, src: url, alt },
     });
     ReactEditor.focus(editor);
   };
 
-  const getImageData = e => {
+  const getImageData = (e) => {
     e.preventDefault();
     if (!selection) return;
 
@@ -54,25 +54,25 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
         form,
         callback: addImage,
         closeCallback: onModalClose(editor, selection),
-        resolveLabel: t("actions.add")
+        resolveLabel: t("actions.add"),
       });
   };
 
-  const updateImageData = e => {
+  const updateImageData = (e) => {
     e.preventDefault();
 
     const [[image]] = Array.from(
       Editor.nodes(editor, {
         at: Editor.unhangRange(editor, selection),
-        match: n =>
-          !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "img"
-      })
+        match: (n) =>
+          !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === "img",
+      }),
     );
 
     const attrs = image?.htmlAttrs ?? {};
     const defaultValues = {
       src: attrs.src,
-      alt: attrs.alt
+      alt: attrs.alt,
     };
 
     const heading = t("editor.forms.image_update_heading");
@@ -91,7 +91,7 @@ const ImageButton = ({ icon, size, ...rest }, ref) => {
         form,
         callback: updateImage(attrs),
         closeCallback: onModalClose(editor, selection),
-        resolveLabel: t("actions.update")
+        resolveLabel: t("actions.update"),
       });
   };
 

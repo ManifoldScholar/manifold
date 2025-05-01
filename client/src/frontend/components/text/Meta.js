@@ -10,7 +10,7 @@ export default function TextMeta({
   datesVisible,
   datePrefix,
   date,
-  publishedVisible
+  publishedVisible,
 }) {
   const { t } = useTranslation();
 
@@ -40,5 +40,5 @@ TextMeta.propTypes = {
   datesVisible: PropTypes.bool,
   datePrefix: PropTypes.string,
   date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
-  publishedVisible: PropTypes.bool
+  publishedVisible: PropTypes.bool,
 };

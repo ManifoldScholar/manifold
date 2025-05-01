@@ -6,8 +6,8 @@ export default {
       endpoint: `/api/v1/comments`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -16,8 +16,8 @@ export default {
       endpoint: `/api/v1/${subject.type}/${subject.id}/relationships/comments`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -27,8 +27,8 @@ export default {
       endpoint: `/api/v1/${subject.type}/${subject.id}/relationships/comments`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "comments", data })
-      }
+        body: JSON.stringify({ type: "comments", data }),
+      },
     };
   },
 
@@ -36,7 +36,7 @@ export default {
     return {
       endpoint: `/api/v1/comments/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -46,8 +46,8 @@ export default {
       endpoint: `/api/v1/comments/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "comments", data })
-      }
+        body: JSON.stringify({ type: "comments", data }),
+      },
     };
   },
 
@@ -56,7 +56,7 @@ export default {
     return {
       endpoint: `/api/v1/comments/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -65,7 +65,7 @@ export default {
     return {
       endpoint: `/api/v1/comments/${id}/relationships/flags`,
       method: "POST",
-      options: {}
+      options: {},
     };
   },
 
@@ -74,7 +74,7 @@ export default {
     return {
       endpoint: `/api/v1/comments/${id}/relationships/flags`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -82,7 +82,7 @@ export default {
     return {
       endpoint: `/api/v1/comments/${commentId}/relationships/flags/resolve_all`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

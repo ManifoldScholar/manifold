@@ -3,5 +3,5 @@ import Editor from "./Editor";
 
 export default {
   Thread,
-  Editor
+  Editor,
 };

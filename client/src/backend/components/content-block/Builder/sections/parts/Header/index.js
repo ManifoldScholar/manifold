@@ -11,7 +11,7 @@ export default class ProjectContentSectionsPartsHeader extends PureComponent {
     children: PropTypes.string,
     subtitle: PropTypes.string,
     headerId: PropTypes.string,
-    instructionsId: PropTypes.string
+    instructionsId: PropTypes.string,
   };
 
   render() {

@@ -35,12 +35,12 @@ export class CommentEditor extends PureComponent {
     parentId: PropTypes.string,
     focus: PropTypes.bool,
     t: PropTypes.func,
-    initialOpen: PropTypes.bool
+    initialOpen: PropTypes.bool,
   };
 
   static defaultProps = {
     focus: true,
-    initialOpen: false
+    initialOpen: false,
   };
 
   constructor(props) {
@@ -75,7 +75,7 @@ export class CommentEditor extends PureComponent {
     return {
       body,
       errors: [],
-      open: props.initialOpen
+      open: props.initialOpen,
     };
   }
 
@@ -87,7 +87,7 @@ export class CommentEditor extends PureComponent {
     return "comment-textarea-error";
   }
 
-  submitOnReturnKey = event => {
+  submitOnReturnKey = (event) => {
     if (event.keyCode === 13 && !event.shiftKey) {
       event.preventDefault();
       event.stopPropagation();
@@ -95,7 +95,7 @@ export class CommentEditor extends PureComponent {
     }
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     if (this.isEdit(this.props))
       return this.updateComment(this.props, this.state);
@@ -106,7 +106,7 @@ export class CommentEditor extends PureComponent {
     const comment = this.commentFromPropsAndState(props, state);
     const call = commentsAPI.create(props.subject, comment);
     const options = {
-      adds: `comments-for-${props.subject.id}`
+      adds: `comments-for-${props.subject.id}`,
     };
     const createRequest = request(call, requests.rCommentCreate, options);
     this.processRequest(createRequest);
@@ -125,16 +125,16 @@ export class CommentEditor extends PureComponent {
       () => {
         this.handleSuccess();
       },
-      response => {
+      (response) => {
         this.handleErrors(response.body.errors);
-      }
+      },
     );
   }
 
   commentFromPropsAndState(props, state) {
     return {
       body: state.body,
-      parentId: props.parentId
+      parentId: props.parentId,
     };
   }
 
@@ -149,12 +149,12 @@ export class CommentEditor extends PureComponent {
   }
 
   toggleOpen() {
-    this.setState(state => {
+    this.setState((state) => {
       return { open: !state.open };
     });
   }
 
-  handleBodyChange = event => {
+  handleBodyChange = (event) => {
     this.setState({ body: event.target.value });
   };
 
@@ -183,7 +183,7 @@ export class CommentEditor extends PureComponent {
     if (this.isReply(props)) return t("placeholders.comments.reply");
     if (this.isComment(props)) {
       return t("placeholders.comments.discuss_entity", {
-        entity: singularEntityName(props.subject)
+        entity: singularEntityName(props.subject),
       });
     }
   }
@@ -201,15 +201,10 @@ export class CommentEditor extends PureComponent {
     if (this.isReply(props)) return t("actions.reply");
   }
 
-  toggleOpen = () =>
-    this.setState(state => {
-      return { open: !state.open };
-    });
-
   render() {
     const showLogin = bindActionCreators(
       () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
-      this.props.dispatch
+      this.props.dispatch,
     );
 
     const t = this.props.t;
@@ -238,7 +233,7 @@ export class CommentEditor extends PureComponent {
                 aria-labelledby={this.formLabel(this.props)}
               >
                 <UIDConsumer>
-                  {id => (
+                  {(id) => (
                     <GlobalForm.Errorable
                       name="attributes[body]"
                       errors={this.state.errors}
@@ -289,5 +284,5 @@ export class CommentEditor extends PureComponent {
 }
 
 export default withTranslation()(
-  connect(CommentEditor.mapStateToProps)(CommentEditor)
+  connect(CommentEditor.mapStateToProps)(CommentEditor),
 );

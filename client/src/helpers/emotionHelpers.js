@@ -9,14 +9,14 @@ const ALLOWED_PROPS = [
   "placeholderAttributes",
   "aria-expanded",
   "aria-controls",
-  "aria-labelledby"
+  "aria-labelledby",
 ];
 
 // styled-components-style transient prop support (`$someProp`)
 export const transientOptions = {
-  shouldForwardProp: propName => {
+  shouldForwardProp: (propName) => {
     if (ALLOWED_PROPS.indexOf(propName) >= 0) return true;
 
     return isPropValid(propName) && !propName.startsWith("$");
-  }
+  },
 };

@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: "/api/v1/users/whoami",
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -12,8 +12,8 @@ export default {
       endpoint: "/api/v1/users",
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -22,8 +22,8 @@ export default {
       endpoint: `/api/v1/users/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "user", data: user })
-      }
+        body: JSON.stringify({ type: "user", data: user }),
+      },
     };
   },
 
@@ -31,7 +31,7 @@ export default {
     return {
       endpoint: `/api/v1/users/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -40,8 +40,8 @@ export default {
       endpoint: "/api/v1/users",
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "user", data: user })
-      }
+        body: JSON.stringify({ type: "user", data: user }),
+      },
     };
   },
 
@@ -49,7 +49,7 @@ export default {
     return {
       endpoint: `/api/v1/users/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -58,8 +58,8 @@ export default {
       endpoint: `/api/v1/users/${id}/relationships/annotations`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -68,8 +68,8 @@ export default {
       endpoint: `/api/v1/users/${id}/relationships/reading_group_memberships`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
-  }
+  },
 };

@@ -23,13 +23,13 @@ class ResourceSlideshow extends PureComponent {
     hideDetailUrl: PropTypes.bool,
     hideDownload: PropTypes.bool,
     slideOptions: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     slideOptions: {},
     hideDetailUrl: false,
-    hideDownload: false
+    hideDownload: false,
   };
 
   constructor(props) {
@@ -42,11 +42,11 @@ class ResourceSlideshow extends PureComponent {
       loadedPages: [1],
       map: {},
       totalCount: 0,
-      slideDirection: "left"
+      slideDirection: "left",
     };
     this.state.map = this.buildInitialMap(
       props.collectionResources,
-      props.pagination
+      props.pagination,
     );
     this.state.totalCount = props.pagination.totalCount || 0;
 
@@ -67,7 +67,7 @@ class ResourceSlideshow extends PureComponent {
       nextState.loadedPages = loadedPages;
     }
 
-    return nextState === {} ? null : nextState;
+    return Object.keys(nextState).length === 0 ? null : nextState;
   }
 
   componentDidMount() {
@@ -88,7 +88,7 @@ class ResourceSlideshow extends PureComponent {
 
       this.sliderRef.current.scrollTo({
         left: (this.state.position - 1) * clientWidth,
-        top: 0
+        top: 0,
       });
     }
   }
@@ -99,7 +99,7 @@ class ResourceSlideshow extends PureComponent {
     if (this.sliderRef.current) {
       this.sliderRef.current.removeEventListener(
         "scroll",
-        this.debouncedScroll
+        this.debouncedScroll,
       );
     }
   }
@@ -120,7 +120,7 @@ class ResourceSlideshow extends PureComponent {
     );
   }
 
-  bindKeyboard = event => {
+  bindKeyboard = (event) => {
     if (event.keyCode === 39) {
       this.handleSlideNext();
     } else if (event.keyCode === 37) {
@@ -128,7 +128,7 @@ class ResourceSlideshow extends PureComponent {
     }
   };
 
-  bindScroll = event => {
+  bindScroll = (event) => {
     const boundary = event.target.getBoundingClientRect();
     const scrollLeft = Math.round(event.target.scrollLeft);
     const width = Math.round(boundary.width);
@@ -140,13 +140,13 @@ class ResourceSlideshow extends PureComponent {
     }
   };
 
-  handleUnloadedSlide = position => {
+  handleUnloadedSlide = (position) => {
     const page = this.positionToPage(position, this.props.pagination.perPage);
     if (!this.isPageLoaded(page)) {
       const fetch = resourceCollectionsAPI.collectionResources(
         this.props.resourceCollection.id,
         {},
-        { number: page, size: this.props.pagination.perPage }
+        { number: page, size: this.props.pagination.perPage },
       );
       this.props.dispatch(request(fetch, requests.feSlideshow));
     }
@@ -155,7 +155,7 @@ class ResourceSlideshow extends PureComponent {
   handleSlidePrev = () => {
     if (this.state.slideDirection !== "right") {
       this.setState({
-        slideDirection: "right"
+        slideDirection: "right",
       });
     }
 
@@ -167,7 +167,7 @@ class ResourceSlideshow extends PureComponent {
   handleSlideNext = () => {
     if (this.state.slideDirection !== "left") {
       this.setState({
-        slideDirection: "left"
+        slideDirection: "left",
       });
     }
 

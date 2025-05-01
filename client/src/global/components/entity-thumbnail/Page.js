@@ -9,11 +9,11 @@ export default class EntityThumbnailPage extends PureComponent {
     entity: PropTypes.object.isRequired,
     width: PropTypes.string,
     height: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static defaultProps = {
-    attributes: {}
+    attributes: {},
   };
 
   get icon() {

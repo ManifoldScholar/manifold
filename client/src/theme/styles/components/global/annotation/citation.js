@@ -3,7 +3,7 @@ import {
   defaultFocusStyle,
   formInputMessage,
   formInputPrimary,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export default `

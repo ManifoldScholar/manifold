@@ -6,7 +6,7 @@ import { projectsAPI, eventsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Search,
-  EventRow
+  EventRow,
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { eventFilters } from "hoc/withFilteredLists";
 import { useListQueryParams, useFetch, useApiCallback } from "hooks";
@@ -17,24 +17,28 @@ function ProjectEventsContainer({
   project,
   entitiesListSearchParams,
   entitiesListSearchProps,
-  confirm
+  confirm,
 }) {
   const { t } = useTranslation();
 
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 10,
     initFilters: entitiesListSearchParams.events,
-    initSearchProps: entitiesListSearchProps("events")
+    initSearchProps: entitiesListSearchProps("events"),
   });
 
-  const { data: events, meta: eventsMeta, refresh } = useFetch({
+  const {
+    data: events,
+    meta: eventsMeta,
+    refresh,
+  } = useFetch({
     request: [projectsAPI.events, project.id, filters, pagination],
-    options: { requestKey: requests.beEvents }
+    options: { requestKey: requests.beEvents },
   });
 
   const destroyEvent = useApiCallback(eventsAPI.destroy);
 
-  const handleEventDestroy = event => {
+  const handleEventDestroy = (event) => {
     const heading = t("modals.delete_event");
     const message = t("modals.confirm_body");
     confirm(heading, message, async () => {
@@ -56,7 +60,7 @@ function ProjectEventsContainer({
         <EntitiesList
           entityComponent={EventRow}
           entityComponentProps={{
-            destroyHandler: handleEventDestroy
+            destroyHandler: handleEventDestroy,
           }}
           entities={events}
           listStyle="tiles"
@@ -66,7 +70,7 @@ function ProjectEventsContainer({
           titleStyle="bar"
           titleTag="h2"
           unit={t("glossary.event", {
-            count: eventsMeta?.pagination?.totalCount
+            count: eventsMeta?.pagination?.totalCount,
           })}
           pagination={eventsMeta.pagination}
           search={<Search {...searchProps} />}
@@ -83,11 +87,11 @@ ProjectEventsContainer.propTypes = {
   confirm: PropTypes.func.isRequired,
   refresh: PropTypes.func,
   entitiesListSearchProps: PropTypes.func.isRequired,
-  entitiesListSearchParams: PropTypes.object.isRequired
+  entitiesListSearchParams: PropTypes.object.isRequired,
 };
 
 export default withConfirmation(
   withFilteredLists(ProjectEventsContainer, {
-    events: eventFilters()
-  })
+    events: eventFilters(),
+  }),
 );

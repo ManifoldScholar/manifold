@@ -8,5 +8,5 @@ export {
   SelectAll,
   BulkActionButtons,
   useBulkActions,
-  useClearBulkSelectionWithFilters
+  useClearBulkSelectionWithFilters,
 };

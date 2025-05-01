@@ -14,11 +14,11 @@ export default class TextList extends Component {
     showDates: PropTypes.bool,
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
-    onUncollect: PropTypes.func
+    onUncollect: PropTypes.func,
   };
 
   static defaultProps = {
-    showCollectingToggle: true
+    showCollectingToggle: true,
   };
 
   get texts() {
@@ -40,7 +40,7 @@ export default class TextList extends Component {
           <Styled.CategoryHeading>{this.props.label}</Styled.CategoryHeading>
         )}
         <Styled.List>
-          {this.texts.map(text => {
+          {this.texts.map((text) => {
             return (
               <li key={text.id}>
                 <Text

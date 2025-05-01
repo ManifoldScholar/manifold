@@ -4,7 +4,7 @@ import {
   buttonAvatar,
   defaultTransitionProps,
   defaultHoverStyle,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Button = styled.button`

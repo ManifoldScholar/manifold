@@ -10,7 +10,7 @@ import {
   useFetch,
   useApiCallback,
   useNotification,
-  useRedirectToFirstMatch
+  useRedirectToFirstMatch,
 } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
@@ -21,20 +21,20 @@ import capitalize from "lodash/capitalize";
 function ReadingGroupWrapper({ match, route, history, confirm, location }) {
   const { t } = useTranslation();
   const { data: readingGroup, refresh } = useFetch({
-    request: [readingGroupsAPI.show, match.params.id]
+    request: [readingGroupsAPI.show, match.params.id],
   });
   const destroy = useApiCallback(readingGroupsAPI.destroy, {
-    removes: readingGroup
+    removes: readingGroup,
   });
 
-  const notifyDestroy = useNotification(rg => ({
+  const notifyDestroy = useNotification((rg) => ({
     level: 0,
     id: `READING_GROUP_DESTROYED_${rg.id}`,
     heading: t("notifications.reading_group_delete"),
     body: t("notifications.delete_entity_body", {
-      title: rg?.name
+      title: rg?.name,
     }),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const destroyAndRedirect = useCallback(() => {
@@ -44,7 +44,7 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
         notifyDestroy(readingGroup);
         redirect();
       },
-      () => redirect()
+      () => redirect(),
     );
   }, [destroy, history, readingGroup, notifyDestroy]);
 
@@ -59,19 +59,19 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
       label: "actions.view",
       route: "frontendReadingGroupDetail",
       slug: readingGroup?.id,
-      icon: "eyeOpen32"
+      icon: "eyeOpen32",
     },
     {
       label: "actions.delete",
       authorize: "delete",
       icon: "delete32",
-      onClick: handleReadingGroupDestroy
-    }
+      onClick: handleReadingGroupDestroy,
+    },
   ];
 
   const renderRoutes = () => {
     return childRoutes(route, {
-      childProps: { refresh, readingGroup }
+      childProps: { refresh, readingGroup },
     });
   };
 
@@ -79,7 +79,7 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
     route: "backendReadingGroup",
     id: readingGroup?.id,
     slug: readingGroup?.attributes.slug,
-    candidates: readingGroup ? navigation.readingGroup(readingGroup) : []
+    candidates: readingGroup ? navigation.readingGroup(readingGroup) : [],
   });
 
   if (!readingGroup) return null;
@@ -89,12 +89,12 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
   const breadcrumbs = [
     {
       to: lh.link("backendReadingGroups"),
-      label: t("glossary.reading_group_title_case_other")
+      label: t("glossary.reading_group_title_case_other"),
     },
     {
       to: lh.link("backendReadingGroup", readingGroup.id),
-      label: readingGroup.attributes.name
-    }
+      label: readingGroup.attributes.name,
+    },
   ];
 
   return (
@@ -102,7 +102,7 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
       <Authorize
         entity={readingGroup}
         failureFatalError={{
-          detail: t("groups.unauthorized_edit")
+          detail: t("groups.unauthorized_edit"),
         }}
         ability={["update"]}
       >

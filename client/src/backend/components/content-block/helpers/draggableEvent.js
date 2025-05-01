@@ -7,33 +7,33 @@ export default class DraggableEventHelper {
   static syntheticDraggable = (blockType, opts = {}) => {
     const options = {
       ...DraggableEventHelper.defaultOptions(),
-      ...opts
+      ...opts,
     };
     return {
       type: DraggableEventHelper.isTopType(blockType) ? "TOP" : "BOTTOM",
       draggableId: blockType,
       source: {
-        droppableId: options.source.name
+        droppableId: options.source.name,
       },
       destination: {
         droppableId: options.destination.name,
-        index: -1
-      }
+        index: -1,
+      },
     };
   };
 
-  static isTopType = type => {
+  static isTopType = (type) => {
     return !!resolver.typeToBlockComponent(type).top;
   };
 
   static defaultOptions = () => {
     return {
       source: {
-        name: "available"
+        name: "available",
       },
       destination: {
-        name: "current"
-      }
+        name: "current",
+      },
     };
   };
 
@@ -52,7 +52,7 @@ export default class DraggableEventHelper {
     let blocks = this.clonedBlocks;
     const block = this.block;
     if (this.isMove) {
-      blocks = blocks.filter(b => b.id !== block.id);
+      blocks = blocks.filter((b) => b.id !== block.id);
     }
     blocks.splice(block.attributes.position - 1, 0, block);
     return blocks;
@@ -70,7 +70,7 @@ export default class DraggableEventHelper {
     if (!this.draggable.source) return false;
     return startsWith(
       this.draggable.source.droppableId,
-      this.options.source.name
+      this.options.source.name,
     );
   }
 
@@ -78,7 +78,7 @@ export default class DraggableEventHelper {
     if (!this.draggable.source) return false;
     return startsWith(
       this.draggable.source.droppableId,
-      this.options.destination.name
+      this.options.destination.name,
     );
   }
 
@@ -86,7 +86,7 @@ export default class DraggableEventHelper {
     if (!this.draggable.destination) return false;
     return startsWith(
       this.draggable.destination.droppableId,
-      this.options.destination.name
+      this.options.destination.name,
     );
   }
 
@@ -133,7 +133,7 @@ export default class DraggableEventHelper {
   }
 
   get topCount() {
-    return sumBy(this._blocks, block => (this.isTopBlock(block) ? 1 : 0));
+    return sumBy(this._blocks, (block) => (this.isTopBlock(block) ? 1 : 0));
   }
 
   get type() {
@@ -153,7 +153,7 @@ export default class DraggableEventHelper {
   }
 
   findBlock(id) {
-    return this._blocks.find(block => block.id === id);
+    return this._blocks.find((block) => block.id === id);
   }
 
   cloneBlock(id) {
@@ -166,9 +166,9 @@ export default class DraggableEventHelper {
       attributes: {
         type: this.type,
         position: this.position,
-        renderable: true
+        renderable: true,
       },
-      relationships: {}
+      relationships: {},
     };
   }
 

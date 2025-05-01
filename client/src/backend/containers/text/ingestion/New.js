@@ -8,9 +8,9 @@ import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
 
 export class IngestionNewContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      ingestion: select(requests.beIngestionCreate, state.entityStore)
+      ingestion: select(requests.beIngestionCreate, state.entityStore),
     };
   };
 
@@ -23,7 +23,7 @@ export class IngestionNewContainer extends PureComponent {
     ingestion: PropTypes.object,
     match: PropTypes.object,
     location: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidUpdate(prevProps) {
@@ -40,7 +40,7 @@ export class IngestionNewContainer extends PureComponent {
     const path = lh.link(
       "backendTextIngestionIngest",
       this.textId,
-      ingestionId
+      ingestionId,
     );
     this.props.history.push(path, { back: this.props.match.url });
   }

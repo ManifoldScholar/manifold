@@ -19,12 +19,12 @@ class ProjectRow extends PureComponent {
     renderWithoutLink: PropTypes.bool,
     dragHandleProps: PropTypes.object,
     draggableProps: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     placeholderMode: "responsive",
-    compact: false
+    compact: false,
   };
 
   get figure() {

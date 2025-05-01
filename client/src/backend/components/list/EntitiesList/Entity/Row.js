@@ -31,7 +31,7 @@ class EntitiesListRow extends PureComponent {
       PropTypes.string,
       PropTypes.object,
       PropTypes.array,
-      PropTypes.node
+      PropTypes.node,
     ]),
     active: PropTypes.bool,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
@@ -44,7 +44,7 @@ class EntitiesListRow extends PureComponent {
     t: PropTypes.func,
     index: PropTypes.number,
     entityCount: PropTypes.number,
-    onKeyboardMove: PropTypes.func
+    onKeyboardMove: PropTypes.func,
   };
 
   static defaultProps = {
@@ -53,7 +53,7 @@ class EntitiesListRow extends PureComponent {
     sortableStyle: "spaced",
     figureSize: "normal",
     figureShape: "square",
-    active: false
+    active: false,
   };
 
   constructor(props) {
@@ -173,7 +173,7 @@ class EntitiesListRow extends PureComponent {
   get itemClassNames() {
     return classNames({
       "entity-row entity-list__entity": true,
-      "scheme-dark entity-row--bulk-actions": this.hasPrepend
+      "scheme-dark entity-row--bulk-actions": this.hasPrepend,
     });
   }
 
@@ -189,7 +189,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__figure--in-grid": this.listStyle === "grid",
       "entity-row__figure--in-well": this.listStyle === "well",
       "entity-row--figure--in-tiles": this.listStyle === "tiles",
-      "entity-row--figure--in-rows": this.listStyle === "rows"
+      "entity-row--figure--in-rows": this.listStyle === "rows",
     });
   }
 
@@ -204,7 +204,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__inner--sortable": this.isSortable,
       "entity-row__inner--sortable-tight":
         this.isSortable && this.sortableStyle === "tight",
-      "entity-row__inner--is-dragging": this.isDragging
+      "entity-row__inner--is-dragging": this.isDragging,
     });
   }
 
@@ -214,7 +214,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__text--valign-center": this.verticalAlignment === "center",
       "entity-row__text--in-grid": this.listStyle === "grid",
       "entity-row__text--in-tiles": this.listStyle === "tiles",
-      "entity-row__text--in-rows": this.listStyle === "rows"
+      "entity-row__text--in-rows": this.listStyle === "rows",
     });
   }
 
@@ -224,7 +224,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__title--in-grid": this.listStyle === "grid",
       "entity-row__title--in-well": this.listStyle === "well",
       "entity-row__title--in-tiles": this.listStyle === "tiles",
-      "entity-row__title--in-rows": this.listStyle === "rows"
+      "entity-row__title--in-rows": this.listStyle === "rows",
     });
   }
 
@@ -234,7 +234,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__subtitle--in-grid": this.listStyle === "grid",
       "entity-row__subtitle--in-well": this.listStyle === "well",
       "entity-row__subtitle--in-tiles": this.listStyle === "tiles",
-      "entity-row__subtitle--in-rows": this.listStyle === "rows"
+      "entity-row__subtitle--in-rows": this.listStyle === "rows",
     });
   }
 
@@ -244,7 +244,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__count--in-grid": this.listStyle === "grid",
       "entity-row__count--in-well": this.listStyle === "well",
       "entity-row__count--in-tiles": this.listStyle === "tiles",
-      "entity-row__count--in-rows": this.listStyle === "rows"
+      "entity-row__count--in-rows": this.listStyle === "rows",
     });
   }
 
@@ -254,7 +254,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__meta--in-grid": this.listStyle === "grid",
       "entity-row__meta--in-well": this.listStyle === "well",
       "entity-row__meta--in-tiles": this.listStyle === "tiles",
-      "entity-row__meta--in-rows": this.listStyle === "rows"
+      "entity-row__meta--in-rows": this.listStyle === "rows",
     });
   }
 
@@ -269,7 +269,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__row-link--atag": true,
       "entity-row__row-link--in-grid": this.listStyle === "grid",
       "entity-row__row-link--in-well": this.listStyle === "well",
-      "entity-row__row-link--is-active": this.active
+      "entity-row__row-link--is-active": this.active,
     });
 
     return (
@@ -291,7 +291,7 @@ class EntitiesListRow extends PureComponent {
       "entity-row__row-link--button": true,
       "entity-row__row-link--in-grid": this.listStyle === "grid",
       "entity-row__row-link--in-well": this.listStyle === "well",
-      "entity-row__row-link--is-active": this.active
+      "entity-row__row-link--is-active": this.active,
     });
     return (
       <button
@@ -330,7 +330,7 @@ class EntitiesListRow extends PureComponent {
     return this.wrapWithClickHandler(child, id, false, tabIndex);
   }
 
-  onKeyboardMove = direction => {
+  onKeyboardMove = (direction) => {
     const { title, index } = this.props;
     const draggableId = this.props.draggableProps?.["data-rbd-draggable-id"];
 
@@ -345,7 +345,7 @@ class EntitiesListRow extends PureComponent {
         if (this.popoverDisclosureRef?.current) {
           this.popoverDisclosureRef.current.focus();
         }
-      }
+      },
     );
   };
 
@@ -378,14 +378,14 @@ class EntitiesListRow extends PureComponent {
                 id: "up",
                 label: this.props.t("actions.dnd.move_up_position"),
                 onClick: () => this.onKeyboardMove("up"),
-                disabled: this.props.index === 0
+                disabled: this.props.index === 0,
               },
               {
                 id: "down",
                 label: this.props.t("actions.dnd.move_down_position"),
                 onClick: () => this.onKeyboardMove("down"),
-                disabled: this.props.index === this.props.entityCount - 1
-              }
+                disabled: this.props.index === this.props.entityCount - 1,
+              },
             ]}
           />
         </div>
@@ -402,7 +402,7 @@ class EntitiesListRow extends PureComponent {
   render() {
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <li className={this.itemClassNames}>
             {this.hasPrepend && <>{this.prepend}</>}
             {this.blockLink(
@@ -415,7 +415,7 @@ class EntitiesListRow extends PureComponent {
                       {this.inlineLink(
                         this.figure,
                         undefined,
-                        this.title ? -1 : 0
+                        this.title ? -1 : 0,
                       )}
                     </div>
                   ))}
@@ -434,7 +434,7 @@ class EntitiesListRow extends PureComponent {
                           item:
                             typeof this.titlePlainText === "string"
                               ? this.titlePlainText
-                              : "item"
+                              : "item",
                         })}
                       </span>
                     </h3>
@@ -461,7 +461,7 @@ class EntitiesListRow extends PureComponent {
                   </div>
                 )}
               </div>,
-              id
+              id,
             )}
           </li>
         )}

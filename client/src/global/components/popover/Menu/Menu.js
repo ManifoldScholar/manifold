@@ -4,7 +4,7 @@ import {
   useRef,
   useEffect,
   useCallback,
-  useState
+  useState,
 } from "react";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 import * as Styled from "./styles";
@@ -26,23 +26,23 @@ export default function PopoverMenu({ disclosure, actions }) {
     "aria-haspopup": "menu",
     "aria-expanded": open,
     onClick: () => {
-      setOpen(prevOpen => !prevOpen);
+      setOpen((prevOpen) => !prevOpen);
       if (disclosure.props.onClick) {
         disclosure.props.onClick();
       }
-    }
+    },
   });
 
   useEffect(() => {
     if (popoverRef.current) {
       menuItems.current = [
-        ...popoverRef.current.querySelectorAll("[role='menuitem']")
+        ...popoverRef.current.querySelectorAll("[role='menuitem']"),
       ];
     }
   }, []);
 
   const handleKeyDown = useCallback(
-    event => {
+    (event) => {
       let preventDefault = false;
       const currentIndex = menuItems.current.indexOf(event.target);
       const itemCount = menuItems.current.length;
@@ -86,7 +86,7 @@ export default function PopoverMenu({ disclosure, actions }) {
         event.stopPropagation();
       }
     },
-    [disclosure.ref]
+    [disclosure.ref],
   );
 
   useEventListener("keydown", handleKeyDown, popoverRef);
@@ -97,7 +97,7 @@ export default function PopoverMenu({ disclosure, actions }) {
     }
   }, [open]);
 
-  const handleFocusOut = useCallback(event => {
+  const handleFocusOut = useCallback((event) => {
     const el = wrapperRef?.current;
 
     // Do nothing if new focus is still inside ref
@@ -142,7 +142,7 @@ export default function PopoverMenu({ disclosure, actions }) {
               >
                 {label}
               </Styled.Button>
-            )
+            ),
           )}
         </Styled.Popover>
       )}

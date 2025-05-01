@@ -3,7 +3,7 @@ import {
   fluidScale,
   headingQuaternary,
   subtitlePrimary,
-  respond
+  respond,
 } from "theme/styles/mixins";
 import Utility from "global/components/utility";
 
@@ -57,6 +57,6 @@ export const ButtonGroup = styled.div`
       margin-right: 0;
     }
     `,
-      40
+      40,
     )}`}
 `;

@@ -21,7 +21,7 @@ function ListItem({ icon, label, value }) {
 ListItem.propTypes = {
   icon: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
 };
 
 ListItem.displayName = "Analytics.Block.List.ListItem";

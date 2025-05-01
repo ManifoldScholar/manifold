@@ -46,7 +46,7 @@ export const LogoWrapper = styled("div", transientOptions)`
           color: var(--color-base-neutral70);
         }
       `,
-        65
+        65,
       )}
     `}
 
@@ -99,14 +99,14 @@ export const Copyright = styled.div`
       margin-left: 6px;
       font-size: 17px;
     `,
-    65
+    65,
   )}
 `;
 
 export const LogoText = styled("span", transientOptions)`
   display: inline-block;
   color: var(--PoweredBy-text-color);
-  margin-inline-end: .25em;
+  margin-inline-end: 0.25em;
 
   ${({ $neutral }) =>
     $neutral &&
@@ -128,7 +128,7 @@ export const LogoText = styled("span", transientOptions)`
           margin-top: 0;
           font-size: 13px;
         `,
-        65
+        65,
       )}
   `}
 `;

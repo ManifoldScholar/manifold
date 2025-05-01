@@ -14,7 +14,7 @@ export const unwrapNode = ({ editor, format, path }) => {
     match: (n, p) => {
       return n.type === format && isEqual(p, path);
     },
-    at: path
+    at: path,
   });
   ReactEditor.focus(editor);
 };
@@ -30,8 +30,8 @@ export const toggleOrWrapNode = (editor, format) => {
   const formatIsText = !formatIsContainer;
 
   const condition = formatIsContainer
-    ? n => !Editor.isEditor(n) && !n.nodeName && !n.text
-    : n => !Editor.isEditor(n) && !n.nodeName;
+    ? (n) => !Editor.isEditor(n) && !n.nodeName && !n.text
+    : (n) => !Editor.isEditor(n) && !n.nodeName;
 
   const [common, path] = getCommonBlock(editor, condition);
 
@@ -41,7 +41,7 @@ export const toggleOrWrapNode = (editor, format) => {
       format,
       node: common,
       path,
-      split: !isCollapsed
+      split: !isCollapsed,
     });
 
   return wrapLayoutBlock({
@@ -49,7 +49,7 @@ export const toggleOrWrapNode = (editor, format) => {
     format,
     node: common,
     path,
-    split: !isCollapsed
+    split: !isCollapsed,
   });
 };
 

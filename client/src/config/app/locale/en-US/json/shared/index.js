@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import actions from "./actions.json";
 import common from "./common.json";
 import counts from "./counts.json";
@@ -22,5 +21,5 @@ export default {
   ...navigation,
   ...utility,
   ...notifications,
-  ...pageTitles
+  ...pageTitles,
 };

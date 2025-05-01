@@ -12,9 +12,9 @@ export default function withSettings(WrappedComponent) {
   const displayName = `WithSettings('${getDisplayName(WrappedComponent)})`;
 
   class WithSettings extends React.PureComponent {
-    static mapStateToProps = state => {
+    static mapStateToProps = (state) => {
       return {
-        settings: select(requests.settings, state.entityStore)
+        settings: select(requests.settings, state.entityStore),
       };
     };
 
@@ -29,7 +29,7 @@ export default function withSettings(WrappedComponent) {
   }
 
   const ConnectedWithSettings = connect(WithSettings.mapStateToProps)(
-    WithSettings
+    WithSettings,
   );
 
   return hoistStatics(ConnectedWithSettings, WrappedComponent);

@@ -6,7 +6,7 @@ export default class LowLevelApiClient {
   constructor() {
     this.defaultOptions = {
       authToken: null,
-      params: {}
+      params: {},
     };
   }
 
@@ -31,7 +31,7 @@ export default class LowLevelApiClient {
     const options = this._adjustedOptions(rawOptions);
     const endpoint = this._endpointWithParams(
       this._adjustedEndpoint(rawEndpoint),
-      options.params
+      options.params,
     );
 
     const baseHeaders = rawOptions.headers || {};
@@ -40,23 +40,23 @@ export default class LowLevelApiClient {
       "Content-Type": "application/json",
       Authorization: `Bearer ${options.authToken}`,
       "VISIT-TOKEN": options.visitToken,
-      "VISITOR-TOKEN": options.visitorToken
+      "VISITOR-TOKEN": options.visitorToken,
     };
 
     const fetchConfig = {
       method,
       body: options.body,
-      headers
+      headers,
     };
 
-    const out = fetch(endpoint, fetchConfig).catch(error => {
+    const out = fetch(endpoint, fetchConfig).catch((error) => {
       return new Promise((resolve, reject) => {
         reject({
           response: {
             status: 503,
             statusText: error.name,
-            exception: error.message
-          }
+            exception: error.message,
+          },
         });
       });
     });

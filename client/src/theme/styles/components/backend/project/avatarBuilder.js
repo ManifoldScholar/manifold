@@ -32,7 +32,7 @@ export default `
           flex-flow: row nowrap;
           justify-content: center;
         `,
-        95
+        95,
       )}
 
       .section {
@@ -52,7 +52,7 @@ export default `
             border: 1px solid var(--color-neutral-ui-dull-light);
             border-right: 0;
           `,
-          95
+          95,
         )}
 
         + .section {
@@ -130,7 +130,7 @@ export default `
                 height: 100px;
                 line-height: 100px;
               `,
-              95
+              95,
             )}
           }
 

@@ -5,7 +5,7 @@ export default class ProjectContentBlockMarkdownBlock extends PureComponent {
   static displayName = "Project.Content.Block.Markdown";
 
   static propTypes = {
-    block: PropTypes.object.isRequired
+    block: PropTypes.object.isRequired,
   };
 
   static get placeholderTitle() {

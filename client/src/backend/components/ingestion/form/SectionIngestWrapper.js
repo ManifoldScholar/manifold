@@ -10,25 +10,25 @@ import lh from "helpers/linkHandler";
 export default function SectionIngestionFormWrapper({
   textId,
   sectionId,
-  cancelUrl
+  cancelUrl,
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const createIngestion = model => {
+  const createIngestion = (model) => {
     const data = {
       ...model,
-      relationships: { ...model.relationships, textSection: sectionId }
+      relationships: { ...model.relationships, textSection: sectionId },
     };
     return ingestionsAPI.createSection(textId, data);
   };
 
   const onSuccess = useCallback(
-    res => {
+    (res) => {
       navigate(lh.link("backendTextSectionIngestIngest", textId, res.id));
     },
-    [navigate, textId]
+    [navigate, textId],
   );
 
   return (
@@ -56,5 +56,5 @@ SectionIngestionFormWrapper.displayName = "Text.SectionIngestion.Form.Wrapper";
 SectionIngestionFormWrapper.propTypes = {
   textId: PropTypes.string.isRequired,
   sectionId: PropTypes.string,
-  cancelUrl: PropTypes.string
+  cancelUrl: PropTypes.string,
 };

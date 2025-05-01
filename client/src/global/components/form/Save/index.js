@@ -14,12 +14,12 @@ class FormSave extends Component {
     cancelCallback: PropTypes.func,
     theme: PropTypes.oneOf(["frontend", "backend", "reader"]),
     t: PropTypes.func,
-    marginTop: PropTypes.bool
+    marginTop: PropTypes.bool,
   };
 
   static defaultProps = {
     text: "Save",
-    theme: "backend"
+    theme: "backend",
   };
 
   render() {
@@ -37,7 +37,7 @@ class FormSave extends Component {
               "button-secondary": true,
               "button-secondary--dull": true,
               "button-secondary--outlined": this.props.theme === "backend",
-              "button-secondary--accent-pale": this.props.theme === "frontend"
+              "button-secondary--accent-pale": this.props.theme === "frontend",
             })}
           >
             {t("actions.cancel")}
@@ -50,7 +50,7 @@ class FormSave extends Component {
             className={classNames({
               "button-secondary": true,
               "button-secondary--dull": true,
-              "button-secondary--outlined": this.props.theme === "backend"
+              "button-secondary--outlined": this.props.theme === "backend",
             })}
           >
             {t("actions.cancel")}
@@ -59,7 +59,7 @@ class FormSave extends Component {
         <input
           className={classNames({
             "button-secondary": true,
-            "button-secondary--outlined": this.props.theme === "backend"
+            "button-secondary--outlined": this.props.theme === "backend",
           })}
           type="submit"
           value={this.props.text}

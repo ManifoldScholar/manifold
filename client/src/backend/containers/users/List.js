@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
   Search,
-  UserRow
+  UserRow,
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { userFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -14,31 +14,35 @@ import {
   useListQueryParams,
   useFetch,
   useApiCallback,
-  useNotification
+  useNotification,
 } from "hooks";
 import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
   SelectAll,
-  BulkActionButtons
+  BulkActionButtons,
 } from "backend/components/list/EntitiesList/List/bulkActions";
 
 function UsersListContainer({
   confirm,
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
 }) {
   const { t } = useTranslation();
 
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 10,
     initFilters: entitiesListSearchParams.users,
-    initSearchProps: entitiesListSearchProps("users")
+    initSearchProps: entitiesListSearchProps("users"),
   });
 
-  const { data: users, meta: usersMeta, refresh } = useFetch({
+  const {
+    data: users,
+    meta: usersMeta,
+    refresh,
+  } = useFetch({
     request: [usersAPI.index, filters, pagination],
-    options: { requestKey: requests.beUsers }
+    options: { requestKey: requests.beUsers },
   });
 
   const {
@@ -50,27 +54,27 @@ function UsersListContainer({
     bulkSelectionEmpty,
     addItem,
     removeItem,
-    addPage
+    addPage,
   } = useBulkActions(users, filters);
 
   const { onReset, setParam } = useClearBulkSelectionWithFilters(
     searchProps.onReset,
     searchProps.setParam,
     resetBulkSelection,
-    bulkSelectionEmpty
+    bulkSelectionEmpty,
   );
 
   const bulkDelete = useApiCallback(bulkDeleteAPI.users);
 
-  const notifyBulkDelete = useNotification(count => ({
+  const notifyBulkDelete = useNotification((count) => ({
     level: 0,
     id: "BULK_DELETE_SUCCESS",
     heading: t("notifications.bulk_delete_success"),
     body: t("notifications.bulk_delete_success_body", {
       count,
-      entity: t("glossary.user", { count })
+      entity: t("glossary.user", { count }),
     }),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const unit = t("glossary.user", { count: usersMeta?.pagination?.totalCount });
@@ -95,7 +99,7 @@ function UsersListContainer({
 
   if (!users || !usersMeta) return null;
 
-  const currentPageIds = users?.map(a => a.id);
+  const currentPageIds = users?.map((a) => a.id);
 
   return (
     <EntitiesList
@@ -104,7 +108,7 @@ function UsersListContainer({
         bulkActionsActive,
         bulkSelection,
         addItem,
-        removeItem
+        removeItem,
       }}
       title={t("records.users.header")}
       titleStyle="bar"
@@ -141,9 +145,9 @@ function UsersListContainer({
                 text={t("records.users.button_label")}
                 authorizedFor="user"
                 type="add"
-              />
+              />,
             ]
-          : [])
+          : []),
       ]}
     />
   );
@@ -152,9 +156,9 @@ function UsersListContainer({
 UsersListContainer.displayName = "Users.List";
 
 UsersListContainer.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };
 
 export default withFilteredLists(withConfirmation(UsersListContainer), {
-  users: userFilters()
+  users: userFilters(),
 });

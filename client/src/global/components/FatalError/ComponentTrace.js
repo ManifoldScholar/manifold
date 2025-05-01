@@ -4,7 +4,7 @@ import * as Styled from "./styles";
 
 export default class FatalErrorCompnentTrace extends PureComponent {
   static propTypes = {
-    trace: PropTypes.string.isRequired
+    trace: PropTypes.string.isRequired,
   };
 
   get stackLines() {
@@ -13,7 +13,7 @@ export default class FatalErrorCompnentTrace extends PureComponent {
     stackLines = stackLines.map((line, index) => {
       return {
         index,
-        component: (line.trim().match(/^in (\S*)/) || ["", ""])[1]
+        component: (line.trim().match(/^in (\S*)/) || ["", ""])[1],
       };
     });
     return stackLines;
@@ -25,7 +25,7 @@ export default class FatalErrorCompnentTrace extends PureComponent {
         <div>
           <Styled.StackTitle>Component Stack</Styled.StackTitle>
           <Styled.LineList>
-            {this.stackLines.map(line => {
+            {this.stackLines.map((line) => {
               return (
                 <Styled.Line key={line.index}>
                   {line.index === 0 ? (

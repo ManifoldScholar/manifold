@@ -7,7 +7,7 @@ export default class ProjectContentBlockInListAvailablePlaceholder extends PureC
   static displayName = "Project.Content.Block.InList.AvailablePlaceholder";
 
   static propTypes = {
-    typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   };
 
   render() {
@@ -15,7 +15,7 @@ export default class ProjectContentBlockInListAvailablePlaceholder extends PureC
 
     return (
       <TypeComponent>
-        {block => (
+        {(block) => (
           <div className="backend-content-block__inner">
             <Identity icon={block.icon} title={block.title} />
             <Utility.IconComposer icon="circlePlus32" size={32} />

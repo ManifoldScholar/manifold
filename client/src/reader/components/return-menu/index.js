@@ -3,5 +3,5 @@ import Button from "./Button";
 
 export default {
   Body,
-  Button
+  Button,
 };

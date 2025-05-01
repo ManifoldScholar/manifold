@@ -13,7 +13,7 @@ class UserLinks extends PureComponent {
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     history: PropTypes.object.isRequired,
     closeNavigation: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get canAccessReadingGroups() {
@@ -22,17 +22,17 @@ class UserLinks extends PureComponent {
     return currentUser.attributes.classAbilities.readingGroup.read;
   }
 
-  handleProfileClick = eventIgnored => {
+  handleProfileClick = (eventIgnored) => {
     this.props.commonActions.toggleSignInUpOverlay();
     this.props.closeNavigation();
   };
 
-  handleLogOutClick = eventIgnored => {
+  handleLogOutClick = (eventIgnored) => {
     this.props.commonActions.logout();
     this.props.closeNavigation();
   };
 
-  handleLoginClick = eventIgnored => {
+  handleLoginClick = (eventIgnored) => {
     this.props.commonActions.toggleSignInUpOverlay();
     this.props.closeNavigation();
   };
@@ -41,7 +41,6 @@ class UserLinks extends PureComponent {
   // but that's just the name of the component.
   // The correct HTML element is used in <Link />.
 
-  /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
     const t = this.props.t;
 
@@ -83,7 +82,7 @@ class UserLinks extends PureComponent {
             <Avatar
               url={get(
                 this.props.authentication,
-                "currentUser.attributes.avatarStyles.smallSquare"
+                "currentUser.attributes.avatarStyles.smallSquare",
               )}
             />
             <span className="nested-nav__button-text">
@@ -146,7 +145,6 @@ class UserLinks extends PureComponent {
       </ul>
     );
   }
-  /* eslint-enable jsx-a11y/anchor-is-valid */
 }
 
 export default withTranslation()(UserLinks);

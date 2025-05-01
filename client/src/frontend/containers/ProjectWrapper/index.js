@@ -12,7 +12,7 @@ import { getJournalBreadcrumbs } from "./helpers";
 export default function ProjectWrapper({ route }) {
   const { id } = useParams();
   const { data: project, response } = useFetch({
-    request: [projectsAPI.show, id]
+    request: [projectsAPI.show, id],
   });
   const { path } = useRouteMatch();
   const location = useLocation();
@@ -25,16 +25,16 @@ export default function ProjectWrapper({ route }) {
     candidates: [
       {
         label: "All Projects",
-        route: "frontendProjectsAll"
-      }
-    ]
+        route: "frontendProjectsAll",
+      },
+    ],
   });
 
   const { t } = useTranslation();
 
   const breadcrumbsCallback = useCallback(
     () => getJournalBreadcrumbs(project, t, libraryDisabled),
-    [project, t, libraryDisabled]
+    [project, t, libraryDisabled],
   );
 
   const journalBreadcrumbs = project?.attributes?.isJournalIssue
@@ -56,8 +56,8 @@ export default function ProjectWrapper({ route }) {
           project,
           response,
           settings,
-          journalBreadcrumbs
-        }
+          journalBreadcrumbs,
+        },
       })}
     </>
   );
@@ -66,5 +66,5 @@ export default function ProjectWrapper({ route }) {
 ProjectWrapper.displayName = "Frontend.Containers.ProjectWrapper";
 
 ProjectWrapper.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };

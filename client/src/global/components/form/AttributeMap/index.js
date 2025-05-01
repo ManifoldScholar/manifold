@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import {
   DragDropContext,
-  Droppable
+  Droppable,
 } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Mapping from "./Mapping";
 import Instructions from "../Instructions";
@@ -14,13 +14,13 @@ import FieldWrapper from "../FieldWrapper";
 import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
-const sortAttributes = props => {
+const sortAttributes = (props) => {
   const attributes = Object.values(props.getModelValue(props.attributes));
   const unavailableAttributes = Object.values(props.value);
-  return attributes.filter(c => !unavailableAttributes.includes(c)).sort();
+  return attributes.filter((c) => !unavailableAttributes.includes(c)).sort();
 };
 
-const sortHeaders = props => {
+const sortHeaders = (props) => {
   const headers = props.getModelValue(props.headers);
   return Object.values(headers).map((header, index) => {
     if (header) return header;
@@ -36,14 +36,14 @@ class FormColumnMap extends PureComponent {
     instructions: PropTypes.string.isRequired,
     getModelValue: PropTypes.func.isRequired,
     value: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       sortedHeaders: sortHeaders(props),
-      sortedAttributes: sortAttributes(props)
+      sortedAttributes: sortAttributes(props),
     };
   }
 
@@ -52,44 +52,43 @@ class FormColumnMap extends PureComponent {
     const nextAttributes = sortAttributes(nextProps);
     if (difference(prevState.sortedAttributes, nextAttributes)) {
       return {
-        sortedAttributes: nextAttributes
+        sortedAttributes: nextAttributes,
       };
     }
 
     return null;
   }
 
-  onDragEnd = result => {
+  onDragEnd = (result) => {
     if (!result.destination) return;
     const currentMap = this.props.value;
     const headerPosition = result.destination.droppableId;
     const column = result.draggableId;
-    const updated = omitBy(currentMap, value => value === column);
+    const updated = omitBy(currentMap, (value) => value === column);
     updated[headerPosition] = column;
     this.props.set(updated);
   };
 
   getHeaderPosition(header, props) {
     const headers = props.getModelValue(props.headers);
-    return Object.keys(headers).find(key => headers[key] === header);
+    return Object.keys(headers).find((key) => headers[key] === header);
   }
 
-  getCurrentMapping = position => {
+  getCurrentMapping = (position) => {
     return this.props.value[position] || null;
   };
 
-  autoMap = event => {
+  autoMap = (event) => {
     event.preventDefault();
     this.props.set(this.props.getModelValue("attributes[columnAutomap]"));
   };
 
   unLinkMatch = (mapping, column) => {
     const currentMap = this.props.value;
-    const updated = omitBy(currentMap, value => value === column);
+    const updated = omitBy(currentMap, (value) => value === column);
     this.props.set(updated);
   };
 
-  /* eslint-disable react/no-array-index-key */
   render() {
     const { sortedAttributes, sortedHeaders } = this.state;
     const t = this.props.t;
@@ -165,7 +164,6 @@ class FormColumnMap extends PureComponent {
       </>
     );
   }
-  /* eslint-enable react/no-array-index-key */
 }
 
 export default withTranslation()(setter(FormColumnMap));

@@ -11,7 +11,7 @@ export default function SlideshowSection({
   dispatch,
   slug,
   totalCount,
-  listHeaderId
+  listHeaderId,
 }) {
   const { t } = useTranslation();
 

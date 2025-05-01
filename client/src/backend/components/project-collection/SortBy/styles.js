@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
       flex-flow: row wrap;
       align-items: baseline;
     `,
-    60
+    60,
   )}
 `;
 

@@ -9,7 +9,7 @@ export default class ContentBlockList extends PureComponent {
     entity: PropTypes.object,
     hideHeader: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
     hideDefaultHeader: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-    hideLastBottomBorder: PropTypes.bool
+    hideLastBottomBorder: PropTypes.bool,
   };
 
   get entity() {
@@ -18,7 +18,7 @@ export default class ContentBlockList extends PureComponent {
 
   byAccess(blocks) {
     const authorized = this.entity.attributes.abilities.fullyRead;
-    return blocks.filter(block => {
+    return blocks.filter((block) => {
       const { access } = block.attributes;
       if (access === "always") return true;
       if (authorized) return access === "authorized";
@@ -33,7 +33,7 @@ export default class ContentBlockList extends PureComponent {
 
   get visibleContentBlocks() {
     return this.byAccess(
-      this.contentBlocks.filter(block => block.attributes?.visible)
+      this.contentBlocks.filter((block) => block.attributes?.visible),
     );
   }
 

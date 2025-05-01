@@ -5,5 +5,5 @@ import Resource from "./Resource";
 export default {
   ProjectCollection,
   Social,
-  Resource
+  Resource,
 };

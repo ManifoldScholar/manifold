@@ -3,7 +3,7 @@ import {
   panelRounded,
   respond,
   rgba,
-  buttonUnstyled
+  buttonUnstyled,
 } from "theme/styles/mixins";
 import { dialog } from "theme/styles/variables/crossComponent";
 
@@ -25,7 +25,7 @@ export default `
       padding-right: 40px;
       padding-left: 40px;
     `,
-    90
+    90,
   )}
 
   &__header {

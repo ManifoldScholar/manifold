@@ -9,5 +9,5 @@ export default {
   PageHeader,
   BackendPanel,
   DrawerHeader,
-  SecondaryNav
+  SecondaryNav,
 };

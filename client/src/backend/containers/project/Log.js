@@ -15,7 +15,7 @@ export default function LogContainer({ project }) {
 
   const { data: versions, meta: versionsMeta } = useFetch({
     request: [projectsAPI.versions, project.id, filters, pagination],
-    options: { requestKey: requests.beVersions }
+    options: { requestKey: requests.beVersions },
   });
 
   if (!versions || !versionsMeta) return null;
@@ -37,7 +37,7 @@ export default function LogContainer({ project }) {
         pagination={versionsMeta.pagination}
         showCount
         unit={t("glossary.change", {
-          count: versionsMeta?.pagination?.totalCount
+          count: versionsMeta?.pagination?.totalCount,
         })}
       />
     </Authorize>
@@ -47,5 +47,5 @@ export default function LogContainer({ project }) {
 LogContainer.displayName = "Project.Log";
 
 LogContainer.propTypes = {
-  project: PropTypes.object.isRequired
+  project: PropTypes.object.isRequired,
 };

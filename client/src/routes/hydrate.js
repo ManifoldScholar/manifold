@@ -8,7 +8,7 @@ export default function hydrate(route, registry) {
   }
   if (isArray(route.routes)) {
     properties.routes = [];
-    route.routes.forEach(childRoute => {
+    route.routes.forEach((childRoute) => {
       properties.routes.push(hydrate(childRoute, registry));
     });
   }

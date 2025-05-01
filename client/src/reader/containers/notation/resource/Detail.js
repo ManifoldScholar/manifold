@@ -16,7 +16,7 @@ export class NotationResourceDetailContainer extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       resource: select(requests.rResource, state.entityStore),
-      resourceMeta: meta(requests.rResource, state.entityStore)
+      resourceMeta: meta(requests.rResource, state.entityStore),
     };
     return { ...newState, ...ownProps };
   };
@@ -25,7 +25,7 @@ export class NotationResourceDetailContainer extends PureComponent {
     const promises = [];
     const resourceCall = resourcesAPI.show(match.params.resourceId);
     const { promise: one } = dispatch(
-      request(resourceCall, requests.rResource)
+      request(resourceCall, requests.rResource),
     );
     promises.push(one);
     return Promise.all(promises);
@@ -38,18 +38,18 @@ export class NotationResourceDetailContainer extends PureComponent {
     match: PropTypes.object,
     resource: PropTypes.object,
     dispatch: PropTypes.func,
-    history: PropTypes.object
+    history: PropTypes.object,
   };
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.rResource));
   }
 
-  handleClose = event => {
+  handleClose = (event) => {
     if (event) event.preventDefault();
     const { textId, sectionId } = this.props.match.params;
     this.props.history.push(lh.link("readerSection", textId, sectionId), {
-      noScroll: true
+      noScroll: true,
     });
   };
 
@@ -83,5 +83,5 @@ export class NotationResourceDetailContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  connectAndFetch(NotationResourceDetailContainer)
+  connectAndFetch(NotationResourceDetailContainer),
 );

@@ -9,5 +9,5 @@ export default {
   New,
   Properties,
   Body,
-  Detail
+  Detail,
 };

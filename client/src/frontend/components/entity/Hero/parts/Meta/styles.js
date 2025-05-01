@@ -28,7 +28,7 @@ export const Contributors = styled(NamesList)`
     `
     font-size: 17px;
   `,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 `;
 
@@ -37,7 +37,7 @@ export const Creators = styled(NamesList)`
     `
     font-size: 20px;
   `,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 
   + ${Contributors} {
@@ -78,6 +78,6 @@ export const Description = styled.div`
     ${Contributors} + & {
       margin-block-start: 45px;
     }`,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 `;

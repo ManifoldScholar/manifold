@@ -12,13 +12,13 @@ export default `
 
       ${respond(
         `padding: calc(var(--container-padding-inline-narrow) * 0.8) calc(var(--container-padding-inline-narrow) * 1.2);`,
-        60
+        60,
       )}
 
       &--padded {
         ${respond(
           `padding: var(--container-padding-inline-narrow) var(--container-padding-inline-responsive);`,
-          35
+          35,
         )}
 
         ${respond(
@@ -26,7 +26,7 @@ export default `
         padding-right: var(--container-padding-inline-full);
         padding-left: var(--container-padding-inline-full);
       `,
-          120
+          120,
         )}
       }
     }

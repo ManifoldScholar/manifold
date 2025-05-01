@@ -19,11 +19,11 @@ class FormGeneratedPasswordInput extends Component {
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,
     set: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    focusOnMount: false
+    focusOnMount: false,
   };
 
   static contextType = FormContext;
@@ -32,7 +32,7 @@ class FormGeneratedPasswordInput extends Component {
     super(props);
     this.state = {
       password: this.initializePassword(),
-      showPassword: false
+      showPassword: false,
     };
   }
 
@@ -86,14 +86,14 @@ class FormGeneratedPasswordInput extends Component {
 
     return (
       <Input
-        ref={input => {
+        ref={(input) => {
           this.inputElement = input;
         }}
         id={`${this.idPrefix}-${id}`}
         aria-describedby={this.props.idForError}
         type={type}
         placeholder={this.props.t("forms.password_reset.enter_password")}
-        onChange={event => this.handlePasswordChange(event)}
+        onChange={(event) => this.handlePasswordChange(event)}
         value={this.state.password}
       />
     );
@@ -105,7 +105,7 @@ class FormGeneratedPasswordInput extends Component {
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <Errorable
             name={this.props.name}
             errors={this.props.errors}
@@ -119,7 +119,7 @@ class FormGeneratedPasswordInput extends Component {
               styleType={this.context?.styleType}
             />
             <Styled.Toggle
-              onClick={event => this.togglePassword(event)}
+              onClick={(event) => this.togglePassword(event)}
               role="button"
               tabIndex="0"
             >

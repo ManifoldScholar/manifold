@@ -6,7 +6,7 @@ export default class NotationFader extends PureComponent {
   static displayName = "NotationViewer.Fader";
 
   static propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
   };
 
   constructor(props) {
@@ -19,7 +19,7 @@ export default class NotationFader extends PureComponent {
     const rect = this.wrapper.getBoundingClientRect();
     const visible =
       rect.top > 75 && rect.top + rect.height / 2 < window.innerHeight;
-    // eslint-disable-next-line react/no-did-update-set-state
+
     this.setState({ visible });
   }
 
@@ -27,13 +27,13 @@ export default class NotationFader extends PureComponent {
     const { children } = this.props;
     const classes = classNames("notation-preview-fader", {
       "transition-out": !this.state.visible,
-      "transition-in": this.state.visible
+      "transition-in": this.state.visible,
     });
 
     return (
       <div
         className={classes}
-        ref={r => {
+        ref={(r) => {
           this.wrapper = r;
         }}
       >

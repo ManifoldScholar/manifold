@@ -5,5 +5,5 @@ import Issue from "./patterns/IssueHero";
 export default {
   Project,
   Journal,
-  Issue
+  Issue,
 };

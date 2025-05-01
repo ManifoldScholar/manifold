@@ -25,15 +25,15 @@ export class FormSelect extends Component {
       PropTypes.shape({
         value: PropTypes.any.isRequired,
         label: PropTypes.string.isRequired,
-        key: PropTypes.string.isRequired
-      })
+        key: PropTypes.string.isRequired,
+      }),
     ).isRequired,
-    focusOnMount: PropTypes.bool
+    focusOnMount: PropTypes.bool,
   };
 
   static defaultProps = {
     rounded: false,
-    hideLabel: false
+    hideLabel: false,
   };
 
   static contextType = FormContext;
@@ -57,7 +57,7 @@ export class FormSelect extends Component {
   }
 
   render() {
-    const options = this.props.options.map(option => {
+    const options = this.props.options.map((option) => {
       return (
         <option key={option.key} value={option.value}>
           {option.label}
@@ -67,18 +67,17 @@ export class FormSelect extends Component {
 
     const styleType = this.context?.styleType;
 
-    /* eslint-disable no-nested-ternary */
     const WrapperTag = this.props.rounded
       ? Styled.TertiarySelectWrapper
       : styleType === "primary"
-      ? Styled.PrimarySelectWrapper
-      : Styled.SecondarySelectWrapper;
+        ? Styled.PrimarySelectWrapper
+        : Styled.SecondarySelectWrapper;
 
     const SelectComponent = this.props.rounded
       ? Styled.TertiarySelect
       : styleType === "primary"
-      ? Styled.PrimarySelect
-      : Styled.SecondarySelect;
+        ? Styled.PrimarySelect
+        : Styled.SecondarySelect;
 
     const IconComponent = this.props.rounded
       ? Styled.IconTertiary
@@ -86,7 +85,7 @@ export class FormSelect extends Component {
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <Errorable
             name={this.props.name}
             errors={this.props.errors}
@@ -111,7 +110,7 @@ export class FormSelect extends Component {
                 value={
                   this.props.optionsMeta?.stringValue ?? this.props.value ?? ""
                 }
-                ref={input => {
+                ref={(input) => {
                   this.inputElement = input;
                 }}
                 $wide={this.props.wide}

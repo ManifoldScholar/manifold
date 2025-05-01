@@ -9,11 +9,11 @@ export default class IconBooksOnShelfStroke extends Component {
     className: PropTypes.string,
     size: PropTypes.number,
     fill: PropTypes.string,
-    stroke: PropTypes.string
+    stroke: PropTypes.string,
   };
 
   static defaultProps = {
-    stroke: "currentColor"
+    stroke: "currentColor",
   };
 
   render() {

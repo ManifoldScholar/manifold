@@ -7,7 +7,7 @@ import {
   defaultTransitionProps,
   rgba,
   transparentize,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 
 export const Cover = styled(Link, transientOptions)`
@@ -23,7 +23,8 @@ export const Cover = styled(Link, transientOptions)`
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     box-shadow ${defaultTransitionProps};
 
   ${({ $isPlaceholder }) =>
@@ -93,7 +94,7 @@ export const IconWrapper = styled.div`
   ${respond(
     `padding: 18px 24px 18px 0;
     font-size: 14px;`,
-    75
+    75,
   )}
 
   ${respond(`transform: translateY(-5px);`, 90)}
@@ -105,6 +106,6 @@ export const IconText = styled.span`
   ${respond(
     `display: block;
     word-break: break-word;`,
-    90
+    90,
   )}
 `;

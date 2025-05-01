@@ -25,7 +25,7 @@ function SectionListItem(props) {
     setError,
     index,
     sectionCount,
-    onReorder
+    onReorder,
   } = props;
 
   const { t } = useTranslation();
@@ -37,15 +37,15 @@ function SectionListItem(props) {
   const propertiesUrl = lh.link(
     "backendTextSectionProperties",
     textId,
-    section.id
+    section.id,
   );
 
   const updateText = useApiCallback(textsAPI.update);
 
-  const onSetStart = async id => {
+  const onSetStart = async (id) => {
     setError(null);
     const res = await updateText(textId, {
-      attributes: { startTextSectionId: id }
+      attributes: { startTextSectionId: id },
     });
     if (res?.errors) setError(res.errors);
   };
@@ -67,13 +67,13 @@ function SectionListItem(props) {
     if (confirm) confirm(heading, message, doDelete);
   };
 
-  const onKeyboardMove = direction => {
+  const onKeyboardMove = (direction) => {
     const newIndex = direction === "down" ? index + 1 : index - 1;
     const callback = () => {
       setTimeout(() => {
         // refs are unreliably here due to rerendering caused by ancestor components
         const disclosureToggleEl = document.querySelector(
-          `[data-disclosure-toggle-for="${section.id}"]`
+          `[data-disclosure-toggle-for="${section.id}"]`,
         );
         if (disclosureToggleEl) {
           disclosureToggleEl.focus();
@@ -84,7 +84,7 @@ function SectionListItem(props) {
       id: section.id,
       title: section.name,
       position: newIndex + 1,
-      callback
+      callback,
     };
 
     onReorder(result);
@@ -160,14 +160,14 @@ function SectionListItem(props) {
                   id: "up",
                   label: t("actions.dnd.move_up_position"),
                   onClick: () => onKeyboardMove("up"),
-                  disabled: index === 0
+                  disabled: index === 0,
                 },
                 {
                   id: "down",
                   label: t("actions.dnd.move_down_position"),
                   onClick: () => onKeyboardMove("down"),
-                  disabled: index === sectionCount - 1
-                }
+                  disabled: index === sectionCount - 1,
+                },
               ]}
             />
           </Styled.KeyboardButtons>
@@ -198,7 +198,7 @@ SectionListItem.propTypes = {
   refresh: PropTypes.func,
   index: PropTypes.number,
   sectionCount: PropTypes.number,
-  onReorder: PropTypes.func
+  onReorder: PropTypes.func,
 };
 
 export default withConfirmation(SectionListItem);

@@ -32,7 +32,7 @@ TOCListNode.propTypes = {
   className: PropTypes.string,
   textSlug: PropTypes.string.isRequired,
   anchor: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default TOCListNode;

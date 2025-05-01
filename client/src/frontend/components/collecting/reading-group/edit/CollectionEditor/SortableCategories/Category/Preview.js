@@ -18,7 +18,7 @@ export default function Preview({ category, active, container }) {
           </Styled.Inner>
         </Styled.Category>
       </Styled.Wrapper>,
-      container
+      container,
     )
   );
 }

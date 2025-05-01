@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 
 export default class MyReadingGroupsContainer extends Component {
   static propTypes = {
-    route: PropTypes.object.isRequired
+    route: PropTypes.object.isRequired,
   };
 
   render() {

@@ -39,7 +39,7 @@ export const ImageCol = styled.div`
   display: block;
   padding-inline-end: 15px;
 `,
-    60
+    60,
   )}
 `;
 

@@ -11,7 +11,7 @@ class ProjectContentBlockInListPartsEdit extends PureComponent {
     baseClass: PropTypes.string.isRequired,
     clickHandler: PropTypes.func.isRequired,
     blockTitle: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -24,7 +24,7 @@ class ProjectContentBlockInListPartsEdit extends PureComponent {
         className={`${this.props.baseClass}__button`}
         onClick={this.props.clickHandler}
         aria-label={this.props.t("layout.edit_block", {
-          blockTitle: translatedTitle
+          blockTitle: translatedTitle,
         })}
       >
         <Utility.IconComposer

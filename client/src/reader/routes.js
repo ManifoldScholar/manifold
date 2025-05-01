@@ -3,14 +3,14 @@ const routes = {
   component: "Reader",
   exact: false,
   path: "/read/:textId/:ignore(section|search)?/:sectionId?",
-  helper: t => `/read/${t}`,
+  helper: (t) => `/read/${t}`,
   routes: [
     {
       name: "readerSearchResults",
       exact: true,
       component: "Search",
       path: "/read/:textId/search",
-      helper: t => `/read/${t}/search`
+      helper: (t) => `/read/${t}/search`,
     },
     {
       name: "readerSection",
@@ -24,16 +24,15 @@ const routes = {
           exact: true,
           component: "NotationResourceDetail",
           path: "/read/:textId/section/:sectionId/resource/:resourceId",
-          helper: (t, s, r) => `/read/${t}/section/${s}/resource/${r}`
+          helper: (t, s, r) => `/read/${t}/section/${s}/resource/${r}`,
         },
         {
           name: "readerSectionResourceCollection",
           exact: true,
           component: "NotationResourceCollectionDetail",
-          path:
-            "/read/:textId/section/:sectionId/resource-collection/:resourceCollectionId",
+          path: "/read/:textId/section/:sectionId/resource-collection/:resourceCollectionId",
           helper: (t, s, c) =>
-            `/read/${t}/section/${s}/resource-collection/${c}`
+            `/read/${t}/section/${s}/resource-collection/${c}`,
         },
         {
           name: "readerSectionSearchResults",
@@ -41,11 +40,11 @@ const routes = {
           component: "Search",
           transition: "overlay-full",
           path: "/read/:textId/section/:sectionId/search",
-          helper: (t, ts) => `/read/${t}/section/${ts}/search`
-        }
-      ]
-    }
-  ]
+          helper: (t, ts) => `/read/${t}/section/${ts}/search`,
+        },
+      ],
+    },
+  ],
 };
 
 export default routes;

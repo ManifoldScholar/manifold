@@ -8,7 +8,7 @@ class Highlights extends Component {
   static displayName = "Analytics.Composed.Highlights";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get data() {
@@ -27,7 +27,7 @@ class Highlights extends Component {
     const { rangeInWords } = this.props;
     return rangeInWords
       ? this.props.t("analytics.highlights_in_date_range", {
-          dateRange: rangeInWords
+          dateRange: rangeInWords,
         })
       : this.props.t("analytics.highlights_made");
   }

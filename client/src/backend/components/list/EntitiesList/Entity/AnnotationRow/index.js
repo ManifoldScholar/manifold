@@ -18,7 +18,7 @@ function AnnotationRow({
   addItem,
   removeItem,
   onDelete,
-  linkOverride
+  linkOverride,
 }) {
   const { id, attributes } = entity;
   const {
@@ -33,7 +33,7 @@ function AnnotationRow({
     textId,
     creatorName,
     creatorId,
-    orphaned
+    orphaned,
   } = attributes;
 
   const { t } = useTranslation();
@@ -51,9 +51,7 @@ function AnnotationRow({
     >
       <Utility.IconComposer icon="delete32" size={26} />
     </button>
-  ) : (
-    undefined
-  );
+  ) : undefined;
 
   return (
     <Styled.Item className="entity-row entity-list__entity scheme-dark">
@@ -76,28 +74,28 @@ function AnnotationRow({
                         text: isPrivate
                           ? t("common.private")
                           : t("common.public"),
-                        level: "notice"
-                      }
+                        level: "notice",
+                      },
                     ]
                   : []),
                 ...(orphaned
                   ? [
                       {
                         text: t("records.annotations.orphaned_tag"),
-                        level: ""
-                      }
+                        level: "",
+                      },
                     ]
                   : []),
                 ...(unresolvedFlagsCount
                   ? [
                       {
                         text: t("records.annotations.flag_count", {
-                          count: unresolvedFlagsCount
+                          count: unresolvedFlagsCount,
                         }),
-                        level: "error"
-                      }
+                        level: "error",
+                      },
                     ]
-                  : [])
+                  : []),
               ]}
             />
           </Styled.MetaOne>
@@ -105,7 +103,7 @@ function AnnotationRow({
             {!hideCreator && (
               <Link
                 to={{
-                  pathname: lh.link("backendRecordsUserProperties", creatorId)
+                  pathname: lh.link("backendRecordsUserProperties", creatorId),
                 }}
               >
                 {creatorName}
@@ -113,17 +111,17 @@ function AnnotationRow({
             )}
             <Link
               to={{
-                pathname: lh.link("backendText", textId)
+                pathname: lh.link("backendText", textId),
               }}
               dangerouslySetInnerHTML={{
                 __html:
-                  textTitle ?? t("records.annotations.text_title_placeholder")
+                  textTitle ?? t("records.annotations.text_title_placeholder"),
               }}
             />
             {!!readingGroupId && !hideRG && (
               <Link
                 to={{
-                  pathname: lh.link("backendReadingGroup", readingGroupId)
+                  pathname: lh.link("backendReadingGroup", readingGroupId),
                 }}
               >
                 {readingGroupName}
@@ -135,7 +133,7 @@ function AnnotationRow({
               linkOverride
                 ? linkOverride(id)
                 : {
-                    pathname: lh.link("backendRecordsAnnotationsDetail", id)
+                    pathname: lh.link("backendRecordsAnnotationsDetail", id),
                   }
             }
           >
@@ -160,7 +158,7 @@ AnnotationRow.propTypes = {
   bulkSelection: PropTypes.object,
   addItem: PropTypes.func,
   removeItem: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
 };
 
 export default AnnotationRow;

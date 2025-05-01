@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   respond,
   defaultTransitionProps,
-  formInputPrimary
+  formInputPrimary,
 } from "theme/styles/mixins";
 
 const TextAreaBase = styled.textarea`
@@ -50,7 +50,7 @@ export const TextAreaSecondary = styled(TextAreaBase)`
     padding: 1.25em 1.389em;
     font-size: 18px;
   `,
-    70
+    70,
   )}
 
   &::placeholder {

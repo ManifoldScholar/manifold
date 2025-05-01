@@ -5,5 +5,5 @@ import KindPicker from "./KindPicker";
 export default {
   KindAttributes,
   Kind,
-  KindPicker
+  KindPicker,
 };

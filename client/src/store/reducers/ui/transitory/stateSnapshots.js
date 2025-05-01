@@ -22,7 +22,7 @@ export default handleActions(
   {
     TAKE_SNAPSHOT: takeSnapshot,
     RESET_SNAPSHOT: resetSnapshot,
-    RESET_SNAPSHOTS: resetSnapshots
+    RESET_SNAPSHOTS: resetSnapshots,
   },
-  initialState
+  initialState,
 );

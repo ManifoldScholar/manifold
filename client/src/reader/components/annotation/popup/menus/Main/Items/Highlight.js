@@ -26,7 +26,7 @@ function Highlight({ menu, actions, activeAnnotation }) {
             : actions.createHighlight
         }
         className={classNames({
-          "annotation-popup__button--selected": highlighted
+          "annotation-popup__button--selected": highlighted,
         })}
         kind="any"
         label={t("reader.menus.popup.highlight")}
@@ -53,7 +53,7 @@ Highlight.displayName = "Annotation.Popup.Menus.MainMenu.Highlight";
 Highlight.propTypes = {
   menu: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  activeAnnotation: PropTypes.object
+  activeAnnotation: PropTypes.object,
 };
 
 export default Highlight;

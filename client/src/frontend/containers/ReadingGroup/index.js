@@ -28,7 +28,7 @@ export default function ReadingGroup({ route }) {
 
   const { data: readingGroup } = useFetch({
     request: [readingGroupsAPI.show, id],
-    dependencies: [fetchVersion]
+    dependencies: [fetchVersion],
   });
 
   const breadcrumbProps = useMemo(() => {
@@ -37,17 +37,17 @@ export default function ReadingGroup({ route }) {
         breadcrumbs: [
           {
             to: lh.link("frontendPublicReadingGroups"),
-            label: t("pages.public_groups")
-          }
-        ]
+            label: t("pages.public_groups"),
+          },
+        ],
       };
     return {
       breadcrumbs: [
         {
           to: lh.link("frontendMyReadingGroups"),
-          label: t("pages.my_groups")
-        }
-      ]
+          label: t("pages.my_groups"),
+        },
+      ],
     };
   }, [readingGroup?.attributes?.currentUserRole, t]);
 
@@ -60,12 +60,12 @@ export default function ReadingGroup({ route }) {
 
   const childProps = {
     settings,
-    refresh: () => setFetchVersion(prev => prev + 1),
+    refresh: () => setFetchVersion((prev) => prev + 1),
     fetchVersion,
     navigate,
     route,
     readingGroup,
-    dispatch
+    dispatch,
   };
 
   const handleClose = () => {
@@ -78,9 +78,9 @@ export default function ReadingGroup({ route }) {
     readingGroup,
     closeDrawer: handleClose,
     onArchive: () => {
-      setFetchVersion(prev => prev + 1);
+      setFetchVersion((prev) => prev + 1);
       handleClose();
-    }
+    },
   };
 
   const drawerProps = {
@@ -89,11 +89,11 @@ export default function ReadingGroup({ route }) {
     size: "wide",
     position: "overlay",
     lockScroll: "always",
-    closeCallback: () => handleClose()
+    closeCallback: () => handleClose(),
   };
 
   const onCloseSearch = () => {
-    setFetchVersion(prev => prev + 1);
+    setFetchVersion((prev) => prev + 1);
     handleClose();
   };
 

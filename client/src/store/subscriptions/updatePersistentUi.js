@@ -16,8 +16,8 @@ export default function updatePersistentUi(store) {
       store.dispatch(
         request(
           meAPI.update({ persistent_ui: currentState.ui.persistent }),
-          requests.gAuthenticatedUserUpdate
-        )
+          requests.gAuthenticatedUserUpdate,
+        ),
       );
     }
   };

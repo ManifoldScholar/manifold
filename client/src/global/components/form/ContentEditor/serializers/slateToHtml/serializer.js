@@ -10,10 +10,10 @@ const MARK_TAG_MAP = {
   bold: "strong",
   underline: "u",
   italic: "em",
-  code: "code"
+  code: "code",
 };
 
-const serializeText = node => {
+const serializeText = (node) => {
   if (node.slateOnly) return null;
 
   const textContent = node.text;
@@ -22,7 +22,7 @@ const serializeText = node => {
   const textSplits = replaceLineBreaks(textContent);
 
   const markElements = Object.keys(MARK_TAG_MAP)
-    .map(key => {
+    .map((key) => {
       return node[key] ? MARK_TAG_MAP[key] : null;
     })
     .filter(Boolean);
@@ -36,13 +36,12 @@ const serializeText = node => {
   return new Document(textElements);
 };
 
-const mergeSlateOnlyChildren = node => {
+const mergeSlateOnlyChildren = (node) => {
   if (!node.slateOnly) return node;
   return node.children;
 };
 
-/* eslint-disable no-use-before-define */
-const serializeChildren = children => {
+const serializeChildren = (children) => {
   if (!children) return [];
 
   return children
@@ -52,7 +51,7 @@ const serializeChildren = children => {
     .filter(Boolean);
 };
 
-const serializeNode = node => {
+const serializeNode = (node) => {
   if (!node) return null;
 
   if (SlateText.isText(node)) return serializeText(node);
@@ -74,12 +73,12 @@ const serializeNode = node => {
   return el ?? new Document(children);
 };
 
-export const slateToDom = slate => {
-  const document = slate.map(n => serializeNode(n)).filter(Boolean);
+export const slateToDom = (slate) => {
+  const document = slate.map((n) => serializeNode(n)).filter(Boolean);
   return document;
 };
 
-export const slateToHtml = slate => {
+export const slateToHtml = (slate) => {
   const document = slateToDom(slate);
   return serializer(document);
 };

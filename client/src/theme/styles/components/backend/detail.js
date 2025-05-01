@@ -10,7 +10,7 @@ export default `
       `
         padding-top: 45px;
       `,
-      60
+      60,
     )}
 
     .backend-panel > .container {

@@ -25,12 +25,12 @@ function Menu({
     "annotation-popup__menu": true,
     "annotation-popup__menu--active": menuProps.visible,
     "annotation-popup__menu--bottom": direction === "up",
-    "annotation-popup__menu--top": direction === "down"
+    "annotation-popup__menu--top": direction === "down",
   });
   const tailClassName = classNames({
     "annotation-popup__tail": true,
     "annotation-popup__tail--down": direction === "up",
-    "annotation-popup__tail--up": direction === "down"
+    "annotation-popup__tail--up": direction === "down",
   });
   return (
     <ReakitMenu
@@ -54,10 +54,10 @@ Menu.propTypes = {
   onKeyDown: PropTypes.func,
   activeMenu: PropTypes.string,
   lastActiveMenu: PropTypes.shape({
-    current: PropTypes.string
+    current: PropTypes.string,
   }),
   visible: PropTypes.bool,
-  submenu: PropTypes.bool
+  submenu: PropTypes.bool,
 };
 
 export default Menu;

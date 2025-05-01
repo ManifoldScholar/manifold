@@ -18,7 +18,7 @@ export default function JournalAccessWrapper({ journal, route }) {
   const canGrantPermissions = authorization.authorizeAbility({
     authentication,
     entity: journal,
-    ability: "managePermissions"
+    ability: "managePermissions",
   });
 
   return journal ? (
@@ -39,8 +39,8 @@ export default function JournalAccessWrapper({ journal, route }) {
         drawerProps: { closeUrl, lockScroll: "always" },
         childProps: {
           entity: journal,
-          closeUrl
-        }
+          closeUrl,
+        },
       })}
     </>
   ) : null;
@@ -50,5 +50,5 @@ JournalAccessWrapper.displayName = "Journal.Access.Wrapper";
 
 JournalAccessWrapper.propTypes = {
   journal: PropTypes.object,
-  route: PropTypes.object
+  route: PropTypes.object,
 };

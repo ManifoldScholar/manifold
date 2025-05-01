@@ -14,19 +14,19 @@ class ResourceListSlideInteractive extends PureComponent {
     resource: PropTypes.object.isRequired,
     flexibleHeight: PropTypes.bool,
     enableZoom: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     enableZoom: true,
-    flexibleHeight: false
+    flexibleHeight: false,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       containerWidth: 0,
-      containerHeight: 0
+      containerHeight: 0,
     };
 
     this.updateStateOnResize = throttle(this.updateContainerState, 100);
@@ -60,14 +60,14 @@ class ResourceListSlideInteractive extends PureComponent {
     window.removeEventListener("resize", this.updateStateOnResize);
   }
 
-  setContainer = el => {
+  setContainer = (el) => {
     this.containerRef = el;
   };
 
   updateContainerState = () => {
     this.setState({
       containerWidth: this.containerWidth(),
-      containerHeight: this.containerHeight()
+      containerHeight: this.containerHeight(),
     });
   };
 

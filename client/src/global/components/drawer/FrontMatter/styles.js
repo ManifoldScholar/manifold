@@ -5,7 +5,7 @@ import {
   defaultHoverStyle,
   respond,
   drawerPadding,
-  headingQuaternary
+  headingQuaternary,
 } from "theme/styles/mixins";
 import Utility from "global/components/utility";
 
@@ -30,7 +30,7 @@ export const Bar = styled.div`
         padding-right: 32px;
         padding-left: 32px;
       `,
-      65
+      65,
     )}
   `}
 

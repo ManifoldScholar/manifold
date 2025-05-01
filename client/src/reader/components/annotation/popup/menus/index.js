@@ -9,5 +9,5 @@ export default {
   Login,
   Main,
   ReadingGroup,
-  Share
+  Share,
 };

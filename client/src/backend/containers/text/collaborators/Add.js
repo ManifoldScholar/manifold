@@ -25,5 +25,5 @@ AddCollaboratorContainer.displayName = "Text.Collaborators.Add";
 
 AddCollaboratorContainer.propTypes = {
   textId: PropTypes.string.isRequired,
-  refresh: PropTypes.func
+  refresh: PropTypes.func,
 };

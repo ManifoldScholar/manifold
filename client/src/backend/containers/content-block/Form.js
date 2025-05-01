@@ -20,7 +20,7 @@ export class ProjectContentFormContainer extends Component {
     history: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     match: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -58,7 +58,7 @@ export class ProjectContentFormContainer extends Component {
     this.fetchContentBlocks();
     return this.props.history.push(
       lh.link("backendProjectLayout", this.project.id),
-      { noScroll: true }
+      { noScroll: true },
     );
   };
 
@@ -71,7 +71,7 @@ export class ProjectContentFormContainer extends Component {
   // We manually assign these values because they come from the pending block, which acts as the
   // source model. Since those values aren't changed, they are not passed to the update request
   // on their own.
-  create = model => {
+  create = (model) => {
     const adjusted = { ...model };
     adjusted.attributes.position = this.contentBlock.attributes.position;
     adjusted.attributes.type = this.contentBlock.attributes.type;

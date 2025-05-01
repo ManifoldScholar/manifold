@@ -11,7 +11,7 @@ function collectionRef(collection) {
   return {
     type,
     [identityKey]: identity,
-    relationship: "collection"
+    relationship: "collection",
   };
 }
 
@@ -21,14 +21,14 @@ function getCollectableType(collectable) {
 }
 
 function mapCollectables(collectables) {
-  return collectables.map(collectable => ({
+  return collectables.map((collectable) => ({
     collectableType: getCollectableType(collectable),
     collectableId: collectable.id,
     groupingId:
       collectable.groupingId === "$uncategorized$"
         ? null
         : collectable.groupingId,
-    position: collectable.position
+    position: collectable.position,
   }));
 }
 
@@ -38,9 +38,9 @@ function makePayload(operation, collectables, collection) {
       {
         op: operation,
         ref: collectionRef(collection),
-        data: mapCollectables(collectables)
-      }
-    ]
+        data: mapCollectables(collectables),
+      },
+    ],
   };
 }
 
@@ -53,8 +53,8 @@ export default {
       endpoint,
       method,
       options: {
-        body: JSON.stringify(makePayload("update", collectables, collection))
-      }
+        body: JSON.stringify(makePayload("update", collectables, collection)),
+      },
     };
   },
 
@@ -63,8 +63,8 @@ export default {
       endpoint,
       method,
       options: {
-        body: JSON.stringify(makePayload("remove", collectables, collection))
-      }
+        body: JSON.stringify(makePayload("remove", collectables, collection)),
+      },
     };
-  }
+  },
 };

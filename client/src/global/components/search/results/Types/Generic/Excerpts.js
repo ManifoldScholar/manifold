@@ -23,12 +23,12 @@ function GenericExcerpts({ excerpts, joinHighlightedFragments }) {
   return excerpts.length ? (
     <>
       <Styled.ExcerptsWrapper ref={scrollTarget}>
-        {visibleExcerpts.map(excerpt => (
+        {visibleExcerpts.map((excerpt) => (
           <Styled.Excerpt key={excerpt.nodeUuid}>
             <Link
               to={excerpt.url}
               dangerouslySetInnerHTML={{
-                __html: joinHighlightedFragments(excerpt.contentHighlighted)
+                __html: joinHighlightedFragments(excerpt.contentHighlighted),
               }}
             />
           </Styled.Excerpt>
@@ -39,14 +39,14 @@ function GenericExcerpts({ excerpts, joinHighlightedFragments }) {
           <Collapse.Content>
             <>
               <Styled.Shim />
-              {expandedExcerpts.map(excerpt => (
+              {expandedExcerpts.map((excerpt) => (
                 <Styled.Excerpt key={excerpt.nodeUuid}>
                   <Link
                     to={excerpt.url}
                     dangerouslySetInnerHTML={{
                       __html: joinHighlightedFragments(
-                        excerpt.contentHighlighted
-                      )
+                        excerpt.contentHighlighted,
+                      ),
                     }}
                     tabIndex={visible ? 0 : -1}
                   />
@@ -69,7 +69,7 @@ GenericExcerpts.displayName = "Global.Search.Results.Generic.Excerpts";
 
 GenericExcerpts.propTypes = {
   excerpts: PropTypes.array.isRequired,
-  joinHighlightedFragments: PropTypes.func.isRequired
+  joinHighlightedFragments: PropTypes.func.isRequired,
 };
 
 export default withSearchResultHelper(GenericExcerpts);

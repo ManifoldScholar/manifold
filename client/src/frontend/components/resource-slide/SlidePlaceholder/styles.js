@@ -26,14 +26,14 @@ export const Icon = styled(Utility.IconComposer)`
     `
     width: 21.34vw;
     height: 21.34vw;`,
-    50
+    50,
   )}
 
   ${respond(
     `
     width: 220px;
     height: 220px;`,
-    120
+    120,
   )}
 `;
 

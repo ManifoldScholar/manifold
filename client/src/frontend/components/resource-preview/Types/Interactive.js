@@ -8,11 +8,11 @@ export default class ResourcePreviewInteractive extends Component {
 
   static propTypes = {
     resource: PropTypes.object.isRequired,
-    flexibleHeight: PropTypes.bool
+    flexibleHeight: PropTypes.bool,
   };
 
   static defaultProps = {
-    flexibleHeight: false
+    flexibleHeight: false,
   };
 
   get minHeight() {

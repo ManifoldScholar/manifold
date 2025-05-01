@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
   Search,
-  ResourceRow
+  ResourceRow,
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { resourceFilters } from "hoc/withFilteredLists";
 import { useListQueryParams, useFetch } from "hooks";
@@ -14,7 +14,7 @@ import { useListQueryParams, useFetch } from "hooks";
 function ProjectResourcesListContainer({
   project,
   entitiesListSearchParams,
-  entitiesListSearchProps
+  entitiesListSearchProps,
 }) {
   const { t } = useTranslation();
 
@@ -23,13 +23,13 @@ function ProjectResourcesListContainer({
     initFilters: entitiesListSearchParams.resources,
     initSearchProps: resourceFilters.dynamicParams(
       entitiesListSearchProps("resources"),
-      project
-    )
+      project,
+    ),
   });
 
   const { data: resources, meta: resourcesMeta } = useFetch({
     request: [projectsAPI.resources, project.id, filters, pagination],
-    options: { requestKey: requests.beResources }
+    options: { requestKey: requests.beResources },
   });
 
   if (!resources || !resourcesMeta) return null;
@@ -42,7 +42,7 @@ function ProjectResourcesListContainer({
       titleTag="h2"
       entities={resources}
       unit={t("glossary.resource", {
-        count: resourcesMeta?.pagination?.totalCount
+        count: resourcesMeta?.pagination?.totalCount,
       })}
       pagination={resourcesMeta.pagination}
       showCount
@@ -61,7 +61,7 @@ function ProjectResourcesListContainer({
           authorizedFor={project}
           authorizedTo="createResources"
           icon="BEResourcesBoxes64"
-        />
+        />,
       ]}
     />
   );
@@ -70,9 +70,9 @@ function ProjectResourcesListContainer({
 ProjectResourcesListContainer.displayName = "Project.ResourcesList";
 
 ProjectResourcesListContainer.propTypes = {
-  project: PropTypes.object
+  project: PropTypes.object,
 };
 
 export default withFilteredLists(ProjectResourcesListContainer, {
-  resources: resourceFilters.defaultParams()
+  resources: resourceFilters.defaultParams(),
 });

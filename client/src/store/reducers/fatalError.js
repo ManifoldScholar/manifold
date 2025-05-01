@@ -3,10 +3,10 @@ import endsWith from "lodash/endsWith";
 
 const initialState = {
   error: null,
-  type: null
+  type: null,
 };
 
-const clearError = state => {
+const clearError = (state) => {
   return { ...state, ...initialState };
 };
 
@@ -17,14 +17,14 @@ const mapAPIError = ({ status, error, exception, traces }) => {
   try {
     if (exception) body = exception.match(/(?:^#<|^)(.*)(?:>$|$)/)[1];
     if (endsWith(body, ">")) body = body.substring(0, body.length - 1);
-  } catch (e) {
+  } catch (_) {
     body = exception;
   }
   return {
     status,
     heading: `API ${error}`,
     body,
-    apiTrace: traces
+    apiTrace: traces,
   };
 };
 
@@ -35,12 +35,12 @@ const mapAuthorizationError = ({ status, heading, body, project, method }) => {
     heading,
     body,
     project,
-    apiTrace: null
+    apiTrace: null,
   };
 };
 
 const setError = (state, { payload: { error: rawError, type } }) => {
-  const error = (e => {
+  const error = ((e) => {
     switch (type) {
       case types.api:
         return mapAPIError(e);

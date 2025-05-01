@@ -5,7 +5,7 @@ import {
   fluidScale,
   respond,
   linkUnstyled,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import { containerWidth } from "theme/styles/variables/layout";
 import TitleLinkComponent from "./TitleLink";
@@ -67,7 +67,7 @@ function getImageStyles({ $layout }) {
             position: static;
             margin-inline: calc(-100vw / 2 + ${containerWidth.inner} / 2);
           `,
-          120
+          120,
         )}
       `;
     case "wide_inset":
@@ -102,7 +102,7 @@ export const Header = styled("header", transientOptions)`
         grid-template-rows: auto 1fr;
         grid-template-columns: ${IMAGE_MAX_HEIGHT} auto;
       `,
-      75
+      75,
     )}
 `;
 

@@ -14,7 +14,7 @@ export default function AuthorSectionContainer(props) {
 
   const { data: section } = useFetch({
     request: [sectionsAPI.show, sectionId, props.textId],
-    condition: !!sectionId
+    condition: !!sectionId,
   });
 
   return (
@@ -35,5 +35,5 @@ AuthorSectionContainer.displayName = "Text.Sections.Author";
 
 AuthorSectionContainer.propTypes = {
   textId: PropTypes.string.isRequired,
-  nextPosition: PropTypes.number
+  nextPosition: PropTypes.number,
 };

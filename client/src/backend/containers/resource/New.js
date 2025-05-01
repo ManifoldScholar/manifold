@@ -21,9 +21,9 @@ import Authorize from "hoc/Authorize";
 const { request } = entityStoreActions;
 
 export class ResourceNewContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      project: select(requests.beProject, state.entityStore)
+      project: select(requests.beProject, state.entityStore),
     };
   };
 
@@ -41,7 +41,7 @@ export class ResourceNewContainer extends PureComponent {
     project: PropTypes.object,
     history: PropTypes.object,
     match: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -54,7 +54,7 @@ export class ResourceNewContainer extends PureComponent {
     this.props.history.push(path);
   }
 
-  handleSuccess = resource => {
+  handleSuccess = (resource) => {
     this.redirectToResource(resource);
   };
 
@@ -69,7 +69,7 @@ export class ResourceNewContainer extends PureComponent {
     const parentProps = {
       parentTitle: project.attributes.titleFormatted,
       parentSubtitle: project.attributes.subtitle,
-      parentId: project.id
+      parentId: project.id,
     };
 
     return (
@@ -99,7 +99,7 @@ export class ResourceNewContainer extends PureComponent {
               model={this.defaultResource}
               name="backend-resource-create"
               update={resourcesAPI.update}
-              create={model => resourcesAPI.create(project.id, model)}
+              create={(model) => resourcesAPI.create(project.id, model)}
               onSuccess={this.handleSuccess}
               className="form-secondary"
             >

@@ -10,7 +10,7 @@ class Filters extends Component {
   static propTypes = {
     filterChangeHandler: PropTypes.func,
     filters: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   filteredBy(filter, format) {
@@ -42,7 +42,7 @@ class Filters extends Component {
           type="checkbox"
           id={checkboxId}
           checked={checked}
-          onChange={e => this.toggleFormat(e, format)}
+          onChange={(e) => this.toggleFormat(e, format)}
         />
         <div className="checkbox__indicator" aria-hidden="true">
           <IconComposer
@@ -65,11 +65,11 @@ class Filters extends Component {
         <div className="notes-filters__checkbox-group">
           {this.renderCheckBox(
             this.props.t("glossary.highlight_title_case_other"),
-            "highlight"
+            "highlight",
           )}
           {this.renderCheckBox(
             this.props.t("glossary.annotation_title_case_other"),
-            "annotation"
+            "annotation",
           )}
         </div>
       </fieldset>

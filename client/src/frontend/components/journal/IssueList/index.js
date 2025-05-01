@@ -24,7 +24,7 @@ function JournalIssueList({ issues = [] }) {
 JournalIssueList.displayName = "Journal.IssueList";
 
 JournalIssueList.propTypes = {
-  issues: PropTypes.array
+  issues: PropTypes.array,
 };
 
 export default JournalIssueList;

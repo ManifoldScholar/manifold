@@ -9,7 +9,7 @@ import {
   blockLabelRound,
   fluidScale,
   defaultFocusStyle,
-  revealOnFocus
+  revealOnFocus,
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`

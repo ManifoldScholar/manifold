@@ -3,7 +3,7 @@ import {
   panelRounded,
   respond,
   utilityPrimary,
-  subtitlePrimary
+  subtitlePrimary,
 } from "theme/styles/mixins";
 
 const basePaddingVertical = "24px";
@@ -30,7 +30,7 @@ export const ActionBox = styled.div`
         margin-left: ${gap};
       }
     `,
-    65
+    65,
   )}
 `;
 
@@ -48,7 +48,7 @@ export const Title = styled.span`
   ${respond(
     `display: inline-block;
     padding-right: 12px;`,
-    65
+    65,
   )}
 `;
 

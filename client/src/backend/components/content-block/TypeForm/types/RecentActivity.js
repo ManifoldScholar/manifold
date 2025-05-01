@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 
 export default class ProjectContentTypeFormRecentActivity extends PureComponent {
   static displayName = "Project.Content.TypeForm.Types.RecentActivity";

@@ -11,7 +11,7 @@ export default class Event extends PureComponent {
     itemTag: PropTypes.oneOf(["li", "div"]),
     className: PropTypes.string,
     destroyCallback: PropTypes.func,
-    hideLink: PropTypes.bool
+    hideLink: PropTypes.bool,
   };
 
   eventProps() {
@@ -38,7 +38,7 @@ export default class Event extends PureComponent {
     return {
       type: attr.eventType,
       postAttribution: attr.attribution,
-      icon: "activityComments64"
+      icon: "activityComments64",
     };
   }
 
@@ -49,7 +49,7 @@ export default class Event extends PureComponent {
       date: attr.createdAt,
       header: attr.eventTitle,
       dateFormat: "MMMM dd, yyyy",
-      title: attr.eventSubtitle
+      title: attr.eventSubtitle,
     };
   }
 
@@ -61,7 +61,7 @@ export default class Event extends PureComponent {
       dateFormat: "MMMM dd, yyyy",
       title: attr.subjectTitle,
       icon: "activityText64",
-      linkHref: lh.link("reader", attr.subjectSlug)
+      linkHref: lh.link("reader", attr.subjectSlug),
     };
   }
 
@@ -76,8 +76,8 @@ export default class Event extends PureComponent {
       linkHref: lh.link(
         "frontendProjectResource",
         attr.projectSlug,
-        attr.subjectSlug
-      )
+        attr.subjectSlug,
+      ),
     };
   }
 
@@ -92,8 +92,8 @@ export default class Event extends PureComponent {
       linkHref: lh.link(
         "frontendProjectResourceCollection",
         attr.projectSlug,
-        attr.subjectSlug
-      )
+        attr.subjectSlug,
+      ),
     };
   }
 

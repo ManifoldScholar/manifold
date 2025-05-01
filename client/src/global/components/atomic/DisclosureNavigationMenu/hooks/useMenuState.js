@@ -36,7 +36,7 @@ export default function useMenuState(initialVisible = false, onBlur) {
     "aria-controls": id,
     onClick: toggleVisible,
     onBlur: handleBlur,
-    onKeyDown: handleKeyDown
+    onKeyDown: handleKeyDown,
   };
   const contentProps = {
     ref: contentRef,
@@ -44,16 +44,16 @@ export default function useMenuState(initialVisible = false, onBlur) {
     visible,
     onBlur: handleBlur,
     onKeyDown: handleKeyDown,
-    toggleVisible
+    toggleVisible,
   };
 
   const state = useMemo(
     () => ({
       visible,
       disclosureProps,
-      contentProps
+      contentProps,
     }),
-    [visible, id] // eslint-disable-line react-hooks/exhaustive-deps
+    [visible, id], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   useEffect(() => {

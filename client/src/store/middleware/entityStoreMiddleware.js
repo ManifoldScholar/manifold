@@ -16,7 +16,7 @@ function sendRequest(request, tokens) {
 
 function buildResponseAction(requestAction, payload, meta, error) {
   const type = `API_RESPONSE/${constantizeMeta(meta)}`;
-  /* eslint-disable no-param-reassign */
+
   if (payload) {
     payload.appends = get(requestAction, "payload.appends") || null;
     payload.request = requestAction?.payload?.request;
@@ -27,7 +27,7 @@ function buildResponseAction(requestAction, payload, meta, error) {
     payload.noTouch = get(requestAction, "payload.noTouch") || false;
     payload.force = get(requestAction, "payload.force") || false;
   }
-  /* eslint-enable no-param-reassign */
+
   return { type, error, payload, meta };
 }
 
@@ -35,7 +35,7 @@ function buildEagerLoadRequestAction(originalAction, nextPage) {
   const {
     type,
     meta,
-    payload: { request: originalRequest }
+    payload: { request: originalRequest },
   } = originalAction;
 
   const request = copy(originalRequest);
@@ -72,7 +72,7 @@ const willEagerLoad = (action, response) => {
 };
 
 export default function entityStoreMiddleware({ dispatch, getState }) {
-  return next => action => {
+  return (next) => (action) => {
     // Guards
     if (action.type !== "API_REQUEST") {
       return next(action);
@@ -110,7 +110,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     const requestPromise = sendRequest(action.payload.request, {
       authToken,
       visitToken,
-      visitorToken
+      visitorToken,
     });
 
     if (!action.payload.silent) {
@@ -119,7 +119,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         dispatch({ type: "START_LOADING", payload: action.meta });
       }, 0);
 
-      const maybeStopLoading = response => {
+      const maybeStopLoading = (response) => {
         if (!willEagerLoad(action, response)) {
           dispatch({ type: "STOP_LOADING", payload: action.meta });
         }
@@ -142,33 +142,33 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
     let newMeta = action.meta;
     if (!Array.isArray(newMeta)) newMeta = [action.meta];
 
-    newMeta.forEach(meta => {
+    newMeta.forEach((meta) => {
       const type = `API_REQUEST/${constantizeMeta(meta)}`;
       const adjustedRequestAction = {
         type,
         payload: requestPayload,
-        meta
+        meta,
       };
       next(adjustedRequestAction);
     });
 
     // Execute the API call and when it is complete, dispatch a response action.
     requestPromise.then(
-      response => {
-        newMeta.forEach(meta => {
+      (response) => {
+        newMeta.forEach((meta) => {
           dispatch(buildResponseAction(action, response, meta, false));
         });
 
         if (willEagerLoad(action, response))
           dispatch(buildEagerLoadRequestAction(action, getNextPage(response)));
       },
-      response => {
-        newMeta.forEach(meta => {
+      (response) => {
+        newMeta.forEach((meta) => {
           const payload = response || {};
           payload.request = action.payload.request;
           dispatch(buildResponseAction(action, response, meta, true));
         });
-      }
+      },
     );
 
     // Remove object if requested on success.
@@ -179,21 +179,21 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         },
         () => {
           // noop
-        }
+        },
       );
     }
 
     // Add object if requested on success.
     if (requestPayload.adds) {
       requestPromise.then(
-        response => {
+        (response) => {
           if (Array.isArray(response.data)) {
             throw new Error(
               "Request options 'adds' is only supported for requests that return a " +
                 "single object. The attempt to add to the " +
                 requestPayload.adds +
                 " response" +
-                "did not succeed because the response contained a collection of entities."
+                "did not succeed because the response contained a collection of entities.",
             );
           }
           const { type, id } = response.data;
@@ -201,7 +201,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         },
         () => {
           // noop
-        }
+        },
       );
     }
 
@@ -214,7 +214,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         },
         () => {
           // noop
-        }
+        },
       );
     }
 
@@ -225,7 +225,7 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
         () => {
           const refreshResponse = get(
             state,
-            `entityStore.responses.${requestPayload.refreshes}`
+            `entityStore.responses.${requestPayload.refreshes}`,
           );
           if (
             !refreshResponse ||
@@ -235,13 +235,13 @@ export default function entityStoreMiddleware({ dispatch, getState }) {
             return;
           const refreshAction = entityStoreActions.request(
             refreshResponse.request,
-            requestPayload.refreshes
+            requestPayload.refreshes,
           );
           dispatch(refreshAction);
         },
         () => {
           // noop
-        }
+        },
       );
     }
 

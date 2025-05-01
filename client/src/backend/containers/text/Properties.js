@@ -8,7 +8,7 @@ import { textsAPI } from "api";
 export default function TextPropertiesContainer({ text }) {
   const { t } = useTranslation();
 
-  const formatData = data => {
+  const formatData = (data) => {
     const { coverAltText, cover, ...rest } = data?.attributes ?? {};
 
     const finalCoverData =
@@ -18,7 +18,7 @@ export default function TextPropertiesContainer({ text }) {
 
     return {
       ...data,
-      attributes: { cover: finalCoverData, ...rest }
+      attributes: { cover: finalCoverData, ...rest },
     };
   };
 
@@ -97,7 +97,7 @@ export default function TextPropertiesContainer({ text }) {
             name="attributes[socialTitle]"
             placeholder={t("journals.forms.properties.social_card_placeholder")}
             instructions={t(
-              "journals.forms.properties.social_card_instructions"
+              "journals.forms.properties.social_card_instructions",
             )}
           />
           <Form.TextArea
@@ -105,7 +105,7 @@ export default function TextPropertiesContainer({ text }) {
             label={t("journals.forms.properties.social_description_label")}
             name="attributes[socialDescription]"
             placeholder={t(
-              "journals.forms.properties.social_description_placeholder"
+              "journals.forms.properties.social_description_placeholder",
             )}
           />
           <Form.Upload
@@ -135,5 +135,5 @@ export default function TextPropertiesContainer({ text }) {
 TextPropertiesContainer.displayName = "Text.Properties";
 
 TextPropertiesContainer.propTypes = {
-  text: PropTypes.object
+  text: PropTypes.object,
 };

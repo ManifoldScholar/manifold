@@ -13,7 +13,7 @@ export default function IconComposer({
   svgProps = { "aria-hidden": true },
   className,
   size,
-  stroke
+  stroke,
 }) {
   const key = humps.pascalize(icon);
   const source = endsWith(key, "Unique") ? UniqueIcons : Icons;
@@ -25,7 +25,7 @@ export default function IconComposer({
     className: adjustedclassName,
     size,
     fill,
-    stroke
+    stroke,
   };
 
   return React.createElement(IconComponent ?? MissingIcon, props);
@@ -37,5 +37,5 @@ IconComposer.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   fill: PropTypes.string,
   stroke: PropTypes.string,
-  svgProps: PropTypes.object
+  svgProps: PropTypes.object,
 };

@@ -32,7 +32,7 @@ export class IngestionIngest extends Component {
       webSocketConnecting: state.websocket.connecting,
       webSocketConnected: state.websocket.connected,
       channel: get(state.websocket.channels, "IngestionChannel"),
-      ingestion: select(requests.beIngestionShow, state.entityStore)
+      ingestion: select(requests.beIngestionShow, state.entityStore),
     };
   };
 
@@ -51,11 +51,11 @@ export class IngestionIngest extends Component {
     webSocketConnected: PropTypes.bool,
     webSocketFailure: PropTypes.bool,
     t: PropTypes.func,
-    sectionIngestion: PropTypes.bool
+    sectionIngestion: PropTypes.bool,
   };
 
   static defaultProps = {
-    setDialogClassName: () => {} // noop
+    setDialogClassName: () => {}, // noop
   };
 
   constructor(props) {
@@ -66,7 +66,7 @@ export class IngestionIngest extends Component {
     this.state = {
       textLog: "Connecting to Manifold websocket...",
       updates: 0,
-      loading: false
+      loading: false,
     };
 
     this.channelName = "IngestionChannel";
@@ -141,7 +141,7 @@ export class IngestionIngest extends Component {
     if (this.state.loading) return;
     this.setState({ textLog: "" }, () => {
       this.props.dispatch(
-        websocketActions.triggerAction(this.channelName, "reset")
+        websocketActions.triggerAction(this.channelName, "reset"),
       );
     });
   };
@@ -149,14 +149,14 @@ export class IngestionIngest extends Component {
   ingest = () => {
     if (this.state.loading) return;
     this.props.dispatch(
-      websocketActions.triggerAction(this.channelName, "process")
+      websocketActions.triggerAction(this.channelName, "process"),
     );
   };
 
   reingest = () => {
     if (this.state.loading) return;
     this.props.dispatch(
-      websocketActions.triggerAction(this.channelName, "reingest")
+      websocketActions.triggerAction(this.channelName, "reingest"),
     );
   };
 
@@ -188,7 +188,7 @@ export class IngestionIngest extends Component {
     this.setState({ loading: true }, () => {
       this.props.dispatch({
         type: "START_LOADING",
-        payload: "ingestion-websocket"
+        payload: "ingestion-websocket",
       });
     });
   }
@@ -197,14 +197,14 @@ export class IngestionIngest extends Component {
     this.setState({ loading: false }, () => {
       this.props.dispatch({
         type: "STOP_LOADING",
-        payload: "ingestion-websocket"
+        payload: "ingestion-websocket",
       });
     });
   }
 
   openSocket(ingestionId) {
     const options = {
-      ingestion: ingestionId
+      ingestion: ingestionId,
     };
     this.props.dispatch(websocketActions.subscribe(this.channelName, options));
   }
@@ -251,7 +251,7 @@ export class IngestionIngest extends Component {
       body,
       scope: this.isReingestion ? "global" : "drawer",
       expiration: 0,
-      removeNotification: this.complete
+      removeNotification: this.complete,
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   }
@@ -288,7 +288,7 @@ export class IngestionIngest extends Component {
             </p>
             <div
               className="ingestion-output__log-value"
-              ref={el => {
+              ref={(el) => {
                 this.logEl = el;
               }}
             >

@@ -9,7 +9,7 @@ const createApiAction = (type, apiMethod) => {
       const { endpoint, method, options } = apiMethod(...apiMethodArgs);
       options.authToken = token;
       const action = createAction(type, () =>
-        client.call(endpoint, method, options)
+        client.call(endpoint, method, options),
       )();
       return dispatch(action);
     };

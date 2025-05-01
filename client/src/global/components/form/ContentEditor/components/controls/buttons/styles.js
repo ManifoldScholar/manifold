@@ -3,7 +3,7 @@ import {
   buttonUnstyled,
   defaultTransitionProps,
   formLabelPrimary,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -15,7 +15,8 @@ export const Button = styled.button`
   height: 28px;
   width: 28px;
   background-color: transparent;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-semibold);
@@ -69,7 +70,8 @@ export const Select = styled.select`
   padding-block-start: 2px;
   padding-block-end: 4px;
   padding-inline-start: 8px;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   .backend & {

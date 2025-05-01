@@ -35,8 +35,8 @@ function GroupAnnotationsEntityCollection({
           : {
               pagination: get(annotationsMeta, "pagination"),
               unit: t("glossary.note", {
-                count: annotationsMeta?.pagination?.totalCount || 0
-              })
+                count: annotationsMeta?.pagination?.totalCount || 0,
+              }),
             }
       }
       BodyComponent={() => (
@@ -67,7 +67,7 @@ function GroupAnnotationsEntityCollection({
           ? {}
           : {
               pagination: get(annotationsMeta, "pagination"),
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -84,7 +84,7 @@ GroupAnnotationsEntityCollection.propTypes = {
   annotationsMeta: PropTypes.object,
   filterProps: PropTypes.object,
   isFiltered: PropTypes.bool,
-  paginationProps: PropTypes.object
+  paginationProps: PropTypes.object,
 };
 
 export default GroupAnnotationsEntityCollection;

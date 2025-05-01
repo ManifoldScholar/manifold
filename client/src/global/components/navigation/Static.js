@@ -28,13 +28,13 @@ export class NavigationStatic extends PureComponent {
     exact: PropTypes.bool,
     style: PropTypes.object,
     darkTheme: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static contextType = FrontendModeContext;
 
   static defaultProps = {
-    exact: false
+    exact: false,
   };
 
   get userMenuClasses() {
@@ -42,7 +42,7 @@ export class NavigationStatic extends PureComponent {
       "user-nav": true,
       "show-82": this.props.mode === "frontend",
       "show-100": this.props.mode === "backend",
-      "user-nav--dark": this.props.darkTheme
+      "user-nav--dark": this.props.darkTheme,
     });
   }
 
@@ -51,7 +51,7 @@ export class NavigationStatic extends PureComponent {
       "site-nav": true,
       "show-82": this.props.mode === "frontend",
       "show-100": this.props.mode === "backend",
-      "site-nav--backend": this.props.mode === "backend"
+      "site-nav--backend": this.props.mode === "backend",
     });
   }
 
@@ -94,7 +94,7 @@ export class NavigationStatic extends PureComponent {
     }
     return {
       className: "site-nav__link",
-      activeClassName: "site-nav__link--active"
+      activeClassName: "site-nav__link--active",
     };
   }
 
@@ -170,7 +170,7 @@ export class NavigationStatic extends PureComponent {
           searchType={projectId ? "project" : "library"}
           projectId={projectId}
           initialState={{
-            keyword: ""
+            keyword: "",
           }}
           description={description}
           hidePanel={this.props.commonActions.hideSearchPanel}

@@ -11,16 +11,16 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
 
   const emailRef = useRef("");
 
-  const notifySuccess = useNotification(email => ({
+  const notifySuccess = useNotification((email) => ({
     level: 0,
     id: "PASSWORD_RESET_SENT",
     heading: t("forms.signin_overlay.send_reset_success", {
-      email
+      email,
     }),
-    expiration: 3000
+    expiration: 3000,
   }));
 
-  const formatData = useCallback(data => {
+  const formatData = useCallback((data) => {
     emailRef.current = data.email;
     return data.email;
   }, []);
@@ -59,10 +59,10 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
         />
       </SharedStyles.Form>
       <SharedStyles.LinksWrapper>
-        <SharedStyles.ViewLink onClick={e => handleViewChange("login", e)}>
+        <SharedStyles.ViewLink onClick={(e) => handleViewChange("login", e)}>
           {t("forms.signin_overlay.remember_password")}
         </SharedStyles.ViewLink>
-        <SharedStyles.ViewLink onClick={e => handleViewChange("terms", e)}>
+        <SharedStyles.ViewLink onClick={(e) => handleViewChange("terms", e)}>
           {t("forms.signin_overlay.need_account")}
         </SharedStyles.ViewLink>
       </SharedStyles.LinksWrapper>
@@ -74,5 +74,5 @@ ForgotPasswordForm.displayName = "Global.SignInUp.ForgotPasswordForm";
 
 ForgotPasswordForm.propTypes = {
   handleViewChange: PropTypes.func,
-  hideOverlay: PropTypes.func
+  hideOverlay: PropTypes.func,
 };

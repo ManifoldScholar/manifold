@@ -1,13 +1,13 @@
 export default function assetFilters({ snapshotState = false } = {}) {
   return {
     config: {
-      snapshotState
+      snapshotState,
     },
     params: [
       {
         label: "Search...",
         name: "keyword",
-        value: ""
+        value: "",
       },
       // {
       //   label: "Kind",
@@ -29,9 +29,9 @@ export default function assetFilters({ snapshotState = false } = {}) {
           { label: "By recently updated", value: "updated_at DESC" },
           { label: "By name", value: "name" },
           { label: "Newest first", value: "created_at DESC" },
-          { label: "Oldest first", value: "created_at ASC" }
-        ]
-      }
-    ]
+          { label: "Oldest first", value: "created_at ASC" },
+        ],
+      },
+    ],
   };
 }

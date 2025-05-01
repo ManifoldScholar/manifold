@@ -7,5 +7,5 @@ export default {
   Edit,
   Fetch,
   Static,
-  Wrapper
+  Wrapper,
 };

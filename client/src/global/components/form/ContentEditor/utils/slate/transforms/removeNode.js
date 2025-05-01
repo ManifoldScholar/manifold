@@ -20,7 +20,7 @@ export const removeNode = (editor, path) => {
         !Editor.isEditor(n) &&
         Element.isElement(n) &&
         n.type === node.type &&
-        isEqual(p, path)
+        isEqual(p, path),
     });
 
   // if the node is inline, it's safe to unwrap; the parent node is already setup for inline children
@@ -31,29 +31,29 @@ export const removeNode = (editor, path) => {
         !Editor.isEditor(n) &&
         Element.isElement(n) &&
         n.type === node.type &&
-        isEqual(p, path)
+        isEqual(p, path),
     });
   }
 
   // if this is a list node, we're going to enforce some proper structure
   // replace all li nodes with p nodes before removing the list tag
   if (node.type === "ol" || node.type === "ul") {
-    node.children.forEach(c => {
+    node.children.forEach((c) => {
       const childPath = ReactEditor.findPath(editor, c);
       Transforms.setNodes(
         editor,
         { type: "p", slateOnly: undefined },
-        { at: childPath, mode: "highest" }
+        { at: childPath, mode: "highest" },
       );
       if (c.children) {
-        c.children.forEach(nc => {
+        c.children.forEach((nc) => {
           if (nc.type === "ol" || nc.type === "ul") {
             const nestedChildPath = ReactEditor.findPath(editor, nc);
             return Transforms.unwrapNodes(editor, {
-              match: n =>
+              match: (n) =>
                 !Editor.isEditor(n) && Element.isElement(n) && n.type === "p",
               at: nestedChildPath,
-              mode: "lowest"
+              mode: "lowest",
             });
           }
         });
@@ -65,7 +65,7 @@ export const removeNode = (editor, path) => {
         Element.isElement(n) &&
         n.type === node.type &&
         isEqual(p, path),
-      at: path
+      at: path,
     });
   }
 
@@ -77,7 +77,7 @@ export const removeNode = (editor, path) => {
     Transforms.setNodes(
       editor,
       { ...node.children[0], code: undefined },
-      { at: [...path, 0], mode: "highest" }
+      { at: [...path, 0], mode: "highest" },
     );
 
   // also safe to unwrap, we're just bumping blocks a level up the tree
@@ -89,14 +89,14 @@ export const removeNode = (editor, path) => {
         Element.isElement(n) &&
         n.type === node.type &&
         !n.slateOnly &&
-        isEqual(p, path)
+        isEqual(p, path),
     });
 
   // if the children are inline, there's a normalization issue because we'd be moving inline nodes up to parent with block children
   if (!hasBlockChildren)
     Editor.withoutNormalizing(editor, () => {
       let pathCounter = 0;
-      node.children.forEach(c => {
+      node.children.forEach((c) => {
         // remove if empty text node
         if (has(c, "text") && !Node.string(c)) {
           Transforms.removeNodes(editor, { at: [...path, pathCounter] });
@@ -105,7 +105,7 @@ export const removeNode = (editor, path) => {
           Transforms.wrapNodes(
             editor,
             { type: "div", slateOnly: true },
-            { at: [...path, pathCounter] }
+            { at: [...path, pathCounter] },
           );
           pathCounter += 1;
         }
@@ -118,7 +118,7 @@ export const removeNode = (editor, path) => {
           Element.isElement(n) &&
           n.type === node.type &&
           !n.slateOnly &&
-          isEqual(p, path)
+          isEqual(p, path),
       });
     });
 };

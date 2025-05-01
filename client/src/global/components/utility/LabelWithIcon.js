@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import classNames from "classnames";
 import IconComposer from "./IconComposer";
 
@@ -25,7 +24,7 @@ export default class LabelWithIcon extends React.PureComponent {
   get containerClassNames() {
     return classNames({
       "label-with-icon": true,
-      "label-with-icon__text-large": this.textStyle === "large"
+      "label-with-icon__text-large": this.textStyle === "large",
     });
   }
 

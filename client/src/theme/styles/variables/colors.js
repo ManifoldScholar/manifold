@@ -43,7 +43,7 @@ export const baseColors = {
   violet75: "#9c4a96",
   yellow20: "#fff799",
   yellow45: "#f5e425",
-  yellow75: "#706b2c"
+  yellow75: "#706b2c",
 };
 
 // Default colors that meet WCAG AA color contrast guidelines
@@ -59,15 +59,14 @@ export const neutralColors = {
   textDark: `var(${createCustomPropertyName("color", "baseNeutral75")})`, // for neutral10 ↓ bg
   uiDark: `var(${createCustomPropertyName("color", "baseNeutral70")})`, // ""
   textExtraDark: `var(${createCustomPropertyName("color", "baseNeutral90")})`, // for informational hierarchy with neutralTextDark
-  uiExtraDark: `var(${createCustomPropertyName("color", "baseNeutral85")})` // ""
+  uiExtraDark: `var(${createCustomPropertyName("color", "baseNeutral85")})`, // ""
 };
 
 const accentPrimaryBase = "#52e3ac";
 const accentPrimaryColorScheme = new ColorSchemeGenerator(accentPrimaryBase);
 
-const accentPrimaryCustomProperties = accentPrimaryColorScheme.generatedRules.join(
-  "\n"
-);
+const accentPrimaryCustomProperties =
+  accentPrimaryColorScheme.generatedRules.join("\n");
 
 const accentSecondaryBase = "#61caff"; // formerly analyticsHighlight
 const accentTertiaryBase = "#2bd1fa"; // formerly spHighlight
@@ -83,7 +82,7 @@ export const otherAccentColors = {
     .spin(-1)
     .desaturate(14.44)
     .lighten(34.31)
-    .toHexString() // #d9f5fb
+    .toHexString(), // #d9f5fb
 };
 
 export const interactionColors = {
@@ -99,7 +98,7 @@ export const interactionColors = {
     .darken(40.78)
     .toHexString(), // #085d43
   focusSecondary: `var(${createCustomPropertyName("color", "baseNeutral20")})`,
-  focusTertiary: `var(${createCustomPropertyName("color", "baseNeutral30")})`
+  focusTertiary: `var(${createCustomPropertyName("color", "baseNeutral30")})`,
 };
 
 export const notificationColors = {
@@ -109,14 +108,14 @@ export const notificationColors = {
 
   warningExtraLight: `var(${createCustomPropertyName(
     "color",
-    "baseYellow20"
+    "baseYellow20",
   )})`,
   warningLight: `var(${createCustomPropertyName("color", "baseYellow45")})`,
   warningDark: `var(${createCustomPropertyName("color", "baseYellow75")})`,
 
   noticeExtraLight: `var(${createCustomPropertyName("color", "baseBlue20")})`,
   noticeLight: `var(${createCustomPropertyName("color", "baseBlue45")})`,
-  noticeDark: `var(${createCustomPropertyName("color", "baseBlue75")})`
+  noticeDark: `var(${createCustomPropertyName("color", "baseBlue75")})`,
 };
 
 // default heading theming that's customizable in the backend
@@ -126,17 +125,17 @@ export const headerColors = {
   foreground: `var(${createCustomPropertyName("color", "neutralTextDark")})`,
   foregroundActive: `var(${createCustomPropertyName(
     "color",
-    "neutralTextExtraDark"
+    "neutralTextExtraDark",
   )})`,
   foregroundHover: `var(${createCustomPropertyName(
     "color",
-    "interactionLight"
-  )})`
+    "interactionLight",
+  )})`,
 };
 
 export const inputColors = {
   placeholder: `var(${createCustomPropertyName("color", "neutralUiLight")})`,
-  border: `var(${createCustomPropertyName("color", "neutralUiDullLight")})`
+  border: `var(${createCustomPropertyName("color", "neutralUiDullLight")})`,
 };
 
 const highlightPrimaryBase = "#2bd1fa";
@@ -170,7 +169,7 @@ export const annotationHighlightColors = {
       .mix(this.primaryPale, this.secondaryPale)
       .darken(20)
       .toHexString();
-  }
+  },
 };
 
 // global defaults
@@ -178,22 +177,22 @@ export const defaultColors = {
   color: `var(${createCustomPropertyName("color", "neutralTextDark")})`,
   backgroundColor: `var(${createCustomPropertyName(
     "color",
-    "baseNeutralWhite"
+    "baseNeutralWhite",
   )})`,
   hoverColor: `var(${createCustomPropertyName("color", "interactionDark")})`,
   focusColor: `var(${createCustomPropertyName("color", "interactionDark")})`,
   errorColor: `var(${createCustomPropertyName(
     "color",
-    "notificationErrorDark"
+    "notificationErrorDark",
   )})`,
   warningColor: `var(${createCustomPropertyName(
     "color",
-    "notificationWarningDark"
+    "notificationWarningDark",
   )})`,
   noticeColor: `var(${createCustomPropertyName(
     "color",
-    "notificationNoticeDark"
-  )})`
+    "notificationNoticeDark",
+  )})`,
 };
 
 export default `

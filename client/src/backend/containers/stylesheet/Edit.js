@@ -22,8 +22,8 @@ export class StylesheetEditContainer extends PureComponent {
     return dispatch(stylesheet);
   };
 
-  static mapStateToProps = state => ({
-    stylesheet: select(requests.beStylesheetShow, state.entityStore)
+  static mapStateToProps = (state) => ({
+    stylesheet: select(requests.beStylesheetShow, state.entityStore),
   });
 
   static displayName = "Stylesheet.Edit";
@@ -32,7 +32,7 @@ export class StylesheetEditContainer extends PureComponent {
     match: PropTypes.object,
     refresh: PropTypes.func,
     stylesheet: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get isNew() {
@@ -54,16 +54,16 @@ export class StylesheetEditContainer extends PureComponent {
     return this.props.text;
   }
 
-  redirectToStylesheet = stylesheet => {
+  redirectToStylesheet = (stylesheet) => {
     const path = lh.link(
       "BackendTextStylesheetEdit",
       this.text.id,
-      stylesheet.id
+      stylesheet.id,
     );
     this.props.history.push(path);
   };
 
-  create = attributes => {
+  create = (attributes) => {
     return stylesheetsAPI.create(this.props.match.params.id, attributes);
   };
 
@@ -91,7 +91,7 @@ export class StylesheetEditContainer extends PureComponent {
           onSuccess={this.redirectToStylesheet}
           className="form-secondary"
         >
-          {getModelValue => (
+          {(getModelValue) => (
             <>
               {this.stylesheet.attributes.ingested ? (
                 <Form.Instructions
@@ -110,7 +110,7 @@ export class StylesheetEditContainer extends PureComponent {
                 mode="css"
                 name="attributes[rawStyles]"
                 instructions={t(
-                  "texts.stylesheets.edit.source_styles_instructions"
+                  "texts.stylesheets.edit.source_styles_instructions",
                 )}
               />
               <Form.CodeArea
@@ -118,7 +118,7 @@ export class StylesheetEditContainer extends PureComponent {
                 name="attributes[styles]"
                 mode="css"
                 instructions={t(
-                  "texts.stylesheets.edit.validated_styles_instructions"
+                  "texts.stylesheets.edit.validated_styles_instructions",
                 )}
                 readOnly
               />

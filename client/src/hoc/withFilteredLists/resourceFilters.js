@@ -1,29 +1,29 @@
 function defaultParams({ snapshotState = false } = {}) {
   return {
     config: {
-      snapshotState
+      snapshotState,
     },
     params: [
       {
         label: "Search...",
         name: "keyword",
-        value: ""
+        value: "",
       },
       {
         label: "Tag",
         name: "tag",
-        options: []
+        options: [],
       },
       {
         label: "Kind",
         name: "kind",
-        options: []
+        options: [],
       },
       {
         hidden: true,
         label: "Resource Collection",
         name: "resourceCollection",
-        value: ""
+        value: "",
       },
       {
         label: "Order",
@@ -32,10 +32,10 @@ function defaultParams({ snapshotState = false } = {}) {
         options: [
           { label: "In default order", value: "" },
           { label: "Alphabetical by title", value: "sort_title ASC" },
-          { label: "Newest resources first", value: "created_at DESC" }
-        ]
-      }
-    ]
+          { label: "Newest resources first", value: "created_at DESC" },
+        ],
+      },
+    ],
   };
 }
 
@@ -44,23 +44,23 @@ function dynamicParams(searchProps, project) {
 
   const tagFilterOptions = () => {
     const tags = project.attributes.resourceTags || [];
-    const options = tags.map(t => ({ label: `Tag: ${t}`, value: t }));
+    const options = tags.map((t) => ({ label: `Tag: ${t}`, value: t }));
     options.unshift({ label: "Select a tag", value: "" });
     return options;
   };
 
   const kindFilterOptions = () => {
     const tags = project.attributes.resourceKinds || [];
-    const options = tags.map(k => ({ label: `Type: ${k}`, value: k }));
+    const options = tags.map((k) => ({ label: `Type: ${k}`, value: k }));
     options.unshift({ label: "Select a type", value: "" });
     return options;
   };
 
   const searchParams = () => {
     const { params } = searchProps;
-    const tag = params.find(p => p.name === "tag");
+    const tag = params.find((p) => p.name === "tag");
     tag.options = tagFilterOptions();
-    const kind = params.find(p => p.name === "kind");
+    const kind = params.find((p) => p.name === "kind");
     kind.options = kindFilterOptions();
     return params;
   };
@@ -70,5 +70,5 @@ function dynamicParams(searchProps, project) {
 
 export default {
   defaultParams,
-  dynamicParams
+  dynamicParams,
 };

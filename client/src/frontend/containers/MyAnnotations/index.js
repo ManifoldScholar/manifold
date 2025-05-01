@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
 import HeadContent from "global/components/HeadContent";
@@ -8,27 +7,27 @@ import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { useFetch, useListFilters, useListQueryParams } from "hooks";
 
 const INIT_FILTER_STATE = {
-  formats: ["highlight", "annotation", "bookmark"]
+  formats: ["highlight", "annotation", "bookmark"],
 };
 
 export default function MyAnnotationsContainer() {
   const { pagination, filters, setFilters } = useListQueryParams({
     initSize: 10,
-    initFilters: INIT_FILTER_STATE
+    initFilters: INIT_FILTER_STATE,
   });
 
   const { data: annotations, meta } = useFetch({
-    request: [meAPI.annotations, filters, pagination]
+    request: [meAPI.annotations, filters, pagination],
   });
   const { data: annotatedTexts } = useFetch({
-    request: [meAPI.annotatedTexts]
+    request: [meAPI.annotatedTexts],
   });
 
   const filterProps = useListFilters({
-    onFilterChange: state => setFilters(state),
+    onFilterChange: (state) => setFilters(state),
     initialState: filters,
     resetState: INIT_FILTER_STATE,
-    options: { texts: annotatedTexts }
+    options: { texts: annotatedTexts },
   });
 
   const { t } = useTranslation();

@@ -39,7 +39,7 @@ CollectablesList.propTypes = {
   collectedIds: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
   onRemove: PropTypes.func.isRequired,
-  onMove: PropTypes.func.isRequired
+  onMove: PropTypes.func.isRequired,
 };
 
 export default CollectablesList;

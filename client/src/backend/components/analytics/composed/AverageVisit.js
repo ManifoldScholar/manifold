@@ -8,7 +8,7 @@ class AverageVisit extends Component {
   static displayName = "Analytics.Composed.AverageVisit";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get data() {

@@ -20,7 +20,7 @@ function StylePreview({ style }) {
 StylePreview.displayName = "ReadingGroup.Forms.MemberSettings.StylePreview";
 
 StylePreview.propTypes = {
-  style: PropTypes.string
+  style: PropTypes.string,
 };
 
 export default StylePreview;

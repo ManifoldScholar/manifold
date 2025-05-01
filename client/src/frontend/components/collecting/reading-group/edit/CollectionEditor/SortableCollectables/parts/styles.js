@@ -3,7 +3,7 @@ import {
   buttonUnstyled,
   utilityPrimary,
   textTruncate,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Action = styled.button`

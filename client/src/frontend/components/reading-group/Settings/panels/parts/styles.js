@@ -4,7 +4,7 @@ import {
   formLabelPrimary,
   headingSecondary,
   formInstructions,
-  utilityPrimary
+  utilityPrimary,
 } from "theme/styles/mixins";
 
 const basePaddingVertical = "38px";
@@ -12,9 +12,9 @@ const basePaddingLateral = "38px";
 const gap = "20px";
 
 export const Form = styled.form`
-${panelRounded}
-padding: ${basePaddingVertical} ${basePaddingLateral};
-color: var(--strong-color);
+  ${panelRounded}
+  padding: ${basePaddingVertical} ${basePaddingLateral};
+  color: var(--strong-color);
 `;
 
 export const Label = styled.h3`

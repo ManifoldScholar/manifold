@@ -32,7 +32,7 @@ Login.propTypes = {
   menu: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   direction: PropTypes.oneOf(["up", "down"]),
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
 };
 
 export default Login;

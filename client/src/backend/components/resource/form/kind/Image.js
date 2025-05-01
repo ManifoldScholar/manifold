@@ -7,7 +7,7 @@ class ResourceFormKindImage extends PureComponent {
   static displayName = "Resource.Form.Kind.Image";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

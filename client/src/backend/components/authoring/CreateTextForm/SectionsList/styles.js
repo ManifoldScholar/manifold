@@ -3,7 +3,7 @@ import {
   fluidScale,
   buttonUnstyled,
   utilityPrimary,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Section = styled.li`

@@ -33,7 +33,7 @@ function Detail({ issue }) {
 Detail.displayName = "Issue.Detail";
 
 Detail.propTypes = {
-  issue: PropTypes.object.isRequired
+  issue: PropTypes.object.isRequired,
 };
 
 export default Detail;

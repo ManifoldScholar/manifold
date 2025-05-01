@@ -8,7 +8,7 @@ class SiteStatistics extends Component {
   static displayName = "Analytics.Composed.SiteStatistics";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get stats() {
@@ -22,38 +22,38 @@ class SiteStatistics extends Component {
       {
         icon: "projects64",
         label: this.props.t("glossary.project_title_case_other"),
-        value: this.stats.totalProjectCount
+        value: this.stats.totalProjectCount,
       },
       {
         icon: "textsBook64",
         label: this.props.t("glossary.text_title_case_other"),
-        value: this.stats.totalTextCount
+        value: this.stats.totalTextCount,
       },
       {
         icon: "BEResourcesBoxes64",
         label: this.props.t("glossary.resource_title_case_other"),
-        value: this.stats.totalResourceCount
+        value: this.stats.totalResourceCount,
       },
       {
         icon: "users32",
         label: this.props.t("glossary.user_title_case_other"),
-        value: this.stats.totalUserCount
+        value: this.stats.totalUserCount,
       },
       {
         icon: "interactAnnotate32",
         label: this.props.t("glossary.annotation_title_case_other"),
-        value: this.stats.totalAnnotationCount
+        value: this.stats.totalAnnotationCount,
       },
       {
         icon: "interactComment32",
         label: this.props.t("glossary.comment_title_case_other"),
-        value: this.stats.totalCommentCount
+        value: this.stats.totalCommentCount,
       },
       {
         icon: "download24",
         label: this.props.t("glossary.download_title_case_other"),
-        value: this.stats.totalDownloadCount ?? 0
-      }
+        value: this.stats.totalDownloadCount ?? 0,
+      },
     ];
   }
 

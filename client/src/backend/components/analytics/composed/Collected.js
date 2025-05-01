@@ -9,7 +9,7 @@ class Collected extends Component {
   static displayName = "Analytics.Composed.Collected";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get data() {

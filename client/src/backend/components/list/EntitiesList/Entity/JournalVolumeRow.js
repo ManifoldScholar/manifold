@@ -21,14 +21,14 @@ function JournalVolumeRow({
     subtitle,
     active: active === id,
     count: t("glossary.issue_with_count", { count: journalIssuesCount }),
-    figure: <EntityThumbnail.JournalVolume />
+    figure: <EntityThumbnail.JournalVolume />,
   };
 
   if (clickable) {
     additionalProps.onRowClick = lh.link(
       "backendJournalVolumeEdit",
       journal.id,
-      id
+      id,
     );
     additionalProps.rowClickMode = "block";
   }
@@ -40,7 +40,7 @@ JournalVolumeRow.propTypes = {
   journal: PropTypes.object.isRequired,
   clickable: PropTypes.bool,
   entity: PropTypes.object,
-  active: PropTypes.string
+  active: PropTypes.string,
 };
 
 export default JournalVolumeRow;

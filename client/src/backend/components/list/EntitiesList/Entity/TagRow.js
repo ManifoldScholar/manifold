@@ -7,7 +7,7 @@ export default class TagRow extends PureComponent {
 
   static propTypes = {
     entity: PropTypes.object,
-    active: PropTypes.string
+    active: PropTypes.string,
   };
 
   get tag() {
@@ -29,7 +29,7 @@ export default class TagRow extends PureComponent {
   render() {
     const additionalProps = {
       title: this.name,
-      active: this.active
+      active: this.active,
     };
 
     return <EntityRow {...this.props} {...additionalProps} />;

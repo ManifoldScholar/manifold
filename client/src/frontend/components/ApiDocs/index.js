@@ -3,8 +3,8 @@ import loadable from "@loadable/component";
 import Layout from "./SwaggerUIComponents/Layout";
 import AuthorizeOperationBtn from "./SwaggerUIComponents/AuthorizeOperationBtn";
 
-const SwaggerUI = loadable(() =>
-  import(/* webpackChunkName: "swagger-ui" */ "./SwaggerUi")
+const SwaggerUI = loadable(
+  () => import(/* webpackChunkName: "swagger-ui" */ "./SwaggerUi"),
 );
 
 export default class ApiDocs extends React.Component {
@@ -15,19 +15,19 @@ export default class ApiDocs extends React.Component {
   }
 
   get componentReplacementPlugin() {
-    return swaggerUi => {
+    return (swaggerUi) => {
       return {
         components: {
           authorizeOperationBtn: this.wrapComponent(AuthorizeOperationBtn, {
-            swaggerUi
+            swaggerUi,
           }),
-          ManifoldLayout: Layout
-        }
+          ManifoldLayout: Layout,
+        },
       };
     };
   }
 
-  onComplete = swaggerUi => {
+  onComplete = (swaggerUi) => {
     this.preAuthorize(swaggerUi);
     this.setState({ swaggerUi });
   };
@@ -44,7 +44,7 @@ export default class ApiDocs extends React.Component {
   }
 
   wrapComponent(Component, injectProps) {
-    return props => <Component {...props} {...injectProps} />;
+    return (props) => <Component {...props} {...injectProps} />;
   }
 
   render() {

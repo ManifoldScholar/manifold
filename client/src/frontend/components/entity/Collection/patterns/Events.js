@@ -18,13 +18,13 @@ function EventsEntityCollection({
     <EntityCollection
       title={t("pages.events_all")}
       icon="recentActivity64"
-      BodyComponent={props => <Event.List events={events} {...props} />}
+      BodyComponent={(props) => <Event.List events={events} {...props} />}
       paginationProps={
         isEmpty(eventsMeta)
           ? {}
           : {
               pagination: get(eventsMeta, "pagination"),
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -37,7 +37,7 @@ EventsEntityCollection.displayName = "Frontend.Entity.Collection.Events";
 EventsEntityCollection.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
   eventsMeta: PropTypes.object,
-  paginationProps: shapes.pagination
+  paginationProps: shapes.pagination,
 };
 
 export default EventsEntityCollection;

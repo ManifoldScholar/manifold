@@ -18,8 +18,8 @@ function Metadata({ journal }) {
           renderable: true,
           type: "Content::MetadataBlock",
           title: t("pages.subheaders.journal_info"),
-          icon: "journals64"
-        }
+          icon: "journals64",
+        },
       }}
       entity={journal}
     />
@@ -29,7 +29,7 @@ function Metadata({ journal }) {
 Metadata.displayName = "Journal.Metadata";
 
 Metadata.propTypes = {
-  journal: PropTypes.object.isRequired
+  journal: PropTypes.object.isRequired,
 };
 
 export default Metadata;

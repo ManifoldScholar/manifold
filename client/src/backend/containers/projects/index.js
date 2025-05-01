@@ -3,5 +3,5 @@ import Wrapper from "./Wrapper";
 
 export default {
   ProjectsList,
-  Wrapper
+  Wrapper,
 };

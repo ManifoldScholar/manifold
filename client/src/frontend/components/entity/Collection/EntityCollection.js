@@ -32,7 +32,7 @@ function EntityCollection({
   nested,
   boxed,
   className,
-  filterProps
+  filterProps,
 }) {
   return (
     <Styled.Wrapper
@@ -41,7 +41,7 @@ function EntityCollection({
       as={!!boxed && Box}
       className={classNames({
         [`bg-${bgColor}`]: !nested && !boxed,
-        [className]: !!className
+        [className]: !!className,
       })}
     >
       <Styled.Inner className={!nested && !boxed ? "container" : null}>
@@ -94,7 +94,7 @@ EntityCollection.propTypes = {
   nested: PropTypes.bool,
   boxed: PropTypes.bool,
   className: PropTypes.string,
-  ...headerProps
+  ...headerProps,
 };
 
 export default EntityCollection;

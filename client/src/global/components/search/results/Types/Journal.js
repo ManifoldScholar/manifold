@@ -22,17 +22,17 @@ function SearchResultsTypeJournal({ result, highlightedAttribute }) {
   const collectable = {
     type: searchableType,
     id: searchableId,
-    attributes: { title: titlePlaintext }
+    attributes: { title: titlePlaintext },
   };
   const creators = model?.relationships?.creators ?? [];
 
   const resultProps = {
     url: lh.link("frontendJournalDetail", attributes.slug),
     title: highlightedAttribute("title"),
-    attribution: creators.map(c => c.attributes.fullName).join(", "),
+    attribution: creators.map((c) => c.attributes.fullName).join(", "),
     description: highlightedAttribute("description"),
     label: t("glossary.journal_one"),
-    collectable
+    collectable,
   };
 
   return (
@@ -65,7 +65,7 @@ SearchResultsTypeJournal.displayName = "Search.Results.Type.Journal";
 
 SearchResultsTypeJournal.propTypes = {
   result: PropTypes.object,
-  highlightedAttribute: PropTypes.func.isRequired
+  highlightedAttribute: PropTypes.func.isRequired,
 };
 
 export default withSearchResultHelper(SearchResultsTypeJournal);

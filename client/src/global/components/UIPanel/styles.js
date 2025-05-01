@@ -3,7 +3,8 @@ import { defaultTransitionProps } from "theme/styles/mixins";
 
 export const Panel = styled.div`
   .panel {
-    transition: transform ${defaultTransitionProps},
+    transition:
+      transform ${defaultTransitionProps},
       opacity ${defaultTransitionProps};
   }
 

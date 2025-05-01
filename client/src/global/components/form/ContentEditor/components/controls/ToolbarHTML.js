@@ -4,7 +4,7 @@ import { FunctionButton } from "./buttons";
 import {
   MenuBar as ReakitMenuBar,
   MenuItem as ReakitMenuItem,
-  useMenuBarState
+  useMenuBarState,
 } from "reakit/Menu";
 import * as Styled from "./styles";
 
@@ -13,13 +13,13 @@ export default function ToolbarHTML({
   onClickRedo,
   toggleStyles,
   cssVisible,
-  controlsRef
+  controlsRef,
 }) {
   const { t } = useTranslation();
   const menu = useMenuBarState({
     orientation: "horizontal",
     loop: true,
-    wrap: "horizontal"
+    wrap: "horizontal",
   });
   return (
     <ReakitMenuBar

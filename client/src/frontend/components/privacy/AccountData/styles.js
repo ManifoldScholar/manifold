@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   utilityPrimary,
   formLabelPrimary,
-  formInstructions
+  formInstructions,
 } from "theme/styles/mixins";
 
 export const SectionHeader = styled.h2`

@@ -14,8 +14,8 @@ export default function renderException(error) {
       heading: "Client SSR Javascript Exception",
       body: body(error),
       clientTrace: error.stack,
-      clientTraceTruncate: null
-    }
+      clientTraceTruncate: null,
+    },
   };
   return <FatalError fatalError={fatalError} />;
 }

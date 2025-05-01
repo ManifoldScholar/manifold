@@ -28,5 +28,5 @@ EventAllLink.displayName = "Event.AllLink";
 
 EventAllLink.propTypes = {
   threshold: PropTypes.number.isRequired,
-  entity: PropTypes.object.isRequired
+  entity: PropTypes.object.isRequired,
 };

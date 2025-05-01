@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
@@ -9,12 +8,12 @@ function ProjectsSecondaryNav(props, ref) {
   const { links, visible, ...dropDownProps } = props;
   const { t } = useTranslation();
 
-  const pathForLink = link => {
+  const pathForLink = (link) => {
     const args = link.args || [];
     return lh.link(link.route, ...args);
   };
 
-  const renderItem = link => {
+  const renderItem = (link) => {
     const icon =
       link.route === "backendProjectsAll"
         ? "BEProject64"
@@ -37,7 +36,7 @@ function ProjectsSecondaryNav(props, ref) {
   return (
     <Styled.Wrapper $visible={visible} ref={ref} {...dropDownProps}>
       <Styled.List>
-        {links.map(link => {
+        {links.map((link) => {
           if (link.ability)
             return (
               <Authorize

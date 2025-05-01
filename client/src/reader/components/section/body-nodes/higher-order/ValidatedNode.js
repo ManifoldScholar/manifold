@@ -5,7 +5,7 @@ import { attributesToProps } from "html-react-parser";
 import humps from "utils/humps";
 import smoothScroll from "utils/smoothScroll";
 
-export default RenderComponent => {
+export default (RenderComponent) => {
   class ValidatedNode extends Component {
     static propTypes = {
       children: PropTypes.array,
@@ -15,7 +15,7 @@ export default RenderComponent => {
       nodeUuid: PropTypes.string,
       openAnnotations: PropTypes.object,
       scrollToView: PropTypes.bool,
-      scrollKey: PropTypes.string
+      scrollKey: PropTypes.string,
     };
 
     componentDidMount() {
@@ -53,7 +53,7 @@ export default RenderComponent => {
       const object = declarations.reduce((previous, value) => {
         const parts = value.split(":");
         const styleProp = humps.camelize(parts[0]);
-        previous[styleProp] = parts[1]; // eslint-disable-line no-param-reassign
+        previous[styleProp] = parts[1];
         return previous;
       }, {});
       return object;
@@ -63,7 +63,7 @@ export default RenderComponent => {
       const attributes = attributesToProps(this.props.attributes);
 
       // We need to keep track of the child's dom element so that we can scroll to it.
-      attributes.ref = el => (this.el = el);
+      attributes.ref = (el) => (this.el = el);
 
       return (
         <RenderComponent

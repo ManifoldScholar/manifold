@@ -14,7 +14,7 @@ export default function Overlay({ hideOverlay, active = false }) {
     <FocusTrap
       active={active}
       focusTrapOptions={{
-        onDeactivate: hideOverlay
+        onDeactivate: hideOverlay,
       }}
     >
       <Styled.Dialog
@@ -31,5 +31,5 @@ export default function Overlay({ hideOverlay, active = false }) {
 Overlay.displayName = "Global.SignInUp.Overlay";
 
 Overlay.propTypes = {
-  hideOverlay: PropTypes.func
+  hideOverlay: PropTypes.func,
 };

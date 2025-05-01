@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import { uiFrontendModeActions } from "actions";
 import { FrontendModeContext } from "helpers/contexts";
 import connectAndFetch from "utils/connectAndFetch";
@@ -8,9 +8,9 @@ import queryString from "query-string";
 class CheckFrontendMode extends PureComponent {
   static contextType = FrontendModeContext;
 
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      frontendMode: state.ui.transitory.frontendMode
+      frontendMode: state.ui.transitory.frontendMode,
     };
   };
 
@@ -85,8 +85,8 @@ class CheckFrontendMode extends PureComponent {
     const project = this.project;
     this.props.dispatch(
       uiFrontendModeActions.setFrontendModeToStandalone({
-        project
-      })
+        project,
+      }),
     );
   }
 
@@ -95,8 +95,8 @@ class CheckFrontendMode extends PureComponent {
     if (!project) return;
     this.props.dispatch(
       uiFrontendModeActions.setFrontendModeProjectContext({
-        project
-      })
+        project,
+      }),
     );
   }
 

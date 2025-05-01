@@ -12,7 +12,8 @@ export const Link = styled(LinkComponent, transientOptions)`
   padding-left: var(--link-indent, ${nestedLevelPadding});
   color: inherit;
   text-decoration: none;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   &:hover,

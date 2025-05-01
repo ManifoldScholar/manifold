@@ -23,5 +23,5 @@ export default {
   Feature,
   ReadingGroup,
   JournalVolume,
-  Asset
+  Asset,
 };

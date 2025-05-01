@@ -32,11 +32,11 @@ function JournalEditorRow({ entity, handleDelete, ...props }) {
         ? [
             {
               text: t("common.you"),
-              level: "notice"
-            }
+              level: "notice",
+            },
           ]
         : [],
-    utility
+    utility,
   };
 
   return <EntityRow {...props} {...additionalProps} />;
@@ -45,7 +45,7 @@ function JournalEditorRow({ entity, handleDelete, ...props }) {
 JournalEditorRow.displayName = "EntitiesList.Entity.UserRow";
 
 JournalEditorRow.propTypes = {
-  entity: PropTypes.object
+  entity: PropTypes.object,
 };
 
 export default JournalEditorRow;

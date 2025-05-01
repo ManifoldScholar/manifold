@@ -7,7 +7,7 @@ export default class ResourcePlayerIframe extends Component {
 
   static propTypes = {
     resource: PropTypes.object.isRequired,
-    styleProps: PropTypes.object
+    styleProps: PropTypes.object,
   };
 
   render() {
@@ -17,7 +17,7 @@ export default class ResourcePlayerIframe extends Component {
       titlePlaintext,
       minimumHeight,
       minimumWidth,
-      iframeAllows
+      iframeAllows,
     } = resource.attributes;
 
     const finalMinHeight = /^\d+$/.test(minimumHeight)
@@ -35,7 +35,7 @@ export default class ResourcePlayerIframe extends Component {
           title={titlePlaintext}
           allow={iframeAllows?.join(" ")}
           style={{
-            ...styleProps
+            ...styleProps,
           }}
           $minWidth={finalMinWidth}
           $minHeight={finalMinHeight}

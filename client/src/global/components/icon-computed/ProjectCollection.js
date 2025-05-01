@@ -6,11 +6,11 @@ export default class IconComputedProjectCollection extends PureComponent {
   static displayName = "IconComputed.ProjectCollection";
 
   static propTypes = {
-    icon: PropTypes.string.isRequired
+    icon: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
-    size: 48
+    size: 48,
   };
 
   iconForValue(value) {
@@ -21,7 +21,7 @@ export default class IconComputedProjectCollection extends PureComponent {
       "books-on-shelf": "projects64",
       globe: "globe64",
       touch: "touch64",
-      mug: "mug64"
+      mug: "mug64",
     };
     return map[value];
   }

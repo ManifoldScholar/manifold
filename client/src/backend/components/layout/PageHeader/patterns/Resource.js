@@ -14,7 +14,7 @@ export default function ResourceHeader({
   actions,
   note,
   hasSecondaryNav,
-  icon
+  icon,
 }) {
   return (
     <>

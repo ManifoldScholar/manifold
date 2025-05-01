@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { entityStoreActions } from "actions";
 import { useUID } from "react-uid";
@@ -14,7 +14,7 @@ export default function useApiCallback(apiMethod, options = {}) {
       const { promise } = dispatch(action);
       return promise;
     },
-    [apiMethod, dispatch, options, requestKey]
+    [apiMethod, dispatch, options, requestKey],
   );
 
   return triggerCall;

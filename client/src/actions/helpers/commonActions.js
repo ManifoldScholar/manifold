@@ -1,7 +1,7 @@
 import {
   currentUserActions,
   uiVisibilityActions,
-  notificationActions
+  notificationActions,
 } from "actions";
 import { bindActionCreators } from "redux";
 
@@ -13,19 +13,16 @@ const {
   panelToggle,
   panelHide,
   panelShow,
-  showMyNotes
+  showMyNotes,
 } = uiVisibilityActions;
-const {
-  addNotification,
-  removeNotification,
-  removeAllNotifications
-} = notificationActions;
+const { addNotification, removeNotification, removeAllNotifications } =
+  notificationActions;
 
 function b(action, dispatch) {
   return bindActionCreators(action, dispatch);
 }
 
-const commonActions = dispatch => {
+const commonActions = (dispatch) => {
   return {
     toggleSearchPanel: b(() => panelToggle("search"), dispatch),
     hideSearchPanel: b(() => panelHide("search"), dispatch),
@@ -37,21 +34,21 @@ const commonActions = dispatch => {
     hideReaderReturnPanel: b(() => panelHide("readerReturn"), dispatch),
     toggleSignInUpOverlay: b(
       () => visibilityToggle("signInUpOverlay"),
-      dispatch
+      dispatch,
     ),
     closeSignInUpOverlay: b(() => visibilityHide("signInUpOverlay"), dispatch),
-    addNotification: b(opts => addNotification(opts), dispatch),
-    removeNotification: b(opts => removeNotification(opts), dispatch),
+    addNotification: b((opts) => addNotification(opts), dispatch),
+    removeNotification: b((opts) => removeNotification(opts), dispatch),
     clearNotifications: b(removeAllNotifications, dispatch),
     logout: b(currentUserActions.logout, dispatch),
-    visibilityChange: b(el => visibilityChange(el), dispatch),
-    visibilityToggle: b(el => visibilityToggle(el), dispatch),
-    visibilityHide: b(el => visibilityHide(el), dispatch),
-    visibilityShow: b(el => visibilityShow(el), dispatch),
+    visibilityChange: b((el) => visibilityChange(el), dispatch),
+    visibilityToggle: b((el) => visibilityToggle(el), dispatch),
+    visibilityHide: b((el) => visibilityHide(el), dispatch),
+    visibilityShow: b((el) => visibilityShow(el), dispatch),
     showMyNotes: b(showMyNotes, dispatch),
-    panelToggle: b(el => panelToggle(el), dispatch),
-    panelHide: b(el => panelHide(el), dispatch),
-    panelShow: b(el => panelShow(el), dispatch)
+    panelToggle: b((el) => panelToggle(el), dispatch),
+    panelHide: b((el) => panelHide(el), dispatch),
+    panelShow: b((el) => panelShow(el), dispatch),
   };
 };
 

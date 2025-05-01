@@ -13,7 +13,7 @@ export default function AddEditAssetContainer({ textId, refresh }) {
 
   const { data: asset } = useFetch({
     request: [ingestionSourcesAPI.show, assetId],
-    condition: !!assetId
+    condition: !!assetId,
   });
 
   const title = assetId
@@ -36,5 +36,5 @@ export default function AddEditAssetContainer({ textId, refresh }) {
 AddEditAssetContainer.displayName = "Text.Assets.AddEdit";
 
 AddEditAssetContainer.propTypes = {
-  textId: PropTypes.string.isRequired
+  textId: PropTypes.string.isRequired,
 };

@@ -37,7 +37,7 @@ Tag.propTypes = {
   children: PropTypes.node.isRequired,
   icon: PropTypes.string,
   iconSize: PropTypes.number,
-  iconCount: PropTypes.number
+  iconCount: PropTypes.number,
 };
 
 export default Tag;

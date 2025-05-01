@@ -5,7 +5,7 @@ import isArray from "lodash/isArray";
 
 export default function reduceAssets(ext, stats) {
   if (!stats?.assetsByChunkName) return [];
-  const test = asset => {
+  const test = (asset) => {
     return endsWith(asset, ext);
   };
 
@@ -17,12 +17,12 @@ export default function reduceAssets(ext, stats) {
         return entries;
       if (isString(assets) && test(assets)) entries.push(assets);
       if (isArray(assets)) {
-        assets.forEach(asset => {
+        assets.forEach((asset) => {
           if (test(asset)) entries.push(asset);
         });
       }
       return entries;
     },
-    []
+    [],
   );
 }

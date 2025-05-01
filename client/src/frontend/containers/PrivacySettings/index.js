@@ -18,7 +18,7 @@ export default function PrivacySettingsContainer() {
       failureNotification={{
         heading: t("errors.unauthorized.heading"),
         body: t("errors.unauthorized.privacy_body"),
-        level: 2
+        level: 2,
       }}
     >
       <HeadContent title={t("titles.privacy")} appendDefaultTitle />

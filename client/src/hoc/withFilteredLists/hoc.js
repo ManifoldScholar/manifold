@@ -14,7 +14,7 @@ function getDisplayName(WrappedComponent) {
 
 function withFilters(WrappedComponent, filteredLists = {}) {
   const displayName = `HigherOrder.WithFilters('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithFilters extends Component {
@@ -22,13 +22,13 @@ function withFilters(WrappedComponent, filteredLists = {}) {
 
     static displayName = displayName;
 
-    static mapStateToProps = state => {
+    static mapStateToProps = (state) => {
       return { snapshots: state.ui.transitory.stateSnapshots };
     };
 
     static propTypes = {
       snapshot: PropTypes.object,
-      dispatch: PropTypes.func
+      dispatch: PropTypes.func,
     };
 
     constructor(props) {
@@ -37,7 +37,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
     }
 
     UNSAFE_componentWillMount() {
-      this.managedLists.forEach(listKey => {
+      this.managedLists.forEach((listKey) => {
         if (!this.state[listKey].config.snapshotState) return null;
         const snapshot = this.props.snapshots[this.snapshotKey(listKey)];
         if (!snapshot || !snapshot.filters) return null;
@@ -45,7 +45,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       });
     }
 
-    onReset = key => {
+    onReset = (key) => {
       this.setValues(key, this.initialValues(key), true);
     };
 
@@ -55,21 +55,21 @@ function withFilters(WrappedComponent, filteredLists = {}) {
 
     get initialState() {
       const state = {};
-      this.managedLists.forEach(listKey => {
+      this.managedLists.forEach((listKey) => {
         const listDefinition = filteredLists[listKey];
         const listState = {};
         listState.config = listDefinition.config;
         listState.values = {};
         listState.params = [];
-        listDefinition.params.forEach(paramDefinition => {
+        listDefinition.params.forEach((paramDefinition) => {
           const param = {
             label: paramDefinition.label,
             name: paramDefinition.name,
             as: paramDefinition.as,
-            hidden: paramDefinition.hidden || false
+            hidden: paramDefinition.hidden || false,
           };
           if (paramDefinition.options) {
-            param.options = paramDefinition.options.map(o => ({ ...o }));
+            param.options = paramDefinition.options.map((o) => ({ ...o }));
           }
           listState.params.push(param);
           listState.values[param.name] = paramDefinition.value || "";
@@ -96,7 +96,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       const newListState = { ...listState, values: newValues };
       this.setState({
         [key]: newListState,
-        message: isReset ? this.resetMessage : null
+        message: isReset ? this.resetMessage : null,
       });
 
       // remove message on timeout was a reset
@@ -111,9 +111,9 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       return this.state[key].initialValues;
     }
 
-    entitiesListSearchParams = memoize(stateIgnored => {
+    entitiesListSearchParams = memoize((stateIgnored) => {
       const params = {};
-      this.managedLists.forEach(key => {
+      this.managedLists.forEach((key) => {
         params[key] = this.requestParams(key);
         params[`initial${key}`] = this.initialRequestParams(key);
       });
@@ -142,7 +142,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
 
     paramByName(key, paramName) {
       const params = this.paramsFor(key);
-      return params.find(p => p.name === paramName);
+      return params.find((p) => p.name === paramName);
     }
 
     ensureParamObject(key, paramLike) {
@@ -157,17 +157,13 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       };
     };
 
-    entitiesListSearchProps = key => {
+    entitiesListSearchProps = (key) => {
       return {
         onReset: this.buildMemoizedHandler("onReset", key),
         setParam: this.buildMemoizedHandler("setParam", key),
         params: this.paramsFor(key),
-        values: this.valuesFor(key)
+        values: this.valuesFor(key),
       };
-    };
-
-    paramsFor = key => {
-      return this.state[key].params;
     };
 
     snapshotKey(key) {
@@ -180,13 +176,13 @@ function withFilters(WrappedComponent, filteredLists = {}) {
         this.snapshotKey(key),
         {
           filters: this.requestParams(key),
-          pagination
-        }
+          pagination,
+        },
       );
       this.props.dispatch(action);
     };
 
-    savedSearchPaginationState = key => {
+    savedSearchPaginationState = (key) => {
       if (!this.state[key].config.snapshotState) return null;
       const snapshot = this.props.snapshots[this.snapshotKey(key)];
       if (!snapshot) return null;
@@ -223,7 +219,7 @@ function withFilters(WrappedComponent, filteredLists = {}) {
   }
 
   const connectedWithFilters = connect(WithFilters.mapStateToProps)(
-    WithFilters
+    WithFilters,
   );
 
   return hoistStatics(connectedWithFilters, WrappedComponent);

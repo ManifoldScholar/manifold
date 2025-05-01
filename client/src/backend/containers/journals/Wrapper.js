@@ -11,7 +11,7 @@ export default function JournalsWrapper({ route }) {
       ability="update"
       entity={["journal"]}
       failureFatalError={{
-        body: t("journals.unauthorized")
+        body: t("journals.unauthorized"),
       }}
     >
       <div>
@@ -24,5 +24,5 @@ export default function JournalsWrapper({ route }) {
 }
 
 JournalsWrapper.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };

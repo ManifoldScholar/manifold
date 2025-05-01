@@ -15,16 +15,16 @@ function LanguageSelect({ authentication, language }) {
 
   const dispatch = useDispatch();
   const updateLanguage = useCallback(
-    l => {
+    (l) => {
       dispatch({
         type: "SET_LOCALE",
-        payload: { language: l }
+        payload: { language: l },
       });
     },
-    [dispatch]
+    [dispatch],
   );
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const newLang = event.target?.value || "en";
     setLang(newLang);
     // dispatch
@@ -45,16 +45,16 @@ function LanguageSelect({ authentication, language }) {
       options={[
         {
           value: "en",
-          label: t(`locales.en`)
+          label: t(`locales.en`),
         },
         {
           value: "es",
-          label: t(`locales.es`)
+          label: t(`locales.es`),
         },
         {
           value: "nl",
-          label: t(`locales.nl`)
-        }
+          label: t(`locales.nl`),
+        },
       ]}
       onChange={handleChange}
       preIcon="languageGlobe24"
@@ -62,10 +62,10 @@ function LanguageSelect({ authentication, language }) {
   );
 }
 
-LanguageSelect.mapStateToProps = state => {
+LanguageSelect.mapStateToProps = (state) => {
   return {
     authentication: state.authentication,
-    language: state.ui.persistent.locale.language
+    language: state.ui.persistent.locale.language,
   };
 };
 

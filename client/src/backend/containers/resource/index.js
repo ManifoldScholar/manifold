@@ -9,5 +9,5 @@ export default {
   Metadata,
   New,
   Variants,
-  Wrapper
+  Wrapper,
 };

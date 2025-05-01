@@ -4,7 +4,7 @@ import {
   subtitlePrimary,
   utilityPrimary,
   buttonUnstyled,
-  revealOnFocus
+  revealOnFocus,
 } from "theme/styles/mixins";
 
 export default `

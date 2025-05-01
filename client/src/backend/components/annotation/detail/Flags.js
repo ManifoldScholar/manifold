@@ -7,12 +7,12 @@ import * as Styled from "./styles";
 
 export default function FlagsList({
   flags,
+  resolvedFlagsCount,
   unresolvedFlagsCount,
-  resolvedFlagsCount
 }) {
   const { t } = useTranslation();
 
-  const active = flags.filter(flag => !flag.attributes.resolved);
+  const active = flags.filter((flag) => !flag.attributes.resolved);
 
   return (
     <>
@@ -28,15 +28,15 @@ export default function FlagsList({
             <span style={{ color: "var(--color-neutral-text-extra-light)" }}>
               <b>{resolvedFlagsCount}</b>{" "}
               {t("records.annotations.resolved_flags_count", {
-                count: resolvedFlagsCount
+                count: resolvedFlagsCount,
               })}
             </span>
           </Styled.FlagWrapper>
         )}
-        {active.map(f => {
+        {active.map((f) => {
           const {
             attributes: { message, createdAt },
-            relationships: { creator }
+            relationships: { creator },
           } = f;
           return (
             <Styled.FlagWrapper>
@@ -58,5 +58,5 @@ FlagsList.displayName = "Annotation.Detail.FlagsList";
 FlagsList.propTypes = {
   flags: PropTypes.arrayOf(PropTypes.object),
   resolvedFlagsCount: PropTypes.number,
-  unresolvedFlagsCount: PropTypes.number
+  unresolvedFlagsCount: PropTypes.number,
 };

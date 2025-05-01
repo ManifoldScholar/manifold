@@ -9,7 +9,7 @@ import IconComposer from "global/components/utility/IconComposer";
 export class NotationMarker extends Component {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
-      activeAnnotation: state.ui.transitory.reader.activeAnnotation
+      activeAnnotation: state.ui.transitory.reader.activeAnnotation,
     };
     return { ...newState, ...ownProps };
   };
@@ -18,7 +18,7 @@ export class NotationMarker extends Component {
     annotations: PropTypes.array,
     dispatch: PropTypes.func,
     activeAnnotation: PropTypes.string,
-    history: PropTypes.object
+    history: PropTypes.object,
   };
 
   get hasTouchSupport() {
@@ -41,7 +41,7 @@ export class NotationMarker extends Component {
 
   setActiveAnnotation(annotationId) {
     this.props.dispatch(
-      uiReaderActions.setActiveAnnotation({ annotationId, passive: false })
+      uiReaderActions.setActiveAnnotation({ annotationId, passive: false }),
     );
   }
 
@@ -57,7 +57,7 @@ export class NotationMarker extends Component {
     if (annotation.type === "resource_collection") {
       rel = lh.link(
         "frontendProjectResourceCollectionRelative",
-        annotation.resourceCollectionId
+        annotation.resourceCollectionId,
       );
     }
     const url = `${base}/${rel}`;
@@ -67,11 +67,11 @@ export class NotationMarker extends Component {
   render() {
     return (
       <span>
-        {this.props.annotations.map(annotation => {
+        {this.props.annotations.map((annotation) => {
           const id = annotation.id;
           const markerClassNames = classnames({
             "notation-marker": true,
-            "notation-marker--active": id === this.props.activeAnnotation
+            "notation-marker--active": id === this.props.activeAnnotation,
           });
           return (
             <span
@@ -80,7 +80,7 @@ export class NotationMarker extends Component {
               data-annotation-notation={id}
               role="presentation"
               className={markerClassNames}
-              onClick={event => this.handleClick(event, annotation)}
+              onClick={(event) => this.handleClick(event, annotation)}
               onMouseOver={() => {
                 if (this.disallowMarkerClickthru) return null;
                 this.setActiveAnnotation(id);

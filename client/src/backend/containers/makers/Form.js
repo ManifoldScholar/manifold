@@ -12,10 +12,10 @@ class MakersFormContainer extends PureComponent {
     maker: PropTypes.object,
     successHandler: PropTypes.func,
     options: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
-  handleSuccess = maker => {
+  handleSuccess = (maker) => {
     if (!this.props.successHandler) return null;
     return this.props.successHandler(maker);
   };

@@ -7,7 +7,7 @@ export default class SVGBooksOnShelfColor extends Component {
 
   static propTypes = {
     className: PropTypes.string,
-    size: PropTypes.number
+    size: PropTypes.number,
   };
 
   get width() {

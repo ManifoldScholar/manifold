@@ -20,20 +20,20 @@ class FormSwitch extends Component {
     value: PropTypes.any,
     customValues: PropTypes.shape({
       true: PropTypes.string,
-      false: PropTypes.string
+      false: PropTypes.string,
     }),
     focusOnMount: PropTypes.bool,
     submitOnChange: PropTypes.bool,
     wide: PropTypes.bool,
     theme: PropTypes.oneOf(["default", "checkbox"]),
     isPrimary: PropTypes.bool,
-    collapseProps: PropTypes.object
+    collapseProps: PropTypes.object,
   };
 
   static defaultProps = {
     labelPos: "above",
     theme: "default",
-    submitOnChange: false
+    submitOnChange: false,
   };
 
   static contextType = FormContext;
@@ -121,11 +121,11 @@ class FormSwitch extends Component {
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <FieldWrapper
             className={classNames({
               wide: this.props.wide,
-              [this.props.className]: !!this.props.className
+              [this.props.className]: !!this.props.className,
             })}
           >
             <Styled.Label
@@ -140,13 +140,13 @@ class FormSwitch extends Component {
                 </LabelText>
               )}
               <Input
-                ref={c => {
+                ref={(c) => {
                   this.checkbox = c;
                 }}
                 type="checkbox"
                 id={`${this.idPrefix}-${id}`}
                 checked={this.checked}
-                onChange={eventIgnored => this.handleChange()}
+                onChange={(eventIgnored) => this.handleChange()}
                 disabled={this.props.disabled}
                 {...this.props.collapseProps}
               />

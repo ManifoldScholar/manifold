@@ -21,25 +21,25 @@ export class FormTusUpload extends Component {
       "portrait",
       "landscape",
       "horizontal",
-      "embed"
+      "embed",
     ]),
     placeholder: PropTypes.string, // Allows override of placeholder graphic
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    layout: "square"
+    layout: "square",
   };
 
   constructor(props) {
     super(props);
     this.state = {
       progress: null,
-      error: null
+      error: null,
     };
   }
 
@@ -60,7 +60,7 @@ export class FormTusUpload extends Component {
     this.setState({ progress: null, error: null });
   }
 
-  handleUploadError = error => {
+  handleUploadError = (error) => {
     // eslint-disable-next-line no-console
     console.log(error, "TUS Upload Error");
     this.setState({ error: this.props.t("errors.upload_failed") });
@@ -80,13 +80,13 @@ export class FormTusUpload extends Component {
       metadata: {
         filename,
         size,
-        mimeType
-      }
+        mimeType,
+      },
     };
     set(source);
   };
 
-  updateValue = state => {
+  updateValue = (state) => {
     const { attachment } = state;
     if (attachment) {
       const { type: mimeType, name: filename } = attachment;
@@ -96,11 +96,11 @@ export class FormTusUpload extends Component {
         retryDelays: [0, 1000, 3000, 5000],
         metadata: {
           filename,
-          mimeType
+          mimeType,
         },
         onError: this.handleUploadError,
         onProgress: this.handleUploadProgress,
-        onSuccess: () => this.handleUploadSuccess(upload, attachment)
+        onSuccess: () => this.handleUploadSuccess(upload, attachment),
       });
       this.setState({ progress: null, error: null }, () => {
         upload.start();
@@ -114,12 +114,12 @@ export class FormTusUpload extends Component {
     const { set: setIgnored, ...baseProps } = this.props;
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <Base
             {...baseProps}
             accepts={{
               accepts: null,
-              extensions: null
+              extensions: null,
             }}
             progress={this.state.progress}
             uploadError={this.state.error}

@@ -12,31 +12,31 @@ export const eventEntity = {
   iconSize: {
     small: "40px",
     med: "44px",
-    large: "48px"
+    large: "48px",
   },
-  panelBreakpoint: breakpoints[60]
+  panelBreakpoint: breakpoints[60],
 };
 
 export const headerLayout = {
   paddingVerticalMobile: "9px",
-  paddingVerticalDesktop: "19px"
+  paddingVerticalDesktop: "19px",
 };
 
 export const standaloneHeaderLayout = {
   maxWidth: "1178px",
   paddingTopMobile: "24px",
-  paddingTopDesktop: "45px"
+  paddingTopDesktop: "45px",
 };
 
 export const annotationList = {
   avatarHeight: "32px",
   avatarPlaceholderWidth: "38px",
-  avatarPlaceholderMarginInlineStart: "-2px"
+  avatarPlaceholderMarginInlineStart: "-2px",
 };
 
 export const dialog = {
   paddingTop: "30px",
-  paddingBottom: "50px"
+  paddingBottom: "50px",
 };
 
 export const entityFilterForm = {
@@ -48,10 +48,12 @@ export const entityFilterForm = {
     if (!Number.isInteger(inputCount) || !Number.isInteger(searchCount))
       return "auto";
     const gapCount = inputCount + searchCount - 1;
-    return `${this.selectMinWidth * inputCount +
+    return `${
+      this.selectMinWidth * inputCount +
       this.searchMinWidth * searchCount +
-      this.gap * gapCount}px`;
-  }
+      this.gap * gapCount
+    }px`;
+  },
 };
 
 export const dashboardLayoutBreakpoint = breakpoints[75];

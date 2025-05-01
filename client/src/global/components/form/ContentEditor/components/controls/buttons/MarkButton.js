@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useSlate, ReactEditor } from "slate-react";
+import { useSlate } from "slate-react";
 import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
@@ -32,7 +32,7 @@ const MarkButton = ({ format, label, icon, isFirst, ...rest }, ref) => {
         {...rest}
         aria-label={t("editor.controls.labels.format", { format })}
         data-active={isMarkActive(editor, format)}
-        onClick={event => {
+        onClick={(event) => {
           event.preventDefault();
           if (!selection) return;
           toggleMark(editor, format);

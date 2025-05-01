@@ -9,7 +9,7 @@ export default class ResourceImportResultsImported extends PureComponent {
   static displayName = "ResourceImport.Results.Imported";
 
   static propTypes = {
-    resourceImportRow: PropTypes.object.isRequired
+    resourceImportRow: PropTypes.object.isRequired,
   };
 
   render() {
@@ -32,14 +32,14 @@ export default class ResourceImportResultsImported extends PureComponent {
                   <Link
                     to={lh.link(
                       "backendResource",
-                      resourceImportRow.resourceId
+                      resourceImportRow.resourceId,
                     )}
                   />
-                )
+                ),
               }}
               values={{
                 resourceTitle: resourceImportRow.resourceTitle,
-                number: resourceImportRow.lineNumber
+                number: resourceImportRow.lineNumber,
               }}
             />
           ) : (
@@ -50,14 +50,14 @@ export default class ResourceImportResultsImported extends PureComponent {
                   <Link
                     to={lh.link(
                       "backendResource",
-                      resourceImportRow.resourceId
+                      resourceImportRow.resourceId,
                     )}
                   />
-                )
+                ),
               }}
               values={{
                 resourceTitle: resourceImportRow.resourceTitle,
-                number: resourceImportRow.lineNumber
+                number: resourceImportRow.lineNumber,
               }}
             />
           )}

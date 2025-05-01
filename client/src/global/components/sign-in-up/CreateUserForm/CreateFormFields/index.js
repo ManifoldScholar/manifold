@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 
@@ -28,7 +27,7 @@ export default function CreateFormFields() {
         errorName={[
           "attributes[name]",
           "attributes[lastName]",
-          "attributes[firstName]"
+          "attributes[firstName]",
         ]}
         label={t("forms.signin_overlay.name")}
         autoComplete="name"

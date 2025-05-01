@@ -15,10 +15,10 @@ class FormColumnMapAttribute extends PureComponent {
     unLink: PropTypes.func,
     t: PropTypes.func,
     inWell: PropTypes.bool,
-    isDragging: PropTypes.bool
+    isDragging: PropTypes.bool,
   };
 
-  handleCancel = event => {
+  handleCancel = (event) => {
     event.preventDefault();
     this.props.unLink(this.props.mapping, this.props.name);
   };
@@ -27,7 +27,7 @@ class FormColumnMapAttribute extends PureComponent {
     return (
       <>
         <Draggable draggableId={this.props.name} index={this.props.index}>
-          {provided => {
+          {(provided) => {
             return (
               <>
                 <Styled.ColumnListing>
@@ -48,7 +48,7 @@ class FormColumnMapAttribute extends PureComponent {
                       <span className="screen-reader-text">
                         {this.props.t("forms.attribute_map.cancel", {
                           name: this.props.name,
-                          mapping: this.props.mapping
+                          mapping: this.props.mapping,
                         })}
                       </span>
                       <IconComposer icon="close16" size="default" />

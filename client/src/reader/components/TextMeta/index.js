@@ -8,7 +8,7 @@ export default class TextMeta extends PureComponent {
   static propTypes = {
     title: PropTypes.string,
     meta: PropTypes.object,
-    subtitle: PropTypes.string
+    subtitle: PropTypes.string,
   };
 
   render() {

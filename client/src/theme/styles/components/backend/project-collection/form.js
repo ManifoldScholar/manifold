@@ -4,7 +4,7 @@ export default `
   .project-collection-form {
     ${respond(
       `max-width: 446.44px; /* set explicity to prevent drawer from expanding */`,
-      75
+      75,
     )}
 
     .button-switch-primary {
@@ -22,7 +22,7 @@ export default `
             content: " Collection";
           `,
           "500px",
-          "min"
+          "min",
         )}
       }
     }

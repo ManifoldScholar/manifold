@@ -4,8 +4,8 @@ export default {
       endpoint: "/api/v1/makers",
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -14,8 +14,8 @@ export default {
       endpoint: "/api/v1/makers",
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "makers", data: maker })
-      }
+        body: JSON.stringify({ type: "makers", data: maker }),
+      },
     };
   },
 
@@ -24,8 +24,8 @@ export default {
       endpoint: `/api/v1/makers/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "maker", data: maker })
-      }
+        body: JSON.stringify({ type: "maker", data: maker }),
+      },
     };
   },
 
@@ -33,7 +33,7 @@ export default {
     return {
       endpoint: `/api/v1/makers/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -41,7 +41,7 @@ export default {
     return {
       endpoint: `/api/v1/makers/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

@@ -3,7 +3,7 @@ import {
   panelRounded,
   headingQuaternary,
   headingSecondary,
-  containerPrototype
+  containerPrototype,
 } from "theme/styles/mixins";
 
 export const Category = styled.article`

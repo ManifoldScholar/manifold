@@ -12,7 +12,7 @@ export class ExportTargetsNewContainer extends PureComponent {
 
   static propTypes = {
     history: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -21,9 +21,9 @@ export class ExportTargetsNewContainer extends PureComponent {
       attributes: {
         strategy: "sftp_key",
         configuration: {
-          targetNameFormat: "%s.%e"
-        }
-      }
+          targetNameFormat: "%s.%e",
+        },
+      },
     };
   }
 
@@ -40,7 +40,9 @@ export class ExportTargetsNewContainer extends PureComponent {
         />
         <Form
           model={this.defaultExportTarget}
-          onSuccess={exportTarget => this.redirectToExportTarget(exportTarget)}
+          onSuccess={(exportTarget) =>
+            this.redirectToExportTarget(exportTarget)
+          }
           options={{ adds: requests.beExportTargets }}
         />
       </section>

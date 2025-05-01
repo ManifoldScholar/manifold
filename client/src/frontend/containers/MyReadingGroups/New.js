@@ -20,5 +20,5 @@ export default connectAndFetch(ReadingGroupsNewContainer);
 ReadingGroupsNewContainer.displayName = "Frontend.Containers.ReadingGroupsNew";
 
 ReadingGroupsNewContainer.propTypes = {
-  onSuccess: PropTypes.func.isRequired
+  onSuccess: PropTypes.func.isRequired,
 };

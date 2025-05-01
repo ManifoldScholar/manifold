@@ -11,14 +11,14 @@ class ExportTargetsContainerForm extends PureComponent {
 
   static propTypes = {
     model: PropTypes.object,
-    onSuccess: PropTypes.func, // eslint-disable-line react/require-default-props
+    onSuccess: PropTypes.func,
     options: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     model: {},
-    options: {}
+    options: {},
   };
 
   get modelExists() {
@@ -55,12 +55,12 @@ class ExportTargetsContainerForm extends PureComponent {
           options={[
             {
               label: t("settings.export_targets.type_options.sftp_key"),
-              value: "sftp_key"
+              value: "sftp_key",
             },
             {
               label: t("settings.export_targets.type_options.sftp_password"),
-              value: "sftp_password"
-            }
+              value: "sftp_password",
+            },
           ]}
         />
         <Form.TextInput
@@ -115,7 +115,7 @@ class ExportTargetsContainerForm extends PureComponent {
         className="form-secondary"
         notificationScope="drawer"
       >
-        {getModelValue => this.renderFormContents(getModelValue)}
+        {(getModelValue) => this.renderFormContents(getModelValue)}
       </FormContainer.Form>
     );
   }

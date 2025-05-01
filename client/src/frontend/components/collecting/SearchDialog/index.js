@@ -14,6 +14,7 @@ function CollectingSearchDialog({ heading, onClose }) {
       describedBy={uidSeed("description")}
       header={
         <div className="search-dialog__header">
+          {/* eslint-disable jsx-a11y/heading-has-content */}
           <Trans
             i18nKey="modals.collecting_search"
             components={[
@@ -22,10 +23,11 @@ function CollectingSearchDialog({ heading, onClose }) {
               <p
                 id={uidSeed("description")}
                 className="search-dialog__instructions"
-              />
+              />,
             ]}
             values={{ heading }}
           />
+          {/* eslint-enable jsx-a11y/heading-has-content */}
         </div>
       }
     />
@@ -36,7 +38,7 @@ CollectingSearchDialog.displayName = "Collecting.Search";
 
 CollectingSearchDialog.propTypes = {
   heading: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
 };
 
 export default CollectingSearchDialog;

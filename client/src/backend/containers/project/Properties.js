@@ -12,10 +12,10 @@ function ProjectPropertiesContainer({ project }) {
   const createSubject = useApiCallback(subjectsAPI.create);
 
   const createSubjectFromValue = useCallback(
-    name => {
+    (name) => {
       return createSubject({ type: "subject", attributes: { name } });
     },
-    [createSubject]
+    [createSubject],
   );
 
   const { journal, journalIssue } = project.relationships;
@@ -27,17 +27,19 @@ function ProjectPropertiesContainer({ project }) {
 
   const { t } = useTranslation();
 
-  const formatData = data => {
-    const { avatarAltText, avatar: avatarData, ...rest } =
-      data?.attributes ?? {};
+  const formatData = (data) => {
+    const {
+      avatarAltText,
+      avatar: avatarData,
+      ...rest
+    } = data?.attributes ?? {};
 
-    /* eslint-disable no-nested-ternary */
     const finalAvatarData =
       typeof avatarAltText === "string"
         ? { avatar: { ...avatarData, altText: avatarAltText } }
         : avatarData
-        ? { avatar: avatarData }
-        : {};
+          ? { avatar: avatarData }
+          : {};
 
     const { subjects, journalVolume } = data.relationships ?? {};
 
@@ -45,14 +47,14 @@ function ProjectPropertiesContainer({ project }) {
       ...(subjects && { subjects: { data: subjects } }),
       ...(journalVolume && {
         journalVolume: {
-          data: journalVolume
-        }
-      })
+          data: journalVolume,
+        },
+      }),
     };
 
     return {
       relationships,
-      attributes: { ...finalAvatarData, ...rest }
+      attributes: { ...finalAvatarData, ...rest },
     };
   };
 
@@ -107,7 +109,7 @@ function ProjectPropertiesContainer({ project }) {
                   belongsTo
                   label={t("issues.forms.volume_label")}
                   name="relationships[journalVolume]"
-                  optionToLabel={volume => volume.attributes.number}
+                  optionToLabel={(volume) => volume.attributes.number}
                   predictive
                   listStyle={"rows"}
                   options={fetchJournalVolumes}
@@ -134,7 +136,7 @@ function ProjectPropertiesContainer({ project }) {
               listStyle={"well"}
               name="relationships[subjects]"
               options={subjectsAPI.index}
-              optionToLabel={subject => subject.attributes.name}
+              optionToLabel={(subject) => subject.attributes.name}
               newToValue={createSubjectFromValue}
               placeholder={t("projects.forms.properties.subjects_placeholder")}
               listRowComponent="SubjectRow"
@@ -147,8 +149,8 @@ function ProjectPropertiesContainer({ project }) {
               name="attributes[tagList]"
               placeholder={t("projects.forms.properties.tags_placeholder")}
               options={tagsAPI.index}
-              optionToLabel={tag => tag.attributes.name}
-              optionToValue={tag => tag.attributes.name}
+              optionToLabel={(tag) => tag.attributes.name}
+              optionToValue={(tag) => tag.attributes.name}
               allowNew
             />
           </Form.FieldGroup>
@@ -157,10 +159,10 @@ function ProjectPropertiesContainer({ project }) {
               label={t("journals.forms.properties.social_card_label")}
               name="attributes[socialTitle]"
               placeholder={t(
-                "journals.forms.properties.social_card_placeholder"
+                "journals.forms.properties.social_card_placeholder",
               )}
               instructions={t(
-                "journals.forms.properties.social_card_instructions"
+                "journals.forms.properties.social_card_instructions",
               )}
             />
             <Form.TextArea
@@ -168,7 +170,7 @@ function ProjectPropertiesContainer({ project }) {
               label={t("journals.forms.properties.social_description_label")}
               name="attributes[socialDescription]"
               placeholder={t(
-                "journals.forms.properties.social_description_placeholder"
+                "journals.forms.properties.social_description_placeholder",
               )}
             />
             <Form.Upload
@@ -179,7 +181,7 @@ function ProjectPropertiesContainer({ project }) {
               name="attributes[socialImage]"
               remove="attributes[removeSocialImage]"
               instructions={t(
-                "projects.forms.properties.social_image_instructions"
+                "projects.forms.properties.social_image_instructions",
               )}
             />
           </Form.FieldGroup>
@@ -191,7 +193,7 @@ function ProjectPropertiesContainer({ project }) {
               label={t("projects.forms.properties.draft_mode_label")}
               name="attributes[draft]"
               instructions={t(
-                "projects.forms.properties.draft_mode_instructions"
+                "projects.forms.properties.draft_mode_instructions",
               )}
             />
             <Form.Switch
@@ -199,7 +201,7 @@ function ProjectPropertiesContainer({ project }) {
               label={t("projects.forms.properties.featured_label")}
               name="attributes[featured]"
               instructions={t(
-                "projects.forms.properties.featured_instructions"
+                "projects.forms.properties.featured_instructions",
               )}
             />
             <Form.Switch
@@ -207,7 +209,7 @@ function ProjectPropertiesContainer({ project }) {
               label={t("projects.forms.properties.finished_label")}
               name="attributes[finished]"
               instructions={t(
-                "projects.forms.properties.finished_instructions"
+                "projects.forms.properties.finished_instructions",
               )}
             />
             <Form.Select
@@ -218,38 +220,38 @@ function ProjectPropertiesContainer({ project }) {
                 {
                   value: "disabled",
                   label: t(
-                    "projects.forms.properties.standalone_options.disabled"
-                  )
+                    "projects.forms.properties.standalone_options.disabled",
+                  ),
                 },
                 {
                   value: "enabled",
                   label: t(
-                    "projects.forms.properties.standalone_options.enabled"
-                  )
+                    "projects.forms.properties.standalone_options.enabled",
+                  ),
                 },
                 {
                   value: "enforced",
                   label: t(
-                    "projects.forms.properties.standalone_options.enforced"
-                  )
-                }
+                    "projects.forms.properties.standalone_options.enforced",
+                  ),
+                },
               ]}
               instructions={t(
-                "projects.forms.properties.standalone_instructions"
+                "projects.forms.properties.standalone_instructions",
               )}
             />
             <Form.TextInput
               label={t("projects.forms.properties.top_bar_text_label")}
               name="attributes[standaloneModePressBarText]"
               instructions={t(
-                "projects.forms.properties.top_bar_text_instructions"
+                "projects.forms.properties.top_bar_text_instructions",
               )}
             />
             <Form.TextInput
               label={t("projects.forms.properties.top_bar_url_label")}
               name="attributes[standaloneModePressBarUrl]"
               instructions={t(
-                "projects.forms.properties.top_bar_url_instructions"
+                "projects.forms.properties.top_bar_url_instructions",
               )}
             />
           </Form.FieldGroup>
@@ -261,7 +263,7 @@ function ProjectPropertiesContainer({ project }) {
               label={t("projects.forms.properties.disable_public_label")}
               name="attributes[disableEngagement]"
               instructions={t(
-                "projects.forms.properties.disable_public_instructions"
+                "projects.forms.properties.disable_public_instructions",
               )}
             />
           </Form.FieldGroup>

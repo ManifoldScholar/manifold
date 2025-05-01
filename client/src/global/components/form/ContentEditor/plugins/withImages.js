@@ -1,11 +1,10 @@
 import { insertImage } from "../utils/slate/transforms";
 import { isImageUrl } from "../utils/helpers";
 
-/* eslint-disable no-param-reassign */
-const withImages = editor => {
+const withImages = (editor) => {
   const { insertData } = editor;
 
-  editor.insertData = data => {
+  editor.insertData = (data) => {
     const text = data.getData("text/plain");
     const { files } = data;
 

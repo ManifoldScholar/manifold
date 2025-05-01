@@ -12,7 +12,7 @@ export default function SiteNav({
   returnUrl,
   entityTitle,
   toggleSignInUpOverlay,
-  moreLink = "https://manifoldapp.org/"
+  moreLink = "https://manifoldapp.org/",
 }) {
   const context = useContext(FrontendModeContext);
   const menu = useMenuState();
@@ -86,5 +86,5 @@ SiteNav.propTypes = {
   returnUrl: PropTypes.string.isRequired,
   entityTitle: PropTypes.string.isRequired,
   toggleSignInUpOverlay: PropTypes.func.isRequired,
-  moreLink: PropTypes.string
+  moreLink: PropTypes.string,
 };

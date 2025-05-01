@@ -34,7 +34,7 @@ export default function makeRendererProxy(requestHandler) {
             res.end(msg);
           } else {
             ch.error(
-              `Rendering fallback failed to render in server-development.js`
+              `Rendering fallback failed to render in server-development.js`,
             );
             res.setHeader("Content-Type", "text/html");
             res.end(exceptionRenderer(error));
@@ -46,7 +46,7 @@ export default function makeRendererProxy(requestHandler) {
       const cookie = new CookieHelper(req, res);
       promises.push(manifoldBootstrap(store.getState, store.dispatch, cookie));
       Promise.all(promises).then(render, render);
-    }
+    },
   });
   return reactServerProxy;
 }

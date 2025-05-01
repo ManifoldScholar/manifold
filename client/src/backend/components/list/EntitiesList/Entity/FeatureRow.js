@@ -14,10 +14,10 @@ class FeatureRow extends PureComponent {
   static propTypes = {
     entity: PropTypes.object,
     onTogglePublish: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
-  onTogglePublish = event => {
+  onTogglePublish = (event) => {
     event.preventDefault();
     event.stopPropagation();
     this.props.onTogglePublish(this.feature);
@@ -55,11 +55,11 @@ class FeatureRow extends PureComponent {
     return truncate(
       this.header ||
         this.props.t("records.features.untitled_record", {
-          number: this.position
+          number: this.position,
         }),
       {
-        length: 60
-      }
+        length: 60,
+      },
     );
   }
 

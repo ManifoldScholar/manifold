@@ -1,7 +1,7 @@
 import {
   defaultHoverStyle,
   defaultTransitionProps,
-  rgba
+  rgba,
 } from "theme/styles/mixins";
 
 export default `

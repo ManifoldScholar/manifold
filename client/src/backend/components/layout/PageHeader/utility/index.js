@@ -1,1 +1,1 @@
-export default from "./Utility";
+export { default } from "./Utility";

@@ -9,7 +9,7 @@ function Toggle({ children, className, activeClassName, as }) {
     !React.isValidElement(children) || typeof children === "string";
   const mergedToggleProps = {
     ...toggleProps,
-    ...(applyLabelPropsToToggle ? labelProps : {})
+    ...(applyLabelPropsToToggle ? labelProps : {}),
   };
 
   const ToggleComponent = as ?? "button";
@@ -20,7 +20,7 @@ function Toggle({ children, className, activeClassName, as }) {
         <ToggleComponent
           className={cx({
             [className]: !!className,
-            [activeClassName]: activeClassName ? visible : false
+            [activeClassName]: activeClassName ? visible : false,
           })}
           {...mergedToggleProps}
         >
@@ -39,10 +39,10 @@ Toggle.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node,
-    PropTypes.func
+    PropTypes.func,
   ]),
   className: PropTypes.string,
-  activeClassName: PropTypes.string
+  activeClassName: PropTypes.string,
 };
 
 export default Toggle;

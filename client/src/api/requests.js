@@ -208,5 +208,5 @@ export default {
   gContactForm: "global-contact-form",
   gLogin: "global-login",
   settings: "settings",
-  analyticsEventCreate: "analytics-event-create"
+  analyticsEventCreate: "analytics-event-create",
 };

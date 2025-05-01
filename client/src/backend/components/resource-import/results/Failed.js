@@ -8,7 +8,7 @@ class ResourceImportResultsFailed extends PureComponent {
 
   static propTypes = {
     resourceImportRow: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -24,7 +24,7 @@ class ResourceImportResultsFailed extends PureComponent {
         />
         <span>
           {t("resources.import.row_failed", {
-            number: resourceImportRow.lineNumber
+            number: resourceImportRow.lineNumber,
           })}
         </span>
       </>

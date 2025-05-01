@@ -20,7 +20,7 @@ class TextBibliographic extends Component {
     showSubtitles: PropTypes.bool,
     showCovers: PropTypes.bool,
     onUncollect: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get text() {
@@ -49,7 +49,7 @@ class TextBibliographic extends Component {
     if (!this.props.showAuthors) return null;
     const creatorNames = this.attributes.creatorNames;
     if (Array.isArray(creatorNames)) {
-      return creatorNames.map(n => `${n.firstName} ${n.lastName}`).join(", ");
+      return creatorNames.map((n) => `${n.firstName} ${n.lastName}`).join(", ");
     }
     return creatorNames;
   }

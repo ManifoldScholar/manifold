@@ -16,7 +16,7 @@ function FiltersGroup(props) {
     showReset,
     setScreenReaderStatus,
     className,
-    visibleLabels = false
+    visibleLabels = false,
   } = props;
 
   const searchInput = useRef(null);
@@ -31,17 +31,15 @@ function FiltersGroup(props) {
     }
   };
 
-  const onSubmit = e =>
+  const onSubmit = (e) =>
     updateFilterState(e, "keyword", searchInput.current.value);
 
-  /* eslint-disable no-nested-ternary */
   const resetLabel =
     filters?.length && !hideSearch
       ? t("filters.reset_search_and_filters")
       : filters?.length
-      ? t("filters.reset_filters")
-      : t("filters.reset_search");
-  /* eslint-disable no-nested-ternary */
+        ? t("filters.reset_filters")
+        : t("filters.reset_search");
 
   return (
     <Styled.Wrapper
@@ -55,7 +53,7 @@ function FiltersGroup(props) {
       {!hideSearch && <Search inputRef={searchInput} />}
       {!!filters?.length && (
         <Styled.SelectGroup $count={filters?.length}>
-          {filters.map(filter => (
+          {filters.map((filter) => (
             <Filter
               key={filter.label}
               visibleLabel={visibleLabels}
@@ -83,7 +81,7 @@ FiltersGroup.propTypes = {
   hideSearch: PropTypes.bool,
   setScreenReaderStatus: PropTypes.func,
   className: PropTypes.string,
-  visibleLabels: PropTypes.bool
+  visibleLabels: PropTypes.bool,
 };
 
 export default withScreenReaderStatus(FiltersGroup);

@@ -16,14 +16,14 @@ class GroupItem extends Component {
     annotation: PropTypes.object,
     visitHandler: PropTypes.func,
     showAnnotationCreator: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get currentGroupName() {
     const {
       readingGroupId,
       readingGroupName,
-      private: isPrivate
+      private: isPrivate,
     } = this.props.annotation.attributes;
     if (isPrivate) return this.privateLabel;
     if (!readingGroupId) return this.publicLabel;
@@ -31,10 +31,8 @@ class GroupItem extends Component {
   }
 
   get showLock() {
-    const {
-      readingGroupPrivacy,
-      private: isPrivate
-    } = this.props.annotation.attributes;
+    const { readingGroupPrivacy, private: isPrivate } =
+      this.props.annotation.attributes;
     return (
       readingGroupPrivacy === "private" ||
       readingGroupPrivacy === "anonymous" ||
@@ -58,7 +56,7 @@ class GroupItem extends Component {
     // TODO: Point to the right URL
     return get(
       this.props,
-      "annotation.attributes.creatorAvatarStyles.smallSquare"
+      "annotation.attributes.creatorAvatarStyles.smallSquare",
     );
   }
 
@@ -80,7 +78,7 @@ class GroupItem extends Component {
     return icon;
   }
 
-  handleVisitAnnotation = event => {
+  handleVisitAnnotation = (event) => {
     event.preventDefault();
     this.props.visitHandler(this.props.annotation);
   };
@@ -95,7 +93,8 @@ class GroupItem extends Component {
           className={classNames({
             "notes-filtered-list__item-creator-avatar": true,
             "notes-filtered-list__item-creator-avatar--image": this.avatarUrl,
-            "notes-filtered-list__item-creator-avatar--default": !this.avatarUrl
+            "notes-filtered-list__item-creator-avatar--default":
+              !this.avatarUrl,
           })}
         />
         <span className="truncate-text-overflow">{creatorName}</span>
@@ -108,7 +107,7 @@ class GroupItem extends Component {
             icon: "interactComment16",
             iconSize: 16,
             iconCount: commentsCount,
-            className: "annotation-tag--creator"
+            className: "annotation-tag--creator",
           };
 
     return <Tag {...tagProps}>{creator}</Tag>;

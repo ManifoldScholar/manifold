@@ -25,16 +25,16 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     return {
       projectCollections: select(
         requests.beProjectCollections,
-        state.entityStore
+        state.entityStore,
       ),
       projectCollection: select(
         requests.beProjectCollection,
-        state.entityStore
+        state.entityStore,
       ),
       collectionProjects: select(
         requests.beCollectionProjects,
-        state.entityStore
-      )
+        state.entityStore,
+      ),
     };
   };
 
@@ -49,7 +49,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     match: PropTypes.object,
     route: PropTypes.object,
     confirm: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -78,10 +78,10 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   fetchProjectCollections = () => {
     const call = projectCollectionsAPI.index(
       { order: "position ASC" },
-      { number: 1, size: 100 }
+      { number: 1, size: 100 },
     );
     const { promise } = this.props.dispatch(
-      request(call, requests.beProjectCollections)
+      request(call, requests.beProjectCollections),
     );
     return promise;
   };
@@ -95,7 +95,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 
     const call = projectCollectionsAPI.show(id, pagination);
     const { promise } = this.props.dispatch(
-      request(call, requests.beProjectCollection)
+      request(call, requests.beProjectCollection),
     );
     return promise;
   };
@@ -105,7 +105,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     if (!id || id === "new") return Promise.resolve();
     const call = collectionProjectsAPI.index(id);
     const { promise } = this.props.dispatch(
-      request(call, requests.beCollectionProjects)
+      request(call, requests.beCollectionProjects),
     );
     return promise;
   };
@@ -117,7 +117,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     const destroyRequest = request(
       call,
       requests.beProjectCollectionDestroy,
-      options
+      options,
     );
     const { promise } = this.props.dispatch(destroyRequest);
     promise.then(afterDestroy);
@@ -132,7 +132,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     return projectCollectionsAPI.update(id, changes);
   };
 
-  buildCreateProjectCollection = model => {
+  buildCreateProjectCollection = (model) => {
     return projectCollectionsAPI.create(model);
   };
 
@@ -141,12 +141,12 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     const call = projectCollectionsAPI.updateCollectionProject(
       projectCollection.id,
       id,
-      changes
+      changes,
     );
     const projectCollectionRequest = request(
       call,
       requests.beCollectionProjectUpdate,
-      options
+      options,
     );
     const { promise } = this.props.dispatch(projectCollectionRequest);
     return promise;
@@ -155,30 +155,30 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   updateProjectCollection = (
     changes,
     options = {},
-    optionalProjectCollection = null
+    optionalProjectCollection = null,
   ) => {
     const projectCollection =
       optionalProjectCollection || this.props.projectCollection;
     const config = this.buildUpdateProjectCollection(
       projectCollection.id,
-      changes
+      changes,
     );
     const updateRequest = request(
       config,
       requests.beProjectCollectionUpdate,
-      options
+      options,
     );
     const { promise } = this.props.dispatch(updateRequest);
     promise.then(this.fetchCollectionProjects);
     return promise;
   };
 
-  handleCollectionOrderChange = result => {
+  handleCollectionOrderChange = (result) => {
     const { id, title, position, announce, callback } = result;
     const changes = { attributes: { position } };
     const announcement = this.props.t("actions.dnd.moved_to_position", {
       title,
-      position
+      position,
     });
 
     this.updateProjectCollection(changes, { noTouch: true }, { id }).then(() =>
@@ -190,16 +190,16 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
         if (callback && typeof callback === "function") {
           callback();
         }
-      })
+      }),
     );
   };
 
-  handleCollectionSelect = collection => {
+  handleCollectionSelect = (collection) => {
     const url = lh.link("backendProjectCollection", collection.id);
     this.props.history.push(url);
   };
 
-  handleNewSuccess = projectCollection => {
+  handleNewSuccess = (projectCollection) => {
     this.fetchProjectCollections();
     const path = lh.link("backendProjectCollection", projectCollection.id);
     this.props.history.push(path);
@@ -223,7 +223,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       refreshProjectCollection: this.fetchProjectCollection,
       refreshProjectCollections: this.fetchProjectCollections,
       refreshCollectionProjects: this.fetchCollectionProjects,
-      handleNewSuccess: this.handleNewSuccess
+      handleNewSuccess: this.handleNewSuccess,
     };
   }
 
@@ -232,7 +232,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 
     if (id && id !== "new")
       return childRoutes(this.props.route, {
-        childProps: this.childProps
+        childProps: this.childProps,
       });
 
     return childRoutes(this.props.route, {
@@ -242,8 +242,8 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
         size: "flexible",
         padding: "large",
         lockScroll: "always",
-        closeUrl: lh.link("backendProjectCollections")
-      }
+        closeUrl: lh.link("backendProjectCollections"),
+      },
     });
   }
 
@@ -263,7 +263,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 
     const wrapperClasses = classnames("project-collections", {
       "active-collection": this.props.match.params.id,
-      empty: this.noProjectCollections
+      empty: this.noProjectCollections,
     });
 
     const collectionForHeader = this.props.match.params.id
@@ -278,19 +278,19 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
           { to: null, label: t("glossary.project_title_case_other") },
           {
             to: lh.link("backendProjectCollections"),
-            label: t("glossary.project_collection_title_case_other")
+            label: t("glossary.project_collection_title_case_other"),
           },
           {
             to: lh.link("backendProjectCollections", projectCollection.id),
-            label: projectCollection.attributes.title
-          }
+            label: projectCollection.attributes.title,
+          },
         ]
       : [
           { to: null, label: t("glossary.project_title_case_other") },
           {
             to: lh.link("backendProjectCollections"),
-            label: t("glossary.project_collection_title_case_other")
-          }
+            label: t("glossary.project_collection_title_case_other"),
+          },
         ];
 
     return (
@@ -298,7 +298,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
         ability="update"
         entity={["projectCollection"]}
         failureFatalError={{
-          detail: this.props.t("project_collections.unauthorized")
+          detail: this.props.t("project_collections.unauthorized"),
         }}
       >
         <HeadContent
@@ -343,6 +343,6 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 export default withTranslation()(
   withScreenReaderStatus(
     withConfirmation(connectAndFetch(ProjectCollectionWrapperContainer)),
-    false
-  )
+    false,
+  ),
 );

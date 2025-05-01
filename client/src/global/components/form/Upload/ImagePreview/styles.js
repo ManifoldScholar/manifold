@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   formLabelPrimary,
   buttonUnstyled,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Preview = styled.div`

@@ -1,13 +1,10 @@
-const nodeToUids = n => {
+const nodeToUids = (n) => {
   if (!n) return undefined;
   return [n.uid, n.children?.map(nodeToUids)];
 };
 
-const getFinalParentChildren = children => {
-  return children
-    .map(nodeToUids)
-    .flat(100)
-    .filter(Boolean);
+const getFinalParentChildren = (children) => {
+  return children.map(nodeToUids).flat(100).filter(Boolean);
 };
 
 const formatTreeItem = (entry, parentId, depth = 1, finalParent) => {
@@ -28,18 +25,16 @@ const formatTreeItem = (entry, parentId, depth = 1, finalParent) => {
         title: entry.label,
         anchor: entry.anchor,
         parentId: finalParent ?? parentId,
-        isValidParent: !finalParent
-      }
+        isValidParent: !finalParent,
+      },
     };
   }
 
-  /* eslint-disable no-nested-ternary */
   const children = setFinalParent
     ? getFinalParentChildren(entry.children)
     : !finalParent
-    ? entry.children.map(c => (c ? c.uid : undefined)).filter(Boolean)
-    : [];
-  /* eslint-disable no-nested-ternary */
+      ? entry.children.map((c) => (c ? c.uid : undefined)).filter(Boolean)
+      : [];
 
   return [
     {
@@ -54,22 +49,22 @@ const formatTreeItem = (entry, parentId, depth = 1, finalParent) => {
         title: entry.label,
         anchor: entry.anchor,
         parentId: finalParent ?? parentId,
-        isValidParent: !finalParent
-      }
+        isValidParent: !finalParent,
+      },
     },
     entry.children
-      .map(c =>
-        formatTreeItem(c, entry.uid, depth + 1, finalParent ?? setFinalParent)
+      .map((c) =>
+        formatTreeItem(c, entry.uid, depth + 1, finalParent ?? setFinalParent),
       )
-      .filter(Boolean)
+      .filter(Boolean),
   ];
 };
 
-export const formatTreeData = toc => {
+export const formatTreeData = (toc) => {
   if (!toc) return null;
 
-  const rootChildren = toc.map(e => e.uid);
-  const entries = toc.map(e => formatTreeItem(e, "root")).filter(Boolean);
+  const rootChildren = toc.map((e) => e.uid);
+  const entries = toc.map((e) => formatTreeItem(e, "root")).filter(Boolean);
   const flatEntries = entries.flat(100);
   const asObj = flatEntries.reduce((obj, e) => {
     return { ...obj, [e.id]: e };
@@ -86,15 +81,15 @@ export const formatTreeData = toc => {
         isChildrenLoading: false,
         data: {
           title: "root",
-          isValidParent: true
-        }
+          isValidParent: true,
+        },
       },
-      ...asObj
-    }
+      ...asObj,
+    },
   };
 };
 
-const formatTOCEntry = all => item => {
+const formatTOCEntry = (all) => (item) => {
   if (!item) return undefined;
 
   const formatter = formatTOCEntry(all);
@@ -104,15 +99,15 @@ const formatTOCEntry = all => item => {
     label: item.data.title,
     anchor: item.data.anchor,
     children: item.hasChildren
-      ? item.children.map(c => formatter(all[c]))
-      : undefined
+      ? item.children.map((c) => formatter(all[c]))
+      : undefined,
   };
 };
 
-export const formatTOCData = tree => {
+export const formatTOCData = (tree) => {
   if (!tree) return null;
 
-  const topLevel = tree.items.root.children.map(c => tree.items[c]);
+  const topLevel = tree.items.root.children.map((c) => tree.items[c]);
   return topLevel.map(formatTOCEntry(tree.items)).filter(Boolean);
 };
 
@@ -123,7 +118,7 @@ export const getNestedTreeChildren = (itemId, treeItems) => {
 
   return [
     ...item.children,
-    item.children.map(c => getNestedTreeChildren(c, treeItems))
+    item.children.map((c) => getNestedTreeChildren(c, treeItems)),
   ].flat(10);
 };
 
@@ -152,13 +147,13 @@ const removeKey = (k, { [k]: _, ...o }) => o;
 export const removeKeys = (keys, o) =>
   keys.reduce((r, k) => removeKey(k, r), o);
 
-const childCount = item => {
+const childCount = (item) => {
   return item.hasChildren ? item.children.length : 0;
 };
 
 export const getCollapseCount = (item, items) => {
   return [
     item.isExpanded ? childCount(item) : 0,
-    ...item.children?.map(c => getCollapseCount(items[c], items))
+    ...(item.children?.map((c) => getCollapseCount(items[c], items)) ?? []),
   ].reduce((sum, val) => sum + val, 0);
 };

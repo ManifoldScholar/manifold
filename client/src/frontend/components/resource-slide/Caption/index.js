@@ -9,7 +9,7 @@ export default function ResourceListSlideCaption({
   resource,
   resourceCollection,
   hideDetailUrl = false,
-  hideDownload = false
+  hideDownload = false,
 }) {
   const [isExpandable, setExpandable] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -38,20 +38,20 @@ export default function ResourceListSlideCaption({
         "frontendProjectCollectionResource",
         resource.attributes.projectSlug,
         resourceCollection.attributes.slug,
-        resource.attributes.slug
+        resource.attributes.slug,
       );
     }
     return lh.link(
       "frontendProjectResource",
       resource.attributes.projectSlug,
-      resource.attributes.slug
+      resource.attributes.slug,
     );
   };
 
   const renderDescription = () => {
     if (!resource.attributes.captionFormatted) return null;
     const content = {
-      __html: resource.attributes.captionFormatted
+      __html: resource.attributes.captionFormatted,
     };
 
     return (
@@ -76,7 +76,7 @@ export default function ResourceListSlideCaption({
       <header>
         <Styled.Title
           dangerouslySetInnerHTML={{
-            __html: attr.titleFormatted
+            __html: attr.titleFormatted,
           }}
         />
         <span className="screen-reader-text" role="alert">
@@ -126,5 +126,5 @@ ResourceListSlideCaption.propTypes = {
   resource: PropTypes.object,
   resourceCollection: PropTypes.object,
   hideDetailUrl: PropTypes.bool,
-  hideDownload: PropTypes.bool
+  hideDownload: PropTypes.bool,
 };

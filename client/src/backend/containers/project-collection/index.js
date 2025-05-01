@@ -9,5 +9,5 @@ export default {
   ManageProjects,
   New,
   Settings,
-  Wrapper
+  Wrapper,
 };

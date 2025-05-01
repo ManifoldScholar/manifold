@@ -11,5 +11,5 @@ export default {
   Label,
   NextSection,
   Pagination,
-  Text
+  Text,
 };

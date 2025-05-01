@@ -14,7 +14,7 @@ export class SettingsSubjectsNewContainer extends PureComponent {
   static propTypes = {
     history: PropTypes.object,
     subject: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   handleSuccess = () => {
@@ -34,7 +34,7 @@ export class SettingsSubjectsNewContainer extends PureComponent {
           create={subjectsAPI.create}
           options={{
             adds: requests.beSubjects,
-            refreshes: requests.feSubjects
+            refreshes: requests.feSubjects,
           }}
           onSuccess={this.handleSuccess}
           className="form-secondary"

@@ -20,7 +20,7 @@ export default class UserAvatarUpload extends Component {
       "portrait",
       "landscape",
       "horizontal",
-      "embed"
+      "embed",
     ]),
     placeholder: PropTypes.string, // Allows override of placeholder graphic
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
@@ -31,20 +31,20 @@ export default class UserAvatarUpload extends Component {
     idForInstructions: PropTypes.string.isRequired,
     fileNameFrom: PropTypes.string,
     uploadError: PropTypes.string,
-    getModelValue: PropTypes.func
+    getModelValue: PropTypes.func,
   };
 
   static defaultProps = {
     layout: "square",
     accepts: null,
-    wide: false
+    wide: false,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       removed: false,
-      attachment: null
+      attachment: null,
     };
   }
 
@@ -62,11 +62,11 @@ export default class UserAvatarUpload extends Component {
     return this.props.getModelValue(this.props.fileNameFrom);
   }
 
-  handleFileDrop = file => {
+  handleFileDrop = (file) => {
     this.setState({ attachment: file[0], removed: false });
   };
 
-  handleRemove = event => {
+  handleRemove = (event) => {
     event.preventDefault();
     event.stopPropagation();
     this.setState({ attachment: null, removed: true });
@@ -85,7 +85,7 @@ export default class UserAvatarUpload extends Component {
 
   previewUrl = () => {
     const preview = this.currentPreview();
-    return typeof preview === "string" ? preview : preview?.data ?? "";
+    return typeof preview === "string" ? preview : (preview?.data ?? "");
   };
 
   render() {
@@ -119,7 +119,7 @@ export default class UserAvatarUpload extends Component {
                     multiple: false,
                     id: "avatar-update",
                     "aria-describedby": "avatar-update-error",
-                    tabIndex: 0
+                    tabIndex: 0,
                   })}
                 />
                 <Styled.DropzoneOutline>

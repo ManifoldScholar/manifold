@@ -11,7 +11,7 @@ const { request } = entityStoreActions;
 export class AnnotationList extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
-      annotations: select(requests.rDrawerAnnotations, state.entityStore) || []
+      annotations: select(requests.rDrawerAnnotations, state.entityStore) || [],
     };
     return { ...newState, ...ownProps };
   };
@@ -26,11 +26,11 @@ export class AnnotationList extends PureComponent {
     annotations: PropTypes.array,
     closeDrawer: PropTypes.func,
     sectionId: PropTypes.string,
-    textId: PropTypes.string
+    textId: PropTypes.string,
   };
 
   static defaultProps = {
-    annotations: []
+    annotations: [],
   };
 
   componentDidMount() {
@@ -49,7 +49,7 @@ export class AnnotationList extends PureComponent {
   fetchAnnotations(props) {
     const { sectionId, textId } = this.props ?? {};
     const annotationsCall = annotationsAPI.forSection(sectionId, textId, {
-      ids: this.props.annotationIds
+      ids: this.props.annotationIds,
     });
     props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));
   }

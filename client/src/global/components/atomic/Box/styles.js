@@ -8,7 +8,7 @@ export const Container = styled.section`
     containerPaddingInline.full,
     "0px",
     120,
-    35
+    35,
   )});
   padding-block: var(--Box-padding-block, 0);
 `;

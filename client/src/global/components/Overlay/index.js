@@ -19,7 +19,7 @@ function Overlay({
   triggerScrollToTop,
   id,
   children,
-  ariaLabel
+  ariaLabel,
 }) {
   const overlayRef = useRef(null);
   const headerId = useUID();
@@ -54,7 +54,7 @@ function Overlay({
         <FocusTrap
           active={open}
           focusTrapOptions={{
-            escapeDeactivates: e => handleCloseEvent(e)
+            escapeDeactivates: (e) => handleCloseEvent(e),
           }}
         >
           <div>
@@ -91,7 +91,7 @@ Overlay.propTypes = {
   appearance: PropTypes.string,
   triggerScrollToTop: PropTypes.any,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  ariaLabel: PropTypes.string
+  ariaLabel: PropTypes.string,
 };
 
 export default Overlay;

@@ -20,7 +20,7 @@ function getDisplayName(WrappedComponent) {
 
 function withFormOptions(WrappedComponent) {
   const displayName = `HigherOrder.WithFormOptions('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithFormOptions extends Component {
@@ -28,9 +28,9 @@ function withFormOptions(WrappedComponent) {
 
     static displayName = displayName;
 
-    static mapStateToProps = state => {
+    static mapStateToProps = (state) => {
       return {
-        authentication: state.authentication
+        authentication: state.authentication,
       };
     };
 
@@ -45,15 +45,15 @@ function withFormOptions(WrappedComponent) {
             PropTypes.shape({
               label: PropTypes.string.isRequired,
               instructions: PropTypes.string,
-              value: PropTypes.any.isRequired
+              value: PropTypes.any.isRequired,
             }),
             PropTypes.shape({
               id: PropTypes.string.isRequired,
-              attributes: PropTypes.object
-            })
-          ])
+              attributes: PropTypes.object,
+            }),
+          ]),
         ),
-        PropTypes.func
+        PropTypes.func,
       ]).isRequired,
       value: PropTypes.any,
       predictive: PropTypes.bool,
@@ -66,7 +66,7 @@ function withFormOptions(WrappedComponent) {
       beforeSetValue: PropTypes.func,
       beforeGetValue: PropTypes.func,
       optionFilter: PropTypes.func,
-      belongsTo: PropTypes.bool
+      belongsTo: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -82,7 +82,7 @@ function withFormOptions(WrappedComponent) {
       beforeGetValue: WithFormOptions.passthrough,
       predictive: false,
       allowNew: false,
-      belongsTo: false
+      belongsTo: false,
     };
 
     static passthrough(value) {
@@ -125,12 +125,12 @@ function withFormOptions(WrappedComponent) {
         return {
           label: rawOption.label,
           instructions: rawOption.instructions,
-          originalValue: rawOption.value
+          originalValue: rawOption.value,
         };
       return {
         label: null,
         instructions: null,
-        originalValue: rawOption
+        originalValue: rawOption,
       };
     }
 
@@ -144,7 +144,7 @@ function withFormOptions(WrappedComponent) {
       }
       if (isNil(option.instructions)) {
         enhancements.instructions = props.optionToInstructions(
-          option.originalValue
+          option.originalValue,
         );
       }
       if (isNil(option.key)) enhancements.key = enhancements.value;
@@ -153,10 +153,10 @@ function withFormOptions(WrappedComponent) {
 
     static deriveStateFromOptions(optionsIn, props) {
       const options = Array.isArray(optionsIn)
-        ? optionsIn.map(rawOption => {
+        ? optionsIn.map((rawOption) => {
             return WithFormOptions.enhanceOption(
               WithFormOptions.rawOptionToOption(rawOption),
-              props
+              props,
             );
           })
         : [];
@@ -183,7 +183,7 @@ function withFormOptions(WrappedComponent) {
         valueMap: null,
         labelMap: null,
         activeOption: null,
-        searchWord: null
+        searchWord: null,
       };
     }
 
@@ -214,7 +214,7 @@ function withFormOptions(WrappedComponent) {
         options: this.optionsForWrappedComponent,
         optionsMeta: this.optionsMeta,
         optionsHandlers: this.optionsHandlers,
-        filteredOptions: this.optionsForWrappedComponent
+        filteredOptions: this.optionsForWrappedComponent,
       };
       return childProps;
     }
@@ -235,7 +235,7 @@ function withFormOptions(WrappedComponent) {
         deselect: this.deselect,
         reorderSelection: this.reorderSelection,
         selectAll: this.selectAll,
-        unselectAll: this.unselectAll
+        unselectAll: this.unselectAll,
       };
     }
 
@@ -256,7 +256,7 @@ function withFormOptions(WrappedComponent) {
         value: this.currentValue,
         stringValue: this.props.optionToString(this.currentValue),
         allOptions: this.unfilteredOptions,
-        announcement: this.state.announcement
+        announcement: this.state.announcement,
       };
     }
 
@@ -276,10 +276,10 @@ function withFormOptions(WrappedComponent) {
     get selectedOptions() {
       const values = this.isMultiple
         ? this.currentValue
-        : [this.currentValue].filter(i => i);
+        : [this.currentValue].filter((i) => i);
       return values
-        .map(v => this.findOption(this.props.optionToString(v)))
-        .filter(i => i);
+        .map((v) => this.findOption(this.props.optionToString(v)))
+        .filter((i) => i);
     }
 
     get filterOptionsInternally() {
@@ -297,8 +297,8 @@ function withFormOptions(WrappedComponent) {
     get filteredOptions() {
       const { searchWord } = this.state;
       if (!searchWord || searchWord === "") return this.unfilteredOptions;
-      return this.unfilteredOptions.filter(option =>
-        this.props.optionFilter(searchWord, option)
+      return this.unfilteredOptions.filter((option) =>
+        this.props.optionFilter(searchWord, option),
       );
     }
 
@@ -310,12 +310,12 @@ function withFormOptions(WrappedComponent) {
       options.params.noPagination = true;
 
       const client = new ApiClient();
-      client.call(endpoint, method, options).then(results => {
+      client.call(endpoint, method, options).then((results) => {
         if (this.unmounting) return;
         const resources = results.data;
         const newState = this.constructor.deriveStateFromOptions(
           resources,
-          this.props
+          this.props,
         );
         this.setState(newState);
       });
@@ -348,7 +348,7 @@ function withFormOptions(WrappedComponent) {
       return this.authorization.authorizeAbility({
         authentication: this.props.authentication,
         entity: allowNew.entity,
-        ability: allowNew.ability
+        ability: allowNew.ability,
       });
     }
 
@@ -358,7 +358,7 @@ function withFormOptions(WrappedComponent) {
       return option.label;
     }
 
-    toggleOptionSelection = value => {
+    toggleOptionSelection = (value) => {
       const originalValue = this.selectToOriginalValue(value);
       if (this.isSelected(originalValue)) {
         this.deselect(originalValue);
@@ -367,19 +367,19 @@ function withFormOptions(WrappedComponent) {
       }
     };
 
-    select = value => {
+    select = (value) => {
       const originalValue = this.selectToOriginalValue(value);
       if (originalValue == null && this.allowsNew && value)
         return this.newThenSelectValue(value);
       return this.addOrReplaceSelection(originalValue);
     };
 
-    deselect = value => {
+    deselect = (value) => {
       if (!this.isMultiple) {
         if (this.currentValue === value) return this.replaceSelection(null);
       }
       const newValue = this.currentValue.filter(
-        compareValue => !this.doValuesMatch(value, compareValue)
+        (compareValue) => !this.doValuesMatch(value, compareValue),
       );
       if (newValue.length !== this.currentValue.length) {
         this.announceDeselection(value);
@@ -387,7 +387,7 @@ function withFormOptions(WrappedComponent) {
       this.replaceSelection(newValue);
     };
 
-    newThenSelectValue = inputValue => {
+    newThenSelectValue = (inputValue) => {
       const value = this.props.newToValue(inputValue);
       if (!isPromise(value)) return this.addOrReplaceSelection(value);
       value
@@ -400,7 +400,7 @@ function withFormOptions(WrappedComponent) {
           },
           () => {
             // noop
-          }
+          },
         );
     };
 
@@ -424,10 +424,10 @@ function withFormOptions(WrappedComponent) {
 
     reorderSelection = ({ id, position }) => {
       const thingToMove = this.currentValue.find(
-        thing => this.props.optionToString(thing) === id
+        (thing) => this.props.optionToString(thing) === id,
       );
       const newCollection = this.currentValue.filter(
-        thing => thing !== thingToMove
+        (thing) => thing !== thingToMove,
       );
       let insertIndex;
       switch (position) {
@@ -446,7 +446,7 @@ function withFormOptions(WrappedComponent) {
 
     selectAll = () => {
       if (!this.isMultiple) return;
-      const values = this.filteredOptions.map(option => option.originalValue);
+      const values = this.filteredOptions.map((option) => option.originalValue);
       this.replaceSelection(values);
     };
 
@@ -465,11 +465,11 @@ function withFormOptions(WrappedComponent) {
       this.setState({ announcement });
     }
 
-    isSelected = value => {
+    isSelected = (value) => {
       if (!this.isMultiple) return this.currentValue === value;
       if (this.isMultiple)
-        return this.currentValue.some(compareValue =>
-          this.doValuesMatch(value, compareValue)
+        return this.currentValue.some((compareValue) =>
+          this.doValuesMatch(value, compareValue),
         );
     };
 
@@ -481,7 +481,7 @@ function withFormOptions(WrappedComponent) {
       );
     }
 
-    onChange = event => {
+    onChange = (event) => {
       const value = event.target.value === "" ? null : event.target.value;
       const res = this.props.beforeOnChange(this.currentValue, value, event);
       if (!isPromise(res)) return this.select(value);
@@ -491,26 +491,26 @@ function withFormOptions(WrappedComponent) {
         },
         () => {
           // Do nothing!
-        }
+        },
       );
     };
 
-    activateOptionByValue = value => {
+    activateOptionByValue = (value) => {
       this.setState({ activeOption: this.findOption(value) });
     };
 
-    activateOption = option => {
+    activateOption = (option) => {
       this.setState({ activeOption: option });
     };
 
-    updateSearchWord = searchWord => {
+    updateSearchWord = (searchWord) => {
       this.setState({ searchWord: searchWord ? searchWord.trim() : null });
     };
 
     render() {
       return React.createElement(WrappedComponent, {
         ...this.props,
-        ...this.childProps
+        ...this.childProps,
       });
     }
   }

@@ -9,7 +9,7 @@ export default function useRedirectToFirstMatch({
   id,
   slug,
   candidates,
-  state
+  state,
 }) {
   const authentication = useAuthentication();
   const { pathname } = useLocation();
@@ -33,7 +33,7 @@ export default function useRedirectToFirstMatch({
 
     const authorization = new Authorization();
 
-    candidates.every(candidate => {
+    candidates.every((candidate) => {
       if (
         !candidate.ability ||
         authorization.authorize({ ...candidate, authentication })
@@ -42,7 +42,7 @@ export default function useRedirectToFirstMatch({
           navigate({
             pathname: candidate.path,
             state,
-            replace: true
+            replace: true,
           });
           return false;
         } else if (candidate.hasOwnProperty("route")) {
@@ -50,7 +50,7 @@ export default function useRedirectToFirstMatch({
           navigate({
             pathname: lh.link(candidate.route, ...args),
             state,
-            replace: true
+            replace: true,
           });
           return false;
         }

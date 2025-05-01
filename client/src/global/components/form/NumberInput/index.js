@@ -18,11 +18,11 @@ export default class FormNumberInput extends Component {
     value: PropTypes.any,
     focusOnMount: PropTypes.bool,
     errors: PropTypes.array,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
   };
 
   static defaultProps = {
-    focusOnMount: false
+    focusOnMount: false,
   };
 
   get idPrefix() {
@@ -37,7 +37,7 @@ export default class FormNumberInput extends Component {
     return "number-input-instructions";
   }
 
-  renderValue = value => {
+  renderValue = (value) => {
     if (isNull(value) || isUndefined(value)) return "";
     return value;
   };
@@ -45,7 +45,7 @@ export default class FormNumberInput extends Component {
   render() {
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <Styled.NumberInput
             {...this.props}
             id={`${this.idPrefix}-${id}`}

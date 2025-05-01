@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import FieldWrapper from "../../FieldWrapper";
 import { ErrorBoundary } from "react-error-boundary";
-import { Slate, withReact, ReactEditor } from "slate-react";
+import { Slate, withReact } from "slate-react";
 import { createEditor, Transforms } from "slate";
 import { withHistory, HistoryEditor } from "slate-history";
 import withPlugins from "../plugins";
@@ -24,7 +24,7 @@ export default function EditorWrapper({
   setHasErrors,
   warnErrors,
   setWarnErrors,
-  nextRef
+  nextRef,
 }) {
   const editorRef = useRef();
   if (!editorRef.current)
@@ -41,7 +41,7 @@ export default function EditorWrapper({
   const [localSlate, setLocalSlate] = useState(
     has(initialSlateValue, "error")
       ? initialSlateValue.default
-      : initialSlateValue
+      : initialSlateValue,
   );
 
   // The value prop on the Slate provider component is unhelpfully named. It is really initialSlateValue and is only read once, so it's easy for Slate to get out of sync when waiting for data from the api. This resets the editor each time the form model changes.
@@ -59,11 +59,11 @@ export default function EditorWrapper({
   /* eslint-enable react-hooks/exhaustive-deps */
 
   const setFormValueFromSlate = throttle(
-    val => setFormValue(serializeToHtml(val)),
-    500
+    (val) => setFormValue(serializeToHtml(val)),
+    500,
   );
 
-  const onChangeSlate = val => {
+  const onChangeSlate = (val) => {
     setLocalSlate(val);
     const changes = editor?.history?.undos ?? [];
     const shouldUpdateFormValue =
@@ -72,11 +72,11 @@ export default function EditorWrapper({
   };
 
   const setFormValueFromHtml = throttle(
-    val => setFormValue(removeFormatting(val)),
-    500
+    (val) => setFormValue(removeFormatting(val)),
+    500,
   );
 
-  const onChangeHtml = val => {
+  const onChangeHtml = (val) => {
     setLocalHtml(val);
     setFormValueFromHtml(val);
   };
@@ -98,7 +98,7 @@ export default function EditorWrapper({
               selectedCrumb,
               setSelectedCrumb,
               editingCrumb,
-              setEditingCrumb
+              setEditingCrumb,
             }}
           >
             <Slate
@@ -135,5 +135,5 @@ EditorWrapper.propTypes = {
   set: PropTypes.func,
   stylesheets: PropTypes.arrayOf(PropTypes.object),
   sectionId: PropTypes.string,
-  sectionBody: PropTypes.string
+  sectionBody: PropTypes.string,
 };

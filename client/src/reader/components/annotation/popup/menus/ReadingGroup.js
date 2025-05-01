@@ -20,7 +20,7 @@ function ReadingGroupMenu({
   readingGroups,
   currentReadingGroup,
   onSelect,
-  currentUser
+  currentUser,
 }) {
   const context = useReaderContext();
   const canEngagePublicly = context.attributes.abilities.engagePublicly;
@@ -67,7 +67,7 @@ function ReadingGroupMenu({
           selected={currentReadingGroup === "private"}
         />
         {!!readingGroups?.length &&
-          readingGroups.map(rg => (
+          readingGroups.map((rg) => (
             <RGMenuItem
               key={rg.id}
               menu={{ ...menu, visible }}
@@ -115,7 +115,7 @@ ReadingGroupMenu.propTypes = {
   readingGroups: PropTypes.array,
   currentReadingGroup: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
 };
 
 export default withCurrentUser(ReadingGroupMenu);

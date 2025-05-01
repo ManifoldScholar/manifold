@@ -3,14 +3,14 @@ import {
   drawerIndent,
   buttonUnstyled,
   utilityPrimary,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import { annotationList } from "theme/styles/variables/crossComponent";
 
 const {
   avatarHeight,
   avatarPlaceholderWidth,
-  avatarPlaceholderMarginInlineStart
+  avatarPlaceholderMarginInlineStart,
 } = annotationList;
 
 export default `

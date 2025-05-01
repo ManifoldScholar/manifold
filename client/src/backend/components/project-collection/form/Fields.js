@@ -14,7 +14,7 @@ class Fields extends Component {
   static propTypes = {
     handleDestroy: PropTypes.func,
     getModelValue: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get homepageVisible() {
@@ -33,8 +33,8 @@ class Fields extends Component {
             onClick: this.props.handleDestroy,
             icon: "delete32",
             label: t("actions.delete"),
-            className: "utility-button__icon--notice"
-          }
+            className: "utility-button__icon--notice",
+          },
         ]
       : [];
 
@@ -43,7 +43,7 @@ class Fields extends Component {
         <div>
           <Layout.DrawerHeader
             title={t("project_collections.manage", {
-              entity: t("glossary.project_collection_other")
+              entity: t("glossary.project_collection_other"),
             })}
             hideTitle
             buttons={buttons}
@@ -56,7 +56,7 @@ class Fields extends Component {
               label={t("project_collections.collection_title")}
               name="attributes[title]"
               placeholder={t(
-                "project_collections.collection_title_placeholder"
+                "project_collections.collection_title_placeholder",
               )}
             />
           </Layout.DrawerHeader>
@@ -81,7 +81,7 @@ class Fields extends Component {
             name="attributes[shortDescription]"
             placeholder={t("project_collections.short_description_placeholder")}
             instructions={t(
-              "project_collections.short_description_instructions"
+              "project_collections.short_description_instructions",
             )}
           />
           <Form.Upload
@@ -101,7 +101,7 @@ class Fields extends Component {
             options={[
               { label: "Square Inset", value: "square_inset" },
               { label: "Wide Inset", value: "wide_inset" },
-              { label: "Full Bleed", value: "full_bleed" }
+              { label: "Full Bleed", value: "full_bleed" },
             ]}
           />
           <Form.Switch
@@ -115,7 +115,7 @@ class Fields extends Component {
           {this.homepageVisible && (
             <Form.FieldGroup
               instructions={t(
-                "project_collections.homepage_visible_instructions"
+                "project_collections.homepage_visible_instructions",
               )}
             >
               <Form.DatePicker
@@ -132,7 +132,7 @@ class Fields extends Component {
                 label={t("project_collections.projects_shown")}
                 name="attributes[homepageCount]"
                 instructions={t(
-                  "project_collections.projects_shown_instructions"
+                  "project_collections.projects_shown_instructions",
                 )}
                 wide
               />
@@ -171,7 +171,7 @@ class Fields extends Component {
             label={t("project_collections.social_description")}
             name="attributes[socialDescription]"
             placeholder={t(
-              "project_collections.social_description_placeholder"
+              "project_collections.social_description_placeholder",
             )}
           />
         </Form.FieldGroup>

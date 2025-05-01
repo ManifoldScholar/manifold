@@ -21,82 +21,82 @@ class CommentDetail extends PureComponent {
     comment: PropTypes.object.isRequired,
     showLogin: PropTypes.func,
     parent: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      editor: null
+      editor: null,
     };
     this.replyToggleRef = React.createRef();
     this.editToggleRef = React.createRef();
   }
 
-  handleDelete = event => {
+  handleDelete = (event) => {
     this.props.handleDelete(event, this.props.comment);
   };
 
-  handleRestore = event => {
+  handleRestore = (event) => {
     this.props.handleRestore(event, this.props.comment);
   };
 
-  handleDestroy = event => {
+  handleDestroy = (event) => {
     this.props.handleDestroy(event, this.props.comment);
   };
 
   startEdit = () => {
     this.setState(
       {
-        editor: null
+        editor: null,
       },
       () => {
         this.setState({
-          editor: "edit"
+          editor: "edit",
         });
-      }
+      },
     );
   };
 
   startReply = () => {
     this.setState(
       {
-        editor: null
+        editor: null,
       },
       () => {
         this.setState({
-          editor: "reply"
+          editor: "reply",
         });
-      }
+      },
     );
   };
 
   stopEdit = () => {
     this.setState(
       {
-        editor: null
+        editor: null,
       },
       () => {
         if (this.editToggleRef.current) this.editToggleRef.current.focus();
-      }
+      },
     );
   };
 
   stopReply = () => {
     this.setState(
       {
-        editor: null
+        editor: null,
       },
       () => {
         if (this.replyToggleRef.current) this.replyToggleRef.current.focus();
-      }
+      },
     );
   };
 
   closeEditor = () => {
     this.setState({
-      editor: null
+      editor: null,
     });
   };
 

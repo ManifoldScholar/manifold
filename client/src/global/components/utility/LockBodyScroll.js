@@ -8,18 +8,18 @@ export default class LockBodyScroll extends PureComponent {
 
   static propTypes = {
     lockClass: PropTypes.string,
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
   };
 
   static defaultProps = {
-    lockClass: "no-scroll"
+    lockClass: "no-scroll",
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      currentScrollTop: __SERVER__ ? 0 : document.body.scrollTop
+      currentScrollTop: __SERVER__ ? 0 : document.body.scrollTop,
     };
   }
 

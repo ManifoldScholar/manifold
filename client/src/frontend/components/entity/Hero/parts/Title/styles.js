@@ -49,7 +49,7 @@ export const Subtitle = styled.div`
   ${respond(
     `margin-block-start: 11px;
     font-size: 24px;`,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 
   em,

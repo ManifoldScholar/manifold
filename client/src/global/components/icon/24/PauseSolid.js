@@ -8,7 +8,7 @@ export default class PauseSolid extends Component {
     size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     stroke: PropTypes.string,
     fill: PropTypes.string,
-    svgProps: PropTypes.object
+    svgProps: PropTypes.object,
   };
 
   static defaultProps = {
@@ -16,7 +16,7 @@ export default class PauseSolid extends Component {
     size: "inherit",
     stroke: "currentColor",
     fill: "currentColor",
-    svgProps: {}
+    svgProps: {},
   };
 
   get defaultHeight() {
@@ -66,7 +66,7 @@ export default class PauseSolid extends Component {
       className: this.classes,
       width: this.width,
       height: this.height,
-      viewBox: this.viewBox
+      viewBox: this.viewBox,
     };
 
     const svgProps = Object.assign(baseSvgProps, this.props.svgProps);

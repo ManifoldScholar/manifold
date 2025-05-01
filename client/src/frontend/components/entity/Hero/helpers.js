@@ -3,27 +3,27 @@ import orderBy from "lodash/orderBy";
 export const getAuth = (entity, authorization) => {
   const showErrors = authorization.current.authorizeAbility({
     entity,
-    ability: "update"
+    ability: "update",
   });
   const authorized = authorization.current.authorizeAbility({
     entity,
-    ability: "fullyRead"
+    ability: "fullyRead",
   });
   return { showErrors, authorized };
 };
 
-export const getPartsData = entity => {
+export const getPartsData = (entity) => {
   const callouts = entity.relationships?.actionCallouts ?? [];
   const orderedCallouts = orderBy(
     callouts,
     ["attributes.button", "attributes.location", "attributes.position"],
-    ["desc", "asc", "asc"]
+    ["desc", "asc", "asc"],
   );
-  const calloutsBySide = side =>
+  const calloutsBySide = (side) =>
     orderBy(
-      callouts.filter(callout => callout.attributes.location === side),
+      callouts.filter((callout) => callout.attributes.location === side),
       ["attributes.button", "attributes.position"],
-      ["desc", "asc"]
+      ["desc", "asc"],
     );
   const leftCallouts = calloutsBySide("left");
   const rightCallouts = calloutsBySide("right");
@@ -50,6 +50,6 @@ export const getPartsData = entity => {
     description,
     creators,
     flattenedCollaborators,
-    cover
+    cover,
   };
 };

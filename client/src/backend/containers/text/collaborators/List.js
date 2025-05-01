@@ -6,7 +6,7 @@ import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
-  ContributorRow
+  ContributorRow,
 } from "backend/components/list/EntitiesList";
 import Authorization from "helpers/authorization";
 import { useApiCallback } from "hooks";
@@ -21,13 +21,13 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
   const auth = new Authorization();
   const canUpdate = auth.authorizeAbility({
     entity: text.relationships.project,
-    ability: "updateMakers"
+    ability: "updateMakers",
   });
 
   const destroyCollaborator = useApiCallback(collaboratorsAPI.destroy);
 
   const onDelete = useCallback(
-    makerId => {
+    (makerId) => {
       const heading = t("modals.remove_contributor");
       if (confirm)
         confirm(heading, null, async () => {
@@ -35,7 +35,7 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
           refresh();
         });
     },
-    [text.id, confirm, destroyCollaborator, t, refresh]
+    [text.id, confirm, destroyCollaborator, t, refresh],
   );
 
   const [ordered, setOrdered] = useState([]);
@@ -44,23 +44,23 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
     const update = flattenedCollaborators.map((fc, i) => ({
       id: fc.id,
       position: i + 1,
-      collaborators: fc.attributes.collaborators
+      collaborators: fc.attributes.collaborators,
     }));
     setOrdered(update);
   };
 
   const updateProject = useApiCallback(textsAPI.update);
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (!ordered.length) return;
 
     const data = ordered
-      .map(fc => {
-        const collaborators = fc.collaborators.map(c => ({
+      .map((fc) => {
+        const collaborators = fc.collaborators.map((c) => ({
           id: c,
-          type: "collaborators"
+          type: "collaborators",
         }));
         return collaborators;
       })
@@ -68,7 +68,7 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
 
     const { errors } = await updateProject(text.id, {
       attributes: {},
-      relationships: { collaborators: { data } }
+      relationships: { collaborators: { data } },
     });
 
     if (errors) {
@@ -81,7 +81,7 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
       {childRoutes(route, {
         drawer: true,
         drawerProps: { closeUrl },
-        childProps: { refresh, textId: text.id }
+        childProps: { refresh, textId: text.id },
       })}
       <form
         onSubmit={onSubmit}
@@ -105,7 +105,7 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
                     path={lh.link("backendTextCollaboratorNew", text.id)}
                     type="add"
                     text={t("projects.add_contributor_label")}
-                  />
+                  />,
                 ]
               : []
           }
@@ -124,5 +124,5 @@ TextCollaboratorsContainer.propTypes = {
   text: PropTypes.object,
   refresh: PropTypes.func.isRequired,
   route: PropTypes.object,
-  confirm: PropTypes.func.isRequired
+  confirm: PropTypes.func.isRequired,
 };

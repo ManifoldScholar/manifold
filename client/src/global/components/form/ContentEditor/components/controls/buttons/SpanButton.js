@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useSlate, ReactEditor } from "slate-react";
+import { useSlate } from "slate-react";
 import { useTranslation } from "react-i18next";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
@@ -31,7 +31,7 @@ const SpanButton = ({ format, ...rest }, ref) => {
         {...rest}
         aria-label={t("editor.controls.labels.span")}
         data-active={isElementActive(editor, format)[0]}
-        onClick={event => {
+        onClick={(event) => {
           event.preventDefault();
           if (!selection) return;
           toggleOrWrapNode(editor, format);

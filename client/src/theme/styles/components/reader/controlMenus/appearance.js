@@ -3,7 +3,7 @@ import {
   respond,
   buttonUnstyled,
   defaultTransitionProps,
-  defaultHoverStyle
+  defaultHoverStyle,
 } from "theme/styles/mixins";
 import { uiPanelMenu } from "../uiPanelMenu";
 
@@ -165,7 +165,7 @@ export default `
       ${respond(
         `width: 35px;
       height: 35px;`,
-        50
+        50,
       )}
 
       &:disabled,

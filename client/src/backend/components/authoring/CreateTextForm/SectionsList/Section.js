@@ -10,13 +10,13 @@ export default function Section({
   onDelete,
   index,
   sectionCount,
-  setSectionOrder
+  setSectionOrder,
 }) {
   const popoverDisclosureRef = useRef(null);
 
   const { t } = useTranslation();
 
-  const handleDelete = e => {
+  const handleDelete = (e) => {
     e.preventDefault();
     onDelete(section.id);
   };
@@ -45,7 +45,7 @@ export default function Section({
                 const result = {
                   draggableId: section.id,
                   destination: {
-                    index: index - 1
+                    index: index - 1,
                   },
                   title: section.name,
                   announce: true,
@@ -53,11 +53,11 @@ export default function Section({
                     if (popoverDisclosureRef.current) {
                       popoverDisclosureRef.current.focus();
                     }
-                  }
+                  },
                 };
                 setSectionOrder(result);
               },
-              disabled: index === 0
+              disabled: index === 0,
             },
             {
               id: "down",
@@ -66,7 +66,7 @@ export default function Section({
                 const result = {
                   draggableId: section.id,
                   destination: {
-                    index: index + 1
+                    index: index + 1,
                   },
                   title: section.name,
                   announce: true,
@@ -74,12 +74,12 @@ export default function Section({
                     if (popoverDisclosureRef.current) {
                       popoverDisclosureRef.current.focus();
                     }
-                  }
+                  },
                 };
                 setSectionOrder(result);
               },
-              disabled: index === sectionCount - 1
-            }
+              disabled: index === sectionCount - 1,
+            },
           ]}
         />
       </Styled.ButtonGroup>
@@ -94,5 +94,5 @@ Section.propTypes = {
   onDelete: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   setSectionOrder: PropTypes.func.isRequired,
-  sectionCount: PropTypes.number.isRequired
+  sectionCount: PropTypes.number.isRequired,
 };

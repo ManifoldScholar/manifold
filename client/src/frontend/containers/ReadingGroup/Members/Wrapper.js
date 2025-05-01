@@ -18,14 +18,14 @@ function ReadingGroupsMembersContainer({ route, readingGroup, ...restProps }) {
   return childRoutes(route, {
     childProps: {
       readingGroup,
-      ...restProps
-    }
+      ...restProps,
+    },
   });
 }
 
 ReadingGroupsMembersContainer.propTypes = {
   route: PropTypes.object.isRequired,
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
 };
 
 export default ReadingGroupsMembersContainer;

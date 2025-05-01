@@ -25,7 +25,7 @@ Empty.displayName =
   "ReadingGroup.Collecting.CollectionEditor.SortableCollectables.Empty";
 
 Empty.propTypes = {
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
 };
 
 export default Empty;

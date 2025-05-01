@@ -7,7 +7,7 @@ export default {
     return {
       endpoint: "/api/v1/subjects",
       method: "GET",
-      options: { params }
+      options: { params },
     };
   },
 
@@ -16,8 +16,8 @@ export default {
       endpoint: "/api/v1/subjects",
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "subjects", data: subject })
-      }
+        body: JSON.stringify({ type: "subjects", data: subject }),
+      },
     };
   },
 
@@ -26,8 +26,8 @@ export default {
       endpoint: `/api/v1/subjects/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "subjects", data: subject })
-      }
+        body: JSON.stringify({ type: "subjects", data: subject }),
+      },
     };
   },
 
@@ -35,7 +35,7 @@ export default {
     return {
       endpoint: `/api/v1/subjects/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -43,7 +43,7 @@ export default {
     return {
       endpoint: `/api/v1/subjects/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -53,8 +53,8 @@ export default {
       endpoint: `/api/v1/subjects/`,
       method: "GET",
       options: {
-        params: { filter }
-      }
+        params: { filter },
+      },
     };
-  }
+  },
 };

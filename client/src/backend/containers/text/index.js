@@ -3,7 +3,7 @@ import Metadata from "./Metadata";
 import Wrapper from "./Wrapper";
 import {
   List as CollaboratorsList,
-  Add as AddCollaborator
+  Add as AddCollaborator,
 } from "./collaborators";
 import Ingestion from "./ingestion";
 import Styles from "./Stylesheets";
@@ -27,5 +27,5 @@ export default {
   Section,
   TableOfContents,
   TOCEntry,
-  Assets
+  Assets,
 };

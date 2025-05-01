@@ -14,16 +14,16 @@ export default class Table extends PureComponent {
     unit: PropTypes.string.isRequired,
     filters: PropTypes.node,
     filterCount: PropTypes.number,
-    children: props => {
+    children: (props) => {
       React.Children.toArray(props.children).every(
-        child => child.type === Column
+        (child) => child.type === Column,
       );
-    }
+    },
   };
 
   get containerClassNames() {
     return classNames({
-      "group-name": true
+      "group-name": true,
     });
   }
 
@@ -31,7 +31,7 @@ export default class Table extends PureComponent {
     return {
       pagination: this.props.pagination,
       unit: this.props.unit,
-      showRange: true
+      showRange: true,
     };
   }
 

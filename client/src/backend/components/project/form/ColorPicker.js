@@ -13,7 +13,7 @@ class ColorPicker extends Component {
     wrapperClass: PropTypes.string,
     getModelValue: PropTypes.func,
     label: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   label() {
@@ -31,44 +31,44 @@ class ColorPicker extends Component {
       {
         value: "primary",
         label: t("projects.thumbnail.green"),
-        className: "color-picker__item--primary"
+        className: "color-picker__item--primary",
       },
       {
         value: "secondary",
         label: t("projects.thumbnail.gray"),
-        className: "color-picker__item--secondary"
+        className: "color-picker__item--secondary",
       },
       {
         value: "tertiary",
         label: t("projects.thumbnail.blue"),
-        className: "color-picker__item--tertiary"
+        className: "color-picker__item--tertiary",
       },
       {
         value: "quaternary",
         label: t("projects.thumbnail.orange"),
-        className: "color-picker__item--quaternary"
+        className: "color-picker__item--quaternary",
       },
       {
         value: "quinary",
         label: t("projects.thumbnail.violet"),
-        className: "color-picker__item--quinary"
+        className: "color-picker__item--quinary",
       },
       {
         value: "sentary",
         label: t("projects.thumbnail.white"),
-        className: "color-picker__item--sentary"
-      }
+        className: "color-picker__item--sentary",
+      },
     ];
 
     return (
-      <UIDConsumer name={id => `${this.idForPrefix}-${id}`}>
-        {id => (
+      <UIDConsumer name={(id) => `${this.idForPrefix}-${id}`}>
+        {(id) => (
           <div
             className="color-picker__list"
             role="group"
             aria-label={this.label()}
           >
-            {avatarColors.map(color => {
+            {avatarColors.map((color) => {
               const checked =
                 this.props.getModelValue("attributes[avatarColor]") ===
                 color.value;
@@ -77,7 +77,7 @@ class ColorPicker extends Component {
                 "color-picker__item",
                 "radio",
                 colorClass,
-                { checked }
+                { checked },
               );
               return (
                 <label

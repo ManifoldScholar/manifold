@@ -10,7 +10,7 @@ export default class CollectionProjectRow extends PureComponent {
     placeholderMode: PropTypes.string,
     listStyle: PropTypes.oneOf(["rows", "grid"]),
     figure: PropTypes.node,
-    compact: PropTypes.bool
+    compact: PropTypes.bool,
   };
 
   get project() {

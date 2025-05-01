@@ -4,14 +4,14 @@ import { linkUnstyled } from "theme/styles/mixins";
 
 const underlineStyleKeys = ["solid", "dashes", "dots", "wavy"];
 
-const underlineStyles = color => {
+const underlineStyles = (color) => {
   return underlineStyleKeys
     .map(
-      style => `
+      (style) => `
         &.annotation-${style} {
           ${styledUnderline(style, color)}
         }
-     `
+     `,
     )
     .join("");
 };

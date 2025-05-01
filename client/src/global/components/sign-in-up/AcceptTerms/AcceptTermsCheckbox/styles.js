@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   screenReaderText,
   utilityPrimary,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.label`

@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: `/api/v1/events/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

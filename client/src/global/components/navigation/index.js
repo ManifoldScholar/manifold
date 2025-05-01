@@ -5,5 +5,5 @@ import Static from "./Static";
 export default {
   Primary,
   Mobile,
-  Static
+  Static,
 };

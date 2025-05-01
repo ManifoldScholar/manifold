@@ -3,11 +3,11 @@ import {
   renderedElements,
   markElements,
   nestableElements,
-  rteVoids
+  rteVoids,
 } from "../utils/elements";
 import has from "lodash/has";
 
-const isHtmlVideo = element => {
+const isHtmlVideo = (element) => {
   const { htmlAttrs, children } = element ?? {};
   const src = htmlAttrs?.src;
   if (!src || !/api\/proxy\//.test(src)) return true;
@@ -29,11 +29,10 @@ export const isSlateVoid = (type, element) => {
   return !(isRteEl || isRendered || isMark || isAssetVideo);
 };
 
-/* eslint-disable no-param-reassign */
-const withVoids = editor => {
+const withVoids = (editor) => {
   const { isVoid } = editor;
 
-  editor.isVoid = element => {
+  editor.isVoid = (element) => {
     return isSlateVoid(element.type, element) || isVoid(element);
   };
 

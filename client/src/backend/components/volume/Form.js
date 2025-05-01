@@ -13,7 +13,7 @@ function VolumeForm({ journalId, model, ...props }) {
       {...props}
       name={model ? "update-journal-volume" : "create-journal-volume"}
       update={journalVolumesAPI.update}
-      create={toCreate => journalVolumesAPI.create(journalId, toCreate)}
+      create={(toCreate) => journalVolumesAPI.create(journalId, toCreate)}
       className="form-secondary"
       model={model}
     >
@@ -37,7 +37,7 @@ function VolumeForm({ journalId, model, ...props }) {
 
 VolumeForm.prop_types = {
   model: PropTypes.object,
-  journalId: PropTypes.string.isRequired
+  journalId: PropTypes.string.isRequired,
 };
 
 export default VolumeForm;

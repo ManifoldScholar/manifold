@@ -19,5 +19,5 @@ EntitlementNew.displayName = "Entitlements.New";
 
 EntitlementNew.propTypes = {
   entity: PropTypes.object,
-  closeUrl: PropTypes.string
+  closeUrl: PropTypes.string,
 };

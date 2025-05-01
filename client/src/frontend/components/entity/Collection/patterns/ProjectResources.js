@@ -25,7 +25,7 @@ function ProjectResourcesEntityCollection({
       title={t("pages.resources_all")}
       icon="resources64"
       filterProps={showFilters ? filterProps : null}
-      BodyComponent={props => (
+      BodyComponent={(props) => (
         <ResourceList.Cards
           project={project}
           resources={resources}
@@ -39,8 +39,8 @@ function ProjectResourcesEntityCollection({
           : {
               pagination: get(resourcesMeta, "pagination"),
               unit: t("glossary.resource", {
-                count: resourcesMeta?.pagination?.totalCount || 0
-              })
+                count: resourcesMeta?.pagination?.totalCount || 0,
+              }),
             }
       }
       paginationProps={
@@ -48,7 +48,7 @@ function ProjectResourcesEntityCollection({
           ? {}
           : {
               pagination: get(resourcesMeta, "pagination"),
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -65,7 +65,7 @@ ProjectResourcesEntityCollection.propTypes = {
   project: PropTypes.object,
   filterProps: shapes.filters,
   paginationProps: shapes.pagination,
-  itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+  itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6]),
 };
 
 export default ProjectResourcesEntityCollection;

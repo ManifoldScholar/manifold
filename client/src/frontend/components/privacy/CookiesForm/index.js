@@ -10,10 +10,10 @@ export default function CookiesForm() {
   const { t } = useTranslation();
   const settings = useFromStore("settings", "select");
 
-  const manifoldAnalyticsEnabled = !settings?.attributes?.general
-    ?.disableInternalAnalytics;
-  const googleAnalyticsEnabled = !!settings?.attributes?.integrations
-    ?.gaFourTrackingId;
+  const manifoldAnalyticsEnabled =
+    !settings?.attributes?.general?.disableInternalAnalytics;
+  const googleAnalyticsEnabled =
+    !!settings?.attributes?.integrations?.gaFourTrackingId;
 
   const { currentUser } = useFromStore("authentication") ?? {};
   const { consentManifoldAnalytics, consentGoogleAnalytics } =
@@ -21,7 +21,7 @@ export default function CookiesForm() {
 
   const [cookiePrefs, setCookiePrefs] = useState({
     manifold: consentManifoldAnalytics ? "yes" : "no",
-    google: consentGoogleAnalytics ? "yes" : "no"
+    google: consentGoogleAnalytics ? "yes" : "no",
   });
 
   const formatAttributes = () => ({
@@ -30,14 +30,14 @@ export default function CookiesForm() {
       : cookiePrefs.manifold === "yes",
     consentGoogleAnalytics: !googleAnalyticsEnabled
       ? null
-      : cookiePrefs.google === "yes"
+      : cookiePrefs.google === "yes",
   });
 
   const notifyUpdate = useNotification(() => ({
     level: 0,
     id: `CURRENT_USER_UPDATED`,
     heading: t("forms.signin_overlay.update_notification_header"),
-    expiration: 3000
+    expiration: 3000,
   }));
 
   return (

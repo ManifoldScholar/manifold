@@ -5,5 +5,5 @@ import DrawerHeader from "./DrawerHeader";
 export default {
   Builder,
   TypeForm,
-  DrawerHeader
+  DrawerHeader,
 };

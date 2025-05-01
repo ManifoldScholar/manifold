@@ -22,7 +22,7 @@ Annotate.displayName = "Annotation.Popup.Menus.MainMenu.Annotate";
 
 Annotate.propTypes = {
   menu: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
 };
 
 export default Annotate;

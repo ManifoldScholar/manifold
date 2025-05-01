@@ -1,7 +1,7 @@
 import { handleActions } from "redux-actions";
 
 const initialState = {
-  project: {}
+  project: {},
 };
 
 const setProjectFilters = (state, action) => {
@@ -10,7 +10,7 @@ const setProjectFilters = (state, action) => {
 
 export default handleActions(
   {
-    SET_PROJECT_FILTERS: setProjectFilters
+    SET_PROJECT_FILTERS: setProjectFilters,
   },
-  initialState
+  initialState,
 );

@@ -10,16 +10,16 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import EntitiesList, {
   Button,
-  ExportTargetRow
+  ExportTargetRow,
 } from "backend/components/list/EntitiesList";
 
 const { request } = entityStoreActions;
 
 export class ExportTargetsContainerImplementation extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       exportTargets: select(requests.beExportTargets, state.entityStore),
-      exportTargetMeta: meta(requests.beExportTargets, state.entityStore)
+      exportTargetMeta: meta(requests.beExportTargets, state.entityStore),
     };
   };
 
@@ -28,14 +28,14 @@ export class ExportTargetsContainerImplementation extends PureComponent {
   static propTypes = {
     // export target information is required to render the component,
     // but can be null until the async network request is fulfilled
-    /* eslint-disable react/require-default-props */
+
     exportTargets: PropTypes.array,
     exportTargetsMeta: PropTypes.object,
-    /* eslint-enable react/require-default-props */
+
     match: PropTypes.object.isRequired,
     route: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -65,7 +65,7 @@ export class ExportTargetsContainerImplementation extends PureComponent {
     const active = match.params.id || "";
     const drawerProps = {
       closeUrl: lh.link("backendSettingsExportTargets"),
-      lockScroll: "always"
+      lockScroll: "always",
     };
 
     return (
@@ -84,7 +84,7 @@ export class ExportTargetsContainerImplementation extends PureComponent {
               text={t("settings.export_targets.button_label")}
               authorizedFor="exportTarget"
               type="add"
-            />
+            />,
           ]}
         />
       </>
@@ -94,6 +94,6 @@ export class ExportTargetsContainerImplementation extends PureComponent {
 
 export default withTranslation()(
   connect(ExportTargetsContainerImplementation.mapStateToProps)(
-    ExportTargetsContainerImplementation
-  )
+    ExportTargetsContainerImplementation,
+  ),
 );

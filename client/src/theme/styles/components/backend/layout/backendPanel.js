@@ -38,7 +38,7 @@ export default `
           max-width: 312px;
           margin-right: 46px;
         `,
-        75
+        75,
       )}
 
       ${respond(`min-width: auto;`, 85)}
@@ -48,7 +48,7 @@ export default `
           min-width: 312px;
           margin-right: 70px;
         `,
-        110
+        110,
       )}
     }
 

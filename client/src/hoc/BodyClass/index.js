@@ -5,7 +5,7 @@ import withSideEffect from "react-side-effect";
 class BodyClass extends Component {
   static propTypes = {
     className: PropTypes.string.isRequired,
-    children: PropTypes.object
+    children: PropTypes.object,
   };
 
   render() {
@@ -17,7 +17,7 @@ class BodyClass extends Component {
 }
 
 function reducePropsToState(propsList) {
-  const classes = propsList.map(prop => {
+  const classes = propsList.map((prop) => {
     return prop.className;
   });
   return classes;
@@ -29,5 +29,5 @@ function handleStateChangeOnClient(bodyClasses) {
 
 export default withSideEffect(
   reducePropsToState,
-  handleStateChangeOnClient
+  handleStateChangeOnClient,
 )(BodyClass);

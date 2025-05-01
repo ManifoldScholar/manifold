@@ -24,17 +24,17 @@ function SearchResultsTypeJournalIssue({ result, highlightedAttribute }) {
   const title = parentVolume
     ? t("journals.volume_issue_number", {
         volNum: parentVolume.number,
-        issNum: highlightedAttribute("number")
+        issNum: highlightedAttribute("number"),
       })
     : t("journals.issue_number", {
-        issNum: highlightedAttribute("number")
+        issNum: highlightedAttribute("number"),
       });
 
   const { searchableType, searchableId } = result.attributes ?? {};
   const collectable = {
     type: searchableType,
     id: searchableId,
-    attributes: { title }
+    attributes: { title },
   };
   const creators = model?.relationships?.creators ?? [];
 
@@ -45,10 +45,10 @@ function SearchResultsTypeJournalIssue({ result, highlightedAttribute }) {
     parentUrl: parentJournal
       ? lh.link("frontendJournalDetail", parentJournal.attributes?.slug)
       : null,
-    attribution: creators.map(c => c.attributes.fullName).join(", "),
+    attribution: creators.map((c) => c.attributes.fullName).join(", "),
     description: highlightedAttribute("subtitle"),
     label: t("glossary.issue_one"),
-    collectable
+    collectable,
   };
 
   return (
@@ -81,7 +81,7 @@ SearchResultsTypeJournalIssue.displayName = "Search.Results.Type.JournalIssue";
 
 SearchResultsTypeJournalIssue.propTypes = {
   result: PropTypes.object,
-  highlightedAttribute: PropTypes.func.isRequired
+  highlightedAttribute: PropTypes.func.isRequired,
 };
 
 export default withSearchResultHelper(SearchResultsTypeJournalIssue);

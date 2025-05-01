@@ -28,5 +28,5 @@ TextCreateContainer.displayName = "Project.Text.Create";
 
 TextCreateContainer.propTypes = {
   project: PropTypes.object.isRequired,
-  refresh: PropTypes.func
+  refresh: PropTypes.func,
 };

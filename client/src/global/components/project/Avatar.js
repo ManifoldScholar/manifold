@@ -6,7 +6,7 @@ export default class ProjectAvatar extends Component {
   static displayName = "Project.Avatar";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
   };
 
   renderAvatarImage(project) {

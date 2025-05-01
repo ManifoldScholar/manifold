@@ -3,7 +3,7 @@ import {
   SecondaryInput,
   WrapperWithActions,
   Action,
-  ActionGroup
+  ActionGroup,
 } from "global/components/form/BaseInput/styles";
 import { respond } from "theme/styles/mixins";
 
@@ -26,7 +26,7 @@ export const Wrapper = styled(WrapperWithActions)`
           "label label" auto
           "input actions" auto / 70% 30%;
       `,
-    60
+    60,
   )}
 `;
 

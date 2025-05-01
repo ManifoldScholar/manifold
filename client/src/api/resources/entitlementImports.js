@@ -4,8 +4,8 @@ export default {
       endpoint: `/api/v1/entitlement_imports`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -14,8 +14,11 @@ export default {
       endpoint: `/api/v1/entitlement_imports`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "entitlement_imports", data: entitlement })
-      }
+        body: JSON.stringify({
+          type: "entitlement_imports",
+          data: entitlement,
+        }),
+      },
     };
-  }
+  },
 };

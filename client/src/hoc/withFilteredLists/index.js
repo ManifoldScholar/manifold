@@ -28,5 +28,5 @@ export {
   assetFilters,
   readingGroupFilters,
   annotationFilters,
-  commentFilters
+  commentFilters,
 };

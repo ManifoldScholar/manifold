@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 import Dashboards from "backend/containers/dashboards";
 import Authorize from "hoc/Authorize";
 import HeadContent from "global/components/HeadContent";
@@ -16,7 +15,7 @@ export default function DashboardContainer() {
         "project_creator",
         "project_editor",
         "project_property_manager",
-        "journal_editor"
+        "journal_editor",
       ]}
       failureNotification
     >

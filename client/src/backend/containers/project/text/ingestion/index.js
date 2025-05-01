@@ -3,5 +3,5 @@ import Edit from "./Edit";
 
 export default {
   New,
-  Edit
+  Edit,
 };

@@ -4,7 +4,7 @@ import {
   listUnstyled,
   formInputBase,
   defaultTransitionProps,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import BaseList from "./List";
@@ -100,8 +100,8 @@ export const ResultsList = styled.ul`
   border-style: solid;
   border-width: 0 1px 1px;
   opacity: 0;
-  transition: opacity var(--transition-duration-fast)
-      var(--transition-timing-function),
+  transition:
+    opacity var(--transition-duration-fast) var(--transition-timing-function),
     visibility var(--transition-duration-fast) var(--transition-timing-function);
   z-index: 100;
 
@@ -114,13 +114,12 @@ export const ResultsList = styled.ul`
 
 export const Result = styled.li`
   --Result-bg-color: ${({ $active, $selected }) => {
-    if ($active && $selected) return "var(--color-base-neutral75);";
-    if ($active) return "var(--color-base-neutral80);";
-    if ($selected) return "var(--color-base-neutral85);";
-    return "inherit;";
-  }}
-
-  padding: 8px 17px;
+      if ($active && $selected) return "var(--color-base-neutral75);";
+      if ($active) return "var(--color-base-neutral80);";
+      if ($selected) return "var(--color-base-neutral85);";
+      return "inherit;";
+    }}
+    padding: 8px 17px;
   font-family: var(--font-family-sans);
   color: var(--color-base-neutral10);
   cursor: pointer;

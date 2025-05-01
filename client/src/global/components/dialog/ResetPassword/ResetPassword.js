@@ -11,21 +11,21 @@ export default function ResetPasswordBase({ resolve, reject, user }) {
   const [confirm, setConfirm] = useState(false);
 
   const handleRejectClick = useCallback(
-    event => {
+    (event) => {
       if (reject) {
         event.preventDefault();
         reject();
       }
     },
-    [reject]
+    [reject],
   );
 
   const handleKeyPress = useCallback(
-    event => {
+    (event) => {
       event.preventDefault();
       if (event.keyCode === 27) return handleRejectClick(event);
     },
-    [handleRejectClick]
+    [handleRejectClick],
   );
 
   useEffect(() => {
@@ -61,5 +61,5 @@ ResetPasswordBase.displayName = "Dialog.ResetPassword";
 ResetPasswordBase.propTypes = {
   resolve: PropTypes.func.isRequired,
   reject: PropTypes.func.isRequired,
-  user: PropTypes.object
+  user: PropTypes.object,
 };

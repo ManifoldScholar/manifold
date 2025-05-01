@@ -14,7 +14,7 @@ class ResourceDetail extends PureComponent {
   static propTypes = {
     resource: PropTypes.object,
     handleClose: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -25,7 +25,7 @@ class ResourceDetail extends PureComponent {
     window.removeEventListener("keyup", this.handleEscape);
   }
 
-  handleEscape = event => {
+  handleEscape = (event) => {
     if (event.keyCode === 27) {
       this.props.handleClose(event);
     }
@@ -36,7 +36,7 @@ class ResourceDetail extends PureComponent {
     return lh.link(
       "frontendProjectResource",
       resource.attributes.projectSlug,
-      resource.attributes.slug
+      resource.attributes.slug,
     );
   }
 
@@ -63,7 +63,7 @@ class ResourceDetail extends PureComponent {
             {!isEmpty(attr.descriptionFormatted) ? (
               <div
                 dangerouslySetInnerHTML={{
-                  __html: attr.descriptionFormatted
+                  __html: attr.descriptionFormatted,
                 }}
               />
             ) : null}
@@ -107,7 +107,7 @@ class ResourceDetail extends PureComponent {
               className={classNames(
                 "button-secondary",
                 "button-secondary--outlined",
-                "button-secondary--dull"
+                "button-secondary--dull",
               )}
               data-id="close-overlay"
             >

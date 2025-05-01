@@ -23,7 +23,7 @@ export class ResourceImportWrapper extends PureComponent {
     if (!match.params.projectId || !match.params.id) return;
     const call = resourceImportsAPI.show(
       match.params.projectId,
-      match.params.id
+      match.params.id,
     );
     const resourceImport = request(call, requests.beResourceImportFetch);
     return dispatch(resourceImport);
@@ -34,9 +34,9 @@ export class ResourceImportWrapper extends PureComponent {
       resourceImport: grab(
         "resourceImports",
         ownProps.match.params.id,
-        state.entityStore
+        state.entityStore,
       ),
-      project: select(requests.feProject, state.entityStore)
+      project: select(requests.feProject, state.entityStore),
     };
   };
 
@@ -48,13 +48,13 @@ export class ResourceImportWrapper extends PureComponent {
     project: PropTypes.object,
     resourceImport: PropTypes.object,
     route: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      fileLoaded: false
+      fileLoaded: false,
     };
   }
 
@@ -72,18 +72,18 @@ export class ResourceImportWrapper extends PureComponent {
     const { match, dispatch } = this.props;
     const call = resourceImportsAPI.show(
       match.params.projectId,
-      match.params.id
+      match.params.id,
     );
     const resourceImport = request(call, requests.beResourceImportFetch);
     return dispatch(resourceImport);
   };
 
-  create = model => {
+  create = (model) => {
     const { match } = this.props;
     return resourceImportsAPI.create(match.params.projectId, model);
   };
 
-  executeUpdate = attributes => {
+  executeUpdate = (attributes) => {
     const { dispatch } = this.props;
     const call = this.update(null, attributes);
     const resourceImport = request(call, requests.beResourceImportFetch);
@@ -95,7 +95,7 @@ export class ResourceImportWrapper extends PureComponent {
     return resourceImportsAPI.update(
       match.params.projectId,
       match.params.id,
-      model
+      model,
     );
   };
 
@@ -108,7 +108,7 @@ export class ResourceImportWrapper extends PureComponent {
       fetch: this.fetch,
       create: this.create,
       update: this.update,
-      executeUpdate: this.executeUpdate
+      executeUpdate: this.executeUpdate,
     };
     return childRoutes(this.props.route, { childProps });
   }
@@ -123,20 +123,20 @@ export class ResourceImportWrapper extends PureComponent {
       "import",
       project,
       belongsToJournalIssue,
-      t
+      t,
     );
 
     const parentProps = {
       parentTitle: project.attributes.titleFormatted,
       parentSubtitle: project.attributes.subtitle,
-      parentId: project.id
+      parentId: project.id,
     };
 
     return (
       <Authorize
         entity={project}
         failureFatalError={{
-          body: t("resources.import.unauthorized")
+          body: t("resources.import.unauthorized"),
         }}
         ability={["update"]}
       >

@@ -15,11 +15,11 @@ class CategoryListUncategorized extends PureComponent {
     callbacks: PropTypes.object.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
     t: PropTypes.func,
-    categoryCount: PropTypes.number.isRequired
+    categoryCount: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
-    texts: []
+    texts: [],
   };
 
   get category() {

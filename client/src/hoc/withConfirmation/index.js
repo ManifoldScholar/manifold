@@ -8,7 +8,7 @@ function getDisplayName(WrappedComponent) {
 
 function withConfirmation(WrappedComponent) {
   const displayName = `HigherOrder.WithConfirmation('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithConfirmation extends Component {
@@ -38,7 +38,7 @@ function withConfirmation(WrappedComponent) {
         },
         () => {
           this.closeDialog();
-        }
+        },
       );
       return promise;
     };
@@ -51,7 +51,7 @@ function withConfirmation(WrappedComponent) {
           )}
           {React.createElement(WrappedComponent, {
             ...this.props,
-            confirm: this.confirm
+            confirm: this.confirm,
           })}
         </>
       );

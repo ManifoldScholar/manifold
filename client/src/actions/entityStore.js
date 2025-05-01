@@ -3,7 +3,7 @@ import isString from "lodash/isString";
 import isObject from "lodash/isObject";
 import { v1 as uuidv1 } from "uuid";
 
-export const flush = createAction("ENTITY_STORE_FLUSH", passedMetas => {
+export const flush = createAction("ENTITY_STORE_FLUSH", (passedMetas) => {
   let metas;
   if (isString(passedMetas)) metas = [passedMetas];
   if (!metas && isObject(passedMetas)) metas = Object.values(passedMetas);
@@ -19,6 +19,6 @@ export const request = createAction(
   },
   (apiConfig, meta = null) => {
     return meta || uuidv1();
-  }
+  },
 );
 /* eslint-enable no-unused-vars */

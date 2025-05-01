@@ -6,7 +6,7 @@ import EntityRow from "../Row";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
-const extToTag = ext => {
+const extToTag = (ext) => {
   switch (ext?.toLowerCase()) {
     case "gif":
     case "jpeg":
@@ -47,7 +47,7 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
     sourceIdentifier,
     displayName,
     attachmentExtension,
-    attachmentContentType
+    attachmentContentType,
   } = asset?.attributes ?? {};
 
   const src = `/api/proxy/ingestion_sources/${asset.id}`;
@@ -62,7 +62,7 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
     </Styled.IconWrapper>
   );
 
-  const onCopy = e => {
+  const onCopy = (e) => {
     e.preventDefault();
     if (navigator.clipboard) {
       navigator.clipboard.writeText(src);
@@ -83,14 +83,14 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
       <button
         className="entity-row__utility-button"
         onClick={() => onDelete(asset.id)}
-        ariaLabel={t("actions.delete")}
+        aria-label={t("actions.delete")}
       >
         <Utility.IconComposer icon="delete32" size={26} />
       </button>
       <button
         className="entity-row__utility-button"
         onClick={() => onEdit(asset.id)}
-        ariaLabel={t("actions.edit")}
+        aria-label={t("actions.edit")}
       >
         <Utility.IconComposer icon="annotate32" size={26} />
       </button>
@@ -103,7 +103,7 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
     figure,
     figureHasWrapper: true,
     label: extToTag(attachmentExtension),
-    ...rest
+    ...rest,
   };
 
   return <EntityRow utility={utility} {...rowProps} />;
@@ -114,5 +114,5 @@ AssetRow.displayName = "EntitiesList.Entity.AssetRow";
 AssetRow.propTypes = {
   entity: PropTypes.object,
   onDelete: PropTypes.func,
-  onEdit: PropTypes.func
+  onEdit: PropTypes.func,
 };

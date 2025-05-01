@@ -9,7 +9,7 @@ export default class FormOptionRow extends PureComponent {
 
   static propTypes = {
     entity: PropTypes.any,
-    active: PropTypes.string
+    active: PropTypes.string,
   };
 
   get subject() {
@@ -34,8 +34,8 @@ export default class FormOptionRow extends PureComponent {
 
   get name() {
     const { options } = this.props;
-    const option = options.find(o =>
-      this.compareValues(o.originalValue, this.subject)
+    const option = options.find((o) =>
+      this.compareValues(o.originalValue, this.subject),
     );
     if (option) return option.label;
     if (isString(this.subject)) return this.subject;
@@ -45,7 +45,7 @@ export default class FormOptionRow extends PureComponent {
   render() {
     const additionalProps = {
       title: this.name,
-      active: this.active
+      active: this.active,
     };
     return <EntityRow {...this.props} {...additionalProps} />;
   }

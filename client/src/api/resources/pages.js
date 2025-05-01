@@ -4,8 +4,8 @@ export default {
       endpoint: "/api/v1/pages",
       method: "GET",
       options: {
-        params: { filter }
-      }
+        params: { filter },
+      },
     };
   },
 
@@ -13,7 +13,7 @@ export default {
     return {
       endpoint: `/api/v1/pages/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -22,8 +22,8 @@ export default {
       endpoint: `/api/v1/pages`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "pages", data: page })
-      }
+        body: JSON.stringify({ type: "pages", data: page }),
+      },
     };
   },
 
@@ -32,8 +32,8 @@ export default {
       endpoint: `/api/v1/pages/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "pages", data: page })
-      }
+        body: JSON.stringify({ type: "pages", data: page }),
+      },
     };
   },
 
@@ -41,7 +41,7 @@ export default {
     return {
       endpoint: `/api/v1/pages/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

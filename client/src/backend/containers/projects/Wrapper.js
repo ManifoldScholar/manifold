@@ -12,7 +12,7 @@ export default function ProjectsWrapper({ route }) {
 
   useRedirectToFirstMatch({
     route: "backendProjects",
-    candidates: secondaryLinks
+    candidates: secondaryLinks,
   });
 
   return (
@@ -20,7 +20,7 @@ export default function ProjectsWrapper({ route }) {
       ability="update"
       entity={["project"]}
       failureFatalError={{
-        body: t("projects.unauthorized")
+        body: t("projects.unauthorized"),
       }}
     >
       <main id="skip-to-main" tabIndex={-1} className="backend-detail">
@@ -31,5 +31,5 @@ export default function ProjectsWrapper({ route }) {
 }
 
 ProjectsWrapper.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };

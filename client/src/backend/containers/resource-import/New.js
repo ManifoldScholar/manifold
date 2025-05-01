@@ -16,10 +16,10 @@ export class ResourceImportNew extends PureComponent {
     history: PropTypes.object.isRequired,
     create: PropTypes.func.isRequired,
     update: PropTypes.func.isRequired,
-    resourceImport: PropTypes.object
+    resourceImport: PropTypes.object,
   };
 
-  onSuccess = model => {
+  onSuccess = (model) => {
     const { projectId } = this.props.match.params;
     const importId = model.id;
     const url = lh.link("backendResourceImportMap", projectId, importId);
@@ -29,7 +29,7 @@ export class ResourceImportNew extends PureComponent {
   get buttonClasses() {
     return classNames(
       "buttons-icon-horizontal__button",
-      "button-icon-secondary"
+      "button-icon-secondary",
     );
   }
 
@@ -47,7 +47,7 @@ export class ResourceImportNew extends PureComponent {
     }
   };
 
-  create = model => {
+  create = (model) => {
     return this.props.create(this.preSave(model));
   };
 
@@ -55,16 +55,14 @@ export class ResourceImportNew extends PureComponent {
     return this.props.update(id, this.preSave(model));
   };
 
-  /* eslint-disable no-param-reassign */
-  preSave = model => {
+  preSave = (model) => {
     model.attributes.state = "parsing";
     model.attributes.storageType = "google_drive";
     return model;
   };
-  /* eslint-enable no-param-reassign */
 
   headerRowOptions = () => {
-    return [1, 2, 3, 4, 5, 6].map(i => {
+    return [1, 2, 3, 4, 5, 6].map((i) => {
       return { label: i.toString(), value: i };
     });
   };
@@ -85,8 +83,8 @@ export class ResourceImportNew extends PureComponent {
           <Form.InputError
             errors={[
               {
-                detail: t("resources.import.parse_error")
-              }
+                detail: t("resources.import.parse_error"),
+              },
             ]}
           />
         ) : null}

@@ -10,17 +10,17 @@ function RowSort({ options, active, onChange }) {
   return (
     <div className="analytics-block__sort">
       <form
-        onSubmit={event => event.preventDefault()}
+        onSubmit={(event) => event.preventDefault()}
         className="analytics-block__sort-form"
       >
-        <UIDConsumer name={id => `rowSort-${id}`}>
-          {id => (
+        <UIDConsumer name={(id) => `rowSort-${id}`}>
+          {(id) => (
             <div>
               <Styled.Label htmlFor={id}>{t("analytics.sort_by")}</Styled.Label>
               <Styled.SelectWrapper>
                 <Styled.Select
                   id={id}
-                  onChange={event => onChange(event.target.value)}
+                  onChange={(event) => onChange(event.target.value)}
                   value={active.value}
                 >
                   {options.map(({ key, value, label }) => (
@@ -42,7 +42,7 @@ function RowSort({ options, active, onChange }) {
 RowSort.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object.isRequired),
   active: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 RowSort.displayName = "Analytics.Block.Table.Sort";

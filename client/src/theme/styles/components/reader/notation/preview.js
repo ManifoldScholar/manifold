@@ -1,7 +1,7 @@
 import {
   defaultTransitionProps,
   respond,
-  defaultHoverStyle
+  defaultHoverStyle,
 } from "theme/styles/mixins";
 import { containerPaddingInline } from "theme/styles/variables/layout";
 

@@ -15,16 +15,16 @@ export default class Errorable extends PureComponent {
     name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     nameForError: PropTypes.string,
-    idForError: PropTypes.string
+    idForError: PropTypes.string,
   };
 
   static defaultProps = {
-    containerStyle: {}
+    containerStyle: {},
   };
 
   allErrors() {
     if (!this.props.errors) return [];
-    return this.props.errors.filter(error => {
+    return this.props.errors.filter((error) => {
       return has(error, "source");
     });
   }
@@ -37,9 +37,9 @@ export default class Errorable extends PureComponent {
     if (!Array.isArray(names)) {
       names = [this.props.name];
     }
-    names.forEach(name => {
+    names.forEach((name) => {
       const pointer = this.pointerFor(name);
-      const pointerErrors = this.props.errors.filter(error => {
+      const pointerErrors = this.props.errors.filter((error) => {
         if (!error.hasOwnProperty("source")) return false;
         return error.source.pointer === pointer;
       });

@@ -26,12 +26,10 @@ export default function useDeprecatedFetchData(fetchData, location, match) {
 
   const internalContext = useContext(InternalContext);
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   const triggerFetchData = useCallback(() => {
     log("useDeprecatedFetchData", requestKey);
     return fetchData(getState, dispatch, location, match);
   }, [getState, fetchData, requestKey, dispatch, location, match]);
-  /* eslint-enable react-hooks/exhaustive-deps */
 
   // Fetch on the server
   if (
@@ -43,14 +41,14 @@ export default function useDeprecatedFetchData(fetchData, location, match) {
     const effects = [];
     if (isPromise(result)) effects.push(result);
     if (Array.isArray(result)) {
-      result.forEach(aResult => {
+      result.forEach((aResult) => {
         if (isPromise(aResult)) effects.push(aResult);
       });
     }
     internalContext.requests.push({
       id: requestKey,
       promise: Promise.all(effects),
-      cancel: () => {}
+      cancel: () => {},
     });
   }
 

@@ -170,5 +170,5 @@ export default {
   CommentDetail: Comments.Detail,
   UserWrapper: User.Wrapper,
   UserProperties: User.Properties,
-  UserActivity: User.Activity
+  UserActivity: User.Activity,
 };

@@ -10,7 +10,7 @@ export default class AnnotatableNotationViewer extends PureComponent {
     notations: PropTypes.array,
     annotations: PropTypes.array,
     containerSize: PropTypes.number,
-    bodySelector: PropTypes.string
+    bodySelector: PropTypes.string,
   };
 
   render() {

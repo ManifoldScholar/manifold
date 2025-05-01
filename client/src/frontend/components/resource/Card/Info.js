@@ -34,7 +34,7 @@ Info.displayName = "ResourceCard.Info";
 Info.propTypes = {
   resource: PropTypes.object.isRequired,
   detailUrl: PropTypes.string,
-  itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+  itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6]),
 };
 
 export default Info;

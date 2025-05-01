@@ -20,9 +20,9 @@ export function show(size, display = "inherit") {
 }
 
 export function fluidShrink(maxWidth, breakpoint = containerWidth.inner) {
-  /* eslint-disable radix */
-  return `min(${(parseInt(maxWidth) / parseInt(breakpoint)) *
-    100}vw, ${maxWidth})`;
+  return `min(${
+    (parseInt(maxWidth) / parseInt(breakpoint)) * 100
+  }vw, ${maxWidth})`;
 }
 
 // Interactions
@@ -44,7 +44,7 @@ export function setFocusStyle(property = "outline", value = "solid 2px") {
 
 export function setHoverStyle(
   property = "color",
-  value = "var(--hover-color)"
+  value = "var(--hover-color)",
 ) {
   return `
     transition: ${property} var(--transition-duration-default)

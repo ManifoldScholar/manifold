@@ -8,11 +8,11 @@ class ProjectContentTypeFormMarkdown extends PureComponent {
 
   static propTypes = {
     setOther: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultAttributes = {
-    style: "normal"
+    style: "normal",
   };
 
   render() {
@@ -30,7 +30,7 @@ class ProjectContentTypeFormMarkdown extends PureComponent {
           name="attributes[style]"
           options={[
             { label: this.props.t("layout.normal"), value: "normal" },
-            { label: this.props.t("layout.shaded"), value: "shaded" }
+            { label: this.props.t("layout.shaded"), value: "shaded" },
           ]}
           inline
           wide

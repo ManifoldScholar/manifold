@@ -22,7 +22,7 @@ export default function useFilterState(baseFilters = {}) {
         setFilterState(newState);
       }
     },
-    [setInitialFilterState]
+    [setInitialFilterState],
   );
 
   return [filters, setFilters];

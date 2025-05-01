@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export default class LoadingBar extends Component {
   static propTypes = {
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
   };
 
   constructor(props) {
@@ -37,7 +37,7 @@ export default class LoadingBar extends Component {
     return (
       <div>
         <div
-          ref={loader => {
+          ref={(loader) => {
             this.loader = loader;
           }}
           className="loading-bar default"

@@ -9,7 +9,7 @@ class ListEntitiesListEmpty extends PureComponent {
   static propTypes = {
     message: PropTypes.node,
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get message() {
@@ -26,7 +26,7 @@ class ListEntitiesListEmpty extends PureComponent {
 
     const wrapperClasses = classNames({
       "entity-list__empty-message": true,
-      "entity-list__empty-message--well": listStyle === "well"
+      "entity-list__empty-message--well": listStyle === "well",
     });
 
     return <div className={wrapperClasses}>{this.message}</div>;

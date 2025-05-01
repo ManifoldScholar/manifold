@@ -7,7 +7,7 @@ export default function ToggleBar({
   htmlMode,
   onClickEditorToggle,
   darkMode,
-  onClickDarkModeToggle
+  onClickDarkModeToggle,
 }) {
   const { t } = useTranslation();
 
@@ -20,15 +20,15 @@ export default function ToggleBar({
             mobileLabel: t("editor.controls.toggles.html_label_mobile"),
             icon: "editorHTML24",
             active: htmlMode,
-            onClick: onClickEditorToggle(true)
+            onClick: onClickEditorToggle(true),
           },
           {
             label: t("editor.controls.toggles.rte_label"),
             mobileLabel: t("editor.controls.toggles.rte_label_mobile"),
             icon: "editorRTE24",
             active: !htmlMode,
-            onClick: onClickEditorToggle(false)
-          }
+            onClick: onClickEditorToggle(false),
+          },
         ]}
       />
       <Toggle
@@ -38,15 +38,15 @@ export default function ToggleBar({
             icon: "darkMode16",
             iconSize: 12,
             active: darkMode,
-            onClick: onClickDarkModeToggle(true)
+            onClick: onClickDarkModeToggle(true),
           },
           {
             label: t("editor.controls.toggles.light_mode_label"),
             icon: "lightMode16",
             iconSize: 12,
             active: !darkMode,
-            onClick: onClickDarkModeToggle(false)
-          }
+            onClick: onClickDarkModeToggle(false),
+          },
         ]}
         padding="16px"
       />

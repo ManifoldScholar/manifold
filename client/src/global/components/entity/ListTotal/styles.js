@@ -13,8 +13,7 @@ export const Wrapper = styled("div", transientOptions)`
 
   ${respond(`--EntityListTotal-margin-block-end: 50px`, 60)}
 
-  ${({ $alignLeft }) =>
-    $alignLeft && `text-align: start;`}
+  ${({ $alignLeft }) => $alignLeft && `text-align: start;`}
 
   &:not(:last-child) {
     margin-block-end: var(--EntityListTotal-margin-block-end);

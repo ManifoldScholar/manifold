@@ -9,5 +9,5 @@ export default {
   Search,
   Section,
   NotationResourceDetail,
-  NotationResourceCollectionDetail
+  NotationResourceCollectionDetail,
 };

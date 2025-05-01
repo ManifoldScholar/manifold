@@ -1,22 +1,22 @@
 export default function resourceCollectionFilters({
-  snapshotState = false
+  snapshotState = false,
 } = {}) {
   return {
     config: {
-      snapshotState
+      snapshotState,
     },
     params: [
       {
         label: "Search...",
         name: "keyword",
-        value: ""
+        value: "",
       },
       {
         label: "Order",
         name: "order",
         value: "title",
-        options: [{ label: "Alphabetical by title", value: "title" }]
-      }
-    ]
+        options: [{ label: "Alphabetical by title", value: "title" }],
+      },
+    ],
   };
 }

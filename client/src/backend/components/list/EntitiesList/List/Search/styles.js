@@ -3,7 +3,7 @@ import {
   utilityPrimary,
   defaultTransitionProps,
   unstyledSelect,
-  respond
+  respond,
 } from "theme/styles/mixins";
 import Utility from "global/components/utility";
 

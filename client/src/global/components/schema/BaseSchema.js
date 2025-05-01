@@ -5,14 +5,14 @@ export default function BaseSchema({ entity }) {
   const data = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    mainEntity: entity
+    mainEntity: entity,
   };
 
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data)
+        __html: JSON.stringify(data),
       }}
     />
   );
@@ -21,5 +21,5 @@ export default function BaseSchema({ entity }) {
 BaseSchema.displayName = "Schema.Base";
 
 BaseSchema.propTypes = {
-  entity: PropTypes.object.isRequired
+  entity: PropTypes.object.isRequired,
 };

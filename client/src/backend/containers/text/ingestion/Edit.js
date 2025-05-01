@@ -17,9 +17,9 @@ export class IngestionEditContainer extends PureComponent {
     return dispatch(ingestion);
   };
 
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      ingestion: select(requests.beIngestionShow, state.entityStore)
+      ingestion: select(requests.beIngestionShow, state.entityStore),
     };
   };
 
@@ -30,7 +30,7 @@ export class IngestionEditContainer extends PureComponent {
     history: PropTypes.object,
     ingestion: PropTypes.object,
     match: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object,
   };
 
   get textId() {
@@ -45,7 +45,7 @@ export class IngestionEditContainer extends PureComponent {
     const path = lh.link(
       "backendTextIngestionIngest",
       this.textId,
-      ingestionId
+      ingestionId,
     );
     this.props.history.push(path, { back: this.props.match.url });
   }

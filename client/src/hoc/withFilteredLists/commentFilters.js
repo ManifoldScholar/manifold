@@ -1,13 +1,13 @@
 export default function commentFilters({ snapshotState = false } = {}) {
   return {
     config: {
-      snapshotState
+      snapshotState,
     },
     params: [
       {
         label: "Search...",
         name: "keyword",
-        value: ""
+        value: "",
       },
       {
         label: "Flags",
@@ -15,8 +15,8 @@ export default function commentFilters({ snapshotState = false } = {}) {
         value: "",
         options: [
           { label: "With and without flags", value: "" },
-          { label: "With flags", value: "true" }
-        ]
+          { label: "With flags", value: "true" },
+        ],
       },
       {
         label: "Order",
@@ -26,9 +26,9 @@ export default function commentFilters({ snapshotState = false } = {}) {
           { label: "Newest first", value: "created_at DESC" },
           { label: "Oldest first", value: "created_at ASC" },
           { label: "By creator", value: "created_by" },
-          { label: "By subject", value: "subject" }
-        ]
-      }
-    ]
+          { label: "By subject", value: "subject" },
+        ],
+      },
+    ],
   };
 }

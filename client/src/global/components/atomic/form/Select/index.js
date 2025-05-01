@@ -32,11 +32,11 @@ export const selectShape = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
-    }).isRequired
+      label: PropTypes.string.isRequired,
+    }).isRequired,
   ).isRequired,
   onChange: PropTypes.func.isRequired,
-  preIcon: PropTypes.string
+  preIcon: PropTypes.string,
 };
 
 Select.propTypes = selectShape;

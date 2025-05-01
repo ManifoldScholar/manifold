@@ -26,7 +26,7 @@ Share.displayName = "Annotation.Popup.Menus.MainMenu.Share";
 Share.propTypes = {
   menu: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-  activeMenu: PropTypes.string
+  activeMenu: PropTypes.string,
 };
 
 export default Share;

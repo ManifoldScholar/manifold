@@ -6,11 +6,11 @@ function AnnotationListDefault({
   annotations,
   handleVisitAnnotation,
   showCommentsToggleAsBlock,
-  refresh
+  refresh,
 }) {
   return (
     <ul className="notes-list notes-list--pad-top">
-      {annotations.map(annotation => {
+      {annotations.map((annotation) => {
         return (
           <li key={annotation.id} className="notes-list__item-outer">
             <Annotation
@@ -32,7 +32,7 @@ AnnotationListDefault.propTypes = {
   annotations: PropTypes.array,
   handleVisitAnnotation: PropTypes.func,
   showCommentsToggleAsBlock: PropTypes.bool,
-  refresh: PropTypes.func
+  refresh: PropTypes.func,
 };
 
 export default AnnotationListDefault;

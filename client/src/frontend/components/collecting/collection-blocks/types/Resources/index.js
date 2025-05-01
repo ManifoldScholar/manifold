@@ -18,7 +18,7 @@ function CollectedResources(props) {
           to={lh.link(
             "frontendProjectResource",
             response.attributes.projectSlug,
-            response.attributes.slug
+            response.attributes.slug,
           )}
         >
           <Resourceish.Thumbnail resourceish={response} showTitle />
@@ -33,7 +33,7 @@ CollectedResources.displayName = "Collecting.CollectedResources";
 CollectedResources.propTypes = {
   collectedIds: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
-  nested: PropTypes.bool
+  nested: PropTypes.bool,
 };
 
 export default CollectedResources;

@@ -9,14 +9,14 @@ export const highlightNewEl = ({ selector }) => {
     el.animate(
       [
         {
-          outline: "2px solid var(--hover-color)"
-        }
+          outline: "2px solid var(--hover-color)",
+        },
       ],
       {
         duration: 1250,
         easing: "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
-        iterations: 1
-      }
+        iterations: 1,
+      },
     );
   }, 100);
 };
@@ -28,13 +28,13 @@ export const highlightDroppedEl = ({ element }) => {
   element.animate(
     [
       {
-        outline: "2px solid var(--hover-color)"
-      }
+        outline: "2px solid var(--hover-color)",
+      },
     ],
     {
       duration: 1250,
       easing: "cubic-bezier(0.25, 0.1, 0.25, 1.0)",
-      iterations: 1
-    }
+      iterations: 1,
+    },
   );
 };

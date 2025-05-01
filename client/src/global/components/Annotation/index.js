@@ -3,5 +3,5 @@ import Annotation from "./Annotation";
 
 export default {
   List,
-  Annotation
+  Annotation,
 };

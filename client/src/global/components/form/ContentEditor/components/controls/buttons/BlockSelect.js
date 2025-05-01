@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { useSlate, ReactEditor } from "slate-react";
+import { useSlate } from "slate-react";
 import { useTranslation } from "react-i18next";
 import Tooltip from "global/components/atomic/Tooltip";
 import TooltipContent from "./TooltipContent";
@@ -7,7 +7,7 @@ import { hotkeys } from "./TooltipContent/content";
 import { toggleOrWrapNode } from "../../../utils/slate/transforms";
 import {
   isTextBlockActive,
-  isElementActive
+  isElementActive,
 } from "../../../utils/slate/getters";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
@@ -15,8 +15,8 @@ import * as Styled from "./styles";
 const getActiveBlock = (editor, opts, name) => {
   const isActive = name === "textBlock" ? isTextBlockActive : isElementActive;
   const active = opts
-    .map(o => [o, isActive(editor, o)].flat())
-    .filter(o => o[1])
+    .map((o) => [o, isActive(editor, o)].flat())
+    .filter((o) => o[1])
     .sort((a, b) => a[2].length - b[2].length)
     .pop();
 
@@ -33,7 +33,7 @@ const BlockSelect = ({ options, name, color, ariaLabel, ...rest }, ref) => {
 
   const { t } = useTranslation();
 
-  const renderOptions = options.map(o => (
+  const renderOptions = options.map((o) => (
     <option key={o.format} value={o.format} hidden={!o.format}>
       {o.label}
     </option>
@@ -41,8 +41,8 @@ const BlockSelect = ({ options, name, color, ariaLabel, ...rest }, ref) => {
 
   const active = getActiveBlock(
     editor,
-    options.map(o => o.format),
-    name
+    options.map((o) => o.format),
+    name,
   );
 
   return (
@@ -55,7 +55,7 @@ const BlockSelect = ({ options, name, color, ariaLabel, ...rest }, ref) => {
           data-active={active !== ""}
           $color={color ?? "var(--color-accent-primary)"}
           value={active}
-          onChange={e => {
+          onChange={(e) => {
             e.preventDefault();
             if (!selection) return;
             toggleOrWrapNode(editor, e.target.value);

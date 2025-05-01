@@ -89,5 +89,5 @@ export default {
   MyStarred,
   MyAnnotations,
   PrivacySettings,
-  DataUse
+  DataUse,
 };

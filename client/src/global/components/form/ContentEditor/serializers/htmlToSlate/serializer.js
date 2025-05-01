@@ -18,7 +18,7 @@ import {
   getNextNonFormat,
   getPrevNonFormat,
   removeFormatOnlyChildren,
-  isEmptyParagraph
+  isEmptyParagraph,
 } from "./utils";
 
 const deserializeVoid = (el, nodeName, children) => {
@@ -27,7 +27,7 @@ const deserializeVoid = (el, nodeName, children) => {
 
   const adjustedEl = {
     ...el,
-    children: removeFormatOnlyChildren(el)
+    children: removeFormatOnlyChildren(el),
   };
 
   const attrs = {
@@ -35,13 +35,13 @@ const deserializeVoid = (el, nodeName, children) => {
     nodeName,
     htmlChildren: children,
     srcdoc: `<!DOCTYPE html><html><body class="manifold-text-section scheme-dark" style="height: 100%">${htmlSerializer(
-      new Document(adjustedEl)
+      new Document(adjustedEl),
     )}</body></html>`,
-    htmlAttrs: el.attribs ?? {}
+    htmlAttrs: el.attribs ?? {},
   };
   return jsx("element", attrs, [{ text: "" }]);
 };
-const deserializeBody = children => {
+const deserializeBody = (children) => {
   return jsx("fragment", {}, children);
 };
 const deserializeTag = (el, nodeName, children) => {
@@ -60,16 +60,16 @@ const deserializeText = (el, attrs) => {
   return jsx("text", { ...attrs, text }, []);
 };
 
-const flatten = nodes => {
+const flatten = (nodes) => {
   let result = [];
-  nodes.forEach(n => {
+  nodes.forEach((n) => {
     if (n.length === 2) result.push(n);
     if (n.length > 2) result = [...result, ...flatten(n)];
   });
   return result;
 };
 
-const deserializeMarkTag = el => {
+const deserializeMarkTag = (el) => {
   const nodes = assignTextMarkAttributes(el);
   if (!Array.isArray(nodes[0])) {
     const [node, attrs] = nodes;
@@ -82,7 +82,7 @@ const deserializeMarkTag = el => {
     .filter(Boolean);
 };
 
-const deserializeElement = el => {
+const deserializeElement = (el) => {
   if (el.type !== ElementType.Tag && el.type !== ElementType.Text) return null;
   if (blackList.includes(el.type)) return null;
 
@@ -116,15 +116,14 @@ const deserializeElement = el => {
     return deserializeVoid(el, nodeName, el.childNodes);
   }
 
-  /* eslint-disable no-use-before-define */
   const children = deserializeChildren(
     el.childNodes,
-    nodeName ? getSlateNodeContext(nodeName) : ""
+    nodeName ? getSlateNodeContext(nodeName) : "",
   );
 
   const [normalizedChildren, normalizedTag] = normalizeChildren(
     children,
-    nodeName ? getSlateNodeContext(nodeName) : ""
+    nodeName ? getSlateNodeContext(nodeName) : "",
   );
 
   if (nodeName === "body") {
@@ -136,21 +135,21 @@ const deserializeElement = el => {
   }
 };
 
-const deserializeDom = dom => {
+const deserializeDom = (dom) => {
   const nodes = dom
-    .map(el => deserializeElement(el))
+    .map((el) => deserializeElement(el))
     .filter(Boolean)
-    .map(element => addTextNodeToEmptyChildren(element));
+    .map((element) => addTextNodeToEmptyChildren(element));
   return nodes;
 };
 
-const deserializeChildren = children => {
+const deserializeChildren = (children) => {
   if (!children) return [];
   const nodes = deserializeDom(children).filter(Boolean);
   return nodes;
 };
 
-export const htmlToSlate = html => {
+export const htmlToSlate = (html) => {
   let slateContent;
   const handler = new DomHandler((error, dom) => {
     if (error) {
@@ -169,8 +168,8 @@ export const htmlToSlate = html => {
       {
         type: "section",
         children: slateContent[0].children,
-        slateOnly: true
-      }
+        slateOnly: true,
+      },
     ];
   }
   if (slateContent.length >= 1) {
@@ -178,8 +177,8 @@ export const htmlToSlate = html => {
       {
         type: "section",
         children: slateContent,
-        slateOnly: true
-      }
+        slateOnly: true,
+      },
     ];
   }
   if (!slateContent.length)
@@ -187,8 +186,8 @@ export const htmlToSlate = html => {
       {
         type: "section",
         children: [{ type: "p", children: [{ text: "" }] }],
-        slateOnly: true
-      }
+        slateOnly: true,
+      },
     ];
 
   return slateContent;

@@ -14,11 +14,11 @@ export default class DrawerEntityHeaderButton extends PureComponent {
     className: PropTypes.string,
     ability: PropTypes.string,
     entity: PropTypes.object,
-    ariaProps: PropTypes.object
+    ariaProps: PropTypes.object,
   };
 
   static defaultProps = {
-    className: ""
+    className: "",
   };
 
   get buttonClasses() {

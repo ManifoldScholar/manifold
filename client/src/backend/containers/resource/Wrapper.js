@@ -20,9 +20,9 @@ import Authorize from "hoc/Authorize";
 const { request, flush } = entityStoreActions;
 
 export class ResourceWrapperContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      resource: select(requests.beResource, state.entityStore)
+      resource: select(requests.beResource, state.entityStore),
     };
   };
 
@@ -35,11 +35,11 @@ export class ResourceWrapperContainer extends PureComponent {
     history: PropTypes.object,
     route: PropTypes.object,
     confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   componentDidMount() {
@@ -79,9 +79,9 @@ export class ResourceWrapperContainer extends PureComponent {
       id: `RESOURCE_DESTROYED_${this.props.resource.id}`,
       heading: t("notifications.resource_delete"),
       body: t("notifications.delete_entity_body", {
-        title: this.props.resource.attributes.title
+        title: this.props.resource.attributes.title,
       }),
-      expiration: 5000
+      expiration: 5000,
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   }
@@ -103,14 +103,14 @@ export class ResourceWrapperContainer extends PureComponent {
         route: "frontendProjectResource",
         slug: project.attributes.slug,
         resourceSlug: resource.attributes.slug,
-        icon: "eyeOpen32"
+        icon: "eyeOpen32",
       },
       {
         label: "actions.delete",
         icon: "delete32",
         authorize: "delete",
-        onClick: this.handleResourceDestroy
-      }
+        onClick: this.handleResourceDestroy,
+      },
     ];
   }
 
@@ -120,9 +120,8 @@ export class ResourceWrapperContainer extends PureComponent {
   }
 
   render() {
-    /* eslint-disable no-unused-vars */
     const { resource, t } = this.props;
-    /* eslint-enable no-unused-vars */
+
     if (!resource) return null;
     const secondaryLinks = navigation.resource(resource);
 
@@ -135,14 +134,14 @@ export class ResourceWrapperContainer extends PureComponent {
       resource,
       resource.relationships.project,
       belongsToJournalIssue,
-      t
+      t,
     );
 
     const parentProps = {
       parentTitle: resource.relationships.project.attributes.titleFormatted,
       parentSubtitle: resource.relationships.project.attributes.subtitle,
       texts: resource.attributes.projectTextsNav,
-      parentId: resource.relationships.project.id
+      parentId: resource.relationships.project.id,
     };
 
     return (
@@ -150,7 +149,7 @@ export class ResourceWrapperContainer extends PureComponent {
         <Authorize
           entity={resource}
           failureFatalError={{
-            body: t("resources.unauthorized")
+            body: t("resources.unauthorized"),
           }}
           ability="update"
         >
@@ -196,5 +195,5 @@ export class ResourceWrapperContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ResourceWrapperContainer))
+  withConfirmation(connectAndFetch(ResourceWrapperContainer)),
 );

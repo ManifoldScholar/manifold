@@ -2,32 +2,32 @@ const requestNameMap = {
   frontend: {
     me: {
       filtered: "feMyAnnotations",
-      default: "feMyAnnotations"
+      default: "feMyAnnotations",
     },
     group: {
       filtered: "feReadingGroupAnnotations",
-      default: "feReadingGroupAnnotations"
-    }
+      default: "feReadingGroupAnnotations",
+    },
   },
   reader: {
     me: {
       filtered: "rMyFilteredAnnotationsForText",
-      default: "rMyAnnotationsForText"
+      default: "rMyAnnotationsForText",
     },
     group: {
       filtered: "rReadingGroupFilteredAnnotationsForText",
-      default: "rReadingGroupAnnotationsForText"
-    }
-  }
+      default: "rReadingGroupAnnotationsForText",
+    },
+  },
 };
 
 function areValidParams(group, context, type) {
   try {
     const findRequestName = requestNameMap[context][group][type]; // eslint-disable-line no-unused-vars
     return true;
-  } catch (error) {
+  } catch (_) {
     throw new Error(
-      `Couldn't map params (group: "${group}", context: "${context}", filtered: "${type}") to a request name. Check the possible values in \`requestNameMap\` and try again.`
+      `Couldn't map params (group: "${group}", context: "${context}", filtered: "${type}") to a request name. Check the possible values in \`requestNameMap\` and try again.`,
     );
   }
 }

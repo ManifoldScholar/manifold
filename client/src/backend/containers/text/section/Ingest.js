@@ -14,7 +14,7 @@ export default function IngestSectionContainer({ textId }) {
 
   const { data: section } = useFetch({
     request: [sectionsAPI.show, sectionId, textId],
-    condition: !!sectionId
+    condition: !!sectionId,
   });
 
   return (
@@ -39,5 +39,5 @@ IngestSectionContainer.displayName = "Text.Sections.Ingest";
 
 IngestSectionContainer.propTypes = {
   textId: PropTypes.string.isRequired,
-  nextPosition: PropTypes.number
+  nextPosition: PropTypes.number,
 };

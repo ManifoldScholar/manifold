@@ -5,7 +5,7 @@ import * as Styled from "./styles";
 export default function Content({ children, className }) {
   const {
     contentProps,
-    toggleProps: { onClick: closeMenu }
+    toggleProps: { onClick: closeMenu },
   } = useDisclosureContext();
 
   return (

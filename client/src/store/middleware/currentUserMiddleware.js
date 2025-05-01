@@ -45,7 +45,12 @@ function getUserFromToken(token) {
 
 export function handleAuthenticationSuccess(
   dispatch,
-  options = { authToken: null, user: null, cookieHelper: null, setCookie: true }
+  options = {
+    authToken: null,
+    user: null,
+    cookieHelper: null,
+    setCookie: true,
+  },
 ) {
   dispatch(actions.setCurrentUser(options.user));
   dispatch(actions.setAuthToken(options.authToken));
@@ -56,7 +61,7 @@ export function handleAuthenticationSuccess(
 
 export function handleAuthenticationFailure(
   dispatch,
-  options = { status: 500, cookieHelper: null, destroyCookie: true }
+  options = { status: 500, cookieHelper: null, destroyCookie: true },
 ) {
   dispatch(actions.loginSetError(generateErrorPayload(options.status)));
   dispatch(actions.loginComplete());
@@ -66,25 +71,25 @@ export function handleAuthenticationFailure(
 function authenticateWithPassword(email, password, dispatch) {
   const promise = tokensAPI.createToken(email, password);
   promise.then(
-    user => {
+    (user) => {
       const { authToken } = user.meta;
       if (!authToken) {
         handleAuthenticationFailure(dispatch, {
           status: 500,
-          destroyCookie: true
+          destroyCookie: true,
         });
         return Promise.resolve();
       }
       handleAuthenticationSuccess(dispatch, {
         authToken,
         user,
-        setCookie: true
+        setCookie: true,
       });
     },
-    response => {
+    (response) => {
       const { status } = response;
       handleAuthenticationFailure(dispatch, { status, destroyCookie: true });
-    }
+    },
   );
   return promise;
 }
@@ -92,20 +97,20 @@ function authenticateWithPassword(email, password, dispatch) {
 function authenticateWithToken(authToken, dispatch) {
   return new Promise((resolve, reject) => {
     getUserFromToken(authToken).then(
-      user => {
+      (user) => {
         handleAuthenticationSuccess(dispatch, {
           authToken,
           user,
-          setCookie: true
+          setCookie: true,
         }).finally(() => {
           resolve();
         });
       },
-      response => {
+      (response) => {
         const { status } = response;
         handleAuthenticationFailure(dispatch, { status, destroyCookie: true });
         reject();
-      }
+      },
     );
   });
 }
@@ -123,31 +128,31 @@ export function authenticateWithCookie(dispatch, cookieHelper) {
 
   return new Promise((resolve, reject) => {
     getUserFromToken(authToken).then(
-      user => {
+      (user) => {
         handleAuthenticationSuccess(dispatch, {
           authToken,
           user,
           cookieHelper,
-          setCookie: false
+          setCookie: false,
         }).finally(() => {
           resolve();
         });
       },
-      response => {
+      (response) => {
         const { status } = response;
         handleAuthenticationFailure(dispatch, {
           status,
           cookieHelper,
-          destroyCookie: `${status}`[0] !== 5
+          destroyCookie: `${status}`[0] !== 5,
         });
         reject();
-      }
+      },
     );
   });
 }
 
 export default function currentUserMiddleware({ dispatch }) {
-  return next => action => {
+  return (next) => (action) => {
     const payload = action.payload;
 
     if (action.type === "RESTORE_SESSION") {

@@ -10,5 +10,5 @@ cfonts.say("Manifold", {
   letterSpacing: 1,
   lineHeight: 1,
   maxLength: 0,
-  space: true
+  space: true,
 });

@@ -8,7 +8,7 @@ function ActionSelectorMenuBody(props, ref) {
   const { actions, visible, entity, ...dropDownProps } = props;
   const { t } = useTranslation();
 
-  const renderItem = action => {
+  const renderItem = (action) => {
     const linkOrButtonProps = getLinkOrButtonProps(action);
 
     if (action.authorize) {
@@ -40,7 +40,7 @@ function ActionSelectorMenuBody(props, ref) {
 
   return (
     <Styled.Wrapper $visible={visible} ref={ref} {...dropDownProps}>
-      <Styled.List>{actions.map(action => renderItem(action))}</Styled.List>
+      <Styled.List>{actions.map((action) => renderItem(action))}</Styled.List>
     </Styled.Wrapper>
   );
 }

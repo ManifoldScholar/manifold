@@ -10,37 +10,37 @@ function ReadingGroupHomepageFetchContainer({
   readingGroup,
   route,
   refresh,
-  fetchVersion
+  fetchVersion,
 }) {
   const navigate = useNavigate();
 
   const { data: projects } = useFetch({
     request: [readingGroupsAPI.collected, readingGroup.id, "projects"],
-    dependencies: [fetchVersion]
+    dependencies: [fetchVersion],
   });
   const { data: texts } = useFetch({
     request: [readingGroupsAPI.collected, readingGroup.id, "texts"],
-    dependencies: [fetchVersion]
+    dependencies: [fetchVersion],
   });
   const { data: textSections } = useFetch({
     request: [readingGroupsAPI.collected, readingGroup.id, "text_sections"],
-    dependencies: [fetchVersion]
+    dependencies: [fetchVersion],
   });
   const { data: resourceCollections } = useFetch({
     request: [
       readingGroupsAPI.collected,
       readingGroup.id,
-      "resource_collections"
+      "resource_collections",
     ],
-    dependencies: [fetchVersion]
+    dependencies: [fetchVersion],
   });
   const { data: resources } = useFetch({
     request: [readingGroupsAPI.collected, readingGroup.id, "resources"],
-    dependencies: [fetchVersion]
+    dependencies: [fetchVersion],
   });
   const { data: journalIssues } = useFetch({
     request: [readingGroupsAPI.collected, readingGroup.id, "journal_issues"],
-    dependencies: [fetchVersion]
+    dependencies: [fetchVersion],
   });
 
   const responses = {
@@ -49,12 +49,12 @@ function ReadingGroupHomepageFetchContainer({
     textSections,
     resourceCollections,
     resources,
-    journalIssues
+    journalIssues,
   };
 
   const { data: categories } = useFetch({
     request: [readingGroupsAPI.categories, readingGroup.id],
-    dependencies: [fetchVersion]
+    dependencies: [fetchVersion],
   });
 
   return (
@@ -65,8 +65,8 @@ function ReadingGroupHomepageFetchContainer({
           categories,
           responses,
           navigate,
-          refresh
-        }
+          refresh,
+        },
       })}
     </Styled.Body>
   );
@@ -76,7 +76,7 @@ ReadingGroupHomepageFetchContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
   refresh: PropTypes.func.isRequired,
-  fetchVersion: PropTypes.number.isRequired
+  fetchVersion: PropTypes.number.isRequired,
 };
 
 export default ReadingGroupHomepageFetchContainer;

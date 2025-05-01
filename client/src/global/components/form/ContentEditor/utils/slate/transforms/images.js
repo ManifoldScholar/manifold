@@ -6,7 +6,7 @@ export const insertImage = (editor, url, alt) => {
   const image = {
     type: "img",
     htmlAttrs: { src: url, alt: alt ?? "" },
-    children: [text]
+    children: [text],
   };
   const [node] = Editor.above(editor, editor.selection);
   if (Editor.isEmpty(editor, node)) {

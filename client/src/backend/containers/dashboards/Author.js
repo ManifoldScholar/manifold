@@ -17,19 +17,19 @@ export class DashboardsAuthorContainer extends PureComponent {
     const projectsRequest = request(
       projectsAPI.index(
         { order: "sort_title ASC", withUpdateAbility: true },
-        { size: perPage }
+        { size: perPage },
       ),
-      requests.beProjects
+      requests.beProjects,
     );
     return dispatch(projectsRequest);
   };
 
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       projects: select(requests.beProjects, state.entityStore),
       projectsMeta: meta(requests.beProjects, state.entityStore),
       recentProjects: select(requests.beRecentProjects, state.entityStore),
-      currentUser: get(state, "authentication.currentUser")
+      currentUser: get(state, "authentication.currentUser"),
     };
   };
 
@@ -38,13 +38,13 @@ export class DashboardsAuthorContainer extends PureComponent {
     dispatch: PropTypes.func,
     projectsMeta: PropTypes.object,
     currentUser: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      filter: { order: "sort_title ASC", withUpdateAbility: true }
+      filter: { order: "sort_title ASC", withUpdateAbility: true },
     };
     this.updateResults = debounce(this.updateResults.bind(this), 250);
   }
@@ -55,19 +55,19 @@ export class DashboardsAuthorContainer extends PureComponent {
     filter.withUpdateAbility = true;
     const action = request(
       projectsAPI.index(filter, pagination),
-      requests.beProjects
+      requests.beProjects,
     );
     this.props.dispatch(action);
   }
 
-  filterChangeHandler = filter => {
+  filterChangeHandler = (filter) => {
     this.setState({ filter }, () => {
       this.updateResults();
     });
   };
 
-  updateHandlerCreator = page => {
-    return event => {
+  updateHandlerCreator = (page) => {
+    return (event) => {
       this.updateResults(event, page);
     };
   };

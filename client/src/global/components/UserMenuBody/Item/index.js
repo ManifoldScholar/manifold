@@ -23,7 +23,7 @@ UserMenuBodyItem.propTypes = {
   title: PropTypes.string.isRequired,
   srTitle: PropTypes.string,
   icon: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
 };
 
 export default UserMenuBodyItem;

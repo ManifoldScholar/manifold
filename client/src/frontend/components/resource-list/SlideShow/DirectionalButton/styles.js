@@ -29,7 +29,7 @@ export const Next = styled(Button)`
     `
     margin-inline-end: -4px;
     margin-inline-start: 11px;`,
-    60
+    60,
   )}
 `;
 

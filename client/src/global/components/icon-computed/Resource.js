@@ -7,11 +7,11 @@ export default class IconComputedSocial extends PureComponent {
 
   static propTypes = {
     icon: PropTypes.string.isRequired,
-    svgProps: PropTypes.object
+    svgProps: PropTypes.object,
   };
 
   static defaultProps = {
-    size: 48
+    size: 48,
   };
 
   iconMap(safeKind) {
@@ -25,7 +25,7 @@ export default class IconComputedSocial extends PureComponent {
       pdf: "resourcePdf64",
       spreadsheet: "resourceSpreadsheet64",
       presentation: "resourcePresentation64",
-      interactive: "resourceInteractive64"
+      interactive: "resourceInteractive64",
     };
     return map[safeKind];
   }

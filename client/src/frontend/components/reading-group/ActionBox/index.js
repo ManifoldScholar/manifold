@@ -19,7 +19,7 @@ ActionBox.displayName = "ReadingGroup.ActionBox";
 ActionBox.propTypes = {
   title: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
-  actions: PropTypes.node.isRequired
+  actions: PropTypes.node.isRequired,
 };
 
 export default ActionBox;

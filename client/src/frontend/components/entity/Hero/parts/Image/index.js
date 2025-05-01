@@ -25,5 +25,5 @@ export default function HeroImage({ image, alt }) {
 HeroImage.displayName = "Frontend.Entity.Hero.Parts.Image";
 
 HeroImage.propTypes = {
-  image: PropTypes.object.isRequired
+  image: PropTypes.object.isRequired,
 };

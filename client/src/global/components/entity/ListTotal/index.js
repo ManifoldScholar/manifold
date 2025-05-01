@@ -9,7 +9,7 @@ function EntityListTotal({
   count = 0,
   alignLeft,
   tight,
-  className
+  className,
 }) {
   const { t } = useTranslation();
 
@@ -19,8 +19,8 @@ function EntityListTotal({
         <Styled.Value>{count.toLocaleString()}</Styled.Value>{" "}
         {t("counts.entity_total", {
           entity: t(`glossary.${entityName.toLowerCase()}_title_case`, {
-            count
-          })
+            count,
+          }),
         })}
         <Styled.Icon size={30} icon="arrowLongRight16" />
       </Styled.Link>
@@ -35,7 +35,7 @@ EntityListTotal.propTypes = {
   entityName: PropTypes.string.isRequired,
   count: PropTypes.number,
   alignLeft: PropTypes.bool,
-  tight: PropTypes.bool
+  tight: PropTypes.bool,
 };
 
 export default EntityListTotal;

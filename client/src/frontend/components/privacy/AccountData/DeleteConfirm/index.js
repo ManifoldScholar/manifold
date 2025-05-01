@@ -18,14 +18,14 @@ export default function DeleteConfirm() {
 
   const deleteAccount = useApiCallback(meAPI.destroy, { removes: currentUser });
 
-  const notifyDestroy = useNotification(me => ({
+  const notifyDestroy = useNotification((me) => ({
     level: 0,
     id: `USER_DESTROYED_${me.id}`,
     heading: t("forms.privacy.delete.confirmation_header"),
     body: t("forms.privacy.delete.confirmation_body", {
-      name: me?.attributes?.fullName
+      name: me?.attributes?.fullName,
     }),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const deleteAndRedirect = useCallback(async () => {
@@ -35,7 +35,7 @@ export default function DeleteConfirm() {
     dispatch(currentUserActions.logout());
   }, [currentUser, deleteAccount, notifyDestroy, dispatch]);
 
-  const handleDelete = e => {
+  const handleDelete = (e) => {
     e.preventDefault();
     if (!(emailValue === currentUser?.attributes?.email))
       return setMismatch(true);
@@ -44,7 +44,7 @@ export default function DeleteConfirm() {
   };
 
   const mismatchErrorFormatted = [
-    { detail: t("forms.privacy.delete.email_mismatch_error") }
+    { detail: t("forms.privacy.delete.email_mismatch_error") },
   ];
 
   const visibleErrors = mismatch ? mismatchErrorFormatted : errors || [];
@@ -61,7 +61,7 @@ export default function DeleteConfirm() {
             aria-label={t("forms.privacy.delete.email_placeholder")}
             aria-describedby="email-mismatch"
             placeholder={t("forms.privacy.delete.email_placeholder")}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Styled.InputWrapper>
         <Styled.Button

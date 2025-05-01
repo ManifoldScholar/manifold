@@ -8,17 +8,17 @@ export default class NewNotation extends PureComponent {
     return {
       context: "backend",
       size: "default",
-      padding: "default"
+      padding: "default",
     };
   };
 
   static propTypes = {
     pendingAnnotation: PropTypes.object.isRequired,
     projectId: PropTypes.string.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
   };
 
-  saveAnnotation = notation => {
+  saveAnnotation = (notation) => {
     const { pendingAnnotation } = this.props;
     const format = humps.decamelize(notation.type.slice(0, -1)); // Type is a plural, so take the 's' off
     const attributes = { ...pendingAnnotation, format };

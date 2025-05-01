@@ -16,7 +16,7 @@ export default function CollectionEditor({
   readingGroup,
   categories,
   responses,
-  refresh
+  refresh,
 }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ export default function CollectionEditor({
     id: "READING_GROUP_UPDATE_FAILURE",
     heading: t("notifications.reading_group_update_failure"),
     body: t("notifications.reading_group_update_failure_body"),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const collection = getEntityCollection(readingGroup);
@@ -35,7 +35,7 @@ export default function CollectionEditor({
 
   function createCategory(attributes) {
     const call = readingGroupsAPI.createCategory(readingGroup.id, {
-      attributes
+      attributes,
     });
     const createRequest = request(call, requests.feReadingGroupCategoryCreate);
     dispatch(createRequest).promise.then(() => {
@@ -50,10 +50,10 @@ export default function CollectionEditor({
     const call = readingGroupsAPI.updateCategory(
       readingGroup.id,
       categoryId,
-      changes
+      changes,
     );
     const updateRequest = request(call, requests.feReadingGroupCategoryUpdate);
-    dispatch(updateRequest).promise.catch(err => {
+    dispatch(updateRequest).promise.catch((err) => {
       console.error(err);
       notifyUpdateError();
       refresh();
@@ -64,9 +64,9 @@ export default function CollectionEditor({
     const call = readingGroupsAPI.destroyCategory(readingGroup.id, category.id);
     const destroyRequest = request(
       call,
-      requests.feReadingGroupCategoryDestroy
+      requests.feReadingGroupCategoryDestroy,
     );
-    dispatch(destroyRequest).promise.catch(err => {
+    dispatch(destroyRequest).promise.catch((err) => {
       console.error(err);
       notifyUpdateError();
       refresh();
@@ -76,7 +76,7 @@ export default function CollectionEditor({
   function updateCollectable(collectable) {
     const call = collectingAPI.collect([collectable], readingGroup);
     const updateRequest = request(call, requests.feCollectCollectable);
-    dispatch(updateRequest).promise.catch(err => {
+    dispatch(updateRequest).promise.catch((err) => {
       console.error(err);
       notifyUpdateError();
       refresh();
@@ -86,7 +86,7 @@ export default function CollectionEditor({
   function removeCollectable(collectable) {
     const call = collectingAPI.remove([collectable], readingGroup);
     const updateRequest = request(call, requests.feCollectCollectable);
-    dispatch(updateRequest).promise.catch(err => {
+    dispatch(updateRequest).promise.catch((err) => {
       console.error(err);
       notifyUpdateError();
       refresh();
@@ -104,7 +104,7 @@ export default function CollectionEditor({
     onCategoryRemove: removeCategory,
     onCollectableDrag: updateCollectable,
     onCollectableRemove: removeCollectable,
-    onCategoryEditError
+    onCategoryEditError,
   };
 
   return (
@@ -137,5 +137,5 @@ CollectionEditor.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   responses: PropTypes.object.isRequired,
   refresh: PropTypes.func.isRequired,
-  categories: PropTypes.array
+  categories: PropTypes.array,
 };

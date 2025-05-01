@@ -3,7 +3,7 @@ import { DomHandler, Document } from "domhandler";
 import { removeFormatOnlyChildren } from "./utils";
 import htmlSerializer from "dom-serializer";
 
-export const removeFormatting = html => {
+export const removeFormatting = (html) => {
   let update;
   const handler = new DomHandler((error, dom) => {
     if (error) {

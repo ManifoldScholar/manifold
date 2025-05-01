@@ -3,7 +3,7 @@ import {
   respond,
   utilityPrimary,
   buttonUnstyled,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export const Form = styled.form`
@@ -13,7 +13,7 @@ export const Form = styled.form`
   ${respond(
     `min-width: 302px;
   padding-left: 20px;`,
-    65
+    65,
   )}
 `;
 

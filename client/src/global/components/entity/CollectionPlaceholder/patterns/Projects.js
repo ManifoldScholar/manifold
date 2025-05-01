@@ -14,8 +14,8 @@ function ProjectsPlaceholder({
   bgColor = "neutral05",
   style = {
     paddingTop: 50,
-    paddingBottom: 50
-  }
+    paddingBottom: 50,
+  },
 }) {
   const { t } = useTranslation();
 
@@ -40,7 +40,7 @@ function ProjectsPlaceholder({
                   <em />,
                   <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
                     #
-                  </a>
+                  </a>,
                 ]}
               />
             </p>
@@ -63,8 +63,8 @@ function ProjectsPlaceholder({
                   {t("actions.publish_project")}
                 </Link>
               </Authorize>
-            )
-          }
+            ),
+          },
         ]}
       />
     </Wrapper>
@@ -75,7 +75,7 @@ ProjectsPlaceholder.displayName =
   "Global.Entity.CollectionPlaceholder.Projects";
 
 ProjectsPlaceholder.propTypes = {
-  bgColor: PropTypes.oneOf(["white", "neutral05"])
+  bgColor: PropTypes.oneOf(["white", "neutral05"]),
 };
 
 export default ProjectsPlaceholder;

@@ -23,31 +23,29 @@ class SearchQueryForm extends PureComponent {
     textId: PropTypes.string,
     sectionId: PropTypes.string,
     t: PropTypes.func,
-    autoFocus: PropTypes.bool
+    autoFocus: PropTypes.bool,
   };
 
-  /* eslint-disable no-console */
   static defaultProps = {
     searchOnScopeChange: true,
     facets: [],
     scopes: [],
-    setQueryState: state => {
+    setQueryState: (state) => {
       console.warn(
-        "The SearchQuery component expects a setQueryState callback."
+        "The SearchQuery component expects a setQueryState callback.",
       );
       console.warn("Current SearchQuery State");
       console.warn(state);
     },
-    autoFocus: false
+    autoFocus: false,
   };
-  /* eslint-enable no-console */
 
   constructor(props) {
     super(props);
 
     this.handlers = {
       facets: {},
-      scopes: {}
+      scopes: {},
     };
 
     this.state = this.internalStateFromIncomingState(props.initialState);
@@ -59,18 +57,17 @@ class SearchQueryForm extends PureComponent {
       prevProps.searchQueryState !== this.props.searchQueryState
     ) {
       this.setState(
-        this.internalStateFromIncomingState(this.props.searchQueryState)
+        this.internalStateFromIncomingState(this.props.searchQueryState),
       );
     }
   }
 
-  /* eslint-disable no-param-reassign */
   setDefaultScope(state) {
     const availableScopes = this.availableScopes;
     if (availableScopes.length > 0 && !state.scope) {
-      if (availableScopes.find(s => s.value === "project")) {
+      if (availableScopes.find((s) => s.value === "project")) {
         state.scope = "project";
-      } else if (availableScopes.find(s => s.value === "text")) {
+      } else if (availableScopes.find((s) => s.value === "text")) {
         state.scope = "text";
       } else {
         state.scope = availableScopes[availableScopes.length - 1];
@@ -78,7 +75,6 @@ class SearchQueryForm extends PureComponent {
     }
     return state;
   }
-  /* eslint-enable no-param-reassign */
 
   setScopeIdFromScopeString(state) {
     const { scope } = state;
@@ -95,7 +91,7 @@ class SearchQueryForm extends PureComponent {
     this.setState(this.setScopeIdFromScopeString({ scope }), callback);
   }
 
-  setKeyword = event => {
+  setKeyword = (event) => {
     const target = event.target;
     const value = target.value;
     this.setState({ keyword: value });
@@ -114,25 +110,25 @@ class SearchQueryForm extends PureComponent {
       scopes.push({
         label: t("glossary.chapter_one"),
         value: "section",
-        originalValue: "section"
+        originalValue: "section",
       });
     if (textId)
       scopes.push({
         label: t("glossary.text_one"),
         value: "text",
-        originalValue: "text"
+        originalValue: "text",
       });
     if (projectId)
       scopes.push({
         label: t("glossary.project_one"),
         value: "project",
-        originalValue: "project"
+        originalValue: "project",
       });
     return scopes;
   }
 
   get availableFacetValues() {
-    return this.props.facets.map(f => f.value).sort();
+    return this.props.facets.map((f) => f.value).sort();
   }
 
   get searchIdPrefix() {
@@ -152,7 +148,7 @@ class SearchQueryForm extends PureComponent {
       facets: [],
       scope: null,
       keyword: "",
-      ...initialState
+      ...initialState,
     };
     newState = this.setDefaultScope(newState);
     newState = this.setScopeIdFromScopeString(newState);
@@ -185,14 +181,14 @@ class SearchQueryForm extends PureComponent {
       <fieldset
         className={classNames({
           "search-query__filter-group": true,
-          "search-query__filter-group--inline": this.typeIsReader
+          "search-query__filter-group--inline": this.typeIsReader,
         })}
       >
         <legend className="search-query__group-label">
           {this.props.t("search.scopes_label")}
         </legend>
         <div className="search-query__filter-group-list">
-          {this.availableScopes.map(option => (
+          {this.availableScopes.map((option) => (
             <Option
               key={option.value}
               option={option}
@@ -212,7 +208,7 @@ class SearchQueryForm extends PureComponent {
       <CheckboxMixed
         label={this.props.t("search.result_types_label")}
         checkboxes={this.props.facets}
-        onChange={value => this.setFacets(value)}
+        onChange={(value) => this.setFacets(value)}
       />
     );
   }
@@ -247,8 +243,8 @@ class SearchQueryForm extends PureComponent {
     return (
       <form role="search" className="search-query" onSubmit={this.doSearch}>
         <div className="search-query__input-magnify">
-          <UIDConsumer name={id => `${this.searchIdPrefix}-${id}`}>
-            {id => (
+          <UIDConsumer name={(id) => `${this.searchIdPrefix}-${id}`}>
+            {(id) => (
               <>
                 <label htmlFor={id} className="screen-reader-text">
                   {t("search.instructions")}
@@ -256,6 +252,7 @@ class SearchQueryForm extends PureComponent {
                 <input
                   type="text"
                   id={id}
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus={this.props.autoFocus}
                   onChange={this.setKeyword}
                   value={this.state.keyword}

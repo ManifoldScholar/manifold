@@ -13,13 +13,13 @@ export default class DirectionalButton extends PureComponent {
     disabled: PropTypes.bool,
     direction: PropTypes.oneOf([RIGHT, LEFT]),
     paginationText: PropTypes.string.isRequired,
-    screenReaderText: PropTypes.string.isRequired
+    screenReaderText: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
     onClick: () => null,
     disabled: false,
-    direction: RIGHT
+    direction: RIGHT,
   };
 
   get isNext() {

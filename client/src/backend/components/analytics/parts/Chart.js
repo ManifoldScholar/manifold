@@ -16,7 +16,7 @@ function stringToDate(dateStr) {
 function shapeData({ x, y }) {
   return {
     x: stringToDate(x),
-    y
+    y,
   };
 }
 
@@ -24,7 +24,7 @@ const LoadableChart = loadable(() => import("./LoadableChart"));
 
 function Chart({ options, data, tooltipLabel, height = 170 }) {
   const { t } = useTranslation();
-  const shapedData = data?.map(point => shapeData(point));
+  const shapedData = data?.map((point) => shapeData(point));
   const start = shapedData[0]?.x.getTime() || "auto";
   const end = shapedData[shapedData.length - 1]?.x.getTime() || "auto";
   const xAxisDomain = [start, end];
@@ -34,14 +34,14 @@ function Chart({ options, data, tooltipLabel, height = 170 }) {
     options,
     {
       xAxisProps: {
-        domain: xAxisDomain
-      }
-    }
+        domain: xAxisDomain,
+      },
+    },
   );
 
   const chartProps = {
     ...mergedOptions,
-    data: shapedData
+    data: shapedData,
   };
   return (
     <div className="analytics-chart" style={{ width: "100%", height }}>
@@ -54,12 +54,12 @@ Chart.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       x: PropTypes.string,
-      y: PropTypes.number
-    })
+      y: PropTypes.number,
+    }),
   ).isRequired,
   options: PropTypes.object,
   type: PropTypes.string,
-  height: PropTypes.number
+  height: PropTypes.number,
 };
 
 Chart.displayName = "Analytics.Block.Chart";

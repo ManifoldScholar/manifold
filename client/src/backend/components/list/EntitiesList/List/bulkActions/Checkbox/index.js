@@ -38,5 +38,5 @@ BulkActionsCheckbox.displayName = "Global.SignInUp.Inputs.AcceptTermsCheckbox";
 BulkActionsCheckbox.propTypes = {
   onSelect: PropTypes.func,
   onClear: PropTypes.func,
-  checked: PropTypes.bool.isRequired
+  checked: PropTypes.bool.isRequired,
 };

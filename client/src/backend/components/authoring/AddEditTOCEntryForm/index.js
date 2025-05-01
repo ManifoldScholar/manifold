@@ -8,7 +8,7 @@ import { textsAPI } from "api";
 import { useNavigate } from "react-router-dom-v5-compat";
 import {
   formatTreeData,
-  formatTOCData
+  formatTOCData,
 } from "backend/components/authoring/TOCList/treeHelpers";
 
 export default function AddEditTOCEntryForm({
@@ -17,7 +17,7 @@ export default function AddEditTOCEntryForm({
   toc,
   textId,
   sections,
-  setTree
+  setTree,
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -30,31 +30,31 @@ export default function AddEditTOCEntryForm({
           data: {
             sectionId: data.sectionId ?? model.sectionId,
             title: data.label ?? model.label,
-            anchor: data.anchor ?? model.anchor
-          }
+            anchor: data.anchor ?? model.anchor,
+          },
         };
 
         const newTree = {
           ...tree,
-          items: { ...tree.items, [entry.id]: update }
+          items: { ...tree.items, [entry.id]: update },
         };
         const newToc = formatTOCData(newTree);
         return {
-          attributes: { toc: newToc }
+          attributes: { toc: newToc },
         };
       }
 
       const newEntry = {
         id: data.sectionId,
         label: data.label,
-        anchor: data.anchor
+        anchor: data.anchor,
       };
       const newToc = [...toc, newEntry];
       return {
-        attributes: { toc: newToc }
+        attributes: { toc: newToc },
       };
     },
-    [toc, entry, tree]
+    [toc, entry, tree],
   );
 
   const onSuccess = useCallback(
@@ -62,23 +62,21 @@ export default function AddEditTOCEntryForm({
       setTree(formatTreeData(res.data?.attributes?.toc));
       navigate(lh.link("backendTextTOC", textId));
     },
-    [textId, navigate, setTree]
+    [textId, navigate, setTree],
   );
 
-  const sectionOptions = sections.map(s => ({
+  const sectionOptions = sections.map((s) => ({
     value: s.id,
     label: s.name,
-    key: s.id
+    key: s.id,
   }));
 
   const { sectionId, title: label, anchor } = entry?.data ?? {};
 
-  const model = useMemo(() => ({ id: textId, sectionId, label, anchor }), [
-    textId,
-    sectionId,
-    label,
-    anchor
-  ]);
+  const model = useMemo(
+    () => ({ id: textId, sectionId, label, anchor }),
+    [textId, sectionId, label, anchor],
+  );
 
   return (
     <FormContainer.Form
@@ -106,9 +104,9 @@ export default function AddEditTOCEntryForm({
             {
               value: "",
               label: t("texts.toc.section_link_placeholder"),
-              key: 0
+              key: 0,
             },
-            ...sectionOptions
+            ...sectionOptions,
           ]}
           rounded
           wide
@@ -138,5 +136,5 @@ AddEditTOCEntryForm.propTypes = {
   sections: PropTypes.array,
   toc: PropTypes.array.isRequired,
   setTree: PropTypes.func.isRequired,
-  tree: PropTypes.object
+  tree: PropTypes.object,
 };

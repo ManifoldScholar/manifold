@@ -7,5 +7,5 @@ export default {
   Filters,
   Group,
   GroupItem,
-  GroupFilter
+  GroupFilter,
 };

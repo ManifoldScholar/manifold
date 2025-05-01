@@ -8,7 +8,7 @@ import update from "immutability-helper";
 export const initialState = {
   responses: {},
   entities: {},
-  slugMap: {}
+  slugMap: {},
 };
 
 function errorResponse(state, action) {
@@ -20,8 +20,8 @@ function errorResponse(state, action) {
       statusText: action.payload.statusText,
       errors: get(action.payload, "body.errors"),
       request: get(action, "payload.request"),
-      loaded: true
-    }
+      loaded: true,
+    },
   };
   return { ...state, responses };
 }
@@ -46,19 +46,18 @@ function buildMeta(meta, modified = false) {
 
 function entitiesToTypedHash(entities, addTo = {}) {
   if (!entities || Object.keys(entities).length === 0) return addTo;
-  /* eslint-disable no-param-reassign */
+
   return ensureArray(entities).reduce((typedHash, entity) => {
     const { type, id } = entity;
     if (!typedHash[type]) typedHash[type] = {};
     typedHash[type][id] = entity;
     return typedHash;
   }, addTo);
-  /* eslint-enable no-param-reassign */
 }
 
 function typedHashToSlugMap(entities) {
   if (!entities || Object.keys(entities).length === 0) return {};
-  /* eslint-disable no-param-reassign */
+
   return Object.keys(entities).reduce((slugMap, type) => {
     if (!slugMap[type]) slugMap[type] = {};
     slugMap[type] = Object.values(entities[type]).reduce(
@@ -73,11 +72,10 @@ function typedHashToSlugMap(entities) {
         entityHash[entity.attributes.slug] = entity.id;
         return entityHash;
       },
-      {}
+      {},
     );
     return slugMap;
   }, {});
-  /* eslint-enable no-param-reassign */
 }
 
 function extractResults(data) {
@@ -99,16 +97,16 @@ function normalizeResponseAction(action) {
     links = {},
     force = false,
     noTouch = false,
-    appends = null
+    appends = null,
   } = payload;
   const options = { appends, force, noTouch };
   const typedIncluded = entitiesToTypedHash(included);
 
-  const adjustedAtomicResults = atomicResults.map(r => r.data);
+  const adjustedAtomicResults = atomicResults.map((r) => r.data);
 
   const withAtomicUpdates = entitiesToTypedHash(
     adjustedAtomicResults,
-    typedIncluded
+    typedIncluded,
   );
   const entities = entitiesToTypedHash(data, withAtomicUpdates);
   const results = extractResults(data);
@@ -120,13 +118,13 @@ function normalizeResponseAction(action) {
     request,
     meta,
     links,
-    options
+    options,
   };
   const updatedPayload = update(action, {
     payload: {
-      $set: newPayload
+      $set: newPayload,
     },
-    options: { $set: options }
+    options: { $set: options },
   });
   return updatedPayload;
 }
@@ -165,7 +163,7 @@ function responseFromPayload(payload, previousResponse) {
     type: deriveType(results),
     request,
     loaded: true,
-    appends: get(previousResponse, "appends", false)
+    appends: get(previousResponse, "appends", false),
   };
 }
 
@@ -177,12 +175,12 @@ function transformStateTouchResponses(state, payload) {
   forEach(state.responses, (response, meta) => {
     if (!response.includedEntityIds) return;
     if (
-      response.includedEntityIds.some(includedEntityId =>
-        entityIds.includes(includedEntityId)
+      response.includedEntityIds.some((includedEntityId) =>
+        entityIds.includes(includedEntityId),
       )
     ) {
       newState = update(newState, {
-        responses: { [meta]: { $set: { ...response } } }
+        responses: { [meta]: { $set: { ...response } } },
       });
     }
   });
@@ -195,7 +193,7 @@ function transformStateEntities(state, payload) {
   const forceOverwrite = options.force;
 
   const mergedEntities = {};
-  Object.keys(newEntities).forEach(type => {
+  Object.keys(newEntities).forEach((type) => {
     const adjusted = pickBy(newEntities[type], (e, uuid) => {
       if (forceOverwrite) return true;
       const stateEntity = get(entities, `${type}.${uuid}`);
@@ -206,7 +204,7 @@ function transformStateEntities(state, payload) {
     mergedEntities[type] = { ...entities[type], ...adjusted };
   });
   return update(state, {
-    entities: { $set: { ...entities, ...mergedEntities } }
+    entities: { $set: { ...entities, ...mergedEntities } },
   });
 }
 
@@ -215,14 +213,14 @@ function transformStateSlugMap(state, payload) {
   const { slugMap: newSlugMap } = payload;
   if (!newSlugMap) return slugMap;
   const mergedSlugMap = {};
-  Object.keys(newSlugMap).forEach(type => {
+  Object.keys(newSlugMap).forEach((type) => {
     mergedSlugMap[type] = {
       ...slugMap[type],
-      ...newSlugMap[type]
+      ...newSlugMap[type],
     };
   });
   return update(state, {
-    slugMap: { $set: { ...slugMap, ...mergedSlugMap } }
+    slugMap: { $set: { ...slugMap, ...mergedSlugMap } },
   });
 }
 
@@ -267,8 +265,8 @@ function handleRequest(state, action) {
     [meta]: {
       entities: null,
       loaded: false,
-      appends: action.payload.appends || false
-    }
+      appends: action.payload.appends || false,
+    },
   };
   return { ...state, responses };
 }
@@ -277,7 +275,7 @@ function handleFlush(state, action) {
   const metasToFlush = action.payload;
   const responses = { ...state.responses };
   if (metasToFlush?.length)
-    metasToFlush.forEach(meta => {
+    metasToFlush.forEach((meta) => {
       delete responses[meta];
     });
   let entities = state.entities;
@@ -291,11 +289,11 @@ function flushAll(state, actionIgnored) {
   return {
     ...initialState,
     responses: {
-      settings: state.responses.settings
+      settings: state.responses.settings,
     },
     entities: {
-      settings: state.entities.settings
-    }
+      settings: state.entities.settings,
+    },
   };
 }
 
@@ -306,7 +304,7 @@ function handleRemove(state, action) {
   forEach(state.responses, (response, key) => {
     if (response.type !== type) return true;
     if (!isArray(response.collection)) return true;
-    const index = findIndex(response.collection, e => e.id === id);
+    const index = findIndex(response.collection, (e) => e.id === id);
     if (index === -1) return true;
     const newCollection = response.collection.slice();
     newCollection.splice(index, 1);
@@ -314,7 +312,7 @@ function handleRemove(state, action) {
     const newResponse = {
       ...response,
       collection: newCollection,
-      meta: newMeta
+      meta: newMeta,
     };
     responsesOverlay[key] = newResponse;
   });
@@ -328,7 +326,8 @@ function handleAdd(state, action) {
   const meta = state.responses[targetMeta];
   if (!meta) return state;
   if (!Array.isArray(meta.collection)) return state;
-  if (meta.collection.find(entity => entity.id === addEntity.id)) return state;
+  if (meta.collection.find((entity) => entity.id === addEntity.id))
+    return state;
   const newCollection = [...meta.collection, addEntity];
   const newMeta = { ...meta, collection: newCollection };
   if (!get(newMeta, "type")) newMeta.type = addEntity.type;

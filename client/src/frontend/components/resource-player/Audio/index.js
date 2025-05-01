@@ -11,5 +11,5 @@ export default function ResourcePlayerAudio({ resource }) {
 ResourcePlayerAudio.displayName = "Resource.Player.Audio";
 
 ResourcePlayerAudio.propTypes = {
-  resource: PropTypes.object
+  resource: PropTypes.object,
 };

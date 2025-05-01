@@ -4,18 +4,17 @@ import has from "lodash/has";
 import * as Styled from "./styles";
 
 export default function FooterPartNavigation({ children }) {
-  const withIcons = children.filter(child => has(child, "icon"));
-  const withoutIcons = children.filter(child => !has(child, "icon"));
+  const withIcons = children.filter((child) => has(child, "icon"));
+  const withoutIcons = children.filter((child) => !has(child, "icon"));
   const groupedLinks = chunk(withoutIcons, 4);
 
-  /* eslint-disable react/no-array-index-key */
   return (
     <div>
       <Styled.Nav $mobile aria-hidden>
         <Styled.List>
           <li>
             <Styled.Group>
-              {withoutIcons.map(link => (
+              {withoutIcons.map((link) => (
                 <Styled.Item key={`${link.to}${link.title}`}>
                   <Styled.Link item={link} />
                 </Styled.Item>
@@ -24,7 +23,7 @@ export default function FooterPartNavigation({ children }) {
           </li>
           <li>
             <Styled.Group>
-              {withIcons.map(link => (
+              {withIcons.map((link) => (
                 <Styled.Item key={`${link.to}${link.title}`}>
                   <Styled.Link item={link} />
                 </Styled.Item>
@@ -39,7 +38,7 @@ export default function FooterPartNavigation({ children }) {
             <li key={linkGroupIndex}>
               {linkGroup.length > 0 && (
                 <Styled.Group>
-                  {linkGroup.map(link => (
+                  {linkGroup.map((link) => (
                     <Styled.Item key={`${link.to}${link.title}`}>
                       <Styled.Link item={link} />
                     </Styled.Item>
@@ -50,7 +49,7 @@ export default function FooterPartNavigation({ children }) {
           ))}
           <li>
             <Styled.Group>
-              {withIcons.map(link => (
+              {withIcons.map((link) => (
                 <Styled.Item key={`${link.to}${link.title}`}>
                   <Styled.Link item={link} />
                 </Styled.Item>
@@ -61,5 +60,4 @@ export default function FooterPartNavigation({ children }) {
       </Styled.Nav>
     </div>
   );
-  /* eslint-enable react/no-array-index-key */
 }

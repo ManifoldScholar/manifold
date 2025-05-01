@@ -14,13 +14,13 @@ function JournalPropertiesContainer({ journal }) {
   const createSubject = useApiCallback(subjectsAPI.create);
 
   const createSubjectFromValue = useCallback(
-    name => {
+    (name) => {
       return createSubject({ type: "subject", attributes: { name } });
     },
-    [createSubject]
+    [createSubject],
   );
 
-  const formatData = data => {
+  const formatData = (data) => {
     const { avatarAltText, avatar, ...rest } = data?.attributes ?? {};
 
     const finalAvatarData =
@@ -34,7 +34,7 @@ function JournalPropertiesContainer({ journal }) {
 
     return {
       relationships,
-      attributes: { avatar: finalAvatarData, ...rest }
+      attributes: { avatar: finalAvatarData, ...rest },
     };
   };
 
@@ -54,7 +54,7 @@ function JournalPropertiesContainer({ journal }) {
           className="form-secondary"
           formatData={formatData}
         >
-          {getModelValue => (
+          {(getModelValue) => (
             <>
               <Form.FieldGroup label={t("journals.forms.properties.header")}>
                 <Form.TextInput
@@ -87,7 +87,7 @@ function JournalPropertiesContainer({ journal }) {
                   label={t("journals.forms.properties.draft_mode_label")}
                   name="attributes[draft]"
                   instructions={t(
-                    "journals.forms.properties.draft_mode_instructions"
+                    "journals.forms.properties.draft_mode_instructions",
                   )}
                 />
                 <Form.Switch
@@ -95,19 +95,19 @@ function JournalPropertiesContainer({ journal }) {
                   label={t("journals.forms.properties.show_home_label")}
                   name="attributes[showOnHomepage]"
                   instructions={t(
-                    "journals.forms.properties.show_home_instructions"
+                    "journals.forms.properties.show_home_instructions",
                   )}
                 />
                 {getModelValue("attributes[showOnHomepage]") && (
                   <Form.NumberInput
                     wide
                     label={t(
-                      "journals.forms.properties.homepage_priority_label"
+                      "journals.forms.properties.homepage_priority_label",
                     )}
                     name="attributes[homePagePriority]"
                     placeholder="0"
                     instructions={t(
-                      "journals.forms.properties.homepage_priority_instructions"
+                      "journals.forms.properties.homepage_priority_instructions",
                     )}
                   />
                 )}
@@ -119,20 +119,20 @@ function JournalPropertiesContainer({ journal }) {
                   label={t("journals.forms.properties.social_card_label")}
                   name="attributes[socialTitle]"
                   placeholder={t(
-                    "journals.forms.properties.social_card_placeholder"
+                    "journals.forms.properties.social_card_placeholder",
                   )}
                   instructions={t(
-                    "journals.forms.properties.social_card_instructions"
+                    "journals.forms.properties.social_card_instructions",
                   )}
                 />
                 <Form.TextArea
                   wide
                   label={t(
-                    "journals.forms.properties.social_description_label"
+                    "journals.forms.properties.social_description_label",
                   )}
                   name="attributes[socialDescription]"
                   placeholder={t(
-                    "journals.forms.properties.social_description_placeholder"
+                    "journals.forms.properties.social_description_placeholder",
                   )}
                 />
                 <Form.Upload
@@ -143,7 +143,7 @@ function JournalPropertiesContainer({ journal }) {
                   name="attributes[socialImage]"
                   remove="attributes[removeSocialImage]"
                   instructions={t(
-                    "journals.forms.properties.social_image_instructions"
+                    "journals.forms.properties.social_image_instructions",
                   )}
                 />
               </Form.FieldGroup>
@@ -155,10 +155,10 @@ function JournalPropertiesContainer({ journal }) {
                   listStyle={"well"}
                   name="relationships[subjects]"
                   options={subjectsAPI.index}
-                  optionToLabel={subject => subject.attributes.name}
+                  optionToLabel={(subject) => subject.attributes.name}
                   newToValue={createSubjectFromValue}
                   placeholder={t(
-                    "journals.forms.properties.subjects_placeholder"
+                    "journals.forms.properties.subjects_placeholder",
                   )}
                   listRowComponent="SubjectRow"
                 />
@@ -169,8 +169,8 @@ function JournalPropertiesContainer({ journal }) {
                   name="attributes[tagList]"
                   placeholder={t("journals.forms.properties.tags_placeholder")}
                   options={tagsAPI.index}
-                  optionToLabel={tag => tag.attributes.name}
-                  optionToValue={tag => tag.attributes.name}
+                  optionToLabel={(tag) => tag.attributes.name}
+                  optionToValue={(tag) => tag.attributes.name}
                   allowNew
                 />
               </Form.FieldGroup>
@@ -184,7 +184,7 @@ function JournalPropertiesContainer({ journal }) {
 }
 
 JournalPropertiesContainer.propTypes = {
-  journal: PropTypes.object
+  journal: PropTypes.object,
 };
 
 export default JournalPropertiesContainer;

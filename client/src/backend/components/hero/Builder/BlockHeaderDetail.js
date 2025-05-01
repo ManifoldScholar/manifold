@@ -28,7 +28,7 @@ const BlockHeaderDetail = ({ titleId, title, description }) => {
 BlockHeaderDetail.propTypes = {
   titleId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string.isRequired,
-  description: PropTypes.string
+  description: PropTypes.string,
 };
 
 export default BlockHeaderDetail;

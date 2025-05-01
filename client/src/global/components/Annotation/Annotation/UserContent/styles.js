@@ -6,7 +6,7 @@ import {
   buttonUnstyled,
   utilityPrimary,
   defaultHoverStyle,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Inner = styled.div`

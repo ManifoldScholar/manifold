@@ -17,7 +17,7 @@ class FormMaskedTextInput extends Component {
   static propTypes = {
     mask: PropTypes.oneOfType([
       PropTypes.string.isRequired,
-      PropTypes.array.isRequired
+      PropTypes.array.isRequired,
     ]),
     placeholder: PropTypes.string,
     label: PropTypes.string,
@@ -26,11 +26,11 @@ class FormMaskedTextInput extends Component {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     onClick: PropTypes.func,
     wide: PropTypes.bool,
-    autoComplete: PropTypes.string
+    autoComplete: PropTypes.string,
   };
 
   static defaultProps = {
-    autoComplete: "off"
+    autoComplete: "off",
   };
 
   constructor() {
@@ -49,12 +49,12 @@ class FormMaskedTextInput extends Component {
   currencyMask() {
     return createNumberMask({
       prefix: "$",
-      allowDecimal: true
+      allowDecimal: true,
     });
   }
 
   hashTagMask() {
-    return raw => {
+    return (raw) => {
       // eslint-disable-next-line
       const wordChar = /^#?[^\s!@#$%^&*()=+.\/,[{]};:'"?><]+$/;
       // eslint-disable-next-line
@@ -70,7 +70,7 @@ class FormMaskedTextInput extends Component {
   }
 
   doiMask() {
-    return raw => {
+    return (raw) => {
       const base = "https://doi.org/10.".split("");
       const wordChar = /^[A-Za-z0-9_.;()\-/]$/;
       const adjusted = raw.replace(/\s/g, "");
@@ -103,7 +103,7 @@ class FormMaskedTextInput extends Component {
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <FieldWrapper className={this.props.wide ? "wide" : undefined}>
             <BaseLabel
               id={`${this.idPrefix}-${id}`}

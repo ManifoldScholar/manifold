@@ -12,6 +12,6 @@ export default () => {
     hydrate(readerRoutes, readerRouteContainers),
     hydrate(backendRoutes, backendRouteContainers),
     hydrate(frontendRoutes, frontendRouteContainers),
-    { component: NotFound }
+    { component: NotFound },
   ];
 };

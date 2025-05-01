@@ -7,7 +7,7 @@ import {
   buttonUnstyled,
   defaultTransitionProps,
   screenReaderText,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 const ACTION_MARGIN_TOP = 18;
@@ -54,7 +54,7 @@ export default `
           height: 54px;
           margin-right: 9px;
         `,
-        60
+        60,
       )}
     }
 
@@ -102,7 +102,7 @@ export default `
           flex-direction: row;
           align-items: center;
         `,
-        60
+        60,
       )}
     }
 

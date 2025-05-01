@@ -14,18 +14,18 @@ export class EntitlementForm extends PureComponent {
     history: PropTypes.object,
     redirectAfterSuccess: PropTypes.string,
     entitlement: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   handleSuccess = () => {
     if (this.props.redirectAfterSuccess && this.props.history) {
       return this.props.history.push(this.props.redirectAfterSuccess, {
-        keepNotifications: true
+        keepNotifications: true,
       });
     }
   };
 
-  composeCreateCall = entitlement => {
+  composeCreateCall = (entitlement) => {
     const entity = this.props.entity;
     return entitlementsAPI.create(entity, entitlement);
   };
@@ -49,8 +49,8 @@ export class EntitlementForm extends PureComponent {
             listStyle={"well"}
             name="attributes[targetUrl]"
             options={entitlementTargetsAPI.index}
-            optionToValue={et => et.id}
-            optionToLabel={et => et.attributes.name}
+            optionToValue={(et) => et.id}
+            optionToLabel={(et) => et.attributes.name}
             placeholder={t("entitlements.new.user_select_placeholder")}
             predictive
           />

@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import Utility from "global/components/utility";
@@ -7,7 +6,7 @@ import * as Styled from "./styles";
 
 function ProjectsButton(
   { className, link, index, toggleVisible, journalIsActive, ...props },
-  ref
+  ref,
 ) {
   const { t } = useTranslation();
 

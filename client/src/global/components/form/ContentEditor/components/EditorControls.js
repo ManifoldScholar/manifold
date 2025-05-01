@@ -12,7 +12,7 @@ export default function EditorControls({
   onClickUndo,
   toggleStyles,
   errors,
-  controlsRef
+  controlsRef,
 }) {
   return (
     <Styled.Controls id="editor-controls">

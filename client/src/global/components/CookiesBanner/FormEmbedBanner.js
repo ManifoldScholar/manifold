@@ -9,7 +9,7 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
   const { t } = useTranslation();
 
   const [prefs, setPrefs] = useState({ manifold: false, google: false });
-  const onChange = pref => setPrefs({ ...prefs, [pref]: !prefs[pref] });
+  const onChange = (pref) => setPrefs({ ...prefs, [pref]: !prefs[pref] });
 
   const settings = useFromStore("settings", "select");
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
@@ -75,5 +75,5 @@ FormEmbedBanner.displayName = "Global.CookiesBanner.FormEmbed";
 FormEmbedBanner.propTypes = {
   declineAll: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
-  message: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired
+  message: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
 };

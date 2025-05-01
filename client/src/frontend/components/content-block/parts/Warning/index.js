@@ -3,5 +3,5 @@ import Incomplete from "./patterns/Incomplete";
 
 export default {
   AccessDenied,
-  Incomplete
+  Incomplete,
 };

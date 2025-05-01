@@ -6,7 +6,7 @@ import { generateError, getDefaultError } from "./errors";
 
 function getErrorMessages(block) {
   const errors = block.attributes.incompleteRenderAttributes
-    .map(key => {
+    .map((key) => {
       const error = generateError(key, block);
       if (!error) return null;
       return <span key={key}>{error}</span>;
@@ -37,7 +37,7 @@ function Incomplete({ block }) {
 Incomplete.displayName = "ContentBlock.Warning.Incomplete";
 
 Incomplete.propTypes = {
-  block: PropTypes.object.isRequired
+  block: PropTypes.object.isRequired,
 };
 
 export default Incomplete;

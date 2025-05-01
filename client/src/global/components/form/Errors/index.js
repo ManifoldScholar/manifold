@@ -6,7 +6,7 @@ import Errorable from "../Errorable";
 class Errors extends PureComponent {
   static propTypes = {
     names: PropTypes.array.isRequired,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
   };
 
   render() {

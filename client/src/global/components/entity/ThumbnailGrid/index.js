@@ -7,7 +7,7 @@ export default function ThumbnailGrid({
   minItemWidth = "250px",
   minColumns = 2,
   children,
-  parentView = false
+  parentView = false,
 }) {
   const [useGrid, setUseGrid] = useState(true);
   const breakpoint = parseInt(minItemWidth, 10) * minColumns;
@@ -15,7 +15,7 @@ export default function ThumbnailGrid({
     onResize: ({ width }) => {
       if (width > breakpoint) return setUseGrid(true);
       return setUseGrid(false);
-    }
+    },
   });
 
   return (
@@ -37,5 +37,5 @@ ThumbnailGrid.propTypes = {
   minItemWidth: PropTypes.string,
   minColumns: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  parentView: PropTypes.bool
+  parentView: PropTypes.bool,
 };

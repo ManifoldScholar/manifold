@@ -12,7 +12,7 @@ export const Link = styled.a`
       float: right;
       margin-bottom: 0;
     `,
-    65
+    65,
   )}
 `;
 

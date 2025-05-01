@@ -21,7 +21,7 @@ function RadioGroup({ preference, value, options, onChange, inputProps = {} }) {
           {preference.instructions}
         </Styled.Instructions>
       )}
-      {Object.keys(localizedOptions).map(option => {
+      {Object.keys(localizedOptions).map((option) => {
         const checked = value === option;
 
         return (
@@ -55,7 +55,7 @@ RadioGroup.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-  inputProps: PropTypes.object
+  inputProps: PropTypes.object,
 };
 
 export default RadioGroup;

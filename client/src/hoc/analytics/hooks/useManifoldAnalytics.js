@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import get from "lodash/get";
 import CookieHelper from "helpers/cookie/Browser";
 import config from "config";
@@ -53,20 +53,20 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
       if (config.environment.isDevelopment) {
         ch.notice(
           `Manifold analytics initialized.`,
-          "chart_with_upwards_trend"
+          "chart_with_upwards_trend",
         );
       }
     }
   }, [dispatch, settings, consentManifoldAnalytics]);
 
-  const track = trackedEvent => {
+  const track = (trackedEvent) => {
     const { visitToken, visitorToken } = getTokens();
     const { resourceType, resourceId, event } = trackedEvent;
 
     if (config.environment.isDevelopment) {
       ch.notice(
         `Tracking Manifold Analytics event: ${event}/${resourceType}/${resourceId}.`,
-        "chart_with_upwards_trend"
+        "chart_with_upwards_trend",
       );
     }
     const payload = {
@@ -74,13 +74,13 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
         name: event,
         properties: {},
         recordType: resourceType,
-        recordId: resourceId
-      }
+        recordId: resourceId,
+      },
     };
     const call = analyticEventsAPI.create(visitorToken, visitToken, payload);
     const trackRequest = request(call, requests.analyticsEventCreate, {
       silent: true,
-      suppressErrors: true
+      suppressErrors: true,
     });
     dispatch(trackRequest);
   };

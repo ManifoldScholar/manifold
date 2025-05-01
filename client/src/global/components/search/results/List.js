@@ -14,7 +14,7 @@ const TYPE_COMPONENT_MAP = {
   text: Types.Text,
   journal: Types.Journal,
   journalIssue: Types.Issue,
-  journalVolume: Types.Volume
+  journalVolume: Types.Volume,
 };
 
 export default function SearchResultsList(props) {
@@ -24,7 +24,7 @@ export default function SearchResultsList(props) {
     paginationClickHandler,
     context = "frontend",
     hideParent = false,
-    padding = 3
+    padding = 3,
   } = props;
 
   const { t } = useTranslation();
@@ -41,7 +41,7 @@ export default function SearchResultsList(props) {
         />
       </span>
       <Styled.List>
-        {results.map(result => {
+        {results.map((result) => {
           const { searchableType } = result.attributes;
           const Component = TYPE_COMPONENT_MAP[searchableType];
           return Component ? (
@@ -70,5 +70,5 @@ SearchResultsList.propTypes = {
   pagination: PropTypes.object,
   paginationClickHandler: PropTypes.func.isRequired,
   context: PropTypes.string,
-  hideParent: PropTypes.bool
+  hideParent: PropTypes.bool,
 };

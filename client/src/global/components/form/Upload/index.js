@@ -10,61 +10,61 @@ export class FormUpload extends Component {
   static types = {
     images: {
       accepts: "image/*",
-      extensions: "gif, jpeg, jpg, png"
+      extensions: "gif, jpeg, jpg, png",
     },
     audio: {
       accepts: "audio/*",
-      extensions: "mp3, flac, wav, ogg, oga"
+      extensions: "mp3, flac, wav, ogg, oga",
     },
     video: {
       accepts: "video/x-flv,video/*",
-      extensions: "mp4, webm, flv, mov, avi"
+      extensions: "mp4, webm, flv, mov, avi",
     },
     pdf: {
       accepts: "application/pdf",
-      extensions: "pdf"
+      extensions: "pdf",
     },
     document: {
       accepts:
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
         "application/msword,text/*," +
         "application/vnd.oasis.opendocument.text",
-      extensions: "doc, docx, txt, odt"
+      extensions: "doc, docx, txt, odt",
     },
     csv: {
       accepts: "text/*,",
-      extensions: "txt, csv"
+      extensions: "txt, csv",
     },
     spreadsheet: {
       accepts:
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet," +
         "application/vnd.ms-excel," +
         "application/vnd.oasis.opendocument.spreadsheet,",
-      extensions: "xls, xlsx, ods"
+      extensions: "xls, xlsx, ods",
     },
     presentation: {
       accepts:
         "application/vnd.openxmlformats-officedocument.presentationml.presentation," +
         "application/vnd.ms-powerpoint," +
         "application/vnd.oasis.opendocument.presentation",
-      extensions: "ppt, pptx, odp"
+      extensions: "ppt, pptx, odp",
     },
     texts: {
       accepts: "application/epub+zip,application/zip,text/*",
-      extensions: "epub, zip, md"
+      extensions: "epub, zip, md",
     },
     json: {
       accepts: "application/json",
-      extensions: "json"
+      extensions: "json",
     },
     vtt: {
       accepts: "text/vtt",
-      extensions: "vtt"
+      extensions: "vtt",
     },
     any: {
       accepts: null,
-      extensions: null
-    }
+      extensions: null,
+    },
   };
 
   static displayName = "Form.Upload";
@@ -82,7 +82,7 @@ export class FormUpload extends Component {
       "portrait",
       "landscape",
       "horizontal",
-      "embed"
+      "embed",
     ]),
     placeholder: PropTypes.string, // Allows override of placeholder graphic
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
@@ -90,12 +90,12 @@ export class FormUpload extends Component {
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array,
-    fileNameFrom: PropTypes.string
+    fileNameFrom: PropTypes.string,
   };
 
   static defaultProps = {
     layout: "square",
-    accepts: "any"
+    accepts: "any",
   };
 
   get idPrefix() {
@@ -110,14 +110,14 @@ export class FormUpload extends Component {
     return "upload-instructions";
   }
 
-  updateValue = state => {
+  updateValue = (state) => {
     const { attachment, removed } = state;
     const { set, setOther, remove: removeName } = this.props;
     if (setOther && removeName) setOther(removed, removeName);
     if (attachment) {
       const { type, name } = attachment;
       const reader = new FileReader();
-      reader.onload = eventIgnored => {
+      reader.onload = (eventIgnored) => {
         set({ data: reader.result, content_type: type, filename: name });
       };
       reader.readAsDataURL(attachment);
@@ -143,7 +143,7 @@ export class FormUpload extends Component {
     } = this.props;
     return (
       <UIDConsumer>
-        {id =>
+        {(id) =>
           isUserAvatar ? (
             <UserAvatar
               {...baseProps}

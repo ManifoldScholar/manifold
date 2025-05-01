@@ -15,7 +15,7 @@ const DEFAULT_FORMATS = ["annotation"];
 
 function getSectionName(text, sectionId) {
   const { sectionsMap } = text.attributes;
-  const section = sectionsMap.find(s => s.id === sectionId);
+  const section = sectionsMap.find((s) => s.id === sectionId);
   if (!section) return null;
   return section.name;
 }
@@ -24,7 +24,7 @@ function ReaderNotesContainer({
   readingGroups,
   currentAnnotationOverlayReadingGroup: currentGroup,
   setAnnotationOverlayReadingGroup,
-  children
+  children,
 }) {
   const { textId, sectionId } = useParams();
   const navigate = useNavigate();
@@ -36,9 +36,9 @@ function ReaderNotesContainer({
       orphaned: !!(currentGroup === "orphaned"),
       text: text?.id,
       formats: [...DEFAULT_FORMATS],
-      readingGroup: currentGroup === "orphaned" ? "me" : currentGroup
+      readingGroup: currentGroup === "orphaned" ? "me" : currentGroup,
     }),
-    [text, currentGroup]
+    [text, currentGroup],
   );
   const [filters, setFilters] = useFilterState(baseFilters);
   const fetchFilters = useMemo(() => {
@@ -53,12 +53,12 @@ function ReaderNotesContainer({
   const { data: myAnnotations, meta: myMeta } = useFetch({
     request: [meAPI.annotations, fetchFilters],
     condition: showMyAnnotations,
-    options: { fetchKey: requests.rMyFilteredAnnotationsForText }
+    options: { fetchKey: requests.rMyFilteredAnnotationsForText },
   });
   const { data: rgAnnotations, meta: rgMeta } = useFetch({
     request: [readingGroupsAPI.annotations, groupId, fetchFilters],
     condition: !showMyAnnotations,
-    options: { fetchKey: requests.rReadingGroupFilteredAnnotationsForText }
+    options: { fetchKey: requests.rReadingGroupFilteredAnnotationsForText },
   });
 
   const annotations = showMyAnnotations ? myAnnotations : rgAnnotations;
@@ -68,12 +68,12 @@ function ReaderNotesContainer({
     const annotationGroups = groupBy(annotations, "attributes.textSectionId");
 
     return text.attributes.spine
-      .map(id => {
+      .map((id) => {
         if (!annotationGroups[id]) return null;
         return {
           id,
           name: getSectionName(text, id),
-          annotations: annotationGroups[id]
+          annotations: annotationGroups[id],
         };
       })
       .filter(Boolean);
@@ -88,7 +88,7 @@ function ReaderNotesContainer({
       "readerSection",
       textId,
       textSectionId,
-      `#annotation-${annotation.id}`
+      `#annotation-${annotation.id}`,
     );
     commonActions.panelToggle("notes");
     commonActions.showMyNotes();
@@ -101,7 +101,7 @@ function ReaderNotesContainer({
       "readerSection",
       textId,
       sectionId,
-      "#group-annotations"
+      "#group-annotations",
     );
     navigate(url);
   }
@@ -114,7 +114,7 @@ function ReaderNotesContainer({
     sortedAnnotations,
     section,
     handleVisitAnnotation,
-    handleFilterChange: updates => {
+    handleFilterChange: (updates) => {
       setFilters({ newState: { ...filters, ...updates } });
     },
     handleSeeAllClick,
@@ -122,7 +122,7 @@ function ReaderNotesContainer({
     annotated: meta.annotated,
     filters,
     defaultFormats: DEFAULT_FORMATS,
-    readingGroups
+    readingGroups,
   };
 
   if (!children) return null;
@@ -134,7 +134,7 @@ ReaderNotesContainer.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   readingGroups: PropTypes.array,
   setAnnotationOverlayReadingGroup: PropTypes.func.isRequired,
-  currentAnnotationOverlayReadingGroup: PropTypes.string
+  currentAnnotationOverlayReadingGroup: PropTypes.string,
 };
 
 export default withReadingGroups(ReaderNotesContainer);

@@ -11,7 +11,7 @@ class TextInnerStatic extends Component {
   static propTypes = {
     text: PropTypes.object.isRequired,
     category: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get text() {
@@ -40,7 +40,7 @@ class TextInnerStatic extends Component {
             <h3 className="texts-list__title">
               <span
                 dangerouslySetInnerHTML={{
-                  __html: this.text.attributes.titleFormatted
+                  __html: this.text.attributes.titleFormatted,
                 }}
               />
               <span className="texts-list__subtitle">
@@ -48,7 +48,7 @@ class TextInnerStatic extends Component {
               </span>
               {this.labels.length > 0 && (
                 <span className="texts-list__labels">
-                  {this.labels.map(label => (
+                  {this.labels.map((label) => (
                     <span key={label} className="texts-list__label">
                       {label}
                     </span>

@@ -11,5 +11,5 @@ export default {
   TableOfContents,
   Texts,
   Metadata,
-  RecentActivity
+  RecentActivity,
 };

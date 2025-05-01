@@ -14,11 +14,11 @@ function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {
   const { role, name } = attributes;
 
   const meta = `${attributes.annotationsCount} ${t("glossary.annotation", {
-    count: attributes.annotationsCount
+    count: attributes.annotationsCount,
   })} | ${attributes.highlightsCount} ${t("glossary.highlight", {
-    count: attributes.highlightsCount
+    count: attributes.highlightsCount,
   })} | ${attributes.commentsCount} ${t("glossary.comment", {
-    count: attributes.commentsCount
+    count: attributes.commentsCount,
   })}`;
 
   const additionalProps = {
@@ -30,14 +30,14 @@ function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {
         ? [
             {
               text: t("common.public"),
-              level: "notice"
-            }
+              level: "notice",
+            },
           ]
-        : [])
+        : []),
     ],
     active: active === id,
     onRowClick: lh.link("backendReadingGroupMembers", readingGroup.id),
-    rowClickMode: "inline"
+    rowClickMode: "inline",
   };
 
   const utility = (
@@ -56,7 +56,7 @@ function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {
 ReadingGroupMembershipRow.propTypes = {
   entity: PropTypes.object,
   active: PropTypes.string,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
 };
 
 export default ReadingGroupMembershipRow;

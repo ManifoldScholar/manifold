@@ -27,7 +27,7 @@ export class ProjectContent extends PureComponent {
     history: PropTypes.object,
     children: PropTypes.func,
     dispatch: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static cloneBlocks(props) {
@@ -48,7 +48,7 @@ export class ProjectContent extends PureComponent {
     this.state = {
       blocks: ProjectContent.cloneBlocks(props),
       activeDraggableType: null,
-      response: props.contentBlocksResponse
+      response: props.contentBlocksResponse,
     };
   }
 
@@ -56,11 +56,11 @@ export class ProjectContent extends PureComponent {
     this.setState({ activeDraggableType: type });
   };
 
-  onDragEnd = draggable => {
+  onDragEnd = (draggable) => {
     this.setState({ activeDraggableType: null });
     const draggableHelper = new DraggableEventHelper(
       draggable,
-      this.currentBlocks
+      this.currentBlocks,
     );
     if (!draggableHelper.actionable) return;
     const action = draggableHelper.action;
@@ -75,7 +75,7 @@ export class ProjectContent extends PureComponent {
     const { index, direction, callback } = addtlParams;
     const newIndex = direction === "down" ? index + 1 : index - 1;
 
-    const filteredBlocks = this.currentBlocks.filter(b => b.id !== block.id);
+    const filteredBlocks = this.currentBlocks.filter((b) => b.id !== block.id);
     const updatedBlocks = filteredBlocks.toSpliced(newIndex, 0, block);
 
     const clonedBlock = cloneDeep(block);
@@ -83,7 +83,7 @@ export class ProjectContent extends PureComponent {
 
     this.setState(
       { blocks: updatedBlocks },
-      this.updateBlock(clonedBlock, callback)
+      this.updateBlock(clonedBlock, callback),
     );
   };
 
@@ -102,7 +102,7 @@ export class ProjectContent extends PureComponent {
       deleteBlock: this.handleDeleteBlock,
       saveBlockPosition: this.updateBlock,
       editBlock: this.editBlock,
-      onKeyboardMove: this.onKeyboardMove
+      onKeyboardMove: this.onKeyboardMove,
     };
   }
 
@@ -112,24 +112,24 @@ export class ProjectContent extends PureComponent {
   }
 
   get pendingBlock() {
-    return this.state.blocks.find(block => block.id === "pending");
+    return this.state.blocks.find((block) => block.id === "pending");
   }
 
   resetState = () => {
     this.setState({ blocks: this.constructor.cloneBlocks(this.props) });
   };
 
-  editBlock = block => {
+  editBlock = (block) => {
     this.props.history.push(
       lh.link("backendProjectContentBlock", this.projectId, block.id),
-      { noScroll: true }
+      { noScroll: true },
     );
   };
 
   newBlock = () => {
     configHelper.isConfigurable(this.pendingBlock.attributes.type)
       ? this.props.history.push(
-          lh.link("backendProjectContentBlockNew", this.projectId)
+          lh.link("backendProjectContentBlockNew", this.projectId),
         )
       : this.createBlock();
   };
@@ -144,7 +144,7 @@ export class ProjectContent extends PureComponent {
 
   updateBlock = (block, callback) => {
     const call = contentBlocksAPI.update(block.id, {
-      attributes: block.attributes
+      attributes: block.attributes,
     });
     const options = { noTouch: true, notificationScope: "none" };
     const updateRequest = request(call, requests.beContentBlockUpdate, options);
@@ -156,13 +156,13 @@ export class ProjectContent extends PureComponent {
     });
   };
 
-  deleteBlock = block => {
+  deleteBlock = (block) => {
     const call = contentBlocksAPI.destroy(block.id);
     const options = { removes: { type: "contentBlocks", id: block.id } };
     const destroyRequest = request(
       call,
       requests.beContentBlockDestroy,
-      options
+      options,
     );
     this.props.dispatch(destroyRequest).promise.then(() => {
       this.props.refresh();
@@ -176,23 +176,23 @@ export class ProjectContent extends PureComponent {
     this.updateBlock(adjusted);
   }
 
-  showBlock = block => {
+  showBlock = (block) => {
     this.toggleBlockVisibility(block, true);
   };
 
-  hideBlock = block => {
+  hideBlock = (block) => {
     this.toggleBlockVisibility(block, false);
   };
 
-  handleAddEntity = type => {
+  handleAddEntity = (type) => {
     const draggableHelper = new DraggableEventHelper(
       DraggableEventHelper.syntheticDraggable(type),
-      this.currentBlocks
+      this.currentBlocks,
     );
     this.setState({ blocks: draggableHelper.blocks }, this.newBlock);
   };
 
-  handleDeleteBlock = block => {
+  handleDeleteBlock = (block) => {
     const heading = this.props.t("modals.delete_block");
     const message = this.props.t("modals.confirm_body");
     this.props.confirm(heading, message, () => this.deleteBlock(block));
@@ -201,8 +201,8 @@ export class ProjectContent extends PureComponent {
   render() {
     return (
       <section className="backend-project-content rbd-migration-resets">
-        <UIDConsumer name={id => `content-block-builder-${id}`}>
-          {id => (
+        <UIDConsumer name={(id) => `content-block-builder-${id}`}>
+          {(id) => (
             <div
               className="form-secondary"
               role="group"

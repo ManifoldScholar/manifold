@@ -16,7 +16,7 @@ function EditorRTE(props) {
     width: getSize(),
     height: getSize(),
     viewBox: "0 0 24 24",
-    fill
+    fill,
   };
   return (
     <svg {...baseSvgProps} {...svgProps}>
@@ -54,7 +54,7 @@ EditorRTE.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   stroke: PropTypes.string,
   fill: PropTypes.string,
-  svgProps: PropTypes.object
+  svgProps: PropTypes.object,
 };
 
 export default EditorRTE;

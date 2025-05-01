@@ -4,7 +4,7 @@ import {
   listHorizontal,
   buttonUnstyled,
   utilityPrimary,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export const ZOOM_BREAKPOINT = "290px";
@@ -37,7 +37,7 @@ export default `
         transform: translateX(-100vw);
       }
       `,
-      ZOOM_BREAKPOINT
+      ZOOM_BREAKPOINT,
     )}
     ${respond(`width: 100%;`, 50)}
   }
@@ -226,7 +226,7 @@ export default `
       ${respond(
         `width: 32px;
       height: 32px;`,
-        50
+        50,
       )}
     }
   }

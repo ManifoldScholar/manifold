@@ -22,8 +22,8 @@ SectionList.displayName = "CreateTextForm.Sections.List";
 
 SectionList.propTypes = {
   sections: PropTypes.arrayOf(
-    PropTypes.exact({ id: PropTypes.string, name: PropTypes.string })
+    PropTypes.exact({ id: PropTypes.string, name: PropTypes.string }),
   ),
   setSectionOrder: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
 };

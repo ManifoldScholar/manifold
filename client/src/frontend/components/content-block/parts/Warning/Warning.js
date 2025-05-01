@@ -25,10 +25,10 @@ ContentBlockWarning.propTypes = {
   body: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.array,
-    PropTypes.element
+    PropTypes.element,
   ]).isRequired,
   note: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default ContentBlockWarning;

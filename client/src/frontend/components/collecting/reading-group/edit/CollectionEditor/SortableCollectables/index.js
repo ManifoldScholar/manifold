@@ -17,7 +17,7 @@ SortableCollectables.displayName =
 
 SortableCollectables.propTypes = {
   ...collectedShape,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
 };
 
 export default SortableCollectables;

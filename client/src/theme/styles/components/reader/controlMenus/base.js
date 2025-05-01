@@ -3,7 +3,7 @@ import {
   utilityPrimary,
   defaultTransitionProps,
   transparentize,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export default `

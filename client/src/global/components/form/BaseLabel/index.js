@@ -8,15 +8,14 @@ export default function BaseLabel({
   styleType = "primary",
   hasInstructions = false,
   isSelect = false,
-  className
+  className,
 }) {
-  /* eslint-disable no-nested-ternary */
   const Label =
     styleType === "primary"
       ? Styled.PrimaryLabel
       : styleType === "secondary"
-      ? Styled.SecondaryLabel
-      : Styled.TertiaryLabel;
+        ? Styled.SecondaryLabel
+        : Styled.TertiaryLabel;
 
   return (
     <Label

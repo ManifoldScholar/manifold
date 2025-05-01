@@ -29,7 +29,7 @@ function Header({
   headerLayout,
   headerWidth = "auto",
   headerLink,
-  collectingProps
+  collectingProps,
 }) {
   if (!title) return null;
 
@@ -102,7 +102,7 @@ export const headerProps = {
   headerLayout: PropTypes.string,
   headerLink: PropTypes.string,
   headerWidth: PropTypes.string,
-  collectingProps: PropTypes.object
+  collectingProps: PropTypes.object,
 };
 
 Header.propTypes = headerProps;

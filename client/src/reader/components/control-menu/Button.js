@@ -10,10 +10,10 @@ export default class ControlMenuButton extends PureComponent {
     onClick: PropTypes.func.isRequired,
     icon: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    active: PropTypes.bool
+    active: PropTypes.bool,
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     event.stopPropagation();
     this.props.onClick();
   };
@@ -22,7 +22,7 @@ export default class ControlMenuButton extends PureComponent {
     const buttonClass = classNames({
       "reader-header__button": true,
       "reader-header__button--pad-narrow": true,
-      "button-active": this.props.active
+      "button-active": this.props.active,
     });
 
     return (

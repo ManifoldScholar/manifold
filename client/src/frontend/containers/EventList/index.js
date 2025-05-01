@@ -16,7 +16,7 @@ export default function EventList({ project, journalBreadcrumbs }) {
   // API does not send meta for this list
   const { pagination } = useListQueryParams();
   const { data: events, meta } = useFetch({
-    request: [projectsAPI.events, id, null, pagination]
+    request: [projectsAPI.events, id, null, pagination],
   });
   const { t } = useTranslation();
 
@@ -26,11 +26,11 @@ export default function EventList({ project, journalBreadcrumbs }) {
   const breadcrumbs = useMemo(() => {
     const projectCrumb = {
       to: lh.link("frontendProject", slug),
-      label: titlePlaintext
+      label: titlePlaintext,
     };
     const eventsCrumb = {
       to: lh.link("frontendProjectEvents", slug),
-      label: t("glossary.event_other")
+      label: t("glossary.event_other"),
     };
     return journalBreadcrumbs
       ? [...journalBreadcrumbs, eventsCrumb].filter(Boolean)
@@ -63,5 +63,5 @@ EventList.displayName = "Frontend.Containers.EventList";
 
 EventList.propTypes = {
   project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
+  journalBreadcrumbs: PropTypes.array,
 };

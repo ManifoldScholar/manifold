@@ -19,15 +19,19 @@ function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
 
   const { pagination } = useListQueryParams({ initSize: 10 });
 
-  const { data: members, meta, refresh } = useFetch({
-    request: [readingGroupsAPI.members, id, null, pagination]
+  const {
+    data: members,
+    meta,
+    refresh,
+  } = useFetch({
+    request: [readingGroupsAPI.members, id, null, pagination],
   });
 
   const membersRoute = lh.link("frontendReadingGroupMembers", readingGroup.id);
 
   const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
 
-  const removeMember = membership => {
+  const removeMember = (membership) => {
     const heading = t("messages.membership.destroy_heading");
     const message = t("messages.membership.destroy_message");
     if (confirm)
@@ -44,15 +48,15 @@ function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
         context: "frontend",
         size: "wide",
         position: "overlay",
-        lockScroll: "always"
+        lockScroll: "always",
       },
       childProps: {
         confirm,
         dispatch,
         readingGroup,
         onRemoveClick: removeMember,
-        onEditSuccess: () => navigate(membersRoute)
-      }
+        onEditSuccess: () => navigate(membersRoute),
+      },
     });
   };
 
@@ -79,7 +83,7 @@ MembersListContainer.propTypes = {
   route: PropTypes.object,
   dispatch: PropTypes.func,
   confirm: PropTypes.func,
-  readingGroup: PropTypes.object
+  readingGroup: PropTypes.object,
 };
 
 export default withConfirmation(MembersListContainer);

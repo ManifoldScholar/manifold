@@ -65,12 +65,12 @@ export default {
   FieldWrapper,
   InputGroupPrimary,
   InputGroupSecondary,
-  DrawerButtons
+  DrawerButtons,
 };
 
 export const Unwrapped = {
   TextArea: FormTextArea,
   Input: FormBaseInput,
   Toggle,
-  Picker: BasePicker
+  Picker: BasePicker,
 };

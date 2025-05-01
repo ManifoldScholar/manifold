@@ -10,7 +10,7 @@ import lh from "helpers/linkHandler";
 import {
   FlagsList,
   Body,
-  Metadata
+  Metadata,
 } from "backend/components/annotation/detail";
 import withConfirmation from "hoc/withConfirmation";
 
@@ -18,7 +18,7 @@ function AnnotationDetailContainer({
   refresh,
   confirm,
   readingGroup,
-  refreshAnnotations
+  refreshAnnotations,
 }) {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -26,7 +26,7 @@ function AnnotationDetailContainer({
 
   const { data: annotation, refresh: refreshAnnotation } = useFetch({
     request: [annotationsAPI.show, id],
-    condition: !!id
+    condition: !!id,
   });
 
   const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
@@ -51,10 +51,10 @@ function AnnotationDetailContainer({
     confirm,
     deleteAnnotation,
     t,
-    history,
+    navigate,
     refresh,
     readingGroup,
-    refreshAnnotations
+    refreshAnnotations,
   ]);
 
   const { attributes, relationships } = annotation ?? {};
@@ -68,7 +68,7 @@ function AnnotationDetailContainer({
     textTitle,
     textSlug,
     textSectionId,
-    readingGroupName
+    readingGroupName,
   } = attributes ?? {};
 
   const { creator, flags } = relationships ?? {};
@@ -77,7 +77,7 @@ function AnnotationDetailContainer({
     creator,
     createdAt,
     textTitle,
-    readingGroupName
+    readingGroupName,
   };
 
   const resolveFlags = useApiCallback(annotationsAPI.resolveAllFlags);
@@ -98,12 +98,12 @@ function AnnotationDetailContainer({
           label: "actions.view",
           route: "readerSection",
           routeParams: [textSlug, textSectionId, `#annotation-${id}`],
-          icon: "eyeOpen32"
+          icon: "eyeOpen32",
         }
       : {
           label: "records.comments.view_unavailable",
           icon: "eyeClosed32",
-          disabled: true
+          disabled: true,
         };
 
   return id ? (
@@ -117,7 +117,7 @@ function AnnotationDetailContainer({
             icon: "delete24",
             ability: "delete",
             entity: annotation,
-            onClick: onDelete
+            onClick: onDelete,
           },
           ...(unresolvedFlagsCount
             ? [
@@ -126,10 +126,10 @@ function AnnotationDetailContainer({
                   icon: "circleMinus24",
                   ability: "update",
                   entity: annotation,
-                  onClick: handleResolveFlags
-                }
+                  onClick: handleResolveFlags,
+                },
               ]
-            : [])
+            : []),
         ]}
       />
       {!!flagsCount && (
@@ -153,5 +153,5 @@ AnnotationDetailContainer.propTypes = {
   refresh: PropTypes.func.isRequired,
   refreshAnnotations: PropTypes.func,
   confirm: PropTypes.func.isRequired,
-  readingGroup: PropTypes.object
+  readingGroup: PropTypes.object,
 };

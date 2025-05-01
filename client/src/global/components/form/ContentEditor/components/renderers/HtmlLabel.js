@@ -25,12 +25,11 @@ export default function HtmlLabel({ visible, element }) {
 
   if (!visible) return null;
 
-  /* eslint-disable no-nested-ternary */
   const color = rteElements.includes(element.type)
     ? "green"
     : inlineNodes.includes(element.type) || markElements.includes(element.type)
-    ? "blue"
-    : "violet";
+      ? "blue"
+      : "violet";
 
   const path = !markElements.includes(element.type)
     ? ReactEditor.findPath(editor, element)
@@ -42,7 +41,7 @@ export default function HtmlLabel({ visible, element }) {
 
   const disableLift = path.length <= 2 || element.type === "li";
 
-  const updateClassName = e => {
+  const updateClassName = (e) => {
     e.persist();
     const doUpdate = debounce(() => {
       Transforms.setNodes(
@@ -51,16 +50,16 @@ export default function HtmlLabel({ visible, element }) {
           ...element,
           htmlAttrs: {
             ...element.htmlAttrs,
-            class: e.target.value.replaceAll(".", " ").trim()
-          }
+            class: e.target.value.replaceAll(".", " ").trim(),
+          },
         },
-        { at: path, mode: "highest" }
+        { at: path, mode: "highest" },
       );
     }, 1000);
     doUpdate(e);
   };
 
-  const handleDelete = e => {
+  const handleDelete = (e) => {
     e.preventDefault();
     removeNode(editor, path);
   };
@@ -76,11 +75,11 @@ export default function HtmlLabel({ visible, element }) {
       <Styled.ClassInput
         ref={inputRef}
         defaultValue={formattedClass}
-        onChange={e => updateClassName(e)}
+        onChange={(e) => updateClassName(e)}
       />
       <Styled.TagButtons>
         <Styled.LiftButton
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             unwrapNode({ editor, format: element.type, path });
           }}

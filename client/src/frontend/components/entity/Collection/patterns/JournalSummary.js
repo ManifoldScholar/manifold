@@ -16,8 +16,11 @@ function JournalSummaryEntityCollection({
 }) {
   if (!journal) return null;
 
-  const { title, descriptionFormatted: description, slug } =
-    journal.attributes ?? {};
+  const {
+    title,
+    descriptionFormatted: description,
+    slug,
+  } = journal.attributes ?? {};
   const issues = journal.relationships?.recentJournalIssues ?? [];
   const headerLayout = getHeaderLayout(journal);
   const image = getHeroImage(headerLayout, journal);
@@ -37,11 +40,11 @@ function JournalSummaryEntityCollection({
       imageAlt={imageAlt}
       headerLayout={headerLayout}
       headerLink={lh.link("frontendJournal", slug)}
-      BodyComponent={props =>
+      BodyComponent={(props) =>
         !!issues?.length && (
           <ThumbnailGrid {...props}>
             {({ stack }) =>
-              issues.map(item => (
+              issues.map((item) => (
                 <EntityThumbnail key={item.id} entity={item} stack={stack} />
               ))
             }
@@ -67,7 +70,7 @@ JournalSummaryEntityCollection.propTypes = {
   journal: PropTypes.object.isRequired,
   projects: PropTypes.arrayOf(PropTypes.object),
   projectsMeta: PropTypes.object,
-  limit: PropTypes.number
+  limit: PropTypes.number,
 };
 
 export default JournalSummaryEntityCollection;

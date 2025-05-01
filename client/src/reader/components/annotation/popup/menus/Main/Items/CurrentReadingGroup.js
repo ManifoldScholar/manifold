@@ -12,7 +12,7 @@ function CurrentReadingGroup({
   activeMenu,
   currentReadingGroup = "public",
   readingGroups,
-  currentUser
+  currentUser,
 }) {
   const canAccessReadingGroups =
     currentUser?.attributes.classAbilities.readingGroup.read;
@@ -25,7 +25,7 @@ function CurrentReadingGroup({
       return t("reader.my_private_annotations");
 
     const currentGroup = readingGroups.find(
-      group => group.id === currentReadingGroup
+      (group) => group.id === currentReadingGroup,
     );
     return currentGroup.attributes.name;
   }
@@ -75,7 +75,7 @@ CurrentReadingGroup.propTypes = {
   activeMenu: PropTypes.string,
   readingGroups: PropTypes.array,
   currentReadingGroup: PropTypes.string,
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
 };
 
 export default withCurrentUser(CurrentReadingGroup);

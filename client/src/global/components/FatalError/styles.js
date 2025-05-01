@@ -6,7 +6,7 @@ import {
   subtitlePrimary,
   darken,
   fluidScale,
-  containerFocus
+  containerFocus,
 } from "theme/styles/mixins";
 
 export const Body = styled(BodyClass)`

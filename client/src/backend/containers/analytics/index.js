@@ -7,5 +7,5 @@ export default {
   Wrapper,
   TopProjects,
   TopSearches,
-  Global
+  Global,
 };

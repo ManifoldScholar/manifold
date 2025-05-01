@@ -29,7 +29,7 @@ function DuplicatePanel({ readingGroup, onProceed }) {
       <Panel
         label={t("forms.edit_group.duplicate.label")}
         heading={t("forms.edit_group.duplicate.heading", {
-          group: readingGroup.attributes.name
+          group: readingGroup.attributes.name,
         })}
         instructions={t("forms.edit_group.duplicate.instructions")}
         onProceed={handleProceed}
@@ -46,7 +46,7 @@ function DuplicatePanel({ readingGroup, onProceed }) {
               id={uidSeed("name")}
               type="text"
               value={name}
-              onChange={event => setName(event.target.value)}
+              onChange={(event) => setName(event.target.value)}
             />
           </div>
           <div>
@@ -54,19 +54,19 @@ function DuplicatePanel({ readingGroup, onProceed }) {
               id={uidSeed("copyAnnotations")}
               label={t("forms.edit_group.duplicate.copy_annotations")}
               checked={copyAnnotations}
-              onChange={event => setCopyAnnotations(event.target.checked)}
+              onChange={(event) => setCopyAnnotations(event.target.checked)}
             />
             <Checkbox
               id={uidSeed("archive")}
               label={t("forms.edit_group.duplicate.archive")}
               checked={archive}
-              onChange={event => setArchive(event.target.checked)}
+              onChange={(event) => setArchive(event.target.checked)}
             />
             <Checkbox
               id={uidSeed("openOnProceed")}
               label={t("forms.edit_group.duplicate.open_after")}
               checked={openOnProceed}
-              onChange={event => setOpenOnProceed(event.target.checked)}
+              onChange={(event) => setOpenOnProceed(event.target.checked)}
             />
           </div>
         </Styled.Inputs>
@@ -79,7 +79,7 @@ DuplicatePanel.displayName = "ReadingGroup.Settings.DuplicatePanel";
 
 DuplicatePanel.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  onProceed: PropTypes.func.isRequired
+  onProceed: PropTypes.func.isRequired,
 };
 
 export default DuplicatePanel;

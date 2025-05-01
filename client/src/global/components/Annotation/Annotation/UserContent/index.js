@@ -24,7 +24,7 @@ export default function AnnotationDetail({
   annotation,
   showCommentsToggleAsBlock,
   showLogin,
-  refresh
+  refresh,
 }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -35,7 +35,7 @@ export default function AnnotationDetail({
 
   const [action, setAction] = useState();
   const [showComments, setShowComments] = useState(
-    includeComments && !isAnonymous
+    includeComments && !isAnonymous,
   );
 
   const threadRef = useRef(null);
@@ -62,7 +62,7 @@ export default function AnnotationDetail({
     if (editToggleRef.current) editToggleRef.current.focus();
   };
 
-  const saveAnnotation = data => {
+  const saveAnnotation = (data) => {
     const call = annotationsAPI.update(data.id, data.attributes);
     const res = dispatch(request(call, requests.rAnnotationUpdate));
     return res.promise;
@@ -228,5 +228,5 @@ AnnotationDetail.propTypes = {
   showLogin: PropTypes.func,
   includeComments: PropTypes.bool,
   includeMarkers: PropTypes.bool,
-  showCommentsToggleAsBlock: PropTypes.bool
+  showCommentsToggleAsBlock: PropTypes.bool,
 };

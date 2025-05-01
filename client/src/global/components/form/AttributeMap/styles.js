@@ -41,7 +41,7 @@ export const ColumnMap = styled.div`
     display: flex;
     margin-left: -35px;
   `,
-    80
+    80,
   )}
 `;
 

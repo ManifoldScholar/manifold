@@ -27,8 +27,8 @@ function JournalIssuesEntityCollection({
           : {
               pagination: meta.pagination,
               unit: t("glossary.issue_truncated", {
-                count: meta?.pagination?.totalCount || 0
-              })
+                count: meta?.pagination?.totalCount || 0,
+              }),
             }
       }
       paginationProps={
@@ -36,7 +36,7 @@ function JournalIssuesEntityCollection({
           ? {}
           : {
               pagination: meta.pagination,
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -54,7 +54,7 @@ JournalIssuesEntityCollection.propTypes = {
   paginationProps: PropTypes.object,
   countProps: PropTypes.object,
   title: PropTypes.string,
-  FooterComponent: PropTypes.func
+  FooterComponent: PropTypes.func,
 };
 
 export default JournalIssuesEntityCollection;

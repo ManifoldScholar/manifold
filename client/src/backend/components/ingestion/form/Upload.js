@@ -15,15 +15,15 @@ class IngestionFormUpload extends PureComponent {
     header: PropTypes.string,
     t: PropTypes.func,
     sectionIngest: PropTypes.bool,
-    sectionId: PropTypes.string
+    sectionId: PropTypes.string,
   };
 
-  onSourceChange = source => {
+  onSourceChange = (source) => {
     this.props.setOther(source, "attributes[source]");
     this.props.setOther(null, "attributes[externalSourceUrl]");
   };
 
-  onUrlChange = event => {
+  onUrlChange = (event) => {
     this.props.setOther(event.target.value, "attributes[externalSourceUrl]");
     this.props.setOther(null, "attributes[source]");
   };
@@ -54,7 +54,7 @@ class IngestionFormUpload extends PureComponent {
             rel="noopener noreferrer"
           >
             #
-          </a>
+          </a>,
         ]}
       />
     );
@@ -75,7 +75,7 @@ class IngestionFormUpload extends PureComponent {
             rel="noopener noreferrer"
           >
             #
-          </a>
+          </a>,
         ]}
       />
     );
@@ -92,15 +92,12 @@ class IngestionFormUpload extends PureComponent {
       </span>
     );
 
-    /* eslint-disable no-nested-ternary */
     const urlInstructions = isSection
       ? this.props.sectionId
         ? t("texts.section.reingest_url_instructions")
         : t("texts.section.url_instructions")
       : t("texts.ingestion.url_instructions");
-    /* eslint-enable no-nested-ternary */
 
-    /* eslint-disable max-len */
     return (
       <>
         <Form.FieldGroup label={formHeader} instructions={fileInstructions}>
@@ -108,7 +105,7 @@ class IngestionFormUpload extends PureComponent {
             layout="landscape"
             value={this.props.getModelValue("attributes[source]")}
             initialValue={this.props.getModelValue(
-              "attributes[sourceFileName]"
+              "attributes[sourceFileName]",
             )}
             set={this.onSourceChange}
             accepts="any"
@@ -122,7 +119,7 @@ class IngestionFormUpload extends PureComponent {
             label={t("texts.ingestion.url")}
             focusOnMount
             value={this.props.getModelValue("attributes[externalSourceUrl]")}
-            onChange={event => this.onUrlChange(event)}
+            onChange={(event) => this.onUrlChange(event)}
             placeholder={t("texts.ingestion.url_placeholder")}
           />
         </Form.FieldGroup>

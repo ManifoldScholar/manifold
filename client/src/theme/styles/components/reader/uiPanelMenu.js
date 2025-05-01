@@ -13,7 +13,7 @@ export const uiPanelMenu = `
 
   ${respond(
     `max-block-size: calc(100vh - var(--reader-header-height));`,
-    ZOOM_BREAKPOINT
+    ZOOM_BREAKPOINT,
   )}
 
   ${respond(`width: auto;`, 50)}

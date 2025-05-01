@@ -10,7 +10,7 @@ export const InputGroup = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `,
-    90
+    90,
   )}
 
   > .buttons-icon-horizontal, {

@@ -5,7 +5,7 @@ import { resourceCollectionsAPI, projectsAPI, requests } from "api";
 import { useListQueryParams, useFetch, useApiCallback } from "hooks";
 import EntitiesList, {
   Search,
-  ResourceRow
+  ResourceRow,
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { resourceFilters } from "hoc/withFilteredLists";
 import isNil from "lodash/isNil";
@@ -13,7 +13,7 @@ import isNil from "lodash/isNil";
 function ResourceCollectionResourcesContainer({
   resourceCollection,
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
 }) {
   const { t } = useTranslation();
 
@@ -25,32 +25,36 @@ function ResourceCollectionResourcesContainer({
     initFilters: entitiesListSearchParams.resources,
     initSearchProps: resourceFilters.dynamicParams(
       entitiesListSearchProps("resources"),
-      project
-    )
+      project,
+    ),
   });
 
-  const { data: resources, meta, refresh } = useFetch({
+  const {
+    data: resources,
+    meta,
+    refresh,
+  } = useFetch({
     request: [projectsAPI.resources, project.id, filters, pagination],
     dependencies: [filters],
-    options: { requestKey: requests.beResources }
+    options: { requestKey: requests.beResources },
   });
 
   const updateCollection = useApiCallback(resourceCollectionsAPI.update);
 
   if (!resourceCollection) return null;
 
-  const updateResources = async data => {
-    const adjustedResources = data.map(r => {
+  const updateResources = async (data) => {
+    const adjustedResources = data.map((r) => {
       return {
         id: r.id,
-        type: r.type
+        type: r.type,
       };
     });
 
     const update = {
       type: "resourceCollections",
       id: resourceCollection.id,
-      relationships: { resources: { data: adjustedResources } }
+      relationships: { resources: { data: adjustedResources } },
     };
 
     await updateCollection(resourceCollection.id, update);
@@ -62,11 +66,11 @@ function ResourceCollectionResourcesContainer({
     event.preventDefault();
 
     const isInCollection = !!collectionResources.find(
-      r => r.id === resource.id
+      (r) => r.id === resource.id,
     );
 
     if (isInCollection) {
-      const update = collectionResources.filter(r => r.id !== resource.id);
+      const update = collectionResources.filter((r) => r.id !== resource.id);
       return updateResources(update);
     }
 
@@ -74,14 +78,14 @@ function ResourceCollectionResourcesContainer({
     return updateResources(update);
   };
 
-  const toggleCollectionOnly = event => {
+  const toggleCollectionOnly = (event) => {
     event.preventDefault();
 
     setFilters({
       ...filters,
       resourceCollection: filters.resourceCollection
         ? null
-        : resourceCollection.id
+        : resourceCollection.id,
     });
   };
 
@@ -97,7 +101,7 @@ function ResourceCollectionResourcesContainer({
       entityComponentProps={{
         showSwitch: true,
         onSwitchChange: addRemoveResource,
-        switchValue: id => !!collectionResources.find(r => r.id === id)
+        switchValue: (id) => !!collectionResources.find((r) => r.id === id),
       }}
       title={t("glossary.resource_title_case_other")}
       titleStyle="bar"
@@ -106,12 +110,12 @@ function ResourceCollectionResourcesContainer({
         {
           label: toggleLabel,
           onClick: toggleCollectionOnly,
-          icon: collectionFilterEnabled ? "circlePlus24" : "circleMinus24"
-        }
+          icon: collectionFilterEnabled ? "circlePlus24" : "circleMinus24",
+        },
       ]}
       entities={resources}
       unit={t("glossary.resource", {
-        count: meta?.pagination?.totalCount
+        count: meta?.pagination?.totalCount,
       })}
       pagination={meta?.pagination}
       showCount
@@ -121,7 +125,7 @@ function ResourceCollectionResourcesContainer({
 }
 
 export default withFilteredLists(ResourceCollectionResourcesContainer, {
-  resources: resourceFilters.defaultParams()
+  resources: resourceFilters.defaultParams(),
 });
 
 ResourceCollectionResourcesContainer.displayName =
@@ -131,5 +135,5 @@ ResourceCollectionResourcesContainer.propTypes = {
   dispatch: PropTypes.func,
   resourceCollection: PropTypes.object,
   resources: PropTypes.array,
-  resourcesMeta: PropTypes.object
+  resourcesMeta: PropTypes.object,
 };

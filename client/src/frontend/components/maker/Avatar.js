@@ -26,5 +26,5 @@ export default function MakerAvatar({ maker }) {
 MakerAvatar.displayName = "Maker.Avatar";
 
 MakerAvatar.propTypes = {
-  maker: PropTypes.object
+  maker: PropTypes.object,
 };

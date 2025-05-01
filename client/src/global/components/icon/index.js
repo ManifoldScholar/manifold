@@ -371,5 +371,5 @@ export default {
   Users32,
   WarningSign64,
   ZoomIn16,
-  ZoomOut16
+  ZoomOut16,
 };

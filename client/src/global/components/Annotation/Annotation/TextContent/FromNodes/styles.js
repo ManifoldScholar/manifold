@@ -45,7 +45,8 @@ export const Overlay = styled.div`
     80%,
     var(--Overlay-bg)
   );
-  transition: opacity var(--collapse-duration) ease var(--collapse-delay),
+  transition:
+    opacity var(--collapse-duration) ease var(--collapse-delay),
     visibility var(--collapse-duration);
 
   .collapse__content--visible & {

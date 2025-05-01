@@ -15,11 +15,11 @@ class AnnotationMeta extends PureComponent {
     annotation: PropTypes.object.isRequired,
     subject: PropTypes.string,
     includeMarkers: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    includeMarkers: true
+    includeMarkers: true,
   };
 
   get subtitle() {
@@ -31,8 +31,8 @@ class AnnotationMeta extends PureComponent {
     const {
       t,
       annotation: {
-        attributes: { currentUserIsCreator, creatorName }
-      }
+        attributes: { currentUserIsCreator, creatorName },
+      },
     } = this.props;
     if (currentUserIsCreator) return t("common.me_title_case");
     return creatorName;
@@ -63,8 +63,8 @@ class AnnotationMeta extends PureComponent {
   get avatarUrl() {
     const {
       annotation: {
-        attributes: { creatorAvatarStyles }
-      }
+        attributes: { creatorAvatarStyles },
+      },
     } = this.props;
 
     return creatorAvatarStyles.smallSquare;
@@ -74,7 +74,7 @@ class AnnotationMeta extends PureComponent {
     return classNames({
       "annotation-meta__avatar": true,
       "annotation-meta__avatar-placeholder-container": !this.avatarUrl,
-      "annotation-meta__avatar-image-container": this.avatarUrl
+      "annotation-meta__avatar-image-container": this.avatarUrl,
     });
   }
 
@@ -96,7 +96,7 @@ class AnnotationMeta extends PureComponent {
           <Authorize ability="create" entity="comment">
             <div className="annotation-tag__inner annotation-tag--secondary">
               {t("counts.flag", {
-                count: annotation.attributes.unresolvedFlagsCount
+                count: annotation.attributes.unresolvedFlagsCount,
               })}
             </div>
           </Authorize>
@@ -107,8 +107,8 @@ class AnnotationMeta extends PureComponent {
               "frontendReadingGroupDetail",
               annotation.attributes.readingGroupId,
               {
-                text: annotation.attributes.textId
-              }
+                text: annotation.attributes.textId,
+              },
             )}
             className="annotation-tag__inner"
           >

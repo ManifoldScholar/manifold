@@ -38,7 +38,7 @@ function ProjectCollectionsFrontendPlaceholder({ bgColor = "neutral05" }) {
                   <em />,
                   <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
                     #
-                  </a>
+                  </a>,
                 ]}
               />
             </p>
@@ -61,8 +61,8 @@ function ProjectCollectionsFrontendPlaceholder({ bgColor = "neutral05" }) {
                   {t("actions.create_collection")}
                 </Link>
               </Authorize>
-            )
-          }
+            ),
+          },
         ]}
       />
     </Wrapper>
@@ -73,7 +73,7 @@ ProjectCollectionsFrontendPlaceholder.displayName =
   "Global.Entity.CollectionPlaceholder.ProjectCollectionsFrontend";
 
 ProjectCollectionsFrontendPlaceholder.propTypes = {
-  bgColor: PropTypes.oneOf(["white", "neutral05"])
+  bgColor: PropTypes.oneOf(["white", "neutral05"]),
 };
 
 export default ProjectCollectionsFrontendPlaceholder;

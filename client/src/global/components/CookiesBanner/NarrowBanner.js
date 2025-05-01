@@ -9,7 +9,7 @@ export default function NarrowBanner({
   acceptAll,
   settingsLinkProps,
   onClickSettings,
-  error
+  error,
 }) {
   const { t } = useTranslation();
 
@@ -51,7 +51,7 @@ NarrowBanner.propTypes = {
   acceptAll: PropTypes.func.isRequired,
   settingsLinkProps: PropTypes.exact({
     as: PropTypes.instanceOf(Link),
-    to: PropTypes.string
+    to: PropTypes.string,
   }),
-  onClickSettings: PropTypes.func
+  onClickSettings: PropTypes.func,
 };

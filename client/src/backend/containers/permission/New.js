@@ -18,5 +18,5 @@ PermissionNew.displayName = "Permission.New";
 
 PermissionNew.propTypes = {
   entity: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
 };

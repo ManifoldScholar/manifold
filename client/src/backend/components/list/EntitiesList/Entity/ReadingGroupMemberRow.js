@@ -20,11 +20,11 @@ export default function ReadingGroupMemberRow({
   const { name } = attributes;
 
   const meta = `${attributes.annotationsCount} ${t("glossary.annotation", {
-    count: attributes.annotationsCount
+    count: attributes.annotationsCount,
   })} | ${attributes.highlightsCount} ${t("glossary.highlight", {
-    count: attributes.highlightsCount
+    count: attributes.highlightsCount,
   })} | ${attributes.commentsCount} ${t("glossary.comment", {
-    count: attributes.commentsCount
+    count: attributes.commentsCount,
   })}`;
 
   const utility = (
@@ -63,5 +63,5 @@ ReadingGroupMemberRow.displayName = "EntitiesList.Entity.ReadingGroupMemberRow";
 ReadingGroupMemberRow.propTypes = {
   entity: PropTypes.object,
   active: PropTypes.string,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
 };

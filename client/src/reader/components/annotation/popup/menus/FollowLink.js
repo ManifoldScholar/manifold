@@ -11,7 +11,7 @@ function FollowLink({
   activeEvent,
   actions,
   onKeyDown,
-  annotationHref
+  annotationHref,
 }) {
   const { link, annotationIds } = activeEvent;
   const { openViewAnnotationsDrawer } = actions;
@@ -62,7 +62,7 @@ FollowLink.propTypes = {
   actions: PropTypes.object.isRequired,
   direction: PropTypes.oneOf(["up", "down"]),
   visible: PropTypes.bool,
-  annotationHref: PropTypes.string
+  annotationHref: PropTypes.string,
 };
 
 export default FollowLink;

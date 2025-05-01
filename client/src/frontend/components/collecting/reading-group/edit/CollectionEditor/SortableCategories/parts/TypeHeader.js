@@ -14,7 +14,7 @@ CategoryTypeHeader.displayName =
   "ReadingGroup.Collecting.CollectionEditor.Category.CollectableTypeHeader";
 
 CategoryTypeHeader.propTypes = {
-  heading: PropTypes.string.isRequired
+  heading: PropTypes.string.isRequired,
 };
 
 export default CategoryTypeHeader;

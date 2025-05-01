@@ -18,7 +18,7 @@ class Text extends Component {
     showSubtitles: PropTypes.bool,
     utilityPosition: PropTypes.oneOf(["meta", "content"]),
     onUncollect: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get text() {

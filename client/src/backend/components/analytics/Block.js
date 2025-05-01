@@ -6,7 +6,7 @@ import Utility from "global/components/utility";
 function Block({ icon, title, description, children, width }) {
   const blockClassName = classNames({
     "analytics-block": true,
-    [`analytics-grid__item analytics-grid__item--${width}`]: !!width
+    [`analytics-grid__item analytics-grid__item--${width}`]: !!width,
   });
   const Description = ({ value }) => {
     if (!value) return null;
@@ -37,7 +37,7 @@ Block.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   children: PropTypes.node.isRequired,
-  width: PropTypes.oneOf([25, 50, 100])
+  width: PropTypes.oneOf([25, 50, 100]),
 };
 
 Block.displayName = "Analytics.Block";

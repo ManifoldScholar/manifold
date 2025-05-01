@@ -13,7 +13,7 @@ const navProps = (as, url, type) => {
         href: url,
         target: "_blank",
         rel: "noopener noreferrer",
-        download: type === "DOWNLOAD"
+        download: type === "DOWNLOAD",
       };
     case "UserLink":
       return { url };
@@ -28,7 +28,7 @@ export default function Callout({
   isLink = false,
   buttonSize,
   darkMode = false,
-  track
+  track,
 }) {
   const { t } = useTranslation();
   const type =
@@ -50,16 +50,8 @@ export default function Callout({
     );
   }
 
-  const {
-    icon,
-    iconSize,
-    url,
-    title,
-    as,
-    primary,
-    mismatch,
-    analyticsEvent
-  } = getCalloutParams(callout, type, isLink, t);
+  const { icon, iconSize, url, title, as, primary, mismatch, analyticsEvent } =
+    getCalloutParams(callout, type, isLink, t);
 
   if (mismatch) return null;
 
@@ -100,5 +92,5 @@ Callout.propTypes = {
   isLink: PropTypes.bool,
   darkMode: PropTypes.bool,
   buttonSize: PropTypes.oneOf(["sm", "lg"]),
-  track: PropTypes.func
+  track: PropTypes.func,
 };

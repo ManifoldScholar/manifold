@@ -7,7 +7,7 @@ function ProjectContentBlockTableOfContentsBlock({ block }) {
   const { t } = useTranslation();
   const {
     relationships: { text },
-    attributes: { depth, showAuthors, showTextTitle }
+    attributes: { depth, showAuthors, showTextTitle },
   } = block;
 
   return (
@@ -26,7 +26,7 @@ ProjectContentBlockTableOfContentsBlock.displayName =
   "Project.Content.Block.TableOfContents";
 
 ProjectContentBlockTableOfContentsBlock.propTypes = {
-  block: PropTypes.object.isRequired
+  block: PropTypes.object.isRequired,
 };
 
 ProjectContentBlockTableOfContentsBlock.title = "Table of Contents";

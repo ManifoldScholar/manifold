@@ -3,7 +3,7 @@ import {
   defaultHoverStyle,
   buttonUnstyled,
   defaultTransitionProps,
-  respond
+  respond,
 } from "theme/styles/mixins";
 
 const HERO_BLOCK_PADDING = 24;
@@ -11,8 +11,9 @@ const HERO_BLOCK_PADDING = 24;
 export default `
   .hero-builder-block {
     ${panelRounded}
-    padding: ${HERO_BLOCK_PADDING}px ${HERO_BLOCK_PADDING}px ${HERO_BLOCK_PADDING /
-  2}px;
+    padding: ${HERO_BLOCK_PADDING}px ${HERO_BLOCK_PADDING}px ${
+      HERO_BLOCK_PADDING / 2
+    }px;
     margin-top: 18px;
     margin-bottom: 21px;
 
@@ -71,7 +72,7 @@ export default `
               visibility: visible;
               opacity: 1;
             `,
-            40
+            40,
           )}
         }
       }
@@ -86,7 +87,7 @@ export default `
             visibility: visible;
             opacity: 1;
           `,
-          40
+          40,
         )}
       }
     }

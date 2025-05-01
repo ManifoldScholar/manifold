@@ -11,15 +11,16 @@ const animationEasing = `ease-out`;
 const blockArray = [1, 2, 3, 4, 5];
 
 const blocks = blockArray.map(
-  block => `
+  (block) => `
     &:nth-child(${block}) {
       /* stagger block skeleton fade-in */
       --skeleton-delay: ${animationDelay * block - animationDelay}ms;
       /* stagger collecting icon fill and block title transition, and time to start when third skeleton is faded in */
-      --content-delay: ${animationDelay * (block + blockArray.length - 2) -
-        animationDelay}ms;
+      --content-delay: ${
+        animationDelay * (block + blockArray.length - 2) - animationDelay
+      }ms;
     }
-  `
+  `,
 );
 
 export const Animation = styled("div", transientOptions)`

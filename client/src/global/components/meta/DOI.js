@@ -7,7 +7,7 @@ export default class DOI extends Component {
 
   static propTypes = {
     label: PropTypes.string,
-    doi: PropTypes.string
+    doi: PropTypes.string,
   };
 
   render() {

@@ -6,7 +6,7 @@ import {
   Redirect,
   useLocation,
   useParams,
-  useRouteMatch
+  useRouteMatch,
 } from "react-router-dom";
 import { useFetch, useRedirectToFirstMatch } from "hooks";
 import { childRoutes } from "helpers/router";
@@ -16,7 +16,7 @@ import EventTracker, { EVENTS } from "global/components/EventTracker";
 export default function JournalWrapper({ route }) {
   const { id } = useParams();
   const { data: journal, response } = useFetch({
-    request: [journalsAPI.show, id]
+    request: [journalsAPI.show, id],
   });
   const { path } = useRouteMatch();
   const location = useLocation();
@@ -27,9 +27,9 @@ export default function JournalWrapper({ route }) {
     candidates: [
       {
         label: "All Journals",
-        route: "frontendJournalsAll"
-      }
-    ]
+        route: "frontendJournalsAll",
+      },
+    ],
   });
 
   if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
@@ -47,8 +47,8 @@ export default function JournalWrapper({ route }) {
       {childRoutes(route, {
         childProps: {
           journal,
-          response
-        }
+          response,
+        },
       })}
     </>
   );
@@ -57,5 +57,5 @@ export default function JournalWrapper({ route }) {
 JournalWrapper.displayName = "Frontend.Containers.JournalWrapper";
 
 JournalWrapper.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };

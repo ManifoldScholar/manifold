@@ -3,20 +3,20 @@ export default {
     const data = {
       relationships: {
         user: {
-          data: { id: userId }
+          data: { id: userId },
         },
         readingGroup: {
-          data: { id: readingGroupId }
-        }
-      }
+          data: { id: readingGroupId },
+        },
+      },
     };
 
     return {
       endpoint: `/api/v1/reading_group_memberships`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "readingsGroups", data })
-      }
+        body: JSON.stringify({ type: "readingsGroups", data }),
+      },
     };
   },
 
@@ -24,7 +24,7 @@ export default {
     return {
       endpoint: `/api/v1/reading_group_memberships/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -32,7 +32,7 @@ export default {
     return {
       endpoint: `/api/v1/reading_group_memberships/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -41,8 +41,8 @@ export default {
       endpoint: `/api/v1/reading_group_memberships/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "readingGroupMemberships", data })
-      }
+        body: JSON.stringify({ type: "readingGroupMemberships", data }),
+      },
     };
-  }
+  },
 };

@@ -10,7 +10,7 @@ export default function FormattedDate({
   date,
   format = "PPP",
   prefix,
-  suffix = false
+  suffix = false,
 }) {
   const { t } = useTranslation();
 
@@ -23,17 +23,17 @@ export default function FormattedDate({
       if (format === "distanceInWords")
         return formatDistance(parsedDate, Date.now(), {
           addSuffix: suffix,
-          locale: t("date_fns", { returnObjects: true })
+          locale: t("date_fns", { returnObjects: true }),
         });
       return formatDate(parsedDate, format, {
-        locale: t("date_fns", { returnObjects: true })
+        locale: t("date_fns", { returnObjects: true }),
       });
     } catch {
       return "";
     }
   };
 
-  const addPrefix = dateStr => {
+  const addPrefix = (dateStr) => {
     return prefix ? `${prefix} ${dateStr}` : dateStr;
   };
 
@@ -49,5 +49,5 @@ FormattedDate.displayName = "FormattedDate";
 FormattedDate.propTypes = {
   prefix: PropTypes.string,
   format: PropTypes.string,
-  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
 };

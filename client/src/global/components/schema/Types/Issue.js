@@ -5,7 +5,7 @@ import {
   renderOffer,
   renderNamesList,
   renderVolumes,
-  renderJournal
+  renderJournal,
 } from "../helpers";
 import BaseSchema from "../BaseSchema";
 import config from "config";
@@ -25,13 +25,13 @@ export default function Issue({ issue }) {
     createdAt,
     updatedAt,
     avatarStyles,
-    number
+    number,
   } = attributes;
   const { creators, flattenedCollaborators } = relationships;
 
   /* eslint-disable-next-line no-unused-vars */
-  const [authors, others] = partition(flattenedCollaborators, fc =>
-    creators.find(c => c.id === fc.relationships.maker.id)
+  const [authors, others] = partition(flattenedCollaborators, (fc) =>
+    creators.find((c) => c.id === fc.relationships.maker.id),
   );
 
   const issueData = {
@@ -45,7 +45,7 @@ export default function Issue({ issue }) {
       ? {
           "@type": "PropertyValue",
           propertyID: "DOI",
-          value: metadata.doi
+          value: metadata.doi,
         }
       : null,
     author: renderNamesList(creators),
@@ -60,7 +60,7 @@ export default function Issue({ issue }) {
       ? renderVolumes([journalVolume], journal)
       : renderJournal(journal),
     image: avatarStyles && avatarStyles.small,
-    offers: renderOffer(attributes)
+    offers: renderOffer(attributes),
   };
 
   return <BaseSchema entity={issueData} />;
@@ -79,24 +79,24 @@ Issue.propTypes = {
         rights: PropTypes.string,
         publisher: PropTypes.string,
         seriesTitle: PropTypes.string,
-        doi: PropTypes.string
+        doi: PropTypes.string,
       }),
       purchaseUrl: PropTypes.string,
       purchasePrice: PropTypes.number,
       purchasePriceCurrency: PropTypes.string,
       avatarStyles: PropTypes.shape({
-        small: PropTypes.string
+        small: PropTypes.string,
       }),
       publicationDate: PropTypes.string,
       createdAt: PropTypes.string,
-      updatedAt: PropTypes.string
+      updatedAt: PropTypes.string,
     }),
     relationships: PropTypes.shape({
       journal: PropTypes.shape({
         attributes: PropTypes.shape({
-          title: PropTypes.string
-        })
-      })
-    })
-  }).isRequired
+          title: PropTypes.string,
+        }),
+      }),
+    }),
+  }).isRequired,
 };

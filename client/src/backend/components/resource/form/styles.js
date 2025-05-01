@@ -3,7 +3,7 @@ import {
   respond,
   listUnstyled,
   buttonUnstyled,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 const GRID_GAP = "15px";
@@ -41,16 +41,14 @@ export const Item = styled.label`
   margin-bottom: ${GRID_GAP};
   margin-left: ${GRID_GAP};
   border: 1px solid var(--color-neutral-ui-dull-light);
-  transition: background-color var(--transition-duration-fast)
+  transition:
+    background-color var(--transition-duration-fast)
       var(--transition-timing-function),
     border-color ${defaultTransitionProps};
 
   ${respond(`flex-basis: calc(25% - ${GRID_GAP});`, 60)}
 
-  ${respond(
-    `flex-basis: calc(20% - ${GRID_GAP});`,
-    80
-  )}
+  ${respond(`flex-basis: calc(20% - ${GRID_GAP});`, 80)}
 
   &:hover,
   &:focus-within {

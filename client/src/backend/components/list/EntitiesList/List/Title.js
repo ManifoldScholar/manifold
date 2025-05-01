@@ -15,11 +15,11 @@ export default class ListEntitiesListTitle extends PureComponent {
     pagination: PropTypes.object,
     showCount: PropTypes.bool,
     titleTag: PropTypes.string,
-    titleActions: PropTypes.arrayOf(PropTypes.object)
+    titleActions: PropTypes.arrayOf(PropTypes.object),
   };
 
   static defaultProps = {
-    showCount: false
+    showCount: false,
   };
 
   get titleStyle() {

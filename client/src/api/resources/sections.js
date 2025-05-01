@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: `/api/v1/texts/${textId}/relationships/text_sections/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -12,8 +12,8 @@ export default {
       endpoint: `/api/v1/texts/${textId}/relationships/text_sections`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "text_sections", data: section })
-      }
+        body: JSON.stringify({ type: "text_sections", data: section }),
+      },
     };
   },
 
@@ -22,8 +22,8 @@ export default {
       endpoint: `/api/v1/text_sections/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "text_sections", data: section })
-      }
+        body: JSON.stringify({ type: "text_sections", data: section }),
+      },
     };
   },
 
@@ -31,7 +31,7 @@ export default {
     return {
       endpoint: `/api/v1/text_sections/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -39,7 +39,7 @@ export default {
     return {
       endpoint: `/api/v1/texts/${textId}/relationships/text_sections`,
       method: "GET",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

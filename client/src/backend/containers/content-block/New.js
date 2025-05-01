@@ -13,7 +13,7 @@ export class ContentBlockNewContainer extends Component {
     match: PropTypes.object,
     history: PropTypes.object,
     project: PropTypes.object,
-    pendingBlock: PropTypes.object
+    pendingBlock: PropTypes.object,
   };
 
   get pendingBlock() {

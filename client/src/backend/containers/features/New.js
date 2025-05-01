@@ -10,7 +10,7 @@ class FeaturesNewContainer extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    sessionName: PropTypes.string.isRequired
+    sessionName: PropTypes.string.isRequired,
   };
 
   redirectToFeature(feature) {
@@ -18,7 +18,7 @@ class FeaturesNewContainer extends PureComponent {
     this.props.history.push(path);
   }
 
-  handleSuccess = feature => {
+  handleSuccess = (feature) => {
     this.redirectToFeature(feature);
   };
 

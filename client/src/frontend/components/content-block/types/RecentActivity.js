@@ -6,7 +6,7 @@ export default class ProjectContentBlockRecentActivityBlock extends PureComponen
   static displayName = "Project.Content.Block.RecentActivity";
 
   static propTypes = {
-    entity: PropTypes.object.isRequired
+    entity: PropTypes.object.isRequired,
   };
 
   static get title() {

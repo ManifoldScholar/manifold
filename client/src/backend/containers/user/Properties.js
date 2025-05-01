@@ -13,12 +13,12 @@ export default function UserProperties({ user, saveLabel }) {
 
   const { attributes } = user ?? {};
 
-  const humanReadableDate = date => {
+  const humanReadableDate = (date) => {
     return t("dates.date", {
       val: new Date(date),
       formatParams: {
-        val: { year: "numeric", month: "long", day: "numeric" }
-      }
+        val: { year: "numeric", month: "long", day: "numeric" },
+      },
     });
   };
 
@@ -27,13 +27,13 @@ export default function UserProperties({ user, saveLabel }) {
   const userVerificationList = () => {
     const emailMessage = attributes?.emailConfirmed
       ? t("records.users.email_verified_at", {
-          date: humanReadableDate(attributes?.emailConfirmedAt)
+          date: humanReadableDate(attributes?.emailConfirmedAt),
         })
       : t("records.users.email_not_verified");
 
     return (
       <>
-        {/* eslint-disable no-nested-ternary */}
+        {}
         {attributes?.trusted ? (
           <li>
             <span>{t("records.users.trusted")}</span>
@@ -55,12 +55,12 @@ export default function UserProperties({ user, saveLabel }) {
     );
   };
 
-  const redirectToUser = result => {
+  const redirectToUser = (result) => {
     const path = lh.link("backendRecordsUser", result.id);
     navigate(path, { keepNotifications: true });
   };
 
-  const createUser = formValue => {
+  const createUser = (formValue) => {
     const meta = { createdByAdmin: true };
     return usersAPI.create({ ...formValue, meta });
   };
@@ -106,24 +106,24 @@ export default function UserProperties({ user, saveLabel }) {
               options={[
                 {
                   label: t("records.users.role_options.admin"),
-                  value: "admin"
+                  value: "admin",
                 },
                 {
                   label: t("records.users.role_options.editor"),
-                  value: "editor"
+                  value: "editor",
                 },
                 {
                   label: t("records.users.role_options.creator"),
-                  value: "project_creator"
+                  value: "project_creator",
                 },
                 {
                   label: t("records.users.role_options.marketeer"),
-                  value: "marketeer"
+                  value: "marketeer",
                 },
                 {
                   label: t("records.users.role_options.reader"),
-                  value: "reader"
-                }
+                  value: "reader",
+                },
               ]}
             />
             {!user && (

@@ -3,7 +3,7 @@ import { handleActions } from "redux-actions";
 const initialState = {
   started: false,
   popup: null,
-  errors: null
+  errors: null,
 };
 
 function oauthStarted(state, { payload }) {
@@ -31,7 +31,7 @@ export default handleActions(
     OAUTH_START: oauthStarted,
     OAUTH_RESPONSE: oauthDone,
     OAUTH_FAILURE: oauthFailed,
-    OAUTH_CANCEL: oauthCancelled
+    OAUTH_CANCEL: oauthCancelled,
   },
-  initialState
+  initialState,
 );

@@ -22,11 +22,11 @@ class CategoryListCategory extends PureComponent {
     categoryCount: PropTypes.number.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
     isDragging: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    texts: []
+    texts: [],
   };
 
   constructor(props) {
@@ -35,7 +35,7 @@ class CategoryListCategory extends PureComponent {
     this.popoverDisclosureRef = React.createRef();
   }
 
-  onDelete = event => {
+  onDelete = (event) => {
     event.preventDefault();
     this.callbacks.destroyCategory(this.category);
   };
@@ -70,7 +70,7 @@ class CategoryListCategory extends PureComponent {
     const {
       index,
       categoryCount,
-      callbacks: { updateCategoryPosition }
+      callbacks: { updateCategoryPosition },
     } = this.props;
 
     return (
@@ -87,7 +87,7 @@ class CategoryListCategory extends PureComponent {
               key={this.id}
               className={classNames({
                 "text-categories__category": true,
-                "text-categories__category--is-dragging": snapshot.isDragging
+                "text-categories__category--is-dragging": snapshot.isDragging,
               })}
             >
               <header className="text-categories__header">
@@ -113,7 +113,7 @@ class CategoryListCategory extends PureComponent {
                     to={lh.link(
                       "backendProjectCategory",
                       project.id,
-                      category.id
+                      category.id,
                     )}
                   >
                     <Utility.IconComposer icon="annotate32" size={26} />
@@ -161,9 +161,9 @@ class CategoryListCategory extends PureComponent {
                                   this.popoverDisclosureRef.current.focus();
                                 }
                               },
-                              true
+                              true,
                             ), // index starts with 0, positions start with 1
-                          disabled: index === 0
+                          disabled: index === 0,
                         },
                         {
                           id: "down_category",
@@ -177,10 +177,10 @@ class CategoryListCategory extends PureComponent {
                                   this.popoverDisclosureRef.current.focus();
                                 }
                               },
-                              true
+                              true,
                             ), // index starts with 0, positions start with 1
-                          disabled: index === categoryCount - 2 // subtract 1 for Uncategorized, which can't move
-                        }
+                          disabled: index === categoryCount - 2, // subtract 1 for Uncategorized, which can't move
+                        },
                       ]}
                     />
                   </div>
@@ -202,7 +202,7 @@ class CategoryListCategory extends PureComponent {
           <div
             className={classNames(
               "text-categories__category",
-              "drag-placeholder"
+              "drag-placeholder",
             )}
           >
             <header className="text-categories__header">

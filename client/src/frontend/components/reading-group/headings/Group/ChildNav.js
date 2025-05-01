@@ -10,7 +10,7 @@ function ChildNav({ readingGroup }) {
 
   const homePaths = {
     static: lh.link("frontendReadingGroupHomepageStatic", readingGroup.id),
-    edit: lh.link("frontendReadingGroupHomepageEdit", readingGroup.id)
+    edit: lh.link("frontendReadingGroupHomepageEdit", readingGroup.id),
   };
   const { abilities, currentUserRole } = readingGroup.attributes;
   const canUpdateGroup = abilities.update;
@@ -24,8 +24,8 @@ function ChildNav({ readingGroup }) {
       text: t("navigation.reading_group.annotations"),
       icon: "notes24",
       exact: true,
-      isActive: null
-    }
+      isActive: null,
+    },
   ];
 
   if (showHomeLink) {
@@ -38,7 +38,7 @@ function ChildNav({ readingGroup }) {
         if (!match) return false;
         const isHomePath = Object.values(homePaths).includes(location.pathname);
         return isHomePath;
-      }
+      },
     });
   }
 
@@ -48,7 +48,7 @@ function ChildNav({ readingGroup }) {
       text: t("navigation.reading_group.members"),
       icon: "readingGroup24",
       exact: true,
-      isActive: null
+      isActive: null,
     });
   }
 
@@ -62,7 +62,7 @@ function ChildNav({ readingGroup }) {
 ChildNav.displayName = "ReadingGroup.Heading.ChildNav";
 
 ChildNav.propTypes = {
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
 };
 
 export default ChildNav;

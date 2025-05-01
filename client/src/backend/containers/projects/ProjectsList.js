@@ -8,7 +8,7 @@ import HeadContent from "global/components/HeadContent";
 import EntitiesList, {
   Button,
   Search,
-  ProjectRow
+  ProjectRow,
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
 import { useFetch, useListQueryParams } from "hooks";
@@ -18,7 +18,7 @@ const { flush } = entityStoreActions;
 
 function ProjectsListContainer({
   entitiesListSearchParams,
-  entitiesListSearchProps
+  entitiesListSearchProps,
 }) {
   const dispatch = useDispatch();
 
@@ -28,14 +28,14 @@ function ProjectsListContainer({
     initSize: 20,
     initFilters: {
       ...entitiesListSearchParams.projectsList,
-      withUpdateAbility: true
+      withUpdateAbility: true,
     },
-    initSearchProps: entitiesListSearchProps("projectsList")
+    initSearchProps: entitiesListSearchProps("projectsList"),
   });
 
   const { data: projects, meta: projectsMeta } = useFetch({
     request: [projectsAPI.index, filters, pagination],
-    options: { requestKey: requests.beProjects }
+    options: { requestKey: requests.beProjects },
   });
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function ProjectsListContainer({
             text={t("projects.add_button_label")}
             authorizedFor="project"
             type="add"
-          />
+          />,
         ]}
       />
     </>
@@ -82,9 +82,9 @@ ProjectsListContainer.displayName = "Projects.List";
 ProjectsListContainer.propTypes = {
   savedSearchPaginationState: PropTypes.func.isRequired,
   saveSearchState: PropTypes.func,
-  entitiesListSearchParams: PropTypes.object
+  entitiesListSearchParams: PropTypes.object,
 };
 
 export default withFilteredLists(ProjectsListContainer, {
-  projectsList: projectFilters({ snapshotState: true })
+  projectsList: projectFilters({ snapshotState: true }),
 });

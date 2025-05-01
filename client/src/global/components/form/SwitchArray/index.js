@@ -12,22 +12,22 @@ class FormSwitchArray extends Component {
     set: PropTypes.func,
     value: PropTypes.any,
     options: PropTypes.arrayOf(
-      PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
+      PropTypes.shape({ label: PropTypes.string, value: PropTypes.string }),
     ).isRequired,
     name: PropTypes.string,
     errors: PropTypes.array,
     label: PropTypes.string,
-    focusOnMount: PropTypes.bool
+    focusOnMount: PropTypes.bool,
   };
 
   static defaultProps = {
     value: [],
-    focusOnMount: false
+    focusOnMount: false,
   };
 
   handleChange(value) {
     const adjustedValues = this.props.value.includes(value)
-      ? this.props.value.filter(v => v !== value)
+      ? this.props.value.filter((v) => v !== value)
       : [value].concat(this.props.value);
 
     this.props.set(adjustedValues);

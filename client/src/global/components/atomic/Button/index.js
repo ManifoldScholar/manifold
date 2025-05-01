@@ -32,7 +32,7 @@ Button.propTypes = {
   secondary: PropTypes.bool,
   dark: PropTypes.bool,
   icon: PropTypes.string,
-  iconSize: PropTypes.number
+  iconSize: PropTypes.number,
 };
 
 Button.displayName = "Global.Atomic.Button";

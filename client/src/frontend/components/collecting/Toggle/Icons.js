@@ -36,7 +36,7 @@ function Icons({ useOutline }) {
 Icons.displayName = "Collecting.Toggle.Icons";
 
 Icons.propTypes = {
-  useOutline: PropTypes.bool
+  useOutline: PropTypes.bool,
 };
 
 export default Icons;

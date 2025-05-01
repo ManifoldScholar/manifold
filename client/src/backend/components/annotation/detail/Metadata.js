@@ -12,7 +12,7 @@ export default function AnnotationMetadata({
   textTitle,
   subjectTitle,
   readingGroupName,
-  isComment
+  isComment,
 }) {
   const { t } = useTranslation();
 
@@ -35,7 +35,8 @@ export default function AnnotationMetadata({
               <span
                 dangerouslySetInnerHTML={{
                   __html:
-                    textTitle ?? t("records.annotations.text_title_placeholder")
+                    textTitle ??
+                    t("records.annotations.text_title_placeholder"),
                 }}
               />
             </Styled.Item>
@@ -47,7 +48,7 @@ export default function AnnotationMetadata({
             <Styled.Item>
               <span
                 dangerouslySetInnerHTML={{
-                  __html: subjectTitle
+                  __html: subjectTitle,
                 }}
               />
             </Styled.Item>
@@ -90,5 +91,5 @@ AnnotationMetadata.propTypes = {
   textTitle: PropTypes.string,
   subjectTitle: PropTypes.string,
   readingGroupName: PropTypes.string,
-  isComment: PropTypes.bool
+  isComment: PropTypes.bool,
 };

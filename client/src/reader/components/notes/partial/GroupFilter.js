@@ -13,7 +13,7 @@ class GroupFilter extends Component {
     filterChangeHandler: PropTypes.func,
     setAnnotationOverlayReadingGroup: PropTypes.func,
     selectedGroup: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static contextType = ReaderContext;
@@ -29,7 +29,7 @@ class GroupFilter extends Component {
   get groupOptions() {
     return this.readingGroups.map(({ id, attributes: { name } }) => ({
       value: id,
-      label: name
+      label: name,
     }));
   }
 
@@ -50,15 +50,15 @@ class GroupFilter extends Component {
       options: [
         {
           label: this.props.t("reader.menus.notes.my_notes"),
-          value: "me"
+          value: "me",
         },
         {
           label: this.props.t("reader.menus.notes.orphaned_notes"),
-          value: "orphaned"
+          value: "orphaned",
         },
-        ...this.groupOptions
+        ...this.groupOptions,
       ],
-      onChange: this.handleFilterChange
+      onChange: this.handleFilterChange,
     };
   }
 

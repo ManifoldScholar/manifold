@@ -5,7 +5,7 @@ import {
   defaultTransitionProps,
   respond,
   buttonUnstyled,
-  fillOnFocus
+  fillOnFocus,
 } from "theme/styles/mixins";
 
 const CONTAINER_WIDTH = parseInt(containerWidth.inner, 10);
@@ -70,7 +70,7 @@ export default `
       ${respond(
         `height: 42px;
     font-size: 18px;`,
-        60
+        60,
       )}
 
       &:focus-visible {

@@ -5,7 +5,7 @@ import {
   useSlateStatic,
   ReactEditor,
   useFocused,
-  useSelected
+  useSelected,
 } from "slate-react";
 import { Transforms, Editor } from "slate";
 import { handleImageHotkey, handleIframeHotkey } from "../../hotkeys/handlers";
@@ -19,14 +19,14 @@ export default function ImageRenderer({
   attributes,
   as,
   showHtml,
-  darkMode
+  darkMode,
 }) {
   const editor = useSlateStatic();
   const focused = useFocused();
   const selected = useSelected();
   const path = ReactEditor.findPath(editor, element);
 
-  const onRemove = e => {
+  const onRemove = (e) => {
     e.preventDefault();
 
     return Editor.withoutNormalizing(editor, () => {
@@ -34,13 +34,13 @@ export default function ImageRenderer({
       Transforms.insertNodes(
         editor,
         { type: "p", children: [{ text: "" }] },
-        { select: true }
+        { select: true },
       );
     });
   };
 
   const wrapperClassName = classNames({
-    "responsive-iframe": as === "iframe" || as === "video"
+    "responsive-iframe": as === "iframe" || as === "video",
   });
 
   const { htmlAttrs } = element ?? {};

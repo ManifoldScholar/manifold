@@ -24,7 +24,7 @@ export default `
       padding-right: var(--container-padding-inline-full);
       padding-left: var(--container-padding-inline-full);
     `,
-      120
+      120,
     )}
   }
 `;

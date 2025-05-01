@@ -13,7 +13,7 @@ export default function ActionButton({ iconSize, action, entity }) {
 
   const isProjectCollection = entity === "projectCollection";
   const iconClasses = classNames("utility-button__icon", {
-    "utility-button__icon--highlight": isProjectCollection
+    "utility-button__icon--highlight": isProjectCollection,
   });
 
   const Tag = as ?? Link;

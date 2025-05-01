@@ -8,7 +8,7 @@ export default function useListQueryParams({
   initFilters,
   collectionPagination,
   initSearchProps,
-  scrollTargetId
+  scrollTargetId,
 } = {}) {
   const navigate = useNavigate();
   const { pathname, search } = useLocation();
@@ -23,9 +23,9 @@ export default function useListQueryParams({
     () => ({
       number,
       size: size.current,
-      collectionProjects: collection.current
+      collectionProjects: collection.current,
     }),
-    [number]
+    [number],
   );
 
   useEffect(() => {
@@ -39,29 +39,29 @@ export default function useListQueryParams({
 
   const [filters, setFilterState] = useState({
     ...initFilters,
-    ...filterParams
+    ...filterParams,
   });
 
   const updateFilterParams = useCallback(
-    nextFilters => {
+    (nextFilters) => {
       const query = queryString.stringify({ page: 1, ...nextFilters });
 
       navigate({
         pathname,
         search: query,
-        hash: scrollTargetId ? `#${scrollTargetId}` : undefined
+        hash: scrollTargetId ? `#${scrollTargetId}` : undefined,
       });
     },
-    [navigate, pathname, scrollTargetId]
+    [navigate, pathname, scrollTargetId],
   );
 
   // Frontend updates a filters object
   const setFilters = useCallback(
-    newState => {
+    (newState) => {
       updateFilterParams(newState);
       setFilterState(newState);
     },
-    [setFilterState, updateFilterParams]
+    [setFilterState, updateFilterParams],
   );
 
   // Most backend list still use entityListSearchProps which set filters individually
@@ -70,7 +70,7 @@ export default function useListQueryParams({
       const key = field.as || field.name;
       setFilters({ ...filters, [key]: value });
     },
-    [setFilters, filters]
+    [setFilters, filters],
   );
 
   // Legacy reset function for entityListSearchProps; frontend uses setFilters
@@ -86,7 +86,7 @@ export default function useListQueryParams({
       ? Object.keys(initSearchProps.values).reduce((obj, next) => {
           return {
             ...obj,
-            [next]: filters[next] ?? initSearchProps.values[next]
+            [next]: filters[next] ?? initSearchProps.values[next],
           };
         }, {})
       : filters;
@@ -95,7 +95,7 @@ export default function useListQueryParams({
       ...initSearchProps,
       values,
       onReset,
-      setParam: setFilter
+      setParam: setFilter,
     };
   }, [initSearchProps, onReset, setFilter, filters]);
 
@@ -103,6 +103,6 @@ export default function useListQueryParams({
     pagination,
     filters,
     setFilters,
-    searchProps: searchProps()
+    searchProps: searchProps(),
   };
 }

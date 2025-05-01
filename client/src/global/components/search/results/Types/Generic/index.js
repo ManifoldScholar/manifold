@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Collecting from "frontend/components/collecting";
 import withSearchResultHelper from "../searchResultHelper";
@@ -21,7 +20,7 @@ function SearchResultsTypeGeneric(props) {
     label,
     collectable,
     excerpts,
-    meta
+    meta,
   } = props;
 
   const { t } = useTranslation();
@@ -49,7 +48,7 @@ function SearchResultsTypeGeneric(props) {
                 </Styled.Image>
               ),
               tabIndex: -1,
-              ariaHidden: true
+              ariaHidden: true,
             })}
         </Styled.ImageCol>
         <Styled.TextCol>
@@ -63,7 +62,7 @@ function SearchResultsTypeGeneric(props) {
                     <Styled.Parent {...maybeHtml(parent)}>
                       {maybeReactNode(parent)}
                     </Styled.Parent>
-                  )
+                  ),
                 })}
               {title &&
                 maybeWithLink({
@@ -72,7 +71,7 @@ function SearchResultsTypeGeneric(props) {
                     <Styled.Title {...maybeHtml(title)}>
                       {maybeReactNode(title)}
                     </Styled.Title>
-                  )
+                  ),
                 })}
               {attribution && (
                 <Styled.Attribution>

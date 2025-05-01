@@ -13,7 +13,7 @@ export default class ProjectProjectPageContainer extends PureComponent {
   static displayName = "Project.ProjectPage";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
   };
 
   render() {

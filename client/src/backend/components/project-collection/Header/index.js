@@ -9,7 +9,7 @@ class ProjectCollectionHeader extends PureComponent {
 
   static propTypes = {
     projectCollection: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get iconName() {
@@ -27,26 +27,26 @@ class ProjectCollectionHeader extends PureComponent {
         label: "actions.view",
         route: "frontendProjectCollection",
         slug: projectCollection.attributes.slug,
-        icon: "eyeOpen32"
+        icon: "eyeOpen32",
       },
       {
         label: "common.settings",
         route: "backendProjectCollectionSettings",
         slug: projectCollection.id,
-        icon: "settings32"
-      }
+        icon: "settings32",
+      },
     ];
 
     const manage = !smart
       ? [
           {
             label: t("project_collections.manage", {
-              entity: t("glossary.project_other")
+              entity: t("glossary.project_other"),
             }),
             route: "backendProjectCollectionManageProjects",
             slug: projectCollection.id,
-            icon: "BEProject64"
-          }
+            icon: "BEProject64",
+          },
         ]
       : [];
 

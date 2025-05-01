@@ -26,5 +26,5 @@ AddEditTOCEntryContainer.propTypes = {
   sections: PropTypes.array.isRequired,
   toc: PropTypes.array,
   tree: PropTypes.object,
-  setTree: PropTypes.func.isRequired
+  setTree: PropTypes.func.isRequired,
 };

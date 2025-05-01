@@ -21,5 +21,5 @@ export default {
   ProjectCollectionsFrontend,
   Projects,
   ReadingGroups,
-  ResourceCollections
+  ResourceCollections,
 };

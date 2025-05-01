@@ -14,10 +14,10 @@ function ProjectsSummaryEntityCollection({ projects, ...passThroughProps }) {
     <EntityCollection
       title={t("pages.projects_all")}
       icon="projects64"
-      BodyComponent={props => (
+      BodyComponent={(props) => (
         <ThumbnailGrid {...props}>
           {({ stack }) =>
-            projects.map(item => (
+            projects.map((item) => (
               <EntityThumbnail key={item.id} entity={item} stack={stack} />
             ))
           }
@@ -38,7 +38,7 @@ ProjectsSummaryEntityCollection.displayName =
   "Frontend.Entity.Collection.ProjectsSummary";
 
 ProjectsSummaryEntityCollection.propTypes = {
-  projects: PropTypes.arrayOf(PropTypes.object).isRequired
+  projects: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ProjectsSummaryEntityCollection;

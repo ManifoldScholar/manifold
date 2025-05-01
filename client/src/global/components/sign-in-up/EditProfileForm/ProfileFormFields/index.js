@@ -91,5 +91,5 @@ export default function ProfileFormFields({ mode }) {
 ProfileFormFields.displayName = "Global.SignInUp.EditProfileForm.Fields";
 
 ProfileFormFields.propTypes = {
-  mode: PropTypes.string
+  mode: PropTypes.string,
 };

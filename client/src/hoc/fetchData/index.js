@@ -4,13 +4,13 @@ import { isFunction } from "lodash";
 
 export default function fetchData(Component) {
   if (!isFunction(Component.fetchData))
-    return props => <Component {...props} />;
+    return (props) => <Component {...props} />;
 
-  return props => {
+  return (props) => {
     const triggerFetchData = useDeprecatedFetchData(
       Component.fetchData,
       props.location,
-      props.match
+      props.match,
     );
     return <Component {...props} fetchData={triggerFetchData} />;
   };

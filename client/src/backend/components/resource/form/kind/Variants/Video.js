@@ -7,7 +7,7 @@ export default class ResourceFormKindVariantsVideo extends PureComponent {
 
   static propTypes = {
     kind: PropTypes.string,
-    resource: PropTypes.object.isRequired
+    resource: PropTypes.object.isRequired,
   };
 
   get externalVideo() {

@@ -3,5 +3,5 @@ import Node from "./Node/index";
 
 export default {
   List,
-  Node
+  Node,
 };

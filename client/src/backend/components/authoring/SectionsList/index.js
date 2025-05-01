@@ -14,20 +14,18 @@ function SectionsList({
   startSectionId,
   refresh,
   renderLiveRegion,
-  setScreenReaderStatus
+  setScreenReaderStatus,
 }) {
   const { t } = useTranslation();
   const updateSection = useApiCallback(sectionsAPI.update);
   const [error, setError] = useState(null);
 
-  /* eslint-disable no-nested-ternary */
   const errorMessage =
     error === "reorder"
       ? t("errors.section_reorder")
       : Array.isArray(error)
-      ? error.map(e => e.detail).join(". ")
-      : error;
-  /* eslint-disable no-nested-ternary */
+        ? error.map((e) => e.detail).join(". ")
+        : error;
 
   const onReorder = async ({ id, title, position, ...rest }) => {
     setError(null);
@@ -36,7 +34,7 @@ function SectionsList({
 
     const announcement = t("actions.dnd.moved_to_position", {
       title,
-      position
+      position,
     });
     const callback = () => {
       setScreenReaderStatus(announcement);
@@ -60,7 +58,7 @@ function SectionsList({
           refresh,
           setError,
           sectionCount: sections.length,
-          onReorder
+          onReorder,
         }}
         listStyle="bare"
         callbacks={{ onReorder }}
@@ -77,7 +75,7 @@ SectionsList.propTypes = {
   textId: PropTypes.string.isRequired,
   sections: PropTypes.array,
   startTextSectionId: PropTypes.string,
-  refresh: PropTypes.func
+  refresh: PropTypes.func,
 };
 
 export default withScreenReaderStatus(SectionsList, false);

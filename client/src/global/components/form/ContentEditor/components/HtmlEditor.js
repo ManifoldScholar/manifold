@@ -29,7 +29,7 @@ export default function HtmlEditor(props) {
       maxLines={10000}
       wrapEnabled
       showPrintMargin={false}
-      onLoad={editor => {
+      onLoad={(editor) => {
         editor.once("change", () => {
           editor.session.getUndoManager().reset();
         });
@@ -37,7 +37,7 @@ export default function HtmlEditor(props) {
         editor.renderer.setPadding(24, 24);
         editor.renderer.setScrollMargin(24, 24);
         const input = editor.textInput.getElement();
-        input.addEventListener("keydown", e => {
+        input.addEventListener("keydown", (e) => {
           if (e.key === "ArrowDown") {
             const scroller = document.querySelector(".top.pad-xl");
             scroller.scrollBy(0, 16);
@@ -58,15 +58,15 @@ export default function HtmlEditor(props) {
           bindKey: { win: "Tab", mac: "Tab" },
           exec: () => {
             nextRef.current.focus();
-          }
+          },
         },
         {
           name: "shiftTab",
           bindKey: { win: "Shift+Tab", mac: "Shift+Tab" },
           exec: () => {
             prevRef.current.focus();
-          }
-        }
+          },
+        },
       ]}
       {...rest}
     />

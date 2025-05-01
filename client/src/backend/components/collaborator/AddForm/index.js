@@ -12,7 +12,7 @@ export default function AddCollaboratorForm({
   entityId,
   entityType,
   closeUrl,
-  refresh
+  refresh,
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -40,17 +40,17 @@ export default function AddCollaboratorForm({
 
   const createCollaborator = useApiCallback(collaboratorsAPI.create);
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
       roles,
-      maker: { data: { id: makerId.id, type: "maker" } }
+      maker: { data: { id: makerId.id, type: "maker" } },
     };
     const { errors } = await createCollaborator(
       `${entityType.toLowerCase()}s`,
       entityId,
-      data
+      data,
     );
 
     if (!errors) {
@@ -69,25 +69,25 @@ export default function AddCollaboratorForm({
         <Form.FieldGroup>
           <Unwrapped.Picker
             label={t("glossary.maker_title_case_one")}
-            optionToLabel={maker => maker.attributes.fullName}
+            optionToLabel={(maker) => maker.attributes.fullName}
             predictive
             listStyle={"well"}
             options={makersAPI.index}
-            set={val => {
+            set={(val) => {
               setMakerId(val);
             }}
             value={makerId}
           />
           <Unwrapped.Picker
             label={t("common.role_other")}
-            optionToLabel={role => capitalize(role.replaceAll("_", " "))}
+            optionToLabel={(role) => capitalize(role.replaceAll("_", " "))}
             predictive
             isMultiple
             listStyle="rows"
             options={roleOptions ?? []}
             wide
             value={roles}
-            set={val => setRoles(val)}
+            set={(val) => setRoles(val)}
           />
           <Form.DrawerButtons
             showCancel
@@ -106,5 +106,5 @@ AddCollaboratorForm.propTypes = {
   entityId: PropTypes.string.isRequired,
   entityType: PropTypes.oneOf(["Project", "Text"]).isRequired,
   closeUrl: PropTypes.string.isRequired,
-  refresh: PropTypes.func
+  refresh: PropTypes.func,
 };

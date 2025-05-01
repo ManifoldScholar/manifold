@@ -9,7 +9,7 @@ function Uncategorized(props) {
   const { t } = useTranslation();
   const category = {
     id: CATEGORY_ID,
-    attributes: { title: t("common.uncategorized_title_case") }
+    attributes: { title: t("common.uncategorized_title_case") },
   };
 
   return <Category id={CATEGORY_ID} category={category} isStatic {...props} />;
@@ -21,7 +21,7 @@ Uncategorized.displayName =
 Uncategorized.propTypes = {
   mappings: PropTypes.object.isRequired,
   responses: PropTypes.object.isRequired,
-  callbacks: PropTypes.object.isRequired
+  callbacks: PropTypes.object.isRequired,
 };
 
 export default Uncategorized;

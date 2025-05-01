@@ -3,5 +3,5 @@ import HigherOrder from "./higher-order";
 
 export default {
   HigherOrder,
-  Helpers
+  Helpers,
 };

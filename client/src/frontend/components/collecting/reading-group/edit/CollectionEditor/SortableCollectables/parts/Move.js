@@ -19,7 +19,7 @@ Move.propTypes = {
   onClick: PropTypes.func.isRequired,
   direction: PropTypes.oneOf(["up", "down"]),
   onFocus: PropTypes.func,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
 };
 
 export default Move;

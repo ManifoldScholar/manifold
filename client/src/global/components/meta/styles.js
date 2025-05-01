@@ -4,7 +4,7 @@ import {
   listUnstyled,
   respond,
   utilityPrimary,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 
 export const PrimaryList = styled("ul", transientOptions)`
@@ -32,7 +32,7 @@ export const SecondaryList = styled("ul", transientOptions)`
         max-width: 810px;
         column-count: 2;
       `,
-      60
+      60,
     )}
 `;
 

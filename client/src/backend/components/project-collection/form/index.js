@@ -7,5 +7,5 @@ export default {
   Fields,
   IconPicker,
   KindPicker,
-  SmartAttributes
+  SmartAttributes,
 };

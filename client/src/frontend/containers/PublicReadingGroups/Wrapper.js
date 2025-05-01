@@ -7,8 +7,8 @@ import lh from "helpers/linkHandler";
 function PublicReadingGroupsContainer({ route }) {
   const {
     attributes: {
-      general: { disablePublicReadingGroups }
-    }
+      general: { disablePublicReadingGroups },
+    },
   } = useFromStore("settings", "select");
 
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function PublicReadingGroupsContainer({ route }) {
 }
 
 PublicReadingGroupsContainer.propTypes = {
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
 };
 
 export default PublicReadingGroupsContainer;

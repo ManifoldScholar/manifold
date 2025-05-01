@@ -15,5 +15,5 @@ FormRadioLabel.displayName = "Form.Radio.Label";
 
 FormRadioLabel.propTypes = {
   label: PropTypes.string.isRequired,
-  prompt: PropTypes.string
+  prompt: PropTypes.string,
 };

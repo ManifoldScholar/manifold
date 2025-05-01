@@ -20,16 +20,16 @@ function JournalDetailContainer({ journal }) {
   const [volumesPagination] = usePaginationState(1, 5);
 
   const { data: volumes } = useFetch({
-    request: [journalVolumesAPI.index, journal.id, volumesPagination]
+    request: [journalVolumesAPI.index, journal.id, volumesPagination],
   });
 
   const issuesFilter = useMemo(
     () => ({ journal_id: journal.id, volume_is_nil: true }),
-    [journal.id]
+    [journal.id],
   );
 
   const { data: issues } = useFetch({
-    request: [journalIssuesAPI.index, issuesFilter, issuesPagination]
+    request: [journalIssuesAPI.index, issuesFilter, issuesPagination],
   });
 
   const { t } = useTranslation();
@@ -43,12 +43,12 @@ function JournalDetailContainer({ journal }) {
       : [
           {
             to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
+            label: t("navigation.breadcrumbs.all_journals"),
           },
           {
             to: lh.link("frontendJournalDetail", slug),
-            label: titlePlaintext
-          }
+            label: titlePlaintext,
+          },
         ];
   }, [slug, titlePlaintext, t, libraryDisabled]);
 
@@ -59,7 +59,7 @@ function JournalDetailContainer({ journal }) {
   const {
     journalIssuesCount,
     journalVolumesCount,
-    journalIssuesWithoutVolumeCount
+    journalIssuesWithoutVolumeCount,
   } = journal.attributes;
 
   return journal ? (
@@ -86,7 +86,7 @@ function JournalDetailContainer({ journal }) {
               categoryCount={journalVolumesCount}
               uncategorized={journalIssuesWithoutVolumeCount}
             />
-          )
+          ),
         }}
         FooterComponent={() => (
           <FooterLink
@@ -110,7 +110,7 @@ function JournalDetailContainer({ journal }) {
                     categoryCount={journalVolumesCount}
                     uncategorized={journalIssuesWithoutVolumeCount}
                   />
-                )
+                ),
               }
             : null
         }
@@ -131,7 +131,7 @@ JournalDetailContainer.displayName = "Frontend.Containers.JournalDetail";
 
 JournalDetailContainer.propTypes = {
   journal: PropTypes.object,
-  response: PropTypes.object
+  response: PropTypes.object,
 };
 
 export default JournalDetailContainer;

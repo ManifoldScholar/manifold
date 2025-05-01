@@ -16,7 +16,7 @@ export const rteElements = [
   "list-sibling",
   "img",
   "iframe",
-  "video"
+  "video",
 ];
 
 // These elements are removable/insertable via the RTE but their contents cannot be edited as text.
@@ -32,7 +32,7 @@ export const nestableElements = [
   "article",
   "figcaption",
   "blockquote",
-  "pre"
+  "pre",
 ];
 
 // These elements are rendered in the RTE, but can't be created there. Their text children are editable, and these elements can be deleted in the RTE like any other block.
@@ -72,7 +72,7 @@ export const inlineNodes = [
   "input",
   "label",
   "select",
-  "textarea"
+  "textarea",
 ];
 
 // Also duplicated from the api. These elements are removed during serialization and are never saved.

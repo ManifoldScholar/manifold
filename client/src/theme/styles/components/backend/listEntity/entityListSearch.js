@@ -2,7 +2,7 @@ import {
   buttonUnstyled,
   utilityPrimary,
   respond,
-  inputQuaternary
+  inputQuaternary,
 } from "theme/styles/mixins";
 
 export default `

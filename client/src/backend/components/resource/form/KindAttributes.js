@@ -8,7 +8,7 @@ export default class KindAttributes extends PureComponent {
   render() {
     return (
       <FormContext.Consumer>
-        {formProps => {
+        {(formProps) => {
           const props = { ...this.props, ...formProps };
 
           switch (formProps.getModelValue("attributes[kind]")) {

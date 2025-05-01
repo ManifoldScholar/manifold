@@ -11,7 +11,7 @@ export default function SelectAll({
   onClear,
   onSelectPage,
   allSelected,
-  idsSelectedCount
+  idsSelectedCount,
 }) {
   const { t } = useTranslation();
 
@@ -26,12 +26,11 @@ export default function SelectAll({
   // Valid because page change resets bulk selection
   const allPageSelected = idsSelectedCount === pageCount;
 
-  /* eslint-disable no-nested-ternary */
   const ariaState = allPageSelected
     ? "true"
     : idsSelectedCount
-    ? "mixed"
-    : "false";
+      ? "mixed"
+      : "false";
 
   return (
     <>
@@ -61,7 +60,7 @@ export default function SelectAll({
               i18nKey={"counts.bulk_actions_match"}
               values={{
                 total: idsSelectedCount || pagination.totalCount,
-                unit
+                unit,
               }}
               components={[<Styled.Highlighted />]}
             />
@@ -87,10 +86,10 @@ SelectAll.propTypes = {
   pagination: PropTypes.shape({
     currentPage: PropTypes.number.isRequired,
     perPage: PropTypes.number.isRequired,
-    totalCount: PropTypes.number.isRequired
+    totalCount: PropTypes.number.isRequired,
   }).isRequired,
   unit: PropTypes.string.isRequired,
   onSelect: PropTypes.func,
   onClear: PropTypes.func,
-  allSelected: PropTypes.bool.isRequired
+  allSelected: PropTypes.bool.isRequired,
 };

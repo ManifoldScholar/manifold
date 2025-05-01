@@ -9,7 +9,7 @@ function ProjectPreferences({
   showAllProjects,
   preferences,
   onChange,
-  onDigestChange
+  onDigestChange,
 }) {
   const { toggleProps } = useCollapseContext();
   const { t } = useTranslation();
@@ -18,9 +18,9 @@ function ProjectPreferences({
 
   const options = {
     ...(showAllProjects && {
-      projects: t("forms.notifications.project_preferences.all_projects")
+      projects: t("forms.notifications.project_preferences.all_projects"),
     }),
-    followedProjects: t("forms.notifications.project_preferences.only_starred")
+    followedProjects: t("forms.notifications.project_preferences.only_starred"),
   };
 
   return (
@@ -28,18 +28,18 @@ function ProjectPreferences({
       <RadioGroup
         preference={{
           key: "digest",
-          label: t("forms.notifications.project_preferences.frequency_label")
+          label: t("forms.notifications.project_preferences.frequency_label"),
         }}
         options={{
           never: t("forms.notifications.project_preferences.never"),
           daily: t("forms.notifications.project_preferences.daily"),
-          weekly: t("forms.notifications.project_preferences.weekly")
+          weekly: t("forms.notifications.project_preferences.weekly"),
         }}
         inputProps={{
           ...toggleProps,
           onClick: null,
           type: "radio",
-          "aria-expanded": digestOpen
+          "aria-expanded": digestOpen,
         }}
         value={preferences.digest}
         onChange={onChange}
@@ -50,12 +50,13 @@ function ProjectPreferences({
             preference={{
               key: "digest-projects",
               label: t(
-                "forms.notifications.project_preferences.digest_projects_label"
-              )
+                "forms.notifications.project_preferences.digest_projects_label",
+              ),
             }}
             options={options}
             value={Object.keys(preferences).find(
-              prefKey => prefKey in options && preferences[prefKey] === "always"
+              (prefKey) =>
+                prefKey in options && preferences[prefKey] === "always",
             )}
             onChange={onDigestChange}
           />
@@ -63,8 +64,8 @@ function ProjectPreferences({
             preference={{
               key: "digestCommentsAndAnnotations",
               label: t(
-                "forms.notifications.project_preferences.digest_comments_label"
-              )
+                "forms.notifications.project_preferences.digest_comments_label",
+              ),
             }}
             value={preferences.digestCommentsAndAnnotations}
             onChange={onChange}
@@ -78,7 +79,7 @@ function ProjectPreferences({
 ProjectPreferences.displayName = "Frontend.Preferences.ProjectDigest";
 
 ProjectPreferences.propTypes = {
-  showAllProjects: PropTypes.bool
+  showAllProjects: PropTypes.bool,
 };
 
 export default ProjectPreferences;

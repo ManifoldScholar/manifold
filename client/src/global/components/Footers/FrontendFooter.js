@@ -30,6 +30,6 @@ class FrontendFooter extends Component {
 export default withSettings(
   withPluginReplacement(
     FrontendFooter,
-    "Global.Components.Footers.FrontendFooter"
-  )
+    "Global.Components.Footers.FrontendFooter",
+  ),
 );

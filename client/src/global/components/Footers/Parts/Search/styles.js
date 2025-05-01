@@ -4,7 +4,7 @@ import {
   buttonUnstyled,
   inputQuaternary,
   outlineOnFocus,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export const Form = styled.form`
@@ -43,7 +43,8 @@ export const SearchButton = styled.div`
     border-color: var(--color-base-neutral40);
     border-radius: 8px;
     appearance: none;
-    transition: color ${defaultTransitionProps},
+    transition:
+      color ${defaultTransitionProps},
       border-color ${defaultTransitionProps};
     font-family: var(--font-family-sans);
 

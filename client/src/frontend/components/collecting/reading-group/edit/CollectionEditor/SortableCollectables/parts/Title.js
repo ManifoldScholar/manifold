@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Skeleton from "frontend/components/collecting/ContentSkeleton";
 import {
   getResponse,
-  idInResponses
+  idInResponses,
 } from "frontend/components/collecting/helpers";
 import * as Styled from "./styles";
 
@@ -24,7 +24,7 @@ function CollectableTitle({ id, responses, labelId }) {
           height: 14,
           maxWidth: "100%",
           width: 350,
-          transform: "translateY(1px)"
+          transform: "translateY(1px)",
         }}
         nested
       />
@@ -46,7 +46,7 @@ CollectableTitle.displayName =
 CollectableTitle.propTypes = {
   id: PropTypes.string.isRequired,
   responses: PropTypes.array.isRequired,
-  labelId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  labelId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default CollectableTitle;

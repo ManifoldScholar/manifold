@@ -10,38 +10,38 @@ const TEXT_PATHS = {
     {
       prop: "entity",
       path: ["attributes"],
-      name: "restrictedAccessHeading"
+      name: "restrictedAccessHeading",
     },
     {
       prop: "settings",
       path: ["attributes", "general"],
-      name: "restrictedAccessHeading"
+      name: "restrictedAccessHeading",
     },
     {
       prop: "config",
       path: ["app", "locale", "notifications", "projectAuthorizationNotice"],
-      name: "heading"
-    }
+      name: "heading",
+    },
   ],
   body: [
     {
       prop: "entity",
       path: ["attributes"],
       name: "restrictedAccessBody",
-      show: "restrictedAccessBodyFormatted"
+      show: "restrictedAccessBodyFormatted",
     },
     {
       prop: "settings",
       path: ["attributes", "general"],
       name: "restrictedAccessBody",
-      show: "restrictedAccessBodyFormatted"
+      show: "restrictedAccessBodyFormatted",
     },
     {
       prop: "config",
       path: ["app", "locale", "notifications", "projectAuthorizationNotice"],
-      name: "body"
-    }
-  ]
+      name: "body",
+    },
+  ],
 };
 
 function fetchTextPath(props, type) {
@@ -81,18 +81,18 @@ AccessDenied.propTypes = {
     attributes: PropTypes.shape({
       restrictedAccessHeading: PropTypes.string,
       restrictedAccessBody: PropTypes.string,
-      restrictedAccessBodyFormatted: PropTypes.string
-    })
+      restrictedAccessBodyFormatted: PropTypes.string,
+    }),
   }),
   settings: PropTypes.shape({
     attributes: PropTypes.shape({
       general: PropTypes.shape({
         restrictedAccessHeading: PropTypes.string,
         restrictedAccessBody: PropTypes.string,
-        restrictedAccessBodyFormatted: PropTypes.string
-      })
-    })
-  })
+        restrictedAccessBodyFormatted: PropTypes.string,
+      }),
+    }),
+  }),
 };
 
 AccessDenied.defaultProps = { config };

@@ -4,7 +4,7 @@ import {
   utilityPrimary,
   textTruncate,
   rgba,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import { collectableTypeVerticalPadding } from "../styles";
 import { Description } from "frontend/components/collecting/reading-group/static/Category/styles";
@@ -89,7 +89,9 @@ export const Inner = styled.div`
     clamp(20px, 2.857vw, 32px);
   padding-block-start: 40px;
   padding-block-end: 40px;
-  box-shadow: inset 0 ${shadowSize} ${shadowSize} -${halfShadowSize} ${rgba("neutralBlack", 0.08)},
+  box-shadow:
+    inset 0 ${shadowSize} ${shadowSize} -${halfShadowSize}
+      ${rgba("neutralBlack", 0.08)},
     inset 0 -${shadowSize} ${shadowSize} -${halfShadowSize}
       ${rgba("neutralBlack", 0.08)};
 `;

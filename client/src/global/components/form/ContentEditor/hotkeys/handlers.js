@@ -3,7 +3,7 @@ import { getCommonBlock, isLinkActive } from "../utils/slate/getters";
 import { isValidUrl } from "../utils/helpers";
 import { Transforms, Range, Node } from "slate";
 
-export const handleLinkHotkey = editor => {
+export const handleLinkHotkey = (editor) => {
   if (isLinkActive(editor)) return unwrapLink(editor);
 
   const { selection } = editor;
@@ -21,18 +21,18 @@ export const handleLinkHotkey = editor => {
   if (button[0]) button[0].click();
 };
 
-export const handleImageHotkey = e => {
+export const handleImageHotkey = (e) => {
   if (e) e.preventDefault();
   const button = document.getElementsByName("img-modal-trigger");
   if (button[0]) button[0].click();
 };
 
-export const handleIframeHotkey = e => {
+export const handleIframeHotkey = (e) => {
   if (e) e.preventDefault();
   const button = document.getElementsByName("iframe-modal-trigger");
   if (button[0]) button[0].click();
 };
 
-export const insertSoftBreak = editor => {
+export const insertSoftBreak = (editor) => {
   Transforms.insertText(editor, "\n");
 };

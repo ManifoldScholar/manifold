@@ -19,18 +19,18 @@ class NotationViewerSingle extends PureComponent {
     active: PropTypes.bool,
     actions: PropTypes.shape({
       startDestroy: PropTypes.func,
-      makeActive: PropTypes.func
+      makeActive: PropTypes.func,
     }),
     params: PropTypes.shape({
       sectionId: PropTypes.string,
-      textId: PropTypes.string
+      textId: PropTypes.string,
     }),
     showTitle: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    showTitle: true
+    showTitle: true,
   };
 
   render() {
@@ -38,11 +38,10 @@ class NotationViewerSingle extends PureComponent {
     if (!entry) return;
     const { annotation, notation } = entry;
     const linkClass = classNames("notation-single-link", {
-      highlighted: active
+      highlighted: active,
     });
     const height = entry.height ? entry.height + "px" : "auto";
 
-    /* eslint-disable jsx-a11y/anchor-is-valid                                          */
     /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
     /* false positive, as the child Link component does in fact render an a tag with a  */
     /* href.                                                                            */
@@ -66,13 +65,13 @@ class NotationViewerSingle extends PureComponent {
         <Link notation={notation} params={params} className={linkClass}>
           <div
             style={{ maxHeight: height }}
-            ref={r => {
+            ref={(r) => {
               this.wrapperDomEl = r;
             }}
             onMouseOver={() => {
               actions.makeActive({
                 annotationId: annotation.id,
-                passive: false
+                passive: false,
               });
             }}
             onMouseLeave={() => {
@@ -84,7 +83,6 @@ class NotationViewerSingle extends PureComponent {
         </Link>
       </div>
     );
-    /* eslint-enable jsx-a11y/anchor-is-valid */
   }
 }
 

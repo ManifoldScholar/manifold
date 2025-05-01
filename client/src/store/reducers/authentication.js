@@ -10,7 +10,7 @@ const initialState = {
   currentUser: null,
   error: null,
   visitToken: null,
-  visitorToken: null
+  visitorToken: null,
 };
 
 const setError = (state, action) => {
@@ -39,22 +39,22 @@ const setAuthToken = (state, action) => {
   return { ...state, ...newState };
 };
 
-const endLogin = state => {
+const endLogin = (state) => {
   return {
     ...state,
     authenticating: false,
-    authenticated: Boolean(state.authToken)
+    authenticated: Boolean(state.authToken),
   };
 };
 
-const startLogin = state => {
+const startLogin = (state) => {
   return { ...state, authenticating: true };
 };
 
 const replaceUserCollection = (state, action) => {
   if (!state.currentUser || !state.currentUser.relationships) return state;
   const newState = update(state, {
-    currentUser: { relationships: { collection: { $set: action.payload } } }
+    currentUser: { relationships: { collection: { $set: action.payload } } },
   });
   return newState;
 };
@@ -64,15 +64,15 @@ const updateStateFromUser = (state, payload) => {
   delete adjustedUser.relationships;
   adjustedUser.relationships = {
     collection: payload.included
-      ? payload.included.find(inc => {
+      ? payload.included.find((inc) => {
           return inc.type === "userCollections";
         })
-      : null
+      : null,
   };
   const newState = {
     authenticated: !state.authenticating,
     currentUser: adjustedUser,
-    error: null
+    error: null,
   };
   return { ...state, ...newState };
 };
@@ -94,9 +94,8 @@ const syncCurrentUser = (state, action) => {
 
 export default handleActions(
   {
-    [`API_RESPONSE/${constantizeMeta(
-      requests.gAuthenticatedUserUpdate
-    )}`]: syncCurrentUser,
+    [`API_RESPONSE/${constantizeMeta(requests.gAuthenticatedUserUpdate)}`]:
+      syncCurrentUser,
     LOGIN: startLogin,
     LOGIN_SET_CURRENT_USER: setCurrentUser,
     UPDATE_CURRENT_USER: setCurrentUser,
@@ -106,7 +105,7 @@ export default handleActions(
     LOGIN_SET_ERROR: setError,
     LOGIN_SET_VISITOR_TOKEN: setVisitorToken,
     LOGIN_SET_VISIT_TOKEN: setVisitToken,
-    LOGOUT: logout
+    LOGOUT: logout,
   },
-  initialState
+  initialState,
 );

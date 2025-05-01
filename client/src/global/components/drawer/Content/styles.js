@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   defaultTransitionProps,
   respond,
-  drawerPadding
+  drawerPadding,
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 import { ZOOM_BREAKPOINT } from "theme/styles/components/reader/readerHeader";
@@ -64,16 +64,16 @@ export const Drawer = styled.div`
     ${respond(
       `width: auto;
       max-width: 75%;`,
-      75
+      75,
     )}
 
     ${respond(
       `max-width: 1024px;`,
-      `${(parseInt(breakpoints[95], 10) * 4) / 3}px`
+      `${(parseInt(breakpoints[95], 10) * 4) / 3}px`,
     )}
     ${respond(
       `width: calc((100vw - var(--container-width-inner) / 2));`,
-      `${parseInt(breakpoints[120], 10) + 1000}px`
+      `${parseInt(breakpoints[120], 10) + 1000}px`,
     )}
   }
 
@@ -87,7 +87,7 @@ export const Drawer = styled.div`
     ${respond(`padding: 33px 156px 66px 98px;`, 90)}
     ${respond(
       `padding: 33px 70px;`,
-      `${parseInt(breakpoints[120], 10) + 1000}px`
+      `${parseInt(breakpoints[120], 10) + 1000}px`,
     )}
   }
 

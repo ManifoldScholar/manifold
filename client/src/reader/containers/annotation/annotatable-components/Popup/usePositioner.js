@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useCallback } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useState, useCallback } from "react";
 import throttle from "lodash/throttle";
 
 export default function usePositioner({
   popupRef,
   selectionState,
-  annotatableRef
+  annotatableRef,
 }) {
   const { selection, popupTriggerX, popupTriggerY } = selectionState;
 
@@ -20,7 +19,7 @@ export default function usePositioner({
     const measureableNode = popupRef.firstChild ?? popupRef;
     return {
       height: measureableNode.offsetHeight,
-      width: measureableNode.offsetWidth
+      width: measureableNode.offsetWidth,
     };
   }, [popupRef]);
 
@@ -71,10 +70,10 @@ export default function usePositioner({
       const maxLeft = margin + annotatableRect.width - popupWidth * 0.5;
       return { minLeft, maxLeft };
     },
-    [margin, annotatableRect]
+    [margin, annotatableRect],
   );
 
-  const withUnit = value => {
+  const withUnit = (value) => {
     if (value === "auto") return value;
     return `${Math.round(value)}px`;
   };
@@ -132,7 +131,7 @@ export default function usePositioner({
         position: "absolute",
         top: withUnit(top),
         bottom: withUnit(bottom),
-        left: withUnit(left)
+        left: withUnit(left),
       };
 
       return { direction: currentDirection, style: styleProps };
@@ -152,7 +151,7 @@ export default function usePositioner({
     minAndMaxLeft,
     popupDimensions,
     shouldPreferBottom,
-    popupTriggerX
+    popupTriggerX,
   ]);
 
   const [values, setValues] = useState({ direction: "up", style: {} });

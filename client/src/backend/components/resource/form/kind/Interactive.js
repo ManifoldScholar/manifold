@@ -8,7 +8,7 @@ class ResourceFormKindInteractive extends PureComponent {
 
   static propTypes = {
     getModelValue: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -39,12 +39,12 @@ class ResourceFormKindInteractive extends PureComponent {
           options={[
             {
               label: this.props.t("resources.new.iframe_allow_fullscreen"),
-              value: "fullscreen"
+              value: "fullscreen",
             },
             {
               label: this.props.t("resources.new.iframe_allow_camera"),
-              value: "camera"
-            }
+              value: "camera",
+            },
           ]}
         />
       </>

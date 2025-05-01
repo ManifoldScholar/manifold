@@ -4,8 +4,8 @@ export default {
       endpoint: "/api/v1/journals",
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -14,8 +14,8 @@ export default {
       endpoint: `/api/v1/journals/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "journal", data: journal })
-      }
+        body: JSON.stringify({ type: "journal", data: journal }),
+      },
     };
   },
 
@@ -23,7 +23,7 @@ export default {
     return {
       endpoint: `/api/v1/journals/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -32,8 +32,8 @@ export default {
       endpoint: "/api/v1/journals",
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "journal", data: journal })
-      }
+        body: JSON.stringify({ type: "journal", data: journal }),
+      },
     };
   },
 
@@ -41,14 +41,14 @@ export default {
     return {
       endpoint: `/api/v1/journals/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
   actionCallouts(id) {
     return {
       endpoint: `/api/v1/journals/${id}/relationships/action_callouts`,
-      method: "GET"
+      method: "GET",
     };
   },
 
@@ -57,8 +57,8 @@ export default {
       endpoint: `/api/v1/journals/${jId}/relationships/journal_issues`,
       method: "GET",
       options: {
-        params: { page, filter }
-      }
+        params: { page, filter },
+      },
     };
-  }
+  },
 };

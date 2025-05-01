@@ -6,7 +6,7 @@ export default class ResourceListSlideAudio extends Component {
   static displayName = "ResourceList.Slide.Audio";
 
   static propTypes = {
-    resource: PropTypes.object
+    resource: PropTypes.object,
   };
 
   render() {

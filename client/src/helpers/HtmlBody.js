@@ -7,8 +7,8 @@ import reduceAssets from "./reduceAssets";
 
 function getJavascripts(stats) {
   const scripts = reduceAssets(".js", stats);
-  return scripts.map(script => {
-    return <script src={`/${script}`} key={script} charSet="UTF-8" />;
+  return scripts.map((script) => {
+    return <script src={`/${script}`} key={script} />;
   });
 }
 
@@ -29,17 +29,15 @@ function HtmlBody({ stats, component, store, disableBrowserRender }) {
       {store && disableBrowserRender ? (
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.DISABLE_BROWSER_RENDER=true`
+            __html: `window.DISABLE_BROWSER_RENDER=true`,
           }}
-          charSet="UTF-8"
         />
       ) : null}
       {store && !disableBrowserRender ? (
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.__INITIAL_STATE__=${serialize(store.getState())};`
+            __html: `window.__INITIAL_STATE__=${serialize(store.getState())};`,
           }}
-          charSet="UTF-8"
         />
       ) : null}
       {javascripts}
@@ -51,7 +49,7 @@ HtmlBody.propTypes = {
   stats: PropTypes.object,
   component: PropTypes.node,
   store: PropTypes.object,
-  disableBrowserRender: PropTypes.bool
+  disableBrowserRender: PropTypes.bool,
 };
 
 export default HtmlBody;

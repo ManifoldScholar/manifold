@@ -16,7 +16,7 @@ class LinkHandler {
       });
     }
     if (isArray(routes)) {
-      routes.forEach(aRoute => {
+      routes.forEach((aRoute) => {
         this.extract(aRoute);
       });
     }
@@ -26,7 +26,7 @@ class LinkHandler {
   setup() {
     this.handlers = {};
     this.routes = {};
-    getRoutes().forEach(route => {
+    getRoutes().forEach((route) => {
       this.extract(route);
     });
   }

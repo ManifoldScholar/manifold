@@ -7,7 +7,7 @@ import * as Styled from "./styles";
 function Icon({ resourceish }) {
   const {
     type,
-    attributes: { kind }
+    attributes: { kind },
   } = resourceish;
 
   if (type !== "resources" && type !== "resourceCollections") return null;
@@ -26,7 +26,7 @@ function Icon({ resourceish }) {
 Icon.displayName = "Resourceish.Thumbnail.Icon";
 
 Icon.propTypes = {
-  resourceish: PropTypes.object.isRequired
+  resourceish: PropTypes.object.isRequired,
 };
 
 export default Icon;

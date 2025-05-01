@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 export default function InlineCommentsToggle({
   loadComments,
   active,
-  commentsCount
+  commentsCount,
 }) {
   const { t } = useTranslation();
 
@@ -25,5 +25,5 @@ InlineCommentsToggle.displayName =
 InlineCommentsToggle.propTypes = {
   loadComments: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
-  commentsCount: PropTypes.number.isRequired
+  commentsCount: PropTypes.number.isRequired,
 };

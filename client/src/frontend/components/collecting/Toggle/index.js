@@ -53,7 +53,7 @@ function CollectingToggle({
   readingGroups: myReadingGroups,
   setScreenReaderStatus,
   onUncollect,
-  hiddenIfUncollected
+  hiddenIfUncollected,
 }) {
   const [hovered, setHovered] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -64,7 +64,7 @@ function CollectingToggle({
 
   const myCollectableReadingGroups = useMemo(() => {
     if (!Array.isArray(myReadingGroups)) return [];
-    return myReadingGroups.filter(rg => rg?.attributes?.abilities?.update);
+    return myReadingGroups.filter((rg) => rg?.attributes?.abilities?.update);
   }, [myReadingGroups]);
 
   useEffect(() => {
@@ -106,7 +106,7 @@ function CollectingToggle({
     if (!hasReadingGroups) return {};
     return {
       "aria-haspopup": true,
-      "aria-expanded": dialogVisible
+      "aria-expanded": dialogVisible,
     };
   };
 
@@ -128,7 +128,7 @@ function CollectingToggle({
     setConfirmed(false);
     setHovered(false);
     setScreenReaderStatus(
-      t("messages.uncollected", { title: collectableTitle })
+      t("messages.uncollected", { title: collectableTitle }),
     );
   }
 
@@ -198,7 +198,7 @@ function CollectingToggle({
           "collecting-toggle--project-cover": !inline,
           "collecting-toggle--outlined": outlined,
           "collecting-toggle--filled-always": !outlined,
-          "collecting-toggle--toc-hidden": hiddenIfUncollected && !collected
+          "collecting-toggle--toc-hidden": hiddenIfUncollected && !collected,
         })}
         aria-hidden="true"
         tabIndex={-1}
@@ -206,7 +206,7 @@ function CollectingToggle({
         <div
           className={classNames({
             "collecting-toggle__inner": true,
-            [`collecting-toggle__inner--${view}`]: true
+            [`collecting-toggle__inner--${view}`]: true,
           })}
           aria-hidden="true"
         >
@@ -239,7 +239,7 @@ CollectingToggle.propTypes = {
   onUncollect: PropTypes.func,
   inline: PropTypes.bool,
   outlined: PropTypes.bool,
-  hiddenIfUncollected: PropTypes.bool
+  hiddenIfUncollected: PropTypes.bool,
 };
 
 export default withReadingGroups(withScreenReaderStatus(CollectingToggle));

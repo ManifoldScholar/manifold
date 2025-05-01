@@ -11,7 +11,7 @@ export default function SectionFields({ visible, options }) {
 
   const collapseProps = {
     "aria-controls": toggleProps["aria-controls"],
-    "aria-expanded": visible
+    "aria-expanded": visible,
   };
 
   return (
@@ -28,7 +28,7 @@ export default function SectionFields({ visible, options }) {
           label={t("texts.stylesheets.edit.sections_label")}
           placeholder={t("texts.stylesheets.edit.sections_placeholder")}
           name="relationships[textSections]"
-          optionToLabel={text => text.attributes.name}
+          optionToLabel={(text) => text.attributes.name}
           options={options}
           rowProps={{ namePath: "attributes.title" }}
           showAddRemoveAll

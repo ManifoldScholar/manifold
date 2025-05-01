@@ -8,7 +8,7 @@ class Annotations extends Component {
   static displayName = "Analytics.Composed.Annotations";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get data() {
@@ -29,9 +29,9 @@ class Annotations extends Component {
       stat,
       caption: rangeInWords
         ? this.props.t("analytics.annotations_in_date_range", {
-            dateRange: rangeInWords
+            dateRange: rangeInWords,
           })
-        : this.props.t("analytics.annotations_created")
+        : this.props.t("analytics.annotations_created"),
     };
   }
 
@@ -39,7 +39,7 @@ class Annotations extends Component {
     const stat = this.data.publicAnnotations;
     return {
       stat,
-      caption: this.props.t("common.public_title_case")
+      caption: this.props.t("common.public_title_case"),
     };
   }
 
@@ -47,7 +47,7 @@ class Annotations extends Component {
     const stat = this.data.privateAnnotations;
     return {
       stat,
-      caption: this.props.t("common.private_title_case")
+      caption: this.props.t("common.private_title_case"),
     };
   }
 
@@ -55,7 +55,7 @@ class Annotations extends Component {
     const stat = this.data.readingGroupAnnotations;
     return {
       stat,
-      caption: this.props.t("analytics.in_reading_groups")
+      caption: this.props.t("analytics.in_reading_groups"),
     };
   }
 
@@ -64,7 +64,7 @@ class Annotations extends Component {
       this.totalFigure,
       this.publicFigure,
       this.privateFigure,
-      this.readingGroupFigure
+      this.readingGroupFigure,
     ];
   }
 

@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useContext,
-  useCallback,
-  useRef,
-  useState
-} from "react";
+import { useEffect, useContext, useCallback, useRef, useState } from "react";
 import InternalContext from "../contexts/InternalContext";
 import { useSelector, useDispatch, useStore } from "react-redux";
 import { entityStoreActions } from "actions";
@@ -26,11 +20,12 @@ export default function useFetch({
   options = {},
   dependencies = [],
   withAuthDependency = false,
-  condition = true
+  condition = true,
 }) {
   const firstRun = useRef(true);
   const uid = `fetch_${useUID()}`;
-  const [requestKey] = useState(options.requestKey ?? `fetch_${useUID()}`);
+  const fallbackRequestKey = `fetch_${useUID()}`;
+  const [requestKey] = useState(options.requestKey ?? fallbackRequestKey);
   const [count, setCount] = useState(1);
   const store = useStore();
   const getState = store.getState;
@@ -42,7 +37,7 @@ export default function useFetch({
     throw new Error(
       `useFetch expects the 'request' property to be an array. In most cases, the first
        element in the array is the Manifold API function and subsequent elements are the
-       arguments that will be passed to that method.`
+       arguments that will be passed to that method.`,
     );
   }
 
@@ -51,7 +46,7 @@ export default function useFetch({
   if (count > 25)
     throw new Error(
       `useFetch tried to fetch data more than 25 times. This suggests that an input to
-      useFetch needs to be memoized.`
+      useFetch needs to be memoized.`,
     );
 
   /* eslint-disable react-hooks/exhaustive-deps */
@@ -75,13 +70,13 @@ export default function useFetch({
     let cancel = Function.prototype;
 
     if (!internalContext.resolved) {
-      const effectPr = new Promise(resolve => {
+      const effectPr = new Promise((resolve) => {
         cancel = () => {
           resolve(requestKey);
         };
 
         return triggerFetchData()
-          .then(res => {
+          .then((res) => {
             return res;
           })
           .then(() => {
@@ -95,18 +90,18 @@ export default function useFetch({
       internalContext.requests.push({
         id: requestKey,
         promise: effectPr,
-        cancel
+        cancel,
       });
     }
   }
 
-  const authentication = useSelector(state => state.authentication);
+  const authentication = useSelector((state) => state.authentication);
 
   const refetchDependencies = withAuthDependency
     ? [
         ...dependencies,
         authentication.authenticated,
-        authentication.currentUser?.id
+        authentication.currentUser?.id,
       ]
     : dependencies;
 
@@ -118,21 +113,21 @@ export default function useFetch({
       },
       () => {
         // do nothing
-      }
+      },
     );
   }, [triggerFetchData, ...refetchDependencies]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-  const data = useSelector(state =>
-    entityUtils.select(requestKey, state.entityStore)
+  const data = useSelector((state) =>
+    entityUtils.select(requestKey, state.entityStore),
   );
 
-  const meta = useSelector(state =>
-    entityUtils.meta(requestKey, state.entityStore)
+  const meta = useSelector((state) =>
+    entityUtils.meta(requestKey, state.entityStore),
   );
 
-  const loaded = useSelector(state =>
-    entityUtils.loaded(requestKey, state.entityStore)
+  const loaded = useSelector((state) =>
+    entityUtils.loaded(requestKey, state.entityStore),
   );
 
   const response = getState()?.entityStore.responses[requestKey];

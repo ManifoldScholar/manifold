@@ -7,7 +7,7 @@ import {
   dragging,
   blockLabelRound,
   buttonUnstyled,
-  revealOnFocus
+  revealOnFocus,
 } from "theme/styles/mixins";
 
 export default `
@@ -114,7 +114,7 @@ export default `
             margin-left: 23px;
             font-size: 20px;
           `,
-          90
+          90,
         )}
       }
     }

@@ -7,5 +7,5 @@ export default {
   Control,
   Controls,
   Result,
-  Results
+  Results,
 };

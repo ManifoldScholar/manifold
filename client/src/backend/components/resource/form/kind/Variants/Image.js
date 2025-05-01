@@ -6,7 +6,7 @@ export default class ResourceFormKindVariantsImage extends PureComponent {
   static displayName = "Resource.Form.Kind.Variants.Image";
 
   static propTypes = {
-    kind: PropTypes.string
+    kind: PropTypes.string,
   };
 
   render() {

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   buttonUnstyled,
   defaultTransitionProps,
-  rgba
+  rgba,
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
@@ -27,8 +27,10 @@ export const Popover = styled.div`
   );
   border-radius: var(--box-border-radius);
   box-shadow: 5px 15px 35px 8px ${rgba("neutralBlack", 0.13)};
-  transition: display ${defaultTransitionProps},
-    opacity ${defaultTransitionProps}, transform ${defaultTransitionProps};
+  transition:
+    display ${defaultTransitionProps},
+    opacity ${defaultTransitionProps},
+    transform ${defaultTransitionProps};
   transition-behavior: allow-discrete;
 
   &[inert] {

@@ -15,13 +15,13 @@ export default `
         ${respond(
           `flex: 1 1 25%;
       max-width: 25%;`,
-          75
+          75,
         )}
 
         ${respond(
           `flex-basis: 20%;
       max-width: 20%;`,
-          90
+          90,
         )}
       }
     }
@@ -34,7 +34,7 @@ export default `
           `flex-basis: 25%;
         max-width: 25%;
         padding: 15px;`,
-          90
+          90,
         )}
       }
     }

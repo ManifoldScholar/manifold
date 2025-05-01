@@ -13,19 +13,19 @@ function GroupsHeading({ currentUser }) {
     {
       to: lh.link("frontendMyReadingGroups"),
       text: t("navigation.reading_group.my_groups"),
-      exact: false
+      exact: false,
     },
     {
       to: lh.link("frontendPublicReadingGroups"),
       text: t("navigation.reading_group.public_groups"),
-      exact: true
-    }
+      exact: true,
+    },
   ];
 
   const {
     attributes: {
-      general: { disablePublicReadingGroups }
-    }
+      general: { disablePublicReadingGroups },
+    },
   } = useFromStore("settings", "select");
 
   return (
@@ -70,7 +70,7 @@ function GroupsHeading({ currentUser }) {
 GroupsHeading.displayName = "ReadingGroup.GroupsHeading";
 
 GroupsHeading.propTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
 };
 
 export default GroupsHeading;

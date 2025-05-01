@@ -13,7 +13,7 @@ export default function EntitlementAddEditContainer({ refresh }) {
 
   const { data: entitlement } = useFetch({
     request: [pendingEntitlementsAPI.show, id],
-    condition: !!id
+    condition: !!id,
   });
 
   return (
@@ -34,5 +34,5 @@ export default function EntitlementAddEditContainer({ refresh }) {
 EntitlementAddEditContainer.displayName = "PendingEntitlements.CreateEdit";
 
 EntitlementAddEditContainer.propTypes = {
-  refresh: PropTypes.func.isRequired
+  refresh: PropTypes.func.isRequired,
 };

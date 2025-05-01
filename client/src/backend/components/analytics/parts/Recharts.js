@@ -4,7 +4,7 @@ import {
   XAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 
 export { LineChart, Line, XAxis, CartesianGrid, Tooltip, ResponsiveContainer };

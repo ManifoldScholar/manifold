@@ -8,7 +8,7 @@ export default function ResetPasswordMenu({
   setConfirm,
   reject,
   resolve,
-  user
+  user,
 }) {
   const { t } = useTranslation();
 
@@ -33,7 +33,7 @@ export default function ResetPasswordMenu({
           className={classNames(
             "button-secondary",
             "button-secondary--outlined",
-            "button-secondary--dull"
+            "button-secondary--dull",
           )}
           onClick={() => reject()}
         >
@@ -41,7 +41,7 @@ export default function ResetPasswordMenu({
             className={classNames(
               "button-secondary__text",
               "button-secondary__text--white",
-              "button-secondary__text--hover-dark"
+              "button-secondary__text--hover-dark",
             )}
           >
             {t("actions.cancel")}

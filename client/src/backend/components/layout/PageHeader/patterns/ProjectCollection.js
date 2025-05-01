@@ -9,7 +9,7 @@ export default function ProjectCollectionHeader({
   subtitle,
   icon,
   actions,
-  note
+  note,
 }) {
   return (
     <>

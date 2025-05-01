@@ -1,8 +1,8 @@
 import values from "lodash/values";
 import classNames from "classnames";
 
-export const getlocalAnnotationsArray = annotations => {
-  return values(annotations).map(a => {
+export const getlocalAnnotationsArray = (annotations) => {
+  return values(annotations).map((a) => {
     const id = a.id;
     const type = a.attributes.format;
     const isCreator =
@@ -14,7 +14,7 @@ export const getlocalAnnotationsArray = annotations => {
       resourceCollectionId,
       authorCreated,
       abilities,
-      annotationStyle
+      annotationStyle,
     } = a.attributes;
     return {
       id,
@@ -26,7 +26,7 @@ export const getlocalAnnotationsArray = annotations => {
       resourceId,
       resourceCollectionId,
       authorCreated,
-      abilities
+      abilities,
     };
   });
 };
@@ -36,44 +36,44 @@ export const getAnnotationStyles = (
   uuids,
   t,
   hasInteractiveAncestor,
-  isDetail
+  isDetail,
 ) => {
-  const highlighted = annotations.some(a => a.type === "highlight");
-  const underlined = annotations.some(a => a.type === "annotation");
-  const wavy = annotations.some(a => a.annotationStyle === "wavy");
-  const dots = annotations.some(a => a.annotationStyle === "dots");
-  const dashes = annotations.some(a => a.annotationStyle === "dashes");
-  const solid = annotations.some(a => a.annotationStyle === "solid");
-  const pending = annotations.some(a => a.annotationStyle === "pending");
+  const highlighted = annotations.some((a) => a.type === "highlight");
+  const underlined = annotations.some((a) => a.type === "annotation");
+  const wavy = annotations.some((a) => a.annotationStyle === "wavy");
+  const dots = annotations.some((a) => a.annotationStyle === "dots");
+  const dashes = annotations.some((a) => a.annotationStyle === "dashes");
+  const solid = annotations.some((a) => a.annotationStyle === "solid");
+  const pending = annotations.some((a) => a.annotationStyle === "pending");
   const previous =
-    annotations.length === 1 && annotations.some(a => a.type === "previous"); // don't style as previous if node has multiple annotations
-  const isCreator = annotations.some(a => a.isCreator);
-  const authorCreated = annotations.some(a => a.authorCreated);
+    annotations.length === 1 && annotations.some((a) => a.type === "previous"); // don't style as previous if node has multiple annotations
+  const isCreator = annotations.some((a) => a.isCreator);
+  const authorCreated = annotations.some((a) => a.authorCreated);
   const lockedSelection = annotations.some(
-    a => a.id === "selection" && a.type !== "previous"
+    (a) => a.id === "selection" && a.type !== "previous",
   );
   const notations = annotations.filter(
-    a => a.type === "resource" || a.type === "resource_collection"
+    (a) => a.type === "resource" || a.type === "resource_collection",
   );
   const start = annotations.some(
-    a =>
+    (a) =>
       uuids.includes(a.startNode) &&
-      (a.type === "resource" || a.type === "resource_collection")
+      (a.type === "resource" || a.type === "resource_collection"),
   );
   const end = annotations.some(
-    a =>
+    (a) =>
       uuids.includes(a.endNode) &&
-      (a.type === "resource" || a.type === "resource_collection")
+      (a.type === "resource" || a.type === "resource_collection"),
   );
 
-  const annotationIds = annotations.map(a => a.id);
+  const annotationIds = annotations.map((a) => a.id);
 
   const textAnnotationIds = annotations
-    .filter(a => a.type === "annotation")
-    .map(a => a.id);
+    .filter((a) => a.type === "annotation")
+    .map((a) => a.id);
 
   const removableHighlight = annotations.filter(
-    a => a.type === "highlight" && (a.isCreator || a.abilities.delete)
+    (a) => a.type === "highlight" && (a.isCreator || a.abilities.delete),
   )[0];
   const removableHighlightId = removableHighlight
     ? removableHighlight.id
@@ -97,7 +97,7 @@ export const getAnnotationStyles = (
     "annotation-resource-start": notations && start,
     "annotation-resource-end": notations && end,
     pending,
-    previous
+    previous,
   });
 
   const interactiveAttributes =
@@ -108,11 +108,11 @@ export const getAnnotationStyles = (
           "aria-haspopup": removableHighlight ? "menu" : "dialog",
           "aria-label": removableHighlight
             ? t("reader.actions.manage_highlight", {
-                chunk: "mathematical content"
+                chunk: "mathematical content",
               })
             : t("reader.actions.view_annotations", {
-                chunk: "mathematical content"
-              })
+                chunk: "mathematical content",
+              }),
         }
       : {};
 
@@ -121,13 +121,13 @@ export const getAnnotationStyles = (
     removableHighlightId,
     textAnnotationIds,
     annotationIds,
-    interactiveAttributes
+    interactiveAttributes,
   };
 };
 
-export const getUuids = nodes => {
+export const getUuids = (nodes) => {
   return nodes
-    .map(node => {
+    .map((node) => {
       if (node.nodeUuid) {
         return node.nodeUuid;
       }

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
@@ -18,7 +17,7 @@ export default function CSVImportForm() {
       id: "Entitlement_Import_Success",
       heading: t("notifications.entitlement_import_success"),
       body: t("notifications.entitlement_import_success_body"),
-      scope: "drawer"
+      scope: "drawer",
     };
     dispatch(notificationActions.addNotification(notification));
   };

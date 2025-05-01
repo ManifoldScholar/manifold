@@ -4,5 +4,5 @@ import transitory from "./ui/transitory";
 
 export default combineReducers({
   persistent,
-  transitory
+  transitory,
 });

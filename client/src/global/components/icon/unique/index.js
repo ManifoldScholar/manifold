@@ -21,5 +21,5 @@ export default {
   MarginIncreaseUnique: MarginIncrease,
   StarFillUnique: StarFill,
   StarOutlineUnique: StarOutline,
-  NotesUnique: Notes
+  NotesUnique: Notes,
 };

@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: `/api/v1/content_blocks/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -12,8 +12,8 @@ export default {
       endpoint: `/api/v1/projects/${pId}/relationships/content_blocks`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "content_blocks", data: contentBlock })
-      }
+        body: JSON.stringify({ type: "content_blocks", data: contentBlock }),
+      },
     };
   },
 
@@ -22,8 +22,8 @@ export default {
       endpoint: `/api/v1/content_blocks/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "content_blocks", data: contentBlock })
-      }
+        body: JSON.stringify({ type: "content_blocks", data: contentBlock }),
+      },
     };
   },
 
@@ -31,7 +31,7 @@ export default {
     return {
       endpoint: `/api/v1/content_blocks/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

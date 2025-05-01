@@ -8,7 +8,7 @@ class LinkNode extends Component {
   static propTypes = {
     attributes: PropTypes.object,
     tag: PropTypes.string,
-    children: PropTypes.array
+    children: PropTypes.array,
   };
 
   get href() {
@@ -50,10 +50,10 @@ class LinkNode extends Component {
   }
 
   renderChildren() {
-    return React.Children.map(this.props.children, child => {
+    return React.Children.map(this.props.children, (child) => {
       if (React.isValidElement(child)) {
         return React.cloneElement(child, {
-          hasInteractiveAncestor: true
+          hasInteractiveAncestor: true,
         });
       }
     });

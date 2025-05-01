@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: `/api/v1/texts/${textId}/relationships/ingestion_sources`,
       method: "GET",
-      options: { params: { filter, page } }
+      options: { params: { filter, page } },
     };
   },
 
@@ -11,7 +11,7 @@ export default {
     return {
       endpoint: `/api/v1/ingestion_sources/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -20,8 +20,8 @@ export default {
       endpoint: `/api/v1/texts/${textId}/relationships/ingestion_sources`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "ingestion_sources", data: asset })
-      }
+        body: JSON.stringify({ type: "ingestion_sources", data: asset }),
+      },
     };
   },
 
@@ -30,8 +30,8 @@ export default {
       endpoint: `/api/v1/ingestion_sources/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "ingestion_sources", data: asset })
-      }
+        body: JSON.stringify({ type: "ingestion_sources", data: asset }),
+      },
     };
   },
 
@@ -39,7 +39,7 @@ export default {
     return {
       endpoint: `/api/v1/ingestion_sources/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

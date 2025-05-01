@@ -15,11 +15,11 @@ function CollectedResourceCollections(props) {
       )}
       ResponseComponent={({ response }) => (
         <ResourceCollection.Cover
-          urlCreator={collection => {
+          urlCreator={(collection) => {
             return lh.link(
               "frontendProjectResourceCollection",
               collection.attributes.projectSlug,
-              collection.attributes.slug
+              collection.attributes.slug,
             );
           }}
           resourceCollection={response}
@@ -35,7 +35,7 @@ CollectedResourceCollections.displayName =
 CollectedResourceCollections.propTypes = {
   collectedIds: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
-  nested: PropTypes.bool
+  nested: PropTypes.bool,
 };
 
 export default CollectedResourceCollections;

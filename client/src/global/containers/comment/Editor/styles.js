@@ -4,7 +4,7 @@ import {
   fluidScale,
   buttonUnstyled,
   utilityPrimary,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 

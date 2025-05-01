@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   blockLabelRound,
   subtitlePrimary,
-  defaultHoverStyle
+  defaultHoverStyle,
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 

@@ -11,7 +11,7 @@ class CategoryForm extends PureComponent {
   static propTypes = {
     projectId: PropTypes.string,
     model: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -24,7 +24,9 @@ class CategoryForm extends PureComponent {
         {...this.props}
         name={name}
         update={textCategoriesAPI.update}
-        create={model => textCategoriesAPI.create(this.props.projectId, model)}
+        create={(model) =>
+          textCategoriesAPI.create(this.props.projectId, model)
+        }
         className="form-secondary"
         notificationScope="none"
       >

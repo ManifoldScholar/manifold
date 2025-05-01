@@ -3,7 +3,7 @@ import {
   buttonUnstyled,
   defaultHoverStyle,
   utilityPrimary,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 import Utility from "global/components/utility";
 import Dialog from "global/components/dialog";

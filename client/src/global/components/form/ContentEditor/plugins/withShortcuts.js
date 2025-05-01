@@ -13,22 +13,21 @@ const SHORTCUTS = {
   "####": "h4",
   "#####": "h5",
   "######": "h6",
-  "```": "pre"
+  "```": "pre",
 };
 
 const INLINE_SHORTCUTS = {
   "*": "italic",
   "**": "bold",
   "`": "code",
-  "~": "strikethrough"
+  "~": "strikethrough",
 };
 
-/* eslint-disable no-param-reassign */
-const withShortcuts = editor => {
+const withShortcuts = (editor) => {
   const { insertText } = editor;
 
   // Insert block elements from .md shortcuts
-  editor.insertText = text => {
+  editor.insertText = (text) => {
     const { selection } = editor;
     const { anchor } = selection;
 
@@ -36,7 +35,7 @@ const withShortcuts = editor => {
       /* eslint-disable no-unused-vars */
       const [block, path] =
         Editor.above(editor, {
-          match: n => Element.isElement(n) && Editor.isBlock(editor, n)
+          match: (n) => Element.isElement(n) && Editor.isBlock(editor, n),
         }) ?? [];
       const start = Editor.start(editor, path);
       const range = { anchor, focus: start };
@@ -84,26 +83,26 @@ const withShortcuts = editor => {
           const contentAnchor = { path: textNodePath, offset: startIndex };
           const contentFocus = {
             path: textNodePath,
-            offset: beforeText.length
+            offset: beforeText.length,
           };
 
           return Editor.withoutNormalizing(editor, () => {
             Transforms.select(editor, {
               anchor: contentAnchor,
-              focus: contentFocus
+              focus: contentFocus,
             });
             Editor.addMark(editor, INLINE_SHORTCUTS[shortcut], true);
             Transforms.delete(editor, {
               at: contentAnchor,
               distance: shortcut.length,
-              unit: "character"
+              unit: "character",
             });
             Transforms.collapse(editor, { edge: "end" });
             if (shortcut.length > 1) {
               Transforms.delete(editor, {
                 distance: shortcut.length - 1,
                 unit: "character",
-                reverse: true
+                reverse: true,
               });
             }
           });

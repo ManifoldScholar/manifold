@@ -12,7 +12,7 @@ export default class PickerListComponent extends PureComponent {
   static propTypes = {};
 
   static defaultProps = {
-    listStyle: "well"
+    listStyle: "well",
   };
 
   get callbacks() {
@@ -47,7 +47,7 @@ export default class PickerListComponent extends PureComponent {
     return lh.link(this.props.rowEditRoute, entity.id);
   }
 
-  wrappedRowComponent = props => {
+  wrappedRowComponent = (props) => {
     const Row = this.resolvedRowComponent;
 
     const utility = (
@@ -56,7 +56,7 @@ export default class PickerListComponent extends PureComponent {
           <button
             type="button"
             className="entity-row__utility-button"
-            onClick={event => {
+            onClick={(event) => {
               event.stopPropagation();
               event.preventDefault();
               this.callbacks.removeSelection(props.entity);
@@ -81,7 +81,6 @@ export default class PickerListComponent extends PureComponent {
     return <Row {...props} clickable={false} utility={utility} />;
   };
 
-  /* eslint-disable react/jsx-pascal-case */
   render() {
     return (
       <div className={this.props.className}>
@@ -97,5 +96,4 @@ export default class PickerListComponent extends PureComponent {
       </div>
     );
   }
-  /* eslint-enable react/jsx-pascal-case */
 }

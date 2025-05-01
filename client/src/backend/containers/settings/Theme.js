@@ -10,16 +10,16 @@ import { select } from "utils/entityUtils";
 import PageHeader from "backend/components/layout/PageHeader";
 
 export class SettingsThemeContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      settings: select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore),
     };
   };
 
   static displayName = "Settings.Theme";
 
   static propTypes = {
-    settings: PropTypes.object
+    settings: PropTypes.object,
   };
 
   render() {
@@ -107,7 +107,7 @@ export class SettingsThemeContainer extends PureComponent {
                 name="attributes[theme][headerForegroundActiveColor]"
                 placeholder="#363636"
                 instructions={t(
-                  "settings.theme.active_foreground_color_instructions"
+                  "settings.theme.active_foreground_color_instructions",
                 )}
                 wide
               />
@@ -149,16 +149,16 @@ export class SettingsThemeContainer extends PureComponent {
                 options={[
                   {
                     label: t("settings.theme.mode_options.disabled"),
-                    value: "disabled"
+                    value: "disabled",
                   },
                   {
                     label: t("settings.theme.mode_options.always"),
-                    value: "enforced"
+                    value: "enforced",
                   },
                   {
                     label: t("settings.theme.mode_options.standalone"),
-                    value: "enabled"
-                  }
+                    value: "enabled",
+                  },
                 ]}
               />
             </Form.FieldGroup>
@@ -203,7 +203,7 @@ export class SettingsThemeContainer extends PureComponent {
                 label={t("settings.theme.string_cookies_banner_copy")}
                 name="attributes[theme][stringCookiesBannerCopy]"
                 instructions={t(
-                  "settings.theme.cookies_banner_copy_instructions"
+                  "settings.theme.cookies_banner_copy_instructions",
                 )}
               />
             </Form.FieldGroup>
@@ -216,5 +216,5 @@ export class SettingsThemeContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  connect(SettingsThemeContainer.mapStateToProps)(SettingsThemeContainer)
+  connect(SettingsThemeContainer.mapStateToProps)(SettingsThemeContainer),
 );

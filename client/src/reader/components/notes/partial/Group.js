@@ -12,7 +12,7 @@ export default function Group(props) {
     annotations,
     sectionName,
     visitHandler,
-    showAnnotationCreator
+    showAnnotationCreator,
   } = props;
 
   const [initialVisible, setInitialVisible] = useState(false);
@@ -25,17 +25,17 @@ export default function Group(props) {
     preOpenItem();
   }, [readerSection, sectionName]);
 
-  const renderGroupItems = notes => {
+  const renderGroupItems = (notes) => {
     return (
       <Collapse.Content>
-        {visible => (
+        {(visible) => (
           <ul
             className={classNames({
               "notes-filtered-list__group": true,
-              "notes-filtered-list__group--expanded": visible
+              "notes-filtered-list__group--expanded": visible,
             })}
           >
-            {notes.map(annotation => {
+            {notes.map((annotation) => {
               return (
                 <GroupItem
                   key={annotation.id}
@@ -55,14 +55,14 @@ export default function Group(props) {
     <Collapse initialVisible={initialVisible}>
       <li className="notes-filtered-list__section">
         <Collapse.Toggle className="notes-filtered-list__section-button">
-          {visible => (
+          {(visible) => (
             <div className="notes-filtered-list__section-button-inner">
               <IconComposer
                 icon="disclosureDown24"
                 size="default"
                 className={classNames({
                   "notes-filtered-list__disclosure-icon": true,
-                  "notes-filtered-list__disclosure-icon--expanded": visible
+                  "notes-filtered-list__disclosure-icon--expanded": visible,
                 })}
               />
               <span className="notes-filtered-list__section-label">
@@ -84,5 +84,5 @@ Group.propTypes = {
   annotations: PropTypes.array,
   sectionName: PropTypes.string,
   visitHandler: PropTypes.func,
-  showAnnotationCreator: PropTypes.bool
+  showAnnotationCreator: PropTypes.bool,
 };

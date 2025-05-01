@@ -3,7 +3,7 @@ import React, {
   useState,
   useRef,
   useMemo,
-  useEffect
+  useEffect,
 } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
@@ -22,22 +22,22 @@ const defaultValue = [
   {
     type: "section",
     children: [{ type: "p", children: [{ text: "" }] }],
-    slateOnly: true
-  }
+    slateOnly: true,
+  },
 ];
 
-const getInitialSlateValue = value => {
+const getInitialSlateValue = (value) => {
   if (value && typeof value === "string")
     try {
       return serializeToSlate(formatHtml(value));
-    } catch (e) {
+    } catch (_) {
       return { error: "serializer error", default: defaultValue };
     }
 
   return defaultValue;
 };
 
-const getInitialHtmlValue = value => {
+const getInitialHtmlValue = (value) => {
   if (value && typeof value === "string") return formatHtml(value);
   return formatHtml("<!DOCTYPE html><section><p></p></section>");
 };
@@ -46,7 +46,7 @@ export default function EditSectionForm({
   section,
   textId,
   appliesToAllStylesheets,
-  refresh
+  refresh,
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -56,13 +56,17 @@ export default function EditSectionForm({
   }, [section?.attributes.body]);
   const initialHtmlValue = useMemo(
     () => getInitialHtmlValue(section?.attributes.body),
-    [section?.attributes.body]
+    [section?.attributes.body],
   );
 
   const formatData = (data, model) => {
     const { body, name } = data.attributes ?? {};
-    const { position, kind, body: lastSavedBody, name: lastSavedName } =
-      model.attributes ?? {};
+    const {
+      position,
+      kind,
+      body: lastSavedBody,
+      name: lastSavedName,
+    } = model.attributes ?? {};
     // Ensure we never clear out body if the user clicks Save multiple times without dirtying the form
     if (body === undefined)
       return {
@@ -70,11 +74,11 @@ export default function EditSectionForm({
           position,
           kind,
           name: name ?? lastSavedName,
-          body: lastSavedBody ?? null
-        }
+          body: lastSavedBody ?? null,
+        },
       };
     return {
-      attributes: { position, kind, name, body }
+      attributes: { position, kind, name, body },
     };
   };
 
@@ -92,7 +96,7 @@ export default function EditSectionForm({
     hasErrors,
     setHasErrors,
     warnErrors,
-    setWarnErrors
+    setWarnErrors,
   };
 
   useEffect(() => {
@@ -100,8 +104,8 @@ export default function EditSectionForm({
       setHasErrors([
         {
           source: { pointer: "/data/attributes/body" },
-          detail: t(`errors.invalid_html_switch`)
-        }
+          detail: t(`errors.invalid_html_switch`),
+        },
       ]);
       setWarnErrors("switch");
     }
@@ -111,14 +115,14 @@ export default function EditSectionForm({
   const stylesheetDataKeys = stylesheetData ? Object.keys(stylesheetData) : [];
 
   const appliedStylesheets = stylesheetDataKeys
-    .filter(id => appliesToAllStylesheets.find(s => s === id))
-    .map(id => stylesheetData[id]);
+    .filter((id) => appliesToAllStylesheets.find((s) => s === id))
+    .map((id) => stylesheetData[id]);
 
   const stylesheets = Array.isArray(section?.relationships.stylesheets)
-    ? [...section?.relationships.stylesheets, ...appliedStylesheets]
+    ? [...(section?.relationships.stylesheets ?? []), ...appliedStylesheets]
     : [...appliedStylesheets];
 
-  const handleSaveAndCloseClick = e => {
+  const handleSaveAndCloseClick = (e) => {
     if (hasErrors) {
       e.preventDefault();
       return setWarnErrors("save");
@@ -171,5 +175,5 @@ EditSectionForm.propTypes = {
   textId: PropTypes.string.isRequired,
   section: PropTypes.object,
   refresh: PropTypes.func,
-  nextPosition: PropTypes.number
+  nextPosition: PropTypes.number,
 };

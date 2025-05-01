@@ -14,5 +14,5 @@ export default combineReducers({
   search,
   stateSnapshots,
   visibility,
-  frontendMode
+  frontendMode,
 });

@@ -14,21 +14,19 @@ class Toc extends PureComponent {
     tocDrawerVisible: PropTypes.bool,
     hideTocDrawer: PropTypes.func,
     showMeta: PropTypes.func,
-    history: PropTypes.object
+    history: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      mounted: false
+      mounted: false,
     };
   }
 
-  /* eslint-disable react/no-did-mount-set-state */
   componentDidMount() {
     this.setState({ mounted: true });
   }
-  /* eslint-enable react/no-did-mount-set-state */
 
   get text() {
     return this.props.text;
@@ -63,9 +61,9 @@ class Toc extends PureComponent {
     }
   };
 
-  hasChildren = array => {
+  hasChildren = (array) => {
     let hasChildren = false;
-    array.forEach(object => {
+    array.forEach((object) => {
       if (object.hasOwnProperty("children") && object.children.length > 0) {
         hasChildren = true;
       }
@@ -78,7 +76,7 @@ class Toc extends PureComponent {
     if (node.children && node.children.length > 0) {
       children = (
         <Styled.Sublist $level={depth + 1}>
-          {node.children.map(n => this.visitNode(n, depth + 1))}
+          {node.children.map((n) => this.visitNode(n, depth + 1))}
         </Styled.Sublist>
       );
     }
@@ -119,7 +117,7 @@ class Toc extends PureComponent {
     if (this.toc.length <= 0) return this.renderEmpty();
     return (
       <Styled.List>
-        {this.toc.map(node => this.visitNode(node, initialDepth))}
+        {this.toc.map((node) => this.visitNode(node, initialDepth))}
       </Styled.List>
     );
   }
@@ -144,7 +142,7 @@ class Toc extends PureComponent {
       entrySide: "left",
       closeCallback: this.UIHideTocDrawer,
       includeDrawerFrontMatter: false,
-      ariaLabel: this.props.t("glossary.table_of_contents")
+      ariaLabel: this.props.t("glossary.table_of_contents"),
     };
 
     return (

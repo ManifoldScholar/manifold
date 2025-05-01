@@ -11,7 +11,7 @@ class IngestionHeader extends Component {
   static propTypes = {
     ingestion: PropTypes.object,
     reingestion: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get ingestion() {
@@ -28,7 +28,7 @@ class IngestionHeader extends Component {
 
   get currentState() {
     return this.props.t(
-      `texts.ingestion.states.${this.ingestion.attributes.state}`
+      `texts.ingestion.states.${this.ingestion.attributes.state}`,
     );
   }
 
@@ -63,7 +63,7 @@ class IngestionHeader extends Component {
       <figure
         className={classNames(
           "ingest-header__figure-block",
-          "ingest-header__figure-block--shift-left"
+          "ingest-header__figure-block--shift-left",
         )}
       >
         <div className="ingest-header__figure">
@@ -84,7 +84,7 @@ class IngestionHeader extends Component {
       ? "texts.section.ingest_id_label"
       : "texts.ingestion.id_label";
 
-    const Property = props => (
+    const Property = (props) => (
       <div className="ingestion-output__item">
         <p className="ingestion-output__label">{props.label}</p>
         <p className="ingestion-output__value">{props.value}</p>
@@ -98,7 +98,7 @@ class IngestionHeader extends Component {
             className={classNames(
               "ingest-header__content-flex-wrapper",
               "ingest-header__content-flex-wrapper--aib",
-              "ingest-header__content-flex-wrapper--tight"
+              "ingest-header__content-flex-wrapper--tight",
             )}
           >
             {this.figureBlock()}

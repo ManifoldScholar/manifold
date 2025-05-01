@@ -5,13 +5,13 @@ const getInitialState = () => ({
   fontSize: {
     current: 3,
     max: 6,
-    min: 0
+    min: 0,
   },
   margins: {
     current: 1,
     max: 4,
-    min: 0
-  }
+    min: 0,
+  },
 });
 
 export const initialState = getInitialState();
@@ -47,19 +47,19 @@ export default handleActions(
   {
     SET_PERSISTENT_UI: setPersistentUI,
     SELECT_FONT: selectFont,
-    INCREMENT_FONT_SIZE: state => {
+    INCREMENT_FONT_SIZE: (state) => {
       return incrementAttribute(state, "fontSize");
     },
-    DECREMENT_FONT_SIZE: state => {
+    DECREMENT_FONT_SIZE: (state) => {
       return decrementAttribute(state, "fontSize");
     },
-    INCREMENT_MARGINS: state => {
+    INCREMENT_MARGINS: (state) => {
       return incrementAttribute(state, "margins");
     },
-    DECREMENT_MARGINS: state => {
+    DECREMENT_MARGINS: (state) => {
       return decrementAttribute(state, "margins");
     },
-    RESET_TYPOGRAPHY: resetAllAttributes
+    RESET_TYPOGRAPHY: resetAllAttributes,
   },
-  getInitialState()
+  getInitialState(),
 );

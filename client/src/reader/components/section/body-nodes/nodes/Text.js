@@ -18,7 +18,7 @@ class TextNode extends Component {
     scrollKey: PropTypes.string,
     scrollAnnotation: PropTypes.string,
     t: PropTypes.func,
-    hasInteractiveAncestor: PropTypes.bool
+    hasInteractiveAncestor: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -58,7 +58,7 @@ class TextNode extends Component {
   }
 
   get localAnnotationsArray() {
-    return values(this.openAnnotations).map(a => {
+    return values(this.openAnnotations).map((a) => {
       const id = a.id;
       const type = a.attributes.format;
       const isCreator =
@@ -78,7 +78,7 @@ class TextNode extends Component {
         resourceCollectionId,
         authorCreated,
         abilities,
-        annotationStyle
+        annotationStyle,
       } = a.attributes;
       return {
         id,
@@ -92,7 +92,7 @@ class TextNode extends Component {
         resourceId,
         resourceCollectionId,
         authorCreated,
-        abilities
+        abilities,
       };
     });
   }
@@ -104,16 +104,16 @@ class TextNode extends Component {
     const splits = union(
       [this.content.length + 1],
       this.localAnnotationsArray
-        .filter(el => el.start != null)
-        .map(a => a.start),
+        .filter((el) => el.start != null)
+        .map((a) => a.start),
       this.localAnnotationsArray
-        .filter(el => el.end != null)
-        .map(a => a.end + 1 || this.content.length)
+        .filter((el) => el.end != null)
+        .map((a) => a.end + 1 || this.content.length),
     ).sort((a, b) => a - b);
 
     // Build a map of IDs to the splits
-    const map = splits.map(split => {
-      return this.localAnnotationsArray.filter(annotation => {
+    const map = splits.map((split) => {
+      return this.localAnnotationsArray.filter((annotation) => {
         const rangeEnd = annotation.end || this.content.length;
         const rangeStart = annotation.start || 0;
         return rangeStart < split && rangeEnd + 1 >= split;
@@ -123,7 +123,7 @@ class TextNode extends Component {
     // ends
     const ends = {};
     map.forEach((chunk, index) => {
-      chunk.forEach(annotation => {
+      chunk.forEach((annotation) => {
         ends[annotation.id] = index;
       });
     });
@@ -134,7 +134,7 @@ class TextNode extends Component {
       .slice()
       .reverse()
       .forEach((chunk, index) => {
-        chunk.forEach(annotation => {
+        chunk.forEach((annotation) => {
           starts[annotation.id] = index;
         });
       });
@@ -148,40 +148,41 @@ class TextNode extends Component {
 
     // map the chunks to outputs.
     return chunks.map((chunk, index) => {
-      const highlighted = map[index].some(a => a.type === "highlight");
-      const underlined = map[index].some(a => a.type === "annotation");
-      const wavy = map[index].some(a => a.annotationStyle === "wavy");
-      const dots = map[index].some(a => a.annotationStyle === "dots");
-      const dashes = map[index].some(a => a.annotationStyle === "dashes");
-      const solid = map[index].some(a => a.annotationStyle === "solid");
-      const pending = map[index].some(a => a.annotationStyle === "pending");
+      const highlighted = map[index].some((a) => a.type === "highlight");
+      const underlined = map[index].some((a) => a.type === "annotation");
+      const wavy = map[index].some((a) => a.annotationStyle === "wavy");
+      const dots = map[index].some((a) => a.annotationStyle === "dots");
+      const dashes = map[index].some((a) => a.annotationStyle === "dashes");
+      const solid = map[index].some((a) => a.annotationStyle === "solid");
+      const pending = map[index].some((a) => a.annotationStyle === "pending");
       const previous =
-        map[index].length === 1 && map[index].some(a => a.type === "previous"); // don't style as previous if node has multiple annotations
-      const isCreator = map[index].some(a => a.isCreator);
-      const authorCreated = map[index].some(a => a.authorCreated);
+        map[index].length === 1 &&
+        map[index].some((a) => a.type === "previous"); // don't style as previous if node has multiple annotations
+      const isCreator = map[index].some((a) => a.isCreator);
+      const authorCreated = map[index].some((a) => a.authorCreated);
       const lockedSelection = map[index].some(
-        a => a.id === "selection" && a.type !== "previous"
+        (a) => a.id === "selection" && a.type !== "previous",
       );
       const notations = map[index].filter(
-        a => a.type === "resource" || a.type === "resource_collection"
+        (a) => a.type === "resource" || a.type === "resource_collection",
       );
       let endingResources = [];
       let startingResources = [];
       if (notations.length > 0) {
         endingResources = notations.filter(
-          a => ends[a.id] === index && a.endNode === this.props.nodeUuid
+          (a) => ends[a.id] === index && a.endNode === this.props.nodeUuid,
         );
         startingResources = notations.filter(
-          a => starts[a.id] === index && a.startNode === this.props.nodeUuid
+          (a) => starts[a.id] === index && a.startNode === this.props.nodeUuid,
         );
       }
 
       const textAnnotationIds = map[index]
-        .filter(a => a.type === "annotation")
-        .map(a => a.id);
+        .filter((a) => a.type === "annotation")
+        .map((a) => a.id);
 
       const removableHighlight = map[index].filter(
-        a => a.type === "highlight" && (a.isCreator || a.abilities.delete)
+        (a) => a.type === "highlight" && (a.isCreator || a.abilities.delete),
       )[0];
 
       const removableHighlightId = removableHighlight
@@ -210,7 +211,7 @@ class TextNode extends Component {
         "annotation-resource-start": notations && startingResources.length > 0,
         "annotation-resource-end": notations && endingResources.length > 0,
         pending,
-        previous
+        previous,
       });
 
       const interactiveAttributes =
@@ -224,7 +225,7 @@ class TextNode extends Component {
               "aria-haspopup": removableHighlight ? "menu" : "dialog",
               "aria-label": removableHighlight
                 ? this.ariaLabelForHighlight(chunk)
-                : this.ariaLabelForAnnotation(chunk)
+                : this.ariaLabelForAnnotation(chunk),
             }
           : {};
 
@@ -234,15 +235,14 @@ class TextNode extends Component {
         className: classes,
         "data-removable-highlight-id": removableHighlightId,
         "data-text-annotation-ids": textAnnotationIds,
-        "data-annotation-ids": map[index].map(a => a.id),
+        "data-annotation-ids": map[index].map((a) => a.id),
         ...interactiveAttributes,
-        ...previousTabIndex
+        ...previousTabIndex,
       };
 
       const Tag = interactiveAttributes.href ? "a" : "span";
 
       return (
-        // eslint-disable-next-line react/no-array-index-key
         <Tag key={index} {...props}>
           {chunk}
           {endingResources.length > 0 ? (
@@ -257,7 +257,7 @@ class TextNode extends Component {
     const annotations = Object.values(this.openAnnotations);
     const count = annotations.reduce(
       (memo, a) => a.attributes.commentsCount + memo,
-      0
+      0,
     );
     return Number.isInteger(count) ? count : null;
   }
@@ -273,7 +273,7 @@ class TextNode extends Component {
   doScroll(withTimeout = false) {
     const target = this.scrollAnnotation
       ? document.querySelector(
-          `[data-annotation-ids*="${this.scrollAnnotation}"]`
+          `[data-annotation-ids*="${this.scrollAnnotation}"]`,
         )
       : this.el;
     const annotation = this.scrollAnnotation ? this.annotation : null;
@@ -296,7 +296,7 @@ class TextNode extends Component {
       : this.content;
     return (
       <span
-        ref={el => {
+        ref={(el) => {
           this.el = el;
         }}
         data-text-digest={this.props.textDigest}

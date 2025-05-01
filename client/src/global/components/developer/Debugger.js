@@ -9,14 +9,14 @@ export default class Debugger extends PureComponent {
     label: PropTypes.string,
     hideLabel: PropTypes.bool,
     theme: PropTypes.string,
-    shouldExpandNode: PropTypes.func
+    shouldExpandNode: PropTypes.func,
   };
 
   static defaultProps = {
     label: "Debugger",
     hideLabel: false,
     theme: "dark",
-    shouldExpandNode: (keyName, data, level) => level === 0
+    shouldExpandNode: (keyName, data, level) => level === 0,
   };
 
   theme(type) {
@@ -43,14 +43,14 @@ export default class Debugger extends PureComponent {
       base0C: "#4b8093",
       base0D: "#7cafc2",
       base0E: "#96609e",
-      base0F: "#a16946"
+      base0F: "#a16946",
     };
     return {
       extend: theme,
       tree: {
         padding: 20,
-        margin: 0
-      }
+        margin: 0,
+      },
     };
   }
 
@@ -73,14 +73,14 @@ export default class Debugger extends PureComponent {
       base0C: "#005500",
       base0D: "#009900",
       base0E: "#00bb00",
-      base0F: "#005500"
+      base0F: "#005500",
     };
     return {
       extend: theme,
       tree: {
         padding: 20,
-        margin: 0
-      }
+        margin: 0,
+      },
     };
   }
 
@@ -91,7 +91,7 @@ export default class Debugger extends PureComponent {
     return (
       <div
         style={{
-          marginBottom: 15
+          marginBottom: 15,
         }}
       >
         {this.props.hideLabel ? (
@@ -101,7 +101,7 @@ export default class Debugger extends PureComponent {
               color: "rgb(0, 153, 0)",
               margin: 0,
               padding: "10px 20px",
-              display: "inline-block"
+              display: "inline-block",
             }}
           >
             {this.props.label}

@@ -3,7 +3,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import {
   respond,
   defaultTransitionProps,
-  utilityPrimary
+  utilityPrimary,
 } from "theme/styles/mixins";
 
 export const Inner = styled.div`
@@ -52,7 +52,8 @@ export const TextWrapper = styled.div`
   color: var(--color);
   white-space: nowrap;
   background-color: var(--color-base-neutral30);
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   ${respond(`padding: 1em 10px;`, 50)}

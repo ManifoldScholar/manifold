@@ -16,7 +16,7 @@ class ProjectContentBlockInListPartsDrag extends PureComponent {
     entityCount: PropTypes.number,
     entityId: PropTypes.string,
     t: PropTypes.func,
-    announce: PropTypes.func
+    announce: PropTypes.func,
   };
 
   constructor(props) {
@@ -25,7 +25,7 @@ class ProjectContentBlockInListPartsDrag extends PureComponent {
     this.popoverDisclosureRef = React.createRef();
   }
 
-  onKeyboardMoveCallback = direction => {
+  onKeyboardMoveCallback = (direction) => {
     if (this.popoverDisclosureRef?.current) {
       this.popoverDisclosureRef.current.focus();
     }
@@ -35,8 +35,8 @@ class ProjectContentBlockInListPartsDrag extends PureComponent {
     this.props.announce(
       this.props.t("actions.dnd.moved_to_position", {
         title: translatedTitle,
-        position: direction === "up" ? from - 1 : from + 1
-      })
+        position: direction === "up" ? from - 1 : from + 1,
+      }),
     );
   };
 
@@ -78,9 +78,9 @@ class ProjectContentBlockInListPartsDrag extends PureComponent {
                   this.props.entityCallbacks.onKeyboardMove({
                     index: this.props.index,
                     direction: "up",
-                    callback: () => this.onKeyboardMoveCallback("up")
+                    callback: () => this.onKeyboardMoveCallback("up"),
                   }),
-                disabled: this.props.index === 0
+                disabled: this.props.index === 0,
               },
               {
                 id: "down",
@@ -89,10 +89,10 @@ class ProjectContentBlockInListPartsDrag extends PureComponent {
                   this.props.entityCallbacks.onKeyboardMove({
                     index: this.props.index,
                     direction: "down",
-                    callback: () => this.onKeyboardMoveCallback("down")
+                    callback: () => this.onKeyboardMoveCallback("down"),
                   }),
-                disabled: this.props.index === this.props.entityCount - 1
-              }
+                disabled: this.props.index === this.props.entityCount - 1,
+              },
             ]}
           />
         </div>

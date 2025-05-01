@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import GlobalUtility from "global/components/utility";
@@ -16,12 +15,12 @@ export default function ProjectCollectionsContainer() {
     initFilters: { visible: true, order: "position ASC" },
     collectionPagination: {
       size: 4,
-      number: 1
-    }
+      number: 1,
+    },
   });
 
   const { data: projectCollections, meta } = useFetch({
-    request: [projectCollectionsAPI.index, filters, pagination]
+    request: [projectCollectionsAPI.index, filters, pagination],
   });
   const { t } = useTranslation();
 

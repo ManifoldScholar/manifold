@@ -19,53 +19,51 @@ class ActionCallouts extends PureComponent {
     actionCalloutEditRoute: PropTypes.string.isRequired,
     actionCalloutNewRoute: PropTypes.string.isRequired,
     actionCallouts: PropTypes.array,
-    actionCalloutSlots: PropTypes.array
+    actionCalloutSlots: PropTypes.array,
   };
 
   static getDerivedStateFromProps(props, state) {
     if (props.actionCallouts === state.actionCallouts) return null;
 
     const slotCallouts = ActionCallouts.slotActionCallouts(
-      props.actionCallouts
+      props.actionCallouts,
     );
     return { slotCallouts, actionCallouts: props.actionCallouts };
   }
 
   static slotActionCallouts(actionCallouts) {
-    /* eslint-disable no-param-reassign */
     const out = Object.keys(ActionCallouts.slots).reduce((map, id) => {
       const attributes = ActionCallouts.slots[id].attributes;
       const compareKeys = Object.keys(attributes);
-      map[id] = actionCallouts.filter(actionCallout =>
-        compareKeys.every(compareKey => {
+      map[id] = actionCallouts.filter((actionCallout) =>
+        compareKeys.every((compareKey) => {
           const match =
             attributes[compareKey] === actionCallout.attributes[compareKey];
           return match;
-        })
+        }),
       );
       return map;
     }, {});
     return out;
-    /* eslint-enable no-param-reassign */
   }
 
   static slots = {
     "left-button": {
       title: "layout.left_side",
-      attributes: { location: "left", button: true }
+      attributes: { location: "left", button: true },
     },
     "right-button": {
       title: "layout.right_side",
-      attributes: { location: "right", button: true }
+      attributes: { location: "right", button: true },
     },
     "left-link": {
       title: "layout.left_side",
-      attributes: { location: "left", button: false }
+      attributes: { location: "left", button: false },
     },
     "right-link": {
       title: "layout.right_side",
-      attributes: { location: "right", button: false }
-    }
+      attributes: { location: "right", button: false },
+    },
   };
 
   constructor(props) {
@@ -73,22 +71,22 @@ class ActionCallouts extends PureComponent {
 
     this.state = {
       slotCallouts: ActionCallouts.slotActionCallouts(props.actionCallouts),
-      response: props.actionCalloutsResponse
+      response: props.actionCalloutsResponse,
     };
   }
 
-  onDragEnd = draggable => {
+  onDragEnd = (draggable) => {
     if (!draggable.source || !draggable.destination) return;
     this.moveToSlot(
       draggable.draggableId,
       draggable.source.droppableId,
       draggable.destination.droppableId,
-      draggable.destination.index
+      draggable.destination.index,
     );
     this.updateCallout(
       draggable.draggableId,
       draggable.destination.droppableId,
-      draggable.destination.index
+      draggable.destination.index,
     );
   };
 
@@ -110,7 +108,7 @@ class ActionCallouts extends PureComponent {
         destinationIndex = index - 1;
         announcement = this.props.t("actions.dnd.moved_to_position", {
           title,
-          position: position - 1
+          position: position - 1,
         });
         break;
       case "down":
@@ -118,7 +116,7 @@ class ActionCallouts extends PureComponent {
         destinationIndex = index + 1;
         announcement = this.props.t("actions.dnd.moved_to_position", {
           title,
-          position: position + 1
+          position: position + 1,
         });
         break;
       case "left":
@@ -127,7 +125,7 @@ class ActionCallouts extends PureComponent {
         announcement = this.props.t("actions.dnd.moved_to_group", {
           title,
           group: slotPosition - 1,
-          position: 1
+          position: 1,
         });
         break;
       case "right":
@@ -136,7 +134,7 @@ class ActionCallouts extends PureComponent {
         announcement = this.props.t("actions.dnd.moved_to_group", {
           title,
           group: slotPosition + 1,
-          position: 1
+          position: 1,
         });
         break;
       default:
@@ -174,14 +172,14 @@ class ActionCallouts extends PureComponent {
     const baseAttributes = this.findSlot(slotId).attributes;
     const attributes = {
       ...baseAttributes,
-      position: index === 0 ? "top" : index + 1
+      position: index === 0 ? "top" : index + 1,
     };
     const call = actionCalloutsAPI.update(id, { attributes });
     const options = { noTouch: true };
     const updateRequest = request(
       call,
       requests.beActionCalloutUpdate,
-      options
+      options,
     );
 
     const { refreshActionCallouts } = this.props;
@@ -195,14 +193,14 @@ class ActionCallouts extends PureComponent {
   }
 
   moveToSlot(id, sourceSlotId, destinationSlotId, destinationIndex) {
-    this.removeFromSlot(id, sourceSlotId, callout => {
+    this.removeFromSlot(id, sourceSlotId, (callout) => {
       this.addToSlot(callout, destinationSlotId, destinationIndex);
     });
   }
 
   replaceSlotInState(slotId, slotCallouts, callback = null) {
     const state = {
-      slotCallouts: { ...this.state.slotCallouts, [slotId]: slotCallouts }
+      slotCallouts: { ...this.state.slotCallouts, [slotId]: slotCallouts },
     };
     this.setState(state, callback);
   }
@@ -215,7 +213,7 @@ class ActionCallouts extends PureComponent {
 
   removeFromSlot(id, slotId, callback = null) {
     const slotCallouts = this.state.slotCallouts[slotId].slice(0);
-    const index = slotCallouts.findIndex(ac => ac.id === id);
+    const index = slotCallouts.findIndex((ac) => ac.id === id);
     const callout = slotCallouts.splice(index, 1)[0];
     this.replaceSlotInState(slotId, slotCallouts, () => callback(callout));
   }
@@ -236,7 +234,7 @@ class ActionCallouts extends PureComponent {
           onDragEnd={this.onDragEnd}
         >
           {this.slotIds
-            .filter(slot => this.props.actionCalloutSlots.includes(slot))
+            .filter((slot) => this.props.actionCalloutSlots.includes(slot))
             .map((slotId, index) => {
               return (
                 <Slot

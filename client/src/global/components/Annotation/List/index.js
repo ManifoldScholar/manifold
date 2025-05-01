@@ -5,5 +5,5 @@ import Default from "./Default";
 export default {
   GroupedBySelection,
   GroupedBySection,
-  Default
+  Default,
 };

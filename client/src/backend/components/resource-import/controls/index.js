@@ -5,5 +5,5 @@ import Parsed from "./Parsed";
 export default {
   Imported,
   Importing,
-  Parsed
+  Parsed,
 };

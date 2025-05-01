@@ -8,12 +8,12 @@ import {
   IframeButton,
   BlockSelect,
   FunctionButton,
-  SpanButton
+  SpanButton,
 } from "./buttons";
 import {
   MenuBar as ReakitMenuBar,
   MenuItem as ReakitMenuItem,
-  useMenuBarState
+  useMenuBarState,
 } from "reakit/Menu";
 import { Node } from "slate";
 import { useSlateStatic, useSlateSelection } from "slate-react";
@@ -30,7 +30,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
   const menu = useMenuBarState({
     orientation: "horizontal",
     loop: true,
-    wrap: "horizontal"
+    wrap: "horizontal",
   });
 
   const editor = useSlateStatic();
@@ -43,12 +43,8 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
     ancestors = getAncestors(editor, iterator);
   }
 
-  const {
-    setSelectedCrumb,
-    selectedCrumb,
-    editingCrumb,
-    setEditingCrumb
-  } = useHtmlBreadcrumbs();
+  const { setSelectedCrumb, selectedCrumb, editingCrumb, setEditingCrumb } =
+    useHtmlBreadcrumbs();
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -59,20 +55,20 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
   }, [editor.selection]);
 
   const onToggleHtmlOutlines = useCallback(
-    e => {
+    (e) => {
       e.preventDefault();
 
       const val = selectedCrumb === "all" ? null : "all";
       setSelectedCrumb(val);
     },
-    [selectedCrumb, setSelectedCrumb]
+    [selectedCrumb, setSelectedCrumb],
   );
 
   const handleHoverFocus = useCallback(
-    a => {
+    (a) => {
       if (!editingCrumb) setSelectedCrumb(a);
     },
-    [editingCrumb]
+    [editingCrumb],
   );
 
   const clearHoverFocus = useCallback(() => {
@@ -117,20 +113,20 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               { format: "article", label: t("editor.tooltips.labels.article") },
               {
                 format: "blockquote",
-                label: t("editor.tooltips.labels.blockquote")
+                label: t("editor.tooltips.labels.blockquote"),
               },
               { format: "pre", label: t("editor.tooltips.labels.pre") },
               { format: "figure", label: t("editor.tooltips.labels.figure") },
               {
                 format: "figcaption",
-                label: t("editor.tooltips.labels.figcaption")
+                label: t("editor.tooltips.labels.figcaption"),
               },
               {
                 format: "",
                 label: t(
-                  "editor.controls.labels.layout_block_select_placeholder"
-                )
-              }
+                  "editor.controls.labels.layout_block_select_placeholder",
+                ),
+              },
             ]}
             color="var(--color-base-violet45)"
             {...menu}
@@ -152,8 +148,10 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
               { format: "h6", label: t("editor.tooltips.labels.h6") },
               {
                 format: "",
-                label: t("editor.controls.labels.text_block_select_placeholder")
-              }
+                label: t(
+                  "editor.controls.labels.text_block_select_placeholder",
+                ),
+              },
             ]}
             {...menu}
           />
@@ -234,16 +232,15 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
           {!isEmpty(ancestors) &&
             Object.keys(ancestors)
               .sort(
-                (a, b) => ancestors[a].path.length - ancestors[b].path.length
+                (a, b) => ancestors[a].path.length - ancestors[b].path.length,
               )
               .map((a, i) => {
-                /* eslint-disable no-nested-ternary */
                 const tag = ancestors[a].label.split(".")[0].split("#")[0];
                 const color = rteElements.includes(tag)
                   ? "green"
                   : inlineNodes.includes(tag)
-                  ? "blue"
-                  : "violet";
+                    ? "blue"
+                    : "violet";
 
                 return (
                   <Fragment key={a}>
@@ -254,7 +251,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
                       onMouseLeave={clearHoverFocus}
                       onFocus={() => handleHoverFocus(a)}
                       onBlur={clearHoverFocus}
-                      onClick={e => {
+                      onClick={(e) => {
                         e.preventDefault();
                         setSelectedCrumb(a);
                         setEditingCrumb(true);

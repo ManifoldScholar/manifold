@@ -21,7 +21,7 @@ function ProjectResourceCollectionsEntityCollection({
     <EntityCollection
       title={t("pages.resource_collections_all")}
       icon="resourceCollection64"
-      BodyComponent={props => (
+      BodyComponent={(props) => (
         <ResourceCollectionList.Grid
           resourceCollections={resourceCollections}
           itemHeadingLevel={itemHeadingLevel}
@@ -34,8 +34,8 @@ function ProjectResourceCollectionsEntityCollection({
           : {
               pagination: get(resourceCollectionsMeta, "pagination"),
               unit: t("glossary.resource_collection", {
-                count: resourceCollectionsMeta?.pagination?.totalCount || 0
-              })
+                count: resourceCollectionsMeta?.pagination?.totalCount || 0,
+              }),
             }
       }
       paginationProps={
@@ -43,7 +43,7 @@ function ProjectResourceCollectionsEntityCollection({
           ? {}
           : {
               pagination: get(resourceCollectionsMeta, "pagination"),
-              ...paginationProps
+              ...paginationProps,
             }
       }
       {...passThroughProps}
@@ -58,7 +58,7 @@ ProjectResourceCollectionsEntityCollection.propTypes = {
   resourceCollections: PropTypes.arrayOf(PropTypes.object).isRequired,
   resourceCollectionsMeta: PropTypes.object,
   paginationProps: shapes.pagination,
-  itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+  itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6]),
 };
 
 export default ProjectResourceCollectionsEntityCollection;

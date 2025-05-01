@@ -15,5 +15,5 @@ export default {
   Resource,
   Journal,
   Issue,
-  Volume
+  Volume,
 };

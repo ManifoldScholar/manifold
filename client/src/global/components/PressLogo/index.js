@@ -9,7 +9,7 @@ class PressLogo extends Component {
     url: PropTypes.string,
     mobileUrl: PropTypes.string,
     styles: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   getDefaultIcon() {
@@ -25,13 +25,13 @@ class PressLogo extends Component {
 
   getPressImage() {
     const className = classNames("custom-logo__image", {
-      "custom-logo__image--desktop": this.props.mobileUrl
+      "custom-logo__image--desktop": this.props.mobileUrl,
     });
     let style = {};
     if (this.props.styles) {
       try {
         style = JSON.parse(this.props.styles);
-      } catch (e) {
+      } catch (_) {
         /* eslint-disable no-console */
         console.log(this.props.t("errors.logo_styles"));
         /* eslint-enable no-console */
@@ -50,7 +50,7 @@ class PressLogo extends Component {
 
   getMobilePressImage() {
     const className = classNames("custom-logo__image", {
-      "custom-logo__image--mobile": this.props.url
+      "custom-logo__image--mobile": this.props.url,
     });
     return (
       <img
@@ -63,7 +63,7 @@ class PressLogo extends Component {
 
   render() {
     const figureClass = classNames({
-      "custom-logo": this.props.url
+      "custom-logo": this.props.url,
     });
 
     return (

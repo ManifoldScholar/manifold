@@ -5,34 +5,34 @@ const ROLES = {
   editor: "Editor",
   project_creator: "Project Creator",
   marketeer: "Marketeer",
-  reader: "Reader"
+  reader: "Reader",
 };
 
 export default function userFilters({ snapshotState = false } = {}) {
   const roles = Object.keys(ROLES);
   const labels = ROLES;
-  const roleOptions = roles.map(role => {
+  const roleOptions = roles.map((role) => {
     return {
       label: `Role: ${labels[role]}`,
-      value: role
+      value: role,
     };
   });
   roleOptions.unshift({ label: "All roles", value: "" });
 
   return {
     config: {
-      snapshotState
+      snapshotState,
     },
     params: [
       {
         label: "Search...",
         name: "keyword",
-        value: ""
+        value: "",
       },
       {
         label: "Role",
         name: "role_name",
-        options: roleOptions
+        options: roleOptions,
       },
       {
         label: "Order",
@@ -40,9 +40,9 @@ export default function userFilters({ snapshotState = false } = {}) {
         value: "last_name",
         options: [
           { label: "Alphabetical by first name", value: "first_name" },
-          { label: "Alphabetical by last name", value: "last_name" }
-        ]
-      }
-    ]
+          { label: "Alphabetical by last name", value: "last_name" },
+        ],
+      },
+    ],
   };
 }

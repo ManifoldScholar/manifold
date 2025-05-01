@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   respond,
   buttonUnstyled,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 import { COLOR_MAP } from "../renderers/styles";
 import IconComposer from "global/components/utility/IconComposer";

@@ -20,7 +20,7 @@ export const BackendOuter = styled(Outer)`
     `
     padding: 13px 24px;
   `,
-    40
+    40,
   )}
 
   ${({ $hideOnDesktop }) =>

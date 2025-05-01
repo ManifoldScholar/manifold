@@ -15,14 +15,14 @@ const getContent = (entity, parent) => {
     heroStyles,
     heroAltText,
     logoStyles,
-    logoAltText
+    logoAltText,
   } = entity.attributes ?? {};
   const {
     heroBackgroundColor: parentColor,
     heroStyles: parentHero,
     heroAltText: parentHeroAlt,
     logoStyles: parentLogo,
-    logoAltText: parentLogoAlt
+    logoAltText: parentLogoAlt,
   } = parent?.attributes ?? {};
 
   const color = heroBackgroundColor ?? parentColor ?? null;
@@ -34,7 +34,7 @@ const getContent = (entity, parent) => {
     heroStyles,
     parentHero,
     "largeLandscape",
-    "mediumLandscape"
+    "mediumLandscape",
   );
   const imageAlt = heroAltText ?? parentHeroAlt;
 
@@ -45,7 +45,7 @@ export default function Masthead({ entity }) {
   if (!entity) return null;
   const { image, imageAlt, logo, logoAlt, color } = getContent(
     entity,
-    entity.relationships?.journal
+    entity.relationships?.journal,
   );
 
   if (!image && !logo && !color) return null;
@@ -84,5 +84,5 @@ export default function Masthead({ entity }) {
 Masthead.displayName = "Frontend.Entity.Masthead";
 
 Masthead.propTypes = {
-  entity: PropTypes.object.isRequired
+  entity: PropTypes.object.isRequired,
 };

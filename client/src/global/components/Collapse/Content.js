@@ -27,7 +27,7 @@ function Content(props) {
     activeClassName,
     focusOnVisible,
     maxDuration,
-    stubHeight
+    stubHeight,
   } = props;
   const { visible, contentProps, toggleVisible } = useCollapseContext();
   const { ref: resizeRef, height } = useResizeObserver();
@@ -40,7 +40,7 @@ function Content(props) {
     "collapse__content--stub": stubHeight,
     "collapse__content--stub-only": height < stubHeight,
     [className]: className,
-    [activeClassName]: activeClassName
+    [activeClassName]: activeClassName,
   });
 
   const contentRef = useRef();
@@ -61,18 +61,18 @@ function Content(props) {
       contentRef.current.style.setProperty("--collapse-height", `${height}px`);
       contentRef.current.style.setProperty(
         "--collapse-duration",
-        `${duration}ms`
+        `${duration}ms`,
       );
       contentRef.current.style.setProperty("--collapse-delay", `${delay}ms`);
       contentRef.current.style.setProperty(
         "--collapse-durationAfterDelay",
-        `${diff}ms`
+        `${diff}ms`,
       );
 
       if (stubHeight)
         contentRef.current.style.setProperty(
           "--hidden-height",
-          `${stubHeight}px`
+          `${stubHeight}px`,
         );
     }
   }, [height, stubHeight, maxDuration]);
@@ -92,13 +92,13 @@ function Content(props) {
         "[contenteditable]",
         '[tabindex]:not([tabindex="-1"])',
         "summary",
-        "[href]"
+        "[href]",
       ].join(", ");
       const interactiveEls = contentRef.current.querySelectorAll(
-        interactiveElSelector
+        interactiveElSelector,
       );
-      interactiveEls.forEach(el =>
-        el.setAttribute("tabIndex", visible ? 0 : -1)
+      interactiveEls.forEach((el) =>
+        el.setAttribute("tabIndex", visible ? 0 : -1),
       );
     }
   }, [visible, isMounted]);
@@ -125,12 +125,12 @@ Content.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node,
-    PropTypes.func
+    PropTypes.func,
   ]),
   className: PropTypes.string,
   activeClassName: PropTypes.string,
   focusOnVisible: PropTypes.bool,
-  maxDuration: PropTypes.number
+  maxDuration: PropTypes.number,
 };
 
 export default Content;

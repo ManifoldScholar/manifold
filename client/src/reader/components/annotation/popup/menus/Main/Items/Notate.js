@@ -24,7 +24,7 @@ Notate.displayName = "Annotation.Popup.Menus.MainMenu.Notate";
 Notate.propTypes = {
   menu: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  text: PropTypes.object.isRequired
+  text: PropTypes.object.isRequired,
 };
 
 export default Notate;

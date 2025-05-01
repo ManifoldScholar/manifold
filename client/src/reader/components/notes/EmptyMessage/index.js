@@ -7,5 +7,5 @@ export default {
   NoResults,
   TextNotAnnotatedByGroup,
   TextNotAnnotatedByMe,
-  NoOrphanedAnnotations
+  NoOrphanedAnnotations,
 };

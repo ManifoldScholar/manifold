@@ -9,11 +9,11 @@ class ProjectContentTypeFormTableOfContents extends PureComponent {
   static propTypes = {
     project: PropTypes.object.isRequired,
     setOther: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultAttributes = {
-    depth: 6
+    depth: 6,
   };
 
   get project() {
@@ -31,7 +31,7 @@ class ProjectContentTypeFormTableOfContents extends PureComponent {
         <Form.Picker
           label={this.props.t("glossary.text_title_case_one")}
           options={this.project.relationships.texts}
-          optionToLabel={t => t.attributes.title}
+          optionToLabel={(t) => t.attributes.title}
           placeholder={this.props.t("content_blocks.toc.select_text")}
           name="relationships[text]"
           wide

@@ -20,7 +20,7 @@ export default function CurrentUserBanner() {
   const acceptAll = useCallback(async () => {
     const args = {
       consentManifoldAnalytics: !manifoldAnalyticsEnabled ? null : true,
-      consentGoogleAnalytics: !googleAnalyticsEnabled ? null : true
+      consentGoogleAnalytics: !googleAnalyticsEnabled ? null : true,
     };
 
     const res = await acceptCookies(args);

@@ -12,7 +12,7 @@ function ReadingGroupHomepageEditContainer({
   readingGroup,
   categories,
   responses,
-  refresh
+  refresh,
 }) {
   const { t } = useTranslation();
 
@@ -22,7 +22,7 @@ function ReadingGroupHomepageEditContainer({
       ability="update"
       failureRedirect={lh.link(
         "frontendReadingGroupHomepageStatic",
-        readingGroup.id
+        readingGroup.id,
       )}
     >
       <Styled.EditContainer>
@@ -63,7 +63,7 @@ ReadingGroupHomepageEditContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   responses: PropTypes.object.isRequired,
   refresh: PropTypes.func.isRequired,
-  categories: PropTypes.array
+  categories: PropTypes.array,
 };
 
 export default ReadingGroupHomepageEditContainer;

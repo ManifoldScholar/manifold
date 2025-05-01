@@ -8,14 +8,14 @@ export default class ResourceListThumbnails extends Component {
   static displayName = "ResourceList.Thumbnails";
 
   static propTypes = {
-    resources: PropTypes.array
+    resources: PropTypes.array,
   };
 
   render() {
     if (!this.props.resources?.length > 0) return null;
     return (
       <Styled.Grid>
-        {this.props.resources.map(resource => {
+        {this.props.resources.map((resource) => {
           const { projectSlug } = resource.attributes ?? {};
           return (
             <li key={resource.id}>
@@ -23,7 +23,7 @@ export default class ResourceListThumbnails extends Component {
                 to={lh.link(
                   "frontendProjectResource",
                   projectSlug,
-                  resource.attributes.slug
+                  resource.attributes.slug,
                 )}
               >
                 <Resourceish.Thumbnail

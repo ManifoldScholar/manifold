@@ -10,11 +10,11 @@ i18n.use(initReactI18next).init({
         forms: { upload: { image_preview: "<0></0><br/><1></1>" } },
         dashboard: {
           reader_stats: "Readers this week",
-          stats_change: "Change from last week"
-        }
-      }
-    }
-  }
+          stats_change: "Change from last week",
+        },
+      },
+    },
+  },
 });
 
 export default i18n;

@@ -20,35 +20,35 @@ export default class Project extends PureComponent {
           publisher: PropTypes.string,
           seriesTitle: PropTypes.string,
           doi: PropTypes.string,
-          edition: PropTypes.string
+          edition: PropTypes.string,
         }),
         purchaseUrl: PropTypes.string,
         purchasePrice: PropTypes.number,
         purchasePriceCurrency: PropTypes.string,
         avatarStyles: PropTypes.shape({
-          small: PropTypes.string
+          small: PropTypes.string,
         }),
         publicationDate: PropTypes.string,
         createdAt: PropTypes.string,
-        updatedAt: PropTypes.string
+        updatedAt: PropTypes.string,
       }),
       relationships: PropTypes.shape({
         creators: PropTypes.arrayOf(
           PropTypes.shape({
             attributes: PropTypes.shape({
-              fullName: PropTypes.string.isRequired
-            }).isRequired
-          })
+              fullName: PropTypes.string.isRequired,
+            }).isRequired,
+          }),
         ),
         contributors: PropTypes.arrayOf(
           PropTypes.shape({
             attributes: PropTypes.shape({
-              fullName: PropTypes.string.isRequired
-            }).isRequired
-          })
-        )
-      })
-    }).isRequired
+              fullName: PropTypes.string.isRequired,
+            }).isRequired,
+          }),
+        ),
+      }),
+    }).isRequired,
   };
 
   get project() {
@@ -71,14 +71,14 @@ export default class Project extends PureComponent {
       publicationDate,
       createdAt,
       updatedAt,
-      avatarStyles
+      avatarStyles,
     } = this.attributes;
     const { creators, flattenedCollaborators } = this.relationships;
     const hostname = config.services.client.url;
 
     /* eslint-disable-next-line no-unused-vars */
-    const [authors, others] = partition(flattenedCollaborators, fc =>
-      creators.find(c => c.id === fc.relationships.maker.id)
+    const [authors, others] = partition(flattenedCollaborators, (fc) =>
+      creators.find((c) => c.id === fc.relationships.maker.id),
     );
 
     return {
@@ -99,7 +99,7 @@ export default class Project extends PureComponent {
       bookFormat: "EBook",
       isPartOf: renderSeries(metadata),
       image: avatarStyles && avatarStyles.small,
-      offers: renderOffer(this.attributes)
+      offers: renderOffer(this.attributes),
     };
   }
 

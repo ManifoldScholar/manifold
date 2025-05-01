@@ -6,28 +6,28 @@ export const breadcrumbs = ({
   resource,
   collection,
   t,
-  pathname
+  pathname,
 }) => {
   const isCollectionMember = !!collection?.relationships?.resources?.find(
-    r => r.id === resource.id
+    (r) => r.id === resource.id,
   );
   const collectionRoute =
     pathname.split("/").indexOf("resource-collection") >= 0;
   const projectCrumb = {
     to: lh.link("frontendProject", project.attributes.slug),
-    label: project.attributes.titlePlaintext
+    label: project.attributes.titlePlaintext,
   };
   const resourcesCrumb = collectionRoute
     ? {
         to: lh.link(
           "frontendProjectResourceCollections",
-          project.attributes.slug
+          project.attributes.slug,
         ),
-        label: t("glossary.resource_collection_other")
+        label: t("glossary.resource_collection_other"),
       }
     : {
         to: lh.link("frontendProjectResources", project.attributes.slug),
-        label: t("glossary.resource_other")
+        label: t("glossary.resource_other"),
       };
   const collectionCrumb =
     collectionRoute && isCollectionMember
@@ -35,27 +35,27 @@ export const breadcrumbs = ({
           to: lh.link(
             "frontendProjectResourceCollection",
             project.attributes.slug,
-            collection.attributes.slug
+            collection.attributes.slug,
           ),
-          label: collection.attributes.title
+          label: collection.attributes.title,
         }
       : null;
   const currentCrumb = {
     to: lh.link(
       "frontendProjectResource",
       project.attributes.slug,
-      resource.attributes.slug
+      resource.attributes.slug,
     ),
-    label: resource.attributes.titlePlaintext
+    label: resource.attributes.titlePlaintext,
   };
   return journalBreadcrumbs
     ? [
         ...journalBreadcrumbs,
         resourcesCrumb,
         collectionCrumb,
-        currentCrumb
+        currentCrumb,
       ].filter(Boolean)
     : [projectCrumb, resourcesCrumb, collectionCrumb, currentCrumb].filter(
-        Boolean
+        Boolean,
       );
 };

@@ -16,7 +16,7 @@ export const Wrapper = styled("section", transientOptions)`
   ${respond(
     `padding-block-start: 70px;
     padding-block-end: 80px;`,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 
   ${({ $darkMode }) =>
@@ -74,7 +74,7 @@ export const Inner = styled.div`
     `
     grid-template-columns: var(--left-column-width, 1fr) var(--right-column-width, clamp(220px, 28%, 260px));
   `,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 `;
 
@@ -91,7 +91,7 @@ export const TopLeft = styled.div`
   ${respond(
     `grid-row: 1;
     grid-column: 1;`,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 `;
 
@@ -109,7 +109,7 @@ export const TopRight = styled.div`
       margin-block-start: 7px;
     }
     `,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 `;
 
@@ -120,7 +120,7 @@ export const BottomLeft = styled.div`
   ${respond(
     `grid-row: 2;
     grid-column: 1;`,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 `;
 
@@ -132,6 +132,6 @@ export const BottomRight = styled.div`
     `grid-row: 2;
     grid-column: 2;
     align-self: end;`,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 `;

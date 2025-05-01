@@ -8,15 +8,15 @@ import utilityStyles from "./utility";
 import printStyles from "./print";
 
 export default css`
-@layer manifold, stylesheets;
+  @layer manifold, stylesheets;
 
-@layer manifold {
-  ${fonts}
-  ${rootVariables}
+  @layer manifold {
+    ${fonts}
+    ${rootVariables}
   ${vendorStyles}
   ${baseStyles}
   ${utilityStyles}
   ${componentStyles}
   ${printStyles}
-}
+  }
 `;

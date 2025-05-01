@@ -7,7 +7,7 @@ class ResourceFormKindSpreadsheet extends PureComponent {
   static displayName = "Resource.Form.Kind.Spreadsheet";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

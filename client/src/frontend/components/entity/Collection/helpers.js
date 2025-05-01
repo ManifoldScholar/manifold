@@ -12,8 +12,11 @@ export function getHeroImage(layout, collection) {
 }
 
 export function getHeaderLayout(collection) {
-  const { heroLayout, heroStyles, descriptionFormatted: description } =
-    collection?.attributes ?? {};
+  const {
+    heroLayout,
+    heroStyles,
+    descriptionFormatted: description,
+  } = collection?.attributes ?? {};
   if (heroLayout && heroStyles) return heroLayout;
   if (heroStyles?.largeLandscape) return "square_inset";
   return description ? "title_description" : "title_only";

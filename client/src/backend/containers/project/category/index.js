@@ -5,5 +5,5 @@ import Edit from "./Edit";
 export default {
   Wrapper,
   New,
-  Edit
+  Edit,
 };

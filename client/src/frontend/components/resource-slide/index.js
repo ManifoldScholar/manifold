@@ -21,5 +21,5 @@ export default {
   SlideVideo,
   SlideInteractive,
   SlideLoading,
-  Zoom
+  Zoom,
 };

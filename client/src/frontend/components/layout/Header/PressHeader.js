@@ -12,7 +12,7 @@ class PressHeader extends PureComponent {
     url: PropTypes.string,
     label: PropTypes.string,
     bgColor: PropTypes.string,
-    settings: PropTypes.object
+    settings: PropTypes.object,
   };
 
   static contextType = FrontendModeContext;
@@ -51,7 +51,7 @@ class PressHeader extends PureComponent {
     if (bgColor.length === 3) {
       bgColor = bgColor
         .split("")
-        .map(hex => hex + hex)
+        .map((hex) => hex + hex)
         .join("");
     }
 
@@ -151,7 +151,7 @@ class PressHeader extends PureComponent {
   get styles() {
     return {
       color: this.color,
-      backgroundColor: this.bgColor
+      backgroundColor: this.bgColor,
     };
   }
 

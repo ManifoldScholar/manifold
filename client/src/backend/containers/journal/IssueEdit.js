@@ -15,22 +15,22 @@ function JournalIssueEdit({
   closeUrl,
   match,
   journal,
-  history
+  history,
 }) {
   const { data: journalIssue } = useFetch({
-    request: [journalIssuesAPI.show, match.params.iId]
+    request: [journalIssuesAPI.show, match.params.iId],
   });
 
   const destroy = useApiCallback(journalIssuesAPI.destroy, {
-    removes: journalIssue
+    removes: journalIssue,
   });
 
-  const notifyDestroy = useNotification(i => ({
+  const notifyDestroy = useNotification((i) => ({
     level: 0,
     id: `JOURNAL_ISSUE_DESTROYED_${i.id}`,
     heading: "The issue has been destroyed.",
     body: `Issue #${i?.attributes?.number} has passed into the endless night.`,
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const refreshAndRedirect = useCallback(() => {
@@ -46,7 +46,7 @@ function JournalIssueEdit({
         notifyDestroy(journalIssue);
         redirect();
       },
-      () => redirect()
+      () => redirect(),
     );
   }, [destroy, history, journal?.id, journalIssue, notifyDestroy]);
 
@@ -61,8 +61,8 @@ function JournalIssueEdit({
       onClick: onDelete,
       label: "delete",
       icon: "delete32",
-      className: "utility-button__icon--notice"
-    }
+      className: "utility-button__icon--notice",
+    },
   ];
 
   return (
@@ -81,7 +81,7 @@ JournalIssueEdit.propTypes = {
   journal: PropTypes.object.isRequired,
   closeUrl: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
-  refreshIssues: PropTypes.func.isRequired
+  refreshIssues: PropTypes.func.isRequired,
 };
 
 export default withConfirmation(JournalIssueEdit);

@@ -11,14 +11,14 @@ class Activity extends Component {
         newTextsCount: PropTypes.number,
         readersThisWeek: PropTypes.oneOfType([
           PropTypes.bool,
-          PropTypes.number
+          PropTypes.number,
         ]),
         readerIncrease: PropTypes.number,
         newHighlightsCount: PropTypes.number,
-        newAnnotationsCount: PropTypes.number
-      })
+        newAnnotationsCount: PropTypes.number,
+      }),
     }),
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   formatReaderIncrease(stats) {

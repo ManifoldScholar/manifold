@@ -9,7 +9,7 @@ class ProjectCategoryWrapperContainer extends Component {
   static propTypes = {
     project: PropTypes.object,
     history: PropTypes.object,
-    route: PropTypes.object
+    route: PropTypes.object,
   };
 
   render() {

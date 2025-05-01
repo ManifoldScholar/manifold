@@ -9,7 +9,7 @@ import {
   defaultTransitionProps,
   fluidScale,
   listUnstyled,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -17,7 +17,7 @@ const paddingIncrement = "20px";
 export const tocDrawer = {
   width: "477px",
   baseInlineStartPadding: "12.579%",
-  baseInlineEndPadding: "10.482%"
+  baseInlineEndPadding: "10.482%",
 };
 
 // TODO: Componetize these styles when Drawer is migrated to styled.
@@ -108,7 +108,7 @@ export const FooterButton = styled.button`
     `
       padding-block-start: 17px;
       padding-block-end: 17px;`,
-    50
+    50,
   )}
 `;
 

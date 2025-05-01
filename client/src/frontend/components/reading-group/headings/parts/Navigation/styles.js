@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   respond,
   utilityPrimary,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -21,7 +21,7 @@ function setResponsiveLayout(count) {
       ${respond(
         `border-top-right-radius: 0;
       border-bottom-left-radius: var(--box-border-radius);`,
-        breakpoint
+        breakpoint,
       )}
     }
 
@@ -32,7 +32,7 @@ function setResponsiveLayout(count) {
       ${respond(
         `border-top-right-radius: var(--box-border-radius);
       border-bottom-left-radius: 0;`,
-        breakpoint
+        breakpoint,
       )}
     }
   `;
@@ -43,20 +43,20 @@ const getDesktopLayout = (count, layout) => {
     return layout === "grid"
       ? `${respond(
           `grid-template-columns: repeat(2, minmax(0, 1fr));`,
-          count2Breakpoint
+          count2Breakpoint,
         )}`
       : `width: 100%;
 
     ${respond(
       `display: flex;
     width: auto;`,
-      count2Breakpoint
+      count2Breakpoint,
     )}`;
   }
   return layout === "grid"
     ? `${respond(
         `grid-template-columns: repeat(3, minmax(0, 1fr));`,
-        count3Breakpoint
+        count3Breakpoint,
       )}`
     : `${respond(`display: flex;`, count3Breakpoint)}`;
 };
@@ -88,7 +88,8 @@ export const Link = styled(NavLink, transientOptions)`
   padding: 10px ${linkLateralPadding};
   text-decoration: none;
   background-color: var(--box-bg-color);
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   ${({ $padded }) =>

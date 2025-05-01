@@ -23,5 +23,5 @@ export default function MakerAvatar({ maker }) {
 MakerAvatar.displayName = "Frontend.Entity.Hero.Parts.Meta.Avatar";
 
 MakerAvatar.propTypes = {
-  maker: PropTypes.object.isRequired
+  maker: PropTypes.object.isRequired,
 };

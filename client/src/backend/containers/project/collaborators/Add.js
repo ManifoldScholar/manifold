@@ -25,5 +25,5 @@ AddCollaboratorContainer.displayName = "Project.Collaborators.Add";
 
 AddCollaboratorContainer.propTypes = {
   projectId: PropTypes.string.isRequired,
-  refresh: PropTypes.func
+  refresh: PropTypes.func,
 };

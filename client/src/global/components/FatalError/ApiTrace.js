@@ -4,7 +4,7 @@ import * as Styled from "./styles";
 
 export default class FatalErrorApiTrace extends PureComponent {
   static propTypes = {
-    trace: PropTypes.object.isRequired
+    trace: PropTypes.object.isRequired,
   };
 
   get trace() {
@@ -15,12 +15,12 @@ export default class FatalErrorApiTrace extends PureComponent {
     const trace = this.trace;
     return (
       <Styled.Stacks>
-        {Object.keys(trace).map(stackName => {
+        {Object.keys(trace).map((stackName) => {
           return (
             <div key={stackName}>
               <Styled.StackTitle>API {stackName}</Styled.StackTitle>
               <Styled.LineList>
-                {Object.values(trace[stackName]).map(line => {
+                {Object.values(trace[stackName]).map((line) => {
                   return <Styled.Line key={line.id}>{line.trace}</Styled.Line>;
                 })}
               </Styled.LineList>

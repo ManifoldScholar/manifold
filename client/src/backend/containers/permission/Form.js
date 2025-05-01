@@ -18,17 +18,17 @@ export class PermissionForm extends PureComponent {
     permission: PropTypes.object,
     showUserInput: PropTypes.bool,
     dispatch: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
-  handleSuccess = newPermission => {
+  handleSuccess = (newPermission) => {
     if (this.props.permission) return null; // Skip if this permission already existed
     const base = lh.nameFromType("backend", "Permission", this.props.entity);
     const url = lh.link(base, this.props.entity.id, newPermission.id);
     return this.props.history.push(url, { keepNotifications: true });
   };
 
-  composeCreateCall = permission => {
+  composeCreateCall = (permission) => {
     const entity = this.props.entity;
     if (!permission || !entity) return null;
     return permissionsAPI.create(entity, permission);
@@ -40,7 +40,7 @@ export class PermissionForm extends PureComponent {
     return permissionsAPI.update(entity, id, permission);
   };
 
-  labelUser = user => user.attributes.fullName;
+  labelUser = (user) => user.attributes.fullName;
 
   renderSelectedUser(user) {
     if (!user) return null;
@@ -72,7 +72,7 @@ export class PermissionForm extends PureComponent {
         listStyle={"well"}
         name="relationships[user]"
         options={this.fetchUsers}
-        optionToLabel={u => u.attributes.fullName}
+        optionToLabel={(u) => u.attributes.fullName}
         placeholder={t("projects.permissions.user_placeholder")}
         predictive
         listRowComponent="UserRow"
@@ -106,16 +106,16 @@ export class PermissionForm extends PureComponent {
             options={[
               {
                 label: t("projects.permissions.modify_project"),
-                value: "project_editor"
+                value: "project_editor",
               },
               {
                 label: t("projects.permissions.modify_project_properties"),
-                value: "project_property_manager"
+                value: "project_property_manager",
               },
               {
                 label: t("projects.permissions.author"),
-                value: "project_author"
-              }
+                value: "project_author",
+              },
             ]}
             focusOnMount={this.props.showUserInput}
           />

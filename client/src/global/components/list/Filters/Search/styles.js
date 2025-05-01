@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   buttonUnstyled,
   defaultHoverStyle,
-  outlineOnFocus
+  outlineOnFocus,
 } from "theme/styles/mixins";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 import { borderStyles } from "../Filter/styles";

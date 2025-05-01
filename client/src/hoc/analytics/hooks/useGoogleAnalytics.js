@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import get from "lodash/get";
 import ReactGA from "react-ga4";
 import ch from "helpers/consoleHelpers";
@@ -34,7 +34,7 @@ export default function useGoogleAnalytics(location, settings) {
       const consentState = consentGoogleAnalytics ? "granted" : "denied";
 
       ReactGA.gtag("consent", "default", {
-        analytics_storage: consentState
+        analytics_storage: consentState,
       });
     };
 
@@ -43,7 +43,7 @@ export default function useGoogleAnalytics(location, settings) {
       if (config.environment.isDevelopment) {
         ch.notice(
           `Google Analytics initialized for ${googleAnalyticsId}.`,
-          "chart_with_upwards_trend"
+          "chart_with_upwards_trend",
         );
       }
       setGaInitialized(true);

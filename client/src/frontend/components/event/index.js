@@ -7,5 +7,5 @@ export default {
   AllLink,
   List,
   Event,
-  Tile
+  Tile,
 };

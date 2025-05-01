@@ -10,7 +10,7 @@ function Action({ to, onClick, className, children }) {
         to={to}
         className={classNames({
           "button-lozenge-primary": true,
-          [`${className}`]: !!className
+          [`${className}`]: !!className,
         })}
         onClick={onClick}
       >
@@ -22,7 +22,7 @@ function Action({ to, onClick, className, children }) {
     <button
       className={classNames({
         "button-lozenge-primary": true,
-        [`${className}`]: !!className
+        [`${className}`]: !!className,
       })}
       onClick={onClick}
     >
@@ -37,7 +37,7 @@ Action.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
   to: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Action;

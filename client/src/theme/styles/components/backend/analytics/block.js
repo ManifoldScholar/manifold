@@ -2,7 +2,7 @@ import {
   panelRounded,
   listUnstyled,
   utilityPrimary,
-  respond
+  respond,
 } from "theme/styles/mixins";
 
 const STAT_FONT_SIZE_LARGE = "66px";

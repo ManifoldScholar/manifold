@@ -5,7 +5,7 @@ export default function FooterColumn({
   position,
   footerType,
   className,
-  children
+  children,
 }) {
   return (
     <Styled.Column

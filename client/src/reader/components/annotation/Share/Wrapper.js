@@ -12,31 +12,31 @@ export default class AnnotationShareWrapper extends PureComponent {
     annotation: PropTypes.object.isRequired,
     closeDrawer: PropTypes.func,
     truncate: PropTypes.number,
-    shareType: PropTypes.string
+    shareType: PropTypes.string,
   };
 
   static defaultProps = {
-    closeOnSave: true
+    closeOnSave: true,
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      editorOpen: true
+      editorOpen: true,
     };
   }
 
   get selectionTextClassNames() {
     return classNames(
       "annotation-selection__text-container",
-      "annotation-selection__text-container--light"
+      "annotation-selection__text-container--light",
     );
   }
 
   maybeTruncateSelection() {
     const {
-      annotation: { subject }
+      annotation: { subject },
     } = this.props;
     if (this.props.truncate && subject.length > this.props.truncate) {
       return <FromNodes selection={subject} />;

@@ -3,7 +3,7 @@ import {
   rgba,
   listUnstyled,
   defaultTransitionProps,
-  respond
+  respond,
 } from "theme/styles/mixins";
 import { ZOOM_BREAKPOINT } from "theme/styles/components/reader/readerHeader";
 
@@ -23,12 +23,13 @@ export const List = styled.ul`
   background-color: var(--color-base-neutral05);
   overflow: auto;
   max-block-size: calc(100vh - var(--reader-header-height) * 2);
-  transition: opacity ${defaultTransitionProps},
+  transition:
+    opacity ${defaultTransitionProps},
     transform ${defaultTransitionProps};
 
   ${respond(
     `max-block-size: calc(100vh - var(--reader-header-height));`,
-    ZOOM_BREAKPOINT
+    ZOOM_BREAKPOINT,
   )}
 
   &[data-context="reader"] {

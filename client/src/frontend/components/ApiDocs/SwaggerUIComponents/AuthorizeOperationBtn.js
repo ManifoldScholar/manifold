@@ -2,7 +2,7 @@ import React from "react";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default class AuthorizeOperationBtn extends React.Component {
-  onClick = e => {
+  onClick = (e) => {
     e.stopPropagation();
     const { onClick } = this.props;
 

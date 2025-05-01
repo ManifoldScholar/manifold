@@ -12,7 +12,7 @@ class LogRow extends PureComponent {
 
   static propTypes = {
     entity: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get deleted() {
@@ -79,7 +79,7 @@ class LogRow extends PureComponent {
       return (
         <span
           dangerouslySetInnerHTML={{
-            __html: this.itemDisplayName
+            __html: this.itemDisplayName,
           }}
         />
       );
@@ -89,7 +89,7 @@ class LogRow extends PureComponent {
         className="entity-row__link--inverted"
         to={lh.link(urlName, this.itemId)}
         dangerouslySetInnerHTML={{
-          __html: this.itemDisplayName
+          __html: this.itemDisplayName,
         }}
       />
     );
@@ -106,7 +106,7 @@ class LogRow extends PureComponent {
           i18nKey="projects.log.entry_project"
           components={{
             userLink: this.userLink,
-            date: <FormattedDate date={this.createdAt} />
+            date: <FormattedDate date={this.createdAt} />,
           }}
           values={{ user: this.actorName }}
         />
@@ -140,12 +140,12 @@ class LogRow extends PureComponent {
                 date={this.createdAt}
                 suffix
               />
-            )
+            ),
           }}
           values={{
             user: this.actorName,
             entityType: t(`glossary.${this.itemType.toLowerCase()}_one`),
-            action: t(`projects.log.actions.${this.action}`)
+            action: t(`projects.log.actions.${this.action}`),
           }}
         />
       </span>
@@ -157,7 +157,7 @@ class LogRow extends PureComponent {
 
     /* This should be localized following the pattern used in src/global/components/meta/Item.js, but we need the full list of objects that can be changed to do so. -LD */
     const changes = Object.keys(this.objectChanges)
-      .map(change => humps.decamelize(change, { separator: " " }))
+      .map((change) => humps.decamelize(change, { separator: " " }))
       .join(", ");
 
     return <span>{this.props.t("projects.log.change_list", { changes })}</span>;

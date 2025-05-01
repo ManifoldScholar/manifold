@@ -22,10 +22,10 @@ function ProjectRow({ projectId, projectTitle, viewCount }) {
 ProjectRow.propTypes = {
   projectId: PropTypes.string.isRequired,
   projectTitle: PropTypes.string.isRequired,
-  viewCount: PropTypes.number.isRequired
+  viewCount: PropTypes.number.isRequired,
 };
 
-ProjectRow.generateId = project => project.projectId;
+ProjectRow.generateId = (project) => project.projectId;
 
 ProjectRow.displayName = "Analytics.Block.Table.ProjectRow";
 

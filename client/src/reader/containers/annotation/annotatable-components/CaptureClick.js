@@ -9,7 +9,7 @@ export default class AnnotatableCaptureClick extends Component {
     activeAnnotation: PropTypes.string,
     updateActiveAnnotation: PropTypes.func.isRequired,
     actions: PropTypes.object.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   doesElementContainAnnotationAndHighlight(el) {
@@ -31,7 +31,7 @@ export default class AnnotatableCaptureClick extends Component {
     return isString(removableHighlightId) && removableHighlightId.length > 0;
   }
 
-  handleMouseUp = event => {
+  handleMouseUp = (event) => {
     if (!event || !event.target) return;
 
     // If the mouseup happens over the currently active highlight, prevent text
@@ -43,14 +43,14 @@ export default class AnnotatableCaptureClick extends Component {
     }
   };
 
-  handleKeyUp = event => {
+  handleKeyUp = (event) => {
     if (!event || !event.target || event.key !== " ") return;
     if (event.target.tagName === "A") return;
     // handle spacebar keyup like a click (see https://adrianroselli.com/2022/04/brief-note-on-buttons-enter-and-space.html)
     this.handleClick(event, true);
   };
 
-  handleKeyDown = event => {
+  handleKeyDown = (event) => {
     if (!event || !event.target || (event.key !== "Enter" && event.key !== " "))
       return;
     // handle enter keydown like a click
@@ -67,7 +67,7 @@ export default class AnnotatableCaptureClick extends Component {
     }
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     if (!event || !event.target) return;
     const el = isMathMLNode(event.target)
       ? selectionHelpers.closest(event.target, "[data-mathml]")
@@ -82,10 +82,10 @@ export default class AnnotatableCaptureClick extends Component {
 
   handleDisambiguationClick(eventIgnored, el) {
     this.setState({
-      showAnnotationsInDrawer: event => {
+      showAnnotationsInDrawer: (event) => {
         this.clearNativeSelection();
         this.handleAnnotationClick(event, el);
-      }
+      },
     });
   }
 
@@ -99,7 +99,8 @@ export default class AnnotatableCaptureClick extends Component {
   handleAnnotationClick(event, el) {
     const link = selectionHelpers.closest(el, "a");
 
-    const hashRegex = /#annotation-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/g;
+    const hashRegex =
+      /#annotation-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/g;
     const isAnnotationClick = hashRegex.test(link.hash);
 
     if (!isAnnotationClick) event.preventDefault();
@@ -116,7 +117,7 @@ export default class AnnotatableCaptureClick extends Component {
     event.stopPropagation();
     const eventInfo = {
       annotationIds,
-      link
+      link,
     };
     this.props.updateActiveAnnotation(annotationIds[0], event, eventInfo);
   }

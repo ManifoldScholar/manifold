@@ -4,7 +4,7 @@ import {
   drawerIndent,
   buttonUnstyled,
   utilityPrimary,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export default `

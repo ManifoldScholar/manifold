@@ -22,7 +22,7 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
   const titleRef = useRef(null);
   const { t } = useTranslation();
 
-  const addIframe = close => {
+  const addIframe = (close) => {
     const url = urlRef?.current?.inputElement?.value;
     if (!url) return;
     const title = titleRef?.current?.inputElement?.value;
@@ -31,7 +31,7 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
     return insertIframe(editor, url, title);
   };
 
-  const updateIframe = attrs => close => {
+  const updateIframe = (attrs) => (close) => {
     const url = urlRef?.current?.inputElement?.value ?? attrs.src;
     if (!url) return;
     const title = titleRef?.current?.inputElement?.value;
@@ -39,12 +39,12 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
     close();
     Transforms.setNodes(editor, {
       type,
-      htmlAttrs: { ...attrs, src: url, title }
+      htmlAttrs: { ...attrs, src: url, title },
     });
     ReactEditor.focus(editor);
   };
 
-  const getIframeData = e => {
+  const getIframeData = (e) => {
     e.preventDefault();
     if (!selection) return;
 
@@ -57,28 +57,28 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
         form,
         callback: addIframe,
         closeCallback: onModalClose(editor, selection),
-        resolveLabel: t("actions.add")
+        resolveLabel: t("actions.add"),
       });
   };
 
-  const updateIframeData = e => {
+  const updateIframeData = (e) => {
     e.preventDefault();
 
     const [[iframe]] = Array.from(
       Editor.nodes(editor, {
         at: Editor.unhangRange(editor, selection),
-        match: n =>
+        match: (n) =>
           (!Editor.isEditor(n) &&
             SlateElement.isElement(n) &&
             n.type === "iframe") ||
-          n.type === "video"
-      })
+          n.type === "video",
+      }),
     );
 
     const attrs = iframe?.htmlAttrs ?? {};
     const defaultValues = {
       src: attrs.src,
-      title: attrs.title
+      title: attrs.title,
     };
 
     const heading = t("editor.forms.iframe_update_heading");
@@ -97,7 +97,7 @@ const IframeButton = ({ icon, size, ...rest }, ref) => {
         form,
         callback: updateIframe(attrs),
         closeCallback: onModalClose(editor, selection),
-        resolveLabel: t("actions.add")
+        resolveLabel: t("actions.add"),
       });
   };
 

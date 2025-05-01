@@ -10,9 +10,9 @@ import connectAndFetch from "utils/connectAndFetch";
 import withFormSession from "hoc/withFormSession";
 
 class PagesPropertiesContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      page: select("backend-page", state.entityStore)
+      page: select("backend-page", state.entityStore),
     };
   };
 
@@ -22,12 +22,12 @@ class PagesPropertiesContainer extends PureComponent {
     page: PropTypes.object.isRequired,
     onSuccess: PropTypes.func,
     form: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   renderPath() {
     const isExternal = this.props.form.getModelValue(
-      "attributes[isExternalLink]"
+      "attributes[isExternalLink]",
     );
     const t = this.props.t;
     if (isExternal)
@@ -54,7 +54,7 @@ class PagesPropertiesContainer extends PureComponent {
 
   renderBody() {
     const isExternal = this.props.form.getModelValue(
-      "attributes[isExternalLink]"
+      "attributes[isExternalLink]",
     );
     if (isExternal) return null;
     const t = this.props.t;
@@ -120,16 +120,16 @@ class PagesPropertiesContainer extends PureComponent {
               options={[
                 {
                   label: t("records.pages.purpose_options.supplemental"),
-                  value: "supplemental_content"
+                  value: "supplemental_content",
                 },
                 {
                   label: t("records.pages.purpose_options.privacy_policy"),
-                  value: "privacy_policy"
+                  value: "privacy_policy",
                 },
                 {
                   label: t("records.pages.purpose_options.terms"),
-                  value: "terms_and_conditions"
-                }
+                  value: "terms_and_conditions",
+                },
               ]}
             />
             <Form.Switch
@@ -176,5 +176,5 @@ class PagesPropertiesContainer extends PureComponent {
 
 export default withFormSession(
   withTranslation()(connectAndFetch(PagesPropertiesContainer)),
-  "backend-page-update"
+  "backend-page-update",
 );

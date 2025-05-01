@@ -11,7 +11,7 @@ export default function EntityGroup({
   to,
   children,
   parentView,
-  placeholderText
+  placeholderText,
 }) {
   const showPlaceholder = !entities?.length && !children;
 
@@ -31,7 +31,7 @@ export default function EntityGroup({
             parentView={parentView}
           >
             {({ stack }) =>
-              entities.map(entity => (
+              entities.map((entity) => (
                 <EntityThumbnail
                   entity={entity}
                   stack={stack}
@@ -58,5 +58,5 @@ EntityGroup.propTypes = {
   title: PropTypes.string,
   to: PropTypes.string,
   children: PropTypes.node,
-  placeholderText: PropTypes.string.isRequired
+  placeholderText: PropTypes.string.isRequired,
 };

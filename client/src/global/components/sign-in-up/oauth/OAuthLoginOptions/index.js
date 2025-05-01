@@ -8,14 +8,14 @@ export default function OAuthLoginOptions() {
   const settings = useFromStore("settings", "select");
 
   const customOAuthProviders = settings?.attributes?.oauth?.length
-    ? settings.attributes.oauth.filter(provider => provider.custom)
+    ? settings.attributes.oauth.filter((provider) => provider.custom)
     : [];
 
   return (
     <Styled.Wrapper>
       <OAuthMonitor />
       <OAuthProviderButton provider="google" icon="socialEmail32" />
-      {customOAuthProviders.map(provider => (
+      {customOAuthProviders.map((provider) => (
         <OAuthProviderButton key={provider.name} provider={provider.name} />
       ))}
     </Styled.Wrapper>
