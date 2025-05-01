@@ -29,7 +29,7 @@ module Utility
       def capture(**options, &)
         raise "Block required" unless block_given?
 
-        new(options).capture(&)
+        new(**options).capture(&)
       end
     end
 
