@@ -44,7 +44,6 @@
     "*.scss": "yarn fix"
   },
   "dependencies": {
-    "@atlaskit/codemod-utils": "^4.2.5",
     "@atlaskit/pragmatic-drag-and-drop": "^1.5.0",
     "@atlaskit/pragmatic-drag-and-drop-auto-scroll": "^2.1.0",
     "@atlaskit/pragmatic-drag-and-drop-hitbox": "^1.0.3",
@@ -92,7 +91,6 @@
     "query-string": "^7.x",
     "react": "^18.x",
     "react-ace": "^14.x",
-    "react-beautiful-dnd": "^13.1.1",
     "react-datepicker": "^8.x",
     "react-dom": "^18.x",
     "react-dropzone": "^14.x",
