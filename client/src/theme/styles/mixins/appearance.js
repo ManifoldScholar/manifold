@@ -400,13 +400,6 @@ export function revealOnFocus(selector) {
         margin-inline-end: -40px;
         transition: margin-inline-end var(--transition-duration-default)
           ${defaultTransitionProps};
-
-        ${respond(
-          `transition: none;
-                margin-inline-end: 0;`,
-          35,
-          "max"
-        )}
       }
 
       &:has(${selector}:focus-within) {
