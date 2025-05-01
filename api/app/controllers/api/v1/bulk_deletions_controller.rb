@@ -42,7 +42,7 @@ module API
         options[:filters] = raw_params.dig(:bulk_delete, :filters)
         options[:raw_ids] = Array(raw_params.dig(:bulk_delete, :ids)).compact_blank
 
-        handle_monadic_operation! "bulk_deletions.handle_request", options do |m|
+        handle_monadic_operation! "bulk_deletions.handle_request", **options do |m|
           m.success do |bulk_deletions|
             render json: { bulk_deletions: bulk_deletions }
           end

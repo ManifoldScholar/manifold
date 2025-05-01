@@ -59,7 +59,7 @@ module API
           user: current_user
         }
 
-        handle_monadic_operation! "reading_groups.clone", options do |m|
+        handle_monadic_operation! "reading_groups.clone", **options do |m|
           m.success do |cloned_reading_group|
             render_single_resource cloned_reading_group
           end
@@ -74,7 +74,7 @@ module API
           user: current_user
         }
 
-        handle_monadic_operation! "reading_groups.join_public", options do |m|
+        handle_monadic_operation! "reading_groups.join_public", **options do |m|
           m.success do |reading_group_membership|
             render_single_resource reading_group_membership, serializer: ::V1::ReadingGroupMembershipSerializer
           end
