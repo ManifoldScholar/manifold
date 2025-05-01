@@ -9,7 +9,7 @@ export default class ListEntitiesListSearch extends PureComponent {
   static propTypes = {
     pagination: PropTypes.object.isRequired,
     showCount: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
-    unit: PropTypes.string
+    unit: PropTypes.string,
   };
 
   static defaultProps = {};

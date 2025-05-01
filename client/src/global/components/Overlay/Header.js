@@ -35,7 +35,7 @@ Header.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
   headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ariaLabel: PropTypes.string
+  ariaLabel: PropTypes.string,
 };
 
 export default Header;

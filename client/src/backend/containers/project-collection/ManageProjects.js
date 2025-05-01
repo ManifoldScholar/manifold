@@ -8,7 +8,7 @@ import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 import EntitiesList, {
   Search,
-  ProjectRow
+  ProjectRow,
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
@@ -20,7 +20,7 @@ function ProjectCollectionManageProjects({
   projectCollection,
   entitiesListSearchProps,
   entitiesListSearchParams,
-  setScreenReaderStatus
+  setScreenReaderStatus,
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -28,17 +28,17 @@ function ProjectCollectionManageProjects({
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 12,
     initFilters: entitiesListSearchParams.projects,
-    initSearchProps: entitiesListSearchProps("projects")
+    initSearchProps: entitiesListSearchProps("projects"),
   });
 
   const { data: collectionProjects, refresh } = useFetch({
     request: [collectionProjectsAPI.index, projectCollection.id],
-    options: { requestKey: requests.beCollectionProjects }
+    options: { requestKey: requests.beCollectionProjects },
   });
 
   const { data: projects, meta: projectsMeta } = useFetch({
     request: [projectsAPI.index, filters, pagination],
-    options: { requestKey: requests.beProjects }
+    options: { requestKey: requests.beProjects },
   });
 
   const addCollectionProject = useApiCallback(collectionProjectsAPI.create);
@@ -46,21 +46,21 @@ function ProjectCollectionManageProjects({
 
   if (!projectsMeta) return null;
 
-  const projectAddMessage = project => {
+  const projectAddMessage = (project) => {
     const title = project.attributes.title;
     return t("project_collections.add_message", {
-      title
+      title,
     });
   };
 
-  const projectRemoveMessage = project => {
+  const projectRemoveMessage = (project) => {
     const title = project.attributes.title;
     return t("project_collections.remove_message", {
-      title
+      title,
     });
   };
 
-  const collectionProjectParams = project => {
+  const collectionProjectParams = (project) => {
     return {
       attributes: {},
       type: "projectCollections",
@@ -68,31 +68,31 @@ function ProjectCollectionManageProjects({
         project: {
           data: {
             type: "projects",
-            id: project.id
-          }
-        }
-      }
+            id: project.id,
+          },
+        },
+      },
     };
   };
 
-  const findCollectionProjectForProject = project => {
-    return collectionProjects.find(cp => {
+  const findCollectionProjectForProject = (project) => {
+    return collectionProjects.find((cp) => {
       return cp.relationships.project.id === project.id;
     });
   };
 
-  const handleProjectAdd = async project => {
+  const handleProjectAdd = async (project) => {
     setScreenReaderStatus(projectAddMessage(project));
 
     await addCollectionProject(
       projectCollection.id,
-      collectionProjectParams(project)
+      collectionProjectParams(project),
     );
 
     refresh();
   };
 
-  const handleProjectRemove = async project => {
+  const handleProjectRemove = async (project) => {
     setScreenReaderStatus(projectRemoveMessage(project));
 
     const collectionProject = findCollectionProjectForProject(project);
@@ -103,7 +103,7 @@ function ProjectCollectionManageProjects({
     refresh();
   };
 
-  const projectCover = props => {
+  const projectCover = (props) => {
     const entity = props.entity;
     if (!entity) return null;
     return (
@@ -136,7 +136,7 @@ function ProjectCollectionManageProjects({
         <p className="list-total" aria-hidden>
           {t("project_collections.added_count", {
             total,
-            count
+            count,
           })}
         </p>
         {/* Better readout for screen readers */}
@@ -148,7 +148,7 @@ function ProjectCollectionManageProjects({
         >
           {t("project_collections.added_count", {
             total,
-            count
+            count,
           })}
         </div>
       </>
@@ -156,20 +156,20 @@ function ProjectCollectionManageProjects({
   };
 
   const selectedProjectIds = collectionProjects.map(
-    cp => cp.relationships.project.id
+    (cp) => cp.relationships.project.id,
   );
 
   const buttonClasses = classNames(
     "button-icon-secondary",
     "button-icon-secondary--full",
     "button-icon-secondary--centered",
-    "button-icon-secondary--smallcaps"
+    "button-icon-secondary--smallcaps",
   );
 
   const iconClasses = classNames(
     "button-icon-secondary__icon",
     "button-icon-secondary__icon--right",
-    "button-icon-secondary__icon--short"
+    "button-icon-secondary__icon--short",
   );
 
   return (
@@ -185,7 +185,7 @@ function ProjectCollectionManageProjects({
         entityComponent={projectCover}
         entityComponentProps={{
           selectedProjectIds,
-          addable: true
+          addable: true,
         }}
         pagination={projectsMeta.pagination}
         showCount={renderProjectCount()}
@@ -208,12 +208,12 @@ ProjectCollectionManageProjects.displayName =
 ProjectCollectionManageProjects.propTypes = {
   projectCollection: PropTypes.object.isRequired,
   entitiesListSearchProps: PropTypes.func.isRequired,
-  entitiesListSearchParams: PropTypes.object.isRequired
+  entitiesListSearchParams: PropTypes.object.isRequired,
 };
 
 export default withFilteredLists(
   withScreenReaderStatus(ProjectCollectionManageProjects),
   {
-    projects: projectFilters()
-  }
+    projects: projectFilters(),
+  },
 );

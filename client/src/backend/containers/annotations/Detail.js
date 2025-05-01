@@ -10,7 +10,7 @@ import lh from "helpers/linkHandler";
 import {
   FlagsList,
   Body,
-  Metadata
+  Metadata,
 } from "backend/components/annotation/detail";
 import withConfirmation from "hoc/withConfirmation";
 
@@ -21,7 +21,7 @@ function AnnotationDetailContainer({ refresh, confirm }) {
 
   const { data: annotation, refresh: refreshAnnotation } = useFetch({
     request: [annotationsAPI.show, id],
-    condition: !!id
+    condition: !!id,
   });
 
   const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
@@ -48,7 +48,7 @@ function AnnotationDetailContainer({ refresh, confirm }) {
     textTitle,
     textSlug,
     textSectionId,
-    readingGroupName
+    readingGroupName,
   } = attributes ?? {};
 
   const { creator, flags } = relationships ?? {};
@@ -57,7 +57,7 @@ function AnnotationDetailContainer({ refresh, confirm }) {
     creator,
     createdAt,
     textTitle,
-    readingGroupName
+    readingGroupName,
   };
 
   const resolveFlags = useApiCallback(annotationsAPI.resolveAllFlags);
@@ -78,12 +78,12 @@ function AnnotationDetailContainer({ refresh, confirm }) {
           label: "actions.view",
           route: "readerSection",
           routeParams: [textSlug, textSectionId, `#annotation-${id}`],
-          icon: "eyeOpen32"
+          icon: "eyeOpen32",
         }
       : {
           label: "records.comments.view_unavailable",
           icon: "eyeClosed32",
-          disabled: true
+          disabled: true,
         };
 
   return id ? (
@@ -97,7 +97,7 @@ function AnnotationDetailContainer({ refresh, confirm }) {
             icon: "delete24",
             ability: "delete",
             entity: annotation,
-            onClick: onDelete
+            onClick: onDelete,
           },
           ...(unresolvedFlagsCount
             ? [
@@ -106,10 +106,10 @@ function AnnotationDetailContainer({ refresh, confirm }) {
                   icon: "circleMinus24",
                   ability: "update",
                   entity: annotation,
-                  onClick: handleResolveFlags
-                }
+                  onClick: handleResolveFlags,
+                },
               ]
-            : [])
+            : []),
         ]}
       />
       {!!flagsCount && (
@@ -131,5 +131,5 @@ AnnotationDetailContainer.displayName = "Annotations.AnnotationDetail";
 
 AnnotationDetailContainer.propTypes = {
   refresh: PropTypes.func.isRequired,
-  confirm: PropTypes.func.isRequired
+  confirm: PropTypes.func.isRequired,
 };

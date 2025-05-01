@@ -2,9 +2,11 @@ class AnnotationsFilter {
   constructor(annotations, filters) {
     this.annotations = annotations;
     this.filters = filters;
-    this.enabledGroups = Object.keys(this.filters.readingGroups).filter(id => {
-      return this.filters.readingGroups[id] === true;
-    });
+    this.enabledGroups = Object.keys(this.filters.readingGroups).filter(
+      (id) => {
+        return this.filters.readingGroups[id] === true;
+      },
+    );
     this.showYourPublicAnnotations =
       this.enabledGroups.length === 0 ||
       this.enabledGroups.includes("all") ||
@@ -62,12 +64,12 @@ class AnnotationsFilter {
 
   filter() {
     if (!this.annotations) return [];
-    return this.annotations.filter(annotation => {
+    return this.annotations.filter((annotation) => {
       const {
         format,
         readingGroupId,
         currentUserIsCreator: isCreator,
-        private: isPrivate
+        private: isPrivate,
       } = annotation.attributes;
       const isHighlight = format === "highlight";
       const isAnnotation = format === "annotation";

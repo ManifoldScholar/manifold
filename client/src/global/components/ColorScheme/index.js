@@ -40,7 +40,7 @@ class ColorScheme extends Component {
 
   get hasCustomAccentColor() {
     return Boolean(
-      this.accentColor() && colorHelper(this.accentColor()).isValid()
+      this.accentColor() && colorHelper(this.accentColor()).isValid(),
     );
   }
 
@@ -49,20 +49,18 @@ class ColorScheme extends Component {
       "--color-header-background": "headerBackgroundColor",
       "--color-header-foreground": "headerForegroundColor",
       "--color-header-foreground-active": "headerForegroundActiveColor",
-      "--color-header-foreground-hover": "headerForegroundActiveColor"
+      "--color-header-foreground-hover": "headerForegroundActiveColor",
     };
   }
 
   lighten(hexValue) {
-    return `${colorHelper(hexValue)
-      .lighten(5)
-      .toHexString()}`;
+    return `${colorHelper(hexValue).lighten(5).toHexString()}`;
   }
 
   setColorScheme() {
     try {
       this.colorSchemeGenerator.updateBaseColor(
-        this.hasCustomAccentColor ? this.accentColor() : this.defaultBaseColor
+        this.hasCustomAccentColor ? this.accentColor() : this.defaultBaseColor,
       );
       this.colorSchemeGenerator.setColorScheme();
     } catch (error) {
@@ -74,7 +72,7 @@ class ColorScheme extends Component {
 
   setOtherColorVars() {
     try {
-      Object.keys(this.otherColorVars).forEach(varName => {
+      Object.keys(this.otherColorVars).forEach((varName) => {
         const stringValue = this.themeValue(this.otherColorVars[varName]);
 
         if (!stringValue) return;
@@ -86,7 +84,7 @@ class ColorScheme extends Component {
         if (varName === "--color-header-background") {
           this.colorSchemeGenerator.setCustomProperty(
             `${varName}-light`,
-            this.lighten(stringValue)
+            this.lighten(stringValue),
           );
         }
       });
@@ -115,7 +113,7 @@ class ColorScheme extends Component {
   otherColorVarsAsCSS() {
     const rules = [];
     try {
-      Object.keys(this.otherColorVars).forEach(varName => {
+      Object.keys(this.otherColorVars).forEach((varName) => {
         const stringValue = this.themeValue(this.otherColorVars[varName]);
 
         if (!stringValue) return;

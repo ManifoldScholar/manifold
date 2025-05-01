@@ -13,6 +13,6 @@ export const Wrapper = styled.div`
       margin-inline: calc(-1 * var(--container-padding-inline-fluid));
     `,
     60,
-    "max"
+    "max",
   )}
 `;

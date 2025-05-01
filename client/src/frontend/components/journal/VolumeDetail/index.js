@@ -25,7 +25,7 @@ function VolumeDetail({ journal, volume }) {
         placeholderText={t("placeholders.volume_no_issues")}
       >
         {!!issues.length &&
-          issues.map(issue => (
+          issues.map((issue) => (
             <Styled.IssueWrapper key={issue.id}>
               <ThumbnailGrid minColumns={4} minItemWidth="210px">
                 {({ stack }) => (
@@ -55,7 +55,7 @@ VolumeDetail.displayName = "Journal.VolumeDetail";
 
 VolumeDetail.propTypes = {
   journal: PropTypes.object.isRequired,
-  volume: PropTypes.object.isRequired
+  volume: PropTypes.object.isRequired,
 };
 
 export default VolumeDetail;

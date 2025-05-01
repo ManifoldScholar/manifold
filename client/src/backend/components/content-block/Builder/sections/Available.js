@@ -14,11 +14,11 @@ class ProjectContentSectionsAvailable extends PureComponent {
     onClickAdd: PropTypes.func,
     headerId: PropTypes.string,
     instructionsId: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    currentBlocks: []
+    currentBlocks: [],
   };
 
   get types() {

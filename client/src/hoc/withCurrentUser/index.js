@@ -8,7 +8,7 @@ function getDisplayName(WrappedComponent) {
 
 export default function withCurrentUser(WrappedComponent) {
   const displayName = `HigherOrder.WithCurrentUser('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   function WithCurrentUser(props) {

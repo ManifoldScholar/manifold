@@ -5,11 +5,9 @@ import transform from "lodash/transform";
 
 class Resolver {
   blockComponentsByType() {
-    /* eslint-disable no-param-reassign */
     return transform(blocks, (result, val, key) => {
       result[contentBlockHelpers.componentKeyToType(key)] = val;
     });
-    /* eslint-enable no-param-reassign */
   }
 
   typeToBlockComponent(type) {

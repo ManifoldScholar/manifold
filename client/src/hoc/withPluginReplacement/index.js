@@ -10,11 +10,11 @@ function getDisplayName(WrappedComponent) {
 
 export default function withPluginReplacement(WrappedComponent, region) {
   const displayName = `withPluginReplacement('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithPluginReplacement extends React.PureComponent {
-    static mapStateToProps = state => {
+    static mapStateToProps = (state) => {
       const components = state.plugin.components;
       const config = components[region];
       if (!config) return {};
@@ -28,7 +28,7 @@ export default function withPluginReplacement(WrappedComponent, region) {
     static displayName = displayName;
 
     static propTypes = {
-      replacement: PropTypes.func
+      replacement: PropTypes.func,
     };
 
     render() {
@@ -40,7 +40,7 @@ export default function withPluginReplacement(WrappedComponent, region) {
   }
 
   const ConnectedWithPluginReplacement = connect(
-    WithPluginReplacement.mapStateToProps
+    WithPluginReplacement.mapStateToProps,
   )(WithPluginReplacement);
 
   return hoistStatics(ConnectedWithPluginReplacement, WithPluginReplacement);

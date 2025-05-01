@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import {
   AnalyticsFactory,
   Grid,
-  RangePicker
+  RangePicker,
 } from "backend/components/analytics";
 import PageHeader from "backend/components/layout/PageHeader";
 import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
@@ -19,7 +19,7 @@ class AnalyticsGlobalContainer extends PureComponent {
     updateAnalyticsRange: PropTypes.func.isRequired,
     analyticsStartDate: PropTypes.instanceOf(Date),
     analyticsEndDate: PropTypes.instanceOf(Date),
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -33,7 +33,7 @@ class AnalyticsGlobalContainer extends PureComponent {
       statistics,
       updateAnalyticsRange,
       analyticsStartDate,
-      analyticsEndDate
+      analyticsEndDate,
     } = this.props;
 
     return (

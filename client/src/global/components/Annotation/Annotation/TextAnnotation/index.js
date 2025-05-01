@@ -14,13 +14,13 @@ class Annotation extends PureComponent {
     displayFormat: PropTypes.string,
     deleteHandler: PropTypes.func,
     showCommentsToggleAsBlock: PropTypes.bool,
-    refresh: PropTypes.func
+    refresh: PropTypes.func,
   };
 
   get annotationListClassNames() {
     return classNames({
       "annotation-list": true,
-      "annotation-list--dark": this.props.displayFormat === "fullPage"
+      "annotation-list--dark": this.props.displayFormat === "fullPage",
     });
   }
 

@@ -76,6 +76,6 @@ export const MetaTwo = styled.div`
       margin-inline-end: 12px;
     }
     `,
-    50
+    50,
   )};
 `;

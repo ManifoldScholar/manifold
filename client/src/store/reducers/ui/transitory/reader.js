@@ -2,7 +2,7 @@ import { handleActions } from "redux-actions";
 
 export const initialState = {
   activeAnnotation: null,
-  activeAnnotationPassive: false
+  activeAnnotationPassive: false,
 };
 
 const setActiveAnnotation = (state, action) => {
@@ -13,7 +13,7 @@ const setActiveAnnotation = (state, action) => {
   } else {
     newState = {
       activeAnnotation: payload.annotationId,
-      activeAnnotationPassive: payload.passive
+      activeAnnotationPassive: payload.passive,
     };
   }
   return { ...state, ...newState };
@@ -21,7 +21,7 @@ const setActiveAnnotation = (state, action) => {
 
 export default handleActions(
   {
-    SET_ACTIVE_ANNOTATION: setActiveAnnotation
+    SET_ACTIVE_ANNOTATION: setActiveAnnotation,
   },
-  initialState
+  initialState,
 );

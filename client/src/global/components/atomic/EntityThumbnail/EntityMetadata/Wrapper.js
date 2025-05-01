@@ -30,7 +30,7 @@ export default function Wrapper({
         additionalData = entity.attributes.journalVolumeNumber
           ? t("journals.volume_issue_number", {
               volNum: entity.attributes.journalVolumeNumber,
-              issNum: entity.attributes.number
+              issNum: entity.attributes.number,
             })
           : t("journals.issue_number", { issNum: entity.attributes.number });
         bumpDraftDown = true;
@@ -38,7 +38,7 @@ export default function Wrapper({
       // Catch thumbnails rendered in context on a Journal or Volume Detail
       else if (parentView) {
         title = t("journals.issue_number", {
-          issNum: entity.attributes.number
+          issNum: entity.attributes.number,
         });
       }
       // Issues rendered on the Homepage or Journals/Issues List
@@ -47,7 +47,7 @@ export default function Wrapper({
         additionalData = entity.attributes.journalVolumeNumber
           ? t("journals.volume_issue_number", {
               volNum: entity.attributes.journalVolumeNumber,
-              issNum: entity.attributes.number
+              issNum: entity.attributes.number,
             })
           : t("journals.issue_number", { issNum: entity.attributes.number });
         bumpDraftDown = true;
@@ -69,7 +69,7 @@ export default function Wrapper({
         additionalData,
         draft,
         bumpDraftDown,
-        recentlyUpdated
+        recentlyUpdated,
       };
     }
     const data = entity?.attributes;
@@ -77,27 +77,25 @@ export default function Wrapper({
     const subtitle = data.subtitle;
     const description = !hideDescription && data.description;
 
-    /* eslint-disable no-nested-ternary */
     const additionalData =
       "creatorNames" in data
         ? data.creatorNames
         : entity.relationships?.creators?.length > 0
-        ? entity.relationships.creators
-            .map(maker => maker.attributes.fullName)
-            .join(", ")
-        : null;
-    /* eslint-enable no-nested-ternary */
+          ? entity.relationships.creators
+              .map((maker) => maker.attributes.fullName)
+              .join(", ")
+          : null;
 
     const draft = data.draft;
     const showUpdated = !data.finished && !!data.updated;
-    /* eslint-disable no-nested-ternary */
+
     const date =
       hideDate || draft
         ? null
         : showUpdated
-        ? data.updatedAt
-        : data.publicationDate;
-    /* eslint-disable no-nested-ternary */
+          ? data.updatedAt
+          : data.publicationDate;
+
     const prefix = showUpdated
       ? t("dates.updated_title_case")
       : t("dates.published_title_case");
@@ -111,7 +109,7 @@ export default function Wrapper({
       subtitle,
       draft,
       description,
-      recentlyUpdated
+      recentlyUpdated,
     };
   };
 

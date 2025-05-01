@@ -20,24 +20,24 @@ function SearchResultsTypeTextSection({ result, highlightedAttribute }) {
     searchableId,
     searchableType,
     title,
-    parents: { text }
+    parents: { text },
   } = result.attributes ?? {};
 
   const collectable = {
     type: searchableType,
     id: searchableId,
-    attributes: { title }
+    attributes: { title },
   };
 
   const {
-    attributes: { textNodes }
+    attributes: { textNodes },
   } = result;
   const excerpts = (() => {
     if (!textNodes.total.value) return [];
     const { hits } = textNodes;
-    return hits.map(h => ({
+    return hits.map((h) => ({
       ...h,
-      url: lh.link("readerSection", text.slug, model.id, `#node-${h.nodeUuid}`)
+      url: lh.link("readerSection", text.slug, model.id, `#node-${h.nodeUuid}`),
     }));
   })();
 
@@ -49,7 +49,7 @@ function SearchResultsTypeTextSection({ result, highlightedAttribute }) {
     description: highlightedAttribute("fullText"),
     label: t("glossary.full_text_one"),
     collectable,
-    excerpts
+    excerpts,
   };
 
   return (
@@ -72,7 +72,7 @@ SearchResultsTypeTextSection.displayName = "Search.Results.Type.TextSection";
 
 SearchResultsTypeTextSection.propTypes = {
   result: PropTypes.object,
-  highlightedAttribute: PropTypes.func.isRequired
+  highlightedAttribute: PropTypes.func.isRequired,
 };
 
 export default withSearchResultHelper(SearchResultsTypeTextSection);

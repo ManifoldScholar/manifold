@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Collapse from "global/components/Collapse";
 import HeaderDetail from "./BlockHeaderDetail";
 
-const Block = props => {
+const Block = (props) => {
   const {
     title,
     titleId,
@@ -12,10 +12,10 @@ const Block = props => {
     ariaControls,
     ariaExpanded,
     children,
-    initialVisible
+    initialVisible,
   } = props;
 
-  const onDrawerOpen = event => {
+  const onDrawerOpen = (event) => {
     event.preventDefault();
     onEdit();
   };
@@ -59,8 +59,8 @@ Block.propTypes = {
   ariaExpanded: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
+    PropTypes.node,
+  ]),
 };
 
 Block.displayName = "Hero.Builder.Block";

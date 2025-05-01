@@ -6,7 +6,7 @@ import {
   fluidScale,
   defaultTransitionProps,
   utilityPrimary,
-  listUnstyled
+  listUnstyled,
 } from "theme/styles/mixins";
 
 export const Block = styled("div", transientOptions)`
@@ -90,7 +90,7 @@ export const Subtitle = styled.span`
   ${respond(
     `display: inline-block;
     padding-top: 0.143em;`,
-    80
+    80,
   )}
 `;
 
@@ -140,7 +140,7 @@ export const Status = styled("div", transientOptions)`
               margin-left: 12px;
             }
           `,
-          60
+          60,
         )}
 `;
 
@@ -173,7 +173,7 @@ export const Meta = styled.div`
       margin-top: 4px;
       text-align: right;
     `,
-    60
+    60,
   )}
 `;
 

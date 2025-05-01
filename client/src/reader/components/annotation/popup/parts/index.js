@@ -7,5 +7,5 @@ export default {
   Menu,
   MenuItem,
   Panel,
-  RGMenuItem
+  RGMenuItem,
 };

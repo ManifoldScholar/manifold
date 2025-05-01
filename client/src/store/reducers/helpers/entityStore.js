@@ -29,7 +29,7 @@ const responseHelper = {
   shouldTouchResponses,
   shouldOverwritePartials,
   isCollectionResponse,
-  isEntityResponse
+  isEntityResponse,
 };
 
 export default { stateTransformer, responseHelper };

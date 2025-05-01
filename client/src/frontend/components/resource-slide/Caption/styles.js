@@ -25,7 +25,7 @@ export const Title = styled.h3`
     margin-block-end: 0.364em;
     font-size: 22px;
     color: var(--color-base-neutral05);`,
-    60
+    60,
   )}
 
   .overlay-full & {
@@ -108,7 +108,7 @@ const linkStyles = `
     display: inline;
     margin-block-start: 0;
     margin-inline-end: 22px;`,
-    40
+    40,
   )}
 `;
 

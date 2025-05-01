@@ -9,13 +9,13 @@ function LinkMenu({
   actions,
   activeEvent,
   clearSelection,
-  annotationHref
+  annotationHref,
 }) {
   const { menus, activeMenu, handleKeyDown } = useAnnotationMenu({
     menuArray: ["main"],
     defaultMenu: "main",
     visible,
-    clearSelection
+    clearSelection,
   });
 
   return (
@@ -38,7 +38,7 @@ LinkMenu.propTypes = {
   actions: PropTypes.object.isRequired,
   direction: PropTypes.oneOf(["up", "down"]),
   visible: PropTypes.bool,
-  annotationHref: PropTypes.string
+  annotationHref: PropTypes.string,
 };
 
 export default LinkMenu;

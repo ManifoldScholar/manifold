@@ -30,7 +30,7 @@ class ProxyHelper {
     this.defineStaticProxy(
       app,
       "/browser.config.js",
-      `${this.wwwTarget}/browser.config.js`
+      `${this.wwwTarget}/browser.config.js`,
     );
     this.defineStaticProxy(app, "/build", `${this.wwwTarget}/build`);
     this.defineStaticProxy(app, "/static", `${this.wwwTarget}/static`);
@@ -38,7 +38,7 @@ class ProxyHelper {
 
   defineStaticProxy(app, proxyPath, target) {
     ch.background(
-      `${this.name} server will proxy ${proxyPath} requests to ${target}.`
+      `${this.name} server will proxy ${proxyPath} requests to ${target}.`,
     );
     app.use(proxyPath, serveStatic(target));
   }
@@ -47,7 +47,7 @@ class ProxyHelper {
     if (isRegExp(proxyPath))
       return this.defineRegExpProxy(app, proxyPath, target, logLevel);
     ch.background(
-      `${this.name} server will proxy ${proxyPath} requests to ${target}.`
+      `${this.name} server will proxy ${proxyPath} requests to ${target}.`,
     );
     app.use(proxyPath, proxy({ target, logLevel }));
   }
@@ -57,7 +57,7 @@ class ProxyHelper {
     ch.background(
       `${
         this.name
-      } server will proxy ${proxyPath.toString()} requests to ${target}.`
+      } server will proxy ${proxyPath.toString()} requests to ${target}.`,
     );
     app.use((req, res, next) => {
       return proxyPath.test(req.url.toLowerCase())

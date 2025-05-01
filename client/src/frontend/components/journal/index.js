@@ -11,5 +11,5 @@ export default {
   VolumeDetail,
   VolumeList,
   IssueCount,
-  JournalIssueCount
+  JournalIssueCount,
 };

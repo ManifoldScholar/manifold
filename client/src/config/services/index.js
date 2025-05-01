@@ -33,8 +33,8 @@ const serviceConfig = {
   cable: browserCableUrl,
   client: {
     domain,
-    url
-  }
+    url,
+  },
 };
 
 if (isServer) {
@@ -45,7 +45,7 @@ if (isServer) {
     sparePort: port + 1,
     assetPort: port + 2,
     rescueEnabled: toBoolean(process.env.SSR_RESCUE),
-    proxiesEnabled: toBoolean(process.env.CLIENT_SERVER_PROXIES)
+    proxiesEnabled: toBoolean(process.env.CLIENT_SERVER_PROXIES),
   };
 }
 

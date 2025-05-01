@@ -23,7 +23,7 @@ export class ActionCalloutForm extends Component {
     history: PropTypes.object.isRequired,
     actionCallout: PropTypes.object.isRequired,
     refreshActionCallouts: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   onDelete = () => {
@@ -36,12 +36,12 @@ export class ActionCalloutForm extends Component {
   onConfirmedDelete = () => {
     const call = actionCalloutsAPI.destroy(this.actionCallout.id);
     const options = {
-      removes: { type: "actionCallout", id: this.actionCallout.id }
+      removes: { type: "actionCallout", id: this.actionCallout.id },
     };
     const destroyRequest = request(
       call,
       requests.beActionCalloutDestroy,
-      options
+      options,
     );
     this.props.dispatch(destroyRequest).promise.then(() => {
       this.closeDrawer();
@@ -74,8 +74,8 @@ export class ActionCalloutForm extends Component {
         onClick: this.onDelete,
         label: this.props.t("actions.delete"),
         icon: "delete32",
-        className: "utility-button__icon--notice"
-      }
+        className: "utility-button__icon--notice",
+      },
     ];
   }
 
@@ -84,14 +84,14 @@ export class ActionCalloutForm extends Component {
     if (this.calloutable.type === "journals") {
       return [
         { label: t("glossary.link_title_case_one"), value: "link" },
-        { label: t("actions.download"), value: "download" }
+        { label: t("actions.download"), value: "download" },
       ];
     }
     return [
       { label: t("glossary.link_title_case_one"), value: "link" },
       { label: t("actions.read"), value: "read" },
       { label: t("glossary.table_of_contents_title_case"), value: "toc" },
-      { label: t("actions.download"), value: "download" }
+      { label: t("actions.download"), value: "download" },
     ];
   }
 
@@ -100,16 +100,16 @@ export class ActionCalloutForm extends Component {
     return [
       {
         label: t("layout.visibility_options.always"),
-        value: "always"
+        value: "always",
       },
       {
         label: t("layout.visibility_options.authorized"),
-        value: "authorized"
+        value: "authorized",
       },
       {
         label: t("layout.visibility_options.unauthorized"),
-        value: "unauthorized"
-      }
+        value: "unauthorized",
+      },
     ];
   }
 
@@ -117,11 +117,11 @@ export class ActionCalloutForm extends Component {
     const options = [
       {
         label: this.props.t("call_to_action.text_select_placeholder"),
-        value: ""
-      }
+        value: "",
+      },
     ];
     if (!this.calloutable.relationships.texts) return [];
-    const texts = this.calloutable.relationships.texts.map(text => {
+    const texts = this.calloutable.relationships.texts.map((text) => {
       return { label: text.attributes.title, value: text };
     });
     return options.concat(texts);
@@ -131,7 +131,7 @@ export class ActionCalloutForm extends Component {
     const { closeRoute, refreshActionCallouts } = this.props;
     if (refreshActionCallouts) refreshActionCallouts();
     return this.props.history.push(lh.link(closeRoute, this.calloutable.id), {
-      noScroll: true
+      noScroll: true,
     });
   };
 
@@ -151,7 +151,7 @@ export class ActionCalloutForm extends Component {
     return kind === "download";
   }
 
-  create = model => {
+  create = (model) => {
     const adjusted = { ...model };
     const createFunc =
       this.calloutable.type === "journals"
@@ -178,7 +178,7 @@ export class ActionCalloutForm extends Component {
           className="form-secondary"
           notificationScope="drawer"
         >
-          {getModelValue => (
+          {(getModelValue) => (
             <>
               <Form.TextInput
                 label={t("call_to_action.input_labels.title")}
@@ -191,7 +191,7 @@ export class ActionCalloutForm extends Component {
                 name="attributes[kind]"
               />
               {this.shouldShowVisibilityForKind(
-                getModelValue("attributes[kind]")
+                getModelValue("attributes[kind]"),
               ) && (
                 <Form.Select
                   label={t("call_to_action.input_labels.visibility")}
@@ -200,7 +200,7 @@ export class ActionCalloutForm extends Component {
                 />
               )}
               {this.shouldShowTextsForKind(
-                getModelValue("attributes[kind]")
+                getModelValue("attributes[kind]"),
               ) && (
                 <Form.Select
                   label={t("call_to_action.input_labels.text")}
@@ -217,7 +217,7 @@ export class ActionCalloutForm extends Component {
                 />
               )}
               {this.shouldShowAttachmentForKind(
-                getModelValue("attributes[kind]")
+                getModelValue("attributes[kind]"),
               ) && (
                 <Form.Upload
                   layout="portrait"
@@ -238,5 +238,5 @@ export class ActionCalloutForm extends Component {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ActionCalloutForm))
+  withConfirmation(connectAndFetch(ActionCalloutForm)),
 );

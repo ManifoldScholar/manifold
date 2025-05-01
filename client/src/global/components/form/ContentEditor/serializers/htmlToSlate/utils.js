@@ -7,23 +7,24 @@ const CONTEXT_VALUES = {
   block: "block",
   inline: "inline",
   listItem: "list",
-  default: null
+  default: null,
 };
 
-export const addSlateOnlySpan = node => {
+export const addSlateOnlySpan = (node) => {
   return jsx("element", { type: "span", slateOnly: true }, [node]);
 };
 
-const isInlineMath = node => {
+const isInlineMath = (node) => {
   return node.type === "math" && node.htmlAttrs?.display === "inline";
 };
 
-const isInline = node => isInlineMath(node) || inlineNodes.includes(node.type);
+const isInline = (node) =>
+  isInlineMath(node) || inlineNodes.includes(node.type);
 
 const hasInvalidChildren = (children, context) => {
-  const hasTextChild = children.find(c => c.text);
-  const hasBlockChild = children.find(c => c.type && !isInline(c));
-  const hasInlineChild = children.find(c => isInline(c));
+  const hasTextChild = children.find((c) => c.text);
+  const hasBlockChild = children.find((c) => c.type && !isInline(c));
+  const hasInlineChild = children.find((c) => isInline(c));
 
   if (context === CONTEXT_VALUES.block || context === CONTEXT_VALUES.listItem) {
     if (!hasBlockChild) return false;
@@ -38,7 +39,7 @@ const hasInvalidChildren = (children, context) => {
   return false;
 };
 
-const spaceInlineChildren = children => {
+const spaceInlineChildren = (children) => {
   const adjustedChildren = children
     .map((c, i) => {
       if (!isInline(c)) return c;
@@ -48,7 +49,7 @@ const spaceInlineChildren = children => {
     })
     .flat();
   const hasInlineLastChild = isInline(
-    adjustedChildren[adjustedChildren.length - 1]
+    adjustedChildren[adjustedChildren.length - 1],
   );
   return hasInlineLastChild
     ? [...adjustedChildren, jsx("text", { text: "" }, [])]
@@ -75,10 +76,10 @@ const isInlineImage = (prev, next) => {
 
 const wrapBlockChildren = (children, isList) => {
   if (isList) {
-    return children.map(c =>
+    return children.map((c) =>
       isInline(c) || c.text
         ? jsx("element", { type: "list-sibling", slateOnly: true }, c)
-        : c
+        : c,
     );
   }
   return children.map((c, i) => {
@@ -108,17 +109,17 @@ export const normalizeChildren = (children, context) => {
   }
 
   const normalizedChildren = spaceInlineChildren(
-    wrapBlockChildren(children, isList)
+    wrapBlockChildren(children, isList),
   );
 
   if (isBlock || isList) return [normalizedChildren, null];
   return [normalizedChildren, "div"];
 };
 
-export const replacePreTags = html =>
+export const replacePreTags = (html) =>
   html.replace(/<pre[^>]*>/g, "<code>").replace(/<\/pre>/g, "</code>");
 
-export const addTextNodeToEmptyChildren = element => {
+export const addTextNodeToEmptyChildren = (element) => {
   return element.children?.length === 0
     ? { ...element, children: [{ text: "" }] }
     : element;
@@ -131,10 +132,10 @@ export const markTags = {
   i: "italic",
   s: "strikethrough",
   strong: "bold",
-  u: "underline"
+  u: "underline",
 };
 
-export const getMarkAttributesForTag = tag => {
+export const getMarkAttributesForTag = (tag) => {
   if (Object.keys(markTags).includes(tag)) return { [markTags[tag]]: true };
 };
 
@@ -151,41 +152,41 @@ export const assignTextMarkAttributes = (el, attrs) => {
     }
     return assignTextMarkAttributes(onlyChild, {
       ...attrs,
-      ...getMarkAttributesForTag(el.name)
+      ...getMarkAttributesForTag(el.name),
     });
   }
 
-  return children.map(c =>
+  return children.map((c) =>
     assignTextMarkAttributes(c, {
       ...attrs,
-      ...getMarkAttributesForTag(el.name)
-    })
+      ...getMarkAttributesForTag(el.name),
+    }),
   );
 };
 
-export const isOnlyFormat = str => {
+export const isOnlyFormat = (str) => {
   return /^[\n\t\r]+\s*$/.test(str);
 };
 
-export const replaceFormatChars = str => {
+export const replaceFormatChars = (str) => {
   return str.replace(/[\t\n\r]/g, "");
 };
 
-export const getNextNonFormat = el => {
+export const getNextNonFormat = (el) => {
   if (!el?.next) return {};
   if (el.next.tag) return el.next;
   if (!isOnlyFormat(el.next.data)) return el.next;
   return getNextNonFormat(el.next.next);
 };
 
-export const getPrevNonFormat = el => {
+export const getPrevNonFormat = (el) => {
   if (!el?.prev) return {};
   if (el.prev.tag) return el.prev;
   if (!isOnlyFormat(el.prev.data)) return el.prev;
   return getNextNonFormat(el.prev.prev);
 };
 
-export const getSlateNodeContext = tag => {
+export const getSlateNodeContext = (tag) => {
   if (!tag) return CONTEXT_VALUES.default;
   if (tag === "li") return CONTEXT_VALUES.listItem;
   if (inlineNodes.includes(tag) || markElements.includes(tag))
@@ -193,8 +194,8 @@ export const getSlateNodeContext = tag => {
   return CONTEXT_VALUES.block;
 };
 
-export const removeFormatOnlyChildren = el => {
-  const filteredChildren = el.children.map(c => {
+export const removeFormatOnlyChildren = (el) => {
+  const filteredChildren = el.children.map((c) => {
     if (c.type === ElementType.Text) {
       const rawText = c.data;
       if (isOnlyFormat(rawText)) return null;
@@ -207,9 +208,9 @@ export const removeFormatOnlyChildren = el => {
   return filteredChildren.filter(Boolean);
 };
 
-export const isEmptyParagraph = el => {
+export const isEmptyParagraph = (el) => {
   const hasAllTextChildren = el.children.every(
-    c => c.type === "p" || c.type === "span" || c.text
+    (c) => c.type === "p" || c.type === "span" || c.text,
   );
   return hasAllTextChildren && !textContent(el);
 };

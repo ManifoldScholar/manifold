@@ -19,7 +19,7 @@ export default function Logout() {
     <Styled.Wrapper>
       <div>
         {t("forms.signin_overlay.current_user", {
-          name: currentUser?.attributes?.fullName
+          name: currentUser?.attributes?.fullName,
         })}
       </div>
       <button

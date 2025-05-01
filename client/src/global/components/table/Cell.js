@@ -13,11 +13,11 @@ export default class TableCell extends React.PureComponent {
     cellSize: PropTypes.oneOf(["cellTruncate", "cellFitContent"]),
     columnPosition: PropTypes.oneOf(["all", "left", "right"]),
     viewportVisibility: PropTypes.oneOf(["hideMobile"]),
-    maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   };
 
   static defaultProps = {
-    align: "left"
+    align: "left",
   };
 
   static displayName = "GenericTable.Cell";
@@ -38,17 +38,13 @@ export default class TableCell extends React.PureComponent {
       "table__list-value": !this.isTable,
       "table__cell--fit-content": cellSize === "cellFitContent",
       "table__cell--truncate": cellSize === "cellTruncate",
-      "table__cell--header-has-icon": !isNil(headerIcon)
+      "table__cell--header-has-icon": !isNil(headerIcon),
     });
   }
 
   get listItemContainerClassNames() {
-    const {
-      columnPosition,
-      rowPosition,
-      textStyle,
-      viewportVisibility
-    } = this.props;
+    const { columnPosition, rowPosition, textStyle, viewportVisibility } =
+      this.props;
     return classNames({
       "table__list-item-container": !textStyle,
       "table__list-header-container": textStyle,
@@ -57,7 +53,7 @@ export default class TableCell extends React.PureComponent {
       "table__grid-item-colspan": columnPosition === "all",
       "table__grid-item-row-2": rowPosition === 2,
       "table__grid-item-row-3": rowPosition === 3,
-      "table__hide-mobile": viewportVisibility === "hideMobile"
+      "table__hide-mobile": viewportVisibility === "hideMobile",
     });
   }
 

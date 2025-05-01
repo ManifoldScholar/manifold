@@ -20,18 +20,18 @@ function ContributorRow({ entity, onDelete, ...props }) {
 
   const additionalProps = {
     title: attributes.makerName,
-    subtitle: roles.map(r => capitalize(r).replaceAll("_", " ")).join(", "),
+    subtitle: roles.map((r) => capitalize(r).replaceAll("_", " ")).join(", "),
     figure: <EntityThumbnail.Maker entity={maker} />,
     figureSize: "small",
     figureShape: "circle",
     onRowClick: lh.link("backendRecordsMaker", makerId),
-    rowClickMode: "inline"
+    rowClickMode: "inline",
   };
 
   const utility = (
     <button
       className="entity-row__utility-button"
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         onDelete(makerId);
       }}
@@ -48,7 +48,7 @@ ContributorRow.displayName = "EntitiesList.Entity.ContributorRow";
 
 ContributorRow.propTypes = {
   entity: PropTypes.object,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
 };
 
 export default ContributorRow;

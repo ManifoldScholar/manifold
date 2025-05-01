@@ -41,6 +41,6 @@ class DefaultFooter extends Component {
 export default withRouter(
   withPluginReplacement(
     DefaultFooter,
-    "Global.Components.Footers.DefaultFooter"
-  )
+    "Global.Components.Footers.DefaultFooter",
+  ),
 );

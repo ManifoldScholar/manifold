@@ -7,14 +7,13 @@ export default class AnnotationGroupedBySubject extends PureComponent {
 
   static propTypes = {
     annotations: PropTypes.array.isRequired,
-    render: PropTypes.func.isRequired
+    render: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    annotations: []
+    annotations: [],
   };
 
-  /* eslint-disable no-param-reassign */
   get grouped() {
     const grouped = this.props.annotations.reduce((memo, annotation) => {
       const key = hash(annotation.attributes.subject.trim());
@@ -28,8 +27,8 @@ export default class AnnotationGroupedBySubject extends PureComponent {
             startNode: annotation.attributes.startNode,
             startChar: annotation.attributes.startChar,
             endNode: annotation.attributes.endNode,
-            endChar: annotation.attributes.endChar
-          }
+            endChar: annotation.attributes.endChar,
+          },
         };
       }
       memo[key].annotations.push(annotation);
@@ -37,9 +36,8 @@ export default class AnnotationGroupedBySubject extends PureComponent {
     }, {});
     return Object.values(grouped);
   }
-  /* eslint-enable no-param-reassign */
 
   render() {
-    return <>{this.grouped.map(group => this.props.render(group))}</>;
+    return <>{this.grouped.map((group) => this.props.render(group))}</>;
   }
 }

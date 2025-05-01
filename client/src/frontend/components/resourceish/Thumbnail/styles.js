@@ -4,7 +4,7 @@ import {
   respond,
   fluidScale,
   transparentize,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export const Wrapper = styled("article", transientOptions)`
@@ -15,10 +15,14 @@ export const Wrapper = styled("article", transientOptions)`
   height: var(--Thumbnail-height);
   text-align: var(--Thumbnail-text-align, center);
   color: var(--Thumbnail-color);
-  background-color: var(--Thumbnail-background-color, var(--box-medium-bg-color));
+  background-color: var(
+    --Thumbnail-background-color,
+    var(--box-medium-bg-color)
+  );
   border-radius: var(--Thumbnail-border-radius);
   box-shadow: var(--Thumbnail-box-shadow);
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     box-shadow ${defaultTransitionProps};
 
   ${({ $hasBgImage, $minimal, $iconOnly }) =>
@@ -94,10 +98,10 @@ export const Wrapper = styled("article", transientOptions)`
     height: 100%;
     content: "";
     display: var(--Thumbnail-before-display, none);
-    background-color: var(--Thumbnail-before-background-color, ${transparentize(
-      "neutral90",
-      0.3
-    )});
+    background-color: var(
+      --Thumbnail-before-background-color,
+      ${transparentize("neutral90", 0.3)}
+    );
     border-radius: var(--Thumbnail-border-radius);
     transition: background-color ${defaultTransitionProps};
   }

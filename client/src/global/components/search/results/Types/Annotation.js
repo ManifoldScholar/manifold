@@ -19,7 +19,7 @@ function SearchResultsTypeAnnotation({ result, highlightedAttribute }) {
 
   const {
     searchableId,
-    parents: { text, text_section: textSection }
+    parents: { text, text_section: textSection },
   } = result.attributes ?? {};
 
   const parent = text?.title;
@@ -44,7 +44,7 @@ function SearchResultsTypeAnnotation({ result, highlightedAttribute }) {
     url,
     title,
     description: highlightedAttribute("fullText"),
-    label: t("glossary.annotation_one")
+    label: t("glossary.annotation_one"),
   };
 
   return (
@@ -81,7 +81,7 @@ SearchResultsTypeAnnotation.displayName = "Search.Results.Type.Annotation";
 
 SearchResultsTypeAnnotation.propTypes = {
   result: PropTypes.object,
-  highlightedAttribute: PropTypes.func.isRequired
+  highlightedAttribute: PropTypes.func.isRequired,
 };
 
 export default withSearchResultHelper(SearchResultsTypeAnnotation);

@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Editor } from "slate";
-import { useSlate, ReactEditor } from "slate-react";
+import { useSlate } from "slate-react";
 import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import Tooltip from "global/components/atomic/Tooltip";
@@ -9,7 +9,7 @@ import { hotkeys } from "./TooltipContent/content";
 import { toggleOrWrapNode, removeNode } from "../../../utils/slate/transforms";
 import {
   isElementActive,
-  getNearestOfType
+  getNearestOfType,
 } from "../../../utils/slate/getters";
 import * as Styled from "./styles";
 
@@ -21,7 +21,7 @@ const BlockButton = ({ format, icon, size, ...rest }, ref) => {
 
   const [active] = isElementActive(editor, format);
 
-  const onClick = e => {
+  const onClick = (e) => {
     e.preventDefault();
 
     if (!selection) return;

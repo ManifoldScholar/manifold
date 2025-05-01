@@ -20,10 +20,10 @@ import PageHeader from "backend/components/layout/PageHeader";
 const { request, flush } = entityStoreActions;
 
 export class ProjectWrapperContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       projectResponse: get(state.entityStore.responses, requests.beProject),
-      project: select(requests.beProject, state.entityStore)
+      project: select(requests.beProject, state.entityStore),
     };
   };
 
@@ -38,11 +38,11 @@ export class ProjectWrapperContainer extends PureComponent {
     confirm: PropTypes.func.isRequired,
     route: PropTypes.object,
     location: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   componentDidMount() {
@@ -51,7 +51,7 @@ export class ProjectWrapperContainer extends PureComponent {
 
   componentDidUpdate() {
     const {
-      params: { id: nextId }
+      params: { id: nextId },
     } = this.props.match ?? {};
     const prevId = this.props.project?.id;
     if (nextId && prevId && nextId !== prevId) this.fetchProject();
@@ -94,14 +94,14 @@ export class ProjectWrapperContainer extends PureComponent {
         label: "actions.view",
         route: "frontendProjectDetail",
         slug: this.props.project.attributes.slug,
-        icon: "eyeOpen32"
+        icon: "eyeOpen32",
       },
       {
         label: "actions.delete",
         authorize: "delete",
         icon: "delete32",
-        onClick: this.handleProjectDestroy
-      }
+        onClick: this.handleProjectDestroy,
+      },
     ];
   }
 
@@ -110,7 +110,7 @@ export class ProjectWrapperContainer extends PureComponent {
     const refresh = this.fetchProject;
     const updateProject = projectsAPI.update;
     return childRoutes(this.props.route, {
-      childProps: { refresh, updateProject, project, projectResponse }
+      childProps: { refresh, updateProject, project, projectResponse },
     });
   }
 
@@ -124,7 +124,7 @@ export class ProjectWrapperContainer extends PureComponent {
       project,
       this.props.location.state,
       isJournalIssue,
-      t
+      t,
     );
 
     const subpage = location.pathname.split("/")[4]?.replace("-", "_");
@@ -134,7 +134,7 @@ export class ProjectWrapperContainer extends PureComponent {
           parentTitle: project.relationships.journal.attributes.titleFormatted,
           parentSubtitle: project.relationships.journal.attributes.subtitle,
           parentId: project.relationships.journal.id,
-          issues: project.attributes.journalIssuesNav
+          issues: project.attributes.journalIssuesNav,
         }
       : {};
 
@@ -142,7 +142,7 @@ export class ProjectWrapperContainer extends PureComponent {
       <Authorize
         entity={project}
         failureFatalError={{
-          detail: t("projects.unauthorized_edit")
+          detail: t("projects.unauthorized_edit"),
         }}
         ability={["update", "manageResources"]}
       >
@@ -188,5 +188,5 @@ export class ProjectWrapperContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ProjectWrapperContainer))
+  withConfirmation(connectAndFetch(ProjectWrapperContainer)),
 );

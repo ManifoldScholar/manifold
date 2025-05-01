@@ -2,7 +2,7 @@ import {
   clearfix,
   respond,
   defaultTransitionProps,
-  utilityPrimary
+  utilityPrimary,
 } from "theme/styles/mixins";
 
 export default `

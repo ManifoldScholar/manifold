@@ -12,7 +12,7 @@ class ProjectContentBlockResourcesBlock extends PureComponent {
   static propTypes = {
     entity: PropTypes.object.isRequired,
     block: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static get title() {
@@ -96,7 +96,7 @@ class ProjectContentBlockResourcesBlock extends PureComponent {
             <EntityListTotal
               linkTo={lh.link(
                 "frontendProjectResourceCollections",
-                this.entity.attributes.slug
+                this.entity.attributes.slug,
               )}
               entityName="Collection"
               count={this.countProjectCollections}
@@ -114,7 +114,7 @@ class ProjectContentBlockResourcesBlock extends PureComponent {
             <EntityListTotal
               linkTo={lh.link(
                 "frontendProjectResources",
-                this.entity.attributes.slug
+                this.entity.attributes.slug,
               )}
               entityName="Resource"
               count={this.resourcesTotal}

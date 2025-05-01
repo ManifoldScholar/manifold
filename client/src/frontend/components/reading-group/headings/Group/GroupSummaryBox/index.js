@@ -8,17 +8,17 @@ import Item from "./Item";
 import * as Styled from "./styles";
 
 function getUniqueTypes(mappings) {
-  const allTypes = mappings.flatMap(category => Object.keys(category));
+  const allTypes = mappings.flatMap((category) => Object.keys(category));
   return [...new Set(allTypes)];
 }
 
 function aggregateMappingsByType(type, mappingValues) {
   // get arrays of collected IDs by type from each category
-  const valuesByType = mappingValues.map(category => category[type] || []);
+  const valuesByType = mappingValues.map((category) => category[type] || []);
   // reduce to a single array
   return valuesByType.reduce(
     (previous, current) => previous.concat(current),
-    []
+    [],
   );
 }
 
@@ -39,9 +39,9 @@ function collectedIdsForCollectionByType(readingGroup) {
   // return an object with counts by type
   return Object.assign(
     {},
-    ...uniqueTypes.map(type => ({
-      [type]: aggregateMappingsByType(type, mappingValues)
-    }))
+    ...uniqueTypes.map((type) => ({
+      [type]: aggregateMappingsByType(type, mappingValues),
+    })),
   );
 }
 
@@ -54,7 +54,7 @@ function GroupSummaryBox({ readingGroup, isBackend }) {
     membershipsCount,
     currentUserRole,
     currentUserCounts,
-    creatorName
+    creatorName,
   } = readingGroup.attributes;
   const collected = collectedIdsForCollectionByType(readingGroup);
 
@@ -133,7 +133,7 @@ GroupSummaryBox.displayName = "ReadingGroup.GroupSummaryBox";
 
 GroupSummaryBox.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  isBackend: PropTypes.bool
+  isBackend: PropTypes.bool,
 };
 
 export default GroupSummaryBox;

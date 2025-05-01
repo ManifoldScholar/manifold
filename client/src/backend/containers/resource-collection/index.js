@@ -7,5 +7,5 @@ export default {
   Properties,
   New,
   Resources,
-  Wrapper
+  Wrapper,
 };

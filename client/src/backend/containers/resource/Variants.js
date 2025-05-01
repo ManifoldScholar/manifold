@@ -13,7 +13,7 @@ export class ResourceVariantsContainer extends PureComponent {
   static propTypes = {
     resource: PropTypes.object,
     params: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -23,7 +23,7 @@ export class ResourceVariantsContainer extends PureComponent {
           model={this.props.resource}
           name="backend-resource-update"
           update={resourcesAPI.update}
-          create={model =>
+          create={(model) =>
             resourcesAPI.create(this.props.params.projectId, model)
           }
           className="form-secondary"
@@ -40,5 +40,5 @@ export class ResourceVariantsContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  connect(ResourceVariantsContainer.mapStateToProps)(ResourceVariantsContainer)
+  connect(ResourceVariantsContainer.mapStateToProps)(ResourceVariantsContainer),
 );

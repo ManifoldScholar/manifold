@@ -21,5 +21,5 @@ export default {
   Presentation,
   Spreadsheet,
   Variants,
-  Video
+  Video,
 };

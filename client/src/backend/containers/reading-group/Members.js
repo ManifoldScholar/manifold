@@ -8,7 +8,7 @@ import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
 import { withRouter } from "react-router-dom";
 import { useFetch, usePaginationState, useApiCallback } from "hooks";
 import EntitiesList, {
-  ReadingGroupMemberRow
+  ReadingGroupMemberRow,
 } from "backend/components/list/EntitiesList";
 import withConfirmation from "hoc/withConfirmation";
 
@@ -16,7 +16,7 @@ function ReadingGroupMembersContainer({
   refresh,
   readingGroup,
   route,
-  confirm
+  confirm,
 }) {
   const closeUrl = lh.link("backendReadingGroupMembers", readingGroup.id);
 
@@ -24,8 +24,12 @@ function ReadingGroupMembersContainer({
 
   const filters = useMemo(() => ({ withUpdateAbility: true }), []);
 
-  const { data, refresh: refreshMembers, meta } = useFetch({
-    request: [readingGroupsAPI.members, readingGroup.id, filters, pagination]
+  const {
+    data,
+    refresh: refreshMembers,
+    meta,
+  } = useFetch({
+    request: [readingGroupsAPI.members, readingGroup.id, filters, pagination],
   });
 
   const { t } = useTranslation();
@@ -59,12 +63,12 @@ function ReadingGroupMembersContainer({
         titleTag="h2"
         entities={data}
         unit={t("glossary.member", {
-          count: meta?.pagination?.totalCount || 0
+          count: meta?.pagination?.totalCount || 0,
         })}
         pagination={meta.pagination}
         showCount
         callbacks={{
-          onPageClick: page => () => setPageNumber(page)
+          onPageClick: (page) => () => setPageNumber(page),
         }}
       />
       {childRoutes(route, {
@@ -73,14 +77,14 @@ function ReadingGroupMembersContainer({
           lockScroll: "always",
           wide: true,
           lockScrollClickCloses: false,
-          closeUrl
+          closeUrl,
         },
         childProps: {
           refresh,
           refreshMembers,
           readingGroup,
-          closeUrl: lh.link("backendReadingGroupMembers", readingGroup.id)
-        }
+          closeUrl: lh.link("backendReadingGroupMembers", readingGroup.id),
+        },
       })}
     </Authorize>
   );
@@ -90,7 +94,7 @@ ReadingGroupMembersContainer.propTypes = {
   readingGroup: PropTypes.object,
   refresh: PropTypes.func,
   route: PropTypes.string,
-  confirm: PropTypes.func
+  confirm: PropTypes.func,
 };
 
 export default withRouter(withConfirmation(ReadingGroupMembersContainer));

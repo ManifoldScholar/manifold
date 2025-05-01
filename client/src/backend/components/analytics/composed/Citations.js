@@ -8,7 +8,7 @@ class Citations extends Component {
   static displayName = "Analytics.Composed.Citations";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get data() {

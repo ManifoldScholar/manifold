@@ -16,12 +16,12 @@ export default class DrawerEntityHeader extends PureComponent {
     icon: PropTypes.string,
     buttonLayout: PropTypes.oneOf(["stack", "inline", "grid"]),
     small: PropTypes.bool,
-    instructionsAreWarning: PropTypes.bool
+    instructionsAreWarning: PropTypes.bool,
   };
 
   static defaultProps = {
     buttons: [],
-    buttonlayout: "stack"
+    buttonlayout: "stack",
   };
 
   get stackButtons() {
@@ -35,13 +35,13 @@ export default class DrawerEntityHeader extends PureComponent {
   render() {
     return (
       <DrawerContext.Consumer>
-        {contextProps => (
+        {(contextProps) => (
           <Styled.Header $small={this.props.small}>
             {this.props.title && (
               <Styled.TitleWrapper
                 id={contextProps?.headerId}
                 className={classNames({
-                  "screen-reader-text": this.props.hideTitle
+                  "screen-reader-text": this.props.hideTitle,
                 })}
               >
                 {this.props.icon && (
@@ -62,11 +62,11 @@ export default class DrawerEntityHeader extends PureComponent {
                 className={classNames({
                   "utility-button-group": true,
                   "utility-button-group--stack": this.stackButtons,
-                  "utility-button-group--inline": this.inlineButtons
+                  "utility-button-group--inline": this.inlineButtons,
                 })}
               >
                 {this.props.buttons &&
-                  this.props.buttons.map(button => (
+                  this.props.buttons.map((button) => (
                     <Button key={button.label} action={button} iconSize={24} />
                   ))}
               </Styled.ButtonGroup>

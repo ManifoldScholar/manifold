@@ -8,7 +8,7 @@ export default class TableAvatar extends React.PureComponent {
 
   static propTypes = {
     avatar: PropTypes.string,
-    viewportVisibility: PropTypes.string
+    viewportVisibility: PropTypes.string,
   };
 
   get avatarClassNames() {
@@ -16,7 +16,7 @@ export default class TableAvatar extends React.PureComponent {
       "table__avatar-base-container": true,
       "table__hide-desktop": this.viewportVisibility === "hideDesktop",
       "table__avatar-placeholder-container": !this.avatar,
-      "table__avatar-image-container": this.avatar
+      "table__avatar-image-container": this.avatar,
     });
   }
 

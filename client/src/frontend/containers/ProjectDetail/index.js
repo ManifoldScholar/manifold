@@ -34,7 +34,7 @@ ProjectDetailContainer.displayName = "Frontend.Containers.ProjectDetail";
 ProjectDetailContainer.propTypes = {
   project: PropTypes.object,
   response: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
+  journalBreadcrumbs: PropTypes.array,
 };
 
 export default ProjectDetailContainer;

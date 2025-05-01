@@ -3,7 +3,7 @@ import {
   rgba,
   utilityPrimary,
   buttonUnstyled,
-  outlineOnFocus
+  outlineOnFocus,
 } from "theme/styles/mixins";
 
 const tailSize = "16px";

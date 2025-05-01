@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import EntitiesList, {
   Button,
-  SubjectRow
+  SubjectRow,
 } from "backend/components/list/EntitiesList";
 import { useListQueryParams, useFetch } from "hooks";
 import { useParams } from "react-router-dom";
@@ -19,14 +19,14 @@ export default function SettingsSubjectsListContainer({ route }) {
 
   const { data: subjects, meta: subjectsMeta } = useFetch({
     request: [subjectsAPI.index, filters.current, pagination],
-    options: { requestKey: requests.beSubjects }
+    options: { requestKey: requests.beSubjects },
   });
 
   if (!subjects || !subjectsMeta) return null;
 
   const drawerProps = {
     closeUrl: lh.link("backendSettingsSubjects"),
-    lockScroll: "always"
+    lockScroll: "always",
   };
 
   return (
@@ -40,7 +40,7 @@ export default function SettingsSubjectsListContainer({ route }) {
           titleStyle="bar"
           entities={subjects}
           unit={t("glossary.subject", {
-            count: subjectsMeta?.pagination?.totalCount
+            count: subjectsMeta?.pagination?.totalCount,
           })}
           pagination={subjectsMeta.pagination}
           showCountInHeader
@@ -50,7 +50,7 @@ export default function SettingsSubjectsListContainer({ route }) {
               text={t("settings.subjects.add_button_label")}
               authorizedFor="subject"
               type="add"
-            />
+            />,
           ]}
         />
       )}
@@ -61,5 +61,5 @@ export default function SettingsSubjectsListContainer({ route }) {
 SettingsSubjectsListContainer.displayName = "Settings.Subjects.List";
 
 SettingsSubjectsListContainer.propTypes = {
-  route: PropTypes.object
+  route: PropTypes.object,
 };

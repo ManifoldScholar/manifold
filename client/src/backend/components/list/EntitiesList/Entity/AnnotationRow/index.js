@@ -16,7 +16,7 @@ function AnnotationRow({
   bulkSelection,
   addItem,
   removeItem,
-  onDelete
+  onDelete,
 }) {
   const { id, attributes } = entity;
   const {
@@ -28,7 +28,7 @@ function AnnotationRow({
     textTitle,
     creatorName,
     creatorId,
-    orphaned
+    orphaned,
   } = attributes;
 
   const { t } = useTranslation();
@@ -46,9 +46,7 @@ function AnnotationRow({
     >
       <Utility.IconComposer icon="delete32" size={26} />
     </button>
-  ) : (
-    undefined
-  );
+  ) : undefined;
 
   return (
     <Styled.Item className="entity-row entity-list__entity scheme-dark">
@@ -71,28 +69,28 @@ function AnnotationRow({
                         text: isPrivate
                           ? t("common.private")
                           : t("common.public"),
-                        level: "notice"
-                      }
+                        level: "notice",
+                      },
                     ]
                   : []),
                 ...(orphaned
                   ? [
                       {
                         text: t("records.annotations.orphaned_tag"),
-                        level: ""
-                      }
+                        level: "",
+                      },
                     ]
                   : []),
                 ...(unresolvedFlagsCount
                   ? [
                       {
                         text: t("records.annotations.flag_count", {
-                          count: unresolvedFlagsCount
+                          count: unresolvedFlagsCount,
                         }),
-                        level: "error"
-                      }
+                        level: "error",
+                      },
                     ]
-                  : [])
+                  : []),
               ]}
             />
           </Styled.MetaOne>
@@ -100,7 +98,7 @@ function AnnotationRow({
             {!hideCreator && (
               <Link
                 to={{
-                  pathname: lh.link("backendRecordsUserProperties", creatorId)
+                  pathname: lh.link("backendRecordsUserProperties", creatorId),
                 }}
               >
                 {creatorName}
@@ -109,7 +107,7 @@ function AnnotationRow({
             <span
               dangerouslySetInnerHTML={{
                 __html:
-                  textTitle ?? t("records.annotations.text_title_placeholder")
+                  textTitle ?? t("records.annotations.text_title_placeholder"),
               }}
             />
           </Styled.MetaTwo>
@@ -136,7 +134,7 @@ AnnotationRow.propTypes = {
   bulkSelection: PropTypes.object,
   addItem: PropTypes.func,
   removeItem: PropTypes.func,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
 };
 
 export default AnnotationRow;

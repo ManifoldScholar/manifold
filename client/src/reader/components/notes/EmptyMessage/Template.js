@@ -12,7 +12,7 @@ function Template({ title, body }) {
 
 Template.propTypes = {
   title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired
+  body: PropTypes.string.isRequired,
 };
 
 export default Template;

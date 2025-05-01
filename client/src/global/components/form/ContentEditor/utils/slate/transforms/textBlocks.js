@@ -16,17 +16,17 @@ const handleLiTextChild = ({ editor, node, path, format }) => {
       {
         type: "list-sibling",
         slateOnly: true,
-        children: [{ text: start }]
-      }
+        children: [{ text: start }],
+      },
     ]),
     { type: format, children: [{ text: target }] },
     ...(end && [
       {
         type: "list-sibling",
         slateOnly: true,
-        children: [{ text: end }]
-      }
-    ])
+        children: [{ text: end }],
+      },
+    ]),
   ];
 
   Transforms.insertNodes(editor, children, { at: path });
@@ -37,7 +37,7 @@ export const toggleTextBlock = ({
   format,
   node: initialNode,
   path,
-  split = false
+  split = false,
 }) => {
   if (
     initialNode &&
@@ -61,7 +61,7 @@ export const toggleTextBlock = ({
       Element.isElement(n) &&
       LIST_TYPES.includes(n.type) &&
       isEqual(p, path),
-    split: true
+    split: true,
   });
 
   if (node.slateOnly || format !== node.type) {
@@ -74,9 +74,9 @@ export const toggleTextBlock = ({
         {
           type,
           slateOnly: undefined,
-          htmlAttrs: type !== "li" ? htmlAttrs : undefined
+          htmlAttrs: type !== "li" ? htmlAttrs : undefined,
         },
-        { split }
+        { split },
       );
       if (type === "li") {
         Transforms.wrapNodes(editor, { type: format, htmlAttrs, children: [] });

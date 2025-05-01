@@ -11,7 +11,7 @@ class ProjectContentBlockVisibilityToggle extends PureComponent {
     entity: PropTypes.object.isRequired,
     entityCallbacks: PropTypes.object.isRequired,
     blockTitle: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get entity() {
@@ -33,7 +33,7 @@ class ProjectContentBlockVisibilityToggle extends PureComponent {
         <button
           className={`${baseClass}__button`}
           aria-label={this.props.t("layout.hide_block", {
-            blockTitle: translatedTitle
+            blockTitle: translatedTitle,
           })}
           onClick={this.props.entityCallbacks.hideBlock}
         >

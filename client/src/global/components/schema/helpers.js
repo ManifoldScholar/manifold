@@ -1,4 +1,4 @@
-export const renderOffer = attributes => {
+export const renderOffer = (attributes) => {
   const { purchasePrice, purchasePriceCurrency, purchaseUrl } = attributes;
   const showOffer = purchasePrice && purchasePriceCurrency && purchaseUrl;
 
@@ -7,54 +7,54 @@ export const renderOffer = attributes => {
         "@type": "Offer",
         price: purchasePrice,
         priceCurrency: purchasePriceCurrency,
-        url: purchaseUrl
+        url: purchaseUrl,
       }
     : null;
 };
 
-export const renderSeries = metadata => {
+export const renderSeries = (metadata) => {
   const { seriesTitle } = metadata;
 
   return seriesTitle
     ? {
         "@type": "CreativeWorkSeries",
-        name: seriesTitle
+        name: seriesTitle,
       }
     : null;
 };
 
-export const renderNamesList = persons => {
+export const renderNamesList = (persons) => {
   return persons?.length
-    ? persons.map(p => ({
+    ? persons.map((p) => ({
         "@type": "Person",
-        name: p.attributes.fullName ?? p.attributes.makerName
+        name: p.attributes.fullName ?? p.attributes.makerName,
       }))
     : null;
 };
 
-export const renderJournal = journal => {
+export const renderJournal = (journal) => {
   return journal
     ? {
         "@type": "Periodical",
-        name: journal.attributes.title
+        name: journal.attributes.title,
       }
     : null;
 };
 
-export const renderIssues = issues => {
+export const renderIssues = (issues) => {
   if (!issues.length) return [];
 
-  return issues.map(issue => ({
+  return issues.map((issue) => ({
     "@type": "PublicationIssue",
     issueNumber: issue.attributes.number,
-    datePublished: issue.attributes.publicationDate
+    datePublished: issue.attributes.publicationDate,
   }));
 };
 
 export const renderVolumes = (volumes, journal, includeIssues = false) => {
   if (!volumes.length) return [];
 
-  return volumes.map(volume => {
+  return volumes.map((volume) => {
     const issues = volume.relationships?.journalIssues ?? {};
 
     return {
@@ -62,7 +62,7 @@ export const renderVolumes = (volumes, journal, includeIssues = false) => {
       volumeNumber: volume.attributes.number,
       datePublished: volume.attributes.publicationDate,
       isPartOf: journal ? renderJournal(journal) : null,
-      hasPart: includeIssues && issues?.length ? renderIssues(issues) : null
+      hasPart: includeIssues && issues?.length ? renderIssues(issues) : null,
     };
   });
 };

@@ -19,7 +19,7 @@ export default function Preview({ id, type, responses, active, container }) {
           </Styled.Header>
         </Styled.Collectable>
       </Styled.Wrapper>,
-      container
+      container,
     )
   );
 }

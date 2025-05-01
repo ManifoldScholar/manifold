@@ -4,7 +4,7 @@ import { annotationList } from "theme/styles/variables/crossComponent";
 const {
   avatarHeight,
   avatarPlaceholderWidth,
-  avatarPlaceholderMarginInlineStart
+  avatarPlaceholderMarginInlineStart,
 } = annotationList;
 
 export default `
@@ -22,7 +22,7 @@ export default `
         align-items: center;
         justify-content: space-between;
       `,
-      50
+      50,
     )}
 
     &:only-child {

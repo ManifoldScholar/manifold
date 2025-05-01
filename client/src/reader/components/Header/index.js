@@ -35,7 +35,7 @@ export default function Header(props) {
     decrementFontSize,
     incrementMargins,
     decrementMargins,
-    resetTypography
+    resetTypography,
   } = props;
   const { t } = useTranslation();
   const [mobileOptionsExpanded, setExpanded] = useState(false);
@@ -46,16 +46,16 @@ export default function Header(props) {
   const textId = text?.id;
   const sectionId = section?.id;
 
-  const handleContentsButtonClick = event => {
+  const handleContentsButtonClick = (event) => {
     event.stopPropagation();
     commonActions.panelToggle("tocDrawer");
   };
 
-  const handleVisibilityFilterChange = filters => {
+  const handleVisibilityFilterChange = (filters) => {
     commonActions.visibilityChange({ visibilityFilters: filters });
   };
 
-  const panelToggleHandler = memoize(panel => {
+  const panelToggleHandler = memoize((panel) => {
     return () => {
       commonActions.panelToggle(panel);
     };
@@ -114,7 +114,7 @@ export default function Header(props) {
     );
   };
 
-  const renderContentsButton = textAttrs => {
+  const renderContentsButton = (textAttrs) => {
     if (textAttrs.toc.length <= 0 && isEmpty(textAttrs.metadata)) {
       return null;
     }
@@ -123,7 +123,7 @@ export default function Header(props) {
       "reader-header__button": true,
       "reader-header__button--gray": true,
       "reader-header__button--pad-default": true,
-      "button-active": visibility.uiPanels.tocDrawer
+      "button-active": visibility.uiPanels.tocDrawer,
     });
 
     return (
@@ -153,7 +153,7 @@ export default function Header(props) {
 
   const innerClassName = classNames({
     "reader-header__inner": true,
-    "reader-header__inner--shifted": mobileOptionsExpanded
+    "reader-header__inner--shifted": mobileOptionsExpanded,
   });
   return (
     <header className="reader-header">
@@ -233,7 +233,7 @@ export default function Header(props) {
           bodyComponent={ReturnMenu.Body}
           returnUrl={lh.link(
             "frontendProjectDetail",
-            text.relationships.project.attributes.slug
+            text.relationships.project.attributes.slug,
           )}
           projectId={text.relationships.project.id}
           projectTitle={text.relationships.project.attributes.titleFormatted}
@@ -271,7 +271,7 @@ export default function Header(props) {
           toggleVisibility={panelToggleHandler("search")}
           initialState={{
             keyword: "",
-            scope: "text"
+            scope: "text",
           }}
           projectId={projectId}
           textId={textId}
@@ -319,5 +319,5 @@ Header.propTypes = {
   setColorScheme: PropTypes.func,
   scrollAware: PropTypes.object,
   commonActions: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
 };

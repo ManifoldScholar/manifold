@@ -9,7 +9,7 @@ export function createCustomPropertyName(namespace, tokenKey) {
 export function createCSSVariables(namespace, tokenObj) {
   return Object.keys(tokenObj)
     .map(
-      key => `${createCustomPropertyName(namespace, key)}: ${tokenObj[key]};`
+      (key) => `${createCustomPropertyName(namespace, key)}: ${tokenObj[key]};`,
     )
     .join("");
 }

@@ -2,7 +2,7 @@ import {
   listUnstyled,
   containerPrototype,
   utilityPrimary,
-  respond
+  respond,
 } from "theme/styles/mixins";
 
 export default `
@@ -45,7 +45,7 @@ export default `
         font-size: 17px;
       }
     `,
-      40
+      40,
     )}
 
     &:not(.panel-nav) {

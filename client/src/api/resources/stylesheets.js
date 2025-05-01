@@ -4,8 +4,8 @@ export default {
       endpoint: `/api/v1/texts/${textId}/relationships/stylesheets`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "stylesheets", data: stylesheet })
-      }
+        body: JSON.stringify({ type: "stylesheets", data: stylesheet }),
+      },
     };
   },
 
@@ -14,8 +14,8 @@ export default {
       endpoint: `/api/v1/stylesheets/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "stylesheets", data: stylesheet })
-      }
+        body: JSON.stringify({ type: "stylesheets", data: stylesheet }),
+      },
     };
   },
 
@@ -23,7 +23,7 @@ export default {
     return {
       endpoint: `/api/v1/stylesheets/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -31,7 +31,7 @@ export default {
     return {
       endpoint: `/api/v1/stylesheets/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

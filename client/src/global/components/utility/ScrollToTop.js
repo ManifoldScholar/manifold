@@ -5,7 +5,7 @@ import locationHelper from "helpers/location";
 
 class ScrollToTop extends PureComponent {
   static propTypes = {
-    location: PropTypes.object
+    location: PropTypes.object,
   };
 
   componentDidMount() {
@@ -18,7 +18,7 @@ class ScrollToTop extends PureComponent {
     if (
       locationHelper.triggersScrollToTop(
         this.props.location,
-        prevProps.location
+        prevProps.location,
       )
     ) {
       this.doScroll();

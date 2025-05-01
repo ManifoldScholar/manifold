@@ -15,12 +15,12 @@ class PoweredBy extends PureComponent {
   static propTypes = {
     dull: PropTypes.bool,
     withVersion: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     type: "library",
-    dull: false
+    dull: false,
   };
 
   get dull() {
@@ -43,7 +43,7 @@ class PoweredBy extends PureComponent {
     return {
       href: "http://manifoldapp.org",
       target: "_blank",
-      rel: "noopener noreferrer"
+      rel: "noopener noreferrer",
     };
   }
 
@@ -124,6 +124,6 @@ class PoweredBy extends PureComponent {
 
 export default withSettings(
   withPluginReplacement(
-    withTranslation()(PoweredBy, "Global.Components.Footers.PoweredBy")
-  )
+    withTranslation()(PoweredBy, "Global.Components.Footers.PoweredBy"),
+  ),
 );

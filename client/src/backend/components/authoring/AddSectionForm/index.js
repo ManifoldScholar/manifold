@@ -17,12 +17,12 @@ export default function AddSectionForm({ textId, nextPosition, refresh }) {
 
   const defaultModel = useMemo(
     () => ({
-      attributes: { position: nextPosition, kind: "section" }
+      attributes: { position: nextPosition, kind: "section" },
     }),
-    [nextPosition]
+    [nextPosition],
   );
 
-  const createSection = model => {
+  const createSection = (model) => {
     return sectionsAPI.create(textId, model);
   };
 
@@ -33,7 +33,7 @@ export default function AddSectionForm({ textId, nextPosition, refresh }) {
   };
 
   const onSuccess = useCallback(
-    res => {
+    (res) => {
       if (refresh) refresh();
 
       if (openInEditor)
@@ -41,12 +41,12 @@ export default function AddSectionForm({ textId, nextPosition, refresh }) {
 
       navigate(lh.link("backendTextSections", textId));
     },
-    [navigate, textId, refresh, openInEditor]
+    [navigate, textId, refresh, openInEditor],
   );
 
   const buttonClasses = "button-secondary button-secondary--outlined";
 
-  const handleCancelClick = e => {
+  const handleCancelClick = (e) => {
     e.preventDefault();
     navigate(lh.link("backendTextSections", textId));
   };
@@ -102,5 +102,5 @@ AddSectionForm.displayName = "Text.Sections.AddForm";
 AddSectionForm.propTypes = {
   textId: PropTypes.string.isRequired,
   refresh: PropTypes.func,
-  nextPosition: PropTypes.number
+  nextPosition: PropTypes.number,
 };

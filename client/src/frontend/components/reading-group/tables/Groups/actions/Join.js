@@ -17,17 +17,17 @@ function JoinGroup({ confirm, readingGroup, onSuccess, buttonText, outlined }) {
   function doJoin() {
     const {
       href: endpoint,
-      meta: { method }
+      meta: { method },
     } = readingGroup.links.join;
     const call = {
       endpoint,
       method,
-      options: {}
+      options: {},
     };
     const joinRequest = request(
       call,
       requests.feReadingGroupMembershipCreate,
-      {}
+      {},
     );
     dispatch(joinRequest).promise.then(() => {
       if (onSuccess) onSuccess();
@@ -46,7 +46,7 @@ function JoinGroup({ confirm, readingGroup, onSuccess, buttonText, outlined }) {
       onClick={handleClick}
       className={classNames({
         "button-tertiary": true,
-        "button-tertiary--outlined": outlined
+        "button-tertiary--outlined": outlined,
       })}
     >
       {buttonText || t("actions.join")}
@@ -61,7 +61,7 @@ JoinGroup.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   onSuccess: PropTypes.func,
   buttonText: PropTypes.string,
-  outlined: PropTypes.bool
+  outlined: PropTypes.bool,
 };
 
 export default withConfirmation(JoinGroup);

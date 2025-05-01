@@ -13,11 +13,11 @@ function HeadingManageGroup({ readingGroup, location }) {
 
   const homepageStaticPath = lh.link(
     "frontendReadingGroupHomepageStatic",
-    readingGroup.id
+    readingGroup.id,
   );
   const homepageEditPath = lh.link(
     "frontendReadingGroupHomepageEdit",
-    readingGroup.id
+    readingGroup.id,
   );
   const inEditMode = location.pathname === homepageEditPath;
 
@@ -70,7 +70,7 @@ HeadingManageGroup.displayName = "ReadingGroup.Heading.ManageGroup";
 
 HeadingManageGroup.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 export default HeadingManageGroup;

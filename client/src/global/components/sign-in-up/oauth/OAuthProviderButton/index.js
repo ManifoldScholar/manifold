@@ -25,7 +25,7 @@ export default function OAuthProviderButton({ provider, icon }) {
       <IconComposer icon={icon} size={26} className="button-secondary__icon" />
       <span className="button-secondary__text">
         {t("forms.signin_overlay.log_in_with_provider", {
-          provider
+          provider,
         })}
       </span>
     </Styled.Button>
@@ -36,5 +36,5 @@ OAuthProviderButton.displayName = "Global.SignInUp.OAuthProviderButton";
 
 OAuthProviderButton.propTypes = {
   provider: PropTypes.string,
-  icon: PropTypes.string
+  icon: PropTypes.string,
 };

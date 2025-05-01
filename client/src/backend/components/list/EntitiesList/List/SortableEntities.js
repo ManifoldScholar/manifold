@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {
   DragDropContext,
   Droppable,
-  Draggable
+  Draggable,
 } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
@@ -25,12 +25,12 @@ class SortableEntities extends PureComponent {
     listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
     sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     useDragHandle: PropTypes.bool,
-    idForInstructions: PropTypes.string
+    idForInstructions: PropTypes.string,
   };
 
   static defaultProps = {
     useDragHandle: false,
-    sortableStyle: "spaced"
+    sortableStyle: "spaced",
   };
 
   static getDerivedStateFromProps(props, prevState) {
@@ -44,15 +44,15 @@ class SortableEntities extends PureComponent {
     this.state = {
       sorting: false,
       orderedEntities: this.constructor.cloneEntities(props.entities),
-      ref: props.entities
+      ref: props.entities,
     };
   }
 
   findEntity(id) {
-    return this.state.orderedEntities.find(e => e.id === id);
+    return this.state.orderedEntities.find((e) => e.id === id);
   }
 
-  onDragEnd = result => {
+  onDragEnd = (result) => {
     const { draggableId, source, destination } = result;
     const entity = this.findEntity(draggableId);
 
@@ -61,17 +61,17 @@ class SortableEntities extends PureComponent {
 
     this.setState(
       {
-        orderedEntities: this.setOrderByChange(source.index, destination.index)
+        orderedEntities: this.setOrderByChange(source.index, destination.index),
       },
       () => {
         this.reorderCallback(
           {
             id: entity.id,
-            position: this.getAdjustedPosition(destination.index)
+            position: this.getAdjustedPosition(destination.index),
           },
-          this.state.orderedEntities
+          this.state.orderedEntities,
         );
-      }
+      },
     );
   };
 
@@ -82,27 +82,27 @@ class SortableEntities extends PureComponent {
 
     this.setState(
       {
-        orderedEntities: this.setOrderByChange(oldPos, newPos)
+        orderedEntities: this.setOrderByChange(oldPos, newPos),
       },
       () => {
         this.reorderCallback(
           {
             id: entity.id,
-            position: this.getAdjustedPosition(newPos)
+            position: this.getAdjustedPosition(newPos),
           },
-          this.state.orderedEntities
+          this.state.orderedEntities,
         );
 
         const announcement = this.props.t("actions.dnd.moved_to_position", {
           title,
-          position: newPos + 1
+          position: newPos + 1,
         });
         this.props.setScreenReaderStatus(announcement);
 
         if (callback && typeof callback === "function") {
           callback();
         }
-      }
+      },
     );
   };
 
@@ -131,7 +131,7 @@ class SortableEntities extends PureComponent {
       ...this.props.entityComponentProps,
       listStyle: this.listStyle,
       sortableStyle: this.sortableStyle,
-      onKeyboardMove: this.onKeyboardMove
+      onKeyboardMove: this.onKeyboardMove,
     };
   }
 
@@ -178,7 +178,7 @@ class SortableEntities extends PureComponent {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   className={classNames(this.props.className, {
-                    "show-dropzone": snapshot.isDraggingOver
+                    "show-dropzone": snapshot.isDraggingOver,
                   })}
                 >
                   {this.entities.map((entity, index) => (
@@ -210,7 +210,7 @@ class SortableEntities extends PureComponent {
                         <div
                           className={classNames(
                             "entity-row",
-                            "drag-placeholder"
+                            "drag-placeholder",
                           )}
                         >
                           <EntityComponent
@@ -236,5 +236,5 @@ class SortableEntities extends PureComponent {
 }
 
 export default withTranslation()(
-  withScreenReaderStatus(SortableEntities, false)
+  withScreenReaderStatus(SortableEntities, false),
 );

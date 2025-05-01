@@ -12,7 +12,7 @@ export default function NavigationDropdown({ links, className }) {
   const { pathname } = useLocation();
 
   const visitLinks = () => {
-    const activeLink = links.find(link => {
+    const activeLink = links.find((link) => {
       const route = lh.routeFromName(link.route);
       return matchPath(pathname, route) !== null;
     });
@@ -36,12 +36,12 @@ export default function NavigationDropdown({ links, className }) {
     setOpen(false);
   };
 
-  const pathForLink = link => {
+  const pathForLink = (link) => {
     const args = link.args || [];
     return lh.link(link.route, ...args);
   };
 
-  const renderItem = link => {
+  const renderItem = (link) => {
     return (
       <li key={link.route}>
         <Styled.Link
@@ -81,7 +81,7 @@ export default function NavigationDropdown({ links, className }) {
           </Styled.Active>
         </Styled.Disclosure>
         <Styled.List $open={open}>
-          {links.map(link => {
+          {links.map((link) => {
             if (link.ability || link.kind)
               return (
                 <Authorize
@@ -107,5 +107,5 @@ NavigationDropdown.displayName = "SecondaryNav.Mobile.Dropdown";
 
 NavigationDropdown.propTypes = {
   links: PropTypes.array,
-  classNames: PropTypes.string
+  classNames: PropTypes.string,
 };

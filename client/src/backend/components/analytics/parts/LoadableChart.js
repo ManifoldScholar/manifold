@@ -5,17 +5,16 @@ import {
   XAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 
-/* eslint-disable react/prop-types */
 function LoadableChart({
   data,
   chartProps,
   gridProps,
   xAxisProps,
   tooltipProps,
-  lineProps
+  lineProps,
 }) {
   return (
     <ResponsiveContainer>

@@ -6,7 +6,7 @@ import {
   setFocusStyle,
   respond,
   fluidScale,
-  transparentize
+  transparentize,
 } from "theme/styles/mixins";
 
 export const Player = styled.div`
@@ -214,7 +214,7 @@ export const PlayPauseIcon = styled(IconComposer)`
   ${respond(
     `width: 32px;
         height: 32px;`,
-    60
+    60,
   )}
 `;
 
@@ -225,6 +225,6 @@ export const MuteIcon = styled(IconComposer)`
     `top: 1px;
         width: 27.429px;
         height: 27.429px;`,
-    60
+    60,
   )}
 `;

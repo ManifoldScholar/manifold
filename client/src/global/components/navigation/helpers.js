@@ -32,75 +32,76 @@ export const getAdminModeLabel = ({ currentUser, mode, t }) => {
 
 const FE_ROUTE_MAP = {
   resourceCollectionResource: {
-    regex: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection\/([A-Za-z0-9-]+)\/resource/,
-    link: `/backend/projects/resource`
+    regex:
+      /^\/projects\/([A-Za-z0-9-]+)\/resource-collection\/([A-Za-z0-9-]+)\/resource/,
+    link: `/backend/projects/resource`,
   },
   resourceCollection: {
     regex: /^\/projects\/([A-Za-z0-9-]+)\/resource-collection/,
-    link: `/backend/projects/resource-collection`
+    link: `/backend/projects/resource-collection`,
   },
   resource: {
     regex: /^\/projects\/([A-Za-z0-9-]+)\/resource/,
-    link: `/backend/projects/resource`
+    link: `/backend/projects/resource`,
   },
   projectCollection: {
     regex: /^\/projects\/project-collection/,
     link: `/backend/projects/project-collections`,
-    hasAdminList: true
+    hasAdminList: true,
   },
   project: {
     regex: /^\/projects/,
     link: `/backend/projects`,
-    hasAdminList: true
+    hasAdminList: true,
   },
   journal: {
     regex: /^\/journals/,
     link: `/backend/journals`,
-    hasAdminList: true
+    hasAdminList: true,
   },
   page: { regex: /^\/page/, link: `/backend/records/pages` },
   readingGroup: {
     regex: /^\/groups/,
     link: `/backend/groups`,
-    hasAdminList: true
-  }
+    hasAdminList: true,
+  },
 };
 
 const BE_ROUTE_MAP = {
   resourceCollection: {
     regex: /^\/backend\/projects\/resource-collection/,
-    link: `/projects/[pId]/resource-collection/[id]`
+    link: `/projects/[pId]/resource-collection/[id]`,
   },
   resource: {
     regex: /^\/backend\/projects\/resource/,
-    link: `/projects/[pId]/resource/[id]`
+    link: `/projects/[pId]/resource/[id]`,
   },
   projectCollection: {
     regex: /^\/backend\/projects\/project-collections/,
     link: `/projects/project-collection`,
-    hasList: `/projects/project-collections`
+    hasList: `/projects/project-collections`,
   },
   text: {
     regex: /^\/backend\/projects\/text/,
     link: `/projects/[pId]`,
-    hasList: true
+    hasList: true,
   },
   project: {
     regex: /^\/backend\/projects/,
     link: `/projects`,
-    hasList: true
+    hasList: true,
   },
   journal: {
     regex: /^\/backend\/journals/,
     link: `/journals`,
-    hasList: true
+    hasList: true,
   },
   page: { regex: /^\/backend\/records\/pages/, link: `/page` },
   readingGroup: {
     regex: /^\/backend\/groups/,
     link: `/groups`,
-    hasList: true
-  }
+    hasList: true,
+  },
 };
 
 const extractIdentifier = (pathname, basePath) => {
@@ -108,8 +109,8 @@ const extractIdentifier = (pathname, basePath) => {
   return identifier === "all" ? null : identifier;
 };
 
-const getAdminPath = pathname => {
-  const routeKey = Object.keys(FE_ROUTE_MAP).find(key => {
+const getAdminPath = (pathname) => {
+  const routeKey = Object.keys(FE_ROUTE_MAP).find((key) => {
     return FE_ROUTE_MAP[key]?.regex.test(pathname);
   });
   const route = FE_ROUTE_MAP[routeKey];
@@ -155,7 +156,7 @@ const handleRouteWithProjectId = (id, entities, routeKey) => {
 };
 
 const getFrontendPath = (pathname, entities) => {
-  const routeKey = Object.keys(BE_ROUTE_MAP).find(key => {
+  const routeKey = Object.keys(BE_ROUTE_MAP).find((key) => {
     return BE_ROUTE_MAP[key]?.regex.test(pathname);
   });
 
@@ -173,7 +174,6 @@ const getFrontendPath = (pathname, entities) => {
   )
     return handleRouteWithProjectId(identifier, entities, routeKey);
 
-  /* eslint-disable no-nested-ternary */
   if (!identifier)
     return route.hasList
       ? typeof route.hasList === "string"

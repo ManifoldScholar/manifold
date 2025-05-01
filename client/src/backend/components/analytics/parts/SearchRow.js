@@ -12,10 +12,10 @@ function SearchRow({ keyword, count }) {
 
 SearchRow.propTypes = {
   keyword: PropTypes.string.isRequired,
-  count: PropTypes.number.isRequired
+  count: PropTypes.number.isRequired,
 };
 
-SearchRow.generateId = search => search.keyword;
+SearchRow.generateId = (search) => search.keyword;
 
 SearchRow.displayName = "Analytics.Block.Table.SearchRow";
 

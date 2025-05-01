@@ -44,6 +44,6 @@ export const List = styled("div", transientOptions)`
         margin-block-start: 0;
       }
     `,
-      BREAKPOINT
+      BREAKPOINT,
     )}
 `;

@@ -6,8 +6,8 @@ export default {
       endpoint: "/api/v1/annotations",
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -15,7 +15,7 @@ export default {
     return {
       endpoint: `/api/v1/annotations/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -28,8 +28,8 @@ export default {
       endpoint: `/api/v1/texts/${textId}/relationships/text_sections/${sectionId}/annotations`,
       method: "GET",
       options: {
-        params: { filter: filterParams, page: { ...page, size: 25 } }
-      }
+        params: { filter: filterParams, page: { ...page, size: 25 } },
+      },
     };
   },
 
@@ -38,15 +38,15 @@ export default {
     if (notation) {
       data.relationships = {};
       data.relationships[annotation.format] = {
-        data: { id: notation.id, type: notation.type }
+        data: { id: notation.id, type: notation.type },
       };
     }
     return {
       endpoint: `/api/v1/text_sections/${sectionId}/relationships/annotations`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "annotation", data })
-      }
+        body: JSON.stringify({ type: "annotation", data }),
+      },
     };
   },
 
@@ -56,8 +56,8 @@ export default {
       endpoint: `/api/v1/annotations/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "annotations", data })
-      }
+        body: JSON.stringify({ type: "annotations", data }),
+      },
     };
   },
 
@@ -65,7 +65,7 @@ export default {
     return {
       endpoint: `/api/v1/annotations/${annotationId}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -75,8 +75,8 @@ export default {
       endpoint: `/api/v1/annotations/${id}/relationships/flags`,
       method: "POST",
       options: {
-        body: JSON.stringify({ message })
-      }
+        body: JSON.stringify({ message }),
+      },
     };
   },
 
@@ -85,7 +85,7 @@ export default {
     return {
       endpoint: `/api/v1/annotations/${id}/relationships/flags`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -93,7 +93,7 @@ export default {
     return {
       endpoint: `/api/v1/annotations/${annotationId}/relationships/flags/resolve_all`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

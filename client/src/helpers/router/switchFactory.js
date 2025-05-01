@@ -20,7 +20,7 @@ export default function switchFactory(Wrapper) {
       children: PropTypes.any,
       match: PropTypes.object,
       history: PropTypes.object,
-      staticContext: PropTypes.object
+      staticContext: PropTypes.object,
     };
 
     match() {
@@ -29,14 +29,14 @@ export default function switchFactory(Wrapper) {
       const location = this.props.location || route.location;
       let match;
       let child;
-      React.Children.forEach(children, element => {
+      React.Children.forEach(children, (element) => {
         if (match == null && React.isValidElement(element)) {
           const {
             path: pathProp,
             exact,
             strict,
             sensitive,
-            from
+            from,
           } = element.props;
           const path = pathProp || from;
 
@@ -70,7 +70,7 @@ export default function switchFactory(Wrapper) {
         ...this.props,
         match,
         children,
-        wrapperProps: this.wrapperProps()
+        wrapperProps: this.wrapperProps(),
       };
       return React.createElement(Wrapper, props);
     }

@@ -29,5 +29,5 @@ export const ButtonGroup = styled.div`
 `;
 
 export const Heading = styled.h2`
-  color: ${$dark => ($dark ? `var(--strong-color)` : `var(--box-color)`)};
+  color: ${($dark) => ($dark ? `var(--strong-color)` : `var(--box-color)`)};
 `;

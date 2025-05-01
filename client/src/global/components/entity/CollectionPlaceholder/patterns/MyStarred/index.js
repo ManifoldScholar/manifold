@@ -24,8 +24,8 @@ function MyStarredPlaceholder() {
               >
                 {t("navigation.browse_projects")}
               </Link>
-            )
-          }
+            ),
+          },
         ]}
       />
     </Wrapper>

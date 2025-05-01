@@ -3,7 +3,7 @@ import {
   utilityPrimary,
   defaultTransitionProps,
   respond,
-  rgba
+  rgba,
 } from "theme/styles/mixins";
 
 export default `
@@ -32,7 +32,7 @@ export default `
           padding-bottom: 11px;
           font-size: 14px;
         `,
-        90
+        90,
       )}
 
       &:focus-within {
@@ -60,7 +60,7 @@ export default `
           width: 36px;
           height: 36px;
         `,
-        90
+        90,
       )}
     }
 

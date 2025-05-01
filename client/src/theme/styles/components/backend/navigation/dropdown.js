@@ -2,7 +2,7 @@ import {
   buttonUnstyled,
   defaultHoverStyle,
   defaultTransitionProps,
-  listUnstyled
+  listUnstyled,
 } from "theme/styles/mixins";
 
 export default `

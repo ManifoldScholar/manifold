@@ -7,7 +7,7 @@ import Developer from "global/components/developer";
 export default class AnnotatableDebug extends PureComponent {
   static propTypes = {
     annotatableState: PropTypes.object,
-    annotatableProps: PropTypes.object
+    annotatableProps: PropTypes.object,
   };
 
   static defaultProps() {
@@ -17,10 +17,9 @@ export default class AnnotatableDebug extends PureComponent {
   get subject() {
     const newSelection = {};
     const {
-      selectionState: { selection }
+      selectionState: { selection },
     } = this.props.annotatableState;
     if (selection !== null) {
-      /* eslint-disable no-param-reassign */
       Object.keys(selection).reduce((map, key) => {
         const value = selection[key];
         if (key === "range") {
@@ -32,12 +31,11 @@ export default class AnnotatableDebug extends PureComponent {
         }
         return map;
       }, newSelection);
-      /* eslint-enable no-param-reassign */
     }
 
     const out = { ...this.props.annotatableState };
     out.selectionState = {
-      ...this.props.annotatableState.selectionState
+      ...this.props.annotatableState.selectionState,
     };
     out.selectionState.selection = newSelection;
     out.annotatableProps = this.props.annotatableProps;
@@ -53,7 +51,7 @@ export default class AnnotatableDebug extends PureComponent {
           top: 48,
           width: 350,
           left: 0,
-          zIndex: 2000
+          zIndex: 2000,
         }}
       >
         <Developer.Debugger object={this.subject} />

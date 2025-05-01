@@ -3,7 +3,7 @@ import {
   buttonUnstyled,
   utilityPrimary,
   defaultTransitionProps,
-  respond
+  respond,
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
@@ -33,7 +33,8 @@ export const Button = styled.button`
   letter-spacing: 0;
   border-top-left-radius: 14px;
   border-bottom-left-radius: 14px;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps},
     border-color ${defaultTransitionProps};
   width: 50%;

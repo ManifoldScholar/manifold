@@ -20,33 +20,32 @@ export default function AnonymousUserBanner() {
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
     settings?.attributes?.calculated ?? {};
 
-  /* eslint-disable no-nested-ternary */
   const savePrefs = useCallback(
     ({ all = null, manifold, google }) => {
       const prefs = {
         consentManifoldAnalytics: !manifoldAnalyticsEnabled
           ? null
           : typeof manifold === "boolean"
-          ? manifold
-          : all,
+            ? manifold
+            : all,
         consentGoogleAnalytics: !googleAnalyticsEnabled
           ? null
           : typeof google === "boolean"
-          ? google
-          : all
+            ? google
+            : all,
       };
 
       cookie.write("anonAnalyticsConsent", JSON.stringify(prefs), {
-        expires: 365
+        expires: 365,
       });
 
       ReactGA.gtag("consent", "default", {
-        analytics_storage: prefs.consentGoogleAnalytics ? "granted" : "denied"
+        analytics_storage: prefs.consentGoogleAnalytics ? "granted" : "denied",
       });
 
       setConsentNeeded(false);
     },
-    [googleAnalyticsEnabled, manifoldAnalyticsEnabled]
+    [googleAnalyticsEnabled, manifoldAnalyticsEnabled],
   );
 
   const message = settings?.attributes?.stringCookiesBannerCopyFormatted;

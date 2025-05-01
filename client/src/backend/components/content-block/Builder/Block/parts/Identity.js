@@ -13,12 +13,12 @@ class ProjectContentBlockIdentity extends PureComponent {
     requiresAttention: PropTypes.bool,
     size: PropTypes.oneOf(["small", "large"]),
     entity: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     size: "small",
-    renderable: true
+    renderable: true,
   };
 
   get requiresAttention() {
@@ -57,7 +57,7 @@ class ProjectContentBlockIdentity extends PureComponent {
     const titleClasses = `${baseClass}__title ${baseClass}__title--${size}`;
     const classNamees = classnames(
       `${baseClass}__icon ${baseClass}__icon--dark ${baseClass}__icon--${size}`,
-      { [`${baseClass}__icon--incomplete`]: this.requiresAttention }
+      { [`${baseClass}__icon--incomplete`]: this.requiresAttention },
     );
     const translatedTitle = this.props.t(this.props.title);
 

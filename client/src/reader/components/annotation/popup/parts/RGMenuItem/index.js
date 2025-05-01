@@ -13,11 +13,11 @@ function RGMenuItem({ menu, label, onClick, selected, value, privateGroup }) {
         onChange: onClick,
         value,
         checked: selected,
-        name: "readingGroupOption"
+        name: "readingGroupOption",
       }
     : {
         onClick,
-        type: "button"
+        type: "button",
       };
 
   return (
@@ -51,7 +51,7 @@ RGMenuItem.propTypes = {
   value: PropTypes.string,
   menu: PropTypes.object,
   selected: PropTypes.bool,
-  privateGroup: PropTypes.bool
+  privateGroup: PropTypes.bool,
 };
 
 export default RGMenuItem;

@@ -2,7 +2,7 @@ import {
   headingSecondary,
   headingQuaternary,
   subtitlePrimary,
-  respond
+  respond,
 } from "theme/styles/mixins";
 import { dialog } from "theme/styles/variables/crossComponent";
 
@@ -83,7 +83,7 @@ export default `
         `,
         STICKY_MIN_HEIGHT,
         "min",
-        "height"
+        "height",
       )}
     }
 
@@ -103,7 +103,7 @@ export default `
         `,
         STICKY_MIN_HEIGHT,
         "min",
-        "height"
+        "height",
       )}
     }
 

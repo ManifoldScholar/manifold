@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { meAPI } from "api";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import lh from "helpers/linkHandler";
-import PropTypes from "prop-types";
 import Authorize from "hoc/Authorize";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
@@ -14,14 +13,14 @@ export default function SubscriptionsContainer() {
   const { t } = useTranslation();
   const { currentUser } = useFromStore("authentication") ?? {};
   const [preferences, setPreferences] = useState(
-    currentUser?.attributes?.notificationPreferences
+    currentUser?.attributes?.notificationPreferences,
   );
 
   const notifyUpdate = useNotification(() => ({
     level: 0,
     id: `CURRENT_USER_UPDATED`,
     heading: t("forms.signin_overlay.update_notification_header"),
-    expiration: 3000
+    expiration: 3000,
   }));
 
   const formatData = () => {
@@ -35,7 +34,7 @@ export default function SubscriptionsContainer() {
       failureNotification={{
         heading: t("errors.unauthorized.heading"),
         body: t("errors.unauthorized.body"),
-        level: 2
+        level: 2,
       }}
     >
       <HeadContent title={t("titles.notifications")} appendDefaultTitle />

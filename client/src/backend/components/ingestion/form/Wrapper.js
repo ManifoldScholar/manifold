@@ -18,18 +18,18 @@ export default class IngestionFormWrapper extends PureComponent {
     onSuccess: PropTypes.func,
     triggerClose: PropTypes.func,
     cancelUrl: PropTypes.string,
-    header: PropTypes.string
+    header: PropTypes.string,
   };
 
   static defaultProps = {
-    ingestion: {}
+    ingestion: {},
   };
 
   updateIngestion = (id, attributes) => {
     return ingestionsAPI.update(this.props.ingestion.id, attributes);
   };
 
-  createIngestion = _data => {
+  createIngestion = (_data) => {
     const data = cloneDeep(_data);
 
     if (this.props.text) {
@@ -37,8 +37,8 @@ export default class IngestionFormWrapper extends PureComponent {
       data.relationships.text = {
         data: {
           type: "texts",
-          id: this.props.text.id
-        }
+          id: this.props.text.id,
+        },
       };
     }
 

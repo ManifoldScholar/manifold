@@ -9,7 +9,7 @@ export default class TextDate extends Component {
   static propTypes = {
     date: PropTypes.string.isRequired,
     datePrefix: PropTypes.string,
-    inline: PropTypes.bool
+    inline: PropTypes.bool,
   };
 
   render() {

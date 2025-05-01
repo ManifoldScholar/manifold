@@ -2,7 +2,7 @@ import {
   defaultTransitionProps,
   defaultHoverStyle,
   respond,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 import { ZOOM_BREAKPOINT } from "../readerHeader";
 
@@ -47,7 +47,7 @@ export default `
 
     ${respond(
       `max-block-size: calc(100vh - var(--reader-header-height));`,
-      ZOOM_BREAKPOINT
+      ZOOM_BREAKPOINT,
     )}
 
     .header-app & {

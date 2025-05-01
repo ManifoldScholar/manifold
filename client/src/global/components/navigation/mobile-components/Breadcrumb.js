@@ -11,7 +11,7 @@ class MobileBreadcrumb extends PureComponent {
   static propTypes = {
     links: PropTypes.array.isRequired,
     location: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get segments() {
@@ -20,16 +20,15 @@ class MobileBreadcrumb extends PureComponent {
     if (typeof journalIsActive !== "boolean") return segments;
 
     const firstMatch = this.match(this.props.links);
-    /* eslint-disable no-nested-ternary */
+
     const first =
       journalIsActive && firstMatch
         ? firstMatch.route === "frontendProjects"
           ? { label: "titles.journals", route: "frontendJournals" }
           : firstMatch.route === "backendProjects"
-          ? { label: "titles.journals", route: "backendJournals" }
-          : firstMatch
+            ? { label: "titles.journals", route: "backendJournals" }
+            : firstMatch
         : firstMatch;
-    /* eslint-enable no-nested-ternary */
 
     if (first) {
       segments.push(first);
@@ -47,7 +46,7 @@ class MobileBreadcrumb extends PureComponent {
 
   match(links) {
     if (!links) return null;
-    return links.find(link => {
+    return links.find((link) => {
       const route = lh.routeFromName(link.route);
 
       if (link.matchType === "link" || link.externalUrl) {
@@ -76,10 +75,10 @@ class MobileBreadcrumb extends PureComponent {
       <nav
         className={classNames("breadcrumb-list", {
           "hide-100": this.isBackend,
-          "hide-82": !this.isBackend
+          "hide-82": !this.isBackend,
         })}
       >
-        {this.segments.map(link => {
+        {this.segments.map((link) => {
           count += 1;
           return (
             <span key={count}>

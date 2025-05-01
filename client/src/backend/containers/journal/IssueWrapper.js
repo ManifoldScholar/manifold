@@ -10,7 +10,7 @@ function JournalIssueWrapper({ route, ...props }) {
 JournalIssueWrapper.propTypes = {
   journal: PropTypes.object,
   history: PropTypes.object,
-  route: PropTypes.object
+  route: PropTypes.object,
 };
 
 export default withRouter(JournalIssueWrapper);

@@ -5,5 +5,5 @@ import services from "./services";
 export default {
   environment,
   services,
-  app
+  app,
 };

@@ -6,9 +6,9 @@ export default {
       options: {
         body: JSON.stringify({
           type: "projectExportations",
-          data: exportTarget
-        })
-      }
+          data: exportTarget,
+        }),
+      },
     };
   },
 
@@ -16,7 +16,7 @@ export default {
     return {
       endpoint: `/api/v1/project_exportations/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

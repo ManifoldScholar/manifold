@@ -9,13 +9,13 @@ export const insertOrWrapSpan = (editor, isCollapsed) => {
     Transforms.insertNodes(
       editor,
       { type: "span", children: [{ text: "" }] },
-      { at: editor.selection.anchor, select: true }
+      { at: editor.selection.anchor, select: true },
     );
   } else {
     Transforms.wrapNodes(
       editor,
       { type: "span", children: [] },
-      { split: true }
+      { split: true },
     );
   }
   ReactEditor.focus(editor);
@@ -33,28 +33,28 @@ export const unwrapSpan = ({ editor, path }) => {
           at: path,
           match: (n, p) => {
             return n.type === "span" && isEqual(p, path);
-          }
-        }
+          },
+        },
       );
       Transforms.removeNodes(editor, {
         match: (n, p) => {
           return has(n, "text") && !n.text && isEqual(p, Path.next(path));
         },
-        at: parentPath
+        at: parentPath,
       });
       Transforms.liftNodes(editor, {
         match: (n, p) => {
           return n.type === "div" && isEqual(p, path);
         },
-        at: path
+        at: path,
       });
       const parent = Node.get(editor, parentPath);
       if (isEmptyAndChildless(editor, parent)) {
         Transforms.removeNodes(editor, {
           at: Path.parent(parentPath),
-          match: n => {
+          match: (n) => {
             return isEqual(n, parent);
-          }
+          },
         });
       }
       ReactEditor.focus(editor);

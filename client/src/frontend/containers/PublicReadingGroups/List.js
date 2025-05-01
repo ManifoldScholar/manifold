@@ -15,15 +15,19 @@ const DEFAULT_SORT_ORDER = "";
 
 function PublicReadingGroupsListContainer({ route }) {
   const filtersReset = {
-    sort_order: DEFAULT_SORT_ORDER
+    sort_order: DEFAULT_SORT_ORDER,
   };
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filtersReset
+    initFilters: filtersReset,
   });
 
-  const { data: readingGroups, meta, refresh } = useFetch({
+  const {
+    data: readingGroups,
+    meta,
+    refresh,
+  } = useFetch({
     request: [readingGroupsAPI.publicIndex, filters, pagination],
-    options: { requestKey: requests.fePublicReadingGroups }
+    options: { requestKey: requests.fePublicReadingGroups },
   });
 
   const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
@@ -37,11 +41,11 @@ function PublicReadingGroupsListContainer({ route }) {
       context: "frontend",
       size: "wide",
       position: "overlay",
-      lockScroll: "always"
+      lockScroll: "always",
     },
     childProps: {
-      onSuccess: refresh
-    }
+      onSuccess: refresh,
+    },
   };
 
   return readingGroups ? (
@@ -56,9 +60,9 @@ function PublicReadingGroupsListContainer({ route }) {
               currentUser={currentUser}
               pagination={meta?.pagination}
               filterProps={{
-                onFilterChange: state => setFilters(state),
+                onFilterChange: (state) => setFilters(state),
                 initialState: filters,
-                resetState: filtersReset
+                resetState: filtersReset,
               }}
               hideActions
               hideTags
@@ -76,7 +80,7 @@ function PublicReadingGroupsListContainer({ route }) {
 }
 
 PublicReadingGroupsListContainer.propTypes = {
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
 };
 
 export default PublicReadingGroupsListContainer;

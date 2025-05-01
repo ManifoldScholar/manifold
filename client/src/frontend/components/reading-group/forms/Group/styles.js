@@ -19,7 +19,8 @@ export const DatesOuter = styled.div`
   grid-template-rows: 1fr;
   transition-property: display, opacity, grid-template-rows;
   transition-duration: var(--transition-duration);
-  transition-delay: calc(0.5 * var(--transition-duration)),
+  transition-delay:
+    calc(0.5 * var(--transition-duration)),
     calc(0.5 * var(--transition-duration)), 0s;
   transition-timing-function: var(--transition-timing-function);
   transition-behavior: allow-discrete;

@@ -3,10 +3,10 @@ import idleFingersUrl from "ace-builds/src-noconflict/theme-idle_fingers";
 
 config.setModuleUrl(
   "ace-builds/src-noconflict/theme-idle_fingers",
-  idleFingersUrl
+  idleFingersUrl,
 );
 
-/* eslint-disable max-len, no-unused-vars */
+/* eslint-disable no-unused-vars */
 window.ace.define(
   "ace-builds/src-noconflict/theme-idle_fingers",
   ["require", "exports", "module", "ace/lib/dom"],
@@ -130,6 +130,6 @@ window.ace.define(
     `;
     const dom = acequire("../lib/dom");
     dom.importCssString(exports.cssText, exports.cssClass);
-  }
+  },
 );
-/* eslint-enable max-len, no-unused-vars */
+/* eslint-enable no-unused-vars */

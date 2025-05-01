@@ -13,7 +13,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
   const navigate = useNavigate();
 
   const formatData = useCallback(
-    data => {
+    (data) => {
       const { attachmentAltText, attachment, ...rest } = data?.attributes ?? {};
 
       const finalAttachmentData =
@@ -23,7 +23,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
 
       const attributes = {
         ...{ attachment: finalAttachmentData },
-        ...rest
+        ...rest,
       };
 
       return asset
@@ -35,11 +35,11 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
                 asset?.sourceIdentifier ??
                 attachment?.filename ??
                 "filename missing",
-              kind: asset?.kind ?? "publication_resource"
-            }
+              kind: asset?.kind ?? "publication_resource",
+            },
           };
     },
-    [asset]
+    [asset],
   );
 
   const onSuccess = useCallback(() => {
@@ -49,14 +49,14 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
 
   const src = `/api/proxy/ingestion_sources/${assetId}`;
 
-  const onCopy = e => {
+  const onCopy = (e) => {
     e.preventDefault();
     if (navigator.clipboard) {
       navigator.clipboard.writeText(src);
     }
   };
 
-  const createAsset = data => {
+  const createAsset = (data) => {
     return ingestionSourcesAPI.create(textId, data);
   };
 
@@ -126,5 +126,5 @@ AddEditAssetForm.displayName = "Text.Asset.AddEditForm";
 
 AddEditAssetForm.propTypes = {
   assetId: PropTypes.string,
-  textId: PropTypes.string.isRequired
+  textId: PropTypes.string.isRequired,
 };

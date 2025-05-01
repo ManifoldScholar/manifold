@@ -22,11 +22,11 @@ class FilteredList extends PureComponent {
     loaded: PropTypes.bool,
     readingGroups: PropTypes.array,
     setAnnotationOverlayReadingGroup: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    annotations: []
+    annotations: [],
   };
 
   get hasAnnotations() {
@@ -73,7 +73,8 @@ class FilteredList extends PureComponent {
         <div
           className={classNames({
             "notes-filtered-list__header-end": true,
-            "notes-filtered-list__header-end--has-select": this.hasReadingGroups
+            "notes-filtered-list__header-end--has-select":
+              this.hasReadingGroups,
           })}
         >
           {this.hasReadingGroups && (
@@ -99,7 +100,7 @@ class FilteredList extends PureComponent {
               className="notes-filtered-list__see-all-icon button-primary__icon"
               svgProps={{
                 role: "img",
-                title: this.props.t("external_links.opens_in_new")
+                title: this.props.t("external_links.opens_in_new"),
               }}
             />
           </button>
@@ -122,7 +123,7 @@ class FilteredList extends PureComponent {
 
     return (
       <ul className="notes-filtered-list__section-list">
-        {this.props.sortedAnnotations.map(group => {
+        {this.props.sortedAnnotations.map((group) => {
           return (
             <Partial.Group
               key={group.id}

@@ -16,12 +16,12 @@ class List extends Component {
     level: PropTypes.string,
     map: PropTypes.array,
     sortByLength: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
     level: "primary",
-    sortByLength: true
+    sortByLength: true,
   };
 
   constructor(props) {
@@ -39,7 +39,7 @@ class List extends Component {
     const long = {};
     const short = {};
 
-    Object.keys(metadata).forEach(key => {
+    Object.keys(metadata).forEach((key) => {
       const value = metadata[key];
       if (endsWith(key.toLowerCase(), "doi")) return null;
       if (value.length > 280) return (long[key] = value);
@@ -48,7 +48,7 @@ class List extends Component {
 
     return {
       long,
-      short
+      short,
     };
   }
 
@@ -96,7 +96,7 @@ class List extends Component {
 
     return (
       <ListComponent>
-        {metadataKeys.map(key => {
+        {metadataKeys.map((key) => {
           return this.renderValue(key, metadata[key]);
         })}
         {this.renderDoi()}
@@ -115,14 +115,14 @@ class List extends Component {
       <>
         {!isEmpty(longKeys) && (
           <ListComponent>
-            {longKeys.map(key => {
+            {longKeys.map((key) => {
               return this.renderValue(key, long[key]);
             })}
           </ListComponent>
         )}
         {!isEmpty(shortKeys) && (
           <ListComponent $columnar>
-            {shortKeys.map(key => {
+            {shortKeys.map((key) => {
               return this.renderValue(key, short[key]);
             })}
             {this.renderDoi()}

@@ -5,5 +5,5 @@ import Issue from "./Types/Issue";
 export default {
   Project,
   Journal,
-  Issue
+  Issue,
 };

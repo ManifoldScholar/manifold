@@ -6,7 +6,7 @@ import {
   rteElements,
   renderedElements,
   markElements,
-  nestableElements
+  nestableElements,
 } from "../../utils/elements";
 import classNames from "classnames";
 import * as Styled from "./styles";
@@ -19,7 +19,7 @@ export default function SlateElement({
   children,
   element,
   theme,
-  darkMode
+  darkMode,
 }) {
   const className = element.htmlAttrs?.class || undefined;
   const epubType = element.htmlAttrs?.["data-epub-type"] || undefined;

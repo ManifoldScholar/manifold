@@ -17,5 +17,5 @@ export default {
   SkipLink,
   LabelWithIcon,
   SetCSSProperty,
-  RouteAnnouncer
+  RouteAnnouncer,
 };

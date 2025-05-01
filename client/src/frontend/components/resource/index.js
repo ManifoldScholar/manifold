@@ -15,5 +15,5 @@ export default {
   Meta,
   TagList,
   Title,
-  VariantList
+  VariantList,
 };

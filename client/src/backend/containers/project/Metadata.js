@@ -10,7 +10,7 @@ export default class ProjectMetadataContainer extends PureComponent {
   static displayName = "Project.Metadata";
 
   static propTypes = {
-    project: PropTypes.object
+    project: PropTypes.object,
   };
 
   render() {

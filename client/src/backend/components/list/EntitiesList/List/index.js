@@ -30,7 +30,7 @@ export default class ListEntities extends PureComponent {
     invalidButton:
       "List buttons prop can only include List.Entities.List.Button components.",
     invalidSearch:
-      "List search prop can only include List.Entities.List.Search components."
+      "List search prop can only include List.Entities.List.Search components.",
   };
 
   static validateCallbacks = (props, propName) => {
@@ -101,10 +101,10 @@ export default class ListEntities extends PureComponent {
       PropTypes.string,
       PropTypes.shape({
         singular: PropTypes.string,
-        plural: PropTypes.string
-      })
+        plural: PropTypes.string,
+      }),
     ]),
-    error: PropTypes.string
+    error: PropTypes.string,
   };
 
   static defaultProps = {
@@ -115,7 +115,7 @@ export default class ListEntities extends PureComponent {
     sortableStyle: "spaced",
     indented: false,
     entityComponentProps: {},
-    callbacks: {}
+    callbacks: {},
   };
 
   get titleIcon() {
@@ -229,7 +229,7 @@ export default class ListEntities extends PureComponent {
       "entity-list--bare": this.listStyle === "bare",
       "entity-list--well": this.listStyle === "well",
       "entity-list--indented": this.props.indented,
-      [this.props.className]: this.props.className
+      [this.props.className]: this.props.className,
     });
 
     const listClassNames = classNames({
@@ -241,18 +241,18 @@ export default class ListEntities extends PureComponent {
       "entity-list__list--rows": this.listStyle === "rows",
       "entity-list__list--sortable": this.isSortable,
       "entity-list__list--sortable-tight":
-        this.isSortable && this.sortableStyle === "tight"
+        this.isSortable && this.sortableStyle === "tight",
     });
 
     const contentsWrapperClassName = classNames({
       "entity-list__contents-wrapper": true,
       "entity-list__contents-wrapper--with-section-title":
-        this.titleStyle === "section"
+        this.titleStyle === "section",
     });
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <div id={`${this.idPrefix}-${id}`} className={wrapperClassNames}>
             {this.title && (
               <Title

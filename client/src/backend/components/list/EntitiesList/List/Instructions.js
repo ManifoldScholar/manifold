@@ -6,7 +6,7 @@ export default class ListEntitiesListInstructions extends PureComponent {
 
   static propTypes = {
     instructions: PropTypes.node.isRequired,
-    id: PropTypes.string
+    id: PropTypes.string,
   };
 
   get instructions() {

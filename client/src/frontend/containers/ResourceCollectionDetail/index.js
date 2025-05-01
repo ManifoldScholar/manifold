@@ -14,18 +14,18 @@ import { useFetch, useListQueryParams, useListFilters } from "hooks";
 
 export default function ResourceCollectionDetailContainer({
   project,
-  journalBreadcrumbs
+  journalBreadcrumbs,
 }) {
   const { t } = useTranslation();
 
   const { resourceCollectionId } = useParams();
   const { data: collection } = useFetch({
     request: [resourceCollectionsAPI.show, resourceCollectionId],
-    options: { requestKey: requests.feResourceCollection }
+    options: { requestKey: requests.feResourceCollection },
   });
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    scrollTargetId: "collection-list-header"
+    scrollTargetId: "collection-list-header",
   });
 
   const { data: resources, meta } = useFetch({
@@ -33,24 +33,24 @@ export default function ResourceCollectionDetailContainer({
       resourceCollectionsAPI.collectionResources,
       resourceCollectionId,
       filters,
-      pagination
+      pagination,
     ],
-    options: { requestKey: requests.feCollectionResources }
+    options: { requestKey: requests.feCollectionResources },
   });
   const { data: slideshowResources, meta: slideshowMeta } = useFetch({
     request: [resourceCollectionsAPI.collectionResources, resourceCollectionId],
-    options: { requestKey: requests.feSlideshow }
+    options: { requestKey: requests.feSlideshow },
   });
 
   const filterProps = useListFilters({
-    onFilterChange: param => setFilters(param),
+    onFilterChange: (param) => setFilters(param),
     initialState: filters,
     resetState: { resource_collection: resourceCollectionId },
     options: {
       sort: true,
       kinds: collection?.attributes.resourceKinds,
-      tags: collection?.attributes.resourceTags
-    }
+      tags: collection?.attributes.resourceTags,
+    },
   });
 
   const headContentProps = useEntityHeadContent(collection, project);
@@ -70,7 +70,7 @@ export default function ResourceCollectionDetailContainer({
           project,
           collection,
           journalBreadcrumbs,
-          t
+          t,
         })}
       />
       <EntityCollection.ProjectResourceCollectionDetail
@@ -97,7 +97,7 @@ ResourceCollectionDetailContainer.propTypes = {
   resourcesMeta: PropTypes.object,
   history: PropTypes.object,
   journalBreadcrumbs: PropTypes.array,
-  t: PropTypes.func
+  t: PropTypes.func,
 };
 
 ResourceCollectionDetailContainer.displayName =

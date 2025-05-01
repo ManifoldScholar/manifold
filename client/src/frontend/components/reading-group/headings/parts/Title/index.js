@@ -7,7 +7,7 @@ function HeadingTitle({
   title,
   icon = "readingGroup24",
   tag,
-  adminWarning = false
+  adminWarning = false,
 }) {
   const { t } = useTranslation();
 
@@ -33,7 +33,7 @@ HeadingTitle.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string,
   tag: PropTypes.string,
-  adminWarning: PropTypes.bool
+  adminWarning: PropTypes.bool,
 };
 
 export default HeadingTitle;

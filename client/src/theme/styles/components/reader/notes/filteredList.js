@@ -6,7 +6,7 @@ import {
   defaultTransitionProps,
   textTruncate,
   buttonAvatar,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";

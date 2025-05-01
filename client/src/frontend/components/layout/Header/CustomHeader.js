@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import withPluginReplacement from "hoc/withPluginReplacement";
 
 class LayoutCustomHeader extends PureComponent {
@@ -11,5 +11,5 @@ class LayoutCustomHeader extends PureComponent {
 
 export default withPluginReplacement(
   LayoutCustomHeader,
-  "Frontend.Components.Layout.Header.CustomHeader"
+  "Frontend.Components.Layout.Header.CustomHeader",
 );

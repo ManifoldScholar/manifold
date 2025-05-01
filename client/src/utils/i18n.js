@@ -2,7 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import translations from "config/app/locale";
 
-export const updateI18n = lang => {
+export const updateI18n = (lang) => {
   if (i18n.language !== lang) {
     i18n.changeLanguage(lang);
   }
@@ -14,14 +14,14 @@ i18n
     // debug: true,
     resources: translations,
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
     },
     fallbackLng: {
-      default: ["en-US"]
+      default: ["en-US"],
     },
     react: {
-      transSupportBasicHtmlNodes: true
-    }
+      transSupportBasicHtmlNodes: true,
+    },
   });
 
 export default i18n;

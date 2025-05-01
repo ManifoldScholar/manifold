@@ -10,7 +10,7 @@ export default function ProfileGreeting({
   warn,
   userId,
   hideOverlay,
-  trusted
+  trusted,
 }) {
   const formData = useContext(FormContext);
   const nickname = formData.getModelValue("attributes[nickname]");
@@ -23,7 +23,7 @@ export default function ProfileGreeting({
       components={[
         <Styled.Heading />,
         <Styled.Text />,
-        <Styled.Nickname as="h4" />
+        <Styled.Nickname as="h4" />,
       ]}
       values={{ name: nickname }}
     />
@@ -57,5 +57,5 @@ ProfileGreeting.propTypes = {
   userId: PropTypes.string,
   hideOverlay: PropTypes.func,
   warn: PropTypes.bool,
-  trusted: PropTypes.bool
+  trusted: PropTypes.bool,
 };

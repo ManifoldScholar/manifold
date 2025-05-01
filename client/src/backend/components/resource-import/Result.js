@@ -7,7 +7,7 @@ class ResourceImportResult extends PureComponent {
   static displayName = "ResourceImport.Result";
 
   static propTypes = {
-    resourceImportRow: PropTypes.object.isRequired
+    resourceImportRow: PropTypes.object.isRequired,
   };
 
   renderKind(kind) {
@@ -48,7 +48,7 @@ class ResourceImportResult extends PureComponent {
       default:
         return t("resources.import.result_row", {
           num: resourceImportRow.lineNumber,
-          state: resourceImportRow.state
+          state: resourceImportRow.state,
         });
     }
   }

@@ -4,8 +4,8 @@ export default {
       endpoint: "/api/v1/features",
       method: "GET",
       options: {
-        params: { filter }
-      }
+        params: { filter },
+      },
     };
   },
 
@@ -13,7 +13,7 @@ export default {
     return {
       endpoint: `/api/v1/features/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -22,8 +22,8 @@ export default {
       endpoint: `/api/v1/features`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "features", data: feature })
-      }
+        body: JSON.stringify({ type: "features", data: feature }),
+      },
     };
   },
 
@@ -32,8 +32,8 @@ export default {
       endpoint: `/api/v1/features/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "features", data: feature })
-      }
+        body: JSON.stringify({ type: "features", data: feature }),
+      },
     };
   },
 
@@ -41,7 +41,7 @@ export default {
     return {
       endpoint: `/api/v1/features/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

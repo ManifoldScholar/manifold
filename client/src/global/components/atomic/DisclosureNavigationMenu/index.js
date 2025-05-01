@@ -11,16 +11,16 @@ function DisclosureNavigationMenu({
 }) {
   const { disclosureProps, contentProps } = useMenuState(
     initialVisible,
-    onBlur
+    onBlur,
   );
   return (
     <>
       {React.cloneElement(disclosure, {
         ...disclosureProps,
-        ...props
+        ...props,
       })}
       {React.Children.only(
-        React.cloneElement(children, { ...contentProps, ...props })
+        React.cloneElement(children, { ...contentProps, ...props }),
       )}
     </>
   );
@@ -31,7 +31,7 @@ DisclosureNavigationMenu.displayName = "Global.Atomic.DisclosureNavigationMenu";
 DisclosureNavigationMenu.propTypes = {
   disclosure: PropTypes.node.isRequired,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
 };
 
 export default DisclosureNavigationMenu;

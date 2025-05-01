@@ -9,9 +9,9 @@ import Authorization from "helpers/authorization";
 import get from "lodash/get";
 
 export class AuthorizeComponent extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      authentication: state.authentication
+      authentication: state.authentication,
     };
   };
 
@@ -19,7 +19,7 @@ export class AuthorizeComponent extends PureComponent {
     entity: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.string,
-      PropTypes.array
+      PropTypes.array,
     ]),
     ability: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     kind: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
@@ -30,25 +30,25 @@ export class AuthorizeComponent extends PureComponent {
       PropTypes.shape({
         heading: PropTypes.string,
         body: PropTypes.string,
-        level: PropTypes.number
-      })
+        level: PropTypes.number,
+      }),
     ]),
     failureFatalError: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.shape({
         heading: PropTypes.string,
-        body: PropTypes.string
-      })
+        body: PropTypes.string,
+      }),
     ]),
     children: PropTypes.node,
-    authentication: PropTypes.object
+    authentication: PropTypes.object,
   };
 
   static defaultProps = {
     successBehavior: "show",
     failureRedirect: null,
     failureNotification: null,
-    failureFatalError: null
+    failureFatalError: null,
   };
 
   constructor(props) {
@@ -85,7 +85,7 @@ export class AuthorizeComponent extends PureComponent {
     if (!!props.failureFatalError && !this.authorization.authorize(props)) {
       let error = {
         heading: "Access Denied.",
-        body: "You do not have sufficient permissions to perform this action."
+        body: "You do not have sufficient permissions to perform this action.",
       };
       if (isPlainObject(props.failureFatalError)) {
         error = Object.assign(error, props.failureFatalError);
@@ -93,8 +93,8 @@ export class AuthorizeComponent extends PureComponent {
       props.dispatch(
         fatalErrorActions.setFatalError(
           error,
-          fatalErrorActions.types.authorization
-        )
+          fatalErrorActions.types.authorization,
+        ),
       );
     }
   }
@@ -105,7 +105,7 @@ export class AuthorizeComponent extends PureComponent {
         heading: "Access Denied.",
         body: "Please login to proceed.",
         level: 2,
-        scope: "authentication"
+        scope: "authentication",
       };
       if (isPlainObject(props.failureNotification)) {
         error = Object.assign(error, props.failureNotification);
@@ -131,8 +131,8 @@ export class AuthorizeComponent extends PureComponent {
         state: {
           showLogin:
             !this.isAuthenticated && this.props.failureRedirect !== "/login",
-          postLoginRedirect: `${this.props.location.pathname}${this.props.location.search}`
-        }
+          postLoginRedirect: `${this.props.location.pathname}${this.props.location.search}`,
+        },
       };
       return <Redirect to={to} />;
     }
@@ -145,5 +145,5 @@ export class AuthorizeComponent extends PureComponent {
 }
 
 export default connect(AuthorizeComponent.mapStateToProps)(
-  withRouter(AuthorizeComponent)
+  withRouter(AuthorizeComponent),
 );

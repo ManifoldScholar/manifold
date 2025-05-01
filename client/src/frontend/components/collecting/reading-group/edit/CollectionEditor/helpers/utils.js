@@ -5,5 +5,5 @@ export function isShallowEqual(obj1, obj2) {
   if (keys1.length !== keys2.length) {
     return false;
   }
-  return keys1.every(key1 => Object.is(obj1[key1], obj2[key1]));
+  return keys1.every((key1) => Object.is(obj1[key1], obj2[key1]));
 }

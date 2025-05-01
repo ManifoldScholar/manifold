@@ -16,15 +16,14 @@ const PlaceholderActions = ({ actions = [] }) => {
       linkProps: {
         href: DOCS_URL,
         target: "_blank",
-        rel: "noopener norefferer"
-      }
-    }
+        rel: "noopener norefferer",
+      },
+    },
   ];
 
   return (
     <Styled.Actions>
       {allActions.map((action, index) => (
-        // eslint-disable-next-line react/no-array-index-key
         <Action key={index} {...action} />
       ))}
     </Styled.Actions>
@@ -34,7 +33,7 @@ const PlaceholderActions = ({ actions = [] }) => {
 PlaceholderActions.displayName = "Global.Entity.CollectionPlaceholder.Actions";
 
 PlaceholderActions.propTypes = {
-  actions: PropTypes.arrayOf(PropTypes.shape(actionProps))
+  actions: PropTypes.arrayOf(PropTypes.shape(actionProps)),
 };
 
 export default PlaceholderActions;

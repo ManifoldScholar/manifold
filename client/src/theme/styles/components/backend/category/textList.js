@@ -8,7 +8,7 @@ import {
   revealOnFocus,
   outlineOnFocus,
   lighten,
-  fluidScale
+  fluidScale,
 } from "theme/styles/mixins";
 
 export default `

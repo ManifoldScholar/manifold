@@ -5,7 +5,7 @@ export default {
     return {
       endpoint: `/api/v1/tags`,
       method: "GET",
-      options: { params }
+      options: { params },
     };
-  }
+  },
 };

@@ -16,7 +16,7 @@ export default function ProjectHeader({
   note,
   actions,
   hasSecondaryNav,
-  id
+  id,
 }) {
   const { pathname } = useLocation();
   const textLinks = getTextLinks({ texts, pathname });
@@ -24,7 +24,7 @@ export default function ProjectHeader({
   const titleLinkProps = parent
     ? {
         as: NavLink,
-        to: lh.link("backendProject", id)
+        to: lh.link("backendProject", id),
       }
     : {};
 

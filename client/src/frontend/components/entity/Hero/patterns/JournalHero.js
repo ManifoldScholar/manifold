@@ -16,14 +16,14 @@ export default function JournalHero({ entity, mock }) {
     description,
     flattenedCollaborators,
     creators,
-    copy
+    copy,
   } = getPartsData(entity);
 
   const trackEvent = useEventTracker();
 
   const trackJournalEvent = useCallback(
-    eventType => trackEvent(eventType, entity.type, entity.id),
-    [entity, trackEvent]
+    (eventType) => trackEvent(eventType, entity.type, entity.id),
+    [entity, trackEvent],
   );
 
   return (
@@ -75,5 +75,5 @@ export default function JournalHero({ entity, mock }) {
 JournalHero.displayName = "Frontend.Entity.Hero.Journal";
 
 JournalHero.propTypes = {
-  entity: PropTypes.object.isRequired
+  entity: PropTypes.object.isRequired,
 };

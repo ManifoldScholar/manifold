@@ -19,14 +19,14 @@ export class SearchMenuBody extends PureComponent {
     projectId: PropTypes.string,
     textId: PropTypes.string,
     sectionId: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static defaultProps = {
-    toggleVisibility: () => {}
+    toggleVisibility: () => {},
   };
 
-  setQueryState = queryParams => {
+  setQueryState = (queryParams) => {
     this.setState(queryParams, this.doSearch);
   };
 
@@ -43,7 +43,7 @@ export class SearchMenuBody extends PureComponent {
       const path = lh.link("frontendSearch");
       this.props.history.push(path, {
         searchQueryState: this.state,
-        noScroll: true
+        noScroll: true,
       });
     }, 250);
   };
@@ -54,7 +54,7 @@ export class SearchMenuBody extends PureComponent {
       const path = lh.link("frontendProjectSearch", this.props.projectId);
       this.props.history.push(path, {
         searchQueryState: this.state,
-        noScroll: true
+        noScroll: true,
       });
     }, 250);
   };
@@ -66,7 +66,7 @@ export class SearchMenuBody extends PureComponent {
       const path = lh.link("readerSectionSearchResults", textId, sectionId);
       this.props.history.push(path, {
         searchQueryState: this.state,
-        noScroll: true
+        noScroll: true,
       });
     }, 250);
   };
@@ -87,6 +87,7 @@ export class SearchMenuBody extends PureComponent {
           description={this.props.description}
           searchOnScopeChange={false}
           setQueryState={this.setQueryState}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
         />
       </div>

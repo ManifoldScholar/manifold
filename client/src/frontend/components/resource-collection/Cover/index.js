@@ -11,11 +11,11 @@ class ResourceCollectionCover extends Component {
     resourceCollection: PropTypes.object.isRequired,
     urlCreator: PropTypes.func.isRequired,
     itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6]),
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    itemHeadingLevel: 4
+    itemHeadingLevel: 4,
   };
 
   get titleTag() {

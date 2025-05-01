@@ -7,7 +7,7 @@ function SectionLabel({
   as = "header",
   headingAs = "h2",
   id,
-  color = "default"
+  color = "default",
 }) {
   const HTag = headingAs;
 
@@ -25,7 +25,7 @@ SectionLabel.propTypes = {
   as: PropTypes.string,
   headingAs: PropTypes.string,
   id: PropTypes.string,
-  color: PropTypes.oneOf(["default", "error"])
+  color: PropTypes.oneOf(["default", "error"]),
 };
 
 export default SectionLabel;

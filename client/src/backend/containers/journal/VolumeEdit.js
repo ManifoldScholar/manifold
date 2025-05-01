@@ -14,26 +14,26 @@ function JournalVolumeEdit({
   match,
   journal,
   history,
-  confirm
+  confirm,
 }) {
   const { data: journalVolume } = useFetch({
-    request: [journalVolumesAPI.show, match.params.vId]
+    request: [journalVolumesAPI.show, match.params.vId],
   });
 
   const destroy = useApiCallback(journalVolumesAPI.destroy, {
-    removes: journalVolume
+    removes: journalVolume,
   });
 
   const { t } = useTranslation();
 
-  const notifyDestroy = useNotification(v => ({
+  const notifyDestroy = useNotification((v) => ({
     level: 0,
     id: `JOURNAL_VOLUME_DESTROYED_${v.id}`,
     heading: t("notifications.volume_delete"),
     body: t("notifications.volume_body", {
-      number: v?.attributes?.number
+      number: v?.attributes?.number,
     }),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const destroyAndRedirect = useCallback(() => {
@@ -44,7 +44,7 @@ function JournalVolumeEdit({
         notifyDestroy(journalVolume);
         redirect();
       },
-      () => redirect()
+      () => redirect(),
     );
   }, [destroy, history, journal?.id, journalVolume, notifyDestroy]);
 
@@ -64,8 +64,8 @@ function JournalVolumeEdit({
       onClick: onDelete,
       label: t("actions.delete"),
       icon: "delete32",
-      className: "utility-button__icon--notice"
-    }
+      className: "utility-button__icon--notice",
+    },
   ];
 
   return (
@@ -84,7 +84,7 @@ JournalVolumeEdit.propTypes = {
   journal: PropTypes.object.isRequired,
   closeUrl: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
-  refreshVolumes: PropTypes.func.isRequired
+  refreshVolumes: PropTypes.func.isRequired,
 };
 
 export default withConfirmation(JournalVolumeEdit);

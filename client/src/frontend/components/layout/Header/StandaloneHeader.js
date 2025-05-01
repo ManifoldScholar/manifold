@@ -15,11 +15,11 @@ import SetCSSProperty from "global/components/utility/SetCSSProperty";
 class StandaloneHeader extends PureComponent {
   static displayName = "Layout.StandaloneHeader";
 
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
       authentication: state.authentication,
       visibility: state.ui.transitory.visibility,
-      notifications: state.notifications
+      notifications: state.notifications,
     };
   };
 
@@ -29,11 +29,11 @@ class StandaloneHeader extends PureComponent {
     visibility: PropTypes.object,
     notifications: PropTypes.object,
     settings: PropTypes.object,
-    alwaysVisible: PropTypes.bool
+    alwaysVisible: PropTypes.bool,
   };
 
   static defaultProps = {
-    alwaysVisible: false
+    alwaysVisible: false,
   };
 
   static contextType = FrontendModeContext;
@@ -51,12 +51,12 @@ class StandaloneHeader extends PureComponent {
       scroll: 0,
       direction: "down",
       log: null,
-      mobile: window.innerWidth <= this.breakpoint
+      mobile: window.innerWidth <= this.breakpoint,
     };
 
     this.throttleScroll = throttle(this.handleScroll, 250, {
       leading: true,
-      trailing: true
+      trailing: true,
     }).bind(this);
   }
 
@@ -112,7 +112,7 @@ class StandaloneHeader extends PureComponent {
     const state = {
       direction,
       log,
-      scroll: this.getScrollTop()
+      scroll: this.getScrollTop(),
     };
     state.sticky = state.scroll > 50;
     this.setState(state);
@@ -175,15 +175,15 @@ class StandaloneHeader extends PureComponent {
       "standalone-header--visible": visible,
       "standalone-header--hidden": hidden,
       "standalone-header--light": this.lightTheme,
-      "standalone-header--dark": !this.lightTheme
+      "standalone-header--dark": !this.lightTheme,
     });
 
     const innerClasses = classNames({
-      "standalone-header__inner": true
+      "standalone-header__inner": true,
     });
 
     const headingClasses = classNames({
-      "standalone-header__header": true
+      "standalone-header__header": true,
     });
 
     const offset = get(this.props, "settings.attributes.theme.headerOffset");

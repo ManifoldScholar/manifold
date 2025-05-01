@@ -17,7 +17,7 @@ export class ContentBlockEditContainer extends Component {
 
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
-      contentBlock: select(requests.beContentBlock, state.entityStore)
+      contentBlock: select(requests.beContentBlock, state.entityStore),
     };
   };
 
@@ -28,7 +28,7 @@ export class ContentBlockEditContainer extends Component {
     project: PropTypes.object,
     contentBlock: PropTypes.object,
     confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -54,7 +54,7 @@ export class ContentBlockEditContainer extends Component {
 
   onVisibilityToggle = () => {
     const call = contentBlocksAPI.update(this.contentBlock.id, {
-      attributes: { visible: !this.contentBlock.attributes.visible }
+      attributes: { visible: !this.contentBlock.attributes.visible },
     });
     const options = { notificationScope: "none" };
     const updateRequest = request(call, requests.beContentBlockUpdate, options);
@@ -72,16 +72,16 @@ export class ContentBlockEditContainer extends Component {
   doDelete = () => {
     const call = contentBlocksAPI.destroy(this.contentBlock.id);
     const options = {
-      removes: { type: "contentBlocks", id: this.contentBlock.id }
+      removes: { type: "contentBlocks", id: this.contentBlock.id },
     };
     const destroyRequest = request(
       call,
       requests.beContentBlockDestroy,
-      options
+      options,
     );
     this.props.dispatch(destroyRequest).promise.then(() => {
       return this.props.history.push(
-        lh.link("backendProjectLayout", this.project.id)
+        lh.link("backendProjectLayout", this.project.id),
       );
     });
   };
@@ -109,5 +109,5 @@ export class ContentBlockEditContainer extends Component {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ContentBlockEditContainer))
+  withConfirmation(connectAndFetch(ContentBlockEditContainer)),
 );

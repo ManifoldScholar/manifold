@@ -12,11 +12,11 @@ class ResourceTagList extends Component {
     resource: PropTypes.object,
     disabledLinks: PropTypes.bool,
     t: PropTypes.func,
-    isCard: PropTypes.bool
+    isCard: PropTypes.bool,
   };
 
   static defaultProps = {
-    disabledLinks: false
+    disabledLinks: false,
   };
 
   mapTagsToLinks(resource) {
@@ -35,7 +35,7 @@ class ResourceTagList extends Component {
     );
   }
 
-  stopPropagation = event => {
+  stopPropagation = (event) => {
     event.stopPropagation();
   };
 
@@ -43,7 +43,7 @@ class ResourceTagList extends Component {
     const { disabledLinks } = this.props;
     if (!projectSlug && !disabledLinks) return null;
     const url = lh.link("frontendProjectResources", projectSlug, {
-      tag: tag.toLowerCase()
+      tag: tag.toLowerCase(),
     });
     const tagProps = disabledLinks
       ? { className: "disabled" }

@@ -19,9 +19,9 @@ import Authorize from "hoc/Authorize";
 const { request } = entityStoreActions;
 
 export class ResourceCollectionNewContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      project: select(requests.beProject, state.entityStore)
+      project: select(requests.beProject, state.entityStore),
     };
   };
 
@@ -40,7 +40,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
     history: PropTypes.object,
     match: PropTypes.object,
     resourceCollection: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   redirectToCollection(resourceCollection) {
@@ -48,7 +48,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
     this.props.history.push(path);
   }
 
-  handleSuccess = resourceCollection => {
+  handleSuccess = (resourceCollection) => {
     this.redirectToCollection(resourceCollection);
   };
 
@@ -62,16 +62,16 @@ export class ResourceCollectionNewContainer extends PureComponent {
       resourceCollection,
       project,
       belongsToJournalIssue,
-      t
+      t,
     );
 
     const parentProps = {
       parentTitle: project.attributes.titleFormatted,
       parentSubtitle: project.attributes.subtitle,
-      parentId: project.id
+      parentId: project.id,
     };
 
-    const formatData = data => {
+    const formatData = (data) => {
       const { thumbnailAltText, thumbnail, ...rest } = data?.attributes ?? {};
 
       const finalThumbnailData =
@@ -81,7 +81,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
 
       return {
         ...data,
-        attributes: { thumbnail: finalThumbnailData, ...rest }
+        attributes: { thumbnail: finalThumbnailData, ...rest },
       };
     };
 
@@ -94,7 +94,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
       >
         <HeadContent
           title={`${t(`titles.resource_collection_new`)} | ${t(
-            "common.admin"
+            "common.admin",
           )}`}
           appendDefaultTitle
         />
@@ -114,7 +114,9 @@ export class ResourceCollectionNewContainer extends PureComponent {
               model={resourceCollection}
               name={requests.beResourceCollectionCreate}
               update={resourceCollectionsAPI.update}
-              create={model => resourceCollectionsAPI.create(project.id, model)}
+              create={(model) =>
+                resourceCollectionsAPI.create(project.id, model)
+              }
               onSuccess={this.handleSuccess}
               formatData={formatData}
               className="form-secondary"
@@ -131,7 +133,7 @@ export class ResourceCollectionNewContainer extends PureComponent {
                 label={t("resource_collections.forms.descript_label")}
                 name="attributes[description]"
                 placeholder={t(
-                  "resource_collections.forms.descript_placeholder"
+                  "resource_collections.forms.descript_placeholder",
                 )}
                 wide
                 {...this.props}
@@ -159,5 +161,5 @@ export class ResourceCollectionNewContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  connectAndFetch(ResourceCollectionNewContainer)
+  connectAndFetch(ResourceCollectionNewContainer),
 );

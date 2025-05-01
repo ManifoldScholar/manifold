@@ -8,7 +8,7 @@ function CollectingDialogCheckbox({
   value,
   checked,
   onChange,
-  showLock
+  showLock,
 }) {
   const uid = useUID();
   const [assumeChecked, setAssumeChecked] = useState(checked);
@@ -58,7 +58,7 @@ CollectingDialogCheckbox.propTypes = {
   value: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
-  showLock: PropTypes.bool
+  showLock: PropTypes.bool,
 };
 
 export default CollectingDialogCheckbox;

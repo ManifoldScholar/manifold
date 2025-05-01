@@ -18,9 +18,9 @@ function JournalPermissions({ journal, confirm }) {
 
   useEffect(() => {
     if (data) {
-      setEditors(data.map(p => p.relationships?.user));
+      setEditors(data.map((p) => p.relationships?.user));
       setPermissions(
-        data.map(p => ({ id: p.id, userId: p.relationships?.user?.id }))
+        data.map((p) => ({ id: p.id, userId: p.relationships?.user?.id })),
       );
     }
   }, [data]);
@@ -28,11 +28,11 @@ function JournalPermissions({ journal, confirm }) {
   const createPermission = useApiCallback(permissionsAPI.create);
   const deletePermission = useApiCallback(permissionsAPI.destroy);
 
-  const handleCreate = async val => {
+  const handleCreate = async (val) => {
     const user = [...val].pop();
     const permission = {
       relationships: { user: { data: { id: user.id, type: "users" } } },
-      attributes: { roleNames: ["journal_editor"] }
+      attributes: { roleNames: ["journal_editor"] },
     };
 
     try {
@@ -42,30 +42,28 @@ function JournalPermissions({ journal, confirm }) {
         setEditors(val);
         setPermissions([
           ...permissions,
-          { id: res.id, userId: res.relationships?.user?.data?.id }
+          { id: res.id, userId: res.relationships?.user?.data?.id },
         ]);
       }
     } catch (e) {
-      // eslint-disable-next-line
       console.debug(e);
     }
   };
 
-  const doDelete = async id => {
-    const permission = permissions.find(p => p.userId === id);
+  const doDelete = async (id) => {
+    const permission = permissions.find((p) => p.userId === id);
 
     try {
       await deletePermission(journal, permission.id);
-      const update = editors.filter(e => e.id !== id);
+      const update = editors.filter((e) => e.id !== id);
       setEditors(update);
-      setPermissions(permissions.filter(p => p.userId === id));
+      setPermissions(permissions.filter((p) => p.userId === id));
     } catch (e) {
-      // eslint-disable-next-line
       console.debug(e);
     }
   };
 
-  const handleDelete = id => {
+  const handleDelete = (id) => {
     const heading = t("modals.remove_journal_editor");
     const message = t("modals.remove_journal_editor_body");
     confirm(heading, message, () => doDelete(id));
@@ -82,7 +80,7 @@ function JournalPermissions({ journal, confirm }) {
           name=""
           listStyle="rows"
           options={() => usersAPI.index({ order: "first_name, last_name" })}
-          optionToLabel={u => u.attributes.fullName}
+          optionToLabel={(u) => u.attributes.fullName}
           placeholder={t("projects.permissions.user_placeholder")}
           predictive
           isMultiple
@@ -102,5 +100,5 @@ JournalPermissions.displayName = "Journal.Access.Wrapper";
 
 JournalPermissions.propTypes = {
   journal: PropTypes.object,
-  confirm: PropTypes.func
+  confirm: PropTypes.func,
 };

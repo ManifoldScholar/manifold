@@ -7,5 +7,5 @@ export default {
   List,
   AddEdit,
   Import,
-  CSVImports
+  CSVImports,
 };

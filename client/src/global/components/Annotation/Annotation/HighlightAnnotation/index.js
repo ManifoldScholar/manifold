@@ -15,17 +15,17 @@ class HighlightDetail extends PureComponent {
     annotation: PropTypes.object.isRequired,
     visitHandler: PropTypes.func.isRequired,
     deleteHandler: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      hovering: false
+      hovering: false,
     };
   }
 
-  hoverHandler = hovering => {
+  hoverHandler = (hovering) => {
     this.setState({ hovering });
   };
 
@@ -40,7 +40,7 @@ class HighlightDetail extends PureComponent {
       "annotation-selection__text-container--light": true,
       "annotation-selection__text-container--rounded-corners":
         this.displayFormat === "fullPage",
-      "annotation-selection__text-container--hovering": this.state.hovering
+      "annotation-selection__text-container--hovering": this.state.hovering,
     });
 
     return (

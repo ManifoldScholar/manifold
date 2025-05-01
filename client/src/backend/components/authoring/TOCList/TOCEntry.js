@@ -17,7 +17,7 @@ export default function TOCEntry({
   textId,
   onDelete,
   onCollapse,
-  onExpand
+  onExpand,
 }) {
   const { t } = useTranslation();
 
@@ -82,5 +82,5 @@ TOCEntry.propTypes = {
   textId: PropTypes.string,
   onDelete: PropTypes.func,
   isStart: PropTypes.bool,
-  onSetStart: PropTypes.func
+  onSetStart: PropTypes.func,
 };

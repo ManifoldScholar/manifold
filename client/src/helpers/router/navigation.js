@@ -15,7 +15,7 @@ class Navigation {
       {
         label: "titles.home",
         route: "frontend",
-        matchType: "link"
+        matchType: "link",
       },
       {
         label: "titles.projects",
@@ -23,13 +23,13 @@ class Navigation {
         children: [
           {
             label: "titles.projects_all",
-            route: "frontendProjectsAll"
+            route: "frontendProjectsAll",
           },
           {
             label: "titles.project_collections",
-            route: "frontendProjectCollections"
-          }
-        ]
+            route: "frontendProjectCollections",
+          },
+        ],
       },
       settings.attributes.calculated.hasVisibleJournals && {
         label: "titles.journals",
@@ -37,26 +37,26 @@ class Navigation {
         children: [
           {
             label: "titles.journals_all",
-            route: "frontendJournalsList"
+            route: "frontendJournalsList",
           },
           {
             label: "titles.issues_all",
-            route: "frontendIssuesList"
-          }
-        ]
+            route: "frontendIssuesList",
+          },
+        ],
       },
       !hideRGs && {
         label: "titles.groups",
-        route: "frontendPublicReadingGroups"
-      }
-    ].filter(x => x);
+        route: "frontendPublicReadingGroups",
+      },
+    ].filter((x) => x);
   }
 
   static backend = memoize(() => {
     return [
       {
         label: "titles.dashboard",
-        route: "backendDashboard"
+        route: "backendDashboard",
       },
       {
         label: "titles.projects",
@@ -65,29 +65,29 @@ class Navigation {
         children: [
           {
             label: "titles.projects_all",
-            route: "backendProjectsAll"
+            route: "backendProjectsAll",
           },
           {
             label: "titles.project_collections",
             route: "backendProjectCollections",
             entity: "projectCollection",
-            ability: "update"
-          }
-        ]
+            ability: "update",
+          },
+        ],
       },
       {
         label: "titles.projects",
-        route: "backendProjectsAll"
+        route: "backendProjectsAll",
       },
       {
         label: "titles.journals",
-        route: "backendJournals"
+        route: "backendJournals",
       },
       {
         label: "titles.groups",
         route: "backendReadingGroups",
         entity: "readingGroup",
-        kind: "admin"
+        kind: "admin",
       },
       {
         label: "titles.records",
@@ -99,45 +99,45 @@ class Navigation {
             label: "titles.makers",
             route: "backendRecordsMakers",
             entity: "maker",
-            ability: "update"
+            ability: "update",
           },
           {
             label: "titles.users",
             route: "backendRecordsUsers",
             entity: "user",
-            ability: "update"
+            ability: "update",
           },
           {
             label: "titles.pages",
             route: "backendRecordsPages",
             entity: "page",
-            ability: "update"
+            ability: "update",
           },
           {
             label: "titles.features",
             route: "backendRecordsFeatures",
             entity: "feature",
-            ability: "update"
+            ability: "update",
           },
           {
             label: "titles.entitlements",
             route: "backendRecordsEntitlements",
             entity: "entitlement",
-            ability: "update"
+            ability: "update",
           },
           {
             label: "titles.annotations",
             route: "backendRecordsAnnotations",
             entity: "annotation",
-            ability: "update"
+            ability: "update",
           },
           {
             label: "titles.comments",
             route: "backendRecordsComments",
             entity: "comment",
-            ability: "update"
-          }
-        ]
+            ability: "update",
+          },
+        ],
       },
       {
         label: "titles.settings",
@@ -147,43 +147,43 @@ class Navigation {
         children: [
           {
             label: "titles.properties",
-            route: "backendSettingsProperties"
+            route: "backendSettingsProperties",
           },
           {
             label: "titles.theme",
-            route: "backendSettingsTheme"
+            route: "backendSettingsTheme",
           },
           {
             label: "titles.ingestion",
-            route: "backendSettingsIngestion"
+            route: "backendSettingsIngestion",
           },
           {
             label: "titles.integrations",
-            route: "backendSettingsIntegrations"
+            route: "backendSettingsIntegrations",
           },
           {
             label: "titles.subjects",
-            route: "backendSettingsSubjects"
+            route: "backendSettingsSubjects",
           },
           {
             label: "titles.email",
-            route: "backendSettingsEmail"
+            route: "backendSettingsEmail",
           },
           {
             label: "titles.export_targets",
             route: "backendSettingsExportTargets",
             entity: "exportTarget",
-            ability: "update"
-          }
-        ]
+            ability: "update",
+          },
+        ],
       },
       {
         label: "titles.analytics",
         route: "backendAnalytics",
         entity: "statistics",
         ability: "read",
-        children: []
-      }
+        children: [],
+      },
     ];
   });
 
@@ -195,19 +195,19 @@ class Navigation {
         route: "backendResourceCollectionProperties",
         entity: collection,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.resources",
         route: "backendResourceCollectionResources",
         entity: collection,
         ability: "update",
-        args
-      }
+        args,
+      },
     ];
   }
 
-  static page = memoize(page => {
+  static page = memoize((page) => {
     const args = [page.id];
     return [
       {
@@ -215,12 +215,12 @@ class Navigation {
         route: "backendRecordsPageProperties",
         entity: page,
         ability: "update",
-        args
-      }
+        args,
+      },
     ];
   });
 
-  static project = memoize(project => {
+  static project = memoize((project) => {
     const args = [project.id];
     return [
       {
@@ -228,85 +228,85 @@ class Navigation {
         route: "backendProjectAnalytics",
         entity: project,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.properties",
         route: "backendProjectProperties",
         entity: project,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.layout",
         route: "backendProjectLayout",
         entity: project,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.access",
         route: "backendProjectAccess",
         entity: project,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.collaborators",
         route: "backendProjectCollaborators",
         entity: project,
         ability: "updateMakers",
-        args
+        args,
       },
       {
         label: "titles.texts",
         route: "backendProjectTexts",
         entity: project,
         ability: "manageTexts",
-        args
+        args,
       },
       {
         label: "titles.resources",
         route: "backendProjectResources",
         entity: project,
         ability: "manageResources",
-        args
+        args,
       },
       {
         label: "titles.resource_collections",
         route: "backendProjectResourceCollections",
         entity: project,
         ability: "manageResourceCollections",
-        args
+        args,
       },
       {
         label: "titles.events",
         route: "backendProjectEvents",
         entity: project,
         ability: "manageEvents",
-        args
+        args,
       },
       {
         label: "titles.metadata",
         route: "backendProjectMetadata",
         entity: project,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.exports",
         route: "backendProjectExportations",
         entity: project,
         ability: "manageProjectExportations",
-        args
+        args,
       },
       {
         label: "titles.log",
         route: "backendProjectLog",
         entity: project,
         ability: "readLog",
-        args
-      }
+        args,
+      },
     ];
   });
 
@@ -316,18 +316,18 @@ class Navigation {
         label: "titles.projects_all",
         route: "backendProjectsAll",
         entity: "project",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.project_collections",
         route: "backendProjectCollections",
         entity: "projectCollection",
-        ability: "update"
-      }
+        ability: "update",
+      },
     ];
   });
 
-  static journal = memoize(journal => {
+  static journal = memoize((journal) => {
     const args = [journal.id];
     return [
       {
@@ -335,47 +335,47 @@ class Navigation {
         route: "backendJournalProperties",
         entity: journal,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.layout",
         route: "backendJournalLayout",
         entity: journal,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.access",
         route: "backendJournalAccess",
         entity: journal,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.metadata",
         route: "backendJournalMetadata",
         entity: journal,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.issues",
         route: "backendJournalIssues",
         entity: journal,
         ability: "read",
-        args
+        args,
       },
       {
         label: "titles.volumes",
         route: "backendJournalVolumes",
         entity: journal,
         ability: "update",
-        args
-      }
+        args,
+      },
     ];
   });
 
-  static readingGroup = memoize(group => {
+  static readingGroup = memoize((group) => {
     const args = [group.id];
     return [
       {
@@ -383,22 +383,22 @@ class Navigation {
         route: "backendReadingGroupDetails",
         entity: group,
         ability: "read",
-        args
+        args,
       },
       {
         label: "titles.members",
         route: "backendReadingGroupMembers",
         entity: group,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.annotations",
         route: "backendReadingGroupAnnotations",
         entity: group,
         ability: "update",
-        args
-      }
+        args,
+      },
     ];
   });
 
@@ -408,48 +408,48 @@ class Navigation {
         label: "titles.makers",
         route: "backendRecordsMakers",
         entity: "maker",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.users",
         route: "backendRecordsUsers",
         entity: "user",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.pages",
         route: "backendRecordsPages",
         entity: "page",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.features",
         route: "backendRecordsFeatures",
         entity: "feature",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "Entitlements",
         route: "backendRecordsEntitlements",
         entity: "entitlementImport",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.annotations",
         route: "backendRecordsAnnotations",
         entity: "annotation",
-        kind: "admin"
+        kind: "admin",
       },
       {
         label: "titles.comments",
         route: "backendRecordsComments",
         entity: "comment",
-        kind: "admin"
-      }
+        kind: "admin",
+      },
     ];
   });
 
-  static user = memoize(user => {
+  static user = memoize((user) => {
     const args = [user.id];
     return [
       {
@@ -457,19 +457,19 @@ class Navigation {
         route: "backendRecordsUserProperties",
         entity: user,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.activity",
         route: "backendRecordsUserActivity",
         entity: user,
         ability: "update",
-        args
-      }
+        args,
+      },
     ];
   });
 
-  static resource = memoize(resource => {
+  static resource = memoize((resource) => {
     const externalVideo = resource.attributes.externalVideo;
     const project = resource.relationships.project;
     const kind = resource.attributes.kind;
@@ -480,15 +480,15 @@ class Navigation {
         route: "backendResourceProperties",
         entity: project,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.metadata",
         route: "backendResourceMetadata",
         entity: project,
         ability: "manageResources",
-        args
-      }
+        args,
+      },
     ];
     if (
       kind === "image" ||
@@ -502,7 +502,7 @@ class Navigation {
         route: "backendResourceVariants",
         entity: project,
         ability: "update",
-        args
+        args,
       });
     }
     return out;
@@ -514,48 +514,48 @@ class Navigation {
         label: "titles.properties",
         route: "backendSettingsProperties",
         entity: "settings",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.theme",
         route: "backendSettingsTheme",
         entity: "settings",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.integrations",
         route: "backendSettingsIntegrations",
         entity: "settings",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.ingestion",
         route: "backendSettingsIngestion",
         entity: "settings",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.subjects",
         route: "backendSettingsSubjects",
         entity: "settings",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.email",
         route: "backendSettingsEmail",
         entity: "settings",
-        ability: "update"
+        ability: "update",
       },
       {
         label: "titles.export_targets",
         route: "backendSettingsExportTargets",
         entity: "exportTarget",
-        ability: "update"
-      }
+        ability: "update",
+      },
     ];
   });
 
-  static text = memoize(text => {
+  static text = memoize((text) => {
     const args = [text.id];
     return [
       {
@@ -563,64 +563,64 @@ class Navigation {
         route: "backendTextAnalytics",
         entity: text,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.properties",
         route: "backendTextProperties",
         entity: text,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.collaborators",
         route: "backendTextCollaborators",
         entity: text.relationships.project,
         ability: "updateMakers",
-        args
+        args,
       },
       {
         label: "titles.sections",
         route: "backendTextSections",
         entity: text,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.toc",
         route: "backendTextTOC",
         entity: text,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.assets",
         route: "backendTextAssets",
         entity: text,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.metadata",
         route: "backendTextMetadata",
         entity: text,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.styles",
         route: "backendTextStyles",
         entity: text,
         ability: "update",
-        args
+        args,
       },
       {
         label: "titles.reingest",
         route: "backendTextIngestionsNew",
         entity: text,
         ability: "update",
-        args
-      }
+        args,
+      },
     ];
   });
 }

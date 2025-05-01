@@ -7,5 +7,5 @@ export default {
   Edit,
   Form,
   List,
-  New
+  New,
 };

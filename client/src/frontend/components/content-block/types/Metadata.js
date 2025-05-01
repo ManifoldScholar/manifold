@@ -7,7 +7,7 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
   static displayName = "Project.Content.Block.Metadata";
 
   static propTypes = {
-    entity: PropTypes.object.isRequired
+    entity: PropTypes.object.isRequired,
   };
 
   static get title() {

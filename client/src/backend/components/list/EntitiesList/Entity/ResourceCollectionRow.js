@@ -15,16 +15,16 @@ class ResourceCollectionRow extends PureComponent {
     projectId: PropTypes.string,
     active: PropTypes.string,
     onRowClick: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    clickable: true
+    clickable: true,
   };
 
   get onRowClick() {
     if (this.props.onRowClick)
-      return event => {
+      return (event) => {
         event.preventDefault();
         event.stopPropagation();
         return this.props.onRowClick(this.resourceCollection);
@@ -53,9 +53,8 @@ class ResourceCollectionRow extends PureComponent {
   }
 
   get count() {
-    const {
-      collectionResourcesCount: count
-    } = this.resourceCollection.attributes;
+    const { collectionResourcesCount: count } =
+      this.resourceCollection.attributes;
     return this.props.t("glossary.resource_with_count", { count });
   }
 
@@ -67,7 +66,7 @@ class ResourceCollectionRow extends PureComponent {
     const linkProps = this.props.clickable
       ? {
           onRowClick: this.onRowClick,
-          rowClickMode: "block"
+          rowClickMode: "block",
         }
       : {};
     return (

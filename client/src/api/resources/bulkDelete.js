@@ -4,8 +4,8 @@ export default {
       endpoint: "/api/v1/bulk_delete/annotations",
       method: "DELETE",
       options: {
-        body: JSON.stringify({ bulk_delete: params })
-      }
+        body: JSON.stringify({ bulk_delete: params }),
+      },
     };
   },
 
@@ -14,8 +14,8 @@ export default {
       endpoint: "/api/v1/bulk_delete/comments",
       method: "DELETE",
       options: {
-        body: JSON.stringify({ bulk_delete: params })
-      }
+        body: JSON.stringify({ bulk_delete: params }),
+      },
     };
   },
 
@@ -24,8 +24,8 @@ export default {
       endpoint: "/api/v1/bulk_delete/reading_groups",
       method: "DELETE",
       options: {
-        body: JSON.stringify({ bulk_delete: params })
-      }
+        body: JSON.stringify({ bulk_delete: params }),
+      },
     };
   },
 
@@ -34,8 +34,8 @@ export default {
       endpoint: "/api/v1/bulk_delete/users",
       method: "DELETE",
       options: {
-        body: JSON.stringify({ bulk_delete: params })
-      }
+        body: JSON.stringify({ bulk_delete: params }),
+      },
     };
-  }
+  },
 };

@@ -8,7 +8,7 @@ export const insertIframe = (editor, url, title) => {
   const embed = {
     type,
     htmlAttrs: { src: url, title, controls },
-    children: [text]
+    children: [text],
   };
   const [node] = Editor.above(editor, editor.selection);
   if (Editor.isEmpty(editor, node)) {

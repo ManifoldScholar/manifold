@@ -15,7 +15,7 @@ function JournalDescription({
   withDarkMode = true,
   model,
   closeDrawer,
-  setDirty
+  setDirty,
 }) {
   const maybeCloseDrawer = useCallback(() => {
     if (!closeDrawer) return;
@@ -23,13 +23,13 @@ function JournalDescription({
   }, [closeDrawer]);
   const { t } = useTranslation();
 
-  const onDirty = session => {
+  const onDirty = (session) => {
     const dirtyAttrs = Object.keys(session.attributes).length;
     const dirtyRels = Object.keys(session.relationships).length;
     setDirty(dirtyAttrs || dirtyRels);
   };
 
-  const formatData = data => {
+  const formatData = (data) => {
     const { logoAltText, logo, heroAltText, hero, ...rest } =
       data?.attributes ?? {};
 
@@ -45,7 +45,7 @@ function JournalDescription({
 
     return {
       ...data,
-      attributes: { logo: finalLogoData, hero: finalHeroData, ...rest }
+      attributes: { logo: finalLogoData, hero: finalHeroData, ...rest },
     };
   };
 
@@ -85,10 +85,10 @@ function JournalDescription({
             label={t("common.description")}
             name="attributes[description]"
             placeholder={t("hero.description_placeholder", {
-              entity: modelLabel
+              entity: modelLabel,
             })}
             instructions={t("hero.description_instructions", {
-              entity: modelLabel
+              entity: modelLabel,
             })}
           />
           <Form.Upload
@@ -108,7 +108,7 @@ function JournalDescription({
             options={[
               { label: t("hero.square_inset"), value: "square_inset" },
               { label: t("hero.wide_inset"), value: "wide_inset" },
-              { label: t("hero.full_bleed"), value: "full_bleed" }
+              { label: t("hero.full_bleed"), value: "full_bleed" },
             ]}
           />
           <Form.Upload
@@ -119,7 +119,7 @@ function JournalDescription({
             name="attributes[logo]"
             remove="attributes[removeLogo]"
             instructions={t("journals.forms.logo_instructions", {
-              entity: modelLabel
+              entity: modelLabel,
             })}
             altTextName="attributes[logoAltText]"
             altTextLabel={t("journals.forms.logo_alt_label")}
@@ -154,7 +154,7 @@ JournalDescription.propTypes = {
   closeDrawer: PropTypes.func,
   withDarkMode: PropTypes.bool,
   headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  setDirty: PropTypes.func
+  setDirty: PropTypes.func,
 };
 
 export default JournalDescription;

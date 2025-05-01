@@ -20,14 +20,14 @@ export default function withEventTracker(WrappedComponent) {
       this.context.track({
         event,
         resourceType,
-        resourceId
+        resourceId,
       });
     };
 
     render() {
       const props = {
         ...this.props,
-        trackEvent: this.trackEvent
+        trackEvent: this.trackEvent,
       };
       return React.createElement(WrappedComponent, props);
     }

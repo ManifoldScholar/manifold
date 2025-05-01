@@ -15,7 +15,7 @@ function ProjectDescription({
   withDarkMode = true,
   model,
   closeDrawer,
-  setDirty
+  setDirty,
 }) {
   const maybeCloseDrawer = useCallback(() => {
     if (!closeDrawer) return;
@@ -23,13 +23,13 @@ function ProjectDescription({
   }, [closeDrawer]);
   const { t } = useTranslation();
 
-  const onDirty = session => {
+  const onDirty = (session) => {
     const dirtyAttrs = Object.keys(session.attributes).length;
     const dirtyRels = Object.keys(session.relationships).length;
     setDirty(dirtyAttrs || dirtyRels);
   };
 
-  const formatData = data => {
+  const formatData = (data) => {
     const { coverAltText, cover, heroAltText, hero, ...rest } =
       data?.attributes ?? {};
 
@@ -45,7 +45,7 @@ function ProjectDescription({
 
     return {
       ...data,
-      attributes: { cover: finalCoverData, hero: finalHeroData, ...rest }
+      attributes: { cover: finalCoverData, hero: finalHeroData, ...rest },
     };
   };
 
@@ -86,10 +86,10 @@ function ProjectDescription({
               label={t("common.description")}
               name="attributes[description]"
               placeholder={t("hero.description_placeholder", {
-                entity: modelLabel
+                entity: modelLabel,
               })}
               instructions={t("hero.description_instructions", {
-                entity: modelLabel
+                entity: modelLabel,
               })}
             />
             <Form.Upload
@@ -112,7 +112,7 @@ function ProjectDescription({
               name="attributes[cover]"
               remove="attributes[removeCover]"
               instructions={t("hero.cover_image_instructions", {
-                entity: modelLabel
+                entity: modelLabel,
               })}
               altTextName={"attributes[coverAltText]"}
               altTextLabel={t("hero.cover_image_alt_label")}
@@ -142,7 +142,7 @@ ProjectDescription.propTypes = {
   closeDrawer: PropTypes.func,
   withDarkMode: PropTypes.bool,
   headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  setDirty: PropTypes.func
+  setDirty: PropTypes.func,
 };
 
 export default ProjectDescription;

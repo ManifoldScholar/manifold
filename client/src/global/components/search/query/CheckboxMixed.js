@@ -1,22 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 
 function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
-  const initialState = checkboxes.map(checkbox => checkbox.value);
+  const initialState = checkboxes.map((checkbox) => checkbox.value);
   const [checked, setChecked] = useState(initialState);
   const allChecked = checked.length === checkboxes.length;
+
+  const inputRef = useRef(null);
 
   const { t } = useTranslation();
 
   useEffect(() => {
     onChange(checked);
+
+    if (inputRef.current) {
+      const isIndeterminate =
+        checked.length > 0 && checked.length < checkboxes.length;
+      inputRef.current.indeterminate = isIndeterminate;
+    }
   }, [checked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateChecked(key) {
-    setChecked(prevChecked => {
+    setChecked((prevChecked) => {
       const index = prevChecked.indexOf(key);
       return index === -1
         ? [...prevChecked, key]
@@ -25,8 +33,8 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
   }
 
   return (
-    <UIDConsumer name={id => `search-facets-${id}`}>
-      {id => (
+    <UIDConsumer name={(id) => `search-facets-${id}`}>
+      {(id) => (
         <fieldset className="search-query__filter-group">
           <legend className="search-query__group-label">{groupLabel}</legend>
           <div className="search-query__filter-group-list">
@@ -36,13 +44,12 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
                 className="search-query__checkbox checkbox checkbox--gray"
               >
                 <input
+                  ref={inputRef}
                   id={`${id}[all]`}
                   type="checkbox"
                   checked={allChecked}
-                  indeterminate={`${checked.length > 0 &&
-                    checked.length < checkboxes.length}`}
                   aria-controls={checkboxes
-                    .map(checkbox => `${id}[${checkbox.value}]`)
+                    .map((checkbox) => `${id}[${checkbox.value}]`)
                     .join(" ")}
                   onChange={() => setChecked(allChecked ? [] : initialState)}
                 />
@@ -94,7 +101,7 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
 CheckboxMixed.propTypes = {
   label: PropTypes.string.isRequired,
   checkboxes: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 CheckboxMixed.displayName = "Search.Query.Form.CheckboxMixed";

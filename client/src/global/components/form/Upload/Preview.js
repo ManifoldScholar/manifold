@@ -14,7 +14,7 @@ export default class FormUploadPreview extends PureComponent {
   static propTypes = {
     preview: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     handleRemove: PropTypes.func,
-    fileName: PropTypes.string
+    fileName: PropTypes.string,
   };
 
   get isImage() {
@@ -92,7 +92,7 @@ export default class FormUploadPreview extends PureComponent {
     // We don't know what it is.
     /* eslint-disable no-console */
     console.log(
-      "Form.Upload.Preview component passed a file object with an unexpected shape."
+      "Form.Upload.Preview component passed a file object with an unexpected shape.",
     );
     /* eslint-enable no-console */
     return "";
@@ -106,7 +106,7 @@ export default class FormUploadPreview extends PureComponent {
   render() {
     const childProps = {
       handleRemove: this.props.handleRemove,
-      isBuilder: this.props.isBuilder
+      isBuilder: this.props.isBuilder,
     };
     if (this.isImage)
       return <ImagePreview image={this.currentPreview} {...childProps} />;

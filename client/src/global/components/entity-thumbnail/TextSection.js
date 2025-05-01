@@ -10,11 +10,11 @@ export default class EntityThumbnailTextSection extends PureComponent {
     variant: PropTypes.string.isRequired,
     width: PropTypes.string,
     height: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static defaultProps = {
-    variant: "smallPortrait"
+    variant: "smallPortrait",
   };
 
   get attr() {

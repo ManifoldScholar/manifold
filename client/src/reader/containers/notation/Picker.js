@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import EntitiesList, {
   Search,
   ResourceRow,
-  ResourceCollectionRow
+  ResourceCollectionRow,
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { keywordFilter } from "hoc/withFilteredLists";
 import { withTranslation } from "react-i18next";
@@ -23,12 +23,12 @@ export class NotationPickerContainerImplementation extends PureComponent {
       resourcesMeta: meta(requests.beResources, state.entityStore),
       resourceCollections: select(
         requests.beResourceCollections,
-        state.entityStore
+        state.entityStore,
       ),
       resourceCollectionsMeta: meta(
         requests.beResourceCollections,
-        state.entityStore
-      )
+        state.entityStore,
+      ),
     };
     return { ...newState, ...ownProps };
   };
@@ -42,13 +42,13 @@ export class NotationPickerContainerImplementation extends PureComponent {
     resourceCollections: PropTypes.array,
     resourceCollectionsMeta: PropTypes.object,
     dispatch: PropTypes.func,
-    selectionHandler: PropTypes.func
+    selectionHandler: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      context: "resources"
+      context: "resources",
     };
   }
 
@@ -75,7 +75,7 @@ export class NotationPickerContainerImplementation extends PureComponent {
     const pagination = { number: page, size: perPage };
     const action = request(
       projectsAPI.resources(this.props.projectId, this.filters, pagination),
-      requests.beResources
+      requests.beResources,
     );
     this.props.dispatch(action);
   }
@@ -86,9 +86,9 @@ export class NotationPickerContainerImplementation extends PureComponent {
       projectsAPI.resourceCollections(
         this.props.projectId,
         this.filters,
-        pagination
+        pagination,
       ),
-      requests.beResourceCollections
+      requests.beResourceCollections,
     );
     this.props.dispatch(action);
   }
@@ -106,7 +106,7 @@ export class NotationPickerContainerImplementation extends PureComponent {
     this.setState({ context }, onReset);
   };
 
-  pageChangeHandlerCreator = page => {
+  pageChangeHandlerCreator = (page) => {
     return () => this.fetchContext(page);
   };
 
@@ -119,20 +119,20 @@ export class NotationPickerContainerImplementation extends PureComponent {
     let out = {
       entities: props.resources,
       unit: t("glossary.resource", {
-        count: props.resourcesMeta?.pagination?.totalCount || 0
+        count: props.resourcesMeta?.pagination?.totalCount || 0,
       }),
       entityComponent: ResourceRow,
-      pagination: props.resourcesMeta.pagination
+      pagination: props.resourcesMeta.pagination,
     };
 
     if (context === "collections") {
       out = {
         entities: props.resourceCollections,
         unit: t("glossary.resource_collection", {
-          count: props.resourceCollectionsMeta?.pagination?.totalCount || 0
+          count: props.resourceCollectionsMeta?.pagination?.totalCount || 0,
         }),
         entityComponent: ResourceCollectionRow,
-        pagination: props.resourceCollectionsMeta.pagination
+        pagination: props.resourceCollectionsMeta.pagination,
       };
     }
 
@@ -143,7 +143,7 @@ export class NotationPickerContainerImplementation extends PureComponent {
     if (!this.props.resources || !this.props.resourceCollections) return null;
     const { entities, unit, entityComponent, pagination } = this.composeProps(
       this.state.context,
-      this.props
+      this.props,
     );
     const t = this.props.t;
 
@@ -157,12 +157,12 @@ export class NotationPickerContainerImplementation extends PureComponent {
             optionOne={{
               translatedLabel: t("glossary.resource_other"),
               label: "resources",
-              icon: "resource24"
+              icon: "resource24",
             }}
             optionTwo={{
               translatedLabel: t("glossary.collection_other"),
               label: "collections",
-              icon: "resourceCollection64"
+              icon: "resourceCollection64",
             }}
           />
           <div style={{ marginBlockStart: "24px" }}>
@@ -172,10 +172,10 @@ export class NotationPickerContainerImplementation extends PureComponent {
               unit={unit}
               pagination={pagination}
               callbacks={{
-                onPageClick: this.pageChangeHandlerCreator
+                onPageClick: this.pageChangeHandlerCreator,
               }}
               entityComponentProps={{
-                onRowClick: this.props.selectionHandler
+                onRowClick: this.props.selectionHandler,
               }}
               search={
                 <Search {...this.props.entitiesListSearchProps("notations")} />
@@ -191,10 +191,10 @@ export class NotationPickerContainerImplementation extends PureComponent {
 export const NotationPickerContainer = withFilteredLists(
   NotationPickerContainerImplementation,
   {
-    notations: keywordFilter()
-  }
+    notations: keywordFilter(),
+  },
 );
 
 export default withTranslation()(
-  connect(NotationPickerContainer.mapStateToProps)(NotationPickerContainer)
+  connect(NotationPickerContainer.mapStateToProps)(NotationPickerContainer),
 );

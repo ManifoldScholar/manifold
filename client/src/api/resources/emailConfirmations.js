@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: `/api/v1/email_confirmations/${id}`,
       method: "PUT",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

@@ -26,21 +26,21 @@ export default function setter(WrappedComponent) {
       readFrom: PropTypes.string,
       name: PropTypes.string,
       actions: PropTypes.shape({
-        set: PropTypes.func
+        set: PropTypes.func,
       }).isRequired,
       value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object,
         PropTypes.bool,
         PropTypes.number,
-        PropTypes.array
-      ])
+        PropTypes.array,
+      ]),
     };
 
     static defaultProps = {
       actions: {
-        set: () => {}
-      }
+        set: () => {},
+      },
     };
 
     componentDidMount() {
@@ -61,7 +61,7 @@ export default function setter(WrappedComponent) {
           this.props.afterChange(
             this.dirtyValue(this.props),
             this.buildSetHandler(this.props),
-            this.buildSetOtherHandler(this.props)
+            this.buildSetOtherHandler(this.props),
           );
         }
       }
@@ -108,9 +108,7 @@ export default function setter(WrappedComponent) {
     }
 
     passthroughProps(props) {
-      /* eslint-disable no-unused-vars */
       const { dirtyModel, sourceModel, readFrom, actions, ...other } = props;
-      /* eslint-enable no-unused-vars */
       return other;
     }
 
@@ -120,20 +118,20 @@ export default function setter(WrappedComponent) {
         set: this.buildSetHandler(props),
         setOther: this.buildSetOtherHandler(props),
         value: this.currentValue(props),
-        initialValue: this.sourceValue(props)
+        initialValue: this.sourceValue(props),
       };
       return { ...this.passthroughProps(props), ...additional };
     }
 
     disconnectedProps(props) {
       const additional = {
-        setOther: this.buildSetOtherHandler(props)
+        setOther: this.buildSetOtherHandler(props),
       };
       return { ...additional, ...this.passthroughProps(props) };
     }
 
     buildOnChangeHandler(props) {
-      return event => {
+      return (event) => {
         const target = event.target;
         const value = target.value;
         this.setValue(value, props);
@@ -168,6 +166,6 @@ export default function setter(WrappedComponent) {
   const WrappedWithFormContext = withFormContext(Setter);
 
   return hoistStatics(WrappedWithFormContext, WrappedComponent, {
-    getDerivedStateFromProps: true
+    getDerivedStateFromProps: true,
   });
 }

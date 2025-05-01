@@ -15,7 +15,7 @@ function CreateTextForm({
   projectId,
   refresh,
   renderLiveRegion,
-  setScreenReaderStatus
+  setScreenReaderStatus,
 }) {
   const { t } = useTranslation();
   const uidSeed = useUIDSeed();
@@ -24,18 +24,18 @@ function CreateTextForm({
   const [sectionName, setSectionName] = useState();
   const [sections, setSections] = useState([]);
 
-  const setSectionOrder = result => {
+  const setSectionOrder = (result) => {
     const { draggableId, destination, title, announce, callback } =
       result ?? {};
-    const entity = sections.find(s => s.id === draggableId);
-    const newOrder = sections.filter(s => s.id !== draggableId);
+    const entity = sections.find((s) => s.id === draggableId);
+    const newOrder = sections.filter((s) => s.id !== draggableId);
     newOrder.splice(destination.index, 0, entity);
     setSections(newOrder);
 
     if (announce && title) {
       const announcement = t("actions.dnd.moved_to_position", {
         title,
-        position: destination.index + 1
+        position: destination.index + 1,
       });
       setScreenReaderStatus(announcement);
     }
@@ -45,28 +45,28 @@ function CreateTextForm({
     }
   };
 
-  const handleDeleteSection = id => {
-    const update = sections.filter(s => s.id !== id);
+  const handleDeleteSection = (id) => {
+    const update = sections.filter((s) => s.id !== id);
     setSections(update);
   };
 
   const handleAddSection = (e, el) => {
-    const duplicate = sections.filter(s => s.name === el.value);
+    const duplicate = sections.filter((s) => s.name === el.value);
     const id = duplicate.length ? `${el.value}_${duplicate.length}` : el.value;
     setSections([...sections, { id: uidSeed(id), name: el.value }]);
     setSectionName(null);
   };
 
-  const addSectionsToRequest = data => {
+  const addSectionsToRequest = (data) => {
     return {
       attributes: {
-        sectionNames: sections.map(s => s.name),
-        ...data.attributes
-      }
+        sectionNames: sections.map((s) => s.name),
+        ...data.attributes,
+      },
     };
   };
 
-  const createText = model => {
+  const createText = (model) => {
     return textsAPI.create(projectId, model);
   };
 
@@ -92,7 +92,7 @@ function CreateTextForm({
       <Form.FieldGroup
         label={t("texts.create.cover_section_label")}
         instructions={t("hero.cover_image_instructions", {
-          entity: t("glossary.text_one")
+          entity: t("glossary.text_one"),
         })}
       >
         <Form.Upload
@@ -111,7 +111,7 @@ function CreateTextForm({
         <div>
           <Form.TextInput
             placeholder={t("texts.create.section_name_placeholder")}
-            onChange={e => {
+            onChange={(e) => {
               e.preventDefault();
               setSectionName(e.target.value);
             }}
@@ -125,8 +125,8 @@ function CreateTextForm({
             buttons={[
               {
                 label: t("actions.create"),
-                onClick: handleAddSection
-              }
+                onClick: handleAddSection,
+              },
             ]}
           />
           <SectionsList
@@ -153,7 +153,7 @@ CreateTextForm.propTypes = {
   projectId: PropTypes.string.isRequired,
   onSuccess: PropTypes.func,
   renderLiveRegion: PropTypes.func,
-  setScreenReaderStatus: PropTypes.func
+  setScreenReaderStatus: PropTypes.func,
 };
 
 export default withScreenReaderStatus(CreateTextForm, false);

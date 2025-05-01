@@ -3,7 +3,7 @@ import {
   listUnstyled,
   buttonUnstyled,
   defaultHoverStyle,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import { NavLink } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
@@ -61,8 +61,8 @@ export const List = styled.ul`
   background-color: var(--color-base-neutral100);
   border-top: 2px solid var(--color-base-neutral95);
   opacity: 0;
-  transition: opacity var(--transition-duration-slow)
-      var(--transition-timing-function),
+  transition:
+    opacity var(--transition-duration-slow) var(--transition-timing-function),
     visibility var(--transition-duration-slow) var(--transition-timing-function);
   border-radius: 0 0 var(--box-border-radius) var(--box-border-radius);
 

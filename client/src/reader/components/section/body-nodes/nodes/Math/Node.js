@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import {
   getAnnotationStyles,
-  getlocalAnnotationsArray
+  getlocalAnnotationsArray,
 } from "./annotationHelpers";
 import { useTranslation } from "react-i18next";
 import { uid } from "react-uid";
 import { useErrorHandler } from "react-error-boundary";
 
-const createNode = n => {
+const createNode = (n) => {
   const { style, ...attrs } = n.attributes ?? {};
   return React.createElement(
     n.tag,
@@ -16,9 +16,9 @@ const createNode = n => {
       ...attrs,
       key: n.nodeUuid ?? uid(n),
       "data-node-uuid": n.nodeUuid,
-      "data-text-digest": n.textDigest
+      "data-text-digest": n.textDigest,
     },
-    n.content ? n.content : n.children?.map(child => createNode(child))
+    n.content ? n.content : n.children?.map((child) => createNode(child)),
   );
 };
 
@@ -27,15 +27,15 @@ function MathNode({
   children,
   openAnnotations,
   uuids,
-  hasInteractiveAncestor
+  hasInteractiveAncestor,
 }) {
   const { t } = useTranslation();
   const handleError = useErrorHandler();
 
   const childNodes = () => {
     try {
-      return children.map(child => createNode(child));
-    } catch (e) {
+      return children.map((child) => createNode(child));
+    } catch (_) {
       handleError();
     }
   };
@@ -47,13 +47,13 @@ function MathNode({
     removableHighlightId,
     textAnnotationIds,
     annotationIds,
-    interactiveAttributes
+    interactiveAttributes,
   } = getAnnotationStyles(
     localAnnotations,
     uuids,
     t,
     hasInteractiveAncestor,
-    isDetail
+    isDetail,
   );
 
   const Wrapper = attributes.display === "inline" ? "span" : "div";
@@ -79,7 +79,7 @@ function MathNode({
 
 MathNode.propTypes = {
   attributes: PropTypes.object,
-  children: PropTypes.array
+  children: PropTypes.array,
 };
 
 export default MathNode;

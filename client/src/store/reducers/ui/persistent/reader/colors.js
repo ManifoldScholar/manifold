@@ -1,7 +1,7 @@
 import { handleActions } from "redux-actions";
 
 const initialState = {
-  colorScheme: "light"
+  colorScheme: "light",
 };
 
 const setColorScheme = (state, action) => {
@@ -15,7 +15,7 @@ const setPersistentUI = (state, action) => {
 export default handleActions(
   {
     SET_PERSISTENT_UI: setPersistentUI,
-    SET_COLOR_SCHEME: setColorScheme
+    SET_COLOR_SCHEME: setColorScheme,
   },
-  initialState
+  initialState,
 );

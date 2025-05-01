@@ -8,7 +8,7 @@ class NewCollectors extends Component {
   static displayName = "Analytics.Composed.NewCollectors";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get data() {
@@ -23,7 +23,7 @@ class NewCollectors extends Component {
     const { rangeInWords } = this.props;
     return rangeInWords
       ? this.props.t("analytics.stars_in_date_range", {
-          dateRange: rangeInWords
+          dateRange: rangeInWords,
         })
       : this.props.t("analytics.stars_received");
   }

@@ -10,9 +10,9 @@ import Form, { Unwrapped } from "global/components/form";
 const { request, flush } = entityStoreActions;
 
 export class ContactContainer extends Component {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      response: state.entityStore.responses[requests.gContactForm]
+      response: state.entityStore.responses[requests.gContactForm],
     };
   };
 
@@ -20,7 +20,7 @@ export class ContactContainer extends Component {
     history: PropTypes.object,
     dispatch: PropTypes.func,
     response: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor() {
@@ -29,8 +29,8 @@ export class ContactContainer extends Component {
       contact: {
         email: "",
         message: "",
-        fullName: ""
-      }
+        fullName: "",
+      },
     };
   }
 
@@ -42,25 +42,25 @@ export class ContactContainer extends Component {
     this.props.history.push("/");
   }
 
-  sendMessage = event => {
+  sendMessage = (event) => {
     event.preventDefault(event.target);
     this.props
       .dispatch(
         request(
           contactsAPI.create({ attributes: this.state.contact }),
-          requests.gContactForm
-        )
+          requests.gContactForm,
+        ),
       )
       .promise.then(() => {
         this.redirectToHome();
       });
   };
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const name = event.target.name.replace("attributes[", "").replace("]", "");
     const contact = {
       ...this.state.contact,
-      [name]: event.target.value
+      [name]: event.target.value,
     };
     this.setState({ contact });
   };
@@ -126,5 +126,5 @@ export class ContactContainer extends Component {
 }
 
 export default connect(ContactContainer.mapStateToProps)(
-  withTranslation()(ContactContainer)
+  withTranslation()(ContactContainer),
 );

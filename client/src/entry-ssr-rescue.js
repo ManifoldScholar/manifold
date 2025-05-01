@@ -22,7 +22,7 @@ const requestHandler = (req, res) => {
   }
   const htmlOutput = wrapHtmlBody({
     stats,
-    body: render
+    body: render,
   });
   res.setHeader("Content-Type", "text/html");
   res.end(htmlOutput);
@@ -31,7 +31,7 @@ const requestHandler = (req, res) => {
 // Create the app and the server
 const app = webApp("SSR Rescue", {
   proxyDevAssets: true,
-  proxyAPI: config.services.client.proxiesEnabled
+  proxyAPI: config.services.client.proxiesEnabled,
 });
 
 if (!config.environment.skipSSR)

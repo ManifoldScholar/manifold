@@ -6,7 +6,7 @@ export default class ResourcePreviewImage extends Component {
   static displayName = "Resource.Preview.Image";
 
   static propTypes = {
-    resource: PropTypes.object.isRequired
+    resource: PropTypes.object.isRequired,
   };
 
   get image() {

@@ -16,7 +16,7 @@ TitleLink.displayName = "Frontend.Entity.Collection.Header.Title";
 
 TitleLink.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  to: PropTypes.string
+  to: PropTypes.string,
 };
 
 export default TitleLink;

@@ -9,14 +9,14 @@ export default class ResourceHero extends Component {
 
   static propTypes = {
     resource: PropTypes.object,
-    slideOptions: PropTypes.object
+    slideOptions: PropTypes.object,
   };
 
   static defaultProps = {
-    slideOptions: {}
+    slideOptions: {},
   };
 
-  getFigureByType = resource => {
+  getFigureByType = (resource) => {
     const minHeight = resource.attributes.minimumHeight;
     const finalMinHeight = /^\d+$/.test(minHeight)
       ? `${minHeight}px`

@@ -17,11 +17,11 @@ class IconPicker extends Component {
     getModelValue: PropTypes.func,
     setOther: PropTypes.func,
     wide: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    name: "attributes[icon]"
+    name: "attributes[icon]",
   };
 
   get selected() {
@@ -36,11 +36,11 @@ class IconPicker extends Component {
       "books-on-shelf",
       "globe",
       "touch",
-      "mug"
+      "mug",
     ];
   }
 
-  screenreader = icon => {
+  screenreader = (icon) => {
     const t = this.props.t;
     switch (icon) {
       case "book-stack-vertical":
@@ -70,11 +70,11 @@ class IconPicker extends Component {
     return "icon-picker";
   }
 
-  handleIconChange = icon => {
+  handleIconChange = (icon) => {
     this.props.setOther(icon, "attributes[icon]");
   };
 
-  maybeClear = icon => {
+  maybeClear = (icon) => {
     if (this.selected === icon) {
       this.props.setOther(null, "attributes[icon]");
       document.activeElement.blur();
@@ -85,7 +85,7 @@ class IconPicker extends Component {
     const selected = this.selected === icon;
     const labelClasses = classNames({
       "icon-picker__item": true,
-      "icon-picker__item--active": selected
+      "icon-picker__item--active": selected,
     });
     return (
       <label key={icon} className={labelClasses}>
@@ -111,7 +111,7 @@ class IconPicker extends Component {
         id={`${this.idPrefix}-${id}`}
         className="icon-picker__list"
       >
-        {this.icons.map(icon => {
+        {this.icons.map((icon) => {
           return this.renderIcon(icon, id);
         })}
       </div>
@@ -121,12 +121,12 @@ class IconPicker extends Component {
   render() {
     const inputClasses = classNames({
       "icon-picker": true,
-      wide: this.props.wide
+      wide: this.props.wide,
     });
 
     return (
       <UIDConsumer>
-        {id => (
+        {(id) => (
           <div className={inputClasses}>
             <GlobalForm.Errorable
               name={this.props.name}
@@ -141,7 +141,7 @@ class IconPicker extends Component {
               <div>
                 <span className="screen-reader-text">
                   {this.props.t(
-                    "project_collections.collection_icon_instructions"
+                    "project_collections.collection_icon_instructions",
                   )}
                 </span>
                 {this.renderIconList(id)}

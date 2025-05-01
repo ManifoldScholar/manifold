@@ -21,9 +21,9 @@ function ReadingGroupsPlaceholder({ isPublic }) {
               <Link to={lh.link("frontendLogin")} className="button-tertiary">
                 {t("navigation.user.log_in")}
               </Link>
-            )
-          }
-        ]
+            ),
+          },
+        ],
       };
     }
 
@@ -40,9 +40,9 @@ function ReadingGroupsPlaceholder({ isPublic }) {
               >
                 {t("navigation.reading_group.create")}
               </Link>
-            )
-          }
-        ]
+            ),
+          },
+        ],
       };
 
     return {
@@ -57,9 +57,9 @@ function ReadingGroupsPlaceholder({ isPublic }) {
             >
               {t("navigation.reading_group.create")}
             </Link>
-          )
-        }
-      ]
+          ),
+        },
+      ],
     };
   }
 
@@ -80,7 +80,7 @@ ReadingGroupsPlaceholder.displayName =
   "Global.Entity.CollectionPlaceholder.ReadingGroups";
 
 ReadingGroupsPlaceholder.propTypes = {
-  isPublic: PropTypes.bool
+  isPublic: PropTypes.bool,
 };
 
 export default ReadingGroupsPlaceholder;

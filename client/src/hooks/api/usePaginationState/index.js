@@ -5,7 +5,7 @@ import queryString from "query-string";
 export default function usePaginationState(
   initialNumber = 1,
   initialSize = 20,
-  collectionProjects = null
+  collectionProjects = null,
 ) {
   const location = useLocation();
   const { page } = queryString.parse(location.search);
@@ -15,24 +15,23 @@ export default function usePaginationState(
   const [size, setSize] = useState(initialSize);
 
   const setPageNumber = useCallback(
-    pageNumber => {
+    (pageNumber) => {
       if (number !== pageNumber) setNumber(pageNumber);
     },
-    [number, setNumber]
+    [number, setNumber],
   );
 
   const setPageSize = useCallback(
-    pageSize => {
+    (pageSize) => {
       if (size !== pageSize) setSize(pageSize);
     },
-    [size, setSize]
+    [size, setSize],
   );
 
-  const pagination = useMemo(() => ({ number, size, collectionProjects }), [
-    number,
-    size,
-    collectionProjects
-  ]);
+  const pagination = useMemo(
+    () => ({ number, size, collectionProjects }),
+    [number, size, collectionProjects],
+  );
 
   return [pagination, setPageNumber, setPageSize];
 }

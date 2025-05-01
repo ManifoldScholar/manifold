@@ -17,7 +17,7 @@ export default class ApiClient {
       .catch(this._handleFailure);
   };
 
-  _responseToJson = response => {
+  _responseToJson = (response) => {
     if (!response) {
       const returnResponse = new Response(
         JSON.stringify({
@@ -28,11 +28,11 @@ export default class ApiClient {
               title: "API Service Unavailable.",
               detail:
                 "Manifold is experiencing problems communicating with its API " +
-                "backend. Please report this problem to the Manifold administrative team."
-            }
-          ]
+                "backend. Please report this problem to the Manifold administrative team.",
+            },
+          ],
         }),
-        { status: 503, statusText: "serviceUnavailable" }
+        { status: 503, statusText: "serviceUnavailable" },
       );
       return Promise.reject({ returnResponse });
     }
@@ -43,13 +43,13 @@ export default class ApiClient {
       return { json: null, response };
     }
     return response.json().then(
-      json => {
+      (json) => {
         return { json, response };
       },
       () => {
         console.log("API response error #4");
         return Promise.reject({ response });
-      }
+      },
     );
   };
 
@@ -81,19 +81,19 @@ export default class ApiClient {
     return json;
   };
 
-  _responseNotOK = response => {
+  _responseNotOK = (response) => {
     return Promise.reject(response);
   };
 
-  _jsonNotOK = response => {
+  _jsonNotOK = (response) => {
     return Promise.reject(response);
   };
 
-  _fetchNotOK = response => {
+  _fetchNotOK = (response) => {
     return Promise.reject(response);
   };
 
-  _handleFailure = reason => {
+  _handleFailure = (reason) => {
     return new Promise((resolve, reject) => {
       const response = reason.returnResponse || reason.response;
       const payload = {
@@ -102,17 +102,17 @@ export default class ApiClient {
         body: {
           exception: response.exception,
           status: response.status,
-          error: response.statusText
-        }
+          error: response.statusText,
+        },
       };
       if (!response.json) reject(payload);
       response.json().then(
-        json => {
+        (json) => {
           reject(Object.assign(payload, { body: json }));
         },
         () => {
           reject(payload);
-        }
+        },
       );
     });
   };

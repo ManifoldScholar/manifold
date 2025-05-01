@@ -56,7 +56,7 @@ Preview.displayName = "ResourceCard.Preview";
 
 Preview.propTypes = {
   resource: PropTypes.object.isRequired,
-  detailUrl: PropTypes.string
+  detailUrl: PropTypes.string,
 };
 
 export default Preview;

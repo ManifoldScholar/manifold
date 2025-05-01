@@ -5,5 +5,5 @@ import New from "./New";
 export default {
   Wrapper,
   List,
-  New
+  New,
 };

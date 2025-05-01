@@ -58,7 +58,7 @@ MenuItem.propTypes = {
   entity: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
-    PropTypes.array
+    PropTypes.array,
   ]),
   ability: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   onClick: PropTypes.func,
@@ -66,7 +66,7 @@ MenuItem.propTypes = {
   srLabel: PropTypes.string,
   icon: PropTypes.string,
   className: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 export default MenuItem;

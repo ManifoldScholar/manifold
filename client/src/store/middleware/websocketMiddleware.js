@@ -1,11 +1,10 @@
-/* eslint-disable import/no-mutable-exports */
 import ActionCable from "actioncable";
 import get from "lodash/get";
 import { websocketActions } from "actions";
 import config from "config";
 
 let actionCableMiddleware = ({ dispatchIgnored, getStateIgnored }) => {
-  return next => action => {
+  return (next) => (action) => {
     next(action);
   };
 };
@@ -19,7 +18,7 @@ if (__BROWSER__) {
       connected: () => {
         dispatch(websocketActions.subscribed(channel));
       },
-      received: packet => {
+      received: (packet) => {
         dispatch(websocketActions.messageReceived(channel, packet));
         if (packet.type === "entity") {
           const type = "API_RESPONSE/WEBSOCKET_MODEL_UPDATE";
@@ -27,10 +26,10 @@ if (__BROWSER__) {
             type,
             error: null,
             payload: packet.payload,
-            meta: "websocket-model-update"
+            meta: "websocket-model-update",
           });
         }
-      }
+      },
     };
   };
 
@@ -71,11 +70,11 @@ if (__BROWSER__) {
   }
 
   actionCableMiddleware = ({ dispatch, getState }) => {
-    return next => action => {
+    return (next) => (action) => {
       const handledActions = [
         "WEBSOCKET_SUBSCRIBE",
         "WEBSOCKET_UNSUBSCRIBE",
-        "WEBSOCKET_TRIGGER_ACTION"
+        "WEBSOCKET_TRIGGER_ACTION",
       ];
 
       if (!handledActions.includes(action.type)) return next(action);
@@ -99,7 +98,7 @@ if (__BROWSER__) {
               dispatch({ type: "WEBSOCKET_CONNECT" });
               dispatch({
                 type: "STOP_LOADING",
-                payload: "WEBSOCKET_SUBSCRIBE"
+                payload: "WEBSOCKET_SUBSCRIBE",
               });
             },
             () => {
@@ -107,15 +106,15 @@ if (__BROWSER__) {
               dispatch({ type: "WEBSOCKET_CONNECTION_FAILURE" });
               dispatch({
                 type: "STOP_LOADING",
-                payload: "WEBSOCKET_SUBSCRIBE"
+                payload: "WEBSOCKET_SUBSCRIBE",
               });
               cable.disconnect();
-            }
+            },
           ).start();
         }
         const subscription = cable.subscriptions.create(
           { channel, token, ...options },
-          socketHandler(dispatch, channel)
+          socketHandler(dispatch, channel),
         );
         openSubscriptions[channel] = subscription;
       }

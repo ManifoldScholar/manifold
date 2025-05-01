@@ -8,11 +8,11 @@ export default class Instructions extends PureComponent {
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     className: PropTypes.string,
     id: PropTypes.string,
-    withActions: PropTypes.bool
+    withActions: PropTypes.bool,
   };
 
   static defaultProps = {
-    instructions: null
+    instructions: null,
   };
 
   static contextType = FormContext;

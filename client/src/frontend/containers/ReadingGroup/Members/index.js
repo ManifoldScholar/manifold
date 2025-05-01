@@ -5,5 +5,5 @@ import Wrapper from "./Wrapper";
 export default {
   List,
   MemberEdit,
-  Wrapper
+  Wrapper,
 };

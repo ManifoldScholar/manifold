@@ -10,15 +10,15 @@ import { select } from "utils/entityUtils";
 import PageHeader from "backend/components/layout/PageHeader";
 
 export class SettingsPropertiesContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      settings: select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore),
     };
   };
 
   static propTypes = {
     settings: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -35,7 +35,7 @@ export class SettingsPropertiesContainer extends PureComponent {
             create={settingsAPI.update}
             className="form-secondary"
           >
-            {getModelValue => (
+            {(getModelValue) => (
               <>
                 <Form.FieldGroup label={t("settings.properties.about_header")}>
                   <Form.TextInput
@@ -44,17 +44,17 @@ export class SettingsPropertiesContainer extends PureComponent {
                     name="attributes[general][installationName]"
                     placeholder="Manifold"
                     instructions={t(
-                      "settings.properties.installation_instructions"
+                      "settings.properties.installation_instructions",
                     )}
                   />
                   <Form.TextInput
                     label={t("settings.properties.default_title_label")}
                     name="attributes[general][headTitle]"
                     placeholder={t(
-                      "settings.properties.default_title_placeholder"
+                      "settings.properties.default_title_placeholder",
                     )}
                     instructions={t(
-                      "settings.properties.default_title_instructions"
+                      "settings.properties.default_title_instructions",
                     )}
                   />
                   <Form.TextArea
@@ -62,24 +62,24 @@ export class SettingsPropertiesContainer extends PureComponent {
                     label={t("settings.properties.default_descript_label")}
                     name="attributes[general][headDescription]"
                     placeholder={t(
-                      "settings.properties.default_descript_placeholder"
+                      "settings.properties.default_descript_placeholder",
                     )}
                     instructions={t(
-                      "settings.properties.default_descript_instructions"
+                      "settings.properties.default_descript_instructions",
                     )}
                   />
                   <Form.TextInput
                     label={t("settings.properties.default_publisher_label")}
                     name="attributes[general][defaultPublisher]"
                     placeholder={t(
-                      "settings.properties.default_publisher_placeholder"
+                      "settings.properties.default_publisher_placeholder",
                     )}
                   />
                   <Form.TextInput
                     label={t("settings.properties.default_pub_place_label")}
                     name="attributes[general][defaultPublisherPlace]"
                     placeholder={t(
-                      "settings.properties.default_pub_place_placeholder"
+                      "settings.properties.default_pub_place_placeholder",
                     )}
                   />
                 </Form.FieldGroup>
@@ -89,7 +89,7 @@ export class SettingsPropertiesContainer extends PureComponent {
                     name="attributes[general][copyright]"
                     placeholder={t("settings.properties.copyright_placeholder")}
                     instructions={t(
-                      "settings.properties.copyright_instructions"
+                      "settings.properties.copyright_instructions",
                     )}
                   />
                   <Form.TextInput
@@ -106,7 +106,7 @@ export class SettingsPropertiesContainer extends PureComponent {
                     wide
                     label={t("settings.properties.analytics_label")}
                     instructions={t(
-                      "settings.properties.analytics_instructions"
+                      "settings.properties.analytics_instructions",
                     )}
                     name="attributes[general][disableInternalAnalytics]"
                   />
@@ -122,21 +122,21 @@ export class SettingsPropertiesContainer extends PureComponent {
                       <Form.TextInput
                         wide
                         label={t(
-                          "settings.properties.access_notice_header_label"
+                          "settings.properties.access_notice_header_label",
                         )}
                         name="attributes[general][restrictedAccessHeading]"
                         placeholder={t(
-                          "settings.properties.access_notice_header_placeholder"
+                          "settings.properties.access_notice_header_placeholder",
                         )}
                       />
                       <Form.TextArea
                         wide
                         label={t(
-                          "settings.properties.access_notice_body_label"
+                          "settings.properties.access_notice_body_label",
                         )}
                         name="attributes[general][restrictedAccessBody]"
                         placeholder={t(
-                          "settings.properties.access_notice_body_placeholder"
+                          "settings.properties.access_notice_body_placeholder",
                         )}
                       />
                     </>
@@ -145,7 +145,7 @@ export class SettingsPropertiesContainer extends PureComponent {
                     wide
                     label={t("settings.properties.library_views_label")}
                     instructions={t(
-                      "settings.properties.library_views_instructions"
+                      "settings.properties.library_views_instructions",
                     )}
                     name="attributes[general][libraryDisabled]"
                   />
@@ -157,27 +157,27 @@ export class SettingsPropertiesContainer extends PureComponent {
                         label={t("settings.properties.standalone_label")}
                         name="attributes[general][allStandalone]"
                         instructions={t(
-                          "settings.properties.standalone_instructions"
+                          "settings.properties.standalone_instructions",
                         )}
                       />
                       <Form.TextInput
                         label={t("settings.properties.library_redirect_label")}
                         name="attributes[general][libraryRedirectUrl]"
                         placeholder={t(
-                          "settings.properties.library_redirect_placeholder"
+                          "settings.properties.library_redirect_placeholder",
                         )}
                         instructions={t(
-                          "settings.properties.library_redirect_instructions"
+                          "settings.properties.library_redirect_instructions",
                         )}
                       />
                       <Form.TextInput
                         label={t("settings.properties.home_redirect_label")}
                         name="attributes[general][homeRedirectUrl]"
                         placeholder={t(
-                          "settings.properties.home_redirect_placeholder"
+                          "settings.properties.home_redirect_placeholder",
                         )}
                         instructions={t(
-                          "settings.properties.home_redirect_instructions"
+                          "settings.properties.home_redirect_instructions",
                         )}
                       />
                     </>
@@ -186,7 +186,7 @@ export class SettingsPropertiesContainer extends PureComponent {
                     wide
                     label={t("settings.properties.public_comments_label")}
                     instructions={t(
-                      "settings.properties.public_comments_instructions"
+                      "settings.properties.public_comments_instructions",
                     )}
                     name="attributes[general][disableEngagement]"
                   />
@@ -194,7 +194,7 @@ export class SettingsPropertiesContainer extends PureComponent {
                     wide
                     label={t("settings.properties.reading_groups_label")}
                     instructions={t(
-                      "settings.properties.reading_groups_instructions"
+                      "settings.properties.reading_groups_instructions",
                     )}
                     name="attributes[general][disableReadingGroups]"
                   />
@@ -202,7 +202,7 @@ export class SettingsPropertiesContainer extends PureComponent {
                     wide
                     label={t("settings.properties.public_reading_groups_label")}
                     instructions={t(
-                      "settings.properties.public_reading_groups_instructions"
+                      "settings.properties.public_reading_groups_instructions",
                     )}
                     name="attributes[general][disablePublicReadingGroups]"
                   />
@@ -210,12 +210,12 @@ export class SettingsPropertiesContainer extends PureComponent {
                     wide
                     label={t("settings.properties.spam_detection_label")}
                     instructions={t(
-                      "settings.properties.spam_detection_instructions"
+                      "settings.properties.spam_detection_instructions",
                     )}
                     name="attributes[general][disableSpamDetection]"
                   />
                   {getModelValue(
-                    "attributes[general][disableSpamDetection]"
+                    "attributes[general][disableSpamDetection]",
                   ) === false && (
                     <Form.TextInput
                       password
@@ -236,6 +236,6 @@ export class SettingsPropertiesContainer extends PureComponent {
 
 export default withTranslation()(
   connect(SettingsPropertiesContainer.mapStateToProps)(
-    SettingsPropertiesContainer
-  )
+    SettingsPropertiesContainer,
+  ),
 );

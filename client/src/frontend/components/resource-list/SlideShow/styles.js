@@ -22,7 +22,7 @@ export const Footer = styled.footer`
     padding: 17px 23px;
     color: var(--color-neutral-text-light);
     background-color: var(--color-base-neutral90);`,
-    60
+    60,
   )}
 `;
 
@@ -44,7 +44,7 @@ export const Pagination = styled.div`
     padding-inline-end: 0;
     flex-direction: column;
     `,
-    60
+    60,
   )}
 `;
 
@@ -73,7 +73,7 @@ export const ArrowsWrapper = styled.div`
     `justify-content: flex-end;
     margin-block-start: 13px;
     padding-block: 0;`,
-    60
+    60,
   )}
 `;
 

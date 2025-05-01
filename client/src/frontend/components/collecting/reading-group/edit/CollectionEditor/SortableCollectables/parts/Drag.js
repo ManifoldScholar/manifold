@@ -24,7 +24,7 @@ Drag.displayName = "ReadingGroup.Collecting.CollectionEditor.Collectable.Drag";
 Drag.propTypes = {
   dragHandleProps: PropTypes.object,
   onFocus: PropTypes.func,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
 };
 
 export default Drag;

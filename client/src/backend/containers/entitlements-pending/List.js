@@ -6,7 +6,7 @@ import { pendingEntitlementsAPI } from "api";
 import EntitiesList, {
   Button,
   Search,
-  PendingEntitlementRow
+  PendingEntitlementRow,
 } from "backend/components/list/EntitiesList";
 import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import { childRoutes } from "helpers/router";
@@ -20,19 +20,23 @@ function PendingEntitlementsList({
   confirm,
   location,
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
 }) {
   const { t } = useTranslation();
 
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 10,
     initFilters: entitiesListSearchParams.initialentitlements,
-    initSearchProps: entitiesListSearchProps("entitlements")
+    initSearchProps: entitiesListSearchProps("entitlements"),
   });
 
-  const { data: entitlements, meta, refresh } = useFetch({
+  const {
+    data: entitlements,
+    meta,
+    refresh,
+  } = useFetch({
     request: [pendingEntitlementsAPI.index, filters, pagination],
-    dependencies: [filters]
+    dependencies: [filters],
   });
 
   const renderChildRoutes = () => {
@@ -44,19 +48,19 @@ function PendingEntitlementsList({
         lockScroll: "always",
         wide: true,
         closeUrl,
-        showNotifications: location.pathname.includes("import")
+        showNotifications: location.pathname.includes("import"),
       },
-      childProps: { refresh }
+      childProps: { refresh },
     });
   };
 
-  const onEdit = id => {
+  const onEdit = (id) => {
     history.push(lh.link("backendRecordsEntitlementsEdit", id));
   };
 
   const deleteEntitlement = useApiCallback(pendingEntitlementsAPI.destroy);
 
-  const onDelete = id => {
+  const onDelete = (id) => {
     const heading = t("modals.delete_entitlement");
     const message = t("modals.confirm_body");
     if (confirm)
@@ -70,8 +74,8 @@ function PendingEntitlementsList({
     {
       label: "entitlements.imports.view_imports_label",
       route: "backendRecordsEntitlementImports",
-      icon: "eyeOpen32"
-    }
+      icon: "eyeOpen32",
+    },
   ];
 
   return (
@@ -108,13 +112,13 @@ function PendingEntitlementsList({
                 type="reload"
                 text={"Refresh"}
                 authorizedFor="entitlement"
-              />
+              />,
             ]}
             search={<Search {...searchProps} />}
             pagination={meta.pagination}
             showCount
             unit={t("glossary.pending_entitlement", {
-              count: meta.pagination.totalCount
+              count: meta.pagination.totalCount,
             })}
           />
         </>
@@ -124,7 +128,7 @@ function PendingEntitlementsList({
 }
 
 export default withFilteredLists(withConfirmation(PendingEntitlementsList), {
-  entitlements: entitlementFilters()
+  entitlements: entitlementFilters(),
 });
 
 PendingEntitlementsList.displayName = "PendingEntitlements.List";
@@ -135,5 +139,5 @@ PendingEntitlementsList.propTypes = {
   confirm: PropTypes.func,
   location: PropTypes.object.isRequired,
   entitiesListSearchProps: PropTypes.func,
-  entitiesListSearchParams: PropTypes.object
+  entitiesListSearchParams: PropTypes.object,
 };

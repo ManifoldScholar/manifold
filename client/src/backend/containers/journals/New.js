@@ -15,7 +15,7 @@ class JournalsNew extends PureComponent {
   static displayName = "Journals.New";
 
   static propTypes = {
-    history: PropTypes.object
+    history: PropTypes.object,
   };
 
   redirectToJournal(journal) {
@@ -23,7 +23,7 @@ class JournalsNew extends PureComponent {
     this.props.history.push(path);
   }
 
-  handleSuccess = journal => {
+  handleSuccess = (journal) => {
     this.redirectToJournal(journal);
   };
 
@@ -33,12 +33,12 @@ class JournalsNew extends PureComponent {
     const breadcrumbs = [
       {
         to: lh.link("backendJournals"),
-        label: t("glossary.journal_title_case_other")
+        label: t("glossary.journal_title_case_other"),
       },
       {
         to: lh.link("backendJournalsNew"),
-        label: t("common.new")
-      }
+        label: t("common.new"),
+      },
     ];
 
     return (

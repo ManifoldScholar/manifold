@@ -6,7 +6,7 @@ export default class ResourceFormKindVariantsPdf extends PureComponent {
   static displayName = "Resource.Form.Kind.Variants.Pdf";
 
   static propTypes = {
-    kind: PropTypes.string
+    kind: PropTypes.string,
   };
 
   render() {

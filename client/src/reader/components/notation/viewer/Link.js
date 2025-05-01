@@ -7,11 +7,11 @@ class NotationViewerLink extends PureComponent {
   static propTypes = {
     params: PropTypes.shape({
       sectionId: PropTypes.string,
-      textId: PropTypes.string
+      textId: PropTypes.string,
     }),
     notation: PropTypes.object.isRequired,
     className: PropTypes.string,
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
   };
 
   url(notation) {
@@ -25,7 +25,7 @@ class NotationViewerLink extends PureComponent {
         "readerSectionResourceCollection",
         textSlug,
         sectionId,
-        notation.id
+        notation.id,
       );
     }
     return null;

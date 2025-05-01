@@ -7,11 +7,11 @@ import {
   projectsAPI,
   exportTargetsAPI,
   projectExportationsAPI,
-  requests
+  requests,
 } from "api";
 import EntitiesList, {
   Button,
-  ProjectExportationRow
+  ProjectExportationRow,
 } from "backend/components/list/EntitiesList";
 import Form from "/global/components/form";
 import lh from "helpers/linkHandler";
@@ -20,22 +20,26 @@ import * as Styled from "./styles";
 
 export default function ProjectExportations({
   project,
-  projectExportationsPerPage = 20
+  projectExportationsPerPage = 20,
 }) {
   const { t } = useTranslation();
 
   const { pagination } = useListQueryParams({
-    initSize: projectExportationsPerPage
+    initSize: projectExportationsPerPage,
   });
 
-  const { data: projectExportations, meta, refresh } = useFetch({
+  const {
+    data: projectExportations,
+    meta,
+    refresh,
+  } = useFetch({
     request: [projectsAPI.project_exportations, project.id, null, pagination],
-    options: { requestKey: requests.beProjectExportations }
+    options: { requestKey: requests.beProjectExportations },
   });
 
   const { data: exportTargets } = useFetch({
     request: [exportTargetsAPI.index],
-    options: { requestKey: requests.beExportTargets }
+    options: { requestKey: requests.beExportTargets },
   });
 
   const exportTargetSelectOptions = () => {
@@ -43,27 +47,27 @@ export default function ProjectExportations({
       {
         label: t("projects.forms.exports.location_placeholder"),
         value: "",
-        internalValue: ""
-      }
+        internalValue: "",
+      },
     ];
 
     if (!isArray(exportTargets)) return targets;
 
-    exportTargets.forEach(exportTarget =>
+    exportTargets.forEach((exportTarget) =>
       targets.push({
         label: exportTarget.attributes.name,
         value: exportTarget.id,
-        internalValue: exportTarget.id
-      })
+        internalValue: exportTarget.id,
+      }),
     );
     return targets;
   };
 
   const deleteExportation = useApiCallback(projectExportationsAPI.destroy, {
-    refreshes: requests.beProjectExportations
+    refreshes: requests.beProjectExportations,
   });
 
-  const onDelete = projectExportation => {
+  const onDelete = (projectExportation) => {
     deleteExportation(projectExportation.id);
   };
 
@@ -87,8 +91,8 @@ export default function ProjectExportations({
         model={{
           attributes: {
             project_id: project.id,
-            export_target_id: ""
-          }
+            export_target_id: "",
+          },
         }}
         update={() => null}
         create={projectExportationsAPI.create}
@@ -122,7 +126,7 @@ export default function ProjectExportations({
               >
                 <Form.Instructions
                   instructions={t(
-                    "projects.forms.exports.no_targets_unauthorized"
+                    "projects.forms.exports.no_targets_unauthorized",
                   )}
                 />
               </Authorize>
@@ -153,7 +157,7 @@ export default function ProjectExportations({
             pagination={meta.pagination}
             entities={projectExportations}
             unit={t("glossary.export", {
-              count: projectExportations?.length
+              count: projectExportations?.length,
             })}
           />
         </div>
@@ -166,5 +170,5 @@ ProjectExportations.displayName = "Project.Exportations.List";
 
 ProjectExportations.propTypes = {
   project: PropTypes.object.isRequired,
-  projectExportationsPerPage: PropTypes.number
+  projectExportationsPerPage: PropTypes.number,
 };

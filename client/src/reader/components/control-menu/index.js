@@ -5,5 +5,5 @@ import VisibilityMenuBody from "./VisibilityMenuBody";
 export default {
   AppearanceMenuBody,
   Button,
-  VisibilityMenuBody
+  VisibilityMenuBody,
 };

@@ -19,7 +19,7 @@ const KEYS = {
   DOWN: 40,
   UP: 38,
   ENTER: 13,
-  ESCAPE: 27
+  ESCAPE: 27,
 };
 
 export class PickerComponent extends PureComponent {
@@ -119,8 +119,8 @@ export class PickerComponent extends PureComponent {
       PropTypes.bool,
       PropTypes.shape({
         entity: PropTypes.string.isRequired,
-        ability: PropTypes.string.isRequired
-      })
+        ability: PropTypes.string.isRequired,
+      }),
     ]),
     /* NewToValue takes a string input and returns the value that should be set */
     /* the picker. For example, if the picker allows users to create subject    */
@@ -146,7 +146,7 @@ export class PickerComponent extends PureComponent {
     /* rather than null. This allows the API to see that a belongs_to           */
     /* association is being removed.                                            */
     belongsTo: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
@@ -160,7 +160,7 @@ export class PickerComponent extends PureComponent {
     belongsTo: false,
     renderLiveRegion: () => {
       /* noop */
-    }
+    },
   };
 
   static contextType = FormContext;
@@ -174,7 +174,7 @@ export class PickerComponent extends PureComponent {
     this.state = {
       listBoxVisible: false,
       searchInputValue: null,
-      activeOption: null
+      activeOption: null,
     };
   }
 
@@ -272,7 +272,7 @@ export class PickerComponent extends PureComponent {
   get activeOptionIndex() {
     if (!this.activeOption) return -1;
     const { options } = this.props;
-    return options.findIndex(option => option === this.activeOption);
+    return options.findIndex((option) => option === this.activeOption);
   }
 
   get callbacks() {
@@ -284,7 +284,7 @@ export class PickerComponent extends PureComponent {
       removeSelection: this.removeSelection,
       reorderSelection: this.reorderSelection,
       selectAll: this.selectAll,
-      unselectAll: this.unselectAll
+      unselectAll: this.unselectAll,
     };
   }
 
@@ -319,17 +319,17 @@ export class PickerComponent extends PureComponent {
     window.removeEventListener("click", this.maybeCloseListBox);
   }
 
-  selectOrToggleOption = value => {
+  selectOrToggleOption = (value) => {
     if (this.isMultiple) return this.toggleOption(value);
     return this.selectOption(value);
   };
 
-  toggleOption = value => {
+  toggleOption = (value) => {
     this.props.optionsHandlers.toggleOption(value);
     this.makeListBoxHidden();
   };
 
-  selectOption = value => {
+  selectOption = (value) => {
     this.updateSearchInputValue(null);
     this.props.select(value);
     this.makeListBoxHidden();
@@ -360,7 +360,7 @@ export class PickerComponent extends PureComponent {
     callback.bind(this)();
   }
 
-  listenForListBoxNavigation = event => {
+  listenForListBoxNavigation = (event) => {
     if (event.keyCode === KEYS.DOWN)
       this.preventDefault(this.activateNextOption, event);
     if (event.keyCode === KEYS.UP)
@@ -373,7 +373,7 @@ export class PickerComponent extends PureComponent {
       this.stopPropagation(this.makeListBoxHidden, event);
   };
 
-  stopEscapePropagation = event => {
+  stopEscapePropagation = (event) => {
     if (event.keyCode === KEYS.ESCAPE) event.stopPropagation();
   };
 
@@ -441,13 +441,13 @@ export class PickerComponent extends PureComponent {
     this.setActiveOption(options[index]);
   }
 
-  maybeCloseListBox = event => {
+  maybeCloseListBox = (event) => {
     if (!this.inputWrapperRef.current) return;
     if (!this.inputWrapperRef.current.contains(event.target))
       this.makeListBoxHidden();
   };
 
-  removeSelection = selection => {
+  removeSelection = (selection) => {
     this.props.optionsHandlers.deselect(selection);
   };
 
@@ -463,7 +463,7 @@ export class PickerComponent extends PureComponent {
       error: `${id}-picker-error`,
       textBox: `${id}-picker-textbox`,
       listBox: `${id}-picker-listbox`,
-      option: `${id}-picker-option`
+      option: `${id}-picker-option`,
     };
   }
 
@@ -491,7 +491,7 @@ export class PickerComponent extends PureComponent {
     this.props.optionsHandlers.unselectAll();
   };
 
-  onSearchInputChange = event => {
+  onSearchInputChange = (event) => {
     const { value } = event.target;
     this.updateSearchInputValue(value);
   };
@@ -505,7 +505,7 @@ export class PickerComponent extends PureComponent {
     this.selectSearchInputText();
   };
 
-  onSearchInputBlur = event => {
+  onSearchInputBlur = (event) => {
     if (
       !this.somethingInPickerHasFocus ||
       !this.isInPicker(event.relatedTarget)
@@ -545,7 +545,7 @@ export class PickerComponent extends PureComponent {
       debug,
       value,
       renderLiveRegion,
-      t
+      t,
     } = this.props;
 
     const TextInput =
@@ -555,7 +555,7 @@ export class PickerComponent extends PureComponent {
 
     return (
       <UIDConsumer>
-        {id => {
+        {(id) => {
           const ids = this.ids(id);
           return (
             <Errorable
@@ -570,7 +570,7 @@ export class PickerComponent extends PureComponent {
                   shouldExpandNode={(keyName, data, level) => level <= 1}
                   object={{
                     value,
-                    state: this.state
+                    state: this.state,
                   }}
                 />
               )}
@@ -585,7 +585,6 @@ export class PickerComponent extends PureComponent {
                 <Styled.InputWrapper>
                   <Styled.ComboBox
                     ref={this.inputWrapperRef}
-                    // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
                     role="combobox"
                     aria-expanded={this.isListBoxVisible}
                     aria-owns={ids.listBox}
@@ -646,11 +645,10 @@ export class PickerComponent extends PureComponent {
                     </Styled.EmptyResult>
                   )}
 
-                  {options.map(option => {
+                  {options.map((option) => {
                     const active = option === this.state.activeOption;
-                    const selected = optionsMeta.selectedOptions.includes(
-                      option
-                    );
+                    const selected =
+                      optionsMeta.selectedOptions.includes(option);
                     return (
                       <Styled.Result
                         key={option.key}
@@ -711,7 +709,7 @@ export class PickerComponent extends PureComponent {
                     rowComponent={listRowComponent}
                     rowProps={{
                       ...listRowProps,
-                      options: optionsMeta.allOptions
+                      options: optionsMeta.allOptions,
                     }}
                     rowEditRoute={this.props.listRowEditRoute}
                     callbacks={this.callbacks}
@@ -728,9 +726,9 @@ export class PickerComponent extends PureComponent {
 }
 
 export const BasePicker = withTranslation()(
-  withScreenReaderStatus(withFormOptions(PickerComponent), false)
+  withScreenReaderStatus(withFormOptions(PickerComponent), false),
 );
 
 export default withTranslation()(
-  setter(withScreenReaderStatus(withFormOptions(PickerComponent), false))
+  setter(withScreenReaderStatus(withFormOptions(PickerComponent), false)),
 );

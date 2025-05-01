@@ -36,10 +36,7 @@ export function hash(str) {
 
 export function capitalize(s, all = false) {
   if (all) {
-    return s
-      .split(" ")
-      .map(capitalize)
-      .join(" ");
+    return s.split(" ").map(capitalize).join(" ");
   }
   return s && s[0].toUpperCase() + s.slice(1);
 }
@@ -61,7 +58,7 @@ export function nl2br(str, isXhtml) {
     isXhtml || typeof isXhtml === "undefined" ? "<br />" : "<br>";
   return (str + "").replace(
     /([^>\r\n]?)(\r\n|\n\r|\r|\n)/g,
-    "$1" + breakTag + "$2"
+    "$1" + breakTag + "$2",
   );
 }
 
@@ -72,5 +69,5 @@ export default {
   hash,
   capitalize,
   brackets2dots,
-  nl2br
+  nl2br,
 };

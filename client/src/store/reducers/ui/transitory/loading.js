@@ -3,10 +3,10 @@ import { handleActions } from "redux-actions";
 const initialState = {
   active: false,
   activeLoaders: [],
-  pendingRemovals: []
+  pendingRemovals: [],
 };
 
-const getLoadingState = activeLoaders => {
+const getLoadingState = (activeLoaders) => {
   return activeLoaders.length > 0;
 };
 
@@ -63,7 +63,7 @@ const stopLoader = (state, action) => {
 export default handleActions(
   {
     START_LOADING: startLoader,
-    STOP_LOADING: stopLoader
+    STOP_LOADING: stopLoader,
   },
-  initialState
+  initialState,
 );

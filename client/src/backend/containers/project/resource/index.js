@@ -3,5 +3,5 @@ import ResourcesList from "./ResourcesList";
 
 export default {
   ResourceCollectionsList,
-  ResourcesList
+  ResourcesList,
 };

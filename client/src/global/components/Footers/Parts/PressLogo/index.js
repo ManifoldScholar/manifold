@@ -39,5 +39,5 @@ class PressLogo extends PureComponent {
 
 export default withPluginReplacement(
   PressLogo,
-  "Global.Components.Footer.PressLogo"
+  "Global.Components.Footer.PressLogo",
 );

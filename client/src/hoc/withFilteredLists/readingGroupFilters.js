@@ -1,13 +1,13 @@
 export default function readingGroupFilters({ snapshotState = false } = {}) {
   return {
     config: {
-      snapshotState
+      snapshotState,
     },
     params: [
       {
         label: "Search...",
         name: "keyword",
-        value: ""
+        value: "",
       },
       {
         label: "Privacy",
@@ -17,8 +17,8 @@ export default function readingGroupFilters({ snapshotState = false } = {}) {
           { label: "All reading groups", value: "" },
           { label: "Public groups", value: "public" },
           { label: "Private groups", value: "private" },
-          { label: "Anonymous groups", value: "anonymous" }
-        ]
+          { label: "Anonymous groups", value: "anonymous" },
+        ],
       },
       {
         label: "Flags",
@@ -26,8 +26,8 @@ export default function readingGroupFilters({ snapshotState = false } = {}) {
         value: "",
         options: [
           { label: "With and without flags", value: "" },
-          { label: "With flagged annotations", value: "true" }
-        ]
+          { label: "With flagged annotations", value: "true" },
+        ],
       },
       {
         label: "Order",
@@ -36,16 +36,16 @@ export default function readingGroupFilters({ snapshotState = false } = {}) {
         options: [
           {
             label: "A-Z",
-            value: "name_asc"
+            value: "name_asc",
           },
           {
             label: "Z-A",
-            value: "name_desc"
+            value: "name_desc",
           },
           { label: "Newest first", value: "created_at_desc" },
-          { label: "Oldest first", value: "created_at_asc" }
-        ]
-      }
-    ]
+          { label: "Oldest first", value: "created_at_asc" },
+        ],
+      },
+    ],
   };
 }

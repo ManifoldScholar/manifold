@@ -35,7 +35,7 @@ export default `
           height: 100px;
           line-height: 100px;
         `,
-        95
+        95,
       )}
     }
 

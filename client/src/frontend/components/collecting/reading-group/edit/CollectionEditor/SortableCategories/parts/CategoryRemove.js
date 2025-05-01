@@ -31,7 +31,7 @@ CategoryRemove.displayName =
 
 CategoryRemove.propTypes = {
   onRemove: PropTypes.func.isRequired,
-  confirm: PropTypes.func.isRequired
+  confirm: PropTypes.func.isRequired,
 };
 
 export default withConfirmation(CategoryRemove);

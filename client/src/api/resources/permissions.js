@@ -4,8 +4,8 @@ export default {
       endpoint: `/api/v1/${entity.type}/${entity.id}/relationships/permissions`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -14,8 +14,8 @@ export default {
       endpoint: `/api/v1/${entity.type}/${entity.id}/relationships/permissions`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "permissions", data: permission })
-      }
+        body: JSON.stringify({ type: "permissions", data: permission }),
+      },
     };
   },
 
@@ -24,22 +24,22 @@ export default {
       endpoint: `/api/v1/${entity.type}/${entity.id}/relationships/permissions/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "permissions", data: permission })
-      }
+        body: JSON.stringify({ type: "permissions", data: permission }),
+      },
     };
   },
 
   show(entity, id) {
     return {
       endpoint: `/api/v1/${entity.type}/${entity.id}/relationships/permissions/${id}`,
-      method: "GET"
+      method: "GET",
     };
   },
 
   destroy(entity, id) {
     return {
       endpoint: `/api/v1/${entity.type}/${entity.id}/relationships/permissions/${id}`,
-      method: "DELETE"
+      method: "DELETE",
     };
-  }
+  },
 };

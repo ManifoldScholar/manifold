@@ -11,7 +11,7 @@ export class ResourceImportResults extends PureComponent {
     history: PropTypes.object.isRequired,
     fetch: PropTypes.func.isRequired,
     executeUpdate: PropTypes.func.isRequired,
-    resourceImport: PropTypes.object.isRequired
+    resourceImport: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
@@ -48,7 +48,7 @@ export class ResourceImportResults extends PureComponent {
     }
   }
 
-  updateImportState = state => {
+  updateImportState = (state) => {
     this.props.executeUpdate({ attributes: { state } });
   };
 
@@ -68,7 +68,7 @@ export class ResourceImportResults extends PureComponent {
           <div>
             <nav className="results-list">
               <ul>
-                {importResults.map(r => {
+                {importResults.map((r) => {
                   return (
                     <ResourceImport.Result
                       resourceImportRow={r}

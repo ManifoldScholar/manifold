@@ -16,7 +16,7 @@ import { useShowJournalsActive } from "hooks";
 export default function LayoutHeader({
   commonActions,
   authentication,
-  visibility
+  visibility,
 }) {
   const { t } = useTranslation();
   const journalIsActive = useShowJournalsActive();
@@ -25,7 +25,7 @@ export default function LayoutHeader({
   const canUpdateProjectCollections = authorization.authorizeAbility({
     authentication,
     entity: "projectCollection",
-    ability: "update"
+    ability: "update",
   });
 
   const baseLinks = navigation.backend();
@@ -33,17 +33,17 @@ export default function LayoutHeader({
   let links;
 
   if (canUpdateProjectCollections) {
-    const projectsLink = baseLinks.find(l => l.route === "backendProjects");
+    const projectsLink = baseLinks.find((l) => l.route === "backendProjects");
     projectsLink.dropdownContent = (
       <ProjectsNav links={projectsLink.children} />
     );
     projectsLink.toggle = ProjectsButton;
     links = baseLinks.filter(
-      l => l.route !== "backendProjects" && l.route !== "backendProjectsAll"
+      (l) => l.route !== "backendProjects" && l.route !== "backendProjectsAll",
     );
     links.splice(1, 0, projectsLink);
   } else {
-    links = baseLinks.filter(l => l.route !== "backendProjects");
+    links = baseLinks.filter((l) => l.route !== "backendProjects");
   }
 
   return (
@@ -83,5 +83,5 @@ LayoutHeader.displayName = "Layout.Header";
 LayoutHeader.propTypes = {
   visibility: PropTypes.object,
   authentication: PropTypes.object,
-  commonActions: PropTypes.object
+  commonActions: PropTypes.object,
 };

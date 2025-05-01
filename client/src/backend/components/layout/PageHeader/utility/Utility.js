@@ -10,7 +10,7 @@ export default function Utility({
   entityType,
   childType,
   note,
-  hasSecondaryNav
+  hasSecondaryNav,
 }) {
   const showUtilityRow = actions || note;
   const showDropdownRow = hasSecondaryNav && (actions || links);

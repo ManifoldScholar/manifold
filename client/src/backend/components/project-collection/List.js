@@ -16,7 +16,7 @@ export default function ProjectCollectionList(props) {
     projectCollections,
     onCollectionSelect,
     onToggleVisibility,
-    onCollectionOrderChange
+    onCollectionOrderChange,
   } = props ?? {};
 
   const { id } = useParams();
@@ -36,12 +36,12 @@ export default function ProjectCollectionList(props) {
           clickHandler: onCollectionSelect,
           visibilityToggleHandler: onToggleVisibility,
           onReorder: onCollectionOrderChange,
-          itemCount: projectCollections.length
+          itemCount: projectCollections.length,
         }}
         useDragHandle
         listStyle="bare"
         callbacks={{
-          onReorder: onCollectionOrderChange
+          onReorder: onCollectionOrderChange,
         }}
       />
       <div className="actions">
@@ -54,7 +54,7 @@ export default function ProjectCollectionList(props) {
             size={20}
             className={classNames(
               "button-icon-secondary__icon",
-              "button-icon-secondary__icon--large"
+              "button-icon-secondary__icon--large",
             )}
           />
           <span>{t("project_collections.create_collection")}</span>
@@ -75,5 +75,5 @@ ProjectCollectionList.propTypes = {
   onCollectionSelect: PropTypes.func.isRequired,
   onToggleVisibility: PropTypes.func.isRequired,
   onCollectionOrderChange: PropTypes.func.isRequired,
-  match: PropTypes.object
+  match: PropTypes.object,
 };

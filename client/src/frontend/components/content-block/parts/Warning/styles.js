@@ -27,7 +27,7 @@ export const Wrapper = styled.div`
       flex-direction: row;
       text-align: start;
     `,
-    BREAKPOINT
+    BREAKPOINT,
   )}
 `;
 

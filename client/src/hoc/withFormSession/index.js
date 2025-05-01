@@ -12,15 +12,15 @@ function getDisplayName(WrappedComponent) {
 
 export default function withFormSession(WrappedComponent, sessionKey) {
   const displayName = `HigherOrder.WithFormSession('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   class WithFormSession extends React.PureComponent {
-    static mapStateToProps = state => {
+    static mapStateToProps = (state) => {
       return {
         session: get(state.entityEditor.sessions, sessionKey),
         response: get(state.entityStore.responses, sessionKey),
-        errors: get(state.entityStore.responses, `${sessionKey}.errors`)
+        errors: get(state.entityStore.responses, `${sessionKey}.errors`),
       };
     };
 
@@ -31,7 +31,7 @@ export default function withFormSession(WrappedComponent, sessionKey) {
     static propTypes = {
       session: PropTypes.object,
       response: PropTypes.object,
-      errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+      errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     };
 
     nameToPath(name) {
@@ -56,8 +56,8 @@ export default function withFormSession(WrappedComponent, sessionKey) {
           session: this.props.session,
           response: this.props.response,
           errors: this.props.errors,
-          getModelValue: name => this.lookupValue(name, this.props)
-        }
+          getModelValue: (name) => this.lookupValue(name, this.props),
+        },
       };
       const props = { ...childProps };
       return React.createElement(WrappedComponent, props);
@@ -65,7 +65,7 @@ export default function withFormSession(WrappedComponent, sessionKey) {
   }
 
   const ConnectedWithFormSession = connect(WithFormSession.mapStateToProps)(
-    WithFormSession
+    WithFormSession,
   );
 
   return hoistStatics(ConnectedWithFormSession, WrappedComponent);

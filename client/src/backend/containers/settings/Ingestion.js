@@ -12,9 +12,9 @@ import PageHeader from "backend/components/layout/PageHeader";
 import withFormSession from "hoc/withFormSession";
 
 export class SettingsIngestionContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      settings: select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore),
     };
   };
 
@@ -22,7 +22,7 @@ export class SettingsIngestionContainer extends PureComponent {
     form: PropTypes.object,
     settings: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
@@ -60,7 +60,7 @@ export class SettingsIngestionContainer extends PureComponent {
                       href="https://www.npmjs.com/package/mammoth#writing-style-maps"
                     >
                       #
-                    </a>
+                    </a>,
                   ]}
                 />
               }
@@ -76,8 +76,8 @@ export class SettingsIngestionContainer extends PureComponent {
 export default withFormSession(
   withTranslation()(
     connect(SettingsIngestionContainer.mapStateToProps)(
-      SettingsIngestionContainer
-    )
+      SettingsIngestionContainer,
+    ),
   ),
-  "backend-settings"
+  "backend-settings",
 );

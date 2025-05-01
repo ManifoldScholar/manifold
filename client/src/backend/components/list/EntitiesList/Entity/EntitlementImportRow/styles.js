@@ -12,7 +12,6 @@ export const Toggle = styled(Collapse.Toggle)`
   }
 `;
 
-/* eslint-disable prettier/prettier */
 export const Item = styled.li`
   border-bottom: 1px solid var(--color-neutral-ui-dull-light);
 
@@ -30,7 +29,6 @@ export const Item = styled.li`
     }
   }
 `;
-/* eslint-enable prettier/prettier */
 
 export const Inner = styled.div`
   border: 0;

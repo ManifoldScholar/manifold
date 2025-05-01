@@ -8,7 +8,7 @@ export default function AcceptCheckbox({
   label,
   onChange,
   labelStyle = "copy",
-  checkboxWhite = false
+  checkboxWhite = false,
 }) {
   const uid = useUID();
 
@@ -30,5 +30,5 @@ AcceptCheckbox.displayName = "Global.SignInUp.Inputs.AcceptTermsCheckbox";
 AcceptCheckbox.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onChange: PropTypes.func,
-  labelStyle: PropTypes.oneOf(["copy", "heading"])
+  labelStyle: PropTypes.oneOf(["copy", "heading"]),
 };

@@ -12,7 +12,7 @@ export class MakersNewContainer extends PureComponent {
 
   static propTypes = {
     history: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   redirectToMaker(maker) {
@@ -20,7 +20,7 @@ export class MakersNewContainer extends PureComponent {
     this.props.history.push(path, { keepNotifications: true });
   }
 
-  handleSuccess = maker => {
+  handleSuccess = (maker) => {
     this.redirectToMaker(maker);
   };
 

@@ -4,7 +4,7 @@ import {
   respond,
   formInstructions,
   fluidScale,
-  formInputMessage
+  formInputMessage,
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 import { transientOptions } from "helpers/emotionHelpers";
@@ -32,7 +32,7 @@ const Inner = styled.div`
     justify-content: space-between;
     gap: ${fluidScale("60px", "40px", 120, 90)};
     `,
-    breakpoints[90]
+    breakpoints[90],
   )}
 `;
 

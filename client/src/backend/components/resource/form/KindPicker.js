@@ -15,7 +15,7 @@ class KindPicker extends PureComponent {
     getModelValue: PropTypes.func,
     includeButtons: PropTypes.bool,
     set: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get idPrefix() {
@@ -32,17 +32,17 @@ class KindPicker extends PureComponent {
         <Form.Label id={id} label={this.props.t("resources.new.kind")} />
         <Styled.SelectWrapper $only={this.props.includeButtons}>
           <FormSelect
-            onChange={event => {
+            onChange={(event) => {
               this.set(event.target.value);
             }}
             value={this.props.getModelValue("attributes[kind]").toLowerCase()}
-            options={kindList.map(kind => {
+            options={kindList.map((kind) => {
               const safeKind = kind.toLowerCase();
               const translatedKind = this.props.t(`resources.new.${safeKind}`);
               return {
                 value: safeKind,
                 label: translatedKind,
-                key: safeKind
+                key: safeKind,
               };
             })}
           />
@@ -58,7 +58,7 @@ class KindPicker extends PureComponent {
         role="group"
         aria-label={this.props.t("resources.new.resource_kind")}
       >
-        {kindList.map(kind => {
+        {kindList.map((kind) => {
           const safeKind = kind.toLowerCase();
           const translatedKind = this.props.t(`resources.new.${safeKind}`);
           const kindValue = this.props.getModelValue("attributes[kind]");
@@ -98,12 +98,12 @@ class KindPicker extends PureComponent {
       "Document",
       "Spreadsheet",
       "Presentation",
-      "Interactive"
+      "Interactive",
     ];
 
     return (
-      <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
-        {id => (
+      <UIDConsumer name={(id) => `${this.idPrefix}-${id}`}>
+        {(id) => (
           <Styled.KindPicker className="form-secondary">
             <Form.FieldWrapper>
               {this.renderSelect(kindList, id)}

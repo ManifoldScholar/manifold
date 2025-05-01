@@ -1,9 +1,9 @@
-export FormContext from "./FormContext";
-export ManifoldAnalyticsContext from "./ManifoldAnalyticsContext";
-export LanguageContext from "./LanguageContext";
-export TableHeaderContext from "./TableHeaderContext";
-export FrontendModeContext from "./FrontendModeContext";
-export BackLinkContext from "./BackLinkContext";
-export ReaderContext from "./ReaderContext";
-export DrawerContext from "./DrawerContext";
-export CollapseContext from "./CollapseContext";
+export { default as FormContext } from "./FormContext";
+export { default as ManifoldAnalyticsContext } from "./ManifoldAnalyticsContext";
+export { default as LanguageContext } from "./LanguageContext";
+export { default as TableHeaderContext } from "./TableHeaderContext";
+export { default as FrontendModeContext } from "./FrontendModeContext";
+export { default as BackLinkContext } from "./BackLinkContext";
+export { default as ReaderContext } from "./ReaderContext";
+export { default as DrawerContext } from "./DrawerContext";
+export { default as CollapseContext } from "./CollapseContext";

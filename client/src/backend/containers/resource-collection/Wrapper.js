@@ -24,9 +24,9 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     return {
       resourceCollection: select(
         requests.beResourceCollection,
-        state.entityStore
+        state.entityStore,
       ),
-      project: select(requests.beProject, state.entityStore)
+      project: select(requests.beProject, state.entityStore),
     };
   };
 
@@ -39,11 +39,11 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     route: PropTypes.object,
     history: PropTypes.object,
     confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   componentDidMount() {
@@ -61,7 +61,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     }
   }
 
-  fetchProject = id => {
+  fetchProject = (id) => {
     const call = projectsAPI.show(id);
     const projectRequest = request(call, requests.beProject);
     this.props.dispatch(projectRequest);
@@ -71,20 +71,20 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
     const call = resourceCollectionsAPI.show(this.props.match.params.id);
     const resourceCollectionRequest = request(
       call,
-      requests.beResourceCollection
+      requests.beResourceCollection,
     );
     this.props.dispatch(resourceCollectionRequest);
   };
 
   doDestroy = () => {
     const call = resourceCollectionsAPI.destroy(
-      this.props.resourceCollection.id
+      this.props.resourceCollection.id,
     );
     const options = { removes: this.props.resourceCollection };
     const resourceCollectionRequest = request(
       call,
       requests.beResourceCollectionDestroy,
-      options
+      options,
     );
     this.props.dispatch(resourceCollectionRequest).promise.then(() => {
       this.notifyDestroy();
@@ -105,9 +105,9 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
       id: `RESOURCE_COLLECTION_DESTROYED_${this.props.resourceCollection.id}`,
       heading: t("notifications.resource_collection_delete"),
       body: t("notifications.delete_entity_body", {
-        title: this.props.resourceCollection.attributes.title
+        title: this.props.resourceCollection.attributes.title,
       }),
-      expiration: 5000
+      expiration: 5000,
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   }
@@ -127,21 +127,21 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
         route: "frontendProjectResourceCollection",
         slug: resourceCollection.relationships.project.attributes.slug,
         resourceSlug: resourceCollection.attributes.slug,
-        icon: "eyeOpen32"
+        icon: "eyeOpen32",
       },
       {
         label: "actions.delete",
         icon: "delete32",
         authorize: "delete",
-        onClick: this.handleCollectionDestroy
-      }
+        onClick: this.handleCollectionDestroy,
+      },
     ];
   }
 
   renderRoutes() {
     const { resourceCollection, project } = this.props;
     return childRoutes(this.props.route, {
-      childProps: { resourceCollection, project }
+      childProps: { resourceCollection, project },
     });
   }
 
@@ -161,7 +161,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
       resourceCollection,
       resourceCollection.relationships.project,
       belongsToJournalIssue,
-      t
+      t,
     );
 
     const parentProps = {
@@ -170,7 +170,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
       parentSubtitle:
         resourceCollection.relationships.project.attributes.subtitle,
       texts: resourceCollection.attributes.projectTextsNav,
-      parentId: resourceCollection.relationships.project.id
+      parentId: resourceCollection.relationships.project.id,
     };
 
     return (
@@ -178,7 +178,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
         <Authorize
           entity={resourceCollection}
           failureFatalError={{
-            body: t("resource_collections.unauthorized")
+            body: t("resource_collections.unauthorized"),
           }}
           ability="update"
         >
@@ -201,7 +201,7 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
             type="resourceCollection"
             backUrl={lh.link(
               "backendProjectResourceCollections",
-              resourceCollection.relationships.project.id
+              resourceCollection.relationships.project.id,
             )}
             backLabel={
               resourceCollection.relationships.project.attributes.titlePlaintext
@@ -230,5 +230,5 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ResourceCollectionWrapperContainer))
+  withConfirmation(connectAndFetch(ResourceCollectionWrapperContainer)),
 );

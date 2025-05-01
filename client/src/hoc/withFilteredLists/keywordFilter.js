@@ -1,14 +1,14 @@
 export default function keywordFilter({ snapshotState = false } = {}) {
   return {
     config: {
-      snapshotState
+      snapshotState,
     },
     params: [
       {
         label: "Search...",
         name: "keyword",
-        value: ""
-      }
-    ]
+        value: "",
+      },
+    ],
   };
 }

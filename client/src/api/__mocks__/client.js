@@ -7,19 +7,19 @@ export default class ApiClient {
       /\/api\/v1\/projects\/\w*\/relationships\/resources/,
       /\/api\/v1\/annotations\/\w*\/relationships\/comments/,
       /\/api\/v1\/resources\/\w*\/relationships\/comments/,
-      /\/api\/v1\/me\/relationships\/reading_groups/
+      /\/api\/v1\/me\/relationships\/reading_groups/,
     ];
 
     let response;
 
-    const isCollectionEndpoint = some(collectionEndpoints, pattern => {
+    const isCollectionEndpoint = some(collectionEndpoints, (pattern) => {
       return pattern.test(endpoint);
     });
 
     if (isCollectionEndpoint) {
       response = {
         data: [],
-        meta: { pagination: fixtures.pagination() }
+        meta: { pagination: fixtures.pagination() },
       };
     } else {
       response = { data: {} };

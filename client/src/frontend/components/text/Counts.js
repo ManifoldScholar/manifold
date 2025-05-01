@@ -9,7 +9,7 @@ class TextCounts extends Component {
 
   static propTypes = {
     text: PropTypes.object.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get annotationsCount() {

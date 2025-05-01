@@ -18,7 +18,7 @@ class Annotation extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     visitHandler: PropTypes.func,
     showCommentsToggleAsBlock: PropTypes.bool,
-    refresh: PropTypes.func
+    refresh: PropTypes.func,
   };
 
   deleteHandler = () => {
@@ -26,14 +26,14 @@ class Annotation extends PureComponent {
     const call = annotationsAPI.destroy(annotation.id);
     const options = { removes: { type: "annotations", id: annotation.id } };
     const res = this.props.dispatch(
-      request(call, requests.rAnnotationDestroy, options)
+      request(call, requests.rAnnotationDestroy, options),
     );
     res.promise.then(() => {
       if (this.props.refresh) this.props.refresh();
     });
   };
 
-  visitHandler = event => {
+  visitHandler = (event) => {
     event.preventDefault();
     const { annotation, visitHandler } = this.props;
     if (visitHandler) return visitHandler(annotation);
@@ -42,13 +42,13 @@ class Annotation extends PureComponent {
 
   linkFor(annotation) {
     const {
-      attributes: { textSlug, textSectionId }
+      attributes: { textSlug, textSectionId },
     } = annotation;
     return lh.link(
       "readerSection",
       textSlug,
       textSectionId,
-      `#annotation-${annotation.id}`
+      `#annotation-${annotation.id}`,
     );
   }
 
@@ -68,7 +68,7 @@ class Annotation extends PureComponent {
     return {
       deleteHandler: this.deleteHandler,
       visitHandler: this.visitHandler,
-      showCommentsToggleAsBlock: this.showCommentsToggleAsBlock
+      showCommentsToggleAsBlock: this.showCommentsToggleAsBlock,
     };
   }
 

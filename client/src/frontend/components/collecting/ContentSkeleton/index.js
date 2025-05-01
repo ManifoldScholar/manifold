@@ -10,7 +10,7 @@ ContentSkeleton.displayName = "ReadingGroup.Collecting.ContentSkeleton";
 
 ContentSkeleton.propTypes = {
   nested: PropTypes.bool,
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 export default ContentSkeleton;

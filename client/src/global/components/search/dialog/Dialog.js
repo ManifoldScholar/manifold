@@ -17,7 +17,7 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
 
   const { data: results, meta: resultsMeta } = useFetch({
     request: [searchResultsAPI.index, queryAndPagination],
-    condition: query
+    condition: query,
   });
 
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
     { label: t("glossary.project_other"), value: "Project" },
     { label: t("glossary.resource_other"), value: "Resource" },
     { label: t("glossary.text_other"), value: "Text" },
-    { label: t("glossary.full_text_other"), value: "TextSection" }
+    { label: t("glossary.full_text_other"), value: "TextSection" },
   ];
 
   return (
@@ -47,11 +47,12 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
         <h2 className="screen-reader-text">{t("search.form")}</h2>
         <SearchQuery.Form
           initialState={{
-            keyword: ""
+            keyword: "",
           }}
           searchQueryState={query}
           setQueryState={setQuery}
           facets={facets}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
         />
       </div>
@@ -60,7 +61,7 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
           <h2 className="screen-reader-text">{t("search.results")}</h2>
           <SearchResults.List
             pagination={resultsMeta.pagination}
-            paginationClickHandler={page => () => setPageNumber(page)}
+            paginationClickHandler={(page) => () => setPageNumber(page)}
             results={results}
             context="frontend"
             padding={1}
@@ -85,7 +86,7 @@ SearchDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   header: PropTypes.node,
   labelledBy: PropTypes.string,
-  describedBy: PropTypes.string
+  describedBy: PropTypes.string,
 };
 
 export default SearchDialog;

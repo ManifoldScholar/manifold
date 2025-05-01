@@ -6,8 +6,8 @@ export default {
       options: {
         body: JSON.stringify({ type: "analyticsEvent", data: event }),
         visitToken,
-        visitorToken
-      }
+        visitorToken,
+      },
     };
-  }
+  },
 };

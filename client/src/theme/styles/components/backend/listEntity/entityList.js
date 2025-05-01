@@ -3,7 +3,7 @@ import {
   respond,
   dropzone,
   fillOnFocus,
-  utilityPrimary
+  utilityPrimary,
 } from "theme/styles/mixins";
 import { eventEntity } from "theme/styles/variables/crossComponent";
 
@@ -76,18 +76,18 @@ export default `.entity-list {
           );
           margin-left: calc(-1 * ${eventEntity.iconSize.small}));
         `,
-        eventEntity.panelBreakpoint
+        eventEntity.panelBreakpoint,
       )}
 
       ${respond(
         `margin-left: -1 / 2 * event-entity(icon-size-large);`,
-        eventEntity.listLayoutBreakpoint
+        eventEntity.listLayoutBreakpoint,
       )}
 
       /* breakpoint equal to event-entity(min-width) * 2 + gutter + remaining viewport space */
       ${respond(
         `grid-template-columns: repeat(2, minmax(event-entity(min-width), 1fr));`,
-        "952px"
+        "952px",
       )}
 
       li {
@@ -96,7 +96,7 @@ export default `.entity-list {
         ${respond(
           `padding-left: ${eventEntity.iconSize.small};
         margin-top: ${eventEntity.rowGap};`,
-          eventEntity.panelBreakpoint
+          eventEntity.panelBreakpoint,
         )}
 
         ${respond(
@@ -106,7 +106,7 @@ export default `.entity-list {
             max-width: none;
             padding-left: ${eventEntity.columnGap};
           `,
-          eventEntity.listLayoutBreakpoint
+          eventEntity.listLayoutBreakpoint,
         )}
       }
     }
@@ -138,7 +138,7 @@ export default `.entity-list {
             border-bottom: none;
           }
         `,
-        65
+        65,
       )}
 
       ${respond(
@@ -147,7 +147,7 @@ export default `.entity-list {
             flex-basis: 25%;
           }
         `,
-        85
+        85,
       )}
     }
 
@@ -194,7 +194,7 @@ export default `.entity-list {
           margin-top: 0;
         }
       `,
-      60
+      60,
     )}
   }
 

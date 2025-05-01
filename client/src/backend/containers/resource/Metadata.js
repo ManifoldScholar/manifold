@@ -8,7 +8,7 @@ export default class ResourceMetadataContainer extends PureComponent {
 
   static propTypes = {
     resource: PropTypes.object,
-    params: PropTypes.object
+    params: PropTypes.object,
   };
 
   render() {

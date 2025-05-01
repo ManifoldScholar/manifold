@@ -11,7 +11,7 @@ import * as Styled from "./styles";
 function SearchResultsTypeResource({
   result,
   highlightedAttribute,
-  hideParent = false
+  hideParent = false,
 }) {
   const { t } = useTranslation();
 
@@ -26,13 +26,13 @@ function SearchResultsTypeResource({
     searchableId,
     searchableType,
     title,
-    parents: { project }
+    parents: { project },
   } = result.attributes ?? {};
 
   const collectable = {
     type: searchableType,
     id: searchableId,
-    attributes: { title }
+    attributes: { title },
   };
 
   const creators = model?.relationships?.creators ?? [];
@@ -43,10 +43,10 @@ function SearchResultsTypeResource({
     parent: project?.title,
     parentUrl: lh.link("frontendProjectDetail", project?.slug),
     hideParent,
-    attribution: creators.map(c => c.attributes.fullName).join(", "),
+    attribution: creators.map((c) => c.attributes.fullName).join(", "),
     description: highlightedAttribute("fullText"),
     label: t("glossary.resource_one"),
-    collectable
+    collectable,
   };
 
   return (
@@ -76,7 +76,7 @@ SearchResultsTypeResource.displayName = "Search.Results.Type.Resource";
 SearchResultsTypeResource.propTypes = {
   result: PropTypes.object,
   highlightedAttribute: PropTypes.func.isRequired,
-  hideParent: PropTypes.bool
+  hideParent: PropTypes.bool,
 };
 
 export default withSearchResultHelper(SearchResultsTypeResource);

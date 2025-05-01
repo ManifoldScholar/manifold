@@ -7,7 +7,7 @@ import {
   defaultTransitionProps,
   defaultHoverStyle,
   fillOnFocus,
-  rgba
+  rgba,
 } from "theme/styles/mixins";
 
 export default `
@@ -198,7 +198,7 @@ export default `
         min-height: 58px;
         font-size: 14px;
       `,
-      60
+      60,
     )}
 
     &:hover,
@@ -226,7 +226,7 @@ export default `
           width: 54px;
           height: 54px;
         `,
-        60
+        60,
       )}
     }
   }

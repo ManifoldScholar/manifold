@@ -11,7 +11,7 @@ export default function CategoryListTexts({
   categoryCount,
   texts = [],
   callbacks,
-  onTextKeyboardMove
+  onTextKeyboardMove,
 }) {
   const categoryId = category?.id ?? "uncategorized";
 
@@ -23,7 +23,7 @@ export default function CategoryListTexts({
           className={classNames({
             "texts-list": true,
             "texts-list--active": activeType === "text",
-            "texts-list--empty": texts.length === 0
+            "texts-list--empty": texts.length === 0,
           })}
         >
           <TextsInner
@@ -49,5 +49,5 @@ CategoryListTexts.propTypes = {
   callbacks: PropTypes.object.isRequired,
   onTextKeyboardMove: PropTypes.func.isRequired,
   categoryIndex: PropTypes.number.isRequired,
-  categoryCount: PropTypes.number.isRequired
+  categoryCount: PropTypes.number.isRequired,
 };

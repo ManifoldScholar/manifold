@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import EntitiesList, {
   ProjectRow,
-  CollectionProjectRow
+  CollectionProjectRow,
 } from "backend/components/list/EntitiesList";
 
 export default class ProjectCollectionDetailManual extends PureComponent {
@@ -11,7 +11,7 @@ export default class ProjectCollectionDetailManual extends PureComponent {
   static propTypes = {
     projectCollection: PropTypes.object.isRequired,
     orderChangeHandler: PropTypes.func.isRequired,
-    projects: PropTypes.array
+    projects: PropTypes.array,
   };
 
   get isManuallySorted() {
@@ -21,7 +21,9 @@ export default class ProjectCollectionDetailManual extends PureComponent {
 
   get entities() {
     if (!this.isManuallySorted)
-      return this.props.collectionProjects.map(cp => cp.relationships.project);
+      return this.props.collectionProjects.map(
+        (cp) => cp.relationships.project,
+      );
     return this.props.collectionProjects;
   }
 
@@ -36,7 +38,7 @@ export default class ProjectCollectionDetailManual extends PureComponent {
 
     const linkState = {
       id: this.props.projectCollection.id,
-      label: this.props.projectCollection.attributes.title
+      label: this.props.projectCollection.attributes.title,
     };
 
     return (

@@ -15,7 +15,7 @@ export default function FlagAnnotationModal({
   setOpen,
   id,
   annotationId,
-  type
+  type,
 }) {
   const { t } = useTranslation();
 
@@ -27,11 +27,11 @@ export default function FlagAnnotationModal({
 
   const flagAnnotation = useApiCallback(annotationsAPI.flag);
   const flagComment = useApiCallback(commentsAPI.flag, {
-    refreshes: `comments-for-${annotationId}`
+    refreshes: `comments-for-${annotationId}`,
   });
 
   const handleSubmit = useCallback(
-    async e => {
+    async (e) => {
       e.preventDefault();
       try {
         const handleFlag =
@@ -42,13 +42,13 @@ export default function FlagAnnotationModal({
         setErrors(err);
       }
     },
-    [id, type, message, flagAnnotation, flagComment, setOpen]
+    [id, type, message, flagAnnotation, flagComment, setOpen],
   );
 
   const buttonClasses = classNames(
     "buttons-icon-horizontal__button",
     "buttons-icon-horizontal__button--in-dialog",
-    "button-icon-secondary"
+    "button-icon-secondary",
   );
 
   const colorScheme = useFromStore("ui.persistent.reader.colors.colorScheme");
@@ -67,7 +67,7 @@ export default function FlagAnnotationModal({
             type:
               type === "annotations"
                 ? t("glossary.annotation_title_case_one")
-                : t("glossary.comment_title_case_one")
+                : t("glossary.comment_title_case_one"),
           })}
         </Styled.Heading>
       </header>
@@ -77,7 +77,7 @@ export default function FlagAnnotationModal({
           <Unwrapped.TextArea
             rows={5}
             value={message}
-            onChange={e => setMessage(e.target.value)}
+            onChange={(e) => setMessage(e.target.value)}
             id={uid}
             placeholder={t("reader.report_annotation.placeholder")}
             aria-describedby={errorId}
@@ -91,7 +91,7 @@ export default function FlagAnnotationModal({
               type="submit"
               className={classNames(
                 buttonClasses,
-                "button-icon-secondary--red"
+                "button-icon-secondary--red",
               )}
               onClick={handleSubmit}
             >
@@ -105,7 +105,7 @@ export default function FlagAnnotationModal({
             <button
               className={classNames(
                 buttonClasses,
-                "button-icon-secondary--dull"
+                "button-icon-secondary--dull",
               )}
               onClick={() => setOpen(false)}
             >
@@ -129,5 +129,5 @@ FlagAnnotationModal.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   setOpen: PropTypes.func.isRequired,
-  annotationId: PropTypes.string
+  annotationId: PropTypes.string,
 };

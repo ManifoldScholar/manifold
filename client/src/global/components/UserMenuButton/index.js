@@ -14,7 +14,7 @@ const UserMenuButton = forwardRef(
       onClick: onClickIgnored,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { authenticated, currentUser } = useAuthentication();
     const { t } = useTranslation();
@@ -36,7 +36,7 @@ const UserMenuButton = forwardRef(
           ? props
           : {
               "aria-expanded": props["aria-expanded"],
-              "aria-haspopup": "dialog"
+              "aria-haspopup": "dialog",
             })}
       >
         <span className="screen-reader-text">
@@ -51,7 +51,7 @@ const UserMenuButton = forwardRef(
         />
       </Styled.Button>
     );
-  }
+  },
 );
 
 UserMenuButton.displayName = "UserMenuButton";
@@ -59,10 +59,10 @@ UserMenuButton.displayName = "UserMenuButton";
 UserMenuButton.propTypes = {
   callbacks: PropTypes.shape({
     toggleUserPanel: PropTypes.func.isRequired,
-    toggleSignInUpOverlay: PropTypes.func.isRequired
+    toggleSignInUpOverlay: PropTypes.func.isRequired,
   }),
   visible: PropTypes.bool,
-  context: PropTypes.oneOf(["frontend", "backend", "reader"])
+  context: PropTypes.oneOf(["frontend", "backend", "reader"]),
 };
 
 export default UserMenuButton;

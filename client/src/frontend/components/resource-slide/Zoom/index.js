@@ -21,5 +21,5 @@ ResourceListSlideZoom.displayName = "ResourceList.Slide.Zoom";
 
 ResourceListSlideZoom.propTypes = {
   resource: PropTypes.object.isRequired,
-  label: PropTypes.string
+  label: PropTypes.string,
 };

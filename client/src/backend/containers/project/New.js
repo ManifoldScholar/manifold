@@ -19,7 +19,7 @@ export class ProjectNewContainer extends PureComponent {
   static propTypes = {
     history: PropTypes.object,
     project: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -30,9 +30,9 @@ export class ProjectNewContainer extends PureComponent {
           multipleTexts: true,
           resources: true,
           markdown: true,
-          recentActivity: true
-        }
-      }
+          recentActivity: true,
+        },
+      },
     };
   }
 
@@ -47,7 +47,7 @@ export class ProjectNewContainer extends PureComponent {
             rel="noopener noreferrer"
           >
             #
-          </a>
+          </a>,
         ]}
       />
     );
@@ -58,7 +58,7 @@ export class ProjectNewContainer extends PureComponent {
     this.props.history.push(path);
   }
 
-  handleSuccess = project => {
+  handleSuccess = (project) => {
     this.redirectToProject(project);
   };
 
@@ -69,12 +69,12 @@ export class ProjectNewContainer extends PureComponent {
       { to: null, label: t("glossary.project_title_case_other") },
       {
         to: lh.link("backendProjects"),
-        label: t("pages.projects_all")
+        label: t("pages.projects_all"),
       },
       {
         to: lh.link("backendProjectsNew"),
-        label: t("common.new")
-      }
+        label: t("common.new"),
+      },
     ];
 
     return (
@@ -137,7 +137,7 @@ export class ProjectNewContainer extends PureComponent {
                   instructions={t("projects.forms.new.texts_instructions")}
                   options={[
                     { label: t("common.yes"), value: true },
-                    { label: t("common.no"), value: false }
+                    { label: t("common.no"), value: false },
                   ]}
                   inline
                   wide
@@ -149,7 +149,7 @@ export class ProjectNewContainer extends PureComponent {
                   instructions={t("projects.forms.new.resources_instructions")}
                   options={[
                     { label: t("common.yes"), value: true },
-                    { label: t("common.no"), value: false }
+                    { label: t("common.no"), value: false },
                   ]}
                   inline
                   wide
@@ -159,11 +159,11 @@ export class ProjectNewContainer extends PureComponent {
                   prompt={t("projects.forms.new.extended_descript_prompt")}
                   name="attributes[configuration][markdown]"
                   instructions={t(
-                    "projects.forms.new.extended_descript_instructions"
+                    "projects.forms.new.extended_descript_instructions",
                   )}
                   options={[
                     { label: t("common.yes"), value: true },
-                    { label: t("common.no"), value: false }
+                    { label: t("common.no"), value: false },
                   ]}
                   inline
                   wide
@@ -175,7 +175,7 @@ export class ProjectNewContainer extends PureComponent {
                   instructions={t("projects.forms.new.activity_instructions")}
                   options={[
                     { label: t("common.yes"), value: true },
-                    { label: t("common.no"), value: false }
+                    { label: t("common.no"), value: false },
                   ]}
                   inline
                   wide

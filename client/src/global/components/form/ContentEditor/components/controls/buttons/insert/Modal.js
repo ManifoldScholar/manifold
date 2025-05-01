@@ -10,12 +10,12 @@ export default function InsertModal(props) {
   const uid = useUID();
   const { t } = useTranslation();
 
-  const handleResolveClick = e => {
+  const handleResolveClick = (e) => {
     e.preventDefault();
     resolve(e);
   };
 
-  const handleRejectClick = e => {
+  const handleRejectClick = (e) => {
     e.preventDefault();
     reject(e);
   };
@@ -75,5 +75,5 @@ InsertModal.propTypes = {
   reject: PropTypes.func.isRequired,
   heading: PropTypes.string,
   options: PropTypes.object,
-  message: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };

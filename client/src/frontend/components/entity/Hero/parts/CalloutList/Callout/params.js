@@ -14,7 +14,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
         url: lh.link("reader", slug),
         title: data.attributes.title || t("actions.read"),
         as: Link,
-        primary: true
+        primary: true,
       };
     case "DOWNLOAD":
       return {
@@ -23,7 +23,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
         url: data.attributes.attachmentStyles.original,
         title: data.attributes.title || t("actions.download"),
         as: "a",
-        analyticsEvent: "download"
+        analyticsEvent: "download",
       };
     case "LINK":
       return {
@@ -31,7 +31,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
         iconSize: isLink ? 24 : 46,
         url: data.attributes.url,
         title: data.attributes.title || t("placeholders.link"),
-        as: "UserLink"
+        as: "UserLink",
       };
     case "TOC":
       return {
@@ -41,7 +41,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
           ? lh.link("readerSection", slug, tocSectionId)
           : lh.link("reader", slug),
         title: data.attributes.title || t("actions.view_contents"),
-        as: Link
+        as: Link,
       };
     // LD: Not translating placeholders for these cases because we aren't using them. Would only be added if we implement the new icons for journal callouts.
     case "WEBSITE":
@@ -50,7 +50,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
         iconSize: 24,
         url: data.attributes.url,
         title: data.attributes.title || "Website",
-        as: "a"
+        as: "a",
       };
     case "SHARE":
       return {
@@ -59,7 +59,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
         url: data.attributes.url,
         title: data.attributes.title || "Share",
         as: "a",
-        analyticsEvent: "share"
+        analyticsEvent: "share",
       };
     case "EMAIL":
       return {
@@ -67,7 +67,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
         iconSize: 24,
         url: data.attributes.url,
         title: data.attributes.title || "Email",
-        as: "a"
+        as: "a",
       };
     default:
       return { mismatch: true };

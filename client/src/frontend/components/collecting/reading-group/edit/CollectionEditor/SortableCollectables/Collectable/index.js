@@ -17,7 +17,7 @@ export default function Collectable({
     id,
     type,
     index,
-    categoryId
+    categoryId,
   });
 
   return (

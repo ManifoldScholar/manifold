@@ -6,13 +6,13 @@ import { formatNodeLabel } from "./general";
 export const getListItemNode = (editor, path) =>
   Editor.above(editor, {
     at: path,
-    match: n => n.type === "li"
+    match: (n) => n.type === "li",
   }) ?? [];
 
 export const getListNode = (editor, path) =>
   Editor.above(editor, {
     at: path,
-    match: n => n.type === "ul" || n.type === "ol"
+    match: (n) => n.type === "ul" || n.type === "ol",
   }) ?? [];
 
 // Use Node.string() rather than this when appropriate
@@ -30,7 +30,7 @@ export const getCommonBlock = (editor, condition = () => true) => {
   const [common, path] = Node.common(
     editor,
     range.anchor.path,
-    range.focus.path
+    range.focus.path,
   );
 
   if (
@@ -41,8 +41,8 @@ export const getCommonBlock = (editor, condition = () => true) => {
   } else {
     return Editor.above(editor, {
       at: path,
-      match: n =>
-        (Editor.isBlock(editor, n) || Editor.isEditor(n)) && condition(n)
+      match: (n) =>
+        (Editor.isBlock(editor, n) || Editor.isEditor(n)) && condition(n),
     });
   }
 };
@@ -62,11 +62,11 @@ export const getAncestors = (editor, iterator, list = {}) => {
 export const getNearestOfType = (editor, types) => {
   const [nearest, path] = Editor.above(editor, {
     at: Editor.unhangRange(editor, editor.selection),
-    match: n =>
+    match: (n) =>
       !Editor.isEditor(n) &&
       types.includes(n.type) &&
       !n.nodeName &&
-      !n.slateOnly
+      !n.slateOnly,
   });
   return { nearest, path };
 };
@@ -77,12 +77,12 @@ export const isElementActive = (editor, format) => {
 
   const nearest = Editor.above(editor, {
     at: Editor.unhangRange(editor, selection),
-    match: n =>
+    match: (n) =>
       !Editor.isEditor(n) &&
       Element.isElement(n) &&
       !n.nodeName &&
       !n.slateOnly &&
-      n.type === format
+      n.type === format,
   });
 
   const [node, path] = nearest ?? [];
@@ -97,12 +97,12 @@ export const isTextBlockActive = (editor, format) => {
 
   const block = Editor.above(editor, {
     at: Editor.unhangRange(editor, selection),
-    match: n =>
+    match: (n) =>
       !Editor.isEditor(n) &&
       Editor.isBlock(editor, n) &&
       !n.nodeName &&
       !n.slateOnly &&
-      n.type === format
+      n.type === format,
   });
 
   const [node, path] = block ?? [];
@@ -117,15 +117,16 @@ export const isMarkActive = (editor, format) => {
   const marks = node.text ? Editor.marks(editor) : false;
 
   if (format === "code") {
-    const [pre] = Editor.above(editor, { match: n => n.type === "pre" }) ?? [];
+    const [pre] =
+      Editor.above(editor, { match: (n) => n.type === "pre" }) ?? [];
     if (pre) return false;
   }
   return marks ? marks[format] === true : false;
 };
 
-export const isLinkActive = editor => {
+export const isLinkActive = (editor) => {
   const [link] = Editor.nodes(editor, {
-    match: n => !Editor.isEditor(n) && Element.isElement(n) && n.type === "a"
+    match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === "a",
   });
   return !!link;
 };

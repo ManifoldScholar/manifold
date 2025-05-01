@@ -1,7 +1,7 @@
 import { Transforms } from "slate";
 import { ReactEditor } from "slate-react";
 
-export const onModalClose = (editor, selection) => close => {
+export const onModalClose = (editor, selection) => (close) => {
   close();
   const selectionToUse = editor.selection ?? selection;
 

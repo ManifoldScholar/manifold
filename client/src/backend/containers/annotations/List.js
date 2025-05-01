@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 import { annotationsAPI, bulkDeleteAPI } from "api";
 import EntitiesList, {
   Search,
-  AnnotationRow
+  AnnotationRow,
 } from "backend/components/list/EntitiesList";
 import {
   useFetch,
   useApiCallback,
   useListQueryParams,
-  useNotification
+  useNotification,
 } from "hooks";
 import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -21,14 +21,14 @@ import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
   SelectAll,
-  BulkActionButtons
+  BulkActionButtons,
 } from "backend/components/list/EntitiesList/List/bulkActions";
 
 function AnnotationsList({
   route,
   confirm,
   entitiesListSearchProps,
-  entitiesListSearchParams
+  entitiesListSearchParams,
 }) {
   const { t } = useTranslation();
 
@@ -36,14 +36,18 @@ function AnnotationsList({
     initSize: 10,
     initFilters: {
       ...entitiesListSearchParams.initialannotations,
-      formats: ["annotation"]
+      formats: ["annotation"],
     },
-    initSearchProps: entitiesListSearchProps("annotations")
+    initSearchProps: entitiesListSearchProps("annotations"),
   });
 
-  const { data: annotations, meta, refresh } = useFetch({
+  const {
+    data: annotations,
+    meta,
+    refresh,
+  } = useFetch({
     request: [annotationsAPI.index, filters, pagination],
-    dependencies: [filters]
+    dependencies: [filters],
   });
 
   const {
@@ -55,19 +59,19 @@ function AnnotationsList({
     bulkSelectionEmpty,
     addItem,
     removeItem,
-    addPage
+    addPage,
   } = useBulkActions(annotations, filters);
 
   const { onReset, setParam } = useClearBulkSelectionWithFilters(
     searchProps.onReset,
     searchProps.setParam,
     resetBulkSelection,
-    bulkSelectionEmpty
+    bulkSelectionEmpty,
   );
 
   const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
 
-  const onDelete = id => {
+  const onDelete = (id) => {
     const heading = t("modals.delete_annotation");
     const message = t("modals.confirm_body");
     if (confirm)
@@ -80,18 +84,18 @@ function AnnotationsList({
   const bulkDelete = useApiCallback(bulkDeleteAPI.annotations);
 
   const unit = t("glossary.annotation", {
-    count: meta?.pagination?.totalCount
+    count: meta?.pagination?.totalCount,
   });
 
-  const notifyBulkDelete = useNotification(count => ({
+  const notifyBulkDelete = useNotification((count) => ({
     level: 0,
     id: "BULK_DELETE_SUCCESS",
     heading: t("notifications.bulk_delete_success"),
     body: t("notifications.bulk_delete_success_body", {
       count,
-      entity: t("glossary.annotation", { count })
+      entity: t("glossary.annotation", { count }),
     }),
-    expiration: 5000
+    expiration: 5000,
   }));
 
   const onBulkDelete = () => {
@@ -119,13 +123,13 @@ function AnnotationsList({
       drawer: true,
       drawerProps: {
         lockScroll: "always",
-        closeUrl
+        closeUrl,
       },
-      childProps: { refresh }
+      childProps: { refresh },
     });
   };
 
-  const currentPageIds = annotations?.map(a => a.id);
+  const currentPageIds = annotations?.map((a) => a.id);
 
   return (
     <>
@@ -139,7 +143,7 @@ function AnnotationsList({
             bulkSelection,
             addItem,
             removeItem,
-            onDelete
+            onDelete,
           }}
           entities={annotations}
           search={
@@ -168,7 +172,7 @@ function AnnotationsList({
               onBulkDelete={onBulkDelete}
               toggleBulkActions={toggleBulkActions}
               actionsDisabled={bulkSelectionEmpty}
-            />
+            />,
           ]}
         />
       )}
@@ -177,7 +181,7 @@ function AnnotationsList({
 }
 
 export default withFilteredLists(withConfirmation(AnnotationsList), {
-  annotations: annotationFilters()
+  annotations: annotationFilters(),
 });
 
 AnnotationsList.displayName = "Annotations.List";
@@ -186,5 +190,5 @@ AnnotationsList.propTypes = {
   route: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
   entitiesListSearchProps: PropTypes.func,
-  entitiesListSearchParams: PropTypes.object
+  entitiesListSearchParams: PropTypes.object,
 };

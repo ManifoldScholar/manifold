@@ -23,7 +23,7 @@ export default class FormUpload extends Component {
       "portrait",
       "landscape",
       "horizontal",
-      "embed"
+      "embed",
     ]),
     placeholder: PropTypes.string, // Allows override of placeholder graphic
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
@@ -38,20 +38,20 @@ export default class FormUpload extends Component {
     progress: PropTypes.string,
     fileNameFrom: PropTypes.string,
     uploadError: PropTypes.string,
-    getModelValue: PropTypes.func
+    getModelValue: PropTypes.func,
   };
 
   static defaultProps = {
     layout: "square",
     accepts: null,
-    wide: false
+    wide: false,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       removed: false,
-      attachment: null
+      attachment: null,
     };
   }
 
@@ -81,11 +81,11 @@ export default class FormUpload extends Component {
     return this.props.getModelValue(this.props.fileNameFrom);
   }
 
-  handleFileDrop = file => {
+  handleFileDrop = (file) => {
     this.setState({ attachment: file[0], removed: false });
   };
 
-  handleRemove = event => {
+  handleRemove = (event) => {
     event.preventDefault();
     event.stopPropagation();
     this.setState({ attachment: null, removed: true });
@@ -126,7 +126,7 @@ export default class FormUpload extends Component {
               <InputWrapper
                 {...getRootProps({
                   style: this.props.inlineStyle,
-                  tabIndex: undefined
+                  tabIndex: undefined,
                 })}
               >
                 <Styled.Input
@@ -135,7 +135,7 @@ export default class FormUpload extends Component {
                     multiple: false,
                     id: this.props.inputId,
                     "aria-describedby": `${this.props.idForError} ${this.props.idForInstructions}`,
-                    tabIndex: 0
+                    tabIndex: 0,
                   })}
                 />
                 {this.previewable ? (

@@ -12,7 +12,7 @@ export default class ProjectCollectionProjectCover extends PureComponent {
     selectedProjectIds: PropTypes.array,
     addHandler: PropTypes.func,
     removeHandler: PropTypes.func,
-    addable: PropTypes.bool
+    addable: PropTypes.bool,
   };
 
   get addable() {
@@ -47,7 +47,7 @@ export default class ProjectCollectionProjectCover extends PureComponent {
   render() {
     const figureClass = classNames("cover", {
       "cover-placeholder": this.project.attributes.avatarStyles.small,
-      dim: this.project.attributes.draft
+      dim: this.project.attributes.draft,
     });
 
     return (

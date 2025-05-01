@@ -54,7 +54,7 @@ export default class Layout extends React.Component {
             maxWidth: "880px",
             marginLeft: "auto",
             marginRight: "auto",
-            textAlign: "center"
+            textAlign: "center",
           }}
         >
           <div className="loading-container">

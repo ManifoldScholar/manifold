@@ -4,6 +4,6 @@ import { withRouter } from "react-router-dom";
 
 export default function connectAndFetch(WrappedComponent) {
   return withRouter(
-    connect(WrappedComponent.mapStateToProps)(fetchData(WrappedComponent))
+    connect(WrappedComponent.mapStateToProps)(fetchData(WrappedComponent)),
   );
 }

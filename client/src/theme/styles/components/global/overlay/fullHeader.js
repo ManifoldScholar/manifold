@@ -1,7 +1,7 @@
 import {
   containerPrototype,
   utilityPrimary,
-  respond
+  respond,
 } from "theme/styles/mixins";
 
 export default `
@@ -23,7 +23,7 @@ export default `
 
       ${respond(
         `grid-template: "start middle end" auto / 20% minmax(0, 1fr) 20%;`,
-        40
+        40,
       )}
     }
 

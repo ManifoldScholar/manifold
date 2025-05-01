@@ -8,7 +8,7 @@ function NoteStyle({ membership }) {
   const className = classNames({
     "table__inline-value": true,
     "table__inline-value--underlined": true,
-    [`underline-${annotationStyle}`]: true
+    [`underline-${annotationStyle}`]: true,
   });
 
   return <span className={className}>{annotationStyle}</span>;
@@ -17,7 +17,7 @@ function NoteStyle({ membership }) {
 NoteStyle.displayName = "MembersTable.Member.NoteStyle";
 
 NoteStyle.propTypes = {
-  membership: PropTypes.object.isRequired
+  membership: PropTypes.object.isRequired,
 };
 
 export default NoteStyle;

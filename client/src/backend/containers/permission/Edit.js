@@ -12,9 +12,9 @@ import withConfirmation from "hoc/withConfirmation";
 const { request, flush } = entityStoreActions;
 
 export class PermissionEdit extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      permission: select(requests.bePermission, state.entityStore)
+      permission: select(requests.bePermission, state.entityStore),
     };
   };
 
@@ -28,11 +28,11 @@ export class PermissionEdit extends PureComponent {
     closeUrl: PropTypes.string.isRequired,
     history: PropTypes.object,
     confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   componentDidMount() {
@@ -53,7 +53,7 @@ export class PermissionEdit extends PureComponent {
     const entity = this.props.entity;
     const action = request(
       permissionsAPI.show(entity, id),
-      requests.bePermission
+      requests.bePermission,
     );
     this.props.dispatch(action);
   }
@@ -73,7 +73,7 @@ export class PermissionEdit extends PureComponent {
     const action = request(
       permissionsAPI.destroy(entity, permission.id),
       requests.bePermissionDestroy,
-      options
+      options,
     );
     this.props.dispatch(action).promise.then(() => {
       this.props.history.push(this.props.closeUrl);
@@ -92,8 +92,8 @@ export class PermissionEdit extends PureComponent {
               onClick: this.handleRemoveAll,
               icon: "delete32",
               label: t("actions.delete"),
-              className: "utility-button__icon--notice"
-            }
+              className: "utility-button__icon--notice",
+            },
           ]}
         />
         <Form
@@ -108,5 +108,5 @@ export class PermissionEdit extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(PermissionEdit))
+  withConfirmation(connectAndFetch(PermissionEdit)),
 );

@@ -2,7 +2,7 @@ import { createAction } from "redux-actions";
 import { v1 as uuidv1 } from "uuid";
 
 // Add notification that will assign a random ID if one does not exist already
-export const addNotification = createAction("ADD_NOTIFICATION", subject => {
+export const addNotification = createAction("ADD_NOTIFICATION", (subject) => {
   const notification = subject;
   if (!notification.id) {
     notification.id = uuidv1();
@@ -11,10 +11,10 @@ export const addNotification = createAction("ADD_NOTIFICATION", subject => {
 });
 export const removeNotification = createAction(
   "REMOVE_NOTIFICATION",
-  subject => subject
+  (subject) => subject,
 );
 export const removeNotifications = createAction(
   "REMOVE_NOTIFICATIONS",
-  scope => scope
+  (scope) => scope,
 );
 export const removeAllNotifications = createAction("REMOVE_ALL_NOTIFICATIONS");

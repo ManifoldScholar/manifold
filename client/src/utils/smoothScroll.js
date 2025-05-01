@@ -1,11 +1,11 @@
 // Reworked from https://github.com/cferdinandi/smooth-scroll
 
-const getTop = element => {
+const getTop = (element) => {
   if (element.nodeName === "HTML") return -window.pageYOffset;
   return element.getBoundingClientRect().top + window.pageYOffset;
 };
 
-const easeInOutCubic = t => {
+const easeInOutCubic = (t) => {
   return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
 };
 
@@ -19,7 +19,7 @@ export default function smoothScroll(
   offset = 0,
   duration,
   callback,
-  context
+  context,
 ) {
   if (!el) return null;
   const adjustedDuration = duration || 500;
@@ -49,7 +49,7 @@ export default function smoothScroll(
         start,
         end,
         elapsed,
-        adjustedDuration
+        adjustedDuration,
       );
     } else {
       window.scroll(0, position(start, end, elapsed, adjustedDuration));

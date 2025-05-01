@@ -26,7 +26,7 @@ function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
     // Disabling the linter because it's going to complain about hydrateRelationships
     // being called before it's defined. Nothing we can do about that, since this is a
     // recursive scenario, and the two functions call each other.
-    entity.relationships = hydrateRelationships(entity, entities, hydrationMap); // eslint-disable-line
+    entity.relationships = hydrateRelationships(entity, entities, hydrationMap);
   }
   return entity;
 }
@@ -42,19 +42,19 @@ function idOrSlugToId(type, idOrSlug, entityStore) {
 function hydrateRelationships(entity, entities, hydrationMap) {
   const relationships = {};
   if (has(entity, "relationships")) {
-    Object.keys(entity.relationships).forEach(key => {
+    Object.keys(entity.relationships).forEach((key) => {
       const relatedEntities = entity.relationships[key].data;
       if (!relatedEntities) {
         relationships[key] = null;
       } else if (Array.isArray(relatedEntities)) {
-        relationships[key] = relatedEntities.map(entityLookup => {
+        relationships[key] = relatedEntities.map((entityLookup) => {
           return hydrateEntity(entityLookup, entities, hydrationMap);
         });
       } else {
         relationships[key] = hydrateEntity(
           relatedEntities,
           entities,
-          hydrationMap
+          hydrationMap,
         );
       }
     });
@@ -65,7 +65,7 @@ function hydrateRelationships(entity, entities, hydrationMap) {
 const selectCollection = memoize(
   (response, entities) => {
     if (!Array.isArray(response.collection)) return [];
-    return response.collection.map(entity => {
+    return response.collection.map((entity) => {
       return hydrateEntity(entity, entities);
     });
   },
@@ -74,7 +74,7 @@ const selectCollection = memoize(
     // and rehydrate the collection. See comment below for why this is more complicated for
     // single models, which we can cache longer.
     return response;
-  }
+  },
 );
 
 const selectEntity = memoize(
@@ -97,7 +97,7 @@ const selectEntity = memoize(
     const entityPath = `${response.entity.type}.${response.entity.id}`;
     const entity = get(entities, entityPath);
     return entity;
-  }
+  },
 );
 
 // TODO: Refactor this to isRequestLoaded and remove duplicate at line 113 below.
@@ -151,7 +151,7 @@ export function constantizeMeta(metaKey) {
 
 export const entityTypeMap = {
   annotations: "annotation",
-  resources: "resource"
+  resources: "resource",
 };
 
 export function singularEntityName(entity) {
@@ -170,5 +170,5 @@ export default {
   grab,
   select,
   isEntityLoaded,
-  isLoaded
+  isLoaded,
 };

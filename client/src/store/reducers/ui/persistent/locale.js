@@ -1,7 +1,7 @@
 import { handleActions } from "redux-actions";
 
 const initialState = {
-  language: "en"
+  language: "en",
 };
 
 const setLocale = (state, action) => {
@@ -15,7 +15,7 @@ const setPersistentUI = (state, action) => {
 export default handleActions(
   {
     SET_PERSISTENT_UI: setPersistentUI,
-    SET_LOCALE: setLocale
+    SET_LOCALE: setLocale,
   },
-  initialState
+  initialState,
 );

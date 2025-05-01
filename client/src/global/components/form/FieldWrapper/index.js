@@ -13,7 +13,7 @@ function FieldWrapper({ children, as = "div", className }) {
 FieldWrapper.displayName = "Form.FieldWrapper";
 
 FieldWrapper.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default FieldWrapper;

@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: "/api/v1/me",
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -12,8 +12,8 @@ export default {
       endpoint: "/api/v1/me",
       method: "PUT",
       options: {
-        body: JSON.stringify({ data: { type: "user", attributes: me } })
-      }
+        body: JSON.stringify({ data: { type: "user", attributes: me } }),
+      },
     };
   },
 
@@ -21,7 +21,7 @@ export default {
     return {
       endpoint: "/api/v1/me",
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -30,15 +30,15 @@ export default {
       endpoint: `/api/v1/me/relationships/annotations`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
   annotatedTexts() {
     return {
       endpoint: `/api/v1/me/relationships/annotated_texts`,
-      method: "GET"
+      method: "GET",
     };
   },
 
@@ -47,8 +47,8 @@ export default {
       endpoint: `/api/v1/me/relationships/reading_groups`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -56,7 +56,7 @@ export default {
     return {
       endpoint: "/api/v1/me/relationships/collection",
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -65,7 +65,7 @@ export default {
       eagerLoad: true,
       endpoint: `/api/v1/me/relationships/${entity}`,
       method: "GET",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

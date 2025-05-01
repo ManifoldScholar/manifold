@@ -14,8 +14,8 @@ import * as Styled from "./styles";
 
 export default function ResourceDetail({ resource, projectTitle }) {
   const { t } = useTranslation();
-  const commentsMeta = useSelector(state =>
-    meta(`comments-for-${resource.id}`, state.entityStore)
+  const commentsMeta = useSelector((state) =>
+    meta(`comments-for-${resource.id}`, state.entityStore),
   );
   const showComments = !!commentsMeta?.pagination?.totalCount;
 
@@ -49,7 +49,7 @@ export default function ResourceDetail({ resource, projectTitle }) {
                 </Styled.DescriptionHeader>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: attr.descriptionFormatted
+                    __html: attr.descriptionFormatted,
                   }}
                 />
               </>
@@ -84,5 +84,5 @@ ResourceDetail.displayName = "Resource.Detail";
 
 ResourceDetail.propTypes = {
   resource: PropTypes.object,
-  projectTitle: PropTypes.string
+  projectTitle: PropTypes.string,
 };

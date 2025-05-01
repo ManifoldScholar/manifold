@@ -11,9 +11,9 @@ import Layout from "backend/components/layout";
 const { request } = entityStoreActions;
 
 export class ProjectCategoryEditContainer extends Component {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      category: select(requests.beTextCategory, state.entityStore)
+      category: select(requests.beTextCategory, state.entityStore),
     };
   };
 
@@ -25,7 +25,7 @@ export class ProjectCategoryEditContainer extends Component {
     refresh: PropTypes.func.isRequired,
     category: PropTypes.object,
     triggerClose: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {

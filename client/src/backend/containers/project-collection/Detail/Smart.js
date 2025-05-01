@@ -7,7 +7,7 @@ export default class ProjectCollectionDetailSmart extends PureComponent {
 
   static propTypes = {
     projectCollection: PropTypes.object.isRequired,
-    projects: PropTypes.array
+    projects: PropTypes.array,
   };
 
   render() {
@@ -15,7 +15,7 @@ export default class ProjectCollectionDetailSmart extends PureComponent {
 
     const linkState = {
       id: this.props.projectCollection.id,
-      label: this.props.projectCollection.attributes.title
+      label: this.props.projectCollection.attributes.title,
     };
 
     return (

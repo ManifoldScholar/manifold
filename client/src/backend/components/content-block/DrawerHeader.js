@@ -12,7 +12,7 @@ class ContentBlockDrawerHeader extends PureComponent {
     onDelete: PropTypes.func,
     onVisibilityToggle: PropTypes.func,
     icon: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get contentBlock() {
@@ -21,7 +21,7 @@ class ContentBlockDrawerHeader extends PureComponent {
 
   get title() {
     const BlockComponent = resolver.typeToBlockComponent(
-      this.contentBlock.attributes.type
+      this.contentBlock.attributes.type,
     );
     if (
       BlockComponent &&
@@ -34,7 +34,7 @@ class ContentBlockDrawerHeader extends PureComponent {
 
   get icon() {
     const BlockComponent = resolver.typeToBlockComponent(
-      this.contentBlock.attributes.type
+      this.contentBlock.attributes.type,
     );
     if (
       BlockComponent &&
@@ -66,14 +66,14 @@ class ContentBlockDrawerHeader extends PureComponent {
           ? this.props.t("actions.show")
           : this.props.t("actions.hide"),
         icon: this.hidden ? "eyeOpen32" : "eyeClosed32",
-        className: "utility-button__icon--highlight"
+        className: "utility-button__icon--highlight",
       });
     if (this.onDelete)
       buttons.push({
         onClick: this.onDelete,
         label: this.props.t("actions.delete"),
         icon: "delete32",
-        className: "utility-button__icon--notice"
+        className: "utility-button__icon--notice",
       });
     return buttons;
   }

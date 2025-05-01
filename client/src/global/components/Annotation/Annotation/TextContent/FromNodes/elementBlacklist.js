@@ -1,3 +1,3 @@
 export default {
-  iframe: "[iframe]"
+  iframe: "[iframe]",
 };

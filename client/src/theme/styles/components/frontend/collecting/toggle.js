@@ -5,7 +5,7 @@ import {
   buttonUnstyled,
   utilityPrimary,
   defaultTransitionProps,
-  rgba
+  rgba,
 } from "theme/styles/mixins";
 
 const lightColor = `var(
@@ -68,7 +68,7 @@ export default `
           top: calc(2.105vw + 15px);
           left: calc(2.105vw - 15px);
         `,
-        75
+        75,
       )}
 
       ${respond(
@@ -76,7 +76,7 @@ export default `
           top: 40px;
           left: 10px;
         `,
-        120
+        120,
       )}
     }
 
@@ -92,7 +92,7 @@ export default `
         `
           top: 15px;
         `,
-        120
+        120,
       )}
     }
 

@@ -9,7 +9,7 @@ import * as Styled from "./styles";
 const UserMenuBody = forwardRef(
   (
     { callbacks, context = "frontend", visible = false, className, ...props },
-    ref
+    ref,
   ) => {
     const currentUser = useCurrentUser();
     const { t } = useTranslation();
@@ -78,7 +78,7 @@ const UserMenuBody = forwardRef(
         />
       </Styled.List>
     );
-  }
+  },
 );
 
 UserMenuBody.displayName = "UserMenuBody";
@@ -87,10 +87,10 @@ UserMenuBody.propTypes = {
   callbacks: PropTypes.shape({
     hideUserPanel: PropTypes.func.isRequired,
     toggleSignInUpOverlay: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired
+    logout: PropTypes.func.isRequired,
   }),
   visible: PropTypes.bool,
-  context: PropTypes.oneOf(["frontend", "backend", "reader"])
+  context: PropTypes.oneOf(["frontend", "backend", "reader"]),
 };
 
 export default UserMenuBody;

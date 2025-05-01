@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import forms from "./forms.json";
 import messages from "./messages.json";
 import pages from "./pages.json";
@@ -10,5 +9,5 @@ export default {
   ...messages,
   ...pages,
   ...placeholders,
-  ...tables
+  ...tables,
 };

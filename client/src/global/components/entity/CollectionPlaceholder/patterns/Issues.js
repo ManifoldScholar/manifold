@@ -36,7 +36,7 @@ function IssuesPlaceholder({ bgColor = "neutral05" }) {
                   <em />,
                   <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
                     #
-                  </a>
+                  </a>,
                 ]}
               />
             </p>
@@ -62,8 +62,8 @@ function IssuesPlaceholder({ bgColor = "neutral05" }) {
                   {t("actions.create_journal")}
                 </Link>
               </Authorize>
-            )
-          }
+            ),
+          },
         ]}
       />
     </Wrapper>
@@ -73,7 +73,7 @@ function IssuesPlaceholder({ bgColor = "neutral05" }) {
 IssuesPlaceholder.displayName = "Global.Entity.CollectionPlaceholder.Journals";
 
 IssuesPlaceholder.propTypes = {
-  bgColor: PropTypes.oneOf(["white", "neutral05"])
+  bgColor: PropTypes.oneOf(["white", "neutral05"]),
 };
 
 export default IssuesPlaceholder;

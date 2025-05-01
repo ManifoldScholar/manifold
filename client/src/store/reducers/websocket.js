@@ -5,14 +5,14 @@ export const initialState = {
   connected: false,
   connecting: false,
   failure: false,
-  channels: {}
+  channels: {},
 };
 
 function _openChannel(state, channelName) {
   if (has(state.channels, channelName)) return state;
   const defaultChannelState = {
     active: false,
-    message: null
+    message: null,
   };
   const channel = { [channelName]: defaultChannelState };
   const channels = { ...state.channels, ...channel };
@@ -68,7 +68,7 @@ function startConnecting(currentState) {
     ...currentState,
     connecting: true,
     failure: false,
-    connected: false
+    connected: false,
   };
 }
 
@@ -77,7 +77,7 @@ function connect(currentState) {
     ...currentState,
     connected: true,
     failure: false,
-    connecting: false
+    connecting: false,
   };
 }
 
@@ -90,7 +90,7 @@ function handleFailure(currentState) {
     ...currentState,
     connected: false,
     connecting: false,
-    failure: true
+    failure: true,
   };
 }
 
@@ -103,7 +103,7 @@ export default handleActions(
     WEBSOCKET_SUBSCRIBE: openChannel,
     WEBSOCKET_SUBSCRIBED: activateChannel,
     WEBSOCKET_UNSUBSCRIBED: closeChannel,
-    WEBSOCKET_MESSAGE_RECEIVED: receiveMessage
+    WEBSOCKET_MESSAGE_RECEIVED: receiveMessage,
   },
-  initialState
+  initialState,
 );

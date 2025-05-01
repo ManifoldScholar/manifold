@@ -9,29 +9,33 @@ import * as Styled from "./styles";
 function ReadingGroupAnnotationsContainer({
   readingGroup,
   refresh,
-  fetchVersion
+  fetchVersion,
 }) {
   const { pagination, filters, setFilters } = useListQueryParams({
     initFilters: {
-      formats: ["annotation"]
-    }
+      formats: ["annotation"],
+    },
   });
 
   const { id } = useParams();
 
-  const { data: annotations, meta, refresh: refreshAnnotations } = useFetch({
+  const {
+    data: annotations,
+    meta,
+    refresh: refreshAnnotations,
+  } = useFetch({
     request: [readingGroupsAPI.annotations, id, filters, pagination],
-    dependencies: [fetchVersion]
+    dependencies: [fetchVersion],
   });
 
   const { annotatedTexts: texts, readingGroupMemberships: memberships } =
     readingGroup?.relationships ?? {};
 
   const filterProps = useListFilters({
-    onFilterChange: state => setFilters(state),
+    onFilterChange: (state) => setFilters(state),
     initialState: filters,
     resetState: null,
-    options: { sortChron: true, memberships, texts }
+    options: { sortChron: true, memberships, texts },
   });
 
   return readingGroup ? (
@@ -53,7 +57,7 @@ function ReadingGroupAnnotationsContainer({
 ReadingGroupAnnotationsContainer.propTypes = {
   readingGroup: PropTypes.object.isRequired,
   refresh: PropTypes.func.isRequired,
-  fetchVersion: PropTypes.number.isRequired
+  fetchVersion: PropTypes.number.isRequired,
 };
 
 export default ReadingGroupAnnotationsContainer;

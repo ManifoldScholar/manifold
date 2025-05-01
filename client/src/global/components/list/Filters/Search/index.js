@@ -31,7 +31,7 @@ function Search({ inputRef }) {
 Search.displayName = "Global.List.Filters.Search";
 
 Search.propTypes = {
-  inputRef: PropTypes.object.isRequired
+  inputRef: PropTypes.object.isRequired,
 };
 
 export default Search;

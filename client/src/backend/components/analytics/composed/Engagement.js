@@ -8,7 +8,7 @@ class Engagement extends Component {
   static displayName = "Analytics.Composed.Engagement";
 
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get data() {
@@ -33,10 +33,10 @@ class Engagement extends Component {
 
   get caption() {
     const visitorCount = this.props.t("analytics.visitor_with_count", {
-      count: this.activeVisitorCount
+      count: this.activeVisitorCount,
     });
     return this.props.t("analytics.visitor_engagement", {
-      visitorCount
+      visitorCount,
     });
   }
 

@@ -8,14 +8,14 @@ export default class EventRow extends PureComponent {
   static propTypes = {
     listStyle: PropTypes.oneOf(["tiles"]),
     entity: PropTypes.object,
-    destroyHandler: PropTypes.func
+    destroyHandler: PropTypes.func,
   };
 
   get itemClass() {
     return "event-entity-row__inner";
   }
 
-  triggerDestroy = event => {
+  triggerDestroy = (event) => {
     event.preventDefault();
     this.props.destroyHandler(this.props.entity);
   };

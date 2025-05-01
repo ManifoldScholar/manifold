@@ -2,13 +2,13 @@ import React from "react";
 
 const InternalContext = React.createContext({
   requests: [],
-  resolved: false
+  resolved: false,
 });
 
 export const createServerFetchDataContext = () => {
   const internalContextValue = {
     requests: [],
-    resolved: false
+    resolved: false,
   };
   function ServerFetchDataContext(props) {
     return (
@@ -18,13 +18,13 @@ export const createServerFetchDataContext = () => {
     );
   }
   const isFetchingComplete = async () => {
-    const effects = internalContextValue.requests.map(item => item.promise);
+    const effects = internalContextValue.requests.map((item) => item.promise);
     await Promise.all(effects);
     internalContextValue.resolved = true;
   };
   return {
     ServerFetchDataContext,
-    isFetchingComplete
+    isFetchingComplete,
   };
 };
 

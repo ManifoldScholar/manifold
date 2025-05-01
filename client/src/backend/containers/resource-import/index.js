@@ -7,5 +7,5 @@ export default {
   Wrapper,
   New,
   Results,
-  Map
+  Map,
 };

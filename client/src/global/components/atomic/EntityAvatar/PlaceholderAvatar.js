@@ -17,7 +17,7 @@ PlaceholderAvatar.displayName = "Global.Atomic.EntityAvatar.Placeholder";
 
 PlaceholderAvatar.propTypes = {
   entity: PropTypes.object,
-  stack: PropTypes.bool
+  stack: PropTypes.bool,
 };
 
 export default PlaceholderAvatar;

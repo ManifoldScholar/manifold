@@ -8,7 +8,7 @@ import * as Styled from "./styles";
 export default function FlagsList({
   flags,
   resolvedFlagsCount,
-  unresolvedFlagsCount
+  unresolvedFlagsCount,
 }) {
   const { t } = useTranslation();
 
@@ -26,15 +26,15 @@ export default function FlagsList({
             <span style={{ color: "var(--color-neutral-text-extra-light)" }}>
               <b>{resolvedFlagsCount}</b>{" "}
               {t("records.annotations.resolved_flags_count", {
-                count: resolvedFlagsCount
+                count: resolvedFlagsCount,
               })}
             </span>
           </Styled.FlagWrapper>
         )}
-        {flags.map(f => {
+        {flags.map((f) => {
           const {
             attributes: { message, createdAt, resolved },
-            relationships: { creator }
+            relationships: { creator },
           } = f;
           return !resolved ? (
             <Styled.FlagWrapper>
@@ -56,5 +56,5 @@ FlagsList.displayName = "Annotation.Detail.FlagsList";
 FlagsList.propTypes = {
   flags: PropTypes.arrayOf(PropTypes.object),
   resolvedFlagsCount: PropTypes.number,
-  unresolvedFlagsCount: PropTypes.number
+  unresolvedFlagsCount: PropTypes.number,
 };

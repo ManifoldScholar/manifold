@@ -12,7 +12,7 @@ class ResourcePlayerAudio extends Component {
 
   static propTypes = {
     resource: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor() {
@@ -27,13 +27,13 @@ class ResourcePlayerAudio extends Component {
       playing: false,
       muted: false,
       error: false,
-      volume: 100
+      volume: 100,
     };
   }
 
   componentDidMount() {
     // https://github.com/katspaugh/wavesurfer.js/issues/1334
-    this.WaveSurfer = require("wavesurfer"); // eslint-disable-line global-require
+    this.WaveSurfer = require("wavesurfer");
     this.throttleUpdateTime = throttle(this.updateTime, 900);
     this.debouncedResize = debounce(this.resizeWaveform, 120);
     window.addEventListener("resize", this.debouncedResize);
@@ -57,11 +57,11 @@ class ResourcePlayerAudio extends Component {
 
   get progressColor() {
     return getComputedStyle(document.body).getPropertyValue(
-      "--color-accent-primary"
+      "--color-accent-primary",
     );
   }
 
-  setVolume = event => {
+  setVolume = (event) => {
     event.preventDefault();
     const volume = parseInt(event.target.value, 10);
     this.setState({ volume, muted: false }, () => {
@@ -75,18 +75,18 @@ class ResourcePlayerAudio extends Component {
     this.setState({
       duration,
       durationFormatted: this.calcTime(duration),
-      ready: true
+      ready: true,
     });
   };
 
-  togglePlayback = event => {
+  togglePlayback = (event) => {
     event.preventDefault();
     this.setState({ playing: !this.audio.isPlaying() }, () =>
-      this.audio.playPause()
+      this.audio.playPause(),
     );
   };
 
-  toggleMute = event => {
+  toggleMute = (event) => {
     event.preventDefault();
     const muted = !this.audio.getMute();
     this.setState({ muted }, () => this.audio.toggleMute());
@@ -114,52 +114,52 @@ class ResourcePlayerAudio extends Component {
         progressColor: this.progressColor,
         barWidth: 5,
         barHeight: 1,
-        cursorWidth: 0
+        cursorWidth: 0,
       });
     }
 
     this.audio.on("error", this.handleError);
     this.audio.on("ready", this.setReady);
-    this.audio.on("seek", progress => this.handleSeek(progress));
-    this.audio.on("audioprocess", currentTime =>
-      this.handlePlayback(currentTime)
+    this.audio.on("seek", (progress) => this.handleSeek(progress));
+    this.audio.on("audioprocess", (currentTime) =>
+      this.handlePlayback(currentTime),
     );
 
     this.audio.load(resource.attributes.attachmentStyles.original);
   }
 
-  calcTime = time => {
+  calcTime = (time) => {
     const min = Math.floor(time / 60);
     let sec = Math.round(time - min * 60);
     if (sec < 10) sec = `0${sec}`;
     return `${min}:${sec}`;
   };
 
-  handlePlayback = currentTime => {
+  handlePlayback = (currentTime) => {
     const progress = currentTime / this.state.duration;
     this.updateProgress(progress);
     this.throttleUpdateTime();
   };
 
-  handleSeek = progress => {
+  handleSeek = (progress) => {
     this.updateProgress(progress);
     this.updateTime();
   };
 
-  handleProgressClick = event => {
+  handleProgressClick = (event) => {
     const current = (event.target.value / 100) * this.state.duration;
     const progress = current / this.state.duration;
     this.audio.seekTo(progress);
   };
 
-  handleError = error => {
+  handleError = (error) => {
     const message = (
       <Trans i18nKey="errors.audio_playback" values={{ error }} />
     );
     this.setState({ error: message });
   };
 
-  updateProgress = progress => {
+  updateProgress = (progress) => {
     const percent = progress * 100;
     this.setState({ percent });
   };
@@ -168,11 +168,11 @@ class ResourcePlayerAudio extends Component {
     if (!this.audio) return null;
 
     this.setState({
-      currentTime: this.calcTime(this.audio.getCurrentTime())
+      currentTime: this.calcTime(this.audio.getCurrentTime()),
     });
   };
 
-  startPlayback = event => {
+  startPlayback = (event) => {
     event.preventDefault();
     if (!this.state.ready) return null;
     this.setState({ started: true, playing: true }, () => this.audio.play());
@@ -223,7 +223,7 @@ class ResourcePlayerAudio extends Component {
     return (
       <Styled.Player>
         {this.renderUnstarted()}
-        <Styled.WaveForm ref={container => (this.container = container)} />
+        <Styled.WaveForm ref={(container) => (this.container = container)} />
         <Styled.ControlBar>
           <button onClick={this.togglePlayback}>
             <span className="screen-reader-text">
@@ -238,11 +238,11 @@ class ResourcePlayerAudio extends Component {
             <Styled.Slider>
               <Styled.ThumbInput
                 style={{
-                  left: `calc(${this.state.percent}% - 10px)`
+                  left: `calc(${this.state.percent}% - 10px)`,
                 }}
               />
-              <UIDConsumer name={id => `${this.progressBarIdPrefix}-${id}`}>
-                {id => (
+              <UIDConsumer name={(id) => `${this.progressBarIdPrefix}-${id}`}>
+                {(id) => (
                   <>
                     <label htmlFor={id} className="screen-reader-text">
                       {t("glossary.progress_bar")}
@@ -271,11 +271,11 @@ class ResourcePlayerAudio extends Component {
             <Styled.Slider>
               <Styled.ThumbInput
                 style={{
-                  left: `${volume * 0.7 - 10}px`
+                  left: `${volume * 0.7 - 10}px`,
                 }}
               />
-              <UIDConsumer name={id => `${this.volumeBarIdPrefix}-${id}`}>
-                {id => (
+              <UIDConsumer name={(id) => `${this.volumeBarIdPrefix}-${id}`}>
+                {(id) => (
                   <>
                     <label htmlFor={id} className="screen-reader-text">
                       {t("actions.adjust_volume")}

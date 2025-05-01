@@ -18,14 +18,14 @@ class AnnotationSelectionWrapper extends PureComponent {
     onAnnotate: PropTypes.func,
     onLogin: PropTypes.func,
     t: PropTypes.func,
-    annotateToggleRef: PropTypes.object
+    annotateToggleRef: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       editorOpen: false,
-      hovering: false
+      hovering: false,
     };
   }
 
@@ -41,7 +41,7 @@ class AnnotationSelectionWrapper extends PureComponent {
     return this.props.displayFormat === "fullPage";
   }
 
-  hoverHandler = hovering => {
+  hoverHandler = (hovering) => {
     this.setState({ hovering });
   };
 
@@ -51,7 +51,7 @@ class AnnotationSelectionWrapper extends PureComponent {
       "annotation-selection__text-container": true,
       "annotation-selection__text-container--dark": this.fullPageFormat,
       "annotation-selection__text-container--light": !this.fullPageFormat,
-      "annotation-selection__text-container--hovering": this.state.hovering
+      "annotation-selection__text-container--hovering": this.state.hovering,
     });
 
     return (

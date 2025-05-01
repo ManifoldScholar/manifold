@@ -17,7 +17,7 @@ export const Grid = styled.ul`
 
   ${respond(
     `grid-template-columns: repeat(auto-fill, minmax(${itemMinWidth}, 1fr));`,
-    breakpoint
+    breakpoint,
   )}
 `;
 

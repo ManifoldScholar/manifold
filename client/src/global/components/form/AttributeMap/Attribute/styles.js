@@ -3,7 +3,7 @@ import {
   buttonUnstyled,
   outlineOnFocus,
   respond,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 export const ColumnListing = styled.div`
@@ -109,7 +109,8 @@ export const ColumnAvailable = styled.div`
     width: 0;
     height: 0;
     content: "";
-    border-color: var(--color-base-neutral05) transparent transparent transparent;
+    border-color: var(--color-base-neutral05) transparent transparent
+      transparent;
     border-style: solid;
     border-width: 1.2em 0 1.2em 1em;
     transition: border-color ${defaultTransitionProps};
@@ -122,7 +123,8 @@ export const ColumnAvailable = styled.div`
     width: 0;
     height: 0;
     content: "";
-    border-color: transparent transparent var(--color-base-neutral05) transparent;
+    border-color: transparent transparent var(--color-base-neutral05)
+      transparent;
     border-style: solid;
     border-width: 1.2em 0 1.2em 1em;
     transition: border-color ${defaultTransitionProps};

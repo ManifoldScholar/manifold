@@ -15,7 +15,7 @@ export default function FrontMatter(props) {
     headerId,
     handleLeaveEvent,
     fullScreenTitle,
-    ariaLabel
+    ariaLabel,
   } = props;
 
   const hasTitle = title || icon;
@@ -88,5 +88,5 @@ FrontMatter.propTypes = {
   padding: PropTypes.oneOf(["none", "default", "large", "xl"]),
   includeDrawerFrontMatter: PropTypes.bool,
   headerId: PropTypes.string.isRequired,
-  handleLeaveEvent: PropTypes.func.isRequired
+  handleLeaveEvent: PropTypes.func.isRequired,
 };

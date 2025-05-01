@@ -6,7 +6,7 @@ export default class ResourceListSlideVideo extends Component {
   static displayName = "ResourceList.Slide.Video";
 
   static propTypes = {
-    resource: PropTypes.object.isRequired
+    resource: PropTypes.object.isRequired,
   };
 
   render() {

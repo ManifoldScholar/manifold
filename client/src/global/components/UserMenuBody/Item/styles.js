@@ -3,7 +3,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import {
   buttonUnstyled,
   defaultTransitionProps,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Item = styled.li`
@@ -18,7 +18,8 @@ export const Link = styled.a`
   width: 100%;
   padding: 8px 20px;
   text-decoration: none;
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   &:hover,

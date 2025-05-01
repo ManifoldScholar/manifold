@@ -26,6 +26,6 @@ const reducers = combineReducers({
   isomorphic,
   websocket,
   plugin,
-  developer
+  developer,
 });
 export default reducers;

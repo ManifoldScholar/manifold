@@ -3,11 +3,11 @@ import { utilityPrimary } from "theme/styles/mixins";
 const INDENT_INCREMENT = "1em";
 const indents = [2, 3, 4, 5, 6]
   .map(
-    level => `
+    (level) => `
     &--depth-${level} {
       --link-indent: calc(${INDENT_INCREMENT} * (${level} - 1));
     }
-  `
+  `,
   )
   .join("");
 

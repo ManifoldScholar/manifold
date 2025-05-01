@@ -44,5 +44,5 @@ FlagModalToggle.displayName = "Annotation.Annotation.UserContent.FlagToggle";
 
 FlagModalToggle.propTypes = {
   record: PropTypes.object.isRequired,
-  annotationId: PropTypes.string
+  annotationId: PropTypes.string,
 };

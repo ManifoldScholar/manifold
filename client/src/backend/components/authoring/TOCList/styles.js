@@ -8,7 +8,7 @@ import {
   respond,
   fluidScale,
   formInputMessage,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 /* Styles here should be updated after FF implements the :has selector to remove the row-reverse in Inner and TitleWrapper. */
@@ -118,8 +118,8 @@ export const Inner = styled.div`
     $isDragging && `background-color: var(--drawer-bg-color)`}
 
     &:has(${ButtonGroup}:hover) {
-      background-color: var(--drawer-bg-color);
-    }
+    background-color: var(--drawer-bg-color);
+  }
 
   ${({ $isTarget }) => $isTarget && `border-color: var(--highlight-color);`}
 `;

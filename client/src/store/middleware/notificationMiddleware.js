@@ -37,7 +37,7 @@ function handleApiResponseAction(dispatch, action) {
   if (!notifications[key]) return;
   const notification = {
     ...notifications[key](action.payload),
-    id: action.meta
+    id: action.meta,
   };
   let scope = "global";
   if (action.payload && action.payload.notificationScope)
@@ -47,7 +47,7 @@ function handleApiResponseAction(dispatch, action) {
 }
 
 export default function notificationMiddleware({ dispatch, getStateIgnored }) {
-  return next => action => {
+  return (next) => (action) => {
     if (isAddNotificationAction(action))
       handleAddNotificationAction(dispatch, action);
     if (isApiResponseAction(action)) handleApiResponseAction(dispatch, action);

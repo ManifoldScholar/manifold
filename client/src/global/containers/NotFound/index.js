@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 class NotFound extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   };
 
   trigger404() {

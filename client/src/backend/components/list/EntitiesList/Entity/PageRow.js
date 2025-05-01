@@ -8,7 +8,7 @@ export default class PageRow extends PureComponent {
   static displayName = "EntitiesList.Entity.PageRow";
 
   static propTypes = {
-    entity: PropTypes.object
+    entity: PropTypes.object,
   };
 
   get page() {

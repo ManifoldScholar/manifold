@@ -13,7 +13,7 @@ class EntitlementRow extends PureComponent {
     entity: PropTypes.object,
     active: PropTypes.string,
     linkName: PropTypes.string.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get entitlement() {
@@ -59,8 +59,8 @@ class EntitlementRow extends PureComponent {
       return this.props.t("entitlements.expires", {
         val: date,
         formatParams: {
-          val: { month: "long", day: "numeric", year: "numeric" }
-        }
+          val: { month: "long", day: "numeric", year: "numeric" },
+        },
       });
     }
     return null;
@@ -78,7 +78,7 @@ class EntitlementRow extends PureComponent {
     );
   }
 
-  onDelete = event => {
+  onDelete = (event) => {
     event.preventDefault();
     event.stopPropagation();
     this.props.onDelete(this.entitlement);

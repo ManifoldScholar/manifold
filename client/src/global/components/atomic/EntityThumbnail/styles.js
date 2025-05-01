@@ -12,7 +12,8 @@ export const ItemLink = styled(Link, transientOptions)`
   padding: 15px 0;
   color: inherit;
   text-decoration: none;
-  transition: background-color var(--transition-duration-default)
+  transition:
+    background-color var(--transition-duration-default)
       var(--transition-timing-function),
     box-shadow var(--transition-duration-default)
       var(--transition-timing-function);

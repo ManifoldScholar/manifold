@@ -4,8 +4,8 @@ export default {
       endpoint: `/api/v1/passwords`,
       method: "POST",
       options: {
-        params: { email }
-      }
+        params: { email },
+      },
     };
   },
 
@@ -17,9 +17,9 @@ export default {
         params: {
           password,
           password_confirmation: passwordConfirmation,
-          reset_token: resetToken
-        }
-      }
+          reset_token: resetToken,
+        },
+      },
     };
   },
 
@@ -28,8 +28,8 @@ export default {
       endpoint: `/api/v1/passwords/admin_reset_password`,
       method: "POST",
       options: {
-        params: { id }
-      }
+        params: { id },
+      },
     };
-  }
+  },
 };

@@ -13,13 +13,8 @@ export default function Content() {
     settings?.attributes?.calculated ?? {};
   const showProjects = !hasVisibleHomeProjectCollections;
 
-  const {
-    loaded,
-    projects,
-    collections,
-    journals,
-    features
-  } = useFetchHomepageContent(showProjects);
+  const { loaded, projects, collections, journals, features } =
+    useFetchHomepageContent(showProjects);
 
   if (!loaded) return null;
 

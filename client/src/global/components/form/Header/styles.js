@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   roundedFormHeader,
   respond,
-  headingPrimary
+  headingPrimary,
 } from "theme/styles/mixins";
 
 export const Header = styled.header`
@@ -26,7 +26,6 @@ export const Header = styled.header`
       padding-block-end: 14px;
     }
   `}
-
 `;
 
 export const HeaderPrimary = styled.header`

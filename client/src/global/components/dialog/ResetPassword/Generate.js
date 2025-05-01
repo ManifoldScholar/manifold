@@ -9,7 +9,7 @@ export default function GenerateNewPassword({ user, resolve, setConfirm }) {
 
   const reset = useApiCallback(passwordsAPI.admin_reset_password);
 
-  const handleReset = e => {
+  const handleReset = (e) => {
     e.preventDefault();
     reset(user.id).then(() => {
       resolve();

@@ -21,7 +21,7 @@ class TextInner extends Component {
     itemCount: PropTypes.number.isRequired,
     categoryIndex: PropTypes.number.isRequired,
     categoryCount: PropTypes.number.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -53,7 +53,7 @@ class TextInner extends Component {
     return labels;
   }
 
-  onDelete = event => {
+  onDelete = (event) => {
     event.preventDefault();
     this.callbacks.destroyText(this.text);
   };
@@ -89,19 +89,19 @@ class TextInner extends Component {
       {
         text: this.text,
         destinationIndex,
-        position
+        position,
       },
       () => {
         setTimeout(() => {
           // refs are unreliably here due to rerendering caused by ancestor components
           const disclosureToggleEl = document.querySelector(
-            `[data-disclosure-toggle-for="${this.text.id}"]`
+            `[data-disclosure-toggle-for="${this.text.id}"]`,
           );
           if (disclosureToggleEl) {
             disclosureToggleEl.focus();
           }
         }, 300);
-      }
+      },
     );
   }
 
@@ -121,7 +121,7 @@ class TextInner extends Component {
             <h3 className="texts-list__title">
               <span
                 dangerouslySetInnerHTML={{
-                  __html: this.text.attributes.titleFormatted
+                  __html: this.text.attributes.titleFormatted,
                 }}
               />
               <span className="texts-list__subtitle">
@@ -129,7 +129,7 @@ class TextInner extends Component {
               </span>
               {this.labels.length > 0 && (
                 <span className="texts-list__labels">
-                  {this.labels.map(label => (
+                  {this.labels.map((label) => (
                     <span key={label} className="texts-list__label">
                       {label}
                     </span>
@@ -149,7 +149,7 @@ class TextInner extends Component {
         <div className="texts-list__utility texts-list__utility--draggable">
           <button
             className="texts-list__button texts-list__button--notice"
-            onClick={event => {
+            onClick={(event) => {
               this.onDelete(event);
             }}
           >
@@ -197,26 +197,26 @@ class TextInner extends Component {
                   id: "up",
                   label: this.props.t("actions.dnd.move_up_position"),
                   onClick: () => this.onTextKeyboardMove("up_position"),
-                  disabled: index === 0
+                  disabled: index === 0,
                 },
                 {
                   id: "down",
                   label: this.props.t("actions.dnd.move_down_position"),
                   onClick: () => this.onTextKeyboardMove("down_position"),
-                  disabled: index === itemCount - 1
+                  disabled: index === itemCount - 1,
                 },
                 {
                   id: "up_category",
                   label: this.props.t("actions.dnd.move_up_category"),
                   onClick: () => this.onTextKeyboardMove("up_category"),
-                  disabled: categoryIndex === 0
+                  disabled: categoryIndex === 0,
                 },
                 {
                   id: "down_category",
                   label: this.props.t("actions.dnd.move_down_category"),
                   onClick: () => this.onTextKeyboardMove("down_category"),
-                  disabled: categoryIndex === categoryCount - 1
-                }
+                  disabled: categoryIndex === categoryCount - 1,
+                },
               ]}
             />
           </div>

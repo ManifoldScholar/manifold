@@ -16,7 +16,7 @@ function DarkMode(props) {
     width: getSize(),
     height: getSize(),
     viewBox: "-4 -4 24 24",
-    fill
+    fill,
   };
   return (
     <svg {...baseSvgProps} {...svgProps}>
@@ -34,7 +34,7 @@ DarkMode.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   stroke: PropTypes.string,
   fill: PropTypes.string,
-  svgProps: PropTypes.object
+  svgProps: PropTypes.object,
 };
 
 export default DarkMode;

@@ -18,7 +18,7 @@ function JournalIssueRow({
 
   const meta = relationships.journalVolume
     ? t("journals.volume_number", {
-        volNum: relationships.journalVolume.attributes.number
+        volNum: relationships.journalVolume.attributes.number,
       })
     : t("volumes.no_volume");
 
@@ -27,7 +27,7 @@ function JournalIssueRow({
     subtitle,
     meta,
     active: active === id,
-    figure: <EntityThumbnail.Project mode="responsive" entity={entity} />
+    figure: <EntityThumbnail.Project mode="responsive" entity={entity} />,
   };
 
   if (clickable) {
@@ -42,7 +42,7 @@ JournalIssueRow.propTypes = {
   journal: PropTypes.object.isRequired,
   clickable: PropTypes.bool,
   entity: PropTypes.object,
-  active: PropTypes.string
+  active: PropTypes.string,
 };
 
 export default JournalIssueRow;

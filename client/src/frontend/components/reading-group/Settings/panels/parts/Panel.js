@@ -9,7 +9,7 @@ function Panel({
   instructions,
   children,
   onProceed,
-  onCancel
+  onCancel,
 }) {
   const { t } = useTranslation();
 
@@ -43,7 +43,7 @@ Panel.propTypes = {
   instructions: PropTypes.string.isRequired,
   children: PropTypes.node,
   onProceed: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
+  onCancel: PropTypes.func.isRequired,
 };
 
 export default Panel;

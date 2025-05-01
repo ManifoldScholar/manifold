@@ -18,7 +18,7 @@ function CollectingAnimation() {
     "texts",
     "textSections",
     "resourceCollections",
-    "resources"
+    "resources",
   ];
   return (
     <Styled.Animation
@@ -26,7 +26,7 @@ function CollectingAnimation() {
       aria-label={t("placeholders.my_starred.animation_label")}
       $init={init}
     >
-      {types.map(type => (
+      {types.map((type) => (
         <Block key={type} type={type} />
       ))}
     </Styled.Animation>

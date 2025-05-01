@@ -17,7 +17,7 @@ export class MakersEditContainer extends PureComponent {
   static mapStateToProps = (state, ownPropsIgnored) => {
     return {
       maker: select(requests.beMaker, state.entityStore),
-      updateMakers: get(state.entityStore.responses, requests.beMakerUpdate)
+      updateMakers: get(state.entityStore.responses, requests.beMakerUpdate),
     };
   };
 
@@ -31,11 +31,11 @@ export class MakersEditContainer extends PureComponent {
     afterDestroy: PropTypes.func,
     dispatch: PropTypes.func,
     t: PropTypes.func,
-    refetch: PropTypes.func.isRequired
+    refetch: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    confirm: (heading, message, callback) => callback()
+    confirm: (heading, message, callback) => callback(),
   };
 
   componentDidMount() {
@@ -95,8 +95,8 @@ export class MakersEditContainer extends PureComponent {
               label: this.props.t("actions.delete"),
               entity: maker,
               ability: "delete",
-              className: "utility-button__icon--notice"
-            }
+              className: "utility-button__icon--notice",
+            },
           ]}
         />
         <Form maker={maker} />
@@ -106,5 +106,5 @@ export class MakersEditContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(MakersEditContainer))
+  withConfirmation(connectAndFetch(MakersEditContainer)),
 );

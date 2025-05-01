@@ -6,7 +6,7 @@ import IconComposer from "global/components/utility/IconComposer";
 export default function BlockCommentsToggle({
   toggleComments,
   commentsCount,
-  expanded
+  expanded,
 }) {
   const { t } = useTranslation();
 
@@ -50,5 +50,5 @@ BlockCommentsToggle.displayName =
 BlockCommentsToggle.propTypes = {
   toggleComments: PropTypes.func.isRequired,
   commentsCount: PropTypes.number.isRequired,
-  expanded: PropTypes.bool.isRequired
+  expanded: PropTypes.bool.isRequired,
 };

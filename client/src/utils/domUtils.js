@@ -11,7 +11,7 @@ export function closest(el, selector) {
       output.webkitMatchesSelector ||
       output.mozMatchesSelector ||
       output.msMatchesSelector;
-    check = toCheck => {
+    check = (toCheck) => {
       return matchesSelector.call(toCheck, selector);
     };
   }
@@ -32,10 +32,10 @@ export function detectPassiveEventOptionsSupport() {
     const options = Object.defineProperty({}, "passive", {
       get() {
         passiveSupported = true;
-      }
+      },
     });
     window.addEventListener("test", null, options);
-  } catch (err) {}
+  } catch (_) {}
   return passiveSupported;
 }
 /* eslint-enable no-empty */

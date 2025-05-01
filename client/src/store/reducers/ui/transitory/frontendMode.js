@@ -1,7 +1,7 @@
 import { handleActions } from "redux-actions";
 import queryString from "query-string";
 
-const buildProjectState = project => {
+const buildProjectState = (project) => {
   if (!project) return null;
   return {
     id: project.id,
@@ -13,14 +13,14 @@ const buildProjectState = project => {
     darkMode: project.attributes.darkMode,
     heroStyles: project.attributes.heroStyles,
     standaloneModePressBarText: project.attributes.standaloneModePressBarText,
-    standaloneModePressBarUrl: project.attributes.standaloneModePressBarUrl
+    standaloneModePressBarUrl: project.attributes.standaloneModePressBarUrl,
   };
 };
 
 const buildState = (
   mode = "library",
   state = { isProjectHomepage: false },
-  payload = null
+  payload = null,
 ) => {
   const project = payload ? payload.project : null;
   const isLibrary = mode === "library";
@@ -40,7 +40,7 @@ const buildState = (
     isProject,
     isStandalone,
     project: project ? buildProjectState(project) : state.project,
-    lastStandaloneId
+    lastStandaloneId,
   };
 };
 
@@ -82,7 +82,7 @@ export default handleActions(
     SET_FRONTEND_MODE_STANDALONE: setModeStandalone,
     SET_FRONTEND_MODE_IS_PROJECT_SUBPAGE: setIsProjectSubpage,
     SET_FRONTEND_MODE_IS_PROJECT_HOME_PAGE: setIsProjectHomepage,
-    SET_FRONTEND_MODE_PROJECT_CONTEXT: setProjectContext
+    SET_FRONTEND_MODE_PROJECT_CONTEXT: setProjectContext,
   },
-  buildState()
+  buildState(),
 );

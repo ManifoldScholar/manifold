@@ -8,11 +8,11 @@ export default class ResourceListSlideImage extends Component {
 
   static propTypes = {
     resource: PropTypes.object.isRequired,
-    enableZoom: PropTypes.bool
+    enableZoom: PropTypes.bool,
   };
 
   static defaultProps = {
-    enableZoom: true
+    enableZoom: true,
   };
 
   get image() {

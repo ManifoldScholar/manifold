@@ -17,7 +17,7 @@ function Link({ page, paginationClickHandler, disabled, children, ...props }) {
       <Styled.Link
         as="button"
         aria-disabled={disabled}
-        onClick={!disabled ? handler : event => event.preventDefault()}
+        onClick={!disabled ? handler : (event) => event.preventDefault()}
         {...props}
       >
         {children}
@@ -49,7 +49,7 @@ Link.propTypes = {
   page: PropTypes.number,
   paginationClickHandler: PropTypes.func,
   disabled: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 export default Link;

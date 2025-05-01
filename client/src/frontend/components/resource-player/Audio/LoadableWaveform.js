@@ -27,16 +27,16 @@ export default function LoadableWaveform({ resource }) {
     height: 275,
     waveColor: "#555", // $neutral80
     progressColor: getComputedStyle(document.body).getPropertyValue(
-      "--color-accent-primary"
+      "--color-accent-primary",
     ),
     barWidth: 5,
     barHeight: 1,
-    cursorWidth: 0
+    cursorWidth: 0,
   });
 
   useEffect(() => {
     if (wavesurfer) {
-      wavesurfer.on("error", error => {
+      wavesurfer.on("error", (error) => {
         console.error(error);
         setIsErrored(true);
       });
@@ -128,11 +128,11 @@ export default function LoadableWaveform({ resource }) {
           <Styled.Slider>
             <Styled.ThumbInput
               style={{
-                insetInlineStart: `calc(${progress * 100}%)`
+                insetInlineStart: `calc(${progress * 100}%)`,
               }}
             />
-            <UIDConsumer name={id => `progress-bar-${id}`}>
-              {id => (
+            <UIDConsumer name={(id) => `progress-bar-${id}`}>
+              {(id) => (
                 <>
                   <label htmlFor={id} className="screen-reader-text">
                     {t("glossary.progress_bar")}
@@ -164,11 +164,11 @@ export default function LoadableWaveform({ resource }) {
           <Styled.Slider>
             <Styled.ThumbInput
               style={{
-                insetInlineStart: `${volume * 70}px`
+                insetInlineStart: `${volume * 70}px`,
               }}
             />
-            <UIDConsumer name={id => `volume-bar-${id}`}>
-              {id => (
+            <UIDConsumer name={(id) => `volume-bar-${id}`}>
+              {(id) => (
                 <>
                   <label htmlFor={id} className="screen-reader-text">
                     {t("actions.adjust_volume")}
@@ -192,5 +192,5 @@ export default function LoadableWaveform({ resource }) {
 }
 
 LoadableWaveform.propTypes = {
-  resource: PropTypes.object
+  resource: PropTypes.object,
 };

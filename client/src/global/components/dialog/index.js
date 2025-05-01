@@ -5,5 +5,5 @@ import ResetPassword from "./ResetPassword";
 export default {
   Wrapper,
   Confirm,
-  ResetPassword
+  ResetPassword,
 };

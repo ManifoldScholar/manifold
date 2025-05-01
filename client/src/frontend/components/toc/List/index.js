@@ -12,7 +12,7 @@ class ContentBlockTocBlockList extends PureComponent {
     showAuthors: PropTypes.bool,
     text: PropTypes.object.isRequired,
     depth: PropTypes.number,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -44,12 +44,12 @@ class ContentBlockTocBlockList extends PureComponent {
     let children = null;
 
     if (this.showChildren(node, depth)) {
-      depth++; // eslint-disable-line no-param-reassign
+      depth++;
 
       children = (
         <Styled.List $depth={depth}>
-          {/* eslint-disable-next-line no-shadow */}
-          {node.children.map(node => this.renderNode(node, depth))}
+          {}
+          {node.children.map((node) => this.renderNode(node, depth))}
         </Styled.List>
       );
     }
@@ -82,7 +82,7 @@ class ContentBlockTocBlockList extends PureComponent {
 
     return (
       <Styled.List $depth={1}>
-        {this.toc.map(node => this.renderNode(node, 1))}
+        {this.toc.map((node) => this.renderNode(node, 1))}
       </Styled.List>
     );
   }
@@ -92,7 +92,7 @@ class ContentBlockTocBlockList extends PureComponent {
       <Styled.Heading>
         <Styled.TextTitle
           dangerouslySetInnerHTML={{
-            __html: this.textTitle
+            __html: this.textTitle,
           }}
         />
         {this.textSubtitle && (

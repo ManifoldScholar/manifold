@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   utilityPrimary,
   buttonUnstyled,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 
 const collectableMinHeight = `50px`;
@@ -58,7 +58,8 @@ export const Button = styled.button`
   background-color: var(--box-medium-bg-color);
   border-top-right-radius: var(--box-border-radius);
   border-bottom-right-radius: var(--box-border-radius);
-  transition: color ${defaultTransitionProps},
+  transition:
+    color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
   &:hover,

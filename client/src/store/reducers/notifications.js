@@ -1,11 +1,11 @@
 const initialState = {
-  notifications: []
+  notifications: [],
 };
 
 const addNotification = (state, action) => {
   const notification = { ...action.payload };
   const notifications = state.notifications.slice(0);
-  const index = notifications.findIndex(n => n.id === notification.id);
+  const index = notifications.findIndex((n) => n.id === notification.id);
   if (index >= 0) {
     notifications[index] = notification;
     return { ...state, notifications };
@@ -45,7 +45,7 @@ const clearDrawerNotifications = (state, action) => {
   return removeNotificationsByScope(state, { payload: "drawer" });
 };
 
-const removeAllNotifications = state => {
+const removeAllNotifications = (state) => {
   return { ...state, notifications: [] };
 };
 

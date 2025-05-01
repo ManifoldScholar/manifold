@@ -16,11 +16,11 @@ class CategoryListTexts extends PureComponent {
     dragging: PropTypes.string,
     t: PropTypes.func,
     categoryIndex: PropTypes.number.isRequired,
-    categoryCount: PropTypes.number.isRequired
+    categoryCount: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
-    texts: []
+    texts: [],
   };
 
   get texts() {
@@ -63,7 +63,7 @@ class CategoryListTexts extends PureComponent {
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 className={classNames("texts-list__text", {
-                  "texts-list__text--is-dragging": snapshot.isDragging
+                  "texts-list__text--is-dragging": snapshot.isDragging,
                 })}
               >
                 <TextInner

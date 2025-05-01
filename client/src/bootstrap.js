@@ -22,18 +22,18 @@ export default function bootstrap(getState, dispatch, cookieHelper) {
       settingsAPI.show({ authToken }),
       requests.settings,
       {
-        oneTime: true
-      }
+        oneTime: true,
+      },
     );
     const settingsPromise = dispatch(settingsRequest).promise;
     settingsPromise.then(
       () => {
         ch.notice("Initialization: settings loaded", "ok_hand");
       },
-      err => {
+      (err) => {
         console.error(err);
         ch.error("Initialization: settings failed to load");
-      }
+      },
     );
     promises.push(settingsPromise);
   }
@@ -51,7 +51,7 @@ export default function bootstrap(getState, dispatch, cookieHelper) {
       () => {
         ch.notice("Initialization: unable to authenticate user", "thumbsdown");
         resolve();
-      }
+      },
     );
   });
   promises.push(authPromiseWrapper);

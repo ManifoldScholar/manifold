@@ -1,7 +1,7 @@
 import {
   legacy_createStore as _createStore,
   applyMiddleware,
-  compose
+  compose,
 } from "redux";
 import thunkMiddleware from "./middleware/thunkMiddleware";
 import oauthMiddleware from "./middleware/oauthMiddleware";
@@ -35,7 +35,7 @@ export default function createStore(data) {
     const composeEnhancers =
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     finalCreateStore = composeEnhancers(applyMiddleware(...middleware))(
-      _createStore
+      _createStore,
     );
   } else {
     finalCreateStore = applyMiddleware(...middleware)(_createStore);

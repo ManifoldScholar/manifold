@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export default class Passthrough extends React.PureComponent {
   static propTypes = {
-    children: PropTypes.any
+    children: PropTypes.any,
   };
 
   render() {

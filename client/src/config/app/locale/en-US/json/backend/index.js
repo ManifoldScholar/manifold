@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import analytics from "./analytics.json";
 import entitlements from "./entitlements.json";
 import journals from "./journals.json";
@@ -26,5 +25,5 @@ export default {
   ...settings,
   ...texts,
   ...editor,
-  ...readingGroups
+  ...readingGroups,
 };

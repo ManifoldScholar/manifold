@@ -15,9 +15,9 @@ import withFormSession from "hoc/withFormSession";
 const { request } = entityStoreActions;
 
 export class SettingsEmailContainer extends PureComponent {
-  static mapStateToProps = state => {
+  static mapStateToProps = (state) => {
     return {
-      settings: select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore),
     };
   };
 
@@ -25,10 +25,10 @@ export class SettingsEmailContainer extends PureComponent {
     form: PropTypes.object,
     settings: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
-  sendTestEmail = event => {
+  sendTestEmail = (event) => {
     event.preventDefault();
     const call = testMailsAPI.create();
     const testMailRequest = request(call, requests.beCreateTestMail);
@@ -37,26 +37,26 @@ export class SettingsEmailContainer extends PureComponent {
       .promise.then(this.notifyEmailSuccess, this.notifyEmailFail);
   };
 
-  notifyEmailSuccess = responseIgnored => {
+  notifyEmailSuccess = (responseIgnored) => {
     const t = this.props.t;
     const notification = {
       level: 0,
       id: `TEST_EMAIL_SENT`,
       heading: t("notifications.email.success"),
       body: t("notifications.email_success_body"),
-      expiration: 5000
+      expiration: 5000,
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   };
 
-  notifyEmailFail = responseIgnored => {
+  notifyEmailFail = (responseIgnored) => {
     const t = this.props.t;
     const notification = {
       level: 0,
       id: `TEST_EMAIL_NOT_SENT`,
       heading: t("notifications.email_failure"),
       body: t("notifications.email_failure_body"),
-      expiration: 5000
+      expiration: 5000,
     };
     this.props.dispatch(notificationActions.addNotification(notification));
   };
@@ -116,16 +116,16 @@ export class SettingsEmailContainer extends PureComponent {
                 options={[
                   { label: "", value: "" },
                   { label: "SMTP", value: "smtp" },
-                  { label: "Sendmail", value: "sendmail" }
+                  { label: "Sendmail", value: "sendmail" },
                 ]}
               />
             </Form.FieldGroup>
             {this.props.form.getModelValue(
-              "attributes[email][deliveryMethod]"
+              "attributes[email][deliveryMethod]",
             ) === "smtp" ? (
               <Form.FieldGroup
                 label={t("settings.email.config_header", {
-                  method: "SMTP"
+                  method: "SMTP",
                 })}
               >
                 <Form.TextInput
@@ -152,11 +152,11 @@ export class SettingsEmailContainer extends PureComponent {
               </Form.FieldGroup>
             ) : null}
             {this.props.form.getModelValue(
-              "attributes[email][deliveryMethod]"
+              "attributes[email][deliveryMethod]",
             ) === "sendmail" ? (
               <Form.FieldGroup
                 label={t("settings.email.config_header", {
-                  method: "Sendmail"
+                  method: "Sendmail",
                 })}
               >
                 <Form.TextInput
@@ -175,7 +175,7 @@ export class SettingsEmailContainer extends PureComponent {
               style={{
                 display: "flex",
                 flexWrap: "wrap",
-                rowGap: "20px"
+                rowGap: "20px",
               }}
             >
               <Form.Save text={t("settings.save")} />
@@ -195,7 +195,7 @@ export class SettingsEmailContainer extends PureComponent {
 
 export default withFormSession(
   withTranslation()(
-    connect(SettingsEmailContainer.mapStateToProps)(SettingsEmailContainer)
+    connect(SettingsEmailContainer.mapStateToProps)(SettingsEmailContainer),
   ),
-  "backend-settings"
+  "backend-settings",
 );

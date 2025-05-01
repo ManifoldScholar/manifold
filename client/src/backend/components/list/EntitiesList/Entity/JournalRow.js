@@ -23,7 +23,7 @@ function JournalRow({
     journalVolumesCount,
     draft,
     updatedAt,
-    subtitleFormatted
+    subtitleFormatted,
   } = attributes;
 
   const { t } = useTranslation();
@@ -43,11 +43,11 @@ function JournalRow({
   );
 
   const issuesCount = t("glossary.issue_with_count", {
-    count: journalIssuesCount
+    count: journalIssuesCount,
   });
 
   const volumesCount = t("glossary.volume_with_count", {
-    count: journalVolumesCount
+    count: journalVolumesCount,
   });
 
   return (
@@ -75,7 +75,7 @@ JournalRow.propTypes = {
   compact: PropTypes.bool,
   renderWithoutLink: PropTypes.bool,
   dragHandleProps: PropTypes.object,
-  draggableProps: PropTypes.object
+  draggableProps: PropTypes.object,
 };
 
 export default JournalRow;

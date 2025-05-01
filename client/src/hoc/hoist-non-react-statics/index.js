@@ -19,7 +19,7 @@ const REACT_STATICS = {
   getDerivedStateFromProps: true,
   mixins: true,
   propTypes: true,
-  type: true
+  type: true,
 };
 
 const KNOWN_STATICS = {
@@ -29,7 +29,7 @@ const KNOWN_STATICS = {
   caller: true,
   callee: true,
   arguments: true,
-  arity: true
+  arity: true,
 };
 
 const FORWARD_REF_STATICS = {
@@ -37,7 +37,7 @@ const FORWARD_REF_STATICS = {
   render: true,
   defaultProps: true,
   displayName: true,
-  propTypes: true
+  propTypes: true,
 };
 
 const MEMO_STATICS = {
@@ -46,7 +46,7 @@ const MEMO_STATICS = {
   defaultProps: true,
   displayName: true,
   propTypes: true,
-  type: true
+  type: true,
 };
 
 const TYPE_STATICS = {};
@@ -54,7 +54,7 @@ TYPE_STATICS[React.forwardRef] = FORWARD_REF_STATICS;
 TYPE_STATICS[React.memo] = MEMO_STATICS;
 
 function getStatics(component) {
-  return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS; // eslint-disable-line dot-notation
+  return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS;
 }
 
 const defineProperty = Object.defineProperty;
@@ -67,7 +67,7 @@ const objectPrototype = Object.prototype;
 export default function hoistNonReactStatics(
   targetComponent,
   sourceComponent,
-  excludelist
+  excludelist,
 ) {
   if (typeof sourceComponent !== "string") {
     // don't hoist over string (html) components
@@ -100,7 +100,7 @@ export default function hoistNonReactStatics(
         try {
           // Avoid failures from read-only properties
           defineProperty(targetComponent, key, descriptor);
-        } catch (e) {} // eslint-disable-line no-empty
+        } catch (_) {} // eslint-disable-line no-empty
       }
     }
   }

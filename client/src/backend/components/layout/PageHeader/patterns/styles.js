@@ -129,7 +129,7 @@ export const TitleWrapper = styled.div`
 
   ${respond(
     `flex-direction: row; align-items: center; gap: 12px; flex-wrap: wrap;`,
-    65
+    65,
   )}
 `;
 

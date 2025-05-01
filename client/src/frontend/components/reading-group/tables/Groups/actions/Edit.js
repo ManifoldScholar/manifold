@@ -13,7 +13,7 @@ function EditGroup({ readingGroup }) {
 
   const baseLink = lh.link(
     "frontendReadingGroupHomepageStatic",
-    readingGroup.id
+    readingGroup.id,
   );
   const hash = "settings";
   return <Action to={`${baseLink}#${hash}`}>{t("actions.edit")}</Action>;
@@ -22,7 +22,7 @@ function EditGroup({ readingGroup }) {
 EditGroup.displayName = "GroupsTable.Group.Edit";
 
 EditGroup.propTypes = {
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
 };
 
 export default EditGroup;

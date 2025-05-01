@@ -3,7 +3,7 @@ import {
   listUnstyled,
   utilityPrimary,
   fluidScale,
-  buttonUnstyled
+  buttonUnstyled,
 } from "theme/styles/mixins";
 
 const LINK_PADDING = 7;

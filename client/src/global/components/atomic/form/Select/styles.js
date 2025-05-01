@@ -3,7 +3,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import {
   defaultTransitionProps,
   unstyledSelect,
-  utilityPrimary
+  utilityPrimary,
 } from "theme/styles/mixins";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 
@@ -42,7 +42,7 @@ export const Select = styled.select`
   ${unstyledSelect}
   ${utilityPrimary}
   padding: 11px ${ICON_WIDTH +
-    ICON_PADDING * 1.5}px 13px var(--padding-inline-start, 13px);
+  ICON_PADDING * 1.5}px 13px var(--padding-inline-start, 13px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -41,9 +41,9 @@ class EntryBrowser {
     const cookie = new CookieHelper();
     ch.error("Initializing client application...", "rain_cloud");
     return manifoldBootstrap(store.getState, store.dispatch, cookie).catch(
-      e => {
+      (e) => {
         console.log(e, "Bootstrap failed.");
-      }
+      },
     );
   }
 
@@ -82,14 +82,14 @@ class EntryBrowser {
         this.root,
         <CacheProvider value={cache}>
           <App store={this.store} />
-        </CacheProvider>
+        </CacheProvider>,
       );
     } else {
       const renderRoot = createRoot(this.root);
       renderRoot.render(
         <CacheProvider value={cache}>
           <App store={this.store} />
-        </CacheProvider>
+        </CacheProvider>,
       );
     }
     if (config.environment.isDevelopment) this.enableDevelopment();
@@ -103,7 +103,7 @@ class EntryBrowser {
       }
       this.performBootstrap().then(
         () => this.bootstrapSuccess(resolve),
-        () => this.bootstrapFailure(reject)
+        () => this.bootstrapFailure(reject),
       );
     }).finally(this.render);
   }

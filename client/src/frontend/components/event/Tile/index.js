@@ -29,7 +29,7 @@ export class EventTile extends Component {
     linkTarget: PropTypes.string,
     history: PropTypes.object,
     italicizeContent: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
@@ -37,7 +37,7 @@ export class EventTile extends Component {
     hideLink: false,
     visible: true,
     className: "",
-    itemTag: "li"
+    itemTag: "li",
   };
 
   get hasLink() {
@@ -49,7 +49,7 @@ export class EventTile extends Component {
     return this.props.itemTag;
   }
 
-  handleTileClick = event => {
+  handleTileClick = (event) => {
     if (event.target.href) return;
     if (!this.hasLink) return;
     const { linkHref, linkTarget } = this.props;
@@ -72,19 +72,19 @@ export class EventTile extends Component {
       date,
       dateFormat,
       italicizeContent,
-      t
+      t,
     } = this.props;
 
     return (
       <this.tileTag className={this.props.className}>
-        {/* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
+        {}
         <Styled.Tile
           role={this.hasLink ? "link" : null}
           tabIndex={this.hasLink ? "0" : null}
           onClick={this.handleTileClick}
           $linked={this.hasLink}
         >
-          {/* eslint-enable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
+          {}
           <Styled.Inner>
             {icon && <Styled.Icon icon={icon} size={48} />}
             {header && <Styled.Header>{header}</Styled.Header>}

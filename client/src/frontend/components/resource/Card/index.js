@@ -9,7 +9,7 @@ function ResourceCard({
   resource,
   resourceCollection,
   project,
-  itemHeadingLevel = 4
+  itemHeadingLevel = 4,
 }) {
   if (!resource) return null;
 
@@ -19,13 +19,13 @@ function ResourceCard({
         "frontendProjectCollectionResource",
         project.attributes.slug,
         resourceCollection.attributes.slug,
-        resource.attributes.slug
+        resource.attributes.slug,
       );
     }
     return lh.link(
       "frontendProjectResource",
       project.attributes.slug,
-      resource.attributes.slug
+      resource.attributes.slug,
     );
   }
 
@@ -47,7 +47,7 @@ ResourceCard.propTypes = {
   resource: PropTypes.object,
   project: PropTypes.object.isRequired,
   resourceCollection: PropTypes.object,
-  itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+  itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6]),
 };
 
 export default ResourceCard;

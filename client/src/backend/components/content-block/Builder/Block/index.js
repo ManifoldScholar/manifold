@@ -19,14 +19,14 @@ export default class ProjectContentBlock extends PureComponent {
     onClickAdd: PropTypes.func,
     isDragging: PropTypes.bool,
     entityCount: PropTypes.number,
-    announce: PropTypes.func
+    announce: PropTypes.func,
   };
 
   static defaultProps = {
     blocks: [],
     placed: false,
     available: true,
-    disabled: () => false
+    disabled: () => false,
   };
 
   get listContext() {
@@ -93,7 +93,7 @@ export default class ProjectContentBlock extends PureComponent {
         <div
           className={classNames(
             baseClass,
-            `${baseClass}--${this.props.context} ${baseClass}--inactive`
+            `${baseClass}--${this.props.context} ${baseClass}--inactive`,
           )}
         >
           <ListContextBlock
@@ -127,8 +127,8 @@ export default class ProjectContentBlock extends PureComponent {
                   `${baseClass}--${this.props.context}`,
                   {
                     [`${baseClass}--active`]: !this.disabled,
-                    [`${baseClass}--is-dragging`]: snapshot.isDragging
-                  }
+                    [`${baseClass}--is-dragging`]: snapshot.isDragging,
+                  },
                 )}
               >
                 <ListContextBlock
@@ -151,7 +151,7 @@ export default class ProjectContentBlock extends PureComponent {
               baseClass,
               `${baseClass}--${this.props.context}`,
               `${baseClass}--inactive`,
-              "drag-placeholder"
+              "drag-placeholder",
             )}
           >
             <ListContextBlock

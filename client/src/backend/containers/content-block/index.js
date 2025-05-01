@@ -3,5 +3,5 @@ import New from "./New";
 
 export default {
   Edit,
-  New
+  New,
 };

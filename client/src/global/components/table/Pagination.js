@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 
 export default class TablePagination extends React.PureComponent {

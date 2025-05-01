@@ -12,14 +12,14 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
   static propTypes = {
     resourceCollection: PropTypes.object,
     params: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {
     const { resourceCollection, t } = this.props;
     if (!resourceCollection) return null;
 
-    const formatData = data => {
+    const formatData = (data) => {
       const { thumbnailAltText, thumbnail, ...rest } = data?.attributes ?? {};
 
       const finalThumbnailData =
@@ -29,7 +29,7 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
 
       return {
         ...data,
-        attributes: { thumbnail: finalThumbnailData, ...rest }
+        attributes: { thumbnail: finalThumbnailData, ...rest },
       };
     };
 
@@ -39,7 +39,7 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
           model={resourceCollection}
           name="backend-collection-update"
           update={resourceCollectionsAPI.update}
-          create={model =>
+          create={(model) =>
             resourceCollectionsAPI.create(this.props.params.projectId, model)
           }
           className="form-secondary"
@@ -82,6 +82,6 @@ export class ResourceCollectionPropertiesContainer extends PureComponent {
 
 export default withTranslation()(
   connect(ResourceCollectionPropertiesContainer.mapStateToProps)(
-    ResourceCollectionPropertiesContainer
-  )
+    ResourceCollectionPropertiesContainer,
+  ),
 );

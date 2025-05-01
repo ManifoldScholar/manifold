@@ -24,7 +24,7 @@ const routes = {
             const query = queryString.stringify(params);
             if (!query) return "/projects/all";
             return `/projects/all?${query}`;
-          }
+          },
         },
         {
           name: "frontendProjectCollections",
@@ -36,7 +36,7 @@ const routes = {
             const query = queryString.stringify(params);
             if (!query) return "/projects/project-collections";
             return `/projects/project-collections?${query}`;
-          }
+          },
         },
         {
           name: "frontendProjectCollection",
@@ -48,21 +48,21 @@ const routes = {
             const query = queryString.stringify(params);
             if (!query) return `/projects/project-collection/${pc}`;
             return `/projects/project-collection/${pc}?${query}`;
-          }
+          },
         },
         {
           name: "frontendProject",
           exact: false,
           component: "ProjectWrapper",
           path: "/projects/:id",
-          helper: p => `/projects/${p}`,
+          helper: (p) => `/projects/${p}`,
           routes: [
             {
               name: "frontendProjectDetail",
               exact: true,
               component: "ProjectDetail",
               path: "/projects/:id",
-              helper: p => `/projects/${p}`
+              helper: (p) => `/projects/${p}`,
             },
             {
               name: "frontendProjectSearch",
@@ -73,7 +73,7 @@ const routes = {
                 const query = queryString.stringify(params);
                 if (!query) return `/projects/${p}/search`;
                 return `/projects/${p}/search/?${query}`;
-              }
+              },
             },
             {
               name: "frontendProjectResources",
@@ -84,25 +84,24 @@ const routes = {
                 const query = queryString.stringify(params);
                 if (!query) return `/projects/${p}/resources`;
                 return `/projects/${p}/resources/?${query}`;
-              }
+              },
             },
             {
               name: "frontendProjectResourceCollections",
               exact: true,
               component: "ProjectResourceCollections",
               path: "/projects/:id/resource-collections",
-              helper: p => {
+              helper: (p) => {
                 return `/projects/${p}/resource-collections`;
-              }
+              },
             },
             {
               name: "frontendProjectCollectionResource",
               exact: true,
               component: "ResourceDetail",
-              path:
-                "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId",
+              path: "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId",
               helper: (p, c, r) =>
-                `/projects/${p}/resource-collection/${c}/resource/${r}`
+                `/projects/${p}/resource-collection/${c}/resource/${r}`,
             },
             {
               name: "frontendProjectResource",
@@ -112,8 +111,8 @@ const routes = {
               helpers: {
                 frontendProjectResource: (p, r) =>
                   `/projects/${p}/resource/${r}`,
-                frontendProjectResourceRelative: r => `resource/${r}`
-              }
+                frontendProjectResourceRelative: (r) => `resource/${r}`,
+              },
             },
             {
               name: "frontendProjectResourceCollection",
@@ -126,9 +125,9 @@ const routes = {
                   if (!query) return `/projects/${p}/resource-collection/${c}`;
                   return `/projects/${p}/resource-collection/${c}?${query}`;
                 },
-                frontendProjectResourceCollectionRelative: c =>
-                  `resource-collection/${c}`
-              }
+                frontendProjectResourceCollectionRelative: (c) =>
+                  `resource-collection/${c}`,
+              },
             },
             {
               name: "frontendProjectEvents",
@@ -136,17 +135,17 @@ const routes = {
               component: "EventList",
               path: "/projects/:id/events/:page?",
               helpers: {
-                frontendProjectEvents: p => `/projects/${p}/events`,
+                frontendProjectEvents: (p) => `/projects/${p}/events`,
                 frontendProjectEventsPage: (pr, pg) =>
-                  `/projects/${pr}/events/${pg}`
-              }
+                  `/projects/${pr}/events/${pg}`,
+              },
             },
             {
-              component: NotFound
-            }
-          ]
-        }
-      ]
+              component: NotFound,
+            },
+          ],
+        },
+      ],
     },
     {
       name: "frontendJournals",
@@ -166,7 +165,7 @@ const routes = {
             const query = queryString.stringify(params);
             if (!query) return "/journals/all";
             return `/journals/all?${query}`;
-          }
+          },
         },
         {
           name: "frontendIssuesList",
@@ -178,46 +177,46 @@ const routes = {
             const query = queryString.stringify(params);
             if (!query) return "/journals/issues";
             return `/journals/issues?${query}`;
-          }
+          },
         },
         {
           name: "frontendJournal",
           exact: false,
           component: "JournalWrapper",
           path: "/journals/:id",
-          helper: j => `/journals/${j}`,
+          helper: (j) => `/journals/${j}`,
           routes: [
             {
               name: "frontendJournalDetail",
               exact: true,
               component: "JournalDetail",
               path: "/journals/:id",
-              helper: j => `/journals/${j}`
+              helper: (j) => `/journals/${j}`,
             },
             {
               name: "frontendJournalAllIssues",
               exact: true,
               component: "JournalIssuesList",
               path: "/journals/:id/issues",
-              helper: j => `/journals/${j}/issues`
+              helper: (j) => `/journals/${j}/issues`,
             },
             {
               name: "frontendJournalAllVolumes",
               exact: true,
               component: "JournalVolumesList",
               path: "/journals/:id/volumes",
-              helper: j => `/journals/${j}/volumes`
+              helper: (j) => `/journals/${j}/volumes`,
             },
             {
               name: "frontendVolumeDetail",
               exact: true,
               component: "VolumeDetail",
               path: "/journals/:id/volumes/:volumeSlug",
-              helper: (j, v) => `/journals/${j}/volumes/${v}`
-            }
-          ]
-        }
-      ]
+              helper: (j, v) => `/journals/${j}/volumes/${v}`,
+            },
+          ],
+        },
+      ],
     },
     {
       name: "frontendPublicReadingGroups",
@@ -241,7 +240,7 @@ const routes = {
             const base = `/groups`;
             if (!query) return base;
             return `${base}?${query}`;
-          }
+          },
         },
         {
           name: "frontendReadingGroupDetail",
@@ -265,14 +264,14 @@ const routes = {
                 const base = `/groups/${rg}/annotations`;
                 if (!query) return base;
                 return `${base}?${query}`;
-              }
+              },
             },
             {
               name: "frontendReadingGroupMembers",
               exact: false,
               component: "ReadingGroupMembers",
               path: "/groups/:id/members",
-              helper: rg => `/groups/${rg}/members`,
+              helper: (rg) => `/groups/${rg}/members`,
               routes: [
                 {
                   exact: true,
@@ -284,11 +283,11 @@ const routes = {
                       exact: true,
                       component: "ReadingGroupMemberEdit",
                       path: "/groups/:id/members/:membershipId",
-                      helper: (rg, m) => `/groups/${rg}/members/${m}`
-                    }
-                  ]
-                }
-              ]
+                      helper: (rg, m) => `/groups/${rg}/members/${m}`,
+                    },
+                  ],
+                },
+              ],
             },
             {
               exact: false,
@@ -305,22 +304,22 @@ const routes = {
                       exact: true,
                       component: "ReadingGroupHomepageStatic",
                       path: "/groups/:id",
-                      helper: rg => `/groups/${rg}`
+                      helper: (rg) => `/groups/${rg}`,
                     },
                     {
                       name: "frontendReadingGroupHomepageEdit",
                       exact: true,
                       component: "ReadingGroupHomepageEdit",
                       path: "/groups/:id/edit",
-                      helper: rg => `/groups/${rg}/edit`
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                      helper: (rg) => `/groups/${rg}/edit`,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       name: "frontendMyReadingGroups",
@@ -344,25 +343,25 @@ const routes = {
               exact: true,
               path: "/my/groups/new",
               component: "MyReadingGroupsNew",
-              helper: () => "/my/groups/new"
-            }
-          ]
-        }
-      ]
+              helper: () => "/my/groups/new",
+            },
+          ],
+        },
+      ],
     },
     {
       name: "frontendStarred",
       exact: true,
       component: "MyStarred",
       path: "/my/starred",
-      helper: () => "/my/starred"
+      helper: () => "/my/starred",
     },
     {
       name: "frontendAnnotations",
       exact: true,
       component: "MyAnnotations",
       path: "/my/notes",
-      helper: () => "/my/notes"
+      helper: () => "/my/notes",
     },
     {
       name: "frontendSearch",
@@ -370,75 +369,75 @@ const routes = {
       component: "Search",
       path: "/search",
       isLibrary: true,
-      helper: () => `/search`
+      helper: () => `/search`,
     },
     {
       name: "frontendLogin",
       exact: true,
       component: "Login",
       path: "/login",
-      helper: () => `/login`
+      helper: () => `/login`,
     },
     {
       name: "frontendSignUp",
       exact: true,
       component: "Login",
       path: "/signup",
-      helper: () => `/signup`
+      helper: () => `/signup`,
     },
     {
       name: "frontendContact",
       exact: true,
       component: "Contact",
       path: "/contact",
-      helper: () => "/contact"
+      helper: () => "/contact",
     },
     {
       exact: true,
       component: "PasswordReset",
-      path: "/reset-password/:resetToken"
+      path: "/reset-password/:resetToken",
     },
     {
       name: "frontendPage",
       exact: true,
       component: "Page",
       path: "/page/:slug",
-      helper: p => `/page/${p}`
+      helper: (p) => `/page/${p}`,
     },
     {
       name: "subscriptions",
       exact: true,
       component: "Subscriptions",
       path: "/subscriptions",
-      helper: () => "/subscriptions"
+      helper: () => "/subscriptions",
     },
     {
       name: "privacy",
       exact: true,
       component: "PrivacySettings",
       path: "/privacy",
-      helper: () => "/privacy"
+      helper: () => "/privacy",
     },
     {
       name: "dataUse",
       exact: true,
       component: "DataUse",
       path: "/data-use",
-      helper: () => "/data-use"
+      helper: () => "/data-use",
     },
     {
       name: "unsubscribe",
       exact: true,
       component: "Unsubscribe",
       path: "/unsubscribe/:token",
-      helper: token => `/unsubscribe/${token}`
+      helper: (token) => `/unsubscribe/${token}`,
     },
     {
       name: "api",
       exact: true,
       component: "ApiDocs",
       path: "/docs/api",
-      helper: () => "/docs/api"
+      helper: () => "/docs/api",
     },
     {
       name: "frontend",
@@ -450,12 +449,12 @@ const routes = {
         const query = queryString.stringify(params);
         if (!query) return "/";
         return `/?${query}`;
-      }
+      },
     },
     {
-      component: NotFound
-    }
-  ]
+      component: NotFound,
+    },
+  ],
 };
 
 export default routes;

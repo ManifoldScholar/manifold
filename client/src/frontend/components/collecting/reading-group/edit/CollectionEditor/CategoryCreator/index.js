@@ -59,7 +59,7 @@ CategoryCreator.displayName =
 CategoryCreator.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isMarkdown: PropTypes.bool,
-  count: PropTypes.number
+  count: PropTypes.number,
 };
 
 export default CategoryCreator;

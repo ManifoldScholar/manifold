@@ -9,10 +9,10 @@ import lodashUnset from "lodash/unset";
 import flatMapDeep from "lodash/flatMapDeep";
 
 const initialState = {
-  sessions: {}
+  sessions: {},
 };
 
-const setPathToGetPath = path => {
+const setPathToGetPath = (path) => {
   const parts = path.split(".");
   parts.pop();
   const getPath = parts.join(".");
@@ -24,31 +24,31 @@ const getSourceValue = (setPath, model) => {
   return value;
 };
 
-const hasKeysDeep = obj => {
+const hasKeysDeep = (obj) => {
   if (!isPlainObject(obj)) return false;
-  const found = flatMapDeep(obj).find(entry => {
+  const found = flatMapDeep(obj).find((entry) => {
     return Object.keys(entry).length > 0;
   });
   return found !== undefined;
 };
 
-const hasKeys = obj => {
+const hasKeys = (obj) => {
   if (!isPlainObject(obj)) return false;
   return Object.keys(obj).length > 0;
 };
 
-const makeComparableCollection = collection => {
-  return collection.map(entity => {
+const makeComparableCollection = (collection) => {
+  return collection.map((entity) => {
     if (entity.hasOwnProperty("id")) return entity.id;
     return entity;
   });
 };
 
-const hasIdentity = value => {
+const hasIdentity = (value) => {
   return isPlainObject(value) && value.hasOwnProperty("id");
 };
 
-const isResourcish = value => {
+const isResourcish = (value) => {
   return (
     isPlainObject(value) &&
     (value.hasOwnProperty("attributes") ||
@@ -86,10 +86,10 @@ const anyRelationshipChanged = (dirty, source) => {
     !isPlainObject(source.relationships)
   )
     return false;
-  return Object.keys(dirty.relationships).some(relationship => {
+  return Object.keys(dirty.relationships).some((relationship) => {
     return relationshipChanged(
       dirty.relationships[relationship],
-      source.relationships[relationship]
+      source.relationships[relationship],
     );
   });
 };
@@ -108,10 +108,10 @@ const open = (state, action) => {
   const newSession = {
     dirty: {
       attributes: {},
-      relationships: {}
+      relationships: {},
     },
     source: model,
-    changed: false
+    changed: false,
   };
   const newSessions = { ...state.sessions, [key]: newSession };
   const newState = { ...state, sessions: newSessions };
@@ -130,7 +130,7 @@ const removeChangedFlag = (state, action) => {
   if (!entity) return state;
   const id = entity.id;
   const clear = {};
-  Object.keys(state.sessions).forEach(sessionKey => {
+  Object.keys(state.sessions).forEach((sessionKey) => {
     const source = state.sessions[sessionKey].source;
     if (source && source.id && source.id === id) {
       clear[sessionKey] = true;
@@ -138,13 +138,13 @@ const removeChangedFlag = (state, action) => {
   });
   if (clear.length === 0) return state;
   let newState = { ...state };
-  Object.keys(clear).forEach(sessionKey => {
+  Object.keys(clear).forEach((sessionKey) => {
     newState = update(newState, {
       sessions: {
         [sessionKey]: {
-          changed: { $set: false }
-        }
-      }
+          changed: { $set: false },
+        },
+      },
     });
   });
   return newState;
@@ -189,23 +189,23 @@ const set = (state, action) => {
     sessions: {
       [id]: {
         changed: { $set: changed },
-        dirty: { $set: newDirty }
-      }
-    }
+        dirty: { $set: newDirty },
+      },
+    },
   });
 };
 
 const startAction = (state, dispatchedAction) => {
   const { id, action } = dispatchedAction.payload;
   return update(state, {
-    sessions: { [id]: { pendingAction: { $set: action } } }
+    sessions: { [id]: { pendingAction: { $set: action } } },
   });
 };
 
 const completeAction = (state, dispatchedAction) => {
   const { id } = dispatchedAction.payload;
   return update(state, {
-    sessions: { [id]: { pendingAction: { $set: null } } }
+    sessions: { [id]: { pendingAction: { $set: null } } },
   });
 };
 
@@ -216,7 +216,7 @@ export default handleActions(
     ENTITY_EDITOR_SET: set,
     ENTITY_EDITOR_PENDING_ACTION: startAction,
     ENTITY_EDITOR_COMPLETE_ACTION: completeAction,
-    ENTITY_STORE_REMOVE: removeChangedFlag
+    ENTITY_STORE_REMOVE: removeChangedFlag,
   },
-  initialState
+  initialState,
 );

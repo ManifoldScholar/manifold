@@ -25,7 +25,7 @@ export function JournalMetadataContainer({ journal }) {
 }
 
 JournalMetadataContainer.propTypes = {
-  journal: PropTypes.object
+  journal: PropTypes.object,
 };
 
 export default JournalMetadataContainer;

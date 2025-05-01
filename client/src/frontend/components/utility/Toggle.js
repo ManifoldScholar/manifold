@@ -13,14 +13,14 @@ class Toggle extends Component {
     label: PropTypes.string.isRequired,
     optionOne: PropTypes.shape({
       icon: PropTypes.string,
-      label: PropTypes.string
+      label: PropTypes.string,
     }).isRequired,
     optionTwo: PropTypes.shape({
       icon: PropTypes.string,
-      label: PropTypes.string
+      label: PropTypes.string,
     }).isRequired,
     selected: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   get selected() {
@@ -33,7 +33,7 @@ class Toggle extends Component {
 
   get unselected() {
     const unselected = this.options.find(
-      option => this.selected !== option.label
+      (option) => this.selected !== option.label,
     );
     return unselected ? unselected.label : null;
   }
@@ -42,7 +42,7 @@ class Toggle extends Component {
     return "button-switch";
   }
 
-  handleClick = event => {
+  handleClick = (event) => {
     event.preventDefault();
     this.props.handleToggle();
   };
@@ -52,7 +52,7 @@ class Toggle extends Component {
     const optionClasses = classNames({
       radio: true,
       "button-switch-primary__side": true,
-      "button-switch-primary__side--selected": selected
+      "button-switch-primary__side--selected": selected,
     });
 
     return (
@@ -90,20 +90,20 @@ class Toggle extends Component {
     const options = [this.props.optionOne, this.props.optionTwo];
 
     return (
-      <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
-        {id => (
+      <UIDConsumer name={(id) => `${this.idPrefix}-${id}`}>
+        {(id) => (
           <div
             role="group"
             aria-describedby={id}
             className="button-switch-primary"
           >
             {options.map((option, index) =>
-              this.renderOption(option, id, index)
+              this.renderOption(option, id, index),
             )}
             <span id={id} className="screen-reader-text">
               {this.props.t("actions.toggle_to_state", {
                 label: this.props.label,
-                state: this.unselected
+                state: this.unselected,
               })}
             </span>
           </div>

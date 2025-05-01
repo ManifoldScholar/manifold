@@ -4,12 +4,12 @@ import capitalize from "lodash/capitalize";
 import * as Styled from "./styles";
 
 export default function HeroMeta({ flattenedCollaborators, description }) {
-  const renderCollaboratorWithRoles = collaborator => (
+  const renderCollaboratorWithRoles = (collaborator) => (
     <Styled.Name key={collaborator.id}>
       {collaborator.attributes.makerName}
       <Styled.Roles>
         {collaborator.attributes.roles
-          .map(r => capitalize(r).replaceAll("_", " "))
+          .map((r) => capitalize(r).replaceAll("_", " "))
           .join(", ")}
       </Styled.Roles>
     </Styled.Name>
@@ -19,8 +19,8 @@ export default function HeroMeta({ flattenedCollaborators, description }) {
     <Styled.Wrapper>
       {!!flattenedCollaborators?.length && (
         <Styled.Contributors>
-          {flattenedCollaborators.map(collaborator =>
-            renderCollaboratorWithRoles(collaborator)
+          {flattenedCollaborators.map((collaborator) =>
+            renderCollaboratorWithRoles(collaborator),
           )}
         </Styled.Contributors>
       )}
@@ -35,5 +35,5 @@ HeroMeta.displayName = "Frontend.Entity.Hero.Parts.Meta";
 
 HeroMeta.propTypes = {
   contributors: PropTypes.array,
-  description: PropTypes.string
+  description: PropTypes.string,
 };

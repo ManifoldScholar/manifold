@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import withPluginReplacement from "hoc/withPluginReplacement";
 
 class LayoutPreHeader extends PureComponent {
@@ -11,5 +11,5 @@ class LayoutPreHeader extends PureComponent {
 
 export default withPluginReplacement(
   LayoutPreHeader,
-  "Reader.Components.Layout.PreHeader"
+  "Reader.Components.Layout.PreHeader",
 );

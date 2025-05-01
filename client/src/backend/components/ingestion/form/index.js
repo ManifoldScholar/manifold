@@ -5,5 +5,5 @@ import SectionWrapper from "./SectionIngestWrapper";
 export default {
   Upload,
   Wrapper,
-  SectionWrapper
+  SectionWrapper,
 };

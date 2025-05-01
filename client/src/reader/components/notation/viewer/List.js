@@ -23,7 +23,7 @@ class NotationViewerList extends PureComponent {
     const newState = {
       activeAnnotation: state.ui.transitory.reader.activeAnnotation || null,
       activeAnnotationPassive:
-        state.ui.transitory.reader.activeAnnotationPassive
+        state.ui.transitory.reader.activeAnnotationPassive,
     };
     return { ...newState, ...ownProps };
   };
@@ -41,7 +41,7 @@ class NotationViewerList extends PureComponent {
     textId: PropTypes.string,
     textSlug: PropTypes.string,
     confirm: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   constructor(props) {
@@ -50,14 +50,14 @@ class NotationViewerList extends PureComponent {
     const { dispatch } = props;
     this.actions = {
       makeActive: bac(uiReaderActions.setActiveAnnotation, dispatch),
-      startDestroy: this.startDestroy
+      startDestroy: this.startDestroy,
     };
     this.notationHeight = 110;
     this.groupHeight = 200;
     this.state = {
       markers: [],
       scrollY: 0,
-      previewEntry: null
+      previewEntry: null,
     };
   }
 
@@ -96,16 +96,16 @@ class NotationViewerList extends PureComponent {
   setPreviewEntry(props) {
     const aId = props.activeAnnotation;
     if (!aId) return this.clearPreviewAnnotation();
-    const annotation = props.annotations.find(a => a.id === aId);
+    const annotation = props.annotations.find((a) => a.id === aId);
     const notation = this.notationForAnnotation(props, annotation);
     if (!notation || !annotation) return this.clearPreviewAnnotation();
     return this.setState({
-      previewEntry: { annotation, notation, key: annotation.id }
+      previewEntry: { annotation, notation, key: annotation.id },
     });
   }
 
   markerByAnnotationId(props, aId) {
-    return [...this.markerNodes(props)].find(marker => {
+    return [...this.markerNodes(props)].find((marker) => {
       return marker.dataset.annotationNotation === aId;
     });
   }
@@ -156,7 +156,7 @@ class NotationViewerList extends PureComponent {
     return this.listEl.offsetParent !== null;
   };
 
-  updateScrollY = throttle(eventIgnored => {
+  updateScrollY = throttle((eventIgnored) => {
     const scrollY = window.pageYOffset;
     if (!this.listIsVisible()) this.autoSetActive(this.props);
     this.setState({ scrollY });
@@ -180,7 +180,7 @@ class NotationViewerList extends PureComponent {
   markerNodes(props) {
     if (!this.bodyNode(props)) return [];
     const markerNodes = this.bodyNode(props).querySelectorAll(
-      "[data-annotation-notation]"
+      "[data-annotation-notation]",
     );
     return [...markerNodes];
   }
@@ -188,7 +188,7 @@ class NotationViewerList extends PureComponent {
   entryFromMarkerNode(props, markerNode) {
     if (!markerNode) return null;
     const aId = markerNode.getAttribute("data-annotation-notation");
-    const annotation = props.annotations.find(a => a.id === aId);
+    const annotation = props.annotations.find((a) => a.id === aId);
     const notation = this.notationForAnnotation(props, annotation);
     if (!notation || !annotation) return null;
     const top = markerNode.getBoundingClientRect().top + window.pageYOffset;
@@ -201,7 +201,7 @@ class NotationViewerList extends PureComponent {
     const nId =
       annotation.attributes.resourceId ||
       annotation.attributes.resourceCollectionId;
-    return props.notations.find(n => n.id === nId);
+    return props.notations.find((n) => n.id === nId);
   }
 
   updateIfHeightChanged() {
@@ -219,12 +219,12 @@ class NotationViewerList extends PureComponent {
     const destroyRequest = request(
       call,
       requests.feResourceAnnotationDestroy,
-      options
+      options,
     );
     this.props.dispatch(destroyRequest);
   }
 
-  startDestroy = entry => {
+  startDestroy = (entry) => {
     const t = this.props.t;
     const heading = t("modals.delete_note");
     const message = t("modals.delete_note_body");
@@ -233,11 +233,11 @@ class NotationViewerList extends PureComponent {
 
   entries(props) {
     return this.markerNodes(props)
-      .map(markerNode => {
+      .map((markerNode) => {
         const entry = this.entryFromMarkerNode(props, markerNode);
         return entry;
       })
-      .filter(e => e); // filter empty entries in collection.
+      .filter((e) => e); // filter empty entries in collection.
   }
 
   groupOverlappingEntries(entries, index = 0) {
@@ -258,7 +258,7 @@ class NotationViewerList extends PureComponent {
           key: `group-${index}`,
           location: current.location,
           height: this.groupHeight,
-          entries: [current, next]
+          entries: [current, next],
         };
         entries.splice(index, 2, group);
       }
@@ -272,7 +272,7 @@ class NotationViewerList extends PureComponent {
     const { activeAnnotation, textId, sectionId, textSlug } = this.props;
     const wrapperStyle = {
       top: group.location,
-      height: group.height
+      height: group.height,
     };
 
     return (
@@ -318,8 +318,8 @@ class NotationViewerList extends PureComponent {
         className={viewerClass}
         aria-label={this.props.t("glossary.notation_title_case_other")}
       >
-        <ul className="viewer-list" ref={el => (this.listEl = el)}>
-          {this.state.entries.map(entry => {
+        <ul className="viewer-list" ref={(el) => (this.listEl = el)}>
+          {this.state.entries.map((entry) => {
             return (
               <li key={entry.key}>
                 {entry.group
@@ -341,6 +341,6 @@ class NotationViewerList extends PureComponent {
 
 export default withTranslation()(
   withConfirmation(
-    connect(NotationViewerList.mapStateToProps)(NotationViewerList)
-  )
+    connect(NotationViewerList.mapStateToProps)(NotationViewerList),
+  ),
 );

@@ -1,16 +1,15 @@
-import React, { useRef, useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useRef, useState, useEffect } from "react";
 import invariant from "tiny-invariant";
 import {
   draggable,
   dropTargetForElements,
-  monitorForElements
+  monitorForElements,
 } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { preserveOffsetOnSource } from "@atlaskit/pragmatic-drag-and-drop/element/preserve-offset-on-source";
 import { setCustomNativeDragPreview } from "@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview";
 import {
   attachClosestEdge,
-  extractClosestEdge
+  extractClosestEdge,
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import { isShallowEqual } from "../../helpers/utils";
 
@@ -19,7 +18,7 @@ export default function useDraggableCategory({
   index,
   category,
   isStatic = false,
-  onDropInto
+  onDropInto,
 }) {
   const categoryRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -39,7 +38,7 @@ export default function useDraggableCategory({
       onDrop({ source }) {
         if (source.data.type === "categories") setCollapsed(false);
         setDragState({ type: null });
-      }
+      },
     });
   }, []);
 
@@ -56,7 +55,7 @@ export default function useDraggableCategory({
           return attachClosestEdge(data, {
             element,
             input,
-            allowedEdges: ["top", "bottom"]
+            allowedEdges: ["top", "bottom"],
           });
         },
         canDrop: ({ source }) => {
@@ -75,7 +74,7 @@ export default function useDraggableCategory({
           setDragState({
             status: "is-over",
             type: source.data.type,
-            closestEdge
+            closestEdge,
           });
         },
         onDrag({ source, self }) {
@@ -89,9 +88,9 @@ export default function useDraggableCategory({
           const proposed = {
             status: "is-over",
             type: source.data.type,
-            closestEdge
+            closestEdge,
           };
-          setDragState(current => {
+          setDragState((current) => {
             if (isShallowEqual(proposed, current)) {
               return current;
             }
@@ -112,7 +111,7 @@ export default function useDraggableCategory({
             source.data.type !== "categories"
           )
             onDropInto();
-        }
+        },
       });
     }
   }, [category, id, index, isStatic, isMarkdown, onDropInto]);
@@ -132,7 +131,7 @@ export default function useDraggableCategory({
           id,
           index,
           rect: element.getBoundingClientRect(),
-          element: categoryEl
+          element: categoryEl,
         }),
         onDragStart: () => {
           setDragState({ status: "dragging", type: "categories" });
@@ -145,20 +144,20 @@ export default function useDraggableCategory({
             nativeSetDragImage,
             getOffset: preserveOffsetOnSource({
               element: categoryEl,
-              input: location.current.input
+              input: location.current.input,
             }),
             render({ container }) {
               setDragState({
                 status: "preview",
                 type: "categories",
-                container
+                container,
               });
 
               return () =>
                 setDragState({ status: "dragging", type: "categories" });
-            }
+            },
           });
-        }
+        },
       });
     }
   }, [category, id, index, isStatic]);
@@ -170,6 +169,6 @@ export default function useDraggableCategory({
     collapsed,
     categoryRef,
     wrapperRef,
-    dragHandleRef
+    dragHandleRef,
   };
 }

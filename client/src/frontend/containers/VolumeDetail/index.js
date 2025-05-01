@@ -15,7 +15,7 @@ import { useFetch, useFromStore } from "hooks";
 function VolumeDetailContainer({ journal }) {
   const { volumeSlug: slug } = useParams();
   const { data: volume } = useFetch({
-    request: [journalVolumesAPI.show, slug]
+    request: [journalVolumesAPI.show, slug],
   });
 
   const { t } = useTranslation();
@@ -27,21 +27,21 @@ function VolumeDetailContainer({ journal }) {
     const nestedCrumbs = [
       {
         to: lh.link("frontendJournalDetail", journalSlug),
-        label: titlePlaintext
+        label: titlePlaintext,
       },
       {
         to: lh.link("frontendVolumeDetail", journalSlug, slug),
-        label: `${t("glossary.volume_one")} ${volume?.attributes?.number}`
-      }
+        label: `${t("glossary.volume_one")} ${volume?.attributes?.number}`,
+      },
     ];
     return libraryDisabled
       ? nestedCrumbs
       : [
           {
             to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
+            label: t("navigation.breadcrumbs.all_journals"),
           },
-          ...nestedCrumbs
+          ...nestedCrumbs,
         ];
   }, [
     t,
@@ -49,13 +49,13 @@ function VolumeDetailContainer({ journal }) {
     titlePlaintext,
     volume?.attributes?.number,
     slug,
-    libraryDisabled
+    libraryDisabled,
   ]);
 
   const headContentProps = useEntityHeadContent(
     volume,
     journal,
-    t("glossary.volume_title_case_one")
+    t("glossary.volume_title_case_one"),
   );
 
   return journal && volume ? (
@@ -77,7 +77,7 @@ function VolumeDetailContainer({ journal }) {
 VolumeDetailContainer.displayName = "Frontend.Containers.VolumeDetail";
 
 VolumeDetailContainer.propTypes = {
-  journal: PropTypes.object
+  journal: PropTypes.object,
 };
 
 export default VolumeDetailContainer;

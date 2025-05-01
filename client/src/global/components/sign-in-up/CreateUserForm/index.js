@@ -13,7 +13,7 @@ import * as SharedStyles from "../styles";
 export default function CreateUserForm({
   handleViewChange,
   willRedirect,
-  redirectToHomeOnSignup
+  redirectToHomeOnSignup,
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -29,15 +29,15 @@ export default function CreateUserForm({
     (email, password) => {
       dispatch(currentUserActions.login({ email, password }));
     },
-    [dispatch]
+    [dispatch],
   );
 
   const pages = useFromStore("gPages", "select");
   const termsPage = pages?.find(
-    p => p.attributes.purpose === "terms_and_conditions"
+    (p) => p.attributes.purpose === "terms_and_conditions",
   );
 
-  const formatAttributes = data => {
+  const formatAttributes = (data) => {
     const { attributes } = data;
     emailRef.current = attributes?.email;
     passwordRef.current = attributes?.password;
@@ -46,9 +46,9 @@ export default function CreateUserForm({
       attributes: termsPage
         ? {
             ...attributes,
-            termsAndConditionsAcceptedAt: new Date().toISOString()
+            termsAndConditionsAcceptedAt: new Date().toISOString(),
           }
-        : attributes
+        : attributes,
     };
   };
 
@@ -63,7 +63,7 @@ export default function CreateUserForm({
       if (redirectToHomeOnSignup && !location?.state?.postLoginRedirect) {
         navigate(location, {
           postLoginRedirect: "/",
-          replace: true
+          replace: true,
         });
       }
     }
@@ -73,7 +73,7 @@ export default function CreateUserForm({
     willRedirect,
     redirectToHomeOnSignup,
     navigate,
-    location
+    location,
   ]);
 
   return (
@@ -97,7 +97,7 @@ export default function CreateUserForm({
       </SharedStyles.Form>
       <SharedStyles.LinksWrapper>
         <SharedStyles.ViewLink
-          onClick={event => handleViewChange("login", event)}
+          onClick={(event) => handleViewChange("login", event)}
         >
           {t("forms.signin_overlay.have_account")}
         </SharedStyles.ViewLink>
@@ -111,5 +111,5 @@ CreateUserForm.displayName = "Global.SignInUp.CreateUserForm";
 CreateUserForm.propTypes = {
   handleViewChange: PropTypes.func,
   willRedirect: PropTypes.bool,
-  redirectToHomeOnSignup: PropTypes.bool
+  redirectToHomeOnSignup: PropTypes.bool,
 };

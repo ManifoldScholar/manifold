@@ -13,7 +13,7 @@ export const List = styled.ul`
       grid-template-columns: repeat(auto-fill, minmax(${eventEntity.minWidth}, 1fr));
       margin-left: -${eventEntity.iconSize.large};
     `,
-    eventEntity.panelBreakpoint
+    eventEntity.panelBreakpoint,
   )}
 `;
 
@@ -25,6 +25,6 @@ export const Item = styled.li`
   ${respond(
     `
     padding-left: ${eventEntity.iconSize.small};`,
-    eventEntity.panelBreakpoint
+    eventEntity.panelBreakpoint,
   )}
 `;

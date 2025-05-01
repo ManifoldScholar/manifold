@@ -27,7 +27,7 @@ CollectedProjects.propTypes = {
   collectedIds: PropTypes.array.isRequired,
   responses: PropTypes.array.isRequired,
   onUncollect: PropTypes.func,
-  nested: PropTypes.bool
+  nested: PropTypes.bool,
 };
 
 export default CollectedProjects;

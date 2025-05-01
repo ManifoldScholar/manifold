@@ -3,5 +3,5 @@ import Create from "./create";
 
 export default {
   Ingestion,
-  Create
+  Create,
 };

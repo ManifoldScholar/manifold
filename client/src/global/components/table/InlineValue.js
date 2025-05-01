@@ -9,7 +9,7 @@ export default class InlineValue extends React.PureComponent {
   static propTypes = {
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     srLabel: PropTypes.string,
-    icon: PropTypes.string
+    icon: PropTypes.string,
   };
 
   get icon() {

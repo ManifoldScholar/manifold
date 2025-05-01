@@ -20,18 +20,18 @@ function getDisplayName(WrappedComponent) {
 
 export default function withAnalyticsReport(WrappedComponent) {
   const displayName = `withAnalyticsReport('${getDisplayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
 
   const requestUUID = uuidv4();
   const requestName = `${requests.beAnalyticsReport}-${requestUUID}`;
 
   class WithAnalyticsReport extends React.PureComponent {
-    static mapStateToProps = state => {
+    static mapStateToProps = (state) => {
       return {
         statistics: select(requests.beStats, state.entityStore),
         analytics: select(requestName, state.entityStore),
-        analyticsMeta: meta(requestName, state.entityStore)
+        analyticsMeta: meta(requestName, state.entityStore),
       };
     };
 
@@ -45,7 +45,7 @@ export default function withAnalyticsReport(WrappedComponent) {
         lastReportType: null,
         lastReportParams: null,
         analyticsStartDate: this.defaultAnalyticsStart,
-        analyticsEndDate: this.defaultAnalyticsEnd
+        analyticsEndDate: this.defaultAnalyticsEnd,
       };
     }
 
@@ -56,7 +56,7 @@ export default function withAnalyticsReport(WrappedComponent) {
       ) {
         this.fetchAnalytics(
           this.state.lastReportType,
-          this.state.lastReportParams
+          this.state.lastReportParams,
         );
       }
     }
@@ -83,9 +83,9 @@ export default function withAnalyticsReport(WrappedComponent) {
       return formatDuration(
         intervalToDuration({
           start,
-          end
+          end,
         }),
-        { format: ["years", "months", "weeks", "days"], delimiter: ", " }
+        { format: ["years", "months", "weeks", "days"], delimiter: ", " },
       );
     }
 
@@ -103,14 +103,14 @@ export default function withAnalyticsReport(WrappedComponent) {
           ...params,
           reportType: report,
           startDate: this.formatDateForFetch(this.state.analyticsStartDate),
-          endDate: this.formatDateForFetch(this.state.analyticsEndDate)
+          endDate: this.formatDateForFetch(this.state.analyticsEndDate),
         }),
-        requestName
+        requestName,
       );
       dispatch(analyticsRequest);
     };
 
-    formatDateForFetch = date => {
+    formatDateForFetch = (date) => {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const day = String(date.getDate()).padStart(2, "0");
@@ -118,11 +118,11 @@ export default function withAnalyticsReport(WrappedComponent) {
       return `${year}-${month}-${day}`;
     };
 
-    analyticsPaginationClickHandler = page => {
+    analyticsPaginationClickHandler = (page) => {
       return () => {
         this.fetchAnalytics(this.state.lastReportType, {
           ...this.state.lastReportParams,
-          page: { number: page }
+          page: { number: page },
         });
       };
     };
@@ -130,7 +130,7 @@ export default function withAnalyticsReport(WrappedComponent) {
     updateAnalyticsRange = (startDate, endDate) => {
       this.setState({
         analyticsStartDate: startDate,
-        analyticsEndDate: endDate
+        analyticsEndDate: endDate,
       });
     };
 
@@ -144,14 +144,14 @@ export default function withAnalyticsReport(WrappedComponent) {
         analyticsPaginationClickHandler: this.analyticsPaginationClickHandler,
         analyticsStartDate: this.state.analyticsStartDate,
         analyticsEndDate: this.state.analyticsEndDate,
-        analyticsRangeInWords: this.analyticsDuration
+        analyticsRangeInWords: this.analyticsDuration,
       };
       return React.createElement(WrappedComponent, props);
     }
   }
 
   const ConnectedWithAnalyticsReport = connect(
-    WithAnalyticsReport.mapStateToProps
+    WithAnalyticsReport.mapStateToProps,
   )(WithAnalyticsReport);
 
   return hoistStatics(ConnectedWithAnalyticsReport, WrappedComponent);

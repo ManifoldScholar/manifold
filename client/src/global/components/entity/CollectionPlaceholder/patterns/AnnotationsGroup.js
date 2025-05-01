@@ -25,9 +25,9 @@ function GroupAnnotationsPlaceholder({ readingGroup, refresh, style }) {
               <Link to={lh.link("frontendLogin")} className="button-tertiary">
                 {t("navigation.user.log_in")}
               </Link>
-            )
-          }
-        ]
+            ),
+          },
+        ],
       };
     }
 
@@ -43,16 +43,16 @@ function GroupAnnotationsPlaceholder({ readingGroup, refresh, style }) {
                 onSuccess={refresh}
                 buttonText={t("actions.join_group")}
               />
-            )
-          }
-        ]
+            ),
+          },
+        ],
       };
     }
 
     return {
       title: t("placeholders.annotations_group.user_is_member.title"),
       body: t("placeholders.annotations_group.user_is_member.body"),
-      actions: []
+      actions: [],
     };
   }
 
@@ -73,7 +73,7 @@ GroupAnnotationsPlaceholder.displayName =
   "Global.Entity.CollectionPlaceholder.GroupAnnotations";
 
 GroupAnnotationsPlaceholder.propTypes = {
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
 };
 
 export default GroupAnnotationsPlaceholder;

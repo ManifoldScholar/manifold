@@ -17,7 +17,7 @@ export default `
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         --gap: 7.6vw;
       `,
-      dashboardLayoutBreakpoint
+      dashboardLayoutBreakpoint,
     )}
 
     ${respond(`--gap: 95px;`, 120)}

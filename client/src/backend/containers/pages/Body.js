@@ -12,7 +12,7 @@ class PagesEditContainer extends PureComponent {
   static propTypes = {
     page: PropTypes.object.isRequired,
     onSuccess: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   render() {

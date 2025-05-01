@@ -11,13 +11,13 @@ import { useFetch, useListQueryParams } from "hooks";
 import EntitiesList, {
   Search,
   Button,
-  MakerRow
+  MakerRow,
 } from "backend/components/list/EntitiesList";
 
 function MakersListContainer({
   entitiesListSearchProps,
   entitiesListSearchParams,
-  route
+  route,
 }) {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -25,19 +25,23 @@ function MakersListContainer({
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 10,
     initFilters: entitiesListSearchParams.makers,
-    initSearchProps: entitiesListSearchProps("makers")
+    initSearchProps: entitiesListSearchProps("makers"),
   });
 
-  const { data: makers, meta: makersMeta, refresh } = useFetch({
+  const {
+    data: makers,
+    meta: makersMeta,
+    refresh,
+  } = useFetch({
     request: [makersAPI.index, filters, pagination],
-    options: { requestKey: requests.beMakers }
+    options: { requestKey: requests.beMakers },
   });
 
   if (!makers || !makersMeta) return null;
 
   const drawerProps = {
     closeUrl: lh.link("backendRecordsMakers"),
-    lockScroll: "always"
+    lockScroll: "always",
   };
 
   return (
@@ -45,7 +49,7 @@ function MakersListContainer({
       {childRoutes(route, {
         drawer: true,
         drawerProps,
-        childProps: { refetch: refresh }
+        childProps: { refetch: refresh },
       })}
       {makers && (
         <EntitiesList
@@ -57,7 +61,7 @@ function MakersListContainer({
               text={t("records.makers.button_label")}
               type="add"
               authorizedFor="maker"
-            />
+            />,
           ]}
           search={<Search {...searchProps} />}
           entities={makers}
@@ -66,7 +70,7 @@ function MakersListContainer({
           pagination={makersMeta.pagination}
           showCount
           unit={t("glossary.maker", {
-            count: makersMeta.pagination.totalCount
+            count: makersMeta.pagination.totalCount,
           })}
         />
       )}
@@ -79,9 +83,9 @@ MakersListContainer.displayName = "Makers.List";
 MakersListContainer.propTypes = {
   entitiesListSearchProps: PropTypes.func.isRequired,
   entitiesListSearchParams: PropTypes.object.isRequired,
-  route: PropTypes.object
+  route: PropTypes.object,
 };
 
 export default withFilteredLists(MakersListContainer, {
-  makers: makerFilters()
+  makers: makerFilters(),
 });

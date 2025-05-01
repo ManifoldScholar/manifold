@@ -8,7 +8,7 @@ class FormHiddenInput extends Component {
 
   static propTypes = {
     value: PropTypes.any,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
   };
 
   render() {

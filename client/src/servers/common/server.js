@@ -7,7 +7,7 @@ import httpShutdown from "http-shutdown";
 export default function webServer(
   app,
   name,
-  options = { socket: null, port: null }
+  options = { socket: null, port: null },
 ) {
   const pretty = new PrettyError();
   const socket = options.socket;
@@ -22,10 +22,10 @@ export default function webServer(
     ch.error(`${name} server is unlinking the existing socket at ${socket}.`);
   };
 
-  const shutdown = signal => {
+  const shutdown = (signal) => {
     ch.error(`${name} server received ${signal} signal.`);
     ch.error(`${name} server is shuting down.`);
-    servers.forEach(server => {
+    servers.forEach((server) => {
       server.close(() => {
         unlinkSocket();
       });
@@ -34,7 +34,7 @@ export default function webServer(
   };
 
   const makeListenCallback = (listen, listenType) => {
-    return err => {
+    return (err) => {
       if (err) {
         ch.error(`${name} server encountered an error.`);
         ch.error("SERVER ERROR:", pretty.render(err));

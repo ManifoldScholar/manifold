@@ -5,7 +5,7 @@ import { useState, useLayoutEffect, useEffect } from "react";
 const scrollLockStyles = {
   overflow: "hidden",
   position: "absolute",
-  width: "100%"
+  width: "100%",
 };
 
 export default function usePreventBodyScroll(active = false) {

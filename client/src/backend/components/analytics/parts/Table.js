@@ -15,7 +15,7 @@ function Table({
   pagination,
   paginationClickHandler,
   sortOptions,
-  emptyMessageKey = "messages.no_results"
+  emptyMessageKey = "messages.no_results",
 }) {
   const hasRows = !!rows?.length;
   const useSorting = hasRows && !!sortOptions?.length;
@@ -26,7 +26,7 @@ function Table({
   const { t } = useTranslation();
 
   function handleSortChange(value) {
-    const selectedSort = sortOptions.find(option => option.value === value);
+    const selectedSort = sortOptions.find((option) => option.value === value);
     setActiveSortParam(selectedSort);
   }
 
@@ -42,19 +42,19 @@ function Table({
       <table id="pagination-target" className="analytics-table">
         <thead className="analytics-table__header">
           <tr>
-            {/* eslint-disable react/no-array-index-key */}
+            {}
             {headers.map((header, index) => (
               <th key={index} scope="col">
                 {header}
               </th>
             ))}
-            {/* eslint-enable react/no-array-index-key */}
+            {}
           </tr>
         </thead>
         <tbody>
           {!hasRows && <EmptyRow message={t(emptyMessageKey)} />}
           {hasRows &&
-            rows.map(row => (
+            rows.map((row) => (
               <RowComponent key={RowComponent.generateId(row)} {...row} />
             ))}
         </tbody>
@@ -87,7 +87,7 @@ Table.propTypes = {
   pagination: PropTypes.object,
   paginationClickHandler: PropTypes.func,
   sortOptions: PropTypes.arrayOf(PropTypes.object.isRequired),
-  emptyMessageKey: PropTypes.string
+  emptyMessageKey: PropTypes.string,
 };
 
 Table.displayName = "Analytics.Block.Table";

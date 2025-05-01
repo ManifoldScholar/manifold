@@ -11,7 +11,7 @@ export class ProjectContentTypeForm extends PureComponent {
   static propTypes = {
     contentBlock: PropTypes.object,
     project: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   componentDidMount() {
@@ -37,8 +37,8 @@ export class ProjectContentTypeForm extends PureComponent {
   setDefaults() {
     const defaults = this.typeComponent.defaultAttributes;
     if (!defaults) return null;
-    Object.keys(defaults).forEach(attr =>
-      this.props.setOther(defaults[attr], `attributes[${attr}]`)
+    Object.keys(defaults).forEach((attr) =>
+      this.props.setOther(defaults[attr], `attributes[${attr}]`),
     );
   }
 
@@ -52,16 +52,16 @@ export class ProjectContentTypeForm extends PureComponent {
           options={[
             {
               label: this.props.t("layout.visibility_options.always"),
-              value: "always"
+              value: "always",
             },
             {
               label: this.props.t("layout.visibility_options.authorized"),
-              value: "authorized"
+              value: "authorized",
             },
             {
               label: this.props.t("layout.visibility_options.unauthorized"),
-              value: "unauthorized"
-            }
+              value: "unauthorized",
+            },
           ]}
           name="attributes[access]"
         />

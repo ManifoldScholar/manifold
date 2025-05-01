@@ -9,10 +9,10 @@ export default function useEventTracker() {
       context.track({
         event,
         resourceType,
-        resourceId
+        resourceId,
       });
     },
-    [JSON.stringify(context)] // eslint-disable-line react-hooks/exhaustive-deps
+    [JSON.stringify(context)], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return trackEvent;

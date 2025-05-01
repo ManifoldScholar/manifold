@@ -21,5 +21,5 @@ export default {
   orderCollection,
   groupSort,
   groupStatus,
-  sortChron
+  sortChron,
 };

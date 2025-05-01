@@ -18,7 +18,7 @@ export default function EntitlementImportRow({ entity: csv }) {
         className="entity-row__utility-button"
         href={fileUrl}
         download
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       >
         <Utility.IconComposer icon="download24" size={26} />
       </a>
@@ -47,7 +47,7 @@ export default function EntitlementImportRow({ entity: csv }) {
             <Styled.MessagesTitle>
               {t("entitlements.imports.results_header")}
             </Styled.MessagesTitle>
-            {messages.map(m => (
+            {messages.map((m) => (
               <Styled.Message key={m}>{m}</Styled.Message>
             ))}
           </Styled.Messages>
@@ -60,5 +60,5 @@ export default function EntitlementImportRow({ entity: csv }) {
 EntitlementImportRow.displayName = "EntitiesList.Entity.EntitlementImportRow";
 
 EntitlementImportRow.propTypes = {
-  entity: PropTypes.object
+  entity: PropTypes.object,
 };

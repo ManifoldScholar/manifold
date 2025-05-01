@@ -4,89 +4,89 @@ import r from "./requests";
 const defaultExpiration = 5000;
 
 export default {
-  [r.beProjectDestroy]: payloadIgnored => {
+  [r.beProjectDestroy]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "The project has been deleted.",
       body: `Alas, it has passed into the endless night.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beUserUpdate]: payload => {
+  [r.beUserUpdate]: (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${possessivize(
-        payload.data.attributes.fullName
+        payload.data.attributes.fullName,
       )} account has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.gPasswordReset]: payloadIgnored => {
+  [r.gPasswordReset]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Success!",
       body: "Your password has been reset.",
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beMakerUpdate]: payload => {
+  [r.beMakerUpdate]: (payload) => {
     return {
       level: 0,
       heading: "Success!",
-      body: `${payload.data.attributes.fullName} has been updated.`
+      body: `${payload.data.attributes.fullName} has been updated.`,
     };
   },
-  [r.beMakerCreate]: payload => {
+  [r.beMakerCreate]: (payload) => {
     return {
       level: 0,
       heading: "New maker record created",
       body: `${payload.data.attributes.fullName}
        can now be added to projects, texts, and users in the backend.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "backend-settings": payloadIgnored => {
+  "backend-settings": (payloadIgnored) => {
     return {
       level: 0,
       id: "SETTINGS_UPDATED",
       heading: "Manifold settings updated",
       body: "Your Manifold settings changes have been applied.",
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "update-creators": payloadIgnored => {
+  "update-creators": (payloadIgnored) => {
     return {
       level: 0,
       heading: "Collaborators have been updated",
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "create-creators": payload => {
+  "create-creators": (payload) => {
     return {
       level: 0,
       heading: "New maker record created",
       body: `${possessivize(
-        payload.data.attributes.fullName
+        payload.data.attributes.fullName,
       )} can now be added to projects, texts, and users in the backend.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "update-contributors": payloadIgnored => {
+  "update-contributors": (payloadIgnored) => {
     return {
       level: 0,
       heading: "Project contributors have been updated.",
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "create-contributors": payload => {
+  "create-contributors": (payload) => {
     return {
       level: 0,
       heading: "New maker record created.",
       body: `${possessivize(
-        payload.data.attributes.fullName
+        payload.data.attributes.fullName,
       )} can now be added to projects, texts, and users in the backend.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
   [r.beTextCategoryDestroy]: () => {
@@ -94,7 +94,7 @@ export default {
       level: 0,
       heading: "The category has been deleted.",
       body: `To sleep, perchance to dream - ay, there's the rub`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
   [r.beMakerDestroy]: () => {
@@ -102,17 +102,17 @@ export default {
       level: 0,
       heading: "The maker has been deleted.",
       body: `Henceforth I quit thee from my thought, my part is ended on thy stage.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beUserCreate]: payload => {
+  [r.beUserCreate]: (payload) => {
     return {
       level: 0,
       heading: "New user record created",
       body: `${possessivize(
-        payload.data.attributes.fullName
+        payload.data.attributes.fullName,
       )} account created.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
   [r.beUserDestroy]: () => {
@@ -120,17 +120,17 @@ export default {
       level: 0,
       heading: "The user has been deleted.",
       body: `Henceforth I quit thee from my thought, my part is ended on thy stage.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "backend-user-update": payload => {
+  "backend-user-update": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${possessivize(
-        payload.data.attributes.fullName
+        payload.data.attributes.fullName,
       )} account has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
   "backend-create-project": () => {
@@ -138,207 +138,206 @@ export default {
       level: 0,
       heading: "Your project has been created.",
       body: "A new manifold project is born.",
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "backend-project-update": payload => {
+  "backend-project-update": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.title} has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "backend-resource-create": payloadIgnored => {
+  "backend-resource-create": (payloadIgnored) => {
     return {
       level: 0,
       heading: "Your resource has been created.",
       body: "A new manifold resource is born.",
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "backend-maker-update": payload => {
+  "backend-maker-update": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.fullName} has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "backend-resource-update": payload => {
+  "backend-resource-update": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.title} has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beResourceCollectionCreate]: payloadIgnored => {
+  [r.beResourceCollectionCreate]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Your resource collection has been created.",
       body: "A new manifold collection is born.",
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beResourceCollectionUpdate]: payload => {
+  [r.beResourceCollectionUpdate]: (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.title} has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.bePermissionCreate]: payloadIgnored => {
+  [r.bePermissionCreate]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Success!",
       body: `The selected permissions have been granted.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.bePermissionDestroy]: payloadIgnored => {
+  [r.bePermissionDestroy]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Success!",
       body: `The selected permissions have been revoked.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.bePermissionUpdate]: payloadIgnored => {
+  [r.bePermissionUpdate]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Success!",
       body: `The selected permissions have been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beStylesheetUpdate]: payload => {
+  [r.beStylesheetUpdate]: (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.name} has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beStylesheetCreate]: payload => {
+  [r.beStylesheetCreate]: (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.name} has been created.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.gContactForm]: payloadIgnored => {
+  [r.gContactForm]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Success!",
       body: `Your message has been sent.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beTextCategoryCreate]: payload => {
+  [r.beTextCategoryCreate]: (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.title} has been created.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beTextCategoryUpdate]: payload => {
+  [r.beTextCategoryUpdate]: (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.title} has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.gAuthenticatedUserNotificationsUpdate]: payloadIgnored => {
+  [r.gAuthenticatedUserNotificationsUpdate]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Success!",
       body: "Your notification settings have been updated.",
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.feUnsubscribe]: payloadIgnored => {
+  [r.feUnsubscribe]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Success!",
-      body:
-        "You have been successfully unsubscribed from all email notifications.",
-      expiration: defaultExpiration
+      body: "You have been successfully unsubscribed from all email notifications.",
+      expiration: defaultExpiration,
     };
   },
-  [`${r.feUnsubscribe}-error`]: payloadIgnored => {
+  [`${r.feUnsubscribe}-error`]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Invalid Token",
       body: "Could not unsubscribe from email notification.",
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  [r.beStylesheetDestroy]: payloadIgnored => {
+  [r.beStylesheetDestroy]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Success!",
-      body: "Stylesheet successfully deleted."
+      body: "Stylesheet successfully deleted.",
     };
   },
-  [r.beContentBlockUpdate]: payloadIgnored => {
+  [r.beContentBlockUpdate]: (payloadIgnored) => {
     return {
       level: 0,
       heading: "Success!",
       body: `Content Block has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "backend-create-journal": payload => {
+  "backend-create-journal": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.title} has been created.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "backend-journal-update": payload => {
+  "backend-journal-update": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `${payload.data.attributes.title} has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "create-journal-issue": payload => {
+  "create-journal-issue": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `Issue #${payload.data.attributes.number} has been created.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "update-journal-issue": payload => {
+  "update-journal-issue": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `Issue #${payload.data.attributes.number} has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "create-journal-volume": payload => {
+  "create-journal-volume": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `Volume #${payload.data.attributes.number} has been created.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
   },
-  "update-journal-volume": payload => {
+  "update-journal-volume": (payload) => {
     return {
       level: 0,
       heading: "Success!",
       body: `Volume #${payload.data.attributes.number} has been updated.`,
-      expiration: defaultExpiration
+      expiration: defaultExpiration,
     };
-  }
+  },
 };

@@ -22,7 +22,7 @@ export default function Description({ date, description }) {
       {!!description && (
         <Styled.Description
           dangerouslySetInnerHTML={{
-            __html: description
+            __html: description,
           }}
         />
       )}

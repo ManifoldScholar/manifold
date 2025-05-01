@@ -12,7 +12,7 @@ import * as Styled from "./styles";
 export default function TextSectionsContainer({
   text,
   route: baseRoute,
-  refresh
+  refresh,
 }) {
   const { t } = useTranslation();
 
@@ -20,12 +20,12 @@ export default function TextSectionsContainer({
     const closeUrl = lh.link("backendTextSections", text.id);
 
     const { routes, ...route } = baseRoute;
-    const drawerRoutes = { ...route, routes: routes.filter(r => !r.editor) };
-    const editorRoute = { ...route, routes: [routes.find(r => r.editor)] };
+    const drawerRoutes = { ...route, routes: routes.filter((r) => !r.editor) };
+    const editorRoute = { ...route, routes: [routes.find((r) => r.editor)] };
 
     const appliesToAllStylesheets = text.relationships.stylesheets
-      ?.filter(s => s.attributes.appliesToAllTextSections)
-      .map(s => s.id);
+      ?.filter((s) => s.attributes.appliesToAllTextSections)
+      .map((s) => s.id);
 
     return (
       <>
@@ -40,14 +40,14 @@ export default function TextSectionsContainer({
             context: "editor",
             entrySide: "top",
             fullScreenTitle: t("texts.edit_section"),
-            icon: "annotate32"
+            icon: "annotate32",
           },
           childProps: {
             textId: text.id,
             appliesToAllStylesheets,
             nextPosition: text.attributes?.sectionsMap?.length + 1,
-            refresh
-          }
+            refresh,
+          },
         })}
         {childRoutes(drawerRoutes, {
           drawer: true,
@@ -56,15 +56,15 @@ export default function TextSectionsContainer({
             lockScrollClickCloses: false,
             closeUrl,
             size: "default",
-            padding: "default"
+            padding: "default",
           },
           childProps: {
             textId: text.id,
             sectionIngest: true,
             nextPosition: text.attributes?.sectionsMap?.length + 1,
             startSectionId: text?.attributes?.startTextSectionId,
-            refresh
-          }
+            refresh,
+          },
         })}
       </>
     );
@@ -133,5 +133,5 @@ TextSectionsContainer.displayName = "Text.Sections";
 
 TextSectionsContainer.propTypes = {
   text: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
 };

@@ -4,8 +4,8 @@ export default {
       endpoint: "/api/v1/texts",
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -13,7 +13,7 @@ export default {
     return {
       endpoint: `/api/v1/texts/${id}`,
       method: "GET",
-      options: {}
+      options: {},
     };
   },
 
@@ -22,8 +22,8 @@ export default {
       endpoint: `/api/v1/projects/${projectId}/relationships/texts`,
       method: "POST",
       options: {
-        body: JSON.stringify({ type: "texts", data: text })
-      }
+        body: JSON.stringify({ type: "texts", data: text }),
+      },
     };
   },
 
@@ -32,8 +32,8 @@ export default {
       endpoint: `/api/v1/texts/${id}`,
       method: "PUT",
       options: {
-        body: JSON.stringify({ type: "texts", data: text })
-      }
+        body: JSON.stringify({ type: "texts", data: text }),
+      },
     };
   },
 
@@ -41,7 +41,7 @@ export default {
     return {
       endpoint: `/api/v1/texts/${id}`,
       method: "DELETE",
-      options: {}
+      options: {},
     };
   },
 
@@ -49,7 +49,7 @@ export default {
     return {
       endpoint: `/api/v1/texts/${id}/export_epub_v3`,
       method: "PUT",
-      options: {}
+      options: {},
     };
-  }
+  },
 };

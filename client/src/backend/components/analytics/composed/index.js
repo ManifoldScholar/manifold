@@ -31,5 +31,5 @@ export default {
   ShareClicks,
   Citations,
   TextSectionViews,
-  Downloads
+  Downloads,
 };

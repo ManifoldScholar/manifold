@@ -11,7 +11,7 @@ class ChildSwitch extends React.Component {
     parentRoute: PropTypes.object,
     children: PropTypes.node,
     location: PropTypes.object,
-    match: PropTypes.object
+    match: PropTypes.object,
   };
 
   render() {
@@ -23,7 +23,7 @@ class ChildSwitch extends React.Component {
     // here because toArray adds keys to all child elements and we do not want
     // to trigger an unmount/remount for two <Route>s that render the same
     // component at different URLs.
-    React.Children.forEach(this.props.children, child => {
+    React.Children.forEach(this.props.children, (child) => {
       if (match == null && React.isValidElement(child)) {
         element = child;
 

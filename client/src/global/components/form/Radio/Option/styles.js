@@ -3,7 +3,7 @@ import {
   formLabelPrimary,
   respond,
   defaultTransitionProps,
-  defaultFocusStyle
+  defaultFocusStyle,
 } from "theme/styles/mixins";
 
 export const Instructions = styled.span`
@@ -49,7 +49,7 @@ export const WrapperLabel = styled.label`
           margin-top: 0;
           margin-left: 35px;
         }`,
-      50
+      50,
     )}
   `}
 `;
@@ -110,7 +110,6 @@ export const RadioToggle = styled.span`
   ${RadioInput}:checked ~ &::before {
     opacity: 1;
   }
-
 `;
 
 export const ToggleLabel = styled.span`

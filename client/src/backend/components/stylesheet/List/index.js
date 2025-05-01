@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
   DragDropContext,
-  Droppable
+  Droppable,
 } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import Stylesheet from "./Stylesheet";
@@ -15,14 +15,14 @@ class StylesheetList extends Component {
   static propTypes = {
     text: PropTypes.object,
     stylesheets: PropTypes.array,
-    callbacks: PropTypes.object.isRequired
+    callbacks: PropTypes.object.isRequired,
   };
 
   static getDerivedStateFromProps(props, state = {}) {
     if (props.text === state.text) return null;
     return {
       text: props.text,
-      stylesheets: props.stylesheets.slice(0)
+      stylesheets: props.stylesheets.slice(0),
     };
   }
 
@@ -31,15 +31,15 @@ class StylesheetList extends Component {
 
     this.state = {
       dragging: false,
-      ...this.constructor.getDerivedStateFromProps(props)
+      ...this.constructor.getDerivedStateFromProps(props),
     };
   }
 
-  onDragStart = draggableIgnored => {
+  onDragStart = (draggableIgnored) => {
     this.setState({ dragging: true });
   };
 
-  onDragEnd = draggable => {
+  onDragEnd = (draggable) => {
     this.setState({ dragging: false });
     if (!draggable.destination) return;
     const stylesheet = this.findStylesheet(draggable.draggableId);
@@ -57,7 +57,7 @@ class StylesheetList extends Component {
 
     const announcement = this.props.t("actions.dnd.moved_to_position", {
       title,
-      position: newIndex + 1
+      position: newIndex + 1,
     });
     const callback = () => {
       this.props.setScreenReaderStatus(announcement);
@@ -82,11 +82,13 @@ class StylesheetList extends Component {
   }
 
   findStylesheet(id) {
-    return this.stylesheets.find(ss => ss.id === id);
+    return this.stylesheets.find((ss) => ss.id === id);
   }
 
   updateInternalState(stylesheet, index) {
-    const stylesheets = this.stylesheets.filter(ss => ss.id !== stylesheet.id);
+    const stylesheets = this.stylesheets.filter(
+      (ss) => ss.id !== stylesheet.id,
+    );
     stylesheets.splice(index, 0, stylesheet);
     this.setState({ stylesheets });
   }
@@ -104,7 +106,7 @@ class StylesheetList extends Component {
                 <div
                   className={classNames({
                     "ordered-records__dropzone": true,
-                    "ordered-records__dropzone--active": this.state.dragging
+                    "ordered-records__dropzone--active": this.state.dragging,
                   })}
                   ref={provided.innerRef}
                   {...provided.droppableProps}

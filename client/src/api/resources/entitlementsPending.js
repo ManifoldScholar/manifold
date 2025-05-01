@@ -4,8 +4,8 @@ export default {
       endpoint: `/api/v1/pending_entitlements`,
       method: "GET",
       options: {
-        params: { filter, page }
-      }
+        params: { filter, page },
+      },
     };
   },
 
@@ -16,16 +16,16 @@ export default {
       options: {
         body: JSON.stringify({
           type: "pending_entitlements",
-          data: entitlement
-        })
-      }
+          data: entitlement,
+        }),
+      },
     };
   },
 
   show(id) {
     return {
       endpoint: `/api/v1/pending_entitlements/${id}`,
-      method: "GET"
+      method: "GET",
     };
   },
 
@@ -36,16 +36,16 @@ export default {
       options: {
         body: JSON.stringify({
           type: "pending_entitlements",
-          data: entitlement
-        })
-      }
+          data: entitlement,
+        }),
+      },
     };
   },
 
   destroy(id) {
     return {
       endpoint: `/api/v1/pending_entitlements/${id}`,
-      method: "DELETE"
+      method: "DELETE",
     };
-  }
+  },
 };

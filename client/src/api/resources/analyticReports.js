@@ -3,7 +3,7 @@ export default {
     return {
       endpoint: "/api/v1/analytics/reports",
       method: "GET",
-      options: { params }
+      options: { params },
     };
-  }
+  },
 };

@@ -11,5 +11,5 @@ export default {
   Text,
   Iframe,
   Math,
-  Video
+  Video,
 };

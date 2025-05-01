@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import {
   defaultTransitionProps,
   filterSelectBase,
-  utilityPrimary
+  utilityPrimary,
 } from "theme/styles/mixins";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 import IconComposer from "global/components/utility/IconComposer";

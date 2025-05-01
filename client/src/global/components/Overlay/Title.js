@@ -16,7 +16,7 @@ Title.displayName = "Global.Overlay.Header.Title";
 Title.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default Title;

@@ -5,7 +5,7 @@ export default class Copyright extends PureComponent {
   static displayName = "Global.Footers.Parts.Copyright";
 
   static defaultProps = {
-    type: "library"
+    type: "library",
   };
 
   get isStandalone() {
@@ -23,7 +23,7 @@ export default class Copyright extends PureComponent {
     return (
       <div
         dangerouslySetInnerHTML={{
-          __html: this.settings.attributes.copyrightFormatted
+          __html: this.settings.attributes.copyrightFormatted,
         }}
       />
     );

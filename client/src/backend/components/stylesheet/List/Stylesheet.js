@@ -20,7 +20,7 @@ class StylesheetList extends PureComponent {
     isDragging: PropTypes.bool,
     index: PropTypes.number,
     stylesheetCount: PropTypes.number,
-    onKeyboardMove: PropTypes.func
+    onKeyboardMove: PropTypes.func,
   };
 
   constructor(props) {
@@ -52,7 +52,7 @@ class StylesheetList extends PureComponent {
     return lh.link(
       "BackendTextStylesheetEdit",
       this.text.id,
-      this.stylesheet.id
+      this.stylesheet.id,
     );
   }
 
@@ -60,7 +60,7 @@ class StylesheetList extends PureComponent {
     return this.props.index;
   }
 
-  confirmDestroy = event => {
+  confirmDestroy = (event) => {
     event.preventDefault();
     this.callbacks.confirmDestroy(this.stylesheet);
   };
@@ -82,7 +82,7 @@ class StylesheetList extends PureComponent {
               {...provided.draggableProps}
               className={classNames({
                 [`${baseClass}`]: true,
-                [`${baseClass}--is-dragging`]: snapshot.isDragging
+                [`${baseClass}--is-dragging`]: snapshot.isDragging,
               })}
             >
               <div className={`${baseClass}__inner`}>
@@ -159,9 +159,9 @@ class StylesheetList extends PureComponent {
                                 if (this.popoverDisclosureRef?.current) {
                                   this.popoverDisclosureRef.current.focus();
                                 }
-                              }
+                              },
                             }),
-                          disabled: index === 0
+                          disabled: index === 0,
                         },
                         {
                           id: "down",
@@ -176,10 +176,10 @@ class StylesheetList extends PureComponent {
                                 if (this.popoverDisclosureRef?.current) {
                                   this.popoverDisclosureRef.current.focus();
                                 }
-                              }
+                              },
                             }),
-                          disabled: index === stylesheetCount - 1
-                        }
+                          disabled: index === stylesheetCount - 1,
+                        },
                       ]}
                     />
                   </div>

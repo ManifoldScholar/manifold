@@ -2,7 +2,7 @@ import has from "lodash/has";
 import {
   isMathMLNode,
   findMathTagNode,
-  findFirstMathUuidNode
+  findFirstMathUuidNode,
 } from "./mathHelpers";
 
 const closest = (el, selector) => {
@@ -21,7 +21,7 @@ const closest = (el, selector) => {
   return element;
 };
 
-const findClosestTextNode = node => {
+const findClosestTextNode = (node) => {
   if (isMathMLNode(node)) {
     const mathTagNode = findMathTagNode(node);
     return findFirstMathUuidNode(mathTagNode);
@@ -66,7 +66,7 @@ const selectionMatchesAnnotation = (selectionState, annotation) => {
   const compare = selectionState.selectionAnnotation;
   if (!annotation || !compare) return false;
   const {
-    attributes: { endChar, endNode, startChar, startNode }
+    attributes: { endChar, endNode, startChar, startNode },
   } = annotation;
   const match =
     endChar === compare.endChar &&
@@ -80,5 +80,5 @@ export default {
   closest,
   findClosestTextNode,
   parentContainsSelection,
-  selectionMatchesAnnotation
+  selectionMatchesAnnotation,
 };

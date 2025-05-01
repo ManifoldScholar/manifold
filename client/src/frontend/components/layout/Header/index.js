@@ -34,5 +34,5 @@ LayoutHeader.propTypes = {
   notifications: PropTypes.object,
   commonActions: PropTypes.object,
   settings: PropTypes.object,
-  pages: PropTypes.array
+  pages: PropTypes.array,
 };

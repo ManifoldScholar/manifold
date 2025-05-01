@@ -18,11 +18,11 @@ export default class ListEntitiesListButtonSet extends PureComponent {
     authorizedTo: PropTypes.string,
     onClick: PropTypes.func,
     className: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
-    tag: "link"
+    tag: "link",
   };
 
   get path() {
@@ -67,7 +67,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
   render() {
     const buttonClassNames = classNames(this.props.className, {
       "entity-list__button": true,
-      "button-lozenge-secondary": true
+      "button-lozenge-secondary": true,
     });
 
     const { tag, onClick } = this.props;
@@ -86,7 +86,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
       >
         {this.icon && <Utility.IconComposer icon={this.icon} />}
         <span>{this.text}</span>
-      </Tag>
+      </Tag>,
     );
   }
 }

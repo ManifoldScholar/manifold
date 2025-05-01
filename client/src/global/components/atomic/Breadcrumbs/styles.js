@@ -5,7 +5,7 @@ import {
   respond,
   utilityPrimary,
   containerPrototype,
-  defaultTransitionProps
+  defaultTransitionProps,
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -28,7 +28,7 @@ export const Outer = styled.nav`
     padding: 18px 0 20px;
     font-size: 14px;
   `,
-    40
+    40,
   )}
 `;
 

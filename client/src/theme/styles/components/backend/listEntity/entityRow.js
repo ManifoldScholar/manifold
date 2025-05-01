@@ -9,7 +9,7 @@ import {
   panelRounded,
   rgba,
   blockLabelRound,
-  breakpointLessOne
+  breakpointLessOne,
 } from "theme/styles/mixins";
 
 export default `
@@ -47,7 +47,7 @@ export default `
           padding: 20px 25px;
           border-bottom: 0;
         `,
-          65
+          65,
         )}
       }
 
@@ -162,7 +162,7 @@ export default `
               color: inherit;
               box-shadow: 0 31px 26px -13px ${rgba("neutralBlack", 0.33)};
             `,
-            65
+            65,
           )}
         }
       }
@@ -384,7 +384,7 @@ export default `
             }
           }
         `,
-          65
+          65,
         )}
       }
 
@@ -425,7 +425,7 @@ export default `
         `&--in-grid {
       font-size: 16px;
     }`,
-        65
+        65,
       )}
     }
 
@@ -449,7 +449,7 @@ export default `
         ${respond(
           `text-decoration-line: underline;`,
           breakpointLessOne(65),
-          "max"
+          "max",
         )}
       }
 
@@ -477,7 +477,7 @@ export default `
         `&--in-grid {
       font-size: 16px;
     }`,
-        65
+        65,
       )}
     }
 
@@ -490,7 +490,7 @@ export default `
         `&--in-grid {
       font-size: 16px;
     }`,
-        65
+        65,
       )}
 
       em {

@@ -11,11 +11,11 @@ import lh from "helpers/linkHandler";
 
 export default function JournalIssuesList({ journal }) {
   const { pagination, filters } = useListQueryParams({
-    initFilters: { journal_id: journal.id, volume_is_nil: true }
+    initFilters: { journal_id: journal.id, volume_is_nil: true },
   });
 
   const { data: issues, meta } = useFetch({
-    request: [journalIssuesAPI.index, filters, pagination]
+    request: [journalIssuesAPI.index, filters, pagination],
   });
 
   const { t } = useTranslation();
@@ -24,28 +24,28 @@ export default function JournalIssuesList({ journal }) {
 
   const { titlePlaintext, slug } = journal?.attributes || {};
   const containerTitle = `${titlePlaintext}: ${t(
-    "glossary.issue_truncated_title_case_other"
+    "glossary.issue_truncated_title_case_other",
   )}`;
 
   const breadcrumbs = useMemo(() => {
     const nestedCrumbs = [
       {
         to: lh.link("frontendJournalDetail", slug),
-        label: titlePlaintext
+        label: titlePlaintext,
       },
       {
         to: lh.link("frontendJournalAllIssues", slug),
-        label: t("navigation.breadcrumbs.issues")
-      }
+        label: t("navigation.breadcrumbs.issues"),
+      },
     ];
     return libraryDisabled
       ? nestedCrumbs
       : [
           {
             to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
+            label: t("navigation.breadcrumbs.all_journals"),
           },
-          ...nestedCrumbs
+          ...nestedCrumbs,
         ];
   }, [slug, t, titlePlaintext, libraryDisabled]);
 

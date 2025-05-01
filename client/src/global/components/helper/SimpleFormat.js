@@ -4,11 +4,11 @@ import he from "he";
 import loadable from "@loadable/component";
 import { nl2br } from "utils/string";
 
-const Loaded = loadable.lib(() =>
-  import(/* webpackChunkName: "autolinker" */ "autolinker")
+const Loaded = loadable.lib(
+  () => import(/* webpackChunkName: "autolinker" */ "autolinker"),
 );
 
-const formattedText = props => {
+const formattedText = (props) => {
   const sanitized = he.encode(props.text);
   const formatted = nl2br(sanitized);
 
@@ -17,7 +17,7 @@ const formattedText = props => {
       {({ default: autolinker }) => (
         <p
           dangerouslySetInnerHTML={{
-            __html: autolinker.link(formatted)
+            __html: autolinker.link(formatted),
           }}
         />
       )}
@@ -26,7 +26,7 @@ const formattedText = props => {
 };
 
 formattedText.propTypes = {
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
 };
 
 export default class SimpleFormat extends PureComponent {
@@ -34,12 +34,12 @@ export default class SimpleFormat extends PureComponent {
     text: PropTypes.string.isRequired,
     wrapperTag: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     postfix: PropTypes.string,
-    wrapperTagProps: PropTypes.object
+    wrapperTagProps: PropTypes.object,
   };
 
   static defaultProps = {
     wrapperTag: "div",
-    wrapperTagProps: {}
+    wrapperTagProps: {},
   };
 
   render() {
@@ -47,7 +47,7 @@ export default class SimpleFormat extends PureComponent {
     return createElement(
       wrapperTag,
       wrapperTagProps,
-      formattedText(this.props)
+      formattedText(this.props),
     );
   }
 }

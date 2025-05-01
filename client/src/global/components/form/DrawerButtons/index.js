@@ -13,14 +13,14 @@ export default function DrawerButtons({
   disableSubmit = false,
   onSaveClick,
   onSaveAndCloseClick,
-  saveRef
+  saveRef,
 }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const buttonClasses = "button-secondary button-secondary--outlined";
 
-  const handleCancelClick = e => {
+  const handleCancelClick = (e) => {
     e.preventDefault();
     navigate(cancelUrl ?? -1);
   };
@@ -31,7 +31,7 @@ export default function DrawerButtons({
         type="submit"
         className={classNames(buttonClasses, {
           "button-secondary--dull": disableSubmit,
-          disabled: disableSubmit
+          disabled: disableSubmit,
         })}
         disabled={disableSubmit}
         onClick={onSaveClick}
@@ -44,7 +44,7 @@ export default function DrawerButtons({
           type="submit"
           className={classNames(buttonClasses, {
             "button-secondary--dull": disableSubmit,
-            disabled: disableSubmit
+            disabled: disableSubmit,
           })}
           disabled={disableSubmit}
           onClick={onSaveAndCloseClick}
@@ -68,5 +68,5 @@ DrawerButtons.propTypes = {
   showCancel: PropTypes.bool,
   cancelUrl: PropTypes.string,
   submitLabel: PropTypes.string,
-  disableSubmit: PropTypes.bool
+  disableSubmit: PropTypes.bool,
 };

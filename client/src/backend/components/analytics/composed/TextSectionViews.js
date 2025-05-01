@@ -10,11 +10,11 @@ class TextSectionViews extends Component {
   static propTypes = {
     withSort: PropTypes.bool,
     data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
   static defaultProps = {
-    withSort: false
+    withSort: false,
   };
 
   get data() {
@@ -41,12 +41,12 @@ class TextSectionViews extends Component {
 
   viewCountForSection(section) {
     const rowData = Array.isArray(this.data)
-      ? this.data.find(entry => entry.id === section.id)
+      ? this.data.find((entry) => entry.id === section.id)
       : null;
     return rowData ? rowData.count : 0;
   }
 
-  visitTocEntry = node => {
+  visitTocEntry = (node) => {
     const { children, ...row } = node;
     row.count = this.viewCountForSection(row);
     if (children) {
@@ -65,7 +65,7 @@ class TextSectionViews extends Component {
         <TextNodeTable
           headers={[
             this.props.t("analytics.section_title"),
-            this.props.t("analytics.view_count")
+            this.props.t("analytics.view_count"),
           ]}
           rows={this.rows}
           slug={this.slug}

@@ -18,19 +18,19 @@ export class ProjectCollectionDetail extends PureComponent {
     match: PropTypes.object,
     history: PropTypes.object,
     route: PropTypes.object,
-    t: PropTypes.func
+    t: PropTypes.func,
   };
 
-  handleProjectOrderChange = result => {
+  handleProjectOrderChange = (result) => {
     const id = result.id;
     const changes = { attributes: { position: result.position } };
     const options = { noTouch: true };
     this.props.updateCollectionProject(id, changes, options);
   };
 
-  handleSortOrderChange = order => {
+  handleSortOrderChange = (order) => {
     this.props.updateProjectCollection({
-      attributes: { sortOrder: order.sortBy }
+      attributes: { sortOrder: order.sortBy },
     });
   };
 
@@ -39,7 +39,7 @@ export class ProjectCollectionDetail extends PureComponent {
       lockScroll: "always",
       size: "flexible",
       padding: "large",
-      closeUrl: lh.link("backendProjectCollection", props.projectCollection.id)
+      closeUrl: lh.link("backendProjectCollection", props.projectCollection.id),
     };
   }
 
@@ -47,13 +47,13 @@ export class ProjectCollectionDetail extends PureComponent {
     const { collectionProjects, projectCollection, t } = this.props;
 
     if (!projectCollection || !collectionProjects) return null;
-    const projects = collectionProjects.map(cp => cp.relationships.project);
+    const projects = collectionProjects.map((cp) => cp.relationships.project);
 
     return (
       <Authorize
         entity={projectCollection}
         failureFatalError={{
-          detail: t("project_collections.unauthorized_edit")
+          detail: t("project_collections.unauthorized_edit"),
         }}
         ability="update"
       >
@@ -77,7 +77,7 @@ export class ProjectCollectionDetail extends PureComponent {
           {childRoutes(this.props.route, {
             childProps: this.props,
             drawer: true,
-            drawerProps: this.drawerProps(this.props)
+            drawerProps: this.drawerProps(this.props),
           })}
         </div>
       </Authorize>

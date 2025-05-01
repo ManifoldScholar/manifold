@@ -5,5 +5,5 @@ import Partial from "./partial";
 export default {
   ReaderDrawer,
   FilteredList,
-  Partial
+  Partial,
 };

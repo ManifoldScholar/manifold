@@ -15,7 +15,7 @@ export function generateError(key, block) {
   const blockEditLink = lh.link(
     "backendProjectContentBlock",
     projectId,
-    block.id
+    block.id,
   );
 
   const availableErrors = {
@@ -25,10 +25,10 @@ export function generateError(key, block) {
           i18nKey="errors.content_block.no_contents"
           components={[<Link to={blockEditLink} />]}
         />
-      )
+      ),
     },
     "Content::RecentActivityBlock": {
-      has_activity: <Trans i18nKey="errors.content_block.no_activity" />
+      has_activity: <Trans i18nKey="errors.content_block.no_activity" />,
     },
     "Content::MarkdownBlock": {
       body: (
@@ -36,7 +36,7 @@ export function generateError(key, block) {
           i18nKey="errors.content_block.no_markdown"
           components={[<Link to={blockEditLink} />]}
         />
-      )
+      ),
     },
     "Content::TextsBlock": {
       texts: (
@@ -44,10 +44,10 @@ export function generateError(key, block) {
           i18nKey="errors.content_block.no_texts"
           components={[
             <Link to={getProjectEditLink("backendProjectTexts")} />,
-            <Link to={blockEditLink} />
+            <Link to={blockEditLink} />,
           ]}
         />
-      )
+      ),
     },
     "Content::ResourcesBlock": {
       resources_or_collections: (
@@ -57,21 +57,21 @@ export function generateError(key, block) {
             <Link to={getProjectEditLink("backendProjectResources")} />,
             <Link
               to={getProjectEditLink("backendProjectResourceCollections")}
-            />
+            />,
           ]}
         />
-      )
+      ),
     },
     "Content::MetadataBlock": {
       has_metadata: (
         <Trans
           i18nKey="errors.content_block.no_metadata"
           components={[
-            <Link to={getProjectEditLink("backendProjectMetadata")} />
+            <Link to={getProjectEditLink("backendProjectMetadata")} />,
           ]}
         />
-      )
-    }
+      ),
+    },
   };
 
   if (!has(availableErrors, [type, key])) return null;
@@ -82,7 +82,7 @@ export function getDefaultError(block) {
   const blockEditLink = lh.link(
     "backendProjectContentBlock",
     block.relationships.project.id,
-    block.id
+    block.id,
   );
   return (
     <span key="default-error">
