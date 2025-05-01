@@ -27,7 +27,7 @@ module Testing
 
     delegate :get, :post, :put, :patch, :delete, to: :client
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       @client = Class.new(HTTPClient)
