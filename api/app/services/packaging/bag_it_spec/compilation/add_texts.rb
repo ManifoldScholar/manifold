@@ -12,12 +12,16 @@ module Packaging
         # @param [<Packaging::BagItSpec::TextProxy>] texts
         # @param [Hash] state
         # @return [void]
-        def call(bag:, texts:, **_state)
+        def call
+          state => { bag:, texts: }
+
           texts.each do |text|
             text.entries.each_value do |entry|
               entry.add_to! bag
             end
           end
+
+          Success()
         end
       end
     end

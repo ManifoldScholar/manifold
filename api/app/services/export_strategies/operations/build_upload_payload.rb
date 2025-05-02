@@ -8,8 +8,8 @@ module ExportStrategies
 
       # @param [{ Symbol => Object }] state
       # @return [ExportStrategies::UploadPayload]
-      def call(state)
-        ExportStrategies::UploadPayload.new state
+      def call(**state)
+        Success ExportStrategies::UploadPayload.new state
       end
     end
   end

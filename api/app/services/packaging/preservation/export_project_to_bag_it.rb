@@ -8,7 +8,6 @@ module Packaging
     # @see ProjectExport
     class ExportProjectToBagIt < ActiveInteraction::Base
       include MonadicInteraction
-      # include Packaging::BagItSpec::Import[bagit_pipeline: "compilation.pipeline"]
 
       TEXT_ASSOCIATIONS = [
         :text_sections,
@@ -47,6 +46,10 @@ module Packaging
         return @project_export
       end
 
+      def bagit_pipeline
+        @bagit_pipeline ||= Packaging::BagItSpec::Container["compilation.pipeline"]
+      end
+
       private
 
       # @return [void]
@@ -61,7 +64,8 @@ module Packaging
         step_args = {
           finalize!: [{ project_export: @project_export }]
         }
-        Packaging::BagItSpec::Container["compilation.pipeline"].with_step_args(**step_args).call(project) do |m|
+
+        bagit_pipeline.with_step_args(**step_args).call(project) do |m|
           m.success do |result|
             @project_context = result
           end

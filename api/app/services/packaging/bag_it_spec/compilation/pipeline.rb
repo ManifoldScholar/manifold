@@ -7,33 +7,29 @@ module Packaging
       class Pipeline
         include Packaging::BagItSpec::PipelinedTransaction
 
+        around :provide_state!, with: "utilities.provide_state"
+
         step :prepare!, with: "compilation.prepare"
 
-        batch_map_state :prepare_text!, with: "compilation.prepare_text",
-          source: ->(state) { state[:context].all_texts },
-          target: :texts
+        step :prepare_texts!, with: "compilation.prepare_texts"
 
-        batch_map_state :prepare_resources!, with: "compilation.prepare_resource",
-          source: ->(state) { state[:context].resources },
-          target: :resources
+        step :prepare_resources!, with: "compilation.prepare_resources"
 
-        pipe :add_texts!, with: "compilation.add_texts"
+        step :add_texts!, with: "compilation.add_texts"
 
-        pipe :add_resources!, with: "compilation.add_resources"
+        step :add_resources!, with: "compilation.add_resources"
 
-        pipe :write_project_entries!, with: "compilation.write_project_entries"
+        step :write_project_entries!, with: "compilation.write_project_entries"
 
-        pipe_into :generate_bag_info!, with: "compilation.generate_bag_info",
-          target: :bag_info
+        step :generate_bag_info!, with: "compilation.generate_bag_info"
 
-        pipe :write_bag_info!, with: "compilation.write_bag_info"
+        step :write_bag_info!, with: "compilation.write_bag_info"
 
-        pipe :build_manifest!, with: "compilation.build_manifest"
+        step :build_manifest!, with: "compilation.build_manifest"
 
-        pipe_into :build_archive!, with: "compilation.build_archive",
-          target: :archive
+        step :build_archive!, with: "compilation.build_archive"
 
-        pipe :finalize!, with: "compilation.finalize"
+        step :finalize!, with: "compilation.finalize"
       end
     end
   end

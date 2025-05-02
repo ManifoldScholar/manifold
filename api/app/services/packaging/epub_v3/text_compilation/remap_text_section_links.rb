@@ -6,13 +6,13 @@ module Packaging
       # Remap {ReferencedPathStrategy::TextSectionLink text section links}
       # within the referenced items.
       class RemapTextSectionLinks
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
 
         # @param [Hash] state
         # @option state [Packaging::EpubV3::PackageContext] :package_context
         # @option state [<Packaging::EpubV3::GroupedReferencedItem>] :referenced_items
         # @return [void]
-        def call(state)
+        def call
           state[:referenced_items].select(&:text_section_link?).each do |item|
             referenced_section = state[:package_context].find_text_section_by_id item.text_section_id
 
@@ -27,6 +27,8 @@ module Packaging
 
             item.update_references_to! referenced_section.remapped_path
           end
+
+          Success()
         end
       end
     end
