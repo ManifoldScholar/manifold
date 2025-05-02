@@ -3,7 +3,7 @@
 module Analytics
   class RecordLeaveEvent < Analytics::RecordScopedEvent
     def execute
-      Analytics::RecordLeaveEventJob.perform_later(job_params)
+      Analytics::RecordLeaveEventJob.perform_later(**job_params)
     end
 
     private

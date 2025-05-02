@@ -35,6 +35,7 @@ class ReadingGroupAuthorizer < ApplicationAuthorizer
   end
 
   def moderator?(user)
+    return false if user.instance_of?(AnonymousUser)
     user.has_role?(:moderator, resource)
   end
 
