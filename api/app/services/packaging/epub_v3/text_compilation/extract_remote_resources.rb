@@ -8,12 +8,12 @@ module Packaging
       #
       # @see Packaging::EpubV3::TextSectionCompilation::ExtractStylesheets
       class ExtractRemoteResources
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
         include CachedExternalSources::Import[fetch_external_source: "pipeline"]
 
         # @param [Hash] state
         # @return [<Packaging::EpubV3::RemoteResourceItem>]
-        def call(state)
+        def call
           remote_resources = state[:text_sections].flat_map(&:remote_resources).uniq
 
           remote_resources.map do |remote_resource|
@@ -27,6 +27,10 @@ module Packaging
               end
             end
           end
+
+          state[:remote_resources] = remote_resources
+
+          Success()
         end
       end
     end

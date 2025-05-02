@@ -8,13 +8,13 @@ module Packaging
       # that point to the manifold paths to use
       # {Packaging::EpubV3::IngestionSourceItem#remapped_path the internal epub path}.
       class ExtractAndRemapIngestionSources
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
 
         # @param [Hash] state
         # @option state [<Packaging::EpubV3::GroupedReferencedItem>] :referenced_items
         # @option state [Text] :text
         # @return [void]
-        def call(state)
+        def call
           state[:ingestion_sources] = []
 
           state[:referenced_items].select(&:has_ingestion_source?).each do |item|
@@ -26,6 +26,8 @@ module Packaging
 
             item.update_references_to! source_item.remapped_path
           end
+
+          Success()
         end
       end
     end

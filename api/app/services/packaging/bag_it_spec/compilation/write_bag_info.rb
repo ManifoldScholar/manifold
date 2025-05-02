@@ -11,8 +11,12 @@ module Packaging
         # @param [{ String => String }] bag_info
         # @param [Hash] state
         # @return [void]
-        def call(bag:, bag_info:, **_state)
+        def call
+          state => { bag:, bag_info: }
+
           bag.write_bag_info bag_info
+
+          Success()
         end
       end
     end

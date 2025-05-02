@@ -10,7 +10,7 @@ module Packaging
         # @param [Hash] state
         # @option state [Packaging::BagItSpec::Context] :context
         # @return [Tempfile]
-        def call(state)
+        def call
           build_path = state[:context].build_path
 
           file = Tempfile.open(["bagit", ".zip"], encoding: "ascii-8bit")
@@ -29,7 +29,9 @@ module Packaging
             end
           end
 
-          return file
+          state[:archive] = file
+
+          Success()
         end
       end
     end

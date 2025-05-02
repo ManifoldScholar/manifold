@@ -10,7 +10,7 @@ module Packaging
         # @param [Resource] resource
         # @return [Packaging::BagItSpec::Resources::Proxy]
         def call(resource)
-          Packaging::BagItSpec::Resources::Proxy.new resource
+          Success Packaging::BagItSpec::Resources::Proxy.new resource
         end
       end
     end

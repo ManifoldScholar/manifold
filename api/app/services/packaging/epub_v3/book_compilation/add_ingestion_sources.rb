@@ -7,7 +7,7 @@ module Packaging
         include Packaging::PipelineOperation
 
         # @param [Packaging::EpubV3::BookContext] context
-        # @return [void]
+        # @return [Dry::Monads::Success(Packaging::EpubV3::BookContext)]
         def call(context)
           context.with!(:book, :compiled_text) do |book, compiled_text|
             compiled_text.ingestion_sources.each do |ingestion_source|
@@ -18,6 +18,8 @@ module Packaging
               item.set_media_type ingestion_source.content_type
             end
           end
+
+          Success context
         end
       end
     end

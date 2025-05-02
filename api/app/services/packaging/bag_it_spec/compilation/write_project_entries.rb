@@ -13,10 +13,14 @@ module Packaging
         # @param [Packaging::BagItSpec::Context] context
         # @param [Hash] state
         # @return [void]
-        def call(bag:, context:, **_state)
+        def call
+          state => { bag:, context: }
+
           context.each_entry do |entry|
             entry.add_to! bag
           end
+
+          Success()
         end
       end
     end

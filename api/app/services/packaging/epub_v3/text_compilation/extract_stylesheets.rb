@@ -8,13 +8,15 @@ module Packaging
       #
       # @see Packaging::EpubV3::TextSectionCompilation::ExtractStylesheets
       class ExtractStylesheets
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
 
         # @param [Hash] state
         # @option state [<Packaging::EpubV3::TextSectionItem>] :text_sections
-        # @return [<Packaging::EpubV3::StylesheetItem>]
-        def call(state)
-          state[:text_sections].flat_map(&:stylesheets).uniq
+        # @return [Dry::Monads::Success(void)]
+        def call
+          state[:stylesheets] = state[:text_sections].flat_map(&:stylesheets).uniq
+
+          Success()
         end
       end
     end

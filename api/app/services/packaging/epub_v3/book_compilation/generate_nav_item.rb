@@ -8,11 +8,13 @@ module Packaging
         include Packaging::PipelineOperation
 
         # @param [Packaging::EpubV3::BookContext] context
-        # @return [void]
+        # @return [Dry::Monads::Success(Packaging::EpubV3::BookContext)]
         def call(context)
           context.with! :book, :namespace_set do |book, namespace_set|
             compile_nav_item! book, namespace_set
           end
+
+          Success context
         end
 
         # @param [GEPUB::Book] book
@@ -34,7 +36,7 @@ module Packaging
 
         # @param [GEPUB::Book] book
         # @param [Nokogiri::XML::Builder] builder
-        # @return [void]
+        # @return [Dry::Monads::Success(Packaging::EpubV3::BookContext)]
         def add_nav_item!(book, builder)
           content = builder.to_xml encoding: "utf-8"
 

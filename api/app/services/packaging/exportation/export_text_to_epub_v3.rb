@@ -4,7 +4,6 @@ module Packaging
   module Exportation
     class ExportTextToEpubV3 < ActiveInteraction::Base
       include MonadicInteraction
-      include Packaging::EpubV3::Import[book_pipeline: "book_compilation.pipeline"]
 
       record :text
 
@@ -24,8 +23,8 @@ module Packaging
           step_args = {
             finalize!: [text_export: @text_export]
           }
-          operation = Packaging::EpubV3::Container["book_compilation.pipeline"]
-          operation.with_step_args(**step_args).call(text) do |m|
+
+          book_pipeline.with_step_args(**step_args).call(text) do |m|
             m.success do |result|
               @book_context = result
             end
@@ -37,6 +36,10 @@ module Packaging
         end
 
         return @text_export
+      end
+
+      def book_pipeline
+        @book_pipeline ||= Packaging::EpubV3::Container["book_compilation.pipeline"]
       end
     end
   end
