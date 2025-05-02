@@ -11,6 +11,7 @@ class IngestionSource < ApplicationRecord
   include SerializedAbilitiesFor
   include SearchIndexable
   include Attachments
+  include HasKeywordSearch
   self.authorizer_name = "ProjectChildAuthorizer"
 
   classy_enum_attr :kind, enum: "IngestionSourceKind", allow_blank: false
@@ -53,6 +54,7 @@ class IngestionSource < ApplicationRecord
   end
 
   # Search
+  has_keyword_search! against: TYPEAHEAD_ATTRIBUTES
   searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
              callbacks: :async,
              batch_size: 500)
