@@ -90,7 +90,7 @@ module Ingestions
           line.strip!
           space = "  #{line}\n"
           tab = "    #{line}\n"
-          out = "#{out}#{line.end_with?('{', '}') ? space : tab}'"
+          out = "#{out}#{line.end_with?('{', '}') ? space : tab}"
         end
         out
       end
