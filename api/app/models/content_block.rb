@@ -16,7 +16,7 @@ class ContentBlock < ApplicationRecord
   # Ordering
   acts_as_list scope: :project
 
-  enum access: {
+  enum :access, {
     always: 0,
     authorized: 1,
     unauthorized: 2
