@@ -8,7 +8,7 @@ GlobalID::Locator.use :entitlements do |gid|
   when "SystemEntitlement"
     case gid.model_id
     when *SystemEntitlementKind
-      SystemEntitlement.upsert! kind: gid.model_id
+      SystemEntitlement.upsert!({ kind: gid.model_id })
     when UUID.method(:validate)
       SystemEntitlement.find gid.model_id
     end
