@@ -2,7 +2,10 @@
 
 # A resource is any asset our source document that is associated with a text.
 class ResourceImport < ApplicationRecord
-  include Statesman::Adapters::ActiveRecordQueries
+  include Statesman::Adapters::ActiveRecordQueries[
+    initial_state: :pending,
+    transition_class: ResourceImportTransition,
+  ]
   include TrackedCreator
   include Attachments
 
@@ -30,15 +33,6 @@ class ResourceImport < ApplicationRecord
       transition_class: ResourceImportTransition
     )
   end
-
-  def self.transition_class
-    ResourceImportTransition
-  end
-
-  def self.initial_state
-    :pending
-  end
-  private_class_method :initial_state
 
   def self.attachment_columns
     %w(attachment high_res variant_thumbnail variant_poster variant_format_one
