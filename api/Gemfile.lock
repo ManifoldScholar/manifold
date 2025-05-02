@@ -757,7 +757,7 @@ GEM
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
       spring (>= 4)
-    statesman (3.5.0)
+    statesman (9.0.1)
     statesman-events (0.0.1)
       statesman (>= 1.3)
     store_model (2.2.0)
@@ -972,7 +972,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec (~> 1.0.4)
   spring-watcher-listen (~> 2.1.0)
-  statesman (~> 3.4)
+  statesman (= 9.0.1)
   statesman-events (~> 0.0.1)
   store_model (~> 2.2.0)
   strip_attributes (~> 1.13.0)

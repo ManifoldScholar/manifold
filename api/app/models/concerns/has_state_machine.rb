@@ -42,9 +42,7 @@ module HasStateMachine
     raise NotImplementedError, "Must implement a state machine"
   end
 
-  class_methods do
-    include Statesman::Adapters::ActiveRecordQueries::ClassMethods
-
+  module ClassMethods
     def has_state_machine!(initial_state:, enum_klass: default_enum_klass, machine_klass: default_machine_klass, transition_klass: default_transition_klass)
       config.initial_state = initial_state
       config.transition_klass = transition_klass
@@ -56,6 +54,11 @@ module HasStateMachine
       const_set(:StandardStateMachineMethods, mod)
 
       include mod
+
+      include Statesman::Adapters::ActiveRecordQueries[
+        initial_state:,
+        transition_class: transition_klass,
+      ]
 
       has_many :transitions, class_name: transition_klass.name, dependent: :destroy, autosave: false, inverse_of: model_name.i18n_key
 
