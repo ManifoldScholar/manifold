@@ -193,7 +193,6 @@ module Patches
     # @option options [Symbol, nil] guard_target
     # @return [Boolean]
     def ensure_transitionable!(target_state, on:, error: :cannot_transition, **options)
-
       model = on.is_a?(Symbol) ? __send__(on) : on
 
       return true if model.can_transition_to? target_state

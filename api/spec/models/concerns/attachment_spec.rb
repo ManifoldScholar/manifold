@@ -19,7 +19,7 @@ RSpec.describe Attachments do
     end
 
     model do
-      include  Attachments
+      include Attachments
 
       manifold_has_attached_file :attached, :image
       manifold_has_attached_file :resource, :resource

@@ -141,11 +141,11 @@ class Project < ApplicationRecord
   validates :draft, inclusion: { in: [true, false] }
   validates :restricted_access_heading, :restricted_access_body, presence: { if: :restricted_access }
 
-  enum standalone_mode: {
+  enum :standalone_mode, {
     disabled: 0,
     enabled: 1,
     enforced: 2
-  }, _prefix: true
+  }, prefix: true
 
   # Attachments
   manifold_has_attached_file :cover, :image

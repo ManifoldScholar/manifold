@@ -582,6 +582,10 @@ RSpec/DescribeClass:
   Exclude:
     - spec/requests/**/*.rb
 
+# False positives
+RSpec/DescribedClass:
+  Enabled: false
+
 RSpec/DuplicatedMetadata:
   Enabled: true
 
@@ -660,6 +664,10 @@ RSpec/ReceiveMessages:
 
 RSpec/RedundantAround:
   Enabled: true
+
+# False positives
+RSpec/RedundantPredicateMatcher:
+  Enabled: false
 
 # The next two cops don't work right when using helpers that set up contexts
 RSpec/RepeatedDescription:
