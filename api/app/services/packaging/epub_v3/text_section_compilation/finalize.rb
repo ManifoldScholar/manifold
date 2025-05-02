@@ -6,7 +6,7 @@ module Packaging
       # Compile the accumulated state from the previous steps into
       # a {Packaging::EpubV3::TextSectionItem finalized text section proxy}.
       class Finalize
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
 
         # @param [Hash] state
         # @option state [Nokogiri::HTML::Document] :document
@@ -15,10 +15,14 @@ module Packaging
         # @option state [<Packaging::EpubV3::StylesheetItem>] :stylesheets
         # @option state [TextSection] :text_section
         # @return [Dry::Types::Result(Packaging::EpubV3::TextSectionItem)]
-        def call(state)
+        def call
           state[:namespace_set] = HTMLNodes::ExtractNamespaces.run! state
 
-          Success(Packaging::EpubV3::TextSectionItem.new(state))
+          item = Packaging::EpubV3::TextSectionItem.new(state)
+
+          self.pipeline_result = item
+
+          Success item
         end
       end
     end

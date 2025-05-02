@@ -22,9 +22,11 @@ module ExportStrategies
 
         return Failure([:empty_path, "Cannot sanitize #{input.inspect}"]) if parts.blank?
 
-        parts.map.with_index do |part, index|
+        sanitized = parts.map.with_index do |part, index|
           is_absolute && index.zero? ? "" : Zaru.sanitize!(part)
         end.join(File::SEPARATOR)
+
+        Success sanitized
       end
     end
   end

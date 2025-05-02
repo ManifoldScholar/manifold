@@ -29,15 +29,6 @@ end
 
 Dry::Logic::Result.prepend ResultAttrPatch
 
-module TransactionCallablePatch
-  # We don't rely on this logic, and want our hashes to be provided as-is without splatting.
-  def ruby_27_last_arg_hash?(*)
-    false
-  end
-end
-
-Dry::Transaction::Callable.prepend TransactionCallablePatch
-
 Dry::Validation.load_extensions :predicates_as_macros
 
 ActiveRecord::Type.register :indifferent_hash, OurTypes::IndifferentHash

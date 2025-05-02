@@ -8,6 +8,8 @@ module Packaging
     class Container
       include IntrospectiveContainer
 
+      import ::Shared::PipelineUtilities
+
       register "api_url" do
         URI(Rails.configuration.manifold.api_url)
       end
@@ -39,6 +41,7 @@ module Packaging
 
       register_simple_callables_in :text_compilation,
                                    :calculate_fingerprint,
+                                   :compile_text_sections,
                                    :extract_and_remap_ingestion_sources,
                                    :extract_collaborators,
                                    :extract_remote_resources,
