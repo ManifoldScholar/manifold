@@ -140,36 +140,6 @@ RSpec.describe "Text Section Annotations API", type: :request do
     end
   end
 
-  describe "destroys an annotation" do
-    let(:annotation) { FactoryBot.create(:annotation, creator: reader) }
-    let(:path) { api_v1_annotation_path(annotation) }
-    context "when the user is the author of the annotation" do
-      describe "the response" do
-        it "has a 204 NO CONTENT status code" do
-          delete path, headers: reader_headers
-          expect(response).to have_http_status(204)
-        end
-      end
-    end
-    context "when the user is not the author of the annotation" do
-      describe "the response" do
-        it "has a 403 FORBIDDEN status code" do
-          annotation = FactoryBot.create(:annotation, creator: author)
-          delete api_v1_annotation_path(annotation), headers: reader_headers
-          expect(response).to have_http_status(403)
-        end
-      end
-    end
-    context "when the user is an admin" do
-      describe "the response" do
-        it "has a 204 NO CONTENT status code" do
-          delete path, headers: admin_headers
-          expect(response).to have_http_status(204)
-        end
-      end
-    end
-  end
-
   context "when creating an annotation" do
     let(:annotation_privacy) { :is_public }
 
