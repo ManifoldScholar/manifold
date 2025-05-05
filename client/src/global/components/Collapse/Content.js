@@ -51,7 +51,11 @@ function Content(props) {
     }
   }, [visible, focusOnVisible]);
 
-  useLayoutEffect(() => {
+  const isBrowser =
+    typeof window !== "undefined" && !!window.document?.createElement;
+  const safeEffect = isBrowser ? useLayoutEffect : useEffect;
+
+  safeEffect(() => {
     if (contentRef.current) {
       const { duration, delay, diff } = getAnimationParams(height, maxDuration);
       contentRef.current.style.setProperty("--collapse-height", `${height}px`);
