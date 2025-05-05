@@ -1,16 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import partition from "lodash/partition";
 import Form from "global/components/form";
 import FormattedDate from "global/components/FormattedDate";
 import * as Styled from "./styles";
 
-export default function FlagsList({
-  flags,
-  resolvedFlagsCount,
-  unresolvedFlagsCount
-}) {
+export default function FlagsList({ flags, unresolvedFlagsCount }) {
   const { t } = useTranslation();
+
+  const [resolved, active] = partition(flags, flag => flag.attributes.resolved);
+  const [, adminResolved] = partition(
+    resolved,
+    flag => flag.attributes.resolvedByCreator
+  );
 
   return (
     <>
@@ -21,22 +24,22 @@ export default function FlagsList({
         color={unresolvedFlagsCount ? "error" : undefined}
       />
       <Styled.FlagsList>
-        {!!resolvedFlagsCount && (
+        {!!adminResolved?.length && (
           <Styled.FlagWrapper>
             <span style={{ color: "var(--color-neutral-text-extra-light)" }}>
-              <b>{resolvedFlagsCount}</b>{" "}
+              <b>{adminResolved.length}</b>{" "}
               {t("records.annotations.resolved_flags_count", {
-                count: resolvedFlagsCount
+                count: adminResolved.length
               })}
             </span>
           </Styled.FlagWrapper>
         )}
-        {flags.map(f => {
+        {active.map(f => {
           const {
-            attributes: { message, createdAt, resolved },
+            attributes: { message, createdAt },
             relationships: { creator }
           } = f;
-          return !resolved ? (
+          return (
             <Styled.FlagWrapper>
               <Styled.FlagMeta>
                 <FormattedDate format="MMM dd, yyyy" date={createdAt} />
@@ -44,7 +47,7 @@ export default function FlagsList({
               </Styled.FlagMeta>
               {message && <Styled.FlagMessage>{message}</Styled.FlagMessage>}
             </Styled.FlagWrapper>
-          ) : null;
+          );
         })}
       </Styled.FlagsList>
     </>
