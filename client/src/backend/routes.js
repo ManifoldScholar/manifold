@@ -816,10 +816,19 @@ const routes = {
             },
             {
               name: "backendReadingGroupAnnotations",
-              exact: true,
+              exact: false,
               component: "ReadingGroupAnnotations",
               path: "/backend/groups/:id/annotations",
-              helper: g => `/backend/groups/${g}/annotations`
+              helper: g => `/backend/groups/${g}/annotations`,
+              routes: [
+                {
+                  name: "backendReadingGroupAnnotationDetail",
+                  exact: true,
+                  component: "AnnotationDetail",
+                  path: "/backend/groups/:rgId/annotations/:id",
+                  helper: (g, a) => `/backend/groups/${g}/annotations/${a}`
+                }
+              ]
             }
           ]
         }
