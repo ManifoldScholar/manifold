@@ -13,7 +13,12 @@ import {
 } from "backend/components/annotation/detail";
 import withConfirmation from "hoc/withConfirmation";
 
-function AnnotationDetailContainer({ refresh, confirm }) {
+function AnnotationDetailContainer({
+  refresh,
+  confirm,
+  readingGroup,
+  refreshAnnotations
+}) {
   const { t } = useTranslation();
   const { id } = useParams();
   const history = useHistory();
@@ -31,10 +36,27 @@ function AnnotationDetailContainer({ refresh, confirm }) {
     if (confirm)
       confirm(heading, message, async () => {
         await deleteAnnotation(id);
-        refresh();
-        history.push(lh.link("backendRecordsAnnotations"));
+
+        if (readingGroup) {
+          refreshAnnotations();
+          history.push(
+            lh.link("backendReadingGroupAnnotations", readingGroup.id)
+          );
+        } else {
+          refresh();
+          history.push(lh.link("backendRecordsAnnotations"));
+        }
       });
-  }, [id, confirm, deleteAnnotation, t, history, refresh]);
+  }, [
+    id,
+    confirm,
+    deleteAnnotation,
+    t,
+    history,
+    refresh,
+    readingGroup,
+    refreshAnnotations
+  ]);
 
   const { attributes, relationships } = annotation ?? {};
 
@@ -130,5 +152,7 @@ AnnotationDetailContainer.displayName = "Annotations.AnnotationDetail";
 
 AnnotationDetailContainer.propTypes = {
   refresh: PropTypes.func.isRequired,
-  confirm: PropTypes.func.isRequired
+  refreshAnnotations: PropTypes.func,
+  confirm: PropTypes.func.isRequired,
+  readingGroup: PropTypes.object
 };

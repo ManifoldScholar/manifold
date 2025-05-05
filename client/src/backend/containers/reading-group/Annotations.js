@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import { readingGroupsAPI, bulkDeleteAPI } from "api";
+import { readingGroupsAPI, bulkDeleteAPI, annotationsAPI } from "api";
 import { withRouter } from "react-router-dom";
 import {
   useFetch,
@@ -74,6 +74,18 @@ function ReadingGroupAnnotationsContainer({
 
   const bulkDelete = useApiCallback(bulkDeleteAPI.annotations);
 
+  const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
+
+  const onDelete = id => {
+    const heading = t("modals.delete_annotation");
+    const message = t("modals.confirm_body");
+    if (confirm)
+      confirm(heading, message, async () => {
+        await destroyAnnotation(id);
+        refreshAnnotations();
+      });
+  };
+
   const unit = t("glossary.annotation", {
     count: meta?.pagination?.totalCount
   });
@@ -126,7 +138,15 @@ function ReadingGroupAnnotationsContainer({
             bulkActionsActive,
             bulkSelection,
             addItem,
-            removeItem
+            removeItem,
+            onDelete,
+            hideRG: true,
+            linkOverride: id =>
+              lh.link(
+                "backendReadingGroupAnnotationDetail",
+                readingGroup.id,
+                id
+              )
           }}
           title={t("reading_groups.annotations_header")}
           titleStyle="bar"
