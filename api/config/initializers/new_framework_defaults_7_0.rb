@@ -13,7 +13,7 @@
 
 # `button_to` view helper will render `<button>` element, regardless of whether
 # or not the content is passed as the first argument or as a block.
-# Rails.application.config.action_view.button_to_generates_button_tag = true
+Rails.application.config.action_view.button_to_generates_button_tag = true
 
 # `stylesheet_link_tag` view helper will not render the media attribute by default.
 # Rails.application.config.action_view.apply_stylesheet_media_default = false
@@ -34,13 +34,13 @@
 
 # Don't override ActiveSupport::TimeWithZone.name and use the default Ruby
 # implementation.
-# Rails.application.config.active_support.remove_deprecated_time_with_zone_name = true
+Rails.application.config.active_support.remove_deprecated_time_with_zone_name = true
 
 # Calls `Rails.application.executor.wrap` around test cases.
 # This makes test cases behave closer to an actual request or job.
 # Several features that are normally disabled in test, such as Active Record query cache
 # and asynchronous queries will then be enabled.
-# Rails.application.config.active_support.executor_around_test_case = true
+Rails.application.config.active_support.executor_around_test_case = true
 
 # Set both the `:open_timeout` and `:read_timeout` values for `:smtp` delivery method.
 # Rails.application.config.action_mailer.smtp_timeout = 5
