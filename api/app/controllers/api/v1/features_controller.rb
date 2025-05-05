@@ -5,7 +5,7 @@ module API
     # Features controller
     class FeaturesController < ApplicationController
       resourceful! Feature, authorize_options: { except: [:index, :show] } do
-        Feature.filtered(feature_filter_params || {})
+        Feature.filtered(**(feature_filter_params || {}))
       end
 
       def index
@@ -25,7 +25,7 @@ module API
 
       def update
         @feature = load_and_authorize_feature
-        ::Updaters::Feature.new(feature_params).update(@feature)
+        ::Updaters::Feature.new(**feature_params).update(@feature)
         render_single_resource(@feature)
       end
 

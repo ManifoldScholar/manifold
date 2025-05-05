@@ -74,7 +74,7 @@ RSpec.describe Citable do
     end
 
     model do
-      include described_class
+      include Citable
 
       has_many :children, class_name: 'CitableChild'
 
@@ -97,7 +97,7 @@ RSpec.describe Citable do
     end
 
     model do
-      include described_class
+      include Citable
 
       belongs_to :citable_class
 

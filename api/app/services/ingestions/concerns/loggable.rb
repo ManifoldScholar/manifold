@@ -8,12 +8,12 @@ module Ingestions
       end
 
       def significant(key, vars = {})
-        msg = I18n.t(key, vars)
+        msg = I18n.t(key, **vars)
         the_logger.info(Rainbow(msg).green)
       end
 
       def info(key, vars = {})
-        msg = I18n.t(key, vars)
+        msg = I18n.t(key, **vars)
         the_logger.info(Rainbow(msg).blue)
       end
 
@@ -22,12 +22,12 @@ module Ingestions
       end
 
       def debug(key, vars = {})
-        msg = I18n.t(key, vars)
+        msg = I18n.t(key, **vars)
         the_logger.debug(Rainbow(msg).lightcyan)
       end
 
       def error(key, vars = {})
-        msg = I18n.t(key, vars)
+        msg = I18n.t(key, **vars)
         the_logger.error(Rainbow(msg).red)
       end
 
@@ -36,7 +36,7 @@ module Ingestions
       end
 
       def warn(key, vars = {})
-        msg = I18n.t(key, vars)
+        msg = I18n.t(key, **vars)
         the_logger.warn(Rainbow(msg).yellow)
       end
 

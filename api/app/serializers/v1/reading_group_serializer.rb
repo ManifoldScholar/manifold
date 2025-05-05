@@ -86,7 +86,7 @@ module V1
     end
 
     link_with_meta :clone, if: guard_user_authorized_to(:update), method: "POST" do |object, _params|
-      routes.clone_api_v1_reading_group_path(object)
+      ManifoldApi::Container["system.routes"].clone_api_v1_reading_group_path(object)
     end
 
     CAN_JOIN = ->(object, params) do
@@ -97,7 +97,7 @@ module V1
     end
 
     link_with_meta :join, if: CAN_JOIN, method: "POST" do |object, _params|
-      routes.join_api_v1_reading_group_path(object)
+      ManifoldApi::Container["system.routes"].join_api_v1_reading_group_path(object)
     end
 
     SHOW_ARCHIVE_LINK = ->(reading_group, params) do
@@ -115,7 +115,7 @@ module V1
 
       next nil if membership.blank?
 
-      routes.archive_api_v1_reading_group_membership_path(membership)
+      ManifoldApi::Container["system.routes"].archive_api_v1_reading_group_membership_path(membership)
     end
   end
 end

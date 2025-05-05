@@ -8,7 +8,7 @@ module Packaging
       #
       # @see Packaging::EpubV3::CompileNodeToXHTML
       class BuildInitialHTML
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
 
         PAGE_TEMPLATE = <<~HTML
         <!doctype html>
@@ -26,12 +26,16 @@ module Packaging
         # @return [void] should the HTML compilation succeed, it's void and continues with the state
         # @return [Dry::Monads::Result::Failure] should the interaction fail,
         #   this will return a failure and stop the pipeline.
-        def call(state)
+        def call
           document = Nokogiri::HTML(PAGE_TEMPLATE)
 
           state[:document] = document
 
-          Packaging::EpubV3::CompileNodeToXHTML.run_as_monad parent: document.at_css("body"), node: state[:node]
+          result = Packaging::EpubV3::CompileNodeToXHTML.run_as_monad parent: document.at_css("body"), node: state[:node]
+
+          result.bind do
+            Success()
+          end
         end
       end
     end

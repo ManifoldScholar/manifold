@@ -155,7 +155,7 @@ module ManifoldEnv
 
         options = endpoint_options.merge(defaults).symbolize_keys
 
-        h[endpoint_name] = ManifoldEnv::CustomOauthEndpoint.new options
+        h[endpoint_name] = ManifoldEnv::CustomOauthEndpoint.new(**options)
       end
     end
 

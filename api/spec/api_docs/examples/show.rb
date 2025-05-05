@@ -14,7 +14,7 @@ RSpec.shared_context "an API show request" do |options|
 
   get api_spec_helper.summary do
     api_spec_helper.parameters.each do |parameter_options|
-      parameter(parameter_options)
+      parameter(**parameter_options)
     end
 
     description api_spec_helper.response_description if api_spec_helper.response_description?

@@ -15,8 +15,12 @@ module ExportStrategies
       # @param [{ Symbol => Object }] state
       # @return [Dry::Monads::Result::Success(String)]
       # @return [Dry::Monads::Result::Failure((Symbol, String))]
-      def call(export:, target_name_format:, **_state)
-        export.to_target_name_formatter.call(target_name_format)
+      def call(**state)
+        state => { export:, target_name_format: }
+
+        state[:target_name] = export.to_target_name_formatter.call(target_name_format)
+
+        Success state
       end
     end
   end

@@ -121,7 +121,7 @@ module MultiKeyable
 
     attr_reader :mapping
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       @mapping = items.reduce({}.with_indifferent_access) do |acc, item|

@@ -5,7 +5,7 @@ module Collections
     extend Dry::Initializer
     extend Memoist
 
-    include Dry::Equalizer.new(:collectable)
+    include Dry::Core::Equalizer.new(:collectable)
     include MultiKeyable
 
     multi_keyable :collectable, :entry

@@ -5,7 +5,7 @@ module API
     # makers controller
     class MakersController < ApplicationController
       resourceful! Maker, authorize_options: { except: [:index, :show] } do
-        Maker.filtered(with_pagination!(maker_filter_params))
+        Maker.filtered(**with_pagination!(maker_filter_params))
       end
 
       def index

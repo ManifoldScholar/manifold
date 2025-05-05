@@ -157,14 +157,14 @@ RSpec.describe Resource, type: :model do
       collection.resources << @resource_a
       collection.resources << @resource_b
       collection.save
-      results = described_class.filtered({ collection_order: collection.id })
+      results = described_class.filtered(collection_order: collection.id)
       expect(results.first.id).to eq @resource_a.id
     end
 
     it "to only include those belonging to a project" do
-      results = described_class.filtered({ project: @project_a })
+      results = described_class.filtered(project: @project_a)
       expect(results.length).to be 2
-      results = described_class.filtered({ project: @project_b })
+      results = described_class.filtered(project: @project_b)
       expect(results.length).to be 1
     end
 
@@ -173,23 +173,23 @@ RSpec.describe Resource, type: :model do
       @collection_resource_a = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_a)
       @collection_resource_b = FactoryBot.create(:collection_resource, resource_collection: @collection_a, resource: @resource_b)
       @collection_resource_c = FactoryBot.create(:collection_resource, resource_collection: @collection_b, resource: @resource_d)
-      results = described_class.filtered({ resource_collection: @collection_a.id })
+      results = described_class.filtered(resource_collection: @collection_a.id)
       expect(results.length).to be 2
-      results = described_class.filtered({ resource_collection: @collection_b.id })
+      results = described_class.filtered(resource_collection: @collection_b.id)
       expect(results.length).to be 1
     end
 
     it "by kind" do
       # TBD: Expand this test. Right now all factory resources are links to avoid dealing
       # with attachments.
-      results = described_class.filtered({ kind: "link" })
+      results = described_class.filtered(kind: "link")
       expect(results.length).to be 3
     end
 
     it "by tag" do
-      results = described_class.filtered({ tag: "dog" })
+      results = described_class.filtered(tag: "dog")
       expect(results.length).to be 2
-      results = described_class.filtered({ tag: "test" })
+      results = described_class.filtered(tag: "test")
       expect(results.length).to be 1
     end
   end

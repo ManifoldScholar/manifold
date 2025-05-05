@@ -7,7 +7,7 @@ module API
         class VersionsController < AbstractProjectChildController
           resourceful! Version, authorize_options: { except: [:index] } do
             Version.filtered(
-              with_pagination!(version_filter_params),
+              **with_pagination!(version_filter_params),
               scope: Version.for_item(@project).with_actor
             )
           end

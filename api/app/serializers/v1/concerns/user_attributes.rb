@@ -58,7 +58,7 @@ module V1
         end
 
         link :request_email_confirmation, if: CURRENT_CAN_UPDATE do |object|
-          routes.api_v1_email_confirmation_path(object.id)
+          ManifoldApi::Container["system.routes"].api_v1_email_confirmation_url(object.id)
         end
       end
     end

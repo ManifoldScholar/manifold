@@ -10,7 +10,7 @@ module API
 
           resourceful! Project do
             Project.filtered(
-              with_pagination!(project_filter_params),
+              **with_pagination!(project_filter_params),
               scope: current_user.favorite_projects.includes(:creators)
             )
           end

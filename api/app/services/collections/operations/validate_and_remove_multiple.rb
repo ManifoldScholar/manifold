@@ -81,7 +81,7 @@ module Collections
       def remove!(collector, collectables)
         options = { user: user, collector: collector, collectables: collectables.to_a }
 
-        remove = Collections::Operations::RemoveMultiple.new options
+        remove = Collections::Operations::RemoveMultiple.new(**options)
 
         remove.call
       end

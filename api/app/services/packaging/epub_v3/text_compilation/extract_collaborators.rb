@@ -7,12 +7,12 @@ module Packaging
       # transforming them into {Packaging::EpubV3::CollaboratorItem a resource proxy}, and adding them
       # to the state.
       class ExtractCollaborators
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
 
         # @param [Hash] state
         # @option state [Text] :text
         # @return [void]
-        def call(state)
+        def call
           state[:collaborators] = []
 
           state[:text].collaborators.includes(:maker).group_by(&:role).each do |kind, collaborators|
@@ -30,6 +30,8 @@ module Packaging
               state[:collaborators] << item
             end
           end
+
+          Success()
         end
       end
     end

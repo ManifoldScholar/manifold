@@ -101,7 +101,7 @@ module Authentication
       title: I18n.t("controllers.errors.auth_timeout.title").titlecase,
       detail: I18n.t("controllers.errors.auth_timeout.detail")
     }
-    render json: { errors: build_api_error(options) }, status: 419
+    render json: { errors: build_api_error(**options) }, status: 419
   end
 
   def forbidden_resource
@@ -110,7 +110,7 @@ module Authentication
       title: I18n.t("controllers.errors.forbidden_generic.title").titlecase,
       detail: I18n.t("controllers.errors.forbidden_generic.detail")
     }
-    render json: { errors: build_api_error(options) }, status: :forbidden
+    render json: { errors: build_api_error(**options) }, status: :forbidden
   end
 
   def user_not_authenticated
@@ -119,6 +119,6 @@ module Authentication
       title: I18n.t("controllers.errors.unauthorized.title").titlecase,
       detail: I18n.t("controllers.errors.unauthorized.detail")
     }
-    render json: { errors: build_api_error(options) }, status: :unauthorized
+    render json: { errors: build_api_error(**options) }, status: :unauthorized
   end
 end

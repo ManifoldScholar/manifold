@@ -9,7 +9,7 @@ module API
 
           resourceful! Entitlement, authorize_options: { except: [:index, :create] } do
             Entitlement.filtered(
-              with_pagination!(entitlement_filter_params),
+              **with_pagination!(entitlement_filter_params),
               scope: Entitlement.where(subject_type: "Project", subject_id: params[:project_id])
             )
           end

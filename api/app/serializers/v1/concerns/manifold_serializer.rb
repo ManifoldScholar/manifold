@@ -169,7 +169,7 @@ module V1
         end
 
         def camelize_hash(hash)
-          hash.deep_transform_keys { |key| key.to_s.camelize(:lower) }.symbolize_keys!
+          hash.deep_transform_keys { |key| key.to_s.camelize(:lower) }.symbolize_keys
         end
 
         def admin?(params)

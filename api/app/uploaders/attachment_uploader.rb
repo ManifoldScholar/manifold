@@ -52,7 +52,7 @@ class AttachmentUploader < Shrine
   end
 
   class Attachment
-    def initialize(*) # rubocop:todo Metrics/MethodLength
+    def initialize(*, **) # rubocop:todo Metrics/MethodLength
       super
 
       module_eval <<~RUBY, __FILE__, __LINE__ + 1

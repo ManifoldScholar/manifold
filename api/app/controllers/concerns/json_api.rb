@@ -36,7 +36,7 @@ module JSONAPI
   end
 
   def render_json_response(s_instance, options)
-    render jsonapi: s_instance, status: build_status(options)
+    render json: s_instance, status: build_status(options)
   end
 
   def raise_not_errors

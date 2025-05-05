@@ -9,12 +9,23 @@ module Shared
     include Dry::Matcher.for(:monadic_in_state!, with: Dry::Matcher::ResultMatcher)
     include Dry::Matcher.for(:monadic_transition_to!, with: Dry::Matcher::ResultMatcher)
 
+    included do
+      include Dry::Effects.Reader(:pipeline_state)
+      include Dry::Effects.State(:pipeline_result)
+    end
+
     def build_state(**pairs)
       built_state = { **pairs }.tap do |state|
         yield state if block_given?
       end
 
-      Success(built_state)
+      pipeline_state.merge!(built_state)
+
+      Success()
+    end
+
+    def state
+      pipeline_state
     end
 
     def compose_monadic_interaction(interaction, inputs = {}, &)

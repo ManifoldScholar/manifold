@@ -7,7 +7,7 @@ module Packaging
     #
     # Produced via {Packaging::EpubV3::TextCompilation::Pipeline}.
     class CompiledText < Types::FlexibleStruct
-      include Dry::Equalizer.new(:text_id)
+      include Dry::Core::Equalizer.new(:text_id)
 
       attribute :collaborators, Types::Array.of(Packaging::EpubV3::CollaboratorItem)
       attribute :fingerprint, Types::String

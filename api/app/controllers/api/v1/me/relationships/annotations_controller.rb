@@ -12,7 +12,7 @@ module API
             scope = Annotation.created_by(current_user).sans_archived_reading_group_memberships.sans_orphaned_from_text
 
             Annotation.filtered(
-              with_pagination!(annotation_filter_params),
+              **with_pagination!(annotation_filter_params),
               scope: scope
             )
           end

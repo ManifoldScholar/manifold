@@ -4,10 +4,10 @@ module Packaging
   module EpubV3
     module BookCompilation
       class AddTextSections
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
 
         # @param [Packaging::EpubV3::BookContext] context
-        # @return [void]
+        # @return [Dry::Monads::Success(Packaging::EpubV3::BookContext)]
         def call(context)
           context.with!(:book, :compiled_text) do |book, compiled_text|
             book.ordered do
@@ -16,13 +16,15 @@ module Packaging
               end
             end
           end
+
+          Success context
         end
 
         private
 
         # @param [GEPUB::Book] book
         # @param [Packaging::EpubV3::TextSectionItem] section
-        # @return [void]
+        # @return [Dry::Monads::Success(Packaging::EpubV3::BookContext)]
         def add_section!(book, section)
           item = book.add_item section.path
 

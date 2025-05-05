@@ -25,9 +25,9 @@ RSpec.describe Event, type: :model do
       @event_b = FactoryBot.create(:event, subject_title: "ATLiens")
       described_class.reindex
       described_class.searchkick_index.refresh
-      results = described_class.filtered({ keyword: "Aquemini" })
+      results = described_class.filtered(keyword: "Aquemini")
       expect(results.length).to be 1
-      results = described_class.filtered({ keyword: "ATLiens" })
+      results = described_class.filtered(keyword: "ATLiens")
       expect(results.length).to be 1
     end
   end
@@ -40,9 +40,9 @@ RSpec.describe Event, type: :model do
     end
 
     it "by type" do
-      results = described_class.filtered({ type: EventType[:tweet] })
+      results = described_class.filtered(type: EventType[:tweet])
       expect(results.length).to be 2
-      results = described_class.filtered({ type: EventType[:project_created] })
+      results = described_class.filtered(type: EventType[:project_created])
       expect(results.length).to be 1
     end
   end

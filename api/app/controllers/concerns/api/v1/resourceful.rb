@@ -120,11 +120,10 @@ module API
               # by default.
               performed_options = authorize_options.deep_dup
               performed_options[:if] ||= :auditing_security?
-
-              ensure_authorization_performed performed_options
+              ensure_authorization_performed(**performed_options)
             end
 
-            authorize_actions_for resource_configuration.model, authorize_options
+            authorize_actions_for(resource_configuration.model, **authorize_options)
           end
 
           self.model_klass      = resource_configuration.model

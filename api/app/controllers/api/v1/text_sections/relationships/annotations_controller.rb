@@ -16,7 +16,7 @@ module API
             scope = scope.with_read_ability(current_user, exclude_public_annotations?)
             scope = scope.includes(:reading_group, :reading_group_membership, :text, :creator)
             Annotation.filtered(
-              with_pagination!(annotation_filter_params),
+              **with_pagination!(annotation_filter_params),
               scope: scope
             )
           end

@@ -12,7 +12,7 @@ module Packaging
         def call(text_section)
           node = HTMLNodes::Node.new text_section.body_json
 
-          build_state node: node, text_section: text_section
+          build_state(node:, text_section:)
         end
       end
     end

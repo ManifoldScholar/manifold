@@ -6,7 +6,7 @@ module Packaging
       # Compile the accumulated state from the previous steps into
       # a {Packaging::EpubV3::CompiledText finalized text proxy}.
       class Finalize
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
 
         # @param [Hash] state
         # @option state [<Packaging::EpubV3::CollaboratorItem>] :collaborators
@@ -17,12 +17,16 @@ module Packaging
         # @option state [<Packaging::EpubV3::TextSectionItem>] :text_sections
         # @option state [<Packaging::EpubV3::TitleItem>] :titles
         # @return [Dry::Types::Result(Packaging::EpubV3::CompiledText)]
-        def call(state)
+        def call
           state[:namespace_set] = state[:text_sections].reduce(HTMLNodes::NamespaceSet.new) do |ns, text_section|
             ns | text_section.namespace_set
           end
 
-          Success(Packaging::EpubV3::CompiledText.new(state))
+          compiled = Packaging::EpubV3::CompiledText.new(state)
+
+          self.pipeline_result = compiled
+
+          Success compiled
         end
       end
     end

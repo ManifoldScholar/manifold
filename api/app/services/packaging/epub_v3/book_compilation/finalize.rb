@@ -24,6 +24,8 @@ module Packaging
               try_to_save! text_export, code: :failed_export, prefix: "Could not export text"
             end
 
+            self.pipeline_result = context
+
             Success(context)
           end
         end

@@ -6,7 +6,7 @@ module Packaging
       extend Dry::Initializer
       extend Memoist
 
-      include Dry::Equalizer.new(:path)
+      include Dry::Core::Equalizer.new(:path)
 
       param :path, Types::Strict::String
 
@@ -25,7 +25,7 @@ module Packaging
       # @!attribute [r] derived_ingestion_source
       # @return [IngestionSource, nil]
       memoize def derived_ingestion_source
-        return IngestionSource.find_by(attachment_id: attachment_id) if legacy_ingestion_source?
+        return IngestionSource.by_attachment_id(attachment_id).first if legacy_ingestion_source?
 
         IngestionSource.find ingestion_source_id if has_ingestion_source?
       end

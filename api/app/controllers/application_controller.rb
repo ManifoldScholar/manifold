@@ -112,31 +112,31 @@ class ApplicationController < ActionController::API
     vars = { resource: error.resource.to_s.downcase.pluralize, action: error.action }
     options = {
       status: authorization_error_status,
-      title: I18n.t("controllers.errors.forbidden.class.title", vars).titlecase,
-      detail: I18n.t("controllers.errors.forbidden.class.detail", vars)
+      title: I18n.t("controllers.errors.forbidden.class.title", **vars).titlecase,
+      detail: I18n.t("controllers.errors.forbidden.class.detail", **vars)
     }
-    render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
+    render json: { errors: build_api_error(**options) }, status: authorization_error_status(symbol: true)
   end
 
   def authority_forbidden_resource_instance(error)
     vars = { resource: error.resource.to_s, action: error.action }
     options = {
       status: authorization_error_status,
-      title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
-      detail: I18n.t("controllers.errors.forbidden.instance.detail", vars),
+      title: I18n.t("controllers.errors.forbidden.instance.title", **vars).titlecase,
+      detail: I18n.t("controllers.errors.forbidden.instance.detail", **vars),
       project: error_project_details(error)
     }
-    render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
+    render json: { errors: build_api_error(**options) }, status: authorization_error_status(symbol: true)
   end
 
   def respond_with_forbidden(resource, action)
     vars = { resource: resource, action: action }
     options = {
       status: authorization_error_status,
-      title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
-      detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
+      title: I18n.t("controllers.errors.forbidden.instance.title", **vars).titlecase,
+      detail: I18n.t("controllers.errors.forbidden.instance.detail", **vars)
     }
-    render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
+    render json: { errors: build_api_error(**options) }, status: authorization_error_status(symbol: true)
   end
 
   def respond_with_resource_not_found(*)
@@ -145,7 +145,7 @@ class ApplicationController < ActionController::API
       title: I18n.t("controllers.errors.not_found.title").titlecase,
       detail: I18n.t("controllers.errors.not_found.detail")
     }
-    render json: { errors: build_api_error(options) }, status: :not_found
+    render json: { errors: build_api_error(**options) }, status: :not_found
   end
 
   def respond_with_bad_request
@@ -154,7 +154,7 @@ class ApplicationController < ActionController::API
       title: I18n.t("controllers.errors.bad_request.title").titlecase,
       detail: I18n.t("controllers.errors.bad_request.detail")
     }
-    render json: { errors: build_api_error(options) }, status: :bad_request
+    render json: { errors: build_api_error(**options) }, status: :bad_request
   end
 
   def authority_forbidden(error)
@@ -170,7 +170,7 @@ class ApplicationController < ActionController::API
       title: "Manifold encountered an error",
       detail: error.message
     }
-    render json: { errors: build_api_error(options) }, status: :internal_server_error
+    render json: { errors: build_api_error(**options) }, status: :internal_server_error
   end
 
   private

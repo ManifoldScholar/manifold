@@ -19,7 +19,7 @@ module Packaging
           build_path = context.build_path
           bag = context.bag
 
-          build_state bag: bag, build_path: build_path, context: context
+          build_state(bag:, build_path:, context:)
         end
       end
     end

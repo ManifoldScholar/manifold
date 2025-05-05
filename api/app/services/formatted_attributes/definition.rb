@@ -3,9 +3,8 @@
 module FormattedAttributes
   class Definition
     extend Dry::Initializer
-    extend Memoist
+    include Dry::Core::Equalizer.new(:path)
 
-    include Equalizer.new(:path)
     include Sliceable
 
     param :attribute, type: Types::Coercible::Symbol
@@ -40,7 +39,7 @@ module FormattedAttributes
     # @return [String]
     attr_reader :path
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       derive_attributes!
@@ -56,7 +55,9 @@ module FormattedAttributes
       elsif container_or_model.respond_to?(attribute)
         container_or_model.public_send(attribute)
       elsif container_or_model.respond_to?(:dig)
-        container_or_model[attribute]
+        # rubocop:disable Style/SingleArgumentDig
+        container_or_model.dig(attribute)
+        # rubocop:enable Style/SingleArgumentDig
       elsif container_or_model.respond_to?(:[])
         container_or_model[attribute]
       else

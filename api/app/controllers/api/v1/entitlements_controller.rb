@@ -25,7 +25,7 @@ module API
 
         inputs[:entitling_entity] = current_user
 
-        outcome = Entitlements::Create.run inputs
+        outcome = Entitlements::Create.run(**inputs)
 
         if outcome.valid?
           render_single_resource outcome.result

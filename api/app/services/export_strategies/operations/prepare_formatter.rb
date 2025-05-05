@@ -13,8 +13,10 @@ module ExportStrategies
       # @return [ExportStrategies::TargetNameFormatter]
       def call(input)
         case input
-        when ExportStrategies::TargetNameFormatter then input
-        when ProjectExport then input.to_target_name_formatter
+        when ExportStrategies::TargetNameFormatter
+          Success input
+        when ProjectExport
+          Success input.to_target_name_formatter
         else
           # :nocov:
           Failure([:invalid_input, "#{input.inspect} is not formattable"])

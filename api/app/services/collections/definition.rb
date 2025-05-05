@@ -5,7 +5,7 @@ module Collections
     extend Dry::Initializer
     extend Memoist
 
-    include Dry::Equalizer.new(:collector)
+    include Dry::Core::Equalizer.new(:collector)
     include MultiKeyable
 
     Type = Types.Instance(self)

@@ -6,7 +6,11 @@ class ResourceImportRow < ApplicationRecord
   ROW_TYPE_IGNORED = "ignored"
   ROW_TYPE_HEADER = "header"
 
-  include Statesman::Adapters::ActiveRecordQueries
+  include Statesman::Adapters::ActiveRecordQueries[
+    initial_state: :pending,
+    transition_class: ResourceImportRowTransition,
+  ]
+
   include Fingerprinted
 
   belongs_to :resource_import, inverse_of: :resource_import_rows
@@ -35,15 +39,6 @@ class ResourceImportRow < ApplicationRecord
       transition_class: ResourceImportRowTransition
     )
   end
-
-  def self.transition_class
-    ResourceImportRowTransition
-  end
-
-  def self.initial_state
-    :pending
-  end
-  private_class_method :initial_state
 
   def value(position)
     return nil unless position

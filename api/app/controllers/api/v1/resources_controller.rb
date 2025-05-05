@@ -5,7 +5,7 @@ module API
     # resources controller
     class ResourcesController < ApplicationController
       resourceful! Resource, authorize_options: { except: [:index, :show] } do
-        Resource.filtered(with_pagination!(resource_filter_params))
+        Resource.filtered(**with_pagination!(resource_filter_params))
       end
 
       def index

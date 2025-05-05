@@ -98,7 +98,7 @@ module Collections
       def assign!(collector, collectables)
         options = { user: user, collector: collector, collectables: collectables.to_a }
 
-        assign = Collections::Operations::AssignMultiple.new options
+        assign = Collections::Operations::AssignMultiple.new(**options)
 
         assign.call
       end

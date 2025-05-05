@@ -9,7 +9,7 @@ module ProjectExportations
     # @option inputs [Boolean] force_new_export
     # @return [void]
     def perform(inputs)
-      ProjectExportations::Perform.run! inputs
+      ProjectExportations::Perform.run!(**inputs)
     end
   end
 end

@@ -16,7 +16,7 @@ module Packaging
         def call(text)
           Packaging::Exportation::ExportTextToEpubV3.run_as_monad(text: text) do |m|
             m.success do |text_export|
-              Packaging::BagItSpec::TextProxy.new text, text_export
+              Success Packaging::BagItSpec::TextProxy.new text, text_export
             end
 
             m.failure do |_code, reason|

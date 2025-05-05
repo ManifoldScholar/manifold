@@ -36,9 +36,9 @@ module ReadingGroups
 
       # @return [void]
       def clone_reading_group!
-        attrs = reading_group.slice *CLONEABLE_ATTRIBUTES
+        attrs = reading_group.slice(*CLONEABLE_ATTRIBUTES)
 
-        group = ReadingGroup.new attrs
+        group = ReadingGroup.new(**attrs)
 
         group.name = name if name.present?
 

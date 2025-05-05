@@ -46,7 +46,7 @@ module JSONAPI
 
       attr_reader :pointer
 
-      def initialize(*)
+      def initialize(*, **)
         super
 
         @pointer = calculate_pointer

@@ -8,6 +8,8 @@ module Packaging
     class Container
       include IntrospectiveContainer
 
+      import ::Shared::PipelineUtilities
+
       register_simple_callables_in :compilation,
                                    :add_resources,
                                    :add_texts,
@@ -18,7 +20,9 @@ module Packaging
                                    :pipeline,
                                    :prepare,
                                    :prepare_resource,
+                                   :prepare_resources,
                                    :prepare_text,
+                                   :prepare_texts,
                                    :write_bag_info,
                                    :write_project_entries
 
@@ -40,6 +44,5 @@ module Packaging
       register_simple_callables_in :resources,
                                    :attachment_name_parser
     end
-    # rubocop:enable
   end
 end

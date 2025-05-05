@@ -29,7 +29,7 @@ module SerializableAuthorization
   # @return [{ Symbol => Boolean }]
   def to_serializable_hash_for(user, **options)
     exposed_abilities.index_with do |ability|
-      able_to?(ability, user, options)
+      able_to?(ability, user, **options)
     end
   end
 

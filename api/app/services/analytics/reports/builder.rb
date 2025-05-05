@@ -241,7 +241,7 @@ module Analytics
       end
 
       def build_meta(type, **metadata)
-        build_json("meta", { type: type }.merge(metadata))
+        build_json("meta", type: type, **metadata)
       end
 
       def build_simple_data(value, is_query: true, value_key: "value")

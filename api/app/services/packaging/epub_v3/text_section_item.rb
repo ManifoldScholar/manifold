@@ -4,7 +4,7 @@ module Packaging
   module EpubV3
     # Proxy around a {TextSection} and its dependent objects.
     class TextSectionItem < Types::FlexibleStruct
-      include Dry::Equalizer.new(:text_section_id)
+      include Dry::Core::Equalizer.new(:text_section_id)
       include Packaging::EpubV3::HasPath
 
       attribute :document, Types.Instance(Nokogiri::XML::Document)

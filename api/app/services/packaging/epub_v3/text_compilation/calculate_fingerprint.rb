@@ -10,8 +10,16 @@ module Packaging
         # @param [Hash] state
         # @option state [Text] :text
         # @return [Dry::Monads::Result(String)]
-        def call(state)
-          ::Texts::CalculateFingerprint.run_as_monad text: state[:text]
+        def call
+          result = ::Texts::CalculateFingerprint.run_as_monad text: state[:text]
+
+          # :nocov:
+          return result if result.failure?
+          # :nocov:
+
+          state[:fingerprint] = result.value!
+
+          Success()
         end
       end
     end

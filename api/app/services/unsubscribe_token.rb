@@ -5,7 +5,7 @@ module UnsubscribeToken
     delegate :verify, to: :verifier
 
     def generate(user)
-      verifier.generate user_id: user.id
+      verifier.generate({ user_id: user.id })
     end
 
     private

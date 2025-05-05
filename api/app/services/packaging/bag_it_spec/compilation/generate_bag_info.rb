@@ -8,11 +8,21 @@ module Packaging
         include Packaging::PipelineOperation
         include Packaging::BagItSpec::Import[compilation_version: "compilation.version", manifold_version: "manifold.version"]
 
+        def call(*)
+          state[:bag_info] = generate
+
+          Success()
+        end
+
+        private
+
         # @param [Pathname] build_path
         # @param [Packaging::BagItSpec::Context] context
         # @param [Hash] state
         # @return [{ String => String }]
-        def call(build_path:, context:, **_state)
+        def generate
+          state => { build_path:, context:, }
+
           project = context.project
 
           start!
@@ -34,8 +44,6 @@ module Packaging
         ensure
           reset!
         end
-
-        private
 
         # @return [void]
         def start!

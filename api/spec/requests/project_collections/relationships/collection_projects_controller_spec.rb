@@ -13,7 +13,7 @@ RSpec.describe "ProjectCollection CollectionProject API", type: :request do
 
       describe "the response" do
         it "has a 201 CREATED status code" do
-          post path, headers: headers, params: build_json_payload(collectionProject)
+          post path, headers: headers, params: build_json_payload(**collectionProject)
           expect(response).to have_http_status(:created)
         end
       end
@@ -22,7 +22,7 @@ RSpec.describe "ProjectCollection CollectionProject API", type: :request do
     context "when the user is a reader" do
       let(:headers) { reader_headers }
       it "has a 403 FORBIDDEN status code" do
-        post path, headers: headers, params: build_json_payload(collectionProject)
+        post path, headers: headers, params: build_json_payload(**collectionProject)
         expect(response).to have_http_status(:forbidden)
       end
     end

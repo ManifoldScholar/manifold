@@ -21,7 +21,7 @@ module FormattedAttributes
 
     delegate :attribute, :key, :path, to: :definition
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       initialize_methods!

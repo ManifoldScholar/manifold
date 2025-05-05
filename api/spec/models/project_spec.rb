@@ -151,7 +151,7 @@ RSpec.describe Project, type: :model do
       end
 
       it "to only include creator's projects" do
-        results = described_class.filtered({ with_creator_role: true }, user: @user)
+        results = described_class.filtered(with_creator_role: true, user: @user)
         expect(results).to match_array(@project_b)
       end
 
@@ -192,7 +192,7 @@ RSpec.describe Project, type: :model do
       end
 
       it "applies a default scope" do
-        scope = described_class.filtered({})
+        scope = described_class.filtered
 
         expect(scope.order_values).to have(2).items
       end

@@ -8,7 +8,6 @@ module Packaging
     # @see ProjectExport
     class ExportProjectToBagIt < ActiveInteraction::Base
       include MonadicInteraction
-      include Packaging::BagItSpec::Import[bagit_pipeline: "compilation.pipeline"]
 
       TEXT_ASSOCIATIONS = [
         :text_sections,
@@ -16,13 +15,14 @@ module Packaging
         { collaborators: %i[maker] }
       ].freeze
 
+      NESTED_ASSOCIATIONS = {
+        collaborators: [ :maker ],
+        published_texts: TEXT_ASSOCIATIONS,
+        texts: TEXT_ASSOCIATIONS
+      }.freeze
+
       ASSOCIATIONS = [
-        :resources,
-        {
-          collaborators: :maker,
-          published_texts: TEXT_ASSOCIATIONS,
-          texts: TEXT_ASSOCIATIONS
-        }
+        :resources
       ].freeze
 
       record :project
@@ -46,13 +46,15 @@ module Packaging
         return @project_export
       end
 
+      def bagit_pipeline
+        @bagit_pipeline ||= Packaging::BagItSpec::Container["compilation.pipeline"]
+      end
+
       private
 
       # @return [void]
       def preload_associations!
-        preloader = ActiveRecord::Associations::Preloader.new
-
-        preloader.preload project, ASSOCIATIONS
+        Project.preload(*ASSOCIATIONS, **NESTED_ASSOCIATIONS)
       end
 
       # @return [void]
@@ -63,7 +65,7 @@ module Packaging
           finalize!: [{ project_export: @project_export }]
         }
 
-        bagit_pipeline.with_step_args(step_args).call(project) do |m|
+        bagit_pipeline.with_step_args(**step_args).call(project) do |m|
           m.success do |result|
             @project_context = result
           end

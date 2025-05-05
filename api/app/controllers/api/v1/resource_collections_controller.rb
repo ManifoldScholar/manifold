@@ -5,7 +5,7 @@ module API
     # Collections controller
     class ResourceCollectionsController < ApplicationController
       resourceful! ResourceCollection, authorize_options: { except: [:index] } do
-        ResourceCollection.filtered(with_pagination!(resource_collection_filter_params))
+        ResourceCollection.filtered(**with_pagination!(resource_collection_filter_params))
       end
 
       # GET /collections/1

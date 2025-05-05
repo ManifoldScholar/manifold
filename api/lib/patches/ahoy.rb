@@ -3,9 +3,9 @@
 module Patches
   module Ahoy
     module Tracker
-      def initialize(options)
+      def initialize(visitor_token: nil, **)
         super
-        @visitor_token = options[:visitor_token]
+        @visitor_token = visitor_token
       end
     end
   end

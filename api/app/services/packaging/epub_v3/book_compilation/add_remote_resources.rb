@@ -8,7 +8,7 @@ module Packaging
         include Packaging::PipelineOperation
 
         # @param [Packaging::EpubV3::BookContext] context
-        # @return [void]
+        # @return [Dry::Monads::Success(Packaging::EpubV3::BookContext)]
         def call(context)
           context.with!(:book, :compiled_text) do |book, compiled_text|
             compiled_text.remote_resources.each_with_index do |remote_resource, index|
@@ -21,6 +21,8 @@ module Packaging
               # :nocov:
             end
           end
+
+          Success context
         end
 
         private

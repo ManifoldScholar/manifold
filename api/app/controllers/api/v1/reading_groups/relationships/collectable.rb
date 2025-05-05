@@ -54,7 +54,7 @@ module API
               resourceful! klass do
                 if klass < ::Filterable
                   klass.filtered(
-                    with_pagination!(public_send(filter_params_name)),
+                    **with_pagination!(public_send(filter_params_name)),
                     scope: @reading_group.public_send(association_name)
                   )
                 else
