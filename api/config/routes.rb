@@ -111,7 +111,7 @@ Rails.application.routes.draw do
       resources :journal_issues, except: [:create]
       resources :journal_volumes, except: [:create, :index]
       resources :ingestion_sources, except: [:create, :index]
-      resources :annotations, only: [:index, :show]
+      resources :annotations, only: [:index, :show, :destroy]
       resources :collaborators do
         collection do
           get :roles
@@ -153,7 +153,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :annotations, only: [:update, :destroy], controller: "text_sections/relationships/annotations" do
+      resources :annotations, only: [:update], controller: "text_sections/relationships/annotations" do
         namespace :relationships do
           concerns :flaggable
           resources :comments, controller: "/api/v1/comments"
