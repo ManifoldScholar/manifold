@@ -6,6 +6,4 @@ ROOT="$(realpath "$(dirname "$0")/..")"
 
 cd "$ROOT"
 
-corepack enable
-
 yarn

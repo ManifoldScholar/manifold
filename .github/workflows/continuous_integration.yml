@@ -23,7 +23,6 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v3
 
-      - run: corepack enable
       - uses: ./.github/actions/setup-node
 
       - name: "Lint client"
@@ -75,7 +74,6 @@ jobs:
 
       - uses: ./.github/actions/setup-ruby
 
-      - run: corepack enable
       - uses: ./.github/actions/setup-node
 
       - uses: ./.github/actions/setup-elasticsearch
