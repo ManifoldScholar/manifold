@@ -94,11 +94,14 @@ api:
     repository: ghcr.io/notch8/princeton-manifold/api
     pullPolicy: IfNotPresent
     tag: ""
+  rails:
+    replicaCount: 1
 client:
   image:
     repository: ghcr.io/notch8/princeton-manifold/client
     pullPolicy: IfNotPresent
     tag: ""
+  replicaCount: 1
 
 livenessProbe:
   httpGet:

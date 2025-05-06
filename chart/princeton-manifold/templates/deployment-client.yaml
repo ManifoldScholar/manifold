@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "princeton-manifold.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.client.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: client

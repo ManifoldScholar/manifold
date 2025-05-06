@@ -37,6 +37,13 @@ ingress:
         - openpublishing.princeton.edu
       secretName: production-princeton-manifold-tls
 
+api:
+  rails:
+    replicaCount: 2
+
+client:
+  replicaCount: 2
+
 redis:
   enabled: true
   architecture: standalone
