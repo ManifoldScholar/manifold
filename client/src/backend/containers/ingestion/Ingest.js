@@ -265,7 +265,10 @@ export class IngestionIngest extends Component {
 
     return (
       <>
-        <Prompt message={this.props.t("messages.unsaved_changes")} />
+        <Prompt
+          message={this.props.t("messages.unsaved_changes")}
+          when={this.state.loading || this.props.webSocketConnecting}
+        />
         <div className="ingestion-output">
           <Heading
             ingestion={this.props.ingestion}
