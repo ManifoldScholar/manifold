@@ -1,5 +1,5 @@
 <div>
-  The following <%= @kind %> in <a href="<%= @resource.subject_url %>"><%= @resource.project.title.titleize %></a> has been flagged <%= @resource.flags_count %> <%= "time".pluralize(@resource.flags_count) %>.
+  The following <%= @kind %> in <a href="<%= @resource.subject_url %>"><%= sanitize @resource.project.title %></a> has been flagged <%= @resource.flags_count %> <%= "time".pluralize(@resource.flags_count) %>.
 
   <div>
     <p style="margin-top: 15px; margin-bottom: 0;">
@@ -8,8 +8,8 @@
   </div>
 
   <% if @message %>
-    <div style="margin-block: 30px;">
-      <span style="display: block; margin-block-start: 15px;">
+    <div style="margin-top: 30px; margin-bottom: 30px;">
+      <span style="display: block; margin-top: 15px;">
         With the latest flag, the user included this comment:
       </span>
       <p><em><%= @message %></em></p>
