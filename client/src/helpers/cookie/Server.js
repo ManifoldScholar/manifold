@@ -1,4 +1,4 @@
-import cookie from "cookie";
+import * as cookie from "cookie";
 
 export default class ServerCookie {
   constructor(req, res) {
@@ -28,7 +28,7 @@ export default class ServerCookie {
 
   adjustedOptions(options) {
     const out = { ...options };
-    if (out.expires) {
+    if (out.expires && typeof out.expires === "number") {
       out.expires = new Date(new Date() * 1 + out.expires * 864e5);
     }
     return out;

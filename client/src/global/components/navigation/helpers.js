@@ -69,16 +69,21 @@ const FE_ROUTE_MAP = {
 const BE_ROUTE_MAP = {
   resourceCollection: {
     regex: /^\/backend\/projects\/resource-collection/,
-    link: `/projects/[pId]/resource-collection`
+    link: `/projects/[pId]/resource-collection/[id]`
   },
   resource: {
     regex: /^\/backend\/projects\/resource/,
-    link: `/projects/[pId]/resource`
+    link: `/projects/[pId]/resource/[id]`
   },
   projectCollection: {
     regex: /^\/backend\/projects\/project-collections/,
     link: `/projects/project-collection`,
     hasList: `/projects/project-collections`
+  },
+  text: {
+    regex: /^\/backend\/projects\/text/,
+    link: `/projects/[pId]`,
+    hasList: true
   },
   project: {
     regex: /^\/backend\/projects/,
@@ -138,15 +143,14 @@ const handlePageRoute = (id, pages) => {
 const handleRouteWithProjectId = (id, entities, routeKey) => {
   if (!id) return `/`;
 
-  const records =
-    routeKey === "resourceCollection"
-      ? entities.resourceCollections
-      : entities.resources;
+  const records = entities[`${routeKey}s`];
 
   const projectId = getProjectId(id, records);
 
   return projectId
-    ? `${BE_ROUTE_MAP[routeKey].link.replace("[pId]", projectId)}/${id}`
+    ? `${BE_ROUTE_MAP[routeKey].link
+        .replace("[pId]", projectId)
+        .replace("[id]", id)}`
     : `/`;
 };
 
@@ -162,7 +166,11 @@ const getFrontendPath = (pathname, entities) => {
   const identifier = extractIdentifier(pathname, route.regex);
 
   if (routeKey === "page") return handlePageRoute(identifier, entities.pages);
-  if (routeKey === "resource" || routeKey === "resourceCollection")
+  if (
+    routeKey === "resource" ||
+    routeKey === "resourceCollection" ||
+    routeKey === "text"
+  )
     return handleRouteWithProjectId(identifier, entities, routeKey);
 
   /* eslint-disable no-nested-ternary */

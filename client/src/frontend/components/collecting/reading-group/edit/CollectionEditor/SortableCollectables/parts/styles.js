@@ -2,13 +2,26 @@ import styled from "@emotion/styled";
 import {
   buttonUnstyled,
   utilityPrimary,
-  textTruncate
+  textTruncate,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export const Action = styled.button`
   ${buttonUnstyled}
   ${utilityPrimary}
   font-size: 12px;
+
+  &[data-drag-handle] {
+    cursor: grab;
+
+    &:focus-visible {
+      ${defaultFocusStyle}
+    }
+  }
+
+  & + & {
+    margin-block-start: 12px;
+  }
 `;
 
 export const ActionPadded = styled(Action)`

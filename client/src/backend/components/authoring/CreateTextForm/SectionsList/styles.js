@@ -3,7 +3,6 @@ import {
   fluidScale,
   buttonUnstyled,
   utilityPrimary,
-  dragging,
   defaultFocusStyle
 } from "theme/styles/mixins";
 
@@ -16,24 +15,14 @@ export const Section = styled.li`
   font-weight: var(--font-weight-regular);
   letter-spacing: 0.015em;
   border-bottom: 1px solid var(--input-border-color);
-  padding-block: 13px;
-
-  ${({ $dragging }) =>
-    $dragging &&
-    `
-  ${dragging}
-
-  background-color: var(--drawer-bg-color);
-  padding-inline: 8px;
-  border-radius: 5px;
-  border: 0;
-  `}
+  padding-block: 0.6em;
 `;
 
 export const ButtonGroup = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  gap: 12px;
+  align-items: center;
+  gap: 4px;
 `;
 
 export const Button = styled.button`
@@ -43,8 +32,4 @@ export const Button = styled.button`
   &:focus-visible {
     ${defaultFocusStyle}
   }
-`;
-
-export const DragHandle = styled(Button)`
-  cursor: grab;
 `;

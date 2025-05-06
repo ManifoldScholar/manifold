@@ -5,9 +5,11 @@ import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import * as Styled from "./styles";
+import { useNavigate } from "react-router-dom-v5-compat";
 
-function HeadingManageGroup({ readingGroup, history, location }) {
+function HeadingManageGroup({ readingGroup, location }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const homepageStaticPath = lh.link(
     "frontendReadingGroupHomepageStatic",
@@ -20,8 +22,8 @@ function HeadingManageGroup({ readingGroup, history, location }) {
   const inEditMode = location.pathname === homepageEditPath;
 
   function handleSwitchChange() {
-    if (!inEditMode) return history.push(homepageEditPath);
-    history.push(homepageStaticPath);
+    if (!inEditMode) return navigate(homepageEditPath);
+    navigate(homepageStaticPath);
   }
 
   return (
@@ -68,7 +70,6 @@ HeadingManageGroup.displayName = "ReadingGroup.Heading.ManageGroup";
 
 HeadingManageGroup.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 };
 

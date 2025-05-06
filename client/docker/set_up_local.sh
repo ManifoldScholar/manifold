@@ -6,6 +6,4 @@ ROOT="$(realpath "$(dirname "$0")/..")"
 
 cd "$ROOT"
 
-npm install --location=global yarn
-
 yarn

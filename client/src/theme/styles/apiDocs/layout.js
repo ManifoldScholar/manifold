@@ -239,6 +239,7 @@ export default `
     }
 
     .opblock-summary-path,
+    .opblock-summary-path-description-wrapper,
     .opblock-summary-operation-id,
     .opblock-summary-path__deprecated {
       font-family: var(--font-family-sans);
@@ -254,6 +255,10 @@ export default `
       }
     }
 
+    .opblock-summary-path {
+      padding-inline-start: 0;
+    }
+
     .opblock-summary-path__deprecated {
       text-decoration: line-through;
     }
@@ -266,6 +271,7 @@ export default `
       ${textBody}
       flex: 1 1 auto;
       font-size: 16px;
+      font-weight: normal;
       word-break: break-word;
     }
 

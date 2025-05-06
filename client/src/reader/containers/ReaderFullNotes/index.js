@@ -145,6 +145,7 @@ function ReaderFullNotesContainer({
 
   return (
     <Overlay
+      open
       closeCallback={closeCallback}
       contentWidth={950}
       {...getOverlayPropsForGroup()}

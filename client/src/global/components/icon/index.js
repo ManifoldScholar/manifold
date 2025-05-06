@@ -8,6 +8,7 @@ import AnnotationGroup24 from "./24/AnnotationGroup";
 import AnnotationGroupAlt24 from "./24/AnnotationGroupAlt";
 import Archive24 from "./24/Archive";
 import Arrow24 from "./24/Arrow";
+import ArrowCardinals32 from "./32/ArrowCardinals";
 import ArrowDown16 from "./16/ArrowDown";
 import ArrowDown24 from "./24/ArrowDown";
 import ArrowDown32 from "./32/ArrowDown";
@@ -20,6 +21,7 @@ import ArrowRight24 from "./24/ArrowRight";
 import ArrowRight32 from "./32/ArrowRight";
 import ArrowUp16 from "./16/ArrowUp";
 import ArrowUp32 from "./32/ArrowUp";
+import ArrowUpDown32 from "./32/ArrowUpDown";
 import Avatar16 from "./16/Avatar";
 import Avatar24 from "./24/Avatar";
 import Avatar64 from "./64/Avatar";
@@ -194,6 +196,7 @@ export default {
   AnnotationGroupAlt24,
   Archive24,
   Arrow24,
+  ArrowCardinals32,
   ArrowDown16,
   ArrowDown24,
   ArrowDown32,
@@ -206,6 +209,7 @@ export default {
   ArrowRight32,
   ArrowUp16,
   ArrowUp32,
+  ArrowUpDown32,
   Avatar16,
   Avatar24,
   Avatar64,

@@ -13,7 +13,7 @@ import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import withFilteredLists, { assetFilters } from "hoc/withFilteredLists";
 import { ingestionSourcesAPI } from "api";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import * as Styled from "./styles";
 
 function TextAssetsContainer({
@@ -24,7 +24,7 @@ function TextAssetsContainer({
   entitiesListSearchParams
 }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 10,
@@ -61,7 +61,7 @@ function TextAssetsContainer({
   };
 
   const onEdit = id => {
-    history.push(lh.link("backendTextAssetEdit", text.id, id));
+    navigate(lh.link("backendTextAssetEdit", text.id, id));
   };
 
   const deleteAsset = useApiCallback(ingestionSourcesAPI.destroy);

@@ -34,7 +34,9 @@ export default function ProjectCollectionList(props) {
         entityComponentProps={{
           active: id,
           clickHandler: onCollectionSelect,
-          visibilityToggleHandler: onToggleVisibility
+          visibilityToggleHandler: onToggleVisibility,
+          onReorder: onCollectionOrderChange,
+          itemCount: projectCollections.length
         }}
         useDragHandle
         listStyle="bare"

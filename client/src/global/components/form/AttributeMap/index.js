@@ -1,6 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Droppable
+} from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Mapping from "./Mapping";
 import Instructions from "../Instructions";
 import Attribute from "./Attribute";
@@ -109,7 +112,7 @@ class FormColumnMap extends PureComponent {
           onDragEnd={this.onDragEnd}
         >
           <FieldWrapper>
-            <Styled.ColumnMap>
+            <Styled.ColumnMap className="rbd-migration-resets">
               <Styled.ColumnMappable>
                 <Styled.ColumnHeading>
                   {t("forms.attribute_map.spreadsheet_cols")}
@@ -137,7 +140,7 @@ class FormColumnMap extends PureComponent {
                   {t("forms.attribute_map.available")}
                 </Styled.ColumnHeading>
                 <Droppable droppableId="attributesAvailable" isDropDisabled>
-                  {(provided, snapshotIgnored) => (
+                  {(provided, snapshot) => (
                     <Styled.Available ref={provided.innerRef}>
                       {sortedAttributes.map((attribute, index) => {
                         return (
@@ -145,6 +148,9 @@ class FormColumnMap extends PureComponent {
                             key={attribute}
                             name={attribute}
                             index={index}
+                            isDragging={
+                              snapshot.draggingFromThisWith === attribute
+                            }
                           />
                         );
                       })}

@@ -1,11 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import {
-  TransitionGroup as ReactTransitionGroup,
-  CSSTransition
-} from "react-transition-group";
-import { Swipeable } from "react-swipeable";
 import includes from "lodash/includes";
+import debounce from "lodash/debounce";
 import ResourceSlide from "frontend/components/resource-slide";
 import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -48,11 +44,14 @@ class ResourceSlideshow extends PureComponent {
       totalCount: 0,
       slideDirection: "left"
     };
-    this.state.map = this.buildNewMap(
+    this.state.map = this.buildInitialMap(
       props.collectionResources,
       props.pagination
     );
     this.state.totalCount = props.pagination.totalCount || 0;
+
+    this.sliderRef = React.createRef(null);
+    this.debouncedScroll = debounce(this.bindScroll, 100);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -73,16 +72,36 @@ class ResourceSlideshow extends PureComponent {
 
   componentDidMount() {
     document.addEventListener("keyup", this.bindKeyboard, false);
+
+    if (this.sliderRef.current) {
+      this.sliderRef.current.addEventListener("scroll", this.debouncedScroll);
+    }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.collectionResources !== prevProps.collectionResources) {
       this.updateMap(this.props.collectionResources, this.props.pagination);
+    }
+
+    if (prevState.position !== this.state.position && this.sliderRef.current) {
+      const clientWidth = this.sliderRef.current.clientWidth;
+
+      this.sliderRef.current.scrollTo({
+        left: (this.state.position - 1) * clientWidth,
+        top: 0
+      });
     }
   }
 
   componentWillUnmount() {
     document.removeEventListener("keyup", this.bindKeyboard, false);
+
+    if (this.sliderRef.current) {
+      this.sliderRef.current.removeEventListener(
+        "scroll",
+        this.debouncedScroll
+      );
+    }
   }
 
   getFigureByType(resource) {
@@ -106,6 +125,18 @@ class ResourceSlideshow extends PureComponent {
       this.handleSlideNext();
     } else if (event.keyCode === 37) {
       this.handleSlidePrev();
+    }
+  };
+
+  bindScroll = event => {
+    const boundary = event.target.getBoundingClientRect();
+    const scrollLeft = Math.round(event.target.scrollLeft);
+    const width = Math.round(boundary.width);
+    const activeCalc = Math.round(scrollLeft / width);
+    const active = scrollLeft === 0 || activeCalc < 0 ? 0 : activeCalc;
+
+    if (active + 1 !== this.state.position) {
+      this.updatePosition(active + 1);
     }
   };
 
@@ -146,8 +177,11 @@ class ResourceSlideshow extends PureComponent {
     this.updatePosition(newPosition);
   };
 
-  isLoaded(position) {
-    return this.state.map.hasOwnProperty(position);
+  isLoaded(index) {
+    return (
+      this.state.map.hasOwnProperty(index) &&
+      typeof this.state.map[index] === "object"
+    );
   }
 
   positionToPage(position, perPage) {
@@ -167,16 +201,22 @@ class ResourceSlideshow extends PureComponent {
     this.setState({ map });
   }
 
-  updatePosition(newPosition) {
+  async updatePosition(newPosition) {
     if (!this.isLoaded(newPosition)) {
       this.handleUnloadedSlide(newPosition);
     }
+
     this.setState({ position: newPosition });
+  }
+
+  buildInitialMap(collectionResources, pagination) {
+    const slots = Array.from(Array(pagination.totalCount).keys());
+    return { ...slots, ...collectionResources };
   }
 
   buildNewMap(collectionResources, pagination) {
     const updates = {};
-    const start = pagination.perPage * (pagination.currentPage - 1) + 1;
+    const start = pagination.perPage * (pagination.currentPage - 1);
     collectionResources.forEach((collectionResource, index) => {
       updates[start + index] = collectionResource;
     });
@@ -184,65 +224,48 @@ class ResourceSlideshow extends PureComponent {
   }
 
   renderSlideShow() {
-    const position = this.state.position;
-    const collectionResource = this.state.map[position];
+    const { map, position } = this.state;
+    const slides = Object.values(map);
 
-    return (
-      <CSSTransition
-        key={position}
-        classNames={this.state.slideDirection}
-        timeout={{ enter: 500, exit: 500 }}
+    return slides.map((slide, index) => (
+      <Styled.Slide
+        key={slide.id ?? index}
+        id={slide.id}
+        data-active={index === position - 1}
       >
-        <Styled.Slide>
-          {this.isLoaded(position) ? (
-            this.getFigureByType(collectionResource)
-          ) : (
-            <ResourceSlide.SlideLoading />
-          )}
-        </Styled.Slide>
-      </CSSTransition>
-    );
+        {this.isLoaded(index) ? (
+          this.getFigureByType(slide)
+        ) : (
+          <ResourceSlide.SlideLoading />
+        )}
+      </Styled.Slide>
+    ));
   }
 
   renderPlaceholder() {
     return (
-      <CSSTransition
-        key="placeholder"
-        classNames={this.state.slideDirection}
-        timeout={{ enter: 500, exit: 500 }}
-      >
-        <div>
-          <Styled.Slide>
-            <ResourceSlide.SlidePlaceholder />
-          </Styled.Slide>
-        </div>
-      </CSSTransition>
+      <Styled.Slide data-active>
+        <ResourceSlide.SlidePlaceholder />
+      </Styled.Slide>
     );
   }
 
   render() {
     const position = this.state.position;
     const totalCount = this.state.totalCount;
-    const collectionResource = this.state.map[position];
+    const collectionResource = this.state.map[position - 1];
     const collectionResourcesCount = this.props.collectionResources.length;
     const t = this.props.t;
 
     return (
       <Styled.SlideShow>
-        <Swipeable
-          onSwipedLeft={this.handleSlideNext}
-          onSwipedRight={this.handleSlidePrev}
-        >
-          <Styled.SlidesWrapper>
-            <ReactTransitionGroup>
-              {collectionResourcesCount > 0
-                ? this.renderSlideShow()
-                : this.renderPlaceholder()}
-            </ReactTransitionGroup>
-          </Styled.SlidesWrapper>
-        </Swipeable>
+        <Styled.SlidesWrapper ref={this.sliderRef}>
+          {collectionResourcesCount > 0
+            ? this.renderSlideShow()
+            : this.renderPlaceholder()}
+        </Styled.SlidesWrapper>
         <Styled.Footer>
-          {this.isLoaded(position) ? (
+          {this.isLoaded(position - 1) ? (
             <ResourceSlide.Caption
               resource={collectionResource}
               resourceCollection={this.props.resourceCollection}

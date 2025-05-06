@@ -3,7 +3,7 @@
     "add_block": "Add content block \"{{blockTitle}}\"",
     "delete_block": "Delete content block \"{{blockTitle}}\"",
     "edit_block": "Edit content block \"{{blockTitle}}\"",
-    "hide_block": "Hide  content block \"{{blockTitle}}\"",
+    "hide_block": "Hide content block \"{{blockTitle}}\"",
     "show_block": "Show content block \"{{blockTitle}}\"",
     "authorized": "Authorized",
     "unauthorized": "Unauthorized",

@@ -36,7 +36,7 @@ export const ResetButton = styled.button`
   margin-top: 8px;
   font-size: 13px;
 
-  &.focus-visible {
+  &:focus-visible {
     color: var(--focus-color);
   }
 `;

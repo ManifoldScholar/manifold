@@ -1,28 +1,33 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { readingGroupsAPI, collectingAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import CategoryCreator from "./CategoryCreator";
 import SortableCategories from "./SortableCategories";
-import CategoriesList from "./SortableCategories/CategoriesList";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
+import { useNotification } from "hooks";
 import * as Styled from "./styles";
-
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 const { request } = entityStoreActions;
 
-function CollectionEditor({
+export default function CollectionEditor({
   readingGroup,
   categories,
   responses,
-  refresh,
-  setScreenReaderStatus: announce
+  refresh
 }) {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
+  const notifyUpdateError = useNotification(() => ({
+    level: 2,
+    id: "READING_GROUP_UPDATE_FAILURE",
+    heading: t("notifications.reading_group_update_failure"),
+    body: t("notifications.reading_group_update_failure_body"),
+    expiration: 5000
+  }));
 
   const collection = getEntityCollection(readingGroup);
 
@@ -48,7 +53,11 @@ function CollectionEditor({
       changes
     );
     const updateRequest = request(call, requests.feReadingGroupCategoryUpdate);
-    dispatch(updateRequest).promise.then(() => refresh());
+    dispatch(updateRequest).promise.catch(err => {
+      console.error(err);
+      notifyUpdateError();
+      refresh();
+    });
   }
 
   function removeCategory(category) {
@@ -57,102 +66,45 @@ function CollectionEditor({
       call,
       requests.feReadingGroupCategoryDestroy
     );
-    dispatch(destroyRequest).promise.then(() => refresh());
+    dispatch(destroyRequest).promise.catch(err => {
+      console.error(err);
+      notifyUpdateError();
+      refresh();
+    });
   }
 
   function updateCollectable(collectable) {
     const call = collectingAPI.collect([collectable], readingGroup);
     const updateRequest = request(call, requests.feCollectCollectable);
-    dispatch(updateRequest).promise.then(() => refresh());
+    dispatch(updateRequest).promise.catch(err => {
+      console.error(err);
+      notifyUpdateError();
+      refresh();
+    });
   }
 
   function removeCollectable(collectable) {
     const call = collectingAPI.remove([collectable], readingGroup);
     const updateRequest = request(call, requests.feCollectCollectable);
-    dispatch(updateRequest).promise.then(() => refresh());
+    dispatch(updateRequest).promise.catch(err => {
+      console.error(err);
+      notifyUpdateError();
+      refresh();
+    });
   }
 
-  function determineMovePosition(destinationId, type, direction) {
-    if (direction === "down") return 1;
-    const destinationCollectables =
-      collection.attributes.categoryMappings[destinationId]?.[type];
-    return destinationCollectables?.length + 1 || 1;
+  function onCategoryEditError(err) {
+    console.error(err);
+    notifyUpdateError();
+    refresh();
   }
-
-  const validateTargetPosition = (targetPosition, direction) => {
-    if (targetPosition === 0 || targetPosition > categories.length + 1)
-      return targetPosition;
-
-    const destination = categories.find(
-      c => c.attributes.position === targetPosition
-    );
-
-    if (destination?.attributes.markdownOnly) {
-      const next =
-        direction === "down" ? targetPosition + 1 : targetPosition - 1;
-      return validateTargetPosition(next, direction);
-    }
-
-    return targetPosition;
-  };
-
-  const handleCollectableMove = sourceId => ({ id, type, direction }) => {
-    const sourcePosition =
-      sourceId === "$uncategorized$"
-        ? categories.length + 1
-        : categories.find(c => c.id === sourceId)?.attributes.position;
-
-    const initialTargetPosition =
-      direction === "down" ? sourcePosition + 1 : sourcePosition - 1;
-
-    const targetPosition = validateTargetPosition(
-      initialTargetPosition,
-      direction
-    );
-
-    if (targetPosition === 0) {
-      announce(t("messages.cannot_move_up"));
-      return;
-    }
-
-    if (targetPosition > categories.length + 1) {
-      announce(t("messages.cannot_move_down"));
-      return;
-    }
-
-    const destination = categories.find(
-      c => c.attributes.position === targetPosition
-    );
-
-    const destinationId =
-      targetPosition === categories.length + 1
-        ? "$uncategorized$"
-        : destination.id;
-
-    const position = determineMovePosition(destinationId, type, direction);
-
-    const updatedCollectable = {
-      groupingId: destinationId,
-      id,
-      position,
-      type
-    };
-    updateCollectable(updatedCollectable);
-    announce(
-      t("messages.item_moved_category", {
-        category:
-          destination?.attributes.title.plaintext || t("common.uncategorized")
-      })
-    );
-  };
 
   const callbacks = {
-    onCategoryEdit: refresh,
     onCategoryDrag: updateCategory,
     onCategoryRemove: removeCategory,
     onCollectableDrag: updateCollectable,
     onCollectableRemove: removeCollectable,
-    onCollectableMove: handleCollectableMove
+    onCategoryEditError
   };
 
   return (
@@ -165,24 +117,16 @@ function CollectionEditor({
           isMarkdown
         />
       </Styled.CategoryInputs>
-      <SortableCategories
-        collection={collection}
-        responses={responses}
-        callbacks={callbacks}
-      >
-        {(categoryOrder, mappings, activeType) => (
-          <CategoriesList
-            groupId={readingGroup.id}
-            categories={categories}
-            categoryOrder={categoryOrder}
-            mappings={mappings}
-            responses={responses}
-            callbacks={callbacks}
-            activeType={activeType}
-            newMarkdownBlock={newMarkdownBlock}
-          />
-        )}
-      </SortableCategories>
+      {categories && (
+        <SortableCategories
+          collection={collection}
+          categories={categories}
+          responses={responses}
+          callbacks={callbacks}
+          groupId={readingGroup.id}
+          newMarkdownBlock={newMarkdownBlock}
+        />
+      )}
     </Styled.Editor>
   );
 }
@@ -195,5 +139,3 @@ CollectionEditor.propTypes = {
   refresh: PropTypes.func.isRequired,
   categories: PropTypes.array
 };
-
-export default withScreenReaderStatus(CollectionEditor);

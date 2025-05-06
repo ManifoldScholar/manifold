@@ -5,8 +5,7 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "node": true,
-    "jest": true
+    "node": true
   },
   "rules": {
 
@@ -31,19 +30,21 @@
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-curly-brace-presence": 0,
     "react/no-unused-state": 0,
+    "react/react-in-jsx-scope": "off",
 
     "import/order": 0,
     "no-restricted-globals": 0,
     "getter-return": 0,
     "prefer-promise-reject-errors": 0,
     "no-else-return": 0,
+    "no-console": ["error", { "allow": ["warn", "error"] }],
 
     "jsx-a11y/label-has-associated-control": 0,
     "jsx-a11y/control-has-associated-label": 0,
 
     ///////// END NEW //////////////////
 
-    "camelcase": ['error', {
+    "camelcase": ["error", {
       "properties": "never",
       "ignoreDestructuring": false,
       "allow": [
@@ -204,13 +205,5 @@
     "__CABLE_URL__": true,
     "socket": true,
     "def": "readonly"
-  },
-  "overrides": [
-    {
-      "files": [ "*.stories.js" ],
-      "rules": {
-        "no-console": 0
-      }
-    }
-  ]
+  }
 }

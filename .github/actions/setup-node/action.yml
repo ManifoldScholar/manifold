@@ -2,10 +2,10 @@ name: "Setup Node.js"
 runs:
   using: "composite"
   steps:
-    - name: "Install Node 16.x"
-      uses: actions/setup-node@v3
+    - name: "Install Node"
+      uses: actions/setup-node@v4
       with:
-        node-version: "16"
+        node-version-file: "./client/package.json"
         cache: "yarn"
         cache-dependency-path: ./client/yarn.lock
 
@@ -14,4 +14,4 @@ runs:
         NODE_ENV: development
       working-directory: "./client"
       shell: bash
-      run: yarn install --frozen-lockfile
+      run: yarn install --immutable

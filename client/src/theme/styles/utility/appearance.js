@@ -73,7 +73,7 @@ export default `
     position: relative;
   }
 
-  .no-focus-outline.focus-visible {
+  .no-focus-outline:focus-visible {
     outline: none;
   }
 
@@ -109,7 +109,7 @@ export default `
     transition: none;
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       color: var(--color-base-neutral85);
       background-color: var(--color-interaction-light);
       border-color: var(--color-interaction-light);
@@ -119,5 +119,28 @@ export default `
 
   .inline-block {
     display: inline-block;
+  }
+
+  .has-scroll-lock {
+    overflow: hidden;
+    scrollbar-gutter: stable;
+    position: absolute;
+    width: 100%;
+  }
+
+  .drag-placeholder {
+    opacity: .5;
+    pointer-events: none;
+  }
+
+  .rbd-migration-resets {
+    *[data-rbd-placeholder-context-id] {
+      display: none;
+    }
+
+    *[data-rbd-drop-indicator] {
+      height: 4px !important;
+      background-color: var(--color-accent-primary) !important;
+    }
   }
 `;

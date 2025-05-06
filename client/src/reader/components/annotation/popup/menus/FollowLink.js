@@ -1,9 +1,8 @@
-import React from "react";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
-import { useHistory } from "react-router-dom";
 
 function FollowLink({
   menu,
@@ -17,11 +16,11 @@ function FollowLink({
   const { link, annotationIds } = activeEvent;
   const { openViewAnnotationsDrawer } = actions;
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleAnnotateClick() {
     if (!openViewAnnotationsDrawer || !annotationIds) return;
-    if (annotationHref) history.push(annotationHref);
+    if (annotationHref) navigate(annotationHref);
     return openViewAnnotationsDrawer(annotationIds);
   }
   const { t } = useTranslation();

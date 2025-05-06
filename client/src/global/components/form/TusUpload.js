@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import setter from "./setter";
 import Base from "./Upload/Base";
-import tus from "tus-js-client";
+import { Upload } from "tus-js-client";
 import config from "config";
 
 export class FormTusUpload extends Component {
@@ -90,7 +90,7 @@ export class FormTusUpload extends Component {
     const { attachment } = state;
     if (attachment) {
       const { type: mimeType, name: filename } = attachment;
-      const upload = new tus.Upload(attachment, {
+      const upload = new Upload(attachment, {
         chunkSize: 5 * 1024 * 1024,
         endpoint: config.services.api + "/api/files",
         retryDelays: [0, 1000, 3000, 5000],
@@ -98,7 +98,6 @@ export class FormTusUpload extends Component {
           filename,
           mimeType
         },
-        resume: false,
         onError: this.handleUploadError,
         onProgress: this.handleUploadProgress,
         onSuccess: () => this.handleUploadSuccess(upload, attachment)

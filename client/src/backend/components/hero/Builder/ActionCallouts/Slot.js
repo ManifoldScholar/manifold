@@ -4,7 +4,7 @@ import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import classNames from "classnames";
 import { withRouter } from "react-router-dom";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Chip from "./Chip";
 import { withTranslation } from "react-i18next";
 
@@ -20,7 +20,10 @@ class Slot extends PureComponent {
     model: PropTypes.object.isRequired,
     actionCalloutEditRoute: PropTypes.string.isRequired,
     actionCalloutNewRoute: PropTypes.string.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
+    index: PropTypes.number,
+    slotCount: PropTypes.number,
+    onKeyboardMove: PropTypes.func
   };
 
   get title() {
@@ -90,6 +93,13 @@ class Slot extends PureComponent {
                     actionCallout={actionCallout}
                     history={this.history}
                     model={this.model}
+                    isDragging={
+                      snapshot.draggingFromThisWith === actionCallout.id
+                    }
+                    chipCount={this.actionCallouts.length}
+                    slotIndex={this.props.index}
+                    slotCount={this.props.slotCount}
+                    onKeyboardMove={this.props.onKeyboardMove}
                   />
                 ))}
                 {provided.placeholder}

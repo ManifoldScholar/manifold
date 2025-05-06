@@ -80,6 +80,14 @@ export const Editable = styled(BaseEditable)`
   margin: auto;
   padding-block: 4em;
   padding-inline: var(--container-padding-inline-fluid);
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  *[data-slate-placeholder] {
+    top: auto !important;
+  }
 `;
 
 export const Controls = styled.div`

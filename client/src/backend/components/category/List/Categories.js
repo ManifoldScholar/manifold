@@ -11,7 +11,8 @@ export default class CategoryListCategories extends PureComponent {
     categories: PropTypes.array.isRequired,
     activeType: PropTypes.string,
     callbacks: PropTypes.object.isRequired,
-    onTextKeyboardMove: PropTypes.func.isRequired
+    onTextKeyboardMove: PropTypes.func.isRequired,
+    dragging: PropTypes.string
   };
 
   get categories() {
@@ -55,8 +56,11 @@ export default class CategoryListCategories extends PureComponent {
         key={category.id}
         index={index}
         category={category}
+        // add 1 to account for Uncategorized
+        categoryCount={this.props.categories.length + 1}
         texts={this.categoryTexts(category)}
         onTextKeyboardMove={this.props.onTextKeyboardMove}
+        isDragging={this.props.dragging === category.id}
       />
     ));
   }

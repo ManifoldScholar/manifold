@@ -11,7 +11,7 @@ import has from "lodash/has";
 import forEach from "lodash/forEach";
 import isFunction from "lodash/isFunction";
 import pick from "lodash/pick";
-import brackets2dots from "brackets2dots";
+import { brackets2dots } from "utils/string";
 import { Prompt } from "react-router-dom";
 import { FormContext } from "helpers/contexts";
 import isArray from "lodash/isArray";

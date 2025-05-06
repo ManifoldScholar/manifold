@@ -1,30 +1,79 @@
-import React from "react";
+import * as React from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
+import PopoverMenu from "global/components/popover/Menu";
 import IconComposer from "global/components/utility/IconComposer";
 import CategoryEdit from "./CategoryEdit";
 import CategoryRemove from "./CategoryRemove";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import * as Styled from "./styles";
 
 function CategoryHeader({
   category,
   groupId,
-  dragProps,
-  onCategoryEdit,
+  dragHandleRef,
   onCategoryRemove,
-  initExpanded
+  initExpanded,
+  setCollapsed,
+  manualCollapsed,
+  collectableOver,
+  onCategoryMove,
+  onCategoryEditError,
+  index,
+  categoryCount
 }) {
   const { t } = useTranslation();
 
-  const { markdownOnly, title } = category?.attributes ?? {};
+  const { markdownOnly, title, descriptionPlaintext } =
+    category?.attributes ?? {};
+
+  const [categoryDragActive, setCategoryDragActive] = useState();
+
+  useEffect(() => {
+    return monitorForElements({
+      onDragStart({ source }) {
+        if (source.data.type === "categories") {
+          setCategoryDragActive(true);
+        }
+      },
+      onDrop({ source }) {
+        if (source.data.type === "categories") {
+          setCategoryDragActive(false);
+        }
+      }
+    });
+  }, []);
+
+  const kind = markdownOnly ? "block" : "category";
+  const collapseToggleLabel = manualCollapsed
+    ? `forms.category.expand_${kind}`
+    : `forms.category.collapse_${kind}`;
 
   return (
     <>
       <Collapse initialVisible={initExpanded}>
-        <Styled.Header>
-          {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
-          {dragProps && (
+        <Styled.Header
+          $borderRadius={categoryDragActive || manualCollapsed}
+          $bg={collectableOver}
+        >
+          <Styled.TitleWrapper>
+            <Styled.Action as="button" onClick={setCollapsed}>
+              <IconComposer
+                icon={manualCollapsed ? "disclosureDown24" : "disclosureUp24"}
+                size="default"
+              />
+              <span className="screen-reader-text">
+                {t(collapseToggleLabel)}
+              </span>
+            </Styled.Action>
+            {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
+            {markdownOnly && (categoryDragActive || manualCollapsed) && (
+              <Styled.Title>{descriptionPlaintext}</Styled.Title>
+            )}
+          </Styled.TitleWrapper>
+          {dragHandleRef && (
             <Styled.Actions>
               <CategoryRemove
                 isMarkdown={!!markdownOnly}
@@ -36,13 +85,38 @@ function CategoryHeader({
                   {t("forms.category.edit")}
                 </span>
               </Styled.Action>
-              <Styled.Action {...dragProps.provided.dragHandleProps}>
-                <IconComposer icon="grabber32" size="default" />
-              </Styled.Action>
+              <PopoverMenu
+                disclosure={
+                  <Styled.Action
+                    as="button"
+                    ref={dragHandleRef}
+                    data-drag-handle
+                  >
+                    <IconComposer icon="grabber32" size="default" />
+                    <span className="screen-reader-text">
+                      {t("actions.dnd.reorder_category")}
+                    </span>
+                  </Styled.Action>
+                }
+                actions={[
+                  {
+                    id: "up",
+                    label: t("actions.dnd.move_up_position"),
+                    onClick: () => onCategoryMove(category.id, "up"),
+                    disabled: index === 0
+                  },
+                  {
+                    id: "down",
+                    label: t("actions.dnd.move_down_position"),
+                    onClick: () => onCategoryMove(category.id, "down"),
+                    disabled: index === categoryCount - 1
+                  }
+                ]}
+              />
             </Styled.Actions>
           )}
         </Styled.Header>
-        {dragProps && (
+        {dragHandleRef && (
           <Collapse.Content maxDuration={400}>
             {(visible, toggleVisible) => {
               return (
@@ -50,11 +124,9 @@ function CategoryHeader({
                   <CategoryEdit
                     category={category}
                     groupId={groupId}
-                    onSuccess={() => {
-                      onCategoryEdit();
-                      toggleVisible();
-                    }}
+                    onSuccess={toggleVisible}
                     onCancel={toggleVisible}
+                    onError={onCategoryEditError}
                   />
                 </Styled.Inner>
               );

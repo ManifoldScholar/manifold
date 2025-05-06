@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { meAPI } from "api";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
@@ -32,11 +32,11 @@ function MyReadingGroupsListContainer({ route }) {
   const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
 
   const currentUser = useCurrentUser();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   function handleNewGroupSuccess() {
-    history.push(lh.link("frontendMyReadingGroups"));
+    navigate(lh.link("frontendMyReadingGroups"));
     refresh();
   }
 

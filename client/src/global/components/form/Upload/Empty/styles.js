@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { utilityPrimary, formLabelPrimary } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
+import { Prompt } from "../Base/styles";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -9,6 +10,13 @@ export const Wrapper = styled.div`
   justify-content: center;
   height: 200px;
   padding: 15px;
+  cursor: pointer;
+
+  &:hover {
+    ${Prompt} {
+      color: var(--hover-color);
+    }
+  }
 `;
 
 export const Icon = styled(IconComposer)`

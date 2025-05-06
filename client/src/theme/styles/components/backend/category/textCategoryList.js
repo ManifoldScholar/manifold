@@ -5,7 +5,8 @@ import {
   buttonUnstyled,
   lighten,
   respond,
-  fluidScale
+  fluidScale,
+  revealOnFocus
 } from "theme/styles/mixins";
 
 export default `
@@ -29,6 +30,8 @@ export default `
     }
 
     &__header {
+      --PopoverMenu-inset-block-start: calc(100% + 8px);
+
       ${utilityPrimary}
       display: flex;
       justify-content: space-between;
@@ -76,6 +79,7 @@ export default `
       flex-direction: row;
       align-items: center;
       margin-left: 14px;
+      ${revealOnFocus(".text-categories__keyboard-buttons")}
 
       > * + * {
         margin-left: 14px;
@@ -93,6 +97,10 @@ export default `
           color: var(--error-color);
         }
       }
+    }
+
+    &__keyboard-buttons {
+      display: inherit;
     }
 
     &__dropzone {

@@ -88,13 +88,13 @@ export default `
     transition: background-color ${defaultTransitionProps};
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       color: inherit;
       background-color: var(--box-medium-bg-color);
       outline: 0;
     }
 
-    &.focus-visible {
+    &:focus-visible {
       ${defaultFocusStyle}
       outline-offset: -2px;
     }
@@ -156,7 +156,7 @@ export default `
     transition: background-color ${defaultTransitionProps};
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       --darker-tag-bg-color: var(--box-strong-bg-color);
 
       color: inherit;
@@ -164,7 +164,7 @@ export default `
       outline: 0;
     }
 
-    &.focus-visible {
+    &:focus-visible {
       ${defaultFocusStyle}
       outline-offset: -2px;
     }

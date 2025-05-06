@@ -5,12 +5,16 @@ import Section from "./SectionListItem";
 import { sectionsAPI } from "api";
 import { useApiCallback } from "hooks";
 import { useTranslation } from "react-i18next";
+import * as Styled from "./styles";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
-export default function SectionsList({
+function SectionsList({
   sections = [],
   textId,
   startSectionId,
-  refresh
+  refresh,
+  renderLiveRegion,
+  setScreenReaderStatus
 }) {
   const { t } = useTranslation();
   const updateSection = useApiCallback(sectionsAPI.update);
@@ -25,24 +29,45 @@ export default function SectionsList({
       : error;
   /* eslint-disable no-nested-ternary */
 
-  const onReorder = async ({ id, position }) => {
+  const onReorder = async ({ id, title, position, ...rest }) => {
     setError(null);
     const res = await updateSection(id, { attributes: { position } });
     if (res?.errors) setError("reorder");
-    refresh();
+
+    const announcement = t("actions.dnd.moved_to_position", {
+      title,
+      position
+    });
+    const callback = () => {
+      setScreenReaderStatus(announcement);
+
+      if (rest.callback && typeof rest.callback === "function") {
+        rest.callback();
+      }
+    };
+
+    refresh(callback);
   };
 
   return sections.length ? (
-    <div className="full-width">
+    <Styled.Wrapper className="full-width">
       <EntitiesList
         entities={sections}
         entityComponent={Section}
-        entityComponentProps={{ startSectionId, textId, refresh, setError }}
+        entityComponentProps={{
+          startSectionId,
+          textId,
+          refresh,
+          setError,
+          sectionCount: sections.length,
+          onReorder
+        }}
         listStyle="bare"
         callbacks={{ onReorder }}
         error={errorMessage}
       />
-    </div>
+      {renderLiveRegion("alert")}
+    </Styled.Wrapper>
   ) : null;
 }
 
@@ -54,3 +79,5 @@ SectionsList.propTypes = {
   startTextSectionId: PropTypes.string,
   refresh: PropTypes.func
 };
+
+export default withScreenReaderStatus(SectionsList, false);

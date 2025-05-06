@@ -60,10 +60,14 @@ export class TextWrapperContainer extends PureComponent {
     this.props.dispatch(entityStoreActions.flush(requests.beText));
   }
 
-  fetchText = () => {
+  fetchText = callback => {
     const call = textsAPI.show(this.props.match.params.id);
     const textRequest = request(call, requests.beText);
-    this.props.dispatch(textRequest);
+    this.props.dispatch(textRequest).promise.then(() => {
+      if (callback && typeof callback === "function") {
+        callback();
+      }
+    });
   };
 
   doDestroy = () => {

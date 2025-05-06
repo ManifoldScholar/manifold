@@ -3,6 +3,8 @@ import {
   draggable,
   dragging,
   defaultHoverStyle,
+  defaultFocusStyle,
+  revealOnFocus,
   buttonUnstyled,
   panelRounded,
   rgba,
@@ -121,8 +123,13 @@ export default `
       padding-top: 9px;
       padding-bottom: 9px;
 
-      &.focus-visible {
+      &:focus-visible {
         outline: 0;
+
+        > * {
+          ${defaultFocusStyle}
+          outline-offset: -2px;
+        }
       }
     }
 
@@ -146,7 +153,7 @@ export default `
           box-shadow var(--transition-duration-default) ease-out;
 
         &:hover,
-        &.focus-visible {
+        &:focus-visible {
           outline: 0;
 
           ${respond(
@@ -236,9 +243,16 @@ export default `
     }
 
     &__utility {
+      --PopoverMenu-inset-block-start: calc(100% + 10px);
+      --PopoverMenu-inset-inline-end: -9px;
+      --PopoverMenu-background-color: var(--box-bg-color);
+
       align-self: center;
       flex-shrink: 0;
+      display: flex;
+      gap: 6px;
       margin-inline-start: auto;
+      ${revealOnFocus(".entity-row__utility-keyboard-buttons")}
     }
 
     &__utility-button {
@@ -248,6 +262,10 @@ export default `
         cursor: move;
         cursor: grab;
       }
+    }
+
+    &__utility-keyboard-buttons {
+      display: inherit;
     }
 
     &__figure {
@@ -421,13 +439,13 @@ export default `
 
       .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):hover
         &,
-      .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active).focus-visible
+      .entity-row__row-link--block:not(.entity-row__row-link--in-grid):not(.entity-row__row-link--is-active):focus-visible
         & {
         text-decoration-line: underline;
       }
 
       .entity-row__row-link--in-grid:hover &,
-      .entity-row__row-link--in-grid.focus-visible & {
+      .entity-row__row-link--in-grid:focus-visible & {
         ${respond(
           `text-decoration-line: underline;`,
           breakpointLessOne(65),

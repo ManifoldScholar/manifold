@@ -32,7 +32,6 @@ const FunctionButton = (
         <TooltipContent
           label={t(`editor.tooltips.labels.${tooltip}`)}
           hotkeys={hotkeys[tooltip]}
-          description={t(`editor.tooltips.descriptions.${tooltip}`)}
         />
       }
       xOffset="-50px"

@@ -1,10 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import Current from "./in-list/Current";
 import Available from "./in-list/Available";
-import AvailablePlaceholder from "./in-list/AvailablePlaceholder";
 import typeResolver from "../../helpers/resolver";
 import isFunction from "lodash/isFunction";
 
@@ -17,7 +16,10 @@ export default class ProjectContentBlock extends PureComponent {
     entity: PropTypes.object,
     context: PropTypes.oneOf(["available", "current"]),
     disabled: PropTypes.func,
-    onClickAdd: PropTypes.func
+    onClickAdd: PropTypes.func,
+    isDragging: PropTypes.bool,
+    entityCount: PropTypes.number,
+    announce: PropTypes.func
   };
 
   static defaultProps = {
@@ -99,21 +101,23 @@ export default class ProjectContentBlock extends PureComponent {
             entityCallbacks={this.props.entityCallbacks}
             typeComponent={TypeComponent}
             onClickAdd={this.handleClickAdd}
-            disabled={this.disabled}
+            disabled
+            index={this.props.index}
+            entityCount={this.props.entityCount}
           />
         </div>
       );
 
     return (
-      <Draggable
-        type={TypeComponent.top ? "TOP" : "BOTTOM"}
-        isDragDisabled={this.disabled}
-        draggableId={this.draggableId}
-        index={this.index}
-      >
-        {(provided, snapshot) => {
-          return (
-            <>
+      <>
+        <Draggable
+          type={TypeComponent.top ? "TOP" : "BOTTOM"}
+          isDragDisabled={this.disabled}
+          draggableId={this.draggableId}
+          index={this.index}
+        >
+          {(provided, snapshot) => {
+            return (
               <div
                 {...provided.draggableProps}
                 ref={provided.innerRef}
@@ -123,7 +127,6 @@ export default class ProjectContentBlock extends PureComponent {
                   `${baseClass}--${this.props.context}`,
                   {
                     [`${baseClass}--active`]: !this.disabled,
-                    [`${baseClass}--inactive`]: this.disabled,
                     [`${baseClass}--is-dragging`]: snapshot.isDragging
                   }
                 )}
@@ -134,24 +137,34 @@ export default class ProjectContentBlock extends PureComponent {
                   dragHandleProps={provided.dragHandleProps}
                   typeComponent={TypeComponent}
                   onClickAdd={this.handleClickAdd}
-                  disabled={this.disabled}
+                  index={this.props.index}
+                  entityCount={this.props.entityCount}
+                  announce={this.props.announce}
                 />
               </div>
-              {this.inAvailableList && snapshot.isDragging && (
-                <div
-                  className={classNames(
-                    baseClass,
-                    `${baseClass}--${this.props.context}`,
-                    `${baseClass}--inactive`
-                  )}
-                >
-                  <AvailablePlaceholder typeComponent={TypeComponent} />
-                </div>
-              )}
-            </>
-          );
-        }}
-      </Draggable>
+            );
+          }}
+        </Draggable>
+        {this.props.isDragging && (
+          <div
+            className={classNames(
+              baseClass,
+              `${baseClass}--${this.props.context}`,
+              `${baseClass}--inactive`,
+              "drag-placeholder"
+            )}
+          >
+            <ListContextBlock
+              entity={this.props.entity}
+              entityCallbacks={this.props.entityCallbacks}
+              typeComponent={TypeComponent}
+              index={this.props.index}
+              entityCount={this.props.entityCount}
+              announce={this.props.announce}
+            />
+          </div>
+        )}
+      </>
     );
   }
 }

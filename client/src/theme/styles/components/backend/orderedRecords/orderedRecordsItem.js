@@ -3,7 +3,8 @@ import {
   dragging,
   subtitlePrimary,
   utilityPrimary,
-  buttonUnstyled
+  buttonUnstyled,
+  revealOnFocus
 } from "theme/styles/mixins";
 
 export default `
@@ -92,10 +93,8 @@ export default `
       flex-direction: row;
       align-items: flex-start;
       justify-content: flex-start;
-
-      > * + * {
-        margin-left: 14px;
-      }
+      gap: 14px;
+      ${revealOnFocus(".ordered-records-item__keyboard-buttons")}
     }
 
     &__button {

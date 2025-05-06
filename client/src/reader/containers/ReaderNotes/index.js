@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { useParams, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
+import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { readingGroupsAPI, meAPI, requests } from "api";
 import groupBy from "lodash/groupBy";
@@ -26,7 +27,7 @@ function ReaderNotesContainer({
   children
 }) {
   const { textId, sectionId } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const text = useFromStore("texts", "grab", textId);
   const section = useFromStore("textSections", "grab", sectionId);
 
@@ -91,7 +92,7 @@ function ReaderNotesContainer({
     );
     commonActions.panelToggle("notes");
     commonActions.showMyNotes();
-    history.push(url);
+    navigate(url);
   }
 
   function handleSeeAllClick(event) {
@@ -102,7 +103,7 @@ function ReaderNotesContainer({
       sectionId,
       "#group-annotations"
     );
-    history.push(url);
+    navigate(url);
   }
 
   if (!annotations || !meta) return null;

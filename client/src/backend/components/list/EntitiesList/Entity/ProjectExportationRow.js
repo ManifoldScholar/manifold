@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
-import filesize from "filesize";
+import { filesize } from "filesize";
 import { withTranslation } from "react-i18next";
 
 class ProjectExportationRow extends PureComponent {

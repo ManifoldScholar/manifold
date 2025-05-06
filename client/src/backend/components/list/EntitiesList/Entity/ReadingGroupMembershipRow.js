@@ -41,15 +41,13 @@ function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {
   };
 
   const utility = (
-    <>
-      <button
-        className="entity-row__utility-button"
-        title={t("reading_groups.remove_member")}
-        onClick={() => onDelete(id, name, readingGroup.attributes.name)}
-      >
-        <Utility.IconComposer icon="circleMinus24" size={26} />
-      </button>
-    </>
+    <button
+      className="entity-row__utility-button"
+      title={t("reading_groups.remove_member")}
+      onClick={() => onDelete(id, name, readingGroup.attributes.name)}
+    >
+      <Utility.IconComposer icon="circleMinus24" size={26} />
+    </button>
   );
 
   return <EntityRow utility={utility} {...props} {...additionalProps} />;

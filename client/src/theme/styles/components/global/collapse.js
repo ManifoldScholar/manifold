@@ -7,8 +7,6 @@ export default `
       --collapse-delay: 0;
       --collapse-durationAfterDelay: 0;
 
-      overflow: hidden;
-
       &--visible {
         max-height: var(--collapse-height);
         visibility: visible;
@@ -18,6 +16,7 @@ export default `
       }
 
       &--hidden {
+        overflow: hidden;
         max-height: var(--hidden-height);
         visibility: hidden;
         opacity: 0;

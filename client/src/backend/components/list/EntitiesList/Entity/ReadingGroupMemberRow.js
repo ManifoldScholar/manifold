@@ -28,15 +28,13 @@ export default function ReadingGroupMemberRow({
   })}`;
 
   const utility = (
-    <>
-      <button
-        className="entity-row__utility-button"
-        title={t("reading_groups.remove_member")}
-        onClick={() => onDelete(id, name)}
-      >
-        <Utility.IconComposer icon="circleMinus24" size={26} />
-      </button>
-    </>
+    <button
+      className="entity-row__utility-button"
+      title={t("reading_groups.remove_member")}
+      onClick={() => onDelete(id, name)}
+    >
+      <Utility.IconComposer icon="circleMinus24" size={26} />
+    </button>
   );
 
   return (

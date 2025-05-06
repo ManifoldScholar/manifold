@@ -21,11 +21,12 @@ export default function NavigationPrimary(props) {
     `entityStore.entities.resourceCollections`
   );
   const pages = useFromStore(`entityStore.entities.pages`);
+  const texts = useFromStore(`entityStore.entities.texts`);
 
   const to = getDestinationPath({
     mode: props.mode,
     pathname,
-    entities: { resources, resourceCollections, pages }
+    entities: { resources, resourceCollections, pages, texts }
   });
 
   const authorization = new Authorization();

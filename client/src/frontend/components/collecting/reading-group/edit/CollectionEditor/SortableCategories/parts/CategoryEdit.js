@@ -5,14 +5,14 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { readingGroupsAPI, requests } from "api";
 
-function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
+function CategoryEdit({ category, groupId, onSuccess, onCancel, onError }) {
   const { t } = useTranslation();
 
   function doUpdate(categoryId, data) {
     return readingGroupsAPI.updateCategory(groupId, categoryId, data);
   }
 
-  const isMarkdown = category.attributes?.markdownOnly;
+  const isMarkdown = category?.attributes?.markdownOnly;
 
   const nameLabel = isMarkdown ? t("common.title") : t("forms.category.name");
   const descriptionLabel = isMarkdown
@@ -28,9 +28,10 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel }) {
   return (
     <FormContainer.Form
       model={category}
-      name={`${requests.feReadingGroupCategoryUpdate}-${category.attributes.slug}`}
+      name={`${requests.feReadingGroupCategoryUpdate}-${category?.attributes?.slug}`}
       update={doUpdate}
       onSuccess={onSuccess}
+      onError={onError}
       className="form-secondary"
     >
       <Form.FieldGroup>

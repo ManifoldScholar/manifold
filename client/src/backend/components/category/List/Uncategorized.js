@@ -14,7 +14,8 @@ class CategoryListUncategorized extends PureComponent {
     texts: PropTypes.array.isRequired,
     callbacks: PropTypes.object.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
+    categoryCount: PropTypes.number.isRequired
   };
 
   static defaultProps = {
@@ -58,6 +59,8 @@ class CategoryListUncategorized extends PureComponent {
           callbacks={this.callbacks}
           texts={this.texts}
           onTextKeyboardMove={this.props.onTextKeyboardMove}
+          categoryIndex={this.props.categoryCount} // always last position
+          categoryCount={this.props.categoryCount + 1} // add 1 for Uncategorized
         />
       </div>
     );

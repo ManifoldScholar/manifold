@@ -8,14 +8,22 @@ import {
   respond,
   blockLabelRound,
   fluidScale,
-  defaultFocusStyle
+  defaultFocusStyle,
+  revealOnFocus
 } from "theme/styles/mixins";
 
-export const Item = styled.li`
-  & + & {
-    padding-block-start: 16px;
+export const Wrapper = styled.div`
+  ul > * + *:not([data-rbd-drop-indicator]) {
+    margin-block-start: 16px;
   }
+`;
+
+export const Item = styled.li`
   color: var(--color-neutral-text-extra-light);
+
+  &:first-child {
+    margin-block-start: 16px;
+  }
 `;
 
 export const Title = styled.div`
@@ -50,10 +58,13 @@ export const BG = styled.div`
     $isDragging && `background-color: var(--drawer-bg-color)`}
 `;
 
+export const KeyboardButtons = styled.div``;
+
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   padding: 0;
+  ${revealOnFocus(KeyboardButtons)}
 
   &:hover ~ ${TitleWrapper} {
     color: var(--highlight-color);

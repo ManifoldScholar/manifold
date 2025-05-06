@@ -4,7 +4,7 @@ import { meAPI } from "api";
 import lh from "helpers/linkHandler";
 import ProfileFormFields from "./ProfileFormFields";
 import Greeting from "./Greeting";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { useFromStore, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "frontend/components/privacy/CookiesForm/CookiesFormFields";
@@ -14,7 +14,7 @@ import * as SharedStyles from "../styles";
 
 export default function EditProfileForm({ hideOverlay, mode }) {
   const authentication = useFromStore("authentication");
-  const history = useHistory();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const { currentUser } = authentication ?? {};
@@ -69,7 +69,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
 
   const redirect = route => () => {
     if (hideOverlay) hideOverlay();
-    history.push(lh.link(route));
+    navigate(lh.link(route));
   };
 
   return currentUser ? (
