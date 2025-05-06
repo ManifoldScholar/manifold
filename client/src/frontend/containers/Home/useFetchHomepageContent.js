@@ -24,6 +24,8 @@ export default function useFetchHomepageContent(fetchProjects) {
     []
   );
 
+  const projectPagination = useMemo(() => ({ number: 1, size: 20 }), []);
+
   const journalFilters = useMemo(
     () => ({
       showOnHomepage: true
@@ -34,9 +36,10 @@ export default function useFetchHomepageContent(fetchProjects) {
   const featuresFilters = useMemo(() => ({ home: true }), []);
 
   const { data: projects, loaded: projectsLoaded } = useFetch({
-    request: [projectsAPI.index, projectFilters, { number: 1, size: 20 }],
+    request: [projectsAPI.index, projectFilters, projectPagination],
     condition: fetchProjects
   });
+
   const { data: collections, loaded: collectionsLoaded } = useFetch({
     request: [projectCollectionsAPI.index, collectionFilters],
     withAuthDependency: true,
