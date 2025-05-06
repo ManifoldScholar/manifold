@@ -2118,11 +2118,11 @@ CREATE VIEW public.reading_group_collections AS
 CREATE VIEW public.reading_group_counts AS
  SELECT rg.id AS reading_group_id,
     count(DISTINCT rgm.id) AS memberships_count,
-    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS annotations_count,
     count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS highlights_count,
     count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
-    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE ((NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS comments_count,
     count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
    FROM (((public.reading_groups rg
      LEFT JOIN public.annotations a ON ((a.reading_group_id = rg.id)))
@@ -2165,11 +2165,11 @@ CREATE TABLE public.reading_group_kinds (
 
 CREATE VIEW public.reading_group_membership_counts AS
  SELECT rgm.id AS reading_group_membership_id,
-    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS annotations_count,
     count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS highlights_count,
     count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
-    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE ((NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS comments_count,
     count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
    FROM ((public.reading_group_memberships rgm
      LEFT JOIN public.annotations a ON ((a.reading_group_id = rgm.reading_group_id)))
@@ -2199,11 +2199,11 @@ CREATE TABLE public.reading_group_text_sections (
 CREATE VIEW public.reading_group_user_counts AS
  SELECT rg.id AS reading_group_id,
     rgm.user_id,
-    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS annotations_count,
     count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS highlights_count,
     count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
-    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE ((NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS comments_count,
     count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
    FROM (((public.reading_groups rg
      LEFT JOIN public.annotations a ON ((a.reading_group_id = rg.id)))
@@ -7379,4 +7379,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250129200019'),
 ('20250210192150'),
 ('20250210230256'),
-('20250306230246');
+('20250306230246'),
+('20250506201306');
+
+
