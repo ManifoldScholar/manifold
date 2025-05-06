@@ -1,0 +1,76 @@
+replicaCount: 1
+
+imagePullSecrets:
+  - name: github
+
+volumes:
+  - name: shared-storage
+    persistentVolumeClaim:
+      claimName: princeton-manifold-friends-shared-pvc
+
+resources:
+  limits:
+    memory: "4Gi"
+    cpu: "600m"
+  requests:
+    memory: "2Gi"
+    cpu: "300m"
+
+livenessProbe:
+  enabled: false
+readinessProbe:
+  enabled: false
+
+ingress:
+  enabled: true
+  hosts:
+    - host: princeton-manifold-friends.notch8.cloud
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  tls:
+    - hosts:
+        - princeton-manifold-friends.notch8.cloud
+      secretName: friends-princeton-manifold-tls
+
+redis:
+  enabled: true
+  architecture: standalone
+  auth:
+    password: $REDIS_PASSWORD # FIXME need to set
+
+env:
+  rails_secret_key: $SECRET_KEY_BASE
+
+postgresql:
+  enabled: true
+  image:
+    repository: bitnami/postgresql
+    tag: 14.5.0-debian-11-r35
+  auth:
+    database: princeton_manifold_friends
+    password: $DB_PASSWORD
+    username: princeton_manifold
+  containerPorts:
+    postgresql: 5432
+  primary:
+    service:
+      ports:
+        postgresql: 5432
+  readReplicas:
+    service:
+      ports:
+        postgresql: 5432
+
+nginx:
+  enabled: false
+  service:
+    type: ClusterIP
+  image:
+    registry: ghcr.io
+    repository: notch8/princeton-manifold/nginx
+    tag: $TAG
