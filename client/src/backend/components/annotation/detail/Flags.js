@@ -1,19 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import partition from "lodash/partition";
 import Form from "global/components/form";
 import FormattedDate from "global/components/FormattedDate";
 import * as Styled from "./styles";
 
-export default function FlagsList({ flags, unresolvedFlagsCount }) {
+export default function FlagsList({
+  flags,
+  unresolvedFlagsCount,
+  resolvedFlagsCount
+}) {
   const { t } = useTranslation();
 
-  const [resolved, active] = partition(flags, flag => flag.attributes.resolved);
-  const [, adminResolved] = partition(
-    resolved,
-    flag => flag.attributes.resolvedByCreator
-  );
+  const active = flags.filter(flag => !flag.attributes.resolved);
 
   return (
     <>
@@ -24,12 +23,12 @@ export default function FlagsList({ flags, unresolvedFlagsCount }) {
         color={unresolvedFlagsCount ? "error" : undefined}
       />
       <Styled.FlagsList>
-        {!!adminResolved?.length && (
+        {!!resolvedFlagsCount && (
           <Styled.FlagWrapper>
             <span style={{ color: "var(--color-neutral-text-extra-light)" }}>
-              <b>{adminResolved.length}</b>{" "}
+              <b>{resolvedFlagsCount}</b>{" "}
               {t("records.annotations.resolved_flags_count", {
-                count: adminResolved.length
+                count: resolvedFlagsCount
               })}
             </span>
           </Styled.FlagWrapper>
