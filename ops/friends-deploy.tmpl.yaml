@@ -42,6 +42,14 @@ api:
     host: princeton-manifold-friends-api-rails
   cable:
     host: princeton-manifold-friends-api-cable
+  sidekiq:
+    resources:
+      limits:
+        memory: "12Gi"
+        cpu: "2"
+      requests:
+        memory: "2Gi"
+        cpu: "300m"
 
 client:
   browserApiCableUrl: https://princeton-manifold-friends.notch8.cloud/cable
