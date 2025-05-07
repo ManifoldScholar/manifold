@@ -37,6 +37,18 @@ ingress:
         - princeton-manifold-friends.notch8.cloud
       secretName: friends-princeton-manifold-tls
 
+api:
+  rails:
+    host: princeton-manifold-friends-api-rails
+  cable:
+    host: princeton-manifold-friends-api-cable
+
+client:
+  browserApiCableUrl: https://princeton-manifold-friends.notch8.cloud/cable
+  browserApiUrl: https://princeton-manifold-friends.notch8.cloud
+  serverApiUrl: http://princeton-manifold-friends-api-rails:3020
+  serverHost: princeton-manifold-friends-client
+
 redis:
   enabled: true
   architecture: standalone
@@ -44,7 +56,10 @@ redis:
     password: $REDIS_PASSWORD # FIXME need to set
 
 env:
-  rails_secret_key: $SECRET_KEY_BASE
+  domain: princeton-manifold-friends.notch8.cloud
+  elasticsearchUrl: http://princeton-manifold-friends-es:9200
+  railsDbHost: princeton-manifold-friends-postgresql
+  railsSecretKey: $SECRET_KEY_BASE
 
 postgresql:
   enabled: true
