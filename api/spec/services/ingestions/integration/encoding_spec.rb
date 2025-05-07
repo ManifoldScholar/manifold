@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
-RSpec.describe "When ingesting document with varying character encoding", integration: true do
+RSpec.describe "When ingesting document with varying character encoding", integration: true do # rubocop:todo RSpec/DescribeClass
   include TestHelpers::IngestionHelper
 
   context "when non-latin HTML" do
@@ -24,5 +26,4 @@ RSpec.describe "When ingesting document with varying character encoding", integr
       expect(text.result.text_sections.first.body).to eq_ignoring_whitespace compare
     end
   end
-
 end

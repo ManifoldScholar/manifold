@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Projects
   class GetReaderURL < ActiveInteraction::Base
     string :frontend_url, default: proc { Rails.configuration.manifold.url }

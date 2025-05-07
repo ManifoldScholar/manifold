@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module UnsubscribeToken
   class << self
-
     delegate :verify, to: :verifier
 
     def generate(user)

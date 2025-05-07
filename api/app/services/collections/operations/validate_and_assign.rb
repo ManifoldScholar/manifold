@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Collections
   module Operations
     # Designed to accept an assignment tuple from the server.

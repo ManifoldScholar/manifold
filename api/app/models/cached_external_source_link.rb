@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CachedExternalSourceLink < ApplicationRecord
   upsert_keys %i[cached_external_source_id text_id]
 

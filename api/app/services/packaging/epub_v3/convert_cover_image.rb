@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     # For best support, cover images must be `image/jpeg` or `image/png`. Though many may be
@@ -9,7 +11,7 @@ module Packaging
       ACCEPTABLE_CONTENT_TYPES = %w[image/jpeg image/png].freeze
 
       # @api private
-      PNG_CONTENT_TYPE = "image/png".freeze
+      PNG_CONTENT_TYPE = "image/png"
 
       object :uploaded_file, class: "Shrine::UploadedFile"
 

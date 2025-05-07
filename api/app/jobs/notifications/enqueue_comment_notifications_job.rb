@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Notifications
   class EnqueueCommentNotificationsJob < ApplicationJob
-
     # @param [String] comment_id
     def perform(comment_id)
       comment = Comment.find(comment_id)
@@ -32,6 +33,5 @@ module Notifications
         Notifications::SendCommentNotificationJob.perform_later user.id, comment.id
       end
     end
-
   end
 end

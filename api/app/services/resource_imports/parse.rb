@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceImports
   class Parse < ActiveInteraction::Base
     record :resource_import
@@ -32,6 +34,5 @@ module ResourceImports
       resource_import.resource_import_rows.reload
       resource_import
     end
-
   end
 end

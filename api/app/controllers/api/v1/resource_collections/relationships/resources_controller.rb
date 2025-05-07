@@ -1,17 +1,18 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module ResourceCollections
       module Relationships
         # Responds with resources in a collection
         class ResourcesController < ApplicationController
-
           before_action :set_collection, only: [:index]
 
           resourceful! Resource, authorize_options: { except: [:index, :show] } do
             ids = @collection.resources.pluck(:id)
             Resource.filtered(
               with_pagination!(resource_filter_params),
-              scope: Resource.all.where("resources.id IN (?)", ids)
+              scope: Resource.all.where(resources: { id: ids })
             )
           end
 
@@ -41,7 +42,6 @@ module API
             @collection = ResourceCollection.friendly
               .find(params[:resource_collection_id])
           end
-
         end
       end
     end

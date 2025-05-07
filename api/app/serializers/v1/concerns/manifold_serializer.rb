@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   module Concerns
     module ManifoldSerializer
@@ -33,7 +35,7 @@ module V1
         make_meta
 
         def initialize(resource, options = {})
-          super(resource, options)
+          super
           @params[:root] = self.class unless @params.key? :root
         end
       end
@@ -143,7 +145,7 @@ module V1
         def full?(params)
           return true unless partialable?
 
-          params.dig(:full) == true && params.dig(:root) == self
+          params[:full] == true && params[:root] == self
         end
 
         def partialable?

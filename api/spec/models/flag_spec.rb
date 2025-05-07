@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Flag, type: :model do
-
   it "has a valid flag factory" do
     expect(FactoryBot.build(:flag)).to be_valid
   end
 
   it "enqueues an EnqueueFlagNotificationsJob job on create" do
     comment = FactoryBot.create(:comment)
-    expect(Notifications::EnqueueFlagNotificationsJob).to receive(:perform_later)
+    expect(Notifications::EnqueueFlagNotificationsJob).to receive(:perform_later) # rubocop:todo RSpec/MessageSpies
     FactoryBot.create(:flag, flaggable: comment)
   end
 
@@ -17,7 +18,7 @@ RSpec.describe Flag, type: :model do
 
     it "flaggable is nil" do
       flag.flaggable = nil
-      expect(flag).to_not be_valid
+      expect(flag).not_to be_valid
     end
   end
 end

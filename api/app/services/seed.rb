@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength, Metrics/MethodLength
+# rubocop:disable Layout/LineLength
 class Seed
   extend ActiveModel::Callbacks
 
@@ -91,7 +91,7 @@ class Seed
       link_url: "http://localhost:13100/",
       style: "dark",
       foreground_position: "absolute",
-      foreground: File.open(Rails.root.join("app", "assets", "images", "seed-feature-foreground.png")),
+      foreground: Rails.root.join("app", "assets", "images", "seed-feature-foreground.png").open,
       creator: cli_user,
       foreground_top: "1.9em",
       live: true
@@ -105,4 +105,4 @@ class Seed
     end
   end
 end
-# rubocop:enable Layout/LineLength, Metrics/MethodLength
+# rubocop:enable Layout/LineLength

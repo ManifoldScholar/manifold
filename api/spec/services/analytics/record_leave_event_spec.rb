@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Analytics::RecordLeaveEvent do
-
   let!(:visit) { FactoryBot.create(:analytics_visit) }
 
   it "should queue up Analytics::RecordLeaveEventJob" do
@@ -9,5 +10,4 @@ RSpec.describe Analytics::RecordLeaveEvent do
       described_class.run analytics_visit: visit
     end.to have_enqueued_job(Analytics::RecordLeaveEventJob)
   end
-
 end

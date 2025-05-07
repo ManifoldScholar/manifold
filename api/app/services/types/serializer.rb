@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   module Serializer
     ID = Types::String.meta(example: "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX")

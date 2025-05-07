@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Derive a {ReadingGroupMembership} for an {Annotation} based on its {User #creator} and {ReadingGroup}.
 class AnnotationReadingGroupMembership < ApplicationRecord
   include View

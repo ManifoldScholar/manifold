@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ProjectExports::Prune, interaction: true, packaging: true do
@@ -51,7 +53,7 @@ RSpec.describe ProjectExports::Prune, interaction: true, packaging: true do
       )
     end
 
-    it "preserves the exportation" do
+    it "preserves the exportation" do # rubocop:todo RSpec/NoExpectationExample
       perform_within_expectation! do |e|
         e.to change { prunable_exportation.reload.project_export }.from(a_kind_of(ProjectExport)).and keep_the_same { preserved_exportation.reload.project_export }
       end

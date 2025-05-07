@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Refinements
   module HandleRenamedCollections
     refine ::ResourceCollection.singleton_class do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This is a shared authorizer for dependents of journals
 class JournalChildAuthorizer < ApplicationAuthorizer
   # By default, we defer to {JournalAuthorizer#updatable_by?}.

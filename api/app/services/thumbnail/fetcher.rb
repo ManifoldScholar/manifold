@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Thumbnail
   # This class is responsible for fetching thumbnails for resources
   class Fetcher

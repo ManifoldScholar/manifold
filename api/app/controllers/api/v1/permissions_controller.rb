@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module API
   module V1
     class PermissionsController < ApplicationController
-
       resourceful! Permission, authorize_options: {
         except: [:index, :create, :show, :update, :destroy]
       }

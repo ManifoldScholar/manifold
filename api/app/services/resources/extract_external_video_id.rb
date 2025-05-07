@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Resources
   class ExtractExternalVideoId < ActiveInteraction::Base
     string :external_id
@@ -42,6 +44,5 @@ module Resources
     def parsed_url_params
       @parsed_url_params ||= Rack::Utils.parse_nested_query(parsed_url.query).with_indifferent_access
     end
-
   end
 end

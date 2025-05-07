@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module SystemUpgrades
   module Upgrades
     class Manifold030000 < SystemUpgrades::AbstractVersion
-      # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
 
       def perform!
         reprocess_text_covers!
@@ -80,7 +82,7 @@ module SystemUpgrades
         elastic_connection_error
       end
 
-      # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end

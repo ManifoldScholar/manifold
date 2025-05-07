@@ -51,9 +51,9 @@ class Text < ApplicationRecord
   end
   with_citable_children :text_sections
 
-  attribute :structure_titles, :indifferent_hash, default: {}
-  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: []
-  attribute :landmarks, Texts::LandmarkEntry.to_array_type, default: []
+  attribute :structure_titles, :indifferent_hash, default: -> { {} }
+  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: -> { [] }
+  attribute :landmarks, Texts::LandmarkEntry.to_array_type, default: -> { [] }
 
   jsonb_accessor(
     :export_configuration,
@@ -73,23 +73,27 @@ class Text < ApplicationRecord
   has_many :ingestion_sources, dependent: :destroy, inverse_of: :text
   has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text, autosave: true
-  has_one :text_section_aggregation, inverse_of: :text
+  has_one :text_section_aggregation, inverse_of: :text # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text
   has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
   has_many :annotations, through: :text_sections
   has_one :text_created_event, -> { where event_type: EventType[:text_added] },
           class_name: "Event", as: :subject, dependent: :destroy, inverse_of: :subject
-  has_one :toc_section,
+  has_one :toc_section, # rubocop:todo Rails/HasManyOrHasOneDependent
           -> { where(kind: TextSection::KIND_NAVIGATION) },
           class_name: "TextSection",
           inverse_of: :text
-  has_one :last_finished_ingestion, -> { where(state: "finished").order(created_at: :desc) }, class_name: "Ingestion"
+  # rubocop:todo Rails/InverseOf
+  has_one :last_finished_ingestion, -> { where(state: "finished").order(created_at: :desc) }, class_name: "Ingestion" # rubocop:todo Rails/HasManyOrHasOneDependent, Rails/InverseOf
+  # rubocop:enable Rails/InverseOf
   has_many :cached_external_source_links, inverse_of: :text, dependent: :destroy
   has_many :cached_external_sources, through: :cached_external_source_links
   has_many :text_exports, inverse_of: :text, dependent: :destroy
-  has_many :text_export_statuses, inverse_of: :text
-  has_one :current_text_export_status, -> { current }, class_name: "TextExportStatus"
+  has_many :text_export_statuses, inverse_of: :text # rubocop:todo Rails/HasManyOrHasOneDependent
+  # rubocop:todo Rails/InverseOf
+  has_one :current_text_export_status, -> { current }, class_name: "TextExportStatus" # rubocop:todo Rails/HasManyOrHasOneDependent, Rails/InverseOf
+  # rubocop:enable Rails/InverseOf
   has_one :current_text_export, through: :current_text_export_status, source: :text_export
   has_many :action_callouts,
            dependent: :destroy,
@@ -106,9 +110,8 @@ class Text < ApplicationRecord
   delegate :texts_nav, to: :project, prefix: true, allow_nil: true
   delegate :journal_nav, to: :project, prefix: true, allow_nil: true
 
-  before_validation :ensure_toc_uids!
-
   after_initialize :migrate_toc!
+  before_validation :ensure_toc_uids!
 
   validate :validate_start_text_section
   validate :validate_toc
@@ -495,5 +498,4 @@ class Text < ApplicationRecord
 
     stylesheets.create global_stylesheet_attributes
   end
-
 end

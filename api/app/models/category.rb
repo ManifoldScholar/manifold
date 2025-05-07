@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 # Used to group texts and resources in a project
 class Category < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Constants
-  ROLE_TEXT = "text".freeze
-  ROLE_RESOURCE = "resource".freeze
+  ROLE_TEXT = "text"
+  ROLE_RESOURCE = "resource"
 
   # Associations
   belongs_to :project
@@ -26,10 +27,9 @@ class Category < ApplicationRecord
   validates :title, presence: true
   validates :role,
             inclusion: { in: [ROLE_TEXT, ROLE_RESOURCE],
-                         message: "%<value>s is not a valid category role" }
+                         message: "%<value>s is not a valid category role" } # rubocop:todo Rails/I18nLocaleTexts
 
   def to_s
     title
   end
-
 end

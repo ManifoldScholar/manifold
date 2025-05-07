@@ -4,7 +4,7 @@ module API
   module V1
     class ContactsController < ApplicationController
       def create
-        @outcome = Contacts::SendMessage.run contact_params&.dig(:data)&.dig(:attributes) || {}
+        @outcome = Contacts::SendMessage.run contact_params&.dig(:data, :attributes) || {}
 
         if @outcome.valid?
           render status: :no_content

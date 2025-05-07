@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TextTitles
   # Calculate the fingerprint for a {TextTitle}
   class CalculateFingerprint < ActiveInteraction::Base

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
   class RedisConfig
     attr_reader :url

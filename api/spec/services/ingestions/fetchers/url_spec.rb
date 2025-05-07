@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Fetchers::URL, slow: true do
-
-  before(:all) do
+  before(:all) do # rubocop:todo RSpec/BeforeAfterAll
     Settings.instance.update_from_environment!
     url = "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3"
     root = Dir.mktmpdir
@@ -12,5 +13,4 @@ RSpec.describe Ingestions::Fetchers::URL, slow: true do
   end
 
   include_examples "a fetcher"
-
 end

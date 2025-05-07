@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Utility::CalculateDirectorySize, interaction: true do
   let_input!(:path) { Pathname.new(Dir.mktmpdir) }
 
-  after(:each) do
+  after do
     FileUtils.remove_entry_secure path if path.exist? && path.directory?
   end
 

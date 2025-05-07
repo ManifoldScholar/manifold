@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReadingGroups
   class Clone
     def call(reading_group:, **options)

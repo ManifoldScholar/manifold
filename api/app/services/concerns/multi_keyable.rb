@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MultiKeyable
   extend ActiveSupport::Concern
 
@@ -24,8 +26,8 @@ module MultiKeyable
   end
 
   def to_multi_keyable_hash
-    multi_keyable_keys.each_with_object({}) do |key, h|
-      h[key] = self
+    multi_keyable_keys.index_with do |key|
+      self
     end
   end
 

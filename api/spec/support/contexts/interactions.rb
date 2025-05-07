@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'interaction testing' do
   let(:interaction_inputs) do
     build_interaction_inputs
   end
 
   let(:valid_outcome) do
-    double("valid interaction", :invalid? => false, :valid? => true, result: valid_outcome_result)
+    double("valid interaction", invalid?: false, valid?: true, result: valid_outcome_result) # rubocop:todo RSpec/VerifiedDoubles
   end
 
   let(:valid_outcome_result) do
@@ -28,7 +30,7 @@ module InteractionTesting
       described_class.run interaction_inputs.merge(inputs)
     end
 
-    def perform_within_expectation!(valid: true, raises: false, **inputs)
+    def perform_within_expectation!(valid: true, raises: false, **inputs) # rubocop:todo Metrics/PerceivedComplexity
       block_expectation = expect do
         @outcome = perform_the_interaction! valid: valid, raises: raises, **inputs
 

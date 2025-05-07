@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConfigMash < Hashie::Mash
   disable_warnings
 end

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Notifications
   class SendReadingGroupJoinNotificationJob < ApplicationJob
-
     # @param [String] user_id
     # @param [String] flag_id
     def perform(user_id, reading_group_membership_id)
@@ -15,6 +16,5 @@ module Notifications
         "  Failed to notify #<User:#{user_id}> of Reading Group Join #<ReadingGroupMembership:#{reading_group_membership_id}>"
       )
     end
-
   end
 end

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Journals controller
     class JournalsController < ApplicationController
-
       resourceful! Journal, authorize_options: { except: [:index, :show] } do
         Journal.filtered(
           with_pagination!(journal_filter_params),
@@ -55,7 +56,6 @@ module API
 
         Journal.all
       end
-
     end
   end
 end

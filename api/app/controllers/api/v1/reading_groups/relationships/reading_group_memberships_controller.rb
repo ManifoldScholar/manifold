@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module ReadingGroups
       module Relationships
         class ReadingGroupMembershipsController < ApplicationController
-
           before_action :set_reading_group
           authorize_actions_for :reading_group, all_actions: :read
 
@@ -32,7 +33,6 @@ module API
           def set_reading_group
             @reading_group = ReadingGroup.find(params[:reading_group_id])
           end
-
         end
       end
     end

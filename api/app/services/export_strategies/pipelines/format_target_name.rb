@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   module Pipelines
     # Pipeline that takes a {ProjectExport} and turns it into a formatted target name.

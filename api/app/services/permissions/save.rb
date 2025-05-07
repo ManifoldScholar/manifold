@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Permissions
   class Save < ActiveInteraction::Base
     object :permission
@@ -30,6 +32,5 @@ module Permissions
       Permission.fetch!(@resource, @user) if permission.role_names.present?
     end
     # rubocop:enable Metrics/AbcSize
-
   end
 end

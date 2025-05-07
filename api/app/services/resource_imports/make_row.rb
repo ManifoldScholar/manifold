@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceImports
   class MakeRow < ActiveInteraction::Base
     record :resource_import
@@ -27,6 +29,5 @@ module ResourceImports
 
       ResourceImportRow::ROW_TYPE_IGNORED
     end
-
   end
 end

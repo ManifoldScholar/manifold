@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationFrequency < ClassyEnum::Base
   include ActiveSupport::Configurable
 
@@ -12,6 +14,7 @@ class NotificationFrequency < ClassyEnum::Base
     config.nondigest.present?
   end
 end
+
 class NotificationFrequency::Never < NotificationFrequency
   config.digest = true
   config.nondigest = true

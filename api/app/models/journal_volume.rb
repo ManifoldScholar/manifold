@@ -9,9 +9,8 @@ class JournalVolume < ApplicationRecord
   include Sluggable
 
   belongs_to :journal, counter_cache: true
-  has_many :journal_issues, -> { in_reverse_order }, dependent: :nullify
+  has_many :journal_issues, -> { in_reverse_order }, dependent: :nullify # rubocop:todo Rails/InverseOf
 
-  validates :journal_id, presence: true
   validates :number, presence: true
 
   scope :in_reverse_order, -> { order(number: :desc) }

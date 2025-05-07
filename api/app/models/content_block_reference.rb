@@ -1,5 +1,6 @@
-class ContentBlockReference < ApplicationRecord
+# frozen_string_literal: true
 
+class ContentBlockReference < ApplicationRecord
   acts_as_list scope: [:content_block_id, :kind]
 
   default_scope { order(position: "ASC") }

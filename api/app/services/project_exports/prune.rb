@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectExports
   # @see ProjectExport.prunable
   class Prune < ActiveInteraction::Base

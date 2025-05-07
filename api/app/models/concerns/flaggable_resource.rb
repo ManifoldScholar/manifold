@@ -8,7 +8,7 @@ module FlaggableResource
 
   included do
     has_many :flags, as: :flaggable, dependent: :destroy, inverse_of: :flaggable
-    has_one :flag_status, as: :flaggable, inverse_of: :flaggable
+    has_one :flag_status, as: :flaggable, inverse_of: :flaggable # rubocop:todo Rails/HasManyOrHasOneDependent
 
     after_touch :refresh_flag_status_data!
   end

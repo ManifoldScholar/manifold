@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # Tracks the relationship between collections and resources
 class CollectionResource < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -26,5 +27,4 @@ class CollectionResource < ApplicationRecord
   def to_s
     "#{resource_collection} #{resource}"
   end
-
 end

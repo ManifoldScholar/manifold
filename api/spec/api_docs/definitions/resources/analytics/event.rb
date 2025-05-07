@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       module Analytics
         class Event
-
           REQUIRED_CREATE_ATTRIBUTES = [name].freeze
 
           REQUEST_ATTRIBUTES = {

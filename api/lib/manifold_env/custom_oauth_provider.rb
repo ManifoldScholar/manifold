@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
-  # rubocop:disable Metrics/ParameterLists
   # rubocop:disable Metrics/MethodLength
   class CustomOauthProvider
     def initialize(
@@ -97,7 +98,7 @@ module ManifoldEnv
       end
     end
 
-    def build_strategy_class
+    def build_strategy_class # rubocop:todo Metrics/AbcSize
       provider = self
 
       Class.new(OmniAuth::Strategies::OAuth2) do

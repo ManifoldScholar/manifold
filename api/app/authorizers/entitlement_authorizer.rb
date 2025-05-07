@@ -36,12 +36,12 @@ class EntitlementAuthorizer < ApplicationAuthorizer
   # @yieldparam [Project] project
   # @yieldreturn [Boolean]
   # @return [Boolean]
-  def with_project
+  def with_project(&)
     project = resource.subject
 
     return false if project.blank?
 
-    project.then(&Proc.new)
+    project.then(&)
   end
 
   class << self

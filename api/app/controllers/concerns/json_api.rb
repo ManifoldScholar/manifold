@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Includes JSON API related functionality
 module JSONAPI
   extend ActiveSupport::Concern
@@ -61,8 +63,8 @@ module JSONAPI
     return serializer_class unless serializer_class.is_a? Symbol
 
     version = self.class.controller_path.split("/").second.upcase.to_s
-    serializer_name = serializer_class.to_s.classify + "Serializer"
-    (version + "::" + serializer_name).constantize
+    serializer_name = "#{serializer_class.to_s.classify}Serializer"
+    "#{version}::#{serializer_name}".constantize
   end
 
   def serializer_key_for(collection)
@@ -81,9 +83,8 @@ module JSONAPI
     camelize_hash(meta)
   end
 
-  # rubocop:disable Metrics/AbcSize
   def build_params(options, _collection)
-    params = (options[:params] || {})
+    params = options[:params] || {}
     params[:action] = request.params[:action]
     params[:current_user] = current_user
     params[:authority_user] = authority_user
@@ -93,7 +94,6 @@ module JSONAPI
     params[:filters] = request.params[:filter].presence || {}.with_indifferent_access
     params
   end
-  # rubocop:enable Metrics/AbcSize
 
   def build_include(options, _collection)
     return [] unless options.key?(:include)

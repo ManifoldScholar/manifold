@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module V1
   module Content
     class TextsBlockSerializer < ContentBlockSerializer
-
       typed_attribute :show_authors, NilClass
       typed_attribute :show_descriptions, NilClass
       typed_attribute :show_subtitles, NilClass

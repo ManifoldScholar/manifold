@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # makers controller
     class MakersController < ApplicationController
-
       resourceful! Maker, authorize_options: { except: [:index, :show] } do
         Maker.filtered(with_pagination!(maker_filter_params))
       end
@@ -34,7 +35,6 @@ module API
         @maker = load_and_authorize_maker
         @maker.destroy
       end
-
     end
   end
 end

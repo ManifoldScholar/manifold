@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Reusable definitions for search services.
   class Container

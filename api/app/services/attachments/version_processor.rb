@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "image_processing/mini_magick"
 
 module Attachments
@@ -24,11 +26,11 @@ module Attachments
 
     def animated_gif?
       @animated_gif ||= begin
-        return false unless shrine_uploaded_file.extension == "gif"
+        return false unless shrine_uploaded_file.extension == "gif" # rubocop:todo Lint/NoReturnInBeginEndBlocks
 
         image = MiniMagick::Image.new(file_resource.path)
-        return false unless image.type == "GIF"
-        return false unless image.pages&.length&.positive?
+        return false unless image.type == "GIF" # rubocop:todo Lint/NoReturnInBeginEndBlocks
+        return false unless image.pages&.length&.positive? # rubocop:todo Lint/NoReturnInBeginEndBlocks
 
         true
       end
@@ -43,6 +45,5 @@ module Attachments
     def process_image
       ImageProcessing::MiniMagick.apply(config).loader(page: 0).call(file_resource)
     end
-
   end
 end

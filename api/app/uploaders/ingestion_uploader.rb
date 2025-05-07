@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IngestionUploader < TusUploader
   include SharedUploader
 
@@ -33,7 +35,5 @@ class IngestionUploader < TusUploader
 
       RUBY
     end
-
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Reduce duplication in uploader classes.
 module SharedUploader
   extend ActiveSupport::Concern
@@ -43,7 +45,7 @@ module SharedUploader
         parts = ["new_record"]
       else
         splittable = identifier.is_a?(Array) ? identifier.first : identifier
-        parts = splittable.to_s[0..2].split("")
+        parts = splittable.to_s[0..2].chars
         parts.push(identifier) unless identifier.is_a? Array
         parts += identifier if identifier.is_a? Array
       end

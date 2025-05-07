@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Collaborators
   # Calculate the fingerprint for a {Collaborator}
   class CalculateFingerprint < ActiveInteraction::Base

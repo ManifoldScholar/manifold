@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Stylesheets controller
@@ -56,7 +58,6 @@ module API
       def set_text
         @text = Text.friendly.find(params[:text_id]) if params[:text_id]
       end
-
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::CreateManually do
@@ -8,13 +10,13 @@ RSpec.describe Ingestions::CreateManually do
   it "creates an ingestion" do
     expect do
       described_class.run project: project, source: File.open(path)
-    end.to change { Ingestion.count }.by 1
+    end.to change(Ingestion, :count).by 1
   end
 
   describe "the resulting ingestion" do
     it "has a source file attached" do
       outcome = described_class.run project: project, source: File.open(path)
-      expect(outcome.result.source).to_not be_nil
+      expect(outcome.result.source).not_to be_nil
     end
   end
 end

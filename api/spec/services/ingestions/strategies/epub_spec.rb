@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Strategies::Epub do
@@ -130,16 +132,15 @@ RSpec.describe Ingestions::Strategies::Epub do
   end
 
   context "when url", slow: true do
-
     let(:url) { "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3" }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, external_source_url: url }
 
-    before(:all) do
+    before(:all) do # rubocop:todo RSpec/BeforeAfterAll
       Settings.instance.update_from_environment!
       WebMock.allow_net_connect!
     end
 
-    after(:all) do
+    after(:all) do # rubocop:todo RSpec/BeforeAfterAll
       WebMock.disable_net_connect!
     end
 

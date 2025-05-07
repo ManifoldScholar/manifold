@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module Shared
     # Represents a selector tuple that can point to a given resource.

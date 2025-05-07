@@ -7,7 +7,7 @@ RSpec.shared_examples_for "a model with spam detection" do
 
   before do
     # sanity check
-    expect(instance).to be_new_record
+    expect(instance).to be_new_record # rubocop:todo RSpec/ExpectInHook
   end
 
   def instance_has_spam!
@@ -25,7 +25,7 @@ RSpec.shared_examples_for "a model with spam detection" do
       akismet_stub_comment_check!(situation: :spam)
     end
 
-    it "is not marked as spam no matter what" do
+    it "is not marked as spam no matter what" do # rubocop:todo RSpec/NoExpectationExample
       instance_has_no_spam!
     end
   end
@@ -62,7 +62,7 @@ RSpec.shared_examples_for "a model with spam detection" do
         akismet_stub_comment_check!(situation: :not_spam)
       end
 
-      it "passes" do
+      it "passes" do # rubocop:todo RSpec/NoExpectationExample
         instance_has_no_spam!
       end
     end
@@ -72,7 +72,7 @@ RSpec.shared_examples_for "a model with spam detection" do
         akismet_stub_comment_check!(situation: :spam)
       end
 
-      it "is marked as spam" do
+      it "is marked as spam" do # rubocop:todo RSpec/NoExpectationExample
         instance_has_spam!
       end
 
@@ -83,7 +83,7 @@ RSpec.shared_examples_for "a model with spam detection" do
           instance.creator = admin
         end
 
-        it "is not marked as spam" do
+        it "is not marked as spam" do # rubocop:todo RSpec/NoExpectationExample
           instance_has_no_spam!
         end
       end

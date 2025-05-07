@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ExportTarget, type: :model do
@@ -27,7 +29,7 @@ RSpec.describe ExportTarget, type: :model do
   end
 
   with_strategy :s3 do
-    its("configuration.configured_strategy") { will raise_error(ExportStrategies::DisabledStrategy) }
+    its("configuration.configured_strategy") { will raise_error(ExportStrategies::DisabledStrategy) } # rubocop:todo RSpec/NoExpectationExample
   end
 
   with_strategy :sftp_key do
@@ -41,6 +43,6 @@ RSpec.describe ExportTarget, type: :model do
   end
 
   with_strategy :unknown do
-    its("configuration.configured_strategy") { will raise_error(ExportStrategies::DisabledStrategy) }
+    its("configuration.configured_strategy") { will raise_error(ExportStrategies::DisabledStrategy) } # rubocop:todo RSpec/NoExpectationExample
   end
 end

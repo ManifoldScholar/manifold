@@ -201,11 +201,13 @@ module Validator
     # @param declarations [Array]
     # @return [String]
     def compose_rule_set(selector, declarations)
+      # rubocop:todo Naming/HeredocDelimiterNaming
       <<~END
         #{selector} {
         #{declarations.map { |d| "    #{d}" }.join("\n")}
         }
       END
+      # rubocop:enable Naming/HeredocDelimiterNaming
     end
 
     # Is the color in grayscale?
@@ -354,7 +356,7 @@ module Validator
       return clean if clean.blank?
 
       # Find last element in combinatory selectors, strip psuedo selectors.
-      clean.split(/(\s?[~>+]\s?|\s)/).last.split(/:/).first
+      clean.split(/(\s?[~>+]\s?|\s)/).last.split(':').first
     end
     memoize :tag_from_selector
 

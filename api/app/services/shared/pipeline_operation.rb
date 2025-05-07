@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Shared
   module PipelineOperation
     extend ActiveSupport::Concern
@@ -15,8 +17,8 @@ module Shared
       Success(built_state)
     end
 
-    def compose_monadic_interaction(interaction, inputs = {}, &block)
-      interaction.run_as_monad(inputs, &block)
+    def compose_monadic_interaction(interaction, inputs = {}, &)
+      interaction.run_as_monad(inputs, &)
     end
 
     # @param [HasStateMachine] stateful

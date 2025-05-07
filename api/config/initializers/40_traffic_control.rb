@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Patches
   module MakeTrafficControlSupportRedisNamespace
     def client_class_type(client)

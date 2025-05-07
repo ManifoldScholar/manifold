@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExportTargetStrategy < ClassyEnum::Base
   config.disabled = false
 

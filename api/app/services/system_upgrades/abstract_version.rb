@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SystemUpgrades
   class AbstractVersion < ActiveInteraction::Base
     include SystemUpgrades::HasLogger
@@ -42,8 +44,8 @@ module SystemUpgrades
 
     private
 
-    def tag_version!
-      logger.tagged(version_string, &Proc.new)
+    def tag_version!(&)
+      logger.tagged(version_string, &)
     end
 
     class << self

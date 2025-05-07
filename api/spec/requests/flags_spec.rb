@@ -2,7 +2,7 @@
 
 RSpec.describe "Flags API", type: :request do
   shared_examples_for "a flaggable relationship" do |model_klass|
-    factory_name = model_klass.model_name.i18n_key
+    model_klass.model_name.i18n_key
 
     url_base = "/api/v1/#{model_klass.model_name.plural}/:#{model_klass.model_name.singular}_id/flags"
 

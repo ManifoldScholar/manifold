@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectExportationTransition < ApplicationRecord
   belongs_to :project_exportation, inverse_of: :transitions
 

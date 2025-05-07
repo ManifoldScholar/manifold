@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples_for "a fingerprint interaction" do
   it "returns a hexdigest string by default" do
     perform_within_expectation!

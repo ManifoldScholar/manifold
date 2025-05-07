@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   class Converter < AbstractInteraction
     string :source_path
@@ -7,6 +9,5 @@ module Ingestions
 
       compose converter.interaction
     end
-
   end
 end

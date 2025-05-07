@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This is a proxy object that represents a global system entitlement.
 #
 # Currently, there's only one, {SystemEntitlementKind::Subscription subscription},

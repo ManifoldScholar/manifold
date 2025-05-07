@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ProjectExports::PruneJob, type: :job, packaging: true do
   it "calls the interaction" do
-    expect(ProjectExports::Prune).to receive(:run!).once
+    expect(ProjectExports::Prune).to receive(:run!).once # rubocop:todo RSpec/MessageSpies
 
     expect do
       described_class.perform_now

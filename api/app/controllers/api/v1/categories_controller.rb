@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # categories controller
     class CategoriesController < ApplicationController
-
       resourceful! Category, authorize_options: { except: [:index, :show] } do
         Category.all
       end
@@ -29,7 +30,6 @@ module API
         @category = load_and_authorize_category
         @category.destroy
       end
-
     end
   end
 end

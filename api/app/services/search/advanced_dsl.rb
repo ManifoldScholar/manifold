@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Enhancements related to using `elasticsearch-dsl`.
   module AdvancedDSL
@@ -32,9 +34,9 @@ module Search
     end
 
     # @return [{ Symbol => Object }]
-    def extracted_query
+    def extracted_query(&block)
       result = search do
-        query(&Proc.new)
+        query(&block)
       end
 
       result.to_hash.fetch(:query)
@@ -42,17 +44,17 @@ module Search
 
     # @param [Array] args
     # @return [{ Symbol => Object }]
-    def extracted_match(*args)
+    def extracted_match(*args, &block)
       extracted_query do |q|
-        q.match(*args, &Proc.new)
+        q.match(*args, &block)
       end
     end
 
     # @param [Array] args
     # @return [{ Symbol => Object }]
-    def extracted_match_phrase(*args)
+    def extracted_match_phrase(*args, &block)
       extracted_query do |q|
-        q.match_phrase(*args, &Proc.new)
+        q.match_phrase(*args, &block)
       end
     end
 

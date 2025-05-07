@@ -169,7 +169,7 @@ module Filtering
         f.paginate params[:page], params[:per_page] unless skip_pagination
       end
 
-      model.lookup search_query, filter
+      model.lookup search_query, **filter
     end
 
     # @return [ActiveRecord::Relation]

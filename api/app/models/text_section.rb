@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # A section in a text
 class TextSection < ApplicationRecord
-
   attribute :body_json, :indifferent_hash
 
   # Misc. Concerns
@@ -10,9 +11,9 @@ class TextSection < ApplicationRecord
   include Attachments
 
   # Constants
-  KIND_COVER_IMAGE = "cover_image".freeze
-  KIND_NAVIGATION = "navigation".freeze
-  KIND_SECTION = "section".freeze
+  KIND_COVER_IMAGE = "cover_image"
+  KIND_NAVIGATION = "navigation"
+  KIND_SECTION = "section"
   ALLOWED_KINDS = [KIND_COVER_IMAGE, KIND_NAVIGATION, KIND_SECTION].freeze
 
   # Authority
@@ -77,9 +78,9 @@ class TextSection < ApplicationRecord
 
   # Callbacks
   before_validation :update_body_json
+  after_destroy :remove_linked_toc_entries
   after_save :extrapolate_nodes!
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
-  after_destroy :remove_linked_toc_entries
 
   # Scopes
   scope :in_texts, lambda { |texts|
@@ -204,7 +205,7 @@ class TextSection < ApplicationRecord
     slice(:id, :name).merge(hidden: hidden_in_reader)
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   def properties_for_text_nodes
     inline = Serializer::HTML::INLINE_ELEMENTS
     *, nodes = text_nodes.reverse.inject([false, []]) do |(once_more, nodes), node|
@@ -212,7 +213,7 @@ class TextSection < ApplicationRecord
 
       if (inline.include?(node["parent"]) && nodes[-1]) || once_more
         # Append inline content to previous node
-        nodes[-1][:content] = nodes[-1][:content].dup.insert(0, node["content"] + " ")
+        nodes[-1][:content] = nodes[-1][:content].dup.insert(0, "#{node["content"]} ")
         # Collect wrapped up uuids
         nodes[-1][:contains] << node[:node_uuid]
         nodes[-1][:node_uuid] = node[:node_uuid]
@@ -227,11 +228,11 @@ class TextSection < ApplicationRecord
         node_uuid: node["node_uuid"],
         text_section_id: id
       )
-      next [false, nodes]
+      next [false, nodes] # rubocop:todo Lint/UnmodifiedReduceAccumulator
     end
     nodes.reverse.map.with_index(1) { |node, index| node.merge(position: index) }
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   def text_nodes(node = body_json, nodes = [], parent = nil)
     if node["node_type"] == "text"

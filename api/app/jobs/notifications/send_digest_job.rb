@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Notifications
   class SendDigestJob < ApplicationJob
-
     # @param [String] user_id
     # @param [String] frequency
     def perform(user_id, frequency)
@@ -12,6 +13,5 @@ module Notifications
         "  Failed to send digest to #<User:#{user_id}>"
       )
     end
-
   end
 end

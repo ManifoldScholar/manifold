@@ -7,7 +7,7 @@ RSpec.describe Packaging::EpubV3::TextSectionItem do
     HTMLNodes::Node.new(
       node_type: "element",
       tag: "div",
-      children: [{ node_type: "text", content: "This is Content "}],
+      children: [{ node_type: "text", content: "This is Content " }],
     )
   end
 
@@ -15,7 +15,7 @@ RSpec.describe Packaging::EpubV3::TextSectionItem do
     HTMLNodes::Node.new(
       node_type: "element",
       tag: "div",
-      children: [{ node_type: "text", content: "This is Content "}],
+      children: [{ node_type: "text", content: "This is Content " }],
       attributes: { "data-epub-type" => "aside" }
     )
   end

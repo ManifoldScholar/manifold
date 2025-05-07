@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     # EpubV3 packaging services and operations.

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       class Text
-
         METADATA_ATTRIBUTES = {
           series_title: Types::String,
           container_title: Types::String,
@@ -36,13 +37,11 @@ module APIDocs
         REQUIRED_CREATE_ATTRIBUTES = [:title].freeze
 
         class << self
-
           include APIDocs::Definitions::Resource
 
           def create_attributes
             request_attributes.except(:remove_cover)
           end
-
         end
       end
     end

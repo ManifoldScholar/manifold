@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Parse a search string along with some options and return {Search::Results results}, if any.
   #

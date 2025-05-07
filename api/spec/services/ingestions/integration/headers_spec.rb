@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
-RSpec.describe "When ingesting document without header ids", integration: true do
+RSpec.describe "When ingesting document without header ids", integration: true do # rubocop:todo RSpec/DescribeClass
   include TestHelpers::IngestionHelper
 
   let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "without_header_ids", "index.html") }
@@ -27,6 +29,4 @@ RSpec.describe "When ingesting document without header ids", integration: true d
   it "resulting text's TOC includes anchors for the generated IDs" do
     expect(text.result.toc.first[:anchor]).to eq "2015bb5b2b47b5a6e4a87fd4e8d72936"
   end
-
 end
-

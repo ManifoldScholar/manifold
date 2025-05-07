@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Analytics
   class RecordScopedEvent < Analytics::RecordEvent
-
     object :record, class: ApplicationRecord, default: nil
 
     string :record_type, default: nil
@@ -18,6 +19,5 @@ module Analytics
 
       record_type.classify.safe_constantize&.find_by(id: record_id)
     end
-
   end
 end

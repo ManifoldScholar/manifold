@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       class TwitterQuery
-
         REQUIRED_CREATE_ATTRIBUTES = [:query].freeze
 
         class << self

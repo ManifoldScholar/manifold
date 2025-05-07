@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectExportations
   class PerformJob < ApplicationJob
     queue_as :default

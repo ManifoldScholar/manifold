@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The base application controller
 class ApplicationController < ActionController::API
   # Base error handler, before any concerns.
@@ -69,7 +71,7 @@ class ApplicationController < ActionController::API
   # @return [Boolean]
   def skip_pagination
     RequestStore.fetch :skip_pagination do
-      !pagination_enforced && Types::SAFE_BOOL.(params.dig(:no_pagination))
+      !pagination_enforced && Types::SAFE_BOOL.(params[:no_pagination])
     end
   end
 
@@ -196,7 +198,6 @@ class ApplicationController < ActionController::API
     # @param [Boolean] authorize
     # @yieldreturn [ActiveRecord::Relation]
     # @return [void]
-    # rubocop:disable Lint/UnusedMethodArgument
     def resourceful!(model, authorize: true, **other_options, &model_scope)
       include API::V1::Resourceful
 
@@ -220,5 +221,4 @@ class ApplicationController < ActionController::API
       yield
     end
   end
-
 end

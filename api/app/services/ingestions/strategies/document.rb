@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Strategies
     class Document < Ingestions::Strategies::AbstractStrategy
-
       delegate :text, to: :ingestion, prefix: :existing
       delegate :text_sections, to: :existing_text, prefix: :existing, allow_nil: true
       delegate :reingest?, to: :ingestion

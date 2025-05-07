@@ -23,12 +23,12 @@ class ReadingGroup < ApplicationRecord
   # We intentionally leave out the :dependent option here because we apply out own logic
   # to child annotations on reading group delete in the :update_annotations_privacy
   # before_destroy callback below.
-  has_many :annotations
+  has_many :annotations # rubocop:todo Rails/HasManyOrHasOneDependent
 
-  has_one :reading_group_collection, inverse_of: :reading_group
-  has_one :reading_group_count
-  has_many :reading_group_visibilities
-  has_many :reading_group_user_counts
+  has_one :reading_group_collection, inverse_of: :reading_group # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_one :reading_group_count # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many :reading_group_visibilities # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many :reading_group_user_counts # rubocop:todo Rails/HasManyOrHasOneDependent
 
   has_many :annotated_texts, -> { distinct.reorder(nil) }, through: :annotations, source: :text
 
@@ -53,8 +53,8 @@ class ReadingGroup < ApplicationRecord
 
   before_validation :ensure_invitation_code
   before_validation :upcase_invitation_code
-  after_save :ensure_creator_membership
   before_destroy :update_annotations_privacy
+  after_save :ensure_creator_membership
 
   scope :for_serialization, -> { includes(:reading_group_kind, :reading_group_count, reading_group_memberships: :user) }
 
@@ -145,7 +145,6 @@ class ReadingGroup < ApplicationRecord
       end
     end
 
-    # rubocop:disable Metrics/AbcSize
     def apply_sort_order_scope_value(value)
       case value
       when /\A(?<attr>created_at|name)(?:_(?<dir>asc|desc))\z/i
@@ -166,7 +165,6 @@ class ReadingGroup < ApplicationRecord
         all
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     def build_sort_order_direction(value)
       /desc/i.match?(value) ? :desc : :asc

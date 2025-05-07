@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module Shared
     class ReferencedPath
@@ -23,7 +25,7 @@ module Packaging
       # @!attribute [r] derived_ingestion_source
       # @return [IngestionSource, nil]
       memoize def derived_ingestion_source
-        return IngestionSource.find_by_attachment_id(attachment_id) if legacy_ingestion_source?
+        return IngestionSource.find_by(attachment_id: attachment_id) if legacy_ingestion_source?
 
         IngestionSource.find ingestion_source_id if has_ingestion_source?
       end

@@ -1,5 +1,6 @@
-class AuthConstraint
+# frozen_string_literal: true
 
+class AuthConstraint
   attr_reader :request
 
   def initialize(request)
@@ -21,5 +22,4 @@ class AuthConstraint
   rescue JWT::DecodeError
     false
   end
-
 end

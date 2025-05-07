@@ -5,21 +5,21 @@ RSpec.describe "Passwords API", type: :request do
 
   describe "reset password request" do
     describe "the response" do
-      before(:each) {
+      before do
         post api_v1_passwords_path, params: { email: user.email }
         user.reload
-      }
+      end
 
       it "has a 204 status code" do
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:no_content)
       end
 
       it "grants a reset password token" do
-        expect(user.reset_password_token).to_not be_nil
+        expect(user.reset_password_token).not_to be_nil
       end
 
       it "sets the time token was granted at" do
-        expect(user.reset_password_sent_at).to_not be_nil
+        expect(user.reset_password_sent_at).not_to be_nil
       end
     end
   end
@@ -34,14 +34,14 @@ RSpec.describe "Passwords API", type: :request do
     end
 
     describe "the response" do
-      before(:each) {
+      before do
         user.generate_reset_token
         put '/api/v1/passwords/update', params: update_params
         user.reload
-      }
+      end
 
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it "updates the user's password" do

@@ -1,4 +1,5 @@
-# rubocop:disable Naming/MethodName
+# frozen_string_literal: true
+
 module Types
   include Dry.Types
 
@@ -17,7 +18,7 @@ module Types
   (?:[a-z]|_(?!_))+
   [a-z]
   \z
-  /xms.freeze
+  /xms
 
   # @see ATTRIBUTE_NAME_FORMAT
   ATTRIBUTE_NAME = Types::Coercible::Symbol.constrained(format: ATTRIBUTE_NAME_FORMAT)

@@ -25,7 +25,7 @@ module Filterable
     # @param [User, nil] user
     # @return [Searchkick::Relation]
     # @return [ActiveRecord::Relation] with kaminari data from {.by_pagination}.
-    def filtered(params, scope: all, user: nil, skip_pagination: false)
+    def filtered(scope: all, user: nil, skip_pagination: false, **params)
       ManifoldApi::Container["filtering.apply"].(params, scope: scope, user: user, skip_pagination: skip_pagination)
     end
 

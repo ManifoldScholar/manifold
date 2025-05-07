@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Metrics/AbcSize
 module ExportStatusView
   extend ActiveSupport::Concern

@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Me
       module Relationships
         # Favorite Projects controller
         class FavoriteProjectsController < ApplicationController
-
           before_action :authenticate_request!
 
           resourceful! Project do
@@ -19,7 +20,6 @@ module API
             @projects = load_projects
             render_multiple_resources @projects, include: [:creators]
           end
-
         end
       end
     end

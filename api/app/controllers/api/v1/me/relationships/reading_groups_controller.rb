@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Me
       module Relationships
         # Reading groups controller
         class ReadingGroupsController < ApplicationController
-
           SERIALIZED_INCLUDES = %i[collection annotated_texts current_user_reading_group_membership reading_group_memberships.user].freeze
 
           resourceful! ReadingGroup do
@@ -22,7 +23,6 @@ module API
           def current_user_reading_groups(archived)
             Utilities::Truthy.truthy?(archived) ? current_user.archived_reading_groups : current_user.reading_groups
           end
-
         end
       end
     end

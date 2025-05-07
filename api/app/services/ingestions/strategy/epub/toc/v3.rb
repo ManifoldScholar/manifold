@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Strategy
     module Epub
@@ -55,7 +57,6 @@ module Ingestions
             @nav_xml.xpath(selector_landmark_root_node)
           end
 
-          # rubocop: disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
           def nodes_to_structure(nodes)
             items = []
             if nodes.count
@@ -78,7 +79,7 @@ module Ingestions
             end
             items
           end
-          # rubocop: enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+          # rubocop: enable, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
           def toc_nodes_to_structure(nodes)
             nodes_to_structure(nodes)

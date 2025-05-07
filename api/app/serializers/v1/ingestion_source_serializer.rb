@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class IngestionSourceSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :source_identifier, Types::String
@@ -11,6 +12,5 @@ module V1
     typed_attribute :attachment_extension, Types::String.optional.meta(read_only: true)
     typed_attribute :attachment_file_size, Types::Integer.optional.meta(read_only: true)
     typed_attribute :attachment_alt_text, Types::String.optional
-
   end
 end

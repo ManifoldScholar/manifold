@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Text, type: :model do
@@ -16,9 +18,9 @@ RSpec.describe Text, type: :model do
   end
 
   describe "its starting section" do
-    let!(:text) { FactoryBot.create(:text, title: "test text")}
-    let!(:valid_section) { FactoryBot.create(:text_section, text: text)}
-    let!(:invalid_section) { FactoryBot.create(:text_section)}
+    let!(:text) { FactoryBot.create(:text, title: "test text") }
+    let!(:valid_section) { FactoryBot.create(:text_section, text: text) }
+    let!(:invalid_section) { FactoryBot.create(:text_section) }
 
     it "is valid when it is a section of the text" do
       text.start_text_section_id = valid_section.id
@@ -32,11 +34,11 @@ RSpec.describe Text, type: :model do
   end
 
   describe "its toc" do
-    let!(:text) { FactoryBot.create(:text, title: "test text")}
-    let!(:section_one) { FactoryBot.create(:text_section, text: text)}
-    let!(:section_two) { FactoryBot.create(:text_section, text: text)}
-    let(:new_toc) { [{label: "one", id: section_one.id, type: "test"}, {label: "two", id: section_two.id}] }
-    let(:new_toc_invalid_entry) { [*new_toc, {label: "three"}]}
+    let!(:text) { FactoryBot.create(:text, title: "test text") }
+    let!(:section_one) { FactoryBot.create(:text_section, text: text) }
+    let!(:section_two) { FactoryBot.create(:text_section, text: text) }
+    let(:new_toc) { [{ label: "one", id: section_one.id, type: "test" }, { label: "two", id: section_two.id }] }
+    let(:new_toc_invalid_entry) { [*new_toc, { label: "three" }] }
 
     it "is valid when all entries have a valid section id" do
       text.toc = new_toc
@@ -52,7 +54,7 @@ RSpec.describe Text, type: :model do
   end
 
   context "when citations are updated" do
-    before(:each) do
+    before do
       @calling_class = FactoryBot.create(:text, title: "A Title")
       @child_class = FactoryBot.create(:text_section, text: @calling_class, name: "Section Name")
     end
@@ -100,55 +102,9 @@ RSpec.describe Text, type: :model do
     end
   end
 
-  describe ".pending_epub_v3_export" do
-    let!(:text) { FactoryBot.create :text }
-
-    let(:the_scope) { described_class.pending_epub_v3_export }
-
-    subject { the_scope }
-
-    class << self
-      def it_is_found
-        it "is found by the scope" do
-          expect(the_scope).to include text
-        end
-      end
-
-      def it_is_not_found
-        it "is not found by the scope" do
-          expect(the_scope).not_to include text
-        end
-      end
-    end
-
-    context "with a text not marked to export" do
-      it_is_not_found
-    end
-
-    context "with a text marked to export" do
-      let!(:text) { FactoryBot.create :text, :exports_as_epub_v3 }
-
-      context "and no text exports" do
-        it_is_found
-      end
-
-      context "with a stale export" do
-        let!(:text_export) { FactoryBot.create :text_export, :epub_v3, text: text, fingerprint: text.fingerprint.reverse }
-
-        it_is_found
-      end
-
-      context "with a current export" do
-        let!(:text_export) { FactoryBot.create :text_export, :epub_v3, text: text, fingerprint: text.fingerprint }
-
-        it_is_not_found
-      end
-    end
-  end
-
   specify "a new text can create sections from a list of names" do
-    new_text = Text.new
-    new_text.section_names= %w[foo bar]
+    new_text = described_class.new
+    new_text.section_names = %w[foo bar]
 
     expect(new_text.text_sections.size).to eq 2
   end
@@ -166,13 +122,13 @@ RSpec.describe Text, type: :model do
   end
 
   context "when a section is deleted" do
-    let!(:text) { FactoryBot.create(:text)}
-    let!(:section_one) { FactoryBot.create(:text_section, text: text)}
-    let!(:section_two) { FactoryBot.create(:text_section, text: text)}
-    let(:toc) { [{label: "one", id: section_one.id}, {label: "two", id: section_two.id, children: [{label: "one_child", id: section_one.id}]}, {label: "three", id: section_one.id}] }
+    let!(:text) { FactoryBot.create(:text) }
+    let!(:section_one) { FactoryBot.create(:text_section, text: text) }
+    let!(:section_two) { FactoryBot.create(:text_section, text: text) }
+    let(:toc) { [{ label: "one", id: section_one.id }, { label: "two", id: section_two.id, children: [{ label: "one_child", id: section_one.id }] }, { label: "three", id: section_one.id }] }
 
     before do
-      text.update! :toc => toc
+      text.update! toc: toc
     end
 
     specify "all linked toc entries are also deleted" do
@@ -184,11 +140,11 @@ RSpec.describe Text, type: :model do
     end
   end
 
-  it_should_behave_like "a model that stores its fingerprint" do
+  it_behaves_like "a model that stores its fingerprint" do
     subject { FactoryBot.create :text }
   end
 
-  it_should_behave_like "a model with formatted attributes"
+  it_behaves_like "a model with formatted attributes"
 
-  it_should_behave_like "a collectable"
+  it_behaves_like "a collectable"
 end

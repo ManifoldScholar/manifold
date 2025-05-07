@@ -5,23 +5,25 @@ RSpec.describe "Project Resources API", type: :request do
 
   describe "sends a list of project resources" do
     let(:path) { api_v1_project_relationships_resources_path(project) }
-    before(:each) { get path }
+    before { get path }
+
     describe "the response" do
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
 
   describe "creates a new project resource" do
-
     let(:path) { api_v1_project_relationships_resources_path(project) }
-    let(:resource) { { attributes: {
+    let(:resource) do
+      { attributes: {
       title: "A new hope",
       externalType: "vimeo",
       externalId: "abc123",
       sub_kind: "external_video"
-    }, relationships: { project: { data: { type: "projects", id: project.id } } } } }
+    }, relationships: { project: { data: { type: "projects", id: project.id } } } }
+    end
 
     context "when the user is an admin" do
       let(:headers) { admin_headers }
@@ -29,7 +31,7 @@ RSpec.describe "Project Resources API", type: :request do
       describe "the response" do
         it "has a 201 CREATED status code" do
           post path, headers: headers, params: build_json_payload(resource)
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(:created)
         end
       end
     end
@@ -40,7 +42,7 @@ RSpec.describe "Project Resources API", type: :request do
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
           post path, headers: headers, params: build_json_payload(resource)
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end

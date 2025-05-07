@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Test Mail", type: :request do
-
   include_context("authenticated request")
 
   path "/test_mails" do
@@ -10,12 +11,12 @@ RSpec.describe "Test Mail", type: :request do
       security [apiKey: []]
 
       response "204", "Email sent successfully" do
-        let(:Authorization) { admin_auth }
+        let(:Authorization) { admin_auth } # rubocop:todo RSpec/VariableName
         run_test!
       end
 
       response "403", I18n.t("swagger.not_authenticated") do
-        let(:Authorization) { reader_auth }
+        let(:Authorization) { reader_auth } # rubocop:todo RSpec/VariableName
         before do |example|
           submit_request(example.metadata)
         end
@@ -26,7 +27,7 @@ RSpec.describe "Test Mail", type: :request do
       end
 
       response "401", I18n.t("swagger.not_authenticated") do
-        let(:Authorization) {}
+        let(:Authorization) {} # rubocop:todo Lint/EmptyBlock, RSpec/VariableName
         before do |example|
           submit_request(example.metadata)
         end

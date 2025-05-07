@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 module APIDocs
   class Config
-
     class << self
       include Helpers::Inflections
 
       def swagger_root
-        File.join(Rails.root, "public/api/static/docs")
+        Rails.public_path.join('api/static/docs')
       end
 
       def definitions
@@ -18,7 +19,6 @@ module APIDocs
         defined
       end
 
-      # rubocop:disable Metrics/MethodLength
       def swagger_docs
         {
           "v1/swagger.json" => {
@@ -40,9 +40,6 @@ module APIDocs
           }
         }
       end
-      # rubocop:enable Metrics/MethodLength
-
     end
-
   end
 end

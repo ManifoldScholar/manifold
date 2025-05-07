@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Adds resourceful methods to a controller
@@ -56,8 +58,7 @@ module API
       private
 
       # rubocop:disable Metrics/AbcSize
-      # rubocop:disable Lint/UnderscorePrefixedVariableName
-      def define_methods!
+      def define_methods! # rubocop:todo Metrics/MethodLength
         _resource_configuration = self
 
         define_method(:resource_configuration) { _resource_configuration }
@@ -136,7 +137,6 @@ module API
           method_names[:resource_scope] = :"scope_for_#{the_collection_name}"
         end
       end
-
     end
   end
 end

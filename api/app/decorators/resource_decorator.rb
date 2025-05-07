@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourceDecorator < ApplicationDecorator
   delegate_all
   decorates_association :resource_collection
@@ -6,5 +8,4 @@ class ResourceDecorator < ApplicationDecorator
   def url
     ClientURL.call(:resource_show, project_slug: project.slug, resource_slug: slug)
   end
-
 end

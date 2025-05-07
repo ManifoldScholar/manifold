@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # SearchResultsController
     class SearchResultsController < ApplicationController
-
       record_analytics! do
         record_analytics_for_action :index, event: :search
       end
@@ -15,7 +16,7 @@ module API
                          include: [:model, :"model.creator", :"model.creators"],
                          serializer: ::V1::SearchResultSerializer,
                          meta: {
-                           keyword: search_options.dig(:keyword),
+                           keyword: search_options[:keyword],
                            pagination: pagination_dict(outcome.result)
                          }
         else
@@ -46,7 +47,6 @@ module API
           text_section: p[:text_section].presence
         }
       end
-
     end
   end
 end

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Notifications
   class SendFlagNotificationJob < ApplicationJob
-
     # @param [String] user_id
     # @param [String] flag_id
     def perform(user_id, flag_id)
@@ -17,6 +18,5 @@ module Notifications
         "  Failed to notify #<User:#{user_id}> of flag #<Flag:#{flag_id}>"
       )
     end
-
   end
 end

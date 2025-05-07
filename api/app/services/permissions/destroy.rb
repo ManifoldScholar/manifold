@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Permissions
   class Destroy < ActiveInteraction::Base
     object :permission
@@ -14,6 +16,5 @@ module Permissions
         @user.remove_role role, @resource
       end
     end
-
   end
 end

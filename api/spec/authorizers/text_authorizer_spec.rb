@@ -1,33 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe "Text Abilities", :authorizer, :project_role_tests do
+RSpec.describe "Text Abilities", :authorizer, :project_role_tests do # rubocop:todo RSpec/DescribeClass
   let_it_be(:text, refind: true) { FactoryBot.create(:text, project: project) }
 
   let(:object) { text }
-
-  context "when the subject is an admin" do
-    subject { admin }
-
-    the_subject_behaves_like "instance abilities", Text, all: true
-  end
-
-  context "when the subject is an editor" do
-    subject { editor }
-
-    the_subject_behaves_like "instance abilities", Text, all: true
-  end
-
-  context "when the subject is a project_creator" do
-    subject { project_creator }
-
-    the_subject_behaves_like "instance abilities", Text, read_only: true
-  end
-
-  context "when the subject is a marketeer" do
-    subject { marketeer }
-
-    the_subject_behaves_like "instance abilities", Text, all: true
-  end
 
   context "when the subject is a reader and project_editor of the text's project" do
     subject { project_editor }

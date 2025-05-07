@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   module Operations
     # Set up a {ExportStrategies::TargetNameFormatter target name formatter} for

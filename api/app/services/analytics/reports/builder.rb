@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 module Analytics
   module Reports
     class Builder < ActiveInteraction::Base
-
-      TIME_ZONE = "PST".freeze
-      VISIT_DATE_PLACEHOLDER = "{{ VISIT DATE FILTER }}".freeze
-      START_DATE_PLACEHOLDER = "{{ START DATE }}".freeze
-      END_DATE_PLACEHOLDER = "{{ END DATE }}".freeze
-      TZ_PLACEHOLDER = "{{ TIME ZONE }}".freeze
-      GENERATE_SERIES_PLACEHOLDER = "{{ GENERATE_SERIES }}".freeze
+      TIME_ZONE = "PST"
+      VISIT_DATE_PLACEHOLDER = "{{ VISIT DATE FILTER }}"
+      START_DATE_PLACEHOLDER = "{{ START DATE }}"
+      END_DATE_PLACEHOLDER = "{{ END DATE }}"
+      TZ_PLACEHOLDER = "{{ TIME ZONE }}"
+      GENERATE_SERIES_PLACEHOLDER = "{{ GENERATE_SERIES }}"
 
       attr_reader :cached_result
 
@@ -45,7 +46,6 @@ module Analytics
       ## Class Methods
 
       class << self
-
         attr_reader :ctes, :base_ctes, :analytics
 
         def register_base_cte!(name, sql)
@@ -69,12 +69,12 @@ module Analytics
           ctes.symbolize_keys.keys
         end
 
-        def define_analytic(name, &block)
+        def define_analytic(name, &)
           @analytics = [] unless @analytics.present?
 
           @analytics.push(name)
 
-          define_method name, &block
+          define_method(name, &)
         end
 
         def quote(str)
@@ -84,7 +84,6 @@ module Analytics
         def timestamp_field_in_range(field_name)
           "(#{field_name} #{TZ_PLACEHOLDER})::date BETWEEN #{START_DATE_PLACEHOLDER} AND #{END_DATE_PLACEHOLDER}"
         end
-
       end
 
       ## Instance methods
@@ -124,9 +123,7 @@ module Analytics
       def cached_analytics
         @cached_result = true
 
-        # rubocop:disable Layout/LineLength
         compose Analytics::Reports::AnalyticsResult, data: cached_analytics_result, **inputs, start_date: valid_start_date, end_date: valid_end_date
-        # rubocop:enable Layout/LineLength
       end
 
       def cached_analytics_result
@@ -205,7 +202,7 @@ module Analytics
         ApplicationRecord.connection.quote(value)
       end
 
-      def build_simple_query(name:, type:, value:, value_key: "value", from: self.class.base_ctes.first, filter: nil, **metadata) # rubocop:disable Metrics/ParameterLists
+      def build_simple_query(name:, type:, value:, value_key: "value", from: self.class.base_ctes.first, filter: nil, **metadata)
         <<~SQL
           SELECT
             '#{name}' AS name,
@@ -216,7 +213,7 @@ module Analytics
         SQL
       end
 
-      def build_agg_query(name:, type:, query_or_table_name:, from: self.class.base_ctes.first, filter: nil, **metadata) # rubocop:disable Metrics/ParameterLists
+      def build_agg_query(name:, type:, query_or_table_name:, from: self.class.base_ctes.first, filter: nil, **metadata)
         <<~SQL
           SELECT
             '#{name}' AS name,
@@ -264,7 +261,6 @@ module Analytics
         fraction = "COALESCE(#{numerator}::float / NULLIF(#{denominator}, 0), 0)"
         { numerator: "COALESCE(#{numerator}, 0)", denominator: "COALESCE(#{denominator}, 0)", fraction: fraction }
       end
-
     end
   end
 end

@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Strategy
     module Epub
       # Inspects epub for a single title
       class Title
-
         def initialize(title_node, epub_inspector)
           @title_node = title_node
           @epub_inspector = epub_inspector
@@ -43,7 +44,6 @@ module Ingestions
         protected
 
         # rubocop:disable Metrics/CyclomaticComplexity
-        # rubocop:disable Metrics/MethodLength
         def onix_code_to_type(code)
           case code.to_i
           when 1, 2, 3, 7
@@ -66,13 +66,11 @@ module Ingestions
             ::TextTitle::KIND_ALTERNATIVE
           end
         end
-        # rubocop:enable Metrics/MethodLength
         # rubocop:enable Metrics/CyclomaticComplexity
 
         def id
           @title_node.attribute("id")&.value
         end
-
       end
     end
   end

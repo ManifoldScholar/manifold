@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 # Simple job to process a resource import row
 module ResourceImportRows
   class ImportJob < ApplicationJob
-
     # Our acceptance tests use perform_now, which break if this is throttled.
     unless Rails.env.test?
       # concurrency 6, drop: false

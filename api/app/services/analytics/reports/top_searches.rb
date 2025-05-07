@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Analytics
   module Reports
     class TopSearches < Analytics::Reports::PaginatedBuilder
-
       register_base_cte! :searches, <<~SQL
         SELECT
           analytics_events.properties ->> 'keyword' AS keyword,

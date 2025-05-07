@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Search Results", type: :request do
@@ -6,7 +8,7 @@ RSpec.describe "Search Results", type: :request do
     let!(:text_resource) { FactoryBot.create(:text) }
     let!(:project_resource) { FactoryBot.create(:project, title: keyword, texts: [text_resource]) }
 
-    around(:example) do |example|
+    around do |example|
       WebMock.disable_net_connect!(allow: [/127\.0\.0\.1:2?9200/, /localhost:2?9200/, /elasticsearch:9200/])
       Journal.reindex
       Text.reindex
@@ -23,8 +25,8 @@ RSpec.describe "Search Results", type: :request do
       let(:project) { project_resource.id }
       let(:text) { nil }
       let(:text_section) { nil }
-      let(:'page[number]') { 1 }
-      let(:'page[size]') { 10 }
+      let(:'page[number]') { 1 } # rubocop:todo RSpec/VariableName
+      let(:'page[size]') { 10 } # rubocop:todo RSpec/VariableName
       let(:raw) { nil }
       let(:facets) { [] }
 

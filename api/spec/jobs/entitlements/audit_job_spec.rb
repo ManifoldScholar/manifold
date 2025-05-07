@@ -2,7 +2,7 @@
 
 RSpec.describe Entitlements::AuditJob, type: :job do
   let(:stubbed_operation) do
-    double(ManifoldApi::Container["entitlements.audit.perform"])
+    double(ManifoldApi::Container["entitlements.audit.perform"]) # rubocop:todo RSpec/VerifiedDoubles
   end
 
   let(:result) { Dry::Monads.Success(true) }
@@ -33,7 +33,7 @@ RSpec.describe Entitlements::AuditJob, type: :job do
     it "fails loudly" do
       expect do
         described_class.perform_now
-      end.to raise_error /\AFailed Audit/
+      end.to raise_error(/\AFailed Audit/)
     end
   end
 end

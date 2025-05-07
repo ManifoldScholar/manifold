@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates a Journal model from JSON-API style params
   class Journal
-
     include ::Updaters
     include ::Updaters::Concerns::HasSortableCollaborators
 

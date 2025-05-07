@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Content Blocks", type: :request do

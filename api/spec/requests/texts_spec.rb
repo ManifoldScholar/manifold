@@ -3,10 +3,11 @@
 RSpec.describe "Texts API", type: :request do
   describe "sends a list of texts" do
     let(:path) { api_v1_texts_path }
-    before(:each) { get path }
+    before { get path }
+
     describe "the response" do
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -49,7 +50,7 @@ RSpec.describe "Texts API", type: :request do
   end
 
   describe "updates a text" do
-    it_should_behave_like "orderable api requests" do
+    it_behaves_like "orderable api requests" do
       let(:path) { "api_v1_text_path" }
       let!(:object_a) { FactoryBot.create(:text, position: 1) }
       let!(:object_b) { FactoryBot.create(:text, position: 2, project: object_a.project) }

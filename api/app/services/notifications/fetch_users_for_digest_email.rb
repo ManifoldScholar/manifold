@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Notifications
   class FetchUsersForDigestEmail < ActiveInteraction::Base
     record :frequency, class: "NotificationFrequency", finder: :[]

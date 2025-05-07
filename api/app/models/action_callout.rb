@@ -1,5 +1,6 @@
-class ActionCallout < ApplicationRecord
+# frozen_string_literal: true
 
+class ActionCallout < ApplicationRecord
   # Authorization
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -62,5 +63,4 @@ class ActionCallout < ApplicationRecord
   def requires_text?
     read? || toc?
   end
-
 end

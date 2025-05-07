@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     # A proxy that wraps a {Collaborator} (and its {Maker}) for a given {Text}.

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnnotationDecorator < ApplicationDecorator
   delegate_all
   decorates_association :text
@@ -21,5 +23,4 @@ class AnnotationDecorator < ApplicationDecorator
                    annotation_anchor: "annotation-#{id}")
   end
   alias subject_url reader_url
-
 end

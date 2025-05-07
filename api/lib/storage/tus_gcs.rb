@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require "google/cloud/storage"
 require "factory/drive_session"
 
 module Storage
   class TusGcs
-
     # Reasonable multipart upload limits
     MIN_PART_SIZE       = 5 * 1024 * 1024
     MAX_PART_SIZE       = 5 * 1024 * 1024 * 1024 * 1024
@@ -13,7 +14,6 @@ module Storage
     attr_reader :bucket, :prefix, :upload_options, :limits
 
     # Initializes an aws-sdk-s3 client with the given credentials.
-    # rubocop:disable Metrics/ParameterLists
     def initialize(bucket:, prefix: "tus", upload_options: {}, limits: {}, credentials: nil, **_client_options)
       raise ArgumentError, "the :bucket option was nil" unless bucket
 
@@ -171,6 +171,5 @@ module Storage
 
       @storage = Google::Cloud::Storage.new(opts)
     end
-
   end
 end

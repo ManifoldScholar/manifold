@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Receives the parsed search components from {Search::Query#parse_search_components!}
   # along with its {Search::Options options} and uses those to produce a suitable set

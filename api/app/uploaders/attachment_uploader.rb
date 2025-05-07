@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @see Attachments
 class AttachmentUploader < Shrine
   include SharedUploader
@@ -50,7 +52,7 @@ class AttachmentUploader < Shrine
   end
 
   class Attachment
-    def initialize(*)
+    def initialize(*) # rubocop:todo Metrics/MethodLength
       super
 
       module_eval <<~RUBY, __FILE__, __LINE__ + 1
@@ -166,5 +168,4 @@ class AttachmentUploader < Shrine
       to_io&.path
     end
   end
-
 end

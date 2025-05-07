@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "sti_preload"
 
 class ContentBlock < ApplicationRecord
@@ -93,7 +95,6 @@ class ContentBlock < ApplicationRecord
       "::V1::#{name}Serializer".constantize
     end
 
-    # rubocop:disable Naming/PredicateName
     def has_configured_attributes(attributes)
       @configured_attributes = attributes
 
@@ -101,7 +102,6 @@ class ContentBlock < ApplicationRecord
         jsonb_accessor :configuration, @configured_attributes
       RUBY
     end
-    # rubocop:enable Naming/PredicateName
 
     def available_attributes
       @configured_attributes&.keys

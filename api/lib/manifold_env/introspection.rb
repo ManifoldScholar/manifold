@@ -7,7 +7,7 @@ module ManifoldEnv
   class Introspection
     EMPTY_PARAMS = {}.with_indifferent_access.freeze
 
-    JSON_MIME = %r{application/json}.freeze
+    JSON_MIME = %r{application/json}
 
     # @return [Boolean]
     attr_reader :authorized_admin
@@ -41,7 +41,7 @@ module ManifoldEnv
     attr_reader :throttled
 
     # @param [Hash] env
-    def initialize(env = {})
+    def initialize(env = {}) # rubocop:todo Metrics/AbcSize
       @request = Rack::Request.new(env)
       @params = parse_json_params
       @authorized_admin = request.get? ? nil : AuthToken.authorized_admin?(request.env["HTTP_AUTHORIZATION"])

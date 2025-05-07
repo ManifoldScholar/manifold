@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Search::Query, elasticsearch: true, interaction: true do
@@ -47,7 +49,7 @@ RSpec.describe Search::Query, elasticsearch: true, interaction: true do
     context "when set to raise errors" do
       let_input!(:raise_search_errors) { true }
 
-      it "should raise an error" do
+      it "should raise an error" do # rubocop:todo RSpec/NoExpectationExample
         perform_within_expectation! valid: false, raises: true do |e|
           e.to raise_error(Searchkick::InvalidQueryError)
         end
@@ -65,7 +67,7 @@ RSpec.describe Search::Query, elasticsearch: true, interaction: true do
     context "when set to raise errors" do
       let_input!(:raise_search_errors) { true }
 
-      it "should raise an error" do
+      it "should raise an error" do # rubocop:todo RSpec/NoExpectationExample
         perform_within_expectation! valid: false, raises: true do |e|
           e.to raise_error(Searchkick::InvalidQueryError)
         end

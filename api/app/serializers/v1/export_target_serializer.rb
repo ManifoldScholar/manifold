@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class ExportTargetSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
@@ -9,8 +11,8 @@ module V1
         username: Types::String,
         compression: Types::Integer,
         privateKey: Types::String.meta(
-          description: "The key used to secure the sftp connection. This value "\
-          "can be updated, but will not be sent in any response. It will instead "\
+          description: "The key used to secure the sftp connection. This value " \
+          "can be updated, but will not be sent in any response. It will instead " \
           "respond with [FILTERED] if there is a value.",
           example: "[FILTERED]"
         )

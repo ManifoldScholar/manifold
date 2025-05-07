@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module BagItSpec
     # Prune the temporary directory used by the {Packaging::BagItSpec::Compilation compilation process}

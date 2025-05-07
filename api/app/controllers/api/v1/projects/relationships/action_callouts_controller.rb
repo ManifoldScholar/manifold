@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Projects
       module Relationships
         class ActionCalloutsController < AbstractProjectChildController
-
           resourceful! ActionCallout, authorize_options: { except: [:index] } do
             @project.action_callouts
           end
@@ -33,7 +34,6 @@ module API
 
             api_v1_action_callout_url(@action_callout, project_id: @project.id)
           end
-
         end
       end
     end

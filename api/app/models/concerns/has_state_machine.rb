@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # An idiomatic concern that composes ClassyEnum with Statesman in a standard way.
 #
-# rubocop:disable Layout/LineLength, Naming/PredicateName
 module HasStateMachine
   extend ActiveSupport::Concern
 
@@ -114,4 +115,3 @@ module HasStateMachine
     end
   end
 end
-# rubocop:enable Layout/LineLength, Naming/PredicateName

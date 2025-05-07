@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 shared_examples_for "an ingestion registry" do |definition|
@@ -18,8 +20,8 @@ shared_examples_for "an ingestion registry" do |definition|
   it "adds a definition to the registry" do
     expect do
       registry.configure do
-        eval definition
+        eval definition # rubocop:todo Security/Eval
       end
-    end.to change{ registry.length }.from(0).to(1)
+    end.to change(registry, :length).from(0).to(1)
   end
 end

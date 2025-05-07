@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExportUploader < Shrine
   include SharedUploader
 
@@ -45,5 +47,4 @@ class ExportUploader < Shrine
       RUBY
     end
   end
-
 end

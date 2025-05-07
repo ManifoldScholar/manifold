@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Analytics
   class RecordSearchEvent < Analytics::RecordCustomEvent
-
     validate :properties_contains_query
 
     private
@@ -12,6 +13,5 @@ module Analytics
     def properties_contains_query
       errors.add(:properties, "must contain a search keyword") unless properties[:keyword].present?
     end
-
   end
 end

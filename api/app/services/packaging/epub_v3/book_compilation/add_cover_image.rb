@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     module BookCompilation
@@ -25,8 +27,8 @@ module Packaging
 
         private
 
-        def convert_image(compiled_text, &block)
-          compose_monadic_interaction Packaging::EpubV3::ConvertCoverImage, compiled_text.to_convert_cover_image_inputs, &block
+        def convert_image(compiled_text, &)
+          compose_monadic_interaction(Packaging::EpubV3::ConvertCoverImage, compiled_text.to_convert_cover_image_inputs, &)
         end
 
         def add_image_to!(book, cover_image_proxy)

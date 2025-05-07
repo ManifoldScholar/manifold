@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module JSONAPI
   module Helpers
     # rubocop:disable Metrics/CyclomaticComplexity

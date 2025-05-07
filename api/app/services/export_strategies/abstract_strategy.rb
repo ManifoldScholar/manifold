@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   # @abstract
   class AbstractStrategy
@@ -47,7 +49,6 @@ module ExportStrategies
       # @param [Integer] min_value
       # @param [Integer] max_value
       # @return [void]
-      # rubocop:disable Naming/PredicateName
       def has_port!(attribute_name = :port, default:, min_value: MIN_TCP_PORT, max_value: MAX_TCP_PORT)
         attribute attribute_name, :integer, default: default
 
@@ -60,7 +61,6 @@ module ExportStrategies
           }
         )
       end
-      # rubocop:enable Naming/PredicateName
 
       # Augment the {.connection_klass subclass} of {ExportTargets::AbstractConnection}
       # for this specific strategy.
@@ -68,9 +68,9 @@ module ExportStrategies
       # @yield a class-evaled block
       # @yieldreturn [void]
       # @return [void]
-      def connection
+      def connection(&block)
         connection_klass.tap do |klass|
-          klass.class_eval(&Proc.new) if block_given?
+          klass.class_eval(&block) if block_given?
         end
       end
 
@@ -101,7 +101,7 @@ module ExportStrategies
       # @see ExportStrategies::AbstractConnection
       # @return [Class]
       def parent_connection_klass
-        AbstractStrategy == self ? ExportStrategies::AbstractConnection : superclass.connection_klass
+        self == AbstractStrategy ? ExportStrategies::AbstractConnection : superclass.connection_klass
       end
 
       # Augment the {.uploader_klass subclass} of {ExportTargets::AbstractUploader}
@@ -110,9 +110,9 @@ module ExportStrategies
       # @yield a class-evaled block
       # @yieldreturn [void]
       # @return [void]
-      def uploader
+      def uploader(&block)
         uploader_klass.tap do |klass|
-          klass.class_eval(&Proc.new) if block_given?
+          klass.class_eval(&block) if block_given?
         end
       end
 
@@ -140,7 +140,7 @@ module ExportStrategies
       # @see ExportStrategies::AbstractUploader
       # @return [Class]
       def parent_uploader_klass
-        AbstractStrategy == self ? ExportStrategies::AbstractUploader : superclass.uploader_klass
+        self == AbstractStrategy ? ExportStrategies::AbstractUploader : superclass.uploader_klass
       end
     end
   end

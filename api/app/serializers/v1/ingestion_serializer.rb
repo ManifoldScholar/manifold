@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class IngestionSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :state, Types::String.enum("sleeping", "processing", "finished").meta(read_only: true)
@@ -21,6 +22,5 @@ module V1
     typed_attribute :target_kind, Types::String.enum("text", "text_section")
 
     typed_has_one :creator, serializer: ::V1::UserSerializer
-
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TextDecorator < ApplicationDecorator
   delegate_all
   decorates_association :project
@@ -6,5 +8,4 @@ class TextDecorator < ApplicationDecorator
   def reader_url
     ClientURL.call(:reader_text, text_slug: slug)
   end
-
 end

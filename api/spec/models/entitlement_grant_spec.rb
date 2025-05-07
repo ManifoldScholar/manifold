@@ -14,7 +14,7 @@ RSpec.describe EntitlementGrant, type: :model do
     let!(:project_collection) { collection_project.project_collection }
 
     let!(:active_entitlement) { shared_entitlement_for project }
-    let!(:collection_entitlement) { shared_entitlement_for project_collection}
+    let!(:collection_entitlement) { shared_entitlement_for project_collection }
     let!(:expired_entitlement) { shared_entitlement_for project, expires_on: Date.current - 7 }
 
     let!(:everything) do
@@ -26,7 +26,7 @@ RSpec.describe EntitlementGrant, type: :model do
 
       ManifoldApi::Container["entitlements.populate_grants"].()
 
-      EntitlementGrant.where(user: user, resource: project).first!
+      described_class.where(user: user, resource: project).first!
     end
 
     subject { grant }

@@ -1,13 +1,17 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Ingestion Sources", type: :request do
   let!(:text) { FactoryBot.create(:text) }
   let(:text_id) { text.id }
-  let(:attributes) { {
+  let(:attributes) do
+    {
     attachment: image_params,
     kind: "publication_resource",
     source_identifier: "test"
-  }}
+  }
+  end
 
   path "/texts/{text_id}/relationships/ingestion_sources" do
     include_examples "an API index request",
@@ -20,14 +24,14 @@ RSpec.describe "Ingestion Sources", type: :request do
                      parent: :text,
                      url_parameters: [:text_id],
                      authorized_user: :admin do
-              let(:body) do
-                {
-                  data: {
-                    attributes: attributes
-                  }
-                }
-              end
-            end
+      let(:body) do
+        {
+          data: {
+            attributes: attributes
+          }
+        }
+      end
+    end
   end
 
   path "/ingestion_sources/{id}" do
@@ -37,14 +41,14 @@ RSpec.describe "Ingestion Sources", type: :request do
     include_examples "an API update request",
                      model: IngestionSource,
                      authorized_user: :admin do
-              let(:body) do
-                {
-                  data: {
-                    attributes: attributes
-                  }
-                }
-              end
-            end
+      let(:body) do
+        {
+          data: {
+            attributes: attributes
+          }
+        }
+      end
+    end
 
     include_examples "an API destroy request",
                      model: IngestionSource,

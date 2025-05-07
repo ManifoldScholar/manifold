@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Maker, type: :model do
-
   it "has a valid factory" do
     expect(FactoryBot.build(:maker)).to be_valid
   end
 
   it "has many collaborators" do
-    maker = Maker.new
+    maker = described_class.new
     5.times { maker.collaborators << Collaborator.new }
     expect(maker.collaborators.length).to be 5
   end
 
   describe "its name" do
-    let(:maker) do  FactoryBot.create(:maker,
+    let(:maker) do
+      FactoryBot.create(:maker,
                                       name: nil,
                                       prefix: "Sir",
                                       first_name: "Stubblin",
@@ -35,24 +37,23 @@ RSpec.describe Maker, type: :model do
     end
 
     it "is invalid without a single first or last name" do
-      expect(FactoryBot.build(:maker, name: nil, first_name: nil, last_name: nil)).to_not be_valid
+      expect(FactoryBot.build(:maker, name: nil, first_name: nil, last_name: nil)).not_to be_valid
     end
   end
 
   describe "its with_order scope" do
-    before(:each) do
-      Maker.create(name: "Rowan Ono")
-      Maker.create(name: "Ida")
-      Maker.create(name: "Sir Stubblin Champflin III")
+    before do
+      described_class.create(name: "Rowan Ono")
+      described_class.create(name: "Ida")
+      described_class.create(name: "Sir Stubblin Champflin III")
     end
 
     it "returns the correct order" do
-      expect(Maker.with_order.pluck(:last_name, :first_name)).to eq [
-                                                                      %w(Champflin Stubblin),
-                                                                      [nil, "Ida"],
-                                                                      %w(Ono Rowan)
-                                                                    ]
+      expect(described_class.with_order.pluck(:last_name, :first_name)).to eq [
+        %w(Champflin Stubblin),
+        [nil, "Ida"],
+        %w(Ono Rowan)
+      ]
     end
   end
-
 end

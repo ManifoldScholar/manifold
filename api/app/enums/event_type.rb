@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class EventType < ClassyEnum::Base
 end
+
 class EventType::ProjectCreated < EventType
 end
 

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # User controller
     class UsersController < ApplicationController
-
       PRELOADS = %w(roles).freeze
 
       resourceful! User, authorize_options: { except: [:create, :show, :whoami] } do

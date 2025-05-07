@@ -1,7 +1,8 @@
-RSpec.shared_context "resource import", :shared_context => :metadata do
+# frozen_string_literal: true
 
-  before(:each) do
-    allow_any_instance_of(ResourceImportRows::Import)
+RSpec.shared_context "resource import", shared_context: :metadata do
+  before do
+    allow_any_instance_of(ResourceImportRows::Import) # rubocop:todo RSpec/AnyInstance
       .to receive(:fetch_google_drive_file) do |import, value|
       if value
         path = Rails.root.join("spec", "data", "resource_import", value)
@@ -10,5 +11,4 @@ RSpec.shared_context "resource import", :shared_context => :metadata do
       nil
     end
   end
-
 end

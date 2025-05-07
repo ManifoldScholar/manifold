@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProxiedAssociations
   extend ActiveSupport::Concern
 
@@ -29,7 +31,7 @@ module ProxiedAssociations
       cbrs = content_block_references.__send__(method) { |cbr| cbr.kind == config.name.to_s }
 
       h[config.name] = if config.multiple
-                         cbrs.map(&:referencable).reject(&:blank?)
+                         cbrs.map(&:referencable).compact_blank
                        else
                          cbrs&.referencable
                        end
@@ -37,7 +39,6 @@ module ProxiedAssociations
   end
   # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
-  # rubocop:disable Naming/PredicateName
   class_methods do
     def available_relationships
       reference_configurations.map(&:name)
@@ -63,8 +64,8 @@ module ProxiedAssociations
 
     def configure_association(**options)
       reference_configurations << Content::ReferenceConfiguration.new(**options)
-      build_association_getter options.dig(:name)
-      build_assocciation_id_getter(options.dig(:name))
+      build_association_getter options[:name]
+      build_assocciation_id_getter(options[:name])
     end
 
     def build_assocciation_id_getter(name)
@@ -89,5 +90,4 @@ module ProxiedAssociations
       RUBY
     end
   end
-  # rubocop:enable Naming/PredicateName
 end

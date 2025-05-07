@@ -30,8 +30,8 @@ class TextSectionNode < ApplicationRecord
   scope :terminal, -> { where(intermediate: false) }
   scope :with_intermediate_tag, -> { where(tag: INTERMEDIATE_TAGS) }
 
-  has_many :text_section_node_links, -> { in_order }, inverse_of: :parent, foreign_key: :parent_id
-  has_many :ancestor_links, -> { in_reverse_order }, class_name: "TextSectionNodeLink", inverse_of: :child, foreign_key: :child_id
+  has_many :text_section_node_links, -> { in_order }, inverse_of: :parent, foreign_key: :parent_id # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many :ancestor_links, -> { in_reverse_order }, class_name: "TextSectionNodeLink", inverse_of: :child, foreign_key: :child_id # rubocop:todo Rails/HasManyOrHasOneDependent
 
   has_many :parents, -> { terminal }, through: :ancestor_links, source: :parent
   has_many :children, through: :text_section_node_links, source: :child

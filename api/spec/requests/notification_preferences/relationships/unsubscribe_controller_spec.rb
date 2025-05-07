@@ -6,10 +6,11 @@ RSpec.describe "NotificationPreferences Unsubscribe API", type: :request do
 
   describe "unsubscribes a user from notifications" do
     let(:path) { api_v1_notification_preferences_relationships_unsubscribe_path }
-    before(:each) { post path, params: { token: token } }
+    before { post path, params: { token: token } }
+
     describe "the response" do
       it "has a 201 status code" do
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
       end
     end
   end

@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 namespace :pspec do
-  task :create do
+  task create: :environment do
     system "RAILS_ENV=test ./bin/rake parallel:create"
   end
 
-  task :drop do
+  task drop: :environment do
     system "RAILS_ENV=test ./bin/rake parallel:drop"
   end
 
-  task :prepare do
+  task prepare: :environment do
     system "RAILS_ENV=test ./bin/rake parallel:rake[db:schema:load]"
   end
 
-  task :failures do
+  task failures: :environment do
     system "RAILS_ENV=test ./bin/pspec-failures"
   end
 end
 
-task :pspec do
+task pspec: :environment do
   system "RAILS_ENV=test ./bin/rake parallel:spec"
 end

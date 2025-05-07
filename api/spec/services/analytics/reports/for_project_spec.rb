@@ -5,7 +5,7 @@ RSpec.describe Analytics::Reports::ForProject do
 
   include_examples "analytics reporter visits"
 
-  let(:scope) { project }
+  let(:scope) { project } # rubocop:todo RSpec/LetBeforeExamples
 
   include_examples "analytics reporter events" do
     let(:expectations) do

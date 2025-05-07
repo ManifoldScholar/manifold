@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ResourceImports::ParseCSV do
@@ -6,16 +8,16 @@ RSpec.describe ResourceImports::ParseCSV do
     import = FactoryBot.create(:resource_import_csv, data: path)
 
     expect do
-      ResourceImports::ParseCSV.run resource_import: import
-    end.to_not raise_error
+      described_class.run resource_import: import
+    end.not_to raise_error
   end
 
   context "when utf-8 encoded sheet" do
     let(:path) { fixture_file_upload(Rails.root.join("spec", "data", "resource_import", "utf-8.csv"), "text/csv") }
     let(:import) { FactoryBot.create(:resource_import_csv, data: path) }
 
-    before(:each) do
-      ResourceImports::ParseCSV.run resource_import: import
+    before do
+      described_class.run resource_import: import
     end
 
     it "parses and maintains the correct characters" do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::TextSection::Ingestor do
@@ -34,8 +36,7 @@ RSpec.describe Ingestions::TextSection::Ingestor do
   end
 
   context "when Google Doc", slow: true do
-
-    before(:all) do
+    before(:all) do # rubocop:todo RSpec/BeforeAfterAll
       Settings.instance.update_from_environment!
     end
 
@@ -49,7 +50,7 @@ RSpec.describe Ingestions::TextSection::Ingestor do
   context "when a text has existing sections" do
     let!(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
     let!(:text) { FactoryBot.create :text }
-    let!(:section_one) { FactoryBot.create :text_section, text: text, position: 1}
+    let!(:section_one) { FactoryBot.create :text_section, text: text, position: 1 }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path, text: text }
 
     it "adds a new text section in last position" do
@@ -63,7 +64,7 @@ RSpec.describe Ingestions::TextSection::Ingestor do
   context "when a reingest" do
     let!(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
     let!(:text) { FactoryBot.create :text }
-    let!(:section_one) { FactoryBot.create :text_section, text: text, position: 1}
+    let!(:section_one) { FactoryBot.create :text_section, text: text, position: 1 }
     let!(:target_section) { FactoryBot.create :text_section, text: text, position: 2 }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path, text: text, text_section: target_section }
 

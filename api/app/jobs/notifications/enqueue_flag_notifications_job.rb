@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Notifications
   class EnqueueFlagNotificationsJob < ApplicationJob
-
     # @param [String] flag_id
     def perform(flag_id)
       ensure_resource(flag_id)
@@ -25,6 +26,5 @@ module Notifications
       resource = Flag.find(flag_id)&.flaggable
       raise ActiveRecord::RecordNotFound unless resource.present?
     end
-
   end
 end

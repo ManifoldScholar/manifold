@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     class EntitlementTargetsController < ApplicationController
-      resourceful! EntitlementTarget do
+      resourceful! EntitlementTarget do # rubocop:todo Lint/EmptyBlock
       end
 
       def index

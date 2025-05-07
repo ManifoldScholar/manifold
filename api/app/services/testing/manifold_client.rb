@@ -1,6 +1,6 @@
+# frozen_string_literal: true
+
 module Testing
-  # rubocop:disable Metrics/ParameterLists, Lint/UnusedMethodArgument, Naming/MethodParameterName, Layout/LineLength
-  # rubocop:disable Layout/FirstHashElementIndentation
   class ManifoldClient
     extend Dry::Initializer
 
@@ -230,5 +230,5 @@ module Testing
     prepend ResponseWrapping
   end
   # rubocop:enable Layout/FirstHashElementIndentation
-  # rubocop:enable Metrics/ParameterLists, Lint/UnusedMethodArgument, Naming/MethodParameterName, Layout/LineLength
+  # rubocop:enable Metrics/ParameterLists, Lint/UnusedMethodArgument, Naming/MethodParameterName
 end

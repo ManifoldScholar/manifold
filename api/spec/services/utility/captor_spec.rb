@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Utility::Captor do
-  let(:default) { double("The Default Value") }
+  let(:default) { double("The Default Value") } # rubocop:todo RSpec/VerifiedDoubles
   let(:one_time) { true }
   let(:captor) { described_class.new default: default, one_time: one_time }
 

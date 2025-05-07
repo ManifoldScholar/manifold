@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HTMLNodes
   class Namespace < Types::FlexibleStruct
     include Dry::Equalizer.new(:name)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "redcarpet/compat"
 require "image_processing/mini_magick"
 require "uber/inheritable_attr"

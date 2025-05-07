@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # {ReadingGroupEntry} models create and maintain 1:1 representations here
 # in order to allow simpler generation of {ReadingGroupCollection} records.
 class ReadingGroupCompositeEntry < ApplicationRecord

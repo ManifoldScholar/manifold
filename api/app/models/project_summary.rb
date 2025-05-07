@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectSummary < ApplicationRecord
   include Attachments
   include View
@@ -24,6 +26,6 @@ class ProjectSummary < ApplicationRecord
   end
 
   def recently_updated?
-    updated? && updated_at >= Time.current - 1.week
+    updated? && updated_at >= 1.week.ago
   end
 end

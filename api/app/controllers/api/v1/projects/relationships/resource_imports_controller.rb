@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Projects
       module Relationships
         # Imports resources into a project
         class ResourceImportsController < AbstractProjectChildController
-
           resourceful! ResourceImport do
             @project.resource_imports
           end
@@ -42,7 +43,6 @@ module API
               project_id: @project.id
             )
           end
-
         end
       end
     end

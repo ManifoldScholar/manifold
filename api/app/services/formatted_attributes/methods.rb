@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormattedAttributes
   # This class derives and defines a number of methods that get included
   # directly on a model that uses {HasFormattedAttributes.has_formatted_attribute}.

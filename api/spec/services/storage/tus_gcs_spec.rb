@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 require "storage/tus_gcs"
 
 RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true do
-  before(:all) do
+  before(:all) do # rubocop:todo RSpec/BeforeAfterAll
     Settings.instance.update_from_environment!
   end
 
-  before(:each) do
+  before do
     WebMock.allow_net_connect!
   end
 
-  around(:example) do
+  around do # rubocop:todo RSpec/AroundBlock
     if bucket.present?
       example.run
     else
@@ -20,7 +22,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
 
   let(:bucket) { ENV["MANIFOLD_SETTINGS_STORAGE_TEST_BUCKET"] }
   let(:credentials) { ::Factory::DriveSession.config }
-  let(:gcs) { Storage::TusGcs.new(bucket: bucket, credentials: credentials) }
+  let(:gcs) { described_class.new(bucket: bucket, credentials: credentials) }
 
   describe "#initialize" do
     it "accepts bucket" do
@@ -30,7 +32,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
 
   describe "#create" do
     it "creates new empty file" do
-      gcs.create_file("the-unique-file-id", info = {})
+      gcs.create_file("the-unique-file-id", {})
       expect(gcs.get_file("the-unique-file-id").each.to_a.join).to eq ""
     end
   end
@@ -127,7 +129,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
       expect(response.each.to_a.join).to eq("a" * 16 * 1024 + "b" * 3)
     end
 
-    it "handles multibyte characters" do
+    it "handles multibyte characters" do # rubocop:todo RSpec/NoExpectationExample
       gcs.create_file("foo")
       gcs.patch_file("foo", StringIO.new("😃"))
     end
@@ -144,12 +146,8 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
       expect(gcs.info_exists?("foo")).to be false
     end
 
-    it "doesn't raise an error if file is missing" do
+    it "doesn't raise an error if file is missing" do # rubocop:todo RSpec/NoExpectationExample
       gcs.delete_file("not-a-real-file")
     end
-  end
-
-  describe "#expire_files" do
-    # TODO
   end
 end

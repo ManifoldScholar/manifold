@@ -46,7 +46,7 @@ class Project < ApplicationRecord
   end
   with_citable_children :texts
   has_sort_title do |project|
-    project.title[/^((a|the|an) )?(?<title>.*)$/i, :title]
+    project.title[/^((a|the|an) )?(?<title>.*)$/i, :title] # rubocop:todo Lint/MixedRegexpCaptureTypes
   end
 
   # PaperTrail
@@ -59,11 +59,11 @@ class Project < ApplicationRecord
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
-  has_many :collection_project_rankings
+  has_many :collection_project_rankings # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :project_collections, through: :collection_projects, dependent: :destroy
   has_many :texts, dependent: :destroy, inverse_of: :project
-  has_many :text_summaries, inverse_of: :project
-  has_many :published_texts,
+  has_many :text_summaries, inverse_of: :project # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many :published_texts, # rubocop:todo Rails/HasManyOrHasOneDependent
            -> { published(true) },
            class_name: "Text",
            inverse_of: :project
@@ -84,7 +84,7 @@ class Project < ApplicationRecord
   has_many :subjects, through: :project_subjects
   has_many :ingestions, dependent: :destroy, inverse_of: :project
   has_many :twitter_queries, dependent: :destroy, inverse_of: :project
-  has_many :permissions, as: :resource, inverse_of: :resource
+  has_many :permissions, as: :resource, inverse_of: :resource # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :resource_imports, inverse_of: :project, dependent: :destroy
   has_many :tracked_dependent_versions,
            -> { order(created_at: :desc) },
@@ -97,14 +97,14 @@ class Project < ApplicationRecord
            dependent: :destroy,
            inverse_of: :project
   has_many :content_block_references, through: :content_blocks
-  has_many :action_callouts,
+  has_many :action_callouts, # rubocop:todo Rails/InverseOf
            -> { order(:position) },
            dependent: :destroy,
            as: :calloutable
   has_many :project_exports, inverse_of: :project, dependent: :destroy
-  has_many :project_export_statuses, inverse_of: :project
+  has_many :project_export_statuses, inverse_of: :project # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :project_exportations, dependent: :destroy
-  has_many :uncollected_resources, ->(object) {
+  has_many :uncollected_resources, ->(object) { # rubocop:todo Rails/HasManyOrHasOneDependent, Rails/InverseOf
     where.not(id: object.collection_resources.select(:resource_id))
   }, class_name: "Resource"
 
@@ -112,7 +112,9 @@ class Project < ApplicationRecord
 
   has_one :journal, through: :journal_issue
   has_one :journal_volume, through: :journal_issue, touch: true
-  has_one :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
+  # rubocop:todo Rails/InverseOf
+  has_one :current_project_export_status, -> { current }, class_name: "ProjectExportStatus" # rubocop:todo Rails/HasManyOrHasOneDependent, Rails/InverseOf
+  # rubocop:enable Rails/InverseOf
   has_one :current_project_export, through: :current_project_export_status, source: :project_export
 
   delegate :number, to: :journal_issue, allow_nil: true, prefix: true
@@ -122,8 +124,8 @@ class Project < ApplicationRecord
 
   # Callbacks
   before_validation :ensure_restricted_access_notice_content!
-  before_update :prepare_to_reindex_children, if: :draft_changed?
   before_create :assign_publisher_defaults!
+  before_update :prepare_to_reindex_children, if: :draft_changed?
   after_commit :trigger_creation_event, on: [:create]
   after_commit :queue_reindex_children_job
 
@@ -244,19 +246,17 @@ class Project < ApplicationRecord
              batch_size: 500,
              highlight: [:title, :body])
 
-  # rubocop:disable Metrics/AbcSize
   def search_data
     {
       search_result_type: search_result_type,
       title: title,
       full_text: description_plaintext,
-      keywords: (tag_list + texts.map(&:title) + subjects.map(&:title) + hashtag).reject(&:blank?),
+      keywords: (tag_list + texts.map(&:title) + subjects.map(&:title) + hashtag).compact_blank,
       creator: creator&.full_name,
       makers: makers.map(&:full_name),
-      metadata: metadata.values.reject(&:blank?)
+      metadata: metadata.values.compact_blank
     }.merge(search_hidden)
   end
-  # rubocop:enable Metrics/AbcSize
 
   def search_hidden
     {
@@ -351,7 +351,7 @@ class Project < ApplicationRecord
   end
 
   def recently_updated?
-    updated? && updated_at >= Time.current - 1.week
+    updated? && updated_at >= 1.week.ago
   end
 
   def reindex_children
@@ -405,7 +405,7 @@ class Project < ApplicationRecord
     return if metadata[attr].present?
 
     settings = Settings.instance
-    default = settings.general.dig("default_#{attr}")
+    default = settings.general["default_#{attr}"]
 
     return unless default.present?
 
@@ -497,7 +497,6 @@ class Project < ApplicationRecord
 
     private
 
-    # rubocop:disable Metrics/AbcSize
     # This creates a case statement to be supplied to `where`.
     #
     # * If the project is a draft, only show for users with draft access roles
@@ -518,7 +517,6 @@ class Project < ApplicationRecord
         stmt.else(true)
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     # @see .arel_with_roles_for
     # @param [User] user

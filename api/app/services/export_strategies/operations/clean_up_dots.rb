@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   module Operations
     class CleanUpDots
       include Shared::PipelineOperation
 
-      DOT = ".".freeze
-      DOUBLE_DOT = /\.\./.freeze
+      DOT = "."
+      DOUBLE_DOT = /\.\./
 
       # @param [String] input
       # @return [String]

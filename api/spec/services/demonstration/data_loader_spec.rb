@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Demonstration::DataLoader do
-
-  let(:loader) { Demonstration::DataLoader.new }
+  let(:loader) { described_class.new }
   let(:settings) { Settings.instance }
 
   it "does not overwrite setting if already set" do
@@ -11,5 +12,4 @@ RSpec.describe Demonstration::DataLoader do
     settings.reload
     expect(settings.general["ga_tracking_id"]).to eq("rowan")
   end
-
 end

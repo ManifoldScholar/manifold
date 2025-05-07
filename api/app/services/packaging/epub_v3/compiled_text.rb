@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     # A proxy object that wraps a {Text} and its dependent resources which have

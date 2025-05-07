@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates a Resource model from JSON-API style params
   class Resource
@@ -9,6 +11,5 @@ module Updaters
         :variant_format_two, :variant_poster, :captions_track
       ]
     end
-
   end
 end

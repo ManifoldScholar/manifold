@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A person or organization involved with the creation of a text
 class Maker < ApplicationRecord
   # Constants
@@ -5,7 +7,7 @@ class Maker < ApplicationRecord
 
   PACKAGING_ATTRIBUTES = %i[id name first_name middle_name last_name display_name suffix prefix].freeze
 
-  PACKAGING_AVATAR_FORMAT = %[%<name>s_%<id>s.%<extension>s].freeze
+  PACKAGING_AVATAR_FORMAT = %[%<name>s_%<id>s.%<extension>s]
 
   # Concerns
   include Filterable

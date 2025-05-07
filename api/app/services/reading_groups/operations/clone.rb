@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReadingGroups
   module Operations
     class Clone
@@ -14,7 +16,7 @@ module ReadingGroups
 
       option :user, model: "User", optional: true
 
-      option :name, Types::String.optional, optional: true, default: proc { nil }
+      option :name, Types::String.optional, optional: true, default: proc {}
       option :archive, Types::Bool, optional: true, default: proc { false }
       option :clone_owned_annotations, Types::Bool, optional: true, default: proc { false }
 

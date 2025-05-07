@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Entitlements
   # Create an Entitlement
   class Create < AbstractCreate
@@ -45,6 +47,5 @@ module Entitlements
       errors.add :subject_url, "does not correspond to a known subject" if @subject.blank?
       errors.add :subject_url, "is not entitleable" unless @subject.is_a?(Entitleable)
     end
-
   end
 end

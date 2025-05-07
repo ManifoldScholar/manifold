@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Packaging::BagItSpec::Compilation::GenerateBagInfo, packaging: true do
@@ -14,7 +16,7 @@ RSpec.describe Packaging::BagItSpec::Compilation::GenerateBagInfo, packaging: tr
 
   let!(:operation) { described_class.new }
 
-  after(:each) do 
+  after do
     FileUtils.remove_entry_secure tmp_root
   end
 

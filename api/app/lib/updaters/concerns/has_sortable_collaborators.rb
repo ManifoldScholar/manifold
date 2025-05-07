@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   module Concerns
     module HasSortableCollaborators
@@ -10,7 +12,7 @@ module Updaters
       def sort_collaborators
         collaborators = relationships.dig :collaborators, :data
 
-        return unless collaborators && !collaborators.empty?
+        return unless collaborators.present?
 
         @model.collaborators.each_with_index do |collaborator, _i|
           index = collaborators.find_index { |c| c[:id] == collaborator.id }

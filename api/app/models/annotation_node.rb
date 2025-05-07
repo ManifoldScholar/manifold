@@ -12,7 +12,7 @@ class AnnotationNode < ApplicationRecord
 
   belongs_to :start_node, class_name: "TextSectionNode"
   belongs_to :end_node, class_name: "TextSectionNode"
-  belongs_to :ancestor_node, -> { preload(:children) }, class_name: "TextSectionNode"
+  belongs_to :ancestor_node, -> { preload(:children) }, class_name: "TextSectionNode" # rubocop:todo Rails/InverseOf
 
   attribute :existing_node, :indifferent_hash
 

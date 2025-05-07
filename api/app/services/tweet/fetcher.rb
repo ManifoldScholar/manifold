@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Tweet
   # This class is responsible for fetching tweets related to a given project
   class Fetcher
@@ -49,10 +51,10 @@ module Tweet
 
     def client
       @client ||= Twitter::REST::Client.new do |config|
-        config.consumer_key        = settings.integrations.dig(:twitter_app_id)
-        config.consumer_secret     = settings.secrets.dig(:twitter_app_secret)
-        config.access_token        = settings.integrations.dig(:twitter_access_token)
-        config.access_token_secret = settings.secrets.dig(:twitter_access_token_secret)
+        config.consumer_key        = settings.integrations[:twitter_app_id]
+        config.consumer_secret     = settings.secrets[:twitter_app_secret]
+        config.access_token        = settings.integrations[:twitter_access_token]
+        config.access_token_secret = settings.secrets[:twitter_access_token_secret]
       end
     end
 
@@ -62,10 +64,10 @@ module Tweet
 
     def twitter_configured?
       config = [
-        settings.integrations.dig(:twitter_app_id),
-        settings.integrations.dig(:twitter_access_token),
-        settings.secrets.dig(:twitter_app_secret),
-        settings.secrets.dig(:twitter_access_token_secret)
+        settings.integrations[:twitter_app_id],
+        settings.integrations[:twitter_access_token],
+        settings.secrets[:twitter_app_secret],
+        settings.secrets[:twitter_access_token_secret]
       ]
 
       config.all?(&:present?)

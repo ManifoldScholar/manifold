@@ -1,4 +1,5 @@
-# rubocop:disable Metrics/AbcSize
+# frozen_string_literal: true
+
 module CollectsReadingGroupEntries
   extend ActiveSupport::Concern
 
@@ -27,7 +28,11 @@ module CollectsReadingGroupEntries
       uncategorized_entries = associations.uncategorized_entries
       uncategorized_collectables = associations.uncategorized_collectables
 
-      has_many uncategorized_entries, -> { uncategorized.in_order }, class_name: model_name
+      # rubocop:todo Rails/ReflectionClassName
+      # rubocop:todo Rails/InverseOf
+      has_many uncategorized_entries, -> { uncategorized.in_order }, class_name: model_name # rubocop:todo Rails/HasManyOrHasOneDependent, Rails/InverseOf, Rails/ReflectionClassName
+      # rubocop:enable Rails/InverseOf
+      # rubocop:enable Rails/ReflectionClassName
       has_many uncategorized_collectables, through: uncategorized_entries, source: collectable
     end
 
@@ -43,4 +48,3 @@ module CollectsReadingGroupEntries
     end
   end
 end
-# rubocop:enable Metrics/AbcSize

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   # Wrapper class that can build field queries the way that
   # Searchkick does, with both fuzzy and boosted direct matching,
@@ -6,7 +8,6 @@ module Search
   # For fields that need to search nested content, a la `text_nodes.content`,
   # its interface will automatically use nested alternatives.
   #
-  # rubocop:disable Metrics/MethodLength
   class FieldInfo < Types::FlexibleStruct
     include Search::AdvancedDSL
 
@@ -210,5 +211,4 @@ module Search
       end
     end
   end
-  # rubocop:enable Metrics/MethodLength
 end

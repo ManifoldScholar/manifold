@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "forwardable"
 module Search
   # Search::Results wraps raw Searchkick::Results and injects parent record IDs and slugs
@@ -9,7 +11,6 @@ module Search
   # model instances. If Searchkick is returning raw elastic search results, we can
   # execute a performant query and inject parent slugs needed for link creation.
   class Results
-
     include ActiveSupport::Inflector
 
     MODEL_INCLUDES = {
@@ -42,14 +43,14 @@ module Search
 
     def adjusted_results
       @adjusted_results ||= begin
-        return @searchkick_results.results if @searchkick_results.options[:load]
+        return @searchkick_results.results if @searchkick_results.options[:load] # rubocop:todo Lint/NoReturnInBeginEndBlocks
 
         inject_associations(@searchkick_results)
       end
     end
 
-    def each_with_hit(&block)
-      adjusted_results.zip(@searchkick_results.hits).each(&block)
+    def each_with_hit(&)
+      adjusted_results.zip(@searchkick_results.hits).each(&)
     end
 
     # @note Introspection methods, used in tests
@@ -114,8 +115,8 @@ module Search
 
     def result_model_reference(result)
       [
-        result.dig("_source", "search_result_type") || result.dig("search_result_type"),
-        result.dig("_id")
+        result.dig("_source", "search_result_type") || result["search_result_type"],
+        result["_id"]
       ]
     end
 
@@ -124,6 +125,5 @@ module Search
         models << result_model_reference(result)
       end
     end
-
   end
 end

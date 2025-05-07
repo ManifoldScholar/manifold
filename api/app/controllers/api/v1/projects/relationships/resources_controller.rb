@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Projects
       module Relationships
         # Responds with resources in a project
         class ResourcesController < AbstractProjectChildController
-
           resourceful! Resource, authorize_options: { except: [:index] } do
             Resource.filtered(
               with_pagination!(resource_filter_params),
@@ -29,7 +30,6 @@ module API
             )
             render_single_resource @resource, location: location
           end
-
         end
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PagePurpose < ClassyEnum::Base
   include ActiveSupport::Configurable
 
@@ -17,6 +19,7 @@ class PagePurpose < ClassyEnum::Base
     end
   end
 end
+
 class PagePurpose::TermsAndConditions < PagePurpose
   policy!
 end

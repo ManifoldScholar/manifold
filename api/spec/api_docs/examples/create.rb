@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples_for "an API create request" do |options|
+RSpec.shared_context "an API create request" do |options|
   api_spec_helper = APIDocs::Helpers::Request.new(options, :create)
 
   let(:body) { json_structure_from_factory(api_spec_helper.factory, type: :request) } if api_spec_helper.response_body?
@@ -17,7 +17,7 @@ RSpec.shared_examples_for "an API create request" do |options|
     tags api_spec_helper.tags
 
     response api_spec_helper.success_response_code, api_spec_helper.success_description, focus: api_spec_helper.focus do
-      let(:Authorization) { get_user_token(api_spec_helper.authorized_user) } if api_spec_helper.requires_auth?
+      let(:Authorization) { get_user_token(api_spec_helper.authorized_user) } if api_spec_helper.requires_auth? # rubocop:todo RSpec/VariableName
       schema api_spec_helper.response if api_spec_helper.response_body?
 
       run_test!
@@ -25,7 +25,7 @@ RSpec.shared_examples_for "an API create request" do |options|
 
     unless api_spec_helper.exclude_401
       response "401", I18n.t("swagger.not_authenticated"), focus: api_spec_helper.focus do
-        let(:Authorization) {}
+        let(:Authorization) {} # rubocop:todo Lint/EmptyBlock, RSpec/VariableName
         run_test!
       end
     end

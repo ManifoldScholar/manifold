@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceImports
   class StateMachine
     include Statesman::Machine
@@ -89,7 +91,6 @@ module ResourceImports
         row.state_machine.transition_to :pending
       end
     end
-
   end
 end
 # rubocop:enable

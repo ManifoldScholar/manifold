@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Stylesheet, type: :model do
@@ -8,7 +10,7 @@ RSpec.describe Stylesheet, type: :model do
   end
 
   it "is invalid without a name" do
-    expect(FactoryBot.build(:stylesheet, name: nil)).to_not be_valid
+    expect(FactoryBot.build(:stylesheet, name: nil)).not_to be_valid
   end
 
   it "changes the computed styles when its raw styles change" do
@@ -18,7 +20,7 @@ RSpec.describe Stylesheet, type: :model do
 
   it "does not destroy text section records on destroy" do
     stylesheet.text_sections << FactoryBot.create(:text_section)
-    expect { stylesheet.destroy }.to_not change { TextSection.count }
+    expect { stylesheet.destroy }.not_to change(TextSection, :count)
   end
 
   context "when raw_styles have changed" do

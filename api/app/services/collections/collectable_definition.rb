@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Collections
   class CollectableDefinition
     extend Dry::Initializer
@@ -26,7 +28,7 @@ module Collections
 
     delegate :collectable_jsonapi_type, :collectable_type, to: :associations
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       @collectable_associations = CollectableAssociations.new self

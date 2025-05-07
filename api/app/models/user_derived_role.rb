@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserDerivedRole < ApplicationRecord
   self.primary_key = :user_id
 

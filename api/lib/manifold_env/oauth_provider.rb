@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
   class OauthProvider
     include Comparable
@@ -11,7 +13,7 @@ module ManifoldEnv
 
     CREDENTIAL_KEYS = %i(id secret).freeze
 
-    validates :credentials, presence: { message: "are unset" }
+    validates :credentials, presence: { message: "are unset" } # rubocop:todo Rails/I18nLocaleTexts
 
     attr_reader :name
 
@@ -110,7 +112,6 @@ module ManifoldEnv
       end.presence
     end
 
-    # rubocop:disable Style/CaseEquality
     def indifferently_compare(left, right)
       if right.is_a?(String)
         left.to_s == right

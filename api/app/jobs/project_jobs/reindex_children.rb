@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectJobs
   # Simple job to reindex a projects children in the background.
   class ReindexChildren < ApplicationJob

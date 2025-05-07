@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TextExports
   # @see TextExports::Prune
   class PruneJob < ApplicationJob

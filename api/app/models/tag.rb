@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tag < ActsAsTaggableOn::Tag
   # Constants
   TYPEAHEAD_ATTRIBUTES = [:title].freeze

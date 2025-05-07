@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ProjectCollections::CacheCollectionProjects do
@@ -22,7 +24,7 @@ RSpec.describe ProjectCollections::CacheCollectionProjects do
       project_collection = FactoryBot.create(:project_collection, number_of_projects: 2, smart: true)
       expect do
         described_class.run project_collection: project_collection
-      end.to change{ project_collection.projects.count }.from(0).to(2)
+      end.to change { project_collection.projects.count }.from(0).to(2)
     end
 
     context "when no parameters are included" do
@@ -42,7 +44,7 @@ RSpec.describe ProjectCollections::CacheCollectionProjects do
     end
 
     context "when parameters include subjects" do
-      before(:each) do
+      before do
         @project_collection = FactoryBot.create(:project_collection, smart: true)
         @project_collection.subjects = [subject_a, subject_c]
       end
@@ -54,7 +56,7 @@ RSpec.describe ProjectCollections::CacheCollectionProjects do
     end
 
     context "when parameters include tags" do
-      before(:each) do
+      before do
         @project_collection = FactoryBot.create(:project_collection, smart: true)
         @project_collection.update tag_list: "b, e"
       end
@@ -66,7 +68,7 @@ RSpec.describe ProjectCollections::CacheCollectionProjects do
     end
 
     context "when parameters include tags and subjects" do
-      before(:each) do
+      before do
         @project_collection = FactoryBot.create(:project_collection, smart: true)
         @project_collection.subjects = [subject_a]
         @project_collection.update tag_list: "c"
