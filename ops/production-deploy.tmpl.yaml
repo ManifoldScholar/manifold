@@ -40,9 +40,16 @@ ingress:
 api:
   rails:
     replicaCount: 2
+    host: princeton-manifold-production-api-rails
+  cable:
+    host: princeton-manifold-production-api-cable
 
 client:
   replicaCount: 2
+  browserApiCableUrl: https://openpublishing.princeton.edu/cable
+  browserApiUrl: https://openpublishing.princeton.edu
+  serverApiUrl: http://princeton-manifold-production-api-rails:3020
+  serverHost: princeton-manifold-production-client
 
 redis:
   enabled: true
@@ -51,7 +58,10 @@ redis:
     password: $REDIS_PASSWORD # FIXME need to set
 
 env:
-  rails_secret_key: $SECRET_KEY_BASE
+  domain: openpublishing.princeton.edu
+  elasticsearchUrl: http://princeton-manifold-production-es:9200
+  railsDbHost: princeton-manifold-production-postgresql
+  railsSecretKey: $SECRET_KEY_BASE
 
 postgresql:
   enabled: true

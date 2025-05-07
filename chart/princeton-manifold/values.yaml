@@ -96,12 +96,19 @@ api:
     tag: ""
   rails:
     replicaCount: 1
+    host: ""
+  cable:
+    host: ""
 client:
   image:
     repository: ghcr.io/notch8/princeton-manifold/client
     pullPolicy: IfNotPresent
     tag: ""
   replicaCount: 1
+  browserApiCableUrl: ""
+  browserApiUrl: ""
+  serverApiUrl: ""
+  serverHost: ""
 
 livenessProbe:
   httpGet:
