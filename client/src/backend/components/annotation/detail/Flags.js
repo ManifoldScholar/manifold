@@ -7,10 +7,12 @@ import * as Styled from "./styles";
 
 export default function FlagsList({
   flags,
-  resolvedFlagsCount,
-  unresolvedFlagsCount
+  unresolvedFlagsCount,
+  resolvedFlagsCount
 }) {
   const { t } = useTranslation();
+
+  const active = flags.filter(flag => !flag.attributes.resolved);
 
   return (
     <>
@@ -31,12 +33,12 @@ export default function FlagsList({
             </span>
           </Styled.FlagWrapper>
         )}
-        {flags.map(f => {
+        {active.map(f => {
           const {
-            attributes: { message, createdAt, resolved },
+            attributes: { message, createdAt },
             relationships: { creator }
           } = f;
-          return !resolved ? (
+          return (
             <Styled.FlagWrapper>
               <Styled.FlagMeta>
                 <FormattedDate format="MMM dd, yyyy" date={createdAt} />
@@ -44,7 +46,7 @@ export default function FlagsList({
               </Styled.FlagMeta>
               {message && <Styled.FlagMessage>{message}</Styled.FlagMessage>}
             </Styled.FlagWrapper>
-          ) : null;
+          );
         })}
       </Styled.FlagsList>
     </>

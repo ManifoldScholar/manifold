@@ -12,20 +12,25 @@ import * as Styled from "./styles";
 function AnnotationRow({
   entity,
   hideCreator,
+  hideRG,
   bulkActionsActive,
   bulkSelection,
   addItem,
   removeItem,
-  onDelete
+  onDelete,
+  linkOverride
 }) {
   const { id, attributes } = entity;
   const {
     body,
     private: notePrivate,
     readingGroupPrivacy,
+    readingGroupName,
+    readingGroupId,
     unresolvedFlagsCount,
     createdAt,
     textTitle,
+    textId,
     creatorName,
     creatorId,
     orphaned
@@ -106,15 +111,33 @@ function AnnotationRow({
                 {creatorName}
               </Link>
             )}
-            <span
+            <Link
+              to={{
+                pathname: lh.link("backendText", textId)
+              }}
               dangerouslySetInnerHTML={{
                 __html:
                   textTitle ?? t("records.annotations.text_title_placeholder")
               }}
             />
+            {!!readingGroupId && !hideRG && (
+              <Link
+                to={{
+                  pathname: lh.link("backendReadingGroup", readingGroupId)
+                }}
+              >
+                {readingGroupName}
+              </Link>
+            )}
           </Styled.MetaTwo>
           <Styled.Link
-            to={{ pathname: lh.link("backendRecordsAnnotationsDetail", id) }}
+            to={
+              linkOverride
+                ? linkOverride(id)
+                : {
+                    pathname: lh.link("backendRecordsAnnotationsDetail", id)
+                  }
+            }
           >
             {body && (
               <Styled.Body className="entity-row__title entity-row__title">
@@ -132,6 +155,7 @@ function AnnotationRow({
 AnnotationRow.propTypes = {
   entity: PropTypes.object,
   hideCreator: PropTypes.bool,
+  hideRG: PropTypes.bool,
   bulkActionsActive: PropTypes.bool,
   bulkSelection: PropTypes.object,
   addItem: PropTypes.func,

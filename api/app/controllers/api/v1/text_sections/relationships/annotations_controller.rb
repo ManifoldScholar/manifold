@@ -42,11 +42,6 @@ module API
             )
           end
 
-          def destroy
-            @annotation = load_and_authorize_annotation
-            @annotation.destroy
-          end
-
           private
 
           def exclude_public_annotations?

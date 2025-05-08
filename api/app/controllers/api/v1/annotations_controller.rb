@@ -5,7 +5,7 @@ module API
     class AnnotationsController < ApplicationController
       config.pagination_enforced = true
 
-      resourceful! Annotation do
+      resourceful! Annotation, authorize_options: { except: [:index, :show] } do
         Annotation.filtered(with_pagination!(annotation_filter_params))
       end
 
@@ -23,6 +23,11 @@ module API
           @annotation,
           include: [:creator, :flags]
         )
+      end
+
+      def destroy
+        @annotation = load_and_authorize_annotation
+        @annotation.destroy
       end
     end
   end
