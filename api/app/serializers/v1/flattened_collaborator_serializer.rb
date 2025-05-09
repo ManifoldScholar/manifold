@@ -7,5 +7,8 @@ module V1
     typed_belongs_to :maker, serializer: ::V1::MakerSerializer
     typed_belongs_to :collaboratable, polymorphic: true
     typed_attribute :collaborators, Types::Array.of(Types::Serializer::ID.meta(read_only: true))
+    typed_attribute :position, Types::Integer do |object|
+      object.min_position
+    end
   end
 end

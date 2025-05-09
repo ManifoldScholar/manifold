@@ -132,6 +132,7 @@ Rails.application.routes.draw do
             resources :collaborators, only: [:index, :show] do
               collection do
                 post :create_from_roles
+                post :update_from_roles
                 delete :destroy
               end
             end
@@ -221,6 +222,7 @@ Rails.application.routes.draw do
             resources :collaborators, only: [:index, :show] do
               collection do
                 post :create_from_roles
+                post :update_from_roles
                 delete :destroy
               end
             end
