@@ -12,9 +12,11 @@ import Authorization from "helpers/authorization";
 import { useApiCallback } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import Form from "global/components/form";
+import { useHistory } from "react-router-dom";
 
 function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const closeUrl = lh.link("backendTextCollaborators", text.id);
 
@@ -76,6 +78,10 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
     }
   };
 
+  const onEdit = id => {
+    history.push(lh.link("backendTextCollaboratorEdit", text.id, id));
+  };
+
   return (
     <section>
       {childRoutes(route, {
@@ -96,7 +102,7 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
           callbacks={{ onReorder }}
           sortableStyle="tight"
           entityComponent={ContributorRow}
-          entityComponentProps={canUpdate ? { onDelete } : null}
+          entityComponentProps={canUpdate ? { onDelete, onEdit } : null}
           entities={text?.relationships?.flattenedCollaborators ?? []}
           buttons={
             canUpdate
