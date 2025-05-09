@@ -76,16 +76,14 @@ class FilteredList extends PureComponent {
             "notes-filtered-list__header-end--has-select": this.hasReadingGroups
           })}
         >
-          {this.hasReadingGroups && (
-            <Partial.GroupFilter
-              filterChangeHandler={handleFilterChange}
-              selectedGroup={this.selectedGroup}
-              readingGroups={this.readingGroups}
-              setAnnotationOverlayReadingGroup={
-                this.setAnnotationOverlayReadingGroup
-              }
-            />
-          )}
+          <Partial.GroupFilter
+            filterChangeHandler={handleFilterChange}
+            selectedGroup={this.selectedGroup}
+            readingGroups={this.readingGroups}
+            setAnnotationOverlayReadingGroup={
+              this.setAnnotationOverlayReadingGroup
+            }
+          />
           <button
             onClick={handleSeeAllClick}
             className="notes-filtered-list__see-all button-primary button-primary--dull button-primary--rounded"
