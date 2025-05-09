@@ -6,27 +6,21 @@ module API
       extend ActiveSupport::Concern
 
       def collaborators_from_roles_params
-        params.require(:data)
-        maker = { data: [:type, :id] }
-        param_config = { data: { roles: [], maker: maker } }
+        maker = [:type, :id]
+        param_config = [{ roles: [], maker: maker }, :position]
         params.permit(param_config)
       end
 
-      def collaborators_from_roles(params, collaboratable_id, collaboratable_type)
-        raw_params = params.to_unsafe_h
-
-        roles = raw_params.dig(:data, :roles)
-        maker = raw_params.dig(:data, :maker)
+      def collaborators_from_roles(collaboratable, attrs = collaborators_from_roles_params)
+        roles = attrs[:roles]
 
         roles.each_with_object([]) do |role, arr|
           collaborator_params = {
             data: {
-              attributes: { role: role },
+              attributes: { role: role, position: attrs[:position] },
               relationships: {
-                collaboratable: {
-                  data: { id: collaboratable_id, type: collaboratable_type }
-                },
-                maker: maker
+                collaboratable: { data: collaboratable },
+                maker: { data: attrs[:maker] }
               }
             }
           }
@@ -37,14 +31,36 @@ module API
         end
       end
 
-      def maker_param_present?
-        maker_id = collaborator_filter_params[:maker]
+      def adjust_collaborators_from_roles(collaborators, collaboratable)
+        next_roles = collaborators_from_roles_params[:roles]
+        current_roles = collaborators.map { |c| c.role }
 
+        collaborators.each do |c|
+          unless next_roles.include?(c.role)
+            c.destroy
+          end
+        end
+
+        to_add = next_roles.reject { |r| current_roles.include?(r) }
+        attrs = {
+          roles: to_add,
+          maker: collaborators_from_roles_params[:maker],
+          position: collaborators_from_roles_params[:position]
+        }
+
+        collaborators_from_roles(collaboratable, attrs)
+      end
+
+      def maker_id
+        collaborator_filter_params[:maker] || collaborators_from_roles_params[:maker][:id]
+      end
+
+      def maker_present?
         maker_id.present?
       end
 
       def render_no_maker_error
-        message = "Maker filter is required"
+        message = "Maker is required"
 
         render json: { errors: [message] }, status: :unprocessable_entity
       end
