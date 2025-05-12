@@ -31,4 +31,6 @@ data:
   RAILS_REDIS_URL: {{ template "princeton-manifold.redis.url" . }}
   RAILS_SECRET_KEY: {{ .Values.env.rails_secret_key }}
   REDIS_URL: {{ template "princeton-manifold.redis.url" . }}
+  SENTRY_DSN: {{ .Values.env.sentry_dsn }}
+  SENTRY_ENVIRONMENT: {{ .Values.env.sentry_environment }}
   SSL_ENABLED: "true"
