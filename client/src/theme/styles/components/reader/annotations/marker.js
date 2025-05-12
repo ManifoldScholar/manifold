@@ -84,22 +84,6 @@ export default `
       }
     }
 
-    &.secondary {
-      background-color: var(--color-annotation-secondary-pale);
-
-      .scheme-dark & {
-        background-color: var(--color-annotation-secondary-pale-low-contrast);
-      }
-    }
-
-    &.tertiary {
-      background-color: var(--color-annotation-tertiary-pale);
-
-      .scheme-dark & {
-        background-color: var(--color-annotation-tertiary-pale-low-contrast);
-      }
-    }
-
     &.mixed {
       background-color: var(--color-annotation-mixed);
     }
