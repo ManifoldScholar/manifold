@@ -11,7 +11,6 @@ export default `
   .button-search {
     height: 100%;
     padding: 0;
-    color: var(--header-foreground-color);
     vertical-align: middle;
     background: transparent;
     border: 0;

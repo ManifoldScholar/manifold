@@ -14,7 +14,7 @@ export const Button = styled.button`
   outline: 0;
 
   .avatar {
-    ${buttonAvatar(42, "var(--header-foreground-color)")}
+    ${buttonAvatar(42)}
   }
 
   ${({ $context }) =>
