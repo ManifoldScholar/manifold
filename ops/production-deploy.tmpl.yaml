@@ -52,8 +52,8 @@ redis:
 
 env:
   rails_secret_key: $SECRET_KEY_BASE
-  sentry_dsn: $SENTRY_DSN
-  sentry_environment: $SENTRY_ENVIRONMENT
+  sentryDsn: $SENTRY_DSN
+  sentryEnvironment: $SENTRY_ENVIRONMENT
 
 postgresql:
   enabled: true
