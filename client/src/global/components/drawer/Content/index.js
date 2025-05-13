@@ -54,15 +54,16 @@ function DrawerContent(props, ref) {
     return true;
   };
 
-  /* eslint-disable no-nested-ternary */
-  const Drawer =
-    context === "reader"
-      ? Styled.DrawerReader
-      : context === "editor"
-      ? Styled.DrawerEditor
-      : position === "overlay"
-      ? Styled.DrawerOverlay
-      : Styled.Drawer;
+  let Drawer = Styled.Drawer;
+
+  if (context === "reader") {
+    Drawer =
+      position === "overlay" ? Styled.DrawerReaderOverlay : Styled.DrawerReader;
+  } else if (context === "editor") {
+    Drawer = Styled.DrawerEditor;
+  } else if (position === "overlay") {
+    Drawer = Styled.DrawerOverlay;
+  }
 
   const Inner = context === "editor" ? Styled.DrawerEditorInner : "div";
 
