@@ -45,11 +45,11 @@ api:
   sidekiq:
     resources:
       limits:
-        memory: "12Gi"
-        cpu: "2"
+        memory: "4Gi"
+        cpu: "300m"
       requests:
         memory: "2Gi"
-        cpu: "300m"
+        cpu: "150m"
 
 client:
   browserApiCableUrl: https://princeton-manifold-friends.notch8.cloud/cable
