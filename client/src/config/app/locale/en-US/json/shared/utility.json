@@ -40,7 +40,7 @@
     },
     "default_options": {
       "type": "Type",
-      "members": "All members",
+      "members": "All active members",
       "sections": "All sections",
       "tag": "Tag",
       "text": "All texts"
