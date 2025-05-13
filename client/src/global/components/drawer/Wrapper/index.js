@@ -44,12 +44,7 @@ export default function DrawerWrapper({
         <Styled.Overlay
           inert={!open ? "" : undefined}
           style={{
-            "--z-index":
-              identifier === "notes-drawer" ||
-              identifier === "annotations-drawer" ||
-              identifier === "toc-drawer"
-                ? 150
-                : 500
+            "--z-index": identifier === "toc-drawer" ? 150 : 500
           }}
         />
         <Content

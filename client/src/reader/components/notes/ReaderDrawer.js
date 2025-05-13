@@ -29,6 +29,7 @@ class ReaderDrawer extends PureComponent {
       open: this.props.visible,
       context: "reader",
       size: "wide",
+      position: "overlay",
       padding: "none",
       identifier: "notes-drawer",
       lockScroll: "always",

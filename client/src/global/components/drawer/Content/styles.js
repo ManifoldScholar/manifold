@@ -117,6 +117,13 @@ export const DrawerReader = styled(Drawer)`
   }
 `;
 
+export const DrawerReaderOverlay = styled(DrawerReader)`
+  top: 0;
+  z-index: 500;
+
+  ${respond(`top: 0;`, ZOOM_BREAKPOINT)}
+`;
+
 export const DrawerOverlay = styled(Drawer)`
   --Dropzone-max-width: 350px;
 
