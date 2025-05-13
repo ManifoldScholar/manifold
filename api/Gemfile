@@ -17,6 +17,7 @@ gem "ahoy_matey", "~> 4.2.1"
 gem "anyway_config", "~> 2.7.1"
 # Project is now unmaintained. Fixing to 3.3 for now.
 gem "authority", "~>3.3.0"
+gem "aws-sdk-s3", "~> 1.146.1"
 gem "bagit", "~> 0.4.3"
 gem "bcrypt", "~> 3.0"
 gem "charlock_holmes", "~> 0.7.9"
