@@ -2,9 +2,11 @@
 
 # Base class for application config classes
 class ApplicationConfig < Anyway::Config
+  include Dry::Core::Memoizable
+
   class << self
     # Make it possible to access a singleton config instance
-    # via class methods (i.e., without explicitly calling `instance`)
+    # via class methods (i.e., without explictly calling `instance`)
     delegate_missing_to :instance
 
     private

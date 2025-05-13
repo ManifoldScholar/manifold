@@ -1,0 +1,22 @@
+default: &default
+  bucket: "manifold-storage"
+  mapped_host: ""
+  public: true
+
+development:
+  <<: *default
+  mapped_host: "http://localhost:13115"
+  use_asset_cdn: false
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+  spaces: true
+  use_asset_cdn: true
+
+production:
+  <<: *default
+  spaces: true
+  use_asset_cdn: true
