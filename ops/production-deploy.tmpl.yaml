@@ -65,7 +65,6 @@ env:
   sentryDsn: $SENTRY_DSN
   sentryEnvironment: $SENTRY_ENVIRONMENT
 
-
 postgresql:
   enabled: true
   image:
