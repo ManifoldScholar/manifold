@@ -1,6 +1,4 @@
 # Copied from github.com/ManifoldScholar/manifold-docker-compose (v8.1.1)
-version: "3"
-
 x-api: &api
   image: ghcr.io/notch8/princeton-manifold/api:${TAG:-latest}
   build:

@@ -4,7 +4,7 @@
 # Originally copied from:
 # - github.com/ManifoldScholar/manifold-docker-build/blob/v8.1.1/dockerfiles/manifold-api/Dockerfile
 ####################################################################################################
-FROM ruby:2.7.8 as manifold-api
+FROM ruby:2.7.8 AS manifold-api
 RUN apt-get -o Acquire::Check-Valid-Until=false update
 RUN apt-get install -y libicu-dev postgresql-client nano curl software-properties-common ghostscript \
     vim less
@@ -31,7 +31,7 @@ COPY bin/start-and-run /opt/manifold/api/start-and-run
 # Originally copied from:
 # - github.com/ManifoldScholar/manifold-docker-build/blob/v8.1.1/dockerfiles/manifold-client/Dockerfile
 ####################################################################################################
-FROM node:16.16.0 as manifold-client
+FROM node:16.16.0 AS manifold-client
 RUN apt-get -o Acquire::Check-Valid-Until=false update
 RUN apt-get install -y vim less
 
@@ -55,7 +55,7 @@ RUN yarn run build
 # Originally copied from:
 # - github.com/ManifoldScholar/manifold-docker-build/blob/v8.1.1/dockerfiles/manifold-nginx/Dockerfile
 ####################################################################################################
-FROM nginx:1.25 as manifold-nginx
+FROM nginx:1.25 AS manifold-nginx
 
 RUN apt-get -o Acquire::Check-Valid-Until=false update
 RUN apt-get install -y openssl
