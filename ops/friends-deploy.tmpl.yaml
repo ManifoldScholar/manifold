@@ -68,6 +68,8 @@ env:
   elasticsearchUrl: http://princeton-manifold-friends-es:9200
   railsDbHost: princeton-manifold-friends-postgresql
   railsSecretKey: $SECRET_KEY_BASE
+  sentryDsn: $SENTRY_DSN
+  sentryEnvironment: $SENTRY_ENVIRONMENT
 
 postgresql:
   enabled: true
