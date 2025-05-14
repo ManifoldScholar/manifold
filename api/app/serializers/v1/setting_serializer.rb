@@ -127,12 +127,6 @@ module V1
       object.calculated(params[:current_user])
     end
 
-    typed_attribute :oauth, Types::Hash.schema(
-      googleOauth2: Types::Serializer::Oauth
-    ).meta(read_only: true) do |_object, _params|
-      ManifoldEnv.oauth.as_json
-    end
-
     typed_section_attribute :secrets, Types::Hash.schema(
       akismet_api_key: Types::String,
       google_private_key: Types::String,

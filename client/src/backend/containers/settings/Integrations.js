@@ -66,19 +66,6 @@ export class SettingsIntegrationsContainer extends PureComponent {
               />
             </Form.FieldGroup>
             <Form.FieldGroup
-              label={t("settings.integrations.google_oauth_header")}
-            >
-              <Form.TextInput
-                label={t("settings.integrations.google_oauth_id_label")}
-                name="attributes[integrations][googleOauthClientId]"
-              />
-              <Form.TextInput
-                label={t("settings.integrations.google_client_secret_label")}
-                password
-                name="attributes[secrets][googleOauthClientSecret]"
-              />
-            </Form.FieldGroup>
-            <Form.FieldGroup
               label={t("settings.integrations.google_analytics_header")}
             >
               <Form.TextInput
