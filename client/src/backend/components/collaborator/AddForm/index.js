@@ -12,13 +12,16 @@ export default function AddCollaboratorForm({
   entityId,
   entityType,
   closeUrl,
-  refresh
+  refresh,
+  collaborator
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [makerId, setMakerId] = useState("");
-  const [roles, setRoles] = useState([]);
+  const [makerId, setMakerId] = useState(
+    collaborator?.relationships?.maker.data || ""
+  );
+  const [roles, setRoles] = useState(collaborator?.attributes?.roles || []);
 
   const fetchRoles = useApiCallback(collaboratorsAPI.roles);
 
@@ -40,14 +43,20 @@ export default function AddCollaboratorForm({
 
   const createCollaborator = useApiCallback(collaboratorsAPI.create);
 
+  const updateCollaborator = useApiCallback(collaboratorsAPI.update);
+
   const onSubmit = async e => {
     e.preventDefault();
 
     const data = {
       roles,
-      maker: { data: { id: makerId.id, type: "maker" } }
+      maker: { id: makerId.id, type: "maker" },
+      ...(collaborator ? { position: collaborator.attributes.position } : {})
     };
-    const { errors } = await createCollaborator(
+
+    const callback = collaborator ? updateCollaborator : createCollaborator;
+
+    const { errors } = await callback(
       `${entityType.toLowerCase()}s`,
       entityId,
       data
@@ -67,17 +76,19 @@ export default function AddCollaboratorForm({
         className="backend form-secondary"
       >
         <Form.FieldGroup>
-          <Unwrapped.Picker
-            label={t("glossary.maker_title_case_one")}
-            optionToLabel={maker => maker.attributes.fullName}
-            predictive
-            listStyle={"well"}
-            options={makersAPI.index}
-            set={val => {
-              setMakerId(val);
-            }}
-            value={makerId}
-          />
+          {!collaborator && (
+            <Unwrapped.Picker
+              label={t("glossary.maker_title_case_one")}
+              optionToLabel={maker => maker.attributes.fullName}
+              predictive
+              listStyle={"well"}
+              options={makersAPI.index}
+              set={val => {
+                setMakerId(val);
+              }}
+              value={makerId}
+            />
+          )}
           <Unwrapped.Picker
             label={t("common.role_other")}
             optionToLabel={role => capitalize(role.replaceAll("_", " "))}

@@ -8,10 +8,10 @@ import Utility from "global/components/utility";
 import { useFromStore } from "hooks";
 import capitalize from "lodash/capitalize";
 
-function ContributorRow({ entity, onDelete, ...props }) {
+function ContributorRow({ entity, onDelete, onEdit, ...props }) {
   const { t } = useTranslation();
 
-  const { attributes, relationships } = entity;
+  const { id, attributes, relationships } = entity;
 
   const makerId = relationships?.maker?.id;
   const maker = useFromStore(`entityStore.entities.makers[${makerId}]`);
@@ -29,16 +29,29 @@ function ContributorRow({ entity, onDelete, ...props }) {
   };
 
   const utility = (
-    <button
-      className="entity-row__utility-button"
-      onClick={e => {
-        e.preventDefault();
-        onDelete(makerId);
-      }}
-      title={t("actions.delete")}
-    >
-      <Utility.IconComposer icon="delete32" size={26} />
-    </button>
+    <>
+      <button
+        className="entity-row__utility-button"
+        onClick={e => {
+          e.preventDefault();
+          onEdit(id);
+        }}
+        title={t("actions.edit")}
+      >
+        <Utility.IconComposer icon="annotate24" size={26} />
+      </button>
+      <button
+        className="entity-row__utility-button"
+        style={{ marginInline: "4px" }}
+        onClick={e => {
+          e.preventDefault();
+          onDelete(makerId);
+        }}
+        title={t("actions.delete")}
+      >
+        <Utility.IconComposer icon="delete32" size={26} />
+      </button>
+    </>
   );
 
   return <EntityRow {...props} {...additionalProps} utility={utility} />;
