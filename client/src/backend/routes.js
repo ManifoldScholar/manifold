@@ -199,6 +199,14 @@ const routes = {
                   path: "/backend/projects/text/:tId/collaborators/new",
                   helper: tId =>
                     `/backend/projects/text/${tId}/collaborators/new`
+                },
+                {
+                  name: "backendTextCollaboratorEdit",
+                  exact: true,
+                  component: "TextAddCollaborator",
+                  path: "/backend/projects/text/:tId/collaborators/:id",
+                  helper: (tId, id) =>
+                    `/backend/projects/text/${tId}/collaborators/${id}`
                 }
               ]
             },
@@ -541,6 +549,14 @@ const routes = {
                   path: "/backend/projects/:projectId/collaborators/new",
                   helper: projectId =>
                     `/backend/projects/${projectId}/collaborators/new`
+                },
+                {
+                  name: "backendProjectCollaboratorEdit",
+                  exact: true,
+                  component: "ProjectAddCollaborator",
+                  path: "/backend/projects/:projectId/collaborators/:id",
+                  helper: (projectId, id) =>
+                    `/backend/projects/${projectId}/collaborators/${id}`
                 }
               ]
             },
