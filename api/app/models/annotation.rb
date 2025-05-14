@@ -203,7 +203,7 @@ class Annotation < ApplicationRecord
     when "created_at DESC"
       order(created_at: :desc)
     when "created_by"
-      order(creator_id: :desc)
+      joins(:creator).order(User.arel_table[:last_name].asc)
     else
       order(created: :desc)
     end

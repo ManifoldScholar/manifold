@@ -11,7 +11,7 @@ module API
       resourceful! Comment, authorize_options: { except: [:index, :show] } do
         Comment.filtered(
           with_pagination!(comment_filter_params),
-          scope: comment_scope.includes(*INCLUDES).roots_and_descendants_preordered
+          scope: comment_scope
         )
       end
 
@@ -80,7 +80,11 @@ module API
       end
 
       def comment_scope
-        @subject.nil? ? Comment.all : @subject.comments
+        if @subject.nil?
+          Comment.all.includes(*INCLUDES)
+        else
+          @subject.comments.includes(*INCLUDES).roots_and_descendants_preordered
+        end
       end
 
       def set_subject
