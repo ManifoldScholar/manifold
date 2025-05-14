@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { collaboratorsAPI, textsAPI } from "api";
@@ -11,10 +11,11 @@ import EntitiesList, {
 import Authorization from "helpers/authorization";
 import { useApiCallback } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
-import Form from "global/components/form";
+import { useHistory } from "react-router-dom";
 
 function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const closeUrl = lh.link("backendTextCollaborators", text.id);
 
@@ -38,35 +39,19 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
     [text.id, confirm, destroyCollaborator, t, refresh]
   );
 
-  const [ordered, setOrdered] = useState([]);
+  const updateText = useApiCallback(textsAPI.update);
 
-  const onReorder = (_change, flattenedCollaborators) => {
-    const update = flattenedCollaborators.map((fc, i) => ({
-      id: fc.id,
-      position: i + 1,
-      collaborators: fc.attributes.collaborators
-    }));
-    setOrdered(update);
-  };
-
-  const updateProject = useApiCallback(textsAPI.update);
-
-  const onSubmit = async e => {
-    e.preventDefault();
-
-    if (!ordered.length) return;
-
-    const data = ordered
-      .map(fc => {
-        const collaborators = fc.collaborators.map(c => ({
+  const onReorder = async (_change, flattenedCollaborators) => {
+    const data = flattenedCollaborators
+      .map(fc =>
+        fc.attributes.collaborators.map(c => ({
           id: c,
           type: "collaborators"
-        }));
-        return collaborators;
-      })
+        }))
+      )
       .flat();
 
-    const { errors } = await updateProject(text.id, {
+    const { errors } = await updateText(text.id, {
       attributes: {},
       relationships: { collaborators: { data } }
     });
@@ -76,6 +61,10 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
     }
   };
 
+  const onEdit = id => {
+    history.push(lh.link("backendTextCollaboratorEdit", text.id, id));
+  };
+
   return (
     <section>
       {childRoutes(route, {
@@ -83,35 +72,28 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
         drawerProps: { closeUrl },
         childProps: { refresh, textId: text.id }
       })}
-      <form
-        onSubmit={onSubmit}
-        method="post"
-        className="backend form-secondary"
-      >
-        <EntitiesList
-          className="full-width"
-          title={t("projects.contributors_header")}
-          titleStyle="bar"
-          titleTag="h2"
-          callbacks={{ onReorder }}
-          sortableStyle="tight"
-          entityComponent={ContributorRow}
-          entityComponentProps={canUpdate ? { onDelete } : null}
-          entities={text?.relationships?.flattenedCollaborators ?? []}
-          buttons={
-            canUpdate
-              ? [
-                  <Button
-                    path={lh.link("backendTextCollaboratorNew", text.id)}
-                    type="add"
-                    text={t("projects.add_contributor_label")}
-                  />
-                ]
-              : []
-          }
-        />
-        <Form.Save marginTop />
-      </form>
+      <EntitiesList
+        className="full-width"
+        title={t("projects.contributors_header")}
+        titleStyle="bar"
+        titleTag="h2"
+        callbacks={{ onReorder }}
+        sortableStyle="tight"
+        entityComponent={ContributorRow}
+        entityComponentProps={canUpdate ? { onDelete, onEdit } : null}
+        entities={text?.relationships?.flattenedCollaborators ?? []}
+        buttons={
+          canUpdate
+            ? [
+                <Button
+                  path={lh.link("backendTextCollaboratorNew", text.id)}
+                  type="add"
+                  text={t("projects.add_contributor_label")}
+                />
+              ]
+            : []
+        }
+      />
     </section>
   );
 }
