@@ -51,6 +51,11 @@ export const Title = styled.h3`
   letter-spacing: 0.089em;
   ${textTruncate}
   margin-block-start: 16px;
+  transition: opacity 0.2s;
+
+  &[data-invisible="true"] {
+    opacity: 0;
+  }
 `;
 
 export const Actions = styled.div`
