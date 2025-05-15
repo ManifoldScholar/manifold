@@ -29,7 +29,10 @@ export default function Content({
   const { t } = useTranslation();
 
   return (
-    <Styled.Wrapper ref={wrapperRef} $hidden={dragState?.status === "has-left"}>
+    <Styled.Wrapper
+      ref={wrapperRef}
+      $hidden={dragState?.status === "has-left" || dragState?.self}
+    >
       <Styled.Collectable
         ref={collectableRef}
         tabIndex={-1}

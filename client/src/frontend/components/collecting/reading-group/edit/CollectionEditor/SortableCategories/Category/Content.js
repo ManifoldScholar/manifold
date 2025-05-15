@@ -22,19 +22,14 @@ export default function Content({
 
   const hidden =
     dragState?.status === "has-left" ||
+    dragState?.self ||
     (isMarkdown && !!dragState?.type && dragState.type !== "categories");
-
-  // const isDragging = dragState
-  //   ? dragState.status !== "idle" && dragState.type === "categories"
-  //   : false;
 
   const collectableOver =
     manualCollapsed &&
     dragState?.status === "is-over" &&
     !!dragState?.type &&
     dragState?.type !== "categories";
-
-  // const displayAsCollapsed = collapsed || (!isDragging && manualCollapsed);
 
   return (
     <Styled.Wrapper ref={wrapperRef} $hidden={hidden}>

@@ -48,7 +48,12 @@ export default function useDraggableCollectable({
           return;
         }
         if (source.data.id === id) {
-          return;
+          return setDragState({
+            status: "is-over",
+            self: true,
+            type: source.data.type,
+            closestEdge: "top"
+          });
         }
         const closestEdge = extractClosestEdge(self.data);
         if (!closestEdge) {
