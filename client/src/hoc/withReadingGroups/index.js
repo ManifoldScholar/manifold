@@ -134,14 +134,19 @@ export default function withReadingGroups(WrappedComponent) {
     }
 
     get currentAnnotationOverlayReadingGroup() {
-      const { currentAnnotationOverlayReadingGroup: overlay } = this.props;
+      const {
+        currentAnnotationOverlayReadingGroup: overlay,
+        readingGroupsLoaded
+      } = this.props;
       if (overlay === "me" || overlay === "orphaned") return overlay;
+
+      if (!readingGroupsLoaded) return overlay;
 
       const validOverlay = this.adjustedReadingGroups.find(
         group => group.id === overlay
       );
 
-      if (validOverlay) return validOverlay;
+      if (validOverlay) return overlay;
 
       this.props.dispatch(
         uiReadingGroupActions.setAnnotationOverlayReadingGroup("me")
