@@ -69,8 +69,12 @@ function CategoryHeader({
               </span>
             </Styled.Action>
             {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
-            {markdownOnly && (categoryDragActive || manualCollapsed) && (
-              <Styled.Title>{descriptionPlaintext}</Styled.Title>
+            {markdownOnly && (
+              <Styled.Title
+                data-invisible={!categoryDragActive && !manualCollapsed}
+              >
+                {descriptionPlaintext}
+              </Styled.Title>
             )}
           </Styled.TitleWrapper>
           {dragHandleRef && (
