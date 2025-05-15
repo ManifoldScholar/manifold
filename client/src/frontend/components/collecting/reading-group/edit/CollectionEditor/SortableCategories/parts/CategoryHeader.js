@@ -120,7 +120,7 @@ function CategoryHeader({
             </Styled.Actions>
           )}
         </Styled.Header>
-        {dragHandleRef && (
+        {dragHandleRef && !categoryDragActive && (
           <Collapse.Content maxDuration={400}>
             {(visible, toggleVisible) => {
               return (
