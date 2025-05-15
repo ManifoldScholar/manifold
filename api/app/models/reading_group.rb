@@ -68,7 +68,13 @@ class ReadingGroup < ApplicationRecord
   scope :visible_to, ->(user) do
     where(id: ReadingGroupVisibility.visible_to(user).select(:reading_group_id))
   end
-  scope :with_flags, ->(value = nil) { joins(:annotation_flags) if value.present? }
+  scope :with_flags, ->(value = nil) {
+    if value.present?
+      joins(:annotations)
+        .where("annotations.unresolved_flags_count > 0")
+        .distinct
+    end
+  }
 
   def private?
     privacy == "private"
