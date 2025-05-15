@@ -3,14 +3,9 @@ import {
   buttonUnstyled,
   utilityPrimary,
   textTruncate,
-  rgba,
   defaultTransitionProps
 } from "theme/styles/mixins";
-import { collectableTypeVerticalPadding } from "../styles";
 import { Description } from "frontend/components/collecting/reading-group/static/Category/styles";
-
-const shadowSize = `10px`;
-const halfShadowSize = `5px`;
 
 export const Header = styled.header`
   --label-margin-bottom: 18px;
@@ -27,7 +22,7 @@ export const Header = styled.header`
   border-radius: var(--box-border-radius);
   min-block-size: 52px;
 
-  &:is([data-collapsed="false"], :has(+ .collapse__content--visible)) {
+  &:is([data-collapsed="false"]) {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -91,21 +86,6 @@ export const Action = styled.div`
   }
 `;
 
-export const Inner = styled.div`
-  padding: calc(32px - ${collectableTypeVerticalPadding})
-    clamp(20px, 2.857vw, 32px);
-  padding-block-start: 40px;
-  padding-block-end: 40px;
-  box-shadow: inset 0 ${shadowSize} ${shadowSize} -${halfShadowSize} ${rgba("neutralBlack", 0.08)};
-  transition: box-shadow 0.4s;
-
-  &[data-show-bottom-box-shadow="true"] {
-    box-shadow: inset 0 ${shadowSize} ${shadowSize} -${halfShadowSize} ${rgba("neutralBlack", 0.08)},
-      inset 0 -${shadowSize} ${shadowSize} -${halfShadowSize}
-        ${rgba("neutralBlack", 0.08)};
-  }
-`;
-
 export const Button = styled.button`
   ${buttonUnstyled}
   ${utilityPrimary}
@@ -126,4 +106,11 @@ export const TypeHeaderText = styled.h4`
 
 export const MarkdownContent = styled(Description)`
   margin: 0;
+`;
+
+export const EditDialog = styled.dialog`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: inherit;
 `;

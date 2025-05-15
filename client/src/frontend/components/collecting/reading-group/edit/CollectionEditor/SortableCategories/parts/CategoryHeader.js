@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -46,6 +45,9 @@ function CategoryHeader({
     });
   }, []);
 
+  const [editActive, setEditActive] = useState(false);
+  const toggleEditActive = () => setEditActive(prevActive => !prevActive);
+
   const kind = markdownOnly ? "block" : "category";
   const collapseToggleLabel = manualCollapsed
     ? `forms.category.expand_${kind}`
@@ -83,7 +85,7 @@ function CategoryHeader({
                 isMarkdown={!!markdownOnly}
                 onRemove={() => onCategoryRemove(category)}
               />
-              <Styled.Action as={Collapse.Toggle}>
+              <Styled.Action as="button" onClick={toggleEditActive}>
                 <IconComposer icon="annotate32" size="default" />
                 <span className="screen-reader-text">
                   {t("forms.category.edit")}
@@ -120,26 +122,13 @@ function CategoryHeader({
             </Styled.Actions>
           )}
         </Styled.Header>
-        {dragHandleRef && !categoryDragActive && (
-          <Collapse.Content maxDuration={400}>
-            {(visible, toggleVisible) => {
-              return (
-                <Styled.Inner
-                  data-show-bottom-box-shadow={
-                    !markdownOnly && !manualCollapsed
-                  }
-                >
-                  <CategoryEdit
-                    category={category}
-                    groupId={groupId}
-                    onSuccess={toggleVisible}
-                    onCancel={toggleVisible}
-                    onError={onCategoryEditError}
-                  />
-                </Styled.Inner>
-              );
-            }}
-          </Collapse.Content>
+        {editActive && (
+          <CategoryEdit
+            category={category}
+            groupId={groupId}
+            onClose={toggleEditActive}
+            onError={onCategoryEditError}
+          />
         )}
       </Collapse>
     </>

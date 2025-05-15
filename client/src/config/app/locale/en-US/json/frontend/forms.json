@@ -18,7 +18,8 @@
       "expand_category": "Expand category content",
       "collapse_category": "Collapse category content",
       "expand_block": "Expand block content",
-      "collapse_block": "Collapse block content"
+      "collapse_block": "Collapse block content",
+      "edit_dialog_title": "Edit {{title}}"
     },
     "reading_group": {
       "drawer_title": "New Reading Group",

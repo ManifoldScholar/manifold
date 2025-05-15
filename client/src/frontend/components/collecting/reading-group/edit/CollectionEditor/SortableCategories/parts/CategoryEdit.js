@@ -1,11 +1,14 @@
-import React from "react";
+import { useId, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
+import Dialog from "global/components/dialog";
 import { readingGroupsAPI, requests } from "api";
+import withConfirmation from "hoc/withConfirmation";
+import * as Styled from "./styles";
 
-function CategoryEdit({ category, groupId, onSuccess, onCancel, onError }) {
+function CategoryEdit({ category, groupId, onError, onClose, confirm }) {
   const { t } = useTranslation();
 
   function doUpdate(categoryId, data) {
@@ -25,35 +28,67 @@ function CategoryEdit({ category, groupId, onSuccess, onCancel, onError }) {
     ? undefined
     : t("forms.category.description_instructions");
 
+  const dialogLabelId = useId();
+
+  const [isDirty, setIsDirty] = useState(false);
+
+  const confirmClose = () => {
+    if (isDirty) {
+      const heading = t("messages.confirm");
+      const message = t("messages.unsaved_changes");
+      return confirm(heading, message, onClose);
+    } else {
+      onClose();
+    }
+  };
+
+  const onDirty = session => {
+    const dirtyAttrs = Object.keys(session.attributes).length;
+    const dirtyRels = Object.keys(session.relationships).length;
+    setIsDirty(!!(dirtyAttrs || dirtyRels));
+  };
+
   return (
-    <FormContainer.Form
-      model={category}
-      name={`${requests.feReadingGroupCategoryUpdate}-${category?.attributes?.slug}`}
-      update={doUpdate}
-      onSuccess={onSuccess}
-      onError={onError}
-      className="form-secondary"
+    <Styled.EditDialog
+      as={Dialog.Wrapper}
+      labelledBy={dialogLabelId}
+      closeCallback={confirmClose}
     >
-      <Form.FieldGroup>
-        {!isMarkdown && (
-          <Form.TextInput
+      <h2 id={dialogLabelId}>
+        {t("forms.category.edit_dialog_title", {
+          title: isMarkdown ? "Markdown Block" : category.attributes.title
+        })}
+      </h2>
+      <FormContainer.Form
+        model={category}
+        name={`${requests.feReadingGroupCategoryUpdate}-${category?.attributes?.slug}`}
+        update={doUpdate}
+        onSuccess={onClose}
+        onError={onError}
+        onDirty={onDirty}
+        className="form-secondary"
+      >
+        <Form.FieldGroup>
+          {!isMarkdown && (
+            <Form.TextInput
+              wide
+              label={nameLabel}
+              name="attributes[title]"
+              placeholder={t("forms.category.name_placeholder")}
+            />
+          )}
+          <Form.TextArea
             wide
-            label={nameLabel}
-            name="attributes[title]"
-            placeholder={t("forms.category.name_placeholder")}
+            height={150}
+            label={descriptionLabel}
+            name="attributes[description]"
+            placeholder={descriptionPlaceholder}
+            instructions={descriptionInstructions}
           />
-        )}
-        <Form.TextArea
-          wide
-          height={122}
-          label={descriptionLabel}
-          name="attributes[description]"
-          placeholder={descriptionPlaceholder}
-          instructions={descriptionInstructions}
-        />
-      </Form.FieldGroup>
-      <Form.Save text="Save" theme="frontend" cancelCallback={onCancel} />
-    </FormContainer.Form>
+        </Form.FieldGroup>
+        <Form.Save text="Save" theme="frontend" cancelCallback={confirmClose} />
+      </FormContainer.Form>
+    </Styled.EditDialog>
   );
 }
 
@@ -63,8 +98,8 @@ CategoryEdit.displayName =
 CategoryEdit.propTypes = {
   category: PropTypes.object.isRequired,
   groupId: PropTypes.string.isRequired,
-  onSuccess: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  confirm: PropTypes.func.isRequired
 };
 
-export default CategoryEdit;
+export default withConfirmation(CategoryEdit);

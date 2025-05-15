@@ -50,10 +50,7 @@ export default function Content({
           index={index}
           categoryCount={categoryCount}
         />
-        <Styled.Inner
-          inert={manualCollapsed ? "" : undefined}
-          data-markdown={isMarkdown}
-        >
+        <Styled.Inner inert={manualCollapsed ? "" : undefined}>
           {isMarkdown ? (
             <MarkdownBody category={category} />
           ) : (
