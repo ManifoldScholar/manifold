@@ -114,12 +114,14 @@ export default function SortableCategories({
     if (priorCategoryId === categoryId && priorPosition === position) return;
 
     setMappings(result);
-    callbacks.onCollectableDrag({
-      groupingId: categoryId,
-      id,
-      position,
-      type
-    });
+    callbacks.onCollectableDrag(
+      result[categoryId][type].map((c, i) => ({
+        groupingId: categoryId,
+        id: c,
+        position: i + 1,
+        type
+      }))
+    );
     highlightNewEl({ selector: `[data-collectable-id="${id}"]` });
   };
 
