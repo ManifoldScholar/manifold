@@ -388,6 +388,7 @@ CREATE TABLE public.text_sections (
     slug text,
     hidden_in_reader boolean DEFAULT false NOT NULL,
     metadata jsonb DEFAULT '{}'::jsonb,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
 );
 
@@ -7380,6 +7381,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250210192150'),
 ('20250210230256'),
 ('20250306230246'),
-('20250506201306');
+('20250506201306'),
+('20250513002532');
 
 

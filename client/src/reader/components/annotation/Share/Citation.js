@@ -96,7 +96,7 @@ export class AnnotationShareEditor extends PureComponent {
     const { attributes } = this.props.section ?? {};
     const {
       citations,
-      metadata: { citationOverride }
+      metadataFormatted: { citationOverride }
     } = attributes ?? {};
 
     return (
