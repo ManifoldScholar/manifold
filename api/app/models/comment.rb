@@ -40,7 +40,7 @@ class Comment < ApplicationRecord
     when "created_at DESC"
       reorder(created_at: :desc)
     when "created_by"
-      reorder(creator_id: :desc)
+      joins(:creator).reorder(User.arel_table[:last_name].asc)
     when "subject"
       reorder(subject_id: :desc)
     else

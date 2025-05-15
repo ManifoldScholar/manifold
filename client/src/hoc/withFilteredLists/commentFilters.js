@@ -25,8 +25,7 @@ export default function commentFilters({ snapshotState = false } = {}) {
         options: [
           { label: "Newest first", value: "created_at DESC" },
           { label: "Oldest first", value: "created_at ASC" },
-          { label: "By creator", value: "created_by" },
-          { label: "By subject", value: "subject" }
+          { label: "By creator", value: "created_by" }
         ]
       }
     ]
