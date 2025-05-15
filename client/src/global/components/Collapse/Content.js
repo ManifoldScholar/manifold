@@ -31,7 +31,6 @@ function Content(props) {
   } = props;
   const { visible, contentProps, toggleVisible } = useCollapseContext();
   const { ref: resizeRef, height } = useResizeObserver();
-  const [isMounted, setIsMounted] = useState(false);
 
   const finalClassName = classNames({
     collapse__content: true,
@@ -76,32 +75,6 @@ function Content(props) {
         );
     }
   }, [height, stubHeight, maxDuration]);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, [setIsMounted]);
-
-  useEffect(() => {
-    if (isMounted && contentRef.current) {
-      const interactiveElSelector = [
-        "a[href]",
-        "button:not(:disabled)",
-        'input:not([disabled]):not([type="hidden"])',
-        "select:not([disabled])",
-        "textarea:not([disabled])",
-        "[contenteditable]",
-        '[tabindex]:not([tabindex="-1"])',
-        "summary",
-        "[href]"
-      ].join(", ");
-      const interactiveEls = contentRef.current.querySelectorAll(
-        interactiveElSelector
-      );
-      interactiveEls.forEach(el =>
-        el.setAttribute("tabIndex", visible ? 0 : -1)
-      );
-    }
-  }, [visible, isMounted]);
 
   return (
     <div

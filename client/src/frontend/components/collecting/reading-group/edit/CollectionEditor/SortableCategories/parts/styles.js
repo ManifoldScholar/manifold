@@ -22,13 +22,15 @@ export const Header = styled.header`
   padding: 0 20px;
   background-color: ${({ $bg }) =>
     $bg ? `var(--dropzone-bg-color)` : `var(--box-medium-bg-color)`};
-  transition: background-color ${defaultTransitionProps};
-  border-top-left-radius: var(--box-border-radius);
-  border-top-right-radius: var(--box-border-radius);
+  transition: background-color ${defaultTransitionProps},
+    border-radius ${defaultTransitionProps};
+  border-radius: var(--box-border-radius);
   min-block-size: 52px;
 
-  ${({ $borderRadius }) =>
-    $borderRadius && `border-radius: var(--box-border-radius)`}
+  &:is([data-collapsed="false"], :has(+ .collapse__content--visible)) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 `;
 
 export const TitleWrapper = styled.div`
@@ -94,9 +96,14 @@ export const Inner = styled.div`
     clamp(20px, 2.857vw, 32px);
   padding-block-start: 40px;
   padding-block-end: 40px;
-  box-shadow: inset 0 ${shadowSize} ${shadowSize} -${halfShadowSize} ${rgba("neutralBlack", 0.08)},
-    inset 0 -${shadowSize} ${shadowSize} -${halfShadowSize}
-      ${rgba("neutralBlack", 0.08)};
+  box-shadow: inset 0 ${shadowSize} ${shadowSize} -${halfShadowSize} ${rgba("neutralBlack", 0.08)};
+  transition: box-shadow 0.4s;
+
+  &[data-show-bottom-box-shadow="true"] {
+    box-shadow: inset 0 ${shadowSize} ${shadowSize} -${halfShadowSize} ${rgba("neutralBlack", 0.08)},
+      inset 0 -${shadowSize} ${shadowSize} -${halfShadowSize}
+        ${rgba("neutralBlack", 0.08)};
+  }
 `;
 
 export const Button = styled.button`

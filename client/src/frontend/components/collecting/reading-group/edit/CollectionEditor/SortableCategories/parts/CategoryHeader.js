@@ -55,7 +55,7 @@ function CategoryHeader({
     <>
       <Collapse initialVisible={initExpanded}>
         <Styled.Header
-          $borderRadius={categoryDragActive || manualCollapsed}
+          data-collapsed={categoryDragActive || manualCollapsed}
           $bg={collectableOver}
         >
           <Styled.TitleWrapper>
@@ -124,7 +124,11 @@ function CategoryHeader({
           <Collapse.Content maxDuration={400}>
             {(visible, toggleVisible) => {
               return (
-                <Styled.Inner>
+                <Styled.Inner
+                  data-show-bottom-box-shadow={
+                    !markdownOnly && !manualCollapsed
+                  }
+                >
                   <CategoryEdit
                     category={category}
                     groupId={groupId}

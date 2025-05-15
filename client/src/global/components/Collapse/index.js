@@ -21,7 +21,8 @@ function Collapse({ initialVisible, children }) {
   const contentProps = {
     id: idSeed("content"),
     role: "region",
-    "aria-labelledby": idSeed("label")
+    "aria-labelledby": idSeed("label"),
+    inert: !visible ? "" : undefined
   };
 
   const value = useMemo(
