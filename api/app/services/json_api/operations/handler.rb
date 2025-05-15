@@ -3,20 +3,26 @@
 module JSONAPI
   module Operations
     class Handler
-      extend Dry::Initializer
+      extend ActiveModel::Callbacks
 
-      include Dry::Effects::Handler.Resolve
+      include Dry::Effects::Handler.Reader(:current_user)
       include Dry::Effects::Handler.Reader(:operation_index)
       include Dry::Monads[:list, :result, :validated, :do]
 
-      option :current_user
+      include Dry::Initializer[undefined: false].define -> do
+        option :current_user, ::JSONAPI::Types::AnyUser, default: proc { AnonymousUser.new }
+      end
+
+      define_model_callbacks :handle_all, :handle_each
+
+      around_handle_all :provide_current_user!
 
       def call(raw_params)
+        prepare!
+
         params = yield parse_params(raw_params)
 
-        results = params.operations.map.with_index do |operation, index|
-          yield handle operation, index
-        end
+        results = yield handle_all!(params)
 
         wrapped = yield wrap results
 
@@ -25,48 +31,57 @@ module JSONAPI
 
       private
 
-      def handle(operation, index)
-        provide(operation: operation, current_user: current_user) do
-          with_operation_index(index) do
-            operator_klass = yield operator_klass_for operation
+      # @return [Array]
+      attr_reader :operation_results
 
-            operator_params = yield operator_params_for operation
+      # @return [void]
+      def prepare!
+        @operation_results = []
+      end
 
-            operator = operator_klass.new(**operator_params)
+      # @param [JSONAPI::Operations::Params] params
+      # @return [Dry::Monads::Success(Array)]
+      def handle_all!(params)
+        run_callbacks :handle_all do
+          params.operations.each_with_index do |operation, index|
+            with_operation_index index do
+              run_callbacks :handle_each do
+                result = yield handle operation
 
-            operator.call.fmap do |data|
-              yield maybe_serialize data
-            end.or do |err|
-              unroll = UnrollErrors.new
-
-              errors = unroll.call err
-
-              Failure[:operation_failure, errors]
+                operation_results << result
+              end
             end
           end
         end
+
+        Success operation_results
       end
 
-      def operator_klass_for(operation)
-        if operation.for_collection?
-          if operation.add_or_update?
-            Success Collections::Operations::ValidateAndAssignMultiple
-          elsif operation.remove?
-            Success Collections::Operations::ValidateAndRemoveMultiple
-          end
-        else
-          unsupported_operation
+      # @param [JSONAPI::Operations::Operation] operation
+      def handle(operation)
+        operator_klass = yield operator_check! operation.operator_klass
+
+        operator_params = yield operator_check! operation.operator_params
+
+        operator = operator_klass.new(**operator_params)
+
+        operator.call.fmap do |data|
+          yield maybe_serialize data
+        end.or do |err|
+          unroll = UnrollErrors.new
+
+          errors = unroll.call err
+
+          Failure[:operation_failure, errors]
         end
       end
 
-      def operator_params_for(operation)
-        if operation.for_collection?
-          Success operation.to_collection_params.merge(user: current_user)
-        else
-          # :nocov:
-          unsupported_operation
-          # :nocov:
-        end
+      # @param [Object] value
+      # @return [Dry::Monads::Result]
+      def operator_check!(value)
+        return unsupported_operation if value.nil?
+
+        Success value
       end
 
       def parse_params(raw_params)
@@ -159,6 +174,17 @@ module JSONAPI
           current_user: current_user
         }
       end
+
+      # @!group Callbacks
+
+      # @return [void]
+      def provide_current_user!
+        with_current_user current_user do
+          yield
+        end
+      end
+
+      # @!endgroup
     end
   end
 end

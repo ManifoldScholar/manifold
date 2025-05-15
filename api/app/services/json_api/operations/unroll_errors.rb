@@ -10,7 +10,7 @@ module JSONAPI
 
       TUPLE = Dux.yard("(Symbol, String)")
 
-      option :pointer, Types::String.optional, optional: true
+      option :pointer, ::JSONAPI::Types::String.optional, optional: true
 
       # @return [<JSONAPI::Operations::Error>]
       def call(err)

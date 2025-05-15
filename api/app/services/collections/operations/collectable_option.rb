@@ -18,13 +18,15 @@ module Collections
 
         entry = entry_collection.upsert! attributes
 
-        # entry = entry_collection.find entry.id
-
         reposition! entry if position.present?
 
         Dry::Monads.Success entry
       rescue ActiveRecord::RecordInvalid => e
         operation_error title: "Failed Upsert", detail: e.message, code: :invalid_entry
+      end
+
+      def has_position?
+        position.present?
       end
 
       private
