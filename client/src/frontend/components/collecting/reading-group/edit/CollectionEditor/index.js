@@ -61,8 +61,8 @@ export default function CollectionEditor({
       });
   }
 
-  function updateCollectable(collectable) {
-    const call = collectingAPI.collect([collectable], readingGroup);
+  function updateCollectable(collectables) {
+    const call = collectingAPI.collect(collectables, readingGroup);
     const updateRequest = request(call, requests.feCollectCollectable);
     dispatch(updateRequest).promise.catch(err => {
       console.error(err);
