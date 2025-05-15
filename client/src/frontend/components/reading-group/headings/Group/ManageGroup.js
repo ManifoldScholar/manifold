@@ -7,7 +7,7 @@ import ActionBox from "frontend/components/reading-group/ActionBox";
 import * as Styled from "./styles";
 import { useNavigate } from "react-router-dom-v5-compat";
 
-function HeadingManageGroup({ readingGroup, location }) {
+function HeadingManageGroup({ readingGroup, location, refresh }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -23,6 +23,7 @@ function HeadingManageGroup({ readingGroup, location }) {
 
   function handleSwitchChange() {
     if (!inEditMode) return navigate(homepageEditPath);
+    refresh();
     navigate(homepageStaticPath);
   }
 
@@ -70,7 +71,8 @@ HeadingManageGroup.displayName = "ReadingGroup.Heading.ManageGroup";
 
 HeadingManageGroup.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  refresh: PropTypes.func.isRequired
 };
 
 export default HeadingManageGroup;
