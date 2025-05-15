@@ -11,11 +11,11 @@ export default function Preview({ category, active, container }) {
     createPortal(
       <Styled.Wrapper>
         <Styled.Category $preview>
-          <Styled.Inner>
+          <Styled.PreviewInner>
             <Styled.Title>
               {markdownOnly ? descriptionPlaintext : title}
             </Styled.Title>
-          </Styled.Inner>
+          </Styled.PreviewInner>
         </Styled.Category>
       </Styled.Wrapper>,
       container
