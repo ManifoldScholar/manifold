@@ -37,8 +37,11 @@ function ReaderFullNotesContainer({
   match,
   history,
   dispatch,
-  closeCallback
+  closeCallback,
+  readingGroupsLoaded
 }) {
+  const { t } = useTranslation();
+
   const initialFilters = useMemo(() => {
     return {
       orphaned: !!(currentGroupId === "orphaned"),
@@ -100,11 +103,9 @@ function ReaderFullNotesContainer({
 
   function getMemberships() {
     if (readingGroup === "me" || readingGroup === "orphaned") return [];
-    const rgms = readingGroup.relationships.readingGroupMemberships;
+    const rgms = readingGroup?.relationships?.readingGroupMemberships;
     return rgms?.length ? rgms : [];
   }
-
-  const { t } = useTranslation();
 
   /* eslint-disable no-nested-ternary */
   function getOverlayPropsForGroup() {
@@ -114,7 +115,7 @@ function ReaderFullNotesContainer({
           ? t("reader.menus.notes.my_notes")
           : readingGroup === "orphaned"
           ? t("reader.menus.notes.orphaned_notes")
-          : readingGroup.attributes.name,
+          : readingGroup?.attributes.name,
       subtitle:
         readingGroup === "me" || readingGroup === "orphaned"
           ? null
@@ -139,7 +140,7 @@ function ReaderFullNotesContainer({
     options: { memberships, sections }
   });
 
-  if (!annotations || !meta) return null;
+  if (!annotations || !meta || !readingGroupsLoaded) return null;
 
   const sortedAnnotations = mapAnnotationsToSections();
 
