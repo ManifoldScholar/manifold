@@ -9,24 +9,22 @@ export default `
 
       &--visible {
         max-height: var(--collapse-height);
-        visibility: visible;
         opacity: 1;
-        transition: max-height var(--collapse-duration) linear 0ms,
+        transition:
+          max-height var(--collapse-duration) linear 0ms,
           opacity var(--collapse-durationAfterDelay) ease var(--collapse-delay);
       }
 
       &--hidden {
         overflow: hidden;
         max-height: var(--hidden-height);
-        visibility: hidden;
         opacity: 0;
-        transition: max-height var(--collapse-durationAfterDelay) linear 0ms,
-          opacity var(--collapse-duration) ease var(--collapse-delay),
-          visibility var(--collapse-duration);
+        transition:
+          max-height var(--collapse-durationAfterDelay) linear 0ms,
+          opacity var(--collapse-duration) ease var(--collapse-delay);
       }
 
       &--stub {
-        visibility: visible;
         opacity: 1;
       }
 

@@ -9,10 +9,11 @@ import { categoryVerticalPadding } from "../../styles";
 
 export const collapsible = `
   overflow-y: clip;
-  transition-property: opacity, height, padding-block;
+  transition-property: opacity, height, padding-block, display, opacity;
   transition-duration: 0.5s;
-  transition-delay: 0.2s, 0s, 0s;
+  transition-delay: 0.2s, 0s, 0s, 0s, 0s;
   transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-behavior: allow-discrete;
 `;
 export const collapsed = `
   height: 0;
@@ -48,12 +49,20 @@ export const Category = styled.article`
 export const Inner = styled.div`
   position: relative;
   padding: 22px clamp(20px, 2.857vw, 32px);
-
-  .collapse__content--visible + & div.markdown-body {
-    display: none;
-  }
-
+  background-color: var(--box-bg-color);
+  border-bottom-left-radius: var(--box-border-radius);
+  border-bottom-right-radius: var(--box-border-radius);
   ${collapsible}
+
+  &[data-markdown="true"] {
+    height: auto;
+    height: calc-size(auto, size);
+
+    .collapse__content--visible + & {
+      display: none;
+      ${collapsed}
+    }
+  }
 
   &[inert] {
     ${collapsed}
