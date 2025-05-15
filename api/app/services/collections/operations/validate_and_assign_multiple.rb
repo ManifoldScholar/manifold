@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Collections
   module Operations
     # Designed to accept an assignment tuple from the server.
@@ -56,9 +58,9 @@ module Collections
 
         collectable_list = yield load_all_collectables! collector
 
-        collectables = collectable_list.to_a
+        loaded_collectables = collectable_list.to_a
 
-        assign! collector, collectables
+        assign! collector, loaded_collectables
       end
 
       def authorize_collector!(collector)
@@ -93,10 +95,10 @@ module Collections
         Success params
       end
 
-      def assign!(collector, collectables)
-        options = { user: user, collector: collector, collectables: collectables.to_a }
+      def assign!(collector, loaded_collectables)
+        options = { user: user, collector: collector, collectables: loaded_collectables.to_a }
 
-        assign = Collections::Operations::AssignMultiple.new options
+        assign = Collections::Operations::AssignMultiple.new(**options)
 
         assign.call
       end
