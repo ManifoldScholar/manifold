@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
+import React, { useLayoutEffect, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import useResizeObserver from "use-resize-observer";
 import classNames from "classnames";

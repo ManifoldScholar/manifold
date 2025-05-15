@@ -8,7 +8,7 @@ import reduceAssets from "./reduceAssets";
 function getJavascripts(stats) {
   const scripts = reduceAssets(".js", stats);
   return scripts.map(script => {
-    return <script src={`/${script}`} key={script} charSet="UTF-8" />;
+    return <script src={`/${script}`} key={script} />;
   });
 }
 
@@ -31,7 +31,6 @@ function HtmlBody({ stats, component, store, disableBrowserRender }) {
           dangerouslySetInnerHTML={{
             __html: `window.DISABLE_BROWSER_RENDER=true`
           }}
-          charSet="UTF-8"
         />
       ) : null}
       {store && !disableBrowserRender ? (
@@ -39,7 +38,6 @@ function HtmlBody({ stats, component, store, disableBrowserRender }) {
           dangerouslySetInnerHTML={{
             __html: `window.__INITIAL_STATE__=${serialize(store.getState())};`
           }}
-          charSet="UTF-8"
         />
       ) : null}
       {javascripts}

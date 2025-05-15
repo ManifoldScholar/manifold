@@ -51,7 +51,7 @@ function AnnotationDetailContainer({
     confirm,
     deleteAnnotation,
     t,
-    history,
+    navigate,
     refresh,
     readingGroup,
     refreshAnnotations

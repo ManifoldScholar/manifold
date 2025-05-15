@@ -83,14 +83,14 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
       <button
         className="entity-row__utility-button"
         onClick={() => onDelete(asset.id)}
-        ariaLabel={t("actions.delete")}
+        aria-label={t("actions.delete")}
       >
         <Utility.IconComposer icon="delete32" size={26} />
       </button>
       <button
         className="entity-row__utility-button"
         onClick={() => onEdit(asset.id)}
-        ariaLabel={t("actions.edit")}
+        aria-label={t("actions.edit")}
       >
         <Utility.IconComposer icon="annotate32" size={26} />
       </button>
