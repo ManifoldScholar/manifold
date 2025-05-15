@@ -71,7 +71,7 @@ class ApplicationController < ActionController::API
   # @return [Boolean]
   def skip_pagination
     RequestStore.fetch :skip_pagination do
-      !pagination_enforced && Types::SAFE_BOOL.(params[:no_pagination])
+      !pagination_enforced && ::Types::SAFE_BOOL.(params[:no_pagination])
     end
   end
 
