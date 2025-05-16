@@ -3,7 +3,7 @@ import { resetWordWrap, defaultTransitionProps } from "theme/styles/mixins";
 export default `
   .reader-window {
     ${resetWordWrap}
-    padding: 60px 0;
+    padding: calc(60px + var(--reader-header-height, 0px)) 0 60px;
     overflow: hidden;
     color: var(--reader-color);
     background-color: var(--bg-color);
@@ -16,6 +16,7 @@ export default `
   }
 
   .text-section {
+
     font-family: var(--font-family-copy);
     font-weight: var(--font-weight-regular);
     line-height: 1.761;
@@ -136,5 +137,9 @@ export default `
     .notation-marker {
       cursor: pointer;
     }
+  }
+
+  #text-section-interactive-region {
+    scroll-margin-block-start: calc(60px + var(--reader-header-height, 0px));
   }
 `;
