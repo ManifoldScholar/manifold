@@ -14,7 +14,8 @@ export default function ReturnMenuBody({
   projectTitle: entityTitle,
   toggleSignInUpOverlay,
   moreLink,
-  className
+  className,
+  hidePanel
 }) {
   const context = useContext(FrontendModeContext);
   const settings = useFromStore("settings", "select");
@@ -25,7 +26,7 @@ export default function ReturnMenuBody({
     <Styled.Menu className={className}>
       <Styled.List>
         <Styled.Item>
-          <Styled.ItemLink to={returnUrl}>
+          <Styled.ItemLink to={returnUrl} onClick={hidePanel}>
             <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
             <Styled.LinkText>
               {isJournalArticle
@@ -45,6 +46,7 @@ export default function ReturnMenuBody({
                   ? "frontendJournalsList"
                   : "frontendProjectsAll"
               )}
+              onClick={hidePanel}
             >
               <Styled.LinkIcon
                 icon={isJournalArticle ? "journals64" : "projects64"}
