@@ -158,7 +158,11 @@ module Storage
       end
 
       def tus_server_s3_storage
-        # TODO: Implement this
+        Tus::Storage::S3.new(
+          concurrency: { concatenation: 20 },
+          logger: Rails.logger,
+          **cache_s3_options
+        )
       end
 
       private
@@ -171,8 +175,27 @@ module Storage
         Shrine::Storage::GoogleCloudStorage.new(bucket: bucket, prefix: prefix, credentials: ::Factory::DriveSession.config)
       end
 
+      def shared_s3_options
+        aws_credentials = S3Config.to_h
+
+        return {
+          http_open_timeout: 30,
+          retry_limit: 10,
+          use_accelerate_endpoints: false,
+          **aws_credentials
+        }
+      end
+
+      def cache_s3_options
+        { **shared_s3_options, prefix: "cache" }
+      end
+
+      def store_s3_options
+        { **shared_s3_options, prefix: "store" }
+      end
+
       def s3_storage(bucket, prefix)
-        # TODO: Implement
+        Shrine::Storage::S3.new(bucket: bucket, **store_s3_options)
       end
 
       def test_storage(path, prefix)
