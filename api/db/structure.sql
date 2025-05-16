@@ -2865,6 +2865,22 @@ CREATE VIEW public.text_summaries AS
 
 
 --
+-- Name: text_tracks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.text_tracks (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    resource_id uuid NOT NULL,
+    kind character varying NOT NULL,
+    srclang character varying,
+    label character varying,
+    cues_data jsonb
+);
+
+
+--
 -- Name: throttled_requests; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3857,6 +3873,14 @@ ALTER TABLE ONLY public.text_subjects
 
 ALTER TABLE ONLY public.text_titles
     ADD CONSTRAINT text_titles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: text_tracks text_tracks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.text_tracks
+    ADD CONSTRAINT text_tracks_pkey PRIMARY KEY (id);
 
 
 --
@@ -5835,6 +5859,13 @@ CREATE INDEX index_text_titles_on_text_id ON public.text_titles USING btree (tex
 
 
 --
+-- Name: index_text_tracks_on_resource_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_tracks_on_resource_id ON public.text_tracks USING btree (resource_id);
+
+
+--
 -- Name: index_texts_export_configuration_exports_as_epub_v3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7380,6 +7411,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250210192150'),
 ('20250210230256'),
 ('20250306230246'),
-('20250506201306');
+('20250506201306'),
+('20250514190334');
 
 

@@ -50,6 +50,7 @@ class Resource < ApplicationRecord
   has_many :resource_collections, through: :collection_resources
   has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject
   has_many :annotations, dependent: :destroy, inverse_of: :resource
+  has_many :text_tracks, dependent: :destroy, inverse_of: :resource
 
   delegate :slug, to: :project, prefix: true
 
