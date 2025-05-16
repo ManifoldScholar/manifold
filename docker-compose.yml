@@ -106,6 +106,39 @@ services:
       - rails-log:/srv/app/log
       - rails-tmp:/srv/app/tmp
       - uploads:/srv/app/public/system
+  minio:
+    image: "minio/minio:RELEASE.2022-09-25T15-44-53Z"
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - "13115:9000"
+      - "13116:9001"
+    volumes:
+      - minio_storage:/data
+    env_file:
+      - docker/minio.env
+    command: server --console-address ":9001" /data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+  minio-client:
+    entrypoint: "/root/.mc/initialize.sh"
+    image: "minio/mc:RELEASE.2022-09-16T09-16-47Z"
+    depends_on:
+      minio:
+        condition: service_healthy
+    env_file:
+      - docker/manifold.env
+      - docker/minio.env
+    restart: "no"
+    volumes:
+      - ./docker/minio/client:/root/.mc
   web:
     tty: true
     stdin_open: true
@@ -282,6 +315,8 @@ volumes:
   bundle-cache:
     driver: local
   esdata:
+    driver: local
+  minio_storage:
     driver: local
   postgres-data:
     driver: local
