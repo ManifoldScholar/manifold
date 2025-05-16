@@ -35,6 +35,7 @@ module V1
     typed_attribute :variant_thumbnail_styles, Types::Serializer::Attachment.meta(read_only: true)
 
     typed_has_many :collection_resources
+    typed_has_many :text_tracks, serializer: V1::TextTrackSerializer, record_type: "textTrack"
 
     serialize_collectable_attributes!
 
