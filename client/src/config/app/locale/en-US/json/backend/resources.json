@@ -61,7 +61,8 @@
       "interactive": "Interactive",
       "resource_kind": "Resource Kind",
       "kind": "Kind",
-      "captions": "Captions"
+      "captions": "Captions",
+      "transcript": "Transcript"
     },
     "properties": {
       "title_instructions": "This field accepts Markdown.",
