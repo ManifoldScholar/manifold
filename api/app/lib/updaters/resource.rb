@@ -6,7 +6,7 @@ module Updaters
     def attachment_fields
       [
         :attachment, :high_res, :variant_thumbnail, :variant_format_one,
-        :variant_format_two, :variant_poster, :captions_track
+        :variant_format_two, :variant_poster, :captions_track, :transcript
       ]
     end
 

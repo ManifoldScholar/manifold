@@ -257,7 +257,7 @@ module Validation
                   attachment(:variant_format_two), :remove_variant_format_two,
                   attachment(:variant_thumbnail), :remove_variant_thumbnail,
                   attachment(:variant_poster), :remove_variant_poster,
-                  attachment(:captions_track), :remove_captions_track,
+                  attachment(:transcript), :remove_transcript,
                   :title, :caption, :description, { tag_list: [] }, :kind, :sub_kind,
                   :alt_text, :copyright_status, :credit,
                   :allow_download, :external_type, :external_url, :external_id,
