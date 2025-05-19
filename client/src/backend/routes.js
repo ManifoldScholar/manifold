@@ -115,6 +115,32 @@ const routes = {
               component: "ResourceProperties",
               path: "/backend/projects/resource/:id/properties",
               helper: r => `/backend/projects/resource/${r}/properties`
+            },
+            {
+              name: "backendResourceTracks",
+              exact: false,
+              component: "ResourceTracksList",
+              path: "/backend/projects/resource/:id/tracks",
+              helper: r => `/backend/projects/resource/${r}/tracks`,
+              routes: [
+                {
+                  name: "backendResourceTrackNew",
+                  exact: true,
+                  component: "ResourceTrackAdd",
+                  path: "/backend/projects/resource/:id/tracks/new",
+                  helper: r => `/backend/projects/resource/${r}/tracks/new`,
+                  modal: true
+                },
+                {
+                  name: "backendResourceTrackEdit",
+                  exact: true,
+                  component: "ResourceTrackAdd",
+                  path: "/backend/projects/resource/:id/tracks/:trackId",
+                  helper: (r, trackId) =>
+                    `/backend/projects/resource/${r}/tracks/${trackId}`,
+                  modal: true
+                }
+              ]
             }
           ]
         },

@@ -155,6 +155,26 @@
         }
       },
       "submit_label": "Save Feature"
+    },
+    "tracks": {
+      "header": "Manage Text Tracks",
+      "button_label": "Add New Track",
+      "label": "Label",
+      "label_placeholder": "Optional label for admin only",
+      "kind": "Kind",
+      "kind_placeholder": "Select kind",
+      "kind_subtitles": "Subtitles",
+      "kind_captions": "Captions",
+      "kind_descriptions": "Descriptions",
+      "kind_chapters": "Chapters",
+      "kind_metadata": "Metadata",
+      "srclang": "Language",
+      "srclang_placeholder": "Enter language code (e.g. en, es, fr)",
+      "cues": "Text Content",
+      "delete_confirm": "Are you sure you want to delete this track?",
+      "add_header": "Add Text Track",
+      "edit_header": "Edit {{title}}",
+      "instructions": "Manifold can display WebVTT content alongside or embedded in media resources. Add or edit text tracks for this resource below."
     }
   }
 }

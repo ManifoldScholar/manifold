@@ -29,6 +29,7 @@ import ReadingGroup from "backend/containers/reading-group";
 import Annotations from "backend/containers/annotations";
 import User from "backend/containers/user";
 import Comments from "backend/containers/comments";
+import TextTracks from "backend/containers/resource/tracks";
 
 export default {
   Backend,
@@ -170,5 +171,7 @@ export default {
   CommentDetail: Comments.Detail,
   UserWrapper: User.Wrapper,
   UserProperties: User.Properties,
-  UserActivity: User.Activity
+  UserActivity: User.Activity,
+  ResourceTracksList: TextTracks.List,
+  ResourceTrackAdd: TextTracks.AddEdit
 };
