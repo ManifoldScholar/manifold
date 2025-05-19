@@ -126,8 +126,8 @@ class FormGeneratedPasswordInput extends Component {
               <Styled.Icon icon={icon} size="default" />
               <span className="screen-reader-text">
                 {this.state.showPassword
-                  ? t("forms.password_reset.hide_password")
-                  : t("forms.password_reset.show_password")}
+                  ? t("forms.password_reset.hide")
+                  : t("forms.password_reset.show")}
               </span>
             </Styled.Toggle>
             {this.renderInput(id)}
