@@ -82,11 +82,6 @@ module V1
       typed_attribute :attachment_file_name, Types::String.optional.meta(read_only: true)
       typed_attribute :downloadable_kind, Types::Bool.meta(read_only: true), &:downloadable_kind?
 
-      typed_attribute :captions_track_content_type, Types::String.optional.meta(read_only: true)
-      typed_attribute :captions_track_file_name, Types::String.optional.meta(read_only: true)
-      typed_attribute :captions_track_file_size, Types::String.optional.meta(read_only: true)
-      typed_attribute :captions_track_url, Types::String.optional.meta(read_only: true)
-
       typed_has_many :resource_collections
       typed_belongs_to :project
     end
