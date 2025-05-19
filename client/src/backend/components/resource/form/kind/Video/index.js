@@ -53,15 +53,6 @@ class ResourceFormKindVideo extends PureComponent {
           remove="attributes[removeAttachment]"
           {...this.props}
         />
-        <Form.Upload
-          layout="landscape"
-          label={this.props.t("resources.new.captions")}
-          accepts="vtt"
-          readFrom="attributes[captionsTrackFileName]"
-          name="attributes[captionsTrack]"
-          remove="attributes[removeCaptionsTrack]"
-          {...this.props}
-        />
       </Styled.Group>
     );
   }
