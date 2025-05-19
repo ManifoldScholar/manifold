@@ -11,15 +11,23 @@ class TextTrack < ApplicationRecord
   classy_enum_attr :kind, enum: "TextTrackKind", allow_blank: false
 
   validates :kind, presence: true
-  validates :srclang,
-            presence: { message: "language is required when kind is subtitles" },
-            if: -> { kind&.subtitles? }
-
-  # See https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/track#track_data_types
-  validates :label, uniqueness: {
-    scope: [:resource_id, :kind, :srclang],
-    message: "combination of kind, language, and label must be unique per resource"
-  }
+  validate :validate_label_uniqueness
+  validate :validate_subtitles_has_language
 
   manifold_has_attached_file :cues, :resource, no_styles: true
+
+  private
+
+  # See https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/track#track_data_types
+  def validate_label_uniqueness
+    if label.present? && TextTrack.where(resource: resource, kind: kind, srclang: srclang, label: label).exists?
+      errors.add(:label, "must be unique per kind,language combination")
+    end
+  end
+
+  def validate_subtitles_has_language
+    if kind.subtitles? && srclang.blank?
+      errors.add(:srclang, "is required when kind is subtitles")
+    end
+  end
 end
