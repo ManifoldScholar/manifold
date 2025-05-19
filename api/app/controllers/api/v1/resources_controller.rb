@@ -38,7 +38,7 @@ module API
       protected
 
       def includes
-        [:project]
+        [:project, :text_tracks]
       end
 
       def scope_for_zresources

@@ -2,6 +2,8 @@ module V1
   class TextTrackSerializer < ManifoldSerializer
     include V1::Concerns::ManifoldSerializer
 
+    abilities
+
     typed_attribute :id, Types::Serializer::ID
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
     typed_attribute :resource_id, Types::Serializer::ID

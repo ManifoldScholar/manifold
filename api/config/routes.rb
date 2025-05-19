@@ -161,8 +161,11 @@ Rails.application.routes.draw do
       end
 
       resources :resources, only: [:show, :update, :destroy] do
-        namespace :relationships do
-          resources :comments, controller: "/api/v1/comments"
+        scope module: :resources do
+          namespace :relationships do
+            resources :comments, controller: "/api/v1/comments"
+            resources :text_tracks
+          end
         end
       end
 
