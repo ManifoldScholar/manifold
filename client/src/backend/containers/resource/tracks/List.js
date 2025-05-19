@@ -15,6 +15,7 @@ import withConfirmation from "hoc/withConfirmation";
 function TextTracksListContainer({ resource, route, confirm }) {
   const { t } = useTranslation();
 
+  /* eslint-disable-next-line no-unused-vars */
   const { data: tracks, meta, refresh } = useFetch({
     request: [textTracksAPI.index, resource.id]
   });
@@ -56,10 +57,6 @@ function TextTracksListContainer({ resource, route, confirm }) {
           entityComponent={TextTrackRow}
           entityComponentProps={{ onDelete, resourceId: resource.id }}
           entities={tracks}
-          rowClickMode="block"
-          unit={t("glossary.track", {
-            count: meta?.pagination?.totalCount
-          })}
           instructions={t("records.tracks.instructions")}
           buttons={[
             <Button
