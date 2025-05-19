@@ -505,6 +505,15 @@ class Navigation {
         args
       });
     }
+    if (kind === "audio" || kind === "video") {
+      out.push({
+        label: "titles.tracks",
+        route: "backendResourceTracks",
+        entity: project,
+        ability: "update",
+        args
+      });
+    }
     return out;
   });
 
