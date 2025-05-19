@@ -99,15 +99,6 @@ GEM
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
-    sentry-rails (5.23.0)
-      railties (>= 5.0)
-      sentry-ruby (~> 5.23.0)
-    sentry-ruby (5.23.0)
-      bigdecimal
-      concurrent-ruby (~> 1.0, >= 1.0.2)
-    sentry-sidekiq (5.23.0)
-      sentry-ruby (~> 5.23.0)
-      sidekiq (>= 3.0)
     sidekiq (7.3.9)
       base64
       connection_pool (>= 2.3.0)
@@ -129,9 +120,6 @@ DEPENDENCIES
   gettext
   github_changelog_generator (~> 1.15.0.pre.rc)
   paint
-  sentry-rails
-  sentry-ruby
-  sentry-sidekiq
 
 BUNDLED WITH
    2.2.19

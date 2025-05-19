@@ -108,6 +108,9 @@ gem "rubyzip", "~> 2.3.1"
 gem "scanf", "~> 1.0.0"
 gem "scenic", "~> 1.4"
 gem "searchkick", "5.2.4"
+gem "sentry-ruby"
+gem "sentry-rails"
+gem "sentry-sidekiq"
 gem "shrine", "~> 3.5.0"
 gem "shrine-google_cloud_storage", "~> 3.3"
 gem "shrine-tus", "~> 2.0"
@@ -167,3 +170,4 @@ group :test do
   gem "test-prof", "~> 1.0"
   gem "with_model", "~> 2.1"
 end
+

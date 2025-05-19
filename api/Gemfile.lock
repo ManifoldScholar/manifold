@@ -686,6 +686,15 @@ GEM
     searchkick (5.2.4)
       activemodel (>= 5.2)
       hashie
+    sentry-rails (5.23.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.23.0)
+    sentry-ruby (5.23.0)
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+    sentry-sidekiq (5.23.0)
+      sentry-ruby (~> 5.23.0)
+      sidekiq (>= 3.0)
     shrine (3.5.0)
       content_disposition (~> 1.0)
       down (~> 5.1)
@@ -943,6 +952,9 @@ DEPENDENCIES
   scanf (~> 1.0.0)
   scenic (~> 1.4)
   searchkick (= 5.2.4)
+  sentry-rails
+  sentry-ruby
+  sentry-sidekiq
   shrine (~> 3.5.0)
   shrine-google_cloud_storage (~> 3.3)
   shrine-tus (~> 2.0)
