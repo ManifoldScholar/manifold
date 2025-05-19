@@ -48,7 +48,7 @@ class ResourceLink extends Component {
           <Styled.Link
             href={attr.attachmentStyles.original}
             className={this.props.buttonClass}
-            download={attr.slug}
+            download={attr.attachmentFilename}
           >
             <span className="button-primary__text" aria-hidden>
               {t("actions.download")}
