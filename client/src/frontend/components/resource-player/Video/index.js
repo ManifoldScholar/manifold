@@ -73,11 +73,8 @@ class ResourcePlayerVideo extends Component {
     };
   }
 
-  get captionsSrc() {
-    if (!this.props.resource.attributes.captionsTrackUrl) return null;
-
-    const trackUrl = new URL(this.props.resource.attributes.captionsTrackUrl);
-
+  urlToRelativePath(url) {
+    const trackUrl = new URL(url);
     return trackUrl.pathname;
   }
 
@@ -111,9 +108,9 @@ class ResourcePlayerVideo extends Component {
   renderFileVideo() {
     const {
       variantPosterStyles,
-      attachmentStyles,
-      captionsTrackUrl
+      attachmentStyles
     } = this.props.resource.attributes;
+    const { textTracks } = this.props.resource.relationships;
 
     return (
       <Styled.VideoWrapper>
@@ -125,13 +122,23 @@ class ResourcePlayerVideo extends Component {
           loading="lazy"
         >
           <source src={attachmentStyles.original} type="video/mp4" />
-          {!!captionsTrackUrl && (
-            <track
-              kind="captions"
-              src={this.captionsSrc.toString()}
-              srcLang="en"
-            />
-          )}
+          {!!textTracks.length &&
+            textTracks.map(track => {
+              if (!track?.attributes) return null;
+              const {
+                id,
+                attributes: { kind, srclang, cuesUrl }
+              } = track;
+              if (!kind || !cuesUrl) return null;
+              return (
+                <track
+                  key={id}
+                  src={this.urlToRelativePath(cuesUrl)}
+                  kind={kind}
+                  srcLang={srclang}
+                />
+              );
+            })}
         </Styled.Video>
       </Styled.VideoWrapper>
     );
