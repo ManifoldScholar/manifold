@@ -170,4 +170,3 @@ group :test do
   gem "test-prof", "~> 1.0"
   gem "with_model", "~> 2.1"
 end
-
