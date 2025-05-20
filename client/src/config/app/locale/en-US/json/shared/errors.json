@@ -25,7 +25,7 @@
     "no_collapse_context": "Collapse components cannot be rendered outside the Collapse wrapper component.",
     "color_scheme": "Manifold color scheme error!",
     "fatal": {
-      "heading_line_one": "We're at a bit of a loose end.",
+      "heading_line_one": "We’re at a bit of a loose end.",
       "heading_line_two": "Frightfully sorry.",
       "dismiss_link": "Try again."
     },

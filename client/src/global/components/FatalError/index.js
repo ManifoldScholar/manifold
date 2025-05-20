@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -108,20 +108,20 @@ class FatalError extends PureComponent {
           <Styled.Wrapper>
             <Styled.Inner>
               <Styled.Container>
-                <Styled.Header>
-                  <Styled.Icon icon="stopSign64" size={60} />
+                <header>
+                  <Styled.Icon icon="stopSign64" size={52} />
                   <Styled.Message>
                     {this.props.headerLineOne ??
                       this.defaultHeaders.headerLineOne}
                     {this.props.headerLineTwo !== null && (
-                      <span>
+                      <>
                         <br />
                         {this.props.headerLineTwo ??
                           this.defaultHeaders.headerLineTwo}
-                      </span>
+                      </>
                     )}
                   </Styled.Message>
-                </Styled.Header>
+                </header>
                 <div role="alert" aria-live="assertive" aria-atomic="true">
                   {error ? (
                     <Styled.ErrorTitle>
