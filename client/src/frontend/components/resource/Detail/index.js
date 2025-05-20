@@ -1,7 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import CommentContainer from "global/containers/comment";
+import IconComposer from "global/components/utility/IconComposer";
 import Hero from "../Hero";
 import LinkComponent from "../Link";
 import Meta from "../Meta";
@@ -11,6 +11,7 @@ import Share from "../Share";
 import { useSelector } from "react-redux";
 import { meta } from "utils/entityUtils";
 import * as Styled from "./styles";
+import * as StyledLink from "../Link/styles";
 
 export default function ResourceDetail({ resource, projectTitle }) {
   const { t } = useTranslation();
@@ -71,6 +72,22 @@ export default function ResourceDetail({ resource, projectTitle }) {
         )}
         <Styled.MetadataWrapper>
           <LinkComponent attributes={attr} />
+          {attr.downloadable && attr.transcriptFileName && (
+            <StyledLink.Link
+              href={attr.attachmentStyles.original}
+              className="button-primary"
+              download={attr.transcriptFileName}
+            >
+              <span className="button-primary__text" aria-hidden>
+                {t("resources.new.transcript")}
+              </span>
+              <IconComposer
+                icon="arrowDown16"
+                size="default"
+                className="button-primary__icon"
+              />
+            </StyledLink.Link>
+          )}
           <Share title={shareTitle} />
           <Meta resource={resource} layout={"secondary"} />
           <VariantList resource={resource} />
