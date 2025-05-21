@@ -129,7 +129,7 @@
       "author": "Is a project author?",
       "submit_label": "Save Permissions",
       "project_editor": "Project Editor",
-      "metadata_editor": "Metadata Editor",
+      "metadata_editor": "Project Collaborator",
       "author": "$t(glossary.author_title_case_one)"
     },
     "log": {
