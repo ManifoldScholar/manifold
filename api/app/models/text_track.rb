@@ -20,13 +20,17 @@ class TextTrack < ApplicationRecord
 
   # See https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/track#track_data_types
   def validate_label_uniqueness
-    if label.present? && TextTrack.where(resource: resource, kind: kind, srclang: srclang, label: label).exists?
-      errors.add(:label, "must be unique per kind,language combination")
+    return unless label.present?
+
+    if TextTrack.where(resource: resource, kind: kind, srclang: srclang, label: label)
+        .where.not(id: id)
+        .exists?
+      errors.add(:label, "must be unique per kind, language combination")
     end
   end
 
   def validate_subtitles_has_language
-    if kind.subtitles? && srclang.blank?
+    if kind&.subtitles? && srclang.blank?
       errors.add(:srclang, "is required when kind is subtitles")
     end
   end
