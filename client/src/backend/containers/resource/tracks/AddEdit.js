@@ -16,15 +16,18 @@ export default function ResourceTrackAddEdit({ resource, refresh }) {
     condition: !!id
   });
 
+  const trackTitle = track?.attributes
+    ? track.attributes.label ??
+      t(`records.tracks.kind_${track?.attributes.kind}`)
+    : null;
+
   return (
     <section>
       <Layout.DrawerHeader
         title={
           id
             ? t("records.tracks.edit_header", {
-                title:
-                  track?.attributes?.label ??
-                  t(`records.tracks.kind_${track?.attributes?.kind}`)
+                title: trackTitle
               })
             : t("records.tracks.add_header")
         }
