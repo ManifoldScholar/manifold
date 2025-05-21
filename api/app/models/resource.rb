@@ -62,7 +62,6 @@ class Resource < ApplicationRecord
   manifold_has_attached_file :variant_format_two, :resource, no_styles: true
   manifold_has_attached_file :translation, :resource, no_styles: true
   manifold_has_attached_file :transcript, :resource, no_styles: true
-  manifold_has_attached_file :captions_track, :resource, no_styles: true
 
   has_formatted_attributes :title, :caption,
                            include_wrap: false
