@@ -85,7 +85,7 @@ export default class ProjectContentBlockTextsBlock extends PureComponent {
         ))}
         {this.visibility.showUncategorized && (
           <TextList
-            label="Uncategorized"
+            label={this.visibility.showCategoryLabels ? "Uncategorized" : null}
             texts={this.uncategorizedTexts}
             {...this.visibility}
           />

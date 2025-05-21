@@ -14,6 +14,7 @@ export default class TextList extends Component {
     showDates: PropTypes.bool,
     showDescriptions: PropTypes.bool,
     showSubtitles: PropTypes.bool,
+    showCategoryLabels: PropTypes.bool,
     onUncollect: PropTypes.func
   };
 
@@ -35,7 +36,7 @@ export default class TextList extends Component {
     if (!this.texts || this.texts.length === 0) return null;
 
     return (
-      <Styled.Category>
+      <Styled.Category $hideCategoryLabels={!this.props.showCategoryLabels}>
         {this.props.label && (
           <Styled.CategoryHeading>{this.props.label}</Styled.CategoryHeading>
         )}
