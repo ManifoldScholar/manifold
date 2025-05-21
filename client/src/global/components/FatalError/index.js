@@ -12,6 +12,7 @@ import styles from "theme/styles/globalStyles";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import * as Styled from "./styles";
+import HeadContent from "../HeadContent";
 
 class FatalError extends PureComponent {
   static propTypes = {
@@ -103,6 +104,7 @@ class FatalError extends PureComponent {
 
     return (
       <HelmetProvider>
+        <HeadContent title={`${error.status} Error: ${error.heading}`} />
         <GlobalStyles styles={styles} />
         <Styled.Body className="browse">
           <Styled.Wrapper>
