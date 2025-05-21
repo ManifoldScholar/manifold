@@ -9,7 +9,6 @@ export default function TextTrackRow({
   entity,
   resourceId,
   onDelete,
-  onEdit,
   ...props
 }) {
   const { t } = useTranslation();
@@ -27,6 +26,7 @@ export default function TextTrackRow({
 
   const utility = [
     <button
+      key="delete"
       className="entity-row__utility-button"
       title={t("actions.delete")}
       onClick={() => onDelete(id)}
@@ -52,6 +52,5 @@ TextTrackRow.displayName = "EntitiesList.Entity.TextTrackRow";
 
 TextTrackRow.propTypes = {
   entity: PropTypes.object.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired
 };
