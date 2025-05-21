@@ -54,18 +54,7 @@ class ResourceCollection < ApplicationRecord
 
   multisearch_parent_name :project
 
-  searchkick(callbacks: :async,
-             batch_size: 500,
-             word_start: TYPEAHEAD_ATTRIBUTES,
-             highlight: [:title, :body])
-
-  scope :search_import, -> { includes(:project) }
-
   after_commit :trigger_creation_event, on: [:create]
-
-  def search_data
-    super.merge(parent_project: project.try(:id))
-  end
 
   def multisearch_title
     title_plaintext

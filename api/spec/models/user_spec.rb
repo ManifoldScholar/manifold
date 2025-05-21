@@ -143,16 +143,12 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context "can be searched", :elasticsearch do
-    let(:first) { "189274891457612" }
-    let(:last) { "HIOUFHAOASJDFIO" }
-    let(:email) { "#{first}@#{last}.com" }
+  context "when searching" do
+    let_it_be(:first) { "189274891457612" }
+    let_it_be(:last) { "HIOUFHAOASJDFIO" }
+    let_it_be(:email) { "#{first}@#{last}.com" }
 
-    before do
-      FactoryBot.create(:user, first_name: first, last_name: last, email: email)
-      described_class.reindex
-      described_class.searchkick_index.refresh
-    end
+    let_it_be(:user) { FactoryBot.create(:user, first_name: first, last_name: last, email: email) }
 
     it "by first name" do
       results = described_class.filtered(keyword: first, typeahead: true)

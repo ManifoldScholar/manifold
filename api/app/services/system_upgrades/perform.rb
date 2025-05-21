@@ -20,44 +20,30 @@ module SystemUpgrades
       applied = false
 
       filtered_upgrades.each do |upgrade_interaction|
-        _result, upgrade_output = compose upgrade_interaction, inputs
-        applied = true if _result && !noop
+        result, upgrade_output = compose upgrade_interaction, inputs
+        applied = true if result && !noop
         output.write upgrade_output
       end
 
-      reindex_records if applied && reindex
+      rebuild_pg_search_documents if applied && reindex
 
       output.string
     end
-    # rubocop:enable Lint/UnderscorePrefixedVariableName
 
     private
 
-    # rubocop:disable Metrics/AbcSize
-    def reindex_records
+    def rebuild_pg_search_documents
       logger.info("[-ANY-]===================================================================")
-      logger.info("[-ANY-]Reindex All Records                                                ")
+      logger.info("[-ANY-] Rebuilding Search Indices                                         ")
       logger.info("[-ANY-]===================================================================")
       logger.info("[-ANY-]Most Manifold updates includes changes to what model data is       ")
       logger.info("[-ANY-]indexed. To accommodate those changes, all records must be         ")
       logger.info("[-ANY-]reindexed. This may take a few minutes, so now is a good time to   ")
       logger.info("[-ANY-]make that cup of tea.                                              ")
       logger.info("[-ANY-]===================================================================")
-      Rails.application.eager_load!
-      begin
-        Searchkick.models.each do |model|
-          logger.info("Reindexing #{model.name}...")
-          model.searchkick_index.delete if model.searchkick_index.exists?
-          model.reindex
-        end
-      rescue Faraday::ConnectionFailed
-        elastic_connection_error
-      rescue StandardError => e
-        # We really do want to continue if reindexing fails.
-        logger.error(e)
-      end
+
+      ManifoldApi::Container["search.rebuild_all"].().value!
     end
-    # rubocop:enable Metrics/AbcSize
 
     def filtered_upgrades
       return upgrade_interactions unless version.present?

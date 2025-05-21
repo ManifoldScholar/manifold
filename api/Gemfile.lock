@@ -270,15 +270,6 @@ GEM
       zeitwerk (~> 2.6)
     dux (0.8.0)
       yard_types
-    elasticsearch (7.17.9)
-      elasticsearch-api (= 7.17.9)
-      elasticsearch-transport (= 7.17.9)
-    elasticsearch-api (7.17.9)
-      multi_json
-    elasticsearch-dsl (0.1.10)
-    elasticsearch-transport (7.17.9)
-      faraday (~> 1)
-      multi_json
     equalizer (0.0.11)
     errbase (0.2.2)
     erubi (1.12.0)
@@ -430,7 +421,6 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    keyword_search (1.5.0)
     language_server-protocol (3.17.0.4)
     lint_roller (1.1.0)
     listen (3.8.0)
@@ -710,9 +700,6 @@ GEM
     scenic (1.7.0)
       activerecord (>= 4.0.0)
       railties (>= 4.0.0)
-    searchkick (5.2.4)
-      activemodel (>= 5.2)
-      hashie
     set (1.1.1)
     shrine (3.5.0)
       content_disposition (~> 1.0)
@@ -888,8 +875,7 @@ DEPENDENCIES
   dry-types
   dry-validation
   dux (~> 0.8.0)
-  elasticsearch (~> 7.0)
-  elasticsearch-dsl (~> 0.1.10)
+  equalizer
   factory_bot_rails (~> 6.2)
   faker (~> 3.2.1)
   fast_jsonapi!
@@ -908,7 +894,6 @@ DEPENDENCIES
   jsonb_accessor (~> 1.0)
   jwt (~> 1.5)
   kaminari (~> 1.2)
-  keyword_search (~> 1.5)
   listen (~> 3.2)
   lockbox (~> 1.3.0)
   lograge (~> 0.10)
@@ -936,7 +921,7 @@ DEPENDENCIES
   paper_trail-globalid (~> 0.2)
   parallel_tests (~> 2.29.2)
   pg (~> 1.2)
-  pg_search
+  pg_search (~> 2.3.6)
   premailer-rails (~> 1.0)
   pry-byebug
   pry-rails (~> 0.3.9)
@@ -969,7 +954,6 @@ DEPENDENCIES
   rubyzip (~> 2.3.1)
   scanf (~> 1.0.0)
   scenic (~> 1.4)
-  searchkick (= 5.2.4)
   shrine (~> 3.5.0)
   shrine-google_cloud_storage (~> 3.3)
   shrine-tus (~> 2.0)

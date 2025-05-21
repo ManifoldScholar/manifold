@@ -2,28 +2,23 @@
 
 # A section in a {Text}.
 class TextSection < ApplicationRecord
-  attribute :body_json, :indifferent_hash
-
-  # Misc. Concerns
-  include Citable
-  include SearchIndexable
-  include Metadata
+  include Authority::Abilities
   include Attachments
+  include Citable
+  include Collectable
+  include Filterable
+  include FriendlyId
+  include Metadata
   include HasKeywordSearch
+  include SearchIndexable
+  include SerializedAbilitiesFor
 
-  # Constants
   KIND_COVER_IMAGE = "cover_image"
   KIND_NAVIGATION = "navigation"
   KIND_SECTION = "section"
   ALLOWED_KINDS = [KIND_COVER_IMAGE, KIND_NAVIGATION, KIND_SECTION].freeze
 
-  # Authority
-  include Authority::Abilities
-  include Collectable
-  include Filterable
-  include SerializedAbilitiesFor
   self.authorizer_name = "TextSectionAuthorizer"
-  include FriendlyId
 
   with_citation do |text_section|
     (text_section.text_citation_parts || {}).merge(
@@ -36,7 +31,6 @@ class TextSection < ApplicationRecord
     citation_override
   )
 
-  # Ordering
   acts_as_list scope: :text
 
   belongs_to :text, inverse_of: :text_sections
@@ -62,7 +56,8 @@ class TextSection < ApplicationRecord
            inverse_of: :text_sections
   has_many :ingestions, dependent: :nullify, inverse_of: :text_section
 
-  # Delegation
+  attribute :body_json, :indifferent_hash
+
   delegate :citation_parts, to: :text, prefix: true, allow_nil: true
   delegate :source_path, to: :ingestion_source, allow_nil: true
   delegate :project, to: :text, allow_nil: true
@@ -75,47 +70,20 @@ class TextSection < ApplicationRecord
 
   manifold_has_attached_file :social_image, :image
 
-  # Validation
   validates :position, numericality: { only_integer: true }
   validates :kind, inclusion: { in: ALLOWED_KINDS }
   validates :name, presence: { on: :from_api }
   validates :slug, presence: true, allow_nil: true
 
-  # Callbacks
   before_validation :update_body_json
   after_destroy :remove_linked_toc_entries
   after_save :extrapolate_nodes!
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
 
-  # Scopes
   scope :in_texts, ->(texts) { where(text: texts) }
   scope :ordered, -> { order(position: :asc) }
 
   multisearches! :body_text
-
-  searchkick(
-    callbacks: :async,
-    batch_size: 25,
-    merge_mappings: true,
-    settings: {
-      index: {
-        mapping: {
-          nested_objects: {
-            limit: 20_000
-          }
-        }
-      }
-    },
-    mappings: {
-      properties: {
-        text_nodes: {
-          type: "nested"
-        }
-      }
-    }
-  )
-
-  scope :search_import, -> { includes(text: [:project, :makers]) }
 
   alias_attribute :title, :name
 
@@ -159,14 +127,6 @@ class TextSection < ApplicationRecord
     name
   end
 
-  def search_data
-    super.merge(
-      parent_text: text&.id,
-      parent_project: project&.id,
-      text_nodes: properties_for_text_nodes
-    )
-  end
-
   def multisearchable_makers
     []
   end
@@ -198,35 +158,6 @@ class TextSection < ApplicationRecord
   def to_section_map
     slice(:id, :name).merge(hidden: hidden_in_reader)
   end
-
-  # rubocop:disable Metrics/AbcSize
-  def properties_for_text_nodes
-    inline = Serializer::HTML::INLINE_ELEMENTS
-    *, nodes = text_nodes.reverse.inject([false, []]) do |(once_more, nodes), node|
-      next [once_more, nodes] if node["content"].strip.blank?
-
-      if (inline.include?(node["parent"]) && nodes[-1]) || once_more
-        # Append inline content to previous node
-        nodes[-1][:content] = nodes[-1][:content].dup.insert(0, "#{node["content"]} ")
-        # Collect wrapped up uuids
-        nodes[-1][:contains] << node[:node_uuid]
-        nodes[-1][:node_uuid] = node[:node_uuid]
-        # Inline nodes break up block nodes. When we collapse the inline node, we also
-        # need to collapse the next node, since it's the later half of the broken block
-        # node. The once_more variable stores this fact.
-        next [!once_more, nodes]
-      end
-      nodes.push(
-        content: node["content"],
-        contains: [node["node_uuid"]],
-        node_uuid: node["node_uuid"],
-        text_section_id: id
-      )
-      next [false, nodes] # rubocop:todo Lint/UnmodifiedReduceAccumulator
-    end
-    nodes.reverse.map.with_index(1) { |node, index| node.merge(position: index) }
-  end
-  # rubocop:enable Metrics/AbcSize
 
   def text_nodes(node = body_json, nodes = [], parent = nil)
     if node["node_type"] == "text"

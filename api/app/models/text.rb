@@ -137,20 +137,6 @@ class Text < ApplicationRecord
 
   has_keyword_search! associated_against: { titles: [:value] }, against: [:description]
 
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
-
-  scope :search_import, lambda {
-    includes(
-      :makers,
-      :project,
-      :category,
-      :titles
-    )
-  }
-
   # During ingestion, texts can be created before they're added to a project.
   # We don't want to index those orphaned texts.
   def should_index?
@@ -159,10 +145,6 @@ class Text < ApplicationRecord
 
   def age
     (Time.zone.today - created_at.to_date).to_i
-  end
-
-  def search_data
-    super.merge(parent_project: project&.id)
   end
 
   def multisearch_full_text

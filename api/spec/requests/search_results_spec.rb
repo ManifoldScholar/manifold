@@ -1,15 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe "Search Results API", elasticsearch: true, type: :request do
+RSpec.describe "Search Results API", type: :request do
   let_it_be(:bovary, refind: true) { FactoryBot.create :project, title: "Madame Bovary", description: "The force will be with you, always" }
   let_it_be(:babble, refind: true) { FactoryBot.create :project, title: "Madame Babble", description: "Peace be with you" }
-
-  before do
-    bovary && babble
-
-    Project.reindex
-    Project.searchkick_index.refresh
-  end
 
   let!(:keyword) { raise "must be set" }
 
@@ -48,28 +41,6 @@ RSpec.describe "Search Results API", elasticsearch: true, type: :request do
           }
         }
       )
-    end
-  end
-
-  # This is no longer true with PG Search and may not really be necessary.
-  xcontext "when searching only a negated needle" do
-    let(:keyword) { "-bovary" }
-
-    it "returns no results" do
-      expect_valid_search!
-
-      expect(@body).to include_json(data: [], meta: { pagination: { totalCount: 0 } })
-    end
-  end
-
-  # This is no longer true with PG Search and may not really be necessary.
-  xcontext "when searching only a negated phrase" do
-    let(:keyword) { %[-"the force"] }
-
-    it "returns no results" do
-      expect_valid_search!
-
-      expect(@body).to include_json(data: [], meta: { pagination: { totalCount: 0 } })
     end
   end
 end

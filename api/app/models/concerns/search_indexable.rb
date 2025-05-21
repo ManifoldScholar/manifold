@@ -181,26 +181,6 @@ module SearchIndexable
   # @return [<String>, nil]
   def multisearch_parent_keywords; end
 
-  # @!group Legacy Methods
-
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: multisearch_title,
-      keywords: multisearch_keywords,
-      parent_keywords: multisearch_parent_keywords,
-      makers: multisearch_makers,
-      metadata: multisearch_arbitrary_metadata,
-      full_text: multisearch_full_text,
-    }.merge(search_hidden)
-  end
-
-  def search_hidden
-    { hidden: hidden_for_multisearch? }
-  end
-
-  # @!endgroup
-
   private
 
   # @param [Hash, Array, String] data

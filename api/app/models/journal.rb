@@ -84,8 +84,6 @@ class Journal < ApplicationRecord
   scope :with_update_ability, ->(user = nil) { build_update_ability_scope_for user }
   scope :with_update_or_issue_update_ability, ->(user = nil) { build_update_or_issue_update_ability_for user }
 
-  scope :search_import, -> { includes(:collaborators, :makers) }
-
   multisearches! :description_plaintext
 
   has_keyword_search!(
@@ -95,15 +93,6 @@ class Journal < ApplicationRecord
       makers: %i[first_name last_name display_name]
     }
   )
-
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
-
-  def search_data
-    super.merge(creator: multisearch_creator)
-  end
 
   def multisearch_full_text
     description_plaintext

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe Project, type: :model do
   it "updates the sort_title when saved" do
     project = FactoryBot.build(:project, title: "A Hobbit's Journey")
@@ -109,16 +107,13 @@ RSpec.describe Project, type: :model do
     expect(project.uncollected_resources.count).to be 2
   end
 
-  context "can be searched", :elasticsearch do
-    it "by title" do
-      @project_a = FactoryBot.create(:project, title: "Bartholomew Smarts", featured: true)
-      @project_b = FactoryBot.create(:project, title: "Rambo Smarts", featured: true)
-      described_class.reindex
-      described_class.searchkick_index.refresh
-      results = described_class.filtered(keyword: "Bartholomew")
-      expect(results.length).to be 1
-      results = described_class.filtered(keyword: "Smarts")
-      expect(results.length).to be 2
+  context "when filtering" do
+    let_it_be(:project_a, refind: true) { FactoryBot.create(:project, title: "Bartholomew Smarts", featured: true) }
+    let_it_be(:project_b, refind: true) { FactoryBot.create(:project, title: "Rambo Smarts", featured: true) }
+
+    it "can find records by keyword containing part of the title", :aggregate_failures do
+      expect(described_class.filtered(keyword: "Bartholomew")).to include project_a
+      expect(described_class.filtered(keyword: "Smarts")).to include project_a, project_b
     end
   end
 
@@ -294,10 +289,6 @@ RSpec.describe Project, type: :model do
     end
 
     shared_examples_for "a valid filtered collection" do
-      it "does not duplicate items across pages" do # rubocop:todo RSpec/NoExpectationExample
-        pages.map { |number| filter! number }
-      end
-
       context "across the entire collection" do
         let!(:entire_collection) { pages.flat_map { |number| filter!(number).to_a } }
 

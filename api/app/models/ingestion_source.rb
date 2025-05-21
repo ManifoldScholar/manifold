@@ -12,14 +12,13 @@ class IngestionSource < ApplicationRecord
   include SearchIndexable
   include Attachments
   include HasKeywordSearch
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   classy_enum_attr :kind, enum: "IngestionSourceKind", allow_blank: false
 
-  # Attachments
   manifold_has_attached_file :attachment, :resource
 
-  # Constants
   KIND_COVER_IMAGE = "cover_image"
   KIND_NAVIGATION = "navigation"
   KIND_SECTION = "section"
@@ -53,21 +52,14 @@ class IngestionSource < ApplicationRecord
     end
   end
 
-  # Search
   has_keyword_search! against: TYPEAHEAD_ATTRIBUTES
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500)
 
-  # Associations
   belongs_to :text, inverse_of: :ingestion_sources
 
-  # Delegations
   delegate :project, to: :text
   delegate *IngestionSourceKind.predicates, to: :kind
   delegate :content_type, to: :attachment, allow_nil: true
 
-  # Validations
   validates :source_identifier, presence: true
   validates :attachment, presence: { on: :from_api }
 

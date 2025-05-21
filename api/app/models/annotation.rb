@@ -95,12 +95,6 @@ class Annotation < ApplicationRecord
 
   multisearches! :body, title_from: :subject, secondary_from: :body
 
-  searchkick(callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
-
-  # Scopes
-  scope :search_import, -> { includes(:creator, text_section: { text: :project }) }
   scope :only_annotations, -> { where(format: "annotation") }
   scope :only_highlights, -> { where(format: "highlight") }
   scope :created_by, ->(user) { where(creator: user) }
@@ -262,15 +256,6 @@ class Annotation < ApplicationRecord
     return nil unless reading_group_id
 
     ReadingGroupMembership.find_by(user: creator, reading_group: reading_group)
-  end
-
-  def search_data
-    super.merge(
-      creator: multisearch_creator,
-      parent_project: project&.id,
-      parent_text_section: text_section&.id,
-      parent_text: text&.id
-    )
   end
 
   def multisearch_full_text
