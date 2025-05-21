@@ -51,7 +51,7 @@ function TextTracksListContainer({ resource, route, confirm }) {
   return (
     <>
       {renderChildRoutes()}
-      <PageHeader type="list" title={t("titles.tracks")} />
+      <PageHeader type="list" title={t("titles.tracks")} hideBreadcrumbs />
       {!!tracks && (
         <EntitiesList
           entityComponent={TextTrackRow}
