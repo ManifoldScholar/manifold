@@ -505,7 +505,7 @@ class Navigation {
         args
       });
     }
-    if (kind === "audio" || kind === "video") {
+    if (kind === "video" && !externalVideo) {
       out.push({
         label: "titles.tracks",
         route: "backendResourceTracks",
