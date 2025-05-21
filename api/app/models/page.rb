@@ -10,7 +10,6 @@ class Page < ApplicationRecord
   include TrackedCreator
   include Sluggable
   include HasFormattedAttributes
-  include ClassyEnum::ActiveRecord
 
   classy_enum_attr :purpose, class_name: "PagePurpose"
 

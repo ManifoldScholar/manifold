@@ -93,14 +93,6 @@ class JournalIssue < ApplicationRecord
   delegate :finished, to: :project
   delegate :draft, to: :project
 
-  # Search
-  scope :search_import, -> {
-    includes(
-      :journal,
-      :project
-    )
-  }
-
   has_keyword_search! associated_against: {
     journal: [:title],
     journal_volume: [:number],
@@ -110,11 +102,6 @@ class JournalIssue < ApplicationRecord
   multisearch_parent_name :journal
 
   multisearch_secondary_attr :description_plaintext
-
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
 
   def sort_title_candidate
     pending_sort_title.blank? ? number.to_i : pending_sort_title.to_i

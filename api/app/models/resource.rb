@@ -122,17 +122,6 @@ class Resource < ApplicationRecord
 
   has_keyword_search! against: %i[title description]
 
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
-
-  scope :search_import, -> { includes(:resource_collections, :project) }
-
-  def search_data
-    super.merge(parent_project: project&.id)
-  end
-
   def multisearch_full_text
     [description_plaintext, caption].compact_blank.join("\n")
   end

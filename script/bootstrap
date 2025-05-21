@@ -24,6 +24,3 @@ if [ -f "package.json" ]; then
   yarn install
 fi
 cd .. &>/dev/null
-
-echo "==> Installing a local instance of ElasticSearch"
-bin/m install elasticsearch

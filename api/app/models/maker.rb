@@ -2,7 +2,6 @@
 
 # A person or organization involved with the creation of a text
 class Maker < ApplicationRecord
-  # Constants
   TYPEAHEAD_ATTRIBUTES = [:first_name, :last_name].freeze
   KEYWORD_SEARCH_ATTRIBUTES = %i[first_name middle_name last_name display_name].freeze
 
@@ -10,7 +9,6 @@ class Maker < ApplicationRecord
 
   PACKAGING_AVATAR_FORMAT = %[%<name>s_%<id>s.%<extension>s]
 
-  # Concerns
   include Filterable
   include Attachments
   include Authority::Abilities
@@ -19,40 +17,21 @@ class Maker < ApplicationRecord
   include SearchIndexable
   include HasKeywordSearch
 
-  # Associations
   has_many :collaborators, dependent: :destroy
   has_many :projects,
            through: :collaborators,
            source_type: "Project",
            source: :collaboratable
 
-  # Attachments
   manifold_has_attached_file :avatar, :image
 
-  # Misc
   with_parsed_name :prefix, :first_name, :middle_name, :last_name, :suffix
 
-  # Scopes
   scope :with_order, ->(by = nil) { by.present? ? order(by) : order(arel_sort_name.asc) }
 
   validate :name_is_present!
 
-  # Search
   has_keyword_search! against: KEYWORD_SEARCH_ATTRIBUTES
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500)
-
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: full_name,
-      first_name: first_name,
-      middle_name: middle_name,
-      last_name: last_name,
-      hidden: false
-    }
-  end
 
   def to_s
     full_name

@@ -12,15 +12,16 @@ RSpec.describe "Projects API", type: :request do
       end
     end
 
-    describe "it allows searching by keyword", :elasticsearch do
-      before do
-        FactoryBot.create(:project, title: "foo")
-        path = api_v1_projects_path(params: { filter: { keyword: "foo" } })
-        get path, headers: reader_headers
-      end
+    context "when searching by keyword" do
+      let_it_be(:project_foo, refind: true) { FactoryBot.create(:project, title: "foo") }
 
       it "has a 200 status code" do
-        expect(response).to have_http_status(:ok)
+        expect do
+          path = api_v1_projects_path(params: { filter: { keyword: "foo" } })
+          get path, headers: reader_headers
+        end
+
+        expect(response).to have_http_status(200)
       end
     end
   end

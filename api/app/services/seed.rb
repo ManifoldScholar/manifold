@@ -59,14 +59,6 @@ class Seed
   def make_system_user!(classification)
     classification = UserClassification.fetch(classification)
 
-    begin
-      User.fetch_by_classification(classification.to_s)
-    rescue Faraday::ConnectionFailed
-      # :nocov:
-      Rails.logger.warn "Unable to index user in ElasticSearch while running seed script."
-      # :nocov:
-    end
-
     user = User.fetch_by_classification(classification.to_s)
 
     logger.info Rainbow("Ensuring #{classification.text} user exists: #{user.email}").lightblue

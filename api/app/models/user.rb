@@ -105,7 +105,6 @@ class User < ApplicationRecord
 
   # Search
   has_keyword_search! against: %i[first_name last_name email]
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
 
   delegate *RoleName.global_predicates, to: :role
   delegate *RoleName.scoped_predicates, to: :kind
@@ -129,18 +128,6 @@ class User < ApplicationRecord
   end
 
   alias email_confirmed? email_confirmed
-
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: full_name,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      keywords: [role],
-      hidden: true
-    }
-  end
 
   def email=(value)
     super(value.try(:strip))

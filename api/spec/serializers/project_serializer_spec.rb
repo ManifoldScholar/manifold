@@ -1,22 +1,8 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-
 RSpec.describe V1::ProjectSerializer do
   it_behaves_like "a serializer", partial_by_default: true
   it_behaves_like "a collaborative serializer"
-
-  describe "when the collection is search results", elasticsearch: true do
-    let(:object) do
-      FactoryBot.create(:project, title: "test")
-      Project.filtered(keyword: "test")
-    end
-    let(:subject) { described_class.new(object, include: [:texts], params: { full: true }) } # rubocop:todo RSpec/SubjectDeclaration
-
-    it "successfully serializes the object to a String value" do
-      expect(subject.serialized_json).to be_instance_of String
-    end
-  end
 
   describe "when the object is a project summary and the serialization is partial" do
     let(:object) do

@@ -1,28 +1,25 @@
 # frozen_string_literal: true
 
-require "faker"
-require "open-uri"
 module Demonstration
   # Loads demo data into the Manifold installation
   class DataLoader
     def initialize
-      @logger = Logger.new($stdout)
+      # :nocov:
+      @logger = Logger.new(Rails.env.test? ? "/dev/null" : $stdout)
       @logger.formatter = proc { |severity, _datetime, _progname, msg|
         "#{severity.rjust(8)}: #{msg}\n"
       }
+      # :nocov:
     end
 
     def load
-      Searchkick.callbacks(false) do
-        clear_db
-        seed_db
-        create_admin_user
-        create_fake_users
-        create_pages
-        create_featured_projects_collection
-        import_projects
-      end
-      reindex_records
+      clear_db
+      seed_db
+      create_admin_user
+      create_fake_users
+      create_pages
+      create_featured_projects_collection
+      import_projects
     end
 
     private
@@ -40,12 +37,19 @@ module Demonstration
     end
 
     def import_projects
-      children = Pathname.new("../import").children.select(&:directory?)
+      # :nocov:
+      import_path = Rails.root.join("import")
+
+      return unless import_path.exist?
+
+      children = import_path.children.select(&:directory?)
+
       children.each do |child|
         next if File.file?(File.join(child, ".skip"))
 
         Importer::Project.new(child, cli_user, @logger).import(include_texts: true)
       end
+      # :nocov:
     end
 
     def seed_db
@@ -58,6 +62,7 @@ module Demonstration
                  ProjectCollection CollectionResource ResourceCollection Comment Event
                  Favorite Flag ProjectSubject Stylesheet Subject TwitterQuery
                  UpgradeResult)
+
       clear.each do |model_name|
         warn("Truncate #{model_name} table")
         model_name.constantize.destroy_all
@@ -91,34 +96,21 @@ module Demonstration
     end
 
     def create_featured_projects_collection
-      project_collection = ProjectCollection.create(title: "Featured Projects",
-                                                    featured_only: true,
-                                                    visible: true,
-                                                    number_of_projects: nil,
-                                                    smart: true,
-                                                    homepage: true,
-                                                    icon: "lamp",
-                                                    creator: cli_user)
+      project_collection = ProjectCollection.create(
+        title: "Featured Projects",
+        featured_only: true,
+        visible: true,
+        number_of_projects: nil,
+        smart: true,
+        homepage: true,
+        icon: "lamp",
+        creator: cli_user
+      )
       info("Creating project collection: #{project_collection.title}")
     end
 
-    def reindex_records
-      Project.reindex
-      info("Projects reindexed")
-      User.reindex
-      info("Users reindexed")
-      Maker.reindex
-      info("Makers reindexed")
-      Resource.reindex
-      info("Resources reindexed")
-      ResourceCollection.reindex
-      info("ResourceCollections reindexed")
-      Event.reindex
-      info("Events reindexed")
-    end
-
     def create_admin_user
-      u = User.find_or_create_by(email: "admin@castironcoding.com")
+      u = User.find_or_initialize_by(email: "admin@castironcoding.com")
       u.first_name = "Admin"
       u.last_name = "User"
       u.password = "Test123!"

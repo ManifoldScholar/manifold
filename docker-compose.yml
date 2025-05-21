@@ -22,30 +22,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0
-    environment:
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-      xpack.security.enabled: 'false'
-      discovery.type: single-node
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "10"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
-    restart: unless-stopped
-    healthcheck:
-      test: curl -s -f "http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=80s" >/dev/null || exit 1
-      interval: 100s
-      timeout: 120s
-      retries: 20
-      start_period: 120s
   redis:
     image: bitnami/redis:6.2.7-debian-10-r34
     platform: linux/amd64
@@ -88,8 +64,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      elasticsearch:
-        condition: service_healthy
       redis:
         condition: service_healthy
     env_file: docker/manifold.env
@@ -114,8 +88,6 @@ services:
       dockerfile: docker/development/Dockerfile
     depends_on:
       postgres:
-        condition: service_healthy
-      elasticsearch:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
@@ -154,8 +126,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      elasticsearch:
-        condition: service_healthy
       migrations:
         condition: service_completed_successfully
       redis:
@@ -192,8 +162,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      elasticsearch:
-        condition: service_healthy
       migrations:
         condition: service_completed_successfully
       redis:
@@ -220,8 +188,6 @@ services:
     command: bin/zhong zhong.rb
     depends_on:
       postgres:
-        condition: service_healthy
-      elasticsearch:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
@@ -251,8 +217,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      elasticsearch:
-        condition: service_healthy
       migrations:
         condition: service_completed_successfully
       redis:
@@ -280,8 +244,6 @@ services:
 
 volumes:
   bundle-cache:
-    driver: local
-  esdata:
     driver: local
   postgres-data:
     driver: local

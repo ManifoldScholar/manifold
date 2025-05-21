@@ -128,7 +128,6 @@ class Project < ApplicationRecord
   before_create :assign_publisher_defaults!
   before_update :prepare_to_reindex_children, if: :draft_changed?
   after_commit :trigger_creation_event, on: [:create]
-  after_commit :queue_reindex_children_job
 
   # Misc
   money_attributes :purchase_price
@@ -232,16 +231,6 @@ class Project < ApplicationRecord
     where(journal_issue_id: nil)
   }
 
-  # Search
-  scope :search_import, -> {
-    includes(
-      :collaborators,
-      :subjects,
-      :makers,
-      texts: :titles
-    )
-  }
-
   multisearch_draftable true
 
   multisearches! :description
@@ -256,11 +245,6 @@ class Project < ApplicationRecord
       tags: %i[name]
     }
   )
-
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
 
   def multisearch_full_text
     description_plaintext
@@ -364,12 +348,6 @@ class Project < ApplicationRecord
     updated? && updated_at >= 1.week.ago
   end
 
-  def reindex_children
-    resources.reindex(:search_hidden, mode: :async)
-    texts.reindex(:search_hidden, mode: :async)
-    TextSection.in_texts(texts).reindex(:search_hidden, mode: :async)
-  end
-
   def standalone?
     !standalone_mode_disabled?
   end
@@ -420,17 +398,6 @@ class Project < ApplicationRecord
     return unless default.present?
 
     metadata[attr] = default
-  end
-
-  def prepare_to_reindex_children
-    @reindex_children = true
-  end
-
-  def queue_reindex_children_job
-    return unless @reindex_children
-
-    ProjectJobs::ReindexChildren.perform_later(self)
-    @reindex_children = false
   end
 
   def trigger_creation_event
