@@ -166,9 +166,15 @@ export default class DraggableEventHelper {
       attributes: {
         type: this.type,
         position: this.position,
-        renderable: true
+        renderable: true,
+        showAllCollections: false
       },
-      relationships: {}
+      relationships: {
+        featuredCollections: [],
+        featuredResources: [],
+        includedCategories: [],
+        texts: []
+      }
     };
   }
 
