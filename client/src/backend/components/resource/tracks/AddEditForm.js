@@ -66,6 +66,7 @@ export default function AddEditForm({ resource, track, refresh }) {
       <Form.TextInput
         label={t("records.tracks.srclang")}
         name="attributes[srclang]"
+        instructions={t("records.tracks.srclang_instructions")}
         placeholder={t("records.tracks.srclang_placeholder")}
       />
       <Upload
