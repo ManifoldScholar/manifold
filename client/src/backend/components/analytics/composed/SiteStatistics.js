@@ -53,6 +53,11 @@ class SiteStatistics extends Component {
         icon: "download24",
         label: this.props.t("glossary.download_title_case_other"),
         value: this.stats.totalDownloadCount ?? 0
+      },
+      {
+        icon: "share24",
+        label: this.props.t("glossary.share_title_case_other"),
+        value: this.stats.totalShareCount ?? 0
       }
     ];
   }

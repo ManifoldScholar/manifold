@@ -107,6 +107,10 @@ class Statistics
     Analytics::Event.where(name: DOWNLOAD_EVENT_NAMES).count
   end
 
+  def total_share_count
+    Analytics::Event.where(name: :share_text_section).count
+  end
+
   private
 
   # @param [Numeric] value
