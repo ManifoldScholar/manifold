@@ -44,6 +44,52 @@ module API
         )
       end
 
+      def reset
+        @ingestion.reset
+        @ingestion.save
+
+        render_single_resource(
+          @ingestion,
+          include: [:creator],
+          location: location(@ingestion)
+        )
+      end
+
+      def analyze
+        @ingestion.analyze
+        @ingestion.save
+
+        render_single_resource(
+          @ingestion,
+          include: [:creator],
+          location: location(@ingestion)
+        )
+      end
+
+      def process
+        @ingestion.process(current_user)
+        @ingestion.save
+
+        render_single_resource(
+          @ingestion,
+          include: [:creator],
+          location: location(@ingestion)
+        )
+      end
+
+      def reingest
+        @ingestion.reset
+        @ingestion.analyze
+        @ingestion.process(current_user)
+        @ingestion.save
+
+        render_single_resource(
+          @ingestion,
+          include: [:creator],
+          location: location(@ingestion)
+        )
+      end
+
       private
 
       def location(_ingestion)
