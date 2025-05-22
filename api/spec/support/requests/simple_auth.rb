@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_context "simple auth request" do
-  let(:current_user) { FactoryBot.create :user }
+  let_it_be(:current_user, refind: true) { FactoryBot.create :user }
 
   let(:auth_token) do
     current_user.then do |user|
