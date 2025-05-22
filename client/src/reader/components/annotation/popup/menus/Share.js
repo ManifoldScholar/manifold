@@ -45,11 +45,16 @@ function ShareMenu({
   };
 
   const {
-    onClick: onCopyClick,
+    onClick: handleCopyClick,
     label: copyLabel,
     icon: copyIcon,
     srLabel: copySrLabel
-  } = useCopyLinkToSelection(text, section, selectionState.textFragment);
+  } = useCopyLinkToSelection(
+    text,
+    section,
+    selectionState.textFragment,
+    trackShareEvent
+  );
 
   return (
     <Menu
@@ -81,7 +86,7 @@ function ShareMenu({
       )}
       <MenuItem
         menu={{ ...menu, visible }}
-        onClick={onCopyClick}
+        onClick={handleCopyClick}
         kind="any"
         label={copyLabel}
         srLabel={copySrLabel}

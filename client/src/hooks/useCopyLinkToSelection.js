@@ -17,7 +17,12 @@ export const urlWithTextFragment = (url, fragment) => {
   return `${url}#:~:text=${prefix}${start}${end}${suffix}`;
 };
 
-export default function useCopyLinkToSelection(text, section, urlTextFragment) {
+export default function useCopyLinkToSelection(
+  text,
+  section,
+  urlTextFragment,
+  afterCopy
+) {
   const { t } = useTranslation();
 
   const getBaseUrl = useCallback(() => {
@@ -54,7 +59,10 @@ export default function useCopyLinkToSelection(text, section, urlTextFragment) {
   /* eslint-disable */
   const onClick = () => {
     const href = generateUrl();
-    navigator?.clipboard.writeText(href).then(() => setCopied(true));
+    navigator?.clipboard.writeText(href).then(() => {
+      setCopied(true);
+      if (afterCopy) afterCopy();
+    });
   };
   /* eslint-enable */
 
