@@ -7,7 +7,7 @@ RSpec.describe "Email Confirmations" do
     it "confirms with the right token" do
       expect do
         get api_v1_email_confirmation_path(user, token: user.email_confirmation_token)
-      end.to change { user.reload.email_confirmed }.from(false).to(true)
+      end.to execute_safely.and change { user.reload.email_confirmed }.from(false).to(true)
 
       expect(response).to have_http_status(:found)
     end
@@ -15,7 +15,7 @@ RSpec.describe "Email Confirmations" do
     it "does not confirm with an invalid token" do
       expect do
         get api_v1_email_confirmation_path(user, token: "something invalid")
-      end.to keep_the_same { user.reload.email_confirmed }
+      end.to execute_safely.and keep_the_same { user.reload.email_confirmed }
 
       expect(response).to have_http_status(:found)
     end
@@ -23,7 +23,7 @@ RSpec.describe "Email Confirmations" do
     it "does not confirm with a missing token" do
       expect do
         get api_v1_email_confirmation_path(user, token: nil)
-      end.to keep_the_same { user.reload.email_confirmed }
+      end.to execute_safely.and keep_the_same { user.reload.email_confirmed }
 
       expect(response).to have_http_status(:found)
     end
