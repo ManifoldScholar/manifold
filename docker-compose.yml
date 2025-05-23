@@ -219,7 +219,7 @@ services:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
-      redis:
+      test-redis:
         condition: service_healthy
     env_file:
       - ./docker/manifold.env
