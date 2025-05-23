@@ -165,12 +165,17 @@ class ApplicationController < ActionController::API
   end
 
   def render_error_response(error)
+    # :nocov:
+    raise error if Rails.env.test?
+
     options = {
       status: 500,
       title: "Manifold encountered an error",
       detail: error.message
     }
+
     render json: { errors: build_api_error(**options) }, status: :internal_server_error
+    # :nocov:
   end
 
   private

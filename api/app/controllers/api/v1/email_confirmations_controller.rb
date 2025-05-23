@@ -15,7 +15,7 @@ module API
 
         url.query_values = (url.query_values || {}).merge(email_confirmed: result.success?)
 
-        redirect_to url.to_s
+        redirect_to url.to_s, allow_other_host: true
       end
 
       # Request a new email confirmation message
