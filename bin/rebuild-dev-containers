@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -eu
+
+if ! command -v jq 2>&1 >/dev/null; then
+  echo "Please install jq via:"
+  echo -e "\tbrew install jq"
+
+  exit 1
+fi
+
+docker compose rm -sfv migrations web cable worker clock spec
+
+bundle_volume="$(docker compose config --format json | jq -r '.volumes["bundle-cache"].name')"
+
+docker volume rm "$bundle_volume"
+
+docker compose up --force-recreate --build migrations
+
+docker compose up -d --force-recreate --build --remove-orphans web cable worker clock spec
