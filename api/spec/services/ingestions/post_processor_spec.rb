@@ -12,14 +12,15 @@ RSpec.describe Ingestions::PostProcessor do
     end
   end
   let_it_be(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
-  let_it_be(:outcome) { Ingestions::PostProcessor.run(manifest: manifest, text: text, context: context) }
+  let_it_be(:outcome) { described_class.run(manifest: manifest, text: text, context: context) }
 
   describe "the text section bodies" do
     it "generates the body" do
-      expect(text.text_sections.pluck(:body)).to_not include nil
+      expect(text.text_sections.pluck(:body)).not_to include nil
     end
+
     it "generates the body_json" do
-      expect(text.text_sections.pluck(:body_json)).to_not include nil
+      expect(text.text_sections.pluck(:body_json)).not_to include nil
     end
   end
 
@@ -71,13 +72,13 @@ RSpec.describe Ingestions::PostProcessor do
 
     context "when text sections" do
       it "destroys the compiled records" do
-        expect { described_class.run(manifest: reingestion_manifest, text: after_text, context: context) }.to change { TextSection.count }.by -1
+        expect { described_class.run(manifest: reingestion_manifest, text: after_text, context: context) }.to change(TextSection, :count).by -1
       end
     end
 
     context "when stylesheets" do
       it "destroys the compiled records" do
-        expect { described_class.run(manifest: reingestion_manifest, text: after_text, context: context) }.to change { Stylesheet.count }.by -1
+        expect { described_class.run(manifest: reingestion_manifest, text: after_text, context: context) }.to change(Stylesheet, :count).by -1
       end
 
       it "does not destroy user created stylesheets" do

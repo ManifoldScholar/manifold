@@ -1,4 +1,5 @@
-# rubocop:disable Metrics/AbcSize
+# frozen_string_literal: true
+
 module Collectable
   extend ActiveSupport::Concern
 
@@ -96,4 +97,3 @@ module Collectable
     end
   end
 end
-# rubocop:enable Metrics/AbcSize

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   # This represents the uploader for a given subclass of {ExportStrategies::AbstractStrategy}.
   #
@@ -38,7 +40,6 @@ module ExportStrategies
     # @param [ExportStrategies::UploadPayload] payload
     # @return [void]
     # @return [Dry::Monads::Result::Failure]
-    # rubocop:disable Lint/UnusedMethodArgument
     def upload!(payload)
       # :nocov:
       raise NotImplementedError, "Must implement #{self.class}##{__method__}"

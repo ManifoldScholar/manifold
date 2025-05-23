@@ -19,37 +19,37 @@ RSpec.describe User, type: :model do
 
   it "should not be valid without a password" do
     user = FactoryBot.build(:user, password: nil, password_confirmation: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should be not be valid with a short password" do
     user = FactoryBot.build(:user, password: "short", password_confirmation: "short")
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid with a confirmation mismatch" do
     user = FactoryBot.build(:user, password: "short", password_confirmation: "long")
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid without email" do
     user = FactoryBot.build(:user, email: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid without first_name" do
     user = FactoryBot.build(:user, first_name: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid without last_name" do
     user = FactoryBot.build(:user, last_name: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "should not be valid with an invalid role" do
     user = FactoryBot.build(:user, role: "dog")
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it "has a correctly formatted full name" do
@@ -64,7 +64,7 @@ RSpec.describe User, type: :model do
 
   it "has a default role 'reader'" do
     user = FactoryBot.create(:user)
-    expect(user.has_role?(:reader)).to eq true
+    expect(user.has_role?(:reader)).to be true
   end
 
   it "sets a role correctly" do
@@ -75,7 +75,7 @@ RSpec.describe User, type: :model do
 
   it "has a case-insensitive email" do
     user = FactoryBot.create(:user, email: "rowan@woof.dog")
-    expect(User.find_by(email: "ROWAN@WOOF.DOG")).to eq user
+    expect(described_class.find_by(email: "ROWAN@WOOF.DOG")).to eq user
   end
 
   context "when setting admin_verified" do
@@ -85,14 +85,14 @@ RSpec.describe User, type: :model do
       expect do
         user.admin_verified = true
         user.save!
-      end.to change { user.verified_by_admin_at }.from(nil).to(a_kind_of(ActiveSupport::TimeWithZone))
-        .and change { user.established }.from(false).to(true)
+      end.to change(user, :verified_by_admin_at).from(nil).to(a_kind_of(ActiveSupport::TimeWithZone))
+        .and change(user, :established).from(false).to(true)
 
       expect do
         user.admin_verified = ?0
         user.save!
-      end.to change { user.verified_by_admin_at }.from(a_kind_of(ActiveSupport::TimeWithZone)).to(nil)
-        .and change { user.established }.from(true).to(false)
+      end.to change(user, :verified_by_admin_at).from(a_kind_of(ActiveSupport::TimeWithZone)).to(nil)
+        .and change(user, :established).from(true).to(false)
     end
   end
 
@@ -109,7 +109,7 @@ RSpec.describe User, type: :model do
         user.role = :editor
 
         user.save!
-      end.to change { user.role }.and keep_the_same { user.permissions.reload.to_a }
+      end.to change(user, :role).and keep_the_same { user.permissions.reload.to_a }
     end
   end
 
@@ -123,7 +123,7 @@ RSpec.describe User, type: :model do
           user.add_role :editor
         end.to change { user.role.to_sym }.from(:reader).to(:editor)
           .and change { user.kind.to_sym }.from(:reader).to(:editor)
-          .and change { user.trusted }.from(false).to(true)
+          .and change(user, :trusted).from(false).to(true)
       end
     end
 
@@ -143,29 +143,25 @@ RSpec.describe User, type: :model do
     end
   end
 
-  context "can be searched", :elasticsearch do
-    let(:first) { "189274891457612" }
-    let(:last) { "HIOUFHAOASJDFIO" }
-    let(:email) { "#{first}@#{last}.com" }
+  context "when searching" do
+    let_it_be(:first) { "189274891457612" }
+    let_it_be(:last) { "HIOUFHAOASJDFIO" }
+    let_it_be(:email) { "#{first}@#{last}.com" }
 
-    before(:each) do
-      user = FactoryBot.create(:user, first_name: first, last_name: last, email: email)
-      User.reindex
-      User.searchkick_index.refresh
-    end
+    let_it_be(:user) { FactoryBot.create(:user, first_name: first, last_name: last, email: email) }
 
     it "by first name" do
-      results = User.filtered(keyword: first, typeahead: true)
+      results = described_class.filtered(keyword: first, typeahead: true)
       expect(results.length).to be 1
     end
 
     it "by last name" do
-      results = User.filtered(keyword: last, typeahead: true)
+      results = described_class.filtered(keyword: last, typeahead: true)
       expect(results.length).to be 1
     end
 
     it "by email" do
-      results = User.filtered(keyword: email, typeahead: true)
+      results = described_class.filtered(keyword: email, typeahead: true)
       expect(results.length).to be 1
     end
   end
@@ -173,12 +169,12 @@ RSpec.describe User, type: :model do
   context "when resetting password" do
     let(:user) do
       u = FactoryBot.create(:user, password: "password", password_confirmation: "password")
-      User.find u.id
+      described_class.find u.id
     end
 
     it "generates a reset password token" do
       user.generate_reset_token
-      expect(user.reset_password_token).to_not be_nil
+      expect(user.reset_password_token).not_to be_nil
     end
 
     it "expires the reset password token after one hour" do
@@ -197,7 +193,7 @@ RSpec.describe User, type: :model do
 
     it "can be generated automatically" do
       user.force_reset_password
-      expect(user.password).to_not eq("password")
+      expect(user.password).not_to eq("password")
       expect(user.password.length).to eq(12)
       expect(user).to be_valid
     end
@@ -206,7 +202,7 @@ RSpec.describe User, type: :model do
   context "already exists" do
     let(:user) do
       u = FactoryBot.create(:user, password: "password", password_confirmation: "password")
-      User.find u.id
+      described_class.find u.id
     end
 
     it "should be valid with no changes" do
@@ -215,7 +211,7 @@ RSpec.describe User, type: :model do
 
     it "should not be valid with an empty password" do
       user.password = user.password_confirmation = " "
-      expect(user).to_not be_valid
+      expect(user).not_to be_valid
     end
 
     it "should be valid with a new (valid) password" do
@@ -225,13 +221,13 @@ RSpec.describe User, type: :model do
 
     it "should be able to authenticate" do
       the_user = user
-      u = User.find_by(email: the_user.email).try(:authenticate, "password")
+      u = described_class.find_by(email: the_user.email).try(:authenticate, "password")
       expect(u).to eq(the_user)
     end
 
     it "should not authenticate if the password is incorrect" do
-      u = User.find_by(email: "test@test.com").try(:authenticate, "rambo")
-      expect(u).to eq(nil)
+      u = described_class.find_by(email: "test@test.com").try(:authenticate, "rambo")
+      expect(u).to be_nil
     end
   end
 
@@ -242,18 +238,18 @@ RSpec.describe User, type: :model do
 
       it "can create a user that does not already exist" do
         expect do
-          User.__send__(method_name)
-        end.to change { User.where(classification: classification).count }.from(0).to(1)
+          described_class.__send__(method_name)
+        end.to change { described_class.where(classification: classification).count }.from(0).to(1)
       end
 
       it "exposes a way to tell if a user was created or not" do
         expect do |b|
-          User.__send__(method_name, &b)
-        end.to yield_with_args(true, a_kind_of(User))
+          described_class.__send__(method_name, &b)
+        end.to yield_with_args(true, a_kind_of(described_class))
 
         expect do |b|
-          User.__send__(method_name, &b)
-        end.to yield_with_args(false, a_kind_of(User))
+          described_class.__send__(method_name, &b)
+        end.to yield_with_args(false, a_kind_of(described_class))
       end
     end
 

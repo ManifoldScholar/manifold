@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Converters
     class Markdown < Ingestions::Converters::AbstractConverter
@@ -65,7 +67,6 @@ module Ingestions
           "<meta name='dc.#{tag}' content='#{content}'>"
         end.presence || []
       end
-
     end
   end
 end

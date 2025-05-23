@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Analytics
   class Visit < ApplicationRecord
     DEMOGRAPHICS_ATTRIBUTES = %i[

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Notifications
   class ComposeDigestEvents < ActiveInteraction::Base
     DEFAULT_INCLUDES = [
@@ -54,7 +56,7 @@ module Notifications
     end
 
     # @return [{ Project => <Event> }]
-    def event_scope(*subject_types, to_include: nil)
+    def event_scope(*subject_types, to_include: nil, &block)
       raise "Must include group_by block" unless block_given?
 
       includes = DEFAULT_INCLUDES.deep_dup
@@ -66,7 +68,7 @@ module Notifications
         .includes(includes)
         .where(project: project_ids)
         .created(time_range)
-        .group_by(&Proc.new)
+        .group_by(&block)
     end
 
     # @return [ActiveRecord::Relation<Project>]

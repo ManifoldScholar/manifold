@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "auth_token"
 
 # Includes authentication related functionality
@@ -57,7 +59,7 @@ module Authentication
   # JWT's are stored in the Authorization header using this format:
   # Bearer somerandomstring.encoded-payload.anotherrandomstring
   def http_auth_token
-    @http_auth_token ||= request.headers["Authorization"].split(" ").last if request.headers["Authorization"].present?
+    @http_auth_token ||= request.headers["Authorization"].split.last if request.headers["Authorization"].present?
   end
 
   # Returns user with auth token
@@ -99,7 +101,7 @@ module Authentication
       title: I18n.t("controllers.errors.auth_timeout.title").titlecase,
       detail: I18n.t("controllers.errors.auth_timeout.detail")
     }
-    render json: { errors: build_api_error(options) }, status: 419
+    render json: { errors: build_api_error(**options) }, status: 419
   end
 
   def forbidden_resource
@@ -108,7 +110,7 @@ module Authentication
       title: I18n.t("controllers.errors.forbidden_generic.title").titlecase,
       detail: I18n.t("controllers.errors.forbidden_generic.detail")
     }
-    render json: { errors: build_api_error(options) }, status: :forbidden
+    render json: { errors: build_api_error(**options) }, status: :forbidden
   end
 
   def user_not_authenticated
@@ -117,6 +119,6 @@ module Authentication
       title: I18n.t("controllers.errors.unauthorized.title").titlecase,
       detail: I18n.t("controllers.errors.unauthorized.detail")
     }
-    render json: { errors: build_api_error(options) }, status: :unauthorized
+    render json: { errors: build_api_error(**options) }, status: :unauthorized
   end
 end

@@ -6,6 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   INHERITS = Dux.inherits(self).freeze
 
+  include AssociationHelpers
   include ClassyEnum::ActiveRecord
   include ArelHelpers
   include DetectsSpam

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocumentation
   class DryTypesParser
     class << self
@@ -56,13 +58,11 @@ module APIDocumentation
       end
 
       def allowed_meta_values(type, allowed_swagger_meta_types)
-        type.meta.select do |k, _|
-          allowed_swagger_meta_types.include? k
-        end
+        type.meta.slice(*allowed_swagger_meta_types)
       end
 
       def add_description_for_uniqueness(converted_hash)
-        converted_hash[:description] = (converted_hash[:description].to_s + " Must be unique.").strip
+        converted_hash[:description] = "#{converted_hash[:description]} Must be unique.".strip
         converted_hash
       end
 
@@ -109,7 +109,7 @@ module APIDocumentation
         if keys?(type)
           return {
             type: "object",
-            properties: type.keys.map { |item| [item.name, convert(item.type)] }.to_h
+            properties: type.keys.to_h { |item| [item.name, convert(item.type)] }
           }
         end
 

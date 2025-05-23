@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails"
@@ -41,17 +43,20 @@ require_relative "../lib/manifold_env"
 
 ActionMailer::Base.add_delivery_method :manifold_dynamic, DynamicMailer::Mailer
 
+require_relative "../lib/global_types/array_types"
+require_relative "../lib/patches/support_websearch"
+
 module ManifoldApi
   # Manifold main application
-
   class Application < Rails::Application
+    # Configure the path for configuration classes that should be used before initialization
+    # NOTE: path should be relative to the project root (Rails.root)
+    # config.anyway_config.autoload_static_config_path = "config/configs"
+    #
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 7.0
 
-    # TODO: Switch over to :zeitwerk autoloader.
-    # See https://weblog.rubyonrails.org/2019/2/22/zeitwerk-integration-in-rails-6-beta-2/#backwards-incompatibility
-    config.autoloader = :zeitwerk
     config.autoload_paths += %W(#{config.root}/app/lib)
 
     config.action_mailer.delivery_method = :manifold_dynamic
@@ -78,8 +83,7 @@ module ManifoldApi
 
     # The default locale is :en and all translations from
     # config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join("config",
-                                                 "locales", "**", "*.{rb,yml}")]
+    config.i18n.load_path += Rails.root.glob('config/locales/**/*.{rb,yml}')
     # config.i18n.default_locale = :de
 
     # Only loads a smaller set of middleware suitable for API only apps.
@@ -89,6 +93,7 @@ module ManifoldApi
 
     config.eager_load_paths += [
       "#{config.root}/app/jobs",
+      "#{config.root}/app/models",
       "#{config.root}/app/operations",
       "#{config.root}/app/services",
       "#{config.root}/app/serializers",

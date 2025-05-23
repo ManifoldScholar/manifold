@@ -1,5 +1,6 @@
-class VersionAuthorizer < ApplicationAuthorizer
+# frozen_string_literal: true
 
+class VersionAuthorizer < ApplicationAuthorizer
   def self.readable_by?(user, options = {})
     return true if editor_permissions?(user)
     return false unless options[:for]
@@ -7,5 +8,4 @@ class VersionAuthorizer < ApplicationAuthorizer
 
     options[:for].log_readable_by? user
   end
-
 end

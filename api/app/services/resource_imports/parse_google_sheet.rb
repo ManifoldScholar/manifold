@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceImports
   class ParseGoogleSheet < ActiveInteraction::Base
     record :resource_import
@@ -33,6 +35,5 @@ module ResourceImports
     def session
       @session ||= ::Factory::DriveSession.create_service_account_session
     end
-
   end
 end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class ProjectExport < ApplicationRecord
   include ArchiveUploader::Attachment.new(:asset)
   include HasExportKind
 
   belongs_to :project, inverse_of: :project_exports
-  has_many :project_export_statuses, inverse_of: :project_export
+  has_many_readonly :project_export_statuses, inverse_of: :project_export
 
   upsert_keys %i[project_id export_kind fingerprint]
 

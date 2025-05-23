@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Projects
@@ -9,7 +11,7 @@ module API
           authority_actions create_from_roles: :create
 
           resourceful! Collaborator, authorize_options: { except: [:index, :show] } do
-            @project.collaborators.filtered(collaborator_filter_params)
+            @project.collaborators.filtered(**collaborator_filter_params)
           end
 
           def index

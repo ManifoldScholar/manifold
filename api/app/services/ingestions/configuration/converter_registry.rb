@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Configuration
     # @api private
@@ -9,7 +11,6 @@ module Ingestions
           definition.interaction.convertible_extensions
         end
       end
-
     end
   end
 end

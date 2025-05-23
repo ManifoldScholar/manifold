@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module API
   module V1
     class EntitlementTargetsController < ApplicationController
       resourceful! EntitlementTarget do
+        # Intentionally left blank.
       end
 
       def index

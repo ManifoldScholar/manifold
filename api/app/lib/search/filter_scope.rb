@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Search
   class FilterScope
-
     def initialize
       @filter = {}
 
@@ -30,6 +31,5 @@ module Search
     def to_hash
       @filter
     end
-
   end
 end

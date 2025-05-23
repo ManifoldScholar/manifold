@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Journals
@@ -7,7 +9,7 @@ module API
 
           resourceful! Entitlement, authorize_options: { except: [:index] } do
             Entitlement.filtered(
-              with_pagination!(entitlement_filter_params),
+              **with_pagination!(entitlement_filter_params),
               scope: Entitlement.where(subject_type: "Journal", subject_id: params[:journal_id])
             )
           end

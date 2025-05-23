@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
   class OauthProvider
     include Comparable
@@ -110,7 +112,6 @@ module ManifoldEnv
       end.presence
     end
 
-    # rubocop:disable Style/CaseEquality
     def indifferently_compare(left, right)
       if right.is_a?(String)
         left.to_s == right
@@ -118,7 +119,5 @@ module ManifoldEnv
         left === right
       end
     end
-    # rubocop:enable Style/CaseEquality
   end
-  # rubocop:enable
 end

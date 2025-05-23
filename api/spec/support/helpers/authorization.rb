@@ -20,33 +20,18 @@ module TestHelpers
     end
 
     def matcher_for_ability(ability)
-      "be_#{Authority.abilities.fetch(ability)}_by".to_sym
+      :"be_#{Authority.abilities.fetch(ability)}_by"
     end
 
     # Roughly...
     def indefinite_article_for(klass)
-      return nil if klass == Settings || klass == Statistics
+      return nil if [Settings, Statistics].include?(klass)
       return "a " unless %w(a e i o u).include? klass.to_s.downcase.first
       "an "
     end
   end
 
   def anonymous_user
-    Naught.build do |config|
-      config.impersonate User
-      config.predicates_return false
-
-      def role
-        nil
-      end
-
-      def kind
-        nil
-      end
-
-      def can_read?(resource, options = {})
-        resource.readable_by? self, options
-      end
-    end.new
+    ::AnonymousUser.new
   end
 end

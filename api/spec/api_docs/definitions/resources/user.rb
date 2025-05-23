@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       class User
-
-        BODY_RESPONSE_DESCRIPTION = <<~HEREDOC.freeze
+        BODY_RESPONSE_DESCRIPTION = <<~HEREDOC
           Some user data is private and only returned if the user resource being returned is the same as the user requesting the resource, or if the user requesting the user resource is authorized to update that user. Private data includes the following attributes:
           * email
           * createdAt
@@ -11,7 +12,7 @@ module APIDocs
           * kind
         HEREDOC
 
-        BODY_REQUEST_DESCRIPTION = <<~HEREDOC.freeze
+        BODY_REQUEST_DESCRIPTION = <<~HEREDOC
           The `role` attribute may only be set or updated by admin users.
         HEREDOC
 
@@ -35,7 +36,7 @@ module APIDocs
               colors: Types::Hash, # TODO: Flesh out class abilities
               typography: Types::Hash, # TODO: Flesh out class abilities
               reading_groups: Types::Hash # TODO: Flesh out class abilities
-              ),
+            ),
               locale: Types::Hash
           ),
           notification_preferences_by_kind: Types::Array.of(
@@ -57,13 +58,11 @@ module APIDocs
         }.freeze
 
         class << self
-
           include APIDocs::Definitions::Resource
 
           def create_attributes
             request_attributes.except(:unsubscribe, :remove_avatar)
           end
-
         end
       end
     end

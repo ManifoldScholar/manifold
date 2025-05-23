@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalImport
   class Match < ActiveInteraction::Base
     def execute

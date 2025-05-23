@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Fingerprints
   # @see Fingerprints::Recalculate
   class RecalculateJob < ApplicationJob

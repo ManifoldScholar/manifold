@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Strategy::Document::TOC do
@@ -23,17 +25,16 @@ RSpec.describe Ingestions::Strategy::Document::TOC do
     end
 
     it "correctly generates a toc structure" do
-      expected =  [{:label=>"A", :anchor=>nil, :source_path=>nil, :children=>[
-                      {:label=>"A/1", :anchor=>nil, :source_path=>nil, :children=>[
-                        {:label=>"A/1/a",:anchor=>nil,:source_path=>nil, :children=>[
-                          {:label=>"A/1/a/i",:anchor=>nil,:source_path=>nil, :children=>[]}
-                        ]}
-                      ]},
-                      {:label=>"A/2",:anchor=>nil,:source_path=>nil, :children=>[
-                        {:label=>"A/2/a", :anchor=>nil, :source_path=>nil, :children=>[]}
-                      ]}
-                    ]}
-                   ]
+      expected =  [{ label: "A", anchor: nil, source_path: nil, children: [
+        { label: "A/1", anchor: nil, source_path: nil, children: [
+          { label: "A/1/a", anchor: nil, source_path: nil, children: [
+            { label: "A/1/a/i", anchor: nil, source_path: nil, children: [] }
+          ] }
+        ] },
+        { label: "A/2", anchor: nil, source_path: nil, children: [
+          { label: "A/2/a", anchor: nil, source_path: nil, children: [] }
+        ] }
+      ] }]
       expect(inspector.toc).to eq expected
     end
   end
@@ -63,20 +64,20 @@ RSpec.describe Ingestions::Strategy::Document::TOC do
     end
 
     it "correctly generates a toc structure" do
-      expected = [{:label=>"A", :anchor=>nil, :source_path=>nil, :children=>[]},
-                  {:label=>"B", :anchor=>nil, :source_path=>nil, :children=>[
-                    {:label=>"B/1", :anchor=>nil, :source_path=>nil, :children=>[
-                      {:label=>"B/1/a",:anchor=>nil,:source_path=>nil, :children=>[]},
-                      {:label=>"B/1/b", :anchor=>nil, :source_path=>nil, :children=>[]},
-                      {:label=>"B/1/c",:anchor=>nil,:source_path=>nil, :children=>[]}
+      expected = [{ label: "A", anchor: nil, source_path: nil, children: [] },
+                  { label: "B", anchor: nil, source_path: nil, children: [
+                    { label: "B/1", anchor: nil, source_path: nil, children: [
+                      { label: "B/1/a", anchor: nil, source_path: nil, children: [] },
+                      { label: "B/1/b", anchor: nil, source_path: nil, children: [] },
+                      { label: "B/1/c", anchor: nil, source_path: nil, children: [] }
 
-                    ]},
-                  ]},
-                  {:label=>"C", :anchor=>nil, :source_path=>nil, :children=>[
-                    {:label=>"C/1",:anchor=>nil,:source_path=>nil, :children=>[
-                      :label=>"C/1/a",:anchor=>nil,:source_path=>nil, :children=>[]
-                    ]}
-                  ]}]
+                    ] },
+                  ] },
+                  { label: "C", anchor: nil, source_path: nil, children: [
+                    { label: "C/1", anchor: nil, source_path: nil, children: [
+                      label: "C/1/a", anchor: nil, source_path: nil, children: []
+                    ] }
+                  ] }]
       actual = inspector.toc
       expect(actual).to eq expected
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   class TargetNameFormatter
     extend Dry::Initializer
@@ -8,9 +10,9 @@ module ExportStrategies
     include Dry::Matcher.for(:format, with: Dry::Matcher::ResultMatcher)
     include ExportStrategies::Import[format_pipeline: "pipelines.format_target_name"]
 
-    DATE_FORMAT = "%Y-%m-%d".freeze
-    TIME_FORMAT = "%Y-%m-%dT%H%M%S".freeze
-    NO_LEADING_DOT = /\A(?!\.)(.+)\z/.freeze
+    DATE_FORMAT = "%Y-%m-%d"
+    TIME_FORMAT = "%Y-%m-%dT%H%M%S"
+    NO_LEADING_DOT = /\A(?!\.)(.+)\z/
 
     option :export_asset_extension, Types::Coercible::String, default: proc { ".zip" }
     option :export_created_at, Types::Time, default: proc { Time.current }
@@ -33,8 +35,8 @@ module ExportStrategies
 
     # @see ExportStrategies::Operations::FormatTargetName
     # @param [String] format
-    def call(format, &block)
-      format_pipeline.with_step_args(apply_format: [{ format: format }]).call(self, &block)
+    def call(format, &)
+      format_pipeline.with_step_args(apply_format: [{ format: format }]).call(self, &)
     end
 
     # @api private

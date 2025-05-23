@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= "test"
 require "spec_helper"
@@ -102,7 +104,7 @@ Dry::Effects.load_extensions :rspec
 # require only the support files necessary.
 #
 # Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -159,8 +161,12 @@ RSpec.configure do |config|
   config.include ActiveJob::TestHelper
 
   # Clean up any jobs before each run.
-  config.before(:each) do
+  config.before do
     clear_enqueued_jobs
+  end
+
+  config.before(:all, type: :request) do
+    host! ENV['DOMAIN']
   end
 
   config.after do
@@ -201,32 +207,8 @@ RSpec.configure do |config|
     ingestion_dir.each_child(&:rmtree)
   end
 
-  config.before(:suite) do
-    Searchkick.disable_callbacks
-  end
-
-  allowed_net_connect = [
-    /googleapis\.com/
-  ]
-
-  # config.around(:each, elasticsearch: true) do |example|
-  #   WebMock.allow_net_connect!
-  #   Searchkick.callbacks(nil) do
-  #     example.run
-  #   end
-  #   WebMock.disable_net_connect!(allow: allowed_net_connect)
-  # end
-
-  # Allow elastic search for tests tagged with elasticsearch
-
-  config.around(:example) do |example|
-    disable_web_connect = !example.metadata[:elasticsearch]
-
-    if disable_web_connect
-      WebMock.disable_net_connect!(allow: allowed_net_connect)
-    else
-      WebMock.allow_net_connect!
-    end
+  config.around do |example|
+    WebMock.disable_net_connect!(allow: [/googleapis\.com/])
 
     example.run
   end

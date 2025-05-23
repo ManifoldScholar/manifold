@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "memoist"
 
 module Ingestions
@@ -293,7 +295,6 @@ module Ingestions
         def v2_guide_node_by_type(type)
           guide_node&.css("[type=\"#{type}\"]")&.first
         end
-
       end
     end
   end

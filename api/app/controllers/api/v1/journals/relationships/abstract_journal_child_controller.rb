@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Journals
       module Relationships
         class AbstractJournalChildController < ApplicationController
-
           before_action :set_journal
           before_action :authorize_journal
 
@@ -25,7 +26,6 @@ module API
             id = params[:journal_id]
             @journal = Journal.friendly.find(id) if id
           end
-
         end
       end
     end

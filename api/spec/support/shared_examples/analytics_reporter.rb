@@ -4,7 +4,7 @@ RSpec.shared_context "with analytics visits" do
   let_it_be(:admin) { FactoryBot.create(:user, :admin) }
 
   def running_the_interaction!(**inputs)
-    report_scope = try(:scope)
+    try(:scope)
 
     described_class.run!(
       resource: try(:scope),
@@ -16,7 +16,7 @@ RSpec.shared_context "with analytics visits" do
   alias_method :run_the_interaction!, :running_the_interaction!
 
   def running_the_interaction(**inputs)
-    report_scope = try(:scope)
+    try(:scope)
 
     described_class.run(
       resource: try(:scope),
@@ -37,7 +37,7 @@ RSpec.shared_context "with analytics visits" do
     max_offset.downto(0).map do |offset|
       day = from_date - offset.days
 
-      result = {}.tap do |res|
+      {}.tap do |res|
         res["x"] = day.to_s
         res["y"] = offset == 0 ? visitor_count : repeat_visitor_count
       end
@@ -57,8 +57,8 @@ RSpec.shared_context "with analytics visits" do
 
   let_it_be(:tokens) do
     Timecop.freeze do
-      repeat_visitors.each_with_object({}) { |u, h| h[u] = SecureRandom.uuid }
-        .merge(single_visitors.each_with_object({}) { |u, h| h[u] = SecureRandom.uuid })
+      repeat_visitors.index_with { |u| SecureRandom.uuid }
+        .merge(single_visitors.index_with { |u| SecureRandom.uuid })
     end
   end
 
@@ -81,29 +81,27 @@ end
 RSpec.shared_context "with projects" do
   include_context "with analytics visits"
 
-  let_it_be(:reading_group) { FactoryBot.create(:reading_group) }
+  let_it_be(:reading_group, refind: true) { FactoryBot.create(:reading_group) }
 
   let_it_be(:created_at) { { created_at: 2.days.ago } }
 
   let_it_be(:project_count) { 2 }
-  let_it_be(:projects) { FactoryBot.create_list(:project, project_count, **created_at) }
+  let_it_be(:projects, refind: true) { FactoryBot.create_list(:project, project_count, **created_at) }
 
   let_it_be(:text_count) { 2 }
-  let_it_be(:texts) { projects.map { |p| FactoryBot.create_list(:text, text_count, project: p, **created_at) }.flatten }
+  let_it_be(:texts, refind: true) { projects.map { |p| FactoryBot.create_list(:text, text_count, project: p, **created_at) }.flatten }
 
-  let_it_be(:text_section_count) { 2 }
-
-  let_it_be(:text_sections) do
-    texts.map do |t|
+  let_it_be(:text_sections, refind: true) do
+    texts.flat_map do |t|
       FactoryBot.create_list(:text_section, 5, :with_simple_body, text: t, **created_at)
-    end.flatten
+    end
   ensure
     texts.each(&:reload)
   end
 
-  let(:actual_projects_count) { projects.size }
+  let(:actual_projects_count) { projects.count }
   let(:actual_projects) { projects.take(actual_projects_count) }
-  let(:actual_texts_count) { texts.size }
+  let(:actual_texts_count) { texts.count }
   let(:actual_texts) { texts.take(actual_texts_count) }
 
   let(:actual_text_sections) { actual_texts.flat_map(&:text_sections) }
@@ -158,13 +156,13 @@ end
 RSpec.shared_context "with a single project" do
   include_context "with projects"
 
-  let_it_be(:project) { projects.first }
+  let_it_be(:project, refind: true) { projects.first }
   let_it_be(:previous_favorite_count) { 1 }
   let_it_be(:previous_favorites) { FactoryBot.create_list(:favorite, previous_favorite_count, favoritable: project, created_at: 100.days.ago) }
 
   let(:actual_projects_count) { 1 }
 
-  let(:actual_texts_count) { project.texts.size }
+  let(:actual_texts_count) { project.texts.count }
 
   let(:project_downloads_count) { visits.count }
 
@@ -233,7 +231,7 @@ RSpec.shared_examples_for "analytics reporter visits" do
       it "should return results for all analytics" do
         analytics = running_the_interaction!.data.map { |h| h["name"] }
 
-        expect(analytics.to_set).to eq described_class.analytics.map(&:to_s).to_set
+        expect(analytics.to_set).to eq described_class.analytics.to_set(&:to_s)
       end
 
       it "should return a cached result after first run" do
@@ -294,9 +292,6 @@ RSpec.shared_examples_for "analytics reporter events" do
       else
         expect(actual).to eq expected
       end
-    rescue Exception => e
-
-      raise e
     end
   end
 end

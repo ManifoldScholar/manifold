@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Entitlements
   module RoleMapping
     extend ActiveSupport::Concern
@@ -47,7 +49,7 @@ module Entitlements
 
         found_roles = RoleName.select do |role|
           next unless role.entitlement?
-          next if role.in? managed_roles
+          next if role.in?(managed_roles || [])
 
           yield role
         end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @see IngestionSource
 class IngestionSourceUploader < Shrine
   include SharedUploader
@@ -35,5 +37,4 @@ class IngestionSourceUploader < Shrine
       RUBY
     end
   end
-
 end

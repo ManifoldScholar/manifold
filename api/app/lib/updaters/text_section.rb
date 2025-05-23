@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates a TextSection model from JSON-API style params
   class TextSection

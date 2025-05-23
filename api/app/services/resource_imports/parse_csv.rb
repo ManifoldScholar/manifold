@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require "charlock_holmes"
 
 module ResourceImports
   class ParseCSV < ActiveInteraction::Base
     record :resource_import
 
-    VALID_ENCODING = "UTF-8".freeze
+    VALID_ENCODING = "UTF-8"
 
     def execute
       path = resource_import.data_original(&:open)
@@ -47,6 +49,5 @@ module ResourceImports
       detection = CharlockHolmes::EncodingDetector.detect(content)
       CharlockHolmes::Converter.convert content, detection[:encoding], VALID_ENCODING
     end
-
   end
 end

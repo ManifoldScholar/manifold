@@ -1,5 +1,6 @@
-class IngestionChannel < ApplicationCable::Channel
+# frozen_string_literal: true
 
+class IngestionChannel < ApplicationCable::Channel
   def ingestion
     @ingestion ||= Ingestion.find(params[:ingestion])
   end
@@ -70,5 +71,4 @@ class IngestionChannel < ApplicationCable::Channel
     ).serializable_hash
     IngestionChannel.broadcast_to ingestion, type: "entity", payload: serialization
   end
-
 end

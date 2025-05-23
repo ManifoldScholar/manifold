@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Compiler do
@@ -137,7 +139,7 @@ RSpec.describe Ingestions::Compiler do
         .and change(TextSection, :count).by(1)
         .and change(TextTitle, :count).by(1)
         .and change(IngestionSource, :count).by(1)
-        .and change(Maker, :count).by(0)
+        .and keep_the_same(Maker, :count)
         .and change(Stylesheet, :count).by(2)
     end
   end

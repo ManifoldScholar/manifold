@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Patches
   # Allows ActiveModel error messages to be flattened into a single string
   module FlattenedErrors
-    DEFAULT_FLATTENED_ERROR = "Something went wrong".freeze
+    DEFAULT_FLATTENED_ERROR = "Something went wrong"
 
     # @return [String]
     def flattened_errors(default: DEFAULT_FLATTENED_ERROR, prefix: "")
@@ -157,7 +159,7 @@ module Patches
       save_options = {}.tap do |h|
         h[:context] = save_context if save_context.present?
       end
-      return model if model.save(save_options)
+      return model if model.save(**save_options)
 
       absorb_model_errors!(model, assimilate: assimilate, save_context: save_context)
     end
@@ -217,7 +219,6 @@ module Patches
     # @option options [Symbol, nil] error_target
     # @option options [Symbol, nil] guard_target
     # @return [Boolean]
-    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/ParameterLists
     def transition_to!(target_state, on:, assimilate: false, check_if_transitionable: true, error: :something_went_wrong, guard_error: :cannot_transition, metadata: {}, **options)
       model = on.is_a?(Symbol) ? __send__(on) : on
 
@@ -237,7 +238,6 @@ module Patches
 
       halt!
     end
-    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/ParameterLists
 
     # Ensure that a given model can attempt to trigger an event, purely based on its current state.
     #
@@ -273,7 +273,6 @@ module Patches
     # @option options [Symbol, nil] error_target
     # @option options [Symbol, nil] guard_target
     # @return [Boolean]
-    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/ParameterLists
     def trigger!(event, on:, assimilate: false, check_if_triggerable: true, error: :something_went_wrong, guard_error: :cannot_trigger, **options)
       model = on.is_a?(Symbol) ? __send__(on) : on
 
@@ -293,7 +292,6 @@ module Patches
 
       halt!
     end
-    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/ParameterLists
 
     # @!endgroup
 
@@ -325,25 +323,28 @@ module Patches
     end
 
     # @api private
-    # @return [ActiveRecord::WrappedTransaction::Result]
-    def in_transaction_with_result(start_new: always_start_new_transaction?, &block)
-      transactor_klass.wrapped_transaction(joinable: !start_new, requires_new: start_new, &block)
-    end
-
-    # @api private
     # @param [Object] on_success We use {NO_ARG} here to differentiate vs `nil`.
     # @yield The execution method for this interaction
     # @return [Object]
     def in_transaction(on_success: NO_ARG, on_failure: :halt, &block)
-      txn_result = in_transaction_with_result(&block)
+      requires_new = always_start_new_transaction?
+      joinable = !requires_new
 
-      if txn_result.success?
-        on_success.eql?(NO_ARG) ? txn_result.result : on_success
-      elsif on_failure == :halt
-        handle_failed_transaction! txn_result
+      ApplicationRecord.transaction(joinable:, requires_new:, &block)
+    rescue StandardError => e
+      return false if errors.any?
+
+      interrupt = extract_interrupt_from e
+
+      if interrupt&.errors&.any?
+        errors.merge! interrupt.errors
+      elsif e.present?
+        errors.add :base, "Error caused rollback: #{e.inspect}"
       else
-        on_failure
+        errors.add :base, "Uncaught rollback"
       end
+
+      false
     end
 
     def in_transaction?
@@ -355,24 +356,6 @@ module Patches
     end
 
     private
-
-    def handle_failed_transaction!(transaction_result)
-      return false if errors.any?
-
-      error = transaction_result.error
-
-      interrupt = extract_interrupt_from error
-
-      if interrupt&.errors&.any?
-        errors.merge! interrupt.errors
-      elsif error.present?
-        errors.add :base, "Error caused rollback: #{error.inspect}"
-      else
-        errors.add :base, "Uncaught rollback"
-      end
-
-      false
-    end
 
     def extract_interrupt_from(exception)
       loop do
@@ -387,8 +370,8 @@ module Patches
       # rather than simply joining its parent (if any).
       #
       # @return [void]
-      def always_start_new_transaction!(value = true)
-        self.always_start_new_transaction = value
+      def always_start_new_transaction!(value:)
+        self.always_start_new_transaction = value.present?
       end
 
       # Make an interaction easily haltable.
@@ -509,8 +492,5 @@ ActiveInteraction::Base.prepend Patches::BetterInteractions
 # We want to be able to refer to this in our subclasses
 ActiveInteraction.public_constant :Interrupt
 
-# Transactions need to be wrappable
-ActiveRecord::Base.include ActiveRecord::WrappedTransaction
-
 # ActiveRecord models should also be able to flatten their errors.
-ActiveRecord::Base.include Patches::FlattenedErrors
+ActiveSupport.on_load(:active_record) { include Patches::FlattenedErrors }

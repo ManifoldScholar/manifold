@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module Analytics
   class RecordEvent < ActiveInteraction::Base
-
-    VIEW_EVENT_MATCHER = "view resource".freeze
-    SEARCH_EVENT_MATCHER = "search resource".freeze
-    SHARE_EVENT_MATCHER = "share".freeze
-    CITE_EVENT_MATCHER = "cite".freeze
-    LEAVE_EVENT_MATCHER = "leave".freeze
-    DOWNLOAD_EVENT_MATCHER = "download".freeze
+    VIEW_EVENT_MATCHER = "view resource"
+    SEARCH_EVENT_MATCHER = "search resource"
+    SHARE_EVENT_MATCHER = "share"
+    CITE_EVENT_MATCHER = "cite"
+    LEAVE_EVENT_MATCHER = "leave"
+    DOWNLOAD_EVENT_MATCHER = "download"
 
     record :analytics_visit, class: Analytics::Visit
     string :visit_token, default: nil
@@ -14,7 +15,6 @@ module Analytics
     object :request, class: ActionDispatch::Request, default: nil
 
     class << self
-      # rubocop:disable Metrics/MethodLength
       def record_event(inputs)
         interaction = case inputs[:name]
                       when VIEW_EVENT_MATCHER
@@ -36,7 +36,6 @@ module Analytics
 
         interaction.run inputs
       end
-      # rubocop:enable Metrics/MethodLength
     end
 
     private
@@ -59,6 +58,5 @@ module Analytics
     def valid_visitor_token
       @valid_visitor_token ||= valid_visitor_token || request.headers["HTTP_VISITOR_TOKEN"]
     end
-
   end
 end

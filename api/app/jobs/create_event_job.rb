@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Simple job to create a new event in the background.
 class CreateEventJob < ApplicationJob
   include ExclusiveJob
@@ -13,6 +15,6 @@ class CreateEventJob < ApplicationJob
   end
 
   def perform(event_type, **args)
-    Factory::Event.new.create(event_type, args)
+    Factory::Event.new.create(event_type, **args)
   end
 end

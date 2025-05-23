@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Testing
   class CommentizeReadingGroup < ActiveInteraction::Base
     record :reading_group

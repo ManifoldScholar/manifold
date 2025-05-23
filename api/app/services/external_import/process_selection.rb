@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalImport
   class ProcessSelection < ActiveInteraction::Base
     string :source_text_id

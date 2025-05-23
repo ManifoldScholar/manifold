@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utility
   class MonadicStateOperation
     extend Dry::Initializer

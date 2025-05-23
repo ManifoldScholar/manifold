@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class ProjectCollectionSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     abilities
@@ -52,6 +53,5 @@ module V1
     when_full do
       typed_has_many :subjects, serializer: SubjectSerializer
     end
-
   end
 end

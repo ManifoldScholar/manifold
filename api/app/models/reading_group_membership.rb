@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A reading group is a cohort of users who are collaboratively consuming Manifold content.
 class ReadingGroupMembership < ApplicationRecord
   upsert_keys %i[reading_group_id user_id]
@@ -29,9 +31,10 @@ class ReadingGroupMembership < ApplicationRecord
 
   validates :user_id, uniqueness: { scope: :reading_group_id }
 
-  belongs_to :user, optional: false
-  belongs_to :reading_group, optional: false
-  has_one :reading_group_membership_count
+  belongs_to :user, inverse_of: :reading_group_memberships
+  belongs_to :reading_group, inverse_of: :reading_group_memberships
+
+  has_one_readonly :reading_group_membership_count
 
   delegate :full_name, to: :user, prefix: true
   delegate :anonymous?, to: :reading_group, prefix: true
@@ -39,11 +42,11 @@ class ReadingGroupMembership < ApplicationRecord
   delegate :moderator?, :member?, to: :role
 
   before_validation :ensure_anonymous_label
-  after_save :ensure_user_roles!
-  after_commit :enqueue_notification, on: [:create]
   after_create :create_entitlements!
   before_destroy :remove_entitlements!
   after_destroy :remove_user_roles!
+  after_save :ensure_user_roles!
+  after_commit :enqueue_notification, on: [:create]
 
   aasm do
     state :active, initial: true

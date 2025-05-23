@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Strategies::Epub do
@@ -130,7 +132,6 @@ RSpec.describe Ingestions::Strategies::Epub do
   end
 
   context "when url", slow: true do
-
     let(:url) { "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3" }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, external_source_url: url }
 

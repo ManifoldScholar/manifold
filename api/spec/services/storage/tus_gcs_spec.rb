@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 require "storage/tus_gcs"
 
@@ -6,11 +8,11 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
     Settings.instance.update_from_environment!
   end
 
-  before(:each) do
+  before do
     WebMock.allow_net_connect!
   end
 
-  around(:example) do
+  around do |example|
     if bucket.present?
       example.run
     else
@@ -20,7 +22,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
 
   let(:bucket) { ENV["MANIFOLD_SETTINGS_STORAGE_TEST_BUCKET"] }
   let(:credentials) { ::Factory::DriveSession.config }
-  let(:gcs) { Storage::TusGcs.new(bucket: bucket, credentials: credentials) }
+  let(:gcs) { described_class.new(bucket: bucket, credentials: credentials) }
 
   describe "#initialize" do
     it "accepts bucket" do
@@ -30,7 +32,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
 
   describe "#create" do
     it "creates new empty file" do
-      gcs.create_file("the-unique-file-id", info = {})
+      gcs.create_file("the-unique-file-id", {})
       expect(gcs.get_file("the-unique-file-id").each.to_a.join).to eq ""
     end
   end
@@ -147,9 +149,5 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
     it "doesn't raise an error if file is missing" do
       gcs.delete_file("not-a-real-file")
     end
-  end
-
-  describe "#expire_files" do
-    # TODO
   end
 end

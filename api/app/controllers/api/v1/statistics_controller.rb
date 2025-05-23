@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Statistics controller
     class StatisticsController < ApplicationController
-
       resourceful! Statistics do
         Statistics.new
       end
@@ -13,7 +14,6 @@ module API
                                serializer: ::V1::StatisticsSerializer,
                                location: "[:api, :v1, :statistics]"
       end
-
     end
   end
 end

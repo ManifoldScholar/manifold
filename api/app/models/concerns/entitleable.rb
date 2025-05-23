@@ -14,9 +14,9 @@ module Entitleable
   end
 
   # @return [GlobalID]
-  def to_entitlement_gid(**params)
-    params[:app] = :entitlements
+  def to_entitlement_gid(params = {})
+    params[:app] = "entitlements"
 
-    to_global_id params
+    to_global_id(**params)
   end
 end

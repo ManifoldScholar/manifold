@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :manifold do
   namespace :cache do
     desc "Prime Manifold caches"

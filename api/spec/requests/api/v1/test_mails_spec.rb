@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Test Mail", type: :request do
-
   include_context("authenticated request")
 
   path "/test_mails" do
@@ -16,6 +17,7 @@ RSpec.describe "Test Mail", type: :request do
 
       response "403", I18n.t("swagger.not_authenticated") do
         let(:Authorization) { reader_auth }
+
         before do |example|
           submit_request(example.metadata)
         end
@@ -26,7 +28,8 @@ RSpec.describe "Test Mail", type: :request do
       end
 
       response "401", I18n.t("swagger.not_authenticated") do
-        let(:Authorization) {}
+        let(:Authorization) { "" }
+
         before do |example|
           submit_request(example.metadata)
         end

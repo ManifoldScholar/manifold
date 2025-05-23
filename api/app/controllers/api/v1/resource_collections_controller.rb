@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Collections controller
     class ResourceCollectionsController < ApplicationController
-
       resourceful! ResourceCollection, authorize_options: { except: [:index] } do
-        ResourceCollection.filtered(with_pagination!(resource_collection_filter_params))
+        ResourceCollection.filtered(**with_pagination!(resource_collection_filter_params))
       end
 
       # GET /collections/1
@@ -36,7 +37,6 @@ module API
       def scope_for_resource_collections
         ResourceCollection.friendly
       end
-
     end
   end
 end

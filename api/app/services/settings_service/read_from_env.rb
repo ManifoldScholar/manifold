@@ -5,7 +5,7 @@ module SettingsService
   # that can be merged into {Settings}.
   class ReadFromEnv < ActiveInteraction::Base
     # Parses an environment variable into its component section & setting names
-    KEY_PARSER = /\AMANIFOLD_SETTING_(?<section>[^_]+)_(?<setting>\w+)\z/.freeze
+    KEY_PARSER = /\AMANIFOLD_SETTING_(?<section>[^_]+)_(?<setting>\w+)\z/
 
     # Proxied here so that we can test easily.
     interface :env, methods: %i(each_with_object), default: proc { ENV }

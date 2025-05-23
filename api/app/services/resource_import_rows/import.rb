@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module ResourceImportRows
   class Import < ActiveInteraction::Base
-
     TRUTHY_VALUES = %w(true TRUE True 1 y yes Yes YES T).freeze
 
     record :row, class: :resource_import_row
@@ -79,15 +80,15 @@ module ResourceImportRows
     end
 
     def transformers_for(attribute)
-      candidates(attribute).compact.map { |s| "transform_#{s}".to_sym }
+      candidates(attribute).compact.map { |s| :"transform_#{s}" }
     end
 
     def blockers_for(attribute)
-      candidates(attribute).compact.map { |s| "block_#{s}".to_sym }
+      candidates(attribute).compact.map { |s| :"block_#{s}" }
     end
 
     def setters_for(attribute)
-      candidates(attribute).compact.map { |s| "set_#{s}".to_sym }
+      candidates(attribute).compact.map { |s| :"set_#{s}" }
     end
 
     def candidates(attribute)
@@ -238,6 +239,5 @@ module ResourceImportRows
     def block_special_instructions(*_args)
       true
     end
-
   end
 end

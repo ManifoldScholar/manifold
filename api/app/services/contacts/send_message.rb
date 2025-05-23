@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Contacts
   class SendMessage < ActiveInteraction::Base
     string :full_name
@@ -10,6 +12,5 @@ module Contacts
     def execute
       ContactMailer.contact_message(full_name, email, message).deliver
     end
-
   end
 end

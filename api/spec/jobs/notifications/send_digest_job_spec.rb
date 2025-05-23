@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Notifications::SendDigestJob, type: :job do
@@ -14,7 +16,7 @@ RSpec.describe Notifications::SendDigestJob, type: :job do
       end
     end
 
-    let(:daily_notifications) { { digest: :daily,  followed_projects: :always, digest_comments_and_annotations: :always } }
+    let(:daily_notifications) { { digest: :daily, followed_projects: :always, digest_comments_and_annotations: :always } }
 
     let!(:annotation_event) do
       Timecop.freeze Date.current.yesterday do

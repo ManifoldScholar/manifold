@@ -101,7 +101,7 @@ module EntitlementImportRows
 
       row.save! if row.target_id_changed?
 
-      return Success() unless row.target.blank?
+      return Success() if row.target.present?
 
       yield build_pending_entitlement_for!(row)
 

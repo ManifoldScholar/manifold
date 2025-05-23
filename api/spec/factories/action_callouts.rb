@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :action_callout do
     title { "Check this out" }
@@ -8,7 +10,7 @@ FactoryBot.define do
   end
 
   factory :read_action_callout, parent: :action_callout do
-    kind { :read}
+    kind { :read }
     text
   end
 

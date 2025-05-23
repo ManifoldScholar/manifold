@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class PermissionSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :role_names, Types::Array.of(Types::String.meta(example: "editor"))

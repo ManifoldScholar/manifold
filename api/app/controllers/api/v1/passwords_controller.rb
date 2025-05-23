@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Passwords controller
@@ -48,7 +50,6 @@ module API
           ]
         }, status: :unprocessable_entity
       end
-
     end
   end
 end

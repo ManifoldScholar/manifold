@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   class Fetcher < AbstractInteraction
     string :url
@@ -16,6 +18,5 @@ module Ingestions
       info "services.ingestions.fetcher.log.download_external",
            url: url
     end
-
   end
 end

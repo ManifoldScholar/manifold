@@ -18,6 +18,7 @@ class Resource < ApplicationRecord
   include Sluggable
   include Metadata
   include SearchIndexable
+  include HasKeywordSearch
 
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
   ALLOWED_KINDS = %w(image video audio link pdf document file spreadsheet presentation
@@ -71,7 +72,6 @@ class Resource < ApplicationRecord
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
   validates :sub_kind,
             inclusion: { in: ALLOWED_SUB_KINDS },
-            allow_nil: true,
             allow_blank: true
   validates :fingerprint,
             uniqueness: { scope: :project,
@@ -93,7 +93,7 @@ class Resource < ApplicationRecord
     id = id_from_slug || collection
 
     joins(:collection_resources)
-      .where("collection_resources.resource_collection_id = ?", id)
+      .where(collection_resources: { resource_collection_id: id })
   }
   scope :by_kind, lambda { |kind|
     return all unless kind.present?
@@ -103,7 +103,7 @@ class Resource < ApplicationRecord
   scope :with_collection_order, lambda { |collection_id|
     id = ResourceCollection.friendly.find(collection_id)
     joins(:collection_resources)
-      .where("collection_resources.resource_collection_id = ?", id)
+      .where(collection_resources: { resource_collection_id: id })
       .order("collection_resources.position ASC")
   }
 
@@ -116,35 +116,29 @@ class Resource < ApplicationRecord
   after_commit :queue_fetch_thumbnail, on: [:create, :update]
   after_commit :trigger_event_creation, on: [:create]
 
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
+  multisearch_parent_name :project
 
-  scope :search_import, lambda {
-    includes(:resource_collections, :project)
-  }
+  multisearches! :description_plaintext, secondary_from: :caption
 
-  # rubocop:disable Metrics/AbcSize
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title_plaintext,
-      full_text: [description_plaintext, caption].reject(&:blank?).join("\n"),
-      parent_project: project&.id,
-      parent_keywords: resource_collections.map(&:title) + [project&.title],
-      metadata: metadata.values.reject(&:blank?),
-      keywords: (tag_list + attachment_file_name).reject(&:blank?)
-    }.merge(search_hidden)
+  has_keyword_search! against: %i[title description]
+
+  def multisearch_full_text
+    [description_plaintext, caption].compact_blank.join("\n")
   end
-  # rubocop:enable Metrics/AbcSize
 
-  def search_hidden
-    project.present? ? project.search_hidden : { hidden: true }
+  def multisearch_keywords
+    [*super, attachment_file_name].compact_blank
+  end
+
+  def multisearch_parent_keywords
+    [].tap do |a|
+      a.concat(resource_collections.map(&:title))
+      a << project.try(:title)
+    end.compact_blank
   end
 
   def fetch_thumbnail?
-    return unless Thumbnail::Fetcher.accepts?(self)
+    return false unless Thumbnail::Fetcher.accepts?(self)
 
     !variant_thumbnail.present? || previous_changes.key?(:external_id)
   end
@@ -176,7 +170,7 @@ class Resource < ApplicationRecord
   end
 
   def sort_title_candidate
-    candidate = pending_sort_title.blank? ? title_plaintext : pending_sort_title
+    candidate = pending_sort_title.presence || title_plaintext
     candidate.delete "\"", "'"
   end
 
@@ -192,7 +186,7 @@ class Resource < ApplicationRecord
     return :video if %w(mp4 webm).include?(ext)
     return :video if sub_kind == "external_video"
     return :audio if ["mp3"].include?(ext)
-    return :link if !attachment.present? && !external_url.blank?
+    return :link if !attachment.present? && external_url.present?
 
     # We return a default because we always want the resource kind to be valid. If it's
     # not valid, we have a problem because it will prevent Paperclip from processing

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EntitlementTarget < ApplicationRecord
   include Authority::Abilities
   include View

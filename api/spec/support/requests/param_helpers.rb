@@ -2,7 +2,7 @@
 
 RSpec.shared_context "param helpers" do
   def json_structure_from_factory(factory_name, **options)
-    build_json_structure(options.merge({ attributes: FactoryBot.attributes_for(factory_name) }))
+    build_json_structure(**options, attributes: FactoryBot.attributes_for(factory_name))
   end
 
   def build_json_structure(attributes: {}, relationships: {}, meta: {}, type: :response)
@@ -16,7 +16,7 @@ RSpec.shared_context "param helpers" do
   end
 
   def build_json_payload(**options)
-    build_json_structure(options).to_json
+    build_json_structure(**options).to_json
   end
 
   def adjust_attributes(attributes, type)
@@ -25,10 +25,10 @@ RSpec.shared_context "param helpers" do
   end
 
   def adjust_attributes_for_request(attributes)
-    attributes.map { |k,v|
+    attributes.to_h do |k, v|
       next [k, v] unless v.respond_to? :path
       [k, file_param(v.path, v.content_type, v.original_filename)]
-    }.to_h
+    end
   end
 
   def adjust_attributes_for_response(attributes)
@@ -36,11 +36,11 @@ RSpec.shared_context "param helpers" do
   end
 
   def relationship_payload(name, models)
-    Hash[name, models]
+    { name => models }
   end
 
   def expect_updated_param(param, value, expected_value = nil, expected_param = nil)
-    attributes = Hash[param, value]
+    attributes = { param => value }
     expected_value ||= value
     expected_param ||= param
     patch(path, headers: headers, params: build_json_payload(attributes: attributes))
@@ -49,7 +49,7 @@ RSpec.shared_context "param helpers" do
   end
 
   def file_param(path, content_type, file_name)
-    data = Base64.encode64(File.open(path, "rb").read)
+    data = Base64.encode64(File.binread(path))
     {
       content_type: content_type,
       data: "data:#{content_type};base64,#{data}",

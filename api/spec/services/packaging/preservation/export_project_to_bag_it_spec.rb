@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Packaging::Preservation::ExportProjectToBagIt, interaction: true, packaging: true do

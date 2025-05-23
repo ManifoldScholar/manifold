@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Collections
   class Definition
     extend Dry::Initializer
     extend Memoist
 
-    include Dry::Equalizer.new(:collector)
+    include Dry::Core::Equalizer.new(:collector)
     include MultiKeyable
 
     Type = Types.Instance(self)
@@ -14,7 +16,7 @@ module Collections
 
     option :collects, Types::ModelProxies, as: :collectable_models, default: proc { [] }
 
-    option :grouping, Types::ModelProxy.optional, optional: true, default: proc { nil }
+    option :grouping, Types::ModelProxy.optional, optional: true, default: proc {}
 
     option :entry_prefix, Types::String, default: proc { collector.model_name.name }
 
@@ -39,7 +41,7 @@ module Collections
     # @return [<#to_s>]
     attr_reader :collectable_entries
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       @collectables = collectable_models.map do |collectable|

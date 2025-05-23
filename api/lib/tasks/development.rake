@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :manifold do
   namespace :development do
     desc "Loads demo data into Manifold"

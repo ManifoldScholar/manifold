@@ -10,6 +10,7 @@ class ResourceCollection < ApplicationRecord
   include Sluggable
   include SerializedAbilitiesFor
   include SearchIndexable
+  include HasKeywordSearch
 
   TYPEAHEAD_ATTRIBUTES = [:title].freeze
 
@@ -44,27 +45,27 @@ class ResourceCollection < ApplicationRecord
     order(by)
   }
 
-  searchkick(callbacks: :async,
-             batch_size: 500,
-             word_start: TYPEAHEAD_ATTRIBUTES,
-             highlight: [:title, :body])
+  has_keyword_search!(
+    against: %i[title description],
+    associated_against: {
+      project: %i[title]
+    }
+  )
 
-  scope :search_import, -> { includes(:project) }
+  multisearch_parent_name :project
 
   after_commit :trigger_creation_event, on: [:create]
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title_plaintext,
-      full_text: description_plaintext,
-      parent_project: project&.id,
-      parent_keywords: [project&.title]
-    }.merge(search_hidden)
+  def multisearch_title
+    title_plaintext
   end
 
-  def search_hidden
-    project.present? ? project.search_hidden : { hidden: true }
+  def multisearch_full_text
+    description_plaintext
+  end
+
+  def multisearch_parent_keywords
+    [project.try(:title)].compact
   end
 
   def resource_kinds

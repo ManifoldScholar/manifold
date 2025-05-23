@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       class Journal
-
         REQUEST_ATTRIBUTES = {
           avatar: Types::Serializer::Upload,
           hero: Types::Serializer::Upload,
@@ -33,12 +34,11 @@ module APIDocs
           restrictions: Types::String,
           rights_holder: Types::String,
           citation_override: Types::String
-        }
+        }.freeze
 
         REQUIRED_CREATE_ATTRIBUTES = [:title].freeze
 
         class << self
-
           include APIDocs::Definitions::Resource
 
           def create_attributes
@@ -48,7 +48,6 @@ module APIDocs
               :remove_cover
             )
           end
-
         end
       end
     end

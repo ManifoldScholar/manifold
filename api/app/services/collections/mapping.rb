@@ -1,4 +1,5 @@
-# rubocop:disable Layout/LineLength
+# frozen_string_literal: true
+
 module Collections
   Mapping = MultiKeyable::Map.from(
     [
@@ -7,4 +8,3 @@ module Collections
     ]
   )
 end
-# rubocop:enable Layout/LineLength

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Pickers
     class AbstractPicker < AbstractInteraction
@@ -31,7 +33,6 @@ module Ingestions
           klass_name.pluralize.underscore
         end
       end
-
     end
   end
 end

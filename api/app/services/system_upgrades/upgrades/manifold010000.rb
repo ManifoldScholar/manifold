@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module SystemUpgrades
   module Upgrades
     class Manifold010000 < SystemUpgrades::AbstractVersion
-
       def perform!
         delete_creatorless_annotations
       end
@@ -18,10 +19,9 @@ module SystemUpgrades
         logger.info("===================================================================")
         Annotation
           .joins("left join users on users.id = annotations.creator_id")
-          .where("users.id is null")
+          .where(users: { id: nil })
           .destroy_all
       end
-
     end
   end
 end

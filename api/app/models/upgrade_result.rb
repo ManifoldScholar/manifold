@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpgradeResult < ApplicationRecord
   self.primary_key = :version
 

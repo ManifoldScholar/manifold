@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Identity do
@@ -10,7 +12,7 @@ RSpec.describe Identity do
   end
 
   describe '.from_omniauth' do
-    let(:fetched_identity) { Identity.from_omniauth(auth_hash) }
+    let(:fetched_identity) { described_class.from_omniauth(auth_hash) }
 
     subject { fetched_identity }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TextTrack < ApplicationRecord
   include Authority::Abilities
   include SerializedAbilitiesFor

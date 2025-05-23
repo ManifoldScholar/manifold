@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EntitlementKind < ClassyEnum::Base
   applicable!
 
@@ -27,7 +29,7 @@ class EntitlementKind < ClassyEnum::Base
   end
 
   def known?
-    not unknown?
+    !unknown?
   end
 
   class << self

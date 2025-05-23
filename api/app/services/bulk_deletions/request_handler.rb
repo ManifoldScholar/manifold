@@ -68,7 +68,7 @@ module BulkDeletions
 
       sans_filter_sql = base_scope.apply_filtering_loads.to_sql
 
-      filter_scope = model_klass.filtered(filters, scope: base_scope, user: user, skip_pagination: true).reorder(nil).limit(nil).offset(nil)
+      filter_scope = model_klass.filtered(**filters, scope: base_scope, user: user, skip_pagination: true).reorder(nil).limit(nil).offset(nil)
 
       with_filter_sql = filter_scope.to_sql
 

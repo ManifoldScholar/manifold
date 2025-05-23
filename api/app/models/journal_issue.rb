@@ -14,13 +14,13 @@ class JournalIssue < ApplicationRecord
   include HasFormattedAttributes
   include SearchIndexable
   include HasSortTitle
+  include HasKeywordSearch
 
-  belongs_to :journal, counter_cache: true
-  belongs_to :journal_volume, optional: true, counter_cache: true
+  belongs_to :journal, counter_cache: true, inverse_of: :journal_issues
+  belongs_to :journal_volume, optional: true, counter_cache: true, inverse_of: :journal_issues
 
   has_one :project, required: true, inverse_of: :journal_issue, dependent: :destroy
 
-  validates :journal_id, presence: true
   validates :number, presence: true
 
   include TrackedCreator
@@ -93,39 +93,29 @@ class JournalIssue < ApplicationRecord
   delegate :finished, to: :project
   delegate :draft, to: :project
 
-  # Search
-  scope :search_import, -> {
-    includes(
-      :journal,
-      :project
-    )
+  has_keyword_search! associated_against: {
+    journal: [:title],
+    journal_volume: [:number],
+    project: [:description]
   }
 
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
+  multisearch_parent_name :journal
+
+  multisearch_secondary_attr :description_plaintext
 
   def sort_title_candidate
     pending_sort_title.blank? ? number.to_i : pending_sort_title.to_i
   end
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description_plaintext,
-      keywords: (tag_list + texts.map(&:title) + hashtag).reject(&:blank?),
-      creator: creator&.full_name,
-      makers: makers.map(&:full_name),
-      metadata: metadata.values.reject(&:blank?)
-    }.merge(search_hidden)
+  def multisearch_full_text
+    description_plaintext
   end
 
-  def search_hidden
-    {
-      hidden: journal.draft?
-    }
+  def multisearch_keywords
+    super.tap do |kw|
+      kw.concat(texts.map(&:title))
+      kw << hashtag
+    end.compact_blank
   end
 
   def title
@@ -143,7 +133,7 @@ class JournalIssue < ApplicationRecord
   end
 
   def recently_updated?
-    updated? && updated_at >= Time.current - 1.week
+    updated? && updated_at >= 1.week.ago
   end
 
   def content_blocks

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Model concern that includes relations to collaborators and scoped relations to creators
 # and contributors
 module Collaborative
@@ -9,12 +11,12 @@ module Collaborative
 
     # "If you use a hash-style where option, then record creation via this association
     # will be automatically scoped using the hash." -- Love, Rails
-    has_many :creator_collaborators,
+    has_many_readonly :creator_collaborators,
              -> { where(role: CollaboratorRole::Author).order(:position) },
              as: :collaboratable,
              class_name: "Collaborator",
              inverse_of: :collaboratable
-    has_many :contributor_collaborators,
+    has_many_readonly :contributor_collaborators,
              -> { where(role: CollaboratorRole::Other).order(:position) },
              as: :collaboratable,
              class_name: "Collaborator"
@@ -22,7 +24,7 @@ module Collaborative
     has_many :makers, through: :collaborators
     has_many :creators, through: :creator_collaborators, source: "maker"
     has_many :contributors, through: :contributor_collaborators, source: "maker"
-    has_many :flattened_collaborators, as: :collaboratable
+    has_many_readonly :flattened_collaborators, as: :collaboratable
 
     scope :with_collaborators, ->(role = nil) { where(id: Collaborator.by_role(role).select(:collaboratable_id)) }
     scope :sans_collaborators, ->(role = nil) { where.not(id: Collaborator.by_role(role).select(:collaboratable_id)) }

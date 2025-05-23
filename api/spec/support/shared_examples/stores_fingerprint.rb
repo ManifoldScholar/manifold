@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples_for "a model that stores its fingerprint" do
   it "can recalculate its fingerprint" do
     expect do

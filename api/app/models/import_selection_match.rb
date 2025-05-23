@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImportSelectionMatch < ApplicationRecord
   belongs_to :import_selection, counter_cache: :matches_count
   belongs_to :text_section
@@ -11,7 +13,8 @@ class ImportSelectionMatch < ApplicationRecord
   alias end_node node_uuid
 
   scope :sans_range, -> { where(start_char: nil) }
-  scope :with_range, -> { where.not(start_char: nil, end_char: nil) }
+  scope :with_range, -> { where(arel_table[:start_char].not_eq(nil).and(arel_table[:end_char].not_eq(nil))) }
+
   def has_range?
     start_char? && end_char?
   end

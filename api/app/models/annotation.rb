@@ -4,7 +4,6 @@
 # a likely candidate for refactoring into a "range" model that can be used by various
 # other manifold records.
 class Annotation < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -13,6 +12,7 @@ class Annotation < ApplicationRecord
   include TrackedCreator
   include Filterable
   include FlaggableResource
+  include HasKeywordSearch
   include SearchIndexable
   include SoftDeletable
 
@@ -48,11 +48,11 @@ class Annotation < ApplicationRecord
           dependent: :destroy,
           inverse_of: :subject
 
-  has_one :annotation_node, -> { preload(ancestor_node: :children) }, inverse_of: :annotation
+  has_one_readonly :annotation_node, -> { preload(ancestor_node: :children) }, inverse_of: :annotation
 
-  has_one :annotation_reading_group_membership
+  has_one_readonly :annotation_reading_group_membership
   has_one :reading_group_membership, through: :annotation_reading_group_membership
-  has_many :annotation_membership_comments
+  has_many_readonly :annotation_membership_comments
   has_many :membership_comments, through: :annotation_membership_comments, source: :comment
 
   # Validations
@@ -93,17 +93,12 @@ class Annotation < ApplicationRecord
   delegate :text_node_for, to: :text_section, prefix: true
   delegate :text_nodes, to: :text_section, prefix: true
 
-  # Search
-  searchkick(callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
+  multisearches! :body, title_from: :subject, secondary_from: :body
 
-  # Scopes
-  scope :search_import, -> { includes(:creator, text_section: { text: :project }) }
   scope :only_annotations, -> { where(format: "annotation") }
   scope :only_highlights, -> { where(format: "highlight") }
   scope :created_by, ->(user) { where(creator: user) }
-  scope :sans_orphaned_from_text, -> { where.not(text_section: nil) }
+  scope :sans_orphaned_from_text, -> { with_existing_text }
   scope :by_text, lambda { |text|
     joins(:text_section).where(text_sections: { text: text }) if text.present?
   }
@@ -163,15 +158,10 @@ class Annotation < ApplicationRecord
         .where(reading_groups: { id: [nil, ReadingGroup.visible_to_public] })
     end
   }
-  scope :by_formats, lambda { |formats|
-    where(format: formats) if formats.present?
-  }
-  scope :with_orphaned, lambda { |orphaned|
-    where.not(text_section: nil).where(orphaned: orphaned) unless orphaned.blank?
-  }
-  scope :with_existing_text, lambda {
-    where.not(text_section: nil)
-  }
+
+  scope :by_formats, ->(formats) { where(format: formats) if formats.present? }
+  scope :with_orphaned, ->(orphaned) { where.not(text_section: nil).where(orphaned: orphaned) if orphaned.present? }
+  scope :with_existing_text, -> { where.not(text_section: nil) }
 
   scope :only_resource_annotations, -> { where(format: TYPE_RESOURCE) }
   scope :sans_public_annotations_not_owned_by, ->(user) { where(arel_exclude_public_annotations_not_owned_by(user)) }
@@ -263,24 +253,16 @@ class Annotation < ApplicationRecord
     ReadingGroupMembership.find_by(user: creator, reading_group: reading_group)
   end
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: subject,
-      full_text: body,
-      creator: creator&.full_name,
-      parent_project: project&.id,
-      parent_text_section: text_section&.id,
-      parent_text: text&.id,
-      parent_keywords: [
-        text&.title
-      ],
-      hidden: false
-    }
+  def multisearch_full_text
+    body
   end
 
-  def should_index?
-    !unindexable?
+  def multisearch_parent_keywords
+    [text.try(:title)].compact_blank
+  end
+
+  def hidden_for_multisearch?
+    unindexable? || super
   end
 
   def unindexable?
@@ -384,11 +366,11 @@ class Annotation < ApplicationRecord
 
       needle = "%#{escaped}%"
 
-      body_matches = where arel_table[:body].matches(needle)
+      body_matches = where(arel_table[:body].matches(needle))
 
       creator_matches = joins(:creator).where(User.arel_table[:first_name].matches(needle).or(User.arel_table[:last_name].matches(needle)))
 
-      creator_matches.or(body_matches).distinct
+      where(id: creator_matches.select(:id)).or(where(id: body_matches.select(:id))).distinct
     end
   end
 end

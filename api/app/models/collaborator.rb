@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Tracks the relationship between texts and makers
 class Collaborator < ApplicationRecord
   acts_as_list scope: [:collaboratable_id, :collaboratable_type]

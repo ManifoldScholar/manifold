@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class PageSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     abilities
@@ -23,6 +24,5 @@ module V1
     when_full do
       typed_attribute :body, Types::String
     end
-
   end
 end

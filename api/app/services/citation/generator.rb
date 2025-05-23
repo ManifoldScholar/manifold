@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "citeproc"
 require "csl/styles"
 
@@ -11,7 +13,7 @@ module Citation
         cp = CiteProc::Processor.new style: style[1], format: "html"
         cp.import item
         citation = cp.render(:bibliography, id: subject.id).first
-        results[style[0]] = citation unless citation.blank?
+        results[style[0]] = citation if citation.present?
       end
     rescue TypeError
       Rails.logger.error("Error while generating citation: #{TypeError}")
@@ -25,10 +27,9 @@ module Citation
       parts.push subject.metadata if subject.respond_to? :metadata
       parts.push(id: subject.id)
       parts.push(subject.citation_parts)
-      props = parts.reject(&:nil?).reduce({}, :merge)
+      props = parts.compact.reduce({}, :merge)
       props.transform_keys! { |key| key.to_s.tr("_", "-") }
       props
     end
-
   end
 end

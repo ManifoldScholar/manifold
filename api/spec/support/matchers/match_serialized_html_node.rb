@@ -1,5 +1,6 @@
-RSpec::Matchers.define :match_serialized_html_node do |expected|
+# frozen_string_literal: true
 
+RSpec::Matchers.define :match_serialized_html_node do |expected|
   def build_match_node(node)
     out = {}
     out[:node_type] = node[:node_type] if node.key? :node_type

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module API
   module V1
     class IngestionSourcesController < ApplicationController
-
       resourceful! IngestionSource, authorize_options: { except: [:show] }
 
       def show

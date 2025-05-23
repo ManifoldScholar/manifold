@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class ApplicationJob < ActiveJob::Base
-  def match_result(result)
-    Dry::Matcher::ResultMatcher.(result, &Proc.new)
+  def match_result(result, &)
+    Dry::Matcher::ResultMatcher.(result, &)
   end
 
-  def match_result_on_failure(result)
+  def match_result_on_failure(result, &block)
     match_result(result) do |m|
       m.success do
         # This block intentionally left blank
       end
 
-      m.failure(&Proc.new)
+      m.failure(&block)
     end
   end
 
@@ -51,13 +53,11 @@ class ApplicationJob < ActiveJob::Base
       @advisory_lock_retry_wait ||= 5.minutes
     end
 
-    attr_writer :advisory_lock_retry_wait
+    attr_writer :advisory_lock_retry_wait, :advisory_lock_timeout
 
     def advisory_lock_timeout
       @advisory_lock_timeout ||= 60
     end
-
-    attr_writer :advisory_lock_timeout
   end
 
   # @!endgroup

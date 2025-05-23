@@ -1,4 +1,4 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
 RSpec.describe TextTrack, type: :model do
   let_it_be(:resource) { FactoryBot.create(:resource) }

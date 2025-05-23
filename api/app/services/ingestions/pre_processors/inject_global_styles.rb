@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module PreProcessors
     class InjectGlobalStyles < AbstractInteraction
@@ -45,7 +47,6 @@ module Ingestions
       def write_file
         context.write_build_file "global-styles.css", global_styles
       end
-
     end
   end
 end

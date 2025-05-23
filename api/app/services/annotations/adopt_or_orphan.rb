@@ -4,7 +4,7 @@ module Annotations
   # This service attempts to reassign an annotation's start/end positions based on
   # subject content. To keep things sane, we only assume a node is correct
   # if a block of its content is is an exact match to a piece of the subject.
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:disable Metrics/AbcSize
   class AdoptOrOrphan < ActiveInteraction::Base
     extend Memoist
 
@@ -133,7 +133,7 @@ module Annotations
       node_subset.each do |node|
         node_text_iterator = 0
         node_content = collapse(node[:content])
-        node_content.split("") do
+        node_content.chars do
           if haystack_iterator == first_index
             updates[:start_node] = node[:node_uuid]
           elsif haystack_iterator == last_index
@@ -330,5 +330,5 @@ module Annotations
     # this will bail out instead of infinitely looping.
     class TooManyCandidates < HaltError; end
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 end

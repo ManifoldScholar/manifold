@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "Project Abilities", :authorizer do
@@ -331,7 +333,7 @@ RSpec.describe "Project Abilities", :authorizer do
 
   context "when the user is an editor of an associated journal" do
     let!(:user) { FactoryBot.create :user }
-    let!(:journal) { FactoryBot.create :journal}
+    let!(:journal) { FactoryBot.create :journal }
     let!(:journal_issue) { FactoryBot.create :journal_issue, journal: journal }
 
     before do

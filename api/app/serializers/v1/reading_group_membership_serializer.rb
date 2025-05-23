@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class ReadingGroupMembershipSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
@@ -39,7 +41,7 @@ module V1
     end
 
     link :activate, if: SHOW_ACTIVATE_LINK do |object|
-      routes.activate_api_v1_reading_group_membership_path(object)
+      ManifoldApi::Container["system.routes"].activate_api_v1_reading_group_membership_path(object)
     end
 
     SHOW_ARCHIVE_LINK = ->(object, params) do
@@ -50,7 +52,7 @@ module V1
     end
 
     link :archive, if: SHOW_ARCHIVE_LINK do |object|
-      routes.archive_api_v1_reading_group_membership_path(object)
+      ManifoldApi::Container["system.routes"].archive_api_v1_reading_group_membership_path(object)
     end
 
     class << self

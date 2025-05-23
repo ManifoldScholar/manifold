@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Texts
@@ -5,7 +7,6 @@ module API
         module TextSections
           # Collections controller
           class ResourceCollectionsController < ApplicationController
-
             before_action :set_text, only: [:index]
             before_action :set_text_section, only: [:index]
 

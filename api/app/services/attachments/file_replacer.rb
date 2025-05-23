@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Attachments
   class FileReplacer < ActiveInteraction::Base
     string :klass_name
@@ -69,6 +71,5 @@ module Attachments
       error_message = errors.join("/n    ")
       logger.error msg + error_message
     end
-
   end
 end

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class ProjectSummary < ApplicationRecord
   include Attachments
   include View
 
   self.primary_key = :id
 
-  belongs_to :project
+  belongs_to :project, inverse_of: :project_summary
 
   delegate :collected_by?, to: :project
   delegate :entitlement_subject_url, to: :project
@@ -24,6 +26,6 @@ class ProjectSummary < ApplicationRecord
   end
 
   def recently_updated?
-    updated? && updated_at >= Time.current - 1.week
+    updated? && updated_at >= 1.week.ago
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe NotificationPreferences do
@@ -10,7 +12,7 @@ RSpec.describe NotificationPreferences do
   end
 
   describe "#unsubscribe_all" do
-    before(:each) do
+    before do
       user.update(notification_preferences_by_kind: { projects: NotificationFrequency[:always] })
       user.unsubscribe_all
     end
@@ -28,14 +30,14 @@ RSpec.describe NotificationPreferences do
 
   context "when creating user" do
     it "assigns the default preferences" do
-      expect(user.notification_preferences).to_not be_nil
+      expect(user.notification_preferences).not_to be_nil
     end
   end
 
   context "when updating user" do
     context "when role is not changed" do
       it "does not change preferences" do
-        expect { user.save! }.to_not change { user.notification_preferences.reload.to_a }
+        expect { user.save! }.not_to change { user.notification_preferences.reload.to_a }
       end
     end
 
@@ -54,15 +56,19 @@ RSpec.describe NotificationPreferences do
 
   context "when updating preferences" do
     it "assigns from a hash of kind:frequency pairs" do
-      user.notification_preferences_by_kind = { replies_to_me: NotificationFrequency[:always] }
-      user.save
-      expect(user.notification_preferences.pluck(:frequency)).to match_array %w(always always never never)
+      expect do
+        user.notification_preferences_by_kind = { replies_to_me: NotificationFrequency[:always] }
+        user.save!
+      end.to change { user.notification_preferences.reload.find_by(kind: :replies_to_me).frequency.to_s }.to("always")
+        .and keep_the_same { user.notification_preferences.reload.find_by(kind: :digest).frequency.to_s }
+        .and keep_the_same { user.notification_preferences.reload.find_by(kind: :digest_comments_and_annotations).frequency.to_s }
+        .and keep_the_same { user.notification_preferences.reload.find_by(kind: :followed_projects).frequency.to_s }
     end
 
     it "ignores kinds not available to user" do
       user.notification_preferences_by_kind = { digest_comments_and_annotations: NotificationFrequency[:always] }
 
-      expect { user.save }.to_not change { user.notification_preferences.count }
+      expect { user.save }.not_to change { user.notification_preferences.count }
     end
   end
 end

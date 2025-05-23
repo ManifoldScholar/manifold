@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     class StylesheetItem < Types::FlexibleStruct
-      include Dry::Equalizer.new(:stylesheet_id)
+      include Dry::Core::Equalizer.new(:stylesheet_id)
       include Dux.comparable(:stylesheet_name)
       include Packaging::EpubV3::HasPath
 

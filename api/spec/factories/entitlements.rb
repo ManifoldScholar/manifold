@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :entitlement do
     transient do
-      user { create :user }
+      user { FactoryBot.create :user }
     end
 
     target { user }
@@ -35,7 +37,7 @@ FactoryBot.define do
     end
 
     trait :for_reading_group do
-      target { create :reading_group, with_user: user }
+      target { FactoryBot.create :reading_group, with_user: user }
     end
 
     trait :with_expiration do

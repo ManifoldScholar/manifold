@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class takes an Ingestion record and
 # returns a new TextSection record.
 module Ingestions
@@ -7,7 +9,6 @@ module Ingestions
       record :text
       object :logger, default: nil
 
-      # rubocop:disable Metrics/AbcSize
       def execute
         @context = shared_inputs[:context] = build_context
 
@@ -33,7 +34,6 @@ module Ingestions
 
         text_section
       end
-      # rubocop:enable Metrics/AbcSize
 
       private
 

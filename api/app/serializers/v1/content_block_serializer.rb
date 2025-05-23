@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class ContentBlockSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     abilities
@@ -26,6 +27,5 @@ module V1
     def self.include_abilities?(_object, _params)
       true
     end
-
   end
 end

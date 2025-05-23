@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :journal do
     title { "A journal title" }
@@ -9,6 +11,5 @@ FactoryBot.define do
     trait :as_draft do
       draft { true }
     end
-
   end
 end

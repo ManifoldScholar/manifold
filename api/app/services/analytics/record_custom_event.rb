@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Analytics
   class RecordCustomEvent < Analytics::RecordScopedEvent
-
     string :name, default: nil
     hash :properties, strip: false, default: {}
     time :time, default: Time.current
@@ -23,6 +24,5 @@ module Analytics
         time: time
       )
     end
-
   end
 end

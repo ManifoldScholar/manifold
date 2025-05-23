@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
   class OauthConfig
     include ManifoldEnv::HasConfigurationDSL
@@ -94,7 +96,7 @@ module ManifoldEnv
       raw_custom_oauth_configuration.each do |provider_name, provider_options|
         options = provider_options.merge(name: provider_name).symbolize_keys
 
-        @custom_providers[provider_name] = ManifoldEnv::CustomOauthProvider.new options
+        @custom_providers[provider_name] = ManifoldEnv::CustomOauthProvider.new(**options)
       end
     end
 

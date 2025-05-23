@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 using Refinements::HandleRenamedCollections
 # The primary entry point for this subsystem is {PaperclipMigrator.migrate_all!}.
 #
 # Its intention is to divorce all dependencies on Paperclip itself so that migrations
 # will continue to work even after we eventually remove the Paperclip gem.
-# rubocop:disable Metrics/MethodLength
 module PaperclipMigrator
   FIELD_NAMES = %w[file_name file_size content_type updated_at].freeze
-  HASH_DATA = ":class/:attachment/:id/:style/:updated_at".freeze
-  PATH = ":rails_root/public/system/:class/:attachment/:uuid_partition/:style-:hash.:extension".freeze
+  HASH_DATA = ":class/:attachment/:id/:style/:updated_at"
+  PATH = ":rails_root/public/system/:class/:attachment/:uuid_partition/:style-:hash.:extension"
 
   class << self
     # @param [Class] klass
@@ -216,8 +217,8 @@ module PaperclipMigrator
     # @return [{ Symbol => { Symbol => Object }}] styles mapped to shrine data objects
     # @return [{ Symbol => Object }] when there is only one style
     def to_shrine_data
-      style_names.each_with_object({}) do |style_name, h|
-        h[style_name] = shrine_data_for(style_name)
+      style_names.index_with do |style_name|
+        shrine_data_for(style_name)
       end.compact.tap do |h|
         return h[default_style] unless has_additional_styles?
       end
@@ -236,7 +237,7 @@ module PaperclipMigrator
     end
 
     def build_uuid_partition
-      instance.id.to_s[0..2].scan(/\w/).join("/".freeze)
+      instance.id.to_s[0..2].scan(/\w/).join("/")
     end
 
     # Fetch the original attachment fields from paperclip columns
@@ -299,4 +300,3 @@ module PaperclipMigrator
     end
   end
 end
-# rubocop:enable Metrics/MethodLength

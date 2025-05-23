@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 RSpec.describe ExternalSourceUploader do
   let(:attachment) { cached_external_source.reload.asset }
@@ -12,6 +14,7 @@ RSpec.describe ExternalSourceUploader do
     expect(attachment.extension).to eq("png")
     expect(attachment.size).to be_instance_of(Integer)
   end
+
   it "stores the SHA256 hash" do
     expect(attachment.metadata["sha256"]).to be_a String
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalImport
   class ImportUser < ActiveInteraction::Base
     string :email

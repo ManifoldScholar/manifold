@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Configuration
     class AbstractDefinitionConfigurator
@@ -8,7 +10,7 @@ module Ingestions
 
       # @param [Symbol] name
       # @param [Class, nil] interaction
-      def initialize(name, interaction = nil, &block)
+      def initialize(name, interaction = nil, &)
         interaction ||= derive_interaction(name)
 
         if interaction.blank?
@@ -21,7 +23,7 @@ module Ingestions
           interaction: interaction
         }
 
-        evaluate(&block) if block_given?
+        evaluate(&) if block_given?
       end
 
       # @param [String] text

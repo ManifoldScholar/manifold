@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Strategies::Manifest do
@@ -79,7 +81,6 @@ RSpec.describe Ingestions::Strategies::Manifest do
   let!(:context) { create_context(ingestion) }
   let!(:manifest) { described_class.run(context: context).result }
 
-
   context "when collection of different file kinds" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local.zip") }
 
@@ -104,7 +105,7 @@ RSpec.describe Ingestions::Strategies::Manifest do
     end
   end
 
-  context "when the manifest is composed of nested, remote sources", slow: true do
+  context "when the manifest is composed of nested, remote sources and toc anchors", slow: true do
     before(:all) do
       Settings.instance.update_from_environment!
     end
@@ -118,8 +119,5 @@ RSpec.describe Ingestions::Strategies::Manifest do
     it "Assigns the correct title to the parent section" do
       expect(manifest[:relationships][:text_sections][1][:name]).to eq "Section 2"
     end
-
   end
-
-
 end

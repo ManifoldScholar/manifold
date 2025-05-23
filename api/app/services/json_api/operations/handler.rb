@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module JSONAPI
   module Operations
     class Handler
@@ -30,7 +32,7 @@ module JSONAPI
 
             operator_params = yield operator_params_for operation
 
-            operator = operator_klass.new operator_params
+            operator = operator_klass.new(**operator_params)
 
             operator.call.fmap do |data|
               yield maybe_serialize data
@@ -111,7 +113,7 @@ module JSONAPI
 
         options = build_serializer_options
 
-        serializer = serializer_klass.new(data, options)
+        serializer = serializer_klass.new(data, **options)
 
         Success serializer.serializable_hash
       end

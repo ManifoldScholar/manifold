@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe TextTitle, type: :model do
   it "belongs to a text" do
-    text_title = TextTitle.new
+    text_title = described_class.new
     text = Text.new
     text_title.text = text
     expect(text_title.text).to be text
   end
 
-  it_should_behave_like "a model with formatted attributes" do
+  it_behaves_like "a model with formatted attributes" do
     describe "with specific values" do
       let(:raw) { "_italic_ a **bold**" }
       let(:formatted) { "<em>italic</em> a <strong>bold</strong>" }

@@ -27,11 +27,11 @@ RSpec.describe "Journal JournalIssues API", type: :request do
 
         it "creates an issue with the existing project" do
           expect do
-            post path, headers: headers, params: build_json_payload(params)
+            post path, headers: headers, params: build_json_payload(**params)
           end.to change(JournalIssue, :count).by(1)
             .and keep_the_same(Project, :count)
 
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(:created)
         end
       end
 
@@ -44,11 +44,11 @@ RSpec.describe "Journal JournalIssues API", type: :request do
 
         it "creates an issue AND a project" do
           expect do
-            post path, headers: headers, params: build_json_payload(params)
+            post path, headers: headers, params: build_json_payload(**params)
           end.to change(JournalIssue, :count).by(1)
             .and change(Project, :count).by(1)
 
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(:created)
         end
       end
     end
@@ -79,11 +79,11 @@ RSpec.describe "Journal JournalIssues API", type: :request do
 
         it "does not create an issue" do
           expect do
-            post path, headers: headers, params: build_json_payload(params)
+            post path, headers: headers, params: build_json_payload(**params)
           end.to keep_the_same(JournalIssue, :count)
             .and keep_the_same(Project, :count)
 
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
 
@@ -96,11 +96,11 @@ RSpec.describe "Journal JournalIssues API", type: :request do
 
         it "creates an issue and a project" do
           expect do
-            post path, headers: headers, params: build_json_payload(params)
+            post path, headers: headers, params: build_json_payload(**params)
           end.to change(JournalIssue, :count).by(1)
             .and change(Project, :count).by(1)
 
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(:created)
         end
       end
     end

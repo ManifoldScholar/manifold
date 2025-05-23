@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module ProjectCollections
       module Relationships
         class ProjectsController < ApplicationController
-
           before_action :set_project_collection, only: [:index]
 
           resourceful! Project, authorize_options: { except: [:index, :show] } do
             ids = @project_collection.projects.select(:id)
             Project.filtered(
-              with_pagination!(project_filter_params),
+              **with_pagination!(project_filter_params),
               scope: Project.all.where(id: ids)
             )
           end
@@ -39,7 +40,6 @@ module API
           def location
             api_v1_project_collection_relationships_projects_url(@project_collection)
           end
-
         end
       end
     end

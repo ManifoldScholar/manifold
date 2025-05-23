@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength, Metrics/MethodLength
 class Seed
   extend ActiveModel::Callbacks
 
@@ -59,14 +58,6 @@ class Seed
   def make_system_user!(classification)
     classification = UserClassification.fetch(classification)
 
-    begin
-      User.fetch_by_classification(classification.to_s)
-    rescue Faraday::ConnectionFailed
-      # :nocov:
-      Rails.logger.warn "Unable to index user in ElasticSearch while running seed script."
-      # :nocov:
-    end
-
     user = User.fetch_by_classification(classification.to_s)
 
     logger.info Rainbow("Ensuring #{classification.text} user exists: #{user.email}").lightblue
@@ -91,7 +82,7 @@ class Seed
       link_url: "http://localhost:13100/",
       style: "dark",
       foreground_position: "absolute",
-      foreground: File.open(Rails.root.join("app", "assets", "images", "seed-feature-foreground.png")),
+      foreground: Rails.root.join("app", "assets", "images", "seed-feature-foreground.png").open,
       creator: cli_user,
       foreground_top: "1.9em",
       live: true
@@ -105,4 +96,3 @@ class Seed
     end
   end
 end
-# rubocop:enable Layout/LineLength, Metrics/MethodLength

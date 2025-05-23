@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
   module HasConfigurationDSL
     extend ActiveSupport::Concern

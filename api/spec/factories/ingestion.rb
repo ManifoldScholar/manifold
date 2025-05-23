@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :ingestion do
     transient do
@@ -14,7 +16,6 @@ FactoryBot.define do
       external_source_url { nil }
 
       after(:build) do |ingestion, evaluator|
-
         ingestion.source =
           case evaluator.source_path
           when IO, File then evaluator.source_path

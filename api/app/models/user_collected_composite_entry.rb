@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Serves as a composite, polymorphic collection of all a user's collected records.
 #
 # Not used directly, but used in several cases where the entire collection needs to be rendered.
@@ -21,7 +23,7 @@ class UserCollectedCompositeEntry < ApplicationRecord
 
   has_many :subjects, through: :project
 
-  has_one :favorite, foreign_key: :id, inverse_of: :user_collected_composite_entry
+  has_one_readonly :favorite, foreign_key: :id, inverse_of: :user_collected_composite_entry
 
   validates :collectable_jsonapi_type, presence: true
 end

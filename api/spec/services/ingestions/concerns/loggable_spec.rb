@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
-RSpec.describe Ingestions::Concerns::Loggable do
-  class LoggingThing
-    include Ingestions::Concerns::Loggable
-    def initialize(logger)
-      @logger = logger
-    end
+class LoggingThing
+  include Ingestions::Concerns::Loggable
+  def initialize(logger)
+    @logger = logger
   end
+end
 
+RSpec.describe Ingestions::Concerns::Loggable do
   let(:logging_thing) { LoggingThing.new(Rails.logger) }
 
   it "logs info level messages" do

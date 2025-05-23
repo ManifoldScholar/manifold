@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Factory::Event do
-
-  let(:factory) { Factory::Event.new }
+  let(:factory) { described_class.new }
 
   it "resolves a subject keyword argument to an event subject" do
     project = FactoryBot.create(:project)
@@ -25,14 +26,14 @@ RSpec.describe Factory::Event do
   end
 
   it "raises an exception when it's not given a subject" do
-    expect{factory.create(EventType[:project_created])}
+    expect { factory.create(EventType[:project_created]) }
       .to raise_error(Factory::Errors::NoEventSubject)
   end
 
   it "creates a valid event" do
     project = FactoryBot.create(:project)
     event = factory.create(EventType[:project_created], subject: project)
-    match = I18n.t("services.factory.event.event_title.project_created")
+    I18n.t("services.factory.event.event_title.project_created")
     expect(event).to be_valid
   end
 
@@ -79,16 +80,16 @@ RSpec.describe Factory::Event do
 
   it "raises an exception if the subject can't be resolved to a project" do
     user = FactoryBot.create(:user)
-    expect{
+    expect do
       factory.create(EventType[:text_added], subject: user)
-    }.to raise_error(Factory::Errors::NoEventProject)
+    end.to raise_error(Factory::Errors::NoEventProject)
   end
 
   it "correctly reports whether an i18n key is set" do
     t1 = factory.send(:i18n_set?, "services.factory.event.event_title.project_created")
-    expect(t1).to eq true
+    expect(t1).to be true
     t2 = factory.send(:i18n_set?, "not.a.real.translation")
-    expect(t2).to eq false
+    expect(t2).to be false
   end
 
   it "correctly records the attribution_name from the subject creator" do
@@ -97,5 +98,4 @@ RSpec.describe Factory::Event do
     event = factory.create(EventType[:text_annotated], subject: annotation)
     expect(event.attribution_name).to eq "Alexander Hamilton"
   end
-
 end

@@ -31,6 +31,7 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   Rails.application.configure do
+    config.hosts << "www.example.com"
     config.hosts << "localhost"
     config.hosts << "manifold.lvh"
     config.hosts << "manifold-api.ngrok.io"

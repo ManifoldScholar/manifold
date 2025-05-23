@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module TextSectionJobs
   class EnqueueAdoptAnnotationsJob < ApplicationJob
-
     def perform(annotations_ids)
       return unless annotations_ids.present?
 

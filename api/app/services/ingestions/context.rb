@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   class Context
     include Ingestions::Concerns::Loggable
@@ -64,6 +66,5 @@ module Ingestions
       ensure_root
       ensure_working_dirs
     end
-
   end
 end

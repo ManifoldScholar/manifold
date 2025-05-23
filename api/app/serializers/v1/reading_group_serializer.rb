@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class ReadingGroupSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     abilities
@@ -85,18 +86,18 @@ module V1
     end
 
     link_with_meta :clone, if: guard_user_authorized_to(:update), method: "POST" do |object, _params|
-      routes.clone_api_v1_reading_group_path(object)
+      ManifoldApi::Container["system.routes"].clone_api_v1_reading_group_path(object)
     end
 
     CAN_JOIN = ->(object, params) do
       next unless params[:current_user].present?
       next unless object.public?
 
-      !ReadingGroupMembership.where(reading_group: object, user: params[:current_user]).exists?
+      !ReadingGroupMembership.exists?(reading_group: object, user: params[:current_user])
     end
 
     link_with_meta :join, if: CAN_JOIN, method: "POST" do |object, _params|
-      routes.join_api_v1_reading_group_path(object)
+      ManifoldApi::Container["system.routes"].join_api_v1_reading_group_path(object)
     end
 
     SHOW_ARCHIVE_LINK = ->(reading_group, params) do
@@ -114,7 +115,7 @@ module V1
 
       next nil if membership.blank?
 
-      routes.archive_api_v1_reading_group_membership_path(membership)
+      ManifoldApi::Container["system.routes"].archive_api_v1_reading_group_membership_path(membership)
     end
   end
 end

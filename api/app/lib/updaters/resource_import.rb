@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates a Resource Import model from JSON-API style params
   class ResourceImport
@@ -28,6 +30,5 @@ module Updaters
     def remove_state!(attributes)
       attributes.delete(:state)
     end
-
   end
 end

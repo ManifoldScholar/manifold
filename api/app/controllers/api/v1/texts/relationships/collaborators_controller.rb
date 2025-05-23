@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Texts
@@ -11,7 +13,7 @@ module API
           before_action :set_text
 
           resourceful! Collaborator, authorize_options: { except: [:index, :show] } do
-            @text.collaborators.filtered(collaborator_filter_params)
+            @text.collaborators.filtered(**collaborator_filter_params)
           end
 
           def index

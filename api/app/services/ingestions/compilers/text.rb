@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Compilers
     class Text < AbstractInteraction
@@ -35,7 +37,7 @@ module Ingestions
       def add_pending_slug!(attributes)
         title = text_titles.find { |t| t["kind"] == "main" } || text_titles.first
         value = title&.fetch("value", nil)
-        value = value&.downcase == "index" ? "untitled" : value
+        value = "untitled" if value&.downcase == "index"
         attributes[:pending_slug] = value
       end
 
@@ -51,15 +53,14 @@ module Ingestions
         end
 
         info "services.ingestions.compiler.text.log.lang",
-             lang: text.metadata.dig("language")
+             lang: text.metadata["language"]
         info "services.ingestions.compiler.text.log.rights",
-             rights: text.metadata.dig("rights")
+             rights: text.metadata["rights"]
         info "services.ingestions.compiler.text.log.date",
              date: text.publication_date
         info "services.ingestions.compiler.text.log.desc",
              desc: text.description
       end
-
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Reading groups controller
@@ -8,7 +10,7 @@ module API
 
       resourceful! ReadingGroup do
         ReadingGroup.includes(:reading_group_collection, :reading_group_kind, reading_group_memberships: %i[user])
-          .filtered(with_pagination!(reading_group_filter_params))
+          .filtered(**with_pagination!(reading_group_filter_params))
       end
 
       authority_actions do_clone: :update, join: :read
@@ -57,7 +59,7 @@ module API
           user: current_user
         }
 
-        handle_monadic_operation! "reading_groups.clone", options do |m|
+        handle_monadic_operation! "reading_groups.clone", **options do |m|
           m.success do |cloned_reading_group|
             render_single_resource cloned_reading_group
           end
@@ -72,7 +74,7 @@ module API
           user: current_user
         }
 
-        handle_monadic_operation! "reading_groups.join_public", options do |m|
+        handle_monadic_operation! "reading_groups.join_public", **options do |m|
           m.success do |reading_group_membership|
             render_single_resource reading_group_membership, serializer: ::V1::ReadingGroupMembershipSerializer
           end

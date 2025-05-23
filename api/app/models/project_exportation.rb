@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The intention to export a {Project} (via {ProjectExport}) to an {ExportTarget}.
 #
 # @see ProjectExportationTransition
@@ -8,8 +10,8 @@ class ProjectExportation < ApplicationRecord
   include SerializedAbilitiesFor
   include Filterable
 
-  belongs_to :project, required: true
-  belongs_to :export_target, required: true
+  belongs_to :project, optional: false
+  belongs_to :export_target, optional: false
   belongs_to :project_export, optional: true
   belongs_to :user, optional: true
 

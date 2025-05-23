@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module HTMLNodes
   class ExtractNamespaces < ActiveInteraction::Base
-    EPUB_PREFIX = /\A(?<name>[^:]+):\s+(?<url>.+)\z/.freeze
-    PREFIX_SEPARATOR = /,\s*(?=\S+:)/.freeze
+    EPUB_PREFIX = /\A(?<name>[^:]+):\s+(?<url>.+)\z/
+    PREFIX_SEPARATOR = /,\s*(?=\S+:)/
 
     object :document, class: "Nokogiri::XML::Document"
 

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
-# rubocop:disable Layout/LineLength
 RSpec.describe Serializer::HTML do
-  let(:serializer) { Serializer::HTML.new }
+  let(:serializer) { described_class.new }
 
   it "should wrap top level siblings in a div element" do
     node = "<p>AAA</p><p>BBB</p>"
@@ -88,7 +89,7 @@ RSpec.describe Serializer::HTML do
     html = "<div><span>AAA</span></div>"
     serialized = serializer.serialize(html)
     span_node = serialized[:children].first
-    expect(span_node).to_not include(:node_uuid)
+    expect(span_node).not_to include(:node_uuid)
   end
 
   it "should add a node_uuid to text nodes" do
@@ -114,6 +115,4 @@ RSpec.describe Serializer::HTML do
     children = serialized[:children]
     expect(children.size).to eq 1
   end
-
-
 end

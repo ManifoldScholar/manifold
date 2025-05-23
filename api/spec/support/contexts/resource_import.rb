@@ -1,6 +1,7 @@
-RSpec.shared_context "resource import", :shared_context => :metadata do
+# frozen_string_literal: true
 
-  before(:each) do
+RSpec.shared_context "resource import", shared_context: :metadata do
+  before do
     allow_any_instance_of(ResourceImportRows::Import)
       .to receive(:fetch_google_drive_file) do |import, value|
       if value
@@ -10,5 +11,4 @@ RSpec.shared_context "resource import", :shared_context => :metadata do
       nil
     end
   end
-
 end

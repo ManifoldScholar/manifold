@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     class TitleItem < Types::FlexibleStruct
-      include Dry::Equalizer.new(:text_title_id)
+      include Dry::Core::Equalizer.new(:text_title_id)
       include Dux.comparable(:position)
 
       attribute :kind, Types::ENUM_OF_TYPE[TextTitleKind]
@@ -13,7 +15,7 @@ module Packaging
 
       # @return [(String, Hash)]
       def to_gepub_args
-        [value, to_gepub_options]
+        [value]
       end
 
       # @return [Hash]

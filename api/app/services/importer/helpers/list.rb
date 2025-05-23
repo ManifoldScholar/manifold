@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class is used in place of the GoogleDrive gem's list class, which provides an
 # enumerable interface to Google worksheets. The reason we override it is because our
 # current implementation assumes that the data in the worksheet begins on row 4, and that
@@ -42,7 +44,7 @@ module Importer
       # Iterates over Hash-like object (GoogleDrive::ListRow) for each row
       # (except for the first row).
       # Keys of the object are colum names (the first row).
-      def each(&_block)
+      def each(&)
         for i in 0...size
           yield(self[i])
         end

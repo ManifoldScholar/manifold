@@ -4,10 +4,9 @@ module API
   module V1
     # Projects controller
     class ProjectsController < ApplicationController
-
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filtered(
-          with_pagination!(project_filter_params&.with_defaults(no_issues: true)),
+          **with_pagination!(project_filter_params&.with_defaults(no_issues: true)),
           scope: scope_visibility.includes(:creators),
           user: current_user
         )

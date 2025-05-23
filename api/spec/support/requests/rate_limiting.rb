@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_context "rack-attack rate limiting" do
-  after(:each) do
+  after do
     # Clear the rack-attack cache after every request spec.
     Rack::Attack.reset!
   end

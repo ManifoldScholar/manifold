@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module PostProcessors
     class SetStartSection < AbstractInteraction
@@ -29,10 +31,8 @@ module Ingestions
       end
 
       def manifest_start_text_section
-        @manifest_start_text_section ||= begin
-          manifest[:relationships][:text_sections].detect do |ts|
-            ts[:source_identifier] == manifest[:start_section_identifier]
-          end
+        @manifest_start_text_section ||= manifest[:relationships][:text_sections].detect do |ts|
+          ts[:source_identifier] == manifest[:start_section_identifier]
         end
       end
 

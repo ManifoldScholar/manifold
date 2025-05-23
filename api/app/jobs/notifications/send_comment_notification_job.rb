@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Notifications
   class SendCommentNotificationJob < ApplicationJob
-
     # @param [String] user_id
     # @param [String] comment_id
     def perform(user_id, comment_id)
@@ -13,6 +14,5 @@ module Notifications
         "  Failed to send new comment notification for #<Comment:#{comment_id} to #<User:#{user_id}>"
       )
     end
-
   end
 end

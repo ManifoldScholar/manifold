@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module ExternalAuth
   module Provisioners
     class User < Abstract
-
       before_provision :random_password
 
       with_options if: :facebook_or_google? do

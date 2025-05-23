@@ -1,12 +1,11 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe V1::ErrorSerializer do
-  let(:subject) { described_class.new(errors) }
-  let(:project) do
-    project = Project.new
-    project.save
-    project
-  end
+  subject { described_class.new(errors) }
+
+  let(:project) { Project.new.tap(&:save) }
   let(:errors) { ::V1::Helpers::Errors.new(project.errors).for_serialization }
 
   it "successfully serializes the object to a String value" do

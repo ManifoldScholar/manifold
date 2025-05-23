@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "memoist"
 
 module Ingestions
@@ -5,7 +7,6 @@ module Ingestions
     module Manifest
       # Inspects epub for a single text section
       class TextSection
-
         def initialize(strategy, source, ingestion_sources, position)
           @source = source
           @context = strategy.context

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Layout/LineLength
 module Patches
   module BetterEnums
     extend ActiveSupport::Concern
@@ -105,19 +104,19 @@ module Patches
       def as_case_statement(initial = nil, or_else: UNSET, only: [], except: [])
         quoted_expr = Arel::Nodes.build_quoted initial if initial.present?
 
-        statement = Arel::Nodes::Case.new(quoted_expr).tap do |statement|
+        statement = Arel::Nodes::Case.new(quoted_expr).tap do |stmt|
           unless or_else == UNSET
             other_value = Arel::Nodes.build_quoted or_else
 
-            statement.else(other_value)
-            end
+            stmt.else(other_value)
+          end
         end
 
-        constrain(only: only, except: except).each_with_object(statement) do |enum, statement|
+        constrain(only: only, except: except).each_with_object(statement) do |enum, stmt|
           value = yield enum
 
-          statement.when(enum.to_s).then(value)
-          end
+          stmt.when(enum.to_s).then(value)
+        end
       end
 
       def as_case_order(initial = nil, **options)
@@ -161,7 +160,7 @@ module Patches
         inverted? ? !value : value
       end
 
-      alias_method :match, :call
+      alias match call
 
       def inverted?
         @inverted
@@ -194,7 +193,7 @@ module Patches
         applies_to? owner
       end
 
-      alias_method :applicable?, :applies?
+      alias applicable? applies?
 
       # @api private
       # @note Test method
@@ -346,8 +345,6 @@ module Patches
     end
   end
 end
-# rubocop:enable Layout/LineLength
-
 ClassyEnum::Base.include Patches::BetterEnums
 ActiveRecord::ConnectionAdapters::AbstractAdapter.prepend Patches::ProperlyQuoteEnums
 ActiveModel::Type::ImmutableString.prepend Patches::ProperlySerializeForType

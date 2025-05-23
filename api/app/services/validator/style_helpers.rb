@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Validator
   module StyleHelpers
     CSS_UNITS = %w(em ex % px cm mm in pt pc ch rem vh vw vmin vmax).freeze
@@ -52,8 +54,7 @@ module Validator
     # @param styles [Hash] a hash representation of CSS properties/values
     # @return [String] an inline CSS string
     def pairs_to_style_string(styles)
-      b = []
-      styles.each { |key, value| b.push("#{key}: #{value}") }
+      b = styles.map { |key, value| "#{key}: #{value}" }
       b.join("; ")
     end
 

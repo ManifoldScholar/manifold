@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Utility::Counter do
@@ -21,7 +23,7 @@ RSpec.describe Utility::Counter do
   it "can count various integers" do
     test_counter! expected: 1 do |c|
       c += 2
-      c -= 1
+      c - 1
     end
 
     expect(@counted).to eq 1

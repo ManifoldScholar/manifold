@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Adds a `slice_with` method that allows keys to be remapped.
 module SliceWith
   extend ActiveSupport::Concern

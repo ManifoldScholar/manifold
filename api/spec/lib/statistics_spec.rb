@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Statistics do
@@ -6,7 +8,7 @@ RSpec.describe Statistics do
   shared_context 'a float statistic' do
     let(:attribute_name) { nil }
 
-    before(:each) do
+    before do
       if attribute_name.nil?
         raise 'Be sure to set attribute_name when including the context'
       end

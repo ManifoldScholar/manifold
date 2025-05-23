@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Factory
   # Factory class for creating Event models
   class Event
@@ -5,7 +7,6 @@ module Factory
       @settings = Settings.instance
     end
 
-    # rubocop:disable Metrics/MethodLength
     def create(event_type, subject_id: nil, subject_type: nil, subject: nil)
       ApplicationRecord.transaction do
         subject = resolve_subject(subject_id, subject_type, subject)
@@ -26,9 +27,7 @@ module Factory
         event
       end
     end
-    # rubocop:enable Metrics/MethodLength
 
-    # rubocop:disable Metrics/MethodLength
     def create_from_tweet(tweet, query)
       subject = query
       raise_no_subject unless subject
@@ -54,14 +53,13 @@ module Factory
       log_event_errors(event)
       event
     end
-    # rubocop:enable Metrics/MethodLength
 
     private
 
     def log_event_errors(event)
       return unless event.errors.any?
 
-      Rails.logger.debug("Factory::Event invalid event: #{event.errors.full_messages}")
+      Rails.logger.debug { "Factory::Event invalid event: #{event.errors.full_messages}" }
     end
 
     def subject_attribution_name(_type, subject)
@@ -139,7 +137,7 @@ module Factory
       rescue StandardError
         false
       end
-      !t.blank?
+      t.present?
     end
   end
 end

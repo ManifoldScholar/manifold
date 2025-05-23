@@ -1,5 +1,6 @@
-class StatisticsAuthorizer < ApplicationAuthorizer
+# frozen_string_literal: true
 
+class StatisticsAuthorizer < ApplicationAuthorizer
   def self.default(_able, _user, _options = {})
     false
   end
@@ -7,5 +8,4 @@ class StatisticsAuthorizer < ApplicationAuthorizer
   def self.readable_by?(user, _options = {})
     marketeer_permissions?(user)
   end
-
 end

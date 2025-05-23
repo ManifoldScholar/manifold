@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Defines an interaction that generates a fingerprint for a model.
 module FingerprintInteraction
   extend ActiveSupport::Concern
@@ -118,7 +120,6 @@ module FingerprintInteraction
     end
   end
 
-  # rubocop:disable Layout/LineLength
   class_methods do
     # @return [Symbol, nil]
     attr_reader :fingerprint_target
@@ -137,5 +138,4 @@ module FingerprintInteraction
       alias_method :fingerprint_target, @fingerprint_target
     end
   end
-  # rubocop:enable Layout/LineLength
 end

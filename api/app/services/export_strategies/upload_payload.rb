@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   # The prepared payload for uploading a {ProjectExport} with an {ExportTarget}
   # (via {ExportStrategies::Selection}) utilizing an {ExportTargetStrategy export strategy}.

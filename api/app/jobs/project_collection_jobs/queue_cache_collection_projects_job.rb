@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectCollectionJobs
   class QueueCacheCollectionProjectsJob < ApplicationJob
     def perform
@@ -5,6 +7,5 @@ module ProjectCollectionJobs
         ProjectCollectionJobs::CacheCollectionProjectsJob.perform_later project_collection
       end
     end
-
   end
 end

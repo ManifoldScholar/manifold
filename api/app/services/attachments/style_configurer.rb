@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Attachments
   class StyleConfigurer < ActiveInteraction::Base
     object :shrine_uploaded_file, class: Object
@@ -36,6 +38,5 @@ module Attachments
       !shrine_uploaded_file.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
     end
     # rubocop:enable Lint/Void
-
   end
 end

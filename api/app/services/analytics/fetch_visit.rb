@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Analytics
   class FetchVisit < ActiveInteraction::Base
-
     with_options default: nil do
       string :visit_token
       string :visitor_token
@@ -42,6 +43,5 @@ module Analytics
         request: request
       }.compact
     end
-
   end
 end

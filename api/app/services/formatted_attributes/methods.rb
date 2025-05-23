@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormattedAttributes
   # This class derives and defines a number of methods that get included
   # directly on a model that uses {HasFormattedAttributes.has_formatted_attribute}.
@@ -19,7 +21,7 @@ module FormattedAttributes
 
     delegate :attribute, :key, :path, to: :definition
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       initialize_methods!

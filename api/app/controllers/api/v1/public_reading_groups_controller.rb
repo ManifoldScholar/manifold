@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     class PublicReadingGroupsController < ApplicationController
@@ -8,7 +10,7 @@ module API
       ].freeze
 
       resourceful! ReadingGroup, authorize_options: { except: [:index, :show] } do
-        ReadingGroup.includes(*EAGER_LOADS).visible_to_public.filtered(with_pagination!(reading_group_filter_params))
+        ReadingGroup.includes(*EAGER_LOADS).visible_to_public.filtered(**with_pagination!(reading_group_filter_params))
       end
 
       def index

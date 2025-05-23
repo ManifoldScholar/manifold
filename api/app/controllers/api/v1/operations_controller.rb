@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # @see https://jsonapi.org/ext/atomic/
@@ -7,7 +9,7 @@ module API
       def create
         handler = JSONAPI::Operations::Handler.new current_user: current_user
 
-        result = handler.call params
+        result = handler.call(params)
 
         handle_monadic_result! result do |m|
           m.success do |value|

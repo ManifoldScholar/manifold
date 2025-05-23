@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   class AbstractBaseInteraction < ActiveInteraction::Base
     include Ingestions::Concerns::CatchesExceptions
@@ -7,7 +9,7 @@ module Ingestions
     private
 
     def compose(interaction_klass, **composed_inputs)
-      super interaction_klass, composed_inputs.merge(shared_inputs)
+      super(interaction_klass, composed_inputs.merge(shared_inputs))
     end
 
     def compose_into(target, interaction_klass, **composed_inputs)

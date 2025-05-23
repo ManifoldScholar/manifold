@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module ProvidesEntitlements
   extend ActiveSupport::Concern
 
   included do
-    has_one :entitler, as: :entity
+    has_one_readonly :entitler, as: :entity
 
     has_many :provided_entitlements, through: :entitler, source: :entitlements
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   module Operations
     # Perform the actual upload.

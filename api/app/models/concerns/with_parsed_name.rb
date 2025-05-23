@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module WithParsedName
   extend ActiveSupport::Concern
 
@@ -28,7 +30,7 @@ module WithParsedName
     parts.each do |key, value|
       next unless respond_to? KEY_MAP[key]
 
-      write_attribute(KEY_MAP[key], value)
+      self[KEY_MAP[key]] = value
     end
   end
 
@@ -51,7 +53,7 @@ module WithParsedName
   end
 
   def full_name
-    full_name_properties.map { |p| send(p) }.reject(&:blank?).join(" ")
+    full_name_properties.map { |p| send(p) }.compact_blank.join(" ")
   end
 
   private

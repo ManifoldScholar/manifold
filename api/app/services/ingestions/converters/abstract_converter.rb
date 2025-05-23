@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Converters
     # @abstract
@@ -56,7 +58,6 @@ module Ingestions
         info "services.ingestions.conversion.log.perform",
              source: File.basename(source_path)
       end
-
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "pandoc-ruby"
 
 module Ingestions
@@ -29,7 +31,6 @@ module Ingestions
       def raw_html
         PandocRuby.latex(contents, :s).to_html
       end
-
     end
   end
 end

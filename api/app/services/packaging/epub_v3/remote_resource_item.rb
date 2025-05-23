@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     class RemoteResourceItem < Types::FlexibleStruct
-      include Dry::Equalizer.new(:url)
+      include Dry::Core::Equalizer.new(:url)
 
       attribute :url, Types::HTTP_URI
       attribute? :external_source, Types.Instance(::CachedExternalSource)

@@ -1,4 +1,4 @@
-require "stringio"
+# frozen_string_literal: true
 
 # Connects texts to resources that were sources for text sections during ingestion
 class Ingestion < ApplicationRecord
@@ -48,16 +48,16 @@ class Ingestion < ApplicationRecord
   end
 
   %w(DEBUG INFO WARN ERROR FATAL UNKNOWN).each do |severity|
-    class_eval <<-EOT, __FILE__, __LINE__ + 1
+    class_eval <<~RUBY, __FILE__, __LINE__ + 1
       def #{severity.downcase}(message = nil, progname = nil, &block)
         add("#{severity}", message, progname, &block)
       end
-    EOT
+    RUBY
   end
 
+  before_validation :infer_kind!
   before_save :commit_log
   before_update :commit_log
-  before_validation :infer_kind!
 
   def reset_strategy
     self.strategy = nil
@@ -154,5 +154,4 @@ class Ingestion < ApplicationRecord
       "text"
     end
   end
-
 end

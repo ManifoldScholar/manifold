@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Settings controller
     class SettingsController < ApplicationController
-
       resourceful! Settings, authorize_options: { except: [:show] } do
         Settings.instance
       end
@@ -16,7 +17,6 @@ module API
         ::Updaters::Settings.new(settings_params).update(@settings)
         render_single_resource(Settings.instance, location: "")
       end
-
     end
   end
 end

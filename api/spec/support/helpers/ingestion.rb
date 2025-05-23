@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TestHelpers
   module IngestionHelper
     def create_context(ingestion, logger = nil)

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       class Setting
-
         REQUEST_ATTRIBUTES = {
           press_logo: Types::Serializer::Upload,
           remove_press_logo: Types::Bool,
@@ -13,10 +14,9 @@ module APIDocs
           favicon: Types::Serializer::Upload,
           remove_favicon: Types::Bool,
           google_service: Types::Serializer::Upload.meta(description: "A json google service configuration file")
-        }
+        }.freeze
 
         class << self
-
           include APIDocs::Definitions::Resource
 
           def create_attributes
@@ -27,7 +27,6 @@ module APIDocs
               :remove_favicon
             )
           end
-
         end
       end
     end

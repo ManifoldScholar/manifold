@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :event do
     event_type { EventType[:project_created] }
@@ -19,13 +21,13 @@ FactoryBot.define do
     trait :resource_added do
       event_type { :resource_added }
 
-      subject { create(:resource, project: project) }
+      subject { FactoryBot.create(:resource, project: project) }
     end
 
     trait :text_added do
       event_type { :text_added }
 
-      subject { create(:text, project: project) }
+      subject { FactoryBot.create(:text, project: project) }
     end
 
     trait :text_annotated do
@@ -47,7 +49,7 @@ FactoryBot.define do
     trait :resource_collection_added do
       event_type { :resource_collection_added }
 
-      subject { create(:resource_collection, project: project) }
+      subject { FactoryBot.create(:resource_collection, project: project) }
     end
   end
 end

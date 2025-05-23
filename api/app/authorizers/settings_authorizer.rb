@@ -1,5 +1,6 @@
-class SettingsAuthorizer < ApplicationAuthorizer
+# frozen_string_literal: true
 
+class SettingsAuthorizer < ApplicationAuthorizer
   expose_abilities [:read_secrets]
 
   # Singleton settings can't be created or deleted, guy.
@@ -18,5 +19,4 @@ class SettingsAuthorizer < ApplicationAuthorizer
   def secrets_readable_by(user, _options = {})
     admin_permissions?(user)
   end
-
 end

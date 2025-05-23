@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @abstract
 class TusUploader < Shrine
   plugin :tus
@@ -30,5 +32,4 @@ class TusUploader < Shrine
     # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/PerceivedComplexity
   end
-
 end

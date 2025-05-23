@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ReadingGroups
   class CourseConfiguration
     include StoreModel::Model

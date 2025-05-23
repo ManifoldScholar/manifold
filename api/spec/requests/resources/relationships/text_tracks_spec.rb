@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe "Text Tracks API", type: :request do
   let!(:project) { FactoryBot.create(:project) }
   let!(:resource) { FactoryBot.create(:resource, project: project) }
@@ -10,6 +12,7 @@ RSpec.describe "Text Tracks API", type: :request do
       label: "Spanish",
     }
   end
+
   let(:params) do
     {
       data: {
@@ -43,9 +46,9 @@ RSpec.describe "Text Tracks API", type: :request do
       let(:headers) { admin_headers }
 
       it "creates a text track" do
-        expect {
+        expect do
           post path, headers: headers, params: params
-        }.to change(TextTrack, :count).by(1)
+        end.to change(TextTrack, :count).by(1)
         expect(response).to have_http_status(:created)
       end
     end
@@ -54,9 +57,9 @@ RSpec.describe "Text Tracks API", type: :request do
       let(:headers) { reader_headers }
 
       it "it does not create a text track" do
-        expect {
+        expect do
           post path, headers: headers, params: params
-        }.to keep_the_same(TextTrack, :count)
+        end.to keep_the_same(TextTrack, :count)
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -76,9 +79,9 @@ RSpec.describe "Text Tracks API", type: :request do
       let(:headers) { reader_headers }
 
       it "it does not update a text track" do
-        expect {
+        expect do
           post path, headers: headers, params: params
-        }.to keep_the_same(text_track, :label)
+        end.to keep_the_same(text_track, :label)
         expect(response).to have_http_status(:forbidden)
       end
     end
@@ -89,9 +92,9 @@ RSpec.describe "Text Tracks API", type: :request do
       let(:headers) { admin_headers }
 
       it "deletes a text track" do
-        expect {
+        expect do
           delete track_path, headers: headers
-        }.to change(TextTrack, :count).by(-1)
+        end.to change(TextTrack, :count).by(-1)
         expect(response).to have_http_status(:no_content)
       end
     end
@@ -100,9 +103,9 @@ RSpec.describe "Text Tracks API", type: :request do
       let(:headers) { reader_headers }
 
       it "it does not delete a text track" do
-        expect {
+        expect do
           post path, headers: headers, params: params
-        }.to keep_the_same(TextTrack, :count)
+        end.to keep_the_same(TextTrack, :count)
         expect(response).to have_http_status(:forbidden)
       end
     end

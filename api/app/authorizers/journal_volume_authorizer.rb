@@ -1,3 +1,4 @@
-class JournalVolumeAuthorizer < JournalChildAuthorizer
+# frozen_string_literal: true
 
+class JournalVolumeAuthorizer < JournalChildAuthorizer
 end

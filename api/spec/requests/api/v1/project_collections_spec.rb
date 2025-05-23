@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Project Collections", type: :request do
-
   included_relationships = [
     :subjects,
     :collection_projects,
@@ -32,5 +33,4 @@ RSpec.describe "Project Collections", type: :request do
 
     include_examples "an API destroy request", model: ProjectCollection, authorized_user: :admin
   end
-
 end

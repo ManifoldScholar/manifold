@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TextExports
   # @see TextExport.prunable
   class Prune < ActiveInteraction::Base

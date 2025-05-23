@@ -20,8 +20,9 @@ class Text < ApplicationRecord
   include SoftDeletable
   include TableOfContentsWithCollected
   include TimestampScopes
+  include HasKeywordSearch
 
-  TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
+  TYPEAHEAD_ATTRIBUTES = %i[title makers].freeze
 
   has_paper_trail meta: {
     parent_item_id: :project_id,
@@ -51,9 +52,9 @@ class Text < ApplicationRecord
   end
   with_citable_children :text_sections
 
-  attribute :structure_titles, :indifferent_hash, default: {}
-  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: []
-  attribute :landmarks, Texts::LandmarkEntry.to_array_type, default: []
+  attribute :structure_titles, :indifferent_hash, default: -> { {} }
+  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: -> { [] }
+  attribute :landmarks, Texts::LandmarkEntry.to_array_type, default: -> { [] }
 
   jsonb_accessor(
     :export_configuration,
@@ -73,24 +74,24 @@ class Text < ApplicationRecord
   has_many :ingestion_sources, dependent: :destroy, inverse_of: :text
   has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text, autosave: true
-  has_one :text_section_aggregation, inverse_of: :text
+  has_one_readonly :text_section_aggregation, inverse_of: :text
   has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text
   has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
   has_many :annotations, through: :text_sections
   has_one :text_created_event, -> { where event_type: EventType[:text_added] },
           class_name: "Event", as: :subject, dependent: :destroy, inverse_of: :subject
-  has_one :toc_section,
+  has_one_readonly :toc_section,
           -> { where(kind: TextSection::KIND_NAVIGATION) },
           class_name: "TextSection",
           inverse_of: :text
-  has_one :last_finished_ingestion, -> { where(state: "finished").order(created_at: :desc) }, class_name: "Ingestion"
+  has_one_readonly :last_finished_ingestion, -> { where(state: "finished").order(created_at: :desc) }, class_name: "Ingestion"
   has_many :cached_external_source_links, inverse_of: :text, dependent: :destroy
   has_many :cached_external_sources, through: :cached_external_source_links
   has_many :text_exports, inverse_of: :text, dependent: :destroy
-  has_many :text_export_statuses, inverse_of: :text
-  has_one :current_text_export_status, -> { current }, class_name: "TextExportStatus"
-  has_one :current_text_export, through: :current_text_export_status, source: :text_export
+  has_many_readonly :text_export_statuses, inverse_of: :text
+  has_one_readonly :current_text_export_status, -> { current }, class_name: "TextExportStatus"
+  has_one_readonly :current_text_export, through: :current_text_export_status, source: :text_export
   has_many :action_callouts,
            dependent: :destroy,
            inverse_of: :text
@@ -106,9 +107,8 @@ class Text < ApplicationRecord
   delegate :texts_nav, to: :project, prefix: true, allow_nil: true
   delegate :journal_nav, to: :project, prefix: true, allow_nil: true
 
-  before_validation :ensure_toc_uids!
-
   after_initialize :migrate_toc!
+  before_validation :ensure_toc_uids!
 
   validate :validate_start_text_section
   validate :validate_toc
@@ -129,45 +129,30 @@ class Text < ApplicationRecord
   after_commit :trigger_text_added_event, on: [:create, :update]
   after_commit :inject_global_stylesheet, on: :create
 
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
+  multisearches! :description, secondary_from: :description_plaintext
 
-  scope :search_import, lambda {
-    includes(
-      :makers,
-      :project,
-      :category,
-      :titles
-    )
-  }
+  has_keyword_search! associated_against: { titles: [:value] }, against: [:description]
 
   # During ingestion, texts can be created before they're added to a project.
   # We don't want to index those orphaned texts.
   def should_index?
-    project.present?
+    project.present? && super
   end
 
   def age
     (Time.zone.today - created_at.to_date).to_i
   end
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description,
-      parent_project: project&.id,
-      keywords: titles.map(&:value),
-      parent_keywords: [project&.title],
-      makers: makers.map(&:full_name),
-      metadata: metadata.values
-    }.merge(search_hidden)
+  def multisearch_full_text
+    description_plaintext
   end
 
-  def search_hidden
-    project.present? ? project.search_hidden : { hidden: true }
+  def multisearch_keywords
+    titles.map(&:value)
+  end
+
+  def multisearch_parent_keywords
+    [project.try(:title)].compact
   end
 
   def title_main
@@ -495,5 +480,4 @@ class Text < ApplicationRecord
 
     stylesheets.create global_stylesheet_attributes
   end
-
 end

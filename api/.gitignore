@@ -37,3 +37,6 @@ dump.sql
 
 coverage
 backup*
+
+/config/*.local.yml
+/config/credentials/local.*

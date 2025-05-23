@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Strategy
     module Document
       class TOC
-
         def initialize(inspector)
           @context = inspector.context
           @inspector = inspector
@@ -24,8 +25,6 @@ module Ingestions
           header_tags.find_index(tag)
         end
 
-        # rubocop:disable Metrics/AbcSize, Metrics/MethodLength,
-        # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         def build_toc_from_headers
           xpath = header_tags.map { |h| "//#{h}" }.join(" | ")
           headers = body_parsed.search(xpath)
@@ -58,8 +57,6 @@ module Ingestions
           end
           entries
         end
-        # rubocop:enable Metrics/AbcSize, Metrics/MethodLength,
-        # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
         def header_tags
           %w(h1 h2 h3 h4 h5 h6)
@@ -75,7 +72,6 @@ module Ingestions
             children: []
           }
         end
-
       end
     end
   end

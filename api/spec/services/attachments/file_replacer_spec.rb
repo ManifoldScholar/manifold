@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Attachments::FileReplacer do
@@ -20,19 +22,19 @@ RSpec.describe Attachments::FileReplacer do
   end
   let(:instance_image) do
     instance = AttachableClass.new
-    instance.attached = fixture_file_upload(Rails.root.join("spec", "data","assets","images","test_avatar.jpg"))
+    instance.attached = fixture_file_upload(Rails.root.join("spec", "data", "assets", "images", "test_avatar.jpg"))
     instance.save
 
     instance.reload
   end
   let(:instance_pdf) do
     instance = AttachableClass.new
-    instance.attached = fixture_file_upload(Rails.root.join("spec", "data","assets","pdfs","multi-page.pdf"))
+    instance.attached = fixture_file_upload(Rails.root.join("spec", "data", "assets", "pdfs", "multi-page.pdf"))
     instance.save
 
     instance.reload
   end
-  let(:replacement_dir) { Rails.root.join("spec", "data","assets","replacements") }
+  let(:replacement_dir) { Rails.root.join("spec", "data", "assets", "replacements") }
 
   context "when dry run" do
     it "doesn't change any attachments" do
@@ -51,5 +53,4 @@ RSpec.describe Attachments::FileReplacer do
       instance_pdf.reload
     end.to change(instance_image, :attached).and change(instance_pdf, :attached)
   end
-
 end

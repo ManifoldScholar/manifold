@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Validate an epub and record errors / warnings.
 #
 # @see https://github.com/w3c/epubcheck

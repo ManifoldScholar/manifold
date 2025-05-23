@@ -1,27 +1,11 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 describe CoreMediaTypeKind, packaging: true, type: :enum do
   let(:enum) { described_class.new }
 
   subject { enum }
-
-  describe ".match" do
-    class << self
-      def matches(content_type, expected_kind)
-        it "matches #{content_type.inspect} to #{expected_kind.inspect}" do
-          expect(described_class.match(content_type)).to eq expected_kind
-        end
-      end
-    end
-
-    matches "image/gif", :image
-    matches "audio/mp4", :audio
-    matches "video/mp4", :video
-    matches "text/css", :style
-    matches "font/woff2", :font
-    matches "application/xhtml+xml", :other
-    matches "application/x-gzip", :unknown
-  end
 
   shared_examples_for "something with statically defined MIME types" do
     describe ".mime_pattern" do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ExternalSourceUploader < Shrine
   include SharedUploader
 
@@ -40,5 +42,4 @@ class ExternalSourceUploader < Shrine
       RUBY
     end
   end
-
 end

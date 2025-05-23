@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Journals API", type: :request do
@@ -39,5 +41,4 @@ RSpec.describe "Journals API", type: :request do
 
     include_examples "an API create request", model: Journal, authorized_user: :admin
   end
-
 end

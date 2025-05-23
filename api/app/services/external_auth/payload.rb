@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExternalAuth
   class Payload
     # @!attribute [r] outcome

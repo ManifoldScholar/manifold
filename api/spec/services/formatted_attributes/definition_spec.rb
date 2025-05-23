@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe FormattedAttributes::Definition do
   let(:attribute_name) { :title }
-  let(:definition) { described_class.new(attribute_name, options) }
   let(:container) { nil }
-  let(:include_wrap)  { true }
+  let(:include_wrap) { true }
   let(:renderer_options) { {} }
 
   let(:options) do
@@ -19,6 +20,7 @@ RSpec.describe FormattedAttributes::Definition do
   let(:formatted_value) { "<p><em>italic</em> a <strong>bold</strong></p>" }
   let(:plaintext_value) { "italic a bold" }
 
+  let(:definition) { described_class.new(attribute_name, **options) }
   subject { definition }
 
   it 'has equality via :path' do
@@ -62,8 +64,6 @@ RSpec.describe FormattedAttributes::Definition do
         allow(dig).to receive(:dig) do |value|
           case value
           when attribute_name then raw_value
-          else
-            nil
           end
         end
       end
@@ -74,8 +74,6 @@ RSpec.describe FormattedAttributes::Definition do
         allow(ba).to receive(:[]) do |value|
           case value
           when attribute_name then raw_value
-          else
-            nil
           end
         end
       end
@@ -107,7 +105,7 @@ RSpec.describe FormattedAttributes::Definition do
       end
 
       context "with a blank model" do
-        let(:model_instance) { maybe_wrap_container double("blank model", :blank? => true) }
+        let(:model_instance) { maybe_wrap_container double("blank model", blank?: true) }
 
         it "returns nil" do
           expect(definition.extract_raw_from(model_instance)).to be_nil

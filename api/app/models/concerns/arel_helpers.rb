@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 # Shared collection of (mostly Arel) class-level helpers for working with advanced
 # SQL selections.
 #
-# rubocop:disable Style/StringLiterals
 # @see https://www.postgresql.org/docs/9.5/static/functions-json.html JSON functions and operators in PostgreSQL
 module ArelHelpers
   extend ActiveSupport::Concern

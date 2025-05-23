@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # Model representing a home page feature
 class Feature < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -29,5 +30,4 @@ class Feature < ApplicationRecord
   def to_s
     header
   end
-
 end

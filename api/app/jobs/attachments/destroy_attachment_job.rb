@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Attachments
   class DestroyAttachmentJob < ApplicationJob
     def perform(attacher_klass, data)

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       class ContentBlock
-
         REQUIRED_CREATE_ATTRIBUTES = [
           :type
         ].freeze

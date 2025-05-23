@@ -1,0 +1,11 @@
+default: &default
+  strategy: "pg"
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

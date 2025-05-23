@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EntitlementState < ClassyEnum::Base
   applicable!
 end
@@ -22,6 +24,6 @@ end
 
 class EntitlementState::Active < EntitlementState
   def applies_to?(entitlement)
-    not (entitlement.should_be_expiring_soon? || entitlement.has_expired?)
+    !(entitlement.should_be_expiring_soon? || entitlement.has_expired?)
   end
 end

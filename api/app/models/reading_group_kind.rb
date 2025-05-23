@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReadingGroupKind < ApplicationRecord
   include Authority::Abilities
   include FriendlyId

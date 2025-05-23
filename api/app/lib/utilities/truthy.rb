@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utilities
   class Truthy
     def self.truthy?(value)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_examples_for "an API destroy request" do |options|
+RSpec.shared_context "an API destroy request" do |options|
   api_spec_helper = APIDocs::Helpers::Request.new(options, :destroy)
 
   let(:resource_instance) do
@@ -10,7 +10,7 @@ RSpec.shared_examples_for "an API destroy request" do |options|
 
   delete api_spec_helper.summary do
     api_spec_helper.parameters.each do |parameter_options|
-      parameter(parameter_options)
+      parameter(**parameter_options)
     end
     description api_spec_helper.response_description if api_spec_helper.response_description?
     produces api_spec_helper.content_type if api_spec_helper.delete_has_response_body?
@@ -25,7 +25,7 @@ RSpec.shared_examples_for "an API destroy request" do |options|
 
     unless api_spec_helper.exclude_401
       response "401", I18n.t("swagger.not_authenticated"), focus: api_spec_helper.focus do
-        let(:Authorization) {}
+        let(:Authorization) { "" }
         run_test!
       end
     end

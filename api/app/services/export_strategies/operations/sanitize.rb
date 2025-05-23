@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   module Operations
     # Split a path by its component parts and pass each component through `Zaru`
@@ -9,7 +11,7 @@ module ExportStrategies
       include Shared::PipelineOperation
 
       # @api private
-      ABSOLUTE_PATH = %r{\A/.+}.freeze
+      ABSOLUTE_PATH = %r{\A/.+}
 
       # @param [String] input
       # @return [String]
@@ -20,9 +22,11 @@ module ExportStrategies
 
         return Failure([:empty_path, "Cannot sanitize #{input.inspect}"]) if parts.blank?
 
-        parts.map.with_index do |part, index|
+        sanitized = parts.map.with_index do |part, index|
           is_absolute && index.zero? ? "" : Zaru.sanitize!(part)
         end.join(File::SEPARATOR)
+
+        Success sanitized
       end
     end
   end

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       class Statistics
-
         ID_TYPE = ::Types::String.meta(example: "0")
 
         class << self

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require "rails_helper"
-include ActiveJob::TestHelper
 
 RSpec.shared_examples "after importing" do
+  include ActiveJob::TestHelper
   include_context "resource import"
 
   it "is valid" do
@@ -162,12 +164,12 @@ RSpec.describe ResourceImport, type: :model, slow: true do
 
   it "is invalid without a project" do
     ri = FactoryBot.build(:resource_import, project: nil)
-    expect(ri).to_not be_valid
+    expect(ri).not_to be_valid
   end
 
   it "is invalid without a creator" do
     ri = FactoryBot.build(:resource_import, creator: nil)
-    expect(ri).to_not be_valid
+    expect(ri).not_to be_valid
   end
 
   it "has an initial state of 'pending'" do
@@ -177,7 +179,7 @@ RSpec.describe ResourceImport, type: :model, slow: true do
   describe "when source is google_sheet" do
     it "is invalid if url is blank" do
       google_resource_import.url = nil
-      expect(google_resource_import).to_not be_valid
+      expect(google_resource_import).not_to be_valid
     end
 
     context "after parsing it" do
@@ -191,7 +193,7 @@ RSpec.describe ResourceImport, type: :model, slow: true do
   describe "when source is csv" do
     it "is invalid if data is blank" do
       csv_resource_import.data = nil
-      expect(csv_resource_import).to_not be_valid
+      expect(csv_resource_import).not_to be_valid
     end
 
     context "after parsing" do

@@ -1,9 +1,8 @@
-require "sti_preload"
+# frozen_string_literal: true
 
 class ContentBlock < ApplicationRecord
-  include ProxiedAssociations
   include ActiveSupport::Configurable
-  include StiPreload
+  include ProxiedAssociations
 
   config.required_render_attributes = [].freeze
 
@@ -14,7 +13,7 @@ class ContentBlock < ApplicationRecord
   # Ordering
   acts_as_list scope: :project
 
-  enum access: {
+  enum :access, {
     always: 0,
     authorized: 1,
     unauthorized: 2
@@ -26,8 +25,9 @@ class ContentBlock < ApplicationRecord
   delegate :orderable?, to: :class
   delegate :hideable?, to: :class
 
-  belongs_to :project
-  has_many :content_block_references, dependent: :destroy
+  belongs_to :project, inverse_of: :content_blocks
+
+  has_many :content_block_references, dependent: :destroy, inverse_of: :content_block
 
   validate :references_are_valid!
   validate :references_belong_to_project!
@@ -93,15 +93,13 @@ class ContentBlock < ApplicationRecord
       "::V1::#{name}Serializer".constantize
     end
 
-    # rubocop:disable Naming/PredicateName
-    def has_configured_attributes(attributes)
+    def has_configured_attributes(**attributes)
       @configured_attributes = attributes
 
       class_eval <<~RUBY, __FILE__, __LINE__ + 1
         jsonb_accessor :configuration, @configured_attributes
       RUBY
     end
-    # rubocop:enable Naming/PredicateName
 
     def available_attributes
       @configured_attributes&.keys
@@ -117,7 +115,6 @@ class ContentBlock < ApplicationRecord
 
     def configurable?
       true
-      # available_attributes.present? || available_relationships.present?
     end
 
     def orderable?

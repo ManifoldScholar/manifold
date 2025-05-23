@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class takes an Ingestion record and
 # returns a new Text record.
 module Ingestions

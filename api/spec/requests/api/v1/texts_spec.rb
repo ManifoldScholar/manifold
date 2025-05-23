@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Text", type: :request do
@@ -41,5 +43,4 @@ RSpec.describe "Text", type: :request do
                     url_parameters: [:project_id],
                     authorized_user: :admin
   end
-
 end

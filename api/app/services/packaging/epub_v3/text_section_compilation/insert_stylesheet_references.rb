@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     module TextSectionCompilation
@@ -9,7 +11,7 @@ module Packaging
         # @option state [Nokogiri::HTML::Document] :document
         # @option state [<Packaging::EpubV3::StylesheetItem>] :stylesheets
         # @return [void]
-        def call(state)
+        def call
           document = state[:document]
 
           head = document.at_css("head")
@@ -23,6 +25,8 @@ module Packaging
 
             head.add_child link
           end
+
+          Success()
         end
       end
     end
