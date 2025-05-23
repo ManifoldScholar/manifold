@@ -10,7 +10,6 @@ env:
   BROWSERSLIST_IGNORE_OLD_DATA: beQuiet
   DATABASE_URL: "postgres://postgres:postgres@localhost:5432/manifold_test"
   DISABLE_SPRING: yes
-  ELASTICSEARCH_URL: "http://localhost:9200"
   PATH: /usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:/usr/local/sbin
   RAILS_ENV: test
 
@@ -75,8 +74,6 @@ jobs:
       - uses: ./.github/actions/setup-ruby
 
       - uses: ./.github/actions/setup-node
-
-      - uses: ./.github/actions/setup-elasticsearch
 
       - name: "Install Pandoc"
         run: |

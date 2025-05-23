@@ -11,7 +11,7 @@ runs:
     - name: "Install Ruby 2.7.8"
       uses: ruby/setup-ruby@v1
       with:
-        bundler: 2.2.19
+        bundler: 2.4.19
         bundler-cache: true
-        ruby-version: 2.7.8
+        ruby-version: 3.2.3
         working-directory: api
