@@ -16,6 +16,14 @@ module MultisearchDocumentEnhancement
     scope :for_text, ->(text) { where(text: text) }
     scope :for_text_section, ->(text_section) { where(text_section: text_section) }
 
+    scope :sans_draft_projects, -> do
+      left_outer_joins(:project).where(Project.arel_table[:id].eq(nil).or(Project.arel_table[:draft].eq(false)))
+    end
+
+    scope :sans_draft_journals, -> do
+      left_outer_joins(:journal).where(Journal.arel_table[:id].eq(nil).or(Journal.arel_table[:draft].eq(false)))
+    end
+
     has_many_readonly :text_section_nodes, -> { current }, primary_key: :text_section_id, foreign_key: :text_section_id
 
     attribute :secondary_data, ::Search::SecondaryData.to_type
@@ -102,7 +110,10 @@ module MultisearchDocumentEnhancement
   module ClassMethods
     # @return [ActiveRecord::Relation<PgSearch::Document>]
     def faceted_search_for(keyword, facets: [], project: nil, text: nil, text_section: nil)
-      query = search(keyword)
+      query = all
+        .sans_draft_projects
+        .sans_draft_journals
+        .search(keyword)
         .with_pg_search_rank
         .with_pg_search_highlight.then do |q|
           tsearch = q.__send__(:tsearch)

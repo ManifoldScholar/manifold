@@ -366,11 +366,11 @@ class Annotation < ApplicationRecord
 
       needle = "%#{escaped}%"
 
-      body_matches = where arel_table[:body].matches(needle)
+      body_matches = where(arel_table[:body].matches(needle))
 
       creator_matches = joins(:creator).where(User.arel_table[:first_name].matches(needle).or(User.arel_table[:last_name].matches(needle)))
 
-      creator_matches.or(body_matches).distinct
+      where(id: creator_matches.select(:id)).or(where(id: body_matches.select(:id))).distinct
     end
   end
 end
