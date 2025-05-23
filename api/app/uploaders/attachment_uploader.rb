@@ -52,11 +52,18 @@ class AttachmentUploader < Shrine
   end
 
   class Attachment
-    def initialize(*, **) # rubocop:todo Metrics/MethodLength
+    def initialize(...)
       super
 
-      module_eval <<~RUBY, __FILE__, __LINE__ + 1
+      add_attachment_core_methods!
 
+      add_attachment_predicates!
+    end
+
+    private
+
+    def add_attachment_core_methods!
+      module_eval <<~RUBY, __FILE__, __LINE__ + 1
       def #{@name}_configuration
         shrine_configuration_for(#{@name.inspect})
       end
@@ -83,10 +90,6 @@ class AttachmentUploader < Shrine
         shrine_image_placeholder_for(style)
       end
 
-      def #{@name}_versions?
-        #{@name}_derivatives.is_a? Hash
-      end
-
       def #{@name}_checksum
         #{@name}_original(&:sha256)
       end
@@ -97,10 +100,6 @@ class AttachmentUploader < Shrine
 
       def #{@name}_file_name
         #{@name}_original(&:original_filename)
-      end
-
-      def #{@name}?
-        #{@name}.present?
       end
 
       def #{@name}_url
@@ -125,6 +124,18 @@ class AttachmentUploader < Shrine
 
       def #{@name}_styles
         shrine_styles_for #{@name.inspect}
+      end
+      RUBY
+    end
+
+    def add_attachment_predicates!
+      module_eval <<~RUBY, __FILE__, __LINE__ + 1
+      def #{@name}_versions?
+        #{@name}_derivatives.is_a? Hash
+      end
+
+      def #{@name}?
+        #{@name}.present?
       end
 
       def #{@name}_is_image?
@@ -154,7 +165,6 @@ class AttachmentUploader < Shrine
       def #{@name}_is_pdf?
         shrine_upload_matches_type?(#{@name}_original, type: :pdf)
       end
-
       RUBY
     end
   end

@@ -4,9 +4,9 @@ require "rails_helper"
 
 shared_examples_for "a serializer" do |partial_by_default: false|
   let(:serialized_object) { defined?(super) ? super() : nil }
-  let(:subject) { described_class.new(object) } # rubocop:todo RSpec/SubjectDeclaration
   let(:factory) { described_class.to_s.demodulize.gsub("Serializer", "").underscore.to_sym }
   let(:object) { serialized_object || FactoryBot.create(factory) }
+  subject { described_class.new(object) }
 
   it "successfully serializes the object to a String value" do
     expect(subject.serialized_json).to be_instance_of String
@@ -26,7 +26,7 @@ shared_examples_for "a serializer" do |partial_by_default: false|
     end
 
     context "when full serialization is requested" do
-      let(:subject) { described_class.new(object, params: { full: true }) } # rubocop:todo RSpec/SubjectDeclaration
+      subject { described_class.new(object, params: { full: true }) }
 
       if partial_by_default
         it "it sets meta.partial to false because this resource is not partial" do

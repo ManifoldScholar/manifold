@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Project Abilities", :authorizer do # rubocop:todo RSpec/DescribeClass
+RSpec.describe "Project Abilities", :authorizer do
   include TestHelpers::AuthorizationHelpers
 
   let!(:user) { FactoryBot.create :user, *user_traits }

@@ -3,7 +3,8 @@
 module API
   module V1
     class EntitlementTargetsController < ApplicationController
-      resourceful! EntitlementTarget do # rubocop:todo Lint/EmptyBlock
+      resourceful! EntitlementTarget do
+        # Intentionally left blank.
       end
 
       def index

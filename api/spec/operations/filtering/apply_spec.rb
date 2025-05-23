@@ -26,6 +26,7 @@ RSpec.describe Filtering::Apply, type: :operation do
       FactoryBot.create_list(:project, 30)
       expect(operation.call({ per_page: 3 }, model: Project, scope: Project.all, skip_pagination: true, user: admin_user).length).to eq(30)
     end
+
     it "performs keyword search on Maker model" do
       FactoryBot.create_list(:maker, 10)
       FactoryBot.create_list(:maker, 10, first_name: "Rocky", last_name: "Balboa", name: "Rocky Balboa")

@@ -48,7 +48,7 @@ RSpec.describe Content::TextsBlock do
     context "when not filtered by category" do
       context "when show_uncategorized is true" do
         it "returns all project texts" do
-          expect(texts_block.texts.reload).to match_array [text_a, text_b, text_c]
+          expect(texts_block.texts.reload).to contain_exactly(text_a, text_b, text_c)
         end
       end
 

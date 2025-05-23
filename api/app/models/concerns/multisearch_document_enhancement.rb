@@ -3,6 +3,8 @@
 module MultisearchDocumentEnhancement
   extend ActiveSupport::Concern
 
+  include AssociationHelpers
+
   included do
     belongs_to :journal, optional: true
     belongs_to :project, optional: true
@@ -14,7 +16,7 @@ module MultisearchDocumentEnhancement
     scope :for_text, ->(text) { where(text: text) }
     scope :for_text_section, ->(text_section) { where(text_section: text_section) }
 
-    has_many :text_section_nodes, -> { current }, primary_key: :text_section_id, foreign_key: :text_section_id
+    has_many_readonly :text_section_nodes, -> { current }, primary_key: :text_section_id, foreign_key: :text_section_id
 
     attribute :secondary_data, ::Search::SecondaryData.to_type
     attribute :tertiary_data, ::Search::TertiaryData.to_type

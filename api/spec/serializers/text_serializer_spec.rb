@@ -11,7 +11,7 @@ RSpec.describe V1::TextSerializer do
       FactoryBot.create(:text)
       return TextSummary.first
     end
-    let(:subject) { described_class.new(object) } # rubocop:todo RSpec/SubjectDeclaration
+    subject { described_class.new(object) }
 
     it "does not include attributes or relationships that are not supported by text summaries" do
       expect(subject.serialized_json).to be_instance_of String

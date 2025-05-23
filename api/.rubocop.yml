@@ -32,7 +32,7 @@ FactoryBot/CreateList:
   Enabled: false
 
 FactoryBot/ExcessiveCreateList:
-  Enabled: true
+  Enabled: false
 
 FactoryBot/FactoryAssociationWithStrategy:
   Enabled: true
@@ -92,12 +92,9 @@ Layout/LineContinuationSpacing:
 Layout/LineEndStringConcatenationIndentation:
   Enabled: false
 
+# Manifold has a lot of long lines by necessity. Use soft-wrapping in your editor
 Layout/LineLength:
-  AllowedPatterns:
-    - def .+!\(.+\)
-  Max: 180
-  Exclude:
-    - "spec/**/*.rb"
+  Enabled: false
 
 Layout/MultilineMethodCallBraceLayout:
   Enabled: false
@@ -278,7 +275,7 @@ Metrics/AbcSize:
   Exclude:
     - "app/operations/**/*.rb"
     - "app/services/**/*.rb"
-    - "lib/support/**/*.rb"
+    - "lib/**/*.rb"
     - "spec/**/*.rb"
   Max: 25
 
@@ -304,9 +301,9 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Exclude:
     - "app/services/harvesting/**/*.rb"
-    - "lib/support/**/*.rb"
+    - "lib/**/*.rb"
     - "spec/**/*.rb"
-  Max: 30
+  Max: 50
 
 Metrics/ModuleLength:
   Enabled: false
@@ -318,7 +315,8 @@ Metrics/PerceivedComplexity:
   Exclude:
     - "app/operations/**/*.rb"
     - "app/services/**/*.rb"
-    - "lib/support/**/*.rb"
+    - "lib/**/*.rb"
+    - "spec/**/*.rb"
 
 Naming/AccessorMethodName:
   Enabled: false
@@ -430,6 +428,9 @@ Rails/FindEach:
 Rails/FreezeTime:
   Enabled: true
 
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
 Rails/I18nLazyLookup:
   Enabled: true
 
@@ -437,7 +438,7 @@ Rails/I18nLocaleAssignment:
   Enabled: true
 
 Rails/I18nLocaleTexts:
-  Enabled: true
+  Enabled: false
 
 Rails/IgnoredColumnsAssignment:
   Enabled: true
@@ -557,6 +558,9 @@ Rails/WhereNot:
 Rails/WhereRange:
   Enabled: true
 
+RSpec/AnyInstance:
+  Enabled: false
+
 RSpec/BeEmpty:
   Enabled: true
 
@@ -565,6 +569,9 @@ RSpec/BeEq:
 
 RSpec/BeNil:
   Enabled: true
+
+RSpec/BeforeAfterAll:
+  Enabled: false
 
 RSpec/ChangeByZero:
   Enabled: true
@@ -580,6 +587,8 @@ RSpec/ContextWording:
 
 RSpec/DescribeClass:
   Exclude:
+    - spec/authorizers/**/*.rb
+    - spec/**/integration/**/*.rb
     - spec/requests/**/*.rb
 
 # False positives
@@ -635,8 +644,17 @@ RSpec/LetSetup:
 RSpec/MatchArray:
   Enabled: true
 
+RSpec/MessageChain:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
 RSpec/MetadataStyle:
   Enabled: false
+
+RSpec/MissingExpectationTargetMethod:
+  Enabled: true
 
 RSpec/MultipleExpectations:
   Enabled: false
@@ -650,8 +668,9 @@ RSpec/NamedSubject:
 RSpec/NestedGroups:
   Enabled: false
 
+# False positives for our helpers
 RSpec/NoExpectationExample:
-  Enabled: true
+  Enabled: false
 
 RSpec/PendingWithoutReason:
   Enabled: false
@@ -698,10 +717,19 @@ RSpec/SpecFilePathSuffix:
 RSpec/SubjectDeclaration:
   Enabled: true
 
+RSpec/StubbedMock:
+  Enabled: false
+
+RSpec/VariableName:
+  Exclude:
+    - spec/api_docs/**/*.rb
+    - spec/requests/**/*.rb
+
 RSpec/VerifiedDoubleReference:
   Enabled: true
 
 RSpec/VerifiedDoubles:
+  Enabled: false
   IgnoreNameless: true
   IgnoreSymbolicNames: true
 
@@ -728,6 +756,10 @@ RSpecRails/TravelAround:
 
 Security/CompoundHash:
   Enabled: true
+
+Security/Eval:
+  Exclude:
+    - spec/**/*.rb
 
 Security/IoMethods:
   Enabled: true
@@ -939,6 +971,9 @@ Style/OpenStructUse:
 
 Style/OperatorMethodCall:
   Enabled: true
+
+Style/OptionalBooleanParameter:
+  Enabled: false
 
 Style/QuotedSymbols:
   Enabled: false

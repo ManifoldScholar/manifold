@@ -145,7 +145,7 @@ module SearchIndexable
     return unless respond_to?(:metadata) && metadata.kind_of?(Hash)
     # :nocov:
 
-    metadata.values.reject(&:blank?)
+    metadata.values.compact_blank
   end
 
   # @abstract

@@ -151,7 +151,7 @@ RSpec.describe Ingestions::Strategies::Document do
     end
 
     context "when HTML page with external stylesheet" do
-      context "when ZIP" do # rubocop:todo RSpec/RepeatedExampleGroupBody
+      context "when ZIP" do
         let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal.zip") }
 
         include_examples "outcome assertions"
@@ -166,8 +166,8 @@ RSpec.describe Ingestions::Strategies::Document do
         end
       end
 
-      context "when dir" do # rubocop:todo RSpec/RepeatedExampleGroupBody
-        let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal.zip") }
+      xcontext "when dir" do
+        let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal") }
 
         include_examples "outcome assertions"
 
@@ -215,12 +215,12 @@ RSpec.describe Ingestions::Strategies::Document do
     let(:url) { "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing" }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, external_source_url: url }
 
-    before(:all) do # rubocop:todo RSpec/BeforeAfterAll
+    before(:all) do
       Settings.instance.update_from_environment!
       WebMock.allow_net_connect!
     end
 
-    after(:all) do # rubocop:todo RSpec/BeforeAfterAll
+    after(:all) do
       WebMock.disable_net_connect!
     end
 

@@ -28,7 +28,9 @@ RSpec.describe SpamMitigation::Check, type: :operation do
         akismet_stub_comment_check!(situation: :error)
 
         # sanity check
-        expect(Settings.current.general).not_to be_disable_spam_detection # rubocop:todo RSpec/ExpectInHook
+        # rubocop:disable RSpec/ExpectInHook
+        expect(Settings.current.general).not_to be_disable_spam_detection
+        # rubocop:enable RSpec/ExpectInHook
       end
 
       it "allows the content to go through in lieu of a better current approach" do

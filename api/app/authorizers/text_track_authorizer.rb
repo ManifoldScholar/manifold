@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TextTrackAuthorizer < ProjectPropertyAuthorizer
   # @see ProjectAuthorizer#resources_creatable_by?
   def specifically_creatable_by?(user, options = {})

@@ -946,6 +946,7 @@ DEPENDENCIES
   rspec-retry (~> 0.6.2)
   rspec-support (~> 3.0)
   rswag (~> 2.16)
+  rswag-api (= 2.16.0)
   rubocop (= 1.74.0)
   rubocop-factory_bot (= 2.27.1)
   rubocop-rails (= 2.30.3)

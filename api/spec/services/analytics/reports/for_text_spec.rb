@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe Analytics::Reports::ForText do
+  let(:scope) { text }
+
   include_context "with a single text"
 
   include_examples "analytics reporter visits"
-
-  let(:scope) { text } # rubocop:todo RSpec/LetBeforeExamples
 
   include_examples "analytics reporter events" do
     let_it_be(:share_actions) { %w[facebook twitter] }

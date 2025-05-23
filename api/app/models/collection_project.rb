@@ -8,9 +8,8 @@ class CollectionProject < ApplicationRecord
 
   belongs_to :project_collection, counter_cache: true
   belongs_to :project
-  belongs_to :project_summary, foreign_key: :project_id # rubocop:todo Rails/InverseOf
-  # No need to include :dependent option, because this related record comes from a DB view.
-  has_one :ranking, class_name: "CollectionProjectRanking", inverse_of: :collection_project # rubocop:todo Rails/HasManyOrHasOneDependent
+  belongs_to_readonly :project_summary, foreign_key: :project_id
+  has_one_readonly :ranking, class_name: "CollectionProjectRanking", inverse_of: :collection_project
 
   has_many :creators, through: :project, source: "makers"
   has_many :contributors, through: :project, source: "makers"

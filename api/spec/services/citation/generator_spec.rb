@@ -43,7 +43,8 @@ RSpec.describe Citation::Generator do
   end
 
   context "when the subject is citable but incomplete" do
-    let(:subject) { TextSection.create } # rubocop:todo RSpec/SubjectDeclaration
+    subject { TextSection.create }
+
     let(:citations) do
       generator.cite(subject, subject.citation_styles)
     end

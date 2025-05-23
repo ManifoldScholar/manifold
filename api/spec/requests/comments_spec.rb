@@ -44,7 +44,7 @@ RSpec.describe "Comments API", type: :request do
     describe "updates a comment" do
       let(:path) { api_v1_annotation_relationships_comment_path(annotation, comment_a) }
 
-      context "when the user is an admin" do # rubocop:todo RSpec/RepeatedExampleGroupBody
+      context "when the user is an admin" do
         let(:headers) { admin_headers }
 
         describe "the response" do
@@ -59,8 +59,8 @@ RSpec.describe "Comments API", type: :request do
         end
       end
 
-      context "when the user is the comment creator" do # rubocop:todo RSpec/RepeatedExampleGroupBody
-        let(:headers) { admin_headers }
+      context "when the user is the comment creator" do
+        let(:headers) { reader_headers }
 
         describe "the response" do
           context "body" do
@@ -204,7 +204,7 @@ RSpec.describe "Comments API", type: :request do
     describe "updates a comment" do
       let(:path) { api_v1_resource_relationships_comment_path(resource, comment_b) }
 
-      context "when the user is an admin" do # rubocop:todo RSpec/RepeatedExampleGroupBody
+      context "when the user is an admin" do
         let(:headers) { admin_headers }
 
         describe "the response" do
@@ -219,8 +219,8 @@ RSpec.describe "Comments API", type: :request do
         end
       end
 
-      context "when the user is the comment creator" do # rubocop:todo RSpec/RepeatedExampleGroupBody
-        let(:headers) { admin_headers }
+      context "when the user is the comment creator" do
+        let(:headers) { reader_headers }
 
         describe "the response" do
           context "body" do

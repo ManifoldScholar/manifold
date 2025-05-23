@@ -38,18 +38,21 @@ class Journal < ApplicationRecord
   )
 
   has_sort_title do |journal|
-    journal.title[/^((a|the|an) )?(?<title>.*)$/i, :title] # rubocop:todo Lint/MixedRegexpCaptureTypes
+    journal.title[/^(?:(?:a|the|an) )?(?<title>.*)$/i, :title]
   end
 
   has_many :journal_subjects, dependent: :destroy, inverse_of: :journal
   has_many :subjects, through: :journal_subjects
-  has_many :action_callouts, # rubocop:todo Rails/InverseOf
+  has_many :action_callouts,
            -> { order(:position) },
            dependent: :destroy,
-           as: :calloutable
-  has_many :journal_volumes, -> { in_reverse_order }, dependent: :destroy # rubocop:todo Rails/InverseOf
-  has_many :journal_issues, -> { in_reverse_order },  dependent: :destroy # rubocop:todo Rails/InverseOf
-  has_many :journal_project_links, -> { in_default_order } # rubocop:todo Rails/HasManyOrHasOneDependent, Rails/InverseOf
+           as: :calloutable,
+           inverse_of: :calloutable
+  has_many :journal_volumes, -> { in_reverse_order }, dependent: :destroy, inverse_of: :journal
+  has_many :journal_issues, -> { in_reverse_order },  dependent: :destroy, inverse_of: :journal
+
+  has_many_readonly :journal_project_links, -> { in_default_order }
+
   has_many :projects, through: :journal_project_links
 
   validates :title, presence: true

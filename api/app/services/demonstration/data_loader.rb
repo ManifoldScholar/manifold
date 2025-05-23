@@ -5,7 +5,7 @@ module Demonstration
   class DataLoader
     def initialize
       # :nocov:
-      @logger = Logger.new(Rails.env.test? ? "/dev/null" : $stdout)
+      @logger = Logger.new(Rails.env.test? ? ::File::NULL : $stdout)
       @logger.formatter = proc { |severity, _datetime, _progname, msg|
         "#{severity.rjust(8)}: #{msg}\n"
       }

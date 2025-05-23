@@ -5,7 +5,7 @@ class TextExport < ApplicationRecord
   include ExportUploader::Attachment.new(:asset)
 
   belongs_to :text, inverse_of: :text_exports
-  has_many :text_export_statuses, inverse_of: :text_export # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many_readonly :text_export_statuses, inverse_of: :text_export
 
   classy_enum_attr :export_kind, allow_blank: false, default: :unknown
 

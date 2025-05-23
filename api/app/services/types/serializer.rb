@@ -83,13 +83,13 @@ module Types
     )
 
     NotificationPreferences = Types::Hash.schema(
-      projects: Types::String.enum("never", "always"),
-      followedProjects: Types::String.enum("never", "always"),
-      flaggedResources: Types::String.enum("never", "always"),
-      projectCommentsAndAnnotations: Types::String.enum("never", "always"),
-      repliesToMe: Types::String.enum("never", "always"),
-      digest: Types::String.enum("never", "always"),
-      digestCommentsAndAnnotations: Types::String.enum("never", "always")
+      projects: NotificationPreference,
+      followedProjects: NotificationPreference,
+      flaggedResources: NotificationPreference,
+      projectCommentsAndAnnotations: NotificationPreference,
+      repliesToMe: NotificationPreference,
+      digest: NotificationPreference,
+      digestCommentsAndAnnotations: NotificationPreference
     )
 
     Oauth = Types::Hash.schema(

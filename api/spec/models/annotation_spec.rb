@@ -82,13 +82,13 @@ RSpec.describe Annotation, type: :model do
 
   it "enqueues a TEXT_ANNOTATED event on creation" do
     text_section = FactoryBot.create(:text_section)
-    expect(CreateEventJob).to receive(:perform_later).with(EventType[:text_annotated], any_args) # rubocop:todo RSpec/MessageSpies
+    expect(CreateEventJob).to receive(:perform_later).with(EventType[:text_annotated], any_args)
     FactoryBot.create(:annotation, text_section: text_section)
   end
 
   it "does not enqueues a TEXT_ANNOTATED event on creation when it is private" do
     text_section = FactoryBot.create(:text_section)
-    expect(CreateEventJob).not_to receive(:perform_later).with(EventType[:text_annotated], any_args) # rubocop:todo RSpec/MessageSpies
+    expect(CreateEventJob).not_to receive(:perform_later).with(EventType[:text_annotated], any_args)
     FactoryBot.create(:annotation, private: true, text_section: text_section)
   end
 

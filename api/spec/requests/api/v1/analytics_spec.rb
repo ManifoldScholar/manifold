@@ -26,8 +26,8 @@ RSpec.describe "Analytics API", type: :request do
           }
         }
       end
-      let(:HTTP_VISIT_TOKEN) { "82e69a96-43f2-4fc8-914e-c9ef9d555919" } # rubocop:todo RSpec/VariableName
-      let(:HTTP_VISITOR_TOKEN) { "883d1769-4352-419c-839f-104406fd2d91" } # rubocop:todo RSpec/VariableName
+      let(:HTTP_VISIT_TOKEN) { "82e69a96-43f2-4fc8-914e-c9ef9d555919" }
+      let(:HTTP_VISITOR_TOKEN) { "883d1769-4352-419c-839f-104406fd2d91" }
     end
 
     let(:start_date) { Date.current.yesterday }

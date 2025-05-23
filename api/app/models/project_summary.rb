@@ -6,7 +6,7 @@ class ProjectSummary < ApplicationRecord
 
   self.primary_key = :id
 
-  belongs_to :project
+  belongs_to :project, inverse_of: :project_summary
 
   delegate :collected_by?, to: :project
   delegate :entitlement_subject_url, to: :project

@@ -47,7 +47,7 @@ class Project < ApplicationRecord
   end
   with_citable_children :texts
   has_sort_title do |project|
-    project.title[/^((a|the|an) )?(?<title>.*)$/i, :title] # rubocop:todo Lint/MixedRegexpCaptureTypes
+    project.title[/^(?:(?:a|the|an) )?(?<title>.*)$/i, :title]
   end
 
   # PaperTrail
@@ -60,11 +60,11 @@ class Project < ApplicationRecord
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
-  has_many :collection_project_rankings # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many_readonly :collection_project_rankings
   has_many :project_collections, through: :collection_projects, dependent: :destroy
   has_many :texts, dependent: :destroy, inverse_of: :project
-  has_many :text_summaries, inverse_of: :project # rubocop:todo Rails/HasManyOrHasOneDependent
-  has_many :published_texts, # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many_readonly :text_summaries, inverse_of: :project
+  has_many_readonly :published_texts,
            -> { published(true) },
            class_name: "Text",
            inverse_of: :project
@@ -85,7 +85,7 @@ class Project < ApplicationRecord
   has_many :subjects, through: :project_subjects
   has_many :ingestions, dependent: :destroy, inverse_of: :project
   has_many :twitter_queries, dependent: :destroy, inverse_of: :project
-  has_many :permissions, as: :resource, inverse_of: :resource # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many_readonly :permissions, as: :resource, inverse_of: :resource
   has_many :resource_imports, inverse_of: :project, dependent: :destroy
   has_many :tracked_dependent_versions,
            -> { order(created_at: :desc) },
@@ -98,25 +98,26 @@ class Project < ApplicationRecord
            dependent: :destroy,
            inverse_of: :project
   has_many :content_block_references, through: :content_blocks
-  has_many :action_callouts, # rubocop:todo Rails/InverseOf
+  has_many :action_callouts,
            -> { order(:position) },
            dependent: :destroy,
-           as: :calloutable
+           as: :calloutable,
+           inverse_of: :calloutable
   has_many :project_exports, inverse_of: :project, dependent: :destroy
-  has_many :project_export_statuses, inverse_of: :project # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many_readonly :project_export_statuses, inverse_of: :project
   has_many :project_exportations, dependent: :destroy
-  has_many :uncollected_resources, ->(object) { # rubocop:todo Rails/HasManyOrHasOneDependent, Rails/InverseOf
+  has_many_readonly :uncollected_resources, ->(object) {
     where.not(id: object.collection_resources.select(:resource_id))
   }, class_name: "Resource"
+
+  has_one_readonly :project_summary, inverse_of: :project
 
   belongs_to :journal_issue, optional: true, dependent: :destroy, touch: true
 
   has_one :journal, through: :journal_issue
   has_one :journal_volume, through: :journal_issue, touch: true
-  # rubocop:todo Rails/InverseOf
-  has_one :current_project_export_status, -> { current }, class_name: "ProjectExportStatus" # rubocop:todo Rails/HasManyOrHasOneDependent, Rails/InverseOf
-  # rubocop:enable Rails/InverseOf
-  has_one :current_project_export, through: :current_project_export_status, source: :project_export
+  has_one_readonly :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
+  has_one_readonly :current_project_export, through: :current_project_export_status, source: :project_export
 
   delegate :number, to: :journal_issue, allow_nil: true, prefix: true
   delegate :pending_sort_title, to: :journal_issue, allow_nil: true, prefix: true

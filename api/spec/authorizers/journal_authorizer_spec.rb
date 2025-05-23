@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Journal Abilities", :authorizer do # rubocop:todo RSpec/DescribeClass
+RSpec.describe "Journal Abilities", :authorizer do
   include TestHelpers::AuthorizationHelpers
 
   let(:journal_traits) do

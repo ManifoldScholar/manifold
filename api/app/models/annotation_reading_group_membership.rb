@@ -6,7 +6,7 @@ class AnnotationReadingGroupMembership < ApplicationRecord
 
   self.primary_key = :annotation_id
 
-  belongs_to :annotation
+  belongs_to :annotation, inverse_of: :annotation_reading_group_membership
   belongs_to :reading_group
   belongs_to :reading_group_membership, optional: true
   belongs_to :user

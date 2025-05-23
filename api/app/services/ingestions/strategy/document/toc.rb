@@ -25,9 +25,6 @@ module Ingestions
           header_tags.find_index(tag)
         end
 
-        # rubocop:disable Metrics/AbcSize,, Lint/CopDirectiveSyntax, Lint/CopDirectiveSyntax, Lint/CopDirectiveSyntax, Lint/CopDirectiveSyntax
-        # rubocop:enable Lint/CopDirectiveSyntax
-        # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         def build_toc_from_headers
           xpath = header_tags.map { |h| "//#{h}" }.join(" | ")
           headers = body_parsed.search(xpath)
@@ -60,10 +57,6 @@ module Ingestions
           end
           entries
         end
-        # rubocop:todo Lint/CopDirectiveSyntax
-        # rubocop:enable Metrics/AbcSize,, Lint/CopDirectiveSyntax, Lint/CopDirectiveSyntax, Lint/CopDirectiveSyntax, Lint/CopDirectiveSyntax
-        # rubocop:enable Lint/CopDirectiveSyntax
-        # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
         def header_tags
           %w(h1 h2 h3 h4 h5 h6)

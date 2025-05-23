@@ -20,7 +20,7 @@ RSpec.describe Ingestions::PreProcessors::InjectGlobalStyles do
       s.save
     end
 
-    it "injects a global stylesheet into the manifest" do # rubocop:todo RSpec/NoExpectationExample
+    it "injects a global stylesheet into the manifest" do
       s = Settings.instance
       s.ingestion["global_styles"] = "p { background-color: red }"
       s.save

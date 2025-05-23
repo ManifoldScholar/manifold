@@ -16,8 +16,8 @@ class JournalIssue < ApplicationRecord
   include HasSortTitle
   include HasKeywordSearch
 
-  belongs_to :journal, counter_cache: true
-  belongs_to :journal_volume, optional: true, counter_cache: true
+  belongs_to :journal, counter_cache: true, inverse_of: :journal_issues
+  belongs_to :journal_volume, optional: true, counter_cache: true, inverse_of: :journal_issues
 
   has_one :project, required: true, inverse_of: :journal_issue, dependent: :destroy
 

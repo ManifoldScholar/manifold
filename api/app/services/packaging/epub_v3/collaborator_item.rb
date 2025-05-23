@@ -22,7 +22,13 @@ module Packaging
 
       # @return [(String, Hash)]
       def to_gepub_args
-        [name, { display_seq: display_seq }]
+        [name]
+      end
+
+      def to_gepub_options
+        {
+          display_seq: display_seq
+        }
       end
     end
   end

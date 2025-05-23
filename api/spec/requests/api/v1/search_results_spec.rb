@@ -8,10 +8,6 @@ RSpec.describe "Search Results", type: :request do
     let!(:text_resource) { FactoryBot.create(:text) }
     let!(:project_resource) { FactoryBot.create(:project, title: keyword, texts: [text_resource]) }
 
-    around(:example) do |example|
-      example.run
-    end
-
     path "/search_results" do
       let(:scope) { nil }
       let(:search_num) { nil }
@@ -19,8 +15,8 @@ RSpec.describe "Search Results", type: :request do
       let(:project) { project_resource.id }
       let(:text) { nil }
       let(:text_section) { nil }
-      let(:'page[number]') { 1 } # rubocop:todo RSpec/VariableName
-      let(:'page[size]') { 10 } # rubocop:todo RSpec/VariableName
+      let(:'page[number]') { 1 }
+      let(:'page[size]') { 10 }
       let(:raw) { nil }
       let(:facets) { [] }
 

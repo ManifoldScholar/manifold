@@ -184,7 +184,7 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
   describe "after importing" do
     RSpec.shared_examples "Imported resource rows" do |type|
       context "a valid #{type} resource row" do
-        let(:row) { make_row(eval("#{type}_values"), column_map) } # rubocop:todo Style/EvalWithLocation, Security/Eval
+        let(:row) { make_row(__send__("#{type}_values"), column_map) }
         it "the resource exists" do
           row.state_machine.transition_to(:importing)
           expect(row.resource).to be_an_instance_of(Resource)

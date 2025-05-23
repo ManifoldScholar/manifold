@@ -16,7 +16,7 @@ RSpec.describe SettingsService::UpdateFromEnv, interaction: true do
     stub_env("MANIFOLD_SETTING_INVALID_OTHER", "never seen")
   end
 
-  it "merges in new settings from the environment" do # rubocop:todo RSpec/NoExpectationExample
+  it "merges in new settings from the environment" do
     perform_within_expectation! do |e|
       e.to change { settings.reload.secrets.smtp_settings_password }.to(smtp_settings_password)
         .and change { settings.reload.secrets.unknown_attributes["unknown_value"] }.from(nil).to(unknown_value)
