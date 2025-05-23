@@ -393,19 +393,19 @@ RSpec.describe Project, type: :model do
   describe "#standalone?" do
     context "when :disabled" do
       it "returns false" do
-        expect(FactoryBot.create(:project, standalone_mode: "disabled").standalone?).to be false
+        expect(FactoryBot.create(:project, standalone_mode: "disabled")).not_to be_standalone
       end
     end
 
-    context "when :enabled" do # rubocop:todo RSpec/RepeatedExampleGroupBody
+    context "when :enabled" do
       it "returns true" do
-        expect(FactoryBot.create(:project, standalone_mode: "disabled").standalone?).to be false
+        expect(FactoryBot.create(:project, standalone_mode: "enabled")).to be_standalone
       end
     end
 
-    context "when :enforced" do # rubocop:todo RSpec/RepeatedExampleGroupBody
+    context "when :enforced" do
       it "returns true" do
-        expect(FactoryBot.create(:project, standalone_mode: "disabled").standalone?).to be false
+        expect(FactoryBot.create(:project, standalone_mode: "enforced")).to be_standalone
       end
     end
   end

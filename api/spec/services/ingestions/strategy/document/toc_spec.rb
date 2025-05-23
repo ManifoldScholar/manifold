@@ -20,7 +20,7 @@ RSpec.describe Ingestions::Strategy::Document::TOC do
     end
 
     let(:inspector) do
-      mock_inspector = double(context: {}, index_parsed_uncached: Nokogiri::HTML(toc), index_source_path: nil) # rubocop:todo RSpec/VerifiedDoubles
+      mock_inspector = double(context: {}, index_parsed_uncached: Nokogiri::HTML(toc), index_source_path: nil)
       described_class.new mock_inspector
     end
 
@@ -59,7 +59,7 @@ RSpec.describe Ingestions::Strategy::Document::TOC do
     end
 
     let(:inspector) do
-      mock_inspector = double(context: {}, index_parsed_uncached: Nokogiri::HTML(toc), index_source_path: nil) # rubocop:todo RSpec/VerifiedDoubles
+      mock_inspector = double(context: {}, index_parsed_uncached: Nokogiri::HTML(toc), index_source_path: nil)
       described_class.new mock_inspector
     end
 

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe Analytics::Reports::ForProject do
+  let(:scope) { project }
+
   include_context "with a single project"
 
   include_examples "analytics reporter visits"
-
-  let(:scope) { project } # rubocop:todo RSpec/LetBeforeExamples
 
   include_examples "analytics reporter events" do
     let(:expectations) do

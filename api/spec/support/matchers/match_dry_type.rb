@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-RSpec::Matchers.define :match_dry_type do |expected|
-  DRY_TYPE = Types.Instance(Dry::Types::Type) # rubocop:todo Lint/ConstantDefinitionInBlock
+module MatcherHelpers
+  DRY_TYPE = Types.Instance(Dry::Types::Type)
+end
 
+RSpec::Matchers.define :match_dry_type do |expected|
   match do |actual|
-    raise "Expected #{expected.inspect} to be a dry-type" unless DRY_TYPE.valid?(expected)
+    raise "Expected #{expected.inspect} to be a dry-type" unless MatcherHelpers::DRY_TYPE.valid?(expected)
 
     expected.valid? actual
   end

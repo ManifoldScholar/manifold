@@ -15,7 +15,7 @@ module Packaging
 
       # @return [(String, Hash)]
       def to_gepub_args
-        [value, to_gepub_options]
+        [value]
       end
 
       # @return [Hash]

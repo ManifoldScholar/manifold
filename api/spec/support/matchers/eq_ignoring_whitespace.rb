@@ -10,22 +10,18 @@ RSpec::Matchers.define :eq_ignoring_whitespace do |compare|
   end
 
   failure_message do |object_instance|
-    # rubocop:todo Naming/HeredocDelimiterNaming
-    out = <<~END
+    out = <<~TEXT
     expected: #{compare}
     to match: #{object_instance}
-    END
-    # rubocop:enable Naming/HeredocDelimiterNaming
+    TEXT
     out
   end
 
   failure_message_when_negated do |object_instance|
-    # rubocop:todo Naming/HeredocDelimiterNaming
-    out = <<~END
+    out = <<~TEXT
     expected: #{compare}
     to not match: #{object_instance}
-    END
-    # rubocop:enable Naming/HeredocDelimiterNaming
+    TEXT
     out
   end
 

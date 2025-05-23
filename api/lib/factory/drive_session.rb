@@ -3,10 +3,7 @@
 module Factory
   # Returns a drive session object; used by the drive_resource importer
   class DriveSession
-    # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/CyclomaticComplexity
-    # rubocop:disable Metrics/PerceivedComplexity
-    def self.config # rubocop:todo Metrics/AbcSize
+    def self.config
       env_config = SettingsService::ReadFromEnv.run.result
 
       db_config = ActiveRecord::Base.connection_pool.with_connection do |conn|
@@ -46,9 +43,6 @@ module Factory
         client_x509_cert_url: client_x509_cert_url
       }
     end
-    # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Metrics/CyclomaticComplexity
-    # rubocop:enable Metrics/PerceivedComplexity
 
     def self.create_service_account_session
       fetched_config = config

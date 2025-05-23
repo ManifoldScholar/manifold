@@ -28,12 +28,8 @@ module Content
     end
 
     def blueprint
-      @blueprint ||= begin
-        return Content::ScaffoldTemplate.new(kind) if kind.present? # rubocop:todo Lint/NoReturnInBeginEndBlocks
-        return Content::ScaffoldConfigured.new(configuration) if configuration.present? # rubocop:todo Lint/NoReturnInBeginEndBlocks
-
-        nil
-      end
+      return Content::ScaffoldTemplate.new(kind) if kind.present?
+      return Content::ScaffoldConfigured.new(configuration) if configuration.present?
     end
 
     def scaffold_content(types)

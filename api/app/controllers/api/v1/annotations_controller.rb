@@ -6,7 +6,7 @@ module API
       config.pagination_enforced = true
 
       resourceful! Annotation, authorize_options: { except: [:index, :show] } do
-        Annotation.filtered(with_pagination!(annotation_filter_params))
+        Annotation.filtered(**with_pagination!(annotation_filter_params))
       end
 
       def index

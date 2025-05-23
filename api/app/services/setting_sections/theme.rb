@@ -16,17 +16,11 @@ module SettingSections
 
     attribute :string_signup_terms_header, :string, default: "First things first..."
     attribute :string_signup_terms_one, :string, default: "When you create an account, we will collect and store your name and email address for account management purposes."
-    attribute :string_signup_terms_two, :string,
-# rubocop:todo Layout/LineLength
-default: "This site will also store the annotations and highlights you create on texts, and it will keep track of content that you've starred. Depending on its configuration, this site may store anonymous data on how the site is being used."
-    # rubocop:enable Layout/LineLength
+    attribute :string_signup_terms_two, :string, default: "This site will also store the annotations and highlights you create on texts, and it will keep track of content that you've starred. Depending on its configuration, this site may store anonymous data on how the site is being used."
     attribute :string_data_use_header, :string, default: "What data does Manifold store about me?"
     attribute :string_data_use_copy, :string, default: DEFAULT_STRING_DATA_USE_COPY
     attribute :string_cookies_banner_header, :string, default: "Manifold uses cookies"
-    attribute :string_cookies_banner_copy, :string,
-# rubocop:todo Layout/LineLength
-default: "We use cookies to analyze our traffic. Please decide if you are willing to accept cookies from our website. You can change this setting anytime in [Privacy Settings](/privacy)."
-    # rubocop:enable Layout/LineLength
+    attribute :string_cookies_banner_copy, :string, default: "We use cookies to analyze our traffic. Please decide if you are willing to accept cookies from our website. You can change this setting anytime in [Privacy Settings](/privacy)."
 
     attribute :logo_styles, :string
     attribute :typekit_id, :string

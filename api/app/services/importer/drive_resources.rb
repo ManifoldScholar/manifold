@@ -318,9 +318,7 @@ module Importer
     end
 
     def raise_missing_column_error(worksheet)
-      # rubocop:disable Layout/LineLength
       msg = "\"#{worksheet.title}\" sheet in \"#{worksheet.spreadsheet.title}\" is missing required column(s): #{(REQUIRED_RESOURCE_COLUMNS - Helpers::List.new(worksheet).keys).join(', ')}"
-      # rubocop:enable Layout/LineLength
       @logger.error(Rainbow(msg).red)
       raise ImportDriveResourcesError
     end

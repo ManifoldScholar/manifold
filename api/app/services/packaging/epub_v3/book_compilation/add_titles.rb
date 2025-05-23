@@ -11,7 +11,7 @@ module Packaging
         def call(context)
           context.with! :book, :compiled_text do |book, compiled_text|
             compiled_text.titles.each do |title|
-              book.add_title(*title.to_gepub_args)
+              book.add_title(*title.to_gepub_args, **title.to_gepub_options)
             end
           end
 

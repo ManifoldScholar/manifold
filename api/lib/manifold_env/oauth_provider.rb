@@ -13,7 +13,7 @@ module ManifoldEnv
 
     CREDENTIAL_KEYS = %i(id secret).freeze
 
-    validates :credentials, presence: { message: "are unset" } # rubocop:todo Rails/I18nLocaleTexts
+    validates :credentials, presence: { message: "are unset" }
 
     attr_reader :name
 
@@ -119,7 +119,5 @@ module ManifoldEnv
         left === right
       end
     end
-    # rubocop:enable Style/CaseEquality
   end
-  # rubocop:enable
 end

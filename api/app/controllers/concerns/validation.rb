@@ -4,7 +4,7 @@
 module Validation
   extend ActiveSupport::Concern
 
-  def user_params # rubocop:todo Metrics/MethodLength
+  def user_params
     params.require(:data)
     persistent_ui = {
       persistent_ui: {

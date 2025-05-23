@@ -13,7 +13,7 @@ class Role < ApplicationRecord
   scope :scoped, -> { by_kind(:scoped) }
 
   belongs_to :resource, polymorphic: true, optional: true
-  has_and_belongs_to_many :users, join_table: "users_roles" # rubocop:todo Rails/HasAndBelongsToMany
+  has_and_belongs_to_many :users, join_table: "users_roles"
 
   validates :resource_type, inclusion: { in: Rolify.resource_types }, allow_nil: true
   validate :check_resource_for_kind!

@@ -136,6 +136,99 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 
 --
+-- Name: manifold_lang; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.manifold_lang AS ENUM (
+    'simple',
+    'english'
+);
+
+
+--
+-- Name: extract_text_section_content(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.extract_text_section_content(jsonb) RETURNS text
+    LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
+    AS $_$
+SELECT
+  pg_catalog.string_agg(TRIM(content #>> '{}'), ' ' ORDER BY idx ASC) FILTER (WHERE content #>> '{}' ~ '[^[:space:]]+')
+FROM
+  pg_catalog.jsonb_path_query($1, 'strict $.**.content') WITH ORDINALITY AS t(content, idx)
+;
+$_$;
+
+
+--
+-- Name: immutable_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.immutable_unaccent(text) RETURNS text
+    LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
+    AS $_$
+SELECT public.unaccent('public.unaccent'::regdictionary, $1);
+$_$;
+
+
+--
+-- Name: FUNCTION immutable_unaccent(text); Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON FUNCTION public.immutable_unaccent(text) IS 'An expression-indexable version of unaccent that uses the default dictionary.';
+
+
+--
+-- Name: jsonb_extract_strings(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.jsonb_extract_strings(jsonb) RETURNS SETOF text
+    LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
+    AS $_$
+WITH RECURSIVE extracted_objects(path, value) AS (
+  SELECT
+    key AS path,
+    value
+  FROM pg_catalog.jsonb_each(jsonb_build_object('input', $1)) AS t(key, value)
+  UNION ALL
+  SELECT
+  path || '.' || COALESCE(obj_key, (arr_key- 1)::text),
+  COALESCE(obj_value, arr_value)
+  FROM extracted_objects
+  LEFT JOIN LATERAL
+  jsonb_each(case jsonb_typeof(value) when 'object' then value end)
+  AS o(obj_key, obj_value)
+  ON jsonb_typeof(value) = 'object'
+  LEFT JOIN LATERAL
+  jsonb_array_elements(CASE jsonb_typeof(value) WHEN 'array' THEN value END)
+  WITH ORDINALITY AS a(arr_value, arr_key)
+  ON jsonb_typeof(value) = 'array'
+  WHERE obj_key IS NOT NULL or arr_key IS NOT NULL
+)
+SELECT
+  value #>> '{}'
+FROM extracted_objects
+  WHERE jsonb_typeof(value) = 'string'
+;
+$_$;
+
+
+--
+-- Name: lang2dictionary(public.manifold_lang); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.lang2dictionary(public.manifold_lang) RETURNS regconfig
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT CASE $1
+WHEN 'english' THEN 'pg_catalog.english'::regconfig
+ELSE
+  'pg_catalog.simple'::regconfig
+END;
+$_$;
+
+
+--
 -- Name: manifold_slugify(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -162,6 +255,51 @@ CREATE FUNCTION public.manifold_slugify(text) RETURNS text
     FROM "hyphenated"
   )
   SELECT NULLIF("value", '') FROM "trimmed";
+$_$;
+
+
+--
+-- Name: to_unaccented_tsv(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.to_unaccented_tsv(jsonb) RETURNS tsvector
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT pg_catalog.to_tsvector('pg_catalog.english'::regconfig, COALESCE(pg_catalog.STRING_AGG(public.immutable_unaccent(str), ' '), ''))
+FROM public.jsonb_extract_strings($1) AS t(str);
+$_$;
+
+
+--
+-- Name: to_unaccented_tsv(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.to_unaccented_tsv(text) RETURNS tsvector
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT pg_catalog.to_tsvector('pg_catalog.english'::regconfig, COALESCE(public.immutable_unaccent($1), ''));
+$_$;
+
+
+--
+-- Name: to_unaccented_weighted_tsv(jsonb, "char"); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.to_unaccented_weighted_tsv(jsonb, "char") RETURNS tsvector
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT pg_catalog.setweight(public.to_unaccented_tsv($1), $2);
+$_$;
+
+
+--
+-- Name: to_unaccented_weighted_tsv(text, "char"); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.to_unaccented_weighted_tsv(text, "char") RETURNS tsvector
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT pg_catalog.setweight(public.to_unaccented_tsv($1), $2);
 $_$;
 
 
@@ -360,7 +498,10 @@ CREATE TABLE public.text_section_nodes (
     extrapolated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    intermediate boolean DEFAULT false NOT NULL
+    intermediate boolean DEFAULT false NOT NULL,
+    contained_node_uuids text[] DEFAULT '{}'::text[] NOT NULL,
+    contained_content text,
+    tsv_contained_content tsvector GENERATED ALWAYS AS (public.to_unaccented_weighted_tsv(contained_content, 'A'::"char")) STORED NOT NULL
 );
 
 
@@ -388,6 +529,7 @@ CREATE TABLE public.text_sections (
     slug text,
     hidden_in_reader boolean DEFAULT false NOT NULL,
     metadata jsonb DEFAULT '{}'::jsonb,
+    body_text text,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
 );
 
@@ -1194,7 +1336,8 @@ CREATE TABLE public.users (
     established boolean DEFAULT false NOT NULL,
     trusted boolean DEFAULT false NOT NULL,
     deleted_at timestamp without time zone,
-    marked_for_purge_at timestamp without time zone
+    marked_for_purge_at timestamp without time zone,
+    cached_full_name text
 );
 
 
@@ -1787,6 +1930,34 @@ CREATE VIEW public.permissions AS
   WHERE (r.kind = 'scoped'::text)
   GROUP BY ur.user_id, r.resource_id, r.resource_type
  HAVING ((r.resource_id IS NOT NULL) AND (r.resource_type IS NOT NULL));
+
+
+--
+-- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pg_search_documents (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    searchable_type character varying,
+    searchable_id uuid,
+    journal_id uuid,
+    project_id uuid,
+    text_id uuid,
+    text_section_id uuid,
+    lang public.manifold_lang DEFAULT 'english'::public.manifold_lang NOT NULL,
+    search_result_type text,
+    title text,
+    primary_data jsonb,
+    secondary text,
+    secondary_data jsonb,
+    tertiary text,
+    tertiary_data jsonb,
+    content text,
+    metadata jsonb,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    tsv_composite tsvector GENERATED ALWAYS AS ((((((((public.to_unaccented_weighted_tsv(title, 'A'::"char") || public.to_unaccented_weighted_tsv(primary_data, 'A'::"char")) || public.to_unaccented_weighted_tsv(secondary, 'B'::"char")) || public.to_unaccented_weighted_tsv(secondary_data, 'B'::"char")) || public.to_unaccented_weighted_tsv(tertiary, 'C'::"char")) || public.to_unaccented_weighted_tsv(tertiary_data, 'C'::"char")) || public.to_unaccented_weighted_tsv(content, 'D'::"char")) || public.to_unaccented_weighted_tsv(metadata, 'D'::"char"))) STORED NOT NULL
+);
 
 
 --
@@ -3571,6 +3742,14 @@ ALTER TABLE ONLY public.pending_entitlements
 
 
 --
+-- Name: pg_search_documents pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT pg_search_documents_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: project_collection_subjects project_collection_subjects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4934,6 +5113,48 @@ CREATE INDEX index_pending_entitlements_on_user_id ON public.pending_entitlement
 
 
 --
+-- Name: index_pg_search_documents_on_journal_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_journal_id ON public.pg_search_documents USING btree (journal_id);
+
+
+--
+-- Name: index_pg_search_documents_on_project_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_project_id ON public.pg_search_documents USING btree (project_id);
+
+
+--
+-- Name: index_pg_search_documents_on_searchable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_pg_search_documents_on_searchable ON public.pg_search_documents USING btree (searchable_type, searchable_id);
+
+
+--
+-- Name: index_pg_search_documents_on_text_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_text_id ON public.pg_search_documents USING btree (text_id);
+
+
+--
+-- Name: index_pg_search_documents_on_text_section_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_text_section_id ON public.pg_search_documents USING btree (text_section_id);
+
+
+--
+-- Name: index_pg_search_documents_on_tsv_composite; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_tsv_composite ON public.pg_search_documents USING gin (tsv_composite);
+
+
+--
 -- Name: index_project_collection_subjects_on_project_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5774,6 +5995,13 @@ CREATE INDEX index_text_section_nodes_on_text_section_id ON public.text_section_
 
 
 --
+-- Name: index_text_section_nodes_on_tsv_contained_content; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_section_nodes_on_tsv_contained_content ON public.text_section_nodes USING gin (tsv_contained_content);
+
+
+--
 -- Name: index_text_section_nodes_uniqueness; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6353,6 +6581,14 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 
 
 --
+-- Name: pg_search_documents fk_rails_114aa6d248; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_114aa6d248 FOREIGN KEY (project_id) REFERENCES public.projects(id) ON DELETE CASCADE;
+
+
+--
 -- Name: entitlement_import_row_transitions fk_rails_121d85ff30; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6513,6 +6749,14 @@ ALTER TABLE ONLY public.annotations
 
 
 --
+-- Name: pg_search_documents fk_rails_4b852ed946; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_4b852ed946 FOREIGN KEY (journal_id) REFERENCES public.journals(id) ON DELETE SET NULL;
+
+
+--
 -- Name: reading_group_text_sections fk_rails_4d48b09fa9; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6654,6 +6898,14 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 
 ALTER TABLE ONLY public.text_section_nodes
     ADD CONSTRAINT fk_rails_7f8f8051f7 FOREIGN KEY (text_section_id) REFERENCES public.text_sections(id) ON DELETE CASCADE;
+
+
+--
+-- Name: pg_search_documents fk_rails_811918d20d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_811918d20d FOREIGN KEY (text_section_id) REFERENCES public.text_sections(id) ON DELETE CASCADE;
 
 
 --
@@ -6862,6 +7114,14 @@ ALTER TABLE ONLY public.user_collected_journal_issues
 
 ALTER TABLE ONLY public.entitlement_user_links
     ADD CONSTRAINT fk_rails_c63fa4df49 FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: pg_search_documents fk_rails_cba4da74d4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_cba4da74d4 FOREIGN KEY (text_id) REFERENCES public.texts(id) ON DELETE CASCADE;
 
 
 --
@@ -7410,6 +7670,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250210192150'),
 ('20250210230256'),
 ('20250306230246'),
+('20250312204629'),
+('20250410180020'),
+('20250410201712'),
 ('20250506201306'),
 ('20250514190334'),
 ('20250521211043');

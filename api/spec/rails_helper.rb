@@ -207,8 +207,6 @@ RSpec.configure do |config|
     ingestion_dir.each_child(&:rmtree)
   end
 
-  allowed_net_connect =
-
   config.around do |example|
     WebMock.disable_net_connect!(allow: [/googleapis\.com/])
 

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe NotificationMailer, type: :mailer do
   let(:project_one) { FactoryBot.create(:project) }
   let(:project_two) { FactoryBot.create(:project) }
-  let!(:events) do
+  let!(:other_events) do
     return [
       FactoryBot.create(:event, :project_created, project: project_one),
       FactoryBot.create(:event, :project_created, project: project_two)
@@ -13,7 +13,7 @@ RSpec.describe NotificationMailer, type: :mailer do
   end
   let(:flagged_comment) { FactoryBot.create(:comment, flags_count: 3) }
   let(:reading_group_membership) { FactoryBot.create(:reading_group_membership) }
-  let(:events) do # rubocop:todo RSpec/OverwritingSetup
+  let!(:events) do
     {
       projects: Event
         .where(project: [project_one.id, project_two.id])

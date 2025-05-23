@@ -32,7 +32,6 @@ module HasKeywordSearch
 
   module ClassMethods
     # @return [void]
-    # rubocop:disable Naming/PredicateName
     def has_keyword_search!(**options)
       normalized_options = normalize_keyword_search_options(**options)
 
@@ -40,7 +39,6 @@ module HasKeywordSearch
 
       pg_search_scope :keyword_search, **normalized_options
     end
-    # rubocop:enable Naming/PredicateName
 
     def has_keyword_search?
       keyword_search_options.present?

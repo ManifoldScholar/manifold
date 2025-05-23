@@ -32,21 +32,6 @@ module TestHelpers
   end
 
   def anonymous_user
-    Naught.build do |config|
-      config.impersonate User
-      config.predicates_return false
-
-      def role # rubocop:todo Lint/NestedMethodDefinition
-        nil
-      end
-
-      def kind # rubocop:todo Lint/NestedMethodDefinition
-        nil
-      end
-
-      def can_read?(resource, options = {}) # rubocop:todo Lint/NestedMethodDefinition
-        resource.readable_by? self, options
-      end
-    end.new
+    ::AnonymousUser.new
   end
 end

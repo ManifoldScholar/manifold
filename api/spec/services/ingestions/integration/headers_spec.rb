@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "When ingesting document without header ids", integration: true do # rubocop:todo RSpec/DescribeClass
+RSpec.describe "When ingesting document without header ids", integration: true do
   include TestHelpers::IngestionHelper
 
   let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "without_header_ids", "index.html") }

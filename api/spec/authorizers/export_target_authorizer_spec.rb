@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Export Target Abilities", :authorizer do # rubocop:todo RSpec/DescribeClass
+RSpec.describe "Export Target Abilities", :authorizer do
   let(:user) { FactoryBot.create :user }
 
   subject { user }

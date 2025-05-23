@@ -37,8 +37,8 @@ class TextSectionNode < ApplicationRecord
   scope :current, -> { joins(:text_section).where(TextSection.arel_table[:body_hash].eq(arel_table[:body_hash])) }
   scope :orphaned, -> { joins(:text_section).where(TextSection.arel_table[:body_hash].not_eq(arel_table[:body_hash])) }
 
-  has_many :text_section_node_links, -> { in_order }, inverse_of: :parent, foreign_key: :parent_id
-  has_many :ancestor_links, -> { in_reverse_order }, class_name: "TextSectionNodeLink", inverse_of: :child, foreign_key: :child_id
+  has_many_readonly :text_section_node_links, -> { in_order }, inverse_of: :parent, foreign_key: :parent_id
+  has_many_readonly :ancestor_links, -> { in_reverse_order }, class_name: "TextSectionNodeLink", inverse_of: :child, foreign_key: :child_id
 
   has_many :parents, -> { terminal }, through: :ancestor_links, source: :parent
   has_many :children, through: :text_section_node_links, source: :child

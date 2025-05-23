@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Ingestions::Compiler do
   include TestHelpers::IngestionHelper
 
-  before(:all) do # rubocop:todo RSpec/BeforeAfterAll
+  before(:all) do
     Settings.instance.update_from_environment!
   end
 
@@ -139,7 +139,7 @@ RSpec.describe Ingestions::Compiler do
         .and change(TextSection, :count).by(1)
         .and change(TextTitle, :count).by(1)
         .and change(IngestionSource, :count).by(1)
-        .and change(Maker, :count).by(0) # rubocop:todo RSpec/ChangeByZero
+        .and keep_the_same(Maker, :count)
         .and change(Stylesheet, :count).by(2)
     end
   end

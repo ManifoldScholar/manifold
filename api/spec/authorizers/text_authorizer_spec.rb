@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe "Text Abilities", :authorizer, :project_role_tests do # rubocop:todo RSpec/DescribeClass
+RSpec.describe "Text Abilities", :authorizer, :project_role_tests do
   let_it_be(:text, refind: true) { FactoryBot.create(:text, project: project) }
 
   let(:object) { text }

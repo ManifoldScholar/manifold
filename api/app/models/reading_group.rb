@@ -17,18 +17,19 @@ class ReadingGroup < ApplicationRecord
 
   belongs_to :reading_group_kind, optional: true, inverse_of: :reading_groups
 
-  has_many :reading_group_memberships, dependent: :destroy
+  has_many :reading_group_memberships, dependent: :destroy, inverse_of: :reading_group
   has_many :moderators, -> { merge(ReadingGroupMembership.moderators) }, through: :reading_group_memberships, source: :user
   has_many :users, -> { merge(ReadingGroupMembership.active) }, through: :reading_group_memberships
+
   # We intentionally leave out the :dependent option here because we apply out own logic
   # to child annotations on reading group delete in the :update_annotations_privacy
   # before_destroy callback below.
-  has_many :annotations # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many_readonly :annotations
 
-  has_one :reading_group_collection, inverse_of: :reading_group # rubocop:todo Rails/HasManyOrHasOneDependent
-  has_one :reading_group_count # rubocop:todo Rails/HasManyOrHasOneDependent
-  has_many :reading_group_visibilities # rubocop:todo Rails/HasManyOrHasOneDependent
-  has_many :reading_group_user_counts # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_one_readonly :reading_group_collection, inverse_of: :reading_group
+  has_one_readonly :reading_group_count
+  has_many_readonly :reading_group_visibilities
+  has_many_readonly :reading_group_user_counts
 
   has_many :annotated_texts, -> { distinct.reorder(nil) }, through: :annotations, source: :text
 

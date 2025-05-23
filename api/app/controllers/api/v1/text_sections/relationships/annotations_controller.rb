@@ -6,7 +6,7 @@ module API
       module Relationships
         # Annotations controller
         class AnnotationsController < ApplicationController
-          before_action :set_annotation, only: [:update, :destroy]
+          before_action :set_annotation, only: [:update]
           before_action :set_text_section, only: [:create]
 
           config.pagination_enforced = true

@@ -1,22 +1,20 @@
 # frozen_string_literal: true
 
+# :nocov:
+class Test000100 < SystemUpgrades::AbstractVersion
+  def perform!
+    logger.debug "Test"
+  end
+end if Rails.env.test?
+
+class Test000200 < SystemUpgrades::AbstractVersion
+  def perform!
+    logger.debug "Test"
+  end
+end if Rails.env.test?
+# :nocov:
+
 RSpec.describe SystemUpgrades do
-  # rubocop:todo RSpec/LeakyConstantDeclaration
-  class Test000100 < SystemUpgrades::AbstractVersion # rubocop:todo Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
-    def perform!
-  logger.debug "Test" # rubocop:todo Layout/IndentationWidth
-    end
-  end
-  # rubocop:enable RSpec/LeakyConstantDeclaration
-
-  # rubocop:todo RSpec/LeakyConstantDeclaration
-  class Test000200 < SystemUpgrades::AbstractVersion # rubocop:todo Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
-    def perform!
-  logger.debug "Test" # rubocop:todo Layout/IndentationWidth
-    end
-  end
-  # rubocop:enable RSpec/LeakyConstantDeclaration
-
   it "retrieves and orders upgrade version files", :aggregate_failures do
     upgrades = described_class.eager_load_upgrades!
 

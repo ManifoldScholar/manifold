@@ -14,10 +14,10 @@ FactoryBot.define do
     password { "bananarambo" }
     password_confirmation { "bananarambo" }
     notification_preferences_by_kind do
-      Hash.new({ # rubocop:todo Lint/SharedMutableDefault
-      digest: NotificationFrequency[:daily],
-      followed_projects: NotificationFrequency[:always]
-    })
+      {
+        digest: NotificationFrequency[:daily],
+        followed_projects: NotificationFrequency[:always],
+      }
     end
 
     trait :admin do

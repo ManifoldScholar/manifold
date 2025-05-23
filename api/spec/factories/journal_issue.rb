@@ -18,9 +18,9 @@ FactoryBot.define do
 
   factory :journal_issue_with_title, parent: :journal_issue do
     transient do
-      journal_attributes {{title: "new"}}
-      journal_volume_attributes {{number: 1}}
-      project_attributes {{description: "tomorrow"}}
+      journal_attributes { { title: "new" } }
+      journal_volume_attributes { { number: 1 } }
+      project_attributes { { description: "tomorrow" } }
     end
     journal { association :journal, **journal_attributes }
     project { association :project, **project_attributes }

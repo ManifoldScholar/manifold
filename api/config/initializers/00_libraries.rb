@@ -8,6 +8,7 @@ require "auth_token"
 require "middleware/omniauth_stack"
 require "our_types/indifferent_hash"
 require "scanf"
+require "stringio"
 require "zip"
 
 require "dry/core"

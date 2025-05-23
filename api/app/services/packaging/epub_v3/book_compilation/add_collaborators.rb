@@ -11,7 +11,7 @@ module Packaging
         def call(context)
           context.with!(:book, :compiled_text) do |book, compiled_text|
             compiled_text.collaborators.each do |collaborator|
-              book.public_send(collaborator.gepub_add_method, *collaborator.to_gepub_args)
+              book.public_send(collaborator.gepub_add_method, *collaborator.to_gepub_args, **collaborator.to_gepub_options)
             end
           end
 

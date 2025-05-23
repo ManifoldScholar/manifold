@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Ingestions::Fetchers::URL, slow: true do
-  before(:all) do # rubocop:todo RSpec/BeforeAfterAll
+  before(:all) do
     Settings.instance.update_from_environment!
     url = "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3"
     root = Dir.mktmpdir

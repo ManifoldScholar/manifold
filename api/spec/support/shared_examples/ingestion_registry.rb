@@ -20,7 +20,7 @@ shared_examples_for "an ingestion registry" do |definition|
   it "adds a definition to the registry" do
     expect do
       registry.configure do
-        eval definition # rubocop:todo Security/Eval
+        eval definition
       end
     end.to change(registry, :length).from(0).to(1)
   end

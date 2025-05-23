@@ -21,7 +21,7 @@ class Entitlement < ApplicationRecord
 
   has_many :entitlement_user_links, autosave: true, inverse_of: :entitlement, dependent: :destroy
   has_many :users, through: :entitlement_user_links, source: :user
-  has_many :derived_roles, class_name: "EntitlementDerivedRole", inverse_of: :entitlement # rubocop:todo Rails/HasManyOrHasOneDependent
+  has_many_readonly :derived_roles, class_name: "EntitlementDerivedRole", inverse_of: :entitlement
 
   scope :active, -> { in_state(:active) }
   scope :by_target, ->(target) { where(target: target) }

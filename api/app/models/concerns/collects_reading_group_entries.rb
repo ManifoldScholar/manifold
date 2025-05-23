@@ -20,20 +20,16 @@ module CollectsReadingGroupEntries
       collectables = associations.collectables
       collectable = associations.collectable.singular
 
-      has_many entries, -> { in_order }, inverse_of: collection_inverse_name, dependent: :destroy
-      has_many collectables, through: entries
+      has_many_readonly entries, -> { in_order }, inverse_of: collection_inverse_name, dependent: :destroy
+      has_many_readonly collectables, through: entries
 
       return unless categorized
 
       uncategorized_entries = associations.uncategorized_entries
       uncategorized_collectables = associations.uncategorized_collectables
 
-      # rubocop:todo Rails/ReflectionClassName
-      # rubocop:todo Rails/InverseOf
-      has_many uncategorized_entries, -> { uncategorized.in_order }, class_name: model_name # rubocop:todo Rails/HasManyOrHasOneDependent, Rails/InverseOf, Rails/ReflectionClassName
-      # rubocop:enable Rails/InverseOf
-      # rubocop:enable Rails/ReflectionClassName
-      has_many uncategorized_collectables, through: uncategorized_entries, source: collectable
+      has_many_readonly uncategorized_entries, -> { uncategorized.in_order }, class_name: model_name
+      has_many_readonly uncategorized_collectables, through: uncategorized_entries, source: collectable
     end
 
     # The inverse association used within {.collects_reading_group_entry!}.

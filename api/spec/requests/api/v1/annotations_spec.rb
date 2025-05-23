@@ -54,7 +54,7 @@ RSpec.describe "Annotations", type: :request do
     end
 
     path "/me/relationships/annotations" do
-      let!(:'filter[text]') { nil } # rubocop:todo RSpec/VariableName
+      let!(:'filter[text]') { nil }
 
       include_examples "an API index request",
                        parent: "current user",

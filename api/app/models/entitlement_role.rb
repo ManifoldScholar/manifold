@@ -5,7 +5,8 @@ class EntitlementRole < ApplicationRecord
 
   classy_enum_attr :name, enum: "RoleName", allow_blank: false
   classy_enum_attr :kind, enum: "RoleKind", allow_blank: false
-  has_many :derived_roles, class_name: "EntitlementDerivedRole", inverse_of: :entitlement_role # rubocop:todo Rails/HasManyOrHasOneDependent
+
+  has_many_readonly :derived_roles, class_name: "EntitlementDerivedRole", inverse_of: :entitlement_role
 
   before_validation :infer_kind!
 

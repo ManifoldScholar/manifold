@@ -4,9 +4,6 @@
 module MoneyAttributes
   extend ActiveSupport::Concern
 
-  included do # rubocop:todo Lint/EmptyBlock
-  end
-
   class_methods do
     def money_attributes(*args)
       args.each do |attribute|

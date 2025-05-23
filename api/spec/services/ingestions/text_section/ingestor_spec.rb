@@ -36,7 +36,7 @@ RSpec.describe Ingestions::TextSection::Ingestor do
   end
 
   context "when Google Doc", slow: true do
-    before(:all) do # rubocop:todo RSpec/BeforeAfterAll
+    before(:all) do
       Settings.instance.update_from_environment!
     end
 

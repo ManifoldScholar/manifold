@@ -6,7 +6,7 @@ class Permission < ApplicationRecord
   include Authority::Abilities
   include SerializedAbilitiesFor
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :permissions
   belongs_to :resource, polymorphic: true
 
   scope :by_resource, ->(resource) { where resource: resource }
