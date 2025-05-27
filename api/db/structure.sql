@@ -501,7 +501,9 @@ CREATE TABLE public.text_section_nodes (
     intermediate boolean DEFAULT false NOT NULL,
     contained_node_uuids text[] DEFAULT '{}'::text[] NOT NULL,
     contained_content text,
-    tsv_contained_content tsvector GENERATED ALWAYS AS (public.to_unaccented_weighted_tsv(contained_content, 'A'::"char")) STORED NOT NULL
+    tsv_contained_content tsvector GENERATED ALWAYS AS (public.to_unaccented_weighted_tsv(contained_content, 'A'::"char")) STORED NOT NULL,
+    search_indexed_at timestamp(6) without time zone,
+    search_indexed boolean DEFAULT false NOT NULL
 );
 
 
@@ -5988,6 +5990,13 @@ CREATE INDEX index_text_section_nodes_extrapolation ON public.text_section_nodes
 
 
 --
+-- Name: index_text_section_nodes_missing_search_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_section_nodes_missing_search_index ON public.text_section_nodes USING btree (id) WHERE (NOT search_indexed);
+
+
+--
 -- Name: index_text_section_nodes_on_text_section_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7675,6 +7684,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250410201712'),
 ('20250506201306'),
 ('20250514190334'),
-('20250521211043');
+('20250521211043'),
+('20250527180248');
 
 
