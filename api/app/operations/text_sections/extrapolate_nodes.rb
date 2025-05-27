@@ -84,7 +84,9 @@ module TextSections
         COALESCE(node_extra, '{}'::jsonb) AS node_extra,
         COALESCE(children_count, 0) AS children_count,
         (#{TAG_IS_INTERMEDIATE}) AS intermediate,
-        CURRENT_TIMESTAMP AS extrapolated_at
+        CURRENT_TIMESTAMP AS extrapolated_at,
+        CURRENT_TIMESTAMP AS search_indexed_at,
+        TRUE AS search_indexed
       FROM nodes
       LEFT OUTER JOIN contained_data USING (node_path)
     )
@@ -102,7 +104,9 @@ module TextSections
       node_extra,
       children_count,
       intermediate,
-      extrapolated_at
+      extrapolated_at,
+      search_indexed_at,
+      search_indexed
     ) SELECT
       text_section_id, body_hash,
       node_root, node_path, path,
@@ -114,7 +118,9 @@ module TextSections
       node_extra,
       children_count,
       intermediate,
-      extrapolated_at
+      extrapolated_at,
+      search_indexed_at,
+      search_indexed
       FROM finalized
     ON CONFLICT (node_path) DO UPDATE SET
       "text_section_id" = EXCLUDED."text_section_id",
@@ -184,11 +190,11 @@ module TextSections
     def call(**args)
       corrected = yield correct_intermediate_nodes.(**args)
 
-      return Success(upserted: 0, corrected: corrected) if args[:text_section].present? && args[:text_section].body_json.blank?
+      return Success(upserted: 0, corrected:) if args[:text_section].present? && args[:text_section].body_json.blank?
 
       upserted = sql_update! FIRST_PART, interpolate(**args), SECOND_PART, FINAL_PART
 
-      Success(upserted: upserted, corrected: corrected)
+      Success(upserted:, corrected:)
     end
 
     private

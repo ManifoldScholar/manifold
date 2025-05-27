@@ -26,6 +26,8 @@ module Search
         [klass.search_result_type, diff]
       end
 
+      TextSectionNodes::BackportSearchIndexJob.perform_later
+
       Success results
     end
   end
