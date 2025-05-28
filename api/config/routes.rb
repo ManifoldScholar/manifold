@@ -101,7 +101,14 @@ Rails.application.routes.draw do
       resources :subjects
       resources :categories, except: [:create, :index]
       resources :makers
-      resources :ingestions, only: [:show, :update]
+      resources :ingestions, only: [:show, :update] do
+        member do
+          get "show_messages"
+          patch "reset"
+          patch "process_ingestion"
+          patch "reingest"
+        end
+      end
       resources :stylesheets, only: [:show, :update, :destroy]
       resources :tags, only: [:index]
       resources :events, only: [:destroy]
