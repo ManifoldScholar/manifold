@@ -6,7 +6,17 @@ module API
     class IngestionsController < ApplicationController
       before_action :set_project
 
-      resourceful! Ingestion, authorize_options: { except: [:show, :create, :update] } do
+      resourceful! Ingestion, authorize_options: {
+        except: [
+          :show,
+          :create,
+          :update,
+          :reset,
+          :process_ingestion,
+          :reingest,
+          :show_messages
+        ]
+      } do
         @project.nil? ? Ingestion : @project.ingestions
       end
 
@@ -45,24 +55,24 @@ module API
       end
 
       def reset
-        @ingestion = load_and_authorize_ingestion
+        @ingestion = load_ingestion
         @ingestion.reset
         @ingestion.save
       end
 
       def process_ingestion
-        @ingestion = load_and_authorize_ingestion
-        Ingestions::ProcessIngestionJob.perform_later(@ingestion.id, current_user.id)
+        @ingestion = load_ingestion
+        Ingestions::ProcessIngestionJob.perform_later(@ingestion.id, current_user)
       end
 
       def reingest
-        @ingestion = load_and_authorize_ingestion
-        Ingestions::ReingestIngestionJob.perform_later(@ingestion.id, current_user.id)
+        @ingestion = load_ingestion
+        Ingestions::ReingestIngestionJob.perform_later(@ingestion.id, current_user)
       end
 
       def show_messages
-        @ingestion = load_and_authorize_ingestion
-        permitted = params.expect(:starting_at)
+        @ingestion = load_ingestion
+        permitted = params.permit(:starting_at)
         time = DateTime.parse(permitted[:starting_at])
         render_multiple_resources IngestionMessage.where(
           ingestion: @ingestion,
