@@ -68,8 +68,6 @@ module V1
         value: Types::Integer
       )
     ).optional do |object, params|
-      object.load_text_node_hits_for!(params[:search_keyword])
-
       camelize_hash(object.text_nodes)
     end
 
