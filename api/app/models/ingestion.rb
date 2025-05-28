@@ -96,8 +96,7 @@ class Ingestion < ApplicationRecord
     log_buffer << line
     return if severity == "DEBUG"
 
-    IngestionMessage.create(kind: log, payload: line, ingestion: self)
-    # IngestionChannel.broadcast_to self, type: "log", payload: line
+    IngestionMessage.create(kind: "log", payload: line, ingestion: self)
   end
 
   def clear_log
