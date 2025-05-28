@@ -43,6 +43,14 @@ api:
     host: princeton-manifold-production-api-rails
   cable:
     host: princeton-manifold-production-api-cable
+  sidekiq:
+    resources:
+      limits:
+        memory: "4Gi"
+        cpu: "300m"
+      requests:
+        memory: "2Gi"
+        cpu: "150m"
 
 client:
   replicaCount: 2
