@@ -100,19 +100,24 @@ class TextSectionNode < ApplicationRecord
 
   class << self
     # @param [String] keyword
+    # @param [<String>] text_section_ids
     # @return [<Hash>]
-    def hit_search_for(keyword)
-      hit_filter = Search::HitFilter.new
+    def hit_search_for(keyword, text_section_ids: [])
+      return {} if text_section_ids.blank?
 
-      keyword_search(keyword)
-        .with_pg_search_rank
-        .with_pg_search_highlight
-        .limit(MAX_HIT_COUNT)
-        .each_with_object([]) do |node, hits|
-          next unless hit_filter.allow?(node)
+      query = build_hit_query_for(keyword, text_section_ids:)
 
-          hits << node.to_hit
-        end
+      hit_filters = text_section_ids.index_with { Search::HitFilter.new }
+
+      hit_results = text_section_ids.index_with { [] }.merge(nil => Dry::Core::Constants::EMPTY_ARRAY)
+
+      query.each_with_object(hit_results) do |node, hits|
+        hit_filter = hit_filters.fetch(node.text_section_id)
+
+        next unless hit_filter.allow?(node)
+
+        hits[node.text_section_id] << node.to_hit
+      end
     end
 
     # @api private
@@ -149,6 +154,63 @@ class TextSectionNode < ApplicationRecord
         c.id = tsn.id
       ;
       SQL
+    end
+
+    private
+
+    # @param [String] keyword
+    # @param [<String>] text_section_ids
+    # @return [ActiveRecord::Relation<TextSectionNode>]
+    def build_hit_query_for(keyword, text_section_ids:)
+      inner_query = build_hit_inner_query_for(keyword, text_section_ids:)
+
+      node_hits = Arel::Table.new("node_hits")
+
+      TextSectionNode.from(inner_query.to_sql, "node_hits")
+        .reselect(?*)
+        .where(node_hits[:hit_number].lteq(MAX_HIT_COUNT))
+        .order(node_hits[:text_section_id].asc)
+        .order(node_hits[:pg_search_rank].desc)
+        .order(node_hits[:hit_number].asc)
+    end
+
+    # @param [String] keyword
+    # @param [<String>] text_section_ids
+    # @return [Arel::Nodes::Grouping]
+    def build_hit_inner_query_for(keyword, text_section_ids:)
+      base_query = where(text_section_id: text_section_ids)
+        .current
+        .keyword_search(keyword)
+        .with_pg_search_rank
+        .with_pg_search_highlight
+
+      hit_number = hit_number_for(base_query)
+
+      arel_grouping(
+        arel_literal(
+          base_query.select(hit_number.as("hit_number")).to_sql
+        )
+      ).as("node_hits")
+    end
+
+    # @param [ActiveRecord::Relation<TextSectionNode>] query
+    # @return [Arel::Nodes::NamedFunction]
+    def hit_number_for(query)
+      window = search_window_for query
+
+      arel_named_fn("row_number").over(window)
+    end
+
+    # @param [ActiveRecord::Relation<TextSectionNode>] query
+    # @return [Arel::Nodes::Window]
+    def search_window_for(query)
+      rank_table = Arel::Table.new(query.pg_search_rank_table_alias)
+
+      Arel::Nodes::Window.new
+        .partition(arel_table[:text_section_id])
+        .order(rank_table[:rank].desc)
+        .order(arel_table[:node_indices].desc)
+        .order(arel_table[:id].asc)
     end
   end
 end

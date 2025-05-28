@@ -31,8 +31,26 @@ module Search
         text_section: text_section,
       }
 
-      PgSearch::Document.faceted_search_for(keyword, **options)
+      results = PgSearch::Document.faceted_search_for(keyword, **options)
         .page(page_number).per(per_page)
+
+      eager_load_text_node_hits_within! results
+
+      return results
+    end
+
+    private
+
+    # @param [ActiveRecord::Relation<PgSearch::Document>] results
+    # @return [void]
+    def eager_load_text_node_hits_within!(results)
+      text_section_ids = results.pluck(:text_section_id).compact_blank
+
+      text_node_hits = TextSectionNode.hit_search_for(keyword, text_section_ids:)
+
+      results.records.each do |record|
+        record.assign_text_node_hits!(keyword, text_node_hits)
+      end
     end
   end
 end

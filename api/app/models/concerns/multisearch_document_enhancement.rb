@@ -24,6 +24,10 @@ module MultisearchDocumentEnhancement
       left_outer_joins(:journal).where(Journal.arel_table[:id].eq(nil).or(Journal.arel_table[:draft].eq(false)))
     end
 
+    scope :with_default_associations, -> do
+      includes(:project, :text_section, text: %i[titles text_subjects category])
+    end
+
     has_many_readonly :text_section_nodes, -> { current }, primary_key: :text_section_id, foreign_key: :text_section_id
 
     attribute :secondary_data, ::Search::SecondaryData.to_type
@@ -70,13 +74,6 @@ module MultisearchDocumentEnhancement
     search_result_type == "text_section"
   end
 
-  # @return [void]
-  def load_text_node_hits_for!(keyword)
-    self.search_keyword = keyword
-
-    @text_node_hits = build_text_node_hits
-  end
-
   def text_nodes
     {
       hits: text_node_hits,
@@ -86,20 +83,23 @@ module MultisearchDocumentEnhancement
     }
   end
 
+  # @api private
+  # @param [String] keyword
+  # @param [{ String => <Hash> }] all_hits hashes keyed by `text_section_id`
+  def assign_text_node_hits!(keyword, all_hits)
+    self.search_keyword = keyword
+
+    @text_node_hits = all_hits.fetch(text_section_id, Dry::Core::Constants::EMPTY_ARRAY)
+  end
+
   # @return [<TextSectionNode>]
   def text_node_hits
-    @text_node_hits ||= build_text_node_hits
+    @text_node_hits ||= Dry::Core::Constants::EMPTY_ARRAY
   end
 
   # @!endgroup
 
   private
-
-  def build_text_node_hits
-    return [] unless exposes_text_node_hits? && search_keyword.present?
-
-    text_section_nodes.hit_search_for(search_keyword)
-  end
 
   # @param [Project, Text]
   # @return [Hash]
@@ -120,7 +120,7 @@ module MultisearchDocumentEnhancement
 
           with_highlighted_title(query: q, tsearch: tsearch)
         end
-        .includes(:project, :text, :text_section)
+        .with_default_associations
         .faceted_by(*facets)
 
       query = query.for_project(project) unless project.nil?
