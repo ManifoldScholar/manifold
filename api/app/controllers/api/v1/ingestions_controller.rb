@@ -44,6 +44,32 @@ module API
         )
       end
 
+      def reset
+        @ingestion = load_and_authorize_ingestion
+        @ingestion.reset
+        @ingestion.save
+      end
+
+      def process_ingestion
+        @ingestion = load_and_authorize_ingestion
+        Ingestions::ProcessIngestionJob.perform_later(@ingestion.id, current_user.id)
+      end
+
+      def reingest
+        @ingestion = load_and_authorize_ingestion
+        Ingestions::ReingestIngestionJob.perform_later(@ingestion.id, current_user.id)
+      end
+
+      def show_messages
+        @ingestion = load_and_authorize_ingestion
+        permitted = params.expect(:starting_at)
+        time = DateTime.parse(permitted[:starting_at])
+        render_multiple_resources IngestionMessage.where(
+          ingestion: @ingestion,
+          created_at: time..DateTime.now
+        )
+      end
+
       private
 
       def location(_ingestion)

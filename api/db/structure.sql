@@ -1665,6 +1665,20 @@ CREATE TABLE public.import_selections (
 
 
 --
+-- Name: ingestion_messages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ingestion_messages (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    ingestion_id uuid NOT NULL,
+    kind text NOT NULL,
+    payload jsonb NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: ingestion_sources; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3650,6 +3664,14 @@ ALTER TABLE ONLY public.import_selections
 
 
 --
+-- Name: ingestion_messages ingestion_messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ingestion_messages
+    ADD CONSTRAINT ingestion_messages_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: ingestion_sources ingestion_sources_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4277,6 +4299,13 @@ CREATE UNIQUE INDEX index_analytics_visits_on_visit_token ON public.analytics_vi
 
 
 --
+-- Name: index_analytics_visits_on_visitor_token_and_started_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_analytics_visits_on_visitor_token_and_started_at ON public.analytics_visits USING btree (visitor_token, started_at);
+
+
+--
 -- Name: index_annotations_for_membership_counts; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4897,6 +4926,13 @@ CREATE INDEX index_import_selections_on_source_text_id ON public.import_selectio
 --
 
 CREATE INDEX index_import_selections_on_text_id ON public.import_selections USING btree (text_id);
+
+
+--
+-- Name: index_ingestion_messages_on_ingestion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ingestion_messages_on_ingestion_id ON public.ingestion_messages USING btree (ingestion_id);
 
 
 --
@@ -6830,6 +6866,14 @@ ALTER TABLE ONLY public.reading_group_resource_collections
 
 
 --
+-- Name: ingestion_messages fk_rails_589512f280; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ingestion_messages
+    ADD CONSTRAINT fk_rails_589512f280 FOREIGN KEY (ingestion_id) REFERENCES public.ingestions(id) ON DELETE CASCADE;
+
+
+--
 -- Name: reading_group_resources fk_rails_5b9a9060bb; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7704,6 +7748,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250514190334'),
 ('20250521211043'),
 ('20250527180248'),
+('20250528002025'),
 ('20250603192547'),
 ('20250609191642'),
 ('20250609192241');
