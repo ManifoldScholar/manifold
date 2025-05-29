@@ -69,11 +69,11 @@ module Storage
       end
 
       def primary_bucket
-        ENV["MANIFOLD_SETTINGS_STORAGE_PRIMARY_BUCKET"]
+        ENV["MANIFOLD_SETTINGS_STORAGE_PRIMARY_BUCKET"].presence || UploadConfig.bucket
       end
 
       def mirror_bucket
-        ENV["MANIFOLD_SETTINGS_STORAGE_MIRROR_BUCKET"]
+        ENV["MANIFOLD_SETTINGS_STORAGE_MIRROR_BUCKET"].presence || UploadConfig.mirror_bucket || UploadConfig.bucket
       end
 
       def cache_bucket
@@ -161,7 +161,8 @@ module Storage
         Tus::Storage::S3.new(
           concurrency: { concatenation: 20 },
           logger: Rails.logger,
-          **cache_s3_options
+          **cache_s3_options,
+          bucket: cache_bucket,
         )
       end
 
@@ -181,21 +182,21 @@ module Storage
         return {
           http_open_timeout: 30,
           retry_limit: 10,
-          use_accelerate_endpoints: false,
+          use_accelerate_endpoint: false,
           **aws_credentials
         }
       end
 
       def cache_s3_options
-        { **shared_s3_options, prefix: "cache" }
+        { **shared_s3_options, bucket: cache_bucket, prefix: "cache" }
       end
 
       def store_s3_options
-        { **shared_s3_options, prefix: "store" }
+        { **shared_s3_options, bucket: primary_bucket, prefix: "store" }
       end
 
       def s3_storage(bucket, prefix)
-        Shrine::Storage::S3.new(bucket: bucket, **store_s3_options)
+        Shrine::Storage::S3.new(bucket:, **store_s3_options)
       end
 
       def test_storage(path, prefix)
