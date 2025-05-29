@@ -52,7 +52,7 @@ module API
       end
 
       def maker_id
-        collaborator_filter_params[:maker] || collaborators_from_roles_params[:maker][:id]
+        collaborator_filter_params[:maker] || collaborators_from_roles_params.dig(:maker, :id)
       end
 
       def maker_present?

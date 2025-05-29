@@ -36,7 +36,7 @@ module API
           def update_from_roles
             return render_no_maker_error unless maker_present?
 
-            @current_collaborators = @project.collaborators.filtered({ maker: maker_id })
+            @current_collaborators = @project.collaborators.filtered(maker: maker_id)
 
             @collaborators = adjust_collaborators_from_roles(@current_collaborators, collaboratable)
             render_multiple_resources(@collaborators, serializer: ::V1::CollaboratorSerializer)
