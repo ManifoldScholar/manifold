@@ -40,12 +40,12 @@ shared_examples_for "a controller handling flattened collaborators" do |factory|
   end
 
   describe "creates and deletes collaborators from a list of roles" do
-    let_it_be(:collaborator_one) {
+    let_it_be(:collaborator_one) do
       FactoryBot.create(:collaborator, maker: maker_one, collaboratable: object, role: :author, position: 2)
-    }
-    let_it_be(:collaborator_two) {
+    end
+    let_it_be(:collaborator_two) do
       FactoryBot.create(:collaborator, maker: maker_one, collaboratable: object, role: :edited_by, position: 3)
-    }
+    end
     let(:params) do
       {
           roles: [ "author", "editor", "translator" ],
@@ -64,7 +64,7 @@ shared_examples_for "a controller handling flattened collaborators" do |factory|
         expect do
           post path, headers: headers, params: params.to_json
         end.to change(object.collaborators.where(maker_id: maker_one.id), :count).by(1)
-        
+
         expect(object.collaborators.where(maker_id: maker_one.id, role: :editor).count).to eq(1)
         expect(object.collaborators.where(maker_id: maker_one.id, role: :edited_by).count).to eq(0)
         expect(object.collaborators.where(maker_id: maker_one.id, role: :author).count).to eq(1)
@@ -73,7 +73,7 @@ shared_examples_for "a controller handling flattened collaborators" do |factory|
 
       it "does not update roles when no maker id is provided" do
         expect do
-          delete path, headers: headers
+          post path, headers: headers
         end.to keep_the_same { object.collaborators.count }
       end
     end
