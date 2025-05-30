@@ -7,7 +7,9 @@ module Ingestions
     # @param [User] user
     # @return [void]
     def perform(ingestion, user)
+      ingestion.ingestion_messages.create!(kind: "message", payload: "START_ACTION")
       ingestion.perform_process! user
+      ingestion.ingestion_messages.create!(kind: "message", payload: "END_ACTION")
     end
   end
 end
