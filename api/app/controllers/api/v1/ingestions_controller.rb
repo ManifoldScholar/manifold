@@ -12,7 +12,7 @@ module API
           :create,
           :update,
           :reset,
-          :process_ingestion,
+          :do_process,
           :reingest,
           :show_messages
         ]
@@ -58,25 +58,27 @@ module API
         @ingestion = load_ingestion
         @ingestion.reset
         @ingestion.save
+        render_single_resource(
+          @ingestion,
+          location: location(@ingestion)
+        )
       end
 
-      def process_ingestion
+      def do_process
         @ingestion = load_ingestion
-        Ingestions::ProcessIngestionJob.perform_later(@ingestion.id, current_user)
+        ::Ingestions::ProcessJob.perform_later(@ingestion, current_user)
+        render_single_resource(
+          @ingestion,
+          location: location(@ingestion)
+        )
       end
 
       def reingest
         @ingestion = load_ingestion
-        Ingestions::ReingestIngestionJob.perform_later(@ingestion.id, current_user)
-      end
-
-      def show_messages
-        @ingestion = load_ingestion
-        permitted = params.permit(:starting_at)
-        time = DateTime.parse(permitted[:starting_at])
-        render_multiple_resources IngestionMessage.where(
-          ingestion: @ingestion,
-          created_at: time..DateTime.now
+        ::Ingestions::ReingestJob.perform_later(@ingestion, current_user)
+        render_single_resource(
+          @ingestion,
+          location: location(@ingestion)
         )
       end
 
