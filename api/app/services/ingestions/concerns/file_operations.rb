@@ -125,6 +125,11 @@ module Ingestions
         File.join(WORKING_DIR_BASE, identifier)
       end
 
+      # @return [void]
+      def prune_root_path!
+        FileUtils.remove_entry_secure(root_path)
+      end
+
       def source_root
         source_root_dir? ? top_level_entities[:dirs].first : source_root_path
       end
@@ -218,6 +223,7 @@ module Ingestions
 
             target_file = extract_path.join zip_path
             target_path = target_file.dirname
+
             next if target_file.exist?
 
             target_path.mkpath
