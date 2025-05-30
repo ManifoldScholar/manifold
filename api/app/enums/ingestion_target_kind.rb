@@ -19,7 +19,7 @@ class IngestionTargetKind < ClassyEnum::Base
       serialization_options
     ).serializable_hash
 
-    IngestionChannel.broadcast_to(ingestion, type: "entity", payload:)
+    ingestion.ingestion_messages.create!(kind: "entity", payload:)
   end
 
   def begin_processing(user, ingestion)
