@@ -3,6 +3,7 @@
 require "swagger_helper"
 
 RSpec.describe "Ingestions", type: :request do
+  include ActiveJob::TestHelper
   path "/ingestions/{id}" do
     include_examples "an API update request", model: Ingestion, authorized_user: :admin
     include_examples "an API show request",
@@ -20,7 +21,7 @@ RSpec.describe "Ingestions", type: :request do
                        parent: "project",
                        model: Ingestion,
                        url_parameters: [:project_id],
-                       authorized_user: :admin,
+authorized_user: :admin,
                        included_relationships: [:creator]
     end
   end
