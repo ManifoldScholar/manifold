@@ -1720,7 +1720,8 @@ CREATE TABLE public.ingestions (
     source_updated_at timestamp without time zone,
     source_data jsonb,
     text_section_id uuid,
-    target_kind text NOT NULL
+    target_kind text NOT NULL,
+    processing_failed boolean DEFAULT false NOT NULL
 );
 
 
@@ -4294,13 +4295,6 @@ CREATE INDEX index_analytics_events_on_visit_id ON public.analytics_events USING
 --
 
 CREATE UNIQUE INDEX index_analytics_visits_on_visit_token ON public.analytics_visits USING btree (visit_token);
-
-
---
--- Name: index_analytics_visits_on_visitor_token_and_started_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_analytics_visits_on_visitor_token_and_started_at ON public.analytics_visits USING btree (visitor_token, started_at);
 
 
 --
@@ -7730,6 +7724,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250514190334'),
 ('20250521211043'),
 ('20250527180248'),
-('20250528002025');
+('20250528002025'),
+('20250530205742');
 
 

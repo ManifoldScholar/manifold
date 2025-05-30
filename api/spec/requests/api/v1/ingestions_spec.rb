@@ -39,5 +39,4 @@ authorized_user: :admin,
                        included_relationships: [:creator]
     end
   end
-
 end
