@@ -25,5 +25,25 @@ FactoryBot.define do
     trait :unknown do
       payload { ['UNKNOWN', 'an unknown message'] }
     end
+
+    trait :start_message do
+      kind { "message" }
+      payload { "START_ACTION" }
+    end
+
+    trait :end_message do
+      kind { "message" }
+      payload { "END_ACTION" }
+    end
+
+    trait :entity do
+      kind { "entity" }
+      payload do
+        ::V1::IngestionSerializer.new(
+          ingestion,
+          { current_user: ingestion.creator }
+        )
+      end
+    end
   end
 end
