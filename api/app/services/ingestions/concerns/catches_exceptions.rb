@@ -15,11 +15,6 @@ module Ingestions
       # @return [Exception, nil]
       attr_reader :uncaught_exception
 
-      # @abstract
-      # @param [Exception] exception
-      # @return [void]
-      def handle_uncaught_exception!(exception); end
-
       # @api private
       # @return [void]
       def watch_for_uncaught_exceptions!
