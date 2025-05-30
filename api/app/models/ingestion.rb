@@ -25,6 +25,7 @@ class Ingestion < ApplicationRecord
   # Validations
   validates :source, presence: true, if: :file_based_ingestion?
   validates :external_source_url, presence: true, unless: :file_based_ingestion?
+
   aasm column: "state" do
     state :sleeping, initial: true
     state :processing
@@ -60,8 +61,33 @@ class Ingestion < ApplicationRecord
   before_save :commit_log
   before_update :commit_log
 
+  # @!group Main Entry Points
+
+  # @see Ingestions::ProcessJob
+  # @return [void]
+  def perform_process!(user)
+    process! user
+    save!
+  end
+
+  # @see Ingestions::ReingestJob
+  # @return [void]
+  def perform_reingest!(user)
+    reset!
+    perform_process! user
+  end
+
+  # @!endgroup
+
+  # @return [Ingestions::Context]
+  def build_context
+    ::Ingestions::Context.new(self)
+  end
+
   def reset_strategy
-    self.strategy = nil
+    prune_root_path!
+
+    update_column(:strategy, nil)
   end
 
   def file_based_ingestion?
@@ -74,6 +100,12 @@ class Ingestion < ApplicationRecord
 
   def ingestable?
     valid?
+  end
+
+  # @see Ingestions::Concerns::FileOperations#prune_root_path!
+  # @return [void]
+  def prune_root_path!
+    build_context.prune_root_path!
   end
 
   def reingest?
@@ -109,10 +141,14 @@ class Ingestion < ApplicationRecord
   end
 
   def begin_processing(user)
+    update_column :processing_failed, false
+
     target_kind.begin_processing(user, self)
   end
 
   def handle_ingestion_exception(errors)
+    update_column :processing_failed, true
+
     error("Processing failed.\n")
 
     if errors.respond_to?(:full_messages)

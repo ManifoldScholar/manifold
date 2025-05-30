@@ -2,6 +2,10 @@
 
 FactoryBot.define do
   factory :ingestion_message do
+    association(:ingestion)
+
+    kind { "log" }
+
     trait :info do
       payload { ['INFO', 'an info message'] }
     end
