@@ -20,7 +20,7 @@ class Ingestion < ApplicationRecord
   belongs_to :text, optional: true
   belongs_to :text_section, optional: true
   belongs_to :project
-  has_many :ingestion_messages, -> { reorder(created_at: :asc) }, inverse_of: :ingestion, dependent: :destroy
+  has_many :ingestion_messages, -> { reorder(created_at: :asc) }, inverse_of: :ingestion, dependent: :delete_all
 
   # Validations
   validates :source, presence: true, if: :file_based_ingestion?
@@ -96,7 +96,7 @@ class Ingestion < ApplicationRecord
     log_buffer << line
     return if severity == "DEBUG"
 
-    IngestionMessage.create(kind: "log", payload: line, ingestion: self)
+    ingestion_messages.create!(kind: "log", payload: line)
   end
 
   def clear_log
