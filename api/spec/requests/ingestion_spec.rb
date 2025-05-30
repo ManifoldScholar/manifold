@@ -34,4 +34,35 @@ RSpec.describe "Ingestions API", type: :request do
       expect(file).to eq "something.md"
     end
   end
+
+  describe "ingestion processing" do
+    let!(:ingestion) { FactoryBot.create(:ingestion) }
+    let!(:project_id) { ingestion.project_id }
+
+    before do
+      stub_request(:get, "http://example.com/index.md").
+        to_return(status: 200, body: "", headers: {})
+    end
+
+    it "can start ingestion processing" do
+      expect do
+        post process_api_v1_ingestion_path(ingestion), headers: admin_headers
+      end.to have_enqueued_job(::Ingestions::ProcessJob).once
+
+      expect(response).to be_successful
+    end
+
+    it "can reingest an ingestion" do
+      expect do
+        post reingest_api_v1_ingestion_path(ingestion), headers: admin_headers
+      end.to have_enqueued_job(::Ingestions::ReingestJob).once
+      expect(response).to be_successful
+    end
+
+    it "can reset an ingestion" do
+      ingestion.process(ingestion.creator)
+      post reset_api_v1_ingestion_path(ingestion), headers: admin_headers
+      expect(response).to be_successful
+    end
+  end
 end
