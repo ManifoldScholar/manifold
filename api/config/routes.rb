@@ -104,9 +104,15 @@ Rails.application.routes.draw do
       resources :ingestions, only: [:show, :update] do
         member do
           get "show_messages"
-          patch "reset"
-          patch "process_ingestion"
-          patch "reingest"
+          post "reset"
+          post "process", action: :do_process
+          post "reingest"
+        end
+
+        scope module: :ingestions do
+          namespace :relationships do
+            resources :ingestion_messages, only: [:index]
+          end
         end
       end
       resources :stylesheets, only: [:show, :update, :destroy]

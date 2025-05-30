@@ -3,4 +3,5 @@
 # A message stored during resource ingestion to be later returned to the client
 class IngestionMessage < ApplicationRecord
   belongs_to :ingestion
+  validates :kind, :payload, presence: true
 end
