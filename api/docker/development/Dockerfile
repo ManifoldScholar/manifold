@@ -12,11 +12,8 @@ ENV BUNDLE_PATH=/bundle \
     RAILS_MIN_THREADS=16 \
     RAILS_MAX_THREADS=16 \
     API_PORT=13101 \
-    API_CABLE_PORT=13102 \
     API_PIDFILE=/srv/pids/server.pid \
-    API_CABLE_PIDFILE=/srv/pids/cable.pid \
     API_STATEFILE=/srv/pids/server.state \
-    API_CABLE_STATEFILE=/srv/pids/cable.state \
     WORKER_COUNT=0
 
 COPY docker/install_node_16.sh /usr/local/src/install_node_16.sh

@@ -13,7 +13,6 @@ require "action_mailer/railtie"
 # require "action_mailbox/engine"
 # require "action_text/engine"
 require "action_view/railtie"
-require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
 require "dynamic_mailer/mailer"
@@ -62,13 +61,6 @@ module ManifoldApi
     config.action_mailer.delivery_method = :manifold_dynamic
 
     config.active_record.belongs_to_required_by_default = true
-
-    config.action_cable.allowed_request_origins = [
-      "http://#{ENV['DOMAIN']}",
-      "https://#{ENV['DOMAIN']}",
-      "http://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_PORT']}",
-      "https://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_PORT']}"
-    ]
 
     # Settings in config/environments/* take precedence over those specified
     # here. Application configuration should go into files in
