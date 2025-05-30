@@ -103,7 +103,6 @@ Rails.application.routes.draw do
       resources :makers
       resources :ingestions, only: [:show, :update] do
         member do
-          get "show_messages"
           post "reset"
           post "process", action: :do_process
           post "reingest"
