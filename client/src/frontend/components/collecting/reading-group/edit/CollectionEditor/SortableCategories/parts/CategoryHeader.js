@@ -7,6 +7,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import CategoryEdit from "./CategoryEdit";
 import CategoryRemove from "./CategoryRemove";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { MD_TITLE_REGEX } from "../../helpers/constants";
 import * as Styled from "./styles";
 
 function CategoryHeader({
@@ -53,6 +54,9 @@ function CategoryHeader({
     ? `forms.category.expand_${kind}`
     : `forms.category.collapse_${kind}`;
 
+  const mdTitleHidden =
+    MD_TITLE_REGEX.test(title) && !categoryDragActive && !manualCollapsed;
+
   return (
     <>
       <Collapse initialVisible={initExpanded}>
@@ -72,10 +76,8 @@ function CategoryHeader({
             </Styled.Action>
             {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
             {markdownOnly && (
-              <Styled.Title
-                data-invisible={!categoryDragActive && !manualCollapsed}
-              >
-                {descriptionPlaintext}
+              <Styled.Title data-invisible={mdTitleHidden}>
+                {MD_TITLE_REGEX.test(title) ? descriptionPlaintext : title}
               </Styled.Title>
             )}
           </Styled.TitleWrapper>
@@ -128,6 +130,7 @@ function CategoryHeader({
             groupId={groupId}
             onClose={toggleEditActive}
             onError={onCategoryEditError}
+            index={index}
           />
         )}
       </Collapse>

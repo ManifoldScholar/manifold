@@ -15,25 +15,21 @@ function CategoryCreator({ onSubmit, isMarkdown, count }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const title = isMarkdown ? `markdown_${seed(count)}` : inputValue;
+    const title = inputValue || `markdown_${seed(count)}`;
     onSubmit({ title, markdownOnly: isMarkdown });
     setInputValue("");
   }
 
-  const buttonLabel = isMarkdown
+  const createLabel = isMarkdown
     ? t("forms.category.add_markdown")
-    : t("actions.add");
+    : t("forms.category.create");
   const placeholder = isMarkdown
     ? t("forms.category.title_placeholder")
     : t("forms.category.name_placeholder");
 
-  const ButtonComponent = isMarkdown ? Styled.MarkdownButton : Styled.Button;
-
   return (
     <Styled.CategoryCreator onSubmit={handleSubmit}>
-      {!isMarkdown && (
-        <Styled.Label htmlFor={uid}>{t("forms.category.create")}</Styled.Label>
-      )}
+      <Styled.Label htmlFor={uid}>{createLabel}</Styled.Label>
       <Styled.InputWrapper>
         <Styled.Input
           id={uid}
@@ -42,12 +38,11 @@ function CategoryCreator({ onSubmit, isMarkdown, count }) {
           onChange={({ target: { value } }) => setInputValue(value)}
           placeholder={placeholder}
           required={!isMarkdown}
-          hidden={isMarkdown}
         />
-        <ButtonComponent type="submit">
+        <Styled.Button type="submit">
           <IconComposer icon="circlePlus32" size={32} />
-          <span>{buttonLabel}</span>
-        </ButtonComponent>
+          <span>{t("actions.add")}</span>
+        </Styled.Button>
       </Styled.InputWrapper>
     </Styled.CategoryCreator>
   );

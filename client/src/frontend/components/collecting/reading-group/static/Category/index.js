@@ -41,7 +41,7 @@ function Category({ category, mappings, responses, onUncollect }) {
   return (
     <CategoryComponent>
       <Styled.Header>
-        {!markdownOnly && <Styled.Title>{title}</Styled.Title>}
+        <Styled.Title>{title}</Styled.Title>
         {descriptionFormatted && (
           <Styled.Description
             dangerouslySetInnerHTML={{ __html: descriptionFormatted }}

@@ -1,23 +1,35 @@
 import { useId, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useUIDSeed } from "react-uid";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import Dialog from "global/components/dialog";
 import { readingGroupsAPI, requests } from "api";
 import withConfirmation from "hoc/withConfirmation";
+import { MD_TITLE_REGEX } from "../../helpers/constants";
 import * as Styled from "./styles";
 
-function CategoryEdit({ category, groupId, onError, onClose, confirm }) {
+function CategoryEdit({ category, groupId, onError, onClose, confirm, index }) {
   const { t } = useTranslation();
 
-  function doUpdate(categoryId, data) {
-    return readingGroupsAPI.updateCategory(groupId, categoryId, data);
-  }
+  const seed = useUIDSeed();
 
   const isMarkdown = category?.attributes?.markdownOnly;
 
-  const nameLabel = isMarkdown ? t("common.title") : t("forms.category.name");
+  function doUpdate(categoryId, data) {
+    if (isMarkdown && data.attributes.title === "")
+      /* eslint-disable-next-line no-param-reassign */
+      data.attributes.title = `markdown_${seed(index)}`;
+    return readingGroupsAPI.updateCategory(groupId, categoryId, data);
+  }
+
+  const nameLabel = isMarkdown
+    ? t("forms.category.title")
+    : t("forms.category.name");
+  const namePlaceholder = isMarkdown
+    ? t("forms.category.title_placeholder")
+    : t("forms.category.name_placeholder");
   const descriptionLabel = isMarkdown
     ? t("common.content")
     : t("forms.category.description");
@@ -69,14 +81,13 @@ function CategoryEdit({ category, groupId, onError, onClose, confirm }) {
         className="form-secondary"
       >
         <Form.FieldGroup>
-          {!isMarkdown && (
-            <Form.TextInput
-              wide
-              label={nameLabel}
-              name="attributes[title]"
-              placeholder={t("forms.category.name_placeholder")}
-            />
-          )}
+          <Form.TextInput
+            wide
+            label={nameLabel}
+            name="attributes[title]"
+            placeholder={namePlaceholder}
+            hideValue={val => MD_TITLE_REGEX.test(val)}
+          />
           <Form.TextArea
             wide
             height={150}

@@ -21,7 +21,8 @@ export default class FormTextInput extends Component {
     join: PropTypes.func,
     wide: PropTypes.bool,
     disabled: PropTypes.bool,
-    buttons: PropTypes.array
+    buttons: PropTypes.array,
+    hideValue: PropTypes.func
   };
 
   static defaultProps = {
@@ -44,6 +45,7 @@ export default class FormTextInput extends Component {
 
   renderValue = value => {
     if (!value) return "";
+    if (this.props.hideValue) return this.props.hideValue(value) ? "" : value;
     if (!isArray(value)) return value;
     return this.props.join(value);
   };
