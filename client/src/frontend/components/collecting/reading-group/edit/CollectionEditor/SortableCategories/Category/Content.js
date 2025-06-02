@@ -10,7 +10,6 @@ export default function Content({
   category,
   groupId,
   callbacks,
-  newMarkdownBlock,
   collapsed,
   manualCollapsed,
   setManualCollapsed,
@@ -40,9 +39,6 @@ export default function Content({
           groupId={groupId}
           onCategoryEditError={callbacks.onCategoryEditError}
           onCategoryRemove={callbacks.onCategoryRemove}
-          initExpanded={
-            newMarkdownBlock && newMarkdownBlock === category?.attributes.title
-          }
           setCollapsed={() => setManualCollapsed(!manualCollapsed)}
           manualCollapsed={manualCollapsed}
           collectableOver={collectableOver}

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { readingGroupsAPI, collectingAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import CategoryCreator from "./CategoryCreator";
+import CategoryNewToggle from "./CategoryCreator/CategoryNewToggle";
 import SortableCategories from "./SortableCategories";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import { useNotification } from "hooks";
@@ -30,19 +29,6 @@ export default function CollectionEditor({
   }));
 
   const collection = getEntityCollection(readingGroup);
-
-  const [newMarkdownBlock, setNewMarkdownBlock] = useState(null);
-
-  function createCategory(attributes) {
-    const call = readingGroupsAPI.createCategory(readingGroup.id, {
-      attributes
-    });
-    const createRequest = request(call, requests.feReadingGroupCategoryCreate);
-    dispatch(createRequest).promise.then(() => {
-      setNewMarkdownBlock(attributes.markdownOnly ? attributes.title : null);
-      refresh();
-    });
-  }
 
   function updateCategory(category) {
     const { id: categoryId, position } = category;
@@ -110,11 +96,19 @@ export default function CollectionEditor({
   return (
     <Styled.Editor>
       <Styled.CategoryInputs>
-        <CategoryCreator onSubmit={createCategory} />
-        <CategoryCreator
-          onSubmit={createCategory}
-          count={categories?.length ?? 0}
+        <CategoryNewToggle
+          groupId={readingGroup.id}
+          onError={onCategoryEditError}
+          confirm={confirm}
+          refresh={refresh}
+        />
+        <CategoryNewToggle
           isMarkdown
+          groupId={readingGroup.id}
+          onError={onCategoryEditError}
+          confirm={confirm}
+          count={categories?.length ?? 0}
+          refresh={refresh}
         />
       </Styled.CategoryInputs>
       {categories && (
@@ -124,7 +118,6 @@ export default function CollectionEditor({
           responses={responses}
           callbacks={callbacks}
           groupId={readingGroup.id}
-          newMarkdownBlock={newMarkdownBlock}
         />
       )}
     </Styled.Editor>

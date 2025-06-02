@@ -19,10 +19,11 @@ export const Editor = styled.div`
 `;
 
 export const CategoryInputs = styled.div`
-  display: grid;
+  display: flex;
   column-gap: 40px;
   row-gap: 25px;
-  grid-template-columns: 1fr;
+  flex-wrap: wrap;
+  justify-content: center;
 
-  ${respond(`grid-template-columns: repeat(2, 1fr);`, 85)}
+  ${respond(`justify-content: flex-start`, 85)}
 `;
