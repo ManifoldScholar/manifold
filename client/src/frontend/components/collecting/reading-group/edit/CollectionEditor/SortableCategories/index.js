@@ -54,10 +54,7 @@ export default function SortableCategories({
     const update = setCategoriesFromProps(collection, categoriesData);
     if (!isEqual(prevCategories.current, categories)) {
       prevCategories.current = categories;
-    } else if (
-      !isEqual(prevCatsFromProps.current, update) &&
-      !isEqual(update, categories)
-    ) {
+    } else if (update.length !== categories.length) {
       setCategories(update);
       prevCatsFromProps.current = update;
     } else {

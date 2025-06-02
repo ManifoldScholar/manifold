@@ -52,11 +52,13 @@ export default function CollectionEditor({
       call,
       requests.feReadingGroupCategoryDestroy
     );
-    dispatch(destroyRequest).promise.catch(err => {
-      console.error(err);
-      notifyUpdateError();
-      refresh();
-    });
+    dispatch(destroyRequest)
+      .promise.then(() => refresh())
+      .catch(err => {
+        console.error(err);
+        notifyUpdateError();
+        refresh();
+      });
   }
 
   function updateCollectable(collectable) {
