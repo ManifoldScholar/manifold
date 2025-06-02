@@ -264,7 +264,7 @@ export class NavigationMobile extends Component {
               {this.isStandalone && this.renderStandaloneHeading()}
               {this.hasLinks &&
                 this.props.links.map((link, index) => {
-                  if (link.ability)
+                  if (link.ability || link.kind)
                     return (
                       <Authorize
                         key={`${link.route}-wrapped`}
