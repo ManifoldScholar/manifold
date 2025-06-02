@@ -43,7 +43,8 @@ export class SearchMenuBody extends PureComponent {
       const path = lh.link("frontendSearch");
       this.props.history.push(path, {
         searchQueryState: this.state,
-        noScroll: true
+        noScroll: true,
+        fromMenu: true
       });
     }, 250);
   };
@@ -54,7 +55,8 @@ export class SearchMenuBody extends PureComponent {
       const path = lh.link("frontendProjectSearch", this.props.projectId);
       this.props.history.push(path, {
         searchQueryState: this.state,
-        noScroll: true
+        noScroll: true,
+        fromMenu: true
       });
     }, 250);
   };
@@ -66,7 +68,8 @@ export class SearchMenuBody extends PureComponent {
       const path = lh.link("readerSectionSearchResults", textId, sectionId);
       this.props.history.push(path, {
         searchQueryState: this.state,
-        noScroll: true
+        noScroll: true,
+        fromMenu: true
       });
     }, 250);
   };
