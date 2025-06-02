@@ -6,6 +6,7 @@ import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
 import { useFromStore } from "hooks";
+import Authorization from "helpers/authorization";
 import capitalize from "lodash/capitalize";
 
 function ContributorRow({ entity, onDelete, ...props }) {
@@ -18,14 +19,26 @@ function ContributorRow({ entity, onDelete, ...props }) {
 
   const { roles } = attributes ?? {};
 
+  const authentication = useFromStore("authentication");
+  const auth = new Authorization();
+  const canAccessMakers = auth.authorizeAbility({
+    entity: "maker",
+    ability: "update",
+    currentUser: authentication.currentUser
+  });
+
   const additionalProps = {
     title: attributes.makerName,
     subtitle: roles.map(r => capitalize(r).replaceAll("_", " ")).join(", "),
     figure: <EntityThumbnail.Maker entity={maker} />,
     figureSize: "small",
     figureShape: "circle",
-    onRowClick: lh.link("backendRecordsMaker", makerId),
-    rowClickMode: "inline"
+    ...(canAccessMakers
+      ? {
+          onRowClick: lh.link("backendRecordsMaker", makerId),
+          rowClickMode: "inline"
+        }
+      : {})
   };
 
   const utility = (
