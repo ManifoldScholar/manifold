@@ -55,9 +55,8 @@ export const Button = styled.button`
   padding-inline-start: 27px;
   font-size: 14px;
   letter-spacing: 0.089em;
-  background-color: var(--box-medium-bg-color);
-  border-top-right-radius: var(--box-border-radius);
-  border-bottom-right-radius: var(--box-border-radius);
+  background-color: var(--button-tertiary-bg-color);
+  border-radius: var(--box-border-radius);
   transition: color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
