@@ -157,15 +157,13 @@ services:
     build:
       context: api
       dockerfile: docker/development/Dockerfile
-    command: "bin/sidekiq"
+    command: bin/good_job start --probe-port 7001
     depends_on:
       postgres:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
-      minio-client:
-        condition: service_completed_successfully
-      redis:
+      web:
         condition: service_healthy
     env_file:
       - ./docker/manifold.env
@@ -182,34 +180,12 @@ services:
       - rails-log:/srv/app/log
       - rails-tmp:/srv/app/tmp
       - uploads:/srv/app/public/system
-  clock:
-    build:
-      context: api
-      dockerfile: docker/development/Dockerfile
-    command: bin/zhong zhong.rb
-    depends_on:
-      postgres:
-        condition: service_healthy
-      migrations:
-        condition: service_completed_successfully
-      redis:
-        condition: service_healthy
-    env_file:
-      - ./docker/manifold.env
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "10"
-    restart: unless-stopped
-    volumes:
-      - ./api/public/system/:/srv/app/public/system
-      - ./api/:/srv/app
-      - bundle-cache:/bundle
-      - rails-data:/srv/app/data
-      - rails-log:/srv/app/log
-      - rails-tmp:/srv/app/tmp
-      - uploads:/srv/app/public/system
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-s", "-o", "/dev/null", "http://localhost:7001/status/started"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
   spec:
     build:
       context: api
