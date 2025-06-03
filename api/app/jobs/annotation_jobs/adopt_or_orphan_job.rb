@@ -5,7 +5,7 @@ module AnnotationJobs
   class AdoptOrOrphanJob < ApplicationJob
     queue_as :annotations
 
-    unique :until_executed, lock_ttl: 15.minutes, on_conflict: :log
+    unique_job! by: :job
 
     # @param [Annotation] annotation
     # @return [void]
