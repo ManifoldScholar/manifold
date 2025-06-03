@@ -20,38 +20,55 @@ Rails.application.configure do
   config.good_job.shutdown_timeout = 25 # seconds
   config.good_job.enable_cron = true
   config.good_job.cron = {
-    "feed.refresh_feed": {
-      cron: "0 * * * *",
-      class: "FeedRefreshJob",
-      description: "Refresh the opportunity feed.",
+    "caches.refresh_project_collections": {
+      cron: "*/15 * * * *",
+      class: "::ProjectCollectionJobs::QueueCacheCollectionProjectsJob"
     },
-    "opportunities.archive_expired": {
-      cron: "55 * * * *",
-      class: "Opportunities::ArchiveExpiredJob",
-      description: "Automatically archive expired opportunities",
-    },
-    "opportunities.calculate_all_sorting": {
-      cron: "0 1,13 * * *",
-      class: "Opportunities::CalculateAllSortingJob",
-      description: "Calculate sorting for all opportunities",
-    },
-    "opportunities.check_all_url_validity": {
-      cron: "0 0,4,8,12,16,20 * * *",
-      class: "Opportunities::CheckAllURLValidityJob",
-      description: "Check the URL Validity of all opportunities",
-    },
-    "resources.maintain": {
-      cron: "*/5 * * * *",
-      class: "Resources::MaintainJob",
-      description: "Maintain resources",
-    },
-    "sources.calculate_counter_caches": {
+    "caches.refresh_all_flag_status_data": {
       cron: "*/10 * * * *",
-      class: "Sources::CalculateCounterCaches",
-      description: "Refresh counter caches on Sources",
+      class: "::Flags::RefreshAllStatusDataJob"
     },
+    "entitlements.audit": {
+      cron: "*/15 * * * *",
+      class: "Entitlements::AuditJob"
+    },
+    "entitlements.check_expiration": {
+      cron: "0 * * * *",
+      class: "Entitlements::CheckExpirationJob"
+    },
+    "uploads.expire_shrine_cache": {
+      cron: "* * 0 * *",
+      class: "ExpireShrineCacheJob"
+    },
+    "uploads.expire_tus_uploads": {
+      cron: "* * 0 * *",
+      class: "ExpireTusUploadsJob"
+    },
+    "notifications.enqueue_user_daily_digests": {
+      cron: "* 6 * * *",
+      class: "Notifications::EnqueueDigestsJob"
+    },
+    "notifications.enqueue_user_weekly_digests": {
+      cron: "* 6 * * 0",
+      class: "Notifications::EnqueueDigestsJob"
+    },
+    "packaging.automate_text_exports": {
+      cron: "*/5 * * * *",
+      class: "Texts::AutomateExportsJob"
+    },
+    "packaging.prune_text_exports": {
+      cron: "* 1 * * *",
+      class: "TextExports::PruneJob"
+    },
+    "packaging.prune_project_exports": {
+      cron: "5 1 * * *",
+      class: "ProjectExports::PruneJob"
+    },
+    "packaging.prune_bag_it_temporary_directory": {
+      cron: "* */4 * * *",
+      class: "Packaging::BagItSpec::PruneTemporaryDirectoryJob"
+    }
   }
 
   config.good_job.dashboard_default_locale = :en
 end
-
