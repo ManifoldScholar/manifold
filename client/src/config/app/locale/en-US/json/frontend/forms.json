@@ -15,13 +15,16 @@
       "description_instructions": "Enter a brief description of the category. This field accepts basic Markdown.",
       "empty_placeholder": "Drag here to add",
       "markdown_body_placeholder": "Enter markdown content",
-      "add_markdown": "Markdown block",
+      "add_block": "Add a new block:",
+      "add_markdown": "Markdown",
+      "add_category": "Category",
+      "organize": "Organize:",
       "expand_category": "Expand category content",
       "collapse_category": "Collapse category content",
       "expand_block": "Expand block content",
       "collapse_block": "Collapse block content",
       "edit_dialog_title": "Edit {{title}}",
-      "create_dialog_title": "Create New Category",
+      "create_dialog_title": "Add New Category Block",
       "create_dialog_title_markdown": "Add New Markdown Block"
     },
     "reading_group": {
