@@ -18,7 +18,6 @@ export default function ProjectHero({ entity, mock }) {
     bgImage,
     bgAlt,
     description,
-    creators,
     flattenedCollaborators
   } = getPartsData(entity);
 
@@ -41,7 +40,6 @@ export default function ProjectHero({ entity, mock }) {
         <>
           {(flattenedCollaborators || description) && (
             <Meta
-              creators={creators}
               flattenedCollaborators={flattenedCollaborators}
               description={description}
             />
