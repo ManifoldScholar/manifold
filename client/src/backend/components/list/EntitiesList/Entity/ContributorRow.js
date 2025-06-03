@@ -15,7 +15,6 @@ function ContributorRow({ entity, onDelete, ...props }) {
   const { attributes, relationships } = entity;
 
   const makerId = relationships?.maker?.id;
-  const maker = useFromStore(`entityStore.entities.makers[${makerId}]`);
 
   const { roles } = attributes ?? {};
 
@@ -30,7 +29,7 @@ function ContributorRow({ entity, onDelete, ...props }) {
   const additionalProps = {
     title: attributes.makerName,
     subtitle: roles.map(r => capitalize(r).replaceAll("_", " ")).join(", "),
-    figure: <EntityThumbnail.Maker entity={maker} />,
+    figure: <EntityThumbnail.Maker entity={entity} />,
     figureSize: "small",
     figureShape: "circle",
     ...(canAccessMakers
