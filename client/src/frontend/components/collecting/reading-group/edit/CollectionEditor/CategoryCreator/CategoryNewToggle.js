@@ -16,7 +16,6 @@ function CategoryNewToggle({ isMarkdown, ...props }) {
   return (
     <>
       <Styled.Button type="button" onClick={() => setIsOpen(true)}>
-        {/* <IconComposer icon="lamp64" size={32} /> */}
         <span>{label}</span>
         <IconComposer icon="circlePlus32" size={32} />
       </Styled.Button>
