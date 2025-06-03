@@ -32,23 +32,6 @@ export const Contributors = styled(NamesList)`
   )}
 `;
 
-export const Creators = styled(NamesList)`
-  ${respond(
-    `
-    font-size: 20px;
-  `,
-    BREAKPOINT
-  )}
-
-  + ${Contributors} {
-    margin-block-start: 12px;
-  }
-
-  .italic {
-    font-style: italic;
-  }
-`;
-
 export const Name = styled.span`
   &:not(:last-child) {
     margin-inline-end: 1.25ch;
@@ -65,7 +48,6 @@ export const Description = styled.div`
   letter-spacing: 0.012em;
   line-height: 1.529em;
 
-  ${Creators} + &,
   ${Contributors} + & {
     margin-block-start: 22px;
   }
@@ -74,7 +56,6 @@ export const Description = styled.div`
     `
     font-size: 17px;
 
-    ${Creators} + &,
     ${Contributors} + & {
       margin-block-start: 45px;
     }`,

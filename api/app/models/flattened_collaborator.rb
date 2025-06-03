@@ -5,6 +5,7 @@ class FlattenedCollaborator < ApplicationRecord
   belongs_to :collaboratable, polymorphic: true
 
   delegate :name, to: :maker, prefix: true
+  delegate :avatar_styles, to: :maker, prefix: true
 
   self.primary_key = :id
 

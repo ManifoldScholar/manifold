@@ -1,9 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
+import Avatar from "./Avatar";
 import * as Styled from "./styles";
 
 export default function HeroMeta({ flattenedCollaborators, description }) {
+  const showAvatars =
+    flattenedCollaborators?.length < 3 &&
+    flattenedCollaborators.every(c => c.attributes?.avatarStyles?.smallSquare);
+
   const renderCollaboratorWithRoles = collaborator => (
     <Styled.Name key={collaborator.id}>
       {collaborator.attributes.makerName}
@@ -20,7 +25,15 @@ export default function HeroMeta({ flattenedCollaborators, description }) {
       {!!flattenedCollaborators?.length && (
         <Styled.Contributors>
           {flattenedCollaborators.map(collaborator =>
-            renderCollaboratorWithRoles(collaborator)
+            showAvatars ? (
+              <Avatar
+                key={collaborator.id}
+                url={collaborator.attributes?.avatarStyles?.smallSquare}
+                collaborator={renderCollaboratorWithRoles(collaborator)}
+              />
+            ) : (
+              renderCollaboratorWithRoles(collaborator)
+            )
           )}
         </Styled.Contributors>
       )}
