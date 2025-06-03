@@ -29,6 +29,7 @@ gem "cleanroom"
 gem "closure_tree", "~> 7.0"
 # Until Rails 7.1
 gem "composite_primary_keys", "~> 14.0.10"
+gem "connection_pool"
 gem "crass", "~> 1.0.5"
 gem "csl-styles", "~> 1.0"
 gem "cssbeautify"
@@ -114,7 +115,6 @@ gem "scenic", "~> 1.4"
 gem "shrine", "~> 3.5.0"
 gem "shrine-google_cloud_storage", "~> 3.3"
 gem "shrine-tus", "~> 2.0"
-gem "sidekiq", "< 6"
 gem "signet", "~> 0.10"
 gem "sinatra", "~>2.2"
 gem "sixarm_ruby_unaccent", "~> 1.2.2"
@@ -134,7 +134,6 @@ gem "validates_email_format_of", "~> 1.0"
 gem "validate_url", "~> 1.0"
 gem "with_advisory_lock", "~> 4.0"
 gem "zaru", "~> 1.0.0"
-gem "zhong", "~> 0.3"
 
 group :development, :test do
   gem "pry-byebug"
@@ -174,3 +173,5 @@ group :test do
   gem "test-prof", "~> 1.0"
   gem "with_model", "~> 2.1"
 end
+
+gem "good_job", "~> 3.99"
