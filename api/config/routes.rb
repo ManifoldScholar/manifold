@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "sidekiq/web"
-require "zhong/web"
-
 Rails.application.routes.draw do
   concern :flaggable do
     resource :flags, controller: "/api/v1/flags", only: [:create, :destroy] do
@@ -19,8 +16,7 @@ Rails.application.routes.draw do
   end
 
   constraints ->(request) { AuthConstraint.new(request).admin? || Rails.env.development? } do
-    mount Sidekiq::Web => "/api/sidekiq"
-    mount Zhong::Web, at: "/api/zhong"
+    mount GoodJob::Engine => '/api/good_job'
   end
 
   get "auth/:provider/callback", to: "oauth#authorize"
