@@ -5,7 +5,7 @@ import {
   defaultTransitionProps
 } from "theme/styles/mixins";
 
-const collectableMinHeight = `50px`;
+const collectableMinHeight = `2.4rem`;
 const inputHeight = collectableMinHeight;
 
 export const CategoryCreator = styled.form`
@@ -50,9 +50,10 @@ export const Button = styled.button`
   ${utilityPrimary}
   display: flex;
   align-items: center;
+  gap: min(1vw, 16px);
   height: ${inputHeight};
-  padding-inline-end: 27px;
-  padding-inline-start: 27px;
+  padding-inline-start: 20px;
+  padding-inline-end: 16px;
   font-size: 14px;
   letter-spacing: 0.089em;
   background-color: var(--button-tertiary-bg-color);
@@ -65,10 +66,6 @@ export const Button = styled.button`
     color: var(--strong-color);
     background-color: var(--color-accent-primary-light);
     outline: none;
-  }
-
-  > * + * {
-    margin-inline-start: 0.75em;
   }
 `;
 

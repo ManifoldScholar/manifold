@@ -11,13 +11,14 @@ function CategoryNewToggle({ isMarkdown, ...props }) {
 
   const label = isMarkdown
     ? t("forms.category.add_markdown")
-    : t("forms.category.create");
+    : t("forms.category.add_category");
 
   return (
     <>
       <Styled.Button type="button" onClick={() => setIsOpen(true)}>
-        <IconComposer icon="circlePlus32" size={32} />
+        {/* <IconComposer icon="lamp64" size={32} /> */}
         <span>{label}</span>
+        <IconComposer icon="circlePlus32" size={32} />
       </Styled.Button>
       {isOpen && (
         <NewCategory

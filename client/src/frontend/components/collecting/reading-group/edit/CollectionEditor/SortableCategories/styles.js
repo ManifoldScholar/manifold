@@ -4,6 +4,8 @@ import { dropzoneStyled } from "theme/styles/mixins";
 export const collectableTypeVerticalPadding = `10px`;
 
 export const Categories = styled.div`
+  margin-block-start: -10px;
+
   ${({ $active }) => dropzoneStyled("18px", $active)}
 `;
 

@@ -97,30 +97,36 @@ export default function CollectionEditor({
 
   return (
     <Styled.Editor>
-      <Styled.CategoryInputs>
-        <CategoryNewToggle
-          groupId={readingGroup.id}
-          onError={onCategoryEditError}
-          confirm={confirm}
-          refresh={refresh}
-        />
-        <CategoryNewToggle
-          isMarkdown
-          groupId={readingGroup.id}
-          onError={onCategoryEditError}
-          confirm={confirm}
-          count={categories?.length ?? 0}
-          refresh={refresh}
-        />
-      </Styled.CategoryInputs>
+      <Styled.Section>
+        <Styled.Header>{t("forms.category.add_block")}</Styled.Header>
+        <Styled.CategoryInputs>
+          <CategoryNewToggle
+            groupId={readingGroup.id}
+            onError={onCategoryEditError}
+            confirm={confirm}
+            refresh={refresh}
+          />
+          <CategoryNewToggle
+            isMarkdown
+            groupId={readingGroup.id}
+            onError={onCategoryEditError}
+            confirm={confirm}
+            count={categories?.length ?? 0}
+            refresh={refresh}
+          />
+        </Styled.CategoryInputs>
+      </Styled.Section>
       {categories && (
-        <SortableCategories
-          collection={collection}
-          categories={categories}
-          responses={responses}
-          callbacks={callbacks}
-          groupId={readingGroup.id}
-        />
+        <Styled.Section>
+          <Styled.Header>{t("forms.category.organize")}</Styled.Header>
+          <SortableCategories
+            collection={collection}
+            categories={categories}
+            responses={responses}
+            callbacks={callbacks}
+            groupId={readingGroup.id}
+          />
+        </Styled.Section>
       )}
     </Styled.Editor>
   );
