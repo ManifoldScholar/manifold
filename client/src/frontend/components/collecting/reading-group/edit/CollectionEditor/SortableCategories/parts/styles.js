@@ -109,8 +109,12 @@ export const MarkdownContent = styled(Description)`
 `;
 
 export const EditDialog = styled.dialog`
+  --Instructions-margin-block-start: 0;
+
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   font-weight: inherit;
+
+  ${({ $isMarkdown }) => $isMarkdown && `--FieldWrapper-gap: 1em;`}
 `;

@@ -13,6 +13,7 @@
       "description": "Category Description",
       "description_placeholder": "Enter category description",
       "description_instructions": "Enter a brief description of the category. This field accepts basic Markdown.",
+      "block_content": "Block Content",
       "empty_placeholder": "Drag here to add",
       "markdown_body_placeholder": "Enter markdown content",
       "add_block": "Add a new block:",

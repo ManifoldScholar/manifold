@@ -31,7 +31,7 @@ function CategoryEdit({ category, groupId, onError, onClose, confirm, index }) {
     ? t("forms.category.title_placeholder")
     : t("forms.category.name_placeholder");
   const descriptionLabel = isMarkdown
-    ? t("common.content")
+    ? t("forms.category.block_content")
     : t("forms.category.description");
   const descriptionPlaceholder = isMarkdown
     ? t("forms.category.markdown_body_placeholder")
@@ -65,6 +65,7 @@ function CategoryEdit({ category, groupId, onError, onClose, confirm, index }) {
       as={Dialog.Wrapper}
       labelledBy={dialogLabelId}
       closeCallback={confirmClose}
+      $isMarkdown={isMarkdown}
     >
       <h2 id={dialogLabelId}>
         {t("forms.category.edit_dialog_title", {
