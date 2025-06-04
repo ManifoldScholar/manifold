@@ -12,7 +12,6 @@ RSpec.describe Ingestions::ProcessJob, type: :job do
       .and change(ingestion, :state).from("sleeping").to("finished")
       .and keep_the_same(ingestion, :processing_failed)
       .and change(Text, :count).by(1)
-      .and change(IngestionMessage, :count).by_at_least(22)
 
     # sanity check
     expect(ingestion).not_to be_processing_failed

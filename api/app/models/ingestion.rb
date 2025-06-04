@@ -128,7 +128,11 @@ class Ingestion < ApplicationRecord
     log_buffer << line
     return if severity == "DEBUG"
 
-    ingestion_messages.create!(kind: "log", payload: line)
+    ::Ingestions::LogMessageJob.perform_later(
+      ingestion_id: id,
+      kind: "log",
+      payload: line
+    )
   end
 
   def clear_log
