@@ -6004,10 +6004,10 @@ CREATE INDEX index_text_section_nodes_on_text_section_id ON public.text_section_
 
 
 --
--- Name: index_text_section_nodes_on_tsv_contained_content; Type: INDEX; Schema: public; Owner: -
+-- Name: index_text_section_nodes_searching; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_text_section_nodes_on_tsv_contained_content ON public.text_section_nodes USING gin (tsv_contained_content);
+CREATE INDEX index_text_section_nodes_searching ON public.text_section_nodes USING gin (id, body_hash, text_section_id, public.immutable_unaccent(COALESCE(contained_content, ''::text)) public.gin_trgm_ops, tsv_contained_content) WITH (fastupdate=off);
 
 
 --
@@ -6547,6 +6547,20 @@ CREATE UNIQUE INDEX udx_users_cli ON public.users USING btree (classification) W
 --
 
 CREATE UNIQUE INDEX udx_users_deleted ON public.users USING btree (classification) WHERE ((classification)::text = 'deleted'::text);
+
+
+--
+-- Name: text_section_nodes_body_hash_stats; Type: STATISTICS; Schema: public; Owner: -
+--
+
+CREATE STATISTICS public.text_section_nodes_body_hash_stats (ndistinct, dependencies) ON text_section_id, body_hash FROM public.text_section_nodes;
+
+
+--
+-- Name: text_section_nodes_depth_stats; Type: STATISTICS; Schema: public; Owner: -
+--
+
+CREATE STATISTICS public.text_section_nodes_depth_stats (ndistinct, dependencies) ON node_path, depth FROM public.text_section_nodes;
 
 
 --
@@ -7685,6 +7699,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250506201306'),
 ('20250514190334'),
 ('20250521211043'),
-('20250527180248');
+('20250527180248'),
+('20250603192547');
 
 

@@ -72,7 +72,7 @@ module V1
     end
 
     typed_has_one :model, polymorphic: true do |object|
-      object.searchable
+      object.searchable_model
     end
   end
 end
