@@ -5,8 +5,7 @@ Rails.application.configure do
   config.good_job.smaller_number_is_higher_priority = true
 
   queues = [
-    "maintenance:1",
-    "default,mailers,processing,sorting,url_validity:3",
+    "+default,mailers,deletions,low_priority,ahoy,annotations:10",
   ].join(?;)
 
   config.good_job.cleanup_preserved_jobs_before_seconds_ago = 43_200 # half-day
