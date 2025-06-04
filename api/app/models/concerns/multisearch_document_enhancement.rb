@@ -3,7 +3,78 @@
 module MultisearchDocumentEnhancement
   extend ActiveSupport::Concern
 
+  include ArelHelpers
   include AssociationHelpers
+
+  SEARCHABLE_TYPES = %i[
+    annotation
+    journal
+    project
+    resource
+    text
+    text_section
+  ].freeze
+
+  SEARCHABLE_TYPE_MAP = SEARCHABLE_TYPES.index_with { _1.to_s.classify }.freeze
+
+  SEARCHABLE_LOOKUP_MAP = SEARCHABLE_TYPE_MAP.invert.transform_values { :"searchable_#{_1}" }
+
+  STANDARD_ASSOCIATIONS = {
+    journal: [
+      :creator,
+      :creators,
+    ],
+    project: [
+      :creator,
+      :creators,
+    ],
+    text: [
+      :creator,
+      :creators,
+      :category,
+      :stylesheets,
+      :titles,
+      :text_subjects,
+    ],
+    text_section: [],
+  }.freeze
+
+  SEARCHABLE_ASSOCIATIONS = {
+    annotation: [
+      :creator,
+      {
+        annotation_node: {
+          ancestor_node: %i[children]
+        },
+      }
+    ],
+    journal: [
+      :creator,
+      :creators,
+    ],
+    project: [
+      :creator,
+      :creators,
+    ],
+    text: [
+      :creator,
+      :creators,
+      :category,
+      :stylesheets,
+      :titles,
+      :text_subjects,
+    ],
+    text_section: {
+      stylesheets: [],
+      text: [],
+    },
+  }.freeze
+
+  SEARCHABLE_TYPE_ASSOCIATIONS = SEARCHABLE_TYPES.each_with_object({}) do |key, h|
+    h[:"searchable_#{key}"] = SEARCHABLE_ASSOCIATIONS.fetch(key, [])
+  end
+
+  DEFAULT_ASSOCIATIONS = STANDARD_ASSOCIATIONS.merge(SEARCHABLE_TYPE_ASSOCIATIONS)
 
   included do
     belongs_to :journal, optional: true
@@ -11,21 +82,25 @@ module MultisearchDocumentEnhancement
     belongs_to :text, optional: true
     belongs_to :text_section, optional: true
 
+    SEARCHABLE_TYPE_MAP.each do |(key, class_name)|
+      belongs_to_readonly :"searchable_#{key}", class_name:, foreign_key: :searchable_id, optional: true
+    end
+
     scope :for_journal, ->(journal) { where(journal: journal) }
     scope :for_project, ->(project) { where(project: project) }
     scope :for_text, ->(text) { where(text: text) }
     scope :for_text_section, ->(text_section) { where(text_section: text_section) }
 
     scope :sans_draft_projects, -> do
-      left_outer_joins(:project).where(Project.arel_table[:id].eq(nil).or(Project.arel_table[:draft].eq(false)))
+      where(arel_sans_draft_projects)
     end
 
     scope :sans_draft_journals, -> do
-      left_outer_joins(:journal).where(Journal.arel_table[:id].eq(nil).or(Journal.arel_table[:draft].eq(false)))
+      where(arel_sans_draft_journals)
     end
 
     scope :with_default_associations, -> do
-      includes(:project, :text_section, text: %i[titles text_subjects category])
+      preload(**DEFAULT_ASSOCIATIONS)
     end
 
     has_many_readonly :text_section_nodes, -> { current }, primary_key: :text_section_id, foreign_key: :text_section_id
@@ -45,12 +120,35 @@ module MultisearchDocumentEnhancement
     nil
   end
 
+  # @!attribute [r] searchable_model
+  # This attribute acts as a proxy for the `searchable` polymorphic association,
+  # but allows for us to do the right sort of eager loading necessary for each
+  # record. There are still some N+1 issues in serialization, but they existed
+  # prior to the search refactor.
+  # @return [ApplicationRecord]
+  def searchable_model
+    case searchable_type
+    when "Annotation"
+      searchable_annotation
+    when "Journal"
+      searchable_journal
+    when "Project"
+      searchable_project
+    when "Resource"
+      searchable_resource
+    when "Text"
+      searchable_text
+    when "TextSection"
+      searchable_text_section
+    end
+  end
+
   def serialized_highlights
     {
       parent_keywords: [],
       keywords: [],
       makers: [],
-      full_text: [pg_search_highlight],
+      full_text: [],
       title: [pg_highlighted_title],
     }
   end
@@ -101,7 +199,7 @@ module MultisearchDocumentEnhancement
 
   private
 
-  # @param [Project, Text]
+  # @param [Project, Text] model
   # @return [Hash]
   def serialized_parent(model)
     model.slice(:id, :slug, :title)
@@ -113,15 +211,15 @@ module MultisearchDocumentEnhancement
       query = all
         .sans_draft_projects
         .sans_draft_journals
+        .faceted_by(*facets)
         .search(keyword)
         .with_pg_search_rank
-        .with_pg_search_highlight.then do |q|
+        .then do |q|
           tsearch = q.__send__(:tsearch)
 
           with_highlighted_title(query: q, tsearch: tsearch)
         end
         .with_default_associations
-        .faceted_by(*facets)
 
       query = query.for_project(project) unless project.nil?
       query = query.for_text(text) unless text.nil?
@@ -137,6 +235,14 @@ module MultisearchDocumentEnhancement
       return all if searchable_type.blank?
 
       where(searchable_type: searchable_type)
+    end
+
+    def arel_sans_draft_projects
+      arel_table[:project_id].eq(nil).or(Arel::Nodes::Not.new(arel_attr_in_query(:project_id, Project.drafts.select(:id))))
+    end
+
+    def arel_sans_draft_journals
+      arel_table[:journal_id].eq(nil).or(Arel::Nodes::Not.new(arel_attr_in_query(:journal_id, Journal.drafts.select(:id))))
     end
 
     private

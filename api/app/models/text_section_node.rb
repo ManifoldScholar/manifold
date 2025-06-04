@@ -4,7 +4,7 @@
 class TextSectionNode < ApplicationRecord
   include HasKeywordSearch
 
-  MAX_HIT_COUNT = 100
+  MAX_HIT_COUNT = 5
 
   # A list of HTML / MathML tags that should be treated as "intermediate".
   #
@@ -45,12 +45,14 @@ class TextSectionNode < ApplicationRecord
   has_many :parents, -> { terminal }, through: :ancestor_links, source: :parent
   has_many :children, through: :text_section_node_links, source: :child
 
-  has_keyword_search! against: :contained_content, using: {
-    tsearch: {
-      tsvector_column: :tsv_contained_content,
-    },
-  },
-  order_within_rank: "node_indices DESC, id ASC"
+  has_keyword_search! against: :contained_content,
+    order_within_rank: "node_indices DESC, id ASC",
+    using: {
+      trigram: {},
+      tsearch: {
+        tsvector_column: :tsv_contained_content,
+      },
+    }
 
   delegate :to_apply, to: :text_section_node_contained_content, allow_nil: true, prefix: :contained_content
 
@@ -87,12 +89,17 @@ class TextSectionNode < ApplicationRecord
     node_uuid || contained_node_uuids.first
   end
 
+  # @note Override default behavior. Highlights don't perform well on large corpuses.
+  def pg_search_highlight
+    ""
+  end
+
   # @api private
   # @return [Hash]
   def to_hit
     {
       content: contained_content,
-      content_highlighted: [pg_search_highlight],
+      content_highlighted: [content_highlighted],
       node_uuid: hit_uuid,
       position: pg_search_rank
     }
@@ -146,7 +153,7 @@ class TextSectionNode < ApplicationRecord
       )
       UPDATE text_section_nodes tsn SET
         contained_node_uuids = COALESCE(c.contained_node_uuids, '{}'::text[]),
-        contained_content = c.contained_content,
+        contained_content = CASE WHEN char_length(c.contained_content) <= 4096 THEN c.contained_content ELSE '' END,
         search_indexed_at = CURRENT_TIMESTAMP,
         search_indexed = TRUE
       FROM contained c
@@ -158,6 +165,22 @@ class TextSectionNode < ApplicationRecord
 
     private
 
+    def arel_content_highlighted_for(keyword, node_hits:)
+      q = unscoped.keyword_search(keyword)
+
+      tsearch = q.__send__(:tsearch)
+
+      Arel::Nodes::NamedFunction.new(
+        "ts_headline",
+        [
+          tsearch.__send__(:dictionary),
+          node_hits[:contained_content],
+          tsearch.__send__(:arel_wrap, tsearch.__send__(:tsquery)),
+          Arel::Nodes.build_quoted(tsearch.__send__(:ts_headline_options))
+        ]
+      )
+    end
+
     # @param [String] keyword
     # @param [<String>] text_section_ids
     # @return [ActiveRecord::Relation<TextSectionNode>]
@@ -168,6 +191,7 @@ class TextSectionNode < ApplicationRecord
 
       TextSectionNode.from(inner_query.to_sql, "node_hits")
         .reselect(?*)
+        .select(arel_content_highlighted_for(keyword, node_hits:).as("content_highlighted"))
         .where(node_hits[:hit_number].lteq(MAX_HIT_COUNT))
         .order(node_hits[:text_section_id].asc)
         .order(node_hits[:pg_search_rank].desc)
@@ -178,17 +202,28 @@ class TextSectionNode < ApplicationRecord
     # @param [<String>] text_section_ids
     # @return [Arel::Nodes::Grouping]
     def build_hit_inner_query_for(keyword, text_section_ids:)
-      base_query = where(text_section_id: text_section_ids)
-        .current
+      base_query = all
         .keyword_search(keyword)
+        .current
+        .where(text_section_id: text_section_ids)
         .with_pg_search_rank
-        .with_pg_search_highlight
 
       hit_number = hit_number_for(base_query)
 
+      hit_inner_query = base_query.select(hit_number.as("hit_number")).to_sql
+
+      in_text_sections = arel_table[:text_section_id].in(text_section_ids).to_sql
+
+      # We need to move this condition inside the pg_search subquery
+      # or else we fetch way too much
+      hit_inner_query = hit_inner_query.sub(
+        /(WHERE\s+)(.+?)(\) AS #{base_query.pg_search_rank_table_alias} ON)/i,
+        %[\\1 #{in_text_sections} AND (\\2)\\3]
+      )
+
       arel_grouping(
         arel_literal(
-          base_query.select(hit_number.as("hit_number")).to_sql
+          hit_inner_query
         )
       ).as("node_hits")
     end

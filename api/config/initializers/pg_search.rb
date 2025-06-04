@@ -36,3 +36,5 @@ PgSearch.multisearch_options = {
 ActiveSupport::Reloader.to_prepare do
   PgSearch::Document.include MultisearchDocumentEnhancement
 end
+
+PgSearch.unaccent_function = "immutable_unaccent"
