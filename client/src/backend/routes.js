@@ -304,6 +304,16 @@ const routes = {
                   modal: false
                 },
                 {
+                  name: "backendTextSectionIngestNewEdit",
+                  exact: true,
+                  component: "TextSectionIngest",
+                  path:
+                    "/backend/projects/text/:id/sections/ingestions/:ingestionId/edit",
+                  helper: (t, i) =>
+                    `/backend/projects/text/${t}/sections/ingestions/${i}/edit`,
+                  modal: false
+                },
+                {
                   name: "backendTextSectionIngestEdit",
                   exact: true,
                   component: "TextSectionIngestEdit",
