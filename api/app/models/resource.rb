@@ -137,6 +137,10 @@ class Resource < ApplicationRecord
     end.compact_blank
   end
 
+  def should_index?
+    project.present? && !project.draft? && super
+  end
+
   def fetch_thumbnail?
     return false unless Thumbnail::Fetcher.accepts?(self)
 
