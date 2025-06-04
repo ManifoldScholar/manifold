@@ -266,6 +266,8 @@ class Annotation < ApplicationRecord
   end
 
   def unindexable?
+    return true if text_section.blank?
+
     return true if private? || reading_group.try(:private?)
 
     return true if project.try(:draft?)
