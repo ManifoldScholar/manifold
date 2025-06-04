@@ -1,126 +1,116 @@
-import React, { Component } from "react";
+import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { useParams, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import IconComposer from "global/components/utility/IconComposer";
+import lh from "helpers/linkHandler";
 
-class IngestionActions extends Component {
-  static displayName = "Ingestion.Actions";
+export default function IngestionActions({ onStart, ingestion, isSection }) {
+  const { t } = useTranslation();
+  const { id, ingestionId } = useParams();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-  static propTypes = {
-    ingestion: PropTypes.object,
-    connected: PropTypes.bool,
-    start: PropTypes.func.isRequired,
-    cancel: PropTypes.func.isRequired,
-    complete: PropTypes.func.isRequired,
-    t: PropTypes.func
+  const startRef = useRef(null);
+
+  useEffect(() => {
+    if (startRef.current) startRef.current.focus();
+  }, []);
+
+  if (!ingestion) return null;
+
+  const {
+    attributes: { state }
+  } = ingestion;
+
+  const finished = state === "finished";
+  const inProgress = state === "processing";
+
+  const editUrl = () => {
+    const path = pathname.includes("texts")
+      ? "backendProjectTextsIngestionEdit"
+      : "backendTextIngestionEdit";
+
+    return lh.link(path, id, ingestionId);
   };
 
-  componentDidMount() {
-    if (this.startButtonRef) this.startButtonRef.focus();
-  }
+  const closeUrl = () => {
+    if (isSection) return lh.link("backendTextSections", id);
 
-  get ingestion() {
-    return this.props.ingestion;
-  }
+    const path = pathname.includes("texts")
+      ? "backendProjectTexts"
+      : "backendTextIngestionsNew";
 
-  get connected() {
-    return this.props.connected;
-  }
+    return lh.link(path, id);
+  };
 
-  get canCancel() {
-    return !this.finished && !this.inProgress;
-  }
+  const onCancel = () => {
+    navigate(editUrl(), { stage: "upload" });
+  };
 
-  get finished() {
-    return this.ingestion.attributes.state === "finished";
-  }
+  const onComplete = () => {
+    navigate(closeUrl());
+  };
 
-  get inProgress() {
-    return this.ingestion.attributes.state === "processing";
-  }
+  const buttonClasses = classNames(
+    "buttons-icon-horizontal__button",
+    "button-icon-secondary"
+  );
 
-  get buttonClasses() {
-    return classNames(
-      "buttons-icon-horizontal__button",
-      "button-icon-secondary"
-    );
-  }
+  const startLabel = inProgress
+    ? t("texts.ingestion.ingesting_button_label")
+    : t("texts.ingestion.start_button_label");
 
-  get startButton() {
-    if (this.finished) return null;
-    const t = this.props.t;
-    const label = this.inProgress
-      ? t("texts.ingestion.ingesting_button_label")
-      : t("texts.ingestion.start_button_label");
-
-    return (
-      <button
-        ref={el => {
-          this.startButtonRef = el;
-        }}
-        onClick={this.props.start}
-        className={this.buttonClasses}
-        disabled={this.inProgress}
-      >
-        <IconComposer
-          icon="arrowDown16"
-          size="default"
-          className="button-icon-secondary__icon"
-        />
-        <span>{label}</span>
-      </button>
-    );
-  }
-
-  get backButton() {
-    if (this.finished) return null;
-
-    return (
-      <button
-        onClick={this.props.cancel}
-        className={classNames(
-          this.buttonClasses,
-          "button-icon-secondary--dull"
-        )}
-        disabled={this.inProgress}
-      >
-        <IconComposer
-          icon="close16"
-          size="default"
-          className="button-icon-secondary__icon"
-        />
-        <span>{this.props.t("texts.ingestion.change_button_label")}</span>
-      </button>
-    );
-  }
-
-  get completeButton() {
-    if (!this.finished) return null;
-
-    return (
-      <button onClick={this.props.complete} className={this.buttonClasses}>
-        <IconComposer
-          icon="checkmark16"
-          size="default"
-          className="button-icon-secondary__icon"
-        />
-        <span>{this.props.t("texts.ingestion.complete_button_label")}</span>
-      </button>
-    );
-  }
-
-  render() {
-    if (!this.ingestion || !this.connected) return null;
-
-    return (
-      <div className="ingestion-output__buttons buttons-icon-horizontal">
-        {this.startButton}
-        {this.completeButton}
-        {this.backButton}
-      </div>
-    );
-  }
+  return (
+    <div className="ingestion-output__buttons buttons-icon-horizontal">
+      {finished ? (
+        <button onClick={onComplete} className={buttonClasses}>
+          <IconComposer
+            icon="checkmark16"
+            size="default"
+            className="button-icon-secondary__icon"
+          />
+          <span>{t("texts.ingestion.complete_button_label")}</span>
+        </button>
+      ) : (
+        <>
+          <button
+            ref={startRef}
+            onClick={onStart}
+            className={buttonClasses}
+            disabled={inProgress}
+          >
+            <IconComposer
+              icon="arrowDown16"
+              size="default"
+              className="button-icon-secondary__icon"
+            />
+            <span>{startLabel}</span>
+          </button>
+          <button
+            onClick={onCancel}
+            className={classNames(buttonClasses, "button-icon-secondary--dull")}
+            disabled={inProgress}
+          >
+            <IconComposer
+              icon="close16"
+              size="default"
+              className="button-icon-secondary__icon"
+            />
+            <span>{t("texts.ingestion.change_button_label")}</span>
+          </button>
+        </>
+      )}
+    </div>
+  );
 }
 
-export default withTranslation()(IngestionActions);
+IngestionActions.displayName = "Ingestion.Actions";
+
+IngestionActions.propTypes = {
+  ingestion: PropTypes.object,
+  isSection: PropTypes.bool.isRequired,
+  onStart: PropTypes.func.isRequired
+};
