@@ -29,6 +29,10 @@ export default function IngestionActions({ onStart, ingestion, isSection }) {
   const inProgress = state === "processing";
 
   const editUrl = () => {
+    if (isSection) {
+      return lh.link("backendTextSectionIngestNewEdit", id, ingestionId);
+    }
+
     const path = pathname.includes("texts")
       ? "backendProjectTextsIngestionEdit"
       : "backendTextIngestionEdit";

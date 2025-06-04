@@ -10,7 +10,8 @@ import lh from "helpers/linkHandler";
 export default function SectionIngestionFormWrapper({
   textId,
   sectionId,
-  cancelUrl
+  cancelUrl,
+  ingestion
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ export default function SectionIngestionFormWrapper({
     return ingestionsAPI.createSection(textId, data);
   };
 
+  const updateIngestion = model => ingestionsAPI.update(ingestion.id, model);
+
   const onSuccess = useCallback(
     res => {
       navigate(lh.link("backendTextSectionIngestIngest", textId, res.id));
@@ -35,8 +38,10 @@ export default function SectionIngestionFormWrapper({
     <FormContainer.Form
       doNotWarn
       groupErrors
+      model={ingestion}
       name={"be-text-section-ingestion"}
       create={createIngestion}
+      update={updateIngestion}
       className="form-secondary"
       onSuccess={onSuccess}
     >
