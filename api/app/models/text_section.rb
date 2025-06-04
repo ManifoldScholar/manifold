@@ -135,6 +135,10 @@ class TextSection < ApplicationRecord
     []
   end
 
+  def should_index?
+    project.present? && !project.draft? && super
+  end
+
   def previous_section
     text.section_before(position)
   end

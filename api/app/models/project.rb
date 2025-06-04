@@ -63,6 +63,7 @@ class Project < ApplicationRecord
   has_many_readonly :collection_project_rankings
   has_many :project_collections, through: :collection_projects, dependent: :destroy
   has_many :texts, dependent: :destroy, inverse_of: :project
+  has_many :text_sections, through: :texts
   has_many_readonly :text_summaries, inverse_of: :project
   has_many_readonly :published_texts,
            -> { published(true) },
@@ -127,8 +128,9 @@ class Project < ApplicationRecord
   # Callbacks
   before_validation :ensure_restricted_access_notice_content!
   before_create :assign_publisher_defaults!
-  before_update :prepare_to_reindex_children, if: :draft_changed?
   after_commit :trigger_creation_event, on: [:create]
+
+  after_save_commit :reindex_children!, if: :saved_change_to_draft?
 
   # Misc
   money_attributes :purchase_price
@@ -257,6 +259,11 @@ class Project < ApplicationRecord
       a.concat(subjects.map(&:title))
       a << hashtag
     end.compact_blank
+  end
+
+  # @return [void]
+  def reindex_children!
+    Projects::ReindexChildrenJob.perform_later self
   end
 
   def journal_issue?

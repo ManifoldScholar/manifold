@@ -136,7 +136,7 @@ class Text < ApplicationRecord
   # During ingestion, texts can be created before they're added to a project.
   # We don't want to index those orphaned texts.
   def should_index?
-    project.present? && super
+    project.present? && !project.draft? && super
   end
 
   def age

@@ -140,6 +140,48 @@ RSpec.describe Text, type: :model do
     end
   end
 
+  context "when dealing with indexing a text whose project is made a draft" do
+    let_it_be(:project, refind: true) { FactoryBot.create :project, title: "Testing Project", draft: false }
+
+    let_it_be(:title) { "Testing Text" }
+
+    let_it_be(:text, refind: true) { FactoryBot.create :text, title:, project: }
+
+    it "becomes unsearchable" do
+      expect do
+        perform_enqueued_jobs do
+          project.update! draft: true
+        end
+      end.to execute_safely
+        .and change { project.reload.should_index? }.from(true).to(false)
+        .and change { text.reload.should_index? }.from(true).to(false)
+        .and change(PgSearch::Document.where(searchable: project), :count).by(-1)
+        .and change(PgSearch::Document.where(searchable: text), :count).by(-1)
+        .and change { Search::Query.run!(keyword: title, facets: %w[Text]).first&.searchable_model }.from(text).to(nil)
+    end
+  end
+
+  context "when dealing with indexing a text whose project is taken out of draft status" do
+    let_it_be(:project, refind: true) { FactoryBot.create :project, title: "Testing Project", draft: true }
+
+    let_it_be(:title) { "Testing Text" }
+
+    let_it_be(:text, refind: true) { FactoryBot.create :text, title:, project: }
+
+    it "becomes searchable" do
+      expect do
+        perform_enqueued_jobs do
+          project.update! draft: false
+        end
+      end.to execute_safely
+        .and change { project.reload.should_index? }.from(false).to(true)
+        .and change { text.reload.should_index? }.from(false).to(true)
+        .and change(PgSearch::Document.where(searchable: project), :count).by(1)
+        .and change(PgSearch::Document.where(searchable: text), :count).by(1)
+        .and change { Search::Query.run!(keyword: title, facets: %w[Text]).first&.searchable_model }.from(nil).to(text)
+    end
+  end
+
   it_behaves_like "a model that stores its fingerprint" do
     subject { FactoryBot.create :text }
   end
