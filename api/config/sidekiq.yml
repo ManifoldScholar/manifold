@@ -1,7 +1,0 @@
-:queues:
-  - default
-  - mailers
-  - deletions
-  - low_priority
-  - ahoy
-  - annotations
