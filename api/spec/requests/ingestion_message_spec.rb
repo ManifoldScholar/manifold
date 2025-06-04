@@ -24,6 +24,7 @@ RSpec.describe "Ingestion Messages API", type: :request do
 
   it "only returns ingestion messages after the requested timestamp" do
     ingestion.process(ingestion.creator)
+    perform_enqueued_jobs
     second_to_last_timestamp = ingestion.ingestion_messages.sort_by(&:created_at)[-2].created_at
     get path, headers: admin_headers, params: { starting_at: second_to_last_timestamp.strftime('%Y-%m-%d %H:%M:%S.%N') }
     expect(response).to have_http_status(:success)
