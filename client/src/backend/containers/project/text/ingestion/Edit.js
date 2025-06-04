@@ -1,7 +1,9 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import connectAndFetch from "utils/connectAndFetch";
+import { withTranslation } from "react-i18next";
 import Ingestion from "backend/components/ingestion";
+import Layout from "backend/components/layout";
 import { entityStoreActions } from "actions";
 import { ingestionsAPI, requests } from "api";
 import { select, isLoaded } from "utils/entityUtils";
@@ -50,9 +52,12 @@ export class IngestionEditContainer extends PureComponent {
   }
 
   render() {
-    return (
-      <div>
-        {this.props.ingestion ? (
+    return this.props.ingestion ? (
+      <section>
+        <>
+          <Layout.DrawerHeader
+            title={this.props.t("texts.ingest_button_label")}
+          />
           <Ingestion.Form.Wrapper
             cancelUrl={lh.link("backendProjectTexts", this.projectId)}
             ingestion={this.props.ingestion}
@@ -62,10 +67,11 @@ export class IngestionEditContainer extends PureComponent {
             project={this.props.project}
             onSuccess={this.handleSuccess}
           />
-        ) : null}
-      </div>
-    );
+        </>
+        )
+      </section>
+    ) : null;
   }
 }
 
-export default connectAndFetch(IngestionEditContainer);
+export default withTranslation()(connectAndFetch(IngestionEditContainer));
