@@ -26,7 +26,12 @@ export default function IngestSectionContainer({ textId }) {
     `entityStore.entities.textSections[${ingestion?.attributes.textSectionId}]`
   )?.attributes.name;
 
-  return section || ingestion ? (
+  const shouldRender =
+    (!!sectionId && !!section) ||
+    (!!ingestionId && !!ingestion) ||
+    (!sectionId && !ingestionId);
+
+  return shouldRender ? (
     <section>
       <Layout.DrawerHeader
         title={
@@ -34,7 +39,7 @@ export default function IngestSectionContainer({ textId }) {
           sectionId
             ? section?.attributes?.name
             : ingestionId
-            ? sectionName
+            ? sectionName ?? t("texts.section.ingest_button_label")
             : t("texts.section.ingest_button_label")
         }
       />
