@@ -21,7 +21,8 @@ export class FormTextArea extends Component {
     errors: PropTypes.array,
     name: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    required: PropTypes.bool
   };
 
   static defaultProps = {
@@ -78,6 +79,7 @@ export class FormTextArea extends Component {
               placeholder={this.props.placeholder}
               onChange={this.props.onChange}
               value={this.props.value || ""}
+              required={this.props.required}
             />
           </Errorable>
         )}
