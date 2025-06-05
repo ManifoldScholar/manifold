@@ -68,7 +68,6 @@ export class IngestionEditContainer extends PureComponent {
             onSuccess={this.handleSuccess}
           />
         </>
-        )
       </section>
     ) : null;
   }
