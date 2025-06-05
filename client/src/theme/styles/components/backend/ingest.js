@@ -32,17 +32,15 @@ export default `
     }
 
     &__log-value {
-      ${utilityPrimary}
       height: 200px;
-      padding: 10px 15px;
+      padding: 15px;
       margin-top: 10px;
       overflow-y: auto;
       font-size: 14px;
-      font-weight: normal;
+      font-family: var(--font-family-mono);
       line-height: 1.45em;
-      color: var(--color-neutral-text-extra-light);
-      text-transform: none;
       white-space: pre-line;
+      color: var(--color-neutral-text-extra-light);
       border: 1px solid var(--color-neutral-ui-dull-light);
 
       ${respond(`height: 50vh;`, 90)}
