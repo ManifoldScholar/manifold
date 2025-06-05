@@ -85,6 +85,7 @@ export default function IngestContainer({ sectionIngest, refresh }) {
           ingestion={ingestion}
           reingestion={state !== "sleeping"}
           sectionIngest={sectionIngest}
+          loading={loading}
         />
         <Actions
           ingestion={ingestion}
