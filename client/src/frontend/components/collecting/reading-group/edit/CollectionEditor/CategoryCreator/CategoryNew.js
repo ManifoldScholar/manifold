@@ -94,6 +94,7 @@ function NewCategory({
             label={nameLabel}
             name="attributes[title]"
             placeholder={namePlaceholder}
+            required={!isMarkdown}
           />
           <Form.TextArea
             wide
@@ -102,6 +103,7 @@ function NewCategory({
             name="attributes[description]"
             placeholder={descriptionPlaceholder}
             instructions={descriptionInstructions}
+            required={isMarkdown}
           />
         </Form.FieldGroup>
         <Form.Save
