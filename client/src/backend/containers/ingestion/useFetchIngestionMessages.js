@@ -46,7 +46,9 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
     [endPolling, appendToLog, setAction, logIds]
   );
 
-  const fetchMessages = useApiCallback(ingestionsAPI.messages);
+  const fetchMessages = useApiCallback(ingestionsAPI.messages, {
+    silent: true
+  });
 
   const startPolling = useCallback(() => {
     if (intervalRef.current) return;
