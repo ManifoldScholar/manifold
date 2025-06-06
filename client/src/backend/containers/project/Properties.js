@@ -170,6 +170,10 @@ function ProjectPropertiesContainer({ project }) {
               placeholder={t(
                 "journals.forms.properties.social_description_placeholder"
               )}
+              instructions={t(
+                "journals.forms.properties.social_description_instructions"
+              )}
+              instructionsPosition="below"
             />
             <Form.Upload
               layout="portrait"
