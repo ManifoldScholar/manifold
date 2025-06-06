@@ -1721,7 +1721,8 @@ CREATE TABLE public.ingestions (
     source_updated_at timestamp without time zone,
     source_data jsonb,
     text_section_id uuid,
-    target_kind text NOT NULL
+    target_kind text NOT NULL,
+    processing_failed boolean DEFAULT false NOT NULL
 );
 
 
@@ -7749,6 +7750,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250521211043'),
 ('20250527180248'),
 ('20250528002025'),
+('20250530205742'),
 ('20250603192547'),
 ('20250609191642'),
 ('20250609192241');
