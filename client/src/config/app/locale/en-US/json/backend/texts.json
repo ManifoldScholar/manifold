@@ -54,7 +54,6 @@
       "upload_from_url": "Upload from URL",
       "url": "URL",
       "url_instructions": "Manifold can also ingest texts by entering a URL to a Google Doc, EPUB, or HTML file.",
-      "url_placeholder": "enter url here...",
       "log_label": "Log",
       "restart_button_label": "Restart Ingestion",
       "start_button_label": "Start Ingestion",
