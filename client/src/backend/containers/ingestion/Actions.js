@@ -7,7 +7,12 @@ import { useNavigate } from "react-router-dom-v5-compat";
 import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
 
-export default function IngestionActions({ onStart, ingestion, isSection }) {
+export default function IngestionActions({
+  onStart,
+  ingestion,
+  isSection,
+  loading
+}) {
   const { t } = useTranslation();
   const { id, ingestionId } = useParams();
   const { pathname } = useLocation();
@@ -26,7 +31,6 @@ export default function IngestionActions({ onStart, ingestion, isSection }) {
   } = ingestion;
 
   const finished = state === "finished";
-  const inProgress = state === "processing";
 
   const editUrl = () => {
     if (isSection) {
@@ -63,7 +67,7 @@ export default function IngestionActions({ onStart, ingestion, isSection }) {
     "button-icon-secondary"
   );
 
-  const startLabel = inProgress
+  const startLabel = loading
     ? t("texts.ingestion.ingesting_button_label")
     : t("texts.ingestion.start_button_label");
 
@@ -84,7 +88,7 @@ export default function IngestionActions({ onStart, ingestion, isSection }) {
             ref={startRef}
             onClick={onStart}
             className={buttonClasses}
-            disabled={inProgress}
+            disabled={loading}
           >
             <IconComposer
               icon="arrowDown16"
@@ -96,7 +100,7 @@ export default function IngestionActions({ onStart, ingestion, isSection }) {
           <button
             onClick={onCancel}
             className={classNames(buttonClasses, "button-icon-secondary--dull")}
-            disabled={inProgress}
+            disabled={loading}
           >
             <IconComposer
               icon="close16"
@@ -116,5 +120,6 @@ IngestionActions.displayName = "Ingestion.Actions";
 IngestionActions.propTypes = {
   ingestion: PropTypes.object,
   isSection: PropTypes.bool.isRequired,
-  onStart: PropTypes.func.isRequired
+  onStart: PropTypes.func.isRequired,
+  loading: PropTypes.bool
 };

@@ -91,6 +91,7 @@ export default function IngestContainer({ sectionIngest, refresh }) {
           ingestion={ingestion}
           onStart={onStart}
           isSection={!!sectionIngest}
+          loading={loading}
         />
         <Log
           log={log}
