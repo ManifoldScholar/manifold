@@ -115,6 +115,7 @@ const fallbackImageFor = (entity, parent) => {
         maybeAvatarImage(entity, fallbackImageFor(parent))
       );
     case "journalVolumes":
+    case "textSections":
       return fallbackImageFor(parent);
     default:
       return null;
