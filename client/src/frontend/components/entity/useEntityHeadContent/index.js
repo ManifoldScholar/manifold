@@ -63,15 +63,20 @@ export const useMetaTitle = (entity, parent, prepend) => {
 };
 
 export const useMetaDescription = (entity, parent) => {
-  const { socialDescription, descriptionPlaintext } = entity?.attributes ?? {};
+  const { socialDescription, descriptionPlaintext, description } =
+    entity?.attributes ?? {};
   if (socialDescription) return socialDescription;
   if (descriptionPlaintext) return descriptionPlaintext;
+  if (description) return description;
 
   const {
     socialDescription: parentSocialDescription,
-    descriptionPlaintext: parentDescriptionPlaintext
+    descriptionPlaintext: parentDescriptionPlaintext,
+    description: parentDescription
   } = parent?.attributes ?? {};
-  return parentSocialDescription ?? parentDescriptionPlaintext;
+  return (
+    parentSocialDescription ?? parentDescriptionPlaintext ?? parentDescription
+  );
 };
 
 const maybeCoverImage = (entity, fallback) => {
@@ -115,6 +120,7 @@ const fallbackImageFor = (entity, parent) => {
         maybeAvatarImage(entity, fallbackImageFor(parent))
       );
     case "journalVolumes":
+    case "textSections":
       return fallbackImageFor(parent);
     default:
       return null;

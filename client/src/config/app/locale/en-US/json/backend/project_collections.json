@@ -28,7 +28,7 @@
     "social_header": "Open Graph",
     "social_title": "Open Graph Title",
     "social_title_placeholder": "Optionally, enter a social title",
-    "social_title_instructions": "If blank, Title will be used in og:title meta tags.",
+    "social_title_instructions": "If blank, Title will be used in title meta tags.",
     "social_description": "Open Graph Description",
     "social_description_placeholder": "Optionally, enter a description",
     "social_image": "Open Graph Image",
