@@ -89,7 +89,7 @@ function ReadingGroupMembersContainer({
 ReadingGroupMembersContainer.propTypes = {
   readingGroup: PropTypes.object,
   refresh: PropTypes.func,
-  route: PropTypes.string,
+  route: PropTypes.object,
   confirm: PropTypes.func
 };
 
