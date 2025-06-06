@@ -40,7 +40,6 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
           endPolling();
           return setAction("end");
         }
-        return setAction("start");
       }
     },
     [endPolling, appendToLog, setAction, logIds]
