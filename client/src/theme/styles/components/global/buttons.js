@@ -22,6 +22,10 @@ export default `
     text-transform: uppercase;
     letter-spacing: 0.125em;
 
+    &[disabled] {
+      pointer-events: none;
+    }
+
     &__icon:not(.utility-button__icon--light),
     &__text:not(.utility-button__text--light) {
       .utility-button:not(:disabled):hover & {
