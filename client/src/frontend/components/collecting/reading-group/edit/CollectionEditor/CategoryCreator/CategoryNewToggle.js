@@ -34,7 +34,6 @@ CategoryNewToggle.propTypes = {
   isMarkdown: PropTypes.bool,
   groupId: PropTypes.string.isRequired,
   onError: PropTypes.func.isRequired,
-  confirm: PropTypes.func.isRequired,
   count: PropTypes.number
 };
 

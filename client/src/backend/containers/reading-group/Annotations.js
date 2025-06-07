@@ -204,7 +204,7 @@ function ReadingGroupAnnotationsContainer({
 ReadingGroupAnnotationsContainer.propTypes = {
   readingGroup: PropTypes.object,
   refresh: PropTypes.func,
-  route: PropTypes.string,
+  route: PropTypes.object,
   confirm: PropTypes.func,
   entitiesListSearchProps: PropTypes.func,
   entitiesListSearchParams: PropTypes.object

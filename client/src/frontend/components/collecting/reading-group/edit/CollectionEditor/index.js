@@ -103,14 +103,12 @@ export default function CollectionEditor({
           <CategoryNewToggle
             groupId={readingGroup.id}
             onError={onCategoryEditError}
-            confirm={confirm}
             refresh={refresh}
           />
           <CategoryNewToggle
             isMarkdown
             groupId={readingGroup.id}
             onError={onCategoryEditError}
-            confirm={confirm}
             count={categories?.length ?? 0}
             refresh={refresh}
           />
