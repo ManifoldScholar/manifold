@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { readingGroupsAPI, collectingAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import CategoryNewToggle from "./CategoryCreator/CategoryNewToggle";
+import { CategoryNewToggle } from "./CategoryNew";
 import SortableCategories from "./SortableCategories";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import { useNotification } from "hooks";
