@@ -9,6 +9,8 @@ module Collections
   class PositionsUpdater
     extend Dry::Core::Cache
 
+    include Dry::Effects::Handler.Reader(:collection_entry_mass_update_klasses)
+
     # @return [void]
     def wrap_mass_assignment
       # :nocov:
@@ -17,8 +19,10 @@ module Collections
 
       first_klass, *extra_klasses = reorderable_entry_classes
 
-      first_klass.acts_as_list_no_update(extra_klasses) do
-        yield
+      with_collection_entry_mass_update_klasses reorderable_entry_classes do
+        first_klass.acts_as_list_no_update(extra_klasses) do
+          yield
+        end
       end
     end
 

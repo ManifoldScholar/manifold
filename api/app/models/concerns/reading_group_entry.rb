@@ -27,11 +27,13 @@ module ReadingGroupEntry
     validate :category_matches!
 
     after_save :update_collection_entry!
+
+    prepend ReorderableCollectionEntry
   end
 
   # @return [Hash]
   def to_collection_entry_params
-    slice(:reading_group_id, :reading_group_category_id, :collectable_type, :collectable_id, :collectable_jsonapi_type).tap do |h|
+    slice(:reading_group_id, :reading_group_category_id, :collectable_type, :collectable_id, :collectable_jsonapi_type, :position).tap do |h|
       h[collectable_associations.entry.foreign_key] = id
     end
   end

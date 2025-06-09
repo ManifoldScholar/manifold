@@ -531,8 +531,8 @@ CREATE TABLE public.text_sections (
     slug text,
     hidden_in_reader boolean DEFAULT false NOT NULL,
     metadata jsonb DEFAULT '{}'::jsonb,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     body_text text,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
 );
 
@@ -2162,8 +2162,47 @@ CREATE TABLE public.reading_group_composite_entries (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     reading_group_text_section_id uuid,
-    reading_group_journal_issue_id uuid
+    reading_group_journal_issue_id uuid,
+    "position" bigint
 );
+
+
+--
+-- Name: reading_group_collections; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.reading_group_collections AS
+ WITH category_type_ids AS (
+         SELECT x.reading_group_id,
+            COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text) AS category_id,
+            x.collectable_jsonapi_type,
+            jsonb_agg(x.collectable_id ORDER BY x."position") AS ids
+           FROM public.reading_group_composite_entries x
+          GROUP BY x.reading_group_id, COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text), x.collectable_jsonapi_type
+        ), category_mappings AS (
+         SELECT cti.reading_group_id,
+            cti.category_id,
+            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
+           FROM category_type_ids cti
+          GROUP BY cti.reading_group_id, cti.category_id
+        ), collection_mappings AS (
+         SELECT cm_1.reading_group_id,
+            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
+           FROM category_mappings cm_1
+          GROUP BY cm_1.reading_group_id
+        ), category_lists AS (
+         SELECT rgc.reading_group_id,
+            jsonb_agg(jsonb_build_object('id', rgc.id, 'title', (rgc.fa_cache -> 'title'::text), 'description', (rgc.fa_cache -> 'description'::text), 'position', rgc."position") ORDER BY rgc."position") AS categories
+           FROM public.reading_group_categories rgc
+          GROUP BY rgc.reading_group_id
+        )
+ SELECT ((rg.id)::text || '-collection'::text) AS id,
+    rg.id AS reading_group_id,
+    COALESCE(cl.categories, '[]'::jsonb) AS categories,
+    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
+   FROM ((public.reading_groups rg
+     LEFT JOIN category_lists cl ON ((cl.reading_group_id = rg.id)))
+     LEFT JOIN collection_mappings cm ON ((cm.reading_group_id = rg.id)));
 
 
 --
@@ -2245,44 +2284,6 @@ CREATE VIEW public.reading_group_composite_entry_rankings AS
      LEFT JOIN public.reading_group_resources rger ON ((rgce.reading_group_resource_id = rger.id)))
      LEFT JOIN public.reading_group_resource_collections rgerc ON ((rgce.reading_group_resource_collection_id = rgerc.id)))
      LEFT JOIN public.reading_group_texts rget ON ((rgce.reading_group_text_id = rget.id)));
-
-
---
--- Name: reading_group_collections; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.reading_group_collections AS
- WITH category_type_ids AS (
-         SELECT x.reading_group_id,
-            COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text) AS category_id,
-            x.collectable_jsonapi_type,
-            jsonb_agg(x.collectable_id ORDER BY x."position") AS ids
-           FROM public.reading_group_composite_entry_rankings x
-          GROUP BY x.reading_group_id, COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text), x.collectable_jsonapi_type
-        ), category_mappings AS (
-         SELECT cti.reading_group_id,
-            cti.category_id,
-            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
-           FROM category_type_ids cti
-          GROUP BY cti.reading_group_id, cti.category_id
-        ), collection_mappings AS (
-         SELECT cm_1.reading_group_id,
-            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
-           FROM category_mappings cm_1
-          GROUP BY cm_1.reading_group_id
-        ), category_lists AS (
-         SELECT rgc.reading_group_id,
-            jsonb_agg(jsonb_build_object('id', rgc.id, 'title', (rgc.fa_cache -> 'title'::text), 'description', (rgc.fa_cache -> 'description'::text), 'position', rgc."position") ORDER BY rgc."position") AS categories
-           FROM public.reading_group_categories rgc
-          GROUP BY rgc.reading_group_id
-        )
- SELECT ((rg.id)::text || '-collection'::text) AS id,
-    rg.id AS reading_group_id,
-    COALESCE(cl.categories, '[]'::jsonb) AS categories,
-    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
-   FROM ((public.reading_groups rg
-     LEFT JOIN category_lists cl ON ((cl.reading_group_id = rg.id)))
-     LEFT JOIN collection_mappings cm ON ((cm.reading_group_id = rg.id)));
 
 
 --
@@ -7703,4 +7704,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250514190334'),
 ('20250521211043'),
 ('20250527180248'),
-('20250603192547');
+('20250603192547'),
+('20250609191642'),
+('20250609192241');
+
+
