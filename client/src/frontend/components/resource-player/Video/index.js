@@ -127,7 +127,7 @@ class ResourcePlayerVideo extends Component {
               if (!track?.attributes) return null;
               const {
                 id,
-                attributes: { kind, srclang, cuesUrl }
+                attributes: { kind, srclang, cuesUrl, label }
               } = track;
               if (!kind || !cuesUrl) return null;
               return (
@@ -135,6 +135,7 @@ class ResourcePlayerVideo extends Component {
                   key={id}
                   src={this.urlToRelativePath(cuesUrl)}
                   kind={kind}
+                  label={label}
                   srcLang={srclang}
                 />
               );
