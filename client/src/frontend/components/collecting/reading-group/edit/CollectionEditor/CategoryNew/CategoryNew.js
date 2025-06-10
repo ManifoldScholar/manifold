@@ -60,9 +60,12 @@ function NewCategory({
 
   const doCreate = input => {
     const data = { ...input };
-    if (isMarkdown && !data.attributes.title) {
-      data.attributes.title = `markdown_${seed(count)}`;
+    if (isMarkdown) {
       data.attributes.markdownOnly = true;
+
+      if (!data.attributes.title) {
+        data.attributes.title = `markdown_${seed(count)}`;
+      }
     }
     return readingGroupsAPI.createCategory(groupId, data);
   };
