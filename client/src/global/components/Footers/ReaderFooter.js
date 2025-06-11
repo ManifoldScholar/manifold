@@ -10,8 +10,8 @@ class ReaderFooter extends Component {
   }
 
   get copyright() {
-    const metadata = this.text.attributes.metadataFormatted;
-    if (!metadata.rights && !metadata.citationOverride) return null;
+    const metadata = this.text?.attributes.metadataFormatted;
+    if (!metadata?.rights && !metadata?.citationOverride) return null;
 
     const html =
       metadata.citationOverride && metadata.rights

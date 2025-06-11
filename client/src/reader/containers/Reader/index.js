@@ -152,6 +152,8 @@ export class ReaderContainer extends Component {
   };
 
   shouldRedirect(props) {
+    if (!this.props.text) return false;
+
     const matches = matchRoutes(
       props.route.routes,
       this.props.location.pathname
@@ -235,7 +237,6 @@ export class ReaderContainer extends Component {
   }
 
   render() {
-    if (!this.props.text) return null;
     if (this.shouldRedirect(this.props)) return this.renderRedirect(this.props);
 
     return (
@@ -247,10 +248,9 @@ export class ReaderContainer extends Component {
           />
           <CheckFrontendMode
             debugLabel="ReaderWrapper"
-            project={this.props.text.relationships.project}
+            project={this.props.text?.relationships.project}
           />
           <ScrollAware>
-            {/* Header inside ScrollAware HOC */}
             <Header
               // Props required by body component
               text={this.props.text}
