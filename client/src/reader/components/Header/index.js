@@ -115,7 +115,7 @@ export default function Header(props) {
   };
 
   const renderContentsButton = textAttrs => {
-    if (textAttrs.toc.length <= 0 && isEmpty(textAttrs.metadata)) {
+    if (textAttrs?.toc.length <= 0 && isEmpty(textAttrs?.metadata)) {
       return null;
     }
 
@@ -164,7 +164,7 @@ export default function Header(props) {
             toggleReaderMenu={panelToggleHandler("readerReturn")}
             expanded={visibility.uiPanels.readerReturn}
           />
-          {renderContentsButton(text.attributes)}
+          {renderContentsButton(text?.attributes)}
         </div>
         {section && (
           <TextTitles
@@ -226,77 +226,83 @@ export default function Header(props) {
           </ul>
         </div>
       </nav>
-      <div className="reader-header__panels reader-header__panels--left">
-        <UIPanel
-          id="readerReturn"
-          visibility={visibility.uiPanels}
-          bodyComponent={ReturnMenu.Body}
-          returnUrl={lh.link(
-            "frontendProjectDetail",
-            text.relationships.project.attributes.slug
-          )}
-          projectId={text.relationships.project.id}
-          projectTitle={text.relationships.project.attributes.titleFormatted}
-          isJournalArticle={
-            text.relationships.project.attributes.isJournalIssue
-          }
-          toggleSignInUpOverlay={commonActions.toggleSignInUpOverlay}
-          hidePanel={commonActions.hideReaderReturnPanel}
-          // TODO: More link (and eventually, the link text) should be pulled from settings
-          moreLink="https://manifoldapp.org/"
-        />
-      </div>
+      {!!text && (
+        <>
+          <div className="reader-header__panels reader-header__panels--left">
+            <UIPanel
+              id="readerReturn"
+              visibility={visibility.uiPanels}
+              bodyComponent={ReturnMenu.Body}
+              returnUrl={lh.link(
+                "frontendProjectDetail",
+                text?.relationships.project.attributes.slug
+              )}
+              projectId={text?.relationships.project.id}
+              projectTitle={
+                text?.relationships.project.attributes.titleFormatted
+              }
+              isJournalArticle={
+                text?.relationships.project.attributes.isJournalIssue
+              }
+              toggleSignInUpOverlay={commonActions.toggleSignInUpOverlay}
+              hidePanel={commonActions.hideReaderReturnPanel}
+              // TODO: More link (and eventually, the link text) should be pulled from settings
+              moreLink="https://manifoldapp.org/"
+            />
+          </div>
 
-      <div className="reader-header__panels reader-header__panels--right">
-        <UIPanel
-          id="notes"
-          visibility={visibility.uiPanels}
-          visible={visibility.uiPanels.notes}
-          bodyComponent={Notes.ReaderDrawer}
-          match={match}
-          history={history}
-          hidePanel={commonActions.hideNotesPanel}
-        />
-        <UIPanel
-          id="visibility"
-          visibility={visibility.uiPanels}
-          filter={visibility.visibilityFilters}
-          filterChangeHandler={handleVisibilityFilterChange}
-          bodyComponent={ControlMenu.VisibilityMenuBody}
-          hidePanel={commonActions.hideVisibilityPanel}
-        />
-        <UIPanel
-          id="search"
-          visibility={visibility.uiPanels}
-          toggleVisibility={panelToggleHandler("search")}
-          initialState={{
-            keyword: "",
-            scope: "text"
-          }}
-          projectId={projectId}
-          textId={textId}
-          sectionId={sectionId}
-          searchType="reader"
-          bodyComponent={SearchMenu.Body}
-          bodyClassName="search-menu"
-          hidePanel={commonActions.hideSearchPanel}
-        />
-        <UIPanel
-          id="appearance"
-          visibility={visibility.uiPanels}
-          bodyComponent={ControlMenu.AppearanceMenuBody}
-          // Props required by body component
-          appearance={appearance}
-          selectFont={selectFont}
-          setColorScheme={setColorScheme}
-          incrementFontSize={incrementFontSize}
-          decrementFontSize={decrementFontSize}
-          incrementMargins={incrementMargins}
-          decrementMargins={decrementMargins}
-          resetTypography={resetTypography}
-          hidePanel={commonActions.hideAppearancePanel}
-        />
-      </div>
+          <div className="reader-header__panels reader-header__panels--right">
+            <UIPanel
+              id="notes"
+              visibility={visibility.uiPanels}
+              visible={visibility.uiPanels.notes}
+              bodyComponent={Notes.ReaderDrawer}
+              match={match}
+              history={history}
+              hidePanel={commonActions.hideNotesPanel}
+            />
+            <UIPanel
+              id="visibility"
+              visibility={visibility.uiPanels}
+              filter={visibility.visibilityFilters}
+              filterChangeHandler={handleVisibilityFilterChange}
+              bodyComponent={ControlMenu.VisibilityMenuBody}
+              hidePanel={commonActions.hideVisibilityPanel}
+            />
+            <UIPanel
+              id="search"
+              visibility={visibility.uiPanels}
+              toggleVisibility={panelToggleHandler("search")}
+              initialState={{
+                keyword: "",
+                scope: "text"
+              }}
+              projectId={projectId}
+              textId={textId}
+              sectionId={sectionId}
+              searchType="reader"
+              bodyComponent={SearchMenu.Body}
+              bodyClassName="search-menu"
+              hidePanel={commonActions.hideSearchPanel}
+            />
+            <UIPanel
+              id="appearance"
+              visibility={visibility.uiPanels}
+              bodyComponent={ControlMenu.AppearanceMenuBody}
+              // Props required by body component
+              appearance={appearance}
+              selectFont={selectFont}
+              setColorScheme={setColorScheme}
+              incrementFontSize={incrementFontSize}
+              decrementFontSize={decrementFontSize}
+              incrementMargins={incrementMargins}
+              decrementMargins={decrementMargins}
+              resetTypography={resetTypography}
+              hidePanel={commonActions.hideAppearancePanel}
+            />
+          </div>
+        </>
+      )}
       {renderOptionsToggle()}
       <HeaderNotifications />
     </header>
