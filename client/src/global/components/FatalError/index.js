@@ -1,7 +1,7 @@
 import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { withTranslation } from "react-i18next";
 import { Global as GlobalStyles } from "@emotion/react";
 import has from "lodash/has";
@@ -12,7 +12,6 @@ import styles from "theme/styles/globalStyles";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import * as Styled from "./styles";
-import HeadContent from "../HeadContent";
 
 class FatalError extends PureComponent {
   static propTypes = {
@@ -104,7 +103,7 @@ class FatalError extends PureComponent {
 
     return (
       <HelmetProvider>
-        <HeadContent title={`${error.status} Error: ${error.heading}`} />
+        <Helmet title={`${error.status} Error: ${error.heading}`} />
         <GlobalStyles styles={styles} />
         <Styled.Body className="browse">
           <Styled.Wrapper>
