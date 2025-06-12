@@ -7,7 +7,7 @@ module Packaging
 
       around_perform :advisory_locked!
 
-      unique :until_executed, lock_ttl: 15.minutes, on_conflict: :log
+      unique_job! by: :job
 
       queue_as :default
 
