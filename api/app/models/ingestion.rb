@@ -20,10 +20,12 @@ class Ingestion < ApplicationRecord
   belongs_to :text, optional: true
   belongs_to :text_section, optional: true
   belongs_to :project
+  has_many :ingestion_messages, -> { reorder(created_at: :asc) }, inverse_of: :ingestion, dependent: :delete_all
 
   # Validations
   validates :source, presence: true, if: :file_based_ingestion?
   validates :external_source_url, presence: true, unless: :file_based_ingestion?
+
   aasm column: "state" do
     state :sleeping, initial: true
     state :processing
@@ -59,8 +61,33 @@ class Ingestion < ApplicationRecord
   before_save :commit_log
   before_update :commit_log
 
+  # @!group Main Entry Points
+
+  # @see Ingestions::ProcessJob
+  # @return [void]
+  def perform_process!(user)
+    process! user
+    save!
+  end
+
+  # @see Ingestions::ReingestJob
+  # @return [void]
+  def perform_reingest!(user)
+    reset!
+    perform_process! user
+  end
+
+  # @!endgroup
+
+  # @return [Ingestions::Context]
+  def build_context
+    ::Ingestions::Context.new(self)
+  end
+
   def reset_strategy
-    self.strategy = nil
+    prune_root_path!
+
+    update_column(:strategy, nil)
   end
 
   def file_based_ingestion?
@@ -73,6 +100,12 @@ class Ingestion < ApplicationRecord
 
   def ingestable?
     valid?
+  end
+
+  # @see Ingestions::Concerns::FileOperations#prune_root_path!
+  # @return [void]
+  def prune_root_path!
+    build_context.prune_root_path!
   end
 
   def reingest?
@@ -95,7 +128,11 @@ class Ingestion < ApplicationRecord
     log_buffer << line
     return if severity == "DEBUG"
 
-    IngestionChannel.broadcast_to self, type: "log", payload: line
+    ::Ingestions::LogMessageJob.perform_later(
+      ingestion_id: id,
+      kind: "log",
+      payload: line
+    )
   end
 
   def clear_log
@@ -108,10 +145,14 @@ class Ingestion < ApplicationRecord
   end
 
   def begin_processing(user)
+    update_column :processing_failed, false
+
     target_kind.begin_processing(user, self)
   end
 
   def handle_ingestion_exception(errors)
+    update_column :processing_failed, true
+
     error("Processing failed.\n")
 
     if errors.respond_to?(:full_messages)

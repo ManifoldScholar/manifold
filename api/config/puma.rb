@@ -16,7 +16,6 @@ Dotenv.load(
 
 env_var_lookups = {
   "API" => "API",
-  "CABLE" => "API_CABLE"
 }
 
 application = ENV.fetch("PUMA_APPLICATION", "api").upcase

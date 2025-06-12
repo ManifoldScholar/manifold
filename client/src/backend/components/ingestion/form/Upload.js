@@ -123,7 +123,6 @@ class IngestionFormUpload extends PureComponent {
             focusOnMount
             value={this.props.getModelValue("attributes[externalSourceUrl]")}
             onChange={event => this.onUrlChange(event)}
-            placeholder={t("texts.ingestion.url_placeholder")}
           />
         </Form.FieldGroup>
         <Form.DrawerButtons

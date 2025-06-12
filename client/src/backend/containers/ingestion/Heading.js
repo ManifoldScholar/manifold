@@ -11,6 +11,8 @@ class IngestionHeader extends Component {
   static propTypes = {
     ingestion: PropTypes.object,
     reingestion: PropTypes.bool,
+    sectionIngest: PropTypes.bool,
+    loading: PropTypes.bool,
     t: PropTypes.func
   };
 
@@ -27,6 +29,8 @@ class IngestionHeader extends Component {
   }
 
   get currentState() {
+    if (this.props.loading)
+      return this.props.t("texts.ingestion.states.processing");
     return this.props.t(
       `texts.ingestion.states.${this.ingestion.attributes.state}`
     );
