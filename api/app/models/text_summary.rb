@@ -19,6 +19,7 @@ class TextSummary < ApplicationRecord
   attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: -> { [] }
 
   delegate :collected_by?, to: :text
+  delegate :creator_names, to: :text
 
   alias_attribute :toc_section_id, :toc_section
 

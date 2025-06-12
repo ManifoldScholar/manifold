@@ -10,6 +10,7 @@ class ProjectSummary < ApplicationRecord
 
   delegate :collected_by?, to: :project
   delegate :entitlement_subject_url, to: :project
+  delegate :creator_names, to: :project
 
   manifold_has_attached_file :avatar, :image
 
