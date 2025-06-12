@@ -77,16 +77,20 @@ export default function Wrapper({
     const subtitle = data.subtitle;
     const description = !hideDescription && data.description;
 
-    /* eslint-disable no-nested-ternary */
-    const additionalData =
-      "creatorNames" in data
-        ? data.creatorNames
-        : entity.relationships?.creators?.length > 0
-        ? entity.relationships.creators
-            .map(maker => maker.attributes.fullName)
-            .join(", ")
-        : null;
-    /* eslint-enable no-nested-ternary */
+    const namesArray = data?.creatorNames
+      ? data.creatorNames.split(", ")
+      : null;
+
+    let additionalData = null;
+
+    if (namesArray) {
+      if (namesArray.length > 3) {
+        const firstThree = namesArray.slice(0, 3).join(", ");
+        additionalData = t("common.et_al", { names: firstThree });
+      } else {
+        additionalData = data.creatorNames;
+      }
+    }
 
     const draft = data.draft;
     const showUpdated = !data.finished && !!data.updated;

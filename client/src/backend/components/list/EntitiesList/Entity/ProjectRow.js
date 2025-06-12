@@ -4,7 +4,6 @@ import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import FormattedDate from "global/components/FormattedDate";
-import has from "lodash/has";
 import { withTranslation } from "react-i18next";
 
 class ProjectRow extends PureComponent {
@@ -59,14 +58,12 @@ class ProjectRow extends PureComponent {
   }
 
   get creatorNames() {
-    if (has(this.attr, "creatorNames")) {
-      return this.attr.creatorNames;
+    const namesArray = this.attr.creatorNames?.split(", ") ?? [];
+    if (namesArray.length > 3) {
+      const firstSix = namesArray.slice(0, 3).join(", ");
+      return this.props.t("common.et_al", { names: firstSix });
     }
-    return this.creators.map((creator, i) => {
-      let nameList = creator.attributes.fullName;
-      if (i > 0) nameList = ", " + nameList;
-      return nameList;
-    });
+    return this.attr.creatorNames;
   }
 
   get url() {
