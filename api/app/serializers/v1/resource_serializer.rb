@@ -62,6 +62,7 @@ module V1
       typed_attribute :transcript_content_type, Types::String.optional.meta(read_only: true)
       typed_attribute :transcript_file_name, Types::String.optional.meta(read_only: true)
       typed_attribute :transcript_file_size, Types::String.optional.meta(read_only: true)
+      typed_attribute :transcript_url, Types::String.optional.meta(read_only: true)
       typed_attribute :translation_content_type, Types::String.optional.meta(read_only: true)
       typed_attribute :translation_file_name, Types::String.optional.meta(read_only: true)
       typed_attribute :translation_file_size, Types::String.optional.meta(read_only: true)
