@@ -72,9 +72,9 @@ export default function ResourceDetail({ resource, projectTitle }) {
         )}
         <Styled.MetadataWrapper>
           <LinkComponent attributes={attr} />
-          {attr.downloadable && attr.transcriptFileName && (
+          {attr.transcriptUrl && attr.transcriptFileName && (
             <StyledLink.Link
-              href={attr.attachmentStyles.original}
+              href={attr.transcriptUrl}
               className="button-primary"
               download={attr.transcriptFileName}
             >
