@@ -6,7 +6,7 @@ import ResourceCollectionList from "frontend/components/resource-collection-list
 import ResourceList from "frontend/components/resource-list";
 import lh from "helpers/linkHandler";
 
-class ProjectContentBlockResourcesBlock extends PureComponent {
+export class ProjectContentBlockResourcesBlock extends PureComponent {
   static displayName = "Project.Content.Block.Resources";
 
   static propTypes = {
