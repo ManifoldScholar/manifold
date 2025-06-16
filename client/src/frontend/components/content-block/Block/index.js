@@ -5,6 +5,7 @@ import AllLink from "frontend/components/event/AllLink";
 import Authorization from "helpers/authorization";
 import contentBlockHelpers from "helpers/contentBlockHelpers";
 import types from "../types";
+import { ProjectContentBlockResourcesBlock } from "../types/Resources";
 import { Warning } from "../parts";
 import * as Styled from "./styles";
 
@@ -32,9 +33,13 @@ function getTitle(block, typeComponent, hideDefaultHeader) {
   const {
     attributes: { title, renderable }
   } = block;
-  if (!renderable) return typeComponent.placeholderTitle || typeComponent.title;
+  const defaultTitle =
+    block.type === "resourcesBlocks"
+      ? ProjectContentBlockResourcesBlock.title
+      : typeComponent.title;
+  if (!renderable) return typeComponent.placeholderTitle || defaultTitle;
   if (title) return title;
-  return hideDefaultHeader ? undefined : typeComponent.title;
+  return hideDefaultHeader ? undefined : defaultTitle;
 }
 
 function getIcon(block, typeComponent, isJournalIssue) {
