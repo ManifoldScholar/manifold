@@ -599,7 +599,7 @@ module Validation
     coerce_filter_to_hash(:filter, :formats)
     params.permit(
       filter: [
-        :orphaned, :text, :text_section, :reading_group_membership, :order, :privacy, :flags, :keyword,
+        :orphaned, :text, :text_section, :reading_group_membership, :reading_group, :order, :privacy, :flags, :keyword,
         { ids: [] },
         [{ formats: [] }]
       ]
