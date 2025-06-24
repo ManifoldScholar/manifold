@@ -20,7 +20,8 @@ export const Overlay = styled.div`
   --Overlay-bg: rgba(247, 247, 247, 1);
   --Overlay-bg-transparent: rgba(247, 247, 247, 0);
 
-  .overlay-full & {
+  .overlay-full &,
+  .notes-list & {
     --Overlay-bg: rgba(236, 236, 236, 1);
     --Overlay-bg-transparent: rgba(236, 236, 236, 0);
   }
