@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -13,16 +13,18 @@ import useEntityHeadContent from "frontend/components/entity/useEntityHeadConten
 import some from "lodash/some";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import { useFetch } from "hooks";
+import { useFetch, useCurrentUser } from "hooks";
 
 export default function ResourceDetailContainer({
   project,
   journalBreadcrumbs
 }) {
   const { resourceId, resourceCollectionId } = useParams();
+  const currentUser = useCurrentUser() ?? "anon";
   const { data: resource } = useFetch({
     request: [resourcesAPI.show, resourceId],
-    options: { requestKey: requests.feResource }
+    options: { requestKey: requests.feResource },
+    condition: currentUser
   });
   const { data: collection } = useFetch({
     request: [resourceCollectionsAPI.show, resourceCollectionId],
