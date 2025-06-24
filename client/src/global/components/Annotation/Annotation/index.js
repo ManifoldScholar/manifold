@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import TextAnnotation from "./TextAnnotation";
 import HighlightAnnotation from "./HighlightAnnotation";
+import ResourceAnnotation from "./ResourceAnnotation";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import { connect } from "react-redux";
@@ -66,6 +67,10 @@ class Annotation extends PureComponent {
     return <TextAnnotation {...this.props} {...this.injectedProps} />;
   }
 
+  get resourceAnnotation() {
+    return <ResourceAnnotation {...this.props} {...this.injectedProps} />;
+  }
+
   get injectedProps() {
     return {
       deleteHandler: this.deleteHandler,
@@ -79,9 +84,17 @@ class Annotation extends PureComponent {
     return annotation.attributes.format === "annotation";
   }
 
+  get isResourceAnnotation() {
+    const { annotation } = this.props;
+    return annotation.attributes.format === "resource";
+  }
+
   render() {
+    /* eslint-disable no-nested-ternary */
     return this.isTextAnnotation
       ? this.textAnnotation
+      : this.isResourceAnnotation
+      ? this.resourceAnnotation
       : this.highlightAnnotation;
   }
 }

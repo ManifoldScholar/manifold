@@ -8,10 +8,6 @@ export const Link = styled.a`
   line-height: 13px;
   text-align: center;
 
-  & + & {
-    margin-block-start: 0.75rem;
-  }
-
   ${respond(
     `
     width: 180px;

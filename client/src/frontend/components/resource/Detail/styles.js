@@ -4,7 +4,9 @@ import {
   utilityPrimary,
   drawerIndent,
   containerPrototype,
-  fluidScale
+  fluidScale,
+  defaultTransitionProps,
+  buttonUnstyled
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -53,7 +55,13 @@ export const MetadataWrapper = styled.div`
     `,
     65
   )}
-  }
+`;
+
+export const CtaGroup = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: start;
 `;
 
 export const CommentsWrapper = styled.div`
@@ -95,16 +103,14 @@ export const DescriptionHeader = styled.h2`
 `;
 
 export const Comments = styled("div", transientOptions)`
-  display: none;
   padding-block-start: 16px;
-  margin-block-start: 54px;
+  margin-block-start: 36px;
   padding-block-end: 25px;
   border-top: 1px solid var(--color-base-neutral45);
 
-  ${({ $show }) => $show && `display: block;`}
-
   .comment-list {
     padding-inline-start: 0;
+    padding-block-start: 24px;
 
     .comment-list {
       ${drawerIndent("padding-left")};
@@ -115,4 +121,71 @@ export const Comments = styled("div", transientOptions)`
     padding-block-start: 16px;
     padding-inline-start: 0;
   }
+`;
+
+const NOTES_BREAKPOINT = "600px";
+
+export const NotesNav = styled.nav`
+  ${utilityPrimary}
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 15px;
+  color: var(--color-base-neutral80);
+  padding-block-start: 24px;
+
+  ${respond(
+    `grid-template-columns: repeat(2, minmax(0, 1fr));`,
+    NOTES_BREAKPOINT
+  )}
+
+  > :first-child {
+    border-top-left-radius: var(--box-border-radius);
+    border-top-right-radius: var(--box-border-radius);
+
+    ${respond(
+      `border-top-right-radius: 0;
+    border-bottom-left-radius: var(--box-border-radius);`,
+      NOTES_BREAKPOINT
+    )}
+  }
+
+  > :last-child {
+    border-bottom-right-radius: var(--box-border-radius);
+    border-bottom-left-radius: var(--box-border-radius);
+
+    ${respond(
+      `border-top-right-radius: var(--box-border-radius);
+    border-bottom-left-radius: 0;`,
+      NOTES_BREAKPOINT
+    )}
+  }
+`;
+
+export const Button = styled.button`
+  ${buttonUnstyled}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  text-decoration: none;
+  background-color: var(--box-bg-color);
+  transition: color ${defaultTransitionProps},
+    background-color ${defaultTransitionProps};
+  align-self: end;
+
+  ${({ $isActive }) =>
+    $isActive && `background-color: var(--box-medium-bg-color);`}
+
+  &:focus-visible,
+  &:hover {
+    --box-bg-color: var(--color-base-neutral20);
+    color: var(--strong-color);
+
+    outline: none;
+  }
+`;
+
+export const ButtonText = styled.span`
+  margin-left: 9px;
+  transform: translateY(-1px);
 `;

@@ -7,7 +7,7 @@ import blacklist from "./elementBlacklist";
 import { useFromStore } from "hooks";
 import { nl2br } from "utils/string";
 
-function AnnotationWithNodes({ annotation, selection }) {
+function AnnotationWithNodes({ annotation, selection, overlayLight }) {
   const {
     annotationNode,
     startNode: startNodeId,
@@ -112,7 +112,11 @@ function AnnotationWithNodes({ annotation, selection }) {
     isDetail: true
   });
 
-  return <Wrapper>{iterator.visit(fragment, null, blacklist)}</Wrapper>;
+  return (
+    <Wrapper overlayLight={overlayLight}>
+      {iterator.visit(fragment, null, blacklist)}
+    </Wrapper>
+  );
 }
 
 const checkId = (prev, next) => {
