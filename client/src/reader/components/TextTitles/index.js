@@ -22,7 +22,7 @@ export default class TextTitles extends Component {
   }
 
   get textTitle() {
-    return this.text.attributes.titleFormatted;
+    return this.text?.attributes.titleFormatted;
   }
 
   get section() {

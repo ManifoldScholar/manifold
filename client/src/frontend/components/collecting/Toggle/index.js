@@ -31,7 +31,7 @@ function determineView(collected, hovered, confirmed, isCollecting) {
 }
 
 function normalizeTitle(collectable) {
-  const attrs = collectable.attributes;
+  const attrs = collectable?.attributes;
   if (!attrs) return "";
 
   if (attrs.titlePlaintext) return attrs.titlePlaintext;
@@ -175,7 +175,7 @@ function CollectingToggle({
 
   if (
     !currentUser ||
-    COLLECTABLE_TYPE_RESTRICTED_LIST.includes(collectable.type)
+    COLLECTABLE_TYPE_RESTRICTED_LIST.includes(collectable?.type)
   )
     return null;
 
