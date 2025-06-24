@@ -4,7 +4,6 @@ set -e
 
 # Remove a potentially pre-existing server pid for rails
 rm -f /srv/pids/server.pid
-rm -f /srv/pids/cable.pid
 
 gem install --no-document bundler:2.2.19
 
