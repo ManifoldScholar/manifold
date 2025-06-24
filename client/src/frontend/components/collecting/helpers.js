@@ -34,7 +34,7 @@ export function inCollection(collectionOrEntity, collectable) {
   if (!collection) return false;
 
   const collectedIds = collectedIdsForCollection(collection);
-  return collectedIds.includes(collectable.id);
+  return collectedIds.includes(collectable?.id);
 }
 
 export function inCollections(collectable, ...collectionsOrEntities) {
