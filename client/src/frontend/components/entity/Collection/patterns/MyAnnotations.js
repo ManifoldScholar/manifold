@@ -43,6 +43,8 @@ function MyAnnotationsEntityCollection({
             <Annotation.List.Default
               annotations={annotations}
               showCommentsToggleAsBlock
+              showMarkers
+              markerIcons
             />
           )}
           {!hasAnnotations && isFiltered && (

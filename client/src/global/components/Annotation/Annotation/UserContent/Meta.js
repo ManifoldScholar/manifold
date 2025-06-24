@@ -5,6 +5,7 @@ import FormattedDate from "global/components/FormattedDate";
 import classNames from "classnames";
 import Authorize from "hoc/Authorize";
 import Avatar from "global/components/avatar/index";
+import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 
@@ -15,6 +16,7 @@ class AnnotationMeta extends PureComponent {
     annotation: PropTypes.object.isRequired,
     subject: PropTypes.string,
     includeMarkers: PropTypes.bool,
+    markerIcons: PropTypes.bool,
     t: PropTypes.func
   };
 
@@ -79,7 +81,7 @@ class AnnotationMeta extends PureComponent {
   }
 
   renderMarkers(annotation) {
-    const t = this.props.t;
+    const { t, markerIcons } = this.props;
     return (
       <div className="annotation-tag annotation-tag--group">
         {annotation.attributes.authorCreated && (
@@ -87,11 +89,30 @@ class AnnotationMeta extends PureComponent {
             {t("glossary.author_one")}
           </div>
         )}
-        {annotation.attributes.private && (
-          <div className="annotation-tag__inner">
-            {t("common.private_title_case")}
-          </div>
-        )}
+        {annotation.attributes.private &&
+          (markerIcons ? (
+            <div className="annotation-tag__inner">
+              <span className="annotation-tag__text">
+                {t("navigation.reading_group.my_private_annotations")}
+              </span>
+              <IconComposer
+                icon="Lock16"
+                size={16}
+                className="annotation-tag__icon"
+              />
+            </div>
+          ) : (
+            <div className="annotation-tag__inner">
+              {t("common.private_title_case")}
+            </div>
+          ))}
+        {markerIcons &&
+          !annotation.attributes.private &&
+          !annotation.attributes.readingGroupId && (
+            <div className="annotation-tag__inner">
+              {t("navigation.reading_group.my_public_annotations")}
+            </div>
+          )}
         {annotation.attributes.unresolvedFlagsCount > 0 && (
           <Authorize ability="create" entity="comment">
             <div className="annotation-tag__inner annotation-tag--secondary">
@@ -115,6 +136,13 @@ class AnnotationMeta extends PureComponent {
             <div className="annotation-tag__text">
               {annotation.attributes.readingGroupName}
             </div>
+            {markerIcons && (
+              <IconComposer
+                icon="Lock16"
+                size={16}
+                className="annotation-tag__icon"
+              />
+            )}
           </Link>
         )}
       </div>
@@ -124,6 +152,7 @@ class AnnotationMeta extends PureComponent {
   render() {
     const { annotation, includeMarkers } = this.props;
     if (!annotation) return null;
+
     return (
       <section className="annotation-meta">
         {/* NB: Empty div required for flex-positioning of private/author marker */}

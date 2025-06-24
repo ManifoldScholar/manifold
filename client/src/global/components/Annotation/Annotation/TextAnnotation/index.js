@@ -14,6 +14,8 @@ class Annotation extends PureComponent {
     displayFormat: PropTypes.string,
     deleteHandler: PropTypes.func,
     showCommentsToggleAsBlock: PropTypes.bool,
+    showMarkers: PropTypes.bool,
+    markerIcons: PropTypes.bool,
     refresh: PropTypes.func
   };
 
@@ -29,7 +31,13 @@ class Annotation extends PureComponent {
   }
 
   render() {
-    const { annotation, visitHandler, displayFormat } = this.props;
+    const {
+      annotation,
+      visitHandler,
+      displayFormat,
+      showMarkers,
+      markerIcons
+    } = this.props;
 
     return (
       <>
@@ -45,7 +53,8 @@ class Annotation extends PureComponent {
           <UserContent
             annotation={annotation}
             includeComments={false}
-            includeMarkers={false}
+            includeMarkers={showMarkers}
+            markerIcons={markerIcons}
             showCommentsToggleAsBlock={this.showCommentsToggleAsBlock}
             refresh={this.props.refresh}
           />
