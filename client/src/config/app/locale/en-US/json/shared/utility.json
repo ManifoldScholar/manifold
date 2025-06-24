@@ -36,14 +36,17 @@
       "by_status": "Filter by status",
       "by_role": "Filter by role",
       "by_draft": "Filter by draft",
-      "order_results": "Order results"
+      "order_results": "Order results",
+      "by_group": "Filter by reading group",
+      "by_privacy": "Filter by privacy"
     },
     "default_options": {
       "type": "Type",
       "members": "All active members",
       "sections": "All sections",
       "tag": "Tag",
-      "text": "All texts"
+      "text": "All texts",
+      "group": "All groups"
     },
     "sort_options": {
       "none_selected": "Sort",
@@ -73,6 +76,11 @@
       "title_desc": "Title Z to A",
       "publication_date_desc": "Publication Date (Newest First)",
       "publication_date_asc": "Publication Date (Oldest First)"
+    },
+    "annotations": {
+      "all": "All Notes",
+      "only_public": "Public Notes",
+      "only_private": "Private Notes"
     }
   },
   "pagination": {
