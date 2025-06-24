@@ -166,6 +166,7 @@ Rails.application.routes.draw do
           namespace :relationships do
             resources :comments, controller: "/api/v1/comments"
             resources :text_tracks
+            resources :annotations, only: [:index]
           end
         end
       end
