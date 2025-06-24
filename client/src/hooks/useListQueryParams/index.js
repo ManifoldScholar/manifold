@@ -12,7 +12,14 @@ export default function useListQueryParams({
 } = {}) {
   const navigate = useNavigate();
   const { pathname, search } = useLocation();
-  const { page, ...filterParams } = queryString.parse(search);
+  const { page, formats, ...filterParams } = queryString.parse(search);
+
+  /* eslint-disable no-nested-ternary */
+  const formatsValue = formats
+    ? Array.isArray(formats)
+      ? { formats }
+      : { formats: [formats] }
+    : {};
 
   const [number, setNumber] = useState(page || initPage);
   const size = useRef(initSize);
@@ -39,7 +46,8 @@ export default function useListQueryParams({
 
   const [filters, setFilterState] = useState({
     ...initFilters,
-    ...filterParams
+    ...filterParams,
+    ...formatsValue
   });
 
   const updateFilterParams = useCallback(
