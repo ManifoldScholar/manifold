@@ -9,7 +9,7 @@ export default `
     align-items: center;
     overflow: hidden;
     color: var(--color);
-    background-color: var(--box-bg-color);
+    background-color: var(--tag-bg-color, var(--box-bg-color));
     border-radius: 12px;
     line-height: 1.4;
     font-family: var(--font-family-sans);

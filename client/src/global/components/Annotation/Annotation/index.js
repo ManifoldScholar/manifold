@@ -18,6 +18,8 @@ class Annotation extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     visitHandler: PropTypes.func,
     showCommentsToggleAsBlock: PropTypes.bool,
+    showMarkers: PropTypes.bool,
+    markerIcons: PropTypes.bool,
     refresh: PropTypes.func
   };
 

@@ -21,6 +21,7 @@ const { request } = entityStoreActions;
 export default function AnnotationDetail({
   includeComments = true,
   includeMarkers,
+  markerIcons,
   annotation,
   showCommentsToggleAsBlock,
   showLogin,
@@ -111,6 +112,7 @@ export default function AnnotationDetail({
             annotation={annotation}
             creator={creator}
             includeMarkers={includeMarkers}
+            markerIcons={markerIcons}
           />
           {action === "editing" ? (
             <Editor
@@ -228,5 +230,6 @@ AnnotationDetail.propTypes = {
   showLogin: PropTypes.func,
   includeComments: PropTypes.bool,
   includeMarkers: PropTypes.bool,
+  markerIcons: PropTypes.bool,
   showCommentsToggleAsBlock: PropTypes.bool
 };
