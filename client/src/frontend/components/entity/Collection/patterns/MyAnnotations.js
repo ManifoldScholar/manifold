@@ -26,7 +26,7 @@ function MyAnnotationsEntityCollection({
     <EntityCollection
       title={t("pages.my_notes")}
       icon="NotesUnique"
-      filterProps={hasAnnotations ? filterProps : null}
+      filterProps={hasAnnotations || isFiltered ? filterProps : null}
       countProps={
         isEmpty(annotationsMeta)
           ? {}

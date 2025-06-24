@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
@@ -6,9 +6,10 @@ import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { useFetch, useListFilters, useListQueryParams } from "hooks";
+import intersection from "lodash/intersection";
 
 const INIT_FILTER_STATE = {
-  formats: ["highlight", "annotation", "bookmark"]
+  formats: ["highlight", "annotation"]
 };
 
 export default function MyAnnotationsContainer() {
@@ -23,12 +24,31 @@ export default function MyAnnotationsContainer() {
   const { data: annotatedTexts } = useFetch({
     request: [meAPI.annotatedTexts]
   });
+  const { data: readingGroups } = useFetch({
+    request: [meAPI.readingGroups]
+  });
+
+  const setFiltersWithHighlights = useCallback(
+    state => {
+      if (!state.privacy) return setFilters({ ...state, ...INIT_FILTER_STATE });
+      if (state.privacy === "highlight") {
+        const { privacy, ...rest } = state;
+        return setFilters({ ...rest, formats: ["highlight"] });
+      }
+      return setFilters({ ...state, formats: ["annotation"] });
+    },
+    [setFilters]
+  );
 
   const filterProps = useListFilters({
-    onFilterChange: state => setFilters(state),
+    onFilterChange: setFiltersWithHighlights,
     initialState: filters,
     resetState: INIT_FILTER_STATE,
-    options: { texts: annotatedTexts }
+    options: {
+      texts: annotatedTexts,
+      readingGroup: readingGroups,
+      privacy: true
+    }
   });
 
   const { t } = useTranslation();
@@ -41,7 +61,13 @@ export default function MyAnnotationsContainer() {
         annotationsMeta={meta}
         annotatedTexts={annotatedTexts}
         filterProps={{ ...filterProps, hideSearch: true }}
-        isFiltered={"text" in filters}
+        isFiltered={
+          !!intersection(Object.keys(filters), [
+            "texts",
+            "readingGroup",
+            "privacy"
+          ]).length
+        }
       />
       <CollectionNavigation />
     </>
