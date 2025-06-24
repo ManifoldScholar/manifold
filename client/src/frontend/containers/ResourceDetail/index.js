@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useParams, useLocation } from "react-router-dom";
-import Resource from "frontend/components/resource";
+import ResourceDetail from "frontend/components/resource/Detail";
 import { fatalErrorActions } from "actions";
 import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
@@ -68,7 +68,7 @@ export default function ResourceDetailContainer({
           pathname
         })}
       />
-      <Resource.Detail
+      <ResourceDetail
         projectTitle={project.attributes.titlePlaintext}
         resource={resource}
       />
