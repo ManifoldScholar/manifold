@@ -70,6 +70,8 @@
     "see_all": "See all",
     "see_next_comment_one": "See next {{count}} comment",
     "see_next_comment_other": "See next {{count}} comments",
+    "see_next_annotation_one": "See next {{count}} annotation",
+    "see_next_annotation_other": "See next {{count}} annotations",
     "select_all": "Select all",
     "select_all_matching": "Select all {{ count }} {{ unit }} matching this search",
     "select_item": "Select {{ item }}",
