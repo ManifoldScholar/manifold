@@ -5,7 +5,7 @@ import Collecting from "frontend/components/collecting";
 
 export default class TextTitles extends Component {
   static propTypes = {
-    text: PropTypes.object.isRequired,
+    text: PropTypes.object,
     section: PropTypes.object.isRequired,
     showSection: PropTypes.bool
   };
