@@ -57,6 +57,10 @@ export default function ResourceDetail({ resource, projectTitle }) {
     : attr.title;
 
   const hasListContent = canEngagePublicly || !!annotations?.length;
+  const tabbed = canEngagePublicly && !!annotations?.length;
+  const staticHeader = annotations?.length
+    ? t("glossary.annotation_title_case_other")
+    : t("glossary.comment_title_case_other");
 
   return (
     <Styled.Container>
@@ -86,7 +90,7 @@ export default function ResourceDetail({ resource, projectTitle }) {
         {hasListContent && (
           <Styled.CommentsWrapper>
             <Styled.Comments>
-              {canEngagePublicly && !!annotations?.length && (
+              {tabbed ? (
                 <Styled.NotesNav $layout="grid" $count={2}>
                   <Styled.Button
                     $isActive={activeTab === "comments"}
@@ -107,6 +111,8 @@ export default function ResourceDetail({ resource, projectTitle }) {
                     </Styled.ButtonText>
                   </Styled.Button>
                 </Styled.NotesNav>
+              ) : (
+                <Styled.ListHeader>{staticHeader}</Styled.ListHeader>
               )}
               {canEngagePublicly && activeTab === "comments" && (
                 <>
