@@ -189,3 +189,15 @@ export const ButtonText = styled.span`
   margin-left: 9px;
   transform: translateY(-1px);
 `;
+
+export const ListHeader = styled.h2`
+  ${utilityPrimary}
+  color: var(--color-base-neutral80);
+  margin-block: 0;
+  margin-block-start: 24px;
+  font-size: 15px;
+  text-align: center;
+  padding: 10px 12px;
+  background-color: var(--box-bg-color);
+  border-radius: var(--box-border-radius);
+`;
