@@ -7,7 +7,12 @@ import blacklist from "./elementBlacklist";
 import { useFromStore } from "hooks";
 import { nl2br } from "utils/string";
 
-function AnnotationWithNodes({ annotation, selection, overlayLight }) {
+function AnnotationWithNodes({
+  annotation,
+  selection,
+  overlayLight,
+  expandable = true
+}) {
   const {
     annotationNode,
     startNode: startNodeId,
@@ -112,10 +117,12 @@ function AnnotationWithNodes({ annotation, selection, overlayLight }) {
     isDetail: true
   });
 
-  return (
+  return expandable ? (
     <Wrapper overlayLight={overlayLight}>
       {iterator.visit(fragment, null, blacklist)}
     </Wrapper>
+  ) : (
+    iterator.visit(fragment, null, blacklist)
   );
 }
 

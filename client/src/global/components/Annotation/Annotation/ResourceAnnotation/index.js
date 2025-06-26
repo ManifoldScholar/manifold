@@ -1,33 +1,45 @@
-import { useState } from "react";
 import Utility from "frontend/components/utility";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
-import SourceSummary from "../SourceSummary/index";
+import TextTitle from "../SourceSummary/TextTitle";
 import Authorize from "hoc/Authorize";
 import FromNodes from "../TextContent/FromNodes";
+import lh from "helpers/linkHandler";
 
 export default function ResourceAnnotation({
   annotation,
-  visitHandler,
   deleteHandler,
   displayFormat
 }) {
   const { t } = useTranslation();
 
-  const [hovering, setHovering] = useState(false);
-
   const wrapperClasses = classNames({
     "annotation-selection__text-container": true,
     "annotation-selection__text-container--light": true,
-    "annotation-selection__text-container--hovering": hovering,
+    "annotation-selection__text-container--link": true,
     "annotation-selection__text-container--rounded-corners":
       displayFormat === "fullPage"
   });
 
+  const {
+    textSlug,
+    textSectionId,
+    textTitleFormatted,
+    textSectionTitle
+  } = annotation.attributes;
+
   return (
-    <div className={wrapperClasses}>
+    <a
+      href={lh.link(
+        "readerSection",
+        textSlug,
+        textSectionId,
+        `#annotation-${annotation.id}`
+      )}
+      className={wrapperClasses}
+    >
       <div className="annotation-selection__container">
         <IconComposer
           icon="bookmark32"
@@ -37,15 +49,24 @@ export default function ResourceAnnotation({
         <FromNodes
           annotation={annotation}
           selection={annotation.attributes.subject}
-          overlayLight
+          expandable={false}
         />
-        <SourceSummary
-          includeDate
-          includeCreator
-          annotation={annotation}
-          onClick={visitHandler}
-          onHover={setHovering}
-        />
+        <div className="annotation-selection__source-summary annotation-selection__source-summary-link">
+          <span className="annotation-selection__source-summary-text">
+            <Trans
+              i18nKey="messages.annotation_summary.source"
+              components={{
+                text: <TextTitle title={textTitleFormatted} />
+              }}
+              values={{ section: textSectionTitle }}
+            />
+          </span>
+          <IconComposer
+            icon="arrowLongRight16"
+            size={24}
+            className="annotation-selection__arrow-icon"
+          />
+        </div>
         <Authorize entity={annotation} ability={"delete"}>
           <div className="annotation-selection__action-buttons">
             <Utility.ConfirmableButton
@@ -55,7 +76,7 @@ export default function ResourceAnnotation({
           </div>
         </Authorize>
       </div>
-    </div>
+    </a>
   );
 }
 

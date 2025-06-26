@@ -67,6 +67,21 @@ export default `
           transform: translateX(20%);
         }
       }
+
+      &--link {
+        display: block;
+        text-decoration: none;
+
+        &:hover {
+          color: inherit;
+          position: relative;
+          background-color: var(--box-medium-bg-color);
+
+          .annotation-selection__arrow-icon {
+            transform: translateX(20%);
+          }
+        }
+      }
     }
 
     &__highlight-text {
