@@ -1,4 +1,4 @@
-import Utility from "frontend/components/utility";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
 import classNames from "classnames";
@@ -6,14 +6,32 @@ import IconComposer from "global/components/utility/IconComposer";
 import TextTitle from "../SourceSummary/TextTitle";
 import Authorize from "hoc/Authorize";
 import FromNodes from "../TextContent/FromNodes";
+import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import withConfirmation from "hoc/withConfirmation";
+import * as Styled from "./styles";
 
-export default function ResourceAnnotation({
+function ResourceAnnotation({
   annotation,
   deleteHandler,
-  displayFormat
+  displayFormat,
+  confirm
 }) {
   const { t } = useTranslation();
+
+  const onDelete = useCallback(
+    e => {
+      e.preventDefault();
+
+      const heading = t("modals.delete_note");
+      const message = t("modals.delete_note_body");
+      if (confirm)
+        confirm(heading, message, async () => {
+          await deleteHandler;
+        });
+    },
+    [deleteHandler, confirm, t]
+  );
 
   const wrapperClasses = classNames({
     "annotation-selection__text-container": true,
@@ -31,8 +49,8 @@ export default function ResourceAnnotation({
   } = annotation.attributes;
 
   return (
-    <a
-      href={lh.link(
+    <Link
+      to={lh.link(
         "readerSection",
         textSlug,
         textSectionId,
@@ -68,22 +86,27 @@ export default function ResourceAnnotation({
           />
         </div>
         <Authorize entity={annotation} ability={"delete"}>
-          <div className="annotation-selection__action-buttons">
-            <Utility.ConfirmableButton
-              label={t("actions.delete")}
-              confirmHandler={deleteHandler}
-            />
-          </div>
+          <Styled.ButtonWrapper>
+            <Styled.Delete
+              className="button-secondary button-secondary--dull button-secondary--red button-secondary--sm"
+              onClick={onDelete}
+            >
+              {t("actions.remove")}
+            </Styled.Delete>
+          </Styled.ButtonWrapper>
         </Authorize>
       </div>
-    </a>
+    </Link>
   );
 }
+
+export default withConfirmation(ResourceAnnotation);
 
 ResourceAnnotation.displayName = "Annotation.ResourceAnnotation";
 
 ResourceAnnotation.propTypes = {
   annotation: PropTypes.object.isRequired,
   visitHandler: PropTypes.func.isRequired,
-  deleteHandler: PropTypes.func.isRequired
+  deleteHandler: PropTypes.func.isRequired,
+  confirm: PropTypes.func.isRequired
 };
