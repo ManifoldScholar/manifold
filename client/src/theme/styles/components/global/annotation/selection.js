@@ -74,6 +74,9 @@ export default `
 
         &:hover {
           color: inherit;
+        }
+
+        &:hover:not(:has(button:hover)) {
           position: relative;
           background-color: var(--box-medium-bg-color);
 
