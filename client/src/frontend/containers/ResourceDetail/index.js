@@ -20,11 +20,11 @@ export default function ResourceDetailContainer({
   journalBreadcrumbs
 }) {
   const { resourceId, resourceCollectionId } = useParams();
-  const currentUser = useCurrentUser() ?? "anon";
+  const currentUser = useCurrentUser() ?? { id: null };
   const { data: resource } = useFetch({
     request: [resourcesAPI.show, resourceId],
     options: { requestKey: requests.feResource },
-    condition: currentUser
+    dependencies: [currentUser.id]
   });
   const { data: collection } = useFetch({
     request: [resourceCollectionsAPI.show, resourceCollectionId],
