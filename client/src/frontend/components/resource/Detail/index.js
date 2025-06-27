@@ -23,7 +23,11 @@ export default function ResourceDetail({ resource, projectTitle }) {
 
   const [annotationsPagination, setAnnotationsPage] = usePaginationState(1, 5);
 
-  const { data: annotations, meta: annotationsMeta } = useFetch({
+  const {
+    data: annotations,
+    meta: annotationsMeta,
+    refresh: refreshAnnotations
+  } = useFetch({
     request: [
       resourcesAPI.annotations,
       resourceId,
@@ -128,7 +132,7 @@ export default function ResourceDetail({ resource, projectTitle }) {
                 <>
                   <AnnotationList
                     annotations={annotations}
-                    showCommentsToggleAsBlock
+                    refresh={refreshAnnotations}
                   />
                   {!!annotationsMeta?.pagination?.nextPage && (
                     <button
