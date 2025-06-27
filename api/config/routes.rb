@@ -176,6 +176,7 @@ Rails.application.routes.draw do
           namespace :relationships do
             resources :collection_resources, only: [:index, :show]
             resources :resources, only: [:index]
+            resources :annotations, only: [:index]
           end
         end
       end
