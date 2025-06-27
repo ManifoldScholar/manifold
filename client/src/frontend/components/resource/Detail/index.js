@@ -12,7 +12,7 @@ import VariantList from "../VariantList";
 import Share from "../Share";
 import Utility from "global/components/utility";
 import AnnotationList from "global/components/Annotation/List/Default";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, usePaginationState, useCurrentUser } from "hooks";
 import { resourcesAPI } from "api";
 import * as Styled from "./styles";
 import * as StyledLink from "../Link/styles";
@@ -22,6 +22,7 @@ export default function ResourceDetail({ resource, projectTitle }) {
   const { resourceId } = useParams();
 
   const [annotationsPagination, setAnnotationsPage] = usePaginationState(1, 5);
+  const currentUser = useCurrentUser() ?? { id: null };
 
   const {
     data: annotations,
@@ -37,7 +38,8 @@ export default function ResourceDetail({ resource, projectTitle }) {
     options: {
       requestKey: "RESOURCE_DETAIL_ANNOTATIONS",
       appends: "RESOURCE_DETAIL_ANNOTATIONS"
-    }
+    },
+    dependencies: [currentUser.id]
   });
 
   const remainingAnnotations =
