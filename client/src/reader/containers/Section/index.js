@@ -63,7 +63,7 @@ export class SectionContainer extends Component {
     resources: PropTypes.array,
     resourceCollections: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
-    text: PropTypes.object.isRequired,
+    text: PropTypes.object,
     appearance: PropTypes.object.isRequired,
     authentication: PropTypes.object,
     t: PropTypes.func

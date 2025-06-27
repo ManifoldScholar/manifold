@@ -41,5 +41,15 @@ export default {
       method: "GET",
       options: {}
     };
+  },
+
+  annotations(resourceId, filter, page) {
+    return {
+      endpoint: `/api/v1/resources/${resourceId}/relationships/annotations`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
   }
 };

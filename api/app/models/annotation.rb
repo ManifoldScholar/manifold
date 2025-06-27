@@ -171,12 +171,16 @@ class Annotation < ApplicationRecord
     case value
     when "private"
       left_outer_joins(:reading_group)
-        .where(reading_groups: { privacy: %w[private anonymous] })
-        .or(where(private: true))
+        .where(
+          arel_table[:private].eq(true)
+            .or(ReadingGroup.arel_table[:privacy].in(%w[private anonymous]))
+        )
     when "public"
       left_outer_joins(:reading_group)
-        .where(reading_groups: { privacy: "public" })
-        .or(where(reading_groups: { id: nil }))
+        .where(
+          ReadingGroup.arel_table[:privacy].eq("public")
+            .or(ReadingGroup.arel_table[:id].eq(nil))
+        )
         .where(private: false)
     end
   }

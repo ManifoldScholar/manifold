@@ -231,7 +231,7 @@ function CollectingToggle({
 CollectingToggle.displayName = "Collecting.Toggle";
 
 CollectingToggle.propTypes = {
-  collectable: PropTypes.object.isRequired,
+  collectable: PropTypes.object,
   readingGroups: PropTypes.array,
   onDialogOpen: PropTypes.func,
   onDialogClose: PropTypes.func,

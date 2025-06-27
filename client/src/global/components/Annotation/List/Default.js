@@ -6,7 +6,9 @@ function AnnotationListDefault({
   annotations,
   handleVisitAnnotation,
   showCommentsToggleAsBlock,
-  refresh
+  refresh,
+  showMarkers,
+  markerIcons
 }) {
   return (
     <ul className="notes-list notes-list--pad-top">
@@ -19,6 +21,8 @@ function AnnotationListDefault({
               displayFormat="fullPage"
               showCommentsToggleAsBlock={showCommentsToggleAsBlock}
               refresh={refresh}
+              showMarkers={showMarkers}
+              markerIcons={markerIcons}
             />
           </li>
         );
@@ -32,7 +36,9 @@ AnnotationListDefault.propTypes = {
   annotations: PropTypes.array,
   handleVisitAnnotation: PropTypes.func,
   showCommentsToggleAsBlock: PropTypes.bool,
-  refresh: PropTypes.func
+  refresh: PropTypes.func,
+  showMarkers: PropTypes.bool,
+  markerIcons: PropTypes.bool
 };
 
 export default AnnotationListDefault;

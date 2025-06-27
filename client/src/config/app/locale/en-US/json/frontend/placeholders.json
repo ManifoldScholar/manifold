@@ -22,7 +22,7 @@
     },
     "annotations_filtered": {
       "title": "No annotations matched your search criteria.",
-      "body": "Try removing the text or member filter above to see more annotations."
+      "body": "Try removing one of the filters above to see more annotations."
     },
     "annotations_group": {
       "no_user": {

@@ -54,6 +54,7 @@ class HighlightDetail extends PureComponent {
           <FromNodes
             annotation={annotation}
             selection={annotation.attributes.subject}
+            overlayLight
           />
           <SourceSummary
             includeDate
