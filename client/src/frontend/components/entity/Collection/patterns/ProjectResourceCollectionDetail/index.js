@@ -8,6 +8,7 @@ import ResourceCollection from "frontend/components/resource-collection";
 import EntityCollection from "../../EntityCollection";
 import SlideshowSection from "./SlideshowSection";
 import * as shapes from "../../shapes";
+import * as Styled from "./styles";
 
 function ProjectResourceCollectionDetail({
   resourceCollection,
@@ -24,8 +25,6 @@ function ProjectResourceCollectionDetail({
 }) {
   const { t } = useTranslation();
 
-  const totalCount = resourceCollection.attributes.collectionResourcesCount;
-
   return (
     <EntityCollection
       title={resourceCollection.attributes.title}
@@ -41,25 +40,29 @@ function ProjectResourceCollectionDetail({
       headerLayout="title_description_image"
       headerWidth="100%"
       ImageComponent={props => (
-        <SlideshowSection
-          slideshowResourcesMeta={slideshowResourcesMeta}
-          resourceCollection={resourceCollection}
-          slideshowResources={slideshowResources}
-          dispatch={dispatch}
-          slug={project.attributes.slug}
-          totalCount={totalCount}
-          listHeaderId={listHeaderId}
-          {...props}
-        />
+        <>
+          <SlideshowSection
+            slideshowResourcesMeta={slideshowResourcesMeta}
+            resourceCollection={resourceCollection}
+            slideshowResources={slideshowResources}
+            dispatch={dispatch}
+            {...props}
+          />
+          <Styled.SectionHeader id={listHeaderId}>
+            {t("pages.subheaders.resource_list")}
+          </Styled.SectionHeader>
+        </>
       )}
       BodyComponent={props => (
-        <ResourceList.Cards
-          resourceCollection={resourceCollection}
-          project={project}
-          resources={resources}
-          itemHeadingLevel={3}
-          {...props}
-        />
+        <>
+          <ResourceList.Cards
+            resourceCollection={resourceCollection}
+            project={project}
+            resources={resources}
+            itemHeadingLevel={3}
+            {...props}
+          />
+        </>
       )}
       filterProps={filterProps}
       countProps={

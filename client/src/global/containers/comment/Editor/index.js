@@ -8,6 +8,7 @@ import { singularEntityName } from "utils/entityUtils";
 import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
 import { UIDConsumer } from "react-uid";
+import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
@@ -220,9 +221,14 @@ export class CommentEditor extends PureComponent {
           <Styled.Label
             onClick={this.toggleOpen}
             aria-expanded={this.state.open}
+            className="button-primary"
           >
-            <Styled.Icon icon="interactComment24" size={24} />
-            <span>{this.props.label}</span>
+            <span className="button-primary__text">{this.props.label}</span>
+            <IconComposer
+              icon="interactComment24"
+              size={24}
+              className="button-primary__icon"
+            />
           </Styled.Label>
         ) : null}
         {(this.state.open || !this.isComment(this.props)) && (

@@ -1,12 +1,10 @@
 import styled from "@emotion/styled";
 import {
   respond,
-  fluidScale,
   buttonUnstyled,
   utilityPrimary,
   defaultFocusStyle
 } from "theme/styles/mixins";
-import IconComposer from "global/components/utility/IconComposer";
 
 const ACTION_MARGIN_TOP = 18;
 const BUTTON_MARGIN_LEFT = 15;
@@ -18,24 +16,12 @@ export const Editor = styled.div`
 
 export const Label = styled.button`
   display: flex;
-  align-items: center;
-  padding-inline: 24px;
-  padding-block: ${fluidScale("8px", "5px")};
-  border-radius: 20px;
-  border: none;
-  margin-block-start: 50px;
-  font-size: ${fluidScale("17px", "14px")};
-  font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-regular);
-  color: var(--color-neutral-text-extra-dark);
-  background-color: var(--box-medium-bg-color);
-`;
+  margin-block-start: var(--CommentEditor-Label-margin-block-start, 50px);
+  padding: 0.5em 1.3em;
 
-export const Icon = styled(IconComposer)`
-  margin-right: 8px;
-  margin-left: -3px;
-  width: 24px;
-  height: 24px;
+  + * {
+    margin-block-start: 12px;
+  }
 `;
 
 export const TextArea = styled.textarea`

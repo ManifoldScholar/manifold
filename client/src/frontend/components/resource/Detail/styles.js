@@ -6,7 +6,8 @@ import {
   containerPrototype,
   fluidScale,
   defaultTransitionProps,
-  buttonUnstyled
+  buttonUnstyled,
+  panelRounded
 } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
@@ -102,15 +103,14 @@ export const DescriptionHeader = styled.h2`
   color: var(--color-neutral-text-dark);
 `;
 
-export const Comments = styled("div", transientOptions)`
-  padding-block-start: 16px;
-  margin-block-start: 36px;
-  padding-block-end: 25px;
-  border-top: 1px solid var(--color-base-neutral45);
+export const CommentsSection = styled("div", transientOptions)`
+  --CommentEditor-Label-margin-block-start: 30px;
+
+  margin-block-start: 50px;
 
   .comment-list {
     padding-inline-start: 0;
-    padding-block-start: 24px;
+    padding-block-start: 12px;
 
     .comment-list {
       ${drawerIndent("padding-left")};
@@ -191,13 +191,20 @@ export const ButtonText = styled.span`
 `;
 
 export const ListHeader = styled.h2`
-  ${utilityPrimary}
-  color: var(--color-base-neutral80);
-  margin-block: 0;
-  margin-block-start: 24px;
-  font-size: 15px;
-  text-align: center;
-  padding: 10px 12px;
-  background-color: var(--box-bg-color);
-  border-radius: var(--box-border-radius);
+  ${panelRounded}
+  padding: 0.857em 1.643em 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: ${fluidScale("14px", "13px")};
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  color: var(--strong-color);
+  text-transform: uppercase;
+  letter-spacing: 0.107em;
+  background-color: var(--box-medium-bg-color);
+`;
+
+export const EmptyMessage = styled.p`
+  padding-block: 30px;
+  font-family: var(--font-family-heading);
 `;
