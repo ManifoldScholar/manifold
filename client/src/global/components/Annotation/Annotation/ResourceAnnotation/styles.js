@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled, { transientOptions } from "@emotion/styled";
 import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
 import {
@@ -9,7 +9,7 @@ import {
   respond
 } from "theme/styles/mixins";
 
-export const ResourceLink = styled(Link)`
+export const ResourceLink = styled(Link, transientOptions)`
 display: block;
 text-decoration: none;
 ${drawerPadding("padding-right")}
