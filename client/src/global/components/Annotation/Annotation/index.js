@@ -21,6 +21,7 @@ class Annotation extends PureComponent {
     showCommentsToggleAsBlock: PropTypes.bool,
     showMarkers: PropTypes.bool,
     markerIcons: PropTypes.bool,
+    compact: PropTypes.bool,
     refresh: PropTypes.func
   };
 
@@ -86,7 +87,10 @@ class Annotation extends PureComponent {
 
   get isResourceAnnotation() {
     const { annotation } = this.props;
-    return annotation.attributes.format === "resource";
+    return (
+      annotation.attributes.format === "resource" ||
+      annotation.attributes.format === "resource_collection"
+    );
   }
 
   render() {

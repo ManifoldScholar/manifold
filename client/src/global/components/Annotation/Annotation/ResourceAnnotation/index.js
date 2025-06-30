@@ -1,22 +1,15 @@
 import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
-import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import TextTitle from "../SourceSummary/TextTitle";
 import Authorize from "hoc/Authorize";
 import FromNodes from "../TextContent/FromNodes";
-import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import withConfirmation from "hoc/withConfirmation";
 import * as Styled from "./styles";
 
-function ResourceAnnotation({
-  annotation,
-  deleteHandler,
-  displayFormat,
-  confirm
-}) {
+function ResourceAnnotation({ annotation, deleteHandler, confirm, compact }) {
   const { t } = useTranslation();
 
   const onDelete = useCallback(
@@ -33,14 +26,6 @@ function ResourceAnnotation({
     [deleteHandler, confirm, t]
   );
 
-  const wrapperClasses = classNames({
-    "annotation-selection__text-container": true,
-    "annotation-selection__text-container--light": true,
-    "annotation-selection__text-container--link": true,
-    "annotation-selection__text-container--rounded-corners":
-      displayFormat === "fullPage"
-  });
-
   const {
     textSlug,
     textSectionId,
@@ -49,17 +34,17 @@ function ResourceAnnotation({
   } = annotation.attributes;
 
   return (
-    <Link
+    <Styled.ResourceLink
       to={lh.link(
         "readerSection",
         textSlug,
         textSectionId,
         `#annotation-${annotation.id}`
       )}
-      className={wrapperClasses}
+      $compact={compact}
     >
-      <div className="annotation-selection__container">
-        <IconComposer
+      <Styled.Container $compact={compact}>
+        <Styled.Icon
           icon="bookmark32"
           size="default"
           className="annotation-selection__icon"
@@ -90,13 +75,14 @@ function ResourceAnnotation({
             <Styled.Delete
               className="button-secondary button-secondary--dull button-secondary--red button-secondary--sm"
               onClick={onDelete}
+              $compact={compact}
             >
               {t("actions.remove")}
             </Styled.Delete>
           </Styled.ButtonWrapper>
         </Authorize>
-      </div>
-    </Link>
+      </Styled.Container>
+    </Styled.ResourceLink>
   );
 }
 
