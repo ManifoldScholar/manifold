@@ -121,49 +121,50 @@ export default function ResourceCollectionDetailContainer({
           t
         })}
       />
-      <Styled.Container>
-        <Styled.Grid>
-          <Styled.Main>
-            <EntityCollection.ProjectResourceCollectionDetail
-              resourceCollection={collection}
-              resources={resources ?? []}
-              project={project}
-              meta={meta}
-              slideshowResources={slideshowResources}
-              slideshowResourcesMeta={slideshowMeta}
-              filterProps={filterProps}
-              nested
+      <EntityCollection.ProjectResourceCollectionDetail
+        resourceCollection={collection}
+        resources={resources ?? []}
+        project={project}
+        meta={meta}
+        slideshowResources={slideshowResources}
+        slideshowResourcesMeta={slideshowMeta}
+        filterProps={filterProps}
+      />
+      <Styled.Annotations>
+        <Styled.AnnotationsHeader>
+          {t("glossary.annotation_title_case_other")}
+        </Styled.AnnotationsHeader>
+        {annotations?.length ? (
+          <>
+            <AnnotationList
+              annotations={annotations}
+              refresh={refreshAnnotations}
+              compact
             />
-          </Styled.Main>
-          {!!annotations?.length && (
-            <Styled.Annotations>
-              <Styled.AnnotationsHeader>Annotations</Styled.AnnotationsHeader>
-              <AnnotationList
-                annotations={annotations}
-                refresh={refreshAnnotations}
-                compact
-              />
-              {!!annotationsMeta?.pagination?.nextPage && (
-                <button
-                  className="comment-more"
-                  onClick={() =>
-                    setAnnotationsPage(annotationsMeta?.pagination?.nextPage)
-                  }
-                >
-                  {t("actions.see_next_annotation", {
-                    count: nextAnnotationsCount
-                  })}
-                  <Utility.IconComposer
-                    icon="disclosureDown16"
-                    size={16}
-                    className="comment-more__icon"
-                  />
-                </button>
-              )}
-            </Styled.Annotations>
-          )}
-        </Styled.Grid>
-      </Styled.Container>
+            {!!annotationsMeta?.pagination?.nextPage && (
+              <button
+                className="comment-more"
+                onClick={() =>
+                  setAnnotationsPage(annotationsMeta?.pagination?.nextPage)
+                }
+              >
+                {t("actions.see_next_annotation", {
+                  count: nextAnnotationsCount
+                })}
+                <Utility.IconComposer
+                  icon="disclosureDown16"
+                  size={16}
+                  className="comment-more__icon"
+                />
+              </button>
+            )}
+          </>
+        ) : (
+          <Styled.EmptyMessage>
+            {t("messages.empty_resource_collection_annotations")}
+          </Styled.EmptyMessage>
+        )}
+      </Styled.Annotations>
     </>
   );
 }
