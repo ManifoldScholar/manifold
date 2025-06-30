@@ -8,7 +8,8 @@ function AnnotationListDefault({
   showCommentsToggleAsBlock,
   refresh,
   showMarkers,
-  markerIcons
+  markerIcons,
+  compact
 }) {
   return (
     <ul className="notes-list notes-list--pad-top">
@@ -23,6 +24,7 @@ function AnnotationListDefault({
               refresh={refresh}
               showMarkers={showMarkers}
               markerIcons={markerIcons}
+              compact={compact}
             />
           </li>
         );
@@ -38,7 +40,8 @@ AnnotationListDefault.propTypes = {
   showCommentsToggleAsBlock: PropTypes.bool,
   refresh: PropTypes.func,
   showMarkers: PropTypes.bool,
-  markerIcons: PropTypes.bool
+  markerIcons: PropTypes.bool,
+  compact: PropTypes.bool
 };
 
 export default AnnotationListDefault;
