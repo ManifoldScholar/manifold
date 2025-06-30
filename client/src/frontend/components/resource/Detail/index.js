@@ -63,10 +63,6 @@ export default function ResourceDetail({ resource, projectTitle }) {
     : attr.title;
 
   const hasListContent = canEngagePublicly || !!annotations?.length;
-  const tabbed = canEngagePublicly && !!annotations?.length;
-  const staticHeader = annotations?.length
-    ? t("glossary.annotation_title_case_other")
-    : t("glossary.comment_title_case_other");
 
   return (
     <Styled.Container>
@@ -74,53 +70,34 @@ export default function ResourceDetail({ resource, projectTitle }) {
         <Styled.Main>
           <Title resource={resource} showIcon={false} />
           <Hero resource={resource} />
-          <Styled.Content>
-            <Styled.Caption
-              dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
-            />
+          {(attr.captionFormatted || attr.descriptionFormatted) && (
+            <Styled.Content>
+              <Styled.Caption
+                dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
+              />
 
-            {!!attr.descriptionFormatted && (
-              <>
-                <Styled.DescriptionHeader>
-                  {t("pages.subheaders.full_description")}
-                </Styled.DescriptionHeader>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: attr.descriptionFormatted
-                  }}
-                />
-              </>
-            )}
-          </Styled.Content>
+              {!!attr.descriptionFormatted && (
+                <>
+                  <Styled.DescriptionHeader>
+                    {t("pages.subheaders.full_description")}
+                  </Styled.DescriptionHeader>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: attr.descriptionFormatted
+                    }}
+                  />
+                </>
+              )}
+            </Styled.Content>
+          )}
         </Styled.Main>
         {hasListContent && (
           <Styled.CommentsWrapper>
-            <Styled.Comments>
-              {tabbed ? (
-                <Styled.NotesNav $layout="grid" $count={2}>
-                  <Styled.Button
-                    $isActive={activeTab === "comments"}
-                    as="div"
-                    onClick={() => setActiveTab("comments")}
-                  >
-                    <Styled.ButtonText>
-                      {t("glossary.comment_title_case_other")}
-                    </Styled.ButtonText>
-                  </Styled.Button>
-                  <Styled.Button
-                    $isActive={activeTab === "annotations"}
-                    as="div"
-                    onClick={() => setActiveTab("annotations")}
-                  >
-                    <Styled.ButtonText>
-                      {t("glossary.annotation_title_case_other")}
-                    </Styled.ButtonText>
-                  </Styled.Button>
-                </Styled.NotesNav>
-              ) : (
-                <Styled.ListHeader>{staticHeader}</Styled.ListHeader>
-              )}
-              {canEngagePublicly && activeTab === "comments" && (
+            <Styled.CommentsSection>
+              <Styled.ListHeader>
+                {t("glossary.comment_title_case_other")}
+              </Styled.ListHeader>
+              {canEngagePublicly && (
                 <>
                   <CommentContainer.Thread subject={resource} />
                   <CommentContainer.Editor
@@ -130,11 +107,17 @@ export default function ResourceDetail({ resource, projectTitle }) {
                   />
                 </>
               )}
-              {activeTab === "annotations" && !!annotations?.length && (
+            </Styled.CommentsSection>
+            <Styled.CommentsSection>
+              <Styled.ListHeader>
+                {t("glossary.annotation_title_case_other")}
+              </Styled.ListHeader>
+              {!!annotations?.length ? (
                 <>
                   <AnnotationList
                     annotations={annotations}
                     refresh={refreshAnnotations}
+                    compact
                   />
                   {!!annotationsMeta?.pagination?.nextPage && (
                     <button
@@ -156,8 +139,12 @@ export default function ResourceDetail({ resource, projectTitle }) {
                     </button>
                   )}
                 </>
+              ) : (
+                <Styled.EmptyMessage>
+                  {t("messages.empty_resource_annotations")}
+                </Styled.EmptyMessage>
               )}
-            </Styled.Comments>
+            </Styled.CommentsSection>
           </Styled.CommentsWrapper>
         )}
         <Styled.MetadataWrapper>
