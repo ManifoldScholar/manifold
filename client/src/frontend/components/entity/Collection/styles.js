@@ -85,6 +85,10 @@ export const BodyWrapper = styled.div`
 export const PaginationWrapper = styled.div`
   flex-basis: 100%;
   margin-block-start: 25px;
+
+  &:empty {
+    display: none;
+  }
 `;
 
 export const FooterWrapper = styled.div``;
