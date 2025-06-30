@@ -61,5 +61,15 @@ export default {
       method: "GET",
       options: {}
     };
+  },
+
+  annotations(collectionId, filter, page) {
+    return {
+      endpoint: `/api/v1/resource_collections/${collectionId}/relationships/annotations`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
   }
 };
