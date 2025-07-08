@@ -25,6 +25,9 @@ const deserializeVoid = (el, nodeName, children) => {
   if (nodeName === "hr" || nodeName === "br")
     return jsx("element", { type: nodeName });
 
+  if (nodeName === "resource-block")
+    return jsx("element", { type: nodeName, htmlAttrs: el.attribs ?? {} });
+
   const adjustedEl = {
     ...el,
     children: removeFormatOnlyChildren(el)

@@ -20,6 +20,7 @@ export default function useConfirmation() {
     });
     promise.then(
       () => {
+        console.log("promise resolve");
         callback(closeDialog);
       },
       () => {

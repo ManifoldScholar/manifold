@@ -8,7 +8,8 @@ import {
   IframeButton,
   BlockSelect,
   FunctionButton,
-  SpanButton
+  SpanButton,
+  ResourceButton
 } from "./buttons";
 import {
   MenuBar as ReakitMenuBar,
@@ -227,6 +228,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
           <ReakitMenuItem as={LinkButton} icon="RTELink24" {...menu} />
           <ReakitMenuItem as={ImageButton} icon="RTEImage24" {...menu} />
           <ReakitMenuItem as={IframeButton} icon="iframe24" {...menu} />
+          <ReakitMenuItem as={ResourceButton} icon="resource24" {...menu} />
         </Styled.ToolGroup>
       </ReakitMenuBar>
       <Styled.BreadcrumbsBar $darkMode={darkMode}>

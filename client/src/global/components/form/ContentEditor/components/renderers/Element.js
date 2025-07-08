@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "./Image";
 import Void from "./Void";
+import ResourceBlock from "./ResourceBlock";
 import HtmlLabel from "./HtmlLabel";
 import {
   rteElements,
@@ -54,6 +55,19 @@ export default function SlateElement({
         </Styled.HrInner>
         <HtmlLabel element={element} visible={showHtml} />
       </Styled.HrOuter>
+    );
+  }
+  if (element.type === "resource-block") {
+    return (
+      <ResourceBlock
+        attributes={attributes}
+        element={element}
+        theme={theme}
+        darkMode={darkMode}
+        showHtml={showHtml}
+      >
+        {children}
+      </ResourceBlock>
     );
   }
   if (element.type === "void") {

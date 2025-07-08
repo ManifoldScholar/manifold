@@ -47,6 +47,8 @@ export default function ImageRenderer({
   const className = htmlAttrs?.class ?? undefined;
   const epubType = htmlAttrs?.["data-epub-type"] || undefined;
 
+  console.log({ element });
+
   return (
     <div
       className={htmlAttrs?.inline ? "inline-block" : undefined}

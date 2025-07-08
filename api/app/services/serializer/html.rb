@@ -57,7 +57,7 @@ module Serializer
       visited = begin_visit(node, representation)
       return nil unless visited
 
-      children = traverse(node) unless mathml_element?(representation) && representation[:content]
+      children = traverse(node, representation)
       representation[:children] = children unless children.nil?
       clean_empty_text_nodes!(representation)
       representation
@@ -70,6 +70,10 @@ module Serializer
 
     def mathml_element?(representation)
       MATHML_ELEMENTS.include?(representation[:tag])
+    end
+
+    def resource_block?(representation)
+      representation[:tag] == "resource-block"
     end
 
     # rubocop:disable Metrics/PerceivedComplexity, Metrics/AbcSize
@@ -102,7 +106,10 @@ module Serializer
     # rubocop:enable Metrics/PerceivedComplexity, Metrics/AbcSize
     # rubocop:enable Metrics/CyclomaticComplexity
 
-    def traverse(node)
+    def traverse(node, representation)
+      return nil if resource_block?(representation)
+      return nil if mathml_element?(representation) && representation[:content]
+
       children = nil
       node.children.each do |child_node|
         children ||= []
@@ -129,6 +136,7 @@ module Serializer
         .transform_keys(&:to_sym)
         .transform_values(&:content)
       merge_mathml_element_text_child(node, representation) if mathml_element?(representation)
+      add_resource_props(representation) if resource_block?(representation)
       true
     end
 
@@ -161,6 +169,15 @@ module Serializer
       return unless text_only_child?(node.children)
 
       begin_visit_text(node.children[0], representation)
+    end
+
+    def add_resource_props(representation)
+      @resource_id = representation.dig(:attributes, :resourceid)
+      @resource = Resource.find(@resource_id)
+      return unless @resource
+
+      representation[:attributes][:url] = @resource.attachment_styles[:medium]
+      representation[:attributes][:alt_text] = @resource.alt_text
     end
 
     def reset

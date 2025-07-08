@@ -55,9 +55,12 @@ const serializeChildren = children => {
 const serializeNode = node => {
   if (!node) return null;
 
+  console.log({ node });
+
   if (SlateText.isText(node)) return serializeText(node);
 
   if (node.nodeName) {
+    console.log({ node });
     const { srcdoc, ...attrs } = node.htmlAttrs ?? {};
     return new Element(node.nodeName, attrs, node.htmlChildren);
   }
