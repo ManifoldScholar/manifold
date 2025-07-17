@@ -1028,8 +1028,8 @@ CREATE TABLE public.journal_issues (
     journal_id uuid NOT NULL,
     journal_volume_id uuid,
     creator_id uuid,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     number character varying DEFAULT ''::character varying NOT NULL,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     sort_title integer DEFAULT 0 NOT NULL,
     pending_sort_title integer
 );
@@ -5063,6 +5063,13 @@ CREATE INDEX index_makers_sort_by_name ON public.makers USING btree ((((COALESCE
 
 
 --
+-- Name: index_manifold_oai_records_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_records_on_source ON public.manifold_oai_records USING btree (source_type, source_id);
+
+
+--
 -- Name: index_notification_preferences_on_frequency; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7729,7 +7736,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250527180248'),
 ('20250603192547'),
 ('20250609191642'),
-('20250609192241');
+('20250609192241'),
 ('20250715233614');
 
 
