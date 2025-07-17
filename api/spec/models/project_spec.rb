@@ -442,4 +442,6 @@ RSpec.describe Project, type: :model do
   it_behaves_like "a model with formatted attributes"
 
   it_behaves_like "a collectable"
+
+  it_behaves_like "an OAI record source", :with_metadata, ignore_oai_tag: :as_draft
 end
