@@ -328,7 +328,7 @@ class Project < ApplicationRecord
     unsorted_resources.joins(:tags).distinct.pluck("tags.name")
   end
 
-  def shold_have_oai_record?
+  def should_have_oai_record?
     return false if draft? || restricted_access?
 
     super
