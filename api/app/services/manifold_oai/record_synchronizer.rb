@@ -18,7 +18,7 @@ module ManifoldOAI
 
       record.save!
 
-      Success()
+      Success(record)
     end
 
     private
@@ -28,8 +28,35 @@ module ManifoldOAI
       @record.oai_dc_content = extract_oai_dc_from_source
     end
 
+    def dc_to_internal_metadata_map
+      {
+        title: :series_title,
+        rights: :rights,
+        publisher: :publisher,
+        rightsHolder: :rights_holder,
+      }
+    end
+
     def extract_oai_dc_from_source
-      # To Be Implemented
+      metadata = source.metadata
+      # rubocop:disable Style/BlockDelimiters
+      builder = Nokogiri::XML::Builder.new do |xml|
+        xml['oai_dc'].dc(
+          'xmlns:oai_dc': "http://www.openarchives.org/OAI/2.0/oai_dc/",
+          'xmlns:dc': "http://purl.org/dc/elements/1.1/",
+          'xmlns:xsi':  "http://www.w3.org/2001/XMLSchema-instance",
+          'xsi:schemaLocations': %{
+            http://www.openarchives.org/OAI/2.0/oai_dc/
+            http://www.openarchives.org/OAI/2.0/oai_dc.xsd
+          }
+        ) {
+          dc_to_internal_metadata_map.each do |key, value|
+            xml['oai_dc'].send(key, metadata[value])
+          end
+        }
+      end
+      # rubocop:enable Style/BlockDelimiters
+      builder.to_xml
     end
 
     # @return [void]
