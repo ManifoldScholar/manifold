@@ -5537,6 +5537,13 @@ CREATE INDEX index_makers_sort_by_name ON public.makers USING btree ((((COALESCE
 
 
 --
+-- Name: index_manifold_oai_records_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_records_on_source ON public.manifold_oai_records USING btree (source_type, source_id);
+
+
+--
 -- Name: index_notification_preferences_on_frequency; Type: INDEX; Schema: public; Owner: -
 --
 
