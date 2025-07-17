@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module ManifoldOAI
-  class RecordWrapper < OAI::Provider::Model
+  class RecordWrapper < OAI::Provider::ActiveRecordWrapper
     attr_reader :model
 
     def initialize
-      @model = ManifoldOAIRecord
+      super(ManifoldOAIRecord)
     end
 
     def deleted?(record)
