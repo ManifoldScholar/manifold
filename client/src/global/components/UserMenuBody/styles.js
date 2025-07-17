@@ -35,7 +35,9 @@ export const List = styled.ul`
     inset-inline-end: 0;
 
     &[inert] {
-      transform: translateX(100%);
+      transform: translateX(100vw);
+
+      ${respond(`transform: translateX(100%)`, 50)}
     }
   }
 
