@@ -18,6 +18,7 @@ class Settings < ApplicationRecord
   attribute :rate_limiting, SettingSections::RateLimiting.to_type, default: -> { {} }
   attribute :secrets, SettingSections::Secrets.to_type, default: -> { {} }
   attribute :theme, SettingSections::Theme.to_type, default: -> { {} }
+  attribute :oai, SettingSections::OAI.to_type, default: -> { {} }
 
   validates :singleton_guard, inclusion: [0], uniqueness: true
 
