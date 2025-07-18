@@ -1905,6 +1905,21 @@ CREATE TABLE public.makers (
 
 
 --
+-- Name: manifold_oai_records; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_records (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    oai_dc_content text,
+    deleted_at timestamp without time zone,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
 -- Name: notification_preferences; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3805,6 +3820,14 @@ ALTER TABLE ONLY public.legacy_favorites
 
 ALTER TABLE ONLY public.makers
     ADD CONSTRAINT makers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: manifold_oai_records manifold_oai_records_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_records
+    ADD CONSTRAINT manifold_oai_records_pkey PRIMARY KEY (id);
 
 
 --
@@ -7886,6 +7909,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250603192547'),
 ('20250609191642'),
 ('20250609192241'),
+('20250715233614'),
 ('20250723210143'),
 ('20251016204352'),
 ('20251017174417'),
@@ -7899,5 +7923,3 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20251121202033'),
 ('20251203230443'),
 ('20251203231940');
-
-
