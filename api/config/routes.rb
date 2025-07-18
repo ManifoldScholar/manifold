@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get "auth/:provider/callback", to: "oauth#authorize"
 
   namespace :api do
+    mount ManifoldOAI::RackWrapper => "/oai", as: :oai
     mount Tus::Server => "/files"
 
     namespace :proxy do
