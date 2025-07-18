@@ -106,10 +106,17 @@ Dry::Effects.load_extensions :rspec
 # Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-# Checks for pending migrations before tests are run.
-# If you are not using ActiveRecord, you can remove this line.
+# Checks for pending migrations and applies them before tests are run.
+# If you are not using ActiveRecord, you can remove these lines.
 # Rails 7.1+ added Object#with which conflicts with RSpec matcher chain methods.
 Object.remove_method(:with) if Object.method_defined?(:with)
+
+begin
+  ActiveRecord::Migration.maintain_test_schema!
+rescue ActiveRecord::PendingMigrationError => e
+  puts e.to_s.strip
+  exit 1
+end if Rails.env.test?
 
 ActiveRecord::Migration.maintain_test_schema!
 
