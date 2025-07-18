@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
 import { defaultTransitionProps, respond } from "theme/styles/mixins";
 
-export const Wrapper = styled("div", transientOptions)`
+export const Wrapper = styled.div`
   display: block;
   padding-block: ${({ $reader }) => ($reader ? "34px" : "22px")};
   background-color: var(--color-base-neutral110);
@@ -11,23 +10,11 @@ export const Wrapper = styled("div", transientOptions)`
   &:not(:only-child) {
     margin-block-start: 30px;
   }
-
-  ${({ $library }) =>
-    $library &&
-    `
-      &:hover,
-      &:focus-visible {
-        --PoweredBy-svg-color: var(--color-base-neutral95);
-        --PoweredBy-text-color: var(--color-base-neutral95);
-
-        background-color: var(--hover-color);
-        outline: 0;
-      }
-  `}
 `;
 
-export const LogoWrapper = styled("div", transientOptions)`
-  display: block;
+export const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-size: 17px;
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-semibold);
@@ -59,20 +46,6 @@ export const LogoWrapper = styled("div", transientOptions)`
       ${respond(`flex-direction: row;`, 65)}
     `}
 
-  ${({ $standalone }) =>
-    $standalone &&
-    `
-      display: inline-block;
-
-      &:hover,
-      &:focus-visible {
-        --PoweredBy-svg-color: var(--color-base-neutral-white);
-        --PoweredBy-text-color: var(--color-base-neutral-white);
-
-        outline: 0;
-      }
-  `}
-
   svg {
     position: relative;
     top: -2px;
@@ -103,10 +76,9 @@ export const Copyright = styled.div`
   )}
 `;
 
-export const LogoText = styled("span", transientOptions)`
-  display: inline-block;
+export const LogoText = styled.span`
   color: var(--PoweredBy-text-color);
-  margin-inline-end: .25em;
+  text-decoration: none;
 
   ${({ $neutral }) =>
     $neutral &&
@@ -120,19 +92,34 @@ export const LogoText = styled("span", transientOptions)`
   ${({ $tiny }) =>
     $tiny &&
     `
-      margin-top: 11px;
+      margin-top: 1em;
       font-size: 12px;
-      line-height: 1.4em;
+      line-height: 1.4;
       ${respond(
         `
-          margin-top: 0;
-          font-size: 13px;
+          font-size: 14px;
         `,
         65
       )}
   `}
+
+  ${({ $hidden }) => $hidden && `display: none;`}
+
+  &:is(a) {
+    &:hover {
+      color: var(--color-accent-primary);
+    }
+  }
 `;
 
 export const PostScript = styled.div`
   margin-top: 20px;
+`;
+
+export const AddtlLinks = styled.span`
+  --PoweredBy-text-color: var(--color-base-neutral30);
+
+  > * + * {
+    margin-inline-start: 1rem;
+  }
 `;
