@@ -130,4 +130,28 @@ RSpec.describe ProjectCollection, type: :model do
       end
     end
   end
+
+  describe "oai behavior" do
+    it "creates a set for every collection" do
+      collections = []
+      expect do
+        collections = FactoryBot.create_list :project_collection, 5
+      end.to change(ManifoldOAISet, :count).by(5)
+      expect(collections.any? { |c| c.manifold_oai_set.nil? }).to be false
+    end
+
+    it "does not create sets when project collections are excluded" do
+      expect do
+        FactoryBot.create_list :project_collection, 5, exclude_from_oai: true
+      end.not_to change(ManifoldOAISet, :count)
+    end
+
+    it "deletes OAI records when a project collection is hidden" do
+      collection = FactoryBot.create :project_collection
+      expect do
+        collection.exclude_from_oai = true
+        collection.save!
+      end.to change(ManifoldOAISet, :count).by(-1)
+    end
+  end
 end
