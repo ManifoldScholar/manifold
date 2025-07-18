@@ -5,7 +5,7 @@ module ManifoldOAI
     attr_reader :model
 
     def initialize
-      super()
+      super
 
       @identifier_field = "id"
       @timestamp_field = "updated_at"
