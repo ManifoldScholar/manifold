@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
@@ -7,7 +6,9 @@ import humps from "utils/humps";
 import intersection from "lodash/intersection";
 import reduce from "lodash/reduce";
 import concat from "lodash/concat";
+import has from "lodash/has";
 import difference from "lodash/difference";
+import { licensesAPI } from "api";
 
 export default function MetadataForm({ model, ...restProps }) {
   const { t } = useTranslation();
@@ -129,6 +130,8 @@ export default function MetadataForm({ model, ...restProps }) {
     }
   };
 
+  const showLicense = has(attributes, "license");
+
   return (
     <section>
       <FormContainer.Form model={model} {...restProps}>
@@ -152,6 +155,14 @@ export default function MetadataForm({ model, ...restProps }) {
                   />
                 );
               })}
+              {group.label === "Copyright" && showLicense && (
+                <Form.Picker
+                  label={t("metadata.license")}
+                  name="attributes.license"
+                  options={licensesAPI.index}
+                  placeholder={t("metadata.license_placeholder")}
+                />
+              )}
             </Form.FieldGroup>
           );
         })}

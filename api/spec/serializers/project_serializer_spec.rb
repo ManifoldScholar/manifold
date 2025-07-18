@@ -41,6 +41,7 @@ RSpec.describe V1::ProjectSerializer do
       end
 
       let(:hash) { subject.serializable_hash }
+      let(:expected_attributes) { %i[excludeFromOAI title subtitle darkMode purchasePriceMoney] }
       let(:toc_cb_id) { hash[:data][:relationships][:contentBlocks][:data][0][:id] }
       let(:included_cb) { hash[:included].find { |o| o[:id] == toc_cb_id } }
       let(:text) { object.texts.first }
@@ -69,6 +70,11 @@ RSpec.describe V1::ProjectSerializer do
         text_id = hash[:data][:relationships][:texts][:data].first[:id]
         text = hash[:included].find { |i| i[:id] == text_id }
         expect(text[:meta][:partial]).to be true
+      end
+
+      it "correctly includes expected fields" do
+        hash = subject.serializable_hash
+        expect(hash[:data][:attributes].keys).to include(*expected_attributes)
       end
     end
 
