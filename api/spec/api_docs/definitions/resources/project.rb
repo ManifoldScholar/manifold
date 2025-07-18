@@ -34,7 +34,8 @@ module APIDocs
           restrictions: Types::String,
           rights_holder: Types::String,
           resources_doi: Types::String,
-          citation_override: Types::String
+          citation_override: Types::String,
+          exclude_from_oai: Types::Bool
         }.freeze
 
         REQUIRED_CREATE_ATTRIBUTES = [:title].freeze

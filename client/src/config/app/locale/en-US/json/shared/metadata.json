@@ -17,6 +17,8 @@
       "publisher": "Publisher",
       "citation": "Citation"
     },
+    "license": "License",
+    "license_placeholder": "Select a license if applicable",
     "citation": "Citation",
     "citation_override": "Citation override",
     "citation_override_instructions": "Add a suggested citation. If set, will override any auto-generated citations for this entity. Accepts markdown.",

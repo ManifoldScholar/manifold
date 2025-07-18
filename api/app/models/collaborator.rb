@@ -18,6 +18,8 @@ class Collaborator < ApplicationRecord
   classy_enum_attr :role, class_name: "CollaboratorRole", default: CollaboratorRole::Other
 
   before_update :set_role_priority
+  after_destroy :manage_collaboratable_oai_record!
+  after_save :manage_collaboratable_oai_record!
 
   scope :by_role, ->(role = nil) { where(role: role) if role.present? }
   scope :by_maker, ->(maker = nil) { where(maker: maker) if maker.present? }
@@ -32,7 +34,16 @@ class Collaborator < ApplicationRecord
     "#{role} #{maker}"
   end
 
+  private
+
   def set_role_priority
     self.priority = role.priority
+  end
+
+  def manage_collaboratable_oai_record!
+    return unless collaboratable.present?
+    return if collaboratable.destroyed?
+
+    collaboratable.manage_oai_record! if collaboratable.respond_to?(:manage_oai_record!)
   end
 end

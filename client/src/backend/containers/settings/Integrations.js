@@ -64,6 +64,24 @@ export default function SettingsIntegrationsContainer() {
               placeholder="G-0000000000"
             />
           </Form.FieldGroup>
+          <Form.FieldGroup label={t("settings.oai.header")}>
+            <Form.TextInput
+              label={t("settings.oai.repository_name_label")}
+              name="attributes[oai][repositoryName]"
+              placeholder="Manifold"
+            />
+            <Form.TextInput
+              label={t("settings.oai.admin_email_label")}
+              name="attributes[oai][adminEmail]"
+              placeholder="admin@manifold.app"
+            />
+            <Form.Switch
+              wide
+              label={t("settings.oai.directory_enabled_label")}
+              name="attributes[oai][directoryEnabled]"
+              instructions={t("settings.oai.directory_enabled_instructions")}
+            />
+          </Form.FieldGroup>
           <Form.Save text={t("settings.save")} />
         </FormContainer.Form>
       </Layout.BackendPanel>
