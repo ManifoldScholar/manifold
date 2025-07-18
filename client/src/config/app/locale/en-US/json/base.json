@@ -4,6 +4,8 @@
   },
   "app": {
     "manifold": "Manifold",
-    "manifold_logo": "$t(app.manifold) Logo"
+    "manifold_logo": "$t(app.manifold) Logo",
+    "manifold_directory": "$t(app.manifold) Directory",
+    "manifold_docs":  "Documentation"
   }
 }

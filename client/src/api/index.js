@@ -54,3 +54,4 @@ export bulkDeleteAPI from "./resources/bulkDelete";
 export collaboratorsAPI from "./resources/collaborators";
 export userGroupMembershipsAPI from "./resources/userGroupMemberships";
 export userGroupEntitlementsAPI from "./resources/userGroupEntitlements";
+export licensesAPI from "./resources/licenses";

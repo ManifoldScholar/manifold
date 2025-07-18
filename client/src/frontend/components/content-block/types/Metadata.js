@@ -23,10 +23,15 @@ export default class ProjectContentBlockMetadataBlock extends PureComponent {
   }
 
   render() {
-    const { metadata, metadataFormatted } = this.entity.attributes;
+    const {
+      metadata,
+      metadataFormatted,
+      license,
+      licenseLabel
+    } = this.entity.attributes;
 
-    if (!metadata || isEmpty(metadata)) return null;
+    if ((!metadata || isEmpty(metadata)) && !license) return null;
 
-    return <Meta.List metadata={metadataFormatted} />;
+    return <Meta.List metadata={metadataFormatted} license={licenseLabel} />;
   }
 }

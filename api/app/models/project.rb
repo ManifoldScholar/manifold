@@ -29,6 +29,7 @@ class Project < ApplicationRecord
   include WithConfigurableAvatar
   include HasKeywordSearch
   include ExternallyIdentifiable
+  include ManifoldOAIRecordSource
 
   self.filter_attributes = [:fa_cache]
 
@@ -124,6 +125,8 @@ class Project < ApplicationRecord
   has_one :journal_volume, through: :journal_issue, touch: true
   has_one_readonly :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
   has_one_readonly :current_project_export, through: :current_project_export_status, source: :project_export
+
+  classy_enum_attr :license, class_name: "License", allow_nil: true
 
   delegate :number, to: :journal_issue, allow_nil: true, prefix: true
   delegate :pending_sort_title, to: :journal_issue, allow_nil: true, prefix: true
@@ -332,6 +335,12 @@ class Project < ApplicationRecord
 
   def resource_tags
     unsorted_resources.joins(:tags).distinct.pluck("tags.name")
+  end
+
+  def should_have_oai_record?
+    return false if draft?
+
+    super
   end
 
   def sorted_resource_tags
