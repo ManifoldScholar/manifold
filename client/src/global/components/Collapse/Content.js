@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import useResizeObserver from "use-resize-observer";
 import classNames from "classnames";
 import useCollapseContext from "./useCollapseContext";
 
@@ -26,18 +25,22 @@ function Content(props) {
     className,
     activeClassName,
     focusOnVisible,
-    maxDuration,
-    stubHeight
+    maxDuration
   } = props;
-  const { visible, contentProps, toggleVisible } = useCollapseContext();
-  const { ref: resizeRef, height } = useResizeObserver();
+  const {
+    visible,
+    contentProps: { resizeRef, ...contentProps },
+    toggleVisible,
+    height,
+    stubHeight
+  } = useCollapseContext();
 
   const finalClassName = classNames({
     collapse__content: true,
-    "collapse__content--visible": visible || height < stubHeight,
+    "collapse__content--visible": visible || height <= stubHeight,
     "collapse__content--hidden": !visible,
     "collapse__content--stub": stubHeight,
-    "collapse__content--stub-only": height < stubHeight,
+    "collapse__content--stub-only": height <= stubHeight,
     [className]: className,
     [activeClassName]: activeClassName
   });

@@ -3,8 +3,19 @@ import PropTypes from "prop-types";
 import { ClassNames } from "@emotion/react";
 import useCollapseContext from "./useCollapseContext";
 
+export const inertToggleClass = `
+  cursor: default;
+  pointer-events: none;
+`;
+
 function Toggle({ children, className, activeClassName, as }) {
-  const { visible, toggleProps, labelProps } = useCollapseContext();
+  const {
+    visible,
+    toggleProps,
+    labelProps,
+    height,
+    stubHeight
+  } = useCollapseContext();
   const applyLabelPropsToToggle =
     !React.isValidElement(children) || typeof children === "string";
   const mergedToggleProps = {
@@ -12,15 +23,16 @@ function Toggle({ children, className, activeClassName, as }) {
     ...(applyLabelPropsToToggle ? labelProps : {})
   };
 
-  const ToggleComponent = as ?? "button";
+  const ToggleComponent = as ?? height <= stubHeight ? "div" : "button";
 
   return (
     <ClassNames>
-      {({ cx }) => (
+      {({ cx, css }) => (
         <ToggleComponent
           className={cx({
             [className]: !!className,
-            [activeClassName]: activeClassName ? visible : false
+            [activeClassName]: activeClassName ? visible : false,
+            [css(inertToggleClass)]: height <= stubHeight
           })}
           {...mergedToggleProps}
         >

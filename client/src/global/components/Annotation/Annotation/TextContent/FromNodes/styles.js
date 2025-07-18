@@ -24,6 +24,12 @@ export const Overlay = styled.div`
   .notes-list & {
     --Overlay-bg: rgba(236, 236, 236, 1);
     --Overlay-bg-transparent: rgba(236, 236, 236, 0);
+
+    ${({ $light }) =>
+      $light &&
+      `  --Overlay-bg: rgba(247, 247, 247, 1);
+      --Overlay-bg-transparent: rgba(247, 247, 247, 0);
+  `}
   }
 
   .scheme-dark & {
