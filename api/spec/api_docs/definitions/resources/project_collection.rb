@@ -10,6 +10,10 @@ module APIDocs
           :icon
         ].freeze
 
+        METADATA_ATTRIBUTES = {
+          exclude_from_oai: Types::Bool
+        }.freeze
+
         class << self
           include APIDocs::Definitions::Resource
         end
