@@ -3,16 +3,15 @@
 RSpec.describe "OAI PMH List Records", type: :request do
   include_context "OAI testing"
 
-  let_it_be(:old_records) { FactoryBot.create_list(:manifold_oai_record, 5, updated_at: 6.days.ago) }
-  let_it_be(:new_records) { FactoryBot.create_list(:manifold_oai_record, 3, updated_at: 3.days.ago) }
+  let_it_be(:records) { FactoryBot.create_list(:project, 8, :with_metadata).map(&:manifold_oai_record) }
 
   let(:opts) { {} }
 
-  before do
-    ManifoldOAIRecord.where.not(id: old_records.pluck(:id).concat(new_records.pluck(:id))).delete_all
-  end
-
   subject(:response) { client.list_records(opts) }
+
+  before do
+    ManifoldOAIRecord.where.not(id: records.pluck(:id)).delete_all
+  end
 
   it { is_expected.to be_an_instance_of OAI::ListRecordsResponse }
 
@@ -23,8 +22,24 @@ RSpec.describe "OAI PMH List Records", type: :request do
   context "when given filter options" do
     let(:opts) { { from: 5.days.ago, until: 2.days.ago } }
 
+    before do
+      ManifoldOAIRecord.limit(3).update_all(updated_at: 4.days.ago)
+    end
+
     it "only finds records between the two dates" do
       expect(response.count).to eq 3
+    end
+  end
+
+  context "when part of a set" do
+    let(:opts) { { set: "projects" } }
+
+    before do
+      ManifoldOAIRecord.limit(3).each { |r| r.sets = [] }
+    end
+
+    it "finds all projects" do
+      expect(response.count).to eq 5
     end
   end
 end
