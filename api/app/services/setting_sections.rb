@@ -17,6 +17,7 @@ module SettingSections
     :rate_limiting,
     :secrets,
     :theme,
+    :oai
   ].freeze
 
   register "classes", memoize: true do

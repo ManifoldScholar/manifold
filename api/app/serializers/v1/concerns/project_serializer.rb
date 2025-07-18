@@ -82,6 +82,11 @@ module V1
           typed_attribute :social_description, Types::String.optional
           typed_attribute :social_title, Types::String.optional
           typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
+          typed_attribute :exclude_from_directory, Types::Bool
+          typed_attribute :license, Types::String.optional
+          typed_attribute :license_label, Types::String.optional do |object|
+            object.license.presence&.label
+          end
 
           typed_has_one :journal
           typed_has_one :journal_volume, record_type: "journalVolume"

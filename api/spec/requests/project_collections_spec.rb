@@ -87,6 +87,7 @@ RSpec.describe "Project Collections API", type: :request do
       describe "the response" do
         context "body" do
           it("contains the updated title") { expect_updated_param("title", "some title") }
+          it("contains the updated OAI exclusion status") { expect_updated_param("excludeFromOAI", "true", true) }
         end
 
         it "has a 200 OK status code" do
