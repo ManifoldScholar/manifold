@@ -6,6 +6,7 @@ class ProjectCollection < ApplicationRecord
   include Entitleable
   include Filterable
   include HasFormattedAttributes
+  include ManifoldOAISetSource
   include ProjectOrdering
   include SerializedAbilitiesFor
   include Sluggable

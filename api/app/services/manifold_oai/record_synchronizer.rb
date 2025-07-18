@@ -4,7 +4,7 @@ module ManifoldOAI
   class RecordSynchronizer
     include Dry::Monads[:result]
     include Dry::Initializer[undefined: false].define -> do
-      param :source, Types::Source
+      param :source, Types::RecordSource
     end
 
     # @return [ManifoldOAIRecord]
@@ -17,6 +17,8 @@ module ManifoldOAI
       assign_metadata!
 
       record.save!
+
+      maybe_link_project!
 
       Success(record)
     end
@@ -62,6 +64,16 @@ module ManifoldOAI
     # @return [void]
     def prepare!
       @record = ManifoldOAIRecord.where(source:).first_or_initialize
+      @projects_set = ManifoldOAISet.fetch_projects!
+    end
+
+    # @return [void]
+    def maybe_link_project!
+      # :nocov:
+      return unless source.kind_of?(Project)
+      # :nocov:
+
+      @projects_set.link! record
     end
   end
 end
