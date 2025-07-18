@@ -8,6 +8,7 @@ export default `
       --collapse-durationAfterDelay: 0;
 
       &--visible {
+        overflow: hidden;
         max-height: var(--collapse-height);
         opacity: 1;
         transition:

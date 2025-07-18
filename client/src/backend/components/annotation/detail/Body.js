@@ -15,9 +15,9 @@ export default function AnnotationBody({ body }) {
         label={t("common.content")}
         id="annotation-body-header"
       />
-      <Collapse>
+      <Collapse stubHeight={300}>
         <Styled.Toggle>
-          <Styled.Content stubHeight={300}>
+          <Styled.Content>
             {body && (
               <Styled.Body className="entity-row__title entity-row__title">
                 {body}

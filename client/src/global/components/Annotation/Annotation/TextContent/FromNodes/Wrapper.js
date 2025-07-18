@@ -2,13 +2,13 @@ import React from "react";
 import Collapse from "global/components/Collapse";
 import * as Styled from "./styles";
 
-export default function FromNodesWrapper({ children }) {
+export default function FromNodesWrapper({ children, overlayLight }) {
   return (
-    <Collapse>
-      <Styled.Toggle>
-        <Styled.Content stubHeight={200}>
+    <Collapse stubHeight={200}>
+      <Styled.Toggle inertClassName={Styled.inertToggleClass}>
+        <Styled.Content>
           {children}
-          <Styled.Overlay />
+          <Styled.Overlay $light={overlayLight} />
         </Styled.Content>
       </Styled.Toggle>
     </Collapse>
