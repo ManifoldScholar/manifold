@@ -28,6 +28,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.acronym "HTTP"
   inflect.acronym "API"
   inflect.acronym "JSON"
+  inflect.acronym "OAI"
 end
 
 Rails.autoloaders.each do |autoloader|
