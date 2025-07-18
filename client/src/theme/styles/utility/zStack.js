@@ -11,7 +11,7 @@ export default `
 
   .dialog-wrapper,
   .range-picker__dialog {
-    z-index: 600;
+    z-index: 625;
   }
 
   .press-header {
