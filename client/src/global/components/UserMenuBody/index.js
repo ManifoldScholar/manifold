@@ -69,7 +69,7 @@ const UserMenuBody = forwardRef(
         />
         <Item
           as="button"
-          title={t("navigation.user.logout")}
+          title={t("navigation.user.log_out")}
           icon="logout24"
           onClick={() => {
             callbacks.logout();

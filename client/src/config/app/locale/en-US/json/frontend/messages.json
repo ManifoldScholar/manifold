@@ -19,8 +19,6 @@
       "annotation": "{{creator}} annotated \"{{section}}\" in <text></text> on <date></date>.",
       "source": "\"{{section}}\" in <text></text>"
     },
-    "empty_resource_annotations": "No one has annotated a text with this resource yet.",
-    "empty_resource_collection_annotations": "No one has annotated a text with this resource collection yet.",
     "reading_group": {
       "privacy_change": {
         "heading": "Confirm Privacy Change",

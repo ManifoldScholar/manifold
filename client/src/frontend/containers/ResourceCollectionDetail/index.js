@@ -161,7 +161,7 @@ export default function ResourceCollectionDetailContainer({
           </>
         ) : (
           <Styled.EmptyMessage>
-            {t("messages.empty_resource_collection_annotations")}
+            {t("placeholders.resource_collection_annotations")}
           </Styled.EmptyMessage>
         )}
       </Styled.Annotations>

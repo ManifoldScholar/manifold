@@ -5,7 +5,7 @@
       "sign_out": "Sign Out",
       "log_in": "Log In",
       "login": "Login",
-      "login_to_manifold": "$(t.user.navigation.login) to Manifold",
+      "log_in_to_manifold": "$(t.user.navigation.log_in) to Manifold",
       "log_out": "Log Out",
       "logout": "Logout",
       "my_starred": "My Starred",

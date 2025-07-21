@@ -7,12 +7,15 @@
       "settings": "<0>Edit settings and invite members:</0><1>You can edit the settings for your group at any time. Change your group’s name, privacy settings, or email notifications. You can also see your group’s invitation code, or use an invitation URL, which makes inviting members as easy as sharing its invitation web page address.</1>"
     },
     "resource_collection": "This collection has no resources.",
+    "resource_collection_annotations": "No one has annotated a text with this resource collection yet.",
+    "resource_annotations": "No one has annotated a text with this resource yet.",
     "table_of_contents": "This text does not have a table of contents.",
     "comments": {
       "edit": "Edit this comment…",
       "reply": "Reply to this commment…",
       "discuss_entity": "Discuss this {{entity}}…",
-      "unauthenticated": "Login to post a comment",
+      "unauthenticated": "Log in to post a comment",
+      "unauthenticated_full": "<0>Log in</0> to view and add comments.",
       "deleted": "This comment was deleted."
     },
     "my_starred": {
