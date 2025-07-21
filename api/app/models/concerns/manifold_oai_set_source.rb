@@ -25,6 +25,22 @@ module ManifoldOAISetSource
     true
   end
 
+  def set_spec
+    title.gsub(/[^a-z\\s+]/i, "").camelize(:lower)
+  end
+
+  def set_name
+    title
+  end
+
+  def set_description
+    ""
+  end
+
+  def set_category
+    self.class.name.camelize(:lower)
+  end
+
   # @see ManifoldOAI::SetSynchronizer
   # @return [void]
   def synchronize_oai_set!

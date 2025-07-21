@@ -42,4 +42,21 @@ RSpec.describe "OAI PMH List Records", type: :request do
       expect(response.count).to eq 5
     end
   end
+
+  context "When the set is a project collection" do
+    let(:collection_project) { FactoryBot.create(:collection_project) }
+    let(:opts) { { set: collection_project.project_collection.manifold_oai_set.spec } }
+
+    it "finds the expected project" do
+      expect(response.count).to eq 1
+    end
+
+    it "does not find the expected record when the link is deleted" do
+      collection_project.destroy!
+
+      expect do
+        client.list_records(opts)
+      end.to raise_error(OAI::NoMatchException)
+    end
+  end
 end
