@@ -11,6 +11,7 @@ module ManifoldOAI
       param :set, Types.Instance(::ManifoldOAISet)
 
       param :records_or_sources, RecordsOrSources
+      option :link_source, optional: true
     end
 
     delegate :id, to: :set, prefix: :manifold_oai_set
@@ -53,8 +54,9 @@ module ManifoldOAI
       return if record.blank?
 
       manifold_oai_record_id = record.id
+      source_info = link_source ? {source_id: link_source.id, source_type: link_source.class.name } : {}
 
-      @tuples << { manifold_oai_set_id:, manifold_oai_record_id:, }
+      @tuples << { manifold_oai_set_id:, manifold_oai_record_id:, **source_info }
     end
 
     def upsert!
