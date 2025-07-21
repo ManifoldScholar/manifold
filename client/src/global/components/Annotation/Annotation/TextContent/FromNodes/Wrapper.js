@@ -5,7 +5,7 @@ import * as Styled from "./styles";
 export default function FromNodesWrapper({ children, overlayLight }) {
   return (
     <Collapse stubHeight={200}>
-      <Styled.Toggle inertClassName={Styled.inertToggleClass}>
+      <Styled.Toggle>
         <Styled.Content>
           {children}
           <Styled.Overlay $light={overlayLight} />
