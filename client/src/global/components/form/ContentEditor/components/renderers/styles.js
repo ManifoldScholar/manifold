@@ -51,7 +51,7 @@ export const Content = styled.img`
   ${({ $selected }) => $selected && `${defaultFocusStyle} outline-offset: 1px;`}
 `;
 export const ImageWrapper = styled.span`
-  display: inline-block;
+  display: inline;
   width: max-content;
   max-width: 100%;
   position: relative;
