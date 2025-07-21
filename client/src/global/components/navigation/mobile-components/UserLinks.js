@@ -57,12 +57,12 @@ class UserLinks extends PureComponent {
               <div className="nested-nav__grid-item">
                 <Avatar />
                 <span className="nested-nav__button-text">
-                  {t("navigation.user.login")}
+                  {t("navigation.user.log_in")}
                 </span>
               </div>
             </button>
             <span id="user-menu-login-mobile" className="screen-reader-text">
-              {t("navigation.user.login_to_manifold")}
+              {t("navigation.user.log_in_to_manifold")}
             </span>
           </li>
         </ul>
@@ -138,7 +138,7 @@ class UserLinks extends PureComponent {
         />
         <Link
           as="button"
-          title={t("navigation.user.logout")}
+          title={t("navigation.user.log_out")}
           icon="logout24"
           onClick={this.handleLogOutClick}
         />
