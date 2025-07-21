@@ -19,6 +19,11 @@ RSpec.describe "OAI PMH List Records", type: :request do
     expect(response.count).to eq 8
   end
 
+  it "does not find excluded records" do
+    FactoryBot.create_list :project, 3, exclude_from_oai: true
+    expect(response.count).to eq 8
+  end
+
   context "when given filter options" do
     let(:opts) { { from: 5.days.ago, until: 2.days.ago } }
 

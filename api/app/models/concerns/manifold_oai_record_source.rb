@@ -14,6 +14,8 @@ module ManifoldOAIRecordSource
   def manage_oai_record!
     if should_have_oai_record?
       synchronize_oai_record!
+    elsif exclude_from_oai
+      ManifoldOAIRecord.where(source: self).delete_all
     else
       ManifoldOAIRecord.where(source: self, deleted_at: nil).update_all(deleted_at: Time.current)
     end
@@ -22,7 +24,7 @@ module ManifoldOAIRecordSource
   # @abstract This method should be overridden in models where it is included
   #  in order to determine whether or not a record should exist.
   def should_have_oai_record?
-    true
+    !exclude_from_oai
   end
 
   # @see ManifoldOAI::RecordSynchronizer

@@ -18,5 +18,10 @@ RSpec.describe "OAI PMH List Sets", type: :request do
     it "finds a set for every project collection" do
       expect(response.count).to eq(num_collections + 1) # The "projects" set should always exist
     end
+
+    it "does not find excluded collections" do
+      FactoryBot.create_list :project_collection, 3, exclude_from_oai: true
+      expect(response.count).to eq(num_collections + 1) # The "projects" set should always exist
+    end
   end
 end
