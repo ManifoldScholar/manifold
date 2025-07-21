@@ -5,6 +5,7 @@ class CreateManifoldOAISetLinks < ActiveRecord::Migration[7.0]
     create_table :manifold_oai_set_links, id: :uuid do |t|
       t.references :manifold_oai_set, null: false, foreign_key: { on_delete: :cascade }, type: :uuid, index: false
       t.references :manifold_oai_record, null: false, foreign_key: { on_delete: :cascade }, type: :uuid, index: false
+      t.references :source, polymorphic: true, null: true, type: :uuid, index: { unique: true }
 
       t.timestamps null: false, default: -> { "CURRENT_TIMESTAMP" }
 
