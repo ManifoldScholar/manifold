@@ -7,6 +7,7 @@ module ManifoldOAIRecordSource
     has_one :manifold_oai_record, as: :source, inverse_of: :source, dependent: :nullify
 
     after_save :manage_oai_record!
+    around_destroy :mark_oai_record_deleted!
   end
 
   # @api private
@@ -19,6 +20,12 @@ module ManifoldOAIRecordSource
     else
       ManifoldOAIRecord.where(source: self, deleted_at: nil).update_all(deleted_at: Time.current)
     end
+  end
+
+  def mark_oai_record_deleted!
+    record = manifold_oai_record
+    yield
+    record&.touch(:deleted_at)
   end
 
   # @abstract This method should be overridden in models where it is included
