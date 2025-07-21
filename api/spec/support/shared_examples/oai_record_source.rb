@@ -16,6 +16,19 @@ RSpec.shared_examples_for "an OAI record source" do |*factory_tags, ignore_oai_t
     end
   end
 
+  it "does not create a record when exclude_from_oai is selected" do
+    source = FactoryBot.create(described_class.name.underscore, *factory_tags, exclude_from_oai: true)
+    expect(source.manifold_oai_record).to be_nil
+  end
+
+  it "deletes existing record when exclude_from_oai is toggled" do
+    source_with_record
+    expect do
+      source_with_record.exclude_from_oai = true
+      source_with_record.save!
+    end.to change(ManifoldOAIRecord, :count).by(-1)
+  end
+
   it "properly nullifies OAI record relationship when source is deleted" do
     record = source_with_record.manifold_oai_record
     expect { source_with_record.destroy }.not_to change(ManifoldOAIRecord, :count)

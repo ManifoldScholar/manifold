@@ -14,6 +14,8 @@ module ManifoldOAISetSource
   def manage_oai_set!
     if should_have_oai_set?
       synchronize_oai_set!
+    elsif exclude_from_oai
+      ManifoldOAISet.where(source: self).delete_all
     else
       ManifoldOAISet.where(source: self).destroy_all
     end
@@ -22,7 +24,7 @@ module ManifoldOAISetSource
   # @abstract This method should be overridden in models where it is included
   #  in order to determine whether or not a set should exist.
   def should_have_oai_set?
-    true
+    !exclude_from_oai
   end
 
   def set_spec
