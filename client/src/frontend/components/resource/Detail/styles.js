@@ -14,7 +14,7 @@ import { transientOptions } from "helpers/emotionHelpers";
 export const Container = styled.section`
   ${containerPrototype}
   padding-block-start: ${fluidScale("63px", "48px")};
-  padding-block-end: ${fluidScale("55px", "40px")};
+  padding-block-end: var(--container-padding-block-end);
 `;
 
 export const Grid = styled.div`
