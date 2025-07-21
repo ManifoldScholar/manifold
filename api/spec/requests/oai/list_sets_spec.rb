@@ -11,4 +11,12 @@ RSpec.describe "OAI PMH List Sets", type: :request do
   it "finds default sets" do
     expect(response.count).to eq 1
   end
+
+  context "when there are multiple project collections" do
+    let_it_be(:num_collections) { 5 }
+    let_it_be(:collections) { FactoryBot.create_list :project_collection, 5 }
+    it "finds a set for every project collection" do
+      expect(response.count).to eq(num_collections + 1) # The "projects" set should always exist
+    end
+  end
 end

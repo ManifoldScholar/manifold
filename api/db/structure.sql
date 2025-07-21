@@ -1927,6 +1927,8 @@ CREATE TABLE public.manifold_oai_set_links (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     manifold_oai_set_id uuid NOT NULL,
     manifold_oai_record_id uuid NOT NULL,
+    source_type character varying,
+    source_id uuid,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -5220,6 +5222,13 @@ CREATE INDEX index_makers_sort_by_name ON public.makers USING btree ((((COALESCE
 --
 
 CREATE UNIQUE INDEX index_manifold_oai_records_on_source ON public.manifold_oai_records USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_set_links_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_set_links_on_source ON public.manifold_oai_set_links USING btree (source_type, source_id);
 
 
 --

@@ -14,9 +14,9 @@ module ManifoldOAI
     def call
       prepare!
 
-      # assign_metadata!
+      assign_metadata!
 
-      # set.save!
+      set.save!
 
       Success(set)
     end
@@ -25,6 +25,9 @@ module ManifoldOAI
 
     # @return [void]
     def assign_metadata!
+      set.spec = "#{source.set_category}:#{source.set_spec}"
+      set.name = source.set_name
+      set.description = source.set_description
     end
 
     # @return [void]
