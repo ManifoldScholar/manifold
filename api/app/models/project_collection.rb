@@ -108,6 +108,10 @@ class ProjectCollection < ApplicationRecord
     end
   end
 
+  def set_description
+    description
+  end
+
   private
 
   def valid_homepage_start_date!
