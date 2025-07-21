@@ -43,6 +43,15 @@ RSpec.shared_examples_for "an OAI record source" do |*factory_tags, ignore_oai_t
     end.not_to change(record, :oai_dc_content)
   end
 
+  it "sets the OAI record deleted at time when the source is deleted" do
+    record = source_with_record.manifold_oai_record
+    expect do
+      source_with_record.destroy
+      record.reload
+    end.to change(record, :deleted_at)
+    expect(record.deleted_at).not_to be_nil
+  end
+
   it "updates record when source record is updated" do
     record = source_with_record.manifold_oai_record
     expect do
