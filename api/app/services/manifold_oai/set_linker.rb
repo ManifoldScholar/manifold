@@ -54,7 +54,7 @@ module ManifoldOAI
       return if record.blank?
 
       manifold_oai_record_id = record.id
-      source_info = link_source ? {source_id: link_source.id, source_type: link_source.class.name } : {}
+      source_info = link_source ? { source_id: link_source.id, source_type: link_source.class.name } : {}
 
       @tuples << { manifold_oai_set_id:, manifold_oai_record_id:, **source_info }
     end

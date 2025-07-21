@@ -327,7 +327,7 @@ class Project < ApplicationRecord
   end
 
   def should_have_oai_record?
-    return false if draft? || restricted_access?
+    return false if draft?
 
     super
   end
