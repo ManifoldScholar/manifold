@@ -71,7 +71,8 @@ class AnnotationsFilter {
       } = annotation.attributes;
       const isHighlight = format === "highlight";
       const isAnnotation = format === "annotation";
-      const isResource = format === "resource";
+      const isResource =
+        format === "resource" || format === "resource_collection";
       const isInGroup = Boolean(readingGroupId);
       if (isHighlight && isCreator && this.hideYourHighlights) return false;
       if (isHighlight && !isCreator) return false;
