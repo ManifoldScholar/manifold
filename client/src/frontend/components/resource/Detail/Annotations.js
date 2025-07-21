@@ -1,10 +1,15 @@
+import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useFetch, usePaginationState } from "hooks";
 import { resourcesAPI } from "api";
 import Utility from "global/components/utility";
 import AnnotationList from "global/components/Annotation/List/Default";
+import { entityStoreActions } from "actions";
 import * as Styled from "./styles";
+
+const { flush } = entityStoreActions;
 
 function ResourceDetailAnnotations() {
   const { t } = useTranslation();
@@ -12,6 +17,8 @@ function ResourceDetailAnnotations() {
   const { resourceId } = useParams();
 
   const [annotationsPagination, setAnnotationsPage] = usePaginationState(1, 5);
+
+  const filters = useMemo(() => ({ orphaned: false }), []);
 
   const {
     data: annotations,
@@ -21,7 +28,7 @@ function ResourceDetailAnnotations() {
     request: [
       resourcesAPI.annotations,
       resourceId,
-      undefined,
+      filters,
       annotationsPagination
     ],
     options: {
@@ -30,6 +37,12 @@ function ResourceDetailAnnotations() {
     },
     dependencies: [resourceId]
   });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => dispatch(flush("RESOURCE_DETAIL_ANNOTATIONS"));
+  }, [dispatch]);
 
   const remainingAnnotations =
     annotationsMeta?.pagination?.totalCount -
