@@ -18,7 +18,6 @@ import {
   useFetch,
   useListQueryParams,
   useListFilters,
-  useCurrentUser,
   usePaginationState
 } from "hooks";
 import config from "config";
@@ -56,7 +55,6 @@ export default function ResourceCollectionDetailContainer({
   });
 
   const [annotationsPagination, setAnnotationsPage] = usePaginationState(1, 5);
-  const currentUser = useCurrentUser() ?? { id: null };
 
   const {
     data: annotations,
@@ -73,7 +71,7 @@ export default function ResourceCollectionDetailContainer({
       requestKey: "RESOURCE_COLLECTION_DETAIL_ANNOTATIONS",
       appends: "RESOURCE_COLLECTION_DETAIL_ANNOTATIONS"
     },
-    dependencies: [currentUser.id, resourceCollectionId],
+    dependencies: [resourceCollectionId],
     condition: !config.environment.isServer
   });
   /* Fetch these in the client only, so we don't end up with duplicates when navigating between collection resources using back/fwd. */
