@@ -1,4 +1,3 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -49,10 +48,6 @@ export default function ResourceDetail({ resource, projectTitle }) {
     remainingAnnotations > 5 ? 5 : remainingAnnotations;
 
   const canEngagePublicly = resource?.attributes?.abilities?.engagePublicly;
-
-  const [activeTab, setActiveTab] = useState(
-    canEngagePublicly ? "comments" : "annotations"
-  );
 
   if (!resource) return null;
 
@@ -112,7 +107,7 @@ export default function ResourceDetail({ resource, projectTitle }) {
               <Styled.ListHeader>
                 {t("glossary.annotation_title_case_other")}
               </Styled.ListHeader>
-              {!!annotations?.length ? (
+              {annotations?.length ? (
                 <>
                   <AnnotationList
                     annotations={annotations}
