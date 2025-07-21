@@ -99,9 +99,9 @@ export default function Header(props) {
         </span>
         {mobileOptionsExpanded ? (
           <Utility.IconComposer
-            icon="close32"
+            icon="close24"
             size="default"
-            className="reader-header__options-button-icon"
+            className="reader-header__options-button-icon reader-header__options-button-icon--close"
           />
         ) : (
           <Utility.IconComposer

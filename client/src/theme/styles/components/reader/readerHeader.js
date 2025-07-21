@@ -189,21 +189,32 @@ export default `
     display: none;
     align-items: center;
     justify-content: flex-end;
+    gap: 10px;
     width: fit-content;
     padding-inline: 12px;
 
-    ${respond(`display: inline;`, ZOOM_BREAKPOINT)}
+    ${respond(`display: inline-flex;`, ZOOM_BREAKPOINT)}
     ${respond(`display: none;`, 50)}
 
     > span {
       display: none;
-      ${respond(`display: inline;`, 20)}
+      ${respond(`display: inline-flex;`, 20)}
     }
   }
 
   &__options-button-icon {
     &--options {
       ${respond(`display: none;`, 20)}
+    }
+
+    &--close {
+      ${respond(
+        `
+        inline-size: 24px;
+        block-size: 24px;
+      `,
+        20
+      )}
     }
   }
 
