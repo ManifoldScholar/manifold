@@ -124,12 +124,28 @@ export class ReaderContainer extends Component {
     ) {
       window.scrollTo(0, 0);
     }
+
+    if (
+      !prevProps.authentication.authToken &&
+      this.props.authentication.authToken
+    ) {
+      this.refetchText();
+    }
   }
 
   componentWillUnmount() {
     this.props.dispatch(flush(requests.rText));
     this.props.dispatch(flush(requests.rMyAnnotationsForText));
     this.props.dispatch(flush(requests.rMyFilteredAnnotationsForText));
+  }
+
+  refetchText() {
+    const { textId } = this.props.match.params;
+
+    const call = textsAPI.show(textId);
+    this.props.dispatch(
+      request(call, requests.rText, { refreshes: requests.rText })
+    );
   }
 
   maybeFetchReadingGroups() {

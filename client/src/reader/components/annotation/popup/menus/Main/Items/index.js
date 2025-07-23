@@ -1,13 +1,13 @@
 import Annotate from "./Annotate";
 import CurrentReadingGroup from "./CurrentReadingGroup";
 import Highlight from "./Highlight";
-import Notate from "./Notate";
+import Resource from "./Resource";
 import Share from "./Share";
 
 export default {
   Annotate,
   CurrentReadingGroup,
   Highlight,
-  Notate,
+  Resource,
   Share
 };

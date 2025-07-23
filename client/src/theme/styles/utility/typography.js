@@ -47,6 +47,8 @@ const readerFontSizeClasses = readerFontSizes
         desktop,
         mobile
       )} * clamp(0.5, var(--font-size-adjustment), 1.5));
+
+      --reader-font-size-index: ${index};
     }
   `
   )

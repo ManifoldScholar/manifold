@@ -1,9 +1,8 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
-import ResourceList from "frontend/components/resource-list";
+import ResourceList from "frontend/components/resource-list/List";
 import EntityCollection from "../EntityCollection";
 import * as shapes from "../shapes";
 
@@ -27,10 +26,11 @@ function ProjectResourcesEntityCollection({
       filterProps={showFilters ? filterProps : null}
       containerWrapPoint="1120px"
       BodyComponent={props => (
-        <ResourceList.Cards
+        <ResourceList
           project={project}
           resources={resources}
           itemHeadingLevel={itemHeadingLevel}
+          renderAsLink
           {...props}
         />
       )}
@@ -66,7 +66,7 @@ ProjectResourcesEntityCollection.propTypes = {
   project: PropTypes.object,
   filterProps: shapes.filters,
   paginationProps: shapes.pagination,
-  itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+  itemHeadingLevel: PropTypes.oneOf([2, 3])
 };
 
 export default ProjectResourcesEntityCollection;

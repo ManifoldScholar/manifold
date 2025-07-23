@@ -1,7 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
 import Template from "../../Template";
-import ResourceCollection from "frontend/components/resource-collection";
+import Cover from "frontend/components/resource-collection/Cover";
 import lh from "helpers/linkHandler";
 import * as Styled from "frontend/components/resource-collection-list/Grid/styles";
 
@@ -14,7 +13,7 @@ function CollectedResourceCollections(props) {
         <Styled.Grid>{children(restProps)}</Styled.Grid>
       )}
       ResponseComponent={({ response }) => (
-        <ResourceCollection.Cover
+        <Cover
           urlCreator={collection => {
             return lh.link(
               "frontendProjectResourceCollection",

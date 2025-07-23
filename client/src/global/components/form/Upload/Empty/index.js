@@ -9,7 +9,8 @@ export default class FormUploadEmpty extends PureComponent {
     accepts: PropTypes.object,
     placeholder: PropTypes.string,
     progress: PropTypes.string,
-    uploadError: PropTypes.string
+    uploadError: PropTypes.string,
+    instructionsSingleLine: PropTypes.bool
   };
 
   static defaultProps = {
@@ -32,13 +33,18 @@ export default class FormUploadEmpty extends PureComponent {
                 <Trans
                   i18nKey="forms.upload.progress"
                   values={{ percent: this.props.progress }}
+                  components={this.props.instructionsSingleLine ? [] : [<br />]}
                 />
               </span>
             ) : (
               <>
                 <Trans
                   i18nKey="forms.upload.instructions"
-                  components={[<Prompt />]}
+                  components={
+                    this.props.instructionsSingleLine
+                      ? [<Prompt />]
+                      : [<Prompt />, <br />]
+                  }
                 />
                 {this.props.uploadError ? (
                   <Styled.Error>{this.props.uploadError}</Styled.Error>

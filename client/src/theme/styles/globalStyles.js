@@ -9,7 +9,7 @@ import printStyles from "./print";
 import rteStyles from "./utility/rte";
 
 export default css`
-@layer manifold, stylesheets, editor;
+@layer manifold, custom-styles, editor;
 
 @layer manifold {
   ${fonts}

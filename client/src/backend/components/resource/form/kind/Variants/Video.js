@@ -46,15 +46,6 @@ export default class ResourceFormKindVariantsVideo extends PureComponent {
             {...this.props}
           />
         )}
-        <Form.Upload
-          layout="square"
-          label="Thumbnail Image"
-          accepts="images"
-          readFrom="attributes[variantThumbnailStyles][small]"
-          name="attributes[variantThumbnail]"
-          remove="attributes[removeVariantThumbnail]"
-          {...this.props}
-        />
       </>
     );
   }

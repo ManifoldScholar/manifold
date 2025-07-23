@@ -1,10 +1,11 @@
-import React from "react";
 import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
 import { useEventTracker, useShare, useCopyLinkToSelection } from "hooks";
 import { useMetaTitle } from "frontend/components/entity/useEntityHeadContent";
 import { t } from "i18next";
+import { Back as BackButton } from "./ReadingGroup/styles";
+import * as Styled from "./styles";
 
 function ShareMenu({
   menu,
@@ -64,42 +65,43 @@ function ShareMenu({
       direction={direction}
       onKeyDown={onKeyDown}
     >
-      {canCite && (
-        <MenuItem
-          menu={{ ...menu, visible }}
-          onClick={handleCiteClick}
-          kind="any"
-          label={t("reader.menus.popup.cite")}
-          srLabel={t("reader.menus.popup.cite_selection")}
-          icon="socialCite32"
-        />
-      )}
-      {canShare && (
-        <MenuItem
-          menu={{ ...menu, visible }}
-          onClick={handleShareClick}
-          kind="any"
-          label={t("reader.menus.popup.app_share")}
-          srLabel={t("reader.menus.popup.share_selection")}
-          icon="link24"
-        />
-      )}
-      <MenuItem
-        menu={{ ...menu, visible }}
-        onClick={handleCopyClick}
-        kind="any"
-        label={copyLabel}
-        srLabel={copySrLabel}
-        icon={copyIcon}
-      />
-      <MenuItem
+      <BackButton
         menu={{ ...menu, visible }}
         onClick={onBackClick}
         kind="any"
         label={t("navigation.back")}
         icon="arrowLeft32"
-        className="annotation-popup__button--secondary-dark"
       />
+      <Styled.Actions>
+        {canCite && (
+          <MenuItem
+            menu={{ ...menu, visible }}
+            onClick={handleCiteClick}
+            kind="any"
+            label={t("reader.menus.popup.cite")}
+            srLabel={t("reader.menus.popup.cite_selection")}
+            icon="socialCite32"
+          />
+        )}
+        {canShare && (
+          <MenuItem
+            menu={{ ...menu, visible }}
+            onClick={handleShareClick}
+            kind="any"
+            label={t("reader.menus.popup.app_share")}
+            srLabel={t("reader.menus.popup.share_selection")}
+            icon="link24"
+          />
+        )}
+        <MenuItem
+          menu={{ ...menu, visible }}
+          onClick={handleCopyClick}
+          kind="any"
+          label={copyLabel}
+          srLabel={copySrLabel}
+          icon={copyIcon}
+        />
+      </Styled.Actions>
     </Menu>
   );
 }

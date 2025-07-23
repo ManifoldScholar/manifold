@@ -30,6 +30,8 @@ class IngestionSource < ApplicationRecord
     KIND_PUBLICATION_RESOURCE
   ].freeze
 
+  CONFIG = Rails.configuration.manifold.attachments.validations
+
   scope :by_attachment_id, ->(attachment_id) { where(arel_json_property_eq(:attachment_data, :id, attachment_id)) }
   scope :by_kind, ->(kind) { where(kind: kind) }
   scope :cover_images, -> { by_kind(:cover_image) }
@@ -51,6 +53,7 @@ class IngestionSource < ApplicationRecord
       order(updated_at: :desc)
     end
   end
+  scope :by_format, ->(format) { filtered_by_file_format(format) }
 
   has_keyword_search! against: TYPEAHEAD_ATTRIBUTES
 
@@ -120,6 +123,21 @@ class IngestionSource < ApplicationRecord
     # @return [IngestionSource]
     def find_by_attachment_id(attachment_id)
       by_attachment_id(attachment_id).first!
+    end
+
+    # @param [String] format
+    # @return [ActiveRecord::Relation]
+    def filtered_by_file_format(format)
+      return all unless format.present?
+
+      allowed_extensions = CONFIG.fetch(format).allowed_ext
+
+      where_clause = allowed_extensions.map do |ext|
+        content_types = ::MIME::Types.select { |mt| mt.extensions.include?(ext) }.map(&:content_type)
+        arel_json_get_path_as_text(:attachment_data, :metadata, :mime_type).in(content_types) if content_types.present?
+      end.compact
+
+      where_clause.any? ? where(arel_or_expressions(where_clause)) : none
     end
 
     def proxy_path(ingestion_source)

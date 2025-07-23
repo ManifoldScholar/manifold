@@ -32,6 +32,11 @@ export default class IconComputedSocial extends PureComponent {
 
   render() {
     const { icon, ...childProps } = this.props;
-    return <Utility.IconComposer icon={this.iconMap(icon)} {...childProps} />;
+    return (
+      <Utility.IconComposer
+        icon={this.iconMap(icon) ?? "resources64"}
+        {...childProps}
+      />
+    );
   }
 }
