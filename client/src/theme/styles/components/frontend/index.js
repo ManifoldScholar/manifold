@@ -2,7 +2,6 @@ import collecting from "./collecting";
 import layout from "./layout";
 import page from "./page";
 import project from "./project";
-import resource from "./resource";
 import text from "./text";
 
 export default `
@@ -11,5 +10,4 @@ export default `
   ${page}
   ${project}
   ${text}
-  ${resource}
 `;

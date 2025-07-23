@@ -16,22 +16,25 @@ export const ErrorButton = styled(Button)`
 `;
 
 export const LinkIcon = styled(IconComposer)`
-  margin-inline-end: 12px;
+  inline-size: 1.667em;
+  block-size: 1.667em;
   color: var(--text-color, --color-base-neutral50);
   transition: color ${defaultTransitionProps};
 `;
 
 export const LinkCallout = styled(Link, transientOptions)`
-  font-family: var(--font-family-heading);
-  font-size: 13px;
-  font-weight: var(--font-weight-semibold);
-  color: inherit;
-  text-decoration: none;
-  text-transform: uppercase;
+  min-height: 17.33px;
   letter-spacing: 0.104em;
   display: flex;
   align-items: center;
-  min-height: 17.33px;
+  gap: 8px;
+  font-family: var(--font-family-heading);
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
 
   &:hover {
     ${LinkIcon} {
@@ -39,6 +42,10 @@ export const LinkCallout = styled(Link, transientOptions)`
     }
 
     color: var(--hover-color);
+  }
+
+  > span {
+    padding-block: 0.15em 0.275em;
   }
 `;
 

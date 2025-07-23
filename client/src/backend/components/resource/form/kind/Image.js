@@ -19,6 +19,8 @@ class ResourceFormKindImage extends PureComponent {
         readFrom="attributes[attachmentStyles][small]"
         name="attributes[attachment]"
         remove="attributes[removeAttachment]"
+        altTextName={"attributes[attachmentAltText]"}
+        altTextLabel={this.props.t("resources.properties.attachment_alt_label")}
         {...this.props}
       />
     );

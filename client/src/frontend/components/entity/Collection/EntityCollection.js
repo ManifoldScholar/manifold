@@ -14,6 +14,7 @@ function EntityCollection({
   IconComponent,
   iconProps,
   title,
+  BadgeComponent,
   description,
   DescriptionComponent,
   image,
@@ -51,6 +52,7 @@ function EntityCollection({
           icon={icon}
           IconComponent={IconComponent}
           iconProps={iconProps}
+          BadgeComponent={BadgeComponent}
           description={description}
           DescriptionComponent={DescriptionComponent}
           image={image}

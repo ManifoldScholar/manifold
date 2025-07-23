@@ -1,9 +1,7 @@
 import Thumbnails from "./Thumbnails/index";
-import Cards from "./Cards/index";
-import Slideshow from "./SlideShow";
+import Slideshow from "./SlideShow/Fetcher";
 
 export default {
   Thumbnails,
-  Cards,
   Slideshow
 };
