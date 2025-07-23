@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
-import ResourceCollection from "frontend/components/resource-collection";
+import Cover from "frontend/components/resource-collection/Cover";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
@@ -29,7 +29,7 @@ export default class ResourceCollectionGrid extends Component {
         {resourceCollections.map(collection => {
           return (
             <li key={collection.id}>
-              <ResourceCollection.Cover
+              <Cover
                 urlCreator={this.urlCreator}
                 resourceCollection={collection}
                 itemHeadingLevel={itemHeadingLevel}

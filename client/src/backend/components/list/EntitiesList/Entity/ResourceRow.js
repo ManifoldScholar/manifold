@@ -129,6 +129,7 @@ class ResourceRow extends PureComponent {
         }
         figure={<EntityThumbnail.Resource entity={this.resource} />}
         utility={this.utility}
+        active={this.id === this.props.active}
       />
     );
   }

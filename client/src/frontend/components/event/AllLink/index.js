@@ -1,7 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Button from "global/components/atomic/Button";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
@@ -12,14 +12,13 @@ export default function EventAllLink({ threshold, entity }) {
 
   return (
     <Styled.Wrapper>
-      <Link
+      <Button
+        as={Link}
+        label={t("navigation.see_all_activity")}
         to={lh.link("frontendProjectEvents", entity.attributes.slug)}
-        className="button-primary"
-      >
-        <span className="button-primary__text">
-          {t("navigation.see_all_activity")}
-        </span>
-      </Link>
+        size="lg"
+        background="outline-accent"
+      />
     </Styled.Wrapper>
   );
 }

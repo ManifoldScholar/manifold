@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
-import ResourceCollectionList from "frontend/components/resource-collection-list";
+import ResourceCollectionListGrid from "frontend/components/resource-collection-list/Grid";
 import EntityCollection from "../EntityCollection";
 import * as shapes from "../shapes";
 
@@ -22,7 +22,7 @@ function ProjectResourceCollectionsEntityCollection({
       title={t("pages.resource_collections_all")}
       icon="resourceCollection64"
       BodyComponent={props => (
-        <ResourceCollectionList.Grid
+        <ResourceCollectionListGrid
           resourceCollections={resourceCollections}
           itemHeadingLevel={itemHeadingLevel}
           {...props}

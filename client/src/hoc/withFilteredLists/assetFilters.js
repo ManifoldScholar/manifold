@@ -9,18 +9,17 @@ export default function assetFilters({ snapshotState = false } = {}) {
         name: "keyword",
         value: ""
       },
-      // {
-      //   label: "Kind",
-      //   name: "kind",
-      //   value: "",
-      //   options: [
-      //     { label: "All assets", value: "" },
-      //     { label: "Cover images", value: "cover_image" },
-      //     { label: "Table of contents", value: "navigation" },
-      //     { label: "Text sections", value: "section" },
-      //     { label: "Other", value: "publication_resource" }
-      //   ]
-      // },
+      {
+        label: "Format",
+        name: "format",
+        value: "",
+        options: [
+          { label: "All assets", value: "" },
+          { label: "Images", value: "image" },
+          { label: "Videos", value: "video" },
+          { label: "PDFs", value: "pdf" }
+        ]
+      },
       {
         label: "Order",
         name: "order",

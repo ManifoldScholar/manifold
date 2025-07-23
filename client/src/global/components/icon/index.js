@@ -106,6 +106,7 @@ import New64 from "./64/New";
 import Notes24 from "./24/Notes";
 import Notifications24 from "./24/Notifications";
 import PauseSolid24 from "./24/PauseSolid";
+import Pencil24 from "./24/Pencil";
 import Play16 from "./16/Play";
 import PlaySolid24 from "./24/PlaySolid";
 import PlayOutline24 from "./24/PlayOutline";
@@ -309,6 +310,7 @@ export default {
   Notifications24,
   OrderedList24,
   PauseSolid24,
+  Pencil24,
   Play16,
   PlaySolid24,
   PlayOutline24,

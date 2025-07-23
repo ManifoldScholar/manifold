@@ -53,7 +53,8 @@ export default class GroupedList extends PureComponent {
       annotations,
       saveAnnotation,
       loginHandler,
-      showUnverifiedWarning
+      showUnverifiedWarning,
+      closeDrawer
     } = this.props;
 
     return (
@@ -103,6 +104,7 @@ export default class GroupedList extends PureComponent {
                         key={annotation.id}
                         annotation={annotation}
                         showLogin={loginHandler}
+                        closeDrawer={closeDrawer}
                       />
                     );
                   })}

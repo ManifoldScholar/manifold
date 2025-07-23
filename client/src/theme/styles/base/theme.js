@@ -5,7 +5,7 @@ export default `
   html {
     @supports (scrollbar-color: auto) {
       scrollbar-color: var(--color-accent-primary)
-        var(--color-base-neutral90);
+        var(--color-base-neutral-black);
       scrollbar-width: auto;
     }
   }
@@ -44,10 +44,12 @@ export default `
     --drawer-bg-color: var(--background-color);
     --dropzone-bg-color: var(--color-base-neutral30);
     --select-bg-color: transparent;
-    --select-border-color: currentColor;
+    --select-border-color: var(--color-base-neutral50);
+    --button-bg-color: var(--color-base-neutral10);
     --button-dull-bg-color: var(--color-base-neutral30);
     --button-tertiary-bg-color: var(--color-accent-primary-pale);
     --button-tertiary-bg-hover-color: var(--color-accent-primary-light);
+    --outline-button-color: var(--color);
     --reader-color: var(--strong-color);
     --input-color: var(--color);
     --input-bg-color: var(--color-base-neutral-white);
@@ -65,9 +67,16 @@ export default `
     color-scheme: light;
   }
 
+
+  .bg-neutral05,
+  .bg-neutral10 {
+    --button-bg-color: var(--color-base-neutral20);
+  }
+
   .backend,
   .drawer--backend,
   .scheme-dark,
+  .bg-black,
   .bg-neutral90,
   .bg-neutral95 {
     --color: var(--color-neutral-text-light);
@@ -95,9 +104,11 @@ export default `
     --dropzone-bg-color: ${lighten("neutral90", 5)};
     --select-bg-color: var(--color-base-neutral90);
     --select-border-color: var(--color-base-neutral45);
+    --button-bg-color: var(--color-base-neutral100);
     --button-dull-bg-color: var(--color-base-neutral10);
     --button-tertiary-bg-color: var(--color-accent-primary);
     --button-tertiary-bg-hover-color: var(--color-accent-primary-pale);
+    --outline-button-color: var(--color-accent-primary);
     --reader-color: var(--color-base-neutral-white);
     --input-color: var(--strong-color);
     --input-bg-color: transparent;
@@ -122,5 +133,9 @@ export default `
     textarea {
       color: var(--input-color);
     }
+  }
+
+  .bg-black {
+    --button-bg-color: var(--color-base-neutral85);
   }
 `;

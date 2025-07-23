@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Resourceish from "frontend/components/resourceish";
+import Resource from "frontend/components/resource";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
@@ -26,9 +26,9 @@ export default class ResourceListThumbnails extends Component {
                   resource.attributes.slug
                 )}
               >
-                <Resourceish.Thumbnail
+                <Resource.Thumbnail
                   key={resource.id}
-                  resourceish={resource}
+                  resource={resource}
                   showTitle
                 />
               </Styled.Link>

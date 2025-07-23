@@ -3,11 +3,14 @@ import { defaultFocusStyle, setHoverStyle } from "theme/styles/mixins";
 import BaseInput from "../../BaseInput";
 
 const BaseDropzone = styled.div`
+  --Dropzone-aspect-ratio: 350 / 220;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 200px;
+  inline-size: 100%;
+  aspect-ratio: var(--Dropzone-aspect-ratio);
+  overflow: hidden;
 
   a,
   .fake-link {
@@ -27,10 +30,22 @@ export const Dropzone = styled(BaseDropzone)`
   max-width: var(--Dropzone-max-width, 350px);
   border: 1px solid var(--input-border-color);
   border-radius: var(--box-border-radius);
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  .reader & {
+    background-color: var(--box-medium-bg-color);
+    border-color: transparent;
+
+    &:hover {
+      border-color: var(--strong-color);
+      background-color: var(--box-weak-bg-color);
+    }
+  }
 `;
 
 export const AvatarBuilderDropzone = styled(BaseDropzone)`
+  --Dropzone-aspect-ratio: 275 / 200;
+
   position: relative;
   width: 100%;
 `;
@@ -43,6 +58,14 @@ export const Prompt = styled.span`
 
   &:hover {
     color: var(--hover-color);
+  }
+
+  .reader & {
+    color: var(--reader-color);
+
+    &:hover {
+      color: var(--reader-color);
+    }
   }
 `;
 
