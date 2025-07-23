@@ -54,6 +54,26 @@ export class ResourceNewContainer extends PureComponent {
     this.props.history.push(path);
   }
 
+  formatData = data => {
+    const { attributes, relationships } = data ?? {};
+    const {
+      attachment: attachmentData,
+      attachmentAltText,
+      ...rest
+    } = attributes;
+
+    return {
+      relationships,
+      attributes: {
+        ...rest,
+        attachment: {
+          ...attachmentData,
+          altText: attributes.kind === "image" ? attachmentAltText : null
+        }
+      }
+    };
+  };
+
   handleSuccess = resource => {
     this.redirectToResource(resource);
   };
@@ -99,7 +119,9 @@ export class ResourceNewContainer extends PureComponent {
               model={this.defaultResource}
               name="backend-resource-create"
               update={resourcesAPI.update}
-              create={model => resourcesAPI.create(project.id, model)}
+              create={model =>
+                resourcesAPI.create(project.id, this.formatData(model))
+              }
               onSuccess={this.handleSuccess}
               className="form-secondary"
             >

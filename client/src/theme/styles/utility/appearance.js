@@ -1,4 +1,4 @@
-import { screenReaderText, show, hide, utilityPrimary } from "../mixins";
+import { screenReaderText, show, hide } from "../mixins";
 
 export default `
   .screen-reader-text {
@@ -91,29 +91,6 @@ export default `
 
     &__background {
       fill: var(--box-medium-bg-color);
-    }
-  }
-
-  .annotation-manage-groups-link {
-    ${utilityPrimary}
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-    padding: 3px;
-    font-size: 12px;
-    color: var(--manage-groups-link-color, #5c5c5c);
-    text-decoration: none;
-    border: 1px solid;
-    border-radius: 4px;
-    transition: none;
-
-    &:hover,
-    &:focus-visible {
-      color: var(--color-base-neutral85);
-      background-color: var(--color-interaction-light);
-      border-color: var(--color-interaction-light);
-      outline: 0;
     }
   }
 
