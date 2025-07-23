@@ -342,7 +342,7 @@ module Validation
   def annotation_params
     params.require(:data)
     attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,
-                  :subject, :body, :private, :reading_group_id]
+                  :subject, :body, :private, :reading_group_id, :reader_display_format]
     relationships = [:resource, :resource_collection]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
