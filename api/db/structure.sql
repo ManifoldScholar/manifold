@@ -405,7 +405,8 @@ CREATE TABLE public.annotations (
     marked_for_purge_at timestamp without time zone,
     resolved_flags_count bigint DEFAULT 0 NOT NULL,
     unresolved_flags_count bigint DEFAULT 0 NOT NULL,
-    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
+    reader_display_format text
 );
 
 
@@ -531,8 +532,8 @@ CREATE TABLE public.text_sections (
     slug text,
     hidden_in_reader boolean DEFAULT false NOT NULL,
     metadata jsonb DEFAULT '{}'::jsonb,
-    body_text text,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    body_text text,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
 );
 
@@ -7753,6 +7754,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250530205742'),
 ('20250603192547'),
 ('20250609191642'),
-('20250609192241');
+('20250609192241'),
+('20250723210143');
 
 
