@@ -237,4 +237,8 @@ export default `
     background-color: initial;
     color: inherit;
   }
+
+  dialog {
+    border: none;
+  }
 `;
