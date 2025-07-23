@@ -468,7 +468,8 @@ CREATE TABLE public.annotations (
     marked_for_purge_at timestamp without time zone,
     resolved_flags_count bigint DEFAULT 0 NOT NULL,
     unresolved_flags_count bigint DEFAULT 0 NOT NULL,
-    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
+    reader_display_format text
 );
 
 
@@ -7839,9 +7840,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250603192547'),
 ('20250609191642'),
 ('20250609192241'),
+('20250723210143'),
 ('20251016204352'),
 ('20251017174417'),
 ('20251017211501'),
 ('20251020225421');
-
-
