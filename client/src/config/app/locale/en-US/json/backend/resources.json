@@ -20,7 +20,8 @@
     "title_label": "Title",
     "title_placeholder": "Enter a resource title",
     "descript_label": "Description",
-    "descript_placeholder": "Enter a description",
+    "descript_placeholder": "Enter a description for your resource...",
+    "cta_label": "More info",
     "new": {
       "title": "New Resource",
       "instructions": "Select your resource type, then enter a name and a brief description. Press save to continue.",
@@ -81,7 +82,13 @@
       "caption_label": "Caption",
       "caption_placeholder": "Enter a short description",
       "download_label": "Allow download?",
-      "save": "Save Resource"
+      "save": "Save Resource",
+      "thumbnail": "Featured Image",
+      "thumbnail_alt_label": "Featured Image Alt Text",
+      "featured_image": "Featured Image (Optional)",
+      "url": "URL",
+      "url_placeholder": "Enter resource URL",
+      "attachment_alt_label": "Image Alt Text"
     },
     "import": {
       "header": "Bulk Add Resources",

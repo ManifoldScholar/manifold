@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
+import * as Styled from "./styles";
 
 function FollowLink({
   menu,
@@ -13,7 +14,7 @@ function FollowLink({
   onKeyDown,
   annotationHref
 }) {
-  const { link, annotationIds } = activeEvent;
+  const { link, annotationIds } = activeEvent ?? {};
   const { openViewAnnotationsDrawer } = actions;
 
   const navigate = useNavigate();
@@ -33,23 +34,25 @@ function FollowLink({
       direction={direction}
       onKeyDown={onKeyDown}
     >
-      <MenuItem
-        menu={{ ...menu, visible }}
-        as="a"
-        href={link.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        kind="none"
-        label={t("reader.menus.popup.follow_link")}
-        icon="arrowRight32"
-      />
-      <MenuItem
-        menu={{ ...menu, visible }}
-        onClick={handleAnnotateClick}
-        kind="any"
-        label={t("actions.annotate")}
-        icon="comment24"
-      />
+      <Styled.Actions>
+        <MenuItem
+          menu={{ ...menu, visible }}
+          as="a"
+          href={link?.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          kind="none"
+          label={t("reader.menus.popup.follow_link")}
+          icon="arrowRight32"
+        />
+        <MenuItem
+          menu={{ ...menu, visible }}
+          onClick={handleAnnotateClick}
+          kind="any"
+          label={t("actions.annotate")}
+          icon="interactAnnotate24"
+        />
+      </Styled.Actions>
     </Menu>
   );
 }

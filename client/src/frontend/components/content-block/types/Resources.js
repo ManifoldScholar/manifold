@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import EntityListTotal from "global/components/entity/ListTotal";
-import ResourceCollectionList from "frontend/components/resource-collection-list";
+import ResourceCollectionListGrid from "frontend/components/resource-collection-list/Grid";
 import ResourceList from "frontend/components/resource-list";
 import lh from "helpers/linkHandler";
 
@@ -90,7 +90,7 @@ export class ProjectContentBlockResourcesBlock extends PureComponent {
             <h3 className="screen-reader-text">
               {this.props.t("glossary.resource_collection_title_case_other")}
             </h3>
-            <ResourceCollectionList.Grid
+            <ResourceCollectionListGrid
               resourceCollections={this.visibleCollections}
             />
             <EntityListTotal

@@ -48,6 +48,7 @@ module V1
     end
 
     typed_attribute :annotation_style, Types::String.optional
+    typed_attribute :reader_display_format, Types::String.optional
 
     typed_attribute :creator_avatar_styles, Types::Serializer::Attachment.meta(read_only: true) do |object, params|
       creator_identity_visible?(object, params) ? camelize_hash(object.creator_avatar_styles) : {}

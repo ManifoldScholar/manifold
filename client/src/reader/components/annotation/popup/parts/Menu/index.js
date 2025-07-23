@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import { Menu as ReakitMenu } from "reakit/Menu";
+import * as Styled from "./styles";
 
 function Menu({
   menu,
@@ -21,28 +20,17 @@ function Menu({
     fromRGtoMain ? menu.last() : menu.first();
   }, [menuProps.visible]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const menuClassName = classNames({
-    "annotation-popup__menu": true,
-    "annotation-popup__menu--active": menuProps.visible,
-    "annotation-popup__menu--bottom": direction === "up",
-    "annotation-popup__menu--top": direction === "down"
-  });
-  const tailClassName = classNames({
-    "annotation-popup__tail": true,
-    "annotation-popup__tail--down": direction === "up",
-    "annotation-popup__tail--up": direction === "down"
-  });
   return (
-    <ReakitMenu
+    <Styled.Menu
       {...menu}
       {...menuProps}
       unstable_autoFocusOnHide={false} // we handle this on our own since there's no disclosure component
-      className={menuClassName}
       onKeyDown={onKeyDown}
+      data-active={menuProps.visible}
+      data-direction={direction}
     >
-      <div className="annotation-popup__menu-inner">{children}</div>
-      <div className={tailClassName} />
-    </ReakitMenu>
+      <div>{children}</div>
+    </Styled.Menu>
   );
 }
 

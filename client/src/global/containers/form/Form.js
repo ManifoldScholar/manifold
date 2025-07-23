@@ -59,7 +59,8 @@ export class FormContainer extends PureComponent {
     options: PropTypes.object,
     flushOnUnmount: PropTypes.bool,
     notificationScope: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
+    handleSubmitOverride: PropTypes.func
   };
 
   static defaultProps = {
@@ -129,7 +130,10 @@ export class FormContainer extends PureComponent {
   handleSubmit = (event = null) => {
     if (event) event.preventDefault();
     this.setState({ submitKey: this.createKey() });
-    if (this.props.session.source.id) {
+    if (this.props.handleSubmitOverride) {
+      const { dirty, source } = this.props.session;
+      this.props.handleSubmitOverride(dirty, source);
+    } else if (this.props.session.source.id) {
       this.update();
     } else {
       this.create();
