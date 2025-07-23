@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { FocusTrap } from "focus-trap-react";
 import { useUID } from "react-uid";
 import Header from "./Header";
-import helpers from "reader/containers/annotation/annotatable-components/selectionHelpers";
+import helpers from "reader/containers/Annotatable/helpers/selectionHelpers";
 
 import BodyClass from "hoc/BodyClass";
 

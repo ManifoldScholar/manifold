@@ -45,6 +45,10 @@ export const TextAreaSecondary = styled(TextAreaBase)`
   background-color: var(--input-bg-color);
   border-radius: var(--box-border-radius);
 
+  .reader & {
+    border-color: var(--select-border-color);
+  }
+
   ${respond(
     `
     padding: 1.25em 1.389em;
@@ -55,5 +59,11 @@ export const TextAreaSecondary = styled(TextAreaBase)`
 
   &::placeholder {
     color: var(--color-neutral-ui-light);
+  }
+
+  .reader &::placeholder {
+    color: var(--input-placeholder-color);
+    font-style: italic;
+    font-family: var(--font-family-copy);
   }
 `;

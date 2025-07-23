@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import serialize from "serialize-javascript";
 import reduceAssets from "./reduceAssets";

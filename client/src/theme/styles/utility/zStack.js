@@ -73,15 +73,7 @@ export default `
     z-index: 150;
   }
 
-  .notation-preview-footer {
-    z-index: 140;
-  }
-
   .picker-input__results {
-    z-index: 100;
-  }
-
-  .annotation-popup {
     z-index: 100;
   }
 
