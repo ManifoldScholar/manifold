@@ -35,7 +35,7 @@ export const Columns = styled.ul`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: ${({ $wide }) => ($wide ? `space-between` : `center`)};
   gap: ${fluidScale(`${60 - LINK_PADDING}px`, `${50 - LINK_PADDING}px`)};
 `;
 
@@ -51,6 +51,8 @@ export const Pages = styled.div`
 
 export const Link = styled.a`
   ${buttonUnstyled}
+  ${utilityPrimary}
+  font-size: 15px;
   display: flex;
   align-items: center;
   gap: 8px;

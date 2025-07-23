@@ -16,7 +16,7 @@ export default `
   }
 
   .text-section {
-
+    container: text-section / inline-size;
     font-family: var(--font-family-copy);
     font-weight: var(--font-weight-regular);
     line-height: 1.761;
@@ -129,11 +129,6 @@ export default `
     ul[class],
     ol[class] {
       list-style: revert;
-    }
-
-    /* Link with notation marker cube */
-    .notation-marker {
-      cursor: pointer;
     }
   }
 

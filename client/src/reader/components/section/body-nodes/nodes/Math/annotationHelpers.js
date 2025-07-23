@@ -119,19 +119,28 @@ export const getAnnotationStyles = (
   const interactiveAttributes =
     isInteractive && !hasInteractiveAncestor && !previous
       ? {
-          tabIndex: 0,
-          role: "button",
-          "aria-haspopup": removableHighlight ? "menu" : "dialog",
+          href: textAnnotationIds.length
+            ? `#annotation-${textAnnotationIds[0]}`
+            : undefined,
+          "aria-haspopup": removableHighlight ? "menu" : undefined,
           "aria-label": ariaLabel()
         }
       : {};
+
+  /* eslint-disable-next-line no-nested-ternary */
+  const tag = interactiveAttributes.href
+    ? "a"
+    : removableHighlightId && removableHighlightId !== "selection"
+    ? "button"
+    : null;
 
   return {
     classes,
     removableHighlightId,
     textAnnotationIds,
     annotationIds,
-    interactiveAttributes
+    interactiveAttributes,
+    interactiveTag: tag
   };
 };
 

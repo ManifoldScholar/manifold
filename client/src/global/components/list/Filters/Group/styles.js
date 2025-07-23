@@ -34,9 +34,11 @@ export const Wrapper = styled("div", transientOptions)`
 `;
 
 export const SelectGroup = styled("div", transientOptions)`
+  --min-width: var(--SelectGroup-min-width, ${selectMinWidth}px);
+
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(${selectMinWidth}px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(var(--min-width), 1fr));
   grid-gap: ${gap}px;
   margin-bottom: 0;
   flex-basis: ${({ $count }) => entityFilterForm.flexBasis($count)};

@@ -509,7 +509,7 @@ class Navigation {
   });
 
   static resource = memoize(resource => {
-    const externalVideo = resource.attributes.externalVideo;
+    const externalVideo = !!resource.attributes.externalId;
     const project = resource.relationships.project;
     const kind = resource.attributes.kind;
     const args = [resource.id];
@@ -532,7 +532,6 @@ class Navigation {
     if (
       kind === "image" ||
       kind === "audio" ||
-      kind === "pdf" ||
       kind === "interactive" ||
       (kind === "video" && !externalVideo)
     ) {
@@ -544,7 +543,7 @@ class Navigation {
         args
       });
     }
-    if (kind === "video" && !externalVideo) {
+    if (kind === "audio" || (kind === "video" && !externalVideo)) {
       out.push({
         label: "titles.tracks",
         route: "backendResourceTracks",

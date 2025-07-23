@@ -10,12 +10,14 @@ import { borderStyles } from "../Filter/styles";
 const { searchMinWidth } = entityFilterForm;
 
 export const Wrapper = styled.div`
+  --min-width: var(--Search-min-width, ${searchMinWidth}px);
+
   position: relative;
   display: inline-block;
   flex-basis: 0;
   flex-grow: 999;
   width: 100%;
-  min-width: ${searchMinWidth}px;
+  min-width: var(--min-width);
 `;
 
 export const Button = styled.button`

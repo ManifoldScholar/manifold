@@ -90,7 +90,8 @@ export class FormUpload extends Component {
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array,
-    fileNameFrom: PropTypes.string
+    fileNameFrom: PropTypes.string,
+    instructionsSingleLine: PropTypes.bool
   };
 
   static defaultProps = {

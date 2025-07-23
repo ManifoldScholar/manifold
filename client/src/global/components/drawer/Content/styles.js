@@ -101,7 +101,6 @@ export const DrawerReader = styled(Drawer)`
 
   top: calc(var(--reader-header-height) * 2);
   z-index: 150;
-  padding: 0 !important;
 
   ${respond(`top: var(--reader-header-height);`, ZOOM_BREAKPOINT)}
 
@@ -112,8 +111,19 @@ export const DrawerReader = styled(Drawer)`
   }
 
   &.wide {
-    ${respond(`width: 585px;`, 75)}
-    ${respond(`width: 920px;`, 120)}
+    width: 100%;
+    ${respond(`width: 860px;`, 85)}
+    ${respond(`width: 860px;`, 120)}
+  }
+
+  &.pad-none {
+    padding: 0 !important;
+  }
+
+  &.pad-default {
+    padding-inline: 60px;
+    padding-block-start: 24px;
+    padding-block-end: 60px;
   }
 `;
 

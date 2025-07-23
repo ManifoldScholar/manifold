@@ -1,8 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { useUID } from "react-uid";
 import { useTranslation } from "react-i18next";
+import Button from "global/components/atomic/Button";
 import * as Styled from "./styles";
 
 export default function InsertModal(props) {
@@ -19,8 +18,6 @@ export default function InsertModal(props) {
     e.preventDefault();
     reject(e);
   };
-
-  const buttonClasses = "button-secondary button-secondary--outlined";
 
   return (
     <Styled.Modal
@@ -46,21 +43,21 @@ export default function InsertModal(props) {
           {form}
           <Styled.ButtonGroup>
             {typeof resolve === "function" && (
-              <button
+              <Button
                 onClick={handleResolveClick}
-                className={buttonClasses}
                 data-id="accept"
-              >
-                <span>{resolveLabel}</span>
-              </button>
+                label={resolveLabel}
+                size="md"
+                background="outline-accent"
+              />
             )}
-            <button
-              className={classNames(buttonClasses, "button-secondary--dull")}
+            <Button
               onClick={handleRejectClick}
               data-id="reject"
-            >
-              <span>{t("actions.cancel")}</span>
-            </button>
+              label={t("actions.cancel")}
+              size="md"
+              background="outline"
+            />
           </Styled.ButtonGroup>
         </Styled.ModalBody>
       </>

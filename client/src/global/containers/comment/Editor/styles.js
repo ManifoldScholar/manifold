@@ -5,19 +5,17 @@ import {
   utilityPrimary,
   defaultFocusStyle
 } from "theme/styles/mixins";
+import Button from "global/components/atomic/Button";
 
 const ACTION_MARGIN_TOP = 18;
 const BUTTON_MARGIN_LEFT = 15;
 
 export const Editor = styled.div`
-  margin-block-end: 5px;
   padding-inline-start: var(--Editor-padding-inline-start);
 `;
 
-export const Label = styled.button`
-  display: flex;
-  margin-block-start: var(--CommentEditor-Label-margin-block-start, 50px);
-  padding: 0.5em 1.3em;
+export const Label = styled(Button)`
+  margin-block-start: 50px;
 
   + * {
     margin-block-start: 12px;
