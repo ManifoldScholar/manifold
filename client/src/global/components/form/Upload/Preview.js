@@ -106,7 +106,8 @@ export default class FormUploadPreview extends PureComponent {
   render() {
     const childProps = {
       handleRemove: this.props.handleRemove,
-      isBuilder: this.props.isBuilder
+      isBuilder: this.props.isBuilder,
+      instructionsSingleLine: this.props.instructionsSingleLine
     };
     if (this.isImage)
       return <ImagePreview image={this.currentPreview} {...childProps} />;

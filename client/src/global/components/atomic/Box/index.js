@@ -1,8 +1,8 @@
 import * as Styled from "./styles";
 
-export default function Box({ children, className }) {
+export default function Box({ children, className, ...props }) {
   return (
-    <Styled.Container className={className}>
+    <Styled.Container className={className} {...props}>
       <Styled.Background>{children}</Styled.Background>
     </Styled.Container>
   );
