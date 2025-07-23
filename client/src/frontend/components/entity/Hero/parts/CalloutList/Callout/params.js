@@ -10,15 +10,15 @@ export const getCalloutParams = (data, type, isLink, t) => {
     case "READ":
       return {
         icon: isLink ? "arrowRight24" : "glasses64",
-        iconSize: isLink ? 24 : 46,
+        iconSize: isLink ? 24 : 32,
         url: lh.link("reader", slug),
         title: data.attributes.title || t("actions.read"),
         as: Link,
-        primary: true
+        background: "accent"
       };
     case "DOWNLOAD":
       return {
-        icon: "arrowDown24",
+        icon: isLink ? "arrowDown24" : "arrowDown32",
         iconSize: 24,
         url: data.attributes.attachmentStyles.original,
         title: data.attributes.title || t("actions.download"),
@@ -28,7 +28,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
     case "LINK":
       return {
         icon: isLink ? "arrowRight24" : null,
-        iconSize: isLink ? 24 : 46,
+        iconSize: isLink ? 24 : 32,
         url: data.attributes.url,
         title: data.attributes.title || t("placeholders.link"),
         as: "UserLink"
@@ -36,7 +36,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
     case "TOC":
       return {
         icon: isLink ? "arrowRight24" : "toc64",
-        iconSize: isLink ? 24 : 46,
+        iconSize: isLink ? 24 : 32,
         url: tocSectionId
           ? lh.link("readerSection", slug, tocSectionId)
           : lh.link("reader", slug),

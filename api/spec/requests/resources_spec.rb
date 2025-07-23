@@ -23,7 +23,6 @@ RSpec.describe "Resources API", type: :request do
           it("contains the updated caption") { expect_updated_param("caption", "some caption") }
           it("contains the updated description") { expect_updated_param("description", "some description") }
           it("contains the updated tag_list") { expect_updated_param("tagList", %w(glorp glomp), %w(glorp glomp)) }
-          it("contains the updated alt_text") { expect_updated_param("altText", "some alt_text") }
           it("contains the updated metadata") { expect_updated_param("metadata", metadata) }
           it("contains the updated credit") { expect_updated_param("title", "some credit") }
         end

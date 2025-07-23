@@ -1,8 +1,8 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
+import * as Styled from "./styles";
 
 function Login({ menu, visible, direction, actions, onKeyDown }) {
   const { t } = useTranslation();
@@ -15,13 +15,15 @@ function Login({ menu, visible, direction, actions, onKeyDown }) {
       direction={direction}
       onKeyDown={onKeyDown}
     >
-      <MenuItem
-        menu={menu}
-        onClick={actions.showLogin}
-        kind="unauthenticated"
-        label={t("reader.menus.popup.log_in_annotate")}
-        icon="editProfile24"
-      />
+      <Styled.Actions>
+        <MenuItem
+          menu={menu}
+          onClick={actions.showLogin}
+          kind="unauthenticated"
+          label={t("reader.menus.popup.log_in_annotate")}
+          icon="editProfile24"
+        />
+      </Styled.Actions>
     </Menu>
   );
 }

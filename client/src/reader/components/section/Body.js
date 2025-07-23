@@ -1,30 +1,48 @@
-import React from "react";
-import { Component } from "react";
+import { useMemo } from "react";
 import PropTypes from "prop-types";
 import BodyNodes from "./body-nodes";
+import ResourceMarkerContextProvider from "reader/components/resource-annotation/Marker/context";
 
-export default class Body extends Component {
-  static propTypes = {
-    section: PropTypes.object,
-    annotations: PropTypes.array,
-    pendingAnnotation: PropTypes.object,
-    location: PropTypes.object
-  };
+export default function Body(props) {
+  const {
+    section,
+    annotations,
+    pendingAnnotation,
+    location,
+    destroyAnnotation
+  } = props;
+  const deps = [
+    section.attributes.bodyJSON,
+    annotations,
+    pendingAnnotation,
+    location.key
+  ];
 
-  shouldComponentUpdate(nextProps, nextStateIgnored) {
-    const same =
-      this.props.section.attributes.bodyJSON ===
-        nextProps.section.attributes.bodyJSON &&
-      this.props.annotations === nextProps.annotations &&
-      this.props.pendingAnnotation === nextProps.pendingAnnotation &&
-      this.props.location.key === nextProps.location.key;
-    return !same;
-  }
+  /* eslint-disable react-hooks/exhaustive-deps */
+  const iterator = useMemo(
+    () => new BodyNodes.Helpers.NodeTreeIterator(props),
+    [...deps]
+  );
+  const elements = useMemo(() => iterator.visit(section.attributes.bodyJSON), [
+    iterator,
+    section.attributes.bodyJSON
+  ]);
 
-  render() {
-    const iterator = new BodyNodes.Helpers.NodeTreeIterator(this.props);
-    const node = this.props.section.attributes.bodyJSON;
-    const elements = iterator.visit(node);
-    return elements;
-  }
+  return (
+    <ResourceMarkerContextProvider
+      annotations={annotations}
+      destroyAnnotation={destroyAnnotation}
+    >
+      {elements}
+    </ResourceMarkerContextProvider>
+  );
 }
+
+Body.propTypes = {
+  section: PropTypes.object,
+  annotations: PropTypes.array,
+  pendingAnnotation: PropTypes.object,
+  location: PropTypes.object
+};
+
+Body.displayName = "Reader.Section.Body";

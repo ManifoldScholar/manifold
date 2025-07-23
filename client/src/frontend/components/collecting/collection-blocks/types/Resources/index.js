@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Template from "../../Template";
-import Resourceish from "frontend/components/resourceish";
+import Resource from "frontend/components/resource";
 import lh from "helpers/linkHandler";
 import * as Styled from "frontend/components/resource-list/Thumbnails/styles";
 
@@ -21,7 +21,7 @@ function CollectedResources(props) {
             response.attributes.slug
           )}
         >
-          <Resourceish.Thumbnail resourceish={response} showTitle />
+          <Resource.Thumbnail resource={response} showTitle />
         </Styled.Link>
       )}
     />

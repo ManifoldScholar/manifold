@@ -82,4 +82,8 @@ export default `
   .flex-grow {
     flex-grow: 1;
   }
+
+  .container-inline-size {
+    container-type: inline-size;
+  }
 `;

@@ -21,6 +21,7 @@ function Header({
   icon,
   IconComponent,
   iconProps,
+  BadgeComponent,
   description,
   DescriptionComponent,
   image,
@@ -46,32 +47,43 @@ function Header({
 
   return (
     <Styled.Header $layout={layout} $width={headerWidth}>
-      <Styled.TitleAndIcon>
-        {IconComponent && (
-          <Styled.IconComponent as={IconComponent} {...iconProps} />
+      <Styled.TitleRow>
+        <Styled.TitleAndIcon>
+          {IconComponent && (
+            <Styled.IconComponent as={IconComponent} {...iconProps} />
+          )}
+          {!IconComponent && icon && (
+            <Styled.Icon
+              size={iconProps?.size ?? 60}
+              icon={icon}
+              {...iconProps}
+            />
+          )}
+          <Styled.TitleLink to={headerLink}>
+            <Styled.Title>{title}</Styled.Title>
+          </Styled.TitleLink>
+          {!!collectingProps && (
+            <Styled.ToggleWrapper>
+              <Collecting.Toggle {...collectingProps} />
+            </Styled.ToggleWrapper>
+          )}
+        </Styled.TitleAndIcon>
+        {BadgeComponent && <Styled.Badge>{BadgeComponent()}</Styled.Badge>}
+        {description && (
+          <Styled.Description>
+            <Styled.DescriptionInner
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+          </Styled.Description>
         )}
-        {!IconComponent && icon && (
-          <Styled.Icon
-            size={iconProps?.size ?? 60}
-            icon={icon}
-            {...iconProps}
-          />
+        {DescriptionComponent && (
+          <Styled.Description>
+            <Styled.DescriptionInner>
+              {DescriptionComponent()}
+            </Styled.DescriptionInner>
+          </Styled.Description>
         )}
-        <Styled.TitleLink to={headerLink}>
-          <Styled.Title>{title}</Styled.Title>
-        </Styled.TitleLink>
-        {!!collectingProps && (
-          <Styled.ToggleWrapper>
-            <Collecting.Toggle {...collectingProps} />
-          </Styled.ToggleWrapper>
-        )}
-      </Styled.TitleAndIcon>
-      {description && (
-        <Styled.Description dangerouslySetInnerHTML={{ __html: description }} />
-      )}
-      {DescriptionComponent && (
-        <Styled.Description>{DescriptionComponent()}</Styled.Description>
-      )}
+      </Styled.TitleRow>
       {image && (
         <Styled.Image
           src={image}
@@ -95,6 +107,7 @@ export const headerProps = {
   title: PropTypes.string,
   icon: PropTypes.string,
   IconComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  BadgeComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   description: PropTypes.string,
   DescriptionComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   image: PropTypes.string,
