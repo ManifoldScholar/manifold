@@ -2,8 +2,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 import Skeleton from "frontend/components/collecting/ContentSkeleton";
-import * as StyledThumbnail from "frontend/components/resourceish/Thumbnail/styles";
-import * as StyledIcon from "frontend/components/resourceish/Thumbnail/Icon/styles";
+import * as StyledThumbnail from "frontend/components/resource/Thumbnail/styles";
+import * as StyledIcon from "frontend/components/resource/Thumbnail/Icon/styles";
 import * as Styled from "./styles";
 
 function Placeholder() {
