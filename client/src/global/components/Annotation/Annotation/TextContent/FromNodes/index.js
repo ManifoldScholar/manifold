@@ -94,7 +94,7 @@ function AnnotationWithNodes({
   };
 
   const adjustedEndChar =
-    subjectInSingleNode && textSplit
+    subjectInSingleNode && textSplit.current
       ? endChar - textSplit.current - 1
       : endChar;
 
@@ -108,7 +108,9 @@ function AnnotationWithNodes({
           annotationStyle,
           format: "annotation",
           ...annotation.attributes,
-          startChar: textSplit ? startChar - textSplit.current - 1 : startChar,
+          startChar: textSplit.current
+            ? startChar - textSplit.current - 1
+            : startChar,
           endChar: adjustedEndChar
         }
       }

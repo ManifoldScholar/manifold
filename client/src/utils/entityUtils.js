@@ -124,12 +124,12 @@ export function select(requestMeta, entityStore) {
   return selectEntity(response, entityStore.entities);
 }
 
-export function grab(type, idOrSlug, entityStore) {
+export function grab(type, idOrSlug, entityStore, allowPartial = false) {
   const id = idOrSlugToId(type, idOrSlug, entityStore);
   const entityPath = `${type}.${id}`;
   const source = get(entityStore.entities, entityPath);
   if (!source) return null;
-  if (get(source, "meta.partial") === true) return null;
+  if (!allowPartial && get(source, "meta.partial") === true) return null;
   return selectEntity({ entity: { type, id } }, entityStore.entities);
 }
 

@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-import Utility from "global/components/utility";
 import Authorize from "hoc/Authorize";
+import Button from "global/components/atomic/Button";
 
 export default class ListEntitiesListButtonSet extends PureComponent {
   static displayName = "List.Entities.List.Button";
@@ -66,8 +66,7 @@ export default class ListEntitiesListButtonSet extends PureComponent {
 
   render() {
     const buttonClassNames = classNames(this.props.className, {
-      "entity-list__button": true,
-      "button-lozenge-secondary": true
+      "entity-list__button": true
     });
 
     const { tag, onClick } = this.props;
@@ -79,14 +78,18 @@ export default class ListEntitiesListButtonSet extends PureComponent {
       : { to: this.path };
 
     return this.maybeAuthorize(
-      <Tag
+      <Button
+        as={Tag}
+        label={this.text}
+        size="sm"
+        shape="lozenge"
+        background="outline-accent"
+        lowercase
+        preIcon={this.icon}
         className={buttonClassNames}
         style={this.props.style}
         {...buttonProps}
-      >
-        {this.icon && <Utility.IconComposer icon={this.icon} />}
-        <span>{this.text}</span>
-      </Tag>
+      />
     );
   }
 }
