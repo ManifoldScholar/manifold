@@ -16,7 +16,8 @@ function FiltersGroup(props) {
     showReset,
     setScreenReaderStatus,
     className,
-    containerWrapPoint
+    containerWrapPoint,
+    as = "form"
   } = props;
 
   const searchInput = useRef(null);
@@ -45,15 +46,20 @@ function FiltersGroup(props) {
 
   return (
     <Styled.Wrapper
-      as={onSubmit ? "form" : "div"}
-      role={onSubmit ? "search" : null}
-      onSubmit={onSubmit}
+      as={as}
+      role={as === "form" ? "search" : null}
+      onSubmit={as === "form" ? onSubmit : undefined}
       $count={filters?.length || 0}
       $searchCount={hideSearch ? 0 : 1}
       $containerWrapPoint={containerWrapPoint}
       className={className}
     >
-      {!hideSearch && <Search inputRef={searchInput} />}
+      {!hideSearch && (
+        <Search
+          inputRef={searchInput}
+          onSearch={as !== "form" ? onSubmit : undefined}
+        />
+      )}
       {!!filters?.length && (
         <Styled.SelectGroup $count={filters?.length}>
           {filters.map(filter => (

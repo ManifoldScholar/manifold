@@ -47,9 +47,6 @@ export default function ResourceCollectionDetailContainer({
       pagination
     ]
   });
-  const { data: slideshowResources, meta: slideshowMeta } = useFetch({
-    request: [resourceCollectionsAPI.collectionResources, resourceCollectionId]
-  });
 
   const [annotationsPagination, setAnnotationsPage] = usePaginationState(1, 5);
 
@@ -121,8 +118,6 @@ export default function ResourceCollectionDetailContainer({
         resources={resources ?? []}
         project={project}
         meta={meta}
-        slideshowResources={slideshowResources}
-        slideshowResourcesMeta={slideshowMeta}
         filterProps={filterProps}
       />
       <Styled.Annotations>

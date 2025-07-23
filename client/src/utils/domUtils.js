@@ -1,3 +1,4 @@
+import { flushSync as reactDomFlushSync } from "react-dom";
 import isFunction from "lodash/isFunction";
 
 export function closest(el, selector) {
@@ -43,3 +44,20 @@ export function detectPassiveEventOptionsSupport() {
 export function scrollOptions(passive = true) {
   return detectPassiveEventOptionsSupport() ? { passive } : false;
 }
+
+export const doViewTransition = (callback, options) => {
+  if (!document.startViewTransition) {
+    callback();
+    return { finished: Promise.resolve() };
+  }
+  return document.startViewTransition(() => {
+    if (options?.flushSync) {
+      // https://malcolmkee.com/blog/view-transition-api-in-react-app/#usage-view-transition-api-with-react
+      reactDomFlushSync(() => {
+        callback();
+      });
+    } else {
+      callback();
+    }
+  });
+};

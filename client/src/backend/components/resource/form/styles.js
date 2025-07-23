@@ -9,6 +9,8 @@ import {
 const GRID_GAP = "15px";
 
 export const KindPicker = styled.div`
+  container-type: inline-size;
+
   ${respond(`padding-bottom: 12px;`, 65)}
 `;
 
@@ -25,32 +27,26 @@ export const SelectWrapper = styled.div`
 export const List = styled.div`
   ${listUnstyled}
   display: none;
-  flex-wrap: wrap;
-  margin-left: calc(-1 * ${GRID_GAP});
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: ${GRID_GAP};
 
-  ${respond(`display: flex;`, 65)}
+  ${respond(`display: grid;`, 65)}
+
+  @container (min-inline-size: 800px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 export const Item = styled.label`
   ${buttonUnstyled}
   display: flex;
-  flex-basis: calc(50% - ${GRID_GAP});
   flex-direction: column;
   align-items: center;
   padding: 18px 10px;
-  margin-bottom: ${GRID_GAP};
-  margin-left: ${GRID_GAP};
   border: 1px solid var(--color-neutral-ui-dull-light);
   transition: background-color var(--transition-duration-fast)
       var(--transition-timing-function),
     border-color ${defaultTransitionProps};
-
-  ${respond(`flex-basis: calc(25% - ${GRID_GAP});`, 60)}
-
-  ${respond(
-    `flex-basis: calc(20% - ${GRID_GAP});`,
-    80
-  )}
 
   &:hover,
   &:focus-within {
