@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Link from "./Link";
-import Notation from "./Notation";
+import Thumbnail from "./Thumbnail";
 import IconComposer from "global/components/utility/IconComposer";
 
 import { withTranslation } from "react-i18next";
@@ -11,8 +11,8 @@ import Authorize from "hoc/Authorize";
 // This class represents a single notation in the margin. It's used to show the active
 // notation when notations are grouped, and it's used to show a single notation in the
 // reader margin.
-class NotationViewerSingle extends PureComponent {
-  static displayName = "NotationViewer.Single";
+class ViewerSingle extends PureComponent {
+  static displayName = "ResourceAnnotation.Viewer.Single";
 
   static propTypes = {
     entry: PropTypes.object,
@@ -42,10 +42,7 @@ class NotationViewerSingle extends PureComponent {
     });
     const height = entry.height ? entry.height + "px" : "auto";
 
-    /* eslint-disable jsx-a11y/anchor-is-valid                                          */
-    /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
-    /* false positive, as the child Link component does in fact render an a tag with a  */
-    /* href.                                                                            */
+    /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
       <div className="notation-preview-single">
         <Authorize entity={annotation} ability="delete">
@@ -79,7 +76,7 @@ class NotationViewerSingle extends PureComponent {
               actions.makeActive(null);
             }}
           >
-            <Notation notation={notation} showTitle={this.props.showTitle} />
+            <Thumbnail notation={notation} showTitle={this.props.showTitle} />
           </div>
         </Link>
       </div>
@@ -88,4 +85,4 @@ class NotationViewerSingle extends PureComponent {
   }
 }
 
-export default withTranslation()(NotationViewerSingle);
+export default withTranslation()(ViewerSingle);

@@ -4,7 +4,7 @@ import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import values from "lodash/values";
 import union from "lodash/union";
-import Notation from "reader/components/notation";
+import ResourceAnnotationFactory from "reader/components/resource-annotation";
 import smoothScroll from "utils/smoothScroll";
 import { withTranslation } from "react-i18next";
 
@@ -78,7 +78,8 @@ class TextNode extends Component {
         resourceCollectionId,
         authorCreated,
         abilities,
-        annotationStyle
+        annotationStyle,
+        readerDisplayFormat
       } = a.attributes;
       return {
         id,
@@ -92,7 +93,8 @@ class TextNode extends Component {
         resourceId,
         resourceCollectionId,
         authorCreated,
-        abilities
+        abilities,
+        readerDisplayFormat
       };
     });
   }
@@ -252,7 +254,7 @@ class TextNode extends Component {
         <Tag key={index} {...props}>
           {chunk}
           {endingResources.length > 0 ? (
-            <Notation.Marker annotations={endingResources} />
+            <ResourceAnnotationFactory annotations={endingResources} />
           ) : null}
         </Tag>
       );

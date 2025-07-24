@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import Notation from "reader/containers/notation";
+import ResourceAnnotation from "reader/containers/resource-annotation";
 import PropTypes from "prop-types";
 import humps from "utils/humps";
 
-export default class NewNotation extends PureComponent {
+export default class NewResourceAnnotation extends PureComponent {
   static drawerProps = () => {
     return {
       context: "backend",
@@ -28,7 +28,7 @@ export default class NewNotation extends PureComponent {
 
   render() {
     return (
-      <Notation.Picker
+      <ResourceAnnotation.Picker
         projectId={this.props.projectId}
         selectionHandler={this.saveAnnotation}
       />
