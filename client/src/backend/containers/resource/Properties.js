@@ -106,6 +106,15 @@ export class ResourcePropertiesContainer extends PureComponent {
             optionToValue={tag => tag.attributes.name}
             allowNew
           />
+          <Form.Upload
+            layout="square"
+            label={t("resources.properties.thumbnail")}
+            accepts="images"
+            readFrom="attributes[variantThumbnailStyles][small]"
+            name="attributes[variantThumbnail]"
+            remove="attributes[removeVariantThumbnail]"
+            instructions={t("resources.properties.thumbnail_instructions")}
+          />
           <Form.TextArea
             label={t("resources.descript_label")}
             name="attributes[description]"
