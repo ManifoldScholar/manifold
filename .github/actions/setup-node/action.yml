@@ -2,7 +2,7 @@ name: "Setup Node.js"
 runs:
   using: "composite"
   steps:
-    - name: "Install Node"
+    - name: "Install Node 20.x"
       uses: actions/setup-node@v4
       with:
         node-version-file: "./client/package.json"
