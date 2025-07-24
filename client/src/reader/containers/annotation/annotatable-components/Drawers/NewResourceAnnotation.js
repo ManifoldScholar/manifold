@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
-import ResourceAnnotation from "reader/containers/resource-annotation";
+import AddResourceAnnotationForm from "reader/containers/resource-annotation/AddResourceAnnotationForm";
 import PropTypes from "prop-types";
-import humps from "utils/humps";
 
 export default class NewResourceAnnotation extends PureComponent {
   static drawerProps = () => {
@@ -18,19 +17,13 @@ export default class NewResourceAnnotation extends PureComponent {
     actions: PropTypes.object.isRequired
   };
 
-  saveAnnotation = notation => {
-    const { pendingAnnotation } = this.props;
-    const format = humps.decamelize(notation.type.slice(0, -1)); // Type is a plural, so take the 's' off
-    const attributes = { ...pendingAnnotation, format };
-    const toCreate = { attributes };
-    return this.props.actions.createAnnotation(toCreate, { notation });
-  };
-
   render() {
     return (
-      <ResourceAnnotation.Picker
+      <AddResourceAnnotationForm
         projectId={this.props.projectId}
-        selectionHandler={this.saveAnnotation}
+        pendingAnnotation={this.props.pendingAnnotation}
+        createAnnotation={this.props.actions.createAnnotation}
+        closeDrawer={this.props.close}
       />
     );
   }
