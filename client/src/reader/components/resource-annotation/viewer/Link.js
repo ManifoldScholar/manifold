@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
-class NotationViewerLink extends PureComponent {
+class ViewerLink extends PureComponent {
   static propTypes = {
     params: PropTypes.shape({
       sectionId: PropTypes.string,
@@ -50,4 +50,4 @@ class NotationViewerLink extends PureComponent {
   }
 }
 
-export default NotationViewerLink;
+export default ViewerLink;

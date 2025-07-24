@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import MenuItem from "reader/components/annotation/popup/parts/MenuItem";
 
-function Notate({ menu, actions, text }) {
+function Resource({ menu, actions, text }) {
   const { t } = useTranslation();
 
   return (
     <MenuItem
       menu={menu}
-      onClick={actions.openNewNotationDrawer}
+      onClick={actions.openNewResourceAnnotationDrawer}
       ability="notate"
       entity={text}
       label={t("glossary.resource_one")}
@@ -19,12 +19,12 @@ function Notate({ menu, actions, text }) {
   );
 }
 
-Notate.displayName = "Annotation.Popup.Menus.MainMenu.Notate";
+Resource.displayName = "Annotation.Popup.Menus.MainMenu.Resource";
 
-Notate.propTypes = {
+Resource.propTypes = {
   menu: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   text: PropTypes.object.isRequired
 };
 
-export default Notate;
+export default Resource;
