@@ -3,14 +3,11 @@ import Resourceish from "frontend/components/resourceish";
 import Link from "./Link";
 import IconComposer from "global/components/utility/IconComposer";
 
-export default function NotationViewerPreview({ entry, params }) {
+export default function ViewerPreview({ entry, params }) {
   return (
     <div inert={!entry ? "" : undefined} className="notation-preview-footer">
       {entry && (
-        /* eslint-disable jsx-a11y/anchor-is-valid                                          */
-        /* jsx-a11y sees the link in this component as missing a href attribute, but it's a */
-        /* false positive, as the child Link component does in fact render an a tag with a  */
-        /* href.                                                                            */
+        /* eslint-disable jsx-a11y/anchor-is-valid */
         <Link
           notation={entry.notation}
           params={params}
@@ -48,9 +45,9 @@ export default function NotationViewerPreview({ entry, params }) {
   );
 }
 
-NotationViewerPreview.displayName = "NotationViewer.Preview";
+ViewerPreview.displayName = "ResourceAnnotation.Viewer.Preview";
 
-NotationViewerPreview.propTypes = {
+ViewerPreview.propTypes = {
   entry: PropTypes.object,
   params: PropTypes.object,
   actions: PropTypes.shape({

@@ -6,13 +6,13 @@ import { resourcesAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import Overlay from "global/components/Overlay";
-import Notation from "reader/components/notation";
+import { Resource as ResourceDetail } from "reader/components/resource-annotation";
 import lh from "helpers/linkHandler";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 const { request, flush } = entityStoreActions;
 
-export class NotationResourceDetailContainer extends PureComponent {
+export class ResourceAnnotationResourceDetailContainer extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       resource: select(requests.rResource, state.entityStore),
@@ -31,7 +31,7 @@ export class NotationResourceDetailContainer extends PureComponent {
     return Promise.all(promises);
   };
 
-  static displayName = "ReaderContainer.Notation.Resource.Detail";
+  static displayName = "ReaderContainer.ResourceAnnotation.Resource.Detail";
 
   static propTypes = {
     route: PropTypes.object,
@@ -71,7 +71,7 @@ export class NotationResourceDetailContainer extends PureComponent {
           }
         >
           <div className="notation-detail">
-            <Notation.Resource.Detail
+            <ResourceDetail
               resource={this.props.resource}
               handleClose={this.handleClose}
             />
@@ -83,5 +83,5 @@ export class NotationResourceDetailContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  connectAndFetch(NotationResourceDetailContainer)
+  connectAndFetch(ResourceAnnotationResourceDetailContainer)
 );
