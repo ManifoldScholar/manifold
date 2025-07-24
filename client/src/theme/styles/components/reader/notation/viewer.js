@@ -59,7 +59,7 @@ export default `
       position: absolute;
       top: 0;
       right: 3vw;
-      /* There is a bit of javascript in the Reader/Notation/Viewer/List component that relies on the following display: none property. If the viewer-list is not visible, the List component will automatically set the active notation as the user scrolls, to populate the preview. We detect the visibility of the viewer-list by checking for an offsetParent, which is null if the element is set to display: none. In short, if you change hows this element is hidden/visible, you may need to revisit that logic as well. I realize the separation of concerns here isn't ideal, but it's worth it to maintain simplicity around how we track which notation is active. --ZD */
+      /* There is a bit of javascript in the reader/resource-annotation/viewer/List component that relies on the following display: none property. If the viewer-list is not visible, the List component will automatically set the active notation as the user scrolls, to populate the preview. We detect the visibility of the viewer-list by checking for an offsetParent, which is null if the element is set to display: none. In short, if you change hows this element is hidden/visible, you may need to revisit that logic as well. I realize the separation of concerns here isn't ideal, but it's worth it to maintain simplicity around how we track which notation is active. --ZD */
       display: none;
       height: 100%;
 

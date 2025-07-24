@@ -2,12 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Resourceish from "frontend/components/resourceish";
 
-// The Notation class is used to generate a notation thumbnail, which is currently either
-// a resource or a collection. Please do not add any logic to this class that's not
-// directly related to rendering the thumbnail. Logic around linking or visibility does
-// not belong here.
-export default class NotationViewerNotation extends PureComponent {
-  static displayName = "NotationViewer.Notation";
+export default class Thumbnail extends PureComponent {
+  static displayName = "ResourceAnnotation.Viewer.Thumbnail";
 
   static propTypes = {
     notation: PropTypes.object,
