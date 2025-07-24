@@ -81,7 +81,9 @@
       "caption_label": "Caption",
       "caption_placeholder": "Enter a short description",
       "download_label": "Allow download?",
-      "save": "Save Resource"
+      "save": "Save Resource",
+      "thumbnail": "Thumbnail",
+      "thumbnail_instructions": "Displayed in resource annotation blocks and in lists."
     },
     "import": {
       "header": "Bulk Add Resources",
