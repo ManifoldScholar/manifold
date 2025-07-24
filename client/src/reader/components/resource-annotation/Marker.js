@@ -6,7 +6,7 @@ import { uiReaderActions } from "actions";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 
-export class NotationMarker extends Component {
+export class Marker extends Component {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       activeAnnotation: state.ui.transitory.reader.activeAnnotation
@@ -103,4 +103,4 @@ export class NotationMarker extends Component {
   }
 }
 
-export default connectAndFetch(NotationMarker);
+export default connectAndFetch(Marker);
