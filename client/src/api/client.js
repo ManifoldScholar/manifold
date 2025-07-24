@@ -3,8 +3,6 @@ import isPlainObject from "lodash/isPlainObject";
 import has from "lodash/has";
 import LowLevelApiClient from "./LowLevelApiClient";
 
-require("isomorphic-fetch");
-
 export default class ApiClient {
   constructor() {
     this.client = new LowLevelApiClient();
