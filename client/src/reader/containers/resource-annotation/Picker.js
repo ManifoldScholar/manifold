@@ -16,7 +16,7 @@ import { withTranslation } from "react-i18next";
 const { request } = entityStoreActions;
 const perPage = 5;
 
-export class NotationPickerContainerImplementation extends PureComponent {
+export class ResourceAnnotationPickerContainerImplementation extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       resources: select(requests.beResources, state.entityStore),
@@ -33,7 +33,7 @@ export class NotationPickerContainerImplementation extends PureComponent {
     return { ...newState, ...ownProps };
   };
 
-  static displayName = "ReaderContainer.Notation.Picker";
+  static displayName = "ReaderContainer.ResourceAnnotation.Picker";
 
   static propTypes = {
     projectId: PropTypes.string,
@@ -188,13 +188,15 @@ export class NotationPickerContainerImplementation extends PureComponent {
   }
 }
 
-export const NotationPickerContainer = withFilteredLists(
-  NotationPickerContainerImplementation,
+export const ResourceAnnotationPickerContainer = withFilteredLists(
+  ResourceAnnotationPickerContainerImplementation,
   {
     notations: keywordFilter()
   }
 );
 
 export default withTranslation()(
-  connect(NotationPickerContainer.mapStateToProps)(NotationPickerContainer)
+  connect(ResourceAnnotationPickerContainer.mapStateToProps)(
+    ResourceAnnotationPickerContainer
+  )
 );

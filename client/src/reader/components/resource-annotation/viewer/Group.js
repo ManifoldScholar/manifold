@@ -2,16 +2,16 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Single from "./Single";
-import Notation from "./Notation";
+import Thumbnail from "./Thumbnail";
 import Link from "./Link";
 
-export default class NotationViewerGroup extends PureComponent {
+export default class ViewerGroup extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const activeNotation = state.ui.transitory.reader.activeNotation;
     return { activeNotation, ...ownProps };
   };
 
-  static displayName = "NotationViewer.Group";
+  static displayName = "ResourceAnnotation.Viewer.Group";
 
   static propTypes = {
     group: PropTypes.object,
@@ -109,7 +109,7 @@ export default class NotationViewerGroup extends PureComponent {
                 >
                   <div className={thumbnailClass}>
                     <Link params={params} notation={notation}>
-                      <Notation
+                      <Thumbnail
                         notation={notation}
                         showTitle={false}
                         neverCrop
