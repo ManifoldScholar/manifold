@@ -5,7 +5,7 @@ import ResourceMarkers from "./Marker";
 export default function Factory({ annotations }) {
   const [blocks, markers] = partition(
     annotations,
-    a => a.readerDisplayFormat === "block"
+    a => a.readerDisplayFormat === "block" || a.readerDisplayFormat === "embed"
   );
   return (
     <>
