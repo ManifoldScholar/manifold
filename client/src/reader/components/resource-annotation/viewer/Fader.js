@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-export default class NotationFader extends PureComponent {
-  static displayName = "NotationViewer.Fader";
+export default class Fader extends PureComponent {
+  static displayName = "ResourceAnnotation.Viewer.Fader";
 
   static propTypes = {
     children: PropTypes.element.isRequired

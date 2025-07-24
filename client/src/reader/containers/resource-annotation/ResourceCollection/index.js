@@ -12,7 +12,7 @@ const { request, flush } = entityStoreActions;
 const page = 1;
 const perPage = 10;
 
-export class NotationResourceCollectionDetailContainer extends PureComponent {
+export class ResourceAnnotationResourceCollectionDetailContainer extends PureComponent {
   static fetchData = (getState, dispatch, location, match) => {
     const state = getState();
     const promises = [];
@@ -51,7 +51,8 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
     return { ...newState, ...ownProps };
   };
 
-  static displayName = "ReaderContainer.Notation.ResourceCollection.Detail";
+  static displayName =
+    "ReaderContainer.ResourceAnnotation.ResourceCollection.Detail";
 
   static propTypes = {
     route: PropTypes.object,
@@ -106,4 +107,6 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
   }
 }
 
-export default connectAndFetch(NotationResourceCollectionDetailContainer);
+export default connectAndFetch(
+  ResourceAnnotationResourceCollectionDetailContainer
+);

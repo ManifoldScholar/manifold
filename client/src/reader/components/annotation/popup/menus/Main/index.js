@@ -49,7 +49,7 @@ function MainMenu({
       <MenuItems.Share {...itemProps} onClick={() => openSubmenu("share")} />
       {permitAnnotation && (
         <>
-          <MenuItems.Notate {...itemProps} />
+          <MenuItems.Resource {...itemProps} />
           <MenuItems.Annotate {...itemProps} />
           <MenuItems.Highlight {...itemProps} />
         </>
