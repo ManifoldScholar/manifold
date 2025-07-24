@@ -2,7 +2,7 @@ import Group from "./Group";
 import Link from "./Link";
 import Single from "./Single";
 import List from "./List";
-import Notation from "./Notation";
+import Thumbnail from "./Thumbnail";
 import Fader from "./Fader";
 import Preview from "./Preview";
 
@@ -11,7 +11,7 @@ export default {
   Link,
   Single,
   List,
-  Notation,
+  Thumbnail,
   Fader,
   Preview
 };
