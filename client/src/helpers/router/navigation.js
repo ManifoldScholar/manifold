@@ -493,7 +493,6 @@ class Navigation {
     if (
       kind === "image" ||
       kind === "audio" ||
-      kind === "pdf" ||
       kind === "interactive" ||
       (kind === "video" && !externalVideo)
     ) {
