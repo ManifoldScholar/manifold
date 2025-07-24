@@ -120,7 +120,8 @@ function AddResourceAnnotationForm({
               }}
               entityComponentProps={{
                 onRowClick: entity => setSelected(entity),
-                rowClickMode: "block"
+                rowClickMode: "block",
+                active: selected?.id
               }}
               search={<Search {...entitiesListSearchProps("notations")} />}
             />
