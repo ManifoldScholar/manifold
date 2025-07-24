@@ -8,7 +8,7 @@ import AnnotatableDrawer from "./annotatable-components/Drawer";
 import AnnotatablePopup from "./annotatable-components/Popup/index";
 import CaptureSelection from "./annotatable-components/CaptureSelection";
 import CaptureClick from "./annotatable-components/CaptureClick";
-import AnnotationNotationViewer from "./annotatable-components/NotationViewer";
+import { Viewer as ResourceAnnotationViewer } from "reader/components/resource-annotation";
 import selectionHelpers from "./annotatable-components/selectionHelpers";
 import locationHelper from "helpers/location";
 import withReadingGroups from "hoc/withReadingGroups";
@@ -123,7 +123,7 @@ export class Annotatable extends Component {
   get actions() {
     if (this.cachedActions) return this.cachedActions;
     const actions = [
-      "openNewNotationDrawer",
+      "openNewResourceAnnotationDrawer",
       "destroyAnnotation",
       "createHighlight",
       "createAnnotation",
@@ -328,14 +328,14 @@ export class Annotatable extends Component {
     return res.promise;
   };
 
-  openNewNotationDrawer = (event = null) => {
+  openNewResourceAnnotationDrawer = (event = null) => {
     this.setState({
       drawerProps: {
         pendingAnnotation: this.state.selectionState.selectionAnnotation,
         projectId: this.props.projectId
       }
     });
-    this.openDrawer("newNotation", event);
+    this.openDrawer("newResourceAnnotation", event);
   };
 
   openViewAnnotationsDrawer = (ids, event = null) => {
@@ -570,7 +570,7 @@ export class Annotatable extends Component {
           close={this.closeDrawer}
           {...this.state.drawerProps}
         />
-        <AnnotationNotationViewer
+        <ResourceAnnotationViewer.List
           sectionId={this.props.sectionId}
           textId={this.props.textId}
           textSlug={this.props.text.attributes.slug}
