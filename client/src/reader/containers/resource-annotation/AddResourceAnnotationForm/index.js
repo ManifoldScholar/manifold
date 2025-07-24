@@ -82,7 +82,7 @@ function AddResourceAnnotationForm({
         : "block"
       : "inline";
 
-    const format = visible === "resources" ? "resource" : "resourceCollection";
+    const format = visible === "resources" ? "resource" : "resource_collection";
     const annotation = {
       attributes: { ...pendingAnnotation, format, readerDisplayFormat }
     };
