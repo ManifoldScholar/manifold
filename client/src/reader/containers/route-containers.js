@@ -1,13 +1,13 @@
 import Reader from "reader/containers/Reader";
 import Search from "reader/containers/Search";
 import Section from "reader/containers/Section";
-import NotationResourceDetail from "reader/containers/notation/resource/Detail";
-import NotationResourceCollectionDetail from "reader/containers/notation/resource-collection/Detail";
+import AnnotationResourceDetail from "reader/containers/resource-annotation/Resource";
+import AnnotationResourceCollectionDetail from "reader/containers/resource-annotation/ResourceCollection";
 
 export default {
   Reader,
   Search,
   Section,
-  NotationResourceDetail,
-  NotationResourceCollectionDetail
+  AnnotationResourceDetail,
+  AnnotationResourceCollectionDetail
 };
