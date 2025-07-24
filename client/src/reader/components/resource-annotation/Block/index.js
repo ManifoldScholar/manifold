@@ -5,15 +5,20 @@ export default function ResourceBlock({ annotation }) {
   const resource = useFromStore(
     `entityStore.entities.resources["${annotation.resourceId}"]`
   );
-  return (
+  const collection = useFromStore(
+    `entityStore.entities.resourceCollections["${annotation.resourceCollectionId}"]`
+  );
+  const entity = resource ?? collection;
+
+  return entity ? (
     <Styled.Block>
       <p>Resource block for:</p>
-      <p>{resource?.attributes.title}</p>
+      <p>{entity?.attributes.title}</p>
       {annotation.readerDisplayFormat === "embed" ? (
         <p>Display: Interactive embed</p>
       ) : (
         <p>Display: Static callout</p>
       )}
     </Styled.Block>
-  );
+  ) : null;
 }
