@@ -60,17 +60,8 @@ const config = merge(baseConfig(["node", "browserslist"]), {
           transform: compileEnv
         }
       ]
-    }),
-
-    // Isomorphic fetch requires iconv-loader which has a dynamic include that Webpack can't
-    // really handle. We replace it with a noop javascript object, since we don't really need
-    // it. See https://github.com/matthew-andrews/isomorphic-fetch/pull/58. I think mocking it
-    // is a better solution than disabling all warnings, as suggested in that issue.
-    new NormalModuleReplacementPlugin(/iconv-loader$/, "node-noop")
-  ],
-
-  // https://github.com/matthew-andrews/isomorphic-fetch/issues/194#issuecomment-737132024
-  externals: [{ "node-fetch": "commonjs2 node-fetch" }]
+    })
+  ]
 });
 
 export default config;
