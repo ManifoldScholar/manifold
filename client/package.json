@@ -183,13 +183,13 @@
     "webpack-node-externals": "^3.0.0"
   },
   "engines": {
-    "node": "20.x",
+    "node": "22.x",
     "yarn": "4.x"
   },
-  "packageManager": "yarn@4.9.1",
+  "packageManager": "yarn@4.9.2",
   "browserslist": [
     "defaults",
     "not IE 11",
-    "node >= 20"
+    "node >= 22"
   ]
 }
