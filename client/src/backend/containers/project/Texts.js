@@ -207,16 +207,35 @@ export class ProjectTextsContainer extends Component {
     const { refresh } = this.props;
     const closeUrl = lh.link("backendProjectTexts", this.project.id);
 
-    return childRoutes(this.props.route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        wide: true,
-        lockScrollClickCloses: false,
-        closeUrl
-      },
-      childProps: { refresh, project: this.project }
-    });
+    const { routes, ...route } = this.props.route;
+    const drawerRoutes = { ...route, routes: routes.filter(r => !r.ingest) };
+    const ingestRoute = { ...route, routes: [routes.find(r => r.ingest)] };
+
+    return (
+      <>
+        {childRoutes(ingestRoute, {
+          drawer: true,
+          drawerProps: {
+            lockScroll: "always",
+            wide: true,
+            lockScrollClickCloses: false,
+            closeUrl,
+            context: "ingestion"
+          },
+          childProps: { refresh, project: this.project }
+        })}
+        {childRoutes(drawerRoutes, {
+          drawer: true,
+          drawerProps: {
+            lockScroll: "always",
+            wide: true,
+            lockScrollClickCloses: false,
+            closeUrl
+          },
+          childProps: { refresh, project: this.project }
+        })}
+      </>
+    );
   }
 
   render() {

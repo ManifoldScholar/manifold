@@ -260,7 +260,8 @@ const routes = {
               path: "/backend/projects/text/:id/ingestion/:ingestionId/ingest",
               helper: (t, i) =>
                 `/backend/projects/text/${t}/ingestion/${i}/ingest`,
-              modal: false
+              modal: false,
+              ingest: true
             },
             {
               name: "backendTextProperties",
@@ -331,7 +332,8 @@ const routes = {
                     "/backend/projects/text/:id/sections/ingestion/:ingestionId/ingest",
                   helper: (t, i) =>
                     `/backend/projects/text/${t}/sections/ingestion/${i}/ingest`,
-                  modal: false
+                  modal: false,
+                  ingest: true
                 },
                 {
                   name: "backendTextSectionProperties",
@@ -498,7 +500,8 @@ const routes = {
                     "/backend/projects/:id/texts/ingestion/:ingestionId/ingest",
                   helper: (p, i) =>
                     `/backend/projects/${p}/texts/ingestion/${i}/ingest`,
-                  modal: true
+                  modal: true,
+                  ingest: true
                 },
                 {
                   exact: false,
