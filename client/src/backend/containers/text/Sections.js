@@ -20,8 +20,12 @@ export default function TextSectionsContainer({
     const closeUrl = lh.link("backendTextSections", text.id);
 
     const { routes, ...route } = baseRoute;
-    const drawerRoutes = { ...route, routes: routes.filter(r => !r.editor) };
+    const drawerRoutes = {
+      ...route,
+      routes: routes.filter(r => !r.editor && !r.ingest)
+    };
     const editorRoute = { ...route, routes: [routes.find(r => r.editor)] };
+    const ingestRoute = { ...route, routes: [routes.find(r => r.ingest)] };
 
     const appliesToAllStylesheets = text.relationships.stylesheets
       ?.filter(s => s.attributes.appliesToAllTextSections)
@@ -46,6 +50,24 @@ export default function TextSectionsContainer({
             textId: text.id,
             appliesToAllStylesheets,
             nextPosition: text.attributes?.sectionsMap?.length + 1,
+            refresh
+          }
+        })}
+        {childRoutes(ingestRoute, {
+          drawer: true,
+          drawerProps: {
+            lockScroll: "always",
+            lockScrollClickCloses: false,
+            closeUrl,
+            size: "default",
+            padding: "default",
+            context: "ingestion"
+          },
+          childProps: {
+            textId: text.id,
+            sectionIngest: true,
+            nextPosition: text.attributes?.sectionsMap?.length + 1,
+            startSectionId: text?.attributes?.startTextSectionId,
             refresh
           }
         })}

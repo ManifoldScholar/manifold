@@ -69,11 +69,12 @@ function DrawerContent(props, ref) {
 
   // A variety of other classes depend on .drawer--backend
   const classes = classNames(entrySide, size, `pad-${padding}`, {
-    "drawer--backend": context === "backend"
+    "drawer--backend": context === "backend" || context === "ingestion"
   });
 
   const handleClickOutside = e => {
-    if (context === "reader" || context === "editor") return;
+    if (context === "reader" || context === "editor" || context === "ingestion")
+      return;
 
     handleLeaveEvent(e);
     // Return false here so the focus trap isn't actually deactivated. While we want to respond to outside clicks, we want to either fully close the drawer or maintain the focus trap depending on the user's choice in the confirm modal.
