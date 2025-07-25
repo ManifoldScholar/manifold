@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import withConfirmation from "hoc/withConfirmation";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, notificationActions } from "actions";
 import { textsAPI, textCategoriesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
@@ -180,11 +180,26 @@ export class ProjectTextsContainer extends Component {
     });
   };
 
+  notifyDestroy(text) {
+    const t = this.props.t;
+    const notification = {
+      level: 0,
+      id: `TEXT_DESTROYED_${text.id}`,
+      heading: t("notifications.text_delete"),
+      body: t("notifications.delete_entity_body", {
+        title: text.attributes.titlePlaintext
+      }),
+      expiration: 5000
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+  }
+
   destroyText(text) {
     const call = textsAPI.destroy(text.id);
     const textRequest = request(call, requests.beTextDestroy);
     this.props.dispatch(textRequest).promise.then(() => {
       this.props.refresh();
+      this.notifyDestroy(text);
     });
   }
 
