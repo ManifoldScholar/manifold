@@ -62,7 +62,7 @@ class CategoryList extends PureComponent {
   }
 
   get texts() {
-    return this.props.texts;
+    return this.props.texts.filter(text => !text.attributes.markedForPurgeAt);
   }
 
   get callbacks() {
