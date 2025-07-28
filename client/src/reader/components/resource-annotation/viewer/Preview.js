@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Resourceish from "frontend/components/resourceish";
+import Resource from "frontend/components/resource";
 import Link from "./Link";
 import IconComposer from "global/components/utility/IconComposer";
 
@@ -20,8 +20,8 @@ export default function ViewerPreview({ entry, params }) {
                 size="default"
                 className="notation-preview-footer__cube-icon"
               />
-              <Resourceish.Thumbnail
-                resourceish={entry.notation}
+              <Resource.Thumbnail
+                resource={entry.notation}
                 showTitle={false}
                 showKind={false}
                 iconOnly
