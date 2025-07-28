@@ -31,7 +31,7 @@ module V1
         typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
         typed_attribute :entitlement_subject_url, Types::String.meta(read_only: true)
 
-        typed_attribute :marked_for_purge_at, Types::DateTime.meta(read_only: true) do |object|
+        typed_attribute :marked_for_purge_at, Types::DateTime.optional.meta(read_only: true) do |object|
           object.respond_to?(:marked_for_purge_at) ? object.marked_for_purge_at : object.project.marked_for_purge_at
         end
 
