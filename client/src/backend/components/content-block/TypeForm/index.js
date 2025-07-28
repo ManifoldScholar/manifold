@@ -4,6 +4,7 @@ import typeResolver from "../helpers/resolver";
 import setter from "global/components/form/setter";
 import Form from "../../../../global/components/form";
 import { withTranslation } from "react-i18next";
+import { unwrappedForDefaultAttrs } from "./types";
 
 export class ProjectContentTypeForm extends PureComponent {
   static displayName = "Project.Content.TypeForm";
@@ -35,7 +36,10 @@ export class ProjectContentTypeForm extends PureComponent {
   }
 
   setDefaults() {
-    const defaults = this.typeComponent.defaultAttributes;
+    const key = this.type.split("::")?.[1]?.replace("Block", "");
+    const defaults = key
+      ? unwrappedForDefaultAttrs[key].defaultAttributes
+      : null;
     if (!defaults) return null;
     Object.keys(defaults).forEach(attr =>
       this.props.setOther(defaults[attr], `attributes[${attr}]`)
