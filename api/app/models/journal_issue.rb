@@ -92,6 +92,7 @@ class JournalIssue < ApplicationRecord
   delegate :metadata, to: :project
   delegate :finished, to: :project
   delegate :draft, to: :project
+  delegate :marked_for_purge_at, to: :project, prefix: true, allow_nil: true
 
   has_keyword_search! associated_against: {
     journal: [:title],

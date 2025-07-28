@@ -61,7 +61,7 @@ module V1
 
     typed_belongs_to :category
 
-    typed_attribute :marked_for_purge_at, Types::DateTime.meta(read_only: true) do |object|
+    typed_attribute :marked_for_purge_at, Types::DateTime.optional.meta(read_only: true) do |object|
       object.respond_to?(:marked_for_purge_at) ? object.marked_for_purge_at : object.text.marked_for_purge_at
     end
 
