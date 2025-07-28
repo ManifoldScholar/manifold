@@ -5,7 +5,6 @@ import { transientOptions } from "helpers/emotionHelpers";
 export const Preview = styled.div`
   .overlay-full & {
     padding-top: 70px;
-
     ${respond(`padding-top: 120px;`, 70)}
   }
 `;
