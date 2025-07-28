@@ -196,7 +196,8 @@ export class ProjectTextsContainer extends Component {
 
   destroyText(text) {
     const call = textsAPI.destroy(text.id);
-    const textRequest = request(call, requests.beTextDestroy);
+    const options = { removes: text };
+    const textRequest = request(call, requests.beTextDestroy, options);
     this.props.dispatch(textRequest).promise.then(() => {
       this.props.refresh();
       this.notifyDestroy(text);
