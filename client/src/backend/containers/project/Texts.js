@@ -186,7 +186,7 @@ export class ProjectTextsContainer extends Component {
       level: 0,
       id: `TEXT_DESTROYED_${text.id}`,
       heading: t("notifications.text_delete"),
-      body: t("notifications.delete_entity_body", {
+      body: t("notifications.text_delete_body", {
         title: text.attributes.titlePlaintext
       }),
       expiration: 5000
