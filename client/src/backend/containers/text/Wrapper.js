@@ -92,7 +92,7 @@ export class TextWrapperContainer extends PureComponent {
       level: 0,
       id: `TEXT_DESTROYED_${this.props.text.id}`,
       heading: t("notifications.text_delete"),
-      body: t("notifications.delete_entity_body", {
+      body: t("notifications.text_delete_body", {
         title: this.props.text.attributes.titlePlaintext
       }),
       expiration: 5000

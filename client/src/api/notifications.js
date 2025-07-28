@@ -8,7 +8,7 @@ export default {
     return {
       level: 0,
       heading: "The project has been deleted.",
-      body: `Alas, it has passed into the endless night.`,
+      body: `Alas, the project has passed into the endless night. However, it may take a minute or two for all traces to disappear from the frontend.`,
       expiration: defaultExpiration
     };
   },
