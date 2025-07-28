@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import * as StyledThumbnail from "frontend/components/resourceish/Thumbnail/styles";
+import * as StyledThumbnail from "frontend/components/resource/Thumbnail/styles";
 import { respond } from "theme/styles/mixins";
 
 export const Wrapper = styled(StyledThumbnail.Wrapper)`
