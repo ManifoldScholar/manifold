@@ -328,7 +328,7 @@ module Validation
 
   def ingestion_source_filter_params
     params[:filter] = params[:filter].except(:kind) if !params[:filter].nil? && params[:filter][:kind] == ""
-    params.permit(filter: [:order, :keyword, :kind])[:filter]
+    params.permit(filter: [:order, :keyword, :kind, :format])[:filter]
   end
 
   def stylesheet_params
