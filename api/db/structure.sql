@@ -4301,13 +4301,6 @@ CREATE UNIQUE INDEX index_analytics_visits_on_visit_token ON public.analytics_vi
 
 
 --
--- Name: index_analytics_visits_on_visitor_token_and_started_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_analytics_visits_on_visitor_token_and_started_at ON public.analytics_visits USING btree (visitor_token, started_at);
-
-
---
 -- Name: index_annotations_for_membership_counts; Type: INDEX; Schema: public; Owner: -
 --
 
