@@ -35,18 +35,18 @@ export default function useFetchHomepageContent(fetchProjects) {
 
   const featuresFilters = useMemo(() => ({ home: true }), []);
 
-  const { data: projects, loaded: projectsLoaded } = useFetch({
+  const { data: projectsData, loaded: projectsLoaded } = useFetch({
     request: [projectsAPI.index, projectFilters, projectPagination],
     condition: fetchProjects
   });
 
-  const { data: collections, loaded: collectionsLoaded } = useFetch({
+  const { data: collectionsData, loaded: collectionsLoaded } = useFetch({
     request: [projectCollectionsAPI.index, collectionFilters],
     withAuthDependency: true,
     condition: !fetchProjects
   });
 
-  const { data: journals, loaded: journalsLoaded } = useFetch({
+  const { data: journalsData, loaded: journalsLoaded } = useFetch({
     request: [journalsAPI.index, journalFilters],
     withAuthDependency: true
   });
@@ -60,6 +60,26 @@ export default function useFetchHomepageContent(fetchProjects) {
     journalsLoaded && featuresLoaded && fetchProjects
       ? projectsLoaded
       : collectionsLoaded;
+
+  const projects = projectsData?.filter(p => !p?.attributes.markedForPurgeAt);
+  const journals = journalsData?.map(j => ({
+    ...j,
+    relationships: {
+      ...j.relationships,
+      recentJournalIssues: j.relationships.recentJournalIssues.filter(
+        i => !i?.attributes.projectMarkedForPurgeAt
+      )
+    }
+  }));
+  const collections = collectionsData?.map(c => ({
+    ...c,
+    relationships: {
+      ...c.relationships,
+      collectionProjects: c.relationships.collectionProjects.filter(
+        p => !p?.attributes.markedForPurgeAt
+      )
+    }
+  }));
 
   return { loaded, journals, projects, collections, features };
 }
