@@ -4,11 +4,11 @@ import Utility from "global/components/utility";
 import IconComputed from "global/components/icon-computed";
 import * as Styled from "./styles";
 
-function Icon({ resourceish }) {
+function Icon({ resource }) {
   const {
     type,
     attributes: { kind }
-  } = resourceish;
+  } = resource;
 
   if (type !== "resources" && type !== "resourceCollections") return null;
 
@@ -23,10 +23,10 @@ function Icon({ resourceish }) {
   );
 }
 
-Icon.displayName = "Resourceish.Thumbnail.Icon";
+Icon.displayName = "Resource.Thumbnail.Icon";
 
 Icon.propTypes = {
-  resourceish: PropTypes.object.isRequired
+  resource: PropTypes.object.isRequired
 };
 
 export default Icon;
