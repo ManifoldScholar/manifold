@@ -1,5 +1,5 @@
-import videoPlayer from "./videoPlayer";
+import vdsTheme from "./vds_theme";
 
 export default `
-${videoPlayer}
+${vdsTheme}
 `;
