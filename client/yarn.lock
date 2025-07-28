@@ -1820,6 +1820,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@floating-ui/core@npm:^1.7.2":
+  version: 1.7.2
+  resolution: "@floating-ui/core@npm:1.7.2"
+  dependencies:
+    "@floating-ui/utils": "npm:^0.2.10"
+  checksum: 10c0/ea5909ae1bfad6d8dd60ab893c7751fd974d96b25481d13805935a089b39881b4d69425a0a84cc74c82269d8b64ca0117c472fc83e425143bee1bb21b247de9c
+  languageName: node
+  linkType: hard
+
 "@floating-ui/dom@npm:^1.0.0":
   version: 1.7.0
   resolution: "@floating-ui/dom@npm:1.7.0"
@@ -1827,6 +1836,16 @@ __metadata:
     "@floating-ui/core": "npm:^1.7.0"
     "@floating-ui/utils": "npm:^0.2.9"
   checksum: 10c0/49a7f0fbef82ba2c2f0bde7bb4812b276ae431b59e6a81427283a55cfb36c0af9cc459cbeb0bb1a5cc3efca1a332f584e123e7b1a8f0a9c94a21989b09b8c060
+  languageName: node
+  linkType: hard
+
+"@floating-ui/dom@npm:^1.6.10":
+  version: 1.7.2
+  resolution: "@floating-ui/dom@npm:1.7.2"
+  dependencies:
+    "@floating-ui/core": "npm:^1.7.2"
+    "@floating-ui/utils": "npm:^0.2.10"
+  checksum: 10c0/1b2ad76dc7fe245a1bb406cd5b64a1316f2ec642aebaa4d1928b56ced6fe71046f089e3fef9340bab234645b6333546211e363a630a9e7cfca6bf5031c39e0cb
   languageName: node
   linkType: hard
 
@@ -1853,6 +1872,13 @@ __metadata:
     react: ">=17.0.0"
     react-dom: ">=17.0.0"
   checksum: 10c0/901317ca85ed0b80231edc1ded1f67e685cd736ed52949b3b7ce2fa4bb52635a5676b035996e6d98f675f60891869b312beb1a2572001758d0ee2cce0efb1a77
+  languageName: node
+  linkType: hard
+
+"@floating-ui/utils@npm:^0.2.10":
+  version: 0.2.10
+  resolution: "@floating-ui/utils@npm:0.2.10"
+  checksum: 10c0/e9bc2a1730ede1ee25843937e911ab6e846a733a4488623cd353f94721b05ec2c9ec6437613a2ac9379a94c2fd40c797a2ba6fa1df2716f5ce4aa6ddb1cf9ea4
   languageName: node
   linkType: hard
 
@@ -3365,6 +3391,19 @@ __metadata:
   dependencies:
     "@types/yargs-parser": "npm:*"
   checksum: 10c0/d16937d7ac30dff697801c3d6f235be2166df42e4a88bf730fa6dc09201de3727c0a9500c59a672122313341de5f24e45ee0ff579c08ce91928e519090b7906b
+  languageName: node
+  linkType: hard
+
+"@vidstack/react@npm:^1.12.13":
+  version: 1.12.13
+  resolution: "@vidstack/react@npm:1.12.13"
+  dependencies:
+    "@floating-ui/dom": "npm:^1.6.10"
+    media-captions: "npm:^1.0.4"
+  peerDependencies:
+    "@types/react": ^18.0.0 || ^19.0.0
+    react: ^18.0.0 || ^19.0.0
+  checksum: 10c0/b86f9ad1026b041eae54ba9f0840a826805252083bc6add75490ac243d316b19e937cf2e72db5a527193e1fb65adf73a1cd9ef58523559207947b7123dc4d11a
   languageName: node
   linkType: hard
 
@@ -9406,6 +9445,7 @@ __metadata:
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.6.1"
     "@types/react": "npm:^18.x"
     "@types/react-dom": "npm:^18.x"
+    "@vidstack/react": "npm:^1.12.13"
     "@wavesurfer/react": "npm:^1.0.11"
     ace-builds: "npm:^1.x"
     actioncable: "npm:~5.0.7"
@@ -9448,6 +9488,7 @@ __metadata:
     lint-staged: "npm:^16.1.2"
     lodash: "npm:^4.17.21"
     mammoth: "npm:^1.9.1"
+    media-icons: "npm:^1.1.5"
     mini-css-extract-plugin: "npm:^2.9.2"
     minimist: "npm:^1.2.8"
     mkdirp: "npm:^3.0.1"
@@ -9545,6 +9586,20 @@ __metadata:
   version: 2.12.2
   resolution: "mdn-data@npm:2.12.2"
   checksum: 10c0/b22443b71d70f72ccc3c6ba1608035431a8fc18c3c8fc53523f06d20e05c2ac10f9b53092759a2ca85cf02f0d37036f310b581ce03e7b99ac74d388ef8152ade
+  languageName: node
+  linkType: hard
+
+"media-captions@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "media-captions@npm:1.0.4"
+  checksum: 10c0/62c6df2909b748284e929fe3d169548b42b91ea79374f67f89a313aa529395b024d5be82056613f3e88ebb2e4a86464f6c6a8d569bc7bae2f5542baa350031ba
+  languageName: node
+  linkType: hard
+
+"media-icons@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "media-icons@npm:1.1.5"
+  checksum: 10c0/7b9afb4314d0d3cc194e300bd88e05c4f468e070fa2d972e56bfbbb071d7ab969148efea351ba9bcf38b04a1c69ae34207a9807c7e9553d13aae88df8c42fa47
   languageName: node
   linkType: hard
 
