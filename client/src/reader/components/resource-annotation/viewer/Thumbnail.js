@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Resourceish from "frontend/components/resourceish";
+import Resource from "frontend/components/resource";
 
 export default class Thumbnail extends PureComponent {
   static displayName = "ResourceAnnotation.Viewer.Thumbnail";
@@ -26,7 +26,7 @@ export default class Thumbnail extends PureComponent {
   }
 
   hasImage() {
-    return Resourceish.Thumbnail.hasImage(this.props.notation, this.variant);
+    return Resource.Thumbnail.hasImage(this.props.notation, this.variant);
   }
 
   renderNotation() {
@@ -34,9 +34,9 @@ export default class Thumbnail extends PureComponent {
     let noCrop = false;
     if (this.hasImage && !neverCrop) noCrop = true;
     return (
-      <Resourceish.Thumbnail
+      <Resource.Thumbnail
         key={notation.id}
-        resourceish={notation}
+        resource={notation}
         showKind={false}
         noCrop={noCrop}
         showTitle={showTitle}
