@@ -40,7 +40,15 @@ const extToTag = ext => {
   }
 };
 
-export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
+export default function AssetRow({
+  entity: asset,
+  onDelete,
+  onEdit,
+  isBrowse,
+  active,
+  onRowClick,
+  ...rest
+}) {
   const { t } = useTranslation();
 
   const {
@@ -97,16 +105,28 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
     </Styled.ButtonGroup>
   );
 
+  const onClick = e => {
+    e.preventDefault();
+    if (onRowClick) onRowClick(asset);
+  };
+
   const rowProps = {
     title: <Styled.Truncate>{displayName ?? sourceIdentifier}</Styled.Truncate>,
-    subtitle: <Styled.Truncate>{src}</Styled.Truncate>,
+    subtitle: !isBrowse ? <Styled.Truncate>{src}</Styled.Truncate> : undefined,
     figure,
     figureHasWrapper: true,
-    label: extToTag(attachmentExtension),
+    label: !isBrowse ? extToTag(attachmentExtension) : undefined,
+    onRowClick: onRowClick ? onClick : undefined,
     ...rest
   };
 
-  return <EntityRow utility={utility} {...rowProps} />;
+  return (
+    <EntityRow
+      utility={!isBrowse ? utility : undefined}
+      active={active === asset.id}
+      {...rowProps}
+    />
+  );
 }
 
 AssetRow.displayName = "EntitiesList.Entity.AssetRow";
