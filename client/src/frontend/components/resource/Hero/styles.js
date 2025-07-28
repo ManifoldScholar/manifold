@@ -35,6 +35,6 @@ export const Resource = styled.div`
   }
 `;
 
-export const ResourceAudio = styled(Resource)`
-  height: auto;
-`;
+// export const ResourceAudio = styled(Resource)`
+//   height: auto;
+// `;
