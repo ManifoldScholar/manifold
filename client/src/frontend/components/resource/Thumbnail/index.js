@@ -6,16 +6,16 @@ import has from "lodash/has";
 import Icon from "./Icon";
 import * as Styled from "./styles";
 
-class ResourceishThumbnail extends Component {
-  static displayName = "Resourceish.Thumbnail";
+class ResourceThumbnail extends Component {
+  static displayName = "Resource.Thumbnail";
 
-  static hasImage(resourceish, variant) {
-    return this.imageKey(resourceish, variant) !== undefined;
+  static hasImage(resource, variant) {
+    return this.imageKey(resource, variant) !== undefined;
   }
 
-  static imageKey(resourceish, variant) {
-    if (!resourceish) return false;
-    const { attributes } = resourceish;
+  static imageKey(resource, variant) {
+    if (!resource) return false;
+    const { attributes } = resource;
     const lookups = [
       "variantThumbnailStyles",
       "variantPosterStyles",
@@ -27,7 +27,7 @@ class ResourceishThumbnail extends Component {
   }
 
   static propTypes = {
-    resourceish: PropTypes.object,
+    resource: PropTypes.object,
     showKind: PropTypes.bool,
     showTitle: PropTypes.bool,
     variant: PropTypes.string,
@@ -42,16 +42,16 @@ class ResourceishThumbnail extends Component {
     variant: "smallPortrait"
   };
 
-  get resourceish() {
-    return this.props.resourceish;
+  get resource() {
+    return this.props.resource;
   }
 
-  get resourceishType() {
-    return this.resourceish.type;
+  get resourceType() {
+    return this.resource.type;
   }
 
-  get resourceishKind() {
-    const kind = this.resourceish.attributes.kind;
+  get resourceKind() {
+    const kind = this.resource.attributes.kind;
     return this.props.t(`resources.kinds.${kind}`);
   }
 
@@ -64,9 +64,9 @@ class ResourceishThumbnail extends Component {
   }
 
   get image() {
-    const key = this.constructor.imageKey(this.resourceish, this.variant);
+    const key = this.constructor.imageKey(this.resource, this.variant);
     if (!key) return null;
-    return this.resourceish.attributes[key][this.variant];
+    return this.resource.attributes[key][this.variant];
   }
 
   get hasImage() {
@@ -89,10 +89,10 @@ class ResourceishThumbnail extends Component {
   get caption() {
     const t = this.props.t;
     let out = t("glossary.file_title_case_one");
-    switch (this.resourceishType) {
+    switch (this.resourceType) {
       case "resources":
-        if (!this.resourceishKind) break;
-        out = this.resourceishKind;
+        if (!this.resourceKind) break;
+        out = this.resourceKind;
         break;
       case "resourceCollections":
         out = t("glossary.resource_collection_title_case_one");
@@ -111,7 +111,7 @@ class ResourceishThumbnail extends Component {
   }
 
   render() {
-    if (!this.resourceish) return null;
+    if (!this.resource) return null;
 
     return (
       <Styled.Wrapper
@@ -133,18 +133,18 @@ class ResourceishThumbnail extends Component {
               <Styled.ImageWrapper>
                 <Styled.Image
                   src={this.image}
-                  alt={this.resourceish.attributes.altText}
+                  alt={this.resource.attributes.altText}
                 />
                 <Styled.ImageOverlay />
               </Styled.ImageWrapper>
             ) : (
-              <Icon resourceish={this.resourceish} />
+              <Icon resource={this.resource} />
             )}
           </Styled.Figure>
           {this.props.showTitle ? (
             <Styled.Title
               dangerouslySetInnerHTML={{
-                __html: this.resourceish.attributes.titleFormatted
+                __html: this.resource.attributes.titleFormatted
               }}
             />
           ) : null}
@@ -154,4 +154,4 @@ class ResourceishThumbnail extends Component {
   }
 }
 
-export default withTranslation()(ResourceishThumbnail);
+export default withTranslation()(ResourceThumbnail);
