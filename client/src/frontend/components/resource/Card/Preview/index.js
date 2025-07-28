@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Resourceish from "frontend/components/resourceish";
+import Thumbnail from "frontend/components/resource/Thumbnail";
 import ResourcePreview from "frontend/components/resource-preview";
 import Text from "./Text";
 import * as Styled from "./styles";
@@ -13,7 +13,7 @@ function Preview({ resource, detailUrl }) {
 
   const PreviewInner = () => (
     <Styled.Inner>
-      <Resourceish.Thumbnail resourceish={resource} />
+      <Thumbnail resource={resource} />
       <Styled.TextWrapper>
         <Text resource={resource} />
       </Styled.TextWrapper>
