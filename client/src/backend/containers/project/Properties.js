@@ -201,7 +201,7 @@ function ProjectPropertiesContainer({ project }) {
             <Form.Switch
               wide
               label={t("projects.forms.properties.exclude_from_oai_label")}
-              name="attributes[excludeFromOai]"
+              name="attributes[excludeFromOAI]"
               instructions={t(
                 "projects.forms.properties.exclude_from_oai_instructions"
               )}
