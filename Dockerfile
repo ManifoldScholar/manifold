@@ -10,7 +10,7 @@ RUN apt-get install -y libicu-dev postgresql-client nano curl software-propertie
     vim less
 
 # We need Node and Mammoth for Word text ingestion
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g mammoth@^1.4.16
 ENV MAMMOTH_PATH=/usr/lib/node_modules/mammoth/bin/mammoth
@@ -31,7 +31,7 @@ COPY bin/start-and-run /opt/manifold/api/start-and-run
 # Originally copied from:
 # - github.com/ManifoldScholar/manifold-docker-build/blob/v8.1.1/dockerfiles/manifold-client/Dockerfile
 ####################################################################################################
-FROM node:16.16.0 AS manifold-client
+FROM node:18 AS manifold-client
 RUN apt-get -o Acquire::Check-Valid-Until=false update
 RUN apt-get install -y vim less
 
@@ -47,6 +47,7 @@ ENV CLIENT_BROWSER_API_CABLE_URL="https://openpublishing.princeton.edu/cable"
 ENV CLIENT_BROWSER_API_URL="https://openpublishing.princeton.edu"
 ENV DOMAIN="openpublishing.princeton.edu"
 ENV SSL_ENABLED="true"
+ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN yarn run build
 
 ####################################################################################################
