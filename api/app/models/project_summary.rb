@@ -8,9 +8,7 @@ class ProjectSummary < ApplicationRecord
 
   belongs_to :project, inverse_of: :project_summary
 
-  delegate :collected_by?, to: :project
-  delegate :entitlement_subject_url, to: :project
-  delegate :creator_names, to: :project
+  delegate :collected_by?, :entitlement_subject_url, :creator_names, :exclude_from_oai, to: :project
 
   manifold_has_attached_file :avatar, :image
 

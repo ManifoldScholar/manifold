@@ -3,6 +3,7 @@
 module V1
   class ProjectCollectionSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
+    include ::V1::Concerns::HasOAIRecordSerializer
 
     abilities
 
