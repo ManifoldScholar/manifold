@@ -6,6 +6,7 @@ class ProjectCollection < ApplicationRecord
   include Entitleable
   include Filterable
   include HasFormattedAttributes
+  include ManifoldOAISetSource
   include ProjectOrdering
   include SerializedAbilitiesFor
   include Sluggable
@@ -98,6 +99,10 @@ class ProjectCollection < ApplicationRecord
     self.collection_projects = projects.map do |project, index|
       CollectionProject.new(project: project, project_collection: self, position: index)
     end
+  end
+
+  def set_description
+    description
   end
 
   private
