@@ -725,7 +725,7 @@ CREATE TABLE public.project_collections (
     social_title text,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     short_description text,
-    exclude_from_oai boolean
+    exclude_from_oai boolean DEFAULT false
 );
 
 
@@ -798,7 +798,7 @@ CREATE TABLE public.projects (
     social_image_data jsonb,
     social_description text,
     social_title text,
-    exclude_from_oai boolean
+    exclude_from_oai boolean DEFAULT false
 );
 
 
@@ -7833,6 +7833,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250715233614'),
 ('20250718200409'),
 ('20250718201018'),
-('20250721212242');
+('20250721212242'),
+('20250729212944');
 
 
