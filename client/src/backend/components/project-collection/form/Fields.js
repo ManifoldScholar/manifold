@@ -153,7 +153,7 @@ class Fields extends Component {
           <Form.Switch
             wide
             label={t("project_collections.exclude_from_oai_label")}
-            name="attributes[excludeFromOai]"
+            name="attributes[excludeFromOAI]"
             instructions={t(
               "project_collections.exclude_from_oai_instructions"
             )}
