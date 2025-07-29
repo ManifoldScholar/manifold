@@ -68,6 +68,9 @@
     "collection_is_not_visible": "Collection is not visible",
     "save_button_label": "$t(actions.save) Project Collection",
     "hero_alt_label": "Hero Image Alt Text",
-    "display_header": "Display Settings"
+    "properties_header": "Properties",
+    "visibility_header": "Visibility",
+    "exclude_from_oai_label": "Exclude from OAI-PMH",
+    "exclude_from_oai_instructions": "If set, Manifold will exclude this project from the OAI-PMH feed."
   }
 }
