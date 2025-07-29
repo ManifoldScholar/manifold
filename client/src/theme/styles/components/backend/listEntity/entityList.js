@@ -151,6 +151,27 @@ export default `.entity-list {
       )}
     }
 
+    &--modal {
+      ${respond(
+        `
+          display: grid;
+          gap: 8px;
+          grid-template-columns: repeat(
+            auto-fill,
+            minmax(150px, 1fr)
+          );
+
+          li {
+            flex-basis: 25%;
+            flex-grow: 1;
+            min-width: 150px;
+            border-bottom: none;
+          }
+        `,
+        65
+      )}
+    }
+
     &--sortable {
       ${dropzone()}
       padding-top: 9px;
