@@ -62,7 +62,7 @@ class Fields extends Component {
           </Layout.DrawerHeader>
           <KindPicker {...this.props} />
         </div>
-        <Form.FieldGroup label={t("project_collections.display_header")}>
+        <Form.FieldGroup label={t("project_collections.properties_header")}>
           <Form.TextInput
             wide
             label={t("common.slug")}
@@ -84,6 +84,16 @@ class Fields extends Component {
               "project_collections.short_description_instructions"
             )}
           />
+          <IconPicker {...this.props} />
+          <Form.Upload
+            wide
+            layout="portrait"
+            label={t("project_collections.custom_icon")}
+            accepts="images"
+            readFrom="attributes[customIconStyles][small]"
+            name="attributes[customIcon]"
+            remove="attributes[removeCustomIcon]"
+          />
           <Form.Upload
             wide
             layout="portrait"
@@ -104,6 +114,8 @@ class Fields extends Component {
               { label: "Full Bleed", value: "full_bleed" }
             ]}
           />
+        </Form.FieldGroup>
+        <Form.FieldGroup label={t("project_collections.visibility_header")}>
           <Form.Switch
             label={t("project_collections.visible")}
             name="attributes[visible]"
@@ -138,15 +150,13 @@ class Fields extends Component {
               />
             </Form.FieldGroup>
           )}
-          <IconPicker {...this.props} />
-          <Form.Upload
+          <Form.Switch
             wide
-            layout="portrait"
-            label={t("project_collections.custom_icon")}
-            accepts="images"
-            readFrom="attributes[customIconStyles][small]"
-            name="attributes[customIcon]"
-            remove="attributes[removeCustomIcon]"
+            label={t("project_collections.exclude_from_oai_label")}
+            name="attributes[excludeFromOai]"
+            instructions={t(
+              "project_collections.exclude_from_oai_instructions"
+            )}
           />
         </Form.FieldGroup>
         <Form.FieldGroup label={t("project_collections.social_header")}>
