@@ -41,6 +41,9 @@ export default function SlateElement({
       </p>
     );
   }
+  if (element.type === "wbr") {
+    return <></>;
+  }
   if (element.type === "hr") {
     return (
       <Styled.HrOuter contentEditable={false} {...attributes}>
