@@ -29,6 +29,15 @@ export default function SlateLeaf({ attributes, children, leaf, darkMode }) {
     );
   }
 
+  if (leaf.i) {
+    leafChildren = (
+      <i style={showHtml ? getHtmlOutlineStyles("i", darkMode) : undefined}>
+        {leafChildren}
+        <HtmlLabel element={{ type: "i" }} visible={showHtml} />
+      </i>
+    );
+  }
+
   if (leaf.underline) {
     leafChildren = (
       <u style={showHtml ? getHtmlOutlineStyles("u", darkMode) : undefined}>
@@ -44,6 +53,15 @@ export default function SlateLeaf({ attributes, children, leaf, darkMode }) {
         {leafChildren}
         <HtmlLabel element={{ type: "s" }} visible={showHtml} />
       </s>
+    );
+  }
+
+  if (leaf.del) {
+    leafChildren = (
+      <del style={showHtml ? getHtmlOutlineStyles("del", darkMode) : undefined}>
+        {leafChildren}
+        <HtmlLabel element={{ type: "del" }} visible={showHtml} />
+      </del>
     );
   }
 
