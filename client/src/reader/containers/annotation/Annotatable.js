@@ -8,7 +8,6 @@ import AnnotatableDrawer from "./annotatable-components/Drawer";
 import AnnotatablePopup from "./annotatable-components/Popup/index";
 import CaptureSelection from "./annotatable-components/CaptureSelection";
 import CaptureClick from "./annotatable-components/CaptureClick";
-import { Viewer as ResourceAnnotationViewer } from "reader/components/resource-annotation";
 import selectionHelpers from "./annotatable-components/selectionHelpers";
 import locationHelper from "helpers/location";
 import withReadingGroups from "hoc/withReadingGroups";
@@ -570,15 +569,6 @@ export class Annotatable extends Component {
           actions={this.actions}
           close={this.closeDrawer}
           {...this.state.drawerProps}
-        />
-        <ResourceAnnotationViewer.List
-          sectionId={this.props.sectionId}
-          textId={this.props.textId}
-          textSlug={this.props.text.attributes.slug}
-          notations={this.props.notations}
-          annotations={this.props.annotations}
-          containerSize={this.props.containerSize}
-          bodySelector={this.props.bodySelector}
         />
       </>
     );
