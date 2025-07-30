@@ -14,32 +14,41 @@ RSpec.describe AnnotationReaderDisplayFormat, :enum do
   let(:owner) { nil }
 
   describe AnnotationReaderDisplayFormat::Block do
-    context "when not a resource notation" do
-      let(:owner) { FactoryBot.build :annotation, format: "annotation" }
+    context "set on an annotation" do
+      let(:owner) { FactoryBot.build :annotation, format: "annotation", reader_display_format: "block" }
 
-      it { is_expected.to be_invalid }
+      its "annotation is invalid" do
+        expect(owner).not_to be_valid
+      end
     end
 
-    context "when a resource notation" do
-      let(:owner) { FactoryBot.build :annotation, format: "resource" }
+    context "set on a resource notation" do
+      let(:resource) { FactoryBot.build :resource, kind: "image" }
+      let(:owner) { FactoryBot.build :annotation, format: "resource", reader_display_format: "block", resource: resource }
 
-      it { is_expected.to be_valid }
+      its "notation is valid" do
+        expect(owner).to be_valid
+      end
     end
   end
 
   describe AnnotationReaderDisplayFormat::Embed do
-    context "when not an embeddable type" do
+    context "when notation resource not an embeddable type" do
       let(:resource) { FactoryBot.build :resource, kind: "image" }
-      let(:owner) { FactoryBot.build :annotation, format: "resource", resource: resource }
+      let(:owner) { FactoryBot.build :annotation, format: "resource", resource: resource, reader_display_format: "embed" }
 
-      it { is_expected.to be_invalid }
+      its "notation is invalid" do
+        expect(owner).not_to be_valid
+      end
     end
 
-    context "when an embeddable type" do
+    context "when notation resource an embeddable type" do
       let(:resource) { FactoryBot.build :resource, kind: "video" }
-      let(:owner) { FactoryBot.build :annotation, format: "resource", resource: resource }
+      let(:owner) { FactoryBot.build :annotation, format: "resource", resource: resource, reader_display_format: "embed" }
 
-      it { is_expected.to be_valid }
+      its "notation is valid" do
+        expect(owner).to be_valid
+      end
     end
   end
 end
