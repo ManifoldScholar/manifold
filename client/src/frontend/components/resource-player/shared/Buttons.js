@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   CaptionButton,
   FullscreenButton,
@@ -26,9 +27,9 @@ import {
 } from "@vidstack/react/icons";
 import { useTranslation } from "react-i18next";
 
-// export interface MediaButtonProps {
-//   tooltipPlacement: TooltipPlacement;
-// }
+const MediaButtonProps = {
+  thumbnails: PropTypes.string
+};
 
 export function Play({ tooltipPlacement }) {
   const isPaused = useMediaState("paused");
@@ -50,6 +51,8 @@ export function Play({ tooltipPlacement }) {
     </Tooltip.Root>
   );
 }
+
+Play.propTypes = MediaButtonProps;
 
 export function Mute({ tooltipPlacement }) {
   const volume = useMediaState("volume");
@@ -80,6 +83,8 @@ export function Mute({ tooltipPlacement }) {
   );
 }
 
+Mute.propTypes = MediaButtonProps;
+
 export function Caption({ tooltipPlacement }) {
   const track = useMediaState("textTrack");
   const isOn = track && isTrackCaptionKind(track);
@@ -102,6 +107,8 @@ export function Caption({ tooltipPlacement }) {
   );
 }
 
+Caption.propTypes = MediaButtonProps;
+
 export function PIP({ tooltipPlacement }) {
   const isActive = useMediaState("pictureInPicture");
   const { t } = useTranslation();
@@ -122,6 +129,8 @@ export function PIP({ tooltipPlacement }) {
     </Tooltip.Root>
   );
 }
+
+PIP.propTypes = MediaButtonProps;
 
 export function Fullscreen({ tooltipPlacement }) {
   const isActive = useMediaState("fullscreen");
@@ -146,9 +155,7 @@ export function Fullscreen({ tooltipPlacement }) {
   );
 }
 
-// export interface SeekButtonProps extends MediaButtonProps {
-//   seconds: number;
-// }
+Fullscreen.propTypes = MediaButtonProps;
 
 export function Seek({ seconds, tooltipPlacement }) {
   const isBackward = seconds < 0;
@@ -168,3 +175,5 @@ export function Seek({ seconds, tooltipPlacement }) {
     </Tooltip.Root>
   );
 }
+
+Seek.propTypes = { seconds: PropTypes.number, ...MediaButtonProps };
