@@ -1,11 +1,9 @@
 import React, { forwardRef } from "react";
+import PropTypes from "prop-types";
 import { MediaProvider, Track, Poster } from "@vidstack/react";
 import * as Styled from "./styles";
 
-function MediaPlayer(
-  { title, src, tracks, children, poster, playbackRate, ...rest },
-  ref
-) {
+function MediaPlayer({ title, src, tracks, children, poster, ...rest }, ref) {
   if (!src) return null;
 
   return (
@@ -32,3 +30,11 @@ function MediaPlayer(
 }
 
 export default forwardRef(MediaPlayer);
+
+MediaPlayer.propTypes = {
+  title: PropTypes.string,
+  src: PropTypes.string,
+  tracks: PropTypes.arrayOf(PropTypes.object),
+  children: PropTypes.node,
+  poster: PropTypes.string
+};
