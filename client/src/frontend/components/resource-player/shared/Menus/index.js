@@ -1,10 +1,10 @@
+import PropTypes from "prop-types";
 import {
   Menu,
   Tooltip,
   useCaptionOptions,
-  useMediaState
-  // type MenuPlacement,
-  // type TooltipPlacement,
+  useMediaState,
+  usePlaybackRateOptions
 } from "@vidstack/react";
 import {
   ChevronLeftIcon,
@@ -14,16 +14,12 @@ import {
   MuteIcon,
   CheckIcon,
   VolumeLowIcon,
-  VolumeHighIcon
+  VolumeHighIcon,
+  PlaybackSpeedCircleIcon
 } from "@vidstack/react/icons";
-import { Speed as SpeedSlider, Volume as VolumeSlider } from "../Sliders";
+import { Volume as VolumeSlider } from "../Sliders";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
-
-// export interface SettingsProps {
-//   placement: MenuPlacement;
-//   tooltipPlacement: TooltipPlacement;
-// }
 
 export function Volume({ tooltipPlacement }) {
   const isMuted = useMediaState("muted");
@@ -43,7 +39,9 @@ export function Volume({ tooltipPlacement }) {
             ) : (
               <VolumeHighIcon />
             )}
-            <span className="screen-reader-text">{t("actions.adjust_volume")}</span>
+            <span className="screen-reader-text">
+              {t("actions.adjust_volume")}
+            </span>
           </Menu.Button>
         </Tooltip.Trigger>
         <Tooltip.Content
@@ -81,11 +79,16 @@ export function Settings({ placement, tooltipPlacement }) {
       </Tooltip.Root>
       <Menu.Content className="vds-menu-items" placement={placement}>
         <CaptionSubmenu />
-        {/* <SpeedSlider /> */}
+        <SpeedSubmenu />
       </Menu.Content>
     </Menu.Root>
   );
 }
+
+Settings.propTypes = {
+  placement: PropTypes.string,
+  tooltipPlacement: PropTypes.string
+};
 
 function CaptionSubmenu() {
   const options = useCaptionOptions();
@@ -123,21 +126,57 @@ function CaptionSubmenu() {
   );
 }
 
-// export interface SubmenuButtonProps {
-//   label: string;
-//   hint: string;
-//   disabled?: boolean;
-//   icon: ReactNode;
-// }
+function SpeedSubmenu() {
+  const { t } = useTranslation();
+  const options = usePlaybackRateOptions();
+  const hint =
+    options.selectedValue === "1" ? "Normal" : options.selectedValue + "x";
+
+  return (
+    <Menu.Root>
+      <SubmenuButton
+        label={t("actions.speed")}
+        hint={hint}
+        disabled={options.disabled}
+        icon={PlaybackSpeedCircleIcon}
+      />
+      <Menu.Content className="vds-menu-items">
+        <Menu.RadioGroup
+          value={options.selectedValue}
+          className="vds-radio-group"
+        >
+          {options.map(({ label, value, select }) => (
+            <Menu.Radio
+              value={value}
+              onSelect={select}
+              key={value}
+              className="vds-radio"
+            >
+              <CheckIcon className="vds-icon" />
+              <span className="vds-radio-label">{label}</span>
+            </Menu.Radio>
+          ))}
+        </Menu.RadioGroup>
+      </Menu.Content>
+    </Menu.Root>
+  );
+}
 
 function SubmenuButton({ label, hint, icon: Icon, disabled }) {
   return (
     <Menu.Button className="vds-menu-item" disabled={disabled}>
       <ChevronLeftIcon className="vds-menu-close-icon" />
-      <Icon className="vds-icon" />
+      {!!Icon && <Icon className="vds-icon" />}
       <span className="vds-menu-item-label">{label}</span>
       <span className="vds-menu-item-hint">{hint}</span>
       <ChevronRightIcon className="vds-menu-open-icon" />
     </Menu.Button>
   );
 }
+
+SubmenuButton.propTypes = {
+  label: PropTypes.string.isRequired,
+  hint: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
+  icon: PropTypes.node
+};
