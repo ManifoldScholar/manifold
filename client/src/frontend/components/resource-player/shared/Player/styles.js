@@ -14,7 +14,7 @@ export const MediaPlayer = styled(BaseMediaPlayer)`
   --default-bg: var(--media-background-color);
   --default-color: var(--color-base-neutral-white);
   --media-font-family: var(--font-family-sans);
-  --media-controls-background: rgba(0,0,0,.7);
+  --media-controls-background: rgba(0, 0, 0, 0.7);
 
   /* menus */
   --media-menu-padding: 0.25rem;
