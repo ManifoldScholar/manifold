@@ -1,11 +1,4 @@
-import {
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-  useMemo,
-  useContext
-} from "react";
+import { useState, useCallback, useEffect, useMemo, useContext } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
@@ -49,10 +42,21 @@ export default function Marker({ annotation }) {
     [annotation, navigate, location.pathname]
   );
 
-  const [visible, setVisible] = useState(false);
+  const [markerEl, setMarkerEl] = useState(null);
   const [left, setLeft] = useState(0);
-  const markerRef = useRef();
-  const thumbRef = useRef();
+
+  const markerRef = useCallback(node => {
+    if (node !== null) {
+      setMarkerEl(node);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (markerEl) {
+      const rect = markerEl.getBoundingClientRect();
+      setLeft(rect.left);
+    }
+  }, [markerEl]);
 
   const id = annotation.id;
 
@@ -61,79 +65,16 @@ export default function Marker({ annotation }) {
     "notation-marker--active": id === activeAnnotation
   });
 
-  const callback = useCallback(
-    entries => {
-      entries.forEach(entry => {
-        const markerLeft = parseFloat(entry.boundingClientRect.left.toFixed(3));
-        if (left !== markerLeft) setLeft(markerLeft);
+  const { groups } = useContext(MarkerContext);
 
-        if (entry.isIntersecting !== visible) setVisible(entry.isIntersecting);
-      });
-    },
-    [left, setLeft, visible, setVisible]
-  );
+  const group = useMemo(() => Object.values(groups).find(g => g.includes(id)), [
+    groups,
+    id
+  ]);
 
-  const observer = useMemo(
-    () =>
-      new IntersectionObserver(callback, {
-        root: null,
-        rootMargin: "-40px 0px -100px 0px",
-        threshold: 1.0
-      }),
-    [callback]
-  );
-
-  const { setThumbOffsets, overlaps } = useContext(MarkerContext);
-  const [top, setTop] = useState(null);
-
-  const group = useMemo(
-    () => Object.values(overlaps).find(g => g.includes(id)),
-    [overlaps, id]
-  );
-
-  const groupIndex = useMemo(() => {
-    return group ? group.indexOf(id) : null;
+  const rendersGroup = useMemo(() => {
+    return group ? group.indexOf(id) === 0 : false;
   }, [id, group]);
-
-  const thumbCallback = useCallback(
-    entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-          setTop(null);
-        }
-        if (entry.isIntersecting) {
-          setTop(entry.intersectionRect.top);
-        }
-      });
-    },
-    [setTop]
-  );
-
-  const thumbObserver = useMemo(
-    () =>
-      new IntersectionObserver(thumbCallback, {
-        root: null,
-        rootMargin: "-40px 0px -20px 0px",
-        threshold: 0.5
-      }),
-    [thumbCallback]
-  );
-
-  useEffect(() => {
-    if (markerRef.current) observer.observe(markerRef.current);
-    if (thumbRef.current) thumbObserver.observe(thumbRef.current);
-
-    return () => {
-      observer.disconnect();
-      thumbObserver.disconnect();
-    };
-  }, [markerRef, observer, thumbRef, thumbObserver]);
-
-  useEffect(() => {
-    setThumbOffsets(offsets => {
-      return { ...offsets, [id]: top };
-    });
-  }, [top, setThumbOffsets, id]);
 
   return (
     <Styled.Wrapper
@@ -152,11 +93,20 @@ export default function Marker({ annotation }) {
         size={28}
         className="notation-marker__icon"
       />
-      <Styled.Thumbnail ref={thumbRef} $visible={visible} $left={left}>
-        {typeof groupIndex !== "number" && <ThumbnailInner id={id} />}
-        {groupIndex === 0 &&
-          group.map(notationId => <ThumbnailInner id={notationId} grouped />)}
+      <Styled.Thumbnail $left={left}>
+        <ThumbnailInner id={id} hidden={!!group} setsPosition />
       </Styled.Thumbnail>
+      {rendersGroup && (
+        <>
+          <Styled.Thumbnail $left={left}>
+            <Styled.Group $count={group.length}>
+              {group.map(notationId => (
+                <ThumbnailInner id={notationId} grouped />
+              ))}
+            </Styled.Group>
+          </Styled.Thumbnail>
+        </>
+      )}
     </Styled.Wrapper>
   );
 }

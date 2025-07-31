@@ -1,31 +1,42 @@
 import styled from "@emotion/styled";
-import { defaultTransitionProps, respond } from "theme/styles/mixins";
+import { respond } from "theme/styles/mixins";
+import { readerContainerWidths } from "theme/styles/utility/layout";
 
 export const Wrapper = styled.span`
   position: relative;
 `;
 
-export const Thumbnail = styled.div`
-  display: none;
-  position: absolute;
-  opacity: 0;
-  height: 100px;
-  width: 100px;
-  left: ${({ $left }) => ($left ? `-${$left - 45}px` : 0)};
-  top: -50%;
-  transition: opacity ${defaultTransitionProps},
-    transform ${defaultTransitionProps};
+const paddings = readerContainerWidths
+  .map(
+    (width, i) => `
+  --margin-width: calc((100% - ${width}) / 2);
+  --thumbnail-padding: calc(var((--margin-width) - 200px) / 2);
 
-  ${({ $visible }) => $visible && `opacity: 1;`}
+  .container-width-${i} & {
+    padding-inline: calc((((100vw - ${width}) / 2) - 200px) / 2);
+  }
+`
+  )
+  .join("");
+
+export const Thumbnail = styled.div`
+  display: block;
+  position: absolute;
+  left: ${({ $left }) => ($left ? `-${$left}px` : 0)};
+  top: -50%;
+  height: max-content;
+
+  ${paddings}
 
   ${respond(`display: block;`, "1235px")}
+
+  ${({ $right }) =>
+    $right && `left: auto; right: calc((100vw - ${$right}px) * -1);`}
 `;
 
-export const Inner = styled.span`
-  display: block;
-  height: 100px;
-  width: 100px;
-  background-color: var(--color-base-neutral30);
-  border: 2px solid var(--color-accent-primary);
-  ${({ $grouped }) => $grouped && `color: blue;`}
+export const Group = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-block-start: ${({ $count }) => `calc(-1 * ${$count} * 10px)`};
 `;
