@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AudioLayout from "./AudioLayout";
-import Player from "../shared/Player";
+import DefaultPlayer from "../shared/DefaultPlayer";
 
 export default function ResourcePlayerAudio({ resource }) {
   const player = React.useRef(null);
@@ -28,11 +27,7 @@ export default function ResourcePlayerAudio({ resource }) {
 
   if (!src) return null;
 
-  return (
-    <Player title={title} src={src} ref={player} tracks={tracks}>
-      <AudioLayout />
-    </Player>
-  );
+  return <DefaultPlayer title={title} src={src} ref={player} tracks={tracks} />;
 }
 
 ResourcePlayerAudio.displayName = "Resource.Player.Audio";
