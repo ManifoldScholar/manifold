@@ -30,6 +30,8 @@ export const Thumbnail = styled.div`
 
   ${respond(`display: block;`, "1235px")}
 
+  ${({ $hidden }) => $hidden && `z-index: -1`}
+
   ${({ $right }) =>
     $right && `left: auto; right: calc((100vw - ${$right}px) * -1);`}
 `;
