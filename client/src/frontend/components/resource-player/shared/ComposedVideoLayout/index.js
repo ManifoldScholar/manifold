@@ -1,8 +1,8 @@
 import { ChapterTitle } from "@vidstack/react";
-import * as Buttons from "../../shared/Buttons";
-import * as Menus from "../../shared/Menus";
-import * as Sliders from "../../shared/Sliders";
-import { TimeGroup } from "../../shared/TimeGroup";
+import * as Buttons from "../Buttons";
+import * as Menus from "../Menus";
+import * as Sliders from "../Sliders";
+import { TimeGroup } from "../TimeGroup";
 import * as Styled from "./styles";
 // export interface VideoLayoutProps {
 //   thumbnails?: string;
