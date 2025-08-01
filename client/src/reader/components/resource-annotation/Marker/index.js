@@ -9,6 +9,7 @@ import { useFromStore } from "hooks";
 import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { MarkerContext } from "../context";
 import ThumbnailInner from "./Thumbnail";
+import { useWindowSize } from "usehooks-ts";
 import * as Styled from "./styles";
 
 export default function Marker({ annotation }) {
@@ -45,6 +46,8 @@ export default function Marker({ annotation }) {
   const [markerEl, setMarkerEl] = useState(null);
   const [left, setLeft] = useState(0);
 
+  const { width } = useWindowSize();
+
   const markerRef = useCallback(node => {
     if (node !== null) {
       setMarkerEl(node);
@@ -56,7 +59,7 @@ export default function Marker({ annotation }) {
       const rect = markerEl.getBoundingClientRect();
       setLeft(rect.left);
     }
-  }, [markerEl]);
+  }, [markerEl, width]);
 
   const id = annotation.id;
 
