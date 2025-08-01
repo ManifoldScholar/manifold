@@ -1458,7 +1458,7 @@ iframe.vds-youtube[data-no-controls] {
 }
 
 :where(.vds-menu-items .vds-slider-thumb),
-:where(.vds-volume-slider .vds-slider-thumb) {
+:where([data-visible] + .vds-volume-popup .vds-slider-thumb) {
   opacity: 1 !important;
 }
 
