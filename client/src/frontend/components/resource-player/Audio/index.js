@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import DefaultPlayer from "../shared/DefaultPlayer";
 
 export default function ResourcePlayerAudio({ resource }) {
-  const player = React.useRef(null);
-
   const {
     // variantPosterStyles,
     attachmentStyles,
@@ -27,7 +25,9 @@ export default function ResourcePlayerAudio({ resource }) {
 
   if (!src) return null;
 
-  return <DefaultPlayer title={title} src={src} ref={player} tracks={tracks} />;
+  return (
+    <DefaultPlayer title={title} src={src} tracks={tracks} viewType="audio" />
+  );
 }
 
 ResourcePlayerAudio.displayName = "Resource.Player.Audio";
