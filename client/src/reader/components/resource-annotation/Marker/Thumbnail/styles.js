@@ -17,6 +17,11 @@ export const Label = styled.div`
   border-top: 1px solid var(--color-base-neutral40);
   border-left: 1px solid var(--color-base-neutral40);
   border-right: 1px solid var(--color-base-neutral40);
+
+  .scheme-dark & {
+    background-color: var(--color-base-neutral100);
+    border-color: var(--color-base-neutral75);
+  }
 `;
 
 export const Content = styled.div`
@@ -29,6 +34,11 @@ export const Content = styled.div`
 
   > * + * {
     padding-block-start: 10px;
+  }
+
+  .scheme-dark & {
+    border-color: var(--color-base-neutral75);
+    color: var(--color-base-neutral45);
   }
 `;
 
@@ -60,6 +70,25 @@ export const Wrapper = styled.article`
   }
 
   ${({ $hidden }) => $hidden && `opacity: 0; pointer-events: none;`}
+
+  .scheme-dark & {
+    color: var(--color-base-neutral50);
+
+    &:hover {
+      color: var(--color-base-neutral90);
+      box-shadow: 0 8px 35.8px -6px rgba(0, 0, 0, 0.7);
+
+      ${Label} {
+        background-color: var(--color-accent-primary);
+        border-color: var(--color-accent-primary);
+      }
+
+      ${Content} {
+        border-color: transparent;
+        color: var(--color-base-neutral20);
+      }
+    }
+  }
 `;
 
 export const ImageWrapper = styled.figure`
@@ -67,12 +96,17 @@ export const ImageWrapper = styled.figure`
   height: 63px;
   border-radius: 4px;
   border: 1px solid var(--color-base-neutral40);
+
+  .scheme-dark & {
+    border-color: var(--color-base-neutral45);
+  }
 `;
 
 export const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 4px;
 `;
 
 export const Title = styled.h3`
