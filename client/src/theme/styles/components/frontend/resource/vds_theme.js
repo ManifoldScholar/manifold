@@ -1453,7 +1453,12 @@ iframe.vds-youtube[data-no-controls] {
   --track-focus-height: var(--track-height) !important;
 }
 
-:where(.vds-menu-items .vds-slider-thumb) {
+:where(.vds-volume-popup) {
+  padding-block: 8px;
+}
+
+:where(.vds-menu-items .vds-slider-thumb),
+:where(.vds-volume-slider .vds-slider-thumb) {
   opacity: 1 !important;
 }
 
