@@ -93,7 +93,7 @@ export default function Marker({ annotation }) {
         size={28}
         className="notation-marker__icon"
       />
-      <Styled.Thumbnail $left={left}>
+      <Styled.Thumbnail $left={left} $hidden={!!group}>
         <ThumbnailInner id={id} hidden={!!group} setsPosition />
       </Styled.Thumbnail>
       {rendersGroup && (
