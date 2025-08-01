@@ -20,7 +20,7 @@ const paddings = readerContainerWidths
   .join("");
 
 export const Thumbnail = styled.div`
-  display: block;
+  display: none;
   position: absolute;
   left: ${({ $left }) => ($left ? `-${$left}px` : 0)};
   top: -50%;
@@ -28,7 +28,13 @@ export const Thumbnail = styled.div`
 
   ${paddings}
 
-  ${respond(`display: block;`, "1235px")}
+  .container-width-1 & {
+    ${respond(`display: block;`, "1360px")}
+  }
+
+  .container-width-2 & {
+    ${respond(`display: block;`, "1240px")}
+  }
 
   ${({ $hidden }) => $hidden && `z-index: -1`}
 
