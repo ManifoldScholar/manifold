@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import DefaultPlayer from "../shared/DefaultPlayer";
 
 export default function ResourcePlayerVideo({ resource }) {
-  const player = React.useRef(null);
-
   const {
     // variantPosterStyles,
     variantThumbnailStyles,
@@ -26,8 +24,9 @@ export default function ResourcePlayerVideo({ resource }) {
     }
   }, [attachmentStyles, externalType, externalId]);
 
-  // const poster = variantPosterStyles.mediumLandscape;
-  const poster = variantThumbnailStyles.mediumLandscape;
+  // vidstack auto detects external poster urls
+  const poster =
+    externalType === null ? variantThumbnailStyles.mediumLandscape : null;
 
   const tracks = transcriptUrl
     ? [
@@ -41,17 +40,15 @@ export default function ResourcePlayerVideo({ resource }) {
       ]
     : null;
 
-  if (!src) return null;
-
-  return (
+  return src ? (
     <DefaultPlayer
       title={title}
       src={src}
-      ref={player}
       poster={poster}
       tracks={tracks}
+      viewType="video"
     />
-  );
+  ) : null;
 }
 
 ResourcePlayerVideo.displayName = "Resource.Player.Video";
