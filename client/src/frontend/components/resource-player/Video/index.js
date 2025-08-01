@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import VideoLayout from "./VideoLayout";
-import Player from "../shared/Player";
+import DefaultPlayer from "../shared/DefaultPlayer";
 
 export default function ResourcePlayerVideo({ resource }) {
   const player = React.useRef(null);
@@ -45,15 +44,13 @@ export default function ResourcePlayerVideo({ resource }) {
   if (!src) return null;
 
   return (
-    <Player
+    <DefaultPlayer
       title={title}
       src={src}
       ref={player}
       poster={poster}
       tracks={tracks}
-    >
-      <VideoLayout />
-    </Player>
+    />
   );
 }
 
