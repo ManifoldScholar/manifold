@@ -5,7 +5,16 @@ import capitalize from "lodash/capitalize";
 import { MarkerContext } from "../../context";
 import * as Styled from "./styles";
 
-export default function Thumbnail({ id, grouped, hidden, setsPosition }) {
+export default function Thumbnail({
+  id,
+  grouped,
+  hidden,
+  setsPosition,
+  active,
+  onMouseEnter,
+  onMouseLeave,
+  handleClick
+}) {
   const annotation = useFromStore(`entityStore.entities.annotations["${id}"]`);
 
   const { resourceId, resourceCollectionId } = annotation?.attributes;
@@ -79,14 +88,20 @@ export default function Thumbnail({ id, grouped, hidden, setsPosition }) {
 
   const { title, kind, variantThumbnailStyles } = entity.attributes;
 
+  const onClick = handleClick(entity.id, annotation.type);
+
   return (
     <Styled.Wrapper
       id={id}
       ref={ref}
       $grouped={grouped}
       $visible={visible}
+      $active={active}
       $hidden={hidden}
       aria-hidden={hidden}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
     >
       <Styled.Label>
         <IconComposer icon={`resource${capitalize(kind)}64`} size={20} />
