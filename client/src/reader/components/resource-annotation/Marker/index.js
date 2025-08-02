@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
 import { uiReaderActions } from "actions";
-import classnames from "classnames";
 import { useDispatch } from "react-redux";
+import capitalize from "lodash/capitalize";
 import { useFromStore } from "hooks";
 import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { MarkerContext } from "../context";
-import ThumbnailInner from "./Thumbnail";
+import Thumbnail from "./Thumbnail";
 import { useWindowSize } from "usehooks-ts";
 import * as Styled from "./styles";
 
@@ -26,21 +26,18 @@ export default function Marker({ annotation }) {
     );
 
   const handleClick = useCallback(
-    e => {
+    (entityId, type) => e => {
       e.preventDefault();
 
       const target =
-        annotation.type === "resource_collection"
-          ? lh.link(
-              "frontendProjectResourceCollectionRelative",
-              annotation.resourceCollectionId
-            )
-          : lh.link("frontendProjectResourceRelative", annotation.resourceId);
+        type === "resource_collection"
+          ? lh.link("frontendProjectResourceCollectionRelative", entityId)
+          : lh.link("frontendProjectResourceRelative", entityId);
 
       const url = `${location.pathname}/${target}`;
       navigate(url, { noScroll: true });
     },
-    [annotation, navigate, location.pathname]
+    [navigate, location.pathname]
   );
 
   const [markerEl, setMarkerEl] = useState(null);
@@ -61,12 +58,7 @@ export default function Marker({ annotation }) {
     }
   }, [markerEl, width]);
 
-  const id = annotation.id;
-
-  const markerClassNames = classnames({
-    "notation-marker": true,
-    "notation-marker--active": id === activeAnnotation
-  });
+  const { id, resourceId, resourceCollectionId } = annotation;
 
   const { groups } = useContext(MarkerContext);
 
@@ -79,35 +71,63 @@ export default function Marker({ annotation }) {
     return group ? group.indexOf(id) === 0 : false;
   }, [id, group]);
 
+  const resource = useFromStore(
+    `entityStore.entities.resources["${resourceId}"]`
+  );
+  const collection = useFromStore(
+    `entityStore.entities.resourceCollections["${resourceCollectionId}"]`
+  );
+
+  /* eslint-disable no-nested-ternary */
+  const kind = resource
+    ? resource.attributes.kind
+    : collection
+    ? "collection"
+    : "file";
+
+  const active = id === activeAnnotation;
+
   return (
-    <Styled.Wrapper
-      id={`observer-${id}`}
-      ref={markerRef}
-      key={id}
-      title={id}
-      data-annotation-notation={id}
-      className={markerClassNames}
-      onClick={handleClick}
-      onMouseOver={() => setActiveAnnotation(id)}
-      onMouseLeave={() => setActiveAnnotation(null)}
-    >
-      <IconComposer
-        icon="resourceFilled24"
-        size={28}
-        className="notation-marker__icon"
-      />
-      <Styled.Thumbnail $left={left} $hidden={!!group}>
-        <ThumbnailInner id={id} hidden={!!group} setsPosition />
-      </Styled.Thumbnail>
+    <Styled.Wrapper ref={markerRef}>
+      <Styled.Marker
+        $active={active}
+        data-annotation-notation={id}
+        onClick={handleClick(
+          resourceId ?? resourceCollectionId,
+          annotation.type
+        )}
+        onMouseEnter={() => setActiveAnnotation(id)}
+        onMouseLeave={() => setActiveAnnotation(null)}
+      >
+        <IconComposer size={20} icon={`resource${capitalize(kind)}64`} />
+      </Styled.Marker>
+      <Styled.Sidebar $left={left} $hidden={!!group}>
+        <Thumbnail
+          id={id}
+          hidden={!!group}
+          active={active}
+          onMouseEnter={() => setActiveAnnotation(id)}
+          onMouseLeave={() => setActiveAnnotation(null)}
+          handleClick={handleClick}
+          setsPosition
+        />
+      </Styled.Sidebar>
       {rendersGroup && (
         <>
-          <Styled.Thumbnail $left={left}>
+          <Styled.Sidebar $left={left}>
             <Styled.Group $count={group.length}>
               {group.map(notationId => (
-                <ThumbnailInner id={notationId} grouped />
+                <Thumbnail
+                  id={notationId}
+                  active={notationId === activeAnnotation}
+                  onMouseEnter={() => setActiveAnnotation(notationId)}
+                  onMouseLeave={() => setActiveAnnotation(null)}
+                  handleClick={handleClick}
+                  grouped
+                />
               ))}
             </Styled.Group>
-          </Styled.Thumbnail>
+          </Styled.Sidebar>
         </>
       )}
     </Styled.Wrapper>

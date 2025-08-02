@@ -1,9 +1,44 @@
 import styled from "@emotion/styled";
-import { respond } from "theme/styles/mixins";
+import { respond, buttonUnstyled } from "theme/styles/mixins";
 import { readerContainerWidths } from "theme/styles/utility/layout";
 
 export const Wrapper = styled.span`
   position: relative;
+`;
+
+export const Marker = styled.button`
+  ${buttonUnstyled};
+  height: 28px;
+  width: 28px;
+  padding: 4px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background-color: var(--color-base-neutral10);
+  color: var(--color-base-neutral75);
+  cursor: pointer;
+  margin-inline: 8px;
+  transform: translateY(4px);
+
+  .scheme-dark & {
+    background-color: var(--color-base-neutral100);
+    color: var(--color-base-neutral50);
+
+    ${({ $active }) =>
+      $active &&
+      `
+        background-color: var(--color-accent-primary);
+        color: var(--color-base-neutral90);
+      `}
+  }
+
+  ${({ $active }) =>
+    $active &&
+    `
+      background-color: var(--color-accent-primary);
+      color: var(--color-base-neutral90);
+    `}
 `;
 
 const paddings = readerContainerWidths
@@ -19,12 +54,19 @@ const paddings = readerContainerWidths
   )
   .join("");
 
-export const Thumbnail = styled.div`
+const unselectable = `
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+`;
+
+export const Sidebar = styled.div`
   display: none;
   position: absolute;
   left: ${({ $left }) => ($left ? `-${$left}px` : 0)};
   top: -50%;
-  height: max-content;
 
   ${paddings}
 
@@ -36,10 +78,12 @@ export const Thumbnail = styled.div`
     ${respond(`display: block;`, "1240px")}
   }
 
-  ${({ $hidden }) => $hidden && `z-index: -1`}
+  ${({ $hidden }) => $hidden && `z-index: -1; height: 0;`}
 
   ${({ $right }) =>
     $right && `left: auto; right: calc((100vw - ${$right}px) * -1);`}
+
+    ${unselectable}
 `;
 
 export const Group = styled.div`
