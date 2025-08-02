@@ -49,13 +49,16 @@ export const Wrapper = styled.article`
   text-indent: 0;
   color: var(--color-base-neutral75);
   opacity: 0;
+  cursor: pointer;
   transform: translateX(-50px);
   transition: opacity ${defaultTransitionProps},
     transform ${defaultTransitionProps};
 
   ${({ $visible }) => $visible && `opacity: 1; transform: translateX(0);`}
 
-  &:hover {
+${({ $active }) =>
+  $active &&
+  `
     color: var(--color-base-neutral90);
     box-shadow: 0 8px 35.8px -6px rgba(0, 0, 0, 0.3);
 
@@ -67,14 +70,16 @@ export const Wrapper = styled.article`
     ${Content} {
       border-color: transparent;
     }
-  }
+  `}
 
   ${({ $hidden }) => $hidden && `opacity: 0; pointer-events: none;`}
 
   .scheme-dark & {
     color: var(--color-base-neutral50);
 
-    &:hover {
+    ${({ $active }) =>
+      $active &&
+      `
       color: var(--color-base-neutral90);
       box-shadow: 0 8px 35.8px -6px rgba(0, 0, 0, 0.7);
 
@@ -87,7 +92,7 @@ export const Wrapper = styled.article`
         border-color: transparent;
         color: var(--color-base-neutral20);
       }
-    }
+    `}
   }
 `;
 
