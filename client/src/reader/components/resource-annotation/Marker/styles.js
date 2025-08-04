@@ -19,7 +19,7 @@ export const Marker = styled.button`
   color: var(--color-base-neutral75);
   cursor: pointer;
   margin-inline: 8px;
-  transform: translateY(4px);
+  transform: translateY(3px);
 
   .scheme-dark & {
     background-color: var(--color-base-neutral100);
