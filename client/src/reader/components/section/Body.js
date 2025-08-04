@@ -12,6 +12,18 @@ export default function Body(props) {
     location.key
   ];
 
+  const thumbCount = useMemo(
+    () =>
+      annotations
+        ?.filter(
+          a =>
+            a.attributes.format === "resource" ||
+            a.attributes.format === "resource_collection"
+        )
+        .filter(a => a.attributes.readerDisplayFormat === "inline").length,
+    [annotations]
+  );
+
   const [resourceThumbs, setResourceThumbs] = useState({});
 
   const sorted = Object.keys(resourceThumbs).sort(
@@ -21,9 +33,12 @@ export default function Body(props) {
   const getOverlap = (target, positions) => {
     const { height, top } = target;
     const range = top + height + 20;
-    return Object.keys(positions).find(
-      id => Math.abs(range - resourceThumbs[id].top) < height + 20
+    const candidates = Object.keys(positions).filter(
+      id => Math.abs(range - resourceThumbs[id].top) <= height + 20
     );
+    return candidates?.length
+      ? candidates.sort((a, b) => positions[a].top - positions[b].top)[0]
+      : null;
   };
 
   const getAllOverlaps = (target, positions, group = []) => {
@@ -76,7 +91,8 @@ export default function Body(props) {
     <MarkerContext.Provider
       value={{
         groups,
-        setResourceThumbs
+        setResourceThumbs,
+        thumbCount
       }}
     >
       {elements}
