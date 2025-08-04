@@ -3,6 +3,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import { useFromStore } from "hooks";
 import { useWindowSize } from "usehooks-ts";
 import capitalize from "lodash/capitalize";
+import { useTranslation } from "react-i18next";
 import { MarkerContext } from "../../context";
 import * as Styled from "./styles";
 
@@ -101,9 +102,19 @@ export default function Thumbnail({
   ]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
+  const { t } = useTranslation();
+
   if (!entity) return null;
 
-  const { title, kind, variantThumbnailStyles } = entity.attributes;
+  const {
+    title,
+    kind,
+    variantThumbnailStyles,
+    thumbnailStyles
+  } = entity.attributes;
+
+  const renderedKind = collection ? t("glossary.collection_one") : kind;
+  const imgSrc = variantThumbnailStyles?.medium ?? thumbnailStyles?.medium;
 
   const onClick = handleClick(entity.id, annotation.type);
 
@@ -121,13 +132,16 @@ export default function Thumbnail({
   return (
     <WrapperComponent id={id} ref={ref} {...wrapperProps}>
       <Styled.Label>
-        <IconComposer icon={`resource${capitalize(kind)}64`} size={20} />
-        <span>{kind}</span>
+        <IconComposer
+          icon={`resource${capitalize(renderedKind)}64`}
+          size={20}
+        />
+        <span>{renderedKind}</span>
       </Styled.Label>
       <Styled.Content>
-        {!!variantThumbnailStyles?.medium && (
+        {!!imgSrc && (
           <Styled.ImageWrapper>
-            <Styled.Image src={variantThumbnailStyles.medium} />
+            <Styled.Image src={imgSrc} />
           </Styled.ImageWrapper>
         )}
         <Styled.Title>{title}</Styled.Title>
