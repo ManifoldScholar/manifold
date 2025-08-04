@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useMemo, useContext } from "react";
+import { useState, useCallback, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
@@ -16,14 +16,18 @@ export default function Marker({ annotation }) {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+
   const activeAnnotation = useFromStore(
     `ui.transitory.reader.activeAnnotation`
   );
-
   const setActiveAnnotation = annotationId =>
     dispatch(
       uiReaderActions.setActiveAnnotation({ annotationId, passive: false })
     );
+
+  const { font, fontSize, margins } = useFromStore(
+    `ui.persistent.reader.typography`
+  );
 
   const handleClick = useCallback(
     (entityId, type) => e => {
@@ -45,31 +49,28 @@ export default function Marker({ annotation }) {
 
   const { width } = useWindowSize();
 
+  const { groups, thumbCount } = useContext(MarkerContext);
+
   const markerRef = useCallback(node => {
     if (node !== null) {
       setMarkerEl(node);
     }
   }, []);
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (markerEl) {
       const rect = markerEl.getBoundingClientRect();
       setLeft(rect.left);
     }
-  }, [markerEl, width]);
+  }, [markerEl, width, font, fontSize.current, margins.current, thumbCount]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   const { id, resourceId, resourceCollectionId } = annotation;
 
-  const { groups } = useContext(MarkerContext);
+  const group = Object.values(groups).find(g => g.includes(id));
 
-  const group = useMemo(() => Object.values(groups).find(g => g.includes(id)), [
-    groups,
-    id
-  ]);
-
-  const rendersGroup = useMemo(() => {
-    return group ? group.indexOf(id) === 0 : false;
-  }, [id, group]);
+  const rendersGroup = group ? group.indexOf(id) === 0 : false;
 
   const resource = useFromStore(
     `entityStore.entities.resources["${resourceId}"]`
@@ -123,7 +124,6 @@ export default function Marker({ annotation }) {
                   onMouseEnter={() => setActiveAnnotation(notationId)}
                   onMouseLeave={() => setActiveAnnotation(null)}
                   handleClick={handleClick}
-                  grouped
                 />
               ))}
             </Styled.Group>
