@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import DefaultPlayer from "../shared/DefaultPlayer";
+import loadable from "@loadable/component";
+
+const LoadablePlayer = loadable(() => import("../shared/DefaultPlayer"));
 
 export default function ResourcePlayerAudio({ resource }) {
   const {
@@ -26,7 +28,7 @@ export default function ResourcePlayerAudio({ resource }) {
   if (!src) return null;
 
   return (
-    <DefaultPlayer title={title} src={src} tracks={tracks} viewType="audio" />
+    <LoadablePlayer title={title} src={src} tracks={tracks} viewType="audio" />
   );
 }
 

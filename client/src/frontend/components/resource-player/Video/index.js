@@ -1,6 +1,8 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import PropTypes from "prop-types";
-import DefaultPlayer from "../shared/DefaultPlayer";
+import loadable from "@loadable/component";
+
+const LoadablePlayer = loadable(() => import("../shared/DefaultPlayer"));
 
 export default function ResourcePlayerVideo({ resource }) {
   const {
@@ -41,7 +43,7 @@ export default function ResourcePlayerVideo({ resource }) {
     : null;
 
   return src ? (
-    <DefaultPlayer
+    <LoadablePlayer
       title={title}
       src={src}
       poster={poster}
