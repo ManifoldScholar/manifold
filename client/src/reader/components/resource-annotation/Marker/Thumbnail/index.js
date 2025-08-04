@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useContext, useState, useMemo } from "react";
 import IconComposer from "global/components/utility/IconComposer";
 import { useFromStore } from "hooks";
+import { useWindowSize } from "usehooks-ts";
 import capitalize from "lodash/capitalize";
 import { MarkerContext } from "../../context";
 import * as Styled from "./styles";
 
 export default function Thumbnail({
   id,
-  grouped,
   hidden,
   setsPosition,
   active,
@@ -28,7 +28,7 @@ export default function Thumbnail({
 
   const entity = resource ?? collection;
 
-  const { setResourceThumbs } = useContext(MarkerContext);
+  const { setResourceThumbs, thumbCount } = useContext(MarkerContext);
 
   const [visible, setVisible] = useState(false);
   const [el, setEl] = useState(null);
@@ -52,7 +52,7 @@ export default function Thumbnail({
     () =>
       new IntersectionObserver(callback, {
         root: null,
-        rootMargin: "-40px 0px -20px 600px",
+        rootMargin: "-80px 0px -20px 600px",
         threshold: 0.75
       }),
     [callback]
@@ -68,6 +68,13 @@ export default function Thumbnail({
     }
   }, [el, observer]);
 
+  const { font, fontSize, margins } = useFromStore(
+    `ui.persistent.reader.typography`
+  );
+
+  const { width } = useWindowSize();
+
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (setsPosition && el) {
       const rect = el.getBoundingClientRect();
@@ -76,13 +83,23 @@ export default function Thumbnail({
           ...thumbs,
           [id]: {
             top: rect.y,
-            height: rect.height,
-            el
+            height: rect.height
           }
         };
       });
     }
-  }, [el, setsPosition, id, setResourceThumbs]);
+  }, [
+    el,
+    setsPosition,
+    id,
+    setResourceThumbs,
+    font,
+    fontSize.current,
+    margins.current,
+    width,
+    thumbCount
+  ]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   if (!entity) return null;
 
@@ -90,19 +107,19 @@ export default function Thumbnail({
 
   const onClick = handleClick(entity.id, annotation.type);
 
+  const WrapperComponent = hidden ? Styled.PositionerWrapper : Styled.Wrapper;
+  const wrapperProps = hidden
+    ? { "aria-hidden": true }
+    : {
+        $visible: visible,
+        $active: active,
+        onMouseEnter,
+        onMouseLeave,
+        onClick
+      };
+
   return (
-    <Styled.Wrapper
-      id={id}
-      ref={ref}
-      $grouped={grouped}
-      $visible={visible}
-      $active={active}
-      $hidden={hidden}
-      aria-hidden={hidden}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onClick={onClick}
-    >
+    <WrapperComponent id={id} ref={ref} {...wrapperProps}>
       <Styled.Label>
         <IconComposer icon={`resource${capitalize(kind)}64`} size={20} />
         <span>{kind}</span>
@@ -115,6 +132,6 @@ export default function Thumbnail({
         )}
         <Styled.Title>{title}</Styled.Title>
       </Styled.Content>
-    </Styled.Wrapper>
+    </WrapperComponent>
   );
 }
