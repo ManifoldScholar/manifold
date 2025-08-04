@@ -44,9 +44,6 @@ export const Marker = styled.button`
 const paddings = readerContainerWidths
   .map(
     (width, i) => `
-  --margin-width: calc((100% - ${width}) / 2);
-  --thumbnail-padding: calc(var((--margin-width) - 200px) / 2);
-
   .container-width-${i} & {
     padding-inline: calc((((100vw - ${width}) / 2) - 200px) / 2);
   }
@@ -78,7 +75,7 @@ export const Sidebar = styled.div`
     ${respond(`display: block;`, "1240px")}
   }
 
-  ${({ $hidden }) => $hidden && `z-index: -1; height: 0;`}
+  ${({ $hidden }) => $hidden && `z-index: -1; height: 0; overflow: hidden;`}
 
   ${({ $right }) =>
     $right && `left: auto; right: calc((100vw - ${$right}px) * -1);`}
