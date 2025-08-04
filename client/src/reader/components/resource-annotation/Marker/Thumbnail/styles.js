@@ -42,13 +42,21 @@ export const Content = styled.div`
   }
 `;
 
+const baseWrapperStyles = `
+width: 200px;
+border-radius: 6px;
+text-indent: 0;
+color: var(--color-base-neutral75);
+opacity: 0;
+`;
+
+export const PositionerWrapper = styled.article`
+  ${baseWrapperStyles}
+  pointer-events: none;
+`;
+
 export const Wrapper = styled.article`
-  width: 200px;
-  max-height: 165px;
-  border-radius: 6px;
-  text-indent: 0;
-  color: var(--color-base-neutral75);
-  opacity: 0;
+  ${baseWrapperStyles}
   cursor: pointer;
   transform: translateX(-50px);
   transition: opacity ${defaultTransitionProps},
@@ -56,9 +64,9 @@ export const Wrapper = styled.article`
 
   ${({ $visible }) => $visible && `opacity: 1; transform: translateX(0);`}
 
-${({ $active }) =>
-  $active &&
-  `
+  ${({ $active }) =>
+    $active &&
+    `
     color: var(--color-base-neutral90);
     box-shadow: 0 8px 35.8px -6px rgba(0, 0, 0, 0.3);
 
@@ -71,8 +79,6 @@ ${({ $active }) =>
       border-color: transparent;
     }
   `}
-
-  ${({ $hidden }) => $hidden && `opacity: 0; pointer-events: none;`}
 
   .scheme-dark & {
     color: var(--color-base-neutral50);
@@ -121,4 +127,5 @@ export const Title = styled.h3`
   font-variant: none;
   text-align: left;
   margin-block: 0;
+  font-family: var(--font-family-sans);
 `;
