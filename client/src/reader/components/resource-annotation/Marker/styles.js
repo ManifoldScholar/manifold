@@ -19,7 +19,8 @@ export const Marker = styled.button`
   color: var(--color-base-neutral75);
   cursor: pointer;
   margin-inline: 8px;
-  transform: translateY(3px);
+  transform: scale(calc(100% - (3 - var(--reader-font-size-index)) * 5%))
+    translateY(calc(2px + (3 - var(--reader-font-size-index)) * 1px));
 
   .scheme-dark & {
     background-color: var(--color-base-neutral100);
