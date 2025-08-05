@@ -93,7 +93,6 @@ function AddResourceAnnotationForm({
     <FormContainer.Form
       handleSubmitOverride={handleSubmit}
       name="reader-create-resource-annotation"
-      className="form-secondary"
     >
       {getModelValue => (
         <>
