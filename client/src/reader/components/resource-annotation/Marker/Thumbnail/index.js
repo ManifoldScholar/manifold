@@ -4,7 +4,7 @@ import { useFromStore } from "hooks";
 import { useWindowSize } from "usehooks-ts";
 import capitalize from "lodash/capitalize";
 import { useTranslation } from "react-i18next";
-import { MarkerContext } from "../../context";
+import { ResourceMarkerContext } from "../context";
 import * as Styled from "./styles";
 
 export default function Thumbnail({
@@ -29,7 +29,7 @@ export default function Thumbnail({
 
   const entity = resource ?? collection;
 
-  const { setResourceThumbs, thumbCount } = useContext(MarkerContext);
+  const { setResourceThumbs, thumbCount } = useContext(ResourceMarkerContext);
 
   const [visible, setVisible] = useState(false);
   const [el, setEl] = useState(null);
