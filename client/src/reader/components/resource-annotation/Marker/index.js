@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import capitalize from "lodash/capitalize";
 import { useFromStore } from "hooks";
 import { useNavigate, useLocation } from "react-router-dom-v5-compat";
-import { MarkerContext } from "../context";
+import { ResourceMarkerContext } from "./context";
 import Thumbnail from "./Thumbnail";
 import { useWindowSize } from "usehooks-ts";
 import * as Styled from "./styles";
@@ -49,7 +49,7 @@ export default function Marker({ annotation }) {
 
   const { width } = useWindowSize();
 
-  const { groups, thumbCount } = useContext(MarkerContext);
+  const { groups, thumbCount } = useContext(ResourceMarkerContext);
 
   const markerRef = useCallback(node => {
     if (node !== null) {
