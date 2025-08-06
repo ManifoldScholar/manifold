@@ -42,6 +42,7 @@ function DefaultPlayer({ title, src, tracks, poster, viewType }) {
             playbackMenuLoop: null
           }}
           noAudioGain
+          noModal
         />
       </Styled.MediaPlayer>
     </>
