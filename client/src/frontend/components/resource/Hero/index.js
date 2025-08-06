@@ -59,12 +59,12 @@ export default class ResourceHero extends Component {
         break;
       case "audio":
         output = (
-          <div>
+          <Styled.AudioResource>
             <ResourceSlide.SlideAudio
               resource={resource}
               {...this.props.slideOptions}
             />
-          </div>
+          </Styled.AudioResource>
         );
         break;
       default:

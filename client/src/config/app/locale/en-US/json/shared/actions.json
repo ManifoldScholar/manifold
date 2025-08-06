@@ -53,8 +53,6 @@
     "open": "Open",
     "pause_playback": "Pause Playback",
     "play": "Play",
-    "pause": "Pause",
-    "speed": "Speed",
     "post": "Post",
     "preview": "Preview",
     "publish": "Publish",
@@ -110,14 +108,6 @@
       "moved_to_group": "{{title}} is now in group {{group}}, position {{position}}",
       "reorder_category": "Reorder category",
       "reorder": "Reorder"
-    },
-    "on": "On",
-    "off": "Off",
-    "captions_on": "Closed Captions On",
-    "captions_off": "Closed Captions Off",
-    "enter_pip": "Enter PIP",
-    "exit_pip": "Exit PIP",
-    "enter_fullscreen": "Enter Fullscreen",
-    "exit_fullscreen": "Exit Fullscreen"
+    }
   }
 }
