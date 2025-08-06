@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import PropTypes from "prop-types";
 import { MediaProvider, Poster, Track } from "@vidstack/react";
 import {
@@ -6,35 +5,50 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout
 } from "@vidstack/react/player/layouts/default";
+import { Global as GlobalStyles } from "@emotion/react";
+import vdsStyles from "./vdsStyles";
 import * as Styled from "./styles";
 
 function DefaultPlayer({ title, src, tracks, poster, viewType }) {
-  const ref = useRef();
+  if (!src) return null;
 
-  return src ? (
-    <Styled.MediaPlayer
-      title={title}
-      src={src}
-      crossOrigin
-      playsInline
-      viewType={viewType || "video"}
-      ref={ref}
-    >
-      <MediaProvider>
-        {/* Automatically detects youtube & vimeo posters */}
-        <Poster
-          className={`vds-poster`}
-          alt=""
-          {...(poster ? { src: poster } : {})}
+  return (
+    <>
+      <GlobalStyles styles={vdsStyles} />
+      <Styled.MediaPlayer
+        title={title}
+        src={src}
+        crossOrigin
+        playsInline
+        viewType={viewType || "video"}
+        aspectRatio={viewType === "video" ? "16/9" : undefined}
+        className="bg-neutral95"
+      >
+        <MediaProvider>
+          {/* Automatically detects youtube & vimeo posters */}
+          <Poster
+            className={`vds-poster`}
+            alt=""
+            {...(poster ? { src: poster } : {})}
+          />
+          {tracks?.map(track => (
+            <Track {...track} key={track.id} />
+          ))}
+        </MediaProvider>
+        <DefaultAudioLayout icons={defaultLayoutIcons} colorScheme="dark" />
+        <DefaultVideoLayout
+          icons={defaultLayoutIcons}
+          colorScheme="dark"
+          slots={{
+            googleCastButton: null,
+            airPlayButton: null,
+            playbackMenuLoop: null
+          }}
+          noAudioGain
         />
-        {tracks?.map(track => (
-          <Track {...track} key={track.src} />
-        ))}
-      </MediaProvider>
-      <DefaultAudioLayout icons={defaultLayoutIcons} colorScheme="dark" />
-      <DefaultVideoLayout icons={defaultLayoutIcons} colorScheme="dark" />
-    </Styled.MediaPlayer>
-  ) : null;
+      </Styled.MediaPlayer>
+    </>
+  );
 }
 
 DefaultPlayer.propTypes = {
