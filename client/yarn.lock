@@ -3599,16 +3599,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wavesurfer/react@npm:^1.0.11":
-  version: 1.0.11
-  resolution: "@wavesurfer/react@npm:1.0.11"
-  peerDependencies:
-    react: ^18.2.0 || ^19.0.0
-    wavesurfer.js: ">=7.7.14"
-  checksum: 10c0/36d25cc63e7b01d5d2723c526a14dce8bef72c5e628fd7d18c8c0cd87e842f5d74b60450b8b8486bc67a4ad8b095ac0a101eff36e72c6657cc0f56f6cc9725d2
-  languageName: node
-  linkType: hard
-
 "@webassemblyjs/ast@npm:1.14.1, @webassemblyjs/ast@npm:^1.14.1":
   version: 1.14.1
   resolution: "@webassemblyjs/ast@npm:1.14.1"
@@ -9662,7 +9652,6 @@ __metadata:
     "@types/react": "npm:^18.x"
     "@types/react-dom": "npm:^18.x"
     "@vidstack/react": "npm:^1.12.13"
-    "@wavesurfer/react": "npm:^1.0.11"
     ace-builds: "npm:^1.x"
     autolinker: "npm:^4.1.5"
     babel-eslint: "npm:^10"
@@ -9703,7 +9692,6 @@ __metadata:
     lint-staged: "npm:^16.1.2"
     lodash: "npm:^4.18.0"
     mammoth: "npm:^1.11.0"
-    media-icons: "npm:^1.1.5"
     mini-css-extract-plugin: "npm:^2.9.2"
     minimist: "npm:^1.2.8"
     mkdirp: "npm:^3.0.1"
@@ -9767,7 +9755,6 @@ __metadata:
     usehooks-ts: "npm:^3.1.1"
     uuid: "npm:^11.x"
     wait-on: "npm:^8.0.4"
-    wavesurfer.js: "npm:^7.10.1"
     webpack: "npm:^5.x"
     webpack-cli: "npm:^6.x"
     webpack-dev-server: "npm:^5.x"
@@ -9808,13 +9795,6 @@ __metadata:
   version: 1.0.4
   resolution: "media-captions@npm:1.0.4"
   checksum: 10c0/62c6df2909b748284e929fe3d169548b42b91ea79374f67f89a313aa529395b024d5be82056613f3e88ebb2e4a86464f6c6a8d569bc7bae2f5542baa350031ba
-  languageName: node
-  linkType: hard
-
-"media-icons@npm:^1.1.5":
-  version: 1.1.5
-  resolution: "media-icons@npm:1.1.5"
-  checksum: 10c0/7b9afb4314d0d3cc194e300bd88e05c4f468e070fa2d972e56bfbbb071d7ab969148efea351ba9bcf38b04a1c69ae34207a9807c7e9553d13aae88df8c42fa47
   languageName: node
   linkType: hard
 
@@ -14965,13 +14945,6 @@ __metadata:
     glob-to-regexp: "npm:^0.4.1"
     graceful-fs: "npm:^4.1.2"
   checksum: 10c0/dffbb483d1f61be90dc570630a1eb308581e2227d507d783b1d94a57ac7b705ecd9a1a4b73d73c15eab596d39874e5276a3d9cb88bbb698bafc3f8d08c34cf17
-  languageName: node
-  linkType: hard
-
-"wavesurfer.js@npm:^7.10.1":
-  version: 7.11.1
-  resolution: "wavesurfer.js@npm:7.11.1"
-  checksum: 10c0/97a4e94d5db3b0fd728005dbc6b3307813661dd8c948e49c9315dbf84408e7890f1eb8e57697c2529c1e3ff1ec8e548196d70ed105d92851f3f43689756fc546
   languageName: node
   linkType: hard
 
