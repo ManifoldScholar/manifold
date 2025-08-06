@@ -58,7 +58,6 @@
     "@emotion/styled": "^11.14.1",
     "@loadable/component": "^5.16.7",
     "@vidstack/react": "^1.12.13",
-    "@wavesurfer/react": "^1.0.11",
     "ace-builds": "^1.x",
     "actioncable": "~5.0.7",
     "autolinker": "^4.1.5",
@@ -81,7 +80,6 @@
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "mammoth": "^1.9.1",
-    "media-icons": "^1.1.5",
     "minimist": "^1.2.8",
     "mkdirp": "^3.0.1",
     "morgan": "^1.10.1",
@@ -131,8 +129,7 @@
     "tus-js-client": "^4.3.1",
     "use-resize-observer": "^9.1.0",
     "usehooks-ts": "^3.1.1",
-    "uuid": "^11.x",
-    "wavesurfer.js": "^7.10.1"
+    "uuid": "^11.x"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
