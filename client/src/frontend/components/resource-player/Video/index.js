@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import PropTypes from "prop-types";
 import loadable from "@loadable/component";
 
@@ -15,22 +14,10 @@ export default function ResourcePlayerVideo({ resource }) {
     variantThumbnailStyles,
     attachmentStyles,
     title,
-    externalType,
-    externalId,
-    allowDownload,
-    subKind
+    allowDownload
   } = resource.attributes;
 
-  const src = useMemo(() => {
-    switch (externalType) {
-      case "vimeo":
-        return `vimeo/${externalId}`;
-      case "youtube":
-        return `youtube/${externalId}`;
-      default:
-        return attachmentStyles.original;
-    }
-  }, [attachmentStyles, externalType, externalId]);
+  const src = attachmentStyles.original;
 
   if (!src) return null;
 
@@ -39,28 +26,24 @@ export default function ResourcePlayerVideo({ resource }) {
     variantThumbnailStyles.mediumLandscape;
 
   const tracks =
-    // shouldn't happen but just in case tracks get set on an external video
-    subKind === "external_video"
-      ? []
-      : resource.relationships?.textTracks?.map(track => {
-          const {
-            id,
-            attributes: { kind, srclang: lang, cuesUrl, label }
-          } = track;
-          return {
-            id,
-            src: urlToRelativePath(cuesUrl),
-            kind,
-            label,
-            lang,
-            default: kind === "chapters"
-          };
-        }) ?? [];
+    resource.relationships?.textTracks?.map(track => {
+      const {
+        id,
+        attributes: { kind, srclang: lang, cuesUrl, label }
+      } = track;
+      return {
+        id,
+        src: urlToRelativePath(cuesUrl),
+        kind,
+        label,
+        lang,
+        default: kind === "chapters"
+      };
+    }) ?? [];
 
-  const download =
-    allowDownload && subKind !== "external_video"
-      ? urlToRelativePath(attachmentStyles.original)
-      : false;
+  const download = allowDownload
+    ? urlToRelativePath(attachmentStyles.original)
+    : false;
 
   return (
     <LoadablePlayer

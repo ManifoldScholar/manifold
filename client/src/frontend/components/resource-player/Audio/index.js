@@ -19,14 +19,15 @@ export default function ResourcePlayerAudio({ resource }) {
     resource.relationships?.textTracks?.map(track => {
       const {
         id,
-        attributes: { kind, srclang, cuesUrl, label }
+        attributes: { kind, srclang: lang, cuesUrl, label }
       } = track;
       return {
         id,
         src: urlToRelativePath(cuesUrl),
-        kind: kind,
-        label: label,
-        lang: srclang
+        kind,
+        label,
+        lang,
+        default: kind === "chapters"
       };
     }) ?? [];
 
