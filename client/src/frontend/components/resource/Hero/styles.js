@@ -35,6 +35,9 @@ export const Resource = styled.div`
   }
 `;
 
-// export const ResourceAudio = styled(Resource)`
-//   height: auto;
-// `;
+export const AudioResource = styled.div`
+  min-block-size: 60px;
+  color: var(--color-neutral-text-extra-light);
+  background-color: var(--color-base-neutral-black);
+  border-radius: 6px;
+`;
