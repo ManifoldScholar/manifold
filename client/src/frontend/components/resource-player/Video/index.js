@@ -26,20 +26,25 @@ export default function ResourcePlayerVideo({ resource }) {
     variantThumbnailStyles.mediumLandscape;
 
   const tracks =
-    resource.relationships?.textTracks?.map(track => {
-      const {
-        id,
-        attributes: { kind, srclang: lang, cuesUrl, label }
-      } = track;
-      return {
-        id,
-        src: urlToRelativePath(cuesUrl),
-        kind,
-        label,
-        lang,
-        default: kind === "chapters"
-      };
-    }) ?? [];
+    resource.relationships?.textTracks
+      ?.map(track => {
+        if (!track?.attributes) return null;
+
+        const {
+          id,
+          attributes: { kind, srclang: lang, cuesUrl, label }
+        } = track;
+
+        return {
+          id,
+          src: urlToRelativePath(cuesUrl),
+          kind,
+          label,
+          lang,
+          default: kind === "chapters"
+        };
+      })
+      .filter(Boolean) ?? [];
 
   const download = allowDownload
     ? urlToRelativePath(attachmentStyles.original)
