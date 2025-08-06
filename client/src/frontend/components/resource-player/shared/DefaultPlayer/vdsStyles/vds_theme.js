@@ -855,8 +855,8 @@ iframe.vds-youtube[data-no-controls] {
   --default-gray-300: rgb(238 238 238);
   --default-gray-400: rgb(250 250 250);
 
-  --default-text: #1a1a1a;
-  --default-text-secondary: #6b6b6b;
+  --default-text: var(--color-neutral-text-extra-dark, #1a1a1a);
+  --default-text-secondary: var(--color-neutral-text-dark, #6b6b6b);
 
   --default-root-border: 1px solid rgb(10 10 10 / 0.1);
 }
@@ -869,8 +869,8 @@ iframe.vds-youtube[data-no-controls] {
   --default-gray-300: rgb(27 27 27);
   --default-gray-400: rgb(10 10 10);
 
-  --default-text: var(--strong-color, #f5f5f5);
-  --default-text-secondary: var(--color, #8a8a8a);
+  --default-text: var(--color-neutral-text-extra-light, #f5f5f5);
+  --default-text-secondary: var(--color-neutral-text-light, #8a8a8a);
 
   --default-root-border: 1px solid rgb(255 255 255 / 0.1);
 }
@@ -921,7 +921,7 @@ iframe.vds-youtube[data-no-controls] {
   --webkit-scrollbar-track-bg: var(--media-menu-scrollbar-track-bg, var(--color-gray-50));
 
   --checkbox-bg: var(--media-menu-checkbox-bg, var(--color-gray-100));
-  --checkbox-active-bg: var(--media-menu-checkbox-bg-active, #1ba13f);
+  --checkbox-active-bg: var(--media-menu-checkbox-bg-active, var(--color-interaction-light, #1ba13f));
   --checkbox-handle-bg: var(--media-menu-checkbox-handle-bg, #f5f5f5);
   --checkbox-handle-border: var(--media-menu-checkbox-handle-border);
 
@@ -1929,7 +1929,7 @@ iframe.vds-youtube[data-no-controls] {
   width: var(--thumb-size);
   height: var(--thumb-size);
   border-radius: var(--media-slider-thumb-border-radius, 9999px);
-  background-color: var(--hover-color);
+  background-color: var(--color-interaction-light);
   transform: translate(-50%, -50%) translateZ(0);
   transition: opacity 0.15s ease-in;
   pointer-events: none;
