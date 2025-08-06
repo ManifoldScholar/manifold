@@ -10,8 +10,6 @@ import vdsStyles from "./vdsStyles";
 import * as Styled from "./styles";
 
 function DefaultPlayer({ title, src, tracks, poster, viewType }) {
-  if (!src) return null;
-
   return (
     <>
       <GlobalStyles styles={vdsStyles} />
@@ -25,7 +23,6 @@ function DefaultPlayer({ title, src, tracks, poster, viewType }) {
         className="bg-neutral95"
       >
         <MediaProvider>
-          {/* Automatically detects youtube & vimeo posters */}
           <Poster
             className={`vds-poster`}
             alt=""
@@ -53,7 +50,7 @@ function DefaultPlayer({ title, src, tracks, poster, viewType }) {
 
 DefaultPlayer.propTypes = {
   title: PropTypes.string,
-  src: PropTypes.string,
+  src: PropTypes.string.isRequired,
   tracks: PropTypes.arrayOf(PropTypes.object),
   poster: PropTypes.string,
   viewType: PropTypes.oneOf(["video", "audio"])
