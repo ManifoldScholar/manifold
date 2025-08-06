@@ -4,15 +4,21 @@ import loadable from "@loadable/component";
 
 const LoadablePlayer = loadable(() => import("../shared/DefaultPlayer"));
 
+function urlToRelativePath(url) {
+  const trackUrl = new URL(url);
+  return trackUrl.pathname;
+}
+
 export default function ResourcePlayerVideo({ resource }) {
   const {
-    // variantPosterStyles,
+    variantPosterStyles,
     variantThumbnailStyles,
     attachmentStyles,
-    transcriptUrl,
     title,
     externalType,
-    externalId
+    externalId,
+    allowDownload,
+    subKind
   } = resource.attributes;
 
   const src = useMemo(() => {
@@ -26,31 +32,46 @@ export default function ResourcePlayerVideo({ resource }) {
     }
   }, [attachmentStyles, externalType, externalId]);
 
-  // vidstack auto detects external poster urls
+  if (!src) return null;
+
   const poster =
-    externalType === null ? variantThumbnailStyles.mediumLandscape : null;
+    variantPosterStyles.mediumLandscape ??
+    variantThumbnailStyles.mediumLandscape;
 
-  const tracks = transcriptUrl
-    ? [
-        {
-          src: transcriptUrl,
-          label: "English",
-          language: "en-US",
-          kind: "subtitles",
-          default: true
-        }
-      ]
-    : null;
+  const tracks =
+    // shouldn't happen but just in case tracks get set on an external video
+    subKind === "external_video"
+      ? []
+      : resource.relationships?.textTracks?.map(track => {
+          const {
+            id,
+            attributes: { kind, srclang: lang, cuesUrl, label }
+          } = track;
+          return {
+            id,
+            src: urlToRelativePath(cuesUrl),
+            kind,
+            label,
+            lang,
+            default: kind === "chapters"
+          };
+        }) ?? [];
 
-  return src ? (
+  const download =
+    allowDownload && subKind !== "external_video"
+      ? urlToRelativePath(attachmentStyles.original)
+      : false;
+
+  return (
     <LoadablePlayer
       title={title}
       src={src}
       poster={poster}
       tracks={tracks}
+      download={download}
       viewType="video"
     />
-  ) : null;
+  );
 }
 
 ResourcePlayerVideo.displayName = "Resource.Player.Video";

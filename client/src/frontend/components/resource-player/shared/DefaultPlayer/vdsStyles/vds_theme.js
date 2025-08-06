@@ -640,7 +640,7 @@ iframe.vds-youtube[data-no-controls] {
   opacity: 1;
   visibility: visible;
   transition: var(--media-controls-in-transition, opacity 0.2s ease-in);
-  
+
   .vds-controls-group {
     background: var(--media-controls-background);
   }
@@ -869,8 +869,8 @@ iframe.vds-youtube[data-no-controls] {
   --default-gray-300: rgb(27 27 27);
   --default-gray-400: rgb(10 10 10);
 
-  --default-text: #f5f5f5;
-  --default-text-secondary: #8a8a8a;
+  --default-text: var(--strong-color, #f5f5f5);
+  --default-text-secondary: var(--color, #8a8a8a);
 
   --default-root-border: 1px solid rgb(255 255 255 / 0.1);
 }
