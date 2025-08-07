@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import selectionHelpers from "./selectionHelpers";
+import selectionHelpers from "../helpers/selectionHelpers";
 import {
   isMathMLNode,
   isMathMLWrapper,
   findFirstMathUuidNode,
   findLastMathUuidNode
-} from "./mathHelpers";
-import { generateFragment } from "./text-fragments-polyfill/fragment-generation-utils";
+} from "../helpers/mathHelpers";
+import { generateFragment } from "../helpers/text-fragments-polyfill/fragment-generation-utils";
 
 class AnnotatableCaptureSelection extends Component {
   static propTypes = {
