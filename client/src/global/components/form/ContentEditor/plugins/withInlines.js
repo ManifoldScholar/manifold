@@ -1,7 +1,7 @@
 import { inlineNodes } from "../utils/elements";
 import { wrapLink, insertImage, insertIframe } from "../utils/slate/transforms";
 import { isValidUrl, isImageUrl, isVideoUrl } from "../utils/helpers";
-import { mathMLElements } from "reader/containers/annotation/annotatable-components/mathHelpers";
+import { mathMLElements } from "reader/containers/Annotatable/helpers/mathHelpers";
 
 /* eslint-disable no-param-reassign */
 const withInlines = editor => {
