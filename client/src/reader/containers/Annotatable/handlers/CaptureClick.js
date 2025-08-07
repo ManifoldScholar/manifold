@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import selectionHelpers from "./selectionHelpers";
-import { isMathMLNode } from "./mathHelpers";
+import selectionHelpers from "../helpers/selectionHelpers";
+import { isMathMLNode } from "../helpers/mathHelpers";
 import isString from "lodash/isString";
 
 export default class AnnotatableCaptureClick extends Component {
