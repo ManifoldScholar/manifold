@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Body from "./Body";
-import Annotation from "reader/containers/annotation";
+import Annotatable from "reader/containers/Annotatable";
 import locationHelper from "helpers/location";
 import filterAnnotations from "./helpers/filter-annotations";
 
@@ -134,7 +134,7 @@ export default class Text extends Component {
       <HtmlClass className={fontSizeClass}>
         <div className="main-content" style={{ flexGrow: 1 }}>
           <section className={readerAppearanceClass}>
-            <Annotation.Annotatable
+            <Annotatable
               currentUser={this.props.authentication.currentUser}
               projectId={this.props.text.relationships.project.id}
               textId={this.props.text.id}
