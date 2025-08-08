@@ -18,8 +18,8 @@ export default function NewResourceAnnotation({
 }
 
 NewResourceAnnotation.drawerProps = {
-  context: "frontend",
-  size: "wide",
+  context: "backend",
+  size: "default",
   padding: "default"
 };
 
