@@ -111,7 +111,8 @@ export class Annotatable extends Component {
       annotationState: null, // null, pending, active
       drawerState: null, // a key indicating visible drawer content
       drawerProps: {}, // props to be passed to the drawer when it opens
-      renderedAnnotations: this.state?.renderedAnnotations ?? []
+      renderedAnnotations: this.state?.renderedAnnotations ?? [],
+      pendingResource: null
     };
   }
 
@@ -131,7 +132,8 @@ export class Annotatable extends Component {
       "openViewAnnotationsDrawer",
       "showLogin",
       "closeDrawer",
-      "focusHandler"
+      "focusHandler",
+      "openResourceAnnotationFormatModal"
     ];
     /* eslint-disable no-param-reassign */
     this.cachedActions = actions.reduce((map, action) => {
@@ -335,6 +337,20 @@ export class Annotatable extends Component {
       }
     });
     this.openDrawer("newResourceAnnotation", event);
+  };
+
+  openResourceAnnotationFormatModal = resource => {
+    this.setState({
+      pendingResource: {
+        format:
+          resource.type === "resourceCollections"
+            ? "resource_collection"
+            : "resource",
+        entity: resource
+      },
+      annotationState: "locked",
+      drawerState: null
+    });
   };
 
   openViewAnnotationsDrawer = (ids, event = null) => {
@@ -570,6 +586,9 @@ export class Annotatable extends Component {
           close={this.closeDrawer}
           {...this.state.drawerProps}
         />
+        {!this.state.drawerState && this.state.pendingResource && (
+          <dialog>Resource Annotation Format Selector Modal— make me!</dialog>
+        )}
       </>
     );
   }
