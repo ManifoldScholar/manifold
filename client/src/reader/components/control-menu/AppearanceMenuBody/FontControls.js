@@ -80,7 +80,7 @@ export default function FontControls({
               disabled={serifDisabled}
               aria-disabled={!fontSizeDecreasable}
               onClick={event => {
-                decrementSizeHandler(event, fontSizeDecreasable);
+                if (fontSizeDecreasable) decrementSizeHandler(event);
               }}
             >
               <Utility.IconComposer icon="MinusUnique" size={30} />
@@ -93,7 +93,7 @@ export default function FontControls({
               disabled={serifDisabled}
               aria-disabled={!fontSizeIncreasable}
               onClick={event => {
-                incrementSizeHandler(event, fontSizeIncreasable);
+                if (fontSizeIncreasable) incrementSizeHandler(event);
               }}
             >
               <Utility.IconComposer icon="PlusUnique" size={30} />
@@ -110,7 +110,7 @@ export default function FontControls({
               disabled={sansDisabled}
               aria-disabled={!fontSizeDecreasable}
               onClick={event => {
-                decrementSizeHandler(event, fontSizeDecreasable);
+                if (fontSizeDecreasable) decrementSizeHandler(event);
               }}
             >
               <Utility.IconComposer icon="MinusUnique" size={30} />
@@ -123,7 +123,7 @@ export default function FontControls({
               disabled={sansDisabled}
               aria-disabled={!fontSizeIncreasable}
               onClick={event => {
-                incrementSizeHandler(event, fontSizeIncreasable);
+                if (fontSizeIncreasable) incrementSizeHandler(event);
               }}
             >
               <Utility.IconComposer icon="PlusUnique" size={30} />
