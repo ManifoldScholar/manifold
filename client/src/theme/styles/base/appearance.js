@@ -1,6 +1,10 @@
 import { outlineOnFocus, setHoverStyle } from "../mixins/appearance";
 
 export default `
+  ::view-transition-group(root) {
+    animation-duration: 250ms;
+  }
+
   /* Default hover styles */
   button,
   [role="button"],
