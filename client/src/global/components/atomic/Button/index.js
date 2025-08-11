@@ -40,9 +40,7 @@ export default function Button({
   );
 }
 
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
-  srLabel: PropTypes.string,
+export const stylePropTypes = {
   size: PropTypes.oneOf(["sm", "md", "lg"]),
   shape: PropTypes.oneOf(["rectangle", "lozenge"]),
   background: PropTypes.oneOf([
@@ -51,9 +49,15 @@ Button.propTypes = {
     "outline",
     "outline-accent"
   ]),
-  lowercase: PropTypes.bool,
+  lowercase: PropTypes.bool
+};
+
+Button.propTypes = {
+  label: PropTypes.string.isRequired,
+  srLabel: PropTypes.string,
   preIcon: PropTypes.string,
-  postIcon: PropTypes.string
+  postIcon: PropTypes.string,
+  ...stylePropTypes
 };
 
 Button.displayName = "Global.Atomic.Button";
