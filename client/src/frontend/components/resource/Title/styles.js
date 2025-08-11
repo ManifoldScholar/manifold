@@ -5,7 +5,6 @@ export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding-block-end: ${fluidScale("42px", "26px")};
   text-decoration: none;
 `;
 
@@ -28,17 +27,25 @@ export const TitleAndToggle = styled.div`
 export const Title = styled.h1`
   width: 100%;
   margin: 0;
-  font-size: var(--Resource-Title-font-size, 26px);
+  font-size: 26px;
   font-family: var(--font-family-heading);
   font-weight: var(--font-weight-medium);
   hyphens: none;
 
   ${respond(`width: auto;`, 60)}
+
+  &:is(h2) {
+    font-size: ${fluidScale("23px", "17px")};
+  }
 `;
 
 export const ToggleWrapper = styled.span`
   margin-inline-start: 12px;
   transform: translateY(3px);
+
+  h2 ~ & {
+    transform: translateY(1px);
+  }
 `;
 
 export const DateWrapper = styled.p`

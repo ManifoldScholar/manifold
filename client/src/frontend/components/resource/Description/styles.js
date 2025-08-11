@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { respond, fluidScale, utilityPrimary } from "theme/styles/mixins";
+import { fluidScale, utilityPrimary } from "theme/styles/mixins";
 
 export const Content = styled.div`
   font-family: var(--font-family-copy);
@@ -19,15 +19,13 @@ export const Content = styled.div`
   }
 `;
 
-export const Caption = styled.div`
-  margin-block-start: 24px;
-
-  ${respond(`margin-block-start: 0;`, 65)}
-`;
-
 export const DescriptionHeader = styled.h2`
   ${utilityPrimary}
-  margin-block-start: 24px;
+  margin-block-start: 0;
   font-size: 13px;
   color: var(--color-neutral-text-dark);
+
+  &:not(:first-child) {
+    margin-block-start: 24px;
+  }
 `;

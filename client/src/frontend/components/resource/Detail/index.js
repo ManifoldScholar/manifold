@@ -14,6 +14,7 @@ import Description from "../Description";
 import Annotations from "./Annotations";
 import * as Styled from "./styles";
 import * as StyledLink from "../Link/styles";
+import Preview from "../Preview";
 
 export default function ResourceDetail({ resource, projectTitle }) {
   const { t } = useTranslation();
@@ -31,11 +32,12 @@ export default function ResourceDetail({ resource, projectTitle }) {
   return (
     <Styled.Container>
       <Styled.Grid>
-        <Styled.Main>
+        {/* <Styled.Main>
           <Title resource={resource} />
           <Hero resource={resource} />
           <Description resource={resource} />
-        </Styled.Main>
+        </Styled.Main> */}
+        <Preview resource={resource} />
         <Styled.CommentsWrapper>
           <Styled.CommentsSection>
             <Styled.ListHeader>
@@ -68,7 +70,7 @@ export default function ResourceDetail({ resource, projectTitle }) {
         </Styled.CommentsWrapper>
         <Styled.MetadataWrapper>
           <Styled.CtaGroup>
-            <LinkComponent attributes={attr} />
+            <LinkComponent resource={resource} />
             {attr.transcriptUrl && attr.transcriptFileName && (
               <StyledLink.Link
                 href={attr.transcriptUrl}
