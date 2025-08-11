@@ -2,12 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import includes from "lodash/includes";
 import debounce from "lodash/debounce";
-import ResourceSlide from "frontend/components/resource-slide";
+import ResourceMediaFactory from "frontend/components/resource/media/Factory";
 import { resourceCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import DirectionalButton from "./DirectionalButton";
-import capitalize from "lodash/capitalize";
-import { withTranslation } from "react-i18next";
+import SlidePlaceholder from "./SlidePlaceholder";
+import Footer from "./Footer";
 import * as Styled from "./styles";
 
 const { request } = entityStoreActions;
@@ -102,22 +101,6 @@ class ResourceSlideshow extends PureComponent {
         this.debouncedScroll
       );
     }
-  }
-
-  getFigureByType(resource) {
-    const { kind } = resource.attributes;
-    const key = `Slide${capitalize(kind)}`;
-    const Slide = ResourceSlide[key];
-    if (Slide) {
-      return <Slide resource={resource} {...this.props.slideOptions} />;
-    }
-
-    return (
-      <ResourceSlide.SlideDefault
-        resource={resource}
-        {...this.props.slideOptions}
-      />
-    );
   }
 
   bindKeyboard = event => {
@@ -233,11 +216,11 @@ class ResourceSlideshow extends PureComponent {
         id={slide.id}
         data-active={index === position - 1}
       >
-        {this.isLoaded(index) ? (
-          this.getFigureByType(slide)
-        ) : (
-          <ResourceSlide.SlideLoading />
-        )}
+        <ResourceMediaFactory
+          resource={slide}
+          aspectRatio="16 / 9"
+          loading={!this.isLoaded(index)}
+        />
       </Styled.Slide>
     ));
   }
@@ -245,7 +228,7 @@ class ResourceSlideshow extends PureComponent {
   renderPlaceholder() {
     return (
       <Styled.Slide data-active>
-        <ResourceSlide.SlidePlaceholder />
+        <SlidePlaceholder />
       </Styled.Slide>
     );
   }
@@ -255,7 +238,6 @@ class ResourceSlideshow extends PureComponent {
     const totalCount = this.state.totalCount;
     const collectionResource = this.state.map[position - 1];
     const collectionResourcesCount = this.props.collectionResources.length;
-    const t = this.props.t;
 
     return (
       <Styled.SlideShow>
@@ -264,47 +246,19 @@ class ResourceSlideshow extends PureComponent {
             ? this.renderSlideShow()
             : this.renderPlaceholder()}
         </Styled.SlidesWrapper>
-        <Styled.Footer>
-          {this.isLoaded(position - 1) ? (
-            <ResourceSlide.Caption
-              resource={collectionResource}
-              resourceCollection={this.props.resourceCollection}
-              hideDetailUrl={this.props.hideDetailUrl}
-              hideDownload={this.props.hideDownload}
-            />
-          ) : (
-            <ResourceSlide.LoadingCaption />
-          )}
-          {collectionResourcesCount > 0 && (
-            <Styled.Pagination>
-              <Styled.Ordinal>
-                {position} / {totalCount}
-              </Styled.Ordinal>
-              <Styled.ArrowsWrapper>
-                <DirectionalButton
-                  onClick={this.handleSlidePrev}
-                  direction="left"
-                  disabled={position === 1}
-                  paginationText={t("pagination.previous_short")}
-                  screenReaderText={t("pagination.previous_slide")}
-                />
-                <Styled.Ordinal $isMobile>
-                  {position} / {totalCount}
-                </Styled.Ordinal>
-                <DirectionalButton
-                  onClick={this.handleSlideNext}
-                  direction="right"
-                  disabled={position === totalCount}
-                  paginationText={t("pagination.next")}
-                  screenReaderText={t("pagination.next_slide")}
-                />
-              </Styled.ArrowsWrapper>
-            </Styled.Pagination>
-          )}
-        </Styled.Footer>
+        <Footer
+          resource={collectionResource}
+          resourceCollection={this.props.resourceCollection}
+          position={position}
+          resourceCount={collectionResourcesCount}
+          totalCount={totalCount}
+          loaded={this.isLoaded(position - 1)}
+          handleSlidePrev={this.handleSlidePrev}
+          handleSlideNext={this.handleSlideNext}
+        />
       </Styled.SlideShow>
     );
   }
 }
 
-export default withTranslation()(ResourceSlideshow);
+export default ResourceSlideshow;

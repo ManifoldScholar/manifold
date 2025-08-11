@@ -31,14 +31,8 @@ function getGridTemplateAreas({ $layout }) {
     case "title_description":
       return `
         "title"
-        "description"
       `;
     case "title_description_image":
-      return `
-        "title"
-        "description"
-        "image"
-      `;
     case "title_image":
       return `
         "title"
@@ -106,8 +100,16 @@ export const Header = styled("header", transientOptions)`
     )}
 `;
 
-export const TitleAndIcon = styled.div`
+export const TitleRow = styled.div`
   grid-area: title;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: calc(${GAP} * 2 / 3);
+`;
+
+export const TitleAndIcon = styled.div`
+  flex-grow: 1;
   display: flex;
   align-items: flex-start;
   gap: ${fluidScale("12px", "9px")};
@@ -163,9 +165,22 @@ export const ToggleWrapper = styled.span`
   }
 `;
 
+export const Badge = styled.div`
+  flex-shrink: 0;
+`;
+
 export const Description = styled.div`
-  max-width: 560px;
-  grid-area: description;
+  flex-basis: 100%;
+  container-type: inline-size;
+
+  &:empty {
+    display: none;
+  }
+`;
+
+export const DescriptionInner = styled.div`
+  max-inline-size: 66cqi;
+  min-inline-size: min(100%, 560px);
   line-height: 1.5;
 
   p + p {

@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { projectsAPI } from "api";
 import { useFetch, usePaginationState, useListFilters } from "hooks";
+import Utility from "global/components/utility";
 import ResourceList from "frontend/components/resource-list/List";
 import ButtonGroup from "./ButtonGroup";
 import * as Styled from "./styles";
@@ -13,6 +15,8 @@ export default function ResourcesList({
   handleSave,
   handleClose
 }) {
+  const { t } = useTranslation();
+
   const [filters, setFilters] = useState({});
 
   const filterProps = useListFilters({
@@ -40,13 +44,27 @@ export default function ResourcesList({
       <Styled.Search>
         <Styled.Filters as="div" {...filterProps} />
       </Styled.Search>
-      <ResourceList
-        resources={resources}
-        pagination={resourcesMeta?.pagination}
-        onPageChange={onPageChange}
-        setActive={setSelected}
-        active={selected?.id}
-      />
+      <Styled.ListWrapper>
+        <Styled.Count>
+          {`${resourcesMeta?.pagination?.totalCount} ${t("glossary.resource", {
+            count: resourcesMeta?.pagination?.totalCount
+          })}`}
+        </Styled.Count>
+        <ResourceList
+          resources={resources}
+          setActive={setSelected}
+          active={selected?.id}
+        />
+        {resourcesMeta?.pagination?.totalPages > 1 && (
+          <Styled.PaginationWrapper>
+            <Utility.Pagination
+              pagination={resourcesMeta?.pagination}
+              paginationClickHandler={onPageChange}
+              wide
+            />
+          </Styled.PaginationWrapper>
+        )}
+      </Styled.ListWrapper>
       <ButtonGroup
         handleSave={handleSave}
         handleClose={handleClose}

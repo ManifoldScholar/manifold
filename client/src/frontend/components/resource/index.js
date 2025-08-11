@@ -1,5 +1,3 @@
-import Card from "./Card";
-import Hero from "./Hero";
 import Link from "./Link";
 import Meta from "./Meta";
 import TagList from "./TagList";
@@ -8,8 +6,6 @@ import VariantList from "./VariantList";
 import Thumbnail from "./Thumbnail";
 
 export default {
-  Card,
-  Hero,
   Link,
   Meta,
   TagList,
