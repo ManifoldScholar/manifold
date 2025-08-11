@@ -77,11 +77,8 @@ class ResourceDetail extends PureComponent {
           <Resource.Meta
             resource={resource}
             layout={"secondary columnar"}
-            showIcon={false}
             showTags={false}
-            isMobile
           />
-
           <nav className="button-nav button-nav--stack">
             <Resource.Link
               attributes={attr}
