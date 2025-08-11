@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
 import { respond } from "theme/styles/mixins";
-import { buttonUnstyled } from "theme/styles/mixins/appearance";
-import { utilityPrimary } from "theme/styles/mixins/typography";
+import {
+  buttonUnstyled,
+  defaultTransitionProps,
+  utilityPrimary
+} from "theme/styles/mixins";
 
 export const Tab = styled.button`
   ${buttonUnstyled}
@@ -15,6 +18,8 @@ export const Tab = styled.button`
   background: var(--box-bg-color);
   padding: 10px 12px;
   white-space: nowrap;
+  transition: color ${defaultTransitionProps},
+    background-color ${defaultTransitionProps};
 
   &:first-child {
     border-top-left-radius: 10px;
