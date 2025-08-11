@@ -78,7 +78,7 @@ export default function ProjectResourcesContainer({
         resources={resources}
         resourcesMeta={meta}
         filterProps={filterProps}
-        itemHeadingLevel={3}
+        itemHeadingLevel={2}
       />
     </>
   );
