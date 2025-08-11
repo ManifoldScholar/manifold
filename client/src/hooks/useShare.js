@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { urlWithTextFragment } from "./useCopyLinkToSelection";
 import useFromStore from "./useFromStore";
 
-export default function useShare(
+export default function useShare({
   title,
   urlTextFragment,
   shareOnly = false,
-  appendDefaultTitle = true
-) {
+  appendDefaultTitle = true,
+  size = "lg"
+}) {
   const { t } = useTranslation();
 
   const [copied, setCopied] = useState(false);
@@ -26,11 +27,13 @@ export default function useShare(
 
   const settings = useFromStore({ requestKey: "settings", action: "select" });
 
+  const shareIcon = size === "sm" ? "share24" : "share32";
+
   if (!isMounted)
     return {
       canRender: true,
       disabled: true,
-      icon: "share32",
+      icon: shareIcon,
       label: t("actions.share")
     };
 
@@ -67,7 +70,7 @@ export default function useShare(
     return {
       canRender: shareSupported,
       onClick: onShare,
-      icon: "share32",
+      icon: shareIcon,
       label: t("actions.share")
     };
 
@@ -77,7 +80,7 @@ export default function useShare(
 
   /* eslint-disable no-nested-ternary */
   const icon = shareSupported
-    ? "share32"
+    ? shareIcon
     : copied
     ? "checkmark16"
     : "RTELink24";
