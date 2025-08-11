@@ -10,6 +10,7 @@ import Meta from "../Meta";
 import Title from "../Title";
 import VariantList from "../VariantList";
 import Share from "../Share";
+import Description from "../Description";
 import Annotations from "./Annotations";
 import * as Styled from "./styles";
 import * as StyledLink from "../Link/styles";
@@ -33,26 +34,7 @@ export default function ResourceDetail({ resource, projectTitle }) {
         <Styled.Main>
           <Title resource={resource} />
           <Hero resource={resource} />
-          {(attr.captionFormatted || attr.descriptionFormatted) && (
-            <Styled.Content>
-              <Styled.Caption
-                dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
-              />
-
-              {!!attr.descriptionFormatted && (
-                <>
-                  <Styled.DescriptionHeader>
-                    {t("pages.subheaders.full_description")}
-                  </Styled.DescriptionHeader>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: attr.descriptionFormatted
-                    }}
-                  />
-                </>
-              )}
-            </Styled.Content>
-          )}
+          <Description resource={resource} />
         </Styled.Main>
         <Styled.CommentsWrapper>
           <Styled.CommentsSection>

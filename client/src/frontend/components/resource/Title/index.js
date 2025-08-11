@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import FormattedDate from "global/components/FormattedDate";
 import Collecting from "frontend/components/collecting";
 import Badge from "../Badge";
 import * as Styled from "./styles";
 
-function ResourceTitle({ resource, showDate = true }) {
+function ResourceTitle({ resource }) {
   const { t } = useTranslation();
 
   const { kind, titleFormatted, createdAt } = resource.attributes;
@@ -19,12 +18,6 @@ function ResourceTitle({ resource, showDate = true }) {
         </Styled.ToggleWrapper>
       </Styled.TitleAndToggle>
       <Badge kind={kind} />
-      {showDate ? (
-        <Styled.DateWrapper>
-          {t("dates.resource_added")}{" "}
-          <FormattedDate format="MMMM, yyyy" date={createdAt} />
-        </Styled.DateWrapper>
-      ) : null}
     </Styled.Container>
   );
 }
@@ -32,8 +25,7 @@ function ResourceTitle({ resource, showDate = true }) {
 ResourceTitle.displayName = "Resource.Title";
 
 ResourceTitle.propTypes = {
-  resource: PropTypes.object.isRequired,
-  showDate: PropTypes.bool
+  resource: PropTypes.object.isRequired
 };
 
 export default ResourceTitle;

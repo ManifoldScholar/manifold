@@ -28,8 +28,7 @@ export const TitleAndToggle = styled.div`
 export const Title = styled.h1`
   width: 100%;
   margin: 0;
-  margin-block-end: 5px;
-  font-size: 26px;
+  font-size: var(--Resource-Title-font-size, 26px);
   font-family: var(--font-family-heading);
   font-weight: var(--font-weight-medium);
   hyphens: none;
@@ -39,7 +38,7 @@ export const Title = styled.h1`
 
 export const ToggleWrapper = styled.span`
   margin-inline-start: 12px;
-  transform: translateY(5px);
+  transform: translateY(3px);
 `;
 
 export const DateWrapper = styled.p`
