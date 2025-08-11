@@ -17,6 +17,10 @@ export const Title = styled.div`
 
 export const List = styled.ul`
   ${listUnstyled}
+
+  &:empty {
+    display: none;
+  }
 `;
 
 export const Item = styled.li`
