@@ -1,62 +1,94 @@
 import styled from "@emotion/styled";
+import { Link as NavLink } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
-import { utilityPrimary } from "theme/styles/mixins/typography";
+import {
+  utilityPrimary,
+  buttonUnstyled,
+  defaultTransitionProps
+} from "theme/styles/mixins";
 import { fluidScale } from "theme/styles/mixins/common";
 
 export const ImageWrapper = styled.figure`
+  aspect-ratio: 25 / 16;
   inline-size: 100px;
-  block-size: 63px;
   flex-shrink: 0;
   border-radius: 6px;
+  /* fallback if light-dark() not supported */
   background-color: var(--box-medium-bg-color);
+  background-color: light-dark(
+    var(--color-base-neutral10),
+    var(--color-base-neutral95)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid transparent;
-  transition: border-color 200ms ease;
+  outline: 2px solid transparent;
+  transition: outline-color ${defaultTransitionProps};
+`;
+
+export const Link = styled(NavLink)`
+  inline-size: fit-content;
+  display: block;
+  color: var(--strong-color);
+  text-decoration-line: none;
+
+  &:hover {
+    text-decoration-line: underline;
+  }
 `;
 
 export const Title = styled.h3`
   font-family: var(--font-family-sans);
-  color: var(--strong-color);
   margin: 0;
   font-weight: 400;
   font-size: ${fluidScale("18px", "16px")};
-  transition: color 200ms ease;
 `;
 
-const titleUnderline = `
-text-decoration-line: underline;
-text-decoration-style: solid;
-text-decoration-skip-ink: auto;
-text-decoration-thickness: 10.5%;
-text-underline-offset: 25%;
+export const Button = styled.button`
+  ${buttonUnstyled}
+  color: var(--strong-color);
+
+  &:hover {
+    text-decoration-line: underline;
+  }
+
+  &::after {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    content: "";
+    inset: 0;
+  }
 `;
 
-export const Wrapper = styled.li`
+export const Wrapper = styled.article`
+  position: relative;
   padding-block-end: 20px;
   width: 100%;
   display: flex;
-  gap: 24px;
-  border-bottom: 1px solid var(--color-base-neutral30);
-  cursor: pointer;
+  flex-wrap: wrap;
+  gap: ${fluidScale("30px", "20px")};
+  border-bottom: 1px solid;
+  border-color: var(--color-base-neutral30);
+  border-color: light-dark(
+    var(--color-base-neutral30),
+    var(--color-base-neutral75)
+  );
 
-  &:hover {
-    ${Title} {
-      ${titleUnderline}
-    }
+  @container (max-width: 400px) {
+    flex-direction: column-reverse;
   }
 
   ${({ $active }) =>
     $active &&
     `
-    ${Title} {
+    ${Button} {
       color: var(--highlight-color);
-      ${titleUnderline}
+      text-decoration-line: underline;
     }
 
     ${ImageWrapper} {
-      border-color: var(--highlight-color);
+      outline-color: var(--highlight-color);
     }
     `}
 `;
@@ -68,8 +100,9 @@ export const TextColumn = styled.div`
 export const Metadata = styled.div`
   padding-block-start: 20px;
   display: flex;
-  gap: 1rem;
-  display: flex;
+  flex-wrap: wrap;
+  row-gap: 6px;
+  column-gap: 16px;
   align-items: center;
 `;
 
