@@ -1,26 +1,20 @@
 import styled from "@emotion/styled";
 import { ListFilters } from "global/components/list";
-import { respond, listUnstyled, buttonUnstyled } from "theme/styles/mixins";
+import {
+  respond,
+  listUnstyled,
+  buttonUnstyled,
+  utilityPrimary
+} from "theme/styles/mixins";
 import FormContainer from "global/containers/form";
 
 export const Search = styled.div`
-  display: flex;
-  justify-content: space-between;
   padding-block-end: 24px;
 `;
 
 export const Filters = styled(ListFilters)`
   --Search-min-width: 172px;
   --SelectGroup-min-width: 160px;
-
-  justify-content: space-between;
-
-  > div {
-    flex-grow: 0;
-    flex-basis: 100%;
-
-    ${respond(`flex-basis: 100px;`, 40)}
-  }
 `;
 
 export const ButtonGroup = styled.div`
@@ -115,4 +109,28 @@ export const FieldGroup = styled.div`
   }
 
   ${respond(`grid-template-columns: repeat(2, 1fr);`, 60)};
+`;
+
+export const ListWrapper = styled.div`
+  > * + * {
+    margin-block-start: 24px;
+  }
+`;
+
+export const Count = styled.div`
+  ${utilityPrimary}
+  font-size: 14px;
+  margin-block-end: 16px;
+  padding-block-end: 10px;
+  border-bottom: 1px solid;
+  border-color: var(--color-base-neutral30);
+  border-color: light-dark(
+    var(--color-base-neutral30),
+    var(--color-base-neutral75)
+  );
+  color: var(--color);
+`;
+
+export const PaginationWrapper = styled.div`
+  padding-block-start: 12px;
 `;
