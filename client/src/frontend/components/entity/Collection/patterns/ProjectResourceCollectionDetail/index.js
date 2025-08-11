@@ -1,10 +1,10 @@
-import React from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
 import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
-import ResourceList from "frontend/components/resource-list";
-import ResourceCollection from "frontend/components/resource-collection";
+import ResourceList from "frontend/components/resource-list/List";
+import Description from "frontend/components/resource-collection/Description";
+import Badge from "frontend/components/resource/Badge/Collection";
 import EntityCollection from "../../EntityCollection";
 import SlideshowSection from "./SlideshowSection";
 import * as shapes from "../../shapes";
@@ -28,15 +28,22 @@ function ProjectResourceCollectionDetail({
   return (
     <EntityCollection
       title={resourceCollection.attributes.title}
-      icon="resourceCollection64"
       collectingProps={{ collectable: resourceCollection }}
-      DescriptionComponent={props => (
-        <ResourceCollection.Description
-          date={resourceCollection.attributes.createdAt}
-          description={resourceCollection.attributes.descriptionFormatted}
+      BadgeComponent={props => (
+        <Badge
+          resourceCount={resourceCollection.attributes.collectionResourcesCount}
           {...props}
         />
       )}
+      DescriptionComponent={props =>
+        resourceCollection.attributes.descriptionFormatted ? (
+          <Description
+            date={resourceCollection.attributes.createdAt}
+            description={resourceCollection.attributes.descriptionFormatted}
+            {...props}
+          />
+        ) : null
+      }
       headerLayout="title_description_image"
       headerWidth="100%"
       ImageComponent={props => (
@@ -55,11 +62,12 @@ function ProjectResourceCollectionDetail({
       )}
       BodyComponent={props => (
         <>
-          <ResourceList.Cards
+          <ResourceList
             resourceCollection={resourceCollection}
             project={project}
             resources={resources}
             itemHeadingLevel={3}
+            renderAsLink
             {...props}
           />
         </>
