@@ -1,52 +1,40 @@
-import React, { Component } from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import Variant from "./Variant";
 import * as Styled from "./styles";
 
-class ResourceVariantList extends Component {
-  static displayName = "Resource.VariantList";
+const VARIANT_KEYS = ["variantFormatOne", "variantFormatTwo", "highRes"];
 
-  static propTypes = {
-    resource: PropTypes.object
-  };
+function ResourceVariantList({ resource }) {
+  const { t } = useTranslation();
 
-  renderVariant(variant) {
-    const url = this.props.resource.attributes[`${variant}Url`];
-    const filename = this.props.resource.attributes[`${variant}FileName`];
-    if (!filename || !url) return null;
+  const variants = VARIANT_KEYS.map(variant => {
+    const url = resource.attributes[`${variant}Url`];
+    const filename = resource.attributes[`${variant}FileName`];
 
-    return (
-      <Styled.Item key={url}>
-        <Styled.Link href={url} target="_blank" rel="noopener noreferrer">
-          <Styled.LinkIcon icon="arrowDown16" size="default" />
-          <Styled.LinkText>{filename}</Styled.LinkText>
-        </Styled.Link>
-      </Styled.Item>
-    );
-  }
+    if (!url || !filename) return null;
 
-  renderVariants() {
-    const variants = ["variantFormatOne", "variantFormatTwo", "highRes"];
-    return variants
-      .map(variant => {
-        return this.renderVariant(variant);
-      })
-      .filter(item => item);
-  }
+    return { url, filename };
+  }).filter(Boolean);
 
-  render() {
-    const children = this.renderVariants();
-    if (children.length === 0) return null;
+  if (!variants.length) return null;
 
-    return (
-      <Styled.Container>
-        <Styled.Title>
-          {`${this.props.t("pages.subheaders.variants")}:`}
-        </Styled.Title>
-        <Styled.List>{children}</Styled.List>
-      </Styled.Container>
-    );
-  }
+  return (
+    <Styled.Container>
+      <Styled.Title>{`${t("pages.subheaders.variants")}:`}</Styled.Title>
+      <Styled.List>
+        {variants.map(({ url, filename }) => (
+          <Variant key={filename} url={url} filename={filename} />
+        ))}
+      </Styled.List>
+    </Styled.Container>
+  );
 }
 
-export default withTranslation()(ResourceVariantList);
+ResourceVariantList.displayName = "Resource.VariantList";
+
+ResourceVariantList.propTypes = {
+  resource: PropTypes.object
+};
+
+export default ResourceVariantList;

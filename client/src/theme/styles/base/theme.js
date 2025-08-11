@@ -5,7 +5,7 @@ export default `
   html {
     @supports (scrollbar-color: auto) {
       scrollbar-color: var(--color-accent-primary)
-        var(--color-base-neutral90);
+        var(--color-base-neutral-black);
       scrollbar-width: auto;
     }
   }
