@@ -1,43 +1,40 @@
-import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 import ListItem from "./ListItem";
-import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
 export default function ResourceList({
   resources,
-  pagination,
-  onPageChange,
+  resourceCollection,
+  project,
   setActive,
-  active
+  active,
+  itemHeadingLevel,
+  renderAsLink
 }) {
-  const { t } = useTranslation();
-
   return (
-    <Styled.Wrapper>
-      <Styled.Count>
-        {`${pagination?.totalCount} ${t("glossary.resource", {
-          count: pagination?.totalCount
-        })}`}
-      </Styled.Count>
-      <Styled.List>
-        {resources?.map(r => (
-          <ListItem
-            key={r.id}
-            resource={r}
-            active={active === r.id}
-            setActive={setActive}
-          />
-        ))}
-      </Styled.List>
-      {pagination?.totalPages > 1 && (
-        <Styled.PaginationWrapper>
-          <Utility.Pagination
-            pagination={pagination}
-            paginationClickHandler={onPageChange}
-            wide
-          />
-        </Styled.PaginationWrapper>
-      )}
-    </Styled.Wrapper>
+    <Styled.List>
+      {resources?.map(r => (
+        <ListItem
+          key={r.id}
+          resource={r}
+          resourceCollection={resourceCollection}
+          project={project}
+          active={active === r.id}
+          setActive={setActive}
+          headingLevel={itemHeadingLevel}
+          renderAsLink={renderAsLink}
+        />
+      ))}
+    </Styled.List>
   );
 }
+
+ResourceList.propTypes = {
+  resources: PropTypes.arrayOf(PropTypes.object),
+  resourceCollection: PropTypes.object,
+  project: PropTypes.object,
+  active: PropTypes.bool,
+  setActive: PropTypes.func,
+  itemHeadingLevel: PropTypes.oneOf([2, 3]),
+  renderAsLink: PropTypes.bool
+};

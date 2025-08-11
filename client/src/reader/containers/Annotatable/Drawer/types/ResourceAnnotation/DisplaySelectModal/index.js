@@ -72,10 +72,11 @@ export default function DisplaySelectModal({
         <Styled.ButtonGroup>
           <Button
             type="submit"
+            size="md"
             background="accent"
             label={t("reader.resource_display.submit_label")}
           />
-          <Button onClick={handleClose} label={t("actions.cancel")} />
+          <Button onClick={handleClose} label={t("actions.cancel")} size="md" />
         </Styled.ButtonGroup>
       </Styled.Form>
     </Styled.Dialog>
