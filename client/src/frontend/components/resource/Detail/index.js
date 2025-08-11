@@ -31,7 +31,7 @@ export default function ResourceDetail({ resource, projectTitle }) {
     <Styled.Container>
       <Styled.Grid>
         <Styled.Main>
-          <Title resource={resource} showIcon={false} />
+          <Title resource={resource} />
           <Hero resource={resource} />
           {(attr.captionFormatted || attr.descriptionFormatted) && (
             <Styled.Content>
@@ -77,12 +77,12 @@ export default function ResourceDetail({ resource, projectTitle }) {
               </Styled.EmptyMessage>
             )}
           </Styled.CommentsSection>
-          <Styled.CommentsSection>
+          {/* <Styled.CommentsSection>
             <Styled.ListHeader>
               {t("glossary.annotation_title_case_other")}
             </Styled.ListHeader>
             <Annotations />
-          </Styled.CommentsSection>
+          </Styled.CommentsSection> */}
         </Styled.CommentsWrapper>
         <Styled.MetadataWrapper>
           <Styled.CtaGroup>

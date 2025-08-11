@@ -139,6 +139,8 @@
     "reading_group_title_case_other": "Reading Groups",
     "resource_collection_one": "resource collection",
     "resource_collection_other": "resource collections",
+    "resource_collection_short_one": "collection",
+    "resource_collection_short_other": "collections",
     "resource_collection_title_case_one": "Resource Collection",
     "resource_collection_title_case_other": "Resource Collections",
     "resource_one": "resource",

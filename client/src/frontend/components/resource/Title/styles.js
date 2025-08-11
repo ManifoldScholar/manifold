@@ -21,15 +21,16 @@ export const Icon = styled.figure`
 `;
 
 export const TitleAndToggle = styled.div`
+  flex-grow: 1;
   display: flex;
 `;
 
 export const Title = styled.h1`
-  font-family: var(--font-family-heading);
   width: 100%;
   margin: 0;
   margin-block-end: 5px;
   font-size: 26px;
+  font-family: var(--font-family-heading);
   font-weight: var(--font-weight-medium);
   hyphens: none;
 
@@ -41,10 +42,9 @@ export const ToggleWrapper = styled.span`
   transform: translateY(5px);
 `;
 
-export const DateWrapper = styled.span`
+export const DateWrapper = styled.p`
   ${subtitlePrimary}
-  display: inline-block;
-  width: 100%;
+  flex-basis: 100%;
   font-size: ${fluidScale("20px", "16px")};
   margin-block-start: 12px;
 
