@@ -116,6 +116,7 @@ export const Button = styled("button", transientOptions)`
           font-size: max(14px, var(--_font-size));
         `
       : `
+          --_inner-text-translateY: -3%;
           text-transform: uppercase;
           letter-spacing: 0.125em;
           font-weight: var(--font-weight-semibold);
@@ -132,7 +133,7 @@ export const Button = styled("button", transientOptions)`
     min-block-size: var(--_min-block-size);
     display: inline-flex;
     align-items: center;
-    transform: translateY(-5%);
+    transform: translateY(var(--_inner-text-translateY, -5%));
   }
 `;
 

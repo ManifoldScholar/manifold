@@ -26,7 +26,6 @@ export const Grid = styled.div`
     "metadata"
     "comments";
   column-gap: 10%;
-  color: var(--color-neutral-text-extra-dark);
 
   ${respond(
     `
@@ -40,15 +39,13 @@ export const Grid = styled.div`
   )}
 `;
 
-export const Main = styled.div`
-  width: 100%;
-  grid-area: main;
-`;
-
 export const MetadataWrapper = styled.div`
   width: 100%;
   padding-block-start: 35px;
   grid-area: metadata;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   ${respond(
     `
@@ -69,38 +66,6 @@ export const CommentsWrapper = styled.div`
   grid-area: comments;
   width: 100%;
   align-self: start;
-`;
-
-export const Content = styled.div`
-  font-family: var(--font-family-copy);
-  font-size: ${fluidScale("17px", "14px")};
-  line-height: 1.4;
-
-  /* These are here for styling html from captionFormatted and descriptionFormatted. -LD */
-  p + p {
-    margin-top: 1em;
-  }
-
-  a {
-    color: var(--color-base-neutral75);
-
-    &:visited {
-      color: var(--color-base-neutral75);
-    }
-  }
-`;
-
-export const Caption = styled.div`
-  margin-block-start: 24px;
-
-  ${respond(`margin-block-start: 0;`, 65)}
-`;
-
-export const DescriptionHeader = styled.h2`
-  ${utilityPrimary}
-  margin-block-start: 24px;
-  font-size: 13px;
-  color: var(--color-neutral-text-dark);
 `;
 
 export const CommentsSection = styled("div", transientOptions)`
