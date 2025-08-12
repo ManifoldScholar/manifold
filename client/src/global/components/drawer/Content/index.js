@@ -131,7 +131,8 @@ function DrawerContent(props, ref) {
             allowOutsideClick: context === "reader",
             clickOutsideDeactivates: handleClickOutside,
             escapeDeactivates: handleEscape,
-            returnFocusOnDeactivate
+            returnFocusOnDeactivate,
+            preventScroll: context === "reader"
           }}
         >
           {inner}
