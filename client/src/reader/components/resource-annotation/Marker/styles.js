@@ -40,6 +40,8 @@ export const Marker = styled.button`
       background-color: var(--color-accent-primary);
       color: var(--color-base-neutral90);
     `}
+
+  ${({ $static }) => $static && `pointer-events: none; cursor: default;`}
 `;
 
 const paddings = readerContainerWidths
