@@ -49,7 +49,7 @@ export default function Marker({ annotation }) {
 
   const { width } = useWindowSize();
 
-  const { groups, thumbCount } = useContext(ResourceMarkerContext);
+  const { groups, thumbCount } = useContext(ResourceMarkerContext) ?? {};
 
   const markerRef = useCallback(node => {
     if (node !== null) {
@@ -68,7 +68,7 @@ export default function Marker({ annotation }) {
 
   const { id, resourceId, resourceCollectionId } = annotation;
 
-  const group = Object.values(groups).find(g => g.includes(id));
+  const group = groups ? Object.values(groups).find(g => g.includes(id)) : null;
 
   const rendersGroup = group ? group.indexOf(id) === 0 : false;
 
