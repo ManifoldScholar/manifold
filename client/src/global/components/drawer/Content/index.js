@@ -135,7 +135,8 @@ function DrawerContent(props, ref) {
         clickOutsideDeactivates: handleClickOutside,
         escapeDeactivates: handleEscape,
         returnFocusOnDeactivate,
-        fallbackFocus: ref
+        fallbackFocus: ref,
+        preventScroll: context === "reader"
       }}
     >
       <Drawer key="drawer" {...drawerProps}>
