@@ -23,5 +23,5 @@ export const Count = styled.div`
   margin-block-end: 16px;
   padding-block-end: 6px;
   border-bottom: 1px solid var(--color-base-neutral30);
-  color: var(--color-base-neutral75);
+  color: var(--color);
 `;
