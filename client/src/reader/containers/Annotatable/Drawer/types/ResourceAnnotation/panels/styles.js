@@ -37,7 +37,7 @@ export const Form = styled(FormContainer.Form)`
   --Dropzone-max-width: 100%;
   --FieldWrapper-gap: 20px;
   --Form-row-gap: 50px;
-  --input-placeholder-color: var(--color-base-neutral75);
+  --input-placeholder-color: var(--color);
 
   ${ButtonGroup} {
     margin-block-start: 0;
@@ -48,12 +48,10 @@ const GRID_GAP = "15px";
 
 export const Kinds = styled.div`
   ${listUnstyled}
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   margin-left: calc(-1 * ${GRID_GAP});
   margin-block-start: var(--FieldWrapper-gap);
-
-  ${respond(`display: flex;`, 65)}
 `;
 
 export const Kind = styled.label`
@@ -65,7 +63,7 @@ export const Kind = styled.label`
   padding: 16px;
   margin-bottom: ${GRID_GAP};
   margin-left: ${GRID_GAP};
-  background-color: var(--color-base-neutral10);
+  background-color: var(--box-medium-bg-color);
   border-radius: 6px;
   transition: background-color var(--transition-duration-fast)
     var(--transition-timing-function);
@@ -81,6 +79,7 @@ export const Kind = styled.label`
   &:focus-within,
   &:has(input:checked) {
     background-color: var(--color-accent-primary);
+    color: var(--color-base-neutral90);
     outline: 0;
   }
 `;
@@ -103,6 +102,8 @@ export const KindLabel = styled.span`
 
 export const UploadGroup = styled.div`
   display: grid;
-  gap: 40px;
-  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 40px;
+  grid-row-gap: 50px;
+
+  ${respond(`grid-template-columns: repeat(2, 1fr);`, 60)};
 `;

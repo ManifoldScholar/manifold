@@ -38,7 +38,7 @@ export const Tab = styled.button`
 
   &:hover {
     background-color: var(--color-accent-primary);
-    color: inherit;
+    color: var(--color-base-neutral90);
   }
 
   &:focus-visible {

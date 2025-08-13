@@ -30,12 +30,12 @@ export const Dropzone = styled(BaseDropzone)`
   transition: border-color 0.2s, background-color 0.2s;
 
   .reader & {
-    background-color: var(--color-base-neutral10);
+    background-color: var(--box-medium-bg-color);
     border-color: transparent;
 
     &:hover {
-      border-color: var(--color-base-neutral90);
-      background-color: var(--color-base-neutral05);
+      border-color: var(--strong-color);
+      background-color: var(--box-weak-bg-color);
     }
   }
 `;
