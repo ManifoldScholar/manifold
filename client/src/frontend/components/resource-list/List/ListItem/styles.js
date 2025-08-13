@@ -76,6 +76,7 @@ export const Metadata = styled.div`
 export const Tag = styled.div`
   padding-inline: 12px;
   padding-block: 4px;
+  min-block-size: 28px;
   display: flex;
   align-items: center;
   gap: 8px;
