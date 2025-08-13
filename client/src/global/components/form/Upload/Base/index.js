@@ -38,7 +38,8 @@ export default class FormUpload extends Component {
     progress: PropTypes.string,
     fileNameFrom: PropTypes.string,
     uploadError: PropTypes.string,
-    getModelValue: PropTypes.func
+    getModelValue: PropTypes.func,
+    instructionsSingleLine: PropTypes.bool
   };
 
   static defaultProps = {
@@ -144,6 +145,7 @@ export default class FormUpload extends Component {
                     handleRemove={this.handleRemove}
                     fileName={this.fileName}
                     isBuilder={this.props.isBuilder}
+                    instructionsSingleLine={this.props.instructionsSingleLine}
                   />
                 ) : (
                   <Empty
@@ -151,6 +153,7 @@ export default class FormUpload extends Component {
                     progress={this.props.progress}
                     uploadError={this.props.uploadError}
                     placeholder={this.props.placeholder}
+                    instructionsSingleLine={this.props.instructionsSingleLine}
                   />
                 )}
               </InputWrapper>

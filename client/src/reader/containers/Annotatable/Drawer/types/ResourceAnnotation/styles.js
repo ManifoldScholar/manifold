@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { utilityPrimary } from "theme/styles/mixins/typography";
 import Tabs from "frontend/components/layout/Tabs";
 
-export const Wrapper = styled.form`
+export const Wrapper = styled.section`
   margin-block-start: 24px;
 
   > * + * {
@@ -35,13 +35,4 @@ export const Label = styled.span`
 
 export const TabList = styled(Tabs.TabList)`
   margin-block-end: 40px;
-`;
-
-export const ButtonGroup = styled.div`
-  display: flex;
-  gap: 16px;
-
-  > button {
-    min-width: 140px;
-  }
 `;

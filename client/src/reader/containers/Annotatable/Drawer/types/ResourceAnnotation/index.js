@@ -3,16 +3,20 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import ResourceList from "./panels/Resources";
 import CollectionList from "./panels/Collections";
+import CreateForm from "./panels/Create";
 import IconComposer from "global/components/utility/IconComposer";
 import Tabs from "frontend/components/layout/Tabs";
-import ButtonGroup from "./ButtonGroup";
 import * as Styled from "./styles";
 
 export default function NewResourceAnnotation({ projectId, actions, close }) {
   const { t } = useTranslation();
 
   const [selected, setSelected] = useState(null);
-  const [toCreate, setToCreate] = useState(null);
+
+  const handleSave = e => {
+    e.preventDefault();
+    actions.openResourceAnnotationFormatModal(selected);
+  };
 
   const tabs = [
     {
@@ -24,6 +28,8 @@ export default function NewResourceAnnotation({ projectId, actions, close }) {
           projectId={projectId}
           selected={selected}
           setSelected={setSelected}
+          handleSave={handleSave}
+          handleClose={close}
         />
       )
     },
@@ -36,6 +42,8 @@ export default function NewResourceAnnotation({ projectId, actions, close }) {
           projectId={projectId}
           selected={selected}
           setSelected={setSelected}
+          handleSave={handleSave}
+          handleClose={close}
         />
       )
     },
@@ -43,24 +51,14 @@ export default function NewResourceAnnotation({ projectId, actions, close }) {
       label: "Create New",
       id: "create",
       icon: "circlePlus24",
-      panel: <div>create resource form here</div>
+      panel: (
+        <CreateForm
+          projectId={projectId}
+          onSuccess={actions.openResourceAnnotationFormatModal}
+        />
+      )
     }
   ];
-
-  const handleSave = e => {
-    e.preventDefault();
-    actions.openResourceAnnotationFormatModal(selected);
-  };
-
-  const handleCreate = e => {
-    e.preventDefault();
-    try {
-      // call create resource here
-      // if success call actions.openResourceAnnotationFormatModal with response
-    } catch {
-      // handle error
-    }
-  };
 
   return (
     <Styled.Wrapper>
@@ -89,13 +87,6 @@ export default function NewResourceAnnotation({ projectId, actions, close }) {
             );
           })}
         </div>
-        <ButtonGroup
-          handleSave={handleSave}
-          handleCreate={handleCreate}
-          handleClose={close}
-          selected={selected}
-          toCreate={toCreate}
-        />
       </Tabs.Provider>
     </Styled.Wrapper>
   );

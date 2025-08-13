@@ -7,7 +7,8 @@ export default function ResourceCollectionListItem({
   active,
   setActive
 }) {
-  const { title, thumbnailStyles, createdAt } = collection?.attributes ?? {};
+  const { title, thumbnailStyles, createdAt, collectionResourcesCount } =
+    collection?.attributes ?? {};
 
   const { t } = useTranslation();
 
@@ -22,6 +23,13 @@ export default function ResourceCollectionListItem({
       <Styled.TextColumn>
         <Styled.Title>{title}</Styled.Title>
         <Styled.Metadata>
+          <Styled.Tag>
+            <span>
+              {`${collectionResourcesCount} ${t("glossary.resource", {
+                count: collectionResourcesCount
+              })}`}
+            </span>
+          </Styled.Tag>
           <Styled.Date>
             <span>{t("dates.created_title_case")}</span>
             <FormattedDate date={createdAt} />
