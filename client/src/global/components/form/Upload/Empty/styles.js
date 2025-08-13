@@ -17,11 +17,21 @@ export const Wrapper = styled.div`
       color: var(--hover-color);
     }
   }
+
+  .reader &:hover {
+    ${Prompt} {
+      color: var(--reader-color);
+    }
+  }
 `;
 
 export const Icon = styled(IconComposer)`
   display: block;
   color: var(--color-base-neutral-white);
+
+  .reader & {
+    color: var(--color-base-neutral75);
+  }
 `;
 
 export const PrimaryText = styled.p`
@@ -31,6 +41,10 @@ export const PrimaryText = styled.p`
   font-weight: var(--font-weight-semibold);
   line-height: 1.5em;
   text-align: center;
+
+  .reader & {
+    color: var(--color-base-neutral75);
+  }
 `;
 
 export const SecondaryText = styled.p`
