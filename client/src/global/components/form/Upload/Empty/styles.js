@@ -30,7 +30,7 @@ export const Icon = styled(IconComposer)`
   color: var(--color-base-neutral-white);
 
   .reader & {
-    color: var(--color-base-neutral75);
+    color: var(--color);
   }
 `;
 
@@ -43,7 +43,7 @@ export const PrimaryText = styled.p`
   text-align: center;
 
   .reader & {
-    color: var(--color-base-neutral75);
+    color: var(--color);
   }
 `;
 

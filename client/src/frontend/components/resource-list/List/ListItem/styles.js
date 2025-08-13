@@ -8,7 +8,7 @@ export const ImageWrapper = styled.figure`
   block-size: 63px;
   flex-shrink: 0;
   border-radius: 6px;
-  background-color: var(--color-base-neutral10);
+  background-color: var(--box-medium-bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +18,7 @@ export const ImageWrapper = styled.figure`
 
 export const Title = styled.h3`
   font-family: var(--font-family-sans);
-  color: var(--color-base-neutral90);
+  color: var(--strong-color);
   margin: 0;
   font-weight: 400;
   font-size: ${fluidScale("18px", "16px")};
@@ -80,8 +80,8 @@ export const Tag = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--color-base-neutral10);
-  color: var(--color-base-neutral75);
+  background-color: var(--box-medium-bg-color);
+  color: var(--color);
   border-radius: 4px;
 
   > span {
@@ -92,7 +92,7 @@ export const Tag = styled.div`
 
 export const Date = styled.span`
   font-style: italic;
-  color: var(--color-base-neutral75);
+  color: var(--color);
   font-family: var(--font-family-copy);
 
   > * + * {
@@ -111,5 +111,5 @@ export const Thumb = styled.img`
 export const Icon = styled(IconComposer)`
   height: 36px;
   width: 36px;
-  color: var(--color-base-neutral80);
+  color: var(--color);
 `;
