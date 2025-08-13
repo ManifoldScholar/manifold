@@ -3,9 +3,16 @@ import PropTypes from "prop-types";
 import { projectsAPI } from "api";
 import { useFetch, usePaginationState, useListFilters } from "hooks";
 import CollectionList from "frontend/components/resource-list/List/CollectionList";
+import ButtonGroup from "./ButtonGroup";
 import * as Styled from "./styles";
 
-export default function CollectionsList({ projectId, selected, setSelected }) {
+export default function CollectionsList({
+  projectId,
+  selected,
+  setSelected,
+  handleSave,
+  handleClose
+}) {
   const [filters, setFilters] = useState({});
 
   const filterProps = useListFilters({
@@ -40,6 +47,11 @@ export default function CollectionsList({ projectId, selected, setSelected }) {
         onPageChange={onPageChange}
         setActive={setSelected}
         active={selected?.id}
+      />
+      <ButtonGroup
+        handleSave={handleSave}
+        handleClose={handleClose}
+        selected={selected}
       />
     </div>
   );
