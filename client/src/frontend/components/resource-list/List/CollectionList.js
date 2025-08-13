@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import ListItem from "./ListItem";
+import ListItem from "./ListItem/CollectionListItem";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
-export default function ResourceList({
-  resources,
+export default function ResourceCollectionList({
+  collections,
   pagination,
   onPageChange,
   setActive,
@@ -15,16 +15,16 @@ export default function ResourceList({
   return (
     <Styled.Wrapper>
       <Styled.Count>
-        {`${pagination?.totalCount} ${t("glossary.resource", {
+        {`${pagination?.totalCount} ${t("glossary.resource_collection", {
           count: pagination?.totalCount
         })}`}
       </Styled.Count>
       <Styled.List>
-        {resources?.map(r => (
+        {collections?.map(c => (
           <ListItem
-            key={r.id}
-            resource={r}
-            active={active === r.id}
+            key={c.id}
+            collection={c}
+            active={active === c.id}
             setActive={setActive}
           />
         ))}
