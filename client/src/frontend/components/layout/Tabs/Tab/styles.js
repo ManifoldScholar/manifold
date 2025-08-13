@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { respond } from "theme/styles/mixins";
 import { buttonUnstyled } from "theme/styles/mixins/appearance";
 import { utilityPrimary } from "theme/styles/mixins/typography";
 
@@ -17,12 +18,22 @@ export const Tab = styled.button`
 
   &:first-child {
     border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    ${respond(
+      `border-bottom-left-radius: 10px; border-top-right-radius: 0;`,
+      60
+    )}
   }
 
   &:last-child {
-    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+
+    ${respond(
+      `border-top-right-radius: 10px; border-bottom-left-radius: 0;`,
+      60
+    )}
   }
 
   &:hover {
