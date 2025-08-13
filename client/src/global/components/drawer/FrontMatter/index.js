@@ -23,7 +23,7 @@ export default function FrontMatter(props) {
 
   const { t } = useTranslation();
 
-  const Bar = context === "reader" ? Styled.BarReader : Styled.Bar;
+  const Bar = context === "reader" && hasTitle ? Styled.BarReader : Styled.Bar;
 
   return (
     <>
