@@ -531,7 +531,9 @@ export class Annotatable extends Component {
           {...this.state.drawerProps}
         />
         {!this.state.drawerState && this.state.pendingResource && (
-          <dialog>Resource Annotation Format Selector Modal— make me!</dialog>
+          <dialog open>
+            Resource Annotation Format Selector Modal— make me!
+          </dialog>
         )}
       </>
     );
