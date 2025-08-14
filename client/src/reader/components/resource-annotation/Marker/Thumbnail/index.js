@@ -110,11 +110,15 @@ export default function Thumbnail({
     title,
     kind,
     variantThumbnailStyles,
-    thumbnailStyles
+    thumbnailStyles,
+    attachmentStyles
   } = entity.attributes;
 
   const renderedKind = collection ? t("glossary.collection_one") : kind;
-  const imgSrc = variantThumbnailStyles?.medium ?? thumbnailStyles?.medium;
+  const imgSrc =
+    variantThumbnailStyles?.medium ??
+    thumbnailStyles?.medium ??
+    attachmentStyles?.medium;
 
   const onClick = handleClick(entity.id, annotation.type);
 
