@@ -36,6 +36,11 @@ export const Description = styled.p`
   text-align: center;
   filter: blur(7px);
   transition: blur 1s ease-in-out;
+  color: var(--reader-color);
+
+  input:checked ~ & {
+    color: var(--color-base-neutral90);
+  }
 
   ${({ $animating }) => $animating && `filter: blur(0px);`}
 `;
@@ -62,6 +67,8 @@ export const Title = styled.h3`
   margin: 0;
 
   input:checked + & {
+    color: var(--color-base-neutral90);
+
     ::after {
       display: inline-block;
       content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 -2 25 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.8067 3.75L10.1164 18.0169L3.08178 11.1475L2 12.2021L10.2432 20.25L23 4.68233L21.8067 3.75Z" fill="currentColor" stroke="currentColor" stroke-linejoin="round"/></svg>');
