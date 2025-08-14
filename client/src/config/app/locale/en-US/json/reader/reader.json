@@ -106,6 +106,19 @@
     "annotated_passage": "Annotated passage",
     "highlight_aria_label": "Begin highlight; {{chunk}}; end highlight.",
     "annotation_aria_label": "Begin annotation; {{chunk}}; end annotation.",
-    "annotation_highlight_aria_label": "Begin highlight and annotation; {{chunk}}; end highlight and annotation."
+    "annotation_highlight_aria_label": "Begin highlight and annotation; {{chunk}}; end highlight and annotation.",
+    "resource_display": {
+      "header": "Choose a Display Style",
+      "instructions": "Please select how you would like this resource to display within your text.",
+      "inline": {
+        "title": "Inline",
+        "description": "A small button appears inline, after the annotated text. Thumbnail previews and titles will appear in the margins (or the footer for narrower screens)."
+      },
+      "block": {
+        "title": "Block",
+        "description": "A large preview block appears within the flow of the main text, just below the annotated portion. This larger preview includes metadata and controls."
+      },
+      "submit_label": "Add Resource"
+    }
   }
 }
