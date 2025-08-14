@@ -55,6 +55,7 @@ export default function NewResourceAnnotation({ projectId, actions, close }) {
         <CreateForm
           projectId={projectId}
           onSuccess={actions.openResourceAnnotationFormatModal}
+          handleClose={close}
         />
       )
     }
