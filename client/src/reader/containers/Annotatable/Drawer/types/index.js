@@ -9,3 +9,5 @@ export default {
   ViewAnnotations,
   Citation
 };
+
+export { default as DisplaySelectModal } from "./ResourceAnnotation/DisplaySelectModal";
