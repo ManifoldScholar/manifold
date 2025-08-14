@@ -4,6 +4,7 @@ import {
   buttonUnstyled,
   defaultFocusStyle
 } from "theme/styles/mixins";
+import { Prompt } from "../Base/styles";
 
 export const Preview = styled.div`
   display: grid;
@@ -34,6 +35,14 @@ export const Message = styled.div`
   text-align: center;
   background: var(--color-base-neutral95);
   opacity: 0.9;
+
+  .reader & {
+    color: var(--color-base-neutral10);
+
+    ${Prompt} {
+      color: var(--colo-base-neutral10);
+    }
+  }
 `;
 
 export const MessageBuilder = styled(Message)`

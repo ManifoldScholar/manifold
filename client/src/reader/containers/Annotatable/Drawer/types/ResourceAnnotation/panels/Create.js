@@ -19,7 +19,7 @@ const RESOURCE_KINDS = [
   "Interactive"
 ];
 
-export default function CreateResource({ projectId, onSuccess }) {
+export default function CreateResource({ projectId, onSuccess, handleClose }) {
   const { t } = useTranslation();
   const id = useId();
 
@@ -83,7 +83,7 @@ export default function CreateResource({ projectId, onSuccess }) {
           instructionsSingleLine
         />
       </Styled.UploadGroup>
-      <ButtonGroup />
+      <ButtonGroup handleClose={handleClose} />
     </Styled.Form>
   );
 }

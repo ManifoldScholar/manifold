@@ -226,9 +226,9 @@
     },
     "upload": {
       "instructions": "<0>Upload a file</0> or <1/> drag and drop here <1/>",
-      "instructions_with_existing": "<0>Remove this file</0><2/>or <1>Upload a new file</1>",
+      "instructions_with_existing": "<0>Remove this file</0><2/> or <1>Upload a new file</1>",
       "progress": "Uploading file to Manifold. <0/>{{percent}}% Complete.",
-      "image_preview": "<0>Remove this image</0><2/>or <1>Upload a new file</1>",
+      "image_preview": "<0>Remove this image</0><2/> or <1>Upload a new file</1>",
       "image_preview_alt": "Upload preview"
     },
     "date_picker": {
