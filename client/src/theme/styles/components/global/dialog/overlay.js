@@ -19,5 +19,9 @@ export default `
     .reader & {
       background-color: ${transparentize("neutralBlack", 0.7)};
     }
+
+    .reader.scheme-dark & {
+      background-color: ${transparentize("neutral40", 0.2)};
+    }
   }
 `;
