@@ -5,7 +5,7 @@ import FormattedDate from "global/components/FormattedDate";
 import * as Styled from "./styles";
 
 export default function ResourceListItem({ resource, active, setActive }) {
-  const { title, variantThumbnailStyles, kind, createdAt } =
+  const { title, variantThumbnailStyles, attachmentStyles, kind, createdAt } =
     resource?.attributes ?? {};
 
   const { t } = useTranslation();
@@ -15,6 +15,8 @@ export default function ResourceListItem({ resource, active, setActive }) {
     e.stopPropagation();
     setActive(resource);
   };
+
+  const src = variantThumbnailStyles?.medium ?? attachmentStyles?.medium;
 
   return resource ? (
     <Styled.Wrapper $active={active} onClick={handleClick}>
@@ -32,8 +34,8 @@ export default function ResourceListItem({ resource, active, setActive }) {
         </Styled.Metadata>
       </Styled.TextColumn>
       <Styled.ImageWrapper>
-        {variantThumbnailStyles?.medium ? (
-          <Styled.Thumb src={variantThumbnailStyles?.medium} />
+        {src ? (
+          <Styled.Thumb src={src} />
         ) : (
           <Styled.Icon icon={`resource${capitalize(kind)}64`} size={32} />
         )}
