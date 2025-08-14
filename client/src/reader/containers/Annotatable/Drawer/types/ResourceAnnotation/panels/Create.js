@@ -26,6 +26,7 @@ export default function CreateResource({ projectId, onSuccess }) {
   return (
     <Styled.Form
       className="form-secondary"
+      name="reader-resource-create"
       model={{ attributes: {} }}
       create={data => resourcesAPI.create(projectId, data)}
       onSuccess={resource => onSuccess(resource)}
