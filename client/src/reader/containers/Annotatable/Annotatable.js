@@ -5,6 +5,7 @@ import { annotationsAPI, requests } from "api";
 import { entityStoreActions, uiVisibilityActions } from "actions";
 import AnnotatableDebug from "./handlers/Debug";
 import AnnotatableDrawer from "./Drawer";
+import { DisplaySelectModal } from "./Drawer/types";
 import AnnotatablePopup from "./Popup";
 import CaptureSelection from "./handlers/CaptureSelection";
 import CaptureClick from "./handlers/CaptureClick";
@@ -587,9 +588,12 @@ export class Annotatable extends Component {
           {...this.state.drawerProps}
         />
         {!this.state.drawerState && this.state.pendingResource && (
-          <dialog open>
-            Resource Annotation Format Selector Modal— make me!
-          </dialog>
+          <DisplaySelectModal
+            handleClose={() => this.setState({ pendingResource: null })}
+            handleCreate={this.actions.createAnnotation}
+            pendingResource={this.state.pendingResource}
+            pendingAnnotation={this.state.drawerProps.pendingAnnotation}
+          />
         )}
       </>
     );
