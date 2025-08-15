@@ -100,10 +100,15 @@ export const KindLabel = styled.span`
   margin-block-start: 13px;
 `;
 
-export const UploadGroup = styled.div`
+export const FieldGroup = styled.div`
   display: grid;
   grid-column-gap: 40px;
   grid-row-gap: 50px;
+  align-items: start;
+
+  label {
+    margin-block-end: 0;
+  }
 
   ${respond(`grid-template-columns: repeat(2, 1fr);`, 60)};
 `;
