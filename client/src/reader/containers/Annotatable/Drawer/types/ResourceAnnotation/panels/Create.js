@@ -59,7 +59,10 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
       create={data => resourcesAPI.create(projectId, data)}
       onSuccess={resource => onSuccess(resource)}
     >
-      {() => {
+      {getModelValue => {
+        const kind = getModelValue("attributes[kind]");
+        const isExternalVideo = !!getModelValue("attributes[subKind]");
+
         return (
           <>
             <Form.TextInput
@@ -82,20 +85,67 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
               />
               <Kinds name="attributes[kind]" />
             </fieldset>
-            <Styled.UploadGroup>
-              <Form.Upload
-                label={t("glossary.resource_one")}
-                accepts="any"
-                name="attributes[attachment]"
-                instructionsSingleLine
+            {(kind === "link" || kind === "interactive") && (
+              <Form.TextInput
+                label={t("resources.properties.url")}
+                name="attributes[externalUrl]"
+                placeholder={t("resources.properties.url_placeholder")}
               />
+            )}
+            {kind === "video" && (
+              <>
+                <Form.Switch
+                  label={t("resources.new.video_source")}
+                  name="attributes[subKind]"
+                  customValues={{
+                    true: "external_video",
+                    false: ""
+                  }}
+                  wide
+                  isPrimary
+                />
+                {isExternalVideo && (
+                  <Styled.FieldGroup>
+                    <Form.TextInput
+                      label={t("resources.new.video_id")}
+                      name="attributes[externalId]"
+                      placeholder={t("resources.new.video_id_placeholder")}
+                      instructions={t("resources.new.video_id_instructions")}
+                    />
+                    <Form.Select
+                      label={t("resources.new.external_video_type")}
+                      name="attributes[externalType]"
+                      options={[
+                        {
+                          label: t("resources.new.select_source"),
+                          value: ""
+                        },
+                        { label: "Youtube", value: "youtube" },
+                        { label: "Vimeo", value: "vimeo" }
+                      ]}
+                    />
+                  </Styled.FieldGroup>
+                )}
+              </>
+            )}
+            <Styled.FieldGroup>
+              {kind !== "link" &&
+                kind !== "interactive" &&
+                !(kind === "video" && isExternalVideo) && (
+                  <Form.Upload
+                    label={t("glossary.resource_one")}
+                    accepts="any"
+                    name="attributes[attachment]"
+                    instructionsSingleLine
+                  />
+                )}
               <Form.Upload
                 label={t("resources.properties.featured_image")}
                 accepts="images"
                 name="attributes[variantThumbnail]"
                 instructionsSingleLine
               />
-            </Styled.UploadGroup>
+            </Styled.FieldGroup>
             <ButtonGroup handleClose={handleClose} />
           </>
         );
