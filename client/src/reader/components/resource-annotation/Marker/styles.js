@@ -2,6 +2,34 @@ import styled from "@emotion/styled";
 import { respond, buttonUnstyled } from "theme/styles/mixins";
 import { readerContainerWidths } from "theme/styles/utility/layout";
 
+export const thumbnailBreakpoints = [
+  "1460px",
+  "1340px",
+  "1205px",
+  "1095px",
+  "925px"
+];
+
+const mediaQueries = thumbnailBreakpoints
+  .map(
+    (width, i) => `
+  .container-width-${i} & {
+    ${respond(`display: block;`, width)}
+  }
+`
+  )
+  .join("");
+
+const paddings = readerContainerWidths
+  .map(
+    (width, i) => `
+    .container-width-${i} & {
+      padding-inline: calc((((100vw - ${width}) / 2) - 200px) / 2);
+    }
+  `
+  )
+  .join("");
+
 export const Wrapper = styled.span`
   position: relative;
 `;
@@ -44,16 +72,6 @@ export const Marker = styled.button`
   ${({ $static }) => $static && `pointer-events: none; cursor: default;`}
 `;
 
-const paddings = readerContainerWidths
-  .map(
-    (width, i) => `
-  .container-width-${i} & {
-    padding-inline: calc((((100vw - ${width}) / 2) - 200px) / 2);
-  }
-`
-  )
-  .join("");
-
 const unselectable = `
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -69,14 +87,7 @@ export const Sidebar = styled.div`
   top: -50%;
 
   ${paddings}
-
-  .container-width-1 & {
-    ${respond(`display: block;`, "1360px")}
-  }
-
-  .container-width-2 & {
-    ${respond(`display: block;`, "1240px")}
-  }
+  ${mediaQueries}
 
   ${({ $hidden }) => $hidden && `z-index: -1; height: 0; overflow: hidden;`}
 
