@@ -9,6 +9,7 @@ import { useFromStore } from "hooks";
 import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { ResourceMarkerContext } from "./context";
 import Thumbnail from "./Thumbnail";
+import ThumbnailMobile from "./Thumbnail/Mobile";
 import { useWindowSize } from "usehooks-ts";
 import * as Styled from "./styles";
 
@@ -130,6 +131,7 @@ export default function Marker({ annotation }) {
           </Styled.Sidebar>
         </>
       )}
+      <ThumbnailMobile id={id} active={active} handleClick={handleClick} />
     </Styled.Wrapper>
   );
 }
