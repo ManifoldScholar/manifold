@@ -120,8 +120,6 @@ export default function Thumbnail({
     thumbnailStyles?.medium ??
     attachmentStyles?.medium;
 
-  const onClick = handleClick(entity.id, annotation.type);
-
   const WrapperComponent = hidden ? Styled.PositionerWrapper : Styled.Wrapper;
   const wrapperProps = hidden
     ? { "aria-hidden": true }
@@ -130,7 +128,7 @@ export default function Thumbnail({
         $active: active,
         onMouseEnter,
         onMouseLeave,
-        onClick
+        onClick: handleClick
       };
 
   return (

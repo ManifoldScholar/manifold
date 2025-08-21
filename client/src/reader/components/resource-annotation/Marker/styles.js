@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { respond, buttonUnstyled } from "theme/styles/mixins";
-import { readerContainerWidths } from "theme/styles/utility/layout";
 
 export const thumbnailBreakpoints = [
   "1460px",
@@ -10,25 +9,16 @@ export const thumbnailBreakpoints = [
   "925px"
 ];
 
-const mediaQueries = thumbnailBreakpoints
-  .map(
-    (width, i) => `
+export const mediaQueries = display =>
+  thumbnailBreakpoints
+    .map(
+      (width, i) => `
   .container-width-${i} & {
-    ${respond(`display: block;`, width)}
+    ${respond(`display: ${display};`, width)}
   }
 `
-  )
-  .join("");
-
-const paddings = readerContainerWidths
-  .map(
-    (width, i) => `
-    .container-width-${i} & {
-      padding-inline: calc((((100vw - ${width}) / 2) - 200px) / 2);
-    }
-  `
-  )
-  .join("");
+    )
+    .join("");
 
 export const Wrapper = styled.span`
   position: relative;
@@ -39,7 +29,7 @@ export const Marker = styled.button`
   height: 28px;
   width: 28px;
   padding: 4px;
-  display: inline-flex;
+  display: none;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
@@ -70,36 +60,18 @@ export const Marker = styled.button`
     `}
 
   ${({ $static }) => $static && `pointer-events: none; cursor: default;`}
+
+  ${mediaQueries("inline-flex")}
 `;
 
-const unselectable = `
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-`;
+export const MarkerMobile = styled(Marker)`
+  display: inline-flex;
 
-export const Sidebar = styled.div`
-  display: none;
-  position: absolute;
-  left: ${({ $left }) => ($left ? `-${$left}px` : 0)};
-  top: -50%;
+  &[data-hover-override="true"],
+  section:not(:has(*[data-hover-override="true"])) &[data-active="true"] {
+    background-color: var(--color-accent-primary);
+    color: var(--color-base-neutral90);
+  }
 
-  ${paddings}
-  ${mediaQueries}
-
-  ${({ $hidden }) => $hidden && `z-index: -1; height: 0; overflow: hidden;`}
-
-  ${({ $right }) =>
-    $right && `left: auto; right: calc((100vw - ${$right}px) * -1);`}
-
-    ${unselectable}
-`;
-
-export const Group = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-block-start: ${({ $count }) => `calc(-1 * ${$count} * 10px)`};
+  ${mediaQueries("none")}
 `;
