@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: "checkout main"
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: "Capture commit hash"
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          COMMIT=`git rev-parse HEAD`
+          echo "commit=${COMMIT}" >> $GITHUB_ENV
+
+      - name: "Setup Node"
+        uses: ./.github/actions/setup-node
+
+      - name: "Build client"
+        run: |
+          cd ${GITHUB_WORKSPACE}/client
+          yarn build
+
+      - name: "Maybe commit release changes"
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          git add --all
+          git add -f client/dist
+          git status
+          git config --global user.email "office@castironcoding.com"
+          git config --global user.name "Build Action"
+          git diff --staged --quiet || git commit -m "[C] build Manifold client from ${{ env.commit }}"
+          git checkout -b release-candidate
+
+      - name: "Push release-candidate changes"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          git push --force origin release-candidate
