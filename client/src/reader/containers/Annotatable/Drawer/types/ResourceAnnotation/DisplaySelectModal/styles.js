@@ -7,7 +7,7 @@ import {
   fluidScale
 } from "theme/styles/mixins";
 import { Form as BaseForm } from "global/containers/form/styles";
-import Utility from "global/components/Utility";
+import Utility from "global/components/utility";
 import BaseDialog from "global/components/dialog";
 
 export const Dialog = styled(BaseDialog.Wrapper)`
