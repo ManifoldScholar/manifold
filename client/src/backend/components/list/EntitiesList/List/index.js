@@ -86,7 +86,14 @@ export default class ListEntities extends PureComponent {
     titleStyle: PropTypes.oneOf(["bar", "title", "section"]),
     titleLink: PropTypes.string,
     titleTag: PropTypes.string,
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
+    listStyle: PropTypes.oneOf([
+      "rows",
+      "tiles",
+      "grid",
+      "bare",
+      "well",
+      "modal"
+    ]),
     sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
     showCount: ListEntities.validateShowCounts,
     showCountInTitle: ListEntities.validateShowCounts,
@@ -239,6 +246,7 @@ export default class ListEntities extends PureComponent {
       "entity-list__list--grid": this.listStyle === "grid",
       "entity-list__list--tiles": this.listStyle === "tiles",
       "entity-list__list--rows": this.listStyle === "rows",
+      "entity-list__list--modal": this.listStyle === "modal",
       "entity-list__list--sortable": this.isSortable,
       "entity-list__list--sortable-tight":
         this.isSortable && this.sortableStyle === "tight"
