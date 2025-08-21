@@ -8,8 +8,8 @@ import capitalize from "lodash/capitalize";
 import { useFromStore } from "hooks";
 import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { ResourceMarkerContext } from "./context";
-import Thumbnail from "./Thumbnail";
-import ThumbnailMobile from "./Thumbnail/Mobile";
+import MobileMarker from "./Mobile";
+import Sidebar from "./Sidebar";
 import { useWindowSize } from "usehooks-ts";
 import * as Styled from "./styles";
 
@@ -22,27 +22,10 @@ export default function Marker({ annotation }) {
     `ui.transitory.reader.activeAnnotation`
   );
   const setActiveAnnotation = annotationId =>
-    dispatch(
-      uiReaderActions.setActiveAnnotation({ annotationId, passive: false })
-    );
+    dispatch(uiReaderActions.setActiveAnnotation({ annotationId }));
 
   const { font, fontSize, margins } = useFromStore(
     `ui.persistent.reader.typography`
-  );
-
-  const handleClick = useCallback(
-    (entityId, type) => e => {
-      e.preventDefault();
-
-      const target =
-        type === "resource_collection"
-          ? lh.link("frontendProjectResourceCollectionRelative", entityId)
-          : lh.link("frontendProjectResourceRelative", entityId);
-
-      const url = `${location.pathname}/${target}`;
-      navigate(url, { noScroll: true });
-    },
-    [navigate, location.pathname]
   );
 
   const [markerEl, setMarkerEl] = useState(null);
@@ -50,7 +33,7 @@ export default function Marker({ annotation }) {
 
   const { width } = useWindowSize();
 
-  const { groups, thumbCount } = useContext(ResourceMarkerContext) ?? {};
+  const { thumbCount } = useContext(ResourceMarkerContext) ?? {};
 
   const markerRef = useCallback(node => {
     if (node !== null) {
@@ -69,10 +52,6 @@ export default function Marker({ annotation }) {
 
   const { id, resourceId, resourceCollectionId } = annotation;
 
-  const group = groups ? Object.values(groups).find(g => g.includes(id)) : null;
-
-  const rendersGroup = group ? group.indexOf(id) === 0 : false;
-
   const resource = useFromStore(
     `entityStore.entities.resources["${resourceId}"]`
   );
@@ -87,51 +66,54 @@ export default function Marker({ annotation }) {
     ? "collection"
     : "file";
 
-  const active = id === activeAnnotation;
+  const icon = `resource${capitalize(kind)}64`;
+
+  const handleClick = useCallback(
+    e => {
+      e.preventDefault();
+
+      const entityId = resourceId || resourceCollectionId;
+
+      const target =
+        annotation.type === "resource_collection"
+          ? lh.link("frontendProjectResourceCollectionRelative", entityId)
+          : lh.link("frontendProjectResourceRelative", entityId);
+
+      const url = `${location.pathname}/${target}`;
+      navigate(url, { noScroll: true });
+    },
+    [
+      navigate,
+      location.pathname,
+      annotation.type,
+      resourceId,
+      resourceCollectionId
+    ]
+  );
 
   return (
     <Styled.Wrapper ref={markerRef}>
       <Styled.Marker
-        $active={active}
+        $active={id === activeAnnotation}
         data-annotation-notation={id}
-        onClick={handleClick(
-          resourceId ?? resourceCollectionId,
-          annotation.type
-        )}
+        onClick={handleClick}
         onMouseEnter={() => setActiveAnnotation(id)}
         onMouseLeave={() => setActiveAnnotation(null)}
       >
-        <IconComposer size={20} icon={`resource${capitalize(kind)}64`} />
+        <IconComposer size={20} icon={icon} />
       </Styled.Marker>
-      <Styled.Sidebar $left={left} $hidden={!!group}>
-        <Thumbnail
-          id={id}
-          hidden={!!group}
-          active={active}
-          onMouseEnter={() => setActiveAnnotation(id)}
-          onMouseLeave={() => setActiveAnnotation(null)}
-          handleClick={handleClick}
-          setsPosition
-        />
-      </Styled.Sidebar>
-      {rendersGroup && (
-        <>
-          <Styled.Sidebar $left={left}>
-            <Styled.Group $count={group.length}>
-              {group.map(notationId => (
-                <Thumbnail
-                  id={notationId}
-                  active={notationId === activeAnnotation}
-                  onMouseEnter={() => setActiveAnnotation(notationId)}
-                  onMouseLeave={() => setActiveAnnotation(null)}
-                  handleClick={handleClick}
-                />
-              ))}
-            </Styled.Group>
-          </Styled.Sidebar>
-        </>
-      )}
-      <ThumbnailMobile id={id} active={active} handleClick={handleClick} />
+      <MobileMarker
+        id={id}
+        icon={icon}
+        handleClick={handleClick}
+        setActiveAnnotation={setActiveAnnotation}
+      />
+      <Sidebar
+        id={id}
+        left={left}
+        handleClick={handleClick}
+        setActiveAnnotation={setActiveAnnotation}
+      />
     </Styled.Wrapper>
   );
 }
