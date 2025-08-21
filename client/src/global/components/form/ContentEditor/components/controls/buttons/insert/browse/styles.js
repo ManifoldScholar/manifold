@@ -77,30 +77,50 @@ export const Heading = styled.span`
   }
 `;
 
-export const ModalBody = styled.div`
-  width: 100%;
-  flex-basis: 52dvh;
-  flex-grow: 1;
-  overflow: auto;
-`;
-
 export const Modal = styled(Dialog.Wrapper)`
-  max-inline-size: 800px;
-  block-size: 80dvh;
+  max-inline-size: 1000px;
+  block-size: 85dvh;
   oveflow: auto;
-  padding-block: ${fluidScale("50px", "30px")};
+  padding-block-start: ${fluidScale("50px", "30px")};
+  padding-block-end: ${fluidScale("40px", "30px")};
   padding-inline: ${fluidScale("60px", "40px")};
   overflow: hidden;
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
 `;
 
 export const ButtonGroup = styled.div`
   display: flex;
   gap: 24px;
-  padding-block-start: 48px;
+  padding-block-start: 36px;
 `;
 
-export const ModalContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+export const ListWrapper = styled.div`
+  padding-block: 1.25rem;
+  padding-inline: 1rem;
+  border-radius: 8px;
+  background-color: var(--box-medium-bg-color);
+  overflow: auto;
+  flex-grow: 1;
+  min-height: 453px;
+
+  div.entity-list {
+    height: 100%;
+  }
+
+  .entity-list__contents-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+`;
+
+export const Pagination = styled(Utility.Pagination)`
+  margin-block-start: 36px;
 `;
