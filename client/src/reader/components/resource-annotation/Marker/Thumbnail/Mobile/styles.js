@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { respond, buttonUnstyled } from "theme/styles/mixins";
 import { readerContainerWidths } from "theme/styles/utility/layout";
-import { thumbnailBreakpoints, unselectable } from "../../styles";
+import { thumbnailBreakpoints } from "../../styles";
+import { unselectable } from "../../Sidebar/styles";
 import IconComposer from "global/components/utility/IconComposer";
 
 const mediaQueries = thumbnailBreakpoints
