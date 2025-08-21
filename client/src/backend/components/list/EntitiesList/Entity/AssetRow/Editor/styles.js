@@ -40,6 +40,7 @@ export const Asset = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   transition: background-color var(--transition-duration-default) ease-out,
     box-shadow var(--transition-duration-default) ease-out;
   padding: 12px;
