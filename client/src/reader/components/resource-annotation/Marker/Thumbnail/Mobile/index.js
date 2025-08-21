@@ -2,7 +2,12 @@ import { useFromStore } from "hooks";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
-export default function ThumbnailMobile({ id, active, handleClick }) {
+export default function ThumbnailMobile({
+  id,
+  active,
+  handleClick,
+  hoverOverride
+}) {
   const annotation = useFromStore(`entityStore.entities.annotations["${id}"]`);
 
   const { resourceId, resourceCollectionId } = annotation?.attributes;
@@ -30,27 +35,22 @@ export default function ThumbnailMobile({ id, active, handleClick }) {
     thumbnailStyles?.medium ??
     attachmentStyles?.medium;
 
-  return (
-    <Styled.Wrapper>
+  return active ? (
+    <Styled.Wrapper data-hover-override={hoverOverride}>
       <Styled.Content>
-        {!!imgSrc && (
-          <Styled.ImageWrapper>
+        <Styled.ImageWrapper>
+          {imgSrc ? (
             <Styled.Image src={imgSrc} />
-          </Styled.ImageWrapper>
-        )}
+          ) : (
+            <Styled.Icon icon="resourceLink64" size={28} />
+          )}
+        </Styled.ImageWrapper>
         <Styled.Title>{title}</Styled.Title>
         {/* Remove from tab order since clicking the resource marker also opens the detail modal */}
-        <Styled.ViewButton
-          tabIndex={-1}
-          aria-hidden
-          onClick={handleClick(
-            resourceId ?? resourceCollectionId,
-            annotation.type
-          )}
-        >
+        <Styled.ViewButton tabIndex={-1} aria-hidden onClick={handleClick}>
           <IconComposer size={20} icon="eyeOpen32" />
         </Styled.ViewButton>
       </Styled.Content>
     </Styled.Wrapper>
-  );
+  ) : null;
 }
