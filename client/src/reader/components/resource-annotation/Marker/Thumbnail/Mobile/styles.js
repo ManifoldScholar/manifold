@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { respond, buttonUnstyled } from "theme/styles/mixins";
 import { readerContainerWidths } from "theme/styles/utility/layout";
-import { thumbnailBreakpoints } from "../../styles";
+import { thumbnailBreakpoints, unselectable } from "../../styles";
+import IconComposer from "global/components/utility/IconComposer";
 
 const mediaQueries = thumbnailBreakpoints
   .map(
@@ -29,8 +30,9 @@ export const Wrapper = styled.article`
   left: 0;
   width: 100vw;
   background: var(--color-base-neutral-white);
+  z-index: 100;
 
-  &::before {
+  &:not([data-hover-override="true"])::before {
     content: "";
     position: absolute;
     inset: -20px;
@@ -40,7 +42,12 @@ export const Wrapper = styled.article`
     z-index: -1;
   }
 
+  &[data-hover-override="true"] {
+    z-index: 101;
+  }
+
   ${mediaQueries}
+  ${unselectable}
 `;
 
 export const Content = styled.div`
@@ -62,6 +69,10 @@ export const ImageWrapper = styled.figure`
   padding-block-start: 3px;
   border-radius: 4px;
   flex-shrink: 0;
+  background-color: var(--box-medium-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Image = styled.img`
@@ -116,4 +127,10 @@ export const ViewButton = styled.button`
     background-color: var(--color-accent-primary);
     color: var(--color-base-neutral90);
   }
+`;
+
+export const Icon = styled(IconComposer)`
+  height: 32px;
+  width: 32px;
+  color: var(--color);
 `;
