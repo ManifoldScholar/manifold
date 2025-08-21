@@ -33,7 +33,7 @@ export default function BrowseModal(props) {
       describedBy={t("editor.forms.described_by_uid", { id })}
       onEsc={onCancel}
     >
-      <Styled.ModalContent>
+      <Styled.Content>
         <Styled.ModalHeader className="dialog__header">
           <Styled.Heading>
             <Styled.HeaderIcon icon={icon} size={32} />
@@ -46,9 +46,7 @@ export default function BrowseModal(props) {
             <Styled.CloseIcon icon="close24" size={24} />
           </Styled.CloseButton>
         </Styled.ModalHeader>
-        <Styled.ModalBody>
-          <BrowseList active={active} setActive={setActive} format={format} />
-        </Styled.ModalBody>
+        <BrowseList active={active} setActive={setActive} format={format} />
         <Styled.ButtonGroup>
           <button onClick={onAdd} className={buttonClasses} data-id="accept">
             <span>{addLabel}</span>
@@ -61,7 +59,7 @@ export default function BrowseModal(props) {
             <span>{t("actions.cancel")}</span>
           </button>
         </Styled.ButtonGroup>
-      </Styled.ModalContent>
+      </Styled.Content>
     </Styled.Modal>
   );
 }
