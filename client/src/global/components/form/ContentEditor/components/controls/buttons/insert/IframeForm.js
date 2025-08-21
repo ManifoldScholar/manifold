@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FormBaseInput as Input } from "../../../../../BaseInput";
 import { useTranslation } from "react-i18next";
-import BrowseButton from "./browse/BrowseButton";
 import * as Styled from "./styles";
 
 export default function InsertIframeForm({ urlRef, titleRef, defaultValues }) {
@@ -12,16 +11,8 @@ export default function InsertIframeForm({ urlRef, titleRef, defaultValues }) {
     title: defaultValues?.title
   });
 
-  const onSelect = asset => {
-    setFormValues({
-      url: `/api/proxy/ingestion_sources/${asset.id}`,
-      title: asset.attributes.displayName
-    });
-  };
-
   return (
     <Styled.Form>
-      <BrowseButton onSelect={onSelect} format="video" />
       <Input
         value={formValues.url}
         ref={urlRef}
