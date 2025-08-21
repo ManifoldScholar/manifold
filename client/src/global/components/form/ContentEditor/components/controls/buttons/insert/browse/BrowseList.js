@@ -3,13 +3,15 @@ import { useTranslation } from "react-i18next";
 import { ingestionSourcesAPI } from "api";
 import { useParams } from "react-router-dom";
 import { useFetch, usePaginationState } from "hooks";
-import EntitiesList, { AssetRow } from "backend/components/list/EntitiesList";
+import EntitiesList from "backend/components/list/EntitiesList";
+import EditorAsset from "backend/components/list/EntitiesList/entity/AssetRow/Editor";
+import * as Styled from "./styles";
 
 export default function BrowseList({ active, setActive, format }) {
   const { t } = useTranslation();
   const { id } = useParams();
 
-  const [pagination] = usePaginationState();
+  const [pagination, setPageNumber] = usePaginationState(1, 8);
 
   const filters = useMemo(() => ({ format }), [format]);
 
@@ -21,21 +23,27 @@ export default function BrowseList({ active, setActive, format }) {
   const onRowClick = asset => setActive(asset);
 
   return assets ? (
-    <EntitiesList
-      entityComponent={AssetRow}
-      entityComponentProps={{
-        onRowClick,
-        active: active?.id,
-        isBrowse: true,
-        rowClickMode: "block"
-      }}
-      entities={assets}
-      unit={t("glossary.asset", {
-        count: assetsMeta?.pagination?.totalCount
-      })}
-      pagination={assetsMeta.pagination}
-      listStyle="grid"
-    />
+    <>
+      <Styled.ListWrapper>
+        <EntitiesList
+          entityComponent={EditorAsset}
+          entityComponentProps={{
+            onRowClick,
+            active: active?.id,
+            format
+          }}
+          entities={assets}
+          unit={t("glossary.asset", {
+            count: assetsMeta?.pagination?.totalCount
+          })}
+          listStyle="modal"
+        />
+      </Styled.ListWrapper>
+      <Styled.Pagination
+        pagination={assetsMeta.pagination}
+        paginationClickHandler={page => () => setPageNumber(page)}
+      />
+    </>
   ) : (
     <div>Loading...</div>
   );
