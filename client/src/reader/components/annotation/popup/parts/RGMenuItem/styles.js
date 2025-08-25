@@ -5,37 +5,34 @@ import IconComposer from "global/components/utility/IconComposer";
 export const RGMenuItem = styled.button`
   ${buttonUnstyled}
   width: 100%;
-  min-width: 290px;
-  color: var(--group-button-color, inherit);
+  min-width: 297px;
+  color: var(--group-button-color);
   text-align: left;
-  background-color: var(--group-button-bg-color, transparent);
   transition: none;
 
   &:hover,
   &:focus-visible {
     color: var(--group-button-hover-color);
-    background-color: var(
-      --group-button-hover-bg-color,
-      var(--color-interaction-dark)
-    );
+    background-color: var(--group-button-hover-bg-color);
     outline: 0;
   }
 `;
 
 export const Inner = styled.div`
   display: grid;
-  grid-template: "selected label private" auto / 22px 1fr 18px;
+  grid-template: "selected label private" auto / 20px 1fr 20px;
   column-gap: 14px;
   padding: 10px 20px;
+  align-items: center;
 `;
 
 export const SelectedIcon = styled(IconComposer)`
   grid-area: selected;
+  margin-block-start: 2px;
 `;
 
 export const PrivateIcon = styled(IconComposer)`
   grid-area: private;
-  margin-top: 2px;
   color: var(--group-button-private-icon-color);
 
   .${RGMenuItem}:hover &,
