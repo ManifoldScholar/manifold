@@ -46,14 +46,14 @@ function MainMenu({
       direction={direction}
       onKeyDown={onKeyDown}
     >
-      <MenuItems.Share {...itemProps} onClick={() => openSubmenu("share")} />
       {permitAnnotation && (
         <>
-          <MenuItems.Resource {...itemProps} />
           <MenuItems.Annotate {...itemProps} />
           <MenuItems.Highlight {...itemProps} />
+          <MenuItems.Resource {...itemProps} />
         </>
       )}
+      <MenuItems.Share {...itemProps} onClick={() => openSubmenu("share")} />
       <MenuItems.CurrentReadingGroup
         {...itemProps}
         onClick={() => openSubmenu("readingGroup")}
