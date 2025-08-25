@@ -130,11 +130,6 @@ export default `
     ol[class] {
       list-style: revert;
     }
-
-    /* Link with notation marker cube */
-    .notation-marker {
-      cursor: pointer;
-    }
   }
 
   #text-section-interactive-region {
