@@ -124,7 +124,7 @@ export default function usePositioner({
         bottom = "auto";
       } else {
         top = "auto";
-        const naturalTopPosition = window.pageYOffset + selectionRect.top - 30;
+        const naturalTopPosition = window.pageYOffset + selectionRect.top - 10;
         bottom = window.innerHeight - naturalTopPosition;
       }
 

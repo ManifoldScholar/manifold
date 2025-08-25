@@ -4,6 +4,7 @@ import { useCurrentUser } from "hooks";
 import PropTypes from "prop-types";
 import Menu from "../../parts/Menu";
 import MenuItems from "./Items";
+import * as Styled from "./styles";
 
 function MainMenu({
   menu,
@@ -46,14 +47,16 @@ function MainMenu({
       direction={direction}
       onKeyDown={onKeyDown}
     >
-      {permitAnnotation && (
-        <>
-          <MenuItems.Annotate {...itemProps} />
-          <MenuItems.Highlight {...itemProps} />
-          <MenuItems.Resource {...itemProps} />
-        </>
-      )}
-      <MenuItems.Share {...itemProps} onClick={() => openSubmenu("share")} />
+      <Styled.Actions>
+        {permitAnnotation && (
+          <>
+            <MenuItems.Annotate {...itemProps} />
+            <MenuItems.Highlight {...itemProps} />
+            <MenuItems.Resource {...itemProps} />
+          </>
+        )}
+        <MenuItems.Share {...itemProps} onClick={() => openSubmenu("share")} />
+      </Styled.Actions>
       <MenuItems.CurrentReadingGroup
         {...itemProps}
         onClick={() => openSubmenu("readingGroup")}
