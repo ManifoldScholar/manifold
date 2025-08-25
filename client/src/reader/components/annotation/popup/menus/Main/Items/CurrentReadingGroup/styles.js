@@ -55,5 +55,5 @@ export const Inner = styled.div`
   align-items: flex-end;
   justify-content: space-between;
   gap: 8px;
-  max-width: 208px;
+  inline-size: 208px;
 `;
