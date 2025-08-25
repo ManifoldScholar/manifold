@@ -37,13 +37,6 @@ function Highlight({ menu, actions, activeAnnotation }) {
         }
         icon="annotate24"
       />
-      {highlighted && (
-        <div className="annotation-popup__note">
-          {activeAnnotation.attributes.currentUserIsCreator
-            ? t("reader.menus.popup.you_highlighted")
-            : t("reader.menus.popup.reader_highlighted")}
-        </div>
-      )}
     </>
   );
 }
