@@ -1,15 +1,14 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { MenuItem as ReakitMenuItem } from "reakit/Menu";
-import Menu from "../parts/Menu";
-import MenuItem from "../parts/MenuItem";
-import RGMenuItem from "../parts/RGMenuItem";
+import Menu from "../../parts/Menu";
+import RGMenuItem from "../../parts/RGMenuItem";
 import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
 import { useReaderContext } from "hooks";
 import withCurrentUser from "hoc/withCurrentUser";
+import * as Styled from "./styles";
 
 function ReadingGroupMenu({
   menu,
@@ -40,15 +39,15 @@ function ReadingGroupMenu({
       direction={direction}
       onKeyDown={onKeyDown}
     >
-      <div className="annotation-popup__header">
+      <Styled.Header>
         <IconComposer icon="readingGroup24" size="default" />
-        <span className="annotation-popup__heading">
+        <Styled.Heading>
           {canAccessReadingGroups
             ? t("glossary.reading_group_other") + ":"
             : "Visibility"}
-        </span>
-      </div>
-      <div className="annotation-popup__button-group" role="group">
+        </Styled.Heading>
+      </Styled.Header>
+      <Styled.ButtonGroup role="group">
         {canEngagePublicly && (
           <RGMenuItem
             menu={{ ...menu, visible }}
@@ -79,7 +78,7 @@ function ReadingGroupMenu({
             />
           ))}
         {canAccessReadingGroups && (
-          <div className="annotation-popup__footer">
+          <Styled.Footer>
             <ReakitMenuItem
               {...menu}
               visible={visible}
@@ -90,16 +89,15 @@ function ReadingGroupMenu({
               <span>{t("reader.menus.popup.manage_groups")}</span>
               <IconComposer icon="link24" size="default" />
             </ReakitMenuItem>
-          </div>
+          </Styled.Footer>
         )}
-      </div>
-      <MenuItem
+      </Styled.ButtonGroup>
+      <Styled.Back
         menu={{ ...menu, visible }}
         onClick={onBackClick}
         kind="any"
         label={t("navigation.back")}
         icon="arrowLeft32"
-        className="annotation-popup__button--secondary-dark"
       />
     </Menu>
   );

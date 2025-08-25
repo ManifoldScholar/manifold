@@ -1,9 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import { MenuItem as ReakitMenuItem } from "reakit/Menu";
-import IconComposer from "global/components/utility/IconComposer";
 import Authorize from "hoc/Authorize";
+import * as Styled from "./styles";
 
 function MenuItem({
   menu,
@@ -14,7 +11,6 @@ function MenuItem({
   icon,
   label,
   srLabel,
-  className,
   children,
   ...menuProps
 }) {
@@ -22,29 +18,17 @@ function MenuItem({
     <Authorize kind={kind} entity={entity} ability={ability}>
       {children && children}
       {!children && (
-        <ReakitMenuItem
+        <Styled.MenuItem
           {...menu}
           {...menuProps}
           onClick={onClick}
           onTouchEnd={onClick}
           tabIndex={menu.visible ? undefined : -1}
-          className={classNames("annotation-popup__button", className)}
         >
-          {icon && (
-            <IconComposer
-              icon={icon}
-              size={24}
-              className="annotation-popup__button-icon"
-            />
-          )}
-          <span
-            className="annotation-popup__button-text"
-            aria-hidden={!!srLabel}
-          >
-            {label}
-          </span>
+          {icon && <Styled.Icon icon={icon} size={24} />}
+          <Styled.Label aria-hidden={!!srLabel}>{label}</Styled.Label>
           {srLabel && <span className="screen-reader-text">{srLabel}</span>}
-        </ReakitMenuItem>
+        </Styled.MenuItem>
       )}
     </Authorize>
   );
