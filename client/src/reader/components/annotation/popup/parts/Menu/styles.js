@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { rgba, outlineOnFocus } from "theme/styles/mixins";
+import { outlineOnFocus } from "theme/styles/mixins";
 import { Menu as ReakitMenu } from "reakit/Menu";
 
 const transitionDuration = "0.3s";
@@ -14,7 +14,7 @@ export const Menu = styled(ReakitMenu)`
   color: var(--menu-color);
   background-color: var(--menu-bg-color);
   border-radius: var(--box-border-radius);
-  box-shadow: 0 12px 22px -3px ${rgba("neutralBlack", 0.39)};
+  box-shadow: 0 12px 32px 3px rgba(0, 0, 0, 0.3);
   opacity: 0;
   pointer-events: none;
   transition: opacity ${transitionDuration} var(--transition-timing-function),

@@ -3,72 +3,57 @@ import { utilityPrimary, buttonUnstyled } from "theme/styles/mixins";
 import { MenuItem as ReakitMenuItem } from "reakit/Menu";
 import IconComposer from "global/components/utility/IconComposer";
 
+export const Icon = styled(IconComposer)`
+  transform: rotate(90deg);
+  opacity: 0;
+  transition: opacity 0.3s;
+`;
+
 export const RGMenuItem = styled(ReakitMenuItem)`
-  --menu-button-color: var(--menu-secondary-color);
-  --menu-button-bg-color: var(--menu-secondary-bg-color);
-
   ${buttonUnstyled}
-  ${utilityPrimary}
-  display: block;
-  width: 100%;
-  padding: 11px 24px 11px 15px;
-  font-size: 14px;
-  line-height: 23px;
-  text-align: start;
-  text-decoration: none;
-  color: var(--menu-button-color);
-  background-color: var(--menu-button-bg-color);
-  transition: none;
-
-  padding-right: 20px;
-  padding-left: 20px;
-  color: var(--color-base-neutral45);
-  background-color: var(--color-base-neutral95);
-
-  &:first-child {
-    border-top-left-radius: var(--box-border-radius);
-    border-top-right-radius: var(--box-border-radius);
-  }
-
-  &:last-child {
-    border-bottom-right-radius: var(--box-border-radius);
-    border-bottom-left-radius: var(--box-border-radius);
-  }
+  padding: 16px 12px 16px 24px;
+  color: var(--color-base-neutral90);
+  background-color: var(--menu-secondary-bg-color);
+  border-bottom-right-radius: var(--box-border-radius);
+  border-bottom-left-radius: var(--box-border-radius);
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     color: var(--menu-button-hover-color);
     background-color: var(--hover-color);
     outline: none;
+
+    ${Icon} {
+      opacity: 1;
+    }
   }
 `;
 
 export const Label = styled.span`
-  position: relative;
-  top: -1px;
+  ${utilityPrimary}
+  font-size: 12px;
+  line-height: 19px;
+  letter-spacing: 1.5px;
+  display: inline-block;
+  inline-size: 100%;
+  text-align: start;
+`;
+
+export const CurrentGroup = styled.span`
+  margin-block-start: 6px;
+  font-family: var(--font-family-sans);
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: var(--font-weight-regular);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const Inner = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  max-width: 175px;
-`;
-
-export const CurrentGroup = styled.span`
-  position: relative;
-  top: -1px;
-  overflow: hidden;
-  font-size: 17px;
-  font-weight: var(--font-weight-regular);
-  text-overflow: ellipsis;
-  text-transform: none;
-  letter-spacing: 0;
-  white-space: nowrap;
-`;
-
-export const Icon = styled(IconComposer)`
-  margin-right: -5px;
-  margin-left: 13px;
-  transform: rotate(90deg);
+  gap: 8px;
+  max-width: 208px;
 `;
