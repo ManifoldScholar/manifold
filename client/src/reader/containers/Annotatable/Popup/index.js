@@ -3,12 +3,18 @@ import PropTypes from "prop-types";
 import PrimaryMenu from "./PrimaryMenu";
 import LinkMenu from "./LinkMenu";
 import LoginMenu from "./LoginMenu";
+import HighlightMenu from "./HighlightMenu";
 import Authorize from "hoc/Authorize";
 import usePositioner from "./usePositioner";
 import * as Styled from "./styles";
 
 export default function AnnotatablePopup(props) {
-  const { selectionState, annotatableRef, activeEvent } = props;
+  const {
+    selectionState,
+    annotatableRef,
+    activeEvent,
+    activeAnnotation
+  } = props;
   const popupRef = useRef();
 
   const showLinkMenu = activeEvent?.annotationIds && activeEvent?.link;
@@ -31,8 +37,11 @@ export default function AnnotatablePopup(props) {
         <LoginMenu {...props} direction={direction} visible />
       </Authorize>
       <Authorize kind="any">
+        {/* eslint-disable no-nested-ternary */}
         {showLinkMenu ? (
           <LinkMenu {...props} direction={direction} visible />
+        ) : activeAnnotation ? (
+          <HighlightMenu {...props} direction={direction} visible />
         ) : (
           <PrimaryMenu
             {...props}
