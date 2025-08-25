@@ -22,9 +22,9 @@ function RGMenuItem({ menu, label, onClick, selected, value, privateGroup }) {
   return (
     <Styled.RGMenuItem as={as} {...itemProps}>
       <Styled.Inner>
-        {selected && <Styled.SelectedIcon icon="checkmark16" size={22} />}
+        {selected && <Styled.SelectedIcon icon="checkmark16" size={20} />}
         <Styled.Label>{label}</Styled.Label>
-        {privateGroup && <Styled.PrivateIcon icon="lock16" size={18} />}
+        {privateGroup && <Styled.PrivateIcon icon="lock16" size={20} />}
       </Styled.Inner>
     </Styled.RGMenuItem>
   );

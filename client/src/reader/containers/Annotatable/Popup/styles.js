@@ -17,10 +17,11 @@ export const Popup = styled.div`
   --menu-selected-button-interaction-background-color: var(
     --color-accent-primary-pale
   );
-  --group-button-hover-color: var(--menu-bg-color);
-  --group-button-hover-bg-color: var(--hover-color);
-  --group-button-private-icon-color: var(--menu-secondary-color);
-  --manage-groups-link-color: var(--color-neutral-text-light);
+  --group-button-color: var(--color-base-neutral80);
+  --group-button-hover-color: var(--menu-button-hover-color);
+  --group-button-hover-bg-color: var(--color-base-neutral20);
+  --group-button-private-icon-color: var(--color-base-neutral50);
+  --manage-groups-link-color: var(--color-base-neutral80);
 
   .scheme-dark & {
     --menu-color: var(--color-base-neutral05);
@@ -34,9 +35,10 @@ export const Popup = styled.div`
     --menu-selected-button-interaction-background-color: var(
       --color-interaction-extra-dark
     );
-    --group-button-hover-color: var(--menu-button-hover-color);
+    --group-button-color: var(--color-base-neutral10);
+    --group-button-hover-bg-color: var(--color-base-neutral90);
     --group-button-private-icon-color: var(--color-neutral-ui-light);
-    --manage-groups-link-color: #5c5c5c;
+    --manage-groups-link-color: var(--color-base-neutral10);
   }
 
   z-index: 100;
