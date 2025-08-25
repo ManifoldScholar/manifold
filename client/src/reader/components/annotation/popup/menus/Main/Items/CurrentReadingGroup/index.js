@@ -50,7 +50,7 @@ function CurrentReadingGroup({
         </Styled.Label>
         <Styled.Inner aria-hidden>
           <Styled.CurrentGroup>{getCurrentGroupName()}</Styled.CurrentGroup>
-          <Styled.Icon icon="disclosureUp16" size={22} />
+          <Styled.Icon icon="disclosureUp16" size={20} />
         </Styled.Inner>
       </Styled.RGMenuItem>
     </Authorize>
