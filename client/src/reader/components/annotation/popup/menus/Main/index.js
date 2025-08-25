@@ -4,7 +4,7 @@ import { useCurrentUser } from "hooks";
 import PropTypes from "prop-types";
 import Menu from "../../parts/Menu";
 import MenuItems from "./Items";
-import * as Styled from "./styles";
+import * as Styled from "../styles";
 
 function MainMenu({
   menu,
