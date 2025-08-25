@@ -20,6 +20,7 @@ export const Menu = styled(ReakitMenu)`
   transition: opacity ${transitionDuration} var(--transition-timing-function),
     transform ${transitionDuration} var(--transition-timing-function);
   transform: translateX(25%);
+  min-width: 244px;
 
   &[data-direction="down"] {
     /* override reakit inline styles */
