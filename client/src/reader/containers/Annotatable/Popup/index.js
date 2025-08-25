@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
 import PrimaryMenu from "./PrimaryMenu";
 import LinkMenu from "./LinkMenu";
 import LoginMenu from "./LoginMenu";
 import Authorize from "hoc/Authorize";
 import usePositioner from "./usePositioner";
+import * as Styled from "./styles";
 
 export default function AnnotatablePopup(props) {
   const { selectionState, annotatableRef, activeEvent } = props;
@@ -25,11 +26,7 @@ export default function AnnotatablePopup(props) {
   });
 
   return (
-    <div
-      ref={setPopupRef}
-      style={style}
-      className="annotation-popup annotation-popup--visible"
-    >
+    <Styled.Popup ref={setPopupRef} style={style}>
       <Authorize kind="unauthenticated">
         <LoginMenu {...props} direction={direction} visible />
       </Authorize>
@@ -45,7 +42,7 @@ export default function AnnotatablePopup(props) {
           />
         )}
       </Authorize>
-    </div>
+    </Styled.Popup>
   );
 }
 
