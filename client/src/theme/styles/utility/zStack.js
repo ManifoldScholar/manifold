@@ -77,10 +77,6 @@ export default `
     z-index: 100;
   }
 
-  .annotation-popup {
-    z-index: 100;
-  }
-
   .annotation-selection__action-buttons {
     z-index: 75;
   }

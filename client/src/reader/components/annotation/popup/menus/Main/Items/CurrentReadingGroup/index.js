@@ -1,10 +1,8 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { MenuItem as ReakitMenuItem } from "reakit/Menu";
-import IconComposer from "global/components/utility/IconComposer";
 import Authorize from "hoc/Authorize";
 import withCurrentUser from "hoc/withCurrentUser";
+import * as Styled from "./styles";
 
 function CurrentReadingGroup({
   menu,
@@ -32,7 +30,7 @@ function CurrentReadingGroup({
 
   return (
     <Authorize kind="any">
-      <ReakitMenuItem
+      <Styled.RGMenuItem
         {...menu}
         onClick={onClick}
         onTouchEnd={onClick}
@@ -40,28 +38,21 @@ function CurrentReadingGroup({
         aria-haspopup="menu"
         aria-expanded={activeMenu === "readingGroup"}
         data-name="readingGroup"
-        className="annotation-popup__button annotation-popup__button--stacked annotation-popup__button--secondary-dark"
       >
         <span className="screen-reader-text">
           {t("reader.actions.select_reading_group")}
         </span>
-        <span className="annotation-popup__button-text" aria-hidden>
+        <Styled.Label aria-hidden>
           {canAccessReadingGroups
             ? t("reader.menus.popup.current_group")
             : t("reader.menus.popup.current_visibility")}
           :
-        </span>
-        <div className="annotation-popup__button-inner-row" aria-hidden>
-          <span className="annotation-popup__button-text annotation-popup__button-text--small">
-            {getCurrentGroupName()}
-          </span>
-          <IconComposer
-            icon="disclosureUp16"
-            size={22}
-            className="annotation-popup__button-icon annotation-popup__button-icon--disclosure"
-          />
-        </div>
-      </ReakitMenuItem>
+        </Styled.Label>
+        <Styled.Inner aria-hidden>
+          <Styled.CurrentGroup>{getCurrentGroupName()}</Styled.CurrentGroup>
+          <Styled.Icon icon="disclosureUp16" size={22} />
+        </Styled.Inner>
+      </Styled.RGMenuItem>
     </Authorize>
   );
 }
