@@ -59,7 +59,9 @@
         "share_selection": "$t(actions.share) $t(glossary.selection_one) with external app",
         "follow_link": "Follow link",
         "copy": "Copy URL",
-        "copy_selection": "Copy link to selection"
+        "copy_selection": "Copy link to selection",
+        "remove_highlight": "Remove Highlight",
+        "copy_highlight": "Copy Highlight"
       },
       "visibility": {
         "all_reading_groups": "All $t(glossary.reading_group_title_case_other)",
