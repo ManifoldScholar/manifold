@@ -35,7 +35,7 @@ function Highlight({ menu, actions, activeAnnotation }) {
             ? t("reader.menus.popup.unhighlight_selection")
             : t("reader.menus.popup.highlight_selection")
         }
-        icon="annotate24"
+        icon="interactHighlight24"
       />
     </>
   );
