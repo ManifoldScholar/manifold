@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { MenuItem as ReakitMenuItem } from "reakit/Menu";
 import Menu from "../../parts/Menu";
 import RGMenuItem from "../../parts/RGMenuItem";
 import IconComposer from "global/components/utility/IconComposer";
@@ -39,12 +38,16 @@ function ReadingGroupMenu({
       direction={direction}
       onKeyDown={onKeyDown}
     >
+      <Styled.Back
+        menu={{ ...menu, visible }}
+        onClick={onBackClick}
+        kind="any"
+        label={t("navigation.back")}
+        icon="arrowLeft32"
+      />
       <Styled.Header>
-        <IconComposer icon="readingGroup24" size="default" />
         <Styled.Heading>
-          {canAccessReadingGroups
-            ? t("glossary.reading_group_other") + ":"
-            : "Visibility"}
+          {canAccessReadingGroups ? "Change Current Group:" : "Visibility"}
         </Styled.Heading>
       </Styled.Header>
       <Styled.ButtonGroup role="group">
@@ -79,26 +82,18 @@ function ReadingGroupMenu({
           ))}
         {canAccessReadingGroups && (
           <Styled.Footer>
-            <ReakitMenuItem
+            <Styled.Manage
               {...menu}
               visible={visible}
               as={Link}
               to={lh.link("frontendMyReadingGroups")}
-              className="annotation-manage-groups-link"
             >
               <span>{t("reader.menus.popup.manage_groups")}</span>
               <IconComposer icon="link24" size="default" />
-            </ReakitMenuItem>
+            </Styled.Manage>
           </Styled.Footer>
         )}
       </Styled.ButtonGroup>
-      <Styled.Back
-        menu={{ ...menu, visible }}
-        onClick={onBackClick}
-        kind="any"
-        label={t("navigation.back")}
-        icon="arrowLeft32"
-      />
     </Menu>
   );
 }
