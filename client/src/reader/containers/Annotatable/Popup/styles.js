@@ -45,5 +45,5 @@ export const Popup = styled.div`
   margin-top: -35px;
   white-space: nowrap;
   user-select: none;
-  transition: top ${defaultTransitionProps}, left ${defaultTransitionProps};
+  transition: top ${defaultTransitionProps}, left ${defaultTransitionProps};  ⁨
 `;
