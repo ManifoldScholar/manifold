@@ -121,10 +121,6 @@ export const Figure = styled.figure`
   text-align: var(--Thumbnail-text-align);
   text-transform: uppercase;
   letter-spacing: 0.096em;
-
-  .notation-viewer & {
-    font-size: 0;
-  }
 `;
 
 export const ImageWrapper = styled.div`
