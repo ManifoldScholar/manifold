@@ -5,6 +5,7 @@ import MenuItem from "../parts/MenuItem";
 import { useEventTracker, useShare, useCopyLinkToSelection } from "hooks";
 import { useMetaTitle } from "frontend/components/entity/useEntityHeadContent";
 import { t } from "i18next";
+import { Back as BackButton } from "./ReadingGroup/styles";
 
 function ShareMenu({
   menu,
@@ -92,13 +93,12 @@ function ShareMenu({
         srLabel={copySrLabel}
         icon={copyIcon}
       />
-      <MenuItem
+      <BackButton
         menu={{ ...menu, visible }}
         onClick={onBackClick}
         kind="any"
         label={t("navigation.back")}
         icon="arrowLeft32"
-        className="annotation-popup__button--secondary-dark"
       />
     </Menu>
   );
