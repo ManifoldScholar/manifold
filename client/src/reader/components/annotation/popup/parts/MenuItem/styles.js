@@ -8,25 +8,16 @@ export const MenuItem = styled(ReakitMenuItem)`
   ${utilityPrimary}
   display: flex;
   align-items: center;
+  gap: 16px;
   width: 100%;
-  padding: 11px 24px 11px 15px;
+  padding: 11px 20px 11px 20px;
   font-size: 14px;
-  line-height: 23px;
+  line-height: 21px;
   text-align: start;
   text-decoration: none;
   color: var(--menu-button-color);
   background-color: var(--menu-button-bg-color);
   transition: none;
-
-  &:first-child {
-    border-top-left-radius: var(--box-border-radius);
-    border-top-right-radius: var(--box-border-radius);
-  }
-
-  &:last-child {
-    border-bottom-right-radius: var(--box-border-radius);
-    border-bottom-left-radius: var(--box-border-radius);
-  }
 
   &:hover,
   &:focus,
@@ -47,11 +38,8 @@ export const MenuItem = styled(ReakitMenuItem)`
   }
 `;
 
-export const Icon = styled(IconComposer)`
-  margin-right: 13px;
-`;
+export const Icon = styled(IconComposer)``;
 
 export const Label = styled.span`
-  position: relative;
-  top: -1px;
+  margin-top: 2px;
 `;
