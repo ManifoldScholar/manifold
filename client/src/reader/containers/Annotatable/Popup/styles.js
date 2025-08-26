@@ -4,19 +4,14 @@ import { defaultTransitionProps } from "theme/styles/mixins";
 export const Popup = styled.div`
   --focus-color: var(--color-interaction-light);
   --hover-color: var(--color-interaction-light);
+
   --menu-color: var(--color-base-neutral85);
   --menu-bg-color: var(--color-base-neutral05);
-  --menu-secondary-color: var(--menu-color);
+  --menu-secondary-color: var(--color-base-neutral90);
   --menu-secondary-bg-color: var(--color-base-neutral10);
-  --menu-button-color: var(--menu-color);
-  --menu-button-bg-color: var(--menu-bg-color);
+
   --menu-button-hover-color: var(--color-base-neutral90);
-  --menu-dark-button-color: var(--color-base-neutral70);
-  --menu-dark-button-bg-color: var(--menu-bg-color);
-  --menu-selected-button-interaction-color: var(--menu-button-bg-color);
-  --menu-selected-button-interaction-background-color: var(
-    --color-accent-primary-pale
-  );
+  --back-button-color: var(--color-base-neutral75);
   --group-button-color: var(--color-base-neutral80);
   --group-button-hover-color: var(--menu-button-hover-color);
   --group-button-hover-bg-color: var(--color-base-neutral20);
@@ -24,20 +19,17 @@ export const Popup = styled.div`
   --manage-groups-link-color: var(--color-base-neutral80);
 
   .scheme-dark & {
-    --menu-color: var(--color-base-neutral05);
+    --menu-color: var(--color-base-neutral10);
     --menu-bg-color: var(--color-base-neutral100);
-    --menu-secondary-color: var(--color-base-neutral85);
-    --menu-secondary-bg-color: var(--color-base-neutral10);
-    --menu-button-hover-color: var(--menu-color);
-    --menu-dark-button-color: var(--color-base-neutral90);
-    --menu-dark-button-bg-color: var(--color-base-neutral70);
-    --menu-selected-button-interaction-color: var(--menu-bg-color);
-    --menu-selected-button-interaction-background-color: var(
-      --color-interaction-extra-dark
-    );
+    --menu-secondary-color: var(--color-base-neutral05);
+    --menu-secondary-bg-color: var(--color-base-neutral95);
+
+
+    --back-button-color: var(--color-base-neutral30);
     --group-button-color: var(--color-base-neutral10);
-    --group-button-hover-bg-color: var(--color-base-neutral90);
-    --group-button-private-icon-color: var(--color-neutral-ui-light);
+    --group-button-hover-color: var(--color-base-neutral00);
+    --group-button-hover-bg-color: var(--color-base-neutral80);
+    --group-button-private-icon-color: var(--color-base-neutral30);
     --manage-groups-link-color: var(--color-base-neutral10);
   }
 
