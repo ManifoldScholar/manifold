@@ -246,9 +246,10 @@ class AnnotatableCaptureSelection extends Component {
     if (!selection) return null;
 
     const range = selection.range;
+    const endRange = selection.endRange;
     const { startNode, startChar, adjustStart } = this.findStartValues(range);
     const { endNode, endChar, adjustEnd } = this.findEndValues(
-      range,
+      endRange,
       startNode
     );
 
@@ -292,12 +293,17 @@ class AnnotatableCaptureSelection extends Component {
 
   mapNativeSelection(nativeSelection) {
     if (!nativeSelection) return null;
+
+    const count = nativeSelection.rangeCount;
     const range = nativeSelection.getRangeAt(0);
+    const endRange = count > 1 ? nativeSelection.getRangeAt(count - 1) : range;
+
     const text = nativeSelection.toString();
     if (text.length === 0 || !text.trim()) return null;
 
     const mappedSelection = {
       range,
+      endRange,
       text,
       anchorNode: nativeSelection.anchorNode,
       anchorOffset: nativeSelection.anchorOffset,
