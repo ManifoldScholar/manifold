@@ -21,7 +21,7 @@ export default `
     }
 
     .reader.scheme-dark & {
-      background-color: ${transparentize("neutral40", 0.2)};
+      background-color: ${transparentize("neutralBlack", 0.3)};
     }
   }
 `;

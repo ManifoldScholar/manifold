@@ -30,7 +30,7 @@ export const Wrapper = styled.article`
   bottom: 0;
   left: 0;
   width: 100vw;
-  background: var(--color-base-neutral-white);
+  background: var(--background-color);
   z-index: 100;
 
   &:not([data-hover-override="true"])::before {
@@ -41,6 +41,10 @@ export const Wrapper = styled.article`
     background: linear-gradient(rgba(0, 0, 0, 0) 0%, #000 100%);
     opacity: 0.1;
     z-index: -1;
+
+    .scheme-dark & {
+      opacity: 0.3;
+    }
   }
 
   &[data-hover-override="true"] {
