@@ -589,7 +589,7 @@ export class Annotatable extends Component {
         />
         {!this.state.drawerState && this.state.pendingResource && (
           <DisplaySelectModal
-            handleClose={() => this.setState({ pendingResource: null })}
+            handleClose={this.resetState}
             handleCreate={this.actions.createAnnotation}
             pendingResource={this.state.pendingResource}
             pendingAnnotation={this.state.drawerProps.pendingAnnotation}
