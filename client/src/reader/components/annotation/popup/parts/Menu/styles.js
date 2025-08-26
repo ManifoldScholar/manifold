@@ -23,7 +23,7 @@ export const Menu = styled(ReakitMenu)`
   min-width: 244px;
 
   .scheme-dark & {
-    box-shadow: 0 12px 32px 3px rgba(85, 85, 85, 0.3);
+    box-shadow: 0 12px 32px -6px rgba(0, 0, 0, 0.7);
   }
 
   &[data-direction="down"] {
