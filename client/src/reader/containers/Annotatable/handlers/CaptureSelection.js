@@ -237,6 +237,20 @@ class AnnotatableCaptureSelection extends Component {
       endRange.setStart(endNode, 0);
       endRange.setEnd(range.endContainer, range.endOffset);
     }
+
+    const contents = endRange.cloneContents();
+    const resources = contents.querySelectorAll(
+      "[data-annotation-resource-unselectable]"
+    );
+    const unselectable = new DocumentFragment();
+    unselectable.replaceChildren(...resources);
+
+    if (unselectable.textContent.length) {
+      const adjustedOffset = range.endOffset - unselectable.textContent.length;
+      if (adjustedOffset > 0)
+        endRange.setEnd(range.endContainer, adjustedOffset);
+    }
+
     const endChar = endRange.toString().length;
     return { endNode, endChar };
   }
