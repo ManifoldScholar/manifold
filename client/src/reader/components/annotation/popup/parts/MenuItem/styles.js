@@ -15,27 +15,18 @@ export const MenuItem = styled(ReakitMenuItem)`
   line-height: 21px;
   text-align: start;
   text-decoration: none;
-  color: var(--menu-button-color);
-  background-color: var(--menu-button-bg-color);
+  color: var(--menu-color);
+  background-color: var(--menu-bg-color);
   transition: none;
 
   &:hover,
-  &:focus,
-  &[data-selected="true"] {
+  &:focus {
     color: var(--menu-button-hover-color);
     background-color: var(--hover-color);
     outline: none;
-  }
-
-  &[data-selected="true"]:hover,
-  &[data-selected="true"]:focus {
-    color: var(--menu-selected-button-interaction-color);
-    background-color: var(--menu-selected-button-interaction-background-color);
   }
 `;
 
 export const Icon = styled(IconComposer)``;
 
-export const Label = styled.span`
-  margin-top: 2px;
-`;
+export const Label = styled.span``;
