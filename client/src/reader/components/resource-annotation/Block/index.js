@@ -11,7 +11,7 @@ export default function ResourceBlock({ annotation }) {
   const entity = resource ?? collection;
 
   return entity ? (
-    <Styled.Block>
+    <Styled.Block data-annotation-resource-unselectable>
       <p>Resource block for:</p>
       <p>{entity?.attributes.title}</p>
       {annotation.readerDisplayFormat === "embed" ? (
