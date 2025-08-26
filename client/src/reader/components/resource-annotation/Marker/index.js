@@ -92,7 +92,7 @@ export default function Marker({ annotation }) {
   );
 
   return (
-    <Styled.Wrapper ref={markerRef}>
+    <Styled.Wrapper data-annotation-resource-unselectable ref={markerRef}>
       <Styled.Marker
         $active={id === activeAnnotation}
         data-annotation-notation={id}
