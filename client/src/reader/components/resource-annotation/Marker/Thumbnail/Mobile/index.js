@@ -36,7 +36,10 @@ export default function ThumbnailMobile({
     attachmentStyles?.medium;
 
   return active ? (
-    <Styled.Wrapper data-hover-override={hoverOverride}>
+    <Styled.Wrapper
+      data-annotation-resource-mobile
+      data-hover-override={hoverOverride}
+    >
       <Styled.Content>
         <Styled.ImageWrapper>
           {imgSrc ? (
