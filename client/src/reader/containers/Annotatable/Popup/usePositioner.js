@@ -2,6 +2,52 @@ import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import throttle from "lodash/throttle";
 
+function combineBoundingRects(firstEl, secondEl) {
+  const rect1 = firstEl.getBoundingClientRect();
+  const rect2 = secondEl.getBoundingClientRect();
+
+  const combinedRect = {
+    left: Math.min(rect1.left, rect2.left),
+    top: Math.min(rect1.top, rect2.top),
+    right: Math.max(rect1.right, rect2.right),
+    bottom: Math.max(rect1.bottom, rect2.bottom)
+  };
+
+  combinedRect.width = combinedRect.right - combinedRect.left;
+  combinedRect.height = combinedRect.bottom - combinedRect.top;
+
+  return combinedRect;
+}
+
+function adjustBottomCoord(rects) {
+  if (!rects?.length) return;
+
+  const bottomVals = [...rects].map(rect => rect.bottom).sort((a, b) => a - b);
+  return bottomVals[bottomVals.length - 2];
+}
+
+function maybeAdjustForResourceFooter(range) {
+  const resourceEls = range
+    .cloneContents()
+    .querySelectorAll("[data-annotation-resource-mobile]");
+
+  const rect = range.getBoundingClientRect();
+
+  if (!resourceEls?.length) return rect;
+
+  const adjusted = {
+    left: rect.left,
+    top: rect.top,
+    right: rect.right,
+    bottom: adjustBottomCoord(range.getClientRects()),
+    width: rect.width
+  };
+
+  adjusted.height = adjusted.bottom - adjusted.top;
+
+  return adjusted;
+}
+
 export default function usePositioner({
   popupRef,
   selectionState,
@@ -9,9 +55,13 @@ export default function usePositioner({
 }) {
   const { selection, popupTriggerX, popupTriggerY } = selectionState;
 
+  /* eslint-disable no-nested-ternary */
   const selectionRect = selection?.range
-    ? selection.range.getBoundingClientRect()
+    ? selection.range !== selection.endRange
+      ? combineBoundingRects(selection.range, selection.endRange)
+      : maybeAdjustForResourceFooter(selection.range)
     : null;
+  /* eslint-enable no-nested-ternary */
 
   const popupDimensions = useCallback(() => {
     if (!popupRef)
