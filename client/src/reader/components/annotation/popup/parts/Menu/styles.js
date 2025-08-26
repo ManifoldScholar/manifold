@@ -22,6 +22,10 @@ export const Menu = styled(ReakitMenu)`
   transform: translateX(25%);
   min-width: 244px;
 
+  .scheme-dark & {
+    box-shadow: 0 12px 32px 3px rgba(85, 85, 85, 0.3);
+  }
+
   &[data-direction="down"] {
     /* override reakit inline styles */
     top: 0 !important;
