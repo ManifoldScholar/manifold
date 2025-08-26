@@ -7,12 +7,29 @@ export const Icon = styled(IconComposer)`
   transform: rotate(90deg);
   opacity: 0;
   transition: opacity 0.3s;
+  flex-shrink: 0;
+`;
+
+export const Label = styled.span`
+  ${utilityPrimary}
+  font-size: 12px;
+  line-height: 19px;
+  letter-spacing: 1.5px;
+  display: inline-block;
+  inline-size: 100%;
+  text-align: start;
+  color: var(--color-base-neutral75);
+  transition: color 0.3s;
+
+  .scheme-dark & {
+    color: var(--color-base-neutral30);
+  }
 `;
 
 export const RGMenuItem = styled(ReakitMenuItem)`
   ${buttonUnstyled}
   padding: 16px 12px 16px 24px;
-  color: var(--color-base-neutral90);
+  color: var(--menu-color);
   background-color: var(--menu-secondary-bg-color);
   border-bottom-right-radius: var(--box-border-radius);
   border-bottom-left-radius: var(--box-border-radius);
@@ -26,17 +43,11 @@ export const RGMenuItem = styled(ReakitMenuItem)`
     ${Icon} {
       opacity: 1;
     }
-  }
-`;
 
-export const Label = styled.span`
-  ${utilityPrimary}
-  font-size: 12px;
-  line-height: 19px;
-  letter-spacing: 1.5px;
-  display: inline-block;
-  inline-size: 100%;
-  text-align: start;
+    ${Label} {
+      color: var(--menu-button-hover-color);
+    }
+  }
 `;
 
 export const CurrentGroup = styled.span`

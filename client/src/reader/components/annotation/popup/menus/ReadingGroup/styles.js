@@ -28,10 +28,17 @@ export const Footer = styled.div`
 
 export const Back = styled(MenuItem)`
   padding: 16px 20px;
-  color: var(--color-base-neutral75);
+  color: var(--back-button-color);
   background-color: var(--menu-secondary-bg-color);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-base-neutral90);
+  }
+
+  s
 `;
 
 export const Manage = styled(ReakitMenuItem)`
@@ -52,8 +59,8 @@ export const Manage = styled(ReakitMenuItem)`
   &:hover,
   &:focus-visible {
     color: var(--color-base-neutral90);
-    background-color: var(--color-interaction-light);
-    border-color: var(--color-interaction-light);
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
     outline: 0;
   }
 `;
