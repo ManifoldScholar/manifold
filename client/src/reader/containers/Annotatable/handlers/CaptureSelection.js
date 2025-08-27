@@ -202,8 +202,18 @@ class AnnotatableCaptureSelection extends Component {
     } catch (error) {
       startRange.setEnd(range.startContainer, range.startOffset);
     }
+
+    const contents = startRange.cloneContents();
+    const resources = contents.querySelectorAll(
+      "[data-annotation-resource-unselectable]"
+    );
+    const unselectable = new DocumentFragment();
+    unselectable.replaceChildren(...resources);
+
     // 3. Find the offset from the data-node-uuid start element
-    const startChar = startRange.toString().length;
+    const startChar =
+      startRange.toString().length - unselectable.textContent?.length;
+
     return { startNode, startChar };
   }
 
@@ -245,13 +255,8 @@ class AnnotatableCaptureSelection extends Component {
     const unselectable = new DocumentFragment();
     unselectable.replaceChildren(...resources);
 
-    if (unselectable.textContent.length) {
-      const adjustedOffset = range.endOffset - unselectable.textContent.length;
-      if (adjustedOffset > 0)
-        endRange.setEnd(range.endContainer, adjustedOffset);
-    }
-
-    const endChar = endRange.toString().length;
+    const endChar =
+      endRange.toString().length - unselectable.textContent?.length;
     return { endNode, endChar };
   }
 
