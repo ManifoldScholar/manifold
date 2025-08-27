@@ -268,27 +268,39 @@ class AnnotatableCaptureSelection extends Component {
     );
 
     // Adjust the selection range if we added characters to capture an entire mathematical expression.
-    if (adjustStart) range.setStart(startNode, 0);
-    if (adjustEnd) range.setEnd(endNode, endNode.childNodes.length);
+    /* eslint-disable no-param-reassign */
+    if (adjustStart) {
+      range.setStart(startNode, 0);
+      selection.allRanges[0] = range;
+    }
+    if (adjustEnd) {
+      endRange.setEnd(endNode, endNode.childNodes.length);
+      selection.allRanges[selection.allRanges.length - 1] = endRange;
+    }
+    /* eslint-enable no-param-reassign */
 
     const annotation = {
       startNode: startNode.dataset.nodeUuid,
       startChar,
       endNode: endNode.dataset.nodeUuid,
       endChar,
-      subject: this.extractText(range)
+      subject: this.extractText(selection.allRanges)
     };
     return annotation;
   }
 
-  extractText(range) {
+  extractText(ranges) {
     try {
-      const fragment = range.cloneContents();
+      const fragment = new DocumentFragment();
+      ranges.map(r => fragment.append(r.cloneContents()));
       const blockRegex = /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr|math)$/i;
 
       let text = "";
       fragment.childNodes.forEach(node => {
-        if (node.nodeType === Node.ELEMENT_NODE) {
+        if (
+          node.nodeType === Node.ELEMENT_NODE &&
+          !node.classList.contains("annotation-resource")
+        ) {
           text += node.innerText ?? node.textContent;
           if (blockRegex.test(node.nodeName)) {
             text += "\n";
@@ -301,7 +313,7 @@ class AnnotatableCaptureSelection extends Component {
       text = text.trim();
       return text;
     } catch (error) {
-      return range.toString();
+      return ranges.toString();
     }
   }
 
@@ -309,21 +321,25 @@ class AnnotatableCaptureSelection extends Component {
     if (!nativeSelection) return null;
 
     const count = nativeSelection.rangeCount;
-    const range = nativeSelection.getRangeAt(0);
-    const endRange = count > 1 ? nativeSelection.getRangeAt(count - 1) : range;
+    const startRange = nativeSelection.getRangeAt(0);
+    const endRange = nativeSelection.getRangeAt(count - 1);
+    const allRanges = Array.from({ length: count }, (_, i) =>
+      nativeSelection.getRangeAt(i)
+    );
 
     const text = nativeSelection.toString();
     if (text.length === 0 || !text.trim()) return null;
 
     const mappedSelection = {
-      range,
+      range: startRange,
       endRange,
+      allRanges,
       text,
       anchorNode: nativeSelection.anchorNode,
       anchorOffset: nativeSelection.anchorOffset,
       focusNode: nativeSelection.focusNode,
       focusOffset: nativeSelection.focusOffset,
-      startNode: selectionHelpers.findClosestTextNode(range.startContainer)
+      startNode: selectionHelpers.findClosestTextNode(startRange.startContainer)
     };
     return mappedSelection;
   }
