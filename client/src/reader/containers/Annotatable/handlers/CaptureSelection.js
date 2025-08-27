@@ -109,12 +109,12 @@ class AnnotatableCaptureSelection extends Component {
     const firstNode = isMathMLWrapper(nodes[0])
       ? findFirstMathUuidNode(nodes[0])
       : nodes[0];
-    const first = [...firstNode.childNodes].find(finder);
+    const first = [...firstNode.childNodes].find(finder) ?? firstNode;
 
     const lastNode = isMathMLWrapper([...nodes].pop())
       ? findLastMathUuidNode([...nodes].pop())
       : [...nodes].pop();
-    const last = [...lastNode.childNodes].find(finder);
+    const last = [...lastNode.childNodes].find(finder) ?? lastNode;
 
     return [first, last];
   }
@@ -298,14 +298,21 @@ class AnnotatableCaptureSelection extends Component {
     try {
       const fragment = new DocumentFragment();
       ranges.map(r => fragment.append(r.cloneContents()));
+
       const blockRegex = /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr|math)$/i;
 
+      const childNodes = [...fragment.childNodes]
+        .map(c => {
+          if (!c.classList.contains("annotation-resource")) return c;
+          return [...c.childNodes].filter(
+            d => !d.dataset?.annotationResourceUnselectable
+          );
+        })
+        .flat();
+
       let text = "";
-      fragment.childNodes.forEach(node => {
-        if (
-          node.nodeType === Node.ELEMENT_NODE &&
-          !node.classList.contains("annotation-resource")
-        ) {
+      childNodes.forEach(node => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
           text += node.innerText ?? node.textContent;
           if (blockRegex.test(node.nodeName)) {
             text += "\n";
