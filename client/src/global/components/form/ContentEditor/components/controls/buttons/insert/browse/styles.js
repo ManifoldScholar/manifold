@@ -81,8 +81,8 @@ export const Modal = styled(Dialog.Wrapper)`
   max-inline-size: 1000px;
   max-block-size: 85dvh;
   oveflow: auto;
-  padding-block-start: ${fluidScale("50px", "30px")};
-  padding-block-end: ${fluidScale("40px", "30px")};
+  padding-block-start: ${fluidScale("50px", "40px")};
+  padding-block-end: ${fluidScale("40px", "40px")};
   padding-inline: ${fluidScale("60px", "40px")};
   overflow: hidden;
 
