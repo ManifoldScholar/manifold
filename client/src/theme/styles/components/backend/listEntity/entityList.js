@@ -152,31 +152,23 @@ export default `.entity-list {
     }
 
     &--modal {
-      > * + * {
-        margin-block-start: 20px;
-      }
-
       ${respond(
         `
           display: grid;
           gap: 40px;
           grid-template-columns: repeat(
             auto-fill,
-            minmax(150px, 1fr)
+            minmax(165px, 1fr)
           );
-
-          > * + * {
-            margin-block-start: 0;
-          }
 
           li {
             flex-basis: 25%;
             flex-grow: 1;
-            min-width: 150px;
+            min-width: 165px;
             border-bottom: none;
           }
         `,
-        50
+        80
       )}
     }
 
