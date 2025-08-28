@@ -79,12 +79,16 @@ export const Heading = styled.span`
 
 export const Modal = styled(Dialog.Wrapper)`
   max-inline-size: 1000px;
-  block-size: 85dvh;
+  max-block-size: 85dvh;
   oveflow: auto;
   padding-block-start: ${fluidScale("50px", "30px")};
   padding-block-end: ${fluidScale("40px", "30px")};
   padding-inline: ${fluidScale("60px", "40px")};
   overflow: hidden;
+
+  .dialog-overlay:has(+ &) {
+    display: none;
+  }
 `;
 
 export const Content = styled.div`
@@ -102,12 +106,9 @@ export const ButtonGroup = styled.div`
 
 export const ListWrapper = styled.div`
   padding-block: 1.25rem;
-  padding-inline: 1rem;
-  border-radius: 8px;
-  background-color: var(--box-medium-bg-color);
   overflow: auto;
   flex-grow: 1;
-  min-height: 453px;
+  max-height: 47dvh;
 
   div.entity-list {
     height: 100%;
