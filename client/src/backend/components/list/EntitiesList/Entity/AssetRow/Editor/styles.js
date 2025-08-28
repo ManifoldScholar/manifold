@@ -29,12 +29,14 @@ export const IconWrapper = styled.div`
 
 const activeStyles = `
 ${panelRounded}
-background-color: var(--color-base-neutral100);
+background-color: var(--color-accent-primary);
+color: var(--color-base-neutral90);
 box-shadow: 16px 16px 26px -12px ${rgba("neutral80", 0.5)};
 `;
 
 export const Asset = styled.button`
   ${buttonUnstyled}
+  ${panelRounded}
   inline-size: 100%;
   block-size: 100%;
   display: flex;
@@ -45,15 +47,14 @@ export const Asset = styled.button`
     box-shadow var(--transition-duration-default) ease-out;
   padding: 12px;
   overflow: hidden;
+  background: var(--color-base-neutral80);
 
   &:hover,
   &:focus-visible {
     ${activeStyles}
-    color: var(--strong-color);
   }
 
-  ${({ $active }) =>
-    $active && `${activeStyles} color: var(--color-accent-primary);`}
+  ${({ $active }) => $active && `${activeStyles}`}
 `;
 
 export const Title = styled.span`
