@@ -21,6 +21,16 @@ class AppearanceMenuBody extends Component {
     className: PropTypes.string
   };
 
+  doViewTransition = callback => event => {
+    if (!document.startViewTransition) {
+      callback(event);
+      return;
+    }
+    document.startViewTransition(() => {
+      callback(event);
+    });
+  };
+
   handleFontStyleControl = event => {
     this.props.selectFont(event.target.value);
     this.props.setScreenReaderStatus(
@@ -223,7 +233,7 @@ class AppearanceMenuBody extends Component {
                 name="font-style-radios"
                 type="radio"
                 checked={option.value === this.typography.font}
-                onChange={this.handleFontStyleControl}
+                onChange={this.doViewTransition(this.handleFontStyleControl)}
                 className="appearance-menu__radio-input"
               />
               <span className="appearance-menu__radio-label">
@@ -258,7 +268,7 @@ class AppearanceMenuBody extends Component {
               name="color-scheme-radios"
               type="radio"
               checked={option.value === this.colorScheme}
-              onChange={this.handleColorSchemeControl}
+              onChange={this.doViewTransition(this.handleColorSchemeControl)}
               className="appearance-menu__radio-input"
             />
             <Utility.IconComposer
@@ -299,9 +309,9 @@ class AppearanceMenuBody extends Component {
                   className={fontSizeButtonClass}
                   disabled={this.serifDisabled}
                   aria-disabled={!this.fontSizeDecreasable}
-                  onClick={event => {
+                  onClick={this.doViewTransition(event => {
                     this.decrementSizeHandler(event, this.fontSizeDecreasable);
-                  }}
+                  })}
                 >
                   <Utility.IconComposer icon="MinusUnique" size={30} />
                   <span className="screen-reader-text">
@@ -312,9 +322,9 @@ class AppearanceMenuBody extends Component {
                   className={fontSizeButtonClass}
                   disabled={this.serifDisabled}
                   aria-disabled={!this.fontSizeIncreasable}
-                  onClick={event => {
+                  onClick={this.doViewTransition(event => {
                     this.incrementSizeHandler(event, this.fontSizeIncreasable);
-                  }}
+                  })}
                 >
                   <Utility.IconComposer icon="PlusUnique" size={30} />
                   <span className="screen-reader-text">
@@ -329,9 +339,9 @@ class AppearanceMenuBody extends Component {
                   className={fontSizeButtonClass}
                   disabled={this.sansDisabled}
                   aria-disabled={!this.fontSizeDecreasable}
-                  onClick={event => {
+                  onClick={this.doViewTransition(event => {
                     this.decrementSizeHandler(event, this.fontSizeDecreasable);
-                  }}
+                  })}
                 >
                   <Utility.IconComposer icon="MinusUnique" size={30} />
                   <span className="screen-reader-text">
@@ -342,9 +352,9 @@ class AppearanceMenuBody extends Component {
                   className={fontSizeButtonClass}
                   disabled={this.sansDisabled}
                   aria-disabled={!this.fontSizeIncreasable}
-                  onClick={event => {
+                  onClick={this.doViewTransition(event => {
                     this.incrementSizeHandler(event, this.fontSizeIncreasable);
-                  }}
+                  })}
                 >
                   <Utility.IconComposer icon="PlusUnique" size={30} />
                   <span className="screen-reader-text">
@@ -387,7 +397,7 @@ class AppearanceMenuBody extends Component {
           <button
             className={buttonClass}
             aria-disabled={!this.marginIncreaseable}
-            onClick={this.incrementMarginsHandler}
+            onClick={this.doViewTransition(this.incrementMarginsHandler)}
           >
             <Utility.IconComposer
               icon="MarginIncreaseUnique"
@@ -400,7 +410,7 @@ class AppearanceMenuBody extends Component {
           <button
             className={buttonClass}
             aria-disabled={!this.marginDecreasable}
-            onClick={this.decrementMarginsHandler}
+            onClick={this.doViewTransition(this.decrementMarginsHandler)}
           >
             <Utility.IconComposer
               icon="MarginDecreaseUnique"
