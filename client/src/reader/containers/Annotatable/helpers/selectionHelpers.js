@@ -76,9 +76,38 @@ const selectionMatchesAnnotation = (selectionState, annotation) => {
   return match;
 };
 
+const blockRegex = /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr|math)$/i;
+
+const getClosestBlock = el => {
+  if (blockRegex.test(el.nodeName)) return el;
+  return getClosestBlock(el.parentElement);
+};
+
+const getBlockTextContent = el => {
+  const clone = el.cloneNode(true);
+
+  const fragment = new DocumentFragment();
+  fragment.append(clone);
+
+  const resources = fragment.querySelectorAll(
+    "[data-annotation-resource-unselectable]"
+  );
+  resources.forEach(r => r.remove());
+
+  return fragment.textContent;
+};
+
+const annotationAtBlockEnd = (endNode, endRange) => {
+  const blockText = getBlockTextContent(getClosestBlock(endNode));
+  const rangeText = endRange.toString();
+  return blockText.endsWith(rangeText) || rangeText.endsWith(blockText);
+};
+
 export default {
   closest,
   findClosestTextNode,
   parentContainsSelection,
-  selectionMatchesAnnotation
+  selectionMatchesAnnotation,
+  blockRegex,
+  annotationAtBlockEnd
 };
