@@ -303,17 +303,13 @@ class AnnotatableCaptureSelection extends Component {
       const fragment = new DocumentFragment();
       ranges.map(r => fragment.append(r.cloneContents()));
 
-      const childNodes = [...fragment.childNodes]
-        .map(c => {
-          if (!c.classList.contains("annotation-resource")) return c;
-          return [...c.childNodes].filter(
-            d => !d.dataset?.annotationResourceUnselectable
-          );
-        })
-        .flat();
+      const resources = fragment.querySelectorAll(
+        "[data-annotation-resource-unselectable]"
+      );
+      resources.forEach(r => r.remove());
 
       let text = "";
-      childNodes.forEach(node => {
+      fragment.childNodes.forEach(node => {
         if (node.nodeType === Node.ELEMENT_NODE) {
           text += node.innerText ?? node.textContent;
           if (selectionHelpers.blockRegex.test(node.nodeName)) {
