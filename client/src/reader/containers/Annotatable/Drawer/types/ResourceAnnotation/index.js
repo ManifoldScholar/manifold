@@ -8,14 +8,34 @@ import IconComposer from "global/components/utility/IconComposer";
 import Tabs from "frontend/components/layout/Tabs";
 import * as Styled from "./styles";
 
-export default function NewResourceAnnotation({ projectId, actions, close }) {
+export default function NewResourceAnnotation({
+  projectId,
+  actions,
+  close,
+  pendingAnnotation,
+  pendingResource
+}) {
   const { t } = useTranslation();
 
   const [selected, setSelected] = useState(null);
 
+  const handleCreateAnnotation = resource => {
+    const attributes = {
+      ...pendingAnnotation,
+      format:
+        resource.type === "resourceCollections"
+          ? "resource_collection"
+          : "resource",
+      readerDisplayFormat: pendingResource.readerDisplayFormat
+    };
+    return actions.createAnnotation({ attributes }, { notation: resource });
+  };
+
   const handleSave = e => {
     e.preventDefault();
-    actions.openResourceAnnotationFormatModal(selected);
+
+    if (!selected) return;
+    handleCreateAnnotation(selected);
   };
 
   const tabs = [
@@ -54,7 +74,7 @@ export default function NewResourceAnnotation({ projectId, actions, close }) {
       panel: (
         <CreateForm
           projectId={projectId}
-          onSuccess={actions.openResourceAnnotationFormatModal}
+          onSuccess={handleCreateAnnotation}
           handleClose={close}
         />
       )

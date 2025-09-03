@@ -20,6 +20,10 @@ export const Option = styled.label`
   &:has(input:checked) {
     background-color: var(--color-accent-primary);
   }
+
+  &:has(input:disabled) {
+    opacity: 0.4;
+  }
 `;
 
 export const Input = styled.input`
