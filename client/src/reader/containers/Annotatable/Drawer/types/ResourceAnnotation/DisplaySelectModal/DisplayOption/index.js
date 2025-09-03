@@ -8,7 +8,8 @@ export default function DisplayOption({
   title,
   description,
   defaultChecked,
-  onChange
+  onChange,
+  disabled
 }) {
   const id = useId();
 
@@ -30,6 +31,7 @@ export default function DisplayOption({
         name="attributes[readerDisplayFormat]"
         defaultChecked={defaultChecked}
         onChange={onChange}
+        disabled={disabled}
       />
       <Styled.Title>{title}</Styled.Title>
       <Styled.Illustration $animating={animating}>

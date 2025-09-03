@@ -5,8 +5,7 @@ import * as Styled from "./styles";
 
 export default function DisplaySelectModal({
   handleClose,
-  handleCreate,
-  pendingResource,
+  handleNext,
   pendingAnnotation
 }) {
   const { t } = useTranslation();
@@ -15,14 +14,7 @@ export default function DisplaySelectModal({
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    const attributes = {
-      ...pendingAnnotation,
-      format: pendingResource.format,
-      readerDisplayFormat: display
-    };
-    const notation = pendingResource.entity;
-    return handleCreate({ attributes }, { notation });
+    handleNext(display);
   };
 
   return (
@@ -57,8 +49,14 @@ export default function DisplaySelectModal({
             title={t("reader.resource_display.block.title")}
             description={t("reader.resource_display.block.description")}
             onChange={() => setDisplay("block")}
+            disabled={!pendingAnnotation.blockResourceAllowed}
           />
         </Styled.Options>
+        {!pendingAnnotation.blockResourceAllowed && (
+          <Styled.Warning>
+            {t("reader.resource_display.block.selection_warning")}
+          </Styled.Warning>
+        )}
         <Styled.ButtonGroup>
           <button type="submit" className="button-secondary">
             <span>{t("reader.resource_display.submit_label")}</span>

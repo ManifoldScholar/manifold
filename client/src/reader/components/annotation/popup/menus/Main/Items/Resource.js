@@ -9,7 +9,7 @@ function Resource({ menu, actions, text }) {
   return (
     <MenuItem
       menu={menu}
-      onClick={actions.openNewResourceAnnotationDrawer}
+      onClick={actions.openResourceAnnotationFormatModal}
       ability="notate"
       entity={text}
       label={t("glossary.resource_one")}
