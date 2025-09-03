@@ -51,6 +51,8 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
     </Styled.Kinds>
   ));
 
+  const Fingerprint = setter(props => <Form.Errorable {...props} />);
+
   return (
     <Styled.Form
       className="form-secondary"
@@ -65,6 +67,7 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
 
         return (
           <>
+            <Fingerprint name="attributes[fingerprint]" />
             <Form.TextInput
               label={t("resources.title_label")}
               name="attributes[title]"
