@@ -25,7 +25,7 @@ export const contentMaxWidth = readerContainerWidths
   )
   .join("");
 
-export const Wrapper = styled.article`
+export const Wrapper = styled.span`
   position: fixed;
   bottom: 0;
   left: 0;
@@ -55,7 +55,7 @@ export const Wrapper = styled.article`
   ${unselectable}
 `;
 
-export const Content = styled.div`
+export const Content = styled.span`
   margin-inline: auto;
   display: flex;
   justify-content: space-between;
@@ -68,7 +68,8 @@ export const Content = styled.div`
   ${contentMaxWidth};
 `;
 
-export const ImageWrapper = styled.figure`
+export const ImageWrapper = styled.span`
+  display: block;
   width: 70px;
   height: 47px;
   padding-block-start: 3px;
@@ -87,7 +88,7 @@ export const Image = styled.img`
   border-radius: 4px;
 `;
 
-export const Title = styled.h3`
+export const Title = styled.span`
   font-size: 13px;
   line-height: 17px;
   font-weight: 400;

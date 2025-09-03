@@ -20,7 +20,7 @@ const paddings = readerContainerWidths
   )
   .join("");
 
-export const Sidebar = styled.div`
+export const Sidebar = styled.span`
   display: none;
   position: absolute;
   left: ${({ $left }) => ($left ? `-${$left}px` : 0)};
@@ -34,7 +34,7 @@ export const Sidebar = styled.div`
   ${unselectable}
 `;
 
-export const Group = styled.div`
+export const Group = styled.span`
   display: flex;
   flex-direction: column;
   gap: 20px;
