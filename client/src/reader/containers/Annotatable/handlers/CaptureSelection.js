@@ -289,7 +289,11 @@ class AnnotatableCaptureSelection extends Component {
       startChar,
       endNode: endNode.dataset.nodeUuid,
       endChar,
-      subject: this.extractText(selection.allRanges)
+      subject: this.extractText(selection.allRanges),
+      blockResourceAllowed: selectionHelpers.annotationAtBlockEnd(
+        endNode,
+        endRange
+      )
     };
     return annotation;
   }
@@ -299,22 +303,16 @@ class AnnotatableCaptureSelection extends Component {
       const fragment = new DocumentFragment();
       ranges.map(r => fragment.append(r.cloneContents()));
 
-      const blockRegex = /^(address|fieldset|li|article|figcaption|main|aside|figure|nav|blockquote|footer|ol|details|form|p|dialog|h1|h2|h3|h4|h5|h6|pre|div|header|section|table|ul|hr|math)$/i;
-
-      const childNodes = [...fragment.childNodes]
-        .map(c => {
-          if (!c.classList.contains("annotation-resource")) return c;
-          return [...c.childNodes].filter(
-            d => !d.dataset?.annotationResourceUnselectable
-          );
-        })
-        .flat();
+      const resources = fragment.querySelectorAll(
+        "[data-annotation-resource-unselectable]"
+      );
+      resources.forEach(r => r.remove());
 
       let text = "";
-      childNodes.forEach(node => {
+      fragment.childNodes.forEach(node => {
         if (node.nodeType === Node.ELEMENT_NODE) {
           text += node.innerText ?? node.textContent;
-          if (blockRegex.test(node.nodeName)) {
+          if (selectionHelpers.blockRegex.test(node.nodeName)) {
             text += "\n";
           }
         } else if (node.nodeType === Node.TEXT_NODE) {
