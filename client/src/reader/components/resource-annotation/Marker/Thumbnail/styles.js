@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { utilityPrimary } from "theme/styles/mixins";
 import { defaultTransitionProps } from "theme/styles/mixins";
 
-export const Label = styled.div`
+export const Label = styled.span`
   background-color: var(--color-base-neutral10);
   padding-block: 0.25rem;
   padding-inline: 0.75rem;
@@ -24,7 +24,8 @@ export const Label = styled.div`
   }
 `;
 
-export const Content = styled.div`
+export const Content = styled.span`
+  display: block;
   padding: 0.75rem;
   border-bottom: 1px solid var(--color-base-neutral40);
   border-left: 1px solid var(--color-base-neutral40);
@@ -48,14 +49,15 @@ border-radius: 6px;
 text-indent: 0;
 color: var(--color-base-neutral75);
 opacity: 0;
+display: block;
 `;
 
-export const PositionerWrapper = styled.article`
+export const PositionerWrapper = styled.span`
   ${baseWrapperStyles}
   pointer-events: none;
 `;
 
-export const Wrapper = styled.article`
+export const Wrapper = styled.span`
   ${baseWrapperStyles}
   cursor: pointer;
   transform: translateX(-50px);
@@ -102,7 +104,8 @@ export const Wrapper = styled.article`
   }
 `;
 
-export const ImageWrapper = styled.figure`
+export const ImageWrapper = styled.span`
+  display: block;
   width: 100px;
   height: 63px;
   border-radius: 4px;
@@ -120,7 +123,8 @@ export const Image = styled.img`
   border-radius: 4px;
 `;
 
-export const Title = styled.h3`
+export const Title = styled.span`
+  display: block;
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
