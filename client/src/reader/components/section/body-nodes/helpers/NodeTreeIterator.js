@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment, createElement } from "react";
 import Nodes from "../nodes";
 import has from "lodash/has";
 import upperFirst from "lodash/upperFirst";
@@ -101,7 +101,7 @@ export default class NodeTreeIterator {
     if (lookup === "Math") {
       return (
         <ErrorBoundary key={node.key} FallbackComponent={MathError}>
-          {React.createElement(
+          {createElement(
             ComponentClass,
             { ...node, uuids: mathUuids },
             node.children
@@ -109,9 +109,10 @@ export default class NodeTreeIterator {
         </ErrorBoundary>
       );
     }
+    const { key, ...props } = node;
     return (
-      <>
-        <ComponentClass {...node}>
+      <Fragment key={key}>
+        <ComponentClass {...props}>
           {this.visitChildren(node, blacklist)}
         </ComponentClass>
         {!!resourceBlocks?.length && (
@@ -121,7 +122,7 @@ export default class NodeTreeIterator {
             )}
           />
         )}
-      </>
+      </Fragment>
     );
   }
 
@@ -153,7 +154,7 @@ export default class NodeTreeIterator {
       parent.nodeType !== "element" ||
       !noTextNodes.includes(parent.tag)
     ) {
-      return React.createElement(Nodes.Text, node);
+      return createElement(Nodes.Text, node);
     }
   }
 
