@@ -99,3 +99,7 @@ export const CloseIcon = styled(Utility.IconComposer)`
   width: ${CLOSE_ICON_SIZE};
   height: ${CLOSE_ICON_SIZE};
 `;
+
+export const Warning = styled.p`
+  color: var(--error-color);
+`;
