@@ -113,7 +113,8 @@ export class Annotatable extends Component {
       drawerState: null, // a key indicating visible drawer content
       drawerProps: {}, // props to be passed to the drawer when it opens
       renderedAnnotations: this.state?.renderedAnnotations ?? [],
-      pendingResource: null
+      pendingResource: null,
+      modalState: null
     };
   }
 
@@ -330,27 +331,24 @@ export class Annotatable extends Component {
     return res.promise;
   };
 
-  openNewResourceAnnotationDrawer = (event = null) => {
+  openNewResourceAnnotationDrawer = displayFormat => {
     this.setState({
       drawerProps: {
         pendingAnnotation: this.state.selectionState.selectionAnnotation,
+        pendingResource: { readerDisplayFormat: displayFormat },
         projectId: this.props.projectId
       }
     });
-    this.openDrawer("newResourceAnnotation", event);
+    this.openDrawer("newResourceAnnotation");
   };
 
-  openResourceAnnotationFormatModal = resource => {
+  openResourceAnnotationFormatModal = (event = null) => {
+    if (event) event.preventDefault();
+
     this.setState({
-      pendingResource: {
-        format:
-          resource.type === "resourceCollections"
-            ? "resource_collection"
-            : "resource",
-        entity: resource
-      },
       annotationState: "locked",
-      drawerState: null
+      drawerState: null,
+      modalState: "displayFormat"
     });
   };
 
@@ -587,12 +585,11 @@ export class Annotatable extends Component {
           close={this.closeDrawer}
           {...this.state.drawerProps}
         />
-        {!this.state.drawerState && this.state.pendingResource && (
+        {!this.state.drawerState && this.state.modalState && (
           <DisplaySelectModal
             handleClose={this.resetState}
-            handleCreate={this.actions.createAnnotation}
-            pendingResource={this.state.pendingResource}
-            pendingAnnotation={this.state.drawerProps.pendingAnnotation}
+            handleNext={this.actions.openNewResourceAnnotationDrawer}
+            pendingAnnotation={this.state.selectionState.selectionAnnotation}
           />
         )}
       </>
