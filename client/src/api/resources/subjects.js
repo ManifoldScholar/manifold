@@ -2,7 +2,7 @@ export default {
   index(filter = {}, page = {}, unpaginated = null) {
     const params = { filter, page };
     if (unpaginated) {
-      params.unpaginated = unpaginated;
+      params.no_pagination = unpaginated;
     }
     return {
       endpoint: "/api/v1/subjects",
