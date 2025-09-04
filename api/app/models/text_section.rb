@@ -232,7 +232,7 @@ class TextSection < ApplicationRecord
   end
 
   def remove_linked_toc_entries
-    text.remove_toc_entry!(id)
+    text&.remove_toc_entry!(id)
   end
 
   class << self
