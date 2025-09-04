@@ -10,6 +10,7 @@ function Pagination({
   pagination = {},
   padding,
   compact = false,
+  wide = false,
   ...linkProps
 }) {
   const { t } = useTranslation();
@@ -29,7 +30,7 @@ function Pagination({
 
   return (
     <Styled.Nav aria-label={t("pagination.aria_label")}>
-      <Styled.Columns>
+      <Styled.Columns $wide={wide}>
         <Styled.Column>
           <Link
             page={pagination.prevPage}
