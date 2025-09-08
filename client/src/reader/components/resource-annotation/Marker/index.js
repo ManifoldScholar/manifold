@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
 import { uiReaderActions } from "actions";
@@ -17,6 +18,7 @@ export default function Marker({ annotation }) {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const activeAnnotation = useFromStore(
     `ui.transitory.reader.activeAnnotation`
@@ -91,6 +93,10 @@ export default function Marker({ annotation }) {
     ]
   );
 
+  const accesibleTitle = t("reader.actions.open_resource_modal", {
+    title: resource?.attributes.title ?? collection?.attributes.title
+  });
+
   return (
     <Styled.Wrapper data-annotation-resource-unselectable ref={markerRef}>
       <Styled.Marker
@@ -100,6 +106,7 @@ export default function Marker({ annotation }) {
         onMouseEnter={() => setActiveAnnotation(id)}
         onMouseLeave={() => setActiveAnnotation(null)}
       >
+        <span className="screen-reader-text">{accesibleTitle}</span>
         <IconComposer size={20} icon={icon} />
       </Styled.Marker>
       <MobileMarker
@@ -107,6 +114,7 @@ export default function Marker({ annotation }) {
         icon={icon}
         handleClick={handleClick}
         setActiveAnnotation={setActiveAnnotation}
+        accesibleTitle={accesibleTitle}
       />
       <Sidebar
         id={id}
