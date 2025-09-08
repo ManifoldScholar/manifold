@@ -8,7 +8,8 @@ export default function MobileMarker({
   id,
   icon,
   handleClick,
-  setActiveAnnotation
+  setActiveAnnotation,
+  accesibleTitle
 }) {
   const activeAnnotation = useFromStore(
     `ui.transitory.reader.activeAnnotation`
@@ -73,6 +74,7 @@ export default function MobileMarker({
         onMouseEnter={() => setHoverOverride(true)}
         onMouseLeave={() => setHoverOverride(false)}
       >
+        <span className="screen-reader-text">{accesibleTitle}</span>
         <IconComposer size={20} icon={icon} />
       </Styled.MarkerMobile>
       <ThumbnailMobile
