@@ -8,7 +8,8 @@
       "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(glossary.page_title_case_one)",
       "return_to_reader": "Return to Reader",
       "manage_highlight": "Begin highlight; {{chunk}}; end highlight.",
-      "view_annotations": "Begin annotation; {{chunk}}; end annotation."
+      "view_annotations": "Begin annotation; {{chunk}}; end annotation.",
+      "open_resource_modal": "Open resource detail modal for {{title}}"
     },
     "menus": {
       "appearance": {
