@@ -22,7 +22,7 @@ export default function Sidebar({
 
   return (
     <>
-      <Styled.Sidebar $left={left} $hidden={!!group}>
+      <Styled.Sidebar aria-hidden $left={left} $hidden={!!group}>
         <Thumbnail
           id={id}
           hidden={!!group}
@@ -35,7 +35,7 @@ export default function Sidebar({
       </Styled.Sidebar>
       {rendersGroup && (
         <>
-          <Styled.Sidebar $left={left}>
+          <Styled.Sidebar $left={left} aria-hidden>
             <Styled.Group $count={group.length}>
               {group.map(notationId => (
                 <Thumbnail
