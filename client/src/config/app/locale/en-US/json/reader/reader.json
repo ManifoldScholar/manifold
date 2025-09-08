@@ -6,7 +6,8 @@
       "select_reading_group": "Select $t(glossary.reading_group_one)",
       "annotate_passage": "$t(actions.annotate) this passage",
       "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(glossary.page_title_case_one)",
-      "return_to_reader": "Return to Reader"
+      "return_to_reader": "Return to Reader",
+      "open_resource_modal": "Open resource detail modal for {{title}}"
     },
     "menus": {
       "appearance": {
