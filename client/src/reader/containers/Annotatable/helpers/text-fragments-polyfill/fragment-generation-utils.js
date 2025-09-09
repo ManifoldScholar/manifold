@@ -27,7 +27,7 @@ const TRUNCATE_RANGE_CHECK_CHARS = 10000;
 const MAX_DEPTH = 500;
 
 // Desired max run time, in ms. Can be overwritten.
-let timeoutDurationMs = 500;
+let timeoutDurationMs = 1000;
 let t0; // Start timestamp for fragment generation
 
 /**
