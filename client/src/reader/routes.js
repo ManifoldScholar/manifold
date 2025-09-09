@@ -20,22 +20,6 @@ const routes = {
       helper: (t, s, anchor = "") => `/read/${t}/section/${s}${anchor}`,
       routes: [
         {
-          name: "readerSectionResource",
-          exact: true,
-          component: "AnnotationResourceDetail",
-          path: "/read/:textId/section/:sectionId/resource/:resourceId",
-          helper: (t, s, r) => `/read/${t}/section/${s}/resource/${r}`
-        },
-        {
-          name: "readerSectionResourceCollection",
-          exact: true,
-          component: "AnnotationResourceCollectionDetail",
-          path:
-            "/read/:textId/section/:sectionId/resource-collection/:resourceCollectionId",
-          helper: (t, s, c) =>
-            `/read/${t}/section/${s}/resource-collection/${c}`
-        },
-        {
           name: "readerSectionSearchResults",
           exact: true,
           component: "Search",
