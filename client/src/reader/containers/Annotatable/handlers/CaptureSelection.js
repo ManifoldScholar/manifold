@@ -8,7 +8,6 @@ import {
   findFirstMathUuidNode,
   findLastMathUuidNode
 } from "../helpers/mathHelpers";
-import { generateFragment } from "../helpers/text-fragments-polyfill/fragment-generation-utils";
 
 class AnnotatableCaptureSelection extends Component {
   static propTypes = {
@@ -171,8 +170,7 @@ class AnnotatableCaptureSelection extends Component {
         selectionAnnotation: this.mapSelectionToAnnotation(selection),
         selectionComplete: complete,
         popupTriggerX: selection && x ? x : selectionState.popupTriggerX,
-        popupTriggerY: selection && y ? y : selectionState.popupTriggerY,
-        textFragment: generateFragment(window.getSelection())
+        popupTriggerY: selection && y ? y : selectionState.popupTriggerY
       });
       this.props.updateSelection(newState);
       window.getSelection().empty();
