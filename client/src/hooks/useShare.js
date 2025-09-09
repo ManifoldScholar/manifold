@@ -30,7 +30,7 @@ export default function useShare(
     return {
       canRender: true,
       disabled: true,
-      icon: "share24",
+      icon: "share32",
       label: t("actions.share")
     };
 
@@ -67,7 +67,7 @@ export default function useShare(
     return {
       canRender: shareSupported,
       onClick: onShare,
-      icon: "share24",
+      icon: "share32",
       label: t("actions.share")
     };
 
@@ -77,7 +77,7 @@ export default function useShare(
 
   /* eslint-disable no-nested-ternary */
   const icon = shareSupported
-    ? "share24"
+    ? "share32"
     : copied
     ? "checkmark16"
     : "RTELink24";
