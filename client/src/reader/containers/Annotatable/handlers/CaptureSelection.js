@@ -246,16 +246,18 @@ class AnnotatableCaptureSelection extends Component {
       endRange.setEnd(range.endContainer, range.endOffset);
     }
 
-    const contents = endRange.cloneContents();
-    const resources = contents.querySelectorAll(
+    const fragment = new DocumentFragment();
+    fragment.replaceChildren(endRange.cloneContents());
+
+    const resources = fragment.querySelectorAll(
       "[data-annotation-resource-unselectable]"
     );
-    const unselectable = new DocumentFragment();
-    unselectable.replaceChildren(...resources);
 
-    const endChar =
-      endRange.toString().length - unselectable.textContent?.length;
-    return { endNode, endChar };
+    resources.forEach(r => r.remove());
+
+    const endChar = fragment.textContent?.length;
+
+    return { endNode, endChar, endRangeText: fragment.textContent };
   }
 
   // Maps selection to an annotation data structure
@@ -265,7 +267,7 @@ class AnnotatableCaptureSelection extends Component {
     const range = selection.range;
     const endRange = selection.endRange;
     const { startNode, startChar, adjustStart } = this.findStartValues(range);
-    const { endNode, endChar, adjustEnd } = this.findEndValues(
+    const { endNode, endChar, adjustEnd, endRangeText } = this.findEndValues(
       endRange,
       startNode
     );
@@ -290,7 +292,7 @@ class AnnotatableCaptureSelection extends Component {
       subject: this.extractText(selection.allRanges),
       blockResourceAllowed: selectionHelpers.annotationAtBlockEnd(
         endNode,
-        endRange
+        endRangeText
       )
     };
     return annotation;
