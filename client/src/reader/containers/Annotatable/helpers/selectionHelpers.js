@@ -97,10 +97,10 @@ const getBlockTextContent = el => {
   return fragment.textContent;
 };
 
-const annotationAtBlockEnd = (endNode, endRange) => {
+const annotationAtBlockEnd = (endNode, endRangeText) => {
   const blockText = getBlockTextContent(getClosestBlock(endNode));
-  const rangeText = endRange.toString();
-  return blockText.endsWith(rangeText) || rangeText.endsWith(blockText);
+
+  return blockText.endsWith(endRangeText) || endRangeText.endsWith(blockText);
 };
 
 export default {
