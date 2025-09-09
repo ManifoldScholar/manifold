@@ -2,21 +2,19 @@ import { useState, useCallback, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
-import lh from "helpers/linkHandler";
 import { uiReaderActions } from "actions";
 import { useDispatch } from "react-redux";
 import capitalize from "lodash/capitalize";
 import { useFromStore } from "hooks";
-import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { ResourceMarkerContext } from "./context";
 import MobileMarker from "./Mobile";
 import Sidebar from "./Sidebar";
 import { useWindowSize } from "usehooks-ts";
+import useDialog from "@castiron/hooks/useDialog";
+import Dialog from "../Dialog";
 import * as Styled from "./styles";
 
 export default function Marker({ annotation }) {
-  const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -70,31 +68,25 @@ export default function Marker({ annotation }) {
 
   const icon = `resource${capitalize(kind)}64`;
 
+  const dialog = useDialog({
+    modal: true,
+    scrollLockClassName: "no-scroll"
+  });
+
   const handleClick = useCallback(
     e => {
       e.preventDefault();
 
-      const entityId = resourceId || resourceCollectionId;
-
-      const target =
-        annotation.type === "resource_collection"
-          ? lh.link("frontendProjectResourceCollectionRelative", entityId)
-          : lh.link("frontendProjectResourceRelative", entityId);
-
-      const url = `${location.pathname}/${target}`;
-      navigate(url, { noScroll: true });
+      dialog.onToggleClick();
     },
-    [
-      navigate,
-      location.pathname,
-      annotation.type,
-      resourceId,
-      resourceCollectionId
-    ]
+    [dialog]
   );
 
+  const resourceTitle =
+    resource?.attributes.titlePlaintext ??
+    collection?.attributes.titlePlaintext;
   const accesibleTitle = t("reader.actions.open_resource_modal", {
-    title: resource?.attributes.title ?? collection?.attributes.title
+    title: resourceTitle
   });
 
   return (
@@ -122,6 +114,7 @@ export default function Marker({ annotation }) {
         handleClick={handleClick}
         setActiveAnnotation={setActiveAnnotation}
       />
+      <Dialog {...dialog}>resource dialog content here</Dialog>
     </Styled.Wrapper>
   );
 }
