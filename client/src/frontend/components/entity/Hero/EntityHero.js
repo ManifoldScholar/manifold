@@ -50,7 +50,11 @@ export default function EntityHero({
   /* eslint-enable no-nested-ternary */
 
   return (
-    <WrapperComponent $darkMode={darkMode} $standalone={isStandalone}>
+    <WrapperComponent
+      $darkMode={darkMode}
+      $standalone={isStandalone}
+      className={darkMode ? "bg-black" : "bg-neutral05"}
+    >
       <Styled.Inner>
         <Styled.TopLeft>
           <div ref={titleRef}>{TitleComponent({ isStandalone })}</div>
