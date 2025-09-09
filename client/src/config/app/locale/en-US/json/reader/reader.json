@@ -111,7 +111,7 @@
     "annotation_aria_label": "Begin annotation; {{chunk}}; end annotation.",
     "annotation_highlight_aria_label": "Begin highlight and annotation; {{chunk}}; end highlight and annotation.",
     "resource_display": {
-      "header": "Choose a Display Style",
+      "header": "1. Choose a Display Style",
       "instructions": "Please select how you would like this resource to display within your text.",
       "inline": {
         "title": "Inline",
@@ -123,6 +123,12 @@
         "selection_warning": "*Resource blocks can only be inserted at the end of a block element, such as a paragraph. If you'd like to display this resource as a block, adjust your selection so it extends to the end of a block."
       },
       "submit_label": "Next"
+    },
+    "resource_drawer": {
+      "header": "2. Select a Resource",
+      "create_tab_label": "Create New",
+      "description": "Description text goes here...",
+      "tabs_header": "Resource Type"
     }
   }
 }
