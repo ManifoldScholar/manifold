@@ -68,7 +68,7 @@ export default function NewResourceAnnotation({
       )
     },
     {
-      label: "Create New",
+      label: t("reader.resource_drawer.create_tab_label"),
       id: "create",
       icon: "circlePlus24",
       panel: (
@@ -84,12 +84,12 @@ export default function NewResourceAnnotation({
   return (
     <Styled.Wrapper>
       <Styled.Heading>
-        <h2>Add a Resource Annotation</h2>
-        <p>Description text goes here...</p>
+        <h2>{t("reader.resource_drawer.header")}</h2>
+        <p>{t("reader.resource_drawer.description")}</p>
       </Styled.Heading>
       <Tabs.Provider initActive="resources">
         <div>
-          <Styled.Label>Resource Type</Styled.Label>
+          <Styled.Label>{t("reader.resource_drawer.tabs_header")}</Styled.Label>
           <Styled.TabList>
             {tabs.map(tab => {
               return (
