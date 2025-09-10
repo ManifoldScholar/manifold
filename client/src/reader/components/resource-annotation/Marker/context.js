@@ -1,4 +1,6 @@
-import { createContext, useState, useMemo } from "react";
+import { createContext, useState, useMemo, useCallback } from "react";
+import Dialog from "../Dialog";
+import useDialog from "@castiron/hooks/useDialog";
 
 export const ResourceMarkerContext = createContext({});
 
@@ -71,15 +73,35 @@ export default function ResourceMarkerContextProvider({
     { remainder: { ...resourceThumbs } }
   );
 
+  const dialog = useDialog({
+    modal: true,
+    scrollLockClassName: "no-scroll"
+  });
+
+  const [dialogResource, setDialogResource] = useState({
+    id: null,
+    type: "resource"
+  });
+
+  const openDialog = useCallback(
+    props => {
+      setDialogResource(props);
+      dialog.onToggleClick();
+    },
+    [dialog]
+  );
+
   return (
     <ResourceMarkerContext.Provider
       value={{
         groups,
         setResourceThumbs,
-        thumbCount
+        thumbCount,
+        openDialog
       }}
     >
       {children}
+      <Dialog resource={dialogResource} {...dialog} />
     </ResourceMarkerContext.Provider>
   );
 }
