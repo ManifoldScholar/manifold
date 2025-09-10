@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useId } from "react";
 import { useTranslation } from "react-i18next";
 import DisplayOption from "./DisplayOption";
+import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
 export default function DisplaySelectModal({
-  handleClose,
+  onClose,
   handleNext,
-  pendingAnnotation
+  pendingAnnotation,
+  dialog
 }) {
   const { t } = useTranslation();
 
@@ -17,23 +19,31 @@ export default function DisplaySelectModal({
     handleNext(display);
   };
 
+  const handleClose = e => {
+    e.preventDefault();
+    dialog.onCloseClick();
+    onClose();
+  };
+
+  const id = useId();
+
   return (
     <Styled.Dialog
-      maxWidth={1006}
-      closeOnOverlayClick={false}
-      showCloseButton={false}
+      ref={dialog.dialogRef}
+      inert={!dialog.open ? "" : undefined}
+      aria-labelledby={id}
     >
       <Styled.Form onSubmit={handleSubmit}>
         <Styled.Header>
           <Styled.TextColumn>
-            <h2>{t("reader.resource_display.header")}</h2>
+            <h2 id={id}>{t("reader.resource_display.header")}</h2>
             <Styled.Instructions>
               {t("reader.resource_display.instructions")}
             </Styled.Instructions>
           </Styled.TextColumn>
-          <Styled.CloseButton onClick={handleClose} tabIndex="0">
-            <Styled.CloseText>{t("actions.close")}</Styled.CloseText>
-            <Styled.CloseIcon icon="close16" size={16} />
+          <Styled.CloseButton onClick={handleClose}>
+            <span>{t("actions.close")}</span>
+            <Utility.IconComposer icon="close16" size={16} />
           </Styled.CloseButton>
         </Styled.Header>
         <Styled.Options>
@@ -49,10 +59,10 @@ export default function DisplaySelectModal({
             title={t("reader.resource_display.block.title")}
             description={t("reader.resource_display.block.description")}
             onChange={() => setDisplay("block")}
-            disabled={!pendingAnnotation.blockResourceAllowed}
+            disabled={!pendingAnnotation?.blockResourceAllowed}
           />
         </Styled.Options>
-        {!pendingAnnotation.blockResourceAllowed && (
+        {!pendingAnnotation?.blockResourceAllowed && (
           <Styled.Warning>
             {t("reader.resource_display.block.selection_warning")}
           </Styled.Warning>
