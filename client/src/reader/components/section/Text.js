@@ -7,6 +7,7 @@ import lh from "helpers/location";
 import filterAnnotations from "./helpers/filter-annotations";
 import HtmlClass from "hoc/HtmlClass";
 import isEqual from "lodash/isEqual";
+import useDialog from "@castiron/hooks/useDialog";
 
 export default function Text({
   children,
@@ -64,6 +65,11 @@ export default function Text({
     history.replace({ hash: "", state: { noScroll: true } });
   }, [history, filteredAnnotations, annotations, location]);
 
+  const resourceDisplayFormatDialog = useDialog({
+    modal: true,
+    scrollLockClassName: "no-scroll"
+  });
+
   const typography = appearance.typography;
   const colorScheme = appearance.colors.colorScheme;
   const highContrast = appearance.colors.highContrast;
@@ -112,6 +118,7 @@ export default function Text({
             location={location}
             history={history}
             section={section}
+            resourceDisplayFormatDialog={resourceDisplayFormatDialog}
             render={(pendingAnnotation, adjustedAnnotations) => (
               <div className={containerClass}>
                 <div
