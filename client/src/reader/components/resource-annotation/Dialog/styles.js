@@ -15,7 +15,6 @@ export const Dialog = styled.dialog`
   min-width: 80vw;
   padding: 0;
   padding-block-end: 50px;
-  gap: 40px;
   overflow: auto;
   border-radius: 20px;
 
@@ -83,4 +82,5 @@ export const CloseButton = styled(HeaderButton)`
 export const CloseText = styled.span`
   ${utilityPrimary}
   font-size: 13px;
+  font-weight: var(--font-weight-semibold);
 `;
