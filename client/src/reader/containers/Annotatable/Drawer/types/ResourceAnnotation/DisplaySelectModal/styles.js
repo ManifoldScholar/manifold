@@ -4,17 +4,36 @@ import {
   buttonUnstyled,
   defaultHoverStyle,
   utilityPrimary,
-  fluidScale
+  fluidScale,
+  transparentize,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 import { Form as BaseForm } from "global/containers/form/styles";
-import Utility from "global/components/utility";
-import BaseDialog from "global/components/dialog";
 
-export const Dialog = styled(BaseDialog.Wrapper)`
+export const Dialog = styled.dialog`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
   padding: ${fluidScale("60px", "30px")};
   padding-block-start: ${fluidScale("50px", "25px")};
   overflow: auto;
   max-height: 90dvh;
+  max-width: 1006px;
+  border-radius: 20px;
+  font-family: var(--font-family-sans);
+
+  &:focus-visible {
+    ${defaultFocusStyle}
+  }
+
+  &::backdrop {
+    background-color: ${transparentize("neutralBlack", 0.3)};
+  }
+
+  .reader.scheme-dark & {
+    background: var(--color-base-neutral90);
+  }
 `;
 
 export const Options = styled.fieldset`
@@ -70,8 +89,14 @@ export const CloseButton = styled.button`
   ${buttonUnstyled}
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   justify-content: flex-end;
   cursor: pointer;
+  padding-inline: 14px;
+  ${utilityPrimary}
+  font-size: 13px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.125em;
 
   &:hover {
     ${defaultHoverStyle}
@@ -81,23 +106,10 @@ export const CloseButton = styled.button`
   &:focus-visible {
     color: var(--focus-color);
   }
-`;
 
-const CLOSE_ICON_SIZE = "16px";
-
-export const CloseText = styled.span`
-  ${utilityPrimary}
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: var(--font-weight-semibold);
-  line-height: ${CLOSE_ICON_SIZE};
-  letter-spacing: 0.125em;
-  margin-block-start: -1px;
-`;
-
-export const CloseIcon = styled(Utility.IconComposer)`
-  width: ${CLOSE_ICON_SIZE};
-  height: ${CLOSE_ICON_SIZE};
+  > span {
+    margin-block-start: -1px;
+  }
 `;
 
 export const Warning = styled.p`

@@ -38,7 +38,8 @@ export class Annotatable extends Component {
     bodySelector: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired,
     annotations: PropTypes.array,
-    notations: PropTypes.array
+    notations: PropTypes.array,
+    resourceDisplayFormatDialog: PropTypes.object
   };
 
   static defaultProps = {
@@ -113,8 +114,7 @@ export class Annotatable extends Component {
       drawerState: null, // a key indicating visible drawer content
       drawerProps: {}, // props to be passed to the drawer when it opens
       renderedAnnotations: this.state?.renderedAnnotations ?? [],
-      pendingResource: null,
-      modalState: null
+      pendingResource: null
     };
   }
 
@@ -347,9 +347,10 @@ export class Annotatable extends Component {
 
     this.setState({
       annotationState: "locked",
-      drawerState: null,
-      modalState: "displayFormat"
+      drawerState: null
     });
+
+    this.props.resourceDisplayFormatDialog.onToggleClick();
   };
 
   openViewAnnotationsDrawer = (ids, event = null) => {
@@ -585,13 +586,17 @@ export class Annotatable extends Component {
           close={this.closeDrawer}
           {...this.state.drawerProps}
         />
-        {!this.state.drawerState && this.state.modalState && (
-          <DisplaySelectModal
-            handleClose={this.resetState}
-            handleNext={this.actions.openNewResourceAnnotationDrawer}
-            pendingAnnotation={this.state.selectionState.selectionAnnotation}
-          />
-        )}
+        <DisplaySelectModal
+          dialog={this.props.resourceDisplayFormatDialog}
+          onClose={() =>
+            this.resetState({
+              restoreFocusTo: this.selectableRef,
+              restoreSelectionTo: this.pendingAnnotationNode
+            })
+          }
+          handleNext={this.actions.openNewResourceAnnotationDrawer}
+          pendingAnnotation={this.state.selectionState.selectionAnnotation}
+        />
       </>
     );
   }

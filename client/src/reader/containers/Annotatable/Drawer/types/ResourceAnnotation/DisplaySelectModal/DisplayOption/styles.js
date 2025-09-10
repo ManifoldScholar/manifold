@@ -21,6 +21,14 @@ export const Option = styled.label`
     background-color: var(--color-accent-primary);
   }
 
+  .reader.scheme-dark & {
+    background-color: var(--color-base-neutral95);
+
+    &:has(input:checked) {
+      background-color: var(--color-accent-primary);
+    }
+  }
+
   &:has(input:disabled) {
     opacity: 0.4;
   }
@@ -54,6 +62,7 @@ export const Illustration = styled.figure`
   border-radius: 12px;
   height: ${fluidScale("200px", "100px")};
   width: ${fluidScale("277px", "138px")};
+  margin-inline: ${fluidScale("38px", "18px")};
   filter: blur(7px);
   transition: blur 1s ease-in-out;
 
