@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-import Utility from "global/components/utility";
 import Authorize from "hoc/Authorize";
 import Button from "global/components/atomic/Button";
 
