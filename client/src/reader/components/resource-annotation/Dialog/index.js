@@ -4,7 +4,7 @@ import { useFromStore } from "hooks";
 import { useParams } from "react-router-dom";
 import * as Styled from "./styles";
 
-export default function ResourceAnnotationDialog({ children, ...dialog }) {
+export default function ResourceAnnotationDialog({ resource, ...dialog }) {
   const { t } = useTranslation();
   const { sectionId } = useParams();
   const section = useFromStore(
@@ -13,10 +13,16 @@ export default function ResourceAnnotationDialog({ children, ...dialog }) {
   const textTitle =
     section?.attributes.textTitle ?? t("glossary.text_title_case_one");
 
+  const resourceEntity = useFromStore(
+    `entityStore.entities.${resource.type}s.${resource.id}`
+  );
+
   return (
     <Styled.Dialog ref={dialog.dialogRef} inert={!dialog.open ? "" : undefined}>
       <Header onClose={dialog.onCloseClick} textTitle={textTitle} />
-      <div>{children}</div>
+      <div>type: {resource.type}</div>
+      <div>id: {resource.id}</div>
+      <div>title: {resourceEntity?.attributes.title}</div>
     </Styled.Dialog>
   );
 }
