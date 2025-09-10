@@ -10,8 +10,6 @@ import { ResourceMarkerContext } from "./context";
 import MobileMarker from "./Mobile";
 import Sidebar from "./Sidebar";
 import { useWindowSize } from "usehooks-ts";
-import useDialog from "@castiron/hooks/useDialog";
-import Dialog from "../Dialog";
 import * as Styled from "./styles";
 
 export default function Marker({ annotation }) {
@@ -33,7 +31,7 @@ export default function Marker({ annotation }) {
 
   const { width } = useWindowSize();
 
-  const { thumbCount } = useContext(ResourceMarkerContext) ?? {};
+  const { thumbCount, openDialog } = useContext(ResourceMarkerContext) ?? {};
 
   const markerRef = useCallback(node => {
     if (node !== null) {
@@ -68,23 +66,20 @@ export default function Marker({ annotation }) {
 
   const icon = `resource${capitalize(kind)}64`;
 
-  const dialog = useDialog({
-    modal: true,
-    scrollLockClassName: "no-scroll"
-  });
-
   const handleClick = useCallback(
     e => {
       e.preventDefault();
 
-      dialog.onToggleClick();
+      const dialogProps = resource
+        ? { id: resourceId, type: "resource" }
+        : { id: resourceCollectionId, type: "resourceCollection" };
+      openDialog(dialogProps);
     },
-    [dialog]
+    [openDialog, resource, resourceId, resourceCollectionId]
   );
 
   const resourceTitle =
-    resource?.attributes.titlePlaintext ??
-    collection?.attributes.titlePlaintext;
+    resource?.attributes.titlePlaintext ?? collection?.attributes.title;
   const accesibleTitle = t("reader.actions.open_resource_modal", {
     title: resourceTitle
   });
@@ -114,7 +109,6 @@ export default function Marker({ annotation }) {
         handleClick={handleClick}
         setActiveAnnotation={setActiveAnnotation}
       />
-      <Dialog {...dialog}>resource dialog content here</Dialog>
     </Styled.Wrapper>
   );
 }
