@@ -22,7 +22,7 @@ export const Option = styled.label`
   }
 
   .reader.scheme-dark & {
-    background-color: var(--color-base-neutral95);
+    background-color: var(--color-base-neutral100);
 
     &:has(input:checked) {
       background-color: var(--color-accent-primary);
