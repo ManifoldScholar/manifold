@@ -35,7 +35,7 @@ export const Header = styled.header`
   padding: 12px;
   background: var(--color-base-neutral10);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items-center;
 
   .reader.scheme-dark & {
