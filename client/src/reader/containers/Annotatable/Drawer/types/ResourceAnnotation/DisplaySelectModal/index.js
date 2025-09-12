@@ -16,6 +16,7 @@ export default function DisplaySelectModal({
 
   const handleSubmit = e => {
     e.preventDefault();
+    dialog.onCloseClick();
     handleNext(display);
   };
 
