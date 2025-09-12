@@ -439,14 +439,6 @@ const routes = {
                   path: "/backend/projects/project-collections/:id/settings",
                   helper: pc =>
                     `/backend/projects/project-collections/${pc}/settings`
-                },
-                {
-                  name: "backendProjectCollectionNew",
-                  exact: true,
-                  component: "ProjectCollectionNew",
-                  path: "/backend/projects/project-collections/:id/new",
-                  helper: pc =>
-                    `/backend/projects/project-collections/${pc}/new`
                 }
               ]
             }

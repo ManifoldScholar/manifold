@@ -84,7 +84,7 @@ export const Drawer = styled.div`
 
   &.pad-large {
     ${respond(`padding: 33px 48px;`, 65)}
-    ${respond(`padding: 33px 156px 66px 98px;`, 90)}
+    ${respond(`padding: 33px 98px 66px 98px;`, 90)}
     ${respond(
       `padding: 33px 70px;`,
       `${parseInt(breakpoints[120], 10) + 1000}px`
