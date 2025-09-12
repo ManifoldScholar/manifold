@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
-import { respond, buttonUnstyled } from "theme/styles/mixins";
+import {
+  respond,
+  buttonUnstyled,
+  defaultTransitionProps
+} from "theme/styles/mixins";
 
 export const thumbnailBreakpoints = [
   "1460px",
@@ -39,6 +43,7 @@ export const Marker = styled.button`
   margin-inline: 8px;
   transform: scale(calc(100% - (3 - var(--reader-font-size-index)) * 5%))
     translateY(calc(2px + (3 - var(--reader-font-size-index)) * 1px));
+  transition: background-color ${defaultTransitionProps};
 
   .scheme-dark & {
     background-color: var(--color-base-neutral100);

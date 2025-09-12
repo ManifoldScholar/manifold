@@ -17,6 +17,8 @@ export const Label = styled.span`
   border-top: 1px solid var(--color-base-neutral40);
   border-left: 1px solid var(--color-base-neutral40);
   border-right: 1px solid var(--color-base-neutral40);
+  transition: background-color ${defaultTransitionProps},
+    border-color ${defaultTransitionProps};
 
   .scheme-dark & {
     background-color: var(--color-base-neutral100);
@@ -32,6 +34,7 @@ export const Content = styled.span`
   border-right: 1px solid var(--color-base-neutral40);
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+  transition: border-color ${defaultTransitionProps};
 
   > * + * {
     padding-block-start: 10px;
@@ -62,7 +65,8 @@ export const Wrapper = styled.span`
   cursor: pointer;
   transform: translateX(-50px);
   transition: opacity ${defaultTransitionProps},
-    transform ${defaultTransitionProps};
+    transform ${defaultTransitionProps}, box-shadow ${defaultTransitionProps},
+    color ${defaultTransitionProps};
 
   ${({ $visible }) => $visible && `opacity: 1; transform: translateX(0);`}
 
