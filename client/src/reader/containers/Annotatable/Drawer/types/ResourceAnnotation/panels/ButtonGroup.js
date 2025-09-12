@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import Button from "global/components/atomic/Button";
 import * as Styled from "./styles";
 
 export default function ButtonGroup({ selected, handleSave, handleClose }) {
@@ -6,20 +7,15 @@ export default function ButtonGroup({ selected, handleSave, handleClose }) {
 
   return (
     <Styled.ButtonGroup>
-      <button
+      <Button
         type="submit"
-        className="button-secondary"
+        background="accent"
         disabled={handleSave && !selected}
         onClick={handleSave}
-      >
-        <span>{t("actions.save")}</span>
-      </button>
-      <button
-        onClick={handleClose}
-        className="button-secondary button-secondary--dull"
-      >
-        <span>{t("actions.cancel")}</span>
-      </button>
+        label={t("actions.save")}
+        size="md"
+      />
+      <Button onClick={handleClose} label={t("actions.cancel")} size="md" />
     </Styled.ButtonGroup>
   );
 }
