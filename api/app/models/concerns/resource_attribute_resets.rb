@@ -11,7 +11,7 @@ module ResourceAttributeResets
 
   def reset_non_audio_attributes
     attributes = %w(external_url external_id external_type sub_kind)
-    attachments = %w(high_res variant_thumbnail variant_poster)
+    attachments = %w(high_res variant_poster)
     reset_attributes(attributes, attachments)
   end
 
@@ -52,14 +52,14 @@ module ResourceAttributeResets
   def reset_non_link_attributes
     attributes = %w(external_id external_type sub_kind)
     attachments = %w(attachment variant_format_one variant_format_two
-                     high_res variant_thumbnail variant_poster)
+                     high_res variant_poster)
     reset_attributes(attributes, attachments)
   end
 
   def reset_file_attributes
     attributes = %w(external_url external_id external_type sub_kind)
     attachments = %w(variant_format_one variant_format_two high_res
-                     variant_thumbnail variant_poster)
+                     variant_poster)
     reset_attributes(attributes, attachments)
   end
 
