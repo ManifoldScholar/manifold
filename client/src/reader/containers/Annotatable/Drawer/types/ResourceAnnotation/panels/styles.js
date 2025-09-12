@@ -31,6 +31,10 @@ export const ButtonGroup = styled.div`
   > button {
     min-width: 140px;
   }
+
+  .scheme-dark & {
+    --button-bg-color: var(--color-base-neutral90);
+  }
 `;
 
 export const Form = styled(FormContainer.Form)`

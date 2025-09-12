@@ -2,6 +2,7 @@ import { useState, useId } from "react";
 import { useTranslation } from "react-i18next";
 import DisplayOption from "./DisplayOption";
 import Utility from "global/components/utility";
+import Button from "global/components/atomic/Button";
 import * as Styled from "./styles";
 
 export default function DisplaySelectModal({
@@ -69,15 +70,12 @@ export default function DisplaySelectModal({
           </Styled.Warning>
         )}
         <Styled.ButtonGroup>
-          <button type="submit" className="button-secondary">
-            <span>{t("reader.resource_display.submit_label")}</span>
-          </button>
-          <button
-            className="button-secondary button-secondary--dull"
-            onClick={handleClose}
-          >
-            <span>{t("actions.cancel")}</span>
-          </button>
+          <Button
+            type="submit"
+            background="accent"
+            label={t("reader.resource_display.submit_label")}
+          />
+          <Button onClick={handleClose} label={t("actions.cancel")} />
         </Styled.ButtonGroup>
       </Styled.Form>
     </Styled.Dialog>
