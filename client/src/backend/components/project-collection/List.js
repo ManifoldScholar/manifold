@@ -21,11 +21,6 @@ export default function ProjectCollectionList(props) {
 
   const { id } = useParams();
 
-  const newPath =
-    id && id !== "new"
-      ? lh.link("backendProjectCollectionNew", id)
-      : lh.link("backendProjectCollectionsNew");
-
   return (
     <aside className="aside-wide project-collection-list">
       <EntitiesList
@@ -47,7 +42,7 @@ export default function ProjectCollectionList(props) {
       <div className="actions">
         <Link
           className="button-icon-secondary button-icon-secondary--full"
-          to={newPath}
+          to={lh.link("backendProjectCollectionsNew")}
         >
           <IconComposer
             icon="plus16"

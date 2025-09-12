@@ -240,7 +240,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       drawer: true,
       drawerProps: {
         size: "flexible",
-        padding: "large",
+        padding: "default",
         lockScroll: "always",
         closeUrl: lh.link("backendProjectCollections")
       }
