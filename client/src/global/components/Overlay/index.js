@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { FocusTrap } from "focus-trap-react";
 import { useUID } from "react-uid";
 import Header from "./Header";
+import { closest } from "reader/containers/annotation/annotatable-components/selectionHelpers";
 
 import BodyClass from "hoc/BodyClass";
 
@@ -25,6 +26,9 @@ function Overlay({
   const headerId = useUID();
 
   function handleCloseEvent(event) {
+    const dialog = closest(event.target, "dialog");
+    if (dialog) return false;
+
     if (closeCallback) {
       closeCallback(event);
     }
