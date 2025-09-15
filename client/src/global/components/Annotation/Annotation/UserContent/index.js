@@ -26,7 +26,8 @@ export default function AnnotationDetail({
   annotation,
   showCommentsToggleAsBlock,
   showLogin,
-  refresh
+  refresh,
+  closeDrawer
 }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -78,7 +79,9 @@ export default function AnnotationDetail({
     const call = annotationsAPI.destroy(annotation.id);
     const options = { removes: { type: "annotations", id: annotation.id } };
     const res = dispatch(request(call, requests.rAnnotationDestroy, options));
-    return res.promise;
+    return res.promise.then(() => {
+      if (closeDrawer) closeDrawer();
+    });
   };
 
   const toggleComments = () => {
