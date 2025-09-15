@@ -15,7 +15,7 @@ export default function Body(props) {
   /* eslint-disable react-hooks/exhaustive-deps */
   const iterator = useMemo(
     () => new BodyNodes.Helpers.NodeTreeIterator(props),
-    [deps]
+    [...deps]
   );
   const elements = useMemo(() => iterator.visit(section.attributes.bodyJSON), [
     iterator,
