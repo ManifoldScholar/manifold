@@ -99,8 +99,7 @@ export class Annotatable extends Component {
       annotationState: null, // null, pending, active
       drawerState: null, // a key indicating visible drawer content
       drawerProps: {}, // props to be passed to the drawer when it opens
-      renderedAnnotations: this.state?.renderedAnnotations ?? [],
-      pendingResource: null
+      renderedAnnotations: this.state?.renderedAnnotations ?? []
     };
   }
 
@@ -294,7 +293,7 @@ export class Annotatable extends Component {
     this.setState({
       drawerProps: {
         pendingAnnotation: this.state.selectionState.selectionAnnotation,
-        pendingResource: { readerDisplayFormat: displayFormat },
+        readerDisplayFormat: displayFormat,
         projectId: this.props.projectId
       }
     });
