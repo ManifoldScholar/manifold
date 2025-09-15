@@ -57,8 +57,9 @@ export class Annotatable extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!isEqual(this.props.annotations, prevProps.annotations))
-      this.setState({ renderedAnnotations: this.props.annotations });
+    if (!isEqual(this.props.annotations, prevProps.annotations)) {
+      return this.setState({ renderedAnnotations: this.props.annotations });
+    }
 
     const { selection } = this.state.selectionState ?? {};
     const { range, ...selectionData } = selection ?? {};
@@ -470,6 +471,7 @@ export class Annotatable extends Component {
     const { annotationState, selectionState, renderedAnnotations } = this.state;
     const pendingAnnotation =
       annotationState === "locked" ? selectionState.selectionAnnotation : null;
+
     return (
       <>
         {this.debuggable && (
