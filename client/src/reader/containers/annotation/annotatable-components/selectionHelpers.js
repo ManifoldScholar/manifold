@@ -5,7 +5,7 @@ import {
   findFirstMathUuidNode
 } from "./mathHelpers";
 
-const closest = (el, selector) => {
+export const closest = (el, selector) => {
   let element = el;
   const matchesSelector =
     element.matches ||
