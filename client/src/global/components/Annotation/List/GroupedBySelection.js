@@ -35,7 +35,12 @@ export default class GroupedList extends PureComponent {
   };
 
   render() {
-    const { annotations, saveAnnotation, loginHandler } = this.props;
+    const {
+      annotations,
+      saveAnnotation,
+      loginHandler,
+      closeDrawer
+    } = this.props;
 
     return (
       <div className="annotation-selection">
@@ -65,6 +70,7 @@ export default class GroupedList extends PureComponent {
                         key={annotation.id}
                         annotation={annotation}
                         showLogin={loginHandler}
+                        closeDrawer={closeDrawer}
                       />
                     );
                   })}
