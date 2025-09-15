@@ -13,7 +13,7 @@ export default function NewResourceAnnotation({
   actions,
   close,
   pendingAnnotation,
-  pendingResource
+  readerDisplayFormat
 }) {
   const { t } = useTranslation();
 
@@ -26,7 +26,7 @@ export default function NewResourceAnnotation({
         resource.type === "resourceCollections"
           ? "resource_collection"
           : "resource",
-      readerDisplayFormat: pendingResource.readerDisplayFormat
+      readerDisplayFormat
     };
     return actions.createAnnotation({ attributes }, { notation: resource });
   };
