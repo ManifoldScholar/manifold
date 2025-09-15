@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
-import { respond } from "theme/styles/mixins";
+import {
+  respond,
+  defaultFocusStyle,
+  transparentize
+} from "theme/styles/mixins";
 
 export const Form = styled.form`
   --TextArea-border-color: var(--color);
@@ -30,4 +34,23 @@ export const ButtonGroup = styled.div`
 
 export const Heading = styled.h2`
   color: ${$dark => ($dark ? `var(--strong-color)` : `var(--box-color)`)};
+`;
+
+export const Dialog = styled.dialog`
+  position: fixed;
+  top: 50%;
+  transform: translate(0, -50%);
+  max-height: 60dvh;
+  width: min(90vw, 600px);
+  border-radius: 20px;
+  border: none;
+  &:focus-visible {
+    ${defaultFocusStyle}
+  }
+  &::backdrop {
+    background-color: ${transparentize("neutralBlack", 0.3)};
+  }
+  .reader.scheme-dark & {
+    background: var(--color-base-neutral90);
+  }
 `;

@@ -1,9 +1,8 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import { useTranslation } from "react-i18next";
-import Wrapper from "global/components/dialog/Wrapper";
 import { Unwrapped } from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
 import { FormContext } from "helpers/contexts";
@@ -12,10 +11,10 @@ import { annotationsAPI, commentsAPI } from "api";
 import * as Styled from "./styles";
 
 export default function FlagAnnotationModal({
-  setOpen,
   id,
   annotationId,
-  type
+  type,
+  dialog
 }) {
   const { t } = useTranslation();
 
@@ -37,12 +36,12 @@ export default function FlagAnnotationModal({
         const handleFlag =
           type === "annotations" ? flagAnnotation : flagComment;
         const res = await handleFlag(id, message);
-        if (res?.data) return setOpen(false);
+        if (res?.data) return dialog.onCloseClick();
       } catch (err) {
         setErrors(err);
       }
     },
-    [id, type, message, flagAnnotation, flagComment, setOpen]
+    [id, type, message, flagAnnotation, flagComment, dialog]
   );
 
   const buttonClasses = classNames(
@@ -54,12 +53,20 @@ export default function FlagAnnotationModal({
   const colorScheme = useFromStore("ui.persistent.reader.colors.colorScheme");
   const styleType = colorScheme === "dark" ? "secondary" : "primary";
 
+  const handleEsc = e => {
+    if (e.key === "Escape") {
+      // prevent also exiting full screen in FF
+      e.preventDefault();
+      dialog.onCloseClick();
+    }
+  };
+
   return (
-    <Wrapper
+    <Styled.Dialog
       className="dialog"
-      maxWidth={600}
-      showCloseButton={false}
-      closeOnOverlayClick={false}
+      ref={dialog.dialogRef}
+      inert={!dialog.open ? "" : undefined}
+      onKeyDown={handleEsc}
     >
       <header className="dialog__header">
         <Styled.Heading>
@@ -107,7 +114,7 @@ export default function FlagAnnotationModal({
                 buttonClasses,
                 "button-icon-secondary--dull"
               )}
-              onClick={() => setOpen(false)}
+              onClick={dialog.onCloseClick}
             >
               <IconComposer
                 icon="close16"
@@ -119,7 +126,7 @@ export default function FlagAnnotationModal({
           </Styled.ButtonGroup>
         </Styled.Form>
       </FormContext.Provider>
-    </Wrapper>
+    </Styled.Dialog>
   );
 }
 
@@ -128,6 +135,6 @@ FlagAnnotationModal.displayName = "Annotation.Annotation.UserContent.FlagModal";
 FlagAnnotationModal.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  setOpen: PropTypes.func.isRequired,
+  dialog: PropTypes.object.isRequired,
   annotationId: PropTypes.string
 };
