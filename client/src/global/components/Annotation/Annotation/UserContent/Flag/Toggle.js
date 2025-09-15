@@ -1,7 +1,7 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useApiCallback } from "hooks";
+import useDialog from "@castiron/hooks/useDialog";
 import { annotationsAPI, commentsAPI } from "api";
 import Modal from "./Modal";
 import * as Styled from "../styles";
@@ -9,7 +9,7 @@ import * as Styled from "../styles";
 export default function FlagModalToggle({ record, annotationId }) {
   const { t } = useTranslation();
 
-  const [open, setOpen] = useState(false);
+  const dialog = useDialog({ modal: true, scrollLockClassName: "no-scroll" });
 
   const unflagAnnotation = useApiCallback(annotationsAPI.unflag);
   const unflagComment = useApiCallback(commentsAPI.unflag);
@@ -24,18 +24,19 @@ export default function FlagModalToggle({ record, annotationId }) {
           {t("actions.unflag")}
         </Styled.SecondaryButton>
       ) : (
-        <Styled.SecondaryButton onClick={() => setOpen(true)}>
+        <Styled.SecondaryButton
+          ref={dialog.toggleRef}
+          onClick={dialog.onToggleClick}
+        >
           {t("actions.report")}
         </Styled.SecondaryButton>
       )}
-      {open && (
-        <Modal
-          setOpen={setOpen}
-          id={record.id}
-          annotationId={annotationId}
-          type={record.type}
-        />
-      )}
+      <Modal
+        id={record.id}
+        annotationId={annotationId}
+        type={record.type}
+        dialog={dialog}
+      />
     </>
   );
 }
