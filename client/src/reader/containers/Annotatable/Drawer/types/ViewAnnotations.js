@@ -8,7 +8,8 @@ export default function ViewAnnotations({
   actions,
   sectionId,
   textId,
-  annotationIds
+  annotationIds,
+  close: closeDrawer
 }) {
   const request = useMemo(
     () => [
@@ -36,6 +37,7 @@ export default function ViewAnnotations({
       saveAnnotation={saveAnnotation}
       annotations={annotations ?? []}
       loginHandler={actions.showLogin}
+      closeDrawer={closeDrawer}
     />
   );
 }
