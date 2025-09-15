@@ -57,8 +57,9 @@ export class Annotatable extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!isEqual(this.props.annotations, prevProps.annotations))
-      this.setState({ renderedAnnotations: this.props.annotations });
+    if (!isEqual(this.props.annotations, prevProps.annotations)) {
+      return this.setState({ renderedAnnotations: this.props.annotations });
+    }
 
     // if the user just removed a highlight, restore focus to the previous selection
     const lastAnnotation = this.state.renderedAnnotations[
@@ -525,6 +526,7 @@ export class Annotatable extends Component {
     const { annotationState, selectionState, renderedAnnotations } = this.state;
     const pendingAnnotation =
       annotationState === "locked" ? selectionState.selectionAnnotation : null;
+
     return (
       <>
         {this.debuggable && (
