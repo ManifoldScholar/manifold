@@ -6,6 +6,8 @@ module TextSectionNodes
 
     queue_as :low_priority
 
+    unique :until_executed, lock_ttl: 2.days, on_conflict: :log
+
     def build_enumerator(cursor:)
       enumerator_builder.active_record_on_batch_relations(
         TextSectionNode.sans_search_indexed,
