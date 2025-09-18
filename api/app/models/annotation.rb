@@ -48,7 +48,7 @@ class Annotation < ApplicationRecord
           dependent: :destroy,
           inverse_of: :subject
 
-  has_one_readonly :annotation_node, -> { preload(ancestor_node: :children) }, inverse_of: :annotation
+  has_one_readonly :annotation_node, inverse_of: :annotation
 
   has_one_readonly :annotation_reading_group_membership
   has_one :reading_group_membership, through: :annotation_reading_group_membership
