@@ -2,27 +2,45 @@ import Header from "./Header";
 import { useTranslation } from "react-i18next";
 import { useFromStore } from "hooks";
 import { useParams } from "react-router-dom";
+import ResourcePreview from "frontend/components/resource/Preview";
 import * as Styled from "./styles";
+import { useId } from "react";
 
 export default function ResourceAnnotationDialog({ resource, ...dialog }) {
   const { t } = useTranslation();
+
+  const headingId = useId();
+
   const { sectionId } = useParams();
   const section = useFromStore(
     `entityStore.entities.textSections.${sectionId}`
   );
-  const textTitle =
-    section?.attributes.textTitle ?? t("glossary.text_title_case_one");
 
   const resourceEntity = useFromStore(
     `entityStore.entities.${resource.type}s.${resource.id}`
   );
 
   return (
-    <Styled.Dialog ref={dialog.dialogRef} inert={!dialog.open ? "" : undefined}>
-      <Header onClose={dialog.onCloseClick} textTitle={textTitle} />
-      <div>type: {resource.type}</div>
-      <div>id: {resource.id}</div>
-      <div>title: {resourceEntity?.attributes.title}</div>
+    <Styled.Dialog
+      ref={dialog.dialogRef}
+      inert={!dialog.open ? "" : undefined}
+      aria-labelledby={headingId}
+    >
+      <Header
+        onClose={dialog.onCloseClick}
+        title={resourceEntity?.attributes.title}
+        headingId={headingId}
+      />
+      <div className="container-inline-size">
+        <Styled.Inner>
+          {resourceEntity ? (
+            <ResourcePreview
+              resource={resourceEntity}
+              // resourceCollection={collection}
+            />
+          ) : null}
+        </Styled.Inner>
+      </div>
     </Styled.Dialog>
   );
 }

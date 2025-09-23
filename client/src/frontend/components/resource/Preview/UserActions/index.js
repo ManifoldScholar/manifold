@@ -73,10 +73,7 @@ function ResourcePreviewUserActions({
         </li>
       )}
       <li>
-        <Share
-          title={`${title} | ${project?.attributes.title}`}
-          {...BUTTON_STYLE_PROPS}
-        />
+        <Share title={title} {...BUTTON_STYLE_PROPS} />
       </li>
     </Styled.List>
   );

@@ -5,35 +5,20 @@ import {
   defaultHoverStyle,
   utilityPrimary,
   fluidScale,
-  transparentize,
-  defaultFocusStyle
 } from "theme/styles/mixins";
 import { Form as BaseForm } from "global/containers/form/styles";
 
 export const Dialog = styled.dialog`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -30%);
   padding: ${fluidScale("60px", "30px")};
   padding-block-start: ${fluidScale("50px", "25px")};
   overflow: auto;
-  max-height: 90dvh;
-  max-width: 1006px;
+  // fallback if dvh units not supported
+  max-block-size: 90vh;
+  max-block-size: 90dvh;
+  inline-size: 88vw;
+  max-inline-size: 1000px;
   border-radius: 20px;
   font-family: var(--font-family-sans);
-
-  &:focus-visible {
-    ${defaultFocusStyle}
-  }
-
-  &::backdrop {
-    background-color: ${transparentize("neutralBlack", 0.3)};
-  }
-
-  .reader.scheme-dark & {
-    background: var(--color-base-neutral90);
-  }
 `;
 
 export const Options = styled.fieldset`
