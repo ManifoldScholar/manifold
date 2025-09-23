@@ -18,6 +18,7 @@ export const Container = styled.section`
 `;
 
 export const Grid = styled.div`
+  container-type: inline-size;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto;
