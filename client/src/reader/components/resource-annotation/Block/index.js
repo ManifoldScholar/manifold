@@ -1,3 +1,5 @@
+import ResourcePreview from "frontend/components/resource/Preview";
+import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
@@ -5,20 +7,29 @@ export default function ResourceBlock({ annotation }) {
   const resource = useFromStore(
     `entityStore.entities.resources["${annotation.resourceId}"]`
   );
-  const collection = useFromStore(
+  const resourceCollection = useFromStore(
     `entityStore.entities.resourceCollections["${annotation.resourceCollectionId}"]`
   );
-  const entity = resource ?? collection;
 
-  return entity ? (
+  console.debug(resourceCollection);
+
+  if (resourceCollection)
+    return (
+      <Styled.Block data-annotation-resource-unselectable>
+        <p>WIP Resource collection annotation</p>
+        {/* // TODO wire up resource collection slideshow
+        <ResourceCollectionSlideshow
+          resourceCollection={resourceCollection}
+          collectionResources={resourceCollection.relationships.resources}
+          pagination={slideshowResourcesMeta.pagination}
+          dispatch={dispatch}
+        /> */}
+      </Styled.Block>
+    );
+
+  return resource ? (
     <Styled.Block data-annotation-resource-unselectable>
-      <p>Resource block for:</p>
-      <p>{entity?.attributes.title}</p>
-      {annotation.readerDisplayFormat === "embed" ? (
-        <p>Display: Interactive embed</p>
-      ) : (
-        <p>Display: Static callout</p>
-      )}
+      <ResourcePreview resource={resource} />
     </Styled.Block>
   ) : null;
 }
