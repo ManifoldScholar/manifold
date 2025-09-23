@@ -11,8 +11,6 @@ export default function ResourceBlock({ annotation }) {
     `entityStore.entities.resourceCollections["${annotation.resourceCollectionId}"]`
   );
 
-  console.debug(resourceCollection);
-
   if (resourceCollection)
     return (
       <Styled.Block data-annotation-resource-unselectable>
