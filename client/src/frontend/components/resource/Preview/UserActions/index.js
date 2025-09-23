@@ -30,8 +30,6 @@ function ResourcePreviewUserActions({
     projectSlug,
     downloadable
   } = resource.attributes;
-  const { project } =
-    resourceCollection?.relationships ?? resource.relationships;
 
   const detailUrl = resourceCollection
     ? lh.link(
