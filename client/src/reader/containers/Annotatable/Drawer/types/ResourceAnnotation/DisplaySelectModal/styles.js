@@ -4,7 +4,7 @@ import {
   buttonUnstyled,
   defaultHoverStyle,
   utilityPrimary,
-  fluidScale,
+  fluidScale
 } from "theme/styles/mixins";
 import { Form as BaseForm } from "global/containers/form/styles";
 
