@@ -31,6 +31,17 @@ function ResourcePreviewEditorActions({ resource }) {
           />
         </li>
       </Authorize>
+      {/* TODO wire up annotation remove button
+      <Authorize entity={text} ability={"notate"}>
+        <li>
+          <Button
+            onClick={() => {}}
+            label={t("actions.remove")}
+            preIcon="delete24"
+            {...BUTTON_STYLE_PROPS}
+          />
+        </li>
+      </Authorize> */}
     </Styled.List>
   );
 }
