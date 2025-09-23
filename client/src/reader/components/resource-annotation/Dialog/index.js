@@ -1,5 +1,4 @@
 import Header from "./Header";
-import { useTranslation } from "react-i18next";
 import { useFromStore } from "hooks";
 import { useParams } from "react-router-dom";
 import ResourcePreview from "frontend/components/resource/Preview";
@@ -7,8 +6,6 @@ import * as Styled from "./styles";
 import { useId } from "react";
 
 export default function ResourceAnnotationDialog({ resource, ...dialog }) {
-  const { t } = useTranslation();
-
   const headingId = useId();
 
   const { sectionId } = useParams();
