@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { fluidScale } from "theme/styles/mixins";
 
-export const Wrapper = styled.article`
+export const Wrapper = styled.div`
   --_spacing: ${fluidScale("30px", "20px")};
 
   display: flex;
