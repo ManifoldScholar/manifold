@@ -7,7 +7,8 @@ export default function useFromStore({
   action,
   id,
   entityType,
-  path
+  path,
+  allowPartial
 }) {
   return useSelector(state => {
     if (!action && !path) return null;
@@ -19,7 +20,7 @@ export default function useFromStore({
       case "meta":
         return meta(requestKey, state.entityStore);
       case "grab":
-        return grab(entityType, id, state.entityStore);
+        return grab(entityType, id, state.entityStore, allowPartial);
       default:
         return null;
     }
