@@ -7,12 +7,12 @@ import * as Styled from "./styles";
 export default function StaticMarker({ annotation }) {
   const { resourceId, resourceCollectionId } = annotation;
 
-  const resource = useFromStore(
-    `entityStore.entities.resources["${resourceId}"]`
-  );
-  const collection = useFromStore(
-    `entityStore.entities.resourceCollections["${resourceCollectionId}"]`
-  );
+  const resource = useFromStore({
+    path: `entityStore.entities.resources["${resourceId}"]`
+  });
+  const collection = useFromStore({
+    path: `entityStore.entities.resourceCollections["${resourceCollectionId}"]`
+  });
 
   /* eslint-disable no-nested-ternary */
   const kind = resource
