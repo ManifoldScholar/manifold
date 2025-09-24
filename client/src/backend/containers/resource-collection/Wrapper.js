@@ -177,9 +177,10 @@ export class ResourceCollectionWrapperContainer extends PureComponent {
       <div>
         <Authorize
           entity={resourceCollection}
-          failureFatalError={{
+          failureNotification={{
             body: t("resource_collections.unauthorized")
           }}
+          failureRedirect
           ability="update"
         >
           {subpage && (

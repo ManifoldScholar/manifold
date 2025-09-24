@@ -24,7 +24,7 @@ export default function useShare(
     }
   }, [copied]);
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   if (!isMounted)
     return {

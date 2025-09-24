@@ -33,9 +33,10 @@ class RecordsContainer extends PureComponent {
           "feature",
           "exportTarget"
         ]}
-        failureFatalError={{
+        failureNotification={{
           body: this.props.t("records.unauthorized")
         }}
+        failureRedirect
       >
         {subpage && (
           <HeadContent

@@ -7,6 +7,7 @@ import { childRoutes } from "helpers/router";
 import withFilteredLists, { makerFilters } from "hoc/withFilteredLists";
 import { useParams } from "react-router-dom";
 import { useFetch, useListQueryParams } from "hooks";
+import Authorize from "hoc/Authorize";
 
 import EntitiesList, {
   Search,
@@ -41,7 +42,16 @@ function MakersListContainer({
   };
 
   return (
-    <>
+    <Authorize
+      ability="update"
+      entity={["maker"]}
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "makers"
+        })
+      }}
+      failureRedirect
+    >
       {childRoutes(route, {
         drawer: true,
         drawerProps,
@@ -70,7 +80,7 @@ function MakersListContainer({
           })}
         />
       )}
-    </>
+    </Authorize>
   );
 }
 

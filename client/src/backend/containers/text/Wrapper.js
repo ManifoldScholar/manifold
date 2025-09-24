@@ -221,9 +221,10 @@ export class TextWrapperContainer extends PureComponent {
       <>
         <Authorize
           entity={text}
-          failureFatalError={{
+          failureNotification={{
             body: t("texts.unauthorized")
           }}
+          failureRedirect
           ability={["update"]}
         >
           {subpage && (

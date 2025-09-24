@@ -8,7 +8,7 @@ import Form from "global/components/form";
 import * as Styled from "./styles";
 
 export default function DeleteConfirm() {
-  const { currentUser } = useFromStore("authentication");
+  const { currentUser } = useFromStore({ path: "authentication" });
   const { t } = useTranslation();
   const dispatch = useDispatch();
 

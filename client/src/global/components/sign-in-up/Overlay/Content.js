@@ -8,7 +8,7 @@ import * as Styled from "./styles";
 
 const OverlayContent = ({ uid, hideOverlay }, ref) => {
   const { t } = useTranslation();
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
 
   return (
     <div ref={ref}>

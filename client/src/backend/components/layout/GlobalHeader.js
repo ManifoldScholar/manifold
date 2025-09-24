@@ -28,6 +28,19 @@ export default function LayoutHeader({
     ability: "update"
   });
 
+  const hasAnyAdminAccess = authorization.authorizeKind({
+    authentication,
+    kind: [
+      "admin",
+      "editor",
+      "marketeer",
+      "project_creator",
+      "project_editor",
+      "project_property_manager",
+      "journal_editor"
+    ]
+  });
+
   const baseLinks = navigation.backend();
 
   let links;
@@ -61,7 +74,7 @@ export default function LayoutHeader({
               <PressLogo aria-hidden="true" />
             </HeaderLogo>
             <Navigation.Primary
-              links={links}
+              links={hasAnyAdminAccess ? links : []}
               journalIsActive={journalIsActive}
               commonActions={commonActions}
               authentication={authentication}

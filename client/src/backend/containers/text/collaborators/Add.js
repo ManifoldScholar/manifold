@@ -10,9 +10,9 @@ import { useFromStore } from "hooks";
 export default function AddCollaboratorContainer({ textId, refresh }) {
   const { t } = useTranslation();
   const { id } = useParams();
-  const collaborator = useFromStore(
-    `entityStore.entities.flattenedCollaborators.${id}`
-  );
+  const collaborator = useFromStore({
+    path: `entityStore.entities.flattenedCollaborators.${id}`
+  });
 
   return (
     <section>

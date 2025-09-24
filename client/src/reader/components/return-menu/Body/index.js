@@ -18,26 +18,28 @@ export default function ReturnMenuBody({
   hidePanel
 }) {
   const context = useContext(FrontendModeContext);
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
   const { t } = useTranslation();
 
   return (
     <Styled.Menu className={className}>
       <Styled.List>
-        <Styled.Item>
-          <Styled.ItemLink to={returnUrl} onClick={hidePanel}>
-            <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
-            <Styled.LinkText>
-              {isJournalArticle
-                ? t("reader.menus.return.issue_home")
-                : t("reader.menus.return.project_home")}
-            </Styled.LinkText>
-            <Styled.EntityTitle {...maybeHtml(entityTitle)}>
-              {maybeReactNode(entityTitle)}
-            </Styled.EntityTitle>
-          </Styled.ItemLink>
-        </Styled.Item>
+        {returnUrl && (
+          <Styled.Item>
+            <Styled.ItemLink to={returnUrl} onClick={hidePanel}>
+              <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
+              <Styled.LinkText>
+                {isJournalArticle
+                  ? t("reader.menus.return.issue_home")
+                  : t("reader.menus.return.project_home")}
+              </Styled.LinkText>
+              <Styled.EntityTitle {...maybeHtml(entityTitle)}>
+                {maybeReactNode(entityTitle)}
+              </Styled.EntityTitle>
+            </Styled.ItemLink>
+          </Styled.Item>
+        )}
         {context.isLibrary && !isLibraryDisabled && (
           <Styled.Item>
             <Styled.ItemLink

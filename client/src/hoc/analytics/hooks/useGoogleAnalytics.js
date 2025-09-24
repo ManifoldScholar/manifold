@@ -21,7 +21,7 @@ function googleAnalyticsEnabled(settings) {
 export default function useGoogleAnalytics(location, settings) {
   const googleAnalyticsId = getGoogleAnalyticsId(settings);
   const [gaInitialized, setGaInitialized] = useState(false);
-  const { currentUser } = useFromStore("authentication") ?? {};
+  const { currentUser } = useFromStore({ path: "authentication" }) ?? {};
 
   const anonConsent = JSON.parse(cookie.read("anonAnalyticsConsent") ?? "{}");
 

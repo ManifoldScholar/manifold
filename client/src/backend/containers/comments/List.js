@@ -23,6 +23,7 @@ import {
   SelectAll,
   BulkActionButtons
 } from "backend/components/list/EntitiesList/List/bulkActions";
+import Authorize from "hoc/Authorize";
 
 function CommentsList({
   route,
@@ -127,7 +128,15 @@ function CommentsList({
   const currentPageIds = comments?.map(a => a.id);
 
   return (
-    <>
+    <Authorize
+      kind="admin"
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "comments"
+        })
+      }}
+      failureRedirect
+    >
       {renderChildRoutes()}
       <PageHeader type="list" title={t("titles.comments")} />
       {!!comments && (
@@ -171,7 +180,7 @@ function CommentsList({
           ]}
         />
       )}
-    </>
+    </Authorize>
   );
 }
 

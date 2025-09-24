@@ -18,7 +18,7 @@ function ContributorRow({ entity, onDelete, onEdit, ...props }) {
 
   const { roles } = attributes ?? {};
 
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
   const auth = new Authorization();
   const canAccessMakers = auth.authorizeAbility({
     entity: "maker",
