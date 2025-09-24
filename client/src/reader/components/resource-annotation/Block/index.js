@@ -1,14 +1,17 @@
 import ResourcePreview from "frontend/components/resource/Preview";
 import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow";
-import { useHydratedEntity } from "hooks";
+import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 export default function ResourceBlock({ annotation }) {
-  const resource = useHydratedEntity("resources", annotation.resourceId);
-  const resourceCollection = useHydratedEntity(
-    "resourceCollections",
-    annotation.resourceCollectionId
-  );
+  const resource = useFromStore({
+    entityType: "resources",
+    id: annotation.resourceId
+  });
+  const resourceCollection = useFromStore({
+    entityType: "resourceCollections",
+    id: annotation.resourceCollectionId
+  });
 
   if (resourceCollection)
     return (
