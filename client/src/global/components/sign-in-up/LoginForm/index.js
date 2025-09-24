@@ -21,7 +21,7 @@ export default function LoginForm({
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
   const error = authentication?.error?.body;
 
   const formatData = data => {
