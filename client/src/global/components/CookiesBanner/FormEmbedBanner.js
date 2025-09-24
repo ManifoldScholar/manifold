@@ -11,7 +11,7 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
   const [prefs, setPrefs] = useState({ manifold: false, google: false });
   const onChange = pref => setPrefs({ ...prefs, [pref]: !prefs[pref] });
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
     settings?.attributes?.calculated ?? {};
 
