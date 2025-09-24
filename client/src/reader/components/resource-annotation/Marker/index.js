@@ -16,15 +16,15 @@ export default function Marker({ annotation }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const activeAnnotation = useFromStore(
-    `ui.transitory.reader.activeAnnotation`
-  );
+  const activeAnnotation = useFromStore({
+    path: `ui.transitory.reader.activeAnnotation`
+  });
   const setActiveAnnotation = annotationId =>
     dispatch(uiReaderActions.setActiveAnnotation({ annotationId }));
 
-  const { font, fontSize, margins } = useFromStore(
-    `ui.persistent.reader.typography`
-  );
+  const { font, fontSize, margins } = useFromStore({
+    path: `ui.persistent.reader.typography`
+  });
 
   const [markerEl, setMarkerEl] = useState(null);
   const [left, setLeft] = useState(0);
@@ -50,12 +50,12 @@ export default function Marker({ annotation }) {
 
   const { id, resourceId, resourceCollectionId } = annotation;
 
-  const resource = useFromStore(
-    `entityStore.entities.resources["${resourceId}"]`
-  );
-  const collection = useFromStore(
-    `entityStore.entities.resourceCollections["${resourceCollectionId}"]`
-  );
+  const resource = useFromStore({
+    path: `entityStore.entities.resources["${resourceId}"]`
+  });
+  const collection = useFromStore({
+    path: `entityStore.entities.resourceCollections["${resourceCollectionId}"]`
+  });
 
   /* eslint-disable no-nested-ternary */
   const kind = resource
