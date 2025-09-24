@@ -24,7 +24,7 @@ export default function SignInUpInterface({
   showLogout = false,
   hideOverlay
 }) {
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
   const location = useLocation();
 
   const [view, setView] = useState(defaultView);

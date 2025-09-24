@@ -9,7 +9,7 @@ function PublicReadingGroupsContainer({ route }) {
     attributes: {
       general: { disablePublicReadingGroups }
     }
-  } = useFromStore("settings", "select");
+  } = useFromStore({ requestKey: "settings", action: "select" });
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
