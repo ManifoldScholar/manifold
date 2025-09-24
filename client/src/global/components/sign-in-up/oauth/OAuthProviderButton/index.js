@@ -10,7 +10,7 @@ import * as Styled from "./styles";
 
 export default function OAuthProviderButton({ provider, icon }) {
   const { t } = useTranslation();
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const dispatch = useDispatch();
   const providerSettings =
     settings?.attributes?.oauth[providerSetting(provider)] ?? {};
