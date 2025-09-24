@@ -28,11 +28,19 @@ function ReaderNotesContainer({
 }) {
   const { textId, sectionId } = useParams();
   const navigate = useNavigate();
-  const text = useFromStore("texts", "grab", textId);
-  const section = useFromStore("textSections", "grab", sectionId);
-  const visibilityFilters = useFromStore(
-    "ui.transitory.visibility.visibilityFilters"
-  );
+  const text = useFromStore({
+    entityType: "texts",
+    action: "grab",
+    id: textId
+  });
+  const section = useFromStore({
+    entityType: "textSections",
+    action: "grab",
+    id: sectionId
+  });
+  const visibilityFilters = useFromStore({
+    path: "ui.transitory.visibility.visibilityFilters"
+  });
 
   const baseFilters = useMemo(
     () => ({
