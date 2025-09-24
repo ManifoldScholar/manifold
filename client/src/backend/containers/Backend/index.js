@@ -13,6 +13,7 @@ import lh from "helpers/linkHandler";
 import BodyClass from "hoc/BodyClass";
 import Authorize from "hoc/Authorize";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
+import AppFatalError from "global/components/FatalError/AppWrapper";
 
 const { request } = entityStoreActions;
 
@@ -25,7 +26,8 @@ export class BackendContainer extends PureComponent {
       notifications: state.notifications,
       routing: state.routing,
       pages: entityUtils.select(requests.gPages, state.entityStore),
-      settings: entityUtils.select(requests.settings, state.entityStore)
+      settings: entityUtils.select(requests.settings, state.entityStore),
+      fatalError: state.fatalError
     };
   };
 
@@ -68,21 +70,29 @@ export class BackendContainer extends PureComponent {
 
   render() {
     return (
-      <Authorize
-        kind={[
-          "admin",
-          "editor",
-          "marketeer",
-          "project_creator",
-          "project_editor",
-          "project_property_manager",
-          "journal_editor"
-        ]}
-        failureRedirect={lh.link("frontendLogin")}
-        failureNotification
-      >
-        <BodyClass className={"backend bg-neutral90"}>
-          <>
+      <BodyClass className={"backend bg-neutral90"}>
+        <>
+          <Utility.ScrollToTop />
+          <Layout.GlobalHeader
+            visibility={this.props.visibility}
+            match={this.props.match}
+            location={this.props.location}
+            authentication={this.props.authentication}
+            commonActions={this.commonActions}
+          />
+          <Authorize
+            kind={[
+              "admin",
+              "editor",
+              "marketeer",
+              "project_creator",
+              "project_editor",
+              "project_property_manager",
+              "journal_editor"
+            ]}
+            failureRedirect={lh.link("frontendLogin")}
+            failureNotification
+          >
             <RedirectToFirstMatch
               route={"backend"}
               candidates={[
@@ -92,31 +102,27 @@ export class BackendContainer extends PureComponent {
                 }
               ]}
             />
-            <Utility.ScrollToTop />
-            <Layout.GlobalHeader
-              visibility={this.props.visibility}
-              match={this.props.match}
-              location={this.props.location}
-              authentication={this.props.authentication}
-              commonActions={this.commonActions}
-            />
             <BreadcrumbsProvider>
               <div className="main-content">
-                {childRoutes(this.props.route, {
-                  childProps: this.childProps()
-                })}
+                {this.props.fatalError.error ? (
+                  <AppFatalError fatalError={this.props.fatalError} />
+                ) : (
+                  childRoutes(this.props.route, {
+                    childProps: this.childProps()
+                  })
+                )}
               </div>
             </BreadcrumbsProvider>
-            <Footers.FrontendFooter
-              pages={this.props.pages}
-              authentication={this.props.authentication}
-              commonActions={this.commonActions}
-              settings={this.props.settings}
-              withVersion
-            />
-          </>
-        </BodyClass>
-      </Authorize>
+          </Authorize>
+          <Footers.FrontendFooter
+            pages={this.props.pages}
+            authentication={this.props.authentication}
+            commonActions={this.commonActions}
+            settings={this.props.settings}
+            withVersion
+          />
+        </>
+      </BodyClass>
     );
   }
 }

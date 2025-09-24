@@ -13,7 +13,7 @@ export default function CookiesFormFields({
   googleAnalyticsEnabled
 }) {
   const { t } = useTranslation();
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   const installationName = settings?.attributes?.general?.installationName;
 

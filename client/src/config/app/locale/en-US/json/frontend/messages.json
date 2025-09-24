@@ -14,6 +14,7 @@
     "unsaved_changes": "You may have unsaved changes. Do you want to leave without saving your changes?",
     "no_results": "Sorry, no results were found.",
     "no_sections": "This text doesn’t contain any sections.",
+    "unverified_to_comment": "It looks like your account is unverified. You won't be able to comment on annotations until you've verified your email. You can resend the verification instructions from your <0>profile page</0>.",
     "annotation_summary": {
       "highlight": "{{creator}} highlighted \"{{section}}\" in <text></text> on <date></date>.",
       "annotation": "{{creator}} annotated \"{{section}}\" in <text></text> on <date></date>.",
