@@ -11,9 +11,9 @@ export default function MobileMarker({
   setActiveAnnotation,
   accesibleTitle
 }) {
-  const activeAnnotation = useFromStore(
-    `ui.transitory.reader.activeAnnotation`
-  );
+  const activeAnnotation = useFromStore({
+    path: `ui.transitory.reader.activeAnnotation`
+  });
 
   const [markerEl, setMarkerEl] = useState(null);
   const [visible, setVisible] = useState(false);
