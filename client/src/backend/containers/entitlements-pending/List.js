@@ -13,6 +13,7 @@ import { childRoutes } from "helpers/router";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
+import Authorize from "hoc/Authorize";
 
 function PendingEntitlementsList({
   route,
@@ -75,7 +76,16 @@ function PendingEntitlementsList({
   ];
 
   return (
-    <>
+    <Authorize
+      ability="update"
+      entity={["pendingEntitlement"]}
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "entitlements"
+        })
+      }}
+      failureRedirect
+    >
       {renderChildRoutes()}
       {entitlements && (
         <>
@@ -119,7 +129,7 @@ function PendingEntitlementsList({
           />
         </>
       )}
-    </>
+    </Authorize>
   );
 }
 

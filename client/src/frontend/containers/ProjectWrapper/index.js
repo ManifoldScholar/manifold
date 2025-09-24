@@ -17,7 +17,7 @@ export default function ProjectWrapper({ route }) {
   const { path } = useRouteMatch();
   const location = useLocation();
   const isHomePage = location.pathname === path;
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   useRedirectToFirstMatch({

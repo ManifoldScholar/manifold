@@ -21,7 +21,8 @@ export class NotificationsComponent extends Component {
     addNotification: PropTypes.func,
     removeNotification: PropTypes.func,
     removeAllNotifications: PropTypes.func,
-    notifications: PropTypes.object
+    notifications: PropTypes.object,
+    noDismiss: PropTypes.bool
   };
 
   static defaultProps = {
@@ -126,6 +127,7 @@ export class NotificationsComponent extends Component {
               heading={notification.heading}
               body={notification.body}
               removeNotification={this.removeNotification}
+              noDismiss={this.props.noDismiss}
             />
           ))}
         </div>

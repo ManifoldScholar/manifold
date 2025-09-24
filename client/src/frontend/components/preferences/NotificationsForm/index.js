@@ -15,7 +15,7 @@ export default function NotificationsForm({
   preferences,
   setPreferences
 }) {
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
   const { t } = useTranslation();
 
   const digestOpen = preferences?.digest !== "never";

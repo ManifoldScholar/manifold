@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useParams, useLocation } from "react-router-dom";
 import ResourceDetail from "frontend/components/resource/Detail";
 import { fatalErrorActions } from "actions";
-import { resourcesAPI, resourceCollectionsAPI } from "api";
+import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { breadcrumbs } from "./breadcrumbs";
 import HeadContent from "global/components/HeadContent";
@@ -13,17 +13,17 @@ import useEntityHeadContent from "frontend/components/entity/useEntityHeadConten
 import some from "lodash/some";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import { useFetch, useCurrentUser } from "hooks";
+import { useFetch } from "hooks";
 
 export default function ResourceDetailContainer({
   project,
   journalBreadcrumbs
 }) {
   const { resourceId, resourceCollectionId } = useParams();
-  const currentUser = useCurrentUser() ?? { id: null };
   const { data: resource } = useFetch({
     request: [resourcesAPI.show, resourceId],
-    dependencies: [currentUser.id]
+    options: { requestKey: requests.feResource },
+    refetchOnLogin: true
   });
   const { data: collection } = useFetch({
     request: [resourceCollectionsAPI.show, resourceCollectionId],
