@@ -10,7 +10,6 @@ export { default as useCurrentUser } from "./useCurrentUser";
 export { default as useAuthentication } from "./useAuthentication";
 
 export { default as useFromStore } from "./useFromStore";
-export { default as useHydratedEntity } from "./useHydratedEntity";
 
 export { default as useEventTracker } from "./useEventTracker";
 
