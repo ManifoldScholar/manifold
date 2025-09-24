@@ -22,7 +22,7 @@ export default function ReadingGroup({ route }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   const [fetchVersion, setFetchVersion] = useState(1);
 
