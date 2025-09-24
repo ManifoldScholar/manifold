@@ -26,7 +26,7 @@ export default function useShowJournalsActive() {
     }
   }
 
-  const projects = useFromStore(`entityStore.entities.projects`);
+  const projects = useFromStore({ path: `entityStore.entities.projects` });
 
   if (!id) {
     id = projects
