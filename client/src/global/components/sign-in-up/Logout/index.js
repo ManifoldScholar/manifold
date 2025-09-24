@@ -8,7 +8,8 @@ import * as Styled from "./styles";
 export default function Logout() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { authenticated, currentUser } = useFromStore("authentication") ?? {};
+  const { authenticated, currentUser } =
+    useFromStore({ path: "authentication" }) ?? {};
 
   const handleLogout = () => {
     const action = currentUserActions.logout();
