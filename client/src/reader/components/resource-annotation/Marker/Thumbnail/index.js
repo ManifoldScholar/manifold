@@ -71,9 +71,9 @@ export default function Thumbnail({
     }
   }, [el, observer]);
 
-  const { font, fontSize, margins } = useFromStore(
-    `ui.persistent.reader.typography`
-  );
+  const { font, fontSize, margins } = useFromStore({
+    path: `ui.persistent.reader.typography`
+  });
 
   const { width } = useWindowSize();
 
