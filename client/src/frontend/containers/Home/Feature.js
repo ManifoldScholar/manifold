@@ -9,7 +9,7 @@ export default function HomeFeatureContainer({ features }) {
   const dispatch = useDispatch();
   const actions = commonActions(dispatch);
 
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
 
   return features?.length ? (
     <Layout.Splash
