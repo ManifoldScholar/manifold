@@ -13,7 +13,7 @@ export default function JournalAccessWrapper({ journal, route }) {
   const closeUrl = lh.link("backendJournalAccess", journal.id);
 
   const authorization = new Authorization();
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
 
   const canGrantPermissions = authorization.authorizeAbility({
     authentication,

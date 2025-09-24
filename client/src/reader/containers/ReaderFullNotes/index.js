@@ -88,9 +88,9 @@ function ReaderFullNotesContainer({
     return out;
   }
 
-  const visibilityFilters = useFromStore(
-    "ui.transitory.visibility.visibilityFilters"
-  );
+  const visibilityFilters = useFromStore({
+    path: "ui.transitory.visibility.visibilityFilters"
+  });
 
   function handleVisitAnnotation(annotation) {
     const { textSectionId, currentUserIsCreator } = annotation.attributes;
