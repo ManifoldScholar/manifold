@@ -9,13 +9,13 @@ export default function ResourceAnnotationDialog({ resource, ...dialog }) {
   const headingId = useId();
 
   const { sectionId } = useParams();
-  const section = useFromStore(
-    `entityStore.entities.textSections.${sectionId}`
-  );
+  const section = useFromStore({
+    path: `entityStore.entities.textSections.${sectionId}`
+  });
 
-  const resourceEntity = useFromStore(
-    `entityStore.entities.${resource.type}s.${resource.id}`
-  );
+  const resourceEntity = useFromStore({
+    path: `entityStore.entities.${resource.type}s.${resource.id}`
+  });
 
   return (
     <Styled.Dialog
