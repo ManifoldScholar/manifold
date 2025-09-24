@@ -10,6 +10,7 @@ import EntitiesList, {
   Button,
   PageRow
 } from "backend/components/list/EntitiesList";
+import Authorize from "hoc/Authorize";
 
 const { request } = entityStoreActions;
 
@@ -37,20 +38,31 @@ class PagesDashboardContainer extends PureComponent {
     const { pages, t } = this.props;
     if (!pages) return null;
     return (
-      <EntitiesList
-        entityComponent={PageRow}
-        title={t("records.pages.header")}
-        titleStyle="bar"
-        entities={pages}
-        buttons={[
-          <Button
-            path={lh.link("backendRecordsPageNew")}
-            type="add"
-            text={t("records.pages.button_label")}
-            authorizedFor="page"
-          />
-        ]}
-      />
+      <Authorize
+        ability="update"
+        entity={["page"]}
+        failureNotification={{
+          body: t("errors.access_denied.authorization_admin_type", {
+            type: "pages"
+          })
+        }}
+        failureRedirect
+      >
+        <EntitiesList
+          entityComponent={PageRow}
+          title={t("records.pages.header")}
+          titleStyle="bar"
+          entities={pages}
+          buttons={[
+            <Button
+              path={lh.link("backendRecordsPageNew")}
+              type="add"
+              text={t("records.pages.button_label")}
+              authorizedFor="page"
+            />
+          ]}
+        />
+      </Authorize>
     );
   }
 }

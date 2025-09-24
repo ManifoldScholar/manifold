@@ -35,6 +35,10 @@ export default `
       @starting-style {
         opacity: 0;
       }
+
+      &.notification--error {
+        background-color: var(--color-notification-error-light);
+      }
     }
 
     &--context-header {
@@ -86,6 +90,10 @@ export default `
         font-size: 20px;
         color: var(--color-base-neutral30);
       }
+
+      .notification--context-drawer.notification--error & {
+        color: var(--color-base-neutral90);
+      }
     }
 
     &__body {
@@ -103,6 +111,10 @@ export default `
         font-size: 16px;
         font-weight: normal;
         color: var(--color-base-neutral30);
+      }
+
+      .notification--context-drawer.notification--error & {
+        color: var(--color-base-neutral90);
       }
     }
 
@@ -144,6 +156,14 @@ export default `
           margin: 0;
           overflow: visible;
           font-size: 12px;
+        }
+      }
+
+      .notification--context-drawer.notification--error & {
+        color: var(--color-base-neutral75);
+
+        &:hover {
+          color: var(--color-base-neutral05);
         }
       }
     }

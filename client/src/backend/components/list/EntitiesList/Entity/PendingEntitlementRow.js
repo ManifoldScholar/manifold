@@ -17,8 +17,12 @@ export default function PendingEntitlementRow({
 
   const { email, subjectId, expiresOn } = entitlement?.attributes ?? {};
 
-  const project = useFromStore(`entityStore.entities.projects["${subjectId}"]`);
-  const journal = useFromStore(`entityStore.entities.journals["${subjectId}"]`);
+  const project = useFromStore({
+    path: `entityStore.entities.projects["${subjectId}"]`
+  });
+  const journal = useFromStore({
+    path: `entityStore.entities.journals["${subjectId}"]`
+  });
   const target = project ?? journal;
 
   const subtitle = target ? target.attributes?.titlePlaintext : "";

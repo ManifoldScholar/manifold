@@ -16,7 +16,7 @@ export default function AnonymousUserBanner() {
     setConsentNeeded(!hasConsentCookie);
   }, []);
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
     settings?.attributes?.calculated ?? {};
 

@@ -10,6 +10,7 @@ import EntitiesList, {
   Button,
   FeatureRow
 } from "backend/components/list/EntitiesList";
+import Authorize from "hoc/Authorize";
 
 const { select } = entityUtils;
 const { request } = entityStoreActions;
@@ -53,23 +54,34 @@ class ContentFeaturesList extends PureComponent {
     const { features, t } = this.props;
     if (!features) return null;
     return (
-      <EntitiesList
-        title={t("records.features.header")}
-        titleStyle="bar"
-        entityComponent={FeatureRow}
-        entityComponentProps={{
-          onTogglePublish: this.togglePublished
+      <Authorize
+        ability="update"
+        entity={["feature"]}
+        failureNotification={{
+          body: t("errors.access_denied.authorization_admin_type", {
+            type: "features"
+          })
         }}
-        entities={features}
-        buttons={[
-          <Button
-            path={lh.link("backendRecordsFeatureNew")}
-            type="add"
-            text={t("records.features.button_label")}
-            authorizedFor="feature"
-          />
-        ]}
-      />
+        failureRedirect
+      >
+        <EntitiesList
+          title={t("records.features.header")}
+          titleStyle="bar"
+          entityComponent={FeatureRow}
+          entityComponentProps={{
+            onTogglePublish: this.togglePublished
+          }}
+          entities={features}
+          buttons={[
+            <Button
+              path={lh.link("backendRecordsFeatureNew")}
+              type="add"
+              text={t("records.features.button_label")}
+              authorizedFor="feature"
+            />
+          ]}
+        />
+      </Authorize>
     );
   }
 }

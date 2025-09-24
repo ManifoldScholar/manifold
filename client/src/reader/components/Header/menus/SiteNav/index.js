@@ -16,7 +16,7 @@ export default function SiteNav({
 }) {
   const context = useContext(FrontendModeContext);
   const menu = useMenuState();
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
 
   return (
