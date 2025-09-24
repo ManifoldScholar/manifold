@@ -12,7 +12,7 @@ import * as Styled from "./styles";
 
 export default function SubscriptionsContainer() {
   const { t } = useTranslation();
-  const { currentUser } = useFromStore("authentication") ?? {};
+  const { currentUser } = useFromStore({ path: "authentication" }) ?? {};
   const [preferences, setPreferences] = useState(
     currentUser?.attributes?.notificationPreferences
   );

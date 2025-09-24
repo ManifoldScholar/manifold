@@ -29,7 +29,7 @@ function DrawerContent(props, ref) {
     additionalDrawerProps = {}
   } = props;
 
-  const connected = useFromStore("websocket.connected");
+  const connected = useFromStore({ path: "websocket.connected" });
   usePreventBodyScroll(lockScroll && open);
 
   // Waits for animation to finish before focusing in trap.
