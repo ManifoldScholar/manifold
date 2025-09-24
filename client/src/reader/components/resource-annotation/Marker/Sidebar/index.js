@@ -10,9 +10,9 @@ export default function Sidebar({
   handleClick,
   setActiveAnnotation
 }) {
-  const activeAnnotation = useFromStore(
-    `ui.transitory.reader.activeAnnotation`
-  );
+  const activeAnnotation = useFromStore({
+    path: `ui.transitory.reader.activeAnnotation`
+  });
 
   const { groups } = useContext(ResourceMarkerContext) ?? {};
 
