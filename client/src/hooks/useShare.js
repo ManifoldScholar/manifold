@@ -25,7 +25,7 @@ export default function useShare({
     }
   }, [copied]);
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   const shareIcon = size === "sm" ? "share24" : "share32";
 
