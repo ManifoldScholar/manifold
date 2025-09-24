@@ -16,17 +16,19 @@ export default function NavigationPrimary(props) {
 
   const label = getAdminModeLabel({ currentUser, mode: props.mode, t });
 
-  const resources = useFromStore(`entityStore.entities.resources`);
-  const resourceCollections = useFromStore(
-    `entityStore.entities.resourceCollections`
-  );
-  const pages = useFromStore(`entityStore.entities.pages`);
-  const texts = useFromStore(`entityStore.entities.texts`);
+  const resources = useFromStore({ path: `entityStore.entities.resources` });
+  const resourceCollections = useFromStore({
+    path: `entityStore.entities.resourceCollections`
+  });
+  const pages = useFromStore({ path: `entityStore.entities.pages` });
+  const texts = useFromStore({ path: `entityStore.entities.texts` });
+  const fatalError = useFromStore({ path: "fatalError" });
 
   const to = getDestinationPath({
     mode: props.mode,
     pathname,
-    entities: { resources, resourceCollections, pages, texts }
+    entities: { resources, resourceCollections, pages, texts },
+    fatalError
   });
 
   const authorization = new Authorization();

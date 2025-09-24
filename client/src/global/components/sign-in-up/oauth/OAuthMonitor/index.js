@@ -9,7 +9,7 @@ const MONITOR_FREQUENCY = 100;
 
 export default function Monitor() {
   const dispatch = useDispatch();
-  const oauth = useFromStore("oauth");
+  const oauth = useFromStore({ path: "oauth" });
 
   useEffect(() => {
     const onMessage = e => {
