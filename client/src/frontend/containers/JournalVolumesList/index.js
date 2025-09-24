@@ -20,7 +20,7 @@ export default function JournalVolumesList({ journal }) {
   });
 
   const { t } = useTranslation();
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   const { titlePlaintext, slug } = journal?.attributes ?? {};

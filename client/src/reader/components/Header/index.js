@@ -223,7 +223,7 @@ export default function Header(props) {
           {renderOptionsNav()}
         </div>
       </nav>
-      {!!text && (
+      {text ? (
         <>
           <div className="reader-header__panels reader-header__panels--left">
             <UIPanel
@@ -260,6 +260,17 @@ export default function Header(props) {
             />
           </div>
         </>
+      ) : (
+        <div className="reader-header__panels reader-header__panels--left">
+          <UIPanel
+            id="readerReturn"
+            visibility={visibility.uiPanels}
+            bodyComponent={ReturnMenu.Body}
+            toggleSignInUpOverlay={commonActions.toggleSignInUpOverlay}
+            hidePanel={commonActions.hideReaderReturnPanel}
+            moreLink="https://manifoldapp.org/"
+          />
+        </div>
       )}
       <HeaderNotifications />
     </header>
