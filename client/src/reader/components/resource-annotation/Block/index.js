@@ -5,12 +5,16 @@ import * as Styled from "./styles";
 
 export default function ResourceBlock({ annotation }) {
   const resource = useFromStore({
+    action: "grab",
     entityType: "resources",
-    id: annotation.resourceId
+    id: annotation.resourceId,
+    allowPartial: true
   });
   const resourceCollection = useFromStore({
+    action: "grab",
     entityType: "resourceCollections",
-    id: annotation.resourceCollectionId
+    id: annotation.resourceCollectionId,
+    allowPartial: true
   });
 
   if (resourceCollection)
