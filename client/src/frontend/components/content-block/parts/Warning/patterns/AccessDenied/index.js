@@ -28,13 +28,13 @@ const TEXT_PATHS = {
       prop: "entity",
       path: ["attributes"],
       name: "restrictedAccessBody",
-      show: "restrictedAccessBodyFormatted"
+      show: "restrictedAccessBody"
     },
     {
       prop: "settings",
       path: ["attributes", "general"],
       name: "restrictedAccessBody",
-      show: "restrictedAccessBodyFormatted"
+      show: "restrictedAccessBody"
     },
     {
       prop: "config",

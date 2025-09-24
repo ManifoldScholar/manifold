@@ -51,7 +51,9 @@ export default function FlagAnnotationModal({
     "button-icon-secondary"
   );
 
-  const colorScheme = useFromStore("ui.persistent.reader.colors.colorScheme");
+  const colorScheme = useFromStore({
+    path: "ui.persistent.reader.colors.colorScheme"
+  });
   const styleType = colorScheme === "dark" ? "secondary" : "primary";
 
   return (

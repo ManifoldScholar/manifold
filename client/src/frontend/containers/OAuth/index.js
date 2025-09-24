@@ -76,7 +76,7 @@ export default function OAuth() {
   return (
     <Styled.Section className="bg-neutral05">
       {error ? (
-        <FatalError fatalError={{ error }} minHeight="60dvh" />
+        <FatalError fatalError={{ error }} contained />
       ) : (
         <Styled.Container className="container">
           <Styled.Message>Logging you in...</Styled.Message>

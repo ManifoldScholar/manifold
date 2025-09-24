@@ -22,9 +22,9 @@ export default function IngestSectionContainer({ textId }) {
     condition: !!ingestionId
   });
 
-  const sectionName = useFromStore(
-    `entityStore.entities.textSections[${ingestion?.attributes.textSectionId}]`
-  )?.attributes.name;
+  const sectionName = useFromStore({
+    path: `entityStore.entities.textSections[${ingestion?.attributes.textSectionId}]`
+  })?.attributes.name;
 
   const shouldRender =
     (!!sectionId && !!section) ||

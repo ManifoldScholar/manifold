@@ -12,7 +12,8 @@ class Notification extends Component {
     level: PropTypes.number,
     removeNotification: PropTypes.func,
     style: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
+    noDismiss: PropTypes.bool
   };
 
   // Close notification in handler in case event access is required
@@ -49,20 +50,22 @@ class Notification extends Component {
           </div>
           {this.bodyCopy()}
 
-          <button
-            className="notification__button"
-            onClick={this.handleClose}
-            data-id="close"
-          >
-            <IconComposer
-              icon="close32"
-              size={36}
-              className="notification__button-icon"
-            />
-            <span className="screen-reader-text">
-              {this.props.t("actions.dismiss")}
-            </span>
-          </button>
+          {!this.props.noDismiss && (
+            <button
+              className="notification__button"
+              onClick={this.handleClose}
+              data-id="close"
+            >
+              <IconComposer
+                icon="close32"
+                size={36}
+                className="notification__button-icon"
+              />
+              <span className="screen-reader-text">
+                {this.props.t("actions.dismiss")}
+              </span>
+            </button>
+          )}
         </div>
       </div>
     );

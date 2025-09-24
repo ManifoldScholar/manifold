@@ -5,7 +5,7 @@ import OAuthProviderButton from "../OAuthProviderButton";
 import * as Styled from "./styles";
 
 export default function OAuthLoginOptions() {
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   const customOAuthProviders = settings?.attributes?.oauth?.length
     ? settings.attributes.oauth.filter(provider => provider.custom)
