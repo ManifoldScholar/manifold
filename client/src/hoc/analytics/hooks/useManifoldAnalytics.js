@@ -37,7 +37,7 @@ function getTokens() {
 }
 
 export default function useManifoldAnalytics(location, settings, dispatch) {
-  const { currentUser } = useFromStore("authentication") ?? {};
+  const { currentUser } = useFromStore({ path: "authentication" }) ?? {};
 
   const anonConsent = JSON.parse(cookie.read("anonAnalyticsConsent") ?? "{}");
 

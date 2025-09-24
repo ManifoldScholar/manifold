@@ -18,7 +18,7 @@ export default function ReturnMenuBody({
   hidePanel
 }) {
   const context = useContext(FrontendModeContext);
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
   const { t } = useTranslation();
 

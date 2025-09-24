@@ -13,7 +13,7 @@ import * as Styled from "./styles";
 import * as SharedStyles from "../styles";
 
 export default function EditProfileForm({ hideOverlay, mode }) {
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -24,7 +24,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
     google: "yes"
   });
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const manifoldAnalyticsEnabled = !settings?.attributes?.general
     ?.disableInternalAnalytics;
   const googleAnalyticsEnabled = !!settings?.attributes?.integrations
