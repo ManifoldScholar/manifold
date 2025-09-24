@@ -10,9 +10,10 @@ export default function ReadingGroupsWrapper({ route }) {
     <Authorize
       ability="update"
       entity={["readingGroup"]}
-      failureFatalError={{
+      failureNotification={{
         body: t("readingGroup.unauthorized")
       }}
+      failureRedirect
     >
       <div>
         <main id="skip-to-main" tabIndex={-1} className="backend-detail">

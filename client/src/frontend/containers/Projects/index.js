@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
-import { projectsAPI } from "api";
+import { projectsAPI, requests } from "api";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
@@ -13,7 +13,10 @@ import {
 } from "hooks";
 
 export default function ProjectsContainer() {
-  const subjects = useFromStore("feSubjects", "select");
+  const subjects = useFromStore({
+    requestKey: requests.feSubjects,
+    action: "select"
+  });
 
   const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
 
