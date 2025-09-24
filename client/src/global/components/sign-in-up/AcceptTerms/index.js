@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import AcceptTermsCheckbox from "./AcceptTermsCheckbox";
 import { useFromStore } from "hooks";
+import { requests } from "api";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 export default function AcceptTerms({ handleViewChange }) {
   const [accepted, setAccepted] = useState(false);
   const { t } = useTranslation();
-  const pages = useFromStore("gPages", "select");
-  const settings = useFromStore("settings", "select");
+  const pages = useFromStore({ requestKey: requests.gPages, action: "select" });
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   const { attributes } = settings ?? {};
   const installationName = attributes?.general?.installationName;

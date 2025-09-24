@@ -10,7 +10,7 @@ import { useFromStore, useFrontendModeContext } from "hooks";
 
 function Detail({ project }) {
   const { isStandalone } = useFrontendModeContext();
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const libraryDisabled = settings.attributes.general.libraryDisabled;
 
   return (
