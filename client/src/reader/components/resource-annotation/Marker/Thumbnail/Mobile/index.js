@@ -8,16 +8,18 @@ export default function ThumbnailMobile({
   handleClick,
   hoverOverride
 }) {
-  const annotation = useFromStore(`entityStore.entities.annotations["${id}"]`);
+  const annotation = useFromStore({
+    path: `entityStore.entities.annotations["${id}"]`
+  });
 
   const { resourceId, resourceCollectionId } = annotation?.attributes;
 
-  const resource = useFromStore(
-    `entityStore.entities.resources["${resourceId}"]`
-  );
-  const collection = useFromStore(
-    `entityStore.entities.resourceCollections["${resourceCollectionId}"]`
-  );
+  const resource = useFromStore({
+    path: `entityStore.entities.resources["${resourceId}"]`
+  });
+  const collection = useFromStore({
+    path: `entityStore.entities.resourceCollections["${resourceCollectionId}"]`
+  });
 
   const entity = resource ?? collection;
 
