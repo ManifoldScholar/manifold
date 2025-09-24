@@ -8,14 +8,14 @@ import * as Styled from "./styles";
 
 export default function CookiesForm() {
   const { t } = useTranslation();
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   const manifoldAnalyticsEnabled = !settings?.attributes?.general
     ?.disableInternalAnalytics;
   const googleAnalyticsEnabled = !!settings?.attributes?.integrations
     ?.gaFourTrackingId;
 
-  const { currentUser } = useFromStore("authentication") ?? {};
+  const { currentUser } = useFromStore({ path: "authentication" }) ?? {};
   const { consentManifoldAnalytics, consentGoogleAnalytics } =
     currentUser.attributes ?? {};
 
