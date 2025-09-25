@@ -1,16 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import includes from "lodash/includes";
 import debounce from "lodash/debounce";
-import { resourceCollectionsAPI } from "api";
 import ResourceMediaFactory from "frontend/components/resource/media/Factory";
-import { resourceCollectionsAPI } from "api";
-import { entityStoreActions } from "actions";
 import SlidePlaceholder from "./SlidePlaceholder";
 import Footer from "./Footer";
 import * as Styled from "./styles";
-
-const { request } = entityStoreActions;
 
 class ResourceSlideshow extends PureComponent {
   static displayName = "ResourceSlideshow";
@@ -18,7 +12,7 @@ class ResourceSlideshow extends PureComponent {
   static propTypes = {
     collectionResources: PropTypes.array,
     pagination: PropTypes.object,
-    dispatch: PropTypes.func,
+    setPageNumber: PropTypes.func,
     resourceCollection: PropTypes.object.isRequired,
     hideDetailUrl: PropTypes.bool,
     hideDownload: PropTypes.bool,
@@ -39,7 +33,6 @@ class ResourceSlideshow extends PureComponent {
     // ordered by collection_resource position
     this.state = {
       position: 1,
-      loadedPages: [1],
       map: {},
       totalCount: 0,
       slideDirection: "left"
@@ -54,19 +47,11 @@ class ResourceSlideshow extends PureComponent {
     this.debouncedScroll = debounce(this.bindScroll, 100);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps) {
     const nextState = {};
     if (nextProps.pagination.totalCount > 0) {
       nextState.totalCount = nextProps.pagination.totalCount;
     }
-
-    const loadedPages = prevState.loadedPages.slice(0);
-    const page = nextProps.pagination.currentPage;
-    if (!includes(loadedPages, page)) {
-      loadedPages.push(page);
-      nextState.loadedPages = loadedPages;
-    }
-
     return nextState === {} ? null : nextState;
   }
 
@@ -126,14 +111,8 @@ class ResourceSlideshow extends PureComponent {
 
   handleUnloadedSlide = position => {
     const page = this.positionToPage(position, this.props.pagination.perPage);
-    if (!this.isPageLoaded(page)) {
-      const fetch = resourceCollectionsAPI.collectionResources(
-        this.props.resourceCollection.id,
-        {},
-        { number: page, size: this.props.pagination.perPage }
-      );
-      this.props.dispatch(request(fetch));
-    }
+    if (!page) return;
+    this.props.setPageNumber(page);
   };
 
   handleSlidePrev = () => {
@@ -170,10 +149,6 @@ class ResourceSlideshow extends PureComponent {
 
   positionToPage(position, perPage) {
     return Math.ceil(position / perPage);
-  }
-
-  isPageLoaded(page) {
-    return includes(this.state.loadedPages, page);
   }
 
   current() {
