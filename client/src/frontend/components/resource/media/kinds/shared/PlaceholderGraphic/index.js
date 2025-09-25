@@ -20,7 +20,10 @@ function ResourceMediaPlaceholderGraphic({ resource, isCollection, loading }) {
           </>
         ) : (
           <>
-            <Styled.ResourceIcon size={120} icon={resource.attributes.kind} />
+            <Styled.ResourceIcon
+              size={120}
+              icon={loading ? "image" : resource.attributes.kind}
+            />
             <Styled.Kind>
               {loading ? t("common.loading") : resource.attributes.kind}
             </Styled.Kind>
