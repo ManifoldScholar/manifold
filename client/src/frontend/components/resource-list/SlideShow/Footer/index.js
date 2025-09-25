@@ -21,11 +21,13 @@ export default function Footer({
 
   return (
     <Styled.Footer>
-      <Badge
-        kind={resource.attributes.kind}
-        position={position}
-        count={totalCount}
-      />
+      {loaded && (
+        <Badge
+          kind={resource.attributes.kind}
+          position={position}
+          count={totalCount}
+        />
+      )}
       {resourceCount > 0 && (
         <>
           <Styled.Pagination>
