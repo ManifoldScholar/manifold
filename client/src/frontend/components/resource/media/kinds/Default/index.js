@@ -3,8 +3,8 @@ import ThumbnailImage from "../shared/ThumbnailImage";
 import PlaceholderGraphic from "../shared/PlaceholderGraphic";
 import * as Styled from "./styles";
 
-function ResourceMediaDefault({ resource }) {
-  const { variantThumbnailStyles } = resource.attributes;
+function ResourceMediaDefault({ resource, loading }) {
+  const { variantThumbnailStyles } = resource?.attributes ?? {};
   const src = variantThumbnailStyles?.largeLandscape;
 
   return (
@@ -12,7 +12,7 @@ function ResourceMediaDefault({ resource }) {
       {src ? (
         <ThumbnailImage src={src} />
       ) : (
-        <PlaceholderGraphic resource={resource} />
+        <PlaceholderGraphic resource={resource} loading={loading} />
       )}
     </Styled.Wrapper>
   );
