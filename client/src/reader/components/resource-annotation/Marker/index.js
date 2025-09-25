@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useContext } from "react";
+import { useState, useCallback, useEffect, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
@@ -66,16 +66,20 @@ export default function Marker({ annotation }) {
 
   const icon = `resource${capitalize(kind)}64`;
 
-  const handleClick = useCallback(
-    e => {
-      e.preventDefault();
-
-      const dialogProps = resource
+  const dialogProps = useMemo(
+    () =>
+      resource
         ? { id: resourceId, type: "resource" }
-        : { id: resourceCollectionId, type: "resourceCollection" };
-      openDialog(dialogProps);
+        : { id: resourceCollectionId, type: "resourceCollection" },
+    [resource, resourceId, resourceCollectionId]
+  );
+
+  const handleClick = useCallback(
+    props => e => {
+      e.preventDefault();
+      openDialog(props);
     },
-    [openDialog, resource, resourceId, resourceCollectionId]
+    [openDialog]
   );
 
   const resourceTitle =
@@ -89,7 +93,7 @@ export default function Marker({ annotation }) {
       <Styled.Marker
         $active={id === activeAnnotation}
         data-annotation-notation={id}
-        onClick={handleClick}
+        onClick={handleClick(dialogProps)}
         onMouseEnter={() => setActiveAnnotation(id)}
         onMouseLeave={() => setActiveAnnotation(null)}
       >
@@ -99,7 +103,7 @@ export default function Marker({ annotation }) {
       <MobileMarker
         id={id}
         icon={icon}
-        handleClick={handleClick}
+        handleClick={handleClick(dialogProps)}
         setActiveAnnotation={setActiveAnnotation}
         accesibleTitle={accesibleTitle}
       />
