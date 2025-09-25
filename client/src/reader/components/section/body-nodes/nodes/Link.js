@@ -34,7 +34,7 @@ class LinkNode extends Component {
       return true;
     } catch (_) {
       // return false for relative links; otherwise treat malformed URLs as absolute
-      return !this.href.startsWith("/");
+      return !(this.href.startsWith("/") || this.href.startsWith("#"));
     }
   }
 
