@@ -1,5 +1,5 @@
 import ResourcePreview from "frontend/components/resource/Preview";
-import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow";
+import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow/Fetcher";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
@@ -20,14 +20,10 @@ export default function ResourceBlock({ annotation }) {
   if (resourceCollection)
     return (
       <Styled.Block data-annotation-resource-unselectable>
-        <p>WIP Resource collection annotation</p>
-        {/* // TODO wire up resource collection slideshow
         <ResourceCollectionSlideshow
           resourceCollection={resourceCollection}
-          collectionResources={resourceCollection.relationships.resources}
-          pagination={slideshowResourcesMeta.pagination}
-          dispatch={dispatch}
-        /> */}
+          fetchKey={`reader-collection-slideshow-${resourceCollection.id}`}
+        />
       </Styled.Block>
     );
 
