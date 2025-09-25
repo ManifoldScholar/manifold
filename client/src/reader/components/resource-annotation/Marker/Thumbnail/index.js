@@ -106,6 +106,14 @@ export default function Thumbnail({
 
   const { t } = useTranslation();
 
+  const dialogProps = useMemo(
+    () =>
+      resource
+        ? { id: resourceId, type: "resource" }
+        : { id: resourceCollectionId, type: "resourceCollection" },
+    [resource, resourceId, resourceCollectionId]
+  );
+
   if (!entity) return null;
 
   const {
@@ -130,7 +138,7 @@ export default function Thumbnail({
         $active: active,
         onMouseEnter,
         onMouseLeave,
-        onClick: handleClick
+        onClick: handleClick(dialogProps)
       };
 
   return (
