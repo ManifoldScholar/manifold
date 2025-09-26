@@ -83,14 +83,28 @@ function DrawerContent(props, ref) {
 
   const handleBlur = e => {
     if (focusTrap || !ref?.current) return;
-    if (ref.current.contains(event.relatedTarget)) return;
+    if (ref.current.contains(e.relatedTarget)) return;
 
     if (hasConfirm) {
       const overlay = document.getElementById("global-overlay-container");
-      if (overlay.contains(event.relatedTarget)) return;
+      if (overlay.contains(e.relatedTarget)) return;
     }
 
     handleLeaveEvent(e);
+  };
+
+  const drawerProps = {
+    ref,
+    className: classes,
+    id,
+    role: "dialog",
+    tabIndex: focusTrap ? -1 : undefined,
+    "aria-modal": focusTrap,
+    "aria-label": ariaLabel,
+    "aria-labelledby": headerId,
+    onBlur: handleBlur,
+    $fullHeight: focusTrap,
+    inert: !open ? "" : undefined
   };
 
   const inner = (
@@ -110,36 +124,25 @@ function DrawerContent(props, ref) {
     </Inner>
   );
 
-  return (
-    <Drawer
-      key="drawer"
-      className={classes}
-      id={id}
-      role="dialog"
-      aria-modal={focusTrap}
-      aria-label={ariaLabel}
-      aria-labelledby={headerId}
-      ref={ref}
-      onBlur={handleBlur}
-      $fullHeight={focusTrap}
-      inert={!open ? "" : undefined}
+  return focusTrap && lockScroll ? (
+    <FocusTrap
+      active={open}
+      focusTrapOptions={{
+        checkCanFocusTrap,
+        allowOutsideClick: context === "reader",
+        clickOutsideDeactivates: handleClickOutside,
+        escapeDeactivates: handleEscape,
+        returnFocusOnDeactivate,
+        fallbackFocus: ref
+      }}
     >
-      {focusTrap && lockScroll ? (
-        <FocusTrap
-          active={open}
-          focusTrapOptions={{
-            checkCanFocusTrap,
-            allowOutsideClick: context === "reader",
-            clickOutsideDeactivates: handleClickOutside,
-            escapeDeactivates: handleEscape,
-            returnFocusOnDeactivate
-          }}
-        >
-          {inner}
-        </FocusTrap>
-      ) : (
-        inner
-      )}
+      <Drawer key="drawer" {...drawerProps}>
+        {inner}
+      </Drawer>
+    </FocusTrap>
+  ) : (
+    <Drawer key="drawer" {...drawerProps}>
+      {inner}
     </Drawer>
   );
 }
