@@ -28,6 +28,7 @@ class Project < ApplicationRecord
   include TimestampScopes
   include WithConfigurableAvatar
   include HasKeywordSearch
+  include ManifoldOAIRecordSource
 
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :restricted_access_body, include_wrap: false
@@ -323,6 +324,12 @@ class Project < ApplicationRecord
 
   def resource_tags
     unsorted_resources.joins(:tags).distinct.pluck("tags.name")
+  end
+
+  def should_have_oai_record?
+    return false if draft?
+
+    super
   end
 
   def sorted_resource_tags
