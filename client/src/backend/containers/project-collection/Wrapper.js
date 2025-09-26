@@ -1,6 +1,8 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
 import connectAndFetch from "utils/connectAndFetch";
 import { collectionProjectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -11,6 +13,7 @@ import size from "lodash/size";
 import lh from "helpers/linkHandler";
 import classnames from "classnames";
 import HeadContent from "global/components/HeadContent";
+import IconComposer from "global/components/utility/IconComposer";
 import withConfirmation from "hoc/withConfirmation";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { fluidScale } from "theme/styles/mixins";
@@ -312,18 +315,39 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
               className="container"
               style={{ marginBlockStart: fluidScale("30px", "20px") }}
             >
-              {this.hasProjectCollections && (
-                <>
-                  <ProjectCollection.List
-                    projectCollection={projectCollection}
-                    projectCollections={projectCollections}
-                    onCollectionSelect={this.handleCollectionSelect}
-                    onCollectionOrderChange={this.handleCollectionOrderChange}
-                    onToggleVisibility={this.handleToggleVisibility}
-                  />
-                  {this.props.renderLiveRegion("alert")}
-                </>
-              )}
+              <aside className="aside-wide project-collection-list">
+                {this.hasProjectCollections && (
+                  <>
+                    <ProjectCollection.List
+                      projectCollection={projectCollection}
+                      projectCollections={projectCollections}
+                      onCollectionSelect={this.handleCollectionSelect}
+                      onCollectionOrderChange={this.handleCollectionOrderChange}
+                      onToggleVisibility={this.handleToggleVisibility}
+                    />
+                    {this.props.renderLiveRegion("alert")}
+                  </>
+                )}
+                <div className="actions">
+                  <Link
+                    className="button-icon-secondary button-icon-secondary--full"
+                    to={lh.link("backendProjectCollectionsNew")}
+                  >
+                    <IconComposer
+                      icon="plus16"
+                      size={20}
+                      className={classNames(
+                        "button-icon-secondary__icon",
+                        "button-icon-secondary__icon--large"
+                      )}
+                    />
+                    <span>{t("project_collections.create_collection")}</span>
+                  </Link>
+                </div>
+                <p className="instructional-copy">
+                  {t("project_collections.create_collection_instructions")}
+                </p>
+              </aside>
               <div className="panel">
                 {this.hasProjectCollections && (
                   <ProjectCollection.Header
