@@ -42,5 +42,10 @@ export const getLinkOrButtonProps = action => {
     };
   }
 
-  return { as: "button", disabled: action.disabled, onClick: action.onClick };
+  return {
+    as: "button",
+    disabled: action.disabled,
+    onClick: action.onClick,
+    type: "button"
+  };
 };
