@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useFromStore } from "hooks";
 import Button from "global/components/atomic/Button";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
@@ -16,7 +17,11 @@ const BUTTON_STYLE_PROPS = {
 function ResourcePreviewEditorActions({ resource }) {
   const { t } = useTranslation();
 
-  const { project } = resource.relationships;
+  const project = useFromStore({
+    action: "grab",
+    entityType: "projects",
+    id: resource.attributes.projectId
+  });
 
   return (
     <Styled.List>

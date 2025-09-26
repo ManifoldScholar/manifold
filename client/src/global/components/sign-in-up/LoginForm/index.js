@@ -61,15 +61,15 @@ export default function LoginForm({
 
   return (
     <div>
-      {willRedirect && (
-        <Styled.NotificationsWrapper>
+      <Styled.NotificationsWrapper>
+        {willRedirect && (
           <Notifications
             scope="authentication"
             style="drawer"
             animate={false}
           />
-        </Styled.NotificationsWrapper>
-      )}
+        )}
+      </Styled.NotificationsWrapper>
       <div>
         <SharedStyles.Form
           name="global-login"

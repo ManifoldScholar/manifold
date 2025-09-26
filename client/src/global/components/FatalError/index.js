@@ -23,6 +23,7 @@ class FatalError extends PureComponent {
     headerLineTwo: PropTypes.string,
     dismiss: PropTypes.func,
     dispatch: PropTypes.func,
+    redirectPath: PropTypes.string,
     i18n: PropTypes.object
   };
 
@@ -48,10 +49,18 @@ class FatalError extends PureComponent {
     return this.error && this.type === fatalErrorActions.types.authorization;
   }
 
+  get isReadError() {
+    return has(this.error, "method") && this.error.method === "GET";
+  }
+
   get isProjectAuthorizationError() {
-    if (!this.isAuthorizationError) return false;
-    if (has(this.error, "method") && this.error.method !== "GET") return false;
+    if (!this.isAuthorizationError || !this.isReadError) return false;
     return has(this.error, "project.id");
+  }
+
+  get shouldRedirectToLogin() {
+    if (!this.isAuthorizationError || !this.isReadError) return false;
+    return true;
   }
 
   get apiTrace() {
@@ -93,13 +102,34 @@ class FatalError extends PureComponent {
     );
   }
 
+  renderLoginRedirect() {
+    console.log(this.props.redirectPath);
+    if (!this.props.redirectPath) return;
+
+    return (
+      <Redirect
+        to={{
+          pathname: "/login",
+          search: `?redirect_uri=${this.props.redirectPath}`
+        }}
+      />
+    );
+  }
+
   render() {
     if (!this.props.fatalError) return null;
     if (this.isProjectAuthorizationError)
       return this.renderProjectAuthorizationRedirect();
+    console.log(this.props.something);
+
+    if (this.shouldRedirectToLogin) return this.renderLoginRedirect();
     const { error } = this.props.fatalError;
     const showDetail = config.environment.isDevelopment;
     const t = this.props.i18n.t;
+
+    console.log("fatalError");
+    console.log({ error });
+    console.log(this.isAuthorizationError);
 
     return (
       <HelmetProvider>

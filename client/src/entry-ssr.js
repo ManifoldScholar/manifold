@@ -110,7 +110,9 @@ const render = async (req, res, store) => {
       const state = store.getState();
       if (has(state, "fatalError.error.status")) {
         res.statusCode = state.fatalError.error.status;
-        const errorComponent = <FatalError fatalError={state.fatalError} />;
+        const errorComponent = (
+          <FatalError fatalError={state.fatalError} redirectPath={req.url} />
+        );
         renderString = fatalErrorOutput(errorComponent, store);
       }
 

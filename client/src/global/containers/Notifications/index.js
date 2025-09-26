@@ -108,7 +108,7 @@ export class NotificationsComponent extends Component {
   };
 
   render() {
-    return (
+    return this.filteredNotifications?.length ? (
       <section className="notifications-container" role="alert">
         <div
           ref={notificationList => {
@@ -130,7 +130,7 @@ export class NotificationsComponent extends Component {
           ))}
         </div>
       </section>
-    );
+    ) : null;
   }
 }
 
