@@ -1,12 +1,22 @@
 import styled from "@emotion/styled";
 import { respond, subtitlePrimary, fluidScale } from "theme/styles/mixins";
 
-export const Container = styled.div`
+export const Container = styled.header`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding-block-end: ${fluidScale("42px", "26px")};
+  gap: var(--_spacing);
   text-decoration: none;
+
+  @container (max-inline-size: 500px) {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  + * {
+    --Media-margin-block-start: 12px;
+    --Media-margin-block-start: min(1.5cqi, 12px);
+  }
 `;
 
 export const Icon = styled.figure`
@@ -21,30 +31,38 @@ export const Icon = styled.figure`
 `;
 
 export const TitleAndToggle = styled.div`
+  flex-grow: 1;
   display: flex;
+  align-items: baseline;
 `;
 
 export const Title = styled.h1`
-  font-family: var(--font-family-heading);
-  width: 100%;
+  inline-size: fit-content;
   margin: 0;
-  margin-block-end: 5px;
+  font-variant: none;
   font-size: 26px;
+  font-family: var(--font-family-heading);
   font-weight: var(--font-weight-medium);
+  line-height: var(--line-height);
   hyphens: none;
+  color: var(--strong-color);
 
   ${respond(`width: auto;`, 60)}
+
+  &:is(h2, h3) {
+    font-size: ${fluidScale("23px", "17px")};
+  }
 `;
 
 export const ToggleWrapper = styled.span`
   margin-inline-start: 12px;
-  transform: translateY(5px);
+  transform: translateY(4px);
+  line-height: 0;
 `;
 
-export const DateWrapper = styled.span`
+export const DateWrapper = styled.p`
   ${subtitlePrimary}
-  display: inline-block;
-  width: 100%;
+  flex-basis: 100%;
   font-size: ${fluidScale("20px", "16px")};
   margin-block-start: 12px;
 

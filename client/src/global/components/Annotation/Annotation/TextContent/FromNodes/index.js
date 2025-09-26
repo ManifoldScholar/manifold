@@ -28,9 +28,9 @@ function AnnotationWithNodes({
   );
 
   const { sectionId } = useParams();
-  const bodyJSON = useFromStore(
-    `entityStore.entities.textSections["${sectionId}"].attributes.bodyJSON`
-  );
+  const bodyJSON = useFromStore({
+    path: `entityStore.entities.textSections["${sectionId}"].attributes.bodyJSON`
+  });
 
   const length = selection?.replace("\n", " ")?.length;
   /* eslint-disable no-nested-ternary */
@@ -68,12 +68,12 @@ function AnnotationWithNodes({
   const nodesToRender =
     finalStack?.children ?? finalStack?.content ? [finalStack] : undefined;
 
-  const activeGroup = useFromStore(
-    `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`
-  );
-  const memberships = useFromStore(
-    `entityStore.entities.readingGroupMemberships`
-  );
+  const activeGroup = useFromStore({
+    path: `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`
+  });
+  const memberships = useFromStore({
+    path: `entityStore.entities.readingGroupMemberships`
+  });
   const membership =
     typeof memberships === "object"
       ? Object.keys(memberships)?.find(
@@ -94,7 +94,7 @@ function AnnotationWithNodes({
   };
 
   const adjustedEndChar =
-    subjectInSingleNode && textSplit
+    subjectInSingleNode && textSplit.current
       ? endChar - textSplit.current - 1
       : endChar;
 
@@ -108,7 +108,9 @@ function AnnotationWithNodes({
           annotationStyle,
           format: "annotation",
           ...annotation.attributes,
-          startChar: textSplit ? startChar - textSplit.current - 1 : startChar,
+          startChar: textSplit.current
+            ? startChar - textSplit.current - 1
+            : startChar,
           endChar: adjustedEndChar
         }
       }
