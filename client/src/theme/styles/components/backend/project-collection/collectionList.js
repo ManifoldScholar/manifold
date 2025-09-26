@@ -14,8 +14,6 @@ const ITEM_INNER_PADDING = 10;
 
 export default `
   .project-collection-list {
-    margin-top: -5px;
-
     &.aside-wide {
       display: block;
 
@@ -29,18 +27,17 @@ export default `
       )}
     }
 
+    .entity-list {
+      margin-top: -5px;
+    }
+
     .actions {
-      margin-top: 18px;
-      margin-bottom: 18px;
+      margin-block-end: clamp(18px, 3.333vw, 25px);
       margin-left: 0;
 
-      ${respond(
-        `
-          margin-top: 37px;
-          margin-bottom: 25px;
-        `,
-        75
-      )}
+      &:not(:first-child) {
+        margin-block-start: clamp(18px, 5vw, 25px);
+      }
 
       ${respond(
         `

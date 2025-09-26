@@ -34,20 +34,36 @@ export class ProjectCollectionDetail extends PureComponent {
     });
   };
 
-  drawerProps(props) {
+  drawerProps(props, padding = "default") {
     return {
       lockScroll: "always",
       size: "flexible",
-      padding: "large",
+      padding,
       closeUrl: lh.link("backendProjectCollection", props.projectCollection.id)
     };
   }
 
   render() {
-    const { collectionProjects, projectCollection, t } = this.props;
+    const { collectionProjects, projectCollection, t, route } = this.props;
 
     if (!projectCollection || !collectionProjects) return null;
     const projects = collectionProjects.map(cp => cp.relationships.project);
+
+    const manageProjectsRoute = {
+      ...route,
+      routes: [
+        route.routes.find(
+          r => r.name === "backendProjectCollectionManageProjects"
+        )
+      ]
+    };
+
+    const restRoutes = {
+      ...route,
+      routes: route.routes.filter(
+        r => r.name !== "backendProjectCollectionManageProjects"
+      )
+    };
 
     return (
       <Authorize
@@ -74,7 +90,12 @@ export class ProjectCollectionDetail extends PureComponent {
               {...this.props}
             />
           )}
-          {childRoutes(this.props.route, {
+          {childRoutes(manageProjectsRoute, {
+            childProps: this.props,
+            drawer: true,
+            drawerProps: this.drawerProps(this.props, "large")
+          })}
+          {childRoutes(restRoutes, {
             childProps: this.props,
             drawer: true,
             drawerProps: this.drawerProps(this.props)
