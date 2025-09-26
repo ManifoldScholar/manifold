@@ -578,6 +578,9 @@ GEM
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
+    omniauth-saml (2.2.4)
+      omniauth (~> 2.1)
+      ruby-saml (~> 1.18)
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
@@ -777,6 +780,9 @@ GEM
       rubocop-rspec (~> 3.5)
     ruby-next-core (1.2.0)
     ruby-progressbar (1.13.0)
+    ruby-saml (1.18.1)
+      nokogiri (>= 1.13.10)
+      rexml
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
@@ -986,6 +992,7 @@ DEPENDENCIES
   omniauth (~> 2.1.3)
   omniauth-facebook (~> 4.0.0)
   omniauth-google-oauth2 (~> 0.4)
+  omniauth-saml
   omniauth-twitter (~> 1.4.0)
   ostruct
   paleta (~> 0.3.0)
