@@ -101,11 +101,11 @@ export const Content = styled.div`
 export const ButtonGroup = styled.div`
   display: flex;
   gap: 24px;
-  padding-block-start: 36px;
+  padding-block-start: 48px;
 `;
 
 export const ListWrapper = styled.div`
-  padding-block: 1.25rem;
+  padding-block: 0.5rem;
   overflow: auto;
   flex-grow: 1;
   max-height: 47dvh;
