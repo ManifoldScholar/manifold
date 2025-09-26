@@ -1,10 +1,9 @@
 import { useId, useState, useMemo } from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { ingestionSourcesAPI } from "api";
 import { useParams } from "react-router-dom";
 import { useFetch, usePaginationState } from "hooks";
+import Button from "global/components/atomic/Button";
 import BrowseList from "./BrowseList";
 import * as Styled from "./styles";
 
@@ -14,8 +13,6 @@ export default function BrowseModal(props) {
   const { t } = useTranslation();
 
   const [active, setActive] = useState(null);
-
-  const buttonClasses = "button-secondary button-secondary--outlined";
 
   const onCancel = e => {
     e.preventDefault();
@@ -69,16 +66,20 @@ export default function BrowseModal(props) {
           format={format}
         />
         <Styled.ButtonGroup>
-          <button onClick={onAdd} className={buttonClasses} data-id="accept">
-            <span>{addLabel}</span>
-          </button>
-          <button
-            className={classNames(buttonClasses, "button-secondary--dull")}
+          <Button
+            onClick={onAdd}
+            data-id="accept"
+            label={addLabel}
+            size="md"
+            background="outline-accent"
+          />
+          <Button
             onClick={onCancel}
             data-id="reject"
-          >
-            <span>{t("actions.cancel")}</span>
-          </button>
+            label={t("actions.cancel")}
+            size="md"
+            background="outline"
+          />
         </Styled.ButtonGroup>
       </Styled.Content>
     </Styled.Modal>

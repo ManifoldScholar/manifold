@@ -155,7 +155,7 @@ export default `.entity-list {
       ${respond(
         `
           display: grid;
-          gap: 40px;
+          gap: 30px;
           grid-template-columns: repeat(
             auto-fill,
             minmax(165px, 1fr)
