@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Button from "global/components/atomic/Button";
 import BrowseModal from "./BrowseModal";
 
 export default function BrowseButton(props) {
@@ -9,15 +10,15 @@ export default function BrowseButton(props) {
 
   return (
     <>
-      <button
+      <Button
         onClick={e => {
           e.preventDefault();
           setIsOpen(true);
         }}
-        className="button-secondary button-secondary--outlined"
-      >
-        <span>Browse</span>
-      </button>
+        label="Browse"
+        size="md"
+        background="outline-accent"
+      />
       {isOpen && (
         <BrowseModal
           icon="Resource24"
