@@ -10,7 +10,7 @@ import {
 const GRID_BREAKPOINT = 80;
 
 export const IconWrapper = styled.div`
-  inline-size: 100px;
+  inline-size: 100%;
   block-size: 100px;
   display: flex;
   align-items: center;
@@ -83,10 +83,11 @@ export const Asset = styled.button`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: background-color var(--transition-duration-default) ease-out,
-    box-shadow var(--transition-duration-default) ease-out;
-  padding: 12px;
-  overflow: hidden;
+  gap: 8px;
+  transition-property: color, background-color, box-shadow;
+  transition-duration: var(--transition-duration-default);
+  transition-timing-function: ease-out;
+  padding: 20px;
   background: var(--color-base-neutral80);
   color: var(--strong-color);
 
@@ -119,8 +120,9 @@ export const Asset = styled.button`
       background-color: transparent;
       justify-content: space-between;
       gap: 24px;
+      padding: 12px 0;
       border-radius: 0;
-      border-top: 1px solid var(--color);
+      border-top: 1px solid var(--color-base-neutral75);
 
       &:hover,
       &:focus-visible {
@@ -141,8 +143,7 @@ export const Title = styled.span`
   font-size: 14px;
   font-weight: 400;
   word-break: break-all;
-  padding-block: 8px;
-  ⁨⁨⁨display: -webkit-box;
+  display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   text-overflow: ellipsis;
