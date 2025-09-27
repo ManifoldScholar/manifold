@@ -52,7 +52,7 @@ class ResourceSlideshow extends PureComponent {
     if (nextProps.pagination?.totalCount > 0) {
       nextState.totalCount = nextProps.pagination.totalCount;
     }
-    return nextState === {} ? null : nextState;
+    return !("totalCount" in nextState) ? null : nextState;
   }
 
   componentDidMount() {

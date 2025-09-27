@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const Footer = styled.footer`
   display: flex;
-  flex-direction: wrap;
+  flex-wrap: wrap;
   gap: 12px;
   justify-content: space-between;
 `;

@@ -14,6 +14,8 @@ export const List = styled.ul`
   @container (max-inline-size: 500px) {
     --_Button-min-inline-size: 100%;
 
+    flex-grow: 1;
+
     > li {
       flex-basis: 100%;
     }

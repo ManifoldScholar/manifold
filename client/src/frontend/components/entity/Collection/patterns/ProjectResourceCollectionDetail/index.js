@@ -6,7 +6,7 @@ import { requests } from "api";
 import ResourceList from "frontend/components/resource-list/List";
 import SlideShow from "frontend/components/resource-list/SlideShow/Fetcher";
 import Description from "frontend/components/resource-collection/Description";
-import Badge from "frontend/components/resource/Badge/Collection";
+import Badge from "frontend/components/resource-collection/Badge";
 import EntityCollection from "../../EntityCollection";
 import * as shapes from "../../shapes";
 import * as Styled from "./styles";

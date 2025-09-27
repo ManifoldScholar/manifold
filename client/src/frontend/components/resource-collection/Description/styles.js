@@ -14,5 +14,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 20px;
   font-family: var(--font-family-copy);
-  font-size: ${fluidScale("17px", "16px")};
+  font-size: ${fluidScale("16px", "14px")};
+
+  p {
+    margin: 0;
+    line-height: 1.56;
+    text-indent: 0;
+  }
 `;

@@ -4,6 +4,7 @@ import Button, { stylePropTypes } from "global/components/atomic/Button";
 
 export default function Share({
   title,
+  uri,
   size = "lg",
   shape = "rectangle",
   background = "outline-accent",
@@ -11,6 +12,7 @@ export default function Share({
 }) {
   const { disabled, canRender, onClick, icon, label, srLabel } = useShare({
     title,
+    uri,
     size
   });
 
@@ -33,5 +35,6 @@ Share.displayName = "Resource.Detail.Share";
 
 Share.propTypes = {
   title: PropTypes.string.isRequired,
+  uri: PropTypes.string.isRequired,
   ...stylePropTypes
 };
