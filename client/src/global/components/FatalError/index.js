@@ -29,8 +29,8 @@ export default function FatalError(props) {
   return (
     <HelmetProvider>
       <Helmet title={`${error.status} Error: ${error.heading}`} />
-      <GlobalStyles styles={styles} />
-      <Styled.Body className="browse">
+      {!contained && <GlobalStyles styles={styles} />}
+      <Styled.Body className={!contained ? "browse" : undefined}>
         <Styled.Wrapper $contained={contained}>
           <Styled.Inner>
             <Styled.Container>
