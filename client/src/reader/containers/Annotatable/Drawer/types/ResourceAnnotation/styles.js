@@ -30,7 +30,7 @@ export const Label = styled.span`
   display: block;
   ${utilityPrimary}
   padding-block-end: 12px;
-  font-size: 14px;
+  font-size: 12px;
 `;
 
 export const TabList = styled(Tabs.TabList)`

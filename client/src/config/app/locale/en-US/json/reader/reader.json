@@ -127,7 +127,7 @@
     "resource_drawer": {
       "header": "2. Select a Resource",
       "create_tab_label": "Create New",
-      "description": "Description text goes here...",
+      "description": "Choose an existing resource or resource collection, or create a new resource for your annotation.",
       "tabs_header": "Resource Type"
     }
   }

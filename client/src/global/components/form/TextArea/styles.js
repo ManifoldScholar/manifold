@@ -46,7 +46,7 @@ export const TextAreaSecondary = styled(TextAreaBase)`
   border-radius: var(--box-border-radius);
 
   .reader & {
-    border-color: var(--color-base-neutral70);
+    border-color: var(--select-border-color);
   }
 
   ${respond(
