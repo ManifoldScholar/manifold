@@ -10,7 +10,7 @@ function ResourcePreview({
   resource,
   resourceCollection,
   titleAs = "h2",
-  hideDetailLink
+  hideDetailLink = false
 }) {
   return (
     <Styled.Wrapper>
