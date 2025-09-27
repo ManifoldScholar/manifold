@@ -5,6 +5,7 @@ import useFromStore from "./useFromStore";
 
 export default function useShare({
   title,
+  uri,
   urlTextFragment,
   shareOnly = false,
   appendDefaultTitle = true,
@@ -42,11 +43,14 @@ export default function useShare({
   const appendedTitle =
     headTitle && appendDefaultTitle ? `${title} | ${headTitle}` : title;
 
-  const baseUrl = window.location.toString();
+  const baseUrl = uri
+    ? new URL(uri, window.location.origin)
+    : new URL(window.location);
+  const url = baseUrl.toString();
   const { status, fragment } = urlTextFragment ?? {};
-  const url = status === 0 ? urlWithTextFragment(baseUrl, fragment) : baseUrl;
+  const finalUrl = status === 0 ? urlWithTextFragment(url, fragment) : url;
 
-  const shareData = { title: appendedTitle, url };
+  const shareData = { title: appendedTitle, url: finalUrl };
 
   /* eslint-disable */
   const onShare = async () => {
