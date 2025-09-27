@@ -42,20 +42,21 @@ function Overlay({
 
   return (
     <BodyClass className={open ? "no-scroll overlay" : ""}>
-      <div
-        className={appearance || "overlay-full"}
-        ref={overlayRef}
-        id={id}
-        role="dialog"
-        aria-modal
-        aria-labelledby={headerId}
-        inert={!open ? "" : undefined}
+      <FocusTrap
+        active={open}
+        focusTrapOptions={{
+          escapeDeactivates: e => handleCloseEvent(e),
+          fallbackFocus: overlayRef
+        }}
       >
-        <FocusTrap
-          active={open}
-          focusTrapOptions={{
-            escapeDeactivates: e => handleCloseEvent(e)
-          }}
+        <div
+          className={appearance || "overlay-full"}
+          ref={overlayRef}
+          id={id}
+          role="dialog"
+          aria-modal
+          aria-labelledby={headerId}
+          inert={!open ? "" : undefined}
         >
           <div>
             <Header
@@ -70,8 +71,8 @@ function Overlay({
               {children}
             </div>
           </div>
-        </FocusTrap>
-      </div>
+        </div>
+      </FocusTrap>
     </BodyClass>
   );
 }
