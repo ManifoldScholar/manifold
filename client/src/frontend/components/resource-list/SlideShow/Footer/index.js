@@ -6,6 +6,7 @@ import Description from "frontend/components/resource/Description";
 import UserActions from "frontend/components/resource/Preview/UserActions";
 import PageIcon from "./PageIcon";
 import * as Styled from "./styles";
+import * as StyledTitle from "frontend/components/resource/Title/styles";
 
 export default function Footer({
   resource,
@@ -21,13 +22,11 @@ export default function Footer({
 
   return (
     <Styled.Footer>
-      {loaded && (
-        <Badge
-          kind={resource.attributes.kind}
-          position={position}
-          count={totalCount}
-        />
-      )}
+      <Badge
+        kind={loaded ? resource.attributes.kind : "Loading…"}
+        position={position}
+        count={totalCount}
+      />
       {resourceCount > 0 && (
         <>
           <Styled.Pagination>
@@ -71,7 +70,11 @@ export default function Footer({
           </Styled.Actions>
         </>
       ) : (
-        <></>
+        <Styled.Meta>
+          <StyledTitle.TitleAndToggle>
+            <StyledTitle.Title as="h3">Loading…</StyledTitle.Title>
+          </StyledTitle.TitleAndToggle>
+        </Styled.Meta>
       )}
     </Styled.Footer>
   );

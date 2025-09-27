@@ -17,6 +17,8 @@ export default function ResourceAnnotationDialog({
     path: `entityStore.entities.${resource.type}s.${resource.id}`
   });
 
+  if (!resourceEntity) return null;
+
   const renderPreview =
     resource.type === "resourceCollection" ? (
       <ResourceCollectionSlideshow
