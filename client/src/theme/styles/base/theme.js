@@ -44,7 +44,7 @@ export default `
     --drawer-bg-color: var(--background-color);
     --dropzone-bg-color: var(--color-base-neutral30);
     --select-bg-color: transparent;
-    --select-border-color: currentColor;
+    --select-border-color: var(--color-base-neutral50);
     --button-bg-color: var(--color-base-neutral10);
     --button-dull-bg-color: var(--color-base-neutral30);
     --button-tertiary-bg-color: var(--color-accent-primary-pale);
