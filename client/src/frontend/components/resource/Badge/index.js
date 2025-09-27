@@ -3,7 +3,13 @@ import { useTranslation } from "react-i18next";
 import IconComputed from "global/components/icon-computed";
 import * as Styled from "./styles";
 
-function ResourceBadge({ kind, position, count, showKindOnly = false }) {
+function ResourceBadge({
+  kind,
+  position,
+  count,
+  showKindOnly = false,
+  showCountOnly = false
+}) {
   const { t } = useTranslation();
 
   return (
@@ -18,10 +24,12 @@ function ResourceBadge({ kind, position, count, showKindOnly = false }) {
             : t("glossary.resource_one")}
         </span>
       )}
-      <Styled.Kind>
-        <IconComputed.Resource icon={kind} size={20} />
-        <span>{kind}</span>
-      </Styled.Kind>
+      {!showCountOnly && (
+        <Styled.Kind>
+          <IconComputed.Resource icon={kind} size={20} />
+          <span>{kind}</span>
+        </Styled.Kind>
+      )}
     </Styled.Wrapper>
   );
 }
@@ -32,7 +40,8 @@ ResourceBadge.propTypes = {
   kind: PropTypes.string.isRequired,
   position: PropTypes.number,
   count: PropTypes.number,
-  showKindOnly: PropTypes.bool
+  showKindOnly: PropTypes.bool,
+  showCountOnly: PropTypes.bool
 };
 
 export default ResourceBadge;
