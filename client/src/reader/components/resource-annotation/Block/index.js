@@ -1,6 +1,6 @@
 import { useContext, useCallback } from "react";
 import ResourcePreview from "frontend/components/resource/Preview";
-import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow/Fetcher";
+import ResourceCollectionPreview from "frontend/components/resource-collection/Preview";
 import { useFromStore } from "hooks";
 import { ResourceMarkerContext } from "../Marker/context";
 import * as Styled from "./styles";
@@ -28,9 +28,10 @@ export default function ResourceBlock({ annotation }) {
   if (resourceCollection)
     return (
       <Styled.Block data-annotation-resource-unselectable>
-        <ResourceCollectionSlideshow
+        <ResourceCollectionPreview
           resourceCollection={resourceCollection}
-          fetchKey={`reader-collection-slideshow-${resourceCollection.id}`}
+          textId={annotation?.textId}
+          destroyAnnotation={handleDestroy}
         />
       </Styled.Block>
     );
