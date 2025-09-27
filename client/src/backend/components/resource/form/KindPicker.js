@@ -28,26 +28,24 @@ class KindPicker extends PureComponent {
 
   renderSelect(kindList, id) {
     return (
-      <>
+      <Styled.SelectWrapper $only={!this.props.includeButtons}>
         <Form.Label id={id} label={this.props.t("resources.new.kind")} />
-        <Styled.SelectWrapper $only={this.props.includeButtons}>
-          <FormSelect
-            onChange={event => {
-              this.set(event.target.value);
-            }}
-            value={this.props.getModelValue("attributes[kind]").toLowerCase()}
-            options={kindList.map(kind => {
-              const safeKind = kind.toLowerCase();
-              const translatedKind = this.props.t(`resources.new.${safeKind}`);
-              return {
-                value: safeKind,
-                label: translatedKind,
-                key: safeKind
-              };
-            })}
-          />
-        </Styled.SelectWrapper>
-      </>
+        <FormSelect
+          onChange={event => {
+            this.set(event.target.value);
+          }}
+          value={this.props.getModelValue("attributes[kind]").toLowerCase()}
+          options={kindList.map(kind => {
+            const safeKind = kind.toLowerCase();
+            const translatedKind = this.props.t(`resources.new.${safeKind}`);
+            return {
+              value: safeKind,
+              label: translatedKind,
+              key: safeKind
+            };
+          })}
+        />
+      </Styled.SelectWrapper>
     );
   }
 
