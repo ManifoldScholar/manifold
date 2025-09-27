@@ -83,8 +83,7 @@
       "caption_placeholder": "Enter a short description",
       "download_label": "Allow download?",
       "save": "Save Resource",
-      "thumbnail": "Thumbnail",
-      "thumbnail_instructions": "Displayed in resource annotation blocks and in lists.",
+      "thumbnail": "Featured Image",
       "featured_image": "Featured Image (Optional)",
       "url": "URL",
       "url_placeholder": "Enter resource URL"
