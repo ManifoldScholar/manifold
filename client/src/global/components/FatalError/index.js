@@ -7,7 +7,6 @@ import { Global as GlobalStyles } from "@emotion/react";
 import has from "lodash/has";
 import isEqual from "lodash/isEqual";
 import config from "config";
-import { notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import styles from "theme/styles/globalStyles";
 import ApiTrace from "./ApiTrace";
@@ -20,8 +19,7 @@ export default function FatalError(props) {
     headerLineOne,
     headerLineTwo,
     dismiss,
-    redirectPath,
-    dispatch
+    redirectPath
   } = props;
 
   const { t } = useTranslation();
@@ -59,26 +57,13 @@ export default function FatalError(props) {
 
   const renderProjectAuthorizationRedirect = () => {
     const url = lh.link("frontendProjectDetail", error.project.slug);
-    if (dispatch) {
-      dispatch(
-        notificationActions.addNotification({
-          id: "projectAuthorizationError",
-          level: 2,
-          heading: t("messages.project_authorization_warning.heading"),
-          body: t("errors.authorization"),
-          scope: "authentication"
-        })
-      );
-    }
-
     return (
       <Redirect
         to={{
           pathname: url,
           state: {
             showLogin: true,
-            postLoginRedirect: redirectPath,
-            setIsRedirecting: true
+            postLoginRedirect: redirectPath
           }
         }}
       />
@@ -177,6 +162,5 @@ FatalError.propTypes = {
   headerLineOne: PropTypes.string,
   headerLineTwo: PropTypes.string,
   dismiss: PropTypes.func,
-  redirectPath: PropTypes.string,
-  dispatch: PropTypes.func
+  redirectPath: PropTypes.string
 };
