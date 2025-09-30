@@ -102,6 +102,13 @@ const render = async (req, res, store) => {
     ch.error("Server-side render failed in server-react.js");
     const errorComponent = exceptionRenderer(renderError);
     renderString = fatalErrorOutput(errorComponent, store);
+
+    /* Handle unauthorized redirects here since we aren't inside the app <Router> */
+    if (
+      req.method === "GET" &&
+      (renderError.status === 401 || renderError.status === 403)
+    )
+      routingContext.url = `/login?redirect_uri=${req.url}`;
   } finally {
     // Redirect if the routing context has a url prop.
     if (routingContext.url) {
