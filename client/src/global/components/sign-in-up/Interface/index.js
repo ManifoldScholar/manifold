@@ -29,7 +29,10 @@ export default function SignInUpInterface({
 
   const [view, setView] = useState(defaultView);
 
-  const willRedirect = !!location?.state?.postLoginRedirect;
+  const searchParams = new URLSearchParams(location?.search);
+  const redirectUri = searchParams.get("redirect_uri");
+
+  const willRedirect = !!location?.state?.postLoginRedirect || !!redirectUri;
 
   const updateView = (newView, e) => {
     if (e) e.preventDefault();
