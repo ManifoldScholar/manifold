@@ -7,7 +7,8 @@ import locationHelper from "helpers/location";
 class FatalErrorBoundary extends Component {
   static propTypes = {
     children: PropTypes.node,
-    location: PropTypes.object
+    location: PropTypes.object,
+    dispatch: PropTypes.func
   };
 
   constructor(props) {
@@ -58,7 +59,12 @@ class FatalErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <FatalError dismiss={this.clearError} fatalError={this.fatalError} />
+        <FatalError
+          dismiss={this.clearError}
+          fatalError={this.fatalError}
+          redirectPath={this.props.location.pathname}
+          dispatch={this.props.dispatch}
+        />
       );
     }
 
