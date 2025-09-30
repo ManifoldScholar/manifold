@@ -53,7 +53,8 @@ export class ReaderContainer extends Component {
       const { promise: one } = dispatch(request(textCall, requests.rText));
       promises.push(one);
     }
-    return Promise.all(promises);
+    /*  Catch errors here, so project redirects work correctly */
+    return Promise.all(promises).catch(e => console.error(e));
   };
 
   static mapStateToProps = (state, ownProps) => {
