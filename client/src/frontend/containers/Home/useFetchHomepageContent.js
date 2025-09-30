@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useFetch } from "hooks";
+import { useFetch, useAuthentication } from "hooks";
 import {
   projectCollectionsAPI,
   journalsAPI,
@@ -8,6 +8,8 @@ import {
 } from "api";
 
 export default function useFetchHomepageContent(fetchProjects) {
+  const authentication = useAuthentication();
+
   const collectionFilters = useMemo(
     () => ({
       visibleOnHomepage: true,
@@ -42,18 +44,18 @@ export default function useFetchHomepageContent(fetchProjects) {
 
   const { data: collectionsData, loaded: collectionsLoaded } = useFetch({
     request: [projectCollectionsAPI.index, collectionFilters],
-    withAuthDependency: true,
+    dependencies: [authentication.authenticated],
     condition: !fetchProjects
   });
 
   const { data: journalsData, loaded: journalsLoaded } = useFetch({
     request: [journalsAPI.index, journalFilters],
-    withAuthDependency: true
+    dependencies: [authentication.authenticated]
   });
 
   const { data: features, loaded: featuresLoaded } = useFetch({
     request: [featuresAPI.index, featuresFilters],
-    withAuthDependency: true
+    dependencies: [authentication.authenticated]
   });
 
   const loaded =
