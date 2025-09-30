@@ -63,9 +63,6 @@ class ManifoldContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.gaInitialized = false;
-    this.state = {
-      isRedirecting: false
-    };
   }
 
   componentDidUpdate(prevProps, prevStateIgnored) {
@@ -88,8 +85,6 @@ class ManifoldContainer extends PureComponent {
       this.userJustLoggedIn(prevProps.authentication, this.props.authentication)
     )
       this.doPostLogin();
-
-    if (this.state.isRedirecting) this.state.isRedirecting = false;
   }
 
   componentDidMount() {
@@ -156,7 +151,6 @@ class ManifoldContainer extends PureComponent {
   }
 
   doPostLogout() {
-    this.state.isRedirecting = true;
     this.reload();
   }
 
@@ -214,8 +208,7 @@ class ManifoldContainer extends PureComponent {
             active={this.props.visibility.signInUpOverlay}
             hideOverlay={hideOverlay}
           />
-          {/* Add isRedirecting check here to ensure that FatalError doesn't trigger another redirect before we've finished navigating home on logout */}
-          {fatalError.error && !this.state.isRedirecting ? (
+          {fatalError.error ? (
             <div className="global-container">
               <FatalError
                 fatalError={fatalError}
