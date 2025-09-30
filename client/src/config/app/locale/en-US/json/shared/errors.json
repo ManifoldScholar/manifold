@@ -35,6 +35,7 @@
     "section_reorder": "There was an error updating the section order. This list has been reset.",
     "toc_reorder": "There was an error updating the TOC order. This list has been reset",
     "invalid_html_save": "HTML is invalid. Fix errors indicated in editor and try saving again.",
-    "invalid_html_switch": "HTML is invalid. Fix errors indicated in editor before switching to RTE mode."
+    "invalid_html_switch": "HTML is invalid. Fix errors indicated in editor before switching to RTE mode.",
+    "authorization": "The content you requested is restricted to authorized users. Please login to proceed. After logging in, you will be automatically redirected."
   }
 }
