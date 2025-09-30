@@ -1,9 +1,11 @@
+import { useRef } from "react";
 import PropTypes from "prop-types";
 import { Redirect, useHistory } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Global as GlobalStyles } from "@emotion/react";
 import has from "lodash/has";
+import isEqual from "lodash/isEqual";
 import config from "config";
 import { notificationActions } from "actions";
 import lh from "helpers/linkHandler";
@@ -25,7 +27,21 @@ export default function FatalError(props) {
   const { t } = useTranslation();
   const history = useHistory();
 
+  const prevError = useRef();
+
   if (!error) return null;
+
+  /* I would like to hanlde this a better way but can't think of one that
+     doesn't involve significant component reorganization. When a user hits
+     renderProjectAuthorizationRedirect below when trying to access a reader route,
+     the Manifold Container renders multiple times before the error is cleared from
+     the redux store, which causes this component to hit that redirect multiple times
+     and we loose the original route as the redirect path. Blocking render here when
+     error is unchanged prevents the extra redirect.
+  */
+  if (isEqual(error, prevError.current)) return null;
+
+  prevError.current = error;
 
   const defaultHeaders = {
     headerLineOne: t("errors.fatal.heading_line_one"),
@@ -47,8 +63,10 @@ export default function FatalError(props) {
       dispatch(
         notificationActions.addNotification({
           id: "projectAuthorizationError",
-          level: 1,
-          heading: t("messages.project_authorization_warning.heading")
+          level: 2,
+          heading: t("messages.project_authorization_warning.heading"),
+          body: t("errors.authorization"),
+          scope: "authentication"
         })
       );
     }
@@ -57,7 +75,11 @@ export default function FatalError(props) {
       <Redirect
         to={{
           pathname: url,
-          state: { projectAuthorizationError: error }
+          state: {
+            showLogin: true,
+            postLoginRedirect: redirectPath,
+            setIsRedirecting: true
+          }
         }}
       />
     );
