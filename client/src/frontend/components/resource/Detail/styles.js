@@ -208,3 +208,8 @@ export const EmptyMessage = styled.p`
   padding-block: 30px;
   font-family: var(--font-family-heading);
 `;
+
+export const LoginButton = styled.button`
+  ${buttonUnstyled}
+  text-decoration: underline;
+`;
