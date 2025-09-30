@@ -63,7 +63,6 @@ class FatalErrorBoundary extends Component {
           dismiss={this.clearError}
           fatalError={this.fatalError}
           redirectPath={this.props.location.pathname}
-          dispatch={this.props.dispatch}
         />
       );
     }
