@@ -724,7 +724,8 @@ CREATE TABLE public.project_collections (
     social_description text,
     social_title text,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    short_description text
+    short_description text,
+    exclude_from_oai boolean DEFAULT false
 );
 
 
@@ -796,7 +797,8 @@ CREATE TABLE public.projects (
     marked_for_purge_at timestamp without time zone,
     social_image_data jsonb,
     social_description text,
-    social_title text
+    social_title text,
+    exclude_from_oai boolean DEFAULT false
 );
 
 
@@ -1028,8 +1030,8 @@ CREATE TABLE public.journal_issues (
     journal_id uuid NOT NULL,
     journal_volume_id uuid,
     creator_id uuid,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     number character varying DEFAULT ''::character varying NOT NULL,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     sort_title integer DEFAULT 0 NOT NULL,
     pending_sort_title integer
 );
@@ -1833,6 +1835,52 @@ CREATE TABLE public.makers (
     avatar_data jsonb,
     prefix character varying,
     cached_full_name character varying
+);
+
+
+--
+-- Name: manifold_oai_records; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_records (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    oai_dc_content text,
+    deleted_at timestamp without time zone,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: manifold_oai_set_links; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_set_links (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    manifold_oai_set_id uuid NOT NULL,
+    manifold_oai_record_id uuid NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: manifold_oai_sets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_sets (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    spec public.citext NOT NULL,
+    name text NOT NULL,
+    description text,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -3737,6 +3785,30 @@ ALTER TABLE ONLY public.makers
 
 
 --
+-- Name: manifold_oai_records manifold_oai_records_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_records
+    ADD CONSTRAINT manifold_oai_records_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: manifold_oai_set_links manifold_oai_set_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_set_links
+    ADD CONSTRAINT manifold_oai_set_links_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: manifold_oai_sets manifold_oai_sets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_sets
+    ADD CONSTRAINT manifold_oai_sets_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: notification_preferences notification_preferences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5074,6 +5146,41 @@ CREATE INDEX index_legacy_favorites_on_user_id ON public.legacy_favorites USING 
 --
 
 CREATE INDEX index_makers_sort_by_name ON public.makers USING btree ((((COALESCE(last_name, ''::character varying))::text || (COALESCE(first_name, ''::character varying))::text)));
+
+
+--
+-- Name: index_manifold_oai_records_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_records_on_source ON public.manifold_oai_records USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_set_links_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_set_links_on_source ON public.manifold_oai_set_links USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_set_links_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_set_links_uniqueness ON public.manifold_oai_set_links USING btree (manifold_oai_set_id, manifold_oai_record_id);
+
+
+--
+-- Name: index_manifold_oai_sets_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_sets_on_source ON public.manifold_oai_sets USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_sets_on_spec; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_sets_on_spec ON public.manifold_oai_sets USING btree (spec);
 
 
 --
@@ -6635,6 +6742,14 @@ ALTER TABLE ONLY public.reading_group_texts
 
 
 --
+-- Name: manifold_oai_set_links fk_rails_0dab76c54d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_set_links
+    ADD CONSTRAINT fk_rails_0dab76c54d FOREIGN KEY (manifold_oai_set_id) REFERENCES public.manifold_oai_sets(id) ON DELETE CASCADE;
+
+
+--
 -- Name: reading_group_composite_entries fk_rails_0f7148b7ff; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6904,6 +7019,14 @@ ALTER TABLE ONLY public.reading_group_texts
 
 ALTER TABLE ONLY public.import_selection_matches
     ADD CONSTRAINT fk_rails_614cdd326b FOREIGN KEY (import_selection_id) REFERENCES public.import_selections(id) ON DELETE CASCADE;
+
+
+--
+-- Name: manifold_oai_set_links fk_rails_61f6bce33f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_set_links
+    ADD CONSTRAINT fk_rails_61f6bce33f FOREIGN KEY (manifold_oai_record_id) REFERENCES public.manifold_oai_records(id) ON DELETE CASCADE;
 
 
 --
@@ -7753,6 +7876,11 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250530205742'),
 ('20250603192547'),
 ('20250609191642'),
-('20250609192241');
+('20250609192241'),
+('20250715233614'),
+('20250718200409'),
+('20250718201018'),
+('20250721212242'),
+('20250729212944');
 
 
