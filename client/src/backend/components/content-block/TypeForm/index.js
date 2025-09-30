@@ -38,7 +38,7 @@ export class ProjectContentTypeForm extends PureComponent {
   setDefaults() {
     const key = this.type.split("::")?.[1]?.replace("Block", "");
     const defaults = key
-      ? unwrappedForDefaultAttrs[key].defaultAttributes
+      ? unwrappedForDefaultAttrs[key]?.defaultAttributes
       : null;
     if (!defaults) return null;
     Object.keys(defaults).forEach(attr =>
