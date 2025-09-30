@@ -106,6 +106,14 @@ class ManifoldContainer extends PureComponent {
       return Boolean(this.props.location.state.postLoginRedirect);
   }
 
+  get routeRedirectUriParam() {
+    if (this.props.location.search) {
+      const searchParams = new URLSearchParams(this.props.location?.search);
+      const redirectUri = searchParams.get("redirect_uri");
+      return redirectUri;
+    }
+  }
+
   maybeShowLogin() {
     this.props.dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
   }
@@ -157,6 +165,9 @@ class ManifoldContainer extends PureComponent {
     if (this.routeStateRequestsPostLoginRedirect) {
       this.props.dispatch(notificationActions.removeAllNotifications());
       this.props.history.push(this.props.location.state.postLoginRedirect);
+    } else if (this.routeRedirectUriParam) {
+      this.props.dispatch(notificationActions.removeAllNotifications());
+      this.props.history.push(this.routeRedirectUriParam);
     }
   }
 
