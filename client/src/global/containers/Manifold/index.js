@@ -218,7 +218,6 @@ class ManifoldContainer extends PureComponent {
           {fatalError.error && !this.state.isRedirecting ? (
             <div className="global-container">
               <FatalError
-                dispatch={this.props.dispatch}
                 fatalError={fatalError}
                 redirectPath={this.props.location.pathname}
               />
