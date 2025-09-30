@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
 import { Trans, useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import CommentContainer from "global/containers/comment";
 import IconComposer from "global/components/utility/IconComposer";
-import lh from "helpers/linkHandler";
 import Hero from "../Hero";
 import LinkComponent from "../Link";
 import Meta from "../Meta";
@@ -11,11 +10,13 @@ import Title from "../Title";
 import VariantList from "../VariantList";
 import Share from "../Share";
 import Annotations from "./Annotations";
+import { uiVisibilityActions } from "actions";
 import * as Styled from "./styles";
 import * as StyledLink from "../Link/styles";
 
 export default function ResourceDetail({ resource, projectTitle }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   if (!resource) return null;
 
@@ -26,6 +27,9 @@ export default function ResourceDetail({ resource, projectTitle }) {
   const shareTitle = projectTitle
     ? `${attr.title} | ${projectTitle}`
     : attr.title;
+
+  const onLoginClick = () =>
+    dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
 
   return (
     <Styled.Container>
@@ -72,7 +76,9 @@ export default function ResourceDetail({ resource, projectTitle }) {
               <Styled.EmptyMessage>
                 <Trans
                   i18nKey="placeholders.comments.unauthenticated_full"
-                  components={[<Link to={lh.link("frontendLogin")} />]}
+                  components={[
+                    <Styled.LoginButton type="button" onClick={onLoginClick} />
+                  ]}
                 />
               </Styled.EmptyMessage>
             )}
