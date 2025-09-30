@@ -25,7 +25,7 @@ export default function useFetch({
   afterFetch,
   options = {},
   dependencies = [],
-  withAuthDependency = false,
+  refetchOnLogin = false,
   condition = true
 }) {
   const firstRun = useRef(true);
@@ -102,12 +102,18 @@ export default function useFetch({
 
   const authentication = useSelector(state => state.authentication);
 
-  const refetchDependencies = withAuthDependency
-    ? [
-        ...dependencies,
-        authentication.authenticated,
-        authentication.currentUser?.id
-      ]
+  /* Logging out redirects home, so there's no need to refetch on logout, and it
+     can lead to an auth error after the redirect home has already happened. So,
+     build in the logout check here.
+  */
+  const [authTrigger, setAuthTrigger] = useState(authentication.authenticated);
+
+  useEffect(() => {
+    if (authentication.authenticated && !authTrigger) setAuthTrigger(true);
+  }, [authentication.authenticated, authTrigger]);
+
+  const refetchDependencies = refetchOnLogin
+    ? [...dependencies, authTrigger]
     : dependencies;
 
   /* eslint-disable react-hooks/exhaustive-deps */

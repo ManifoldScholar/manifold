@@ -13,18 +13,17 @@ import useEntityHeadContent from "frontend/components/entity/useEntityHeadConten
 import some from "lodash/some";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import { useFetch, useCurrentUser } from "hooks";
+import { useFetch } from "hooks";
 
 export default function ResourceDetailContainer({
   project,
   journalBreadcrumbs
 }) {
   const { resourceId, resourceCollectionId } = useParams();
-  const currentUser = useCurrentUser() ?? { id: null };
   const { data: resource } = useFetch({
     request: [resourcesAPI.show, resourceId],
     options: { requestKey: requests.feResource },
-    dependencies: [currentUser.id]
+    refetchOnLogin: true
   });
   const { data: collection } = useFetch({
     request: [resourceCollectionsAPI.show, resourceCollectionId],
