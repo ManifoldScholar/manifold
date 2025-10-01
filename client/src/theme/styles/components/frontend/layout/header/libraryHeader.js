@@ -32,6 +32,19 @@ export default `
       }
     }
 
+    &__inner-preview {
+      ${headerContainerPrimary}
+      display: grid;
+      grid-template: "logo breadcrumbs hamburger" / 1fr auto 1fr;
+      width: 100%;
+      height: 100%;
+
+      ${respond(
+        `grid-template: 'logo site-nav . user-nav' / max-content max-content 1fr max-content;`,
+        82
+      )}
+    }
+
     .header-logo,
     .breadcrumb-list,
     .mobile-nav-toggle {
