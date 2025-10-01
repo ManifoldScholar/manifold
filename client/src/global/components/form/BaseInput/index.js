@@ -91,6 +91,37 @@ export class FormBaseInput extends PureComponent {
     return props.renderValue(props.value);
   }
 
+  renderInputComponent() {
+    const { id, idForError, idForInstructions } = this.props;
+
+    const InputComponent =
+      this.context?.styleType === "secondary"
+        ? Styled.SecondaryInput
+        : Styled.PrimaryInput;
+
+    return (
+      <InputComponent
+        ref={input => {
+          this.inputElement = input;
+        }}
+        id={id}
+        name={this.props.name}
+        disabled={this.props.isDisabled}
+        type={this.props.inputType ?? this.props.type}
+        placeholder={this.props.placeholder}
+        onChange={this.props.onChange}
+        onKeyDown={e => {
+          if (this.props.onKeyDown) this.props.onKeyDown(e, this.inputElement);
+        }}
+        value={this.renderValue(this.props)}
+        aria-describedby={`${idForError || ""} ${idForInstructions || ""}`}
+        autoComplete={this.props.autoComplete}
+        defaultValue={this.props.defaultValue}
+        required={this.props.required}
+      />
+    );
+  }
+
   render() {
     const {
       id,
@@ -107,11 +138,6 @@ export class FormBaseInput extends PureComponent {
     });
     const Wrapper = buttons ? Styled.WrapperWithActions : Errorable;
 
-    const InputComponent =
-      this.context?.styleType === "secondary"
-        ? Styled.SecondaryInput
-        : Styled.PrimaryInput;
-
     return (
       <Wrapper
         className={buttons ? undefined : fieldClasses}
@@ -126,26 +152,14 @@ export class FormBaseInput extends PureComponent {
           hasInstructions={isString(instructions)}
           styleType={this.context?.styleType}
         />
-        <InputComponent
-          ref={input => {
-            this.inputElement = input;
-          }}
-          id={id}
-          name={this.props.name}
-          disabled={this.props.isDisabled}
-          type={this.props.inputType ?? this.props.type}
-          placeholder={this.props.placeholder}
-          onChange={this.props.onChange}
-          onKeyDown={e => {
-            if (this.props.onKeyDown)
-              this.props.onKeyDown(e, this.inputElement);
-          }}
-          value={this.renderValue(this.props)}
-          aria-describedby={`${idForError || ""} ${idForInstructions || ""}`}
-          autoComplete={this.props.autoComplete}
-          defaultValue={this.props.defaultValue}
-          required={this.props.required}
-        />
+        {this.props.inputType === "color" ? (
+          <span className="ColorInput-wrapper">
+            {this.renderInputComponent()}
+            <span>{this.renderValue(this.props)}</span>
+          </span>
+        ) : (
+          this.renderInputComponent()
+        )}
         {buttons && this.renderButtons(buttons)}
         {this.props.instructions && (
           <Instructions
