@@ -36,19 +36,19 @@ Rails.application.configure do
       class: "Entitlements::CheckExpirationJob"
     },
     "uploads.expire_shrine_cache": {
-      cron: "* * 0 * *",
+      cron: "0 22 * * *",
       class: "ExpireShrineCacheJob"
     },
     "uploads.expire_tus_uploads": {
-      cron: "* * 0 * *",
+      cron: "0 23 * * *",
       class: "ExpireTusUploadsJob"
     },
     "notifications.enqueue_user_daily_digests": {
-      cron: "* 6 * * *",
+      cron: "0 6 * * *",
       class: "Notifications::EnqueueDigestsJob"
     },
     "notifications.enqueue_user_weekly_digests": {
-      cron: "* 6 * * 0",
+      cron: "0 6 * * 0",
       class: "Notifications::EnqueueDigestsJob"
     },
     "packaging.automate_text_exports": {
@@ -56,7 +56,7 @@ Rails.application.configure do
       class: "Texts::AutomateExportsJob"
     },
     "packaging.prune_text_exports": {
-      cron: "* 1 * * *",
+      cron: "0 1 * * *",
       class: "TextExports::PruneJob"
     },
     "packaging.prune_project_exports": {
@@ -64,7 +64,7 @@ Rails.application.configure do
       class: "ProjectExports::PruneJob"
     },
     "packaging.prune_bag_it_temporary_directory": {
-      cron: "* */4 * * *",
+      cron: "0 */4 * * *",
       class: "Packaging::BagItSpec::PruneTemporaryDirectoryJob"
     }
   }
