@@ -88,6 +88,8 @@ export class SettingsThemeContainer extends PureComponent {
                 placeholder="0"
                 instructions={t("settings.theme.offset_instructions")}
               />
+            </Form.FieldGroup>
+            <Form.FieldGroup label={t("settings.theme.colors_header")}>
               <Form.TextInput
                 label={t("settings.theme.accent_color_label")}
                 name="attributes[theme][accentColor]"
@@ -124,87 +126,6 @@ export class SettingsThemeContainer extends PureComponent {
                 label={t("settings.theme.typekit_label")}
                 name="attributes[theme][typekitId]"
                 placeholder={t("settings.theme.typekit_placeholder")}
-              />
-            </Form.FieldGroup>
-            <Form.FieldGroup label={t("settings.theme.top_bar_header")}>
-              <Form.TextInput
-                label={t("settings.theme.text_label")}
-                name="attributes[theme][topBarText]"
-                placeholder={t("settings.theme.text_placeholder")}
-              />
-              <Form.TextInput
-                label={t("settings.theme.color_label")}
-                name="attributes[theme][topBarColor]"
-                placeholder={t("settings.theme.color_placeholder")}
-                instructions={t("settings.theme.color_instructions")}
-              />
-              <Form.TextInput
-                label={t("settings.theme.top_bar_url_label")}
-                name="attributes[theme][topBarUrl]"
-                placeholder={t("settings.theme.top_bar_url_placeholder")}
-              />
-              <Form.Select
-                label={t("settings.theme.mode_label")}
-                name="attributes[theme][topBarMode]"
-                options={[
-                  {
-                    label: t("settings.theme.mode_options.disabled"),
-                    value: "disabled"
-                  },
-                  {
-                    label: t("settings.theme.mode_options.always"),
-                    value: "enforced"
-                  },
-                  {
-                    label: t("settings.theme.mode_options.standalone"),
-                    value: "enabled"
-                  }
-                ]}
-              />
-            </Form.FieldGroup>
-            <Form.FieldGroup label={t("settings.theme.content_signup_header")}>
-              <Form.TextInput
-                wide
-                label={t("settings.theme.string_signup_terms_header")}
-                name="attributes[theme][stringSignupTermsHeader]"
-              />
-              <Form.TextArea
-                wide
-                label={t("settings.theme.string_signup_terms_one")}
-                name="attributes[theme][stringSignupTermsOne]"
-              />
-              <Form.TextArea
-                wide
-                label={t("settings.theme.string_signup_terms_two")}
-                name="attributes[theme][stringSignupTermsTwo]"
-              />
-            </Form.FieldGroup>
-            <Form.FieldGroup
-              label={t("settings.theme.content_data_use_header")}
-            >
-              <Form.TextInput
-                wide
-                label={t("settings.theme.string_data_use_header")}
-                name="attributes[theme][stringDataUseHeader]"
-              />
-              <Form.TextArea
-                wide
-                label={t("settings.theme.string_data_use_copy")}
-                name="attributes[theme][stringDataUseCopy]"
-                instructions={t("settings.theme.data_use_copy_instructions")}
-              />
-              <Form.TextInput
-                wide
-                label={t("settings.theme.string_cookies_banner_header")}
-                name="attributes[theme][stringCookiesBannerHeader]"
-              />
-              <Form.TextArea
-                wide
-                label={t("settings.theme.string_cookies_banner_copy")}
-                name="attributes[theme][stringCookiesBannerCopy]"
-                instructions={t(
-                  "settings.theme.cookies_banner_copy_instructions"
-                )}
               />
             </Form.FieldGroup>
             <Form.Save text={t("settings.save")} />
