@@ -113,7 +113,7 @@
         "no_title": "Untitled #{{position}}",
         "unauthorized_create": "You are not allowed to create features.",
         "unauthorized_update": "You are not allowed to update features.",
-        "instructions": "This is an approximate preview of your feature. Foreground, background, and markdown will not be displayed until the feature is saved."
+        "instructions": "This is an approximate preview of your feature. Foreground and background images, and parsed markdown will not be displayed until the feature is saved."
       },
       "untitled_record": "Untitled #{{number}}",
       "new_header": "New Feature",

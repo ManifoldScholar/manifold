@@ -113,13 +113,8 @@ class FeatureDetailContainer extends PureComponent {
   previewableFeature(props) {
     const { session } = props;
     if (!session) return null;
-    const { source, dirty } = session;
-    const previewAttributes = {
-      ...source.attributes,
-      ...dirty.attributes
-    };
-    const preview = { ...source, attributes: previewAttributes };
-    return preview;
+    const { dirty } = session;
+    return dirty.attributes;
   }
 
   isNew(props) {
@@ -214,7 +209,11 @@ class FeatureDetailContainer extends PureComponent {
                     label={t("records.features.preview.section_title")}
                     instructions={t("records.features.preview.instructions")}
                   >
-                    <FrontendLayout.Splash feature={previewFeature} preview />
+                    <FrontendLayout.Splash
+                      feature={feature}
+                      preview
+                      previewAttrs={previewFeature}
+                    />
                   </Form.FieldGroup>
                 ) : null}
                 {this.renderRoutes()}

@@ -123,6 +123,7 @@ export default {
   ExportTargetsEdit: ExportTargets.Edit,
   SettingsWrapper: Settings.Wrapper,
   SettingsTheme: Settings.Theme,
+  SettingsContent: Settings.Content,
   SettingsIntegrations: Settings.Integrations,
   SettingsSubjectsList: Settings.Subjects.List,
   SettingsSubjectsNew: Settings.Subjects.New,
