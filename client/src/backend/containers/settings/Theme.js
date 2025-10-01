@@ -90,35 +90,31 @@ export class SettingsThemeContainer extends PureComponent {
               />
             </Form.FieldGroup>
             <Form.FieldGroup label={t("settings.theme.colors_header")}>
-              <Form.TextInput
+              <Form.ColorInput
                 label={t("settings.theme.accent_color_label")}
                 name="attributes[theme][accentColor]"
-                placeholder="#52e3ac"
+                defaultValue="#52e3ac"
                 instructions={t("settings.theme.accent_color_instructions")}
-                wide
               />
-              <Form.TextInput
+              <Form.ColorInput
                 label={t("settings.theme.foreground_color_label")}
                 name="attributes[theme][headerForegroundColor]"
-                placeholder="#ffffff"
+                defaultValue="#ffffff"
                 instructions={t("settings.theme.foreground_color_instructions")}
-                wide
               />
-              <Form.TextInput
+              <Form.ColorInput
                 label={t("settings.theme.active_foreground_color_label")}
                 name="attributes[theme][headerForegroundActiveColor]"
-                placeholder="#363636"
+                defaultValue="#363636"
                 instructions={t(
                   "settings.theme.active_foreground_color_instructions"
                 )}
-                wide
               />
-              <Form.TextInput
+              <Form.ColorInput
                 label={t("settings.theme.background_color_label")}
                 name="attributes[theme][headerBackgroundColor]"
-                placeholder="#696969"
+                defaultValue="#696969"
                 instructions={t("settings.theme.background_color_instructions")}
-                wide
               />
             </Form.FieldGroup>
             <Form.FieldGroup label={t("settings.theme.typography_header")}>
