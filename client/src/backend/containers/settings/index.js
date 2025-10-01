@@ -6,6 +6,7 @@ import Integrations from "./Integrations";
 import Email from "./Email";
 import Ingestion from "./Ingestion";
 import Subjects from "./subjects";
+import Content from "./Content";
 
 export default {
   Properties,
@@ -15,5 +16,6 @@ export default {
   Integrations,
   Email,
   Ingestion,
-  Subjects
+  Subjects,
+  Content
 };

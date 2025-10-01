@@ -1191,6 +1191,13 @@ const routes = {
           helper: () => "/backend/settings/theme"
         },
         {
+          name: "backendSettingsContent",
+          exact: true,
+          component: "SettingsContent",
+          path: "/backend/settings/content",
+          helper: () => "/backend/settings/content"
+        },
+        {
           name: "backendSettingsIntegrations",
           exact: true,
           component: "SettingsIntegrations",
