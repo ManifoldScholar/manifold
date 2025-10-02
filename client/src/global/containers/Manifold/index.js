@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import ColorScheme from "global/components/ColorScheme";
 import LoadingBar from "global/components/LoadingBar";
-import FatalError from "global/components/FatalError";
+import AppFatalError from "global/components/FatalError/AppWrapper";
 import SignInUp from "global/components/sign-in-up";
 import has from "lodash/has";
 import get from "lodash/get";
@@ -24,6 +24,7 @@ import { entityStoreActions } from "actions";
 import CookiesBanner from "global/components/CookiesBanner";
 import Utility from "global/components/utility";
 import { Helmet } from "react-helmet-async";
+import notifications from "./notifications";
 
 const { request } = entityStoreActions;
 const routes = getRoutes();
@@ -71,6 +72,7 @@ class ManifoldContainer extends PureComponent {
       if (activeEl) activeEl.blur();
       this.dispatchRouteUpdate();
       if (this.routeStateRequestsLogin) this.maybeShowLogin();
+      if (this.routeNotificationParam) this.doNotify();
     }
 
     if (
@@ -89,6 +91,7 @@ class ManifoldContainer extends PureComponent {
 
   componentDidMount() {
     this.maybeFetchReadingGroups();
+    if (this.routeNotificationParam) this.doNotify();
   }
 
   get routeStateRequestsLogin() {
@@ -99,6 +102,14 @@ class ManifoldContainer extends PureComponent {
   get routeStateRequestsPostLoginRedirect() {
     if (this.props.location.state)
       return Boolean(this.props.location.state.postLoginRedirect);
+  }
+
+  get routeNotificationParam() {
+    if (this.props.location.search) {
+      const searchParams = new URLSearchParams(this.props.location?.search);
+      const notificationId = searchParams.get("notification");
+      return notificationId;
+    }
   }
 
   get routeRedirectUriParam() {
@@ -131,6 +142,16 @@ class ManifoldContainer extends PureComponent {
 
   dispatchRouteUpdate() {
     this.props.dispatch(routingActions.update(this.props.location.state));
+  }
+
+  doNotify() {
+    const key = Object.keys(notifications).find(
+      n => notifications[n].id === this.routeNotificationParam
+    );
+    const notification = key ? notifications[key] : null;
+    if (!notification) return;
+
+    this.props.dispatch(notificationActions.addNotification(notification));
   }
 
   routeChanged(prevLocation, location) {
@@ -210,7 +231,7 @@ class ManifoldContainer extends PureComponent {
           />
           {fatalError.error ? (
             <div className="global-container">
-              <FatalError
+              <AppFatalError
                 fatalError={fatalError}
                 redirectPath={this.props.location.pathname}
               />
