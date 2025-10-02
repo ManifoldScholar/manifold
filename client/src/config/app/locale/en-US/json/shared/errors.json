@@ -36,6 +36,10 @@
     "toc_reorder": "There was an error updating the TOC order. This list has been reset",
     "invalid_html_save": "HTML is invalid. Fix errors indicated in editor and try saving again.",
     "invalid_html_switch": "HTML is invalid. Fix errors indicated in editor before switching to RTE mode.",
-    "authorization": "The content you requested is restricted to authorized users. Please login to proceed. After logging in, you will be automatically redirected."
+    "access_denied": {
+      "header": "Access Denied",
+      "authentication": "Please login to proceed. After logging in, you will be automatically redirected.",
+      "authorization": "You must be granted access to proceed."
+    }
   }
 }
