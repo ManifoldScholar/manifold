@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FatalError from "./index";
+import AppFatalError from "./AppWrapper";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import locationHelper from "helpers/location";
@@ -59,7 +59,7 @@ class FatalErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <FatalError
+        <AppFatalError
           dismiss={this.clearError}
           fatalError={this.fatalError}
           redirectPath={this.props.location.pathname}
