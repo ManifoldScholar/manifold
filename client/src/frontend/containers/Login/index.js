@@ -16,17 +16,17 @@ function LoginContainer({ projectBackLink }) {
   const notifiedRef = useRef(false);
 
   const notifyUnauthorized = useNotification(() => ({
-    id: "authorizationError",
+    id: "authenticationError",
     level: 2,
-    heading: "Access Denied",
-    body: t("errors.authorization"),
+    heading: t("errors.access_denied.header"),
+    body: t("errors.access_denied.authentication"),
     scope: "authentication"
   }));
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const redirectUri = searchParams.get("redirect_uri");
-    const shouldNotify = !!redirectUri || !location.state?.postLoginRedirect;
+    const shouldNotify = !!redirectUri || !!location.state?.postLoginRedirect;
 
     if (shouldNotify && !notifiedRef.current) {
       notifyUnauthorized();
