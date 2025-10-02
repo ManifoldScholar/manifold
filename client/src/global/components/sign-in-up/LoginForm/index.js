@@ -67,6 +67,7 @@ export default function LoginForm({
             scope="authentication"
             style="drawer"
             animate={false}
+            noDismiss
           />
         </Styled.NotificationsWrapper>
       )}
