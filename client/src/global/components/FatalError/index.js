@@ -1,13 +1,8 @@
-import { useRef } from "react";
 import PropTypes from "prop-types";
-import { Redirect, useHistory } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Global as GlobalStyles } from "@emotion/react";
-import has from "lodash/has";
-import isEqual from "lodash/isEqual";
 import config from "config";
-import lh from "helpers/linkHandler";
 import styles from "theme/styles/globalStyles";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
@@ -18,78 +13,15 @@ export default function FatalError(props) {
     fatalError: { error },
     headerLineOne,
     headerLineTwo,
-    dismiss,
-    redirectPath
+    dismiss
   } = props;
 
   const { t } = useTranslation();
-  const history = useHistory();
-
-  const prevError = useRef();
-
-  if (!error) return null;
-
-  /* I would like to hanlde this a better way but can't think of one that
-     doesn't involve significant component reorganization. When a user hits
-     renderProjectAuthorizationRedirect below when trying to access a reader route,
-     the Manifold Container renders multiple times before the error is cleared from
-     the redux store, which causes this component to hit that redirect multiple times
-     and we loose the original route as the redirect path. Blocking render here when
-     error is unchanged prevents the extra redirect.
-  */
-  if (isEqual(error, prevError.current)) return null;
-
-  prevError.current = error;
 
   const defaultHeaders = {
     headerLineOne: t("errors.fatal.heading_line_one"),
     headerLineTwo: t("errors.fatal.heading_line_two")
   };
-
-  const isAuthorizationError =
-    error.method === "GET" && (error.status === 403 || error.status === 401);
-
-  const isProjectAuthorizationError =
-    isAuthorizationError && has(error, "project.id");
-
-  const shouldRedirectToLogin =
-    isAuthorizationError && !isProjectAuthorizationError;
-
-  const renderProjectAuthorizationRedirect = () => {
-    const url = lh.link("frontendProjectDetail", error.project.slug);
-    return (
-      <Redirect
-        to={{
-          pathname: url,
-          state: {
-            showLogin: true,
-            postLoginRedirect: redirectPath
-          }
-        }}
-      />
-    );
-  };
-
-  const renderLoginRedirect = () => {
-    return (
-      <Redirect
-        to={{
-          pathname: "/login",
-          search: redirectPath ? `?redirect_uri=${redirectPath}` : undefined
-        }}
-      />
-    );
-  };
-
-  /* Ensure we don't attempt to render router components outside the router context.
-     Redirect to login when an error is caught in SSR and this component is rendered
-     outside of the App Container is handled separately in entry-ssr.js.
-  */
-  if (history) {
-    if (isProjectAuthorizationError)
-      return renderProjectAuthorizationRedirect();
-    if (shouldRedirectToLogin) return renderLoginRedirect();
-  }
 
   return (
     <HelmetProvider>
@@ -161,6 +93,5 @@ FatalError.propTypes = {
   }).isRequired,
   headerLineOne: PropTypes.string,
   headerLineTwo: PropTypes.string,
-  dismiss: PropTypes.func,
-  redirectPath: PropTypes.string
+  dismiss: PropTypes.func
 };
