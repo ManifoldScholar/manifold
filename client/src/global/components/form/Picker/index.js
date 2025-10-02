@@ -82,7 +82,7 @@ export class PickerComponent extends PureComponent {
     updateOptions: PropTypes.func,
     /* This function is used to transform an option, or the results of an       */
     /* options function into a label. By default, simply option values are cast */
-    /* to strings. Labels for resourceish options will generate the label from  */
+    /* to strings. Labels for resource options will generate the label from  */
     /* the type and ID attribute.                                               */
     optionToLabel: PropTypes.func,
     /* By default, whatever is passed in as an option is the value that's set   */

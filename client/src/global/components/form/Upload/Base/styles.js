@@ -27,7 +27,17 @@ export const Dropzone = styled(BaseDropzone)`
   max-width: var(--Dropzone-max-width, 350px);
   border: 1px solid var(--input-border-color);
   border-radius: var(--box-border-radius);
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  .reader & {
+    background-color: var(--box-medium-bg-color);
+    border-color: transparent;
+
+    &:hover {
+      border-color: var(--strong-color);
+      background-color: var(--box-weak-bg-color);
+    }
+  }
 `;
 
 export const AvatarBuilderDropzone = styled(BaseDropzone)`
@@ -43,6 +53,14 @@ export const Prompt = styled.span`
 
   &:hover {
     color: var(--hover-color);
+  }
+
+  .reader & {
+    color: var(--reader-color);
+
+    &:hover {
+      color: var(--reader-color);
+    }
   }
 `;
 

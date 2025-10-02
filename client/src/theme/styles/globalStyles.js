@@ -8,7 +8,7 @@ import utilityStyles from "./utility";
 import printStyles from "./print";
 
 export default css`
-@layer manifold, stylesheets;
+@layer manifold, custom-styles;
 
 @layer manifold {
   ${fonts}

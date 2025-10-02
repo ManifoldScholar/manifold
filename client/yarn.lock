@@ -2015,6 +2015,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@castiron/hooks@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@castiron/hooks@npm:3.1.0"
+  dependencies:
+    focus-trap: "npm:^6.6.0"
+  peerDependencies:
+    react: ">= 18.x"
+    react-dom: ">= 18.x"
+  checksum: 10c0/709389a9d678f3f917d490d172eef1a33ec4486160c166fe5fb051762aa56d7647e0eaacad57c33dd8ae2d63cdd19e903a9c9beea6d9862343ad8f6874ac5473
+  languageName: node
+  linkType: hard
+
 "@castiron/style-mixins@npm:^2.0.0":
   version: 2.0.0
   resolution: "@castiron/style-mixins@npm:2.0.0"
@@ -2201,6 +2213,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@floating-ui/core@npm:^1.7.2":
+  version: 1.7.2
+  resolution: "@floating-ui/core@npm:1.7.2"
+  dependencies:
+    "@floating-ui/utils": "npm:^0.2.10"
+  checksum: 10c0/ea5909ae1bfad6d8dd60ab893c7751fd974d96b25481d13805935a089b39881b4d69425a0a84cc74c82269d8b64ca0117c472fc83e425143bee1bb21b247de9c
+  languageName: node
+  linkType: hard
+
 "@floating-ui/dom@npm:^1.0.0":
   version: 1.6.13
   resolution: "@floating-ui/dom@npm:1.6.13"
@@ -2208,6 +2229,16 @@ __metadata:
     "@floating-ui/core": "npm:^1.6.0"
     "@floating-ui/utils": "npm:^0.2.9"
   checksum: 10c0/272242d2eb6238ffcee0cb1f3c66e0eafae804d5d7b449db5ecf904bc37d31ad96cf575a9e650b93c1190f64f49a684b1559d10e05ed3ec210628b19116991a9
+  languageName: node
+  linkType: hard
+
+"@floating-ui/dom@npm:^1.6.10":
+  version: 1.7.2
+  resolution: "@floating-ui/dom@npm:1.7.2"
+  dependencies:
+    "@floating-ui/core": "npm:^1.7.2"
+    "@floating-ui/utils": "npm:^0.2.10"
+  checksum: 10c0/1b2ad76dc7fe245a1bb406cd5b64a1316f2ec642aebaa4d1928b56ced6fe71046f089e3fef9340bab234645b6333546211e363a630a9e7cfca6bf5031c39e0cb
   languageName: node
   linkType: hard
 
@@ -2234,6 +2265,13 @@ __metadata:
     react: ">=17.0.0"
     react-dom: ">=17.0.0"
   checksum: 10c0/9ebc4e82af905cfafeb5cde1dfbc15a2541d4eaaf1e13fb6b8acbb9f0c3535a7c331b8dee3ab5bb03acb21716ee2ab155629a6c14c3227cf959bf8ad92594539
+  languageName: node
+  linkType: hard
+
+"@floating-ui/utils@npm:^0.2.10":
+  version: 0.2.10
+  resolution: "@floating-ui/utils@npm:0.2.10"
+  checksum: 10c0/e9bc2a1730ede1ee25843937e911ab6e846a733a4488623cd353f94721b05ec2c9ec6437613a2ac9379a94c2fd40c797a2ba6fa1df2716f5ce4aa6ddb1cf9ea4
   languageName: node
   linkType: hard
 
@@ -3712,6 +3750,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vidstack/react@npm:^1.12.13":
+  version: 1.12.13
+  resolution: "@vidstack/react@npm:1.12.13"
+  dependencies:
+    "@floating-ui/dom": "npm:^1.6.10"
+    media-captions: "npm:^1.0.4"
+  peerDependencies:
+    "@types/react": ^18.0.0 || ^19.0.0
+    react: ^18.0.0 || ^19.0.0
+  checksum: 10c0/b86f9ad1026b041eae54ba9f0840a826805252083bc6add75490ac243d316b19e937cf2e72db5a527193e1fb65adf73a1cd9ef58523559207947b7123dc4d11a
+  languageName: node
+  linkType: hard
+
 "@vue/compiler-core@npm:3.5.13":
   version: 3.5.13
   resolution: "@vue/compiler-core@npm:3.5.13"
@@ -3766,16 +3817,6 @@ __metadata:
   version: 3.5.13
   resolution: "@vue/shared@npm:3.5.13"
   checksum: 10c0/2c940ef907116f1c2583ca1d7733984e5705983ab07054c4e72f1d95eb0f7bdf4d01efbdaee1776c2008f79595963f44e98fced057f5957d86d57b70028f5025
-  languageName: node
-  linkType: hard
-
-"@wavesurfer/react@npm:^1.0.11":
-  version: 1.0.11
-  resolution: "@wavesurfer/react@npm:1.0.11"
-  peerDependencies:
-    react: ^18.2.0 || ^19.0.0
-    wavesurfer.js: ">=7.7.14"
-  checksum: 10c0/36d25cc63e7b01d5d2723c526a14dce8bef72c5e628fd7d18c8c0cd87e842f5d74b60450b8b8486bc67a4ad8b095ac0a101eff36e72c6657cc0f56f6cc9725d2
   languageName: node
   linkType: hard
 
@@ -7552,6 +7593,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"focus-trap@npm:^6.6.0":
+  version: 6.9.4
+  resolution: "focus-trap@npm:6.9.4"
+  dependencies:
+    tabbable: "npm:^5.3.3"
+  checksum: 10c0/f01986dac9f21b1091444b75125cf98e230c4263f5e8900b5264f68a1b6d7e35910fb42bbfa70cc9a7d98d7f9fd9d9303f4cb37bd09f35e076a82f51236807d1
+  languageName: node
+  linkType: hard
+
 "focus-trap@npm:^7.6.4":
   version: 7.6.4
   resolution: "focus-trap@npm:7.6.4"
@@ -10141,6 +10191,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.28.0"
     "@babel/preset-react": "npm:^7.27.1"
     "@babel/register": "npm:^7.27.1"
+    "@castiron/hooks": "npm:^3.1.0"
     "@castiron/style-mixins": "npm:^2.0.0"
     "@emotion/babel-plugin": "npm:^11.13.5"
     "@emotion/cache": "npm:^11.14.0"
@@ -10151,7 +10202,7 @@ __metadata:
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.6.1"
     "@types/react": "npm:^18.x"
     "@types/react-dom": "npm:^18.x"
-    "@wavesurfer/react": "npm:^1.0.11"
+    "@vidstack/react": "npm:^1.12.13"
     ace-builds: "npm:^1.x"
     actioncable: "npm:~5.0.7"
     autolinker: "npm:^4.1.5"
@@ -10256,7 +10307,6 @@ __metadata:
     usehooks-ts: "npm:^3.1.1"
     uuid: "npm:^11.x"
     wait-on: "npm:^8.0.4"
-    wavesurfer.js: "npm:^7.10.1"
     webpack: "npm:^5.x"
     webpack-cli: "npm:^6.x"
     webpack-dev-server: "npm:^5.x"
@@ -10290,6 +10340,13 @@ __metadata:
   version: 2.12.2
   resolution: "mdn-data@npm:2.12.2"
   checksum: 10c0/b22443b71d70f72ccc3c6ba1608035431a8fc18c3c8fc53523f06d20e05c2ac10f9b53092759a2ca85cf02f0d37036f310b581ce03e7b99ac74d388ef8152ade
+  languageName: node
+  linkType: hard
+
+"media-captions@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "media-captions@npm:1.0.4"
+  checksum: 10c0/62c6df2909b748284e929fe3d169548b42b91ea79374f67f89a313aa529395b024d5be82056613f3e88ebb2e4a86464f6c6a8d569bc7bae2f5542baa350031ba
   languageName: node
   linkType: hard
 
@@ -14771,6 +14828,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tabbable@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "tabbable@npm:5.3.3"
+  checksum: 10c0/c6cb54be76ecff7d0132fed77ff11cedf76a2ce320f55e350f70d8f68998227e72bc3f8b1ee5e7b02dbe4b4c2ef7b6fa43c3aea7cfa82ef06e7d23746df97a35
+  languageName: node
+  linkType: hard
+
 "tabbable@npm:^6.0.0, tabbable@npm:^6.2.0":
   version: 6.2.0
   resolution: "tabbable@npm:6.2.0"
@@ -15589,13 +15653,6 @@ __metadata:
     glob-to-regexp: "npm:^0.4.1"
     graceful-fs: "npm:^4.1.2"
   checksum: 10c0/ec60a5f0e9efaeca0102fd9126346b3b2d523e01c34030d3fddf5813a7125765121ebdc2552981136dcd2c852deb1af0b39340f2fcc235f292db5399d0283577
-  languageName: node
-  linkType: hard
-
-"wavesurfer.js@npm:^7.10.1":
-  version: 7.10.1
-  resolution: "wavesurfer.js@npm:7.10.1"
-  checksum: 10c0/1508373830bbfaaf89638cd38d8d8cb96bfdf2360ddaa74f397079b792624ccc6bc5f7c4914ba26d889b60a544eb1f8a5bef114500ff8fdeb0f1b16691e67cee
   languageName: node
   linkType: hard
 

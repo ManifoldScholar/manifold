@@ -8,7 +8,8 @@
       "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(glossary.page_title_case_one)",
       "return_to_reader": "Return to Reader",
       "manage_highlight": "Begin highlight; {{chunk}}; end highlight.",
-      "view_annotations": "Begin annotation; {{chunk}}; end annotation."
+      "view_annotations": "Begin annotation; {{chunk}}; end annotation.",
+      "open_resource_modal": "Open resource detail modal for {{title}}"
     },
     "menus": {
       "appearance": {
@@ -60,7 +61,9 @@
         "share_selection": "$t(actions.share) $t(glossary.selection_one) with external app",
         "follow_link": "Follow link",
         "copy": "Copy URL",
-        "copy_selection": "Copy link to selection"
+        "copy_selection": "Copy link to selection",
+        "remove_highlight": "Remove Highlight",
+        "copy_highlight": "Copy Highlight"
       },
       "visibility": {
         "all_reading_groups": "All $t(glossary.reading_group_title_case_other)",
@@ -103,6 +106,26 @@
       "instructions": "Administrators of this instance will be notified.",
       "placeholder": "Optionally, include a message about why you are reporting this content.",
       "message_input_label": "Message"
+    },
+    "resource_display": {
+      "header": "1. Choose a Display Style",
+      "instructions": "Please select how you would like this resource to display within your text.",
+      "inline": {
+        "title": "Inline",
+        "description": "A small button appears inline, after the annotated text. Thumbnail previews and titles will appear in the margins (or the footer for narrower screens)."
+      },
+      "block": {
+        "title": "Block",
+        "description": "A large preview block appears within the flow of the main text, just below the annotated portion. This larger preview includes metadata and controls.",
+        "selection_warning": "*Resource blocks can only be inserted at the end of a block element, such as a paragraph. If you'd like to display this resource as a block, adjust your selection so it extends to the end of a block."
+      },
+      "submit_label": "Next"
+    },
+    "resource_drawer": {
+      "header": "2. Select a Resource",
+      "create_tab_label": "Create New",
+      "description": "Description text goes here...",
+      "tabs_header": "Resource Type"
     }
   }
 }
