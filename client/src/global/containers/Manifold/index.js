@@ -148,8 +148,14 @@ class ManifoldContainer extends PureComponent {
     const key = Object.keys(notifications).find(
       n => notifications[n].id === this.routeNotificationParam
     );
-    const notification = key ? notifications[key] : null;
+    let notification = key ? notifications[key] : null;
     if (!notification) return;
+
+    if (this.props.location.state.notificationBody)
+      notification = {
+        ...notification,
+        body: this.props.location.state.notificationBody
+      };
 
     this.props.dispatch(notificationActions.addNotification(notification));
   }
