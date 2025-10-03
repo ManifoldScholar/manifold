@@ -20,6 +20,19 @@ export default function FatalErrorAppWrapper(props) {
 
   const prevError = useRef();
 
+  const loginNotification = useMemo(
+    () => ({
+      id: "authenticationError",
+      level: 2,
+      heading: t("errors.access_denied.header"),
+      body: t("errors.access_denied.authentication"),
+      scope: "authentication"
+    }),
+    [t]
+  );
+
+  const notifyLogin = useNotification(() => loginNotification);
+
   const unauthorizedNotification = useMemo(
     () => ({
       id: "authorizationError",
@@ -64,7 +77,10 @@ export default function FatalErrorAppWrapper(props) {
       state: routerState
     });
 
-    if (currentUser?.id) setTimeout(notifyUnauthorized, 500);
+    const notify = currentUser?.id
+      ? setTimeout(notifyUnauthorized, 500)
+      : notifyLogin;
+    notify();
   };
 
   const redirectAndNotify = () => {
