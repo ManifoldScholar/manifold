@@ -84,12 +84,8 @@ export class AuthorizeComponent extends PureComponent {
     this.props.dispatch(notificationActions.addNotification(error));
   }
 
-  redirectAndNotify({
-    redirectPath,
-    showLoginOverlay,
-    redirectUri,
-    notificationContent
-  }) {
+  redirectAndNotify({ redirectPath, postLoginUri, notificationContent }) {
+    const showLoginOverlay = !this.isAuthenticated && redirectPath !== "/login";
     if (showLoginOverlay) this.doNotify(notificationContent);
 
     this.props.history.push({
@@ -98,7 +94,7 @@ export class AuthorizeComponent extends PureComponent {
       search: this.isAuthenticated
         ? "?notification=authorizationError"
         : !showLoginOverlay
-        ? `?redirect_uri=${redirectUri}`
+        ? `?redirect_uri=${postLoginUri}`
         : undefined,
       state: {
         showLogin: showLoginOverlay,
@@ -109,14 +105,12 @@ export class AuthorizeComponent extends PureComponent {
 
   handleRedirect(props) {
     const redirectPath = this.redirectPath(props);
-    const showLoginOverlay = !this.isAuthenticated && redirectPath !== "/login";
-    const redirectUri = `${this.props.location.pathname}${this.props.location.search}`;
+    const postLoginUri = `${props.location.pathname}${props.location.search}`;
 
     if (redirectPath)
       return this.redirectAndNotify({
         redirectPath,
-        showLoginOverlay,
-        redirectUri,
+        postLoginUri,
         notificationContent: props.failureNotification
       });
   }
