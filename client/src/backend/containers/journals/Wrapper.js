@@ -10,9 +10,10 @@ export default function JournalsWrapper({ route }) {
     <Authorize
       ability="update"
       entity={["journal"]}
-      failureRedirectAndNotify={{
+      failureNotification={{
         body: t("journals.unauthorized")
       }}
+      failureRedirect
     >
       <div>
         <main id="skip-to-main" tabIndex={-1} className="backend-detail">
