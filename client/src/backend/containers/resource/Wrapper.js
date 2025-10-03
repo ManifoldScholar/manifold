@@ -149,9 +149,10 @@ export class ResourceWrapperContainer extends PureComponent {
       <div>
         <Authorize
           entity={resource}
-          failureRedirectAndNotify={{
+          failureNotification={{
             body: t("resources.unauthorized")
           }}
+          failureRedirect
           ability="update"
         >
           {subpage && (
