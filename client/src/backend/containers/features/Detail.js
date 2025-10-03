@@ -198,7 +198,7 @@ class FeatureDetailContainer extends PureComponent {
 
     return (
       <Authorize
-        failureFatalError={{
+        failureRedirectAndNotify={{
           body: t(`records.features.preview.unauthorized_${authProps.ability}`)
         }}
         {...authProps}

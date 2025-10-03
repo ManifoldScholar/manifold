@@ -68,7 +68,7 @@ export class ProjectCollectionDetail extends PureComponent {
     return (
       <Authorize
         entity={projectCollection}
-        failureFatalError={{
+        failureRedirectAndNotify={{
           detail: t("project_collections.unauthorized_edit")
         }}
         ability="update"
