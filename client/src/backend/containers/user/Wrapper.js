@@ -142,7 +142,7 @@ function UserWrapper({ match, route, history, confirm, location }) {
     <div>
       <Authorize
         entity={user}
-        failureFatalError={{
+        failureRedirectAndNotify={{
           detail: t("groups.unauthorized_edit")
         }}
         ability={["update"]}

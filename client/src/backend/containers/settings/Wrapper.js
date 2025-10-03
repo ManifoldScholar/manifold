@@ -27,7 +27,7 @@ export class SettingsWrapperContainer extends PureComponent {
     return (
       <Authorize
         entity="settings"
-        failureFatalError={{
+        failureRedirectAndNotify={{
           body: this.props.t("settings.unauthorized")
         }}
         ability="update"
