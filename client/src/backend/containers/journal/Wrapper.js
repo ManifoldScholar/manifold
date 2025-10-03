@@ -98,7 +98,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
     <div>
       <Authorize
         entity={journal}
-        failureFatalError={{
+        failureRedirectAndNotify={{
           detail: t("journals.unauthorized_edit")
         }}
         ability={["read"]}
