@@ -19,7 +19,7 @@ export default function ProjectsWrapper({ route }) {
     <Authorize
       ability="update"
       entity={["project"]}
-      failureFatalError={{
+      failureRedirectAndNotify={{
         body: t("projects.unauthorized")
       }}
     >
