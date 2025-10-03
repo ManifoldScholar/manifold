@@ -78,7 +78,7 @@ export default function FatalErrorAppWrapper(props) {
     });
 
     const notify = currentUser?.id
-      ? setTimeout(notifyUnauthorized, 500)
+      ? () => setTimeout(notifyUnauthorized, 500)
       : notifyLogin;
     notify();
   };
