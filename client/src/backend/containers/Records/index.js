@@ -26,9 +26,10 @@ class RecordsContainer extends PureComponent {
       <Authorize
         ability="update"
         entity={["user", "maker", "page", "feature", "exportTarget"]}
-        failureRedirectAndNotify={{
+        failureNotification={{
           body: this.props.t("records.unauthorized")
         }}
+        failureRedirect
       >
         {subpage && (
           <HeadContent

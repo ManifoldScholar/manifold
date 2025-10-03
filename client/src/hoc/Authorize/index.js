@@ -1,9 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import isString from "lodash/isString";
 import isPlainObject from "lodash/isPlainObject";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { notificationActions } from "actions";
 import Authorization from "helpers/authorization";
 import get from "lodash/get";
@@ -24,21 +23,13 @@ export class AuthorizeComponent extends PureComponent {
     ability: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     kind: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     successBehavior: PropTypes.oneOf(["hide", "show"]).isRequired,
-    failureRedirect: PropTypes.string,
+    failureRedirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     failureNotification: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.shape({
         heading: PropTypes.string,
         body: PropTypes.string,
         level: PropTypes.number
-      })
-    ]),
-    failureRedirectAndNotify: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.shape({
-        heading: PropTypes.string,
-        body: PropTypes.string,
-        detai: PropTypes.string
       })
     ]),
     children: PropTypes.node,
@@ -48,44 +39,20 @@ export class AuthorizeComponent extends PureComponent {
   static defaultProps = {
     successBehavior: "show",
     failureRedirect: null,
-    failureNotification: null,
-    failureFatalError: null
+    failureNotification: null
   };
 
   constructor(props) {
     super(props);
-    this.state = { redirect: false };
     this.authorization = new Authorization();
-  }
-
-  componentDidMount() {
-    this.maybeRedirectAndNotify(this.props);
-    this.maybeNotify(this.props);
-    if (this.maybeRedirect(this.props)) this.setState({ redirect: true });
-  }
-
-  componentDidUpdate() {
-    if (this.maybeRedirect(this.props)) this.setState({ redirect: true });
   }
 
   get isAuthenticated() {
     return get(this.props, "authentication.authenticated");
   }
 
-  maybeRedirect(props) {
-    if (!isString(props.failureRedirect)) return false;
-    return !this.authorization.authorize(props);
-  }
-
-  successBehavior(props) {
-    return props.successBehavior;
-  }
-
-  maybeRedirectAndNotify(props) {
-    if (
-      !!props.failureRedirectAndNotify &&
-      !this.authorization.authorize(props)
-    ) {
+  redirectPath(props) {
+    if (props.failureRedirect === true) {
       const pathKey = this.props.location.pathname.split("/")?.[1];
       const availableRedirects = [
         "projects/all",
@@ -93,35 +60,69 @@ export class AuthorizeComponent extends PureComponent {
         "journals/all",
         "groups"
       ];
-      const redirect = pathKey
+      return pathKey
         ? `/${availableRedirects.find(r => r.startsWith(pathKey))}`
         : "/";
-
-      return this.props.history.push({
-        pathname: redirect,
-        search: "?notification=authorizationError",
-        state: {
-          notificationBody:
-            props.failureRedirectAndNotify.detail ??
-            props.failureRedirectAndNotify.body
-        }
-      });
     }
+
+    if (typeof props.failureRedirect === "string") return props.failureRedirect;
+
+    return null;
   }
 
-  maybeNotify(props) {
-    if (!!props.failureNotification && !this.authorization.authorize(props)) {
-      let error = {
-        heading: "Access Denied.",
-        body: "Please login to proceed.",
-        level: 2,
-        scope: "authentication"
-      };
-      if (isPlainObject(props.failureNotification)) {
-        error = Object.assign(error, props.failureNotification);
-      }
-      props.dispatch(notificationActions.addNotification(error));
+  doNotify(failureNotification) {
+    let error = {
+      heading: "Access Denied.",
+      body:
+        "Please login to proceed. After logging in, you will be automatically redirected.",
+      level: 2,
+      scope: "authentication"
+    };
+    if (isPlainObject(failureNotification)) {
+      error = Object.assign(error, failureNotification);
     }
+    this.props.dispatch(notificationActions.addNotification(error));
+  }
+
+  redirectAndNotify({
+    redirectPath,
+    showLoginOverlay,
+    redirectUri,
+    notificationContent
+  }) {
+    if (showLoginOverlay) this.doNotify(notificationContent);
+
+    this.props.history.push({
+      pathname: redirectPath,
+      // eslint-disable-next-line no-nested-ternary
+      search: this.isAuthenticated
+        ? "?notification=authorizationError"
+        : !showLoginOverlay
+        ? `?redirect_uri=${redirectUri}`
+        : undefined,
+      state: {
+        showLogin: showLoginOverlay,
+        notificationBody: notificationContent?.body
+      }
+    });
+  }
+
+  handleRedirect(props) {
+    const redirectPath = this.redirectPath(props);
+    const showLoginOverlay = !this.isAuthenticated && redirectPath !== "/login";
+    const redirectUri = `${this.props.location.pathname}${this.props.location.search}`;
+
+    if (redirectPath)
+      return this.redirectAndNotify({
+        redirectPath,
+        showLoginOverlay,
+        redirectUri,
+        notificationContent: props.failureNotification
+      });
+  }
+
+  successBehavior(props) {
+    return props.successBehavior;
   }
 
   renderHide(props) {
@@ -135,21 +136,16 @@ export class AuthorizeComponent extends PureComponent {
   }
 
   render() {
-    if (this.state.redirect) {
-      const to = {
-        pathname: this.props.failureRedirect,
-        state: {
-          showLogin:
-            !this.isAuthenticated && this.props.failureRedirect !== "/login",
-          postLoginRedirect: `${this.props.location.pathname}${this.props.location.search}`
-        }
-      };
-      return <Redirect to={to} />;
-    }
+    const isAuthorized = this.authorization.authorize(this.props);
+    if (!isAuthorized && this.props.failureRedirect)
+      return this.handleRedirect(this.props);
+
     if (!this.props.children) return null;
+
     const successBehavior = this.successBehavior(this.props);
     if (successBehavior === "hide") return this.renderHide(this.props);
     if (successBehavior === "show") return this.renderShow(this.props);
+
     return null;
   }
 }
