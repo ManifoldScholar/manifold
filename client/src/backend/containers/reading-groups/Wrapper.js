@@ -10,7 +10,7 @@ export default function ReadingGroupsWrapper({ route }) {
     <Authorize
       ability="update"
       entity={["readingGroup"]}
-      failureFatalError={{
+      failureRedirectAndNotify={{
         body: t("readingGroup.unauthorized")
       }}
     >
