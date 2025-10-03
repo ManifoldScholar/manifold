@@ -300,7 +300,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       <Authorize
         ability="update"
         entity={["projectCollection"]}
-        failureFatalError={{
+        failureRedirectAndNotify={{
           detail: this.props.t("project_collections.unauthorized")
         }}
       >

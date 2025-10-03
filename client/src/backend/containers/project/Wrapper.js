@@ -141,7 +141,7 @@ export class ProjectWrapperContainer extends PureComponent {
     return (
       <Authorize
         entity={project}
-        failureFatalError={{
+        failureRedirectAndNotify={{
           detail: t("projects.unauthorized_edit")
         }}
         ability={["update", "manageResources"]}
