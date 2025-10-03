@@ -68,9 +68,10 @@ export class ProjectCollectionDetail extends PureComponent {
     return (
       <Authorize
         entity={projectCollection}
-        failureRedirectAndNotify={{
-          detail: t("project_collections.unauthorized_edit")
+        failureNotification={{
+          body: t("project_collections.unauthorized_edit")
         }}
+        failureRedirect
         ability="update"
       >
         <div>
