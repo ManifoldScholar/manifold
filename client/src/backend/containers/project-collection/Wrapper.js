@@ -300,9 +300,10 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       <Authorize
         ability="update"
         entity={["projectCollection"]}
-        failureRedirectAndNotify={{
-          detail: this.props.t("project_collections.unauthorized")
+        failureNotification={{
+          body: this.props.t("project_collections.unauthorized")
         }}
+        failureRedirect
       >
         <HeadContent
           title={`${pageTitle} | ${t("common.admin")}`}
