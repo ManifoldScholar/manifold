@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import isString from "lodash/isString";
 import isPlainObject from "lodash/isPlainObject";
 import { Redirect, withRouter } from "react-router-dom";
-import { fatalErrorActions, notificationActions } from "actions";
+import { notificationActions } from "actions";
 import Authorization from "helpers/authorization";
 import get from "lodash/get";
 
@@ -33,11 +33,12 @@ export class AuthorizeComponent extends PureComponent {
         level: PropTypes.number
       })
     ]),
-    failureFatalError: PropTypes.oneOfType([
+    failureRedirectAndNotify: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.shape({
         heading: PropTypes.string,
-        body: PropTypes.string
+        body: PropTypes.string,
+        detai: PropTypes.string
       })
     ]),
     children: PropTypes.node,
@@ -58,7 +59,7 @@ export class AuthorizeComponent extends PureComponent {
   }
 
   componentDidMount() {
-    this.maybeError(this.props);
+    this.maybeRedirectAndNotify(this.props);
     this.maybeNotify(this.props);
     if (this.maybeRedirect(this.props)) this.setState({ redirect: true });
   }
@@ -73,7 +74,6 @@ export class AuthorizeComponent extends PureComponent {
 
   maybeRedirect(props) {
     if (!isString(props.failureRedirect)) return false;
-    if (props.failureFatalError) return false;
     return !this.authorization.authorize(props);
   }
 
@@ -81,21 +81,31 @@ export class AuthorizeComponent extends PureComponent {
     return props.successBehavior;
   }
 
-  maybeError(props) {
-    if (!!props.failureFatalError && !this.authorization.authorize(props)) {
-      let error = {
-        heading: "Access Denied.",
-        body: "You do not have sufficient permissions to perform this action."
-      };
-      if (isPlainObject(props.failureFatalError)) {
-        error = Object.assign(error, props.failureFatalError);
-      }
-      props.dispatch(
-        fatalErrorActions.setFatalError(
-          error,
-          fatalErrorActions.types.authorization
-        )
-      );
+  maybeRedirectAndNotify(props) {
+    if (
+      !!props.failureRedirectAndNotify &&
+      !this.authorization.authorize(props)
+    ) {
+      const pathKey = this.props.location.pathname.split("/")?.[1];
+      const availableRedirects = [
+        "projects/all",
+        "backend/dashboard",
+        "journals/all",
+        "groups"
+      ];
+      const redirect = pathKey
+        ? `/${availableRedirects.find(r => r.startsWith(pathKey))}`
+        : "/";
+
+      return this.props.history.push({
+        pathname: redirect,
+        search: "?notification=authorizationError",
+        state: {
+          notificationBody:
+            props.failureRedirectAndNotify.detail ??
+            props.failureRedirectAndNotify.body
+        }
+      });
     }
   }
 
