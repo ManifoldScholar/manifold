@@ -149,7 +149,7 @@ export class ResourceWrapperContainer extends PureComponent {
       <div>
         <Authorize
           entity={resource}
-          failureFatalError={{
+          failureRedirectAndNotify={{
             body: t("resources.unauthorized")
           }}
           ability="update"

@@ -10,7 +10,7 @@ export default function JournalsWrapper({ route }) {
     <Authorize
       ability="update"
       entity={["journal"]}
-      failureFatalError={{
+      failureRedirectAndNotify={{
         body: t("journals.unauthorized")
       }}
     >
