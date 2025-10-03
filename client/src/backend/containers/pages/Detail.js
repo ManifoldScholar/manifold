@@ -226,7 +226,7 @@ class PageDetailContainer extends PureComponent {
 
     return (
       <Authorize
-        failureFatalError={{
+        failureRedirectAndNotify={{
           body: t(`records.pages.unauthorized_${authProps.abiltiy}`)
         }}
         {...authProps}
