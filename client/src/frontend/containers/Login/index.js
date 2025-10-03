@@ -1,10 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import withProjectContext from "hoc/withProjectContext";
 import SignInUp from "global/components/sign-in-up";
 import { useRouteMatch, useLocation, useHistory } from "react-router-dom";
-import { useNotification } from "hooks";
+import { useNotification, useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 function LoginContainer({ projectBackLink }) {
@@ -12,8 +12,7 @@ function LoginContainer({ projectBackLink }) {
   const isSignUp = useRouteMatch("/signup");
   const location = useLocation();
   const history = useHistory();
-
-  const notifiedRef = useRef(false);
+  const notifications = useFromStore({ path: "notifications.notifications" });
 
   const notifyUnauthorized = useNotification(() => ({
     id: "authenticationError",
@@ -26,13 +25,17 @@ function LoginContainer({ projectBackLink }) {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const redirectUri = searchParams.get("redirect_uri");
-    const shouldNotify = !!redirectUri || !!location.state?.postLoginRedirect;
+    const hasAuthNotification = notifications.find(
+      n => n.scope === "authentication"
+    );
+    const shouldNotify =
+      (!!redirectUri || !!location.state?.postLoginRedirect) &&
+      !hasAuthNotification;
 
-    if (shouldNotify && !notifiedRef.current) {
+    if (shouldNotify) {
       notifyUnauthorized();
-      notifiedRef.current = true;
     }
-  }, [location, history, notifyUnauthorized]);
+  }, [location, history, notifyUnauthorized, notifications]);
 
   return (
     <Styled.Section className="bg-neutral05">
