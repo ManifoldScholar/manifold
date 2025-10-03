@@ -98,9 +98,10 @@ function JournalWrapper({ match, route, history, confirm, location }) {
     <div>
       <Authorize
         entity={journal}
-        failureRedirectAndNotify={{
-          detail: t("journals.unauthorized_edit")
+        failureNotification={{
+          body: t("journals.unauthorized_edit")
         }}
+        failureRedirect
         ability={["read"]}
       >
         {subpage && (
