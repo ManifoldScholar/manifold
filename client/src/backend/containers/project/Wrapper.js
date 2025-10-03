@@ -141,9 +141,10 @@ export class ProjectWrapperContainer extends PureComponent {
     return (
       <Authorize
         entity={project}
-        failureRedirectAndNotify={{
-          detail: t("projects.unauthorized_edit")
+        failureNotification={{
+          body: t("projects.unauthorized_edit")
         }}
+        failureRedirect
         ability={["update", "manageResources"]}
       >
         {subpage && (

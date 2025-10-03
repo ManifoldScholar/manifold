@@ -19,9 +19,10 @@ export default function ProjectsWrapper({ route }) {
     <Authorize
       ability="update"
       entity={["project"]}
-      failureRedirectAndNotify={{
+      failureNotification={{
         body: t("projects.unauthorized")
       }}
+      failureRedirect
     >
       <main id="skip-to-main" tabIndex={-1} className="backend-detail">
         {childRoutes(route)}
