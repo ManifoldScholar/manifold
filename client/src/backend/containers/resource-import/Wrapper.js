@@ -135,9 +135,10 @@ export class ResourceImportWrapper extends PureComponent {
     return (
       <Authorize
         entity={project}
-        failureRedirectAndNotify={{
+        failureNotification={{
           body: t("resources.import.unauthorized")
         }}
+        failureRedirect
         ability={["update"]}
       >
         <HeadContent

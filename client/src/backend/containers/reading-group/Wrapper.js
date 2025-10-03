@@ -101,9 +101,10 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
     <div>
       <Authorize
         entity={readingGroup}
-        failureRedirectAndNotify={{
-          detail: t("groups.unauthorized_edit")
+        failureNotification={{
+          body: t("groups.unauthorized_edit")
         }}
+        failureRedirect
         ability={["update"]}
       >
         {subpage && (
