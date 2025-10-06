@@ -99,14 +99,22 @@ export default class NodeTreeIterator {
     if (Nodes.hasOwnProperty(lookup)) ComponentClass = Nodes[lookup];
     if (lookup === "A") ComponentClass = Nodes.Link;
     if (lookup === "Math") {
+      const { key, ...props } = node;
       return (
-        <ErrorBoundary key={node.key} FallbackComponent={MathError}>
-          {createElement(
-            ComponentClass,
-            { ...node, uuids: mathUuids },
-            node.children
+        <Fragment key={key}>
+          <ErrorBoundary FallbackComponent={MathError}>
+            <ComponentClass {...props} uuids={mathUuids}>
+              {node.children}
+            </ComponentClass>
+          </ErrorBoundary>
+          {!!resourceBlocks?.length && (
+            <ResourceAnnotationFactory
+              annotations={formatLocalAnnotations(
+                resourceBlocks.map(block => this.annotationsMap[block])
+              )}
+            />
           )}
-        </ErrorBoundary>
+        </Fragment>
       );
     }
     const { key, ...props } = node;
