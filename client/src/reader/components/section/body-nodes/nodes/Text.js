@@ -224,8 +224,6 @@ class TextNode extends Component {
               href: textAnnotationIds.length
                 ? `#annotation-${textAnnotationIds[0]}`
                 : undefined,
-              tabIndex: removableHighlight ? 0 : undefined,
-              role: removableHighlight ? "button" : undefined,
               "aria-haspopup": removableHighlight ? "menu" : "dialog",
               "aria-label": removableHighlight
                 ? this.ariaLabelForHighlight(chunk)
@@ -244,7 +242,12 @@ class TextNode extends Component {
         ...previousTabIndex
       };
 
-      const Tag = interactiveAttributes.href ? "a" : "span";
+      /* eslint-disable-next-line no-nested-ternary */
+      const Tag = interactiveAttributes.href
+        ? "a"
+        : removableHighlight
+        ? "button"
+        : "span";
 
       return (
         // eslint-disable-next-line react/no-array-index-key
