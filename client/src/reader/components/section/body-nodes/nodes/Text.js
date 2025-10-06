@@ -223,8 +223,6 @@ class TextNode extends Component {
               href: textAnnotationIds.length
                 ? `#annotation-${textAnnotationIds[0]}`
                 : undefined,
-              tabIndex: removableHighlight ? 0 : undefined,
-              role: removableHighlight ? "button" : undefined,
               "aria-haspopup": removableHighlight ? "menu" : "dialog",
               "aria-label": this.ariaLabelForAnnotations(
                 chunk,
@@ -249,7 +247,9 @@ class TextNode extends Component {
 
       if (interactiveAttributes.href) {
         Tag = "a";
-      } else if (textAnnotationIds?.length > 0) {
+      } else if (removableHighlight) {
+        Tag = "button";
+      }else if (textAnnotationIds?.length > 0) {
         Tag = "mark";
       }
 
