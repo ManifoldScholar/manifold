@@ -222,7 +222,7 @@ class TextNode extends Component {
               href: textAnnotationIds.length
                 ? `#annotation-${textAnnotationIds[0]}`
                 : undefined,
-              "aria-haspopup": removableHighlight ? "menu" : "dialog",
+              "aria-haspopup": removableHighlight ? "menu" : undefined,
               "aria-label": removableHighlight
                 ? this.ariaLabelForHighlight(chunk)
                 : this.ariaLabelForAnnotation(chunk)
