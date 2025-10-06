@@ -1,6 +1,6 @@
 import { styledUnderline } from "../../../mixins/typography";
 import { annotationHighlightColors } from "../../../variables/colors";
-import { linkUnstyled } from "theme/styles/mixins";
+import { linkUnstyled, buttonUnstyled } from "theme/styles/mixins";
 
 const underlineStyleKeys = ["solid", "dashes", "dots", "wavy"];
 
@@ -117,6 +117,8 @@ export default `
     @media (forced-colors: active) {
       forced-color-adjust: none;
     }
+
+    ${buttonUnstyled}
 
     &:not(.inert) {
       cursor: pointer;
