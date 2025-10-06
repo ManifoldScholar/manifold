@@ -39,6 +39,9 @@ class LinkNode extends Component {
   }
 
   adjustedAttributes() {
+    if (this.href.startsWith("#"))
+      return { ...this.props.attributes, to: this.props.attributes.href };
+
     const parsedURI = new URL(this.href, config.services.client.url);
     const { pathname, search: query, hash } = parsedURI;
     const adjustedAttributes = { to: { pathname, query } };
