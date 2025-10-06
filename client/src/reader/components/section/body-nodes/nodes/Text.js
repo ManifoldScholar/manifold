@@ -243,7 +243,7 @@ class TextNode extends Component {
       /* eslint-disable-next-line no-nested-ternary */
       const Tag = interactiveAttributes.href
         ? "a"
-        : removableHighlight
+        : removableHighlightId && !removableHighlightId !== "selection"
         ? "button"
         : "span";
 
