@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import config from "config";
 import validatedNode from "../higher-order/ValidatedNode";
 
 class LinkNode extends Component {
@@ -38,20 +37,6 @@ class LinkNode extends Component {
     }
   }
 
-  adjustedAttributes() {
-    if (this.href.startsWith("#"))
-      return { ...this.props.attributes, to: this.props.attributes.href };
-
-    const parsedURI = new URL(this.href, config.services.client.url);
-    const { pathname, search: query, hash } = parsedURI;
-    const adjustedAttributes = { to: { pathname, query } };
-    if (hash) {
-      adjustedAttributes.to.hash = hash;
-    }
-    delete Object.assign(adjustedAttributes, this.props.attributes).href;
-    return adjustedAttributes;
-  }
-
   renderChildren() {
     return React.Children.map(this.props.children, child => {
       if (React.isValidElement(child)) {
@@ -76,7 +61,12 @@ class LinkNode extends Component {
       );
     }
 
-    return <Link {...this.adjustedAttributes()}>{this.renderChildren()}</Link>;
+    const { href, ...attrs } = this.props.attributes;
+    return (
+      <Link {...attrs} to={href}>
+        {this.renderChildren()}
+      </Link>
+    );
   }
 }
 
