@@ -220,7 +220,12 @@ class AnnotatableCaptureSelection extends Component {
     if (isMathMLNode(range.endContainer?.parentNode)) {
       const endNode = findLastMathUuidNode(range.endContainer);
       const endChar = endNode.textContent.length;
-      return { endNode, endChar, adjustEnd: true };
+      return {
+        endNode,
+        endChar,
+        adjustEnd: true,
+        endRangeText: endNode.textContent
+      };
     }
 
     // 4. Do the same for the end node
