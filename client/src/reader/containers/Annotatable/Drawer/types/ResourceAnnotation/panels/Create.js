@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useId, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { resourcesAPI } from "api";
 import setter from "global/components/form/setter";
@@ -24,7 +24,9 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
   const { t } = useTranslation();
   const id = useId();
 
-  const Kinds = setter(({ set }) => (
+  const defaultValue = useMemo(() => ({ attributes: { kind: null } }), []);
+
+  const Kinds = setter(({ set, selected }) => (
     <Styled.Kinds
       label="kinds"
       aria-describedby={`${id}_kind-picker`}
@@ -42,6 +44,7 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
               id={`${id}-${safeKind}`}
               name="attributes[kind]"
               onChange={() => set(safeKind)}
+              checked={safeKind === selected}
             />
             <IconComputed.Resource size={32} icon={safeKind} />
             <Styled.KindLabel>{translatedKind}</Styled.KindLabel>
@@ -57,7 +60,7 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
     <Styled.Form
       className="form-secondary"
       name="reader-resource-create"
-      model={{ attributes: {} }}
+      model={defaultValue}
       create={data => resourcesAPI.create(projectId, data)}
       onSuccess={resource => onSuccess(resource)}
     >
@@ -86,7 +89,7 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
                 id={`${id}_kind-picker`}
                 label={t("resources.new.kind")}
               />
-              <Kinds name="attributes[kind]" />
+              <Kinds name="attributes[kind]" selected={kind} />
             </fieldset>
             {(kind === "link" || kind === "interactive") && (
               <Form.TextInput
