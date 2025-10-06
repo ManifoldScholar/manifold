@@ -47,7 +47,8 @@ function MathNode({
     removableHighlightId,
     textAnnotationIds,
     annotationIds,
-    interactiveAttributes
+    interactiveAttributes,
+    interactiveTag
   } = getAnnotationStyles(
     localAnnotations,
     uuids,
@@ -56,9 +57,14 @@ function MathNode({
     isDetail
   );
 
-  const Wrapper = attributes.display === "inline" ? "span" : "div";
+  /* eslint-disable no-nested-ternary */
+  const Wrapper =
+    interactiveTag ?? (attributes.display === "inline" ? "span" : "div");
+
   const wrapperStyles =
-    Wrapper === "div" ? { width: "max-content", maxWidth: "100%" } : {};
+    attributes.display !== "inline"
+      ? { display: "block", width: "max-content", maxWidth: "100%" }
+      : {};
 
   const { style, ...mathAttrs } = attributes ?? {};
 

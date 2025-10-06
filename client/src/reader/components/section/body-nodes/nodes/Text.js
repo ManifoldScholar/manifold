@@ -247,7 +247,10 @@ class TextNode extends Component {
 
       if (interactiveAttributes.href) {
         Tag = "a";
-      } else if (removableHighlight) {
+      } else if (
+        removableHighlightId &&
+        !removableHighlightId !== "selection"
+      ) {
         Tag = "button";
       } else if (textAnnotationIds?.length > 0) {
         Tag = "mark";
