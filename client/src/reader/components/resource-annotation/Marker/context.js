@@ -91,6 +91,8 @@ export default function ResourceMarkerContextProvider({
     [dialog]
   );
 
+  const textId = annotations?.[0]?.attributes?.textId;
+
   return (
     <ResourceMarkerContext.Provider
       value={{
@@ -101,7 +103,7 @@ export default function ResourceMarkerContextProvider({
       }}
     >
       {children}
-      <Dialog resource={dialogResource} {...dialog} />
+      <Dialog resource={dialogResource} textId={textId} {...dialog} />
     </ResourceMarkerContext.Provider>
   );
 }
