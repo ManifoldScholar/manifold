@@ -6,7 +6,8 @@ export const ResourceMarkerContext = createContext({});
 
 export default function ResourceMarkerContextProvider({
   annotations,
-  children
+  children,
+  destroyAnnotation
 }) {
   const thumbCount = useMemo(
     () =>
@@ -82,10 +83,15 @@ export default function ResourceMarkerContextProvider({
     id: null,
     type: "resource"
   });
+  const [dialogAnnotation, setDialogAnnotation] = useState({
+    id: null,
+    type: "annotations"
+  });
 
   const openDialog = useCallback(
     props => {
-      setDialogResource(props);
+      setDialogResource(props.resource);
+      setDialogAnnotation(props.annotation);
       dialog.onToggleClick();
     },
     [dialog]
@@ -93,17 +99,27 @@ export default function ResourceMarkerContextProvider({
 
   const textId = annotations?.[0]?.attributes?.textId;
 
+  const handleDestroy = useCallback(() => {
+    destroyAnnotation(dialogAnnotation, dialog.onToggleClick);
+  }, [destroyAnnotation, dialogAnnotation, dialog.onToggleClick]);
+
   return (
     <ResourceMarkerContext.Provider
       value={{
         groups,
         setResourceThumbs,
         thumbCount,
-        openDialog
+        openDialog,
+        destroyAnnotation
       }}
     >
       {children}
-      <Dialog resource={dialogResource} textId={textId} {...dialog} />
+      <Dialog
+        resource={dialogResource}
+        textId={textId}
+        destroyAnnotation={handleDestroy}
+        {...dialog}
+      />
     </ResourceMarkerContext.Provider>
   );
 }
