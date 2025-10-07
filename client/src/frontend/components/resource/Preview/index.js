@@ -11,7 +11,8 @@ function ResourcePreview({
   resourceCollection,
   titleAs = "h2",
   hideDetailLink,
-  textId
+  textId,
+  destroyAnnotation
 }) {
   return (
     <Styled.Wrapper>
@@ -28,7 +29,11 @@ function ResourcePreview({
           resourceCollection={resourceCollection}
           hideDetailLink={hideDetailLink}
         />
-        <EditorActions resource={resource} textId={textId} />
+        <EditorActions
+          resource={resource}
+          textId={textId}
+          destroyAnnotation={destroyAnnotation}
+        />
       </Styled.Footer>
     </Styled.Wrapper>
   );
@@ -41,7 +46,8 @@ ResourcePreview.propTypes = {
   resourceCollection: PropTypes.object,
   titleAs: PropTypes.oneOf(["h1", "h2", "h3"]),
   hideDetailLink: PropTypes.bool,
-  textId: PropTypes.string
+  textId: PropTypes.string,
+  destroyAnnotation: PropTypes.func
 };
 
 export default ResourcePreview;

@@ -14,7 +14,7 @@ const BUTTON_STYLE_PROPS = {
   lowercase: false
 };
 
-function ResourcePreviewEditorActions({ resource, textId }) {
+function ResourcePreviewEditorActions({ resource, textId, destroyAnnotation }) {
   const { t } = useTranslation();
 
   const text = useFromStore({
@@ -42,11 +42,11 @@ function ResourcePreviewEditorActions({ resource, textId }) {
           />
         </li>
       </Authorize>
-      {text && (
+      {!!text && !!destroyAnnotation && (
         <Authorize entity={text} ability={"notate"}>
           <li>
             <Button
-              onClick={() => {}}
+              onClick={destroyAnnotation}
               label={t("actions.remove")}
               preIcon="delete24"
               {...BUTTON_STYLE_PROPS}
@@ -62,7 +62,8 @@ ResourcePreviewEditorActions.displayName = "Resource.Preview.EditorActions";
 
 ResourcePreviewEditorActions.propTypes = {
   resource: PropTypes.object.isRequired,
-  textId: PropTypes.string
+  textId: PropTypes.string,
+  destroyAnnotation: PropTypes.func
 };
 
 export default ResourcePreviewEditorActions;
