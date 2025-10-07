@@ -310,7 +310,7 @@ export class Annotatable extends Component {
      the fake. Then we call focus on the new node in componentDidUpdate
      to ensure that it happens after state updates there.
   */
-  destroyAnnotation = annotation => {
+  destroyAnnotation = (annotation, onSuccess) => {
     if (!annotation) return;
     const call = annotationsAPI.destroy(annotation.id);
     const options = { removes: annotation };
@@ -318,6 +318,7 @@ export class Annotatable extends Component {
       request(call, requests.rAnnotationDestroy, options)
     );
     res.promise.then(() => {
+      if (onSuccess) onSuccess();
       // recreate destroyed node and append to renderedAnnotations
       const selectionAnnotation = this.createAnnotationFromSelection(
         this.state.selectionState.selectionAnnotation,
@@ -565,7 +566,11 @@ export class Annotatable extends Component {
               className="annotatable"
               ref={this.setAnnotatableRef}
             >
-              {this.props.render(pendingAnnotation, renderedAnnotations)}
+              {this.props.render(
+                pendingAnnotation,
+                renderedAnnotations,
+                this.destroyAnnotation
+              )}
             </div>
           </CaptureClick>
         </CaptureSelection>
