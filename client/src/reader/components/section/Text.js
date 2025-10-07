@@ -116,7 +116,11 @@ export default function Text({
             history={history}
             section={section}
             resourceDisplayFormatDialog={resourceDisplayFormatDialog}
-            render={(pendingAnnotation, adjustedAnnotations) => (
+            render={(
+              pendingAnnotation,
+              adjustedAnnotations,
+              destroyAnnotation
+            ) => (
               <div className={containerClass}>
                 <div
                   data-id="body"
@@ -128,6 +132,7 @@ export default function Text({
                     pendingAnnotation={pendingAnnotation}
                     annotations={adjustedAnnotations}
                     section={section}
+                    destroyAnnotation={destroyAnnotation}
                   />
                 </div>
               </div>
