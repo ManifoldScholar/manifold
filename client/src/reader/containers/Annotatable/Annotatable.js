@@ -58,6 +58,23 @@ export class Annotatable extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (!isEqual(this.props.annotations, prevProps.annotations)) {
+      const lastAnnotation = this.state.renderedAnnotations[
+        this.state.renderedAnnotations.length - 1
+      ];
+      // if the user just removed a highlight, make sure we don't overwrite it
+      const wasRemoved = lastAnnotation?.attributes.removed;
+      if (wasRemoved) {
+        // call setTimeout with no delay to force focus to happen after all state updates
+        setTimeout(() =>
+          this.restoreFocusAndSelection({
+            restoreFocusTo: "selection",
+            restoreSelectionTo: "selection"
+          })
+        );
+        return this.setState({
+          renderedAnnotations: [...this.props.annotations, lastAnnotation]
+        });
+      }
       return this.setState({ renderedAnnotations: this.props.annotations });
     }
 
@@ -307,25 +324,19 @@ export class Annotatable extends Component {
         "previous",
         true
       );
-      // this state update gets overwritten by the one in componentDidUpdate
-      // if not pushed to the bottom of the stack with setTimeout
-      setTimeout(() => {
-        this.setState({
-          selectionState: {
-            selection: null,
-            selectionComplete: false,
-            selectionAnnotation: null,
-            popupTriggerX: null,
-            popupTriggerY: null
-          },
-          activeEvent: null,
-          annotation: null,
-          annotationState: null,
-          renderedAnnotations: [
-            ...this.state.renderedAnnotations,
-            selectionAnnotation
-          ]
-        });
+      this.appendLastSelectionAnnotation(selectionAnnotation);
+      // clear selection state to hide the popup
+      this.setState({
+        selectionState: {
+          selection: null,
+          selectionComplete: false,
+          selectionAnnotation: null,
+          popupTriggerX: null,
+          popupTriggerY: null
+        },
+        activeEvent: null,
+        annotation: null,
+        annotationState: null
       });
     });
     return res.promise;
