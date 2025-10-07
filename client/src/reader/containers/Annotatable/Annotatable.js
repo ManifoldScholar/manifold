@@ -58,6 +58,23 @@ export class Annotatable extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (!isEqual(this.props.annotations, prevProps.annotations)) {
+      const lastAnnotation = this.state.renderedAnnotations[
+        this.state.renderedAnnotations.length - 1
+      ];
+      // if the user just removed a highlight, make sure we don't overwrite it
+      const wasRemoved = lastAnnotation?.attributes.removed;
+      if (wasRemoved) {
+        // call setTimeout with no delay to force focus to happen after all state updates
+        setTimeout(() =>
+          this.restoreFocusAndSelection({
+            restoreFocusTo: "selection",
+            restoreSelectionTo: "selection"
+          })
+        );
+        return this.setState({
+          renderedAnnotations: [...this.props.annotations, lastAnnotation]
+        });
+      }
       return this.setState({ renderedAnnotations: this.props.annotations });
     }
 
@@ -268,6 +285,15 @@ export class Annotatable extends Component {
     return res.promise;
   };
 
+  /* Currently, this callback is used only for removing highlights.
+     Annotations are deleted using a call in the global component that
+     does not attempt to restore focus. In order to restore focus after
+     delete, we create a *fake* here on success and reset selection and
+     annotation state. We can't call this.resetState here because we
+     don't want to overwrite this.state.renderedAnnotations once we push
+     the fake. Then we call focus on the new node in componentDidUpdate
+     to ensure that it happens after state updates there.
+  */
   destroyAnnotation = annotation => {
     if (!annotation) return;
     const call = annotationsAPI.destroy(annotation.id);
@@ -276,14 +302,25 @@ export class Annotatable extends Component {
       request(call, requests.rAnnotationDestroy, options)
     );
     res.promise.then(() => {
-      // recreate destroyed node and move selection to it after state is reset
+      // recreate destroyed node and append to renderedAnnotations
       const selectionAnnotation = this.createAnnotationFromSelection(
-        this.state.selectionState.selectionAnnotation
+        this.state.selectionState.selectionAnnotation,
+        "previous",
+        true
       );
       this.appendLastSelectionAnnotation(selectionAnnotation);
-      this.resetState({
-        restoreFocusTo: this.pendingAnnotationNode,
-        restoreSelectionTo: this.pendingAnnotationNode
+      // clear selection state to hide the popup
+      this.setState({
+        selectionState: {
+          selection: null,
+          selectionComplete: false,
+          selectionAnnotation: null,
+          popupTriggerX: null,
+          popupTriggerY: null
+        },
+        activeEvent: null,
+        annotation: null,
+        annotationState: null
       });
     });
     return res.promise;
@@ -351,13 +388,14 @@ export class Annotatable extends Component {
     });
   };
 
-  createAnnotationFromSelection = selection => {
+  createAnnotationFromSelection = (selection, style, removed) => {
     return {
       id: "selection",
       attributes: {
         userIsCreator: true,
         annotationStyle: "pending",
-        format: "highlight",
+        format: style ?? "highlight",
+        removed,
         ...selection
       }
     };
