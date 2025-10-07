@@ -41,7 +41,7 @@ class ResourceSlideshow extends PureComponent {
       props.collectionResources,
       props.pagination
     );
-    this.state.totalCount = props.pagination.totalCount || 0;
+    this.state.totalCount = props.pagination?.totalCount || 0;
 
     this.sliderRef = React.createRef(null);
     this.debouncedScroll = debounce(this.bindScroll, 100);
@@ -49,7 +49,7 @@ class ResourceSlideshow extends PureComponent {
 
   static getDerivedStateFromProps(nextProps) {
     const nextState = {};
-    if (nextProps.pagination.totalCount > 0) {
+    if (nextProps.pagination?.totalCount > 0) {
       nextState.totalCount = nextProps.pagination.totalCount;
     }
     return nextState === {} ? null : nextState;
@@ -169,7 +169,7 @@ class ResourceSlideshow extends PureComponent {
   }
 
   buildInitialMap(collectionResources, pagination) {
-    const slots = Array.from(Array(pagination.totalCount).keys());
+    const slots = Array.from(Array(pagination?.totalCount ?? 0).keys());
     return { ...slots, ...collectionResources };
   }
 
@@ -213,7 +213,7 @@ class ResourceSlideshow extends PureComponent {
     const position = this.state.position;
     const totalCount = this.state.totalCount;
     const collectionResource = this.state.map[position - 1];
-    const collectionResourcesCount = this.props.collectionResources.length;
+    const collectionResourcesCount = this.props.collectionResources?.length;
 
     return (
       <Styled.SlideShow>
