@@ -317,11 +317,14 @@ export class Annotatable extends Component {
     const res = this.props.dispatch(
       request(call, requests.rAnnotationDestroy, options)
     );
+    const fullAnnotation = this.state.renderedAnnotations.find(
+      a => a.id === annotation.id
+    );
     res.promise.then(() => {
       if (onSuccess) onSuccess();
       // recreate destroyed node and append to renderedAnnotations
       const selectionAnnotation = this.createAnnotationFromSelection(
-        this.state.selectionState.selectionAnnotation,
+        this.selectionAnnotationFromAnnotation(fullAnnotation),
         "previous",
         true
       );
@@ -415,6 +418,24 @@ export class Annotatable extends Component {
         removed,
         ...selection
       }
+    };
+  };
+
+  selectionAnnotationFromAnnotation = annotation => {
+    if (!annotation) return null;
+    const {
+      endChar,
+      endNode,
+      startChar,
+      startNode,
+      subject
+    } = annotation.attributes;
+    return {
+      endChar,
+      endNode,
+      startChar,
+      startNode,
+      subject
     };
   };
 
