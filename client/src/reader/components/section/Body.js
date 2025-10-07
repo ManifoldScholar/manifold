@@ -4,7 +4,13 @@ import BodyNodes from "./body-nodes";
 import ResourceMarkerContextProvider from "reader/components/resource-annotation/Marker/context";
 
 export default function Body(props) {
-  const { section, annotations, pendingAnnotation, location } = props;
+  const {
+    section,
+    annotations,
+    pendingAnnotation,
+    location,
+    destroyAnnotation
+  } = props;
   const deps = [
     section.attributes.bodyJSON,
     annotations,
@@ -23,7 +29,10 @@ export default function Body(props) {
   ]);
 
   return (
-    <ResourceMarkerContextProvider annotations={annotations}>
+    <ResourceMarkerContextProvider
+      annotations={annotations}
+      destroyAnnotation={destroyAnnotation}
+    >
       {elements}
     </ResourceMarkerContextProvider>
   );

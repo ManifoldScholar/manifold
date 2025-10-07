@@ -8,6 +8,7 @@ import { useId } from "react";
 export default function ResourceAnnotationDialog({
   resource,
   textId,
+  destroyAnnotation,
   ...dialog
 }) {
   const headingId = useId();
@@ -23,7 +24,11 @@ export default function ResourceAnnotationDialog({
         fetchKey={`reader-collection-slideshow-${resource.id}`}
       />
     ) : (
-      <ResourcePreview resource={resourceEntity} textId={textId} />
+      <ResourcePreview
+        resource={resourceEntity}
+        textId={textId}
+        destroyAnnotation={destroyAnnotation}
+      />
     );
 
   return (

@@ -1,6 +1,8 @@
+import { useContext, useCallback } from "react";
 import ResourcePreview from "frontend/components/resource/Preview";
 import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow/Fetcher";
 import { useFromStore } from "hooks";
+import { ResourceMarkerContext } from "../Marker/context";
 import * as Styled from "./styles";
 
 export default function ResourceBlock({ annotation }) {
@@ -17,6 +19,12 @@ export default function ResourceBlock({ annotation }) {
     allowPartial: true
   });
 
+  const { destroyAnnotation } = useContext(ResourceMarkerContext);
+
+  const handleDestroy = useCallback(() => {
+    destroyAnnotation({ id: annotation.id, type: "annotations" });
+  }, [annotation.id, destroyAnnotation]);
+
   if (resourceCollection)
     return (
       <Styled.Block data-annotation-resource-unselectable>
@@ -29,7 +37,11 @@ export default function ResourceBlock({ annotation }) {
 
   return resource ? (
     <Styled.Block data-annotation-resource-unselectable>
-      <ResourcePreview resource={resource} textId={annotation?.textId} />
+      <ResourcePreview
+        resource={resource}
+        textId={annotation?.textId}
+        destroyAnnotation={handleDestroy}
+      />
     </Styled.Block>
   ) : null;
 }
