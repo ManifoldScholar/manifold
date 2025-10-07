@@ -1,15 +1,30 @@
 import Header from "./Header";
 import { useFromStore } from "hooks";
 import ResourcePreview from "frontend/components/resource/Preview";
+import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow/Fetcher";
 import * as Styled from "./styles";
 import { useId } from "react";
 
-export default function ResourceAnnotationDialog({ resource, ...dialog }) {
+export default function ResourceAnnotationDialog({
+  resource,
+  textId,
+  ...dialog
+}) {
   const headingId = useId();
 
   const resourceEntity = useFromStore({
     path: `entityStore.entities.${resource.type}s.${resource.id}`
   });
+
+  const renderPreview =
+    resource.type === "resourceCollection" ? (
+      <ResourceCollectionSlideshow
+        resourceCollection={resourceEntity}
+        fetchKey={`reader-collection-slideshow-${resource.id}`}
+      />
+    ) : (
+      <ResourcePreview resource={resourceEntity} textId={textId} />
+    );
 
   return (
     <Styled.Dialog
@@ -23,14 +38,7 @@ export default function ResourceAnnotationDialog({ resource, ...dialog }) {
         headingId={headingId}
       />
       <div className="container-inline-size">
-        <Styled.Inner>
-          {resourceEntity ? (
-            <ResourcePreview
-              resource={resourceEntity}
-              // resourceCollection={collection}
-            />
-          ) : null}
-        </Styled.Inner>
+        <Styled.Inner>{resourceEntity ? renderPreview : null}</Styled.Inner>
       </div>
     </Styled.Dialog>
   );
