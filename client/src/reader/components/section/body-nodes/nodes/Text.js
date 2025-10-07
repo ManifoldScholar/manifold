@@ -25,7 +25,8 @@ export const formatLocalAnnotations = (annotations, uuid) =>
       authorCreated,
       abilities,
       annotationStyle,
-      readerDisplayFormat
+      readerDisplayFormat,
+      textId
     } = a.attributes;
     return {
       id,
@@ -40,7 +41,8 @@ export const formatLocalAnnotations = (annotations, uuid) =>
       resourceCollectionId,
       authorCreated,
       abilities,
-      readerDisplayFormat
+      readerDisplayFormat,
+      textId
     };
   });
 

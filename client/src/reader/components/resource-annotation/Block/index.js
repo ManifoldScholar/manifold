@@ -29,7 +29,7 @@ export default function ResourceBlock({ annotation }) {
 
   return resource ? (
     <Styled.Block data-annotation-resource-unselectable>
-      <ResourcePreview resource={resource} />
+      <ResourcePreview resource={resource} textId={annotation?.textId} />
     </Styled.Block>
   ) : null;
 }
