@@ -69,9 +69,15 @@ export default function Marker({ annotation }) {
   const dialogProps = useMemo(
     () =>
       resource
-        ? { id: resourceId, type: "resource" }
-        : { id: resourceCollectionId, type: "resourceCollection" },
-    [resource, resourceId, resourceCollectionId]
+        ? {
+            resource: { id: resourceId, type: "resource" },
+            annotation: { id, type: "annotations" }
+          }
+        : {
+            resource: { id: resourceCollectionId, type: "resourceCollection" },
+            annotation: { id, type: "annotations" }
+          },
+    [resource, resourceId, resourceCollectionId, id]
   );
 
   const handleClick = useCallback(
