@@ -17,12 +17,12 @@ export default function ResourceSlideshowFetcher({
     options: { requestKey }
   });
 
-  return slideshowResources?.length ? (
+  return (
     <ResourceCollectionSlideshow
       resourceCollection={resourceCollection}
       collectionResources={slideshowResources}
       pagination={slideshowMeta.pagination}
       setPageNumber={setPageNumber}
     />
-  ) : null;
+  );
 }
