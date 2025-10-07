@@ -10,7 +10,8 @@ function ResourcePreview({
   resource,
   resourceCollection,
   titleAs = "h2",
-  hideDetailLink
+  hideDetailLink,
+  textId
 }) {
   return (
     <Styled.Wrapper>
@@ -27,7 +28,7 @@ function ResourcePreview({
           resourceCollection={resourceCollection}
           hideDetailLink={hideDetailLink}
         />
-        <EditorActions resource={resource} />
+        <EditorActions resource={resource} textId={textId} />
       </Styled.Footer>
     </Styled.Wrapper>
   );
@@ -39,7 +40,8 @@ ResourcePreview.propTypes = {
   resource: PropTypes.object.isRequired,
   resourceCollection: PropTypes.object,
   titleAs: PropTypes.oneOf(["h1", "h2", "h3"]),
-  hideDetailLink: PropTypes.bool
+  hideDetailLink: PropTypes.bool,
+  textId: PropTypes.string
 };
 
 export default ResourcePreview;
