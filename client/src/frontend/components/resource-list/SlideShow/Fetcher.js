@@ -21,7 +21,7 @@ export default function ResourceSlideshowFetcher({
     <ResourceCollectionSlideshow
       resourceCollection={resourceCollection}
       collectionResources={slideshowResources}
-      pagination={slideshowMeta.pagination}
+      pagination={slideshowMeta?.pagination}
       setPageNumber={setPageNumber}
     />
   );
