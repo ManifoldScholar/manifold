@@ -16,16 +16,21 @@ export const Form = styled(GlobalForm.Form)`
   input[type="password"],
   input[type="email"] {
     color: var(--color-neutral-text-dark);
-    border-width: 3px;
-
-    &:focus-visible {
-      border-color: var(--focus-color);
-    }
   }
 
   .button-secondary {
     display: flex;
     margin-top: 30px;
+  }
+
+  .button-secondary,
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    &:focus-visible {
+      outline: var(--outline-width) solid var(--focus-color);
+      outline-offset: 2.5px;
+    }
   }
 `;
 
