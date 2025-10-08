@@ -74,7 +74,6 @@ export default function Text({
   const colorScheme = appearance.colors.colorScheme;
   const highContrast = appearance.colors.highContrast;
 
-
   const readerAppearanceClass = classNames({
     "reader-window": true,
     "scheme-light": colorScheme === "light",

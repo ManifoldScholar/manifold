@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-  getAnnotationStyles,
-  getlocalAnnotationsArray
-} from "./annotationHelpers";
+  getAnnotationProps,
+  formatLocalAnnotations
+} from "../../helpers/annotation";
 import { useTranslation } from "react-i18next";
 import { uid } from "react-uid";
+import values from "lodash/values";
 import { useErrorHandler } from "react-error-boundary";
 
 const createNode = n => {
@@ -41,7 +42,8 @@ function MathNode({
   };
 
   const { isDetail, ...annotations } = openAnnotations;
-  const localAnnotations = getlocalAnnotationsArray(annotations);
+  const localAnnotations = formatLocalAnnotations(values(annotations));
+
   const {
     classes,
     removableHighlightId,
@@ -49,13 +51,14 @@ function MathNode({
     annotationIds,
     interactiveAttributes,
     interactiveTag
-  } = getAnnotationStyles(
-    localAnnotations,
-    uuids,
-    t,
+  } = getAnnotationProps({
+    annotations: localAnnotations,
+    mathUuids: uuids,
     hasInteractiveAncestor,
-    isDetail
-  );
+    isDetail,
+    chunk: "mathematical content",
+    t
+  });
 
   /* eslint-disable no-nested-ternary */
   const Wrapper =
