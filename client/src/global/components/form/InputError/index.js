@@ -26,21 +26,17 @@ export default class InputError extends Component {
 
   /* eslint-disable react/no-array-index-key */
   render() {
-    if (this.hasErrors()) {
-      return (
-        <Styled.ErrorList
-          id={this.props.idForError ? this.props.idForError : null}
-          role="alert"
-          aria-live="polite"
-          aria-atomic="true"
-          className={this.props.className}
-        >
-          {this.props.errors.map((e, i) => {
-            return <Styled.Error key={i}>{this.errorString(e)}</Styled.Error>;
-          })}
-        </Styled.ErrorList>
-      );
-    }
-    return null;
+    return (
+      <Styled.ErrorList
+        id={this.props.idForError ? this.props.idForError : null}
+        className={this.props.className}
+      >
+        {this.hasErrors()
+          ? this.props.errors.map((e, i) => {
+              return <Styled.Error key={i}>{this.errorString(e)}</Styled.Error>;
+            })
+          : null}
+      </Styled.ErrorList>
+    );
   }
 }
