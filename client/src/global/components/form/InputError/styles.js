@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { formInputMessage } from "theme/styles/mixins";
 
-export const ErrorList = styled.span`
+export const ErrorList = styled.output`
   display: block;
 `;
 
