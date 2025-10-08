@@ -93,6 +93,7 @@ export default function LoginForm({
                 inputMode="email"
                 label={t("forms.signin_overlay.email")}
                 autoComplete="email"
+                ariaRequired
               />
               <Form.TextInput
                 password
@@ -101,6 +102,7 @@ export default function LoginForm({
                 placeholder={t("forms.signin_overlay.password")}
                 label={t("forms.signin_overlay.password")}
                 autoComplete="current-password"
+                ariaRequired
               />
             </Form.FieldGroup>
             {error && <Form.InputError errors={[{ detail: error }]} />}
