@@ -2,11 +2,10 @@ import { Fragment, createElement } from "react";
 import Nodes from "../nodes";
 import has from "lodash/has";
 import upperFirst from "lodash/upperFirst";
-import { mathNodeHelpers } from "../nodes/Math";
 import selectionHelpers from "reader/containers/Annotatable/helpers/selectionHelpers";
 import { ErrorBoundary } from "react-error-boundary";
 import ResourceAnnotationFactory from "reader/components/resource-annotation";
-import { formatLocalAnnotations } from "../nodes/Text";
+import { formatLocalAnnotations, getUuids } from "./annotation";
 import * as Styled from "./styles";
 
 const MathError = () => <Styled.Error>MathML error</Styled.Error>;
@@ -188,7 +187,7 @@ export default class NodeTreeIterator {
 
   maybeAppendResources(node) {
     if (!Object.keys(this.annotationEndMap.blocks)?.length) return [];
-    const uuids = mathNodeHelpers.getUuids(
+    const uuids = getUuids(
       node.children.filter(c => !selectionHelpers.blockRegex.test(c.tag))
     );
     const blocks = new Set(Object.keys(this.annotationEndMap.blocks));
@@ -201,7 +200,7 @@ export default class NodeTreeIterator {
   visit(node, parent = null, blacklist) {
     let mathUuids;
     if (node.tag === "math") {
-      mathUuids = mathNodeHelpers.getUuids(node.children);
+      mathUuids = getUuids(node.children);
       mathUuids.map(uuid => this.startAnnotations(uuid));
     } else if (this.annotationStartMap.hasOwnProperty(node.nodeUuid)) {
       this.startAnnotations(node.nodeUuid);
