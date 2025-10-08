@@ -1,50 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import values from "lodash/values";
 import union from "lodash/union";
 import ResourceAnnotationFactory from "reader/components/resource-annotation";
 import smoothScroll from "utils/smoothScroll";
 import { withTranslation } from "react-i18next";
-
-export const formatLocalAnnotations = (annotations, uuid) =>
-  annotations.map(a => {
-    const id = a.id;
-    const type = a.attributes.format;
-    const isCreator =
-      a.id === "selection" ? true : a.attributes.currentUserIsCreator;
-    const start =
-      a.attributes.startNode === uuid ? a.attributes.startChar : null;
-    const end = a.attributes.endNode === uuid ? a.attributes.endChar : null;
-    const {
-      startNode,
-      endNode,
-      resourceId,
-      resourceCollectionId,
-      authorCreated,
-      abilities,
-      annotationStyle,
-      readerDisplayFormat,
-      textId
-    } = a.attributes;
-    return {
-      id,
-      type,
-      annotationStyle,
-      isCreator,
-      start,
-      end,
-      startNode,
-      endNode,
-      resourceId,
-      resourceCollectionId,
-      authorCreated,
-      abilities,
-      readerDisplayFormat,
-      textId
-    };
-  });
+import {
+  getAnnotationProps,
+  formatLocalAnnotations
+} from "../helpers/annotation";
 
 class TextNode extends Component {
   static propTypes = {
@@ -153,105 +118,38 @@ class TextNode extends Component {
 
     // map the chunks to outputs.
     return chunks.map((chunk, index) => {
-      const highlighted = map[index].some(a => a.type === "highlight");
-      const underlined = map[index].some(a => a.type === "annotation");
-      const wavy = map[index].some(a => a.annotationStyle === "wavy");
-      const dots = map[index].some(a => a.annotationStyle === "dots");
-      const dashes = map[index].some(a => a.annotationStyle === "dashes");
-      const solid = map[index].some(a => a.annotationStyle === "solid");
-      const pending = map[index].some(a => a.annotationStyle === "pending");
-      const previous =
-        map[index].length === 1 && map[index].some(a => a.type === "previous"); // don't style as previous if node has multiple annotations
-      const isCreator = map[index].some(a => a.isCreator);
-      const authorCreated = map[index].some(a => a.authorCreated);
-      const lockedSelection = map[index].some(
-        a => a.id === "selection" && a.type !== "previous"
-      );
-      const notations = map[index].filter(
-        a => a.type === "resource" || a.type === "resource_collection"
-      );
-      let endingResources = [];
-      let startingResources = [];
-      if (notations.length > 0) {
-        endingResources = notations.filter(
-          a => ends[a.id] === index && a.endNode === this.props.nodeUuid
-        );
-        startingResources = notations.filter(
-          a => starts[a.id] === index && a.startNode === this.props.nodeUuid
-        );
-      }
-
-      const textAnnotationIds = map[index]
-        .filter(a => a.type === "annotation")
-        .map(a => a.id);
-
-      const removableHighlight = map[index].filter(
-        a => a.type === "highlight" && (a.isCreator || a.abilities.delete)
-      )[0];
-
-      const removableHighlightId = removableHighlight
-        ? removableHighlight.id
-        : "";
-
-      const isDetail = this.props.openAnnotations.isDetail;
-      const isInteractive =
-        removableHighlight ||
-        (!pending && !isDetail && !!textAnnotationIds.length);
-
-      const classes = classNames({
-        primary: isCreator,
-        secondary: !isCreator,
-        tertiary: !isCreator && authorCreated,
-        inert: isDetail,
-        "annotation-locked-selected primary": lockedSelection,
-        "annotation-underline": underlined,
-        "annotation-highlight": highlighted,
-        "annotation-wavy": wavy,
-        "annotation-dashes": dashes,
-        "annotation-dots": dots,
-        "annotation-solid": solid,
-        "annotation-resource": notations.length > 0,
-        "annotation-resource-start": notations && startingResources.length > 0,
-        "annotation-resource-end": notations && endingResources.length > 0,
-        pending,
-        previous
+      const {
+        classes,
+        removableHighlightId,
+        textAnnotationIds,
+        annotationIds,
+        interactiveAttributes,
+        interactiveTag
+      } = getAnnotationProps({
+        annotations: map[index],
+        isDetail: this.props.openAnnotations.isDetail,
+        hasInteractiveAncestor: this.props.hasInteractiveAncestor,
+        nodeUuid: this.props.nodeUuid,
+        chunk,
+        t: this.props.t
       });
 
-      const interactiveAttributes =
-        isInteractive && !this.props.hasInteractiveAncestor
-          ? {
-              href: textAnnotationIds.length
-                ? `#annotation-${textAnnotationIds[0]}`
-                : undefined,
-              "aria-haspopup": removableHighlight ? "menu" : undefined,
-              "aria-label": this.ariaLabelForAnnotations(
-                chunk,
-                !!textAnnotationIds.length,
-                highlighted
-              )
-            }
-          : {};
-
-      const previousTabIndex = previous ? { tabIndex: -1 } : {};
+      const Tag = interactiveTag ?? "span";
 
       const props = {
         className: classes,
         "data-removable-highlight-id": removableHighlightId,
         "data-text-annotation-ids": textAnnotationIds,
-        "data-annotation-ids": map[index].map(a => a.id),
-        ...interactiveAttributes,
-        ...previousTabIndex
+        "data-annotation-ids": annotationIds,
+        ...interactiveAttributes
       };
 
-      let Tag = "span";
-
-      if (interactiveAttributes.href) {
-        Tag = "a";
-      } else if (removableHighlightId && removableHighlightId !== "selection") {
-        Tag = "button";
-      } else if (textAnnotationIds?.length > 0) {
-        Tag = "mark";
-      }
+      const endingResources = map[index].filter(
+        a =>
+          ends[a.id] === index &&
+          a.endNode === this.props.nodeUuid &&
+          (a.type === "resource" || a.type === "resource_collection")
+      );
 
       return (
         // eslint-disable-next-line react/no-array-index-key
@@ -272,16 +170,6 @@ class TextNode extends Component {
       0
     );
     return Number.isInteger(count) ? count : null;
-  }
-
-  ariaLabelForAnnotations(chunk, annotated, highlighted) {
-    if (annotated && highlighted)
-      return this.props.t("reader.annotation_highlight_aria_label", { chunk });
-
-    if (highlighted)
-      return this.props.t("reader.highlight_aria_label", { chunk });
-
-    return this.props.t("reader.annotation_aria_label", { chunk });
   }
 
   doScroll(withTimeout = false) {
