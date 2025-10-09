@@ -43,11 +43,12 @@ export const renderedElements = [
   "sub",
   "sup",
   "cite",
-  "wbr"
+  "wbr",
+  "i"
 ];
 
 // These elements are applied as marks to text leaves in Slate. They can be added and removed in the RTE. This probably needs some adjustment. For example, currently both del and s become "strikethrough" when serialized to Slate and there's no way to tell what the original tag was.
-export const markElements = ["i", "del", "em", "s", "strong", "u", "code"];
+export const markElements = ["del", "em", "s", "strong", "u", "code"];
 
 // All other elements are Slate void elements and are rendered as preview only in the RTE.
 
@@ -81,7 +82,8 @@ export const inlineNodes = [
   "label",
   "select",
   "textarea",
-  "wbr"
+  "wbr",
+  "i"
 ];
 
 // Also duplicated from the api. These elements are removed during serialization and are never saved.
