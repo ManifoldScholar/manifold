@@ -11,7 +11,6 @@ const MARK_TAG_MAP = {
   bold: "strong",
   underline: "u",
   italic: "em",
-  i: "i",
   code: "code"
 };
 

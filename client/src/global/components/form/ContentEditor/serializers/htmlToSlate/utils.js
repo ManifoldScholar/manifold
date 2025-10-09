@@ -128,7 +128,6 @@ export const markTags = {
   code: "code",
   del: "del",
   em: "italic",
-  i: "i",
   s: "strikethrough",
   strong: "bold",
   u: "underline"
