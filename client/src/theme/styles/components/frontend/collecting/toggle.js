@@ -218,7 +218,6 @@ export default `
     }
 
     &--toc-hidden {
-      visibility: hidden;
       opacity: 0;
     }
   }

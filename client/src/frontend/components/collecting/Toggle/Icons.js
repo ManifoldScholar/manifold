@@ -4,7 +4,7 @@ import IconComposer from "global/components/utility/IconComposer";
 
 function Icons({ useOutline }) {
   return (
-    <div className="collecting-toggle__icons">
+    <div className="collecting-toggle__icons" aria-hidden="true">
       <IconComposer
         icon="MinusUnique"
         size={28}
