@@ -55,8 +55,20 @@ export default `
     &--right {
       grid-area: menu-group-right;
       width: 100vw;
+      display: block;
 
       ${respond(`width: auto;`, 50)}
+      ${respond(`display: none;`, 50, "max")}
+      ${respond(`display: block;`, 20, "max")}
+    }
+
+    &--dialog {
+      grid-area: menu-group-right;
+      width: 100vw;
+      display: none;
+
+      ${respond(`display: block;`, 50, "max")}
+      ${respond(`display: none;`, 20, "max")}
     }
   }
 
