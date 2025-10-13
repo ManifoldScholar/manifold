@@ -4,7 +4,7 @@
 # We want to ensure that the public IP used by the client is never
 # accidentally blocklisted or throttled.
 unless Rails.env.development? || Rails.env.test?
-  ManifoldEnv.rate_limiting.derive_public_ips! Rails.application.config.manifold.domain
+  # ManifoldEnv.rate_limiting.derive_public_ips! Rails.application.config.manifold.domain
 end
 
 ManifoldEnv.rate_limiting.public_ips.each do |public_ip|
