@@ -6,6 +6,8 @@ require "shrine/storage/tus"
 require "shrine/storage/google_cloud_storage"
 require "shrine/storage/s3"
 
+require "tus/storage/s3"
+
 require_relative "types"
 require_relative "strategy"
 require_relative "tus_gcs"
