@@ -50,7 +50,7 @@ module ManifoldEnv
     end
 
     def default_url
-      ENV["BOXEN_REDIS_URL"] || ENV["RAILS_REDIS_URL"] || "redis://127.0.0.1:6379"
+      ENV["REDIS_URL"] || ENV["BOXEN_REDIS_URL"] || ENV["RAILS_REDIS_URL"] || "redis://127.0.0.1:6379"
     end
   end
 end
