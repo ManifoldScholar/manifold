@@ -6,14 +6,6 @@ GIT
     fast_jsonapi (1.6.0)
       activesupport (>= 4.2)
 
-GIT
-  remote: https://github.com/steveklabnik/metadown.git
-  revision: 34b79ad7e0bdf560ce13e384caa1626569397798
-  tag: v1.1.0.beta
-  specs:
-    metadown (1.1.0.beta)
-      redcarpet
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -932,7 +924,6 @@ DEPENDENCIES
   marcel (~> 1.0.0)
   maxminddb
   memoist (~> 0.16.0)
-  metadown!
   mime-types (~> 3.3)
   money (~> 6.0)
   namae (~> 1.0)
