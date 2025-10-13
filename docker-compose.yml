@@ -23,7 +23,7 @@ services:
       timeout: 5s
       retries: 5
   redis:
-    image: bitnami/redis:6.2.7-debian-10-r34
+    image: redis:6.2.7
     platform: linux/amd64
     environment:
       - "ALLOW_EMPTY_PASSWORD=yes"
@@ -41,7 +41,7 @@ services:
       timeout: 5s
       retries: 5
   test-redis:
-    image: bitnami/redis:6.2.7-debian-10-r34
+    image: redis:6.2.7
     platform: linux/amd64
     environment:
       - "ALLOW_EMPTY_PASSWORD=yes"
@@ -113,12 +113,27 @@ services:
     restart: "no"
     volumes:
       - ./docker/minio/client:/root/.mc
+  client:
+    tty: true
+    stdin_open: true
+    build:
+      context: client
+      target: prod
+    ports:
+      - "13100:13100" # Rescue
+      - "13101:13101" # SSR
+      - "13102:13102" # Webpack dev server
+    env_file:
+      - ./docker/local.env
+    restart: unless-stopped
+    volumes:
+      - ./client:/srv/app
+      - node_modules:/srv/app/node_modules
   web:
     tty: true
     stdin_open: true
     build:
       context: api
-      dockerfile: docker/development/Dockerfile
     depends_on:
       postgres:
         condition: service_healthy
@@ -156,7 +171,6 @@ services:
   worker:
     build:
       context: api
-      dockerfile: docker/development/Dockerfile
     command: bin/good_job start --probe-port 7001
     depends_on:
       postgres:
@@ -189,7 +203,7 @@ services:
   spec:
     build:
       context: api
-      dockerfile: docker/development/Dockerfile
+
     command: tail -f /dev/null
     depends_on:
       postgres:
@@ -235,4 +249,6 @@ volumes:
   redis-data:
     driver: local
   uploads:
+    driver: local
+  node_modules:
     driver: local
