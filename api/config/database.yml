@@ -1,19 +1,17 @@
 <%
-
   user = ENV["RAILS_DB_USER"]
   pass = ENV["RAILS_DB_PASS"]
   host = ENV["RAILS_DB_HOST"] || 'localhost'
   port = ENV["RAILS_DB_PORT"] || 5432
   db   = ENV["RAILS_DB_NAME"] || 'manifold_development'
   test_db   = ENV["RAILS_TEST_DB_NAME"] || 'manifold_test'
-
 %>
 
 common: &common
   adapter: postgresql
   host: <%= host %>
   encoding: unicode
-  pool: 50
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 50 } %>
   port: <%= port %>
   user: <%= user %>
   database: <%= db %>
