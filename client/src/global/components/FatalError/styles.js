@@ -33,6 +33,8 @@ export const Wrapper = styled.section`
   padding-block-start: var(--container-padding-block-start);
   padding-block-end: var(--container-padding-block-end);
   background-color: var(--color-base-red20);
+
+  ${({ $contained }) => $contained && `min-height: auto; flex-grow: 1;`}
 `;
 
 export const Inner = styled.div`
