@@ -5,6 +5,7 @@ import isPlainObject from "lodash/isPlainObject";
 import { withRouter } from "react-router-dom";
 import { notificationActions } from "actions";
 import Authorization from "helpers/authorization";
+import FatalErrorRender from "global/components/FatalError";
 import get from "lodash/get";
 
 export class AuthorizeComponent extends PureComponent {
@@ -103,7 +104,28 @@ export class AuthorizeComponent extends PureComponent {
     });
   }
 
-  handleRedirect(props) {
+  maybeRedirect(props) {
+    if (this.isAuthenticated) {
+      const fatalError = {
+        error: {
+          status: 403,
+          method: "GET",
+          heading: "Read Failed",
+          body:
+            props.failureNotification?.body ??
+            "You are not authorized to manage the requested resource."
+        }
+      };
+      return (
+        <FatalErrorRender
+          fatalError={fatalError}
+          headerLineOne="errors.access_denied.header"
+          headerLineTwo=""
+          contained
+        />
+      );
+    }
+
     const redirectPath = this.redirectPath(props);
     const postLoginUri = `${props.location.pathname}${props.location.search}`;
 
@@ -132,7 +154,7 @@ export class AuthorizeComponent extends PureComponent {
   render() {
     const isAuthorized = this.authorization.authorize(this.props);
     if (!isAuthorized && this.props.failureRedirect)
-      return this.handleRedirect(this.props);
+      return this.maybeRedirect(this.props);
 
     if (!this.props.children) return null;
 
