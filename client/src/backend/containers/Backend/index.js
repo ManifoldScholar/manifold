@@ -68,21 +68,29 @@ export class BackendContainer extends PureComponent {
 
   render() {
     return (
-      <Authorize
-        kind={[
-          "admin",
-          "editor",
-          "marketeer",
-          "project_creator",
-          "project_editor",
-          "project_property_manager",
-          "journal_editor"
-        ]}
-        failureRedirect={lh.link("frontendLogin")}
-        failureNotification
-      >
-        <BodyClass className={"backend bg-neutral90"}>
-          <>
+      <BodyClass className={"backend bg-neutral90"}>
+        <>
+          <Utility.ScrollToTop />
+          <Layout.GlobalHeader
+            visibility={this.props.visibility}
+            match={this.props.match}
+            location={this.props.location}
+            authentication={this.props.authentication}
+            commonActions={this.commonActions}
+          />
+          <Authorize
+            kind={[
+              "admin",
+              "editor",
+              "marketeer",
+              "project_creator",
+              "project_editor",
+              "project_property_manager",
+              "journal_editor"
+            ]}
+            failureRedirect={lh.link("frontendLogin")}
+            failureNotification
+          >
             <RedirectToFirstMatch
               route={"backend"}
               candidates={[
@@ -92,14 +100,6 @@ export class BackendContainer extends PureComponent {
                 }
               ]}
             />
-            <Utility.ScrollToTop />
-            <Layout.GlobalHeader
-              visibility={this.props.visibility}
-              match={this.props.match}
-              location={this.props.location}
-              authentication={this.props.authentication}
-              commonActions={this.commonActions}
-            />
             <BreadcrumbsProvider>
               <div className="main-content">
                 {childRoutes(this.props.route, {
@@ -107,16 +107,16 @@ export class BackendContainer extends PureComponent {
                 })}
               </div>
             </BreadcrumbsProvider>
-            <Footers.FrontendFooter
-              pages={this.props.pages}
-              authentication={this.props.authentication}
-              commonActions={this.commonActions}
-              settings={this.props.settings}
-              withVersion
-            />
-          </>
-        </BodyClass>
-      </Authorize>
+          </Authorize>
+          <Footers.FrontendFooter
+            pages={this.props.pages}
+            authentication={this.props.authentication}
+            commonActions={this.commonActions}
+            settings={this.props.settings}
+            withVersion
+          />
+        </>
+      </BodyClass>
     );
   }
 }
