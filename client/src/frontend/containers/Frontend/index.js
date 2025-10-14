@@ -13,6 +13,7 @@ import connectAndFetch from "utils/connectAndFetch";
 import { renderRoutes } from "react-router-config";
 import get from "lodash/get";
 import BodyClass from "hoc/BodyClass";
+import AppFatalError from "global/components/FatalError/AppWrapper";
 import redirectIfLibraryDisabled from "hoc/redirectIfLibraryDisabled";
 
 const { request } = entityStoreActions;
@@ -45,7 +46,8 @@ export class FrontendContainer extends Component {
       notifications: state.notifications,
       frontendMode: state.ui.transitory.frontendMode,
       pages: select(requests.gPages, state.entityStore),
-      settings: select(requests.settings, state.entityStore)
+      settings: select(requests.settings, state.entityStore),
+      fatalError: state.fatalError
     };
   };
 
@@ -128,7 +130,11 @@ export class FrontendContainer extends Component {
             tabIndex={-1}
             className={this.mainClassName}
           >
-            {renderRoutes(this.props.route.routes)}
+            {this.props.fatalError.error ? (
+              <AppFatalError fatalError={this.props.fatalError} />
+            ) : (
+              renderRoutes(this.props.route.routes)
+            )}
           </main>
           <Footers.FrontendFooter
             pages={this.props.pages}
