@@ -25,19 +25,21 @@ export default function ReturnMenuBody({
   return (
     <Styled.Menu className={className}>
       <Styled.List>
-        <Styled.Item>
-          <Styled.ItemLink to={returnUrl} onClick={hidePanel}>
-            <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
-            <Styled.LinkText>
-              {isJournalArticle
-                ? t("reader.menus.return.issue_home")
-                : t("reader.menus.return.project_home")}
-            </Styled.LinkText>
-            <Styled.EntityTitle {...maybeHtml(entityTitle)}>
-              {maybeReactNode(entityTitle)}
-            </Styled.EntityTitle>
-          </Styled.ItemLink>
-        </Styled.Item>
+        {returnUrl && (
+          <Styled.Item>
+            <Styled.ItemLink to={returnUrl} onClick={hidePanel}>
+              <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
+              <Styled.LinkText>
+                {isJournalArticle
+                  ? t("reader.menus.return.issue_home")
+                  : t("reader.menus.return.project_home")}
+              </Styled.LinkText>
+              <Styled.EntityTitle {...maybeHtml(entityTitle)}>
+                {maybeReactNode(entityTitle)}
+              </Styled.EntityTitle>
+            </Styled.ItemLink>
+          </Styled.Item>
+        )}
         {context.isLibrary && !isLibraryDisabled && (
           <Styled.Item>
             <Styled.ItemLink

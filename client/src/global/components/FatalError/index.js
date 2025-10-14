@@ -13,7 +13,8 @@ export default function FatalError(props) {
     fatalError: { error },
     headerLineOne,
     headerLineTwo,
-    dismiss
+    dismiss,
+    contained
   } = props;
 
   const { t } = useTranslation();
@@ -28,13 +29,15 @@ export default function FatalError(props) {
       <Helmet title={`${error.status} Error: ${error.heading}`} />
       <GlobalStyles styles={styles} />
       <Styled.Body className="browse">
-        <Styled.Wrapper>
+        <Styled.Wrapper $contained={contained}>
           <Styled.Inner>
             <Styled.Container>
               <header>
                 <Styled.Icon icon="stopSign64" size={52} />
                 <Styled.Message>
-                  {headerLineOne ?? defaultHeaders.headerLineOne}
+                  {headerLineOne
+                    ? t(headerLineOne)
+                    : defaultHeaders.headerLineOne}
                   {headerLineTwo !== null && (
                     <>
                       <br />
