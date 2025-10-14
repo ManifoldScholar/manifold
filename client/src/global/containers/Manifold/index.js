@@ -235,7 +235,8 @@ class ManifoldContainer extends PureComponent {
             active={this.props.visibility.signInUpOverlay}
             hideOverlay={hideOverlay}
           />
-          {fatalError.error ? (
+          {/* Allow 403's through, so we can render the appropriate header/footer with the error message. We now catch these in the Frontend/Backend/Reader containers. */}
+          {fatalError.error && fatalError.error.status !== 403 ? (
             <div className="global-container">
               <AppFatalError
                 fatalError={fatalError}

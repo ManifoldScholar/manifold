@@ -262,6 +262,7 @@ export default function Header(props) {
     "reader-header__inner": true,
     "reader-header__inner--shifted": mobileOptionsExpanded
   });
+
   return (
     <header className="reader-header">
       <Layout.PreHeader />
@@ -301,7 +302,7 @@ export default function Header(props) {
           {renderOptionsNav()}
         </div>
       </nav>
-      {!!text && (
+      {text ? (
         <>
           <div className="reader-header__panels reader-header__panels--left">
             <UIPanel
@@ -338,6 +339,17 @@ export default function Header(props) {
             />
           </div>
         </>
+      ) : (
+        <div className="reader-header__panels reader-header__panels--left">
+          <UIPanel
+            id="readerReturn"
+            visibility={visibility.uiPanels}
+            bodyComponent={ReturnMenu.Body}
+            toggleSignInUpOverlay={commonActions.toggleSignInUpOverlay}
+            hidePanel={commonActions.hideReaderReturnPanel}
+            moreLink="https://manifoldapp.org/"
+          />
+        </div>
       )}
       {renderOptionsToggle()}
       <HeaderNotifications />
