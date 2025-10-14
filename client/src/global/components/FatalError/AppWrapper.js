@@ -1,9 +1,8 @@
-import { useRef, useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import has from "lodash/has";
-import isEqual from "lodash/isEqual";
 import lh from "helpers/linkHandler";
 import { useCurrentUser, useNotification } from "hooks";
 import FatalErrorRender from ".";
@@ -17,8 +16,6 @@ export default function FatalErrorAppWrapper(props) {
   const { t } = useTranslation();
   const history = useHistory();
   const currentUser = useCurrentUser();
-
-  const prevError = useRef();
 
   const loginNotification = useMemo(
     () => ({
@@ -47,18 +44,6 @@ export default function FatalErrorAppWrapper(props) {
 
   if (!error) return null;
 
-  /* I would like to hanlde this a better way but can't think of one that
-     doesn't involve significant component reorganization. When a user hits
-     renderProjectAuthorizationRedirect below when trying to access a reader route,
-     the Manifold Container renders multiple times before the error is cleared from
-     the redux store, which causes this component to hit that redirect multiple times
-     and we loose the original route as the redirect path. Blocking render here when
-     error is unchanged prevents the extra redirect.
-  */
-  if (isEqual(error, prevError.current)) return null;
-
-  prevError.current = error;
-
   const isAuthorizationError =
     error.method === "GET" && (error.status === 403 || error.status === 401);
 
@@ -83,7 +68,7 @@ export default function FatalErrorAppWrapper(props) {
     notify();
   };
 
-  const redirectAndNotify = () => {
+  const redirectOrNotify = () => {
     if (!currentUser?.id) {
       return history.push({
         pathname: "/login",
@@ -91,25 +76,18 @@ export default function FatalErrorAppWrapper(props) {
       });
     }
 
-    const pathKey = redirectPath ? redirectPath.split("/")?.[1] : null;
-    const availableRedirects = [
-      "projects/all",
-      "backend/dashboard",
-      "journals/all",
-      "groups"
-    ];
-    const redirect = pathKey
-      ? `/${availableRedirects.find(r => r.startsWith(pathKey))}`
-      : "/";
-
-    return history.push({
-      pathname: redirect,
-      search: "?notification=authorizationError"
-    });
+    return (
+      <FatalErrorRender
+        headerLineOne={t("errors.access_denied.header")}
+        headerLineTwo=""
+        contained
+        {...props}
+      />
+    );
   };
 
   if (isProjectAuthError) return redirectToProject();
-  if (isAuthorizationError) return redirectAndNotify();
+  if (isAuthorizationError) return redirectOrNotify();
 
   return <FatalErrorRender {...props} />;
 }
