@@ -83,6 +83,11 @@ module ManifoldApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+
     config.eager_load_paths += [
       "#{config.root}/app/jobs",
       "#{config.root}/app/models",
