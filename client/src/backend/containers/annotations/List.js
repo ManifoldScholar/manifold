@@ -23,6 +23,7 @@ import {
   SelectAll,
   BulkActionButtons
 } from "backend/components/list/EntitiesList/List/bulkActions";
+import Authorize from "hoc/Authorize";
 
 function AnnotationsList({
   route,
@@ -128,7 +129,15 @@ function AnnotationsList({
   const currentPageIds = annotations?.map(a => a.id);
 
   return (
-    <>
+    <Authorize
+      kind="admin"
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "annotations"
+        })
+      }}
+      failureRedirect
+    >
       {renderChildRoutes()}
       <PageHeader type="list" title={t("titles.annotations")} />
       {!!annotations && (
@@ -172,7 +181,7 @@ function AnnotationsList({
           ]}
         />
       )}
-    </>
+    </Authorize>
   );
 }
 
