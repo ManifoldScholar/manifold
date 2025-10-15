@@ -16,6 +16,7 @@
       "discuss_entity": "Discuss this {{entity}}…",
       "unauthenticated": "Log in to post a comment",
       "unauthenticated_full": "<0>Log in</0> to view and add comments.",
+      "unverified": "You must verify your account before viewing or adding comments. You can resend the verification email from your <0>profile page</0>.",
       "deleted": "This comment was deleted."
     },
     "my_starred": {
