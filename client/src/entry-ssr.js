@@ -20,6 +20,8 @@ import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import { createServerFetchDataContext } from "hooks/api/contexts/InternalContext";
+import { ChunkExtractor } from "@loadable/server";
+import path from "path";
 
 const socket = config.services.client.rescueEnabled
   ? null
@@ -85,6 +87,17 @@ const render = async (req, res, store) => {
 
   const stats = readStats("Client");
 
+  const loadableStats = path.resolve(
+    "../client/tmp/client/dist/manifold/loadable-stats.json"
+    /* Not sure why this isn't working, but need to remove relative path here eventually */
+    // `${paths.build}/loadable-stats.json`
+  );
+
+  const extractor = new ChunkExtractor({
+    statsFile: loadableStats,
+    entrypoints: ["build/manifold-client-browser"]
+  });
+
   try {
     ch.notice("Rendering application on server.", "floppy_disk");
     ReactDOM.renderToString(
@@ -94,8 +107,10 @@ const render = async (req, res, store) => {
     await isFetchingComplete();
     ch.notice("ResolveData completed.", "floppy_disk");
 
+    const jsx = extractor.collectChunks(appComponent);
+
     renderString = ReactDOM.renderToString(
-      <HtmlBody component={appComponent} stats={stats} store={store} />
+      <HtmlBody component={jsx} stats={stats} store={store} />
     );
   } catch (renderError) {
     isError = true;
@@ -116,12 +131,14 @@ const render = async (req, res, store) => {
 
       const chunks = extractCriticalToChunks(renderString);
       const styleTags = constructStyleTagsFromChunks(chunks);
+      const scriptTags = extractor.getScriptTags();
       const htmlOutput = wrapHtmlBody({
         store,
         stats,
         styleTags,
         helmetContext,
-        body: renderString
+        body: renderString,
+        scriptTags
       });
       if (isError) {
         res.statusCode = 500;

@@ -14,6 +14,7 @@ const presets = [
   ]
 ];
 const plugins = [
+  "@loadable/babel-plugin",
   "@emotion",
   ["@babel/plugin-proposal-decorators", { version: "2023-11" }],
   "@babel/plugin-proposal-export-default-from",

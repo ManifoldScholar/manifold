@@ -1,5 +1,6 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CircularDependencyPlugin from "circular-dependency-plugin";
+import LoadablePlugin from "@loadable/webpack-plugin";
 import environment from "../helpers/environment";
 import plugins from "../helpers/plugins";
 import paths from "../helpers/paths";
@@ -132,6 +133,11 @@ export default function buildWebpackConfiguration(
     },
 
     plugins: [
+      new LoadablePlugin({
+        outputAsset: false,
+        writeToDisk: false
+      }),
+
       environment.isBuild &&
         new MiniCssExtractPlugin({
           filename: `${nameTemplate}.css`,

@@ -25,7 +25,7 @@ ManifestPlugin.prototype.apply = function apply(compiler) {
         version: true,
         timings: false,
         assets: true,
-        chunks: false,
+        chunks: true,
         chunkModules: false,
         chunkOrigins: false,
         modules: false,
@@ -38,6 +38,14 @@ ManifestPlugin.prototype.apply = function apply(compiler) {
         warnings: false,
         publicPath: true
       });
+      mkdirp.sync(paths.build);
+
+      /* @loadable/server needs the unmodified json, so write a copy first */
+      const loadableStatsPath = `${paths.build}/loadable-stats.json`;
+      fs.writeFileSync(loadableStatsPath, JSON.stringify(stats, null, 2), done);
+
+      /* chunks only needed for @loadable/server */
+      delete stats.chunks;
       delete stats.assets;
 
       const filteredGroups = {};
@@ -51,7 +59,6 @@ ManifestPlugin.prototype.apply = function apply(compiler) {
       };
 
       const writePath = `${paths.build}/${this.options.fileName}`;
-      mkdirp.sync(paths.build);
       fs.writeFileSync(writePath, JSON.stringify(out, null, 2), done);
     }
   );

@@ -57,7 +57,8 @@ export default function wrapHtmlBody({
   store,
   stats,
   styleTags = "",
-  body = ""
+  body = "",
+  scriptTags
 }) {
   const favicons = getFaviconLinks(store);
   const stylesheets = getStylesheetLinks(stats);
@@ -87,6 +88,7 @@ export default function wrapHtmlBody({
         }
       </head>
       ${body}
+      ${scriptTags}
     </html>
   `;
 }
