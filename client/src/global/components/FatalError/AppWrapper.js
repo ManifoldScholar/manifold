@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useCurrentUser } from "hooks";
 import FatalErrorRender from ".";
 
@@ -12,6 +12,7 @@ export default function FatalErrorAppWrapper(props) {
 
   const { t } = useTranslation();
   const history = useHistory();
+  const location = useLocation();
   const currentUser = useCurrentUser();
 
   if (!error) return null;
@@ -27,11 +28,25 @@ export default function FatalErrorAppWrapper(props) {
       });
     }
 
+    const title =
+      error.body
+        ?.replace("You are not authorized to read ", "")
+        .replace(".", "") ?? "this content";
+    const isRG = location.pathname.includes("groups");
+
     return (
       <FatalErrorRender
         headerLineOne={t("errors.access_denied.header")}
         headerLineTwo=""
+        userMessage={
+          isRG
+            ? t("errors.access_denied.authorization_reading_group")
+            : t("errors.access_denied.authorization", {
+                title
+              })
+        }
         contained
+        hideStatus
         {...props}
       />
     );
