@@ -39,7 +39,10 @@
     "access_denied": {
       "header": "Access Denied",
       "authentication": "Please login to proceed. After logging in, you will be automatically redirected.",
-      "authorization": "You must be granted access to proceed."
+      "authorization": "You are not authorized to view {{title}}.",
+      "authorization_reading_group": "You are not authorized to view this reading group.",
+      "no_admin_access": "Your account does not have admin access.",
+      "authorization_admin": "You are not authorized to manage the requested resource."
     }
   }
 }
