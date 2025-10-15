@@ -188,7 +188,7 @@ function ProjectPropertiesContainer({ project }) {
             />
           </Form.FieldGroup>
           <Form.FieldGroup
-            label={t("projects.forms.properties.presentation_header")}
+            label={t("projects.forms.properties.visibility_header")}
           >
             <Form.Switch
               wide
@@ -198,6 +198,18 @@ function ProjectPropertiesContainer({ project }) {
                 "projects.forms.properties.draft_mode_instructions"
               )}
             />
+            <Form.Switch
+              wide
+              label={t("projects.forms.properties.exclude_from_oai_label")}
+              name="attributes[excludeFromOAI]"
+              instructions={t(
+                "projects.forms.properties.exclude_from_oai_instructions"
+              )}
+            />
+          </Form.FieldGroup>
+          <Form.FieldGroup
+            label={t("projects.forms.properties.presentation_header")}
+          >
             <Form.Switch
               wide
               label={t("projects.forms.properties.featured_label")}
