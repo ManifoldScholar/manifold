@@ -118,7 +118,7 @@ services:
     stdin_open: true
     build:
       context: client
-      target: prod
+      target: dev
     ports:
       - "13100:13100" # Rescue
       - "13101:13101" # SSR
