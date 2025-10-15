@@ -25,7 +25,7 @@ class RecordsContainer extends PureComponent {
     return (
       <Authorize
         ability="update"
-        entity={["user", "maker", "page", "feature", "exportTarget"]}
+        entity={["user", "maker", "page", "feature"]}
         failureNotification={{
           body: this.props.t("records.unauthorized")
         }}
