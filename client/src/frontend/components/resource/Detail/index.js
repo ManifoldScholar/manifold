@@ -11,12 +11,14 @@ import VariantList from "../VariantList";
 import Share from "../Share";
 import Annotations from "./Annotations";
 import { uiVisibilityActions } from "actions";
+import { useAuthentication } from "hooks";
 import * as Styled from "./styles";
 import * as StyledLink from "../Link/styles";
 
 export default function ResourceDetail({ resource, projectTitle }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const authentication = useAuthentication();
 
   if (!resource) return null;
 
@@ -75,7 +77,11 @@ export default function ResourceDetail({ resource, projectTitle }) {
             ) : (
               <Styled.EmptyMessage>
                 <Trans
-                  i18nKey="placeholders.comments.unauthenticated_full"
+                  i18nKey={
+                    authentication?.authenticated
+                      ? "placeholders.comments.unverified"
+                      : "placeholders.comments.unauthenticated_full"
+                  }
                   components={[
                     <Styled.LoginButton type="button" onClick={onLoginClick} />
                   ]}
