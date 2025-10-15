@@ -109,7 +109,8 @@ export class AuthorizeComponent extends PureComponent {
       const fatalError = {
         error: {
           status: 403,
-          method: "GET"
+          method: "GET",
+          heading: "Access Denied"
         }
       };
 
