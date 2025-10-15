@@ -1,3 +1,8 @@
+\restrict mRJh1bEMqIKlORifWLRPjref0qy1FtwUYDQiKi0d19Z2JfhrL9GFesgbZeG4R02
+
+-- Dumped from database version 13.22
+-- Dumped by pg_dump version 13.22 (Debian 13.22-1.pgdg11+1)
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -7640,6 +7645,8 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 --
 -- PostgreSQL database dump complete
 --
+
+\unrestrict mRJh1bEMqIKlORifWLRPjref0qy1FtwUYDQiKi0d19Z2JfhrL9GFesgbZeG4R02
 
 SET search_path TO "$user", public;
 
