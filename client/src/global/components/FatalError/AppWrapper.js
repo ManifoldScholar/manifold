@@ -17,8 +17,7 @@ export default function FatalErrorAppWrapper(props) {
 
   if (!error) return null;
 
-  const isAuthorizationError =
-    error.method === "GET" && (error.status === 403 || error.status === 401);
+  const isAuthorizationError = error.status === 403 || error.status === 401;
 
   const redirectOrNotify = () => {
     if (!currentUser?.id) {
@@ -33,13 +32,17 @@ export default function FatalErrorAppWrapper(props) {
         ?.replace("You are not authorized to read ", "")
         .replace(".", "") ?? "this content";
     const isRG = location.pathname.includes("groups");
+    const isPost = error.method === "POST";
 
     return (
       <FatalErrorRender
         headerLineOne={t("errors.access_denied.header")}
         headerLineTwo=""
         userMessage={
-          isRG
+          /* eslint-disable-next-line no-nested-ternary */
+          isPost
+            ? error.body
+            : isRG
             ? t("errors.access_denied.authorization_reading_group")
             : t("errors.access_denied.authorization", {
                 title
