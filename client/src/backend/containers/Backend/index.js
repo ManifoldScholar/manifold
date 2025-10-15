@@ -13,6 +13,7 @@ import lh from "helpers/linkHandler";
 import BodyClass from "hoc/BodyClass";
 import Authorize from "hoc/Authorize";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
+import AppFatalError from "global/components/FatalError/AppWrapper";
 
 const { request } = entityStoreActions;
 
@@ -25,7 +26,8 @@ export class BackendContainer extends PureComponent {
       notifications: state.notifications,
       routing: state.routing,
       pages: entityUtils.select(requests.gPages, state.entityStore),
-      settings: entityUtils.select(requests.settings, state.entityStore)
+      settings: entityUtils.select(requests.settings, state.entityStore),
+      fatalError: state.fatalError
     };
   };
 
@@ -102,9 +104,13 @@ export class BackendContainer extends PureComponent {
             />
             <BreadcrumbsProvider>
               <div className="main-content">
-                {childRoutes(this.props.route, {
-                  childProps: this.childProps()
-                })}
+                {this.props.fatalError.error ? (
+                  <AppFatalError fatalError={this.props.fatalError} />
+                ) : (
+                  childRoutes(this.props.route, {
+                    childProps: this.childProps()
+                  })
+                )}
               </div>
             </BreadcrumbsProvider>
           </Authorize>
