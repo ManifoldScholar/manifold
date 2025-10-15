@@ -168,6 +168,12 @@ module Storage
         )
       end
 
+      def url_options
+        {
+          host: asset_host
+        }.compact
+      end
+
       private
 
       def file_storage(path, prefix)
@@ -198,7 +204,7 @@ module Storage
       end
 
       def s3_storage(bucket, prefix)
-        Shrine::Storage::S3.new(bucket:, **store_s3_options)
+        Shrine::Storage::S3.new(**store_s3_options, **{ bucket:, prefix: }.compact, public: true)
       end
 
       def test_storage(path, prefix)
@@ -207,6 +213,14 @@ module Storage
 
       def test?
         Rails.env.test?
+      end
+
+      def asset_host
+        if primary_store.file?
+          Rails.configuration.manifold.api_url&.sub(%r{/\z}, "") || ""
+        else
+          UploadConfig.asset_host || S3Config.endpoint
+        end
       end
     end
   end
