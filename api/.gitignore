@@ -40,3 +40,5 @@ backup*
 
 /config/*.local.yml
 /config/credentials/local.*
+
+.env

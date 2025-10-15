@@ -38,8 +38,11 @@ max_threads = ENV.fetch "RAILS_MAX_THREADS" do
   is_development ? 16 : 6
 end
 
-pidfile pidfile_path
-state_path state_path
+if listen_on_socket
+  pidfile pidfile_path
+  state_path state_path
+end
+
 tag "manifold-#{application}"
 environment rails_environment
 workers number_of_workers
