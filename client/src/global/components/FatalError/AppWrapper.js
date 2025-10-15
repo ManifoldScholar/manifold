@@ -32,6 +32,7 @@ export default function FatalErrorAppWrapper(props) {
         ?.replace("You are not authorized to read ", "")
         .replace(".", "") ?? "this content";
     const isRG = location.pathname.includes("groups");
+    const isAdmin = location.pathname.includes("backend");
     const isPost = error.method === "POST";
 
     return (
@@ -42,8 +43,11 @@ export default function FatalErrorAppWrapper(props) {
           /* eslint-disable-next-line no-nested-ternary */
           isPost
             ? error.body
-            : isRG
-            ? t("errors.access_denied.authorization_reading_group")
+            : /* eslint-disable-next-line no-nested-ternary */
+            isRG
+            ? isAdmin
+              ? t("errors.access_denied.authorization_admin_reading_group")
+              : t("errors.access_denied.authorization_reading_group")
             : t("errors.access_denied.authorization", {
                 title
               })
