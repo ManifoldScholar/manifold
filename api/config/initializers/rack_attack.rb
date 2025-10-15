@@ -1,11 +1,20 @@
 # frozen_string_literal: true
 
+INTERNAL_IP_RANGES = [
+  "10.229.0.0/16",
+  "10.244.0.0/16",
+  "10.245.0.0/16",
+  "10.246.0.0/16"
+]
+
 # :nocov:
 # We want to ensure that the public IP used by the client is never
 # accidentally blocklisted or throttled.
 unless Rails.env.development? || Rails.env.test?
   # ManifoldEnv.rate_limiting.derive_public_ips! Rails.application.config.manifold.domain
 end
+
+INTERNAL_IP_RANGES.each { |ip| Rack::Attack.safelist_ip(ip) }
 
 ManifoldEnv.rate_limiting.public_ips.each do |public_ip|
   Rack::Attack.safelist_ip public_ip
