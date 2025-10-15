@@ -109,19 +109,36 @@ export class AuthorizeComponent extends PureComponent {
       const fatalError = {
         error: {
           status: 403,
-          method: "GET",
-          heading: "Read Failed",
-          body:
-            props.failureNotification?.body ??
-            "You are not authorized to manage the requested resource."
+          method: "GET"
         }
       };
+
+      const hasAnyAdminAccess = this.authorization.authorizeKind({
+        authentication: this.props.authentication,
+        kind: [
+          "admin",
+          "editor",
+          "marketeer",
+          "project_creator",
+          "project_editor",
+          "project_property_manager",
+          "journal_editor"
+        ]
+      });
+
       return (
         <FatalErrorRender
           fatalError={fatalError}
           headerLineOne="errors.access_denied.header"
           headerLineTwo=""
+          userMessage={
+            props.failureNotification?.body ??
+            (!hasAnyAdminAccess
+              ? "errors.access_denied.no_admin_access"
+              : "errors.access_denied.authorization_admin")
+          }
           contained
+          hideStatus
         />
       );
     }
