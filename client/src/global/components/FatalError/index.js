@@ -14,7 +14,9 @@ export default function FatalError(props) {
     headerLineOne,
     headerLineTwo,
     dismiss,
-    contained
+    contained = false,
+    hideStatus = false,
+    userMessage
   } = props;
 
   const { t } = useTranslation();
@@ -47,14 +49,17 @@ export default function FatalError(props) {
                 </Styled.Message>
               </header>
               <div role="alert" aria-live="assertive" aria-atomic="true">
-                {error ? (
+                {error && !hideStatus ? (
                   <Styled.ErrorTitle>
                     {error.status} Error: {error.heading}
                   </Styled.ErrorTitle>
                 ) : null}
-                {config.environment.isDevelopment ? (
+                {userMessage ? (
+                  <Styled.ErrorBody>{t(userMessage)}</Styled.ErrorBody>
+                ) : null}
+                {config.environment.isDevelopment && (dismiss || error.body) ? (
                   <Styled.ErrorBody>
-                    {error.body}
+                    API Error Body (dev only): {error.body}
                     {dismiss ? (
                       <span>
                         <br />
@@ -96,5 +101,8 @@ FatalError.propTypes = {
   }).isRequired,
   headerLineOne: PropTypes.string,
   headerLineTwo: PropTypes.string,
-  dismiss: PropTypes.func
+  dismiss: PropTypes.func,
+  hideStatus: PropTypes.bool,
+  contained: PropTypes.bool,
+  userMessage: PropTypes.string
 };
