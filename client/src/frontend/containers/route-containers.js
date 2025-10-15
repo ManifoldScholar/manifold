@@ -1,8 +1,10 @@
+import loadable from "@loadable/component";
+
 import NotFound from "global/containers/NotFound";
 import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
-import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
-import Projects from "frontend/containers/Projects";
+// import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
+// import Projects from "frontend/containers/Projects";
 import ProjectCollections from "frontend/containers/ProjectCollections";
 import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail";
 import ProjectWrapper from "frontend/containers/ProjectWrapper";
@@ -19,7 +21,7 @@ import PasswordReset from "frontend/containers/PasswordReset";
 import Page from "frontend/containers/Page";
 import Subscriptions from "frontend/containers/Subscriptions";
 import Unsubscribe from "frontend/containers/Unsubscribe";
-import Home from "frontend/containers/Home";
+// import Home from "frontend/containers/Home";
 import MyReadingGroups from "frontend/containers/MyReadingGroups";
 import PublicReadingGroups from "frontend/containers/PublicReadingGroups";
 import ReadingGroup from "frontend/containers/ReadingGroup";
@@ -37,8 +39,24 @@ import JournalDetail from "frontend/containers/JournalDetail";
 import VolumeDetail from "frontend/containers/VolumeDetail";
 import JournalVolumesList from "frontend/containers/JournalVolumesList";
 import JournalIssuesList from "frontend/containers/JournalIssuesList";
-import PrivacySettings from "frontend/containers/PrivacySettings";
 import DataUse from "frontend/containers/DataUse";
+// import PrivacySettings from "frontend/containers/PrivacySettings";
+
+const ProjectsWrapper = loadable(() =>
+  import("frontend/containers/ProjectsWrapper")
+);
+const Projects = loadable(() => import("frontend/containers/Projects"));
+const PrivacySettings = loadable(
+  () => import("frontend/containers/PrivacySettings"),
+  {
+    ssr: true,
+    fallback: <div>this is the fallback</div>
+  }
+);
+const Home = loadable(() => import("frontend/containers/Home"), {
+  ssr: true,
+  fallback: <div>this is the fallback</div>
+});
 
 export default {
   NotFound,
