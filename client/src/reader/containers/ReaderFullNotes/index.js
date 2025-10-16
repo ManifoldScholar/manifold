@@ -11,7 +11,8 @@ import {
   useFetch,
   useFilterState,
   usePaginationState,
-  useListFilters
+  useListFilters,
+  useFromStore
 } from "hooks";
 import withReadingGroups from "hoc/withReadingGroups";
 import EntityCollection from "frontend/components/entity/Collection";
@@ -87,8 +88,12 @@ function ReaderFullNotesContainer({
     return out;
   }
 
+  const visibilityFilters = useFromStore(
+    "ui.transitory.visibility.visibilityFilters"
+  );
+
   function handleVisitAnnotation(annotation) {
-    const { textSectionId } = annotation.attributes;
+    const { textSectionId, currentUserIsCreator } = annotation.attributes;
     const url = lh.link(
       "readerSection",
       match.params.textId,
@@ -97,7 +102,15 @@ function ReaderFullNotesContainer({
     );
 
     commonActions.panelToggle("notes");
-    commonActions.showMyNotes();
+    const annotationFilter = currentUserIsCreator
+      ? { annotation: { ...visibilityFilters.annotation, yours: true } }
+      : { annotation: { ...visibilityFilters.annotation, others: true } };
+    commonActions.visibilityChange({
+      visibilityFilters: {
+        ...visibilityFilters,
+        ...annotationFilter
+      }
+    });
     history.push(url);
   }
 
