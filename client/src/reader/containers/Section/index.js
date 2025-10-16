@@ -41,7 +41,8 @@ export class SectionContainer extends Component {
       );
       promises.push(two);
     }
-    return Promise.all(promises);
+    /*  Catch errors here, so project redirects work correctly */
+    return Promise.all(promises).catch(e => console.error(e));
   };
 
   static mapStateToProps = (state, ownProps) => {
