@@ -324,6 +324,7 @@ class AnnotationEditor extends PureComponent {
               }}
               id="annotation-textarea"
               aria-describedby="annotation-textarea-error"
+              aria-required="true"
               style={{ width: "100%" }}
               placeholder={`${t("reader.actions.annotate_passage")}...`}
               onChange={this.handleBodyChange}
