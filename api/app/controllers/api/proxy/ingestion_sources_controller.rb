@@ -10,7 +10,7 @@ module API
         if source.attachment.storage.respond_to? :path
           send_attachment(source)
         else
-          redirect_to source.attachment.url
+          redirect_to source.attachment.url, allow_other_host: true
         end
       end
 
