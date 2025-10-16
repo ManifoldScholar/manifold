@@ -36,7 +36,7 @@ class VisibilityMenuBody extends PureComponent {
   }
 
   get canEngagePublicly() {
-    return this.context.attributes.abilities.engagePublicly;
+    return this.context?.attributes.abilities.engagePublicly;
   }
 
   get canAccessReadingGroups() {
