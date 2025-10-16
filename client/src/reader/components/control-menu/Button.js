@@ -10,7 +10,9 @@ export default class ControlMenuButton extends PureComponent {
     onClick: PropTypes.func.isRequired,
     icon: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    active: PropTypes.bool
+    active: PropTypes.bool,
+    ariaControls: PropTypes.string,
+    ariaHasPopup: PropTypes.string
   };
 
   handleClick = event => {
@@ -30,8 +32,11 @@ export default class ControlMenuButton extends PureComponent {
         className={buttonClass}
         onClick={this.handleClick}
         data-id={`toggle-${this.props.label}`}
-        aria-haspopup
         aria-expanded={this.props.active}
+        aria-controls={this.props.ariaControls}
+        {...(this.props.ariaHasPopup
+          ? { "aria-haspopup": this.props.ariaHasPopup }
+          : {})}
       >
         <Utility.IconComposer icon={this.props.icon} size={32} />
         <span className="screen-reader-text">{this.props.label}</span>
