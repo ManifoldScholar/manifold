@@ -59,6 +59,21 @@ export class Annotatable extends Component {
     if (!isEqual(this.props.annotations, prevProps.annotations))
       this.setState({ renderedAnnotations: this.props.annotations });
 
+    // if the user just removed a highlight, restore focus to the previous selection
+    const lastAnnotation = this.state.renderedAnnotations[
+      this.state.renderedAnnotations.length - 1
+    ];
+    const wasRemoved = lastAnnotation?.attributes.removed;
+    const prevLastAnnotation =
+      prevState.renderedAnnotations[this.state.renderedAnnotations.length - 1];
+    const prevWasRemoved = prevLastAnnotation?.attributes.removed;
+    if (wasRemoved !== prevWasRemoved) {
+      this.restoreFocusAndSelection({
+        restoreFocusTo: "selection",
+        restoreSelectionTo: "selection"
+      });
+    }
+
     const { selection } = this.state.selectionState ?? {};
     const { range, ...selectionData } = selection ?? {};
     const { selection: prevSelection } = prevState.selectionState ?? {};
@@ -265,6 +280,15 @@ export class Annotatable extends Component {
     return res.promise;
   };
 
+  /* Currently, this callback is used only for removing highlights.
+     Annotations are deleted using a call in the global component that
+     does not attempt to restore focus. In order to restore focus after
+     delete, we create a *fake* here on success and reset selection and
+     annotation state. We can't call this.resetState here because we
+     don't want to overwrite this.state.renderedAnnotations once we push
+     the fake. Then we call focus on the new node in componentDidUpdate
+     to ensure that it happens after state updates there.
+  */
   destroyAnnotation = annotation => {
     if (!annotation) return;
     const call = annotationsAPI.destroy(annotation.id);
@@ -273,14 +297,31 @@ export class Annotatable extends Component {
       request(call, requests.rAnnotationDestroy, options)
     );
     res.promise.then(() => {
-      // recreate destroyed node and move selection to it after state is reset
+      // recreate destroyed node and append to renderedAnnotations
       const selectionAnnotation = this.createAnnotationFromSelection(
-        this.state.selectionState.selectionAnnotation
+        this.state.selectionState.selectionAnnotation,
+        "previous",
+        true
       );
-      this.appendLastSelectionAnnotation(selectionAnnotation);
-      this.resetState({
-        restoreFocusTo: this.pendingAnnotationNode,
-        restoreSelectionTo: this.pendingAnnotationNode
+      // this state update gets overwritten by the one in componentDidUpdate
+      // if not pushed to the bottom of the stack with setTimeout
+      setTimeout(() => {
+        this.setState({
+          selectionState: {
+            selection: null,
+            selectionComplete: false,
+            selectionAnnotation: null,
+            popupTriggerX: null,
+            popupTriggerY: null
+          },
+          activeEvent: null,
+          annotation: null,
+          annotationState: null,
+          renderedAnnotations: [
+            ...this.state.renderedAnnotations,
+            selectionAnnotation
+          ]
+        });
       });
     });
     return res.promise;
@@ -336,13 +377,14 @@ export class Annotatable extends Component {
     });
   };
 
-  createAnnotationFromSelection = selection => {
+  createAnnotationFromSelection = (selection, style, removed) => {
     return {
       id: "selection",
       attributes: {
         userIsCreator: true,
         annotationStyle: "pending",
-        format: "highlight",
+        format: style ?? "highlight",
+        removed,
         ...selection
       }
     };
