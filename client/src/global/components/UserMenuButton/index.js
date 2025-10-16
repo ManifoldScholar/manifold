@@ -35,8 +35,7 @@ const UserMenuButton = forwardRef(
         {...(authenticated
           ? props
           : {
-              "aria-expanded": props["aria-expanded"],
-              "aria-haspopup": "dialog"
+              "aria-expanded": props["aria-expanded"]
             })}
       >
         <span className="screen-reader-text">

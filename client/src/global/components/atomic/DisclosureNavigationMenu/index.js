@@ -31,7 +31,8 @@ DisclosureNavigationMenu.displayName = "Global.Atomic.DisclosureNavigationMenu";
 DisclosureNavigationMenu.propTypes = {
   disclosure: PropTypes.node.isRequired,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
+  onBlur: PropTypes.func
 };
 
 export default DisclosureNavigationMenu;

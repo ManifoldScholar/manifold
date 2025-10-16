@@ -9,7 +9,6 @@ export class SearchMenuBody extends PureComponent {
     toggleVisibility: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    visibility: PropTypes.object.isRequired,
     searchType: PropTypes.string.isRequired,
     onSubmit: PropTypes.func,
     facets: PropTypes.array,

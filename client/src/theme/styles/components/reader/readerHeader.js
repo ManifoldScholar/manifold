@@ -1,7 +1,7 @@
 import {
   respond,
   rgba,
-  listHorizontal,
+  listUnstyled,
   buttonUnstyled,
   utilityPrimary,
   defaultTransitionProps
@@ -231,10 +231,14 @@ export default `
   }
 
   &__nav-list {
-    ${listHorizontal}
     position: relative;
     display: block;
     height: 100%;
+    ${listUnstyled}
+
+    > li {
+      display: inline-block;
+    }
   }
 
   &__nav-item {
@@ -242,7 +246,7 @@ export default `
     height: 100%;
     vertical-align: middle;
 
-    svg {
+    > svg {
       width: 28px;
       height: 28px;
 
