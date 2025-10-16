@@ -307,6 +307,7 @@ class AnnotationEditor extends PureComponent {
 
   render() {
     const t = this.props.t;
+
     return (
       <div className="annotation-editor">
         <form onSubmit={this.handleSubmit}>
@@ -315,22 +316,28 @@ class AnnotationEditor extends PureComponent {
             errors={this.state.errors}
             idForError="annotation-textarea-error"
           >
-            <label htmlFor="annotation-textarea" className="screen-reader-text">
-              {t("reader.actions.annotate_passage")}
-            </label>
-            <textarea
-              ref={ci => {
-                this.ci = ci;
-              }}
-              id="annotation-textarea"
-              aria-describedby="annotation-textarea-error"
-              aria-required="true"
-              style={{ width: "100%" }}
-              placeholder={`${t("reader.actions.annotate_passage")}...`}
-              onChange={this.handleBodyChange}
-              value={this.state.body}
-              className="annotation-editor__textarea"
-            />
+            <UIDConsumer name={id => `annotation-textarea-${id}`}>
+              {id => (
+                <>
+                  <label htmlFor={id} className="screen-reader-text">
+                    {t("reader.actions.annotate_passage")}
+                  </label>
+                  <textarea
+                    ref={ci => {
+                      this.ci = ci;
+                    }}
+                    id={id}
+                    aria-describedby="annotation-textarea-error"
+                    aria-required="true"
+                    style={{ width: "100%" }}
+                    placeholder={`${t("reader.actions.annotate_passage")}...`}
+                    onChange={this.handleBodyChange}
+                    value={this.state.body}
+                    className="annotation-editor__textarea"
+                  />
+                </>
+              )}
+            </UIDConsumer>
           </GlobalForm.Errorable>
 
           <div className="annotation-editor__actions">
