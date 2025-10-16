@@ -64,14 +64,6 @@ module TextSections
         FROM nodes
         LEFT JOIN LATERAL jsonb_array_elements(nodes.children) WITH ORDINALITY AS c(node, index) ON true
         WHERE nodes.children_count <> 0
-    ), contained_data AS (
-      SELECT
-        pn.node_path,
-        COALESCE(array_agg(cn.node_uuid ORDER BY cn.node_indices) FILTER (WHERE cn.node_uuid IS NOT NULL), '{}'::text[]) AS contained_node_uuids,
-        string_agg(cn.content, ' ' ORDER BY cn.node_indices) FILTER (WHERE cn.content IS NOT NULL AND cn.content ~ '[^[:space:]]+') AS contained_content
-        FROM nodes pn
-        INNER JOIN nodes cn ON pn.node_path @> cn.node_path
-        GROUP BY pn.node_path
     ), finalized AS (
       SELECT
         text_section_id, body_hash,
@@ -80,8 +72,6 @@ module TextSections
         node_type, tag,
         COALESCE(attributes, '{}'::jsonb) AS node_attributes,
         node_uuid, text_digest, content,
-        contained_node_uuids,
-        CASE WHEN char_length(contained_content) <= 4096 THEN contained_content ELSE '' END AS contained_content,
         COALESCE(node_extra, '{}'::jsonb) AS node_extra,
         COALESCE(children_count, 0) AS children_count,
         (#{TAG_IS_INTERMEDIATE}) AS intermediate,
@@ -89,7 +79,6 @@ module TextSections
         CURRENT_TIMESTAMP AS search_indexed_at,
         TRUE AS search_indexed
       FROM nodes
-      LEFT OUTER JOIN contained_data USING (node_path)
     )
     SQL
 
@@ -101,8 +90,6 @@ module TextSections
       node_type, tag,
       node_attributes,
       node_uuid, text_digest, content,
-      contained_node_uuids,
-      contained_content,
       node_extra,
       children_count,
       intermediate,
@@ -116,8 +103,6 @@ module TextSections
       node_type, tag,
       node_attributes,
       node_uuid, text_digest, content,
-      contained_node_uuids,
-      contained_content,
       node_extra,
       children_count,
       intermediate,
@@ -139,8 +124,6 @@ module TextSections
       "node_uuid" = EXCLUDED."node_uuid",
       "text_digest" = EXCLUDED."text_digest",
       "content" = EXCLUDED."content",
-      "contained_node_uuids" = EXCLUDED."contained_node_uuids",
-      "contained_content" = EXCLUDED."contained_content",
       "node_extra" = EXCLUDED."node_extra",
       "children_count" = EXCLUDED."children_count",
       "intermediate" = EXCLUDED."intermediate",
@@ -172,10 +155,6 @@ module TextSections
         EXCLUDED."text_digest" IS DISTINCT FROM text_section_nodes."text_digest"
         OR
         EXCLUDED."content" IS DISTINCT FROM text_section_nodes."content"
-        OR
-        EXCLUDED."contained_node_uuids" IS DISTINCT FROM text_section_nodes."contained_node_uuids"
-        OR
-        EXCLUDED."contained_content" IS DISTINCT FROM text_section_nodes."contained_content"
         OR
         EXCLUDED."node_extra" IS DISTINCT FROM text_section_nodes."node_extra"
         OR

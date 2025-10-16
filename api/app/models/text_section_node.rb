@@ -42,6 +42,8 @@ class TextSectionNode < ApplicationRecord
   has_many_readonly :text_section_node_links, -> { in_order }, inverse_of: :parent, foreign_key: :parent_id
   has_many_readonly :ancestor_links, -> { in_reverse_order }, class_name: "TextSectionNodeLink", inverse_of: :child, foreign_key: :child_id
 
+  has_one_readonly :text_section_node_derivation, inverse_of: :text_section_node
+
   has_many :parents, -> { terminal }, through: :ancestor_links, source: :parent
   has_many :children, through: :text_section_node_links, source: :child
 
@@ -92,6 +94,13 @@ class TextSectionNode < ApplicationRecord
   # @note Override default behavior. Highlights don't perform well on large corpuses.
   def pg_search_highlight
     ""
+  end
+
+  # @api private
+  # @see TextSectionNodes::IndexContainedContent
+  # @return [void]
+  def index_contained_content!
+    ManifoldApi::Container["text_section_nodes.index_contained_content"].(self).value!
   end
 
   # @api private

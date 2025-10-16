@@ -78,6 +78,7 @@ class TextSection < ApplicationRecord
   before_validation :update_body_json
   after_destroy :remove_linked_toc_entries
   after_save :extrapolate_nodes!
+  after_save_commit :asynchronously_index_current_node_content!
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
 
   scope :in_texts, ->(texts) { where(text: texts) }
@@ -191,6 +192,12 @@ class TextSection < ApplicationRecord
 
   # @api private
   # @return [void]
+  def asynchronously_index_current_node_content!
+    TextSections::IndexCurrentNodeContentJob.perform_later self
+  end
+
+  # @api private
+  # @return [void]
   def extrapolate_nodes!
     ManifoldApi::Container["text_sections.extrapolate_nodes"].(text_section: self).value!
   end
@@ -202,6 +209,11 @@ class TextSection < ApplicationRecord
     extract_content_from!(body_json, data: data)
 
     data.join(" ")
+  end
+
+  # @return [void]
+  def index_contained_content!
+    ManifoldApi::Container["text_sections.index_contained_content"].(self).value!
   end
 
   private
