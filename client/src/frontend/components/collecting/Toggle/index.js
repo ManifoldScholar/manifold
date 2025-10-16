@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { collectingAPI, requests } from "api";
 import { useDispatch } from "react-redux";
@@ -57,8 +56,6 @@ function CollectingToggle({
   const [confirmed, setConfirmed] = useState(false);
   const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
-
-  const { t } = useTranslation();
 
   const myCollectableReadingGroups = useMemo(() => {
     if (!Array.isArray(myReadingGroups)) return [];
