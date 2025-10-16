@@ -30,6 +30,9 @@ function ReaderNotesContainer({
   const navigate = useNavigate();
   const text = useFromStore("texts", "grab", textId);
   const section = useFromStore("textSections", "grab", sectionId);
+  const visibilityFilters = useFromStore(
+    "ui.transitory.visibility.visibilityFilters"
+  );
 
   const baseFilters = useMemo(
     () => ({
@@ -83,7 +86,7 @@ function ReaderNotesContainer({
   const commonActions = commonActionsHelper(dispatch);
 
   function handleVisitAnnotation(annotation) {
-    const { textSectionId } = annotation.attributes;
+    const { textSectionId, currentUserIsCreator } = annotation.attributes;
     const url = lh.link(
       "readerSection",
       textId,
@@ -91,7 +94,15 @@ function ReaderNotesContainer({
       `#annotation-${annotation.id}`
     );
     commonActions.panelToggle("notes");
-    commonActions.showMyNotes();
+    const annotationFilter = currentUserIsCreator
+      ? { annotation: { ...visibilityFilters.annotation, yours: true } }
+      : { annotation: { ...visibilityFilters.annotation, others: true } };
+    commonActions.visibilityChange({
+      visibilityFilters: {
+        ...visibilityFilters,
+        ...annotationFilter
+      }
+    });
     navigate(url);
   }
 
