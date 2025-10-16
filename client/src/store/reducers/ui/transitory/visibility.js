@@ -35,7 +35,7 @@ const panelSolo = {
 const showMyNotes = state => {
   const yours = true;
   const highlight = { ...state.visibilityFilters.highlight, yours };
-  const annotation = { ...state.visibilityFilters.highlight, yours };
+  const annotation = { ...state.visibilityFilters.annotation, yours };
   const visibilityFilters = {
     ...state.visibilityFilters,
     highlight,
