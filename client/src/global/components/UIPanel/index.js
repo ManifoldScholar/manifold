@@ -23,7 +23,7 @@ export default function UIPanel(props) {
         escapeDeactivates: e => props.hidePanel(e)
       }}
     >
-      <Styled.Panel inert={!visible ? "" : undefined}>
+      <Styled.Panel id={props.id} inert={!visible ? "" : undefined}>
         {React.createElement(props.bodyComponent, {
           ...props,
           closeCallback: props.hidePanel,
