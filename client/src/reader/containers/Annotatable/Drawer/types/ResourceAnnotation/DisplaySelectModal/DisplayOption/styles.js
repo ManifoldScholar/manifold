@@ -1,24 +1,42 @@
 import styled from "@emotion/styled";
 import { fluidScale } from "theme/styles/mixins";
 
-export const Option = styled.label`
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const Option = styled.div`
+  position: relative;
   padding: ${fluidScale("36px", "16px")};
   padding-block-start: ${fluidScale("30px", "14px")};
   background-color: var(--box-medium-bg-color);
+  outline: 3px solid var(--box-medium-bg-color);
   border-radius: 16px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
-  transition: background-color var(--transition-duration-default) ease;
+  transition: background-color var(--transition-duration-default),
+    outline-color var(--transition-duration-default);
 
   > * + * {
     margin-block-start: 16px;
   }
 
+  &:hover:not(:has(:disabled)),
+  &:has(:focus-visible) {
+    outline-color: var(--color-accent-primary);
+  }
+
+  &:has(:focus-visible) {
+    outline-offset: 3px;
+  }
+
   &:has(input:checked) {
     background-color: var(--color-accent-primary);
+    outline-color: var(--color-accent-primary);
   }
 
   .reader.scheme-dark & {
@@ -35,9 +53,17 @@ export const Option = styled.label`
 `;
 
 export const Input = styled.input`
-  position: absolute;
-  z-index: -1;
   opacity: 0;
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  margin: 0;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 `;
 
 export const Description = styled.p`
@@ -74,7 +100,7 @@ export const Illustration = styled.figure`
   }
 `;
 
-export const Title = styled.h3`
+export const Title = styled.label`
   color: var(--reader-color);
   font-size: ${fluidScale("26px", "20px")};
   margin: 0;
