@@ -120,7 +120,7 @@
       "block": {
         "title": "Block",
         "description": "A large preview block appears within the flow of the main text, just below the annotated portion. This larger preview includes metadata and controls.",
-        "selection_warning": "*Resource blocks can only be inserted at the end of a block element, such as a paragraph. If you'd like to display this resource as a block, adjust your selection so it extends to the end of a block."
+        "selection_warning": "Note: Resource blocks can only be inserted at the end of a block-level element, such as a paragraph. If you’d like to display this resource as a block, adjust your selection so it extends to the end of a block."
       },
       "submit_label": "Next"
     },
