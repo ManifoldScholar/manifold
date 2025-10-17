@@ -142,6 +142,8 @@ export default `
 
     &__source-summary {
       padding-top: 10px;
+      display: inline-block;
+      font-style: initial;
     }
 
     &__source-summary-link {

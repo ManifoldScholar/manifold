@@ -84,7 +84,7 @@ class SourceSummary extends React.PureComponent {
 
     /* eslint-disable jsx-a11y/anchor-is-valid */
     return (
-      <div className="annotation-selection__source-summary">
+      <figcaption className="annotation-selection__source-summary">
         <a
           href="#"
           onClick={onClick}
@@ -113,7 +113,7 @@ class SourceSummary extends React.PureComponent {
             />
           )}
         </a>
-      </div>
+      </figcaption>
     );
     /* eslint-enable jsx-a11y/anchor-is-valid */
   }

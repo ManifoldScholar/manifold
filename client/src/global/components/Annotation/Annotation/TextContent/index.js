@@ -56,7 +56,7 @@ class AnnotationSelectionWrapper extends PureComponent {
 
     return (
       <div className={wrapperClasses}>
-        <div className="annotation-selection__container">
+        <figure className="annotation-selection__container">
           <IconComposer
             icon="socialCite32"
             size="default"
@@ -68,7 +68,7 @@ class AnnotationSelectionWrapper extends PureComponent {
             onClick={this.props.visitHandler}
             onHover={this.hoverHandler}
           />
-        </div>
+        </figure>
         {this.annotatable && (
           <>
             <Authorize kind="any">
