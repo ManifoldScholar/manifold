@@ -6,11 +6,13 @@ import {
 } from "theme/styles/mixins";
 
 export const Dialog = styled.dialog`
+  block-size: var(--Dialog-block-size);
   // fallback if dvh units not supported
   max-block-size: 85vh;
   max-block-size: 85dvh;
-  inline-size: 88vw;
+  inline-size: 88vi;
   max-inline-size: 1440px;
+  flex-direction: column;
   padding: 0;
   border-radius: 20px;
   color: var(--color-neutral-text-dark);
@@ -23,6 +25,10 @@ export const Dialog = styled.dialog`
     var(--color-base-neutral-white),
     var(--color-base-neutral90)
   );
+
+  &[open] {
+    display: flex;
+  }
 `;
 
 export const Header = styled.header`
@@ -38,6 +44,10 @@ export const Header = styled.header`
     var(--color-base-neutral10),
     var(--color-base-neutral95)
   );
+
+  & + * {
+    flex-grow: 1;
+  }
 `;
 
 export const HeaderButton = styled.button`
@@ -77,7 +87,10 @@ export const CloseText = styled.span`
 export const Inner = styled.div`
   --_padding: min(4.5cqi, 40px);
 
-  max-inline-size: calc(880px + 2 * var(--_padding));
+  max-inline-size: calc(
+    var(--Dialog-content-max-inline-size, 880px) + 2 * var(--_padding)
+  );
+  block-size: 100%;
   padding: var(--_padding) var(--_padding) calc(1.2 * var(--_padding));
   margin-inline: auto;
 `;
