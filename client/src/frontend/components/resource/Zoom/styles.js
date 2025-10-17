@@ -1,32 +1,23 @@
 import styled from "@emotion/styled";
-import IconComposer from "global/components/utility/IconComposer";
-import {
-  utilityPrimary,
-  defaultTransitionProps,
-  defaultHoverStyle
-} from "theme/styles/mixins";
+import Button from "global/components/atomic/Button";
+import NativeDialog from "global/components/NativeDialog";
 
-export const ZoomIndicator = styled.div`
-  ${utilityPrimary}
+export const ZoomIndicator = styled(Button)`
   position: absolute;
   top: 30px;
   right: 30px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  padding: 5.5px 11px 7.5px 13px;
-  font-size: 12px;
-  cursor: pointer;
-  background-color: var(--color-base-neutral95);
   opacity: 0.9;
-  transition: color ${defaultTransitionProps},
-    background-color ${defaultTransitionProps};
-
-  &:hover {
-    ${defaultHoverStyle}
-  }
 `;
 
-export const Icon = styled(IconComposer)`
-  margin-left: 4px;
+export const Dialog = styled(NativeDialog)`
+  --Dialog-block-size: 85dvh;
+  --Dialog-content-max-inline-size: var(--container-width-inner);
+`;
+
+export const DialogInner = styled.div`
+  block-size: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
