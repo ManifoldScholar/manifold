@@ -11,7 +11,7 @@ export const Popup = styled.div`
   --menu-secondary-bg-color: var(--color-base-neutral10);
 
   --menu-button-hover-color: var(--color-base-neutral90);
-  --back-button-color: var(--color-base-neutral75);
+  --back-button-color: var(--color-base-neutral90);
   --group-button-color: var(--color-base-neutral80);
   --group-button-hover-color: var(--menu-button-hover-color);
   --group-button-hover-bg-color: var(--color-base-neutral20);
