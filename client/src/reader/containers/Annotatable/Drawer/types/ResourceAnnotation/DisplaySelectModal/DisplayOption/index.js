@@ -4,14 +4,14 @@ import BlockIllustration from "./illustrations/Block";
 import * as Styled from "./styles";
 
 export default function DisplayOption({
-  value,
   title,
   description,
-  defaultChecked,
-  onChange,
-  disabled
+  value,
+  warningId,
+  ...inputProps
 }) {
   const id = useId();
+  const descriptionId = useId();
 
   const Illustration =
     value === "inline" ? InlineIllustration : BlockIllustration;
@@ -23,21 +23,20 @@ export default function DisplayOption({
   }, []);
 
   return (
-    <Styled.Option htmlFor={`${id}-${value}`}>
+    <Styled.Option>
       <Styled.Input
         id={`${id}-${value}`}
         type="radio"
         value={value}
         name="attributes[readerDisplayFormat]"
-        defaultChecked={defaultChecked}
-        onChange={onChange}
-        disabled={disabled}
+        aria-describedby={`${descriptionId} ${warningId}`}
+        {...inputProps}
       />
-      <Styled.Title>{title}</Styled.Title>
-      <Styled.Illustration $animating={animating}>
+      <Styled.Title htmlFor={`${id}-${value}`}>{title}</Styled.Title>
+      <Styled.Illustration aria-hidden $animating={animating}>
         <Illustration />
       </Styled.Illustration>
-      <Styled.Description $animating={animating}>
+      <Styled.Description id={descriptionId} $animating={animating}>
         {description}
       </Styled.Description>
     </Styled.Option>
