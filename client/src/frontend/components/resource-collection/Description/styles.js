@@ -15,6 +15,7 @@ export const Wrapper = styled.div`
   gap: 20px;
   font-family: var(--font-family-copy);
   font-size: ${fluidScale("16px", "14px")};
+  color: var(--strong-color);
 
   p {
     margin: 0;
