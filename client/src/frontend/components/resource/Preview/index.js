@@ -13,7 +13,8 @@ function ResourcePreview({
   hideDetailLink,
   textId,
   destroyAnnotation,
-  enableZoom
+  enableZoom,
+  showDescription = false
 }) {
   return (
     <Styled.Wrapper>
@@ -25,7 +26,7 @@ function ResourcePreview({
       />
       <Description
         resource={resource}
-        captionOnly
+        captionOnly={!showDescription}
         className="resource-preview-description"
       />
       <Styled.Footer>
@@ -53,7 +54,8 @@ ResourcePreview.propTypes = {
   hideDetailLink: PropTypes.bool,
   textId: PropTypes.string,
   destroyAnnotation: PropTypes.func,
-  enableZoom: PropTypes.bool
+  enableZoom: PropTypes.bool,
+  showDescription: PropTypes.bool
 };
 
 export default ResourcePreview;

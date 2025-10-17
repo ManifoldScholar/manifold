@@ -222,7 +222,8 @@ export class CommentEditor extends PureComponent {
             onClick={this.toggleOpen}
             aria-expanded={this.state.open}
             postIcon="interactComment24"
-            size="lg"
+            size="md"
+            shape="lozenge"
             background="outline-accent"
           />
         ) : null}
