@@ -11,7 +11,8 @@ const { request } = entityStoreActions;
 export class AnnotationList extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
     const newState = {
-      annotations: select(requests.rDrawerAnnotations, state.entityStore) || []
+      annotations: select(requests.rDrawerAnnotations, state.entityStore) || [],
+      authentication: state.authentication
     };
     return { ...newState, ...ownProps };
   };
@@ -60,6 +61,16 @@ export class AnnotationList extends PureComponent {
     return this.props.createHandler(newModel);
   };
 
+  showUnverifiedWarning = () => {
+    const { authentication } = this.props;
+    if (!authentication?.authenticated) return false;
+
+    const { currentUser } = authentication;
+    const { trusted, established } = currentUser.attributes;
+    if (!trusted && !established) return true;
+    return false;
+  };
+
   render() {
     const { annotations } = this.props;
 
@@ -69,6 +80,7 @@ export class AnnotationList extends PureComponent {
         annotations={annotations}
         loginHandler={this.props.loginHandler}
         dispatch={this.props.dispatch}
+        showUnverifiedWarning={this.showUnverifiedWarning()}
       />
     );
   }
