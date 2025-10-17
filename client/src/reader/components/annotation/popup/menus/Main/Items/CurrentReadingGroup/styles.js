@@ -6,7 +6,6 @@ import IconComposer from "global/components/utility/IconComposer";
 export const Icon = styled(IconComposer)`
   transform: rotate(90deg);
   opacity: 0;
-  transition: opacity 0.3s;
   flex-shrink: 0;
 `;
 
@@ -19,7 +18,6 @@ export const Label = styled.span`
   inline-size: 100%;
   text-align: start;
   color: var(--color-base-neutral75);
-  transition: color 0.3s;
 
   .scheme-dark & {
     color: var(--color-base-neutral30);
@@ -51,10 +49,9 @@ export const RGMenuItem = styled(ReakitMenuItem)`
 `;
 
 export const CurrentGroup = styled.span`
-  margin-block-start: 6px;
   font-family: var(--font-family-sans);
   font-size: 17px;
-  line-height: 20px;
+  line-height: 28px;
   font-weight: var(--font-weight-regular);
   overflow: hidden;
   text-overflow: ellipsis;
