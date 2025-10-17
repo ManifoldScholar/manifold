@@ -1,9 +1,7 @@
-import Header from "./Header";
 import { useFromStore } from "hooks";
+import Dialog from "global/components/NativeDialog";
 import ResourcePreview from "frontend/components/resource/Preview";
 import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow/Fetcher";
-import * as Styled from "./styles";
-import { useId } from "react";
 
 export default function ResourceAnnotationDialog({
   resource,
@@ -11,8 +9,6 @@ export default function ResourceAnnotationDialog({
   destroyAnnotation,
   ...dialog
 }) {
-  const headingId = useId();
-
   const resourceEntity = useFromStore({
     path: `entityStore.entities.${resource.type}s.${resource.id}`
   });
@@ -34,19 +30,8 @@ export default function ResourceAnnotationDialog({
     );
 
   return (
-    <Styled.Dialog
-      ref={dialog.dialogRef}
-      inert={!dialog.open ? "" : undefined}
-      aria-labelledby={headingId}
-    >
-      <Header
-        onClose={dialog.onCloseClick}
-        title={resourceEntity?.attributes.title}
-        headingId={headingId}
-      />
-      <div className="container-inline-size">
-        <Styled.Inner>{resourceEntity ? renderPreview : null}</Styled.Inner>
-      </div>
-    </Styled.Dialog>
+    <Dialog title={resourceEntity?.attributes.title} {...dialog}>
+      {resourceEntity ? renderPreview : null}
+    </Dialog>
   );
 }
