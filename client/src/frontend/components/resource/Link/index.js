@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Button, { stylePropTypes } from "global/components/atomic/Button";
+import * as Styled from "./styles";
 
 function ResourceLink({ resource, ...styleProps }) {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ function ResourceLink({ resource, ...styleProps }) {
 
   if (kind === "link")
     return (
-      <Button
+      <Styled.ExternalLink
         as="a"
         label={t("navigation.visit_page")}
         href={externalUrl}
