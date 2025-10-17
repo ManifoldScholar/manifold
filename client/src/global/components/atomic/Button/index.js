@@ -1,44 +1,51 @@
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
-export default function Button({
-  label,
-  srLabel,
-  size = "sm",
-  shape = "rectangle",
-  background = "neutral",
-  lowercase = false,
-  preIcon,
-  postIcon,
-  ...props
-}) {
-  /* eslint-disable-next-line no-nested-ternary */
-  const iconSize = size === "lg" ? 32 : size === "md" ? 24 : 20;
+const Button = forwardRef(
+  (
+    {
+      label,
+      srLabel,
+      size = "sm",
+      shape = "rectangle",
+      background = "neutral",
+      lowercase = false,
+      preIcon,
+      postIcon,
+      ...props
+    },
+    ref
+  ) => {
+    /* eslint-disable-next-line no-nested-ternary */
+    const iconSize = size === "lg" ? 32 : size === "md" ? 24 : 20;
 
-  return (
-    <Styled.Button
-      $size={size}
-      $shape={shape}
-      $background={background}
-      $lowercase={lowercase}
-      {...props}
-    >
-      {preIcon && <Styled.ButtonIcon icon={preIcon} size={iconSize} />}
-      {label && (
-        <span
-          aria-hidden={srLabel ? true : undefined}
-          style={{
-            "--_min-block-size": `${iconSize}px`
-          }}
-        >
-          {label}
-        </span>
-      )}
-      {srLabel && <span className="screen-reader-text">{srLabel}</span>}
-      {postIcon && <Styled.ButtonIcon icon={postIcon} size={iconSize} />}
-    </Styled.Button>
-  );
-}
+    return (
+      <Styled.Button
+        ref={ref}
+        $size={size}
+        $shape={shape}
+        $background={background}
+        $lowercase={lowercase}
+        {...props}
+      >
+        {preIcon && <Styled.ButtonIcon icon={preIcon} size={iconSize} />}
+        {label && (
+          <span
+            aria-hidden={srLabel ? true : undefined}
+            style={{
+              "--_min-block-size": `${iconSize}px`
+            }}
+          >
+            {label}
+          </span>
+        )}
+        {srLabel && <span className="screen-reader-text">{srLabel}</span>}
+        {postIcon && <Styled.ButtonIcon icon={postIcon} size={iconSize} />}
+      </Styled.Button>
+    );
+  }
+);
 
 export const stylePropTypes = {
   size: PropTypes.oneOf(["sm", "md", "lg"]),
@@ -61,3 +68,5 @@ Button.propTypes = {
 };
 
 Button.displayName = "Global.Atomic.Button";
+
+export default Button;
