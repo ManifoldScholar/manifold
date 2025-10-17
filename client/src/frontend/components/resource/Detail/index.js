@@ -25,7 +25,7 @@ export default function ResourceDetail({ resource }) {
   return (
     <Styled.Container>
       <Styled.Grid>
-        <Preview resource={resource} titleAs="h1" hideDetailLink />
+        <Preview resource={resource} titleAs="h1" hideDetailLink enableZoom />
         <Styled.CommentsWrapper>
           <Styled.CommentsSection>
             <Styled.ListHeader>
