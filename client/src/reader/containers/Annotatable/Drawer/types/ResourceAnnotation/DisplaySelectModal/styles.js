@@ -21,6 +21,12 @@ export const Dialog = styled.dialog`
   font-family: var(--font-family-sans);
 `;
 
+export const OptionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
+
 export const Options = styled.fieldset`
   display: flex;
   gap: 40px;
@@ -95,8 +101,4 @@ export const CloseButton = styled.button`
   > span {
     margin-block-start: -1px;
   }
-`;
-
-export const Warning = styled.p`
-  color: var(--error-color);
 `;
