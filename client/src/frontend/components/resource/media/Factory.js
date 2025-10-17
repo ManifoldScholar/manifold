@@ -1,22 +1,8 @@
 import PropTypes from "prop-types";
 import Zoom from "../Zoom";
 import * as Kinds from "./kinds";
+import getKindComponent from "./getKindComponent";
 import * as Styled from "./styles";
-
-function getKindComponent(kind) {
-  switch (kind) {
-    case "audio":
-      return Kinds.Audio;
-    case "image":
-      return Kinds.Image;
-    case "interactive":
-      return Kinds.Interactive;
-    case "video":
-      return Kinds.Video;
-    default:
-      return Kinds.Default;
-  }
-}
 
 function ResourceMediaFactory({
   resource,
