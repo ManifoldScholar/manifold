@@ -28,6 +28,7 @@ export default function DisplaySelectModal({
   };
 
   const id = useId();
+  const warningId = useId();
 
   return (
     <Styled.Dialog
@@ -48,27 +49,30 @@ export default function DisplaySelectModal({
             <Utility.IconComposer icon="close16" size={16} />
           </Styled.CloseButton>
         </Styled.Header>
-        <Styled.Options>
-          <DisplayOption
-            value="inline"
-            title={t("reader.resource_display.inline.title")}
-            description={t("reader.resource_display.inline.description")}
-            onChange={() => setDisplay("inline")}
-            defaultChecked
-          />
-          <DisplayOption
-            value="block"
-            title={t("reader.resource_display.block.title")}
-            description={t("reader.resource_display.block.description")}
-            onChange={() => setDisplay("block")}
-            disabled={!pendingAnnotation?.blockResourceAllowed}
-          />
-        </Styled.Options>
-        {!pendingAnnotation?.blockResourceAllowed && (
-          <Styled.Warning>
-            {t("reader.resource_display.block.selection_warning")}
-          </Styled.Warning>
-        )}
+        <Styled.OptionsWrapper>
+          <Styled.Options aria-labelledby={id}>
+            <DisplayOption
+              value="inline"
+              title={t("reader.resource_display.inline.title")}
+              description={t("reader.resource_display.inline.description")}
+              onChange={() => setDisplay("inline")}
+              defaultChecked
+            />
+            <DisplayOption
+              value="block"
+              title={t("reader.resource_display.block.title")}
+              description={t("reader.resource_display.block.description")}
+              onChange={() => setDisplay("block")}
+              disabled={!pendingAnnotation?.blockResourceAllowed}
+              warningId={warningId}
+            />
+          </Styled.Options>
+          {!pendingAnnotation?.blockResourceAllowed && (
+            <Styled.Instructions id={warningId}>
+              {t("reader.resource_display.block.selection_warning")}
+            </Styled.Instructions>
+          )}
+        </Styled.OptionsWrapper>
         <Styled.ButtonGroup>
           <Button
             type="submit"
