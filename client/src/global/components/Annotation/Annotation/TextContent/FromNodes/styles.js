@@ -1,19 +1,69 @@
 import styled from "@emotion/styled";
 import Collapse from "global/components/Collapse";
-import { buttonUnstyled } from "theme/styles/mixins";
+import { buttonUnstyled, utilityPrimary } from "theme/styles/mixins";
 
 export const Toggle = styled(Collapse.Toggle)`
   ${buttonUnstyled}
+  ${utilityPrimary}
+
+  --_toggle-arrow-transform: rotate(0deg);
 
   text-align: inherit;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-block: 2px;
+  margin-block-start: 4px;
+
+  &:has(+ *) {
+    margin-block-end: 6px;
+  }
 
   &:hover {
     color: inherit;
+  }
+
+  /* If this is a div, then it's no longer collapsible content and doesn't need to be shown. */
+  &:is(div) {
+    display: none;
+  }
+
+  &[aria-expanded="true"] {
+    --_toggle-arrow-transform: rotate(180deg);
+    margin-block-start: 14px;
+
+    .toggle-show-label {
+      display: none;
+    }
+
+    .toggle-hide-label {
+      display: inline-block;
+    }
+  }
+
+  > svg {
+    stroke: currentColor;
+    stroke-width: 0.5px;
+    transform: var(--_toggle-arrow-transform);
+  }
+
+  .toggle-hide-label {
+    display: none;
   }
 `;
 
 export const Content = styled(Collapse.Content)`
   position: relative;
+
+  &:focus-visible {
+    outline: solid 2px var(--focus-color);
+    outline-offset: 2px;
+  }
+
+  &.collapse__content--hidden {
+    pointer-events: none;
+  }
 `;
 
 export const Overlay = styled.div`
