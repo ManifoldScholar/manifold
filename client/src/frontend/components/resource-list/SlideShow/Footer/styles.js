@@ -80,7 +80,8 @@ export const Meta = styled.div`
   flex-basis: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
+  max-inline-size: 38rem;
 `;
 
 export const Actions = styled.div`
