@@ -1,20 +1,37 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-// import ResourcePreview from "frontend/components/resource-preview";
+import useDialog from "@castiron/hooks/useDialog";
+import getKindComponent from "../media/getKindComponent";
 import * as Styled from "./styles";
 
 export default function ResourceListSlideZoom({ resource, label }) {
   const { t } = useTranslation();
 
-  return null;
+  const dialog = useDialog({
+    modal: true,
+    scrollLockClassName: "no-scroll"
+  });
+
+  const KindComponent = getKindComponent(resource.attributes.kind);
+
+  if (!KindComponent) return null;
 
   return (
-    <ResourcePreview resource={resource} toggleType="slide">
-      <Styled.ZoomIndicator>
-        <span>{label ?? t("actions.zoom")}</span>
-        <Styled.Icon icon="zoomIn16" size={21.333} />
-      </Styled.ZoomIndicator>
-    </ResourcePreview>
+    <>
+      <Styled.ZoomIndicator
+        ref={dialog.toggleRef}
+        onClick={dialog.onToggleClick}
+        size="sm"
+        background="neutral"
+        label={label ?? t("actions.zoom")}
+        postIcon="zoomIn16"
+      />
+      <Styled.Dialog title={resource.attributes.title} {...dialog}>
+        <Styled.DialogInner>
+          <KindComponent resource={resource} fixedAspectRatio={false} />
+        </Styled.DialogInner>
+      </Styled.Dialog>
+    </>
   );
 }
 
