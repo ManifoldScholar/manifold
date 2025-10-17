@@ -7,6 +7,9 @@ export const Block = styled.aside`
   --_ideal-inline-overflow: 0.3 * (95vw - 100cqi);
   --_inline-overflow: clamp(0px, var(--_ideal-inline-overflow), 6.77cqi);
 
+  --Media-Image-max-block-size: 750px;
+  --Media-Image-object-fit: contain;
+
   inline-size: calc(100% + 2 * var(--_inline-overflow));
   margin-inline-start: calc(-1 * var(--_inline-overflow));
   // fallback if cqi not supported
