@@ -37,31 +37,20 @@ export const Marker = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  background-color: var(--color-base-neutral10);
-  color: var(--color-base-neutral75);
+  color: var(--strong-color);
+  background-color: var(--button-bg-color);
   cursor: pointer;
   margin-inline: 8px;
   transform: scale(calc(100% - (3 - var(--reader-font-size-index)) * 5%))
     translateY(calc(2px + (3 - var(--reader-font-size-index)) * 1px));
-  transition: background-color ${defaultTransitionProps};
-
-  .scheme-dark & {
-    background-color: var(--color-base-neutral100);
-    color: var(--color-base-neutral50);
-
-    ${({ $active }) =>
-      $active &&
-      `
-        background-color: var(--color-accent-primary);
-        color: var(--color-base-neutral90);
-      `}
-  }
+  transition: color ${defaultTransitionProps},
+    background-color ${defaultTransitionProps};
 
   ${({ $active }) =>
     $active &&
     `
-      background-color: var(--color-accent-primary);
       color: var(--color-base-neutral90);
+      background-color: var(--color-accent-primary);
     `}
 
   ${({ $static }) => $static && `pointer-events: none; cursor: default;`}
