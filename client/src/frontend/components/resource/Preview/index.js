@@ -14,7 +14,8 @@ function ResourcePreview({
   textId,
   destroyAnnotation,
   enableZoom,
-  showDescription = false
+  showDescription = false,
+  mediaAspectRatio
 }) {
   return (
     <Styled.Wrapper>
@@ -23,6 +24,7 @@ function ResourcePreview({
         resource={resource}
         enableZoom={enableZoom}
         roundedCorners
+        aspectRatio={mediaAspectRatio}
       />
       <Description
         resource={resource}
@@ -55,7 +57,8 @@ ResourcePreview.propTypes = {
   textId: PropTypes.string,
   destroyAnnotation: PropTypes.func,
   enableZoom: PropTypes.bool,
-  showDescription: PropTypes.bool
+  showDescription: PropTypes.bool,
+  mediaAspectRatio: PropTypes.string
 };
 
 export default ResourcePreview;
