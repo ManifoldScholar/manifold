@@ -30,6 +30,7 @@ import BodyClass from "hoc/BodyClass";
 import Authorize from "hoc/Authorize";
 import { ReaderContext } from "helpers/contexts";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
+import AppFatalError from "global/components/FatalError/AppWrapper";
 
 const {
   selectFont,
@@ -78,7 +79,8 @@ export class ReaderContainer extends Component {
       notifications: state.notifications,
       renderDevTools: state.developer.renderDevTools,
       settings: select(requests.settings, state.entityStore),
-      appearance
+      appearance,
+      fatalError: state.fatalError
     };
   };
 
@@ -279,8 +281,14 @@ export class ReaderContainer extends Component {
             tabIndex={-1}
             className="main-content flex-viewport"
           >
-            {this.maybeRenderOverlay(this.props)}
-            {this.renderRoutes()}
+            {this.props.fatalError.error ? (
+              <AppFatalError fatalError={this.props.fatalError} />
+            ) : (
+              <>
+                {this.maybeRenderOverlay(this.props)}
+                {this.renderRoutes()}
+              </>
+            )}
           </main>
           <Footers.ReaderFooter text={this.props.text} />
           <Layout.PostFooter />
