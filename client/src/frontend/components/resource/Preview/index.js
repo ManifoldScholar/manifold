@@ -12,12 +12,17 @@ function ResourcePreview({
   titleAs = "h2",
   hideDetailLink,
   textId,
-  destroyAnnotation
+  destroyAnnotation,
+  enableZoom
 }) {
   return (
     <Styled.Wrapper>
       <Title resource={resource} titleAs={titleAs} />
-      <MediaFactory resource={resource} roundedCorners />
+      <MediaFactory
+        resource={resource}
+        enableZoom={enableZoom}
+        roundedCorners
+      />
       <Description
         resource={resource}
         captionOnly
@@ -47,7 +52,8 @@ ResourcePreview.propTypes = {
   titleAs: PropTypes.oneOf(["h1", "h2", "h3"]),
   hideDetailLink: PropTypes.bool,
   textId: PropTypes.string,
-  destroyAnnotation: PropTypes.func
+  destroyAnnotation: PropTypes.func,
+  enableZoom: PropTypes.bool
 };
 
 export default ResourcePreview;
