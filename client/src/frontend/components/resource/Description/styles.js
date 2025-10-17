@@ -5,6 +5,7 @@ export const Content = styled.div`
   font-family: var(--font-family-copy);
   font-size: ${fluidScale("16px", "14px")};
   line-height: 1.4;
+  color: var(--strong-color);
 
   p + p {
     margin-top: 1em;
