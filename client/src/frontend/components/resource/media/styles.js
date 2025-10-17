@@ -15,5 +15,5 @@ export const Wrapper = styled.div`
     $aspectRatio &&
     `
     --Media-aspect-ratio: ${$aspectRatio};
-  `};
+  `}
 `;
