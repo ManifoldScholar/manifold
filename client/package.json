@@ -80,7 +80,7 @@
     "js-beautify": "^1.15.4",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
-    "mammoth": "^1.9.0",
+    "mammoth": "^1.11.0",
     "minimist": "^1.2.8",
     "mkdirp": "^3.0.1",
     "morgan": "^1.10.0",
