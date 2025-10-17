@@ -231,4 +231,8 @@ export default `
     border-spacing: 0;
     border-collapse: collapse;
   }
+
+  dialog {
+    border: none;
+  }
 `;

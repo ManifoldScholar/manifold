@@ -4,9 +4,47 @@ import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import values from "lodash/values";
 import union from "lodash/union";
-import Notation from "reader/components/notation";
+import ResourceAnnotationFactory from "reader/components/resource-annotation";
 import smoothScroll from "utils/smoothScroll";
 import { withTranslation } from "react-i18next";
+
+export const formatLocalAnnotations = (annotations, uuid) =>
+  annotations.map(a => {
+    const id = a.id;
+    const type = a.attributes.format;
+    const isCreator =
+      a.id === "selection" ? true : a.attributes.currentUserIsCreator;
+    const start =
+      a.attributes.startNode === uuid ? a.attributes.startChar : null;
+    const end = a.attributes.endNode === uuid ? a.attributes.endChar : null;
+    const {
+      startNode,
+      endNode,
+      resourceId,
+      resourceCollectionId,
+      authorCreated,
+      abilities,
+      annotationStyle,
+      readerDisplayFormat,
+      textId
+    } = a.attributes;
+    return {
+      id,
+      type,
+      annotationStyle,
+      isCreator,
+      start,
+      end,
+      startNode,
+      endNode,
+      resourceId,
+      resourceCollectionId,
+      authorCreated,
+      abilities,
+      readerDisplayFormat,
+      textId
+    };
+  });
 
 class TextNode extends Component {
   static propTypes = {
@@ -58,43 +96,10 @@ class TextNode extends Component {
   }
 
   get localAnnotationsArray() {
-    return values(this.openAnnotations).map(a => {
-      const id = a.id;
-      const type = a.attributes.format;
-      const isCreator =
-        a.id === "selection" ? true : a.attributes.currentUserIsCreator;
-      const start =
-        a.attributes.startNode === this.props.nodeUuid
-          ? a.attributes.startChar
-          : null;
-      const end =
-        a.attributes.endNode === this.props.nodeUuid
-          ? a.attributes.endChar
-          : null;
-      const {
-        startNode,
-        endNode,
-        resourceId,
-        resourceCollectionId,
-        authorCreated,
-        abilities,
-        annotationStyle
-      } = a.attributes;
-      return {
-        id,
-        type,
-        annotationStyle,
-        isCreator,
-        start,
-        end,
-        startNode,
-        endNode,
-        resourceId,
-        resourceCollectionId,
-        authorCreated,
-        abilities
-      };
-    });
+    return formatLocalAnnotations(
+      values(this.openAnnotations),
+      this.props.nodeUuid
+    );
   }
 
   get annotatedContent() {
@@ -246,7 +251,7 @@ class TextNode extends Component {
         <Tag key={index} {...props}>
           {chunk}
           {endingResources.length > 0 ? (
-            <Notation.Marker annotations={endingResources} />
+            <ResourceAnnotationFactory annotations={endingResources} />
           ) : null}
         </Tag>
       );
