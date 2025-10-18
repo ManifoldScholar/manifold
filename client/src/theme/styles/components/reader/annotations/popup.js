@@ -198,17 +198,17 @@ export default `
       }
 
       &:hover,
-      &:focus,
+      &:focus-visible {
+        color: var(--menu-selected-button-interaction-color);
+        background-color: var(--menu-selected-button-interaction-background-color);
+        outline: none;
+        text-decoration-line: underline;
+      }
+
       &--selected {
         color: var(--menu-button-hover-color);
         background-color: var(--hover-color);
         outline: none;
-      }
-
-      &--selected:hover,
-      &--selected:focus {
-        color: var(--menu-selected-button-interaction-color);
-        background-color: var(--menu-selected-button-interaction-background-color);
       }
     }
 
