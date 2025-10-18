@@ -19,6 +19,7 @@ export default function Overlay({ hideOverlay, active = false }) {
     >
       <Styled.Dialog
         role="dialog"
+        aria-modal
         aria-labelledby={uid}
         inert={!active ? "" : undefined}
       >

@@ -239,7 +239,13 @@ class TextNode extends Component {
         ...previousTabIndex
       };
 
-      const Tag = interactiveAttributes.href ? "a" : "span";
+      let Tag = "span";
+
+      if (interactiveAttributes.href) {
+        Tag = "a";
+      } else if (textAnnotationIds?.length > 0) {
+        Tag = "mark";
+      }
 
       return (
         // eslint-disable-next-line react/no-array-index-key

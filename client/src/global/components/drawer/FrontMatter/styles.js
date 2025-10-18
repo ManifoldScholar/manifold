@@ -90,10 +90,6 @@ export const CloseButton = styled.button`
       ${defaultHoverStyle}
       outline: 0;
     }
-
-    &:focus-visible {
-      color: var(--focus-color);
-    }
   `}
 `;
 

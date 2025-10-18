@@ -1,7 +1,7 @@
 import {
   respond,
   rgba,
-  listHorizontal,
+  listUnstyled,
   buttonUnstyled,
   utilityPrimary,
   defaultTransitionProps
@@ -55,8 +55,20 @@ export default `
     &--right {
       grid-area: menu-group-right;
       width: 100vw;
+      display: block;
 
       ${respond(`width: auto;`, 50)}
+      ${respond(`display: none;`, 50, "max")}
+      ${respond(`display: block;`, 20, "max")}
+    }
+
+    &--dialog {
+      grid-area: menu-group-right;
+      width: 100vw;
+      display: none;
+
+      ${respond(`display: block;`, 50, "max")}
+      ${respond(`display: none;`, 20, "max")}
     }
   }
 
@@ -219,10 +231,14 @@ export default `
   }
 
   &__nav-list {
-    ${listHorizontal}
     position: relative;
     display: block;
     height: 100%;
+    ${listUnstyled}
+
+    > li {
+      display: inline-block;
+    }
   }
 
   &__nav-item {
@@ -230,7 +246,7 @@ export default `
     height: 100%;
     vertical-align: middle;
 
-    svg {
+    > svg {
       width: 28px;
       height: 28px;
 
