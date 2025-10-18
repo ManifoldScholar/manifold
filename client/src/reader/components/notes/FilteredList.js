@@ -84,6 +84,7 @@ class FilteredList extends PureComponent {
               this.setAnnotationOverlayReadingGroup
             }
           />
+          {/* This button opens a global dialog, and most likely needs more a11y props. */}
           <button
             onClick={handleSeeAllClick}
             className="notes-filtered-list__see-all button-primary button-primary--dull button-primary--rounded"
@@ -95,10 +96,7 @@ class FilteredList extends PureComponent {
               icon="link24"
               size="default"
               className="notes-filtered-list__see-all-icon button-primary__icon"
-              svgProps={{
-                role: "img",
-                title: this.props.t("external_links.opens_in_new")
-              }}
+              svgProps={{ role: "presentation" }}
             />
           </button>
         </div>
