@@ -57,17 +57,19 @@ class AnnotationSelectionWrapper extends PureComponent {
     return (
       <div className={wrapperClasses}>
         <div className="annotation-selection__container">
-          <IconComposer
-            icon="socialCite32"
-            size="default"
-            className="annotation-selection__icon annotation-selection__icon--flipped"
-          />
-          <FromNodes annotation={annotation} selection={selection} />
-          <SourceSummary
-            annotation={annotation}
-            onClick={this.props.visitHandler}
-            onHover={this.hoverHandler}
-          />
+          <blockquote>
+            <IconComposer
+              icon="socialCite32"
+              size="default"
+              className="annotation-selection__icon annotation-selection__icon--flipped"
+            />
+            <FromNodes annotation={annotation} selection={selection} />
+            <SourceSummary
+              annotation={annotation}
+              onClick={this.props.visitHandler}
+              onHover={this.hoverHandler}
+            />
+          </blockquote>
         </div>
         {this.annotatable && (
           <>
