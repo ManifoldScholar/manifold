@@ -231,4 +231,9 @@ export default `
     border-spacing: 0;
     border-collapse: collapse;
   }
+
+  /* Remove mark tag styles */
+  mark {
+    background-color: initial;
+  }
 `;
