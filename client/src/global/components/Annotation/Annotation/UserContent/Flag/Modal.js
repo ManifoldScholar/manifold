@@ -8,13 +8,15 @@ import IconComposer from "global/components/utility/IconComposer";
 import { FormContext } from "helpers/contexts";
 import { useApiCallback, useFromStore } from "hooks";
 import { annotationsAPI, commentsAPI } from "api";
+import Modal from "global/components/dialog/Modal";
 import * as Styled from "./styles";
 
 export default function FlagAnnotationModal({
   id,
   annotationId,
   type,
-  dialog
+  dialog,
+  dialogId
 }) {
   const { t } = useTranslation();
 
@@ -53,21 +55,8 @@ export default function FlagAnnotationModal({
   const colorScheme = useFromStore("ui.persistent.reader.colors.colorScheme");
   const styleType = colorScheme === "dark" ? "secondary" : "primary";
 
-  const handleEsc = e => {
-    if (e.key === "Escape") {
-      // prevent also exiting full screen in FF
-      e.preventDefault();
-      dialog.onCloseClick();
-    }
-  };
-
   return (
-    <Styled.Dialog
-      className="dialog"
-      ref={dialog.dialogRef}
-      inert={!dialog.open ? "" : undefined}
-      onKeyDown={handleEsc}
-    >
+    <Modal id={dialogId} dialog={dialog} maxWidth={600}>
       <header className="dialog__header">
         <Styled.Heading>
           {t("reader.report_annotation.header", {
@@ -110,6 +99,7 @@ export default function FlagAnnotationModal({
               {t("actions.report")}
             </button>
             <button
+              type="button"
               className={classNames(
                 buttonClasses,
                 "button-icon-secondary--dull"
@@ -126,7 +116,7 @@ export default function FlagAnnotationModal({
           </Styled.ButtonGroup>
         </Styled.Form>
       </FormContext.Provider>
-    </Styled.Dialog>
+    </Modal>
   );
 }
 
@@ -135,6 +125,7 @@ FlagAnnotationModal.displayName = "Annotation.Annotation.UserContent.FlagModal";
 FlagAnnotationModal.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  dialogId: PropTypes.string.isRequired,
   dialog: PropTypes.object.isRequired,
   annotationId: PropTypes.string
 };
