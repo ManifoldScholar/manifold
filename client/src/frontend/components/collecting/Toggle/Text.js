@@ -10,12 +10,6 @@ function determineText(view, t) {
         key: "remove",
         text: t("actions.remove")
       };
-    case "remove-confirm":
-    case "remove-confirm-active":
-      return {
-        key: "remove-confirm",
-        text: t("messages.confirm")
-      };
     case "add":
     case "add-active":
       return {

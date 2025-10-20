@@ -53,6 +53,7 @@ export default `
 
     &--inline {
       margin-block-start: 3px;
+      margin-inline-end: 64px; 
     }
 
     &--project-cover {
