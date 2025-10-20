@@ -44,6 +44,17 @@ module Ingestions
           rel_path = context.rel_path_without_ext source
           context.write_build_file "#{rel_path}.html", raw_html
         end
+
+        # This block is only called when there are missing source paths.
+        inspector.validate_local_sources! do |missing|
+          error "services.ingestions.pre_processor.manifest.missing_source_paths"
+
+          missing.each do |source_path|
+            error "services.ingestions.pre_processor.manifest.missing_source_path", source_path: source_path
+          end
+
+          raise Ingestions::IngestionError, "Manifest pre-processing failed: missing source paths"
+        end
       end
 
       def manifest

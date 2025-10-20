@@ -6,6 +6,7 @@ module V1
 
     typed_attribute :kind, Types::String.meta(read_only: true)
     typed_attribute :payload, Types::Any.meta(read_only: true)
+    typed_attribute :severity, Types::Any.meta(read_only: true)
     typed_attribute :id, Types::Serializer::ID
     typed_attribute :created_at, Types::String.meta(read_only: true)
   end

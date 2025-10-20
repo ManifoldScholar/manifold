@@ -136,6 +136,20 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 
 --
+-- Name: ingestion_message_severity; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.ingestion_message_severity AS ENUM (
+    'unknown',
+    'debug',
+    'info',
+    'warn',
+    'error',
+    'fatal'
+);
+
+
+--
 -- Name: manifold_lang; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -143,6 +157,36 @@ CREATE TYPE public.manifold_lang AS ENUM (
     'simple',
     'english'
 );
+
+
+--
+-- Name: extract_ingestion_message_severity(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.extract_ingestion_message_severity(jsonb) RETURNS public.ingestion_message_severity
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT
+CASE
+WHEN jsonb_typeof($1) = 'array' THEN public.normalize_ingestion_message_severity($1->>0)
+ELSE 'unknown'::public.ingestion_message_severity
+END;
+$_$;
+
+
+--
+-- Name: extract_ingestion_message_text(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.extract_ingestion_message_text(jsonb) RETURNS text
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT
+CASE
+WHEN jsonb_typeof($1) = 'array' THEN $1->>1
+ELSE NULL
+END;
+$_$;
 
 
 --
@@ -255,6 +299,25 @@ CREATE FUNCTION public.manifold_slugify(text) RETURNS text
     FROM "hyphenated"
   )
   SELECT NULLIF("value", '') FROM "trimmed";
+$_$;
+
+
+--
+-- Name: normalize_ingestion_message_severity(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.normalize_ingestion_message_severity(text) RETURNS public.ingestion_message_severity
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT
+CASE LOWER($1)
+WHEN 'debug' THEN 'debug'::public.ingestion_message_severity
+WHEN 'info' THEN 'info'::public.ingestion_message_severity
+WHEN 'warn' THEN 'warn'::public.ingestion_message_severity
+WHEN 'error' THEN 'error'::public.ingestion_message_severity
+WHEN 'fatal' THEN 'fatal'::public.ingestion_message_severity
+ELSE 'unknown'::public.ingestion_message_severity
+END;
 $_$;
 
 
@@ -1674,7 +1737,8 @@ CREATE TABLE public.ingestion_messages (
     kind text NOT NULL,
     payload jsonb NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    severity public.ingestion_message_severity DEFAULT 'unknown'::public.ingestion_message_severity NOT NULL
 );
 
 
@@ -4930,6 +4994,13 @@ CREATE INDEX index_import_selections_on_text_id ON public.import_selections USIN
 
 
 --
+-- Name: index_ingestion_messages_on_extracted_text; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ingestion_messages_on_extracted_text ON public.ingestion_messages USING btree (public.extract_ingestion_message_text(payload)) WHERE (kind = 'log'::text);
+
+
+--
 -- Name: index_ingestion_messages_on_ingestion_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7770,6 +7841,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250609192241'),
 ('20251016204352'),
 ('20251017174417'),
-('20251017211501');
+('20251017211501'),
+('20251020225421');
 
 
