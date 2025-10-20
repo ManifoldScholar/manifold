@@ -98,14 +98,6 @@ module Patches
       end
     end
 
-    def compose(interaction, provided_inputs = {})
-      super
-    rescue ActiveInteraction::Interrupt => e
-      raise ActiveRecord::Rollback, e.errors if in_transaction?
-
-      raise e
-    end
-
     def safe_compose(interaction, provided_inputs = {}, halt_on_invalid: true, merge_errors_if_yielded: false, **other_inputs)
       outcome = interaction.run(provided_inputs.with_indifferent_access.merge(other_inputs))
 

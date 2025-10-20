@@ -95,6 +95,23 @@ RSpec.describe Ingestions::Ingestor do
       end
     end
 
+    context "when source has a malformed manifest with several invalid sources" do
+      let(:source_path) { Rails.root.join("spec", "data", "ingestion", "manifest", "malformed.zip") }
+      let!(:ingestion) { FactoryBot.create(:ingestion, :uningested, :file_source, source_path:) }
+
+      it "fails with the expected errors", odd_fs: true do
+        @outcome = nil
+
+        expect do
+          perform_enqueued_jobs do
+            @outcome = described_class.run(ingestion:)
+          end
+        end.to change(IngestionMessage.error_severity.log_message_matches("%One or more source paths were defined by the manifest but not found%"), :count).by(1)
+
+        expect(@outcome).to be_invalid
+      end
+    end
+
     context "when reingesting a document" do
       let(:text) { FactoryBot.create(:text, title: "original") }
       let!(:user_stylesheet) do

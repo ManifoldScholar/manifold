@@ -103,6 +103,30 @@ module Ingestions
           source_map.select { |source| context.url? source["source_path"] }
         end
 
+        def local_sources
+          source_map.reject { |source| context.url? source["source_path"] }
+        end
+
+        def local_source_paths
+          local_sources.pluck("source_path")
+        end
+
+        # @yield [missing]
+        # @yieldparam [Array<String>] missing list of missing local source paths
+        # @yieldreturn [void]
+        # @return [Array<String>] list of missing local source paths
+        def validate_local_sources!
+          source_root_path = Pathname(context.source_root)
+
+          missing = local_source_paths.reject do |source_path|
+            source_root_path.join(source_path).exist?
+          end
+
+          yield missing if block_given? && missing.any?
+
+          return missing
+        end
+
         def update_source_map(original_path, new_path)
           item = source_map.detect do |source|
             source["source_path"] == original_path
