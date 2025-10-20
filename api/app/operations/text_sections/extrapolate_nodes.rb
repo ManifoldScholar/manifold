@@ -170,13 +170,14 @@ module TextSections
     SQL
 
     def call(**args)
-      corrected = yield correct_intermediate_nodes.(**args)
+      # We only need this if we end up changing the nodes that count as intermediate.
+      # corrected = yield correct_intermediate_nodes.(**args)
 
-      return Success(upserted: 0, corrected:) if args[:text_section].present? && args[:text_section].body_json.blank?
+      return Success(upserted: 0) if args[:text_section].present? && args[:text_section].body_json.blank?
 
       upserted = sql_update! FIRST_PART, interpolate(**args), SECOND_PART, FINAL_PART
 
-      Success(upserted:, corrected:)
+      Success(upserted:)
     end
 
     private

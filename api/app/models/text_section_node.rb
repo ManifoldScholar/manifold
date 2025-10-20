@@ -136,42 +136,6 @@ class TextSectionNode < ApplicationRecord
       end
     end
 
-    # @api private
-    # @see TextSectionNodes::BackportSearchIndexJob
-    # @return [void]
-    def backport_search_index!
-      ids = all.where_values_hash.fetch("id", [])
-
-      raise "must be called in a batch relation" if ids.blank?
-
-      tsn = arel_table.alias("pn")
-
-      id_in_batch = tsn[:id].in(ids).to_sql
-
-      connection.exec_update(<<~SQL)
-      WITH contained AS (
-        SELECT
-          pn.id AS id,
-          array_agg(cn.node_uuid ORDER BY cn.node_indices) FILTER (WHERE cn.node_uuid IS NOT NULL) AS contained_node_uuids,
-          string_agg(cn.content, ' ' ORDER BY cn.node_indices) FILTER (WHERE cn.content IS NOT NULL AND cn.content ~ '[^[:space:]]+') AS contained_content
-          FROM text_section_nodes pn
-          INNER JOIN text_section_nodes cn ON pn.node_path @> cn.node_path
-          WHERE
-            #{id_in_batch}
-          GROUP BY 1
-      )
-      UPDATE text_section_nodes tsn SET
-        contained_node_uuids = COALESCE(c.contained_node_uuids, '{}'::text[]),
-        contained_content = CASE WHEN char_length(c.contained_content) <= 4096 THEN c.contained_content ELSE '' END,
-        search_indexed_at = CURRENT_TIMESTAMP,
-        search_indexed = TRUE
-      FROM contained c
-      WHERE
-        c.id = tsn.id
-      ;
-      SQL
-    end
-
     private
 
     def arel_content_highlighted_for(keyword, node_hits:)

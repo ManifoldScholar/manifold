@@ -9,17 +9,16 @@ module TextSectionNodes
     unique :until_executed, lock_ttl: 2.days, on_conflict: :log
 
     def build_enumerator(cursor:)
-      enumerator_builder.active_record_on_batch_relations(
+      enumerator_builder.active_record_on_records(
         TextSectionNode.sans_search_indexed,
-        cursor:,
-        batch_size: 1000
+        cursor:
       )
     end
 
-    # @param [ActiveRecord::Relation<TextSectionNode>] batch_relation
+    # @param [TextSectionNode] text_section_node
     # @return [void]
-    def each_iteration(batch_relation)
-      batch_relation.backport_search_index!
+    def each_iteration(text_section_node)
+      text_section_node.index_contained_content!
     end
   end
 end
