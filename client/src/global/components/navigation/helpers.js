@@ -108,7 +108,10 @@ const extractIdentifier = (pathname, basePath) => {
   return identifier === "all" ? null : identifier;
 };
 
-const getAdminPath = pathname => {
+const getAdminPath = (pathname, fatalError) => {
+  if (fatalError && fatalError.type === "AUTHORIZATION")
+    return "/backend/dashboard";
+
   const routeKey = Object.keys(FE_ROUTE_MAP).find(key => {
     return FE_ROUTE_MAP[key]?.regex.test(pathname);
   });
@@ -184,7 +187,12 @@ const getFrontendPath = (pathname, entities) => {
   return `${route.link}/${identifier}`;
 };
 
-export const getDestinationPath = ({ mode, pathname, entities }) => {
-  if (mode === "frontend") return getAdminPath(pathname);
+export const getDestinationPath = ({
+  mode,
+  pathname,
+  entities,
+  fatalError
+}) => {
+  if (mode === "frontend") return getAdminPath(pathname, fatalError);
   return getFrontendPath(pathname, entities);
 };
