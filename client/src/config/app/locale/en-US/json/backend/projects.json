@@ -87,6 +87,7 @@
         "extended_descript_prompt": "Do you need additional space to describe your project?",
         "extended_descript_instructions": "A freeform content block can be used to add text contextualizing your project.",
         "activity_prompt": "Will your project change frequently?",
+        "activity_instructions": "A recent activity content block can be included on your project's detail page.",
         "save": "Save and Continue"
       }
     },
