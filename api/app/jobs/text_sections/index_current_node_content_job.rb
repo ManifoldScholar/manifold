@@ -11,6 +11,8 @@ module TextSections
 
     queue_as :low_priority
 
+    queue_with_priority 500
+
     # @param [TextSection] text_section
     # @param [String, nil] cursor
     # @return [Enumerator]

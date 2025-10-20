@@ -6025,7 +6025,14 @@ CREATE INDEX index_text_section_nodes_child_ordering ON public.text_section_node
 -- Name: index_text_section_nodes_contained_content_indexing; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_text_section_nodes_contained_content_indexing ON public.text_section_nodes USING gist (text_section_id, body_hash, node_path public.gist_ltree_ops (siglen='100'), id);
+CREATE INDEX index_text_section_nodes_contained_content_indexing ON public.text_section_nodes USING gist (text_section_id, body_hash, node_path public.gist_ltree_ops (siglen='24'), id);
+
+
+--
+-- Name: index_text_section_nodes_currency; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_section_nodes_currency ON public.text_section_nodes USING btree (text_section_id, body_hash);
 
 
 --
@@ -7761,6 +7768,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250603192547'),
 ('20250609191642'),
 ('20250609192241'),
-('20251016204352');
+('20251016204352'),
+('20251017174417'),
+('20251017211501');
 
 
