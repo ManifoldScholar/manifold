@@ -62,7 +62,7 @@ module API
       def render_no_maker_error
         message = "Maker is required"
 
-        render json: { errors: [message] }, status: :unprocessable_entity
+        render json: { errors: [{ detail: message, source: "maker" }] }, status: :unprocessable_entity
       end
     end
   end

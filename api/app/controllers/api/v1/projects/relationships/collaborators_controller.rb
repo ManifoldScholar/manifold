@@ -29,6 +29,8 @@ module API
           end
 
           def create_from_roles
+            return render_no_maker_error unless maker_present?
+
             @collaborators = collaborators_from_roles(collaboratable)
             render_multiple_resources(@collaborators, serializer: ::V1::CollaboratorSerializer)
           end
