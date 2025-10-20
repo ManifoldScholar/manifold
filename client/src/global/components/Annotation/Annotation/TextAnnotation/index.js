@@ -49,7 +49,13 @@ class Annotation extends PureComponent {
             displayFormat={displayFormat}
           />
         </div>
-        <ul className={this.annotationListClassNames}>
+        {/* There's only one child in this list and no comments, so the role should be presentation. */}
+        <ul
+          className={this.annotationListClassNames}
+          {...((annotation?.attributes?.commentsCount || 0) > 0
+            ? {}
+            : { role: "presentation" })}
+        >
           <UserContent
             annotation={annotation}
             includeComments={false}
