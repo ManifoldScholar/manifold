@@ -80,7 +80,7 @@ export default `
     transition: transform 0.4s var(--transition-timing-function);
     display: none;
 
-    ${respond(`display: block;`, 75)}
+    ${respond(`display: block;`, 85)}
 
     .reader-header__title-bar--show-section & {
       transform: translateY(-100%);
@@ -103,7 +103,7 @@ export default `
   }
 
   &__title-bar-collecting-toggle {
-    margin-left: 12px;
+    margin-inline-start: 12px;
     transform: translateY(-3px);
   }
 
