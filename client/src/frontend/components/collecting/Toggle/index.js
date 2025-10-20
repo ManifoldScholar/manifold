@@ -15,10 +15,9 @@ const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals"];
 
 const { request } = entityStoreActions;
 
-function determineView(collected, hovered, confirmed, isCollecting) {
+function determineView(collected, hovered, isCollecting) {
   if (collected) {
-    if (hovered && !confirmed) return "remove-active";
-    if (hovered && confirmed) return "remove-confirm-active";
+    if (hovered) return "remove-active";
     return "remove";
   } else if (isCollecting) {
     return "remove";
@@ -53,7 +52,6 @@ function CollectingToggle({
   hiddenIfUncollected
 }) {
   const [hovered, setHovered] = useState(false);
-  const [confirmed, setConfirmed] = useState(false);
   const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
@@ -77,7 +75,7 @@ function CollectingToggle({
     setIsCollecting(false);
   }, [collected]);
 
-  const view = determineView(collected, hovered, confirmed, isCollecting);
+  const view = determineView(collected, hovered, isCollecting);
   const hasReadingGroups = myCollectableReadingGroups?.length > 0;
   const collectableTitle = normalizeTitle(collectable);
   const useOutlinedStarIcon = outlined && view === "add";
@@ -104,21 +102,18 @@ function CollectingToggle({
     dispatch(collectRequest).promise.then(() => {
       if (onUncollect) onUncollect(collection);
     });
-    setConfirmed(false);
     setHovered(false);
   }
 
   function onClick(event) {
     event.stopPropagation();
-    // if confirmed, we're ready to remove
-    if (confirmed) return doRemove();
     // show dialog if user belongs to any RGs
     if (hasReadingGroups) return setDialogVisible(true);
 
     // user belongs to no RGs;
-    // if collected previously, confirm removal request;
+    // if collected previously, remove;
     // otherwise collect
-    collected ? setConfirmed(true) : doCollect();
+    collected ? doRemove() : doCollect();
   }
 
   function onEnter() {
@@ -129,7 +124,6 @@ function CollectingToggle({
 
   function onLeave() {
     setHovered(false);
-    setConfirmed(false);
   }
 
   function handleDialogChange(isCollected, collection) {

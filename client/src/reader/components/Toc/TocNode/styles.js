@@ -5,7 +5,7 @@ import { defaultTransitionProps, defaultFocusStyle } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 
 const toggleWidth = "24px";
-const togglePadding = "12px";
+const togglePadding = "40px";
 const inlineEndPadding = `calc(${tocDrawer.baseInlineEndPadding} + calc(${toggleWidth} + ${togglePadding})
 )`;
 
@@ -44,6 +44,11 @@ export const ItemLink = styled(Link, transientOptions)`
 export const Toggle = styled.span`
   position: absolute;
   top: 42%;
-  right: calc(${tocDrawer.baseInlineEndPadding} + 2%);
+  right: 24px;
   transform: translateY(-50%);
+
+  /* Only need enough room for 'add' */
+  &:has([aria-haspopup="true"]) {
+    right: 0;
+  }
 `;
