@@ -66,7 +66,7 @@ export default class TextTitles extends Component {
           {`${this.textTitle}: ${this.sectionTitle}`}
         </h1>
         <div className="reader-header__title-bar-inner">
-          <div className="reader-header__title-bar-text" aria-hidden="true">
+          <div className="reader-header__title-bar-text">
             <span
               className="reader-header__title-inner-text"
               dangerouslySetInnerHTML={{ __html: this.textTitle }}
@@ -75,7 +75,7 @@ export default class TextTitles extends Component {
               <Collecting.Toggle collectable={this.text} />
             </span>
           </div>
-          <div className="reader-header__title-bar-text" aria-hidden="true">
+          <div className="reader-header__title-bar-text">
             <span className="reader-header__title-inner-text">
               {this.sectionTitle}
             </span>
