@@ -15,6 +15,8 @@ import { entityStoreActions } from "actions";
 import Authorize from "hoc/Authorize";
 import { useCurrentUser } from "hooks";
 import * as Styled from "./styles";
+import { useUID } from "react-uid";
+import useDialog from "@castiron/hooks/useDialog";
 
 const { request } = entityStoreActions;
 
@@ -41,14 +43,15 @@ export default function AnnotationDetail({
 
   const threadRef = useRef(null);
   const replyToggleRef = useRef(null);
-  const editToggleRef = useRef(null);
+  const editUID = useUID();
+  const editDialog = useDialog({ modal: false, dismissalMode: "explicit" });
 
   const startReply = () => {
     setAction("replying");
   };
 
   const startEdit = () => {
-    setAction("editing");
+    editDialog.onToggleClick();
   };
 
   const stopReply = () => {
@@ -58,9 +61,7 @@ export default function AnnotationDetail({
   };
 
   const stopEdit = () => {
-    setAction(null);
-
-    if (editToggleRef.current) editToggleRef.current.focus();
+    editDialog.onCloseClick();
   };
 
   const saveAnnotation = data => {
@@ -114,94 +115,98 @@ export default function AnnotationDetail({
             includeMarkers={includeMarkers}
             markerIcons={markerIcons}
           />
-          {action === "editing" ? (
+          <div
+            {...(editDialog.open
+              ? { inert: "", className: "screen-reader-text" }
+              : {})}
+          >
+            <Styled.Body>
+              <Helper.SimpleFormat text={annotation.attributes.body} />
+            </Styled.Body>
+            <Authorize kind={"any"}>
+              <Styled.Utility>
+                <Styled.UtilityList $isFlagged={annotation.attributes.flagged}>
+                  <Authorize entity={"comment"} ability={"create"}>
+                    <li>
+                      <Styled.Button
+                        ref={replyToggleRef}
+                        onClick={action === "replying" ? stopReply : startReply}
+                        aria-expanded={action === "replying"}
+                      >
+                        {t("actions.reply")}
+                      </Styled.Button>
+                    </li>
+                  </Authorize>
+
+                  <Authorize entity={annotation} ability={"update"}>
+                    <li>
+                      <Styled.Button
+                        className="confirmable-button"
+                        ref={editDialog.toggleRef}
+                        onClick={startEdit}
+                        aria-expanded={editDialog.open}
+                        aria-controls={editUID}
+                      >
+                        {t("actions.edit")}
+                      </Styled.Button>
+                    </li>
+                  </Authorize>
+                  <Authorize entity={annotation} ability={"delete"}>
+                    <li>
+                      <Utility.ConfirmableButton
+                        label={t("actions.delete")}
+                        confirmHandler={deleteAnnotation}
+                      />
+                    </li>
+                  </Authorize>
+                  {verifiedUser && (
+                    <li>
+                      <FlagToggle record={annotation} />
+                    </li>
+                  )}
+                  {showInlineCommentsToggle && (
+                    <InlineToggle
+                      active={action === "editing"}
+                      loadComments={toggleComments}
+                      commentsCount={commentsCount}
+                    />
+                  )}
+                </Styled.UtilityList>
+                {action === "replying" && (
+                  <CommentContainer.Editor
+                    subject={annotation}
+                    cancel={stopReply}
+                    onSuccess={onReplySuccess}
+                    initialOpen
+                  />
+                )}
+              </Styled.Utility>
+            </Authorize>
+            {showLogin && (
+              <Authorize kind="unauthenticated">
+                <Styled.Utility>
+                  <Styled.UtilityList>
+                    <li>
+                      <Styled.Button onClick={showLogin}>
+                        {t("actions.login_to_reply")}
+                      </Styled.Button>
+                    </li>
+                  </Styled.UtilityList>
+                </Styled.Utility>
+              </Authorize>
+            )}
+          </div>
+          <Styled.EditDialog
+            ref={editDialog.dialogRef}
+            id={editUID}
+            {...(editDialog.open ? {} : { inert: "" })}
+          >
             <Editor
               annotation={annotation}
               saveAnnotation={saveAnnotation}
               cancel={stopEdit}
             />
-          ) : (
-            <div>
-              <Styled.Body>
-                <Helper.SimpleFormat text={annotation.attributes.body} />
-              </Styled.Body>
-              <Authorize kind={"any"}>
-                <Styled.Utility>
-                  <Styled.UtilityList
-                    $isFlagged={annotation.attributes.flagged}
-                  >
-                    <Authorize entity={"comment"} ability={"create"}>
-                      <li>
-                        <Styled.Button
-                          ref={replyToggleRef}
-                          onClick={
-                            action === "replying" ? stopReply : startReply
-                          }
-                          aria-expanded={action === "replying"}
-                        >
-                          {t("actions.reply")}
-                        </Styled.Button>
-                      </li>
-                    </Authorize>
-
-                    <Authorize entity={annotation} ability={"update"}>
-                      <li>
-                        <Styled.Button
-                          className="confirmable-button"
-                          ref={editToggleRef}
-                          onClick={startEdit}
-                          aria-expanded={action === "editing"}
-                        >
-                          {t("actions.edit")}
-                        </Styled.Button>
-                      </li>
-                    </Authorize>
-                    <Authorize entity={annotation} ability={"delete"}>
-                      <li>
-                        <Utility.ConfirmableButton
-                          label={t("actions.delete")}
-                          confirmHandler={deleteAnnotation}
-                        />
-                      </li>
-                    </Authorize>
-                    {verifiedUser && (
-                      <li>
-                        <FlagToggle record={annotation} />
-                      </li>
-                    )}
-                    {showInlineCommentsToggle && (
-                      <InlineToggle
-                        active={action === "editing"}
-                        loadComments={toggleComments}
-                        commentsCount={commentsCount}
-                      />
-                    )}
-                  </Styled.UtilityList>
-                  {action === "replying" && (
-                    <CommentContainer.Editor
-                      subject={annotation}
-                      cancel={stopReply}
-                      onSuccess={onReplySuccess}
-                      initialOpen
-                    />
-                  )}
-                </Styled.Utility>
-              </Authorize>
-              {showLogin && (
-                <Authorize kind="unauthenticated">
-                  <Styled.Utility>
-                    <Styled.UtilityList>
-                      <li>
-                        <Styled.Button onClick={showLogin}>
-                          {t("actions.login_to_reply")}
-                        </Styled.Button>
-                      </li>
-                    </Styled.UtilityList>
-                  </Styled.Utility>
-                </Authorize>
-              )}
-            </div>
-          )}
+          </Styled.EditDialog>
           <div
             ref={threadRef}
             tabIndex={-1}
