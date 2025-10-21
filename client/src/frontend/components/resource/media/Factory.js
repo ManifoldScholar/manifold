@@ -9,7 +9,7 @@ function ResourceMediaFactory({
   loading = false,
   aspectRatio,
   roundedCorners,
-  enableZoom = false
+  enableZoom: enableZoomProp = false
 }) {
   if (loading)
     return (
@@ -23,6 +23,12 @@ function ResourceMediaFactory({
   const KindComponent = getKindComponent(resource.attributes.kind);
 
   if (!KindComponent) return null;
+
+  /* Don't zoom on low-res pdf thumbnails */
+  const enableZoom =
+    resource.attributes.kind === "pdf"
+      ? !!resource.attributes.variantThumbnailStyles?.largeLandscape
+      : enableZoomProp;
 
   return (
     <Styled.Wrapper $aspectRatio={aspectRatio} $roundedCorners={roundedCorners}>
