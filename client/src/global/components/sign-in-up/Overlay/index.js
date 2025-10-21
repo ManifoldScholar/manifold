@@ -18,6 +18,7 @@ export default function Overlay({ hideOverlay, active = false }) {
       }}
     >
       <Styled.Dialog
+        className="bg-neutral90"
         role="dialog"
         aria-modal
         aria-labelledby={uid}
