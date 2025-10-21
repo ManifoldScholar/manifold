@@ -34,7 +34,8 @@ export class FormBaseInput extends PureComponent {
     renderValue: PropTypes.func,
     wide: PropTypes.bool,
     defaultValue: PropTypes.string,
-    required: PropTypes.bool
+    required: PropTypes.bool,
+    clear: PropTypes.bool
   };
 
   static contextType = FormContext;
@@ -45,13 +46,27 @@ export class FormBaseInput extends PureComponent {
   }
 
   componentDidMount() {
+    if (this.props.resetOnMount && !!this.props.value) {
+      this.reset();
+    }
     if (this.props.focusOnMount === true && this.inputElement) {
       this.inputElement.focus();
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.reset && !!this.props.value) {
+      this.reset();
+    }
+  }
+
   componentWillUnmount() {
     clearTimeout(this.timeout);
+  }
+
+  reset() {
+    this.props.onChange({ target: { value: "" } });
+    this.inputElement.value = "";
   }
 
   renderButtons(buttons) {
