@@ -84,7 +84,7 @@
       "download_label": "Allow download?",
       "save": "Save Resource",
       "thumbnail": "Featured Image",
-      "thumbnail_alt_label": "Alt Text",
+      "thumbnail_alt_label": "Featured Image Alt Text",
       "featured_image": "Featured Image (Optional)",
       "url": "URL",
       "url_placeholder": "Enter resource URL"
