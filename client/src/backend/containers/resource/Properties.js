@@ -35,11 +35,29 @@ export class ResourcePropertiesContainer extends PureComponent {
 
   formatData = data => {
     const { attributes, relationships } = data ?? {};
-    const { sortOrder, ...rest } = attributes;
+    const {
+      sortOrder,
+      variantThumbnail,
+      variantThumbnailAltText,
+      ...rest
+    } = attributes;
+
+    /* eslint-disable no-nested-ternary */
+    const thumbnail =
+      typeof variantThumbnailAltText === "string"
+        ? {
+            variantThumbnail: {
+              ...variantThumbnail,
+              altText: variantThumbnailAltText
+            }
+          }
+        : variantThumbnail
+        ? { variantThumbnail }
+        : {};
 
     return {
       relationships,
-      attributes: { ...rest, sortOrder: sortOrder ? 1 : null }
+      attributes: { ...rest, ...thumbnail, sortOrder: sortOrder ? 1 : null }
     };
   };
 
@@ -122,6 +140,8 @@ export class ResourcePropertiesContainer extends PureComponent {
               readFrom="attributes[variantThumbnailStyles][small]"
               name="attributes[variantThumbnail]"
               remove="attributes[removeVariantThumbnail]"
+              altTextName={"attributes[variantThumbnailAltText]"}
+              altTextLabel={t("resources.properties.thumbnail_alt_label")}
             />
           </Form.FieldGroup>
           <Form.FieldGroup
