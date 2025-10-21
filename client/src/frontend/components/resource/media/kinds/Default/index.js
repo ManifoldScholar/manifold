@@ -4,13 +4,14 @@ import PlaceholderGraphic from "../shared/PlaceholderGraphic";
 import * as Styled from "./styles";
 
 function ResourceMediaDefault({ resource, loading }) {
-  const { variantThumbnailStyles } = resource?.attributes ?? {};
+  const { variantThumbnailStyles, variantThumbnailAltText } =
+    resource?.attributes ?? {};
   const src = variantThumbnailStyles?.largeLandscape;
 
   return (
     <Styled.Wrapper>
       {src ? (
-        <ThumbnailImage src={src} />
+        <ThumbnailImage src={src} alt={variantThumbnailAltText} />
       ) : (
         <PlaceholderGraphic resource={resource} loading={loading} />
       )}
