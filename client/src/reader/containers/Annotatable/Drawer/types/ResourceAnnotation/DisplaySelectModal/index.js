@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import { useState, useId, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import DisplayOption from "./DisplayOption";
 import Utility from "global/components/utility";
@@ -29,6 +29,15 @@ export default function DisplaySelectModal({
 
   const id = useId();
   const warningId = useId();
+
+  useEffect(() => {
+    if (dialog?.dialogRef?.current) {
+      dialog.dialogRef.current.addEventListener("cancel", onClose);
+
+      return () =>
+        dialog.dialogRef?.current?.removeEventListener("cancel", onClose);
+    }
+  }, [onClose, dialog.dialogRef]);
 
   return (
     <Styled.Dialog
