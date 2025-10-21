@@ -6,6 +6,8 @@ export default function getKindComponent(kind) {
       return Kinds.Audio;
     case "image":
       return Kinds.Image;
+    case "pdf":
+      return Kinds.PDF;
     case "interactive":
       return Kinds.Interactive;
     case "video":
