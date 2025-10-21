@@ -186,7 +186,11 @@ export default class NodeTreeIterator {
   }
 
   maybeAppendResources(node) {
-    if (!Object.keys(this.annotationEndMap.blocks)?.length) return [];
+    if (
+      !Object.keys(this.annotationEndMap.blocks)?.length ||
+      !node.children?.length
+    )
+      return [];
     const uuids = getUuids(
       node.children.filter(c => !selectionHelpers.blockRegex.test(c.tag))
     );

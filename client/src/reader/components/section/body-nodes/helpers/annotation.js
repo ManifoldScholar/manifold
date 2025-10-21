@@ -161,6 +161,6 @@ export const getUuids = nodes => {
       }
       return null;
     })
-    .filter(Boolean)
-    .flat(50);
+    .flat(50)
+    .filter(Boolean);
 };
