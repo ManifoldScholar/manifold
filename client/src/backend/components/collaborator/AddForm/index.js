@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FormContext } from "helpers/contexts";
 import Form, { Unwrapped } from "global/components/form";
 import InputError from "global/components/form/InputError";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom-v5-compat";
 import { makersAPI, collaboratorsAPI } from "api";
 import { useApiCallback } from "hooks";
 import capitalize from "lodash/capitalize";
+import * as Styled from "./styles";
 
 export default function AddCollaboratorForm({
   entityId,
@@ -53,7 +54,12 @@ export default function AddCollaboratorForm({
     if (!maker?.id) {
       return setFormErrors([
         {
-          detail: t("projects.contributor_maker_error"),
+          detail: (
+            <Trans
+              i18nKey="projects.contributor_maker_error"
+              components={[<Styled.ErrorLink to="/backend/records/makers" />]}
+            />
+          ),
           source: "maker"
         }
       ]);

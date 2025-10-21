@@ -16,6 +16,7 @@ export default class InputError extends Component {
   };
 
   errorString(error) {
+    if (typeof error.detail === "object") return error.detail;
     if (error.detail.split(".").length > 1) {
       return error.detail;
     }

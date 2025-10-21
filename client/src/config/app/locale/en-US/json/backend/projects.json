@@ -11,7 +11,7 @@
     "manage_resource_collections": "Manage Resource Collections",
     "contributors_header": "Manage Contributors",
     "add_contributor_label": "Add Contributor",
-    "contributor_maker_error": "Maker is required. If adding a new maker, you must first create the maker in the records tab before adding as a collaborator.",
+    "contributor_maker_error": "Maker is required. If this is a new maker, you must <0>first create the maker</0> before adding as a contributor.",
     "contributor_role_error": "Please select at least one role.",
     "forms": {
       "title_label": "Title",
