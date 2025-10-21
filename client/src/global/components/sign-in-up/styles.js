@@ -5,10 +5,9 @@ import { buttonUnstyled } from "theme/styles/mixins";
 export const Form = styled(GlobalForm.Form)`
   --Form-row-gap: 0;
 
-  --error-color: var(--color-notification-error-light);
-
   input {
     color: var(--color-neutral-text-extra-dark);
+    border-color: var(--input-border-color);
     width: 100%;
   }
 
@@ -16,16 +15,21 @@ export const Form = styled(GlobalForm.Form)`
   input[type="password"],
   input[type="email"] {
     color: var(--color-neutral-text-dark);
-    border-width: 3px;
-
-    &:focus-visible {
-      border-color: var(--focus-color);
-    }
   }
 
   .button-secondary {
     display: flex;
     margin-top: 30px;
+  }
+
+  .button-secondary,
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    &:focus-visible {
+      outline: var(--outline-width) solid var(--focus-color);
+      outline-offset: 2.5px;
+    }
   }
 `;
 
