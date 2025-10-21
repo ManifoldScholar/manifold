@@ -56,12 +56,22 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
 
   const Fingerprint = setter(props => <Form.Errorable {...props} />);
 
+  const formatData = data => {
+    const isImage = data.attributes.kind === "image";
+
+    if (!isImage) return data;
+    return {
+      ...data,
+      attributes: { ...data.attributes, variantThumbnail: null }
+    };
+  };
+
   return (
     <Styled.Form
       className="form-secondary"
       name="reader-resource-create"
       model={defaultValue}
-      create={data => resourcesAPI.create(projectId, data)}
+      create={data => resourcesAPI.create(projectId, formatData(data))}
       onSuccess={resource => onSuccess(resource)}
     >
       {getModelValue => {
@@ -145,12 +155,14 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
                     instructionsSingleLine
                   />
                 )}
-              <Form.Upload
-                label={t("resources.properties.featured_image")}
-                accepts="images"
-                name="attributes[variantThumbnail]"
-                instructionsSingleLine
-              />
+              {kind !== "image" && (
+                <Form.Upload
+                  label={t("resources.properties.featured_image")}
+                  accepts="images"
+                  name="attributes[variantThumbnail]"
+                  instructionsSingleLine
+                />
+              )}
             </Styled.FieldGroup>
             <ButtonGroup handleClose={handleClose} />
           </>
