@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
-function ResourceMediaThumbnailImage({ src }) {
+function ResourceMediaThumbnailImage({ src, alt }) {
   return (
     <Styled.Wrapper>
       <Styled.Image
         src={src}
         width={800}
         height={450}
-        alt=""
+        alt={alt || ""}
         loading="lazy"
         decoding="async"
       />
