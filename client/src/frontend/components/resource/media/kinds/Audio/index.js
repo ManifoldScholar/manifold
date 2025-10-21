@@ -16,7 +16,8 @@ function ResourcePlayerAudio({ resource }) {
     attachmentStyles,
     title,
     allowDownload,
-    variantThumbnailStyles
+    variantThumbnailStyles,
+    variantThumbnailAltText
   } = resource.attributes;
 
   const src = attachmentStyles.original;
@@ -44,7 +45,7 @@ function ResourcePlayerAudio({ resource }) {
   return (
     <Styled.Wrapper>
       {imageSrc ? (
-        <ThumbnailImage src={imageSrc} />
+        <ThumbnailImage src={imageSrc} alt={variantThumbnailAltText} />
       ) : (
         <PlaceholderGraphic resource={resource} />
       )}
