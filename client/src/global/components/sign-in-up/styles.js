@@ -5,10 +5,9 @@ import { buttonUnstyled } from "theme/styles/mixins";
 export const Form = styled(GlobalForm.Form)`
   --Form-row-gap: 0;
 
-  --error-color: var(--color-notification-error-light);
-
   input {
     color: var(--color-neutral-text-extra-dark);
+    border-color: var(--input-border-color);
     width: 100%;
   }
 
