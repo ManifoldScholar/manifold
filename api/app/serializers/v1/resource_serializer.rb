@@ -34,6 +34,7 @@ module V1
     typed_attribute :attachment_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :variant_poster_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :variant_thumbnail_styles, Types::Serializer::Attachment.meta(read_only: true)
+    typed_attribute :variant_thumbnail_alt_text, Types::String.optional
 
     typed_has_many :collection_resources
     typed_has_many :text_tracks, serializer: V1::TextTrackSerializer, record_type: "textTrack"
