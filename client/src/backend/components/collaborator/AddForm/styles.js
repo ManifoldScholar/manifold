@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom-v5-compat";
 
 export const RoleButton = styled.button`
   display: flex;
@@ -20,5 +21,11 @@ export const RoleGroup = styled.div`
 
   > * + * {
     margin-block-start: 40px;
+  }
+`;
+
+export const ErrorLink = styled(Link)`
+  &:hover {
+    color: var(--color);
   }
 `;
