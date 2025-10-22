@@ -100,8 +100,16 @@ export default function ResourceMarkerContextProvider({
   const textId = annotations?.[0]?.attributes?.textId;
 
   const handleDestroy = useCallback(() => {
-    destroyAnnotation(dialogAnnotation, dialog.onToggleClick);
-  }, [destroyAnnotation, dialogAnnotation, dialog.onToggleClick]);
+    const onSuccess = () => {
+      dialog.onToggleClick();
+      const update = Object.keys(resourceThumbs).reduce((obj, id) => {
+        if (id === dialogAnnotation.id) return obj;
+        return { ...obj, [id]: resourceThumbs[id] };
+      }, {});
+      setResourceThumbs(update);
+    };
+    destroyAnnotation(dialogAnnotation, onSuccess);
+  }, [destroyAnnotation, dialogAnnotation, dialog, resourceThumbs]);
 
   return (
     <ResourceMarkerContext.Provider
