@@ -39,10 +39,15 @@ function JournalSummaryEntityCollection({
       headerLink={lh.link("frontendJournal", slug)}
       BodyComponent={props =>
         !!issues?.length && (
-          <ThumbnailGrid {...props}>
+          <ThumbnailGrid isList={issues.length > 1} {...props}>
             {({ stack }) =>
               issues.map(item => (
-                <EntityThumbnail key={item.id} entity={item} stack={stack} />
+                <EntityThumbnail
+                  key={item.id}
+                  entity={item}
+                  stack={stack}
+                  isListItem={issues.length > 1}
+                />
               ))
             }
           </ThumbnailGrid>
