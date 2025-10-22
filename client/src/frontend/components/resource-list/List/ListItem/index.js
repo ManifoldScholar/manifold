@@ -25,7 +25,10 @@ export default function ResourceListItem({
     setActive(resource);
   };
 
-  const src = variantThumbnailStyles?.small ?? attachmentStyles?.small;
+  const src =
+    kind === "image"
+      ? attachmentStyles?.small
+      : variantThumbnailStyles?.small ?? attachmentStyles?.small;
 
   return resource ? (
     <li>
