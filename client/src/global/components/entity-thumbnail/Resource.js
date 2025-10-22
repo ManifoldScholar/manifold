@@ -56,14 +56,17 @@ export default class EntityThumbnailResource extends PureComponent {
   }
 
   get imageAlt() {
-    return this.attr.altText;
+    if (this.kind === "image") return this.attr.altText;
+    if (this.attr.variantThumbnailStyles?.[this.variant])
+      return this.attr.variantThumbnailAltText;
+    return "";
   }
 
   get image() {
     const { width, height, className } = this.props;
     return (
       <img
-        alt={this.imageAlt ?? ""}
+        alt={this.imageAlt}
         src={this.src}
         width={width}
         height={height}

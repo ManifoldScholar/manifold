@@ -30,15 +30,25 @@ export default function ThumbnailMobile({
     title,
     variantThumbnailStyles,
     thumbnailStyles,
-    attachmentStyles
+    attachmentStyles,
+    altText,
+    variantThumbnailAltText
   } = entity.attributes;
 
-  const imgSrc =
+  /* eslint-disable no-nested-ternary */
+  const imgProps =
     kind === "image"
-      ? attachmentStyles?.medium
-      : variantThumbnailStyles?.medium ??
-        thumbnailStyles?.medium ??
-        attachmentStyles?.medium;
+      ? { src: attachmentStyles?.smallLandscape, alt: altText || "" }
+      : variantThumbnailStyles?.smallLandscape
+      ? {
+          src: variantThumbnailStyles.smallLandscape,
+          alt: variantThumbnailAltText || ""
+        }
+      : {
+          src:
+            thumbnailStyles?.smallLandscape ?? attachmentStyles?.smallLandscape,
+          alt: ""
+        };
 
   return active ? (
     <Styled.Wrapper
@@ -47,8 +57,8 @@ export default function ThumbnailMobile({
     >
       <Styled.Content>
         <Styled.ImageWrapper>
-          {imgSrc ? (
-            <Styled.Image src={imgSrc} />
+          {imgProps.src ? (
+            <Styled.Image {...imgProps} />
           ) : (
             <Styled.Icon icon="resourceLink64" size={28} />
           )}
