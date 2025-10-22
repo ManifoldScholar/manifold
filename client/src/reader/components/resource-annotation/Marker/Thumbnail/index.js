@@ -127,16 +127,27 @@ export default function Thumbnail({
     kind,
     variantThumbnailStyles,
     thumbnailStyles,
-    attachmentStyles
+    attachmentStyles,
+    altText,
+    variantThumbnailAltText
   } = entity.attributes;
 
   const renderedKind = collection ? t("glossary.collection_one") : kind;
-  const imgSrc =
+  /* eslint-disable no-nested-ternary */
+  const imgProps =
     kind === "image"
-      ? attachmentStyles?.medium
-      : variantThumbnailStyles?.medium ??
-        thumbnailStyles?.medium ??
-        attachmentStyles?.medium;
+      ? { src: attachmentStyles?.mediumLandscape, alt: altText || "" }
+      : variantThumbnailStyles?.mediumLandscape
+      ? {
+          src: variantThumbnailStyles.mediumLandscape,
+          alt: variantThumbnailAltText || ""
+        }
+      : {
+          src:
+            thumbnailStyles?.mediumLandscape ??
+            attachmentStyles?.mediumLandscape,
+          alt: ""
+        };
 
   const WrapperComponent = hidden ? Styled.PositionerWrapper : Styled.Wrapper;
   const wrapperProps = hidden
@@ -159,9 +170,9 @@ export default function Thumbnail({
         <span>{renderedKind}</span>
       </Styled.Label>
       <Styled.Content>
-        {!!imgSrc && (
+        {!!imgProps.src && (
           <Styled.ImageWrapper>
-            <Styled.Image src={imgSrc} />
+            <Styled.Image {...imgProps} />
           </Styled.ImageWrapper>
         )}
         <Styled.Title>{title}</Styled.Title>
