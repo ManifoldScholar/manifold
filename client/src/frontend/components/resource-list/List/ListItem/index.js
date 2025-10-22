@@ -14,8 +14,15 @@ export default function ResourceListItem({
   renderAsLink = false,
   headingLevel = 3
 }) {
-  const { title, variantThumbnailStyles, attachmentStyles, kind, createdAt } =
-    resource?.attributes ?? {};
+  const {
+    title,
+    variantThumbnailStyles,
+    attachmentStyles,
+    kind,
+    createdAt,
+    altText,
+    variantThumbnailAltText
+  } = resource?.attributes ?? {};
 
   const { t } = useTranslation();
 
@@ -25,10 +32,19 @@ export default function ResourceListItem({
     setActive(resource);
   };
 
-  const src =
+  /* eslint-disable no-nested-ternary */
+  const imgProps =
     kind === "image"
-      ? attachmentStyles?.small
-      : variantThumbnailStyles?.small ?? attachmentStyles?.small;
+      ? { src: attachmentStyles?.mediumLandscape, alt: altText || "" }
+      : variantThumbnailStyles?.mediumLandscape
+      ? {
+          src: variantThumbnailStyles.mediumLandscape,
+          alt: variantThumbnailAltText || ""
+        }
+      : {
+          src: attachmentStyles?.mediumLandscape,
+          alt: ""
+        };
 
   return resource ? (
     <li>
@@ -67,8 +83,13 @@ export default function ResourceListItem({
           </Styled.Metadata>
         </Styled.TextColumn>
         <Styled.ImageWrapper>
-          {src ? (
-            <Styled.Thumb src={src} loading="lazy" width={100} height={64} />
+          {imgProps.src ? (
+            <Styled.Thumb
+              {...imgProps}
+              loading="lazy"
+              width={100}
+              height={64}
+            />
           ) : (
             <Styled.Icon icon={`resource${capitalize(kind)}64`} size={32} />
           )}
