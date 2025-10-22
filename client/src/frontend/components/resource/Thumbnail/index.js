@@ -69,6 +69,14 @@ class ResourceThumbnail extends Component {
     return this.resource.attributes[key][this.variant];
   }
 
+  get altText() {
+    const key = this.constructor.imageKey(this.resource, this.variant);
+    if (!key) return "";
+    if (key === "variantThumbnailStyles")
+      return this.resource.attributes.variantThumbnailAltText;
+    return this.resource.attributes.altText;
+  }
+
   get hasImage() {
     return !!this.image;
   }
@@ -131,10 +139,7 @@ class ResourceThumbnail extends Component {
             ) : null}
             {this.showImage ? (
               <Styled.ImageWrapper>
-                <Styled.Image
-                  src={this.image}
-                  alt={this.resource.attributes.altText}
-                />
+                <Styled.Image src={this.image} alt={this.altText} />
                 <Styled.ImageOverlay />
               </Styled.ImageWrapper>
             ) : (
