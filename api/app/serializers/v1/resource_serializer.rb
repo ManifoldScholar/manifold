@@ -32,6 +32,7 @@ module V1
     typed_attribute :tag_list, Types::Array.of(Types::String)
 
     typed_attribute :attachment_styles, Types::Serializer::Attachment.meta(read_only: true)
+    typed_attribute :attachment_alt_text, Types::String.optional
     typed_attribute :variant_poster_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :variant_thumbnail_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :variant_thumbnail_alt_text, Types::String.optional
