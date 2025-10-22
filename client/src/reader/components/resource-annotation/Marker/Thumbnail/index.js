@@ -132,9 +132,11 @@ export default function Thumbnail({
 
   const renderedKind = collection ? t("glossary.collection_one") : kind;
   const imgSrc =
-    variantThumbnailStyles?.medium ??
-    thumbnailStyles?.medium ??
-    attachmentStyles?.medium;
+    kind === "image"
+      ? attachmentStyles?.medium
+      : variantThumbnailStyles?.medium ??
+        thumbnailStyles?.medium ??
+        attachmentStyles?.medium;
 
   const WrapperComponent = hidden ? Styled.PositionerWrapper : Styled.Wrapper;
   const wrapperProps = hidden
