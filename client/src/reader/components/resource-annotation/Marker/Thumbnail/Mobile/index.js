@@ -26,6 +26,7 @@ export default function ThumbnailMobile({
   if (!entity) return null;
 
   const {
+    kind,
     title,
     variantThumbnailStyles,
     thumbnailStyles,
@@ -33,9 +34,11 @@ export default function ThumbnailMobile({
   } = entity.attributes;
 
   const imgSrc =
-    variantThumbnailStyles?.medium ??
-    thumbnailStyles?.medium ??
-    attachmentStyles?.medium;
+    kind === "image"
+      ? attachmentStyles?.medium
+      : variantThumbnailStyles?.medium ??
+        thumbnailStyles?.medium ??
+        attachmentStyles?.medium;
 
   return active ? (
     <Styled.Wrapper
