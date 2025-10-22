@@ -87,7 +87,8 @@
       "thumbnail_alt_label": "Featured Image Alt Text",
       "featured_image": "Featured Image (Optional)",
       "url": "URL",
-      "url_placeholder": "Enter resource URL"
+      "url_placeholder": "Enter resource URL",
+      "attachment_alt_label": "Image Alt Text"
     },
     "import": {
       "header": "Bulk Add Resources",
