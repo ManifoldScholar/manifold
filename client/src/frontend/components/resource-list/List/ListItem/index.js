@@ -20,7 +20,7 @@ export default function ResourceListItem({
     attachmentStyles,
     kind,
     createdAt,
-    altText,
+    attachmentAltText,
     variantThumbnailAltText
   } = resource?.attributes ?? {};
 
@@ -35,7 +35,7 @@ export default function ResourceListItem({
   /* eslint-disable no-nested-ternary */
   const imgProps =
     kind === "image"
-      ? { src: attachmentStyles?.mediumLandscape, alt: altText || "" }
+      ? { src: attachmentStyles?.mediumLandscape, alt: attachmentAltText || "" }
       : variantThumbnailStyles?.mediumLandscape
       ? {
           src: variantThumbnailStyles.mediumLandscape,

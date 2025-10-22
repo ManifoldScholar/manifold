@@ -128,7 +128,7 @@ export default function Thumbnail({
     variantThumbnailStyles,
     thumbnailStyles,
     attachmentStyles,
-    altText,
+    attachmentAltText,
     variantThumbnailAltText
   } = entity.attributes;
 
@@ -136,7 +136,7 @@ export default function Thumbnail({
   /* eslint-disable no-nested-ternary */
   const imgProps =
     kind === "image"
-      ? { src: attachmentStyles?.mediumLandscape, alt: altText || "" }
+      ? { src: attachmentStyles?.mediumLandscape, alt: attachmentAltText || "" }
       : variantThumbnailStyles?.mediumLandscape
       ? {
           src: variantThumbnailStyles.mediumLandscape,
