@@ -6,7 +6,6 @@ module V1
 
     metadata(metadata: false, properties: false, formatted: true)
 
-    typed_attribute :alt_text, Types::String.optional
     typed_attribute :caption, Types::String.optional
     typed_attribute :caption_formatted, Types::String.meta(read_only: true)
     typed_attribute :caption_plaintext, Types::String.meta(read_only: true)
