@@ -7,6 +7,9 @@ export const Container = styled.header`
   align-items: center;
   gap: var(--_spacing);
   text-decoration: none;
+  line-height: inherit;
+  margin-block: 0;
+  margin-inline: 0;
 
   @container (max-inline-size: 500px) {
     flex-direction: column-reverse;
