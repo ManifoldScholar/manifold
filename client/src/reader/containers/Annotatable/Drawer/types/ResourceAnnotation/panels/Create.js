@@ -57,12 +57,39 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
   const Fingerprint = setter(props => <Form.Errorable {...props} />);
 
   const formatData = data => {
+    const {
+      variantThumbnail: thumbnailData,
+      variantThumbnailAltText,
+      attachment: attachmentData,
+      attachmentAltText,
+      ...attrs
+    } = data.attributes;
+
     const isImage = data.attributes.kind === "image";
 
-    if (!isImage) return data;
+    if (!isImage)
+      return {
+        ...data,
+        attributes: {
+          ...attrs,
+          attachment: attachmentData,
+          variantThumbnail: {
+            ...thumbnailData,
+            altText: variantThumbnailAltText
+          }
+        }
+      };
+
     return {
       ...data,
-      attributes: { ...data.attributes, variantThumbnail: null }
+      attributes: {
+        ...attrs,
+        attachment: {
+          ...attachmentData,
+          altText: attachmentAltText
+        },
+        variantThumbnail: null
+      }
     };
   };
 
@@ -152,6 +179,12 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
                     label={t("glossary.resource_one")}
                     accepts="any"
                     name="attributes[attachment]"
+                    {...(kind === "image" && {
+                      altTextName: "attributes[attachmentAltText]",
+                      altTextLabel: t(
+                        "resources.properties.attachment_alt_label"
+                      )
+                    })}
                     instructionsSingleLine
                   />
                 )}
@@ -160,6 +193,8 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
                   label={t("resources.properties.featured_image")}
                   accepts="images"
                   name="attributes[variantThumbnail]"
+                  altTextName={"attributes[variantThumbnailAltText]"}
+                  altTextLabel={t("resources.properties.thumbnail_alt_label")}
                   instructionsSingleLine
                 />
               )}

@@ -16,48 +16,46 @@ export class ResourcePropertiesContainer extends PureComponent {
     t: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = this.initialState();
-  }
-
-  initialState() {
-    return {
-      newKind: null,
-      changeKind: false
-    };
-  }
-
-  handleSuccess = () => {
-    this.setState(this.initialState);
-  };
-
   formatData = data => {
     const { attributes, relationships } = data ?? {};
     const {
       sortOrder,
-      variantThumbnail,
+      variantThumbnail: thumbnailData,
       variantThumbnailAltText,
+      attachment: attachmentData,
+      attachmentAltText,
       ...rest
     } = attributes;
 
-    /* eslint-disable no-nested-ternary */
-    const thumbnail =
-      typeof variantThumbnailAltText === "string"
-        ? {
-            variantThumbnail: {
-              ...variantThumbnail,
-              altText: variantThumbnailAltText
-            }
-          }
-        : variantThumbnail
-        ? { variantThumbnail }
-        : {};
+    const isImage = data.attributes.kind
+      ? data.attributes.kind === "image"
+      : this.props.resource.attributes.kind === "image";
+
+    if (!isImage)
+      return {
+        relationships,
+        attributes: {
+          ...rest,
+          attachment: attachmentData,
+          variantThumbnail: {
+            ...thumbnailData,
+            altText: variantThumbnailAltText
+          },
+          sortOrder: sortOrder ? 1 : null
+        }
+      };
 
     return {
       relationships,
-      attributes: { ...rest, ...thumbnail, sortOrder: sortOrder ? 1 : null }
+      attributes: {
+        ...rest,
+        attachment: {
+          ...attachmentData,
+          altText: attachmentAltText
+        },
+        variantThumbnail: null,
+        sortOrder: sortOrder ? 1 : null
+      }
     };
   };
 
@@ -78,7 +76,6 @@ export class ResourcePropertiesContainer extends PureComponent {
           create={model =>
             resourcesAPI.create(this.props.params.projectId, model)
           }
-          onSuccess={this.handleSuccess}
           formatData={this.formatData}
           className="form-secondary"
         >
