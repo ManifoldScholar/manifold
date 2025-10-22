@@ -24,7 +24,7 @@ function Collapse({ initialVisible, children, stubHeight }) {
     id: idSeed("content"),
     role: "region",
     "aria-labelledby": idSeed("label"),
-    inert: !visible ? "" : undefined,
+    inert: !visible && stubHeight < height ? "" : undefined,
     resizeRef
   };
 
@@ -56,6 +56,7 @@ Collapse.displayName = "Global.Collapse";
 
 Collapse.propTypes = {
   initialVisible: PropTypes.bool,
+  stubHeight: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 

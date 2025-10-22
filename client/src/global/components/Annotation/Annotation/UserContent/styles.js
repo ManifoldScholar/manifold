@@ -47,6 +47,10 @@ export const Button = styled.button`
   ${utilityPrimary}
   font-size: 12px;
 
+  &[aria-disabled="true"] {
+    pointer-events: none;
+  }
+
   &[aria-expanded="true"] {
     ${defaultHoverStyle}
     margin-bottom: 15px;
@@ -68,5 +72,16 @@ export const SecondaryButton = styled(Button)`
 export const Thread = styled.div`
   &:focus {
     outline: none;
+  }
+`;
+
+export const EditDialog = styled.dialog`
+  padding: 0;
+  margin: 0;
+  border: 0;
+
+  &[open] {
+    position: relative;
+    inline-size: 100%;
   }
 `;

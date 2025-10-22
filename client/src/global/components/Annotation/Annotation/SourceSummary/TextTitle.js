@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export default function TextTitle({ title }) {
-  return <i {...maybeHtml(title)}>{maybeReactNode(title)}</i>;
+  return <cite {...maybeHtml(title)}>{maybeReactNode(title)}</cite>;
 }
 
 TextTitle.propTypes = {

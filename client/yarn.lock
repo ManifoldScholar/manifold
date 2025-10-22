@@ -1007,6 +1007,13 @@
     "@babel/helper-string-parser" "^7.27.1"
     "@babel/helper-validator-identifier" "^7.27.1"
 
+"@castiron/hooks@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@castiron/hooks/-/hooks-3.1.0.tgz#2e1d8b6459dee042e3916dd3bdef1dc8388ab303"
+  integrity sha512-SwsZfQlkuXBhvuXU698fuD0W2IDZxyEHzujUVcN8G/6Vgi+YDGnZY883mpMQp2/lUAsQIF3Xiv5BsIfSKnQe7w==
+  dependencies:
+    focus-trap "^6.6.0"
+
 "@castiron/style-mixins@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@castiron/style-mixins/-/style-mixins-2.0.0.tgz#6d8bc667527adf43ab2e7ed34eb0a7128f1c2bc7"
@@ -4848,6 +4855,13 @@ focus-trap-react@11.x:
   dependencies:
     focus-trap "^7.6.4"
     tabbable "^6.2.0"
+
+focus-trap@^6.6.0:
+  version "6.9.4"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-6.9.4.tgz#436da1a1d935c48b97da63cd8f361c6f3aa16444"
+  integrity sha512-v2NTsZe2FF59Y+sDykKY+XjqZ0cPfhq/hikWVL88BqLivnNiEffAsac6rP6H45ff9wG9LL5ToiDqrLEP9GX9mw==
+  dependencies:
+    tabbable "^5.3.3"
 
 focus-trap@^7.6.4:
   version "7.6.4"
@@ -9479,6 +9493,11 @@ swagger-ui@5.x:
     xml "=1.0.1"
     xml-but-prettier "^1.0.1"
     zenscroll "^4.0.2"
+
+tabbable@^5.3.3:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-5.3.3.tgz#aac0ff88c73b22d6c3c5a50b1586310006b47fbf"
+  integrity sha512-QD9qKY3StfbZqWOPLp0++pOrAVb/HbUi5xCc8cUo4XjP19808oaMiDzn0leBY5mCespIBM0CIZePzZjgzR83kA==
 
 tabbable@^6.0.0, tabbable@^6.2.0:
   version "6.2.0"
