@@ -17,10 +17,18 @@ export const Wrapper = styled("div", transientOptions)`
   }
 `;
 
+export const ButtonListItem = styled("li", transientOptions)`
+  min-inline-size: min(200px, 100%);
+`;
+
 export const List = styled("div", transientOptions)`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  &:is(ul) {
+    margin-block: 0px;
+  }
 
   > *:not(:first-child) {
     width: 100%;
@@ -42,6 +50,10 @@ export const List = styled("div", transientOptions)`
       > *:not(:first-child) {
         width: auto;
         margin-block-start: 0;
+      }
+
+      > ${ButtonListItem} {
+        display: flex;
       }
     `,
       BREAKPOINT

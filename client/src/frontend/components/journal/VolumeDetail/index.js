@@ -27,13 +27,18 @@ function VolumeDetail({ journal, volume }) {
         {!!issues.length &&
           issues.map(issue => (
             <Styled.IssueWrapper key={issue.id}>
-              <ThumbnailGrid minColumns={4} minItemWidth="210px">
+              <ThumbnailGrid
+                minColumns={4}
+                minItemWidth="210px"
+                isList={issues.length > 1}
+              >
                 {({ stack }) => (
                   <EntityThumbnail
                     entity={issue}
                     stack={stack}
                     key={issue.id}
                     parentView
+                    isListItem={issues.length > 1}
                   />
                 )}
               </ThumbnailGrid>
