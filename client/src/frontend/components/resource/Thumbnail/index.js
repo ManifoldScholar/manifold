@@ -74,7 +74,9 @@ class ResourceThumbnail extends Component {
     if (!key) return "";
     if (key === "variantThumbnailStyles")
       return this.resource.attributes.variantThumbnailAltText;
-    return this.resource.attributes.altText;
+    return this.resource.attributes.kind === "image"
+      ? this.resource.attributes.attachmentAltText
+      : "";
   }
 
   get hasImage() {
