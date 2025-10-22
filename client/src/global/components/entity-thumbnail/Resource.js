@@ -33,7 +33,7 @@ export default class EntityThumbnailResource extends PureComponent {
     const b = this.attr.attachmentStyles
       ? this.attr.attachmentStyles[this.variant]
       : null;
-    return a || b;
+    return this.kind === "image" ? b : a || b;
   }
 
   get kind() {

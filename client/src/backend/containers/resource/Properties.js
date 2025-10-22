@@ -132,18 +132,20 @@ export class ResourcePropertiesContainer extends PureComponent {
               />
             ) : null}
           </Form.FieldGroup>
-          <Form.FieldGroup label={t("resources.properties.thumbnail")}>
-            <Form.Upload
-              layout="square"
-              label={t("resources.properties.thumbnail")}
-              accepts="images"
-              readFrom="attributes[variantThumbnailStyles][small]"
-              name="attributes[variantThumbnail]"
-              remove="attributes[removeVariantThumbnail]"
-              altTextName={"attributes[variantThumbnailAltText]"}
-              altTextLabel={t("resources.properties.thumbnail_alt_label")}
-            />
-          </Form.FieldGroup>
+          {resource.attributes.kind !== "image" && (
+            <Form.FieldGroup label={t("resources.properties.thumbnail")}>
+              <Form.Upload
+                layout="square"
+                label={t("resources.properties.thumbnail")}
+                accepts="images"
+                readFrom="attributes[variantThumbnailStyles][small]"
+                name="attributes[variantThumbnail]"
+                remove="attributes[removeVariantThumbnail]"
+                altTextName={"attributes[variantThumbnailAltText]"}
+                altTextLabel={t("resources.properties.thumbnail_alt_label")}
+              />
+            </Form.FieldGroup>
+          )}
           <Form.FieldGroup
             label={t("projects.forms.properties.taxonomy_header")}
           >
