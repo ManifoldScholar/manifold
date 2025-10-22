@@ -40,7 +40,7 @@ export const Marker = styled.button`
   color: var(--strong-color);
   background-color: var(--button-bg-color);
   cursor: pointer;
-  margin-inline: 8px;
+  margin-inline-start: .5ch;
   transform: scale(calc(100% - (3 - var(--reader-font-size-index)) * 5%))
     translateY(calc(2px + (3 - var(--reader-font-size-index)) * 1px));
   transition: color ${defaultTransitionProps},
