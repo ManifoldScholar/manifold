@@ -3,7 +3,7 @@ export const privacyFilter = (filters, updateFilters, params, t) => {
     ? "highlight"
     : filters.privacy ?? "";
   return {
-    label: t("filters.labels.privacy"),
+    label: t("filters.labels.by_privacy"),
     value,
     onChange: e => updateFilters(e, "privacy"),
     options: [

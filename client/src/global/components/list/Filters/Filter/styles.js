@@ -34,7 +34,7 @@ export const Select = styled.select`
   transition: border-color ${defaultTransitionProps};
 
   &:focus-visible {
-    border-color: var(--hover-color);
+    outline: solid 2px var(--focus-color);
   }
 
   option {
