@@ -31,14 +31,14 @@ export default function ThumbnailMobile({
     variantThumbnailStyles,
     thumbnailStyles,
     attachmentStyles,
-    altText,
+    attachmentAltText,
     variantThumbnailAltText
   } = entity.attributes;
 
   /* eslint-disable no-nested-ternary */
   const imgProps =
     kind === "image"
-      ? { src: attachmentStyles?.smallLandscape, alt: altText || "" }
+      ? { src: attachmentStyles?.smallLandscape, alt: attachmentAltText || "" }
       : variantThumbnailStyles?.smallLandscape
       ? {
           src: variantThumbnailStyles.smallLandscape,
