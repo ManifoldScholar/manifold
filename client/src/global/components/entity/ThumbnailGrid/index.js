@@ -7,7 +7,8 @@ export default function ThumbnailGrid({
   minItemWidth = "250px",
   minColumns = 2,
   children,
-  parentView = false
+  parentView = false,
+  isList = false
 }) {
   const [useGrid, setUseGrid] = useState(true);
   const breakpoint = parseInt(minItemWidth, 10) * minColumns;
@@ -17,6 +18,7 @@ export default function ThumbnailGrid({
       return setUseGrid(false);
     }
   });
+  const as = isList ? "ul" : "div";
 
   return (
     <Styled.Grid
@@ -25,6 +27,7 @@ export default function ThumbnailGrid({
       $empty={!children}
       $minItemWidth={minItemWidth}
       $parentView={parentView}
+      as={as}
     >
       {typeof children === "function" ? children({ stack: useGrid }) : children}
     </Styled.Grid>
@@ -37,5 +40,6 @@ ThumbnailGrid.propTypes = {
   minItemWidth: PropTypes.string,
   minColumns: PropTypes.number,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  parentView: PropTypes.bool
+  parentView: PropTypes.bool,
+  isList: PropTypes.bool
 };

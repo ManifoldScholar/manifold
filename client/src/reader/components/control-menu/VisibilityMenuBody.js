@@ -117,6 +117,8 @@ class VisibilityMenuBody extends PureComponent {
 
   renderFilter(format, label, children) {
     const flex = format !== "reading-group" && format !== "annotation";
+    const ListTag = children?.length > 1 ? "ul" : "div";
+    const ItemTag = children?.length > 1 ? "li" : React.Fragment;
     return (
       <li key={`visibility-${format}`} className="visibility-menu__section">
         <fieldset className="visibility-menu__group">
@@ -128,14 +130,16 @@ class VisibilityMenuBody extends PureComponent {
             />
             <span className="visibility-menu__group-name">{label}</span>
           </legend>
-          <div
+          <ListTag
             className={classNames(
               "visibility-menu__filters control-menu__section",
               { "visibility-menu__filters--flex": flex }
             )}
           >
-            {children}
-          </div>
+            {React.Children.map(children, child => (
+              <ItemTag>{child}</ItemTag>
+            ))}
+          </ListTag>
         </fieldset>
       </li>
     );

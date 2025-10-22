@@ -57,10 +57,15 @@ function ProjectCollectionSummaryEntityCollection({
       headerLink={lh.link("frontendProjectCollection", slug)}
       BodyComponent={props =>
         !!projects?.length && (
-          <ThumbnailGrid {...props}>
+          <ThumbnailGrid isList={projects.length > 1} {...props}>
             {({ stack }) =>
               projects.map(item => (
-                <EntityThumbnail key={item.id} entity={item} stack={stack} />
+                <EntityThumbnail
+                  key={item.id}
+                  entity={item}
+                  stack={stack}
+                  isListItem={projects.length > 1}
+                />
               ))
             }
           </ThumbnailGrid>
