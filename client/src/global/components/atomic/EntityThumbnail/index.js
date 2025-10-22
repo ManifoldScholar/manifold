@@ -13,14 +13,17 @@ export default function EntityThumbnail({
   hideDescription = true,
   hideDate = false,
   stack = true,
-  parentView = false
+  parentView = false,
+  isListItem = false
 }) {
   const urlParam =
     entity.type === "journalIssues"
       ? entity.attributes.projectSlug
       : entity.attributes.slug;
+  const as = isListItem ? "li" : "div";
+
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper as={as}>
       <Styled.ItemLink
         $stack={stack}
         to={lh.link("frontendProjectDetail", urlParam)}
@@ -56,5 +59,6 @@ EntityThumbnail.propTypes = {
   hideMeta: PropTypes.bool,
   hideDate: PropTypes.bool,
   hideDescription: PropTypes.bool,
-  stack: PropTypes.bool
+  stack: PropTypes.bool,
+  isListItem: PropTypes.bool
 };
