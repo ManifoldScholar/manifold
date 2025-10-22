@@ -30,10 +30,14 @@ export const ItemLink = styled(Link, transientOptions)`
 
     &[href]:hover,
     &[href]:focus-visible {
-      outline: 0;
-      box-shadow: 0 31px 44px 2px rgba(0, 0, 0, 0.13);
       background-color: var(--box-medium-bg-color);
-    }`}
+      box-shadow: 0 31px 44px 2px rgba(0, 0, 0, 0.13);
+    }
+
+    &[href]:focus-visible {
+      outline-offset: -2px;
+    }
+  `}
 `;
 
 export const Cover = styled("figure", transientOptions)`
