@@ -16,11 +16,11 @@ class ResourceThumbnail extends Component {
   static imageKey(resource, variant) {
     if (!resource) return false;
     const { attributes } = resource;
-    const lookups = [
-      "variantThumbnailStyles",
-      "variantPosterStyles",
-      "attachmentStyles"
-    ];
+    const { kind } = attributes;
+    const lookups =
+      kind === "image"
+        ? ["attachmentStyles"]
+        : ["variantThumbnailStyles", "variantPosterStyles", "attachmentStyles"];
     return lookups.find(lookup => {
       return has(attributes, `${lookup}.${variant}`);
     });
