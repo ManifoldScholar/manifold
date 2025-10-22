@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 function ResourceMediaImage({ resource, fixedAspectRatio }) {
-  const { altText, attachmentStyles } = resource.attributes;
+  const { attachmentAltText, attachmentStyles } = resource.attributes;
 
   // TODO get dimensions from API
   return (
     <Styled.Image
       src={attachmentStyles.medium}
-      alt={altText || ""}
+      alt={attachmentAltText || ""}
       loading="lazy"
       $fixedAspectRatio={fixedAspectRatio}
     />
