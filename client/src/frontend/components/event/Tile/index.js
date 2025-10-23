@@ -40,23 +40,9 @@ export class EventTile extends Component {
     itemTag: "li"
   };
 
-  get hasLink() {
-    const { linkHref, hideLink } = this.props;
-    return !hideLink && linkHref;
-  }
-
   get tileTag() {
     return this.props.itemTag;
   }
-
-  handleTileClick = event => {
-    if (event.target.href) return;
-    if (!this.hasLink) return;
-    const { linkHref, linkTarget } = this.props;
-    if (linkTarget !== "_self" && window)
-      return window.open(linkHref, "_blank");
-    if (this.props.history) this.props.history.push(linkHref);
-  };
 
   render() {
     if (!this.props.visible) return null;
@@ -72,24 +58,37 @@ export class EventTile extends Component {
       date,
       dateFormat,
       italicizeContent,
-      t
+      t,
+      linkHref,
+      linkTarget,
+      hideLink
     } = this.props;
+
+    const hasLink = !hideLink && linkHref;
 
     return (
       <this.tileTag className={this.props.className}>
         {/* eslint-disable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
-        <Styled.Tile
-          role={this.hasLink ? "link" : null}
-          tabIndex={this.hasLink ? "0" : null}
-          onClick={this.handleTileClick}
-          $linked={this.hasLink}
-        >
+        <Styled.Tile $linked={hasLink}>
           {/* eslint-enable jsx-a11y/no-static-element-interactions,jsx-a11y/no-noninteractive-tabindex */}
           <Styled.Inner>
             {icon && <Styled.Icon icon={icon} size={48} />}
             {header && <Styled.Header>{header}</Styled.Header>}
-            {title && (
-              <Styled.Title dangerouslySetInnerHTML={{ __html: title }} />
+            {hasLink && title ? (
+              <Styled.Link
+                href={linkHref}
+                {...(linkTarget === "_blank"
+                  ? { target: "_blank", noreferrer: true }
+                  : {})}
+              >
+                <Styled.Title dangerouslySetInnerHTML={{ __html: title }} />
+              </Styled.Link>
+            ) : (
+              <>
+                {title && (
+                  <Styled.Title dangerouslySetInnerHTML={{ __html: title }} />
+                )}
+              </>
             )}
             {subtitle && <Styled.Subtitle>{subtitle}</Styled.Subtitle>}
             {preAttribution && <Styled.User>{preAttribution}</Styled.User>}
