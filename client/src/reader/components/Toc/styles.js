@@ -96,6 +96,7 @@ export const FooterButton = styled.button`
   &:hover,
   &:focus-visible {
     background-color: var(--color-base-neutral30);
+    color: var(--color-base-neutral80);
     outline: 0;
   }
 

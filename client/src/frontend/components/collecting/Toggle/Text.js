@@ -4,17 +4,13 @@ import PropTypes from "prop-types";
 
 function determineText(view, t) {
   switch (view) {
+    case "remove":
     case "remove-active":
       return {
         key: "remove",
         text: t("actions.remove")
       };
-    case "remove-confirm":
-    case "remove-confirm-active":
-      return {
-        key: "remove-confirm",
-        text: t("messages.confirm")
-      };
+    case "add":
     case "add-active":
       return {
         key: "add",

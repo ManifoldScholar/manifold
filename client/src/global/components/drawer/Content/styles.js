@@ -51,7 +51,7 @@ export const Drawer = styled.div`
     left: auto;
   }
 
-  ${respond(`width: 400px;`, 65)}
+  ${respond(`width: 500px;`, 65)}
   ${respond(`width: 555px;`, 90)}
   ${respond(`padding: 33px 48px;`, 90)}
 

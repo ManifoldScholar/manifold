@@ -63,14 +63,11 @@ export default `
   &__title-bar {
     font-family: var(--font-family-heading);
     position: relative;
-    display: none;
     grid-area: title-bar;
     height: 100%;
     overflow: hidden;
     font-size: 18px;
     font-weight: var(--font-weight-medium);
-
-    ${respond(`display: block;`, 75)}
   }
 
   &__title-bar-inner {
@@ -81,6 +78,9 @@ export default `
     padding-left: var(--padding-lateral);
     margin: 0;
     transition: transform 0.4s var(--transition-timing-function);
+    display: none;
+
+    ${respond(`display: block;`, 85)}
 
     .reader-header__title-bar--show-section & {
       transform: translateY(-100%);
@@ -103,7 +103,7 @@ export default `
   }
 
   &__title-bar-collecting-toggle {
-    margin-left: 12px;
+    margin-inline-start: 12px;
     transform: translateY(-3px);
   }
 
