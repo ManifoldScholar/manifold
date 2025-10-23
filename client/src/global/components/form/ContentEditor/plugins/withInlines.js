@@ -13,7 +13,10 @@ const withInlines = editor => {
       (element.type !== "math" && mathMLElements.includes(element.type));
 
     return (
-      isInlineMath || inlineNodes.includes(element.type) || isInline(element)
+      isInlineMath ||
+      inlineNodes.includes(element.type) ||
+      isInline(element) ||
+      Object.hasOwn(element, "text")
     );
   };
 

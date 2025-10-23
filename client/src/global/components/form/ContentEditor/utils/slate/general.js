@@ -27,3 +27,9 @@ export const formatNodeLabel = node => {
     label = `${label}.${htmlAttrs.class?.replaceAll(" ", ".")}`;
   return label;
 };
+
+export const matchPaths = (path1, path2) => {
+  return (
+    path1.length === path2.length && path1.every((int, i) => int === path2[i])
+  );
+};
