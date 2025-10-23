@@ -18,7 +18,6 @@ import Utility from "global/components/utility";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
 import { useTranslation } from "react-i18next";
 import Authorize from "hoc/Authorize";
-import { FocusTrap } from "focus-trap-react";
 
 export default function Header(props) {
   const {
@@ -63,7 +62,8 @@ export default function Header(props) {
   });
 
   const handleOptionsToggleClick = () => {
-    setExpanded(!mobileOptionsExpanded);
+    // make sure to fire after options menu focusleave callback
+    setTimeout(() => setExpanded(prevState => !prevState));
   };
 
   const handleResize = useCallback(() => {
@@ -85,13 +85,12 @@ export default function Header(props) {
     return () => window.removeEventListener("resize", handleResize);
   }, [handleResize]);
 
+  // produces a visual effect only, so don't use a <button> here
   const renderOptionsToggle = () => {
     return (
-      <button
+      <div
         onClick={handleOptionsToggleClick}
-        id="options-menu-button"
-        aria-controls="options-menu"
-        aria-expanded={mobileOptionsExpanded}
+        aria-hidden
         className="reader-header__button reader-header__options-button"
       >
         <span>
@@ -112,7 +111,7 @@ export default function Header(props) {
             className="reader-header__options-button-icon reader-header__options-button-icon--options"
           />
         )}
-      </button>
+      </div>
     );
   };
 
@@ -284,22 +283,21 @@ export default function Header(props) {
           {renderOptionsNav()}
         </div>
         {/* Options menu, mobile */}
-        <FocusTrap
-          active={mobileOptionsExpanded}
-          focusTrapOptions={{
-            allowOutsideClick: true,
-            escapeDeactivates: handleOptionsToggleClick
+        <div
+          className="reader-header__menu-group reader-header__menu-group--dialog"
+          onFocus={e => {
+            if (!e.currentTarget.contains(e.relatedTarget)) {
+              setExpanded(true);
+            }
+          }}
+          onBlur={e => {
+            if (!e.currentTarget.contains(e.relatedTarget)) {
+              setExpanded(false);
+            }
           }}
         >
-          <div
-            className="reader-header__menu-group reader-header__menu-group--dialog"
-            id="options-menu"
-            aria-labelledby="options-menu-button"
-            {...(mobileOptionsExpanded ? {} : { inert: "" })}
-          >
-            {renderOptionsNav()}
-          </div>
-        </FocusTrap>
+          {renderOptionsNav()}
+        </div>
       </nav>
       {!!text && (
         <>
