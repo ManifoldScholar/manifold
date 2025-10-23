@@ -52,6 +52,26 @@ export const markElements = ["del", "em", "s", "strong", "u", "code"];
 
 // All other elements are Slate void elements and are rendered as preview only in the RTE.
 
+// Elements that we apply .manifold-rte-[aligment] css classes to
+export const alignableElements = [
+  "p",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "header",
+  "footer",
+  "figure",
+  "div",
+  "section",
+  "article",
+  "ul",
+  "ol",
+  "img"
+];
+
 /* Element groups for Slate normalizing */
 
 // See https://docs.slatejs.org/concepts/02-nodes#blocks-vs.-inlines and https://docs.slatejs.org/concepts/11-normalizing#built-in-constraints
