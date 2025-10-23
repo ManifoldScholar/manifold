@@ -184,6 +184,10 @@ import RTELink24 from "./24/RTELink";
 import RTEImage24 from "./24/RTEImage";
 import CodeBlock24 from "./24/CodeBlock";
 import ProjectCollection32 from "./32/ProjectCollection";
+import RTEAlignLeft32 from "./32/RTEAlignLeft";
+import RTEAlignRight32 from "./32/RTEAlignRight";
+import RTEAlignCenter32 from "./32/RTEAlignCenter";
+import RTEAlignJustify32 from "./32/RTEAlignJustify";
 
 export default {
   ActivityComments64,
@@ -335,6 +339,10 @@ export default {
   ResourceSpreadsheet64,
   ResourceVideo64,
   Resources64,
+  RTEAlignLeft32,
+  RTEAlignRight32,
+  RTEAlignCenter32,
+  RTEAlignJustify32,
   RTELink24,
   RTEImage24,
   Search16,
