@@ -6,3 +6,4 @@ export { default as IframeButton } from "./IframeButton";
 export { default as BlockSelect } from "./BlockSelect";
 export { default as FunctionButton } from "./FunctionButton";
 export { default as SpanButton } from "./SpanButton";
+export { default as AlignmentMenuButton } from "./AlignmentMenuButton";

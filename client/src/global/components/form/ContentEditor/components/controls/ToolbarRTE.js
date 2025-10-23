@@ -8,7 +8,8 @@ import {
   IframeButton,
   BlockSelect,
   FunctionButton,
-  SpanButton
+  SpanButton,
+  AlignmentMenuButton
 } from "./buttons";
 import {
   MenuBar as ReakitMenuBar,
@@ -197,6 +198,7 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
           <Styled.ToolbarSpacer />
         </Styled.ToolGroup>
         <Styled.ToolGroup>
+          <ReakitMenuItem as={AlignmentMenuButton} {...menu} />
           <ReakitMenuItem
             as={BlockButton}
             icon="orderedList24"
@@ -209,18 +211,6 @@ export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {
             format="ul"
             {...menu}
           />
-          {/* <ReakitMenuItem
-            as={BlockButton}
-            icon="blockQuote24"
-            format="blockquote"
-            {...menu}
-          />
-          <ReakitMenuItem
-            as={BlockButton}
-            icon="codeBlock24"
-            format="pre"
-            {...menu}
-          /> */}
           <Styled.ToolbarSpacer />
         </Styled.ToolGroup>
         <Styled.ToolGroup>
