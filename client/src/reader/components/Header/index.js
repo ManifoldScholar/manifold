@@ -62,7 +62,8 @@ export default function Header(props) {
   });
 
   const handleOptionsToggleClick = () => {
-    setExpanded(!mobileOptionsExpanded);
+    // make sure to fire after options menu focusleave callback
+    setTimeout(() => setExpanded(prevState => !prevState));
   };
 
   const handleResize = useCallback(() => {
@@ -84,12 +85,12 @@ export default function Header(props) {
     return () => window.removeEventListener("resize", handleResize);
   }, [handleResize]);
 
+  // produces a visual effect only, so don't use a <button> here
   const renderOptionsToggle = () => {
     return (
-      <button
+      <div
         onClick={handleOptionsToggleClick}
         aria-hidden
-        tabIndex={-1}
         className="reader-header__button reader-header__options-button"
       >
         <span>
@@ -110,7 +111,7 @@ export default function Header(props) {
             className="reader-header__options-button-icon reader-header__options-button-icon--options"
           />
         )}
-      </button>
+      </div>
     );
   };
 
@@ -151,6 +152,110 @@ export default function Header(props) {
     );
   };
 
+  const renderOptionsNav = () => {
+    return (
+      <ul
+        aria-label={t("reader.header.reader_settings_search")}
+        className="reader-header__nav-list"
+      >
+        <Authorize kind={"any"}>
+          <li className="reader-header__nav-item">
+            <ControlMenu.Button
+              onClick={panelToggleHandler("notes")}
+              icon="notes24"
+              label={t("glossary.note_title_case_other")}
+              active={visibility.uiPanels.notes}
+              ariaHasPopup="dialog"
+              ariaControls="notes"
+            />
+          </li>
+        </Authorize>
+        <li className="reader-header__nav-item">
+          <DisclosureNavigationMenu
+            visible={visibility.uiPanels.visibility}
+            disclosure={
+              <ControlMenu.DisclosureButton
+                icon="eyeball24"
+                label={t("common.visibility_title_case")}
+              />
+            }
+          >
+            <ControlMenu.DisclosurePanel direction="right">
+              <ControlMenu.VisibilityMenuBody
+                className="panel"
+                filter={visibility.visibilityFilters}
+                filterChangeHandler={handleVisibilityFilterChange}
+              />
+            </ControlMenu.DisclosurePanel>
+          </DisclosureNavigationMenu>
+        </li>
+        <li className="reader-header__nav-item">
+          <DisclosureNavigationMenu
+            visible={visibility.uiPanels.appearance}
+            disclosure={
+              <ControlMenu.DisclosureButton
+                icon="text24"
+                label={t("reader.header.reader_appearance")}
+              />
+            }
+          >
+            <ControlMenu.DisclosurePanel direction="right">
+              <ControlMenu.AppearanceMenuBody
+                // Props required by body component
+                appearance={appearance}
+                selectFont={selectFont}
+                setColorScheme={setColorScheme}
+                incrementFontSize={incrementFontSize}
+                decrementFontSize={decrementFontSize}
+                incrementMargins={incrementMargins}
+                decrementMargins={decrementMargins}
+                resetTypography={resetTypography}
+                className="panel"
+              />
+            </ControlMenu.DisclosurePanel>
+          </DisclosureNavigationMenu>
+        </li>
+        <li className="reader-header__nav-item">
+          <DisclosureNavigationMenu
+            visible={visibility.uiPanels.search}
+            disclosure={
+              <ControlMenu.DisclosureButton
+                icon="search24"
+                label={t("search.title")}
+              />
+            }
+          >
+            <ControlMenu.DisclosurePanel direction="right">
+              <SearchMenu.Body
+                toggleVisibility={panelToggleHandler("search")}
+                initialState={{
+                  keyword: "",
+                  scope: "text"
+                }}
+                projectId={projectId}
+                textId={textId}
+                sectionId={sectionId}
+                searchType="reader"
+                className="panel search-menu"
+              />
+            </ControlMenu.DisclosurePanel>
+          </DisclosureNavigationMenu>
+        </li>
+        <li className="reader-header__nav-item">
+          <DisclosureNavigationMenu
+            visible={visibility.uiPanels.user}
+            disclosure={<UserMenuButton />}
+            callbacks={commonActions}
+            onBlur={commonActions.hideUserPanel}
+            context="reader"
+          >
+            <UserMenuBody />
+          </DisclosureNavigationMenu>
+        </li>
+      </ul>
+    );
+  };
+
   const innerClassName = classNames({
     "reader-header__inner": true,
     "reader-header__inner--shifted": mobileOptionsExpanded
@@ -173,57 +278,25 @@ export default function Header(props) {
             showSection={!scrollAware.top}
           />
         )}
+        {/* Options menu */}
         <div className="reader-header__menu-group reader-header__menu-group--right">
-          <ul
-            aria-label={t("reader.header.reader_settings_search")}
-            className="reader-header__nav-list"
-          >
-            <Authorize kind={"any"}>
-              <li className="reader-header__nav-item">
-                <ControlMenu.Button
-                  onClick={panelToggleHandler("notes")}
-                  icon="notes24"
-                  label={t("glossary.note_title_case_other")}
-                  active={visibility.uiPanels.notes}
-                />
-              </li>
-            </Authorize>
-            <li className="reader-header__nav-item">
-              <ControlMenu.Button
-                onClick={panelToggleHandler("visibility")}
-                icon="eyeball24"
-                label={t("common.visibility_title_case")}
-                active={visibility.uiPanels.visibility}
-              />
-            </li>
-            <li className="reader-header__nav-item">
-              <ControlMenu.Button
-                onClick={panelToggleHandler("appearance")}
-                icon="text24"
-                label={t("reader.header.reader_appearance")}
-                active={visibility.uiPanels.appearance}
-              />
-            </li>
-            <li className="reader-header__nav-item">
-              <SearchMenu.Button
-                toggleSearchMenu={panelToggleHandler("search")}
-                active={visibility.uiPanels.search}
-                className="reader-header__button reader-header__button--pad-narrow"
-                iconSize={32}
-              />
-            </li>
-            <li className="reader-header__nav-item">
-              <DisclosureNavigationMenu
-                visible={visibility.uiPanels.user}
-                disclosure={<UserMenuButton />}
-                callbacks={commonActions}
-                onBlur={commonActions.hideUserPanel}
-                context="reader"
-              >
-                <UserMenuBody />
-              </DisclosureNavigationMenu>
-            </li>
-          </ul>
+          {renderOptionsNav()}
+        </div>
+        {/* Options menu, mobile */}
+        <div
+          className="reader-header__menu-group reader-header__menu-group--dialog"
+          onFocus={e => {
+            if (!e.currentTarget.contains(e.relatedTarget)) {
+              setExpanded(true);
+            }
+          }}
+          onBlur={e => {
+            if (!e.currentTarget.contains(e.relatedTarget)) {
+              setExpanded(false);
+            }
+          }}
+        >
+          {renderOptionsNav()}
         </div>
       </nav>
       {!!text && (
@@ -260,45 +333,6 @@ export default function Header(props) {
               match={match}
               history={history}
               hidePanel={commonActions.hideNotesPanel}
-            />
-            <UIPanel
-              id="visibility"
-              visibility={visibility.uiPanels}
-              filter={visibility.visibilityFilters}
-              filterChangeHandler={handleVisibilityFilterChange}
-              bodyComponent={ControlMenu.VisibilityMenuBody}
-              hidePanel={commonActions.hideVisibilityPanel}
-            />
-            <UIPanel
-              id="search"
-              visibility={visibility.uiPanels}
-              toggleVisibility={panelToggleHandler("search")}
-              initialState={{
-                keyword: "",
-                scope: "text"
-              }}
-              projectId={projectId}
-              textId={textId}
-              sectionId={sectionId}
-              searchType="reader"
-              bodyComponent={SearchMenu.Body}
-              bodyClassName="search-menu"
-              hidePanel={commonActions.hideSearchPanel}
-            />
-            <UIPanel
-              id="appearance"
-              visibility={visibility.uiPanels}
-              bodyComponent={ControlMenu.AppearanceMenuBody}
-              // Props required by body component
-              appearance={appearance}
-              selectFont={selectFont}
-              setColorScheme={setColorScheme}
-              incrementFontSize={incrementFontSize}
-              decrementFontSize={decrementFontSize}
-              incrementMargins={incrementMargins}
-              decrementMargins={decrementMargins}
-              resetTypography={resetTypography}
-              hidePanel={commonActions.hideAppearancePanel}
             />
           </div>
         </>
