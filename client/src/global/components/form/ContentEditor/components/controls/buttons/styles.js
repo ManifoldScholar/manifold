@@ -32,8 +32,7 @@ export const Button = styled.button`
     background-color: var(--color-accent-primary);
   }
 
-  &:focus-visible,
-  &:focus {
+  &:focus-visible {
     ${defaultFocusStyle}
   }
 `;
