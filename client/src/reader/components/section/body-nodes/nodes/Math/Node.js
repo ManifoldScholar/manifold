@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-  getAnnotationStyles,
-  getlocalAnnotationsArray
-} from "./annotationHelpers";
+  getAnnotationProps,
+  formatLocalAnnotations
+} from "../../helpers/annotation";
 import { useTranslation } from "react-i18next";
 import { uid } from "react-uid";
+import values from "lodash/values";
 import { useErrorHandler } from "react-error-boundary";
 
 const createNode = n => {
@@ -41,24 +42,39 @@ function MathNode({
   };
 
   const { isDetail, ...annotations } = openAnnotations;
-  const localAnnotations = getlocalAnnotationsArray(annotations);
+  const localAnnotations = formatLocalAnnotations(values(annotations));
+
+  const highlightAriaLabel = t("reader.actions.manage_highlight", {
+    chunk: "mathematical content"
+  });
+  const annotationAriaLabel = t("reader.actions.view_annotations", {
+    chunk: "mathematical content"
+  });
+
   const {
     classes,
     removableHighlightId,
     textAnnotationIds,
     annotationIds,
-    interactiveAttributes
-  } = getAnnotationStyles(
-    localAnnotations,
-    uuids,
-    t,
+    interactiveAttributes,
+    interactiveTag
+  } = getAnnotationProps({
+    annotations: localAnnotations,
+    mathUuids: uuids,
     hasInteractiveAncestor,
-    isDetail
-  );
+    isDetail,
+    highlightAriaLabel,
+    annotationAriaLabel
+  });
 
-  const Wrapper = attributes.display === "inline" ? "span" : "div";
+  /* eslint-disable no-nested-ternary */
+  const Wrapper =
+    interactiveTag ?? (attributes.display === "inline" ? "span" : "div");
+
   const wrapperStyles =
-    Wrapper === "div" ? { width: "max-content", maxWidth: "100%" } : {};
+    attributes.display !== "inline"
+      ? { display: "block", width: "max-content", maxWidth: "100%" }
+      : {};
 
   const { style, ...mathAttrs } = attributes ?? {};
 
