@@ -45,11 +45,16 @@ export default function ImageRenderer({
 
   const { htmlAttrs } = element ?? {};
   const className = htmlAttrs?.class ?? undefined;
+  const alignment = className
+    ?.split(" ")
+    .find(c => c.startsWith("manifold-rte"));
   const epubType = htmlAttrs?.["data-epub-type"] || undefined;
 
   return (
     <div
-      className={htmlAttrs?.inline ? "inline-block" : undefined}
+      className={`${alignment ?? ""} ${
+        htmlAttrs?.inline ? "inline-block" : undefined
+      }`}
       {...attributes}
       style={showHtml ? getHtmlOutlineStyles("a", darkMode) : undefined}
     >
