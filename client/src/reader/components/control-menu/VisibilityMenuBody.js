@@ -120,7 +120,7 @@ class VisibilityMenuBody extends PureComponent {
     const ListTag = children?.length > 1 ? "ul" : "div";
     const ItemTag = children?.length > 1 ? "li" : React.Fragment;
     return (
-      <li key={`visibility-${format}`} className="visibility-menu__section">
+      <div key={`visibility-${format}`} className="visibility-menu__section">
         <fieldset className="visibility-menu__group">
           <legend className="visibility-menu__legend control-menu__header control-menu__header--with-icon">
             <IconComposer
@@ -141,7 +141,7 @@ class VisibilityMenuBody extends PureComponent {
             ))}
           </ListTag>
         </fieldset>
-      </li>
+      </div>
     );
   }
 
@@ -326,13 +326,13 @@ class VisibilityMenuBody extends PureComponent {
             {this.props.t("reader.menus.visibility.show_the_following")}
           </h2>
         </div>
-        <ul className="visibility-menu__section-list">
+        <div className="visibility-menu__section-list">
           {this.renderCheckboxGroup("annotation", filter.annotation, true)}
           {this.renderCheckboxGroup("resource", filter.resource)}
           {(this.canAccessReadingGroups || this.canEngagePublicly) &&
             this.renderReadingGroups()}
           {this.renderFooterButtons(filter)}
-        </ul>
+        </div>
       </div>
     );
   }
