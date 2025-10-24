@@ -5,7 +5,7 @@ export const insertImage = (editor, url, alt) => {
   const text = { text: "", slateOnly: true };
   const image = {
     type: "img",
-    htmlAttrs: { src: url, alt: alt ?? "" },
+    htmlAttrs: { src: url, alt: alt ?? "", width: "200px" },
     children: [text]
   };
   const [node] = Editor.above(editor, editor.selection);
