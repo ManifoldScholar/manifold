@@ -436,7 +436,7 @@ class AppearanceMenuBody extends Component {
         <div>
           <button
             className="control-menu__button"
-            disabled={this.resetDisabled}
+            aria-disabled={this.resetDisabled}
             onClick={this.resetHandler}
           >
             <Utility.IconComposer
