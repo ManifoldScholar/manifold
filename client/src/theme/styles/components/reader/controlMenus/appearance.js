@@ -243,7 +243,7 @@ export default `
           outline: 0;
 
           > svg path {
-            fill: var(--strong-color);
+            fill: var(--color-neutral-text-extra-dark);
           }
         }
       }
