@@ -49,10 +49,9 @@ export default `
         background-color ${defaultTransitionProps};
 
       &:hover:not(:disabled):not([aria-disabled="true"]),
-      &:focus-visible {
+      &:focus-visible:not([aria-disabled="true"]) {
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--color-interaction-light);
-        outline: 0;
       }
 
       &:focus-visible {
@@ -60,7 +59,8 @@ export default `
         outline-offset: -2px;
       }
 
-      &:disabled {
+      &:disabled,
+      &[aria-disabled="true"] {
         color: ${transparentize("neutral75", 0.5)};
         cursor: default;
       }
