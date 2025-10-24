@@ -9,11 +9,6 @@ const HERO_BREAKPOINT = breakpoints[60];
 const aSecondaryButton = `
   background-color: var(--color-base-neutral10);
 
-  &:focus-visible {
-    outline: 0;
-    border-color: var(--color-base-neutral70);
-  }
-
   &:hover {
     color: inherit;
     background-color: ${rgba("neutral30", 0.7)};
@@ -61,7 +56,8 @@ export const Button = styled("button", transientOptions)`
   border-radius: var(--box-border-radius);
   background-color: var(--color-accent-primary);
   transition: background-color ${defaultTransitionProps},
-    border-color ${defaultTransitionProps};
+    border-color ${defaultTransitionProps},
+    outline-color ${defaultTransitionProps};
   font-family: var(--font-family-heading);
   font-size: 14px;
   font-weight: var(--font-weight-semibold);
@@ -74,11 +70,6 @@ export const Button = styled("button", transientOptions)`
   &:focus-visible {
     color: var(--color-base-neutral90);
     background-color: var(--color-accent-primary-dull);
-  }
-
-  &:focus-visible {
-    outline: 0;
-    border-color: var(--color-accent-primary);
   }
 
   ${({ $secondary, $darkMode }) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import partition from "lodash/partition";
 import Callout from "./Callout/index";
@@ -23,33 +23,40 @@ export default function HeroCalloutList({
       );
   const [buttons, links] = partition(visible, "attributes.button");
 
+  const ButtonTag = buttons.length > 1 ? Styled.ButtonListItem : Fragment;
+  const LinkTag = links.length > 1 ? "li" : Fragment;
+
   return (
     <Styled.Wrapper $mobile={mobileVisible}>
       {buttons.length > 0 && (
-        <Styled.List $inline={inline}>
+        <Styled.List $inline={inline} as={buttons.length > 1 ? "ul" : "div"}>
           {buttons.map(callout => (
-            <Callout
-              showErrors={showErrors}
-              key={callout.id}
-              callout={callout}
-              darkMode={darkMode}
-              buttonSize={buttonSize}
-              track={track}
-            />
+            <ButtonTag>
+              <Callout
+                showErrors={showErrors}
+                key={callout.id}
+                callout={callout}
+                darkMode={darkMode}
+                buttonSize={buttonSize}
+                track={track}
+              />
+            </ButtonTag>
           ))}
         </Styled.List>
       )}
       {links.length > 0 && (
-        <Styled.List $inline={inline}>
+        <Styled.List $inline={inline} as={links.length > 1 ? "ul" : "div"}>
           {links.map(callout => (
-            <Callout
-              showErrors={showErrors}
-              key={callout.id}
-              callout={callout}
-              darkMode={darkMode}
-              track={track}
-              isLink
-            />
+            <LinkTag>
+              <Callout
+                showErrors={showErrors}
+                key={callout.id}
+                callout={callout}
+                darkMode={darkMode}
+                track={track}
+                isLink
+              />
+            </LinkTag>
           ))}
         </Styled.List>
       )}

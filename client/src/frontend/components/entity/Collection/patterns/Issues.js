@@ -23,7 +23,7 @@ function IssuesEntityCollection({
       icon={icon}
       filterProps={!issuesMeta || !filterProps ? null : filterProps}
       BodyComponent={props => (
-        <ThumbnailGrid {...props}>
+        <ThumbnailGrid isList={issues.length > 1} {...props}>
           {({ stack }) =>
             issues.map(item => (
               <EntityThumbnail
@@ -31,6 +31,7 @@ function IssuesEntityCollection({
                 stack={stack}
                 key={item.id}
                 parentView={parentView}
+                isListItem={issues.length > 1}
               />
             ))
           }

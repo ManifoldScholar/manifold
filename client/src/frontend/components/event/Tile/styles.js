@@ -129,6 +129,18 @@ export const Footer = styled.span`
   margin-top: 18px;
 `;
 
+export const Link = styled.a`
+  text-decoration: none;
+
+  &::after {
+    position: absolute;
+    display: block;
+    content: "";
+    inset-inline: -17px -17px;
+    inset-block: -19px -21px;
+  }
+`;
+
 export const Title = styled.h3`
   margin-top: 0;
   margin-bottom: 0;

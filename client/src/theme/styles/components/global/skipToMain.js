@@ -24,5 +24,8 @@ export default `
       left: 0;
       outline-offset: -3px;
     }
+
+    &:hover {
+      color: var(--color-accent-primary-off-white)}
   }
 `;
