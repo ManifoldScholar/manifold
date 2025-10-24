@@ -32,11 +32,13 @@ class AppearanceMenuBody extends Component {
   };
 
   handleColorSchemeControl = event => {
-    this.props.setColorScheme(event.target.value);
+    const buttonEl = event.currentTarget;
+    const value = buttonEl.dataset.value;
+    this.props.setColorScheme(value);
     this.props.setScreenReaderStatus(
       this.resetOptionMessage(
         this.props.t("reader.menus.appearance.color_scheme"),
-        event.target.value
+        value
       )
     );
   };
@@ -247,29 +249,30 @@ class AppearanceMenuBody extends Component {
       });
 
     return (
-      <fieldset className="appearance-menu__radio-group">
-        <legend className="control-menu__legend">
+      <div className="appearance-menu__radio-group" role="group">
+        <div className="control-menu__legend">
           {this.props.t("reader.menus.appearance.color_scheme")}
-        </legend>
+        </div>
         {this.colorSchemeOptions.map(option => (
-          <label key={option.value} className={labelClassName(option)}>
-            <input
-              value={option.value}
-              name="color-scheme-radios"
-              type="radio"
-              checked={option.value === this.colorScheme}
-              onChange={this.handleColorSchemeControl}
-              className="appearance-menu__radio-input"
-            />
+          <button
+            type="button"
+            role="switch"
+            key={option.value}
+            className={labelClassName(option)}
+            aria-checked={option.value === this.colorScheme}
+            data-value={option.value}
+            onClick={this.handleColorSchemeControl}
+          >
+            <div className="appearance-menu__radio-input" />
             <Utility.IconComposer
               icon="CheckUnique"
               size={30}
               className="appearance-menu__color-scheme-icon"
             />
             <span className="screen-reader-text">{option.label}</span>
-          </label>
+          </button>
         ))}
-      </fieldset>
+      </div>
     );
   }
 
