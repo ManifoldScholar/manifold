@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { Transforms } from "slate";
+import { Transforms, Range, Node } from "slate";
 import { useSlate, ReactEditor } from "slate-react";
 import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
@@ -10,7 +10,7 @@ import {
   useMenuState
 } from "reakit/Menu";
 import { getCommonBlock } from "../../../../utils/slate/getters";
-import { rteElements, nestableElements } from "../../../../utils/elements";
+import { alignableElements } from "../../../../utils/elements";
 import capitalize from "lodash/capitalize";
 import * as SharedStyled from "../styles";
 import * as Styled from "./styles";
@@ -28,10 +28,11 @@ const AlignmentMenuButton = ({ size, ...rest }, ref) => {
     gutter: 7
   });
 
-  const condition = node =>
-    [...rteElements, ...nestableElements].includes(node?.type);
+  const condition = node => [...alignableElements].includes(node?.type);
 
-  const [block, path] = selection ? getCommonBlock(editor, condition) : [];
+  const [block, path] = selection
+    ? getCommonBlock(editor, condition) ?? []
+    : [];
 
   const activeAlignmentClass = block?.htmlAttrs?.class
     ? block.htmlAttrs.class.split(" ").find(c => c.includes("manifold-rte"))
@@ -42,39 +43,64 @@ const AlignmentMenuButton = ({ size, ...rest }, ref) => {
 
     if (!block) return;
 
-    let classes;
+    const classes = block.htmlAttrs?.class
+      ? block.htmlAttrs.class
+          .split(" ")
+          .filter(c => !c.startsWith("manifold-rte"))
+          .concat(`manifold-rte-${style}`)
+          .join(" ")
+      : `manifold-rte-${style}`;
 
-    if (style) {
-      classes = block.htmlAttrs?.class
-        ? block.htmlAttrs.class
-            .split(" ")
-            .filter(c => !c.startsWith("manifold-rte"))
-            .concat(`manifold-rte-${style}`)
-            .join(" ")
-        : `manifold-rte-${style}`;
+    if (Range.isCollapsed(selection) && !block.slateOnly) {
+      Transforms.setNodes(
+        editor,
+        {
+          ...block,
+          htmlAttrs: {
+            ...block.htmlAttrs,
+            class: classes
+          }
+        },
+        { at: path, mode: "highest" }
+      );
     } else {
-      classes = block.htmlAttrs?.class
-        ? block.htmlAttrs.class
-            .split(" ")
-            .filter(c => !c.startsWith("manifold-rte"))
-            .join(" ")
-        : "";
-    }
+      const { anchor, focus } = selection;
+      const anchorIndex = anchor.path[path.length];
+      const focusIndex = focus.path[path.length];
+      const sorted = [anchorIndex, focusIndex].sort();
 
-    Transforms.setNodes(
-      editor,
-      {
-        ...block,
-        htmlAttrs: {
-          ...block.htmlAttrs,
-          class: classes
+      for (let i = sorted[0]; i <= sorted[1]; i++) {
+        const childPath = [...path, i];
+        const childBlock = Node.getIf(editor, childPath);
+        if (childBlock && alignableElements.includes(childBlock.type)) {
+          Transforms.setNodes(
+            editor,
+            {
+              ...childBlock,
+              htmlAttrs: {
+                ...block.htmlAttrs,
+                class: classes
+              }
+            },
+            { at: childPath, mode: "highest" }
+          );
         }
-      },
-      { at: path, mode: "highest" }
-    );
+        if (childBlock?.type === "img") {
+          Transforms.wrapNodes(
+            editor,
+            {
+              type: "figure",
+              children: [childBlock],
+              htmlAttrs: { class: classes }
+            },
+            { at: childPath }
+          );
+        }
+      }
 
-    menu.hide();
-    ReactEditor.focus(editor);
+      menu.hide();
+      ReactEditor.focus(editor);
+    }
   };
 
   const outerIcon = activeAlignmentClass
@@ -87,9 +113,8 @@ const AlignmentMenuButton = ({ size, ...rest }, ref) => {
         as={SharedStyled.Button}
         ref={ref}
         {...rest}
-        aria-label={t("editor.controls.labels.format")}
-        data-active={menu.visible}
-        tabIndex={-1}
+        aria-label={t("editor.controls.labels.alignment")}
+        data-active={menu.visible || !!activeAlignmentClass}
         {...menu}
         onClick={e => {
           e.preventDefault();
@@ -101,8 +126,11 @@ const AlignmentMenuButton = ({ size, ...rest }, ref) => {
       <ReakitMenu as={Styled.Content} {...menu}>
         <ReakitMenuItem
           as={Styled.InnerButton}
-          onClick={onClick()}
-          data-active={!activeAlignmentClass}
+          onClick={onClick("left")}
+          data-active={
+            activeAlignmentClass === "manifold-rte-left" ||
+            !activeAlignmentClass
+          }
           {...menu}
         >
           <Utility.IconComposer icon="RTEAlignLeft32" size={24} />
