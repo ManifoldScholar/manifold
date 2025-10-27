@@ -20,9 +20,10 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
     if (!block) return;
 
     const hasInlineChildren = Object.hasOwn(block.children?.[0], "text");
+    const isList = block.type === "ul" || block.type === "ol";
 
     if (
-      (Range.isCollapsed(selection) || hasInlineChildren) &&
+      (Range.isCollapsed(selection) || hasInlineChildren || isList) &&
       !block.slateOnly
     ) {
       setBlockClassName({
