@@ -23,7 +23,8 @@ export const getActiveAlignment = (selection, block, path) => {
 
   // If selection only spans a single block, just check that block's classes.
   const hasInlineChildren = Object.hasOwn(block.children?.[0], "text");
-  if (Range.isCollapsed(selection) || hasInlineChildren)
+  const isList = block.type === "ul" || block.type === "ol";
+  if (Range.isCollapsed(selection) || hasInlineChildren || isList)
     return block.htmlAttrs?.class
       ?.split(" ")
       .find(c => c.includes("manifold-rte"));
