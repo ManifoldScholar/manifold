@@ -46,7 +46,7 @@ export default function ImageRenderer({
   const { htmlAttrs } = element ?? {};
   const className = htmlAttrs?.class ?? undefined;
   const alignment = className
-    .split(" ")
+    ?.split(" ")
     .find(c => c.startsWith("manifold-rte"));
   const epubType = htmlAttrs?.["data-epub-type"] || undefined;
 
