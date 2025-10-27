@@ -3,10 +3,7 @@ import { useSlate, ReactEditor } from "slate-react";
 import { Range, Node } from "slate";
 import Utility from "global/components/utility";
 import { alignableElements } from "../../../../utils/elements";
-import {
-  setBlockClassName,
-  wrapWithStyledFigure
-} from "../../../../utils/slate/transforms";
+import { setBlockClassName } from "../../../../utils/slate/transforms";
 import { getClassNameWithAlign, getSelectionIndices } from "./helpers";
 import * as Styled from "./styles";
 
@@ -44,14 +41,6 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
             block: childBlock,
             path: childPath,
             className: getClassNameWithAlign(childBlock, style)
-          });
-        }
-        if (childBlock?.type === "img") {
-          wrapWithStyledFigure({
-            editor,
-            imageNode: childBlock,
-            imagePath: childPath,
-            className: `manifold-rte-${style}`
           });
         }
       }
