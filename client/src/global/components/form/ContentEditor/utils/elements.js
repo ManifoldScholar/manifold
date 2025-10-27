@@ -68,7 +68,8 @@ export const alignableElements = [
   "section",
   "article",
   "ul",
-  "ol"
+  "ol",
+  "img"
 ];
 
 /* Element groups for Slate normalizing */

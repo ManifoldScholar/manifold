@@ -14,5 +14,12 @@ export default `
     .manifold-rte-left {
       text-align: left;
     }
+
+    img.manifold-rte-right {
+      margin-inline: auto 0;
+    }
+    img.manifold-rte-center {
+      margin-inline: auto;
+    }
   }
 `;
