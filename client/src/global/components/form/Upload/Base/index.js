@@ -171,6 +171,7 @@ export default class FormUpload extends Component {
           )}
           {showAltTextInput && (
             <Styled.AltTextInput
+              inputType="text"
               name={this.props.altTextName}
               label={this.props.altTextLabel}
               reset={this.state.clearAlt}
