@@ -18,6 +18,9 @@ export class ResourcePropertiesContainer extends PureComponent {
 
   formatData = data => {
     const { attributes, relationships } = data ?? {};
+    /*
+      Because of the structure of the attachment field data, the current Form implementation doesn't handle a separate field with name attributes.attachment.altText correctly. So, we grab the alt fields here and append them to the attachment data if an alt is supplied.
+     */
     const {
       sortOrder,
       variantThumbnail: thumbnailData,
@@ -31,6 +34,7 @@ export class ResourcePropertiesContainer extends PureComponent {
       ? data.attributes.kind === "image"
       : this.props.resource.attributes.kind === "image";
 
+    // The attachment alt text field is only used/visible to users when the attachment type is "image"; featured image and its alt text is used for non-images.
     if (!isImage)
       return {
         relationships,
@@ -45,6 +49,7 @@ export class ResourcePropertiesContainer extends PureComponent {
         }
       };
 
+    // Conversely, save the attachment alt text for images and don't store a separate featured image.
     return {
       relationships,
       attributes: {
