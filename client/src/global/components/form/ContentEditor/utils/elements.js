@@ -66,7 +66,9 @@ export const alignableElements = [
   "figure",
   "div",
   "section",
-  "article"
+  "article",
+  "ul",
+  "ol"
 ];
 
 /* Element groups for Slate normalizing */
