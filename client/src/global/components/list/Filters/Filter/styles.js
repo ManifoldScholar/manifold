@@ -27,9 +27,8 @@ export const Select = styled.select`
   ${filterSelectBase}
   width: 100%;
   height: ${entityFilterForm.filterHeight};
-  padding-top: 11px;
-  padding-bottom: 12px;
-  font-size: 13px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   ${borderStyles}
   transition: border-color ${defaultTransitionProps};
 
@@ -44,7 +43,7 @@ export const Select = styled.select`
 
 export const Icon = styled(IconComposer)`
   position: absolute;
-  top: ${({ $visibleLabel }) => ($visibleLabel ? "70%" : "50%")};
+  top: 70%;
   right: 12px;
   width: 24px;
   height: 24px;
