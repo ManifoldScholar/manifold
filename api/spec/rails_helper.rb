@@ -164,7 +164,7 @@ RSpec.configure do |config|
   end
 
   config.before(:all, type: :request) do
-    host! ENV['DOMAIN']
+    host! StartupConfig.domain
   end
 
   config.after do

@@ -11,11 +11,11 @@ m = ConfigMash.new(Rails.application.config_for(:manifold))
 ssl_enabled = %w(1 true).include?(ENV["SSL_ENABLED"].to_s.downcase)
 m.ssl_enabled = ssl_enabled
 m.protocol = ssl_enabled ? "https" : "http"
-m.domain = ENV["DOMAIN"]
+m.domain = StartupConfig.domain
 m.domain ||= "manifold.lvh" if Rails.env.development? || Rails.env.test?
-m.url ||= ENV["CLIENT_URL"] || "#{ssl_enabled ? 'https' : 'http'}://#{m.domain}"
-m.api_url ||= ENV["CLIENT_BROWSER_API_URL"] || m.url
-m.mammoth_path ||= ENV["MAMMOTH_PATH"] || Rails.root.join("..", "client/node_modules/mammoth/bin/mammoth")
+m.url ||= StartupConfig.client_url || "#{ssl_enabled ? 'https' : 'http'}://#{m.domain}"
+m.api_url ||= StartupConfig.client_browser_api_url || m.url
+m.mammoth_path ||= StartupConfig.mammoth_path || Rails.root.join("..", "client/node_modules/mammoth/bin/mammoth")
 
 m.url_options = {
   protocol: m.protocol,

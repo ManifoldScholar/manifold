@@ -36,7 +36,7 @@ Rails.application.configure do
     config.hosts << "web.manifold.orb.local"
     config.hosts << "manifold-api.ngrok.io"
     config.hosts << "manifold-dev.ngrok.io"
-    config.hosts << ENV["DOMAIN"]
+    config.hosts << StartupConfig.domain
   end
 
   # Raises error for missing translations.
@@ -44,5 +44,5 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ENV["DISABLE_SPRING"].present? ? ActiveSupport::FileUpdateChecker : ActiveSupport::EventedFileUpdateChecker
+  config.file_watcher = StartupConfig.disable_spring.present? ? ActiveSupport::FileUpdateChecker : ActiveSupport::EventedFileUpdateChecker
 end

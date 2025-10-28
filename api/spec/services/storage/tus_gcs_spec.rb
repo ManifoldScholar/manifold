@@ -20,7 +20,7 @@ RSpec.describe Storage::TusGcs, integration: true, slow: true, tus_storage: true
     end
   end
 
-  let(:bucket) { ENV["MANIFOLD_SETTINGS_STORAGE_TEST_BUCKET"] }
+  let(:bucket) { ManifoldSettingsConfig.storage_test_bucket }
   let(:credentials) { ::Factory::DriveSession.config }
   let(:gcs) { described_class.new(bucket: bucket, credentials: credentials) }
 

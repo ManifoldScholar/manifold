@@ -252,7 +252,7 @@ module PaperclipMigrator
     end
 
     def hash_secret
-      ENV["RAILS_SECRET_KEY"]
+      RailsConfig.secret_key
     end
 
     # @param [String] pattern
