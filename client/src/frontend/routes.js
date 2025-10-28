@@ -18,7 +18,7 @@ const routes = {
           name: "frontendProjectsAll",
           exact: true,
           component: "Projects",
-          path: "/projects/all",
+          path: "/projects",
           isLibrary: true,
           helper: (params = {}) => {
             const query = queryString.stringify(params);
@@ -160,7 +160,7 @@ const routes = {
           name: "frontendJournalsList",
           exact: true,
           component: "JournalsList",
-          path: "/journals/all",
+          path: "/journals",
           isLibrary: true,
           helper: (params = {}) => {
             const query = queryString.stringify(params);
