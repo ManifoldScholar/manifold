@@ -21,7 +21,7 @@ const defaultUnderline = (color = annotationHighlightColors.primaryBase) => `
 `;
 
 const prefersContrastUnderline = color => `
-  @media (prefers-contrast: more) {
+  .high-contrast & {
     background: none !important;
     outline: 2.5px solid ${color};
     outline-offset: -2.5px;
@@ -108,7 +108,7 @@ export default `
       color: inherit;
     }
 
-    @media (prefers-contrast: more) {
+    .high-contrast & {
       transition: outline-width 0.2s ease-out;
 
       &:focus-visible {
@@ -119,7 +119,7 @@ export default `
     &.primary {
       background-color: var(--color-annotation-primary-pale);
 
-      @media (prefers-contrast: more) {
+      .high-contrast & {
         --focus-color: var(--color-annotation-primary-dark-high-contrast);
         color: var(--background-color);
         background-color: var(--color-annotation-primary-dark-high-contrast);
@@ -128,7 +128,7 @@ export default `
       .scheme-dark & {
         background-color: var(--color-annotation-primary-pale-low-contrast);
 
-        @media (prefers-contrast: more) {
+        .high-contrast & {
         --focus-color: var(--color-annotation-primary-light-high-contrast);
           background-color: var(--color-annotation-primary-light-high-contrast);
         }
@@ -140,14 +140,14 @@ export default `
       background-color: var(--color-base-yellow20);
       pointer-events: none;
 
-      @media (prefers-contrast: more) {
+      .high-contrast & {
         background-color: var(--color-base-yellow75);
       }
 
       .scheme-dark & {
         background-color: var(--color-base-yellow75);
 
-        @media (prefers-contrast: more) {
+        .high-contrast & {
           background-color: var(--color-base-yellow20);
         }
       }
