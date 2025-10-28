@@ -48,7 +48,7 @@ function ReadingGroupMenu({
             : "Visibility"}
         </span>
       </div>
-      <div className="annotation-popup__button-group">
+      <div className="annotation-popup__button-group" role="group">
         {canEngagePublicly && (
           <RGMenuItem
             menu={{ ...menu, visible }}
