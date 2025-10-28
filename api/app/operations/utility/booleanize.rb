@@ -16,14 +16,5 @@ module Utility
         TYPE.cast(value)
       end
     end
-
-    # Pull a variable out of the environment (that may be missing)
-    # and parse it using {#call}.
-    #
-    # @param [String] key
-    # @return [Boolean]
-    def env(key)
-      call(ENV[key])
-    end
   end
 end

@@ -29,7 +29,7 @@ module Storage
     class << self
       # @return [Storage::Strategy, nil]
       def mirror
-        env_name = ENV["MANIFOLD_SETTINGS_STORAGE_MIRROR"].presence
+        env_name = ManifoldSettingsStorageConfig.mirror.presence
 
         name = ::Storage::Types::MirrorStrategyName[env_name]
 
@@ -40,7 +40,7 @@ module Storage
 
       # @return [Storage::Strategy]
       def primary
-        env_name = ENV["MANIFOLD_SETTINGS_STORAGE_PRIMARY"].presence || "file"
+        env_name = ManifoldSettingsStorageConfig.primary
 
         name = ::Storage::Types::PrimaryStrategyName[env_name]
 
