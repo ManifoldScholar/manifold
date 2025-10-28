@@ -9,7 +9,7 @@ module Validation
     persistent_ui = {
       persistent_ui: {
         reader: {
-          colors: [:color_scheme],
+          colors: [:color_scheme, :high_contrast],
           typography: [
             :font,
             { font_size: [:current, :max, :min] },
