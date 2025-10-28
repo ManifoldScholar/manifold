@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import * as Styled from "./styles";
 
-function Filter({ label, value, options, onChange, visibleLabel = false }) {
+function Filter({ label, value, options, onChange }) {
   const uid = useUID();
 
   return (
     <Styled.Wrapper>
       <Styled.Label
-        className={!visibleLabel ? "screen-reader-text" : undefined}
         htmlFor={uid}
       >
         {label}
@@ -24,7 +23,6 @@ function Filter({ label, value, options, onChange, visibleLabel = false }) {
       <Styled.Icon
         icon="disclosureDown16"
         size={20}
-        $visibleLabel={visibleLabel}
       />
     </Styled.Wrapper>
   );
