@@ -222,6 +222,25 @@ export default `
       }
     }
 
+    &__high-contrast-button {
+      ${buttonUnstyled}
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      inline-size: 100%;
+      margin-block-start: 22px;
+      font-family: var(--font-family-heading);
+
+      &:has(.utility-primary) {
+        margin-block-start: 10px;
+      }
+
+      .utility-primary {
+        font-size: 13px;
+        padding-block-start: 1.5px;
+      }
+    }
+
     &__control-margins {
       display: none;
       border-top: none;
