@@ -9,7 +9,7 @@ const setLocale = (state, action) => {
 };
 
 const setPersistentUI = (state, action) => {
-  return { ...state, ...action.payload };
+  return { ...state, ...action.payload.locale };
 };
 
 export default handleActions(
