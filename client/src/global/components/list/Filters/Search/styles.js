@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
   flex-grow: 999;
   width: 100%;
   min-width: ${searchMinWidth}px;
+  align-self: end;
 `;
 
 export const Button = styled.button`
