@@ -31,6 +31,7 @@ export default function Header(props) {
     appearance,
     selectFont,
     setColorScheme,
+    setHighContrast,
     incrementFontSize,
     decrementFontSize,
     incrementMargins,
@@ -293,6 +294,7 @@ export default function Header(props) {
               appearance={appearance}
               selectFont={selectFont}
               setColorScheme={setColorScheme}
+              setHighContrast={setHighContrast}
               incrementFontSize={incrementFontSize}
               decrementFontSize={decrementFontSize}
               incrementMargins={incrementMargins}
@@ -323,6 +325,7 @@ Header.propTypes = {
   decrementMargins: PropTypes.func,
   resetTypography: PropTypes.func,
   setColorScheme: PropTypes.func,
+  setHighContrast: PropTypes.func,
   scrollAware: PropTypes.object,
   commonActions: PropTypes.object,
   match: PropTypes.object

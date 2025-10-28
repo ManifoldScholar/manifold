@@ -20,10 +20,11 @@
         "increase_font": "Increase font size",
         "decrease_font": "Decrease font size",
         "adjust_font": "Adjust font size",
-        "color_scheme": "Color scheme",
+        "color_scheme": "Color",
         "margins": "Margins",
         "font": "Font",
         "font_style": "Font style",
+        "high_contrast": "High contrast",
         "appearance_reset": "Reader color scheme and typography reset to default settings.",
         "font_size_decreased": "Reader font size decreased.",
         "font_size_increased": "Reader font size increased.",
@@ -33,9 +34,7 @@
         "margin_size_increased": "Reader margins increased.",
         "margin_size_decreased_min": "Reader margins decreased to minimum size.",
         "margin_size_increased_max": "Reader margins increased to maximum size.",
-        "reset_option_message": "Reader {{appearanceType}} is set to {{option}}.",
-        "color_scheme": "color scheme",
-        "font": "font"
+        "reset_option_message": "Reader {{appearanceType}} is set to {{option}}."
       },
       "citation": {
         "citation_style": "Citation style:",

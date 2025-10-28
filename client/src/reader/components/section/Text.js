@@ -94,11 +94,13 @@ export default class Text extends Component {
   render() {
     const typography = this.props.appearance.typography;
     const colorScheme = this.props.appearance.colors.colorScheme;
+    const highContrast = this.props.appearance.colors.highContrast;
 
     const readerAppearanceClass = classNames({
       "reader-window": true,
       "scheme-light": colorScheme === "light",
-      "scheme-dark": colorScheme === "dark"
+      "scheme-dark": colorScheme === "dark",
+      "high-contrast": highContrast
     });
 
     // Font selection may be handled differently later, but for now, variants are based
