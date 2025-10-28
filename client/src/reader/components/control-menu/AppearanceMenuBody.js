@@ -4,6 +4,7 @@ import classNames from "classnames";
 import Utility from "global/components/utility";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import { withTranslation } from "react-i18next";
+import { Toggle } from "../../../global/components/form/Switch/ToggleOnly";
 
 class AppearanceMenuBody extends Component {
   static displayName = "ControlMenu.AppearanceMenuBody";
@@ -12,6 +13,7 @@ class AppearanceMenuBody extends Component {
     appearance: PropTypes.object,
     selectFont: PropTypes.func,
     setColorScheme: PropTypes.func,
+    setHighContrast: PropTypes.func,
     incrementFontSize: PropTypes.func,
     decrementFontSize: PropTypes.func,
     incrementMargins: PropTypes.func,
@@ -43,6 +45,17 @@ class AppearanceMenuBody extends Component {
     );
   };
 
+  handleHighContrastControl = () => {
+    const value = !this.highContrast;
+    this.props.setHighContrast(value);
+    this.props.setScreenReaderStatus(
+      this.resetOptionMessage(
+        this.props.t("reader.menus.appearance.high_contrast"),
+        value
+      )
+    );
+  };
+
   incrementSizeHandler = (event, enabled) => {
     event.stopPropagation();
     if (enabled) {
@@ -62,6 +75,7 @@ class AppearanceMenuBody extends Component {
   resetHandler = event => {
     event.stopPropagation();
     this.props.setColorScheme("light");
+    this.props.setHighContrast(false);
     this.props.resetTypography();
     this.props.setScreenReaderStatus(this.resetMessage);
   };
@@ -123,6 +137,10 @@ class AppearanceMenuBody extends Component {
 
   get colorScheme() {
     return this.props.appearance.colors.colorScheme;
+  }
+
+  get highContrast() {
+    return this.props.appearance.colors.highContrast;
   }
 
   get sansDisabled() {
@@ -253,26 +271,44 @@ class AppearanceMenuBody extends Component {
         <div className="control-menu__legend">
           {this.props.t("reader.menus.appearance.color_scheme")}
         </div>
-        {this.colorSchemeOptions.map(option => (
-          <button
-            type="button"
-            role="switch"
-            key={option.value}
-            className={labelClassName(option)}
-            aria-checked={option.value === this.colorScheme}
-            data-value={option.value}
-            onClick={this.handleColorSchemeControl}
-          >
-            <div className="appearance-menu__radio-input" />
-            <Utility.IconComposer
-              icon="CheckUnique"
-              size={30}
-              className="appearance-menu__color-scheme-icon"
-            />
-            <span className="screen-reader-text">{option.label}</span>
-          </button>
-        ))}
+        <div>
+          {this.colorSchemeOptions.map(option => (
+            <button
+              type="button"
+              role="switch"
+              key={option.value}
+              className={labelClassName(option)}
+              aria-checked={option.value === this.colorScheme}
+              data-value={option.value}
+              onClick={this.handleColorSchemeControl}
+            >
+              <div className="appearance-menu__radio-input" />
+              <Utility.IconComposer
+                icon="CheckUnique"
+                size={30}
+                className="appearance-menu__color-scheme-icon"
+              />
+              <span className="screen-reader-text">{option.label}</span>
+            </button>
+          ))}
+        </div>
+        {this.renderHighContrastControl()}
       </div>
+    );
+  }
+
+  renderHighContrastControl() {
+    return (
+      <button
+        className="appearance-menu__high-contrast-button"
+        type="button"
+        role="switch"
+        aria-checked={this.highContrast}
+        onClick={this.handleHighContrastControl}
+      >
+        <span>{this.props.t("reader.menus.appearance.high_contrast")}</span>
+        <Toggle $checked={this.highContrast} />
+      </button>
     );
   }
 

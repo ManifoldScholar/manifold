@@ -23,7 +23,7 @@ export default `
 
     --selection-bg-color: var(--color-base-yellow20);
 
-    @media (prefers-contrast: more) {
+    .high-contrast &  {
       --selection-bg-color: var(--color-base-yellow75);
     }
 
@@ -31,7 +31,7 @@ export default `
     .scheme-dark & {
       --selection-bg-color: var(--color-base-yellow75);
 
-      @media (prefers-contrast: more) {
+      .high-contrast &  {
         --selection-bg-color: var(--color-base-yellow20);
       }
     }
@@ -40,7 +40,7 @@ export default `
     .annotation-locked-selected {
       background-color: var(--selection-bg-color) !important;
 
-      @media (prefers-contrast: more) {
+      .high-contrast &  {
         color: var(--background-color);
       }
     }
@@ -48,7 +48,7 @@ export default `
     *::target-text {
       background-color: var(--color-base-violet20);
 
-      @media (prefers-contrast: more) {
+      .high-contrast &  {
         color: var(--background-color);
         background-color: var(--color-base-violet75);
       }
@@ -56,7 +56,7 @@ export default `
       .scheme-dark & {
         background-color: var(--color-base-violet75);
 
-        @media (prefers-contrast: more) {
+        .high-contrast &  {
           background-color: var(--color-base-violet20);
         }
       }
