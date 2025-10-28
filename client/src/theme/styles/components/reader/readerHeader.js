@@ -147,7 +147,7 @@ export default `
     }
 
     &.button-active:focus-visible {
-      background-color: var(--color-interaction-dark);
+      background-color: var(--color-interaction-light);
     }
 
     &:focus-visible {
@@ -171,10 +171,8 @@ export default `
     }
   }
 
-  &__button-text {
-    &--dark {
-      color: var(--strong-color);
-    }
+  &__button:not(:focus-visible, :hover) &__button-text--dark {
+    color: var(--strong-color);
   }
 
   &__button-icon {
