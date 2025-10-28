@@ -39,7 +39,7 @@ const {
   decrementMargins,
   resetTypography
 } = uiTypographyActions;
-const { setColorScheme } = uiColorActions;
+const { setColorScheme, setHighContrast } = uiColorActions;
 const { request, flush } = entityStoreActions;
 
 export class ReaderContainer extends Component {
@@ -143,7 +143,8 @@ export class ReaderContainer extends Component {
   get bodyClass() {
     let colorScheme = get(this.props, "appearance.colors.colorScheme");
     colorScheme = colorScheme ? `scheme-${colorScheme}` : "scheme-light";
-    return `reader ${colorScheme}`;
+    const highContrast = get(this.props, "appearance.colors.highContrast");
+    return `reader ${colorScheme} ${highContrast ? "high-contrast" : ""}`;
   }
 
   setPersistentUI = props => {
@@ -172,6 +173,7 @@ export class ReaderContainer extends Component {
       decrementMargins: b(decrementMargins, dispatch),
       resetTypography: b(resetTypography, dispatch),
       setColorScheme: b(el => setColorScheme(el), dispatch),
+      setHighContrast: b(setHighContrast, dispatch),
       setPersistentUI: b(userUi => setPersistentUI(userUi), dispatch)
     };
   };
