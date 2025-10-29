@@ -1,4 +1,5 @@
 import { Range } from "slate";
+import { setBlockClassName } from "../../../../utils/slate/transforms";
 
 export const getClassNameWithAlign = (node, alignment) => {
   return node.htmlAttrs?.class
@@ -18,6 +19,17 @@ export const getSelectionIndices = (selection, parentPath) => {
   return sorted;
 };
 
+const gatherNodesForAlignmentCheck = block => {
+  if (!block) return false;
+
+  const hasInlineChildren = Object.hasOwn(block.children?.[0], "text");
+
+  if (hasInlineChildren && !block.slateOnly) return block;
+
+  if (block.children?.length)
+    return block.children.map(c => gatherNodesForAlignmentCheck(c));
+};
+
 export const getActiveAlignment = (selection, block, path) => {
   if (!block || !selection || !path) return null;
 
@@ -31,17 +43,39 @@ export const getActiveAlignment = (selection, block, path) => {
 
   // Otherwise check whether all selcted children share an alignment class.
   const selectionRange = getSelectionIndices(selection, path);
-  const selectedChildren = [];
+  const selectionChildren = block.children?.slice(
+    selectionRange[0],
+    selectionRange[1] + 1
+  );
 
-  for (let i = selectionRange[0]; i <= selectionRange[1]; i++) {
-    selectedChildren.push(block.children[i]);
-  }
+  const nodesToCheck = selectionChildren
+    ?.map(gatherNodesForAlignmentCheck)
+    .flat(Infinity);
 
-  const firstChildAttrs = selectedChildren[0]?.htmlAttrs;
+  const firstChildAttrs = nodesToCheck[0]?.htmlAttrs;
   const { class: classes } = firstChildAttrs ?? {};
   const target = classes?.split(" ").find(c => c.includes("manifold-rte"));
 
-  return selectedChildren.every(c => c.htmlAttrs?.class?.includes(target))
+  return nodesToCheck.every(c => c.htmlAttrs?.class?.includes(target))
     ? target
     : null;
+};
+
+export const maybeApplyNestedBlockClassName = (editor, block, path, style) => {
+  if (!block) return false;
+
+  const hasInlineChildren = Object.hasOwn(block.children?.[0], "text");
+
+  if (hasInlineChildren && !block.slateOnly)
+    return setBlockClassName({
+      editor,
+      block,
+      path,
+      className: getClassNameWithAlign(block, style)
+    });
+
+  if (block.children?.length)
+    block.children.map((childBlock, i) =>
+      maybeApplyNestedBlockClassName(editor, childBlock, [...path, i], style)
+    );
 };
