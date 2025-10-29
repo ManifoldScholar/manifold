@@ -121,10 +121,16 @@ export default `
       }
     }
 
+    &__button-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      ${drawerIndent("margin-left")}
+    }
+
     &__button {
       ${buttonUnstyled}
       ${utilityPrimary}
-      ${drawerIndent("margin-left")}
       display: block;
       margin-top: 20px;
       font-size: 13px;
