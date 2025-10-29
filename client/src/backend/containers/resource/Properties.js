@@ -116,7 +116,7 @@ export class ResourcePropertiesContainer extends PureComponent {
             name="attributes[caption]"
             placeholder={t("resources.properties.caption_placeholder")}
           />
-          {resource.downloadableKind ? (
+          {resource.attributes.downloadableKind ? (
             <Form.Switch
               label={t("resources.properties.download_label")}
               name="attributes[allowDownload]"
