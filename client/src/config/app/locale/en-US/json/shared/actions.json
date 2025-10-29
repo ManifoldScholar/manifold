@@ -8,6 +8,7 @@
     "adjust_volume": "Adjust Volume",
     "annotate": "Annotate",
     "annotate_passage": "$t(actions.annotate) this passage",
+    "go_to_passage": "Go to passage",
     "archive": "Archive",
     "back": "Back",
     "browse": "Browse",

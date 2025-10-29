@@ -11,6 +11,7 @@ export default class GroupedList extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     loginHandler: PropTypes.func.isRequired,
+    focusHandler: PropTypes.func,
     annotations: PropTypes.array,
     closeDrawer: PropTypes.func
   };
@@ -56,6 +57,7 @@ export default class GroupedList extends PureComponent {
                   onAnnotate={this.showEditor}
                   onLogin={loginHandler}
                   annotateToggleRef={this.annotateToggleRef}
+                  focusHandler={this.props.focusHandler}
                 />
                 {this.state.editorVisible && (
                   <Editor

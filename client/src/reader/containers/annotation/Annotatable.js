@@ -131,7 +131,8 @@ export class Annotatable extends Component {
       "openCitationDrawer",
       "openViewAnnotationsDrawer",
       "showLogin",
-      "closeDrawer"
+      "closeDrawer",
+      "focusHandler"
     ];
     /* eslint-disable no-param-reassign */
     this.cachedActions = actions.reduce((map, action) => {
@@ -427,6 +428,16 @@ export class Annotatable extends Component {
     this.appendLastSelectionAnnotation(revisedAnnotation);
   };
 
+  focusHandler = annotation => {
+    if (!annotation) return;
+
+    const refEl = document.querySelector(
+      `[data-text-annotation-ids="${annotation.id}"]`
+    );
+    if (refEl) this.setSelectableRef(refEl);
+    this.closeDrawer();
+  };
+
   restoreFocusAndSelection = ({
     restoreFocusTo = this.selectableRef,
     restoreSelectionTo
@@ -477,7 +488,9 @@ export class Annotatable extends Component {
 
   resetState = focusAndSelectionNodes => {
     this.setState(this.initialState);
-    this.restoreFocusAndSelection(focusAndSelectionNodes);
+    setTimeout(() => {
+      this.restoreFocusAndSelection(focusAndSelectionNodes);
+    }, 1);
   };
 
   getAnnotationUrl = () => {
