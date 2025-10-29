@@ -2,9 +2,12 @@ import { Menu as ReakitMenu, MenuItem as ReakitMenuItem } from "reakit/Menu";
 import { useSlate, ReactEditor } from "slate-react";
 import { Range, Node } from "slate";
 import Utility from "global/components/utility";
-import { alignableElements } from "../../../../utils/elements";
 import { setBlockClassName } from "../../../../utils/slate/transforms";
-import { getClassNameWithAlign, getSelectionIndices } from "./helpers";
+import {
+  getClassNameWithAlign,
+  getSelectionIndices,
+  maybeApplyNestedBlockClassName
+} from "./helpers";
 import * as Styled from "./styles";
 
 export default function Submenu({ menu, activeAlignment, block, path }) {
@@ -35,14 +38,7 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
       for (let i = selectionRange[0]; i <= selectionRange[1]; i++) {
         const childPath = [...path, i];
         const childBlock = Node.getIf(editor, childPath);
-        if (childBlock && alignableElements.includes(childBlock.type)) {
-          setBlockClassName({
-            editor,
-            block: childBlock,
-            path: childPath,
-            className: getClassNameWithAlign(childBlock, style)
-          });
-        }
+        maybeApplyNestedBlockClassName(editor, childBlock, childPath, style);
       }
 
       menu.hide();
