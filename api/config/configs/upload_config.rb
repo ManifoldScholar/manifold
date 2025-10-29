@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UploadConfig < ApplicationConfig
+  include Dry::Core::Memoizable
   # A pattern that matches a URI that doesn't end in a trailing slash.
   SANS_TRAILING_SLASH = %r{(?<!/)\z}
 
