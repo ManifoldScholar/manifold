@@ -3,57 +3,40 @@
 
 require "dotenv"
 require "active_support/core_ext/object/blank"
+require_relative "configs/rails_config.rb"
+require_relative "configs/puma_config.rb"
 
 # Setup environment
-rails_environment = ENV["RAILS_ENV"] || "development"
-is_development = rails_environment == "development"
-
 Dotenv.load(
   File.join(__dir__, "../../.env.local"),
-  File.join(__dir__, "../../.env.#{rails_environment}"),
+  File.join(__dir__, "../../.env.#{RailsConfig.env}"),
   File.join(__dir__, "../../.env")
 )
 
-env_var_lookups = {
-  "API" => "API",
-}
+rails_config = RailsConfig.new
+puma_config = PumaConfig.new
 
-application = ENV.fetch("PUMA_APPLICATION", "api").upcase
-env_var_lookup = env_var_lookups[application]
-port = ENV.fetch("#{env_var_lookup}_PORT", nil)
-socket = ENV.fetch("#{env_var_lookup}_SOCKET", nil)
-pidfile_path = ENV.fetch("#{env_var_lookup}_PIDFILE", "tmp/pids/manifold-#{application.downcase}.pid")
-state_path = ENV.fetch("#{env_var_lookup}_STATEFILE", "tmp/pids/manifold-#{application.downcase}.state")
-listen_on_port = port.present?
-listen_on_socket = socket.present?
-address = ENV.fetch("#{env_var_lookup}_BIND_IP", "0.0.0.0")
+number_of_workers = puma_config.worker_count || ( rails_config.development? ? 0 : 2)
+listen_on_socket = puma_config.application.listen_on_socket?
+application = puma_config.puma_application
 
-number_of_workers = ENV.fetch "WORKER_COUNT" do
-  rails_environment == "development" ? 0 : 2
-end
-
-min_threads = ENV.fetch("RAILS_MIN_THREADS", 0)
-
-max_threads = ENV.fetch "RAILS_MAX_THREADS" do
-  is_development ? 16 : 6
-end
 
 if listen_on_socket
-  pidfile pidfile_path
-  state_path state_path
+  pidfile puma_config.application.pid_file
+  state_path puma_config.application.state_file
 end
 
 tag "manifold-#{application}"
-environment rails_environment
+environment rails_config.env
 workers number_of_workers
-threads min_threads, max_threads
+threads rails_config.min_threads, rails_config.max_threads
 preload_app!
 fork_worker 1000
 wait_for_less_busy_worker 0.001
 
 plugin :tmp_restart
-bind "unix://#{socket}" if listen_on_socket
-bind "tcp://#{address}:#{port}" if listen_on_port
+bind "unix://#{puma_config.application.socket}" if listen_on_socket
+bind "tcp://#{puma_config.application.address}:#{puma_config.application.port}" if puma_config.application.listen_on_port?
 
 on_refork do
   3.times { GC.start }
