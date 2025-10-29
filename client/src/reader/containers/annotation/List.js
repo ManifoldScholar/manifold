@@ -23,6 +23,7 @@ export class AnnotationList extends PureComponent {
     loginHandler: PropTypes.func.isRequired,
     annotationIds: PropTypes.array.isRequired,
     createHandler: PropTypes.func.isRequired,
+    focusHandler: PropTypes.func,
     annotations: PropTypes.array,
     closeDrawer: PropTypes.func,
     sectionId: PropTypes.string,
@@ -68,6 +69,7 @@ export class AnnotationList extends PureComponent {
         saveAnnotation={this.saveAnnotation}
         annotations={annotations}
         loginHandler={this.props.loginHandler}
+        focusHandler={this.props.focusHandler}
         dispatch={this.props.dispatch}
       />
     );
