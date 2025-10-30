@@ -7,7 +7,7 @@ import {
 } from "theme/styles/mixins";
 import Utility from "global/components/utility";
 
-export const SelectLabel = styled.div`
+export const SelectLabel = styled.label`
   ${utilityPrimary}
   display: block;
   margin-bottom: 12px;
@@ -48,10 +48,10 @@ export const Select = styled.select`
 
 export const Icon = styled(Utility.IconComposer)`
   position: absolute;
-  top: 50%;
+  inset-block-end: calc(0.5 * 2.857em);
   right: 8px;
   width: 22px;
   height: 22px;
   pointer-events: none;
-  transform: translateY(-50%);
+  transform: translateY(50%);
 `;

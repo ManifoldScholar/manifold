@@ -29,7 +29,7 @@ export default `
     flex-wrap: wrap;
     gap: 18px;
     align-items: start;
-    padding-top: 20px;
+    padding-top: 42px;
     padding-bottom: 28px;
 
     ${respond(`gap: 36px`, 120)}

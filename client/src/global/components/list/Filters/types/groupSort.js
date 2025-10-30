@@ -5,10 +5,6 @@ export const groupSortFilter = (filters, updateFilters, params, t) => {
     onChange: e => updateFilters(e, "sort_order"),
     options: [
       {
-        label: t("filters.sort_options.none_selected"),
-        value: ""
-      },
-      {
         label: t("filters.sort_options.alphabetical"),
         value: "name_asc"
       },

@@ -73,7 +73,7 @@ export const TertiarySelect = styled(BaseSelect)`
 
   ${textTruncate}
   text-transform: var(--Select-text-transform, none);
-  letter-spacing: 0.115em;
+  letter-spacing: normal;
   font-size: 16px;
   width: auto;
   height: 40px;

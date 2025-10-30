@@ -11,7 +11,7 @@ export const readingGroupFilter = (filters, updateFilters, params, t) => ({
   value: filters?.readingGroup || "",
   onChange: e => updateFilters(e, "readingGroup"),
   options: [
-    { label: t("filters.default_options.group"), value: "" },
+    { label: t("filters.default_options.generic"), value: "" },
     ...getMembershipOptions(params.readingGroup)
   ]
 });
