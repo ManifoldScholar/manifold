@@ -54,7 +54,7 @@ export const Wrapper = styled("section", transientOptions)`
 export const Inner = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: end;
+  align-items: baseline;
   gap: ${GAP};
 `;
 
