@@ -295,6 +295,7 @@ export const inputQuaternary = `
 export const filterSelectBase = `
   ${unstyledSelect}
   font-family: var(--input-font-family);
+  font-size: 16px;
   padding-right: 36px;
   padding-left: 13px;
   overflow: hidden;

@@ -13,7 +13,7 @@ import { GroupsHeading } from "frontend/components/reading-group/headings";
 import { useFetch, useCurrentUser, useListQueryParams } from "hooks";
 import * as Styled from "./styles";
 
-const DEFAULT_SORT_ORDER = "";
+const DEFAULT_SORT_ORDER = "created_at_asc";
 
 function MyReadingGroupsListContainer({ route }) {
   const filtersReset = {

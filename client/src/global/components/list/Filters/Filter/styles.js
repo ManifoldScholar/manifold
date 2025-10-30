@@ -20,7 +20,7 @@ export const Label = styled.label`
   ${utilityPrimary}
   position: absolute;
   inset-block-end: 100%;
-  font-size: 13px;
+  font-size: 12px;
   display: block;
   margin-block-end: 8px;
 `;
@@ -29,7 +29,7 @@ export const Select = styled.select`
   ${filterSelectBase}
   width: 100%;
   height: ${entityFilterForm.filterHeight};
-  padding-top: 8px;
+  padding-top: 6px;
   padding-bottom: 8px;
   ${borderStyles}
   transition: border-color ${defaultTransitionProps};

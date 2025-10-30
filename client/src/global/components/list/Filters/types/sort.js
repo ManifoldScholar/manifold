@@ -7,10 +7,6 @@ export const sortFilter = (filters, updateFilters, params, t) => {
     onChange: e => updateFilters(e, "order"),
     options: [
       {
-        label: t("filters.sort_options.none_selected"),
-        value: ""
-      },
-      {
         label: t("filters.sort_options.alphabetical"),
         value: "sort_title ASC"
       },
