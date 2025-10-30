@@ -18,6 +18,8 @@ export const Wrapper = styled.div`
 
 export const Label = styled.label`
   ${utilityPrimary}
+  position: absolute;
+  inset-block-end: 100%;
   font-size: 13px;
   display: block;
   margin-block-end: 8px;
@@ -43,11 +45,11 @@ export const Select = styled.select`
 
 export const Icon = styled(IconComposer)`
   position: absolute;
-  top: 70%;
+  inset-block-end: ${parseFloat(entityFilterForm.filterHeight) * 0.5}px;
   right: 12px;
   width: 24px;
   height: 24px;
   color: var(--select-border-color);
   pointer-events: none;
-  transform: translateY(-50%);
+  transform: translateY(50%);
 `;
