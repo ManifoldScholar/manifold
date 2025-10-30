@@ -90,6 +90,7 @@ require "with_model"
 
 Dry::Effects.load_extensions :rspec
 
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -166,7 +167,7 @@ RSpec.configure do |config|
   end
 
   config.before(:all, type: :request) do
-    host! StartupConfig.domain
+    host! ManifoldConfig.domain
   end
 
   config.after do

@@ -11,7 +11,7 @@ module API
 
         result = ManifoldApi::Container["users.confirm_email"].(@user, params[:token])
 
-        url = Addressable::URI.parse(Rails.configuration.manifold.url)
+        url = Addressable::URI.parse(ManifoldConfig.url)
 
         url.query_values = (url.query_values || {}).merge(email_confirmed: result.success?)
 

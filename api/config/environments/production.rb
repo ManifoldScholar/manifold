@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require "anyway_config"
+
 Rails.application.configure do
+  Anyway::Loaders::YAML.permitted_classes << Symbol
+  Anyway::Loaders::YAML.permitted_classes << Regexp
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

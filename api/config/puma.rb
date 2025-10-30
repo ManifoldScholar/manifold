@@ -13,30 +13,30 @@ Dotenv.load(
   File.join(__dir__, "../../.env")
 )
 
-rails_config = RailsConfig.new
-puma_config = PumaConfig.new
+# Refresh in case the Dotenv load changed things
+RailsConfig.reload
 
-number_of_workers = puma_config.worker_count || ( rails_config.development? ? 0 : 2)
-listen_on_socket = puma_config.application.listen_on_socket?
-application = puma_config.puma_application
+number_of_workers = PumaConfig.worker_count || ( RailsConfig.development? ? 0 : 2)
+listen_on_socket = PumaConfig.application.listen_on_socket?
+application = PumaConfig.puma_application
 
 
 if listen_on_socket
-  pidfile puma_config.application.pid_file
-  state_path puma_config.application.state_file
+  pidfile PumaConfig.application.pid_file
+  state_path PumaConfig.application.state_file
 end
 
 tag "manifold-#{application}"
-environment rails_config.env
+environment RailsConfig.env
 workers number_of_workers
-threads rails_config.min_threads, rails_config.max_threads
+threads RailsConfig.min_threads, RailsConfig.max_threads
 preload_app!
 fork_worker 1000
 wait_for_less_busy_worker 0.001
 
 plugin :tmp_restart
-bind "unix://#{puma_config.application.socket}" if listen_on_socket
-bind "tcp://#{puma_config.application.address}:#{puma_config.application.port}" if puma_config.application.listen_on_port?
+bind "unix://#{PumaConfig.application.socket}" if listen_on_socket
+bind "tcp://#{PumaConfig.application.address}:#{PumaConfig.application.port}" if PumaConfig.application.listen_on_port?
 
 on_refork do
   3.times { GC.start }

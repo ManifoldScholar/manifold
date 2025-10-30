@@ -50,7 +50,7 @@ module Ingestions
       end
 
       def mammoth_exec_path
-        Rails.configuration.manifold.mammoth_path.to_s
+        ManifoldConfig.mammoth_path.to_s
       end
 
       # This method sets the extracted paths to a path relative to the /sources dir.

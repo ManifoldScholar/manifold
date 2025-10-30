@@ -3,8 +3,8 @@
 require "rails_helper"
 
 RSpec.describe Validator::Stylesheet do
-  let(:scope_selector) { Rails.configuration.manifold.css_validator.defaults.class_scope }
-  let(:dark_scope_selector) { Rails.configuration.manifold.css_validator.defaults.dark_scope }
+  let(:scope_selector) { ManifoldConfig.css_validator.defaults.class_scope }
+  let(:dark_scope_selector) { ManifoldConfig.css_validator.defaults.dark_scope }
   let(:validator) { described_class.new }
   let(:blacklisted_property) { "font-family" }
 

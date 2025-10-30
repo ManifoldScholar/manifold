@@ -18,8 +18,6 @@ class RailsConfig < ApplicationConfig
     db_name: 'manifold_development',
     test_db_name: 'manifold_test',
     min_threads: 0,
-    redis_namespace: 'manifold',
-    redis_url: 'redis://127.0.0.1:6379'
   )
 
   def development?

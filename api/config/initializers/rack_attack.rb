@@ -11,7 +11,7 @@ INTERNAL_IP_RANGES = [
 # We want to ensure that the public IP used by the client is never
 # accidentally blocklisted or throttled.
 unless Rails.env.development? || Rails.env.test?
-  # ManifoldEnv.rate_limiting.derive_public_ips! Rails.application.config.manifold.domain
+  # ManifoldEnv.rate_limiting.derive_public_ips! ManifoldConfig.domain
 end
 
 INTERNAL_IP_RANGES.each { |ip| Rack::Attack.safelist_ip(ip) }

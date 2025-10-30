@@ -13,7 +13,7 @@ module Attachments
              to: :class
   end
 
-  CONFIG = Rails.configuration.manifold.attachments.validations
+  CONFIG = ManifoldConfig.attachments.validations
 
   RATIO = 1.6
   SMALL = 320
@@ -307,7 +307,7 @@ module Attachments
     # It also adds a before processing callback for Paperclip to process the variants if,
     # and only if the attachment is processable.
     def manifold_has_attached_file(field, type, no_styles: false, validate_content_type: true, backgrounding: true)
-      validations = CONFIG.fetch(type).with_indifferent_access
+      validations = CONFIG.fetch(type).to_h.with_indifferent_access
 
       config = Attachments::Configuration.new(
         field: field, type: type,

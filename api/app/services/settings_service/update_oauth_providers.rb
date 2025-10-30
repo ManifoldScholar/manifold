@@ -22,7 +22,7 @@ module SettingsService
     # @return [void]
     def execute
       PROVIDER_MAPPING.each do |provider_name, (app_id_key, secret_key)|
-        provider = ManifoldEnv.oauth[provider_name]
+        provider = OauthConfig[provider_name]
 
         provider.app_id = settings.integrations[app_id_key]
         provider.secret = settings.secrets[secret_key]

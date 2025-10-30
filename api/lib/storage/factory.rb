@@ -211,7 +211,7 @@ module Storage
 
       def asset_host
         if primary_store.file?
-          Rails.configuration.manifold.api_url&.sub(%r{/\z}, "") || ""
+          ManifoldConfig.api_url&.sub(%r{/\z}, "") || ""
         else
           UploadConfig.asset_host || S3Config.endpoint
         end

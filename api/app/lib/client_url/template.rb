@@ -2,7 +2,7 @@
 
 module ClientURL
   class Template
-    def initialize(uri, client_url: Rails.configuration.manifold.url)
+    def initialize(uri, client_url: ManifoldConfig.url)
       @client_url = client_url
       @uri = uri.to_s.gsub(%r{\A/}, "")
       @full_url = @uri.start_with?("http") ? uri : "#{@client_url}/#{@uri}"

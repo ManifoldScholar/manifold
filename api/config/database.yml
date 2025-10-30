@@ -31,4 +31,4 @@ development:
 
 test:
   <<: *common
-  database: <%= test_db %><%= StartupConfig.test_env_number %>
+  database: <%= test_db %><%= ManifoldConfig.test_env_number %>

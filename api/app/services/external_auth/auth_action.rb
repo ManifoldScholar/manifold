@@ -10,7 +10,7 @@ module ExternalAuth
       object :auth_hash, class: "OmniAuth::AuthHash"
 
       validates :provider,
-                inclusion: { in: ManifoldEnv.oauth.known_strategies },
+                inclusion: { in: OauthConfig.known_strategies },
                 presence: true
 
       delegate :info, to: :auth_hash, prefix: :auth

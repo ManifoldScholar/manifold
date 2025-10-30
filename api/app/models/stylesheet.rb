@@ -49,11 +49,11 @@ class Stylesheet < ApplicationRecord
   end
 
   def validator_config_ingested
-    Rails.configuration.manifold.css_validator.ingested
+    ManifoldConfig.css_validator.ingested
   end
 
   def validator_config_user
-    Rails.configuration.manifold.css_validator.user
+    ManifoldConfig.css_validator.user
   end
 
   def user_stylesheet?

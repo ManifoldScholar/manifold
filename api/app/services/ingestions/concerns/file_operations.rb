@@ -10,7 +10,7 @@ module Ingestions
 
       WORKING_DIR_BASE = Rails.root.join(
         "tmp",
-        Rails.env.test? ? "ingestion-test#{StartupConfig.test_env_number}" : "ingestion"
+        Rails.env.test? ? "ingestion-test#{ManifoldConfig.test_env_number}" : "ingestion"
       )
 
       EXTRACTION_REJECTION_PATTERNS = {

@@ -177,7 +177,7 @@ class Settings < ApplicationRecord
     end
 
     def manage_from_env?
-      StartupConfig.new.manage_settings_from_env
+      ManifoldConfig.new.manage_settings_from_env
     end
 
     def update_from_environment?

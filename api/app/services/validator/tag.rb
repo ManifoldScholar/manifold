@@ -10,7 +10,7 @@ module Validator
     # @return [void]
     def initialize
       @css_validator = ::Validator::Stylesheet.new
-      @config = Rails.configuration.manifold.html_validator
+      @config = ManifoldConfig.html_validator
       @tag_validators_map = {
         img: Tags::Img.new
       }

@@ -11,7 +11,7 @@ class ApplicationMailer < ActionMailer::Base
     @settings = Settings.instance
     @closing = @settings.email[:closing]
     @api_routes = ManifoldApi::Container["system.routes"]
-    @client_url = Rails.configuration.manifold.url
+    @client_url = ManifoldConfig.url
     @installation_name = @settings.general[:installation_name]
   end
 
