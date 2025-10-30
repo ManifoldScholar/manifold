@@ -15,7 +15,7 @@ export const kindFilter = (filters, updateFilters, params, t) => {
     value: filters?.kind || "",
     onChange: e => updateFilters(e, "kind"),
     options: [
-      { label: t("filters.default_options.type"), value: "" },
+      { label: t("filters.default_options.generic"), value: "" },
       ...getKindOptions(params.kinds, t)
     ]
   };

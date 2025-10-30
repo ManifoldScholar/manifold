@@ -1,3 +1,5 @@
+import capitalize from "lodash/capitalize";
+
 function defaultParams({ snapshotState = false } = {}) {
   return {
     config: {
@@ -44,15 +46,15 @@ function dynamicParams(searchProps, project) {
 
   const tagFilterOptions = () => {
     const tags = project.attributes.resourceTags || [];
-    const options = tags.map(t => ({ label: `Tag: ${t}`, value: t }));
-    options.unshift({ label: "Select a tag", value: "" });
+    const options = tags.map(t => ({ label: t, value: t }));
+    options.unshift({ label: "All", value: "" });
     return options;
   };
 
   const kindFilterOptions = () => {
     const tags = project.attributes.resourceKinds || [];
-    const options = tags.map(k => ({ label: `Type: ${k}`, value: k }));
-    options.unshift({ label: "Select a type", value: "" });
+    const options = tags.map(k => ({ label: capitalize(k), value: k }));
+    options.unshift({ label: "All", value: "" });
     return options;
   };
 
