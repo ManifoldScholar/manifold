@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Search from "../Search";
@@ -15,8 +15,7 @@ function FiltersGroup(props) {
     onReset,
     showReset,
     setScreenReaderStatus,
-    className,
-    visibleLabels = false
+    className
   } = props;
 
   const searchInput = useRef(null);
@@ -56,11 +55,7 @@ function FiltersGroup(props) {
       {!!filters?.length && (
         <Styled.SelectGroup $count={filters?.length}>
           {filters.map(filter => (
-            <Filter
-              key={filter.label}
-              visibleLabel={visibleLabels}
-              {...filter}
-            />
+            <Filter key={filter.label} {...filter} />
           ))}
         </Styled.SelectGroup>
       )}
@@ -82,8 +77,7 @@ FiltersGroup.propTypes = {
   updateFilterState: PropTypes.func,
   hideSearch: PropTypes.bool,
   setScreenReaderStatus: PropTypes.func,
-  className: PropTypes.string,
-  visibleLabels: PropTypes.bool
+  className: PropTypes.string
 };
 
 export default withScreenReaderStatus(FiltersGroup);

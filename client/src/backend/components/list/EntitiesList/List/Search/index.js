@@ -154,6 +154,33 @@ class ListEntitiesListSearch extends PureComponent {
     return isPlainObject(param);
   }
 
+  translatedParamLabel(paramLabel) {
+    const t = this.props.t;
+
+    switch (paramLabel) {
+      case "Draft":
+        return t("filters.labels.by_draft");
+      case "Creator":
+        return t("filters.labels.by_creator");
+      case "Privacy":
+        return t("filters.labels.by_privacy");
+      case "Flags":
+        return t("filters.labels.with_flags");
+      case "Order":
+        return t("filters.labels.sort_results");
+      case "Role":
+        return t("filters.labels.by_role");
+      case "Tag":
+        return t("filters.labels.by_tag");
+      case "Kind":
+        return t("filters.labels.by_kind");
+      case "Type":
+        return t("filters.labels.by_type");
+      default:
+        return "";
+    }
+  }
+
   resetSearch = event => {
     event.preventDefault();
     this.setState({ keyword: "" });
@@ -241,27 +268,12 @@ class ListEntitiesListSearch extends PureComponent {
                             )}
                           >
                             <div>
-                              {i === 0 ? (
-                                <Styled.SelectLabel>
-                                  {t("filters.labels.filter_results")}
-                                </Styled.SelectLabel>
-                              ) : (
-                                this.searchStyle === "horizontal" && (
-                                  <Styled.EmptySelectLabel>
-                                    {"\u00A0"}
-                                  </Styled.EmptySelectLabel>
-                                )
-                              )}
                               <div className="rel">
-                                <label
+                                <Styled.SelectLabel
                                   htmlFor={`${id}-filter-${i}`}
-                                  className="screen-reader-text"
                                 >
-                                  {param.label === "Draft" &&
-                                    t("filters.labels.by_draft")}
-                                  {param.label === "Role" &&
-                                    t("filters.labels.by_role")}
-                                </label>
+                                  {this.translatedParamLabel(param.label)}
+                                </Styled.SelectLabel>
                                 <Styled.Select
                                   id={`${id}-filter-${i}`}
                                   onChange={e => this.setParam(e, param)}
@@ -292,14 +304,14 @@ class ListEntitiesListSearch extends PureComponent {
                         >
                           <div>
                             <Styled.SelectLabel>
-                              {t("filters.labels.order_results")}
+                              {t("filters.labels.sort_results")}
                             </Styled.SelectLabel>
                             <div className="rel">
                               <label
                                 htmlFor={`${id}-order`}
                                 className="screen-reader-text"
                               >
-                                {t("filters.labels.order_results")}
+                                {t("filters.labels.sort_results")}
                               </label>
                               <Styled.Select
                                 id={`${id}-order`}

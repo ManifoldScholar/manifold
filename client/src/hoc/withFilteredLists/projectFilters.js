@@ -5,7 +5,7 @@ export default function projectFilters({ snapshotState = false } = {}) {
     },
     params: [
       {
-        label: "Search...",
+        label: "Search…",
         name: "keyword",
         value: ""
       },

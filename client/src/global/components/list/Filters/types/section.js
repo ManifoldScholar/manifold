@@ -11,7 +11,7 @@ export const sectionFilter = (filters, updateFilters, params, t) => ({
   value: filters?.textSection || "",
   onChange: e => updateFilters(e, "textSection"),
   options: [
-    { label: t("filters.default_options.sections"), value: "" },
+    { label: t("filters.default_options.generic"), value: "" },
     ...getSectionOptions(params.sections)
   ]
 });
