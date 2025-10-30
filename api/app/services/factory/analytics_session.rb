@@ -25,7 +25,7 @@ module Factory
     private
 
     def settings_valid?
-      c = Rails.configuration.manifold.google
+      c = ManifoldConfig.google
       settings = Settings.instance
       return false if c.token_uri.blank?
       return false if c.analytics_oauth_scope.blank?
@@ -38,9 +38,9 @@ module Factory
     def auth_options
       settings = Settings.instance
       {
-        token_credential_uri: Rails.configuration.manifold.google.token_uri,
-        audience: Rails.configuration.manifold.google.token_uri,
-        scope: Rails.configuration.manifold.google.analytics_oauth_scope,
+        token_credential_uri: ManifoldConfig.google.token_uri,
+        audience: ManifoldConfig.google.token_uri,
+        scope: ManifoldConfig.google.analytics_oauth_scope,
         issuer: settings.integrations[:google_client_email],
         signing_key: OpenSSL::PKey::RSA.new(
           settings.secrets[:google_private_key]

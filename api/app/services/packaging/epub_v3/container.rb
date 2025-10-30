@@ -11,11 +11,11 @@ module Packaging
       import ::Shared::PipelineUtilities
 
       register "api_url" do
-        URI(Rails.configuration.manifold.api_url)
+        URI(ManifoldConfig.api_url)
       end
 
       register "frontend_url" do
-        URI(Rails.configuration.manifold.url)
+        URI(ManifoldConfig.url)
       end
 
       register "reference_selectors" do

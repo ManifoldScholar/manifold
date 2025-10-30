@@ -4,7 +4,7 @@
 module SharedUploader
   extend ActiveSupport::Concern
 
-  MANIFOLD_CONFIG = Rails.configuration.manifold
+  MANIFOLD_CONFIG = ManifoldConfig
 
   IMAGE_MIME_TYPES = Array(MANIFOLD_CONFIG.dig(:attachments, :validations, :image, :allowed_mime))
 

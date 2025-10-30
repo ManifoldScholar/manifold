@@ -17,7 +17,7 @@ module System
     # @!attribute [r] default_url_options
     # @return [Hash]
     memoize def default_url_options
-      url = URI(Rails.configuration.manifold.api_url)
+      url = URI(ManifoldConfig.api_url)
 
       {
         protocol: url.scheme,

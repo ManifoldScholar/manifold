@@ -4,11 +4,11 @@ module Types
   include Dry.Types
 
   # @api private
-  MANIFOLD_CONFIG = Rails.configuration.manifold
+  MANIFOLD_CONFIG = ManifoldConfig
 
   private_constant :MANIFOLD_CONFIG
 
-  ATTACHMENT_TYPE = Types::Coercible::Symbol.enum(*MANIFOLD_CONFIG.attachments.validations.keys.map(&:to_sym))
+  ATTACHMENT_TYPE = Types::Coercible::Symbol.enum(*MANIFOLD_CONFIG.attachments.validations.to_h.keys.map(&:to_sym))
 
   # Matches a simple attribute name, like `foo` or `bar_baz`. Does not allow numerals
   # or consecutive / initial / terminal underscores per good sense and Ruby idioms.

@@ -10,7 +10,7 @@ module Attachments
       boolean :no_styles, :validate_content_type
     end
 
-    CONFIG = Rails.configuration.manifold.attachments.validations
+    CONFIG = ManifoldConfig.attachments.validations
 
     def execute
       versions

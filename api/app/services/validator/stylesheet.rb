@@ -6,7 +6,7 @@ module Validator
     extend Memoist
 
     def initialize(config = nil)
-      @config = config || Rails.configuration.manifold.css_validator.defaults
+      @config = config || ManifoldConfig.css_validator.defaults
     end
 
     # @param css [String] the CSS to be validated
@@ -238,6 +238,7 @@ module Validator
       out = value
       @config.value_maps.each do |value_map|
         next if (property =~ value_map.match).nil?
+
 
         match = value_map[:entries].detect { |kvp| out == kvp[0] }
         out = match[1] unless match.nil?

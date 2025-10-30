@@ -2,7 +2,7 @@
 
 module Projects
   class GetReaderURL < ActiveInteraction::Base
-    string :frontend_url, default: proc { Rails.configuration.manifold.url }
+    string :frontend_url, default: proc { ManifoldConfig.url }
 
     record :project
 

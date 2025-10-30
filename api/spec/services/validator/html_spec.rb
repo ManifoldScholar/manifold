@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Validator::HTML do
-  html_config = Rails.configuration.manifold.html_validator
+  html_config = ManifoldConfig.html_validator
   excluded_css_properties = [
     'position',
     'font-family',

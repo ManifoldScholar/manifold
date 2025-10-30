@@ -14,7 +14,7 @@ module Citable
   end
 
   def citation_styles
-    Rails.configuration.manifold.citation_styles
+    ManifoldConfig.citation_styles
   end
 
   def citation_parts
